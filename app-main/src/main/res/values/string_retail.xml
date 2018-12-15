@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="retail_cashier">收银</string>
+
+    <string name="retail_string_inventory_management">库存管理</string>
+    <string name="retail_sttring_inventory">盘点</string>
+    <string name="retail_string_inventory_report">库存报表</string>
+    <string name="retail_string_goods_select">商品选择</string>
+    <string name="retail_string_goods_category">商品分类：</string>
+    <string name="retail_string_goods_category_select">请选择商品的分类</string>
+    <string name="retail_string_goods_number_name">商品编码/名称：</string>
+    <string name="retail_string_search">查询</string>
+    <string name="retail_string_input_goods_number_name">请输入商品编码/名称</string>
+
+
+    <string name="retail_string_select_all">全选</string>
+    <string name="retail_string_stock_type">库存类型</string>
+    <string name="retail_string_category">所属分类</string>
+    <string name="retail_string_goods_number">商品编码</string>
+    <string name="retail_string_goods_name">商品名称</string>
+    <string name="retail_string_unit">单位</string>
+    <string name="retail_string_price">价格</string>
+    <string name="retail_string_current_stock">当前库存</string>
+    <string name="retail_string_stock_total_price">库存金额</string>
+    <string name="retail_string_add_success">添加成功</string>
+    <string name="retail_string_confirm_delete">确认删除？</string>
+    <string name="retail_string_is_save_stocktake_order">是否保存盘点单？</string>
+    <string name="retail_string_is_confirm_stocktake_order">是否确认提交？</string>
+
+    <string name="retail_string_total">合计：</string>
+    <string name="retail_string_stock_take_money">盘点金额：{HBF}%s</string>
+    <string name="retail_string_stock_take_positive">盘盈金额：{HBF}%s</string>
+    <string name="retail_string_stock_take_negative">盘亏金额：{HBF}%s</string>
+    <string name="retail_string_stock_take_history">盘点历史</string>
+    <string name="retail_string_stock_take_history_detail">盘点历史详情</string>
+    <string name="retail_string_load_more_empty">已经到底了</string>
+    <string name="retail_string_confirm">确定</string>
+    <string name="retail_string_confirm_sumibt">确认提交</string>
+    <string name="retail_string_save">保存</string>
+    <string name="retail_string_add_goods">添加商品</string>
+    <string name="retail_string_stock_take_order_no">盘点单号:</string>
+    <string name="retail_string_remark">备注:</string>
+    <string name="retail_string_stock_take_tempalte">盘点模板:</string>
+    <string name="retail_string_stock_take_warehouse">盘点仓库:</string>
+    <string name="retail_string_stock_take_warehouse_no_colon">盘点仓库</string>
+    <string name="retail_string_no_more_data">没有更多数据啦!</string>
+    <string name="retail_string_stock_choice_warehouse">请选择仓库（*必选）</string>
+    <string name="retail_string_stock_choice_tempalte">请选择模版（不选，则盘点全部）</string>
+    <string name="retail_string_stock_input_number_hint">请输入盘点数</string>
+    <string name="retail_string_stock_add_remark_hint">请输入您的备注</string>
+    <string name="retail_string_stock_number">盘点数</string>
+    <string name="retail_string_template_name">模板名称</string>
+    <string name="retail_string_profit_amount_name">盘盈金额</string>
+    <string name="retail_string_loss_amount_name">盘亏金额</string>
+    <string name="retail_string_modify_time">修改时间</string>
+    <string name="retail_string_operate_user">操作人</string>
+    <string name="retail_string_create_inventory">创建盘点单</string>
+    <string name="retail_string_modify_time_include_colon">修改时间:</string>
+    <string name="retail_string_no_data">当前还没有数据哦~</string>
+    <string name="retail_string_remark_explain">备注说明</string>
+    <string name="retail_string_remarks">备注</string>
+    <string name="retail_string_goods_stock_take">商品盘点</string>
+    <string name="retail_string_no_stock_take_warehouse">没有可盘点的仓库</string>
+    <string name="retail_string_no_stock_take_template">没有盘点模板</string>
+    <string name="retail_string_stock_take_order_saved">盘点单据己保存</string>
+    <string name="retail_string_stock_take_order_confirm_successed">确认成功</string>
+    <string name="retail_string_sort_no">序号</string>
+    <string name="retail_string_goods_categorys">商品分类</string>
+    <string name="retail_string_primary_inventory">理论库存</string>
+    <string name="retail_string_stock_take_diff">盘点差异</string>
+    <string name="retail_string_stock_take_diff_amount">差异金额</string>
+    <string name="retail_string_operate">操作</string>
+    <string name="retail_string_saved">已保存</string>
+    <string name="retail_string_confirmed">已确认</string>
+
+    <string name="retail_string_middle_category">中类</string>
+    <string name="retail_string_stock_take_money_hint">盘点金额</string>
+    <string name="retail_string_stock_take_positive_hint">盘盈金额</string>
+    <string name="retail_string_stock_take_negative_hint">盘亏金额</string>
+    <string name="retail_string_number_include_colon">单号:</string>
+    <string name="retail_string_operate_time_include_colon">操作时间:</string>
+    <string name="retail_string_operate_user_include_colon">操作人:</string>
+    <string name="retail_string_remark_include_colon">备注:</string>
+
+    <string name="retail_settings_log">零售日志</string>
+    <string name="retail_settings_log_upload">零售日志上传</string>
+    <string name="retail_upload_remind_snack">点击"上传"发送零售日志给研发团队</string>
+
+    <!-- 8.6版本开发新加字符串 -->
+    <string name="retail_delivery_apply">配送申请</string>
+    <string name="retail_receiving_note">收货单</string>
+    <string name="retail_string_create_delivery_apply">创建配送申请单</string>
+    <string name="retail_apply_amount_total">配送金额合计：{HBF}%s</string>
+    <string name="retail_receive_amount_total">收货金额合计：{HBF}%s</string>
+    <string name="retail_data_not_save">尚未保存当前数据，是否确定离开？</string>
+    <string name="retail_string_apply_amount_total">申请金额：{HBF}%s</string>
+    <string name="retail_string_distrute_amount_total">配送费：{HBF}%s</string>
+    <string name="retail_string_all_amount_total">合计：{HBF}%s</string>
+
+    <string name="retail_string_apply_number">申请数</string>
+    <string name="retail_string_apply_number_hint">请输入申请数</string>
+    <string name="retail_string_create_delivery_apply_order">创建配送申请单</string>
+    <string name="retail_string_edit_delivery_apply_order">编辑配送申请单</string>
+    <string name="retail_string_not_delivery_temlplate">没有配送模板</string>
+    <string name="retail_string_chooice_template_replace_orig_goods_prompt">选择此模板将清除原有商品，确定选择该模板？</string>
+    <string name="retail_string_apply_date_not_current_date">申请日期不能小于当前日期</string>
+    <string name="retail_string_receive_date_not_current_date">到货日期不能小于当前日期</string>
+    <string name="retail_string_receive_date_not_apply_date">到货日期不能小于申请日期"</string>
+    <string name="retail_string_apply_number_not_all_zero">申请数不能全部为0</string>
+    <string name="retail_string_confirm_not_edit">确认后，不能再修改</string>
+    <string name="retail_string_delivery_apply_order_saved">配送申请单已保存</string>
+    <string name="retail_string_whether_save_delivery_apply_order">是否保存配送申请单？</string>
+    <string name="retail_string_delivery_template">配送模板:</string>
+    <string name="retail_string_choice_delivery_template_hint">请选择模版（*必选）</string>
+    <string name="retail_string_apply_date">申请日期:</string>
+    <string name="retail_string_arrive_date">到货日期:</string>
+    <string name="retail_string_delivery_apply_no">配送单号:</string>
+    <string name="retail_string_delivery_apply_no_list_head">配送单号</string>
+    <string name="retail_string_delivery_template_list_head">配送模板</string>
+    <string name="retail_string_delivery_apply_goods_type">所属分类</string>
+
+    <string name="retail_string_apply_amount">申请金额</string>
+    <string name="retail_string_current_inventory">当前库存</string>
+    <string name="retail_string_history_detail">历史详情</string>
+    <string name="retail_string_delivery_apply_total_amount">配送申请总金额</string>
+    <string name="retail_string_operate_time_list_head">操作时间</string>
+    <string name="retail_string_status_list_head">状态</string>
+    <string name="retail_string_money_sybmol">{HBF}%s</string>
+    <string name="retail_string_choice_arrive_date">请选择到货日期（*必选）</string>
+    <string name="retail_confirm_not_modify_hint">提交后不能修改，是否确认提交？</string>
+    <string name="retail_receive_number">收货数</string>
+    <string name="retail_input_receive_number">请输入收货数</string>
+    <string name="retail_allocation">调拨</string>
+    <string name="retail_receive_history">收货单历史</string>
+    <string name="retail_edit_receive_note">编辑收货单</string>
+    <string name="retail_choose_retail_warehouse">请选择入库仓库</string>
+
+    <string name="retail_save_failure">保存失败,稍后再试</string>
+    <string name="retail_confirm_failure">确认失败,稍后再试</string>
+
+    <string name="retail_receive_status_not_edit">未编辑</string>
+    <string name="retail_receive_status_save">已保存</string>
+    <string name="retail_receive_status_confirm">已确认</string>
+    <string name="retail_receive_status_stock_up">已备货</string>
+    <string name="retail_receive_status_pick_up">已拣货</string>
+    <string name="retail_receive_status_delivery">已配送</string>
+    <string name="retail_receive_status_received">已收货</string>
+    <string name="retail_receive_no">收货单号</string>
+    <string name="retail_apply_template_no_colon">配送模板</string>
+    <string name="retail_source_category_no_colon">来源类型</string>
+    <string name="retail_arrival_time_no_colon">到货时间</string>
+    <string name="retail_warehouse_include_colon">入库仓库:</string>
+    <string name="retail_choose_warehouse_hint">请选择仓库 *必选</string>
+    <string name="retail_receive_no_include_colon">收货单号:</string>
+    <string name="retail_source_receive_no_include_colon">来源单号:</string>
+    <string name="retail_apply_template_include_colon">配送模板:</string>
+    <string name="retail_source_of_de_include_colon">来源部门:</string>
+    <string name="retail_price">单价</string>
+    <string name="retail_apply_number">配送数</string>
+    <string name="retail_receive_amount">收货金额</string>
+    <string name="retail_apply_amount_total_include_colon">配送金额合计:</string>
+    <string name="retail_receive_amount_total_include_colon">收货金额合计</string>
+    <string name="retail_source_category_include_colon">来源部门:</string>
+    <string name="retail_show_history">查看历史</string>
+    <string name="retail_inventory_goods_search_hint">请输入商品首字母,名称,编号</string>
+    <string name="retail_string_delivery_management">配送管理</string>
+    <string name="retail_string_delivery_apply">配送申请</string>
+    <string name="retail_string_receiable_order">收货单</string>
+    <string name="retail_string_delivery_apply_history">配送申请单历史</string>
+
+
+    <string name="retail_string_print_price_label">打印标价签</string>
+    <string name="retail_string_print">打印</string>
+    <string name="retail_print_price_label_goods_total"><![CDATA[商品数量：<font color=#03a9f4>%d]]></string>
+    <string name="retail_no_label_print">没有可用的标签打印机</string>
+    <string name="retail_print_success">发送打印成功</string>
+    <string name="retail_setting_scanner_by_steps">请按以下步骤设置扫码枪</string>
+    <string name="retail_connect_scanner">连接扫描枪</string>
+    <string name="retail_scan_reset">扫描恢复出厂设置码</string>
+    <string name="retail_scan_virtual_code">扫描虚拟串口码</string>
+    <string name="retail_notices">注意事项</string>
+    <string name="retail_notices_details">1.进入应用前请连接扫码枪; \n2.两次扫描均需听见"滴"的一声</string>
+
+    <string name="retail_log_upload_fail">零售日志上传失败</string>
+    <string name="retail_log_upload_success">零售日志上传成功</string>
+    <string name="retail_log_upload_start">零售日志上传中</string>
+    <string name="retail_log_upload_prepare">准备上传零售日志</string>
+    <string name="retail_string_print_price_label_ticket">打印货价签标签</string>
+    <string name="retail_string_print_label_good_ticket">打印预制商品标签</string>
+
+
+</resources>

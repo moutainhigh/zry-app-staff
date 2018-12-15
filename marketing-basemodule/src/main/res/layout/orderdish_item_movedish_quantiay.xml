@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="9dp"
+    android:paddingRight="9dp"
+    android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_operate_reason_list_item_height"
+        android:minHeight="@dimen/dialog_operate_reason_list_item_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_dishName"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/goods_name"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/dialog_operate_reason_list_item_size"
+            android:gravity="center_vertical"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/ib_decrease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/orderdish_btn_decrease_selector" />
+
+            <TextView
+                android:id="@+id/tv_dishQuantity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:minWidth="55dp"
+                android:maxLines="1"
+                android:text="1"
+                android:padding="10dp"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/dialog_operate_reason_list_item_size"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/ib_increase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/orderdish_btn_increase_selector" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_seat_no"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="9dp"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view_divide_ling"
+            style="@style/buffet_horizontal_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="9dp"
+            android:layout_alignParentTop="true" />
+
+        <TextView
+            android:id="@+id/tv_seat_hint"
+            android:layout_below="@id/view_divide_ling"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_999999"
+            android:text="@string/dinner_table_seat_hint" />
+
+        <TextView
+            android:id="@+id/tv_seat_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|right"
+            android:textColor="@color/color_333333"
+            android:layout_toRightOf="@id/tv_seat_hint"
+            android:drawablePadding="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_below="@id/view_divide_ling"
+            android:drawableRight="@drawable/orderdish_gray_arrow_right" />
+    </RelativeLayout>
+</LinearLayout>

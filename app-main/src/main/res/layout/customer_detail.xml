@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!--遮罩层-->
+    <RelativeLayout
+        android:id="@+id/booking_detail_empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/customer_card_bg"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/customer_empty_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="@null"
+            android:drawableTop="@drawable/customer_empty_log"
+            android:gravity="center"
+            android:text="@string/customer_empty_hint"
+            android:textSize="18sp" />
+    </RelativeLayout>
+    <!--新布局-->
+    <LinearLayout
+        android:id="@+id/customer_detail_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:background="@drawable/customer_card_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/customer_man"
+                    android:ellipsize="end"
+                    android:maxEms="7"
+                    android:singleLine="true"
+                    android:textColor="#333333"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:text="" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="4dp">
+
+                    <TextView
+                        android:id="@+id/customer_member_level"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:ellipsize="end"
+                        android:maxEms="9"
+                        android:singleLine="true"
+                        android:textColor="#666666"
+                        android:text=""
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/mobileInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#666666"
+                        android:text=""
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp">
+
+                <LinearLayout
+                    android:id="@+id/customer_takephoto_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/customer_takephoto"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/customer_take_photo_btn"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:id="@+id/tv_take_photo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="#666666"
+                        android:textSize="10sp"
+                        android:text="@string/customer_face_collected" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/customer_bind_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/customer_bindcard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/customer_binding_btn"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="#666666"
+                        android:textSize="10sp"
+                        android:text="@string/customer_to_entity_card" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/level_up_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/level_up"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/customer_update_btn"
+                        android:clickable="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="#666666"
+                        android:textSize="10sp"
+                        android:text="@string/customer_levelup" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/customer_call_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/call"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/customer_phone_btn"
+                        android:clickable="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="#666666"
+                        android:textSize="10sp"
+                        android:text="@string/custoemr_member_phone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/customer_edit_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:id="@+id/customer_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/customer_edit_btn"
+                        android:clickable="true" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:textColor="#666666"
+                        android:textSize="10sp"
+                        android:text="@string/customer_edit" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D0D6DC" />
+
+        <LinearLayout
+            android:id="@+id/customer_title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:background="@drawable/customer_detail_bg"
+            android:visibility="invisible"
+            android:layout_marginLeft="0.5dp"
+            android:layout_marginRight="0.5dp">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <View
+                    android:id="@+id/customer_menber_title_base_selected"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/text_blue"
+                    android:visibility="invisible"
+                    android:layout_alignParentBottom="true" />
+
+                <TextView
+                    android:id="@+id/customer_menber_title_base"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="3dp"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:text="@string/customer_baseinfo"
+                    android:textColor="@color/customer_detail_info_text_color" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:background="@color/line_gray" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/customer_menber_title_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:textSize="14sp"
+                    android:text="@string/customer_card_num_info"
+                    android:textColor="@color/customer_detail_info_text_color" />
+
+                <View
+                    android:id="@+id/customer_menber_title_card_selected"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/text_blue"
+                    android:visibility="invisible"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/btn_layout"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:background="#000000ff"
+                android:layout_margin="0.5dp">
+
+                <com.zhongmei.bty.customer.views.DrawableLeftCenterTextView
+                    android:id="@+id/customer_recharge"
+                    android:textSize="18sp"
+                    android:textColor="@color/while_line"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_green_customer"
+                    android:drawableLeft="@drawable/customer_recharge"
+                    android:gravity="center_vertical"
+                    android:text="@string/customer_charging_str"
+                    android:clickable="true" />
+
+                <com.zhongmei.bty.customer.views.DrawableLeftCenterTextView
+                    android:id="@+id/create_order"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/while_line"
+                    android:background="@drawable/customer_create_order_btn"
+                    android:drawableLeft="@drawable/customer_create_order"
+                    android:gravity="center_vertical"
+                    android:text="@string/customer_create_order"
+                    android:clickable="true" />
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:layout_above="@id/btn_layout"
+                android:layout_marginBottom="10dp">
+
+                <include
+                    android:id="@+id/detail_base"
+                    layout="@layout/customer_baseinfo"
+                    android:visibility="visible" />
+
+                <include
+                    android:id="@+id/detail_member_card_inf"
+                    layout="@layout/customer_cardinfo"
+                    android:visibility="gone" />
+            </FrameLayout>
+        </RelativeLayout>
+
+    </LinearLayout>
+</FrameLayout>

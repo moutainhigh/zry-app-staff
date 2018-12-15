@@ -1,0 +1,8 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:id="@+id/recipe_view"
+        style="@style/layout.m.w"
+        android:orientation="vertical"></LinearLayout>
+</merge>

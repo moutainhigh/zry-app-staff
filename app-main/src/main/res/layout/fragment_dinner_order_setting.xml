@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F0F3F6"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/setting_dinner_order_dish_title"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        style="@style/setting_right_content_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_dinner_order_dish_operation"
+            android:textColor="#999999"
+            android:textSize="@dimen/setting_dinner_switch_item_title_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_dinner_switch_item_height"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:background="@drawable/setting_on_of_item_bg">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/setting_dinner_switch_item_text_margin_left"
+                android:text="@string/setting_dinner_order_dish_operation_open"
+                android:textColor="#333333"
+                android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+            <ToggleButton
+                android:id="@+id/btn_order_open_operation"
+                android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                android:layout_marginRight="@dimen/setting_dinner_switch_item_btn_margin_right"
+                android:background="@drawable/setting_switch_selector"
+                android:layout_gravity="center_vertical"
+                android:checked="false"
+                android:textOff=""
+                android:textOn="" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_dinner_order_dish_method"
+            android:textColor="#999999"
+            android:textSize="@dimen/setting_dinner_switch_item_title_size"
+            android:layout_marginTop="@dimen/setting_dinner_switch_items_margin" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_dinner_switch_item_height"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:background="@drawable/setting_on_of_item_bg">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/setting_dinner_switch_item_text_margin_left"
+                android:text="@string/setting_dinner_order_dish_method_fold"
+                android:textColor="#333333"
+                android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+            <ToggleButton
+                android:id="@+id/btn_fold_practice"
+                android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                android:layout_marginRight="@dimen/setting_dinner_switch_item_btn_margin_right"
+                android:background="@drawable/setting_switch_selector"
+                android:layout_gravity="center_vertical"
+                android:checked="false"
+                android:textOff=""
+                android:textOn="" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_dinner_order_dish_clear_sort_setting"
+            android:textColor="#999999"
+            android:textSize="@dimen/setting_dinner_switch_item_title_size"
+            android:layout_marginTop="@dimen/setting_dinner_switch_items_margin" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_dinner_switch_item_height"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:background="@drawable/setting_on_of_item_bg">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/setting_dinner_switch_item_text_margin_left"
+                android:text="@string/setting_dinner_order_dish_clear_sort"
+                android:textColor="#333333"
+                android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+            <ToggleButton
+                android:id="@+id/btn_dish_clear_sort"
+                android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                android:layout_marginRight="@dimen/setting_dinner_switch_item_btn_margin_right"
+                android:background="@drawable/setting_switch_selector"
+                android:layout_gravity="center_vertical"
+                android:checked="false"
+                android:textOff=""
+                android:textOn="" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

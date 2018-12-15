@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/category"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    android:paddingBottom="8dp">
+
+    <View
+        android:id="@+id/topline"
+        style="@style/style_topline" />
+
+    <TextView
+        android:id="@+id/category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingLeft="5dp"
+        android:textColor="@color/dinner_dishname_color"
+        android:textSize="18sp"
+        android:layout_below="@id/topline" />
+
+
+    <TextView
+        android:id="@+id/category_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#9B9B9B"
+        android:layout_marginLeft="10dp"
+        android:textSize="12sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/category_name" />
+
+</RelativeLayout>

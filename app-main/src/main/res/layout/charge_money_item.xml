@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhongmei.bty.commonmodule.view.CurrencyButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:text="@string/customer_charging_fullmoney_by_fixed"
+    android:id="@+id/charge_item_money"
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:minHeight="45dp"
+    android:background="@drawable/customer_charging_rule_money_selector"
+    android:textSize="@dimen/text_16"
+    android:textColor="@color/customer_charging_show_balance"
+    android:gravity="center" />

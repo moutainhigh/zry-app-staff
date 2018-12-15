@@ -1,0 +1,25 @@
+<resources>
+
+    <dimen name="display_layout_marginTop">43dp</dimen>
+    <dimen name="display_layout_marginTop2">39dp</dimen>
+    <dimen name="display_small_layout_marginTop">36dp</dimen>
+    <dimen name="display_layout_content_width">800dp</dimen>
+    <dimen name="display_layout_content_height">360dp</dimen>
+    <dimen name="display_layout_round_width">8dp</dimen>
+    <dimen name="display_content_marginTop">64dp</dimen>
+    <dimen name="display_content_marginLeft">43dp</dimen>
+    <dimen name="display_content_txt_marginTop">21dp</dimen>
+    <dimen name="display_content_txt_marginTop2">30dp</dimen>
+    <dimen name="display_barcode_txt_marginTop">6dp</dimen>
+    <dimen name="display_barcode_txt_marginTop2">20dp</dimen>
+    <dimen name="display_barcode_marginTop">77dp</dimen>
+    <dimen name="display_barcode_marginLeft">56dp</dimen>
+    <dimen name="display_barcode_marginRight">10dp</dimen>
+
+    <!--副屏默认叫号-->
+    <dimen name="display_linearLayout_margin">72dp</dimen>
+    <dimen name="display_title_height">112dp</dimen>
+    <dimen name="display_num_size">250sp</dimen>
+    <dimen name="display_switch_height">72dp</dimen>
+
+</resources>

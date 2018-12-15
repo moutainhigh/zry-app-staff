@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <corners
+        android:bottomLeftRadius="@dimen/customer_coupon_label_red_radius"
+        android:topLeftRadius="@dimen/customer_coupon_label_red_radius" />
+
+    <solid android:color="#B18EFF" />
+
+</shape>

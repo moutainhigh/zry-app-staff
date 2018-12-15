@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pos_selft_activation">POS一体机自助激活</string>
+    <string name="pos_selft_setting">POS一体机自助配置</string>
+    <string name="confirm_shopinfo_and_activation">确定设备信息并激活</string>
+    <string name="input_info_and_config_then_use">输入相关信息配置后即可开始使用</string>
+    <string name="shop_no">商户编号</string>
+    <string name="device_no">设备编号</string>
+    <string name="selft_activation">自助激活</string>
+    <string name="start_activation">开始激活</string>
+    <string name="propertytitle_shop_no">商户/门店编号:</string>
+    <string name="propertytitle_shop_name">商户/门店名称:</string>
+    <string name="propertytitle_init_member_name">初始账号名:</string>
+    <string name="propertytitle_init_pwd">初始密码:</string>
+    <string name="please_input_shop_no">请输入9位数商户编号</string>
+    <string name="hint_activation_set_shopno">请为当前设备设置一个编号以便您管理</string>
+    <string name="if_have_no_shop">如果商户还没有注册，请</string>
+    <string name="click_to_register"><u>点击注册</u></string>
+    <string name="shop_no_notice">商户编号说明：</string>
+    <string name="shop_no_notice_content_1">1、商户编号是您餐厅（门店）的数字ID，此ID用于登录此餐厅（门店）的前台后台等管理系统</string>
+    <string name="shop_no_notice_content_2">2、在统一的品牌下，录入门店基础信息、完成注册，系统自动生成商户编号</string>
+    <string name="pre_step">上一步</string>
+    <string name="shop_contracts_phone_empty">商户联系人手机号为空，请联系运维进行补充！</string>
+    <string name="set_as_main_pos">设置为主POS</string>
+
+    <!--门店信息-->
+    <string name="please_input_message_code">请输入短信验证码</string>
+    <string name="activation_info_code_hint">请向门店负责人索要验证码已确认身份(门店负责人手机号码：%1$s)</string>
+    <string name="brand_code_label">品牌编号：</string>
+    <string name="brand_name_label">品牌名称：</string>
+    <string name="brand_charge_label">品牌负责人：</string>
+    <string name="shop_code_label">商户编号：</string>
+    <string name="shop_name_label">门店名称：</string>
+    <string name="shop_charge_label">门店负责人：</string>
+
+    <!--请求erp-->
+    <string name="get_shop_fail">获取商户id失败</string>
+    <string name="get_version_fail">商户在后台没有配置版本信息，请联系运维</string>
+    <string name="get_version_low">商户在后台配置版本比正在应用的版本小，请联系运维</string>
+    <string name="shop_invalid">商户无效，请联系运维</string>
+    <string name="get_init_info_fail">未能获取初始化信息，请联系运维</string>
+    <string name="activation_server_error">系统异常，请联系运维</string>
+
+    <string name="mac_catch_fail_hint">无法获取MAC地址,请前往设置网络链接</string>
+    <string name="device_no_is_not_null">设备编号不能为空</string>
+    <string name="activation_success">激活成功</string>
+    <string name="activation_success_hint">欢迎使用pos一体机，赶紧体验更\n加简单、高效、智能的管理服务吧！</string>
+    <string name="activation_input_shopno_null_hint">商户编号不能为空</string>
+    <string name="dialog_auto_activate_title">激活设备</string>
+    <string name="dialog_auto_activate_content">请使用掌上APP</string>
+    <string name="dialog_auto_activate_sub_content">扫描二维码激活设备，或手动激活</string>
+    <string name="dialog_auto_activate_button_go">激活完成</string>
+    <string name="dialog_auto_activate_explain">点击查看说明</string>
+    <string name="auto_activate_explain_title">下载/绑定硬件设备流程</string>
+    <string name="auto_activate_explain_down">下载\n安装</string>
+    <string name="auto_activate_explain_down_info">在Pos、Handset、KDS、手机等设备上,下载相应的安装包,下载网址：</string>
+    <string name="auto_activate_explain_down_info2">Pos硬件设备下载收银、打印服务\nHandset硬件设备下载Handset\nKDS硬件设备下载KDS</string>
+    <string name="auto_activate_explain_down_info3">(完成安装启动后，打开硬件设备上的设备二维码待被扫使用)</string>
+    <string name="auto_activate_explain_down_info4">智能手机扫描二维码，安装掌上APP</string>
+    <string name="auto_activate_explain_register">注册\n门店</string>
+    <string name="auto_activate_explain_register_info">进入掌上,点击商户注册,进行新增门店操作,详情见内页（商户注册流程,已注册商户,登录流程）</string>
+    <string name="auto_activate_explain_binding">绑定\n设备</string>
+    <string name="auto_activate_explain_binding_info">使用手机扫描Pos、Handset、KDS等硬件设备上的二维码详情见内页</string>
+    <string name="auto_activate_explain_ok">完成</string>
+    <string name="auto_activate_explain_ok_info">完成绑定</string>
+
+</resources>

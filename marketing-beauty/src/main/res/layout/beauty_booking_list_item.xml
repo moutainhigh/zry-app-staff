@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingRight="47dp"
+    android:background="@color/beauty_bg_white"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingLeft="47dp">
+
+        <ImageView
+            android:id="@+id/iv_member_header"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:orientation="vertical"
+            android:paddingRight="25dp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/beauty_notify_textview_value"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/beauty_booking_service_style"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_source_pre"
+                style="@style/beauty_booking_service_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/beauty_source_pre"
+                android:gravity="left" />
+
+            <TextView
+                android:id="@+id/tv_source"
+                style="@style/beauty_booking_service_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tv_servers"
+            style="@style/beauty_booking_service_style"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_cosmetologist"
+            style="@style/beauty_booking_service_style"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginLeft="28dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_time"
+                style="@style/beauty_booking_service_style"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                style="@style/beauty_outline_style"
+                android:text="@string/beauty_outline"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lv_operate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:gravity="right"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_modify"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/beauty_btn_main_modify_selectory"
+                android:paddingLeft="21dp"
+                android:paddingRight="21dp"
+                android:textSize="@dimen/text_14"
+                android:text="@string/beauty_modify"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/btn_open"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/beauty_btn_main_create_trade_selectory"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:textSize="@dimen/text_14"
+                android:text="@string/beauty_open_trade"
+                android:textColor="@color/beauty_text_white" />
+
+
+            <Button
+                android:id="@+id/btn_accept"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/beauty_btn_main_modify_selectory"
+                android:paddingLeft="21dp"
+                android:paddingRight="21dp"
+                android:visibility="gone"
+                android:textSize="@dimen/text_14"
+                android:text="@string/beauty_accept"
+                android:textColor="@color/black" />
+
+
+            <Button
+                android:id="@+id/btn_refuse"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/beauty_btn_main_create_trade_selectory"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:textSize="@dimen/text_14"
+                android:visibility="gone"
+                android:text="@string/beauty_refuse"
+                android:textColor="@color/beauty_text_white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lv_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right">
+
+            <TextView
+                android:id="@+id/tv_cancel_time"
+                style="@style/beauty_booking_service_style"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/tv_cancel_reason"
+                style="@style/beauty_booking_service_style"
+                android:text="@string/beauty_booking_cancel_reason"
+                android:textColor="@color/beauty_color_999999"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

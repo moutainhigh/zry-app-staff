@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_recharge"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/closing_margin_stroke"
+        android:layout_marginLeft="46dp"
+        android:layout_marginRight="46dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/closing_margin_top"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/closing_detail_belongdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/closingDate"
+                    android:textSize="@dimen/closing_date_size"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/closing_detail_daterange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/closing_margin_top"
+                    android:text="@string/closingDateRange"
+                    android:textSize="@dimen/closing_date_size" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/closing_button_print"
+                android:layout_width="@dimen/closing_button_print"
+                android:layout_height="@dimen/closing_button_print_hight"
+                android:layout_alignParentEnd="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/close_bill_button_selector"
+                android:text="@string/closingPrint"
+                android:textColor="@color/bg_white"
+                android:textSize="18sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingBottom="@dimen/closing_margin_stroke">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/closing_margin_stroke"
+            android:layout_marginLeft="46dp"
+            android:layout_marginRight="46dp"
+            android:layout_marginStart="@dimen/closing_margin_stroke"
+            android:orientation="vertical">
+
+            <!--关账总金额-->
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/total_amount_info_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+            <!--订单销售实收入-->
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/ordersall_info_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+
+            <!--储值收入-->
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/member_pay_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+            <!--消账收入-->
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/charge_off_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+            <!--其他收入-->
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/other_income_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+
+            <!--支出-->
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/out_pay_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+            <!--挂账-->
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/lag_info_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+            <!--订单销售实收-->
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/bizamount_info_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/receipt_pay_type_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/discount_detail_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/trade_type_count_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/trade_avg_count_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+
+            <com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView
+                android:id="@+id/bill_dish_type_info_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"></com.zhongmei.bty.basemodule.shopmanager.closing.views.ClosingDetailsView>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/closing_margin_stroke">
+
+        <Button
+            android:id="@+id/closing_detail_back"
+            android:layout_width="400dp"
+            android:layout_height="@dimen/closing_button_print_hight"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/btn_blue_deep_selector"
+            android:text="@string/handover_return"
+            android:textColor="@drawable/handover_but_text_color"
+            android:textSize="24sp" />
+    </LinearLayout>
+
+</LinearLayout>

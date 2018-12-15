@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hs_bracelet_pay_title">请使用手环支付</string>
+    <string name="handset_re_search">重新搜索</string>
+    <string name="handset_pay_desc">手环支付</string>
+    <string name="handset_devices_title">搜索到多个设备，请选择：</string>
+    <string name="handset_init_connect">正在连接设备，请稍等……</string>
+    <string name="handset_money_label">收银%1$s</string>
+
+
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="test">测试</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="dinner_dish_type_all">全部</string>
+    <string name="cancel">取消</string>
+    <string name="haveDishNeedPrint">没有可传送后厨的商品</string>
+</resources>

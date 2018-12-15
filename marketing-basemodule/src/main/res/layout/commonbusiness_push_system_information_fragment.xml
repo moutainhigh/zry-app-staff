@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:layout_gravity="center"
+        android:background="@drawable/trade_orderdish_bg"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_push_information_height">
+
+            <ImageView
+                android:id="@+id/push_system_information_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:layout_marginRight="22dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/push_system_information_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:paddingLeft="22dp"
+                android:paddingRight="50dp"
+                android:textColor="#FF7901"
+                android:textSize="26sp"
+                autofit:minTextSize="22sp" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DADBDA" />
+
+        <WebView
+            android:id="@+id/push_system_information_webview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="22dp"
+            android:layout_marginLeft="22dp"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="28dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_know"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@drawable/commonbusiness_dialog_multi_choice_button_bottom"
+            android:text="@string/know"
+            android:textColor="@color/text_white"
+            android:textSize="21sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

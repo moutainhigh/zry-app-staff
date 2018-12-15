@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/union_pay_layout"
+        android:layout_width="560dp"
+        android:layout_height="418dp"
+        android:background="@drawable/uion_background">
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/mispos_uion_close_button"></ImageView>
+
+        <ImageView
+            android:id="@+id/center_iv"
+            android:layout_width="234dp"
+            android:layout_height="234dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="36dp" />
+
+        <LinearLayout
+            android:id="@+id/center_ll_range"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/center_iv_range"
+                android:layout_width="348dp"
+                android:layout_height="146dp"
+                android:layout_marginTop="88dp" />
+
+            <LinearLayout
+                android:layout_width="348dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/center_tv_first_range"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:textColor="#31b1ff"
+                    android:text="@string/read_start_card"
+                    android:textSize="25sp" />
+
+                <TextView
+                    android:id="@+id/center_tv_second_range"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:textColor="#cecece"
+                    android:gravity="right"
+                    android:text="@string/read_end_card"
+                    android:textSize="25sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/show_info_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/center_iv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/credit_card_transaction_failed"
+            android:textColor="#555555"
+            android:textSize="@dimen/dialog_union_card_hint_size" />
+
+        <TextView
+            android:id="@+id/reminder_msg_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/show_info_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:gravity="center"
+            android:text="@string/notice_info"
+            android:textColor="#555555"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/try_again_button"
+            android:layout_width="180dp"
+            android:layout_height="48dp"
+            android:layout_below="@+id/show_info_tv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/uion_try_again_selector"
+            android:text="@string/try_again"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"
+            android:visibility="visible"></Button>
+    </RelativeLayout>
+
+</LinearLayout>

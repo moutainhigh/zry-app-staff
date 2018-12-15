@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/dish_sequence_btn_sort"
+        android:layout_width="93dp"
+        android:layout_height="42dp"
+        android:background="@drawable/dish_sequence_num_bg"
+        android:text="@string/dish_sequence_value_none"
+        android:textColor="@color/dish_sequence_num_color"
+        android:textSize="14sp" />
+</LinearLayout>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000ff">
+
+    <LinearLayout
+        android:layout_width="373dp"
+        android:layout_height="480dp"
+        android:layout_gravity="center"
+        android:background="@drawable/order_center_operate_dialog_background"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="67dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/shopcart_delete_dish"
+                android:textColor="#FFFF7901"
+                android:textSize="@dimen/dialog_operate_title_size" />
+
+            <ImageButton
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dialog_operate_reason_margin"
+            android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+            android:background="@color/transparent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dialog_operate_reason_title_height"
+                android:background="#FFE6EBEF"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+                android:text="@string/shopcart_delete_dish"
+                android:textColor="#FFB2B7BC"
+                android:textSize="@dimen/dialog_operate_reason_title_size" />
+
+            <RelativeLayout
+                android:id="@+id/return_inventory_item"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/booking_create_info_item_bg"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="10dp"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:text="@string/shopcart_delete_dish_count"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/count_num_tv"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="5"
+                    android:textColor="#333333"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginEnd="@dimen/dialog_operate_reason_margin"
+            android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:background="@color/transparent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/item_title"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dialog_operate_reason_title_height"
+                android:background="#FFE6EBEF"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+                android:text="@string/order_center_return_inventory_item"
+                android:textColor="#FFB2B7BC"
+                android:textSize="@dimen/dialog_operate_reason_title_size" />
+
+            <ListView
+                android:id="@+id/dish_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@color/gray_line"
+                android:dividerHeight="0.5dp"
+                android:scrollbars="none"></ListView>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_return_inventory"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_operate_submit_height"
+            android:layout_marginTop="@dimen/dialog_operate_views_marginTop"
+            android:background="@drawable/bg_order_center_dialog_refund"
+            android:gravity="center"
+            android:paddingRight="5dp"
+            android:text="@string/common_submit"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/dialog_operate_submit_size" />
+
+    </LinearLayout>
+</FrameLayout>

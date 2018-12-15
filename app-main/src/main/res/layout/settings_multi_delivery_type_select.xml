@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F0F3F6">
+
+    <RelativeLayout
+        android:id="@+id/receipt_title"
+        style="@style/settings_rightTitle"
+        android:background="@drawable/cashier_bg_title_bar"
+        android:orientation="horizontal"
+
+        android:paddingRight="@dimen/print_setting_content_margin_left">
+
+        <RelativeLayout
+            android:id="@+id/set_close"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/print_setting_content_margin_left"
+            android:paddingRight="@dimen/print_setting_content_margin_left">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:src="@drawable/print_setting_back_icon" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="84dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/select_deliverty_type"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/setting_title_bar_size" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/print_setting_content_margin"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/print_setting_item_title_style"
+            android:text="@string/snack" />
+
+        <com.zhongmei.bty.settings.view.ScrollListView
+            android:id="@+id/lv_types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/print_setting_item_margin_top"
+            android:background="@drawable/setting_on_of_item_bg"
+            android:divider="@color/gray_line"
+            android:dividerHeight="0.5dp" />
+
+        <TextView
+            style="@style/print_setting_item_title_style"
+            android:text="@string/dinner_icon_name"
+            android:layout_marginTop="@dimen/print_setting_items_margin" />
+
+        <com.zhongmei.bty.settings.view.ScrollListView
+            android:id="@+id/lv_dinner_types"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/print_setting_item_margin_top"
+            android:background="@drawable/setting_on_of_item_bg"
+            android:divider="@color/gray_line"
+            android:dividerHeight="0.5dp" />
+    </LinearLayout>
+
+
+</LinearLayout>

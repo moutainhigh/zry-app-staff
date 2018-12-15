@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/v_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/customer_card_bg"
+        android:layout_marginRight="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tv_empty_trade_details"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_bar_height"
+            android:background="@color/beauty_bg_white"
+            android:gravity="center"
+            android:text="@string/order_detail"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/write"
+            android:textSize="@dimen/text_16" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/dinner_order_center_no_data" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/v_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/customer_card_bg"
+        android:layout_marginRight="10dp"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/layout_titlebar"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_vertical">
+
+
+            <!--  订单号 -->
+            <TextView
+                android:id="@+id/detail_trade_no"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:paddingLeft="15dp"
+                android:textColor="@color/write"
+                android:textSize="@dimen/text_16" />
+
+
+            <!--  取餐状态 -->
+            <TextView
+                android:id="@+id/detail_take_dish_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="12dp"
+                android:textColor="@color/write"
+                android:textSize="@dimen/text_14" />
+
+
+            <!--  配送平台 -->
+            <TextView
+                android:id="@+id/detail_delivery_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/order_dish_grid_item_desc_margin"
+                android:textColor="@color/write"
+                android:textSize="@dimen/text_12" />
+
+            <!--  配送状态 -->
+            <TextView
+                android:id="@+id/order_center_detail_delivery_status_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/order_dish_grid_item_desc_margin"
+                android:textSize="@dimen/text_12"
+                android:textColor="@color/write" />
+
+            <!--  内用、外用 -->
+            <TextView
+                android:id="@+id/detail_delivery_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:textColor="@color/write"
+                android:textSize="@dimen/text_12" />
+
+        </LinearLayout>
+
+        <View style="@style/beauty_horizontal_line" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/order_center_detail_delivery_cancel_alert_ll"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:background="@color/color_FFE5D5"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/order_center_detail_delivery_cancel_alert_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:textColor="@color/color_FE4545"
+                    android:textSize="@dimen/text_10"
+                    android:gravity="center_vertical"
+                    android:drawablePadding="6dp"
+                    android:drawableStart="@drawable/ic_order_center_delivery_cancel_alert" />
+            </LinearLayout>
+
+            <ScrollView
+                android:id="@+id/detail_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="vertical"
+                    android:descendantFocusability="blocksDescendants">
+
+                    <com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView
+                        android:id="@+id/operating_info_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone" />
+
+                    <include
+                        android:id="@+id/delivery_info"
+                        layout="@layout/order_center_detail_delivery_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
+
+                    <include
+                        android:id="@+id/receiver_info"
+                        layout="@layout/order_center_detail_receiver_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
+
+                    <include
+                        android:id="@+id/pay_info"
+                        layout="@layout/dinner_order_center_detail_payinfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
+
+                    <include
+                        android:id="@+id/privilege_info"
+                        layout="@layout/dinner_order_center_detail_privilegeinfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
+
+                    <include
+                        android:id="@+id/goods_info"
+                        layout="@layout/dinner_order_center_detail_goodsinfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
+
+                    <com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView
+                        android:id="@+id/additional_privilege_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:visibility="visible" />
+
+                    <com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView
+                        android:id="@+id/service_privilege_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:visibility="visible" />
+
+
+                    <com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView
+                        android:id="@+id/tax_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="36dp"
+                        android:visibility="visible"></com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView>
+
+                    <include
+                        android:id="@+id/reject_goods_info"
+                        layout="@layout/dinner_order_center_detail_reject_goodsinfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
+
+                    <include
+                        android:id="@+id/bill_info"
+                        layout="@layout/order_center_detail_billinfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp" />
+
+                    <LinearLayout
+                        android:id="@+id/rePay_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+
+                    <LinearLayout
+                        android:id="@+id/split_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical" />
+                    　　
+                </LinearLayout>
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/v_trade_handle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_accept"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/dinner_order_center_accept" />
+
+                <Button
+                    android:id="@+id/btn_refuse"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/dinner_order_center_refuse" />
+
+                <Button
+                    android:id="@+id/btn_accept_return"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_detail_agree_st" />
+
+                <Button
+                    android:id="@+id/btn_refuse_return"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_detail_refuse_st" />
+
+                <Button
+                    android:id="@+id/btn_pay"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/dinner_order_center_pay" />
+
+                <Button
+                    android:id="@+id/btn_recision"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/dinner_order_center_recision" />
+
+                <Button
+                    android:id="@+id/btn_refund"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/dinner_order_center_refund" />
+
+                <Button
+                    android:id="@+id/btn_retry_refund"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_to_refund" />
+
+                <Button
+                    android:id="@+id/btn_deposit_refund"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_deposit_refund_st" />
+
+                <Button
+                    android:id="@+id/btn_repay"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/dinner_order_center_repay" />
+
+                <Button
+                    android:id="@+id/btn_continue_repay"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/dinner_order_center_continue_repay" />
+
+                <FrameLayout
+                    android:id="@+id/fl_send_order"
+                    style="@style/OrderCenterBottomButtonStyle">
+
+                    <TextView
+                        android:id="@+id/tv_send_order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="@string/order_center_send_order"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/text_16" />
+                </FrameLayout>
+
+                <Button
+                    android:id="@+id/btn_cancel_order"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_center_cancel_order" />
+
+                <ImageView
+                    android:id="@+id/btn_call"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:contentDescription="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/dinner_call" />
+
+                <Button
+                    android:id="@+id/btn_print"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/reprint" />
+
+                <Button
+                    android:id="@+id/btn_invoice"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_center_invoice" />
+
+                <Button
+                    android:id="@+id/btn_invoice_revoke"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_center_invoice_revoke" />
+
+                <Button
+                    android:id="@+id/btn_continue_pay"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/continue_pay" />
+
+                <Button
+                    android:id="@+id/btn_take_dish"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/take_dish" />
+
+                <Button
+                    android:id="@+id/btn_rebind_delivery_user"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_center_rebind_delivery_user" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/customer_card_bg"
+        android:layout_marginRight="10dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/layout_loading_title_bar"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_bar_height"
+            android:layout_marginLeft="27dp"
+            android:layout_marginRight="15dp"
+            android:background="@color/bg_white" />
+
+        <com.zhongmei.bty.cashier.ordercenter.view.LoadingSmallView_
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+</FrameLayout>

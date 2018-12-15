@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="reject_reason">作废原因：%1$s</string>
+    <string name="reject_operation">作废操作：%1$s</string>
+    <string name="reject_time">作废时间：%1$s</string>
+
+    <string name="reject_quit">( %1$s退%2$s )</string>
+    <string name="reject_modify">( %1$s改%2$s )</string>
+
+</resources>

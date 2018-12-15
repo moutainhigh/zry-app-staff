@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:background="@drawable/uion_read_card_layout"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:id="@+id/rl_search_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_search_card"
+                android:layout_width="180dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/anonymous_card_pay_btn_selector"
+                android:text="@string/search"
+                android:textColor="@color/anonymous_card_pay_btn_color"
+                android:textSize="@dimen/text_18" />
+
+            <TableRow
+                android:id="@+id/tr_edit_content"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_toStartOf="@id/btn_search_card"
+                android:background="@drawable/customer_search_background"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/customer_search_icon"
+                    android:contentDescription="@string/app_name"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true" />
+
+                <EditText
+                    android:id="@+id/et_order_search"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:hint="@string/order_card_charge_hint"
+                    android:inputType="numberDecimal"
+                    android:singleLine="true"
+                    android:textColor="@color/color_333333"
+                    android:textColorHint="@color/color_bcbcbc"
+                    android:textSize="@dimen/text_18" />
+
+                <ImageView
+                    android:id="@+id/iv_content_delete"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:padding="8dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/customer_ordercenter_search_delete"
+                    android:visibility="gone" />
+
+            </TableRow>
+
+        </RelativeLayout>
+
+        <TableRow
+            android:id="@+id/tr_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/rl_search_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/customer_time"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/customer_card_no"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_title_phone"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/order_card_sale_phone"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_title_sale"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/sale_price"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/customer_manager"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_14" />
+
+        </TableRow>
+
+        <View
+            android:id="@+id/v_sale_title_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.7dp"
+            android:layout_below="@id/tr_title"
+            android:background="@color/print_line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/v_sale_title_line">
+
+            <include layout="@layout/layout_customer_content" />
+
+            <TextView
+                android:id="@+id/tv_orders_empty"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_white"
+                android:gravity="center"
+                android:text="@string/order_card_sale_empty"
+                android:textColor="@color/color_bcbcbc"
+                android:textSize="@dimen/text_16"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="buffet_checkout_unpaid">未结账</string>
+    <string name="buffet_checkout_part">部分结账</string>
+    <string name="buffet_checkout_all">账已结清</string>
+    <string name="buffet_create_trade">开单</string>
+    <string name="buffet_combo_type_hint">用餐类型:</string>
+    <string name="buffet_combo_type">餐标类型:%1$s</string>
+    <string name="buffet_customer_count">就餐人数(%1$s人)</string>
+    <string name="buffet_other_info">其他信息</string>
+    <string name="buffet_modify_people_count">修改人数</string>
+    <string name="buffet_deposit">押金</string>
+    <string name="buffet_deposit_property">押金原路退回</string>
+    <string name="buffet_pledge">押金:{HBF}%1$s</string>
+    <string name="buffet_outtime_fee">超时费:{HBF}%1$s</string>
+    <string name="buffet_outtime_fee_title">超时费</string>
+    <string name="buffet_outtime_hint">共超时%1$s分钟,{HBF}%2$s/%3$s分钟/位</string>
+    <string name="buffet_serialNo">流水号%1$s</string>
+    <string name="buffet_include_degel">含押金:{HBF}%1$s</string>
+    <string name="buffet_per_fee">{HBF}%1$s/位</string>
+    <!--<string name="buffet_fee">¥%1$s</string>-->
+    <string name="buffet_waiter">服务员:%1$s</string>
+    <string name="buffet_salesman">销售员:%1$s</string>
+    <string name="buffet_select_combo_title">选择餐标类型</string>
+    <string name="buffet_notable_list_title">用餐中订单列表</string>
+    <string name="buffet_notable_list_hint">订单详情和更多操作请到单据中心</string>
+    <string name="buffet_scancode_to_return_pledge">扫码退押金</string>
+    <string name="buffet_return_pledge">退押金</string>
+    <string name="buffet_modify_trade">改单</string>
+    <string name="buffet_tradefinish">用餐完毕</string>
+    <string name="buffet_checkout">结账</string>
+    <string name="buffet_orderdish">点单</string>
+    <string name="buffet_tradefinish_tip">用餐完毕后，此订单将不显示在用餐列表中，可到单据中心继续操作。</string>
+    <string name="buffet_tradefinish_deposit_tip">就餐完毕后，可继续进行押金处理。</string>
+    <string name="buffet_notable_trade_modify_title">订单修改</string>
+    <string name="buffet_despoit_paid_abolish">该订单页支付押金，不允许废除</string>
+    <string name="buffet_despoit_paid_transfer_table">该订单已支付押金，不允许转台</string>
+    <string name="buffet_paid_all">账已结清</string>
+    <string name="buffet_dinner_finish">用餐完毕</string>
+    <string name="buffet_dinner_finish_return_deposit">用餐完毕,退押金</string>
+    <string name="hint_buffet_select_customer">请输入就餐人数</string>
+    <string name="hint_buffet_opentable_fail">开台未成功，不允许修改订单</string>
+
+    <string name="buffet_group_combo">自助菜品</string>
+    <string name="buffet_group_single">单点菜品</string>
+    <string name="buffet_group_other">其他信息</string>
+
+    <string name="buffet_no_buffet_combo">请前往后台设置自助餐餐标</string>
+    <string name="buffet_no_trade_despoist_info">没有查询到该订单的押金信息</string>
+    <string name="buffet_out_time_keyword">超</string>
+    <string name="buffet_time_limit_keyword">剩</string>
+    <string name="buffet_cannot_split">自助餐不提供拆单操作!</string>
+
+    <string name="buffet_type_buffet">自助餐</string>
+    <string name="buffet_type_dinner">单点菜品</string>
+
+    <string name="buffet_and_single_standard_cannot_switch">自助和单品规格不允许相互切换！</string>
+    <string name="buffet_outtimefee_delete">超时费不允许删除</string>
+
+    <string name="buffet_order_orgin_price">订单原金额%s</string>
+    <string name="buffet_sigle_dish_label">单点</string>
+    <string name="buffet_people">人数</string>
+    <string name="buffet_privilege_used">该菜品已有被核销的优惠券,不支持删除操作</string>
+    <string name="buffet_deposit_paid_not_delete">押金已支付，不允许删除！</string>
+
+    <string name="buffet_deposit_edit_dialog_title">修改押金金额</string>
+    <string name="buffet_deposit_edit_dialog_hint">请输入押金金额</string>
+    <string name="buffet_union_limit_one">押金已支付，不满足联台条件！</string>
+    <string name="buffet_union_limit_two">餐标不相同，不满足联台条件！</string>
+    <string name="buffet_union_trade_change_order_limit">未设置餐标，无法切换订单</string>
+    <string name="buffet_union_cancel_title">拆单桌台信息</string>
+    <string name="buffet_union_cancel_error_nocancel">联台单已经交押金，不能取消联台</string>
+    <string name="buffet_union_cancel_error_people">拆单餐标人数不能大于主单人数</string>
+    <string name="buffet_union_cancel_error_deposit">拆单押金不能大于主单押金</string>
+    <string name="buffet_union_sub_trade_modify_error">子单改单失败，主单总金额必须大于已付金额！</string>
+    <string name="buffet_order_op_limit_toast">请先设置餐标人数后再进行此操作！</string>
+</resources>

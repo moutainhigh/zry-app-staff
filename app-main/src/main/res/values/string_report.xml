@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="report_app_name">报表</string>
+    <string name="print_dishCategory_witch_txt">票据内容包含大类汇总数据</string>
+    <string name="print_dishType_witch_txt">票据内容包含中类汇总数据</string>
+    <string name="forum_reply_txt">回复</string>
+    <string name="forum_reply_editor_hint">请输入回复内容</string>
+    <string name="print_filter">打印条件</string>
+    <string name="forum_common_count_default_txt">评论总数0条</string>
+    <string name="forum_select_txt">筛选:</string>
+    <string name="forum_source_all_platform">所有平台</string>
+    <string name="forum_picture_select_all">所有评论</string>
+    <string name="forum_score_select_all">所有评分</string>
+    <string name="forum_search_txt">搜索</string>
+    <string name="forum_not_find_forum_record">没有查询到评论信息!</string>
+</resources>

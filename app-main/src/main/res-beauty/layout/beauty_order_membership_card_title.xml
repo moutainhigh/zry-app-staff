@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:visibility="visible">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/beauty_middle_content_titlte_style"
+            android:text="@string/beauty_order_card_title" />
+
+        <TextView
+            style="@style/beauty_middle_content_titlte_hint"
+            android:layout_marginTop="4dp"
+            android:text="@string/beauty_order_card_title" />
+    </LinearLayout>
+</RelativeLayout>

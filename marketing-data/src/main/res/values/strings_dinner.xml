@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dinner_inventory_verify_hint">等商品可售数不足，是否继续下单?</string>
+</resources>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:layout_width="325.33dp"
+        android:layout_height="512dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:background="@drawable/order_center_operate_dialog_background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="66.67dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="@string/retail_string_remarks"
+                android:textColor="#FF7901"
+                android:textSize="21.33sp" />
+
+            <ImageButton
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:padding="10dp"
+                android:background="@color/transparent"
+                android:src="@drawable/dinner_close_gray" />
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="325.33dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingBottom="31.33dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="26.67dp"
+                        android:textColor="#999999"
+                        android:textSize="13.33sp"
+                        android:text="@string/retail_string_remark_explain"
+                        android:background="#F6F6F6"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+
+                        />
+
+                    <com.zhongmei.bty.retail.inventorymanagement.stocktake.widget.NoEmojiEditText
+                        android:id="@+id/et_stocktake_goods_remark"
+                        android:layout_width="match_parent"
+                        android:layout_height="105.64dp"
+                        android:layout_marginTop="10dp"
+                        android:hint="@string/retail_string_stock_add_remark_hint"
+                        android:textColorHint="#BCBCBC"
+                        android:maxLength="48"
+                        android:gravity="left|top"
+                        android:padding="16dp"
+                        android:textSize="16sp"
+                        android:textColor="#333333"
+                        android:background="@drawable/shape_retail_stocktake_round_rectangle"
+
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+
+        <TextView
+            android:id="@+id/tv_ok"
+            android:layout_width="match_parent"
+            android:layout_height="58.67dp"
+            android:background="@drawable/btn_add_fee_selector"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/retail_string_confirm"
+            android:textColor="#FFFFFF"
+            android:textSize="21.33sp" />
+    </LinearLayout>
+</FrameLayout>

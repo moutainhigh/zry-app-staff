@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/customer_balance_showdow"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/customer_integral_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/customer_account_table_h"
+            android:background="@color/write"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_integral_canuse_lable"
+                android:textColor="@color/customer_text_black"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/customer_canuse_intergral_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+                android:text="@string/customer_zero_cent_str"
+                android:textColor="@color/customer_text_orange"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/count_integral_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:text="@string/customer_total_integral_label"
+                android:textColor="@color/customer_text_black"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/customer_total_intergral_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/customer_zero_cent_str"
+                android:textColor="@color/customer_text_black"
+                android:textSize="@dimen/text_16" />
+        </LinearLayout>
+
+        <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:background="#e5e8ec" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/customer_account_table_h"
+            android:layout_marginLeft="@dimen/customer_account_padding"
+            android:layout_marginRight="@dimen/customer_account_padding"
+            android:layout_marginTop="@dimen/customer_account_padding"
+            android:background="@color/write"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="@string/customer_time"
+                android:textColor="@color/customer_balance_jifen_title"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/integral_into"
+                android:textColor="@color/customer_balance_jifen_title"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/available"
+                android:textColor="@color/customer_balance_jifen_title"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:text="@string/customer_manager"
+                android:textColor="@color/customer_balance_jifen_title"
+                android:textSize="@dimen/text_16" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/customer_account_padding"
+        android:layout_marginRight="@dimen/customer_account_padding"
+        android:background="#e5e8ec" />
+
+    <!-- 可用积分title -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/customer_account_padding"
+        android:layout_marginLeft="@dimen/customer_account_padding"
+        android:layout_marginRight="@dimen/customer_account_padding"
+        android:layout_weight="1"
+        android:background="@color/write"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <ListView
+                android:id="@+id/card_integral_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/write"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@null"
+                android:listSelector="@color/transparent"></ListView>
+
+            <in.srain.cube.views.ptr.PtrClassicFrameLayout
+                android:id="@+id/mPtr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/customer_account_padding"
+                android:layout_marginLeft="@dimen/customer_account_padding"
+                android:layout_marginRight="@dimen/customer_account_padding">
+
+                <ListView
+                    android:id="@+id/customer_integral_lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/write"
+                    android:cacheColorHint="@android:color/transparent"
+                    android:divider="@null"
+                    android:listSelector="@color/transparent" />
+            </in.srain.cube.views.ptr.PtrClassicFrameLayout>
+
+            <ImageView
+                android:id="@+id/integral_empty_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/customer_empty_icon"
+                android:layout_centerInParent="true"
+                android:visibility="gone" />
+            <!-- 余额积分为空页面 -->
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/integral_layout_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/write"
+            android:orientation="horizontal"
+            android:layout_marginLeft="@dimen/customer_intrgral_time_l"
+            android:layout_marginRight="@dimen/customer_intrgral_time_l"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/btn_add_integral"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:background="@drawable/customer_modify_integral_btn"
+                android:layout_weight="1"
+                android:text="@string/customer_integral_modify_btn1"
+                android:textSize="16sp"
+                android:textColor="#32ADF6" />
+
+            <View
+                android:layout_width="20dp"
+                android:layout_height="48dp"
+                android:background="@color/write" />
+
+            <Button
+                android:id="@+id/btn_subtract_integral"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="@string/customer_integral_modify_btn2"
+                android:textSize="16sp"
+                android:background="@drawable/customer_modify_integral_btn"
+                android:textColor="#32ADF6" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

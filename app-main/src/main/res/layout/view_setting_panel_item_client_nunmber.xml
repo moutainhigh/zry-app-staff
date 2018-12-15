@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/setting_dinner_switch_item_title_margin_top">
+
+    <TextView
+        style="@style/setting_switch_item_title_text"
+        android:text="@string/settings_panel_client" />
+
+    <LinearLayout style="@style/setting_switch_item">
+
+        <TextView
+            style="@style/setting_switch_item_text"
+            android:text="@string/settings_panel_client_edit" />
+
+        <ToggleButton
+            android:id="@+id/view_setting_panel_item_client_tbtn"
+            style="@style/setting_switch_item_btn"
+            android:textOff=""
+            android:textOn="" />
+    </LinearLayout>
+
+</LinearLayout>

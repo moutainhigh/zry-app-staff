@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/dinner_shoppingCard_dishName_margin"
+    android:id="@+id/privilege_layout">
+
+    <View
+        android:id="@+id/topline"
+        style="@style/style_topline"
+        android:layout_marginLeft="@dimen/dinner_shopcart_item_marginLeft"
+        android:layout_marginRight="@dimen/dinner_shopcart_item_marginRight" />
+
+    <TextView
+        android:id="@+id/dish_name"
+        style="@style/dinnerdishTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dinner_shopcart_item_marginLeft"
+        android:layout_marginTop="@dimen/dinner_shoppingCard_dishName_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/topline"
+        android:layout_centerVertical="true"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="false" />
+
+    <TextView
+        android:id="@+id/dish_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/dish_name"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dinner_shopcart_item_marginRight"
+        android:layout_alignParentRight="true"
+        android:minWidth="20dp"
+        android:textColor="#666666"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/dish_memo"
+        style="@style/dishMemoStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:drawablePadding="5dp"
+        android:ellipsize="end"
+        android:layout_alignLeft="@id/dish_name"
+        android:layout_marginRight="@dimen/dinner_shopcart_item_marginRight"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="0dp"
+        android:singleLine="false"
+        android:textColor="@color/remark_text_color"
+        android:layout_below="@id/dish_name"
+        android:textSize="@dimen/text_16" />
+
+</RelativeLayout>

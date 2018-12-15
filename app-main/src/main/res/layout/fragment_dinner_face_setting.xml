@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F0F3F6">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/setting_dinner_goin_goout"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        style="@style/setting_right_content_margin">
+
+        <TextView
+            style="@style/setting_switch_item_title_text"
+            android:text="@string/setting_customer_face" />
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                style="@style/setting_switch_item_text"
+                android:text="@string/setting_customer_face_open" />
+
+            <Button
+                android:id="@+id/btn_allow_information_collection"
+                style="@style/setting_switch_item_btn" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/setting_switch_item_title_text"
+            android:layout_marginTop="@dimen/setting_dinner_switch_items_margin"
+            android:text="@string/setting_dinner_goin" />
+
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/setting_switch_item_text"
+                android:text="@string/setting_dinner_arrived_remind" />
+
+            <ToggleButton
+                android:id="@+id/btn_customer_goin_remind"
+                style="@style/setting_switch_item_btn"
+                android:checked="false"
+                android:textOff=""
+                android:textOn="" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:background="@drawable/setting_on_of_item_bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_dinner_switch_item_height"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/setting_switch_item_text"
+                    android:text="@string/setting_dinner_goin_weixin" />
+
+                <ToggleButton
+                    android:id="@+id/btn_weixin"
+                    style="@style/setting_switch_item_btn"
+                    android:checked="false"
+                    android:textOff=""
+                    android:textOn="" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_gray"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_dinner_switch_item_height">
+
+                <TextView
+                    android:id="@+id/textView3"
+                    style="@style/setting_switch_item_text"
+                    android:text="@string/setting_dinner_goin_face" />
+
+                <ToggleButton
+                    android:id="@+id/btn_face"
+                    style="@style/setting_switch_item_btn"
+                    android:checked="false"
+                    android:textOff=""
+                    android:textOn="" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/setting_dinner_switch_item_height">
+
+                <TextView
+                    style="@style/setting_switch_item_text"
+                    android:text="@string/setting_dinner_goin_shuke" />
+
+                <ToggleButton
+                    android:id="@+id/btn_shuke"
+                    style="@style/setting_switch_item_btn"
+                    android:checked="false"
+                    android:textOff=""
+                    android:textOn="" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

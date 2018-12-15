@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:paddingBottom="13dp"
+        android:paddingTop="20dp"
+        android:scrollbarStyle="outsideInset">
+
+
+        <GridView
+            android:id="@+id/gv_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:cacheColorHint="@android:color/transparent"
+            android:fadingEdge="none"
+            android:gravity="center_horizontal"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="1"
+            android:verticalSpacing="8dp"
+            tools:listitem="@layout/market_activity_list_item"
+            android:scrollbars="none" />
+
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/include_empty_status"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        layout="@layout/beauty_layout_empty_status" />
+
+</LinearLayout>

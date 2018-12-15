@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F0F3F6">
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        style="@style/settings_rightTitle"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/table_number_setting"
+            android:textColor="@color/text_white"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginTop="50dp"
+        android:text="@string/num_table_choose"
+        android:textColor="@color/print_text_gray"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/gray_round_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_table"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/list_item_blue_bg"
+            android:descendantFocusability="blocksDescendants"
+            android:paddingRight="18dp">
+
+            <CheckBox
+                android:id="@+id/cb_table"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:button="@drawable/single_select_checkbox"
+                android:clickable="false" />
+
+            <TextView
+                android:id="@+id/tv_name_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/need_input_table"
+                android:textColor="@color/print_text_black"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#bcbcbc" />
+
+        <RelativeLayout
+            android:id="@+id/rl_number"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/list_item_blue_bg"
+            android:descendantFocusability="blocksDescendants"
+            android:paddingRight="18dp">
+
+            <CheckBox
+                android:id="@+id/cb_number"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:button="@drawable/single_select_checkbox"
+                android:clickable="false" />
+
+            <TextView
+                android:id="@+id/tv_name_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical"
+                android:text="@string/need_input_number"
+                android:textColor="@color/print_text_black"
+                android:textSize="22sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_number_tip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_select_number_tip"
+        android:drawablePadding="6dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="@string/select_number_tip"
+        android:textColor="#ff7901"
+        android:textSize="@dimen/text_16" />
+
+    <LinearLayout
+        android:id="@+id/ll_here_or_carry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="90dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/which_bill_useful"
+            android:textColor="@color/print_text_gray"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="90dp"
+            android:layout_marginRight="90dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/gray_round_bg"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_here"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_blue_bg"
+                android:descendantFocusability="blocksDescendants"
+                android:paddingRight="18dp">
+
+                <CheckBox
+                    android:id="@+id/cb_here"
+                    style="@style/CheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_here"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/cb_here"
+                    android:gravity="center_vertical"
+                    android:text="@string/inShop"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="22sp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#bcbcbc" />
+
+            <RelativeLayout
+                android:id="@+id/rl_carray"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/list_item_blue_bg"
+                android:descendantFocusability="blocksDescendants"
+                android:paddingRight="18dp">
+
+                <CheckBox
+                    android:id="@+id/cb_carray"
+                    style="@style/CheckboxTheme"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp" />
+
+                <TextView
+                    android:id="@+id/tv_carray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@+id/cb_carray"
+                    android:text="@string/byPackage"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="22sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="54dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:layout_marginTop="34dp"
+        android:background="@drawable/check_but_onclick"
+        android:text="@string/save"
+        android:textColor="@drawable/bule_but_text_color"
+        android:textSize="22sp" />
+
+</LinearLayout>

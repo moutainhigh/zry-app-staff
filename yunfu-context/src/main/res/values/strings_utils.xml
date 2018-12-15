@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">calm-context</string>
+    <string name="baseservice_waiting_time">%1$d分钟</string>
+    <string name="baseservice_hour_minute">%1$d小时%2$d分钟</string>
+    <string name="baseservice_time_input_wrong">时间输入有误，无法计算在店时长</string>
+    <string name="commonmodule_network_error_context_null">网络异常：context上下文为空！</string>
+
+    <string name="calm_exception_crash_title">系统提示</string>
+    <string name="calm_exception_crash_desc">系统出错啦，请关闭保存日志。</string>
+    <string name="calm_exception_crash_submit">好的</string>
+</resources>

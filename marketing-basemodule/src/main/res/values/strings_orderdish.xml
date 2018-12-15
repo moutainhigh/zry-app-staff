@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="goods_name">菜品名字</string>
+    <string name="dinner_table_seat_hint">%1$s后的座位号(选填)</string>
+    <string name="orderdish_dinner_ok">确定</string>
+    <string name="orderdish_dinner_cancel">取消</string>
+    <string name="dinner_table_seat_default">暂不选</string>
+    <string name="move_dishes_choose_num">选择菜品数量</string>
+    <string name="dinner_copydish_choose">选择操作</string>
+    <string name="send_kitchen_and_print">传送后厨并打印</string>
+    <string name="copy_dish_property">复制原桌菜品属性</string>
+
+</resources>

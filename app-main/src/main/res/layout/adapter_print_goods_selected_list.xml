@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="64dp"
+    android:gravity="center_vertical"
+    tools:background="@drawable/search_selected">
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2.5"
+        android:drawableLeft="@drawable/icon_retail_oval"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:text="@string/goods"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/ib_minus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/btn_retail_minus_selector" />
+
+        <TextView
+            android:id="@+id/tv_number"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:maxLength="3"
+            android:singleLine="true"
+            android:text="1"
+            android:textColor="@color/color_333333"
+            android:textSize="16sp" />
+
+        <ImageButton
+            android:id="@+id/ib_plus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:src="@drawable/btn_retail_plus_selector" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_market_price"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center|right"
+        android:minWidth="100dp"
+        android:singleLine="true"
+        android:text="@string/money"
+        android:textColor="@color/color_333333"
+        android:textSize="16sp" />
+
+    <ImageButton
+        android:id="@+id/ib_delete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:background="@null"
+        android:src="@drawable/btn_retail_delete_selector" />
+
+</LinearLayout>

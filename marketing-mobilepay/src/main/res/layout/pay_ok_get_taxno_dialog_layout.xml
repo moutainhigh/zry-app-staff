@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_pay_ok_weight"
+    android:layout_height="@dimen/dialog_pay_ok_height"
+    android:layout_gravity="center"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/pay_ok_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/pay_ok_close_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/dinner_close"
+                android:gravity="center"
+                android:scaleType="center" />
+
+            <TextView
+                android:id="@+id/pay_ok_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/pay_result_text"
+                android:textColor="#9FA0A0"
+                android:textSize="26sp"
+                android:visibility="invisible" />
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/pay_ok_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/pay_ok_icon" />
+
+        <TextView
+            android:id="@+id/pay_amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp"
+            android:text="00"
+            android:textColor="#333333"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pay_ok_alert_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:text="@string/pay_success"
+            android:textColor="#333333"
+            android:textSize="35sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/pay_rest_amount_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:text=""
+            android:textColor="#333333"
+            android:textSize="33sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <!--查询税号界面-->
+    <LinearLayout
+        android:id="@+id/pay_over_taxno_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/pay_over_taxno_close"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/dinner_close"
+                android:gravity="center"
+                android:scaleType="center" />
+
+            <!-- <TextView
+                 android:id="@+id/pay_over_taxno_title"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerHorizontal="true"
+                 android:layout_marginTop="10dp"
+                 android:gravity="center"
+                 android:textColor="#9FA0A0"
+                 android:textSize="26sp"
+                 android:visibility="invisible" />-->
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/pay_over_taxno_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/pay_get_invoice_no_doing" />
+
+        <TextView
+            android:id="@+id/pay_over_taxno_alert_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="35dp"
+            android:text="@string/get_invoiceno_doing_text"
+            android:textColor="#333333"
+            android:textSize="18sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:id="@+id/pay_over_taxno_button"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/reget_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/commonmodule_dialog_nagetive"
+                android:text="@string/retry_to_get_taxno"
+                android:textColor="@color/text_white"
+                android:textSize="20sp"></Button>
+
+            <Button
+                android:id="@+id/pint_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/commonmodule_dialog_positive"
+                android:text="@string/goon_to_print_taxno"
+                android:textColor="@color/text_white"
+                android:textSize="20sp"></Button>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

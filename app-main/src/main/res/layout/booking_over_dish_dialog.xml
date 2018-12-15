@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerInParent="true"
+    android:background="@drawable/reportcenter_dialog_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="@dimen/dialog_operate_weight"
+            android:layout_height="@dimen/dialog_operate_title_height"
+            android:background="@color/transparent">
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/booking_dish_over"
+                android:textColor="#FFFF7901"
+                android:textSize="@dimen/dialog_operate_title_size" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/dish_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/dialog_operate_reason_margin"
+                android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+                android:layout_marginTop="@dimen/dialog_operate_reason_content_margin"
+                android:layout_weight="1"
+                android:divider="#FFDFE3E8"
+                android:dividerHeight="1dp"
+                android:footerDividersEnabled="false"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none"></ListView>
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dialog_operate_submit_height"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dialog_operate_views_marginTop"
+                android:background="@drawable/bg_order_center_dialog_refund"
+                android:text="@string/ok"
+                android:textColor="#FFFFFFFF"
+                android:textSize="@dimen/dialog_operate_submit_size" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

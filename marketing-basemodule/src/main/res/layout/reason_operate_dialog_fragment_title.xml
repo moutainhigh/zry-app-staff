@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dialog_operate_reason_title_height"
+    android:textColor="#FFB2B7BC"
+    android:background="#FFE6EBEF"
+    android:gravity="center_vertical"
+    android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+    android:textSize="@dimen/dialog_operate_reason_title_size" />

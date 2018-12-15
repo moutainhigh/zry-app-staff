@@ -1,0 +1,257 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="460dp"
+    android:layout_height="588dp"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="112dp">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="20dp"
+            android:background="@drawable/dinner_close" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/customer_login_title"
+            android:textColor="@color/verify_perssion_title"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#CECECE" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:padding="18dp"
+        android:background="@color/gray_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_card_login"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:background="@drawable/cashier_table_press"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/card_login"
+            android:textColor="@color/text_blue"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/show_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_weight="1"
+            android:background="@drawable/customer_edit_bg"
+            android:clickable="true"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:hint="@string/customer_login_hint"
+            android:inputType="number"
+            android:maxLength="20"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="#6B6D6C"
+            android:textColorHint="#9FA0A0"
+            android:textSize="24sp" />
+
+        <ImageButton
+            android:id="@+id/btn_scan_code"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:background="@drawable/card_sale_activie_selecter"
+            android:src="@drawable/icon_scan" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/pay_cash_keyboard_bg"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:paddingTop="1dp">
+
+            <ImageView
+                android:id="@+id/one"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_1_bt" />
+
+            <ImageView
+                android:id="@+id/two"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_2_bt" />
+
+            <ImageView
+                android:id="@+id/three"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_3_bt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:paddingTop="1dp">
+
+            <ImageView
+                android:id="@+id/four"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_4_bt" />
+
+            <ImageView
+                android:id="@+id/five"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_5_bt" />
+
+            <ImageView
+                android:id="@+id/six"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_6_bt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:paddingTop="1dp">
+
+            <ImageView
+                android:id="@+id/seven"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_7_bt" />
+
+            <ImageView
+                android:id="@+id/eight"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_8_bt" />
+
+            <ImageView
+                android:id="@+id/nine"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_9_bt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:paddingTop="1dp">
+
+            <ImageView
+                android:id="@+id/dot"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp" />
+
+            <ImageView
+                android:id="@+id/zero"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:src="@drawable/pay_num_0_bt" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:padding="5dp"
+                android:scaleType="center"
+                android:src="@drawable/delete_icon" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/customer_verification"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@drawable/booking_dialog_print_onclick"
+        android:gravity="center"
+        android:text="@string/pay_member_login"
+        android:textColor="@color/text_white"
+        android:textSize="28sp" />
+
+</LinearLayout>

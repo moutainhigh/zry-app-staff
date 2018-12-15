@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="53dp"
+    android:background="@color/beauty_color_2C3031"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+
+    <TextView
+        android:id="@+id/beauty_order_customer_room"
+        android:layout_width="107dp"
+        android:layout_height="39dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/beauty_order_room"
+        android:textColor="@color/beauty_color_white"
+        android:textSize="@dimen/text_15" />
+
+    <ImageView
+        android:id="@+id/beauty_order_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone"
+        android:src="@drawable/beauty_order_back_selector" />
+
+    <TextView
+        android:id="@+id/beauty_serial_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/beauty_order_back"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_16" />
+
+    <TextView
+        android:id="@+id/beauty_order_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="10dp"
+        android:text="@string/beauty_order_label"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_16" />
+
+    <ImageView
+        android:id="@+id/btn_clear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:visibility="gone"
+        android:src="@drawable/beauty_btn_clear" />
+
+    <View
+        android:id="@+id/title_divide"
+        android:layout_width="1dp"
+        android:layout_height="15dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/btn_clear"
+        android:visibility="gone"
+        android:background="@color/color_666666"></View>
+
+    <Button
+        android:id="@+id/btn_add_customer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/title_divide"
+        android:background="@drawable/beauty_btn_shape"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp"
+        android:text="@string/btn_add_customer"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+
+    <Button
+        android:id="@+id/btn_recharge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@id/btn_add_customer"
+        android:background="@drawable/beauty_btn_shape"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp"
+        android:text="@string/btn_recharge"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+
+    <Button
+        android:id="@+id/btn_bank_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="30dp"
+        android:layout_toLeftOf="@id/btn_add_customer"
+        android:background="@drawable/beauty_btn_shape"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp"
+        android:text="@string/btn_bank_card"
+        android:textColor="@color/text_white"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+</RelativeLayout>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/vActionBar"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+            style="@style/beauty_middle_label"
+            android:text="@string/beauty_add_property_label" />
+
+        <Button
+            android:id="@+id/btn_standard"
+            style="@style/beauty_middle_btn"
+            android:text="@string/add_standard" />
+
+        <Button
+            android:id="@+id/btn_remark"
+            style="@style/beauty_middle_btn"
+            android:text="@string/remark_str" />
+
+        <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+            style="@style/beauty_middle_label"
+            android:text="@string/beauty_sale_select_label" />
+
+        <Button
+            android:id="@+id/btn_cosmetologist"
+            style="@style/beauty_middle_btn"
+            android:text="@string/btn_cosmetologist" />
+
+        <Button
+            android:id="@+id/btn_adviser"
+            style="@style/beauty_middle_btn"
+            android:text="@string/btn_adviser" />
+
+        <Button
+            android:id="@+id/btn_sale"
+            style="@style/beauty_middle_btn"
+            android:text="@string/btn_shopowner_select" />
+
+        <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+            style="@style/beauty_middle_label"
+            android:text="@string/beauty_privilege_label" />
+
+        <com.zhongmei.bty.commonmodule.view.VerticalViewPager
+            android:id="@+id/vvp_order_action"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none" />
+
+        <ImageView
+            android:id="@+id/iv_switch_page"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/snack_switch_page_button_height"
+            android:layout_gravity="bottom"
+            android:scaleType="center"
+            android:src="@drawable/ic_switch_page_next" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/divide_line_color" />
+
+    <FrameLayout
+        android:id="@+id/v_content"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:paddingTop="22dp"
+        android:visibility="gone" />
+</LinearLayout>

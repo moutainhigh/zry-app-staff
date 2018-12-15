@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:layout_gravity="center"
+        android:background="@drawable/order_center_operate_dialog_background"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/close_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:minHeight="66dp">
+
+            <TextView
+                android:id="@+id/dialog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:textColor="#FFFF7901"
+                android:text="@string/dinner_order_allremark"
+                android:textSize="@dimen/dialog_operate_title_size" />
+
+            <ImageView
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+        </RelativeLayout>
+
+        <com.zhongmei.bty.cashier.ordercenter.view.ObservableScrollView
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dialog_operate_reason_margin"
+                android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+                android:background="@color/transparent"
+                android:orientation="vertical">
+
+                <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dialog_operate_reason_title_height"
+                    android:text="@string/retail_string_remark_explain"
+                    android:textColor="#FFB2B7BC"
+                    android:background="#FFE6EBEF"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+                    android:textSize="@dimen/dialog_operate_reason_title_size" />
+
+                <com.zhongmei.bty.cashier.ordercenter.view.MyEditText
+                    android:id="@+id/met_trade_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dialog_operate_reason_edit_height"
+                    android:layout_marginTop="@dimen/dialog_operate_reason_content_margin"
+                    android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all"
+                    android:gravity="top"
+                    android:hint="@string/retail_string_stock_add_remark_hint"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp"
+                    android:textColor="#FF333333"
+                    android:textColorHint="#FFC3C8CE"
+                    android:textSize="@dimen/dialog_operate_reason_edit_size" />
+
+                <com.zhongmei.bty.cashier.ordercenter.view.TradeMemoModelView_
+                    android:id="@+id/ttmv_trade_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="-5dp"
+                    android:layout_marginRight="-5dp"
+                    android:layout_marginTop="7dp"
+                    android:overScrollMode="never"
+                    android:scrollbars="none"
+                    android:layout_marginBottom="60dp" />
+
+            </LinearLayout>
+        </com.zhongmei.bty.cashier.ordercenter.view.ObservableScrollView>
+
+        <Button
+            android:id="@+id/btn_ok"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_operate_submit_height"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dialog_operate_views_marginTop"
+            android:background="@drawable/bg_order_center_dialog_refund"
+            android:gravity="center"
+            android:text="@string/ok_button"
+            android:textColor="#FFFFFFFF"
+            android:textSize="@dimen/dialog_operate_submit_size" />
+    </LinearLayout>
+
+</FrameLayout>

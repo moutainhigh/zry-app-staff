@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@drawable/calmui_dialog_background">
+
+    <ImageView
+        android:id="@+id/dialog_account_closing_alert_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/commonmodule_dialog_icon_warning"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:id="@+id/dialog_account_closing_alert_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/text_black"
+        android:textSize="24sp"
+        android:text="@string/closing_alert" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/dialog_account_closing_alert_negative"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/commonmodule_dialog_nagetive"
+            android:textColor="@color/text_white"
+            android:textSize="21sp"
+            android:text="@string/closing_negative" />
+
+        <Button
+            android:id="@+id/dialog_account_closing_alert_positive"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/commonmodule_dialog_positive"
+            android:textColor="@color/text_white"
+            android:textSize="21sp"
+            android:text="@string/closing_positive" />
+    </LinearLayout>
+</LinearLayout>

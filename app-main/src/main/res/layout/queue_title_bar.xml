@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/queue_title"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/title_bar_height"
+    android:background="@drawable/cashier_bg_title_bar"
+    android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_title_bar_left"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2">
+
+        <RelativeLayout
+            android:id="@+id/rl_notify_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <!--<com.zhongmei.bty.basemodule.queue.TurnToOtherModuleView
+                android:id="@+id/ll_back"
+                android:layout_alignParentStart="true"
+                android:visibility="gone"
+                style="@style/title_icon_style" />-->
+
+            <ImageView
+                android:layout_toRightOf="@id/ll_back"
+                android:id="@+id/iv_title_bar_menu"
+                style="@style/title_icon_style"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/queue_menu" />
+
+            <View
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/iv_title_bar_menu"
+                android:background="@drawable/line" />
+
+            <ImageView
+                android:id="@+id/iv_queue_notify_center"
+                style="@style/title_icon_style"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/iv_title_bar_menu"
+                android:scaleType="centerInside"
+                android:src="@drawable/notice_icon" />
+
+            <ImageView
+                android:id="@+id/tip_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/iv_queue_notify_center"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="22dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/notice_tip"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/view_notify_tip_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/iv_queue_notify_center"
+                android:layout_alignTop="@+id/iv_queue_notify_center"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/notification_item_textSize2"
+                android:background="@drawable/notice_tips_number_other"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/view_notify_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignEnd="@+id/iv_queue_notify_center"
+                android:layout_alignTop="@+id/iv_queue_notify_center"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:textColor="@color/notifycenter_tips_trade"
+                android:textSize="@dimen/notification_item_textSize2"
+                android:background="@drawable/order_tips_num_bar_other"
+                android:visibility="gone" />
+
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/iv_search_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_toRightOf="@+id/rl_notify_layout"
+            android:visibility="gone"
+            android:src="@drawable/dinner_back" />
+
+        <TextView
+            android:id="@+id/queue_voice_list_tv"
+            style="@style/tv_title_style"
+            android:textSize="@dimen/queue_toolbar_title_text_size2"
+            android:layout_centerInParent="true"
+            android:text="@string/queue_voice_list_label" />
+
+        <LinearLayout
+            android:id="@+id/queue_list_switch_Layout"
+            android:layout_width="@dimen/queue_titleBar_item_width"
+            android:layout_height="@dimen/queue_titleBar_item_height"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/queue_list"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/text_view_border_left_select"
+                android:gravity="center"
+                android:text="@string/queue_list_label"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/queue_titleBar_item_textSize" />
+
+            <TextView
+                android:id="@+id/queue_list_history"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/text_view_border_right"
+                android:gravity="center"
+                android:text="@string/queue_history_list_title"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/queue_titleBar_item_textSize" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:src="@drawable/queue_search_icon"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/line" />
+
+    <RelativeLayout
+        android:id="@+id/rl_title_bar_right"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_detail_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:src="@drawable/dinner_back"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/queue_print_item_select"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/booking_print_list"
+            android:layout_alignParentRight="true"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/right_switch_layout"
+            android:layout_width="@dimen/queue_titleBar_item_width"
+            android:layout_height="@dimen/queue_titleBar_item_height"
+            android:layout_centerInParent="true"
+            android:visibility="visible"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/create_queue_label"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/text_view_border_left_select"
+                android:gravity="center"
+                android:text="@string/queue_create_title_label"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/queue_titleBar_item_textSize" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/idle_table_list_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/text_view_border_right"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="@string/idle_table_list_label"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/queue_titleBar_item_textSize" />
+
+                <TextView
+                    android:id="@+id/tv_idle_table_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/text_white"
+                    android:textSize="12sp"
+                    android:background="@drawable/notice_num_background"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="@dimen/queue_titleBar_bubble_marginRight"
+                    android:layout_alignParentRight="true"
+                    android:visibility="gone" />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_title_bar_cname"
+            style="@style/tv_title_style"
+            android:textSize="@dimen/queue_toolbar_title_text_size2"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            android:text="@string/queue_create_title_label" />
+
+    </RelativeLayout>
+
+</LinearLayout>

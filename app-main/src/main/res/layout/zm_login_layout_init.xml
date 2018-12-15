@@ -1,0 +1,221 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/beauty_company_logo_bg" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_please_later"
+            android:textColor="@color/color_333333"
+            android:textSize="14sp" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp">
+
+            <ProgressBar
+                android:id="@+id/login_progress"
+                android:layout_width="700dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progress="25"
+                android:progressDrawable="@drawable/login_progress_line" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <LinearLayout
+                    android:layout_width="@dimen/login_progress_item_wd"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ProgressBar
+                        android:id="@+id/login_network_progress"
+                        android:layout_width="@dimen/login_progress_ic_size"
+                        android:layout_height="@dimen/login_progress_ic_size"
+                        android:background="@color/bg_white"
+                        android:indeterminateDrawable="@drawable/login_check_execute_loading" />
+
+                    <TextView
+                        android:id="@+id/login_network_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/login_check_device"
+                        android:textColor="@color/color_777777"
+                        android:textSize="12sp" />
+
+                    <com.zhongmei.yunfu.ui.view.AutoVerticalScrollTextView
+                        android:id="@+id/login_network_state_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/login_network_ll"
+                        android:layout_below="@+id/login_network_ll"
+                        android:singleLine="true"
+                        android:textColor="@color/color_777777"
+                        android:textSize="10sp"
+                        android:visibility="visible"
+                        tools:text="@string/login_check_device" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/login_progress_item_wd"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ProgressBar
+                        android:id="@+id/login_peripheral_progress"
+                        android:layout_width="@dimen/login_progress_ic_size"
+                        android:layout_height="@dimen/login_progress_ic_size"
+                        android:background="@color/bg_white"
+                        android:indeterminateDrawable="@drawable/login_check_execute_waiting" />
+
+                    <TextView
+                        android:id="@+id/login_peripheral_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:singleLine="true"
+                        android:text="@string/login_check_config"
+                        android:textColor="@color/color_777777"
+                        android:textSize="12sp" />
+
+                    <com.zhongmei.yunfu.ui.view.AutoVerticalScrollTextView
+                        android:id="@+id/login_peripheral_state_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/login_peripheral_ll"
+                        android:layout_below="@+id/login_peripheral_ll"
+                        android:singleLine="true"
+                        android:text="@string/login_check_config"
+                        android:textColor="@color/color_777777"
+                        android:textSize="10sp"
+                        android:visibility="invisible" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/login_progress_item_wd"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ProgressBar
+                        android:id="@+id/login_business_progress"
+                        android:layout_width="@dimen/login_progress_ic_size"
+                        android:layout_height="@dimen/login_progress_ic_size"
+                        android:background="@color/bg_white"
+                        android:indeterminateDrawable="@drawable/login_check_execute_waiting" />
+
+                    <TextView
+                        android:id="@+id/login_business_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:singleLine="true"
+                        android:text="@string/login_check_data"
+                        android:textColor="@color/color_777777"
+                        android:textSize="12sp" />
+
+                    <com.zhongmei.yunfu.ui.view.AutoVerticalScrollTextView
+                        android:id="@+id/login_business_state_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/login_business_ll"
+                        android:layout_below="@+id/login_business_ll"
+                        android:singleLine="true"
+                        android:textColor="@color/color_777777"
+                        android:textSize="10sp"
+                        android:visibility="invisible"
+                        tools:text="@string/login_check_data" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="@dimen/login_progress_item_wd"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ProgressBar
+                        android:id="@+id/login_system_data_progress"
+                        android:layout_width="@dimen/login_progress_ic_size"
+                        android:layout_height="@dimen/login_progress_ic_size"
+                        android:background="@color/bg_white"
+                        android:indeterminateDrawable="@drawable/login_check_execute_waiting" />
+
+                    <TextView
+                        android:id="@+id/login_system_data_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:singleLine="true"
+                        android:text="@string/login_check_cache"
+                        android:textColor="@color/color_777777"
+                        android:textSize="12sp" />
+
+                    <com.zhongmei.yunfu.ui.view.AutoVerticalScrollTextView
+                        android:id="@+id/login_system_data_state_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/login_system_data_ll"
+                        android:layout_below="@+id/login_system_data_ll"
+                        android:singleLine="true"
+                        android:textColor="@color/color_777777"
+                        android:textSize="10sp"
+                        android:visibility="invisible"
+                        tools:text="@string/login_check_cache" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="4"
+        android:background="@drawable/login_banner"
+        android:scaleType="centerCrop" />
+
+</LinearLayout>

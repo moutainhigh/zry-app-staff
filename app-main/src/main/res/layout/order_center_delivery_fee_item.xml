@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/order_center_list_root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dialog_operate_reason_list_item_height"
+    android:minHeight="@dimen/dialog_operate_reason_list_item_height">
+
+    <LinearLayout
+        android:id="@+id/right_content_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:gravity="center_vertical">
+
+        <RelativeLayout
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="14dp"
+            android:paddingBottom="14dp">
+
+            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                android:layout_marginTop="7.33dp"
+                android:id="@+id/delivery_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:maxLines="1"
+                android:textColor="@color/text_color_black"
+                android:textSize="16sp"
+                tools:text="fee" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/right_content_layout"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/source_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16.67dp"
+            android:layout_marginRight="14dp"
+            android:src="@drawable/return_card_success" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/serial_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_color_black"
+                android:textSize="14.67sp"
+                tools:text="order_center_list_serial_number" />
+
+            <TextView
+                android:id="@+id/trade_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="#a3aeb5"
+                android:textSize="12sp"
+                tools:text="order_center_list_order_number" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

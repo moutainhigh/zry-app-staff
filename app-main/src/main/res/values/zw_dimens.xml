@@ -1,0 +1,6 @@
+<resources>
+
+    <dimen name="login_progress_item_wd">167dp</dimen>
+    <dimen name="login_progress_ic_size">28dp</dimen>
+
+</resources>

@@ -1,0 +1,175 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <style name="settings_button">
+        <item name="android:background">@drawable/settings_button</item>
+        <item name="android:textColor">@color/settings_blue</item>
+    </style>
+
+    <style name="settings_title">
+        <item name="android:textColor">@color/print_text_gray</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="settings_blue_title">
+        <item name="android:textColor">@color/settings_blue</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">15dp</item>
+    </style>
+
+    <style name="settings_left1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/setting_left_title_height</item>
+        <item name="android:background">#F0F3F6</item>
+        <item name="android:textColor">#666666</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">@dimen/setting_left_title_margin</item>
+        <item name="android:textSize">@dimen/setting_left_title_size</item>
+    </style>
+
+    <style name="settings_left2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/setting_left_content_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:background">@color/settings_normalback</item>
+        <item name="android:paddingLeft">@dimen/setting_left_content_margin</item>
+        <item name="android:textSize">@dimen/setting_left_content_size</item>
+    </style>
+
+    <style name="settings_leftTitlell">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="settings_rightTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/title_bar_height</item>
+    </style>
+
+    <style name="settings_rightcontentTitle">
+        <item name="android:paddingBottom">54dp</item>
+        <item name="android:paddingTop">54dp</item>
+        <item name="android:paddingLeft">90dp</item>
+        <item name="android:paddingRight">90dp</item>
+    </style>
+
+    <style name="setting_right_content_margin">
+        <item name="android:paddingBottom">@dimen/print_setting_content_margin_top</item>
+        <item name="android:paddingTop">@dimen/print_setting_content_margin_top</item>
+        <item name="android:paddingLeft">@dimen/print_setting_content_margin_left</item>
+        <item name="android:paddingRight">@dimen/print_setting_content_margin_left</item>
+    </style>
+
+    <style name="setting_switch_item_title_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/setting_dinner_switch_item_title_size</item>
+        <item name="android:textColor">#999999</item>
+    </style>
+
+    <style name="setting_switch_item">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/setting_dinner_switch_item_height</item>
+        <item name="android:background">@drawable/setting_on_of_item_bg</item>
+        <item name="android:layout_marginTop">@dimen/setting_dinner_switch_item_margin_top</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="setting_switch_item_text">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/setting_dinner_switch_item_size</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginLeft">@dimen/setting_dinner_switch_item_text_margin_left
+        </item>
+    </style>
+
+    <style name="setting_switch_item_btn">
+        <item name="android:layout_width">@dimen/setting_dinner_switch_item_btn_width</item>
+        <item name="android:layout_height">@dimen/setting_dinner_switch_item_btn_height</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:background">@drawable/setting_switch_selector</item>
+        <item name="android:layout_marginRight">@dimen/setting_dinner_switch_item_btn_margin_right
+        </item>
+    </style>
+
+    <style name="setting_switch_item_toggle">
+        <item name="android:layout_width">@dimen/setting_dinner_switch_item_btn_width</item>
+        <item name="android:layout_height">@dimen/setting_dinner_switch_item_btn_height</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:background">@drawable/setting_switch_selector</item>
+        <item name="android:layout_marginRight">@dimen/setting_dinner_switch_item_btn_margin_right
+        </item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <!--打印设置style-->
+
+    <style name="print_setting_content_margin">
+        <item name="android:paddingBottom">@dimen/print_setting_content_margin_top</item>
+        <item name="android:paddingTop">@dimen/print_setting_content_margin_top</item>
+        <item name="android:paddingLeft">@dimen/print_setting_content_margin_left</item>
+        <item name="android:paddingRight">@dimen/print_setting_content_margin_left</item>
+    </style>
+
+    <style name="print_setting_item_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/print_setting_item_height</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:paddingLeft">@dimen/print_setting_item_content_margin_left</item>
+        <item name="android:paddingRight">@dimen/print_setting_item_content_margin_right</item>
+        <item name="android:layout_marginTop">@dimen/print_setting_item_margin_top</item>
+        <item name="android:background">@drawable/setting_on_of_item_bg</item>
+    </style>
+
+    <style name="print_setting_item_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/print_setting_item_title_size</item>
+        <item name="android:textColor">#999999</item>
+    </style>
+
+    <style name="print_setting_item_text_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">@dimen/print_setting_item_size</item>
+        <item name="android:textColor">#333333</item>
+    </style>
+
+    <style name="print_setting_item_toggle_style">
+        <item name="android:layout_width">@dimen/print_setting_item_btn_width</item>
+        <item name="android:layout_height">@dimen/print_setting_item_btn_height</item>
+        <item name="android:background">@drawable/setting_switch_selector</item>
+        <item name="android:textOn"></item>
+        <item name="android:textOff"></item>
+    </style>
+
+    <style name="setting_price_scale_selector_item">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/list_item_blue_bg</item>
+        <item name="android:paddingTop">16.3dp</item>
+        <item name="android:paddingBottom">16.3dp</item>
+        <item name="android:paddingLeft">14dp</item>
+        <item name="android:paddingRight">14dp</item>
+        <item name="android:descendantFocusability">afterDescendants</item>
+    </style>
+
+    <style name="serial_number_selector_item_style">
+        <item name="android:textColor">@color/color_bcbcbc</item>
+        <item name="android:layout_width">58.7dp</item>
+        <item name="android:layout_height">32dp</item>
+        <item name="android:layout_marginLeft">13.3dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">14.7sp</item>
+    </style>
+
+</resources>

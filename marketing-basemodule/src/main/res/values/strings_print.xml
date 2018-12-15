@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ticket_note">客看单</string>
+    <string name="ticket_closed">结账单</string>
+    <string name="ticket_ad_closing">预结单</string>
+    <string name="ticket_xiaofeiqingdan">消费清单</string>
+    <string name="ticket_deposit">押金单</string>
+    <string name="ticket_refundnote">退货单</string>
+    <string name="ticket_invalidorder">作废单</string>
+    <string name="ticket_store">储值单</string>
+    <string name="ticket_store_out">储值消费单</string>
+    <string name="ticket_handover">交接单</string>
+    <string name="ticket_closing">关账单</string>
+    <string name="ticket_sale_rank">商品销售统计单</string>
+    <string name="ticket_bank">银联POS签购单</string>
+    <string name="ticket_queue">排队单</string>
+    <string name="ticket_booking">预订单</string>
+    <string name="ticket_invoice">发票申请单</string>
+    <string name="ticket_kitchenorder">厨总单</string>
+    <string name="ticket_transfer_table">转台单</string>
+    <string name="ticket_merge_table">合台单</string>
+    <string name="ticket_move_dsih">移菜单</string>
+    <string name="ticket_no_name">匿名储值单</string>
+    <string name="ticket_hallticket">堂口单</string>
+
+    <string name="ticket_kitchen_wakeup">等叫单</string>
+    <string name="ticket_kitchen_cancel_wakeup">取消等叫单</string>
+    <string name="ticket_kitchen_rise">起菜单</string>
+    <string name="ticket_kitchen_cancel_rise">取消起菜单</string>
+    <string name="ticket_kitchen_remind">催菜单</string>
+
+    <string name="label">标签</string>
+    <string name="commonmodule_dialog_other">其他</string>
+    <string name="third_party_sources">第三方来源</string>
+    <string name="kitchen_business_no">流水号</string>
+    <string name="dinner_WeChat_order">移动门店下单</string>
+    <string name="baidu_map">百度地图</string>
+    <string name="baidu_takout">百度外卖</string>
+    <string name="baidu_zhida">百度直达号</string>
+    <string name="baidu_nuomi">百度糯米</string>
+    <string name="call_center">呼叫中心</string>
+    <string name="kiosk">自助终端</string>
+    <string name="pos">商户收银终端</string>
+    <string name="merchant_home">商户官网</string>
+    <string name="on_mobile">ON MOBILE</string>
+    <string name="familiar">熟客</string>
+    <string name="eleme">饿了么</string>
+    <string name="dianping">大众点评</string>
+    <string name="meituan">美团外卖</string>
+    <string name="payment_quick">快捷支付</string>
+    <string name="payment_xinmeida">新美大</string>
+    <string name="payment_loyal_backstage">loyal后台</string>
+    <string name="print_privilege_tips">*注:[活动]后的数字，为参与活动的商品编号。</string>
+    <string name="trade_free">[免单]</string>
+    <string name="trade_single_discount">[整单]</string>
+    <string name="fen">份</string>
+    <string name="split_fail_cannot_retry">拆单失败无法重试，请修改后前台或后厨票据配置</string>
+    <string name="customer_timeout">请求失败，请检查网络或联系我们！</string>
+    <string name="memo_format_hint">备注: </string>
+    <string name="open_qianxiang">弹钱箱</string>
+    <string name="print_cancel_reason">作废原因:</string>
+    <string name="print_type_normal_order">正常下单</string>
+    <string name="print_type_nullify">作废</string>
+    <string name="print_type_return">退货</string>
+    <string name="print_type_change_order">改单</string>
+    <string name="check_note">检查小票</string>
+    <string name="print_check_label_note">检查标签小票</string>
+    <string name="ticket_transaction_trade_no">交易单号:</string>
+    <string name="ticket_cancel_account_amount">销账金额:</string>
+    <string name="ticket_cancel_account">销账</string>
+    <string name="ticket_remind_bill_amount">剩余挂账金额:</string>
+    <string name="ticket_operator">操作员:</string>
+    <!-- v8.12.0 打印构建 -->
+    <string name="number_table">桌号</string>
+    <string name="number_plate">号牌</string>
+    <string name="number_take">取餐号</string>
+
+    <integer name="print_dish_sequence_key_none">0</integer>
+    <integer-array name="print_dish_sequence_key">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>@integer/print_dish_sequence_key_none</item>
+    </integer-array>
+    <string-array name="print_dish_sequence_value">
+        <item>第一道</item>
+        <item>第二道</item>
+        <item>第三道</item>
+        <item>第四道</item>
+        <item>第五道</item>
+        <item>第六道</item>
+        <item>第七道</item>
+        <item>第八道</item>
+        <item>第九道</item>
+        <item>第十道</item>
+        <item>无设置</item>
+    </string-array>
+
+</resources>

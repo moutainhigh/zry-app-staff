@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F0F3F6"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue">
+
+        <LinearLayout
+            android:layout_width="@dimen/setting_queue_voice_title_bar_width"
+            android:layout_height="@dimen/setting_queue_voice_title_bar_height"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:background="@drawable/setting_queue_voice_bar_bg"
+            android:padding="1dp">
+
+            <TextView
+                android:id="@+id/broadcast_voice"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:text="@string/broadcast_voice"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/setting_queue_voice_content_size" />
+
+            <TextView
+                android:id="@+id/call_voice"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#28ACF9"
+                android:gravity="center"
+                android:text="@string/call_voice"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/setting_queue_voice_content_size" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+
+
+</LinearLayout>

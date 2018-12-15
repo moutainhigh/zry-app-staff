@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:paddingTop="15dp">
+
+    <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+        android:id="@+id/cash_pay_alerttext"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:background="#f4f7f9"
+        android:gravity="center"
+        android:text="@string/pay_rest_payment_text"
+        android:textColor="@color/print_text_black"
+        android:textSize="@dimen/text_18"
+        android:visibility="visible" />
+
+    <com.zhongmei.bty.basemodule.commonbusiness.view.CommonCheckCouponsView
+        android:id="@+id/check_coupon_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="20dp" />
+
+    <View
+        android:id="@+id/trade_amount_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/basedline"></View>
+
+    <LinearLayout
+        android:id="@+id/fl_contentView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="0dp"
+        android:orientation="vertical"
+        android:paddingTop="6dp">
+
+        <LinearLayout
+            android:id="@+id/input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:gravity="top|center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/ticket_label_ll"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2.2"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/coupon_number"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/text_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.3"
+                    android:gravity="center"
+                    android:text="@string/sheets_number"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/text_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:text="@string/pay_amount_text"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/text_16" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.0"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="@string/operate"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/text_16" />
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/pay_bainuo_ticket_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:divider="@color/bg_white"
+                android:dividerHeight="13dp"
+                android:scrollbarFadeDuration="0"
+                android:fadeScrollbars="false"
+                android:listSelector="@color/bg_white" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/empty_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="1dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/pay_empty_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/empty_coupon" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pay_bottom_height2"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/pay_dopay_btn_selector"
+        android:enabled="false"
+        android:text="@string/pay_settle_accounts"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_30" />
+</LinearLayout>

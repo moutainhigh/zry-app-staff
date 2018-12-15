@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F0F3F6"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/setting_member"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        style="@style/setting_right_content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/setting_switch_item_title_text"
+            android:text="@string/setting_member" />
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                android:id="@+id/group_pay_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/setting_dinner_switch_item_text_margin_left"
+                android:layout_weight="1"
+                android:text="@string/setting_auto_privilege"
+                android:textColor="#333333"
+                android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+            <Button
+                android:id="@+id/btn_selected"
+                style="@style/setting_switch_item_btn" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

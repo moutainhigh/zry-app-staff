@@ -1,0 +1,387 @@
+{
+    "rows": [
+        {
+            "components": [
+                {
+                    "percent": 100,
+                    "value": "#{commercialName}",
+                    "valueStyle": {
+                        "align": "center",
+                        "fontSize": 4
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [
+                {
+                    "percent": 100,
+                    "value": "#{ticketType}",
+                    "valueStyle": {
+                        "align": "center",
+                        "fontSize": 4
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [
+                {
+                    "lable": "桌台号:",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 70,
+                    "value": "#{tableNum}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                },
+                {
+                    "lable": "流水号:",
+                    "lableStyle": {
+                        "align": "right",
+                        "fontSize": 1
+                    },
+                    "percent": 30,
+                    "value": "#{serialNum}",
+                    "valueStyle": {
+                        "align": "right",
+                        "fontSize": 1
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [
+                {
+                    "lable": "订单号:",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 80,
+                    "value": "#{orderNum}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                },
+                {
+                    "lable": "人数:",
+                    "lableStyle": {
+                        "align": "right",
+                        "fontSize": 1
+                    },
+                    "percent": 20,
+                    "value": "#{peopleNum}",
+                    "valueStyle": {
+                        "align": "right",
+                        "fontSize": 1
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [
+                {
+                    "lable": "会员:",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 100,
+                    "value": "#{member}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [
+                {
+                    "lable": "反结账原订单流水号:",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 100,
+                    "value": "#{fanjieyu}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [
+                {
+                    "lable": "商品",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 40,
+                    "value": "#{goodsName}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                },
+                {
+                    "lable": "单价",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 20,
+                    "value": "#{goodsPrice}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                },
+                {
+                    "lable": "数量",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 20,
+                    "value": "#{goodsNum}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                },
+                {
+                    "lable": "价格",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 20,
+                    "value": "#{amount}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                }
+            ],
+            "isShowCategory": "true",
+            "isShowSequence": "true",
+            "type": "goods"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "goodsTotal"
+        },
+        {
+            "components": [
+                {
+                    "lable": "整单备注:",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 100,
+                    "value": "#{orderMemo}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "privilege"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "statement"
+        },
+        {
+            "components": [],
+            "type": "payable"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "moneyDeal"
+        },
+        {
+            "components": [],
+            "type": "paid"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "paymentMode"
+        },
+        {
+            "components": [],
+            "type": "paymentDeal"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "autograph"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "cancelGoods"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "oldTradeInfo"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "returnGoods"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "returnReason"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [],
+            "type": "code"
+        },
+        {
+            "components": [],
+            "type": "line"
+        },
+        {
+            "components": [
+                {
+                    "lable": "服务员:",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 50,
+                    "value": "#{waiter}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                },
+                {
+                    "lable": "收银员:",
+                    "lableStyle": {
+                        "align": "right",
+                        "fontSize": 1
+                    },
+                    "percent": 50,
+                    "value": "#{cashier}",
+                    "valueStyle": {
+                        "align": "right",
+                        "fontSize": 1
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [
+                {
+                    "lable": "开单时间:",
+                    "lableStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    },
+                    "percent": 50,
+                    "value": "#{billingTime}",
+                    "valueStyle": {
+                        "align": "left",
+                        "fontSize": 1
+                    }
+                },
+                {
+                    "lable": "打印时间:",
+                    "lableStyle": {
+                        "align": "right",
+                        "fontSize": 1
+                    },
+                    "percent": 50,
+                    "value": "#{printTime}",
+                    "valueStyle": {
+                        "align": "right",
+                        "fontSize": 1
+                    }
+                }
+            ],
+            "type": "text"
+        },
+        {
+            "components": [],
+            "style": {
+                "align": "center",
+                "fontSize": 1
+            },
+            "type": "commercialInfo"
+        }
+    ]
+}

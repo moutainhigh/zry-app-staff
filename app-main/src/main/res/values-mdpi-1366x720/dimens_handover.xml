@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="print_btn_layout_width">573.33dp</dimen>
+    <integer name="print_btn_width">400</integer>
+    <integer name="calibrate_width">173</integer>
+</resources>

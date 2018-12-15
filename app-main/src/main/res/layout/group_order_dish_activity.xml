@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dinnerdish_bg"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/dinner_title_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></FrameLayout>
+
+
+    <LinearLayout
+        android:id="@+id/orderDishLeftView"
+        android:layout_width="@dimen/snack_dish_left_zone_width"
+        android:layout_height="match_parent"
+        android:layout_below="@id/dinner_title_bar_layout"
+        android:background="@drawable/dinner_left_bg_shadow"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/orderDishRightView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/dinner_title_bar_layout"
+        android:layout_toRightOf="@id/orderDishLeftView"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/dinner_title_bar_layout"
+        android:layout_toRightOf="@id/orderDishLeftView"
+        android:background="@color/shadow_bg"
+        android:clickable="true"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/orderDishMiddle"
+        android:layout_width="388dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/dinner_title_bar_layout"
+        android:layout_toRightOf="@id/orderDishLeftView"
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dinner_title_bar_layout"
+        android:layout_marginLeft="330dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/orderDishLeftView"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_property_close"
+        android:visibility="gone" />
+
+</RelativeLayout>

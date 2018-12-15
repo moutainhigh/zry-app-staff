@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F0F3F6"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/layout_dinner_western_option"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <com.zhongmei.bty.settings.view.ScrollGridView
+        android:id="@+id/layout_option_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/setting_right_content_margin"
+        android:listSelector="@color/transparent"
+        android:horizontalSpacing="@dimen/setting_dinner_cards_horizontal_spacing"
+        android:numColumns="2"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth" />
+
+</LinearLayout>

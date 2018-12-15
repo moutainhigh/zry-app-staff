@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btn_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="17dp"
+        android:paddingBottom="17dp"
+        android:textSize="@dimen/text_15"
+        android:gravity="center"
+        android:textColor="@color/beauty_middle_btn_color_selector"
+        android:background="@drawable/beauty_dish_type_item_bg_recharge"
+        android:text="name" />
+
+    <View style="@style/beauty.waiterdialog.h_line" />
+</LinearLayout>

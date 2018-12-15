@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dinnerdish_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_title"
+        style="@style/settings_rightTitle"
+        android:background="@color/blue">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/setting_order_display_device"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_22" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="28dp"
+        android:paddingLeft="34.6dp"
+        android:paddingRight="34.6dp"
+        android:paddingTop="28dp">
+
+        <TextView
+            android:id="@+id/tv_little_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6.7dp"
+            android:text="@string/fragment_order_display_device_setting_desc"
+            android:textColor="@color/text_color_gray"
+            android:textSize="14.7sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_tips_container"
+            android:layout_below="@+id/tv_little_title"
+            android:layout_marginBottom="13.3dp"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/fragment_order_display_device_setting_content_lv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_setting_list_item_bg"
+                android:divider="@color/color_d3d3d3"
+                android:dividerHeight="0.66dp"></ListView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"></View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_tips_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/cashbox_tip"
+                android:drawablePadding="5.3dp"
+                android:text="@string/setting_member_option_desc"
+                android:textColor="@color/color_333333"
+                android:textSize="14.7sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8.7dp"
+                android:text="@string/fragment_order_display_device_setting_remark"
+                android:textColor="@color/color_999999"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/fg_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.zhongmei.bty.dinner.orderdish.TitleBarFragment_" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fg_status_bar"
+        android:background="@color/color_EFEFEF"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <RelativeLayout
+                android:id="@+id/rl_title_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_bar_height"
+                android:background="@color/title_blue">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    style="@style/title_icon_style"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/customer_back_icon" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/card_sale"
+                    android:textColor="@color/text_white"
+                    android:textSize="21sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="7dp"
+                android:layout_below="@id/rl_title_content"
+                android:background="@drawable/uion_read_card_layout"
+                android:orientation="vertical">
+
+                <include layout="@layout/keyat_yaz_include_card_sale_top" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_E2E4EA" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="1dp"
+                    android:paddingRight="1dp">
+
+                    <ListView
+                        android:id="@+id/lv_cards_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:divider="@color/color_EFEFEF"
+                        android:dividerHeight="1dp" />
+
+                    <TextView
+                        android:id="@+id/tv_cards_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/bg_white"
+                        android:gravity="center"
+                        android:text="@string/uion_card_list_emoty"
+                        android:textColor="@color/color_bcbcbc"
+                        android:textSize="@dimen/text_16" />
+
+                </RelativeLayout>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="39dp"
+                    android:layout_marginRight="39dp">
+
+                    <Button
+                        android:id="@+id/btn_left_button"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/return_customerCard_ok_height"
+                        android:layout_weight="1"
+                        android:background="@drawable/anonymous_card_pay_btn_selector"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="@string/entity_card"
+                        android:textColor="@color/anonymous_card_pay_btn_color"
+                        android:textSize="@dimen/text_16" />
+
+                    <Button
+                        android:id="@+id/btn_right_button"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/return_customerCard_ok_height"
+                        android:layout_weight="1"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/anonymous_card_pay_btn_selector"
+                        android:enabled="false"
+                        android:gravity="center"
+                        android:text="@string/entity_card"
+                        android:textColor="@color/anonymous_card_pay_btn_color"
+                        android:textSize="@dimen/text_16" />
+
+                </TableRow>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- 读卡 -->
+        <com.zhongmei.bty.keyaccount.yaz.ui.widget.YazReadCardView_
+            android:id="@+id/crcv_read_card"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</RelativeLayout>

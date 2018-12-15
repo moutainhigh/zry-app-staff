@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/showMenuView"
+    style="@style/layout.m.m"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/order_button_panel_first"
+        android:layout_width="fill_parent"
+        android:layout_height="70dp"
+        android:background="@color/title_blue"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/title_icon_selector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:id="@+id/saveback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="2dp"
+                android:contentDescription="@null"
+                android:src="@drawable/dinner_back" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_toRightOf="@id/saveback"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/deskNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="6"
+                    android:maxLines="1"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/shopcart_title_table_name_size" />
+
+                <TextView
+                    android:id="@+id/floor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLength="10"
+                    android:maxLines="1"
+                    android:textColor="@color/text_white"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <include
+            android:id="@+id/cus_dtv_trade"
+            layout="@layout/dinnertable_trade_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="14dp"
+            android:layout_toRightOf="@id/rl_back"
+            android:duplicateParentState="true" />
+
+        <!-- 桌台相关信息 -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:gravity="left|center_vertical"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/dinner_bill_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableLeft="@drawable/ic_bill_no"
+                    android:gravity="center"
+                    android:maxLength="5"
+                    android:singleLine="true"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/text_18" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="12dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/text_18" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/peoplecount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_people_count"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/text_18" />
+
+                <View
+                    android:id="@+id/view_seperator"
+                    android:layout_width="2dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/dinner_seperator" />
+
+                <TextView
+                    android:id="@+id/delaytime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_delay_time"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/text_18" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 桌台相关信息 -->
+
+        <ImageButton
+            android:id="@+id/setMemo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="18dp"
+            android:background="@drawable/title_icon_selector"
+            android:contentDescription="@null"
+            android:padding="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/more_menuitem_btn" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dip"
+        android:background="@color/dinner_blue_line_color" />
+
+    <LinearLayout
+        android:id="@+id/ll_number_and_waiter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dinner_tableInfo_ll_number_and_waiter_height"
+        android:background="@color/title_blue"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_customer_count"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="@string/dinner_guests_hint"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dinner_tableInfo_tv_customer_count_textSize" />
+
+        <TextView
+            android:id="@+id/tv_waiter_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="@string/dinner_waiter_hint"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/dinner_tableInfo_tv_customer_count_textSize" />
+
+        <RelativeLayout
+            android:id="@+id/rl_number_android_waiter_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20dp">
+
+            <ImageView
+                android:id="@+id/iv_down"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_arrow_down" />
+
+            <ImageView
+                android:id="@+id/iv_number_and_waiter_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/notice_tip"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/dish_operate_checkbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/operate_name_tv"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@color/title_blue"
+            android:gravity="center"
+            android:text="@string/dinner_orderdish_dish_prepare"
+            android:textColor="#ffffff"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:background="@android:color/white">
+
+            <CheckBox
+                android:id="@+id/allcheck_cb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:button="@drawable/orderdish_item_check_selector"
+                android:paddingLeft="10dp"
+                android:text="@string/selectAll"
+                android:textColor="#333333"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/check_number_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20dp"
+                android:textColor="#bbc7cc"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@color/line_gray" />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/order_dish_bottom"
+            style="@style/layout.m.w"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/line_gray" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dinner_bottom_height"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:id="@+id/cashView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:id="@+id/rl_save_print"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_green_selector"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:contentDescription="@null"
+                            android:src="@drawable/dinner_back" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:contentDescription="@null"
+                            android:src="@drawable/dinner_print_icon" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:gravity="center"
+                            android:text="@string/transfer_kitchen_print"
+                            android:textColor="@color/text_white"
+                            android:textSize="@dimen/dish_shopcart_bottom_btn_size" />
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btn_pre_pay"
+                        android:layout_width="0dp"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="14dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_blue_selector"
+                        android:drawableRight="@drawable/arrow_right"
+                        android:gravity="center"
+                        android:paddingRight="5dp"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/dish_shopcart_bottom_btn_size" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view_bottom_shadow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/transparent_but"
+                    android:clickable="true"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/dish_operate_bottombar_ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <Button
+                        android:id="@+id/cancel_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="2"
+                        android:background="@drawable/btn_green_selector"
+                        android:gravity="center"
+                        android:text="@string/cancel"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/dish_shopcart_bottom_btn_big_size" />
+
+                    <Button
+                        android:id="@+id/done_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.5"
+                        android:background="@drawable/btn_blue_selector"
+                        android:gravity="center"
+                        android:text="@string/dinner_finish"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/dish_shopcart_bottom_btn_big_size" />
+                </LinearLayout>
+
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/order_dish_bottom"
+            android:tag="pager" />
+
+
+        <FrameLayout
+            android:id="@+id/fl_num_waiter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:clickable="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <!--
+    <com.zhongmei.bty.dinner.orderdish.view.NumberAndWaiterView_
+        android:id="@+id/view_number_and_waiter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:visibility="gone"/>
+    -->
+</LinearLayout>

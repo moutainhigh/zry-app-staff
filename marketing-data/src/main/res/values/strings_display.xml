@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<string name="display_price_pre">￥&#160;%s</string>-->
+    <!--<string name="display_givechange_pre">找零&#160;：￥&#160;%s</string>-->
+    <string name="display_user_no_name">匿名</string>
+    <!--<string name="display_pay_symbol">￥</string>-->
+    <string name="display_nothing">无</string>
+    <string name="display_wechat_pay_label">微信付款</string>
+    <string name="display_baidu_takout_pay_label">百度钱包付款</string>
+    <string name="display_alipay_pay_label">支付宝付款</string>
+    <string name="display_dianping_pay_label">点评闪惠</string>
+    <string name="display_jin_cheng_pay_label">金诚APP</string>
+    <string name="display_member_card_pay_label">会员扫码付款</string>
+    <string name="display_mobile_pay_label">移动支付</string>
+</resources>

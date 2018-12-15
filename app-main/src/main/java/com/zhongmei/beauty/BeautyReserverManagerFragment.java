@@ -1,0 +1,169 @@
+package com.zhongmei.beauty;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.RadioGroup;
+
+import com.zhongmei.beauty.booking.BeautyReserverBoardFragment;
+import com.zhongmei.beauty.booking.BeautyCancelBookingFragment;
+import com.zhongmei.beauty.booking.BeautyOuttimeFragment;
+import com.zhongmei.beauty.booking.BeautyUnServiceBookFragment;
+import com.zhongmei.beauty.booking.BeautyUndealBookingFragment;
+import com.zhongmei.beauty.booking.bean.BeautyBookingVo;
+import com.zhongmei.beauty.booking.constants.BeautyBookingEnum;
+import com.zhongmei.beauty.booking.list.BeautyBookingListFragment;
+import com.zhongmei.beauty.dialog.BeautyCreateOrEditBookingDialog;
+import com.zhongmei.bty.basemodule.auth.application.BeautyApplication;
+import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
+import com.zhongmei.yunfu.R;
+import com.zhongmei.yunfu.context.session.core.auth.Auth;
+import com.zhongmei.yunfu.context.session.core.user.User;
+import com.zhongmei.yunfu.db.entity.booking.Booking;
+import com.zhongmei.beauty.operates.message.BeautyBookingResp;
+import com.zhongmei.yunfu.ui.base.BasicFragment;
+
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.CheckedChange;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.ViewById;
+import org.jetbrains.annotations.NotNull;
+
+/**
+ * Created by demo on 2018/12/15
+ */
+@EFragment(R.layout.beauty_reserver_manage_fragment)
+public class BeautyReserverManagerFragment extends BasicFragment {
+
+    @ViewById(R.id.rg_reserver_status)
+    protected RadioGroup rb_reserverStatus;
+
+    protected BeautyBookingListFragment listFragment;
+
+    private BeautyReserverBoardFragment reserverBoardFragment;
+
+    @AfterViews
+    protected void initView() {
+        rb_reserverStatus.check(R.id.rb_reserver_board);
+    }
+
+
+    /**
+     * 前往预约看板
+     */
+    private void toReserverBoard() {
+        reserverBoardFragment = new BeautyReserverBoardFragment();
+        replaceChildFragment(R.id.fl_content, reserverBoardFragment, BeautyReserverBoardFragment.class.getSimpleName());
+    }
+
+    /**
+     * 待服务页
+     */
+    private void toUnServicePage() {
+        listFragment = new BeautyUnServiceBookFragment();
+        replaceChildFragment(R.id.fl_content, listFragment, BeautyUnServiceBookFragment.class.getSimpleName());
+    }
+
+    /**
+     * 已超时服务页
+     */
+    private void toOuttimeServicePage() {
+        listFragment = new BeautyOuttimeFragment();
+        replaceChildFragment(R.id.fl_content, listFragment, BeautyOuttimeFragment.class.getSimpleName());
+    }
+
+    /**
+     * 已取消服务页
+     */
+    private void toCancelServicePage() {
+        listFragment = new BeautyCancelBookingFragment();
+        replaceChildFragment(R.id.fl_content, listFragment, BeautyCancelBookingFragment.class.getSimpleName());
+    }
+
+
+    /**
+     * 已取消未处理
+     */
+    private void toUnDealServicePage() {
+        listFragment = new BeautyUndealBookingFragment();
+        replaceChildFragment(R.id.fl_content, listFragment, BeautyUndealBookingFragment.class.getSimpleName());
+    }
+
+
+    @Click(R.id.btn_create_reserver)
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_create_reserver://创建订单
+                VerifyHelper.verifyAlert(getActivity(), BeautyApplication.PERMISSION_BEAUTY_CREATE_RESERVER, new VerifyHelper.Callback() {
+                    @Override
+                    public void onPositive(User user, String code, Auth.Filter filter) {
+                        super.onPositive(user, code, filter);
+                        showCreateBookingDialog();
+                    }
+
+                });
+                break;
+        }
+
+    }
+
+    private void showCreateBookingDialog() {
+        BeautyCreateOrEditBookingDialog dialog = new BeautyCreateOrEditBookingDialog();
+        dialog.setOnBookingListener(bookingListener);
+        Bundle bundle = new Bundle();
+        bundle.putInt(BeautyBookingEnum.LAUNCHMODE_BOOKING_DIALOG, BeautyBookingEnum.BookingDialogLaunchMode.CREATE);
+        dialog.setArguments(bundle);
+        dialog.show(getChildFragmentManager(), "BeautyCreateOrEditBookingDialog");
+    }
+
+    BeautyCreateOrEditBookingDialog.OnBookingListener bookingListener = new BeautyCreateOrEditBookingDialog.OnBookingListener() {
+
+        @Override
+        public void onEditListener(@NotNull BeautyBookingVo booking, @NotNull BeautyBookingResp resp) {
+
+        }
+
+        @Override
+        public void onCancelListener(@NotNull Booking booking) {
+
+        }
+
+        @Override
+        public void onCreateListener(@NotNull BeautyBookingResp resp) {
+            if (listFragment != null && listFragment.isVisible()) {
+                listFragment.onBookingSuccess(resp);
+            }
+
+            if (reserverBoardFragment != null && reserverBoardFragment.isVisible()) {
+                reserverBoardFragment.onCreateListener(resp);
+            }
+        }
+    };
+
+    @CheckedChange({R.id.rb_reserver_board, R.id.rb_reserver_trades, R.id.rb_reserver_outtime_trades, R.id.rb_reserver_cancel_trades, R.id.rb_reserver_unprocess})
+    public void onCheckedChanged(CompoundButton rb, boolean isChecked) {
+        if (!isChecked) {
+            return;
+        }
+
+        switch (rb.getId()) {
+            case R.id.rb_reserver_board://预约看板
+                toReserverBoard();
+                break;
+            case R.id.rb_reserver_trades://待服务预约单
+                toUnServicePage();
+                break;
+            case R.id.rb_reserver_outtime_trades://已超时预约单
+                toOuttimeServicePage();
+                break;
+            case R.id.rb_reserver_cancel_trades://已取消预约单
+                toCancelServicePage();
+                break;
+            case R.id.rb_reserver_unprocess://未处理订单
+                toUnDealServicePage();
+                break;
+        }
+
+    }
+}

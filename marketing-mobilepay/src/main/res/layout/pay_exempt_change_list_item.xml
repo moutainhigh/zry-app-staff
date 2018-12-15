@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_bg"
+    android:layout_width="120dp"
+    android:layout_height="45dp"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pay_exempt_change_popup_item_height"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/pay_exempt_change_popup_item_size" />
+
+</RelativeLayout>

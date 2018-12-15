@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="760dp"
+        android:layout_height="644dp"
+        android:background="@drawable/orderdish_clear_status_bg"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="76dp">
+
+            <ImageButton
+                android:id="@+id/btn_close"
+                style="@style/layout.w.w"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="1dp"
+                android:background="@drawable/close_but_onclick" />
+
+            <RadioGroup
+                android:id="@+id/rg_clear_status_tab"
+                android:layout_width="316dp"
+                android:layout_height="36dp"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_sale"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/icon_check_left_selector"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/on_sell"
+                    android:textColor="@color/choice_clear_status_title"
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_clear"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/icon_check_right_selector"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:text="@string/sell_out"
+                    android:textColor="@color/choice_clear_status_title"
+                    android:textSize="18sp" />
+            </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/cb_select_all"
+                android:layout_width="53dp"
+                android:layout_height="23dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:background="@drawable/orderdish_clear_status_select_bg_selector"
+                android:textSize="12sp"
+                android:textColor="@color/orderdish_clear_status_select_text_selector"
+                android:gravity="center"
+                android:text="@string/dinner_check_all"
+                android:button="@null"
+                android:checked="false" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dfe1e5" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_marginLeft="73dp"
+            android:layout_marginRight="73dp"
+            android:layout_marginTop="40dp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/ll_standard_type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"></LinearLayout>
+        </HorizontalScrollView>
+
+        <com.zhongmei.bty.snack.orderdish.view.TouchGridView
+            android:id="@+id/gv_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="73dp"
+            android:layout_marginRight="73dp"
+            android:layout_marginTop="36dp"
+            android:layout_weight="1"
+            android:horizontalSpacing="16dp"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="20dp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="118dp"
+            android:background="@drawable/orderdish_clear_status_bottom_bg">
+
+            <Button
+                android:id="@+id/btn_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="73dp"
+                android:layout_marginRight="73dp"
+                android:background="@drawable/orderdish_clear_status_bottom_button_bg_selector"
+                android:gravity="center"
+                android:textColor="@color/text_white"
+                android:textSize="30sp"
+                android:text="@string/hadClear" />
+        </FrameLayout>
+    </LinearLayout>
+
+</FrameLayout>

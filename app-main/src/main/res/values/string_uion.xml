@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="uion_credit_read_card_id_ready">请在%1$d秒内进行刷卡操作</string>
+    <string name="uion_credit_read_card_id_success">录入卡号成功</string>
+    <string name="uion_credit_read_card_id_fail">录入卡号失败%1$s</string>
+    <string name="uion_credit_card_ready">请在%1$d秒内进行刷卡操作</string>
+    <string name="uion_credit_card_full">银联POS机存储已满，请先进行结算</string>
+    <string name="uion_settlement">结算</string>
+    <string name="uion_credit_card_operating">刷卡交易进行中...</string>
+    <string name="uion_credit_card_success">刷卡交易成功 !</string>
+    <string name="uion_credit_card_fail">刷卡交易失败 !%1$s</string>
+    <string name="uion_credit_card_money">支付金额:%1$s</string>
+    <string name="uion_try_again">再次刷卡</string>
+    <string name="uion_return_success">刷卡退款成功 ！</string>
+    <string name="uion_return_fail">刷卡退款失败 ！%1$s</string>
+    <string name="uion_return_money">应退金额:%1$s</string>
+    <string name="uion_key_bord_fail">Pos机出现错误</string>
+    <string name="pos_read_card_single_hint">刷卡机已连接\n请刷卡录入</string>
+    <string name="pos_read_card_rang_first">请刷第 1 张卡</string>
+    <string name="pos_read_card_rang_second">请刷最末张卡</string>
+    <string name="uion_credit_pos_is_occupy">激活刷卡机失败，请再次尝试</string>
+</resources>

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/content_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp"
+        android:layout_marginTop="9dp"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:layout_marginLeft="13dp"
+            android:layout_marginRight="13dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/beauty_order_customer_room"
+                android:layout_width="107dp"
+                android:layout_height="39dp"
+                android:background="@drawable/beauty_btn_shape_2_selector"
+                android:drawableRight="@drawable/beauty_ic_room_arrow_down"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/beauty_order_room"
+                android:textColor="@color/beauty_color_666666"
+                android:visibility="gone"
+                android:textSize="@dimen/text_15" />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:visibility="gone"
+                android:background="@color/beauty_color_BCBCBC" />
+
+            <LinearLayout
+                android:id="@+id/beauty_order_customer_search_layout"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/beauty_order_customer_search_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/beauty_btn_shape_2"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/beauty_order_customer_search_edit"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@null"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:gravity="left|center_vertical"
+                                android:hint="@string/beauty_search_customer_hint"
+                                android:maxLength="30"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp"
+                                android:singleLine="true"
+                                android:textColor="@color/beauty_color_666666"
+                                android:textColorHint="@color/color_bcbcbc"
+                                android:textSize="@dimen/text_15" />
+
+                            <ImageView
+                                android:id="@+id/beauty_order_customer_search"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerInParent="true"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:visibility="gone"
+                                android:paddingLeft="15dp"
+                                android:paddingRight="15dp"
+                                android:src="@drawable/beauty_ic_search_off" />
+
+                            <ImageView
+                                android:id="@+id/beauty_order_customer_search_clear"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@id/beauty_order_customer_search"
+                                android:clickable="false"
+                                android:enabled="false"
+                                android:src="@drawable/icon_delete"
+                                android:visibility="gone" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:id="@+id/beauty_order_customer_card_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/beauty_btn_shape_2_selector"
+                        android:gravity="center"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:text="@string/beauty_search_customer_login"
+                        android:textColor="@color/beauty_color_666666"
+                        android:textSize="@dimen/text_15"
+                        android:visibility="visible" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/beauty_order_customer_base_info"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="6dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/beauty_order_customer_info_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/beauty_order_customer_male" />
+
+                <TextView
+                    android:id="@+id/beauty_order_customer_info_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/beauty_order_customer_info_sex"
+                    android:textColor="@color/beauty_color_333333"
+                    android:textSize="@dimen/text_15"
+                    tools:text="刘先生" />
+
+                <TextView
+                    android:id="@+id/beauty_order_customer_info_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/beauty_order_customer_info_name"
+                    android:textColor="@color/beauty_color_666666"
+                    android:textSize="@dimen/text_13"
+                    tools:text="18215735112" />
+
+                <ImageView
+                    android:id="@+id/beauty_order_customer_info_vip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:layout_toRightOf="@id/beauty_order_customer_info_phone"
+                    android:src="@drawable/beauty_order_customer_vip" />
+
+                <TextView
+                    android:id="@+id/beauty_order_customer_exit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="18dp"
+                    android:background="@drawable/beauty_btn_shape"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="17dp"
+                    android:paddingRight="17dp"
+                    android:paddingTop="3dp"
+                    android:visibility="gone"
+                    android:text="退出"
+
+                    android:textColor="@color/beauty_color_666666"
+                    android:textSize="@dimen/text_15" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/beauty_order_customer_detail_info"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/beauty_customer_detail_info_bg_select"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical|left">
+
+                <RelativeLayout
+                    android:id="@+id/beauty_order_customer_cardinfo_root"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="19dp">
+
+                    <ImageView
+                        android:id="@+id/beauty_order_customer_cardinfo_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/beauty_order_customer_card" />
+
+                    <TextView
+                        android:id="@+id/beauty_order_customer_cardinfo_desc"
+                        style="@style/beauty.order.customer.customer_baseinfo"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@id/beauty_order_customer_cardinfo_card"
+                        tools:text="@string/beauty_order_customer_cardinfo_desc" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/beauty_order_customer_lasttime_serve_root"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/beauty_order_customer_cardinfo_root"
+                    android:layout_below="@id/beauty_order_customer_cardinfo_root"
+                    android:layout_marginBottom="13dp"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/beauty_order_customer_lasttime_serve_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/beauty_order_customer_lasttime_serve" />
+
+                    <TextView
+                        android:id="@+id/beauty_order_customer_lasttime_serve_desc"
+                        style="@style/beauty.order.customer.customer_baseinfo"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:layout_toRightOf="@id/beauty_order_customer_lasttime_serve_card"
+                        tools:text="@string/beauty_order_customer_lasttime_serve_desc" />
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="14dp"
+                android:src="@drawable/beauty_ic_arrow_left" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/beauty_color_DEDEDE" />
+</LinearLayout>

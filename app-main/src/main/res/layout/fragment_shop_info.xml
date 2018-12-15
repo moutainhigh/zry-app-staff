@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/trade_orderdish_bg"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/activation_tv_head_title"
+        android:layout_marginTop="@dimen/activation_shopInfo2_title_marginTop"
+        android:text="@string/pos_selft_activation" />
+
+    <TextView
+        style="@style/activation_tv_second_title"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:text="@string/confirm_shopinfo_and_activation" />
+
+    <LinearLayout
+        android:layout_width="726dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activation_shopInfo2_content_marginTop"
+        android:orientation="vertical">
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/activation_tv_property_title"
+                        android:text="@string/propertytitle_shop_no" />
+
+                    <TextView
+                        android:id="@+id/tv_shopNo"
+                        style="@style/activation_tv_property" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/activation_tv_property_title"
+                        android:text="@string/propertytitle_shop_name" />
+
+                    <TextView
+                        android:id="@+id/tv_shopName"
+                        style="@style/activation_tv_property" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="16dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/layout_initAccount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/activation_tv_property_title"
+                        android:text="@string/propertytitle_init_member_name" />
+
+                    <TextView
+                        android:id="@+id/tv_initAccount"
+                        style="@style/activation_tv_property" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_initPwd"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/activation_tv_property_title"
+                        android:text="@string/propertytitle_init_pwd" />
+
+                    <TextView
+                        android:id="@+id/tv_initPwd"
+                        style="@style/activation_tv_property" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/activation_tv_property_title"
+                        android:text="@string/mac_address" />
+
+                    <TextView
+                        android:id="@+id/tv_macAddr"
+                        style="@style/activation_tv_property" />
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+
+        <View
+            android:id="@+id/trade_amount_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/activation_shopInfo2_cuttingLine_marginTop"
+            android:background="@drawable/basedline"></View>
+
+        <TextView
+            style="@style/activation_tv_second_title"
+            android:layout_marginTop="@dimen/activation_shopInfo2_cuttingLine_marginTop"
+            android:text="@string/device_no" />
+
+        <EditText
+            android:id="@+id/et_deviceNo"
+            style="@style/activation_et_input"
+            android:inputType="number"
+            android:maxLength="3"
+            android:hint="@string/hint_activation_set_shopno" />
+
+        <CheckBox
+            android:id="@+id/cb_set_main_pos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:paddingLeft="10dp"
+            style="@style/activation_tv_property_title"
+            android:button="@drawable/ic_need_invoice_switch_selector"
+            android:text="@string/set_as_main_pos" />
+
+        <Button
+            android:id="@+id/btn_activation"
+            style="@style/activation_btn_next_step"
+            android:layout_marginTop="@dimen/activation_shopInfo2_btnStart_marginTop"
+            android:text="@string/start_activation" />
+
+        <Button
+            android:id="@+id/btn_preStep"
+            style="@style/activation_btn_pre_step"
+            android:layout_marginTop="20dp"
+            android:text="@string/pre_step" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

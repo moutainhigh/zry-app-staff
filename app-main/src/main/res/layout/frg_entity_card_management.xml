@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        tools:ignore="UselessParent">
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/entity_card_background"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="36dp"
+            android:paddingTop="87dp">
+
+            <ImageView
+                android:layout_width="227dp"
+                android:layout_height="205dp"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@drawable/entity_card_sale" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/entity_card_sale"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_20" />
+
+            <Button
+                android:id="@+id/anonymous_entity_card_sale"
+                android:layout_width="187dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="47dp"
+                android:background="@drawable/selector_sale_entity_card_anonymity"
+                android:text="@string/anonymous_entity"
+                android:textColor="@color/text_sale_entity_card_anonymity"
+                android:textSize="@dimen/text_16" />
+
+            <Button
+                android:id="@+id/entity_card_sale"
+                android:layout_width="187dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_sale_entity_card"
+                android:text="@string/entity_card"
+                android:textColor="@color/anonymousecard_paybtn_color"
+                android:textSize="@dimen/text_16" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="27dp"
+            android:background="@drawable/entity_card_background"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="36dp"
+            android:paddingTop="87dp">
+
+            <ImageView
+                android:layout_width="227dp"
+                android:layout_height="205dp"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@drawable/entity_card_activation" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="@string/card_return_str"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_20" />
+
+            <Button
+                android:id="@+id/anonymous_entity_card_refund"
+                android:layout_width="187dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="47dp"
+                android:background="@drawable/selector_back_entity_card_anonymity"
+                android:text="@string/anonymous_entity"
+                android:textColor="@color/text_back_entity_card_anonymity"
+                android:textSize="@dimen/text_16" />
+
+            <Button
+                android:id="@+id/entity_card_refund"
+                android:layout_width="187dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_fade_entity_card"
+                android:text="@string/entity_card"
+                android:textColor="@color/anonymousecard_paybtn_color"
+                android:textSize="@dimen/text_16" />
+
+        </LinearLayout>
+
+    </TableRow>
+
+</RelativeLayout>

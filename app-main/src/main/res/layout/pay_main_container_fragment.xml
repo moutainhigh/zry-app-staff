@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="34dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
+
+        <CheckBox
+            android:id="@+id/pay_main_container_fragment_invoice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:button="@null"
+            android:drawablePadding="5dp"
+            android:drawableStart="@drawable/ic_need_invoice_switch_selector"
+            android:padding="10dp"
+            android:text="@string/pay_e_invoice"
+            android:textColor="@color/text_pay_method"
+            android:textSize="@dimen/dinner_pay_right_title_textSize" />
+
+        <LinearLayout
+            android:id="@+id/pay_main_container_unpaid_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="5dp"
+            android:paddingLeft="100dp"
+            android:paddingRight="130dp">
+
+            <TextView
+                android:id="@+id/pay_main_container_fragment_amount_unreceived"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lines="1"
+                android:textColor="@color/zm_theme_color"
+                android:textSize="@dimen/dinner_pay_right_title_textSize2"
+                android:textStyle="bold"
+                tools:text="0.00" />
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/tv_total_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/pay_main_container_fragment_amount_unreceived"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/pay_main_container_fragment_amount_unreceived"
+                android:gravity="center_vertical"
+                android:lines="1"
+                android:textColor="#C9CACA"
+                android:textSize="@dimen/text_18" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:scaleType="center"
+            android:src="@drawable/dialog_close" />
+
+        <Button
+            android:id="@+id/pay_main_container_fragment_btn_erase"
+            android:layout_width="@dimen/dinner_pay_right_title_btnWidth"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:layout_toLeftOf="@id/iv_close"
+            android:background="@drawable/pay_erase_item_selector"
+            android:gravity="center"
+            android:text="@string/erase_small_change"
+            android:textColor="@color/zm_theme_color"
+            android:textSize="@dimen/dinner_pay_right_title_btnSize" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
+
+        <TextView
+            android:id="@+id/pay_main_container_fragment_amount_actual"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:textColor="@color/text_pay_method"
+            android:textSize="@dimen/dinner_pay_right_title_textSize3" />
+
+        <TextView
+            android:id="@+id/pay_main_container_fragment_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:lines="1"
+            android:textColor="@color/color_bcbcbc"
+            android:textSize="@dimen/dinner_pay_right_title_textSize3"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/pay_main_container_fragment_btn_pay_deposit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/pay_deposit_payfor_selector"
+            android:gravity="center"
+            android:paddingBottom="2dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingTop="2dp"
+            android:text="@string/deposit_take"
+            android:textColor="#FFD255"
+            android:textSize="@dimen/dinner_pay_right_title_btnSize"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/pay_main_container_fragment_amount_erase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:lines="1"
+            android:textColor="@color/text_pay_method"
+            android:textSize="@dimen/dinner_pay_right_title_textSize3" />
+
+        <LinearLayout
+            android:id="@+id/pay_main_container_fragment_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@drawable/icon_pay_ment_received"
+                android:lines="1"
+                android:text="@string/pay_paid_total_amount"
+                android:textColor="#ffb400"
+                android:textSize="16sp" />
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/pay_main_container_fragment_amount_received"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="3"
+                android:lines="1"
+                android:textColor="@color/text_pay_method"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/pay_main_container_fragment_paid_list_icon"
+                android:layout_width="10dp"
+                android:layout_height="8dp"
+                android:layout_marginLeft="6dp"
+                android:src="@drawable/selector_pay_ment_item_list" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:orientation="vertical">
+
+        <!-- android:divider="@drawable/shape_pay_method_divider_line_horizental" -->
+        <com.zhongmei.bty.mobilepay.views.indicator.ViewPagerIndicator
+            android:id="@+id/pay_main_container_fragment_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dinner_pay_right_payment_height"
+            android:background="@drawable/pay_method_bg"
+            android:orientation="horizontal"
+            android:showDividers="middle"
+            app:action_mod="condition"
+            app:page_size="@integer/zm_pay_menu_count" />
+
+
+        <FrameLayout
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:baselineAligned="false" />
+
+    </LinearLayout>
+
+</LinearLayout>

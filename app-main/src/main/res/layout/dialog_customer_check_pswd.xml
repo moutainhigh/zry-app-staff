@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bg_white"
+    android:paddingBottom="20dp">
+
+    <Button
+        android:id="@+id/btn_close"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="34dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/customer_edit_back_bg" />
+
+    <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+        android:id="@+id/etwdi_pswd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/btn_close"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/customer_edit_bg"
+        android:drawableRight="@drawable/input_close_pressed"
+        android:gravity="center"
+        android:hint="@string/passwords"
+        android:inputType="numberPassword"
+        android:paddingLeft="20dp"
+        android:paddingTop="3dp"
+        android:singleLine="true"
+        android:textColor="#595757" />
+
+    <Button
+        android:id="@+id/btn_check"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/etwdi_pswd"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="42dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/handover_button"
+        android:text="@string/check"
+        android:textColor="@drawable/bule_but_text_color"
+        android:textSize="20sp" />
+
+</RelativeLayout>

@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingTop="1dp">
+
+    <View
+        android:id="@+id/topline"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#e3e3e3"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:id="@+id/viewlayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/order_dish_item_bg_selector"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <!-- 菜名 -->
+            <LinearLayout
+                android:id="@+id/dishView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="15dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="15dp">
+
+
+                <ImageView
+                    android:id="@+id/checkButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/dish_name"
+                        style="@style/dishOrderTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:singleLine="true" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/dish_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:minWidth="20dp"
+                    android:textColor="@color/text_gray"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/dish_price"
+                    style="@style/layout.w.w"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center|right"
+                    android:minWidth="100dp"
+                    android:textColor="@color/selectedDishPrice"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!-- 押金退还方式 -->
+            <LinearLayout
+                android:id="@+id/deposit"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="-12dp"
+                android:gravity="center|right"
+                android:orientation="horizontal"
+                android:paddingLeft="25dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/deposit_demo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="5dp"
+                    android:text=""
+                    android:textColor="@color/selectedDishPrice"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- 口味做法 -->
+            <LinearLayout
+                android:id="@+id/dishTasteView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical" />
+
+            <!-- 加料 -->
+            <LinearLayout
+                android:id="@+id/dishAddtionView"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center|right"
+                android:orientation="horizontal"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <TextView
+                    android:id="@+id/dishAddtionName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:lineSpacingExtra="5dp"
+                    android:text=""
+                    android:textColor="@color/remark_text_color"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/custom_allowance_iv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="center"
+                    android:src="@drawable/custom_allowance"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/dishAddtionPrice"
+                    style="@style/layout.w.w"
+                    android:layout_marginLeft="5dp"
+                    android:text=""
+                    android:textColor="@color/selectedDishPrice"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- 备注 -->
+            <TextView
+                android:id="@+id/dish_memo"
+                style="@style/dishMemoStyle"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:ellipsize="end"
+                android:lineSpacingExtra="5dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:singleLine="false"
+                android:textColor="@color/settings_grayword"
+                android:textSize="14sp" />
+
+            <!-- 促销活动 -->
+            <RelativeLayout
+                android:id="@+id/rl_market_activity"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:background="@color/color_F7F8F8"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/tv_market_activity_type"
+                    android:layout_width="32dp"
+                    android:layout_height="18dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="17dp"
+                    android:background="@drawable/snack_bg_market_activity_label"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="@string/activity"
+                    android:textColor="@color/market_activity_red"
+                    android:textSize="@dimen/text_10" />
+
+                <TextView
+                    android:id="@+id/tv_market_activity_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/tv_market_activity_type"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="@dimen/text_12" />
+
+                <ImageView
+                    android:id="@+id/iv_market_activity_remove"
+                    android:layout_width="21dp"
+                    android:layout_height="21dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="11dp"
+                    android:background="@color/transparent"
+                    android:contentDescription="@null"
+                    android:src="@drawable/snack_ic_order_dish_remove_market_activity" />
+
+                <View
+                    android:id="@+id/v_market_activity_divider"
+                    android:layout_width="1dp"
+                    android:layout_height="17dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="11dp"
+                    android:layout_toLeftOf="@id/iv_market_activity_remove"
+                    android:background="#ffe9ecec" />
+
+                <TextView
+                    android:id="@+id/tv_market_activity_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="11dp"
+                    android:layout_toLeftOf="@id/v_market_activity_divider"
+                    android:drawablePadding="4dp"
+                    android:drawableRight="@drawable/snack_ic_order_dish_view_market_activity"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/market_activity_red"
+                    android:textSize="@dimen/text_13" />
+            </RelativeLayout>
+            <!-- 灰色间隔线 -->
+
+            <View
+                android:id="@+id/view_seperator"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/gray_bg"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

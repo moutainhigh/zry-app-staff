@@ -1,0 +1,77 @@
+package com.zhongmei.bty.entity.enums;
+
+import com.zhongmei.yunfu.util.ValueEnum;
+
+/**
+ * 业务通知类型
+ */
+
+public enum NotifyOrderType implements ValueEnum<Integer> {
+
+    /**
+     * 预订
+     */
+    BOOKING(1),
+
+    /**
+     * 排队
+     */
+    QUEUE(2),
+
+    /**
+     * 外卖
+     */
+    TAKEAWAY(3),
+    /**
+     *
+     */
+    ORDERALL(4),
+
+    /**
+     * 订单
+     */
+    TRADE(5),
+
+    /**
+     * 未知的值
+     *
+     * @deprecated 为了避免转为enum出错而设置，不应直接使用
+     */
+    @Deprecated __UNKNOWN__;
+
+    private final Helper<Integer> helper;
+
+    private NotifyOrderType(Integer value) {
+        helper = Helper.valueHelper(value);
+    }
+
+    private NotifyOrderType() {
+        helper = Helper.unknownHelper();
+    }
+
+    @Override
+    public Integer value() {
+        return helper.value();
+    }
+
+    @Override
+    public boolean equalsValue(Integer value) {
+        return helper.equalsValue(this, value);
+    }
+
+    @Override
+    public boolean isUnknownEnum() {
+        return helper.isUnknownEnum();
+    }
+
+    @Override
+    public void setUnknownValue(Integer value) {
+        helper.setUnknownValue(value);
+    }
+
+    @Override
+    public String toString() {
+        return "" + value();
+    }
+
+}

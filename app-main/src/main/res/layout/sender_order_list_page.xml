@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:id="@+id/senderName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/batchClearCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/text_black"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/batchClearing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:enabled="false"
+            android:text="@string/batchClearing"
+            android:textColor="@drawable/textview_click_text_blue_color"
+            android:textSize="18sp" />
+    </RelativeLayout>
+
+    <RadioGroup
+        android:id="@+id/sender_order_radio_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginTop="20sp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/sender_order_all_rd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/sender_order_rd_lf_click"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/sender_order_all"
+            android:textColor="@drawable/radio_button_click_text_blue_color"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/sender_order_unclean_rd"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/sender_order_rd_rt_click"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/sender_order_clean_status_un"
+            android:textColor="@drawable/radio_button_click_text_blue_color"
+            android:textSize="18sp" />
+    </RadioGroup>
+
+    <ExpandableListView
+        android:id="@+id/orderList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:divider="@color/transparent"
+        android:dividerHeight="0dp"></ExpandableListView>
+
+    <LinearLayout
+        android:id="@+id/sender_order_clean_btn_layout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <Button
+            android:id="@+id/sender_order_clean_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/commonmodule_dialog_nagetive"
+            android:text="@string/common_cancel"
+            android:textColor="@color/text_white"
+            android:textSize="21sp"></Button>
+
+        <Button
+            android:id="@+id/sender_order_clean_ok"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/commonmodule_dialog_positive"
+            android:text="@string/sender_order_clean_ok"
+            android:textColor="@color/text_white"
+            android:textSize="21sp"></Button>
+    </LinearLayout>
+
+</LinearLayout>

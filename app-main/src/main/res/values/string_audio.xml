@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="cashier">
+        <item>cashier_suffix.wav</item>
+        <item>cashier_prefix.wav</item>
+    </string-array>
+
+    <string-array name="common">
+        <item>1.wav</item>
+        <item>2.wav</item>
+        <item>3.wav</item>
+        <item>4.wav</item>
+        <item>5.wav</item>
+        <item>6.wav</item>
+        <item>7.wav</item>
+        <item>8.wav</item>
+        <item>9.wav</item>
+        <item>0.wav</item>
+        <item>A.wav</item>
+        <item>B.wav</item>
+        <item>C.wav</item>
+        <item>D.wav</item>
+        <item>E.wav</item>
+        <item>F.wav</item>
+        <item>G.wav</item>
+        <item>H.wav</item>
+        <item>I.wav</item>
+        <item>J.wav</item>
+        <item>K.wav</item>
+        <item>L.wav</item>
+        <item>M.wav</item>
+        <item>N.wav</item>
+        <item>O.wav</item>
+        <item>P.wav</item>
+        <item>Q.wav</item>
+        <item>R.wav</item>
+        <item>S.wav</item>
+        <item>T.wav</item>
+        <item>U.wav</item>
+        <item>V.wav</item>
+        <item>W.wav</item>
+        <item>X.wav</item>
+        <item>Y.wav</item>
+        <item>Z.wav</item>
+    </string-array>
+
+    <string-array name="queue">
+        <item>baTai.mp3</item>
+        <item>merope.mp3</item>
+        <item>order_cloud_ring.mp3</item>
+        <item>pinZhuo.mp3</item>
+        <item>queue_prefix_cxbz.mp3</item>
+        <item>queue_prefix.mp3</item>
+        <item>queue_suffix_cxbz.mp3</item>
+        <item>queue_suffix_jtwe.mp3</item>
+        <item>queue_suffix.mp3</item>
+    </string-array>
+
+</resources>

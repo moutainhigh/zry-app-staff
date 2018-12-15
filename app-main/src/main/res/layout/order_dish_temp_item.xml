@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+    <ImageButton
+        android:id="@+id/checkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:visibility="gone"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="10dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/dishView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dish_name"
+                style="@style/dishOrderTextStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/dish_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|center_horizontal"
+                android:minWidth="80dp"
+                android:textColor="@color/text_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dish_price"
+                style="@style/layout.w.w"
+                android:layout_marginLeft="5dp"
+                android:gravity="center|right"
+                android:minWidth="100dp"
+                android:textColor="@color/selectedDishPrice"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/showDiscountView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|right"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/discountType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dish_discount_icon"
+                android:gravity="center"
+                android:textColor="#F9C559"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/discount_price"
+                style="@style/layout.w.w"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/selectedDishPrice"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dishRecipeName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="5dp"
+                android:paddingLeft="18dp"
+                android:singleLine="true"
+                android:textColor="@color/remark_text_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dishRecipePrice"
+                style="@style/layout.w.w"
+                android:layout_marginLeft="5dp"
+                android:gravity="center|right"
+                android:minWidth="100dp"
+                android:textColor="@color/remark_text_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dishTasteName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:lineSpacingExtra="5dp"
+                android:paddingLeft="18dp"
+                android:singleLine="true"
+                android:textColor="@color/remark_text_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/dishTastePrice"
+                style="@style/layout.w.w"
+                android:layout_marginLeft="5dp"
+                android:gravity="center|right"
+                android:minWidth="100dp"
+                android:textColor="@color/remark_text_color"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dish_memo"
+            style="@style/dishMemoStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-5dp"
+            android:ellipsize="end"
+            android:lineSpacingExtra="5dp"
+            android:paddingLeft="18dp"
+            android:singleLine="false"
+            android:textColor="@color/remark_text_color"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

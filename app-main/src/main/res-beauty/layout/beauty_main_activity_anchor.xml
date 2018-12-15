@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beauty_bg_black"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/beauty_new_company_logo_white" />
+
+        <RadioButton
+            android:id="@+id/rb_anchor_cashier"
+            style="@style/beauty_main_anchor"
+            android:checked="true"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_cashier"
+            android:text="@string/beauty_cashier" />
+
+        <View style="@style/beauty_anchor_horizontal_line" />
+
+        <RadioButton
+            android:id="@+id/rb_anchor_reserver"
+            style="@style/beauty_main_anchor"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_reserver"
+            android:text="@string/beauty_reserver" />
+
+        <View style="@style/beauty_anchor_horizontal_line" />
+
+        <RadioButton
+            android:id="@+id/rb_anchor_trades"
+            style="@style/beauty_main_anchor"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_trades"
+            android:text="@string/beauty_trade" />
+
+        <View style="@style/beauty_anchor_horizontal_line" />
+
+        <RadioButton
+            android:id="@+id/btn_anchor_member"
+            style="@style/beauty_main_anchor"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_member"
+            android:text="@string/beauty_member" />
+
+        <View style="@style/beauty_anchor_horizontal_line" />
+
+        <RadioButton
+            android:id="@+id/rb_anchor_shop"
+            style="@style/beauty_main_anchor"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_shop"
+            android:text="@string/beauty_shopr" />
+
+        <View style="@style/beauty_anchor_horizontal_line" />
+
+        <RadioButton
+            android:id="@+id/rb_anchor_report"
+            style="@style/beauty_main_anchor"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_report"
+            android:text="@string/beauty_report" />
+
+        <View style="@style/beauty_anchor_horizontal_line" />
+
+        <!--<RadioButton
+            android:id="@+id/rb_anchor_refresh"
+            style="@style/beauty_main_anchor"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_notify"
+            android:visibility="visible"
+            android:text="@string/beauty_refresh" />-->
+
+        <LinearLayout
+            android:id="@+id/rb_anchor_refresh"
+            style="@style/beauty_main_anchor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/rb_anchor_refresh_icon"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@null"
+                android:indeterminateDrawable="@drawable/anchor_refresh_icon" />
+
+            <TextView
+                android:id="@+id/rb_anchor_refresh_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3dp"
+                android:text="@string/beauty_refresh"
+                android:textColor="@color/beauty_main_anchor_selector"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+
+        <RadioButton
+            android:id="@+id/rb_anchor_technician"
+            style="@style/beauty_main_anchor"
+            android:visibility="gone"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_technician"
+            android:text="@string/beauty_technician" />
+
+        <RadioButton
+            android:id="@+id/btn_anchor_notifycation"
+            style="@style/beauty_main_anchor"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_notify"
+            android:visibility="gone"
+            android:text="@string/beauty_notify" />
+    </RadioGroup>
+
+    <com.zhongmei.beauty.widgets.DrawableCenterTextView
+        android:id="@+id/tv_waiter"
+        style="@style/beauty_main_rb"
+        android:textSize="@dimen/text_12"
+        android:layout_alignParentBottom="true"
+        android:drawableLeft="@drawable/beauty_icon_waiter_header"
+        android:text="Waiter" />
+</RelativeLayout>

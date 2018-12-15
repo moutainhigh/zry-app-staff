@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F0F3F6">
+
+    <RelativeLayout style="@style/Layout.Title">
+
+        <TextView
+            android:id="@+id/fragment_layout_item_setting_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/setting_title_bar_size"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="64dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/setting_title_bar_size"
+            android:layout_centerInParent="true"
+            android:text="@string/settings_panel_title" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        style="@style/setting_right_content_margin">
+
+        <LinearLayout
+            android:id="@+id/fragment_layout_item_setting_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"></LinearLayout>
+    </ScrollView>
+</LinearLayout>

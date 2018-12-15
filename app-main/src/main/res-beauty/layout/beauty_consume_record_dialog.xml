@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="480dp"
+        android:layout_height="507dp"
+        android:background="@drawable/shape_handover_layout"
+        android:orientation="vertical">
+
+        <include layout="@layout/beauty_consume_record_header" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/beauty_color_D9D9D9" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_consume_record"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none" />
+    </LinearLayout>
+</FrameLayout>

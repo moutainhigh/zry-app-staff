@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg">
+
+    <LinearLayout
+        android:layout_width="438dp"
+        android:layout_height="520dp"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/bg_autoset_config"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/autoset_config_logo" />
+
+        <LinearLayout
+            android:id="@+id/ll_config_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:orientation="vertical"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_prev"
+                android:layout_width="178dp"
+                android:layout_height="54dp"
+                android:textColor="@color/text_blue"
+                android:background="@drawable/cashier_table_press"
+                android:textSize="18sp"
+                android:text="@string/prev" />
+
+            <Button
+                android:id="@+id/btn_next"
+                android:layout_width="188dp"
+                android:layout_height="54dp"
+                android:textColor="@color/text_blue"
+                android:background="@drawable/cashier_table_press"
+                android:textSize="18sp"
+                android:text="@string/next" />
+
+            <Button
+                android:id="@+id/btn_finish"
+                android:layout_width="178dp"
+                android:layout_height="54dp"
+                android:textColor="@color/text_blue"
+                android:background="@drawable/cashier_table_press"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/ok" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_version"
+        android:layout_marginTop="66dp"
+        android:layout_width="wrap_content"
+        android:textColor="@color/print_text_gray"
+        android:textSize="16sp"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

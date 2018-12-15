@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    tools:background="@drawable/search_selected">
+
+    <ImageView
+        android:id="@+id/v_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/beauty_dish_grid_item_selected_margin"
+        android:background="@drawable/beauty_grid_item_selector" />
+
+
+    <TextView
+        android:id="@+id/tv_short_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:maxLength="4"
+        android:paddingLeft="18dp"
+        android:paddingTop="0dp"
+        android:maxLines="1"
+        android:textColor="@color/beauty_color_black"
+        android:textSize="12sp"
+        tools:text="回锅肉" />
+
+    <View
+        android:id="@+id/v_topview"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:visibility="gone"
+        android:background="@drawable/beauty_grid_item_topview_bg" />
+
+    <TextView
+        android:id="@+id/tv_market_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_short_name"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="2dp"
+        android:includeFontPadding="false"
+        android:paddingLeft="18dp"
+        android:maxLines="1"
+        android:textColor="@color/beauty_color_FF666666"
+        android:textSize="@dimen/text_10"
+        tools:text="@string/zero" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_short_name"
+        android:layout_marginBottom="2dp"
+        android:layout_marginTop="2dp"
+        android:ellipsize="end"
+        android:paddingLeft="22dp"
+        android:maxLines="1"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_10"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iv_property"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/v_main_content"
+        android:layout_alignTop="@id/v_main_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="9dp"
+        android:src="@drawable/beauty_dish_property_icon" />
+
+    <TextView
+        android:id="@+id/tv_residue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_market_price"
+        android:layout_marginBottom="2dp"
+        android:layout_marginRight="5dp"
+        android:paddingLeft="18dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@color/beauty_color_6E8DFF"
+        android:textSize="@dimen/text_10"
+        tools:text="余量" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:background="@drawable/beauty_dish_item_bottom_bg"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:visibility="gone"
+        android:maxLines="2"
+        android:paddingLeft="10dp"
+        android:textColor="@color/beauty_color_8D8D8D"
+        android:textSize="@dimen/text_11"
+        tools:text="回锅肉肉肉2" />
+
+    <TextView
+        android:id="@+id/tv_number"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/beauty_dish_tip_bg"
+        android:gravity="center"
+        android:textSize="10sp"
+        android:textColor="@color/text_white" />
+
+</RelativeLayout>

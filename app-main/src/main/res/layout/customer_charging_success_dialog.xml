@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="@dimen/customer_chargind_layout_w"
+        android:layout_height="@dimen/customer_chargind_layout_h"
+        android:background="@drawable/customer_charging_bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/customer_charging_success_dialog_money_top"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/icon"
+                android:text="@string/customer_charging_dialog_success_title"
+                android:textColor="#35DCB7"
+                android:textSize="25sp" />
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/commonmodule_dialog_icon_success" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="4">
+
+                <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                    android:id="@+id/tvMoney_CustomerSDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/customer_charging_success_dialog_money_top2"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_32"
+                    tools:text="@string/zero" />
+
+                <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                    android:id="@+id/tvSendMoney_CustomerSDialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvMoney_CustomerSDialog"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_18"
+                    tools:text="@string/customer_charging_dialog_send_money" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3">
+
+                <TextView
+                    android:id="@+id/tvName_CustomerSDialog"
+                    style="@style/customer_charging_success_dialog_info"
+                    android:layout_marginLeft="@dimen/customer_charging_success_dialog_name_l"
+                    tools:text="@string/customer_charging_dialog_name" />
+
+                <TextView
+                    android:id="@+id/tvMobile_CustomerSDialog"
+                    style="@style/customer_charging_success_dialog_info"
+                    android:layout_alignLeft="@id/tvName_CustomerSDialog"
+                    android:layout_below="@id/tvName_CustomerSDialog"
+                    android:layout_marginTop="@dimen/customer_charging_success_dialog_moblie_top"
+                    tools:text="@string/order_center_list_phone" />
+
+                <TextView
+                    android:id="@+id/tvBalance_CustomerSDialog"
+                    style="@style/customer_charging_success_dialog_info"
+                    android:layout_alignLeft="@id/tvMobile_CustomerSDialog"
+                    android:layout_below="@id/tvMobile_CustomerSDialog"
+                    android:layout_marginTop="@dimen/customer_charging_success_dialog_balance_top"
+                    tools:text="@string/customer_charging_dialog_balance" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/customer_cash_charging"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/customer_chargind_pay_button_h"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/customer_charging_pay_cash_selector"
+            android:text="@string/customer_charging_dialog_submit"
+            android:textColor="@color/write"
+            android:textSize="@dimen/text_22" />
+    </LinearLayout>
+</FrameLayout>

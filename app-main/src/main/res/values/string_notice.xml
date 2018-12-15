@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_notify">暂无通知！</string>
+    <string name="retrade_apply_tip">您有%1$d条退单申请，请及时处理</string>
+</resources>

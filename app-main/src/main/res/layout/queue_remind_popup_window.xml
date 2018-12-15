@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/queue_list_item_popup_padding"
+    android:paddingRight="@dimen/queue_list_item_popup_padding"
+    android:background="@drawable/queue_popup_bg">
+
+    <GridView
+        android:id="@+id/popup_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:listSelector="@android:color/transparent"
+        android:divider="@null"
+        android:horizontalSpacing="0dp"
+        android:verticalSpacing="0dp"
+        android:numColumns="auto_fit"></GridView>
+</LinearLayout>

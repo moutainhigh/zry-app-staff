@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dinner_left_bg_shadow">
+
+    <LinearLayout
+        android:id="@+id/order_dish_right_bottom"
+        style="@style/layout.m.w"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/goods_total_number"
+            style="@style/goodsTotal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="30dp"
+            android:text="@string/cashier_goods_total"
+            android:textColor="@color/goods_total_text_color"
+            android:visibility="gone" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_gray" />
+
+        <TableRow
+            android:id="@+id/tr_quick_pay_top"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:paddingTop="10dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="68dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp">
+
+            <LinearLayout
+                android:id="@+id/cashView"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TableRow
+                    android:id="@+id/fastCash"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:visibility="gone"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/btn_quick_pay_selector"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:contentDescription="@string/app_name"
+                        android:src="@drawable/ic_pay_cash" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:gravity="center"
+                        android:text="@string/quick_pay_cash"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/snack_shopcart_bottom_btn_size1" />
+
+                </TableRow>
+
+                <Button
+                    android:id="@+id/btn_order_dish_right_cash"
+                    android:layout_width="0dp"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/btn_blue_selector"
+                    android:text="@string/pay_for"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/sncak_shopcart_bottom_btn_size2" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/marketing_campaign_operate_ll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/cancel_choose_dish_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="3"
+                    android:background="@drawable/button_red_bg"
+                    android:text="@string/dinner_marketing_campaign_cancel_dishchoose"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/sncak_shopcart_bottom_btn_size3" />
+
+                <Button
+                    android:id="@+id/ok_choose_dish_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="4"
+                    android:layout_marginLeft="14dp"
+                    android:background="@drawable/btn_blue_selector"
+                    android:text="@string/dinner_marketing_campaign_ok_dishchoose"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/sncak_shopcart_bottom_btn_size3" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/pendingOrder"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_blue_selector"
+                android:text="@string/pendingOrder"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/sncak_shopcart_bottom_btn_size4"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/salesReturnBut"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_yellow"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/sncak_shopcart_bottom_btn_size4"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/popSlidingDrawer"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/btn_yellow"
+                android:text="@string/order_dish_open_cash_box"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/sncak_shopcart_bottom_btn_size4"
+                android:visibility="visible" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/showMenuView"
+        style="@style/layout.m.m"
+        android:layout_above="@id/order_dish_right_bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/title_bar_height"
+            android:background="@color/snack_title_bg"
+            android:orientation="horizontal">
+
+            <!--<com.zhongmei.bty.basemodule.queue.TurnToOtherModuleView
+                android:id="@+id/ll_back"
+                android:layout_width="60dp"
+                android:layout_height="match_parent" />-->
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include
+                    layout="@layout/common_title_menu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent" />
+
+                <!-- 会员登录 -->
+                <FrameLayout
+                    android:id="@+id/member_login"
+                    style="@style/title_icon_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/member_name"
+                            android:textStyle="bold"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:clickable="false"
+                            android:drawablePadding="3dp"
+                            android:drawableRight="@drawable/offline_customer_login_selector"
+                            android:ellipsize="end"
+                            android:maxEms="5"
+                            android:maxLength="5"
+                            android:maxLines="1"
+                            android:text="@string/customer_login_title"
+                            android:textColor="@color/offline_text_selector"
+                            android:textSize="@dimen/text_20" />
+
+                        <TextView
+                            android:id="@+id/member_level"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/member_name"
+                            android:layout_centerHorizontal="true"
+                            android:clickable="false"
+                            android:maxLines="1"
+                            android:textColor="@color/text_white"
+                            android:textSize="@dimen/text_12"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </FrameLayout>
+
+                <!-- 清空购物车 -->
+                <ImageView
+                    android:id="@+id/clearShoppingCart"
+                    style="@style/title_icon_style"
+                    android:layout_width="60dp"
+                    android:layout_gravity="right"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/clear_nomal" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/divide_line_color" />
+
+        <LinearLayout
+            android:id="@+id/ll_deliveryType_and_peopleCount"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:id="@+id/fl_delivery_type"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_delivery_type"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="12dp"
+                    android:drawableRight="@drawable/ic_drop_down_arrow"
+                    android:gravity="center_vertical"
+                    android:text="@string/order_here"
+                    android:maxLines="1"
+                    android:maxLength="15"
+                    android:textColor="@color/color_03a9f4"
+                    android:textSize="@dimen/text_16" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:background="@drawable/vertical_divide" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_gravity="bottom"
+                    android:background="@color/divide_line_color" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_delivery_type_extra"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_delivery_type_extra"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="12dp"
+                    android:drawableRight="@drawable/ic_drop_down_arrow"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:maxLength="15"
+                    android:text="@string/deskNo"
+                    android:textColor="@color/color_03a9f4"
+                    android:textSize="@dimen/text_16" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center_vertical|right"
+                    android:background="@drawable/vertical_divide" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_gravity="bottom"
+                    android:background="@color/divide_line_color" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/fl_people_count"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/tv_people_count"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="12dp"
+                    android:drawableRight="@drawable/ic_drop_down_arrow"
+                    android:gravity="center_vertical"
+                    android:text="@string/dinner_people_count"
+                    android:maxLines="1"
+                    android:maxLength="15"
+                    android:textColor="@color/color_03a9f4"
+                    android:textSize="@dimen/text_16" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_gravity="bottom"
+                    android:background="@color/divide_line_color" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dish_sales_return_layout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#ffefe4"
+            android:gravity="center"
+            android:text="@string/sales_return_order"
+            android:textColor="#ff6a4d"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.baoyz.swipemenulistview.SwipeMenuListView
+                android:id="@+id/listView_selected_dish"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:background="#00ff0000"
+                android:cacheColorHint="#00000000"
+                android:divider="#00000000"
+                android:dividerHeight="0dp"
+                android:listSelector="#00000000" />
+
+            <TextView
+                android:id="@android:id/empty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="14dp"
+                android:drawableTop="@drawable/ic_no_goods"
+                android:gravity="center_horizontal"
+                android:text="@string/no_dish"
+                android:textColor="#b8c1cc"
+                android:textSize="@dimen/text_16"
+                android:visibility="gone" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

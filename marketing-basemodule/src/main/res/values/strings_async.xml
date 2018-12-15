@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="async_trade_has_been_modified_after_open_table">该订单开台成功后，已被其他客户端修改，当前操作无效！</string>
+    <string name="async_trade_is_opening_table">该订单正在开台，请稍后重试！</string>
+    <string name="async_trade_has_opened_table">该订单已经开台成功！</string>
+    <string name="async_is_retry">正在重试</string>
+    <string name="async_open_table">开台</string>
+    <string name="async_modify_order">改单</string>
+    <string name="async_pay_for">收银</string>
+    <string name="async_please_cancel_operation_in_notification_bar">失败，请先到桌台通知栏取消操作</string>
+    <string name="async_operating_please_wait">中，请稍后</string>
+    <string name="async_retrying_please_wait">重试中，请稍后</string>
+    <string name="async_trade_tip_toast">订单%1$s%2$s</string>
+    <string name="async_index_no"> &#160;&#160; 流水号%1$s</string>
+    <string name="async_success">已成功!</string>
+    <string name="async_retring">正在重试中...</string>
+    <string name="async_executing">正在执行中...</string>
+    <string name="async_failed">失败!</string>
+
+</resources>

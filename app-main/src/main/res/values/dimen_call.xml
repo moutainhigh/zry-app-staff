@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="call_sum_text">16dp</dimen>
+    <dimen name="call_sum__value_text">20dp</dimen>
+    <dimen name="call_detail_btn_text">18dp</dimen>
+
+
+</resources>

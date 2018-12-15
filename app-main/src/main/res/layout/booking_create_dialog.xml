@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="454dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/customer_card_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/booking_create_dialog_date"
+        android:layout_width="match_parent"
+        android:layout_height="67dp">
+
+        <LinearLayout
+            android:id="@+id/booking_create_dialog_t"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/booking_create_dialog_date_today_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_18" />
+
+            <TextView
+                android:id="@+id/booking_create_dialog_date_today"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/booking_create_dialog_to"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/booking_create_dialog_date_toworrow_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_18" />
+
+            <TextView
+                android:id="@+id/booking_create_dialog_date_toworrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/booking_create_dialog_ta"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/booking_create_dialog_date_tafter_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_18" />
+
+            <TextView
+                android:id="@+id/booking_create_dialog_date_tafter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/booking_create_dialog_calendar_date"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="@dimen/text_22"
+            android:visibility="visible"
+            android:text="" />
+
+        <LinearLayout
+            android:id="@+id/booking_create_dialog_calendar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="37dp"
+                android:layout_height="37dp"
+                android:background="@drawable/calendar_icon_selector"
+                android:contentDescription="@string/add" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/booking_dialog_date_close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/dinner_close" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/booking_dialog_line_color" />
+
+    <GridView
+        android:id="@+id/booking_dialog_mealtype"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:background="@color/booking_dialog_type_bg_color"
+        android:gravity="center_vertical"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="7"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:verticalSpacing="2dp"></GridView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/booking_dialog_line_color" />
+
+    <GridView
+        android:id="@+id/booking_dialog_mealtime"
+        android:layout_width="match_parent"
+        android:layout_height="287dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center_vertical"
+        android:horizontalSpacing="15dp"
+        android:listSelector="@android:color/transparent"
+        android:minHeight="287dp"
+        android:numColumns="4"
+        android:verticalSpacing="15dp"
+        android:scrollbars="none"></GridView>
+
+    <Button
+        android:id="@+id/booking_dialog_btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/booking_creat_bottom_btn"
+        android:text="@string/booking_dialog_btn_ok"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+</LinearLayout>

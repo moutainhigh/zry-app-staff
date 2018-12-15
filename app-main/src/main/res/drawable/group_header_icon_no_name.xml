@@ -1,0 +1,7 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="#52C7CA" />
+    <size
+        android:width="@dimen/group_order_item_header_size"
+        android:height="@dimen/group_order_item_header_size" />
+</shape>

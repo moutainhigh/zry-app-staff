@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="52dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:background="#f8fafa">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:src="@drawable/item_activity_icon" />
+
+    <TextView
+        android:id="@+id/tv_dish_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/iv_icon"
+        android:paddingLeft="4dp"
+        android:ellipsize="end"
+        android:singleLine="false"
+        android:textColor="#333333"
+        android:textSize="18dp"
+        tools:text="新品营销95折" />
+
+    <TextView
+        android:id="@+id/tv_dish_price"
+        style="@style/layout.w.w"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:textColor="#fa7d29"
+        android:textSize="20sp"
+        tools:text="-$10" />
+</RelativeLayout>

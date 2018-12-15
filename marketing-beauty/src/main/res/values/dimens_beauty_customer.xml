@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="beauty_btn_add_customer_store_radius">180dp</dimen>
+    <dimen name="beauty_customer_detail_carid_corner">4dp</dimen>
+    <dimen name="beauty_consume_record_outrec_left_right">56dp</dimen>
+    <dimen name="beauty_customer_consume_line_height">2dp</dimen>
+    <dimen name="beauty_customer_consume_line_height_magintop">16dp</dimen>
+    <dimen name="beauty_customer_consume_kind_height">43dp</dimen>
+    <dimen name="beauty_customer_consume_kind_margintop">20dp</dimen>
+    <dimen name="beauty_customer_consume_project_margintop">13dp</dimen>
+    <dimen name="beauty_customer_consume_project_minheight">53dp</dimen>
+    <dimen name="beauty_customer_consume_project_list_margin">25dp</dimen>
+    <dimen name="beauty_customer_consume_last_consume_h">53dp</dimen>
+    <dimen name="beauty_customer_consume_last_consume_m_t">20dp</dimen>
+    <dimen name="beauty_customer_consume_last_consume_remark_m_r">15dp</dimen>
+    <dimen name="beauty_customer_consume_last_consume_remark_3dp">3dp</dimen>
+    <dimen name="beauty_customer_consume_last_consume_remark_6dp">6dp</dimen>
+</resources>

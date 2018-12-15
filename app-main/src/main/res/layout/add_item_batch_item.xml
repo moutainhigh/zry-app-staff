@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@drawable/add_item_batch_button_selector">
+
+    <RelativeLayout
+        android:id="@+id/trade_view_back_rl"
+        android:layout_width="73dp"
+        android:layout_height="73dp">
+
+        <RelativeLayout
+            android:layout_width="56dp"
+            android:layout_height="57dp"
+            android:layout_centerHorizontal="true"
+            android:duplicateParentState="true"
+            android:background="@drawable/dinnertable_trade_background"
+            android:layout_centerInParent="true">
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/sn"
+                android:layout_width="match_parent"
+                android:layout_height="37dp"
+                android:maxHeight="37dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textSize="18sp"
+                autofit:minTextSize="1sp" />
+
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:layout_below="@+id/sn"
+                android:gravity="center_horizontal|bottom"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp" />
+
+            <!--<LinearLayout-->
+            <!--android:id="@+id/time_layout"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:minHeight="20dp"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_below="@+id/sn"-->
+            <!--&gt;-->
+
+            <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal" >-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/time"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="bottom"-->
+            <!--android:textColor="#FFFFFF"-->
+            <!--android:textSize="14sp" />-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/unit"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="bottom"-->
+            <!--android:text="min"-->
+            <!--android:textColor="#FFFFFF"-->
+            <!--android:textSize="12sp" />-->
+
+            <!--</LinearLayout>-->
+
+            <!--</LinearLayout>-->
+
+
+            <LinearLayout
+                android:id="@+id/table_trade_shadow_ll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/dinner_table_trade_shadow"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/message_tv"
+                    android:text="@string/pay_fail"
+                    android:textSize="11sp"
+                    android:textColor="#ffffff" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/retry_tv"
+                    android:text="@string/click_to_retry"
+                    android:textSize="11sp"
+                    android:textColor="#fff600"
+                    android:background="@android:color/transparent" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_cancel"
+                    android:text="@string/click_to_cancel"
+                    android:textSize="11sp"
+                    android:textColor="#fff600"
+                    android:visibility="gone"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/trade_type_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/dinner_table_wechat"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/dinner_table_print_precash_icon"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/trade_choose_iv"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            android:src="@drawable/table_trade_choose_back" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/indicator_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dinner_table_info_order_indicator"
+        android:visibility="gone"
+        android:paddingTop="3dp"
+
+
+        />
+
+</LinearLayout>

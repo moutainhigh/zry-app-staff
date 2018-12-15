@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="view_privilege_seperator">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/line_gray</item>
+    </style>
+
+    <style name="view_privilege_rl_item">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/orderdish_select_dish_item_bg</item>
+    </style>
+
+    <style name="view_privilege_ll_item_root">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dinner_pay_center_item_height</item>
+        <item name="android:weightSum">2</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="view_privilege_image">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">@dimen/dinner_pay_center_item_padding</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="view_privilege_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">@dimen/dinner_pay_center_item_textSize</item>
+    </style>
+</resources>

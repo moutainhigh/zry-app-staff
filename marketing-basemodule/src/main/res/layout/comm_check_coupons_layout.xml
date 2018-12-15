@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    android:background="@color/transparent">
+
+    <ImageButton
+        android:id="@+id/scan_btn"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:background="@drawable/card_sale_activie_selecter"
+        android:src="@drawable/icon_scan" />
+
+    <EditText
+        android:id="@+id/value"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:textSize="@dimen/store_manager_toolbar_text_size"
+        android:textColor="@color/color_333333"
+        android:background="@drawable/scan_edittext_bg"
+        android:layout_marginLeft="14dp"
+        android:singleLine="true"
+        android:gravity="center"
+        android:hint="@string/input_wechat_coupon_code"
+        android:longClickable="false" />
+
+    <Button
+        android:id="@+id/check_btn"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/card_sale_activie_selecter"
+        android:textColor="@color/color_32ADF6"
+        android:textSize="18sp"
+        android:layout_marginLeft="14dp"
+        android:text="@string/check_ticket_str" />
+
+</LinearLayout>

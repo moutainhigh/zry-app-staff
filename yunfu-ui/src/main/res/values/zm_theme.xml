@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="zm_theme_color">#EE5E1F</drawable>
+    <color name="zm_theme_color">#EE5E1F</color>
+    <color name="zm_theme_color_a50">#88EE5E1F</color>
+    <color name="zm_theme_color_a30">#10EE5E1F</color>
+    <color name="zm_theme_color_a20">#10EE5E1F</color>
+    <color name="zm_theme_color_a8">#10EE5E1F</color>
+    <color name="zm_theme_pressed_color">#CCEE5E1F</color>
+    <color name="zm_theme_disabled_color">#CCCCCC</color>
+
+    <color name="zm_theme_color_positive">#EE5E1F</color>
+    <color name="zm_theme_color_positive_pressed">#CCEE5E1F</color>
+    <color name="zm_theme_color_negative">#EEA31F</color>
+    <color name="zm_theme_color_negative_pressed">#CCEEA31F</color>
+
+    <color name="zm_theme_color_input_hint_read">#EE5E1F</color>
+
+    <color name="zm_pay_theme_color">#F5F5F5</color>
+    <dimen name="zm_pay_radius_size">6dp</dimen>
+    <color name="zm_pay_box_color">#F0F0F0</color>
+
+    <integer name="zm_pay_menu_count">5</integer>
+</resources>

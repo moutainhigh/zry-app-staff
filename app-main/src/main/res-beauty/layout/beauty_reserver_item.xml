@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingRight="47dp"
+    android:background="@color/beauty_bg_white"
+    android:paddingTop="18dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="47dp"
+        android:paddingBottom="17dp">
+
+        <ImageView
+            android:id="@+id/iv_member_header"
+            android:layout_width="32dp"
+            android:layout_height="32dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                style="@style/beauty_notify_textview_value"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                style="@style/beauty_notify_textview_hint"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_servers"
+            style="@style/beauty_notify_textview_hint"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_technician"
+            style="@style/beauty_notify_textview_hint"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/beauty_notify_textview_hint"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center" />
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.2"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_modify"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:background="@drawable/beauty_btn_main_modify_selectory"
+                android:paddingLeft="21dp"
+                android:paddingRight="21dp"
+                android:textSize="@dimen/text_14"
+                android:text="@string/beauty_modify"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/btn_create_trade"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/beauty_btn_main_create_trade_selectory"
+                android:paddingLeft="21dp"
+                android:paddingRight="21dp"
+                android:textSize="@dimen/text_14"
+                android:text="@string/beauty_create_trade"
+                android:textColor="@color/beauty_text_white" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        style="@style/beauty_horizontal_line"
+        android:layout_weight="1" />
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="booking_group_set_period">请在后台设置预订时段</string>
+    <string name="booking_group_desk_no_choice_table">没有可选的桌台</string>
+    <string name="booking_group_edit_title">编辑团餐预定</string>
+    <string name="booking_group_open_title">开台</string>
+    <string name="booking_group_create_title">创建团餐预定</string>
+    <string name="booking_group_username_null">匿名顾客</string>
+    <string name="booking_group_selected_tables_has_booking">当前选中的桌台中包含已锁定的桌台，请重新选择桌台</string>
+    <string name="booking_group_desk_null">请输入手机号码</string>
+    <string name="booking_group_not_has_default_model">没有模版数据</string>
+    <string name="booking_group_has_not_area">没有桌台区域</string>
+    <string name="booking_group_selected_tables_has_locked">当前选中的桌台中包含已锁定的桌台，请重新选择桌台</string>
+    <string name="booking_group_modity_order_table_del">已经传送后厨不允许减少桌台</string>
+    <string name="booking_group_dinner_time_empty">当前团餐没有录入用餐时间</string>
+    <string name="booking_group_money_zero_or_empty">请录入餐标金额</string>
+    <string name="booking_group_order_name_empty">请录入团餐名</string>
+    <string name="booking_group_selected_table_is_null">当前没有选中桌台，请选择桌台后再次开台</string>
+    <string name="booking_group_no_permission">抱歉!您没有此业务权限</string>
+    <string name="booking_group_modity_net_error">改单失败，网络异常</string>
+    <string name="booking_group_edit_net_error">编辑失败，网络异常</string>
+    <string name="booking_group_open_net_error">开台失败，网络异常</string>
+    <string name="booking_group_update_table_failure">编辑预定信息失败，网络异常</string>
+    <string name="booking_group_get_period_null">没有获取到预定时段信息，请设置时段</string>
+</resources>

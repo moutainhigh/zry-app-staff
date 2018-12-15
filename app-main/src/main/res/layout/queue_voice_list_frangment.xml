@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <ListView
+        android:id="@+id/queue_voice_listview"
+        android:layout_width="0dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="7"
+        android:background="@color/bg_white"
+        android:cacheColorHint="@null"
+        android:descendantFocusability="blocksDescendants"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="18dp"
+        android:listSelector="@drawable/queue_list_item_bg_selector"
+        android:padding="20dp"></ListView>
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="match_parent"
+        android:background="@color/bg_light" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="5"
+        android:background="@drawable/queue_auto_bg"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_white">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/queue_voice_play_top" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/queue_voice_list_play_bg1" />
+
+                <ImageView
+                    android:id="@+id/queue_voice_list_bg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/queue_voice_list_play_bg2"
+                    android:layout_marginBottom="10dp" />
+
+                <ImageView
+                    android:id="@+id/queue_voice_rote_bg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/queue_voice_list_play_bg3" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/queue_voice_play_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:padding="30dp">
+
+                <ImageView
+                    android:id="@+id/queue_voice_play_pre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/queue_voice_pre_select" />
+
+                <ImageView
+                    android:id="@+id/queue_voice_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="66dp"
+                    android:layout_marginStart="66dp"
+                    android:background="@drawable/queue_voice_play_selector" />
+
+                <ImageView
+                    android:id="@+id/queue_voice_play_next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/queue_voice_next_selector" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_above="@id/queue_voice_play_layout"
+                android:background="@color/bg_light" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_status_default">系统异常，请稍后重试</string>
+
+    <!--supply-->
+    <string name="supply_200">操作成功</string>
+    <string name="supply_400">系统异常，请稍后重试</string>
+
+    <!--boss-->
+    <string name="boss_20001">该商户不存在，请绑定设备</string>
+    <string name="boss_20099">操作失败，请重试</string>
+    <string name="boss_20100">系统异常，请重试</string>
+    <string name="boss_20105">该品牌不存在，请确认品牌名称</string>
+    <string name="boss_20201">系统异常，请重试</string>
+    <string name="boss_20220">该商户不存在，请绑定设备</string>
+    <string name="boss_20222">该Pad设备已被绑定，请输入新的设备编号</string>
+    <string name="boss_20223">操作失败，主POS已存在</string>
+    <string name="boss_20601">未找到该设备</string>
+    <string name="boss_20603">该设备已绑定其他商户，请重置后绑定</string>
+    <string name="boss_20605">设备MAC地址不能为空</string>
+    <string name="boss_20607">请确认是否为主收银设备</string>
+    <string name="boss_20623">实物对应的订单类别不存在</string>
+    <string name="boss_20624">该设备已经绑定商户，请重新选择设备进行激活</string>
+    <string name="boss_20900">系统异常，请稍后重试</string>
+    <string name="boss_20901">系统异常，请重试</string>
+    <string name="boss_30001">系统异常，请重试</string>
+    <string name="boss_30002">系统异常，请重试</string>
+    <string name="boss_201011">系统异常，请重试</string>
+    <string name="boss_negative_1">系统异常，请重试</string>
+    <string name="boss_negative_2">商户已禁用</string>
+
+    <!--loyalty-->
+    <string name="loyalty_1">操作成功</string>
+    <string name="loyalty_2">系统异常，请重试</string>
+    <string name="loyalty_3">系统异常，请重试</string>
+    <string name="loyalty_10001">系统异常，请重试</string>
+    <string name="loyalty_20001">系统异常，请重试</string>
+    <string name="loyalty_20101">扣除积分不能大于账户积分余额</string>
+    <string name="loyalty_20102">系统异常，请重试</string>
+    <string name="loyalty_20103">系统异常，请重试</string>
+    <string name="loyalty_20104">积分额必须大于0</string>
+    <string name="loyalty_20105">系统异常，请重试</string>
+    <string name="loyalty_20106">系统异常，请重试</string>
+    <string name="loyalty_20201">系统异常，请重试</string>
+    <string name="loyalty_20301">系统异常，请重试</string>
+    <string name="loyalty_20302">国家码错误</string>
+    <string name="loyalty_20303">请输入11位电话号码</string>
+    <string name="loyalty_20304">卡号不存在，请重新输入正确的卡号</string>
+    <string name="loyalty_20305">门店不存在</string>
+    <string name="loyalty_20306">系统异常，请重试</string>
+    <string name="loyalty_20307">系统异常，请重试</string>
+    <string name="loyalty_20308">门店没有操作权限，请通过品牌申请权限</string>
+    <string name="loyalty_20401">人脸识别号已存在</string>
+    <string name="loyalty_20402">该会员不存在</string>
+    <string name="loyalty_20403">人脸识别号已存在</string>
+    <string name="loyalty_20501">国家码错误</string>
+    <string name="loyalty_20502">请输入11位电话号码</string>
+    <string name="loyalty_20503">该顾客不存在</string>
+    <string name="loyalty_20601">该会员不存在</string>
+    <string name="loyalty_20602">系统异常，请稍后重试</string>
+    <string name="loyalty_20603">该会员不存在</string>
+    <string name="loyalty_20604">动态会员码为空</string>
+    <string name="loyalty_20605">动态会员码格式错误</string>
+    <string name="loyalty_20606">登录过期，请重新登录</string>
+    <string name="loyalty_20607">密码错误，请重新输入</string>
+    <string name="loyalty_20701">卡号不存在，请输入正确的卡号</string>
+    <string name="loyalty_20702">实体卡顾客不存在</string>
+    <string name="loyalty_20703">权益卡不存在</string>
+    <string name="loyalty_20704">匿名卡不存在</string>
+    <string name="loyalty_20801">顾客不存在</string>
+    <string name="loyalty_20901">门店不存在</string>
+
+    <!--gateway-->
+    <string name="gateway_1000">系统异常，请稍后重试</string>
+    <string name="gateway_2000">系统异常，请重试</string>
+    <string name="gateway_3000">系统异常，请重试</string>
+
+    <!--mind-->
+    <string name="mind_200">提交成功</string>
+    <string name="mind_201">系统异常，请重试</string>
+    <string name="mind_202">操作失败，请重试</string>
+    <string name="mind_500">系统异常，请重试</string>
+    <string name="mind_501">系统异常，请稍后重试</string>
+
+    <string name="mind_1000">操作成功</string>
+    <string name="mind_1003">系统异常，请重试</string>
+    <string name="mind_1004">系统异常，请稍后重试</string>
+    <string name="mind_1005">系统异常，请重试</string>
+
+
+</resources>

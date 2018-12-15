@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_user_has_permission">没有查找到拥有这个权限的用户</string>
+</resources>

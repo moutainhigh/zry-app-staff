@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout.m.m"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="450dp"
+        android:layout_height="340dp"
+        android:background="@drawable/calmui_dialog_background">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/commonmodule_dialog_icon_warning" />
+
+        <TextView
+            android:id="@+id/common_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/icon"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="@string/the_dish_cannot_print_below"
+            android:textColor="@color/text_black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/negative_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/commonmodule_dialog_nagetive"
+                android:text="@string/cancel_the_operation"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/dialog_move_dish_btn_size"></Button>
+
+            <Button
+                android:id="@+id/positive_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/commonmodule_dialog_positive"
+                android:text="@string/continue_artificial_notice_kitchen"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/dialog_move_dish_btn_size"></Button>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/common_dialog_title"
+            android:background="@color/line_gray" />
+
+        <ListView
+            android:id="@+id/lv_dishes"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ll_bottom"
+            android:layout_below="@+id/view_line"
+            android:layout_centerHorizontal="true"
+            android:divider="@color/line_gray"
+            android:dividerHeight="1dp"
+            android:listSelector="@color/transparent"></ListView>
+    </RelativeLayout>
+
+</LinearLayout>

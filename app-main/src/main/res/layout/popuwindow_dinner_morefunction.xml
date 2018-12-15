@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="210dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="10dp"
+
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#F1F1F1"
+        android:gravity="center_vertical"
+        android:paddingLeft="4dp"
+        android:text="@string/dinner_table_show_setting_label"
+        android:textColor="@color/customer_rule_gray"
+        android:textSize="13sp" />
+
+    <com.zhongmei.bty.dinner.table.view.SpreadListView
+        android:id="@+id/slv_function"
+        android:layout_width="210dp"
+        android:layout_height="133dp"
+        android:cacheColorHint="@color/transparent"
+        android:divider="#f0f3f6"
+        android:dividerHeight="1dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:listSelector="@color/transparent"
+        android:scrollbars="none">
+
+    </com.zhongmei.bty.dinner.table.view.SpreadListView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#F1F1F1"
+        android:gravity="center_vertical"
+        android:paddingLeft="4dp"
+        android:text="@string/dinner_table_other_function_label"
+        android:textColor="@color/customer_rule_gray"
+        android:textSize="13sp" />
+
+    <RelativeLayout
+        android:id="@+id/tv_goto_search_table"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="12dp"
+            android:drawableLeft="@drawable/dinner_search_table_menu_icon"
+            android:drawablePadding="9dp"
+            android:gravity="center_vertical"
+            android:text="@string/search_table_title_label"
+            android:textColor="@color/reason_radio_color2"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/customer_to_right" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_gravity="left|center_vertical"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:background="#F1F1F1"
+        android:gravity="center_vertical"
+        android:paddingLeft="4dp"
+        android:text="@string/dinner_table_business_charge"
+        android:textColor="@color/customer_rule_gray"
+        android:textSize="13sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <LinearLayout
+            android:id="@+id/layout_data_contain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_checkout_fee"
+                style="@style/style_table_tv_morefunction_business_charge"
+                android:text="已结账金额：8888" />
+
+            <View style="@style/buffet_horizontal_line" />
+
+            <TextView
+                android:id="@+id/tv_uncheckout_fee"
+                style="@style/style_table_tv_morefunction_business_charge"
+                android:text="未结账金额：8888" />
+
+            <View style="@style/buffet_horizontal_line" />
+
+            <TextView
+                android:id="@+id/tv_people_avgfee"
+                style="@style/style_table_tv_morefunction_business_charge"
+                android:text="客单价：8888" />
+
+            <View style="@style/buffet_horizontal_line" />
+
+            <TextView
+                android:id="@+id/tv_table_avgfee"
+                style="@style/style_table_tv_morefunction_business_charge"
+                android:text="桌均价：8888" />
+
+            <View style="@style/buffet_horizontal_line" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_controller"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ProgressBar
+                android:id="@+id/pb_loading"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_get_business_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:textColor="#43B5F9"
+                android:textSize="@dimen/s_text_12"
+                android:text="@string/dinner_table_click_getdata" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

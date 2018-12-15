@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="beauty_sale_select_label">选择人员</string>
+    <string name="beauty_tab_service">服务</string>
+    <string name="beauty_tab_product">产品</string>
+    <string name="beauty_order_label">开单</string>
+    <string name="btn_add_customer">添加会员</string>
+    <string name="btn_recharge">充值</string>
+    <string name="btn_bank_card">办卡</string>
+
+
+    <string name="beauty_user_use">占用</string>
+    <string name="beauty_appoint">指定</string>
+    <string name="beauty_un_appoint">非指定</string>
+
+    <string name="beauty_card">会员卡</string>
+
+    <string name="beauty_privilege_label">选择权益</string>
+    <string name="beauty_add_property_label">添加属性</string>
+    <string name="beauty_pay">结账</string>
+    <string name="beauty_total_label">总计：</string>
+    <string name="beauty_no_goods">请在右侧选择服务与商品</string>
+    <string name="beauty_discount_select">选择折扣</string>
+    <string name="beauty_choice_technician">选择美容技师</string>
+    <string name="beauty_choice_shopowner">选择店长</string>
+    <string name="beauty_choice_adviser">选择顾问</string>
+    <string name="beauty_activity_title">活动</string>
+
+    <string name="beauty_market_activity">营销活动</string>
+    <string name="beauty_program_activity">小程序活动</string>
+    <string name="beauty_use">使用</string>
+    <string name="beauty_used">已使用</string>
+
+    <string name="beauty_coupon">优惠劵</string>
+
+    <string name="beauty_consmetologist_unselected">请先选择服务品项！</string>
+    <string name="beauty_marketing_campaign_addfail_notchoose">请点选产品或者服务</string>
+    <string name="beauty_marketing_campaign_addfail">添加的条目信息不满足活动规则，请检查条目选择</string>
+    <string name="beauty_card_service_label">会员权益：次卡服务%1$s/抵扣%2$d次</string>
+    <string name="beauty_wx_service_label">会员权益：小程序活动%1$s/抵扣%2$d次</string>
+    <string name="beauty_orginal_price">原价：</string>
+    <string name="beauty_customr_unlogin">请先登录</string>
+    <string name="beauty_applet_collage">拼团</string>
+    <string name="beauty_applet_seckill">秒杀</string>
+    <string name="beauty_applet_bargain">砍价</string>
+
+    <string name="beauty_cosmetologist">技师</string>
+    <string name="beauty_adviser">顾问： </string>
+    <string name="beauty_shopowner">店长： </string>
+    <string name="beauty_serialnumber">流水号%1$s</string>
+
+
+    <string name="btn_cosmetologist">技师</string>
+    <string name="btn_adviser">顾问</string>
+    <string name="btn_shopowner_select">店长</string>
+
+    <string name="beauty_pre_print">预结单</string>
+
+    <string name="beauty_no_login_customer">购买服务请先登录会员</string>
+
+</resources>

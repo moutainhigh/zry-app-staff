@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/customer_balance_showdow"
+    android:orientation="vertical">
+
+    <!-- 账户余额title -->
+    <LinearLayout
+        android:id="@+id/customer_balance_title_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/customer_account_table_h"
+        android:layout_marginLeft="@dimen/customer_account_padding"
+        android:layout_marginRight="@dimen/customer_account_padding"
+        android:layout_marginTop="@dimen/customer_account_padding"
+        android:background="@color/write"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:text="@string/customer_time"
+            android:textColor="@color/customer_balance_jifen_title"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/charge_type"
+            android:textColor="@color/customer_balance_jifen_title"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="right"
+            android:text="@string/change_balance"
+            android:textColor="@color/customer_balance_jifen_title"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="right"
+            android:text="@string/customer_banlance_text"
+            android:textColor="@color/customer_balance_jifen_title"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.5"
+            android:gravity="right"
+            android:text="@string/customer_manager"
+            android:textColor="@color/customer_balance_jifen_title"
+            android:textSize="@dimen/text_16" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:orientation="horizontal" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/customer_account_padding"
+        android:layout_marginRight="@dimen/customer_account_padding"
+        android:background="#e5e8ec" />
+
+    <!-- 可用积分title -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/customer_account_padding"
+        android:layout_marginLeft="@dimen/customer_account_padding"
+        android:layout_marginRight="@dimen/customer_account_padding"
+        android:layout_weight="1"
+        android:background="@color/write"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/customer_balance_lv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/write"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            android:listSelector="@color/transparent" />
+
+        <ImageView
+            android:id="@+id/balance_empty_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/customer_empty_icon" />
+        <!-- 余额积分为空页面 -->
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvRemark_CustomerBalance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:layout_marginLeft="113dp"
+        android:textSize="@dimen/text_13"
+        android:textColor="@color/color_bcbcbc"
+        android:text="@string/customer_balance_remark" />
+
+</LinearLayout>

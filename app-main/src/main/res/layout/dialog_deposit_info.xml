@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="380dp"
+    android:layout_height="480dp"
+    android:background="@drawable/verify_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/back_deposit_text"
+            android:textSize="21dp"
+            android:textColor="#ff7901" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="19dp"
+            android:layout_below="@id/tv_title"
+            android:layout_centerHorizontal="true"
+            android:text="@string/deposit_info_hint"
+            android:textSize="14dp"
+            android:textColor="#666666" />
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|top"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dinner_close" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:paddingLeft="10dp"
+        android:background="#FFF6F6F6"
+        android:textColor="#FF999999"
+        android:gravity="center_vertical"
+        android:textSize="13dp"
+        android:text="@string/deposit_info_table_info" />
+
+    <TextView
+        android:id="@+id/tv_desktop_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="33dp"
+        android:textColor="#FF333333"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/tv_serial_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="33dp"
+        android:textColor="#FF333333"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="33dp"
+        android:textColor="#FF333333"
+        android:textSize="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="27dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:paddingLeft="10dp"
+        android:background="#FFF6F6F6"
+        android:textColor="#FF999999"
+        android:gravity="center_vertical"
+        android:textSize="13dp"
+        android:text="@string/deposit_info_amount2" />
+
+    <LinearLayout
+        android:id="@+id/layout_deposit_way"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="33dp"
+            android:textColor="#FF333333"
+            android:textSize="16dp"
+            android:text="@string/customer_order_center_pay_mode" />
+
+        <TextView
+            android:id="@+id/tv_deposit_way"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#32ADF6"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="33dp"
+            android:textColor="#FF333333"
+            android:textSize="16dp"
+            android:text="@string/deposit_info_amount" />
+
+        <TextView
+            android:id="@+id/tv_deposit_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#32ADF6"
+            android:textSize="16dp"
+            android:text="$80.00" />
+
+        <TextView
+            android:id="@+id/btn_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:drawableLeft="@drawable/ic_invoice_edit"
+            android:clickable="true"
+            android:drawablePadding="5dp"
+            android:text="@string/pay_modify_payment"
+            android:textColor="#FF32ADF6"
+            android:textSize="13dp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/white"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@drawable/sure_btn_bg"
+        android:layout_gravity="center_vertical"
+        android:text="@string/back_deposit_text"
+        android:textSize="21dp"
+        android:textColor="@color/text_white" />
+</LinearLayout>

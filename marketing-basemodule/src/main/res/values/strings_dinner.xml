@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dinner_app_name">正餐收银</string>
+    <string name="dinner_table_unit">桌</string>
+    <string name="dinner_inventory_verify_hint">等商品可售数不足，是否继续下单?</string>
+    <string name="dinner_refund_amount_print_hint">不退</string>
+</resources>

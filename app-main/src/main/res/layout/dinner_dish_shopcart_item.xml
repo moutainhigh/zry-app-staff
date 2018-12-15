@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:descendantFocusability="blocksDescendants">
+
+    <View
+        android:id="@+id/topline"
+        style="@style/style_topline" />
+
+
+    <!-- 菜名 -->
+    <!--layout="@layout/dinner_shopcart_item_dish_layout"-->
+
+    <include
+        android:id="@+id/dishView"
+        layout="@layout/dinner_west_shopcart_item_dish_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topline" />
+
+    <!-- 退菜明细 -->
+
+    <include
+        android:id="@+id/return_dish_ll"
+        layout="@layout/dinner_shopcart_item_return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dishView"
+        android:layout_marginBottom="10dp" />
+
+</RelativeLayout>

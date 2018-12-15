@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="warp_content_layout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+    <!--  统计普通字体 -->
+    <style name="customer_info_text" parent="@style/warp_content_layout">
+        <item name="android:textColor">#00ff00</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <!--  统计加粗字体 -->
+    <style name="customer_info_text_bold" parent="@style/warp_content_layout">
+        <item name="android:textColor">#00ff00</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+
+    <style name="call_customer_detail_layout" parent="warp_content_layout">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="call_customer_detail_pic_layout" parent="warp_content_layout">
+        <item name="android:background">@color/call_dialog_down_bg</item>
+    </style>
+
+
+    <style name="call_customer_detail_text_layout" parent="warp_content_layout">
+        <item name="android:layout_marginTop">23dp</item>
+        <item name="android:textSize">@dimen/call_detail_btn_text</item>
+        <item name="android:textColor">@color/call_phone_text_color</item>
+    </style>
+
+</resources>

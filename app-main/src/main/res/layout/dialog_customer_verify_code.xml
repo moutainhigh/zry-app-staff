@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/calm_dlg_layout"
+        android:layout_width="460dp"
+        android:layout_height="338dp"
+        android:background="@drawable/dialog_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingRight="30dp"
+                android:paddingLeft="30dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="26dp"
+                    android:gravity="center"
+                    android:text="@string/reset_pswd_need_verify"
+                    android:textColor="#333333"
+                    android:textSize="26sp" />
+
+                <TextView
+                    android:id="@+id/tv_phone_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="@string/verify_code_send_to_phone"
+                    android:textColor="#999999"
+                    android:textSize="18dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btn_negative"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|top"
+                android:layout_marginRight="22dp"
+                android:layout_marginTop="26dp"
+                android:src="@drawable/dialog_close" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_verify_code"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="18dp"
+                android:layout_weight="1"
+                android:background="@drawable/customer_modify_pwd_input_bg"
+                android:hint="@string/input_verify_code_hint"
+                android:inputType="number"
+                android:paddingLeft="16dp"
+                android:singleLine="true"
+                android:textColor="#333333"
+                android:textColorHint="#bcbcbc"
+                android:textSize="20dp" />
+
+            <Button
+                android:id="@+id/btn_get_verify_code"
+                android:layout_width="126dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/customer_modify_getcode_bg"
+                android:gravity="center"
+                android:text="@string/get_verify_code"
+                android:textColor="@color/text_white"
+                android:textSize="22dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="40dp"
+            android:text="@string/verify_code_error"
+            android:textColor="@color/orderdish_text_orange"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_positive"
+                android:layout_width="match_parent"
+                android:layout_height="66dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/booking_dialog_print_onclick"
+                android:text="@string/next"
+                android:textColor="@color/text_white"
+                android:textSize="24sp"></Button>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

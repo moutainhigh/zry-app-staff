@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dinner_multi_terminate_both_no_hint">该订单于【%1$s】进行了更改，您的当前操作无效！</string>
+    <string name="dinner_multi_terminate_no_updator_hint">该订单于【%1$s】在设备【%2$s】上进行了更改，您的当前操作无效！</string>
+    <string name="dinner_multi_terminate_no_padno_hint">该订单于【%1$s】被操作员【%2$s】进行了更改，您的当前操作无效！</string>
+    <string name="dinner_multi_terminate_hint">该订单于【%1$s】被操作员【%2$s】在设备【%3$s】上进行了更改，您的当前操作无效！</string>
+    <string name="dinner_settle_trade_negative_hint">该操作会导致订单金额为负，选择【继续】将删除‘整单让价’避免金额为负</string>
+    <string name="dinner_cacel_operate">取消操作</string>
+    <string name="dinner_continume">继续</string>
+    <string name="save_success">保存成功！</string>
+    <string name="dinner_order_null_print_hint">订单为空不能打印!</string>
+    <string name="dinner_item_null_print_hint">没有可结算品项不能打印!</string>
+    <string name="dinner_privilege_over">优惠累计金额已超过原价，请核对!</string>
+    <string name="dinner_settle_prprint_hint">如果用于其它终端扫码支付，请先保存结算信息!</string>
+    <string name="customer_disable">当前会员已被停用！</string>
+</resources>

@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="beauty" />
+
+    <style name="beauty_layout_w_w_h_w">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="beauty_layout_w_m_h_m">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="beauty_layout_w_m_h_w">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="beauty_layout_w_0_h_w_w_1">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="beauty_main_rb">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/beauty_main_anchor_selector</item>
+        <item name="android:background">@drawable/beauty_main_anchor_bg_selector</item>
+    </style>
+
+    <style name="beauty_main_anchor">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawablePadding">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">10sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textColor">@color/beauty_main_anchor_selector</item>
+        <item name="android:background">@drawable/beauty_main_anchor_bg_selector</item>
+    </style>
+
+    <style name="beauty_horizontal_line">
+        <item name="android:layout_height">@dimen/beauty_line_width</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">#DEDEDE</item>
+    </style>
+
+    <style name="beauty_anchor_horizontal_line" parent="beauty_horizontal_line">
+        <item name="android:background">#000000</item>
+    </style>
+
+    <style name="beauty_vertical_devide_bold_line">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/beauty_line_blod_width</item>
+        <item name="android:background">@color/beauty_color_666666</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+
+    <style name="beauty_vertical_line">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/beauty_line_width</item>
+        <item name="android:background">#DEDEDE</item>
+    </style>
+
+    <style name="beauty_notify_vertical_line">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">@dimen/beauty_line_width</item>
+        <item name="android:background">#DEDEDE</item>
+        <item name="android:layout_marginTop">9dp</item>
+        <item name="android:layout_marginBottom">9dp</item>
+    </style>
+
+    <style name="beauty_notify_item">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="beauty_notify_number" parent="beauty_notify_item">
+        <item name="android:layout_height">40dp</item>
+    </style>
+
+    <style name="beauty_notify_textview_hint">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_12</item>
+        <item name="android:textColor">#666666</item>
+    </style>
+
+    <style name="beauty_notify_textview_value">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:textColor">#3F3F3F</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+    <style name="beauty_operatory_btn">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:textSize">@dimen/text_14</item>
+        <item name="android:background">@drawable/beauty_btn_operator_selector</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:textColor">@color/beauty_text_white</item>
+    </style>
+
+    <style name="beauty_operatory_small_btn" parent="beauty_operatory_btn">
+        <item name="android:layout_width">110dp</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:drawablePadding">5dp</item>
+        <item name="android:textSize">@dimen/text_14</item>
+        <item name="android:background">@drawable/beauty_btn_small_operator_selector</item>
+        <item name="android:layout_marginLeft">15dp</item>
+        <item name="android:textColor">@color/beauty_text_white</item>
+    </style>
+
+    <style name="beauty_add_scheduling" parent="@style/beauty_operatory_btn">
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_width">130dp</item>
+        <item name="android:textSize">@dimen/text_13</item>
+        <item name="android:background">@drawable/beauty_btn_pink_selector</item>
+        <item name="android:drawablePadding">7dp</item>
+    </style>
+
+    <style name="beauty_operatory_btn2" parent="beauty_operatory_btn">
+        <item name="android:background">@drawable/beauty_btn_operator_selector2</item>
+        <item name="android:textColor">@color/beauty_main_text_color2</item>
+    </style>
+
+    <style name="beauty_middle_label">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableLeft">@drawable/beauty_tv_anchor</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:textSize">@dimen/text_13</item>
+        <item name="android:textColor">@color/beauty_color_999999</item>
+        <item name="android:drawablePadding">10dp</item>
+    </style>
+
+    <style name="beauty_middle_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:textSize">@dimen/text_13</item>
+        <item name="android:textColor">@color/beauty_middle_btn_color_selector</item>
+        <item name="android:background">@drawable/beauty_dish_type_item_bg</item>
+    </style>
+
+    <style name="beauty_middle_btn2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:paddingTop">3dp</item>
+        <item name="android:paddingBottom">3dp</item>
+        <item name="android:textSize">@dimen/text_11</item>
+        <item name="android:textColor">@color/beauty_middle_btn_color_selector</item>
+        <item name="android:background">@drawable/beauty_dish_type_item_bg</item>
+    </style>
+
+    <style name="beauty_middle_content_titlte_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_20</item>
+        <item name="android:textColor">@color/beauty_color_FF7901</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="beauty_middle_content_titlte_hint">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_13</item>
+        <item name="android:textColor">@color/beauty_color_999999</item>
+    </style>
+
+    <style name="beauty_middle_content_titlte_hint2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_15</item>
+        <item name="android:textColor">@color/beauty_color_999999</item>
+    </style>
+
+
+    <style name="beauty_scheduling_title">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_13</item>
+        <item name="android:textColor">@color/beauty_text_gray</item>
+        <item name="android:background">@color/beauty_transparent</item>
+    </style>
+
+    <style name="beauty_operatory_rb">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/beauty_operatory_rb_selctor</item>
+        <item name="android:drawableBottom">@drawable/beauty_operator_rb_check_selector</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:gravity">top</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="beauty_orderdish_table_rb" parent="beauty_operatory_rb">
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="beauty_reserver_tab_style">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:textColor">@color/beauty_reserver_tab_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="beauty_reserver_tab_vertical_line" parent="beauty_vertical_line">
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="beauty_reserver_board_rb">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/beauty_operatory_rb_selctor</item>
+        <item name="android:drawableBottom">@drawable/beauty_operator_rb_check_selector</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:gravity">top</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="beauty_outline_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/text_12</item>
+        <item name="android:textColor">@color/beauty_color_FE6A4D</item>
+        <item name="android:background">@drawable/beauty_outline_bg</item>
+    </style>
+
+    <style name="beauty_booking_service_style" parent="beauty_notify_textview_hint">
+        <item name="android:textSize">@dimen/text_12</item>
+    </style>
+
+    <style name="beauty_trades_fragemtn_rb">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/beauty_operatory_rb_selctor</item>
+        <item name="android:drawableBottom">@drawable/beauty_trades_rb_selector</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+    </style>
+
+    <style name="beauty_order_top_btn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">70dp</item>
+        <item name="android:paddingTop">5dp</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+        <item name="android:background">@drawable/beauty_order_top_rb_selector</item>
+        <item name="android:textColor">@color/beauty_order_top_rb_selector</item>
+        <item name="android:gravity">center</item>
+        <item name="android:drawablePadding">1dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:textSize">@dimen/text_10</item>
+    </style>
+
+
+    <style name="beauty_order_top_rb" parent="beauty_order_top_btn">
+        <item name="android:button">@null</item>
+
+    </style>
+</resources>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/one"
+            style="@style/login_number_style"
+            android:layout_marginRight="@dimen/login_number_marginRight"
+            android:textSize="32sp"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/two"
+            style="@style/login_number_style"
+            android:layout_marginRight="@dimen/login_number_marginRight"
+            android:textSize="32sp"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/three"
+            style="@style/login_number_style"
+            android:textSize="32sp"
+            android:text="3" />
+    </LinearLayout>
+    <!-- 4,5,6 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_number_marginTop"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/four"
+            style="@style/login_number_style"
+            android:layout_marginRight="@dimen/login_number_marginRight"
+            android:textSize="32sp"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/five"
+            style="@style/login_number_style"
+            android:layout_marginRight="@dimen/login_number_marginRight"
+            android:textSize="32sp"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/six"
+            style="@style/login_number_style"
+            android:textSize="32sp"
+            android:text="6" />
+    </LinearLayout>
+    <!-- 7,8,9 -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_number_marginTop"
+        android:gravity="center_horizontal">
+
+        <Button
+            android:id="@+id/seven"
+            style="@style/login_number_style"
+            android:layout_marginRight="@dimen/login_number_marginRight"
+            android:textSize="32sp"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/eight"
+            style="@style/login_number_style"
+            android:layout_marginRight="@dimen/login_number_marginRight"
+            android:textSize="32sp"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/nine"
+            style="@style/login_number_style"
+            android:textSize="32sp"
+            android:text="9" />
+    </LinearLayout>
+    <!-- change user,0,delete -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/login_number_marginTop"
+        android:gravity="center_horizontal">
+
+
+        <TextView
+            android:id="@+id/clean"
+            style="@style/login_number_style"
+            android:layout_marginRight="@dimen/login_number_marginRight"
+            android:layout_height="match_parent"
+            android:text="@string/keyboard_clear"
+            android:textSize="@dimen/text_26"
+            android:textColor="@drawable/tv_color_selector" />
+
+        <TextView
+            android:id="@+id/zero"
+            style="@style/login_number_style"
+            android:layout_marginRight="@dimen/login_number_marginRight"
+            android:textSize="32sp"
+            android:text="0" />
+
+        <ImageButton
+            android:id="@+id/delete"
+            style="@style/login_number_style"
+            android:src="@drawable/delete_icon_large"
+            android:textSize="32sp" />
+    </LinearLayout>
+
+</LinearLayout>

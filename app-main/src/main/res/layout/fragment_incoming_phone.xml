@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/takeout_call_incall"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <RelativeLayout
+        android:id="@+id/takeout_call_customerinfo_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bg_white">
+
+        <ImageView
+            android:id="@+id/minincall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/btn_min" />
+
+        <LinearLayout
+            android:id="@+id/phone_bluetooth_incoming_customer_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/phone_bluetooth_incoming_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/text_black"
+                android:textSize="27sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/phone_bluetooth_incoming_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="12dp"
+                android:paddingTop="8dp"
+                android:textColor="@color/text_gray"
+                android:textSize="27sp" />
+
+            <TextView
+                android:id="@+id/phone_bluetooth_incoming_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="8dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_18" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/takeout_call_senderinfo_panel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/bg_gray">
+
+        <LinearLayout
+            android:id="@+id/phone_bluetooth_incoming_pre_order_panel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/phone_bluetooth_incoming_pre_order_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="20dp"
+                android:textColor="@color/text_gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/phone_bluetooth_incoming_pre_order_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="8dp"
+                android:textColor="@color/text_gray"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/phone_bluetooth_incoming_order_sender_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="8dp"
+                android:textColor="@color/text_gray"
+                android:textSize="20sp"
+                android:visibility="visible" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_orderdish_and_booking"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/phone_bluetooth_incoming_OrderDish"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/phone_title"
+            android:gravity="center"
+            android:text="@string/start_order"
+            android:textColor="@color/bg_white"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/btn_booking"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/phone_title"
+            android:gravity="center"
+            android:text="@string/phone_booking"
+            android:textColor="@color/bg_white"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+</LinearLayout>

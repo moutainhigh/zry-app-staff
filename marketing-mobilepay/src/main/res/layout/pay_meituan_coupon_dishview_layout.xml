@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E1E4e9"
+        android:contentDescription="@null" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="13dp">
+
+        <TextView
+            android:id="@+id/ticket_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2.5"
+            android:gravity="left|center_vertical"
+            android:textColor="#333333"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/ticket_dish_relate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.8"
+            android:drawablePadding="4dp"
+            android:drawableRight="@drawable/selector_pay_ment_item_list"
+            android:gravity="right|center_vertical"
+            android:text="@string/coupon_match_dishs_label"
+            android:textColor="#333333"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dish_list_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E1E4e9"
+            android:contentDescription="@null" />
+
+        <TextView
+            android:id="@+id/ticket_dish_list_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="14dp"
+            android:textColor="#333333"
+            android:textSize="@dimen/text_14" />
+    </LinearLayout>
+
+</LinearLayout>

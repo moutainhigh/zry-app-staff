@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="booking_app_name">预订</string>
+    <string name="booking_unarrived">未到店</string>
+    <string name="booking_cancel">已取消</string>
+    <string name="booking_refused">已拒绝</string>
+    <string name="booking_timeout">已逾期</string>
+    <string name="booking_unprocess">未处理</string>
+    <string name="booking_accept">接受</string>
+    <string name="booking_rejection">拒绝</string>
+    <string name="booking_arrived">已到店</string>
+    <string name="booking_leave">已离店</string>
+</resources>

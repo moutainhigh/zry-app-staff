@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_line"
+        style="@style/beauty_horizontal_line" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/lv_reservers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beauty_bg_gray"
+        android:overScrollMode="never"
+        android:layout_below="@id/view_line"
+        android:scrollbars="none" />
+
+    <TextView
+        android:id="@+id/iv_empty_view"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="23dp"
+        android:gravity="center"
+        android:textColor="@color/beauty_color_999999"
+        android:text="暂无订单哦"
+        android:visibility="gone"
+        android:drawableTop="@drawable/beauty_no_order_view" />
+
+</RelativeLayout>

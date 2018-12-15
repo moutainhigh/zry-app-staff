@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--排队主页面-->
+    <!--TitleBar-->
+    <dimen name="queue_titleBar_item_height">32dp</dimen>
+    <dimen name="queue_titleBar_item_width">240dp</dimen>
+    <dimen name="queue_titleBar_item_textSize">16sp</dimen>
+    <dimen name="queue_titleBar_bubble_marginRight">6dp</dimen>
+
+    <dimen name="queue_content_margin">10dp</dimen>
+    <dimen name="queue_content_margin2">5dp</dimen>
+
+    <!--左边排队列表-->
+    <dimen name="queue_left_title_height">46.6dp</dimen>
+    <dimen name="queue_left_title_textSize1">10.67dp</dimen>
+    <dimen name="queue_left_title_textSize2">13.3dp</dimen>
+
+    <dimen name="queue_list_item_height">66dp</dimen>
+    <dimen name="queue_list_item_popup_height">64dp</dimen>
+    <dimen name="queue_list_item_popup_item_width">50dp</dimen>
+    <dimen name="queue_list_item_popup_padding">16dp</dimen>
+
+    <dimen name="queue_list_item_text1_size">18.67sp</dimen>
+    <dimen name="queue_list_item_text2_size">12sp</dimen>
+    <!--历史记录-->
+    <dimen name="queue_left_item_paddingStartAddEnd">26dp</dimen>
+    <dimen name="queue_left_item_paddingTop">8dp</dimen>
+
+    <dimen name="queue_right_edit_height">48dp</dimen>
+    <dimen name="queue_right_edit_textSize">16sp</dimen>
+    <dimen name="queue_right_edit_marginTop">14dp</dimen>
+    <dimen name="queue_right_item_content_margin_left">14dp</dimen>
+</resources>

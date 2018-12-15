@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="493dp"
+        android:background="@drawable/customer_card_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/close_title"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@color/transparent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/please_select_table"
+                    android:textColor="#FFFF7901"
+                    android:textSize="@dimen/dialog_operate_title_size" />
+
+                <TextView
+                    android:id="@+id/tvSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/repay_tip"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/dialog_operate_title2_size"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D9D9D9" />
+
+        <LinearLayout
+            android:id="@+id/order_table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:background="#FFEFE3"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="13sp"
+                android:textColor="#FF6946"
+                android:text="@string/accept_order_choose_tables_name_hint" />
+
+            <TextView
+                android:id="@+id/order_table_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:textSize="13sp"
+                android:textColor="#FF6946"
+                tools:text="桌台A001" />
+
+            <TextView
+                android:id="@+id/order_table_status"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="2dp"
+                android:textSize="13sp"
+                android:textColor="#FF6946"
+                tools:text="(待清台)" />
+
+            <TextView
+                android:id="@+id/order_table_op_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:textSize="13sp"
+                android:textColor="#FF6946"
+                android:text="@string/accept_order_choose_tables_op_hint" />
+
+            <TextView
+                android:id="@+id/order_table_op"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="5dp"
+                android:drawableRight="@drawable/dinner_choose_table_open_icon"
+                android:drawablePadding="3dp"
+                android:textSize="13sp"
+                android:textColor="#32ADF6"
+                android:text="@string/accept_order_choose_tables_clean_and_open" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#D9D9D9" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/table_area_pre"
+                android:layout_width="36dp"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/left_arrow_slector" />
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/tables_area_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="none" />
+
+            <ImageView
+                android:id="@+id/tables_area_next"
+                android:layout_width="36dp"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/right_arrow_selector" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_light" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.zhongmei.bty.snack.orderdish.view.TouchGridView
+                android:id="@+id/booking_create_gridView_desk"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:clipToPadding="false"
+                android:horizontalSpacing="4dp"
+                android:listSelector="@drawable/orderdish_select_dish_item_bg"
+                android:numColumns="4"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:scrollbars="none"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="4dp" />
+
+            <TextView
+                android:id="@+id/booking_create_desk_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableTop="@drawable/customer_empty_icon"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_line"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_table_select_ok"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="@drawable/commonbusiness_dialog_multi_choice_button_bottom"
+            android:text="@string/dialog_table_select_ok_button"
+            android:textColor="@color/text_white"
+            android:textSize="21sp" />
+
+    </LinearLayout>
+</FrameLayout>

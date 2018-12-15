@@ -1,0 +1,85 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customer_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/slideView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#F1F1F1"
+            android:orientation="vertical">
+
+            <fragment
+                android:id="@+id/fragment_title_bar"
+                class="com.zhongmei.bty.dinner.orderdish.TitleBarFragment_"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></fragment>
+
+            <include layout="@layout/beauty_customer_title" />
+
+            <android.support.v4.widget.DrawerLayout
+                android:id="@+id/drawer"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/customer_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"></RelativeLayout>
+
+                <!--<com.zhongmei.bty.basemodule.notifycenter.view.NotifyCenterView_
+                    android:id="@+id/drawer_left"
+                    android:layout_width="@dimen/notification_popup_width"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:background="@color/text_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical" />-->
+            </android.support.v4.widget.DrawerLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/menu_shadow_bg"
+            android:visibility="gone" />
+
+        <com.zhongmei.bty.dinner.table.view.DinnerNotifyBubble_
+            android:id="@+id/nb_notify"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="top|right"
+            android:layout_marginRight="@dimen/bubble_margin_right"
+            android:layout_marginTop="40dp"
+            android:visibility="invisible" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/left_menu"
+        android:layout_width="190dip"
+        android:layout_height="fill_parent"
+        android:background="@drawable/cashier_slide_menu_bg"
+        android:visibility="gone">
+
+        <include layout="@layout/customer_slide_menu" />
+    </LinearLayout>
+
+    <ViewSwitcher
+        android:id="@+id/viewSwitcher"
+        android:layout_width="@dimen/switcher_listview_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_marginRight="@dimen/switcher_margin_right"
+        android:background="@android:color/transparent"
+        android:visibility="invisible" />
+</FrameLayout>

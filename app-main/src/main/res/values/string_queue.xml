@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="queue_app_name">排队</string>
+    <string name="queue_list_title">排队</string>
+    <string name="queue_setting_title">播放列表</string>
+    <string name="queue_desk_label">等位桌数</string>
+    <string name="queue_current_label">当前</string>
+    <string name="queue_null">无</string>
+    <string name="queue_list_label">排队列表</string>
+    <string name="queue_setting_title_clear">排队清零</string>
+    <string name="queue_create_title_label">创建排队</string>
+    <string name="queue_voice_list_label">语音列表</string>
+    <string name="queue_voice_play">语音播放</string>
+    <string name="queue_list_ing">正在排队</string>
+    <string name="queue_list_pass">过号</string>
+    <string name="queue_list_in">入场</string>
+    <string name="queue_list_remind">提醒</string>
+    <string name="queue_waitting">已等待</string>
+    <string name="queue_waitting_hour">%1$d小时</string>
+    <string name="queue_waitting_min">%1$d分钟</string>
+    <string name="queue_list_title_label">排队列表</string>
+    <string name="queue_mananger">排队管理</string>
+    <string name="queue_clean_all">全部清零</string>
+    <string name="queue_clean">清零</string>
+    <string name="queue_list_clean_info">确定清零所有队列</string>
+    <string name="queue_clean_table_count">%1$s桌</string>
+    <string name="queue_clean_person_count">(%1$s人)</string>
+    <string name="queue_hint_takenumber_personcount">请输入就餐人数</string>
+    <string name="queue_personcount_codititon">取号人数须大于0</string>
+    <string name="queue_phone_format">请输入正确的电话号码</string>
+    <string name="queue_count_format">请输入人数</string>
+    <string name="queue_name_format">请输入名称</string>
+    <string name="queue_hint_takenumber_mobileNo">电话</string>
+    <string name="queue_hint_takenumber_personname">称呼</string>
+    <string name="queue_button_takenumber_text">取号</string>
+    <string name="queue_info_sex_man">先生</string>
+    <string name="queue_info_sex_woman">女士</string>
+    <string name="queue_history_list_title">历史记录</string>
+    <string name="queue_docall_label">叫号</string>
+    <string name="queue_notprint_printinfo">未设置打印机信息</string>
+    <string name="queue_takeout_phoneno_prompt">请输入手机号，以便提醒你用餐!</string>
+    <string name="queue_takeno_successed">排队成功</string>
+    <string name="queue_takeno_save_faild">排队数据保存失败</string>
+    <string name="queue_line_empty">没有队列，请先设置队列</string>
+    <string name="queue_send_message_successed">排队短信已发送</string>
+    <string name="queue_send_message_faild">排队短信发送失败</string>
+    <string name="queue_queue_phone_faild">自助语音发送失败</string>
+    <string name="queue_phone_success">操作成功！</string>
+    <string name="queue_keyboard_clean">清除</string>
+    <string name="queue_anonymous">匿名客户</string>
+    <string name="queue_speech_correct_format_toast">请合成正确的语音格式</string>
+    <string name="queue_voice_delete_info">确认删除？</string>
+    <string name="queue_set_period_toast">请在后台设置预订时段</string>
+    <string name="queue_auto_title">\n自助排队取号系统</string>
+    <string name="queue_auto_takenumber">取号流程</string>
+    <string name="queue_auto_input_phone_text">输入就餐人数及联系电话</string>
+    <string name="queue_auto_btn_takenumber_text">点击取号按钮</string>
+    <string name="queue_call_number">正在叫号</string>
+    <string name="queue_pre_comein">准备入场</string>
+    <string name="queue_ex_menu_detail">排队预点菜详情</string>
+    <string name="queue_dish_memo">订单备注：</string>
+    <string name="idle_table_list_label">空闲桌台</string>
+    <string name="queue_select_table_first">请选择桌台后再次开台</string>
+    <string name="queue_fastfood_unable_opentable">快餐模式无法直接开台，请选择直接入场</string>
+    <string name="queue_no_permission">抱歉!您没有此业务权限</string>
+    <string name="desk">桌</string>
+    <string name="queue_person">人</string>
+    <string name="please_input_phone_to_notice_you">请输入手机号，以便提醒你用餐!</string>
+    <string name="direct_entry">直接入场</string>
+    <string name="entry_and_open_table">入场并开台</string>
+    <string name="queue_desk_occupied">已占用</string>
+    <string name="queue_waiting_time" formatted="false">排队时间 %s</string>
+    <string name="queue_line_name_all">全部排队</string>
+    <string name="queue_line_name" formatted="false">%s(%d-%d人)</string>
+    <string name="queue_line_name2" formatted="false">%s(%d人以上)</string>
+    <string name="queue_number" formatted="false">%s号</string>
+    <string name="queue_reprint_receipt">小票重打</string>
+    <string name="queue_pre_menu">预点菜单</string>
+    <string name="queue_remind_phonenumber">电话</string>
+    <string name="queue_remind_message">短信</string>
+    <string name="queue_remind_auto_voice">自助语音</string>
+    <string name="queue_desk_idle" formatted="false">%s有空闲桌台( %d )</string>
+    <string name="queue_file_selection">请选择文件</string>
+    <string name="queue_voice_first">已到第一首</string>
+    <string name="queue_voice_last">已到最后一首</string>
+    <string name="queue_phone_disconnected">电话未连接，请检查</string>
+    <string name="queue_remind_sms">短信提醒</string>
+    <string name="queue_remind_call">电话提醒</string>
+    <string name="queue_remind_voice">语音提醒</string>
+    <string name="queue_remind_reprint">小票重打</string>
+    <string name="queue_create_phone_hint">请输入联系电话（选填）</string>
+    <string name="queue_create_name_hint">请输入顾客姓名（选填）</string>
+    <string name="queue_tv_client_service_error" formatted="false">分屏显示排队信息失败，请检查网络或重新设置ip地址(%s)</string>
+    <string name="queue_old_can_just_select_1_table">移动门店／老版本预订开台只能选择一个桌台</string>
+    <string name="queue_item_modify_hint">排队人数不在该队列范围，需要重新排队取号</string>
+    <string name="queue_memo_hint">你可以为顾客做10个字的备注</string>
+    <string name="queue_list_item_memo">客人备注：%s</string>
+    <string name="queue_ststus_canceled">已取消</string>
+    <string name="queue_ststus_passed">已过号</string>
+    <string name="queue_ststus_queuing">排队中</string>
+    <string name="queue_ststus_entranced">已入场</string>
+
+    <string name="queue_detail_queue_no_label">排队号：</string>
+    <string name="queue_detail_queue_line_label">队列名称：</string>
+    <string name="queue_detail_queue_customer_label">顾客：</string>
+    <string name="queue_detail_queue_mobile_label">联系电话：</string>
+    <string name="queue_detail_queue_person_count_label">排队人数：</string>
+    <string name="queue_detail_queue_dish_label">预点菜单：</string>
+    <string name="queue_detail_queue_memo_label">客人备注：</string>
+    <string name="queue_detail_queue_dish_detail_label">查看详情</string>
+    <string name="queue_detail_queue_status_label">排队状态：</string>
+    <string name="queue_detail_queue_create_time_label">排队时间：</string>
+    <string name="queue_detail_queue_waite_time_label">已等待时长：</string>
+    <string name="queue_detail_queue_pass_time_label">过号时间：</string>
+    <string name="queue_detail_queue_in_time_label">入场时间：</string>
+    <string name="queue_detail_queue_cancel_time_label">取消时间：</string>
+    <string name="queue_detail_queue_remind_label">提醒状态：</string>
+    <string name="queue_detail_queue_reminded">已提醒</string>
+    <string name="queue_detail_queue_not_remind">未提醒</string>
+    <string name="queue_predict_wait_time_hint">预计%s</string>
+    <string name="queue_item_wait_table_count_hint">还需等待%s桌</string>
+
+    <string name="queue_loss_rate_rank">排队流失率报表</string>
+    <string name="queue_voice_setting_call_template">请%s顾客用餐了</string>
+    <string name="queue_voice_setting_next_call_template">请%s顾客准备用餐</string>
+    <string name="queue_predict_time_at_once_in">即将入场</string>
+    <string name="queue_predict_wait_not">订单数据量不够，无法预估。。。</string>
+    <string name="queue_analysis_no_suggestion">门店经营良好，暂无建议。</string>
+    <string name="queue_analysis_suggestion">%s流失率较高，建议增加桌数。</string>
+    <string name="queue_system_call_temp">请%s准备用餐</string>
+    <string name="queue_all_queue_line">全部队列</string>
+    <string name="queue_count">排队量</string>
+    <string name="queue_meal_count">入场量</string>
+    <string name="queue_out_count">过号量</string>
+    <string name="queue_loss_rate">流失率</string>
+    <string name="queue_total">总计</string>
+    <string name="queue_report_analysis">统计分析</string>
+
+
+    <string name="queue_home_title_search_title">搜索列表</string>
+    <string name="queue_home_title_search_detail">搜索详情</string>
+
+    <string name="queue_empty_table_title_hint">%s的空闲桌台</string>
+</resources>

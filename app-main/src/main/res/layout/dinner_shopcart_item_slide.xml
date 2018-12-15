@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="409dp"
+    android:layout_height="match_parent"
+    android:background="#c6ced6"
+    android:gravity="center_vertical|right"
+    android:orientation="horizontal"
+    android:paddingRight="20dp">
+
+    <ImageView
+        android:id="@+id/slide_status_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dinner_orderdish_dish_ready_icon" />
+
+    <TextView
+        android:id="@+id/slide_status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="18sp"
+        android:gravity="center_vertical"
+        android:text="@string/dinner_table_info_dishservice_status0"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
+</LinearLayout>

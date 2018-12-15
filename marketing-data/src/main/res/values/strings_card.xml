@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="eccard_status_all">全部</string>
+    <string name="eccard_not_make_card">未制卡</string>
+    <string name="eccard_unsale">未出售</string>
+    <string name="eccard_unactive">未激活</string>
+    <string name="eccard_actived">已激活</string>
+    <string name="eccard_disabled">已停用</string>
+    <string name="eccard_invalided">已废除</string>
+    <string name="card_change_card">换卡</string>
+    <string name="card_order_status_have_account">已到账</string>
+    <string name="card_order_status_no_account">未到账</string>
+    <string name="card_service_privilege_name">次卡服务</string>
+    <string name="card_service_privilege_wx">微信活动</string>
+</resources>

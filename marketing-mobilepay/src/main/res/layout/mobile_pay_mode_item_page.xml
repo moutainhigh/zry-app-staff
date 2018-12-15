@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingTop="0.5dp"
+    android:paddingBottom="0.5dp">
+
+    <TextView
+        android:id="@+id/item1"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="13sp"
+        tools:text="一码支付" />
+
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_line" />
+
+    <TextView
+        android:id="@+id/item2"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="13sp"
+        tools:text="一码支付" />
+
+    <View
+        android:layout_width="0.5dp"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_line" />
+
+    <TextView
+        android:id="@+id/item3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textSize="13sp"
+        tools:text="一码支付" />
+
+</LinearLayout>

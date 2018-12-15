@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/write"
+    android:orientation="vertical">
+
+    <!--<include-->
+    <!--android:id="@+id/beauty_order_card_project_title"-->
+    <!--layout="@layout/beauty_order_membership_card_project_title" />-->
+
+    <TextView
+        style="@style/beauty_middle_content_titlte_style"
+        android:text="@string/beauty_order_count_service" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"
+        android:layout_marginTop="@dimen/beauty_content_title_margin" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp">
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/beauty_order_card_project_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/write"
+            android:scrollbars="none" />
+
+        <include
+            android:id="@+id/include_empty_status"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            layout="@layout/beauty_layout_empty_status" />
+    </FrameLayout>
+
+</LinearLayout>

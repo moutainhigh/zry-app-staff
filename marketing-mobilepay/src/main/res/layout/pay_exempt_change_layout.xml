@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/pay_exempt_change_popup_width"
+    android:layout_height="@dimen/pay_exempt_change_popup_height"
+    android:background="@drawable/pay_popup"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="@dimen/pay_exempt_change_popup_list_marginBottom"
+        android:divider="@color/pay_bg"
+        android:dividerHeight="@dimen/pay_exempt_change_popup_list_dividerHeight"
+        android:listSelector="@color/bg_white"
+        android:paddingLeft="@dimen/pay_exempt_change_popup_list_paddingLeftAddRight"
+        android:paddingRight="@dimen/pay_exempt_change_popup_list_paddingLeftAddRight"
+        android:paddingTop="@dimen/pay_exempt_change_popup_list_paddingTop"
+        android:scrollbars="none"></ListView>
+
+</LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dialog_operate_weight">380dp</dimen>
+    <dimen name="dialog_operate_height">512dp</dimen>
+    <dimen name="dialog_operate_title_height">70dp</dimen>
+    <dimen name="dialog_operate_title_size">22sp</dimen>
+    <dimen name="dialog_operate_title2_size">16sp</dimen>
+    <dimen name="dialog_operate_submit_size">22sp</dimen>
+    <dimen name="dialog_operate_submit_height">60dp</dimen>
+    <dimen name="dialog_operate_reason_list_item_height">58dp</dimen>
+    <dimen name="dialog_operate_reason_list_item_size">18sp</dimen>
+    <dimen name="dialog_operate_reason_edit_height">90.4dp</dimen>
+    <dimen name="dialog_operate_reason_edit_size">18sp</dimen>
+    <dimen name="dialog_operate_reason_title_height">28dp</dimen>
+    <dimen name="dialog_operate_reason_title_size">14sp</dimen>
+    <dimen name="dialog_operate_reason_title_padding">10dp</dimen>
+    <dimen name="dialog_operate_reason_margin">26dp</dimen>
+    <dimen name="dialog_operate_reason_content_margin">11.2dp</dimen>
+    <dimen name="dialog_operate_views_marginTop">16dp</dimen>
+
+</resources>

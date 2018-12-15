@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/beauty_bg_white"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_condition"
+        android:layout_width="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:layout_height="50dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_all"
+                style="@style/beauty_orderdish_table_rb"
+                android:layout_marginRight="10dp"
+                android:text="全部" />
+
+            <RadioButton
+                android:id="@+id/rb_empty"
+                style="@style/beauty_orderdish_table_rb"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="空闲" />
+
+            <RadioButton
+                android:id="@+id/rb_busy"
+                style="@style/beauty_orderdish_table_rb"
+                android:layout_marginLeft="10dp"
+                android:text="占用" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/layout_zone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/beauty_bg_layout_gray"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/beauty_color_333333"
+                android:textSize="14sp"
+                android:text="区域: " />
+
+            <TextView
+                android:id="@+id/tv_zone"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="14dp"
+                android:maxLength="5"
+                android:drawableRight="@drawable/beauty_ic_room_arrow_down"
+                android:textColor="@color/beauty_color_333333"
+                android:drawablePadding="5dp"
+                android:textSize="14sp"
+                android:text="全部" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/view_condition_divide"
+        style="@style/beauty_horizontal_line"
+        android:layout_below="@id/rl_condition"></View>
+
+    <LinearLayout
+        android:id="@+id/layout_control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:textColor="@color/beauty_color_black"
+            android:background="@drawable/beauty_btn_cancel_selector"
+            android:textSize="16sp"
+            android:text="@string/beauty_cancel" />
+
+        <Button
+            android:id="@+id/btn_sure"
+            android:layout_width="140dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/beauty_btn_purple_selector"
+            android:textSize="16sp"
+            android:textColor="@color/beauty_text_white"
+            android:text="@string/beauty_sure" />
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/view_control_divide"
+        style="@style/beauty_horizontal_line"
+        android:layout_above="@id/layout_control"></View>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/gv_tables"
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:paddingRight="22dp"
+        android:paddingTop="13dp"
+        android:paddingBottom="13dp"
+        android:layout_height="match_parent"
+        android:layout_below="@id/view_condition_divide"
+        android:layout_above="@id/view_control_divide">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+    <ListView
+        android:id="@+id/lv_zones"
+        android:layout_width="115dp"
+        android:layout_height="240dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/rl_condition"
+        android:divider="#FFE6E9ED"
+        android:dividerHeight="1dp"
+        android:visibility="gone"
+        android:background="@drawable/beauty_bg_orderdish_zone_select"
+        android:scrollbars="none"
+        android:cacheColorHint="@null"
+        android:listSelector="@android:color/transparent"
+        android:layout_marginTop="-10dp"
+        android:layout_marginRight="15dp" />
+
+</RelativeLayout>

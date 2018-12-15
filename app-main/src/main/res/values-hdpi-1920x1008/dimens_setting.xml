@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="setting_title_bar_height">58.6dp</dimen>
+    <dimen name="setting_left_title_height">39dp</dimen>
+    <dimen name="setting_left_title_margin">17.3dp</dimen>
+    <dimen name="setting_left_content_height">53dp</dimen>
+    <dimen name="setting_left_content_margin">30.6dp</dimen>
+
+    <dimen name="setting_title_bar_size">20sp</dimen>
+    <dimen name="setting_left_title_size">14sp</dimen>
+    <dimen name="setting_left_content_size">16sp</dimen>
+
+    <!--正餐-->
+    <dimen name="setting_dinner_card_margin_top">20.6dp</dimen>
+    <dimen name="setting_dinner_card_margin_left">30.4dp</dimen>
+    <dimen name="setting_dinner_cards_horizontal_spacing">19.3dp</dimen>
+    <dimen name="setting_dinner_cards_height">266.67dp</dimen>
+    <dimen name="setting_dinner_card_image_margin_top">28dp</dimen>
+    <dimen name="setting_dinner_card_text_margin">14.6dp</dimen>
+
+    <dimen name="setting_dinner_card_template_size">18.6sp</dimen>
+    <dimen name="setting_dinner_card_template_content_size">10.67sp</dimen>
+
+    <dimen name="setting_dinner_switch_item_title_margin_top">26dp</dimen>
+    <dimen name="setting_dinner_switch_item_margin_left">34.6dp</dimen>
+    <dimen name="setting_dinner_switch_item_height">53.33dp</dimen>
+    <dimen name="setting_dinner_switch_item_margin_top">11.33dp</dimen>
+    <dimen name="setting_dinner_switch_item_text_margin_left">19.33dp</dimen>
+    <dimen name="setting_dinner_switch_item_btn_margin_right">15.33dp</dimen>
+    <dimen name="setting_dinner_switch_item_btn_width">56dp</dimen>
+    <dimen name="setting_dinner_switch_item_btn_height">32dp</dimen>
+    <dimen name="setting_dinner_switch_items_margin">22.6dp</dimen>
+    <dimen name="setting_dinner_switch_items_drawable_padding">11.3dp</dimen>
+
+    <dimen name="setting_dinner_switch_item_title_size">14.67sp</dimen>
+    <dimen name="setting_dinner_switch_item_size">16sp</dimen>
+
+    <!--快餐-->
+    <dimen name="setting_snack_time_items_margin">22dp</dimen>
+    <dimen name="setting_snack_num_editview_width">70.67dp</dimen>
+    <dimen name="setting_snack_num_editview_height">32dp</dimen>
+
+    <dimen name="setting_snack_content_item_describe_size">12sp</dimen>
+
+    <!--支付设置-->
+    <dimen name="setting_pay_cards_horizontal_spacing">19.33dp</dimen>
+    <dimen name="setting_pay_card_bg_height">93.33dp</dimen>
+    <dimen name="setting_pay_card_margin_bg">6.66dp</dimen>
+    <dimen name="setting_pay_bottom_btn_height">53.33dp</dimen>
+    <dimen name="setting_pay_bottom_btn_margin_top">30.67dp</dimen>
+
+    <dimen name="setting_pay_method_describe_size">13.33sp</dimen>
+    <dimen name="setting_pay_bottom_btn_size">17.33sp</dimen>
+
+    <!--排队设置-->
+    <dimen name="setting_queue_memager_card_height">186.67dp</dimen>
+    <dimen name="setting_queue_memager_card_title_height">53.33dp</dimen>
+    <dimen name="setting_queue_memager_card_title_btn_margin">10dp</dimen>
+    <dimen name="setting_queue_memager_card_title_btn_width">48dp</dimen>
+    <dimen name="setting_queue_memager_card_title_btn_height">26.67dp</dimen>
+    <dimen name="setting_queue_memager_card_content_margin_top">16dp</dimen>
+    <dimen name="setting_queue_voice_title_bar_width">300dp</dimen>
+    <dimen name="setting_queue_voice_title_bar_height">37.33dp</dimen>
+    <dimen name="setting_queue_voice_edit_height">106.66dp</dimen>
+    <dimen name="setting_queue_voice_edit_padding">10dp</dimen>
+
+    <dimen name="setting_queue_memager_card_title_size">16sp</dimen>
+    <dimen name="setting_queue_memager_card_content_size">13.33sp</dimen>
+    <dimen name="setting_queue_memager_card_content_size2">10.67sp</dimen>
+    <dimen name="setting_queue_voice_content_size">14.67sp</dimen>
+
+    <!--打印设置   以后独立出来，尺寸重新定义-->
+    <dimen name="print_setting_content_margin_top">26dp</dimen>
+    <dimen name="print_setting_content_margin_left">34.6dp</dimen>
+
+    <dimen name="print_setting_item_height">53.33dp</dimen>
+    <dimen name="print_setting_item_height2">66.67dp</dimen>
+    <dimen name="print_setting_item_margin_top">11.33dp</dimen>
+    <dimen name="print_setting_item_content_margin_left">19.33dp</dimen>
+    <dimen name="print_setting_item_content_margin_right">15.33dp</dimen>
+    <dimen name="print_setting_item_btn_width">56dp</dimen>
+    <dimen name="print_setting_item_btn_height">32dp</dimen>
+    <dimen name="print_setting_item_drawable_padding">11.3dp</dimen>
+
+    <dimen name="print_setting_item_title_size">14.67sp</dimen>
+    <dimen name="print_setting_item_size">16sp</dimen>
+    <dimen name="print_setting_btn_size">17.33sp</dimen>
+
+    <dimen name="print_setting_items_margin">22.6dp</dimen>
+
+    <dimen name="print_setting_little_items_margin">22dp</dimen>
+
+</resources>

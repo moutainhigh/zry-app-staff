@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:descendantFocusability="blocksDescendants"
+    android:layout_height="match_parent">
+
+    <CheckBox
+        android:id="@+id/cb_seat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:button="@null"
+        android:textColor="@color/orderdish_choice_seat_selector"
+        android:text="S1"
+        android:textSize="@dimen/text_16"
+        android:gravity="center"
+        android:background="@drawable/orderdish_cb_bg_choise_seat_selector"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
+        android:clickable="false"
+        android:padding="10dp" />
+
+</LinearLayout>

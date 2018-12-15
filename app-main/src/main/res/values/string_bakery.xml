@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bakery_app_name">烘焙</string>
+    <string name="bakery_order_dish">点单</string>
+    <string name="bakery_booking_management">预定管理</string>
+    <string name="bakery_pad_no">No:%1$s</string>
+    <string name="bakery_input_phone">请输入手机号</string>
+
+
+    <!--日期控件-->
+    <string name="pickerview_year">年</string>
+    <string name="pickerview_month">月</string>
+    <string name="pickerview_day">日</string>
+    <string name="pickerview_hours">时</string>
+    <string name="pickerview_minutes">分</string>
+    <string name="pickerview_seconds">秒</string>
+
+    <string name="bakery_manager_list_refresh_empty">暂无预定哟～</string>
+    <string name="bakery_manager_list_search_empty">暂无搜索内容</string>
+    <string name="bakery_manager_list_property_source">来源</string>
+    <string name="bakery_manager_list_property_contact">创建时间</string>
+    <string name="bakery_manager_list_property_receiver_phone">收货人/电话</string>
+    <string name="bakery_manager_list_property_delivery_time">配送/取货时间</string>
+    <string name="bakery_manager_list_property_delivery_type">配送方式</string>
+    <string name="bakery_manager_list_property_payment_info">支付信息</string>
+    <string name="bakery_manager_list_property_status">状态</string>
+    <string name="bakery_manager_booking_create">创建预定</string>
+    <string name="bakery_manager_detail_booking_person">（预订人）</string>
+    <string name="bakery_manager_detail_receiver_person">（收货人）</string>
+    <string name="bakery_manager_detail_person_book_phone">电话：%s</string>
+    <string name="bakery_manager_detail_send_message">短信</string>
+    <string name="bakery_manager_detail_edit">编辑</string>
+    <string name="bakery_manager_detail_call_phone">电话</string>
+    <string name="bakery_manager_detail_goods_info">商品信息</string>
+    <string name="bakery_manager_detail_goods_items_quantity">×%s</string>
+    <string name="bakery_manager_detail_goods_price">{HBF}%1.2f</string>
+    <string name="bakery_manager_detail_goods_price_ne">-{HBF}%1.2f</string>
+    <string name="bakery_manager_detail_change">找零：-{HBF}%1.2f</string>
+    <string name="bakery_manager_detail_goods">商品：</string>
+    <string name="bakery_manager_detail_adds">加料：%s</string>
+    <string name="bakery_manager_detail_module_empty">无</string>
+    <string name="bakery_manager_detail_order_comment">整单备注：</string>
+    <string name="bakery_manager_detail_single_comment">单品备注：</string>
+    <string name="bakery_manager_detail_pre_order_info">预订信息</string>
+    <string name="bakery_manager_detail_receiver_name_phone">收货人/电话：</string>
+    <string name="bakery_manager_detail_delivery_way">配送方式：</string>
+    <string name="bakery_manager_detail_delivery_time">配送/取货时间：</string>
+    <string name="bakery_manager_detail_delivery_address">配送地址：</string>
+    <string name="bakery_manager_detail_pay_info">支付明细</string>
+    <string name="bakery_manager_detail_pre_pay">预付：</string>
+    <string name="bakery_manager_detail_pre_pay_fail">支付失败</string>
+    <string name="bakery_manager_detail_pre_pay_returned">已退款</string>
+    <string name="bakery_manager_detail_rest_pay">尾款：</string>
+    <string name="bakery_manager_detail_rest_pay_returned">已退款</string>
+    <string name="bakery_manager_detail_discount_info">优惠信息</string>
+    <string name="bakery_manager_detail_discount_vip">会员价：</string>
+    <string name="bakery_manager_detail_discount_cut">折扣：</string>
+    <string name="bakery_manager_detail_discount_ticket">代金券：</string>
+    <string name="bakery_manager_detail_refuse">拒绝</string>
+    <string name="bakery_manager_detail_accept">接受</string>
+    <string name="bakery_manager_detail_cancel_book">取消预订</string>
+    <string name="bakery_manager_detail_receive_goods">收货</string>
+    <string name="bakery_manager_detail_pay">收取尾款{HBF}%1.2f</string>
+    <string name="bakery_manager_detail_sales_return">退货</string>
+    <string name="bakery_manager_detail_reprint">补打</string>
+    <string name="bakery_manager_detail_print">开票</string>
+    <string name="bakery_manager_detail_empty">暂无预定详情哟～</string>
+    <string name="bakery_manager_detail_title">预定详情</string>
+    <string name="bakery_manager_detail_trade_id">订单号：%s</string>
+    <string name="bakery_not_supported">暂不支持</string>
+    <string name="bakery_dish_left_add_imformation">填写配送信息</string>
+    <string name="bakery_booking">预订</string>
+    <string name="bakery_manager_create">创建预定</string>
+    <string name="bakery_booking_form_selfcollection">到店自取</string>
+    <string name="bakery_booking_form_delivery">配送上门</string>
+    <string name="bakery_booking_submit">提交预订</string>
+    <string name="bakery_booking_gua">预定订单不能挂单！</string>
+    <string name="bakery_receiver_name_can_not_empty">姓名为必填项</string>
+    <string name="bakery_phone_number_error">手机号码不正确</string>
+    <string name="input_name">请输入姓名</string>
+    <string name="bakery_receiver">收货人</string>
+    <string name="bakery_take_time">取货时间</string>
+    <string name="bakery_booker_info">预约人信息（用于发送订单确认通知）</string>
+    <string name="bakery_delivery_info">配送信息</string>
+    <string name="bakery_null">--</string>
+    <string name="bakery_status_unprocess">未处理</string>
+    <string name="bakery_status_refused">已拒绝</string>
+    <string name="bakery_status_prepared">待取货</string>
+    <string name="bakery_status_cancelled">已取消</string>
+    <string name="bakery_status_overdue">已逾期</string>
+    <string name="bakery_status_finished">已完成</string>
+    <string name="bakery_status_returned">已退货</string>
+    <string name="bakery_payment_tip_book">(预付)</string>
+    <string name="bakery_payment_tip_sale">(尾款)</string>
+    <string name="bakery_payment_tip_returned">(退款)</string>
+    <string name="bakery_payment_tip_fail">支付失败</string>
+    <string name="bakery_payment_tip_unpay">未支付</string>
+    <string name="bakery_payment_tip_refunded">已退款</string>
+    <string name="bakery_payment_tip_refunding">退款中</string>
+    <string name="bakery_payment_tip_refundfail">退款失败</string>
+    <string name="bakery_sex_female">女士</string>
+    <string name="bakery_sex_male">先生</string>
+    <string name="bakery_phone">电话：%s</string>
+    <string name="bakery_customer_anonymous">匿名用户</string>
+    <string name="bakery_booker">预约人</string>
+    <string name="bakery_send_message_success">短信发送成功</string>
+    <string name="bakery_send_message_fail">短信发送失败</string>
+
+    <string name="bakery_detail_pays_total">商品合计：</string>
+    <string name="bakery_detail_pays_extra">附加费：</string>
+    <string name="bakery_detail_pays_service">服务费：</string>
+    <string name="bakery_detail_pays_tax">消费税：</string>
+    <string name="bakery_detail_pays_deposit">押金：</string>
+    <string name="bakery_detail_pays_discount">优惠合计：</string>
+    <string name="bakery_detail_pays_amount">实际应收：</string>
+    <string name="bakery_detail_pays_erase">抹零：</string>
+    <string name="bakery_detail_pays_erase1">抹零</string>
+    <string name="bakery_detail_pays_offer">支付优惠：</string>
+    <string name="bakery_detail_pays_excess">溢收：</string>
+    <string name="bakery_detail_pays_excess1">溢收</string>
+    <string name="bakery_detail_pays_real">实际已付：</string>
+    <string name="bakery_detail_property_property">做法：%s</string>
+    <string name="bakery_detail_property_standard">规格：</string>
+    <string name="bakery_detail_property_label">标签：</string>
+    <string name="bakery_detail_property_memo">备注：</string>
+    <string name="bakery_manager_detail_cancel_booking_info">取消预定</string>
+    <string name="bakery_take">顾客自取</string>
+    <string name="bakery_delivery">配送上门</string>
+    <string name="bakery_delivery_type">配送方式：</string>
+
+    <string name="bakery_delivery_create_time">创建时间：</string>
+    <string name="bakery_edit_success">修改成功</string>
+    <string name="bakery_take_time_can_not_empty">未填写取货时间</string>
+
+    <string name="bakery_print_interface_exception">打印网络接口异常</string>
+
+
+    <string-array name="bakery_week">
+        <item>星期天</item>
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+    </string-array>
+
+    <string-array name="bakery_payment_tips">
+        <item>(预付)</item>
+        <item>(尾款)</item>
+        <item>(退货)</item>
+    </string-array>
+
+    <string name="bakery_booking_money">预付金</string>
+    <string name="bakery_input_booking_money">请输入预付金</string>
+    <string name="bakery_booking_refund_money">预付款退款金额: </string>
+    <string name="bakery_cancel_booking_success">取消预定成功!</string>
+    <string name="bakery_shop_pick_up">到店取货</string>
+    <string name="bakery_refund_success">重新退款成功</string>
+
+    到店取货
+
+
+</resources>

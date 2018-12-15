@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="720dp"
+    android:layout_height="560dp"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/userlist_title"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/userlist_label"
+            style="@style/layout.m.w"
+            android:layout_width="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/userlist_label"
+            android:textColor="@color/orange"
+            android:textSize="@dimen/text_24" />
+
+        <ImageButton
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="right"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/close_btn" />
+
+        <View
+            style="@style/layout.m.w"
+            android:layout_height="1dp"
+            android:layout_below="@id/userlist_label"
+            android:layout_marginTop="16dp"
+            android:background="#F2F2F2" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
+
+        <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/user_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="40dp"
+            android:clipToPadding="false"
+            android:horizontalSpacing="12dip"
+            android:numColumns="5"
+            android:verticalSpacing="10dip" />
+
+        <com.zhongmei.bty.basemodule.customer.dialog.country.SideBar
+            android:id="@+id/sidebar"
+            android:layout_width="30dip"
+            android:layout_height="fill_parent"
+            android:layout_gravity="right|center" />
+    </FrameLayout>
+
+</LinearLayout>

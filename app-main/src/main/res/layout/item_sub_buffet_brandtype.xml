@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="42dp"
+    android:paddingTop="0.5dp"
+    android:paddingBottom="0.5dp"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/buffet_list_item_bg"
+        android:gravity="center"
+        android:lines="1"
+        android:textColor="@color/buffetdish_two_type_text_selector"
+        android:textSize="13dp"
+        tools:text="清蒸" />
+
+    <View
+        android:id="@+id/v_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dcdee0"
+        android:visibility="invisible" />
+</LinearLayout>

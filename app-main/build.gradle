@@ -1,0 +1,199 @@
+apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+repositories {
+    flatDir {
+        dirs 'libs', '../marketing-data/libs', '../marketing-basemodule/libs'
+    }
+}
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION
+    buildToolsVersion BUILD_TOOLS_VERSION
+    useLibrary 'org.apache.http.legacy'
+
+    defaultConfig {
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
+        multiDexEnabled true
+        applicationId calm.applicationId
+        //versionCode calm.versionCode
+        //versionName calm.versionName
+        //该变量用于启动自定义票据 false不启动  true启动
+        buildConfigField "boolean", "CUSTOMIZATION_TICKET_SYSTEM", "true"
+        //该变量用于配置是否内置AD模块
+        buildConfigField "boolean", "INNER_AD_MODULE", "true"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            res.srcDirs = ["src/main/res",
+                           "src/main/res-beauty"
+            ]
+        }
+    }
+
+    signingConfigs {
+
+        release {
+            storeFile file('../release.keystore')
+            storePassword "zhongmeiyunfu"
+            keyAlias "zhongmei"
+            keyPassword "zhongmeiyunfu"
+        }
+
+        develop {
+            storeFile file('../develop.jks')
+            storePassword "develop"
+            keyAlias "pigeon88"
+            keyPassword "develop"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            manifestPlaceholders = [UMENG_APPKEY_VALUE: "578364e5e0f55ab8400021e9"]
+            buildConfigField "int", "MY_BUILD_TYPE", "0"
+            buildConfigField "boolean", "ALLOW_COMPRESS", "true"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            testCoverageEnabled false
+            signingConfig signingConfigs.release
+            manifestPlaceholders = [UMENG_APPKEY_VALUE: "57a4064567e58e6c3b003735"]
+            buildConfigField "int", "MY_BUILD_TYPE", "2"
+            buildConfigField "boolean", "ALLOW_COMPRESS", "false"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        CI {
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            manifestPlaceholders = [UMENG_APPKEY_VALUE: "57a4064567e58e6c3b003735"]
+            buildConfigField "int", "MY_BUILD_TYPE", "4"
+            buildConfigField "boolean", "ALLOW_COMPRESS", "true"
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    //自动追加版本号和版本名称
+    android.applicationVariants.all {
+        variant ->
+            variant.outputs.each {
+                output -> output.outputFile = new File(output.outputFile.parent, "yf_v" + variant.versionName + "_" + new Date().format("yyMMdd") + "_" + buildType.name + ".apk")
+            }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+
+    lintOptions {
+        //checkReleaseBuilds false
+        abortOnError false
+        ignoreWarnings false
+        checkReleaseBuilds false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    compile third.AAapi
+    apt third.AA
+
+    compile fileTree(include: '*.jar', dir: 'libs')
+    //compile(name: 'IoTSdk_release_v1.0.5', ext: 'aar')
+    //compile(name: 'IoTSdk_Pos_release_v1.0.5', ext: 'aar')
+
+    compile androidsdk.cardview
+
+    compile third.ptrLoadMore
+    compile third.ormlite
+    compile third.swipeToLoadLayout
+    compile third.swipemenulistview
+    compile third.okhttp3
+
+    compile project(':marketing-basemodule')
+    compile project(':marketing-common')
+    compile project(':yunfu-ui')
+    compile project(':marketing-data')
+    compile project(':marketing-mobilepay')
+    compile project(':marketing-beauty')
+    compile project(':yunfu-push')
+
+    //添加单元测试
+    testCompile androidsdk.junit
+    //testCompile androidsdk.mockito
+    androidTestCompile(androidsdk.testEspressoCore) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        transitive true
+    }
+    androidTestCompile(androidsdk.testRunner) {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile androidsdk.testRules
+    androidTestCompile("com.android.support:support-annotations:$SUPPORT_VERSION") {
+        force = true
+    }
+    compile third.kotlinStdlibJDK
+
+}
+
+apt {
+    arguments {
+        if (variant.outputs[0] != null) {
+            androidManifestFile variant.outputs[0].processResources.manifestFile
+            resourcePackageName 'com.zhongmei.yunfu'
+            trace true
+        }
+    }
+}
+
+/*guard {
+    findBugsConfig {
+        // 开启和关闭findbugs检测
+        enable = findbugsEnable.toBoolean()
+
+        reportLevel = "low"
+    }
+}*/
+
+/*studio_log {
+    enable true
+    executeTimeout 500
+    includePackage "com.zhongmei.bty"
+    excludePackage = [
+            'com.zhongmei.bty.bean',
+            'com.zhongmei.bty.entity'
+            ]
+}*/

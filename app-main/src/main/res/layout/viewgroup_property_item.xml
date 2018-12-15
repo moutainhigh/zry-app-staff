@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/bg_white"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:orientation="horizontal">
+
+        <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+            android:id="@+id/tv_title"
+            style="@style/buffet_trade_property_title"
+            android:text="@string/buffet_combo_type_hint" />
+
+        <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+            android:id="@+id/tv_property"
+            style="@style/buffet_trade_property_hint"
+            android:layout_toRightOf="@id/tv_title"
+            android:layout_alignBaseline="@id/tv_title"
+            android:layout_marginLeft="14dp"
+            android:text="属性" />
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/icon_right_arrow" />
+
+
+        <View
+            android:id="@+id/view_line"
+            style="@style/buffet_horizontal_line"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+</LinearLayout>

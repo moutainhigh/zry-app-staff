@@ -1,0 +1,13 @@
+include ':app-main',
+        ':marketing-data',
+        ':marketing-basemodule',
+        ':marketing-common',
+        ':marketing-mobilepay',
+        ':marketing-router',
+        ':marketing-beauty',
+        ':yunfu-context',
+        ':yunfu-db',
+        ':yunfu-http',
+        ':yunfu-push',
+        ':yunfu-ui'
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F0F3F6">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/setting_mobile_pay_setting_label"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        style="@style/setting_right_content_margin">
+
+        <TextView
+            style="@style/setting_switch_item_title_text"
+            android:text="@string/setting_mobile_pay_just_current_machine_alter" />
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                android:id="@+id/group_pay_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#333333"
+                android:textSize="@dimen/setting_dinner_switch_item_size"
+                android:layout_marginLeft="@dimen/setting_dinner_switch_item_text_margin_left"
+                android:text="@string/setting_open_mobile_pay_label" />
+
+            <TextView
+                android:id="@+id/group_pay_label2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                android:textColor="@color/settings_grayword"
+                android:textSize="@dimen/setting_snack_content_item_describe_size"
+                android:text="@string/setting_mobile_pay_instruction_text" />
+
+            <Button
+                android:id="@+id/btn_set_mobile_bay"
+                style="@style/setting_switch_item_btn" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

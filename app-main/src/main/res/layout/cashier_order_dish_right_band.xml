@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:id="@+id/order_dish_right_bottom"
+        style="@style/layout.m.w"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/order_foot_view"
+            layout="@layout/order_foot_view" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/text_orderPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center|left"
+                android:textColor="@color/text_gray"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/preferential_price"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center|right"
+                android:textColor="@color/text_gray"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/layout.m.w"
+            android:layout_gravity="center_vertical"
+            android:gravity="right"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/btn_order_dish_right_cash"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/cash_out_onclick"
+            android:text="@string/pay_for"
+            android:textColor="@color/text_white"
+            android:textSize="30sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/popSlidingDrawer"
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/cash_out_onclick"
+            android:text="@string/order_dish_open_cash_box"
+            android:textColor="@color/text_white"
+            android:textSize="30sp"
+            android:visibility="visible"></Button>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/showMenuView"
+        style="@style/layout.m.m"
+        android:layout_above="@id/order_dish_right_bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:paddingTop="1dp">
+
+            <ImageButton
+                android:id="@+id/image_function"
+                style="@style/layout.w.w"
+                android:background="@drawable/order_function_onclick" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <ImageButton
+                android:id="@+id/image_desk_name"
+                style="@style/layout.w.w"
+                android:background="@drawable/order_desk_onclick" />
+
+            <ImageButton
+                android:id="@+id/image_customer"
+                style="@style/layout.w.w"
+                android:background="@drawable/order_member_onclick" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#DADBDA" />
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/listView_selected_dish"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:divider="#00000000"
+            android:dividerHeight="0dp"
+            android:listSelector="@drawable/orderdish_select_dish_item_bg" />
+    </LinearLayout>
+
+</merge>

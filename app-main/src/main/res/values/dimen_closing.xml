@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="closing_margin_stroke">20dp</dimen>
+    <dimen name="closing_margin_top">16dp</dimen>
+    <dimen name="closing_date_size">16sp</dimen>
+    <dimen name="closing_button_print">124dp</dimen>
+    <dimen name="closing_button_print_hight">50dp</dimen>
+</resources>

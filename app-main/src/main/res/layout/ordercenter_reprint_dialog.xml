@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:background="@drawable/order_center_operate_dialog_background">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_operate_title_height"
+            android:background="@color/transparent">
+
+            <ImageButton
+                android:id="@+id/ordercenter_reprint_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+
+            <TextView
+                android:id="@+id/ordercenter_reprint_dialog_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/reprint_dialog_title"
+                android:textColor="#FFFF7901"
+                android:textSize="@dimen/dialog_operate_title_size" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+            android:layout_marginEnd="@dimen/dialog_operate_reason_margin"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dialog_operate_reason_title_height"
+                android:text="@string/reprint_dialog_title2"
+                android:textColor="#FFB2B7BC"
+                android:background="#FFE6EBEF"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+                android:textSize="@dimen/dialog_operate_reason_title_size" />
+
+            <ListView
+                android:id="@+id/ordercenter_reprint_listview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all"
+                android:divider="#FFDFE3E8"
+                android:dividerHeight="1dp"
+                android:footerDividersEnabled="false"
+                android:listSelector="@android:color/transparent"
+                android:layout_marginTop="@dimen/dialog_operate_reason_content_margin"
+                android:scrollbars="none"></ListView>
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/ordercenter_reprint_selectall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/dinner_table_checkbutton_selector2"
+            android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+            android:text="@string/reprint_dialog_all_select"
+            android:paddingLeft="8dp"
+            android:textColor="#999999"
+            android:textSize="@dimen/dialog_operate_reason_list_item_size" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_operate_submit_height"
+            android:background="@drawable/common_bottom_sure_button_bg"
+            android:text="@string/reprint_dialog_title"
+            android:layout_gravity="center"
+            android:textSize="@dimen/dialog_operate_submit_size"
+            android:textColor="#FFFFFFFF"
+            android:id="@+id/ordercenter_reprint_reprint"
+            android:layout_marginTop="@dimen/dialog_operate_views_marginTop" />
+    </LinearLayout>
+</RelativeLayout>

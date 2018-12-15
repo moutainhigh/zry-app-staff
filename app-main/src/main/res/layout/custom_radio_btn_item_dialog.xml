@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioButton xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refuse_result1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    android:paddingTop="16px"
+    android:paddingBottom="16px"
+    android:paddingLeft="14px"
+    android:button="@null"
+    android:drawableLeft="@drawable/orderdish_bg_order_center_dialog_radiogroup_item"
+    android:drawablePadding="12px"
+    android:singleLine="true"
+    android:ellipsize="end"
+    android:textSize="20px"
+    android:textColor="#FF333333" />

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="60dp"
+    android:layout_gravity="center_vertical"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/img_residue_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dinner_residue_icon"
+        android:visibility="gone" />
+
+    <TextView
+        style="@style/dinnerProperResidue"
+        android:text="@string/order_residue_property_sum" />
+
+    <TextView
+        android:id="@+id/tv_residue_sum"
+        style="@style/dinnerProperResidue" />
+
+    <TextView
+        android:id="@+id/tv_residue_sum_unit"
+        style="@style/dinnerProperResidue" />
+
+    <TextView
+        android:id="@+id/tv_residue"
+        style="@style/dinnerProperResidue" />
+
+    <TextView
+        android:id="@+id/tv_residue_unit"
+        style="@style/dinnerProperResidue" />
+
+</LinearLayout>

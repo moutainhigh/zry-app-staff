@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="15dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dfe4e9" />
+
+    <com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView
+        android:id="@+id/operating_info_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:visibility="gone"></com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView>
+
+    <include
+        android:id="@+id/pay_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        layout="@layout/dinner_order_center_detail_payinfo" />
+
+    <include
+        android:id="@+id/privilege_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        layout="@layout/dinner_order_center_detail_privilegeinfo" />
+
+    <include
+        android:id="@+id/goods_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        layout="@layout/dinner_order_center_detail_goodsinfo" />
+
+    <com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView
+        android:id="@+id/additional_privilege_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:visibility="visible"></com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView>
+
+    <com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView
+        android:id="@+id/order_center_tax_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:visibility="gone"></com.zhongmei.bty.dinner.ordercenter.view.OrderCenterDetailView>
+
+    <include
+        android:id="@+id/reject_goods_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        layout="@layout/dinner_order_center_detail_reject_goodsinfo" />
+
+    <include
+        android:id="@+id/bill_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        layout="@layout/dinner_order_center_detail_billinfo" />
+
+</LinearLayout>

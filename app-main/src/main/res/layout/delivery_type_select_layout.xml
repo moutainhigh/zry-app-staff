@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/verify_bg"
+    android:orientation="vertical"
+    android:paddingBottom="26dp"
+    android:paddingTop="28dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="14dp"
+        android:text="@string/select_order_type"
+        android:textColor="@color/settings_normalword"
+        android:textSize="@dimen/text_14" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="24dp">
+
+        <Button
+            android:id="@+id/here_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/delivery_type_item_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/inShop"
+            android:textColor="@color/delivery_type_item_color"
+            android:padding="3dp"
+            android:textSize="@dimen/snack_shapcart_popup_item_size" />
+
+        <Button
+            android:id="@+id/carry_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/delivery_type_item_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/byPackage"
+            android:textColor="@color/delivery_type_item_color"
+            android:textSize="@dimen/snack_shapcart_popup_item_size" />
+
+        <Button
+            android:id="@+id/send_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/delivery_type_item_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/takeaway"
+            android:textColor="@color/delivery_type_item_color"
+            android:padding="3dp"
+            android:textSize="@dimen/snack_shapcart_popup_item_size" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="12dp">
+
+        <Button
+            android:id="@+id/take_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/delivery_type_item_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/sinceTheMention"
+            android:textColor="@color/delivery_type_item_color"
+            android:padding="3dp"
+            android:textSize="@dimen/snack_shapcart_popup_item_size" />
+
+        <Button
+            android:id="@+id/return_btn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/delivery_type_item_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:text="@string/salesReturn"
+            android:textColor="@color/delivery_type_item_color"
+            android:padding="3dp"
+            android:textSize="@dimen/snack_shapcart_popup_item_size" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/delivery_type_item_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:textColor="@color/delivery_type_item_color"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+</LinearLayout>

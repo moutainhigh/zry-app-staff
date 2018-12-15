@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        layout="@layout/dinner_dish_property_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DADBDA" />
+
+    <ScrollView
+        android:id="@+id/sv_property_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="34dp"
+        android:paddingBottom="54dp"
+        android:paddingLeft="78dp"
+        android:paddingRight="78dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.zhongmei.bty.snack.orderdish.view.OrderDishCountAndMemoView_
+                android:id="@+id/ll_count_and_memo"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp" />
+
+            <com.zhongmei.bty.snack.orderdish.view.StandardView
+                android:id="@+id/taste_root_view"
+                style="@style/layout.m.w"
+                android:orientation="vertical" />
+
+            <com.zhongmei.bty.snack.orderdish.view.RecipeView
+                android:id="@+id/recipe_root_view"
+                style="@style/layout.m.w"
+                android:orientation="vertical" />
+
+            <com.zhongmei.bty.snack.orderdish.view.AddtionView_
+                android:id="@+id/add_root_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <LinearLayout
+                android:id="@+id/ll_dish_give"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="left"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/activity"
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/tv_dish_give"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/dish_type_item_bg"
+                    android:gravity="left|center_vertical"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="45dp"
+                    android:paddingRight="45dp"
+                    android:paddingTop="8dp"
+                    android:text="@string/give"
+                    android:textColor="@drawable/dish_type_text_selector"
+                    android:textSize="24sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

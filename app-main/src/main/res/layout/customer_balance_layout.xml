@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/customer_balance_showdow"
+    android:orientation="vertical">
+
+    <!-- title -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@drawable/cashier_bg_title_bar">
+
+        <ImageView
+            android:id="@+id/customer_charging_balance_back_btn"
+            style="@style/title_icon_style"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/customer_back_icon" />
+
+        <RadioGroup
+            android:id="@+id/customer_banlance_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:minWidth="350dp"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/customer_banlance_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/radiobutton_left"
+                android:paddingRight="3dp"
+                android:paddingLeft="3dp"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/customer_banlance"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+
+            <RadioButton
+                android:id="@+id/customer_coupon_use_rb"
+                android:layout_width="wrap_content"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:paddingRight="3dp"
+                android:paddingLeft="3dp"
+                android:background="@drawable/radiobutton_middle"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/customer_coupon_use"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+
+            <RadioButton
+                android:id="@+id/customer_integral_canuse_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingRight="3dp"
+                android:paddingLeft="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/radiobutton_right"
+                android:button="@null"
+                android:gravity="center"
+                android:text="@string/customer_integral_canuse"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- 余额 -->
+        <include
+            android:id="@+id/banlace_layout"
+            layout="@layout/customer_balance_listview_layout" />
+        <!--积分-->
+        <include
+            android:id="@+id/integral_layout"
+            layout="@layout/customer_integral_listview_layout" />
+
+        <GridView
+            android:id="@+id/customer_coupon_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="98dp"
+            android:layout_marginRight="98dp"
+            android:layout_marginTop="43dp"
+            android:horizontalSpacing="20dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="20dp"
+            android:visibility="gone" />
+
+        <!-- 优惠券为空页面 -->
+        <include
+            android:id="@+id/coupon_empty_layout"
+            layout="@layout/customer_empty_layout"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

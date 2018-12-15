@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/fl_slide_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/fl_state_bar_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v4.widget.DrawerLayout
+                android:id="@+id/dl_drawer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/dinnerdish_bg"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/fl_main_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <!--<com.zhongmei.bty.basemodule.notifycenter.view.NotifyCenterView_
+                    android:id="@+id/ncv_notify_center"
+                    android:layout_width="@dimen/notification_popup_width"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:background="@color/text_white"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical" />-->
+            </android.support.v4.widget.DrawerLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/menu_shadow_bg"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <ViewSwitcher
+        android:id="@+id/vs_notify_bubble"
+        android:layout_width="@dimen/switcher_listview_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/switcher_margin_right"
+        android:background="@android:color/transparent"
+        android:visibility="invisible" />
+
+    <com.zhongmei.bty.dinner.table.view.DinnerNotifyBubble_
+        android:id="@+id/dnb_notify_bubble"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/vs_notify_bubble"
+        android:layout_marginRight="@dimen/bubble_margin_right"
+        android:layout_marginTop="2dp"
+        android:visibility="invisible" />
+
+</RelativeLayout>

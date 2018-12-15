@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dishView"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:id="@+id/dishNumPriceView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="right"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/dish_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="20dp"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/text_20"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/dish_price"
+                style="@style/layout.w.w"
+                android:layout_marginLeft="0dp"
+                android:minWidth="20dp"
+                android:textColor="#666666"
+                android:textSize="@dimen/text_14" />
+        </LinearLayout>
+
+        <com.zhongmei.bty.common.view.NumberEditText
+            android:id="@+id/edt_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dish_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/dishNumPriceView"
+        android:layout_toLeftOf="@id/dishNumPriceView"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_weigh_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shopcart_weigh_flag_bg"
+                android:text="@string/weighin_flag_text"
+                android:textColor="@android:color/white"
+                android:textSize="8sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/printstateicon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:clickable="false"
+                android:focusable="false"
+                android:minWidth="18dp"
+                android:src="@drawable/dinner_print_fail_icon"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/issue_time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="2dp"
+            android:drawableLeft="@drawable/dinner_tableinfo_issuing_time1"
+            android:drawablePadding="5dp"
+            android:textColor="#8e989e"
+            android:textSize="@dimen/text_12"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dish_name"
+        style="@style/dinnerdishTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/dish_status"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:singleLine="false" />
+
+    <LinearLayout
+        android:id="@+id/dish_operate_tag_ll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dish_name"
+        android:layout_marginLeft="40dp"
+        android:paddingBottom="5dp"
+        android:paddingTop="10dp">
+
+        <TextView
+            android:id="@+id/dish_prepare_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dish_tag_bg"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/dinner_orderdish_dish_prepare"
+            android:textColor="@color/dish_tag_color"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/dish_make_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dish_tag_bg"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/dinner_orderdish_dish_make"
+            android:textColor="@color/dish_tag_color"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/dish_prepare_cancel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dish_tag_bg"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/dinner_orderdish_dish_cancel_prepare"
+            android:textColor="@color/dish_tag_color"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/dish_make_cancel_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dish_tag_bg"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/dinner_orderdish_cancel_dish_make"
+            android:textColor="@color/dish_tag_color"
+            android:textSize="10sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_remind_dish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dish_tag_bg"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="@string/dinner_orderdish_dish_urge"
+            android:textColor="@color/dish_tag_color"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_make_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/kds_dish_finish_bg"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textColor="@color/kds_dish_finish_color"
+            android:textSize="10sp"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_dish_bat_serving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="@string/dish_bat_serving"
+            android:textColor="@color/dish_tag_color"
+            android:textSize="10sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="9dp"
+    android:orientation="vertical"
+    android:background="@drawable/order_center_search_type_bg">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/order_center_search_type_view"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:overScrollMode="never"
+        android:scrollbars="none" />
+</LinearLayout>

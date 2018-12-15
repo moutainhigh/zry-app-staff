@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/cash_pay_unreceived"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:textColor="@color/text_blue"
+        android:textSize="31sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:id="@+id/rl_diff_changes_hint"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#f4f7f9"
+            android:visibility="invisible"
+            android:gravity="center">
+
+            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                android:id="@+id/cash_pay_alerttext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pay_rest_payment_text"
+                android:layout_centerVertical="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="@dimen/text_18" />
+
+
+            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                android:id="@+id/over_income_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pay_over_income"
+                android:textColor="#999999"
+                android:textSize="@dimen/text_12"
+                android:layout_alignBaseline="@id/cash_pay_alerttext"
+                android:layout_toRightOf="@id/cash_pay_alerttext"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/modify_payment_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_modify_payment"
+                android:layout_toRightOf="@id/over_income_tv"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:drawablePadding="5dp"
+                android:textSize="@dimen/text_12"
+                android:textColor="@color/text_blue"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="7dp"
+                android:visibility="gone"
+                android:background="@drawable/pay_btn_modify_payment_selector"
+                android:text="@string/pay_modify_payment" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/cash_pay_edit_value"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/pay_input_bg"
+                android:focusable="true"
+                android:gravity="center"
+                android:hint="@string/pay_hint_text"
+                android:inputType="none"
+                android:textColor="@color/zm_theme_color"
+                android:textColorHint="#C9CACA"
+                android:textSize="22sp" />
+
+            <ImageView
+                android:id="@+id/cash_pay_delete_cash"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/card_del"
+                android:gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/card_del"
+                android:visibility="invisible" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <GridView
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:horizontalSpacing="20dp"
+        android:listSelector="@color/bg_white"
+        android:numColumns="auto_fit"
+        android:scrollbars="none"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="12dp"
+        android:visibility="gone" />
+
+    <include layout="@layout/pay_cash_input_keyboard_layout" />
+
+</LinearLayout>

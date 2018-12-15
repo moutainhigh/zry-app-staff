@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F0F3F6">
+
+    <RelativeLayout
+        android:id="@+id/receipt_title"
+        style="@style/settings_rightTitle"
+        android:background="@drawable/cashier_bg_title_bar"
+        android:orientation="horizontal"
+        android:paddingRight="@dimen/print_setting_content_margin_left">
+
+        <RelativeLayout
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/print_setting_content_margin_left"
+            android:paddingRight="@dimen/print_setting_content_margin_left">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:src="@drawable/print_setting_back_icon" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/edit_ticket_outlet"
+            android:textColor="@color/bg_white"
+            android:textSize="@dimen/setting_title_bar_size" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="@dimen/print_setting_item_btn_width"
+            android:layout_height="@dimen/print_setting_item_btn_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/print_setting_title_btn_selector"
+            android:text="@string/common_save"
+            android:textColor="@color/write"
+            android:textSize="@dimen/print_setting_item_title_size" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/sv_body"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            style="@style/print_setting_content_margin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_first_base_info_hint"
+                android:drawableLeft="@drawable/settings_first"
+                android:gravity="center_vertical"
+                android:drawablePadding="@dimen/print_setting_item_drawable_padding"
+                android:text="@string/ticket_outlet_base_info"
+                style="@style/print_setting_item_title_style" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_ticket_outlet_name"
+                style="@style/print_setting_item_style">
+
+                <TextView
+                    android:id="@+id/tv_name_hint"
+                    style="@style/print_setting_item_text_style"
+                    android:text="@string/ticket_outlet_name" />
+
+                <EditText
+                    android:id="@+id/et_ticket_outlet_name"
+                    style="@style/print_setting_item_text_style"
+                    android:layout_weight="2"
+                    android:background="@color/transparent"
+                    android:gravity="right|center_vertical"
+                    android:textColorHint="#BCBCBC"
+                    android:hint="@string/uninput" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_second_base_info"
+                style="@style/print_setting_item_title_style"
+                android:layout_marginTop="@dimen/print_setting_items_margin"
+                android:drawableLeft="@drawable/settings_second"
+                android:drawablePadding="@dimen/print_setting_item_drawable_padding"
+                android:gravity="center_vertical"
+                android:text="@string/choose_ticket_outlet_ticket_type" />
+
+            <LinearLayout
+                android:id="@+id/ll_ticket_outlet_ticket_type"
+                style="@style/print_setting_item_style">
+
+                <TextView
+                    android:id="@+id/tv_device_or_ticket_hint"
+                    style="@style/print_setting_item_text_style"
+                    android:text="@string/ticket_type" />
+
+                <TextView
+                    android:id="@+id/tv_ticket_outlet_ticket_type_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/print_setting_item_drawable_padding"
+                    android:text="@string/unchoose"
+                    android:textColor="#BCBCBC"
+                    android:textSize="@dimen/print_setting_item_size" />
+
+                <ImageView
+                    android:id="@+id/btn_ticket_outlet_ticket_type_select"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/print_setting_item_down" />
+
+            </LinearLayout>
+
+            <!-- 针对收银点的设备选择界面，出票口界面时，该部分为不可见 -->
+
+            <LinearLayout
+                android:id="@+id/ll_choose_place_holder_device"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/print_setting_item_margin_top"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <com.zhongmei.bty.settings.view.ScrollGridView
+                    android:id="@+id/gv_place_holder_device"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:horizontalSpacing="@dimen/print_setting_little_items_margin"
+                    android:numColumns="4"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="@dimen/print_setting_item_margin_top">
+
+                </com.zhongmei.bty.settings.view.ScrollGridView>
+
+
+            </LinearLayout>
+
+
+            <!-- 3. 选择出票口打印机及其数量 -->
+
+            <TextView
+                android:id="@+id/tv_choose_print_device"
+                style="@style/print_setting_item_title_style"
+                android:layout_marginTop="@dimen/print_setting_items_margin"
+                android:drawableLeft="@drawable/settings_third"
+                android:drawablePadding="@dimen/print_setting_item_drawable_padding"
+                android:gravity="center_vertical"
+                android:text="@string/choose_ticket_outlet_and_print_count" />
+
+
+            <LinearLayout
+                android:id="@+id/ll_choose_print_device"
+                style="@style/print_setting_item_style">
+
+                <TextView
+                    android:id="@+id/tv_printer_device_hint"
+                    style="@style/print_setting_item_text_style"
+                    android:text="@string/ticket_outlet_print_device" />
+
+                <TextView
+                    android:id="@+id/tv_print_device"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/print_setting_item_drawable_padding"
+                    android:text="@string/unselect"
+                    android:textColor="#BCBCBC"
+                    android:textSize="@dimen/print_setting_item_size" />
+
+                <ImageView
+                    android:id="@+id/iv_print_device_expand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/print_setting_item_right" />
+            </LinearLayout>
+
+            <!-- 4. 选择需要打印的商品 -->
+
+            <LinearLayout
+                android:id="@+id/ll_goods_total_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/print_setting_items_margin">
+
+                <TextView
+                    android:id="@+id/text_four"
+                    style="@style/print_setting_item_title_style"
+                    android:drawableLeft="@drawable/settings_fourth"
+                    android:drawablePadding="@dimen/print_setting_item_drawable_padding"
+                    android:gravity="center_vertical"
+                    android:text="@string/choose_dishes_setting" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_goods_set_toggle"
+                    style="@style/print_setting_item_style">
+
+                    <TextView
+                        style="@style/print_setting_item_text_style"
+                        android:text="@string/enable_dishes_setting" />
+
+                    <TextView
+                        android:id="@+id/tv_dish_setting_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="14dp"
+                        android:text="@string/close"
+                        android:textColor="@color/print_text_gray"
+                        android:textSize="22sp"
+                        android:visibility="gone" />
+
+                    <ToggleButton
+                        android:id="@+id/tb_enable_goods_setting"
+                        style="@style/print_setting_item_toggle_style" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_goods_set"
+                    style="@style/print_setting_item_style"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/print_setting_item_text_style"
+                        android:text="@string/set_dishes" />
+
+                    <TextView
+                        android:id="@+id/tv_selected_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/print_setting_item_drawable_padding"
+                        android:text="@string/unselect"
+                        android:textColor="#BCBCBC"
+                        android:textSize="@dimen/print_setting_item_size" />
+
+                    <ImageView
+                        android:id="@+id/btn_enter_set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/print_setting_item_right" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 5. 选择需要控制的桌台区域 -->
+
+            <LinearLayout
+                android:id="@+id/ll_area_total_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/print_setting_items_margin">
+
+                <TextView
+                    android:id="@+id/tv_control_area_hint"
+                    style="@style/print_setting_item_title_style"
+                    android:drawableLeft="@drawable/settings_fifth"
+                    android:drawablePadding="@dimen/print_setting_item_drawable_padding"
+                    android:gravity="center_vertical"
+                    android:text="@string/choose_filter_table_area" />
+
+
+                <LinearLayout
+                    android:id="@+id/ll_area_set_toggle"
+                    style="@style/print_setting_item_style">
+
+                    <TextView
+                        style="@style/print_setting_item_text_style"
+                        android:text="@string/enable_areas_setting" />
+
+                    <TextView
+                        android:id="@+id/tv_area_setting_status"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="14dp"
+                        android:text="@string/close"
+                        android:textColor="@color/print_text_gray"
+                        android:textSize="22sp"
+                        android:visibility="gone" />
+
+                    <ToggleButton
+                        android:id="@+id/tb_enable_area_setting"
+                        style="@style/print_setting_item_toggle_style" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_area_set"
+                    style="@style/print_setting_item_style"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/print_setting_item_text_style"
+                        android:text="@string/set_area" />
+
+                    <TextView
+                        android:id="@+id/tv_selected_area_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/print_setting_item_drawable_padding"
+                        android:text="@string/unselect"
+                        android:textColor="#BCBCBC"
+                        android:textSize="@dimen/print_setting_item_size" />
+
+                    <ImageView
+                        android:id="@+id/btn_enter_area_set"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/print_setting_item_right" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 5. 选择票据类型 -->
+
+            <LinearLayout
+                android:id="@+id/ll_cashier_point_ticket"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/print_setting_items_margin"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/print_setting_item_title_style"
+                    android:drawableLeft="@drawable/settings_fifth"
+                    android:drawablePadding="@dimen/print_setting_item_drawable_padding"
+                    android:gravity="center_vertical"
+                    android:text="@string/choose_bill_type" />
+
+
+                <com.zhongmei.bty.settings.view.ScrollListView
+                    android:id="@+id/list_cashier_point_ticket"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/print_setting_item_margin_top"
+                    android:layout_weight="1"
+                    android:background="@drawable/setting_on_of_item_bg"
+                    android:divider="@color/line_gray"
+                    android:dividerHeight="0.5dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F0F3F6"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        style="@style/setting_right_content_margin">
+
+        <TextView
+            style="@style/setting_switch_item_title_text"
+            android:text="@string/setting_queue_voice" />
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                android:id="@+id/voice_packge_download_tv"
+                style="@style/setting_switch_item_text"
+                android:text="@string/call_voice_download" />
+
+            <TextView
+                android:id="@+id/voice_packge_download_tg"
+                android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                android:layout_marginRight="@dimen/setting_dinner_switch_item_btn_margin_right"
+                android:background="@drawable/setting_queue_btn_green_selector"
+                android:gravity="center"
+                android:textColor="#39DAB5"
+                android:textSize="@dimen/setting_queue_voice_content_size"
+                android:text="@string/setting_queue_voice_down" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                style="@style/setting_switch_item_text"
+                android:text="@string/setting_queue_call_open_voice_hint" />
+
+            <ToggleButton
+                android:id="@+id/open_voice_tg"
+                style="@style/setting_switch_item_toggle" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                android:id="@+id/voice_packge_systhesis_tv"
+                style="@style/setting_switch_item_text"
+                android:text="@string/call_voice_synthesis" />
+
+            <ToggleButton
+                android:id="@+id/voice_packge_systhesis_tg"
+                style="@style/setting_switch_item_toggle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/voice_synthesis_layout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top">
+
+                <Spinner
+                    android:id="@+id/voice_sex"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/setting_dinner_switch_item_height"
+                    android:layout_weight="1"
+                    android:background="@drawable/setting_on_of_item_bg"
+                    android:popupBackground="@drawable/setting_on_of_item_bg"
+                    android:dropDownVerticalOffset="1dp" />
+
+                <View
+                    android:layout_width="@dimen/setting_dinner_switch_item_margin_top"
+                    android:layout_height="match_parent" />
+
+                <Spinner
+                    android:id="@+id/voice_speed"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/setting_dinner_switch_item_height"
+                    android:layout_weight="1"
+                    android:background="@drawable/setting_on_of_item_bg"
+                    android:popupBackground="@drawable/setting_on_of_item_bg"
+                    android:dropDownVerticalOffset="1dp" />
+            </LinearLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            style="@style/setting_switch_item_title_text"
+                            android:text="@string/setting_queue_call_voice_title" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/call_voice_audition"
+                            android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                            android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                            android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                            android:background="@drawable/setting_queue_btn_green_selector"
+                            android:gravity="center"
+                            android:textColor="#39DAB5"
+                            android:textSize="@dimen/setting_queue_voice_content_size"
+                            android:text="@string/setting_queue_voice_play" />
+
+                        <TextView
+                            android:id="@+id/call_voice_save"
+                            android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                            android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                            android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                            android:background="@drawable/setting_queue_btn_green_selector"
+                            android:gravity="center"
+                            android:textColor="#39DAB5"
+                            android:textSize="@dimen/setting_queue_voice_content_size"
+                            android:text="@string/voice_setting_save" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+                        android:background="@drawable/setting_on_of_item_bg"
+                        android:orientation="vertical">
+
+                        <EditText
+                            android:id="@+id/call_voice_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:gravity="start|top"
+                            android:layout_margin="@dimen/setting_queue_voice_edit_padding"
+                            android:textSize="@dimen/setting_queue_voice_content_size"
+                            android:textColor="#666666" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/line_gray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/setting_dinner_switch_item_height"
+                            android:paddingRight="@dimen/setting_dinner_switch_item_btn_margin_right"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_333333"
+                                android:textSize="@dimen/setting_dinner_switch_item_size"
+                                android:layout_marginLeft="10dp"
+                                android:text="@string/setting_queue_number_label" />
+
+                            <TextView
+                                android:id="@+id/call_voice_number"
+                                android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                                android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                                android:layout_marginLeft="5dp"
+                                android:background="@drawable/setting_queue_btn_green_selector"
+                                android:gravity="center"
+                                android:textColor="#39DAB5"
+                                android:textSize="@dimen/setting_queue_voice_content_size"
+                                android:text="@string/voice_setting_number" />
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top">
+
+                        <TextView
+                            style="@style/setting_switch_item_title_text"
+                            android:text="@string/setting_queue_in_voice_title" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/in_voice_audition"
+                            android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                            android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                            android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                            android:background="@drawable/setting_queue_btn_green_selector"
+                            android:gravity="center"
+                            android:textColor="#39DAB5"
+                            android:textSize="@dimen/setting_queue_voice_content_size"
+                            android:text="@string/setting_queue_voice_play" />
+
+                        <TextView
+                            android:id="@+id/in_voice_save"
+                            android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                            android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                            android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                            android:background="@drawable/setting_queue_btn_green_selector"
+                            android:gravity="center"
+                            android:textColor="#39DAB5"
+                            android:textSize="@dimen/setting_queue_voice_content_size"
+                            android:text="@string/voice_setting_save" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+                        android:background="@drawable/setting_on_of_item_bg"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <EditText
+                            android:id="@+id/in_voice_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:gravity="start|top"
+                            android:layout_margin="@dimen/setting_queue_voice_edit_padding"
+                            android:textSize="@dimen/setting_queue_voice_content_size"
+                            android:textColor="#666666" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/line_gray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/setting_dinner_switch_item_height"
+                            android:paddingRight="@dimen/setting_dinner_switch_item_btn_margin_right"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_333333"
+                                android:textSize="@dimen/setting_dinner_switch_item_size"
+                                android:layout_marginLeft="10dp"
+                                android:text="插入标签：" />
+
+                            <TextView
+                                android:id="@+id/in_voice_number"
+                                android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                                android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                                android:layout_marginLeft="5dp"
+                                android:background="@drawable/setting_queue_btn_green_selector"
+                                android:gravity="center"
+                                android:textColor="#39DAB5"
+                                android:textSize="@dimen/setting_queue_voice_content_size"
+                                android:text="@string/voice_setting_number" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/line_gray" />
+
+                        <EditText
+                            android:id="@+id/next_voice_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:gravity="start|top"
+                            android:layout_margin="@dimen/setting_queue_voice_edit_padding"
+                            android:textSize="@dimen/setting_queue_voice_content_size"
+                            android:textColor="#666666" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/line_gray" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/setting_dinner_switch_item_height"
+                            android:paddingRight="@dimen/setting_dinner_switch_item_btn_margin_right"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/color_333333"
+                                android:textSize="@dimen/setting_dinner_switch_item_size"
+                                android:layout_marginLeft="10dp"
+                                android:text="插入标签：" />
+
+                            <TextView
+                                android:id="@+id/next_voice_number"
+                                android:layout_width="@dimen/setting_dinner_switch_item_btn_width"
+                                android:layout_height="@dimen/setting_dinner_switch_item_btn_height"
+                                android:layout_marginLeft="5dp"
+                                android:background="@drawable/setting_queue_btn_green_selector"
+                                android:gravity="center"
+                                android:textColor="#39DAB5"
+                                android:textSize="@dimen/setting_queue_voice_content_size"
+                                android:text="@string/voice_setting_number" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+                        android:background="@drawable/setting_on_of_item_bg"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

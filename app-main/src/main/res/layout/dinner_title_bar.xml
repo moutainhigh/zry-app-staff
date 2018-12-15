@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/title"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/status_bar_height"
+    android:background="@color/titlebar_bg">
+
+    <LinearLayout
+        android:id="@+id/ll_offline_upload_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="8dp"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_offline_upload_uploading"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:background="@drawable/status_bar_load"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/iv_offline_upload_status"
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/status_bar_upload_success"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_offline_upload_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_white"
+            android:textSize="8sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/status_bar_height"
+        android:layout_alignParentRight="true"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/wifi_state_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="14dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY" />
+
+        <RelativeLayout
+            android:id="@+id/battery_state_layout"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/battery">
+
+            <TextView
+                android:id="@+id/battery_state"
+                android:layout_width="6dp"
+                android:layout_height="0dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="5dp"
+                android:background="@color/battery_bg" />
+        </RelativeLayout>
+
+        <com.zhongmei.bty.statusbar.Clock
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:textColor="@color/battery_bg"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>

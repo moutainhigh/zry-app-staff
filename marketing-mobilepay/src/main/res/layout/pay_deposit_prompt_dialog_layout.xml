@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_pay_ok_weight"
+    android:layout_height="@dimen/dialog_pay_ok_height"
+    android:layout_gravity="center"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dinner_close"
+            android:gravity="center"
+            android:scaleType="center" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="105dp"
+        android:gravity="center"
+        android:text="@string/pay_pay_deposit_first_text"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/text_32" />
+
+    <TextView
+        android:id="@+id/amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/color_333333"
+        android:textSize="@dimen/text_32" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="66dp"
+        android:text="@string/pay_pay_deposit_prompt_text"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_24" />
+
+</LinearLayout>

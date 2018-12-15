@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="beauty_card_raduis">10dp</dimen>
+    <dimen name="beauty_tab_raduis">30dp</dimen>
+    <dimen name="beauty_middle_tab_title_height">33dp</dimen>
+    <dimen name="beauty_middle_discount_title_size">15sp</dimen>
+    <dimen name="beauty_middle_content_margin">15dp</dimen>
+    <dimen name="beauty_dish_grid_item_selected_margin">4dp</dimen>
+    <dimen name="beauty_content_title_margin">18dp</dimen>
+    <dimen name="beauty_tab_margin">20dp</dimen>
+</resources>

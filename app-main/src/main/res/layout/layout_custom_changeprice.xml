@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/custom_title_style"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/change_goods" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="26dp"
+        android:paddingRight="26dp"
+        android:scrollbars="none"
+        android:fillViewport="false">
+
+        <LinearLayout
+            android:id="@+id/v_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/text_18"
+                    android:textColor="@color/text_color_black"
+                    android:id="@+id/tv_goodsName" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_18"
+                    android:textColor="@color/text_color_black"
+                    android:text="@string/country_currency_symbol"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/tv_goodsPrice" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_14"
+                android:textColor="@color/text_color_gray"
+                android:text="@string/hint_restore"
+                android:layout_marginTop="20dp"
+                android:id="@+id/tv_goodsRestore" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_14"
+                android:textColor="@color/text_color_gray"
+                android:text="@string/hint_daily_limit_sale"
+                android:layout_marginTop="14dp"
+                android:id="@+id/tv_dailyLimit" />
+
+
+            <LinearLayout
+                android:id="@+id/layout_changePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="26dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dotted_line" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_gray"
+                    android:text="@string/hint_changeprice"
+                    android:layout_marginTop="20dp" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:singleLine="true"
+                    android:textSize="@dimen/text_18"
+                    android:maxLength="12"
+                    android:textColor="@color/text_color_black"
+                    android:inputType="numberDecimal"
+                    android:background="@drawable/bg_round_rectangle"
+                    android:text="@string/country_currency_symbol"
+                    android:id="@+id/et_changePrice" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/delivery_platform_list_item_name_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/selector_delivery_platform_list_item"
+        android:gravity="center"
+        android:textColor="@color/selector_delivery_platform_list_item_text"
+        android:textSize="@dimen/text_20"
+        android:maxLines="1" />
+</FrameLayout>

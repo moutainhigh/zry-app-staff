@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#cccccc"
+            android:orientation="horizontal"
+            android:padding="1dp">
+
+            <ImageView
+                android:id="@+id/one"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_1_bt" />
+
+            <ImageView
+                android:id="@+id/two"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_2_bt" />
+
+            <ImageView
+                android:id="@+id/three"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_3_bt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#cccccc"
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp">
+
+            <ImageView
+                android:id="@+id/four"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_4_bt" />
+
+            <ImageView
+                android:id="@+id/five"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_5_bt" />
+
+            <ImageView
+                android:id="@+id/six"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_6_bt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#cccccc"
+            android:orientation="horizontal"
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp">
+
+            <ImageView
+                android:id="@+id/seven"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_7_bt" />
+
+            <ImageView
+                android:id="@+id/eight"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_8_bt" />
+
+            <ImageView
+                android:id="@+id/nine"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_9_bt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="1dp"
+            android:background="#cccccc"
+            android:orientation="horizontal"
+            android:paddingBottom="1dp"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp">
+
+            <ImageView
+                android:id="@+id/dot"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_poin_bt" />
+
+            <TextView
+                android:id="@+id/dot_clear"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:gravity="center"
+                android:text="@string/clear"
+                android:textColor="@color/text_pay_method"
+                android:textSize="22sp"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/zero"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:src="@drawable/pay_num_0_bt" />
+
+            <ImageView
+                android:id="@+id/delete"
+                android:layout_width="0dp"
+                android:layout_height="72dp"
+                android:layout_weight="1"
+                android:background="@drawable/pay_cash_keyboard_num2_bg"
+                android:scaleType="centerInside"
+                android:src="@drawable/delete_icon" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

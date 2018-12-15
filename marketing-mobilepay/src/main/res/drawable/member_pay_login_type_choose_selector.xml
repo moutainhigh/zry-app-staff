@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <shape>
+            <stroke android:color="#CCD1D6" android:width="0.5dp" />
+            <solid android:color="#EFEFEF" />
+            <corners android:bottomLeftRadius="4dp" android:topLeftRadius="4dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+            <stroke android:color="@color/zm_pay_box_color" android:width="0.5dp" />
+            <solid android:color="#BAE0F7" />
+            <corners android:bottomLeftRadius="4dp" android:topLeftRadius="4dp" />
+        </shape>
+    </item>
+
+    <item>
+        <shape>
+            <stroke android:color="@color/zm_pay_box_color" android:width="0.5dp" />
+            <solid android:color="#D9F0FE" />
+            <corners android:bottomLeftRadius="4dp" android:topLeftRadius="4dp" />
+        </shape>
+    </item>
+</selector>

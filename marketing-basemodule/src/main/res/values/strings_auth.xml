@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="auth_permission_verify_permission_title">你还没有权限，请授权进行此操作</string>
+    <string name="auth_permission_please_input_password">请输入密码</string>
+
+</resources>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:fitsSystemWindows="true"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="373dp"
+        android:layout_height="480dp"
+        android:background="@drawable/customer_charging_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/foo_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:text="口碑核销"
+            android:textColor="#ff333333"
+            android:textSize="21sp" />
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerInside"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/close_icon" />
+
+        <View
+            android:id="@+id/foo_line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/foo_title"
+            android:layout_marginTop="19dp"
+            android:background="#DFE4E9" />
+
+        <LinearLayout
+            android:id="@+id/foo_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/foo_line"
+            android:layout_marginTop="27dp"
+            android:background="@color/transparent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+                android:id="@+id/et_barcode"
+                android:layout_width="200dp"
+                android:layout_height="43dp"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="52dp"
+                android:background="@drawable/verify_bg_input"
+                android:cursorVisible="false"
+                android:drawableRight="@drawable/icon_delete"
+                android:gravity="center"
+                android:hint="手动输入核销码"
+                android:imeOptions="normal"
+                android:inputType="number"
+                android:paddingLeft="5dp"
+                android:textSize="16sp"
+                tools:ignore="LabelFor" />
+
+            <Button
+                android:id="@+id/bt_ok"
+                android:layout_width="67dp"
+                android:layout_height="43dp"
+                android:background="@drawable/koubei_verify_sure_btn_bg"
+                android:text="@string/customer_inspect"
+                android:textColor="@color/text_white"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/foo_dash_line"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_below="@id/foo_input"
+            android:layout_marginLeft="53dp"
+            android:layout_marginRight="53dp"
+            android:layout_marginTop="27dp"
+            android:background="@drawable/koubei_dash_line"
+            android:layerType="software" />
+
+
+        <RelativeLayout
+            android:id="@+id/foo_scan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/foo_dash_line"
+            android:layout_marginTop="27dp">
+
+            <LinearLayout
+                android:id="@+id/ll_verification_scan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:padding="2dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_verification_scan" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/show_barcode_hint_use_scannar"
+                    android:textColor="@color/color_32ADF6"
+                    android:textSize="@dimen/text_16" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/koubei_order_center_verification_tips"
+                    android:textColor="@color/color_32ADF6"
+                    android:textSize="@dimen/text_16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_verification_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:ignore="UseCompoundDrawables">
+
+                <ImageView
+                    android:id="@+id/iv_verification_result_img"
+                    android:layout_width="107dp"
+                    android:layout_height="107dp"
+                    android:contentDescription="@string/app_name"
+                    android:src="@drawable/ic_verification_success" />
+
+                <TextView
+                    android:id="@+id/tv_verification_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal"
+                    android:textColor="#3FDBB7"
+                    android:textSize="@dimen/text_32" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

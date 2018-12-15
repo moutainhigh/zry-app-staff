@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="notification_popup_width">397dp</dimen>
+    <dimen name="notification_item_textSize2">9.3sp</dimen>
+    <dimen name="notification_item_titleTextSize">10.67sp</dimen>
+    <!--状态页面-->
+
+    <dimen name="bubble_layout_width">60dp</dimen>
+</resources>

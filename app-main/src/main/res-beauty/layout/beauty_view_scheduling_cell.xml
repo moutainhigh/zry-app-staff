@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beauty_bg_white"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@color/beauty_bg_white"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_work_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上午班次"
+            android:textColor="@color/beauty_color_black" />
+
+        <TextView
+            android:id="@+id/tv_work_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:21-13:00"
+            android:textColor="@color/beauty_text_gray" />
+
+        <com.zhongmei.beauty.widgets.DrawableCenterTextView
+            android:id="@+id/tv_rest"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/beauty_bg_gray"
+            android:gravity="left|center_vertical"
+            android:text="休息"
+            android:textColor="@color/beauty_text_gray"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <View style="@style/beauty_vertical_line" />
+</LinearLayout>

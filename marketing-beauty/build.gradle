@@ -1,0 +1,66 @@
+apply plugin: 'com.android.library'
+apply plugin: 'android-apt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion COMPILE_SDK_VERSION
+    buildToolsVersion BUILD_TOOLS_VERSION
+
+    defaultConfig {
+        multiDexEnabled true
+        minSdkVersion MIN_SDK_VERSION
+        targetSdkVersion TARGET_SDK_VERSION
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs', '../calm-data/libs', '../basemodule/libs'
+    }
+}
+
+dependencies {
+    compile third.AAapi
+    apt third.AA
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile project(':marketing-data')
+    compile project(':yunfu-ui')
+    compile project(':marketing-basemodule')
+    compile project(':yunfu-context')
+    compile project(':marketing-mobilepay')
+    compile androidsdk.supportV4
+    compile third.swipeToLoadLayout
+    compile third.kotlinStdlibJDK
+    testCompile androidsdk.junit
+    androidTestCompile(androidsdk.testEspressoCore, {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+}
+
+
+apt {
+    arguments {
+        if (variant.outputs[0] != null) {
+            androidManifestFile variant.outputs[0].processResources.manifestFile
+            resourcePackageName 'com.zhongmei.yunfu.beauty'
+            trace true
+        }
+    }
+}

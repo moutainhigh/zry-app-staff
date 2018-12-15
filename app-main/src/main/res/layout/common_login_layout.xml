@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="60dp"
+    android:layout_marginRight="60dp"
+    android:layout_marginBottom="50dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/pay_member_account"
+        android:textColor="@color/text_blue"
+        android:textSize="@dimen/dinner_pay_customerLogin_titleSize" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dinner_pay_customerLogin_linearLayout_height"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/show_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_edit_bg"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:hint="@string/customer_login_hint"
+            android:inputType="number"
+            android:maxLength="12"
+            android:singleLine="true"
+            android:textColor="@color/text_blue"
+            android:textColorHint="#bcbcbc"
+            android:textSize="@dimen/dinner_pay_customerLogin_show_value_textSize" />
+
+
+        <Button
+            android:id="@+id/btn_card_login"
+            android:layout_width="78dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/cashier_table_press"
+            android:gravity="center"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:text="@string/card_login"
+            android:textColor="@color/text_blue"
+            android:textSize="18sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        layout="@layout/pay_number_keyboard_layout" />
+
+    <Button
+        android:id="@+id/customer_verification"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dinner_pay_customerLogin_btn_height"
+        android:layout_marginTop="@dimen/dinner_pay_customerLogin_btn_marginTop"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:textSize="@dimen/dinner_pay_customerLogin_btnSize"
+        android:text="@string/orderdish_dinner_ok"
+        android:textColor="@color/text_white"
+        android:background="@drawable/btn_blue_selector" />
+</LinearLayout>

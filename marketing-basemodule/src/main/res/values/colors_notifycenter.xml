@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="notice_bg_cl">#f6f7fa</color>
+    <color name="settings_grayword">#999999</color>
+    <color name="settings_normalword">#333333</color>
+    <color name="bg_gray">#DADBDA</color>
+    <color name="verify_perssion_title">#ff7901</color>
+    <color name="settings_blue">#FF03A9F4</color>
+    <color name="gray_line">#e1e1e5</color>
+    <color name="print_text_gray">#afafaf</color>
+    <color name="notifycenter_tab_gray">#f6f7f9</color>
+    <color name="notifycenter_tab_text_gray">#A5ABB9</color>
+    <color name="notifycenter_tab_text_blue">#31B2FE</color>
+    <color name="notifycenter_order_count">#573E0D</color>
+
+</resources>

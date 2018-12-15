@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="@dimen/customer_chargind_layout_w"
+        android:layout_height="@dimen/customer_chargind_layout_h"
+        android:background="@drawable/customer_charging_bg"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/customer_chargind_m_l"
+            android:layout_marginRight="@dimen/customer_chargind_m_l"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/customer_chargind_title_h"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/tvTitle_UionDialog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/uion_active_band_card_title"
+                        android:textColor="@color/customer_charging_title"
+                        android:textSize="@dimen/text_22" />
+
+                    <ImageView
+                        android:id="@+id/ivClose_UionDialog"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/dinner_close" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/customer_charging_name_and_balance_top"
+                    android:gravity="bottom">
+
+                    <TextView
+                        android:id="@+id/tvCardDes_UionDialog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxEms="12"
+                        android:singleLine="true"
+                        android:textColor="@color/color_666666"
+                        android:textSize="@dimen/text_15"
+                        tools:text="@string/uion_card_desc" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/customer_charging_showdow"
+                android:padding="4dp"
+                android:text="@string/customer_binding_card_choose_type"
+                android:textColor="@color/customer_charging_showdow_text"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tvBandCustomer_UionDialog"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_uion_sale_and_active_btn"
+                android:layout_marginTop="24dp"
+                android:text="@string/customer_binding_card_exist_customer"
+                android:gravity="center"
+                android:textColor="@color/select_uion_sale_and_active"
+                android:textSize="@dimen/text_18" />
+
+            <TextView
+                android:id="@+id/tvCreateCustomer_UionDialog"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/selector_uion_sale_and_active_btn"
+                android:layout_marginTop="19dp"
+                android:text="@string/customer_binding_card_new_customer"
+                android:gravity="center"
+                android:textColor="@color/select_uion_sale_and_active"
+                android:textSize="@dimen/text_18" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvPauseActive_UionDialog"
+            android:layout_width="wrap_content"
+            android:text="@string/customer_binding_card_not_activate"
+            android:textColor="#27acf9"
+            android:layout_gravity="center"
+            android:layout_marginBottom="34dp"
+            android:textSize="@dimen/text_16"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</FrameLayout>

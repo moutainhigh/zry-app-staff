@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_checked="true">
+        <selector>
+            <item android:state_pressed="true">
+                <shape>
+                    <stroke android:width="0.5dp" android:color="#ff8251"></stroke>
+                    <corners android:radius="4dp" />
+                    <solid android:color="#ffe6d9" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <stroke android:width="0.5dp" android:color="#ff8251"></stroke>
+                    <corners android:radius="4dp" />
+                    <solid android:color="#ffffff" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+
+    <item android:state_enabled="false">
+        <shape>
+            <stroke android:width="0.5dp" android:color="#c3c8ce"></stroke>
+            <corners android:radius="4dp" />
+            <solid android:color="#f0f3f6" />
+        </shape>
+    </item>
+
+    <item>
+        <selector>
+            <item android:state_pressed="true">
+                <shape>
+                    <stroke android:width="0.5dp" android:color="#32adfa"></stroke>
+                    <corners android:radius="4dp" />
+                    <solid android:color="#d9f0fc" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <stroke android:width="0.5dp" android:color="#32adfa"></stroke>
+                    <corners android:radius="4dp" />
+                    <solid android:color="#ffffff" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+
+    <!--<item android:drawable="@drawable/orderdish_clear_status_disselect_all_selector" android:state_checked="true"/>
+    <item android:drawable="@drawable/orderdish_clear_status_select_all_checkbox_not_enabled" android:state_enabled="false"/>
+    <item android:drawable="@drawable/orderdish_clear_status_select_all_selector"/>-->
+
+</selector>

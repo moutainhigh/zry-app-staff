@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="beauty_select_dialog_title">选择服务</string>
+    <string name="beauty_select_dialog_title_hint">(可多选)</string>
+    <string name="beauty_search_hint">请输入服务名称</string>
+    <string name="all">全部</string>
+    <string name="beauty_open_trade">开单</string>
+    <string name="beauty_refuse">拒绝</string>
+    <string name="beauty_buy_service">服务购买</string>
+    <string name="beauty_source_pre">来源：</string>
+    <string name="beauty_source_daodian">线下预约</string>
+    <string name="beauty_source_wechat">微信预约</string>
+    <string name="beauty_booking_cosmetologist_unselected">未选择技师</string>
+    <string name="beauty_booking_cancel_reason">商家取消</string>
+    <string name="beauty_outline">超时</string>
+    <string name="beauty_custom">自定义</string>
+    <string name="beauty_arrive">到店：%1$s</string>
+    <string name="beauty_arrive_time">到店时间</string>
+    <string name="beauty_mr">先生</string>
+    <string name="beauty_miss">女士</string>
+</resources>

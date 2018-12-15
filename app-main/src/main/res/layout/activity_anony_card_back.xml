@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment
+        android:id="@+id/fg_status_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.zhongmei.bty.dinner.orderdish.TitleBarFragment_" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fg_status_bar"
+        android:background="@color/color_EFEFEF"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <RelativeLayout
+                android:id="@+id/rl_title_content"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/title_bar_height"
+                android:background="@color/title_blue">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    style="@style/title_icon_style"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/customer_back_icon" />
+
+                <TextView
+                    android:textStyle="bold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:text="@string/anonymous_card_return"
+                    android:textColor="@color/text_white"
+                    android:textSize="21sp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="7dp"
+                android:layout_below="@id/rl_title_content"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:background="@drawable/uion_read_card_layout"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="30dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:background="@color/color_F6F6F6"
+                    android:gravity="center_vertical"
+                    android:text="@string/anonymous_card_info"
+                    android:textColor="@color/color_666666"
+                    android:textSize="@dimen/text_14" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:id="@+id/tv_card_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:hint="@string/entity_card_reset"
+                        android:textColor="@color/color_151515"
+                        android:textColorHint="@color/color_999999"
+                        android:textSize="@dimen/text_14" />
+
+                </TableRow>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/order_state"
+                            android:textColor="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/tv_card_back_status"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:hint="@string/entity_card_reset"
+                            android:textColor="@color/color_151515"
+                            android:textColorHint="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/anony_card_back_mode"
+                            android:textColor="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/tv_card_back_mode"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:hint="@string/entity_card_reset"
+                            android:textColor="@color/color_151515"
+                            android:textColorHint="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+                    </TableRow>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:orientation="horizontal">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/anony_card_sale_time"
+                            android:textColor="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/tv_card_sale_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:hint="@string/entity_card_reset"
+                            android:textColor="@color/color_151515"
+                            android:textColorHint="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/anony_card_sale_creater"
+                            android:textColor="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/tv_card_sale_creater"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:hint="@string/entity_card_reset"
+                            android:textColor="@color/color_151515"
+                            android:textColorHint="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+                    </TableRow>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/anony_card_balance"
+                            android:textColor="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/tv_card_balance"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_marginStart="4dp"
+                            android:hint="@string/entity_card_reset"
+                            android:textColor="@color/color_FF9B41"
+                            android:textColorHint="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/anony_card_present"
+                            android:textColor="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/tv_card_present"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="4dp"
+                            android:hint="@string/entity_card_reset"
+                            android:textColor="@color/color_FF9B41"
+                            android:textColorHint="@color/color_999999"
+                            android:textSize="@dimen/text_14" />
+
+                        <TextView
+                            android:id="@+id/tv_card_back_none"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/anony_card_back_none"
+                            android:textColor="@color/color_999999"
+                            android:textSize="@dimen/text_14"
+                            android:visibility="invisible" />
+
+                    </TableRow>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:paddingRight="10dp"
+                    android:paddingLeft="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/anony_card_cost"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:id="@+id/tv_card_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:hint="@string/entity_card_reset"
+                        android:textColor="@color/color_FF9B41"
+                        android:textColorHint="@color/color_999999"
+                        android:textSize="@dimen/text_14" />
+
+                    <ImageView
+                        android:id="@+id/iv_delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/order_close"
+                        android:contentDescription="@string/app_name"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="28dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:background="@color/color_F6F6F6"
+                    android:gravity="center_vertical"
+                    android:text="@string/anony_card_back_balance"
+                    android:textColor="@color/color_666666"
+                    android:textSize="@dimen/text_14" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/anony_card_back_total"
+                        android:textColor="@color/color_999999"
+                        android:textSize="@dimen/text_14" />
+
+                    <TextView
+                        android:id="@+id/tv_card_back_total"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:hint="@string/entity_card_reset"
+                        android:textColor="@color/color_FF9B41"
+                        android:textColorHint="@color/color_999999"
+                        android:textSize="@dimen/text_14" />
+
+                </TableRow>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/btn_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/return_customerCard_ok_height"
+                    android:layout_marginBottom="13dp"
+                    android:background="@drawable/anonymous_card_pay_btn_selector"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="@string/card_return_str"
+                    android:textColor="@color/anonymous_card_pay_btn_color"
+                    android:textSize="@dimen/text_16" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!-- 读卡 -->
+        <com.zhongmei.bty.customer.card.view.CustomReadCardView_
+            android:id="@+id/crcv_read_card"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</RelativeLayout>

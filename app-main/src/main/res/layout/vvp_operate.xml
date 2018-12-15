@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom">
+
+
+    <Button
+        android:text="@string/dinner_orderdish_dish_prepare"
+        style="@style/DishOperateButtonStyle"
+        android:textColor="@color/dish_operate_color_selector"
+        android:drawableTop="@drawable/dinner_dish_wakeup_selector"
+        android:id="@+id/btn_prepare"
+        android:visibility="visible" />
+
+    <Button
+        android:text="@string/dinner_orderdish_dish_make"
+        style="@style/DishOperateButtonStyle"
+        android:textColor="@color/dish_operate_color_selector"
+        android:drawableTop="@drawable/dinner_dish_make_selector"
+        android:id="@+id/btn_make"
+        android:visibility="visible" />
+
+    <Button
+        android:text="@string/dinner_orderdish_dish_cancel_prepare"
+        style="@style/DishOperateButtonStyle"
+        android:textColor="@color/dish_operate_color_selector"
+        android:drawableTop="@drawable/dinner_dish_wakeup_cancel"
+        android:id="@+id/btn_cancel_prepare"
+        android:visibility="gone" />
+
+    <Button
+        android:text="@string/dinner_orderdish_cancel_dish_make"
+        style="@style/DishOperateButtonStyle"
+        android:textColor="@color/dish_operate_color_selector"
+        android:drawableTop="@drawable/dinner_dish_make_cancel"
+        android:id="@+id/btn_cancel_make"
+        android:visibility="gone" />
+
+    <Button
+        android:text="@string/dinner_orderdish_dish_urge"
+        style="@style/DishOperateButtonStyle"
+        android:textColor="@color/dish_operate_color_selector"
+        android:drawableTop="@drawable/dinner_dish_remind"
+        android:id="@+id/btn_remind"
+        android:visibility="gone" />
+
+    <Button
+        android:text="@string/delete_item"
+        android:id="@+id/btn_delete"
+        android:drawableTop="@drawable/dinner_dish_delete"
+        style="@style/DishOperateButtonStyle" />
+
+    <Button
+        android:text="@string/replace_dish"
+        android:id="@+id/btn_replace"
+        android:drawableTop="@drawable/dinner_dish_replace"
+        style="@style/DishOperateButtonStyle"
+        android:visibility="gone" />
+
+    <Button
+        android:text="@string/pause_print"
+        style="@style/DishOperateButtonStyle"
+        android:drawableTop="@drawable/dinner_pause_print"
+        android:id="@+id/btn_pause" />
+
+    <Button
+        android:text="@string/dinner_reprint_kitchen_all"
+        style="@style/DishOperateButtonStyle"
+        android:drawableTop="@drawable/dinner_reprint_kitchen_all"
+        android:id="@+id/btn_reprint_kitchen_all" />
+
+    <Button
+        android:text="@string/dinner_reprint_kitchen_cell"
+        style="@style/DishOperateButtonStyle"
+        android:drawableTop="@drawable/dinner_reprint_kitchen_cell"
+        android:id="@+id/btn_reprint_kitchen_cell" />
+
+    <Button
+        android:text="@string/give"
+        style="@style/DishOperateButtonStyle"
+        android:drawableTop="@drawable/dinner_dish_give"
+        android:id="@+id/btn_give" />
+
+</LinearLayout>

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/verify_bg">
+
+        <LinearLayout
+            android:id="@+id/ll_loading_mode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:scaleType="center"
+                android:src="@drawable/scan_mode_loading_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/deposit_scan_code_title"
+                android:textColor="#666666"
+                android:textSize="@dimen/text_26"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="28dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/deposit_scan_code_desc"
+                android:textColor="#666666"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/code_edittext"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/scan_edittext_bg"
+                    android:hint="@string/input_code_hint"
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:textColorHint="@color/print_line_gray"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/ok"
+                    android:layout_width="80dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/anonymouscard_paybtn_selector"
+                    android:enabled="false"
+                    android:gravity="center"
+                    android:text="@string/ok"
+                    android:textColor="@color/print_line_gray"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_detail_mode"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="13dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/refund_deposit"
+                android:textColor="#ff7901"
+                android:textSize="@dimen/text_26"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#e6ebef" />
+
+            <com.zhongmei.bty.cashier.ordercenter.view.ObservableScrollView
+                android:id="@+id/main_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginRight="22dp"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="#e6ebef"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="@string/deposit_refund_detail"
+                        android:textColor="#b2b7bc"
+                        android:textSize="@dimen/text_16" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/deposit_serial_number"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:id="@+id/tv_serial_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16"
+                            tools:text="A12345" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/deposit_total_amount"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:id="@+id/tv_deposit"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/text_guest_cnt"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:id="@+id/tv_people_count"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16"
+                            tools:text="" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/deposit_meal_time"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:id="@+id/tv_time_len"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_desktop_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/deposit_table"
+                            android:textColor="#333333"
+                            android:textSize="16dp" />
+
+                        <TextView
+                            android:id="@+id/tv_desktop_num"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:singleLine="true"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="#e6ebef"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="@string/deposit_refund_type"
+                        android:textColor="#b2b7bc"
+                        android:textSize="@dimen/text_16"
+                        android:visibility="visible" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:visibility="visible">
+
+                        <RadioGroup
+                            android:id="@+id/rg_back_type"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="8dp"
+                            android:orientation="vertical">
+
+                            <RadioButton
+                                android:id="@+id/rb_back_all"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:button="@drawable/multicselect_checkbox_style"
+                                android:checked="true"
+                                android:paddingLeft="15dp"
+                                android:text="@string/deposit_refund_all"
+                                android:textColor="#333333"
+                                android:textSize="@dimen/text_18" />
+
+                            <RadioButton
+                                android:id="@+id/rb_back_segment"
+                                style="@style/CashierPopupCheckboxTheme"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:button="@drawable/multicselect_checkbox_style"
+                                android:paddingLeft="15dp"
+                                android:text="@string/deposit_refund_part"
+                                android:textColor="#333333"
+                                android:textSize="@dimen/text_18"
+                                android:visibility="visible" />
+                        </RadioGroup>
+
+                        <EditText
+                            android:id="@+id/et_segment_value"
+                            android:layout_width="126dp"
+                            android:layout_height="34dp"
+                            android:layout_alignBottom="@id/rg_back_type"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="20dp"
+                            android:background="@drawable/dish_button_nomal"
+                            android:inputType="numberDecimal"
+                            android:paddingLeft="5dp"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/text_16"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <com.zhongmei.bty.cashier.ordercenter.view.ReasonLayout
+                        android:id="@+id/reasonLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/transparent"
+                        android:orientation="vertical" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="#e6ebef"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="@string/deposit_refund_method"
+                        android:textColor="#b2b7bc"
+                        android:textSize="@dimen/text_16"
+                        android:visibility="visible" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:id="@+id/rg_back_path"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"
+                            android:visibility="visible">
+
+                            <RadioButton
+                                android:id="@+id/rb_path_cash"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:button="@null"
+                                android:checked="true"
+                                android:text="@string/deposit_refund_cash"
+                                android:textColor="#333333"
+                                android:textSize="@dimen/text_18" />
+
+                            <RadioButton
+                                android:id="@+id/rb_path_bank"
+                                style="@style/CashierPopupCheckboxTheme"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:paddingLeft="15dp"
+                                android:text="@string/deposit_refund_unionpay"
+                                android:textColor="#333333"
+                                android:textSize="@dimen/text_18"
+                                android:visibility="gone" />
+                        </RadioGroup>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/deposit_refund_method_detail"
+                            android:textColor="#ff7901"
+                            android:textSize="@dimen/text_14" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.zhongmei.bty.cashier.ordercenter.view.ObservableScrollView>
+
+            <Button
+                android:id="@+id/btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="@drawable/sure_btn_bg"
+                android:text="@android:string/ok"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/text_22"
+                android:visibility="visible" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|top"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="13dp"
+            android:background="@drawable/dinner_close" />
+
+        <!--<EditText
+            android:id="@+id/et_barcode"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_gravity="top|center"
+            android:background="@color/transparent"
+            android:cursorVisible="false"
+            android:focusable="true"
+            android:imeOptions="normal"
+            android:inputType="text"
+            android:textColor="@color/transparent" />-->
+    </FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="473dp"
+    android:layout_height="247dp"
+    android:background="@drawable/shape_bg_calm_exception_crash">
+
+    <TextView
+        android:id="@+id/activity_exception_handler_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:drawableLeft="@drawable/ic_calm_exception_crash_title"
+        android:drawablePadding="15dp"
+        android:gravity="center_vertical"
+        android:text="@string/calm_exception_crash_title"
+        android:textColor="@color/color_333333"
+        android:textSize="27sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_exception_handler_title"
+        android:layout_marginLeft="47dp"
+        android:layout_marginTop="19dp"
+        android:text="@string/calm_exception_crash_desc"
+        android:textColor="@color/color_333333"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/activity_exception_handler_btn"
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/shape_bg_calm_exception_crash_button"
+        android:text="@string/calm_exception_crash_submit"
+        android:textColor="@color/color_ffffff"
+        android:textSize="21sp" />
+</RelativeLayout>

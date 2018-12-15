@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F0F3F6"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="@string/setting_dinner_exit"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        style="@style/setting_right_content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/setting_switch_item_title_text"
+            android:text="@string/setting_dinner_exit" />
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                style="@style/setting_switch_item_text"
+                android:text="@string/setting_dinner_exit_kitchen" />
+
+            <ToggleButton
+                android:id="@+id/dinner_exit_kitchen_switch"
+                style="@style/setting_switch_item_toggle" />
+        </LinearLayout>
+
+        <TextView
+            style="@style/setting_switch_item_title_text"
+            android:layout_marginTop="20dp"
+            android:text="@string/setting_dinner_exit" />
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                style="@style/setting_switch_item_text"
+                android:text="@string/setting_dinner_exit_settle_accounts" />
+
+            <ToggleButton
+                android:id="@+id/dinner_exit_settle_switch"
+                style="@style/setting_switch_item_toggle" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

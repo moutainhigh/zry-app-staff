@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="8dp"
+    android:background="@color/transparent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/topline"
+        style="@style/style_topline" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:paddingTop="8dp"
+        android:layout_marginLeft="10dp"
+        android:drawableLeft="@drawable/middle_category_shape"
+        android:textColor="@color/dinner_dishname_color"
+        android:textSize="16sp" />
+
+
+    <TextView
+        android:id="@+id/property"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textColor="#9B9B9B"
+        android:textSize="12sp" />
+
+</LinearLayout>

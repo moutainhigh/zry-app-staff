@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="@dimen/customer_coupon_layout_w"
+    android:layout_height="@dimen/customer_coupon_layout_h"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@drawable/customer_cash_bg_left">
+
+        <View
+            android:id="@+id/vwLabel"
+            android:layout_width="@dimen/customer_coupon_label_w"
+            android:layout_height="match_parent"
+            android:background="@drawable/customer_coupon_label_red" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@id/vwLabel"
+            android:src="@drawable/customer_cash_juan" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/customer_coupon_left_l_p"
+                android:layout_marginRight="@dimen/customer_coupon_left_p"
+                android:ems="1"
+                android:lineSpacingExtra="-4dp"
+                android:maxLines="3"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_22"
+                tools:text="礼品卷" />
+
+        </FrameLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/customer_cash_bg_right">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/customer_coupon_right_p"
+            android:paddingRight="@dimen/customer_coupon_right_p">
+
+            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                android:id="@+id/desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_13"
+                tools:text="@string/gift_full_value" />
+
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_20" />
+
+            <TextView
+                android:id="@+id/cash_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_20"
+                android:text="123"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/discount_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="@string/discount1"
+                    android:textColor="@color/color_333333"
+                    android:textSize="@dimen/text_20" />
+            </LinearLayout>
+
+            <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/time_limit_str"-->
+            <!--android:textColor="@color/customer_rule_gray"-->
+            <!--android:textSize="14sp" />-->
+
+            <TextView
+                android:id="@+id/time_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/customer_coupon_time_t"
+                android:textColor="@color/customer_rule_gray"
+                android:textSize="@dimen/text_11"
+                android:singleLine="true"
+                tools:text="有效期限 2017/01/01-2017/01/01" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

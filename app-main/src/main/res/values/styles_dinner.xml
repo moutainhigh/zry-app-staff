@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="dinner_balace_title_txt_style">
+        <item name="android:textSize">@dimen/text_20</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="dinner_bottom_text_style">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:textColor">@color/text_white</item>
+    </style>
+
+    <style name="payinfo_item_text_style">
+        <item name="android:textColor">#555555</item>
+        <item name="android:textSize">@dimen/text_12</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="dinnerMemoStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/orderdish_text_black</item>
+    </style>
+
+
+    <style name="dinnerOrderTextStyle">
+        <item name="android:textSize">@dimen/dinner_shoppingCart_dishName_textSize</item>
+        <item name="android:textColor">@color/orderdish_text_black</item>
+    </style>
+
+    <style name="dinnerLabelUnsave">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dinner_label_unsave</item>
+    </style>
+
+    <style name="dinnerLabelUnPrinted">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dinner_label_unprinted</item>
+    </style>
+
+    <style name="dinnerLabelSavePrinted">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/dinner_label_printed</item>
+    </style>
+
+    <style name="dinnerdishTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/dinner_dishname_color</item>
+    </style>
+
+    <style name="dinnerdishTextDescStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_6981AD</item>
+    </style>
+
+
+    <style name="dinnerProperResidue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#ff7901</item>
+        <item name="android:textSize">@dimen/text_16</item>
+    </style>
+
+    <style name="dinnerDishBrownTv" parent="@style/dinnerProperResidue">
+        <item name="android:textSize">@dimen/text_28</item>
+    </style>
+
+    <style name="dinnerCustomerBanlanceLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">76dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="dinnerCustomerBanlanceTextBase">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:focusable">false</item>
+    </style>
+
+    <style name="dinnerCustomerBanlanceText" parent="@style/dinnerCustomerBanlanceTextBase">
+        <item name="android:layout_marginLeft">14dp</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:textColor">#333333</item>
+        <item name="android:textSize">@dimen/text_22</item>
+    </style>
+
+    <style name="dinnerCustomerBanlanceValue" parent="@style/dinnerCustomerBanlanceTextBase">
+        <item name="android:textColor">#ff7901</item>
+        <item name="android:textSize">@dimen/text_26</item>
+    </style>
+
+
+    <style name="dinnerIntergralToCash" parent="@style/dinnerCustomerBanlanceTextBase">
+        <item name="android:textColor">#53565b</item>
+        <item name="android:textSize">@dimen/text_16</item>
+    </style>
+
+    <style name="dinnerDishOperateTextView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#33adf6</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/orderdish_select_dish_item_bg</item>
+    </style>
+
+    <style name="TableInfoMoreMenuItemTextView">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#33adf6</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:background">@drawable/orderdish_select_dish_item_bg</item>
+    </style>
+
+    <style name="style_formcenter_column_hint">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textSize">@dimen/text_14</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="style_btn_blue">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_20</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">58dp</item>
+        <item name="android:background">@drawable/btn_blue_selector</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="style_topline">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">#e3e3e3</item>
+    </style>
+
+    <style name="style_table_tv_morefunction_business_charge">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+</resources>

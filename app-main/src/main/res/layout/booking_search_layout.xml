@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/customer_card_bg"
+    android:orientation="vertical"
+    android:padding="0.5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@drawable/customer_search_background"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/btn_search_description"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:paddingLeft="22dp"
+                android:paddingRight="9dp"
+                android:src="@drawable/editer_text_search_icon" />
+
+            <EditText
+                android:id="@+id/booking_search_edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:hint="@string/booking_search_condition_call_or_name"
+                android:singleLine="true"
+                android:textColorHint="#BCBCBC"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/booking_search_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/editer_text_clear_icon"
+                android:contentDescription="@string/btn_search_description"
+                android:gravity="center"
+                android:padding="5dp"
+                android:textColor="@color/text_white"
+                android:textSize="20sp"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/booking_search_btn"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/booking_search_button"
+            android:enabled="false"
+            android:text="@string/booking_search"
+            android:textColor="@color/booking_search_button_text" />
+    </LinearLayout>
+
+    <include layout="@layout/booking_listview_layout" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@drawable/customer_card_bg_bottom" />
+
+</LinearLayout>

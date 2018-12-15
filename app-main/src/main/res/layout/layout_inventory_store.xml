@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/layout_inventory_store"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_operate_reason_title_height"
+        android:text="@string/dinner_table_inventory_num_hint"
+        android:textColor="#FFB2B7BC"
+        android:background="#FFE6EBEF"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+        android:textSize="@dimen/dialog_operate_reason_title_size" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/text_16"
+            android:text="@string/dinner_table_invertory_num_title" />
+
+        <TextView
+            android:id="@+id/tv_inventory_num"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:drawableRight="@drawable/gray_arrow_right"
+            android:drawablePadding="5dp"
+            android:textSize="@dimen/text_16"
+            android:textColor="@color/color_333333"
+            android:text="0" />
+    </RelativeLayout>
+</LinearLayout>

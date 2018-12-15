@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="keyborad">
+        <attr name="margingRL" format="integer" />
+        <attr name="margingTB" format="integer" />
+        <attr name="source" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="SetmealButton">
+        <attr name="title" format="reference" />
+        <attr name="description" format="reference" />
+        <attr name="background" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="ColumnLayout">
+        <attr name="column" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="LableEditText">
+        <attr name="labletext" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="page_size" format="integer" />
+        <attr name="action_mod" format="enum">
+            <enum name="hide_always" value="1" />
+            <enum name="show_always" value="2" />
+            <enum name="condition" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <attr name="borderRadius" format="dimension" />
+    <attr name="type">
+        <enum name="circle" value="0" />
+        <enum name="round" value="1" />
+    </attr>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="borderRadius" />
+        <attr name="type" />
+    </declare-styleable>
+
+    <declare-styleable name="AutoVerticalScrollTextView">
+        <attr name="textColor" format="reference|color" />
+        <attr name="textSize" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="PropertyItemView">
+        <attr name="titleText" format="string" />
+        <attr name="propertyText" format="string" />
+        <attr name="propertyVisiable">
+            <enum name="gone" value="8"></enum>
+            <enum name="visible" value="0"></enum>
+            <enum name="invisible" value="4"></enum>
+        </attr>
+        <attr name="devideLineVisiable">
+            <enum name="gone" value="8"></enum>
+            <enum name="visible" value="0"></enum>
+            <enum name="invisible" value="4"></enum>
+        </attr>
+        <attr name="iconVisiable">
+            <enum name="gone" value="8"></enum>
+            <enum name="visible" value="0"></enum>
+            <enum name="invisible" value="4"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="AvatarView">
+        <attr name="showLabel" format="boolean" />
+        <attr name="avatarSize" format="dimension" />
+        <attr name="avatarSrc" format="reference" />
+        <attr name="labelSrc" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="DinnerLeftMenuView">
+        <attr name="showBooking">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+        <!--<attr name="showNotify">-->
+        <!--<enum name="visible" value="0"/>-->
+        <!--<enum name="invisible" value="1"/>-->
+        <!--<enum name="gone" value="2"/>-->
+        <!--</attr>>-->
+        <attr name="showBomb">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+        <attr name="showQueue">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+        <attr name="showGroup">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+        <attr name="showDinner">
+            <enum name="visible" value="0" />
+            <enum name="invisible" value="1" />
+            <enum name="gone" value="2" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="LabelView">
+        <attr name="backgroundColor" format="color" />
+        <attr name="textTitleColor" format="color" />
+        <attr name="textContentColor" format="color" />
+
+        <attr name="textTitle" format="string" />
+        <attr name="textContent" format="string" />
+
+        <attr name="textTitleSize" format="dimension" />
+        <attr name="textContentSize" format="dimension" />
+
+        <attr name="labelTopPadding" format="dimension" />
+        <attr name="labelCenterPadding" format="dimension" />
+        <attr name="labelBottomPadding" format="dimension" />
+        <attr name="labelTopDistance" format="dimension" />
+
+        <attr name="textTitleStyle">
+            <enum name="normal" value="0" />
+            <enum name="italic" value="1" />
+            <enum name="bold" value="2" />
+        </attr>
+
+        <attr name="textContentStyle">
+            <enum name="normal" value="0" />
+            <enum name="italic" value="1" />
+            <enum name="bold" value="2" />
+        </attr>
+
+        <attr name="direction">
+            <enum name="leftTop" value="-45" />
+            <enum name="rightTop" value="45" />
+        </attr>
+    </declare-styleable>
+
+</resources>

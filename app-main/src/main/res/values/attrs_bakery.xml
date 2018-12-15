@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="bakery_profile_view">
+        <attr name="info_title" format="string" />
+        <attr name="info_title_icon" format="reference" />
+        <attr name="name_key" format="string" />
+    </declare-styleable>
+
+</resources>

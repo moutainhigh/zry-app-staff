@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_psam_card_does_not_exist">PSAM卡没有插好或者\nPSAM模块问题</string>
+    <string name="error_nfc_seek_card_timeout">NFC寻卡超时</string>
+    <string name="error_nfc_authentication_failed">NFC认证出错</string>
+    <string name="error_nfc_read_card_failed">NFC读卡出错</string>
+    <string name="error_nfc_board_failed">NFC模块问题</string>
+    <string name="error_code_unknown">其它错误字串</string>
+</resources>

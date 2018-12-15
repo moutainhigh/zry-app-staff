@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/setting_dinner_switch_item_height"
+    android:padding="0.5dp">
+
+    <TextView
+        android:id="@+id/tv_title_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="@dimen/setting_dinner_switch_item_size"
+        android:layout_marginLeft="@dimen/setting_dinner_switch_item_text_margin_left"
+        android:textColor="#333333"
+        android:text="性别" />
+
+    <TextView
+        android:id="@+id/tv_property"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/setting_dinner_switch_item_size"
+        android:layout_marginLeft="@dimen/setting_dinner_switch_item_text_margin_left"
+        android:textColor="#999999" />
+
+    <RelativeLayout
+        android:id="@+id/btn"
+        android:layout_width="43dp"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/setting_queue_spinner_down"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+
+</LinearLayout>

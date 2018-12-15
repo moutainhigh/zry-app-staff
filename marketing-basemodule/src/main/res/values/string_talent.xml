@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name_talent">员工管理</string>
+    <string name="talent_alter_bind_face_text">还没有绑定人脸哦,请先绑定人脸信息！</string>
+    <string name="talent_alter_not_promisson">您还没有权限！</string>
+    <string name="promisson_face_label">人脸授权</string>
+    <string name="talent_open_face_alter">请先在“我的服务”中开通人脸服务！</string>
+    <string name="talent_know_alter">知道了</string>
+</resources>

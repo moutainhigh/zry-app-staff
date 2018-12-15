@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#292e37"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/lanucher_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/lanucher_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/lanucher_user_icon"
+                android:layout_width="45dip"
+                android:layout_height="45dip"
+                android:layout_marginLeft="54dip"
+                android:src="@drawable/lanucher_user_default" />
+
+            <LinearLayout
+                android:id="@+id/ll_lanucher_user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/lanucher_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dip"
+                    android:maxWidth="150dip"
+                    android:minWidth="50dip"
+                    android:singleLine="true"
+                    android:textColor="#9197A7"
+                    android:textSize="20sp" />
+
+                <ImageView
+                    android:id="@+id/iv_pull_down_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_gravity="center"
+                    android:src="@drawable/icon_pull_down" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_divide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="18dp"
+                android:orientation="horizontal">
+
+                <View
+                    android:background="#14171D"
+                    android:layout_width="1.33dp"
+                    android:layout_height="24dp" />
+
+                <View
+                    android:background="#333840"
+                    android:layout_width="1.33dp"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/lanucher_user_loginout"
+                android:layout_width="24dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="16dip"
+                android:src="@drawable/lanucher_user_change_icon" />
+
+            <TableRow
+                android:id="@+id/lanucher_auth_login_tr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="14dp"
+                    android:background="#333840" />
+
+                <TextView
+                    android:id="@+id/lanucher_auth_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:drawablePadding="8dp"
+                    android:drawableStart="@drawable/ic_auth_qr_code"
+                    android:maxWidth="150dip"
+                    android:minWidth="50dip"
+                    android:singleLine="true"
+                    android:text="@string/scan_login_str"
+                    android:textColor="#9197A7"
+                    android:textSize="20sp" />
+
+            </TableRow>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/lanucher_logo"
+                android:layout_width="254dp"
+                android:layout_height="96dp"
+                android:layout_marginRight="27dp"
+                android:src="@drawable/home_logo" />
+
+            <LinearLayout
+                android:id="@+id/foo_split_line"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="1.33dp"
+                    android:layout_height="match_parent"
+                    android:background="#14171D" />
+
+                <View
+                    android:layout_width="1.33dp"
+                    android:layout_height="match_parent"
+                    android:background="#FF50596A" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/brand_logo"
+                android:layout_width="152dp"
+                android:layout_height="76dp"
+                android:layout_marginLeft="27dp"
+                android:scaleType="fitXY"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="54dp"
+            android:layout_marginTop="70dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.zhongmei.bty.common.view.ui.widget.RoundImageView
+                android:id="@+id/iv_shop_logo"
+                android:layout_width="43dp"
+                android:layout_height="43dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/shop_icon" />
+
+            <TextView
+                android:id="@+id/tv_shop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:maxLines="2"
+                android:textColor="#818690"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/lanucher_shopinfo_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="28dip">
+
+        <LinearLayout
+            android:id="@+id/ll_weChat_vipcn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginLeft="64dip"
+            android:background="@drawable/calm_home_btn_bg"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/qrcode_for_gh_small" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#5A5F69"
+                android:textSize="15sp"
+                android:text="@string/calm_home_wechat__official_account_hint"
+                android:layout_marginLeft="3dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_shop_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lanucher_shopInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/lanucher_shopId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dip"
+                    android:gravity="center"
+                    android:textColor="#5A5F69"
+                    android:textSize="15sp"
+                    tools:text="00000000" />
+
+                <TextView
+                    android:id="@+id/lanucher_tabletNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dip"
+                    android:gravity="center"
+                    android:textColor="#5A5F69"
+                    android:textSize="15sp"
+                    tools:text="0000" />
+
+                <TextView
+                    android:id="@+id/lanucher_main_pos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dip"
+                    android:background="@drawable/lanucher_main_pos_bg"
+                    android:gravity="center"
+                    android:maxWidth="250dip"
+                    android:minWidth="50dip"
+                    android:singleLine="true"
+                    android:textColor="#747b8b"
+                    android:textSize="14sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/customer_service_phoneNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/customer_service_phoneNo"
+                android:textColor="#5A5F69"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/version_layer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/ll_shop_info"
+            android:layout_marginLeft="30dip">
+
+            <TextView
+                android:id="@+id/lanucher_version_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="400dip"
+                android:minWidth="50dip"
+                android:singleLine="true"
+                android:textColor="#5A5F69"
+                android:textSize="15sp"
+                tools:text="0.00.00" />
+
+            <TextView
+                android:id="@+id/lanucher_print_version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:maxWidth="400dip"
+                android:minWidth="50dip"
+                android:singleLine="true"
+                android:textColor="#5A5F69"
+                android:textSize="15sp"
+                tools:text="0.00.00" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_koubei_logo"
+        android:layout_above="@id/lanucher_shopinfo_ll"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/ic_koubei_logo"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/lanucher_app_grid_load_hint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/iv_koubei_logo"
+        android:layout_below="@id/lanucher_top_layout"
+        android:layout_marginBottom="5dip"
+        android:layout_marginLeft="50dip"
+        android:layout_marginRight="50dip"
+        android:layout_marginTop="60dip"
+        android:gravity="center"
+        android:horizontalSpacing="10dip"
+        android:text="@string/load_app_is_running"
+        android:textColor="#5A5F69"
+        android:textSize="18sp"
+        android:visibility="gone" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/iv_koubei_logo"
+        android:layout_below="@id/lanucher_top_layout"
+        android:layout_marginBottom="10dip"
+        android:layout_marginTop="40dip">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/lanucher_app_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fadingEdge="none"
+            android:fadingEdgeLength="0dp"
+            android:listSelector="@android:color/transparent"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp"
+            android:scrollbars="none" />
+
+    </FrameLayout>
+
+    <com.zhongmei.bty.splash.calmlauncher.ViewPagerDot
+        android:id="@+id/lanucher_app_pager_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_above="@id/lanucher_shopinfo_ll"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="130dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginRight="7dp"
+            android:background="@drawable/lanucher_app_pager_dot"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp" />
+
+        <ImageView
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginLeft="7dp"
+            android:background="@drawable/lanucher_app_pager_dot" />
+    </com.zhongmei.bty.splash.calmlauncher.ViewPagerDot>
+
+    <LinearLayout
+        android:id="@+id/btn_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="29dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/check_btn_bg"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="23dp"
+            android:text="@string/setting_check"
+            android:textColor="#D2D3D4"
+            android:textSize="19dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_cpu_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0%"
+                android:textColor="#D2D3D4"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cpu_occupy"
+                android:textColor="#D2D3D4"
+                android:textSize="9dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

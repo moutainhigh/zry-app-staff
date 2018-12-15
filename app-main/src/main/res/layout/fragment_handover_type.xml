@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f3f6"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/handover_type_setting"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_22" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginTop="26dp"
+        android:text="@string/handover_type_select"
+        android:textColor="#999999"
+        android:textSize="14.67sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/selector_type_setting"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:background="@drawable/list_item_blue_bg"
+            android:id="@+id/show_data_type_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="afterDescendants"
+            android:paddingBottom="14dp"
+            android:paddingLeft="14dp"
+            android:paddingTop="14dp">
+
+            <ImageButton
+                android:id="@+id/show_data_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/transparent"
+                android:src="@drawable/cashier_popup_check_checked" />
+
+            <TextView
+                android:id="@+id/type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_toRightOf="@id/show_data_type"
+                android:text="@string/show_data_type"
+                android:textColor="@color/black"
+                android:textSize="17.33sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/type"
+                android:layout_below="@id/type"
+                android:layout_toRightOf="@id/show_data_type"
+                android:text="@string/show_data_type_tips"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.67dp"
+            android:background="@color/color_d3d3d3" />
+
+        <RelativeLayout
+            android:background="@drawable/list_item_blue_bg"
+            android:id="@+id/hide_data_type_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:descendantFocusability="afterDescendants"
+            android:paddingBottom="14dp"
+            android:paddingLeft="14dp"
+            android:paddingTop="14dp">
+
+            <ImageButton
+                android:id="@+id/hide_data_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@color/transparent"
+                android:src="@drawable/cashier_popup_check_normal" />
+
+            <TextView
+                android:id="@+id/tv_hide_data_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="13dp"
+                android:layout_toRightOf="@id/hide_data_type"
+                android:text="@string/hide_data_type"
+                android:textSize="17.33sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/tv_hide_data_type"
+                android:layout_below="@id/tv_hide_data_type"
+                android:layout_toRightOf="@id/hide_data_type"
+                android:text="@string/hide_data_type_tips"
+                android:textColor="#999999"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

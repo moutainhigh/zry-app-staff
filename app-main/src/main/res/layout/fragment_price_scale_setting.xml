@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/setting_price_scale"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/setting_right_content_margin">
+
+        <TextView
+            android:id="@+id/tv_setting_price_scale"
+            style="@style/setting_switch_item_title_text"
+            android:text="@string/price_scale_code_setting" />
+
+        <LinearLayout
+            android:id="@+id/ll_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_setting_price_scale"
+            android:background="@drawable/setting_on_of_item_bg"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/price_scale_mode_1"
+                style="@style/setting_price_scale_selector_item">
+
+                <ImageButton
+                    android:id="@+id/price_scale_mode_1_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@color/transparent"
+                    android:clickable="false"
+                    android:src="@drawable/setting_content_item_selected" />
+
+                <TextView
+                    android:id="@+id/price_scale_mode_1_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                    android:layout_toRightOf="@id/price_scale_mode_1_img"
+                    android:text="@string/price_scale_mode_1"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/price_scale_mode_1_tv"
+                    android:text="@string/price_scale_code_length_13"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="@dimen/setting_dinner_switch_item_size" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.67dp"
+                android:background="@color/color_d3d3d3" />
+
+            <RelativeLayout
+                android:id="@+id/price_scale_mode_2"
+                style="@style/setting_price_scale_selector_item">
+
+                <ImageButton
+                    android:id="@+id/price_scale_mode_2_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@color/transparent"
+                    android:clickable="false"
+                    android:src="@drawable/setting_content_item_unselected" />
+
+                <TextView
+                    android:id="@+id/price_scale_mode_2_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                    android:layout_toRightOf="@id/price_scale_mode_2_img"
+                    android:text="@string/price_scale_mode_2"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/price_scale_mode_2_tv"
+                    android:text="@string/price_scale_code_length_13"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="@dimen/setting_dinner_switch_item_size" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.67dp"
+                android:background="@color/color_d3d3d3" />
+
+            <RelativeLayout
+                android:id="@+id/price_scale_mode_3"
+                style="@style/setting_price_scale_selector_item">
+
+                <ImageButton
+                    android:id="@+id/price_scale_mode_3_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@color/transparent"
+                    android:clickable="false"
+                    android:src="@drawable/setting_content_item_unselected" />
+
+                <TextView
+                    android:id="@+id/price_scale_mode_3_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                    android:layout_toRightOf="@id/price_scale_mode_3_img"
+                    android:text="@string/price_scale_mode_3"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/price_scale_mode_3_tv"
+                    android:text="@string/price_scale_code_length_18"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="@dimen/setting_dinner_switch_item_size" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.67dp"
+                android:background="@color/color_d3d3d3" />
+
+            <RelativeLayout
+                android:id="@+id/price_scale_mode_4"
+                style="@style/setting_price_scale_selector_item">
+
+                <ImageButton
+                    android:id="@+id/price_scale_mode_4_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@color/transparent"
+                    android:clickable="false"
+                    android:src="@drawable/setting_content_item_unselected" />
+
+                <TextView
+                    android:id="@+id/price_scale_mode_4_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/setting_dinner_switch_items_drawable_padding"
+                    android:layout_toRightOf="@id/price_scale_mode_4_img"
+                    android:text="@string/price_scale_mode_4"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/price_scale_mode_4_tv"
+                    android:text="@string/price_scale_code_length_18"
+                    android:textColor="@color/text_color_gray"
+                    android:textSize="@dimen/setting_dinner_switch_item_size" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/cashbox_tip" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="6.67dp"
+                    android:text="@string/setting_member_option_desc"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="14.7dp" />
+            </LinearLayout>
+
+            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6.67dp"
+                android:text="@string/price_scale_advice"
+                android:textColor="@color/print_text_gray"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

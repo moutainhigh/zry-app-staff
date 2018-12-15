@@ -1,0 +1,89 @@
+apply plugin: 'maven'
+afterEvaluate { project ->
+    configurations {
+        mvnpub
+    }
+
+    task printMappings << {
+        conf2ScopeMappings.mappings.each { k, v ->
+            println "configuration: ${k}"
+            println "mapping: \n\tpriority: ${v.priority}\n\tscope: ${v.scope}"
+            println "========================================"
+        }
+    }
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                conf2ScopeMappings.mappings.remove(configurations.compile)
+                conf2ScopeMappings.addMapping(300, configurations.mvnpub, "compile")
+                repository(url: uri("./maven-repo/"))
+                println("pom: " + pom.scopeMappings.mappings)
+                println("pom: " + pom.dependencies)
+
+                /*addFilter('api') {artifact, file ->
+                    //artifact.name == 'api'
+                    println("pom: " + artifact.name)
+                }
+                //pom.groupId = GROUP
+                //pom.artifactId = POM_ARTIFACT_ID
+                //pom.version = VERSION_NAME
+                pom.project {
+                    pom.artifactId = POM_ARTIFACT_ID
+                    pom.version = VERSION_NAME
+                    packaging POM_PACKAGING
+                }
+
+                /*pom.withXml {
+                    configurations.compile.allDependencies.each {
+                        println("dependencies: " + it)
+                    }*/
+
+                /*def root = asNode()
+                def dependenciesNode = root.appendNode('dependencies')
+                def repositoriesNode = root.appendNode('repositories')
+                //Iterate over the compile dependencies (we don't want the test ones), adding a <dependency> node for each
+                configurations.allDependencies.each {
+                    if (it.group != null) {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+                //add the repositories exclude local repositories,such as file:/D:/AndroidSDK/extras/android/m2repository/
+                project.repositories.each {
+                    if (!it.url.toString().startsWith('file')) {
+                        def repositoryNode = repositoriesNode.appendNode('repository')
+                        repositoryNode.appendNode('url', it.url)
+                        repositoryNode.appendNode('name', it.name)
+                        repositoryNode.appendNode('releases').appendNode("enabled",true)
+                        repositoryNode.appendNode('snapshots').appendNode("enabled",false)
+                    }
+                }*/
+                //}
+            }
+        }
+    }
+
+    /*task androidJavadocs(type: Javadoc) {
+        failOnError false
+        options.encoding = "utf-8"
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }*/
+
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.sourceFiles
+    }
+
+    artifacts {
+        archives androidSourcesJar
+        //archives androidJavadocsJar
+    }
+}

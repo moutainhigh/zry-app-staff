@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:background="@drawable/equipment_check"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/equipment_check_item"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/help_self_check_icon"
+            android:gravity="center_vertical"
+            android:text="@string/equipment_self_checking"
+            android:textColor="@drawable/text_equpment_selector"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/helpcenter_item_divider" />
+
+        <TextView
+            android:id="@+id/call_customer_item"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/help_call_customer_icon"
+            android:gravity="center_vertical"
+            android:text="@string/customer_phone"
+            android:textColor="@drawable/text_equpment_selector"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/helpcenter_item_divider" />
+
+        <TextView
+            android:id="@+id/team_view_item"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/help_team_view_icon"
+            android:gravity="center_vertical"
+            android:text="@string/team_viewer"
+            android:textColor="@drawable/text_equpment_selector"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/helpcenter_item_divider" />
+
+        <TextView
+            android:id="@+id/tv_autoset"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/ic_autoset"
+            android:gravity="center_vertical"
+            android:text="@string/autoset"
+            android:textColor="@drawable/text_equpment_selector"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/helpcenter_item_divider" />
+
+        <TextView
+            android:id="@+id/questions_item"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/help_questions_icon"
+            android:gravity="center_vertical"
+            android:text="@string/questions"
+            android:textColor="@drawable/text_equpment_selector"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/cut_down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_equipment_select"
+        android:gravity="center"
+        android:text="@string/up_str"
+        android:textColor="@color/helpcenter_item_press"
+        android:textSize="18sp" />
+
+</LinearLayout>

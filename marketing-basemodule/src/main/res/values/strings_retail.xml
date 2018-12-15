@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="retail_app_name">收银</string>
+    <string name="retail_goods_total"><![CDATA[商品数量：<b><font color=#57C1FF>%s</b>]]></string>
+    <string name="retail_customer_login_title">顾客登录/注册</string>
+    <string name="goods">商品</string>
+    <string name="quantity">数量</string>
+    <string name="money">金额</string>
+    <string name="no_goods">当前还没有商品哦～</string>
+    <string name="retail_scan_code_hint">扫描条形码添加商品</string>
+    <string name="retail_scan_code">扫码</string>
+    <string name="order_dish_search_goods_hint1">请输入商品条形码或助记码</string>
+    <string name="please_set_right_mode">请在设置->价签称中选择正确的模式</string>
+</resources>

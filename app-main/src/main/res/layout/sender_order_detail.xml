@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_square_up_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/order_center_detail_search_bg"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/rl_square_up_group_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="20dp"
+            android:drawableTop="@drawable/order_sender_detail_square_up"
+            android:gravity="center_horizontal"
+            android:text="@string/order_sender_detail_square_up_text"
+            android:textColor="@color/text_pay_method"
+            android:textSize="@dimen/text_20"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_detail_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/trade_orderdish_bg"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="61dp"
+            android:gravity="center"
+            android:text="@string/sender_order_track"
+            android:textColor="@color/text_pay_method"
+            android:textSize="@dimen/text_18" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_gray" />
+
+        <TextView
+            android:id="@+id/tv_delivery_address"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_14" />
+
+        <View
+            android:id="@+id/base_line"
+            android:layout_width="fill_parent"
+            android:layout_height="1dp"
+            android:background="@drawable/basedline"
+            android:paddingLeft="1dp"
+            android:paddingRight="1dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/sender_order_detail_paddingLeft"
+                android:paddingRight="@dimen/sender_order_detail_paddingRight">
+
+                <TextView
+                    android:id="@+id/tv_cost_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="26dp"
+                    android:layout_marginTop="30dp"
+                    android:gravity="center"
+                    android:textColor="#40cf85"
+                    android:textSize="@dimen/text_16" />
+
+
+                <!-- 订单送达时间 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_received_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="92dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/sender_order_detail_marginRight">
+
+                        <View
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/while_line" />
+
+                        <ImageView
+                            android:id="@+id/iv_received_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="center"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="7dp"
+                            android:src="@drawable/takeout_order_finish" />
+
+                        <View
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/green_line" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="92dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@drawable/dotted_line"
+                            android:paddingLeft="1dp"
+                            android:paddingRight="1dp" />
+
+                        <TextView
+                            android:id="@+id/tv_received_time_lb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:text="@string/sender_order_finish"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:id="@+id/tv_received_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_marginBottom="24dp"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/text_green"
+                            android:textSize="@dimen/text_16" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 订单送出时间 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_sendout_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="92dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/sender_order_detail_marginRight">
+
+                        <View
+                            android:id="@+id/sendout_time_line"
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/green_line" />
+
+                        <ImageView
+                            android:id="@+id/iv_sendout_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="center"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="7dp"
+                            android:src="@drawable/takeout_order_out" />
+
+                        <View
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/green_line" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="92dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@drawable/dotted_line"
+                            android:paddingLeft="1dp"
+                            android:paddingRight="1dp" />
+
+                        <TextView
+                            android:id="@+id/tv_sendout_time_lb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:text="@string/sender_order_send"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:id="@+id/tv_sendout_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:gravity="center_vertical"
+                            android:layout_marginBottom="24dp"
+                            android:singleLine="true"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_16" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 订单接受时间 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_accept_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="92dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/sender_order_detail_marginRight">
+
+                        <View
+                            android:id="@+id/accept_time_line"
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/green_line" />
+
+                        <ImageView
+                            android:id="@+id/iv_accept_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="center"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="7dp"
+                            android:src="@drawable/takeout_order_accept" />
+
+                        <View
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/green_line" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="92dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="15dp"
+                            android:background="@drawable/dotted_line"
+                            android:paddingLeft="1dp"
+                            android:paddingRight="1dp" />
+
+                        <TextView
+                            android:id="@+id/tv_accept_time_lb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:text="@string/sender_order_accept"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_16" />
+
+                        <TextView
+                            android:id="@+id/tv_accept_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_marginBottom="24dp"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_16" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 客户下单时间 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_create_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="92dp"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/sender_order_detail_marginRight">
+
+                        <View
+                            android:id="@+id/create_time_line"
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/green_line" />
+
+                        <ImageView
+                            android:id="@+id/iv_create_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:scaleType="center"
+                            android:layout_marginTop="7dp"
+                            android:layout_marginBottom="7dp"
+                            android:src="@drawable/takeout_order_submit" />
+
+                        <View
+                            android:layout_weight="1"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@color/while_line" />
+                    </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="92dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <View
+                            android:id="@+id/line"
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/dotted_line" />
+
+                        <TextView
+                            android:id="@+id/tv_create_time_lb"
+                            android:layout_below="@id/line"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:text="@string/sender_order_create_success"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_16"
+                            android:layout_marginTop="15dp" />
+
+                        <TextView
+                            android:id="@+id/tv_expect_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_below="@id/line"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_16"
+                            android:layout_marginTop="15dp" />
+
+                        <TextView
+                            android:id="@+id/tv_create_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_below="@id/tv_create_time_lb"
+                            android:gravity="center_vertical"
+                            android:singleLine="true"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/text_16" />
+
+                        <View
+                            android:layout_alignParentBottom="true"
+                            android:layout_width="fill_parent"
+                            android:layout_height="1dp"
+                            android:background="@drawable/dotted_line" />
+
+                    </RelativeLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tv_call"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:background="@drawable/order_sender_bt_bg_selector"
+            android:gravity="center"
+            android:text="@string/order_detail_call_st"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_22" />
+    </LinearLayout>
+
+</FrameLayout>

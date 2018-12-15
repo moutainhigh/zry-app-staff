@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F0F3F6">
+
+    <RelativeLayout
+        android:id="@+id/printer_title"
+        style="@style/settings_rightTitle"
+        android:background="@drawable/cashier_bg_title_bar">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:scaleType="center"
+            android:src="@drawable/setting_print_back_icon"
+            android:visibility="visible"
+            android:paddingLeft="@dimen/print_setting_content_margin_left"
+            android:paddingRight="@dimen/print_setting_content_margin_left" />
+
+        <TextView
+            android:id="@+id/iv_type_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@color/blue"
+            android:text="@string/edit_ticket_outlet"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/setting_title_bar_size" />
+
+        <Button
+            android:id="@+id/btn_save"
+            android:layout_width="@dimen/print_setting_item_btn_width"
+            android:layout_height="@dimen/print_setting_item_btn_height"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/print_setting_title_btn_selector"
+            android:text="@string/common_save"
+            android:textColor="@color/write"
+            android:textSize="@dimen/print_setting_item_title_size"
+            android:layout_marginRight="@dimen/print_setting_content_margin_left" />
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/print_setting_content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/select_ticket_outlet_ticket_tip"
+            style="@style/print_setting_item_title_style"
+            android:text="@string/choose_ticket_outlet_ticket_type" />
+
+        <ListView
+            android:id="@+id/list_kitchen_ticket"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/print_setting_item_margin_top"
+            android:background="@drawable/setting_on_of_item_bg"
+            android:divider="@color/line_gray"
+            android:dividerHeight="0.5dp" />
+    </LinearLayout>
+
+</LinearLayout>

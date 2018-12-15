@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="48dp"
+    android:clickable="true"
+    android:orientation="horizontal"
+    android:paddingBottom="14dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_weight="1"
+        android:background="@drawable/ic_dish_property_item_bg">
+
+        <TextView
+            android:id="@+id/text_name"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:textColor="@drawable/dish_type_text_selector"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:id="@+id/text_price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingRight="24dp"
+            android:textColor="@drawable/dish_type_text_selector"
+            android:textSize="@dimen/text_16" />
+
+        <LinearLayout
+            android:id="@+id/count_ll0"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:paddingRight="10dp"
+            android:layout_marginLeft="-14dp">
+
+            <ImageView
+                android:id="@+id/text_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_minus_bg" />
+
+            <TextView
+                android:id="@+id/text_count"
+                android:layout_width="24dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@drawable/dish_type_text_selector"
+                android:textSize="@dimen/text_16" />
+
+            <ImageView
+                android:id="@+id/text_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_add_bg" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

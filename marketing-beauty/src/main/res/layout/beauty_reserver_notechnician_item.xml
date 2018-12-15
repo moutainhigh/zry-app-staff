@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingTop="20dp"
+    android:layout_height="match_parent"
+    android:background="@color/beauty_bg_white">
+
+    <ImageView
+        android:id="@+id/iv_member_header"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/iv_member_header">
+
+        <TextView
+            android:id="@+id/tv_name"
+            style="@style/beauty_notify_textview_value"
+            android:textSize="@dimen/text_17"
+            android:text="王先生" />
+
+        <TextView
+            android:id="@+id/tv_phone"
+            style="@style/beauty_notify_textview_hint"
+            android:textColor="@color/beauty_color_999999"
+            android:text="13588888888"
+            android:layout_below="@id/tv_name"
+            android:textSize="@dimen/text_13" />
+
+        <Button
+            android:id="@+id/btn_choice_technician"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:textColor="@color/beauty_main_text_color"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="12sp"
+            android:background="@drawable/beauty_btn_reserver_choice_technician_selector"
+            android:text="选择技师" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_reserver_time"
+        style="@style/beauty_notify_textview_hint"
+        android:layout_alignStart="@+id/rl_details"
+        android:layout_below="@+id/rl_details"
+        android:textSize="@dimen/text_13" />
+
+    <View
+        style="@style/beauty_horizontal_line"
+        android:layout_below="@id/tv_reserver_time"
+        android:layout_marginTop="20dp"></View>
+
+</RelativeLayout>

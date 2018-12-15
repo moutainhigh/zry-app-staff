@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ff0000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/haveNoDishLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/haveNoDishImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/have_no_product" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/haveNoDishImage"
+            android:layout_centerHorizontal="true"
+            android:textSize="12sp"
+            android:textColor="#d7dadd"
+            android:layout_marginBottom="6dp"
+            android:text="@string/no_goods" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.zhongmei.bty.dinner.orderdish.view.SlideListView
+            android:id="@+id/lv_selected_dish"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#00c6ced6"
+            android:cacheColorHint="@null"
+            android:scrollingCache="false"
+            android:divider="#00000000"
+            android:dividerHeight="0dp"
+            android:fadeScrollbars="false"
+            android:listSelector="@drawable/orderdish_select_dish_item_bg"
+            android:layout_marginLeft="@dimen/dinner_shopcart_item_marginLeft"
+            android:layout_marginRight="@dimen/dinner_shopcart_item_marginRight"
+            android:overScrollMode="never"
+            android:scrollbarSize="0dp"
+            android:scrollbars="none" />
+
+        <View
+            android:id="@+id/trade_amount_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/basedline"></View>
+
+        <RelativeLayout
+            android:id="@+id/trade_amount_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/goods_total_number"
+                style="@style/goodsTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="20dp"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/goods_total_text_color"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_tarde_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:text=""
+                android:textColor="@color/settings_normalword"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/tv_trade_extra_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_below="@id/goods_total_number"
+                android:text="@string/trade_extra_label"
+                android:textColor="#8e989e"
+                android:textSize="@dimen/text_14" />
+
+            <!--<RelativeLayout
+                android:id="@+id/dinner_prievlege_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true" android:layout_below="@id/goods_total_number"
+                android:focusable="true"
+                android:gravity="bottom"
+                android:layout_centerVertical="true">
+
+                <TextView
+                    android:id="@+id/tv_trade_privilege_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="{HBF}0.00"
+                    android:textColor="#8e989e"
+                    android:textSize="@dimen/text_12" />
+
+                <TextView
+                    android:id="@+id/tv_tarde_tax_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/tv_trade_privilege_amount"
+                    android:gravity="center"
+                    android:text="{HBF}0.00"
+                    android:textColor="#8e989e"
+                    android:textSize="@dimen/text_12" />
+
+                <TextView
+                    android:id="@+id/tv_tarde_service_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/tv_tarde_tax_amount"
+                    android:gravity="center"
+                    android:text="{HBF}0.00"
+                    android:textColor="#8e989e"
+                    android:textSize="@dimen/text_12" />
+
+                <TextView
+                    android:id="@+id/tv_tarde_extra_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/tv_tarde_service_amount"
+                    android:gravity="center"
+                    android:text="{HBF}0.00"
+                    android:textColor="#8e989e"
+                    android:textSize="@dimen/text_12" />
+
+            </RelativeLayout>-->
+        </RelativeLayout>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pay_small_change">
+        <item>抹分</item>
+        <item>抹角</item>
+        <item>抹元</item>
+        <item>自定义</item>
+    </string-array>
+    <string-array name="cash_type">
+        <item>现金</item>
+        <item>银联</item>
+        <item>储值</item>
+        <item>扫码</item>
+        <item>券类</item>
+        <item>其它</item>
+        <item>挂账</item>
+        <item>峰火</item>
+    </string-array>
+    <string name="pay_mode_cash">现金</string>
+    <string name="pay_mode_alipay">支付宝</string>
+    <string name="pay_mode_weixin">微信</string>
+    <string name="pay_mode_union">银联</string>
+    <string name="pay_mode_stored_val">储值</string>
+</resources>

@@ -1,0 +1,696 @@
+package com.zhongmei.beauty.ordercenter;
+
+import android.app.Dialog;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.os.AsyncTaskCompat;
+import android.text.TextUtils;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.zhongmei.yunfu.R;
+import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonSource;
+import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
+import com.zhongmei.bty.basemodule.commonbusiness.operates.ReasonDal;
+import com.zhongmei.bty.basemodule.inventory.bean.InventoryItem;
+import com.zhongmei.bty.basemodule.inventory.message.InventoryItemReq;
+import com.zhongmei.bty.basemodule.inventory.utils.InventoryCacheUtil;
+import com.zhongmei.bty.basemodule.inventory.utils.InventoryUtils;
+import com.zhongmei.bty.basemodule.orderdish.bean.TradeItemVo;
+import com.zhongmei.bty.basemodule.pay.bean.PaymentVo;
+import com.zhongmei.bty.basemodule.trade.bean.Reason;
+import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.bty.basemodule.trade.entity.TradeDeposit;
+import com.zhongmei.beauty.widgets.BeautyReasonLayout;
+import com.zhongmei.bty.cashier.inventory.view.ReturnInventoryDialogFragment;
+import com.zhongmei.bty.cashier.inventory.view.ReturnInventoryLayout;
+import com.zhongmei.bty.cashier.ordercenter.view.InventoryLayout;
+import com.zhongmei.bty.cashier.ordercenter.view.ObservableScrollView;
+import com.zhongmei.bty.cashier.ordercenter.view.PayedLayout;
+import com.zhongmei.bty.cashier.ordercenter.view.PrintLayout;
+import com.zhongmei.bty.common.util.ExtraAsyncTask;
+import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.yunfu.db.entity.trade.TradeItem;
+import com.zhongmei.yunfu.db.enums.DishType;
+import com.zhongmei.yunfu.db.enums.StatusFlag;
+import com.zhongmei.yunfu.util.ToastUtil;
+import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
+import com.zhongmei.bty.entity.enums.InventoryShowType;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 复用正餐模块的代码
+ *
+ * @date 2018/05/15
+ * @description 修改拒绝、作废、退货的dialog为统一的dialog
+ * 格式从上至下大致为：
+ * 退货理由
+ * 理由条目1
+ * 理由条目2
+ * .......
+ * 理由条目n
+ * 退款明细
+ * 现金 ...
+ * 银联...
+ * 扫码...
+ * ....
+ * 其他
+ * 打印选项
+ */
+public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
+        implements OnClickListener {
+    private static final String TAG = BeautyOrderCenterOperateDialogFragment.class.getName();
+
+    public static final String EXTRA_SOURCE = "extra_source";
+
+    //提示语
+    public static final String EXTRA_TIP = "extra_tip";
+
+    private static final int DIALOG_WIDTH = 460;
+    private static final int DIALOG_HEIGHT = 590;
+    private Context mContext;
+    private ObservableScrollView main_content;
+    private LinearLayout mContainer;
+    private BeautyReasonLayout reasonLayout;
+    private PayedLayout payedLayout;
+    private PrintLayout printLayout;
+    private InventoryLayout inventoryLayout; //是否退回库存
+    private TextView dialog_title;
+    private TextView tvTip;
+    private ImageView btn_close;
+    private Button btn_ok;
+    private int mSource = 1;
+    private int mType = -1;
+    private int mInventoryStyle = -1;//库存退回展示样式
+    private int mTypeForNoDocument = -1;
+    private String mTip;
+    private boolean isEmptyShow;
+    private String uuid;
+    private boolean mReasonSwitch;//理由开关
+
+    private TradeDeposit tradeDeposit;
+    private PaymentVo sellPaymentVo;
+    private List<PaymentVo> adjustPaymentVos = new ArrayList<PaymentVo>();
+    private ArrayList<OperateListener> listeners = new ArrayList<OperateListener>();
+    private ArrayList<OperateCloseListener> closelisteners = new ArrayList<OperateCloseListener>();
+    //是否显示打印选择标签
+    private boolean isShowPrint = true;
+    private ReturnInventoryLayout returnInventoryView; //退库存按钮和数量布局
+    private TradeVo tradeVo; //订单信息
+    private List<InventoryItemReq> returnInventroryItemReqs;//退库存的req
+    private List<InventoryItem> inventoryItems;
+
+    private int mFromType = -1000;
+
+    public BeautyOrderCenterOperateDialogFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mContext = getActivity();
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            mSource = arguments.getInt(EXTRA_SOURCE, ReasonSource.ZHONGMEI.value());
+            mType = arguments.getInt("type");
+            mFromType = arguments.getInt("from_type");
+            isEmptyShow = arguments.getBoolean("emptyshow");
+            uuid = arguments.getString("uuid");
+            mTypeForNoDocument = arguments.getInt("typefornodocument");
+            mTip = arguments.getString(EXTRA_TIP);
+        }
+    }
+
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = new Dialog(getActivity(), getTheme());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_LAYOUT_FLAGS | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+        Window window = dialog.getWindow();
+        View decorView = window.getDecorView();
+        decorView.setSystemUiVisibility(uiOptions);
+
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        setCancelable(false);
+        return dialog;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.beauty_order_center_operate_dialog_fragment, container, false);
+        main_content = (ObservableScrollView) view.findViewById(R.id.main_content);
+        mContainer = (LinearLayout) view.findViewById(R.id.container);
+        reasonLayout = (BeautyReasonLayout) view.findViewById(R.id.reasonLayout);
+        payedLayout = (PayedLayout) view.findViewById(R.id.payedLayout);
+        printLayout = (PrintLayout) view.findViewById(R.id.printLayout);
+        inventoryLayout = (InventoryLayout) view.findViewById(R.id.inventoryLayout);
+        dialog_title = (TextView) view.findViewById(R.id.dialog_title);
+        tvTip = (TextView) view.findViewById(R.id.tv_tip);
+        btn_close = (ImageView) view.findViewById(R.id.btn_close);
+        btn_ok = (Button) view.findViewById(R.id.btn_ok);
+        returnInventoryView = (ReturnInventoryLayout) view.findViewById(R.id.return_inventory_view);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setDialogWidthAndHeight(view);
+        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //设置ReasonLayout查询的类型
+        setReasonLayout();
+        //设置PayedLayout的PaymentVo
+        setPaymentVo();
+        setTitleByType();
+        //无单退货使用
+        setInventoryLayout();
+        //选择菜品退货
+        setInventoryLayoutView();
+        setClickListener();
+        DisplayPrintLayoutOrNot();
+
+    }
+
+    private void setReasonLayout() {
+        if (mType == ReasonType.AGREE_RETURN.value().intValue()
+                || mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
+            reasonLayout.setVisibility(View.GONE);
+        } else {
+            reasonLayout.setTypeAndStart(mSource, mType);
+        }
+    }
+
+    public void setmInventoryStyle(int value) {
+        mInventoryStyle = value;
+    }
+
+    private void setInventoryLayout() {
+        if (mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()
+                || mInventoryStyle == InventoryShowType.SHOW_OTHER_DATA.value().intValue()) {
+            inventoryLayout.setVisibility(View.VISIBLE);
+        } else {
+            inventoryLayout.setVisibility(View.GONE);
+        }
+    }
+
+    private void setInventoryLayoutView() {
+        inventoryItems = buildInventoryItems(tradeVo);
+        if (InventoryCacheUtil.getInstance().getSaleSwitch() && !Utils.isEmpty(inventoryItems)) {
+            returnInventoryView.setVisibility(View.VISIBLE);
+            //让其在scrollview的顶部
+            returnInventoryView.setFocusable(true);
+            returnInventoryView.setFocusableInTouchMode(true);
+            returnInventoryView.requestFocus();
+            returnInventoryView.refreshView(inventoryItems);
+            returnInventoryView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (tradeVo != null) {
+                        showReturnInventoryDialog();
+                    }
+                }
+            });
+        } else {
+            returnInventoryView.setVisibility(View.GONE);
+            returnInventroryItemReqs = InventoryUtils.buildInventoryItemReqs(inventoryItems);
+        }
+    }
+
+    private void showReturnInventoryDialog() {
+        ReturnInventoryDialogFragment returnInventoryDialogFragment = new ReturnInventoryDialogFragment();
+        returnInventoryDialogFragment.setInventoryItemList(inventoryItems);
+        returnInventoryDialogFragment.setReturnDishDataListener(new ReturnInventoryDialogFragment.ReturnDishDataListener() {
+            @Override
+            public void setDishData(List<InventoryItem> inventoryItemList) {
+                returnInventoryView.refreshView(inventoryItemList);
+                returnInventroryItemReqs = InventoryUtils.buildInventoryItemReqs(inventoryItemList);
+            }
+        });
+        returnInventoryDialogFragment.show(getActivity().getSupportFragmentManager(), "returnInventoryDialogFragment");
+    }
+
+    private List<TradeItem> findReturnInventoryChildTradeItems(TradeVo tradeVo, TradeItem parentTradeItem) {
+        List<TradeItem> childTradeItems = new ArrayList<>();
+        for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
+            TradeItem tradeItem = tradeItemVo.getTradeItem();
+            if (parentTradeItem.getUuid().equals(tradeItem.getParentUuid())) {
+                childTradeItems.add(tradeItem);
+            }
+        }
+        return childTradeItems;
+    }
+
+    //套餐和单菜 作为加减库存的单位
+    private List<InventoryItem> buildInventoryItems(TradeVo tradeVo) {
+        if (tradeVo == null || Utils.isEmpty(tradeVo.getTradeItemList())) {
+            return null;
+        }
+
+        String buffetOrGroupParentUUID = null;
+        if (tradeVo.getMealShellVo() != null) {//团餐自助餐，需要显示子菜
+            buffetOrGroupParentUUID = tradeVo.getMealShellVo().getUuid();
+        }
+
+        List<InventoryItem> inventoryItems = new ArrayList<>();
+        for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
+            TradeItem tradeItem = tradeItemVo.getTradeItem();
+            if (tradeItem.getStatusFlag() == StatusFlag.INVALID) {
+                continue;
+            }
+            if (tradeItem.getType() == DishType.COMBO) {
+                List<TradeItem> childTradeItem = findReturnInventoryChildTradeItems(tradeVo, tradeItem);
+                if (!Utils.isEmpty(childTradeItem)) {
+                    InventoryItem inventoryItem = new InventoryItem(tradeItem);
+                    inventoryItem.setChildTradeItem(childTradeItem);
+                    inventoryItems.add(inventoryItem);
+                }
+            } else if (tradeItem.getType() == DishType.SINGLE && (tradeItem.getParentUuid() == null || tradeItem.getParentUuid().equals(buffetOrGroupParentUUID))) {//单菜非子菜
+                InventoryItem inventoryItem = new InventoryItem(tradeItem);
+                inventoryItems.add(inventoryItem);
+            }
+        }
+        return inventoryItems;
+    }
+
+    private void setDialogWidthAndHeight(View view) {
+        Window window = getDialog().getWindow();
+        view.measure(0, 0);
+        int measuredHeight = view.getMeasuredHeight();
+        int measuredWidth = view.getMeasuredHeight();
+        Log.d(TAG, "measuredWidth:" + measuredWidth + ",measuredHeight:" + measuredHeight);
+
+        Resources resources = getActivity().getResources();
+        DisplayMetrics metrics = resources.getDisplayMetrics();
+//		int desiredWidth = DIALOG_WIDTH;
+//		int desiredHeight = DIALOG_HEIGHT;
+        int desiredWidth = metrics.widthPixels;
+        int desiredHeight = metrics.heightPixels;
+        window.setLayout(desiredWidth, desiredHeight);
+        window.getAttributes().y = 0;
+
+        //如果当前view的高度大于目标高度，则设置为目标高度,宽度亦如此
+//		if(measuredHeight > desiredHeight){
+//			window.setLayout(measuredWidth, desiredHeight);
+//		}else{
+//			desiredHeight = measuredHeight;
+//		}
+//		if(measuredWidth > desiredWidth){
+//			window.setLayout(desiredWidth, desiredHeight);
+//		}
+    }
+
+    public void registerListener(OperateListener listener) {
+        if (listener == null) return;
+        listeners.add(listener);
+    }
+
+    public void registerCloseListener(OperateCloseListener listener) {
+        if (listener == null) return;
+        closelisteners.add(listener);
+    }
+
+    public void isShowPrint(boolean isShowPrint) {
+        this.isShowPrint = isShowPrint;
+    }
+
+    private OperateResult getResult() {
+        return new OperateResult(reasonLayout.getReason(), printLayout.getPrintCheckedStatus(), inventoryLayout.getInventoryCheckStatus());
+    }
+
+    private void DisplayPrintLayoutOrNot() {
+        if (mType == ReasonType.TRADE_REFUSED.value().intValue()
+                || mType == ReasonType.TRADE_FREE.value().intValue()
+                || !isShowPrint
+                || mType == ReasonType.REFUSE_RETURN.value().intValue()
+                || mType == ReasonType.TRADE_REPEATED.value().intValue()
+                || mType == ReasonType.BOOKING_CANCEL.value().intValue()
+                || mType == ReasonType.BOOKING_REFUSED.value().intValue()
+                || mType == ReasonType.LAG_REASON.value().intValue()
+                || mType == ReasonType.TRADE_DISCOUNT.value().intValue()
+                || mType == ReasonType.ITEM_GIVE.value().intValue()
+                || mType == ReasonType.TRADE_BANQUET.value().intValue()
+                || mType == ReasonType.TRADE_SINGLE_DISCOUNT.value().intValue()
+                || mType == ReasonType.INTEGRAL_MODIFY.value().intValue()
+                || mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()
+                ) {
+            printLayout.setVisibility(View.GONE);
+        }
+    }
+
+    private void setPaymentVo() {
+        if (payedLayout != null) {
+            if (mType == ReasonType.TRADE_INVALID.value().intValue()
+                    || mType == ReasonType.REFUSE_RETURN.value().intValue()
+                    || mType == ReasonType.TRADE_REPEATED.value().intValue()
+                    || mType == ReasonType.BOOKING_CANCEL.value().intValue()
+                    || mType == ReasonType.BOOKING_REFUSED.value().intValue()
+                    || mType == ReasonType.LAG_REASON.value().intValue()
+                    || mType == ReasonType.TRADE_DISCOUNT.value().intValue()
+                    || mType == ReasonType.ITEM_GIVE.value().intValue()
+                    || mType == ReasonType.TRADE_BANQUET.value().intValue()
+                    //||mType == ReasonType.TRADE_RETURNED.value().intValue()
+                    || mType == ReasonType.TRADE_FREE.value().intValue()
+                    || mType == ReasonType.INTEGRAL_MODIFY.value().intValue()
+                    || mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
+                payedLayout.setVisibility(View.GONE);
+                return;
+            }
+
+            if (tradeDeposit != null) {
+                payedLayout.setTradeDeposit(tradeDeposit);
+            }
+
+            payedLayout.setCurrentType(mTypeForNoDocument);
+            if (sellPaymentVo != null) {
+                payedLayout.setPayment(sellPaymentVo);
+                return;
+            }
+            if (adjustPaymentVos != null && adjustPaymentVos.size() > 0) {
+                payedLayout.setPayment(adjustPaymentVos);
+                return;
+            }
+            payedLayout.setVisibility(View.GONE);
+        }
+    }
+
+    private void setTitleByType() {
+        payedLayout.setTitle(R.string.order_center_fragment_dialog_title_payed);
+        printLayout.setTitle(R.string.order_center_fragment_dialog_title_print);
+        inventoryLayout.setTitle(R.string.select_return_inventory);
+        if (mType == ReasonType.TRADE_RETURNED.value().intValue()) {
+            dialog_title.setText(R.string.reason_type_delete_dish_title);
+        } else if (mType == ReasonType.TRADE_INVALID.value().intValue()) {
+            dialog_title.setText(R.string.beauty_delete_trade);
+        } else if (mType == ReasonType.TRADE_REFUSED.value().intValue()) {
+            dialog_title.setText(R.string.reason_type_refuse_title);
+        } else if (ReasonType.TRADE_REPEATED.equalsValue(mType)) {
+            dialog_title.setText(R.string.reason_type_repay_btn);
+        } else if (mType == ReasonType.TRADE_FREE.value().intValue()) {
+            dialog_title.setText(R.string.reason_type_free_btn);
+        } else if (mType == ReasonType.BOOKING_REFUSED.value().intValue()) {
+            dialog_title.setText(R.string.booking_refused_title);
+        } else if (mType == ReasonType.BOOKING_CANCEL.value().intValue()) {
+            dialog_title.setText(R.string.booking_recision_title);
+        } else if (mType == ReasonType.AGREE_RETURN.value().intValue()) {
+            dialog_title.setText(R.string.order_detail_agree_st);
+        } else if (mType == ReasonType.REFUSE_RETURN.value().intValue()) {
+            dialog_title.setText(R.string.order_detail_refuse_st);
+        } else if (mType == ReasonType.LAG_REASON.value().intValue()) {
+            dialog_title.setText(R.string.reason_lag_title);
+        } else if (mType == ReasonType.TRADE_DISCOUNT.value().intValue()) {
+            dialog_title.setText(R.string.reason_trade_discount_title);
+        } else if (mType == ReasonType.ITEM_GIVE.value().intValue()) {
+            dialog_title.setText(R.string.reason_item_give_title);
+        } else if (mType == ReasonType.TRADE_BANQUET.value().intValue()) {
+            dialog_title.setText(R.string.reason_banquet_title);
+        } else if (mType == ReasonType.TRADE_SINGLE_DISCOUNT.value()) {
+            dialog_title.setText(R.string.reason_trade_discount_title);
+        } else if (mType == ReasonType.INTEGRAL_MODIFY.value()) {
+            dialog_title.setText(getString(R.string.reason_member_integral_modify));
+        }
+        if (!TextUtils.isEmpty(mTip)) {
+            tvTip.setText(mTip);
+            tvTip.setVisibility(View.VISIBLE);
+        } else {
+            tvTip.setVisibility(View.GONE);
+        }
+        //只展示库存退回布局时
+        if (mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
+            dialog_title.setText(getString(R.string.goods_return_inventory));
+        }
+    }
+
+    private void setClickListener() {
+        btn_close.setOnClickListener(this);
+        btn_ok.setOnClickListener(this);
+        if (mType == ReasonType.TRADE_RETURNED.value().intValue()) {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.reason_type_delete_dish_title);//c
+        } else if (mType == ReasonType.TRADE_INVALID.value().intValue()) {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.beauty_delete_trade);//c
+        } else if (mType == ReasonType.TRADE_REFUSED.value().intValue()) {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.reason_type_refuse_title);//c
+        } else if (mType == ReasonType.TRADE_REPEATED.value().intValue()) {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.reason_type_repay_btn);//l
+        } else if (mType == ReasonType.TRADE_FREE.value().intValue()) {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.reason_type_free_btn);//l
+        } else if (mType == ReasonType.BOOKING_CANCEL.value().intValue()//c
+                || mType == ReasonType.BOOKING_REFUSED.value().intValue()//c
+                ) {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.common_submit);
+        } else if (mType == ReasonType.LAG_REASON.value().intValue()//l
+                || mType == ReasonType.TRADE_DISCOUNT.value().intValue()//l
+                || mType == ReasonType.TRADE_BANQUET.value().intValue()//l
+                || mType == ReasonType.ITEM_GIVE.value().intValue()//l
+                || mType == ReasonType.TRADE_SINGLE_DISCOUNT.value().intValue()) {//l
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.common_submit);
+        } else if (mType == ReasonType.AGREE_RETURN.value().intValue()) {//l
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.order_detail_agree_st);
+        } else if (mType == ReasonType.REFUSE_RETURN.value().intValue()) {//c
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.order_detail_refuse_st);
+        } else if (mType == ReasonType.INTEGRAL_MODIFY.value().intValue()) {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.common_submit);
+        } else {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+        }
+        if (mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
+            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+            btn_ok.setText(R.string.common_submit);
+        }
+    }
+
+    public void setPayment(PaymentVo paymentVo) {
+        sellPaymentVo = paymentVo;
+        setPaymentVo();
+    }
+
+    public void setPayment(List<PaymentVo> paymentVos) {
+        adjustPaymentVos.clear();
+        boolean sucess = adjustPaymentVos.addAll(paymentVos);
+        setPaymentVo();
+    }
+
+    /**
+     * 设置押金信息
+     */
+    public void setTradeDepoist(TradeDeposit vTradeDeposit) {
+        tradeDeposit = vTradeDeposit;
+    }
+
+    /**
+     * 设置订单信息
+     *
+     * @param tradeVo
+     */
+    public void setTradeVo(TradeVo tradeVo) {
+        this.tradeVo = tradeVo;
+    }
+
+    private void clearStatus() {
+        if (listeners != null) {
+            listeners.clear();
+            listeners = null;
+        }
+        if (closelisteners != null) {
+            closelisteners.clear();
+            closelisteners = null;
+        }
+        if (adjustPaymentVos != null) {
+            adjustPaymentVos.clear();
+            adjustPaymentVos = null;
+        }
+    }
+
+    private boolean setResult() {
+        if (listeners == null || listeners.size() == 0) {
+            Log.d(TAG, "setResult listeners empty");
+            return true;
+        }
+        OperateResult result = getResult();
+        if (returnInventroryItemReqs != null) {
+            result.returnInventoryItemReqs = returnInventroryItemReqs;
+        } else {
+            //默认退全部的库存
+            result.returnInventoryItemReqs = InventoryUtils.buildInventoryItemReqs(buildInventoryItems(tradeVo));
+        }
+        if (mInventoryStyle != InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
+            if (mReasonSwitch) {
+                if ((result == null || result.reason == null) && (mType != ReasonType.AGREE_RETURN.value().intValue())) {
+                    if (mType == ReasonType.BOOKING_CANCEL.value().intValue()) {
+                        ToastUtil.showShortToast(R.string.not_cancel_reason);
+                    } else if (mType == ReasonType.BOOKING_REFUSED.value().intValue()) {
+                        ToastUtil.showShortToast(R.string.not_refused_reason);
+                    } else {
+                        ToastUtil.showShortToast(R.string.reason_not_illedgal);
+                    }
+                    return false;
+                }
+            }
+
+        }
+        setResultListener(result);
+
+        return true;
+    }
+
+    private void setResultListener(OperateResult result) {
+        for (OperateListener listener : listeners) {
+            listener.onSuccess(result);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_close:
+                if (closelisteners != null && closelisteners.size() > 0) {
+                    for (OperateCloseListener listener : closelisteners) {
+                        listener.onClose(null);
+                    }
+
+                }
+                clearStatus();
+                if (v != null) {
+                    InputMethodManager inputmanger = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputmanger.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+                dismiss();
+                break;
+            case R.id.btn_ok:
+                boolean success = setResult();
+                if (!success) return;
+                clearStatus();
+                dismiss();
+                break;
+
+            default:
+                break;
+        }
+
+    }
+
+    public interface OperateListener {
+        public boolean onSuccess(OperateResult result);
+    }
+
+    public interface OperateCloseListener {
+        public void onClose(OperateResult result);
+    }
+
+    static public class OperateResult {
+        public List<InventoryItemReq> returnInventoryItemReqs;
+        public Reason reason;
+        public boolean isPrintChecked;
+        public boolean isReturnInvetory;
+
+        public OperateResult(Reason reason, boolean isPrintChecked, boolean isReturnInvetory) {
+            this.reason = reason;
+            this.isPrintChecked = isPrintChecked;
+            this.isReturnInvetory = isReturnInvetory;
+        }
+
+    }
+
+    /**
+     * 是否开启了理由弹窗
+     *
+     * @return
+     */
+    private boolean isReasonSwitchOpen() {
+        ReasonDal reasonDal = OperatesFactory.create(ReasonDal.class);
+        int type = getArguments().getInt("type");
+        if (ReasonType.LAG_REASON.value() == type) {//挂账必须要理由
+            return true;
+        }
+        return reasonDal.isReasonSwitchOpen(ReasonType.newReason(type));
+    }
+
+    @Override
+    public void show(FragmentManager manager, String tag) {
+        //判断是否开启了理由弹窗
+//		if (!isReasonSwitchOpen()) {
+//			setResultListener(new OperateResult(null, false));
+//			return;
+//		}
+//
+//		super.show(manager, tag);
+        asyncBack(manager, null, tag);
+    }
+
+    @Override
+    public int show(FragmentTransaction transaction, String tag) {
+        //判断是否开启了理由弹窗
+//		if (!isReasonSwitchOpen()) {
+//			setResultListener(new OperateResult(null, false));
+//			return -1;
+//		}
+//		return super.show(transaction, tag);
+        asyncBack(null, transaction, tag);
+        return -1;
+    }
+
+    private void asyncBack(FragmentManager manager, FragmentTransaction transaction, String tag) {
+        AsyncTaskCompat.executeParallel(new ExtraAsyncTask<Void, Void, Boolean>(manager, transaction, tag) {
+            @Override
+            protected Boolean doInBackground(Void... params) {
+                mReasonSwitch = isReasonSwitchOpen();
+                return mReasonSwitch || mInventoryStyle != -1;
+            }
+
+            @Override
+            protected void onPostExecute(Boolean aBoolean) {
+                super.onPostExecute(aBoolean);
+                FragmentManager manager = get(0);
+                FragmentTransaction transaction = get(1);
+                String tag = get(2);
+
+                if (!aBoolean) {
+                    setResultListener(new OperateResult(null, false, true));
+                } else {
+                    try {//当使用FragmentManager.commit()时偶现stateLoss异常
+                        if (manager != null) {
+                            BeautyOrderCenterOperateDialogFragment.super.show(manager, tag);
+                        } else if (transaction != null) {
+                            BeautyOrderCenterOperateDialogFragment.super.show(transaction, tag);
+                        } else {
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }
+        });
+    }
+}

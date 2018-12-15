@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/order_dish_right_bottom"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="26dp"
+    android:paddingRight="26dp">
+
+    <TextView
+        style="@style/custom_title_style"
+        android:text="@string/add_discount_title" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/orderAllDiscount"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/snack_middle_discount_title_height"
+            android:layout_weight="1"
+            android:background="@drawable/discount_left_selected"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/orderAllDiscount"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/sncak_middle_discount_title_size" />
+
+        <TextView
+            android:id="@+id/batchDishDiscount"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/snack_middle_discount_title_height"
+            android:layout_weight="1"
+            android:background="@drawable/discount_right_nomail"
+            android:gravity="center"
+            android:padding="2dp"
+            android:text="@string/batchDishDiscount"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/sncak_middle_discount_title_size" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="26dp"
+        android:layout_marginBottom="26dp"
+        android:layout_marginTop="26dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/changeDiscountType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/discount_icon" />
+
+        <Button
+            android:id="@+id/clearDiscount"
+            android:layout_width="71dp"
+            android:layout_height="24dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/clear_discount_onclick"
+            android:gravity="center"
+            android:text="@string/removeDiscount"
+            android:textColor="@color/clear_discount_text_onclick"
+            android:textSize="@dimen/middle_discount_remave_btn_text_size" />
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/custom_discount_gridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@color/transparent"
+        android:numColumns="1"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="14dp" />
+</LinearLayout>

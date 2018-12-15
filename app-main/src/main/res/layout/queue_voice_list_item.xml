@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/queue_voice_item_layout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/booking_create_edit_height"
+    android:background="@drawable/queue_voice_list_background"
+    android:baselineAligned="false"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/booking_create_edit_height"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/queue_voice_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:contentDescription="@null"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/queue_voice_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:textSize="26sp" />
+
+</LinearLayout>

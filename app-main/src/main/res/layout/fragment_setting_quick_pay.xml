@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F0F3F6"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/setting_quick_pay"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        style="@style/setting_right_content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/setting_quick_pay_tips"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/text_15" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="1dp"
+            android:background="@drawable/setting_on_of_item_bg">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_quick_pays"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

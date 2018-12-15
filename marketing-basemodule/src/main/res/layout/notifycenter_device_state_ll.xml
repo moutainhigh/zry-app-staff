@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:orientation="vertical"
+        android:paddingLeft="14dp"
+        android:paddingRight="13dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/notification_systemStage_title_height"
+            android:background="@color/notice_bg_cl"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="@string/order_dish_system"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/notification_systemStage_textSize" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_gray" />
+
+        <LinearLayout
+            android:id="@+id/wifi_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notifycenter_notice_item_bg"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/notifycenter_wifi_icon"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="WI-FI"
+                android:textColor="@color/settings_normalword"
+                android:textSize="@dimen/notification_systemStage_textSize" />
+
+            <TextView
+                android:id="@+id/wifi_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/notifycenter_notice_arrow"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/settings_grayword"
+                android:textSize="@dimen/notification_systemStage_textSize" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_gray" />
+
+        <LinearLayout
+            android:id="@+id/bluetooth_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notifycenter_notice_item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/notifycenter_blue_tooth"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/order_dish_bluetooth"
+                android:textColor="@color/settings_normalword"
+                android:textSize="@dimen/notification_systemStage_textSize" />
+
+            <TextView
+                android:id="@+id/bluetooth_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/notifycenter_notice_arrow"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/settings_grayword"
+                android:textSize="@dimen/notification_systemStage_textSize" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_gray" />
+
+        <RelativeLayout
+            android:id="@+id/kry_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notifycenter_notice_item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/notifycenter_kry_service"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/order_dish_kry_service"
+                android:textColor="@color/settings_normalword"
+                android:textSize="@dimen/notification_systemStage_textSize" />
+
+            <ImageView
+                android:id="@+id/service_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/notifycenter_check_loading"
+                android:visibility="gone" />
+
+            <TextSwitcher
+                android:id="@+id/kry_service_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical|left"
+                android:inAnimation="@anim/notifycenter_slide_in_bottom"
+                android:outAnimation="@anim/notifycenter_slide_out_top">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/settings_grayword"
+                    android:textSize="@dimen/notification_systemStage_textSize" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/settings_grayword"
+                    android:textSize="@dimen/notification_systemStage_textSize" />
+            </TextSwitcher>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_gray" />
+
+        <RelativeLayout
+            android:id="@+id/print"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notifycenter_notice_item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/notifycenter_print_service_icon"
+                android:drawablePadding="10dp"
+                android:gravity="center_vertical"
+                android:text="@string/order_dish_print_service"
+                android:textColor="@color/settings_normalword"
+                android:textSize="@dimen/notification_systemStage_textSize" />
+
+            <ImageView
+                android:id="@+id/print_loding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/notifycenter_check_loading"
+                android:visibility="gone" />
+
+            <TextSwitcher
+                android:id="@+id/print_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical|left"
+                android:inAnimation="@anim/notifycenter_slide_in_bottom"
+                android:outAnimation="@anim/notifycenter_slide_out_top">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/settings_grayword"
+                    android:textSize="@dimen/notification_systemStage_textSize" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/settings_grayword"
+                    android:textSize="@dimen/notification_systemStage_textSize" />
+            </TextSwitcher>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_gray" />
+
+        <LinearLayout
+            android:id="@+id/battery_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/notifycenter_notice_item_bg"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/notifycenter_battery_icon"
+                    android:drawablePadding="10dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/order_dish_battery"
+                    android:textColor="@color/settings_normalword"
+                    android:textSize="@dimen/notification_systemStage_textSize" />
+
+                <TextView
+                    android:id="@+id/battery_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:drawableLeft="@drawable/notifycenter_low_battery_icon"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/settings_grayword"
+                    android:textSize="@dimen/notification_systemStage_textSize" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/bg_gray" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/notifycenter_notice_item_bg"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:drawableStart="@drawable/notifycenter_phone_icon"
+                android:gravity="center_vertical"
+                android:text="@string/order_dish_phone"
+                android:textColor="@color/settings_normalword"
+                android:textSize="@dimen/notification_systemStage_textSize" />
+
+            <TextView
+                android:id="@+id/phone_status_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/notifycenter_notice_arrow"
+                android:gravity="right|center_vertical"
+                android:textColor="@color/settings_grayword"
+                android:textSize="@dimen/notification_systemStage_textSize" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_gray" />
+
+        <TextView
+            android:id="@+id/tv_devices"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/notification_systemStage_title_height"
+            android:background="@color/notice_bg_cl"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="@string/device"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/notification_systemStage_textSize" />
+    </LinearLayout>
+
+</merge>

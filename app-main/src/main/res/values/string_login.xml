@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_login_user_hint">没有可以登录的用户</string>
+    <string name="password_error_hint">密码有误！</string>
+    <string name="password_empty_hint">密码为空，请输入密码</string>
+    <string name="shopId_label">商户编号：</string>
+    <string name="login_retry">重试</string>
+    <string name="login_action_settings">去设置</string>
+    <string name="login_reset">重置</string>
+    <string name="unlogin">未登录</string>
+    <string name="logout">退出</string>
+    <string name="login_switch_account">切换账号</string>
+    <string name="login_current">当前：%1$s</string>
+    <string name="login_user_null_hint">未获取到服务员信息\n1、请前往后台确认添加了服务员\n2、退出应用后，再次尝试初始化</string>
+    <string name="login_user_null_label">暂无服务员</string>
+    <string name="login_quiet_success">账号退出成功！</string>
+    <string name="login_quiet">退出程序</string>
+    <string name="login_retry_label">再次登录</string>
+    <string name="userlist_label">请选择登录用户</string>
+    <string name="waiterlist_label">请选择服务员</string>
+    <string name="salesman_select_hint">请选择销售员</string>
+    <string name="salesman_nobody_alter_txt">请先设置销售员!</string>
+    <string name="salesman_select_hint2">请选择推销员</string>
+    <string name="salesman_label">销售员</string>
+    <string name="salesman_select_label">销售员(选填 )</string>
+    <string name="salesman_select_label2">推销员(选填 )</string>
+    <string name="login_quiet_confirm">确定要退出登录？</string>
+    <string name="request_server_address">正在连接服务器</string>
+    <string name="request_server_address_success">获取服务器地址完成</string>
+    <string name="check_versions_area">正在校验客户端版本</string>
+    <string name="check_versions_area_success">校验客户端版本完成</string>
+    <string name="check_versions_area_error">校验客户端版本失败</string>
+    <string name="check_auth">正在校验商户权限信息</string>
+    <string name="check_auth_error">商户权限信息校验出错</string>
+    <string name="check_auth_unfinished">检测到您未进行数据迁移，暂时无法使用当前版本</string>
+    <string name="check_auth_unknown">商户权限信息校验未知code</string>
+    <string name="request_server_address_failed">未获取到商户服务器地址</string>
+    <string name="update_check">正在进行升级检查</string>
+    <string name="update_check_success">升级检查完成</string>
+    <string name="update_check_failed">服务器返回信息失败</string>
+    <string name="update_check_error">升级检查,%1$s</string>
+    <string name="print_update_check_success">打印服务升级检查完成</string>
+    <string name="print_update_check_failed">打印服务升级检查,服务器返回信息失败</string>
+    <string name="print_update_check_error">打印服务升级检查,%1$s</string>
+    <string name="init">正在同步数据</string>
+    <string name="init_success">同步数据完成</string>
+    <string name="init_failed">同步数据失败</string>
+    <string name="push_config_init">初始化推送配置</string>
+    <string name="all_check_has_finished">所有的检测已经完成了</string>
+    <string name="can_continue_operation">可以继续后续操作</string>
+    <string name="cannot_continue_operation">不能继续后续操作，请查询</string>
+    <string name="initial">正在同步数据</string>
+    <string name="level_up_check">升级检查</string>
+    <string name="get_server_info_failed">获取服务器地址，返回信息失败</string>
+    <string name="get_server_address">获取服务器地址</string>
+    <string name="is_loading">正在下载中。。。。请耐心等待</string>
+    <string name="start_load_packet">开始下载升级包。。。。请耐心等待</string>
+    <string name="load_manager_not_open">下载管理器未开启！请打开下载管理器！</string>
+    <string name="error_level_up_address_format">错误的升级地址:%s,请重新配置!</string>
+    <string name="go_check_network">去检查网络</string>
+    <string name="account_list">账号列表</string>
+    <string name="login_please_later">正在进入系统，请稍等...</string>
+    <string name="login_check_execute_waiting">等待中</string>
+    <string name="login_check_execute_loading">加载中</string>
+    <string name="login_check_execute_completed">已完成</string>
+    <string name="login_check_device">设备环境检测</string>
+    <string name="login_check_network_error">网络连接异常</string>
+    <string name="login_check_config">配置信息检测</string>
+    <string name="login_check_data">门店数据同步</string>
+    <string name="login_check_cache">门店数据缓存</string>
+    <string name="init_shop_cache">正在缓存数据</string>
+    <string name="init_shop_cache_success">数据缓存完成</string>
+    <string name="login_check_error_rest_title" formatted="true">%s出错\n请点击重试</string>
+    <string name="login_check_error_exit_title" formatted="true">%s出错，请截图并联系客服处理4008-866-815</string>
+    <string name="login_check_error_exit_message" formatted="true">出错项, %s</string>
+    <string-array name="login_check_peripheral_init">
+        <item>打印服务初始化</item>
+        <item>打印服务故障单票据通知监测</item>
+        <item>打印部分初始化获取商户logo</item>
+        <item>电话服务初始化</item>
+        <item>副屏服务初始化"</item>
+    </string-array>
+    <string-array name="login_check_business_init">
+        <item>DB初始化</item>
+        <item>包更新初始化</item>
+        <item>启动监听订单服务</item>
+        <item>获取服务关于合同到期消息数据</item>
+    </string-array>
+    <string name="login_check_system_data_del_log">删除七天前的日志</string>
+    <string name="login_check_system_data_sync">数据同步</string>
+    <string name="check_inventory_data">检查售卖数据</string>
+    <string name="check_inventory_finish">售卖数据检查完成</string>
+    <string name="update_inventory_data">正在检查售卖数据</string>
+    <string name="check_inventory_error">售卖数据检查失败</string>
+    <string name="login_sync_error">同步出错</string>
+    <string name="login_sync_cancel">同步已取消</string>
+    <string name="member_regiest_text_html"><![CDATA[<u>去注册</u>]]></string>
+    <string name="pay_coupon_null">暂无</string>
+    <string name="login_init_dialog_contract_renewal_title">合同到期</string>
+    <string name="login_init_dialog_contract_renewal_pay_completed">支付完成</string>
+    <string name="login_ali_login_tips">扫描上面的二维码进行登录</string>
+
+    <!-- 直接进入 -->
+    <string name="login_enter">直接进入</string>
+    <string name="login_face_label">人脸\n登录</string>
+    <string name="login_not_promisson">您还没有开通登录权限</string>
+</resources>

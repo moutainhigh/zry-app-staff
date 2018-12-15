@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/rg_menu_group"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_trade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/slidemenu_item_click"
+            android:button="@null"
+            android:drawableLeft="@drawable/slidemenu_order_dishes_icon"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="30dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="30dip"
+            android:text="@string/slidemenu_dinner_tables"
+            android:textColor="@color/slidemenu_text_white"
+            android:textSize="17sp" />
+
+        <RadioButton
+            android:id="@+id/rb_order_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/slidemenu_item_click"
+            android:button="@null"
+            android:drawableLeft="@drawable/slidemenu_order_center_icon"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="30dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="30dip"
+            android:text="@string/slidemenu_dinner_order_center"
+            android:textColor="@color/slidemenu_text_white"
+            android:textSize="17sp" />
+
+        <RadioButton
+            android:id="@+id/rb_shop_management"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/slidemenu_item_click"
+            android:button="@null"
+            android:drawableLeft="@drawable/slidemenu_ic_shop_management"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="30dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="30dp"
+            android:text="@string/slidemenu_shop_management"
+            android:textColor="@color/slidemenu_text_white"
+            android:textSize="17sp" />
+
+        <RadioButton
+            android:id="@+id/rb_form_center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/slidemenu_item_click"
+            android:button="@null"
+            android:checked="false"
+            android:drawableLeft="@drawable/slidemenu_report_form_icon"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="30dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="30dp"
+            android:text="@string/slidemenu_dinner_form_center"
+            android:textColor="@color/slidemenu_text_white"
+            android:textSize="17sp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_back_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/slidemenu_exit_item_click"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dip"
+        android:maxLines="1"
+        android:text="@string/slidemenu_back_home"
+        android:textColor="@color/slidemenu_text_white"
+        android:textSize="@dimen/slidemenu_text_20" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/tv_back_home"
+        android:background="@color/slidemenu_text_gray" />
+</merge>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/fragment_titlebar"
+        class="com.zhongmei.bty.dinner.orderdish.TitleBarFragment_"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/dl_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <fragment
+                android:id="@+id/fragment_anchor"
+                class="com.zhongmei.beauty.BeautyMainAnchorFragment_"
+                android:layout_width="110dp"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/layout_contain_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <!--<fragment
+                    class="com.zhongmei.beauty.BeautyMainFragment_"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />-->
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <!--<com.zhongmei.bty.basemodule.notifycenter.view.NotifyCenterView_
+            android:id="@+id/ncv_notify_center"
+            android:layout_width="@dimen/notification_popup_width"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:background="@color/text_white"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical" />-->
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
+

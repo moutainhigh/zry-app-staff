@@ -1,0 +1,7 @@
+<resources>
+    <!--副屏默认叫号-->
+    <dimen name="display_linearLayout_margin">48dp</dimen>
+    <dimen name="display_title_height">74.7dp</dimen>
+    <dimen name="display_num_size">220sp</dimen>
+    <dimen name="display_switch_height">50dp</dimen>
+</resources>

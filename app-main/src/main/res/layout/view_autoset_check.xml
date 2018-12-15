@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageview"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/autoset_uncheck" />
+
+    <TextView
+        android:id="@+id/textview"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/imageview"
+        android:layout_marginLeft="12dp"
+        android:textColor="@color/print_text_black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</merge>

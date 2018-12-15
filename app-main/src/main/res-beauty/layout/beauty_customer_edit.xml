@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_white"
+    android:orientation="vertical">
+
+    <!-- 标题 -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/beauty_color_2C3031">
+
+        <ImageView
+            android:id="@+id/back_btn"
+            style="@style/title_icon_style"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/customer_back_icon" />
+
+        <TextView
+            android:id="@+id/title_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/customer_add"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/customer_toolbar_text_size"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/customer_import"
+            style="@style/title_icon_style"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/customer_import"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <!-- 左边布局 -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7">
+
+            <include layout="@layout/beauty_customer_add_left_layout" />
+        </LinearLayout>
+
+        <!-- 右边布局 -->
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="@color/customer_charging_bg"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:orientation="vertical">
+
+                <!-- 电话 -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <EditText
+                        android:id="@+id/customer_phonenum"
+                        style="@style/zm_edit_text_style"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="4"
+                        android:background="@drawable/booking_detail_bg"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint="@string/customer_input_phone"
+                        android:inputType="number"
+                        android:maxLength="20"
+                        android:singleLine="true"
+                        android:textColor="@color/text_gray"
+                        android:textColorHint="@color/zm_theme_color_input_hint_read"
+                        android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="3"
+                        android:background="@drawable/customer_edit_height_bg"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <EditText
+                            android:id="@+id/etCountry_CustomerInfo"
+                            style="@style/group_create_info_edittext_only_text"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:enabled="false"
+                            android:gravity="center_vertical"
+                            android:hint="@string/selector_country" />
+
+                        <ImageButton
+                            android:id="@+id/ivCountry_CustomerInfo"
+                            android:layout_width="70dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/customer_right_corners_bg"
+                            android:clickable="true"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/customer_down_btn" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/customer_password_first"
+                        style="@style/zm_edit_text_style"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/booking_detail_bg"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint="@string/customer_input_password_first"
+                        android:inputType="numberPassword"
+                        android:maxLength="6"
+                        android:singleLine="true"
+                        android:textColor="@color/text_gray"
+                        android:textColorHint="@color/zm_theme_color_input_hint_read"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/customer_password_second"
+                        style="@style/zm_edit_text_style"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/booking_detail_bg"
+                        android:cursorVisible="true"
+                        android:focusable="true"
+                        android:hint="@string/customer_input_password_second"
+                        android:inputType="numberPassword"
+                        android:maxLength="6"
+                        android:singleLine="true"
+                        android:textColor="@color/text_gray"
+                        android:textColorHint="@color/zm_theme_color_input_hint_read"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <include
+                    layout="@layout/keynum_pad"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/save_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/beauty_selector_btn_yellow_oval_shadow"
+                    android:gravity="center"
+                    android:text="@string/customer_save"
+                    android:textColor="@color/text_white"
+                    android:textSize="18.6sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

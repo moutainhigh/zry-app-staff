@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/login_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvScanDesc_Customer"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/color_FDF6EC"
+            android:gravity="center"
+            android:textColor="@color/color_F85121"
+            android:textSize="@dimen/text_13"
+            tools:text="@string/customer_login_desc_1"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="37dp"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:id="@+id/ll_login_mobile"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_login_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="手机号登录"
+                    android:textColor="@color/color_32ADF6"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/v_login_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/color_32ADF6" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/gray_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_login_card"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_login_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/customer_login_type_card"
+                    android:textColor="@color/color_999999"
+                    android:textSize="16sp" />
+
+                <View
+                    android:id="@+id/v_login_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:background="@color/color_32ADF6" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_line"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="23dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/rl_area_code"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/queue_item_bg"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_area_codes"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:layout_toLeftOf="@id/ivAreaCode"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textColor="@color/color_333333"
+                        android:textSize="@dimen/queue_right_edit_textSize"
+                        tools:text="中国" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icon_areacode" />
+                </LinearLayout>
+
+                <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+                    android:id="@+id/phone_number"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@drawable/input_price_edit_selector"
+                    android:drawableRight="@drawable/icon_delete"
+                    android:gravity="center"
+                    android:hint="@string/customer_login_hint"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:textColor="#6B6D6C"
+                    android:textColorHint="#9FA0A0"
+                    android:textSize="@dimen/text_16" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/customer_verification"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="19dp"
+                android:background="@drawable/btn_blue_selector"
+                android:gravity="center"
+                android:text="@string/member_login"
+                android:textColor="#fefefe"
+                android:textSize="@dimen/text_16" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="43dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="6"
+                    android:background="@drawable/dinner_customer_dash_line" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/customer_login_hint_login_type2"
+                    android:textColor="@color/color_bcbcbc"
+                    android:textSize="@dimen/text_12" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="2dp"
+                    android:layout_weight="6"
+                    android:background="@drawable/dinner_customer_dash_line" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="28dp"
+                android:paddingTop="28dp">
+
+                <LinearLayout
+                    style="@style/customer_login_dialog_layout"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/card_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/btn_customer_login_read_card" />
+
+                    <TextView
+                        style="@style/customer_login_dialog_btn_text"
+                        android:text="@string/customer_login_read_card" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/customer_login_dialog_layout"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/face_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/btn_customer_login_face" />
+
+                    <TextView
+                        style="@style/customer_login_dialog_btn_text"
+                        android:text="@string/customer_face_login" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/member_register_root"
+                    style="@style/customer_login_dialog_layout"
+                    android:visibility="gone">
+
+                    <ImageView
+                        android:id="@+id/member_register"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/btn_customer_login_regiest" />
+
+                    <TextView
+                        style="@style/customer_login_dialog_btn_text"
+                        android:text="@string/register_str" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/fragment_face_login_error" />
+</FrameLayout>
+

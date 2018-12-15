@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="134dp"
+    android:layout_height="match_parent"
+    android:paddingLeft="4dp"
+    android:background="@drawable/dinner_order_dish_type_bg"
+    android:gravity="center_vertical">
+
+    <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+        android:id="@+id/btn_search_goods"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dinner_order_right_searchBtn_height"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="20dp"
+        android:textSize="@dimen/dinner_order_right_searchBtn_textSize"
+        android:drawablePadding="10dp"
+        android:background="@drawable/dinner_dish_type_arrow_bg"
+        android:contentDescription="@null"
+        android:drawableLeft="@drawable/orderdish_search_goods"
+        android:gravity="center_vertical"
+        android:text="@string/search" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/line_gray" />
+
+    <com.zhongmei.bty.commonmodule.view.VerticalViewPager
+        android:id="@+id/viewPager_dish_type"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageButton
+            android:id="@+id/arrow_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/orderdish_arrow_left"
+            android:contentDescription="@string/image_left_arrow_description"
+            android:scaleType="center" />
+
+        <ImageButton
+            android:id="@+id/arrow_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:background="@drawable/orderdish_arrow_right"
+            android:contentDescription="@string/image_right_arrow_description"
+            android:scaleType="center" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/queue_self_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/auto_queue_color"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:padding="20dp">
+
+    <!-- Left 布局 -->
+    <RelativeLayout
+        android:id="@+id/left_panel"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:background="@drawable/queue_auto_takenumber_left_bg">
+
+        <ImageView
+            android:id="@+id/id_imageview_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:src="@drawable/queue_auto_takenumber_logo" />
+
+        <TextView
+            android:id="@+id/id_queue_autotextview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/id_imageview_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:lineSpacingExtra="10dp"
+            android:text="@string/queue_auto_title"
+            android:textColor="@color/text_white"
+            android:textSize="26.6sp"
+            android:textStyle="bold" />
+
+        <!-- 取号流程 -->
+        <LinearLayout
+            android:id="@+id/bottom_tips_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/queue_auto_takenumber"
+                android:textColor="@color/text_white"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/id_queue_autotextview_promt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/queue_auto_takenumber_one"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="@string/queue_auto_input_phone_text"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_18"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/id_queue_autotextview_promt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:drawableLeft="@drawable/queue_auto_takenumber_two"
+                android:drawablePadding="10dp"
+                android:gravity="center"
+                android:text="@string/queue_auto_btn_takenumber_text"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_18" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_above="@id/bottom_tips_layout"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/queue_auto_takenumber_line" />
+    </RelativeLayout>
+
+    <!-- Right 布局 -->
+    <LinearLayout
+        android:id="@+id/right_panel"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="6"
+        android:orientation="vertical"></LinearLayout>
+
+</LinearLayout>

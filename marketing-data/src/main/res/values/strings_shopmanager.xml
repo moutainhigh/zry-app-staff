@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--交接-->
+    <string name="handover_ok">确定</string>
+    <string name="handover_print_collect_pay_detail">店内收款概况</string>
+    <string name="handover_print_third_expense_details">第三方收款</string>
+    <string name="handover_print_hang_account_total">挂账统计</string>
+    <string name="handover_print_actual_collect_detail">实收明细</string>
+    <string name="handover_print_sales_promotion_privilege_detail">促销及优惠明细</string>
+    <string name="handover_print_business_overview">营业概况</string>
+    <string name="handover_print_sale_type_statistical">中类销售统计</string>
+    <string name="handover_print_sale_big_type_statistical">大类销售统计</string>
+</resources>

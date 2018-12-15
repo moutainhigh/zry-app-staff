@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_privilege_seperator"
+        style="@style/view_privilege_seperator" />
+
+    <LinearLayout style="@style/view_privilege_ll_item_root">
+
+        <RelativeLayout
+            android:id="@+id/rl_customer_coupon"
+            style="@style/view_privilege_rl_item">
+
+            <ImageView
+                android:id="@+id/iv_customer_coupon"
+                style="@style/view_privilege_image"
+                android:src="@drawable/ic_customer_coupon" />
+
+            <TextView
+                android:id="@+id/tv_customer_coupon"
+                style="@style/view_privilege_text"
+                android:layout_below="@+id/iv_customer_coupon"
+                android:text="@string/dinner_privliges_customer_coupon" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line_gray" />
+
+        <RelativeLayout
+            android:id="@+id/rl_discount"
+            style="@style/view_privilege_rl_item">
+
+            <ImageView
+                android:id="@+id/iv_discount"
+                style="@style/view_privilege_image"
+                android:src="@drawable/ic_dinner_discount" />
+
+            <TextView
+                android:id="@+id/tv_discount"
+                style="@style/view_privilege_text"
+                android:layout_below="@+id/iv_discount"
+                android:text="@string/discount" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray" />
+
+    <LinearLayout
+        android:id="@+id/layout_market"
+        style="@style/view_privilege_ll_item_root">
+
+        <RelativeLayout
+            android:id="@+id/rl_extra_charge"
+            style="@style/view_privilege_rl_item">
+
+            <ImageView
+                android:id="@+id/iv_extra_charge"
+                style="@style/view_privilege_image"
+                android:src="@drawable/ic_dinner_extra_fee" />
+
+            <TextView
+                android:id="@+id/tv_extra_charge"
+                style="@style/view_privilege_text"
+                android:layout_below="@+id/iv_extra_charge"
+                android:text="@string/extra_charge" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line_gray" />
+
+        <RelativeLayout
+            android:id="@+id/rl_coupon_code"
+            style="@style/view_privilege_rl_item">
+
+            <ImageView
+                android:id="@+id/iv_coupon_code"
+                style="@style/view_privilege_image"
+                android:src="@drawable/weixin_icon_large" />
+
+            <TextView
+                android:id="@+id/tv_coupon_code"
+                style="@style/view_privilege_text"
+                android:layout_below="@+id/iv_coupon_code"
+                android:text="@string/coupon_code_WeChat_label" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray" />
+
+    <LinearLayout
+        android:id="@+id/layout_extra"
+        style="@style/view_privilege_ll_item_root">
+
+        <RelativeLayout
+            android:id="@+id/rl_market_activity"
+            style="@style/view_privilege_rl_item">
+
+            <ImageView
+                android:id="@+id/iv_market_activity"
+                style="@style/view_privilege_image"
+                android:src="@drawable/ic_dinner_market_activity" />
+
+            <TextView
+                android:id="@+id/tv_market_activity"
+                style="@style/view_privilege_text"
+                android:layout_below="@+id/iv_market_activity"
+                android:text="@string/dinner_market_activity_label" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/line_gray" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray" />
+</LinearLayout>

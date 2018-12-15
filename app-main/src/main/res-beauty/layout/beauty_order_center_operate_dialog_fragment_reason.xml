@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/order_center_operate_dialog_fragment_title" />
+
+    <!--
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#FFFF0000"
+        android:showDividers="middle"
+        android:layout_marginBottom="20px"
+        android:layout_marginTop="20px" >
+
+    </RadioGroup>
+  -->
+
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all"
+        android:divider="#FFDFE3E8"
+        android:dividerHeight="1dp"
+        android:layout_marginTop="@dimen/dialog_operate_reason_content_margin"
+        android:footerDividersEnabled="false"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none" />
+
+
+    <com.zhongmei.bty.cashier.ordercenter.view.MyEditText
+        android:id="@+id/user_defined_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_operate_reason_edit_height"
+        android:layout_marginTop="@dimen/dialog_operate_reason_content_margin"
+        android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all"
+        android:gravity="top"
+        android:maxLength="30"
+        android:hint="@string/reason_type_self_define_reason"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:textColor="#FF333333"
+        android:textColorHint="#FFC3C8CE"
+        android:textSize="@dimen/dialog_operate_reason_edit_size"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+</LinearLayout>

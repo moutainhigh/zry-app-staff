@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:gravity="center|right"
+    android:orientation="horizontal"
+    android:visibility="gone">
+
+    <TextView
+        android:id="@+id/return_dish_reason_tv"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:lineSpacingExtra="5dp"
+        android:text=""
+        android:textColor="@color/remark_text_color"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/return_dish_quantity_tv"
+        style="@style/layout.w.w"
+        android:layout_marginLeft="5dp"
+        android:background="@drawable/dinner_dish_return_quantity_back"
+        android:ellipsize="end"
+        android:paddingBottom="2dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="2dp"
+        android:singleLine="true"
+        android:textColor="@color/bg_white"
+        android:textSize="14sp" />
+</LinearLayout>

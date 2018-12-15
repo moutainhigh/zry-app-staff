@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
+
+    <LinearLayout
+        android:id="@+id/scan_btn"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/card_sale_activie_selecter"
+        android:clickable="true"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:drawablePadding="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:drawableStart="@drawable/icon_scan_mini"
+            android:gravity="center"
+            android:text="@string/scan_code_check_coupon"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/snack_middle_coupon_scan_size" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/trade_amount_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/basedline"></View>
+
+    <EditText
+        android:id="@+id/value"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/bg_round_rectangle"
+        android:gravity="center"
+        android:longClickable="false"
+        android:hint="@string/input_voucher_code"
+        android:textColorHint="@color/text_hint_color"
+        android:paddingLeft="20dp"
+        android:textColor="@color/settings_normalword"
+        android:textSize="16sp"
+        android:maxLines="1" />
+
+    <Button
+        android:id="@+id/check_btn"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/coupon_check_button_bg_selector"
+        android:text="@string/check_ticket_str"
+        android:textColor="@drawable/coupon_check_button_text_color_selector"
+        android:textSize="18sp" />
+</LinearLayout>

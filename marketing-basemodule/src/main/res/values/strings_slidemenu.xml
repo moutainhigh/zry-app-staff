@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="slidemenu_group_list_title">团餐列表</string>
+    <string name="slidemenu_dinner_order_center">单据中心</string>
+    <string name="slidemenu_back_home">返回主页</string>
+    <string name="slidemenu_dinner_tables">桌台</string>
+    <string name="slidemenu_shop_management">门店管理</string>
+    <string name="slidemenu_dinner_form_center">报表中心</string>
+</resources>

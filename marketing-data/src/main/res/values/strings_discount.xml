@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="coupons_counsumed">卡券已核销</string>
+    <string name="coupons_expire">卡券已过期</string>
+    <string name="coupons_delete">卡券已删除</string>
+    <string name="coupons_unavailable">卡券已失效</string>
+    <string name="dish_discount">单菜折扣</string>
+    <string name="dish_discount_let">单菜让价</string>
+    <string name="order_free">免单</string>
+    <string name="dish_free">单菜赠送</string>
+    <string name="coupon_type_gift">礼品券</string>
+    <string name="dish_problems">问题菜品</string>
+    <string name="intergral_privilege">积分抵现</string>
+    <string name="banquet_privilege">宴请</string>
+    <string name="member_dish_discount">会员折扣</string>
+    <string name="member_dish_price">会员特价</string>
+    <string name="week_day_sunday">星期日</string>
+    <string name="week_day_monday">星期一</string>
+    <string name="week_day_tuesday">星期二</string>
+    <string name="week_day_wednesday">星期三</string>
+    <string name="week_day_thursday">星期四</string>
+    <string name="week_day_friday">星期五</string>
+    <string name="week_day_saturday">星期六</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_multiple_goods_fixed_price">满%1$s件一口价%2$s</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_multiple_goods_rebate">满%1$s件减%2$s</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_multiple_goods_rebate_lowest">满%1$s件减最低价</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_multiple_goods_discount">满%1$s件%2$s折</string>
+    <string name="sales_promotion_rule_name_match_amount_once_specified_goods_rebate">满%1$s减%2$s</string>
+    <string name="sales_promotion_rule_name_match_amount_once_specified_goods_discount">满%1$s %2$s折</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_single_goods_fixed_price">满%1$s件每件%2$s元</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_single_goods_rebate">满%1$s件每件减%2$s元</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_single_goods_discount">满%1$s件每件%2$s折</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_single_goods_give">满%1$s件赠送指定商品%2$s件</string>
+    <string name="sales_promotion_rule_name_match_quantity_once_single_goods_raise_price">满%1$s件加%2$s赠送指定商品%3$s件</string>
+
+    <string name="sales_promotion_rule_name_match_amount_once_single_goods_give">满%1$s元赠送指定商品%2$s件</string>
+    <string name="sales_promotion_rule_name_match_amount_once_single_goods_raise_price">满%1$s元加%2$s赠送指定商品%3$s件</string>
+</resources>

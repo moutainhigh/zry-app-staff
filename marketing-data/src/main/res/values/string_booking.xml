@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<string name="booking_create_yuan">元</string>-->
+    <!--<string name="person_standard">元的消费水准</string>-->
+    <string name="booking_time_format">yyyy年MM月dd日 HH:mm</string>
+</resources>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:layout_width="800dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/calculator_background">
+
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="22dp">
+
+
+            <LinearLayout
+                android:id="@+id/ll_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/close_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="44dp"
+                    android:background="@color/transparent"
+                    android:text="@string/common_cancel"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/text_20" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/please_select_shangjia_dish"
+                    android:textColor="#ff7901"
+                    android:textSize="@dimen/text_26"
+                    tools:text="@string/please_select_shangjia_dish"
+                    tools:textSize="26sp" />
+
+                <CheckBox
+                    android:id="@+id/cb_select_all"
+                    android:layout_width="53dp"
+                    android:layout_height="23dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:background="@drawable/orderdish_clear_status_select_bg_selector"
+                    android:textSize="12sp"
+                    android:textColor="@color/orderdish_clear_status_select_text_selector"
+                    android:gravity="center"
+                    android:text="@string/dinner_check_all"
+                    android:button="@null"
+                    android:checked="false" />
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@+id/ll_title"
+                android:layout_marginTop="22dp"
+                android:background="#ebebeb"></View>
+
+        </RelativeLayout>
+
+        <com.zhongmei.bty.snack.orderdish.view.TouchGridView
+            android:id="@+id/gv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/rl_title"
+            android:layout_marginLeft="73dp"
+            android:layout_marginRight="73dp"
+            android:layout_marginTop="36dp"
+            android:horizontalSpacing="20dp"
+            android:listSelector="@color/bg_white"
+            android:numColumns="3"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="20dp" />
+
+        <Button
+            android:id="@+id/btn_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="22dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/btn_blue_selector"
+            android:text="@string/common_submit"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_20" />
+
+    </RelativeLayout>
+</LinearLayout>

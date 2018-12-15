@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <LinearLayout
+            android:id="@+id/ll_coupon_center_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="2dp"
+            android:orientation="horizontal"
+            android:padding="0dp">
+
+            <TextView
+                android:id="@+id/tv_customer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:drawablePadding="8dp"
+                android:focusable="true"
+                android:singleLine="true"
+                android:textColor="#333333"
+                android:textSize="28sp" />
+
+            <Button
+                android:id="@+id/bt_customer_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_customer_exit_bg"
+                android:clickable="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dinner_close" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DADBDA" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:paddingLeft="60dp">
+
+            <TextView
+                android:id="@+id/tv_balance_label"
+                style="@style/layout.w.w"
+                android:layout_width="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:singleLine="true"
+                android:text="@string/customer_banlance_label"
+                android:textColor="#999999"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_balance_value"
+                style="@style/layout.w.w"
+                android:layout_width="wrap_content"
+                android:layout_toRightOf="@+id/tv_balance_label"
+                android:focusable="true"
+                android:singleLine="true"
+                android:textColor="#ff850b"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_customer_level_label"
+                style="@style/layout.w.w"
+                android:layout_width="wrap_content"
+                android:layout_below="@+id/tv_balance_label"
+                android:layout_marginTop="10dp"
+                android:focusable="true"
+                android:singleLine="true"
+                android:text="@string/customer_level"
+                android:textColor="#999999"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_customer_level"
+                style="@style/layout.w.w"
+                android:layout_width="wrap_content"
+                android:layout_alignTop="@+id/tv_customer_level_label"
+                android:layout_toRightOf="@+id/tv_customer_level_label"
+                android:focusable="true"
+                android:singleLine="true"
+                android:textColor="#ff850b"
+                android:textSize="22sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:paddingLeft="60dp"
+            android:paddingRight="70dp">
+
+            <TextView
+                android:id="@+id/tv_credit_label"
+                style="@style/layout.w.w"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                android:text="@string/customer_integral_label"
+                android:textColor="#999999"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_credit_value"
+                style="@style/layout.w.w"
+                android:layout_width="wrap_content"
+                android:layout_toRightOf="@+id/tv_credit_label"
+                android:focusable="true"
+                android:singleLine="true"
+                android:textColor="#ff850b"
+                android:textSize="22sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_credit_label"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_intergral_to_cash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/checkbox_style"
+                    android:drawablePadding="10dp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:text="@string/intergral_to_cash"
+                    android:textColor="#999999"
+                    android:textSize="22sp" />
+
+                <TextView
+                    android:id="@+id/tv_level_rights"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:textColor="#999999"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DADBDA" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:background="#f8f9fb"
+        android:fadeScrollbars="false"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/coupons_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"></LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="text_color_black">#333333</color>
+    <color name="text_color_darkgrey">#939393</color>
+    <color name="scroll_bg_blue">#52D4F7</color>
+    <color name="text_scroll_color">#636363</color>
+    <color name="text_import_color">#FF7E60</color>
+    <color name="round_yellow_default">#F9CA55</color>
+    <color name="round_yellow_press">#F2B336</color>
+    <color name="round_blue_default">#52D4F7</color>
+    <color name="round_blue_press">#3EC6E5</color>
+    <color name="round_orange_default">#fdbd57</color>
+    <color name="round_orange_press">#Fdcd57</color>
+    <color name="queue_button_bg_blue_press">#5dd0fa</color>
+    <color name="queue_button_bg_blue_normal">#4fc6f1</color>
+    <color name="round_green_default">#3bdac2</color>
+    <color name="round_green_press">#35c5af</color>
+    <color name="auto_queue_color">#292E37</color>
+    <color name="text_hint_color">#bcbcbc</color>
+
+</resources>

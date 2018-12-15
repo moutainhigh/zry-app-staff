@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="order_dish_left_view_width">50dp</dimen>
+    <dimen name="order_dish_left_view_bottom">5dp</dimen>
+    <dimen name="order_dish_left_view_top">5dp</dimen>
+    <dimen name="order_dish_left_view_right">10dp</dimen>
+    <dimen name="cashier_trade_pending_pager_paddingLeft">20dp</dimen>
+    <dimen name="cashier_trade_pending_pager_paddingRight">25dp</dimen>
+    <dimen name="cashier_trade_pending_pager_marginRight">10dp</dimen>
+    <dimen name="cashier_trade_pending_pager_marginLeft">10dp</dimen>
+    <dimen name="order_center_item_detail_layout">10dp</dimen>
+    <dimen name="order_center_detail_list_minWidth">50dp</dimen>
+    <dimen name="order_center_detail_list_minWidth_other">80dp</dimen>
+    <dimen name="order_dish_grid_width">164dp</dimen>
+    <dimen name="order_dish_grid_margin">5dp</dimen>
+    <dimen name="order_dish_grid_paddingTop">16dp</dimen>
+    <dimen name="order_dish_grid_marginTop">0dp</dimen>
+    <dimen name="sender_order_detail_paddingLeft">30dp</dimen>
+    <dimen name="sender_order_detail_paddingRight">30dp</dimen>
+    <dimen name="sender_order_detail_marginRight">20dp</dimen>
+    <dimen name="order_dish_grid_item_selected_margin">8dp</dimen>
+    <!--点单页上边距-->
+    <dimen name="order_dish_margin_top">6dp</dimen>
+    <dimen name="order_dish_grid_item_desc_margin">12dp</dimen>
+    <dimen name="order_dish_grid_item_width">90dp</dimen>
+</resources>

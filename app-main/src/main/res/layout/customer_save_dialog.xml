@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout.m.m"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="450dp"
+        android:layout_height="240dp"
+        android:background="@drawable/calmui_dialog_background">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/commonmodule_dialog_icon_success" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center"
+            android:text="@string/save_success"
+            android:textColor="@color/text_black"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/return_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/commonmodule_dialog_nagetive"
+                android:gravity="center"
+                android:text="@string/customer_return_list"
+                android:textColor="@color/text_white"
+                android:textSize="21sp" />
+
+            <Button
+                android:id="@+id/card_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/common_dailog_center"
+                android:gravity="center"
+                android:text="@string/customer_to_card_stroe"
+                android:textColor="@color/text_white"
+                android:textSize="21sp" />
+
+            <Button
+                android:id="@+id/entity_card_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/commonmodule_dialog_positive"
+                android:gravity="center"
+                android:text="@string/customer_to_entity_card"
+                android:textColor="@color/text_white"
+                android:textSize="21sp" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</LinearLayout>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="0dp">
+
+    <RelativeLayout style="@style/group_date_root_layout">
+
+        <LinearLayout
+            android:id="@+id/ll_monday"
+            style="@style/group_date_layout">
+
+            <TextView
+                android:id="@+id/tv_week_monday"
+                style="@style/group_date_week_textview"
+                android:text="2212" />
+
+            <TextView
+                android:id="@+id/tv_date_monday"
+                style="@style/group_date_time_textview"
+                android:text="星期一" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/monday_image_tv"
+            style="@style/group_date_red_point"
+            android:layout_alignParentRight="true"
+            tools:visibility="visible" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/group_date_root_layout">
+
+        <LinearLayout
+            android:id="@+id/ll_tuesday"
+            style="@style/group_date_layout">
+
+            <TextView
+                android:id="@+id/tv_week_tuesday"
+                style="@style/group_date_week_textview" />
+
+            <TextView
+                android:id="@+id/tv_date_tuesday"
+                style="@style/group_date_time_textview" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tuesday_image_tv"
+            style="@style/group_date_red_point"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/group_date_root_layout">
+
+        <LinearLayout
+            android:id="@+id/ll_wednesdaay"
+            style="@style/group_date_layout">
+
+            <TextView
+                android:id="@+id/tv_week_wednesday"
+                style="@style/group_date_week_textview" />
+
+            <TextView
+                android:id="@+id/tv_date_wednesday"
+                style="@style/group_date_time_textview" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/wednesday_image_tv"
+            style="@style/group_date_red_point"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/group_date_root_layout">
+
+        <LinearLayout
+            android:id="@+id/ll_thursday"
+            style="@style/group_date_layout">
+
+            <TextView
+                android:id="@+id/tv_week_thursday"
+                style="@style/group_date_week_textview" />
+
+            <TextView
+                android:id="@+id/tv_date_thursday"
+                style="@style/group_date_time_textview" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/thursday_image_tv"
+            style="@style/group_date_red_point"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/group_date_root_layout">
+
+        <LinearLayout
+            android:id="@+id/ll_friday"
+            style="@style/group_date_layout">
+
+            <TextView
+                android:id="@+id/tv_week_friday"
+                style="@style/group_date_week_textview" />
+
+            <TextView
+                android:id="@+id/tv_date_friday"
+                style="@style/group_date_time_textview" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/friday_image_tv"
+            style="@style/group_date_red_point"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/group_date_root_layout">
+
+        <LinearLayout
+            android:id="@+id/ll_saturday"
+            style="@style/group_date_layout">
+
+            <TextView
+                android:id="@+id/tv_week_saturday"
+                style="@style/group_date_week_textview" />
+
+            <TextView
+                android:id="@+id/tv_date_saturday"
+                style="@style/group_date_time_textview" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/saturday_image_tv"
+            style="@style/group_date_red_point"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout style="@style/group_date_root_layout">
+
+        <LinearLayout
+            android:id="@+id/ll_sunday"
+            style="@style/group_date_layout">
+
+            <TextView
+                android:id="@+id/tv_week_sunday"
+                style="@style/group_date_week_textview" />
+
+            <TextView
+                android:id="@+id/tv_date_sunday"
+                style="@style/group_date_time_textview" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/sunday_image_tv"
+            style="@style/group_date_red_point"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

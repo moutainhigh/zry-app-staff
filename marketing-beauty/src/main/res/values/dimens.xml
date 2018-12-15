@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="yellow_oval_btn_radius">18dp</dimen>
+    <dimen name="beauty_line_width">1px</dimen>
+    <dimen name="beauty_line_blod_width">1dp</dimen>
+    <dimen name="beauty_btn_skroke_width">1px</dimen>
+    <dimen name="beauty_btn_skroke_height">1px</dimen>
+    <dimen name="beauty_btn_corner_radius">5dp</dimen>
+
+    <dimen name="beauty_stroke_width">1dp</dimen>
+    <dimen name="beauty_stroke_height">1px</dimen>
+
+    <dimen name="beauty_charging_radius_10">10dp</dimen>
+    <dimen name="beauty_booking_radius_4">4dp</dimen>
+
+    <dimen name="beauty_reserver_board_item_height">50dp</dimen>
+    <dimen name="beauty_reserver_board_item_width">100dp</dimen>
+    <dimen name="beauty_reserver_board_item_line_width">1dp</dimen>
+</resources>

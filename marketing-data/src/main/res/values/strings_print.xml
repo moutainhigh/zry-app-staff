@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ticket_note">客看单</string>
+    <string name="ticket_closed">结账单</string>
+    <string name="ticket_ad_closing">预结单</string>
+    <string name="ticket_xiaofeiqingdan">消费清单</string>
+    <string name="ticket_deposit">押金单</string>
+    <string name="ticket_refundnote">退货单</string>
+    <string name="ticket_invalidorder">作废单</string>
+    <string name="ticket_store">储值单</string>
+    <string name="ticket_store_out">储值消费单</string>
+    <string name="ticket_handover">交接单</string>
+    <string name="ticket_closing">关账单</string>
+    <string name="ticket_sale_rank">商品销售统计单</string>
+    <string name="ticket_bank">银联POS签购单</string>
+    <string name="ticket_queue">排队单</string>
+    <string name="ticket_booking">预订单</string>
+    <string name="ticket_invoice">发票申请单</string>
+    <string name="ticket_kitchenorder">厨总单</string>
+    <string name="ticket_transfer_table">转台单</string>
+    <string name="ticket_merge_table">合台单</string>
+    <string name="ticket_move_dsih">移菜单</string>
+    <string name="ticket_hallticket">堂口单</string>
+    <string name="ticket_kitchen_wakeup">等叫单</string>
+    <string name="ticket_kitchen_cancel_wakeup">取消等叫单</string>
+    <string name="ticket_kitchen_rise">起菜单</string>
+    <string name="ticket_kitchen_cancel_rise">取消起菜单</string>
+    <string name="ticket_kitchen_remind">催菜单</string>
+    <string name="label">标签</string>
+    <string name="commonmodule_dialog_other">其他</string>
+    <string name="third_party_sources">第三方来源</string>
+    <string name="baidu_map">百度地图</string>
+    <string name="baidu_takout">百度外卖</string>
+    <string name="baidu_nuomi">百度糯米</string>
+    <string name="on_mobile">ON MOBILE</string>
+    <string name="familiar">熟客</string>
+    <string name="eleme">饿了么</string>
+    <string name="meituan">美团外卖</string>
+    <string name="payment_quick">快捷支付</string>
+    <string name="payment_xinmeida">新美大</string>
+    <string name="payment_loyal_backstage">loyal后台</string>
+
+    <string name="split_fail_cannot_retry">拆单失败无法重试，请修改后前台或后厨票据配置</string>
+</resources>

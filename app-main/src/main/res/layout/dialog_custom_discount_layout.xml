@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="374dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/order_center_operate_dialog_background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/dialog_close" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textColor="#ff7901"
+                android:text="@string/userdefine_discount" />
+
+            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                android:id="@+id/tv_privilege"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="#ff7901"
+                android:text="@string/now_discount_limit"
+                android:visibility="gone" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:paddingLeft="22dp"
+        android:paddingRight="22dp"
+        android:background="#f8f8f8">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:background="@drawable/discount_dialog_edittext_bg"
+            android:layout_centerInParent="true">
+
+            <EditText
+                android:id="@+id/tv_value"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:hint="@string/input_userdefine_discount"
+                android:textColor="#33adf6"
+                android:textColorHint="#cfcfcf"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/tv_discount_unite"
+                android:layout_width="41dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/discount_dialog_edittext_unite_bg"
+                android:text="@string/discount1"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:textColor="@color/color_666666" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <com.zhongmei.bty.settings.view.NumberKeyboardLayout
+        android:id="@+id/keyboard"
+        android:layout_width="374dp"
+        android:layout_height="272dp"
+        android:background="#f8f8f8" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:background="@drawable/beauty_booking_datetime_submit_selector"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textSize="26dp"
+        android:textColor="#FFFFFFFF"
+        android:text="@android:string/ok"
+        android:id="@+id/btn_ok" />
+</LinearLayout>

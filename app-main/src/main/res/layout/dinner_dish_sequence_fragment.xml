@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/shadow_bg"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="@dimen/snack_dish_left_zone_width"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:background="#32ADF6"
+            android:gravity="center"
+            android:text="@string/dish_sequence_title"
+            android:textColor="#FFFFFF"
+            android:textSize="21sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="26dp"
+            android:background="#FFF1ED"
+            android:gravity="center"
+            android:text="@string/dish_sequence_subtitle"
+            android:textColor="#FE4545"
+            android:textSize="12sp" />
+
+        <ListView
+            android:id="@+id/dish_sequence_lv"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/transparent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:fadingEdge="none"
+            android:listSelector="@android:color/transparent"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="@string/dish_sequence_check_count"
+                android:textColor="#999999"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/dish_item_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="#40D0AE"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/trade_amount_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingLeft="13dp"
+            android:paddingRight="15dp"
+            android:paddingTop="8dp">
+
+            <Button
+                android:id="@+id/dish_sequence_btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="2"
+                android:background="@drawable/btn_green_selector"
+                android:gravity="center"
+                android:text="@string/cancel"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_28" />
+
+            <Button
+                android:id="@+id/dish_sequence_btn_ok"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_weight="1.5"
+                android:background="@drawable/btn_blue_selector"
+                android:gravity="center"
+                android:text="@string/orderdish_dinner_ok"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_28" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/dish_sequence_num_sv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="#F0F3F6">
+
+        <LinearLayout
+            android:id="@+id/dish_sequence_num_ll"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="15dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="15dp">
+
+            <include layout="@layout/dinner_dish_sequence_fragment_num_item" />
+
+            <include layout="@layout/dinner_dish_sequence_fragment_num_item" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

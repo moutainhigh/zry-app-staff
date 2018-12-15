@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:paddingTop="15dp">
+
+    <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+        android:id="@+id/cash_pay_alerttext"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:background="#f4f7f9"
+        android:gravity="center"
+        android:text="@string/pay_rest_payment_text"
+        android:textColor="@color/print_text_black"
+        android:textSize="@dimen/text_18"
+        android:visibility="visible" />
+
+    <FrameLayout
+        android:id="@+id/contentView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_weight="1"
+        android:paddingTop="0dp">
+
+        <ScrollView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:scrollbars="none"
+            android:verticalSpacing="4dp" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/pay_bottom_height2"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/pay_dopay_btn_selector"
+        android:enabled="false"
+        android:text="@string/pay_settle_accounts"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_30" />
+
+</LinearLayout>

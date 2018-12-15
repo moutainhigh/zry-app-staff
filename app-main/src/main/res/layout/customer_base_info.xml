@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/customer_member_item"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_base_info_text"
+            android:text="@string/customer_taste" />
+
+        <TextView
+
+            style="@style/customer_base_info_value" />
+    </LinearLayout>
+
+    <ImageView style="@style/customer_member_line" />
+
+    <LinearLayout
+        style="@style/customer_member_item"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_base_info_text"
+            android:text="@string/customer_brith_title" />
+
+        <TextView
+
+            style="@style/customer_base_info_value" />
+    </LinearLayout>
+
+    <ImageView style="@style/customer_member_line" />
+
+    <LinearLayout
+        style="@style/customer_member_item"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_base_info_text"
+            android:text="@string/customer_address" />
+
+        <TextView
+
+            style="@style/customer_base_info_value" />
+    </LinearLayout>
+
+    <ImageView style="@style/customer_member_line" />
+
+    <LinearLayout
+        style="@style/customer_member_item"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_base_info_text"
+            android:text="@string/customer_member_num" />
+
+        <TextView
+
+            style="@style/customer_base_info_value" />
+    </LinearLayout>
+
+    <ImageView style="@style/customer_member_line" />
+
+    <LinearLayout
+        style="@style/customer_member_item"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_base_info_text"
+            android:text="@string/customer_invoice" />
+
+        <TextView
+
+            style="@style/customer_base_info_value" />
+    </LinearLayout>
+
+    <ImageView style="@style/customer_member_line" />
+
+    <LinearLayout
+        style="@style/customer_member_item"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/customer_base_info_text"
+            android:text="@string/customer_memo" />
+
+        <TextView style="@style/customer_base_info_value" />
+    </LinearLayout>
+
+    <ImageView style="@style/customer_member_line" />
+
+</LinearLayout>

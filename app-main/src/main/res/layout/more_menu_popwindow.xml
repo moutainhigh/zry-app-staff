@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="72dp"
+    android:paddingTop="108dp">
+
+    <LinearLayout
+        android:id="@+id/content_ll"
+        android:layout_width="match_parent"
+        android:layout_height="106dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="@drawable/dinner_order_center_child_tab_bg">
+
+        <TextView
+            android:id="@+id/move_dish_tv"
+            style="@style/TableInfoMoreMenuItemTextView"
+            android:drawableTop="@drawable/move_dish_btn_icon"
+            android:text="@string/dinner_movedish" />
+
+        <TextView
+            android:id="@+id/copy_dish_tv"
+            style="@style/TableInfoMoreMenuItemTextView"
+            android:drawableTop="@drawable/copy_dish_btn_icon"
+            android:text="@string/dinner_copy" />
+
+        <TextView
+            android:id="@+id/dish_make_tv"
+            android:text="@string/dinner_orderdish_dish_make"
+            android:drawableTop="@drawable/dish_make"
+            style="@style/TableInfoMoreMenuItemTextView" />
+
+        <TextView
+            android:id="@+id/dish_urge_tv"
+            android:text="@string/dinner_orderdish_dish_urge"
+            android:drawableTop="@drawable/dish_urge"
+            style="@style/TableInfoMoreMenuItemTextView" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

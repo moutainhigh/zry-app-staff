@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="beauty.booking" />
+
+    <style name="beauty.booking.create" />
+
+
+    <style name="beauty.booking.create.content_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">41dp</item>
+        <item name="android:paddingRight">31dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="beauty.booking.create.item_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">47dp</item>
+        <item name="android:layout_marginTop">@dimen/beauty_booking_create_item_top</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="beauty.booking.create.text_red" parent="@style/beauty_layout_w_w_h_w">
+        <item name="android:textSize">@dimen/text_13</item>
+        <item name="android:textColor">@color/beauty_color_FE6A4D</item>
+    </style>
+
+    <style name="beauty.booking.create.text_title" parent="@style/beauty_layout_w_w_h_w">
+        <item name="android:textSize">@dimen/text_15</item>
+        <item name="android:textColor">@color/beauty_color_333333</item>
+    </style>
+
+    <style name="beauty.booking.create.edit_input">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textSize">@dimen/text_15</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:background">@drawable/beauty_booking_create_item_bg</item>
+        <item name="android:textColor">@color/beauty_color_000000</item>
+        <item name="android:textColorHint">@color/beauty_color_BCBCBC</item>
+    </style>
+
+    <style name="beauty.booking.create.child_item_layout">
+        <item name="android:layout_width">300dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/beauty_booking_create_item_bg</item>
+    </style>
+
+    <style name="beauty.booking.create.child_item_text" parent="@style/beauty_layout_w_0_h_w_w_1">
+        <item name="android:textSize">@dimen/text_15</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:textColor">@color/beauty_color_BCBCBC</item>
+    </style>
+
+    <style name="beauty.booking.create.child_item_left_arrow" parent="@style/beauty_layout_w_w_h_w">
+        <item name="android:src">@drawable/beauty_ic_arrow_left</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="beauty.booking.create.button">
+        <item name="android:layout_width">207dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/text_17</item>
+    </style>
+
+    <style name="beauty.booking.create.date_time_item">
+        <item name="android:paddingTop">17dp</item>
+        <item name="android:paddingBottom">17dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/keyat_yaz_bg_choose_card"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_yaz_card_num"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center"
+        android:textColor="@color/keyat_yaz_text_entity_card_query_choose"
+        android:textSize="@dimen/text_16" />
+
+</TableRow>

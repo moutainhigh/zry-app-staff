@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="#637DDD" />
+            <corners android:radius="@dimen/beauty_btn_corner_radius" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="false">
+        <shape>
+            <solid android:color="#6E8DFF" />
+            <corners android:radius="@dimen/beauty_btn_corner_radius" />
+        </shape>
+    </item>
+
+
+    <item>
+        <shape>
+            <solid android:color="#6E8DFF" />
+            <corners android:radius="@dimen/beauty_btn_corner_radius" />
+        </shape>
+    </item>
+</selector>

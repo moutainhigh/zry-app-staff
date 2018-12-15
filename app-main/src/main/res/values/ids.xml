@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- Messages IDs -->
+    <item name="btn_order_dish_right_clear" type="id" />
+    <item name="combo_dish_name" type="id" />
+    <item name="combo_dish_price" type="id" />
+    <item name="combo_dish_tag" type="id" />
+    <item name="common_market_view" type="id" />
+    <item name="common_valid_position" type="id" />
+
+    <item name="dinner_table_dish_data" type="id" />
+    <item name="dinner_table_dish_property" type="id" />
+
+    <!--view -->
+    <item name="origin_background_drawable" type="id" />
+    <item name="origin_src_drawable" type="id" />
+
+
+    <item name="quick_pay_item" type="id" />
+</resources>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:baselineAligned="false"
+    android:orientation="horizontal"
+    android:layout_marginBottom="20dp">
+
+    <LinearLayout
+        android:id="@+id/left_show_dishes"
+        android:layout_width="0dp"
+        android:layout_height="500dp"
+        android:layout_marginLeft="16dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/left_show_dishes_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_selection"
+                style="@style/RadioButtonTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/print_radiobutton_normal"
+                android:gravity="center"
+                android:paddingLeft="8dp" />
+
+            <TextView
+                android:id="@+id/tv_type_selection_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="6dp"
+                android:gravity="center" />
+
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_gravity="top|center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="450dp"
+            android:layout_marginTop="6dp">
+
+            <ImageView
+                android:id="@+id/iv_type_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="matrix" />
+
+            <ImageView
+                android:id="@+id/img_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:src="@drawable/customization_selected" />
+        </FrameLayout>
+
+    </LinearLayout>
+</LinearLayout>

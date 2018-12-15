@@ -1,0 +1,165 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/basemodule_layout.m.m"
+    android:gravity="center">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:background="@drawable/trade_orderdish_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/close_title"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@color/transparent">
+
+            <ImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_head_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/dinner_move_dishes"
+                    android:textColor="#FFFF7901"
+                    android:textSize="@dimen/dialog_operate_title_size" />
+
+                <TextView
+                    android:id="@+id/common_dialog_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#666666"
+                    android:textSize="@dimen/dialog_operate_title2_size" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/negative_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_dish_quantity"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/dialog_operate_reason_margin"
+            android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+            android:layout_marginBottom="@dimen/dialog_operate_reason_content_margin"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dialog_operate_reason_title_height"
+                android:background="#FFE6EBEF"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+                android:text="@string/move_dishes_choose_num"
+                android:textColor="#FFB2B7BC"
+                android:textSize="@dimen/dialog_operate_reason_title_size" />
+
+            <ListView
+                android:id="@+id/lv_dishQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/dialog_operate_reason_content_margin"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10dp"
+                android:footerDividersEnabled="false"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none"></ListView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_property"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/dialog_operate_reason_margin"
+            android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+            android:layout_marginBottom="@dimen/dialog_operate_reason_content_margin"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dialog_operate_reason_title_height"
+                android:background="#FFE6EBEF"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+                android:text="@string/dinner_copydish_choose"
+                android:textColor="#FFB2B7BC"
+                android:textSize="@dimen/dialog_operate_reason_title_size" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dialog_operate_reason_content_margin"
+                android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/print_kitchen_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dialog_operate_reason_list_item_height"
+                    android:layout_marginLeft="9dp"
+                    android:button="@drawable/orderdish_bg_order_center_dialog_radiogroup_item"
+                    android:checked="true"
+                    android:paddingLeft="8dp"
+                    android:text="@string/send_kitchen_and_print"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dialog_operate_reason_list_item_size" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#FFDFE3E8" />
+
+                <CheckBox
+                    android:id="@+id/copy_dish_property_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dialog_operate_reason_list_item_height"
+                    android:layout_marginLeft="9dp"
+                    android:button="@drawable/orderdish_bg_order_center_dialog_radiogroup_item"
+                    android:checked="true"
+                    android:paddingLeft="8dp"
+                    android:text="@string/copy_dish_property"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/dialog_operate_reason_list_item_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/positive_button"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_operate_submit_height"
+            android:layout_gravity="bottom"
+            android:background="@drawable/orderdish_bg_order_center_dialog_refund"
+            android:textColor="#FFFFFFFF"
+            android:textSize="@dimen/dialog_operate_submit_size"
+            android:visibility="visible" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="text_red_2">#FF7901</color>
+    <color name="text_gray">#666666</color>
+    <color name="print_text_black">#333333</color>
+    <color name="text_blue">#03A9F4</color>
+    <color name="bg_white">#FFFFFFFF</color>
+    <color name="print_font_color">#ff6d66</color>
+    <color name="dinner_customer_gray">#53565b</color>
+    <color name="dinner_integral_gray">#8F99A3</color>
+    <color name="line_gray">#DADBDA</color>
+    <color name="color_32adf6">#32adf6</color>
+    <color name="color_d8d8d8">#d8d8d8</color>
+</resources>

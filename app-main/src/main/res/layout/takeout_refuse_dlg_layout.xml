@@ -1,0 +1,168 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calm_dlg_height"
+    android:layout_width="564dp"
+    android:layout_height="580dp"
+    android:background="@drawable/takeout_refuse_bg">
+
+    <RelativeLayout
+        android:id="@+id/custom_title_rl"
+        android:layout_width="match_parent"
+        android:layout_height="70dip">
+
+        <TextView
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:id="@+id/title"
+            android:text="@string/refuse_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/reason_radio_color"
+            android:textSize="30sp"
+            android:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/close"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="30dp"
+            android:background="@color/transparent"
+            android:src="@drawable/pay_close_btn" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_below="@id/custom_title_rl"
+        android:id="@+id/text_line"
+        android:layout_width="fill_parent"
+        android:layout_height="1sp"
+        android:layout_marginBottom="32dp"
+        android:background="@color/line_gray" />
+
+    <RadioGroup
+        android:layout_below="@id/text_line"
+        android:id="@+id/refuse_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="55dp">
+
+        <RadioButton
+            android:id="@+id/refuse_result1"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_style"
+            android:ellipsize="end"
+            android:text="@string/sold_out"
+            android:textColor="@drawable/refuse_text_color"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/refuse_result2"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:text="@string/hot_business"
+            android:layout_marginTop="10dp"
+            android:textColor="@drawable/refuse_text_color"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_style"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/refuse_result3"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_style"
+            android:ellipsize="end"
+            android:textColor="@drawable/refuse_text_color"
+            android:text="@string/out_of_range"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textSize="24sp" />
+
+        <RadioButton
+            android:id="@+id/refuse_result4"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_style"
+            android:ellipsize="end"
+            android:text="@string/can_not_send"
+            android:layout_marginTop="10dp"
+            android:textColor="@drawable/refuse_text_color"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textSize="24sp" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_below="@id/refuse_result"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="55dp">
+
+        <RadioButton
+            android:id="@+id/refuse_result5"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:button="@drawable/checkbox_style"
+            android:ellipsize="end"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="20dp"
+            android:singleLine="true"
+            android:textSize="24sp" />
+
+        <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+            android:id="@+id/refuse_et"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/customer_edit_bg"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:textColor="@drawable/refuse_text_color"
+            android:textSize="24sp"
+            android:textColorHint="@color/print_text_gray"
+            android:hint="@string/please_input_reason_self"
+            android:drawableRight="@drawable/input_close_pressed" />
+    </LinearLayout>
+
+    <Button
+        android:textSize="24sp"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/sure_btn_bg"
+        android:textColor="@color/text_white"
+        android:enabled="false"
+        android:text="@string/customer_inspect"
+        android:id="@+id/sure" />
+
+</RelativeLayout>

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="94dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="44dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/dinner_all_discount"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dinner_discount_title_left"
+                android:gravity="center"
+                android:text="@string/dinner_all_discount_label"
+                android:textColor="@drawable/text_color_dinner_discount_title"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/dinner_batch_discount"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dinner_discount_title_right"
+                android:text="@string/dinner_batch_label"
+                android:textColor="@drawable/text_color_dinner_discount_title"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:padding="4dp"
+            android:src="@drawable/dinner_close" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray" />
+
+
+    <com.zhongmei.bty.common.view.LinearWeightLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fadeScrollbars="false"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:background="@drawable/dinner_discount_tab_bg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dinner_tab_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_blue_bootom"
+                android:gravity="center"
+                android:text="@string/discount"
+                android:textColor="@color/discount_radio_text_click"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="18dp"
+                android:background="@color/line_gray" />
+
+            <TextView
+                android:id="@+id/dinner_tab_let"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_blue_bootom"
+                android:gravity="center"
+                android:text="@string/letThePrice"
+                android:textColor="@color/discount_radio_text_click"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="18dp"
+                android:background="@color/line_gray" />
+
+            <TextView
+                android:id="@+id/dinner_tab_free"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_blue_bootom"
+                android:gravity="center"
+                android:text="@string/freemeal"
+                android:textColor="@color/discount_radio_text_click"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/dinner_problem_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="18dp"
+                    android:background="@color/line_gray" />
+
+                <TextView
+                    android:id="@+id/dinner_tab_problem"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_blue_bootom"
+                    android:gravity="center"
+                    android:text="@string/dish_problems"
+                    android:textColor="@color/discount_radio_text_click"
+                    android:textSize="14sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.zhongmei.bty.common.view.LinearWeightLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.zhongmei.yunfu.ui.view.WrapGridView
+                android:id="@+id/dinner_discount_gridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:cacheColorHint="@android:color/transparent"
+                android:horizontalSpacing="14dp"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="2"
+                android:paddingTop="26dp"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="20dp" />
+
+            <Button
+                android:id="@+id/btn_user_define"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/ic_dish_property_item_bg"
+                android:gravity="center"
+                android:text="@string/user_define_discount"
+                android:textColor="@color/dish_type_text_selector"
+                android:textColorHint="@color/edit_text_hint_color"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_free"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/btn_free"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginTop="26dp"
+                    android:background="@drawable/ic_dish_property_item_bg"
+                    android:text="@string/give"
+                    android:textColor="@color/dish_type_text_selector"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_free_hint"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/settings_grayword"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_fete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <Button
+                    android:id="@+id/btn_fete"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginTop="26dp"
+                    android:background="@drawable/ic_dish_property_item_bg"
+                    android:text="@string/fete"
+                    android:textColor="@color/dish_type_text_selector"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tv_fete"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/fete_tip"
+                    android:textColor="@color/settings_grayword"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_clear_discount"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginTop="26dp"
+                android:background="@drawable/ic_dish_property_item_bg"
+                android:text="@string/clearDiscount"
+                android:textColor="@color/dish_type_text_selector"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

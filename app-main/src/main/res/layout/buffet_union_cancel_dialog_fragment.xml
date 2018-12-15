@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:layout_gravity="center"
+        android:background="@drawable/trade_orderdish_bg"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="76dp">
+
+            <ImageView
+                android:id="@+id/push_system_information_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:layout_marginRight="22dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/push_system_information_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@string/buffet_union_cancel_title"
+                android:textColor="#FF7901"
+                android:textSize="21sp"
+                autofit:minTextSize="21sp" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DADBDA" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/buffet_union_cancel_people_num_tv"
+                android:layout_width="match_parent"
+                android:layout_height="27dp"
+                android:background="#F6F6F6"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="@string/buffet_customer_count"
+                android:textColor="#999999" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E4EAEE" />
+
+            <LinearLayout
+                android:id="@+id/buffet_union_cancel_meal_shell_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:minHeight="54dp"
+                android:orientation="vertical">
+
+                <!--<include layout="@layout/buffet_union_cancel_dialog_fragment_item" />
+
+                <include layout="@layout/buffet_union_cancel_dialog_fragment_item" />-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/buffet_union_cancel_deposit_ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E4EAEE"
+                    android:paddingLeft="13dp"
+                    android:paddingRight="13dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:background="#F6F6F6"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:text="@string/buffet_other_info"
+                    android:textColor="#999999" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E4EAEE"
+                    android:paddingLeft="13dp"
+                    android:paddingRight="13dp" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                        android:id="@+id/buffet_union_cancel_deposit_amount_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="@string/buffet_pledge"
+                        android:textColor="#333333" />
+
+                    <!--<com.zhongmei.bty.commonmodule.view.CurrencyEditText
+                        android:id="@+id/buffet_union_cancel_deposit_et"
+                        android:layout_width="133dp"
+                        android:layout_height="32dp"
+                        android:layout_marginLeft="6dp"
+                        android:background="@drawable/customer_edit_bg"
+                        android:inputType="numberDecimal"
+                        android:paddingLeft="8dp"
+                        android:text="0"
+                        android:textSize="16sp" />-->
+
+                    <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                        android:id="@+id/buffet_union_cancel_deposit_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@+id/buffet_union_cancel_deposit_amount_tv"
+                        android:text="@string/buffet_per_fee"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/buffet_union_cancel_deposit_btn"
+                        style="@style/buffet_btn_tradefinish"
+                        android:layout_width="60dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/edit" />
+
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_know"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="@drawable/commonbusiness_dialog_multi_choice_button_bottom"
+            android:text="@string/know"
+            android:textColor="@color/text_white"
+            android:textSize="21sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

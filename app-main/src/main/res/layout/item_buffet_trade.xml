@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="14dp"
+    android:paddingTop="14dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/tv_serial_num"
+            style="@style/buffet_tradelist_title"
+            android:text="流水号15" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/buffet_tradelist_second_title"
+            android:text="2017-06-07 14:11:45" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_combo"
+            style="@style/buffet_tradelist_title"
+            android:text="180套餐" />
+
+        <TextView
+            android:id="@+id/tv_customer"
+            style="@style/buffet_tradelist_second_title"
+            android:text="成人x3,儿童x5,老人x4" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+            android:id="@+id/tv_fee"
+            style="@style/buffet_tradelist_title"
+            android:text="@string/zero" />
+
+        <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+            android:id="@+id/tv_pledge"
+            style="@style/buffet_tradelist_second_title"
+            android:text="@string/buffet_include_degel" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btn_modify"
+            style="@style/buffet_btn_tradefinish"
+            android:text="@string/buffet_modify_trade" />
+
+        <Button
+            android:id="@+id/btn_return_pledge"
+            style="@style/buffet_btn_tradefinish"
+            android:layout_marginLeft="14dp"
+            android:text="@string/buffet_return_pledge" />
+
+        <Button
+            android:id="@+id/btn_checkout"
+            style="@style/buffet_btn_tradefinish"
+            android:layout_marginLeft="14dp"
+            android:text="@string/buffet_checkout" />
+
+        <Button
+            android:id="@+id/btn_buffet_finish"
+            style="@style/buffet_btn_tradefinish"
+            android:layout_marginLeft="14dp"
+            android:text="@string/buffet_tradefinish" />
+    </LinearLayout>
+
+</LinearLayout>

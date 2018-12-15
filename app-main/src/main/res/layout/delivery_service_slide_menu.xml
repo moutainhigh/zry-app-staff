@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RadioGroup
+        android:id="@+id/rg_menu_group"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/cashier_slide_menu_bg"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_order_center"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/slidemenu_item_click"
+            android:button="@null"
+            android:drawableLeft="@drawable/order_center_icon"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="50dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="50dip"
+            android:text="@string/order_center"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_18" />
+
+        <RadioButton
+            android:id="@+id/rb_order_sender"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/slidemenu_item_click"
+            android:button="@null"
+            android:drawableLeft="@drawable/order_sender_icon"
+            android:drawablePadding="10dip"
+            android:gravity="center_vertical"
+            android:paddingBottom="50dp"
+            android:paddingLeft="30dp"
+            android:paddingTop="50dip"
+            android:text="@string/manag_delivery"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_18" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/tv_current_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/exit_item_click"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:drawableLeft="@drawable/user_icon"
+        android:drawableRight="@drawable/user_exchange"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dip"
+        android:singleLine="true"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_18" />
+
+    <TextView
+        android:id="@+id/tv_current_id"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:gravity="center"
+        android:textColor="#727171"
+        android:textSize="@dimen/text_18" />
+
+</RelativeLayout>

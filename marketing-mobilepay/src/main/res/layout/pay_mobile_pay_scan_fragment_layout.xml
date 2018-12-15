@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="20dp"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
+
+
+    <EditText
+        android:id="@+id/pay_online_wechat_id"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:layout_marginTop="5dp"
+        android:focusable="true"
+        android:gravity="center"
+        android:hint="@string/pay_union_hint_text"
+        android:singleLine="true"
+        android:textColor="@color/bg_white"
+        android:textColorHint="@color/bg_white"
+        android:background="@color/color_ffffff"
+        android:textSize="14sp"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_refresh_pay_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/pay_online_getstatus_button_selector"
+        android:gravity="center"
+        android:paddingBottom="4dp"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        android:paddingTop="3dp"
+        android:text="@string/please_refresh"
+        android:textColor="@color/color_FF8249"
+        android:textSize="14sp"
+        android:visibility="invisible" />
+
+    <com.zhongmei.bty.basemodule.commonbusiness.view.ShowBarcodeView
+        android:id="@+id/showBarcode"
+        android:layout_width="201dp"
+        android:layout_height="201dp"
+        android:layout_marginTop="5dp" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_scan_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="20dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"></LinearLayout>
+
+
+</LinearLayout>

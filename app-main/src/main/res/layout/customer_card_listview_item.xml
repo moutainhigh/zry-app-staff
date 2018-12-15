@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="58dp"
+    android:minHeight="58dp">
+
+    <TextView
+        android:id="@+id/customer_card_item_no"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="@color/settings_normalword"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/customer_card_item_card_no"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:textColor="@color/settings_normalword"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/customer_card_item_money"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textColor="@color/settings_normalword"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/customer_card_item_point"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textColor="@color/settings_normalword"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/customer_card_item_status"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textColor="@color/settings_normalword"
+        android:textSize="18sp" />
+
+</LinearLayout>

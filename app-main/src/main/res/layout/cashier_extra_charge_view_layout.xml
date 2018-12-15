@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/custom_title_style"
+        android:text="@string/add_extra_charge" />
+
+    <ListView
+        android:id="@+id/order_extra_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:cacheColorHint="@android:color/transparent"
+        android:listSelector="@drawable/bg_dinner_discount"
+        android:divider="@color/transparent"
+        android:dividerHeight="10dp"></ListView>
+
+</LinearLayout>

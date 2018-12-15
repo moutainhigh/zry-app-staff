@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="notification_item_titleTextSize">11.38sp</dimen>
+    <dimen name="notification_item_textSize1">12.81sp</dimen>
+    <dimen name="notification_item_marginTopAddBottom">32dp</dimen>
+    <dimen name="notification_item_marginRight">10dp</dimen>
+    <dimen name="notification_item_textSize2">9.96sp</dimen>
+    <dimen name="title_bar_height">58.6dp</dimen>
+    <dimen name="notification_left_item_width">78.3dp</dimen>
+    <dimen name="notification_left_item_height">71.1dp</dimen>
+    <dimen name="notification_time_textSize">17.08sp</dimen>
+    <dimen name="notification_forum_textSize">14sp</dimen>
+    <dimen name="notification_systemStage_title_height">25.6dp</dimen>
+    <dimen name="notification_systemStage_textSize">12.81sp</dimen>
+    <dimen name="notification_systemStage_textSize2">10.5sp</dimen>
+
+    <dimen name="notification_setting_content_margin_top">26dp</dimen>
+    <dimen name="notification_setting_content_margin_left">34.6dp</dimen>
+
+    <dimen name="notification_setting_title_bar_size">20sp</dimen>
+
+    <dimen name="notification_setting_item_height">53.33dp</dimen>
+    <dimen name="notification_setting_item_margin_top">11.33dp</dimen>
+    <dimen name="notification_setting_item_text_margin_left">19.33dp</dimen>
+    <dimen name="notification_setting_item_btn_margin_right">15.33dp</dimen>
+    <dimen name="notification_setting_item_btn_width">56dp</dimen>
+    <dimen name="notification_setting_item_btn_height">32dp</dimen>
+    <dimen name="notification_setting_items_margin">22.6dp</dimen>
+    <dimen name="notification_setting_items_drawable_padding">11.3dp</dimen>
+    <dimen name="notification_setting_item_drawable_width">20dp</dimen>
+
+    <dimen name="notification_setting_item_title_size">14.67sp</dimen>
+    <dimen name="notification_setting_item_size">16sp</dimen>
+
+</resources>

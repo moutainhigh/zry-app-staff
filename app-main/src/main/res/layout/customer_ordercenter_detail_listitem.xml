@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/check_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/customer_ordercenter_detail_not_check" />
+
+        <TextView
+            android:id="@+id/serial_number"
+            tools:text="0"
+            style="@style/customer_ordercenter_detail_listitem"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:id="@+id/card_number"
+            tools:text="1000000000000000"
+            style="@style/customer_ordercenter_detail_listitem"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/card_category"
+            tools:text="汗1"
+            style="@style/customer_ordercenter_detail_listitem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/card_status"
+            tools:text="未激活"
+            style="@style/customer_ordercenter_detail_listitem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/sell_price"
+            tools:text="10.00"
+            style="@style/customer_ordercenter_detail_listitem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/deal_status"
+            tools:text="已售"
+            style="@style/customer_ordercenter_detail_listitem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</LinearLayout>

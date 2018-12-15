@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pay_exempt_change_popup_width">160dp</dimen>
+    <dimen name="pay_exempt_change_popup_height">200dp</dimen>
+    <dimen name="pay_exempt_change_popup_list_marginBottom">2dp</dimen>
+    <dimen name="pay_exempt_change_popup_list_dividerHeight">18dp</dimen>
+    <dimen name="pay_exempt_change_popup_list_paddingLeftAddRight">20dp</dimen>
+    <dimen name="pay_exempt_change_popup_list_paddingTop">30dp</dimen>
+    <dimen name="pay_exempt_change_popup_item_width">120dp</dimen>
+    <dimen name="pay_exempt_change_popup_item_height">45dp</dimen>
+    <dimen name="pay_exempt_change_popup_item_size">24sp</dimen>
+
+
+</resources>

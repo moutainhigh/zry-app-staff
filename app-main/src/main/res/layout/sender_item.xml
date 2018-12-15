@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sender_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sender_bg"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/customer_female_detail" />
+
+    <TextView
+        android:id="@+id/showAlertMess"
+        style="@style/unSquareUpCountTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/photo"
+        android:layout_alignTop="@id/photo"
+        android:layout_marginTop="-10dp"
+        android:background="@drawable/alert_bg"
+        android:gravity="center"
+        android:padding="2dp"></TextView>
+
+    <ImageView
+        android:id="@+id/clearingIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/photo"
+        android:layout_alignRight="@id/photo"
+        android:layout_marginBottom="-10dp"
+        android:background="@drawable/clearing_icon" />
+
+    <TextView
+        android:id="@+id/senderName"
+        style="@style/takeOutSenderTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/photo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:singleLine="true"
+        android:ellipsize="end" />
+
+    <ImageView
+        android:id="@+id/clearingTag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/clearing_tag" />
+
+</RelativeLayout>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/order_dish_right_bottom"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingLeft="26dp"
+    android:paddingRight="26dp">
+
+    <TextView
+        style="@style/view_page_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/remark_str" />
+
+    <RelativeLayout
+        android:id="@+id/pack_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/bg_round_rectangle">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/settings_normalword"
+            android:layout_centerVertical="true"
+            android:textSize="16sp"
+            android:text="@string/itemPackaged" />
+
+        <ToggleButton
+            android:id="@+id/item_packaged"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@android:color/transparent"
+            android:button="@drawable/cashier_toggle_button"
+            android:checked="false"
+            android:text=""
+            android:textOff=""
+            android:textOn="" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_order_remark"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/snack_middle_discount_title_height"
+            android:layout_weight="1"
+            android:background="@drawable/discount_left_selected"
+            android:gravity="center"
+            android:text="@string/orderAllRemark"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/sncak_middle_discount_title_size" />
+
+        <TextView
+            android:id="@+id/tv_single_remark"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/snack_middle_discount_title_height"
+            android:layout_weight="1"
+            android:background="@drawable/discount_right_nomail"
+            android:gravity="center"
+            android:text="@string/orderSingleRemark"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/sncak_middle_discount_title_size" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_remark"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_round_rectangle"
+        android:hint="@string/inputRemarkInfo"
+        android:padding="14dp"
+        android:maxLength="50"
+        android:gravity="left|top"
+        android:textColorHint="@color/text_hint_color"
+        android:textColor="@color/print_text_black"
+        android:textSize="16sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/extra_order_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"
+        android:layout_marginTop="7dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        android:layout_marginBottom="60dp" />
+</LinearLayout>

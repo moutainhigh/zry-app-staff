@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/order_accept_settings"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/text_22" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            style="@style/settings_rightcontentTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gray_round_bg"
+                android:padding="16dp"
+                android:paddingTop="20dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accept_wechat_order_str"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="22sp" />
+
+                <ToggleButton
+                    android:id="@+id/settings_openorclose_swtich"
+                    android:layout_width="64dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/settings_toggle_button"
+                    android:checked="true"
+                    android:textOff=""
+                    android:textOn="" />
+
+                <LinearLayout
+                    android:id="@+id/settings_log_extend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/settings_openorclose_swtich"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/settings_log_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@color/settings_bg_gray" />
+
+                    <TextView
+                        android:id="@+id/settings_openorclose_descrption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/receive_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/auto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/auto_accept_title"
+                    android:textColor="@color/print_text_gray"
+                    android:textSize="@dimen/text_18" />
+
+                <com.zhongmei.bty.settings.view.XInnerListView
+                    android:id="@+id/auto_accept_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:divider="#FFCC00" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_auto_reject_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/auto_reject_title"
+                android:textColor="@color/print_text_gray"
+                android:textSize="@dimen/text_18" />
+
+            <RelativeLayout
+                android:id="@+id/autoreject_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/gray_round_bg"
+                android:padding="16dp">
+
+
+                <TextView
+                    android:id="@+id/autoreject"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/auto_reject"
+                    android:textColor="@color/print_text_black"
+                    android:textSize="22sp" />
+
+                <ToggleButton
+                    android:id="@+id/settings_reject_swtich"
+                    style="@style/Toggle.Setting"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginLeft="20dp"
+                    android:checked="true" />
+
+                <TextView
+                    android:id="@+id/rejectTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/settings_reject_swtich"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

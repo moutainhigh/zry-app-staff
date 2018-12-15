@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_number_marginRight">56dp</dimen>
+    <dimen name="login_number_marginTop">20dp</dimen>
+    <dimen name="login_switch_user_btn_width">38dp</dimen>
+    <dimen name="login_switch_user_btn_size">12sp</dimen>
+
+    <dimen name="zm_login_number_marginRight">20dp</dimen>
+</resources>

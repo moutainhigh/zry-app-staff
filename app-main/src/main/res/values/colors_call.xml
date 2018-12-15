@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 弹屏  -->
+    <color name="call_sum_text_color">#828282</color>
+    <color name="call_phone_text_color">#5e5e5e</color>
+    <color name="call_dialog_up_bg">#f1f7f7</color>
+    <color name="call_dialog_down_bg">#ffffff</color>
+    <color name="call_dialog_calling">#f17255</color>
+
+    <!-- 通话记录  -->
+    <color name="call_name">#353949</color>
+    <color name="call_no">#353949</color>
+    <color name="call_time">#8a8888</color>
+    <color name="call_name_selected">#f47048</color>
+    <color name="call_log_text">#33adf6</color>
+    <color name="call_missed">#ffffff</color>
+    <color name="call_title_bg">#33adf6</color>
+    <color name="call_dailing_no">#646873</color>
+    <color name="call_dailing_contact">#70747e</color>
+</resources>

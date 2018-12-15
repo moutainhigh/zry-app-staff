@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dialog_pay_ok_weight"
+    android:layout_height="@dimen/dialog_pay_ok_height"
+    android:layout_gravity="center"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/pay_ok_close_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:scaleType="center"
+            android:background="@drawable/dinner_close" />
+
+        <TextView
+            android:id="@+id/pay_ok_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/pay_result_text"
+            android:textColor="#9FA0A0"
+            android:textSize="26sp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/pay_ok_image"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/pay_ok_icon" />
+
+    <TextView
+        android:id="@+id/pay_amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:text="00"
+        android:textColor="#333333"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/pay_ok_alert_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="5dp"
+        android:text="@string/pay_success"
+        android:textColor="#333333"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/pay_rest_amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="25dp"
+        android:text=""
+        android:textColor="#333333"
+        android:textSize="33sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
+
+</LinearLayout>

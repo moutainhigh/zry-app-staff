@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/login_bg"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="114dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/blue_logo" />
+
+    <com.zhongmei.bty.splash.autoset.view.AutoSetCheckView_
+        android:id="@+id/ascv_net"
+        android:layout_alignLeft="@id/iv_logo"
+        android:layout_below="@id/iv_logo"
+        android:layout_marginTop="114dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.zhongmei.bty.splash.autoset.view.AutoSetCheckView_
+        android:id="@+id/ascv_server"
+        android:layout_alignLeft="@id/iv_logo"
+        android:layout_below="@id/ascv_net"
+        android:layout_marginTop="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.zhongmei.bty.splash.autoset.view.AutoSetCheckView_
+        android:id="@+id/ascv_print_server"
+        android:layout_alignLeft="@id/iv_logo"
+        android:layout_below="@id/ascv_server"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

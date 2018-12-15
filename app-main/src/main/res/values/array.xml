@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="paystate_type">
+        <item>未付款</item>
+        <item>已付款</item>
+    </string-array>
+    <string-array name="delivery_type_value">
+        <item>HERE</item>
+        <item>SEND</item>
+        <item>TAKE</item>
+        <item>CARRY</item>
+    </string-array>
+    <string-array name="delivery_type">
+        <item>内用</item>
+        <item>外送</item>
+        <item>自取</item>
+        <item>外带</item>
+    </string-array>
+    <string-array name="trade_pay_status">
+        <item>未支付</item>
+        <item>支付中</item>
+        <item>已支付</item>
+        <item>退款中</item>
+        <item>已退款</item>
+        <item>退款失败</item>
+        <item>预支付</item>
+        <item>等待退款</item>
+        <item>支付失败</item>
+        <item>顾客多次付款</item>
+        <item>未确定支付</item>
+    </string-array>
+    <string-array name="trade_pay_status_value">
+        <item>UNPAID</item>
+        <item>PAYING</item>
+        <item>PAID</item>
+        <item>REFUNDING</item>
+        <item>REFUNDED</item>
+        <item>REFUND_FAILED</item>
+        <item>PREPAID</item>
+    </string-array>
+    <string-array name="trade_status">
+        <item>未处理</item>
+        <item>挂单</item>
+        <item>已确认</item>
+        <item>已完成</item>
+        <item>已退货</item>
+        <item>已作废</item>
+        <item>已拒绝</item>
+    </string-array>
+    <string-array name="payment_type">
+        <item>交易支付</item>
+        <item>交易退款</item>
+        <item>交易预支付</item>
+    </string-array>
+    <string-array name="payment_type_value">
+        <item>TRADE_SELL</item>
+        <item>TRADE_REFUND</item>
+        <item>TRADE_PREPAID</item>
+    </string-array>
+    <string-array name="trade_status_value">
+        <item>UNPROCESSED</item>
+        <item>TEMPORARY</item>
+        <item>CONFIRMED</item>
+        <item>FINISH</item>
+        <item>RETURNED</item>
+        <item>INVALID</item>
+        <item>REFUSED</item>
+    </string-array>
+    <string-array name="trade_payment_item">
+        <item>在线支付</item>
+        <item>现金</item>
+        <item>银行卡</item>
+        <item>储值卡</item>
+        <item>现金券</item>
+        <item>其他收款</item>
+    </string-array>
+    <!--<string-array name="trade_payment_mode">
+        <item>会员消费</item>
+        <item>优惠券</item>
+        <item>现金</item>
+        <item>银行卡</item>
+        <item>微信支付</item>
+        <item>支付宝</item>
+        <item>百度钱包</item>
+        <item>百度直达号</item>
+        <item>积分抵现</item>
+        <item>百度地图</item>
+        <item>POS刷卡</item>
+        <item>百糯到店付</item>
+        <item>百度外卖</item>
+        <item>饿了么</item>
+        <item>会员实体卡</item>
+        <item>大众点评</item>
+        <item>美团外卖</item>
+        <item>点评团购券</item>
+        <item>点评闪惠</item>
+        <item>匿名卡</item>
+        <item>糯米点菜</item>
+        <item>第三方C端</item>
+        <item>美团闪付</item>
+        <item>美团团购</item>
+        <item>钱包生活</item>
+        <item>百度糯米券</item>
+        <item>金诚APP</item>
+        <item>金诚储值卡</item>
+    </string-array>-->
+    <string-array name="takeout_ordercenter_groupby_time_title">
+        <item>30分钟内</item>
+        <item>30分钟前</item>
+        <item>1小时前</item>
+        <item>1个半小时前</item>
+        <item>1天前</item>
+        <item>2天前</item>
+    </string-array>
+    <string-array name="sender_ordercenter_groupby_time_title">
+        <item>30分钟内</item>
+        <item>30分钟前</item>
+        <item>1小时前</item>
+        <item>1个半小时前</item>
+        <item>1天前</item>
+        <item>2天前</item>
+        <item>未送出</item>
+    </string-array>
+    <string-array name="dinner_table_info_commentswindow_default_comments">
+        <item>加辣椒</item>
+        <item>味道清淡点</item>
+        <item>加醋</item>
+        <item>早点上菜，好吗</item>
+        <item>要白酒，红酒，橙汁</item>
+        <item>送水果好吗</item>
+        <item>分量弄足了</item>
+    </string-array>
+    <string-array name="ordercenter_reprint_ticket_type">
+        <item>消费清单</item>
+        <item>厨打总单</item>
+        <item>堂口单据</item>
+    </string-array>
+    <string-array name="dinner_ordercenter_account_reconciliation_reasons">
+        <item>少收了钱</item>
+        <item>多收了钱</item>
+        <item>支付方式选择错误</item>
+        <item>临时调整收款金额</item>
+        <item>冲抵账</item>
+    </string-array>
+    <string-array name="dinner_ordercenter_account_reconciliation_payways">
+        <item>现金</item>
+        <item>银联</item>
+        <item>储值</item>
+        <item>微信</item>
+        <item>支付宝</item>
+        <item>现金券</item>
+    </string-array>
+    <string-array name="dinner_ordercenter_reprint_ticket_type">
+        <item>客看单</item>
+        <item>预结单</item>
+        <item>结账单</item>
+        <item>作废单</item>
+        <item>退货单</item>
+        <item>厨打总单</item>
+        <item>堂口单据</item>
+    </string-array>
+    <string-array name="dinner_ordercenter_account_reconciliation_payways2">
+        <item>现金</item>
+        <item>银行卡</item>
+        <item>储值卡</item>
+        <item>微信</item>
+        <item>支付宝</item>
+        <item>百度钱包</item>
+    </string-array>
+
+    <string-array name="dinner_ordercenter_searchtype_category">
+        <item>全部</item>
+        <item>订单号</item>
+        <item>流水号</item>
+        <item>桌台</item>
+        <item>手机号</item>
+    </string-array>
+
+    <string-array name="dinner_ordercenter_searchtype_category_hint">
+        <item>订单、流水、桌台、手机号</item>
+        <item>输入订单号</item>
+        <item>输入流水号</item>
+        <item>输入桌台号</item>
+        <item>输入手机号</item>
+    </string-array>
+
+    <string-array name="voice_sex">
+        <item>男</item>
+        <item>女</item>
+    </string-array>
+    <string-array name="voice_speed">
+        <item>最慢</item>
+        <item>较慢</item>
+        <item>正常</item>
+        <item>较快</item>
+        <item>最快</item>
+    </string-array>
+    <string-array name="customer_ordercenter_detail_tab_text">
+        <item>卡号详情</item>
+        <item>实体卡信息</item>
+        <item>会员信息</item>
+    </string-array>
+
+    <string-array name="customer_ordercenter_detail_card_deal_status">
+        <item>未售</item>
+        <item>已售</item>
+        <item>已退货</item>
+    </string-array>
+
+    <string-array name="customer_ordercenter_detail_card_status">
+        <item>未制卡</item>
+        <item>未出售</item>
+        <item>未激活</item>
+        <item>已激活</item>
+        <item>已停用</item>
+        <item>已废除</item>
+    </string-array>
+
+    <string-array name="dinner_table_fnction">
+        <item>1001:桌台流水号展示</item>
+        <item>1002:已打印预结单提示</item>
+        <item>1003:点餐/更新时间提示</item>
+    </string-array>
+
+    <string-array name="dinner_billcenter_networkorder_childtab">
+        <item>待处理</item>
+        <item>已拒绝</item>
+    </string-array>
+    <string-array name="dinner_billcenter_salesorder_childtab">
+        <item>未结账</item>
+        <item>已结账</item>
+        <item>已退款</item>
+        <item>已作废</item>
+    </string-array>
+    <string-array name="dinner_billcenter_returnsorder_childtab">
+        <item>有票退货</item>
+        <item>无票退货</item>
+    </string-array>
+    <string-array name="dinner_billcenter_online_childtab">
+        <item>支付状态</item>
+        <item>退款状态</item>
+    </string-array>
+    <string-array name="order_center_process_search_type">
+        <item>全部</item>
+        <item>流水号</item>
+        <item>手机号</item>
+        <item>号牌</item>
+        <item>取餐号</item>
+    </string-array>
+    <string-array name="order_center_process_dinner_search_type">
+        <item>全部</item>
+        <item>流水号</item>
+        <item>手机号</item>
+        <item>桌台</item>
+    </string-array>
+    <string-array name="order_center_sales_search_type">
+        <item>全部</item>
+        <item>流水号</item>
+        <item>订单金额</item>
+        <item>手机号</item>
+        <item>号牌</item>
+        <item>取餐号</item>
+    </string-array>
+    <string-array name="order_center_sales_dinner_search_type">
+        <item>全部</item>
+        <item>流水号</item>
+        <item>订单金额</item>
+        <item>手机号</item>
+        <item>桌台</item>
+    </string-array>
+    <string-array name="taste">
+        <item>添加</item>
+        <item>不放香菜</item>
+        <item>不放葱</item>
+        <item>少辣</item>
+        <item>加辣</item>
+        <item>少盐</item>
+        <item>少油</item>
+    </string-array>
+    <integer-array name="dish_sequence_key">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>0</item>
+    </integer-array>
+    <string name="dish_sequence_value_none">未设置</string>
+    <string-array name="dish_sequence_value">
+        <item>第一道</item>
+        <item>第二道</item>
+        <item>第三道</item>
+        <item>第四道</item>
+        <item>第五道</item>
+        <item>第六道</item>
+        <item>第七道</item>
+        <item>第八道</item>
+        <item>第九道</item>
+        <item>第十道</item>
+        <item>取消顺序</item>
+    </string-array>
+</resources>

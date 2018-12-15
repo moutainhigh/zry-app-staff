@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardCornerRadius="@dimen/corner_card"
+    app:cardPreventCornerOverlap="false"
+    app:cardBackgroundColor="#FFFFFF"
+    app:contentPadding="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/fragment_invoice_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/fragment_invoice_title_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/fragment_invoice_title_preview_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="22dp"
+                    android:text="@string/invoice_preview_title"
+                    android:textColor="#FF7901"
+                    android:textSize="26sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fragment_invoice_title_preview_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fragment_invoice_title_preview_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoice_preview_trade_amount"
+                        android:textSize="16sp"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:id="@+id/fragment_invoice_title_preview_amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="16sp"
+                        android:textColor="#333333" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/invoice_preivew_total"
+                        android:textSize="16sp"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:id="@+id/fragment_invoice_title_preview_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="16sp"
+                        android:textColor="#333333" />
+                </LinearLayout>
+
+                <ImageButton
+                    android:id="@+id/fragment_invoice_title_preview_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@null"
+                    android:src="@drawable/close_icon" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/fragment_invoice_title_add"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="22dp">
+
+                <TextView
+                    android:id="@+id/fragment_invoice_title_add_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/invoice_add_title"
+                    android:textColor="#FF7901"
+                    android:textSize="26sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/fragment_invoice_title_add_title"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/fragment_invoice_title_add_tag"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoice_add_remain_amount"
+                        android:textSize="16sp"
+                        android:textColor="#999999" />
+
+                    <TextView
+                        android:id="@+id/fragment_invoice_title_add_content"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textSize="16sp"
+                        android:textColor="#333333" />
+                </LinearLayout>
+            </RelativeLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_invoice_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/fragment_invoice_content_preview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="30dp">
+
+                    <com.zhongmei.bty.common.view.ui.widget.ExpandPlusListView
+                        android:id="@+id/fragment_invoice_content_preview_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:groupIndicator="@null"
+                        android:divider="#00000000"
+                        android:dividerHeight="5dp"
+                        android:childDivider="#00000000"
+                        android:scrollbars="none"
+                        android:overScrollMode="never"
+                        android:cacheColorHint="#00000000"
+                        app:groupCloseAble="true"
+                        app:groupExpandAble="true" />
+
+                    <com.zhongmei.bty.mobilepay.views.InvoiceView
+                        android:id="@+id/fragment_invoice_content_preview_invoice"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:id="@+id/fragment_invoice_content_preview_add"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:background="@drawable/selector_invoice_btn_add"
+                    android:layout_marginTop="44dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:text="@string/invoice_add"
+                        android:textColor="#333333"
+                        android:drawablePadding="10dp"
+                        android:drawableLeft="@drawable/ic_invoice_add" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/fragment_invoice_content_preview_commit"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/selector_invoice_btn_ok"
+                    android:text="@string/invoice_btn_ok"
+                    android:textColor="#FFFFFF"
+                    android:textSize="26sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/fragment_invoice_content_add"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:padding="20dp">
+
+                <com.zhongmei.bty.mobilepay.views.InvoiceView
+                    android:id="@+id/fragment_invoice_content_add_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <Button
+                    android:id="@+id/fragment_invoice_content_add_commit"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/selector_invoice_btn_ok_style1"
+                    android:text="@string/invoice_btn_ok"
+                    android:textSize="18sp"
+                    android:textColor="#FFFFFF" />
+
+                <Button
+                    android:id="@+id/fragment_invoice_content_add_cancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/selector_invoice_btn_cancel_style1"
+                    android:text="@string/invoice_btn_cancel"
+                    android:textSize="18sp"
+                    android:textColor="#333333" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

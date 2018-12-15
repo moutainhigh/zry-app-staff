@@ -1,0 +1,24 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <style name="zm_login_number_style">
+        <item name="android:background">@drawable/login_button_selector</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="zm_edit_text_style">
+        <item name="android:background">@drawable/zm_inputtext_bg_normal</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">@dimen/text_14</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/text_color_black</item>
+        <item name="android:textColorHint">@color/text_hint_color</item>
+        <item name="android:paddingStart">20dp</item>
+    </style>
+
+</resources>

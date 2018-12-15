@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvCradNum_BindCustomer"
+        style="@style/uion_customer_info"
+        tools:text="@string/uion_bind_customer_phone"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>

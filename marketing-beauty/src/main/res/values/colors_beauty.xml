@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="beauty_transparent">#00000000</drawable>
+    <color name="beauty_transparent">#00000000</color>
+    <color name="bg_beauty_main">#2C3031</color>
+    <color name="beauty_color_2C3031">#2C3031</color>
+    <color name="beauty_color_FFB729">#FFB729</color>
+    <color name="beauty_color_434343">#434343</color>
+    <color name="beauty_color_FF666666">#FF666666</color>
+    <color name="beauty_color_FF4990E2">#FF4990E2</color>
+    <color name="beauty_color_505050">#505050</color>
+    <color name="beauty_color_1D1E1E">#1D1E1E</color>
+    <color name="beauty_color_F6F6F6">#F6F6F6</color>
+
+    <color name="beauty_text_white">#FFFFFF</color>
+    <color name="beauty_bg_white">#FFFFFF</color>
+    <color name="beauty_bg_black">#292929</color>
+    <color name="beauty_text_gray">#999999</color>
+    <color name="beauty_text_yellow_default">#FF9F00</color>
+    <color name="beauty_bg_gray">#F1F1F1</color>
+    <color name="beauty_bg_gray_white">#FAFAFA</color>
+    <color name="beauty_bg_shallow_gray">#DEDEDE</color>
+    <color name="beauty_bg_deep_gray">#B6B6B6</color>
+
+    <color name="beauty_yellow_btn_normal">#FC2584</color>
+    <color name="beauty_yellow_btn_pressed">#F1589B</color>
+
+
+    <color name="beauty_color_333333">#333333</color>
+    <color name="beauty_color_999999">#999999</color>
+    <color name="beauty_color_666666">#666666</color>
+    <color name="beauty_color_DEDEDE">#DEDEDE</color>
+    <color name="beauty_color_D9D9D9">#D9D9D9</color>
+    <color name="beauty_color_F9FBFE">#F9FBFE</color>
+    <color name="beauty_color_E1E5EA">#E1E5EA</color>
+    <color name="beauty_color_FF9F00">#FF9F00</color>
+    <color name="beauty_color_000000">#000000</color>
+    <color name="beauty_color_D8D8D8">#D8D8D8</color>
+    <color name="beauty_color_FC2584">#FC2584</color>
+    <color name="beauty_color_FF74B1">#FC2584</color>
+    <color name="beauty_main_text_color">#FF2283</color>
+    <color name="beauty_main_text_color2">#EE5E1F</color>
+    <color name="beauty_main_bg_color">#EE5E1F</color>
+    <color name="beauty_color_FF7901">#FF7901</color>
+    <color name="beauty_color_white">#FFFFFF</color>
+    <color name="beauty_color_BCBCBC">#BCBCBC</color>
+    <color name="beauty_color_AAA8A8">#AAA8A8</color>
+    <color name="beauty_bg_titlebar">#323333</color>
+    <color name="beauty_titlebar_divide_line">#B1B1B1B1</color>
+
+    <color name="beauty_color_btn_pink_nomal">#FF74B1</color>
+    <color name="beauty_color_btn_pink_pressed">#F1589B</color>
+    <color name="beauty_color_btn_red_nomal">#FF2283</color>
+    <color name="beauty_color_btn_red_pressed">#E02376</color>
+
+    <color name="beauty_color_black">#333333</color>
+
+    <color name="beauty_color_59D109">#59D109</color>
+    <color name="beauty_color_6E8DFF">#6E8DFF</color>
+    <color name="beauty_color_959798">#959798</color>
+    <color name="beauty_color_FF2283">#FF2283</color>
+
+    <color name="beauty_color_FF5490">#FF5490</color>
+    <color name="beauty_color_F3F3F3">#F3F3F3</color>
+    <color name="beauty_color_FF2E8A">#FF2E8A</color>
+    <color name="beauty_color_FFEFF6">#FFEFF6</color>
+
+    <color name="beauty_color_D5D5D5">#D5D5D5</color>
+    <color name="beauty_color_888888">#888888</color>
+    <color name="beauty_color_8D8D8D">#8D8D8D</color>
+    <color name="beauty_color_40D0AD">#40D0AD</color>
+    <color name="beauty_color_f4f4f4">#f4f4f4</color>
+    <color name="beauty_color_FE6A4D">#FE6A4D</color>
+    <color name="beauty_color_FFF4E7">#FFF4E7</color>
+    <color name="beauty_color_FF9000">#FF9000</color>
+    <color name="beauty_color_d7dddf">#d7dddf</color>
+
+</resources>

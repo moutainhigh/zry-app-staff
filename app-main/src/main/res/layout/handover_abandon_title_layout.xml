@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_handover_layout"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingLeft="25dp"
+    android:paddingBottom="15dp"
+    android:paddingTop="15dp"
+    android:paddingRight="25dp">
+
+    <TextView
+        android:id="@+id/handover_user_name"
+        style="@style/handover_abandon_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/handover_name_value" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/handover_user_name"
+        android:background="@drawable/shape_abandon_tv"
+        android:gravity="center"
+        android:paddingLeft="4.67dp"
+        android:paddingRight="4.67dp"
+        android:paddingTop="2.67dp"
+        android:paddingBottom="2.67dp"
+        android:text="@string/abandon"
+        android:textSize="9sp" />
+
+    <TextView
+        android:layout_marginTop="6dp"
+        android:id="@+id/handover_abandon_name"
+        style="@style/handover_abandon_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/handover_user_name"
+        tools:text="@string/handover_calibrate_name" />
+
+    <TextView
+
+        android:id="@+id/handover_date"
+        style="@style/handover_abandon_title_tv"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="38dp"
+        tools:text="@string/handover_date_value" />
+
+    <TextView
+        android:id="@+id/abandon_date"
+        style="@style/handover_abandon_title_tv"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/handover_date"
+        android:layout_marginRight="38dp"
+        tools:text="@string/handover_abandon_date" />
+
+
+</RelativeLayout>

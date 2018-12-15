@@ -1,0 +1,99 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000ff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="374dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_round_white"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+
+            <Button
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/dinner_close" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/coupon_code_WeChat_label"
+                android:textColor="@color/verify_perssion_title"
+                android:textSize="22dp" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:gravity="center_vertical"
+            android:background="@color/gray_bg">
+
+            <ImageButton
+                android:id="@+id/scan_btn"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:background="@drawable/card_sale_activie_selecter"
+                android:src="@drawable/icon_scan"
+                android:layout_marginLeft="12dp" />
+
+            <EditText
+                android:id="@+id/value"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/wechat_coupon_dialog_card_input_size"
+                android:textColor="@color/settings_normalword"
+                android:background="@drawable/scan_edittext_bg"
+                android:layout_marginLeft="14dp"
+                android:singleLine="true"
+                android:gravity="center"
+                android:hint="@string/input_wechat_coupon_code"
+                android:longClickable="false"
+                android:layout_marginRight="12dp"
+                android:clickable="false" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/coupon_code_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/gray_bg"
+            android:gravity="center"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/text_18"
+            android:visibility="gone" />
+
+        <com.zhongmei.bty.basemodule.input.NumberKeyBoard
+            android:id="@+id/keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="276dp" />
+
+        <Button
+            android:id="@+id/customer_verification"
+            android:text="@string/check_ticket_str"
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="@drawable/sure_btn_bg"
+            android:textColor="@color/text_white"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+
+</FrameLayout>

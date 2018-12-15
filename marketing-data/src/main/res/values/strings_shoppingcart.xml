@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="canont_delete_dish">必选菜不可被删除</string>
+    <string name="order_dish_setmeal_close_tip">套餐未达生效条件，关闭视为放弃添加</string>
+    <string name="calm_logout_no">取消</string>
+    <string name="close">关闭</string>
+    <string name="order_all_discount">整单打折</string>
+    <string name="free_this_order">整单免单</string>
+    <string name="all_order_rebate">整单让价</string>
+    <string name="have_no_name">匿名客户</string>
+    <!--<string name="money_symbol">￥</string>-->
+    <string name="discount1">折</string>
+    <string name="give">赠送</string>
+    <string name="special_price">特价</string>
+    <string name="marketing_campaign">商品营销</string>
+    <string name="shoppingcart_minimum_charge">最低消费</string>
+</resources>

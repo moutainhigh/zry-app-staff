@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+
+    <FrameLayout
+        android:layout_width="@dimen/snack_dish_action_zone_width"
+        android:layout_height="match_parent"
+        android:background="@color/content_bg">
+
+
+        <LinearLayout
+            android:id="@+id/v_action_bar"
+            android:layout_width="@dimen/snack_dish_action_zone_width"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.zhongmei.bty.snack.orderdish.view.CustomDishQuantityView_
+                android:id="@+id/v_dish_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/snack_property_dish_quantity_height"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="@dimen/snack_property_dish_quantity_margin_top" />
+
+            <Button
+                android:id="@+id/btn_standard"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/dish_standard" />
+
+            <Button
+                android:id="@+id/btn_property"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/dish_property" />
+
+            <Button
+                android:id="@+id/btn_extra"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/dish_extra" />
+
+            <Button
+                android:id="@+id/btn_change_price"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/dish_detail" />
+
+            <View
+                android:id="@+id/v_divide_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/divide_line_color" />
+
+            <com.zhongmei.bty.commonmodule.view.VerticalViewPager
+                android:id="@+id/vvp_order_action"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none" />
+
+            <ImageView
+                android:id="@+id/iv_switch_page"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/snack_switch_page_button_height"
+                android:layout_gravity="bottom"
+                android:scaleType="center"
+                android:src="@drawable/ic_switch_page_next" />
+        </LinearLayout>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/snack_dish_action_zone_width"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent" />
+    </FrameLayout>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/divide_line_color" />
+
+    <FrameLayout
+        android:id="@+id/v_content"
+        android:layout_width="@dimen/snack_dish_property_zone_width"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:paddingTop="34dp"
+        android:visibility="gone" />
+</LinearLayout>

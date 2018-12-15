@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="mispos_pos_occupying">POS占用中</string>
+    <string name="credit_card_transaction_failed">刷卡交易失败</string>
+    <string name="notice_info">提示信息</string>
+    <string name="notice_info_ticket_output_error">出票异常</string>
+    <string name="try_again">再次尝试</string>
+    <string name="uion_key_bord_ready">请在%1$d秒内进行输入密码操作</string>
+    <string name="uion_key_bord_operating">密码输入中...</string>
+    <string name="uion_key_bord_success">成功</string>
+    <string name="uion_input_again">再次录入</string>
+    <string name="uion_credit_card_ready_remind">如要取消操作，请在刷卡终端点击[取消]</string>
+    <string name="pay_amount">支付金额</string>
+    <string name="uion_credit_card_ready">请在%1$d秒内进行刷卡操作</string>
+    <string name="uion_credit_card_money">支付金额:%1$s</string>
+    <string name="uion_return_money">应退金额:%1$s</string>
+    <string name="uion_credit_card_operating">刷卡交易进行中...</string>
+    <string name="uion_credit_card_success">刷卡交易成功 !</string>
+    <string name="uion_return_success">刷卡退款成功 ！</string>
+    <string name="uion_credit_card_fail">刷卡交易失败 !%1$s</string>
+    <string name="uion_return_fail">刷卡退款失败 ！%1$s</string>
+    <string name="pay_on_specify_device">请到%s编号的终端设备操作</string>
+    <string name="no_pos_connected">POS机未连接</string>
+    <string name="cannot_refund_becauseof_settled">POS交易已被结算，无法直接进行退款！</string>
+    <string name="mark_offline_refund_title">退款失败，是否标记为线下退款（退款失败的单据稍后可在单据中心进行二次退款）?</string>
+    <string name="pos_refund_successed">订单已退款成功，POS交易完成！</string>
+    <string name="pos_refund_unsuccessed">订单退款未成功，准备更新退款状态！</string>
+    <string name="pos_refund_uncard">订单退款未成功，准备撤销POS交易！</string>
+    <string name="refund_failed">退款失败</string>
+    <string name="offline_refund">线下退款</string>
+    <string name="pos_pay_successed">订单已支付成功，POS交易完成！</string>
+    <string name="pos_pay_unsuccessed">订单支付未成功，准备撤销POS交易！</string>
+
+</resources>

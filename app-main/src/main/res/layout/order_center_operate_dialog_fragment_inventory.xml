@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/order_center_operate_dialog_fragment_title" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all">
+
+        <RadioGroup
+            android:id="@+id/inventory_radiogroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/return_inventory_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dialog_operate_reason_list_item_height"
+                android:layout_marginLeft="9dp"
+                android:textColor="@color/black"
+                android:drawablePadding="8dp"
+                android:checked="true"
+                android:button="@null"
+                android:drawableLeft="@drawable/check_selector"
+                android:textSize="@dimen/dialog_operate_reason_list_item_size"
+                android:text="@string/return_inventory" />
+
+            <RadioButton
+                android:id="@+id/not_return_inventory_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/dialog_operate_reason_list_item_height"
+                android:drawablePadding="8dp"
+                android:layout_marginLeft="9dp"
+                android:textColor="@color/black"
+                android:button="@null"
+                android:text="@string/not_return_inventory"
+                android:textSize="@dimen/dialog_operate_reason_list_item_size"
+                android:drawableLeft="@drawable/check_selector" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#FFE6E9ED"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+</LinearLayout>

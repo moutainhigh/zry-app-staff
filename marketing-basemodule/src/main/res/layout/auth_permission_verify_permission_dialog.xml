@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/auth_permission_verify_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- v8.16.0 人脸登录业务添加 -->
+        <Button
+            android:id="@+id/btn_face_pick"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/cashier_table_press"
+            android:gravity="center"
+            android:text="@string/promisson_face_label"
+            android:textSize="@dimen/text_13"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/verify_dialog_hint_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="13dip"
+            android:background="@drawable/auth_permission_verify_dialog_hint_icon" />
+
+        <Button
+            android:id="@+id/close_btn"
+            android:layout_width="@dimen/auth_permission_dialog_close_btn"
+            android:layout_height="@dimen/auth_permission_dialog_close_btn"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/auth_permission_dinner_close" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/permission_title_tx"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/verify_dialog_hint_icon"
+        android:layout_marginTop="10dp"
+        android:text="@string/auth_permission_verify_permission_title"
+        android:textColor="@color/auth_permission_verify_perssion_title"
+        android:textSize="20sp" />
+
+    <!-- <TextView
+         android:id="@+id/permission_introduction_tx"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:gravity="center"
+         android:layout_below="@+id/permission_title_tx"
+         android:layout_marginTop="5dp"
+         android:text="@string/veryfy_permission_introduction"
+         android:textColor="@color/verify_perssion_title"
+         android:textSize="18sp" />-->
+
+    <LinearLayout
+        android:id="@+id/pemmission_select_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@+id/permission_introduction_tx"
+        android:layout_marginTop="12dp"
+        android:background="#f8fafa">
+
+        <Button
+            android:id="@+id/input_select_btn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/auth_permission_booking_create_spinner_bg"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="10dp"
+            android:maxLines="1"
+            android:textSize="20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:layout_below="@+id/input_select_btn"
+            android:layout_marginTop="10dp"
+            android:background="@color/auth_permission_white">
+
+            <TextView
+                android:id="@+id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_permission_please_input_password"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:textSize="14sp"
+                android:textColor="#666666" />
+
+            <com.zhongmei.bty.basemodule.input.Password
+                android:id="@+id/password_edt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/text"
+                android:layout_marginTop="10dp" />
+
+            <TextView
+                android:id="@+id/password_error_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/password_edt"
+                android:layout_marginLeft="13dip"
+                android:layout_toRightOf="@id/password_edt"
+                android:textColor="#ff7901"
+                android:textSize="14sp"></TextView>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <com.zhongmei.bty.basemodule.input.NumberKeyBoard
+        android:id="@+id/software_disk_layout"
+        android:layout_width="373dp"
+        android:layout_height="234dp"
+        android:layout_below="@+id/pemmission_select_layout"
+        android:layout_marginBottom="3dip"
+        android:background="#F0F3F6" />
+
+</LinearLayout>

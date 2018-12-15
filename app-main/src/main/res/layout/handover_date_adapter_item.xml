@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:baselineAligned="false"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:layout_alignParentLeft="true"
+            android:layout_width="1dp"
+            android:background="@color/color_DDDDDD"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_monday"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_week_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_date_monday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/monday_image_tv"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/booking_date_prompt"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/monday_selected_tv"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_32ADF6"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/color_DDDDDD"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_tuesday"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_week_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_date_tuesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tuesday_image_tv"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/booking_date_prompt"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tuesday_selected_tv"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_32ADF6"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/color_DDDDDD"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_wednesdaay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_week_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_date_wednesday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/wednesday_image_tv"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/booking_date_prompt"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/wednesday_selected_tv"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_32ADF6"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/color_DDDDDD"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_thursday"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_week_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_date_thursday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/thursday_image_tv"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/booking_date_prompt"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/thursday_selected_tv"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_32ADF6"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/color_DDDDDD"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_friday"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_week_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_date_friday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/friday_image_tv"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/booking_date_prompt"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/friday_selected_tv"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_32ADF6"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/color_DDDDDD"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_saturday"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_week_saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_date_saturday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/saturday_image_tv"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/booking_date_prompt"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/saturday_selected_tv"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_32ADF6"
+            android:visibility="invisible" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <View
+            android:layout_width="1dp"
+            android:layout_alignParentLeft="true"
+            android:background="@color/color_DDDDDD"
+            android:layout_height="match_parent" />
+
+        <LinearLayout
+            android:id="@+id/ll_sunday"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_week_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_date_sunday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_12" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/sunday_image_tv"
+            android:layout_width="5dp"
+            android:layout_height="5dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/booking_date_prompt"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/sunday_selected_tv"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_32ADF6"
+            android:visibility="invisible" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/color_DDDDDD"
+            android:layout_height="match_parent" />
+    </RelativeLayout>
+
+
+</LinearLayout>

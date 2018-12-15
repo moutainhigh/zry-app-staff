@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="page_size" format="integer" />
+        <attr name="action_mod" format="enum">
+            <enum name="hide_always" value="1" />
+            <enum name="show_always" value="2" />
+            <enum name="condition" value="3" />
+        </attr>
+    </declare-styleable>
+
+
+</resources>

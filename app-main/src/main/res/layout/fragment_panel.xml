@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Layout.Setting">
+
+    <TextView
+        style="@style/TextView.Label"
+        android:text="@string/table_or_numplete_select" />
+
+    <TextView
+        style="@style/TextView.Label"
+        android:text="@string/string_panel_dish_order" />
+
+    <TextView
+        style="@style/TextView.Label"
+        android:text="@string/settings_panel_client" />
+
+    <TextView
+        style="@style/TextView.Label"
+        android:text="@string/settings_panel_functions" />
+</LinearLayout>

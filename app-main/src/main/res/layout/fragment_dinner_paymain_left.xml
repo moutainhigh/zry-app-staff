@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/have_no_dish_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/haveNoDishImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/pay_order_empty" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/haveNoDishImage"
+            android:layout_centerHorizontal="true"
+            android:text="@string/order_have_no_dish"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            android:layout_marginTop="8dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/dinner_balance_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dinner_title_height"
+            android:background="@color/title_blue">
+
+            <ImageButton
+                android:id="@+id/dinner_balance_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:background="@drawable/title_icon_selector"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/dinner_back" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/dinner_balance_back"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_paypage_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payPage"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/dinner_pay_left_title_textSize" />
+
+                <TextView
+                    android:id="@+id/tv_table_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/dinner_pay_center_title_textSize2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="@dimen/dinner_balance_marginRight"
+                android:orientation="vertical"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:id="@+id/dinner_balance_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:padding="0dp"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/dinner_pay_left_title_textSize2"
+                    tools:text="@string/country_currency_symbol" />
+
+                <TextView
+                    android:id="@+id/buffet_orgin_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+                    android:textColor="@color/text_white"
+                    android:text="@string/buffet_order_orgin_price" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tv_select_all"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/dinner_order_center_child_tab_bg"
+            android:drawablePadding="12dp"
+            android:gravity="center"
+            android:text="@string/dinner_select_all"
+            android:textColor="@color/text_blue"
+            android:textSize="24sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_pay_label"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/pay_title_lable_bg"
+            android:gravity="center"
+            android:text="@string/dinner_split_label"
+            android:textColor="@color/print_font_color"
+            android:textSize="@dimen/text_16"
+            android:visibility="gone" />
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/dinner_balance_ticket_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:cacheColorHint="@null"
+            android:divider="@null"
+            android:fadeScrollbars="false"
+            android:listSelector="@drawable/orderdish_select_dish_item_bg"
+            android:overScrollMode="never"
+            android:scrollbarSize="0dp"
+            android:scrollbars="none"></com.baoyz.swipemenulistview.SwipeMenuListView>
+
+        <TextView
+            android:id="@+id/goods_total_number"
+            style="@style/goodsTotal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="-2dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="0"
+            android:padding="5dp"
+            android:text="@string/goods_total_quantity"
+            android:visibility="visible"
+            android:textColor="@color/goods_total_text_color" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/bg_gray" />
+
+        <ViewStub
+            android:id="@+id/dinner_balance_topay"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dinner_bottom_height2"
+            android:layout_margin="10dp"
+            android:layout_gravity="bottom"
+            android:inflatedId="@+id/dinner_pay_inflate"
+            android:layout="@layout/dinner_balance_pay_bottom"></ViewStub>
+
+        <LinearLayout
+            android:id="@+id/marketing_campaign_operate_ll"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dinner_bottom_height2"
+            android:layout_gravity="bottom"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <Button
+                android:id="@+id/cancel_choose_dish_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:background="@drawable/button_red_bg"
+                android:text="@string/dinner_marketing_campaign_cancel_dishchoose"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/pay_shupcatr_bottom_btn_size" />
+
+            <Button
+                android:id="@+id/ok_choose_dish_btn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="4"
+                android:background="@drawable/btn_blue_selector"
+                android:text="@string/dinner_marketing_campaign_ok_dishchoose"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/pay_shupcatr_bottom_btn_size" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/dinner_invert_selection_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dinner_bottom_height2"
+            android:layout_margin="10dp"
+            android:textSize="@dimen/pay_shupcatr_bottom_btn_size"
+            android:textColor="@color/text_white"
+            android:text="@string/dinner_invert_selection_txt"
+            android:background="@drawable/btn_green_selector"
+            android:visibility="gone" />
+
+    </LinearLayout>
+</FrameLayout>

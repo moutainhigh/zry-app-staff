@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="410dp"
+    android:layout_height="490dp"
+    android:layout_gravity="center"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical"
+    android:padding="1dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="80dp">
+
+        <ImageView
+            android:id="@+id/pay_error_close_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dinner_close"
+            android:gravity="center"
+            android:scaleType="center" />
+
+        <TextView
+            android:id="@+id/pay_error_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/coupon_part_error_title"
+            android:textColor="#333333"
+            android:textSize="26sp"
+            android:visibility="visible" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="47dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="#ecfbf7"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="2.0">
+
+        <TextView
+            android:id="@+id/pay_ok_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:drawableLeft="@drawable/pay_part_ok_icon"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:text="@string/pay_success"
+            android:textColor="#41d3b0"
+            android:textSize="@dimen/text_18" />
+
+        <TextView
+            android:id="@+id/pay_ok_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="right|center_vertical"
+            android:paddingRight="12dp"
+            android:text="89"
+            android:textColor="#333333"
+            android:textSize="@dimen/text_18" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pay_ok_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="47dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="20dp"
+        android:background="#fff1e5"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        android:weightSum="2.0">
+
+        <TextView
+            android:id="@+id/pay_error_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:drawableLeft="@drawable/pay_part_error_icon"
+            android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:text="@string/pay_error"
+            android:textColor="#ff7901"
+            android:textSize="@dimen/text_18" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/pay_error_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:visibility="visible" />
+
+</LinearLayout>

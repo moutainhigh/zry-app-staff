@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="13dp"
+    android:paddingBottom="13dp"
+    android:paddingLeft="22dp"
+    android:paddingRight="22dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/order_no_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textColor="@color/color_5F6A70"
+        android:textSize="@dimen/text_14" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/basedline" />
+
+    <TextView
+        android:id="@+id/old_card_num_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textColor="@color/color_5F6A70"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/old_card_status_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:maxLines="1"
+        android:textColor="@color/color_5F6A70"
+        android:textSize="@dimen/text_14" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/basedline" />
+
+    <TextView
+        android:id="@+id/new_card_num_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:textColor="@color/color_5F6A70"
+        android:textSize="@dimen/text_14" />
+
+    <TextView
+        android:id="@+id/new_card_status_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:maxLines="1"
+        android:textColor="@color/color_5F6A70"
+        android:textSize="@dimen/text_14" />
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dinner_new_booking">新预订</string>
+    <string name="dinner_new_queue">新排队</string>
+    <string name="dinner_newtrade_wechat">新订单-移动门店</string>
+    <string name="dinner_newtrade_baidurich">新订单-百度糯米</string>
+    <string name="dinner_newtrade_baidutakeout">新订单-百度外卖</string>
+    <string name="dinner_newtrade_pizza_hut">新订单-必胜客</string>
+    <string name="dinner_newtrade_elm">新订单-饿了么</string>
+    <string name="dinner_newtrade_meituantakeout">新订单-美团外卖</string>
+    <string name="dinner_newtrade_jd_home">新订单-京东到家</string>
+    <string name="dinner_newtrade_open_platform">新订单-第三方</string>
+    <string name="dinner_newtrade_publiccomment">新订单-大众点评</string>
+    <string name="dinner_newtrade_xinmeida">新订单-新美大</string>
+    <string name="dinner_newtrade_freqencycustomer">新订单-熟客</string>
+    <string name="dinner_wechat_repay_fail">退款失败</string>
+    <string name="print_failed">票据打印失败</string>
+    <string name="dinner_pos_trade_unfinish">pos未完成交易</string>
+    <string name="dinner_take_out_retrade_apply">外卖退单申请</string>
+    <string name="dinner_orderdish_dish_urge">催菜</string>
+    <string name="dinner_dish_call_up">等叫</string>
+    <string name="dinner_orderdish_dish_make">起菜</string>
+    <string name="dinner_compact_over">合同到期</string>
+    <string name="dinner_free_table">空闲桌台</string>
+    <string name="dinner_print_fail_trade">打印服务故障订单</string>
+    <string name="dinner_server_calling">服务铃</string>
+    <string name="dinner_additem">加菜单</string>
+    <string name="dinner_WeChat_additem">加菜单－移动门店</string>
+    <string name="dinner_returnguest_additem">加菜单－熟客</string>
+    <string name="dinner_system_information">系统公告</string>
+    <string name="dinner_other_client_payed">其他端支付</string>
+    <string name="dinner_print_error">打印出错</string>
+    <string name="new_trade">新订单</string>
+    <string name="delivery_cancel_trade">配送取消</string>
+    <string name="delivery_waiting">待派送订单</string>
+    <string name="dinner_newtrade_koubei">新订单-口碑</string>
+</resources>

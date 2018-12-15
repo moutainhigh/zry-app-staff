@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="@dimen/customer_chargind_layout_w"
+        android:layout_height="@dimen/customer_chargind_layout_h"
+        android:background="@drawable/customer_charging_bg"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/customer_chargind_m_l"
+            android:layout_marginRight="@dimen/customer_chargind_m_l"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/customer_chargind_title_h"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/customer_charging_str"
+                        android:textColor="@color/customer_charging_title"
+                        android:textSize="@dimen/text_22" />
+
+                    <ImageView
+                        android:id="@+id/ivClose_CCharging"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:src="@drawable/dinner_close" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/customer_charging_name_and_balance_top"
+                    android:gravity="bottom">
+
+                    <TextView
+                        android:id="@+id/customer_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:maxEms="12"
+                        android:singleLine="true"
+                        android:textColor="@color/customer_text_black"
+                        android:textSize="@dimen/text_15"
+                        tools:text="@string/customer_charging_name" />
+
+                    <TextView
+                        android:id="@+id/customer_balance_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_toRightOf="@id/customer_name"
+                        android:text="@string/customer_charging_current_balance"
+                        android:textColor="@color/customer_text_black"
+                        android:textSize="@dimen/text_15" />
+
+                    <TextView
+                        android:id="@+id/customer_balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/customer_balance_title"
+                        android:textColor="@color/customer_text_black"
+                        android:textSize="@dimen/text_15"
+                        tools:text="100" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/customer_charging_showdow"
+                android:padding="4dp"
+                android:text="@string/customer_charging_c_title"
+                android:textColor="@color/customer_charging_showdow_text"
+                android:textSize="@dimen/text_14" />
+
+            <TextView
+                android:id="@+id/show_value"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/customer_chargind_show_value_h"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/customer_chargind_show_value_m_t"
+                android:background="@drawable/customer_charging_balance_edit_bg"
+                android:gravity="center"
+                android:textColor="@color/customer_charging_show_balance"
+                android:textSize="@dimen/text_24" />
+
+            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+                android:id="@+id/rule_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/customer_chargind_rule_monry_t"
+                android:maxLines="1"
+                android:textColor="@color/customer_charging_showdow_text"
+                android:textSize="@dimen/text_16"
+                tools:text="@string/customer_charging_rule_money" />
+
+            <GridView
+                android:id="@+id/customer_charging_num"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:horizontalSpacing="@dimen/customer_chargind_rule_money_h_spacing"
+                android:listSelector="@android:color/transparent"
+                android:numColumns="2"
+                android:paddingBottom="@dimen/customer_chargind_num_b"
+                android:paddingTop="@dimen/customer_chargind_num_t"
+                android:scrollbars="none"
+                android:verticalSpacing="10dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/customer_chargind_m_l"
+            android:layout_marginRight="@dimen/customer_chargind_m_l"
+            android:background="@color/customer_charging_showdow"
+            android:padding="4dp"
+            android:text="@string/salesman_select_label2"
+            android:textColor="@color/customer_charging_showdow_text"
+            android:textSize="@dimen/text_14" />
+
+        <LinearLayout
+            android:id="@+id/salesman_ll"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_marginLeft="@dimen/customer_chargind_m_l"
+            android:layout_marginRight="@dimen/customer_chargind_m_l"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="8dp"
+            android:paddingTop="9dp">
+
+            <EditText
+                android:id="@+id/salesman_name_et"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_select_waiter_left"
+                android:enabled="false"
+                android:focusable="false"
+                android:gravity="center_vertical"
+                android:hint="@string/salesman_select_hint2"
+                android:paddingLeft="10dp"
+                android:textColor="@color/print_text_black"
+                android:textSize="@dimen/text_16" />
+
+            <ImageView
+                android:id="@+id/salesman_iv"
+                android:layout_width="70dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_select_waiter_right_selector"
+                android:clickable="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_pay_ment_item_label_close" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/customer_cash_charging"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/customer_chargind_pay_button_h"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/customer_charging_pay_cash_selector"
+            android:text="@string/customer_charging_cash"
+            android:textColor="@color/write"
+            android:textSize="@dimen/text_22" />
+    </LinearLayout>
+</FrameLayout>

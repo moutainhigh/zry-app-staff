@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="80dp"
+    android:background="@drawable/order_center_more_float_bg"
+    android:gravity="center"
+    android:paddingLeft="30dp"
+    android:paddingRight="2dp">
+
+    <ImageView
+        android:id="@+id/order_center_list_item_notice_wechat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="18dp"
+        android:src="@drawable/call_number_wechat_selector" />
+
+    <ImageView
+        android:id="@+id/order_center_list_item_notice_ivr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="18dp"
+        android:src="@drawable/call_number_ivr_selector" />
+</LinearLayout>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tradeproperty="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_number_and_waiter"
+    android:orientation="vertical"
+    android:paddingLeft="25dp"
+    android:paddingBottom="25dp"
+    android:paddingTop="8dp"
+    android:paddingRight="25dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#F6F6F6"
+        android:gravity="center_vertical"
+        android:paddingLeft="9dp"
+        android:textColor="@color/color_999999"
+        android:text="@string/dinner_number_of_guests" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_white"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/buffet_trade_property_title"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="9dp"
+            android:layout_weight="2"
+            android:text="@string/dinner_guests" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dinner_waiter_and_number_repastNum_marginBottom"
+            android:layout_marginRight="9dp"
+            android:layout_marginTop="@dimen/dinner_waiter_and_number_repastNum_marginBottom"
+            android:layout_weight="3"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/minus_customer_iv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/bg_cycle_number_left_selector"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_dinner_guest_decrease" />
+
+            <EditText
+                android:id="@+id/customer_num_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/icon_dinner_guest_number_bg"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="3"
+                android:text="4"
+                android:textColor="@color/text_blue"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/add_customer_iv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/bg_cycle_number_right_selector"
+                android:scaleType="centerInside"
+                android:src="@drawable/icon_dinner_guest_increase" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="#F6F6F6"
+        android:gravity="center_vertical"
+        android:paddingLeft="9dp"
+        android:textColor="@color/color_999999"
+        android:text="@string/dinner_other_info" />
+
+
+    <com.zhongmei.bty.buffet.table.view.PropertyItemView_
+        android:id="@+id/piv_waiter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tradeproperty:titleText="服务员:Admin"
+        android:layout_marginLeft="9dp"
+        tradeproperty:propertyVisiable="gone">
+
+    </com.zhongmei.bty.buffet.table.view.PropertyItemView_>
+
+    <com.zhongmei.bty.buffet.table.view.PropertyItemView_
+        android:id="@+id/piv_salesman"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tradeproperty:propertyVisiable="gone"
+        android:layout_marginLeft="9dp"
+        tradeproperty:titleText="销售员:">
+
+    </com.zhongmei.bty.buffet.table.view.PropertyItemView_>
+</LinearLayout>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/notification_setting_content_margin_left"
+            android:layout_marginRight="@dimen/notification_setting_content_margin_left">
+
+            <LinearLayout
+                style="@style/setting_item"
+                android:layout_marginTop="@dimen/notification_setting_content_margin_top">
+
+                <TextView
+                    style="@style/setting_item_name_text"
+                    android:text="@string/setting_notify_whole_open" />
+
+                <ToggleButton
+                    android:id="@+id/notify_whole_switch"
+                    style="@style/setting_switch_item_toggle" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/neworder_sound"
+                style="@style/setting_item_title_text"
+                android:layout_marginTop="@dimen/notification_setting_items_margin" />
+
+            <LinearLayout style="@style/setting_item">
+
+                <TextView
+                    style="@style/setting_item_name_text"
+                    android:text="@string/voice_notice" />
+
+                <ToggleButton
+                    android:id="@+id/notify_shengyin_switch"
+                    style="@style/setting_switch_item_toggle" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/neworder_msg"
+                style="@style/setting_item_title_text"
+                android:layout_marginTop="@dimen/notification_setting_items_margin" />
+
+
+            <LinearLayout
+                android:id="@+id/seting_module"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/notifycenter_setting_item_bg"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/notification_setting_item_margin_top"
+                android:layout_marginBottom="@dimen/notification_setting_content_margin_top">
+
+                <!-- 正餐 -->
+
+                <LinearLayout style="@style/setting_notify_module_ui">
+
+                    <ImageView
+                        android:id="@+id/notify_zheng_icon"
+                        style="@style/setting_notify_module_icon"
+                        android:src="@drawable/notifycenter_dinner_icon" />
+
+                    <TextView
+                        style="@style/setting_notify_module_text"
+                        android:text="@string/dinner_app_name" />
+
+                    <ToggleButton
+                        android:id="@+id/notify_zheng_switch"
+                        style="@style/setting_switch_item_toggle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line_gray" />
+
+                <!-- 快餐 -->
+
+                <LinearLayout style="@style/setting_notify_module_ui">
+
+                    <ImageView
+                        android:id="@+id/notify_kuai_icon"
+                        style="@style/setting_notify_module_icon"
+                        android:src="@drawable/notifycenter_cashier_icon" />
+
+                    <TextView
+                        style="@style/setting_notify_module_text"
+                        android:layout_toRightOf="@id/notify_kuai_icon"
+                        android:text="@string/cashier_app_name" />
+
+                    <ToggleButton
+                        android:id="@+id/notify_kuai_switch"
+                        style="@style/setting_switch_item_toggle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line_gray" />
+
+                <!-- 外卖 -->
+
+                <LinearLayout style="@style/setting_notify_module_ui">
+
+                    <ImageView
+                        android:id="@+id/notify_wai_icon"
+                        style="@style/setting_notify_module_icon"
+                        android:src="@drawable/notifycenter_takeaway_icon" />
+
+                    <TextView
+                        style="@style/setting_notify_module_text"
+                        android:layout_toRightOf="@id/notify_wai_icon"
+                        android:text="@string/delivery_app_name" />
+
+                    <ToggleButton
+                        android:id="@+id/notify_wai_switch"
+                        style="@style/setting_switch_item_toggle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line_gray" />
+
+                <!-- 排队 -->
+
+                <LinearLayout style="@style/setting_notify_module_ui">
+
+                    <ImageView
+                        android:id="@+id/notify_pai_icon"
+                        style="@style/setting_notify_module_icon"
+                        android:src="@drawable/notifycenter_queue_icon" />
+
+                    <TextView
+                        style="@style/setting_notify_module_text"
+                        android:layout_toRightOf="@id/notify_pai_icon"
+                        android:text="@string/queue_app_name" />
+
+                    <ToggleButton
+                        android:id="@+id/notify_pai_switch"
+                        style="@style/setting_switch_item_toggle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line_gray" />
+
+                <!-- 预定 -->
+
+                <LinearLayout style="@style/setting_notify_module_ui">
+
+                    <ImageView
+                        android:id="@+id/notify_yu_icon"
+                        style="@style/setting_notify_module_icon"
+                        android:src="@drawable/notifycenter_booking_icon" />
+
+                    <TextView
+                        style="@style/setting_notify_module_text"
+                        android:layout_toRightOf="@id/notify_yu_icon"
+                        android:text="@string/booking_app_name" />
+
+                    <ToggleButton
+                        android:id="@+id/notify_yu_switch"
+                        style="@style/setting_switch_item_toggle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line_gray" />
+
+                <!-- 顾客 -->
+
+                <LinearLayout style="@style/setting_notify_module_ui">
+
+                    <ImageView
+                        android:id="@+id/notify_gu_icon"
+                        style="@style/setting_notify_module_icon"
+                        android:src="@drawable/notifycenter_customer_module_icon" />
+
+                    <TextView
+                        style="@style/setting_notify_module_text"
+                        android:layout_toRightOf="@id/notify_gu_icon"
+                        android:text="@string/customer_app_name" />
+
+                    <ToggleButton
+                        android:id="@+id/notify_gu_switch"
+                        style="@style/setting_switch_item_toggle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/line_gray" />
+
+                <!-- 电话 -->
+
+                <LinearLayout style="@style/setting_notify_module_ui">
+
+                    <ImageView
+                        android:id="@+id/notify_dian_icon"
+                        style="@style/setting_notify_module_icon"
+                        android:src="@drawable/notifycenter_phone_module_icon" />
+
+                    <TextView
+                        style="@style/setting_notify_module_text"
+                        android:layout_toRightOf="@id/notify_dian_icon"
+                        android:text="@string/phone_app_name" />
+
+                    <ToggleButton
+                        android:id="@+id/notify_dian_switch"
+                        style="@style/setting_switch_item_toggle" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

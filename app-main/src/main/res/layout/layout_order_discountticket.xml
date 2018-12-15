@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:gravity="center_vertical">
+
+
+        <TextView
+            android:id="@+id/tv_nameAndFee"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:textColor="#555555"
+            android:textSize="@dimen/text_12"
+            tools:text="TextView" />
+
+        <TextView
+            android:id="@+id/tv_order_pay_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp"
+            android:textColor="#555555"
+            android:textSize="@dimen/text_12"
+            tools:text="TextView" />
+
+        <TextView
+            android:id="@+id/tv_refund_failed_reason"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/text_red"
+            android:visibility="invisible"
+            android:textStyle="bold"
+            android:textSize="@dimen/text_12" />
+
+        <!--<TextView
+            android:id="@+id/tv_extra_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:textColor="#555555"
+            android:textSize="@dimen/text_14"
+            tools:text="@string/dinner_order_center_payinfo_extra" />-->
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:gravity="right|center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_order_refund"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:paddingBottom="12dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingTop="12dp"
+                android:text="@string/order_center_return_money"
+                android:textColor="@color/color_fe6a4d"
+                android:textSize="@dimen/text_12" />
+
+            <Button
+                android:id="@+id/tv_refreshState"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/btn_green"
+                android:padding="5dp"
+                android:text="@string/dinner_order_center_refund_status"
+                android:textColor="@color/write"
+                android:textSize="@dimen/text_12" />
+
+            <TextView
+                android:id="@+id/tv_foldDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:text="@string/dinner_order_center_showinfo"
+                android:textColor="#33adf6"
+                android:textSize="@dimen/text_12" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#dfe4e9" />
+
+    <LinearLayout
+        android:id="@+id/layout_ticketDetails"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="44dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_12" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_dinner_order_center_detail_content_item"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:id="@+id/layout_tickets"
+                android:layout_width="match_parent"
+                android:layout_height="34dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/tv_ticket_column"
+                    android:layout_weight="1"
+                    android:text="@string/dinner_ordercenter_index" />
+
+                <TextView
+                    style="@style/tv_ticket_column"
+                    android:layout_weight="4"
+                    android:text="@string/dinner_ordercenter_ticket_no" />
+
+                <TextView
+                    style="@style/tv_ticket_column"
+                    android:layout_weight="4"
+                    android:text="@string/dinner_ordercenter_ticket_name" />
+
+                <TextView
+                    style="@style/tv_ticket_column"
+                    android:layout_weight="3"
+                    android:text="@string/dinner_ordercenter_ticket_denomination" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#dfe4e9" />
+
+            <com.zhongmei.bty.dinner.table.view.SpreadListView
+                android:id="@+id/slv_discountTickets"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:cacheColorHint="@color/transparent"
+                android:divider="@color/transparent"
+                android:dividerHeight="12dp"
+                android:listSelector="@color/transparent"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp">
+
+            </com.zhongmei.bty.dinner.table.view.SpreadListView>
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="#dfe4e9" />
+
+    </LinearLayout>
+</LinearLayout>

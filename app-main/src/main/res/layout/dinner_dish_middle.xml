@@ -1,0 +1,103 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="horizontal">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@color/dinnerdish_bg"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/v_action_bar"
+            android:layout_width="@dimen/snack_dish_action_zone_width"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.zhongmei.bty.snack.orderdish.view.CustomDishQuantityView_
+                android:id="@+id/v_dish_quantity"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:layout_marginTop="16dp" />
+
+            <Button
+                android:id="@+id/btn_seat"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/dish_seat"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/btn_standard"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/dish_standard" />
+
+            <Button
+                android:id="@+id/btn_property"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/dish_property" />
+
+            <Button
+                android:id="@+id/btn_extra"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/dish_extra" />
+
+            <Button
+                android:id="@+id/btn_remark"
+                style="@style/DishPropertyActionButtonStyle"
+                android:text="@string/remark_str" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btn_change_price"
+                    style="@style/DishPropertyActionButtonStyle"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/dish_detail" />
+
+                <ImageView
+                    android:id="@+id/btn_chageprice_anchor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/dish_changeprice_anchor"
+                    android:layout_gravity="right|top"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone" />
+            </FrameLayout>
+
+            <View
+                android:id="@+id/v_divide_line"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp"
+                android:background="@color/divide_line_color" />
+
+            <include
+                android:id="@+id/vvp_operate"
+                layout="@layout/vvp_operate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@color/divide_line_color" />
+
+    <FrameLayout
+        android:id="@+id/v_content"
+        android:layout_width="@dimen/snack_dish_property_zone_width"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:paddingTop="34dp" />
+
+</LinearLayout>

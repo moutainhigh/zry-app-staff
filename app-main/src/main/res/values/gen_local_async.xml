@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?><!-- 请不要随意改动这里面的内容-->
+<resources>
+    <!--code desc-->
+    <string name="desc_1000">成功</string>
+    <string name="desc_1001">数据验证失败</string>
+    <string name="desc_1109">数据不存在</string>
+    <string name="desc_8848">服务执行异常</string>
+    <!--message-->
+    <string name="z_trade_not_exist">订单数据不存在</string>
+    <string name="z_trade_refund_must_not_refund">退化单不能再次退货</string>
+    <string name="z_trade_refund_repeat">订单不能重复退货</string>
+    <string name="z_trade_refund_must_finish">没有完成的订单不能退货</string>
+    <string name="z_trade_refund_squareup_lock">待清账的订单不能做做</string>
+    <string name="z_trade_refund_must_not_repaid">反结账的订单不允许退货</string>
+    <string name="z_exe_error_db">数据库</string>
+    <!--*********************************************************************************************-->
+    <string name="successful">成功</string>
+    <string name="uuuuuuuuuuuuuuuuunknown">未知错误</string>
+    <string name="trade_refund_not_exist">订单不存在</string>
+    <string name="trade_refund_repeat">订单重复退款</string>
+    <string name="trade_refund_repeated">订单已反结账</string>
+    <string name="trade_refund_not_support_trade_pay_status">订单支付状态不支持退货</string>
+    <string name="trade_refund_not_support_trade_status">订单状态不支持退货</string>
+    <string name="trade_refund_privilege_failure">优惠券退货失败</string>
+    <string name="trade_refund_payment_failure">支付订单退货失败</string>
+    <string name="coupon_failed">会员优惠劵验证失败</string>
+    <string name="wechat_coupon_failed">微信优惠劵验证失败</string>
+    <string name="integral_failed">会员积分使用失败</string>
+    <string name="business_operation_failed">业务操作失败</string>
+    <string name="business_data_has_existed">该数据已经存在了，不能重复创建</string>
+    <string name="business_data_has_not_existed">该数据不存在</string>
+    <string name="business_server_trade_no_data_error">该订单号创建重复</string>
+
+    <string name="trade_payment_not_support_pay_times">订单不支持分步支付</string>
+    <string name="feature_not_supported">该功能暂不支持。</string>
+    <string name="trade_refund_offline_not_allow">离线模式下不支持退货操作,请检查网络</string>
+</resources>

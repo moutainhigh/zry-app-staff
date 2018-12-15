@@ -1,0 +1,14 @@
+<resources>
+    <!--快餐左侧区域宽度-->
+    <dimen name="snack_dish_left_zone_width">397dp</dimen>
+    <!--快餐操作栏区域宽度-->
+    <dimen name="snack_dish_action_zone_width">118dp</dimen>
+    <!--快餐属性栏区域宽度-->
+    <dimen name="snack_dish_property_zone_width">253dp</dimen>
+
+    <dimen name="order_dish_grid_width">130dp</dimen>
+    <dimen name="order_dish_grid_item_selected_margin">6dp</dimen>
+    <!--点单页上边距-->
+    <dimen name="order_dish_margin_top">8dp</dimen>
+    <dimen name="order_dish_grid_item_desc_margin">10dp</dimen>
+</resources>

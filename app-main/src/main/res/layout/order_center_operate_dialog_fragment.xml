@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00000000">
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:layout_gravity="center"
+        android:background="@drawable/order_center_operate_dialog_background"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/close_title"
+            android:background="@color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="66dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true">
+
+                <TextView
+                    android:id="@+id/dialog_title"
+                    android:textSize="@dimen/dialog_operate_title_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FFFF7901"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:id="@+id/tv_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/color_fe6a4d"
+                    android:text="@string/repay_tip"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/dialog_operate_title2_size"
+                    android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+                    android:layout_marginEnd="@dimen/dialog_operate_reason_margin" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/dinner_close"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:clickable="true" />
+        </RelativeLayout>
+
+
+        <com.zhongmei.bty.cashier.ordercenter.view.ObservableScrollView
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:layout_marginStart="@dimen/dialog_operate_reason_margin"
+                android:layout_marginEnd="@dimen/dialog_operate_reason_margin"
+                android:orientation="vertical">
+
+                <com.zhongmei.bty.cashier.inventory.view.ReturnInventoryLayout
+                    android:id="@+id/return_inventory_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+
+                <com.zhongmei.bty.cashier.ordercenter.view.ReasonLayout
+                    android:id="@+id/reasonLayout"
+                    android:background="@color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical" />
+
+                <com.zhongmei.bty.cashier.ordercenter.view.InventoryLayout
+                    android:id="@+id/inventoryLayout"
+                    android:background="@color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/dialog_operate_views_marginTop" />
+
+                <com.zhongmei.bty.cashier.ordercenter.view.PrintLayout
+                    android:id="@+id/printLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dialog_operate_views_marginTop" />
+
+                <com.zhongmei.bty.cashier.ordercenter.view.PayedLayout
+                    android:id="@+id/payedLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="@dimen/dialog_operate_views_marginTop" />
+
+            </LinearLayout>
+        </com.zhongmei.bty.cashier.ordercenter.view.ObservableScrollView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_operate_submit_height"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="@dimen/dialog_operate_submit_size"
+            android:textColor="#FFFFFFFF"
+            android:id="@+id/btn_ok"
+            android:layout_marginTop="@dimen/dialog_operate_views_marginTop" />
+    </LinearLayout>
+
+</FrameLayout>

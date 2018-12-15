@@ -1,0 +1,164 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:fitsSystemWindows="true"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_width="373dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/verify_bg"
+        android:orientation="vertical"
+        tools:ignore="UselessParent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="@dimen/customer_dialog_top"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/customer_menber_login"
+                android:textColor="#ff7901"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="22dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/dinner_close"
+                tools:ignore="RelativeOverlap" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/line_gray" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="480dp"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="40dp"
+                android:paddingRight="40dp"
+                android:orientation="vertical">
+
+                <!-- 二维码-->
+                <ImageView
+                    android:id="@+id/iv_default_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/customer_defalut_top"
+                    android:layout_marginBottom="@dimen/customer_defalut_bottom"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/login_defalut_icon"
+                    android:contentDescription="@string/app_name"
+                    android:visibility="gone" />
+
+                <!-- 登录页面-->
+                <LinearLayout
+                    android:id="@+id/ll_qr_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:orientation="vertical"
+                    android:visibility="visible"
+                    tools:ignore="UseCompoundDrawables">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center_horizontal"
+                        android:text="@string/input_scan_qrcode"
+                        android:textColor="@color/text_black"
+                        android:textSize="12sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_qr_code"
+                        android:layout_width="@dimen/customer_qr_wh"
+                        android:layout_height="@dimen/customer_qr_wh"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="5dp"
+                        android:background="@drawable/display_gray_qrcode_round_bg"
+                        android:contentDescription="@string/app_name" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+                        android:id="@+id/et_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:background="@drawable/input_price_edit_selector"
+                        android:drawableEnd="@drawable/icon_delete"
+                        android:gravity="center"
+                        android:hint="@string/customer_login_hint"
+                        android:inputType="number"
+                        android:maxLength="20"
+                        android:textColor="#6B6D6C"
+                        android:textColorHint="#9FA0A0" />
+
+                    <Button
+                        android:id="@+id/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="46dp"
+                        android:layout_marginTop="18dp"
+                        android:background="@drawable/orderdish_clear_status_select_all_not_enabled"
+                        android:gravity="center"
+                        android:text="@string/member_login"
+                        android:textColor="#fefefe"
+                        android:textSize="20sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="24dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/dash_line_image" />
+
+                    <TextView
+                        android:id="@+id/tv_card_login"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@drawable/card_login_icon"
+                        android:gravity="center"
+                        android:text="@string/card_login_str"
+                        android:textColor="@color/text_pay_other_black"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

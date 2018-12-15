@@ -1,0 +1,76 @@
+ext {
+    // SDK And Tools
+    COMPILE_SDK_VERSION = 25
+    BUILD_TOOLS_VERSION = '25.0.3'
+    MIN_SDK_VERSION = 17
+    TARGET_SDK_VERSION = 18
+
+    SUPPORT_VERSION = '25.3.0'
+
+    KOTLIN_VERSION = '1.2.0'
+
+    //APP
+    calm = [
+            applicationId: "com.zhongmei.yunfu",
+            versionCode  : 2110081400,
+            versionName  : "0.9.0"
+    ]
+    //android libs
+    androidsdk = [
+            supportV4       : "com.android.support:support-v4:$SUPPORT_VERSION",
+            testRules       : "com.android.support.test:rules:0.4",
+            testRunner      : "com.android.support.test:runner:0.4",
+            testEspressoCore: "com.android.support.test.espresso:espresso-core:2.2.2",
+            junit           : "junit:junit:4.12",
+            mockito         : "org.mockito:mockito-core:2.8.9",
+            powermock       : "org.powermock:powermock-api-mockito2:1.7.4",
+            powermock_junit : "org.powermock:powermock-module-junit4:1.7.4",
+            powermock_rule  : "org.powermock:powermock-module-junit4-rule:1.7.4",
+            //gson            : "com.google.code.gson:gson:2.8.5",
+            multidex        : "com.android.support:multidex:1.0.1",
+            recyclerview    : "com.android.support:recyclerview-v7:$SUPPORT_VERSION",
+            cardview        : "com.android.support:cardview-v7:$SUPPORT_VERSION",
+            appcompatV7     : "com.android.support:appcompat-v7:$SUPPORT_VERSION",
+            constraintLayout: "com.android.support.constraint:constraint-layout:1.1.0"
+    ]
+    //calm libs
+    calmsdk = [
+            displaySDK  : "com.zhongmei.bty:displaysdk:1.0.2",
+            calmMsglib  : "com.zhongmei.bty:calmMsglib:1.0.0@aar",
+            //faceplatformUI: [group: 'com.zhongmei.bty', name: 'faceplatformUI', version: '1.0.0-SNAPSHOT', classifier: 'release', ext: 'aar'],
+            commonmodule: "com.zhongmei.bty:commonmodule:1.0.0-SNAPSHOT@aar",
+            basemodule  : "com.zhongmei.bty:basemodule:1.0.0-SNAPSHOT",
+            //offline       : "com.zhongmei.bty:offline:1.0.0-SNAPSHOT",
+            onposmachine: [group: 'com.zhongmei.bty', name: 'onposmachine', version: '2.0.17', classifier: 'release', ext: 'jar']
+    ]
+    //third libs
+    third = [
+            AAapi            : "org.androidannotations:androidannotations-api:4.4.0",
+            AA               : "org.androidannotations:androidannotations:4.4.0",
+            arouter          : "com.alibaba:arouter-api:1.2.4",
+            arouterCompile   : "com.alibaba:arouter-compiler:1.1.4",
+            zxing            : "com.google.zxing:core:3.3.0",
+            okhttp3          : "com.squareup.okhttp3:okhttp:3.8.1",
+            ormlite          : "com.j256.ormlite:ormlite-android:4.48",
+            ptrLoadMore      : "in.srain.cube:ptr-load-more:1.0.2",
+            kotlinStdlibJDK  : "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$KOTLIN_VERSION",
+            swipeToLoadLayout: "com.github.Aspsine:SwipeToLoadLayout:1.0.4",
+            swipemenulistview: "com.baoyz.swipemenulistview:library:1.3.0",
+            umengCommon      : "com.umeng.sdk:common:1.5.0",
+            umengAnalytics   : "com.umeng.sdk:analytics:7.5.0",
+            eventbus         : "org.greenrobot:eventbus:3.1.1"
+    ]
+
+    // TODO
+    dependencies = [
+            "baiduLBS"            : files('libs/BaiduLBS_Android.jar'),
+            "core"                : files('libs/core_3.2.0.jar'),
+            "libamm"              : files('libs/libammsdk.jar'),
+            "mta-sdk"             : files('libs/mta-sdk-1.6.2.jar'),
+            "open_sdk"            : files('libs/open_sdk_r5756.jar'),
+            "pgyer_sdk"           : files('libs/pgyer_sdk_2.4.5.jar'),
+
+            "butterknife"         : 'com.jakewharton:butterknife:8.8.1',
+            "butterknife-compiler": 'com.jakewharton:butterknife-compiler:8.8.1',
+    ]
+}

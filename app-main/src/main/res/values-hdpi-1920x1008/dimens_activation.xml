@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--66dp-->
+    <dimen name="activation_shopQuery_title_marginTop">44dp</dimen>
+    <!--76dp-->
+    <dimen name="activation_shopQuery_content_marginTop">50.6dp</dimen>
+    <!--100dp-->
+    <dimen name="activation_shopQuery_explain_marginTop">66.7dp</dimen>
+
+    <!--66dp-->
+    <dimen name="activation_shopInfo_title_marginTop">44dp</dimen>
+    <!--90dp-->
+    <dimen name="activation_shopInfo_brandInfo_marginTop">60dp</dimen>
+    <!--40dp-->
+    <dimen name="activation_shopInfo_cuttingLine_margin">26.6dp</dimen>
+
+    <!--66dp-->
+    <dimen name="activation_shopInfo2_title_marginTop">44dp</dimen>
+    <!--66dp-->
+    <dimen name="activation_shopInfo2_content_marginTop">44dp</dimen>
+    <!--40dp-->
+    <dimen name="activation_shopInfo2_cuttingLine_marginTop">26.7dp</dimen>
+    <!--64dp-->
+    <dimen name="activation_shopInfo2_btnStart_marginTop">42.7dp</dimen>
+
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F0F3F6">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/merchant_information"
+        android:textColor="#FFFFFF"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/setting_dinner_switch_item_title_margin_top"
+        android:layout_marginBottom="@dimen/setting_dinner_switch_item_title_margin_top"
+        android:layout_marginLeft="@dimen/setting_dinner_switch_item_margin_left"
+        android:layout_marginRight="@dimen/setting_dinner_switch_item_margin_left"
+        android:background="@drawable/setting_on_of_item_bg">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/shop_picture"
+                    android:layout_width="148dp"
+                    android:layout_height="148dp"
+                    android:background="@drawable/default_logo" />
+
+                <ImageView
+                    android:layout_width="148dp"
+                    android:layout_height="148dp"
+                    android:background="@drawable/head_mask" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/shop_name"
+                style="@style/settings_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/shop_name"
+                android:textColor="@color/settings_normalword"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/shop_phone"
+                style="@style/settings_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/shop_phone"
+                android:textColor="@color/print_text_gray"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_line" />
+
+        <ListView
+            android:id="@+id/shop_info_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@color/gray_line"
+            android:listSelector="@android:color/transparent"
+            android:dividerHeight="0.5dp" />
+    </LinearLayout>
+
+</LinearLayout>

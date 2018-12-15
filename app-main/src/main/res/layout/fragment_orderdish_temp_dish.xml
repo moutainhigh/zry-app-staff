@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="374dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:background="@drawable/verify_bg"
+        android:fitsSystemWindows="false"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+
+        <!--名字操作，关闭-->
+        <include layout="@layout/layout_orderdish_tempdish_name" />
+
+        <include layout="@layout/layout_temp_dish_number" />
+
+        <com.zhongmei.bty.basemodule.input.NumberKeyBoard
+            android:id="@+id/keyboard"
+            android:layout_width="match_parent"
+            android:layout_height="272dp" />
+
+        <Button
+            android:id="@+id/btn_add_to_cart"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/sure_btn_bg"
+            android:layout_gravity="center_vertical"
+            android:text="@string/add_to_cart"
+            android:textSize="22sp"
+            android:textColor="@color/text_white" />
+
+
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#00ff0000"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/haveNoDishLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/haveNoDishImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/beauty_have_no_product" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/haveNoDishImage"
+            android:layout_centerHorizontal="true"
+            android:textSize="12sp"
+            android:textColor="#d7dadd"
+            android:layout_marginTop="20dp"
+            android:text="@string/beauty_no_goods" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_select_all"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/dinner_order_center_child_tab_bg"
+            android:drawablePadding="12dp"
+            android:gravity="center"
+            android:text="@string/dinner_select_all"
+            android:textColor="@color/text_blue"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/lv_selected_dish"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#00c6ced6"
+            android:cacheColorHint="@null"
+            android:scrollingCache="false"
+            android:divider="#00000000"
+            android:dividerHeight="0dp"
+            android:fadeScrollbars="false"
+            android:listSelector="@drawable/orderdish_select_dish_item_bg"
+            android:layout_marginLeft="@dimen/dinner_shopcart_item_marginLeft"
+            android:layout_marginRight="@dimen/dinner_shopcart_item_marginRight"
+            android:overScrollMode="never"
+            android:scrollbarSize="0dp"
+            android:scrollbars="none" />
+
+    </LinearLayout>
+</LinearLayout>

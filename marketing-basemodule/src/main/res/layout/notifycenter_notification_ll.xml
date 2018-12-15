@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/notification_max_size_notice"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:textColor="@color/verify_perssion_title"
+        android:textSize="14sp"
+        android:visibility="gone"
+        android:background="@drawable/notifycenter_notice_background"
+        android:text="@string/notice_max_size_notice"></TextView>
+
+    <ExpandableListView
+        android:id="@+id/elv_notification"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp"
+        android:layout_below="@id/notification_max_size_notice"
+        android:cacheColorHint="@android:color/transparent"
+        android:divider="@null"
+        android:groupIndicator="@null"></ExpandableListView>
+
+    <ImageView
+        android:id="@+id/iv_no_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="196dp"
+        android:background="@drawable/notifycenter_notify_empty" />
+
+    <TextView
+        android:id="@+id/tv_no_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/print_text_gray"
+        android:textSize="16sp"
+        android:layout_below="@id/iv_no_notify"
+        android:text="@string/no_notify" />
+
+</merge>

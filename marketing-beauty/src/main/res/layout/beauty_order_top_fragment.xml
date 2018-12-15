@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beauty_bg_black"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="5dp"
+    android:paddingTop="5dp">
+
+    <com.zhongmei.beauty.view.NestRadioGroup
+        android:id="@+id/custom_rb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/beauty_order_top_back_selector"
+            android:paddingBottom="10dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="10dp"
+            android:text="@string/back"
+            android:textColor="@color/beauty_order_top_rb_selector"
+            android:textSize="@dimen/text_12" />
+
+
+        <Button
+            android:id="@+id/btn_login"
+            style="@style/beauty_order_top_btn"
+            android:layout_marginLeft="30dp"
+            android:drawableTop="@drawable/beauty_order_btn_login_selector"
+            android:text="@string/login_in" />
+
+
+        <RadioButton
+            android:id="@+id/rb_card"
+            style="@style/beauty_order_top_rb"
+            android:drawableTop="@drawable/beauty_order_top_btn_card_selector"
+            android:enabled="false"
+            android:text="@string/count_card" />
+
+        <RadioButton
+            android:id="@+id/rb_integral"
+            style="@style/beauty_order_top_rb"
+            android:drawableTop="@drawable/beauty_order_top_btn_integral_selector"
+            android:enabled="false"
+            android:text="@string/integral" />
+
+
+        <RadioButton
+            android:id="@+id/rb_party"
+            style="@style/beauty_order_top_rb"
+            android:layout_marginLeft="50dp"
+            android:drawableTop="@drawable/beauty_order_top_btn_party_selector"
+            android:text="@string/join_user" />
+
+        <RadioButton
+            android:id="@+id/rb_coupon"
+            style="@style/beauty_order_top_rb"
+            android:drawableTop="@drawable/beauty_order_top_btn_coupon_selector"
+            android:enabled="false"
+            android:text="@string/coupon" />
+
+        <RadioButton
+            android:id="@+id/rb_discount"
+            style="@style/beauty_order_top_rb"
+            android:drawableTop="@drawable/beauty_order_top_btn_discount_selector"
+            android:text="@string/discount" />
+
+        <RadioButton
+            android:id="@+id/rb_activity"
+            style="@style/beauty_order_top_rb"
+            android:drawableTop="@drawable/beauty_order_top_btn_activity_selector"
+            android:text="@string/activity" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="15dp"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_extra"
+                style="@style/beauty_order_top_rb"
+                android:drawableTop="@drawable/beauty_order_top_btn_remark_selector"
+                android:visibility="gone"
+                android:text="@string/trade_extra" />
+
+            <RadioButton
+                android:id="@+id/rb_remark"
+                style="@style/beauty_order_top_rb"
+                android:drawableTop="@drawable/beauty_order_top_btn_remark_selector"
+                android:text="@string/trade_remark" />
+
+            <RadioButton
+                android:id="@+id/rb_table"
+                style="@style/beauty_order_top_rb"
+                android:drawableTop="@drawable/beauty_order_top_btn_table_selector"
+                android:text="@string/choice_table" />
+
+
+            <Button
+                android:id="@+id/btn_clearcart"
+                style="@style/beauty_order_top_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_clearcart_selector"
+                android:text="@string/clean_shopping_cart" />
+        </LinearLayout>
+    </com.zhongmei.beauty.view.NestRadioGroup>
+
+</LinearLayout>

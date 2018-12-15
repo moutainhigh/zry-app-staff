@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@id/title"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/title_bar_height"
+    android:background="@drawable/cashier_bg_title_bar">
+
+
+    <!--<com.zhongmei.bty.basemodule.queue.TurnToOtherModuleView
+        android:id="@+id/ll_back"
+        android:layout_alignParentStart="true"
+        android:visibility="gone"
+        style="@style/title_icon_style" />-->
+
+    <ImageView
+        android:layout_toRightOf="@id/ll_back"
+        android:id="@+id/iv_title_bar_menu"
+        style="@style/title_icon_style"
+        android:layout_centerVertical="true"
+        android:scaleType="centerInside"
+        android:src="@drawable/cashier_main_menu" />
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_toRightOf="@id/iv_title_bar_menu"
+        android:layout_width="2dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/line" />
+
+    <TextView
+        android:id="@+id/tv_title_bar_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:paddingLeft="75.0dip"
+        android:paddingRight="75.0dip"
+        android:singleLine="true"
+        android:text="@string/order_dish"
+        android:textColor="@color/text_white"
+        android:textSize="22sp" />
+
+    <RelativeLayout
+        android:id="@+id/order_refresh"
+        style="@style/title_icon_style"
+        android:layout_toRightOf="@id/line">
+
+        <ImageView
+            android:id="@+id/iv_bell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/notice_icon" />
+
+        <ImageView
+            android:id="@+id/tip_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/notice_tip"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/view_notify_tip_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/notification_item_textSize2"
+            android:visibility="gone"
+            android:background="@drawable/notice_tips_number_other" />
+
+        <TextView
+            android:id="@+id/view_notify_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textColor="@color/notifycenter_tips_trade"
+            android:textSize="@dimen/notification_item_textSize2"
+            android:visibility="gone"
+            android:background="@drawable/order_tips_num_bar_other" />
+    </RelativeLayout>
+
+    <ViewSwitcher
+        android:id="@+id/viewSwitcher"
+        android:layout_width="@dimen/switcher_listview_width"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/switcher_margin_right"
+        android:background="@android:color/transparent"
+        android:visibility="invisible" />
+
+</RelativeLayout>

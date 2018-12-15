@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="229dp"
+        android:layout_height="106dp"
+        android:background="@drawable/sales_promotion_selector_bg_item_child"
+        android:padding="1dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_rule_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tv_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="16dp"
+                android:textColor="@color/color_999999"
+                android:textSize="@dimen/text_11" />
+
+            <TextView
+                android:id="@+id/tv_view_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginRight="11dp"
+                android:drawableRight="@drawable/sales_promotion_ic_view_details"
+                android:gravity="center_vertical"
+                android:text="@string/sales_promotion_view_details"
+                android:textColor="@color/sales_promotion_text_color_view_details"
+                android:textSize="@dimen/text_11"
+                android:drawablePadding="3dp" />
+
+            <TextView
+                android:id="@+id/tv_policy_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="17dp"
+                android:maxLines="1"
+                android:textColor="@color/sales_promotion_text_color_rule_name"
+                android:textSize="@dimen/text_16"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_policy_detail"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_rule_restrict"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/sales_promotion_text_color_rule_restrict"
+                    android:textSize="@dimen/text_11" />
+
+                <TextView
+                    android:id="@+id/tv_activity_dish"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="11dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/text_11" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_state_tag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|right"
+            android:scaleType="centerInside"
+            android:src="@drawable/sales_promotion_ic_selected_tag" />
+    </FrameLayout>
+</LinearLayout>

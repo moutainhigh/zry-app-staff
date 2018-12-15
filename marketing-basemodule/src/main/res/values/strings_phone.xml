@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="phone_app_name">电话</string>
+    <string name="string_phone_phone_ok">电话功能已启用</string>
+    <string name="string_phone_phone_dis">电话功能未启用</string>
+    <string name="string_phone_settings_to">点击进入电话设置</string>
+    <string name="string_phone_bind">请绑定蓝牙电话或者电话盒</string>
+
+</resources>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/pay_method_item_layout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_pay_method_item_bg"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:minHeight="100dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/pay_method_item_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/pay_ic_method_cash_normal" />
+
+    <TextView
+        android:id="@+id/pay_method_item_txv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:checked="true"
+        android:text="@string/cash"
+        android:textColor="@drawable/selector_pay_method_text_color" />
+
+</LinearLayout>

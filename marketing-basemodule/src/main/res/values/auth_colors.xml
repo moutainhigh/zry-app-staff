@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="auth_permission_verify_perssion_title">#ff7901</color>
+    <color name="auth_permission_white">#ffffff</color>
+
+</resources>

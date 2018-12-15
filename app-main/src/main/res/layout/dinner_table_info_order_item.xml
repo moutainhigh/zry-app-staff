@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="88dp"
+    android:gravity="center_horizontal|bottom"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/trade_view_back_rl"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dinner_table_info_button_selector">
+
+        <include
+            android:id="@+id/trade_view2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            layout="@layout/dinnertable_trade_item"
+            android:duplicateParentState="true" />
+
+        <ImageView
+            android:id="@+id/trade_type_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/dinner_table_wechat" />
+
+        <ImageView
+            android:id="@+id/trade_choose_iv"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:visibility="gone"
+            android:scaleType="fitXY"
+            android:layout_centerInParent="true"
+            android:src="@drawable/table_trade_choose_back" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/indicator_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dinner_table_info_order_indicator"
+        android:visibility="visible"
+        android:layout_marginTop="5dp"
+        android:paddingTop="3dp" />
+
+</LinearLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- 透明灰色虚线圆角 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <solid android:color="@color/transparent" />
+
+    <corners android:radius="4dp" />
+
+    <stroke
+        android:dashGap="2dp"
+        android:dashWidth="2dp"
+        android:width="1dp"
+        android:color="#c0c3c9" />
+
+</shape>

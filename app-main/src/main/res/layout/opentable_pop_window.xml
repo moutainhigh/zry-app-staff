@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="83dp"
+    android:layout_height="60dp"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/minus_customer_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/customer_number_minus_selector" />
+
+        <LinearLayout
+            android:layout_width="85dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/customer_num_edit_back"
+
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+
+            android:paddingBottom="8dp">
+
+            <EditText
+                android:id="@+id/customer_num_tv"
+                android:layout_width="45dp"
+                android:layout_height="match_parent"
+                android:gravity="center|right"
+                android:selectAllOnFocus="true"
+                android:cursorVisible="false"
+                android:clickable="false"
+                android:background="@android:color/transparent"
+                android:textColor="#333333"
+                android:textSize="20sp"
+                android:inputType="number"
+                android:maxLength="4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="12sp"
+                android:textColor="#333333"
+                android:text="@string/people"
+                android:gravity="center" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/add_customer_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+
+            android:src="@drawable/customer_number_add_selector"
+            android:scaleType="fitXY" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/open_table_btn"
+        android:layout_width="83dp"
+        android:layout_height="60dp"
+        android:background="@drawable/dinnertable_opentable_button_selector"
+        android:text="@string/dinner_open_tables"
+        android:textSize="@dimen/dinner_table_open_table_btn_szie"
+        android:textColor="#3f4348"
+        android:layout_gravity="center_horizontal"
+        android:visibility="visible"
+        android:layout_marginTop="0dp" />
+
+</LinearLayout>
+
+

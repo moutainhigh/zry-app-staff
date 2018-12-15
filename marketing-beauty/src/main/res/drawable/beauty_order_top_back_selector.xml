@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="false">
+        <shape>
+            <solid android:color="@color/beauty_bg_black" />
+            <corners android:radius="@dimen/beauty_btn_corner_radius" />
+            <stroke android:width="@dimen/beauty_stroke_width" android:color="@color/beauty_main_bg_color" />
+        </shape>
+    </item>
+
+
+    <item android:state_pressed="true">
+        <shape>
+            <solid android:color="@color/beauty_main_bg_color" />
+            <corners android:radius="@dimen/beauty_btn_corner_radius" />
+            <stroke android:width="@dimen/beauty_stroke_width" android:color="@color/beauty_main_bg_color" />
+        </shape>
+    </item>
+
+    <item android:state_pressed="false">
+        <shape>
+            <solid android:color="@color/beauty_bg_black" />
+            <corners android:radius="@dimen/beauty_btn_corner_radius" />
+            <stroke android:width="@dimen/beauty_stroke_width" android:color="@color/beauty_main_bg_color" />
+        </shape>
+    </item>
+</selector>

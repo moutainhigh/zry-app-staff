@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="374dp"
+    android:layout_height="@dimen/dialog_pay_ok_height"
+    android:layout_gravity="center_vertical"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical"
+    android:paddingBottom="30dp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="80dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/dinner_close"
+            android:gravity="center"
+            android:scaleType="center" />
+
+        <TextView
+            android:id="@+id/title_text_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/pay_device_connect_label"
+            android:textColor="#FF7901"
+            android:textSize="@dimen/text_22" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:text="@string/pay_please_use_handset_connect"
+        android:textColor="#32ADF6"
+        android:textSize="@dimen/text_22" />
+
+
+    <ImageView
+        android:id="@+id/showBarcode"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="12dp"
+        android:scaleType="center"
+        android:src="@drawable/get_bq_fail" />
+
+    <TextView
+        android:id="@+id/local_ip_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textColor="@color/color_999999"
+        android:textSize="@dimen/text_16" />
+</LinearLayout>

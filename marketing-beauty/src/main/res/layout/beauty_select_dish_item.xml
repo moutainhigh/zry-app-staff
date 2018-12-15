@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="53dp"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <CheckedTextView
+        android:id="@+id/checkView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/beauty_color_333333"
+        android:textSize="@dimen/text_17"
+        android:drawablePadding="10dp"
+        android:drawableLeft="@drawable/beauty_service_selecter" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/beauty_color_999999"
+        android:textSize="@dimen/text_17"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="20dp" />
+</LinearLayout>

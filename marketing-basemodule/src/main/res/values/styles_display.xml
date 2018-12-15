@@ -1,0 +1,31 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 第二屏显示 -->
+    <style name="display_txt_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:textColor">@color/display_txt_color</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="dispaly_small_txt_style" parent="@style/display_txt_style">
+        <item name="android:textSize">40sp</item>
+    </style>
+
+    <style name="dispaly_txt_small_style" parent="@style/display_txt_style">
+        <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="dispaly_txt_middle_style" parent="@style/display_txt_style">
+        <item name="android:textSize">45sp</item>
+    </style>
+
+    <style name="display_txt_large_style" parent="@style/display_txt_style">
+        <item name="android:textSize">50sp</item>
+    </style>
+
+    <style name="display_txt_orange_style" parent="@style/display_txt_large_style">
+        <item name="android:textColor">@color/display_txt_orange</item>
+    </style>
+</resources>

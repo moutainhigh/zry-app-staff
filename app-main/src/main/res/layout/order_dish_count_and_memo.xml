@@ -1,0 +1,134 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/order_dish_memo"
+            android:textColor="@color/text_pay_method"
+            android:textSize="@dimen/text_24" />
+
+        <TextView
+            android:id="@+id/tv_residue_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:singleLine="true"
+            android:textColor="#ff7733"
+            android:textSize="@dimen/text_18"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/layout.m"
+        android:layout_height="112dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="135dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/text_count"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:background="@drawable/orderdish_edit_dish_count_bg"
+                android:gravity="center"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColor="@color/orderdish_text_black"
+                android:textSize="36sp" />
+
+            <LinearLayout
+                android:id="@+id/reduce_add_layout"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_reduce"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="-1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/orderdish_edit_dish_reduce_bg"
+                    android:gravity="center"
+                    android:text="-"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/text_add"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/orderdish_edit_dish_add_bg"
+                    android:gravity="center"
+                    android:text="+"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/weight_tips"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="@string/weight_tips_str"
+                android:background="@drawable/orderdish_weight_bg"
+                android:layout_marginLeft="1dp"
+                android:textColor="#ff7733"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edit_memo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/orderdish_dlg_item_normal"
+            android:hint="@string/order_dish_add_memo_hint"
+            android:maxLength="50"
+            android:padding="10dp"
+            android:textColor="@color/orderdish_text_black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text_memo_child_arrow"
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/orderdish_dlg_item_normal"
+            android:drawableTop="@drawable/orderdish_dlg_arrow_down"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text="@string/order_dish_common_label"
+            android:textColor="@color/orderdish_text_black"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/memo_child_root_view"
+        style="@style/layout.m.m"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"></LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="54dp"
+        android:background="@color/line_gray" />
+
+</merge>

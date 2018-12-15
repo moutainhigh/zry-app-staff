@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    android:paddingLeft="28dp"
+    android:paddingRight="28dp"
+    android:paddingTop="14dp"
+    android:paddingBottom="14dp"
+    android:focusableInTouchMode="true"
+    android:background="@color/gray_bg"
+    android:orientation="horizontal">
+
+
+    <EditText
+        android:id="@+id/et_tempDishPrice"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/edit_gray_bg_selecter"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="@dimen/text_24"
+        android:focusable="true"
+        android:hint="@string/please_input_goods_value"
+        android:textColorHint="#cecece"
+        android:textColor="#32adf6"
+        android:inputType="numberDecimal"
+        android:maxLength="12"
+        android:maxLines="1" />
+
+
+    <EditText
+        android:id="@+id/et_temp_dish_weigh"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_marginLeft="14dp"
+        android:focusable="true"
+        android:background="@drawable/edit_gray_bg_selecter"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="@dimen/text_24"
+        android:hint="@string/invoice_product_count"
+        android:inputType="number"
+        android:textColorHint="#cecece"
+        android:maxLines="1"
+        android:maxLength="3"
+        android:textColor="#32adf6" />
+</LinearLayout>

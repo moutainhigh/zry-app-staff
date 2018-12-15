@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="retail_green">#2ED2AE</color>
+    <color name="retail_white">#ffffff</color>
+    <color name="retail_dark">#d2d2d2</color>
+    <color name="retail_blue">#28ACF9</color>
+    <color name="retail_blue_pressed">#2E9BDD</color>
+    <color name="retail_gray">#DFE4E9</color>
+    <color name="retail_green_pressed">#39B28F</color>
+    <color name="retail_dark_green_pressed">#DCF7F0</color>
+    <color name="retail_black">#333333</color>
+    <color name="retail_999999">#999999</color>
+    <color name="retail_dark_gray">#F6F6F6</color>
+    <color name="retail_color_40d0ae">#40d0ae</color>
+    <color name="retail_color_c3c8ce">#c3c8ce</color>
+    <color name="retail_bbbbbb">#bbbbbb</color>
+    <color name="retail_a229dc">#A229DC</color>
+    <color name="retail_b633f5">#B633F5</color>
+    <color name="retail_f5e7fc">#F5E7FC</color>
+    <color name="retail_6468fa">#6468FA</color>
+    <color name="retail_5a5eeb">#5A5EEB</color>
+    <color name="retail_e7e8ff">#E7E8FF</color>
+    <color name="color_ffe4eaee">#ffe4eaee</color>
+    <color name="color_fa9337">#FA9337</color>
+
+    <color name="retail_color_51C4FF">#51C4FF</color>
+    <color name="retail_color_4DB1E5">#4DB1E5</color>
+    <color name="retail_color_32ADF6">#32ADF6</color>
+    <color name="retail_color_2E9BDD">#2E9BDD</color>
+    <color name="retail_color_FFE6D9">#FFE6D9</color>
+
+</resources>

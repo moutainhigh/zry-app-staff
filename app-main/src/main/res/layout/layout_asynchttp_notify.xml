@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhongmei.bty.dinner.table.view.AsyncHttpNotifyView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dinner_asynchttp_notify"
+    android:visibility="gone"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.zhongmei.bty.dinner.table.view.ScrollListView
+                android:id="@+id/lv_asyncHttp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scrollbars="none"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:listSelector="@color/transparent"
+                android:cacheColorHint="@color/transparent"></com.zhongmei.bty.dinner.table.view.ScrollListView>
+
+            <CheckBox
+                android:id="@+id/cb_notifyControl"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:paddingRight="20dp"
+                android:paddingLeft="10dp"
+                android:drawableLeft="@drawable/cb_dinner_asynchttp_notify_selector"
+                android:button="@null" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_enhace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_asynchttp_enhace" />
+
+    </FrameLayout>
+
+
+</com.zhongmei.bty.dinner.table.view.AsyncHttpNotifyView>

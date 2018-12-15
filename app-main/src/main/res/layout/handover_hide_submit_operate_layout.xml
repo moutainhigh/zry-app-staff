@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:id="@+id/tips"
+        android:text="@string/submit_tip"
+        android:textSize="13.33sp" />
+
+    <TextView
+        android:id="@+id/tv_closing_time_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:text="@string/closing_handover_time_hint"
+        android:textColor="@color/text_red"
+        android:layout_marginBottom="13dp"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp">
+
+        <Button
+            android:id="@+id/handover_handover"
+            style="@style/handover_button"
+            android:layout_width="451.33dp"
+            android:background="@drawable/selector_submit_btn"
+            android:text="@string/submit_cash" />
+
+        <Button
+            android:id="@+id/handover_open_cash_box"
+            style="@style/handover_button"
+            android:layout_width="173.33dp"
+            android:layout_marginLeft="13dp"
+            android:background="@drawable/btn_yellow_selector"
+            android:text="@string/handover_open_cash_box" />
+
+        <Button
+            android:id="@+id/handover_calculator"
+            style="@style/handover_button"
+            android:layout_width="173.33dp"
+            android:layout_marginLeft="13dp"
+            android:background="@drawable/selector_calc_btn"
+            android:text="@string/handover_calculator" />
+    </LinearLayout>
+</LinearLayout>

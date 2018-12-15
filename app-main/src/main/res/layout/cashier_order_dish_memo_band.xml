@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout.w.w"
+    android:background="@drawable/orderdish_memo_pop_bg"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="350dp"
+        android:layout_height="120dp"
+        android:divider="@color/line_gray"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/order_center_list_item_bt"></ListView>
+
+</LinearLayout>

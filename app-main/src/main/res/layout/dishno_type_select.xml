@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dishno_type_select"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dish_flapper"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/function_line_onclick"
+        android:gravity="center"
+        android:text="@string/dish_flapper"
+        android:textColor="@drawable/bule_but_text_color"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/text_blue" />
+
+    <TextView
+        android:id="@+id/dish_table_number"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/function_line_onclick"
+        android:gravity="center"
+        android:text="@string/dish_table_number"
+        android:textColor="@drawable/bule_but_text_color"
+        android:textSize="18sp" />
+
+</LinearLayout>

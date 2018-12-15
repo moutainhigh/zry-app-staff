@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <!--销货退货-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sale_order_count_finish"
+            style="@style/handover_amount_tv"
+            android:text="@string/handover_sale_orders" />
+
+        <TextView
+            android:id="@+id/refund_order_count_finish"
+            style="@style/handover_amount_tv"
+            android:text="@string/handover_sale_charges" />
+    </LinearLayout>
+    <!--储值-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/sale_valuecard_count_finish"
+            style="@style/handover_amount_tv"
+            android:text="@string/handover_sale_charges" />
+
+        <TextView
+            android:id="@+id/refund_valuecard_count_finish"
+            style="@style/handover_amount_tv"
+            android:text="@string/handover_refund" />
+    </LinearLayout>
+    <!--挂账-->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/credit_num"
+            style="@style/handover_amount_tv"
+            android:text="@string/handover_creditnum_label" />
+
+        <TextView
+            android:id="@+id/credit_amount"
+            style="@style/handover_amount_tv"
+            android:text="@string/handover_creditamount_label" />
+    </LinearLayout>
+
+</LinearLayout>

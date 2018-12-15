@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:layout_width="320px"
+    android:layout_height="480px"
+    android:background="#292e37">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15px"
+        android:layout_marginLeft="12px"
+        android:layout_marginRight="12px"
+        android:layout_marginTop="15px"
+        android:background="@drawable/order_center_operate_dialog_background"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="vertical"
+        android:paddingBottom="46px"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/dp700_shopping_cart_layout_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="70px"
+            android:orientation="vertical">
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/dp700_shopping_cart_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="36px"
+                android:textStyle="bold"
+                autofit:minTextSize="24px" />
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/dp700_shopping_cart_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30px"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="36px"
+                android:textStyle="bold"
+                autofit:minTextSize="24px" />
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/dp700_shopping_cart_method"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="38px"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/glass_half"
+                android:textSize="22px"
+                android:textStyle="bold"
+                autofit:minTextSize="16px" />
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/dp700_shopping_cart_charge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20px"
+                android:ellipsize="end"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/glass_half"
+                android:textSize="22px"
+                android:textStyle="bold"
+                autofit:minTextSize="16px" />
+
+        </LinearLayout>
+
+        <com.zhongmei.bty.commonmodule.view.AutofitTextView
+            android:id="@+id/dp700_shopping_cart_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:singleLine="true"
+            android:textColor="#ff7b23"
+            android:textSize="48px"
+            android:textStyle="bold"
+            autofit:minTextSize="36px" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/dp700_shopping_cart_layout_privilege"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15px"
+        android:layout_marginLeft="12px"
+        android:layout_marginRight="12px"
+        android:layout_marginTop="15px"
+        android:background="@drawable/order_center_operate_dialog_background"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="top"
+            android:layout_marginTop="70px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/dp700_shopping_cart_account_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="22px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dp700_shopping_cart_account_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:layout_marginTop="24px"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="22px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dp700_shopping_cart_deposit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:layout_marginTop="24px"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="22px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dp700_shopping_cart_integral_cash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:layout_marginTop="24px"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="22px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dp700_shopping_cart_properties_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:layout_marginTop="24px"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="22px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dp700_shopping_cart_privilege_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:layout_marginTop="24px"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="22px"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/total_tax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24px"
+                android:layout_marginTop="24px"
+                android:includeFontPadding="false"
+                android:singleLine="true"
+                android:textColor="@color/print_text_black"
+                android:textSize="22px"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="12px"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/should_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:includeFontPadding="false"
+                android:padding="12px"
+                android:singleLine="true"
+                android:text="@string/should_pay"
+                android:textColor="#ff7b23"
+                android:textSize="24px" />
+
+            <TextView
+                android:id="@+id/dp700_shopping_cart_account_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:includeFontPadding="false"
+                android:padding="12px"
+                android:singleLine="true"
+                android:textColor="#ff7b23"
+                android:textSize="36px"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</FrameLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="20dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/paytimeoutAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:text="@string/alipaytimeout"
+            android:textColor="@color/color_666666"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:id="@+id/tv_refresh_pay_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="3dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/pay_online_getstatus_button_selector"
+            android:gravity="center"
+            android:text="@string/please_refresh"
+            android:textColor="@color/color_FF8249"
+            android:textSize="14sp"
+            android:visibility="invisible" />
+
+        <com.zhongmei.bty.basemodule.commonbusiness.view.ShowBarcodeView
+            android:id="@+id/showBarcode"
+            android:layout_width="201dp"
+            android:layout_height="201dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="48dp"
+        android:layout_marginRight="48dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_loginType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minHeight="20dp"
+            android:orientation="horizontal" />
+
+        <com.zhongmei.bty.mobilepay.views.MobilePayModeChooseView
+            android:id="@+id/choose_mode_view"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

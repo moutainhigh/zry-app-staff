@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/trade_orderdish_bg"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginBottom="14dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <ImageButton
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@null"
+            android:src="@drawable/dinner_close" />
+
+        <Button
+            android:id="@+id/btn_finish"
+            android:layout_width="68dp"
+            android:layout_height="36dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/orderdish_setmeal_submit_bg_selector"
+            android:gravity="center"
+            android:text="@string/pendingOrder"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/text_16" />
+
+        <TextView
+            android:id="@+id/tv_setmeal_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/settings_normalword"
+            android:textSize="@dimen/text_20" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="#D1D7DE" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/ll_setmeal_child"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="38dp"
+            android:layout_marginLeft="31dp"
+            android:layout_marginRight="31dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/tv_select_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="20dp"
+                android:singleLine="true"
+                android:textColor="@color/settings_normalword"
+                android:textSize="@dimen/text_16" />
+
+            <com.zhongmei.bty.snack.orderdish.view.TouchGridView
+                android:id="@+id/gv_setmeal_child_list"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="1"
+                android:columnWidth="90dp"
+                android:listSelector="@color/transparent"
+                android:numColumns="3"
+                android:scrollbarFadeDuration="500"
+                android:stretchMode="columnWidth" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#D1D7DE" />
+
+        <ScrollView
+            android:layout_width="184dp"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_setmeal_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" />
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

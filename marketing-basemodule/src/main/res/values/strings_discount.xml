@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="coupons_counsumed">卡券已核销</string>
+    <string name="coupons_expire">卡券已过期</string>
+    <string name="coupons_delete">卡券已删除</string>
+    <string name="coupons_unavailable">卡券已失效</string>
+    <string name="coupons_empty">卡券号不能为空！</string>
+    <string name="dish_discount">单菜折扣</string>
+    <string name="dish_discount_let">单菜让价</string>
+    <string name="order_free">免单</string>
+    <string name="dish_free">单菜赠送</string>
+    <string name="coupon_type_gift">礼品券</string>
+    <string name="dish_problems">问题菜品</string>
+    <string name="intergral_privilege">积分抵现</string>
+    <string name="banquet_privilege">宴请</string>
+    <string name="member_dish_discount">会员折扣</string>
+    <string name="member_dish_price">会员特价</string>
+
+</resources>

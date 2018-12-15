@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="410dp"
+    android:layout_height="490dp"
+    android:layout_gravity="center"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/pay_error_close_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/dinner_close"
+            android:gravity="center"
+            android:scaleType="center" />
+
+        <TextView
+            android:id="@+id/pay_error_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@string/pay_result_text"
+            android:textColor="#9FA0A0"
+            android:textSize="26sp"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/pay_error_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/title"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/pay_error_icon" />
+
+    <TextView
+        android:id="@+id/pay_amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/pay_error_image"
+        android:layout_marginTop="25dp"
+        android:text=""
+        android:textColor="#333333"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/pay_error_alert_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/pay_amount_text"
+        android:layout_marginTop="5dp"
+        android:text="@string/pay_error"
+        android:textColor="#333333"
+        android:textSize="35sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/pay_error_reason_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_below="@id/pay_error_alert_title"
+        android:gravity="center"
+        android:lines="2"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="#35383b"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/pay_error_repay_button"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/pay_error_repay_button_selector"
+        android:gravity="center"
+        android:text="@string/pay_repeat_dopay"
+        android:textColor="@color/text_white"
+        android:textSize="26sp" />
+
+</RelativeLayout>

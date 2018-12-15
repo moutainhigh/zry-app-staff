@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/union_pay_unreceived"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:textColor="@color/text_blue"
+        android:textSize="31sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/input_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="21dp"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="32dp"
+        android:paddingRight="32dp"
+        android:visibility="visible">
+
+        <com.zhongmei.bty.commonmodule.view.CurrencyTextView
+            android:id="@+id/cash_pay_alerttext"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dinner_pay_second_cash_pay_alertTextHeight"
+            android:background="#f4f7f9"
+            android:gravity="center"
+            android:text="@string/pay_rest_payment_text"
+            android:textColor="@color/print_text_black"
+            android:textSize="@dimen/dinner_pay_second_cash_pay_alertTextSize"
+            android:visibility="visible" />
+
+
+        <RelativeLayout
+            android:id="@+id/input"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dinner_pay_second_cash_pay_editHeight"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/cash_pay_edit_value"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/input_edittext_bg"
+                android:focusable="true"
+                android:gravity="center"
+                android:hint="@string/pay_hint_text"
+                android:singleLine="true"
+                android:textColor="@color/text_blue"
+                android:textColorHint="#C9CACA"
+                android:textSize="@dimen/dinner_pay_second_cash_pay_editTextSize"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/delete_all_text"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/card_del"
+                android:gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/card_del"
+                android:visibility="invisible" />
+
+            <ImageView
+                android:id="@+id/pos_status_icon"
+                android:layout_width="65dp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/pos_icon_offline"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/pay_fenghuo_ip_rlt"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="21dp"
+            android:background="@drawable/pay_fenghuo_hanset_connect_selector"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:background="@color/transparent"
+                android:gravity="center_vertical"
+                android:text="@string/pay_please_use_handset_connect"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/text_16" />
+
+            <TextView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/pay_fenghuo_ip_ic"
+                android:gravity="center"
+                android:textColor="@color/color_F69227"
+                android:textSize="@dimen/text_12" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <!--<TextView
+        android:id="@+id/union_pay_errortext"
+        android:layout_width="match_parent"
+        android:layout_height="28dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="10dp"
+        android:paddingLeft="45dp"
+        android:text="@string/pay_more_input_alter"
+        android:textColor="@color/text_red"
+        android:textSize="20sp"
+        android:visibility="invisible" />-->
+
+    <include layout="@layout/pay_cash_input_keyboard_layout" />
+
+</LinearLayout>

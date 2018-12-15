@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tv_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawablePadding="14dp"
+        android:drawableTop="@drawable/ic_property_empty"
+        android:text="@string/property_empty"
+        android:textSize="@dimen/text_16"
+        android:textColor="#b8c1cc"
+        android:gravity="center_horizontal" />
+</merge>

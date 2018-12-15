@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">美业</string>
+    <string name="beauty_cashier">收银台</string>
+    <string name="beauty_reserver">预约</string>
+    <string name="beauty_shopr">门店</string>
+    <string name="beauty_trade">订单</string>
+    <string name="beauty_member">会员</string>
+    <string name="beauty_report">报表</string>
+    <string name="beauty_technician">技师</string>
+    <string name="beauty_notify">通知</string>
+    <string name="beauty_refresh">刷新</string>
+    <string name="beauty_business_time_format">营业时间:%1$s</string>
+    <string name="beauty_shopinfo">商户信息:%1$s</string>
+    <string name="beauty_customer_number_hint">到店人数</string>
+    <string name="beauty_reserver_number_hint">预约单数</string>
+    <string name="beauty_trade_number_hint">订单数</string>
+    <string name="beauty_member_number_hint">新增会员</string>
+    <string name="beauty_create_trade">开单</string>
+    <string name="beauty_create_card">办卡</string>
+    <string name="beauty_buy_server">服务购买</string>
+    <string name="beauty_charge">充值</string>
+    <string name="beauty_create_member">添加会员</string>
+    <string name="beauty_create_reserver">添加预约</string>
+    <string name="beauty_today_reserver">今日预约</string>
+    <string name="beauty_unpaid_trade">待付订单</string>
+    <string name="beauty_modify">修改</string>
+    、
+    <string name="beauty_accept">接受</string>
+    <string name="beauty_delete">删除</string>
+    <string name="beauty_trade_details">进入订单</string>
+    <string name="beauty_cancel">取消</string>
+    <string name="beauty_sure">确定</string>
+    <string name="beauty_empty">暂无信息</string>
+    <string name="beauty_add_scheduling">添加排班</string>
+    <string name="beauty_order_status_unprocessed">未处理</string>
+    <string name="beauty_order_status_confirmed">已确认</string>
+
+    <string name="beauty_pay_status_unpaid">待付款</string>
+    <string name="beauty_pay_status_paiding">支付中</string>
+
+    <string name="beauty_unknow_customer">匿名客户</string>
+    <string name="beauty_delete_trade">删除订单</string>
+    <string name="eauty_bcurrency_unit">{HBF}</string>
+
+    <string name="beauty_hold_on">开发小哥哥正在努力实现该功能，敬请期待！</string>
+    <string name="beauty_no_service">暂无服务</string>
+    <string name="beauty_serial_no">流水号：</string>
+    <string name="beauty_reserver_board">预约看板</string>
+    <string name="beauty_reserver_trades">待服务</string>
+    <string name="beauty_reserver_outtime_trades">已超时</string>
+    <string name="beauty_reserver_cancel_trades">已取消</string>
+    <string name="beauty_reserver_unaccept_trades">未处理</string>
+
+    <string name="beauty_today">今天</string>
+    <string name="beauty_tomorrow">明天</string>
+    <string name="beauty_after_tomorrow">后天</string>
+    <string name="beauty_yesterdy">昨天</string>
+    <string name="beauty_allot_technical">待安排技师</string>
+
+    <string name="refresh">下拉刷新</string>
+    <string name="loadmore">加载更多...</string>
+    <string name="login_in">登录</string>
+    <string name="login_out">登出</string>
+    <string name="back">返回</string>
+    <string name="count_card">次卡</string>
+    <string name="integral">积分</string>
+    <string name="join_user">参与者</string>
+    <string name="coupon">优惠券</string>
+    <string name="discount">折扣</string>
+    <string name="activity">活动</string>
+    <string name="trade_remark">整单备注</string>
+    <string name="trade_extra">加项</string>
+    <string name="choice_table">选择工作台</string>
+    <string name="clean_shopping_cart">清除购物车</string>
+    <string name="beauty_order_center_count_service">次卡服务抵扣：%1$s(%2$s)</string>
+    <string name="beauty_coupon_enable_user">无法使用该优惠券，没有找到对应的哟欧惠劵规则！</string>
+</resources>

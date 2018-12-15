@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="entity_title">请选择要进行的操作</string>
+    <string name="entity_sale_top">售卡</string>
+    <string name="entity_refund_top">退卡</string>
+    <string name="entity_card">会员卡</string>
+    <string name="anonymous_entity">匿名卡</string>
+
+
+    <string name="entity_activation_btn">关联会员激活</string>
+    <string name="entity_create_top">新建账号</string>
+    <string name="entity_have_top">已有账号</string>
+    <string name="entity_create_btn">新建账号关联</string>
+    <string name="entity_have_btn">关联已有账号</string>
+
+</resources>

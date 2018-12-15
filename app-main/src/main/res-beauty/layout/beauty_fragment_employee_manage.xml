@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beauty_bg_gray"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/beauty_bg_white"
+        android:gravity="center"
+        android:padding="15dp"
+        android:text="排班设置"
+        android:textColor="@color/beauty_color_black"
+        android:textSize="@dimen/text_16" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/beauty_bg_white"
+        android:paddingTop="12dp">
+
+        <com.zhongmei.beauty.widgets.DrawableCenterButton
+            android:id="@+id/btn_create_trade"
+            style="@style/beauty_add_scheduling"
+            android:layout_marginLeft="27dp"
+            android:drawableLeft="@drawable/beauty_icon_add_scheduling"
+            android:text="@string/beauty_add_scheduling" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="47dp"
+            android:layout_centerInParent="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/beauty_btn_to_pre_selector" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_week_of_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="第五周"
+                    android:textColor="@color/beauty_color_black"
+                    android:textSize="@dimen/text_13" />
+
+
+                <TextView
+                    android:id="@+id/tv_date_stance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2018/03/20-2018/03/26"
+                    android:textColor="@color/beauty_color_black"
+                    android:textSize="@dimen/text_13" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/beauty_btn_to_next_selector" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View style="@style/beauty_horizontal_line"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="17dp"
+        android:background="@drawable/beauty_shape_square"
+        android:padding="1px"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="43dp"
+            android:background="@color/beauty_bg_gray_white"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/beauty_scheduling_title"
+                android:text="技师" />
+
+            <TextView
+                style="@style/beauty_scheduling_title"
+                android:text="周一" />
+
+            <TextView
+                style="@style/beauty_scheduling_title"
+                android:text="周二" />
+
+            <TextView
+                style="@style/beauty_scheduling_title"
+                android:text="周三" />
+
+            <TextView
+                style="@style/beauty_scheduling_title"
+                android:text="周四" />
+
+            <TextView
+                style="@style/beauty_scheduling_title"
+                android:text="周五" />
+
+            <TextView
+                style="@style/beauty_scheduling_title"
+                android:text="周六" />
+
+            <TextView
+                style="@style/beauty_scheduling_title"
+                android:text="周日" />
+
+            <View
+                android:layout_width="147dp"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <View style="@style/beauty_horizontal_line"></View>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lv_employee"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+
+    </LinearLayout>
+
+</LinearLayout>

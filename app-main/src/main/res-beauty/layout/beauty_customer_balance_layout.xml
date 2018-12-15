@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beauty_color_2C3031"
+    android:orientation="vertical">
+
+    <!-- title -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/beauty_color_2C3031">
+
+        <ImageView
+            android:id="@+id/customer_charging_balance_back_btn"
+            style="@style/title_icon_style"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/customer_back_icon" />
+
+        <RadioGroup
+            android:id="@+id/customer_banlance_radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/beauty_customer_title_order_bg"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/customer_banlance_rb"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/beauty_customer_title_order_left"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@string/customer_banlance"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+
+            <!--<View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/beauty_color_959798" />
+
+            <RadioButton
+                android:id="@+id/customer_card_time_rb"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@string/customer_card_time_usable"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />-->
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/beauty_color_959798" />
+
+            <RadioButton
+                android:id="@+id/customer_coupon_use_rb"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/beauty_customer_title_order_middle"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@string/customer_coupon_use"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/beauty_color_959798" />
+
+            <RadioButton
+                android:id="@+id/customer_integral_canuse_rb"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/beauty_customer_title_order_middle"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@string/customer_integral_canuse"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/beauty_color_959798" />
+
+            <RadioButton
+                android:id="@+id/customer_card_time_rb"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/beauty_customer_title_order_middle"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@string/customer_card_time"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/beauty_color_959798" />
+
+            <RadioButton
+                android:id="@+id/customer_wx_app_rb"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/beauty_customer_title_order_middle"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@string/customer_wxapp_service"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/beauty_color_959798" />
+
+            <RadioButton
+                android:id="@+id/customer_expense_rb"
+                android:layout_width="90dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/beauty_customer_title_order_right"
+                android:button="@null"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="@string/customer_expense_service"
+                android:textColor="@drawable/white_blue_text_color"
+                android:textSize="@dimen/text_16" />
+        </RadioGroup>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/customer_balance_showdow"
+        android:orientation="vertical"
+        android:id="@+id/main_content">
+
+        <!-- 余额 -->
+        <include
+            android:id="@+id/banlace_layout"
+            layout="@layout/customer_balance_listview_layout" />
+        <!--积分-->
+        <include
+            android:id="@+id/integral_layout"
+            layout="@layout/customer_integral_listview_layout" />
+
+        <include
+            android:id="@+id/expense_layout"
+            layout="@layout/customer_expense_listview_layout" />
+
+        <GridView
+            android:id="@+id/customer_coupon_gridview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="98dp"
+            android:layout_marginRight="98dp"
+            android:layout_marginTop="43dp"
+            android:horizontalSpacing="20dp"
+            android:listSelector="@color/transparent"
+            android:numColumns="4"
+            android:stretchMode="columnWidth"
+            android:verticalSpacing="20dp"
+            android:visibility="gone" />
+
+        <!-- 优惠券为空页面 -->
+        <include
+            android:id="@+id/coupon_empty_layout"
+            layout="@layout/customer_empty_layout"
+            android:visibility="gone" />
+    </LinearLayout>
+</LinearLayout>

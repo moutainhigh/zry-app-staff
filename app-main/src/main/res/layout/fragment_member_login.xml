@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingLeft="35dp"
+    android:paddingRight="35dp"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/pay_member_account"
+        android:textColor="@color/text_blue"
+        android:textSize="24sp" />
+
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_below="@+id/label"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_card_login"
+            android:layout_width="78dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/cashier_table_press"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/card_login"
+            android:textColor="@color/text_blue"
+            android:textSize="18sp"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/show_value"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_edit_bg"
+            android:cursorVisible="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:hint="@string/customer_login_hint"
+            android:inputType="number"
+            android:singleLine="true"
+            android:textColor="@color/text_blue"
+            android:textColorHint="#9FA0A0"
+            android:textSize="22sp" />
+
+
+        <ImageButton
+            android:id="@+id/btn_scan_login"
+            android:layout_width="78dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/icon_scan"
+            android:background="@drawable/cashier_table_press"
+            android:gravity="center"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/pay_number_keyboard_layout"
+        android:layout_width="match_parent"
+        android:layout_height="293dp"
+
+
+        android:layout_below="@+id/linearlayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:layout_below="@+id/include"
+        android:id="@+id/customer_verification"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_bottom_height"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/pay_dopay_btn_selector"
+        android:text="@string/orderdish_dinner_ok"
+        android:textSize="@dimen/text_24" />
+
+</RelativeLayout>

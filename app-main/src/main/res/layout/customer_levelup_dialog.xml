@@ -1,0 +1,243 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="522dp"
+        android:layout_height="588dp"
+        android:background="@drawable/dialog_bg"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="86dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/customer_uplevel"
+                android:textColor="#ff7901"
+                android:textSize="26sp" />
+
+            <ImageView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="22dp"
+                android:src="@drawable/dialog_close" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="32dp"
+            android:paddingRight="32dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+                    android:id="@+id/customer_name"
+                    style="@style/customer_dialog_line"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:hint="@string/customer_uplevel_name_hint"
+                    android:maxLength="30" />
+
+                <RadioGroup
+                    android:id="@+id/customer_edit_sex_rg"
+                    android:layout_width="162dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/customer_dialog_edit_bg"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingLeft="27dp"
+                    android:paddingRight="27dp">
+
+                    <RadioButton
+                        android:id="@+id/female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/customer_edit_female_bg"
+                        android:gravity="center" />
+
+                    <RadioButton
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="#e1e4e8"
+                        android:button="@null"
+                        android:gravity="center" />
+
+                    <RadioButton
+                        android:id="@+id/male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/customer_edit_male_bg"
+                        android:gravity="center" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:orientation="horizontal">
+
+                <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+                    android:id="@+id/customer_mobile"
+                    style="@style/customer_dialog_line"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:hint="@string/customer_upLevel_tel_hint" />
+
+                <LinearLayout
+                    android:layout_width="162dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/customer_level_up_country_heigh_bg"
+                    android:gravity="center_vertical"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/customer_country"
+                        style="@style/group_create_info_edittext_only_text"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:enabled="false"
+                        android:gravity="center_vertical"
+                        android:hint="@string/selector_country" />
+
+                    <ImageButton
+                        android:id="@+id/customer_country_btn"
+                        android:layout_width="70dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/customer_level_up_country_right_corners_bg"
+                        android:clickable="true"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/customer_down_btn" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 先暂时去掉此部分代码，在后续完善 -->
+            <!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="42dp"
+            android:layout_marginRight="42dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:text="手机"
+                android:textSize="20sp"
+                android:visibility="invisible" />
+
+            <EditText
+                android:id="@+id/et_verify_code"
+                android:layout_width="310dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/customer_edit_bg"
+                android:inputType="number"
+                android:paddingLeft="10dp" />
+
+            <Button
+                android:id="@+id/btn_get_verify_code"
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/customer_member_btn_pressed"
+                android:gravity="center"
+                android:text="@string/get_verify_code"
+                android:textColor="@color/text_blue" />
+        </LinearLayout>
+            -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/customer_birthdate"
+                    style="@style/customer_dialog_line"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="@string/customer_uplevel_birth_hint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:orientation="horizontal">
+
+                <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+                    android:id="@+id/pass_edit"
+                    style="@style/customer_dialog_line"
+                    android:layout_width="match_parent"
+                    android:hint="@string/customer_consume_password_hint"
+                    android:inputType="numberPassword"
+                    android:maxLength="6" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:orientation="horizontal">
+
+                <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
+                    android:id="@+id/pass_edit_confirm"
+                    style="@style/customer_dialog_line"
+                    android:layout_width="match_parent"
+                    android:hint="@string/customer_consume_password_again_hint"
+                    android:inputType="numberPassword"
+                    android:maxLength="6" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/level_up"
+                android:layout_width="match_parent"
+                android:layout_height="72dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/booking_dialog_print_onclick"
+                android:text="@string/level_up"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

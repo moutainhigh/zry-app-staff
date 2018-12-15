@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_round_white_large"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_customer_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dinner_pay_center_title_height">
+
+        <Button
+            android:id="@+id/btn_customer_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_separate_customer_login"
+            android:gravity="center"
+            android:paddingBottom="6dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingTop="6dp"
+            android:text="@string/dinner_customer_login_or_register"
+            android:textColor="@color/dinner_label_printed"
+            android:textSize="@dimen/dinner_pay_center_title_textSize" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_customer_login"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="@string/customer_privilege_can_use_after_login"
+            android:textColor="@color/print_text_gray"
+            android:textSize="@dimen/dinner_pay_center_title_textSize2" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_customer_info"
+                android:layout_width="match_parent"
+                android:layout_height="94dp"
+                android:layout_marginLeft="24dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="14dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_customer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/dinner_dishname_color"
+                            android:textSize="24sp" />
+
+                        <Button
+                            android:id="@+id/btn_check"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/transparent"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingTop="10dp"
+                            android:text="@string/card_switch"
+                            android:textColor="@color/notice_warm"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_card_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dinner_customer_gray"
+                        android:textSize="14sp"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tv_customer_info"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/dinner_customer_gray"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_exit_customer"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="14dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/btn_dinner_exit_customer" />
+            </RelativeLayout>
+
+            <View
+                android:id="@+id/view_top_seprator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/line_gray"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_discount"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="1dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/orderdish_select_dish_item_bg"-->
+                <!--android:drawableTop="@drawable/ic_dinner_discount"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingBottom="20dp"-->
+                <!--android:paddingTop="30dp"-->
+                <!--android:text="@string/discount"-->
+                <!--android:textColor="@color/text_black"-->
+                <!--android:textSize="18sp" />-->
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="#d8dee4" />
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_integral"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/orderdish_select_dish_item_bg"-->
+                <!--android:drawableTop="@drawable/ic_dinner_integral"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingBottom="20dp"-->
+                <!--android:paddingTop="30dp"-->
+                <!--android:text="@string/customer_integral"-->
+                <!--android:textColor="@color/text_black"-->
+                <!--android:textSize="18sp" />-->
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="#d8dee4" />
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_coupon"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginRight="1dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/orderdish_select_dish_item_bg"-->
+                <!--android:drawableTop="@drawable/ic_dinner_coupon"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingBottom="20dp"-->
+                <!--android:paddingTop="30dp"-->
+                <!--android:text="@string/customer_coupon"-->
+                <!--android:textColor="@color/text_black"-->
+                <!--android:textSize="18sp" />-->
+            </LinearLayout>
+
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.5dp"-->
+            <!--android:background="#d8dee4" />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_extra_charge"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginLeft="1dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/orderdish_select_dish_item_bg"-->
+                <!--android:drawableTop="@drawable/ic_dinner_extra_fee"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingBottom="20dp"-->
+                <!--android:paddingTop="30dp"-->
+                <!--android:text="@string/extra_charge"-->
+                <!--android:textColor="@color/text_black"-->
+                <!--android:textSize="18sp" />-->
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="#d8dee4" />
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_coupon_code"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/orderdish_select_dish_item_bg"-->
+                <!--android:drawableTop="@drawable/weixin_icon_large"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingBottom="20dp"-->
+                <!--android:paddingTop="30dp"-->
+                <!--android:text="@string/coupon_code_weixin_label"-->
+                <!--android:textColor="@color/text_black"-->
+                <!--android:textSize="18sp" />-->
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="#d8dee4" />
+
+                <!--<TextView-->
+                <!--android:id="@+id/tv_market_activity"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginRight="1dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/orderdish_select_dish_item_bg"-->
+                <!--android:drawableTop="@drawable/ic_dinner_market_activity"-->
+                <!--android:gravity="center"-->
+                <!--android:paddingBottom="20dp"-->
+                <!--android:paddingTop="30dp"-->
+                <!--android:text="@string/dinner_market_activity_label"-->
+                <!--android:textColor="@color/text_black"-->
+                <!--android:textSize="18sp" />-->
+            </LinearLayout>
+
+            <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0.5dp"-->
+            <!--android:background="#d8dee4" />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_fete"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="1dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/orderdish_select_dish_item_bg"
+                    android:drawableTop="@drawable/ic_fete"
+                    android:gravity="center"
+                    android:paddingBottom="20dp"
+                    android:paddingTop="30dp"
+                    android:text="@string/fete"
+                    android:textColor="@color/text_black"
+                    android:textSize="18sp" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="#d8dee4" />
+
+                <!-- 占位的 -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <View
+                    android:layout_width="0.5dp"
+                    android:layout_height="match_parent"
+                    android:background="#d8dee4" />
+
+                <!-- 占位的 -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_customer_privilege"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="26dp"
+                android:paddingRight="26dp"
+                android:visibility="gone">
+
+                <RelativeLayout
+                    android:id="@+id/rl_face"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:background="@drawable/dinner_integral_item_bg">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_face"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/customer_face"
+                        android:textColor="@color/print_text_black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_face_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_integral_arrow" />
+
+                    <TextView
+                        android:id="@+id/tv_face"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@id/iv_face_arrow"
+                        android:textColor="@color/notice_warm"
+                        android:textSize="16sp"
+                        tools:text="未认证" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_member_content_separator1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_integral"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:background="@drawable/dinner_integral_item_bg">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_integral"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/customer_integral"
+                        android:textColor="@color/print_text_black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_integral_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_integral_arrow" />
+
+                    <TextView
+                        android:id="@+id/tv_integral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@id/iv_integral_arrow"
+                        android:textColor="@color/notice_warm"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_face_separator"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:background="@drawable/dinner_integral_item_bg">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_coupon"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/customer_coupon"
+                        android:textColor="@color/print_text_black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_coupon_arrow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_integral_arrow" />
+
+                    <TextView
+                        android:id="@+id/tv_coupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_toLeftOf="@id/iv_coupon_arrow"
+                        android:textColor="@color/notice_warm"
+                        android:textSize="16sp" />
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_member_content_separator0"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_gray" />
+
+                <RelativeLayout
+                    android:id="@+id/rl_memo"
+                    android:layout_width="match_parent"
+                    android:layout_height="43dp"
+                    android:background="@drawable/dinner_integral_item_bg">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:drawableLeft="@drawable/ic_like_or_remark"
+                        android:drawablePadding="10dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/customer_more"
+                        android:textColor="@color/print_text_black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_memo_arraw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_integral_arrow" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <include layout="@layout/fragment_dinner_privliges_extra_view" />
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/done_save_bt"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dinner_bottom_height2"
+            android:background="@drawable/btn_green_selector"
+            android:text="@string/done_save_bt"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/pay_shupcatr_bottom_btn_size" />
+    </LinearLayout>
+</LinearLayout>

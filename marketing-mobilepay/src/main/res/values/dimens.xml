@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="corner_card">6dp</dimen>
+    <dimen name="pay_bottom_height">74dp</dimen>
+    <dimen name="pay_bottom_height2">54dp</dimen>
+    <!--支付页面-->
+    <dimen name="dinner_pay_left_title_textSize">22sp</dimen>
+    <dimen name="dinner_pay_left_title_textSize2">28sp</dimen>
+
+    <dimen name="dinner_pay_center_title_height">90dp</dimen>
+    <dimen name="dinner_pay_center_title_textSize">16sp</dimen>
+    <dimen name="dinner_pay_center_title_textSize2">12sp</dimen>
+    <dimen name="dinner_pay_center_item_height">134dp</dimen>
+    <dimen name="dinner_pay_center_item_textSize">14sp</dimen>
+    <dimen name="dinner_pay_center_item_padding">24dp</dimen>
+
+    <dimen name="dinner_pay_right_title_textSize">16sp</dimen>
+    <dimen name="dinner_pay_right_title_textSize2">29sp</dimen>
+    <dimen name="dinner_pay_right_title_btnWidth">50dp</dimen>
+    <dimen name="dinner_pay_right_title_btnHeight">31dp</dimen>
+    <dimen name="dinner_pay_right_title_btnSize">15sp</dimen>
+    <dimen name="dinner_pay_right_title_textSize3">16sp</dimen>
+    <dimen name="dinner_pay_right_payment_height">100dp</dimen>
+
+    <dimen name="dinner_pay_second_cash_pay_alertTextHeight">30dp</dimen>
+    <dimen name="dinner_pay_second_cash_pay_alertTextSize">18sp</dimen>
+    <dimen name="dinner_pay_second_cash_pay_editHeight">60dp</dimen>
+    <dimen name="dinner_pay_second_cash_pay_editTextSize">22sp</dimen>
+    <dimen name="dinner_pay_second_keyboard_marginBottom">40dp</dimen>
+
+    <!--储值支付界面 挂账支付界面-->
+    <dimen name="dinner_pay_customerLogin_titleSize">24sp</dimen>
+    <dimen name="dinner_pay_customerLogin_linearLayout_height">58dp</dimen>
+    <dimen name="dinner_pay_customerLogin_btnCardLogin_textSize">16sp</dimen>
+    <dimen name="dinner_pay_customerLogin_show_value_textSize">22sp</dimen>
+    <dimen name="dinner_pay_customerLogin_btn_marginTop">28dp</dimen>
+    <dimen name="dinner_pay_customerLogin_btn_height">58dp</dimen>
+    <dimen name="dinner_pay_customerLogin_btnSize">24sp</dimen>
+
+    <dimen name="pay_shupcatr_bottom_btn_size">24sp</dimen>
+    <dimen name="pay_lagpay_buttom_size">30sp</dimen>
+    <dimen name="btn_bottom_height">58dp</dimen>
+</resources>

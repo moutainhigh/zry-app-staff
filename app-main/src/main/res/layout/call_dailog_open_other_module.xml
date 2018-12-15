@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/call_dialog_down_bg"
+    android:gravity="center_horizontal"
+    android:paddingRight="104dp"
+    android:paddingLeft="104dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        style="@style/call_customer_detail_layout"
+
+        android:layout_weight="1"
+        android:id="@+id/call_ll_customer">
+
+        <ImageView
+            style="@style/call_customer_detail_pic_layout"
+            android:src="@drawable/call_customer_detail" />
+
+        <TextView
+            style="@style/call_customer_detail_text_layout"
+            android:text="@string/call_dialog_customer_detail" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/call_customer_detail_layout"
+        android:layout_weight="1"
+        android:id="@+id/call_ll_waimai">
+
+        <ImageView
+            style="@style/call_customer_detail_pic_layout"
+            android:src="@drawable/call_create_waimai" />
+
+        <TextView
+            style="@style/call_customer_detail_text_layout"
+            android:text="@string/call_dialog_create_takeout" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/call_customer_detail_layout"
+        android:id="@+id/call_ll_book"
+        android:layout_weight="1">
+
+        <ImageView
+            style="@style/call_customer_detail_pic_layout"
+            android:src="@drawable/call_create_book" />
+
+        <TextView
+            style="@style/call_customer_detail_text_layout"
+            android:text="@string/call_dialog_create_booking" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/call_customer_detail_layout"
+        android:layout_weight="1"
+        android:id="@+id/call_ll_queue">
+
+        <ImageView
+            style="@style/call_customer_detail_pic_layout"
+            android:src="@drawable/call_create_queue" />
+
+        <TextView
+            style="@style/call_customer_detail_text_layout"
+            android:text="@string/call_dialog_create_queue" />
+
+    </LinearLayout>
+
+</LinearLayout>

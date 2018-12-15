@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#FFFFFF"
+    android:paddingLeft="-410dp">
+
+    <View
+        android:id="@+id/topline"
+        style="@style/style_topline" />
+
+    <!-- 划菜 -->
+    <include
+        android:id="@+id/slide_layout"
+        layout="@layout/dinner_shopcart_item_slide"
+        android:layout_width="409dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true" />
+
+
+    <!-- 菜名 -->
+    <include
+        android:id="@+id/dishView"
+        layout="@layout/dinner_west_shopcart_item_dish_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topline"
+        android:layout_toRightOf="@id/slide_layout" />
+
+    <!-- 退菜明细 -->
+
+    <include
+        android:id="@+id/return_dish_ll"
+        layout="@layout/dinner_shopcart_item_return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dishView"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="409dp" />
+
+    <!--<LinearLayout-->
+    <!--android:id="@+id/dishTasteView"-->
+    <!--android:layout_width="fill_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@id/return_dish_ll"-->
+    <!--android:gravity="center_vertical"-->
+    <!--android:orientation="vertical"-->
+    <!--android:layout_marginLeft="409dp"-->
+    <!--&gt;</LinearLayout>-->
+
+
+</RelativeLayout>

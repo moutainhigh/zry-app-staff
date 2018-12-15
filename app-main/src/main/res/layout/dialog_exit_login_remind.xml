@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/commonmodule_layout.m.m"
+    android:gravity="center">
+
+    <RelativeLayout
+        android:layout_width="@dimen/commonmodule_dialog_common_weight"
+        android:layout_height="@dimen/commonmodule_dialog_common_height"
+        android:background="@drawable/calmui_dialog_background">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/commonmodule_dialog_common_margin_top"
+            android:src="@drawable/commonmodule_dialog_icon_hint" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <TextView
+                android:id="@+id/common_dialog_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="@string/dialog_exit_remind_title"
+                android:textColor="@color/commonmodule_text_black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/common_dialog_message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:textColor="@color/commonmodule_text_color_gray"
+                android:textSize="@dimen/commonmodule_text_18"
+                android:visibility="gone"
+                tools:text="Message" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/negative_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/commonbusiness_dialog_multi_choice_button_bottom"
+                android:text="@string/dialog_exit_remind_button"
+                android:textColor="@color/commonmodule_text_white"
+                android:textSize="21sp"
+                android:visibility="visible" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

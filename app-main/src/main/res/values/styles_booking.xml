@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="booking_create_keyboard">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/orderdish_dlg_item_selector</item>
+        <item name="android:contentDescription">@null</item>
+    </style>
+
+    <style name="top_category_scroll_view_item_text">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="spinner_style">
+        <item name="android:layout_height">@dimen/booking_create_spinner_height</item>
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:textColor">@color/booking_special_text_color</item>
+        <item name="android:background">@drawable/booking_create_spinner_bg</item>
+        <item name="android:popupBackground">@drawable/button_gray_bg</item>
+        <item name="android:keepScreenOn">false</item>
+        <item name="android:divider">@drawable/list_divider</item>
+        <item name="android:dividerHeight">1px</item>
+        <item name="android:dropDownSelector">@android:drawable/list_selector_background</item>
+    </style>
+
+    <style name="commone_btn_style">
+        <item name="android:background">@drawable/button_gray_bg_selecter</item>
+        <item name="android:layout_height">@dimen/booking_create_edit_height</item>
+        <item name="android:textSize">@dimen/text_22</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="edit_style">
+        <item name="android:background">@drawable/booking_detail_bg</item>
+        <item name="android:layout_height">@dimen/booking_create_edit_height</item>
+        <item name="android:textSize">@dimen/text_24</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/text_color_black</item>
+        <item name="android:textColorHint">@color/text_hint_color</item>
+        <item name="android:paddingStart">20dp</item>
+    </style>
+
+    <style name="style_label">
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:textColor">@color/booking_special_text_color</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="text_label_style">
+        <item name="android:textSize">@dimen/text_22</item>
+        <item name="android:textColor">@color/booking_label_color</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="text_small_label_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/booking_label_color</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="tv_title_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textColor">@color/text_white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="text_red_style" parent="@style/text_label_style">
+        <item name="android:textColor">@color/text_import_color</item>
+        <item name="android:textSize">@dimen/s_text_24</item>
+    </style>
+
+    <style name="title_icon_style">
+        <item name="android:background">@drawable/dinner_table_info_button_selector</item>
+        <item name="android:layout_width">70dp</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="booking_menu_name">
+
+    </style>
+</resources>

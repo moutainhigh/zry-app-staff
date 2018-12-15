@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingTop="5dp">
+
+    <RelativeLayout
+        android:id="@+id/trade_view_back_rl"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dinner_table_info_button_selector">
+
+        <include
+            android:id="@+id/trade_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            layout="@layout/move_dish_dragview"
+            android:duplicateParentState="true" />
+
+        <ImageView
+            android:id="@+id/trade_type_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/dinner_table_wechat"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/indicator_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/dinner_table_info_order_indicator"
+        android:visibility="visible"
+        android:paddingTop="3dp" />
+
+</LinearLayout>

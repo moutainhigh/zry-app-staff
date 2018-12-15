@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="8dp"
+    android:background="@drawable/customer_card_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_titlebar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_bar_height"
+        android:background="@color/beauty_bg_white"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:paddingRight="2dp">
+        <!--android:layout_width="@dimen/title_bar_menu_button_width"-->
+        <!--<com.zhongmei.bty.basemodule.queue.TurnToOtherModuleView
+            android:id="@+id/ll_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />-->
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include
+                layout="@layout/common_title_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left" />
+
+            <RadioGroup
+                android:id="@+id/process_display_group"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/title_bar_tab_height"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/process_btn"
+                    android:layout_width="@dimen/title_bar_tab_width"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/radiobutton_left"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/wait_for_process"
+                    android:textColor="@color/handover_textcolor_selector"
+                    android:textSize="@dimen/order_center_toolbar_item_size" />
+
+                <RadioButton
+                    android:id="@+id/sales_note_btn"
+                    android:layout_width="@dimen/title_bar_tab_width"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/radiobutton_right"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:text="@string/sales_note"
+                    android:textColor="@color/handover_textcolor_selector"
+                    android:textSize="@dimen/order_center_toolbar_item_size" />
+            </RadioGroup>
+
+            <RadioGroup
+                android:visibility="gone"
+                android:id="@+id/bind_delivery_user_and_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/process_delivery_user"
+                    android:layout_width="@dimen/title_bar_tab_width"
+                    android:layout_height="@dimen/title_bar_tab_height"
+                    android:background="@drawable/radiobutton_left"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/order_center_process_delivery_user"
+                    android:textColor="@color/handover_textcolor_selector"
+                    android:textSize="@dimen/order_center_toolbar_item_size" />
+
+                <RadioButton
+                    android:id="@+id/process_send"
+                    android:layout_width="@dimen/title_bar_tab_width"
+                    android:layout_height="@dimen/title_bar_tab_height"
+                    android:background="@drawable/radiobutton_right"
+                    android:button="@null"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:text="@string/order_center_detail_waiting_create"
+                    android:textColor="@color/handover_textcolor_selector"
+                    android:textSize="@dimen/order_center_toolbar_item_size" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tv_list_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:textColor="@color/color_333333"
+                android:visibility="gone"
+                android:paddingTop="7dp"
+                android:paddingBottom="15dp"
+                android:text="订单中心" />
+
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/beauty_bg_white"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/order_center_list_child_tab_layout"
+            android:layout_width="match_parent"
+            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
+            android:background="@drawable/order_center_child_tab_bg">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/order_center_child_tab_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+            <LinearLayout
+                android:id="@+id/order_center_search_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingBottom="10dp"
+                android:paddingLeft="14dp"
+                android:paddingTop="10dp"
+                android:visibility="gone">
+                <!--此处为了让显示和隐藏搜索右侧筛选无抖动,所以嵌套了一层-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/order_center_search_bg">
+
+                    <TextView
+                        android:id="@+id/order_center_search_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:drawablePadding="5dp"
+                        android:drawableRight="@drawable/ordercenter_searchtype_arrow"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/order_center_list_search_btn_padding"
+                        android:paddingRight="@dimen/order_center_list_search_btn_padding2"
+                        android:text="@string/all"
+                        android:textColor="@color/text_red_2"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_vertical"
+                        android:background="#d8dee5" />
+
+                    <EditText
+                        android:id="@+id/order_center_search_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/transparent"
+                        android:maxLength="30"
+                        android:maxLines="1"
+                        android:padding="3dp"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/square_account_filter_layout"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingLeft="14dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_square_account_filter_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/order_center_list_square_account_tip"
+                    android:textColor="@color/text_color_black"
+                    android:textSize="16sp" />
+
+                <RadioGroup
+                    android:id="@+id/waiter_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <RadioButton
+                        android:id="@+id/all_waiter"
+                        android:layout_width="110dp"
+                        android:layout_height="22dp"
+                        android:button="@null"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:textColor="@color/text_pay_other_black"
+                        android:text="@string/all_waiter"
+                        android:drawableLeft="@drawable/order_center_radio_btn"
+                        android:textSize="16px" />
+
+                    <RadioButton
+                        android:id="@+id/select_waiter"
+                        android:layout_width="120dp"
+                        android:layout_height="22dp"
+                        android:layout_marginLeft="12dp"
+                        android:button="@null"
+                        android:checked="false"
+                        android:gravity="center"
+                        android:textColor="@color/text_pay_other_black"
+                        android:drawableLeft="@drawable/order_center_radio_btn"
+                        android:text="@string/select_waiter"
+                        android:drawableRight="@drawable/pull_down_arrow"
+                        android:textSize="16px" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/order_search_btn"
+                    android:layout_width="54dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/order_center_search"
+                    android:scaleType="centerInside" />
+
+                <ImageView
+                    android:id="@+id/order_filter_btn"
+                    android:layout_width="54dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/order_center_filter"
+                    android:visibility="gone"
+                    android:scaleType="centerInside" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/filter_tip_layout"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/order_center_filter_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:textColor="#a3aeb5"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/order_center_filter_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/order_center_filter_close_icon" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/divide_line"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.01">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/order_center_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:scrollbars="none" />
+
+            <ImageView
+                android:id="@+id/order_center_list_empty_view"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/no_order_view"
+                android:visibility="gone" />
+
+            <com.zhongmei.bty.cashier.ordercenter.view.LoadingSmallView_
+                android:id="@+id/loading_view"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/order_center_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="20dp"
+            android:textColor="#999999"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/square_account_layout"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:visibility="gone">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/dotted_line" />
+            <!--清账按钮-->
+            <TextView
+                android:id="@+id/square_account"
+                android:layout_width="110dp"
+                android:layout_height="38dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="23dp"
+                android:background="@drawable/round_green_rectangle"
+                android:gravity="center"
+                android:text="@string/square_account"
+                android:textColor="#48cfae"
+                android:textSize="17sp" />
+
+            <ToggleButton
+                android:id="@+id/take_meal_notice_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="28dp"
+                android:background="@android:color/transparent"
+                android:button="@drawable/cashier_toggle_button"
+                android:checked="false"
+                android:text=""
+                android:textOff=""
+                android:textOn="" />
+
+            <TextView
+                android:id="@+id/tak_meal_notice_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:layout_marginRight="12dp"
+                android:layout_toLeftOf="@id/take_meal_notice_button"
+                android:text="@string/take_meal_notice"
+                android:textColor="#555555"
+                android:textSize="16sp" />
+            <!--全部选择-->
+            <CheckBox
+                android:id="@+id/order_center_select_check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/order_center_check_box"
+                android:button="@null"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/order_center_select_tip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="14dp"
+                android:layout_toRightOf="@id/order_center_select_check_box"
+                android:text="@string/select_all"
+                android:textColor="#555555"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/confirm_square_account"
+                android:layout_width="107dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/sel_order_center_list_bind_delivery_user"
+                android:gravity="center"
+                android:text="@string/sender_order_clean_ok"
+                android:textColor="@color/color_25BE98"
+                android:textSize="17sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/order_center_cancel"
+                android:layout_width="107dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/confirm_square_account"
+                android:background="@drawable/sel_order_center_list_bind_delivery_user_cancel"
+                android:gravity="center"
+                android:text="@string/common_cancel"
+                android:textColor="@color/color_E8470B"
+                android:textSize="17sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+        <!--绑定配送员-->
+        <RelativeLayout
+            android:id="@+id/rl_bind_delivery_user"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="78dp">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:background="@drawable/dotted_line" />
+
+            <TextView
+                android:id="@+id/tv_bind_delivery_user_and_send"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:minWidth="134dp"
+                android:padding="5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/sel_order_center_list_bind_delivery_user"
+                android:gravity="center"
+                android:text="@string/order_center_list_bind_delivery_user_and_send"
+                android:textColor="@color/color_25BE98"
+                android:textSize="17sp"
+                android:layout_marginLeft="23dp" />
+
+            <TextView
+                android:id="@+id/tv_order_center_koubei_verification"
+                android:layout_width="99dp"
+                android:text="@string/order_center_koubei_verification"
+                android:gravity="center"
+                android:textSize="17sp"
+                android:layout_centerVertical="true"
+                android:visibility="gone"
+                android:layout_marginStart="16dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:background="@drawable/sel_order_center_list_bind_delivery_user_cancel"
+                android:textColor="@color/color_E8470B"
+                android:drawableStart="@drawable/ic_verification_scan_small"
+                android:layout_toEndOf="@id/tv_bind_delivery_user_and_send"
+                android:layout_height="40dp" />
+
+            <!--全部选择-->
+            <CheckBox
+                android:id="@+id/order_center_delivery_user_select_all_chk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="23dp"
+                android:background="@drawable/order_center_check_box"
+                android:button="@null"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/order_center_delivery_user_select_all_tip_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/order_center_delivery_user_select_all_chk"
+                android:text="@string/select_all"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_16"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/order_center_delivery_user_bind_confirm_tv"
+                android:layout_width="107dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/sel_order_center_list_bind_delivery_user"
+                android:gravity="center"
+                android:text="@string/order_center_list_bind_delivery_user"
+                android:textColor="@color/color_25BE98"
+                android:textSize="@dimen/text_18"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/order_center_delivery_user_bind_cancel_tv"
+                android:layout_width="107dp"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:layout_toLeftOf="@id/order_center_delivery_user_bind_confirm_tv"
+                android:background="@drawable/sel_order_center_list_bind_delivery_user_cancel"
+                android:gravity="center"
+                android:text="@string/common_cancel"
+                android:textColor="@color/color_FF8123"
+                android:textSize="@dimen/text_18"
+                android:visibility="gone" />
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

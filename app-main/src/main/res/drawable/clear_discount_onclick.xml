@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--    <item android:drawable="@drawable/clear_discount_focused" android:state_selected="true"/>
+        <item android:drawable="@drawable/clear_discount_focused" android:state_pressed="true"/>
+        <item android:drawable="@drawable/clear_discount_normal" android:state_enabled="false"/>
+        <item android:drawable="@drawable/clear_discount_normal"/>-->
+
+    <item android:state_selected="true">
+        <shape>
+            <stroke android:color="#fdaf33" android:width="0.5dp" />
+            <corners android:radius="20dp" />
+            <solid android:color="@color/color_ffffff" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+            <stroke android:color="#fdaf33" android:width="0.5dp" />
+            <corners android:radius="20dp" />
+            <solid android:color="@color/color_ffffff" />
+        </shape>
+    </item>
+    <item android:state_pressed="false">
+        <shape>
+            <stroke android:color="#333333" android:width="0.5dp" />
+            <corners android:radius="20dp" />
+            <solid android:color="@color/color_ffffff" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <stroke android:color="#333333" android:width="0.5dp" />
+            <corners android:radius="20dp" />
+            <solid android:color="@color/color_ffffff" />
+        </shape>
+    </item>
+
+</selector>

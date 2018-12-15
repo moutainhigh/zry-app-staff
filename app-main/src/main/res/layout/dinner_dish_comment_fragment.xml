@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@drawable/trade_orderdish_bg"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp">
+
+        <TextView
+            android:id="@+id/text_title1"
+            style="@style/layout.w.w"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:singleLine="true"
+            android:text="@string/orderAllRemark"
+            android:textColor="#6B6D6C"
+            android:textSize="30sp" />
+
+        <ImageButton
+            android:id="@+id/close_iv"
+            style="@style/layout.w.w"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/dinner_close" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginBottom="30dp"
+        android:background="#DADBDA" />
+
+    <LinearLayout
+        android:id="@+id/content_ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp">
+
+        <com.zhongmei.bty.dinner.table.view.CommentsView
+            android:id="@+id/commentsview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp" />
+
+        <EditText
+            android:id="@+id/content_edit"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:layout_margin="20dp"
+            android:background="@drawable/orderdish_dlg_item_normal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:hint="@string/remark_hint_text"
+            android:inputType="textMultiLine"
+            android:maxLength="50"
+            android:padding="13dp"
+            android:textColor="@color/orderdish_text_black"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_print_memo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/btn_green_selector"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginRight="20dp"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/text_22"
+        android:text="@string/print_order_memo" />
+
+</LinearLayout>

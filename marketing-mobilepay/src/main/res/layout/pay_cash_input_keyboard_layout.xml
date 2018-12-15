@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom|center_horizontal"
+    android:layout_marginBottom="@dimen/dinner_pay_second_keyboard_marginBottom"
+    android:background="@drawable/pay_cash_keyboard_bg"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="1dp"
+        android:paddingLeft="1dp"
+        android:paddingTop="1dp">
+
+        <TextView
+            android:id="@+id/one"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num1_bg"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/four"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="4"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/seven"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:id="@+id/dot"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_numdot_bg"
+            android:scaleType="centerInside"
+            android:src="@drawable/pay_cash_keyboard_dot" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="1dp"
+        android:paddingTop="1dp">
+
+        <TextView
+            android:id="@+id/two"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+
+        <TextView
+            android:id="@+id/five"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/eight"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/zero"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingBottom="1dp"
+        android:paddingTop="1dp">
+
+
+        <TextView
+            android:id="@+id/three"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/six"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="6"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+        <TextView
+            android:id="@+id/nine"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:gravity="center"
+            android:text="9"
+            android:textColor="#333333"
+            android:textSize="26sp" />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/pay_cash_keyboard_num2_bg"
+            android:scaleType="centerInside"
+            android:src="@drawable/delete_icon" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/pay"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_margin="1dp"
+        android:layout_weight="1"
+        android:background="@drawable/pay_erase_selected_noborder_bg"
+        android:enabled="false"
+        android:text="@string/pay_settle_accounts"
+        android:textColor="@color/text_white"
+        android:textSize="27sp" />
+
+</LinearLayout>

@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/beauty_waiter_dialog_bg">
+
+    <RelativeLayout
+        android:layout_width="480dp"
+        android:layout_height="576dp">
+
+        <LinearLayout
+            android:id="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="添加预约"
+                    android:textColor="@color/beauty_color_333333"
+                    android:textSize="@dimen/text_20" />
+
+                <ImageButton
+                    android:id="@+id/btn_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_property_close" />
+            </RelativeLayout>
+
+            <View style="@style/beauty.waiterdialog.h_line" />
+
+            <LinearLayout
+                android:id="@+id/ll_customer"
+                android:layout_width="match_parent"
+                android:layout_height="53dp"
+                android:background="@color/beauty_color_f4f4f4"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="27dp"
+                android:paddingRight="27dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_sex"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/beauty_customer_male" />
+
+
+                <TextView
+                    android:id="@+id/tv_customer_name_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="13dp"
+                    android:src="@drawable/beauty_customer_male"
+                    android:textColor="@color/beauty_color_000000"
+                    android:textSize="@dimen/text_17"
+                    android:textStyle="bold"
+                    tools:text="王先生 13889987656" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <View style="@style/beauty.waiterdialog.h_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <LinearLayout
+                    style="@style/beauty_layout_w_w_h_w"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_cancel"
+                        style="@style/beauty.booking.create.button"
+                        android:background="@drawable/beauty_booking_btn_cancel_selector"
+                        android:text="取消"
+                        android:textColor="@color/beauty_color_999999" />
+
+                    <Button
+                        android:id="@+id/btn_submit"
+                        style="@style/beauty.booking.create.button"
+                        android:layout_marginLeft="13dp"
+                        android:background="@drawable/beauty_booking_btn_submit_selector"
+                        android:text="完成"
+                        android:textColor="@color/beauty_color_white" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/slv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_bottom"
+            android:layout_below="@id/ll_title"
+            android:fitsSystemWindows="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollbars="none">
+
+            <LinearLayout style="@style/beauty.booking.create.content_layout">
+
+                <LinearLayout
+                    android:id="@+id/ll_booking_phone"
+                    style="@style/beauty.booking.create.item_layout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/beauty.booking.create.text_red"
+                        android:text="    *" />
+
+                    <TextView
+                        style="@style/beauty.booking.create.text_title"
+                        android:text="手机号：" />
+
+                    <EditText
+                        android:id="@+id/et_phone"
+                        style="@style/beauty.booking.create.edit_input"
+                        android:hint="请输入手机号码"
+                        android:inputType="phone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_booking_customer"
+                    style="@style/beauty.booking.create.item_layout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/beauty.booking.create.text_red"
+                        android:text="    *" />
+
+                    <TextView
+                        style="@style/beauty.booking.create.text_title"
+                        android:text="预约人：" />
+
+                    <LinearLayout
+                        android:layout_width="300dp"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/et_customer_name"
+                            style="@style/beauty.booking.create.edit_input"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:hint="请输入预约客户" />
+
+                        <!-- 性别 -->
+                        <ImageView
+                            android:id="@+id/iv_male"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/beauty_customer_sex_male_button"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/beauty_booking_man_selected" />
+
+                        <ImageView
+                            android:id="@+id/iv_female"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="-1dp"
+                            android:background="@drawable/beauty_customer_sex_female_button"
+                            android:scaleType="centerInside"
+                            android:src="@drawable/beauty_booking_woman_notselected" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/beauty.booking.create.item_layout"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/beauty.booking.create.text_red"
+                        android:text="*" />
+
+                    <TextView
+                        style="@style/beauty.booking.create.text_title"
+                        android:text="到店时间：" />
+
+                    <LinearLayout
+                        android:id="@+id/rl_time"
+                        style="@style/beauty.booking.create.child_item_layout">
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            style="@style/beauty.booking.create.child_item_text"
+                            android:text="请输入到店时间" />
+
+                        <ImageView style="@style/beauty.booking.create.child_item_left_arrow" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/beauty.booking.create.item_layout"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:minHeight="47dp">
+
+                    <TextView
+                        style="@style/beauty.booking.create.text_title"
+                        android:layout_gravity="top"
+                        android:layout_marginTop="12dp"
+                        android:text="  预约服务：" />
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_service"
+                            style="@style/beauty_layout_w_m_h_w"
+                            android:visibility="gone" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_service"
+                            style="@style/beauty.booking.create.child_item_layout"
+                            android:layout_height="47dp"
+                            android:layout_gravity="top">
+
+                            <TextView
+                                style="@style/beauty.booking.create.child_item_text"
+                                android:text="请选择预约服务" />
+
+                            <ImageView style="@style/beauty.booking.create.child_item_left_arrow" />
+                        </LinearLayout>
+                    </FrameLayout>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/ll_waiter"
+                        style="@style/beauty.booking.create.item_layout"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:text="  预约技师：" />
+
+                        <LinearLayout
+                            android:id="@+id/rl_waiter"
+                            style="@style/beauty.booking.create.child_item_layout">
+
+                            <TextView
+                                android:id="@+id/tv_waiter"
+                                style="@style/beauty.booking.create.child_item_text"
+                                android:text="请选择技师" />
+
+                            <ImageView style="@style/beauty.booking.create.child_item_left_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/ll_waiter"
+                        android:layout_marginTop="7dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:text="  预约技师："
+                            android:visibility="invisible" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:text="*预约需在“预约看板”展示，请选择技师"
+                            android:textColor="@color/beauty_color_FE6A4D"
+                            android:textSize="@dimen/text_12" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                    style="@style/beauty.booking.create.item_layout"
+                    android:layout_marginBottom="@dimen/beauty_booking_create_item_top"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        style="@style/beauty.booking.create.text_title"
+                        android:text="  订单备注：" />
+
+                    <EditText
+                        android:id="@+id/et_remark"
+                        style="@style/beauty.booking.create.edit_input"
+                        android:hint="请输入订单备注" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</FrameLayout>

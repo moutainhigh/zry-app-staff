@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhongmei.bty.buffet.table.view.BuffetTableView android:id="@+id/dinnertable_shade"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:layout_width="124dp"
+    android:layout_height="124dp">
+
+    <LinearLayout
+        android:id="@+id/dinnertable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="4dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_table_header"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:minHeight="28dp"
+            android:layout_marginRight="2dp"
+            android:paddingLeft="7dp"
+            android:paddingRight="5dp">
+
+            <com.zhongmei.bty.commonmodule.view.AutofitTextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.65"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:textSize="@dimen/dinner_table_name_textsize"
+                autofit:minTextSize="10sp" />
+
+            <TextView
+                android:id="@+id/number"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.35"
+                android:gravity="bottom|right"
+                android:layout_marginBottom="2dp"
+                android:singleLine="true"
+                android:textColor="#A4FFFFFF"
+                android:textSize="@dimen/dinner_table_number_textsize" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/dinnertable_trades_group"
+            android:layout_gravity="bottom"
+            android:paddingLeft="9dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iv_empty_table"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/dinnertable_empty_icon"
+                android:layout_width="42dp"
+                android:layout_height="42dp" />
+
+            <ImageView
+                android:id="@+id/iv_done_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/dinner_tables_done_icon" />
+
+            <TextView
+                android:id="@+id/tv_trade_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textColor="@color/text_white"
+                android:background="#828da0"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                android:textSize="10sp" />
+
+            <TextView
+                android:id="@+id/tv_trade_amount"
+                android:layout_marginTop="11dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_trade_time"
+                android:layout_below="@id/tv_trade_amount"
+                android:layout_centerHorizontal="true"
+                android:drawablePadding="3dp"
+                android:textSize="14sp"
+                android:textColor="@color/text_black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <!--<ImageView-->
+            <!--android:id="@+id/trade_back_iv"-->
+            <!--android:layout_width="56dp"-->
+            <!--android:layout_height="57dp"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:layout_marginLeft="6dp"-->
+            <!--android:layout_marginTop="7dp"-->
+            <!--android:src="@drawable/table_trade_back"/>-->
+
+            <!--<include-->
+            <!--android:id="@+id/dinner_table_order_include"-->
+            <!--layout="@layout/dinnertable_trade"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--/>-->
+
+            <!--<RelativeLayout-->
+            <!--android:id="@+id/dinnertable_trades_group"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:visibility="gone"-->
+            <!--/>-->
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/open_table_btn"
+            android:layout_width="76dp"
+            android:layout_height="34dp"
+            android:background="#ffffff"
+            android:text="@string/open_table"
+            android:textSize="14sp"
+            android:textColor="#3f4348"
+            android:layout_gravity="center_horizontal"
+            android:visibility="gone" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_prepay_mark"
+        android:background="@drawable/dinnertable_prepay_ticket_bg"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="6dp"
+        android:textColor="@color/text_black"
+        android:textSize="10sp"
+        android:gravity="center"
+        android:padding="3dp"
+        android:text="@string/has_printed_prepay_ticket"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:layout_height="20dp" />
+
+    <ImageView
+        android:id="@+id/tv_unprocess_trade_number"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="6dp"
+        android:contentDescription="@null"
+        android:background="@drawable/dinner_table_3th_party_trade_icon"
+        android:scaleType="centerInside"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/reserve_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="6dp"
+        android:contentDescription="@null"
+        android:gravity="center"
+        android:scaleType="centerInside"
+        android:visibility="gone" />
+
+    <!--
+    <LinearLayout
+        android:id="@+id/dinnertable_shade"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dinnertable_shape_square"
+        android:orientation="vertical"
+        android:visibility="invisible" />-->
+
+    <LinearLayout
+        android:id="@+id/table_shadow_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginTop="34dp"
+        android:orientation="vertical"
+        android:background="@drawable/buffet_table_shadow"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/table_message_tv"
+            android:text="@string/pay_fail"
+            android:textSize="14sp"
+            android:textColor="#ffffff" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/table_retry_tv"
+            android:text="@string/click_to_retry"
+            android:textSize="14sp"
+            android:textColor="#fff600"
+            android:background="@android:color/transparent" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/table_cancel_tv"
+            android:text="@string/click_to_cancel"
+            android:textSize="14sp"
+            android:textColor="#fff600"
+            android:background="@android:color/transparent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_checkout_status"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center"
+        android:layout_gravity="bottom"
+        android:background="@drawable/buffet_table_shadow"
+        android:textStyle="bold"
+        android:layout_marginRight="6dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="6dp"
+        android:visibility="gone"
+        android:textSize="15sp" />
+
+
+    <ImageView
+        android:id="@+id/iv_booking_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="top|right"
+        android:scaleType="centerInside"
+        android:visibility="gone"
+        android:background="@drawable/icon_booking" />
+
+</com.zhongmei.bty.buffet.table.view.BuffetTableView>

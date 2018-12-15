@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+    <com.zhongmei.bty.commonmodule.view.AutofitCheckBox
+        android:id="@+id/cb_table"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:button="@null"
+        android:maxLines="1"
+        android:fadingEdge="none"
+        android:textSize="12sp"
+        android:textColor="@color/beauty_black_rb_selctor"
+        android:background="@drawable/beauty_cb_orderdish_table_selector"
+        autofit:minTextSize="10sp" />
+
+</LinearLayout>

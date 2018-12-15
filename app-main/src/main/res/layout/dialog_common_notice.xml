@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="@dimen/dialog_operate_weight"
+        android:layout_height="@dimen/dialog_operate_height"
+        android:layout_gravity="center"
+        android:background="@drawable/dialog_multi_choice_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/close_title"
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:background="@color/transparent">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/handover_print_title"
+                    android:textColor="#FFFF7901"
+                    android:textSize="@dimen/dialog_operate_title_size" />
+
+                <TextView
+                    android:id="@+id/tvSubTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/repay_tip"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/dialog_operate_title2_size"
+                    android:visibility="gone" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/lvItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="@dimen/dialog_operate_reason_content_margin"
+            android:layout_weight="1"
+            android:background="@drawable/orderdish_bg_order_center_dialog_radiogroup_all"
+            android:scrollbars="none"
+            android:textColor="@color/color_333333"
+            android:textSize="@dimen/text_18"
+            tools:text="@string/dialog_item_content" />
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_operate_submit_height"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dialog_operate_views_marginTop"
+            android:background="@drawable/dialog_multi_choice_button_bottom"
+            android:gravity="center"
+            android:text="@string/closing_positive"
+            android:textColor="#FFFFFFFF"
+            android:textSize="@dimen/dialog_operate_submit_size" />
+    </LinearLayout>
+</FrameLayout>

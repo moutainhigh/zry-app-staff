@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_operate_reason_title_height"
+        android:background="#FFE6EBEF"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dialog_operate_reason_title_padding"
+        android:text="@string/inventory_choose_dish"
+        android:textColor="#FFB2B7BC"
+        android:textSize="@dimen/dialog_operate_reason_title_size" />
+
+    <LinearLayout
+        android:id="@+id/return_inventory_item"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:background="@drawable/booking_create_info_item_bg"
+        android:layout_marginTop="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:text="@string/inventory_return_dish" />
+
+        <TextView
+            android:id="@+id/count_num_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:layout_gravity="center_vertical"
+            android:text="5" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_select_waiter_right" />
+    </LinearLayout>
+
+
+</LinearLayout>

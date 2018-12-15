@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhongmei.bty.basemodule.shopmanager.handover.views.TouchLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f0f3f6"
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp">
+
+    <!--name title-->
+
+    <!--title-->
+    <include layout="@layout/handover_title_layout" />
+
+    <LinearLayout
+        android:weightSum="1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--显示数据区域-->
+        <FrameLayout
+            android:id="@+id/handover_right_center_layout"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp"></FrameLayout>
+        <!--按钮操作区-->
+        <RelativeLayout
+            android:id="@+id/operates_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp">
+
+            <include
+                android:id="@+id/show_handover_submitted_operate_layout"
+                layout="@layout/handover_show_submitted_operate_layout" />
+
+            <include
+                android:id="@+id/finished_operate_layout"
+                layout="@layout/handover_hide_finished_operate_layout" />
+
+            <include
+                android:id="@+id/submit_operate_layout"
+                layout="@layout/handover_hide_submit_operate_layout" />
+        </RelativeLayout>
+    </LinearLayout>
+</com.zhongmei.bty.basemodule.shopmanager.handover.views.TouchLinearLayout>

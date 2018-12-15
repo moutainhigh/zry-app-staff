@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_F0F3F6"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/blue"
+        android:gravity="center"
+        android:text="@string/cashbox"
+        android:textColor="@color/text_white"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        style="@style/setting_right_content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/print_setting_item_title_style"
+            android:text="@string/current_cashbox" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:layout_weight="1"
+            android:background="@drawable/setting_on_of_item_bg">
+
+            <LinearLayout
+                android:id="@+id/cash_printer_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_choose_money_box"
+                android:textColor="#333333"
+                android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+            <TextView
+                android:id="@+id/tv_choose_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="#28ACF9"
+                android:textSize="@dimen/setting_dinner_switch_item_size" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/btn_test_cashbox"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/setting_dinner_switch_item_height"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:background="@drawable/setting_blue_btn_selector"
+            android:text="@string/test_cashbox"
+            android:textColor="#28ACF9"
+            android:textSize="@dimen/setting_pay_bottom_btn_size" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/cashbox_tip"
+                android:drawablePadding="10dp"
+                android:text="@string/friendly_tips"
+                android:textColor="#333333"
+                android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/setting_dinner_switch_item_margin_top"
+                android:text="@string/set_cashbox_steps"
+                android:textColor="#999999" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

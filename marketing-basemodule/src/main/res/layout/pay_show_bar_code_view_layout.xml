@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pay_show_bar_code_view_bg"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/showBarcode"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/get_bq_fail"
+        android:background="@drawable/pay_show_bar_code_qr_bg"
+        android:layout_margin="5dp" />
+
+    <LinearLayout
+        android:id="@+id/ll_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_ffffff"
+        android:layout_margin="5dp"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/iv_error"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:scaleType="centerInside"
+            android:src="@drawable/get_bq_fail"
+            android:background="@color/color_ffffff" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/show_barcode_hint_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/show_barcode_hint_content"
+                android:lineSpacingExtra="3dp"
+                android:gravity="center"
+                android:textColor="#535e6f"
+                android:textSize="13.3sp"
+                tools:text="测试数据\n测试数据" />
+
+            <Button
+                android:id="@+id/bt_retry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:paddingLeft="23dp"
+                android:paddingRight="23dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/pay_online_qr_retry"
+                android:textSize="13sp"
+                android:textColor="@color/color_ffffff"
+                android:background="@drawable/online_pay_qr_retry_btn_selector" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

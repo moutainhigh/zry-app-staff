@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_F0F3F6">
+
+    <TextView
+        style="@style/settings_rightTitle"
+        android:background="@color/settings_blue"
+        android:gravity="center"
+        android:text="@string/order_accept_settings"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/setting_title_bar_size" />
+
+    <LinearLayout
+        style="@style/setting_right_content_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/auto"
+            style="@style/setting_switch_item_title_text"
+            android:text="@string/auto_accept_title" />
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                style="@style/setting_switch_item_text"
+                android:text="@string/server_auto_accept" />
+
+            <TextView
+                android:id="@+id/server_accept_swtich"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/setting_dinner_switch_item_btn_margin_right"
+                android:text="@string/server_auto_accept_close"
+                android:textColor="#999999"
+                android:textSize="@dimen/setting_dinner_switch_item_size" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/receive_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/setting_dinner_switch_items_margin"
+            android:visibility="gone">
+
+            <com.zhongmei.bty.settings.view.XInnerListView
+                android:id="@+id/auto_accept_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#FFCC00"
+                android:listSelector="@android:color/transparent" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/setting_switch_item_title_text"
+            android:text="@string/weixin_accept_transfer_kitchen_title"
+            android:layout_marginTop="@dimen/setting_dinner_switch_items_margin" />
+
+        <LinearLayout style="@style/setting_switch_item">
+
+            <TextView
+                style="@style/setting_switch_item_text"
+                android:text="@string/weixin_accept_transfer_kitchen" />
+
+            <Button
+                android:id="@+id/btn_weixin_accept_transfer_kitchen"
+                style="@style/setting_switch_item_btn" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

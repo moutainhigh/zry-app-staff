@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="pay_erase_cent">抹分</string>
+    <string name="pay_erase_dime">抹角</string>
+    <string name="pay_erase_yuan">抹元</string>
+    <string name="pay_erase_auto">自定义</string>
+    <string name="pay_erase_small_change">抹零</string>
+
+    <!--<string name="pay_symbol">￥%s</string>-->
+    <string name="pay_more_input_alter">支付金额已超出应收金额！</string>
+    <string name="pay_dict_not_enough">您的余额不足!</string>
+    <string name="pay_change_error">找零金额小于零，请重新收银.</string>
+    <string name="pay_user_not_login">用户未登录！</string>
+    <string name="pay_change_more_error">找零金额大于100，请确认是否正确！</string>
+
+    <string name="show_barcode_hint_use_scannar">使用扫码枪</string>
+    <string name="show_barcode_hint_scan">扫描顾客的条形码或者二维码</string>
+    <string name="show_barcode_hint_qr_code_Invalid">二维码已失效</string>
+    <string name="show_barcode_hint_qr_code_generating">二维码生成中...</string>
+    <string name="show_barcode_hint_qr_code_generation_fails">生成失败</string>
+    <string name="show_barcode_hint_scan_success">扫码完成</string>
+    <string name="show_barcode_hint_waiting">请等待支付结果</string>
+
+    <string name="display_barcode_pay_title">扫一扫付款</string>
+    <string name="display_barcode_weixin_title">手机打开微信「扫一扫」</string>
+    <string name="display_barcode_alipay_title">手机打开支付宝「扫一扫」</string>
+    <string name="display_barcode_baifudao_title">手机打开百度钱包「扫一扫」"</string>
+    <string name="display_barcode_all_title">「扫一扫」付款</string>
+    <string name="display_barcode_success">已扫码,可移出手机</string>
+    <string name="display_barcode_success_wait">请稍等…</string>
+    <string name="pay_mobile_pay_not_assign_type_hint">请在下方选择收款类型</string>
+    <string name="pay_online_qr_retry">重新生成</string>
+
+
+</resources>

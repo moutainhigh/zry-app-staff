@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="16dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/card_money_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_detail_item_bg"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp">
+
+            <TextView
+                style="@style/customer_info_item_left"
+                android:text="@string/customer_entity_card_yue"
+                android:textColor="#333333" />
+
+            <TextView
+                android:id="@+id/card_money"
+                style="@style/customer_info_item_right"
+                android:textColor="#ff7901" />
+
+            <ImageView style="@style/customer_info_item_img" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/card_point_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_detail_item_bg"
+            android:paddingLeft="6dp"
+            android:paddingRight="6dp"
+            android:layout_marginLeft="10dp">
+
+            <TextView
+                style="@style/customer_info_item_left"
+                android:text="@string/customer_jifen"
+                android:textColor="#333333" />
+
+            <TextView
+                android:id="@+id/card_point"
+                style="@style/customer_info_item_right"
+                android:textColor="#ff7901" />
+
+            <ImageView style="@style/customer_info_item_img" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/bg_dotted_line"
+        android:layout_marginTop="16dp"
+        android:layerType="software" />
+
+    <LinearLayout
+        android:id="@+id/card_no_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/customer_card_num"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/card_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textSize="14sp"
+            android:textColor="#333333" />
+
+        <ImageView
+            style="@style/customer_info_item_img"
+            android:contentDescription="@null" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="14sp"
+            android:text="@string/customer_card_kind"
+            android:textColor="#666666" />
+
+        <TextView
+            android:id="@+id/card_kind"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:textSize="14sp"
+            android:textColor="#333333" />
+    </LinearLayout>
+
+</LinearLayout>

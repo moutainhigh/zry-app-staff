@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#DFE4E9">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dialog_keyboard_margin">
+
+        <TextView
+            android:id="@+id/one"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/two"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dialog_keyboard_margin"
+            android:layout_marginRight="@dimen/dialog_keyboard_margin"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:gravity="center"
+            android:text="2"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/three"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:text="3"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dialog_keyboard_margin">
+
+        <TextView
+            android:id="@+id/four"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:contentDescription="@null"
+            android:gravity="center"
+            android:text="4"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/five"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dialog_keyboard_margin"
+            android:layout_marginRight="@dimen/dialog_keyboard_margin"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:gravity="center"
+            android:text="5"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/six"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:gravity="center"
+            android:text="6"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dialog_keyboard_margin">
+
+        <TextView
+            android:id="@+id/seven"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:gravity="center"
+            android:text="7"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/eight"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dialog_keyboard_margin"
+            android:layout_marginRight="@dimen/dialog_keyboard_margin"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:gravity="center"
+            android:text="8"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/nine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:gravity="center"
+            android:text="9"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/dialog_keyboard_margin">
+
+        <TextView
+            android:id="@+id/clean"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_numdot_bg"
+            android:gravity="center"
+            android:text="@string/queue_keyboard_clean"
+            android:textColor="@color/text_black"
+            android:textSize="18sp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/point"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_numdot_bg"
+            android:gravity="center"
+            android:src="@drawable/pay_num_poin_bt"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/zero"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dialog_keyboard_margin"
+            android:layout_marginRight="@dimen/dialog_keyboard_margin"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_num2_bg"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/text_black"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/customer_login_numdel_bg"
+            android:scaleType="centerInside"
+            android:src="@drawable/delete_icon" />
+    </LinearLayout>
+
+</LinearLayout>

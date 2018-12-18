@@ -93,7 +93,6 @@
 -keep class com.baidu.**{*;}
 -keep class com.androidpos.sysapi.**{*;}
 -dontwarn com.androidpos.sysapi.**
--keep class com.landicorp.**{*;}
 -keep class com.baidu.**{*;}
 -keep class com.android.encryptcaculator.**{*;}
 -keep class com.android.serialport.**{*;}

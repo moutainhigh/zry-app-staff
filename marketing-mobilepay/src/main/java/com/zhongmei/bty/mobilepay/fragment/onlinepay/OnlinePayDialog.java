@@ -40,6 +40,7 @@ import com.zhongmei.bty.basemodule.pay.event.PushPayRespEvent;
 import com.zhongmei.bty.basemodule.pay.event.RegisterDeWoOnlinePayScanEvent;
 import com.zhongmei.bty.basemodule.pay.message.PayResp;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.bty.basemodule.trade.event.ActionCloseOrderDishActivity;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 import com.zhongmei.bty.commonmodule.view.NumberInputdialog;
 import com.zhongmei.bty.mobilepay.IOnlinePayBreakCallback;
@@ -71,6 +72,7 @@ import com.zhongmei.yunfu.util.ViewUtil;
 import java.math.BigDecimal;
 import java.util.Timer;
 
+import de.greenrobot.event.EventBus;
 
 /**
  * V3在线支付界面，解耦，用来替换clam3 下面的OnlinePayDialog
@@ -907,6 +909,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         @Override
         public void onPayResult(Long paymentItemId, int payStatus) {
             if (TradePayStatus.PAID.value() == payStatus) {//支付成功
+                EventBus.getDefault().post(new ActionCloseOrderDishActivity());
                 DoPayApi.OnlineDialogShowing = false;//add v8.5及时标记退出在线支付界面
                 stopGetPayStatus();// 取消查询订单状态
                 dismiss();

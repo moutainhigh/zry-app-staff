@@ -48,10 +48,14 @@ public class MacAddressUtil {
         }
         if (macSerial == null || "".equals(macSerial)) {
             try {
-                File file = new File("/sys/class/net/eth1/address");
-                if (!file.exists()) {
-                    file = new File("/sys/class/net/eth0/address");
+                File file = new File("/sys/class/net/eth0/address");
+                if ("MuMu".equalsIgnoreCase(Build.MODEL)) {
+                    File eth1 = new File("/sys/class/net/eth1/address");
+                    if (eth1.exists()) {
+                        file = eth1;
+                    }
                 }
+
                 return loadFileAsString(file.getPath()).substring(0, 17);
             } catch (Exception e) {
                 e.printStackTrace();

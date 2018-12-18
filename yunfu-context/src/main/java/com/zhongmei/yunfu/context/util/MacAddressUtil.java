@@ -8,11 +8,7 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
-import java.io.Reader;
+import java.net.NetworkInterface;
 
 public class MacAddressUtil {
 
@@ -30,38 +26,32 @@ public class MacAddressUtil {
                 return macAddress0;
             }
         }
-        String str = "";
+
         String macSerial = "";
         try {
-            Process pp = Runtime.getRuntime().exec("cat /sys/class/net/wlan0/address");
-            InputStreamReader ir = new InputStreamReader(pp.getInputStream());
-            LineNumberReader input = new LineNumberReader(ir);
-            for (; null != str; ) {
-                str = input.readLine();
-                if (str != null) {
-                    macSerial = str.trim();// 去空格
-                    break;
+            NetworkInterface networkInterface = NetworkInterface.getByName("wlan0");
+            if (networkInterface == null) {
+                networkInterface = NetworkInterface.getByName("eth0");
+                if ("MuMu".equalsIgnoreCase(Build.MODEL)) {
+                    networkInterface = NetworkInterface.getByName("eth1");
                 }
             }
-        } catch (Exception ex) {
-            Log.e("----->" + "NetInfoManager", "getMacAddress:" + ex.toString());
-        }
-        if (macSerial == null || "".equals(macSerial)) {
-            try {
-                File file = new File("/sys/class/net/eth0/address");
-                if ("MuMu".equalsIgnoreCase(Build.MODEL)) {
-                    File eth1 = new File("/sys/class/net/eth1/address");
-                    if (eth1.exists()) {
-                        file = eth1;
-                    }
+
+            if (networkInterface != null) {
+                byte[] addressByte = networkInterface.getHardwareAddress();
+                StringBuilder sb = new StringBuilder();
+                for (byte b : addressByte) {
+                    sb.append(String.format("%02X:", b));
+                }
+                if (sb.length() > 0) {
+                    sb.deleteCharAt(sb.length() - 1);
                 }
 
-                return loadFileAsString(file.getPath()).substring(0, 17);
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.e("----->" + "NetInfoManager",
-                        "getMacAddress:" + e.toString());
+                macSerial = sb.toString();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("----->" + "NetInfoManager", "getMacAddress:" + e.toString());
         }
         return macSerial;
     }
@@ -96,23 +86,4 @@ public class MacAddressUtil {
         }
         return false;
     }
-
-    private static String loadFileAsString(String fileName) throws Exception {
-        FileReader reader = new FileReader(fileName);
-        String text = loadReaderAsString(reader);
-        reader.close();
-        return text;
-    }
-
-    private static String loadReaderAsString(Reader reader) throws Exception {
-        StringBuilder builder = new StringBuilder();
-        char[] buffer = new char[4096];
-        int readLength = reader.read(buffer);
-        while (readLength >= 0) {
-            builder.append(buffer, 0, readLength);
-            readLength = reader.read(buffer);
-        }
-        return builder.toString();
-    }
-
 }

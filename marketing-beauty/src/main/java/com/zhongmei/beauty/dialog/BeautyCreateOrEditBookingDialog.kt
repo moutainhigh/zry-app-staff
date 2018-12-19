@@ -761,6 +761,8 @@ class BeautyCreateOrEditBookingDialog : BasicDialogFragment(), View.OnClickListe
         mBeautyBookingVo.bookingTradeItemVos?.forEach {
             it.tradeItem.statusFlag = StatusFlag.INVALID // 菜品无效
             it.tradeItem.bookingId = mBeautyBookingVo.bookingId
+            it.tradeItem.validateUpdate()
+            it.tradeItem.updatorName
             req.bookingTradeItems.add(it.tradeItem)
             if (it.bookingTradeItemUsers != null && it.bookingTradeItemUsers.size > 0) {
                 for (user in it.bookingTradeItemUsers) { // 推销员无效

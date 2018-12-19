@@ -595,11 +595,22 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         }
     }
 
-    @Override
-    public void onDestroy() {
+    public void clearShopCart(){
         initTask.cancel(true);
         DinnerShoppingCart.getInstance().unRegisterListenerByTag(ShoppingCartListerTag.ORDER_DISH_LEFT);
         BeautyOrderManager.clearShopcart();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (getActivity().isFinishing()) {
+            clearShopCart();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
         super.onDestroy();
     }
 }

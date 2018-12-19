@@ -220,7 +220,7 @@ public class BeautyOrderManager {
     private static void updateDinnerTradeVo(TradeVo tradeVo, IPaymentInfo mPaymentInfo) {
         //先把原单会员拿出来，等reset方法玩了以后再放回去（临时方案，后续需要优化）
         CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
-        DinnerShoppingCart.getInstance().updateDataFromTradeVo(tradeVo);//set callback false v8.10
+        DinnerShoppingCart.getInstance().updateBeautyDataFromTradeVo(tradeVo);//set callback false v8.10
         CustomerManager.getInstance().setDinnerLoginCustomer(customer);
         //刷新积分抵现
         DinnerCashManager cashManager = new DinnerCashManager();

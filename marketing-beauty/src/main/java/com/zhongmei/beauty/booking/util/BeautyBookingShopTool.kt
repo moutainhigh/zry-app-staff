@@ -44,6 +44,7 @@ class BeautyBookingShopTool {
                 var bookingItemProperty = buildTradeItemProperty(shopcartItem, property, bookingId)
                 bProperties.add(bookingItemProperty)
             }
+            bookingTradeItem.validateCreate()
             var bookingTradeItemVo = BookingTradeItemVo()
             bookingTradeItemVo.tradeItem = bookingTradeItem
             bookingTradeItemVo.tradeItemPropertyList = bProperties

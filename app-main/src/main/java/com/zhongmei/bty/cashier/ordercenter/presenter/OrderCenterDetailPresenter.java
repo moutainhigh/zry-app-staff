@@ -208,8 +208,8 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             String info;
             Integer nowTradePayStatus;
             TradePayStateResp resp = response.getContent();
-            if (resp != null && resp.payState != null) {
-                nowTradePayStatus = resp.payState;
+            if (resp != null) {
+                nowTradePayStatus = resp.getPaymentItems().get(0).getPayStatus().value();
                 if (Utils.equals(currentTradePayStatus.value(), nowTradePayStatus)) {
                     info = context.getString(R.string.dinner_orderdish_staus_no_resh);
                 } else {

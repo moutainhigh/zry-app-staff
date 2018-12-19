@@ -588,6 +588,17 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
     /**
+     * 移除小程序item
+     * @param shopcartItem
+     */
+    public void removeAppletItem(IShopcartItem shopcartItem){
+        removeDinnerShoppingcartItem(shopcartItem);
+        for (int key : arrayListener.keySet()) {
+            arrayListener.get(key).removeMarketActivity(dinnerShoppingCartVo.getmTradeVo());
+        }
+    }
+
+    /**
      * @Title: returnQTY
      * @Description: TODO
      * @Param @param mShopcartItem 退回菜品新生成的数据
@@ -1010,6 +1021,25 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 arrayListener.get(key).updateDish(mergeShopcartItem(dinnerShoppingCartVo),
                         dinnerShoppingCartVo.getmTradeVo());
             }
+        }
+    }
+
+    public void updateBeautyDataFromTradeVo(TradeVo tradeVo) {
+        this.updateBeautyDataFromTradeVo(tradeVo, true);
+    }
+
+    public void updateBeautyDataFromTradeVo(TradeVo tradeVo, boolean isCallback) {
+        if (tradeVo == null || dinnerShoppingCartVo == null) {
+            return;
+        }
+
+        if (dinnerShoppingCartVo.getDinnertableTradeInfo() != null){ // 美业有可能有桌台有可能没有
+            DinnertableTradeInfo dinnertableTradeInfo = dinnerShoppingCartVo.getDinnertableTradeInfo();
+            dinnertableTradeInfo.setTradeVo(tradeVo);
+            resetOrderFromTable(dinnertableTradeInfo,isCallback);
+        } else {
+            DinnertableTradeInfo tradeInfo=DinnertableTradeInfo.createNoTableBuffet(tradeVo);
+            resetOrderFromTable(null,tradeInfo,true);
         }
     }
 

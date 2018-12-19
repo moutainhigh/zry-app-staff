@@ -164,6 +164,9 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
      */
     public void onEventMainThread(ActionCloseOrderDishActivity event) {
         this.finish();
+        if(mLeftFragment!=null){
+            mLeftFragment.clearShopCart();
+        }
     }
 
     /**

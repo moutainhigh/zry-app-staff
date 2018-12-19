@@ -5,16 +5,24 @@
     android:background="@color/beauty_bg_white"
     android:layout_height="match_parent">
 
-    <com.zhongmei.bty.dinner.table.view.ZonesVerticalIndicator
-        android:id="@+id/custom_zone_indicator"
+    <ScrollView
+        android:id="@+id/sv_zones"
         android:layout_width="120dp"
-        android:layout_height="match_parent"
         android:minWidth="120dp"
-        android:orientation="vertical"
-        android:layout_marginRight="40dp"
-        android:layout_alignParentRight="true">
+        android:layout_alignParentRight="true"
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp"
+        android:layout_marginRight="40dp">
+        <com.zhongmei.bty.dinner.table.view.ZonesVerticalIndicator
+            android:id="@+id/custom_zone_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+        </com.zhongmei.bty.dinner.table.view.ZonesVerticalIndicator>
+    </ScrollView>
 
-    </com.zhongmei.bty.dinner.table.view.ZonesVerticalIndicator>
+
 
 
     <android.support.v7.widget.RecyclerView
@@ -23,13 +31,13 @@
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@id/custom_zone_indicator"
+        android:layout_toLeftOf="@id/sv_zones"
         android:background="@color/beauty_bg_gray"
         android:fadingEdge="none"
         android:paddingBottom="10dp"
         android:paddingLeft="5dp"
         android:paddingRight="15dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="10dp"
         android:paddingTop="5dp"></android.support.v7.widget.RecyclerView>
 </RelativeLayout>

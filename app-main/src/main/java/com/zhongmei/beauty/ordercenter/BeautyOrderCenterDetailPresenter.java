@@ -654,9 +654,7 @@ public class BeautyOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                 ToastUtil.showLongToast(response.getMessage());
                 if (ResponseObject.isOk(response)) {
                     // 打印退货单
-                    List<Trade> trades = response.getContent().getTrades();
-                    if (Utils.isNotEmpty(trades)) {
-                        Trade refundTrade = DinnerPosManager.getTradeByTradeType(trades, TradeType.REFUND);
+                        Trade refundTrade = response.getContent().getTrade();
                         if (refundTrade != null) {
                             //IPrintHelper.Holder.getInstance().printDinnerRedundOrderTicket(refundTrade.getUuid(), false, new PRTOnSimplePrintListener(PrintTicketTypeEnum.REFUND));
 //                            if (result.isPrintChecked) {//美业不打印堂口单，厨总单
@@ -669,21 +667,26 @@ public class BeautyOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                             //PRTPrintContentQueue.getCommonPrintQueue().openMoneyBox(null);
                         }
 
-                        Trade sellTrade = null;
-                        for (Trade trade : trades) {
-                            if (trade.getTradeType() != TradeType.REFUND) {//不是退货类型的，就是原单，原单类型不确定，只有这样取了
-                                sellTrade = trade;
-                            }
+                        if(Utils.isNotEmpty(response.getContent().getPaymentItems())){
+                            refreshPayStatus(refundTrade,response.getContent().getPaymentItems());
                         }
-                        try {
-                            if (sellTrade != null && refundTrade != null) {
-                                new DinnerPosManager().posRefund(sellTrade, refundTrade, mView.getViewFragmentManager());
-                            }
-                        } catch (Exception e) {
-                            Log.e(TAG, e.getMessage(), e);
-                        }
-                        AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_RETURN_REFUND, sellTrade.getId(), sellTrade.getUuid(), sellTrade.getClientUpdateTime());
-                    }
+
+
+
+//                        Trade sellTrade = null;
+//                        for (Trade trade : trades) {
+//                            if (trade.getTradeType() != TradeType.REFUND) {//不是退货类型的，就是原单，原单类型不确定，只有这样取了
+//                                sellTrade = trade;
+//                            }
+//                        }
+//                        try {
+//                            if (sellTrade != null && refundTrade != null) {
+//                                new DinnerPosManager().posRefund(sellTrade, refundTrade, mView.getViewFragmentManager());
+//                            }
+//                        } catch (Exception e) {
+//                            Log.e(TAG, e.getMessage(), e);
+//                        }
+//                        AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_RETURN_REFUND, sellTrade.getId(), sellTrade.getUuid(), sellTrade.getClientUpdateTime());
                 } else {
                     AuthLogManager.getInstance().clear();
                 }
@@ -719,6 +722,7 @@ public class BeautyOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                 intent.putExtra("tradeId", trade.getId());
                 intent.putExtra("paymentItemId", paymentItem.getId());
                 MainApplication.getInstance().startService(intent);
+                Log.e("SyncPayStatus","启动退款状态查询。。。。");
             }
         }
 

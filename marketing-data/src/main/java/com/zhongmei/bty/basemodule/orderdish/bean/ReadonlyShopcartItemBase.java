@@ -175,7 +175,10 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
 
     @Override
     public String getSkuUuid() {
-        return getDishShop().getUuid();
+        if(getDishShop()!=null){
+            return getDishShop().getUuid();
+        }
+        return tradeItem.getSkuUuid();
     }
 
     @Override

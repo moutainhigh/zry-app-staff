@@ -93,8 +93,8 @@ class BeautyAppletTool {
                 if (item.statusFlag == StatusFlag.INVALID || item.appletPrivilegeVo == null || !item.appletPrivilegeVo.isPrivilegeValid) {
                     continue
                 }
-                if (item.appletPrivilegeVo.activityId.equals(activityId)) {
-                    DinnerShoppingCart.getInstance().removeDinnerShoppingcartItem(item)
+                if (item.appletPrivilegeVo.activityId.toString().equals(activityId)) {
+                    DinnerShoppingCart.getInstance().removeAppletItem(item)
                     break
                 }
             }

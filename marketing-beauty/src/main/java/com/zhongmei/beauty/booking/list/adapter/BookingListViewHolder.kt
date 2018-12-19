@@ -1,7 +1,6 @@
 package com.zhongmei.beauty.booking.list.adapter
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
@@ -20,17 +19,14 @@ import com.zhongmei.beauty.enums.BeautyListType
 import com.zhongmei.beauty.operates.message.BeautyBookingResp
 import com.zhongmei.bty.basemodule.auth.application.BeautyApplication
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper
-import com.zhongmei.bty.basemodule.session.support.VerifyHelper.verifyAlert
 import com.zhongmei.yunfu.db.enums.BookingOrderSource
 import com.zhongmei.yunfu.db.enums.BookingOrderStatus
 import com.zhongmei.yunfu.db.enums.Sex
-import com.zhongmei.bty.commonmodule.util.CalmClickAgent
 import com.zhongmei.bty.commonmodule.util.DateUtil
 import com.zhongmei.yunfu.context.base.BaseApplication
 import com.zhongmei.yunfu.context.session.core.auth.Auth
 import com.zhongmei.yunfu.context.session.core.user.User
 import com.zhongmei.yunfu.context.util.Utils
-import com.zhongmei.yunfu.ui.view.recycler.OnRecyclerViewScrollListener
 import com.zhongmei.yunfu.util.DensityUtil
 import kotlinx.android.synthetic.main.beauty_booking_list_item.view.*
 

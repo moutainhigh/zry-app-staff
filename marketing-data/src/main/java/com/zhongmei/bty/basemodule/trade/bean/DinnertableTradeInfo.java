@@ -209,17 +209,22 @@ public class DinnertableTradeInfo {
     public static DinnertableTradeInfo createNoTableBuffet(TradeVo tradeVo) {
         DinnertableTradeInfo info = new DinnertableTradeInfo();
         TradeTableInfo tradeTableInfo = new TradeTableInfo(tradeVo.getTrade(), new TradeTable(), getTradeStatus(tradeVo.getTradeExtra()), null, null);
-        info.serialNumber = tradeVo.getTradeExtra().getSerialNumber();
+        info.serialNumber = tradeVo.getTrade().getSerialNumber();
         info.tradeType = tradeVo.getTrade().getTradeType();
         info.numberOfMeals = tradeVo.getTrade().getTradePeopleCount();
         info.iDinnertableTrade = new NoTableBuffetTradeModel(tradeTableInfo);
-        info.iDinnertableTrade.refreshSpendTime();
+//        info.iDinnertableTrade.refreshSpendTime();
         info.setTradeVo(tradeVo);
         return info;
     }
 
     private static DinnertableStatus getTradeStatus(TradeExtra tradeExtra) {
         DinnertableStatus status = DinnertableStatus.UNISSUED;
+
+        if(tradeExtra==null){
+            return status;
+        }
+
         if (tradeExtra.getHasServing() == TradeServingStatus.SERVED) {
             status = DinnertableStatus.SERVING;
         } else {

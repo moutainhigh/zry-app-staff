@@ -99,13 +99,13 @@ public class TradeTableInfo implements Comparable<TradeTableInfo> {
     public TradeTableInfo(Trade trade, TradeTable tradeTable,
                           DinnertableStatus dishStatus, PrintOperation preCashPrintOperation, List<AddItemVo> addItemVoList) {
         this.id = tradeTable.getId();
-        this.uuid = tradeTable.getUuid();
-        this.serverUpdateTime = tradeTable.verValue();
-        this.startTimeMillis = tradeTable.getServerCreateTime();
+        this.uuid = trade.getUuid();
+        this.serverUpdateTime = trade.getServerUpdateTime();
+        this.startTimeMillis = trade.getServerCreateTime();
 
 
         this.tableId = tradeTable.getTableId();
-        this.numberOfMeals = tradeTable.getTablePeopleCount();
+        this.numberOfMeals = trade.getTradePeopleCount();
         this.tradeUuid = trade.getUuid();
         this.tradeId = trade.getId();
         this.tradeServerUpdateTime = trade.getServerUpdateTime();

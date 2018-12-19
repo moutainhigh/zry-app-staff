@@ -46,7 +46,7 @@ class BeautyProgramAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         var program: BeautyAcitivityBuyRecordResp = mProgramList!![position]
         holder!!.itemView.tv_title.setText(program.dishName)
         holder!!.itemView.tv_content.setText("有效期：" + DateUtil.formatDate(program.validityPeriod))
-        holder!!.itemView.tv_use.setOnClickListener {
+        holder!!.itemView.ll_content.setOnClickListener {
             //combo:100615734186551296 sigle:107161226020891648
             if (program.isUsed) {
                 BeautyAppletTool.removeApplet(program)

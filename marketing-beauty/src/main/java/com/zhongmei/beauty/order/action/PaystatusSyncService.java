@@ -10,9 +10,14 @@ import android.os.Looper;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
+import android.util.Log;
 
+import com.zhongmei.bty.basemodule.trade.message.TradePayStateResp;
 import com.zhongmei.bty.basemodule.trade.operates.TradeOperates;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
+import com.zhongmei.yunfu.db.enums.TradePayStatus;
 import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.yunfu.resp.ResponseListener;
 import com.zhongmei.yunfu.resp.ResponseObject;
@@ -42,8 +47,8 @@ public class PaystatusSyncService extends Service {
 
 
     @Override
-    public void onStart(Intent intent, int startId) {
-        super.onStart(intent, startId);
+    public void onCreate() {
+        super.onCreate();
         init();
     }
 
@@ -127,14 +132,24 @@ public class PaystatusSyncService extends Service {
         }
     }
 
+    private boolean isReturnSuccess(List<PaymentItem> paymentItems){
+        if(Utils.isNotEmpty(paymentItems)){
+            PaymentItem paymentItem=paymentItems.get(0);
+            return !paymentItem.getPayStatus().equalsValue(TradePayStatus.REFUNDING.value());
+        }
+
+        return false;
+    }
+
     private void refreshTradePayStatus(final int index, Long tradeId, Long paymentItemId) {
+        Log.e("SyncPayStatus","启动查询。。。。tradeId:"+tradeId+",paymentItemid:"+paymentItemId);
         TradeOperates mTradeOperates = OperatesFactory.create(TradeOperates.class);
-        mTradeOperates.refreshState(tradeId, paymentItemId, new ResponseListener() {
+        mTradeOperates.refreshState(tradeId, paymentItemId, new ResponseListener<TradePayStateResp>() {
 
             @Override
-            public void onResponse(ResponseObject response) {
+            public void onResponse(ResponseObject<TradePayStateResp> response) {
                 int curIdx = index;
-                if (ResponseObject.isOk(response)) {
+                if (ResponseObject.isOk(response) && isReturnSuccess(response.getContent().getPaymentItems())) {
                     //请求下一个，移除当前这个
                     if (mRequestQueueList != null && mRequestQueueList.size() > index) {
                         mRequestQueueList.remove(index);

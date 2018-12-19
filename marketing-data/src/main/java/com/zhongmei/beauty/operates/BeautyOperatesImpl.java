@@ -261,7 +261,7 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                 TradeItem tradeItem = tradeItemVo.getTradeItem();
                 TradeItemReq tradeItemReq = new TradeItemReq();
                 copyProperties(tradeItem, tradeItemReq);
-                tradeItemReq.setUnitName("套");
+                tradeItemReq.setUnitName(tradeItem.getUnitName());
                 tradeItemReq.setDeviceIdenty(BaseApplication.sInstance.getDeviceIdenty());
                 tradeItemReq.setCardSaleInfos(tradeItemVo.getCardSaleInfos());
                 tradeItems.add(tradeItemReq);

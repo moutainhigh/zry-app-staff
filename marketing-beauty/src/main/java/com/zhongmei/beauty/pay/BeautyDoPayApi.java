@@ -373,7 +373,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                 try {
                     // 支付结束
                     PayResp resp = response.getContent();
-                    if (ResponseObject.isOk(response) && !Utils.isEmpty(resp.getPaymentItems())) {
+                    if (ResponseObject.isOkExisted(response) && !Utils.isEmpty(resp.getPaymentItems())) {
                         //获取支付明细uuid,用于推送
                         final PaymentItem paymentItem = resp.getPaymentItems().get(0);
                         setOnlinePaymentItemUuid(paymentItem.getUuid());

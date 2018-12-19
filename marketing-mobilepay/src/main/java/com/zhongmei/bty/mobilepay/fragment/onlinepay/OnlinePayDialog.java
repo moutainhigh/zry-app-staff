@@ -1063,7 +1063,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
     private void sendShowGetPayStateButtonMS() {
         Message message = new Message();
         message.what = WHAT_SHOW_PAYSTATUS_BUTTON;
-        mHandler.sendMessageDelayed(message, 1000 * 12);//等待10秒显示
+        mHandler.sendMessageDelayed(message, 10 * 1000);//等待10秒显示
     }
 
     private void showGetPayStateBT() {

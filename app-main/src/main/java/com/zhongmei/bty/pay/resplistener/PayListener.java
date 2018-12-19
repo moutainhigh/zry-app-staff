@@ -102,8 +102,8 @@ public class PayListener extends EventResponseListener<PayResp> implements Respo
             //显示收银结果
             if (response != null) {
                 switch (response.getStatusCode()) {
-
                     case ResponseObject.OK://成功
+                    case ResponseObject.OK_TIMEOUT:
                         //获取最新订单
                         if (response.getContent() != null && !Utils.isEmpty(response.getContent().getTrades())) {
                             this.paymentInfo.getTradeVo().setTrade(response.getContent().getTrades().get(0));

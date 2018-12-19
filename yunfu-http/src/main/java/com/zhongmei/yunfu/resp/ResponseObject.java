@@ -77,6 +77,7 @@ public class ResponseObject<T> implements NoProGuard {
      * 操作成功
      */
     public static final int OK = 1000;
+    public static final int OK_TIMEOUT = 1010;
     /**
      * 操作成功数据被其它状态更新
      */
@@ -171,7 +172,11 @@ public class ResponseObject<T> implements NoProGuard {
             return false;
         }
         // 两个码都表示数据已存在
-        return ResponseObject.OK_DATA_UPDATED == obj.getStatusCode();
+        return obj.getStatusCode() == ResponseObject.OK_TIMEOUT
+                || ResponseObject.OK_DATA_UPDATED == obj.getStatusCode();
     }
 
+    public static boolean isOkExisted(ResponseObject<?> obj) {
+        return isOk(obj) || isExisted(obj);
+    }
 }

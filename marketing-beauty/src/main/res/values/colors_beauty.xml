@@ -50,7 +50,7 @@
 
     <color name="beauty_color_btn_pink_nomal">#FF74B1</color>
     <color name="beauty_color_btn_pink_pressed">#F1589B</color>
-    <color name="beauty_color_btn_red_nomal">#FF2283</color>
+    <color name="beauty_color_btn_red_nomal">#F1605D</color>
     <color name="beauty_color_btn_red_pressed">#E02376</color>
 
     <color name="beauty_color_black">#333333</color>

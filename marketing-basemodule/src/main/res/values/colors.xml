@@ -19,9 +19,9 @@
     <color name="split_line_color">#DDDDDD</color>
     <color name="type_select_color">#F1605D</color>
     <color name="type_select_bg_color">#0EF1605D</color>
-    <color name="beauty_color_btn_pink_nomal">#FF74B1</color>
+    <color name="beauty_color_btn_pink_nomal">#F1605D</color>
     <color name="beauty_color_btn_pink_pressed">#F1589B</color>
-    <color name="beauty_color_btn_red_nomal">#FF2283</color>
+    <color name="beauty_color_btn_red_nomal">#F1605D</color>
     <color name="beauty_color_btn_red_pressed">#E02376</color>
 
     <color name="color_F5A623">#F5A623</color>

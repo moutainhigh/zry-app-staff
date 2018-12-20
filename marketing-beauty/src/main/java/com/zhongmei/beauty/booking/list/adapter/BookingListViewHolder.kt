@@ -17,6 +17,7 @@ import com.zhongmei.yunfu.db.entity.booking.BookingTradeItem
 import com.zhongmei.beauty.entity.BookingTradeItemUser
 import com.zhongmei.beauty.enums.BeautyListType
 import com.zhongmei.beauty.operates.message.BeautyBookingResp
+import com.zhongmei.beauty.utils.BeautyDialogUtils
 import com.zhongmei.bty.basemodule.auth.application.BeautyApplication
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper
 import com.zhongmei.yunfu.db.enums.BookingOrderSource
@@ -27,6 +28,7 @@ import com.zhongmei.yunfu.context.base.BaseApplication
 import com.zhongmei.yunfu.context.session.core.auth.Auth
 import com.zhongmei.yunfu.context.session.core.user.User
 import com.zhongmei.yunfu.context.util.Utils
+import com.zhongmei.yunfu.ui.view.CommonDialogFragment
 import com.zhongmei.yunfu.util.DensityUtil
 import kotlinx.android.synthetic.main.beauty_booking_list_item.view.*
 
@@ -252,19 +254,28 @@ class BookingListViewHolder : RecyclerView.ViewHolder {
      * 拒绝
      */
     fun refuseTrade(fragment: Fragment, bookingVo: BeautyBookingVo) {
-        VerifyHelper.verifyAlert(fragment.activity, BeautyApplication.PERMISSION_BEAUTY_ACCEPT_OR_REFUSE_RESERVER, object : VerifyHelper.Callback() {
-            override fun onPositive(user: User, code: String, filter: Auth.Filter?) {
-                super.onPositive(user, code, filter)
-                var manager = BeautyOpenTradeManager()
-                manager.acceptOrRefuseBookingTrade(fragment.activity, bookingVo, BookingOrderStatus.REFUSED, object : BeautyOpenTradeManager.OpenTradeCallBack {
-                    override fun onOpenTradeSuccess() {
-                        mAdapter.update(beautyListManager.removeBooking(bookingVo))
-                        mAdapter.notifyDataSetChanged()
+        BeautyDialogUtils.showDialog(fragment.fragmentManager, CommonDialogFragment.ICON_WARNING, "确认拒绝此预约？", object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                VerifyHelper.verifyAlert(fragment.activity, BeautyApplication.PERMISSION_BEAUTY_ACCEPT_OR_REFUSE_RESERVER, object : VerifyHelper.Callback() {
+                    override fun onPositive(user: User, code: String, filter: Auth.Filter?) {
+                        super.onPositive(user, code, filter)
+                        var manager = BeautyOpenTradeManager()
+                        manager.acceptOrRefuseBookingTrade(fragment.activity, bookingVo, BookingOrderStatus.REFUSED, object : BeautyOpenTradeManager.OpenTradeCallBack {
+                            override fun onOpenTradeSuccess() {
+                                mAdapter.update(beautyListManager.removeBooking(bookingVo))
+                                mAdapter.notifyDataSetChanged()
+                            }
+                        })
                     }
+
                 })
             }
+        }, object : View.OnClickListener {
+            override fun onClick(v: View?) {
+            }
+        }, "showCancelDialog")
 
-        })
+
 
     }
 

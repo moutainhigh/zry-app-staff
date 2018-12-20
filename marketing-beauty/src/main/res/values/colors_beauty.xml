@@ -48,10 +48,10 @@
     <color name="beauty_bg_titlebar">#323333</color>
     <color name="beauty_titlebar_divide_line">#B1B1B1B1</color>
 
-    <color name="beauty_color_btn_pink_nomal">#FF74B1</color>
-    <color name="beauty_color_btn_pink_pressed">#F1589B</color>
+    <color name="beauty_color_btn_pink_nomal">#B0F1605D</color>
+    <color name="beauty_color_btn_pink_pressed">#83F1605D</color>
     <color name="beauty_color_btn_red_nomal">#F1605D</color>
-    <color name="beauty_color_btn_red_pressed">#E02376</color>
+    <color name="beauty_color_btn_red_pressed">#83F1605D</color>
 
     <color name="beauty_color_black">#333333</color>
 

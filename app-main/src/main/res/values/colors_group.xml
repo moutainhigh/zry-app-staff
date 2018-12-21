@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="group_desk_line">#e6e8e9</color>
-
     <color name="group_area_and_time_masking">#eaf7ff</color>
-    <color name="group_label_is_open_desk">#1CD8CE</color>
-    <color name="group_label_is_pay">#FF962F</color>
 
 
-    <color name="group_desk_item_normal">#4E5764</color>
-    <color name="group_desk_item_occupy">#FFC414</color>
-
-
-    <color name="group_statusbar_bg">#008DDF</color>
     <color name="group_title_bg">#28ACF9</color>
 
-    <color name="group_date_masking">#eaf7ff</color>
-
-    <color name="group_preview_bg">#F6F9F8</color>
-    <color name="group_menu_color">#494C6A</color>
-    <color name="group_shell_diff_color">#F8E81C</color>
-    <color name="group_shell_diff_slide_color">#F5A623</color>
-    <color name="group_slide_left_title_bg">#57C1FF</color>
 </resources>

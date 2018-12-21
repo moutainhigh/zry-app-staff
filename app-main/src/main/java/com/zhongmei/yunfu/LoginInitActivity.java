@@ -77,11 +77,11 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
     @ViewById(R.id.login_system_data_state_tv)
     AutoVerticalScrollTextView systemDataStateTv;
 
-    @ViewById(R.id.login_check_hint)
-    protected TextView mCheckTitle;
+    /*@ViewById(R.id.login_check_hint)
+    protected TextView mCheckTitle;*/
 
-    @ViewById(R.id.show_value)
-    protected TextView mPassword;
+    /*@ViewById(R.id.show_value)
+    protected TextView mPassword;*/
 
     private AnimationDrawable mAnimDrawable;
     private PrintInstallReceiver mPrintInstallReceiver;
@@ -497,9 +497,9 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
     protected void initCommonManager(boolean isFreshCash, final String hint) {
         queryUser();
         displayShopId();
-        if (hint != null) {
+        /*if (hint != null) {
             mCheckTitle.setText(hint);
-        }
+        }*/
         if (mAnimDrawable != null) {
             if (mAnimDrawable.isRunning()) mAnimDrawable.stop();
         }

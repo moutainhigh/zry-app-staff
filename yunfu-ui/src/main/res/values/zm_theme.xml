@@ -21,4 +21,9 @@
     <color name="zm_pay_box_color">#F0F0F0</color>
 
     <integer name="zm_pay_menu_count">5</integer>
+
+    <item name="h5_webview" type="id" />
+
+    <string name="h5_webview_refresh">出错啦！刷新看看</string>
+    <string name="h5_webview_refresh_bt">刷新</string>
 </resources>

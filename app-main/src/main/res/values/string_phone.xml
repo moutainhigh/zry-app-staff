@@ -1,44 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="phone_app_name">电话</string>
-    <string name="call_dialog_customer_detail">顾客详情</string>
-    <string name="call_dialog_create_takeout">创建外卖</string>
-    <string name="call_dialog_create_booking">创建预订</string>
-    <string name="call_dialog_create_queue">创建排队</string>
 
-    <string name="dialing_keyboard">拨号键盘</string>
     <string name="phone_no_name">匿名用户</string>
-    <string name="call_duration">通话时长：%s</string>
 
-    <string name="customer_takeaway_times">外卖 %d 次 </string>
-    <string name="customer_book_times">预订 %d 次 </string>
-    <string name="customer_line_times">排队 %d 次</string>
-    <string name="customer_cost">消费 {HBF}%s</string>
-
-    <string name="phone_list_title">电话</string>
-
-    <string name="tel_is_busy">电话正在通话中</string>
-    <string name="tel_is_busy2">电话正在通话，请先挂断后再重新拨打</string>
     <string name="check_phone">电话未连接，请检查！</string>
-    <string name="no_phone_num">匿名电话</string>
-    <string name="anonymous_phone_num">匿名电话  %s</string>
-    <string name="buffet_module">自助餐模块不能点外卖</string>
     <string name="phone_nonsupport">该设备不支持新版蓝牙电话</string>
-    <string name="start_order">开 始 点 餐</string>
-    <string name="phone_booking">预    定</string>
-    <string name="phone_unconnect_please_check">电话连接已经断开，请检查连接。。。</string>
-    <string name="string_phone_bluebooth_invaliable">当前蓝牙不可用</string>
-    <string name="string_phone_setting_wifi">去设置界面开启蓝牙</string>
-    <string name="string_phone_settings">设置</string>
-    <string name="string_phone_known">知道了</string>
-    <string name="string_phone_user_handle_device">请使用手柄挂机</string>
-    <string name="string_phone_login_first">用户未登录，请先登录</string>
-    <string name="string_phone_cut_down">通话结束</string>
-    <string name="string_phone_phone_number">请输入号码</string>
-    <string name="string_phone_unknown_number">未知号码</string>
-    <string name="string_phone_connected">已连接</string>
-    <string name="string_phone_disconnected">未连接</string>
-    <string name="string_phone_waitting_please">正在处理网络请求，请稍后</string>
-    <string name="string_phone_bluetooth_con_success">连接蓝牙成功</string>
-    <string name="string_phone_bluetooth_con_faild">连接蓝牙失败，请在设置里面重新设置</string>
 </resources>

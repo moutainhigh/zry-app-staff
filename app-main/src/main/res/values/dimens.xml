@@ -23,31 +23,9 @@
     <dimen name="text_32">32sp</dimen>
     <dimen name="text_48">48sp</dimen>
     <dimen name="order_dish_spacing">2dp</dimen>
-    <dimen name="check_status_dialog_width">400dp</dimen>
-    <dimen name="check_status_dialog_height">600dp</dimen>
-    <dimen name="calculator_dialog_width">462dp</dimen>
-    <dimen name="calculator_dialog_title_hight">104dp</dimen>
-    <dimen name="order_dish_left_view_width">74dp</dimen>
-    <dimen name="order_dish_left_view_bottom">5dp</dimen>
-    <dimen name="order_dish_left_view_top">5dp</dimen>
-    <dimen name="order_dish_left_view_right">30dp</dimen>
-    <dimen name="cashier_trade_pending_pager_paddingLeft">70dp</dimen>
-    <dimen name="cashier_trade_pending_pager_paddingRight">70dp</dimen>
-    <dimen name="cashier_trade_pending_pager_marginRight">30dp</dimen>
-    <dimen name="cashier_trade_pending_pager_marginLeft">30dp</dimen>
-    <dimen name="order_center_item_detail_layout">20dp</dimen>
-    <dimen name="order_center_detail_list_minWidth">80dp</dimen>
-    <dimen name="order_center_detail_list_minWidth_other">100dp</dimen>
     <dimen name="order_dish_grid_width">70dp</dimen>
-    <dimen name="order_dish_grid_margin">11dp</dimen>
-    <dimen name="order_dish_grid_paddingTop">19dp</dimen>
-    <dimen name="order_dish_grid_marginTop">8dp</dimen>
-    <dimen name="sender_order_detail_paddingLeft">50dp</dimen>
-    <dimen name="sender_order_detail_paddingRight">50dp</dimen>
-    <dimen name="sender_order_detail_marginRight">38dp</dimen>
     <dimen name="order_dish_grid_item_selected_margin">8dp</dimen>
     <dimen name="order_dish_grid_item_desc_margin">12dp</dimen>
-    <dimen name="order_dish_list_page">90dp</dimen>
     <dimen name="btn_bottom_height">58dp</dimen>
     <dimen name="title_bar_height">58.6dp</dimen>
     <dimen name="order_dish_activity_grid_item_width">390dp</dimen>
@@ -58,16 +36,13 @@
     <!--快餐属性栏区域宽度-->
     <dimen name="snack_dish_property_zone_width">270dp</dimen>
     <!--快餐属性栏菜品数量控件高度-->
-    <dimen name="snack_property_dish_quantity_height">82dp</dimen>
     <!--快餐属性栏菜品数量控件top间隔-->
-    <dimen name="snack_property_dish_quantity_margin_top">14dp</dimen>
     <dimen name="property_action_button_height">48dp</dimen>
     <dimen name="dish_property_action_button_margin_top">9dp</dimen>
     <dimen name="snack_switch_page_button_height">36dp</dimen>
 
     <dimen name="corner_card">6dp</dimen>
     <!--弹窗的宽度-->
-    <dimen name="common_dialog_width">374dp</dimen>
     <!--状态栏高度-->
     <dimen name="status_bar_height">20dp</dimen>
     <!--点单页索引栏位高度-->
@@ -81,7 +56,6 @@
     <dimen name="title_bar_tab_width">120dp</dimen>
     <dimen name="title_bar_tab_height">36dp</dimen>
 
-    <dimen name="loading_dialog_layout_margintop">-45dp</dimen>
     <!--button 默认的圆角-->
     <dimen name="btn_radium_default">6dp</dimen>
     <dimen name="btn_radius">4dp</dimen>

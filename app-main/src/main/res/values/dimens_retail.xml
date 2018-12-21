@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dialog_retail_keyboard_margin">1px</dimen>
-    <dimen name="retail_divider_item_height">2px</dimen>
 
 </resources>

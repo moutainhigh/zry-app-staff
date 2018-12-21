@@ -57,7 +57,6 @@ import com.zhongmei.bty.commonmodule.util.DateUtil;
 import com.zhongmei.bty.commonmodule.util.DinnerMobClickAgentEvent;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 import com.zhongmei.bty.dinner.Listener.DishOptListener;
-import com.zhongmei.bty.dinner.TableMainActivity;
 import com.zhongmei.bty.dinner.action.ActionSaveDishService;
 import com.zhongmei.bty.dinner.manager.DinnerTradeItemManager;
 import com.zhongmei.bty.dinner.ordercenter.view.DinnerChooseTableDialogFragment;
@@ -907,7 +906,7 @@ public class TableInfoContentBean {
             DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnerTableTradeVo.getDinnertableTrade(), dinnerTableTradeVo.getTradeVo());
             DinnerShoppingCart.getInstance().resetOrderFromTable(dinnerTableTradeVo.getUnionMainTradeInfo(), dinnerTableTradeVo.getInfo(), true);
             // 显示点菜界面
-            ((TableMainActivity) activity).showOrderDish();
+            //((TableMainActivity) activity).showOrderDish();
 
         }
     }

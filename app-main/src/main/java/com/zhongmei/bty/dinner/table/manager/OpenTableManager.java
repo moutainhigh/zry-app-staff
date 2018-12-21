@@ -5,40 +5,38 @@ import android.os.AsyncTask;
 import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 
+import com.zhongmei.bty.basemodule.auth.permission.manager.AuthLogManager;
+import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
+import com.zhongmei.bty.basemodule.trade.bean.DinnertableTradeInfo;
+import com.zhongmei.bty.basemodule.trade.bean.DinnertableTradeModel;
+import com.zhongmei.bty.basemodule.trade.bean.IDinnertable;
+import com.zhongmei.bty.basemodule.trade.bean.TradeTableInfo;
+import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.bty.basemodule.trade.constants.DinnerTableConstant;
+import com.zhongmei.bty.basemodule.trade.enums.DinnertableStatus;
+import com.zhongmei.bty.basemodule.trade.message.TradeResp;
+import com.zhongmei.bty.basemodule.trade.operates.TradeOperates;
+import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.bty.commonmodule.database.enums.OrderActionEnum;
+import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
+import com.zhongmei.bty.dinner.table.TableInfoFragment;
+import com.zhongmei.bty.dinner.table.view.OpentablePopWindow;
+import com.zhongmei.bty.dinner.vo.DinnertableVo;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.context.session.Session;
 import com.zhongmei.yunfu.context.session.core.user.AuthUser;
-import com.zhongmei.bty.basemodule.trade.bean.TradeTableInfo;
-import com.zhongmei.bty.basemodule.trade.constants.DinnerTableConstant;
-import com.zhongmei.yunfu.resp.UserActionEvent;
-import com.zhongmei.yunfu.net.volley.VolleyError;
-import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
-import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.yunfu.context.util.SystemUtils;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 import com.zhongmei.yunfu.db.entity.trade.TradeExtra;
 import com.zhongmei.yunfu.db.entity.trade.TradeTable;
 import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.db.enums.DeliveryType;
-import com.zhongmei.bty.commonmodule.database.enums.OrderActionEnum;
-import com.zhongmei.yunfu.context.util.SystemUtils;
-import com.zhongmei.yunfu.util.ToastUtil;
-import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
-import com.zhongmei.yunfu.resp.ResponseListener;
-import com.zhongmei.bty.basemodule.trade.operates.TradeOperates;
-import com.zhongmei.yunfu.resp.ResponseObject;
-import com.zhongmei.bty.basemodule.trade.message.TradeResp;
-import com.zhongmei.bty.dinner.DinnerMainActivity;
-import com.zhongmei.bty.dinner.TableMainActivity;
-import com.zhongmei.bty.dinner.table.TableInfoFragment;
-import com.zhongmei.bty.basemodule.trade.bean.DinnertableTradeModel;
-import com.zhongmei.bty.dinner.table.view.OpentablePopWindow;
-import com.zhongmei.bty.basemodule.trade.enums.DinnertableStatus;
-import com.zhongmei.bty.basemodule.trade.bean.DinnertableTradeInfo;
-import com.zhongmei.bty.dinner.vo.DinnertableVo;
-import com.zhongmei.bty.basemodule.trade.bean.IDinnertable;
-import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.yunfu.resp.EventResponseListener;
-import com.zhongmei.bty.basemodule.auth.permission.manager.AuthLogManager;
+import com.zhongmei.yunfu.resp.ResponseListener;
+import com.zhongmei.yunfu.resp.ResponseObject;
+import com.zhongmei.yunfu.resp.UserActionEvent;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -233,11 +231,11 @@ public class OpenTableManager {
             DinnertableTradeInfo info = DinnertableTradeInfo.create(tradeModel, tradeVo);
 
             DinnerShoppingCart.getInstance().resetOrderFromTable(info, true);
-            ((DinnerMainActivity) context).showOrderDish();
+            //((DinnerMainActivity) context).showOrderDish();
 
             OpentablePopWindow.getInstance(context).hide();
-            TableInfoFragment fragment = (TableInfoFragment) ((DinnerMainActivity) context).getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
-            fragment.enableAddOrderBtn(true);
+            //TableInfoFragment fragment = (TableInfoFragment) ((DinnerMainActivity) context).getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
+            //fragment.enableAddOrderBtn(true);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -261,14 +259,14 @@ public class OpenTableManager {
             DinnertableTradeInfo info = DinnertableTradeInfo.create(tradeModel, tradeVo);
 
             DinnerShoppingCart.getInstance().resetOrderFromTable(info, true);
-            ((TableMainActivity) context).showOrderDish();
+            //((TableMainActivity) context).showOrderDish();
 
             //tradevo恢复为未更改
 //            tradeVo.setChangedFalse();//提处到外部
 
             OpentablePopWindow.getInstance(context).hide();
-            TableInfoFragment fragment = (TableInfoFragment) ((TableMainActivity) context).getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
-            fragment.enableAddOrderBtn(true);
+            //TableInfoFragment fragment = (TableInfoFragment) ((TableMainActivity) context).getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
+            //fragment.enableAddOrderBtn(true);
         } catch (Exception e) {
             e.printStackTrace();
         }

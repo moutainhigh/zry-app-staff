@@ -1,5 +1,6 @@
 package com.zhongmei.bty.customer.views;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -103,6 +104,7 @@ public class CustomerLevelUpDialogFragment extends BasicDialogFragment {
 
     private ErpCommercialRelationDal mErpDal;
 
+    @SuppressLint("WrongConstant")
     public static void show(CustomerResp customer, FragmentManager fm) {
         CustomerLevelUpDialogFragment dialogFragment =
                 CustomerLevelUpDialogFragment_.builder().mCustomer(customer).build();

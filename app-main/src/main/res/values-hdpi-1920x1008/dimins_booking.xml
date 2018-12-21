@@ -2,23 +2,7 @@
 <resources>
     <!--预定主界面-->
     <!--预定列表界面-->
-    <dimen name="booking_list_title_height">40dp</dimen>
-    <dimen name="booking_list_btn_height">48.6dp</dimen>
     <!--创建预定UI界面-->
-    <dimen name="booking_create_btnHeight">48dp</dimen>
-    <dimen name="booking_create_right_paddingTop">24dp</dimen>
-    <dimen name="bokking_create_layout_paddingBottom">16dp</dimen>
-    <dimen name="booking_create_right_paddingLeftAddRight">20dp</dimen>
-    <dimen name="booking_create_right_item_height">58dp</dimen>
-    <dimen name="booking_create_right_item_TextSize">18sp</dimen>
-    <dimen name="booking_create_right_item_marginTop">13dp</dimen>
-    <dimen name="booking_create_left_item_height">70dp</dimen>
     <!--预定桌台UI-->
-    <dimen name="booking_chooseDesk_height">126dp</dimen>
-    <dimen name="booking_chooseDesk_margin">6dp</dimen>
-    <dimen name="booking_chooseDesk_marginLeft">10dp</dimen>
-    <dimen name="booking_chooseDesk_middle_margin">10dp</dimen>
-    <dimen name="booking_chooseDesk_bottomLayout_height">28dp</dimen>
-    <dimen name="booking_chooseDesk_DeskName_size">18sp</dimen>
 
 </resources>

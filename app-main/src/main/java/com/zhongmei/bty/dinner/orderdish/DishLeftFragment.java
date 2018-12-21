@@ -42,7 +42,6 @@ import com.zhongmei.bty.cashier.shoppingcart.ShoppingCartListener;
 import com.zhongmei.bty.cashier.shoppingcart.ShoppingCartListerTag;
 import com.zhongmei.bty.commonmodule.util.SpendTimeFormater;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
-import com.zhongmei.bty.dinner.DinnerPayActivity_;
 import com.zhongmei.bty.dinner.Listener.DishOptListener;
 import com.zhongmei.bty.dinner.action.ActionBatchOperationItems;
 import com.zhongmei.bty.dinner.action.ActionDinnerChangePage;
@@ -979,10 +978,10 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
         }
     }
 
-    @Click(R.id.image_customer)
+    /*@Click(R.id.image_customer)
     protected void customerOnClick() {
 
-    }
+    }*/
 
 
     @Click(R.id.rl_save_print)
@@ -1090,8 +1089,8 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
                 DinnerShoppingCart.getInstance().onlyMath();
 
 //		PayManager.gotoDinnerPayUI(this.getActivity(), null,null,false, false);
-                Intent intent = new Intent(getActivity(), DinnerPayActivity_.class);
-                getActivity().startActivity(intent);
+                /*Intent intent = new Intent(getActivity(), DinnerPayActivity_.class);
+                getActivity().startActivity(intent);*/
                 DinnerCashManager.removeInValidAuthLog(mShoppingCart.getOrder());
             }
         });
@@ -1161,7 +1160,7 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
 
     }
 
-    @Click(R.id.clearShoppingCart)
+    /*@Click(R.id.clearShoppingCart)
     protected void clearShoppingCartInfo() {
         if (!ClickManager.getInstance().isClicked()) {
             // 如果购物车中无信息，则清除按钮不可用
@@ -1174,7 +1173,7 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
                 mClearShoppingCart();
             }
         }
-    }
+    }*/
 
     /**
      * @Title: restClearShoppingCartBut

@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_store_app_name">我的服务</string>
-    <string name="download_unknown_title" msgid="7015124071247271585">"&lt;未命名&gt;"</string>
-    <string name="notification_filename_separator">", "</string>
-    <string name="notification_filename_extras" formatted="false">" 还有 %d 项"</string>
-    <string name="notification_download_complete">"下载完成"</string>
-    <string name="notification_download_failed">"下载失败"</string>
-    <string name="notification_need_wifi_for_size">"此大小的文件需要通过 Wi-Fi 下载"</string>
-
-    <string name="astore_download_mgr">下载管理</string>
-    <string name="astore_app_store">应用市场</string>
-    <string name="astore_no_downloads">没有下载</string>
-    <string name="astore_download_add">已加入下载列表</string>
-    <string name="astore_missing_title" formatted="false">未知名</string>
-    <string name="astore_download_size" formatted="false">大小：%s</string>
-    <string name="astore_download_progress" formatted="false">正在下载：%s/%s</string>
-
 
 </resources>

@@ -4,8 +4,6 @@
     <string name="hour_before">小时前</string>
     <string name="day_before">天前</string>
     <string name="bill_no">单号</string>
-    <string name="batch_title">批次：</string>
-    <string name="dish_name_lable">菜名：</string>
     <string name="add_dish">加菜</string>
     <string name="order">订单</string>
     <string name="service">服务</string>
@@ -20,8 +18,4 @@
     <string name="battery_low">电量低</string>
     <string name="phone_unconnect">电话未接入</string>
     <string name="printer_connect_failed">打印机连接失败</string>
-    <string name="call_dish">催菜</string>
-    <string name="call_water">倒茶</string>
-    <string name="call_checkout">结账</string>
-    <string name="call_other">其他</string>
 </resources>

@@ -1,133 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="card_active">激活</string>
-    <string name="card_active_have_choose">激活实体卡(已选%d张实体卡)</string>
-    <string name="no_have_cardkind">没查到类别数据</string>
-    <string name="no_have_cardstatus">没查到卡的状态数据</string>
-    <string name="please_choose_card">请选择卡！</string>
-    <string name="please_enter_data">请输入数据！</string>
-    <string name="no_have_query_card">未能查询到相应的卡</string>
-    <string name="card_have_choose">已选择了%d张卡</string>
-    <string name="card_integral">积分:</string>
-    <string name="card_remainvalue">储值:</string>
-    <string name="card_female">女</string>
-    <string name="card_male">男</string>
-    <string name="card_number">卡号:%s</string>
-    <string name="anous_card_number">卡号: </string>
-    <string name="please_enter_phonenumber">请输入手机号码</string>
-    <string name="card_active_success">%s张卡片已完成了关联激活!\n您已完成激活流程，实体卡已生效。</string>
-    <string name="card_active_fail">"激活失败！"</string>
-    <string name="have_done_opertaion">完成操作</string>
-    <string name="have_finsh_opertaion">结束操作</string>
     <string name="try_again">再次尝试</string>
-    <string name="card_sale">会员卡售卡</string>
-    <string name="card_bind">会员卡绑定</string>
-    <string name="card_sale_have_choose">售卡(已选%d张实体卡)</string>
-    <string name="card_sale_success">%s张卡片已完成销售!\n是否继续为所选择的卡关联激活?</string>
-    <string name="card_link_active">关联激活</string>
-    <string name="card_try_later">以后再说</string>
-    <string name="card_device_no_connent">设备未连接</string>
-    <string name="card_please_enter_card">请录入卡号</string>
-    <string name="card_please_enter_begincard">请录入前段卡号</string>
-    <string name="card_please_enter_endcard">请录入后段卡号</string>
-    <string name="card_status_str">实体卡状态:</string>
-    <string name="card_price_str">实体卡工本费:</string>
-    <string name="card_end_money">卡内余额:</string>
-    <string name="card_return_money">退回合计:</string>
-    <string name="select_card_return_way">请选择退回方式</string>
-    <string name="card_return_way">退回方式:</string>
-    <string name="card_return_str">退卡</string>
-    <string name="anonymous_card_return">匿名卡退卡</string>
-    <string name="return_card_error">此卡不能进行退卡操作！</string>
-    <string name="input_card_tips">请输入卡号！</string>
-    <string name="card_time">售卡时间:</string>
-    <string name="card_operator_name">售卡操作人:</string>
-    <string name="customer_card_return">会员卡退卡</string>
     <string name="nothing">无</string>
-    <string name="no_return_card_permission">门店不具备匿名卡退卡权限！</string>
-    <string name="active_card_not_return">已激活的卡不允许退卡！</string>
-    <string name="cost_of_card">实体卡工本费</string>
-    <string name="card_remain_money">卡内余额 &#160;&#160;</string>
 
     <!-- v7.15 换卡 -->
-    <string name="entity_card_change">换卡</string>
-    <string name="entity_card_old_info">旧卡信息</string>
-    <string name="entity_member_info">会员信息</string>
-    <string name="entity_card_new_info">新卡信息</string>
-    <string name="hint_entity_card_input">请输入会员手机号</string>
-    <string name="hint_entity_card_new">请刷卡输入新卡卡号</string>
-    <string name="entity_card_member_name">会员姓名</string>
-    <string name="entity_card_old_number">原卡卡号</string>
-    <string name="entity_card_new_number">新卡卡号</string>
-    <string name="entity_card_balance">卡内余额</string>
-    <string name="entity_card_new_cost">新卡卡费</string>
-    <string name="entity_card_new_state">新卡状态</string>
-    <string name="entity_card_reset">—</string>
-    <string name="entity_card_phone_empty">手机号不能为空</string>
-    <string name="entity_card_validate_code_empty">验证码不能为空</string>
-    <string name="entity_card_phone_validate_error">手机号不正确</string>
-    <string name="entity_card_phone_length">手机位数不正确</string>
-    <string name="entity_card_phone_error">该会员未绑定实体卡</string>
-    <string name="entity_card_member_error">该手机号不是会员手机号</string>
-    <string name="entity_card_change_tips">换卡后，原卡将作废，会员余额、积分等都将转移到新卡</string>
-    <string name="entity_card_change_error">换卡失败</string>
-    <string name="entity_card_sale_error">绑卡失败</string>
-    <string name="entity_card_change_success">换卡成功</string>
-    <string name="entity_card_sale_success">绑卡成功</string>
-    <string name="entity_card_sale">售卡</string>
-    <string name="entity_card_same_num_error">旧卡和新卡卡号不能相同</string>
-    <string name="entity_card_state_error">新卡状态不正确</string>
-    <string name="entity_card_unsell_error">未出售的卡才能进行换卡操作</string>
-    <string name="entity_card_type_error">不同卡种的实体卡不能进行换卡</string>
-    <string name="entity_card_choose">请选择</string>
 
     <!-- v7.16 金城 -->
-    <string name="entity_card_validate_code">短信验证</string>
-    <string name="entity_card_validate_phone">手机认证</string>
-    <string name="entity_card_get_code">获取验证码</string>
-    <string name="entity_card_input_psd">请会员输入支付密码</string>
-    <string name="entity_card_controller">操作</string>
-    <string name="entity_card_member_confirm">会员信息确认</string>
-    <string name="entity_card_binding_to">绑到此卡</string>
-    <string name="entity_card_binding">绑定此卡</string>
-    <string name="entity_card_pay_setting">支付设置</string>
-    <string name="entity_card_member_phone">手机号码：</string>
-    <string name="entity_card_member_name_jc">会员姓名：</string>
-    <string name="entity_card_member_balance">账户余额：</string>
-    <string name="entity_card_member_card_information">卡号信息：</string>
-    <string name="entity_card_member_pay_setting">是否开通小额免密支付</string>
-    <string name="entity_card_member_validate_error">用户验证失败</string>
-    <string name="entity_card_validate_code_error">验证码发送失败</string>
-    <string name="entity_card_validate_error">充值验证失败</string>
-    <string name="value_card_amount_not_equal_charge_amount">充值卡面额和充值的金额不相等</string>
 
     <!-- v8.1 金城 -->
-    <string name="order_card_sale_record">售卡记录</string>
-    <string name="order_card_sale_empty">暂无售卡记录</string>
 
     <!-- v8.2 金城 -->
-    <string name="order_card_charge_record">充值记录</string>
-    <string name="order_card_charge_empty">暂无充值记录</string>
-    <string name="order_card_charge_type">充值方式</string>
-    <string name="order_card_sale_phone">手机号</string>
-    <string name="order_card_charge_hint">请输入卡号</string>
-    <string name="jc_customer_card">金城会员卡</string>
 
     <!-- v8.5 匿名卡 -->
-    <string name="anony_card_sale_charge_balance">储值共计</string>
-    <string name="anony_card_back_mode">退回方式</string>
-    <string name="anony_card_sale_time">售卡时间</string>
-    <string name="anony_card_sale_creater">售卡操作人</string>
-    <string name="anony_card_cost">工本费</string>
-    <string name="anony_card_balance">充值余额</string>
-    <string name="anony_card_present">赠送余额</string>
-    <string name="anony_card_back_none">（不退回）</string>
-    <string name="anony_card_back_balance">退回金额</string>
-    <string name="anony_card_back_total">退回合计</string>
-    <string name="anony_card_full">满</string>
-    <string name="anony_card_add">赠</string>
 
     <!-- v8.7.0 -->
-    <string name="anony_card_amount_tips">输入金额不能小于卡费，请重新输入</string>
 </resources>

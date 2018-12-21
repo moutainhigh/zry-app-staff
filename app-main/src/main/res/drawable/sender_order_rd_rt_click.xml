@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_focused="true" android:drawable="@drawable/booking_buttom_rt_unchecked" /> <!-- focused -->
-    <item android:state_checked="true" android:drawable="@drawable/booking_buttom_rt_checked" /> <!-- focused and pressed-->
-    <item android:drawable="@drawable/booking_buttom_rt_unchecked" /> <!-- default -->
-</selector>  

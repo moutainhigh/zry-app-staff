@@ -1,24 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="totalPrice">未清账金额:{HBF}%s</string>
-    <string name="totalPerson">未清账:%s人</string>
-    <string name="totalOrder">未清账单数:%s单</string>
-    <string name="backSenderOrder">送餐员管理</string>
-    <string name="batchClearing">批量清账</string>
-    <string name="takeout_sende_ontime">立即送达</string>
-    <string name="takeout_distribute_finish_today">{0} 配送完成</string>
-    <string name="takeout_distribute_finish_yesterday">昨天{0} 配送完成</string>
-    <string name="takeout_distribute_finish_daybeforeyesterday">前天{0} 配送完成</string>
-    <string name="takeout_wait_distribute_today">要求{0} 送达</string>
-    <string name="takeout_wait_distribute_yesterday">要求昨天{0} 送达</string>
-    <string name="takeout_wait_distribute_daybeforeyesterday">要求前天{0} 送达</string>
-    <string name="takeout_distributing_today">{0} 出店</string>
-    <string name="takeout_distributing_yesterday">昨天{0} 出店</string>
-    <string name="takeout_distributing_daybeforeyesterday">前天{0} 出店</string>
-    <string name="takeout_undeal_distribute_titlebar">待处理</string>
-    <string name="takeout_wait_distribute_titlebar">待配送</string>
-    <string name="takeout_distributing_titlebar">配送中</string>
-    <string name="takeout_distribute_finish_titlebar">配送完成</string>
-
 </resources>

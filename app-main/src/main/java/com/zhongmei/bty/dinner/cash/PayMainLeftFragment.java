@@ -1586,33 +1586,33 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         if (isCouponInvalid && isIntegralCashInvalid) {
             checkInvalidDialog(R.string.privilegeisInvalid,
                     R.string.removeDiscount,
-                    R.id.fastCash,
+                    0,
                     FLAG_REMOVE_ALLDISCOUNT);
             return false;
         } else {
             if (isCouponInvalid) {
                 checkInvalidDialog(R.string.couponIsInvalid,
                         R.string.removeCoupon,
-                        R.id.fastCash,
+                        0,
                         FLAG_REMOVE_COUPON);
                 return false;
             } else if (isIntegralCashInvalid) {
 
                 checkInvalidDialog(R.string.intergral_ineffective,
                         R.string.removeIntergral,
-                        R.id.fastCash,
+                        0,
                         FLAG_REMOVE_INTEGRAL);
                 return false;
             } else if (isGiftCoupon) {
                 checkInvalidDialog(R.string.giftcoupon_ineffective,
                         R.string.removeGiftCoupon,
-                        R.id.fastCash,
+                        0,
                         FLAG_REMOVE_GIFT_COUPON);
                 return false;
             } else if (isWeixinCode) {
                 checkInvalidDialog(R.string.weiChatcode_ineffective,
                         R.string.removeWeChatCode,
-                        R.id.fastCash,
+                        0,
                         FLAG_REMOVE_WEIXINCODE_COUPON);
                 return false;
             }

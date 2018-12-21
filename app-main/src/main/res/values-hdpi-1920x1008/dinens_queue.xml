@@ -24,8 +24,6 @@
     <dimen name="queue_list_item_text1_size">18.67sp</dimen>
     <dimen name="queue_list_item_text2_size">12sp</dimen>
     <!--历史记录-->
-    <dimen name="queue_left_item_paddingStartAddEnd">26dp</dimen>
-    <dimen name="queue_left_item_paddingTop">8dp</dimen>
 
     <dimen name="queue_right_edit_height">48dp</dimen>
     <dimen name="queue_right_edit_textSize">16sp</dimen>

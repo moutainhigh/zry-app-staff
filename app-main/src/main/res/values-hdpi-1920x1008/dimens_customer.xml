@@ -1,25 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="return_customerCard_item1_height">385.5dp</dimen>
-    <dimen name="return_customerCard_item2_height">275.3dp</dimen>
-    <dimen name="return_customerCard_readCard_height">54.5dp</dimen>
-    <dimen name="return_customerCard_ok_height">48dp</dimen>
-    <dimen name="return_customerCard_btn_read_padding">9dp</dimen>
-    <dimen name="return_customerCard_btn_read_size">15dp</dimen>
 
     <dimen name="customer_intrgral_time_l">140dp</dimen>
     <dimen name="customer_intrgral_person_r">135dp</dimen>
     <dimen name="customer_intrgral_divider_l">140dp</dimen>
     <dimen name="customer_intrgral_divider_r">133dp</dimen>
 
-    <dimen name="customer_balance_time_l">130dp</dimen>
-    <dimen name="customer_balance_balance_l">105dp</dimen>
-    <dimen name="customer_balance_give_l">105dp</dimen>
-    <dimen name="customer_balance_other_balance_l">105dp</dimen>
-    <dimen name="customer_balance_end_value_l">70dp</dimen>
-    <dimen name="customer_balance_person_l">125dp</dimen>
-    <dimen name="customer_balance_divider_l">132dp</dimen>
-    <dimen name="customer_balance_divider_r">125dp</dimen>
     <dimen name="customer_charging_success_dialog_name_l">138dp</dimen>
 
     <!--<dimen name="customer_chargind_layout_w">560dp</dimen>-->
@@ -58,7 +44,6 @@
     <!--<dimen name="customer_account_table_h">90dp</dimen>-->
 
     <integer name="customer_comm_weight">373</integer>
-    <integer name="customer_comm_heigth">480</integer>
     <dimen name="customer_dialog_top">10dp</dimen>
     <dimen name="customer_defalut_bottom">10dp</dimen>
     <dimen name="customer_defalut_top">15dp</dimen>

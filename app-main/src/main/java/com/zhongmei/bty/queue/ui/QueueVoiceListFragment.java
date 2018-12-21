@@ -165,7 +165,7 @@ public class QueueVoiceListFragment extends QueueBaseFragment {
     /**
      * 选中
      *
-     * @param vo
+     * @param position
      */
     @ItemClick(R.id.queue_voice_listview)
     public void queueVoiceListViewClick(final int position) {
@@ -196,7 +196,7 @@ public class QueueVoiceListFragment extends QueueBaseFragment {
     /**
      * 长按删除
      *
-     * @param vo
+     * @param position
      */
     @ItemLongClick(R.id.queue_voice_listview)
     public void queueVoiceListViewLongClick(final int position) {

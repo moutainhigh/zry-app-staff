@@ -1,21 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="browser_app_name">浏览器</string>
-    <string name="lanucher_shop_info">商户编号：%1$s</string>
-    <string name="lanucher_mian_pos_info">主收银设备</string>
-    <string name="lanucher_device_info">设备编号：%1$s</string>
-    <string name="no_permission_hint">抱歉！您没有此业务的权限</string>
-    <string name="app_not_found_hint">抱歉！我无法为您启动这个应用</string>
-    <string name="app_version">OnOS系统版本：%1$s</string>
     <string name="no_user_has_permission">没有查找到拥有这个权限的用户</string>
     <string name="sure_loginout_hint">你确定注销此次登录?</string>
-    <string name="app_loginout_hint">您确定要退出系统吗?</string>
-    <string name="no_need_login_user_hint">没有登录的用户，不需要注销！</string>
-    <string name="load_app_is_running">正在加载app，请稍等片刻！</string>
-    <string name="no_user_login">账号登录</string>
-    <string name="loading">加载中</string>
-    <string name="logo_lang">智慧服务 实时直达</string>
-    <string name="logo_com"> (北京) 股份有限公司</string>
-    <string name="lanucher_user_center">帮助中心</string>
-    <string name="launcher_app_remove_hit" formatted="false">确定\"%s\"不再在主页桌面上显示</string>
 </resources>

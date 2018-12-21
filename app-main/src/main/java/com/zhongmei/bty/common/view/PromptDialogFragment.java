@@ -6,6 +6,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
@@ -68,6 +69,7 @@ public class PromptDialogFragment extends BasicDialogFragment {
         mTextView.setText(mMessage);
     }
 
+    @SuppressLint("WrongConstant")
     public static void show(FragmentManager fm, String message, int drawableId, OnClickListener listener) {
         if (fm == null || TextUtils.isEmpty(message)) {
             return;

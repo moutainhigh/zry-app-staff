@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="print_app_name">打印</string>
     <string name="connecting_print">正在连接打印...</string>
     <string name="split_fail_cannot_retry">拆单失败无法重试，请修改后前台或后厨票据配置</string>
     <string name="retry">重试</string>
-    <string name="custom">前台、</string>
-    <string name="kitchen">后厨、</string>
     <string name="print_failed">票据打印失败</string>
     <!--银联pos机-->
-    <string name="pos_card_no">卡号：</string>
     <!-- 拆单国际化字符串 -->
     <string name="ticket_outlet_type_name">出票口</string>
-    <string name="cashier_point_type_name">收银点</string>
     <string name="extracharges">附加费</string>
-    <string name="Cutdown">抹零</string>
-    <string name="printservice">打印服务</string>
-    <string name="heji">合计</string>
-    <string name="network">(网络)</string>
-    <string name="tickect_memo">以下网络菜品，各堂口只负责本区域可出的菜品</string>
     <!--<string name="renminbi">￥</string>-->
     <string name="gentleman">先生</string>
     <string name="no_menu">没有品项不能出单</string>
-    <string name="print_has_error">打印异常，请重启！</string>
     <string name="ticket_closed">结账单</string>
     <string name="ticket_ad_closing">预结单</string>
     <string name="ticket_note">客看单</string>
@@ -46,35 +35,9 @@
     <string name="ticket_move_dsih">移菜单</string>
     <string name="ticket_no_name">匿名储值单</string>
 
-    <string name="ticket_transfer_operator">转台</string>
-    <string name="ticket_merge_operator">合单</string>
-    <string name="ticket_move_operator">移菜</string>
-
-    <string name="print_ticket_transfer">转至</string>
-    <string name="print_ticket_merge">合至</string>
-    <string name="print_ticket_move">移至</string>
-
     <!-- 打印回调的message定义 -->
-    <string name="print_callback_normal">打印状态正常</string>
-    <string name="print_callback_unknown_error">打印遇到未知错误</string>
-    <string name="print_callback_data_error">打印数据异常</string>
-    <string name="print_callback_templet_error">获取自定义模板失败</string>
-    <string name="print_callback_no_valid_goods">没有有效品项不能出单</string>
-    <string name="print_callback_no_ticket_type">没有对应票据类型</string>
-    <string name="print_callback_no_choose_device">没有勾选当前设备</string>
-    <string name="print_callback_no_choose_delivery_type">没有勾选当前用餐类型</string>
-    <string name="print_callback_all_success">发起打印成功</string>
-    <string name="print_callback_part_success">发起打印成功(部分失败)</string>
-    <string name="print_callback_all_failed">发起打印失败</string>
-    <string name="print_callback_config_error">配置错误</string>
-    <string name="print_callback_no_choose_area">区域未配置</string>
-    <string name="print_callback_no_choose_goods">菜品未配置</string>
-    <string name="print_callback_package_error">模板数组组装出错</string>
-    <string name="print_callback_send_error">发送打印服务失败</string>
-    <string name="print_callback_send_success">发送打印服务成功</string>
     <string name="print_config_error">打印配置初始化错误,导致出票异常</string>
 
     <!--8.11新增-->
-    <string name="print_printer_name">打印机</string>
 
 </resources>

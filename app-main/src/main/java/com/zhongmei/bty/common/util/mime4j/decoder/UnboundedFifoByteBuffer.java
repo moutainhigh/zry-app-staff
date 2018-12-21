@@ -231,7 +231,7 @@ class UnboundedFifoByteBuffer {
                 }
                 lastReturnedIndex = index;
                 index = increment(index);
-                return new Byte(buffer[lastReturnedIndex]);
+                return Byte.valueOf(buffer[lastReturnedIndex]);
             }
 
             public void remove() {

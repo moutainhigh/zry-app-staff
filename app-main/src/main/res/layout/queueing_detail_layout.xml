@@ -132,7 +132,6 @@
                     android:id="@+id/tv_queue_customer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/booking_order_tables_title"
                     android:gravity="right"
                     android:textColor="@color/color_5F6A70"
                     android:textSize="14sp"

@@ -2,6 +2,7 @@ package com.zhongmei.beauty.customer;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.annotation.SuppressLint;
 import android.app.ActionBar.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
@@ -184,6 +185,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
      *
      * @param event
      */
+    @SuppressLint("WrongConstant")
     public void onEventMainThread(SideMenuClickEvent event) {
         if (drawer.isDrawerOpen(Gravity.START)) {
             drawer.closeDrawer(Gravity.START);
@@ -196,6 +198,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
      *
      * @param event
      */
+    @SuppressLint("WrongConstant")
     public void onEventMainThread(OrderRefreshClickEvent event) {
         if (drawer.isDrawerOpen(Gravity.START)) {
             drawer.closeDrawer(Gravity.START);
@@ -414,6 +417,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
         }
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(Gravity.START)) {
@@ -431,6 +435,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
     /*
      * 处理菜单侧边栏的显示和隐藏
      */
+    @SuppressLint("WrongConstant")
     @Click(R.id.iv_title_bar_menu)
     void onClickMenu() {
         // 点击标题栏菜单按钮
@@ -443,6 +448,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
     /*
      * 处理通知中心的显示隐藏
      */
+    @SuppressLint("WrongConstant")
     @Click(R.id.iv_queue_notify_center)
     void onClickNotifyCenter() {
         if (drawer.isDrawerOpen(Gravity.START)) {

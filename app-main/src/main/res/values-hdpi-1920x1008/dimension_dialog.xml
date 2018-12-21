@@ -25,24 +25,11 @@
     <!--<dimen name="dialog_common_weight">320dp</dimen>
     <dimen name="dialog_common_height">225.3dp</dimen>
     <dimen name="dialog_common_margin_top">5dp</dimen>-->
-    <dimen name="dialog_common_weight">479dp</dimen>
-    <dimen name="dialog_common_height">288dp</dimen>
     <dimen name="dialog_common_margin_top">6.6dp</dimen>
-    <dimen name="dialog_common_btn_height">53dp</dimen>
-    <dimen name="dialog_common_btn_size">18.6sp</dimen>
-    <dimen name="dialog_common_title_size">21.3sp</dimen>
     <dimen name="dialog_common_content_size">16sp</dimen>
 
-    <dimen name="dialog_weixin_coupon_weight">560dp</dimen>
-    <dimen name="dialog_weixin_coupon_height">720dp</dimen>
-    <dimen name="dialog_weixin_coupon_title_height">120dp</dimen>
-    <dimen name="dialog_weixin_coupon_margin">30dp</dimen>
-    <dimen name="dialog_weixin_coupon_size">32sp</dimen>
-    <dimen name="dialog_weixin_coupon_button_height">88dp</dimen>
-    <dimen name="dialog_weixin_coupon_check_view_height">100dp</dimen>
     <dimen name="dialog_pay_ok_weight">560px</dimen>
     <dimen name="dialog_pay_ok_height">680px</dimen>
-    <dimen name="dialog_number_keyboard_height">306dp</dimen>
     <dimen name="switcher_margin_right">10dp</dimen>
     <dimen name="bubble_margin_right">20dp</dimen>
 </resources>

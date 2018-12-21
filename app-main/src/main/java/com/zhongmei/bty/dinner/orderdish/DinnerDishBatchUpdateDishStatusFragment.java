@@ -1,5 +1,6 @@
 package com.zhongmei.bty.dinner.orderdish;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -96,6 +97,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
         mDishInfo = dishInfo;
     }
 
+    @SuppressLint("WrongConstant")
     @AfterViews
     protected void initView() {
 

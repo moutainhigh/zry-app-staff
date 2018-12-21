@@ -1,32 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="order_dish_left_view_width">74dp</dimen>
-    <dimen name="order_dish_left_view_bottom">5dp</dimen>
-    <dimen name="order_dish_left_view_top">5dp</dimen>
-    <dimen name="order_dish_left_view_right">30dp</dimen>
-    <dimen name="cashier_trade_pending_pager_paddingLeft">70dp</dimen>
-    <dimen name="cashier_trade_pending_pager_paddingRight">70dp</dimen>
-    <dimen name="cashier_trade_pending_pager_marginRight">30dp</dimen>
-    <dimen name="cashier_trade_pending_pager_marginLeft">30dp</dimen>
-    <dimen name="order_center_item_detail_layout">20dp</dimen>
-    <dimen name="order_center_detail_list_minWidth">80dp</dimen>
-    <dimen name="order_center_detail_list_minWidth_other">100dp</dimen>
     <dimen name="order_dish_grid_width">70dp</dimen>
-    <dimen name="order_dish_grid_margin">11dp</dimen>
-    <dimen name="order_dish_grid_paddingTop">12dp</dimen>
-    <dimen name="order_dish_grid_marginTop">8dp</dimen>
-    <dimen name="sender_order_detail_paddingLeft">50dp</dimen>
-    <dimen name="sender_order_detail_paddingRight">50dp</dimen>
-    <dimen name="sender_order_detail_marginRight">38dp</dimen>
     <dimen name="order_dish_grid_item_selected_margin">6dp</dimen>
     <!--点单页上边距-->
     <dimen name="order_dish_margin_top">8dp</dimen>
     <dimen name="order_dish_grid_item_desc_margin">9dp</dimen>
     <dimen name="order_dish_grid_item_width">130dp</dimen>
     <!--快餐属性栏菜品数量控件高度-->
-    <dimen name="snack_property_dish_quantity_height">83dp</dimen>
     <!--快餐属性栏菜品数量控件top间隔-->
-    <dimen name="snack_property_dish_quantity_margin_top">14dp</dimen>
     <dimen name="property_action_button_height">47dp</dimen>
     <dimen name="dish_property_action_button_margin_top">8dp</dimen>
     <dimen name="snack_switch_page_button_height">34dp</dimen>
@@ -39,7 +20,6 @@
     <dimen name="title_bar_tab_width">120dp</dimen>
     <dimen name="title_bar_tab_height">30dp</dimen>
 
-    <dimen name="loading_dialog_layout_margintop">-30dp</dimen>
     <!--点菜背景卡片圆角-->
     <dimen name="dish_card_radius">16dp</dimen>
     <dimen name="store_manager_toolbar_title_size">18sp</dimen>

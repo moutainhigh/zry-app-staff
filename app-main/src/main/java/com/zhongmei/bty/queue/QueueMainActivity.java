@@ -2,6 +2,7 @@ package com.zhongmei.bty.queue;
 
 import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -255,6 +256,7 @@ public class QueueMainActivity extends MainBaseActivity {
         }*/
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onNewIntent(Intent newIntent) {
         super.onNewIntent(newIntent);
@@ -273,6 +275,7 @@ public class QueueMainActivity extends MainBaseActivity {
         super.onPause();
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     protected void onStop() {
         if (drawerIdleTable.isDrawerOpen(Gravity.END)) {
@@ -290,6 +293,7 @@ public class QueueMainActivity extends MainBaseActivity {
         super.onDestroy();
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(Gravity.START)) {
@@ -426,6 +430,7 @@ public class QueueMainActivity extends MainBaseActivity {
     }
 
     // 点击标题栏菜单按钮
+    @SuppressLint("WrongConstant")
     @Click(R.id.iv_title_bar_menu)
     void clickTitleBarMenu() {
         if (drawer.isDrawerOpen(Gravity.START)) {
@@ -566,6 +571,7 @@ public class QueueMainActivity extends MainBaseActivity {
         }
     }
 
+    @SuppressLint("WrongConstant")
     private void changePage() {
         if (pageTag == PAGE_QUEUE_LIST) {
 //            switchListOrHistory(PAGE_QUEUE_LIST);
@@ -632,6 +638,7 @@ public class QueueMainActivity extends MainBaseActivity {
 
     }
 
+    @SuppressLint("WrongConstant")
     @Click({R.id.queue_list, R.id.queue_list_history, R.id.iv_queue_notify_center, R.id.create_queue_label, R.id.idle_table_list_label, R.id.iv_search, R.id.iv_search_back, R.id.iv_detail_back, R.id.queue_print_item_select})
     void initListener(View v) {
         if (ClickManager.getInstance().isClicked()) {
@@ -791,6 +798,7 @@ public class QueueMainActivity extends MainBaseActivity {
         EventBus.getDefault().post(new SwictPageEvent(QueueMainActivity.PAGE_QUEUE_DETAIL));
     }
 
+    @SuppressLint("WrongConstant")
     @Click(R.id.idle_table_close_btn)
     public void closeDrawerIdleTable() {
         if (drawerIdleTable.isDrawerOpen(Gravity.END)) {
@@ -803,6 +811,7 @@ public class QueueMainActivity extends MainBaseActivity {
      *
      * @param event
      */
+    @SuppressLint("WrongConstant")
     public void onEventMainThread(QueueShowChooseTableEvent event) {
         if (event.isShow()) {
             //显示桌台选择

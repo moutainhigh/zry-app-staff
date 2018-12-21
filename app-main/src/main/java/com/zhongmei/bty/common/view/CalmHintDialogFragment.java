@@ -5,6 +5,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
@@ -91,6 +92,7 @@ public class CalmHintDialogFragment extends BasicDialogFragment implements
         dialogFragment.show(fm, cancelListener);
     }
 
+    @SuppressLint("WrongConstant")
     public void show(FragmentManager fm, OnClickListener cancelListener) {
         setStyle(DialogFragment.STYLE_NO_TITLE, 0);
         setCancelListener(cancelListener);

@@ -36,7 +36,6 @@ import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 import com.zhongmei.bty.customer.CustomerActivity;
-import com.zhongmei.bty.customer.CustomerChargingBalanceActivity;
 import com.zhongmei.bty.customer.CustomerChargingDialogFragment;
 import com.zhongmei.bty.customer.CustomerChargingDialogFragment_;
 import com.zhongmei.bty.customer.event.CustomerFragmentReplaceListener;
@@ -1077,7 +1076,7 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
             args.putString("customerId", String.valueOf(mCustomer.customerId));
             args.putString("balance", mCustomer.remainValue + "");
             args.putString("integral", mCustomer.integral + "");
-            args.putSerializable(CustomerChargingBalanceActivity.KEY_CUSTOMER, mCustomer);
+            args.putSerializable(BeautyCustomerConstants.KEY_CUSTOMER, mCustomer);
             Intent intent = new Intent();
             intent.setClass(getActivity(), BeautyCustomerChargingBalanceActivity_.class);
             intent.putExtras(args);
@@ -1162,9 +1161,9 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
      * 跳转到预定页面
      */
     private void toBookPage() {
-        if (ClickManager.getInstance().isClicked(R.id.btn_booking)) {
+        /*if (ClickManager.getInstance().isClicked(R.id.btn_booking)) {
             return;
-        }
+        }*/
         /*VerifyHelper.verifyAlert(getActivity(), BookingApplication.PERMISSION_BOOKING,
                 new VerifyHelper.Callback() {
                     @Override

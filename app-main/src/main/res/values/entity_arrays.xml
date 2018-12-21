@@ -1,25 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string-array name="entity_sale">
-        <item></item>
-    </string-array>
-    <string-array name="entity_activation">
-        <item></item>
-    </string-array>
-
-    <string-array name="entity_activation_user">
-        <item>进入会员账号搜索界面;</item>
-        <item>输入账号进行查询;</item>
-        <item>将查询的账号与实体卡进行关联;</item>
-        <item>关联成功则完成激活流程;</item>
-    </string-array>
-    <string-array name="entity_create_user">
-        <item>进入添加会员界面;</item>
-        <item>完成必填会员信息,保存信息;</item>
-        <item>保存成功则会员添加成功;</item>
-        <item>将实体卡与该会员账号进行关联;</item>
-        <item>关联成功则完成激活流程;</item>
-    </string-array>
-
 </resources>

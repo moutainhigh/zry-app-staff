@@ -3,70 +3,11 @@
     <!--这是cashier组专用的style文件-->
 
     <!--********************************************************************************************【Layout】start -->
-    <style name="Layout"></style>
 
-    <style name="Layout.Setting">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:orientation">vertical</item>
-        <item name="android:background">#bcbcbc</item>
-        <item name="android:paddingLeft">64dp</item>
-        <item name="android:paddingTop">48dp</item>
-        <item name="android:paddingRight">64dp</item>
-    </style>
-
-    <style name="Layout.Title">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/title_bar_height</item>
-        <item name="android:background">@color/settings_blue</item>
-    </style>
-
-    <style name="Layout.Round">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/gray_round_bg</item>
-        <item name="android:divider">@drawable/shape_line</item>
-        <item name="android:dividerHeight">1px</item>
-        <item name="android:showDividers">middle</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="Layout.Round.Setting"></style>
-
-    <style name="Layout.Round.Setting.Item">
-        <item name="android:layout_marginTop">14dp</item>
-    </style>
     <!--********************************************************************************************【Layout】end -->
 
     <!--********************************************************************************************【TextView】start -->
-    <style name="TextView"></style>
 
-    <style name="TextView.Title">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:text">Title</item>
-    </style>
-
-    <style name="TextView.Label">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/print_text_gray</item>
-        <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="TextView.Item">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:paddingLeft">20dp</item>
-        <item name="android:paddingRight">20dp</item>
-        <item name="android:textColor">#333333</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:background">@drawable/list_item_blue_bg</item>
-        <item name="android:drawableRight">@drawable/selector_checkbox</item>
-    </style>
     <!--********************************************************************************************【TextView】end -->
 
     <!--********************************************************************************************【ToggleButton】start -->

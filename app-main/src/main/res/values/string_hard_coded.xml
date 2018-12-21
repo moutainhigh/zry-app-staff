@@ -1,47 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--人脸识别-->
-    <string name="face_collect">人脸采集</string>
-    <string name="face_collect_ing">正在人脸采集，请稍后。。。</string>
     <!--预订-->
-    <string name="booking_ok">预订完成</string>
-    <string name="booking_already_select">已选</string>
-    <string name="booking_select_all">全选此区域</string>
-    <string name="booking_create_remark_hint">请输入备注</string>
     <!--自助-->
-    <string name="buffet_show_pay_status">显示结账的状态</string>
-    <string name="buffet_order_dish_type_self_help">自助</string>
-    <string name="buffet_order_dish_type_alone">单点</string>
     <!--设置-->
-    <string name="setting_print_local">(本机)</string>
     <!--顾客登录-->
     <string name="customer_login_hint_login_type">或其他登录方式</string>
     <string name="customer_login_hint_login_type2">注册后再登录</string>
     <!--顾客-->
-    <string name="customer_detail_hint">升级或编辑顾客\n即可查看更多顾客信息</string>
-    <string name="customer_entity_card_num">实体卡号：</string>
-    <string name="customer_card_num_info">实体卡信息</string>
-    <string name="customer_card_info">会员卡信息</string>
     <string name="customer_already_face_collect">已认证头像</string>
-    <string name="customer_return_card_amount">应退金额</string>
-    <string name="customer_binding_card_choose_type">选择操作</string>
-    <string name="customer_binding_card_exist_customer">绑定已有会员</string>
-    <string name="customer_binding_card_new_customer">绑定新会员</string>
-    <string name="customer_binding_card_not_activate">暂不激活</string>
-    <string name="customer_binding_card_find_customer">查找会员</string>
-    <string name="customer_binding_card_find">查找</string>
-    <string name="customer_binding_card_customer_info">会员信息</string>
-    <string name="customer_find_card_input">录入</string>
-    <string name="customer_find_card_input_card_hint">请手动输入卡号</string>
-    <string name="customer_find_card_input_card">手动输入卡号</string>
-    <string name="customer_find_cards_input">多张连号卡录入</string>
-    <string name="customer_return_cards_false_toast">此卡不支持退卡</string>
-    <string name="customer_card_type_temp">临时卡</string>
     <string name="customer_integral_recharging">积入 {HBF}%1$s</string>
     <string name="customer_integral_consume">消费 -{HBF}%1$s</string>
     <string name="customer_integral_refund">退款 {HBF}%1$s</string>
     <string name="customer_integral_add_reason">补录原因：</string>
-    <string name="customer_integral_reduce_reason">扣除原因：</string>
     <!--公共弹窗-->
     <string name="dialog_item_content">内容</string>
     <!--退押金弹窗-->
@@ -58,65 +29,31 @@
     <string name="dinner_cancel_connect_table">取消联台</string>
     <string name="dinner_create_connect_table">创建联台</string>
     <!--团餐-->
-    <string name="group_not_group_info">暂无团餐数据</string>
-    <string name="group_dinner_standard">餐标</string>
     <string name="group_dinner_table_count">桌数</string>
-    <string name="group_dinner_check_amount">结账金额</string>
-    <string name="group_table_already_open">已开台</string>
-    <string name="group_order_already_pay">已结</string>
-    <string name="group_order_not_pay">待结</string>
     <!--开放平台应用-->
-    <string name="h5_down_title">标题</string>
-    <string name="h5_down_already_stop">已暂停</string>
-    <string name="h5_down_stop">暂停</string>
-    <string name="h5_down_install">安装</string>
-    <string name="h5_down_delete">删除</string>
     <!--交接-->
     <string name="handover_already_finish">已完成该班次的交接！</string>
     <string name="handover_up_page">上一页</string>
     <string name="handover_down_page">下一页</string>
     <!--金城-->
-    <string name="jc_customer_card_input_hint">请手动输入卡号</string>
-    <string name="jc_customer_card_input">录入</string>
-    <string name="jc_sale_card_time">时间</string>
-    <string name="jc_sale_card_num">卡号</string>
-    <string name="jc_sale_card_tel">手机号</string>
-    <string name="jc_sale_card_amount">售价</string>
-    <string name="jc_sale_card_user">经手人</string>
-    <string name="jc_card_name">金诚卡</string>
-    <string name="jc_please_swiping_card">请刷卡</string>
     <!--库存-->
     <string name="inventory_choose_dish">选择需要退回库存的商品</string>
     <string name="inventory_return_dish">退回库存的商品</string>
-    <string name="inventory_dish_check">商品盘点</string>
-    <string name="inventory_show_history">查看历史</string>
-    <string name="inventory_already_save">已保存</string>
     <!--券-->
-    <string name="pay_check_coupon_amount">券面额</string>
     <string name="not_have_coupon_list">暂无直发券列表</string>
     <string name="choose_coupon">请选择优惠券</string>
     <!--删除商品弹窗-->
     <string name="shopcart_delete_dish">删除商品</string>
     <string name="shopcart_delete_dish_count">删除商品的数量</string>
     <!--计数器View-->
-    <string name="count_down_service_disconnect">服务器断开，当前为异步模式</string>
-    <string name="count_down_residue_time">剩余可操作时间</string>
     <!--toast-->
     <string name="toast_input_type_error">输入格式有误</string>
     <string name="toast_customer_not_intrgral">没有积分流水</string>
     <string name="toast_not_more">没有更多了！</string>
     <string name="toast_password_verify_error">密码验证失败</string>
-    <string name="toast_customer_need_choose_card">请先选择需要绑定的卡</string>
-    <string name="toast_customer_not_bind_card">暂不支持即售即用的卡片绑定会员</string>
     <string name="toast_customer_create_tel_limit">没有选择号码所属地，请先选择号码所属地</string>
-    <string name="toast_camera_check">请检查设备是否有摄像头</string>
     <string name="toast_data_error">数据异常！</string>
-    <string name="toast_modify_order_error">改单错误！</string>
     <string name="toast_excessive_charge_limit">溢收金额大于券面值，请重新设置！</string>
-    <string name="toast_customer_card_input_success">卡号录入成功</string>
     <string name="toast_coupon_is_cancel_hint">该菜品已有被核销的优惠券,不支持该操作</string>
-    <string name="toast_not_input_face">不支持输入Emoji表情符号</string>
     <string name="toast_pay_error_hint">支付未成功，稍后再试</string>
-    <string name="host_clear_shopcart_seccess">宿主清理购物车成功</string>
-    <string name="host_delete_dish_seccess">宿主删菜成功</string>
 </resources>

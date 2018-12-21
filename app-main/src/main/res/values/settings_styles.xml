@@ -1,21 +1,9 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <style name="settings_button">
-        <item name="android:background">@drawable/settings_button</item>
-        <item name="android:textColor">@color/settings_blue</item>
-    </style>
-
     <style name="settings_title">
         <item name="android:textColor">@color/print_text_gray</item>
         <item name="android:textSize">18sp</item>
-    </style>
-
-    <style name="settings_blue_title">
-        <item name="android:textColor">@color/settings_blue</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:layout_marginTop">15dp</item>
-        <item name="android:layout_marginBottom">15dp</item>
     </style>
 
     <style name="settings_left1">
@@ -142,34 +130,6 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/print_setting_item_size</item>
         <item name="android:textColor">#333333</item>
-    </style>
-
-    <style name="print_setting_item_toggle_style">
-        <item name="android:layout_width">@dimen/print_setting_item_btn_width</item>
-        <item name="android:layout_height">@dimen/print_setting_item_btn_height</item>
-        <item name="android:background">@drawable/setting_switch_selector</item>
-        <item name="android:textOn"></item>
-        <item name="android:textOff"></item>
-    </style>
-
-    <style name="setting_price_scale_selector_item">
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:background">@drawable/list_item_blue_bg</item>
-        <item name="android:paddingTop">16.3dp</item>
-        <item name="android:paddingBottom">16.3dp</item>
-        <item name="android:paddingLeft">14dp</item>
-        <item name="android:paddingRight">14dp</item>
-        <item name="android:descendantFocusability">afterDescendants</item>
-    </style>
-
-    <style name="serial_number_selector_item_style">
-        <item name="android:textColor">@color/color_bcbcbc</item>
-        <item name="android:layout_width">58.7dp</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:layout_marginLeft">13.3dp</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textSize">14.7sp</item>
     </style>
 
 </resources>

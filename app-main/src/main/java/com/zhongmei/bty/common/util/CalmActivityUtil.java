@@ -2,9 +2,6 @@ package com.zhongmei.bty.common.util;
 
 import android.app.Activity;
 
-import com.zhongmei.bty.dinner.DinnerMainActivity;
-import com.zhongmei.bty.dinner.DinnerPayActivity;
-import com.zhongmei.bty.dinner.DinnerPayActivity_;
 import com.zhongmei.bty.dinner.orderdish.DinnerOrderDishMainActivity;
 
 /**
@@ -19,8 +16,8 @@ public class CalmActivityUtil {
      * //
      */
     public static boolean isDinnerActivity(Activity activity) {
-        return activity instanceof DinnerMainActivity || activity instanceof DinnerOrderDishMainActivity
-                || activity instanceof DinnerPayActivity;
+        return /*activity instanceof DinnerMainActivity ||*/ activity instanceof DinnerOrderDishMainActivity
+                /*|| activity instanceof DinnerPayActivity*/;
     }
 
     /**
@@ -30,9 +27,9 @@ public class CalmActivityUtil {
      * @return
      */
     public static boolean isDinnerActivity(Class activityClazz) {
-        return activityClazz != null && (activityClazz.equals(DinnerMainActivity.class)
-                || activityClazz.equals(DinnerOrderDishMainActivity.class)
-                || activityClazz.equals(DinnerPayActivity_.class)
+        return activityClazz != null && (/*activityClazz.equals(DinnerMainActivity.class)
+                ||*/ activityClazz.equals(DinnerOrderDishMainActivity.class)
+                /*|| activityClazz.equals(DinnerPayActivity_.class)*/
                 //|| activityClazz.equals(BuffetMainActivity.class)
                 //|| activityClazz.equals(BuffetOrderDishMainActivity.class)
         );

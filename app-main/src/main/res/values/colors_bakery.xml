@@ -1,17 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="swipe_scheme_colors_1">#FF4040</color>
-    <color name="swipe_scheme_colors_2">#A0522D</color>
-    <color name="swipe_scheme_colors_3">#40E0D0</color>
 
-    <color name="bakery_status_unprocessed">#FCB20C</color>
-    <color name="bakery_status_refused">#FF3B30</color>
-    <color name="bakery_status_prepared">#1FC3C2</color>
-    <color name="bakery_status_cancelled">#FF3B30</color>
-    <color name="bakery_status_overdue">#FF3B30</color>
-    <color name="bakery_status_finished">#20CA53</color>
-    <color name="bakery_status_returned">#797979</color>
-    <color name="bakery_status_default">#333333</color>
-    <color name="bakery_discount_text_color">#F5A623</color>
-    <color name="bakery_total_money_text_color">#444444</color>
 </resources>

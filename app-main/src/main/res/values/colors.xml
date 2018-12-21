@@ -2,42 +2,23 @@
 <resources>
     <color name="gray">#DADBDA</color>
     <color name="blue">#33AEF6</color>
-    <color name="sell_card">#33adf6</color>
-    <color name="sell_card_unpress">#5cbdf8</color>
     <color name="yellow">#ffcd35</color>
-    <color name="sell_card_press">#85cafc</color>
-    <color name="refund_card_unpress">#fbb176</color>
-    <color name="refund_card_press">#fdab69</color>
-    <color name="bg_groupname_list">#E1F5FE</color>
     <color name="bg_white">#FFFFFF</color>
     <color name="bg_red">#F56662</color>
     <color name="bg_blue">#DBEEF6</color>
     <color name="bg_blue_pressed">#219ee9</color>
-    <color name="bg_green">#13AE67</color>
-    <color name="bg_t_30">#30FFFFFF</color>
     <color name="bg_gray">#DADBDA</color>
     <color name="bg_light">#EDEDED</color>
-    <color name="div_gray">#E0DEDF</color>
     <color name="div_customer_list">#E9EBE8</color>
     <color name="text_color_gray">#a1a8b0</color>
     <color name="text_color_white">#a1FFFFFF</color>
-    <color name="bubble_color">#BF000000</color>
-    <color name="text_green">#41CE84</color>
     <color name="text_gray">#666666</color>
     <color name="text_deep_gray">#bcbcbc</color>
-    <color name="text_yellow">#FFD255</color>
-    <color name="text_light">#C9C9C9</color>
     <color name="text_pay_other_black">#555555</color>
-    <color name="customer_main_color">#F8F8F8</color>
-    <color name="bule_customer">#03A8F3</color>
     <color name="text_red_2">#FF7901</color>
     <color name="settings_bg_gray">#FFDADBDA</color>
-    <color name="settings_bg_white">#FFFFFFFF</color>
     <color name="settings_blue">#33AEF6</color>
-    <color name="settings_text">#FF595757</color>
-    <color name="settings_tx">#84879c</color>
     <color name="settings_biueword">#E2F4FF</color>
-    <color name="settings_blueback">#e0f4fd</color>
     <color name="settings_normalword">#333333</color>
     <color name="settings_normalback">#ffffff</color>
     <color name="settings_grayword">#999999</color>
@@ -46,15 +27,11 @@
     <color name="orderdish_text_blue">#FF03A9F4</color>
     <color name="orderdish_text_orange">#FF6F0D</color>
     <color name="orderdish_text_black">#FF595757</color>
-    <color name="orderdish_bg_red">#FFE76460</color>
     <color name="orderdish_select_dish_item_color">#FFF2F2F2</color>
     <color name="buton_text_bule">#03A9F3</color>
     <color name="remark_text_color">#898989</color>
     <color name="goods_total_text_color">#666666</color>
-    <color name="goods_num_text_color">#03a9f4</color>
     <color name="but_gray">#9C9E9D</color>
-    <color name="selectDialogViewBg">#F4F5F5</color>
-    <color name="light_blue">#D5F3FE</color>
     <color name="text_pay_method">#666666</color>
     <color name="selectedDishPrice">#5E605F</color>
     <color name="selectedComboDishPrice">#959595</color>
@@ -63,16 +40,8 @@
     <color name="catalognomail">#3E3A39</color>
     <color name="notice_bg_cl">#f6f7fa</color>
     <color name="notice_warm">#ff9b24</color>
-    <color name="dishHeadTextGray">#aab2b7</color>
-    <color name="notice_pressed">#2bc2f7</color>
-    <color name="order_customer_login">#ffbc3c</color>
     <color name="check_coupons">#32adf6</color>
     <color name="snack_title_bg">#33AEF6</color>
-    <color name="snack_title_divide">#108fdc</color>
-    <color name="content_bg">#f0f5f6</color>
-    <color name="use">#33adf6</color>
-    <color name="using">#4f555e</color>
-    <color name="coupons_text_blue">#32adf6</color>
     <!-- 通知中心和正餐菜品操作条的遮罩颜色 -->
     <color name="shadow_bg">#22000000</color>
     <!-- 各个主activity点击菜单按钮的遮罩颜色 -->
@@ -81,7 +50,6 @@
     <color name="dinner_customer_gray">#53565b</color>
     <color name="dinner_integral_gray">#8F99A3</color>
     <!-- 订单中心颜色 -->
-    <color name="lv_item_bg_gray">#F7F8F8</color>
     <color name="text_discount_yellow">#F5A720</color>
     <color name="reason_radio_color">#595758</color>
     <color name="reason_radio_color2">#333333</color>
@@ -93,48 +61,20 @@
     <color name="print_text_gray">#afafaf</color>
     <color name="print_text_light_gray">#cccccc</color>
     <color name="print_line_gray">#bcbcbc</color>
-    <color name="print_title">#f3f5f5</color>
     <color name="print_line">#d8d8d8</color>
     <color name="print_font_color">#ff6d66</color>
     <!-- 外卖员 -->
-    <color name="senderPageLine">#A5A7A5</color>
-    <color name="glass_half">#666666</color>
-    <color name="green_line">#40cf85</color>
     <color name="while_line">#ffffff</color>
 
     <!-- 预订 -->
-    <color name="booking_selected_txt_color">@android:color/holo_blue_bright</color>
-    <color name="booking_text_selected_blue">#03a9f4</color>
-    <color name="booking_text_default">#898f93</color>
-    <color name="booking_txt_gray">#909a9e</color>
-    <color name="booking_txt_black">#38444c</color>
-    <color name="booking_label_color">#9da2a5</color>
-    <color name="booking_customer_text_color">#F3DD80</color>
-    <color name="booking_dialog_line_color">#ced2d8</color>
-    <color name="booking_dialog_type_color">#afb0b2</color>
-    <color name="booking_dialog_type_bg_color">#f8f9fb</color>
-    <color name="booking_gray">#7c7c7c</color>
-    <color name="booking_lisview_title_bg">#9ea4b9</color>
-    <color name="booking_lisview_selectcolor">#F0F8FE</color>
-    <color name="booking_special_text_color">#646873</color>
-    <color name="booking_statistics_text_color">#ff9e56</color>
-    <color name="booking_timeoud_text_color">#FEA361</color>
     <color name="booking_desk_empty_text_color">#c2ced8</color>
     <color name="booking_desk_occupy_text_color">#fbbc05</color>
-    <color name="booking_desk_checked_text_color">#2fb1fe</color>
-    <color name="booking_desk_lock_text_color">#495056</color>
-    <color name="booking_list_background_color">#F3F5F7</color>
-    <color name="booking_date_selected">#E7F6FF</color>
 
     <!-- 排队 -->
-    <color name="queue_division_color">#0a93c6</color>
-    <color name="queue_bg_gray_color">#F5EFED</color>
-    <color name="queue_person_count_hint_color">#36CFC5</color>
 
     <!-- 购物车 -->
     <color name="shopcat_item_coupon_unenabled">#ff791f</color>
     <color name="gray_line">#e1e1e5</color>
-    <color name="date_bg">#33adf6</color>
     <color name="dinner_label_unsave">#bbc7cc</color>
     <color name="dinner_label_unprinted">#fbbc05</color>
     <color name="dinner_label_printed">#40d0ae</color>
@@ -145,59 +85,33 @@
     <color name="dinner_list_line_color">#eff2f6</color>
     <color name="battery_bg">#f6fbfe</color>
     <color name="battery_warning_bg">#ff5c2a</color>
-    <color name="more_red_color">#ff6464</color>
 
     <!-- 正餐 -->
     <color name="title_blue">#33adf6</color>
     <color name="verify_perssion_title">#ff7901</color>
-    <color name="verify_list_item_line">#dfe3e8</color>
     <color name="write">#ffffff</color>
     <color name="text_select_yellow">#fe6b4c</color>
-    <color name="dack">#a5aeb4</color>
     <color name="gray_recharge">#f0f3f6</color>
-    <color name="recharge_list_item_gray">#f9f9fb</color>
-    <color name="recharge_text_gray">#b1bcc6</color>
     <color name="member_title_bar_divide">#108fdc</color>
-    <color name="orange_red">#ff6c24</color>
     <color name="separator_reason">#e6e9ed</color>
     <color name="text_calendar_title_blue">#33adf6</color>
     <color name="edit_text_hint_color">#c6ced3</color>
-    <color name="remind_dish_red">#f68868</color>
     <color name="dish_tag_color">#8e989e</color>
     <color name="kds_dish_unfinish_color">#fbbc05</color>
     <color name="pay_title_lable_bg">#ffefe4</color>
     <color name="item_operate_text">#75afff</color>
-    <color name="table_partpay_hint">#F8E71C</color>
     <!-- 顾客 -->
-    <color name="customer_item_frozen">#c6cbd1</color>
-    <color name="customer_item_normal">#595757</color>
-    <color name="customer_lisview_title_bg">#9ea4b9</color>
     <color name="customer_charging_bg">#EDEFF5</color>
     <color name="customer_text_black">#333333</color>
     <color name="customer_text_orange">#ff7b61</color>
-    <color name="customer_listview_divider">#e1e3e9</color>
-    <color name="customer_money_gray">#dcd9d9</color>
     <color name="customer_rule_gray">#999999</color>
-    <color name="customer_coupon_text_black">#444444</color>
     <color name="customer_rule_title_blue">#6dbfff</color>
     <color name="customer_add_text_gray">#b7b5b5</color>
-    <color name="delivery_type_blue">#30b1ff</color>
-    <color name="customer_baseinfo_text_color">#33adf6</color>
-    <color name="customer_baseinfo_text_bg">#eff7fd</color>
     <color name="customer_detail_info_text_color">#999999</color>
     <color name="customer_detail_info_text_value_color">#333333</color>
     <color name="member_disable_text_color">#c6cbd1</color>
-    <color name="customer_new_text">#ffffff</color>
     <color name="customer_onclick_selected_bg">#30b1ff</color>
-    <color name="customer_onclick_selected_text">#ffffff</color>
-    <color name="customer_onclick_unselected_bg">#eff7fd</color>
-    <color name="customer_onclick_frozen_bg">#a7abae</color>
-    <color name="customer_onclick_unselected_text">#33adf6</color>
     <color name="customer_dialog_line_text">#cdd1d5</color>
-    <color name="customer_list_text_selected">#cacaca</color>
-    <color name="customer_list_text_unselected">#333333</color>
-    <color name="customer_list_has_group_text">#ffc556</color>
-    <color name="customer_list_item_selected">#F2F9FF</color>
     <color name="customer_balance_jifen_title">#a0a9ae</color>
     <color name="customer_allowance">#ff6969</color>
     <color name="customer_ordercenter_detail_tabchoose">#33adf6</color>
@@ -212,53 +126,33 @@
     <color name="customer_charging_show_balance">#333333</color>
     <color name="customer_charging_pay_cash">#2e9bdd</color>
     <color name="customer_charging_pay_cash_off">#32ADF6</color>
-    <color name="customer_charging_pay_card">#ffc556</color>
     <color name="customer_charging_rule_money_solid_off">#F8F9FB</color>
     <color name="customer_charging_rule_money_stroke_off">#E1E5EA</color>
-    <color name="customer_charging_rule_money_stroke_on">#E1E5EA</color>
     <color name="customer_charging_rule_money_solid_on">#E1E5EA</color>
     <color name="customer_charging_dialog_info">#666666</color>
     <color name="customer_balance_showdow">#f0f3f6</color>
     <color name="customer_divide_line">#d8d8d8</color>
     <color name="customer_read_card_divide_line">#D9D9D9</color>
 
-    <color name="customer_sale_and_active_normal">#AFB4BA</color>
-    <color name="customer_sale_and_active_click">#32ADF6</color>
-
 
     <!-- 帮助中心 -->
-    <color name="helpcenter_item_press">#919599</color>
-    <color name="helpcenter_item_text">#d2d3d4</color>
-    <color name="helpcenter_item_divider">#3f424a</color>
 
-    <color name="card_have_selected">#f3f8f9</color>
-    <color name="card_sale_text_color">#333333</color>
-    <color name="card_sale_unable_text_color">#cdd1d5</color>
-    <color name="card_sale_item_back_color">#fbfcfd</color>
-    <color name="dot_default_bg_color">#dfe4ea</color>
     <color name="divide_line_color">#e6e8e9</color>
 
     <color name="dish_property_type_color">#a1a6ab</color>
 
     <color name="bg_half_transparent">#e0000000</color>
     <color name="change_table_disable_color">#b9babc</color>
-    <color name="entity_top_sale">#33adf6</color>
-    <color name="entity_top_activation">#fba561</color>
 
 
     <!-- 通知中心 -->
     <color name="notifycenter_order_count">#573E0D</color>
     <color name="notifycenter_tips_trade">#573E0D</color>
-    <color name="notifycenter_delivery_tips_bg">#0F3B55</color>
 
     <!---->
     <color name="titlebar_bg">#1F9BE5</color>
     <color name="titlebar_bg2">#3E445A</color>
-    <color name="buffet_status_paid">#41DBD6</color>
-    <color name="property_action_color">#F4F8F9</color>
-    <color name="property_action_color_checked">#ffffff</color>
     <color name="color_E8470B">#E8470B</color>
-    <color name="color_FFE1D6">#FFE1D6</color>
     <color name="color_FCE2D8">#FCE2D8</color>
     <color name="color_CBF9ED">#CBF9ED</color>
 

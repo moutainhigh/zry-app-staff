@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/address"
-    android:background="@drawable/takeout_address_list_selector"
-    android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:gravity="left|center_vertical"
-    android:textColor="@drawable/customer_font_selector"
-    android:textSize="21sp"></TextView>

@@ -232,7 +232,7 @@ public class MemberLoginFragment extends BasicFragment {
     }
 
     @Click({R.id.customer_verification, R.id.back, R.id.btn_card_login, R.id.one, R.id.two, R.id.three, R.id.four, R.id.five, R.id.six, R.id.seven, R.id.eight, R.id.nine,
-            R.id.zero, R.id.delete, R.id.clean, R.id.btn_scan_login, R.id.btn_face_login, R.id.pay_member_login_openscanner_button, R.id.member_login_paycoder_button,
+            R.id.zero, R.id.delete, R.id.clean, R.id.btn_face_login, R.id.pay_member_login_openscanner_button, R.id.member_login_paycoder_button,
             R.id.rlAreaCode, R.id.ll_login_type})
     public void onClick(View v) {
         switch (v.getId()) {

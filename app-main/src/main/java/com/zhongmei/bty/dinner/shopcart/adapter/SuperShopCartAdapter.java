@@ -1839,7 +1839,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                         continue;
                     }
                     if (setmealShopcartItem.getTradeItemExtraDinner() != null && setmealShopcartItem.getTradeItemExtraDinner().getServingOrder() != null) {
-                        sortId = new Long(setmealShopcartItem.getTradeItemExtraDinner().getServingOrder());
+                        sortId = Long.valueOf(setmealShopcartItem.getTradeItemExtraDinner().getServingOrder());
                     }
                     //为0时没有设置上菜顺序
                     if (sortId == null || sortId == 0) {
@@ -1864,7 +1864,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             if (adapter != null)
                 adapter.sumWestAllDishCount(shopCartItem, false);
             if (shopCartItem.getTradeItemExtraDinner() != null && shopCartItem.getTradeItemExtraDinner().getServingOrder() != null) {
-                sortId = new Long(shopCartItem.getTradeItemExtraDinner().getServingOrder());
+                sortId = Long.valueOf(shopCartItem.getTradeItemExtraDinner().getServingOrder());
             }
             //为0时没有设置上菜顺序
             if (sortId == null || sortId == 0) {

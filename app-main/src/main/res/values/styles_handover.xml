@@ -15,10 +15,6 @@
         <item name="android:textColor">@color/color_333333</item>
     </style>
 
-    <style name="handover_item_edit">
-        <item name="android:text">--</item>
-    </style>
-
     <style name="handover_title_tv">
         <item name="android:background">@color/transparent</item>
         <item name="android:layout_width">wrap_content</item>
@@ -68,14 +64,6 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-
-    <style name="handover_detail_button" parent="handover_button">
-        <item name="android:layout_height">48dp</item>
-        <item name="android:background">@drawable/btn_blue_selector</item>
-        <item name="android:enabled">true</item>
-        <item name="android:textColor">@drawable/handover_but_text_color</item>
-        <item name="android:textSize">17sp</item>
-    </style>
 
     <style name="handover_amount_tv">
         <item name="android:maxWidth">160dp</item>

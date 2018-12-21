@@ -34,7 +34,6 @@ import com.zhongmei.bty.mobilepay.bean.IPaymentInfo;
 import com.zhongmei.bty.mobilepay.bean.PayModelItem;
 import com.zhongmei.bty.mobilepay.core.DoPayApi;
 import com.zhongmei.bty.mobilepay.utils.DoPayUtils;
-import com.zhongmei.bty.pay.activity.PayActivity;
 import com.zhongmei.bty.pay.manager.DoPayManager;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.context.session.core.user.AuthUser;
@@ -342,9 +341,9 @@ public class PayUtils {
                                                                    //manager.printTrade(tradeVo.getTrade().getUuid(), Calm.PRINT_TYPE_DESTROY, null, true, false, isPrintKitchen);
                                                                }
                                                                //关闭快餐支付界面
-                                                               if (context instanceof PayActivity) {
+                                                               /*if (context instanceof PayActivity) {
                                                                    context.finish();
-                                                               }
+                                                               }*/
                                                            } else {
 
                                                                showErrorDialog(context, context.getSupportFragmentManager(), response.getMessage());
@@ -566,9 +565,9 @@ public class PayUtils {
                                 ShoppingCart.getInstance().removeGiftCouponePrivilege(coupIds, ShoppingCart.getInstance().getShoppingCartVo(), false);
                                 ShoppingCart.getInstance().removeCouponPrivilege(ShoppingCart.getInstance().fastFootShoppingCartVo, coupIds, true);
                                 //关闭快餐支付界面
-                                if (context instanceof PayActivity) {
+                                /*if (context instanceof PayActivity) {
                                     context.finish();
-                                }
+                                }*/
                             } catch (Exception e) {
 
                                 Log.e(TAG, "", e);
@@ -600,9 +599,9 @@ public class PayUtils {
                                     ShoppingCart.getInstance().removeWeiXinCouponsPrivilege(tradePrivileges);
                                 }
                                 //关闭快餐支付界面
-                                if (context instanceof PayActivity) {
+                                /*if (context instanceof PayActivity) {
                                     context.finish();
-                                }
+                                }*/
                             } catch (Exception e) {
 
                                 Log.e(TAG, "", e);

@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="queue_history_listview_item_row_marginLeft">25dp</dimen>
-    <dimen name="queue_history_listview_item_row_layout_marginTop">7dp</dimen>
-    <dimen name="queue_history_listview_item_row_layout_marginBottom">10dp</dimen>
-    <dimen name="queue_layout__personcount_paddingTop">34dp</dimen>
-    <dimen name="queue_layout__phoneno_paddingTop">30dp</dimen>
-
-    <dimen name="queue_list_number_tv_width">120dp</dimen>
-    <dimen name="queue_list_item_layout_marginLeft">5dp</dimen>
-    <dimen name="queue_list_item_layout_marginTop">10dp</dimen>
-    <dimen name="queue_list_item_marginLeft">14dp</dimen>
-    <dimen name="queue_list_item_marginLeft2">10dp</dimen>
-    <dimen name="queue_list_item_marginRight">4dp</dimen>
-    <dimen name="queue_list_item_marginTop">10dp</dimen>
-    <dimen name="queue_list_item_line_height">18dp</dimen>
-    <dimen name="queue_item_round_width">54dp</dimen>
-    <dimen name="queue_item_round_marginLeft">2dp</dimen>
-    <dimen name="queue_item_round_paddingTop">1dp</dimen>
-    <dimen name="queue_doCallNumber_width">45dp</dimen>
-    <dimen name="queue_list_marginLeft">20dp</dimen>
-    <dimen name="queue_list_btn_padding">5dp</dimen>
-    <dimen name="queue_title_img_marginLeft">15dp</dimen>
-    <dimen name="queue_remind_label_width">60dp</dimen>
-    <dimen name="queue_history_listitem_name_width">110dp</dimen>
-    <dimen name="queue_history_listitem_personcount_width">60dp</dimen>
-    <dimen name="queue_history_listitem_height">85dp</dimen>
-    <dimen name="queue_history_listitem_textviewvertical_width">60dp</dimen>
-    <dimen name="queue_history_listitem_textviewruchang_width">46dp</dimen>
-    <dimen name="queue_history_listitem_textviewruchang_height">26dp</dimen>
-    <dimen name="queue_history_listview_textviewruchang_marginRight">15dp</dimen>
-    <dimen name="queue_history_listview_textviewruchang_marginTop">8dp</dimen>
-    <dimen name="queue_create_takeno_paddingLeft">20dp</dimen>
-    <dimen name="queue_create_takeno_paddingRight">20dp</dimen>
-
-    <dimen name="s_text_16">16sp</dimen>
-    <dimen name="s_text_26">26sp</dimen>
-    <dimen name="s_text_24">24dp</dimen>
     <dimen name="s_text_12">12sp</dimen>
-    <dimen name="s_text_20">20sp</dimen>
-    <dimen name="s_text_28">28sp</dimen>
     <dimen name="queue_toolbar_title_text_size2">18sp</dimen>
 </resources>

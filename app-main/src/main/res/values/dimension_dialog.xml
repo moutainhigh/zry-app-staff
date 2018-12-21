@@ -3,8 +3,6 @@
     <!--功能性弹窗：用于修改，拒绝、作废、退货等的统一dialog-->
     <dimen name="dialog_operate_weight">380dp</dimen>
     <dimen name="dialog_operate_height">512dp</dimen>
-    <dimen name="dialog_operate_weight2">620dp</dimen>
-    <dimen name="dialog_operate_height2">560dp</dimen>
     <dimen name="dialog_operate_title_height">70dp</dimen>
     <dimen name="dialog_operate_title_size">22sp</dimen>
     <dimen name="dialog_operate_title2_size">16sp</dimen>
@@ -22,24 +20,11 @@
     <dimen name="dialog_operate_views_marginTop">16dp</dimen>
 
     <!--提示性弹窗-->
-    <dimen name="dialog_common_weight">450dp</dimen>
-    <dimen name="dialog_common_height">240dp</dimen>
     <dimen name="dialog_common_margin_top">10dp</dimen>
-    <dimen name="dialog_common_btn_height">66dp</dimen>
-    <dimen name="dialog_common_btn_size">21sp</dimen>
-    <dimen name="dialog_common_title_size">24sp</dimen>
     <dimen name="dialog_common_content_size">18sp</dimen>
 
-    <dimen name="dialog_weixin_coupon_weight">460dp</dimen>
-    <dimen name="dialog_weixin_coupon_height">600dp</dimen>
-    <dimen name="dialog_weixin_coupon_title_height">102dp</dimen>
-    <dimen name="dialog_weixin_coupon_margin">20dp</dimen>
-    <dimen name="dialog_weixin_coupon_size">30sp</dimen>
-    <dimen name="dialog_weixin_coupon_button_height">66dp</dimen>
-    <dimen name="dialog_weixin_coupon_check_view_height">87dp</dimen>
     <dimen name="dialog_pay_ok_weight">410dp</dimen>
     <dimen name="dialog_pay_ok_height">468dp</dimen>
-    <dimen name="dialog_number_keyboard_height">356dp</dimen>
     <dimen name="switcher_listview_width">250dp</dimen>
     <dimen name="switcher_margin_right">5dp</dimen>
     <dimen name="bubble_margin_right">20dp</dimen>

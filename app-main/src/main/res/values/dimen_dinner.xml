@@ -2,11 +2,9 @@
 <resources>
     <dimen name="dinner_title_height">70dp</dimen>
     <dimen name="dinner_balance_marginRight">15dp</dimen>
-    <dimen name="dinner_balace_titile_margin">10dp</dimen>
     <dimen name="dinner_bottom_height">74dp</dimen>
     <dimen name="dinner_bottom_height2">54dp</dimen>
     <dimen name="dinner_table_info_btn_height">54dp</dimen>
-    <dimen name="dialog_keyboard_height">290dip</dimen>
     <dimen name="dialog_keyboard_margin">1dp</dimen>
     <dimen name="dinner_table_name_textsize">16sp</dimen>
     <dimen name="dinner_table_number_textsize">14sp</dimen>

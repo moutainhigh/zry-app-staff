@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_pressed="true" android:drawable="@drawable/shape_retail_stocktake_btn_greenstroke_roundrect_pressed"></item>
-    <item android:state_enabled="false" android:drawable="@drawable/shape_stocktake_btn_gray_roundrect_disable"></item>
-    <item android:drawable="@drawable/shape_retail_stocktake_btn_greenstroke_roundrect"></item>
-</selector>

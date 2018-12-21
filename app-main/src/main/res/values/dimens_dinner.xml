@@ -3,36 +3,23 @@
     <!--100dp:dinner侧边栏宽度-->
     <dimen name="dinner_left_menu_width">72dp</dimen>
     <dimen name="dinner_zones_indicator_height">50dp</dimen>
-    <dimen name="dinner_zones_indicator_item_textSize">24sp</dimen>
     <dimen name="dinner_moreFunction_marginTop">20dp</dimen>
-    <dimen name="dinnerTableView_width_add_height">133dp</dimen>
     <!--dinnerTableInfo-->
-    <dimen name="dinner_tableInfo_width">409dp</dimen>
-    <dimen name="dinner_tableInfo_title_rl_height">88dp</dimen>
-    <dimen name="dinner_tableInfo_table_id_tv_ts">30sp</dimen>
-    <dimen name="dinner_tableInfo_floor_tv_ts">18sp</dimen>
     <dimen name="dinner_tableInfo_ll_number_and_waiter_height">40dp</dimen>
     <dimen name="dinner_tableInfo_tv_customer_count_textSize">16sp</dimen>
 
     <!--订单中心显示商品总数的文字区域高度：40px-->
-    <dimen name="dinner_details_trade_amount_height">40dp</dimen>
 
     <!--就餐人数及服务员的选择弹窗-->
-    <dimen name="dinner_waiter_and_number_height">330dp</dimen>
     <dimen name="dinner_waiter_and_number_btnHeight">66dp</dimen>
-    <dimen name="dinner_waiter_add_number_select_height">50dp</dimen>
-    <dimen name="dinner_waiter_and_number_repastNum_marginTop">15dp</dimen>
-    <dimen name="dinner_waiter_and_number_repastNum_textSize">16sp</dimen>
     <dimen name="dinner_waiter_and_number_repastNum_marginBottom">12dp</dimen>
 
     <!--购物车-->
     <dimen name="dinner_shoppingCart_dishName_textSize">22sp</dimen>
     <dimen name="dinner_shoppingCart_dishMemo_textSize">16sp</dimen>
     <dimen name="dinner_shoppingCard_dishName_margin">5dp</dimen>
-    <integer name="dinner_shoppingCard_pay_money_size">17</integer>
 
     <!--点餐页左边页面-->
-    <dimen name="dinner_order_left_bottomBtn_height">58dp</dimen>
 
     <!--点餐页面右边-->
     <dimen name="dinner_order_right_searchBtn_height">46dp</dimen>
@@ -42,9 +29,6 @@
     <dimen name="dinner_order_centerBleed_height">60dp</dimen>
 
     <!--菜品item-->
-    <dimen name="dinner_order_item_TextSize1">22sp</dimen>
-    <dimen name="dinner_order_item_TextSize2">16sp</dimen>
-    <dimen name="dinner_order_item_TextSize3">12sp</dimen>
     <dimen name="dinner_order_item_TextSize4">14sp</dimen>
 
     <!--支付页面-->
@@ -90,8 +74,6 @@
     <dimen name="shopcart_bottom_btn_size">20sp</dimen>
     <dimen name="dish_shopcart_bottom_btn_big_size">28sp</dimen>
     <dimen name="store_manager_toolbar_text_size">22sp</dimen>
-    <dimen name="dialog_move_dish_btn_size">21sp</dimen>
-    <dimen name="dialog_union_card_hint_size">30sp</dimen>
     <dimen name="pay_lagpay_buttom_size">30sp</dimen>
     <dimen name="order_center_list_search_btn_padding">20dp</dimen>
     <dimen name="order_center_list_search_btn_padding2">10dp</dimen>

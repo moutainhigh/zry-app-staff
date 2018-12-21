@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="login_number_marginRight">37.3dp</dimen>
     <dimen name="login_number_marginTop">13.3dp</dimen>
-    <dimen name="login_switch_user_btn_width">38dp</dimen>
-    <dimen name="login_switch_user_btn_size">12sp</dimen>
 </resources>

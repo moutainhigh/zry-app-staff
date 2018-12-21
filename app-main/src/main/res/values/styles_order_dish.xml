@@ -19,26 +19,8 @@
         <item name="android:layout_height">fill_parent</item>
     </style>
 
-    <style name="layout.w.m">
-        <item name="android:layout_height">match_parent</item>
-    </style>
-
     <style name="layout.w.w">
         <item name="android:layout_height">wrap_content</item>
-    </style>
-
-    <style name="order_panel_button_style">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/orderdish_select_dish_item_bg</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textColor">@color/text_blue</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:paddingTop">5dp</item>
-        <item name="android:paddingBottom">5dp</item>
-        <item name="android:drawablePadding">3dp</item>
     </style>
 
     <style name="custom_title_style">

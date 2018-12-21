@@ -26,6 +26,7 @@ public class BeautyCustomerConstants {
 
     public static final String KEY_CUSTOMER_EDIT_PAGE = "customer_edit_page";
 
+    public final static String KEY_CUSTOMER = "key_customer";
 
     @IntDef({CustomerEditLaunchMode.CREATE_CUSTOMER, CustomerEditLaunchMode.EDIT_CUSTOMER})
     @Retention(RetentionPolicy.SOURCE)

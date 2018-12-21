@@ -2,20 +2,19 @@ package com.zhongmei.bty.common.util;
 
 import android.content.Context;
 
+import com.zhongmei.atask.SimpleAsyncTask;
+import com.zhongmei.atask.TaskContext;
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
 import com.zhongmei.bty.basemodule.trade.bean.DinnerTableInfo;
 import com.zhongmei.bty.basemodule.trade.bean.DinnertableTradeInfo;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import com.zhongmei.bty.basemodule.trade.operates.TablesDal;
 import com.zhongmei.bty.basemodule.trade.operates.TradeDal;
-import com.zhongmei.atask.SimpleAsyncTask;
-import com.zhongmei.atask.TaskContext;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.bty.dinner.orderdish.Bean.TableTradeInfo;
+import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 import com.zhongmei.yunfu.db.enums.TradeType;
-import com.zhongmei.yunfu.context.util.Utils;
-import com.zhongmei.bty.dinner.DinnerMainActivity;
-import com.zhongmei.bty.dinner.orderdish.Bean.TableTradeInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +72,7 @@ public class IntentOrderUtil {
                     callback.onStartActivity(aVoid);
                 }
                 if (aVoid) {
-                    DinnerMainActivity.start(context, true, tradeUuid);
+                    //DinnerMainActivity.start(context, true, tradeUuid);
                 }
             }
         });
@@ -126,7 +125,7 @@ public class IntentOrderUtil {
                     callback.onStartActivity(aVoid);
                 }
                 if (aVoid) {
-                    DinnerMainActivity.start(context, true, mainTrade.getUuid());
+                    //DinnerMainActivity.start(context, true, mainTrade.getUuid());
                 }
             }
         });

@@ -31,11 +31,12 @@ android {
 dependencies {
     compile third.AAapi
     apt third.AA
-    compile androidsdk.recyclerview
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile androidsdk.supportV4
+    compile androidsdk.recyclerview
     compile third.umengCommon
     compile third.umengAnalytics
-    compile androidsdk.supportV4
+    compile third.eventbus
     compile project(':yunfu-context')
     compile project(':marketing-router')
     testCompile androidsdk.junit

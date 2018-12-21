@@ -1,85 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--团餐订单列表页面-->
-    <string name="group_list_title">团餐列表</string>
-    <string name="group_manager_dish_menu">管理团餐菜单</string>
-    <string name="group_manager_menu_title">管理团餐模板</string>
-    <string name="group_menu_delete">删除模板</string>
-    <string name="group_menu_cacnel_delte">取消删除</string>
-    <string name="group_menu_create">创建新模板</string>
-    <string name="group_menu_delete_template">删除模板</string>
-    <string name="group_search_hint">通过简码搜索模板</string>
-    <string name="group_menu_create_title">创建团餐模板</string>
-    <string name="group_menu_modify_title">修改团餐模板</string>
-    <string name="group_create_menuprice_hint">请输入餐标金额</string>
-    <string name="group_create_menuname_hint">请输入菜单名称</string>
-    <string name="group_create_menucode_hint">输入简码(4位数字或字母)</string>
-    <string name="group_price_label">餐标金额</string>
-    <string name="group_name_label">菜单名称</string>
-    <string name="group_dish_count">菜品数量</string>
-    <string name="group_code_label">简码</string>
-    <string name="group_have_no_select_dishmenu">没有选择任何模板</string>
 
-    <string name="group_amount_validate_error">餐标金额只能在0-99999999.99之间</string>
-
-    <string name="group_create_selector_all_num">已选 %1$s</string>
-    <string name="group_create_selector_all">全选此区域</string>
-    <string name="group_order_item_money">{HBF}%1$S/桌</string>
     <string name="group_order_item_desknum">%1$s桌</string>
-    <string name="group_order_item_desknum_label">桌</string>
-    <string name="group_order_item_pay_money">{HBF}%1$s (%2$s)</string>
 
     <string name="group_sigle_dish_label">单点菜品</string>
     <string name="group_dish_label">团餐菜品</string>
-    <string name="group_order_item_desk_name_one">%1$s等</string>
-    <string name="group_order_item_desk_name_more">%1$s/%2$s等</string>
-
-    <string name="group_menu_preview_title">菜品预览</string>
-    <string name="group_menu_preview_name">菜单名称：%s</string>
-    <string name="group_menu_preview_count">菜品数量：</string>
-    <string name="group_menu_preview_price">餐标金额：</string>
-
-    <string name="group_dish_shell_price">餐标:</string>
-    <string name="group_dish_desk_count">桌数:</string>
-    <string name="group_order_diff">差额:</string>
 
     <string name="group_cannot_split">团餐不提供拆单操作!</string>
 
-    <string name="group_meal_transfer_type">团餐转台</string>
-    <string name="group_create_info_must_label">(必填)</string>
-    <string name="group_modify_dialog_hint">是否保存当前操作并跳转至编辑团餐页面</string>
-    <string name="group_modify_dialog_po">保存更改并打印</string>
-    <string name="group_create_info_time_title">用餐日期</string>
-    <string name="group_create_info_time_hint">请选择就餐时间</string>
-    <string name="group_submit_button">确定</string>
-    <string name="group_create_info_name">团餐名称</string>
-    <string name="group_create_info_name_hint">请输入团餐名称</string>
-    <string name="group_create_info_money">餐标金额</string>
-    <string name="group_create_info_money_hint">请输入餐标金额</string>
-    <string name="group_create_info_desk_num">团餐桌数</string>
-    <string name="group_create_info_customer_name">顾客姓名</string>
-    <string name="group_create_info_customer_name_hint">请输入顾客姓名</string>
-    <string name="group_create_info_customer_arrive_method">到店方式</string>
-    <string name="group_create_info_customer_arrive_create_time">时间</string>
-    <string name="group_create_info_desk_num_hint">请在左边选择桌台</string>
-    <string name="group_create_info_customer_phone">联系电话</string>
-    <string name="group_create_info_customer_phone_hint">请输入联系电话</string>
-    <string name="group_create_info_selector_model_n">不选择模版</string>
-    <string name="group_create_info_selector_model_y">选择模版</string>
     <!--<string name="group_money_label">¥</string>-->
-    <string name="group_edit_title">编辑团餐</string>
-    <string name="group_create_title">创建团餐</string>
-    <string name="group_pleas_input_phone">请输入手机号码</string>
-    <string name="group_normal_dismenu_is_null">没有模版数据</string>
-    <string name="group_not_has_table_area">没有桌台区域</string>
-    <string name="group_select_table_has_locked_table">当前选中的桌台中包含已锁定的桌台，请重新选择桌台</string>
-    <string name="group_is_open_table_del">已经传送后厨不允许减少桌台</string>
-    <string name="group_not_input_order_time">当前团餐没有录入用餐时间</string>
-    <string name="group_name_is_null">请录入团餐名</string>
-    <string name="group_money_null_or_empty">请录入配餐的餐标</string>
-    <string name="group_modity_net_errot">改单失败，网络异常</string>
-    <string name="group_edit_net_error">编辑失败，网络异常</string>
-    <string name="group_open_table_net_error">开台失败，网络异常</string>
-    <string name="group_create_info_saleman_title">选择销售员</string>
-    <string name="group_table_locked">已锁定</string>
 </resources>

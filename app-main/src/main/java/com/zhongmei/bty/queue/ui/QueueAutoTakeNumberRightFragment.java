@@ -90,7 +90,7 @@ public class QueueAutoTakeNumberRightFragment extends BasicFragment implements K
             getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         }
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        KeyboardFragment_ keyboardFragment = new KeyboardFragment_();
+        KeyboardFragment keyboardFragment = new KeyboardFragment_();
         keyboardFragment.setOnKeyBoradListener(this);
 
         fragmentTransaction.replace(R.id.queue_keyboard_panel, keyboardFragment);

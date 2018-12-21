@@ -1,5 +1,6 @@
 package com.zhongmei.bty.dinner.orderdish;
 
+import android.annotation.SuppressLint;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.graphics.Color;
@@ -106,6 +107,7 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
         super.onDestroy();
     }
 
+    @SuppressLint("WrongConstant")
     @AfterViews
     protected void initView() {
 

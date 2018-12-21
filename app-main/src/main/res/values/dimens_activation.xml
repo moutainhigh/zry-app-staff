@@ -1,31 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--66dp-->
-    <dimen name="activation_shopQuery_title_marginTop">66dp</dimen>
     <!--76dp-->
-    <dimen name="activation_shopQuery_content_marginTop">76dp</dimen>
     <!--100dp-->
-    <dimen name="activation_shopQuery_explain_marginTop">100dp</dimen>
 
     <!--66dp-->
-    <dimen name="activation_shopInfo_title_marginTop">66dp</dimen>
     <!--90dp-->
-    <dimen name="activation_shopInfo_brandInfo_marginTop">90dp</dimen>
     <!--40dp-->
-    <dimen name="activation_shopInfo_cuttingLine_margin">40dp</dimen>
 
     <!--66dp-->
-    <dimen name="activation_shopInfo2_title_marginTop">66dp</dimen>
     <!--66dp-->
-    <dimen name="activation_shopInfo2_content_marginTop">66dp</dimen>
     <!--40dp-->
-    <dimen name="activation_shopInfo2_cuttingLine_marginTop">40dp</dimen>
     <!--64dp-->
-    <dimen name="activation_shopInfo2_btnStart_marginTop">64dp</dimen>
 
-    <dimen name="success_width">45dp</dimen>
-    <dimen name="detect_out">2dp</dimen>
-    <dimen name="preview_margin">50dp</dimen>
-    <dimen name="preview_land_margin">20dp</dimen>
-    <dimen name="head_width">200dp</dimen>
 </resources>

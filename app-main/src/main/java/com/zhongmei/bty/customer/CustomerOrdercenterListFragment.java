@@ -622,7 +622,6 @@ public class CustomerOrdercenterListFragment extends BasicFragment implements On
     }
 
     /**
-     * @param inputList
      * @param cardStoreValueItems
      * @return
      * @Date 2016年3月22日

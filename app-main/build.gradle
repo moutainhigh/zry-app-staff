@@ -142,6 +142,7 @@ dependencies {
     compile third.swipeToLoadLayout
     compile third.swipemenulistview
     compile third.okhttp3
+    compile third.eventbus
 
     compile project(':marketing-basemodule')
     compile project(':marketing-common')

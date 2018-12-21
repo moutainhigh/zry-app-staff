@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp;
 import com.zhongmei.yunfu.R;
+import com.zhongmei.yunfu.ShopInfoManager;
+import com.zhongmei.yunfu.context.session.Session;
+import com.zhongmei.yunfu.ui.H5WebViewActivity;
+import com.zhongmei.yunfu.ui.H5WebViewFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -59,24 +63,34 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.customer_balance_item, parent, false);
+            convertView = mInflater.inflate(R.layout.customer_expense_record_item, parent, false);
             viewHolder.time = (TextView) convertView.findViewById(R.id.time);
             viewHolder.tradeType = (TextView) convertView.findViewById(R.id.type);
             viewHolder.tradeNo = (TextView) convertView.findViewById(R.id.other_balance);
             viewHolder.tradeValue = (TextView) convertView.findViewById(R.id.end_value);
             viewHolder.person = (TextView) convertView.findViewById(R.id.person);
+            viewHolder.viewDetails = (TextView)convertView.findViewById(R.id.view_details);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         if (mRecordList != null) {
-            CustomerExpenseRecordResp record = mRecordList.get(position);
+            final CustomerExpenseRecordResp record = mRecordList.get(position);
             viewHolder.time.setText(formatter.format(new Date(record.getModifyDateTime())));
-
             viewHolder.tradeType.setText(record.getTradeType());
             viewHolder.tradeNo.setText(record.getTradeNo());
             viewHolder.tradeValue.setText(record.getTradeValue().toString());
             viewHolder.person.setText(getPersonName(record.getUserId()));
+            viewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                     //http://mk.zhongmeiyunfu.com/marketing/internal/trade/tradeDetail?tradeId=1001&brandIdenty=1&shopIdenty=1
+                    Long brandId = ShopInfoManager.getInstance().getShopInfo().getBrandId();
+                    Long shopId = ShopInfoManager.getInstance().getShopInfo().getShopId();
+                    String url = String.format("http://mk.zhongmeiyunfu.com/marketing/internal/trade/tradeDetail?tradeId=%d&brandIdenty=%d&shopIdenty=%d", record.getTradeId(), brandId, shopId);
+                    H5WebViewActivity.start(mContext, url);
+                }
+            });
         }
         return convertView;
     }
@@ -87,7 +101,7 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        TextView time, tradeType, tradeNo, tradeValue, person;
+        TextView time, tradeType, tradeNo, tradeValue, person, viewDetails;
     }
 
     private String getPersonName(String userId) {

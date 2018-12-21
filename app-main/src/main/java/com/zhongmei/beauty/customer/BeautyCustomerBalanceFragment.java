@@ -974,7 +974,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 public void onResponse(YFResponseList<BeautyAcitivityBuyRecordResp> response) {
                     if (YFResponseList.isOk(response)) {
                         wxAppRecordAdapter = new CustomerWxAppRecordAdapter(getActivity(), response.getContent());
-                        gridView.setAdapter(cardTimeRecordAdapter);
+                        gridView.setAdapter(wxAppRecordAdapter);
                     } else {
                         ToastUtil.showShortToast(response.getMessage());
                     }

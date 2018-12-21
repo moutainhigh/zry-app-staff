@@ -40,4 +40,6 @@
     <dimen name="pay_shupcatr_bottom_btn_size">24sp</dimen>
     <dimen name="pay_lagpay_buttom_size">30sp</dimen>
     <dimen name="btn_bottom_height">58dp</dimen>
+
+    <dimen name="online_pay_dialog_title_size">28sp</dimen>
 </resources>

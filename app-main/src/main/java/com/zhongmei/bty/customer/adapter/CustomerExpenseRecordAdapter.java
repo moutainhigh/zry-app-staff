@@ -87,7 +87,7 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
                      //http://mk.zhongmeiyunfu.com/marketing/internal/trade/tradeDetail?tradeId=1001&brandIdenty=1&shopIdenty=1
                     Long brandId = ShopInfoManager.getInstance().getShopInfo().getBrandId();
                     Long shopId = ShopInfoManager.getInstance().getShopInfo().getShopId();
-                    String url = String.format("http://mk.zhongmeiyunfu.com/marketing/internal/trade/tradeDetail?tradeId=%d&brandIdenty=%d&shopIdenty=%d", record.getTradeId(), brandId, shopId);
+                    String url = String.format("http://mk.zhongmeiyunfu.com/marketing/internal/trade/tradeDetail?source=1&tradeId=%d&brandIdenty=%d&shopIdenty=%d", record.getTradeId(), brandId, shopId);
                     H5WebViewActivity.start(mContext, url);
                 }
             });

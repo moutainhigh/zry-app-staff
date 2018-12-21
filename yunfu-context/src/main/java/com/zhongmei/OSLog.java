@@ -67,7 +67,7 @@ public class OSLog {
     private static final SimpleDateFormat sdfLog = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
     private static final SimpleDateFormat sdfFile = new SimpleDateFormat("yyMMdd");
     private static final Pattern ANONYMOUS_CLASS = Pattern.compile("(\\$\\d+)+$");
-    private static final String rootDir = "Android/data/app_log/";
+    private static final String rootDir = "Android/data/com/zhongmei/yunfu/app_log/";
     private String dirName;
     private int retentionTime = 7;
 
@@ -235,7 +235,7 @@ public class OSLog {
             deleteDaysBeforeLogFile(retentionTime, outDir);
             File file = new File(outDir, String.format(outDir.getName() + "_%s.log", sdfFile.format(logDate)));
             FileOutputStream raf = new FileOutputStream(file, true);
-            raf.write(String.format("%s %s: %s", sdfLog.format(logDate), tag, msg).getBytes());
+            raf.write(String.format("[%s] %s: %s", sdfLog.format(logDate), tag, msg).getBytes());
             raf.write("\r\n".getBytes());
             raf.getFD().sync();
             raf.close();

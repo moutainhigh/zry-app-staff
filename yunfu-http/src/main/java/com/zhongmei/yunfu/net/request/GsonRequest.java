@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.zhongmei.yunfu.net.RequestManagerCompat;
 import com.zhongmei.yunfu.net.volley.AuthFailureError;
 import com.zhongmei.yunfu.net.volley.DefaultRetryPolicy;
 import com.zhongmei.yunfu.net.volley.NetworkResponse;
@@ -185,7 +186,7 @@ public class GsonRequest<Q, R> extends StatisticsRequest<R> {
         try {
             String json = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             if (isDebug) {
-                Log.i(TAG, "Response: " + json);
+                RequestManagerCompat.log("Response: %s", json);
             }
             R responseValue = toResponseValue(json, mResponseType);
             return Response.success(responseValue, HttpHeaderParser.parseCacheHeaders(response));

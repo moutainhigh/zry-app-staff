@@ -30,6 +30,7 @@
     <string name="beauty_program_activity">小程序活动</string>
     <string name="beauty_use">使用</string>
     <string name="beauty_used">已使用</string>
+    <string name="beauty_not_used">未使用</string>
 
     <string name="beauty_coupon">优惠劵</string>
 

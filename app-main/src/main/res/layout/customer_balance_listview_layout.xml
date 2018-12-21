@@ -115,6 +115,7 @@
         android:layout_marginLeft="113dp"
         android:textSize="@dimen/text_13"
         android:textColor="@color/color_bcbcbc"
-        android:text="@string/customer_balance_remark" />
+        android:text="@string/customer_balance_remark"
+        android:visibility="gone"/>
 
 </LinearLayout>

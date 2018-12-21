@@ -71,7 +71,7 @@ public class CustomerWxAppRecordAdapter extends BaseAdapter {
             if (item.isUsed) {
                 viewHolder.tv_use.setText(mContext.getString(R.string.beauty_used));
             } else {
-                viewHolder.tv_use.setText(mContext.getString(R.string.beauty_use));
+                viewHolder.tv_use.setText(mContext.getString(R.string.beauty_not_used));
             }
         }
 

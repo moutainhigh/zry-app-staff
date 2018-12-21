@@ -1048,12 +1048,12 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
         //刷新会员信息显示
         if (activity != null) {
-            Fragment fragment = activity.getSupportFragmentManager().findFragmentById(R.id.orderDishPrivilegeView);
+            /*Fragment fragment = activity.getSupportFragmentManager().findFragmentById(R.id.orderDishPrivilegeView);
             if (fragment != null && fragment instanceof DinnerPriviligeItemsFragment) {
                 EventBus.getDefault().post(new ActionRefreshDinnerCustomer());
-            } else {
+            } else {*/
                 EventBus.getDefault().post(new ActionDinnerPrilivige(ActionDinnerPrilivige.DinnerPriviligeType.PRIVILIGE_ITEMS));
-            }
+            //}
         } else {
             EventBus.getDefault().post(new ActionDinnerPrilivige(ActionDinnerPrilivige.DinnerPriviligeType.PRIVILIGE_ITEMS));
         }

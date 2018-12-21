@@ -181,7 +181,6 @@
     <string name="dataError">温馨提示：检查到本地数据与服务器数据不匹配，请重新完成初始化操作。</string>
     <string name="loading_tips">信息加载中,请稍等...</string>
     <string name="quite">退出</string>
-    <string name="function_model_is_building">功能模块还在努力建造中...</string>
     <string name="notice_you">提示您</string>
     <string name="notice_info">提示信息</string>
     <string name="year_month_format">yyyy年MM月</string>

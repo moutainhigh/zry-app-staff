@@ -299,7 +299,6 @@
     <string name="dinner_wechat_code_repeat">不能添加相同号码的卡劵</string>
     <string name="payOrderIsEmpty">支付单中没有可清除的商品</string>
     <string name="pleanse_select_discount">请先选择商品</string>
-    <string name="dinner_split_paying">已保存拆单，请收银后再进行其他操作</string>
     <string name="dinner_total_page_label">总单</string>
     <string name="dinner_click_to_pay_label">点击菜品加入支付单</string>
     <string name="dinner_modify_split_label">修改拆单</string>
@@ -308,7 +307,6 @@
     <string name="dinner_back_desk">取消操作，返回桌台</string>
     <string name="dinner_opentable_unfinished">开台未完成,不能拆单!</string>
     <string name="loading_message">信息加载中，请稍后。。。</string>
-    <string name="dinner_subsetup_paying">分步支付中,请支付完成后再操作</string>
     <string name="dinner_waiter_hint">服务员:%1$s</string>
     <string name="dinner_guests_hint">人数:%1$s</string>
     <string name="dinner_number_of_guests">就餐人数</string>

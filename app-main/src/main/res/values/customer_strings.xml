@@ -85,10 +85,6 @@
     <string name="customer_no_confirm_password">请输入确认密码!</string>
     <string name="customer_password_not_match">两次密码不一致，请检查！</string>
     <string name="customer_pswd_length_must_be_6">密码必须是6位的数字！</string>
-    <string name="customer_no_input_cash">请输入储值金额!</string>
-    <string name="customer_input_cash_incorrect">输入金额不正确，请检查!</string>
-    <string name="customer_charging_overrun">单次充值金额超出上限</string>
-    <string name="customer_charging_extract_to_cent">充值金额精确到分</string>
     <string name="uninit">请先登录系统</string>
     <string name="customer_not_member">对不起，您不是会员</string>
     <string name="member_disable">会员已冻结，不能进行此操作！</string>

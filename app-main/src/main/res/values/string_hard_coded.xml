@@ -52,7 +52,6 @@
     <string name="toast_not_more">没有更多了！</string>
     <string name="toast_password_verify_error">密码验证失败</string>
     <string name="toast_customer_create_tel_limit">没有选择号码所属地，请先选择号码所属地</string>
-    <string name="toast_data_error">数据异常！</string>
     <string name="toast_excessive_charge_limit">溢收金额大于券面值，请重新设置！</string>
     <string name="toast_coupon_is_cancel_hint">该菜品已有被核销的优惠券,不支持该操作</string>
     <string name="toast_pay_error_hint">支付未成功，稍后再试</string>

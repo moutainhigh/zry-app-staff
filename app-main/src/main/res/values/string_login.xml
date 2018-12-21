@@ -55,7 +55,6 @@
     <string name="pay_coupon_null">暂无</string>
     <string name="login_init_dialog_contract_renewal_title">合同到期</string>
     <string name="login_init_dialog_contract_renewal_pay_completed">支付完成</string>
-    <string name="login_ali_login_tips">扫描上面的二维码进行登录</string>
 
     <!-- 直接进入 -->
 </resources>

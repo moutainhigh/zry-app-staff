@@ -111,6 +111,7 @@ import com.zhongmei.yunfu.db.enums.DeliveryStatus;
 import com.zhongmei.yunfu.db.enums.DeliveryType;
 import com.zhongmei.yunfu.db.enums.DishType;
 import com.zhongmei.yunfu.db.enums.OperateType;
+import com.zhongmei.yunfu.db.enums.PayModeId;
 import com.zhongmei.yunfu.db.enums.PaymentType;
 import com.zhongmei.yunfu.db.enums.PrivilegeType;
 import com.zhongmei.yunfu.db.enums.SaleType;
@@ -1874,7 +1875,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         //else {
         //    tvPaymentTime.setVisibility(View.GONE);
         //}
-        if ((tradeVo.isPaidTradeposit() || tradeVo.getTrade().getTradePayStatus() != TradePayStatus.UNPAID) && isNeedShowPayInfo(paymentVos)) {
+        if (isNeedShowPayInfo(paymentVos)) {
             View view = mPresenter.createPayInfoItem(getActivity(), tradePaymentVo, oriTradePaymentVo, isRefund);
             llPayInfoContent.addView(view);
             vPayInfo.setVisibility(mPresenter.showPayInfo(tradeVo, paymentTempVoList) ? View.VISIBLE : View.GONE);
@@ -1883,10 +1884,11 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
 
     private boolean isNeedShowPayInfo(List<PaymentVo> paymentVos) {
         for (PaymentVo paymentVo : paymentVos) {
-            if (paymentVo.getPayment().getPaymentType() == PaymentType.TRADE_SELL
-                    || paymentVo.getPayment().getPaymentType() == PaymentType.TRADE_REFUND) {
+            if (paymentVo.getPayment().getPaymentType() == PaymentType.TRADE_SELL) {
+//                    || paymentVo.getPayment().getPaymentType() == PaymentType.TRADE_REFUND) {
                 List<PaymentItem> paymentItems = paymentVo.getPaymentItemList();
                 for (PaymentItem paymentItem : paymentItems) {
+                    if(paymentItem.getPayModeId()== PayModeId.ALIPAY.value() || paymentItem.getPayModeId()== PayModeId.WEIXIN_PAY.value())
                     return true;
                 }
             }

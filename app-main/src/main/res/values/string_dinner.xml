@@ -129,7 +129,7 @@
     <string name="dinner_order_center_goods_total_number">商品总数: %s</string>
     <string name="dinner_order_center_goods_total_amount">合计:</string>
     <string name="dinner_order_center_online_paystatus">更新支付状态</string>
-    <string name="dinner_order_center_refund_status">更新退款状态</string>
+    <string name="dinner_order_center_refund_status">更新支付状态</string>
     <string name="dinner_order_center_print">打 印</string>
     <string name="dinner_order_center_accept">接 受</string>
     <string name="dinner_order_center_refuse">拒 绝</string>

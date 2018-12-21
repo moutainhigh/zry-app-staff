@@ -288,12 +288,13 @@ public class ColumnLayout extends LinearLayout {
                 tv_foldDetails.setVisibility(View.GONE);
             }
 
-            //判断是否显示更新退款状态
-            if (payModeDetailsBean.getPaymentType() != null && payModeDetailsBean.getPaymentType() == PaymentType.TRADE_REFUND) {
-                if (!Snack.isOfflineTrade(tradeVo) && (paymentItem.getPayModeId() == PayModeId.WEIXIN_PAY.value()
+            //判断已使用第三方支付，退货。状态未返回，刷新状态值
+//            if (payModeDetailsBean.getPaymentType() != null) {
+                if ((paymentItem.getPayModeId() == PayModeId.WEIXIN_PAY.value()
                         || paymentItem.getPayModeId() == PayModeId.ALIPAY.value()
                         || paymentItem.getPayModeId() == PayModeId.BAIFUBAO.value())
                         && (paymentItem.getPayStatus() == TradePayStatus.REFUNDING
+                          || paymentItem.getPayStatus() == TradePayStatus.UNPAID
                         || paymentItem.getPayStatus() == TradePayStatus.REFUND_FAILED)) {
                     tv_refreshState.setVisibility(View.VISIBLE);
                 } else {
@@ -310,9 +311,9 @@ public class ColumnLayout extends LinearLayout {
                         }
                     }
                 });
-            } else {
-                tv_refreshState.setVisibility(View.GONE);
-            }
+//            } else {
+//                tv_refreshState.setVisibility(View.GONE);
+//            }
 
             addView(view);
 

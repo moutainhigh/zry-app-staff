@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 public class FileUtil {
 
     private static final String LOCAL_ROOT_PATH = getRootDirectory()
-            + "calm/";
+            + "files/";
 
     public static final String LOCAL_IMAGE_PATH = LOCAL_ROOT_PATH + "image/";
 

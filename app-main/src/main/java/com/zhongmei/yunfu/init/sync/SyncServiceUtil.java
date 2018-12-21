@@ -65,7 +65,7 @@ public class SyncServiceUtil {
         }
     }
 
-    static final OSLog log = OSLog.getLog("owns");
+    static final OSLog log = OSLog.getLog("sync");
 
     public static void info(String msg, Object... args) {
         log.info(msg, args);

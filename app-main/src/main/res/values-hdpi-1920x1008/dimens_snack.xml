@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="snack_middle_discount_title_height">30dp</dimen>
-    <dimen name="sncak_middle_discount_title_size">16sp</dimen>
-    <dimen name="snack_middle_coupon_scan_size">18sp</dimen>
-</resources>

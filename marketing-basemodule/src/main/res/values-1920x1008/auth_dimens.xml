@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <dimen name="auth_permission_dialog_close_btn">32dp</dimen>
-
-</resources>

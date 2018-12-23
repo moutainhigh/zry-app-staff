@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="order_dish_grid_width">125dp</dimen>
-    <dimen name="order_dish_grid_item_selected_margin">6dp</dimen>
-    <!--点单页上边距-->
-    <dimen name="order_dish_margin_top">8dp</dimen>
-    <dimen name="order_dish_grid_item_desc_margin">10dp</dimen>
-    <dimen name="order_dish_grid_item_width">130dp</dimen>
-</resources>

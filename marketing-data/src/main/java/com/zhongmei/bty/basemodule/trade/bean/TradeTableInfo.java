@@ -105,7 +105,7 @@ public class TradeTableInfo implements Comparable<TradeTableInfo> {
 
 
         this.tableId = tradeTable.getTableId();
-        this.numberOfMeals = trade.getTradePeopleCount();
+        this.numberOfMeals = trade.getTradePeopleCount() != null ? trade.getTradePeopleCount() : 0;
         this.tradeUuid = trade.getUuid();
         this.tradeId = trade.getId();
         this.tradeServerUpdateTime = trade.getServerUpdateTime();

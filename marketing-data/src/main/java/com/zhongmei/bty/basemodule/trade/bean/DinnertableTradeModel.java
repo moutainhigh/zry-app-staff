@@ -106,7 +106,8 @@ public class DinnertableTradeModel implements IDinnertableTrade {
 
     @Override
     public void refreshSpendTime() {
-        int time = (int) (System.currentTimeMillis() - tradeTableInfo.startTimeMillis) / (60 * 1000);
+        long startTimeMillis = tradeTableInfo.startTimeMillis != null ? tradeTableInfo.startTimeMillis : 0;
+        int time = (int) (System.currentTimeMillis() - startTimeMillis) / (60 * 1000);
         if (time < 0) {
             time = -1;
         }

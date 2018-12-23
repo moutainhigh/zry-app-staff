@@ -20,8 +20,8 @@
                 android:id="@+id/time"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:paddingLeft="@dimen/customer_intrgral_time_l"
+                android:layout_weight="2"
+                android:gravity="center"
                 android:text="@string/customer_accont_list_empty_data"
                 android:textColor="@color/customer_text_black"
                 android:textSize="@dimen/text_16"
@@ -69,9 +69,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/customer_accont_list_empty_data"
-                android:layout_weight="1.5"
-                android:paddingRight="@dimen/customer_intrgral_person_r"
-                android:gravity="right"
+                android:layout_weight="1"
+                android:gravity="center"
                 android:textColor="@color/customer_text_black"
                 android:textSize="@dimen/text_16"
                 tools:text="weixin" />
@@ -82,7 +81,7 @@
         android:layout_width="match_parent"
         android:background="@color/customer_divide_line"
         android:layout_height="1px"
-        android:layout_marginLeft="@dimen/customer_intrgral_divider_l"
-        android:layout_marginRight="@dimen/customer_intrgral_divider_r"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
         android:layout_alignParentBottom="true" />
 </LinearLayout>

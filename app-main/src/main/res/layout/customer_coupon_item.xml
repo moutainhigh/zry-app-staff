@@ -6,7 +6,7 @@
     android:orientation="horizontal">
 
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="match_parent"
         android:background="@drawable/customer_cash_bg_left">
 
@@ -32,13 +32,12 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/customer_coupon_left_l_p"
-                android:layout_marginRight="@dimen/customer_coupon_left_p"
+                android:layout_marginLeft="5dp"
                 android:ems="1"
                 android:lineSpacingExtra="-4dp"
                 android:maxLines="3"
                 android:textColor="@color/color_333333"
-                android:textSize="@dimen/text_22"
+                android:textSize="18sp"
                 tools:text="礼品卷" />
 
         </FrameLayout>
@@ -63,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@color/color_333333"
-                android:textSize="@dimen/text_13"
+                android:textSize="@dimen/text_12"
                 tools:text="@string/gift_full_value" />
 
             <TextView
@@ -122,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/customer_coupon_time_t"
                 android:textColor="@color/customer_rule_gray"
-                android:textSize="@dimen/text_11"
+                android:textSize="@dimen/text_10"
                 android:singleLine="true"
                 tools:text="有效期限 2017/01/01-2017/01/01" />
         </LinearLayout>

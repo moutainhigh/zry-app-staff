@@ -131,7 +131,7 @@
 
 
             <Button
-                android:id="@+id/btn_accept"
+                android:id="@+id/btn_refuse"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:background="@drawable/beauty_btn_main_modify_selectory"
@@ -139,12 +139,12 @@
                 android:paddingRight="21dp"
                 android:visibility="gone"
                 android:textSize="@dimen/text_14"
-                android:text="@string/beauty_accept"
+                android:text="@string/beauty_refuse"
                 android:textColor="@color/black" />
 
 
             <Button
-                android:id="@+id/btn_refuse"
+                android:id="@+id/btn_accept"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginLeft="20dp"
@@ -153,7 +153,7 @@
                 android:paddingRight="14dp"
                 android:textSize="@dimen/text_14"
                 android:visibility="gone"
-                android:text="@string/beauty_refuse"
+                android:text="@string/beauty_accept"
                 android:textColor="@color/beauty_text_white" />
         </LinearLayout>
 

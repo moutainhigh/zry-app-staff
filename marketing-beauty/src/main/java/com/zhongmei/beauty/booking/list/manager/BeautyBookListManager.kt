@@ -195,6 +195,9 @@ class BeautyBookListManager {
             BeautyListType.CANCELD -> {
                 getCancelList(activty, callback)
             }
+            BeautyListType.UNDEAL->{
+                getUnDealList(activty,callback)
+            }
         }
 
     }

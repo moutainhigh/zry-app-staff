@@ -372,6 +372,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
             mOnPayStopListener.onPayStop();
         }
         DoPayApi.OnlineDialogShowing = false;
+        showLoadingProgressDialogHandler.removeCallbacksAndMessages(null);
         super.onDestroy();
     }
 
@@ -893,7 +894,8 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
             // 开始获取支付状态
             startGetPayStatus();
 
-            sendShowGetPayStateButtonMS();//add 20171014 显示获取状态按钮
+            //sendShowGetPayStateButtonMS();//add 20171014 显示获取状态按钮
+            showGetPayStateBT();
         }
 
         @Override
@@ -908,6 +910,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
 
         @Override
         public void onPayResult(Long paymentItemId, int payStatus) {
+            dismissLoadingProgressDialog();
             if (TradePayStatus.PAID.value() == payStatus) {//支付成功
                 EventBus.getDefault().post(new ActionCloseOrderDishActivity());
                 DoPayApi.OnlineDialogShowing = false;//add v8.5及时标记退出在线支付界面
@@ -952,7 +955,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
 
         mCurrentPaymentItemUuid = mPayModelItem.getUuid();
         showScanOverIcon();//add 20171014 显示扫码完成
-        sendShowGetPayStateButtonMS();//add 20171014 显示获取状态按钮
+        //sendShowGetPayStateButtonMS();//add 20171014 显示获取状态按钮
     }
 
     //add 20170612 start  微信会员扫码支付
@@ -1085,7 +1088,30 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
             ToastUtil.showShortToast(getString(R.string.toast_pay_error_hint));
             return;
         }
+        showLoadingProgressDialog(2500);
         mDoPayApi.getOnlinePayStateOfThird(getActivity(), mPaymentInfo, mCurrentPaymentItemId, mCurrentPaymentItemUuid, onlinePayCallback);
     }
-    //add 20171024  end 获取支付状态按钮
+
+    Handler showLoadingProgressDialogHandler = new Handler();
+    long showLoadingProgressDialogTime = 0;
+
+    public void showLoadingProgressDialog(long delayMillis) {
+        showLoadingProgressDialogTime = System.currentTimeMillis() + delayMillis;
+        showLoadingProgressDialog();
+    }
+
+    @Override
+    public void dismissLoadingProgressDialog() {
+        long time = System.currentTimeMillis() - showLoadingProgressDialogTime;
+        if (time > 0) {
+            super.dismissLoadingProgressDialog();
+        } else {
+            showLoadingProgressDialogHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    dismissLoadingProgressDialog();
+                }
+            }, time);
+        }
+    }
 }

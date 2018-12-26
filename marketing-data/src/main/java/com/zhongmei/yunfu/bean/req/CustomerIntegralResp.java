@@ -21,6 +21,8 @@ public class CustomerIntegralResp {
 
         Long id;//积分记录ID
 
+        Integer recordType; //记录类型1储值、2消费
+
         Long beforeIntegral;//之前积分
 
         Long addIntegral;//本次新增积分
@@ -47,6 +49,7 @@ public class CustomerIntegralResp {
             for (NewIntegralRecord n : result) {
                 record = new IntegralRecord();
                 record.setId(n.id);
+                record.setRecordType(n.recordType);
                 record.setBeforeIntegral(String.valueOf(n.beforeIntegral));
                 record.setAddIntegral(String.valueOf(n.addIntegral));
                 record.setEndIntegral(String.valueOf(n.endIntegral));

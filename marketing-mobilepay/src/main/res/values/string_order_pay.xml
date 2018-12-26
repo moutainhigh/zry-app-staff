@@ -256,7 +256,7 @@
     <string name="pay_cash_changeamount_is_error">找零金额不正确！</string>
     <string name="pay_negative_not_pay">应付金额为负，不能结账！</string>
     <string name="pay_data_format_not_ok">数据格式不正确！</string>
-    <string name="please_refresh">等待超时，可点击查询支付结果</string>
+    <string name="please_refresh">等待超时，点击查询支付结果</string>
     <string name="pay_authcode_can_not_empty">付款码不能为空！</string>
     <string name="pay_remove_member_price_alter">确定切换支付方式并清除会员价？</string>
     <string name="coupon_type_txt">券类型</string>

@@ -9,9 +9,9 @@
     <string name="customer_login_hint_login_type2">注册后再登录</string>
     <!--顾客-->
     <string name="customer_already_face_collect">已认证头像</string>
-    <string name="customer_integral_recharging">积入 {HBF}%1$s</string>
-    <string name="customer_integral_consume">消费 -{HBF}%1$s</string>
-    <string name="customer_integral_refund">退款 {HBF}%1$s</string>
+    <string name="customer_integral_recharging">积入 %1$s</string>
+    <string name="customer_integral_consume">消费 -%1$s</string>
+    <string name="customer_integral_refund">退款 %1$s</string>
     <string name="customer_integral_add_reason">补录原因：</string>
     <!--公共弹窗-->
     <string name="dialog_item_content">内容</string>

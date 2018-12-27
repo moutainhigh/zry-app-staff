@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:drawable="@drawable/queue_voice_pause" android:state_pressed="false" />
-    <item android:drawable="@drawable/queue_voice_pause_press" android:state_pressed="true" />
-    <item android:drawable="@drawable/queue_voice_pause" />
-
-</selector>

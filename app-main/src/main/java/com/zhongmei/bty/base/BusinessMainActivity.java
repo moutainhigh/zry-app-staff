@@ -238,11 +238,11 @@ public abstract class BusinessMainActivity extends MainBaseActivity {
     protected abstract @NonNull
     TextView getViewNotifyCenterOtherTip();
 
-    protected void showOrderCenterFragment(int from) {
+    /*protected void showOrderCenterFragment(int from) {
         int childTabType = DbQueryConstant.UNPROCESSED_NEW_ORDER;
         OrderCenterMainFragment mOrderCenterFragment = OrderCenterMainFragment.newInstance(from, childTabType);
         replaceFragment(R.id.main_frame, mOrderCenterFragment, OrderCenterMainFragment.class.getSimpleName());
-    }
+    }*/
 
     /**
      * @Date 2016/6/30

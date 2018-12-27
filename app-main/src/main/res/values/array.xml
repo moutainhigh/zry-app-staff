@@ -53,17 +53,6 @@
         <item>百度钱包</item>
     </string-array>
 
-    <string-array name="voice_sex">
-        <item>男</item>
-        <item>女</item>
-    </string-array>
-    <string-array name="voice_speed">
-        <item>最慢</item>
-        <item>较慢</item>
-        <item>正常</item>
-        <item>较快</item>
-        <item>最快</item>
-    </string-array>
     <string-array name="customer_ordercenter_detail_tab_text">
         <item>卡号详情</item>
         <item>实体卡信息</item>

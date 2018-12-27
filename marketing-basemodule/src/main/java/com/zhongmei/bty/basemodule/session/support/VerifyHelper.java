@@ -2,24 +2,23 @@ package com.zhongmei.bty.basemodule.session.support;
 
 import android.support.v4.app.FragmentActivity;
 
-import com.zhongmei.yunfu.basemodule.R;
 import com.zhongmei.bty.basemodule.auth.application.BeautyApplication;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
 import com.zhongmei.bty.basemodule.auth.application.DinnerApplication;
 import com.zhongmei.bty.basemodule.auth.application.FastFoodApplication;
-import com.zhongmei.bty.basemodule.auth.application.RetailApplication;
 import com.zhongmei.bty.basemodule.auth.permission.dialog.VerifyPermissionsDialogFragment;
 import com.zhongmei.bty.basemodule.auth.permission.dialog.VerifyPermissionsDialogFragment.CloseListener;
 import com.zhongmei.bty.basemodule.auth.permission.dialog.VerifyPermissionsDialogFragment_;
 import com.zhongmei.bty.basemodule.auth.permission.manager.AuthLogManager;
+import com.zhongmei.bty.basemodule.session.core.user.UserFunc;
+import com.zhongmei.bty.baseservice.util.peony.land.Task;
+import com.zhongmei.bty.commonmodule.database.enums.AuthType;
+import com.zhongmei.yunfu.basemodule.R;
 import com.zhongmei.yunfu.context.session.Session;
 import com.zhongmei.yunfu.context.session.core.auth.Auth;
 import com.zhongmei.yunfu.context.session.core.user.AuthUser;
 import com.zhongmei.yunfu.context.session.core.user.User;
-import com.zhongmei.bty.basemodule.session.core.user.UserFunc;
 import com.zhongmei.yunfu.context.util.peony.ArgsUtils;
-import com.zhongmei.bty.baseservice.util.peony.land.Task;
-import com.zhongmei.bty.commonmodule.database.enums.AuthType;
 import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.math.BigDecimal;
@@ -219,10 +218,6 @@ public class VerifyHelper {
             map.put(DinnerApplication.PERMISSION_DINNER_REFUND, AuthType.TYPE_RETURN);
             map.put(DinnerApplication.PERMISSION_DINNER_CASH, AuthType.TYPE_CHECK_OUT);
             map.put(DinnerApplication.PERMISSION_DINNER_TAKEOUT_CLEAR, AuthType.TYPE_CLEAR_BALANCE);
-            map.put(RetailApplication.PERMISSION_FASTFOOD_ACCEPT, AuthType.TYPE_ACCEPT_REJECT);
-            map.put(RetailApplication.PERMISSION_FASTFOOD_CASH, AuthType.TYPE_CHECK_OUT);
-            map.put(RetailApplication.PERMISSION_FASTFOOD_REPAY, AuthType.TYPE_ANIT_SETTLEMENT);
-            map.put(RetailApplication.PERMISSION_FASTFOOD_INVALID, AuthType.TYPE_CANCEL_ORDER);
             map.put(FastFoodApplication.PERMISSION_FASTFOOD_REFUND, AuthType.TYPE_RETURN);
             map.put(FastFoodApplication.PERMISSION_FASTFOOD_ACCEPT, AuthType.TYPE_ACCEPT_REJECT);
             map.put(FastFoodApplication.PERMISSION_FASTFOOD_REPAY, AuthType.TYPE_ANIT_SETTLEMENT);
@@ -242,7 +237,6 @@ public class VerifyHelper {
             map.put(FastFoodApplication.PERMISSION_FASTFOOD_PRIVILEDGE_FREE, AuthType.TYPE_PRIVILIGE_FREE);
             map.put(FastFoodApplication.PERMISSION_FASTFOOD_PRIVILEDGE_PRESENT, AuthType.TYPE_PRIVILIGE_PRESENT);
             map.put(FastFoodApplication.PERMISSION_PAYMENTS_EDIT, AuthType.TYPE_PAYMENTS_EDIT);
-            map.put(RetailApplication.PERMISSION_PAYMENTS_EDIT, AuthType.TYPE_PAYMENTS_EDIT);
             map.put(DinnerApplication.PERMISSION_PAYMENTS_EDIT, AuthType.TYPE_PAYMENTS_EDIT);
             map.put(DinnerApplication.PERMISSION_DINNER_BUSINESS_CHARGE, AuthType.TYPE_DINNER_BUSINESS_CHARGE);
             map.put(DinnerApplication.PERMISSION_DINNER_RETURN_GOODS, AuthType.TYPE_RETURN_GOODS);

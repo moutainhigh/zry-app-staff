@@ -56,7 +56,6 @@ import com.zhongmei.bty.customer.util.SexUtils;
 import com.zhongmei.bty.customer.views.CustomerEditPopWindow;
 import com.zhongmei.bty.customer.views.SaveCustomerDailog;
 import com.zhongmei.bty.customer.views.SaveCustomerDailog_;
-import com.zhongmei.bty.settings.fragment.QueueSettingSwitchFragment;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.bean.YFResponse;
 import com.zhongmei.yunfu.bean.req.CustomerCreateResp;
@@ -65,7 +64,6 @@ import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.yunfu.context.session.core.auth.Auth;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
-import com.zhongmei.yunfu.context.util.helper.SpHelper;
 import com.zhongmei.yunfu.data.LoadingYFResponseListener;
 import com.zhongmei.yunfu.db.entity.crm.CustomerGroupLevel;
 import com.zhongmei.yunfu.db.enums.Sex;
@@ -829,9 +827,9 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             // 是否开启隐私保护
             mCustomer.mobile = mPhonenum.getText().toString();
         } else {
-            if (!SpHelper.getDefault().getBoolean(QueueSettingSwitchFragment.MOBILE_PRIVACY, false)) {
+            //if (!SpHelper.getDefault().getBoolean(QueueSettingSwitchFragment.MOBILE_PRIVACY, false)) {
                 mCustomer.mobile = mPhonenum.getText().toString();
-            }
+            //}
         }
         if (type == CustomerActivity.PARAM_ADD && mMisPosInput == false) {
             String passwrod = mPassword.getText().toString();

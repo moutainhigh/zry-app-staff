@@ -4,9 +4,6 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.util.TypedValue;
 
-import com.zhongmei.yunfu.context.util.helper.SpHelper;
-import com.zhongmei.bty.settings.fragment.QueueSettingSwitchFragment;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -59,10 +56,9 @@ public class AppUtil {
      * @return
      */
     public static String getTel(String normalTel) {
-
-        if (SpHelper.getDefault().getBoolean(QueueSettingSwitchFragment.MOBILE_PRIVACY, false)) {
+        /*if (SpHelper.getDefault().getBoolean(QueueSettingSwitchFragment.MOBILE_PRIVACY, false)) {
             return getHideTel(normalTel);
-        }
+        }*/
         return normalTel;
     }
 

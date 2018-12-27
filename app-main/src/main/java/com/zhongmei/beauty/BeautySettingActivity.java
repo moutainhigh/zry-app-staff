@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.zhongmei.bty.commonmodule.event.ActionPrinterServerChanged;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 import com.zhongmei.bty.manager.CashierPointManager;
-import com.zhongmei.bty.queue.ui.QueueSettingFragment_;
 import com.zhongmei.bty.settings.fragment.BasicSettingFragment_;
 import com.zhongmei.bty.settings.fragment.BookSettingSwitchFragment_;
 import com.zhongmei.bty.settings.fragment.DinnerAutoOrderFragment_;
@@ -26,10 +25,8 @@ import com.zhongmei.bty.settings.fragment.HandoverTypeSettingFragment_;
 import com.zhongmei.bty.settings.fragment.OrderDisplayDeviceSettingFragment_;
 import com.zhongmei.bty.settings.fragment.PayModelOrderSettingFragment_;
 import com.zhongmei.bty.settings.fragment.PrepaySettingFragment_;
-import com.zhongmei.bty.settings.fragment.QueueSettingSwitchFragment_;
 import com.zhongmei.bty.settings.fragment.ScannerFragment_;
 import com.zhongmei.bty.settings.fragment.ShopInfoFragment_;
-import com.zhongmei.bty.settings.fragment.SpeechSynthesisSettingFragment_;
 import com.zhongmei.bty.settings.fragment.SupportFragment;
 import com.zhongmei.bty.settings.fragment.SupportFragment_;
 import com.zhongmei.bty.settings.fragment.TableNumberFragment_;
@@ -560,7 +557,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, queueCommonSwitch);
             setCurrentStyle(queueCommonSwitch);
-            switchFragment(R.id.right_container1, new QueueSettingSwitchFragment_(), queueCommonSwitch);
+            //switchFragment(R.id.right_container1, new QueueSettingSwitchFragment_(), queueCommonSwitch);
 
             textView = queueCommonSwitch;
         }
@@ -572,7 +569,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, queueManager);
             setCurrentStyle(queueManager);
-            switchFragment(R.id.right_container1, new QueueSettingFragment_(), queueManager);
+            //switchFragment(R.id.right_container1, new QueueSettingFragment_(), queueManager);
 
             textView = queueManager;
         }
@@ -584,7 +581,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, voiceManager);
             setCurrentStyle(voiceManager);
-            switchFragment(R.id.right_container1, new SpeechSynthesisSettingFragment_(), voiceManager);
+            //switchFragment(R.id.right_container1, new SpeechSynthesisSettingFragment_(), voiceManager);
 
             textView = voiceManager;
         }

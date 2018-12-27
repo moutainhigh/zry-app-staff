@@ -58,6 +58,7 @@
                 android:paddingRight="3dp"
                 android:text="@string/customer_banlance"
                 android:textColor="@color/beauty_main_anchor_selector"
+                android:drawableLeft="@drawable/customer_save_selector"
                 android:textSize="@dimen/text_16" />
 
             <!--<View
@@ -94,6 +95,7 @@
                 android:paddingRight="3dp"
                 android:text="@string/customer_coupon_use"
                 android:textColor="@color/beauty_main_anchor_selector"
+                android:drawableLeft="@drawable/customer_coupon_selector"
                 android:textSize="@dimen/text_16" />
 
             <View
@@ -112,6 +114,7 @@
                 android:paddingRight="3dp"
                 android:text="@string/customer_integral_canuse"
                 android:textColor="@color/beauty_main_anchor_selector"
+                android:drawableLeft="@drawable/customer_jf_selector"
                 android:textSize="@dimen/text_16" />
 
             <View
@@ -130,6 +133,7 @@
                 android:paddingRight="3dp"
                 android:text="@string/customer_card_time"
                 android:textColor="@color/beauty_main_anchor_selector"
+                android:drawableLeft="@drawable/customer_card_time_selector"
                 android:textSize="@dimen/text_16" />
 
             <View
@@ -148,6 +152,7 @@
                 android:paddingRight="3dp"
                 android:text="@string/customer_wxapp_service"
                 android:textColor="@color/beauty_main_anchor_selector"
+                android:drawableLeft="@drawable/customer_weixin_selector"
                 android:textSize="@dimen/text_16" />
 
             <View
@@ -166,6 +171,7 @@
                 android:paddingRight="3dp"
                 android:text="@string/customer_expense_service"
                 android:textColor="@color/beauty_main_anchor_selector"
+                android:drawableLeft="@drawable/customer_order_history_selector"
                 android:textSize="@dimen/text_16" />
 
             <View

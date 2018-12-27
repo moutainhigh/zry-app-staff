@@ -1,6 +1,7 @@
 package com.zhongmei.beauty.customer;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -16,31 +17,20 @@ import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount;
-import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp;
+import com.zhongmei.atask.SimpleAsyncTask;
+import com.zhongmei.atask.TaskContext;
 import com.zhongmei.beauty.operates.BeautyCustomerOperates;
 import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp;
-import com.zhongmei.bty.customer.adapter.CustomerCardTimeRecordAdapter;
-import com.zhongmei.bty.customer.adapter.CustomerExpenseRecordAdapter;
-import com.zhongmei.bty.customer.adapter.CustomerWxAppRecordAdapter;
-import com.zhongmei.yunfu.bean.YFResponse;
-import com.zhongmei.yunfu.bean.YFResponseList;
-import com.zhongmei.yunfu.bean.req.CustomerCouponResp;
-import com.zhongmei.yunfu.bean.req.CustomerIntegralResp;
-import com.zhongmei.yunfu.data.LoadingYFResponseListener;
-import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
+import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount;
 import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
-import com.zhongmei.yunfu.bean.req.CustomerResp;
-import com.zhongmei.yunfu.http.CalmNetWorkRequest;
 import com.zhongmei.bty.basemodule.commonbusiness.utils.ServerAddressUtil;
+import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp;
 import com.zhongmei.bty.basemodule.customer.bean.IntegralRecord;
 import com.zhongmei.bty.basemodule.customer.bean.coupon.CouponVo;
 import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
 import com.zhongmei.bty.basemodule.customer.message.MemberIntegralModificationReq;
 import com.zhongmei.bty.basemodule.customer.message.MemberIntegralModificationResp;
-import com.zhongmei.yunfu.bean.req.CustomerStoredBalanceResp;
-import com.zhongmei.yunfu.bean.req.CustomerStoredBalanceReq;
 import com.zhongmei.bty.basemodule.customer.message.NewMemberIntegralInfoResp;
 import com.zhongmei.bty.basemodule.customer.operates.CouponDal;
 import com.zhongmei.bty.basemodule.customer.operates.CustomerOperates;
@@ -51,34 +41,45 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.message.CardIntegralInfoR
 import com.zhongmei.bty.basemodule.devices.mispos.data.message.CustomerCardStoreValueReq;
 import com.zhongmei.bty.basemodule.devices.mispos.data.message.CustomerCardStoreValueResp;
 import com.zhongmei.bty.basemodule.devices.mispos.data.message.CustomerCardStoreValueResp.CardStoreValueItem;
-import com.zhongmei.yunfu.context.session.Session;
-import com.zhongmei.yunfu.context.session.core.auth.Auth;
-import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.bty.basemodule.session.core.user.UserFunc;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.basemodule.trade.bean.Reason;
-import com.zhongmei.atask.SimpleAsyncTask;
-import com.zhongmei.atask.TaskContext;
-import com.zhongmei.yunfu.net.builder.NetError;
-import com.zhongmei.yunfu.net.builder.NetworkRequest;
-import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.bty.cashier.ordercenter.view.OrderCenterOperateDialogFragment;
-import com.zhongmei.yunfu.ui.base.BasicFragment;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
-import com.zhongmei.yunfu.resp.YFResponseListener;
-import com.zhongmei.yunfu.resp.data.TransferReq;
 import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
-import com.zhongmei.yunfu.resp.ResponseListener;
-import com.zhongmei.yunfu.resp.ResponseObject;
-import com.zhongmei.yunfu.util.ToastUtil;
-import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.bty.commonmodule.view.NumberInputdialog;
 import com.zhongmei.bty.customer.adapter.ChargingRecordAdapter;
 import com.zhongmei.bty.customer.adapter.CouponAdapter;
+import com.zhongmei.bty.customer.adapter.CustomerCardTimeRecordAdapter;
+import com.zhongmei.bty.customer.adapter.CustomerExpenseRecordAdapter;
+import com.zhongmei.bty.customer.adapter.CustomerWxAppRecordAdapter;
 import com.zhongmei.bty.customer.adapter.IntegralAdapter;
 import com.zhongmei.bty.customer.event.EventRefreshBalance;
 import com.zhongmei.bty.customer.util.CustomerContants;
 import com.zhongmei.bty.customer.util.CustomerPrintManager;
+import com.zhongmei.yunfu.R;
+import com.zhongmei.yunfu.bean.YFResponse;
+import com.zhongmei.yunfu.bean.YFResponseList;
+import com.zhongmei.yunfu.bean.req.CustomerCouponResp;
+import com.zhongmei.yunfu.bean.req.CustomerIntegralResp;
+import com.zhongmei.yunfu.bean.req.CustomerResp;
+import com.zhongmei.yunfu.bean.req.CustomerStoredBalanceReq;
+import com.zhongmei.yunfu.bean.req.CustomerStoredBalanceResp;
+import com.zhongmei.yunfu.context.session.Session;
+import com.zhongmei.yunfu.context.session.core.auth.Auth;
+import com.zhongmei.yunfu.context.session.core.user.User;
+import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.data.LoadingYFResponseListener;
+import com.zhongmei.yunfu.http.CalmNetWorkRequest;
+import com.zhongmei.yunfu.net.builder.NetError;
+import com.zhongmei.yunfu.net.builder.NetworkRequest;
+import com.zhongmei.yunfu.net.volley.VolleyError;
+import com.zhongmei.yunfu.resp.ResponseListener;
+import com.zhongmei.yunfu.resp.ResponseObject;
+import com.zhongmei.yunfu.resp.YFResponseListener;
+import com.zhongmei.yunfu.resp.data.TransferReq;
+import com.zhongmei.yunfu.ui.base.BasicFragment;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -192,6 +193,24 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     @ViewById(R.id.expense_empty_layout)
     View expense_empty_layout;
 
+    @ViewById(R.id.customer_banlance_rb)
+    RadioButton customer_banlance_rb;
+
+    @ViewById(R.id.customer_coupon_use_rb)
+    RadioButton customer_coupon_use_rb;
+
+    @ViewById(R.id.customer_integral_canuse_rb)
+    RadioButton customer_integral_canuse_rb;
+
+    @ViewById(R.id.customer_card_time_rb)
+    RadioButton customer_card_time_rb;
+
+    @ViewById(R.id.customer_wx_app_rb)
+    RadioButton customer_wx_app_rb;
+
+    @ViewById(R.id.customer_expense_rb)
+    RadioButton customer_expense_rb;
+
     private int currentPage = 1;
 
     // 充值记录
@@ -243,6 +262,60 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
 //		mIntegralAdapter = new IntegralAdapter(getActivity(), mIntegralList, mAllUser);
 //		defalutCheck();
         getAllUserTask();
+
+        initRadioButton();
+
+
+    }
+
+    void initRadioButton(){
+        //定义底部标签图片大小和位置
+        Drawable customer_save_selector = getResources().getDrawable(R.drawable.customer_save_selector);
+        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+        customer_save_selector.setBounds(0, 0, 36, 36);
+        //设置图片在文字的哪个方向
+        customer_banlance_rb.setCompoundDrawables(customer_save_selector, null, null, null);
+
+        //定义底部标签图片大小和位置
+        Drawable customer_coupon_selector = getResources().getDrawable(R.drawable.customer_coupon_selector);
+        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+        customer_coupon_selector.setBounds(0, 0, 36, 36);
+        //设置图片在文字的哪个方向
+        customer_coupon_use_rb.setCompoundDrawables(customer_coupon_selector, null, null, null);
+
+
+        //定义底部标签图片大小和位置
+        Drawable customer_jf_selector = getResources().getDrawable(R.drawable.customer_jf_selector);
+        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+        customer_jf_selector.setBounds(0, 0, 36, 36);
+        //设置图片在文字的哪个方向
+        customer_integral_canuse_rb.setCompoundDrawables(customer_jf_selector, null, null, null);
+
+
+        //定义底部标签图片大小和位置
+        Drawable customer_card_time_selector = getResources().getDrawable(R.drawable.customer_card_time_selector);
+        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+        customer_card_time_selector.setBounds(0, 0, 36, 36);
+        //设置图片在文字的哪个方向
+        customer_card_time_rb.setCompoundDrawables(customer_card_time_selector, null, null, null);
+
+
+        //定义底部标签图片大小和位置
+        Drawable customer_weixin_selector = getResources().getDrawable(R.drawable.customer_weixin_selector);
+        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+        customer_weixin_selector.setBounds(0, 0, 36, 36);
+        //设置图片在文字的哪个方向
+        customer_wx_app_rb.setCompoundDrawables(customer_weixin_selector, null, null, null);
+
+
+        //定义底部标签图片大小和位置
+        Drawable customer_order_history_selector = getResources().getDrawable(R.drawable.customer_order_history_selector);
+        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+        customer_order_history_selector.setBounds(0, 0, 36, 36);
+        //设置图片在文字的哪个方向
+        customer_expense_rb.setCompoundDrawables(customer_order_history_selector, null, null, null);
+
+
     }
 
     /**

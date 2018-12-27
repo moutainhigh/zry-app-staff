@@ -22,7 +22,7 @@ public abstract class BeautyOrderProductListPagerAdapter extends OrderDishListPa
 
     @Override
     protected int getNumColumns() {
-        return 5;
+        return 4;
     }
 
     @Override

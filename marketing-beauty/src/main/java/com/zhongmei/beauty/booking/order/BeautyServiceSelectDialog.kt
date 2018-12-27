@@ -15,6 +15,8 @@ import android.support.v7.widget.DividerItemDecoration
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
+import com.zhongmei.bty.basemodule.orderdish.bean.DishVo
+import com.zhongmei.yunfu.context.util.Utils
 
 
 /**
@@ -95,7 +97,12 @@ class BeautyServiceSelectDialog : Dialog, BeautyBrandSelectListener {
     fun loadData() {
         var typeList = mManager.loadBrandTypeData(mDishManager)
         brandTypeAdapter.setDatas(typeList)
-        dishAdapter.setDatas(mDishManager.getAllDishVo())
+         var listDishVo:List<DishVo> = ArrayList()
+        if(Utils.isNotEmpty(typeList)){
+            typeList!!.get(0)!!.isSelected=true
+            listDishVo=mManager.initDishVoByType(mDishManager, typeList!!.get(0))
+        }
+        dishAdapter.setDatas(listDishVo)
     }
 
     override fun onBrandTypeChange(dishBrandType: DishBrandTypeVo) {

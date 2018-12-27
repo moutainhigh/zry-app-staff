@@ -16,7 +16,7 @@
             android:layout_height="48dp"
             android:background="@color/beauty_bg_black">
 
-            <ImageView
+            <TextView
                 android:id="@+id/customer_charging_balance_back_btn"
                 style="@style/title_icon_style"
                 android:layout_width="wrap_content"
@@ -24,8 +24,12 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
                 android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/actionbar_back_icon"
+                android:gravity="center"
                 android:scaleType="centerInside"
-                android:src="@drawable/customer_back_icon" />
+                android:text="返回"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp" />
         </FrameLayout>
 
 
@@ -195,18 +199,18 @@
             android:id="@+id/customer_coupon_gridview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="10dp"
             android:clipChildren="false"
             android:clipToPadding="false"
             android:horizontalSpacing="20dp"
             android:listSelector="@color/transparent"
             android:numColumns="4"
+            android:paddingLeft="16dp"
+            android:paddingTop="10dp"
+            android:paddingRight="16dp"
+            android:scrollbarStyle="outsideOverlay"
             android:stretchMode="columnWidth"
             android:verticalSpacing="20dp"
-            android:visibility="gone"
-            android:scrollbarStyle="outsideOverlay"/>
+            android:visibility="gone" />
 
         <!-- 优惠券为空页面 -->
         <include

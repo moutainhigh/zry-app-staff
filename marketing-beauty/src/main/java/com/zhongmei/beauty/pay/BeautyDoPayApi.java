@@ -10,12 +10,26 @@ import android.util.Log;
 import android.webkit.URLUtil;
 
 import com.zhongmei.beauty.order.BeautyOrderManager;
+import com.zhongmei.bty.basemodule.auth.permission.manager.AuthLogManager;
+import com.zhongmei.bty.basemodule.commonbusiness.cache.ServerSettingCache;
+import com.zhongmei.bty.basemodule.commonbusiness.manager.QueuePlayServiceManager;
+import com.zhongmei.bty.basemodule.customer.enums.CustomerLoginType;
+import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
+import com.zhongmei.bty.basemodule.pay.bean.PaymentVo;
+import com.zhongmei.bty.basemodule.pay.enums.PayScene;
+import com.zhongmei.bty.basemodule.pay.message.PayResp;
+import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
+import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
+import com.zhongmei.bty.basemodule.trade.operates.TradeDal;
+import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.bty.commonmodule.database.enums.OrderActionEnum;
+import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
+import com.zhongmei.bty.data.operates.impl.NewTradeOperatesImpl;
 import com.zhongmei.bty.mobilepay.IOnlinePayBreakCallback;
 import com.zhongmei.bty.mobilepay.IOnlinePayOverCallback;
 import com.zhongmei.bty.mobilepay.IPayConstParame;
 import com.zhongmei.bty.mobilepay.IPayOverCallback;
 import com.zhongmei.bty.mobilepay.ISavedCallback;
-import com.zhongmei.yunfu.mobilepay.R;
 import com.zhongmei.bty.mobilepay.bean.IPaymentInfo;
 import com.zhongmei.bty.mobilepay.bean.PayModelItem;
 import com.zhongmei.bty.mobilepay.bean.PaymentReqTool;
@@ -30,41 +44,26 @@ import com.zhongmei.bty.mobilepay.event.StopPayStatusTimer;
 import com.zhongmei.bty.mobilepay.manager.CashInfoManager;
 import com.zhongmei.bty.mobilepay.utils.DoPayUtils;
 import com.zhongmei.bty.mobilepay.v1.event.EventPayResult;
-import com.zhongmei.bty.basemodule.auth.permission.manager.AuthLogManager;
-import com.zhongmei.bty.basemodule.commonbusiness.cache.ServerSettingCache;
-import com.zhongmei.bty.basemodule.commonbusiness.manager.QueuePlayServiceManager;
-import com.zhongmei.bty.basemodule.customer.enums.CustomerLoginType;
-import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
-import com.zhongmei.bty.basemodule.pay.bean.PaymentVo;
+import com.zhongmei.yunfu.bean.YFResponse;
+import com.zhongmei.yunfu.bean.req.CustomerLoginResp;
+import com.zhongmei.yunfu.bean.req.CustomerResp;
+import com.zhongmei.yunfu.context.util.EncodingHandler;
+import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.db.entity.trade.Payment;
 import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 import com.zhongmei.yunfu.db.entity.trade.PaymentItemExtra;
-import com.zhongmei.yunfu.db.enums.PayModeId;
-import com.zhongmei.bty.basemodule.pay.enums.PayScene;
-import com.zhongmei.bty.basemodule.pay.message.PayResp;
-import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
-import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
-import com.zhongmei.bty.basemodule.trade.operates.TradeDal;
-import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
-import com.zhongmei.yunfu.db.entity.trade.Payment;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.db.enums.DeliveryType;
-import com.zhongmei.bty.commonmodule.database.enums.OrderActionEnum;
+import com.zhongmei.yunfu.db.enums.PayModeId;
 import com.zhongmei.yunfu.db.enums.PaymentType;
 import com.zhongmei.yunfu.db.enums.SourceChild;
 import com.zhongmei.yunfu.db.enums.SourceId;
 import com.zhongmei.yunfu.db.enums.TradePayStatus;
 import com.zhongmei.yunfu.db.enums.TradeStatus;
 import com.zhongmei.yunfu.db.enums.TradeType;
-import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
-import com.zhongmei.yunfu.util.ToastUtil;
-import com.zhongmei.bty.data.operates.impl.NewTradeOperatesImpl;
-import com.zhongmei.yunfu.bean.YFResponse;
-import com.zhongmei.yunfu.bean.req.CustomerLoginResp;
-import com.zhongmei.yunfu.bean.req.CustomerResp;
-import com.zhongmei.yunfu.context.util.EncodingHandler;
-import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.http.CalmImageRequest;
+import com.zhongmei.yunfu.mobilepay.R;
 import com.zhongmei.yunfu.net.volley.Response;
 import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.yunfu.resp.EventResponseListener;
@@ -72,6 +71,7 @@ import com.zhongmei.yunfu.resp.ResponseListener;
 import com.zhongmei.yunfu.resp.ResponseObject;
 import com.zhongmei.yunfu.resp.UserActionEvent;
 import com.zhongmei.yunfu.resp.YFResponseListener;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -490,197 +490,190 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
         if (!paymentInfo.getId().equals(getCurrentPaymentInfoId())) {
             return;
         }
+
+        PaymentItem paymentItem = null;
         for (final PaymentItem item : paymentItems) {
-            if (item.getUuid().equals(getOnlinePaymentItemUuid())) {
-                if (item.getPayStatus() == TradePayStatus.PAID) {
-                    //播放收款成功语音提示
-                    snackPaidRemind(context, item);
-                    setOnlinePaymentItemUuid(null);//支付成功后清空标识
-                    paymentInfo.getTradeVo().setTrade(result.getTrades().get(0));
-                    //如果剩余金额小于等于零，表示已经已经完成支付
-                    if (DoPayUtils.isTradePaidOver(paymentInfo.getTradeVo().getTrade())) {
-                        //add begin v9.0
-                        boolean isPintPayTick = true;// 是否打印结账单
-                        //如果有消费税，先不打印结账单或消费单
-                        if (DoPayUtils.isHaveTradeTax(paymentInfo.getTradeVo())) {
-                            isPintPayTick = false;
-                        }
-                        //add end v9.0
-                        if (paymentInfo.getCustomer() == null && paymentInfo.getEcCard() != null) {
-                            paymentInfo.setPrintMemeberInfoByCard();
-                        }
-                        if (!paymentInfo.isDinner() && paymentInfo.getTradeVo().getTrade().getTradeType() == TradeType.SELL_FOR_REPEAT) {
-                            EventBus.getDefault().post(new SellForRepeatEvent(paymentInfo.getTradeVo().getTrade().getUuid()));
-                        }
+            if (item.getPayStatus() == TradePayStatus.PAID) {
+                paymentItem = item;
+                break;
+            } else {
+                if (paymentItem == null || item.getServerUpdateTime() > paymentItem.getServerUpdateTime()) {
+                    paymentItem = item;
+                }
+            }
+        }
 
-                        if (paymentInfo.isSplit() && (paymentInfo.getOtherPay().isContainsPayModel(PayModeId.MEMBER_CARD)
-                                || paymentInfo.getOtherPay().isContainsPayModel(PayModeId.ENTITY_CARD)
-                                || paymentInfo.getOtherPay().isContainsPayModel(PayModeId.ANONYMOUS_ENTITY_CARD)
-                        )) {
-                            MemberPayChargeEvent memberPayChargeEvent = new MemberPayChargeEvent();
-                            memberPayChargeEvent.setmValueCardBalance(BigDecimal.valueOf(CashInfoManager.floatSubtract(paymentInfo.getMemberCardBalance(), paymentInfo.getOtherPay().getGroupActualAmount())));
-                            EventBus.getDefault().post(memberPayChargeEvent);//发送EVENTBUS到会员支付界面MemberPayFragment
-                        }
-                        //new GetCouponUrlThread().start();
+        if (paymentItem != null) {
+            final PaymentItem item = paymentItem;
+            if (item.getPayStatus() == TradePayStatus.PAID) {
+                //播放收款成功语音提示
+                snackPaidRemind(context, item);
+                setOnlinePaymentItemUuid(null);//支付成功后清空标识
+                paymentInfo.getTradeVo().setTrade(result.getTrades().get(0));
+                //如果剩余金额小于等于零，表示已经已经完成支付
+                if (DoPayUtils.isTradePaidOver(paymentInfo.getTradeVo().getTrade())) {
+                    //add begin v9.0
+                    boolean isPintPayTick = true;// 是否打印结账单
+                    //如果有消费税，先不打印结账单或消费单
+                    if (DoPayUtils.isHaveTradeTax(paymentInfo.getTradeVo())) {
+                        isPintPayTick = false;
+                    }
+                    //add end v9.0
+                    if (paymentInfo.getCustomer() == null && paymentInfo.getEcCard() != null) {
+                        paymentInfo.setPrintMemeberInfoByCard();
+                    }
+                    if (!paymentInfo.isDinner() && paymentInfo.getTradeVo().getTrade().getTradeType() == TradeType.SELL_FOR_REPEAT) {
+                        EventBus.getDefault().post(new SellForRepeatEvent(paymentInfo.getTradeVo().getTrade().getUuid()));
+                    }
 
-                        // 打印
-                        if (!paymentInfo.isPrintedOk()) {
-                            EventBus.getDefault().post(new StopPayStatusTimer(true));
-                            Trade trade = paymentInfo.getTradeVo().getTrade();
-                            if (result.getPrintOperations() != null && !result.getPrintOperations().isEmpty()
-                                    && paymentInfo.getMemberResp() != null) {
-                                try {
-                                    String tmp = result.getPrintOperations().get(0).getExtendsStr();
-                                    JSONObject extendsStr = new JSONObject(tmp);
-                                    double beforeActualvalue = extendsStr.optDouble("beforeActualvalue", 0);
-                                    double beforeSendValue = extendsStr.optDouble("beforeSendValue", 0);
-                                    paymentInfo.getMemberResp().setValueCardBalance(BigDecimal.valueOf(beforeActualvalue + beforeSendValue));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
+                    if (paymentInfo.isSplit() && (paymentInfo.getOtherPay().isContainsPayModel(PayModeId.MEMBER_CARD)
+                            || paymentInfo.getOtherPay().isContainsPayModel(PayModeId.ENTITY_CARD)
+                            || paymentInfo.getOtherPay().isContainsPayModel(PayModeId.ANONYMOUS_ENTITY_CARD)
+                    )) {
+                        MemberPayChargeEvent memberPayChargeEvent = new MemberPayChargeEvent();
+                        memberPayChargeEvent.setmValueCardBalance(BigDecimal.valueOf(CashInfoManager.floatSubtract(paymentInfo.getMemberCardBalance(), paymentInfo.getOtherPay().getGroupActualAmount())));
+                        EventBus.getDefault().post(memberPayChargeEvent);//发送EVENTBUS到会员支付界面MemberPayFragment
+                    }
+                    //new GetCouponUrlThread().start();
+
+                    // 打印
+                    if (!paymentInfo.isPrintedOk()) {
+                        EventBus.getDefault().post(new StopPayStatusTimer(true));
+                        Trade trade = paymentInfo.getTradeVo().getTrade();
+                        if (result.getPrintOperations() != null && !result.getPrintOperations().isEmpty()
+                                && paymentInfo.getMemberResp() != null) {
+                            try {
+                                String tmp = result.getPrintOperations().get(0).getExtendsStr();
+                                JSONObject extendsStr = new JSONObject(tmp);
+                                double beforeActualvalue = extendsStr.optDouble("beforeActualvalue", 0);
+                                double beforeSendValue = extendsStr.optDouble("beforeSendValue", 0);
+                                paymentInfo.getMemberResp().setValueCardBalance(BigDecimal.valueOf(beforeActualvalue + beforeSendValue));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                            // 如果是订单中心的内用且是Android端下的订单，要打印厨房单
-                            if (paymentInfo.isOrderCenter() && trade.getDeliveryType() == DeliveryType.HERE
-                                    && trade.getSource() == SourceId.POS && trade.getSourceChild() == SourceChild.ANDROID) {
-                                doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), true, true, true, isPintPayTick);
+                        }
+                        // 如果是订单中心的内用且是Android端下的订单，要打印厨房单
+                        if (paymentInfo.isOrderCenter() && trade.getDeliveryType() == DeliveryType.HERE
+                                && trade.getSource() == SourceId.POS && trade.getSourceChild() == SourceChild.ANDROID) {
+                            doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), true, true, true, isPintPayTick);
+                            paymentInfo.setPrintedOk(true);
+                        } else {
+                            //换卡收银不打印,交预付金不打印(add v8.14)
+                            if (paymentInfo.getTradeBusinessType() != BusinessType.ENTITY_CARD_CHANGE && paymentInfo.getPayScene() != PayScene.SCENE_CODE_BOOKING_DEPOSIT) {
+                                doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), !paymentInfo.isOrderCenter(), !paymentInfo.isOrderCenter(), true, isPintPayTick);
                                 paymentInfo.setPrintedOk(true);
-                            } else {
-                                //金诚绑卡,换卡,金诚充值不打印
-                                if (ServerSettingCache.getInstance().isJinChBusiness()) {
-                                    if (paymentInfo.getTradeBusinessType() != BusinessType.CARD
-                                            && paymentInfo.getTradeBusinessType() != BusinessType.ONLINE_RECHARGE
-                                            && paymentInfo.getTradeBusinessType() != BusinessType.ENTITY_CARD_CHANGE
-                                            && paymentInfo.getTradeBusinessType() != BusinessType.ANONYMOUS_ENTITY_CARD_RECHARGE) {
-                                        doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), !paymentInfo.isOrderCenter(), !paymentInfo.isOrderCenter(), true, isPintPayTick);
-                                        paymentInfo.setPrintedOk(true);
-                                    }
-                                } else {
-                                    //换卡收银不打印,交预付金不打印(add v8.14)
-                                    if (paymentInfo.getTradeBusinessType() != BusinessType.ENTITY_CARD_CHANGE && paymentInfo.getPayScene() != PayScene.SCENE_CODE_BOOKING_DEPOSIT) {
-                                        doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), !paymentInfo.isOrderCenter(), !paymentInfo.isOrderCenter(), true, isPintPayTick);
-                                        paymentInfo.setPrintedOk(true);
-                                    }
-                                }
                             }
-                            AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHECK_OUT, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
                         }
+                        AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHECK_OUT, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
+                    }
 
-                    } else {// 继续收银
-                        //如果正餐支付中不能改单
-                        if (paymentInfo.getPayScene() != PayScene.SCENE_CODE_BUFFET_DEPOSIT) {
-                            if (paymentInfo.isSplit()) {
-                                EventBus.getDefault().post(new SeparateEvent(SeparateEvent.EVENT_SEPARATE_PAYING));
-                            } else {
-                                EventBus.getDefault().post(new SeparateEvent(SeparateEvent.EVENT_RESOURCE_PAYING));
-                            }
-                        }
-                        if (paymentInfo.getOtherPay().isContainsPayModel(PayModeId.MEMBER_CARD)
-                                || paymentInfo.getOtherPay().isContainsPayModel(PayModeId.ENTITY_CARD)
-                                || paymentInfo.getOtherPay().isContainsPayModel(PayModeId.ANONYMOUS_ENTITY_CARD)
-                                ) {
-                            MemberPayChargeEvent memberPayChargeEvent = new MemberPayChargeEvent();
-                            memberPayChargeEvent.setmValueCardBalance(BigDecimal.valueOf(CashInfoManager.floatSubtract(paymentInfo.getMemberCardBalance(), paymentInfo.getOtherPay().getGroupActualAmount())));
-                            EventBus.getDefault().post(memberPayChargeEvent);//发送EVENTBUS到会员支付界面MemberPayFragment
+                } else {// 继续收银
+                    //如果正餐支付中不能改单
+                    if (paymentInfo.getPayScene() != PayScene.SCENE_CODE_BUFFET_DEPOSIT) {
+                        if (paymentInfo.isSplit()) {
+                            EventBus.getDefault().post(new SeparateEvent(SeparateEvent.EVENT_SEPARATE_PAYING));
+                        } else {
+                            EventBus.getDefault().post(new SeparateEvent(SeparateEvent.EVENT_RESOURCE_PAYING));
                         }
                     }
-                    //金诚充值打印
-                    if (ServerSettingCache.getInstance().isJinChBusiness()
-                            && (paymentInfo.getTradeBusinessType() == BusinessType.ONLINE_RECHARGE
-                            || paymentInfo.getTradeBusinessType() == BusinessType.ANONYMOUS_ENTITY_CARD_RECHARGE)) {
-                        EventPayResult payResult = new EventPayResult(true, paymentInfo.getTradeBusinessType());
-                        payResult.setContent(result);
-                        EventBus.getDefault().post(payResult);
-                    }
-                    //打印储值消费单
                     if (paymentInfo.getOtherPay().isContainsPayModel(PayModeId.MEMBER_CARD)
-                            && Utils.isNotEmpty(result.getPaymentItemExtras())) {
-                        PaymentItemExtra paymentItemExtra = result.getPaymentItemExtras().get(0);
-                        Long customerId = paymentItemExtra.getCustomerId();
-                        if (customerId != null) {
-                            YFResponseListener<YFResponse<CustomerLoginResp>> listener = new YFResponseListener<YFResponse<CustomerLoginResp>>() {
-                                @Override
-                                public void onResponse(YFResponse<CustomerLoginResp> response) {
-                                    if (YFResponse.isOk(response)) {
+                            || paymentInfo.getOtherPay().isContainsPayModel(PayModeId.ENTITY_CARD)
+                            || paymentInfo.getOtherPay().isContainsPayModel(PayModeId.ANONYMOUS_ENTITY_CARD)
+                            ) {
+                        MemberPayChargeEvent memberPayChargeEvent = new MemberPayChargeEvent();
+                        memberPayChargeEvent.setmValueCardBalance(BigDecimal.valueOf(CashInfoManager.floatSubtract(paymentInfo.getMemberCardBalance(), paymentInfo.getOtherPay().getGroupActualAmount())));
+                        EventBus.getDefault().post(memberPayChargeEvent);//发送EVENTBUS到会员支付界面MemberPayFragment
+                    }
+                }
 
-                                        CustomerLoginResp resp = response.getContent();
-                                        if (resp.customerIsDisable()) {
-                                            return;
-                                        }
-                                        CustomerResp customerNew = resp.getCustomer();
-                                        try {
-                                            BeautyPayPrintUtil.memberPayPrint(customerNew, null, result);
+                //打印储值消费单
+                if (paymentInfo.getOtherPay().isContainsPayModel(PayModeId.MEMBER_CARD)
+                        && Utils.isNotEmpty(result.getPaymentItemExtras())) {
+                    PaymentItemExtra paymentItemExtra = result.getPaymentItemExtras().get(0);
+                    Long customerId = paymentItemExtra.getCustomerId();
+                    if (customerId != null) {
+                        YFResponseListener<YFResponse<CustomerLoginResp>> listener = new YFResponseListener<YFResponse<CustomerLoginResp>>() {
+                            @Override
+                            public void onResponse(YFResponse<CustomerLoginResp> response) {
+                                if (YFResponse.isOk(response)) {
+
+                                    CustomerLoginResp resp = response.getContent();
+                                    if (resp.customerIsDisable()) {
+                                        return;
+                                    }
+                                    CustomerResp customerNew = resp.getCustomer();
+                                    try {
+                                        BeautyPayPrintUtil.memberPayPrint(customerNew, null, result);
                                             /*PLog.d(PLog.TAG_CALLPRINT_KEY,
                                                     "info:收银调用储值消费单打印接口printCardOrMemberCharge（）;tradeUuid:" + paymentInfo.getTradeVo().getTrade()
                                                             .getUuid()
                                                             + ",position:" + TAG + "->ChargingPayPrint()");*/
-                                        } catch (Exception e) {
-                                            Log.e(TAG, "", e);
-                                        }
+                                    } catch (Exception e) {
+                                        Log.e(TAG, "", e);
                                     }
                                 }
+                            }
 
-                                @Override
-                                public void onError(VolleyError error) {
-                                }
-                            };
-                            CustomerManager.getInstance()
-                                    .customerLogin(CustomerLoginType.MEMBER_ID, String.valueOf(customerId), null, false, false, listener);
-                        }
-                    }
-
-                    //打印押金单 add 20170707 start
-                    if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {
-                        DepositPayOver depositPayOver = new DepositPayOver(result);
-                        EventBus.getDefault().post(depositPayOver);
-                        BeautyPayPrintUtil.printDepositTicket(paymentInfo.getTradeVo().getTrade().getUuid());
-                        paymentInfo.setPrintedOk(true);
-                    }
-                    //打印押金单 add 20170707 end
-                    //未完成的订单或者要开电子发票刷新已收金额
-                    if (paymentInfo.getTradeVo().getTrade().getTradeStatus() != TradeStatus.FINISH || paymentInfo.isOpenElectronicInvoice()) {
-                        new AsyncTask<Void, Void, List<PaymentVo>>() {
                             @Override
-                            protected List<PaymentVo> doInBackground(Void... params) {
-                                List<PaymentVo> list = null;
-                                try {
-                                    TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
-                                    list = tradeDal.listPayment(paymentInfo.getTradeVo().getTrade().getUuid(), PaymentType.TRADE_SELL);
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.getMessage(), e);
-                                }
-                                return list;
+                            public void onError(VolleyError error) {
                             }
+                        };
+                        CustomerManager.getInstance()
+                                .customerLogin(CustomerLoginType.MEMBER_ID, String.valueOf(customerId), null, false, false, listener);
+                    }
+                }
 
-                            protected void onPostExecute(List<PaymentVo> data) {
-                                // 通知ui更新
-                                paymentInfo.setPaidPaymentRecords(data);
-                                //显示收银结果
-                                if (payOverCallback != null) {
-                                    payOverCallback.onPayResult(item.getId(), item.getPayStatus().value());
-                                }
-                                DoPayUtils.showPayOkDialog(context, BeautyDoPayApi.this, paymentInfo, false, IPayConstParame.OP_TYPE_DOPAY);
+                //打印押金单 add 20170707 start
+                if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {
+                    DepositPayOver depositPayOver = new DepositPayOver(result);
+                    EventBus.getDefault().post(depositPayOver);
+                    BeautyPayPrintUtil.printDepositTicket(paymentInfo.getTradeVo().getTrade().getUuid());
+                    paymentInfo.setPrintedOk(true);
+                }
+                //打印押金单 add 20170707 end
+                //未完成的订单或者要开电子发票刷新已收金额
+                if (paymentInfo.getTradeVo().getTrade().getTradeStatus() != TradeStatus.FINISH || paymentInfo.isOpenElectronicInvoice()) {
+                    new AsyncTask<Void, Void, List<PaymentVo>>() {
+                        @Override
+                        protected List<PaymentVo> doInBackground(Void... params) {
+                            List<PaymentVo> list = null;
+                            try {
+                                TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
+                                list = tradeDal.listPayment(paymentInfo.getTradeVo().getTrade().getUuid(), PaymentType.TRADE_SELL);
+                            } catch (Exception e) {
+                                Log.e(TAG, e.getMessage(), e);
                             }
-                        }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                    } else {
-                        if (payOverCallback != null) {
-                            payOverCallback.onPayResult(item.getId(), item.getPayStatus().value());
+                            return list;
                         }
-                        DoPayUtils.showPayOkDialog(context, this, paymentInfo, false, IPayConstParame.OP_TYPE_DOPAY);
-                    }
 
-                } else if (item.getPayStatus() == TradePayStatus.PAID_FAIL) {
-                    String resultMsg = TextUtils.isEmpty(result.getTopPaymentItemResultMsg()) ? result.getMessage() : result.getTopPaymentItemResultMsg();
-                    if (payOverCallback != null) {
-                        payOverCallback.onPayResult(item.getId(), item.getPayStatus().value());
-                    }
-                    DoPayUtils.showPayErrorDialog(context, this, paymentInfo, resultMsg, null, result.getStatus());
-
+                        protected void onPostExecute(List<PaymentVo> data) {
+                            // 通知ui更新
+                            paymentInfo.setPaidPaymentRecords(data);
+                            //显示收银结果
+                            if (payOverCallback != null) {
+                                payOverCallback.onPayResult(item.getId(), item.getPayStatus().value());
+                            }
+                            DoPayUtils.showPayOkDialog(context, BeautyDoPayApi.this, paymentInfo, false, IPayConstParame.OP_TYPE_DOPAY);
+                        }
+                    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 } else {
                     if (payOverCallback != null) {
                         payOverCallback.onPayResult(item.getId(), item.getPayStatus().value());
                     }
+                    DoPayUtils.showPayOkDialog(context, this, paymentInfo, false, IPayConstParame.OP_TYPE_DOPAY);
                 }
-                break;
+
+            } else if (item.getPayStatus() == TradePayStatus.PAID_FAIL) {
+                String resultMsg = TextUtils.isEmpty(result.getTopPaymentItemResultMsg()) ? result.getMessage() : result.getTopPaymentItemResultMsg();
+                if (payOverCallback != null) {
+                    payOverCallback.onPayResult(item.getId(), item.getPayStatus().value());
+                }
+                DoPayUtils.showPayErrorDialog(context, this, paymentInfo, resultMsg, null, result.getStatus());
+
+            } else {
+                if (payOverCallback != null) {
+                    payOverCallback.onPayResult(item.getId(), item.getPayStatus().value());
+                }
             }
         }
     }

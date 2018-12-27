@@ -14,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.zhongmei.yunfu.ui.base.BasicFragment;
 
@@ -22,11 +23,11 @@ import com.zhongmei.yunfu.ui.base.BasicFragment;
  */
 public class H5WebViewFragment extends BasicFragment {
 
-    private View rootView;
-
+    protected View rootView;
     private WebView webView;
-
     private ProgressBar progressBar;
+    private TextView txTitle;
+    private String webTitle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,16 +44,30 @@ public class H5WebViewFragment extends BasicFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.h5_webview, container, false);
-        webView = (WebView) rootView.findViewById(R.id.reportView);
-        progressBar = (ProgressBar) rootView.findViewById(R.id.progressbar);//进度条
+        return rootView = inflater.inflate(R.layout.h5_webview, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        webView = (WebView) findViewById(R.id.reportView);
+        progressBar = (ProgressBar) findViewById(R.id.progressbar);//进度条
+        txTitle = (TextView) findViewById(R.id.actionbar_title);
+        findViewById(R.id.actionbar_back_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().finish();
+            }
+        });
 
         String url = null;
         Bundle arguments = getArguments();
         if (arguments != null) {
             url = arguments.getString("url");
+            webTitle = arguments.getString("title");
         }
 
+        txTitle.setText(webTitle);
         if (!TextUtils.isEmpty(url)) {
             webView.loadUrl(url);//加载url
         }
@@ -76,9 +91,6 @@ public class H5WebViewFragment extends BasicFragment {
         webSettings.setSupportZoom(false);
         webSettings.setBuiltInZoomControls(true);
 //        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-
-
-        return rootView;
     }
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件
@@ -118,6 +130,9 @@ public class H5WebViewFragment extends BasicFragment {
         @Override
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
+            if (webTitle == null) {
+                txTitle.setText(title);
+            }
         }
 
         //加载进度回调
@@ -131,14 +146,8 @@ public class H5WebViewFragment extends BasicFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
         webView.destroy();
         webView = null;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
 

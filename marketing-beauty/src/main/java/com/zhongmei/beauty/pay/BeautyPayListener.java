@@ -130,26 +130,12 @@ public class BeautyPayListener implements ResponseListener<PayResp> {
                                     doPayApi.doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), true, true, true, isPintPayTick);
                                     paymentInfo.setPrintedOk(true);
                                 } else {
-                                    //金诚绑卡,换卡,金诚充值不打印
-                                    if (ServerSettingCache.getInstance().isJinChBusiness()) {
-                                        if (paymentInfo.getTradeBusinessType() != BusinessType.CARD
-                                                && paymentInfo.getTradeBusinessType() != BusinessType.ONLINE_RECHARGE
-                                                && paymentInfo.getTradeBusinessType() != BusinessType.ANONYMOUS_ENTITY_CARD_SELL
-                                                && paymentInfo.getTradeBusinessType() != BusinessType.ANONYMOUS_ENTITY_CARD_RECHARGE
-                                                && paymentInfo.getTradeBusinessType() != BusinessType.ENTITY_CARD_CHANGE) {
-                                            doPayApi
-                                                    .doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), !paymentInfo.isOrderCenter(),
-                                                            !paymentInfo.isOrderCenter(), true, isPintPayTick);
-                                            paymentInfo.setPrintedOk(true);
-                                        }
-                                    } else {
-                                        //换卡收银不打印,交预付金不打印(add v8.14)
-                                        if (paymentInfo.getTradeBusinessType() != BusinessType.ENTITY_CARD_CHANGE && paymentInfo.getPayScene() != PayScene.SCENE_CODE_BOOKING_DEPOSIT) {
-                                            doPayApi
-                                                    .doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), !paymentInfo.isOrderCenter(),
-                                                            !paymentInfo.isOrderCenter(), true, isPintPayTick);
-                                            paymentInfo.setPrintedOk(true);
-                                        }
+                                    //换卡收银不打印,交预付金不打印(add v8.14)
+                                    if (paymentInfo.getTradeBusinessType() != BusinessType.ENTITY_CARD_CHANGE && paymentInfo.getPayScene() != PayScene.SCENE_CODE_BOOKING_DEPOSIT) {
+                                        doPayApi
+                                                .doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), !paymentInfo.isOrderCenter(),
+                                                        !paymentInfo.isOrderCenter(), true, isPintPayTick);
+                                        paymentInfo.setPrintedOk(true);
                                     }
                                 }
 
@@ -195,16 +181,6 @@ public class BeautyPayListener implements ResponseListener<PayResp> {
                                 Log.e(TAG, "", e);
                             }
                         }
-                        //金诚充值打印事件发送
-                        if (ServerSettingCache.getInstance().isJinChBusiness()
-                                && (paymentInfo.getTradeBusinessType() == BusinessType.ONLINE_RECHARGE
-                                || paymentInfo.getTradeBusinessType() == BusinessType.ANONYMOUS_ENTITY_CARD_RECHARGE)) {
-                            EventPayResult payResult = new EventPayResult(true, paymentInfo.getTradeBusinessType());
-                            //payResult.setOnlinePay(true);//在线支付充值跳转到充值界面去打印，以便计算余额
-                            payResult.setContent(response.getContent());
-                            EventBus.getDefault().post(payResult);
-                        }
-
 
                         //打印押金单 add 20170707
                         if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {

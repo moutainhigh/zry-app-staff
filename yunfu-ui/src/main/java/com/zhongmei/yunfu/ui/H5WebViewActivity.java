@@ -10,7 +10,16 @@ import com.zhongmei.yunfu.ui.base.BaseActivity;
 public class H5WebViewActivity extends BaseActivity {
 
     public static void start(Context context, String url) {
-        context.startActivity(new Intent(context, H5WebViewActivity.class).putExtra("url", url));
+        context.startActivity(new Intent(context, H5WebViewActivity.class)
+                .putExtra("url", url)
+        );
+    }
+
+    public static void start(Context context, String url, String title) {
+        context.startActivity(new Intent(context, H5WebViewActivity.class)
+                .putExtra("url", url)
+                .putExtra("title", title)
+        );
     }
 
     @Override
@@ -21,6 +30,7 @@ public class H5WebViewActivity extends BaseActivity {
         setContentView(frameLayout);
         Bundle bundle = new Bundle();
         bundle.putString("url", getIntent().getStringExtra("url"));
+        bundle.putString("title", getIntent().getStringExtra("title"));
         H5WebViewFragment h5WebViewFragment = new H5WebViewFragment();
         h5WebViewFragment.setArguments(bundle);
         replaceFragment(frameLayout.getId(), h5WebViewFragment, "H5WebView");

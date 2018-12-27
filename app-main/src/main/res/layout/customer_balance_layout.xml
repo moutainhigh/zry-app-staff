@@ -17,7 +17,7 @@
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
             android:scaleType="centerInside"
-            android:src="@drawable/customer_back_icon" />
+            android:src="@drawable/actionbar_back_icon" />
 
         <RadioGroup
             android:id="@+id/customer_banlance_radio_group"

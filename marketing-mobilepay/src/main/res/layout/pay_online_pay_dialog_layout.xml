@@ -64,9 +64,9 @@
         <EditText
             android:id="@+id/pay_online_wechat_id"
             android:layout_width="fill_parent"
-            android:layout_height="15dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
-            android:background="@color/bg_white"
+            android:background="@color/bg_gray"
             android:focusable="true"
             android:gravity="center"
             android:hint="@string/pay_union_hint_text"

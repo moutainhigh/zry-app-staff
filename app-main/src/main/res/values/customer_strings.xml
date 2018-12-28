@@ -92,7 +92,7 @@
     <string name="ananonymous_card_not_consume_shop">门店不具备匿名卡消费权限</string>
     <string name="mr">先生</string>
     <string name="lady">女士</string>
-    <string name="change_balance">变化金额</string>
+    <string name="change_balance">交易金额</string>
     <string name="customer_integral_canuse_lable">可用积分:</string>
     <string name="customer_total_integral_label">累积积分:</string>
     <string name="integral_into">交易积分</string>

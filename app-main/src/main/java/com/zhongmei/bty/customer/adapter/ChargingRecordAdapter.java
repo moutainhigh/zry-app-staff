@@ -145,8 +145,8 @@ public class ChargingRecordAdapter extends BaseAdapter {
                         viewHolder.give.setVisibility(View.GONE);
                     }
                     viewHolder.balance.setText(recharging);
-                    viewHolder.type.setVisibility(View.VISIBLE);
-                    viewHolder.type.setText(chargingRecord.getPaymentModeName());
+                    //viewHolder.type.setVisibility(View.VISIBLE);
+                    //viewHolder.type.setText(chargingRecord.getPaymentModeName());
                     viewHolder.otherBalanceLayout.setVisibility(View.GONE);
                     viewHolder.charingBalanceLayout.setVisibility(View.VISIBLE);
                     viewHolder.balanceReprint.setVisibility(View.INVISIBLE);
@@ -156,8 +156,8 @@ public class ChargingRecordAdapter extends BaseAdapter {
                     viewHolder.otherBalance.setText(String.format(mContext.getString(R.string.customer_account_list_consume), chargingRecord.getAddValuecard().abs()));
                     viewHolder.otherBalanceLayout.setVisibility(View.VISIBLE);
                     viewHolder.charingBalanceLayout.setVisibility(View.GONE);
-                    viewHolder.type.setVisibility(View.INVISIBLE);
-                    viewHolder.type.setText(chargingRecord.getPaymentModeName());
+                    //viewHolder.type.setVisibility(View.INVISIBLE);
+                    //viewHolder.type.setText(chargingRecord.getPaymentModeName());
                     viewHolder.balanceReprint.setVisibility(View.INVISIBLE);
                     break;
                 case TYPE_REFUND:
@@ -165,8 +165,8 @@ public class ChargingRecordAdapter extends BaseAdapter {
                         viewHolder.otherBalance.setText(String.format(mContext.getString(R.string.customer_account_list_refund), chargingRecord.getAddValuecard()));
                         viewHolder.charingBalanceLayout.setVisibility(View.GONE);
                         viewHolder.otherBalanceLayout.setVisibility(View.VISIBLE);
-                        viewHolder.type.setVisibility(View.INVISIBLE);
-                        viewHolder.type.setText(chargingRecord.getPaymentModeName());
+                        //viewHolder.type.setVisibility(View.INVISIBLE);
+                        //viewHolder.type.setText(chargingRecord.getPaymentModeName());
                     }
                     viewHolder.balanceReprint.setVisibility(View.INVISIBLE);
                     break;
@@ -176,7 +176,7 @@ public class ChargingRecordAdapter extends BaseAdapter {
                         String giving = mContext.getString(R.string.customer_account_list_giving, chargingRecord.getSendValuecard());
                         viewHolder.balance.setText(recharging);
                         viewHolder.give.setText(giving);
-                        viewHolder.type.setVisibility(View.INVISIBLE);
+                        //viewHolder.type.setVisibility(View.INVISIBLE);
                         viewHolder.otherBalanceLayout.setVisibility(View.GONE);
                         viewHolder.charingBalanceLayout.setVisibility(View.VISIBLE);
                     }

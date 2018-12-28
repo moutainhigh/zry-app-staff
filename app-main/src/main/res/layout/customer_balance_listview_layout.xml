@@ -35,7 +35,8 @@
             android:gravity="center"
             android:text="@string/charge_type"
             android:textColor="@color/customer_balance_jifen_title"
-            android:textSize="@dimen/text_16" />
+            android:textSize="@dimen/text_16"
+            android:visibility="gone"/>
 
         <TextView
             android:layout_width="0dp"
@@ -59,7 +60,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.5"
-            android:gravity="right"
+            android:gravity="center"
             android:text="@string/customer_manager"
             android:textColor="@color/customer_balance_jifen_title"
             android:textSize="@dimen/text_16" />
@@ -68,7 +69,8 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1.5"
-            android:orientation="horizontal" />
+            android:orientation="horizontal"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <View

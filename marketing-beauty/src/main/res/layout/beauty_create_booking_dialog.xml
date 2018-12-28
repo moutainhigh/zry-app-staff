@@ -90,19 +90,33 @@
 
                 <LinearLayout
                     style="@style/beauty_layout_w_w_h_w"
+                    android:layout_width="match_parent"
                     android:layout_centerInParent="true"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
                     android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/btn_cancel"
                         style="@style/beauty.booking.create.button"
+                        android:layout_weight="1"
                         android:background="@drawable/beauty_booking_btn_cancel_selector"
                         android:text="取消"
                         android:textColor="@color/beauty_color_999999" />
 
                     <Button
+                        android:id="@+id/btn_create_trade"
+                        style="@style/beauty.booking.create.button"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="13dp"
+                        android:background="@drawable/beauty_booking_btn_cancel_selector"
+                        android:text="开单"
+                        android:textColor="@color/beauty_color_999999" />
+
+                    <Button
                         android:id="@+id/btn_submit"
                         style="@style/beauty.booking.create.button"
+                        android:layout_weight="1"
                         android:layout_marginLeft="13dp"
                         android:background="@drawable/beauty_booking_btn_submit_selector"
                         android:text="完成"

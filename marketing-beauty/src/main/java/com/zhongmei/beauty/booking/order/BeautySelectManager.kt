@@ -40,7 +40,7 @@ class BeautySelectManager {
         var allVo: DishBrandTypeVo = DishBrandTypeVo()
         allVo.isAll = true
         var typeVoList = ArrayList<DishBrandTypeVo>()
-        typeVoList.add(allVo)
+//        typeVoList.add(allVo)
         dishBrandTypes.forEach { type ->
             var typeVo = DishBrandTypeVo()
             typeVo.brandType = type

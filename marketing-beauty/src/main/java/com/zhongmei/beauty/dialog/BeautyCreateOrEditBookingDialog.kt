@@ -14,6 +14,7 @@ import com.zhongmei.yunfu.beauty.R
 import com.zhongmei.beauty.adapter.BeautyBookingServiceAdapter
 import com.zhongmei.beauty.booking.bean.BeautyBookingVo
 import com.zhongmei.beauty.booking.constants.BeautyBookingEnum
+import com.zhongmei.beauty.booking.list.manager.BeautyOpenTradeManager
 import com.zhongmei.beauty.booking.order.BeautyServiceCallback
 import com.zhongmei.beauty.booking.order.BeautyServiceSelectDialog
 import com.zhongmei.beauty.booking.util.BeautyBookingManager
@@ -34,6 +35,8 @@ import com.zhongmei.yunfu.util.DensityUtil
 import com.zhongmei.beauty.entity.BookingTradeItemUser
 import com.zhongmei.beauty.operates.BeautyBookingOperates
 import com.zhongmei.beauty.operates.message.*
+import com.zhongmei.bty.basemodule.auth.application.BeautyApplication
+import com.zhongmei.bty.basemodule.session.support.VerifyHelper
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory
 import com.zhongmei.yunfu.resp.ResponseListener
 import com.zhongmei.yunfu.resp.ResponseObject
@@ -46,6 +49,8 @@ import com.zhongmei.yunfu.ui.view.CommonDialogFragment
 import com.zhongmei.yunfu.ShopInfoManager
 import com.zhongmei.yunfu.context.base.BaseApplication
 import com.zhongmei.yunfu.context.data.ICurrency
+import com.zhongmei.yunfu.context.session.core.auth.Auth
+import com.zhongmei.yunfu.context.session.core.user.User
 import com.zhongmei.yunfu.db.enums.*
 import kotlinx.android.synthetic.main.beauty_create_booking_dialog.*
 import java.text.SimpleDateFormat
@@ -183,6 +188,7 @@ class BeautyCreateOrEditBookingDialog : BasicDialogFragment(), View.OnClickListe
             btn_submit.text = "确定"
             tv_title.text = "添加预约"
             ll_customer.visibility = View.GONE
+            btn_create_trade.visibility=View.GONE
         } else {
             ll_booking_customer.visibility = View.GONE
             ll_booking_phone.visibility = View.GONE
@@ -190,6 +196,7 @@ class BeautyCreateOrEditBookingDialog : BasicDialogFragment(), View.OnClickListe
             btn_submit.text = "保存"
             tv_title.text = "编辑预约"
             ll_customer.visibility = View.VISIBLE
+            btn_create_trade.visibility=View.VISIBLE
             generateEditDateAndView()
         }
         tv_time.setOnClickListener(this)
@@ -198,6 +205,7 @@ class BeautyCreateOrEditBookingDialog : BasicDialogFragment(), View.OnClickListe
         btn_close.setOnClickListener(this)
         btn_cancel.setOnClickListener(this)
         btn_submit.setOnClickListener(this)
+        btn_create_trade.setOnClickListener(this)
         iv_male.setOnClickListener(this)
         iv_female.setOnClickListener(this)
     }
@@ -286,7 +294,25 @@ class BeautyCreateOrEditBookingDialog : BasicDialogFragment(), View.OnClickListe
             R.id.btn_submit -> clickSubmitBtn()
             R.id.iv_male -> checkSex(Sex.MALE)
             R.id.iv_female -> checkSex(Sex.FEMALE)
+            R.id.btn_create_trade->createTrade()
         }
+    }
+
+    private fun createTrade(){
+        VerifyHelper.verifyAlert(activity, BeautyApplication.PERMISSION_BEAUTY_CREATE_TRADE, object : VerifyHelper.Callback() {
+            override fun onPositive(user: User, code: String, filter: Auth.Filter?) {
+                super.onPositive(user, code, filter)
+                var manager = BeautyOpenTradeManager()
+                manager.openTrade(activity, mBeautyBookingVo, object : BeautyOpenTradeManager.OpenTradeCallBack {
+                    override fun onOpenTradeSuccess() {
+                        //开单成功
+                        mOnBookingListener?.onCancelListener(mBeautyBookingVo.booking)
+                        dismissAllowingStateLoss()
+                    }
+                })
+            }
+
+        })
     }
 
     private fun clickSubmitBtn() {

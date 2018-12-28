@@ -99,11 +99,7 @@
     <string name="queue_setting">排队设置</string>
     <string name="common_switch">常用开关</string>
     <string name="queue_manager">排队管理</string>
-    <string name="code_check_queuing_progress">扫描二维码查排队进度</string>
-    <string name="customer_mobile_phone_privacy">顾客手机号隐私保护</string>
     <string name="book_come_in">预定入场开台</string>
-    <string name="queue_come_in">排队入场开台</string>
-    <string name="self_queue">自助排队</string>
     <string name="settings_log_submit_done">提示您，正在做日志上传完成</string>
     <string name="settings_shop_icon_url_error">"商家的商标地址错误，请在后台服务器修正!"</string>
     <string name="set">设置</string>
@@ -116,19 +112,8 @@
     <string name="table_number_setting">号牌/桌台设置</string>
     <string name="layout_option">面板选择</string>
     <string name="layout_item_settings">面板元素设置</string>
-    <string name="broadcast_voice">广播语音</string>
-    <string name="call_voice">叫号语音</string>
     <string name="voice_manager">语音合成与下载</string>
-    <string name="broadcast_voice_download">排队广播语音包下载</string>
-    <string name="broadcast_voice_synthesis">排队广播语音包合成</string>
-    <string name="call_voice_download">排队叫号语音包下载</string>
-    <string name="call_voice_synthesis">排队叫号语音包合成</string>
-    <string name="voice_setting_save">保存</string>
-    <string name="voice_setting_number">号数</string>
-    <string name="input_content_empty_toast">请输入播放内容</string>
     <string name="voice_number_toast">【号数】</string>
-    <string name="content_format_error_toast">播放内容格式不正确，需要【号数】</string>
-    <string name="input_title_toast">请输入文件名</string>
     <string name="accept_wechat_order_str">当前正常接受移动门店订单</string>
     <string name="accept_network_order_str">当前正常接受网络订单</string>
     <string name="not_accept_network_order_str">无法接受网络订单\n注：开关打开关闭应同样影响移动门店端</string>
@@ -144,18 +129,8 @@
     <string name="notice_info_ticket_output_error">出票异常</string>
     <string name="onekey_init">一键初始化</string>
     <string name="onekey_init_loading">初始化中，请稍后...</string>
-    <string name="voice_not_exist">"语音片段不存在！"</string>
 
     <!---->
-    <string name="file_not_exist_unable_call">文件不存在，不满足叫号规则</string>
-    <string name="please_input_content">请输入内容</string>
-    <string name="download_complete">下载完成</string>
-    <string name="no_resource_can_download">没有可下载的文件</string>
-    <string name="downloading_and_waiting">正在下载，请稍后!</string>
-    <string name="download_fail">文件下载失败</string>
-    <string name="download_suit_not_correct">下载地址不正确</string>
-    <string name="unzip_fail">文件解压失败</string>
-    <string name="broadcast_file">广播文件</string>
     <string name="log_file_not_exist_in_route">路径下没有日志文件</string>
     <string name="setting_pay_and_hand_over_set_label">支付交接设置</string>
     <string name="setting_pay_method_set_label">支付方式设置</string>
@@ -186,10 +161,6 @@
     <string name="setting_dinner_order_dish_title">点单设置</string>
 
     <string name="setting_queue">常用开关设置</string>
-    <string name="setting_queue_voice_down">下载</string>
-    <string name="setting_queue_voice_play">播放</string>
-    <string name="setting_queue_voice">语音合成与下载设置</string>
-    <string name="setting_queue_voice_speed">语速</string>
 
     <string name="setting_set_sacnner">请扫描条形码</string>
 
@@ -217,17 +188,8 @@
     <string name="setting_open_kitchenShortName_notice">备注:\n1.短名称是商品的第二名称,后台添加商品时可填写。\n2.开启后,如果商品没有填写短名称,票据仍展示长名称。</string>
 
     <!--v8.13.0-->
-    <string name="setting_queue_switch_show_qrcode">开启后，可以使用微信扫描小票上的二维码查看排队进度</string>
-    <string name="setting_queue_switch_prodect_phone_nub">开启后，排队列表和小票将隐藏顾客部分手机号码</string>
-    <string name="setting_queue_switch_open_table">开启后，排队入场时支持选择桌台并开台，关闭时则直接标记为已入场</string>
-    <string name="setting_queue_auto_queue_quit_hint">长按Logo 5秒后可退出自助排队</string>
 
     <!--8.14.0-->
-    <string name="setting_queue_call_voice_title">手动叫号模板:</string>
-    <string name="setting_queue_in_voice_title">入场智能叫号模板:</string>
-    <string name="setting_queue_number_label">插入标签：</string>
-    <string name="setting_queue_insert_number_limit">仅允许添加一个号数</string>
-    <string name="setting_queue_call_open_voice_hint">POS叫号语音</string>
     <!--智盘-->
     <string name="order_center_label_not_take_food">未取餐</string>
 </resources>

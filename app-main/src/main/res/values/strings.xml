@@ -61,7 +61,6 @@
     <string name="lag_amount_over_hint">超过可挂账金额，不能挂账!</string>
     <string name="lag_amount_zero">应收金额为0不能挂账,请使用现金收银</string>
     <string name="order_detail">订单详情</string>
-    <string name="operate_success">操作成功</string>
     <string name="data_validity_pre">有效期:</string>
     <string name="to">至</string>
     <string name="cashier_name">众美云服</string>

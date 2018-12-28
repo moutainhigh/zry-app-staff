@@ -2,5 +2,4 @@
 <resources>
 
     <dimen name="s_text_12">12sp</dimen>
-    <dimen name="queue_toolbar_title_text_size2">18sp</dimen>
 </resources>

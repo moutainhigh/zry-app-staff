@@ -31,8 +31,6 @@
     <dimen name="customer_charging_rule_money_radius">6dp</dimen>
     <dimen name="customer_charging_balance_edit_store">2dp</dimen>
     <dimen name="customer_coupon_right_p">8dp</dimen>
-    <dimen name="customer_coupon_left_p">8dp</dimen>
-    <dimen name="customer_coupon_left_l_p">10dp</dimen>
     <dimen name="customer_coupon_label_red_radius">4dp</dimen>
     <dimen name="customer_coupon_label_w">7dp</dimen>
     <dimen name="customer_coupon_time_t">10dp</dimen>
@@ -42,9 +40,6 @@
     <dimen name="customer_account_table_h">60dp</dimen>
     <!-- 积分 -->
     <dimen name="customer_intrgral_time_l">150dp</dimen>
-    <dimen name="customer_intrgral_person_r">145dp</dimen>
-    <dimen name="customer_intrgral_divider_l">148dp</dimen>
-    <dimen name="customer_intrgral_divider_r">142dp</dimen>
     <!-- 余额 -->
     <dimen name="customer_charging_success_dialog_name_l">138dp</dimen>
     <integer name="customer_comm_weight">400</integer>

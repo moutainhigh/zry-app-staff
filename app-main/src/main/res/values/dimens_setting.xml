@@ -10,7 +10,6 @@
     <dimen name="setting_left_content_size">16sp</dimen>
 
     <!--正餐-->
-    <dimen name="setting_dinner_cards_horizontal_spacing">19.3dp</dimen>
 
     <dimen name="setting_dinner_switch_item_title_margin_top">26dp</dimen>
     <dimen name="setting_dinner_switch_item_margin_left">34.6dp</dimen>
@@ -42,21 +41,8 @@
     <dimen name="setting_pay_bottom_btn_size">17.33sp</dimen>
 
     <!--排队设置-->
-    <dimen name="setting_queue_memager_card_height">186.67dp</dimen>
-    <dimen name="setting_queue_memager_card_title_height">53.33dp</dimen>
-    <dimen name="setting_queue_memager_card_title_btn_margin">10dp</dimen>
-    <dimen name="setting_queue_memager_card_title_btn_width">48dp</dimen>
-    <dimen name="setting_queue_memager_card_title_btn_height">26.67dp</dimen>
-    <dimen name="setting_queue_memager_card_content_margin_top">16dp</dimen>
-    <dimen name="setting_queue_voice_title_bar_width">300dp</dimen>
-    <dimen name="setting_queue_voice_title_bar_height">37.33dp</dimen>
-    <dimen name="setting_queue_voice_edit_height">106.66dp</dimen>
-    <dimen name="setting_queue_voice_edit_padding">10dp</dimen>
 
-    <dimen name="setting_queue_memager_card_title_size">16sp</dimen>
     <dimen name="setting_queue_memager_card_content_size">13.33sp</dimen>
-    <dimen name="setting_queue_memager_card_content_size2">10.67sp</dimen>
-    <dimen name="setting_queue_voice_content_size">14.67sp</dimen>
 
     <!--打印设置   以后独立出来，尺寸重新定义-->
     <dimen name="print_setting_content_margin_top">26dp</dimen>

@@ -29,7 +29,6 @@
     <string name="dinner_cancel_connect_table">取消联台</string>
     <string name="dinner_create_connect_table">创建联台</string>
     <!--团餐-->
-    <string name="group_dinner_table_count">桌数</string>
     <!--开放平台应用-->
     <!--交接-->
     <string name="handover_already_finish">已完成该班次的交接！</string>

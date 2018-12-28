@@ -15,15 +15,10 @@
     <string name="booking_status">状态</string>
     <string name="booking">预订</string>
     <!--<string name="booking_create_yuan">元</string>-->
-    <string name="booking_request_success">操作成功</string>
     <string name="booking_recision_title">取消预订理由</string>
     <string name="booking_refused_title">拒绝预订理由</string>
-    <string name="person">人</string>
     <!--<string name="person_standard">元的消费水准</string>-->
-    <string name="booking_ex_menu_detail_people" formatted="false">%s/%s 于%s 预点菜</string>
-    <string name="booking_ex_menu_dailog_print">打印</string>
     <string name="printer_error">打印失败！</string>
-    <string name="booking_desk_empty_str">空桌台</string>
     <string name="not_refused_reason">请选择拒绝理由</string>
     <string name="not_cancel_reason">请选择取消理由</string>
     <string name="times">次</string>

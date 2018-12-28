@@ -2,6 +2,5 @@
 <resources>
 
     <dimen name="booking_create_edit_height">64dp</dimen>
-    <dimen name="booking_create_common_marginTop">15dp</dimen>
 
 </resources>

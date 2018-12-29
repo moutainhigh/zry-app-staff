@@ -1,4 +1,4 @@
-package com.zhongmei.bty.splash.login;
+package com.zhongmei.yunfu.ui.view;
 
 import android.content.Context;
 import android.os.Handler;

@@ -27,7 +27,6 @@
     <string name="can_continue_operation">可以继续后续操作</string>
     <string name="cannot_continue_operation">不能继续后续操作，请查询</string>
     <string name="level_up_check">升级检查</string>
-    <string name="get_server_info_failed">获取服务器地址，返回信息失败</string>
     <string name="is_loading">正在下载中。。。。请耐心等待</string>
     <string name="start_load_packet">开始下载升级包。。。。请耐心等待</string>
     <string name="load_manager_not_open">下载管理器未开启！请打开下载管理器！</string>
@@ -46,15 +45,9 @@
     <string name="init_shop_cache">正在缓存数据</string>
     <string name="init_shop_cache_success">数据缓存完成</string>
     <string name="login_check_error_exit_message" formatted="true">出错项, %s</string>
-    <string name="check_inventory_data">检查售卖数据</string>
-    <string name="check_inventory_finish">售卖数据检查完成</string>
-    <string name="update_inventory_data">正在检查售卖数据</string>
-    <string name="check_inventory_error">售卖数据检查失败</string>
     <string name="login_sync_error">同步出错</string>
     <string name="login_sync_cancel">同步已取消</string>
     <string name="pay_coupon_null">暂无</string>
-    <string name="login_init_dialog_contract_renewal_title">合同到期</string>
-    <string name="login_init_dialog_contract_renewal_pay_completed">支付完成</string>
 
     <!-- 直接进入 -->
 </resources>

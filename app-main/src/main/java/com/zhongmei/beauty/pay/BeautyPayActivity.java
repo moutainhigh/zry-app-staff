@@ -3,23 +3,22 @@ package com.zhongmei.beauty.pay;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-import com.zhongmei.beauty.pay.BeautyDoPayApi;
-import com.zhongmei.bty.mobilepay.IPayConstParame;
-import com.zhongmei.bty.mobilepay.enums.PayActionPage;
-import com.zhongmei.yunfu.R;
-import com.zhongmei.bty.base.CalmBaseActivity;
+import com.zhongmei.bty.base.MainBaseActivity;
 import com.zhongmei.bty.basemodule.devices.display.manager.DisplayServiceManager;
 import com.zhongmei.bty.basemodule.pay.enums.PayScene;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
-import com.zhongmei.yunfu.resp.UserActionEvent;
+import com.zhongmei.bty.mobilepay.IPayConstParame;
+import com.zhongmei.bty.mobilepay.enums.PayActionPage;
 import com.zhongmei.bty.pay.fragment.MainPayFragment;
 import com.zhongmei.bty.pay.fragment.MainPayFragment_;
+import com.zhongmei.yunfu.R;
+import com.zhongmei.yunfu.resp.UserActionEvent;
 
 /**
  * Created by demo on 2018/12/15
  */
 
-public class BeautyPayActivity extends CalmBaseActivity implements IPayConstParame {
+public class BeautyPayActivity extends MainBaseActivity implements IPayConstParame {
     private static final String TAG = BeautyPayActivity.class.getSimpleName();
     private static final String EXTRA_LAG_INFO = "lag_info";
     private MainPayFragment mMainPayFragment;

@@ -45,6 +45,7 @@
     <string name="sales_all">全部</string>
     <string name="sales_unpaid">未结账</string>
     <string name="sales_paying">支付中</string>
+    <string name="pay_is_pay_unpay">未支付</string>
     <string name="sales_paid">已结账</string>
     <string name="sales_refunded">已退货</string>
     <string name="sales_invalid">已作废</string>

@@ -134,7 +134,6 @@
     <string name="dinner_orderdish_cancel_dish_make">取消起菜</string>
     <string name="dinner_orderdish_dish_urge">催菜</string>
     <string name="dinner_orderdish_batch_operation">批量操作</string>
-    <string name="dinner_orderdish_sequence">上菜顺序</string>
     <string name="dinner_orderdish_staus_no_resh">交易状态未更新</string>
     <string name="dinner_orderdish_staus_is">交易状态已更新为[%s]</string>
     <string name="dinner_merge_self_hint">很抱歉，系统不允许进行本次操作。</string>
@@ -304,7 +303,6 @@
     <string name="dinner_modify_split_label">修改拆单</string>
     <string name="dinner_customer_coupon">会员优惠券</string>
     <string name="dinner_return_cannot_split">反结账单子不能拆单!</string>
-    <string name="dinner_back_desk">取消操作，返回桌台</string>
     <string name="dinner_opentable_unfinished">开台未完成,不能拆单!</string>
     <string name="loading_message">信息加载中，请稍后。。。</string>
     <string name="dinner_waiter_hint">服务员:%1$s</string>
@@ -385,14 +383,10 @@
     <string name="dinner_real_pay">实付：</string>
     <!--end-->
     <string name="order_center_return_money">退款</string>
-    <string name="search_table_result_label">包含此菜品的桌台(共%s桌)</string>
     <string name="search_table_title_label">按菜品搜索桌台</string>
-    <string name="search_table_alert_text">请在右边搜索菜品</string>
     <string name="dinner_table_show_setting_label">桌台展示设置</string>
     <string name="dinner_table_other_function_label">其它功能</string>
     <string name="dinner_table_business_charge">实时概况</string>
-    <string name="dinner_table_status_used">已点选</string>
-    <string name="search_table_dish_name">商品名称：</string>
 
     <string name="please_select_property">请选择口味做法！</string>
     <string name="please_select_extra">请选择加料！</string>

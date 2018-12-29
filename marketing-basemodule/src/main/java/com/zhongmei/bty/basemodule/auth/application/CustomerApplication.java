@@ -90,7 +90,7 @@ public class CustomerApplication extends AuthorizedApplication {
 
     @Override
     public void setIcon() {
-        setIcon(R.drawable.customer_app_icon_selector);
+        //setIcon(R.drawable.customer_app_icon_selector);
     }
 
     @Override

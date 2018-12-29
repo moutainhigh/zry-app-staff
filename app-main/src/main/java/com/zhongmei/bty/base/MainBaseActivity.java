@@ -1,72 +1,168 @@
 package com.zhongmei.bty.base;
 
-import android.os.Bundle;
+import android.app.ActivityManager;
+import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 
-import com.zhongmei.bty.router.RouteIntent;
+import com.zhongmei.bty.AppDialog;
+import com.zhongmei.bty.basemodule.async.event.ActionExitLoginRemind;
+import com.zhongmei.bty.basemodule.async.event.ActionModifyTradePrintFailed;
+import com.zhongmei.bty.basemodule.async.event.ActionOpenTableFailed;
+import com.zhongmei.bty.basemodule.async.listener.AsyncOpenTableResponseListener;
+import com.zhongmei.bty.basemodule.async.manager.AsyncNetworkManager;
+import com.zhongmei.bty.basemodule.commonbusiness.event.SpeechCallStopEvent;
+import com.zhongmei.bty.basemodule.commonbusiness.manager.MediaPlayerQueueManager;
+import com.zhongmei.bty.basemodule.database.enums.PrintTicketTypeEnum;
+import com.zhongmei.bty.commonmodule.database.entity.local.AsyncHttpRecord;
+import com.zhongmei.bty.commonmodule.database.enums.PrintStatesEnum;
+import com.zhongmei.bty.commonmodule.util.ActivityUtil;
+import com.zhongmei.bty.dinner.action.ActionContractStatus;
+import com.zhongmei.bty.entity.enums.CommercialStatus;
 import com.zhongmei.yunfu.R;
-import com.zhongmei.yunfu.context.session.Session;
-import com.zhongmei.yunfu.ui.view.CommonDialogFragment.CommonDialogFragmentBuilder;
+import com.zhongmei.yunfu.context.base.BaseApplication;
+import com.zhongmei.yunfu.context.util.ActivityUtils;
+import com.zhongmei.yunfu.ui.base.BaseActivity;
+import com.zhongmei.yunfu.util.DialogUtil;
+import com.zhongmei.yunfu.util.MobclickAgentEvent;
 
 /**
- * 主activity的父类，登录和自动配置等除外
+ * Created by demo on 2018/12/15
  */
-public class MainBaseActivity extends CalmBaseActivity {
 
+public class MainBaseActivity extends BaseActivity {
     private static final String TAG = MainBaseActivity.class.getSimpleName();
 
     @Override
-    protected void onCreate(Bundle arg0) {
-        super.onCreate(arg0);
-        //FacePlatformAdapter.init(MainApplication.getInstance());
-//        Looper.myQueue().addIdleHandler(new MessageQueue.IdleHandler() {
-//            @Override
-//            public boolean queueIdle() {
-//                Log.i("IdleHandler","queueIdle");
-//                onInit();
-//                return false; //false 表示只监听一次IDLE事件,之后就不会再执行这个函数了.
-//            }
-//        });
+    protected void onResume() {
+        super.onResume();
+        Class clazz = getClass();
+        ActivityUtil.setTopActivityClazz(clazz);
     }
 
-//    protected void onInit() {}
-
     @Override
-    protected void onResume() {
-        /**
-         * 移除友盟 代码 developer:zhaos
-         */
-        // MobclickAgent.onPageStart(getFlag());
-        // MobclickAgentEvent.onResume(this);
-        super.onResume();
-        if (Session.getAuthUser() == null) {
-
-            new CommonDialogFragmentBuilder(this).title(getResources().getString(R.string.invalidLogin))
-                    .iconType(R.drawable.commonmodule_dialog_icon_warning)
-                    .negativeText(R.string.reLogin)
-                    .negativeLisnter(new OnClickListener() {
-
-                        @Override
-                        public void onClick(View arg0) {
-                            RouteIntent.startLogin(MainBaseActivity.this);
-                            finish();
-
-                        }
-                    })
-                    .build()
-                    .show(this.getSupportFragmentManager(), TAG);
-
+    protected void onStop() {
+        super.onStop();
+        Class topActivityClazz = ActivityUtil.getTopActivityClazz();
+        Class clazz = getClass();
+        if (topActivityClazz != null && topActivityClazz.equals(clazz)) {
+            //相等时，说明不是其他activity切换，而是其他应用导致该应用到后台
+            ActivityUtil.setTopActivityClazz(null);
         }
     }
 
     /**
-     * 控制遮罩显示隐藏
-     *
-     * @param isShow
+     * 合同状态处理
      */
-    public void showShadow(boolean isShow) {
-
+    public void onEventMainThread(ActionContractStatus action) {
+        if (ActivityUtils.isForeground(this, this.getClass().getName())) {
+            if (action.getStatus() == CommercialStatus.UNAVAILABLE) {
+                DialogUtil.showErrorConfirmDialog(getSupportFragmentManager(), R.string.contract_unvailable, R.string.ok, new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        exitPrintServer();
+                        BaseApplication.sInstance.finishAllActivity(null);
+                    }
+                }, true, "contract_unvailable");
+            }
+        }
     }
 
+    private void exitPrintServer() {
+        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        am.killBackgroundProcesses("com.demo.print");
+    }
+
+    /**
+     * 开台失败处理
+     */
+    public void onEventMainThread(final ActionOpenTableFailed action) {
+        boolean needOperate = ActivityUtils.isForeground(this, this.getClass().getName());
+        if (needOperate) {
+            final AsyncHttpRecord asyncRec = action.asyncRec;
+            if (asyncRec != null) {
+                String text = getString(R.string.dinner_tables) + asyncRec.getTableName() + getString(R.string.open_table_fail)
+                        + "\n" + action.errorMsg;
+                if (action.canRetry) {
+                    DialogUtil.showWarnConfirmDialog(getSupportFragmentManager(), text,
+                            R.string.retry_now, R.string.operate_later,
+                            new OnClickListener() {
+
+                                @Override
+                                public void onClick(View arg0) {
+                                    //重试改单
+                                    MobclickAgentEvent.onEvent(MainBaseActivity.this, MobclickAgentEvent.dinnerAsyncHttpDailoRetry);
+                                    AsyncOpenTableResponseListener listener = new AsyncOpenTableResponseListener();
+                                    AsyncNetworkManager.getInstance().retry(asyncRec, listener);
+                                }
+                            },
+                            new OnClickListener() {
+
+                                @Override
+                                public void onClick(View arg0) {
+                                    //忽略
+                                    MobclickAgentEvent.onEvent(MainBaseActivity.this, MobclickAgentEvent.dinnerAsyncHttpDailoIgnore);
+                                }
+                            },
+                            "modify_trade_failed");
+                } else {
+                    DialogUtil.showWarnConfirmDialog(getSupportFragmentManager(), text, R.string.know,
+                            null, false, "modify_trade_failed");
+                }
+            }
+        }
+    }
+
+    public void onEventMainThread(final ActionExitLoginRemind action) {
+        if (ActivityUtils.isForeground(this, this.getClass().getName())) {
+            AppDialog.showExitLoginRemindDialog();
+        }
+    }
+
+    /**
+     * 改单打印失败处理
+     */
+    public void onEventMainThread(final ActionModifyTradePrintFailed action) {
+        if (ActivityUtils.isForeground(this, this.getClass().getName())) {
+            if (action.receiptSendData == null && action.kitchenAllSendData == null
+                    && action.kitchenCellSendData == null && action.labelSendData == null) {
+                return;
+            }
+
+            //可以重试的才弹框
+            StringBuilder sb = new StringBuilder();
+            if (action.receiptSendData != null) {
+                sb.append(action.receiptTicketType.value() + "、");
+            }
+            if (action.kitchenAllSendData != null) {
+                sb.append(PrintTicketTypeEnum.KITCHENALL.value() + "、");
+            }
+            if (action.kitchenCellSendData != null) {
+                sb.append(PrintTicketTypeEnum.KITCHENCELL.value() + "、");
+            }
+            if (action.labelSendData != null) {
+                sb.append(PrintTicketTypeEnum.LABEL.value() + "、");
+            }
+            if (TextUtils.isEmpty(sb)) {
+                return;
+            }
+
+            sb.delete(sb.length() - 1, sb.length());
+            sb.append(PrintStatesEnum.PRINT_GLOBAL_ALL_FAIL.message());
+            if (!TextUtils.isEmpty(action.getTableName()) && !TextUtils.isEmpty(action.getSerialNumber())) {
+                sb = new StringBuilder(getString(R.string.dinner_tables) + action.getTableName()
+                        + getString(R.string.kitchen_business_no) + action.getSerialNumber()
+                        + "\n" + sb);
+            }
+        }
+    }
+
+
+    /**
+     * 服务铃播放结束
+     */
+    public void onEventMainThread(SpeechCallStopEvent selectEvent) {
+        MediaPlayerQueueManager.getInstance().onCompletion(null);
+    }
 }

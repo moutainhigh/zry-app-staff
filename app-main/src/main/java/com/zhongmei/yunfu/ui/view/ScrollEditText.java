@@ -1,4 +1,4 @@
-package com.zhongmei.bty.thirdplatform.forum.view;
+package com.zhongmei.yunfu.ui.view;
 
 import android.content.Context;
 import android.text.Layout;

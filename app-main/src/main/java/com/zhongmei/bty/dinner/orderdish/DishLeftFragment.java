@@ -27,7 +27,6 @@ import com.zhongmei.bty.basemodule.orderdish.bean.ISetmealShopcartItem;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItem;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
 import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItem;
-import com.zhongmei.bty.basemodule.orderdish.entity.TradeItemExtraDinner;
 import com.zhongmei.bty.basemodule.orderdish.enums.ItemType;
 import com.zhongmei.bty.basemodule.orderdish.enums.ShopcartItemType;
 import com.zhongmei.bty.basemodule.orderdish.utils.ShopcartItemUtils;
@@ -46,7 +45,6 @@ import com.zhongmei.bty.dinner.Listener.DishOptListener;
 import com.zhongmei.bty.dinner.action.ActionBatchOperationItems;
 import com.zhongmei.bty.dinner.action.ActionDinnerChangePage;
 import com.zhongmei.bty.dinner.manager.DinnerTradeItemManager;
-import com.zhongmei.bty.dinner.orderdish.view.DishOperatePopWindow;
 import com.zhongmei.bty.dinner.orderdish.view.NumberAndWaiterView;
 import com.zhongmei.bty.dinner.shopcart.adapter.DinnerShopCartAdapter;
 import com.zhongmei.bty.dinner.table.view.DinnertableTradeView;
@@ -68,7 +66,6 @@ import com.zhongmei.yunfu.db.entity.trade.Trade;
 import com.zhongmei.yunfu.db.entity.trade.TradeTable;
 import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.db.enums.PrintOperationOpType;
-import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.db.enums.TradeType;
 import com.zhongmei.yunfu.orm.DBHelperManager;
 import com.zhongmei.yunfu.resp.UserActionEvent;
@@ -93,11 +90,10 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 import static com.zhongmei.yunfu.db.enums.PrintOperationOpType.BATCH_OPERATION;
-import static com.zhongmei.yunfu.db.enums.PrintOperationOpType.DISH_SEQUENCE;
 import static com.zhongmei.yunfu.db.enums.PrintOperationOpType.REMIND_DISH;
 
 @EFragment(R.layout.dinner_left)
-abstract public class DishLeftFragment extends MobclickAgentFragment implements BasicFragment.OnActivityTouchListener, DishOperatePopWindow.OperateChangeListener {
+abstract public class DishLeftFragment extends MobclickAgentFragment implements BasicFragment.OnActivityTouchListener/*, DishOperatePopWindow.OperateChangeListener*/ {
 
     private final static String TAG = DishLeftFragment.class.getSimpleName();
 
@@ -241,7 +237,7 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
     //是否快速开台
     private boolean isQuickOpenTable = false;
 
-    DishOperatePopWindow dishOperatePopWindow;// 菜品操作弹框
+    //DishOperatePopWindow dishOperatePopWindow;// 菜品操作弹框
     private Integer tableTotalCount = null;
 
     protected LoadingFinish mLoadingFinish;
@@ -933,7 +929,7 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
             if (middleChangeListener != null) {
                 middleChangeListener.closePage(null);
             }
-            if (dishOperatePopWindow == null) {
+            /*if (dishOperatePopWindow == null) {
                 Log.i("zhubo", "信息页宽度：" + getView().getWidth());
                 OrderDishMainActivity activity = (OrderDishMainActivity) getActivity();
                 boolean isAllowBatchOperation = false;
@@ -954,7 +950,7 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
                     dishOperatePopWindow.isReturnCash = isReturnCash();
                     dishOperatePopWindow.show();
                 }
-            }
+            }*/
         }
     }
 
@@ -1382,10 +1378,10 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
             showCheckMode(false, null);
             adapter.showDishCheckMode(false, null);
             // 隐藏遮罩层
-            OrderDishMainActivity activity = (OrderDishMainActivity) getActivity();
+            /*OrderDishMainActivity activity = (OrderDishMainActivity) getActivity();
             if (activity != null) {
                 activity.showShadow(false);
-            }
+            }*/
 
         } else if (v.getId() == R.id.done_btn) {// 完成
             if (opType == null) {
@@ -1431,10 +1427,10 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
             adapter.showDishCheckMode(false, null);
 
             // 隐藏遮罩层
-            OrderDishMainActivity activity = (OrderDishMainActivity) getActivity();
+            /*OrderDishMainActivity activity = (OrderDishMainActivity) getActivity();
             if (activity != null && opType != BATCH_OPERATION) {//批量操作不需要隐藏遮罩层
                 activity.showShadow(false);
-            }
+            }*/
 
         }
         showOrderDishView();
@@ -1466,7 +1462,7 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
         }
     };
 
-    @Override
+    /*@Override
     public void changeDishCheckMode(PrintOperationOpType type) {
         if (type == DISH_SEQUENCE) {
             dinnerDishSequenceFragment = DinnerDishSequenceFragment.show(getFragmentManager(), R.id.rootDishOrderView,
@@ -1505,7 +1501,7 @@ abstract public class DishLeftFragment extends MobclickAgentFragment implements 
 //		adapter.notifyDataSetChanged();
             showCheckMode(true, type);
         }
-    }
+    }*/
 
     /**
      * 设置批量操作属性，进行批量操作时，不允许点击其他菜品

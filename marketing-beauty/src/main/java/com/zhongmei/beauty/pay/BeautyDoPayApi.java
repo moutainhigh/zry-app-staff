@@ -63,7 +63,7 @@ import com.zhongmei.yunfu.db.enums.TradePayStatus;
 import com.zhongmei.yunfu.db.enums.TradeStatus;
 import com.zhongmei.yunfu.db.enums.TradeType;
 import com.zhongmei.yunfu.http.CalmImageRequest;
-import com.zhongmei.yunfu.mobilepay.R;
+import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.yunfu.net.volley.Response;
 import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.yunfu.resp.EventResponseListener;

@@ -1,7 +1,6 @@
 package com.zhongmei.bty.dinner.table;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -63,7 +62,6 @@ import com.zhongmei.bty.dinner.ordercenter.view.DinnerChooseTableDialogFragment;
 import com.zhongmei.bty.dinner.ordercenter.view.DinnerChooseTableDialogFragment_;
 import com.zhongmei.bty.dinner.orderdish.DinnerDishTradeInfoFragment;
 import com.zhongmei.bty.dinner.orderdish.DinnerDishTradeInfoFragment_;
-import com.zhongmei.bty.dinner.orderdish.DinnerOrderDishMainActivity;
 import com.zhongmei.bty.dinner.orderdish.manager.DinnerDishManager;
 import com.zhongmei.bty.dinner.shopcart.adapter.DinnerShopCartAdapter;
 import com.zhongmei.bty.dinner.table.event.EventInsertDinnerNotice;
@@ -1010,9 +1008,9 @@ public class TableInfoContentBean {
         } else {
             DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnerTableTradeVo.getDinnertableTrade(), dinnerTableTradeVo.getTradeVo());
             DinnerShoppingCart.getInstance().resetOrderFromTable(tradeInfo, true);
-            Intent intent = new Intent(activity, DinnerOrderDishMainActivity.class);
-            intent.putExtra(DinnerOrderDishMainActivity.IS_DEFAULT_SETTLE, true);
-            activity.startActivity(intent);
+            //Intent intent = new Intent(activity, DinnerOrderDishMainActivity.class);
+            //intent.putExtra(DinnerOrderDishMainActivity.IS_DEFAULT_SETTLE, true);
+            //activity.startActivity(intent);
         }
     }
 

@@ -7,6 +7,7 @@ import android.view.View;
 import com.zhongmei.bty.mobilepay.bean.IPaymentInfo;
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
+import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class BeautyCheckDialog {
 
         new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                 .iconType(CommonDialogFragment.ICON_WARNING)
-                .positiveText(com.zhongmei.yunfu.mobilepay.R.string.pay_unbind_coupon)
+                .positiveText(R.string.pay_unbind_coupon)
                 .positiveLinstner(new View.OnClickListener() {
 
                     @Override
@@ -50,7 +51,7 @@ public class BeautyCheckDialog {
     public static void showRemoveDinnerIntegralDialog(final FragmentActivity context, String title, final IPaymentInfo paymentInfo) {
         new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                 .iconType(CommonDialogFragment.ICON_WARNING)
-                .positiveText(com.zhongmei.yunfu.mobilepay.R.string.pay_unbind_Integral)
+                .positiveText(R.string.pay_unbind_Integral)
                 .positiveLinstner(new View.OnClickListener() {
 
                     @Override
@@ -73,7 +74,7 @@ public class BeautyCheckDialog {
 
         new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                 .iconType(CommonDialogFragment.ICON_WARNING)
-                .positiveText(com.zhongmei.yunfu.mobilepay.R.string.pay_unbind_Wechat_coupon)
+                .positiveText(R.string.pay_unbind_Wechat_coupon)
                 .positiveLinstner(new View.OnClickListener() {
 
                     @Override

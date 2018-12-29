@@ -13,23 +13,9 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.zhongmei.beauty.event.EventOrderCleanRBChecked;
-import com.zhongmei.beauty.interfaces.BeautyOrderOperatorListener;
-import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
-import com.zhongmei.beauty.interfaces.ITableChoice;
-import com.zhongmei.beauty.widgets.BeautyTablePopWindow;
-import com.zhongmei.yunfu.db.enums.BusinessType;
-import com.zhongmei.yunfu.R;
-import com.zhongmei.bty.base.MainBaseActivity;
-import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem;
-import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
-import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItem;
-import com.zhongmei.bty.basemodule.orderdish.enums.ItemType;
-import com.zhongmei.bty.basemodule.shopmanager.interfaces.ChangePageListener;
-import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
-import com.zhongmei.bty.basemodule.trade.event.ActionCloseOrderDishActivity;
 import com.zhongmei.beauty.events.OrderDishMaskingEvent;
-import com.zhongmei.bty.basemodule.trade.manager.DinnerCashManager;
-import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
+import com.zhongmei.beauty.interfaces.BeautyOrderOperatorListener;
+import com.zhongmei.beauty.interfaces.ITableChoice;
 import com.zhongmei.beauty.order.BeautyOrderLeftFragment;
 import com.zhongmei.beauty.order.BeautyOrderLeftFragment_;
 import com.zhongmei.beauty.order.BeautyOrderMiddleFragment;
@@ -42,20 +28,33 @@ import com.zhongmei.beauty.order.BeautySetmealFragment;
 import com.zhongmei.beauty.order.BeautySetmealFragment_;
 import com.zhongmei.beauty.order.event.BeautyOrderCustomerEvent;
 import com.zhongmei.beauty.order.util.IChangeMiddlePageListener;
+import com.zhongmei.beauty.widgets.BeautyTablePopWindow;
+import com.zhongmei.bty.base.MainBaseActivity;
+import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
+import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem;
+import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
+import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItem;
+import com.zhongmei.bty.basemodule.orderdish.enums.ItemType;
+import com.zhongmei.bty.basemodule.shopmanager.interfaces.ChangePageListener;
+import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
+import com.zhongmei.bty.basemodule.trade.event.ActionCloseOrderDishActivity;
+import com.zhongmei.bty.basemodule.trade.manager.DinnerCashManager;
+import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
 import com.zhongmei.bty.common.view.LoadingView;
-import com.zhongmei.yunfu.Constant;
-import com.zhongmei.bty.mobilepay.event.ActionClose;
-import com.zhongmei.yunfu.db.entity.trade.Tables;
 import com.zhongmei.bty.commonmodule.database.enums.CardRechagingStatus;
 import com.zhongmei.bty.dinner.cash.DinnerDishCustomerLogin;
 import com.zhongmei.bty.dinner.cash.DinnerDishCustomerLogin_;
 import com.zhongmei.bty.dinner.orderdish.DinnerDishCommentFragment;
 import com.zhongmei.bty.dinner.orderdish.DishLeftFragment;
-import com.zhongmei.bty.dinner.orderdish.OrderDishMainActivity;
 import com.zhongmei.bty.dinner.vo.LoadingFinish;
+import com.zhongmei.bty.mobilepay.event.ActionClose;
 import com.zhongmei.bty.snack.event.EventEditModle;
+import com.zhongmei.yunfu.Constant;
+import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.db.entity.trade.Tables;
 import com.zhongmei.yunfu.db.entity.trade.TradeTable;
+import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.List;
@@ -68,7 +67,7 @@ import de.greenrobot.event.EventBus;
  */
 public class BeautyOrderActivity extends MainBaseActivity implements View.OnClickListener, BeautyOrderOperatorListener, ITableChoice, PopupWindow.OnDismissListener {
 
-    private final static String TAG = OrderDishMainActivity.class.getSimpleName();
+    private final static String TAG = BeautyOrderActivity.class.getSimpleName();
 
     // 默认进入结算界面
     public static final String IS_DEFAULT_SETTLE = "isDefaultSettlePage";

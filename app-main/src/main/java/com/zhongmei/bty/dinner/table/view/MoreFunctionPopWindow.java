@@ -2,7 +2,6 @@ package com.zhongmei.bty.dinner.table.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,31 +18,30 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.zhongmei.yunfu.MainApplication;
-import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.auth.application.DinnerApplication;
 import com.zhongmei.bty.basemodule.commonbusiness.message.BusinessChargeReq;
 import com.zhongmei.bty.basemodule.commonbusiness.message.BusinessChargeResp;
-import com.zhongmei.yunfu.context.session.core.auth.Auth;
-import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.basemodule.trade.operates.TradeOperates;
-import com.zhongmei.yunfu.net.volley.VolleyError;
-import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
-import com.zhongmei.yunfu.resp.data.MindTransferResp;
-import com.zhongmei.yunfu.resp.data.TransferReq;
-import com.zhongmei.yunfu.db.enums.BusinessType;
-import com.zhongmei.yunfu.resp.ResponseListener;
-import com.zhongmei.yunfu.resp.ResponseObject;
 import com.zhongmei.bty.commonmodule.util.DinnerMobClickAgentEvent;
-import com.zhongmei.yunfu.util.MobclickAgentEvent;
-import com.zhongmei.yunfu.util.ToastUtil;
-import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.bty.dinner.adapter.DinnerTableFunctionAdapter;
 import com.zhongmei.bty.dinner.table.bean.FunctionBean;
 import com.zhongmei.bty.dinner.table.event.EventFunctionChange;
-import com.zhongmei.bty.dinner.table.searchtable.SearchTableActivity_;
+import com.zhongmei.yunfu.MainApplication;
+import com.zhongmei.yunfu.R;
+import com.zhongmei.yunfu.context.session.core.auth.Auth;
+import com.zhongmei.yunfu.context.session.core.user.User;
+import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.db.enums.BusinessType;
+import com.zhongmei.yunfu.net.volley.VolleyError;
+import com.zhongmei.yunfu.resp.ResponseListener;
+import com.zhongmei.yunfu.resp.ResponseObject;
+import com.zhongmei.yunfu.resp.data.MindTransferResp;
+import com.zhongmei.yunfu.resp.data.TransferReq;
+import com.zhongmei.yunfu.util.DensityUtil;
+import com.zhongmei.yunfu.util.MobclickAgentEvent;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -281,11 +279,11 @@ public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchLi
         switch (v.getId()) {
             case R.id.tv_goto_search_table:
                 MobclickAgentEvent.onEvent(mContext, DinnerMobClickAgentEvent.tableMoreFunctionSearchTable);
-                Intent intent = new Intent(mContext, SearchTableActivity_.class);
+                //Intent intent = new Intent(mContext, SearchTableActivity_.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("BusinessType", mBusinessType);
-                intent.putExtras(bundle);
-                mContext.startActivity(intent);
+                //intent.putExtras(bundle);
+                //mContext.startActivity(intent);
                 this.dismiss();
                 break;
             case R.id.btn_get_business_data:

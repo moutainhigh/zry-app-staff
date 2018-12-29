@@ -27,7 +27,6 @@ import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.commonmodule.database.entity.local.CustomerArrivalShop;
 import com.zhongmei.bty.customer.customerarrive.CustomerNoticeHelper;
 import com.zhongmei.bty.customer.customerarrive.ICustomerNoticeListener;
-import com.zhongmei.bty.sync.CustomerArriveEvent;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.context.session.Session;
@@ -245,7 +244,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
         }
     }
 
-    public void onEventMainThread(CustomerArriveEvent event) {
+    /*public void onEventMainThread(CustomerArriveEvent event) {
         if (mEntranceType == EntranceType.DINNER) {
             //开启灯光提示
             LedControl.getInstance().setLed(LedControl.Event.CUSTOMER_ARRIVE, true);
@@ -261,7 +260,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
                 showCustomerArriveDot();
             }
         }
-    }
+    }*/
 
     @Override
     protected void onAttachedToWindow() {

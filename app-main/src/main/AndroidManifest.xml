@@ -88,9 +88,9 @@
         <activity
             android:name="com.zhongmei.beauty.BeautyMainActivity_"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
+            android:hardwareAccelerated="false"
             android:launchMode="singleTask"
-            android:screenOrientation="sensorLandscape"
-            android:hardwareAccelerated="false">
+            android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -127,7 +127,8 @@
             android:name="com.zhongmei.beauty.pay.BeautyPayActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:launchMode="singleTask"
-            android:screenOrientation="sensorLandscape"/>
+            android:screenOrientation="sensorLandscape"
+            android:theme="@style/Transparent" />
 
         <activity
             android:name="com.zhongmei.beauty.customer.BeautyCustomerActivity_"
@@ -162,7 +163,7 @@
 
         <service android:name="com.zhongmei.beauty.order.action.PaystatusSyncService">
             <intent-filter>
-                <action android:name="com.yunfu.beauty.order.action.PaystatusSyncService"/>
+                <action android:name="com.yunfu.beauty.order.action.PaystatusSyncService" />
             </intent-filter>
         </service>
 

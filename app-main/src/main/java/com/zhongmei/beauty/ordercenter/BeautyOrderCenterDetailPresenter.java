@@ -1066,11 +1066,9 @@ public class BeautyOrderCenterDetailPresenter extends OrderCenterDetailPresenter
             return tradeStatus == TradeStatus.CONFIRMED
                     && !trade.getSource().equalsValue(SourceId.WECHAT.value())
                     && tradePayStatus == TradePayStatus.UNPAID
+                    && Utils.isNotEmpty(getTradeVo().getTradeItemList())
                     && (tradeType == TradeType.SPLIT || (tradeType == TradeType.SELL || getTradePaymentVo().getTradeUnionType() == TradeUnionType.UNION_MAIN))
-                    && (tradeExtra == null
-                    || tradeExtra.getDeliveryPlatform() != DeliveryPlatform.MERCHANT
-                    || TextUtils.isEmpty(tradeExtra.getDeliveryUserId()))
-                    && !isClosedOrder();
+                    ;
         }
 
         return false;

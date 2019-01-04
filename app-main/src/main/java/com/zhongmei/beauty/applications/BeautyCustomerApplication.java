@@ -1,6 +1,5 @@
 package com.zhongmei.beauty.applications;
 
-import com.zhongmei.yunfu.basemodule.R;
 import com.zhongmei.bty.basemodule.auth.application.AuthorizedApplication;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
 
@@ -37,7 +36,7 @@ public class BeautyCustomerApplication extends CustomerApplication {
 
     @Override
     public void setLockIcon() {
-        setLockIcon(R.drawable.customer_app_lock_icon);
+        //setLockIcon(R.drawable.customer_app_lock_icon);
     }
 
     @Override

@@ -95,7 +95,7 @@ public class CustomerApplication extends AuthorizedApplication {
 
     @Override
     public void setLockIcon() {
-        setLockIcon(R.drawable.customer_app_lock_icon);
+        //setLockIcon(R.drawable.customer_app_lock_icon);
     }
 
     @Override

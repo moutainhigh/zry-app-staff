@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="customer">顾客</string>
-    <string name="please_input_count">请录入张数</string>
     <string name="customer_name_null">匿名顾客</string>
     <string name="customer_member_password_input">会员输入密码</string>
     <string name="customer_passwor_dialog_membername">会员：%1$s</string>
     <string name="customer_pos_input">POS输入</string>
     <string name="customer_inspect">确认</string>
     <string name="customer_no_password">请输入密码</string>
-    <string name="customer_password_length_6">请输入6位数密码</string>
     <string name="customer_pos_connection_closed">银联POS连接已经断开！</string>
     <string name="customer_login_through_wechat_scan_code">会员通过微信扫码登录</string>
 
-    <string name="customer_app_name">顾客</string>
     <string name="customer_all_customer">全部客户</string>
     <string name="customer_country_dialog_title">国籍选择</string>
 

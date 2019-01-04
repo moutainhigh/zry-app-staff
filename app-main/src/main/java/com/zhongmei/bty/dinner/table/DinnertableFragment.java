@@ -206,7 +206,7 @@ public class DinnertableFragment extends TableFragment {
 
     @Override
     public void doMergeMoveDishDialog(final IDinnertableTradeMoveDish orginal, final IDinnertableTrade dest) {
-        String headTitle = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.move_dishes) : getActivity().getString(R.string.dinner_copydish);
+        /*String headTitle = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.move_dishes) : getActivity().getString(R.string.dinner_copydish);
         String keyWord = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.dinner_movedish) : getActivity().getString(R.string.dinner_copydish);
         String title = getActivity().getString(R.string.dinner_move_dish_merge_dialog_title, orginal.getSn(), dest.getSn(), keyWord);
 
@@ -239,12 +239,12 @@ public class DinnertableFragment extends TableFragment {
         fragment.setData(orginal, dest.getTableSeats());
         fragment.setmOperateType(MoreMenuPopWindow.operateType);
 
-        fragment.show(getFragmentManager(), DIALOG_TAG);
+        fragment.show(getFragmentManager(), DIALOG_TAG);*/
     }
 
     @Override
     public void doTransferMoveDishDialog(final IDinnertableTradeMoveDish orginal, final IDinnertable dest) {
-        String headTitle = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.move_dishes) : getActivity().getString(R.string.dinner_copydish);
+        /*String headTitle = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.move_dishes) : getActivity().getString(R.string.dinner_copydish);
         String keyWord = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.dinner_movedish) : getActivity().getString(R.string.dinner_copydish);
 
         String title = getActivity().getString(R.string.dinner_move_dish_transfer_dialog_title, orginal.getSn(), dest.getName(), keyWord);
@@ -275,7 +275,7 @@ public class DinnertableFragment extends TableFragment {
         fragment.setData(orginal, dest.getTableSeats());
         fragment.setmOperateType(MoreMenuPopWindow.operateType);
 
-        fragment.show(getFragmentManager(), DIALOG_TAG);
+        fragment.show(getFragmentManager(), DIALOG_TAG);*/
     }
 
     @Override

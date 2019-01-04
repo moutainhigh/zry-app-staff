@@ -1,34 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="display_pay_should">应付金额</string>
-    <string name="display_pay_success">支付成功</string>
-    <string name="display_pay_fail">支付失败</string>
     <!--<string name="display_price_pre">￥&#160;%s</string>-->
     <!--<string name="display_givechange_pre">找零&#160;：￥&#160;%s</string>-->
-    <string name="display_customer_pre">会员&#160;：&#160;%s</string>
-    <string name="display_integral_pre">积分&#160;：%s</string>
-    <string name="display_level_pre">等级&#160;：%s</string>
-    <string name="display_barcode_label">请出示二维码并扫描</string>
-    <string name="display_barcode_scan_label">请扫描右侧二维码</string>
-    <string name="display_barcode_scan_label_fail">二维码生成失败</string>
-    <string name="display_barcode_scan_small_label">请扫描下方二维码</string>
-    <string name="display_user_account_label">请输入账号</string>
-    <string name="display_user_pass_label">请输入会员密码</string>
-    <string name="display_user_fail">账号或密码验证失败!</string>
-    <string name="display_recharge_memeber_pre">会员：%1$s</string>
-    <string name="display_content_welcome">欢迎下次光临</string>
-    <string name="display_recharge_label">充值</string>
-    <string name="display_queue_pre_comein">准备入场</string>
-    <string name="display_input_scan_register_str">请扫描二维码进行注册</string>
-    <string name="display_input_scan_login_str">微信扫描二维码登录</string>
-    <string name="display_customer_login_title">顾客登录</string>
-    <string name="display_customer_login_by_phone">顾客手机号登录</string>
-    <string name="display_scan_qr_code">扫描二维码</string>
-    <string name="display_get_coupon">领取优惠券</string>
-    <string name="display_login_error">登录失败</string>
-    <string name="display_memeent_no">暂无</string>
-    <string name="display_account_error_hint">账号错误,请确认后重新输入!</string>
-    <string name="display_password_error_hint">密码错误,请确认后重新输入!</string>
     <string name="display_user_no_name">匿名</string>
     <!--<string name="display_pay_symbol">￥</string>-->
     <string name="display_nothing">无</string>
@@ -40,12 +13,6 @@
     <string name="display_member_card_pay_label">会员扫码付款</string>
 
 
-    <string name="display_user_face_label">您的脸型是</string>
     <string name="display_mobile_pay_label">移动支付</string>
 
-    <string name="display_discount_refund">抵扣并退款</string>
-    <string name="display_discount_refund_type" translatable="false">（%s）</string>
-    <string name="display_pre_pay_amount">预&#160;&#160;&#160;&#160;付&#160;&#160;&#160;&#160;金：</string>
-    <string name="display_pre_discount_amount">抵&#160;扣&#160;&#160;金&#160;额：</string>
-    <string name="display_pre_refund_amount">应退预付金：</string>
 </resources>

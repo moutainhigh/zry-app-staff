@@ -157,12 +157,12 @@ public class BeautyApplication extends AuthorizedApplication {
 
     @Override
     public void setIcon() {
-        setIcon(R.drawable.beauty_app_icon_selector);
+        //setIcon(R.drawable.beauty_app_icon_selector);
     }
 
     @Override
     public void setLockIcon() {
-        setLockIcon(R.drawable.beauty_app_lock_icon);
+        //setLockIcon(R.drawable.beauty_app_lock_icon);
     }
 
     @Override

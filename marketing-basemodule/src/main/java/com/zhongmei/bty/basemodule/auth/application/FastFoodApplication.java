@@ -139,12 +139,12 @@ public class FastFoodApplication extends AuthorizedApplication {
 
     @Override
     public void setIcon() {
-        setIcon(R.drawable.cashier_app_icon_selector);
+        //setIcon(R.drawable.cashier_app_icon_selector);
     }
 
     @Override
     public void setLockIcon() {
-        setLockIcon(R.drawable.cashier_app_lock_icon);
+        //setLockIcon(R.drawable.cashier_app_lock_icon);
     }
 
     @Override

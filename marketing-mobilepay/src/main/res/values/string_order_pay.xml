@@ -203,4 +203,17 @@
     <string name="return_earnest_success">退款成功</string>
     <string name="deduction_earnest_success">抵扣成功</string>
     <string name="auto_input_paymode_not_paymore">自定义输入不能溢收！</string>
+    <string name="input_price_str">请输入金额</string>
+    <string name="cash">现金</string>
+    <string name="country_currency_symbol">{HBF}</string>
+    <string name="reason_type_self_define_reason">请输入自定义理由...</string>
+    <string name="common_submit">确定</string>
+    <string name="pay_erase_cent">抹分</string>
+    <string name="pay_erase_small_change">抹零</string>
+    <string name="pay_erase_yuan">抹元</string>
+    <string name="pay_erase_dime">抹角</string>
+    <string name="pay_erase_auto">自定义</string>
+    <string name="pay_change_error">找零金额小于零，请重新收银.</string>
+    <string name="pay_user_not_login">用户未登录！</string>
+    <string name="pay_change_more_error">找零金额大于100，请确认是否正确！</string>
 </resources>

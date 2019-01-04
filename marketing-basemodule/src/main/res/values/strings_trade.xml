@@ -24,6 +24,4 @@
     <string name="dinner_settle_prprint_hint">如果用于其它终端扫码支付，请先保存结算信息!</string>
     <string name="customer_disable">当前会员已被停用！</string>
 
-    <string name="delivery_app_name">外卖</string>
-
 </resources>

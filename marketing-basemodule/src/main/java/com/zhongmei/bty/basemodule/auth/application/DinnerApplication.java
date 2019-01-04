@@ -227,12 +227,12 @@ public class DinnerApplication extends AuthorizedApplication {
 
     @Override
     public void setIcon() {
-        setIcon(R.drawable.dinner_app_icon_selector);
+        //setIcon(R.drawable.dinner_app_icon_selector);
     }
 
     @Override
     public void setLockIcon() {
-        setLockIcon(R.drawable.dinner_app_lock_icon);
+        //setLockIcon(R.drawable.dinner_app_lock_icon);
     }
 
     @Override

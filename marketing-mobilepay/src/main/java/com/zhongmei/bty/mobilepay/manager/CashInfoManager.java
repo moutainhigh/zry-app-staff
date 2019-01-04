@@ -6,7 +6,7 @@ import android.util.Log;
 import com.zhongmei.bty.mobilepay.bean.GroupPay;
 import com.zhongmei.bty.mobilepay.bean.IPaymentInfo;
 import com.zhongmei.bty.mobilepay.bean.PayModelItem;
-import com.zhongmei.yunfu.basemodule.R;
+import com.zhongmei.yunfu.mobilepay.R;
 import com.zhongmei.bty.basemodule.auth.application.BeautyApplication;
 import com.zhongmei.bty.basemodule.auth.application.DinnerApplication;
 import com.zhongmei.bty.basemodule.commonbusiness.cache.PaySettingCache;

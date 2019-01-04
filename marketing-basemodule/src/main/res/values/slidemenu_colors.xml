@@ -6,7 +6,4 @@
     <color name="slidemenu_catalogSelect">#524E4D</color>
     <color name="slidemenu_catalognomail">#3E3A39</color>
     <color name="bg_white">#FFFFFFFF</color>
-    <color name="print_line_gray">#bcbcbc</color>
-    <color name="text_gray">#666666</color>
-    <color name="gray">#DADBDA</color>
 </resources>

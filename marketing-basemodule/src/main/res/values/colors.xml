@@ -1,30 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_ff3b30">#FF3B30</color>
     <color name="write">#ffffff</color>
-    <color name="button_click_color">#2e9bdd</color>
-    <color name="button_normal_color">#32adf6</color>
     <!-- 帮助中心 -->
-    <color name="card_active_unenable">#bcbcbc</color>
     <color name="orange">#ff8400</color>
     <color name="color_5F6C76">#5F6C76</color>
-    <color name="dinnerdish_bg">#f0f5f6</color>
-    <color name="snack_title_bg">#33AEF6</color>
-    <color name="dinner_dishname_color">#333333</color>
-    <color name="notifycenter_tips_trade">#573E0D</color>
-    <dimen name="store_manager_toolbar_title_size">18sp</dimen>
-    <color name="text_hint">#E0E0E0</color>
-    <color name="gray_recharge">#f0f3f6</color>
-    <color name="color_f6f6f6">#F6F6F6</color>
-    <color name="split_line_color">#DDDDDD</color>
-    <color name="type_select_color">#F1605D</color>
-    <color name="type_select_bg_color">#0EF1605D</color>
-    <color name="beauty_color_btn_pink_nomal">#B0F1605D</color>
-    <color name="beauty_color_btn_pink_pressed">#83F1605D</color>
-    <color name="beauty_color_btn_red_nomal">#F1605D</color>
-    <color name="beauty_color_btn_red_pressed">#83F1605D</color>
-
-    <color name="color_F5A623">#F5A623</color>
 
     <color name="rt_retail_color_2E9BDD">#2E9BDD</color>
     <color name="rt_retail_color_32ADF6">#32ADF6</color>

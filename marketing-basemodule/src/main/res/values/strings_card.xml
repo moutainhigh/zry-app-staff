@@ -10,8 +10,5 @@
     <string name="eccard_invalided">已废除</string>
     <string name="card_change_card">换卡</string>
 
-    <string name="card_sale_to_active_bind">已绑定</string>
-    <string name="card_sale_to_active_not_bind">未绑定</string>
-
     <string name="card_service_privilege_name">次卡服务</string>
 </resources>

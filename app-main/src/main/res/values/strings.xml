@@ -36,7 +36,6 @@
     <string name="reason_type_destroy_title">作废</string>
     <string name="reason_type_refuse_title">拒绝</string>
     <string name="reason_type_repay_btn">反结账</string>
-    <string name="reason_type_self_define_reason">请输入自定义理由...</string>
     <string name="reason_not_illedgal">未选择理由</string>
     <string name="reason_type_free_btn">免单</string>
     <string name="record_pay">支付</string>
@@ -223,5 +222,18 @@
     <string name="order_detail_verify_status">核销状态：%s</string>
     <string name="order_detail_verify_waiting">待核销</string>
     <string name="order_detail_verify_already">已核销</string>
-
+    <string name="handover_type_select">交接方式选择</string>
+    <string name="show_data_type">明交接</string>
+    <string name="show_data_type_tips">营业数据可见，核对钱箱金额后确认提交</string>
+    <string name="hide_data_type">暗交接</string>
+    <string name="hide_data_type_tips">先行录入钱箱金额，提交后可见系统营收金额</string>
+    <string name="reportcenter_whole_goods">全部商品</string>
+    <string name="total_amount">总额</string>
+    <string name="input_handover_money">填入\n交接金额</string>
+    <string name="please_input_count">请录入张数</string>
+    <string name="handover_history_list_empty">当日无交接记录！</string>
+    <string name="handover_date_no_colon">交接时间</string>
+    <string name="handover_person">交接人</string>
+    <string name="customer_password_length_6">请输入6位数密码</string>
+    <string name="display_pay_fail">支付失败</string>
 </resources>

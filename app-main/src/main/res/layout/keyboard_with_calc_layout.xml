@@ -222,7 +222,7 @@
             android:background="@drawable/calculator_num_corner_bg"
             android:gravity="center"
             android:text="@string/input_handover_money"
-            android:textColor="@drawable/handover_edit_text_color"
+            android:textColor="@color/handover_edit_text_color"
             android:textSize="16sp" />
     </LinearLayout>
 

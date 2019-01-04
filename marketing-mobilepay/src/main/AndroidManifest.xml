@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.zhongmei.yunfu.mobilepay">
 
+    <uses-sdk android:minSdkVersion="16" />
+
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"

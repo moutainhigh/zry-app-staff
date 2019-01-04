@@ -4,7 +4,6 @@
     <string name="mispos_pos_occupying">POS占用中</string>
     <string name="credit_card_transaction_failed">刷卡交易失败</string>
     <string name="notice_info">提示信息</string>
-    <string name="notice_info_ticket_output_error">出票异常</string>
     <string name="try_again">再次尝试</string>
     <string name="uion_key_bord_ready">请在%1$d秒内进行输入密码操作</string>
     <string name="uion_key_bord_operating">密码输入中...</string>
@@ -29,7 +28,5 @@
     <string name="pos_refund_uncard">订单退款未成功，准备撤销POS交易！</string>
     <string name="refund_failed">退款失败</string>
     <string name="offline_refund">线下退款</string>
-    <string name="pos_pay_successed">订单已支付成功，POS交易完成！</string>
-    <string name="pos_pay_unsuccessed">订单支付未成功，准备撤销POS交易！</string>
 
 </resources>

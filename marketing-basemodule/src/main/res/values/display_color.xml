@@ -1,25 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="display_bg_color">#ff141c34</color>
-    <color name="display_txt_color">#292e37</color>
-    <color name="display_anchor_color">#ffffffff</color>
-    <color name="display_txt_orange">#ff7124</color>
-    <color name="display_user_color">#0079FF</color>
 
-    <color name="display_user_type_male_color">#279DFF</color>
-    <color name="display_user_type_female_color">#FF6871</color>
-
-    <color name="display_pay_pre">#ff000000</color>
-    <color name="display_pay_success">#ff00cda5</color>
-    <color name="display_pay_fail">#fffe6a4d</color>
-    <color name="display_pay_default">#ffffffff</color>
-
-    <color name="display_qrcode_pre">#ff333333</color>
-    <color name="display_qrcode_success">#ff333333</color>
-    <color name="display_qrcode_fail">#fffe6a4d</color>
-
-    <color name="display_qrcode_pay_text_weixin">#ff00c15c</color>
-    <color name="display_qrcode_pay_text_alipay">#ff0088fd</color>
-    <color name="display_qrcode_pay_text_baifudao">#fff3203a</color>
-    <color name="display_qrcode_pay_text_default">#ff333333</color>
 </resources>

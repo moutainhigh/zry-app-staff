@@ -45,7 +45,7 @@ public class AppDialog {
         final FragmentActivity activity = BaseApplication.sInstance.getActivityLifecycle().getCurrentFragmentActivity();
         if (activity != null) {
             DialogUtil.showHintConfirmDialog(activity.getSupportFragmentManager(), message,
-                    com.zhongmei.yunfu.basemodule.R.string.know, new View.OnClickListener() {
+                    R.string.know, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 
@@ -64,7 +64,7 @@ public class AppDialog {
         if (activity != null && activity instanceof FragmentActivity) {
             FragmentActivity fragmentActivity = (FragmentActivity) activity;
             DialogUtil.showHintConfirmDialog(fragmentActivity.getSupportFragmentManager(), message,
-                    com.zhongmei.yunfu.basemodule.R.string.know, new View.OnClickListener() {
+                    R.string.know, new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
 

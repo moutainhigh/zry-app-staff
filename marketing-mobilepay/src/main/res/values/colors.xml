@@ -10,4 +10,12 @@
     <color name="line_gray">#DADBDA</color>
     <color name="color_32adf6">#32adf6</color>
     <color name="color_d8d8d8">#d8d8d8</color>
+    <color name="gray_line">#e1e1e5</color>
+    <color name="bg_gray">#DADBDA</color>
+    <color name="settings_blue">#33AEF6</color>
+    <color name="text_hint">#E0E0E0</color>
+    <color name="settings_normalword">#333333</color>
+    <color name="print_line_gray">#bcbcbc</color>
+    <color name="dialog_operate_title_warn">#FFFF7901</color>
+    <color name="pay_text_method">#666666</color>
 </resources>

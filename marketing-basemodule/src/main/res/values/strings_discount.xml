@@ -5,7 +5,6 @@
     <string name="coupons_expire">卡券已过期</string>
     <string name="coupons_delete">卡券已删除</string>
     <string name="coupons_unavailable">卡券已失效</string>
-    <string name="coupons_empty">卡券号不能为空！</string>
     <string name="dish_discount">单菜折扣</string>
     <string name="dish_discount_let">单菜让价</string>
     <string name="order_free">免单</string>

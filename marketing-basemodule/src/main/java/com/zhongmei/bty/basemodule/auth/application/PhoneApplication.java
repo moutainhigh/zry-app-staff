@@ -26,12 +26,12 @@ public class PhoneApplication extends AuthorizedApplication {
 
     @Override
     public void setIcon() {
-        setIcon(R.drawable.phone_app_icon_selector);
+        //setIcon(R.drawable.phone_app_icon_selector);
     }
 
     @Override
     public void setLockIcon() {
-        setLockIcon(R.drawable.phone_app_lock_icon);
+        //setLockIcon(R.drawable.phone_app_lock_icon);
     }
 
     @Override

@@ -18,4 +18,13 @@
     <dimen name="btn_bottom_height">58dp</dimen>
 
     <dimen name="online_pay_dialog_title_size">28sp</dimen>
+    <dimen name="pay_exempt_change_popup_width">160dp</dimen>
+    <dimen name="pay_exempt_change_popup_height">200dp</dimen>
+    <dimen name="pay_exempt_change_popup_list_marginBottom">2dp</dimen>
+    <dimen name="pay_exempt_change_popup_list_dividerHeight">18dp</dimen>
+    <dimen name="pay_exempt_change_popup_list_paddingLeftAddRight">20dp</dimen>
+    <dimen name="pay_exempt_change_popup_list_paddingTop">30dp</dimen>
+    <dimen name="pay_exempt_change_popup_item_width">140dp</dimen>
+    <dimen name="pay_exempt_change_popup_item_height">45dp</dimen>
+    <dimen name="pay_exempt_change_popup_item_size">16sp</dimen>
 </resources>

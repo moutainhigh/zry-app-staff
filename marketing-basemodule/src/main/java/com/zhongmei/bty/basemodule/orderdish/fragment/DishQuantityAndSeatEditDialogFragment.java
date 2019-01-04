@@ -48,8 +48,8 @@ public class DishQuantityAndSeatEditDialogFragment extends CommonDialogFragment 
     @ViewById(resName = "print_kitchen_cb")
     public CheckBox printKitchenCb;//是否传送后厨
 
-    @ViewById(resName = "copy_dish_property_cb")
-    public CheckBox copyDishPropertyCb;//是否复制菜品属性
+    //@ViewById(resName = "copy_dish_property_cb")
+    //public CheckBox copyDishPropertyCb;//是否复制菜品属性
 
   /*  @ViewById(resName = "ib_close)
     ImageButton ib_close;*/

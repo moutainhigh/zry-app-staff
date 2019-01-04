@@ -59,7 +59,7 @@ public class TableZonesChoiceAdapter extends BaseAdapter {
         TextView tv_text;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.beauty_lv_item_textview, null);
-            tv_text = (TextView) convertView.findViewById(com.zhongmei.yunfu.basemodule.R.id.name_tv);
+            tv_text = (TextView) convertView.findViewById(R.id.name_tv);
             convertView.setTag(tv_text);
         }
 

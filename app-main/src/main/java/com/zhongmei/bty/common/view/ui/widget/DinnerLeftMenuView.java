@@ -22,7 +22,6 @@ import com.zhongmei.bty.base.BusinessMainActivity;
 import com.zhongmei.bty.basemodule.auth.application.DinnerApplication;
 import com.zhongmei.bty.basemodule.auth.permission.dialog.VerifyPermissionsDialogFragment;
 import com.zhongmei.bty.basemodule.database.enums.EntranceType;
-import com.zhongmei.bty.basemodule.devices.led.LedControl;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.commonmodule.database.entity.local.CustomerArrivalShop;
 import com.zhongmei.bty.customer.customerarrive.CustomerNoticeHelper;
@@ -220,7 +219,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
             @Override
             public void onClick(View v) {
                 //关闭灯光提示
-                LedControl.getInstance().setLed(LedControl.Event.CUSTOMER_ARRIVE, false);
+                //LedControl.getInstance().setLed(LedControl.Event.CUSTOMER_ARRIVE, false);
                 //显示顾客详情
                 //ArriveCustomerDialogFragment dialogFragment = ArriveCustomerDialogFragment.getNewInstance(customer, mNoticeListener);
                 //dialogFragment.show(mBusinessMainActivity.getSupportFragmentManager(), ArriveCustomerDialogFragment.class.getSimpleName());

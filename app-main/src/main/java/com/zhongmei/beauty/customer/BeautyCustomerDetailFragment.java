@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.zhongmei.beauty.customer.adapter.BeautyCustomerDetailProjectAdapter;
 import com.zhongmei.beauty.customer.constants.BeautyCustomerConstants;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
-import com.zhongmei.bty.basemodule.auth.application.PhoneApplication;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount;
 import com.zhongmei.bty.basemodule.customer.CustomerLogin;
 import com.zhongmei.bty.basemodule.customer.dialog.PasswordDialog;
@@ -28,9 +27,6 @@ import com.zhongmei.bty.basemodule.database.entity.customer.CustomerCardItem;
 import com.zhongmei.bty.basemodule.devices.mispos.data.EcCardInfo;
 import com.zhongmei.bty.basemodule.devices.mispos.data.message.MemberCardResp;
 import com.zhongmei.bty.basemodule.devices.mispos.enums.CardStatus;
-import com.zhongmei.bty.basemodule.devices.phone.exception.CalmPhoneException;
-import com.zhongmei.bty.basemodule.devices.phone.exception.CalmPhoneStateException;
-import com.zhongmei.bty.basemodule.devices.phone.manager.CalmPhoneManager;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
@@ -1386,7 +1382,7 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
                     ToastUtil.showLongToast(getString(R.string.tel_is_busy2));
                     return;
                 }*/
-                VerifyHelper.verifyAlert(getActivity(), PhoneApplication.PERMISSION_PHONE,
+                /*VerifyHelper.verifyAlert(getActivity(), PhoneApplication.PERMISSION_PHONE,
                         new VerifyHelper.Callback() {
 
                             @Override
@@ -1407,7 +1403,7 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
                                     Log.e(TAG, "", e);
                                 }
                             }
-                        });
+                        });*/
                 break;
             case R.id.customer_edit: // 会员编辑
                 MobclickAgentEvent.onEvent(UserActionCode.GK010008);

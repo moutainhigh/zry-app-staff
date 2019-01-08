@@ -68,9 +68,7 @@ import com.zhongmei.bty.mobilepay.event.MemberPayChargeEvent;
 import com.zhongmei.bty.mobilepay.event.RefreshTradeVoEvent;
 import com.zhongmei.bty.mobilepay.event.SellForRepeatEvent;
 import com.zhongmei.bty.mobilepay.event.StopPayStatusTimer;
-import com.zhongmei.bty.mobilepay.fragment.BaiNuoCouponFragment;
 import com.zhongmei.bty.mobilepay.fragment.CashPayFragment;
-import com.zhongmei.bty.mobilepay.fragment.FengHuoPayFragment;
 import com.zhongmei.bty.mobilepay.fragment.MeiTuanCouponFragment;
 import com.zhongmei.bty.mobilepay.fragment.OthersFragment;
 import com.zhongmei.bty.mobilepay.fragment.UnionFragment;
@@ -179,26 +177,15 @@ public class MainPayFragment extends MobclickAgentFragment implements IPaymentMe
 
     private UnionFragment mUnionPayFragment;
 
-    private OnlinePayFragment mAliPayFragment, mWxPayFragment, mBaiduPayFragment, mMtshPayFragment, mYiPayFragment;
+    private OnlinePayFragment mAliPayFragment, mWxPayFragment;
 
     private MemberMainFragment mMemberMainFragment;
-
-    private MeiTuanCouponFragment mCouponPayFragment;
 
     private OthersFragment mOtherPayFragment;
 
     private LagMainFragment mLagMainFragment;
 
-    private BaiNuoCouponFragment mBaiNuoCouponFragment;//add 20161226 百度糯米券
-
-    private OnlinePayFragment mJCAPPPayFragment;//金城App储值支付
-    //private JCCustomerCardPayFragment mJCCustomerCardPayFragment;//金城储值卡支付
-    private OnlinePayFragment mJCValueCardPayFragment;//金城充值卡支付
-    private FengHuoPayFragment mFengHuoPayFragment;//烽火手環
-    private BaiNuoCouponFragment mKouBeiCouponFragment;//add 口碑
-    private OnlinePayFragment mCloudPayFragment;//云闪付
-    private OnlinePayFragment mEPayFragment;//E支付
-    private OnlinePayFragment mMobileFragment;//移动支付
+    private MeiTuanCouponFragment mCouponPayFragment;
     private PayMethodItem mCurrentMethod;
 
     private TradeVo mTradeVo;
@@ -665,12 +652,6 @@ public class MainPayFragment extends MobclickAgentFragment implements IPaymentMe
                         this.hideFragment(mWxPayFragment);
                     }
                     break;
-
-                case PAY_MENU_TYPE_BAIDU:// 百度
-                    if (mBaiduPayFragment != null) {
-                        this.hideFragment(mBaiduPayFragment);
-                    }
-                    break;
                 case PAY_MENU_TYPE_UNION:// 银联
                     if (mUnionPayFragment != null) {
                         this.hideFragment(mUnionPayFragment);
@@ -682,24 +663,6 @@ public class MainPayFragment extends MobclickAgentFragment implements IPaymentMe
                         this.hideFragment(mCouponPayFragment);
                     }
                     break;
-
-                case PAY_MENU_TYPE_MEITUANCASHPAY://美团闪惠
-                    if (mMtshPayFragment != null) {
-                        this.hideFragment(mMtshPayFragment);
-                    }
-                    break;
-
-                case PAY_MENU_TYPE_BAINUOCOUPON:// 百度糯米券
-                    if (mBaiNuoCouponFragment != null) {
-                        this.hideFragment(mBaiNuoCouponFragment);
-                    }
-                    break;
-                case PAY_MENU_TYPE_KOUBEI:// 口碑券 addv8.9
-                    if (mKouBeiCouponFragment != null) {
-                        this.hideFragment(mKouBeiCouponFragment);
-                    }
-                    break;
-
                 case PAY_MENU_TYPE_MEMBER://储值(正餐快餐外卖支持储值支付)
                     if (ServerSettingCache.getInstance().isJinChBusiness()) {
                         /*if (mJCCustomerCardPayFragment != null) {
@@ -722,40 +685,6 @@ public class MainPayFragment extends MobclickAgentFragment implements IPaymentMe
                         this.hideFragment(mLagMainFragment);
                     }
                     break;
-                case PAY_MENU_TYPE_JIN_CHENG://金诚支付
-                    if (mJCAPPPayFragment != null) {
-                        this.hideFragment(mJCAPPPayFragment);
-                    }
-                    break;
-                case PAY_MENU_TYPE_JIN_CHENG_VALUE_CARD://金诚充值卡
-                    if (mJCValueCardPayFragment != null) {
-                        this.hideFragment(mJCValueCardPayFragment);
-                    }
-                    break;
-
-                case PAY_MENU_TYPE_FHXM://烽火支付 add v8.7
-                    if (mFengHuoPayFragment != null) {
-                        this.hideFragment(mFengHuoPayFragment);
-                    }
-                    break;
-                case PAY_MENU_TYPE_UNIONPAY_CLOUD://银联云支付 add v8.11
-                    if (mCloudPayFragment != null) {
-                        this.hideFragment(mCloudPayFragment);
-                    }
-                    break;
-                case PAY_MENU_TYPE_ICBC_EPAY://E支付 add v8.11
-                    if (mEPayFragment != null) {
-                        this.hideFragment(mEPayFragment);
-                    }
-                case PAY_MENU_TYPE_MOBILE://移动支付 add v8.12
-                    if (mMobileFragment != null) {
-                        this.hideFragment(mMobileFragment);
-                    }
-                    break;
-                case PAY_MENU_TYPE_DX_YIPAY://翼支付 add v8.16
-                    if (mYiPayFragment != null) {
-                        this.hideFragment(mYiPayFragment);
-                    }
                 default:
                     break;
             }

@@ -88,7 +88,6 @@ import com.zhongmei.bty.data.operates.impl.PrepareTradeRelationImpl;
 import com.zhongmei.bty.data.operates.impl.PushOperatesImpl;
 import com.zhongmei.bty.data.operates.impl.QueueDalImpl;
 import com.zhongmei.bty.data.operates.impl.QueueOperatesImpl;
-import com.zhongmei.bty.data.operates.impl.SenderDalImpl;
 import com.zhongmei.bty.data.operates.impl.ShopLogoOperatesImpl;
 import com.zhongmei.bty.data.operates.impl.ShopManagerOperatesImpl;
 import com.zhongmei.bty.data.operates.impl.SystemSettingDalImpl;
@@ -113,7 +112,7 @@ public class OperateData {
         sOperataDataMap.put(HandoverOperates.class, HandoverOperatesImpl.class);
         sOperataDataMap.put(CustomerOperates.class, CustomerOperatesImpl.class);
         //sOperataDataMap.put(PrintSettingDal.class, PrintSettingDalImpl.class);
-        sOperataDataMap.put(SenderDal.class, SenderDalImpl.class);
+        //sOperataDataMap.put(SenderDal.class, SenderDalImpl.class);
         sOperataDataMap.put(CouponDal.class, CouponDalImpl.class);
         sOperataDataMap.put(CustomerDal.class, CustomerDalImpl.class);
         sOperataDataMap.put(PaymentItemDal.class, PaymentItemDalImpl.class);

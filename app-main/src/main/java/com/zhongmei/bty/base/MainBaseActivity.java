@@ -1,7 +1,5 @@
 package com.zhongmei.bty.base;
 
-import android.app.ActivityManager;
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,10 +16,7 @@ import com.zhongmei.bty.basemodule.database.enums.PrintTicketTypeEnum;
 import com.zhongmei.bty.commonmodule.database.entity.local.AsyncHttpRecord;
 import com.zhongmei.bty.commonmodule.database.enums.PrintStatesEnum;
 import com.zhongmei.bty.commonmodule.util.ActivityUtil;
-import com.zhongmei.bty.dinner.action.ActionContractStatus;
-import com.zhongmei.bty.entity.enums.CommercialStatus;
 import com.zhongmei.yunfu.R;
-import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.context.util.ActivityUtils;
 import com.zhongmei.yunfu.ui.base.BaseActivity;
 import com.zhongmei.yunfu.util.DialogUtil;
@@ -50,28 +45,6 @@ public class MainBaseActivity extends BaseActivity {
             //相等时，说明不是其他activity切换，而是其他应用导致该应用到后台
             ActivityUtil.setTopActivityClazz(null);
         }
-    }
-
-    /**
-     * 合同状态处理
-     */
-    public void onEventMainThread(ActionContractStatus action) {
-        if (ActivityUtils.isForeground(this, this.getClass().getName())) {
-            if (action.getStatus() == CommercialStatus.UNAVAILABLE) {
-                DialogUtil.showErrorConfirmDialog(getSupportFragmentManager(), R.string.contract_unvailable, R.string.ok, new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        exitPrintServer();
-                        BaseApplication.sInstance.finishAllActivity(null);
-                    }
-                }, true, "contract_unvailable");
-            }
-        }
-    }
-
-    private void exitPrintServer() {
-        ActivityManager am = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
-        am.killBackgroundProcesses("com.demo.print");
     }
 
     /**

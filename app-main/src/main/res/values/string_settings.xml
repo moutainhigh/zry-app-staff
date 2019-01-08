@@ -105,7 +105,7 @@
     <string name="set">设置</string>
     <string name="scan_info">扫描条形码测试连接情况</string>
     <string name="how_to_set_scan">如何设置扫描枪</string>
-    <string name="set_scan_steps">1、将扫描枪正确插入收银设备的USB接口；\n2、正确接入后，扫描枪设备在自检完成后，将发出自检成功的提示音；\n如果外设无法正常工作，请访问官网demo.com的帮助中心，或致电4008-866-815联系的运维人员</string>
+    <string name="set_scan_steps">1、将扫描枪正确插入收银设备的USB接口；\n2、正确接入后，扫描枪设备在自检完成后，将发出自检成功的提示音；\n如果外设无法正常工作，请访问官网demo.com的帮助中心，或致电0000-000-000联系的运维人员</string>
     <string name="scan_test_value">1234567890</string>
     <string name="select_printer_info">请选择连接钱箱的设备</string>
     <string name="setting_serial">流水号设置</string>
@@ -180,7 +180,7 @@
     <!-- v8.6.0 -->
     <string name="setting_choose_money_box">当前选中的打印机:</string>
     <string name="current_cashbox">选择钱箱连接的打印机设备</string>
-    <string name="set_cashbox_steps">1、钱箱依赖于打印机（飞捷设备除外）\n2、选择钱箱连接的打印机后，点击“开箱测试”，如弹出钱箱，既表示连接成功\n3、如无法正常工作，请访问官网demo.com的帮助中心，或致电4008-866-815联系运维人员</string>
+    <string name="set_cashbox_steps">1、钱箱依赖于打印机（飞捷设备除外）\n2、选择钱箱连接的打印机后，点击“开箱测试”，如弹出钱箱，既表示连接成功\n3、如无法正常工作，请访问官网demo.com的帮助中心，或致电0000-000-000联系运维人员</string>
 
     <!--v8.12.0-->
     <string name="setting_open_kitchenShortName">开启后厨票据展示短名称</string>

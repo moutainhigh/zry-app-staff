@@ -270,7 +270,6 @@
     <string name="dinner_copydish_choose">选择操作</string>
     <string name="dinner_no_unpain_dish">没有可结算品项不能结账!</string>
     <string name="dinner_no_unpain_dish_or_zeronumber">没有可结算品项或者结算品项数量为0，不能结账!</string>
-    <string name="contract_unvailable">您的服务已到期，请联系4008-866-815进行续约！</string>
     <string name="operation_make_amount_negative">该操作会导致订单金额为负，是否继续？</string>
     <string name="buffet_operation_make_amount_negative">该操作会导致未支付金额为负!</string>
     <string name="buffet_operation_make_privilege_invalid">该操作会导致核销过的优惠不满足条件!</string>

@@ -1,11 +1,9 @@
 package com.zhongmei.bty.data.operates.impl;
 
-import android.database.Cursor;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 
-import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.QueryBuilder;
@@ -67,7 +65,6 @@ import com.zhongmei.bty.commonmodule.database.enums.DeliveryOrderStatus;
 import com.zhongmei.bty.commonmodule.database.enums.DeliveryOrderSubStatus;
 import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 import com.zhongmei.bty.commonmodule.util.Standard;
-import com.zhongmei.bty.data.db.CalmDatabaseHelper;
 import com.zhongmei.bty.snack.offline.Snack;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.context.util.CollectionUtils;
@@ -126,7 +123,6 @@ import com.zhongmei.yunfu.orm.DBHelperManager;
 import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.util.Beans;
 import com.zhongmei.yunfu.util.Checks;
-import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
@@ -879,7 +875,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
     @Override
     public TakeOutVo findTradeVoTakeOutNew()
             throws Exception {
-        // TODO Auto-generated method stub
+        /*// TODO Auto-generated method stub
         CalmDatabaseHelper mHelper = OpenHelperManager.getHelper(getContext(), CalmDatabaseHelper.class);
         Cursor cursor = null;
         // 查三天之内的外卖单
@@ -975,7 +971,8 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
             OpenHelperManager.releaseHelper();
         }
-        return takeOutVo;
+        return takeOutVo;*/
+        throw new Exception("findTradeVoTakeOutNew not supported");
     }
 
     @Override

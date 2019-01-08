@@ -106,11 +106,6 @@ public class MainApplication extends BaseApplication {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
         }
-
-        //初始化百度人脸识别SDK
-        //BaiduFaceRecognition.getInstance().init();
-        //CalmMsgSDK.enableLog(true);
-        //CalmMsgSDK.init(this);
     }
 
     @Override
@@ -156,16 +151,13 @@ public class MainApplication extends BaseApplication {
     @Override
     protected void initCommonInfo() {
         initDBHelperManager();
-        //SystemUtil.init(this);
         SharedPreferenceUtil.init(this, Constant.SP_FILE_NAME);
         DataBaseUtils.init(Constant.DB_AUTHORITY);
-        boolean isOpen = SharedPreferenceUtil.getSpUtil().getBoolean(Constant.SP_LOG_SWITCH, false);
     }
 
     private void initDBHelperManager() {
         HashMap<String, IDBHelperFunc> databaseHelperMap = new HashMap<>();
         databaseHelperMap.put(DBHelperManager.LOCAL_DATABASE_HELPER, new LocalDBHelperFunc());
-        //databaseHelperMap.put(DBHelperManager.CALM_DATABSE_HELPER, new CalmDBHelperFunc());
         databaseHelperMap.put(DBHelperManager.CALM_DATABSE_HELPER, new YfDBHelperFunc());
         DBHelperManager.initDatabaseHelper(databaseHelperMap);
     }
@@ -178,8 +170,6 @@ public class MainApplication extends BaseApplication {
         //PushServiceManager.stopPushService();
         SyncServiceUtil.stopService(this);
         ShopInfoManager.getInstance().logout();
-        //NewOrderlistenerService.stopService(this);
-        //TradeDealServiceUtil.stopTradeDealService(this);
     }
 
 //    ---------Session

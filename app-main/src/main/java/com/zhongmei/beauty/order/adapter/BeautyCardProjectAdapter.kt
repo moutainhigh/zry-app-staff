@@ -28,6 +28,7 @@ class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<Dis
     private lateinit var mOnItemClickListener: OnProjectItemClickListener
 
     private var mCardInfo: BeautyCardServiceInfo?=null
+    private var mCardPosition:Int=0
 
     private val mBeautyCardManager: BeautyCardManager
 
@@ -44,8 +45,9 @@ class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<Dis
     }
 
 
-    fun setCardInfo(cardInfo: BeautyCardServiceInfo?){
+    fun setCardInfo(cardInfo: BeautyCardServiceInfo?,position:Int){
         this.mCardInfo=cardInfo
+        this.mCardPosition=position
     }
 
     /**
@@ -97,7 +99,7 @@ class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<Dis
                     return@setOnClickListener
                 }
 //                if (!inspectServiceCount(vo)) Toast.makeText(this@BeautyCardProjectAdapter.mContext, "已经用完了", Toast.LENGTH_SHORT).show() else mOnItemClickListener!!.onProjectClickListener(vo, position)
-                mOnItemClickListener!!.onProjectClickListener(mCardInfo,vo, position);
+                mOnItemClickListener!!.onProjectClickListener(mCardInfo,vo, mCardPosition)
             }
         }
     }

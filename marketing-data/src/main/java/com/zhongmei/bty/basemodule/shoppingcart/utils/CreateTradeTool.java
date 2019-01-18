@@ -22,6 +22,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItem;
 import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItemBase;
 import com.zhongmei.bty.basemodule.orderdish.bean.TradeItemVo;
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
+import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.yunfu.db.entity.trade.TradeItemExtra;
 import com.zhongmei.bty.basemodule.orderdish.entity.TradeItemExtraDinner;
 import com.zhongmei.yunfu.context.session.core.user.AuthUser;
@@ -49,6 +50,9 @@ import com.zhongmei.yunfu.db.enums.TradeStatus;
 import com.zhongmei.yunfu.db.enums.TradeType;
 import com.zhongmei.yunfu.context.util.SystemUtils;
 import com.zhongmei.yunfu.context.util.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -396,8 +400,22 @@ public class CreateTradeTool {
         mTradeItem.setRelateTradeItemUuid(mShopcartItem.getRelateTradeItemUuid());
         mTradeItem.setInvalidType(mShopcartItem.getInvalidType());
         mTradeItem.setStatusFlag(mShopcartItem.getStatusFlag());
+
+        mTradeItem.setBatchNo(getServerExtraInfo(mShopcartItem.getDishShop()));
         doRelateShell(mShopcartItem, mTradeVo, mTradeItem, deskCount);
         return mTradeItem;
+    }
+
+    private static String getServerExtraInfo(DishShop dishShop){
+        JSONObject obj=new JSONObject();
+        try {
+            obj.put("timeValue",dishShop.getMinNum());
+            obj.put("timeType",dishShop.getMaxNum());
+            obj.put("serversCount",dishShop.getSaleTotal());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj.toString();
     }
 
     /**

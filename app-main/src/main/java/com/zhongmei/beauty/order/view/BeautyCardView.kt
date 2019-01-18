@@ -172,7 +172,7 @@ class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, Beau
 
         include_empty_status.visibility = View.GONE
         mDishShopList.addAll(info!!.listDishShops)
-        mProjectAdapter?.setCardInfo(info)
+        mProjectAdapter?.setCardInfo(info,position)
         mProjectAdapter?.notifyDataSetChanged()
 
         beauty_order_card_project_list.visibility=View.VISIBLE
@@ -263,7 +263,7 @@ class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, Beau
     }
 
     override fun onAddCartCallBack(position: Int) {
-        mCardAdapter!!.notifyItemChanged(position)
+        mCardAdapter!!.notifyDataSetChanged()
     }
 }
 

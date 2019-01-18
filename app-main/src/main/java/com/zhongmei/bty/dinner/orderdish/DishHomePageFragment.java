@@ -493,7 +493,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
                 //添加到购物车
                 List<SetmealShopcartItem> dishChildMeals=new ArrayList<>();
                 for (DishSetmeal dishSetmeal : dishSetmeals) {
-                    DishShop dishShop=DishCache.getDishHolder().get(dishSetmeal.getDishId());
+                    DishShop dishShop=DishCache.getDishHolder().get(dishSetmeal.getChildDishId());
                     if(dishShop==null){
                         continue;
                     }

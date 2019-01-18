@@ -60,14 +60,16 @@ public class CustomerWxAppRecordAdapter extends BaseAdapter {
             viewHolder.tv_title = (TextView) convertView.findViewById(R.id.tv_title);
             viewHolder.tv_content = (TextView) convertView.findViewById(R.id.tv_content);
             viewHolder.tv_use = (TextView) convertView.findViewById(R.id.tv_use);
+            viewHolder.tv_projects=(TextView)convertView.findViewById(R.id.tv_projects);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         if (mCouponList != null) {
             BeautyAcitivityBuyRecordResp item = mCouponList.get(position);
-            viewHolder.tv_title.setText(item.dishName);
-            viewHolder.tv_content.setText("有效期：" + DateUtil.formatDate(item.validityPeriod));
+            viewHolder.tv_title.setText(item.marketingName);
+            viewHolder.tv_projects.setText("可用项目:"+item.dishName);
+            viewHolder.tv_content.setText("有效期:" + DateUtil.formatDate(item.validityPeriod));
             if (item.isUsed) {
                 viewHolder.tv_use.setText(mContext.getString(R.string.beauty_used));
             } else {
@@ -79,7 +81,7 @@ public class CustomerWxAppRecordAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        TextView tv_title, tv_content, tv_use;
+        TextView tv_title, tv_projects,tv_content, tv_use;
     }
 
 }

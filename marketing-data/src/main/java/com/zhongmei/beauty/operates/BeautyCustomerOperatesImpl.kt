@@ -6,6 +6,7 @@ import com.zhongmei.bty.basemodule.commonbusiness.utils.ServerAddressUtil
 import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp
 import com.zhongmei.beauty.operates.message.*
 import com.zhongmei.beauty.utils.BeautyServerAddressUtil
+import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo
 import com.zhongmei.bty.commonmodule.data.operate.AbstractOpeartesImpl
 import com.zhongmei.bty.commonmodule.data.operate.IOperates
 import com.zhongmei.yunfu.bean.YFResponseList
@@ -36,7 +37,7 @@ class BeautyCustomerOperatesImpl : AbstractOpeartesImpl, BeautyCustomerOperates 
         executor.requestValue(transferReq).responseClass(BeautyCardServiceResp::class.java).execute(listener, "getCardServiceInfo")
     }
 
-    override fun getCardServiceInfo(userId: Long, customerId: Long, listener: YFResponseListener<YFResponseList<BeautyCardServiceAccount>>) {
+    override fun getCardServiceInfo(userId: Long, customerId: Long, listener: YFResponseListener<YFResponseList<BeautyCardServiceInfo>>) {
         val req = toBeautyCardServiceReq(userId, customerId)
         var url = BeautyServerAddressUtil.cardServiceInfo()
         val executor = JFRequest.create(url)

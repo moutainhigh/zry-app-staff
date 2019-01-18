@@ -17,7 +17,7 @@ public class BeautyAcitivityBuyRecordResp extends ResponseObject<List<BeautyAcit
     /**
      * 活动名称
      */
-    public String planName;
+    public String marketingName;
 
     /**
      * 原价

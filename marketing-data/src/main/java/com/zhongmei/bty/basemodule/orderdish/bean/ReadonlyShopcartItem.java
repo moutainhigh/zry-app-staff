@@ -23,6 +23,8 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
 
     private List<ReadonlySetmealShopcartItem> setmealItems;
 
+    private List<ReadonlySetmealShopcartItem> serverSetmealItems;
+
     private TradeReasonRel returnQtyReason;
 
     //tradePlanActivity表的uuid
@@ -52,6 +54,14 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
 
     public boolean hasSetmeal() {
         return Utils.isNotEmpty(setmealItems);
+    }
+
+    public void setServerSetmealItems(List<ReadonlySetmealShopcartItem> serverSetmealItems) {
+        this.serverSetmealItems = serverSetmealItems;
+    }
+
+    public boolean hasServerSetmeal() {
+        return Utils.isNotEmpty(serverSetmealItems);
     }
 
     @Override
@@ -168,6 +178,11 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
     @Override
     public List<ReadonlySetmealShopcartItem> getSetmealItems() {
         return setmealItems;
+    }
+
+    @Override
+    public List<? extends ISetmealShopcartItem> getServerItems() {
+        return serverSetmealItems;
     }
 
     @Override

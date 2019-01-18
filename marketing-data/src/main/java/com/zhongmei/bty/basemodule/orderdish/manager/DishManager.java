@@ -185,7 +185,7 @@ public class DishManager {
 		List<DishShop> dishList = DishCache.getDishHolder().filter(filter);*/
         List<DishShop> dishList = null;
         //大类下全部菜品
-        if (dishType.getId() == -1L) {
+        if (dishType.getId() == -2L) {//以前是-1，-1现在被服务所占用了
             Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {

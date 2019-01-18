@@ -103,8 +103,8 @@ public class BeautyOrderProductFragment extends DishHomePageFragment {
     public View getBrandTypeView() {
         hideControlBtn();
         int level = SharedPreferenceUtil.getSpUtil().getInt("dinner_meun_level", 2);
-        if (level == 2) {
-            return new BeautyBrandTypeView(getActivity(), mDishManager, this);
+        if (level == 2 || isBuyServerBusiness()) {
+            return new BeautyBrandTypeView(getActivity(), mDishManager, this,isBuyServerBusiness());
         } else {
             return new BeautyBrandTypeViewEx(getActivity(), mDishManager, this);
         }

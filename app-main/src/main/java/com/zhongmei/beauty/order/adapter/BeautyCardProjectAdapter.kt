@@ -11,8 +11,10 @@ import com.zhongmei.yunfu.R
 import com.zhongmei.bty.basemodule.beauty.BeautyCardManager
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount
 import com.zhongmei.beauty.order.vo.BeautyCardDishshopVo
+import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo
 import com.zhongmei.bty.commonmodule.database.enums.ServerPrivilegeType
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager
+import com.zhongmei.yunfu.db.entity.dish.DishShop
 import kotlinx.android.synthetic.main.beauty_card_project_item.view.*
 
 /**
@@ -21,14 +23,16 @@ import kotlinx.android.synthetic.main.beauty_card_project_item.view.*
 
  * @date 2017/3/13 15:09
  */
-class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<BeautyCardServiceAccount>) : RecyclerView.Adapter<BeautyCardProjectAdapter.ViewHolder>() {
+class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<DishShop>) : RecyclerView.Adapter<BeautyCardProjectAdapter.ViewHolder>() {
 
     private lateinit var mOnItemClickListener: OnProjectItemClickListener
+
+    private var mCardInfo: BeautyCardServiceInfo?=null
 
     private val mBeautyCardManager: BeautyCardManager
 
     interface OnProjectItemClickListener {
-        fun onProjectClickListener(vo: BeautyCardServiceAccount, position: Int)
+        fun onProjectClickListener(vo: BeautyCardServiceInfo?,dishShop:DishShop?, position: Int)
     }
 
     fun setOnItemClickListener(onItemClickListener: OnProjectItemClickListener) {
@@ -39,6 +43,10 @@ class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<Bea
         mBeautyCardManager = BeautyCardManager.getInstance()
     }
 
+
+    fun setCardInfo(cardInfo: BeautyCardServiceInfo?){
+        this.mCardInfo=cardInfo
+    }
 
     /**
      * 创建view
@@ -67,28 +75,29 @@ class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<Bea
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(position: Int) = with(itemView) {
             var vo = this@BeautyCardProjectAdapter.mData.get(position)
-            this.tv_short_name.text = vo.serviceName
-            this.tv_all_num.text = String.format(this@BeautyCardProjectAdapter.mContext.resources.getString(R.string.beauty_card_service_all_count), vo.serviceRemainderTime)// 可用次数
-            if (!inspectServiceCount(vo)) {
-                this.v_main_content.setBackgroundResource(R.drawable.beauty_card_service_bg_disable)
-                this.tv_market_num.setTextColor(resources.getColor(R.color.beauty_color_BCBCBC))
-                this.tv_all_num.setTextColor(resources.getColor(R.color.beauty_color_BCBCBC))
-                this.tv_short_name.setTextColor(resources.getColor(R.color.beauty_color_BCBCBC))
-                this.tv_market_num.text = "已用完"
-                itemView.isEnabled = false
-            } else {
-                this.v_main_content.setBackgroundResource(R.drawable.beauty_grid_item_selector)
-                this.tv_market_num.setTextColor(resources.getColor(R.color.beauty_color_FF666666))
-                this.tv_all_num.setTextColor(resources.getColor(R.color.beauty_color_434343))
-                this.tv_short_name.setTextColor(resources.getColor(R.color.beauty_color_434343))
-                this.tv_market_num.text = getServiceSurplusCount(vo)
-                itemView.isEnabled = true
-            }
+            this.tv_short_name.text = vo.name
+//            this.tv_all_num.text = String.format(this@BeautyCardProjectAdapter.mContext.resources.getString(R.string.beauty_card_service_all_count), vo.serviceRemainderTime)// 可用次数
+//            if (!inspectServiceCount(vo)) {
+//                this.v_main_content.setBackgroundResource(R.drawable.beauty_card_service_bg_disable)
+//                this.tv_market_num.setTextColor(resources.getColor(R.color.beauty_color_BCBCBC))
+//                this.tv_all_num.setTextColor(resources.getColor(R.color.beauty_color_BCBCBC))
+//                this.tv_short_name.setTextColor(resources.getColor(R.color.beauty_color_BCBCBC))
+//                this.tv_market_num.text = "已用完"
+//                itemView.isEnabled = false
+//            } else {
+//                this.v_main_content.setBackgroundResource(R.drawable.beauty_grid_item_selector)
+//                this.tv_market_num.setTextColor(resources.getColor(R.color.beauty_color_FF666666))
+//                this.tv_all_num.setTextColor(resources.getColor(R.color.beauty_color_434343))
+//                this.tv_short_name.setTextColor(resources.getColor(R.color.beauty_color_434343))
+//                this.tv_market_num.text = getServiceSurplusCount(vo)
+//                itemView.isEnabled = true
+//            }
             itemView.setOnClickListener {
                 if (ClickManager.getInstance().isClicked) {
                     return@setOnClickListener
                 }
-                if (!inspectServiceCount(vo)) Toast.makeText(this@BeautyCardProjectAdapter.mContext, "已经用完了", Toast.LENGTH_SHORT).show() else mOnItemClickListener!!.onProjectClickListener(vo, position)
+//                if (!inspectServiceCount(vo)) Toast.makeText(this@BeautyCardProjectAdapter.mContext, "已经用完了", Toast.LENGTH_SHORT).show() else mOnItemClickListener!!.onProjectClickListener(vo, position)
+                mOnItemClickListener!!.onProjectClickListener(mCardInfo,vo, position);
             }
         }
     }

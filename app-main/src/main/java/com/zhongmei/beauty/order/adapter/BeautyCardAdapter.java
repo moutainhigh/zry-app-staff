@@ -9,12 +9,16 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.zhongmei.bty.basemodule.beauty.BeautyCardManager;
+import com.zhongmei.bty.commonmodule.database.enums.ServerPrivilegeType;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import com.zhongmei.bty.commonmodule.database.enums.CardRechagingStatus;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
+import com.zhongmei.yunfu.db.entity.dish.DishShop;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.List;
 
@@ -31,8 +35,10 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
 
     private OnItemClickListener mOnItemClickListener;
 
+    private BeautyCardManager mBeautyCardManager;
+
     public interface OnItemClickListener {
-        void onCardItemClickListener(BeautyCardServiceInfo info);
+        void onCardItemClickListener(BeautyCardServiceInfo info,int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -42,6 +48,7 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
     public BeautyCardAdapter(Context context, List<BeautyCardServiceInfo> data) {
         this.mData = data;
         this.mContext = context;
+        this.mBeautyCardManager = BeautyCardManager.getInstance();
     }
 
     /**
@@ -60,10 +67,10 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
      */
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
-        BeautyCardServiceInfo info = mData.get(position);
-        viewHolder.cardKind.setText(info.cardName);
-        viewHolder.cardNum.setText(info.cardNo);
-        if (info.rightStatus != null && info.rightStatus == CardRechagingStatus.INVALID.value()) {
+        final BeautyCardServiceInfo info = mData.get(position);
+        viewHolder.cardKind.setText(info.serviceName);
+        viewHolder.cardNum.setText(info.serviceName);
+        if (info.isOutTime()) {
             viewHolder.cardKind.setTextColor(Color.parseColor("#B3FFFFFF"));
             viewHolder.cardNum.setTextColor(Color.parseColor("#B3FFFFFF"));
             viewHolder.surplusCount.setTextColor(Color.parseColor("#B3FFFFFF"));
@@ -76,44 +83,46 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
             viewHolder.surplusCount.setTextColor(mContext.getResources().getColor(R.color.beauty_color_white));
             viewHolder.projects.setTextColor(mContext.getResources().getColor(R.color.beauty_color_white));
             viewHolder.validityTime.setTextColor(Color.parseColor("#CCFFFFFF"));
-            if (info.remainderTimes == null) {
-                viewHolder.surplusCount.setText("");
-            } else {
-                viewHolder.surplusCount.setText(String.format(mContext.getString(R.string.beauty_card_service_surplus_count), info.remainderTimes));
-            }
+
+            viewHolder.surplusCount.setText(String.format(mContext.getString(R.string.beauty_card_service_surplus_count), getServiceSurplusCount(info)));
         }
         String str = "";
-        if (info.cardServiceAccountList != null) {
+        if (info.listDishShops != null) {
             str = mContext.getString(R.string.beauty_card_service_projects_label);
-            for (int i = 0; i < info.cardServiceAccountList.size(); i++) {
-                BeautyCardServiceAccount account = info.cardServiceAccountList.get(i);
-                if (i == info.cardServiceAccountList.size() - 1) {
-                    str += account.serviceName + account.serviceRemainderTime + mContext.getString(R.string.beauty_card_service_count_label2);
+            for (int i = 0; i < info.listDishShops.size(); i++) {
+                DishShop dishShop = info.listDishShops.get(i);
+                if (i == info.listDishShops.size() - 1) {
+                    str += dishShop.getName();
                 } else {
-                    str += account.serviceName + account.serviceRemainderTime + mContext.getString(R.string.beauty_card_service_count_label);
+                    str += dishShop.getName() + "/";
                 }
             }
         }
         viewHolder.projects.setText(str);
-        viewHolder.validityTime.setText(formatTime(info.validStartDay, info.validEndDay));
+        viewHolder.validityTime.setText(formatTime(info.validTime));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (ClickManager.getInstance().isClicked() || mOnItemClickListener == null) {
                     return;
                 }
-                mOnItemClickListener.onCardItemClickListener(mData.get(position));
+
+                if(inspectServiceCount(info)){
+                    mOnItemClickListener.onCardItemClickListener(mData.get(position),position);
+                }else{
+                    ToastUtil.showShortToast("该服务已用完");
+                }
+
             }
         });
     }
 
-    private String formatTime(Long startTime, Long endTime) {
-        if (startTime == null || endTime == null) {
+    private String formatTime(Long endTime) {
+        if (endTime == null) {
             return mContext.getString(R.string.beauty_card_time_never_expires);
         }
-        String startTimeStr = DateTimeUtils.formatDateTime(startTime, DateTimeUtils.QUERY_DATE_FORMAT);
         String endTimeStr = DateTimeUtils.formatDateTime(endTime, DateTimeUtils.QUERY_DATE_FORMAT);
-        return String.format(mContext.getResources().getString(R.string.beauty_order_card_time, startTimeStr + "-" + endTimeStr));
+        return String.format(mContext.getResources().getString(R.string.beauty_order_card_time),endTimeStr);
     }
 
     @Override
@@ -124,6 +133,16 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
     @Override
     public int getItemCount() {
         return mData.size();
+    }
+
+    private boolean inspectServiceCount(BeautyCardServiceInfo vo) {
+        int count = vo.serviceRemainderTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
+        return count > 0;
+    }
+
+    private int getServiceSurplusCount(BeautyCardServiceInfo vo) {
+        int remainderCount = vo.serviceRemainderTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
+        return remainderCount;
     }
 
     /**

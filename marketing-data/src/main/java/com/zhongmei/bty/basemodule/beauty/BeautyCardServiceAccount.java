@@ -1,6 +1,9 @@
 package com.zhongmei.bty.basemodule.beauty;
 
+import com.zhongmei.yunfu.db.entity.dish.DishShop;
+
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 次卡服务
@@ -29,6 +32,9 @@ public class BeautyCardServiceAccount implements Serializable {
      * 服务剩余次数
      */
     public Integer serviceRemainderTime;
+
+
+    public List<DishShop> listDishShops;
 
 
 //    /**

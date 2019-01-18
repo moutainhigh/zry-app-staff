@@ -110,6 +110,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     public static final int TRADE_USER_TYPE = 15;
     //卡服务提示
     public static final int CARD_SERVICE_LABEL = 16;
+    //卡服务子项目
+    public static final int CARD_SERVICE_ITEM=17;
 
     protected Boolean isBatchDiscountModle = false;// 是否是批量折扣模式，默认否
     protected boolean isBatchCoercionModel = false; //是否强制批量折扣，不受后台折扣限制
@@ -269,6 +271,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             case CHILD:
             case WEST_CHILD:
                 return DISH_TYPE;
+            case SERVER_CHILD_ITEM:
+                return CARD_SERVICE_ITEM;
             case EXTRA_ITEM:
                 return EXTRA_TYPE;
             case PROPERTIES:
@@ -313,7 +317,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
     @Override
     public int getViewTypeCount() {
-        return 17;
+        return 18;
     }
 
     @Override
@@ -347,8 +351,18 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         BuffetPeopleHolder buffetPeopleHolder = null;
         BuffetExtraHolder buffetExtraHolder = null;
         UserHolder userHolder = null;
+        CardServerItemsHolder cardServerItemsHolder=null;
         int type = getItemViewType(position);
         switch (type) {
+            case CARD_SERVICE_ITEM:
+                if (convertView == null || convertView.getTag(R.id.dishView) == null) {
+                    cardServerItemsHolder = new CardServerItemsHolder();
+                    convertView = initcardServerItemsView(LayoutInflater.from(context),cardServerItemsHolder);
+                    convertView.setTag(R.id.layout_card_server_item, holder);
+                } else {
+                    cardServerItemsHolder = (CardServerItemsHolder) convertView.getTag(R.id.layout_card_server_item);
+                }
+                break;
             case DISH_TYPE:
                 if (convertView == null || convertView.getTag(R.id.dishView) == null) {
                     holder = new ViewHolder();
@@ -539,6 +553,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 showDishLayout(holder, item, position);
                 setTopLine(holder.topLine, item, position);
                 break;
+            case CARD_SERVICE_ITEM:
+                showCardServerItem(cardServerItemsHolder, item, position);
+                setTopLine(cardServerItemsHolder.topLine, item, position);
+                break;
             case PROPERTIES_TYPE:
                 showPropertys(item, propertiesHolder);
                 break;
@@ -701,6 +719,13 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
      */
     protected abstract View initDishLayout(ViewHolder holder);
 
+    protected View initcardServerItemsView(LayoutInflater inflater,CardServerItemsHolder holder) {
+        View contentView=inflater.inflate(R.layout.dinner_shopcart_item_server_items, null);
+        holder.topLine=contentView.findViewById(R.id.topline);
+        holder.tv_dishName=(TextView) contentView.findViewById(R.id.tv_dish_name);
+        return contentView;
+    }
+
     protected View initDishCarteNormView(LayoutInflater inflater) {
         return inflater.inflate(R.layout.dinner_dish_buffet_people, null);
     }
@@ -780,6 +805,17 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
     protected abstract void showDishLayout(ViewHolder holder, final DishDataItem item, int position);
+
+    /**
+     * 显示次卡服务中的子项目
+     * @param holder
+     * @param item
+     * @param position
+     */
+    protected void showCardServerItem(CardServerItemsHolder holder, final DishDataItem item, int position){
+            holder.tv_dishName.setText(item.getName());
+            holder.topLine.setVisibility(item.isNeedTopLine()?View.VISIBLE:View.GONE);
+    }
 
     /**
      * 设置共同的菜品的值
@@ -1442,7 +1478,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             IShopcartItem shopCartItem = dataList.get(i);
             DishDataItem item = null;
             // 如果子菜不为空，就算套餐外壳
-            if (Utils.isNotEmpty(shopCartItem.getSetmealItems())) {
+            if (Utils.isNotEmpty(shopCartItem.getSetmealItems()) || Utils.isNotEmpty(shopCartItem.getServerItems())) {
                 item = new DishDataItem(ItemType.COMBO);// 套餐外壳
                 item.setBase(shopCartItem);
                 item.setItem(shopCartItem);
@@ -1464,6 +1500,22 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     for (ISetmealShopcartItem chirld : chirldList) {
                         // 套餐字菜
                         createChildItem(shopCartItem, chirld, ItemType.CHILD, null, false);
+                    }
+                }
+                if(shopCartItem.getType()==DishType.SERVER_COMBO_ALL){
+                    //全部商品可用
+                    DishDataItem it = new DishDataItem(ItemType.SERVER_CHILD_ITEM);
+                    it.setItem(shopCartItem);
+                    it.setName("所有商品可用");
+                    it.setDishTypeId(null);
+                    it.setNeedTopLine(true);
+                    data.add(it);
+                }
+                if(shopCartItem.getType()==DishType.SERVER_COMBO_PART && Utils.isNotEmpty(shopCartItem.getServerItems())){
+                    //部分商品可用
+                    for (ISetmealShopcartItem serverItems:shopCartItem.getServerItems()){
+                        //添加可用商品
+                        createServerChildItem(shopCartItem, serverItems, ItemType.SERVER_CHILD_ITEM, null, false);
                     }
                 }
                 createCardServiceHint(shopCartItem);
@@ -1596,6 +1648,25 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 data,
                 ItemType.CHILD_MEMO,
                 R.string.order_dish_memo_semicolon);
+    }
+
+
+    private void createServerChildItem(IShopcartItem shopCartItem, IShopcartItemBase child, ItemType itemType, Long typeId, boolean isNeedTopLine) {
+        DishDataItem it = new DishDataItem(itemType);
+        it.setItem(shopCartItem);
+        it.setName(child.getDishShop().getName());
+        it.setDishTypeId(typeId);
+        it.setNeedTopLine(isNeedTopLine);
+        data.add(it);
+//        createPropertiesItem(it);
+//        createExtraItem(it);
+//        createSiglePrivilege(shopCartItem, child);
+//        // 字菜备注
+//        createMemoItem(child,
+//                shopCartItem,
+//                data,
+//                ItemType.CHILD_MEMO,
+//                R.string.order_dish_memo_semicolon);
     }
 
     /**
@@ -2696,6 +2767,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     class UserHolder {
         //用户信息
         TextView user_info;
+        View topLine;
+    }
+
+    class CardServerItemsHolder{
+        TextView tv_dishName;
         View topLine;
     }
 }

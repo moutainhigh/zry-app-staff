@@ -32,6 +32,12 @@ public class ShopcartItem extends ShopcartItemBase<OrderDish> implements IShopca
      */
     private List<SetmealShopcartItem> setmealItems;
 
+    /**
+     * 购买服务可用的子服务
+     * 不可删除，只做展示用
+     */
+    private List<SetmealShopcartItem> serverSetmealItems;
+
     //tradePlanActivity表的uuid
     private String tradePlanUuid;
     /**
@@ -67,7 +73,7 @@ public class ShopcartItem extends ShopcartItemBase<OrderDish> implements IShopca
 
     public ShopcartItem(String uuid, OrderDish orderDish, ItemMetadata metadata) {
         super(uuid, orderDish, null, metadata);
-        if (orderDish.getDishShop().getType() == DishType.COMBO) {
+        if (orderDish.getDishShop().getType() == DishType.COMBO || orderDish.getDishShop().getType() == DishType.SERVER_COMBO_PART || orderDish.getDishShop().getType() == DishType.SERVER_COMBO_ALL) {
             setmealManager = new DishSetmealManager(this);
         } else {
             setmealManager = null;
@@ -133,6 +139,11 @@ public class ShopcartItem extends ShopcartItemBase<OrderDish> implements IShopca
     @Override
     public List<SetmealShopcartItem> getSetmealItems() {
         return setmealItems;
+    }
+
+    @Override
+    public List<? extends ISetmealShopcartItem> getServerItems() {
+        return serverSetmealItems;
     }
 
     @Override
@@ -230,6 +241,14 @@ public class ShopcartItem extends ShopcartItemBase<OrderDish> implements IShopca
         if (setmealShopcartItem != null && setmealShopcartItem instanceof SetmealShopcartItem) {
             setmealItems.add((SetmealShopcartItem) setmealShopcartItem);
         }
+    }
+
+    public List<SetmealShopcartItem> getServerSetmealItems() {
+        return serverSetmealItems;
+    }
+
+    public void setServerSetmealItems(List<SetmealShopcartItem> serverSetmealItems) {
+        this.serverSetmealItems = serverSetmealItems;
     }
 
     @Override

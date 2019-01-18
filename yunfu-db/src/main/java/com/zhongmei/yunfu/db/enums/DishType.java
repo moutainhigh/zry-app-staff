@@ -26,7 +26,17 @@ public enum DishType implements ValueEnum<Integer> {
     /**
      * 实体卡
      */
-    CARD(3),
+    CARD(5),
+
+    /**
+     * 服务次卡套餐(部分)
+     */
+    SERVER_COMBO_PART(3),
+
+    /**
+     * 服务次卡套餐(全部)
+     */
+    SERVER_COMBO_ALL(4),
 
     /**
      * 匿名实体卡售卡

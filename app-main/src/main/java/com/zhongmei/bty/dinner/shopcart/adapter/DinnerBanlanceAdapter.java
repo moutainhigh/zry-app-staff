@@ -266,7 +266,6 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                     }
                 }
                 break;
-
             default:
 //                holder.labelName.setTextAppearance(context, R.style.dinnerLabelUnsave);
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);

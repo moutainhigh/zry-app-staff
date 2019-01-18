@@ -65,8 +65,10 @@ public class CreateItemTool {
         String uuid = SystemUtils.genOnlyIdentifier();
         ShopcartItem shopcartItem = new ShopcartItem(uuid, orderDish);
         // 获取该菜品当前选择数量
-//        BigDecimal increaseUnit = MathDecimal.trimZero(dishVo.getDishShop().getDishIncreaseUnit());
-        BigDecimal increaseUnit = BigDecimal.ONE;
+        BigDecimal increaseUnit = MathDecimal.trimZero(dishVo.getDishShop().getDishIncreaseUnit());
+        if(increaseUnit.compareTo(BigDecimal.ZERO)<=0){
+            increaseUnit=BigDecimal.ONE;
+        }
         shopcartItem.changeQty(increaseUnit);
         // shopcartItem.setTotalQty(increaseUnit);
         // 设置规格属性
@@ -100,6 +102,9 @@ public class CreateItemTool {
         ShopcartItem shopcartItem = new ShopcartItem(uuid, orderDish);
         // 获取该菜品当前选择数量
         BigDecimal increaseUnit = MathDecimal.trimZero(dishVo.getDishShop().getDishIncreaseUnit());
+        if(increaseUnit.compareTo(BigDecimal.ZERO)<=0){
+            increaseUnit=BigDecimal.ONE;
+        }
         shopcartItem.changeQty(increaseUnit);
         // 设置规格属性
         List<OrderProperty> properties = new ArrayList<OrderProperty>();

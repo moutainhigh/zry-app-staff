@@ -21,6 +21,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zhongmei.beauty.utils.BeautyOrderConstants;
+import com.zhongmei.bty.basemodule.orderdish.bean.DishSetmealVo;
 import com.zhongmei.bty.router.RouteIntent;
 import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.yunfu.R;
@@ -36,8 +38,11 @@ import com.zhongmei.bty.basemodule.orderdish.bean.SetmealShopcartItem;
 import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItem;
 import com.zhongmei.bty.basemodule.orderdish.cache.DishCache;
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
+import com.zhongmei.yunfu.db.entity.dish.DishSetmeal;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishUnitDictionary;
+import com.zhongmei.yunfu.db.enums.Bool;
+import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.db.enums.ClearStatus;
 import com.zhongmei.yunfu.db.entity.dish.DishBrandType;
 import com.zhongmei.bty.basemodule.orderdish.event.EventDishChangedNotice;
@@ -59,6 +64,7 @@ import com.zhongmei.yunfu.db.enums.SaleType;
 import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
 import com.zhongmei.yunfu.resp.ResponseListener;
 import com.zhongmei.yunfu.resp.ResponseObject;
+import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.util.UserActionCode;
 import com.zhongmei.yunfu.resp.UserActionEvent;
 import com.zhongmei.yunfu.util.MobclickAgentEvent;
@@ -78,9 +84,12 @@ import com.zhongmei.bty.snack.orderdish.adapter.OrderDishListPagerAdapter;
 import com.zhongmei.bty.snack.orderdish.view.OnCloseListener;
 import com.zhongmei.bty.snack.orderdish.view.QuantityEditPopupWindow;
 import com.zhongmei.bty.snack.orderdish.view.QuantityEditPopupWindow.DataChangeListener;
+import com.zhongmei.yunfu.util.ValueEnums;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -140,6 +149,8 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     private InventoryCacheUtil mInventoryCacheUtil;
 
+    protected BusinessType businessTypeValue = BusinessType.BEAUTY;
+
     protected void assignViews(View view) {
         mMainView = (RelativeLayout) view.findViewById(R.id.mainView);
         mVBrandType = (LinearLayout) view.findViewById(R.id.v_brand_type);
@@ -156,7 +167,16 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         mBtClearDishListShow.setOnClickListener(this);
         mBtnScanCode.setOnClickListener(this);
         mBtnTempDish.setOnClickListener(this);
+
+         int busInteger = getActivity().getIntent().getIntExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE, ValueEnums.toValue(BusinessType.BEAUTY));
+        businessTypeValue=ValueEnums.toEnum(BusinessType.class,busInteger);
     }
+
+    protected boolean isBuyServerBusiness(){
+        return ValueEnums.equalsValue(businessTypeValue,BusinessType.CARD_TIME.value());
+    }
+
+
 
 
     abstract public View getBrandTypeView();
@@ -399,7 +419,9 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             } else {
                 if (dishVo.isCombo()) {// 套餐
                     addUnweighCombo(dishVo);
-                } else {// 直接添加购物车
+                } else if(dishVo.isServerComBoPart()){
+                    addServerComboPart(dishVo);
+                }else {// 直接添加购物车
                     addSingleDish(dishVo);
                 }
             }
@@ -450,6 +472,43 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             bundle.putInt(Constant.EXTRA_LAST_PAGE, ChangePageListener.ORDERDISHLIST);
             bundle.putBoolean(Constant.NONEEDCHECK, true);
             mChangePageListener.changePage(ChangePageListener.DISHCOMBO, bundle);
+        }
+    }
+
+
+    /**
+     * 次卡服务部分
+     * @param dishVo
+     */
+    private void addServerComboPart(DishVo dishVo) {
+        if (mChangePageListener != null) {
+            // 构建一个套餐壳购物车
+            ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
+            shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
+
+            //查询所有的此卡服务子商品
+            List<DishSetmeal> dishSetmeals = DishCache.getSetmealHolder().getDishSetmealByDishId(dishVo.getDishShop().getId());
+
+            if(Utils.isNotEmpty(dishSetmeals)){
+                //添加到购物车
+                List<SetmealShopcartItem> dishChildMeals=new ArrayList<>();
+                for (DishSetmeal dishSetmeal : dishSetmeals) {
+                    DishShop dishShop=DishCache.getDishHolder().get(dishSetmeal.getDishId());
+                    if(dishShop==null){
+                        continue;
+                    }
+
+                    DishSetmealVo setMealVo=new DishSetmealVo(dishShop,dishSetmeal,null);
+
+                    SetmealShopcartItem setmealShopcartItem = CreateItemTool.createSetmealShopcartItem(shopcartItem, setMealVo);
+                    BigDecimal leastCellNum = MathDecimal.trimZero(setMealVo.getSetmeal().getLeastCellNum());
+                    setmealShopcartItem.changeQty(leastCellNum);
+                    dishChildMeals.add(setmealShopcartItem);
+                }
+                shopcartItem.setServerSetmealItems(dishChildMeals);
+            }
+
+            mShoppingCart.addDishToShoppingCart(shopcartItem, false);
         }
     }
 

@@ -199,7 +199,7 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
             Float width = (bookingEndTiime - bookingStartTime) / itemTiem * itemWidth;
 
             Float offsetX = Math.round((bookingStartTime - startTime) / itemTiem) * itemWidth;
-            Float offsetY = technicianIndex * itemHeight;
+            Float offsetY = technicianIndex * itemHeight-technicianIndex;
             reserverItemVo.setHeight(height);
             reserverItemVo.setWidth(width);
             reserverItemVo.setOffsetX(offsetX);

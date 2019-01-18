@@ -34,6 +34,9 @@ import com.zhongmei.yunfu.util.ToastUtil
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager
 import com.zhongmei.yunfu.ui.view.CalmLoadingDialogFragment
 import com.zhongmei.yunfu.bean.YFResponseList
+import com.zhongmei.yunfu.context.util.Utils
+import com.zhongmei.yunfu.db.entity.dish.DishSetmeal
+import com.zhongmei.yunfu.db.entity.dish.DishShop
 import com.zhongmei.yunfu.resp.YFResponseListener
 import kotlinx.android.synthetic.main.beauty_order_membership_card.view.*
 import kotlinx.android.synthetic.main.beauty_order_membership_card_project_title.view.*
@@ -43,15 +46,19 @@ import kotlinx.android.synthetic.main.beauty_order_membership_card_project_title
  *
  * Created by demo on 2018/12/15
  */
-class BeautyCardView : LinearLayout, BeautyCardProjectAdapter.OnProjectItemClickListener, BeautyCardManager.IBeautyCardListener {
+class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, BeautyCardProjectAdapter.OnProjectItemClickListener, BeautyCardManager.IBeautyCardListener {
 
     private var mProjectAdapter: BeautyCardProjectAdapter? = null
+
+    private var mCardAdapter: BeautyCardAdapter?=null
 
     private var mContext: Context
 
     private var mIChangeMiddlePageListener: IChangeMiddlePageListener
 
-    private var mDishShopList = ArrayList<BeautyCardServiceAccount>()
+    private var mDishShopList = ArrayList<DishShop>()
+
+    private var mCardList = ArrayList<BeautyCardServiceInfo>()
 
     private lateinit var mCustomer: CustomerResp
 
@@ -90,9 +97,35 @@ class BeautyCardView : LinearLayout, BeautyCardProjectAdapter.OnProjectItemClick
     private fun setupView() {
         //加载View
         LayoutInflater.from(context).inflate(R.layout.beauty_order_membership_card, this, true)
+        setupCardRecycelerView()
         setupCardProjectRecycelerView()
+        beauty_order_card_list.visibility=View.VISIBLE
+        beauty_order_card_project_list.visibility=View.GONE
     }
 
+    /**
+     * 卡的view
+     */
+    private fun setupCardRecycelerView() {
+        val linearLayoutManager = LinearLayoutManager(mContext)
+        linearLayoutManager.orientation = LinearLayoutManager.VERTICAL
+        linearLayoutManager.isSmoothScrollbarEnabled = true
+        beauty_order_card_list.layoutManager = linearLayoutManager
+        beauty_order_card_list.addItemDecoration(object : RecyclerView.ItemDecoration() {
+            override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State?) {
+                when (parent.getChildAdapterPosition(view)) {
+                    0 -> {
+                        outRect.top = ConvertUtils.dp2px(mContext, 4f)
+                        outRect.bottom = ConvertUtils.dp2px(mContext, 9f)
+                    }// 头部
+                    else -> outRect.bottom = ConvertUtils.dp2px(mContext, 9f)
+                }
+            }
+        })
+        mCardAdapter = BeautyCardAdapter(mContext, mCardList)
+        mCardAdapter!!.setOnItemClickListener(this)
+        beauty_order_card_list.adapter = mCardAdapter
+    }
 
     /**
      * 卡的项目的view
@@ -119,13 +152,45 @@ class BeautyCardView : LinearLayout, BeautyCardProjectAdapter.OnProjectItemClick
         beauty_order_card_project_list.adapter = mProjectAdapter
     }
 
+    override fun onCardItemClickListener(info: BeautyCardServiceInfo?,position: Int) {
+        //展示卡中对应的服务信息，需要从本地数据库中查询
+
+
+        if(Utils.isEmpty(info!!.listDishShops)){
+            ToastUtil.showShortToast("当前服务不可用")
+            return
+        }
+
+        if(info!!.listDishShops.size==1){
+            mCardManager.addDishshopToShopCart(ServerPrivilegeType.COUNT_SERVER, info,info!!.listDishShops!!.get(0), position)
+            return
+        }
+
+        //展示二级UI
+
+        mDishShopList.clear()
+
+        include_empty_status.visibility = View.GONE
+        mDishShopList.addAll(info!!.listDishShops)
+        mProjectAdapter?.setCardInfo(info)
+        mProjectAdapter?.notifyDataSetChanged()
+
+        beauty_order_card_project_list.visibility=View.VISIBLE
+        beauty_order_card_list.visibility=View.GONE
+    }
 
     /**
      * 次卡项目点击事件
      * @param dishShop 项目
      */
-    override fun onProjectClickListener(vo: BeautyCardServiceAccount, position: Int) {
-        mCardManager.addDishshopToShopCart(ServerPrivilegeType.COUNT_SERVER, vo, position)
+    override fun onProjectClickListener(vo: BeautyCardServiceInfo?,dishShop:DishShop?, position: Int) {
+        if(vo==null || dishShop==null){
+            ToastUtil.showShortToast("当前服务不可用")
+            return
+        }
+        mCardManager.addDishshopToShopCart(ServerPrivilegeType.COUNT_SERVER, vo,dishShop, position)
+        beauty_order_card_list.visibility=View.VISIBLE
+        beauty_order_card_project_list.visibility=View.GONE
     }
 
 
@@ -135,15 +200,18 @@ class BeautyCardView : LinearLayout, BeautyCardProjectAdapter.OnProjectItemClick
     fun queryCardByCustomerId(customerId: Long) {
         // FIXME 通过会员id 查询当前会员下的所有卡片，并过滤会员卡, 查询数据库构建商品数据
         showLoadingProgressDialog()
-        mOperates.getCardServiceInfo(Session.getAuthUser().getId(), customerId, object : YFResponseListener<YFResponseList<BeautyCardServiceAccount>> {
-            override fun onResponse(response: YFResponseList<BeautyCardServiceAccount>?) {
+        mOperates.getCardServiceInfo(Session.getAuthUser().getId(), customerId, object : YFResponseListener<YFResponseList<BeautyCardServiceInfo>> {
+            override fun onResponse(response: YFResponseList<BeautyCardServiceInfo>?) {
                 mDishShopList.clear()
                 if (response == null || response!!.content == null || response!!.content.size == 0) {
                     include_empty_status.visibility = View.VISIBLE
                 } else {
                     include_empty_status.visibility = View.GONE
-                    mDishShopList.addAll(response!!.content)
-                    mProjectAdapter?.notifyDataSetChanged()
+                    beauty_order_card_list.visibility=View.VISIBLE
+                    beauty_order_card_project_list.visibility=View.GONE
+                    queryCardServerItems(response!!.content)//初始化卡中子项目的服务
+                    mCardList.addAll(response!!.content)
+                    mCardAdapter?.notifyDataSetChanged()
                 }
                 dismissLoadingProgressDialog()
             }
@@ -152,6 +220,26 @@ class BeautyCardView : LinearLayout, BeautyCardProjectAdapter.OnProjectItemClick
                 dismissLoadingProgressDialog()
             }
         })
+    }
+
+    fun queryCardServerItems(cardInfos:List<BeautyCardServiceInfo>){
+        cardInfos!!.forEach(){ cardInfo ->
+            var  listDishSetmeal=DishCache.getSetmealHolder().getDishSetmealByDishId(cardInfo!!.serviceId)
+
+            if(Utils.isNotEmpty(listDishSetmeal)){
+                listDishSetmeal.forEach(){ dishSetmeal ->
+                    var dishShop:DishShop?=DishCache.getDishHolder().get(dishSetmeal.childDishId)
+                    if(dishShop!=null){
+                        cardInfo.listDishShops.add(dishShop)
+                    }
+                }
+            } else {
+                var dishShops = DishCache.getDishHolder().all
+                cardInfo.listDishShops.addAll(dishShops)
+            }
+
+        }
+
     }
 
 
@@ -171,11 +259,11 @@ class BeautyCardView : LinearLayout, BeautyCardProjectAdapter.OnProjectItemClick
 
 
     override fun onRemoveCartCallBack() {
-        mProjectAdapter!!.notifyDataSetChanged()
+        mCardAdapter!!.notifyDataSetChanged()
     }
 
     override fun onAddCartCallBack(position: Int) {
-        mProjectAdapter!!.notifyItemChanged(position)
+        mCardAdapter!!.notifyItemChanged(position)
     }
 }
 

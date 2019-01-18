@@ -79,6 +79,10 @@ public class DishAndStandards {
         return dishShop.getType() == DishType.COMBO;
     }
 
+    public boolean isServerComboPart(){
+        return dishShop.getType()==DishType.SERVER_COMBO_PART;
+    }
+
     /**
      * 是否可以修改单价
      *

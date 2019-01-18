@@ -1237,6 +1237,7 @@ public class DishCache {
         private Map<String, DishSetmeal> keySetmealMap;
         protected Map<Long, DishSetmeal> dishExtraMap;
         protected Map<String, DishSetmeal> keyDishExtraMap;
+        protected  Map<Long,List<DishSetmeal>> mapDishSetmealByDishId;
 
         DishSetmealHolder() {
             super(DishSetmeal.class);
@@ -1245,6 +1246,13 @@ public class DishCache {
         public DishSetmeal get(Long comboDishId, Long childDishId, Long setmealGroupId) {
             String key = toKey(comboDishId, childDishId, setmealGroupId);
             return keySetmealMap.get(key);
+        }
+
+        public List<DishSetmeal> getDishSetmealByDishId(Long dishId){
+                if(mapDishSetmealByDishId==null){
+                    return null;
+                }
+                return mapDishSetmealByDishId.get(dishId);
         }
 
         @Override
@@ -1272,6 +1280,7 @@ public class DishCache {
         @Override
         protected Map<Long, DishSetmeal> cache(List<DishSetmeal> list) {
             Map<Long, DishSetmeal> setmeals = new LinkedHashMap<Long, DishSetmeal>();
+            Map<Long, List<DishSetmeal>> dishSetmealByDishId = new LinkedHashMap<Long, List<DishSetmeal>>();
             Map<Long, DishSetmeal> dishExtras = new LinkedHashMap<Long, DishSetmeal>();
             Map<String, DishSetmeal> keySetmeals = new HashMap<String, DishSetmeal>();
             Map<String, DishSetmeal> keyDishExtras = new HashMap<String, DishSetmeal>();
@@ -1284,10 +1293,16 @@ public class DishCache {
                     cacheEntity(dishExtras, entity);
                     keyDishExtras.put(key, entity);
                 }
+
+                if(!dishSetmealByDishId.containsKey(entity.getDishId())){
+                    dishSetmealByDishId.put(entity.getDishId(),new ArrayList<DishSetmeal>());
+                }
+                dishSetmealByDishId.get(entity.getDishId()).add(entity);
             }
             this.dishExtraMap = dishExtras;
             this.keySetmealMap = keySetmeals;
             this.keyDishExtraMap = keyDishExtras;
+            this.mapDishSetmealByDishId=dishSetmealByDishId;
             return setmeals;
         }
 

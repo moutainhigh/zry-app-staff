@@ -16,6 +16,8 @@ public interface IShopcartItem extends IShopcartItemBase {
 
     List<? extends ISetmealShopcartItem> getSetmealItems();
 
+    List<? extends ISetmealShopcartItem> getServerItems();
+
     DishSetmealManager getSetmealManager();
 
     boolean hasSetmeal();

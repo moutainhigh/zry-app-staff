@@ -26,12 +26,19 @@
         android:paddingLeft="13dp"
         android:paddingRight="13dp">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/beauty_order_card_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/write"
+            android:scrollbars="none" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/beauty_order_card_project_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/write"
+            android:visibility="gone"
             android:scrollbars="none" />
 
         <include

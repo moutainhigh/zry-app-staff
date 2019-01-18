@@ -1,5 +1,8 @@
 package com.zhongmei.bty.basemodule.beauty;
 
+import com.zhongmei.yunfu.db.entity.dish.DishShop;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,44 +12,38 @@ import java.util.List;
  */
 public class BeautyCardServiceInfo {
 
+    public Long brandIdenty;
     /**
      * 次卡id
      */
     public Long cardInstanceId;
     /**
-     * 卡号
+     * 服务id = brand_dish_id
      */
-    public String cardNo;
+    public Long serviceId;
     /**
-     * 卡名称
+     * 服务名
      */
-    public String cardName;
+    public String serviceName;
     /**
-     * 有效期起始日期
+     * 服务总次数
      */
-    public Long validStartDay;
+    public Integer serviceTotalTime;
     /**
-     * 有效期结束日期
+     * 服务剩余次数
      */
-    public Long validEndDay;
+    public Integer serviceRemainderTime;
+
+
+    public List<DishShop> listDishShops=new ArrayList<>();
+
+    public Long validTime;
 
     /**
-     * 单卡所有服务总次数
+     * 是否过期
+     * @return true 过期  false 未过期
      */
-    public Integer allTimes;
-
-    /**
-     * 单卡所有服务总剩余次数
-     */
-    public Integer remainderTimes;
-
-    /**
-     * 是否已过期
-     */
-    public Integer rightStatus;
-
-    /**
-     * 次卡服务列表
-     */
-    public List<BeautyCardServiceAccount> cardServiceAccountList;
+    public boolean isOutTime(){
+        return false;
+    }
 }

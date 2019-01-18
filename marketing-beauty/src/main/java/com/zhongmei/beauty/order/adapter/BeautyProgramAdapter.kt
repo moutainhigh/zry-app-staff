@@ -44,7 +44,8 @@ class BeautyProgramAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
         var program: BeautyAcitivityBuyRecordResp = mProgramList!![position]
-        holder!!.itemView.tv_title.setText(program.dishName)
+        holder!!.itemView.tv_title.setText(program.marketingName)
+        holder!!.itemView.tv_projects.setText("可用项目："+program.dishName)
         holder!!.itemView.tv_content.setText("有效期：" + DateUtil.formatDate(program.validityPeriod))
         holder!!.itemView.ll_content.setOnClickListener {
             //combo:100615734186551296 sigle:107161226020891648
@@ -56,9 +57,9 @@ class BeautyProgramAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
             notifyDataSetChanged()
         }
 
-        holder!!.itemView.btn_more.setOnClickListener {
-            showDetailDialog(program)
-        }
+//        holder!!.itemView.btn_more.setOnClickListener {
+//            showDetailDialog(program)
+//        }
 
         if (program.isUsed) {
             holder!!.itemView.tv_use.text = mContext.resources.getString(R.string.beauty_used)

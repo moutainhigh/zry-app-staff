@@ -102,6 +102,10 @@ public class DishVo {
         return dish.isCombo();
     }
 
+    public boolean isServerComBoPart(){
+        return dish.isServerComboPart();
+    }
+
     public boolean isChangePrice() {
         return dish.getIsChangePrice() == Bool.YES;
     }

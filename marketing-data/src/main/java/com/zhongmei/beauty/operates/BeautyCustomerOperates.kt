@@ -5,6 +5,7 @@ import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp
 import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp
 import com.zhongmei.beauty.operates.message.BeautyCardServiceHistoryResp
 import com.zhongmei.beauty.operates.message.BeautyCardServiceResp
+import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo
 import com.zhongmei.bty.commonmodule.data.operate.IOperates
 import com.zhongmei.yunfu.bean.YFResponseList
 import com.zhongmei.yunfu.resp.ResponseListener
@@ -35,7 +36,7 @@ interface BeautyCustomerOperates : IOperates {
     /**
      * 获取次卡服务
      */
-    fun getCardServiceInfo(userId: Long, customerId: Long, listener: YFResponseListener<YFResponseList<BeautyCardServiceAccount>>)
+    fun getCardServiceInfo(userId: Long, customerId: Long, listener: YFResponseListener<YFResponseList<BeautyCardServiceInfo>>)
 
     /**
      * 获取顾客消费记录

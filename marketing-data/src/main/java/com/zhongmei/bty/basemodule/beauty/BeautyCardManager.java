@@ -82,12 +82,7 @@ public class BeautyCardManager {
     /**
      * 添加商品到购物车
      */
-    public void addDishshopToShopCart(ServerPrivilegeType privilegeType, BeautyCardServiceAccount vo, int position) {
-        DishShop dishShop = DishCache.getDishHolder().get(vo.serviceId);
-        if (dishShop == null) {
-            ToastUtil.showShortToast("当前菜品不存在");
-            return;
-        }
+    public void addDishshopToShopCart(ServerPrivilegeType privilegeType, BeautyCardServiceInfo vo,DishShop dishShop, int position) {
 
         if (privilegeType != null && dishShop != null) {
             HashMap<Long, Integer> numMap;

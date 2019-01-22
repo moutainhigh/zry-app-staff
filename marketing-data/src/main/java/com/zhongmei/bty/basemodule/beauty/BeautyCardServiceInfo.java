@@ -37,7 +37,10 @@ public class BeautyCardServiceInfo {
 
     public List<DishShop> listDishShops=new ArrayList<>();
 
-    public Long validTime;
+    public Long cardExpireDate;
+
+    public Integer cardType;//3部分，4全部
+
 
     /**
      * 是否过期

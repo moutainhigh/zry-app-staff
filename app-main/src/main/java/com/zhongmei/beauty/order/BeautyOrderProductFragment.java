@@ -32,7 +32,7 @@ public class BeautyOrderProductFragment extends DishHomePageFragment {
 
             @Override
             public void doItemLongClick(DishVo dishVo) {
-                myGridItemLongClicked(dishVo);
+//                myGridItemLongClicked(dishVo);
             }
 
         };

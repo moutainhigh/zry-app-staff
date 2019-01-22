@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.LinearLayout
+import android.widget.Switch
 import com.zhongmei.yunfu.R
 import com.zhongmei.bty.basemodule.beauty.BeautyCardManager
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount
@@ -37,6 +38,8 @@ import com.zhongmei.yunfu.bean.YFResponseList
 import com.zhongmei.yunfu.context.util.Utils
 import com.zhongmei.yunfu.db.entity.dish.DishSetmeal
 import com.zhongmei.yunfu.db.entity.dish.DishShop
+import com.zhongmei.yunfu.db.enums.Bool
+import com.zhongmei.yunfu.db.enums.DishType
 import com.zhongmei.yunfu.resp.YFResponseListener
 import kotlinx.android.synthetic.main.beauty_order_membership_card.view.*
 import kotlinx.android.synthetic.main.beauty_order_membership_card_project_title.view.*
@@ -50,7 +53,7 @@ class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, Beau
 
     private var mProjectAdapter: BeautyCardProjectAdapter? = null
 
-    private var mCardAdapter: BeautyCardAdapter?=null
+    private var mCardAdapter: BeautyCardAdapter? = null
 
     private var mContext: Context
 
@@ -99,8 +102,8 @@ class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, Beau
         LayoutInflater.from(context).inflate(R.layout.beauty_order_membership_card, this, true)
         setupCardRecycelerView()
         setupCardProjectRecycelerView()
-        beauty_order_card_list.visibility=View.VISIBLE
-        beauty_order_card_project_list.visibility=View.GONE
+        beauty_order_card_list.visibility = View.VISIBLE
+        beauty_order_card_project_list.visibility = View.GONE
     }
 
     /**
@@ -152,17 +155,16 @@ class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, Beau
         beauty_order_card_project_list.adapter = mProjectAdapter
     }
 
-    override fun onCardItemClickListener(info: BeautyCardServiceInfo?,position: Int) {
+    override fun onCardItemClickListener(info: BeautyCardServiceInfo?, position: Int) {
         //展示卡中对应的服务信息，需要从本地数据库中查询
 
-
-        if(Utils.isEmpty(info!!.listDishShops)){
+        if (Utils.isEmpty(info!!.listDishShops)) {
             ToastUtil.showShortToast("当前服务不可用")
             return
         }
 
-        if(info!!.listDishShops.size==1){
-            mCardManager.addDishshopToShopCart(ServerPrivilegeType.COUNT_SERVER, info,info!!.listDishShops!!.get(0), position)
+        if (info!!.listDishShops.size == 1) {
+            mCardManager.addDishshopToShopCart(ServerPrivilegeType.COUNT_SERVER, info, info!!.listDishShops!!.get(0), position)
             return
         }
 
@@ -172,25 +174,25 @@ class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, Beau
 
         include_empty_status.visibility = View.GONE
         mDishShopList.addAll(info!!.listDishShops)
-        mProjectAdapter?.setCardInfo(info,position)
+        mProjectAdapter?.setCardInfo(info, position)
         mProjectAdapter?.notifyDataSetChanged()
 
-        beauty_order_card_project_list.visibility=View.VISIBLE
-        beauty_order_card_list.visibility=View.GONE
+        beauty_order_card_project_list.visibility = View.VISIBLE
+        beauty_order_card_list.visibility = View.GONE
     }
 
     /**
      * 次卡项目点击事件
      * @param dishShop 项目
      */
-    override fun onProjectClickListener(vo: BeautyCardServiceInfo?,dishShop:DishShop?, position: Int) {
-        if(vo==null || dishShop==null){
+    override fun onProjectClickListener(vo: BeautyCardServiceInfo?, dishShop: DishShop?, position: Int) {
+        if (vo == null || dishShop == null) {
             ToastUtil.showShortToast("当前服务不可用")
             return
         }
-        mCardManager.addDishshopToShopCart(ServerPrivilegeType.COUNT_SERVER, vo,dishShop, position)
-        beauty_order_card_list.visibility=View.VISIBLE
-        beauty_order_card_project_list.visibility=View.GONE
+        mCardManager.addDishshopToShopCart(ServerPrivilegeType.COUNT_SERVER, vo, dishShop, position)
+        beauty_order_card_list.visibility = View.VISIBLE
+        beauty_order_card_project_list.visibility = View.GONE
     }
 
 
@@ -207,8 +209,8 @@ class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, Beau
                     include_empty_status.visibility = View.VISIBLE
                 } else {
                     include_empty_status.visibility = View.GONE
-                    beauty_order_card_list.visibility=View.VISIBLE
-                    beauty_order_card_project_list.visibility=View.GONE
+                    beauty_order_card_list.visibility = View.VISIBLE
+                    beauty_order_card_project_list.visibility = View.GONE
                     queryCardServerItems(response!!.content)//初始化卡中子项目的服务
                     mCardList.addAll(response!!.content)
                     mCardAdapter?.notifyDataSetChanged()
@@ -222,22 +224,35 @@ class BeautyCardView : LinearLayout, BeautyCardAdapter.OnItemClickListener, Beau
         })
     }
 
-    fun queryCardServerItems(cardInfos:List<BeautyCardServiceInfo>){
-        cardInfos!!.forEach(){ cardInfo ->
-            var  listDishSetmeal=DishCache.getSetmealHolder().getDishSetmealByDishId(cardInfo!!.serviceId)
+    fun queryCardServerItems(cardInfos: List<BeautyCardServiceInfo>) {
+        cardInfos!!.forEach() { cardInfo ->
 
-            if(Utils.isNotEmpty(listDishSetmeal)){
-                listDishSetmeal.forEach(){ dishSetmeal ->
-                    var dishShop:DishShop?=DishCache.getDishHolder().get(dishSetmeal.childDishId)
-                    if(dishShop!=null){
-                        cardInfo.listDishShops.add(dishShop)
+            when (cardInfo.cardType) {
+                DishType.SERVER_COMBO_PART.value() -> {
+                    var listDishSetmeal = DishCache.getSetmealHolder().getDishSetmealByDishId(cardInfo!!.serviceId)
+                    listDishSetmeal!!.forEach() { dishSetmeal ->
+                        var dishShop: DishShop? = DishCache.getDishHolder().get(dishSetmeal.childDishId)
+                        if (dishShop != null) {
+                            cardInfo.listDishShops.add(dishShop)
+                        }
                     }
                 }
-            } else {
-                var dishShops = DishCache.getDishHolder().all
-                cardInfo.listDishShops.addAll(dishShops)
-            }
 
+
+                DishType.SERVER_COMBO_ALL.value() -> {
+                    var dishShops = DishCache.getDishHolder().filter(DishCache.DataFilter<DishShop> { entity ->
+                        // 排除不能单点的
+                        if (entity.type == DishType.SERVER_COMBO_PART || entity.type == DishType.SERVER_COMBO_ALL) {
+                            return@DataFilter false
+                        }
+
+                        true
+                    })
+
+                    cardInfo.listDishShops.addAll(dishShops);
+                }
+
+            }
         }
 
     }

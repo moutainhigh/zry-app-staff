@@ -12,11 +12,10 @@ import android.widget.TextView;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardManager;
 import com.zhongmei.bty.commonmodule.database.enums.ServerPrivilegeType;
 import com.zhongmei.yunfu.R;
-import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
-import com.zhongmei.bty.commonmodule.database.enums.CardRechagingStatus;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
+import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.yunfu.util.ToastUtil;
 
@@ -86,8 +85,8 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
 
             viewHolder.surplusCount.setText(String.format(mContext.getString(R.string.beauty_card_service_surplus_count), getServiceSurplusCount(info)));
         }
-        String str = "";
-        if (info.listDishShops != null) {
+        String str = mContext.getString(R.string.beauty_card_service_projects_label)+"无";
+        if (Utils.isNotEmpty(info.listDishShops)) {
             str = mContext.getString(R.string.beauty_card_service_projects_label);
             for (int i = 0; i < info.listDishShops.size(); i++) {
                 DishShop dishShop = info.listDishShops.get(i);
@@ -99,7 +98,7 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
             }
         }
         viewHolder.projects.setText(str);
-        viewHolder.validityTime.setText(formatTime(info.validTime));
+        viewHolder.validityTime.setText(formatTime(info.cardExpireDate));
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -748,6 +748,9 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         if (mLoadingFinish != null)
             mLoadingFinish.loadingFinish();
 
+
+        mVBrandType.setVisibility(isBuyServerBusiness()?View.GONE:View.VISIBLE);//如果是购买服务，不显示种类选择框
+
         UserActionEvent.end(UserActionEvent.DINNER_DISH_DISPLAY);
     }
 

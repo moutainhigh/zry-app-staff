@@ -80,7 +80,7 @@ public class DishAndStandards {
     }
 
     public boolean isServerComboPart(){
-        return dishShop.getType()==DishType.SERVER_COMBO_PART;
+        return dishShop.getType()==DishType.SERVER_COMBO_PART ||dishShop.getType()==DishType.SERVER_COMBO_ALL;
     }
 
     /**

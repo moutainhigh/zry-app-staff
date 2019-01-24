@@ -355,10 +355,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         int type = getItemViewType(position);
         switch (type) {
             case CARD_SERVICE_ITEM:
-                if (convertView == null || convertView.getTag(R.id.dishView) == null) {
+                if (convertView == null || convertView.getTag(R.id.layout_card_server_item) == null) {
                     cardServerItemsHolder = new CardServerItemsHolder();
                     convertView = initcardServerItemsView(LayoutInflater.from(context),cardServerItemsHolder);
-                    convertView.setTag(R.id.layout_card_server_item, holder);
+                    convertView.setTag(R.id.layout_card_server_item, cardServerItemsHolder);
                 } else {
                     cardServerItemsHolder = (CardServerItemsHolder) convertView.getTag(R.id.layout_card_server_item);
                 }
@@ -1478,7 +1478,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             IShopcartItem shopCartItem = dataList.get(i);
             DishDataItem item = null;
             // 如果子菜不为空，就算套餐外壳
-            if (Utils.isNotEmpty(shopCartItem.getSetmealItems()) || Utils.isNotEmpty(shopCartItem.getServerItems())) {
+            if (Utils.isNotEmpty(shopCartItem.getSetmealItems()) || isServerDishShop(shopCartItem)) {
                 item = new DishDataItem(ItemType.COMBO);// 套餐外壳
                 item.setBase(shopCartItem);
                 item.setItem(shopCartItem);
@@ -1509,7 +1509,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     it.setName("所有商品可用");
                     it.setDishTypeId(null);
                     it.setNeedTopLine(true);
-                    data.add(it);
+                    this.data.add(it);
                 }
                 if(shopCartItem.getType()==DishType.SERVER_COMBO_PART && Utils.isNotEmpty(shopCartItem.getServerItems())){
                     //部分商品可用
@@ -1539,6 +1539,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             }
         }
         return comboAndSingleItems;
+    }
+
+
+    private boolean isServerDishShop(IShopcartItem shopCartItem){
+        return shopCartItem.getType()==DishType.SERVER_COMBO_PART || shopCartItem.getType()==DishType.SERVER_COMBO_ALL;
     }
 
     /**

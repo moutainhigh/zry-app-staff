@@ -1084,6 +1084,8 @@ public class DishCache {
                     DishShop.$.dishQty,
                     DishShop.$.boxQty,
                     DishShop.$.weight,
+                    DishShop.$.minNum,
+                    DishShop.$.maxNum,
                     DishShop.$.wmType);
             qb.where().eq(DishShop.$.statusFlag, StatusFlag.VALID).and().ne(DishShop.$.type, DishType.CARD);
 //			.and().ne(DishShop.$.dishCode,TEMPDISHCODE)

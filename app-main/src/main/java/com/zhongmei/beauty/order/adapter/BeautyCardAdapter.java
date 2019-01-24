@@ -83,7 +83,7 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
             viewHolder.projects.setTextColor(mContext.getResources().getColor(R.color.beauty_color_white));
             viewHolder.validityTime.setTextColor(Color.parseColor("#CCFFFFFF"));
 
-            viewHolder.surplusCount.setText(String.format(mContext.getString(R.string.beauty_card_service_surplus_count), getServiceSurplusCount(info)));
+            viewHolder.surplusCount.setText(getServiceSurplusCount(info));
         }
         String str = mContext.getString(R.string.beauty_card_service_projects_label)+"无";
         if (Utils.isNotEmpty(info.listDishShops)) {
@@ -135,13 +135,19 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
     }
 
     private boolean inspectServiceCount(BeautyCardServiceInfo vo) {
-        int count = vo.serviceRemainderTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
+        if(vo.serviceTotalTime==-1){
+            return true;
+        }
+        int count = vo.serviceTotalTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
         return count > 0;
     }
 
-    private int getServiceSurplusCount(BeautyCardServiceInfo vo) {
-        int remainderCount = vo.serviceRemainderTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
-        return remainderCount;
+    private String getServiceSurplusCount(BeautyCardServiceInfo vo) {
+        if(vo.serviceTotalTime==-1){
+            return "无限次数";
+        }
+        int remainderCount = vo.serviceTotalTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
+        return String.format(mContext.getString(R.string.beauty_card_service_surplus_count), remainderCount);
     }
 
     /**

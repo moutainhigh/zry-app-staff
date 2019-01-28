@@ -37,6 +37,7 @@
     <string name="beauty_card_service_count_label">次/</string>
     <string name="beauty_card_service_count_label2">次</string>
     <string name="beauty_card_service_surplus_count">剩余%1$d次</string>
+    <string name="beauty_card_service_surplus_count_unlimited">无限次数</string>
     <string name="beauty_card_service_surplus_projects">剩余：</string>
     <string name="beauty_card_service_projects_label">项目：</string>
     <string name="beauty_card_service_all_count">可用%1$d次</string>

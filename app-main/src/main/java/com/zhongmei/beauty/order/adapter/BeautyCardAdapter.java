@@ -143,11 +143,11 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
     }
 
     private String getServiceSurplusCount(BeautyCardServiceInfo vo) {
-        if(vo.serviceTotalTime==-1){
+        if(vo.serviceTotalTime==-1 || vo.serviceRemainderTime == -1){
             return "无限次数";
         }
-        int remainderCount = vo.serviceTotalTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
-        return String.format(mContext.getString(R.string.beauty_card_service_surplus_count), remainderCount);
+        //int remainderCount = vo.serviceTotalTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
+        return String.format(mContext.getString(R.string.beauty_card_service_surplus_count), vo.serviceRemainderTime);
     }
 
     /**

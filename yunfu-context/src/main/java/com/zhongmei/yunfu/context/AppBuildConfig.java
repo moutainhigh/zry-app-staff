@@ -8,24 +8,12 @@ import java.lang.reflect.Field;
 
 public final class AppBuildConfig {
 
-    public static class BuildType {
-        public static final int RELEASE = 0;
-        public static final int DEVELOP = 1;
-        public static final int DEBUG = 2;
-        public static final int GLDERP = 3;
-        public static final int CI = 4;
-        public static final int SINGAPORE = 5;
-    }
-
     public static boolean DEBUG = Boolean.parseBoolean("true");
     public static String BUILD_TYPE = "debug";
     public static int VERSION_CODE = -1;
     public static String VERSION_NAME = "";
     public static int MY_BUILD_TYPE = 0;
     public static boolean ALLOW_COMPRESS = false;
-    public static Boolean OFFLINE_SUPPORT = false;
-    public static final boolean CUSTOMIZATION_TICKET_SYSTEM = true;
-    public static final boolean INNER_AD_MODULE = true;
 
     public static void init(Class<?> buildConfigClass) {
         Field[] fields = buildConfigClass.getDeclaredFields();

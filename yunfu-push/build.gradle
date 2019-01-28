@@ -36,9 +36,9 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     //添加单元测试
-    testCompile androidsdk.junit
-    //testCompile androidsdk.mockito
-    androidTestCompile(androidsdk.testEspressoCore, {
+    testCompile sdk.junit
+    //testCompile sdk.mockito
+    androidTestCompile(sdk.testEspressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }

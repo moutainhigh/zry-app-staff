@@ -1094,7 +1094,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void modifyDinner(TradeVo tradeVo, boolean isUpdate, ResponseListener<TradeResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().newTradeModifyDinner();
+        /*String url = ServerAddressUtil.getInstance().newTradeModifyDinner();
         if (isUpdate) {
             tradeVo.getTrade().validateUpdate();
         }
@@ -1112,7 +1112,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             AsyncNetworkManager.getInstance().addRequest(tradeVo, AsyncHttpType.MODIFYTRADE, executor, listener, "tradeModifyDinner");
         } else {
             executor.execute(listener, "tradeModifyDinner");
-        }
+        }*/
     }
 
     @Override
@@ -1122,7 +1122,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void modifyBuffet(TradeVo tradeVo, boolean isUpdate, ResponseListener<TradeResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().tradeModifyBuffet();
+        /*String url = ServerAddressUtil.getInstance().tradeModifyBuffet();
         if (isUpdate) {
             tradeVo.getTrade().validateUpdate();
         }
@@ -1144,7 +1144,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             AsyncNetworkManager.getInstance().addRequest(tradeVo, AsyncHttpType.MODIFYTRADE, executor, listener, "tradeModifyDinner");
         } else {
             executor.execute(listener, "tradeModifyBuffet");
-        }
+        }*/
     }
 
     @Override
@@ -3320,7 +3320,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void dinnerSetTableAndAccept(TradeVo tradeVo, Tables table, Bool genBatchNo, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().dinnerSetTableAndAccept();
+        /*String url = ServerAddressUtil.getInstance().dinnerSetTableAndAccept();
 
         Trade trade = tradeVo.getTrade();
         TradeExtra tradeExtra = tradeVo.getTradeExtra();
@@ -3364,13 +3364,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor(false))
-                .execute(listener, "dinnerSetTableAndAccept");
+                .execute(listener, "dinnerSetTableAndAccept");*/
     }
 
     @Override
     public void modifyPrintStatus(List<TradeItem> tradeItems, List<PrintOperation> printOperations,
                                   List<TradeItemOperation> tradeItemOperations, ResponseListener<TradeItemResp> listener) {
-        String url = ServerAddressUtil.getInstance().modifyPrintStatus();
+        /*String url = ServerAddressUtil.getInstance().modifyPrintStatus();
         ModifyTradeItemPrintStatusReq req =
                 new ModifyTradeItemPrintStatusReq(tradeItems, printOperations, tradeItemOperations);
         OpsRequest.Executor<ModifyTradeItemPrintStatusReq, TradeItemResp> executor = OpsRequest.Executor.create(url);
@@ -3378,7 +3378,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TradeItemResp.class)
                 .responseProcessor(new TradeItemRespProcessor())
                 .timeout(20000)//超时改为20秒 add 20170515
-                .execute(listener, "modifyPrintStatus");
+                .execute(listener, "modifyPrintStatus");*/
     }
 
     @Override

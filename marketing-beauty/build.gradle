@@ -36,19 +36,19 @@ repositories {
 }
 
 dependencies {
-    compile third.AAapi
-    apt third.AA
+    compile opensdk.AAapi
+    apt opensdk.AA
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':marketing-data')
     compile project(':yunfu-ui')
     compile project(':marketing-basemodule')
     compile project(':yunfu-context')
     compile project(':marketing-mobilepay')
-    compile androidsdk.supportV4
-    compile third.swipeToLoadLayout
-    compile third.kotlinStdlibJDK
-    testCompile androidsdk.junit
-    androidTestCompile(androidsdk.testEspressoCore, {
+    compile sdk.supportV4
+    compile opensdk.swipeToLoadLayout
+    compile opensdk.kotlinStdlibJDK
+    testCompile sdk.junit
+    androidTestCompile(sdk.testEspressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 

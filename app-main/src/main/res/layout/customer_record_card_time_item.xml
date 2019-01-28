@@ -8,53 +8,46 @@
         android:id="@+id/v_main_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/beauty_grid_item_selector">
+        android:background="@drawable/beauty_order_card_mark"
+        android:paddingLeft="13dp"
+        android:paddingTop="10dp"
+        android:paddingRight="13dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/tv_name"
+            style="@style/beauty.order.membership.item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:maxLength="4"
             android:maxLines="1"
-            android:paddingLeft="13dp"
             android:paddingTop="0dp"
-            android:textColor="@color/beauty_color_434343"
-            android:textSize="@dimen/text_15"
             android:textStyle="bold"
             tools:text="回锅肉" />
 
-
         <TextView
-            android:id="@+id/tv_all_num"
+            android:id="@+id/tv_usable_num"
+            style="@style/beauty.order.membership.item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="9dp"
-            android:layout_marginLeft="13dp"
-            android:layout_marginTop="10dp"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:paddingRight="18dp"
-            android:textColor="@color/beauty_color_434343"
-            android:textSize="@dimen/text_15"
             android:textStyle="bold"
-            tools:text="共0次" />
+            tools:text="剩余0/100次" />
 
         <TextView
-            android:id="@+id/tv_usable_num"
+            android:id="@+id/tv_expired_date"
+            style="@style/beauty.order.membership.item_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_below="@id/tv_name"
-            android:layout_marginLeft="13dp"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="9dp"
             android:includeFontPadding="false"
             android:maxLines="1"
-            android:paddingBottom="13dp"
-            android:textColor="@color/beauty_color_FF666666"
-            android:textSize="@dimen/text_12"
-            tools:text="剩余0次" />
+            tools:text="有效期: %s" />
 
     </RelativeLayout>
 </RelativeLayout>

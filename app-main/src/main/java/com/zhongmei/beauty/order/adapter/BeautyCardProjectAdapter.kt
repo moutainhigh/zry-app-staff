@@ -104,7 +104,7 @@ class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<Dis
         }
     }
 
-    fun inspectServiceCount(vo: BeautyCardServiceAccount): Boolean {
+    /*fun inspectServiceCount(vo: BeautyCardServiceAccount): Boolean {
         var count = vo.serviceRemainderTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId)
         return count > 0;
     }
@@ -112,5 +112,5 @@ class BeautyCardProjectAdapter(val mContext: Context, val mData: MutableList<Dis
     fun getServiceSurplusCount(vo: BeautyCardServiceAccount): String {
         var remainderCount = vo.serviceRemainderTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId)
         return String.format(this@BeautyCardProjectAdapter.mContext.resources.getString(R.string.beauty_card_service_surplus_count), remainderCount)
-    }
+    }*/
 }

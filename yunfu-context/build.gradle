@@ -31,12 +31,12 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile androidsdk.supportV4
-    compile third.zxing
+    compile sdk.supportV4
+    compile opensdk.zxing
     compile "com.github.bumptech.glide:glide:3.8.0"
-    testCompile androidsdk.junit
-    //testCompile androidsdk.mockito
-    androidTestCompile(androidsdk.testEspressoCore, {
+    testCompile sdk.junit
+    //testCompile sdk.mockito
+    androidTestCompile(sdk.testEspressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 

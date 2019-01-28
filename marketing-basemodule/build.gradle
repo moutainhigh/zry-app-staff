@@ -46,33 +46,25 @@ repositories {
 }
 
 dependencies {
-    compile third.AAapi
-    apt third.AA
+    compile opensdk.AAapi
+    apt opensdk.AA
     compile fileTree(include: '*.jar', dir: 'libs')
     compile project(':marketing-common')
     compile project(':marketing-data')
-    compile third.ormlite
+    compile sdk.recyclerview
+    compile opensdk.ormlite
 
     //添加单元测试
-    testCompile androidsdk.junit
-    //testCompile androidsdk.mockito
-    androidTestCompile(androidsdk.testEspressoCore) {
+    testCompile sdk.junit
+    //testCompile sdk.mockito
+    androidTestCompile sdk.testRules
+    androidTestCompile(sdk.testEspressoCore) {
         exclude group: 'com.android.support', module: 'support-annotations'
         transitive true
     }
-    androidTestCompile(androidsdk.testRunner) {
+    androidTestCompile(sdk.testRunner) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestCompile androidsdk.testRules
-    //compile files('libs/shiro-core-1.2.4.jar')
-    //compile files('libs/calm_lib.jar')
-    //compile files('libs/wdReadLib v1.1.jar')
-
-    //compile files('libs/dewoserialport_SDK2.1.jar')
-    compile androidsdk.recyclerview
-    //compile calmsdk.posNanoServer
-
-    //compile files('libs/stickygridheaders.jar')
 }
 
 apt {

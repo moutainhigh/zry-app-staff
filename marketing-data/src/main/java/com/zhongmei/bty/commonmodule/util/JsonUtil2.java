@@ -1,4 +1,4 @@
-package com.zhongmei.bty.baseservice.util;
+package com.zhongmei.bty.commonmodule.util;
 
 import com.google.gson.Gson;
 

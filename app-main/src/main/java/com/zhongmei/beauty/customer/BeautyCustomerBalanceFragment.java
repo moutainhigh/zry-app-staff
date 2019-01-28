@@ -23,6 +23,7 @@ import com.zhongmei.beauty.operates.BeautyCustomerOperates;
 import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount;
+import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo;
 import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
 import com.zhongmei.bty.basemodule.commonbusiness.utils.ServerAddressUtil;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp;
@@ -1016,10 +1017,10 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
 
     private void getCardTimeRecord() {
         if (mCustomer != null) {
-            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponseList<BeautyCardServiceAccount>>() {
+            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponseList<BeautyCardServiceInfo>>() {
 
                 @Override
-                public void onResponse(YFResponseList<BeautyCardServiceAccount> response) {
+                public void onResponse(YFResponseList<BeautyCardServiceInfo> response) {
                     if (YFResponseList.isOk(response)) {
                         cardTimeRecordAdapter = new CustomerCardTimeRecordAdapter(getActivity(), response.getContent());
                         gridView.setAdapter(cardTimeRecordAdapter);

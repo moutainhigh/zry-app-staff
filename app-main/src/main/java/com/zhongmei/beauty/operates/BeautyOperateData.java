@@ -1,19 +1,125 @@
 package com.zhongmei.beauty.operates;
 
+import com.zhongmei.bty.basemodule.async.operates.AsyncDal;
+import com.zhongmei.bty.basemodule.auth.permission.operates.AuthLogDal;
+import com.zhongmei.bty.basemodule.booking.operates.BookingDal;
+import com.zhongmei.bty.basemodule.booking.operates.BookingOperates;
+import com.zhongmei.bty.basemodule.commonbusiness.operates.PrepareTradeRelationDal;
+import com.zhongmei.bty.basemodule.commonbusiness.operates.ReasonDal;
+import com.zhongmei.bty.basemodule.commonbusiness.operates.ReasonDalImpl;
+import com.zhongmei.bty.basemodule.commonbusiness.operates.SystemSettingDal;
+import com.zhongmei.bty.basemodule.customer.operates.CouponDal;
+import com.zhongmei.bty.basemodule.customer.operates.CustomerOperates;
+import com.zhongmei.bty.basemodule.customer.operates.TakeawayAddressDal;
+import com.zhongmei.bty.basemodule.customer.operates.TakeawayMemoDal;
+import com.zhongmei.bty.basemodule.customer.operates.impls.CouponDalImpl;
+import com.zhongmei.bty.basemodule.customer.operates.impls.CustomerDalImpl;
+import com.zhongmei.bty.basemodule.customer.operates.impls.TakeawayAddressDalImpl;
+import com.zhongmei.bty.basemodule.customer.operates.impls.TakeawayMemoDalImpl;
+import com.zhongmei.bty.basemodule.customer.operates.interfaces.CustomerDal;
+import com.zhongmei.bty.basemodule.database.operates.EcCardDal;
+import com.zhongmei.bty.basemodule.database.operates.impl.EcCardDalImpl;
+import com.zhongmei.bty.basemodule.discount.operates.ExtraChargeDal;
+import com.zhongmei.bty.basemodule.discount.operates.impl.ExtrachargeDalImpl;
+import com.zhongmei.bty.basemodule.discount.operates.impl.MarketDaoImpl;
+import com.zhongmei.bty.basemodule.discount.operates.interfaces.MarketDal;
+import com.zhongmei.bty.basemodule.erp.operates.ErpCommercialRelationDal;
+import com.zhongmei.bty.basemodule.erp.operates.ErpOperates;
+import com.zhongmei.bty.basemodule.pay.operates.PaymentItemDal;
+import com.zhongmei.bty.basemodule.pay.operates.PaymentModeDal;
+import com.zhongmei.bty.basemodule.session.ver.v1.operate.AuthUserDal;
+import com.zhongmei.bty.basemodule.session.ver.v1.operate.impl.AuthUserDalImpl;
 import com.zhongmei.bty.basemodule.shopmanager.handover.operators.HandoverOperates;
+import com.zhongmei.bty.basemodule.trade.operates.TablesDal;
+import com.zhongmei.bty.basemodule.trade.operates.TradeDal;
 import com.zhongmei.bty.basemodule.trade.operates.TradeOperates;
-
+import com.zhongmei.bty.cashier.dal.OrderCenterDal;
+import com.zhongmei.bty.cashier.dal.impl.db.OrderCenterDBDalImpl;
+import com.zhongmei.bty.data.operates.BaiduSyntheticSpeechDal;
+import com.zhongmei.bty.data.operates.CallDishNotifyDal;
+import com.zhongmei.bty.data.operates.CallDishNotifyOperates;
+import com.zhongmei.bty.data.operates.CommercialDal;
+import com.zhongmei.bty.data.operates.CouponsOperates;
+import com.zhongmei.bty.data.operates.CustomerArrivalShopDal;
+import com.zhongmei.bty.data.operates.DishDal;
+import com.zhongmei.bty.data.operates.InventoryOperates;
+import com.zhongmei.bty.data.operates.UploadOperates;
+import com.zhongmei.bty.data.operates.impl.AsyncDalImpl;
+import com.zhongmei.bty.data.operates.impl.AuthLogDalImpl;
+import com.zhongmei.bty.data.operates.impl.BaiduSyntheticSpeechDalImpl;
+import com.zhongmei.bty.data.operates.impl.BookingDalImpl;
+import com.zhongmei.bty.data.operates.impl.BookingOperatesImpl;
+import com.zhongmei.bty.data.operates.impl.CallDishNotifyDalImpl;
+import com.zhongmei.bty.data.operates.impl.CallDishNotifyOperatesImpl;
+import com.zhongmei.bty.data.operates.impl.CommercialImpl;
+import com.zhongmei.bty.data.operates.impl.CouponsOperatesImpl;
+import com.zhongmei.bty.data.operates.impl.CustomerArrivalShopDalImpl;
+import com.zhongmei.bty.data.operates.impl.CustomerOperatesImpl;
+import com.zhongmei.bty.data.operates.impl.DishDalImpl;
+import com.zhongmei.bty.data.operates.impl.ErpCommercialRelationDalImpl;
+import com.zhongmei.bty.data.operates.impl.ErpOperatesImpl;
+import com.zhongmei.bty.data.operates.impl.InventoryOperatesImpl;
+import com.zhongmei.bty.data.operates.impl.KdsTradeDal;
+import com.zhongmei.bty.data.operates.impl.KdsTradeDalImpl;
+import com.zhongmei.bty.data.operates.impl.NewTradeOperatesImpl;
+import com.zhongmei.bty.data.operates.impl.PaymentItemDalImpl;
+import com.zhongmei.bty.data.operates.impl.PaymentModeDalImpl;
+import com.zhongmei.bty.data.operates.impl.PrepareTradeRelationImpl;
+import com.zhongmei.bty.data.operates.impl.SystemSettingDalImpl;
+import com.zhongmei.bty.data.operates.impl.TablesDalImpl;
+import com.zhongmei.bty.data.operates.impl.TradeDalImpl;
+import com.zhongmei.bty.data.operates.impl.TradeOperatesImpl;
+import com.zhongmei.bty.data.operates.impl.UploadOperatesImpl;
 
 import java.util.HashMap;
 
 /**
  * Created by demo on 2018/12/15
  */
-
 public class BeautyOperateData {
     public static HashMap<Class, Class> sOperataDataMap = new HashMap<>();
 
     static {
+        sOperataDataMap.put(TradeOperates.class, TradeOperatesImpl.class);
+        sOperataDataMap.put(NewTradeOperatesImpl.class, NewTradeOperatesImpl.class);
+        sOperataDataMap.put(TradeDal.class, TradeDalImpl.class);
+        sOperataDataMap.put(CustomerOperates.class, CustomerOperatesImpl.class);
+        sOperataDataMap.put(CouponDal.class, CouponDalImpl.class);
+        sOperataDataMap.put(CustomerDal.class, CustomerDalImpl.class);
+        sOperataDataMap.put(PaymentItemDal.class, PaymentItemDalImpl.class);
+        sOperataDataMap.put(BookingDal.class, BookingDalImpl.class);
+        sOperataDataMap.put(BookingOperates.class, BookingOperatesImpl.class);
+        sOperataDataMap.put(TablesDal.class, TablesDalImpl.class);
+        sOperataDataMap.put(SystemSettingDal.class, SystemSettingDalImpl.class);
+        sOperataDataMap.put(DishDal.class, DishDalImpl.class);
+        sOperataDataMap.put(PaymentModeDal.class, PaymentModeDalImpl.class);
+        sOperataDataMap.put(CallDishNotifyOperates.class, CallDishNotifyOperatesImpl.class);
+        sOperataDataMap.put(CallDishNotifyDal.class, CallDishNotifyDalImpl.class);
+        sOperataDataMap.put(AuthUserDal.class, AuthUserDalImpl.class);
+        sOperataDataMap.put(BaiduSyntheticSpeechDal.class, BaiduSyntheticSpeechDalImpl.class);
+        sOperataDataMap.put(PrepareTradeRelationDal.class, PrepareTradeRelationImpl.class);
+        sOperataDataMap.put(ErpCommercialRelationDal.class, ErpCommercialRelationDalImpl.class);
+        sOperataDataMap.put(MarketDal.class, MarketDaoImpl.class);
+        sOperataDataMap.put(CouponsOperates.class, CouponsOperatesImpl.class);
+        //sOperataDataMap.put(ShopManagerOperates.class, ShopManagerOperatesImpl.class);
+        sOperataDataMap.put(AuthLogDal.class, AuthLogDalImpl.class);
+        sOperataDataMap.put(UploadOperates.class, UploadOperatesImpl.class);
+        sOperataDataMap.put(AsyncDal.class, AsyncDalImpl.class);
+        sOperataDataMap.put(CommercialDal.class, CommercialImpl.class);
+        sOperataDataMap.put(ErpOperates.class, ErpOperatesImpl.class);
+        sOperataDataMap.put(InventoryOperates.class, InventoryOperatesImpl.class);
+        sOperataDataMap.put(KdsTradeDal.class, KdsTradeDalImpl.class);
+        sOperataDataMap.put(CustomerArrivalShopDal.class, CustomerArrivalShopDalImpl.class);
+        sOperataDataMap.put(OrderCenterDal.class, OrderCenterDBDalImpl.class);
+        sOperataDataMap.put(EcCardDal.class, EcCardDalImpl.class);
+        sOperataDataMap.put(BookingOperates.class, BookingOperatesImpl.class);
+        sOperataDataMap.put(ExtraChargeDal.class, ExtrachargeDalImpl.class);
+        sOperataDataMap.put(ReasonDal.class, ReasonDalImpl.class);
+        sOperataDataMap.put(TakeawayMemoDal.class, TakeawayMemoDalImpl.class);
+        sOperataDataMap.put(TakeawayAddressDal.class, TakeawayAddressDalImpl.class);
+        sOperataDataMap.put(BeautyOperates.class, BeautyOperatesImpl.class);
+        sOperataDataMap.put(BeautyCustomerOperates.class, BeautyCustomerOperatesImpl.class);
+        sOperataDataMap.put(BeautyBookingOperates.class, BeautyBookingOperatesImpl.class);
         sOperataDataMap.put(HandoverOperates.class, BeautyHandoverOperatesImpl.class);
         sOperataDataMap.put(TradeOperates.class, BeautyTradeOperatesImpl.class);
     }

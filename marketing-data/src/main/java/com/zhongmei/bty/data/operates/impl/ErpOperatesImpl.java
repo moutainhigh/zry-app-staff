@@ -45,17 +45,6 @@ public class ErpOperatesImpl extends AbstractOpeartesImpl implements ErpOperates
     public void getShopInfoById(Long shopId, ResponseListener<ShopInfoByIdResp> listener) {
         String url = ServerAddressUtil.getInstance().getErpShopInfo();
         url += shopId;
-//        BaseApplication application = BaseApplication.sInstance;
-//
-//        OpsRequest.GetExecutor
-//        CalmStringRequest req = new CalmStringRequest(application, Request.Method.GET,
-//                url, listener, errorListener);
-//        req.setErpReq(true);
-//        req.executeRequest("getShopInfoById", "", fm);
-
-      /*  ErpGetRequest.ErpGetExecutor<ShopInfoByIdResp> executor = ErpGetRequest.ErpGetExecutor.create(url);
-        executor.responseClass(ShopInfoByIdResp.class).execute(listener, "getShopInfoById");*/
-
         OpsRequest.Executor<String, ShopInfoByIdResp> executor = OpsRequest.Executor.create(url);
         executor.setMethod(Request.Method.GET)
                 .setHeaderType(HeaderType.HEADER_TYPE_ERP)

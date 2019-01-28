@@ -36,24 +36,24 @@ android {
 }
 
 dependencies {
-    compile third.AAapi
-    apt third.AA
-    compile androidsdk.supportV4
+    compile opensdk.AAapi
+    apt opensdk.AA
+    compile sdk.supportV4
 
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile third.ormlite
-    compile androidsdk.multidex
+    compile opensdk.ormlite
+    compile sdk.multidex
     compile project(':yunfu-context')
     compile project(':yunfu-ui')
     compile project(':yunfu-db')
     compile project(':yunfu-http')
     compile project(':marketing-router')
-    testCompile androidsdk.junit
-    //testCompile androidsdk.mockito
-    testCompile androidsdk.powermock
-    testCompile androidsdk.powermock_junit
-    testCompile androidsdk.powermock_rule
-    androidTestCompile(androidsdk.testEspressoCore, {
+    testCompile sdk.junit
+    //testCompile sdk.mockito
+    testCompile sdk.powermock
+    testCompile sdk.powermock_junit
+    testCompile sdk.powermock_rule
+    androidTestCompile(sdk.testEspressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 }

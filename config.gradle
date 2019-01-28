@@ -16,7 +16,7 @@ ext {
             versionName  : "0.9.0"
     ]
     //android libs
-    androidsdk = [
+    sdk = [
             supportV4       : "com.android.support:support-v4:$SUPPORT_VERSION",
             testRules       : "com.android.support.test:rules:0.4",
             testRunner      : "com.android.support.test:runner:0.4",
@@ -33,18 +33,16 @@ ext {
             appcompatV7     : "com.android.support:appcompat-v7:$SUPPORT_VERSION",
             constraintLayout: "com.android.support.constraint:constraint-layout:1.1.0"
     ]
-    //calm libs
-    calmsdk = [
+    //yf libs
+    yfsdk = [
             displaySDK  : "com.zhongmei.bty:displaysdk:1.0.2",
             calmMsglib  : "com.zhongmei.bty:calmMsglib:1.0.0@aar",
-            //faceplatformUI: [group: 'com.zhongmei.bty', name: 'faceplatformUI', version: '1.0.0-SNAPSHOT', classifier: 'release', ext: 'aar'],
             commonmodule: "com.zhongmei.bty:commonmodule:1.0.0-SNAPSHOT@aar",
             basemodule  : "com.zhongmei.bty:basemodule:1.0.0-SNAPSHOT",
-            //offline       : "com.zhongmei.bty:offline:1.0.0-SNAPSHOT",
             onposmachine: [group: 'com.zhongmei.bty', name: 'onposmachine', version: '2.0.17', classifier: 'release', ext: 'jar']
     ]
-    //third libs
-    third = [
+    //open libs
+    opensdk = [
             AAapi            : "org.androidannotations:androidannotations-api:4.4.0",
             AA               : "org.androidannotations:androidannotations:4.4.0",
             arouter          : "com.alibaba:arouter-api:1.2.4",
@@ -61,7 +59,7 @@ ext {
             eventbus         : "de.greenrobot:eventbus:2.4.0"
     ]
 
-    // TODO
+    // dependencies
     dependencies = [
             "baiduLBS"            : files('libs/BaiduLBS_Android.jar'),
             "core"                : files('libs/core_3.2.0.jar'),

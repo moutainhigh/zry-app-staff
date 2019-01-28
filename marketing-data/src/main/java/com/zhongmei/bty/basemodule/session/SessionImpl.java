@@ -73,8 +73,6 @@ public class SessionImpl extends AbsSession {
     public SessionImpl(Context context, int authVersion) {
         if (authVersion == SessionImpl.AV1) {
             adapter = new com.zhongmei.bty.basemodule.session.ver.v1.AdapterImpl(context);
-        } else if (authVersion == SessionImpl.AV2) {
-            adapter = new com.zhongmei.bty.basemodule.session.ver.v2.AdapterImpl(context);
         } else {
             throw new IllegalArgumentException("Not support auth version:" + authVersion);
         }

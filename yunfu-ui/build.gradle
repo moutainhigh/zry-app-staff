@@ -29,19 +29,19 @@ android {
 }
 
 dependencies {
-    compile third.AAapi
-    apt third.AA
+    compile opensdk.AAapi
+    apt opensdk.AA
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile androidsdk.supportV4
-    compile androidsdk.recyclerview
-    compile third.umengCommon
-    compile third.umengAnalytics
-    compile third.eventbus
+    compile sdk.supportV4
+    compile sdk.recyclerview
+    compile opensdk.umengCommon
+    compile opensdk.umengAnalytics
+    compile opensdk.eventbus
     compile project(':yunfu-context')
     compile project(':marketing-router')
-    testCompile androidsdk.junit
-    //testCompile androidsdk.mockito
-    androidTestCompile(androidsdk.testEspressoCore, {
+    testCompile sdk.junit
+    //testCompile sdk.mockito
+    androidTestCompile(sdk.testEspressoCore, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 

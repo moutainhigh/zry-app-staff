@@ -14,10 +14,10 @@ buildscript {
         //classpath 'com.zhongmei.bty:guard:0.1.0'
         classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.2.30"
+        classpath fileTree(dir: 'calm3/plugin', include: ['*.jar'])
         if (rootProject.ext.fastDexEnable.toBoolean()) {
             classpath 'com.github.typ0520:fastdex-gradle:0.3-rc11'
         }
-        classpath fileTree(dir: 'calm3/plugin', include: ['*.jar'])
     }
 }
 
@@ -43,7 +43,6 @@ subprojects {
         include '**/**.java'
         exclude '**/gen/**'
         classpath = files()
-
     }
 }
 

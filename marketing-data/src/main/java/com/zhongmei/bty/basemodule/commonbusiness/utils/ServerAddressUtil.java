@@ -1,21 +1,15 @@
 package com.zhongmei.bty.basemodule.commonbusiness.utils;
 
-import android.net.Uri;
 import android.util.Log;
-import android.webkit.URLUtil;
 
 import com.zhongmei.bty.basemodule.commonbusiness.constants.Configure;
 import com.zhongmei.yunfu.Constant;
-import com.zhongmei.yunfu.ServerKey;
 import com.zhongmei.yunfu.ShopInfoManager;
 import com.zhongmei.yunfu.context.AppBuildConfig;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.yunfu.context.util.SystemUtils;
 import com.zhongmei.yunfu.context.util.manager.SwitchServerManager;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * @Date：2014年11月8日 下午2:25:20
@@ -24,29 +18,21 @@ import org.json.JSONObject;
  * <p>
  * rights reserved.
  */
-public class ServerAddressUtil extends ServerKey {
+public class ServerAddressUtil {
     private static final String TAG = ServerAddressUtil.class.getSimpleName();
 
     private static ServerAddressUtil instance;
 
-    public String getOnStoreServerURL() {
-        switch (AppBuildConfig.MY_BUILD_TYPE) {
-            case 1: //开发环境
-                return "http://demo.com/all";
-            case 2: //测试环境
-                return "http://demo.com/all";
-            case 3: //灰度环境
-                return "http://demo.com/all";
-            case 4: //CI环境
-                return "http://demo.com/all";
-            default:
-                return "http://demo.com/all";
+    public static ServerAddressUtil getInstance() {
+        if (instance == null) {
+            instance = new ServerAddressUtil();
         }
+        return instance;
     }
 
-    /*
-     *获取远程服务器地址
-     * */
+    /**
+     * 获取远程服务器地址
+     */
     public static String getRemoteHost() {
         switch (AppBuildConfig.MY_BUILD_TYPE) {
             case 1: //开发环境
@@ -65,26 +51,6 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * PUSH服务器地址
-     */
-    public static String getPushHost() {
-        switch (AppBuildConfig.MY_BUILD_TYPE) {
-            case 1:
-                return "demo.com";
-            case 2:
-                return "demo.com";
-            case 3:
-                return "demo.com";
-            case 4:
-                return "demo.com";
-            case 5://新加坡
-                return "demo.com";
-            default:
-                return Configure.PUSH_SERVER_HOST;
-        }
-    }
-
-    /**
      * PUSH服务器端口
      */
     public static int getPushPort() {
@@ -97,49 +63,8 @@ public class ServerAddressUtil extends ServerKey {
                 return 9000;
             case 4:
                 return 9001;
-            case 5://新加坡
-                return 9001;
             default:
                 return Configure.PUSH_SERVER_PORT;
-        }
-    }
-
-    /**
-     * 预结单熟客二维码的服务器地址
-     */
-    public static String getShuKeHost() {
-        switch (AppBuildConfig.MY_BUILD_TYPE) {
-            case 1: //开发环境
-                return "http://demo.com";
-            case 2: //测试环境
-                return "http://demo.com";
-            case 3: //灰度环境
-                return "http://demo.com";
-            case 4: //CI环境
-                return "http://demo.com";
-            default:
-                return Configure.SHUKE_SERVER_HOST;
-        }
-    }
-
-
-    /**
-     * mind服务地址
-     */
-    public static String getMindHost() {
-        switch (AppBuildConfig.MY_BUILD_TYPE) {
-            case 1: //开发环境
-                return "http://demo.com";
-            case 2: //测试环境
-                return "http://demo.com";
-            case 3: //灰度环境
-                return "http://demo.com";
-            case 4: //CI环境
-                return "http://demo.com";
-            case 5: //新加坡
-                return "http://demo.com";
-            default:
-                return Configure.MIND_SERVER_HOST;
         }
     }
 
@@ -154,7 +79,6 @@ public class ServerAddressUtil extends ServerKey {
                 return "http://demo.com";
             case 3: //灰度环境
                 return "http://demo.com";
-//                return "http://demo.com";//7.7版本改成带点的地址
             case 4: //CI度环境
                 return "http://demo.com";
             default:
@@ -163,172 +87,11 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 公共业务组修改密码地址
-     *
-     * @return
-     */
-    public static String geAccountHost() {
-        switch (AppBuildConfig.MY_BUILD_TYPE) {
-            case 1: //开发环境
-                return "http://demo.com";
-            case 2: //测试环境
-                return "http://demo.com";
-            case 3: //灰度环境
-                return "http://demo.com";
-            case 4: //CI度环境
-                return "http://demo.com";
-            default:
-                return Configure.ACCOUNT_SERVER_HOST;
-        }
-    }
-
-    /**
-     * 获取帮助中心地址
-     *
-     * @return
-     */
-    public static String getHelpURLHost() {
-        switch (AppBuildConfig.MY_BUILD_TYPE) {
-            case 1:
-                return "http://demo.com";
-            case 2: //测试环境
-                return "http://demo.com";
-            case 3: //灰度环境
-                return "http://demo.com";
-            case 4://CI
-                return "http://demo.com";
-            case 5://新加坡
-                return "http://demo.com";
-            default:
-                return Configure.ERP_HELP_HOST;
-        }
-    }
-
-    /**
-     * 获取开发平台地址
-     *
-     * @return
-     */
-    public static String getOpenStoreURLHost() {
-        switch (AppBuildConfig.MY_BUILD_TYPE) {
-            case 1: //开发环境
-                return "http://demo.com/";
-            case 2: //测试环境
-                return "http://demo.com/";
-            case 3: //灰度环境
-                return "http://demo.com/";
-            case 4: //CI环境
-                return "http://demo.com/";
-            default:
-                return Configure.OPEN_STORE_HOST;
-        }
-    }
-
-    /**
-     * 获取Portal地址
-     *
-     * @return
-     */
-    public static String getPortalURLHost() {
-        switch (AppBuildConfig.MY_BUILD_TYPE) {
-            case 1: //开发环境
-            case 2: //测试环境
-            case 4: //CI环境
-                return "http://demo.com/#/";
-            case 3: //灰度环境
-                return "http://demo.com/#/";
-            default:
-                return Configure.PORTAL_SERVER_HOST;
-        }
-    }
-
-    /**
-     * 判断域名是否开发平台网址
-     *
-     * @param url
-     * @return
-     */
-    public static boolean hasOpenStoreURLHost(String url) {
-        if (URLUtil.isNetworkUrl(url)) {
-            Uri uri = Uri.parse(url);
-            return "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost())
-                    || "demo.com".equals(uri.getHost());
-        }
-        return false;
-    }
-
-    /*public static Map<String, String> tokenEncrypt(String shopId, String token) {
-        return tokenEncrypt(shopId, token, System.currentTimeMillis());
-    }
-
-    *//**
-     * api安全验证数据信息加密信息设置
-     * SHA-256(kry-api-token=登录认证token&kry-api-shop-id=门店ID^512&kry-api-timestamp=客户端时间戳)
-     *//*
-    public static Map<String, String> tokenEncrypt(String shopId, String token, long currentTimeMillis) {
-        Map<String, String> tempMap = new HashMap<>();
-        if (!TextUtils.isEmpty(shopId) && !TextUtils.isEmpty(token)) {
-            Long shopIdEncrypt = Long.parseLong(shopId) ^ 512;
-            String curTime = currentTimeMillis + "";
-            String encryptData = "kry-api-token=" + token + "&kry-api-shop-id=" + shopIdEncrypt + "&kry-api-timestamp=" + curTime;
-            String securityEncrypt = EncryptUtils.encrypt(encryptData, "SHA-256");
-            tempMap.put("token", securityEncrypt);
-            tempMap.put("time", curTime);
-        }
-
-        return tempMap;
-    }*/
-
-    /**
-     * <pre>
-     * 参数说明:@return
-     * 返回类型:@return ServerAddressUtil
-     * 方法说明:单例模式
-     * 修改历史:
-     *    修改人员:zctsky 修改日期:May 20, 2014 11:27:29 AM
-     *    修改目的:
-     * </pre>
-     */
-    public static ServerAddressUtil getInstance() {
-        if (instance == null) {
-            instance = new ServerAddressUtil();
-        }
-        return instance;
-    }
-
-    /**
-     * <pre>
-     * 参数说明:@return
-     * 返回类型:@return String
-     * 方法说明:获取同步接口的地址
-     * 修改历史:
-     *    修改人员:zctsky 修改日期:May 20, 2014 10:54:04 AM
-     *    修改目的:
-     * </pre>
-     */
-    public String getSyncApi() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/SynController/sysInfoPost?debug=open";
-    }
-
-    /**
      * 获取当前设备配置的门店信息
      *
      * @return
      */
     public String getErpApi() {
-        /*return getRemoteHost() + "/version/checkSyncWithPrinter?ov="
-                + SystemUtils.getVersionCode() + "&mac=" + SystemUtils.getMacAddress()
-                + "&p=" + SystemUtils.getSystemType() + "&app_type=5";*/
-        //return ShopInfoManager.getInstance().getServerKey() + String.format("/pos/shop/info/%s", SystemUtils.getMacAddress());
         return ShopInfoManager.REMOTE_SERVER_HOST + String.format("/pos/api/sync/shop/info/%s", SystemUtils.getMacAddress());
     }
 
@@ -351,21 +114,11 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 验证码检查地址
-     *
-     * @return
-     */
-    public String getCheckPhoneTokenUrl() {
-        return getRemoteHost() + "/os/api/checkMsgToken";
-    }
-
-    /**
      * 获取同步接口地址
      *
      * @return
      */
     public String getOwns() {
-        //return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/sync/owns";
         return ShopInfoManager.REMOTE_SERVER_HOST + "/pos/api/sync/data";
     }
 
@@ -391,91 +144,12 @@ public class ServerAddressUtil extends ServerKey {
         }
     }
 
-    public String getUpdateMemberApi(JSONObject json) {
-
-        JSONObject requestJson = new JSONObject();
-        try {
-            requestJson.put("name", "zct");
-            requestJson.put("sex", "1");
-            requestJson.put("phone", "18612708182");
-            requestJson.put("birthday", "1980-01-05");
-            requestJson.put("isAcceptSubscription", "1");
-            requestJson.put("commercialGroupId", "2192");
-            requestJson.put("oldPhone", "15863952638");
-            requestJson.put("customerSyncFlag", "535EF08C13CF46C7AC773D41C0107772");
-            // 加入 操作者ID
-            requestJson.put("userId", "c215184aac4048639ad1938c208e130a");
-        } catch (JSONException e) {
-            Log.e(TAG, "", e);
-        }
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/memberController/upgradeMember?&content=" + requestJson.toString() + "&versionCode="
-                + SystemUtils.getVersionCode() + "&versionName=4.0.5" + "&macAddress="
-                + SystemUtils.getMacAddress() + "&shopID="
-                + ShopInfoCfg.getInstance().shopId;
-    }
-
-    /**
-     * 交接统计查询
-     *
-     * @return
-     */
-    public String getHandOverInfoApi() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v2/cashHandOver/stats";
-    }
-
-    /**
-     * 交接创建
-     *
-     * @return
-     */
-    public String createHandOverInfoApi() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/cashHandOver/create";
-    }
-
-    /**
-     * 交接历史查询
-     *
-     * @return
-     */
-    public String findHandOverHistoryInfoApi() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/cashHandOver/findHistory";
-    }
-
-    /*public String updateClearStatusApi() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/dish/clearStatus/update";
-    }*/
-
-    public String orderAndCash() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/orderall/orderAndCharge";
-    }
-
-    public String getWXPayStatus() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/orderall/orderStatus";
-    }
-
     /**
      * http上传地址
      *
      * @return
      */
     public String getLogAddApi() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/readStreamController/readStream?debug=open";
-    }
-
-    /**
-     * 七牛上传地址
-     *
-     * @return
-     */
-    public String getQiniuUploadApi() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/readStreamController/readStream?debug=open";
     }
@@ -655,7 +329,6 @@ public class ServerAddressUtil extends ServerKey {
      * @return
      */
     public String tradeRefund() {
-        // return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/trade/return";
         return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v3/onos/refund/submit";
     }
 
@@ -851,46 +524,6 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 修改商户打印服务器ip接口地址
-     *
-     * @return
-     */
-    public String modifyPrintServerIp() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/printer/modifyPrintServerIp";
-    }
-
-    /**
-     * 更新票据样式接口地址
-     *
-     * @return
-     */
-    public String modifyPrinterStyleSetting() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/printer/updatePrinterStyleSetting";
-    }
-
-    /**
-     * 创建更新打印机接口地址
-     *
-     * @return
-     */
-    public String storePrinter() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/printer/device/add_or_modify";
-    }
-
-    /**
-     * 删除多个打印机接口地址
-     *
-     * @return
-     */
-    public String removePrinter() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/printer/device/delete";
-    }
-
-    /**
      * 批量清账接口地址
      *
      * @return
@@ -944,22 +577,11 @@ public class ServerAddressUtil extends ServerKey {
         return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v2/booking/cancel";
     }
 
-    /*第二版预订：8.0.0版本-8.7.0
-    public String createBooking() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v2/booking/submitBooking";
-    }*/
-
     public String createBooking() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/v3/booking/submitBooking";
     }
 
-    /*第二版预订：8.0.0版本-8.7.0
-    public String updateBooking() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v2/booking/updateBooking";
-    }*/
     public String updateBooking() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/v3/booking/updateBooking";
@@ -1009,16 +631,6 @@ public class ServerAddressUtil extends ServerKey {
     public String bookingList() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/doom/booking/list";
-    }
-
-    /**
-     * 搜索预订
-     *
-     * @return
-     */
-    public String bookingQuery() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/doom/booking/query";
     }
 
     /**
@@ -1133,58 +745,6 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 排队短信
-     *
-     * @return
-     */
-    public String queueMessage() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/queueController/queueSmsPost";
-    }
-
-    /**
-     * 排队自助语音
-     *
-     * @return
-     */
-    public String queuePhone() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/queueController/queuePhonePost";
-    }
-
-    /**
-     * 排队叫号
-     *
-     * @return
-     */
-    public String queueCallNumber() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/queue/enter/call_number";
-    }
-
-    public String queueRevocationCall() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v3/queue/recoverInvalid";
-    }
-
-    public String queueModify() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v3/queue/modify";
-    }
-
-    public String predictWaitTime() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v3/queue/predictWaitTime";
-
-    }
-
-    public String queryQTCode() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v3/queue/queryQTCode";
-
-    }
-
-    /**
      * 下单接口地址-正餐
      *
      * @return
@@ -1203,15 +763,6 @@ public class ServerAddressUtil extends ServerKey {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/v1/trade/buffet/submit";
     }
-
-//    /**
-//     * 改单接口地址
-//     *
-//     * @return
-//     */
-//    public String tradeModifyDinner() {
-//        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/trade/modify";
-//    }
 
     /**
      * 正餐接受微信加菜地址
@@ -1277,7 +828,6 @@ public class ServerAddressUtil extends ServerKey {
      * @return
      */
     public String tradeRefundDinner() {
-//		return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v2/trade/return";
         return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v3/onos/refund/submit";
     }
 
@@ -1288,16 +838,6 @@ public class ServerAddressUtil extends ServerKey {
      */
     public String mergeDinner() {
         return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v2/trade/unionTrade";
-    }
-
-    /**
-     * 修改正餐菜品出单状态接口地址
-     *
-     * @return
-     */
-    public String changePrintStatus() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/trade/item/issueStatus/change";
     }
 
     /**
@@ -1343,7 +883,6 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     public String tradeRepayUrl() {
-        //return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/trade/repay";
         return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v3/onos/trade/repay";
     }
 
@@ -1459,17 +998,6 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 修改银联退款状态
-     *
-     * @Title: changeUnionpayRefundStatus
-     * @Return String 返回类型
-     */
-    public String changeRefundStatus() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/payment/changeRefundStatus";
-    }
-
-    /**
      * 修改银联退款状态:ps：7.6版本调整为新接口，未支持组合支付退款，该接口调用时不需要上行订单的支付状态，订单支付状态有服务端进判断
      *
      * @return
@@ -1529,17 +1057,6 @@ public class ServerAddressUtil extends ServerKey {
     public String getMemeberCardUrl() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/v1/entitycard/getCardByMember";
-    }
-
-    /**
-     * 修改打印记录表的打印状态
-     *
-     * @Title: updatePrinted
-     * @Return String 返回类型
-     */
-    public String updatePrinted() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/on_mobile/trade/updateprinted";
     }
 
     /**
@@ -1819,7 +1336,6 @@ public class ServerAddressUtil extends ServerKey {
      * @Return String 返回类型
      */
     public String refreshStateUrl() {
-        //return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/ch5order/state";
         return ShopInfoCfg.getInstance().getServerKey() + "/pos/api/pay/syncTradeStatus";
     }
 
@@ -1851,17 +1367,6 @@ public class ServerAddressUtil extends ServerKey {
      */
     public String modifySubTradePrintStatus() {
         return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/fs/union/sub-trade-modifyPrintStatus";
-    }
-
-    /**
-     * 更新排队状态
-     *
-     * @Title: updateQueueStatus
-     * @Return String 返回类型
-     */
-
-    public String changeQueue() {
-        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/queue/changeQueue";
     }
 
     /**
@@ -1899,40 +1404,12 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 创建排队和入场
-     *
-     * @Title: tradeFinish
-     * @Return String 返回类型
-     */
-    public String createAndUpdateQueue() {
-        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v3/queue/submit";
-    }
-
-    /**
-     * 合同到期提醒
-     *
-     * @return
-     */
-    public String HeTongDaoqiRequest() {
-        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/other/contract/getOverdueContracts";
-    }
-
-    /**
      * 移菜
      *
      * @return
      */
     public String moveDish() {
         return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/trade/item/move";
-    }
-
-    /**
-     * 修改商户打印机健康状态
-     *
-     * @return
-     */
-    public String modifyPrintHealthStatus() {
-        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/printer/modifyPrintHealthStatus";
     }
 
     /**
@@ -2013,26 +1490,6 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 获取销售排行榜打印信息
-     *
-     * @return
-     */
-    public String getGoodsSaleRankPrint() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/trade/mind/getPrintData";
-    }
-
-    /**
-     * 获取云打印地址
-     *
-     * @return
-     */
-    public String getClouldPrintUrl() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v2/trade/cloud_print";
-    }
-
-    /**
      * 获取派送订单Url
      *
      * @return
@@ -2040,16 +1497,6 @@ public class ServerAddressUtil extends ServerKey {
     public String getSendOrderUrl() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/v1/assistant/sendOrder";
-    }
-
-    /**
-     * 获取取消派送订单Url
-     *
-     * @return
-     */
-    public String getCancelOrderUrl() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/assistant/cancelOrder";
     }
 
     /**
@@ -2083,80 +1530,6 @@ public class ServerAddressUtil extends ServerKey {
     public String loyaltyTransfer() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/trade/loyalty/transfer";
-    }
-
-    /**
-     * mind自动配置（用来透传，不需要添加前缀）
-     *
-     * @return
-     */
-    public String mindAutoSet() {
-        return "/mind/innerApi/commercial/initDemo";
-    }
-
-    /**
-     * 后厨管理新增加接口
-     *
-     * @return
-     */
-    public String mindAddKitchenTicketOutlet() {
-        return "/mind/innerApi/printerKitchen/add";
-    }
-
-    /**
-     * 保存与更新标签设置
-     *
-     * @return
-     */
-    public String mindLablePrintSetting() {
-        return "/mind/innerApi/printerKitchen/addOrUpdateLabel";
-    }
-
-
-    /**
-     * 删除标签
-     *
-     * @return
-     */
-    public String mindRemoveLablePrintSetting() {
-        return "/mind/innerApi/printerKitchen/deletePrinterLable";
-    }
-
-    /**
-     * 收银点打印机信息修复接口
-     *
-     * @return
-     */
-    public String mindUpdateCashierPointDeviceId() {
-        return "/mind/innerApi/printerKitchen/updatePrinterDeveiceId";
-    }
-
-    /**
-     * 后厨管理修改出票口接口
-     *
-     * @return
-     */
-    public String mindUpdateKitchenTicketOutlet() {
-        return "/mind/innerApi/printerKitchen/update";
-    }
-
-    /**
-     * 后厨管理删除出票口接口
-     *
-     * @return
-     */
-    public String mindDeleteKitchenTicketOutlets() {
-        return "/mind/innerApi/printerKitchen/delete";
-    }
-
-
-    /**
-     * mind查询自动配置flag
-     *
-     * @return
-     */
-    public String mindQueryAutoSetFlag() {
-        return "/mind/innerApi/commercial/initFlag";
     }
 
     /**
@@ -2244,34 +1617,6 @@ public class ServerAddressUtil extends ServerKey {
         return "/api/core/delivery/order/list";
     }
 
-    /**
-     * 获取服务器时间
-     *
-     * @return
-     */
-    public String getServerTime() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/server/time/get";
-    }
-
-    /**
-     * mind收支录入用来透传，不需要添加前缀）
-     *
-     * @return
-     */
-    public String getPaymentsInputUrl() {
-        return "/mind/innerApi/accountSubject/save";
-    }
-
-    /**
-     * mind收支详情用来透传，不需要添加前缀）
-     *
-     * @return
-     */
-    public String getPaymentsDetailUrl() {
-        return "/mind/innerApi/accountSubject/secondSubjectQuery";
-    }
-
     public String getAuthLogUploadUrl() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/trade/authority/batchUploadAuthLog";
@@ -2287,46 +1632,12 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 设置自定义模板类型地址
-     *
-     * @return
-     */
-    public String setPrintDocument() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/printer/setDocumentTemplate";
-    }
-
-    /**
-     * 修改服务铃状态
-     *
-     * @return
-     */
-    public String updateCallWaiter() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/bellservice/callWaiter/update";
-    }
-
-    /**
      * 获取七牛token
      *
      * @return
      */
     public String getToken() {
         return "/mind/innerApi/qiniu/getToken";
-    }
-
-    public String getHelpUrl() {
-        return getHelpURL();
-//		return getMindHost()+"/mind/pos/help/listShow";
-    }
-
-    /**
-     * 获取商户logoURL
-     *
-     * @return
-     */
-    public String getLogoURLRequest() {
-        return "/mind/innerApi/commercial/info/getLogo";
     }
 
     /**
@@ -2337,26 +1648,6 @@ public class ServerAddressUtil extends ServerKey {
                 + ShopInfoCfg.getInstance().shopId + "&posDeviceID="
                 + SystemUtils.getMacAddress() + "&appType="
                 + SystemUtils.getAppType() + "&uuid=";
-    }
-
-    /**
-     * POS设备认证
-     *
-     * @return
-     */
-    public String getDeviceAuth() {
-        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/security/device_auth";
-    }
-
-    /**
-     * pos验证分区版本信息
-     */
-    public String checkVersionsAreaInfo() {
-        return getRemoteHost() + "/api/cashier/validateVersionZone?";
-    }
-
-    public String checkAuth() {
-        return getRemoteHost() + "/api/mobile/getBrandAuthVersion";
     }
 
     /**
@@ -2388,15 +1679,6 @@ public class ServerAddressUtil extends ServerKey {
      */
     public String getPayStatus() {
         return ShopInfoManager.REMOTE_SERVER_HOST + "/pos/api/pay/queryTradeStatus";
-    }
-
-    /**
-     * 获取帮助中心地址
-     *
-     * @return
-     */
-    public static String getHelpURL() {
-        return getHelpURLHost() + "/page/helpCenterOtherUsing/helpCenterList.html?id=1&name=%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20%0A%20%20%20%20%20%20%20%20On%20Pos%0A%20%20%20%20";
     }
 
     /**
@@ -2538,33 +1820,6 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 供应链地址
-     *
-     * @return
-     */
-    public String getCreateDishMenuUrl() {
-        return "/merchandise/innerApi/carte/save";
-    }
-
-    /**
-     * 删除菜单模板
-     *
-     * @return
-     */
-    public String deleteDishMenus() {
-        return "/merchandise/innerApi/carte/delete";
-    }
-
-    /**
-     * 团餐开台
-     *
-     * @return
-     */
-    public String groupOpenTable() {
-        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/trade/dinner/group/submit";
-    }
-
-    /**
      * 新会员积分流水
      */
     public String newQueryIntegralDetail() {
@@ -2576,18 +1831,6 @@ public class ServerAddressUtil extends ServerKey {
      */
     public String saveCustomerFaceCode() {
         return "v2_member_saveCustomerFaceCode";
-    }
-
-    public String getForumListUrl() {
-        return "/api/core/comment/list";
-    }
-
-    /**
-     * 获得品牌直发券列表
-     */
-    public String customerDirectCouponList() {
-        return "coupInstance_directCouponList" +
-                "?brandId=" + BaseApplication.sInstance.getBrandIdenty();
     }
 
     /**
@@ -2687,31 +1930,10 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 获取健康检查接口地址
-     */
-    public String getHealthUrl() {
-        return getQSApiServerHost() + "/health";
-    }
-
-    /**
      * 获取校验并核销优惠券/积分/微信优惠券接口地址
      */
     public String getUsePrivilegeUrl() {
         return getQSApiServerHost() + "/v1/payment/usePrivilege";
-    }
-
-    /**
-     * @return 返回快餐异步获取在线支付状态的url地址
-     */
-    public String getPayStatus4QSOffline() {
-        return getQSApiServerHost() + "/v1/payment/item/result/get";
-    }
-
-    /**
-     * 异步 获取未处理和错误的日志数量地址
-     */
-    public String getLogErrorQuantityApi() {
-        return getQSApiServerHost() + "/v1/trade/report/shop-trade-quantity";
     }
 
     /**
@@ -2722,28 +1944,11 @@ public class ServerAddressUtil extends ServerKey {
     }
 
     /**
-     * 获取数据上传接口地址
-     */
-    public String getDataUploadUrl() {
-        return getQSUpServerHost() + "/data/upload";
-    }
-
-    /**
      * 绑定配送员接口
      */
     public String getBindOrderUrl() {
         return ShopInfoCfg.getInstance().getServerKey()
                 + "/CalmRouter/v1/assistant/assign2Staff";
-    }
-
-    /**
-     * 从ZK上获取对应的配置
-     *
-     * @return
-     */
-    public String getSysCmdConfig() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/v1/sys/cmd";
     }
 
     /**
@@ -2796,17 +2001,6 @@ public class ServerAddressUtil extends ServerKey {
      */
     public String getUnionTradeItemOperation() {
         return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/fs/union/modifyUnionItemOperation";
-    }
-
-    /**
-     * //     * 三亚开关机
-     * 通用开关机
-     *
-     * @return
-     */
-    public String getOnlineSwitch() {
-//        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/sanya/onlineSwitch";
-        return ShopInfoCfg.getInstance().getServerKey() + "/CalmRouter/v1/pos/onlineSwitch";
     }
 
     /**
@@ -3019,88 +2213,4 @@ public class ServerAddressUtil extends ServerKey {
         return "/loyt/crowd/innerapi/crowd/object";
     }
 
-
-    /**
-     * Talent 通用透传接口
-     * /CalmRouter/talent/transfer 对应 http://demo.com/basic
-     *
-     * @return
-     */
-    public String talentTransfer() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/talent/transfer";
-    }
-
-    /**
-     * Talent 通用透传接口
-     * /CalmRouter/talent/common/transfer对应 http://demo.com
-     *
-     * @return
-     */
-    public String talentCommonTransfer() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/talent/common/transfer";
-    }
-
-    /**
-     * 公共业务组 通用透传接口
-     * /CalmRouter/ps/auth_transfer 对应 http://demo.com
-     *
-     * @return
-     */
-    public String psAuthTransfer() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/ps/auth_transfer";
-    }
-
-    /**
-     * 公共业务组 通用透传接口
-     * /CalmRouter/ps/account_transfer 对应 http://demo.com
-     *
-     * @return
-     */
-    public String psAccountTransfer() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/ps/account_transfer";
-    }
-
-    /**
-     * Talent 通用透传接口
-     * /CalmRouter/ps/resource_transfer对应 http://demo.com
-     *
-     * @return
-     */
-    public String psResourceTransfer() {
-        return ShopInfoCfg.getInstance().getServerKey()
-                + "/CalmRouter/ps/resource_transfer";
-    }
-
-    /**
-     * 员工绑定人脸
-     *
-     * @return
-     */
-    public String talentBindFace() {
-        return "/account/api/mobile/third/face/bind";
-    }
-
-    /**
-     * 员工提交考勤
-     *
-     * @return
-     */
-    public String talentAddAttendanceUrl() {
-
-        return "/api/attendance/add";
-    }
-
-    /**
-     * 查询员工考勤
-     *
-     * @return
-     */
-    public String talentSearchAttendanceUrl() {
-
-        return "/api/attendance/getPunchFace";
-    }
 }

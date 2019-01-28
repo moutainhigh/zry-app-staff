@@ -21,19 +21,12 @@ android {
         applicationId calm.applicationId
         //versionCode calm.versionCode
         //versionName calm.versionName
-        //该变量用于启动自定义票据 false不启动  true启动
-        buildConfigField "boolean", "CUSTOMIZATION_TICKET_SYSTEM", "true"
-        //该变量用于配置是否内置AD模块
-        buildConfigField "boolean", "INNER_AD_MODULE", "true"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-            res.srcDirs = ["src/main/res",
-                           "src/main/res-beauty"
-            ]
         }
     }
 
@@ -58,7 +51,7 @@ android {
         release {
             minifyEnabled false
             signingConfig signingConfigs.release
-            manifestPlaceholders = [UMENG_APPKEY_VALUE: "578364e5e0f55ab8400021e9"]
+            manifestPlaceholders = [UMENG_APPKEY_VALUE: ""]
             buildConfigField "int", "MY_BUILD_TYPE", "0"
             buildConfigField "boolean", "ALLOW_COMPRESS", "true"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -68,8 +61,8 @@ android {
             minifyEnabled false
             testCoverageEnabled false
             signingConfig signingConfigs.release
-            manifestPlaceholders = [UMENG_APPKEY_VALUE: "57a4064567e58e6c3b003735"]
-            buildConfigField "int", "MY_BUILD_TYPE", "2"
+            manifestPlaceholders = [UMENG_APPKEY_VALUE: ""]
+            buildConfigField "int", "MY_BUILD_TYPE", "1"
             buildConfigField "boolean", "ALLOW_COMPRESS", "false"
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -77,8 +70,8 @@ android {
         CI {
             minifyEnabled false
             signingConfig signingConfigs.release
-            manifestPlaceholders = [UMENG_APPKEY_VALUE: "57a4064567e58e6c3b003735"]
-            buildConfigField "int", "MY_BUILD_TYPE", "4"
+            manifestPlaceholders = [UMENG_APPKEY_VALUE: ""]
+            buildConfigField "int", "MY_BUILD_TYPE", "2"
             buildConfigField "boolean", "ALLOW_COMPRESS", "true"
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -128,21 +121,18 @@ android {
 }
 
 dependencies {
-    compile third.AAapi
-    apt third.AA
+    compile opensdk.AAapi
+    apt opensdk.AA
 
     compile fileTree(include: '*.jar', dir: 'libs')
-    //compile(name: 'IoTSdk_release_v1.0.5', ext: 'aar')
-    //compile(name: 'IoTSdk_Pos_release_v1.0.5', ext: 'aar')
+    compile sdk.cardview
 
-    compile androidsdk.cardview
-
-    compile third.ptrLoadMore
-    compile third.ormlite
-    compile third.swipeToLoadLayout
-    compile third.swipemenulistview
-    compile third.okhttp3
-    compile third.eventbus
+    compile opensdk.ptrLoadMore
+    compile opensdk.ormlite
+    compile opensdk.swipeToLoadLayout
+    compile opensdk.swipemenulistview
+    compile opensdk.okhttp3
+    compile opensdk.eventbus
 
     compile project(':marketing-basemodule')
     compile project(':marketing-common')
@@ -153,20 +143,20 @@ dependencies {
     compile project(':yunfu-push')
 
     //添加单元测试
-    testCompile androidsdk.junit
-    //testCompile androidsdk.mockito
-    androidTestCompile(androidsdk.testEspressoCore) {
+    testCompile sdk.junit
+    //testCompile sdk.mockito
+    androidTestCompile(sdk.testEspressoCore) {
         exclude group: 'com.android.support', module: 'support-annotations'
         transitive true
     }
-    androidTestCompile(androidsdk.testRunner) {
+    androidTestCompile(sdk.testRunner) {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    androidTestCompile androidsdk.testRules
+    androidTestCompile sdk.testRules
     androidTestCompile("com.android.support:support-annotations:$SUPPORT_VERSION") {
         force = true
     }
-    compile third.kotlinStdlibJDK
+    compile opensdk.kotlinStdlibJDK
 
 }
 
@@ -187,14 +177,4 @@ apt {
 
         reportLevel = "low"
     }
-}*/
-
-/*studio_log {
-    enable true
-    executeTimeout 500
-    includePackage "com.zhongmei.bty"
-    excludePackage = [
-            'com.zhongmei.bty.bean',
-            'com.zhongmei.bty.entity'
-            ]
 }*/

@@ -25,7 +25,6 @@ import com.zhongmei.bty.basemodule.auth.permission.manager.AuthLogManager;
 import com.zhongmei.bty.basemodule.commonbusiness.cache.PaySettingCache;
 import com.zhongmei.bty.basemodule.commonbusiness.cache.ServerSettingCache;
 import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
-import com.zhongmei.bty.basemodule.devices.display.ShowPayManagerEvent;
 import com.zhongmei.bty.basemodule.pay.bean.PaymentVo;
 import com.zhongmei.bty.basemodule.pay.enums.PayScene;
 import com.zhongmei.bty.basemodule.pay.event.PushPayRespEvent;
@@ -486,7 +485,7 @@ public class MainPayFragment extends MobclickAgentFragment implements IPaymentMe
                     }
 
                     EventBus.getDefault().post(new RegisterDeWoOnlinePayScanEvent());
-                    EventBus.getDefault().post(new ShowPayManagerEvent());
+                    //EventBus.getDefault().post(new ShowPayManagerEvent());
                     updateLastFragment(mCurrentMethod);
                     payMethodItem.isSelected = true;
                     mCurrentMethod = payMethodItem;
@@ -511,7 +510,7 @@ public class MainPayFragment extends MobclickAgentFragment implements IPaymentMe
                     }
 
                     EventBus.getDefault().post(new RegisterDeWoOnlinePayScanEvent());
-                    EventBus.getDefault().post(new ShowPayManagerEvent());
+                    //EventBus.getDefault().post(new ShowPayManagerEvent());
                     updateLastFragment(mCurrentMethod);
                     payMethodItem.isSelected = true;
                     mCurrentMethod = payMethodItem;
@@ -549,7 +548,7 @@ public class MainPayFragment extends MobclickAgentFragment implements IPaymentMe
                     }
 
                     EventBus.getDefault().post(new RegisterDeWoCustomerLoginScanEvent());
-                    EventBus.getDefault().post(new ShowPayManagerEvent());
+                    //EventBus.getDefault().post(new ShowPayManagerEvent());
                     updateLastFragment(mCurrentMethod);
                     payMethodItem.isSelected = true;
                     mCurrentMethod = payMethodItem;

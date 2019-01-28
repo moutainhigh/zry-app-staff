@@ -2,8 +2,6 @@ package com.zhongmei.yunfu.http.utils;
 
 import android.net.Uri;
 
-import com.zhongmei.yunfu.ServerKey;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,11 +18,11 @@ public class RequestRetryUtil {
     private static Set<String> retryUrlPaths = new HashSet<>();
 
     static {
-        retryUrlPaths.add(Uri.parse(ServerKey.tradeModifyBuffet()).getPath());
+        /*retryUrlPaths.add(Uri.parse(ServerKey.tradeModifyBuffet()).getPath());
         retryUrlPaths.add(Uri.parse(ServerKey.dinnerSetTableAndAccept()).getPath());
         retryUrlPaths.add(Uri.parse(ServerKey.newTradeModifyDinner()).getPath());
         retryUrlPaths.add(Uri.parse(ServerKey.getGroupModify()).getPath());
-        retryUrlPaths.add(Uri.parse(ServerKey.modifyPrintStatus()).getPath());
+        retryUrlPaths.add(Uri.parse(ServerKey.modifyPrintStatus()).getPath());*/
     }
 
 

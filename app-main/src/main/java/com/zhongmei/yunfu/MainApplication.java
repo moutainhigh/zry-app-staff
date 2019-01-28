@@ -2,23 +2,19 @@ package com.zhongmei.yunfu;
 
 import android.content.Context;
 import android.os.Build;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 
 import com.zhongmei.OSLog;
 import com.zhongmei.beauty.operates.BeautyOperateData;
-import com.zhongmei.bty.AppDialog;
 import com.zhongmei.bty.basemodule.auth.permission.manager.AuthLogManager;
 import com.zhongmei.bty.basemodule.commonbusiness.cache.PaySettingCache;
 import com.zhongmei.bty.basemodule.discount.cache.MarketRuleCache;
 import com.zhongmei.bty.basemodule.notifycenter.manager.BatteryReceiverManager;
 import com.zhongmei.bty.basemodule.session.support.IAuthUserProxy;
 import com.zhongmei.bty.basemodule.session.support.TradeDeleter;
-import com.zhongmei.bty.commonmodule.data.operate.BeautyOperatesFactory;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.data.db.local.LocalDBHelperFunc;
-import com.zhongmei.bty.data.operates.OperateData;
 import com.zhongmei.bty.snack.offline.Snack;
 import com.zhongmei.bty.snack.offline.SnackImpl;
 import com.zhongmei.yunfu.context.AppBuildConfig;
@@ -61,10 +57,6 @@ public class MainApplication extends BaseApplication {
         this.status = status;
     }
 
-    final Handler mHandler = new Handler();
-
-    private AppDialog appDialog;
-
     public static MainApplication getInstance() {
         return (MainApplication) sInstance;
     }
@@ -72,18 +64,15 @@ public class MainApplication extends BaseApplication {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        appDialog = new AppDialog(this);
     }
 
     @Override
     public void onCreate() {
         long starttime = System.currentTimeMillis();
         super.onCreate();
-        //UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);//第三个参数为push secret
         setStrictModeEnabled(BuildConfig.DEBUG);
         initOperateFactory();
         BatteryReceiverManager.registerReceiver(this);
-        //PrintConfigManager.getInstance().initContext(this);//为打印独立模块初始化Context参数。
         RequestObject.getIntercept().registerObserver(new RequestObjectObservable.InterceptCreateObserver() {
             @Override
             public void onChanged(RequestObject<?> request) {
@@ -111,15 +100,11 @@ public class MainApplication extends BaseApplication {
     @Override
     public void onTerminate() {
         super.onTerminate();
-        //DisplaySDK.getInstance().destroy();
     }
 
     private void initOperateFactory() {
         AppBuildConfig.init(BuildConfig.class);
-        OperatesFactory.init(OperateData.sOperataDataMap, BuildConfig.MY_BUILD_TYPE);
-        //OperatesRetailFactory.init(OperateRetailData.sOperataDataMap, BuildConfig.MY_BUILD_TYPE);
-        BeautyOperatesFactory.init(BeautyOperateData.sOperataDataMap, BuildConfig.MY_BUILD_TYPE);
-        //delegateContractOverdue();
+        OperatesFactory.init(BeautyOperateData.sOperataDataMap, BuildConfig.MY_BUILD_TYPE);
         SyncReceiver.registerReceiver(this);
     }
 
@@ -198,9 +183,6 @@ public class MainApplication extends BaseApplication {
 //               把IAuthUser置位空
                 IAuthUser.Holder.refresh(null);
                 ShopInfoCfg.getInstance().logout();
-
-//                Intent hideIntent = new Intent(Constant.HAVE_NO_LOGINDATA);
-//                BaseApplication.sInstance.sendBroadcast(hideIntent);
             }
         });
     }

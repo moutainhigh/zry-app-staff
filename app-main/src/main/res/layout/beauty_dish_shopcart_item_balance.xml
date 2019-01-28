@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="right"
-                android:layout_marginRight="40dp"
+                android:layout_marginRight="5dp"
                 android:layout_gravity="center_vertical">
 
                 <TextView
@@ -47,8 +47,8 @@
                 <TextView
                     android:id="@+id/dish_price"
                     style="@style/layout.w.w"
+                    android:layout_width="wrap_content"
                     android:layout_marginLeft="0dp"
-                    android:minWidth="20dp"
                     android:textColor="#666666"
                     android:textSize="@dimen/text_14" />
             </LinearLayout>
@@ -120,11 +120,39 @@
             android:layout_toLeftOf="@id/dish_status"
             android:ellipsize="end"
             android:gravity="center_vertical"
-            android:textSize="@dimen/text_16"
-            android:drawablePadding="20dp"
+            android:textSize="@dimen/text_10"
+            android:drawablePadding="10dp"
             android:layout_marginLeft="2dp"
             android:textColor="@color/beauty_color_333333"
             android:singleLine="false" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_extra_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+
+        <TextView
+            android:id="@+id/tv_server_times"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_10"
+            android:textColor="@color/text_color_gray"
+            android:layout_alignParentLeft="true"
+            android:text="次数：无限次数"/>
+
+
+        <TextView
+            android:id="@+id/tv_dead_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_10"
+            android:textColor="@color/text_color_gray"
+            android:layout_alignParentRight="true"
+            android:text="有效期：2018-09-09"/>
     </RelativeLayout>
 
     <!-- 退菜明细 -->

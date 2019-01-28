@@ -2688,6 +2688,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         ImageView imgAnchorRight;//右边箭头
 
         TextView tvWeighFlag; //称重标志
+
+
+        public RelativeLayout rl_extraInfo;//额外信息，美业使用
+        public TextView tv_serverTimes;//服务次数
+        public TextView tv_deadLines;//有效期
     }
 
     class PropertiesHolder {

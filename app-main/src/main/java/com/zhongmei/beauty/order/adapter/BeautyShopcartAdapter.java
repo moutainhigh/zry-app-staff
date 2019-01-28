@@ -6,7 +6,10 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.zhongmei.bty.dinner.shopcart.adapter.SuperShopCartAdapter;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItem;
@@ -16,9 +19,11 @@ import com.zhongmei.bty.basemodule.orderdish.enums.ItemType;
 import com.zhongmei.bty.basemodule.orderdish.utils.ShopcartItemUtils;
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.yunfu.db.entity.trade.TradeUser;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerCashManager;
 import com.zhongmei.beauty.utils.TradeUserUtil;
+import com.zhongmei.yunfu.db.enums.DishType;
 import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.bty.common.view.NumberEditText;
 import com.zhongmei.yunfu.db.enums.Bool;
@@ -26,6 +31,8 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.bty.mobilepay.event.ActionClose;
 import com.zhongmei.bty.dinner.shopcart.adapter.DinnerBanlanceAdapter;
+
+import org.w3c.dom.Text;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -67,6 +74,82 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         super.showDishLayout(holder, item, position);
         showNumEditView(item, holder);
         setItemSelectedBg(holder, item);
+        setExtraInfo(holder,item); //设置服务购买中的次数，有效期
+    }
+
+    private void setExtraInfo(ViewHolder holder,DishDataItem item){
+        if(!isServerComb(item)){
+            holder.rl_extraInfo.setVisibility(View.GONE);
+            return;
+        }
+
+        holder.rl_extraInfo.setVisibility(View.VISIBLE);
+        //显示
+        holder.tv_serverTimes.setText(getServerTimesHint(item.getBase()));
+        holder.tv_deadLines.setText(getDeadLineHint(item.getBase()));
+    }
+
+    /**
+     * 获取次数
+     * @param shopcartItemBase
+     * @return
+     */
+    private String getServerTimesHint(IShopcartItemBase shopcartItemBase){
+        DishShop dishShop=shopcartItemBase.getDishShop();
+        String serverTimes=context.getResources().getString(R.string.server_times_unlimit);
+
+        if(dishShop!=null && dishShop.getSaleTotal().compareTo(BigDecimal.ZERO)>0){
+            serverTimes=dishShop.getSaleTotal().multiply(shopcartItemBase.getSingleQty()).intValue()+"次";
+        }
+
+        return String.format(context.getResources().getString(R.string.server_times_hint),serverTimes);
+    }
+
+    /**
+     * 获取时间限制
+     * @param shopcartItemBase
+     * @return
+     */
+    private String getDeadLineHint(IShopcartItemBase shopcartItemBase){
+        DishShop dishShop=shopcartItemBase.getDishShop();
+        String deadLine=context.getResources().getString(R.string.server_time_unlimit);
+
+        if(dishShop!=null && dishShop.getMinNum()!=null && dishShop.getMaxNum()!=null && dishShop.getMinNum().compareTo(BigDecimal.ZERO)>0){
+            switch (dishShop.getMaxNum().intValue()){
+                case 1:
+                    deadLine=dishShop.getMinNum()+context.getResources().getString(R.string.time_day);
+                    break;
+                case 2:
+                    deadLine=dishShop.getMinNum()+context.getResources().getString(R.string.time_week);
+                    break;
+                case 3:
+                    deadLine=dishShop.getMinNum()+context.getResources().getString(R.string.time_month);
+                    break;
+                default:
+                    deadLine=context.getResources().getString(R.string.server_time_unlimit);
+                    break;
+            }
+        }
+
+        return String.format(context.getResources().getString(R.string.server_deadline_hint),deadLine);
+    }
+
+    private boolean isServerComb(DishDataItem item){
+        if(item==null || item.getBase()==null || item.getBase().getDishShop()==null){
+            return false;
+        }
+
+        return item.getBase().getDishShop().getType() == DishType.SERVER_COMBO_ALL || item.getBase().getDishShop().getType() == DishType.SERVER_COMBO_PART;
+
+    }
+
+    @Override
+    protected View initDishLayout(ViewHolder holder) {
+        View contentView=super.initDishLayout(holder);
+        holder.rl_extraInfo=(RelativeLayout) contentView.findViewById(R.id.rl_extra_info);
+        holder.tv_serverTimes=(TextView)contentView.findViewById(R.id.tv_server_times);
+        holder.tv_deadLines=(TextView)contentView.findViewById(R.id.tv_dead_line);
+        return contentView;
     }
 
     protected void showDiscountDrawable(ViewHolder holder, DishDataItem item) {

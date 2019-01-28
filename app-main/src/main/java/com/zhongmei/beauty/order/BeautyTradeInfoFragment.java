@@ -174,6 +174,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                 case SuperShopCartAdapter.MARKET_TYPE:
                 case SuperShopCartAdapter.MEMO_TYPE:
                 case SuperShopCartAdapter.CARD_SERVICE_LABEL:
+                case SuperShopCartAdapter.CARD_SERVICE_ITEM:
                     break;
                 default:
                     createMenu0(menu, 0);

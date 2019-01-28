@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="type_card_server">"次卡服务"</string>
+    <string name="time_day">天</string>
+    <string name="time_week">周</string>
+    <string name="time_month">月</string>
+    <string name="server_times_hint">次数:%1$s</string>
+    <string name="server_deadline_hint">有效期:%1$s</string>
+    <string name="server_times_unlimit">无限次</string>
+    <string name="server_time_unlimit">无限制</string>
 </resources>

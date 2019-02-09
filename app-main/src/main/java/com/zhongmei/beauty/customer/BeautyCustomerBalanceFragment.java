@@ -22,7 +22,6 @@ import com.zhongmei.atask.TaskContext;
 import com.zhongmei.beauty.operates.BeautyCustomerOperates;
 import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
-import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo;
 import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
 import com.zhongmei.bty.basemodule.commonbusiness.utils.ServerAddressUtil;
@@ -212,6 +211,9 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     @ViewById(R.id.customer_expense_rb)
     RadioButton customer_expense_rb;
 
+    @ViewById(R.id.page_title)
+    TextView page_title;
+
     private int currentPage = 1;
 
     // 充值记录
@@ -349,26 +351,32 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
             case CustomerContants.TYPE_BALANCE:
                 balance_radioGroup.check(R.id.customer_banlance_rb);
                 setTabSelected(R.id.customer_banlance_rb);
+                page_title.setText(getString(R.string.customer_banlance));
                 break;
             case CustomerContants.TYPE_INTEGRAL:
                 balance_radioGroup.check(R.id.customer_integral_canuse_rb);
                 setTabSelected(R.id.customer_integral_canuse_rb);
+                page_title.setText(getString(R.string.customer_integral_canuse));
                 break;
             case CustomerContants.TYPE_COUPON:
                 balance_radioGroup.check(R.id.customer_coupon_use_rb);
                 setTabSelected(R.id.customer_coupon_use_rb);
+                page_title.setText(getString(R.string.customer_coupon_use));
                 break;
             case CustomerContants.TYPE_CARD_TIME:
                 balance_radioGroup.check(R.id.customer_card_time_rb);
                 setTabSelected(R.id.customer_card_time_rb);
+                page_title.setText(getString(R.string.customer_card_time));
                 break;
             case CustomerContants.TYPE_WX_APP:
                 balance_radioGroup.check(R.id.customer_wx_app_rb);
                 setTabSelected(R.id.customer_wx_app_rb);
+                page_title.setText(getString(R.string.customer_wxapp_service));
                 break;
             case CustomerContants.TYPE_EXPENSE:
                 balance_radioGroup.check(R.id.customer_expense_rb);
                 setTabSelected(R.id.customer_expense_rb);
+                page_title.setText(getString(R.string.customer_expense_service));
                 break;
             default:
                 break;
@@ -586,9 +594,11 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 mExpenseLayout.setVisibility(View.GONE);
                 mBalanceLv.setAdapter(mChargingAdapter);
                 curCheck = CustomerContants.TYPE_BALANCE;
+                page_title.setText(getString(R.string.customer_banlance));
                 loadChargeRecord();
                 break;
             case R.id.customer_integral_canuse_rb:// 可用积分
+                page_title.setText(getString(R.string.customer_integral_canuse));
                 if (ecCard == null) {
                     mLayoutBtn.setVisibility(View.GONE);
                     mCardIntegralLv.setVisibility(View.GONE);
@@ -612,6 +622,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 loadIntegral();
                 break;
             case R.id.customer_coupon_use_rb:// 可用优惠券
+                page_title.setText(getString(R.string.customer_coupon_use));
                 mIntegralLayout.setVisibility(View.GONE);
                 mBalanceLayout.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.GONE);
@@ -620,6 +631,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 getCouponInfos();
                 break;
             case R.id.customer_card_time_rb:
+                page_title.setText(getString(R.string.customer_card_time));
                 mIntegralLayout.setVisibility(View.GONE);
                 mBalanceLayout.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.GONE);
@@ -628,6 +640,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 getCardTimeRecord();
                 break;
             case R.id.customer_wx_app_rb:
+                page_title.setText(getString(R.string.customer_wxapp_service));
                 mIntegralLayout.setVisibility(View.GONE);
                 mBalanceLayout.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.GONE);
@@ -636,6 +649,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 getWxAppRecord();
                 break;
             case R.id.customer_expense_rb:
+                page_title.setText(getString(R.string.customer_expense_service));
                 mIntegralLayout.setVisibility(View.GONE);
                 gridView.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.VISIBLE);

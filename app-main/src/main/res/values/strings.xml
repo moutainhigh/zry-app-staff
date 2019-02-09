@@ -236,4 +236,6 @@
     <string name="handover_person">交接人</string>
     <string name="customer_password_length_6">请输入6位数密码</string>
     <string name="display_pay_fail">支付失败</string>
+    <string name="order_type_lable">交易类型：</string>
+    <string name="order_amount_lable">交易金额：</string>
 </resources>

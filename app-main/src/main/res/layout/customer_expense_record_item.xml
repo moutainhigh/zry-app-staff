@@ -2,144 +2,120 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|right"
+        android:layout_marginLeft="15dp"
+        android:textColor="@color/customer_text_black"
+        android:textSize="@dimen/text_16"/>
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/customer_account_table_h"
-        android:orientation="horizontal"
-        android:layout_marginLeft="@dimen/customer_account_padding"
-        android:layout_marginRight="@dimen/customer_account_padding">
+        android:layout_width="40dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:gravity="center"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@color/customer_rule_gray"
+            android:gravity="center"/>
 
-        <TextView
-            android:id="@+id/time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
+        <ImageView
+            android:id="@+id/typeIcon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:gravity="center"
-            android:textColor="@color/customer_text_black"
-            android:textSize="@dimen/text_16"
-            tools:text="2017-09-01 11:11" />
+            android:background="@drawable/customer_sales_icon"/>
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:background="@color/customer_rule_gray"
+            android:gravity="center"/>
 
+    </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/other_balance_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:layout_marginLeft="15dp"
+        android:layout_gravity="center|left"
+        android:orientation="vertical"
+        android:visibility="visible">
         <TextView
             android:id="@+id/type"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="left"
             android:textColor="@color/customer_text_black"
             android:textSize="@dimen/text_16"
             tools:text="类型" />
 
-        <!--<ImageView-->
-        <!--android:id="@+id/type"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center" />-->
-        <!--</LinearLayout>-->
-
-        <RelativeLayout
-            android:id="@+id/charging_balance_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="right"
-            android:layout_weight="1"
-            android:visibility="gone">
-
-            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
-                android:id="@+id/balance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/customer_text_black"
-                android:textSize="@dimen/text_16"
-                tools:text="@string/returnMoney" />
-
-            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
-                android:id="@+id/give"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/balance"
-                android:textColor="@color/customer_text_black"
-                android:textSize="@dimen/text_16"
-                tools:text="@string/customer_charging_rule_money" />
-        </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/other_balance_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:visibility="visible">
-
-            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
-                android:id="@+id/other_balance"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="left"
-                android:textColor="@color/customer_text_black"
-                android:textSize="@dimen/text_16"
-                tools:text="消费270" />
-            <!--@dimen/customer_balance_other_balance_l-->
-            <!--@string/customer_account_list_consume-->
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:orientation="vertical"
-            android:paddingLeft="20dp"
-            android:visibility="visible">
-
-            <com.zhongmei.bty.commonmodule.view.CurrencyTextView
-                android:id="@+id/end_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:textColor="@color/customer_text_black"
-                android:textSize="@dimen/text_16"
-                tools:text="@string/zero" />
-        </LinearLayout>
-
         <TextView
-            android:id="@+id/person"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
+            android:id="@+id/other_balance"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
+            android:gravity="left"
             android:textColor="@color/customer_text_black"
             android:textSize="@dimen/text_16"
-            tools:text="weixin"
-            android:visibility="gone"/>
+            tools:text="消费270" />
 
+    </LinearLayout>
+    <TextView
+        android:id="@+id/end_value"
+        android:layout_width="150dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_gravity="center|right"
+        android:layout_height="wrap_content"
+        android:textColor="@color/customer_text_black"
+        android:textSize="@dimen/text_16"
+        tools:text="@string/zero" />
+    <TextView
+        android:id="@+id/person"
+        android:layout_width="0dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:gravity="center|right"
+        android:textColor="@color/customer_text_black"
+        android:textSize="@dimen/text_16"
+        tools:text="weixin"
+        android:visibility="gone"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/view_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|right"
+        android:gravity="center|right"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center|right"
+            android:background="@drawable/customer_see_detail"/>
         <TextView
-            android:id="@+id/view_details"
-            android:layout_width="0dp"
-            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center|right"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/zm_theme_color"
+            android:textColor="@color/customer_text_black"
             android:textSize="@dimen/text_16"
             android:text="查看详情"
             android:visibility="visible" />
-
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_alignParentBottom="true"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:background="@color/customer_divide_line" />
+
 </LinearLayout>

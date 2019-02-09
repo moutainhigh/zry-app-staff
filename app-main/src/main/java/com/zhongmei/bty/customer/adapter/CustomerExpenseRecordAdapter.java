@@ -1,6 +1,7 @@
 package com.zhongmei.bty.customer.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -64,6 +65,7 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.customer_expense_record_item, parent, false);
+            viewHolder.itemView = (LinearLayout) convertView.findViewById(R.id.itemView);
             viewHolder.time = (TextView) convertView.findViewById(R.id.time);
             viewHolder.tradeType = (TextView) convertView.findViewById(R.id.type);
             viewHolder.tradeNo = (TextView) convertView.findViewById(R.id.other_balance);
@@ -76,6 +78,11 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         if (mRecordList != null) {
+
+            if(position % 2 == 1){
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#F1F1F1"));
+            }
+
             final CustomerExpenseRecordResp record = mRecordList.get(position);
             viewHolder.time.setText(formatter.format(new Date(record.getModifyDateTime())));
             viewHolder.tradeType.setText(mContext.getResources().getString(R.string.order_type_lable)+record.getTradeType());
@@ -112,7 +119,7 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
 
     class ViewHolder {
         TextView time, tradeType, tradeNo, tradeValue, person;
-        LinearLayout viewDetails;
+        LinearLayout itemView,viewDetails;
         ImageView typeIcon;
     }
 

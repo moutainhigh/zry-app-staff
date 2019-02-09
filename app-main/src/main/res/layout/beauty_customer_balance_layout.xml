@@ -20,6 +20,7 @@
             android:layout_gravity="center_vertical"
             android:drawableLeft="@drawable/actionbar_back_icon"
             android:drawablePadding="10px"
+            android:paddingLeft="15dp"
             android:gravity="center|left"
             android:scaleType="centerInside"
             android:text="返回"

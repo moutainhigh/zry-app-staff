@@ -10,28 +10,33 @@
         android:layout_height="wrap_content"
         android:background="@drawable/beauty_order_card_mark"
         android:paddingLeft="13dp"
-        android:paddingTop="10dp"
-        android:paddingRight="13dp"
-        android:paddingBottom="10dp">
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:src="@drawable/beauty_order_card_point" />
 
         <TextView
             android:id="@+id/tv_name"
             style="@style/beauty.order.membership.item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxLength="4"
+            android:maxLength="10"
             android:maxLines="1"
             android:paddingTop="0dp"
             android:textStyle="bold"
-            tools:text="回锅肉" />
+            tools:text="服务次卡" />
 
         <TextView
             android:id="@+id/tv_usable_num"
             style="@style/beauty.order.membership.item_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="9dp"
+            android:layout_below="@id/tv_name"
+            android:layout_marginTop="9dp"
             android:includeFontPadding="false"
             android:maxLines="1"
             android:textStyle="bold"
@@ -42,9 +47,10 @@
             style="@style/beauty.order.membership.item_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_name"
+            android:layout_below="@id/tv_usable_num"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="9dp"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp"
             android:includeFontPadding="false"
             android:maxLines="1"
             tools:text="有效期: %s" />

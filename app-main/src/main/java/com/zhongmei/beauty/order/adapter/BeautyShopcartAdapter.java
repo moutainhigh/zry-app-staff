@@ -114,7 +114,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         DishShop dishShop=shopcartItemBase.getDishShop();
         String deadLine=context.getResources().getString(R.string.server_time_unlimit);
 
-        if(dishShop!=null && dishShop.getMinNum()!=null && dishShop.getMaxNum()!=null && dishShop.getMinNum().compareTo(BigDecimal.ZERO)>0){
+        if(dishShop!=null && dishShop.getMinNum()!=null && dishShop.getMaxNum()!=null){
             switch (dishShop.getMaxNum().intValue()){
                 case 1:
                     deadLine=dishShop.getMinNum()+context.getResources().getString(R.string.time_day);
@@ -125,7 +125,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
                 case 3:
                     deadLine=dishShop.getMinNum()+context.getResources().getString(R.string.time_month);
                     break;
-                default:
+                default://-1表示无限制
                     deadLine=context.getResources().getString(R.string.server_time_unlimit);
                     break;
             }

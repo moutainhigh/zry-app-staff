@@ -193,7 +193,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
             }
             DishDataItem item = new DishDataItem(ItemType.TRADE_USER);
             item.setTradeUser(tradeUser);
-            item.setName(TradeUserUtil.getUserName(tradeUser));
+            item.setName(String.format(context.getString(R.string.order_dish_trade_user),TradeUserUtil.getUserName(tradeUser)));
             item.setNeedTopLine(true);
             data.add(item);
         }

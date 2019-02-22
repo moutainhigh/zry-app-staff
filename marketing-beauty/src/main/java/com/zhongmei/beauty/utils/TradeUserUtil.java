@@ -285,7 +285,7 @@ public class TradeUserUtil {
 //        return getUserName(context,tradeUser.getRoleName(),tradeUser.getUserName());
         String roleName = tradeUser.getRoleName();
         String userName = tradeUser.getUserName();
-        return roleName + ":" + userName;
+        return roleName + "-" + userName;
     }
 
 //    public static String getUserName(Context context,String roleName,String name){

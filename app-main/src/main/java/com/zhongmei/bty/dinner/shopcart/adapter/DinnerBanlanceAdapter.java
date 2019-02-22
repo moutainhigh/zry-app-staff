@@ -22,6 +22,7 @@ import com.zhongmei.bty.basemodule.orderdish.enums.ItemType;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerCashManager;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
+import com.zhongmei.bty.snack.event.EventSelectDish;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.yunfu.context.util.Utils;
@@ -43,6 +44,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 结账购物车界面视图adapter
@@ -638,9 +641,9 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 selectedItem.getBase().setSelected(true);
             }
             notifyDataSetChanged();
-            /*EventSelectDish mEventSelectDish = new EventSelectDish();
+            EventSelectDish mEventSelectDish = new EventSelectDish();
             mEventSelectDish.setSelectIndex(position);
-            EventBus.getDefault().post(mEventSelectDish);*/
+            EventBus.getDefault().post(mEventSelectDish);
         }
 
     }

@@ -622,8 +622,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     protected void showUser(UserHolder userHolder, DishDataItem item, boolean isDefine) {
         if (!isDefine) {
             userHolder.user_info.setLayoutParams(getExtraDiyWh(context, true));
+            setDrawableLeft(userHolder.user_info,R.drawable.icon_trade_item_user);
         } else {
             userHolder.user_info.setLayoutParams(getExtraDiyWh(context, false));
+            setDrawableLeft(userHolder.user_info,R.drawable.icon_trade_user);
         }
         if (item.isNeedTopLine()) {
             userHolder.topLine.setVisibility(View.VISIBLE);
@@ -631,6 +633,13 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             userHolder.topLine.setVisibility(View.GONE);
         }
         userHolder.user_info.setText(item.getName());
+    }
+
+    private void setDrawableLeft(TextView tv,int iconResId){
+        Drawable drawableLeft = context.getResources().getDrawable(iconResId);
+        tv.setCompoundDrawablesWithIntrinsicBounds(drawableLeft,
+                null, null, null);
+        tv.setCompoundDrawablePadding(DensityUtil.dip2px(context,5));
     }
 
     protected void showTitle(TitleHolder titleHolder, DishDataItem item) {

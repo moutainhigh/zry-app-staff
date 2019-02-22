@@ -623,9 +623,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         if (!isDefine) {
             userHolder.user_info.setLayoutParams(getExtraDiyWh(context, true));
             setDrawableLeft(userHolder.user_info,R.drawable.icon_trade_item_user);
+            userHolder.user_info.setTextColor(context.getResources().getColor(R.color.remark_text_color));
         } else {
             userHolder.user_info.setLayoutParams(getExtraDiyWh(context, false));
             setDrawableLeft(userHolder.user_info,R.drawable.icon_trade_user);
+            userHolder.user_info.setTextColor(context.getResources().getColor(R.color.beauty_color_FC2584));
         }
         if (item.isNeedTopLine()) {
             userHolder.topLine.setVisibility(View.VISIBLE);
@@ -1342,12 +1344,17 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
      */
     protected LinearLayout.LayoutParams getExtraDiyWh(Context context, boolean isChild) {
         int left = 0;
+        int bottom=0;
+        int top=0;
         if (isChild) {
             left = DensityUtil.dip2px(context, 44);
         } else {
             left = DensityUtil.dip2px(context, 10);
+            top=DensityUtil.dip2px(context, 10);
+            bottom=DensityUtil.dip2px(context, 10);
+
         }
-        return getExtraDiyWh(left, 0, 0, 0);
+        return getExtraDiyWh(left, top, 0, bottom);
     }
 
     protected LinearLayout.LayoutParams getExtraDiyWh(int left, int top, int right, int bottom) {

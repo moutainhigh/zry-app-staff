@@ -95,7 +95,9 @@
     <!--<string name="combine_cash_text">应收：￥ %s 组合支付</string>-->
     <string name="common_save">保存</string>
     <string name="common_submit">确定</string>
+    <string name="common_submit_update">确定升级</string>
     <string name="common_cancel">取消</string>
+    <string name="common_cancel_update">暂不升级</string>
     <string name="common_neu">其它</string>
     <string name="calm_logout_yes">确定</string>
     <string name="calm_logout_no">取消</string>

@@ -8,6 +8,7 @@ import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +35,7 @@ import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment.CommonDialogFragmentBuilder;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragmentExt;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragmentExt.CommonDialogFragmentExtBuilder;
+import com.zhongmei.yunfu.ui.view.UpdateHintDialog;
 import com.zhongmei.yunfu.util.DialogUtil;
 
 import org.androidannotations.annotations.AfterViews;
@@ -266,10 +268,11 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
 
     private void showCheckUpdateAppDialog(final InitCheck initCheck) {
         boolean isForce = ShopInfoCfg.getInstance().getAppVersionInfo().isForce();
-        CommonDialogFragmentBuilder builder = new CommonDialogFragmentBuilder(MainApplication.getInstance())
-                .title(getApplicationContext().getResources().getString(R.string.login_new_update))
-                .iconType(CommonDialogFragment.ICON_HINT)
-                .positiveText(R.string.common_submit)
+        UpdateHintDialog.UpdateHintDialogBuilder builder = new UpdateHintDialog.UpdateHintDialogBuilder(MainApplication.getInstance())
+                .title("系统版本升级"+ShopInfoCfg.getInstance().getAppVersionInfo().getVersionName())
+                .message(ShopInfoCfg.getInstance().getAppVersionInfo().getVersionDes())
+//                .title(getApplicationContext().getResources().getString(R.string.login_new_update))
+                .positiveText(R.string.common_submit_update)
                 .positiveLinstner(new OnClickListener() {
 
                     @Override
@@ -285,7 +288,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
                     }
                 });
         if (!isForce) {
-            builder = builder.negativeText(R.string.common_cancel)
+            builder = builder.negativeText(R.string.common_cancel_update)
                     .negativeLisnter(new OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -296,8 +299,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
                     });
         }
 
-        CommonDialogFragment dialogFragment = builder.build();
-        dialogFragment.setCancelWithHomeKey(false);
+        UpdateHintDialog dialogFragment = builder.build();
         dialogFragment.show(getSupportFragmentManager(), "UpdateDialog");
     }
 

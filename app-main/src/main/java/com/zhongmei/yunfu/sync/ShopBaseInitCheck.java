@@ -48,10 +48,10 @@ public class ShopBaseInitCheck extends AbsInitCheck {
                     return;
                 }
 
-                checkProgress(ShopBaseInitCheck.this, 10, errorMsg);
+                checkProgress(ShopBaseInitCheck.this, 50, errorMsg);
                 if (errorCode == -1) {
-                    checkProgress(ShopBaseInitCheck.this, 100, MainApplication.getInstance().getString(R.string.login_check_device));
-                    //checkUpdateAll();
+//                    checkProgress(ShopBaseInitCheck.this, 100, MainApplication.getInstance().getString(R.string.login_check_device));
+                    checkUpdateAll();
                 }
             }
         });

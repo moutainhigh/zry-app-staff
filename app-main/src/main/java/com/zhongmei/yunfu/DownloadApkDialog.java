@@ -58,7 +58,7 @@ public class DownloadApkDialog {
         mContext = context;
         this.cancelListener = cancelListener;
         CommonDialogFragment.CommonDialogFragmentBuilder builder = new CommonDialogFragment.CommonDialogFragmentBuilder(MainApplication.getInstance())
-                .title(context.getString(R.string.update_downloading) + "\n" + context.getString(R.string.poetry))
+                .title(context.getString(R.string.update_downloading))
                 .iconType(CommonDialogFragment.ICON_HINT);
         if (!info.isForce()) {
             builder.negativeText(R.string.cancel)
@@ -76,7 +76,7 @@ public class DownloadApkDialog {
         mDialogFragment.setCancelWithHomeKey(false);
         mDownloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         mInfo = info;
-        mUrl = info.getUpdateUrl();
+        mUrl = info.getDownloadUrl();
         //leiliang
 //        mUrl = "http://119.6.238.89:9999/down.androidgame-store.com/201602171005/C5BA789BB4777A3B96BAC5E6CA3897F7/new/game1/38/97638/altosadventure_1455501554099.apk?f=web_1";
     }
@@ -210,7 +210,7 @@ public class DownloadApkDialog {
         }
 
         if (event.totalBytes < 0) {
-            mDialogFragment.setTitle(mContext.getString(R.string.update_download_detail) + "\n" + mContext.getString(R.string.poetry));
+            mDialogFragment.setTitle(mContext.getString(R.string.update_download_detail));
         } else {
             mDialogFragment.setTitle(mContext.getString(R.string.update_download_detail) + formatDownloadByteCount(event.downloadBytes) + "M/" + formatDownloadByteCount(event.totalBytes) + "M --- " +
                     event.downloadBytes * 100 / event.totalBytes + "%");

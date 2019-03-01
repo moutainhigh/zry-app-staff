@@ -6,9 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.text.Html;
 import android.text.TextUtils;
-import android.text.method.ScrollingMovementMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
@@ -23,41 +21,35 @@ import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
 /**
- * Created by dingzb on 2019/2/28.
+ * Created by dingzb on 2019/3/1.
  */
-@EFragment(R.layout.dialog_update_hint)
-public class UpdateHintDialog extends DialogFragment implements DialogInterface.OnKeyListener,View.OnClickListener{
+@EFragment(R.layout.dialog_download_hint)
+public class DownloadHintDialog extends DialogFragment implements DialogInterface.OnKeyListener,View.OnClickListener{
 
-    @ViewById(R.id.common_dialog_title)
-    protected TextView tv_title;
+    @ViewById(R.id.pb_round)
+   public RoundProgressBar pb_round;
 
-    @ViewById(R.id.common_dialog_message)
-    protected TextView tv_message;
+    @ViewById(R.id.tv_message)
+   public TextView tv_message;
 
-    @ViewById(R.id.positive_button)
-    protected Button btn_positive;
+    @ViewById(R.id.btn_negative)
+    public Button btn_negative;
 
-    @ViewById(R.id.negative_button)
-    protected Button btn_negative;
+    @ViewById(R.id.btn_positive)
+    public Button btn_positive;
 
-
-    @FragmentArg("title")
-    protected String title;
 
     @FragmentArg("message")
     protected String message;
+
+    @FragmentArg("max")
+    protected Long max;
 
     @FragmentArg("negative")
     protected String negative;
 
     @FragmentArg("positive")
     protected String positive;
-
-    @FragmentArg("positiveBgRes")
-    protected int positiveBgRes = -1;
-
-    @FragmentArg("negativeBgRes")
-    protected int negativeBgRes = -1;
 
     private View.OnClickListener onPositiveListener;
     private View.OnClickListener onNegativeListener;
@@ -74,11 +66,12 @@ public class UpdateHintDialog extends DialogFragment implements DialogInterface.
 
         getDialog().setCanceledOnTouchOutside(false);
 
-        if (!TextUtils.isEmpty(title)) {
-            tv_title.setText(title);
-        }
         if (!TextUtils.isEmpty(message)) {
             setMessage(message);
+        }
+        if(max!=null){
+            pb_round.setMax(max);
+            pb_round.setProgress(0);
         }
         getDialog().setOnKeyListener(this);
         if (!TextUtils.isEmpty(negative)) {
@@ -92,27 +85,7 @@ public class UpdateHintDialog extends DialogFragment implements DialogInterface.
             btn_positive.setVisibility(View.VISIBLE);
         }
 
-        if (negativeBgRes > -1) {
-            btn_negative.setBackgroundResource(negativeBgRes);
-        }
-
-        if (positiveBgRes > -1) {
-            btn_positive.setBackgroundResource(positiveBgRes);
-        }
-
-        if (btn_negative.getVisibility() == View.GONE) {
-            btn_positive
-                    .setBackgroundResource(com.zhongmei.yunfu.ui.R.drawable.commonmodule_dialog_positive_only);
-        } else if (btn_positive.getVisibility() == View.GONE) {
-            btn_negative
-                    .setBackgroundResource(com.zhongmei.yunfu.ui.R.drawable.commonmodule_dialog_positive_only);
-        } else if (btn_positive.getVisibility() == View.GONE
-                && btn_negative.getVisibility() == View.GONE) {
-            throw new IllegalArgumentException(
-                    "no botton dialog??please check your builder!!!");
-        }
     }
-
 
     @Override
     public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent event) {
@@ -132,13 +105,13 @@ public class UpdateHintDialog extends DialogFragment implements DialogInterface.
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.negative_button:
+            case R.id.btn_negative:
                 if(onNegativeListener!=null){
                     onNegativeListener.onClick(view);
                 }
                 dismissAllowingStateLoss();
                 break;
-            case R.id.positive_button:
+            case R.id.btn_positive:
                 if(onPositiveListener!=null){
                     onPositiveListener.onClick(view);
                 }
@@ -147,7 +120,7 @@ public class UpdateHintDialog extends DialogFragment implements DialogInterface.
         }
     }
 
-    public static class UpdateHintDialogBuilder {
+    public static class DownloadHintDialogBuilder {
         private Context context;
 
         protected Bundle mBundle;
@@ -156,13 +129,13 @@ public class UpdateHintDialog extends DialogFragment implements DialogInterface.
 
         protected View.OnClickListener mpositiveLinstner;
 
-        public UpdateHintDialogBuilder(Context context) {
+        public DownloadHintDialogBuilder(Context context) {
             this.context = context;
             mBundle = new Bundle();
         }
 
-        public UpdateHintDialog build() {
-            UpdateHintDialog fragment = new UpdateHintDialog_();
+        public DownloadHintDialog build() {
+            DownloadHintDialog fragment = new DownloadHintDialog_();
             fragment.setArguments(mBundle);
             if (mNegativeListener != null) {
                 fragment.setOnNegativeListener(mNegativeListener);
@@ -173,77 +146,54 @@ public class UpdateHintDialog extends DialogFragment implements DialogInterface.
             return fragment;
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder negativeLisnter(
+        public DownloadHintDialog.DownloadHintDialogBuilder negativeLisnter(
                 View.OnClickListener listener) {
             mNegativeListener = listener;
             return this;
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder positiveLinstner(
+        public DownloadHintDialog.DownloadHintDialogBuilder positiveLinstner(
                 View.OnClickListener listener) {
             mpositiveLinstner = listener;
             return this;
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder title(int title) {
-            return title(context.getResources()
-                    .getString(title));
+        public DownloadHintDialog.DownloadHintDialogBuilder max(long max) {
+             mBundle.putLong("max", max);
+             return this;
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder title(String title) {
-            mBundle.putString("title", title);
-            return this;
-        }
-
-        public UpdateHintDialog.UpdateHintDialogBuilder title(CharSequence title) {
-            mBundle.putCharSequence("title", title);
-            return this;
-        }
-
-
-        public UpdateHintDialog.UpdateHintDialogBuilder message(int title) {
+        public DownloadHintDialog.DownloadHintDialogBuilder message(int title) {
             return message(context.getResources()
                     .getString(title));
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder message(CharSequence message) {
+        public DownloadHintDialog.DownloadHintDialogBuilder message(CharSequence message) {
             mBundle.putCharSequence("message", message);
             return this;
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder negativeText(String negative) {
+        public DownloadHintDialog.DownloadHintDialogBuilder negativeText(String negative) {
             mBundle.putString("negative", negative);
             return this;
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder positiveText(String positive) {
+        public DownloadHintDialog.DownloadHintDialogBuilder positiveText(String positive) {
             mBundle.putString("positive", positive);
             return this;
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder negativeText(int negative) {
+        public DownloadHintDialog.DownloadHintDialogBuilder negativeText(int negative) {
             return negativeText(context.getResources()
                     .getString(negative));
         }
 
-        public UpdateHintDialog.UpdateHintDialogBuilder positiveText(int positive) {
+        public DownloadHintDialog.DownloadHintDialogBuilder positiveText(int positive) {
             return positiveText(context.getResources()
                     .getString(positive));
         }
 
-
-        public UpdateHintDialog.UpdateHintDialogBuilder negativeBtnRes(int res) {
-            mBundle.putInt("negativeBgRes", res);
-            return this;
-        }
-
-        public UpdateHintDialog.UpdateHintDialogBuilder positiveBtnRes(int res) {
-            mBundle.putInt("positiveBgRes", res);
-            return this;
-        }
-
     }
-
 
     public void setOnPositiveListener(View.OnClickListener onPositiveListener) {
         this.onPositiveListener = onPositiveListener;
@@ -255,7 +205,12 @@ public class UpdateHintDialog extends DialogFragment implements DialogInterface.
 
     public void setMessage(String message) {
         tv_message.setVisibility(View.VISIBLE);
-        tv_message.setText(Html.fromHtml(message));
-        tv_message.setMovementMethod(ScrollingMovementMethod.getInstance());
+        tv_message.setText(message);
     }
+
+    public void setProgress(Long progress){
+        pb_round.setProgress(progress);
+    }
+
+
 }

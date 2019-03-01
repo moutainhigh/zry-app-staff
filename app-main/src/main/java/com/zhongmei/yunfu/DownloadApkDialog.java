@@ -16,6 +16,7 @@ import android.webkit.MimeTypeMap;
 import com.zhongmei.yunfu.context.util.AppUtils;
 import com.zhongmei.yunfu.context.data.VersionInfo;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
+import com.zhongmei.yunfu.ui.view.DownloadHintDialog;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -39,7 +40,7 @@ public class DownloadApkDialog {
 
     private VersionInfo mInfo;
 
-    private CommonDialogFragment mDialogFragment;
+    private DownloadHintDialog mDialogFragment;
 
     private FragmentActivity mContext;
 
@@ -57,9 +58,9 @@ public class DownloadApkDialog {
     private DownloadApkDialog(final FragmentActivity context, VersionInfo info, final View.OnClickListener cancelListener) {
         mContext = context;
         this.cancelListener = cancelListener;
-        CommonDialogFragment.CommonDialogFragmentBuilder builder = new CommonDialogFragment.CommonDialogFragmentBuilder(MainApplication.getInstance())
-                .title(context.getString(R.string.update_downloading))
-                .iconType(CommonDialogFragment.ICON_HINT);
+        DownloadHintDialog.DownloadHintDialogBuilder builder = new DownloadHintDialog.DownloadHintDialogBuilder(MainApplication.getInstance())
+                .message(context.getString(R.string.update_downloading)).max(100);
+
         if (!info.isForce()) {
             builder.negativeText(R.string.cancel)
                     .negativeLisnter(new View.OnClickListener() {
@@ -73,7 +74,6 @@ public class DownloadApkDialog {
         }
         mDialogFragment = builder.build();
         mDialogFragment.setCancelable(false);
-        mDialogFragment.setCancelWithHomeKey(false);
         mDownloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         mInfo = info;
         mUrl = info.getDownloadUrl();
@@ -108,11 +108,11 @@ public class DownloadApkDialog {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    mDialogFragment.setTitle(mContext.getString(R.string.update_download_failed));
-                    mDialogFragment.mPositiveButton.setVisibility(View.VISIBLE);
-                    mDialogFragment.mNegativeButton.setVisibility(View.GONE);
-                    mDialogFragment.mPositiveButton.setText(R.string.common_submit);
-                    mDialogFragment.mPositiveButton.setOnClickListener(new View.OnClickListener() {
+                    mDialogFragment.setMessage(mContext.getString(R.string.update_download_failed));
+                    mDialogFragment.btn_positive.setVisibility(View.VISIBLE);
+                    mDialogFragment.btn_negative.setVisibility(View.GONE);
+                    mDialogFragment.btn_positive.setText(R.string.common_submit);
+                    mDialogFragment.btn_positive.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             dismiss();
@@ -152,24 +152,24 @@ public class DownloadApkDialog {
 
     public void onEventMainThread(final EventDownloadStatus event) {
         if (event.isError) {
-            mDialogFragment.setTitle(mContext.getString(R.string.update_retry_message));
-            mDialogFragment.mPositiveButton.setVisibility(View.VISIBLE);
-            mDialogFragment.mPositiveButton.setText(R.string.login_retry);
-            mDialogFragment.mPositiveButton.setOnClickListener(new View.OnClickListener() {
+            mDialogFragment.setMessage(mContext.getString(R.string.update_retry_message));
+            mDialogFragment.btn_positive.setVisibility(View.VISIBLE);
+            mDialogFragment.btn_positive.setText(R.string.login_retry);
+            mDialogFragment.btn_positive.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    star(true);
                     mDownloadManager = (DownloadManager) mContext.getSystemService(
                             Context.DOWNLOAD_SERVICE);
                     star(true);
-                    mDialogFragment.mPositiveButton.setVisibility(View.GONE);
+                    mDialogFragment.btn_positive.setVisibility(View.GONE);
                 }
             });
             if (!mInfo.isForce()) {
-                mDialogFragment.mNegativeButton.setVisibility(View.VISIBLE);
-                mDialogFragment.mNegativeButton.setBackgroundResource(R.drawable.commonmodule_dialog_nagetive);
-                mDialogFragment.mNegativeButton.setText(R.string.cancel);
-                mDialogFragment.mNegativeButton.setOnClickListener(new View.OnClickListener() {
+                mDialogFragment.btn_negative.setVisibility(View.VISIBLE);
+                mDialogFragment.btn_negative.setBackgroundResource(R.drawable.beauty_btn_dialog_cancel_selector);
+                mDialogFragment.btn_negative.setText(R.string.cancel);
+                mDialogFragment.btn_negative.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         dismiss();
@@ -180,9 +180,9 @@ public class DownloadApkDialog {
                     }
                 });
             } else {
-                mDialogFragment.mNegativeButton.setVisibility(View.VISIBLE);
-                mDialogFragment.mNegativeButton.setText(R.string.go_check_network);
-                mDialogFragment.mNegativeButton.setOnClickListener(new View.OnClickListener() {
+                mDialogFragment.btn_negative.setVisibility(View.VISIBLE);
+                mDialogFragment.btn_negative.setText(R.string.go_check_network);
+                mDialogFragment.btn_negative.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent wifiSettingsIntent = new Intent("android.settings.WIFI_SETTINGS");
@@ -190,30 +190,31 @@ public class DownloadApkDialog {
                     }
                 });
             }
-            mDialogFragment.mNegativeButton.setBackgroundResource(R.drawable.commonmodule_dialog_nagetive);
+            mDialogFragment.btn_negative.setBackgroundResource(R.drawable.beauty_btn_dialog_cancel_selector);
             return;
         }
 
         if (event.isSuccess) {
-            AppUtils.installAPK(mContext, event.localUrl);
-            mDialogFragment.setTitle(mContext.getString(R.string.update_download_success));
-
-            mDialogFragment.mPositiveButton.setVisibility(View.VISIBLE);
-            mDialogFragment.mPositiveButton.setText(R.string.common_submit);
-            mDialogFragment.mPositiveButton.setOnClickListener(new View.OnClickListener() {
+            mDialogFragment.setProgress(100L);
+            mDialogFragment.setMessage(mContext.getString(R.string.update_download_success));
+            mDialogFragment.btn_positive.setVisibility(View.VISIBLE);
+            mDialogFragment.btn_positive.setText(R.string.common_submit);
+            mDialogFragment.btn_positive.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AppUtils.installAPK(mContext, event.localUrl);
                 }
             });
+            AppUtils.installAPK(mContext, event.localUrl);
             return;
         }
 
-        if (event.totalBytes < 0) {
-            mDialogFragment.setTitle(mContext.getString(R.string.update_download_detail));
-        } else {
-            mDialogFragment.setTitle(mContext.getString(R.string.update_download_detail) + formatDownloadByteCount(event.downloadBytes) + "M/" + formatDownloadByteCount(event.totalBytes) + "M --- " +
-                    event.downloadBytes * 100 / event.totalBytes + "%");
+
+        mDialogFragment.setMessage(mContext.getString(R.string.update_download_detail));
+        if (event.totalBytes > 0)  {
+//            mDialogFragment.setMessage(mContext.getString(R.string.update_download_detail) + formatDownloadByteCount(event.downloadBytes) + "M/" + formatDownloadByteCount(event.totalBytes) + "M --- " +
+//                    event.downloadBytes * 100 / event.totalBytes + "%");
+            mDialogFragment.setProgress(event.downloadBytes * 100 / event.totalBytes);
         }
     }
 

@@ -35,6 +35,7 @@ import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment.CommonDialogFragmentBuilder;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragmentExt;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragmentExt.CommonDialogFragmentExtBuilder;
+import com.zhongmei.yunfu.ui.view.RoundProgressBar;
 import com.zhongmei.yunfu.ui.view.UpdateHintDialog;
 import com.zhongmei.yunfu.util.DialogUtil;
 

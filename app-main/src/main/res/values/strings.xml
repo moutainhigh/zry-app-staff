@@ -152,12 +152,12 @@
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     <string name="asnc_operation_not_success">此订单有异步操作尚未成功，请处理后继续操作！</string>
     <string name="settings_new_version">(最新版本:%s)</string>
-    <string name="update_downloading">正在下载最新安装包, 请稍后..\n</string>
-    <string name="update_download_failed">下载失败</string>
-    <string name="update_retry_message">下载出错, 请检查网络连接后重试</string>
-    <string name="update_download_success">下载完成, 请点击确认安装</string>
+    <string name="update_downloading">正在下载最新安装包, 请稍后..\n\n</string>
+    <string name="update_download_failed">下载失败\n\n</string>
+    <string name="update_retry_message">下载出错, 请检查网络连接后重试\n\n</string>
+    <string name="update_download_success">下载完成, 请点击确认安装\n\n</string>
     <string name="download_request_title">升级</string>
-    <string name="update_download_detail">正在下载最新安装包, 请稍后...\n</string>
+    <string name="update_download_detail">正在下载最新安装包, 请稍后...\n\n</string>
     <string name="publish_time">发版时间：%1$s</string>
     <!--<string name="detain_count">%s元</string>-->
     <string name="refund_done">已退款</string>

@@ -52,7 +52,7 @@ public class RoundProgressBar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        mPaint.setColor(getResources().getColor(R.color.beauty_color_434343));
+        mPaint.setColor(getResources().getColor(R.color.beauty_bg_deep_gray));
         mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mPaint.setAntiAlias(true);
 

@@ -76,8 +76,20 @@ public class BeautyTradeDataManager {
      * @param helper
      * @return
      */
-    public int queryReserverNumber(DatabaseHelper helper) {
-        return 1;
+    public int queryReserverNumber(DatabaseHelper helper) throws Exception{
+        Dao<Booking, String> bookingDao = helper.getDao(Booking.class);
+        QueryBuilder bookingBuilder = bookingDao.queryBuilder();
+
+        long date = DateTimeUtils.getDayStart(new Date());
+
+        bookingBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY)
+                .and()
+                .gt(Trade.$.serverCreateTime, date)
+                .and()
+                .eq(Trade.$.statusFlag, StatusFlag.VALID)
+                .and()
+                .in(Booking.$.orderStatus, BookingOrderStatus.UNARRIVED);
+        return (int) bookingBuilder.countOf();
     }
 
     /**

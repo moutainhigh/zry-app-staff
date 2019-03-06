@@ -54,7 +54,6 @@
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/customer_man"
                     android:ellipsize="end"
-                    android:maxEms="7"
                     android:singleLine="true"
                     android:text=""
                     android:textColor="#333333"

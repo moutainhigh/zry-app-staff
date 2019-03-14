@@ -35,6 +35,7 @@ open abstract class BeautyBookingListFragment : BasicFragment(), OnRefreshListen
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         beautyListManager = BeautyBookListManager(activity)
+        beautyListManager.setRefreshListener(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

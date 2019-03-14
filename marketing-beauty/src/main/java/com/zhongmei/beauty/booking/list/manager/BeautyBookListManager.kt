@@ -2,6 +2,7 @@ package com.zhongmei.beauty.booking.list.manager
 
 import android.app.Activity
 import android.content.Context
+import com.aspsine.swipetoloadlayout.OnRefreshListener
 import com.zhongmei.beauty.booking.bean.BeautyBookingListVo
 import com.zhongmei.beauty.booking.bean.BeautyBookingVo
 import com.zhongmei.beauty.booking.list.adapter.BookingListAdapter
@@ -46,10 +47,16 @@ class BeautyBookListManager {
     //接口类型
     var type: BeautyListType = BeautyListType.UNSERVICE
 
+    var  mRefreshListener:OnRefreshListener? = null
+
 
     constructor(context: Context) {
         mContext = context
 
+    }
+
+    fun setRefreshListener(refreshListene:OnRefreshListener){
+        this.mRefreshListener=refreshListene
     }
 
     /**
@@ -300,34 +307,36 @@ class BeautyBookListManager {
      * 更新预定
      */
     fun updateBooking(resp: BeautyBookingResp, bookingVo: BeautyBookingVo, mAdapter: BookingListAdapter) {
-        var newBookingTime = DateTimeUtils.formatDate(resp.booking.orderTime)
-        var oldBookingTime = DateTimeUtils.formatDate(bookingVo.booking.orderTime)
-        //时间未改变，只是更新
-        if (newBookingTime.equals(oldBookingTime)) {
-            mAdapter.notifyDataSetChanged()
-        } else {
-            var removeTitleList = ArrayList<String>()
-            for ((title, booking) in dateMap!!) {
-                var iteartor = booking.bookingVoList.iterator()
-                iteartor.forEach { it ->
-                    if (it.booking.id == bookingVo.booking.id) {
-                        iteartor.remove()
-                    }
-                }
-                if (Utils.isEmpty(booking.bookingVoList)) {
-                    removeTitleList.add(title)
-                }
-            }
+        mRefreshListener!!.onRefresh()
 
-            for (title in removeTitleList) {
-                dateMap!!.remove(title)
-            }
-
-            var newBookingVo = convertBookingRespToVo(resp)
-            putBookingVoToMap(BeautyDateTool.getTitleDay(mContext, newBookingTime), newBookingTime, newBookingVo)
-            mAdapter.update(ArrayList(dateMap!!.values))
-            mAdapter.notifyDataSetChanged()
-        }
+//        var newBookingTime = DateTimeUtils.formatDate(resp.booking.orderTime)
+//        var oldBookingTime = DateTimeUtils.formatDate(bookingVo.booking.orderTime)
+//        //时间未改变，只是更新
+//        if (newBookingTime.equals(oldBookingTime)) {
+//            mAdapter.notifyDataSetChanged()
+//        } else {
+//            var removeTitleList = ArrayList<String>()
+//            for ((title, booking) in dateMap!!) {
+//                var iteartor = booking.bookingVoList.iterator()
+//                iteartor.forEach { it ->
+//                    if (it.booking.id == bookingVo.booking.id) {
+//                        iteartor.remove()
+//                    }
+//                }
+//                if (Utils.isEmpty(booking.bookingVoList)) {
+//                    removeTitleList.add(title)
+//                }
+//            }
+//
+//            for (title in removeTitleList) {
+//                dateMap!!.remove(title)
+//            }
+//
+//            var newBookingVo = convertBookingRespToVo(resp)
+//            putBookingVoToMap(BeautyDateTool.getTitleDay(mContext, newBookingTime), newBookingTime, newBookingVo)
+//            mAdapter.update(ArrayList(dateMap!!.values))
+//            mAdapter.notifyDataSetChanged()
+//        }
     }
 
     /**

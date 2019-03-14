@@ -85,9 +85,9 @@ public class BeautyTradeDataManager {
         bookingBuilder.where()
                 .gt(Booking.$.serverCreateTime, date)
                 .and()
-                .eq(Booking.$.statusFlag, StatusFlag.VALID)
-                .and()
-                .in(Booking.$.orderStatus, BookingOrderStatus.UNARRIVED);
+                .eq(Booking.$.statusFlag, StatusFlag.VALID);
+//                .and()
+//                .notIn(Booking.$.orderStatus, BookingOrderStatus.CANCEL);
         return (int) bookingBuilder.countOf();
     }
 

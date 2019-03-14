@@ -284,7 +284,7 @@ public class BuildPrivilegeTool {
      */
     public static void mathPrivilege(IntegralCashPrivilegeVo mIntegralCashPrivilegeVo, TradeVo mTradeVo) {
         mIntegralCashPrivilegeVo.setActived(false);
-        BigDecimal integra = mIntegralCashPrivilegeVo.getIntegral();
+        BigDecimal integra = mIntegralCashPrivilegeVo.getUseInteger(); //获取最多可以使用的积分
         if (integra == null || mIntegralCashPrivilegeVo.getConvertValue() == null) {
             return;
         }

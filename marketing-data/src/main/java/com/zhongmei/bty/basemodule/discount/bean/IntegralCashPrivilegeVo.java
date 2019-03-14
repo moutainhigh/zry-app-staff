@@ -31,6 +31,9 @@ public class IntegralCashPrivilegeVo implements java.io.Serializable, NoProGuard
     private TradePrivilege tradePrivilege;
 
     private BigDecimal convertValue;//抵用规则 ，多少积分1元钱
+
+    private BigDecimal maxInteger;//最高抵用积分限制 null表示无限制
+
     /**
      * 优惠拓展信息
      */
@@ -79,6 +82,16 @@ public class IntegralCashPrivilegeVo implements java.io.Serializable, NoProGuard
         }
     }
 
+    public void setMaxInteger(BigDecimal maxInteger){
+        if(maxInteger!=null){
+            this.maxInteger=maxInteger;
+        }
+    }
+
+    public BigDecimal getMaxInteger(){
+        return maxInteger;
+    }
+
     public void setRule(CustomerScoreRule rule) {
         if (rule != null && rule.getConvertValue() != null) {
             convertValue = new BigDecimal(rule.getConvertValue());
@@ -103,6 +116,17 @@ public class IntegralCashPrivilegeVo implements java.io.Serializable, NoProGuard
 
     public BigDecimal getIntegral() {
         return integral;
+    }
+
+    /**
+     * 获取可用的积分数量
+     * @return
+     */
+    public BigDecimal getUseInteger(){
+        if(maxInteger==null){
+            return integral;
+        }
+        return integral.compareTo(maxInteger)<0?integral:maxInteger;
     }
 
     public void setIntegral(BigDecimal integral) {

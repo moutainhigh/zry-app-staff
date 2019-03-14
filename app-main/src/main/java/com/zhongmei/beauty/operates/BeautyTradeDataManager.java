@@ -82,11 +82,10 @@ public class BeautyTradeDataManager {
 
         long date = DateTimeUtils.getDayStart(new Date());
 
-        bookingBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY)
+        bookingBuilder.where()
+                .gt(Booking.$.serverCreateTime, date)
                 .and()
-                .gt(Trade.$.serverCreateTime, date)
-                .and()
-                .eq(Trade.$.statusFlag, StatusFlag.VALID)
+                .eq(Booking.$.statusFlag, StatusFlag.VALID)
                 .and()
                 .in(Booking.$.orderStatus, BookingOrderStatus.UNARRIVED);
         return (int) bookingBuilder.countOf();
@@ -105,12 +104,15 @@ public class BeautyTradeDataManager {
         long date = DateTimeUtils.getDayStart(new Date());
 
         tradeBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY)
-                .and()
-                .in(Trade.$.tradeStatus, TradeStatus.CONFIRMED)
+                .and().
+                    gt(Trade.$.serverCreateTime, date)
+//                .and()
+//                .in(Trade.$.tradeStatus, TradeStatus.CONFIRMED)
                 .and()
                 .eq(Trade.$.statusFlag, StatusFlag.VALID)
                 .and()
-                .in(Trade.$.tradeType, TradeType.SELL, TradeType.UNOIN_TABLE_SUB, TradeType.UNOIN_TABLE_MAIN);
+                .eq(Trade.$.tradeType, TradeType.SELL);
+        List<Trade>  trades = tradeBuilder.query();
         return (int) tradeBuilder.countOf();
     }
 
@@ -137,8 +139,7 @@ public class BeautyTradeDataManager {
         long startTime = DateTimeUtils.getDayStart(new Date());
         long endTime = DateTimeUtils.getDayEnd(new Date());
 
-        tradeBuilder.where()/*.eq(Trade.$.businessType, BusinessType.BEAUTY)
-                .and()*/
+        tradeBuilder.where()
                 .eq(Booking.$.orderStatus, BookingOrderStatus.UNARRIVED)
                 .and()
                 .gt(Booking.$.startTime, startTime)

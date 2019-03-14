@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongmei.beauty.booking.bean.BeautyBookingVo;
+import com.zhongmei.bty.basemodule.booking.bean.BookingTradeItemVo;
 import com.zhongmei.yunfu.db.entity.booking.BookingTradeItem;
 import com.zhongmei.beauty.entity.BookingTradeItemUser;
 import com.zhongmei.yunfu.db.enums.Sex;
@@ -72,23 +73,23 @@ public class TodayReserverItemView extends RelativeLayout implements View.OnClic
         iv_memberHeader.setBackgroundResource(getCustomerHead(mReserver.getBooking().getCommercialGender()));
         tv_name.setText(mReserver.getBooking().getCommercialName());
         tv_phone.setText(mReserver.getBooking().getCommercialPhone());
-        tv_servers.setText(getTradeItemInfo(mReserver.getBookingTradeItems()));
+        tv_servers.setText(getTradeItemInfo(mReserver.getBookingTradeItemVos()));
         tv_time.setText("到店时间:" + DateUtil.fomatDayTime(mReserver.getBooking().getStartTime()));
-        tv_technician.setText(getTechnicial(reserver.getBookingTradeItemUsers()));
+        tv_technician.setText(getTechnicial(reserver.getBookingTradeItemVos()));
     }
 
 
     /**
      * 获取技师
      *
-     * @param technicials
+     * @param 服务Item
      * @return
      */
-    public String getTechnicial(List<BookingTradeItemUser> technicials) {
-        if (Utils.isEmpty(technicials) || technicials.size() <= 0) {
+    public String getTechnicial(List<BookingTradeItemVo> tradeItemVos) {
+        if (Utils.isEmpty(tradeItemVos) || Utils.isEmpty(tradeItemVos.get(0).getBookingTradeItemUsers())) {
             return "未指定";
         } else {
-            return technicials.get(0).getUserName();
+            return tradeItemVos.get(0).getBookingTradeItemUsers().get(0).getUserName();
         }
     }
 
@@ -110,7 +111,7 @@ public class TodayReserverItemView extends RelativeLayout implements View.OnClic
     }
 
 
-    private String getTradeItemInfo(List<BookingTradeItem> tradeItemVos) {
+    private String getTradeItemInfo(List<BookingTradeItemVo> tradeItemVos) {
         if (Utils.isEmpty(tradeItemVos)) {
             return getContext().getResources().getString(R.string.beauty_no_service);
         }
@@ -119,7 +120,7 @@ public class TodayReserverItemView extends RelativeLayout implements View.OnClic
 
         StringBuffer itemNameBuffer = new StringBuffer();
         for (int i = 0; i < itemLen; i++) {
-            BookingTradeItem vo = tradeItemVos.get(i);
+            BookingTradeItem vo = tradeItemVos.get(i).getTradeItem();
             itemNameBuffer.append(vo.getDishName());
             itemNameBuffer.append("x" + vo.getQuantity());
             itemNameBuffer.append(",\n");

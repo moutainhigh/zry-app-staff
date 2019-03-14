@@ -17,7 +17,7 @@ public class BeautyBookingBoardVo {
     private Map<Long, ArrayList<ReserverItemVo>> mMapBookingItemVos;//根据技师id，存储对应的预定信息
     private List<BeautyBookingVo> mNoTechnicianBookingItemVos;//储存没有技师的预定单列表
 
-    private List<BeautyBookingVo> mBookingItemVos;//储存没有技师的预定单列表
+    private List<BeautyBookingVo> mBookingItemVos;//储存有技师的预定单列表
 
     public List<BookingTradeItemUser> getmTechnicians() {
         return mTechnicians;

@@ -18,6 +18,7 @@ import com.zhongmei.bty.basemodule.discount.entity.CrmCustomerLevelRights;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
+import com.zhongmei.yunfu.db.entity.discount.CustomerScoreRuleVo;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.bty.commonmodule.database.enums.TrueOrFalse;
 import com.zhongmei.yunfu.util.ToastUtil;
@@ -123,11 +124,12 @@ public class BeautyIntegralView extends LinearLayout {
                         ToastUtil.showShortToast(R.string.intergral_is_zero);
                         tbUserIntegral.setChecked(false);
                     } else {
-                        CustomerScoreRule rule = CustomerManager.getInstance().getIntegerRule();
+                        CustomerScoreRuleVo rule = CustomerManager.getInstance().getIntegerRule();
                         if (rule != null) {
                             IntegralCashPrivilegeVo integralCashPrivilegeVo = new IntegralCashPrivilegeVo();
                             integralCashPrivilegeVo.setIntegral(new BigDecimal(integral));
                             integralCashPrivilegeVo.setRule(rule);
+                            integralCashPrivilegeVo.setMaxInteger(rule.getMaxUserInteger());
                             DinnerShopManager.getInstance().getShoppingCart().setIntegralCash(integralCashPrivilegeVo, true, true);
                         } else {
                             ToastUtil.showShortToast(R.string.have_no_level_rights);

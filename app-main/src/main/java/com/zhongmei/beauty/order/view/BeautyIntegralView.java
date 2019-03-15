@@ -67,10 +67,10 @@ public class BeautyIntegralView extends LinearLayout {
                 tvIntegral.setText(integral + "");
                 DinnerPriviligeItemsFragment.showDisplayUserInfo(mActivity);
 
-                CrmCustomerLevelRights integralRule = customer.customerLevelRights;
-                if (integralRule != null && integralRule.getIsExchangeCash() == TrueOrFalse.TRUE) {
-                    tvIntegralRule.setText(integralRule.getExchangeIntegralValue() + mActivity.getString(R.string.intergral_to_cash_to)
-                            + ShopInfoCfg.formatCurrencySymbol(integralRule.getExchangeCashValue()));
+                CustomerScoreRuleVo rule = CustomerManager.getInstance().getIntegerRule();
+                if (rule != null) {
+                    tvIntegralRule.setText(rule.getConvertValue() + mActivity.getString(R.string.intergral_to_cash_to)
+                            + ShopInfoCfg.formatCurrencySymbol(BigDecimal.ONE)+","+String.format(mActivity.getString(R.string.integral_max_value),rule.getMaxUserInteger()==null?integral+"":rule.getMaxUserInteger().intValue()+""));
                 }
             } else {
                 EcCard card = customer.card;

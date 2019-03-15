@@ -22,6 +22,7 @@
     <string name="intergral_to_cash">积分抵现</string>
     <string name="switch_account">账户切换</string>
     <string name="intergral_to_cash_to">积分抵用</string>
+    <string name="integral_max_value">最多可用%s积分</string>
     <string name="customer_time">时间</string>
     <string name="customer_integral">积分</string>
     <string name="customer_integral_label">积分：</string>

@@ -1078,7 +1078,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         if ((item.getBase().getStatusFlag() == StatusFlag.INVALID)
                 && (item.getBase().getInvalidType() != InvalidType.SPLIT)) {
             // modify by zhubo 2015-12-23 子菜不合法时，不需要显示删除图标
-            if (item.getType() != ItemType.CHILD) {
+            if (item.getType() != ItemType.CHILD && item.getType()!=ItemType.EXTRA_ITEM) {
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDeleteIcon, null, null, null);
             }
             setLayoutGray(holder);

@@ -29,6 +29,9 @@ public class ReserverView extends LinearLayout implements BeautyBookingTradeCont
     private int mWidth;
     private int mHeight;
 
+    private int mActualWidth;
+    private int mActualHeight;
+
     public ReserverView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mScrollView = new HVScrollView(context);
@@ -47,17 +50,15 @@ public class ReserverView extends LinearLayout implements BeautyBookingTradeCont
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-//            int width = Math.max(mWidth, mZoneContentView.getModel().getWidth());
-//            int height = Math.max(mHeight, mZoneContentView.getModel().getHeight());
-        int width = 5000;
-        int height = 5000;
+        int width = Math.max(mWidth, mActualWidth);
+        int height = Math.max(mHeight, mActualHeight);
         if (mReserverBoardView != null) {
             ViewGroup.LayoutParams layoutParams = mReserverBoardView.getLayoutParams();
             layoutParams.width = width;
             layoutParams.height = height;
             mReserverBoardView.setLayoutParams(layoutParams);
-            mReserverBoardView.setMinimumWidth(mWidth);
-            mReserverBoardView.setMinimumHeight(mHeight);
+            mReserverBoardView.setMinimumWidth(width);
+            mReserverBoardView.setMinimumHeight(height);
             mReserverBoardView.measure(layoutParams.width, layoutParams.height);
 
             Log.e("onLayout", "mHeight=>" + mHeight + ";mWidth=>" + mWidth);
@@ -89,6 +90,9 @@ public class ReserverView extends LinearLayout implements BeautyBookingTradeCont
 
 
     public void onSizeChange(int width, int height) {
+        mActualHeight=height;
+        mActualWidth=width;
+
         width = Math.max(mWidth, width);
         height = Math.max(mHeight, height);
 
@@ -99,6 +103,7 @@ public class ReserverView extends LinearLayout implements BeautyBookingTradeCont
         mReserverBoardView.setMinimumWidth(width);
         mReserverBoardView.setMinimumHeight(height);
         mReserverBoardView.measure(layoutParams.width, layoutParams.height);
+        Log.e("onSizeChange", "mHeight=>" + height + ";mWidth=>" + width);
     }
 
 

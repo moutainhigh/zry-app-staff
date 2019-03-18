@@ -85,6 +85,13 @@ public class BeautyBookingTimeShaft extends View {
         postInvalidate();
     }
 
+    public int getactualHeight(){
+        if(startTime==null || stopTime==null){
+            return 0;
+        }
+        return (int)Math.ceil((float)(stopTime-startTime)/perTime)*timeWidth;
+    }
+
     private void setLayoutParams(int width) {
         ViewGroup.LayoutParams params = getLayoutParams();
         params.width = width;

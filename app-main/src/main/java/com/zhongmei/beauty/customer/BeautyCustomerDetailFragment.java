@@ -460,15 +460,15 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
      */
     private void initMemberNotInfoUI() {
         disableMemberView();
-        if (TextUtils.isEmpty(mCustomer.mobile)) {
-            mLevelUpLayout.setVisibility(View.GONE);
-            mCallLayout.setVisibility(View.GONE);
-            mEditLayout.setVisibility(View.GONE);
-        } else {
-            mLevelUpLayout.setVisibility(View.GONE);
-            mCallLayout.setVisibility(View.GONE);
-            mEditLayout.setVisibility(View.VISIBLE);
-        }
+//        if (TextUtils.isEmpty(mCustomer.mobile)) {  //非会员也可以更改信息，更改电话号码
+//            mLevelUpLayout.setVisibility(View.GONE);
+//            mCallLayout.setVisibility(View.GONE);
+//            mEditLayout.setVisibility(View.GONE);
+//        } else {
+//            mLevelUpLayout.setVisibility(View.GONE);
+//            mCallLayout.setVisibility(View.GONE);
+//            mEditLayout.setVisibility(View.VISIBLE);
+//        }
         mBindLayout.setVisibility(View.GONE);
         mRecharge.setVisibility(View.GONE);
         mCreateOrder.setVisibility(View.GONE);
@@ -486,7 +486,7 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
         mBindLayout.setVisibility(View.GONE);
         mLevelUpLayout.setVisibility(View.GONE);
         mCallLayout.setVisibility(View.GONE);
-        mEditLayout.setVisibility(View.GONE);
+        mEditLayout.setVisibility(View.VISIBLE); //微信用户也可以新增电话号码
         mRecharge.setVisibility(View.GONE);
         mCreateOrder.setVisibility(View.GONE);
         mTitleLayout.setVisibility(View.GONE);

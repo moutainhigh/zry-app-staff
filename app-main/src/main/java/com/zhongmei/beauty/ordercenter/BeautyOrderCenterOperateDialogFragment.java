@@ -268,11 +268,6 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
             return null;
         }
 
-        String buffetOrGroupParentUUID = null;
-        if (tradeVo.getMealShellVo() != null) {//团餐自助餐，需要显示子菜
-            buffetOrGroupParentUUID = tradeVo.getMealShellVo().getUuid();
-        }
-
         List<InventoryItem> inventoryItems = new ArrayList<>();
         for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
             TradeItem tradeItem = tradeItemVo.getTradeItem();
@@ -286,7 +281,7 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
                     inventoryItem.setChildTradeItem(childTradeItem);
                     inventoryItems.add(inventoryItem);
                 }
-            } else if (tradeItem.getType() == DishType.SINGLE && (tradeItem.getParentUuid() == null || tradeItem.getParentUuid().equals(buffetOrGroupParentUUID))) {//单菜非子菜
+            } else if (tradeItem.getType() == DishType.SINGLE && TextUtils.isEmpty(tradeItem.getParentUuid())) {//单菜非子菜
                 InventoryItem inventoryItem = new InventoryItem(tradeItem);
                 inventoryItems.add(inventoryItem);
             }

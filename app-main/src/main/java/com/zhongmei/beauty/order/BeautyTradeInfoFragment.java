@@ -24,6 +24,8 @@ import com.zhongmei.beauty.utils.TradeUserUtil;
 import com.zhongmei.bty.basemodule.discount.bean.CouponPrivilegeVo;
 import com.zhongmei.bty.basemodule.discount.entity.ExtraCharge;
 import com.zhongmei.bty.basemodule.discount.manager.ExtraManager;
+import com.zhongmei.bty.basemodule.inventory.bean.InventoryItem;
+import com.zhongmei.bty.basemodule.inventory.utils.InventoryUtils;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem.DishCheckStatus;
 import com.zhongmei.bty.basemodule.orderdish.bean.ISetmealShopcartItem;
@@ -54,6 +56,7 @@ import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.db.enums.DishType;
 import com.zhongmei.yunfu.db.enums.PrivilegeType;
+import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.orm.DBHelperManager;
 import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
@@ -306,6 +309,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
             case SINGLE:
             case COMBO:
             case CHILD:
+                detailInventy(dishDataItem);
                 // 这一项要在最后
                 DinnerTradeItemManager.getInstance().deleteItem(dishDataItem.getBase(),
                         dishDataItem.getItem().getUuid(), mChangePageListener, getActivity());
@@ -321,6 +325,24 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                 removeTradeUser(dishDataItem);
                 break;
         }
+    }
+
+    /**
+     * 处理退库存
+     * @param dishDataItem
+     */
+    private void detailInventy(DishDataItem dishDataItem){
+        if (dishDataItem == null||dishDataItem.getBase()==null) {
+            return;
+        }
+        if(dishDataItem.getBase().getStatusFlag() != StatusFlag.VALID
+                ||!DinnerTradeItemManager.getInstance().isSaved(dishDataItem)){
+            return;
+        }
+        List<InventoryItem> inventoryItemList = new ArrayList<>();
+        InventoryItem inventoryItem = InventoryUtils.transformInventoryItem(dishDataItem, dishDataItem.getBase().getTotalQty());
+        inventoryItemList.add(inventoryItem);
+        DinnerShoppingCart.getInstance().addReturnInventoryList(inventoryItemList);
     }
 
     private void removeItemUser(DishDataItem item) {

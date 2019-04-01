@@ -38,6 +38,7 @@ import com.zhongmei.bty.common.util.CommonKeyBorad;
 import com.zhongmei.bty.common.view.DatePickerDialogFragment;
 import com.zhongmei.bty.common.view.DatePickerDialogFragment.DateSetListener;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.bty.commonmodule.util.NumberUtil;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 import com.zhongmei.bty.customer.CustomerActivity;
 import com.zhongmei.bty.customer.CustomerChargingDialogFragment;
@@ -388,8 +389,8 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 } else {
                     setCardVisble(true);
                 }
-                mPhonenum.setEnabled(false);
-                mPhonenum.setFocusable(false);
+                mPhonenum.setEnabled(true); //编辑的时候也可以更改电话号码
+                mPhonenum.setFocusable(true);
                 mIvCountry.setEnabled(false);
                 setPasswordDisable(true);
                 mImport.setVisibility(View.GONE);
@@ -872,7 +873,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     private void insertOrUpdate() {
         if (setUpdateCustomerValue()) {
             mCustomer.localModifyDateTime = System.currentTimeMillis();
-            if (mErpCurrency != null && !TextUtils.isEmpty(mErpCurrency.getPhoneRegulation()) && !Pattern.matches(mErpCurrency.getPhoneRegulation(), mCustomer.mobile)) {
+            if (TextUtils.isEmpty(mCustomer.mobile) || !NumberUtil.isCellPhone(mCustomer.mobile)) {
                 ToastUtil.showShortToast(getString(R.string.customer_mobile_regulation_error));
                 return;
             }

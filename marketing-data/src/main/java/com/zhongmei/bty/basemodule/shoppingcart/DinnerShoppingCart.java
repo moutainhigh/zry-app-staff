@@ -1029,7 +1029,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
     public void updateBeautyDataFromTradeVo(TradeVo tradeVo, boolean isCallback) {
-        if (tradeVo == null || dinnerShoppingCartVo == null) {
+        //余额充值时，不用更新购物车。
+        if (tradeVo == null || dinnerShoppingCartVo == null || tradeVo.getTrade().getBusinessType().equalsValue(BusinessType.ONLINE_RECHARGE.value())) {
             return;
         }
 

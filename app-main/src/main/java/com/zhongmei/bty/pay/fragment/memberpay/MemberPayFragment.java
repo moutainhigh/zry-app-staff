@@ -781,7 +781,7 @@ public class MemberPayFragment extends BasePayFragment implements PayView {
         if (customerList == null) {
             customerList = new ArrayList<>();
         }
-        customerList.add(customerConvert.buildTradeCustomer(trade.getId(), trade.getUuid(), customerNew, ecCard, CustomerType.MEMBER));
+        customerList.add(customerConvert.buildTradeCustomer(trade.getId(), trade.getUuid(), customerNew, ecCard, CustomerType.PAY));
         tradeVo.setTradeCustomerList(customerList);
 
         if (!mPaymentInfo.isOrdered() && !mPaymentInfo.isOrderCenter()) {

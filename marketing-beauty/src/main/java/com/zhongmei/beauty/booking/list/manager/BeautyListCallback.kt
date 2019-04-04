@@ -11,7 +11,7 @@ interface BeautyListCallback {
     /**
      * 预定列表查询成功
      */
-    fun onQuerySuccess(listVos: ArrayList<BeautyBookingListVo>)
+    fun onQuerySuccess(listVos: ArrayList<BeautyBookingListVo> ,haveMore:Boolean)
 
     /**
      *预定开单成功

@@ -20,6 +20,7 @@ import com.zhongmei.beauty.booking.bean.BeautyBookingVo
 import com.zhongmei.beauty.enums.BeautyListType
 import com.zhongmei.beauty.operates.message.BeautyBookingResp
 import com.zhongmei.yunfu.context.util.Utils
+import com.zhongmei.yunfu.util.ToastUtil
 
 /**
 
@@ -68,8 +69,8 @@ open abstract class BeautyBookingListFragment : BasicFragment(), OnRefreshListen
     }
 
     var mCallback = object : BeautyListCallback {
-        override fun onQuerySuccess(listVos: ArrayList<BeautyBookingListVo>) {
-            showEmptyView(listVos)
+        override fun onQuerySuccess(listVos: ArrayList<BeautyBookingListVo>,haveMore: Boolean) {
+            showEmptyView(listVos,haveMore)
             bookingListAdapter!!.update(listVos)
 
         }
@@ -82,7 +83,7 @@ open abstract class BeautyBookingListFragment : BasicFragment(), OnRefreshListen
         }
 
         override fun onFail(listVos: ArrayList<BeautyBookingListVo>) {
-            showEmptyView(listVos)
+            showEmptyView(listVos,false)
         }
     }
 
@@ -94,11 +95,14 @@ open abstract class BeautyBookingListFragment : BasicFragment(), OnRefreshListen
         refreshView()
     }
 
-    fun showEmptyView(listVos: ArrayList<BeautyBookingListVo>) {
+    fun showEmptyView(listVos: ArrayList<BeautyBookingListVo>,haveMore: Boolean) {
         if (Utils.isEmpty(listVos)) {
             empty_view.visibility = View.VISIBLE
         } else {
-            empty_view.visibility = View.GONE
+            if(!haveMore){
+                ToastUtil.showLongToast(R.string.has_no_more)
+            }
+            empty_view.visibility=View.GONE
         }
     }
 

@@ -78,9 +78,9 @@ class BeautyBookListManager {
      * 获取未服务预定列表
      */
     fun getUnServiceList(activty: Activity, callback: BeautyListCallback) {
-        checkMapInit()
         type = BeautyListType.UNSERVICE
         if (isNeedRefreshTime) {
+            checkMapInit()
             startTime = System.currentTimeMillis()
             endTime = DateTimeUtils.afterDays(QUERY_DAYS)
         }
@@ -99,9 +99,9 @@ class BeautyBookListManager {
      * 已超时 startTime 和 endTime 相同
      */
     fun getOutlineList(activty: Activity, callback: BeautyListCallback) {
-        checkMapInit()
         type = BeautyListType.OUTLINE
         if (isNeedRefreshTime) {
+            checkMapInit()
             startTime = System.currentTimeMillis()
             endTime = startTime
         }
@@ -118,9 +118,9 @@ class BeautyBookListManager {
      * 获取已取消列表
      */
     fun getCancelList(activty: Activity, callback: BeautyListCallback) {
-        checkMapInit()
         type = BeautyListType.CANCELD
         if (isNeedRefreshTime) {
+            checkMapInit()
             startTime = DateTimeUtils.getCurrentDayStart()
             endTime = DateTimeUtils.afterDays(QUERY_DAYS)
         }
@@ -138,9 +138,9 @@ class BeautyBookListManager {
      * 获取未处理列表
      */
     fun getUnDealList(activty: Activity, callback: BeautyListCallback) {
-        checkMapInit()
         type = BeautyListType.UNDEAL
         if (isNeedRefreshTime) {
+            checkMapInit()
             startTime = DateTimeUtils.getCurrentDayStart()
             endTime = DateTimeUtils.afterDays(QUERY_DAYS)
         }
@@ -168,7 +168,12 @@ class BeautyBookListManager {
         val listener = object : CalmResponseListener<ResponseObject<BeautyBookingListResp>>() {
             override fun onSuccess(data: ResponseObject<BeautyBookingListResp>?) {
                 if (ResponseObject.isOk(data)) {
-                    callback?.onQuerySuccess(buildListVos(data!!.content))
+                    if(Utils.isEmpty(data!!.content.bookings)) {
+                        currentPage--
+                        callback?.onQuerySuccess(ArrayList(dateMap!!.values),false)
+                    }else {
+                        callback?.onQuerySuccess(buildListVos(data!!.content),true)
+                    }
                 } else {
                     ToastUtil.showLongToast(data?.message)
                 }

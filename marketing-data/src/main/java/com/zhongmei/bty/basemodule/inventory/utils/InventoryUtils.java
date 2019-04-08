@@ -64,6 +64,7 @@ public class InventoryUtils {
                     }
                     InventoryItemReq returnInventoryItem = new InventoryItemReq();
                     returnInventoryItem.setSkuUuid(item.getTradeItem().getSkuUuid());
+                    returnInventoryItem.setDishId(item.getTradeItem().getDishId());
                     returnInventoryItem.setSkuName(item.getTradeItem().getDishName());
                     returnInventoryItem.setQuantity(item.getReturnInventoryNum());
                     returnInventoryItem.setPrice(item.getTradeItem().getPrice());
@@ -133,32 +134,34 @@ public class InventoryUtils {
         }
         List<InventoryItemReq> inventoryItemReqs = new ArrayList<>();
         for (InventoryItem inventoryItem : inventoryItemList) {
+            InventoryItemReq inventoryItemReq = new InventoryItemReq();
+            inventoryItemReq.setPrice(inventoryItem.getTradeItem().getPrice());
+            inventoryItemReq.setDishId(inventoryItem.getTradeItem().getDishId());
+            inventoryItemReq.setQuantity(inventoryItem.getReturnInventoryNum());
+            inventoryItemReq.setReturnQuantity(inventoryItem.getMaxInventoryNum());
+            inventoryItemReq.setAmount(inventoryItemReq.getPrice().multiply(inventoryItemReq.getQuantity()));
+            inventoryItemReq.setSkuName(inventoryItem.getTradeItem().getDishName());
+            inventoryItemReq.setSkuUuid(inventoryItem.getTradeItem().getSkuUuid());
+            inventoryItemReqs.add(inventoryItemReq);
+
             if (inventoryItem.getTradeItem().getType() == DishType.COMBO) {
                 for (TradeItem childTradeItem : inventoryItem.getChildTradeItem()) {
-                    InventoryItemReq inventoryItemReq = new InventoryItemReq();
-                    inventoryItemReq.setPrice(childTradeItem.getPrice());
+                    InventoryItemReq inventoryItemReqChild = new InventoryItemReq();
+                    inventoryItemReqChild.setPrice(childTradeItem.getPrice());
                     //套餐按比例计算退库存数
                     BigDecimal total = inventoryItem.getReturnInventoryNum()
                             .multiply(childTradeItem.getQuantity());
                     BigDecimal quantity = MathDecimal.div(total, inventoryItem.getMaxInventoryNum());
                     //退库存数量
-                    inventoryItemReq.setQuantity(quantity);
+                    inventoryItemReqChild.setQuantity(quantity);
                     //退货数量
-                    inventoryItemReq.setReturnQuantity(childTradeItem.getQuantity());
-                    inventoryItemReq.setAmount(childTradeItem.getPrice().multiply(inventoryItemReq.getQuantity()));
-                    inventoryItemReq.setSkuName(childTradeItem.getDishName());
-                    inventoryItemReq.setSkuUuid(childTradeItem.getSkuUuid());
-                    inventoryItemReqs.add(inventoryItemReq);
+                    inventoryItemReqChild.setReturnQuantity(childTradeItem.getQuantity());
+                    inventoryItemReqChild.setAmount(childTradeItem.getPrice().multiply(inventoryItemReq.getQuantity()));
+                    inventoryItemReqChild.setSkuName(childTradeItem.getDishName());
+                    inventoryItemReqChild.setSkuUuid(childTradeItem.getSkuUuid());
+                    inventoryItemReqChild.setDishId(childTradeItem.getDishId());
+                    inventoryItemReqs.add(inventoryItemReqChild);
                 }
-            } else {
-                InventoryItemReq inventoryItemReq = new InventoryItemReq();
-                inventoryItemReq.setPrice(inventoryItem.getTradeItem().getPrice());
-                inventoryItemReq.setQuantity(inventoryItem.getReturnInventoryNum());
-                inventoryItemReq.setReturnQuantity(inventoryItem.getMaxInventoryNum());
-                inventoryItemReq.setAmount(inventoryItemReq.getPrice().multiply(inventoryItemReq.getQuantity()));
-                inventoryItemReq.setSkuName(inventoryItem.getTradeItem().getDishName());
-                inventoryItemReq.setSkuUuid(inventoryItem.getTradeItem().getSkuUuid());
-                inventoryItemReqs.add(inventoryItemReq);
             }
         }
         return inventoryItemReqs;

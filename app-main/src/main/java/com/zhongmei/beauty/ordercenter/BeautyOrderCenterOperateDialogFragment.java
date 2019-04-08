@@ -533,12 +533,17 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
             return true;
         }
         OperateResult result = getResult();
-        if (returnInventroryItemReqs != null) {
-            result.returnInventoryItemReqs = returnInventroryItemReqs;
-        } else {
-            //默认退全部的库存
-            result.returnInventoryItemReqs = InventoryUtils.buildInventoryItemReqs(buildInventoryItems(tradeVo));
+        if(result.isReturnInvetory){
+            if (returnInventroryItemReqs != null) {
+                result.returnInventoryItemReqs = returnInventroryItemReqs;
+            } else {
+                //默认退全部的库存
+                result.returnInventoryItemReqs = InventoryUtils.buildInventoryItemReqs(buildInventoryItems(tradeVo));
+            }
+        }else{
+            result.returnInventoryItemReqs = new ArrayList<>();
         }
+
         if (mInventoryStyle != InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
             if (mReasonSwitch) {
                 if ((result == null || result.reason == null) && (mType != ReasonType.AGREE_RETURN.value().intValue())) {

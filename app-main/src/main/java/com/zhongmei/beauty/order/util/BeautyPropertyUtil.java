@@ -72,7 +72,7 @@ import java.util.Set;
  * Created by demo on 2018/12/15
  */
 
-public class BeautyPropertyUtil implements View.OnClickListener {
+public class BeautyPropertyUtil {
 
     /**
      * 规格页
@@ -95,6 +95,7 @@ public class BeautyPropertyUtil implements View.OnClickListener {
 
     private Button btnStandard;
     private Button btnRemark;
+    private Button btnTradeItemRemark;
 
     /**
      * 加料页
@@ -148,32 +149,34 @@ public class BeautyPropertyUtil implements View.OnClickListener {
         mShoppingCart = DinnerShoppingCart.getInstance();
     }
 
-    public void initView(LinearLayout vAnchor, Button btnStandard, Button btnRemark) {
+    public void initView(LinearLayout vAnchor, Button btnStandard, Button btnRemark,Button btnTradeItemRemark) {
         this.btnStandard = btnStandard;
         this.btnRemark = btnRemark;
+        this.btnTradeItemRemark=btnTradeItemRemark;
         vActionBar = vAnchor;
-        btnStandard.setOnClickListener(this);
-        btnRemark.setOnClickListener(this);
     }
 
     public void initData(DishDataItem dishDataItem) {
         this.mDishDataItem = dishDataItem;
         if (mDishDataItem == null) {
-            mShopcartItemBase = null;
+            initValue();
             return;
         }
         initData();
     }
 
     protected void initData() {
-        if (mTargetPageNo == -1 && TextUtils.isEmpty(mDishDataItem.getBase().getUuid())
-                || DinnerTradeItemManager.getInstance().isSaved(mDishDataItem)) {
-            initSavedData();
-            showRemarkView();
-        } else {
-            initSelectData();
-            showDefaultView();
-        }
+//        if (mTargetPageNo == -1 && TextUtils.isEmpty(mDishDataItem.getBase().getUuid())
+//                || DinnerTradeItemManager.getInstance().isSaved(mDishDataItem)) {
+//            initSavedData();
+//            showRemarkView();
+//        } else {
+//            initSelectData();
+//            showDefaultView();
+//        }
+
+        initSelectData();
+        showDefaultView();
     }
 
     protected void initSavedData() {
@@ -182,17 +185,17 @@ public class BeautyPropertyUtil implements View.OnClickListener {
         mUuid = mDishDataItem.getBase().getUuid();
         mParentUuid = mDishDataItem.getBase().getParentUuid();
 
-        ViewUtil.setButtonEnabled(btnStandard, true);
-        ViewUtil.setButtonEnabled(btnRemark, false);
-        if (isSavedValidSingleOrComboItem()) {
-//            btnStandard.setText(R.string.dish_combo_modify);
-            btnStandard.setEnabled(false);
-            btnRemark.setEnabled(false);
-        } else {
-            btnStandard.setText(R.string.dish_standard);
-            btnStandard.setEnabled(false);
-        }
-        btnStandard.setAlpha(0.5f);
+        ViewUtil.setButtonEnabled(btnStandard, false);
+        ViewUtil.setButtonEnabled(btnRemark, true);
+//        if (isSavedValidSingleOrComboItem()) {
+////            btnStandard.setText(R.string.dish_combo_modify);
+//            btnStandard.setEnabled(false);
+//            btnRemark.setEnabled(false);
+//        } else {
+//            btnStandard.setText(R.string.dish_standard);
+//            btnStandard.setEnabled(false);
+//        }
+//        btnStandard.setAlpha(0.5f);
         //刷新内容页
         iOperateListener.showCustomContentView(null);
     }
@@ -232,15 +235,19 @@ public class BeautyPropertyUtil implements View.OnClickListener {
         if (mRealItemBase != null && !DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
             loadProperties();
             mDishSetmealManager = mShopcartItem.getSetmealManager();
+        }else{
+            //设置加项目不可用，同时开启备注
+            initSavedData();
+            showRemarkView();
         }
-        if (mDishDataItem.getBase() != null && mDishDataItem.getBase().getStatusFlag() == StatusFlag.VALID
-                && mDishDataItem.getBase().getDishShop() != null && mDishDataItem.getBase().getDishShop().getClearStatus()
-                == ClearStatus.SALE
-                ) {
-            ViewUtil.setButtonEnabled(btnRemark, true);
-        } else {
-            ViewUtil.setButtonEnabled(btnRemark, false);
-        }
+//        if (mDishDataItem.getBase() != null && mDishDataItem.getBase().getStatusFlag() == StatusFlag.VALID
+//                && mDishDataItem.getBase().getDishShop() != null && mDishDataItem.getBase().getDishShop().getClearStatus()
+//                == ClearStatus.SALE
+//                ) {
+//            ViewUtil.setButtonEnabled(btnRemark, true);
+//        } else {
+//            ViewUtil.setButtonEnabled(btnRemark, false);
+//        }
     }
 
     private void modifyCombo() {
@@ -321,7 +328,7 @@ public class BeautyPropertyUtil implements View.OnClickListener {
 
             @Override
             protected void onPostExecute(EventDishPropertiesNotice eventDishPropertiesNotice) {
-                refreshView(eventDishPropertiesNotice);
+//                refreshView(eventDishPropertiesNotice);
                 setExtra(eventDishPropertiesNotice.dishPropertiesVo);
             }
         }.execute();
@@ -626,7 +633,7 @@ public class BeautyPropertyUtil implements View.OnClickListener {
      * @param
      */
     public void showRemarkView() {
-        ViewUtil.setButtonSelected(vActionBar, btnRemark);
+        ViewUtil.setButtonSelected(vActionBar, mShopcartItemBase==null?btnRemark:btnTradeItemRemark);
         mRemarkView = BeautyRemarkView_.build(mContext, mShopcartItemBase, mShoppingCart.getShoppingCartVo().getmTradeVo().getTrade().getTradeMemo(), true);
         mRemarkView.setListener(new OrderDishListenerImp() {
             @Override
@@ -637,6 +644,7 @@ public class BeautyPropertyUtil implements View.OnClickListener {
                     mMemo = memo;
                     if (added) {
                         mShopcartItemBase.setMemo(memo);
+                        mShopcartItemBase.setChanged(true);
                         mShoppingCart.updateDinnerDish(mShopcartItemBase, false);
                     }
                 }
@@ -651,7 +659,8 @@ public class BeautyPropertyUtil implements View.OnClickListener {
      * 显示加项
      */
     public void showExtra() {
-//        ViewUtil.setButtonSelected(vActionBar, btnExtra);
+        ViewUtil.setButtonEnabled(btnStandard,true);
+        ViewUtil.setButtonSelected(vActionBar, btnStandard);
 
         if (mExtraView == null) {
             mExtraView = BeautyExtraView_.build(mContext);
@@ -689,18 +698,6 @@ public class BeautyPropertyUtil implements View.OnClickListener {
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, mUuid);
     }
 
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_standard:
-                showProperty();
-                break;
-            case R.id.btn_remark:
-                showRemarkView();
-                break;
-        }
-    }
 
     /**
      * 显示属性（加项）

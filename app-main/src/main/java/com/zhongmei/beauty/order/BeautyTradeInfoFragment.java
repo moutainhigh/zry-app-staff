@@ -352,7 +352,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
     }
 
     private void removeTradeUser(DishDataItem item) {
-        TradeUserUtil.removeTradeUser(DinnerShopManager.getInstance().getShoppingCart().getOrder().getTradeUsers(), item.getTradeUser());
+        TradeUserUtil.removeTradeUsers(DinnerShopManager.getInstance().getShoppingCart().getOrder().getTradeUsers(), item.getTradeUser());
         DinnerShoppingCart.getInstance().updateUserInfo();
         EventBus.getDefault().post(new BeautyUpdateUserInfo());
     }

@@ -78,7 +78,7 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
     protected ImageButton btn_close;
 
     private FragmentManager mFragmentManager;
-    private BeautyOrderTopFragment mTopFragment;
+//    private BeautyOrderTopFragment mTopFragment;
 
     protected BeautyOrderLeftFragment mLeftFragment;
 
@@ -135,8 +135,8 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
         shadowView.setOnClickListener(this);
         shadowView.setAlpha(0.8f);
         mFragmentManager = getSupportFragmentManager();
-        mTopFragment = (BeautyOrderTopFragment) mFragmentManager.findFragmentById(R.id.beauty_order_top_fragment);
-        mTopFragment.setOperatorListener(this);
+//        mTopFragment = (BeautyOrderTopFragment) mFragmentManager.findFragmentById(R.id.beauty_order_top_fragment);
+//        mTopFragment.setOperatorListener(this);
         buildView();
 
         tablePopuwindow = new BeautyTablePopWindow(this, BusinessType.BEAUTY);
@@ -191,14 +191,14 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
     public void onEventMainThread(BeautyOrderCustomerEvent event) {
         if (event.mEventFlag == BeautyOrderCustomerEvent.EventFlag.LOGIN) {
             middleFragment.doLoginCustomer(event.mCustomerNew);
-            mTopFragment.doLoginCustomer();
+//            mTopFragment.doLoginCustomer();
             new DinnerCashManager().updateIntegralCash(event.mCustomerNew);
             if (event.mCustomerNew.card == null || event.mCustomerNew.card != null && event.mCustomerNew.card.getRightStatus() == CardRechagingStatus.EFFECTIVE) {
                 DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(true, true);//设置会员折扣／会员价
             }
         } else {
             middleFragment.doExitCustomer();
-            mTopFragment.doLoginOutCustomer();
+//            mTopFragment.doLoginOutCustomer();
         }
     }
 
@@ -602,7 +602,7 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
     @Override
     public void onDiscountClick() {
         if (middleFragment != null) {
-            middleFragment.showDiscount();
+//            middleFragment.showDiscount();
         }
     }
 
@@ -645,17 +645,21 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
 
     @Override
     public void onClearSelected() {
-        if (mTopFragment != null) {
-            mTopFragment.doClearCheckedStatus();
+//        if (mTopFragment != null) {
+//            mTopFragment.doClearCheckedStatus();
+//        }
+
+        if(mLeftFragment!=null){
+            mLeftFragment.clearAllSelected();
         }
     }
 
     private void showTablePopuwindow() {
         if (!tablePopuwindow.isShowing()) {
-            if (mTopFragment != null) {
-                Log.e("BeautyOrderActivity", "onTableChoice...onDismiss");
-                mTopFragment.setCompoundButtonStatus(BeautyOrderTopFragment.TYPE_TABLE, true);
-            }
+//            if (mTopFragment != null) {
+//                Log.e("BeautyOrderActivity", "onTableChoice...onDismiss");
+//                mTopFragment.setCompoundButtonStatus(BeautyOrderTopFragment.TYPE_TABLE, true);
+//            }
 //            tablePopuwindow.showAsDropDown(beauty_order_customer_room, DensityUtil.dip2px(context, -5f), DensityUtil.dip2px(context, -5f));
             tablePopuwindow.showAtLocation(findViewById(R.id.content_parent), Gravity.CENTER, 0, 0);
             EventBus.getDefault().post(new OrderDishMaskingEvent(true));//发送到BeautyOrderActivity显示蒙版
@@ -707,10 +711,10 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
     @Override
     public void onDismiss() {
         //设置选择桌台的按钮为不选状态；
-        if (mTopFragment != null) {
-            Log.e("BeautyOrderActivity", "onTableChoice...onDismiss");
-            mTopFragment.setCompoundButtonStatus(BeautyOrderTopFragment.TYPE_TABLE, false);
-        }
+//        if (mTopFragment != null) {
+//            Log.e("BeautyOrderActivity", "onTableChoice...onDismiss");
+//            mTopFragment.setCompoundButtonStatus(BeautyOrderTopFragment.TYPE_TABLE, false);
+//        }
         EventBus.getDefault().post(new OrderDishMaskingEvent(false));//去掉蒙版效果，发送到BeautyOrderActivity
     }
 }

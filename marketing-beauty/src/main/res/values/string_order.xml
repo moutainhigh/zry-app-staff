@@ -17,12 +17,17 @@
 
     <string name="beauty_privilege_label">选择权益</string>
     <string name="beauty_add_property_label">添加属性</string>
+    <string name="beauty_member_right_label">会员权益</string>
+    <string name="beauty_trade_operate_label">整单操作</string>
+    <string name="beauty_trade_item_operate_label">单品操作</string>
     <string name="beauty_pay">结账</string>
     <string name="beauty_total_label">总计：</string>
     <string name="beauty_no_goods">请在右侧选择服务与商品</string>
     <string name="beauty_discount_select">选择折扣</string>
     <string name="beauty_choice_technician">选择美容技师</string>
     <string name="beauty_choice_shopowner">选择店长</string>
+    <string name="beauty_choice_trade_wiater">整单服务员</string>
+    <string name="beauty_choice_trade_item_wiater">单品服务员</string>
     <string name="beauty_choice_adviser">选择顾问</string>
     <string name="beauty_activity_title">活动</string>
 

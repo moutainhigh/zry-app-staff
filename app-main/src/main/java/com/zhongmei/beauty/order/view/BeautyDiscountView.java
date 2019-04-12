@@ -140,9 +140,10 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
     private int currentFreePosition = -1;
 
-    public BeautyDiscountView(Context context) {
+    public BeautyDiscountView(Context context,DiscountType modeType) {
         super(context);
         mActivity = (FragmentActivity) context;
+        currentDiscountType = modeType;
     }
 
     @AfterViews
@@ -157,12 +158,13 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         }
         gridView_discount.setOnItemClickListener(this);
         isAllDiscountMode();
+//        loadDefaultDiscount(currentDiscountType);
     }
 
 
-    void loadDefaultDiscount() {
+    void loadDefaultDiscount(DiscountType discountType) {
         // TODO Auto-generated method stub
-        changeTab(DiscountType.ALLDISCOUNT);
+        changeTab(discountType);
     }
 
     public void loadDatabaseDicount(DiscountType discountType) {

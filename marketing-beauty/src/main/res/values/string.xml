@@ -70,6 +70,7 @@
     <string name="discount">折扣</string>
     <string name="activity">活动</string>
     <string name="trade_remark">整单备注</string>
+    <string name="trade_item_remark">单品备注</string>
     <string name="trade_extra">加项</string>
     <string name="choice_table">选择工作台</string>
     <string name="clean_shopping_cart">清除购物车</string>

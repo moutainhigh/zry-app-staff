@@ -262,8 +262,8 @@ class BeautyOrderCustomerLoginFragment : BasicCustomerSearchFragment(), View.OnC
         beauty_order_customer_base_info.visibility = View.VISIBLE
         beauty_order_customer_info_name.text = if (TextUtils.isEmpty(customerNew.customerName)) activity.getString(R.string.customer_no_name2) else customerNew.customerName
         beauty_order_customer_info_phone.text = if (TextUtils.isEmpty(customerNew.mobile)) "" else AppUtil.getTel(customerNew.mobile)
-        beauty_order_customer_info_vip.visibility = if (null != customerNew.levelId) View.VISIBLE else View.GONE
-        beauty_order_customer_info_sex.setImageResource(if (customerNew.sex == CustomerResp.SEX_FEMALE) R.drawable.beauty_order_customer_female else R.drawable.beauty_order_customer_male)
+//        beauty_order_customer_info_vip.visibility = if (null != customerNew.levelId) View.VISIBLE else View.GONE
+        beauty_order_customer_info_sex.setImageResource(if (customerNew.sex == CustomerResp.SEX_FEMALE) R.drawable.beauty_customer_female else R.drawable.beauty_customer_male)
         bindCustomerInfo(customerNew)
     }
 

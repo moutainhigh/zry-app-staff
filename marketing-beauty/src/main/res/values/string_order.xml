@@ -24,6 +24,7 @@
     <string name="beauty_total_label">总计：</string>
     <string name="beauty_no_goods">请在右侧选择服务与商品</string>
     <string name="beauty_discount_select">选择折扣</string>
+    <string name="beauty_single_discount_select">单品折扣</string>
     <string name="beauty_choice_technician">选择美容技师</string>
     <string name="beauty_choice_shopowner">选择店长</string>
     <string name="beauty_choice_trade_wiater">整单服务员</string>

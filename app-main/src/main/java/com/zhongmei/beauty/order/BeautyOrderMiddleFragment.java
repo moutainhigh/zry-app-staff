@@ -13,6 +13,8 @@ import com.zhongmei.beauty.dialog.BeautyBookingWaiterDialog;
 import com.zhongmei.beauty.entity.UserVo;
 import com.zhongmei.beauty.interfaces.BeautyOrderOperatorListener;
 import com.zhongmei.beauty.order.event.ActionClearShopcart;
+import com.zhongmei.beauty.order.view.BeautySingleDiscountView;
+import com.zhongmei.beauty.order.view.BeautySingleDiscountView_;
 import com.zhongmei.beauty.utils.TradeUserUtil;
 import com.zhongmei.bty.basemodule.discount.enums.DiscountType;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
@@ -127,6 +129,8 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     Button btn_extra;
     @ViewById(R.id.btn_trade_item_party)
     Button btn_trade_item_party;
+    @ViewById(R.id.btn_trade_item_discount)
+    Button btn_trade_item_discount;
     @ViewById(R.id.btn_trade_item_remark)
     Button btn_trade_item_remark;
 
@@ -302,7 +306,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
                 showExtra();
                 break;
             case R.id.btn_trade_item_discount:
-                showDiscount(DiscountType.BATCHDISCOUNT);
+                showSingleDiscount();
                 break;
             case R.id.btn_trade_item_party://单品服务员
                 showWaiter(R.string.beauty_choice_trade_item_wiater,false);
@@ -555,6 +559,20 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         showCustomContentView(BeautyDiscountView_.build(getActivity(),type));
 //        mBeautyActionManager.setSelectedView(selectedView);
         mChangeListener.changePage(IChangeMiddlePageListener.DEFINE_DISCOUNT_PAGE, null);
+    }
+
+    /**
+     * 单品打折
+     */
+    public void showSingleDiscount(){
+        if (mDishDataItem == null) {
+            ToastUtil.showLongToast(R.string.beauty_consmetologist_unselected);
+            return;
+        }
+        ViewUtil.setButtonSelected(vActionBar, btn_trade_item_discount);
+        showCustomContentView(BeautySingleDiscountView_.build(getActivity(),mDishDataItem));
+//        mBeautyActionManager.setSelectedView(selectedView);
+        mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, mDishDataItem.getBase().getUuid());
     }
 
     /**

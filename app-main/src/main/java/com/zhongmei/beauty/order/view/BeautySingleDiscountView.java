@@ -14,12 +14,11 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.bty.basemodule.auth.application.BeautyApplication;
 import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
 import com.zhongmei.bty.basemodule.discount.entity.DiscountShop;
-import com.zhongmei.yunfu.db.entity.discount.TradePrivilege;
 import com.zhongmei.bty.basemodule.discount.enums.DiscountType;
+import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem;
 import com.zhongmei.bty.basemodule.session.SessionImpl;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
@@ -27,28 +26,30 @@ import com.zhongmei.bty.basemodule.shoppingcart.utils.MathManualMarketTool;
 import com.zhongmei.bty.basemodule.trade.bean.Reason;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
 import com.zhongmei.bty.basemodule.trade.operates.TradeDal;
-import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.bty.cashier.ordercenter.view.OrderCenterOperateDialogFragment;
 import com.zhongmei.bty.common.view.CustomDiscountDialog;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
-import com.zhongmei.yunfu.db.enums.OperateType;
-import com.zhongmei.yunfu.db.enums.PrivilegeType;
-import com.zhongmei.yunfu.util.UserActionCode;
-import com.zhongmei.yunfu.util.DialogUtil;
-import com.zhongmei.yunfu.util.MobclickAgentEvent;
-import com.zhongmei.yunfu.util.ToastUtil;
-import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
-import com.zhongmei.yunfu.ui.view.WrapGridView;
 import com.zhongmei.bty.dinner.action.ActionDinnerBatchDiscount;
 import com.zhongmei.bty.dinner.action.ActionDinnerBatchFree;
 import com.zhongmei.bty.dinner.action.ActionDinnerFinished;
 import com.zhongmei.bty.dinner.adapter.DinnerDiscountAdapter;
 import com.zhongmei.bty.dinner.vo.DiscountShopVo;
+import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.context.session.Session;
 import com.zhongmei.yunfu.context.session.core.auth.Auth;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.db.entity.discount.TradePrivilege;
+import com.zhongmei.yunfu.db.enums.OperateType;
+import com.zhongmei.yunfu.db.enums.PrivilegeType;
+import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
+import com.zhongmei.yunfu.ui.view.WrapGridView;
+import com.zhongmei.yunfu.util.DialogUtil;
+import com.zhongmei.yunfu.util.MathDecimal;
+import com.zhongmei.yunfu.util.MobclickAgentEvent;
+import com.zhongmei.yunfu.util.ToastUtil;
+import com.zhongmei.yunfu.util.UserActionCode;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -68,12 +69,9 @@ import de.greenrobot.event.EventBus;
 /**
  * 折扣自定义控件
  */
-@EViewGroup(R.layout.beauty_discount_layout)
-public class BeautyDiscountView extends LinearLayout implements OnItemClickListener {
-    private static final String TAG = BeautyDiscountView.class.getSimpleName();
-
-    @ViewById(R.id.dinner_all_discount)
-    public Button dinner_all_discount;
+@EViewGroup(R.layout.beauty_single_discount_layout)
+public class BeautySingleDiscountView extends LinearLayout implements OnItemClickListener {
+    private static final String TAG = BeautySingleDiscountView.class.getSimpleName();
 
     @ViewById(R.id.dinner_batch_discount)
     public Button dinner_batch_discount;
@@ -116,6 +114,8 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
     private DinnerDiscountAdapter discountAdapter;
 
+    private DishDataItem mDishDataItem;
+
     private int HAVENO_SELECT = 0;
     //整单折扣或者折让或赠送
     private final int ALL_MODE = 1;
@@ -123,7 +123,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
     private final int BATCH_MODE = 2;
 
 
-    private DiscountType currentDiscountType = DiscountType.ALLDISCOUNT;
+    private DiscountType currentDiscountType = DiscountType.BATCHDISCOUNT;
 
     private int privilegeMode;
 
@@ -140,10 +140,10 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
     private int currentFreePosition = -1;
 
-    public BeautyDiscountView(Context context,DiscountType modeType) {
+    public BeautySingleDiscountView(Context context,DishDataItem dishDataItem) {
         super(context);
         mActivity = (FragmentActivity) context;
-        currentDiscountType = modeType;
+        this.mDishDataItem=dishDataItem;
     }
 
     @AfterViews
@@ -157,7 +157,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
             gridView_discount.setVisibility(View.VISIBLE);
         }
         gridView_discount.setOnItemClickListener(this);
-        isAllDiscountMode();
+        isBatchDiscountMode();
 //        loadDefaultDiscount(currentDiscountType);
     }
 
@@ -214,22 +214,12 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         return discountList;
     }
 
-    private void isAllDiscountMode() {
-        privilegeMode = ALL_MODE;
-        dinner_all_discount.setSelected(true);
-        dinner_batch_discount.setSelected(false);
-        changeTab(DiscountType.ALLDISCOUNT);
-        // 通知购物车刷新视图
-        EventBus.getDefault().post(new ActionDinnerBatchDiscount(false, true));
-    }
 
     private void isBatchDiscountMode() {
         privilegeMode = BATCH_MODE;
-        dinner_all_discount.setSelected(false);
-        dinner_batch_discount.setSelected(true);
         changeTab(DiscountType.BATCHDISCOUNT);
         // 通知购物车刷新视图
-        EventBus.getDefault().post(new ActionDinnerBatchDiscount(true, false));
+//        EventBus.getDefault().post(new ActionDinnerBatchDiscount(true, false));
     }
 
     // 改变折扣 让价标签
@@ -282,8 +272,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
     }
 
-    @Click({R.id.dinner_all_discount,
-            R.id.dinner_batch_discount,
+    @Click({
             R.id.btn_clear_discount,
             R.id.dinner_tab_discount,
             R.id.dinner_tab_let,
@@ -293,18 +282,6 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
             R.id.btn_fete})
     void onclick(View v) {
         switch (v.getId()) {
-            case R.id.dinner_all_discount:
-                privilegeMode = HAVENO_SELECT;
-                unselectAllDiscount();
-                isAllDiscountMode();
-                break;
-            case R.id.dinner_batch_discount:
-                privilegeMode = HAVENO_SELECT;
-                // 清除之前设置的值
-                DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().setDishTradePrivilege(null);
-                unselectAllDiscount();
-                isBatchDiscountMode();
-                break;
             case R.id.btn_clear_discount:
                 unselectAllDiscount();
                 if (privilegeMode == ALL_MODE) {
@@ -313,8 +290,8 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                         DinnerShopManager.getInstance().getShoppingCart().removeBanquet();
                     }
                 } else {
-                    DinnerShopManager.getInstance().getShoppingCart().removeAllSelectedPrivilege();
-                    DinnerShopManager.getInstance().getShoppingCart().setDishPrivilege(null, null);
+                    DinnerShopManager.getInstance().getShoppingCart().removedPrivilege(mDishDataItem.getBase().getUuid());
+                    DinnerShopManager.getInstance().getShoppingCart().setDishPrivilege(null, null,null,mDishDataItem.getBase().getUuid());
                     // 自动添加会员折扣
                     if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
                         DinnerShopManager.getInstance().getShoppingCart().memberPrivilegeForSelected();
@@ -347,9 +324,9 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 //                    ll_fete.setVisibility(View.GONE);
                 }
                 break;
-            case R.id.btn_user_define:
+            case R.id.btn_user_define: //自定义折扣
                 unselectAllDiscount();
-                if (privilegeMode == BATCH_MODE && DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
+                if (privilegeMode == BATCH_MODE && mDishDataItem==null) {
                     ToastUtil.showLongToast(R.string.pleanse_select_discount);
                     return;
                 }
@@ -420,7 +397,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
      * @Return void 返回类型
      */
     private void changeItemCanSelected(boolean isBatchFree) {
-        EventBus.getDefault().post(new ActionDinnerBatchFree(isBatchFree));
+//        EventBus.getDefault().post(new ActionDinnerBatchFree(isBatchFree));
     }
 
     //控制按钮显示隐藏
@@ -444,7 +421,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         public void onCustomDiscount(final float discount) {
             // TODO Auto-generated method stub
             //没有选中菜品不能点击打折
-            if (privilegeMode == BATCH_MODE && DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
+            if (privilegeMode == BATCH_MODE && mDishDataItem==null) {
                 ToastUtil.showLongToast(R.string.pleanse_select_discount);
                 return;
             }
@@ -656,10 +633,10 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         DinnerShoppingCart shoppingCart = DinnerShopManager.getInstance().getShoppingCart();
         // 批量时让价最大金额
         if (privilegeMode == BATCH_MODE) {
-            BigDecimal minPrice = shoppingCart.getMinPrice(shoppingCart.getShoppingCartVo());
+            BigDecimal minPrice = mDishDataItem.getBase().getActualAmount();
             return minPrice;
         } else if (privilegeMode == ALL_MODE) {// 整单让价
-            BigDecimal tradeAumont = shoppingCart.getTradeAmoutCanDiscount(shoppingCart.getShoppingCartVo());
+            BigDecimal tradeAumont = mDishDataItem.getBase().getActualAmount();
             return tradeAumont;
         }
         return BigDecimal.ZERO;
@@ -701,8 +678,8 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
             DinnerShopManager.getInstance().getShoppingCart().setDefineTradePrivilege(privilege, mReason, true, true);
         } else {
             OperateType operateType = DiscountType.getOperateType(currentDiscountType);
-            DinnerShopManager.getInstance().getShoppingCart().setDishPrivilege(privilege, mReason, operateType);
-            EventBus.getDefault().post(new ActionDinnerFinished());
+            DinnerShopManager.getInstance().getShoppingCart().setDishPrivilege(privilege, mReason, operateType,mDishDataItem.getBase().getUuid());
+//            EventBus.getDefault().post(new ActionDinnerFinished());
         }
     }
 
@@ -779,7 +756,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
      */
     private void validateFreePermission() {
         //没有选中菜品不能点击打折
-        if (privilegeMode == BATCH_MODE && DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
+        if (privilegeMode == BATCH_MODE && mDishDataItem==null) {
             ToastUtil.showLongToast(R.string.pleanse_select_discount);
             return;
         }

@@ -198,6 +198,7 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
             }
         } else {
             middleFragment.doExitCustomer();
+            doClose();//关闭浮层
 //            mTopFragment.doLoginOutCustomer();
         }
     }

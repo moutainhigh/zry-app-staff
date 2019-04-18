@@ -62,11 +62,6 @@
                 android:drawableTop="@drawable/beauty_order_top_btn_discount_selector"
                 android:text="@string/discount" />
 
-            <Button
-                android:id="@+id/btn_trade_remark"
-                style="@style/beauty_order_middle_btn"
-                android:drawableTop="@drawable/beauty_order_top_btn_remark_selector"
-                android:text="@string/trade_remark" />
 
             <Button
                 android:id="@+id/btn_table"
@@ -81,6 +76,12 @@
                 android:drawableTop="@drawable/beauty_order_top_btn_party_selector"
                 android:text="@string/join_user" />
 
+            <Button
+                android:id="@+id/btn_trade_remark"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_remark_selector"
+                android:text="@string/trade_remark" />
+
 
             <Button
                 android:id="@+id/btn_clearcart"
@@ -94,8 +95,8 @@
             android:id="@+id/layout_trade_item_operate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:visibility="gone"
+            android:orientation="vertical">
 
             <com.zhongmei.bty.booking.ui.DrawableCenterTextView
                 style="@style/beauty_middle_label"
@@ -104,7 +105,7 @@
             <Button
                 android:id="@+id/btn_extra"
                 style="@style/beauty_order_middle_btn"
-                android:drawableTop="@drawable/beauty_order_top_btn_remark_selector"
+                android:drawableTop="@drawable/beauty_order_top_btn_extra_selector"
                 android:text="@string/trade_extra" />
 
             <Button

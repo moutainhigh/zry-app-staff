@@ -26,7 +26,7 @@ public class CardLoginResp extends CardBaseResp<Result> implements ICustomer {
         customerNew.address = customerV5.getAddress();
         customerNew.customerId = customerV5.getCustomerid();
         customerNew.customerName = customerV5.getName();
-        customerNew.interest = customerV5.getInterest();
+        customerNew.hobby = customerV5.getInterest();
         customerNew.groupId = customerV5.getGroupid();
         customerNew.memberId = customerV5.getMemberid();
         customerNew.mobile = customerV5.getMobile();

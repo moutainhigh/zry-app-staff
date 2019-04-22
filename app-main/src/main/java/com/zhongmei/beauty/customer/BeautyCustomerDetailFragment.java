@@ -228,8 +228,11 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
     @ViewById(R.id.comment)
     protected TextView mComment;
 
-    //@ViewById(R.id.no_customer_info_layout)
-    //RelativeLayout noCustomerInfo;
+    @ViewById(R.id.hobby_layout)
+    LinearLayout mHobbyLayout;
+
+    @ViewById(R.id.hobby)
+    TextView mTvHobby;
     /*********************** 会员基本信息（完） **********************/
 
 
@@ -687,15 +690,12 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
         } else {
             mCommentLayout.setVisibility(View.GONE);
         }
-        /*if (TextUtils.isEmpty(mCustomer.entityCard) && TextUtils.isEmpty(mCustomer.groupName)
-                && TextUtils.isEmpty(mCustomer.birthday) && TextUtils.isEmpty(mCustomer.interest)
-                && TextUtils.isEmpty(mCustomer.address) && TextUtils.isEmpty(mCustomer.invoice)
-                && TextUtils.isEmpty(mCustomer.invoiceTitle) && TextUtils.isEmpty(mCustomer.memo)) {
-            noCustomerInfo.setVisibility(View.VISIBLE);
+        if (!TextUtils.isEmpty(mCustomer.hobby)) {
+            mHobbyLayout.setVisibility(View.VISIBLE);
+            mTvHobby.setText(mCustomer.hobby);
         } else {
-            noCustomerInfo.setVisibility(View.GONE);
-        }*/
-
+            mHobbyLayout.setVisibility(View.GONE);
+        }
         // FIXME 添加 会员累计消费 和 消费次数
 
     }

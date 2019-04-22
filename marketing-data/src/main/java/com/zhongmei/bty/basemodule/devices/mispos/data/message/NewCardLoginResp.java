@@ -51,7 +51,7 @@ public class NewCardLoginResp implements ICustomer {
         customerNew.address = customer.getAddress();
         customerNew.customerId = customer.getCustomerid();
         customerNew.customerName = customer.getName();
-        customerNew.interest = customer.getInterest();
+        customerNew.hobby = customer.getInterest();
         customerNew.groupId = customer.getGroupid();
         customerNew.memberId = customer.getMemberid();
         customerNew.mobile = customer.getMobile();

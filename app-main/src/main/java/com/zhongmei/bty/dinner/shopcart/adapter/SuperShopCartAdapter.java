@@ -141,7 +141,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     protected Drawable mDeleteIcon, mDishUnSaveIcon, mDishUnPrintedIcon, mDishPrintedIcon, mDishPausedIcon, mDIshPrintFailIcon,
             mDishPrintIngIcon, mDishDiscountAllIcon, mDishNoDiscountIcon, mBuffetPeople, mDeposit, mOutTimeFee, mDrawableCategory;
 
-    protected Drawable mLabelUnSaveIcon, mLabelSaveUnprintedIcon, mLabelSavePrintedIcon;
+    protected Drawable mLabelUnSaveIcon, mLabelSaveUnprintedIcon, mLabelSavePrintedIcon,mLabelCardIcon,mLabelVipIcon;
     // 拆单icon 拆单并打印，拆单未打印
     protected Drawable mSplitPritedIcon, mSplitUnPritedIcon;
 
@@ -172,6 +172,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         this.mLabelUnSaveIcon = context.getResources().getDrawable(R.drawable.dinner_label_unsave);
         this.mLabelSaveUnprintedIcon = context.getResources().getDrawable(R.drawable.dinner_label_unprinted);
         this.mLabelSavePrintedIcon = context.getResources().getDrawable(R.drawable.dinner_label_printed);
+        this.mLabelCardIcon=context.getResources().getDrawable(R.drawable.icon_card);
+        this.mLabelVipIcon=context.getResources().getDrawable(R.drawable.icon_vip);
         this.mDishPausedIcon = context.getResources().getDrawable(R.drawable.dinner_pause_icon);
         this.mDIshPrintFailIcon = context.getResources().getDrawable(R.drawable.dinner_print_fail_icon);
         this.mDishPrintIngIcon = context.getResources().getDrawable(R.drawable.dinner_print_ing_icon);
@@ -394,6 +396,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     extraHolder = (ExtraHolder) convertView.getTag(R.id.dishLabelView);
                 }
                 break;
+            case CARD_SERVICE_LABEL:
             case LABLE_TYPE:
                 if (convertView == null || convertView.getTag(R.id.labelView) == null) {
                     labelHolder = new LabelHolder();
@@ -531,7 +534,6 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     buffetExtraHolder = (BuffetExtraHolder) convertView.getTag();
                 }
                 break;
-            case CARD_SERVICE_LABEL:
             case ITEM_USER_TYPE:
             case TRADE_USER_TYPE:
                 if (convertView == null || convertView.getTag() == null) {
@@ -566,6 +568,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             case SIGLE_PRIVILEGE_TYPE:
                 showSiglePrivilege(sPrivilegeHolder, item);
                 break;
+            case CARD_SERVICE_LABEL:
             case LABLE_TYPE:
                 showLabel(labelHolder, item);
                 setTopLine(labelHolder.topLine, item, position);
@@ -601,7 +604,6 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 showBuffetExtra(buffetExtraHolder, item);
                 setTopLine(buffetExtraHolder.topLine, item, position);
                 break;
-            case CARD_SERVICE_LABEL:
             case ITEM_USER_TYPE:
                 showUser(userHolder, item, false);
                 break;
@@ -1191,6 +1193,14 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             case LABEL_SAVE_PRINTED:// 已出单标题
                 labelDrawable = this.mLabelSavePrintedIcon;
                 holder.labelName.setTextAppearance(context, R.style.dinnerLabelSavePrinted);
+                break;
+            case CARD_SERVICE_LABEL:
+                labelDrawable = this.mLabelCardIcon;
+                holder.labelName.setTextAppearance(context, R.style.dinnerCardLabel);
+                break;
+            case APPLET_LABEL:
+                labelDrawable = this.mLabelVipIcon;
+                holder.labelName.setTextAppearance(context, R.style.dinnerCardLabel);
                 break;
         }
         if (!TextUtils.isEmpty(item.getName())) {

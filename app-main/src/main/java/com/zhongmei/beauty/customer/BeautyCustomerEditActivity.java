@@ -456,12 +456,12 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         }
 
         // 设置喜好
-        String enjoyStr = EnjoyManager.getInstance().getDtailEnjoyString(customer.interest);
+        String enjoyStr = EnjoyManager.getInstance().getDtailEnjoyString(customer.hobby);
         if (!TextUtils.isEmpty(enjoyStr)) {
             mEnjoy.setText(enjoyStr);
         }
         mSelectSet.clear();
-        List<String> tempSelect = EnjoyManager.getInstance().getEnjoylist(customer.interest);
+        List<String> tempSelect = EnjoyManager.getInstance().getEnjoylist(customer.hobby);
         mSelectSet.addAll(tempSelect);
 
         mMemo.setText(customer.memo);
@@ -863,7 +863,8 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         mCustomer.address = mAddress.getText().toString();
         mCustomer.invoice = mInvoice.getText().toString();
         mCustomer.memo = mMemo.getText().toString();
-        mCustomer.interest = EnjoyManager.getInstance().tohoddyString(mSelectSet);
+//        mCustomer.interest = EnjoyManager.getInstance().tohoddyString(mSelectSet);
+        mCustomer.hobby = mEnjoy.getText().toString();
         if (mErpCurrency != null) {
             mCustomer.nation = mErpCurrency.getCountryEn();
             mCustomer.country = mErpCurrency.getCountryZh();

@@ -90,7 +90,7 @@ public class DinnerRemarkFragment extends BasicFragment {
                     if (ResponseObject.isOk(response)) {
                         CustomerResp customerNew = response.getContent().result;
                         if (customerNew != null) {
-                            tvLike.setText(TextUtils.isEmpty(customerNew.interest) ? getString(R.string.customer_wu) : EnjoyManager.getInstance().getDtailEnjoyString(customerNew.interest));
+                            tvLike.setText(TextUtils.isEmpty(customerNew.hobby) ? getString(R.string.customer_wu) : EnjoyManager.getInstance().getDtailEnjoyString(customerNew.hobby));
                             tvRemark.setText(TextUtils.isEmpty(customerNew.memo) ? getString(R.string.customer_wu) : customerNew.memo);
                             if (!TextUtils.isEmpty(customerNew.groupName)) {
                                 tvGroup.setText(customerNew.groupName);

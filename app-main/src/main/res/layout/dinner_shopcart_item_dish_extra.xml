@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
         android:gravity="center_vertical"
         android:textColor="@color/remark_text_color"
         android:textSize="@dimen/text_16" />

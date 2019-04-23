@@ -9,13 +9,13 @@
         style="@style/style_topline"></View>
 
     <TextView
-        android:id="@+id/user_name"
+        android:id="@+id/tv_label"
         style="@style/dishMemoStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="3dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="5dp"
-        android:paddingTop="3dp"
+        android:layout_marginTop="10dp"
         android:drawablePadding="5dp"
         android:ellipsize="end"
         android:gravity="center_vertical"

@@ -81,6 +81,8 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
 
             if(position % 2 == 1){
                 viewHolder.itemView.setBackgroundColor(Color.parseColor("#F1F1F1"));
+            }else{
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
             }
 
             final CustomerExpenseRecordResp record = mRecordList.get(position);

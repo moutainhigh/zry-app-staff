@@ -18,7 +18,7 @@
     <string name="beauty_member_number_hint">新增会员</string>
     <string name="beauty_create_trade">开单</string>
     <string name="beauty_create_card">办卡</string>
-    <string name="beauty_buy_server">服务购买</string>
+    <string name="beauty_buy_server">服务次卡</string>
     <string name="beauty_charge">充值</string>
     <string name="beauty_create_member">添加会员</string>
     <string name="beauty_create_reserver">添加预约</string>
@@ -65,11 +65,12 @@
     <string name="back">返回</string>
     <string name="count_card">次卡</string>
     <string name="integral">积分</string>
-    <string name="join_user">参与者</string>
+    <string name="join_user">服务员</string>
     <string name="coupon">优惠券</string>
     <string name="discount">折扣</string>
     <string name="activity">活动</string>
     <string name="trade_remark">整单备注</string>
+    <string name="trade_item_remark">单品备注</string>
     <string name="trade_extra">加项</string>
     <string name="choice_table">选择工作台</string>
     <string name="clean_shopping_cart">清除购物车</string>
@@ -170,4 +171,6 @@
     <string name="now_discount_limit_format">当前折扣上限为%s折</string>
     <string name="now_rebate_limit_format">当前折让上限为{HBF}%d</string>
     <string name="the_card_is_not_member_card">该卡不是会员实体卡！</string>
+
+    <string name="order_dish_trade_user">整单:%1$s</string>
 </resources>

@@ -53,6 +53,9 @@ import java.util.List;
 public class BeautyRemarkView extends LinearLayout {
     private static final String TAG = BeautyRemarkView.class.getSimpleName();
 
+    @ViewById(R.id.tv_title)
+    protected TextView tv_title;
+
     @ViewById(R.id.tv_order_remark)
     protected TextView tvOrderRemark;
 
@@ -166,6 +169,7 @@ public class BeautyRemarkView extends LinearLayout {
         //如果有选择菜品默认切换到单品备注
         if (shopcartItem != null) {
             isOrderRemark = false;
+            tv_title.setText(R.string.orderSingleRemark);//单品备注
         }
         mExtraOrderAdapter.setOnItemClickListener(new ExtraOrderAdapter.OnRecyclerViewItemClickListener() {
             @Override

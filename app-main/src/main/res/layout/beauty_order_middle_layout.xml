@@ -8,61 +8,188 @@
         android:id="@+id/vActionBar"
         android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:visibility="gone"
         android:orientation="vertical">
-
-        <com.zhongmei.bty.booking.ui.DrawableCenterTextView
-            style="@style/beauty_middle_label"
-            android:text="@string/beauty_add_property_label" />
-
-        <Button
-            android:id="@+id/btn_standard"
-            style="@style/beauty_middle_btn"
-            android:text="@string/add_standard" />
-
-        <Button
-            android:id="@+id/btn_remark"
-            style="@style/beauty_middle_btn"
-            android:text="@string/remark_str" />
-
-        <com.zhongmei.bty.booking.ui.DrawableCenterTextView
-            style="@style/beauty_middle_label"
-            android:text="@string/beauty_sale_select_label" />
-
-        <Button
-            android:id="@+id/btn_cosmetologist"
-            style="@style/beauty_middle_btn"
-            android:text="@string/btn_cosmetologist" />
-
-        <Button
-            android:id="@+id/btn_adviser"
-            style="@style/beauty_middle_btn"
-            android:text="@string/btn_adviser" />
-
-        <Button
-            android:id="@+id/btn_sale"
-            style="@style/beauty_middle_btn"
-            android:text="@string/btn_shopowner_select" />
-
-        <com.zhongmei.bty.booking.ui.DrawableCenterTextView
-            style="@style/beauty_middle_label"
-            android:text="@string/beauty_privilege_label" />
-
-        <com.zhongmei.bty.commonmodule.view.VerticalViewPager
-            android:id="@+id/vvp_order_action"
+        <LinearLayout
+            android:id="@+id/layout_member_operate"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scrollbars="none" />
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/iv_switch_page"
+
+            <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+                style="@style/beauty_middle_label"
+                android:text="@string/beauty_member_right_label" />
+
+            <Button
+                android:id="@+id/btn_card"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_card_selector"
+                android:text="@string/count_card" />
+
+            <Button
+                android:id="@+id/btn_integral"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_integral_selector"
+                android:text="@string/integral" />
+
+            <Button
+                android:id="@+id/btn_coupon"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_coupon_selector"
+                android:text="@string/coupon" />
+
+            <Button
+                android:id="@+id/btn_activity"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_activity_selector"
+                android:text="@string/activity" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_trade_operate"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/snack_switch_page_button_height"
-            android:layout_gravity="bottom"
-            android:scaleType="center"
-            android:src="@drawable/ic_switch_page_next" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+                style="@style/beauty_middle_label"
+                android:text="@string/beauty_trade_operate_label" />
+
+            <Button
+                android:id="@+id/btn_discount"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_discount_selector"
+                android:text="@string/discount" />
+
+
+            <Button
+                android:id="@+id/btn_table"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_table_selector"
+                android:text="@string/choice_table" />
+
+
+            <Button
+                android:id="@+id/btn_party"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_party_selector"
+                android:text="@string/join_user" />
+
+            <Button
+                android:id="@+id/btn_trade_remark"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_remark_selector"
+                android:text="@string/trade_remark" />
+
+
+            <Button
+                android:id="@+id/btn_clearcart"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_clearcart_selector"
+                android:text="@string/clean_shopping_cart" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_trade_item_operate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+            <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+                style="@style/beauty_middle_label"
+                android:text="@string/beauty_trade_item_operate_label" />
+
+            <Button
+                android:id="@+id/btn_extra"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_extra_selector"
+                android:text="@string/trade_extra" />
+
+            <Button
+                android:id="@+id/btn_trade_item_discount"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_discount_selector"
+                android:text="@string/discount" />
+
+            <Button
+                android:id="@+id/btn_trade_item_party"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_party_selector"
+                android:text="@string/join_user" />
+
+
+            <Button
+                android:id="@+id/btn_trade_item_remark"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_remark_selector"
+                android:text="@string/trade_item_remark" />
+
+        </LinearLayout>
+
+
+        <!-- 这个layout是之前的，样式已经没有使用了 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+                style="@style/beauty_middle_label"
+                android:text="@string/beauty_add_property_label" />
+
+            <Button
+                android:id="@+id/btn_standard"
+                style="@style/beauty_middle_btn"
+                android:text="@string/add_standard" />
+
+            <Button
+                android:id="@+id/btn_remark"
+                style="@style/beauty_middle_btn"
+                android:text="@string/remark_str" />
+
+            <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+                style="@style/beauty_middle_label"
+                android:text="@string/beauty_sale_select_label" />
+
+            <Button
+                android:id="@+id/btn_cosmetologist"
+                style="@style/beauty_middle_btn"
+                android:text="@string/btn_cosmetologist" />
+
+            <Button
+                android:id="@+id/btn_adviser"
+                style="@style/beauty_middle_btn"
+                android:text="@string/btn_adviser" />
+
+            <Button
+                android:id="@+id/btn_sale"
+                style="@style/beauty_middle_btn"
+                android:text="@string/btn_shopowner_select" />
+
+            <com.zhongmei.bty.booking.ui.DrawableCenterTextView
+                style="@style/beauty_middle_label"
+                android:text="@string/beauty_privilege_label" />
+
+            <com.zhongmei.bty.commonmodule.view.VerticalViewPager
+                android:id="@+id/vvp_order_action"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:scrollbars="none" />
+
+            <ImageView
+                android:id="@+id/iv_switch_page"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/snack_switch_page_button_height"
+                android:layout_gravity="bottom"
+                android:scaleType="center"
+                android:src="@drawable/ic_switch_page_next" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <View

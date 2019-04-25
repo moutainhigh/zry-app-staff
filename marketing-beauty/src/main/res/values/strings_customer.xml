@@ -26,7 +26,7 @@
     <string name="beauty_order_customer_cardinfo_desc">会员卡：%1$s</string>
     <string name="beauty_order_customer_lasttime_serve_desc">上次服务：%1$s</string>
     <string name="beauty_customer_member_card_tab">会员卡</string>
-    <string name="beauty_search_customer_hint">输入手机号／卡号查找会员</string>
+    <string name="beauty_search_customer_hint">点击按钮登录会员</string>
     <string name="beauty_search_customer_login">刷卡登录</string>
     <string name="beauty_membership_card_nonuse_discounts">不使用优惠</string>
     <string name="beauty_order_card_title_hint">选择可用的权益</string>

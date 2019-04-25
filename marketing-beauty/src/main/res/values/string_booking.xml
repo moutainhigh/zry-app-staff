@@ -6,7 +6,7 @@
     <string name="all">全部</string>
     <string name="beauty_open_trade">开单</string>
     <string name="beauty_refuse">拒绝</string>
-    <string name="beauty_buy_service">服务购买</string>
+    <string name="beauty_buy_service">服务次卡</string>
     <string name="beauty_source_pre">来源：</string>
     <string name="beauty_source_daodian">线下预约</string>
     <string name="beauty_source_wechat">微信预约</string>
@@ -18,4 +18,5 @@
     <string name="beauty_arrive_time">到店时间</string>
     <string name="beauty_mr">先生</string>
     <string name="beauty_miss">女士</string>
+    <string name="has_no_more">没有更多了!</string>
 </resources>

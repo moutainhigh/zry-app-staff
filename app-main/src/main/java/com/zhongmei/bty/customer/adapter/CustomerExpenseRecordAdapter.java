@@ -1,20 +1,21 @@
 package com.zhongmei.bty.customer.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.ShopInfoManager;
-import com.zhongmei.yunfu.context.session.Session;
 import com.zhongmei.yunfu.ui.H5WebViewActivity;
-import com.zhongmei.yunfu.ui.H5WebViewFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -64,23 +65,41 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.customer_expense_record_item, parent, false);
+            viewHolder.itemView = (LinearLayout) convertView.findViewById(R.id.itemView);
             viewHolder.time = (TextView) convertView.findViewById(R.id.time);
             viewHolder.tradeType = (TextView) convertView.findViewById(R.id.type);
             viewHolder.tradeNo = (TextView) convertView.findViewById(R.id.other_balance);
             viewHolder.tradeValue = (TextView) convertView.findViewById(R.id.end_value);
             viewHolder.person = (TextView) convertView.findViewById(R.id.person);
-            viewHolder.viewDetails = (TextView)convertView.findViewById(R.id.view_details);
+            viewHolder.viewDetails = (LinearLayout)convertView.findViewById(R.id.view_details);
+            viewHolder.typeIcon = (ImageView) convertView.findViewById(R.id.typeIcon);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         if (mRecordList != null) {
+
+            if(position % 2 == 1){
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#F1F1F1"));
+            }else{
+                viewHolder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
+            }
+
             final CustomerExpenseRecordResp record = mRecordList.get(position);
             viewHolder.time.setText(formatter.format(new Date(record.getModifyDateTime())));
-            viewHolder.tradeType.setText(record.getTradeType());
+            viewHolder.tradeType.setText(mContext.getResources().getString(R.string.order_type_lable)+record.getTradeType());
             viewHolder.tradeNo.setText(record.getTradeNo());
-            viewHolder.tradeValue.setText(record.getTradeValue().toString());
+            viewHolder.tradeValue.setText(mContext.getResources().getString(R.string.order_amount_lable)+record.getTradeValue().toString());
             viewHolder.person.setText(getPersonName(record.getUserId()));
+
+            //交易类型 1:SELL:售货 2:REFUND:退货 3:REPAY:反结账 4:REPAY_FOR_REFUND:反结账退货
+            if(record.getTradeType().equals("售货")){
+                viewHolder.typeIcon.setBackground(mContext.getResources().getDrawable(R.drawable.customer_sales_icon));
+            }else if(record.getTradeType().equals("退货")){
+                viewHolder.typeIcon.setBackground(mContext.getResources().getDrawable(R.drawable.customer_return_icon));
+            }
+
+
             viewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -101,7 +120,9 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        TextView time, tradeType, tradeNo, tradeValue, person, viewDetails;
+        TextView time, tradeType, tradeNo, tradeValue, person;
+        LinearLayout itemView,viewDetails;
+        ImageView typeIcon;
     }
 
     private String getPersonName(String userId) {

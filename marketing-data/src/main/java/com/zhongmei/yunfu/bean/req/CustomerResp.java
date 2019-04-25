@@ -47,7 +47,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     public Long level; //	等级数（1~5）
     public String levelName; //	等级名称
     public String memo; //	备注
-    public String interest; //	口味喜好
+    public String hobby; //	口味喜好
     public String invoice; //	发票开头
     public String invoiceTitle;
     public String address; //	地址
@@ -237,8 +237,8 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         }
 
         json.put("groupId", groupId == null ? "999999" : groupId + "");
-        json.put("interest", interest);
-        json.put("hobby", interest);
+        json.put("interest", hobby);
+        json.put("hobby", hobby);
         json.put("invoice", invoice);
         json.put("isDisable", isDisable);
         json.put("isNeedConfirm", 0);

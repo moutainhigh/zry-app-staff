@@ -141,7 +141,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     protected Drawable mDeleteIcon, mDishUnSaveIcon, mDishUnPrintedIcon, mDishPrintedIcon, mDishPausedIcon, mDIshPrintFailIcon,
             mDishPrintIngIcon, mDishDiscountAllIcon, mDishNoDiscountIcon, mBuffetPeople, mDeposit, mOutTimeFee, mDrawableCategory;
 
-    protected Drawable mLabelUnSaveIcon, mLabelSaveUnprintedIcon, mLabelSavePrintedIcon;
+    protected Drawable mLabelUnSaveIcon, mLabelSaveUnprintedIcon, mLabelSavePrintedIcon,mLabelCardIcon,mLabelVipIcon;
     // 拆单icon 拆单并打印，拆单未打印
     protected Drawable mSplitPritedIcon, mSplitUnPritedIcon;
 
@@ -172,6 +172,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         this.mLabelUnSaveIcon = context.getResources().getDrawable(R.drawable.dinner_label_unsave);
         this.mLabelSaveUnprintedIcon = context.getResources().getDrawable(R.drawable.dinner_label_unprinted);
         this.mLabelSavePrintedIcon = context.getResources().getDrawable(R.drawable.dinner_label_printed);
+        this.mLabelCardIcon=context.getResources().getDrawable(R.drawable.icon_card);
+        this.mLabelVipIcon=context.getResources().getDrawable(R.drawable.icon_vip);
         this.mDishPausedIcon = context.getResources().getDrawable(R.drawable.dinner_pause_icon);
         this.mDIshPrintFailIcon = context.getResources().getDrawable(R.drawable.dinner_print_fail_icon);
         this.mDishPrintIngIcon = context.getResources().getDrawable(R.drawable.dinner_print_ing_icon);
@@ -394,6 +396,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     extraHolder = (ExtraHolder) convertView.getTag(R.id.dishLabelView);
                 }
                 break;
+            case CARD_SERVICE_LABEL:
             case LABLE_TYPE:
                 if (convertView == null || convertView.getTag(R.id.labelView) == null) {
                     labelHolder = new LabelHolder();
@@ -531,7 +534,6 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     buffetExtraHolder = (BuffetExtraHolder) convertView.getTag();
                 }
                 break;
-            case CARD_SERVICE_LABEL:
             case ITEM_USER_TYPE:
             case TRADE_USER_TYPE:
                 if (convertView == null || convertView.getTag() == null) {
@@ -566,6 +568,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             case SIGLE_PRIVILEGE_TYPE:
                 showSiglePrivilege(sPrivilegeHolder, item);
                 break;
+            case CARD_SERVICE_LABEL:
             case LABLE_TYPE:
                 showLabel(labelHolder, item);
                 setTopLine(labelHolder.topLine, item, position);
@@ -601,7 +604,6 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 showBuffetExtra(buffetExtraHolder, item);
                 setTopLine(buffetExtraHolder.topLine, item, position);
                 break;
-            case CARD_SERVICE_LABEL:
             case ITEM_USER_TYPE:
                 showUser(userHolder, item, false);
                 break;
@@ -622,8 +624,12 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     protected void showUser(UserHolder userHolder, DishDataItem item, boolean isDefine) {
         if (!isDefine) {
             userHolder.user_info.setLayoutParams(getExtraDiyWh(context, true));
+            setDrawableLeft(userHolder.user_info,R.drawable.icon_trade_item_user);
+            userHolder.user_info.setTextColor(context.getResources().getColor(R.color.remark_text_color));
         } else {
             userHolder.user_info.setLayoutParams(getExtraDiyWh(context, false));
+            setDrawableLeft(userHolder.user_info,R.drawable.icon_trade_user);
+            userHolder.user_info.setTextColor(context.getResources().getColor(R.color.beauty_color_FC2584));
         }
         if (item.isNeedTopLine()) {
             userHolder.topLine.setVisibility(View.VISIBLE);
@@ -631,6 +637,13 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             userHolder.topLine.setVisibility(View.GONE);
         }
         userHolder.user_info.setText(item.getName());
+    }
+
+    private void setDrawableLeft(TextView tv,int iconResId){
+        Drawable drawableLeft = context.getResources().getDrawable(iconResId);
+        tv.setCompoundDrawablesWithIntrinsicBounds(drawableLeft,
+                null, null, null);
+        tv.setCompoundDrawablePadding(DensityUtil.dip2px(context,5));
     }
 
     protected void showTitle(TitleHolder titleHolder, DishDataItem item) {
@@ -1067,7 +1080,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         if ((item.getBase().getStatusFlag() == StatusFlag.INVALID)
                 && (item.getBase().getInvalidType() != InvalidType.SPLIT)) {
             // modify by zhubo 2015-12-23 子菜不合法时，不需要显示删除图标
-            if (item.getType() != ItemType.CHILD) {
+            if (item.getType() != ItemType.CHILD && item.getType()!=ItemType.EXTRA_ITEM) {
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDeleteIcon, null, null, null);
             }
             setLayoutGray(holder);
@@ -1180,6 +1193,14 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             case LABEL_SAVE_PRINTED:// 已出单标题
                 labelDrawable = this.mLabelSavePrintedIcon;
                 holder.labelName.setTextAppearance(context, R.style.dinnerLabelSavePrinted);
+                break;
+            case CARD_SERVICE_LABEL:
+                labelDrawable = this.mLabelCardIcon;
+                holder.labelName.setTextAppearance(context, R.style.dinnerCardLabel);
+                break;
+            case APPLET_LABEL:
+                labelDrawable = this.mLabelVipIcon;
+                holder.labelName.setTextAppearance(context, R.style.dinnerCardLabel);
                 break;
         }
         if (!TextUtils.isEmpty(item.getName())) {
@@ -1333,12 +1354,17 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
      */
     protected LinearLayout.LayoutParams getExtraDiyWh(Context context, boolean isChild) {
         int left = 0;
+        int bottom=0;
+        int top=0;
         if (isChild) {
             left = DensityUtil.dip2px(context, 44);
         } else {
             left = DensityUtil.dip2px(context, 10);
+            top=DensityUtil.dip2px(context, 10);
+            bottom=DensityUtil.dip2px(context, 10);
+
         }
-        return getExtraDiyWh(left, 0, 0, 0);
+        return getExtraDiyWh(left, top, 0, bottom);
     }
 
     protected LinearLayout.LayoutParams getExtraDiyWh(int left, int top, int right, int bottom) {
@@ -2688,6 +2714,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         ImageView imgAnchorRight;//右边箭头
 
         TextView tvWeighFlag; //称重标志
+
+
+        public RelativeLayout rl_extraInfo;//额外信息，美业使用
+        public TextView tv_serverTimes;//服务次数
+        public TextView tv_deadLines;//有效期
     }
 
     class PropertiesHolder {

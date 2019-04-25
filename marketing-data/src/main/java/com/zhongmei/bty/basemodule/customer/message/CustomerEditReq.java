@@ -59,8 +59,8 @@ public class CustomerEditReq {
         cMemberCreateDateTime = customerNew.upgradeTime;
         groupID = customerNew.groupId == null ? 999999 : customerNew.groupId;
         groupId = customerNew.groupId == null ? "999999" : customerNew.groupId + "";
-        interest = customerNew.interest;
-        hobby = customerNew.interest;
+        interest = customerNew.hobby;
+        hobby = customerNew.hobby;
         invoice = customerNew.invoice;
         isDisable = customerNew.isDisable;
         modifyDateTime = customerNew.modifyDateTime;

@@ -354,6 +354,7 @@ public class DishPropertyManager {
         dishShop.setType(DishType.EXTRA);
         dishShop.setUuid(property.getUuid());
         dishShop.setIsDiscountAll(Bool.YES);
+        dishShop.setUnitName("份");//默认设置一个单位名字 容错，服务器必须传入单位名称
         return dishShop;
     }
 

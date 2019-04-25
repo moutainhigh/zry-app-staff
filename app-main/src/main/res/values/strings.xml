@@ -95,7 +95,9 @@
     <!--<string name="combine_cash_text">应收：￥ %s 组合支付</string>-->
     <string name="common_save">保存</string>
     <string name="common_submit">确定</string>
+    <string name="common_submit_update">确定升级</string>
     <string name="common_cancel">取消</string>
+    <string name="common_cancel_update">暂不升级</string>
     <string name="common_neu">其它</string>
     <string name="calm_logout_yes">确定</string>
     <string name="calm_logout_no">取消</string>
@@ -150,12 +152,12 @@
     <string name="xlistview_footer_hint_ready">松开载入更多</string>
     <string name="asnc_operation_not_success">此订单有异步操作尚未成功，请处理后继续操作！</string>
     <string name="settings_new_version">(最新版本:%s)</string>
-    <string name="update_downloading">正在下载最新安装包, 请稍后..\n</string>
-    <string name="update_download_failed">下载失败</string>
-    <string name="update_retry_message">下载出错, 请检查网络连接后重试</string>
-    <string name="update_download_success">下载完成, 请点击确认安装</string>
+    <string name="update_downloading">正在下载最新安装包, 请稍后..\n\n</string>
+    <string name="update_download_failed">下载失败\n\n</string>
+    <string name="update_retry_message">下载出错, 请检查网络连接后重试\n\n</string>
+    <string name="update_download_success">下载完成, 请点击确认安装\n\n</string>
     <string name="download_request_title">升级</string>
-    <string name="update_download_detail">正在下载最新安装包, 请稍后...\n</string>
+    <string name="update_download_detail">正在下载最新安装包, 请稍后...\n\n</string>
     <string name="publish_time">发版时间：%1$s</string>
     <!--<string name="detain_count">%s元</string>-->
     <string name="refund_done">已退款</string>
@@ -236,4 +238,6 @@
     <string name="handover_person">交接人</string>
     <string name="customer_password_length_6">请输入6位数密码</string>
     <string name="display_pay_fail">支付失败</string>
+    <string name="order_type_lable">交易类型：</string>
+    <string name="order_amount_lable">交易金额：</string>
 </resources>

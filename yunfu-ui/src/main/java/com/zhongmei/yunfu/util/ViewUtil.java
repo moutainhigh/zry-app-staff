@@ -23,10 +23,14 @@ public class ViewUtil {
         int childCount = viewGroup.getChildCount();
         for (int i = 0; i < childCount; i++) {
             View view = viewGroup.getChildAt(i);
-            if (button != null && button.getId() == view.getId()) {
-                view.setSelected(true);
-            } else {
-                view.setSelected(false);
+            if(view instanceof ViewGroup){
+                setButtonSelected((ViewGroup) view,button);
+            }else{
+                if (button != null && button.getId() == view.getId()) {
+                    view.setSelected(true);
+                } else {
+                    view.setSelected(false);
+                }
             }
         }
     }

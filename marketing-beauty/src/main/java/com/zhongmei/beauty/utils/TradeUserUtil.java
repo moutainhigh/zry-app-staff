@@ -8,6 +8,7 @@ import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
 import com.zhongmei.bty.basemodule.orderdish.enums.ItemType;
 import com.zhongmei.yunfu.context.session.Session;
+import com.zhongmei.yunfu.context.session.core.user.Role;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.bty.basemodule.session.core.user.UserFunc;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
@@ -42,8 +43,8 @@ public class TradeUserUtil {
         tradeUser.setUuid(SystemUtils.genOnlyIdentifier());
         tradeUser.setUserId(user.getId());
         tradeUser.setUserName(user.getName());
-        tradeUser.setTradeId(trade.getId());
-        tradeUser.setTradeUuid(trade.getUuid());
+//        tradeUser.setTradeId(trade.getId());
+//        tradeUser.setTradeUuid(trade.getUuid());
         tradeUser.setBrandIdenty(BaseApplication.sInstance.getBrandIdenty());
         tradeUser.setShopIdenty(BaseApplication.sInstance.getShopIdenty());
         tradeUser.setStatusFlag(StatusFlag.VALID);
@@ -92,9 +93,8 @@ public class TradeUserUtil {
      *
      * @param tradeUserList
      * @param user
-     * @param identity
      */
-    public static void removeTradeUser(List<TradeUser> tradeUserList, User user, int identity) {
+    public static void removeTradeUser(List<TradeUser> tradeUserList, User user) {
         if (Utils.isEmpty(tradeUserList)) {
             return;
         }
@@ -116,7 +116,7 @@ public class TradeUserUtil {
         }
     }
 
-    public static void removeTradeUser(List<TradeUser> tradeUserList, TradeUser tradeUser) {
+    public static void removeTradeUsers(List<TradeUser> tradeUserList, TradeUser tradeUser) {
         if (Utils.isEmpty(tradeUserList)) {
             return;
         }
@@ -206,7 +206,7 @@ public class TradeUserUtil {
      * @param identity
      * @param isAssigin
      */
-    public static void updateTradeItemUsers(User user, IShopcartItemBase iShopcartItemBase, int identity, boolean isAssigin) {
+    public static void updateTradeItemUsers(User user, IShopcartItemBase iShopcartItemBase, boolean isAssigin) {
         List<TradeUser> tradeItemUserList = iShopcartItemBase.getTradeItemUserList();
         if (Utils.isEmpty(tradeItemUserList) && isAssigin) {
             addTradeItemUsers(user, iShopcartItemBase, isAssigin);
@@ -285,7 +285,7 @@ public class TradeUserUtil {
 //        return getUserName(context,tradeUser.getRoleName(),tradeUser.getUserName());
         String roleName = tradeUser.getRoleName();
         String userName = tradeUser.getUserName();
-        return roleName + ":" + userName;
+        return roleName + "-" + userName;
     }
 
 //    public static String getUserName(Context context,String roleName,String name){
@@ -301,9 +301,9 @@ public class TradeUserUtil {
 //    }
 
 
-    public static List<UserVo> getUserVos(Long tradeId, boolean isDefine, int identity, List<TradeUser> tradeUserList, IShopcartItemBase shopcartItemBase, ItemType itemType) {
+    public static List<UserVo> getUserVos(Long tradeId, boolean isDefine, List<TradeUser> tradeUserList, IShopcartItemBase shopcartItemBase, ItemType itemType) {
         List<UserVo> listUserVo = new ArrayList<>();
-        List<User> userList = Session.getFunc(UserFunc.class).getUserByIdentity(identity);
+        List<User> userList = Session.getFunc(UserFunc.class).getUsers();
         if (Utils.isEmpty(userList)) {
             return listUserVo;
         }
@@ -332,47 +332,57 @@ public class TradeUserUtil {
             }
         }
 
-        LongSparseArray<Long> usedUserMap = new LongSparseArray<>();
-        LongSparseArray<Long> usedItemUserMap = new LongSparseArray<>();
-        if (isDefine) {
-            List<TradeUser> userdTradeUserList = BeautyDaoImpl.getTradeUserListNo(BusinessType.BEAUTY);
-            for (TradeUser tradeUser : userdTradeUserList) {
-                if (MathDecimal.isLongEqual(tradeUser.getTradeId(), tradeId)) {
-                    continue;
-                }
-                usedUserMap.put(tradeUser.getUserId(), tradeUser.getUserId());
-            }
-        } else {
-            List<TradeUser> userItemUserList = BeautyDaoImpl.getTradeItemListByIdentity(TradeUserType.TECHNICIAN.value(), BusinessType.BEAUTY);
-            for (TradeUser tradeItemUser : userItemUserList) {
-                if (MathDecimal.isLongEqual(tradeItemUser.getTradeId(), tradeId)) {
-                    continue;
-                }
-                usedItemUserMap.put(tradeItemUser.getUserId(), tradeItemUser.getUserId());
-            }
+        List<Role> listRole=Session.getFunc(UserFunc.class).getRoles();
+        LongSparseArray<Role> mapRole=new LongSparseArray<>();
+        for (Role role : listRole) {
+            mapRole.put(role.getId(),role);
         }
+
+//        LongSparseArray<Long> usedUserMap = new LongSparseArray<>();
+//        LongSparseArray<Long> usedItemUserMap = new LongSparseArray<>();
+//        if (isDefine) {
+//            List<TradeUser> userdTradeUserList = BeautyDaoImpl.getTradeUserListNo(BusinessType.BEAUTY);
+//            for (TradeUser tradeUser : userdTradeUserList) {
+//                if (MathDecimal.isLongEqual(tradeUser.getTradeId(), tradeId)) {
+//                    continue;
+//                }
+//                usedUserMap.put(tradeUser.getUserId(), tradeUser.getUserId());
+//            }
+//        } else {
+//            List<TradeUser> userItemUserList = BeautyDaoImpl.getTradeItemListByIdentity(TradeUserType.TECHNICIAN.value(), BusinessType.BEAUTY);
+//            for (TradeUser tradeItemUser : userItemUserList) {
+//                if (MathDecimal.isLongEqual(tradeItemUser.getTradeId(), tradeId)) {
+//                    continue;
+//                }
+//                usedItemUserMap.put(tradeItemUser.getUserId(), tradeItemUser.getUserId());
+//            }
+//        }
 
         for (User user : userList) {
             UserVo userVo = new UserVo(user);
             if (selectedUserMap.get(user.getId()) != null) {
                 userVo.setChecked(true);
-                if (assginUserMap.get(user.getId()) != null) {
-                    userVo.setOppoint(true);
-                }
+//                if (assginUserMap.get(user.getId()) != null) {
+//                    userVo.setOppoint(true);
+//                }
             }
-            if (isDefine) {
-                if (usedUserMap.get(user.getId()) != null) {
-                    userVo.setFree(false);
-                }
-            } else {
-                if (usedItemUserMap.get(user.getId()) != null) {
-                    userVo.setFree(false);
-                }
-
-                if (itemType == ItemType.CHILD) {
-                    userVo.setChild(true);
-                }
+            Role role=mapRole.get(user.getRoleId());
+            if(role!=null){
+                userVo.getUser().setRoleName(role.getRoleName());
             }
+//            if (isDefine) {
+//                if (usedUserMap.get(user.getId()) != null) {
+//                    userVo.setFree(false);
+//                }
+//            } else {
+//                if (usedItemUserMap.get(user.getId()) != null) {
+//                    userVo.setFree(false);
+//                }
+//
+//                if (itemType == ItemType.CHILD) {
+//                    userVo.setChild(true);
+//                }
+//            }
             listUserVo.add(userVo);
         }
 

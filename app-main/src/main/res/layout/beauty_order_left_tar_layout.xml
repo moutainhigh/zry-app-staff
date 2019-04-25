@@ -7,16 +7,6 @@
     android:paddingTop="10dp">
 
 
-    <TextView
-        android:id="@+id/beauty_order_customer_room"
-        android:layout_width="107dp"
-        android:layout_height="39dp"
-        android:gravity="left|center_vertical"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:text="@string/beauty_order_room"
-        android:textColor="@color/beauty_color_white"
-        android:textSize="@dimen/text_15" />
 
     <ImageView
         android:id="@+id/beauty_order_back"
@@ -29,7 +19,6 @@
         android:paddingRight="10dp"
         android:paddingTop="5dp"
         android:paddingBottom="5dp"
-        android:visibility="gone"
         android:src="@drawable/beauty_order_back_selector" />
 
     <TextView
@@ -51,6 +40,19 @@
         android:text="@string/beauty_order_label"
         android:textColor="@color/text_white"
         android:textSize="@dimen/text_16" />
+
+    <TextView
+        android:id="@+id/beauty_order_customer_room"
+        android:layout_width="wrap_content"
+        android:layout_height="39dp"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/beauty_order_room"
+        android:layout_alignParentRight="true"
+        android:textColor="@color/beauty_color_white"
+        android:textSize="@dimen/text_15" />
+
 
     <ImageView
         android:id="@+id/btn_clear"

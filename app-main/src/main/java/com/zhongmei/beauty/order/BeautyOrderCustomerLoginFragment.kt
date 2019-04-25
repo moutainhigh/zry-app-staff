@@ -94,7 +94,7 @@ class BeautyOrderCustomerLoginFragment : BasicCustomerSearchFragment(), View.OnC
         beauty_order_customer_exit.setOnClickListener(this)
         beauty_order_customer_search_login.setOnClickListener(this)
         beauty_order_customer_room.setOnClickListener(this)
-        beauty_order_customer_detail_info.setOnClickListener(this)
+        beauty_order_customer_base_info.setOnClickListener(this)
     }
 
     /**
@@ -230,11 +230,11 @@ class BeautyOrderCustomerLoginFragment : BasicCustomerSearchFragment(), View.OnC
             DinnerShoppingCart.getInstance().setDinnerCustomer(null)
         }
         DinnerShopManager.getInstance().shoppingCart.removeAllPrivilegeForCustomer(true, false)
-        beauty_order_customer_search_layout.visibility = View.GONE
+        beauty_order_customer_search_layout.visibility = View.VISIBLE
         beauty_order_customer_detail_info.visibility = View.GONE
         beauty_order_customer_base_info.visibility = View.GONE
         beauty_order_customer_search_layout.isEnabled = true
-        content_parent.visibility = View.GONE;
+        content_parent.visibility = View.VISIBLE;
     }
 
     /**
@@ -246,7 +246,7 @@ class BeautyOrderCustomerLoginFragment : BasicCustomerSearchFragment(), View.OnC
         mCustomer = customerNew
         beauty_order_customer_search_layout.visibility = View.GONE
         showCustomerBaseInfo(customerNew)
-        showCustomerDetailInfo(customerNew)
+//        showCustomerDetailInfo(customerNew)
         EventBus.getDefault().post(BeautyOrderCustomerEvent(BeautyOrderCustomerEvent.EventFlag.LOGIN, customerNew))
         // 更新购物车积分
         updataDinnerIntegralCash(customerNew)
@@ -262,8 +262,8 @@ class BeautyOrderCustomerLoginFragment : BasicCustomerSearchFragment(), View.OnC
         beauty_order_customer_base_info.visibility = View.VISIBLE
         beauty_order_customer_info_name.text = if (TextUtils.isEmpty(customerNew.customerName)) activity.getString(R.string.customer_no_name2) else customerNew.customerName
         beauty_order_customer_info_phone.text = if (TextUtils.isEmpty(customerNew.mobile)) "" else AppUtil.getTel(customerNew.mobile)
-        beauty_order_customer_info_vip.visibility = if (null != customerNew.levelId) View.VISIBLE else View.GONE
-        beauty_order_customer_info_sex.setImageResource(if (customerNew.sex == CustomerResp.SEX_FEMALE) R.drawable.beauty_order_customer_female else R.drawable.beauty_order_customer_male)
+//        beauty_order_customer_info_vip.visibility = if (null != customerNew.levelId) View.VISIBLE else View.GONE
+        beauty_order_customer_info_sex.setImageResource(if (customerNew.sex == CustomerResp.SEX_FEMALE) R.drawable.beauty_customer_female else R.drawable.beauty_customer_male)
         bindCustomerInfo(customerNew)
     }
 
@@ -301,7 +301,7 @@ class BeautyOrderCustomerLoginFragment : BasicCustomerSearchFragment(), View.OnC
                 showTablePopuwindow()
             }
             R.id.beauty_order_customer_search_login -> BeautyCustomerLoginDialogFragment().show(activity.getSupportFragmentManager(), "DinnerCustomerLoginDialog")
-            R.id.beauty_order_customer_detail_info -> showCustomerDetailDialog(mCustomer!!.customerId!!)
+            R.id.beauty_order_customer_base_info -> showCustomerDetailDialog(mCustomer!!.customerId!!)
         }
     }
 

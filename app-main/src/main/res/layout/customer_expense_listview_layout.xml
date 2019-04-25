@@ -7,62 +7,62 @@
     android:orientation="vertical">
 
     <!-- 账户余额title -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/customer_account_table_h"
-        android:layout_marginLeft="@dimen/customer_account_padding"
-        android:layout_marginRight="@dimen/customer_account_padding"
-        android:layout_marginTop="@dimen/customer_account_padding"
-        android:background="@color/write"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:visibility="visible">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/customer_account_table_h"-->
+        <!--android:layout_marginLeft="@dimen/customer_account_padding"-->
+        <!--android:layout_marginRight="@dimen/customer_account_padding"-->
+        <!--android:layout_marginTop="@dimen/customer_account_padding"-->
+        <!--android:background="@color/write"-->
+        <!--android:gravity="center_vertical"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:visibility="visible">-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/customer_time"
-            android:textColor="@color/customer_balance_jifen_title"
-            android:textSize="@dimen/text_16" />
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/customer_time"-->
+            <!--android:textColor="@color/customer_balance_jifen_title"-->
+            <!--android:textSize="@dimen/text_16" />-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/charge_type"
-            android:textColor="@color/customer_balance_jifen_title"
-            android:textSize="@dimen/text_16" />
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/charge_type"-->
+            <!--android:textColor="@color/customer_balance_jifen_title"-->
+            <!--android:textSize="@dimen/text_16" />-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:gravity="left"
-            android:text="订单号"
-            android:textColor="@color/customer_balance_jifen_title"
-            android:textSize="@dimen/text_16" />
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="2"-->
+            <!--android:gravity="left"-->
+            <!--android:text="订单号"-->
+            <!--android:textColor="@color/customer_balance_jifen_title"-->
+            <!--android:textSize="@dimen/text_16" />-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:text="交易金额"
-            android:textColor="@color/customer_balance_jifen_title"
-            android:textSize="@dimen/text_16" />
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="right"-->
+            <!--android:text="交易金额"-->
+            <!--android:textColor="@color/customer_balance_jifen_title"-->
+            <!--android:textSize="@dimen/text_16" />-->
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="操作"
-            android:textColor="@color/customer_balance_jifen_title"
-            android:textSize="@dimen/text_16" />
-    </LinearLayout>
+        <!--<TextView-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="操作"-->
+            <!--android:textColor="@color/customer_balance_jifen_title"-->
+            <!--android:textSize="@dimen/text_16" />-->
+    <!--</LinearLayout>-->
 
     <View
         android:layout_width="match_parent"

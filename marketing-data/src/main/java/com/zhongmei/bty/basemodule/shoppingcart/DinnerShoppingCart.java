@@ -1029,7 +1029,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
     public void updateBeautyDataFromTradeVo(TradeVo tradeVo, boolean isCallback) {
-        if (tradeVo == null || dinnerShoppingCartVo == null) {
+        //余额充值时，不用更新购物车。
+        if (tradeVo == null || dinnerShoppingCartVo == null || tradeVo.getTrade().getBusinessType().equalsValue(BusinessType.ONLINE_RECHARGE.value())) {
             return;
         }
 
@@ -2019,6 +2020,79 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         setDishPrivilege(mPrivilege, reason, null);
     }
 
+    public void setDishPrivilege (TradePrivilege mPrivilege, Reason reason, OperateType operateType,String uuid){
+        checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
+
+        dinnerShoppingCartVo.setDishTradePrivilege(mPrivilege);
+
+
+                for (IShopcartItemBase mShopcartItemBase : mergeShopcartItem(dinnerShoppingCartVo)) {
+
+                    // 判断是否包含在选中的菜品中
+
+                    if (mShopcartItemBase.getUuid().equals(uuid)) {
+
+                        //礼品劵和单品优惠不共存
+                        removeShopcartItemCoupon(mShopcartItemBase);
+
+                        if (mPrivilege != null) {
+
+                            TradePrivilege mTradePrivilege = new TradePrivilege();
+
+                            mTradePrivilege.setPrivilegeType(mPrivilege.getPrivilegeType());
+
+                            mTradePrivilege.setPrivilegeValue(mPrivilege.getPrivilegeValue());
+
+                            mTradePrivilege.setPrivilegeName(mPrivilege.getPrivilegeName());
+
+                            mShopcartItemBase.setPrivilege(mTradePrivilege);
+
+                            mTradePrivilege = BuildPrivilegeTool.buildPrivilege(mShopcartItemBase,
+
+                                    dinnerShoppingCartVo.getmTradeVo().getTrade().getUuid());
+                            mShopcartItemBase.setPrivilege(mTradePrivilege);
+                            mShopcartItemBase.setDiscountReasonRel(null);
+                            if (reason != null) {
+                                TradeReasonRel tradeReasonRel = setTradeItemReasonRel(mShopcartItemBase, reason, operateType);
+                                mShopcartItemBase.setDiscountReasonRel(tradeReasonRel);
+                            }
+
+                        } else {
+
+//                            mShopcartItemBase.setPrivilege(null);
+                            //移除折扣的同时移除理由
+//                            mShopcartItemBase.setDiscountReasonRel(null);
+                            if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
+                                mShopcartItemBase.getPrivilege().setInValid();
+                            }
+                            if (mShopcartItemBase.getDiscountReasonRel() != null && mShopcartItemBase.getDiscountReasonRel().getId() != null) {
+                                mShopcartItemBase.getDiscountReasonRel().setStatusFlag(StatusFlag.INVALID);
+                                mShopcartItemBase.getDiscountReasonRel().validateUpdate();
+                            }
+                        }
+
+                        break;
+
+                    }
+
+                }
+
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+        // 计算订单总价格
+
+        MathShoppingCartTool.mathTotalPrice(shopcartItemList,
+
+                dinnerShoppingCartVo.getmTradeVo());
+
+        for (int key : arrayListener.keySet()) {
+
+            arrayListener.get(key).batchPrivilege(shopcartItemList,
+
+                    dinnerShoppingCartVo.getmTradeVo());
+
+        }
+    }
+
     public void setDishPrivilege(TradePrivilege mPrivilege, Reason reason, OperateType operateType) {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
 
@@ -2269,6 +2343,38 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
 
         }
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+        // 计算订单总价格
+
+        MathShoppingCartTool.mathTotalPrice(shopcartItemList,
+
+                dinnerShoppingCartVo.getmTradeVo());
+
+        for (int key : arrayListener.keySet()) {
+
+            arrayListener.get(key).batchPrivilege(shopcartItemList,
+
+                    dinnerShoppingCartVo.getmTradeVo());
+
+        }
+
+    }
+
+
+    public void removedPrivilege(String uuid) {
+
+
+        for (IShopcartItemBase mShopcartItemBase : mergeShopcartItem(dinnerShoppingCartVo)) {
+
+            if (mShopcartItemBase.getUuid().equals(uuid)) {
+
+                mShopcartItemBase.setPrivilege(null);
+                break;
+
+            }
+
+        }
+
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         // 计算订单总价格
 

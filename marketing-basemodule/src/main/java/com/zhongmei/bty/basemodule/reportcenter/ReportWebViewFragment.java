@@ -58,7 +58,7 @@ public class ReportWebViewFragment extends BasicFragment {
         Long createId = Session.getAuthUser().getId();
         String createName = Session.getAuthUser().getName();
 
-        String url = "http://mk.zhongmeiyunfu.com/marketing/internal/report/salesReport?brandIdenty=" + brandId + "&shopIdenty=" + shopId + "&creatorId=" + createId + "&creatorName=" + createName;
+        String url = "http://mk.zhongmeiyunfu.com/marketing/internal/report/posReport?brandIdenty=" + brandId + "&shopIdenty=" + shopId + "&creatorId=" + createId + "&creatorName=" + createName;
         webView.loadUrl(url);//加载url
 
 
@@ -77,11 +77,17 @@ public class ReportWebViewFragment extends BasicFragment {
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存，只从网络获取数据.
 
 
-        //支持屏幕缩放
-        webSettings.setSupportZoom(false);
-        webSettings.setBuiltInZoomControls(true);
-//        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
-
+        //支持javascript
+        webSettings.setJavaScriptEnabled(true);
+        // 设置可以支持缩放
+        webSettings.setSupportZoom(true);
+        // 设置出现缩放工具
+        webSettings.setBuiltInZoomControls(false);
+        //扩大比例的缩放
+        webSettings.setUseWideViewPort(true);
+        //自适应屏幕
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setLoadWithOverviewMode(true);
 
         return rootView;
     }

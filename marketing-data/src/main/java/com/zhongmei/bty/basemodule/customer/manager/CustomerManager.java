@@ -17,6 +17,7 @@ import com.zhongmei.bty.basemodule.session.core.auth.Code;
 import com.zhongmei.yunfu.bean.YFResponseList;
 import com.zhongmei.yunfu.bean.req.CustomerCouponResp;
 import com.zhongmei.yunfu.db.entity.booking.Booking;
+import com.zhongmei.yunfu.db.entity.discount.CustomerScoreRuleVo;
 import com.zhongmei.yunfu.db.entity.trade.TradeCustomer;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.yunfu.db.enums.CustomerType;
@@ -34,6 +35,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.resp.ResponseListener;
 import com.zhongmei.yunfu.resp.YFResponseListener;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -68,7 +70,7 @@ public class CustomerManager {
     //1表示从支付页登录,0表示快餐点餐页
     private int loginSource = 0;
 
-    private CustomerScoreRule mCustomerScoreRule;
+    private CustomerScoreRuleVo mCustomerScoreRule;
 
 
     public int getLoginSource() {
@@ -611,7 +613,7 @@ public class CustomerManager {
 
     //add v8.2 添加会员权益卡权益开关 end
 
-    public CustomerScoreRule getIntegerRule() {
+    public CustomerScoreRuleVo getIntegerRule() {
 //        mCustomerScoreRule=new CustomerScoreRule();
 //        mCustomerScoreRule.setConvertValue(10);
 //        mCustomerScoreRule.setId(1L);
@@ -625,9 +627,48 @@ public class CustomerManager {
 
             Dao<CustomerScoreRule, Long> customerScoreRule = helper.getDao(CustomerScoreRule.class);
 
-            mCustomerScoreRule = customerScoreRule.queryBuilder().where().eq(CustomerScoreRule.$.statusFlag, StatusFlag.VALID).and().eq(CustomerScoreRule.$.type, 1).queryForFirst();
+            CustomerScoreRule  rule = customerScoreRule.queryBuilder().where().eq(CustomerScoreRule.$.statusFlag, StatusFlag.VALID).and().eq(CustomerScoreRule.$.type, 2).queryForFirst();
+
+            if(rule!=null){
+                mCustomerScoreRule=new CustomerScoreRuleVo();
+                mCustomerScoreRule.setId(rule.getId());
+                mCustomerScoreRule.setType(rule.getType());
+                mCustomerScoreRule.setConvertValue(rule.getConvertValue());
+                mCustomerScoreRule.setStatusFlag(rule.getStatusFlag());
+            }
+
+            CustomerScoreRule  LimitRule = customerScoreRule.queryBuilder().where().eq(CustomerScoreRule.$.statusFlag, StatusFlag.VALID).and().eq(CustomerScoreRule.$.type, 3).queryForFirst();
+
+            if(LimitRule!=null && LimitRule.getConvertValue()!=null && mCustomerScoreRule!=null){
+                mCustomerScoreRule.setMaxUserInteger(new BigDecimal(LimitRule.getConvertValue()));
+            }
 
             return mCustomerScoreRule;
+        } catch (Exception ex) {
+
+        } finally {
+            DBHelperManager.releaseHelper(helper);
+        }
+        return null;
+    }
+
+
+    public CustomerScoreRule getIntegerLimitRule() {
+//        mCustomerScoreRule=new CustomerScoreRule();
+//        mCustomerScoreRule.setConvertValue(10);
+//        mCustomerScoreRule.setId(1L);
+//        return mCustomerScoreRule;
+
+        DatabaseHelper helper = DBHelperManager.getHelper();
+        try{
+
+            Dao<CustomerScoreRule, Long> customerScoreRule = helper.getDao(CustomerScoreRule.class);
+
+
+            CustomerScoreRule  LimitRule = customerScoreRule.queryBuilder().where().eq(CustomerScoreRule.$.statusFlag, StatusFlag.VALID).and().eq(CustomerScoreRule.$.type, 3).queryForFirst();
+
+
+            return LimitRule;
         } catch (Exception ex) {
 
         } finally {

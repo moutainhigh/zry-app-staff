@@ -76,8 +76,19 @@ public class BeautyTradeDataManager {
      * @param helper
      * @return
      */
-    public int queryReserverNumber(DatabaseHelper helper) {
-        return 1;
+    public int queryReserverNumber(DatabaseHelper helper) throws Exception{
+        Dao<Booking, String> bookingDao = helper.getDao(Booking.class);
+        QueryBuilder bookingBuilder = bookingDao.queryBuilder();
+
+        long date = DateTimeUtils.getDayStart(new Date());
+
+        bookingBuilder.where()
+                .gt(Booking.$.serverCreateTime, date)
+                .and()
+                .eq(Booking.$.statusFlag, StatusFlag.VALID);
+//                .and()
+//                .notIn(Booking.$.orderStatus, BookingOrderStatus.CANCEL);
+        return (int) bookingBuilder.countOf();
     }
 
     /**
@@ -93,12 +104,15 @@ public class BeautyTradeDataManager {
         long date = DateTimeUtils.getDayStart(new Date());
 
         tradeBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY)
-                .and()
-                .in(Trade.$.tradeStatus, TradeStatus.CONFIRMED)
+                .and().
+                    gt(Trade.$.serverCreateTime, date)
+//                .and()
+//                .in(Trade.$.tradeStatus, TradeStatus.CONFIRMED)
                 .and()
                 .eq(Trade.$.statusFlag, StatusFlag.VALID)
                 .and()
-                .in(Trade.$.tradeType, TradeType.SELL, TradeType.UNOIN_TABLE_SUB, TradeType.UNOIN_TABLE_MAIN);
+                .eq(Trade.$.tradeType, TradeType.SELL);
+        List<Trade>  trades = tradeBuilder.query();
         return (int) tradeBuilder.countOf();
     }
 
@@ -125,8 +139,7 @@ public class BeautyTradeDataManager {
         long startTime = DateTimeUtils.getDayStart(new Date());
         long endTime = DateTimeUtils.getDayEnd(new Date());
 
-        tradeBuilder.where()/*.eq(Trade.$.businessType, BusinessType.BEAUTY)
-                .and()*/
+        tradeBuilder.where()
                 .eq(Booking.$.orderStatus, BookingOrderStatus.UNARRIVED)
                 .and()
                 .gt(Booking.$.startTime, startTime)

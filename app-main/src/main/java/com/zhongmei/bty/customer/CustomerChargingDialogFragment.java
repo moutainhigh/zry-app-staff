@@ -452,7 +452,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         tradeCustomer.setTradeUuid(trade.getUuid());
         tradeCustomer.setCustomerType(CustomerType.MEMBER);
         tradeCustomer.setCustomerId(customerId);
-        tradeCustomer.setCustomerName(mCustomer.name);
+        tradeCustomer.setCustomerName(mCustomer.customerName);
         tradeCustomer.setCustomerSex(ValueEnums.toEnum(Sex.class, mCustomer.sex));
         tradeCustomer.setCustomerPhone(mCustomer.mobile);
         tradeVo.setTradeCustomerList(Arrays.asList(tradeCustomer));

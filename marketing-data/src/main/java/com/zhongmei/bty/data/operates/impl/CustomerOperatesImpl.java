@@ -426,7 +426,7 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
         req.setBirthday(customer.birthday);
 //		}
         req.setConsumePwd(customer.password);
-        req.setEnvironmentHobby(customer.interest);
+        req.setEnvironmentHobby(customer.hobby);
         req.setGroupId(customer.groupId);
         req.setInvoiceTitle(customer.invoice);
         req.setMemo(customer.memo);
@@ -1288,7 +1288,7 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
         req.address = customer.address;
         req.birthday = customer.birthday;
         req.consumePassword = customer.password;
-        req.environmentHobby = customer.interest;
+        req.environmentHobby = customer.hobby;
         req.groupId = customer.groupId;
         req.groupName = customer.groupName;
         req.invoiceTitle = customer.invoice;

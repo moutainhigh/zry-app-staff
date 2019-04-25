@@ -283,13 +283,13 @@ public class CommonDialogFragment extends BasicDialogFragment implements
     @Override
     public void onClick(View view) {
         if (view.equals(mNegativeButton)) {
-            if (mNegativeListener != null) {
-                mNegativeListener.onClick(view);
-            }
-        } else if (view.equals(mPositiveButton)) {
-            if (mpositiveLinstner != null) {
-                mpositiveLinstner.onClick(view);
-            }
+                if (mNegativeListener != null) {
+                    mNegativeListener.onClick(view);
+                }
+            } else if (view.equals(mPositiveButton)) {
+                if (mpositiveLinstner != null) {
+                    mpositiveLinstner.onClick(view);
+                }
         }
         this.dismissAllowingStateLoss();
     }

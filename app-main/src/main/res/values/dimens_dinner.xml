@@ -15,8 +15,8 @@
     <dimen name="dinner_waiter_and_number_repastNum_marginBottom">12dp</dimen>
 
     <!--购物车-->
-    <dimen name="dinner_shoppingCart_dishName_textSize">22sp</dimen>
-    <dimen name="dinner_shoppingCart_dishMemo_textSize">16sp</dimen>
+    <dimen name="dinner_shoppingCart_dishName_textSize">16sp</dimen>
+    <dimen name="dinner_shoppingCart_dishMemo_textSize">8sp</dimen>
     <dimen name="dinner_shoppingCard_dishName_margin">5dp</dimen>
 
     <!--点餐页左边页面-->

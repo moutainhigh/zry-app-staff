@@ -3,41 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/beauty_color_000000"
-    android:orientation="horizontal">
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/beauty_bg_black"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/customer_charging_balance_back_btn"
+            style="@style/title_icon_style"
+            android:layout_width="150dp"
+            android:layout_height="48dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_vertical"
+            android:drawableLeft="@drawable/actionbar_back_icon"
+            android:drawablePadding="10px"
+            android:paddingLeft="15dp"
+            android:gravity="center|left"
+            android:scaleType="centerInside"
+            android:text="返回"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/page_title"
+            style="@style/title_icon_style"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:gravity="center"
+            android:scaleType="centerInside"
+            android:textColor="#FFFFFF"
+            android:textSize="14sp" />
+    </LinearLayout>
 
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
         <RelativeLayout
-            android:layout_width="120dp"
+            android:layout_width="150dp"
             android:layout_height="match_parent"
             android:background="@color/beauty_bg_black">
 
-            <FrameLayout
-                android:id="@+id/backView"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@color/beauty_bg_black">
 
-                <TextView
-                    android:id="@+id/customer_charging_balance_back_btn"
-                    style="@style/title_icon_style"
-                    android:layout_width="fill_parent"
-                    android:layout_height="48dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_gravity="center_vertical"
-                    android:drawableLeft="@drawable/actionbar_back_icon"
-                    android:drawablePadding="10px"
-                    android:gravity="center|left"
-                    android:scaleType="centerInside"
-                    android:text="返回"
-                    android:textColor="#FFFFFF"
-                    android:textSize="14sp" />
-
-            </FrameLayout>
 
             <RadioGroup
                 android:id="@+id/customer_banlance_radio_group"
-                android:layout_below="@id/backView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -230,6 +245,9 @@
                 layout="@layout/customer_empty_layout"
                 android:visibility="gone" />
         </LinearLayout>
+    </LinearLayout>
+
+
     <!-- title -->
 
 </LinearLayout>

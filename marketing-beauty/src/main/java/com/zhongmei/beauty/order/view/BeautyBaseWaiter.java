@@ -58,7 +58,6 @@ public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUse
     private OnUserCheckedListener onUserCheckedListener;
     private int mTitleResId;
 
-    private int mIndetity = TradeUserType.TECHNICIAN.value();
     private boolean isHasPonitView = false;
     //针对产品或服务选择
     private IShopcartItemBase shopcartItemBase;
@@ -71,13 +70,11 @@ public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUse
 
     /**
      * @param context
-     * @param identity
      * @param titleResId     title resid
      * @param isHasPointView 是否有指定view
      */
-    public BeautyBaseWaiter(Context context, int identity, int titleResId, boolean isHasPointView) {
+    public BeautyBaseWaiter(Context context, int titleResId, boolean isHasPointView) {
         super(context);
-        mIndetity = identity;
         mTitleResId = titleResId;
         this.isHasPonitView = isHasPointView;
     }
@@ -112,7 +109,7 @@ public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUse
         AsyncTaskCompat.executeParallel(new AsyncTask<Void, Void, List<UserVo>>() {
             @Override
             protected List<UserVo> doInBackground(Void... voids) {
-                List<UserVo> userVos = TradeUserUtil.getUserVos(tradeId, isDefine, getIdentity(), tradeUserList, shopcartItemBase, mItemType);
+                List<UserVo> userVos = TradeUserUtil.getUserVos(tradeId, isDefine, tradeUserList, shopcartItemBase, mItemType);
                 return userVos;
             }
 
@@ -171,7 +168,7 @@ public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUse
             if (isChecked) {
                 TradeUserUtil.addTradeUser(tradeUserList, userVo.getUser(), null);
             } else {
-                TradeUserUtil.removeTradeUser(tradeUserList, userVo.getUser(), mIndetity);
+                TradeUserUtil.removeTradeUser(tradeUserList, userVo.getUser());
             }
         } else {
             if (isChecked) {
@@ -189,7 +186,7 @@ public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUse
     @Override
     public void updateAppoint(UserVo userVo, boolean isChcked) {
         if (!isDefine) {
-            TradeUserUtil.updateTradeItemUsers(userVo.getUser(), shopcartItemBase, mIndetity, isChcked);
+            TradeUserUtil.updateTradeItemUsers(userVo.getUser(), shopcartItemBase, isChcked);
             updateItemChecked(userVo);
         }
         if (onUserCheckedListener != null) {
@@ -217,13 +214,5 @@ public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUse
         void onUserCheckedChange(boolean isDefine);
     }
 
-    /**
-     * 获取销售员
-     *
-     * @return
-     */
-    public int getIdentity() {
-        return mIndetity;
-    }
 
 }

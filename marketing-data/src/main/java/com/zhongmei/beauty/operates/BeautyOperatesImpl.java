@@ -193,15 +193,16 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                     }
                 }
             }
-            if (memberTradeCustomer != null && bookingTradeCustomer == null) {
-                bookingTradeCustomer = new TradeCustomer();
-                copyProperties(memberTradeCustomer, bookingTradeCustomer);
-                bookingTradeCustomer.setId(null);
-                bookingTradeCustomer.setServerUpdateTime(null);
-                bookingTradeCustomer.setUuid(SystemUtils.genOnlyIdentifier());
-                bookingTradeCustomer.setCustomerType(CustomerType.BOOKING);
-                tradeCustomerList.add(bookingTradeCustomer);
-            }
+            //如果没有就不需要复制了 update 2019.04.04
+//            if (memberTradeCustomer != null && bookingTradeCustomer == null) {
+//                bookingTradeCustomer = new TradeCustomer();
+//                copyProperties(memberTradeCustomer, bookingTradeCustomer);
+//                bookingTradeCustomer.setId(null);
+//                bookingTradeCustomer.setServerUpdateTime(null);
+//                bookingTradeCustomer.setUuid(SystemUtils.genOnlyIdentifier());
+//                bookingTradeCustomer.setCustomerType(CustomerType.BOOKING);
+//                tradeCustomerList.add(bookingTradeCustomer);
+//            }
 
             req.setTradeCustomers(tradeCustomerList);
         }

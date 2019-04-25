@@ -97,6 +97,8 @@ public class BeautyPayListener implements ResponseListener<PayResp> {
                         final Trade trade = this.paymentInfo.getTradeVo().getTrade();
                         //如果订单状态是已完成，表示已经完成支付
                         if (DoPayUtils.isTradePaidOver(trade)) {
+                            //清空购物车  add 2019.02.14  充值后下单，带入了销售员
+                            DinnerShoppingCart.getInstance().clearShoppingCart();
                             //add begin v9.0
                             boolean isPintPayTick = true;// 是否打印结账单
                             //如果有消费税，先不打印结账单或消费单

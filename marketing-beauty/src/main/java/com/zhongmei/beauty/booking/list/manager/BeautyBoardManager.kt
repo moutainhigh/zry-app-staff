@@ -78,7 +78,7 @@ class BeautyBoardManager {
         var operates = OperatesFactory.create(BeautyBookingOperates::class.java)
         operates.getBookingList(
                 bookingListReq,
-                getResponseListener(callback),
+                getTodayResponseListener(callback),
                 activty)
     }
 
@@ -138,22 +138,23 @@ class BeautyBoardManager {
 
 
         content.bookings?.forEach { bookingTrade ->
-            var reserverItemVo = ReserverItemVo();
-            var reserverTradeVo = BeautyBookingVo();
+            var reserverItemVo = ReserverItemVo()
+            var reserverTradeVo = BeautyBookingVo()
 
-            reserverTradeVo.booking = bookingTrade;
-            reserverTradeVo.bookingTradeItemVos = mapBookingItemVo?.get(bookingTrade.id);
+            reserverTradeVo.booking = bookingTrade
+            reserverTradeVo.bookingTradeItemVos = mapBookingItemVo?.get(bookingTrade.id)
 
-            reserverItemVo.setmReserverVo(reserverTradeVo);
+            reserverItemVo.setmReserverVo(reserverTradeVo)
 
-            var itemUser = reserverTradeVo.bookingTradeItemVos?.get(0)?.bookingTradeItemUsers?.get(0);
-            if (itemUser == null) {
-                listNoTechnicianBookingItemVo.add(reserverTradeVo);
-            } else {
+            listNoTechnicianBookingItemVo.add(reserverTradeVo)
+
+            var itemUser = reserverTradeVo.bookingTradeItemVos?.get(0)?.bookingTradeItemUsers?.get(0)
+
+            if (itemUser != null) {
                 if (!mMapBookingItemVos.containsKey(itemUser.userId)) {
-                    mMapBookingItemVos.put(itemUser.userId, ArrayList<ReserverItemVo>());
+                    mMapBookingItemVos.put(itemUser.userId, ArrayList<ReserverItemVo>())
                 }
-                mMapBookingItemVos.get(itemUser.userId)?.add(reserverItemVo);
+                mMapBookingItemVos.get(itemUser.userId)?.add(reserverItemVo)
             }
         }
 
@@ -167,11 +168,11 @@ class BeautyBoardManager {
 
 
     private fun buildTodayTradeListVos(content: BeautyBookingListResp): BeautyBookingBoardVo? {
-        var bookingBoardVo = BeautyBookingBoardVo();
-        var mapTechnician = buildTradeItemUser(content.bookingTradeItemUsers);
-        var mapTechnicianBookingTrade = buildTradeItemUserBookingTrade(content.bookingTradeItemUsers);
-        var mapTradeItemProperty = buildTradeItemProperties(content.bookingTradeItemProperties);
-        var mapBookingItemVo = buildTradeItemVos(content.bookingTradeItems, mapTradeItemProperty, mapTechnician);
+        var bookingBoardVo = BeautyBookingBoardVo()
+        var mapTechnician = buildTradeItemUser(content.bookingTradeItemUsers)
+        var mapTechnicianBookingTrade = buildTradeItemUserBookingTrade(content.bookingTradeItemUsers)
+        var mapTradeItemProperty = buildTradeItemProperties(content.bookingTradeItemProperties)
+        var mapBookingItemVo = buildTradeItemVos(content.bookingTradeItems, mapTradeItemProperty, mapTechnician)
 
         var listBookingItemVo = ArrayList<BeautyBookingVo>();
         var listBookingItemVoNoTechnical = ArrayList<BeautyBookingVo>();

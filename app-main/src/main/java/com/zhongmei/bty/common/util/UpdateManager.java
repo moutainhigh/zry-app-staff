@@ -46,7 +46,7 @@ public class UpdateManager {
 
     public void download() {
         if (ShopInfoCfg.getInstance().getAppVersionInfo().hasUpdate()) {
-            String updateUrl = ShopInfoCfg.getInstance().getAppVersionInfo().getUpdateUrl();
+            String updateUrl = ShopInfoCfg.getInstance().getAppVersionInfo().getDownloadUrl();
             if (!TextUtils.isEmpty(updateUrl) && URLUtil.isValidUrl(updateUrl)) {
                 if (UpdateManager.getInstance().isDownloadRunning()) {
                     ToastUtil.showLongToast(R.string.is_loading);

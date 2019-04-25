@@ -7,6 +7,7 @@ import com.zhongmei.yunfu.Constant;
 import com.zhongmei.yunfu.ShopInfoManager;
 import com.zhongmei.yunfu.context.AppBuildConfig;
 import com.zhongmei.yunfu.context.base.BaseApplication;
+import com.zhongmei.yunfu.context.data.ShopInfo;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.yunfu.context.util.SystemUtils;
 import com.zhongmei.yunfu.context.util.manager.SwitchServerManager;
@@ -128,8 +129,10 @@ public class ServerAddressUtil {
      * @Return String 返回类型
      */
     public String getUpdateCheckApi() {
-        return getRemoteHost() + "/version/checkVersion?cid="
-                + ShopInfoCfg.getInstance().shopId + "&p=android&ov="
+        return ShopInfoManager.MARKETING_SERVER_HOST + "/pos/systemVersion/checkVersion?shopId="
+                + ShopInfoManager.getInstance().getShopInfo().getShopId() + "&brandId="
+        +ShopInfoManager.getInstance().getShopInfo().getBrandId()
+                +"&versionCode="
                 + SystemUtils.getVersionCode();
     }
 

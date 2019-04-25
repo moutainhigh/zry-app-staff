@@ -11,9 +11,8 @@
         android:id="@+id/content_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginTop="9dp"
-        android:visibility="gone"
         android:orientation="vertical">
 
         <LinearLayout
@@ -51,7 +50,6 @@
                 android:id="@+id/beauty_order_customer_search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="39dp"
-                android:visibility="gone"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -63,7 +61,6 @@
                         android:id="@+id/beauty_order_customer_search_login"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/beauty_btn_shape_2"
                         android:clickable="true"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
@@ -72,19 +69,20 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:gravity="center">
 
                             <TextView
                                 android:id="@+id/beauty_order_customer_search_edit"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:background="@null"
                                 android:clickable="false"
                                 android:enabled="false"
                                 android:focusable="false"
                                 android:focusableInTouchMode="false"
-                                android:gravity="left|center_vertical"
-                                android:hint="@string/beauty_search_customer_hint"
+                                android:gravity="center_vertical"
+                                android:text="@string/beauty_search_customer_hint"
                                 android:maxLength="30"
                                 android:paddingLeft="15dp"
                                 android:paddingRight="15dp"
@@ -93,24 +91,28 @@
                                 android:textColorHint="@color/color_bcbcbc"
                                 android:textSize="@dimen/text_15" />
 
-                            <ImageView
-                                android:id="@+id/beauty_order_customer_search"
+                            <TextView
+                                android:id="@+id/beauty_order_customer_logih"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerInParent="true"
+                                android:layout_height="wrap_content"
                                 android:clickable="false"
                                 android:enabled="false"
-                                android:visibility="gone"
                                 android:paddingLeft="15dp"
                                 android:paddingRight="15dp"
-                                android:src="@drawable/beauty_ic_search_off" />
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:layout_centerVertical="true"
+                                android:gravity="center"
+                                android:textSize="@dimen/text_14"
+                                android:layout_toRightOf="@id/beauty_order_customer_search_edit"
+                                android:text="登录"
+                                android:background="@drawable/beauty_btn_shape" />
 
                             <ImageView
                                 android:id="@+id/beauty_order_customer_search_clear"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_toLeftOf="@id/beauty_order_customer_search"
+                                android:layout_toLeftOf="@id/beauty_order_customer_logih"
                                 android:clickable="false"
                                 android:enabled="false"
                                 android:src="@drawable/icon_delete"
@@ -130,7 +132,7 @@
                         android:text="@string/beauty_search_customer_login"
                         android:textColor="@color/beauty_color_666666"
                         android:textSize="@dimen/text_15"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -138,10 +140,10 @@
             <RelativeLayout
                 android:id="@+id/beauty_order_customer_base_info"
                 android:layout_width="match_parent"
-                android:layout_height="39dp"
+                android:layout_height="match_parent"
+                android:visibility="gone"
                 android:layout_marginLeft="17dp"
-                android:layout_marginRight="6dp"
-                android:visibility="gone">
+                android:layout_marginRight="6dp">
 
                 <ImageView
                     android:id="@+id/beauty_order_customer_info_sex"
@@ -154,8 +156,7 @@
                     android:id="@+id/beauty_order_customer_info_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/beauty_order_customer_info_sex"
                     android:textColor="@color/beauty_color_333333"
                     android:textSize="@dimen/text_15"
@@ -165,21 +166,12 @@
                     android:id="@+id/beauty_order_customer_info_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_toRightOf="@id/beauty_order_customer_info_name"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/beauty_order_customer_info_name"
+                    android:layout_toRightOf="@id/beauty_order_customer_info_sex"
                     android:textColor="@color/beauty_color_666666"
                     android:textSize="@dimen/text_13"
                     tools:text="18215735112" />
-
-                <ImageView
-                    android:id="@+id/beauty_order_customer_info_vip"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="18dp"
-                    android:layout_toRightOf="@id/beauty_order_customer_info_phone"
-                    android:src="@drawable/beauty_order_customer_vip" />
 
                 <TextView
                     android:id="@+id/beauty_order_customer_exit"
@@ -187,17 +179,29 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="18dp"
+                    android:layout_marginLeft="10dp"
                     android:background="@drawable/beauty_btn_shape"
                     android:paddingBottom="3dp"
-                    android:paddingLeft="17dp"
-                    android:paddingRight="17dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:paddingTop="3dp"
-                    android:visibility="gone"
                     android:text="退出"
 
                     android:textColor="@color/beauty_color_666666"
                     android:textSize="@dimen/text_15" />
+
+                <ImageView
+                    android:id="@+id/beauty_order_customer_info_vip"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+                    android:layout_toLeftOf="@id/beauty_order_customer_exit"
+                    android:src="@drawable/more_details" />
+
+                <View style="@style/beauty_vertical_line"
+                    android:layout_toLeftOf="@id/beauty_order_customer_exit"></View>
+
             </RelativeLayout>
         </LinearLayout>
 

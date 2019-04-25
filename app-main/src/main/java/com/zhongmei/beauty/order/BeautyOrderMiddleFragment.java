@@ -12,8 +12,13 @@ import android.widget.LinearLayout;
 import com.zhongmei.beauty.dialog.BeautyBookingWaiterDialog;
 import com.zhongmei.beauty.entity.UserVo;
 import com.zhongmei.beauty.interfaces.BeautyOrderOperatorListener;
+import com.zhongmei.beauty.order.event.ActionClearShopcart;
+import com.zhongmei.beauty.order.view.BeautySingleDiscountView;
+import com.zhongmei.beauty.order.view.BeautySingleDiscountView_;
 import com.zhongmei.beauty.utils.TradeUserUtil;
+import com.zhongmei.bty.basemodule.discount.enums.DiscountType;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.bty.mobilepay.event.ActionClose;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
@@ -60,6 +65,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * Created by demo on 2018/12/15
  */
@@ -81,6 +88,51 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
      * 空态页
      */
     private CustomEmptyView mCustomEmptyView;
+
+    /**
+     * 会员相关操作
+     */
+    @ViewById(R.id.layout_member_operate)
+    LinearLayout layout_member_operate;
+    @ViewById(R.id.btn_card)
+    Button btn_card; //次卡
+    @ViewById(R.id.btn_integral)
+    Button btn_integral; //积分
+    @ViewById(R.id.btn_coupon)
+    Button btn_coupon; //优惠卷
+    @ViewById(R.id.btn_activity)
+    Button btn_activity; //活动
+
+    /**
+     * 整单操作
+     */
+    @ViewById(R.id.layout_trade_operate)
+    LinearLayout layout_trade_operate;
+    @ViewById(R.id.btn_discount)
+    Button btn_discount;//折扣
+    @ViewById(R.id.btn_trade_remark)
+    Button btn_trade_remark;//备注
+    @ViewById(R.id.btn_table)
+    Button btn_table;//桌台选择
+    @ViewById(R.id.btn_party)
+    Button btn_party;//服务员选择
+    @ViewById(R.id.btn_clearcart)
+    Button btn_clearcart;//清空购物车
+
+
+    /**
+     * 单品操作
+     */
+    @ViewById(R.id.layout_trade_item_operate)
+    LinearLayout layout_trade_item_operate;
+    @ViewById(R.id.btn_extra)
+    Button btn_extra;
+    @ViewById(R.id.btn_trade_item_party)
+    Button btn_trade_item_party;
+    @ViewById(R.id.btn_trade_item_discount)
+    Button btn_trade_item_discount;
+    @ViewById(R.id.btn_trade_item_remark)
+    Button btn_trade_item_remark;
 
     //规格
     @ViewById(R.id.btn_standard)
@@ -186,7 +238,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
 
     private void initPropertyUtil() {
         beautyPropertyUtil = new BeautyPropertyUtil(getActivity(), mChangePageListener, this, mChangeListener);
-        beautyPropertyUtil.initView(vActionBar, btnStandard, btnRemark);
+        beautyPropertyUtil.initView(vActionBar, btn_extra, btnRemark,btn_trade_item_remark);
     }
 
     private void initBtnSelected() {
@@ -197,14 +249,74 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
 
     public void doSelect(DishDataItem item) {
         mDishDataItem = item;
+        switchOperate(false);
         showStandard();
     }
 
+    private void switchOperate(boolean isTrade){
+        if(isTrade){
+            layout_trade_operate.setVisibility(View.VISIBLE);
+            layout_trade_item_operate.setVisibility(View.GONE);
+            layout_member_operate.setVisibility(CustomerManager.getInstance().getDinnerLoginCustomer()==null?View.GONE:View.VISIBLE);
+        }else{
+            layout_trade_operate.setVisibility(View.GONE);
+            layout_trade_item_operate.setVisibility(View.VISIBLE);
+            layout_member_operate.setVisibility(View.GONE);
+        }
+    }
 
-    @Click({R.id.btn_cosmetologist, R.id.btn_adviser, R.id.btn_sale
-    })
+
+    @Click({R.id.btn_card,R.id.btn_integral,R.id.btn_coupon,R.id.btn_activity,
+            R.id.btn_discount,R.id.btn_trade_remark,R.id.btn_table,R.id.btn_party,R.id.btn_clearcart,
+            R.id.btn_extra,R.id.btn_trade_item_discount,R.id.btn_trade_item_party,R.id.btn_trade_item_remark,
+            R.id.btn_cosmetologist, R.id.btn_adviser, R.id.btn_sale})
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.btn_card: //会员次卡
+                showCustomerCard();
+                break;
+            case R.id.btn_integral://会员积分
+                showIntegral();
+                break;
+            case R.id.btn_coupon: //会员优惠卷
+                showCoupon();
+                break;
+            case R.id.btn_activity: //会员活动
+                showMarketActivity();
+                break;
+            case R.id.btn_discount: //整单折扣
+                showDiscount(DiscountType.ALLDISCOUNT);
+                break;
+            case R.id.btn_trade_remark://整单备注
+                showRemark();
+                ViewUtil.setButtonSelected(vActionBar, btn_trade_remark);
+                break;
+            case R.id.btn_table://选择工作台
+                if(mOperatorListener!=null){
+                    mOperatorListener.onTableClick();
+                }
+                break;
+            case R.id.btn_party://整单销售员
+                showShopowner();
+                break;
+            case R.id.btn_clearcart://清空购物车
+                clearCart();
+                break;
+            case R.id.btn_extra: //项目
+                showExtra();
+                break;
+            case R.id.btn_trade_item_discount:
+                showSingleDiscount();
+                break;
+            case R.id.btn_trade_item_party://单品服务员
+                showWaiter(R.string.beauty_choice_trade_item_wiater,false);
+                ViewUtil.setButtonSelected(vActionBar, btn_trade_item_party);
+                break;
+            case R.id.btn_trade_item_remark://单品备注
+                showRemark();
+                ViewUtil.setButtonSelected(vActionBar, btn_trade_item_remark);
+                break;
+
             case R.id.btn_cosmetologist:
                 showCosmetologist();
                 break;
@@ -215,6 +327,16 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
                 showShopowner();
                 break;
         }
+    }
+
+
+    /**
+     * 清空购物车
+     */
+    private void clearCart() {
+        BeautyOrderManager.clearShopcartDish();
+        EventBus.getDefault().post(new ActionClearShopcart());
+        EventBus.getDefault().post(new ActionClose());
     }
 
     //目前只有两页，在第二页则返回第一页，在第一页则前往第二页
@@ -248,13 +370,13 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         ViewUtil.setButtonSelected(vActionBar, btnCosmetologist);
         boolean isHasPointView = true;
 
-        showWaiter(TradeUserType.TECHNICIAN.value(), R.string.beauty_choice_technician, isHasPointView);
+        showWaiter( R.string.beauty_choice_technician, isHasPointView);
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, mDishDataItem.getBase().getUuid());
     }
 
 
-    private void showWaiter(int identity, int resId, boolean isHasPointView) {
-        beautyWaiter = BeautyBaseWaiter_.build(getActivity(), identity, resId, isHasPointView);
+    private void showWaiter(int resId, boolean isHasPointView) {
+        beautyWaiter = BeautyBaseWaiter_.build(getActivity(), resId, isHasPointView);
         beautyWaiter.setOnUserCheckedListener(checkedListener);
         if (mDishDataItem != null) {
             beautyWaiter.initItemData(mDishDataItem.getBase(), mDishDataItem.getType());
@@ -275,7 +397,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         clearSingleItem();
         mBeautyActionManager.clearSelectedView();
         ViewUtil.setButtonSelected(vActionBar, btnAdviser);
-        showWaiter(TradeUserType.ADVISER.value(), R.string.beauty_choice_adviser, false);
+        showWaiter(R.string.beauty_choice_adviser, false);
         mChangeListener.changePage(IChangeMiddlePageListener.COMMON_DEFINE_PAGE, null);
     }
 
@@ -285,8 +407,8 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     private void showShopowner() {
         clearSingleItem();
         mBeautyActionManager.clearSelectedView();
-        ViewUtil.setButtonSelected(vActionBar, btnSale);
-        showWaiter(TradeUserType.SHOPOWER.value(), R.string.beauty_choice_shopowner, false);
+        ViewUtil.setButtonSelected(vActionBar, btn_party);
+        showWaiter( R.string.beauty_choice_trade_wiater, false);
         mChangeListener.changePage(IChangeMiddlePageListener.COMMON_DEFINE_PAGE, null);
     }
 
@@ -329,6 +451,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     public void showCustomerCard() {
         clearSingleItem();
         clearButtonSelected();
+        ViewUtil.setButtonSelected(vActionBar, btn_card);
         showCustomContentView(new BeautyCardView(getActivity(), mChangeListener, getChildFragmentManager()));
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, null);
     }
@@ -339,6 +462,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     public void showIntegral() {
         clearSingleItem();
         clearButtonSelected();
+        ViewUtil.setButtonSelected(vActionBar, btn_integral);
         showCustomContentView(BeautyIntegralView_.build(getActivity()));
 //        mBeautyActionManager.setSelectedView(selectedView);
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, null);
@@ -400,7 +524,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
 
     private void updateTradeUser(TradeVo tradeVo, UserVo userVo) {
         if (userVo == null) {
-            TradeUserUtil.removeTradeUser(tradeVo.getTradeUsers(), null, ValueEnums.toValue(TradeUserType.SALESMAN));
+            TradeUserUtil.removeTradeUser(tradeVo.getTradeUsers(), null);
         } else {
             if (tradeVo.getTradeUsers() == null) {
                 tradeVo.setTradeUsers(new ArrayList<TradeUser>());
@@ -418,6 +542,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     public void showCoupon() {
         clearSingleItem();
         clearButtonSelected();
+        ViewUtil.setButtonSelected(vActionBar, btn_coupon);
         beautyCouponView = BeautyCouponView_.build(getActivity());
         showCustomContentView(beautyCouponView);
 //        mBeautyActionManager.setSelectedView(selectedView);
@@ -427,12 +552,27 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     /**
      * 折扣
      */
-    public void showDiscount() {
+    public void showDiscount(DiscountType type) {
         clearSingleItem();
         clearButtonSelected();
-        showCustomContentView(BeautyDiscountView_.build(getActivity()));
+        ViewUtil.setButtonSelected(vActionBar, btn_discount);
+        showCustomContentView(BeautyDiscountView_.build(getActivity(),type));
 //        mBeautyActionManager.setSelectedView(selectedView);
         mChangeListener.changePage(IChangeMiddlePageListener.DEFINE_DISCOUNT_PAGE, null);
+    }
+
+    /**
+     * 单品打折
+     */
+    public void showSingleDiscount(){
+        if (mDishDataItem == null) {
+            ToastUtil.showLongToast(R.string.beauty_consmetologist_unselected);
+            return;
+        }
+        ViewUtil.setButtonSelected(vActionBar, btn_trade_item_discount);
+        showCustomContentView(BeautySingleDiscountView_.build(getActivity(),mDishDataItem));
+//        mBeautyActionManager.setSelectedView(selectedView);
+        mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, mDishDataItem.getBase().getUuid());
     }
 
     /**
@@ -441,6 +581,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     public void showExtra() {
         if (beautyPropertyUtil != null) {
             beautyPropertyUtil.showExtra();
+            ViewUtil.setButtonSelected(vActionBar, btn_extra);
             Log.e("MiddleFragment", "showExtra.....>");
         }
     }
@@ -461,6 +602,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     public void showMarketActivity() {
         clearSingleItem();
         clearButtonSelected();
+        ViewUtil.setButtonSelected(vActionBar, btn_activity);
         beautyActivityView = BeautyActivityView_.build(getActivity(), mChangePageListener, mChangeListener);
         showCustomContentView(beautyActivityView);
 //        mBeautyActionManager.setSelectedView(selectedView);
@@ -484,6 +626,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
      */
     private void clearSingleItem() {
         mDishDataItem = null;
+        switchOperate(true);
         if (beautyPropertyUtil != null) {
             beautyPropertyUtil.initData(null);
         }
@@ -543,6 +686,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         beautyActivityView = null;
         beautyCouponView = null;
         beautyWaiter = null;
+        switchOperate(true);
         Log.e("MiddleFragment", "FaceRoundView.....>");
     }
 
@@ -551,6 +695,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
      */
     public void doCancel() {
         hideContent();
+        clearSingleItem();
         clearButtonSelected();
     }
 
@@ -562,17 +707,23 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         if (mBeautyActionManager != null) {
             mBeautyActionManager.clearSelectedView();
         }
+
+        if(mOperatorListener!=null){
+            mOperatorListener.onClearSelected();
+        }
     }
 
 
     public void doLoginCustomer(CustomerResp customerNew) {
         mBeautyActionManager.refreshCustomer(true);
         CustomerManager.getInstance().setDinnerLoginCustomer(customerNew);
+        layout_member_operate.setVisibility(View.VISIBLE);
     }
 
     public void doExitCustomer() {
         mBeautyActionManager.refreshCustomer(false);
         CustomerManager.getInstance().setDinnerLoginCustomer(null);
+        layout_member_operate.setVisibility(View.GONE);
         doCancel();
     }
 

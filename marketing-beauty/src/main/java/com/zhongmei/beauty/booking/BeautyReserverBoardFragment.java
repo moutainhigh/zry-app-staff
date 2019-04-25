@@ -38,6 +38,7 @@ import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import com.zhongmei.beauty.operates.message.BeautyBookingResp;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
 import com.zhongmei.yunfu.ui.view.recycler.RecyclerLinearLayoutManager;
+import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.yunfu.util.ToastUtil;
 import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.bty.commonmodule.view.calendar.CalendarDialog;
@@ -154,8 +155,16 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
     public void onResume() {
         super.onResume();
         if (mReserverView != null) {
-            mReserverView.onSizeChange(lv_technicians.getHeight(), custom_BookingTimeShaft.getHeight());
+            mReserverView.onSizeChange(custom_BookingTimeShaft.getactualHeight(),getTechniciansHeight(mTechnicians));
         }
+    }
+
+
+    private int getTechniciansHeight(List<User> technicians){
+        if(Utils.isNotEmpty(technicians)){
+            return technicians.size()* DensityUtil.dip2px(getContext(),50);
+        }
+        return 0;
     }
 
     private void loadReserverData(List<User> technicians, Map<Long, ArrayList<ReserverItemVo>> mapReserverItemVos) {
@@ -329,6 +338,7 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
         Long stopTme = mBeautyManager.getStopBusinessType(selectedDate);
         custom_BookingTimeShaft.setBusinessTime(startTime, stopTme);
     }
+
 
     @Override
     public void onSuccess(BeautyBookingBoardVo boardVo) {

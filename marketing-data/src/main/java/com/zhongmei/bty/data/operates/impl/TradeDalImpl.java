@@ -9,6 +9,7 @@ import com.j256.ormlite.dao.GenericRawResults;
 import com.j256.ormlite.stmt.QueryBuilder;
 import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.stmt.Where;
+import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
 import com.zhongmei.bty.basemodule.devices.mispos.data.EcCardLevelSetting;
 import com.zhongmei.bty.basemodule.discount.bean.AppletPrivilegeVo;
 import com.zhongmei.bty.basemodule.discount.bean.BanquetVo;
@@ -2608,6 +2609,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                                 if (tradeCustomer.getCustomerType() == CustomerType.MEMBER) {
                                     CustomerScoreRule rule = DBHelperManager.queryById(CustomerScoreRule.class, ruleId);
                                     integralCashPrivilegeVo.setRule(rule);
+
+                                    CustomerScoreRule limitRule=CustomerManager.getInstance().getIntegerLimitRule();
+                                    if(limitRule!=null){
+                                        integralCashPrivilegeVo.setMaxInteger(new BigDecimal(limitRule.getConvertValue()));
+                                    }
                                     break;
                                 } else if (tradeCustomer.getCustomerType() == CustomerType.CARD) {
                                     DBHelperManager.queryById(CrmCustomerLevelRights.class, ruleId);

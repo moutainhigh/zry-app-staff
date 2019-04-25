@@ -87,10 +87,17 @@ public class H5WebViewFragment extends BasicFragment {
         webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);//不使用缓存，只从网络获取数据.
 
 
-        //支持屏幕缩放
-        webSettings.setSupportZoom(false);
-        webSettings.setBuiltInZoomControls(true);
-//        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        //支持javascript
+        webSettings.setJavaScriptEnabled(true);
+        // 设置可以支持缩放
+        webSettings.setSupportZoom(true);
+        // 设置出现缩放工具
+        webSettings.setBuiltInZoomControls(false);
+        //扩大比例的缩放
+        webSettings.setUseWideViewPort(true);
+        //自适应屏幕
+        webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webSettings.setLoadWithOverviewMode(true);
     }
 
     //WebViewClient主要帮助WebView处理各种通知、请求事件

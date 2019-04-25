@@ -121,14 +121,14 @@ public class BeautyMainReserverFragment extends BasicFragment implements TodayRe
 
     @Override
     public void onSuccess(BeautyBookingBoardVo boardVo) {
-        List<BeautyBookingVo> mReserverTradeVos = boardVo.getmBookingItemVos();
+        List<BeautyBookingVo> mReserverTradeVos = boardVo.getmNoTechnicianBookingItemVos();
         if (Utils.isEmpty(mReserverTradeVos)) {
             iv_emptyView.setVisibility(View.VISIBLE);
             mReserverListView.setVisibility(View.GONE);
         } else {
             iv_emptyView.setVisibility(View.GONE);
             mReserverListView.setVisibility(View.VISIBLE);
-            mReserverAdapter.setItems(boardVo.getmBookingItemVos());
+            mReserverAdapter.setItems(mReserverTradeVos);
             mReserverAdapter.notifyDataSetChanged();
         }
 

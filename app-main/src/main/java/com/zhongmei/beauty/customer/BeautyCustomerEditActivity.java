@@ -1,6 +1,7 @@
 package com.zhongmei.beauty.customer;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -23,13 +24,18 @@ import com.zhongmei.beauty.customer.constants.BeautyCustomerConstants;
 import com.zhongmei.bty.base.MainBaseActivity;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerStatistic;
+import com.zhongmei.bty.basemodule.customer.dialog.PasswordDialog;
 import com.zhongmei.bty.basemodule.customer.dialog.country.CountryDialog;
 import com.zhongmei.bty.basemodule.customer.dialog.country.CountryGridAdapter;
 import com.zhongmei.bty.basemodule.customer.message.CustomerEditResp;
 import com.zhongmei.bty.basemodule.customer.operates.CustomerOperates;
 import com.zhongmei.bty.basemodule.customer.operates.interfaces.CustomerDal;
 import com.zhongmei.bty.basemodule.customer.util.CustomerUtil;
+import com.zhongmei.bty.basemodule.devices.display.manager.DisplayServiceManager;
+import com.zhongmei.bty.basemodule.devices.liandipos.NewLDResponse;
+import com.zhongmei.bty.basemodule.devices.liandipos.PosConnectManager;
 import com.zhongmei.bty.basemodule.devices.mispos.data.EcCardInfo;
+import com.zhongmei.bty.basemodule.devices.mispos.dialog.ReadKeyboardDialogFragment;
 import com.zhongmei.bty.basemodule.erp.bean.ErpCurrency;
 import com.zhongmei.bty.basemodule.erp.operates.ErpCommercialRelationDal;
 import com.zhongmei.bty.basemodule.input.NumberKeyBoardUtils;
@@ -38,6 +44,8 @@ import com.zhongmei.bty.common.util.CommonKeyBorad;
 import com.zhongmei.bty.common.view.DatePickerDialogFragment;
 import com.zhongmei.bty.common.view.DatePickerDialogFragment.DateSetListener;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.bty.commonmodule.util.MD5;
+import com.zhongmei.bty.commonmodule.util.NumberUtil;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 import com.zhongmei.bty.customer.CustomerActivity;
 import com.zhongmei.bty.customer.CustomerChargingDialogFragment;
@@ -86,6 +94,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import de.greenrobot.event.EventBus;
@@ -388,8 +397,8 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 } else {
                     setCardVisble(true);
                 }
-                mPhonenum.setEnabled(false);
-                mPhonenum.setFocusable(false);
+                mPhonenum.setEnabled(true); //编辑的时候也可以更改电话号码
+                mPhonenum.setFocusable(true);
                 mIvCountry.setEnabled(false);
                 setPasswordDisable(true);
                 mImport.setVisibility(View.GONE);
@@ -447,12 +456,12 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         }
 
         // 设置喜好
-        String enjoyStr = EnjoyManager.getInstance().getDtailEnjoyString(customer.interest);
+        String enjoyStr = EnjoyManager.getInstance().getDtailEnjoyString(customer.hobby);
         if (!TextUtils.isEmpty(enjoyStr)) {
             mEnjoy.setText(enjoyStr);
         }
         mSelectSet.clear();
-        List<String> tempSelect = EnjoyManager.getInstance().getEnjoylist(customer.interest);
+        List<String> tempSelect = EnjoyManager.getInstance().getEnjoylist(customer.hobby);
         mSelectSet.addAll(tempSelect);
 
         mMemo.setText(customer.memo);
@@ -854,7 +863,8 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         mCustomer.address = mAddress.getText().toString();
         mCustomer.invoice = mInvoice.getText().toString();
         mCustomer.memo = mMemo.getText().toString();
-        mCustomer.interest = EnjoyManager.getInstance().tohoddyString(mSelectSet);
+//        mCustomer.interest = EnjoyManager.getInstance().tohoddyString(mSelectSet);
+        mCustomer.hobby = mEnjoy.getText().toString();
         if (mErpCurrency != null) {
             mCustomer.nation = mErpCurrency.getCountryEn();
             mCustomer.country = mErpCurrency.getCountryZh();
@@ -872,7 +882,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     private void insertOrUpdate() {
         if (setUpdateCustomerValue()) {
             mCustomer.localModifyDateTime = System.currentTimeMillis();
-            if (mErpCurrency != null && !TextUtils.isEmpty(mErpCurrency.getPhoneRegulation()) && !Pattern.matches(mErpCurrency.getPhoneRegulation(), mCustomer.mobile)) {
+            if (TextUtils.isEmpty(mCustomer.mobile) || !NumberUtil.isCellPhone(mCustomer.mobile)) {
                 ToastUtil.showShortToast(getString(R.string.customer_mobile_regulation_error));
                 return;
             }
@@ -890,7 +900,39 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                     break;
             }*/
             doCreateCustomer(mCustomer);
+//            checkPassword(mCustomer.mobile,mCustomer.name,getContext()); //密码验证
         }
+    }
+
+    private void checkPassword(final String mobile, final String inputNo, final Context context) {
+        //密码登陆
+        final PasswordDialog dialog;
+        dialog = new PasswordDialog(context) {
+            @Override
+            public void close() {
+                dismiss();
+                DisplayServiceManager.doCancel(context);
+            }
+        };
+
+        dialog.setMembeName(inputNo);
+        dialog.setLisetner(new PasswordDialog.PasswordCheckLisetner() {
+            @Override
+            public void checkPassWord(String password) {
+                password = new MD5().getMD5ofStr(password);
+                mCustomer.password=password;
+                doCreateCustomer(mCustomer);
+            }
+
+            @Override
+            public void showPassWord(String password) {
+            }
+
+            @Override
+            public void showReadKeyBord() {
+            }
+        });
+        dialog.show();
     }
 
     /**

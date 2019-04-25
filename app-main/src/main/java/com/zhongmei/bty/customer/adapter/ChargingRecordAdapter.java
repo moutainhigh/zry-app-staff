@@ -153,7 +153,7 @@ public class ChargingRecordAdapter extends BaseAdapter {
                 }
                 break;
                 case TYPE_EXPENSE:
-                    viewHolder.otherBalance.setText(String.format(mContext.getString(R.string.customer_account_list_consume), chargingRecord.getAddValuecard().abs()));
+                    viewHolder.otherBalance.setText(String.format(mContext.getString(R.string.customer_account_list_consume), chargingRecord.getAddValuecard()));
                     viewHolder.otherBalanceLayout.setVisibility(View.VISIBLE);
                     viewHolder.charingBalanceLayout.setVisibility(View.GONE);
                     //viewHolder.type.setVisibility(View.INVISIBLE);

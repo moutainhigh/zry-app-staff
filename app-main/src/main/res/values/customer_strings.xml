@@ -174,7 +174,7 @@
     <string name="customer_account_list_refund">退款 {HBF}%1$s</string>
     <string name="customer_account_list_recharging">充值 {HBF}%1$s</string>
     <string name="customer_account_list_giving">赠送 {HBF}%f</string>
-    <string name="customer_account_list_consume">消费 -{HBF}%1$f</string>
+    <string name="customer_account_list_consume">消费 -{HBF}%1$s</string>
     <string name="customer_change_balance_value">调账 {HBF}%1$s</string>
     <!--<string name="customer_money_tag">¥%1$s</string>-->
     <string name="input_name_tips">请输入姓名（选填）</string>

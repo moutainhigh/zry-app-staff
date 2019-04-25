@@ -327,16 +327,11 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void insert(TradeVo tradeVo, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeInsert();
+       /* String url = ServerAddressUtil.getInstance().tradeInsert();
         tradeVo.getTrade().validateCreate();
         // 正餐不生成流水号
         boolean genSn = false;
-        /*if (tradeVo.getTrade().getBusinessType() != BusinessType.DINNER) {
-            tradeVo.getTradeExtra().setSerialNumber(PrHelper.getDefault().getSerialNumber());
-			genSn = true;
-		}*/
         TradeReq tradeReq = toTradeReq(tradeVo);
-
         boolean interceptEnable = Snack.netWorkUnavailable()
                 && Snack.isSnackBusiness(tradeVo)
                 && Snack.isOfflineEnable();
@@ -346,13 +341,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .timeout(20000)
                 .responseProcessor(new TradeRespProcessor(genSn))
                 .interceptEnable(interceptEnable)
-                .execute(listener, "tradeInsert");
+                .execute(listener, "tradeInsert");*/
     }
 
     @Override
     public void sellCardsInsert(TradeVo tradeVo, ResponseListener<TradeResp> listener) {
 
-        String url = ServerAddressUtil.getInstance().getSellCardsInsertUrl();
+        /*String url = ServerAddressUtil.getInstance().getSellCardsInsertUrl();
         tradeVo.getTrade().validateCreate();
         TradeReq tradeReq = toTradeReq(tradeVo);
         // boolean genSn = false;
@@ -361,66 +356,66 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TradeResp.class)
                 // .responseProcessor(new
                 // TradeRespProcessor(genSn))
-                .execute(listener, "saleCardsInsert");
+                .execute(listener, "saleCardsInsert");*/
     }
 
     @Override
     public void sellCardsPay(TradeVo tradeVo, List<PaymentVo> paymentVoList, Map<String, String> memberPasswords,
                              ResponseListener<PaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().getSellCardsPayUrl();
+        /*String url = ServerAddressUtil.getInstance().getSellCardsPayUrl();
         PaymentReq paymentReq = toPaymentReq(tradeVo, paymentVoList, memberPasswords);
         OpsRequest.Executor<PaymentReq, PaymentResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(paymentReq).responseClass(PaymentResp.class).execute(listener, "saleCardsPay");
+        executor.requestValue(paymentReq).responseClass(PaymentResp.class).execute(listener, "saleCardsPay");*/
     }
 
     @Override
     public void sellCardsInsertAndPay(TradeVo tradeVo, List<PaymentVo> paymentVoList,
                                       Map<String, String> memberPasswords, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().getSellCardsInsertAndPayUrl();
+        /*String url = ServerAddressUtil.getInstance().getSellCardsInsertAndPayUrl();
         tradeVo.getTrade().validateCreate();
         TradePaymentReq req = toTradePaymentReq(tradeVo, paymentVoList, memberPasswords);
         OpsRequest.Executor<TradePaymentReq, TradePaymentResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(TradePaymentResp.class).execute(listener, "saleCardsInsertAndPay");
+        executor.requestValue(req).responseClass(TradePaymentResp.class).execute(listener, "saleCardsInsertAndPay");*/
     }
 
     @Override
     public void insertAnonymousCards(TradeVo tradeVo, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().getInsertAnonymousCardsUrl();
+        /*String url = ServerAddressUtil.getInstance().getInsertAnonymousCardsUrl();
         tradeVo.getTrade().validateCreate();
         TradeReq tradeReq = toTradeReq(tradeVo);
         OpsRequest.Executor<TradeReq, TradeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(tradeReq).responseClass(TradeResp.class).execute(listener, "insertAnonymousCards");
+        executor.requestValue(tradeReq).responseClass(TradeResp.class).execute(listener, "insertAnonymousCards");*/
     }
 
     @Override
     public void sellAnonymousCardsPay(TradeVo tradeVo, List<PaymentVo> paymentVoList, Map<String, String> memberPasswords, ResponseListener<PaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().getSellAnonymousCardsPayUrl();
+        /*String url = ServerAddressUtil.getInstance().getSellAnonymousCardsPayUrl();
         PaymentReq paymentReq = toPaymentReq(tradeVo, paymentVoList, memberPasswords);
         OpsRequest.Executor<PaymentReq, PaymentResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(paymentReq).responseClass(PaymentResp.class).execute(listener, "sellAnonymousCardsPay");
+        executor.requestValue(paymentReq).responseClass(PaymentResp.class).execute(listener, "sellAnonymousCardsPay");*/
     }
 
     @Override
     public void sellAnonymousCardsinsertAndPay(TradeVo tradeVo, List<PaymentVo> paymentVoList, Map<String, String> memberPasswords, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().getAnonymousCardsinsertAndPayUrl();
+        /*String url = ServerAddressUtil.getInstance().getAnonymousCardsinsertAndPayUrl();
         tradeVo.getTrade().validateCreate();
         TradePaymentReq req = toTradePaymentReq(tradeVo, paymentVoList, memberPasswords);
         OpsRequest.Executor<TradePaymentReq, TradePaymentResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(TradePaymentResp.class).execute(listener, "sellAnonymousCardsinsertAndPay");
+        executor.requestValue(req).responseClass(TradePaymentResp.class).execute(listener, "sellAnonymousCardsinsertAndPay");*/
     }
 
     @Override
     public void saleAndStoreAnonymousCard(TradeVo tradeVo, List<PaymentVo> paymentVoList, Map<String, String> memberPasswords, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().getAnonymousCardSaleAndStoreUrl();
+        /*String url = ServerAddressUtil.getInstance().getAnonymousCardSaleAndStoreUrl();
         tradeVo.getTrade().validateCreate();
         TradePaymentReq req = toTradePaymentReq(tradeVo, paymentVoList, memberPasswords);
         OpsRequest.Executor<TradePaymentReq, TradePaymentResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(TradePaymentResp.class).execute(listener, "saleAndStoreAnonymousCard");
+        executor.requestValue(req).responseClass(TradePaymentResp.class).execute(listener, "saleAndStoreAnonymousCard");*/
     }
 
     @Override
     public void storeAnonymousCard(TradeVo tradeVo, int online, List<PaymentVo> paymentVoList, Map<String, String> memberPasswords, ResponseListener<AnonymousCardStoreResp> listener) {
-        String url = ServerAddressUtil.getInstance().getAnonymousCardStoreUrl();
+        /*String url = ServerAddressUtil.getInstance().getAnonymousCardStoreUrl();
         CardRechargeReq rechargeReq = new CardRechargeReq();
         rechargeReq.setClientCreateTime(System.currentTimeMillis());
         rechargeReq.setClientUpdateTime(System.currentTimeMillis());
@@ -445,12 +440,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         OpsRequest.Executor<CardRechargeReq, AnonymousCardStoreResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(rechargeReq).responseClass(AnonymousCardStoreResp.class)
                 .responseProcessor(new AnonymousCardStoreRespProcessor())
-                .execute(listener, "storeAnonymousCard");
+                .execute(listener, "storeAnonymousCard");*/
     }
 
     @Override
     public void storeEntityCard(TradeVo tradeVo, int online, long customerId, BigDecimal chargeMoney, BigDecimal sendMoney, List<PaymentVo> paymentVoList, ResponseListener<AnonymousCardStoreResp> listener) {
-        String url = ServerAddressUtil.getInstance().getEntityCardStoreUrl();
+        /*String url = ServerAddressUtil.getInstance().getEntityCardStoreUrl();
         CardRechargeReq rechargeReq = new CardRechargeReq();
         rechargeReq.setTradeUser(tradeVo.getTradeUser());//add 20170916 v8.1 销售员
         rechargeReq.setTradeUsers(tradeVo.getTradeUsers());
@@ -478,13 +473,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         OpsRequest.Executor<CardRechargeReq, AnonymousCardStoreResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(rechargeReq).responseClass(AnonymousCardStoreResp.class)
                 .responseProcessor(new AnonymousCardStoreRespProcessor())
-                .execute(listener, "storeEntityCard");
+                .execute(listener, "storeEntityCard");*/
     }
 
     //会员虚拟卡充值
     @Override
     public void storeVirtualCard(TradeVo tradeVo, int online, long customerId, BigDecimal chargeMoney, BigDecimal sendMoney, List<PaymentVo> paymentVoList, ResponseListener<AnonymousCardStoreResp> listener) {
-        String url = ServerAddressUtil.getInstance().getVirtualcardCardStoreUrl();
+        /*String url = ServerAddressUtil.getInstance().getVirtualcardCardStoreUrl();
         VirtualCardRechargeReq req = new VirtualCardRechargeReq();
         req.setCustomerId(customerId);
         req.setOnlinePay(online);
@@ -518,7 +513,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         OpsRequest.Executor<VirtualCardRechargeReq, AnonymousCardStoreResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(AnonymousCardStoreResp.class)
                 .responseProcessor(new AnonymousCardStoreRespProcessor())
-                .execute(listener, "storeVirtualCard");
+                .execute(listener, "storeVirtualCard");*/
     }
 
     @Override
@@ -541,7 +536,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     public void pay(TradeVo tradeVo, List<PaymentVo> paymentVoList, Map<String, String> memberPasswords,
                     ResponseListener<PaymentResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().tradePay();
+        /*String url = ServerAddressUtil.getInstance().tradePay();
         PaymentReq paymentReq = toPaymentReq(tradeVo, paymentVoList, memberPasswords);
         OpsRequest.Executor<PaymentReq, PaymentResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(paymentReq)
@@ -552,31 +547,31 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             AsyncNetworkManager.getInstance().addRequest(tradeVo, AsyncHttpType.CASHER, executor, listener, "tradePay");
         } else {
             executor.execute(listener, "tradePay");
-        }
+        }*/
     }
 
     @Override
     public void adjust(PaymentVo paymentVo, ResponseListener<PaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().adjustPay();
+        /*String url = ServerAddressUtil.getInstance().adjustPay();
         PaymentReq paymentReq = toAdjustPaymentReq(paymentVo);
         OpsRequest.Executor<PaymentReq, PaymentResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(paymentReq)
                 .responseClass(PaymentResp.class)
                 .responseProcessor(new PaymentRespProcessor())
-                .execute(listener, "adjustPay");
+                .execute(listener, "adjustPay");*/
     }
 
     @Override
     public void insertAndPay(TradeVo tradeVo, List<PaymentVo> paymentVoList, Map<String, String> memberPasswords,
                              ResponseListener<TradePaymentResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().tradeInsertAndPay();
+        /*String url = ServerAddressUtil.getInstance().tradeInsertAndPay();
         tradeVo.getTrade().validateCreate();
         // 正餐不生成流水号
         boolean genSn = false;
-        /*if (tradeVo.getTrade().getBusinessType() != BusinessType.DINNER) {
+        *//*if (tradeVo.getTrade().getBusinessType() != BusinessType.DINNER) {
             tradeVo.getTradeExtra().setSerialNumber(PrHelper.getDefault().getSerialNumber());
 			genSn = true;
-		}*/
+		}*//*
         boolean interceptEnable = Snack.isSnackBusiness(tradeVo)
                 && Snack.isOfflineEnable()
                 && Snack.netWorkUnavailable();
@@ -591,7 +586,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             AsyncNetworkManager.getInstance().addRequest(tradeVo, AsyncHttpType.CASHER, executor, listener, "tradeInsertAndPay");
         } else {
             executor.execute(listener, "tradeInsertAndPay");
-        }
+        }*/
     }
 
     @Override
@@ -623,13 +618,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     public void modifyAndPay(TradeVo tradeVo, List<PaymentVo> paymentVoList, Map<String, String> memberPasswords,
                              ResponseListener<PaymentResp> listener, boolean isAsync) {
-        PayDinnerReq payDinnerReq = toPayDinnerReq(tradeVo, paymentVoList, memberPasswords);
+        /*PayDinnerReq payDinnerReq = toPayDinnerReq(tradeVo, paymentVoList, memberPasswords);
         List<TradeTable> tradeTableList = payDinnerReq.getTrade().getTradeTables();
-        /*if (tradeTableList != null) {
+        *//*if (tradeTableList != null) {
             for (TradeTable tradeTable : tradeTableList) {
                 tradeTable.setSelfTableStatus(TableStatus.EMPTY);
             }
-        }*/
+        }*//*
         if (tradeVo.getTrade().getTradeType() == TradeType.SELL_FOR_REPEAT) {
             PaymentOfRepeatReq req = toPaymentOfRepeatReq(tradeVo, payDinnerReq);
             //需要将tradeExtra存在list中 ps:只针对反结
@@ -663,37 +658,37 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             } else {
                 executor.execute(listener, "modifyAndPay");
             }
-        }
+        }*/
     }
 
     @Override
     public void getWechatPayUrl(WechatPayUrlReq req, ResponseListener<WechatPayUrlResp> listener) {
-        String url = ServerAddressUtil.getInstance().wechatPayUrl();
+        /*String url = ServerAddressUtil.getInstance().wechatPayUrl();
         OpsRequest.Executor<WechatPayUrlReq, WechatPayUrlResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(WechatPayUrlResp.class).timeout(30000).execute(listener,
-                "getWechatPayUrl");
+                "getWechatPayUrl");*/
     }
 
     @Override
     public void wechatPay(WechatPayReq req, ResponseListener<WechatPayResp> listener) {
-        String url = ServerAddressUtil.getInstance().wechatPay();
+        /*String url = ServerAddressUtil.getInstance().wechatPay();
         OpsRequest.Executor<WechatPayReq, WechatPayResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(WechatPayResp.class).timeout(12000).execute(listener, "wechatPay");
+        executor.requestValue(req).responseClass(WechatPayResp.class).timeout(12000).execute(listener, "wechatPay");*/
     }
 
     @Override
     public void verifyPay(long tradeId, ResponseListener<VerifyPayResp> listener) {
-        String url = ServerAddressUtil.getInstance().verifyPay();
+        /*String url = ServerAddressUtil.getInstance().verifyPay();
         OpsRequest.Executor<Long, VerifyPayResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(tradeId)
                 .responseClass(VerifyPayResp.class)
                 .responseProcessor(new VerifyPayRespProcessor())
-                .execute(listener, "verifyPay");
+                .execute(listener, "verifyPay");*/
     }
 
     @Override
     public void accept(TradeVo tradeVo, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeAccept();
+        /*String url = ServerAddressUtil.getInstance().tradeAccept();
         tradeVo.getTrade().validateCreate();
         // 正餐不生成流水号
         boolean genSn = false;
@@ -705,28 +700,28 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 tradeExtra.setTradeUuid(tradeVo.getTrade().getUuid());
                 tradeVo.setTradeExtra(tradeExtra);
             }
-            /*if (TextUtils.isEmpty(tradeVo.getTradeExtra().getSerialNumber())) {
+            *//*if (TextUtils.isEmpty(tradeVo.getTradeExtra().getSerialNumber())) {
                 tradeVo.getTradeExtra().setSerialNumber(PrHelper.getDefault().getSerialNumber());
 				genSn = true;
-			}*/
+			}*//*
         }
         TradeOpsReq req = toTradeOpsReq(tradeVo, TradeStatus.CONFIRMED, null);
         OpsRequest.Executor<TradeOpsReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor(genSn))
-                .execute(listener, "tradeAccept");
+                .execute(listener, "tradeAccept");*/
     }
 
     @Override
     public void receiveBatch(ActionType actionType, List<TradeVo> tradeVos, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeReceiveBatch();
+        /*String url = ServerAddressUtil.getInstance().tradeReceiveBatch();
         TradeBatchOpsReq req = toTradeBatchOpsReq(actionType, null, tradeVos);
         OpsRequest.Executor<TradeBatchOpsReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor(false))
-                .execute(listener, "tradeReceiveBatch");
+                .execute(listener, "tradeReceiveBatch");*/
     }
 
     private TradeBatchOpsReq toTradeBatchOpsReq(ActionType actionType, Reason reason, List<TradeVo> tradeVos) {
@@ -758,22 +753,22 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void refuse(TradeVo tradeVo, Reason reason, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeRefuse();
+        /*String url = ServerAddressUtil.getInstance().tradeRefuse();
         tradeVo.getTrade().validateCreate();
         tradeVo.getTrade().validateUpdate();
         TradeOpsReq req = toTradeOpsReq(tradeVo, TradeStatus.REFUSED, reason);
         OpsRequest.Executor<TradeOpsReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(TradeResp.class).responseProcessor(new TradeRespProcessor()).execute(
-                listener, "tradeRefuse");
+                listener, "tradeRefuse");*/
     }
 
     @Override
     public void refuseBatch(ActionType actionType, Reason reason, List<TradeVo> tradeVos, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeRefuseBatch();
+        /*String url = ServerAddressUtil.getInstance().tradeRefuseBatch();
         TradeBatchOpsReq req = toTradeBatchOpsReq(actionType, reason, tradeVos);
         OpsRequest.Executor<TradeBatchOpsReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(TradeResp.class).responseProcessor(new TradeRespProcessor()).execute(
-                listener, "tradeRefuseBatch");
+                listener, "tradeRefuseBatch");*/
     }
 
     @Override
@@ -783,7 +778,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void acceptDinner(Trade trade, boolean genBatchNo, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().dinnerAccept();
+        /*String url = ServerAddressUtil.getInstance().dinnerAccept();
         trade.validateCreate();
         TradeOpsReq req = toTradeOpsReq(trade, TradeStatus.CONFIRMED, null);
         req.setGenBatchNo(genBatchNo ? Bool.YES : Bool.NO);//自动生成批次号
@@ -795,24 +790,24 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         }
         OpsRequest.Executor<TradeOpsReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(TradeResp.class).responseProcessor(new TradeRespProcessor()).execute(
-                listener, "tradeDinnerAccept");
+                listener, "tradeDinnerAccept");*/
     }
 
     @Override
     public void refuseDinner(TradeVo tradeVo, Reason reason, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().dinnerRefuse();
+        /*String url = ServerAddressUtil.getInstance().dinnerRefuse();
         tradeVo.getTrade().validateCreate();
         tradeVo.getTrade().validateUpdate();
         TradeOpsReq req = toTradeOpsReq(tradeVo.getTrade(), TradeStatus.REFUSED, reason);
         OpsRequest.Executor<TradeOpsReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(TradeResp.class).responseProcessor(new TradeRespProcessor()).execute(
-                listener, "tradeDinnerRefuse");
+                listener, "tradeDinnerRefuse");*/
 
     }
 
     @Override
     public void recision(TradeVo tradeVo, Reason reason, List<InventoryItemReq> returnInventoryItems, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeRecision();
+        /*String url = ServerAddressUtil.getInstance().tradeRecision();
         tradeVo.getTrade().validateUpdate();
         TradeOpsReq req = toTradeOpsReq(tradeVo.getTrade(), TradeStatus.INVALID, reason);
         req.setReturnInventoryItems(returnInventoryItems);
@@ -823,12 +818,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor())
                 .interceptEnable(interceptEnable)
-                .execute(listener, "tradeRecision");
+                .execute(listener, "tradeRecision");*/
     }
 
     @Override
     public void refund(TradeVo tradeVo, Reason reason, List<InventoryItemReq> returnInventoryItems, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeRefund();
+        /*String url = ServerAddressUtil.getInstance().tradeRefund();
         tradeVo.getTrade().validateUpdate();
         TradeRefundReq req = toTradeRefundReq(tradeVo.getTrade(), reason);
         req.setReturnInventoryItems(returnInventoryItems);
@@ -839,7 +834,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TradePaymentResp.class)
                 .responseProcessor(new TradePaymentRespProcessor())
                 .interceptEnable(interceptEnable)
-                .execute(listener, "tradeRefund");
+                .execute(listener, "tradeRefund");*/
     }
 
     @Override
@@ -852,18 +847,18 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void deliveredPayment(List<TradeVo> tradeVoList, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().deliveredPayment();
+        /*String url = ServerAddressUtil.getInstance().deliveredPayment();
         DeliveredPaymentReq req = toDeliveredPaymentReq(tradeVoList);
         OpsRequest.Executor<DeliveredPaymentReq, TradePaymentResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(TradePaymentResp.class)
                 .responseProcessor(new TradePaymentRespProcessor())
-                .execute(listener, "deliveredPayment");
+                .execute(listener, "deliveredPayment");*/
     }
 
     @Override
     public void clearAccounts(List<TradeVo> tradeVoList, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().clearAccounts();
+        /*String url = ServerAddressUtil.getInstance().clearAccounts();
         ClearBillReq req = new ClearBillReq();
         List<Long> tradeIdList = toClearAccountsReq(tradeVoList);
         req.setTradeIds(tradeIdList);
@@ -871,7 +866,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseClass(TradePaymentResp.class)
                 .responseProcessor(new TradePaymentRespProcessor())
-                .execute(listener, "clearAccounts");
+                .execute(listener, "clearAccounts");*/
     }
 
     private List<Long> toClearAccountsReq(List<TradeVo> tradeVoList) {
@@ -886,13 +881,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void batchunbindCoupon(Long tradeId, List<TradePrivilege> tradePrivileges, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().batchunbindCoupon();
+        /*String url = ServerAddressUtil.getInstance().batchunbindCoupon();
         TradeBatchUnbindCouponReq req = toTradeBatchUnbindCouponReq(tradeId, tradePrivileges);
         OpsRequest.Executor<TradeBatchUnbindCouponReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor())
-                .execute(listener, "batchunbindCoupon");
+                .execute(listener, "batchunbindCoupon");*/
     }
 
     private TradeBatchUnbindCouponReq toTradeBatchUnbindCouponReq(Long tradeId, List<TradePrivilege> tradePrivileges) {
@@ -912,39 +907,39 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void unbindCoupon(TradeUnbindCouponReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().unbindCoupon();
+        /*String url = ServerAddressUtil.getInstance().unbindCoupon();
         OpsRequest.Executor<TradeUnbindCouponReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(TradeResp.class).responseProcessor(new TradeRespProcessor()).execute(
-                listener, "unbindCoupon");
+                listener, "unbindCoupon");*/
     }
 
     @Override
     public void unbindIntegral(TradeUnbindCouponReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().unbindIntegral();
+        /*String url = ServerAddressUtil.getInstance().unbindIntegral();
         OpsRequest.Executor<TradeUnbindCouponReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(TradeResp.class).responseProcessor(new TradeRespProcessor()).execute(
-                listener, "unbindIntegral");
+                listener, "unbindIntegral");*/
     }
 
     @Override
     public void getSendCouponUrl(ResponseListener<CouponUrlResp> listener) {
-        String url = ServerAddressUtil.getInstance().sendCouponUrl();
+        /*String url = ServerAddressUtil.getInstance().sendCouponUrl();
         OpsRequest.Executor<String, CouponUrlResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue("{}").responseClass(CouponUrlResp.class).execute(
-                listener, "sendCouponUrl");
+                listener, "sendCouponUrl");*/
     }
 
     @Override
     public void salesRetuenPay(TradeVo tradeVo, List<PaymentVo> paymentVoList, Reason reason, boolean isReturnInventory,
                                Map<String, String> memberPasswords, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().salesReturnUrl();
+        /*String url = ServerAddressUtil.getInstance().salesReturnUrl();
         tradeVo.getTrade().validateCreate();
         // 正餐不生成流水号
         boolean genSn = false;
-        /*if (tradeVo.getTrade().getBusinessType() != BusinessType.DINNER) {
+        *//*if (tradeVo.getTrade().getBusinessType() != BusinessType.DINNER) {
             tradeVo.getTradeExtra().setSerialNumber(PrHelper.getDefault().getSerialNumber());
 			genSn = true;
-		}*/
+		}*//*
         SalesReturnTradePaymentReq req = new SalesReturnTradePaymentReq();
         TradeReq tradeReq = toTradeReq(tradeVo);
         PaymentReq paymentReq = toPaymentReq(tradeVo, paymentVoList, memberPasswords);
@@ -959,14 +954,14 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseClass(TradePaymentResp.class)
                 .responseProcessor(new TradePaymentRespProcessor(genSn))
-                .execute(listener, "salesReturn");
+                .execute(listener, "salesReturn");*/
     }
 
     @Override
     public void returnSellCards(Trade srcTrade, TradeVo tradeVo, List<PaymentVo> paymentVoList,
                                 List<CardNumber> cardList, Reason reason, boolean returnAll, ResponseListener<SalesCardReturnResp> listener) {
         // TODO Auto-generated method stub
-        String url = ServerAddressUtil.getInstance().returnCardsUrl();
+        /*String url = ServerAddressUtil.getInstance().returnCardsUrl();
         tradeVo.getTrade().validateCreate();
         SalesCardReturnReq req = new SalesCardReturnReq();
         if (returnAll) {
@@ -997,7 +992,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             req.setPartRefundContent(tradePaymentReq);
         }
         OpsRequest.Executor<SalesCardReturnReq, SalesCardReturnResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(SalesCardReturnResp.class).execute(listener, "tradeInsertDinner");
+        executor.requestValue(req).responseClass(SalesCardReturnResp.class).execute(listener, "tradeInsertDinner");*/
     }
 
     @Override
@@ -1007,7 +1002,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void insertDinner(final TradeVo tradeVo, IDinnertable dinnertable, ResponseListener<TradeResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().tradeInsertDinner();
+        /*String url = ServerAddressUtil.getInstance().tradeInsertDinner();
         tradeVo.getTrade().validateCreate();
         TradeReq tradeReq = toTradeReq(tradeVo);
         DinnertableState dinnertableState = new DinnertableState();
@@ -1047,12 +1042,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             }, "tradeInsertDinner");
         } else {
             executor.execute(listener, "tradeInsertDinner");
-        }
+        }*/
     }
 
     @Override
     public void insertBuffet(TradeVo tradeVo, IDinnertable dinnertable, ResponseListener<TradeResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().tradeInsertBuffet();
+        /*String url = ServerAddressUtil.getInstance().tradeInsertBuffet();
         tradeVo.getTrade().validateCreate();
         TradeReq tradeReq = toTradeReq(tradeVo);
         DinnertableState dinnertableState = new DinnertableState();
@@ -1079,7 +1074,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             AsyncNetworkManager.getInstance().addRequest(tradeVo, AsyncHttpType.OPENTABLE, executor, new AsyncOpenTableResponseListener(UserActionEvent.DINNER_TABLE_OPEN), "tradeInsertDinner");
         } else {
             executor.execute(listener, "tradeInsertBuffet");
-        }
+        }*/
     }
 
     @Override
@@ -1150,7 +1145,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
     @Override
     public void transferDinnertable(List<TradeItemExtraDinner> tradeItemSeats, IDinnertableTrade orginal, IDinnertable dest,
                                     ResponseListener<TransferDinnertableResp> listener) {
-        String url = ServerAddressUtil.getInstance().transferDinnertable();
+        /*String url = ServerAddressUtil.getInstance().transferDinnertable();
         TransferDinnertableReq req = new TransferDinnertableReq();
         AuthUser user = Session.getAuthUser();
         if (user != null) {
@@ -1183,13 +1178,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TransferDinnertableResp.class)
                 .responseProcessor(new TransfertableRespProcessor())
                 .execute(listener, "transferDinnertable");
-        AuthLogManager.getInstance().flush(OrderActionEnum.TRANSFER_TABLES, orginal.getTradeId(), orginal.getTradeUuid(), orginal.getTradeClientUpdateTime());
+        AuthLogManager.getInstance().flush(OrderActionEnum.TRANSFER_TABLES, orginal.getTradeId(), orginal.getTradeUuid(), orginal.getTradeClientUpdateTime());*/
     }
 
     @Override
     public void recisionDinner(Long tradeId, Long serverUpdateTime, List<DinnertableState> states, Reason mReason,
                                List<InventoryItemReq> inventoryItems, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().recisionDinner();
+        /*String url = ServerAddressUtil.getInstance().recisionDinner();
         TradeDeleteReq deleteReq = new TradeDeleteReq();
         RecisionDinnerReq req = new RecisionDinnerReq();
         AuthUser user = Session.getAuthUser();
@@ -1209,7 +1204,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         deleteReq.setReturnInventoryItems(inventoryItems);
         OpsRequest.Executor<TradeDeleteReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(deleteReq).responseClass(TradeResp.class).responseProcessor(new TradeRespProcessor()).execute(
-                listener, "recisionDinner");
+                listener, "recisionDinner");*/
     }
 
     @Override
@@ -1239,7 +1234,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void refundDinner(TradeVo tradeVo, Reason reason, List<InventoryItemReq> inventoryItems, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeRefundDinner();
+        /*String url = ServerAddressUtil.getInstance().tradeRefundDinner();
         tradeVo.getTrade().validateUpdate();
         TradeRefundReq req = toTradeRefundReq(tradeVo.getTrade(), reason);
         req.setReturnInventoryItems(inventoryItems);
@@ -1248,13 +1243,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseClass(TradePaymentResp.class)
                 .responseProcessor(new TradePaymentRespProcessor())
-                .execute(listener, "tradeRefund");
+                .execute(listener, "tradeRefund");*/
     }
 
     @Override
     public void mergeDinner(final List<TradeItemExtraDinner> tradeItemSeats, final IDinnertableTrade orginal, final IDinnertableTrade dest, final Long levelId,
                             final ResponseListener<TradeResp> listener) {
-        new AsyncTask<Object, Object, MergeDinnerReq>() {
+        /*new AsyncTask<Object, Object, MergeDinnerReq>() {
 
             private Exception exception = null;
 
@@ -1290,7 +1285,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                             .execute(listener, "mergeDinner");
                 }
             }
-        }.execute();
+        }.execute();*/
     }
 
     @Override
@@ -1623,19 +1618,19 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void weixinRefund(TradeVo tradeVo, Reason reason, ResponseListener<TradePaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().weixinRefundUrl();
+        /*String url = ServerAddressUtil.getInstance().weixinRefundUrl();
         tradeVo.getTrade().validateUpdate();
         TradeOpsReq req = toRefundToTradeOpsReq(tradeVo.getTrade(), TradeStatus.TOREFUND, reason);
         OpsRequest.Executor<TradeOpsReq, TradePaymentResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(TradePaymentResp.class)
                 .responseProcessor(new TradePaymentRespProcessor())
-                .execute(listener, "toRefund");
+                .execute(listener, "toRefund");*/
     }
 
     @Override
     public void tradeSplitDinner(TradeVo source, TradeVo target, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeSplitUrl();
+        /*String url = ServerAddressUtil.getInstance().tradeSplitUrl();
         source.getTrade().validateUpdate();
         target.getTrade().validateCreate();
 
@@ -1647,13 +1642,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
         OpsRequest.Executor<TradeSplitReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(TradeResp.class).responseProcessor(new TradeRespProcessor()).execute(
-                listener, "tradeSplitDinner");
+                listener, "tradeSplitDinner");*/
     }
 
     @Override
     public void tradeSplitPayDinner(TradeVo source, TradeVo target, List<PaymentVo> paymentVoList,
                                     Map<String, String> memberPasswords, ResponseListener<PaymentResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeSplitPayUrl();
+        /*String url = ServerAddressUtil.getInstance().tradeSplitPayUrl();
         source.getTrade().validateUpdate();
         target.getTrade().validateCreate();
         TradeSplitPayReq splitPayReq = new TradeSplitPayReq();
@@ -1670,12 +1665,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(splitPayReq)
                 .responseClass(PaymentResp.class)
                 .responseProcessor(new PaymentRespProcessor())
-                .execute(listener, "tradeSplitAndPayDinner");
+                .execute(listener, "tradeSplitAndPayDinner");*/
     }
 
     @Override
     public void tradeRepay(TradeVo tradeVo, Reason reason, ResponseListener<PaymentResp> listener) {
-        TradeRepayReq tradeRepayReq = toTradeRepayReq(tradeVo, reason);
+        /*TradeRepayReq tradeRepayReq = toTradeRepayReq(tradeVo, reason);
         boolean interceptEnable = Snack.isOfflineTrade(tradeVo);
         String url = ServerAddressUtil.getInstance().tradeRepayUrl();
         OpsRequest.Executor<TradeRepayReq, PaymentResp> executor = OpsRequest.Executor.create(url);
@@ -1683,7 +1678,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(PaymentResp.class)
                 .responseProcessor(new PaymentRespProcessor())
                 .interceptEnable(interceptEnable)
-                .execute(listener, "tradeRepayDinner");
+                .execute(listener, "tradeRepayDinner");*/
     }
 
     @Override
@@ -1699,17 +1694,17 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void modifyServiceDish(DishServiceReq dishServiceReq, ResponseListener<TradeItemResp> listener) {
-        String url = ServerAddressUtil.getInstance().modifyServiceDish();
+        /*String url = ServerAddressUtil.getInstance().modifyServiceDish();
         OpsRequest.Executor<DishServiceReq, TradeItemResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(dishServiceReq)
                 .responseClass(TradeItemResp.class)
                 .responseProcessor(new TradeItemRespProcessor())
-                .execute(listener, "modifyServiceDish");
+                .execute(listener, "modifyServiceDish");*/
     }
 
     @Override
     public void modifyServiceDishV2(DishServiceV2Req dishServiceReq, CalmResponseListener<ResponseObject<DishServiceV2Resp>> listener) {
-        CalmNetWorkRequest.with(BaseApplication.sInstance)
+        /*CalmNetWorkRequest.with(BaseApplication.sInstance)
                 .url(ServerAddressUtil.getInstance().modifyServiceDishV2())
                 .requestContent(dishServiceReq)
                 .responseClass(DishServiceV2Resp.class)
@@ -1725,57 +1720,57 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .successListener(listener)
                 .errorListener(listener)
                 .tag("modifyServiceDishV2")
-                .create();
+                .create();*/
     }
 
     @Override
     public void doCloseBill(CloseBillReq closeBillReq, ResponseListener<CloseBillResp> listener) {
-        String url = ServerAddressUtil.getInstance().doCloseBill();
+        /*String url = ServerAddressUtil.getInstance().doCloseBill();
         OpsRequest.Executor<CloseBillReq, CloseBillResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(closeBillReq).responseClass(CloseBillResp.class).timeout(30000).execute(listener,
-                "doCloseBill");
+                "doCloseBill");*/
     }
 
 
     @Override
     public void queryHandOverHistory(ResponseListener<ClosingHandOverResp> listener) {
-        String url = ServerAddressUtil.getInstance().queryCloseHandoverhistory();
+        /*String url = ServerAddressUtil.getInstance().queryCloseHandoverhistory();
         OpsRequest.Executor<NullReq, ClosingHandOverResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(new NullReq()).responseClass(ClosingHandOverResp.class).timeout(30000).execute(listener,
-                "queryHandoverHistory");
+                "queryHandoverHistory");*/
     }
 
     @Override
     public void queryHandOverHistory(ClosingReq req, ResponseListener<ClosingHandOverResp> listener) {
-        String url = ServerAddressUtil.getInstance().queryCloseHandoverhistory();
+        /*String url = ServerAddressUtil.getInstance().queryCloseHandoverhistory();
         OpsRequest.Executor<ClosingReq, ClosingHandOverResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req).responseClass(ClosingHandOverResp.class).timeout(30000).execute(listener,
-                "queryHandoverHistory");
+                "queryHandoverHistory");*/
     }
 
     @Override
     public void closeDetail(CloseDetailReq closeDetailReq, ResponseListener<CloseBillDataInfo> listener) {
-        String url = ServerAddressUtil.getInstance().doCloseDetail();
+        /*String url = ServerAddressUtil.getInstance().doCloseDetail();
         OpsRequest.Executor<CloseDetailReq, CloseBillDataInfo> executor = OpsRequest.Executor.create(url);
         executor.requestValue(closeDetailReq).responseClass(CloseBillDataInfo.class).timeout(15000).execute(listener,
-                "docloseDetail");
+                "docloseDetail");*/
     }
 
     @Override
     public void closeDetail(TransferReq transferReq, ResponseListener<TransferCloseBillData> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         OpsRequest.Executor<TransferReq, TransferCloseBillData> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq).responseClass(TransferCloseBillData.class).timeout(30000).execute(listener,
-                "doTransferCloseBill");
+                "doTransferCloseBill");*/
     }
 
 
     @Override
     public void queryCloseHistoryList(CloseHistoryReq closeHistoryReq, ResponseListener<CloseHistoryResp> listener) {
-        String url = ServerAddressUtil.getInstance().queryCloseHistoryList();
+        /*String url = ServerAddressUtil.getInstance().queryCloseHistoryList();
         OpsRequest.Executor<CloseHistoryReq, CloseHistoryResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(closeHistoryReq).responseClass(CloseHistoryResp.class).execute(listener,
-                "queryCloseHistory");
+                "queryCloseHistory");*/
     }
 
     private TradeRepayReq toTradeRepayReq(TradeVo tradeVo, Reason reason) {
@@ -3115,20 +3110,20 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void queryPaymentItem(String uuid, ResponseListener<PaymentItem> listener) {
-        String url = ServerAddressUtil.getInstance().queryModuleItem();
+        /*String url = ServerAddressUtil.getInstance().queryModuleItem();
         ModuleItemReq moduleItemReq = new ModuleItemReq("paymentItem", uuid);
         OpsRequest.Executor<ModuleItemReq, PaymentItem> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(moduleItemReq).responseClass(PaymentItem.class).execute(listener, "queryPaymentItem");
+        executor.requestValue(moduleItemReq).responseClass(PaymentItem.class).execute(listener, "queryPaymentItem");*/
     }
 
     @Override
     public void changeRefundStatus(RefundStatusReq req, ResponseListener<RefundStatusResp> listener) {
-        String url = ServerAddressUtil.getInstance().newChangeRefundStatus();
+        /*String url = ServerAddressUtil.getInstance().newChangeRefundStatus();
         OpsRequest.Executor<RefundStatusReq, RefundStatusResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(RefundStatusResp.class)
                 .responseProcessor(new UnionpayRefundStatusRespProcessor())
-                .execute(listener, "changeRefundStatus");
+                .execute(listener, "changeRefundStatus");*/
     }
 
     private static class UnionpayRefundStatusRespProcessor extends SaveDatabaseResponseProcessor<RefundStatusResp> {
@@ -3181,11 +3176,11 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
     @Override
     public void returnConfirm(Long tradeId, TradeReturnInfoReturnStatus returnStatus, boolean isReturnInventory, String requestUuid, Reason reason,
                               ResponseListener<Object> listener) {
-        ReturnConfirmReq req = toReturnConfirmReq(tradeId, returnStatus, requestUuid, reason);
+        /*ReturnConfirmReq req = toReturnConfirmReq(tradeId, returnStatus, requestUuid, reason);
         req.setReviseStock(isReturnInventory);
         String url = ServerAddressUtil.getInstance().returnConfirm();
         OpsRequest.Executor<ReturnConfirmReq, Object> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(Object.class).execute(listener, "returnConfirm");
+        executor.requestValue(req).responseClass(Object.class).execute(listener, "returnConfirm");*/
     }
 
     private ReturnConfirmReq toReturnConfirmReq(Long tradeId, TradeReturnInfoReturnStatus returnStatus,
@@ -3213,14 +3208,14 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void remindDish(Trade trade, List<Long> tradeItemIds, ResponseListener<TradeItemResp> listener) {
-        String url = ServerAddressUtil.getInstance().remindDish();
-        tradeItemOperation(url, trade, tradeItemIds, listener, "remindDish");
+        /*String url = ServerAddressUtil.getInstance().remindDish();
+        tradeItemOperation(url, trade, tradeItemIds, listener, "remindDish");*/
     }
 
     @Override
     public void riseDish(Trade trade, List<Long> tradeItemIds, ResponseListener<TradeItemResp> listener) {
-        String url = ServerAddressUtil.getInstance().riseDish();
-        tradeItemOperation(url, trade, tradeItemIds, listener, "riseDish");
+        /*String url = ServerAddressUtil.getInstance().riseDish();
+        tradeItemOperation(url, trade, tradeItemIds, listener, "riseDish");*/
     }
 
     private void tradeItemOperation(String url, Trade trade, List<Long> tradeItemIds,
@@ -3245,7 +3240,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void operationDish(Long tradeId, PrintOperationOpType opType, List<DishDataItem> selectedItems, ResponseListener<TradeItemResp> listener) {
-        String url = ServerAddressUtil.getInstance().optDish();
+        /*String url = ServerAddressUtil.getInstance().optDish();
         //AuthUser user = AuthUserCache.getAuthUser();
         OperationDishReq req = new OperationDishReq();
         req.setTradeId(tradeId);
@@ -3287,7 +3282,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         }
         req.setTradeItemOperations(optList);
         OpsRequest.Executor<OperationDishReq, TradeItemResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseProcessor(new TradeItemRespProcessor()).responseClass(TradeItemResp.class).execute(listener, "operationDish");
+        executor.requestValue(req).responseProcessor(new TradeItemRespProcessor()).responseClass(TradeItemResp.class).execute(listener, "operationDish");*/
     }
 
     @Override
@@ -3306,7 +3301,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
     @Override
     public void refreshReturnState(TradeVo tradeVo, ResponseListener<TradePayStateResp> listener) {
         // TODO Auto-generated method stub
-        TradePayStateReq payStateReq = new TradePayStateReq();
+        /*TradePayStateReq payStateReq = new TradePayStateReq();
         payStateReq.setTradeId(tradeVo.getTrade().getId());
         TradePayStatus tradePayStatus = tradeVo.getTrade().getTradePayStatus();
         String url = ServerAddressUtil.getInstance().refreshReturnStateUrl();
@@ -3315,7 +3310,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(payStateReq)
                 .responseClass(TradePayStateResp.class)
                 .responseProcessor(new TradePayStateResqProcessor())
-                .execute(listener, "refreshReturnState");
+                .execute(listener, "refreshReturnState");*/
     }
 
     @Override
@@ -3384,7 +3379,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
     @Override
     public void modifyMainTradePrintStatus(Long mainTradeId, List<TradeItem> tradeItems, List<PrintOperation> printOperations,
                                            List<TradeItemOperation> tradeItemOperations, ResponseListener<TradeItemResp> listener) {
-        String url = ServerAddressUtil.getInstance().modifyMainTradePrintStatus();
+        /*String url = ServerAddressUtil.getInstance().modifyMainTradePrintStatus();
         MainTradeModifyTradeItemPrintStatusReq req =
                 new MainTradeModifyTradeItemPrintStatusReq(mainTradeId, tradeItems, printOperations, tradeItemOperations);
         OpsRequest.Executor<MainTradeModifyTradeItemPrintStatusReq, TradeItemResp> executor = OpsRequest.Executor.create(url);
@@ -3392,13 +3387,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TradeItemResp.class)
                 .responseProcessor(new TradeItemRespProcessor())
                 .timeout(20000)//超时改为20秒 add 20170515
-                .execute(listener, "modifyPrintStatus");
+                .execute(listener, "modifyPrintStatus");*/
     }
 
     @Override
     public void modifySubTradePrintStatus(Long mainTradeId, Long subTradeId, List<TradeItem> tradeItems, List<PrintOperation> printOperations,
                                           List<TradeItemOperation> tradeItemOperations, ResponseListener<TradeItemResp> listener) {
-        String url = ServerAddressUtil.getInstance().modifySubTradePrintStatus();
+        /*String url = ServerAddressUtil.getInstance().modifySubTradePrintStatus();
         SubTradeModifyTradeItemPrintStatusReq req =
                 new SubTradeModifyTradeItemPrintStatusReq(mainTradeId, subTradeId, tradeItems, printOperations, tradeItemOperations);
         OpsRequest.Executor<SubTradeModifyTradeItemPrintStatusReq, TradeItemResp> executor = OpsRequest.Executor.create(url);
@@ -3406,35 +3401,35 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TradeItemResp.class)
                 .responseProcessor(new TradeItemRespProcessor())
                 .timeout(20000)//超时改为20秒 add 20170515
-                .execute(listener, "modifyPrintStatus");
+                .execute(listener, "modifyPrintStatus");*/
     }
 
     @Override
     public void tradeFinish(Long tradeId, ResponseListener<TradeFinishResp> listener) {
-        String url = ServerAddressUtil.getInstance().tradeFinish();
+        /*String url = ServerAddressUtil.getInstance().tradeFinish();
         AuthUser user = Session.getAuthUser();
         TradeFinishReq req = new TradeFinishReq(tradeId, user.getId(), user.getName());
         OpsRequest.Executor<TradeFinishReq, TradeFinishResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(TradeFinishResp.class)
                 .responseProcessor(new TradeFinishRespProcessor())
-                .execute(listener, "tradeFinish");
+                .execute(listener, "tradeFinish");*/
     }
 
     @Override
     public void buffetDepositRefund(Long tradeId, BigDecimal depositRefund, Long paymentItemId, Reason reason, ResponseListener<PayResp> listener) {
-        String url = ServerAddressUtil.getInstance().buffetBackDepositUrl();
+        /*String url = ServerAddressUtil.getInstance().buffetBackDepositUrl();
         OpsRequest.Executor<BuffetDepositRefundReq, PayResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(toBuffetDepositRefundReq(tradeId, depositRefund, paymentItemId, reason))
                 .responseClass(PayResp.class)
                 .responseProcessor(new ReturnDepositRespProcessor())
-                .execute(listener, "buffetDepositRefund");
+                .execute(listener, "buffetDepositRefund");*/
     }
 
 
     @Override
     public void buffetFinishAndDepositRefund(Long tradeId, BigDecimal depositRefund, Long paymentItemId, Reason reason, ResponseListener<PayResp> listener) {
-        String url = ServerAddressUtil.getInstance().buffetFinishAndDepositRefund();
+        /*String url = ServerAddressUtil.getInstance().buffetFinishAndDepositRefund();
         OpsRequest.Executor<BuffetFinishDepositRefundReq, PayResp> executor = OpsRequest.Executor.create(url);
 
         BuffetFinishDepositRefundReq req = new BuffetFinishDepositRefundReq();
@@ -3447,7 +3442,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseClass(PayResp.class)
                 .responseProcessor(new ReturnDepositRespProcessor())
-                .execute(listener, "buffetDepositRefund");
+                .execute(listener, "buffetDepositRefund");*/
     }
 
     private BuffetDepositRefundReq toBuffetDepositRefundReq(Long tradeId, BigDecimal depositRefund, Long paymentItemId, Reason reason) {
@@ -3474,12 +3469,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
     @Override
     public void depositRefund(Long tradeId, BigDecimal depositRefund, Long payModeId, Reason reason,
                               ResponseListener<DepositRefundResp> listener) {
-        String url = ServerAddressUtil.getInstance().backDepositUrl();
+        /*String url = ServerAddressUtil.getInstance().backDepositUrl();
         OpsRequest.Executor<DepositRefundReq, DepositRefundResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(toDepositRefundReq(tradeId, depositRefund, payModeId, reason))
                 .responseClass(DepositRefundResp.class)
                 .responseProcessor(new DepositRefundProcessor())
-                .execute(listener, "depositRefund");
+                .execute(listener, "depositRefund");*/
     }
 
     private DepositRefundReq toDepositRefundReq(Long tradeId, BigDecimal depositRefund, Long payModeId, Reason reason) {
@@ -3568,17 +3563,17 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
     @Override
     public void moveDish(TradeVo sourceTradeVo, TradeVo targetTradeVo, List<TradeItem> tradeItems,
                          ResponseListener<TradeResp> listener, Integer actionType, Integer moveAdd) {
-        if (Utils.isEmpty(sourceTradeVo.getTradeItemList())) {
+        /*if (Utils.isEmpty(sourceTradeVo.getTradeItemList())) {
             return;
         }
 
         String url = ServerAddressUtil.getInstance().moveDish();
-        /*
+        *//*
          * List<TradeItem> tradeItems = new
          * ArrayList<TradeItem>(); for(TradeItemVo
          * tradeItemVo : sourceTradeVo.getTradeItemList()){
          * tradeItems.add(tradeItemVo.getTradeItem()); }
-         */
+         *//*
         List<TradePrivilege> tradePrivilegeList = sourceTradeVo.getTradePrivileges();
         if (tradePrivilegeList == null) {
             tradePrivilegeList = new ArrayList<TradePrivilege>();
@@ -3662,19 +3657,19 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor())
-                .execute(listener, "moveDish");
+                .execute(listener, "moveDish");*/
     }
 
     @Override
     public void doLag(TradeVo tradeVo, LagReq lagReq, ResponseListener<LagResp> listener) {
-        String url = ServerAddressUtil.getInstance().getLagUrl();
+        /*String url = ServerAddressUtil.getInstance().getLagUrl();
         TradeReq tradeReq = toTradeReq(tradeVo, true);
         lagReq.setTradeModifyRequest(tradeReq);
         OpsRequest.Executor<LagReq, LagResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(lagReq)
                 .responseClass(LagResp.class)
                 .responseProcessor(new LagRespProcessor())
-                .execute(listener, "doLag");
+                .execute(listener, "doLag");*/
     }
 
 
@@ -3719,46 +3714,46 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void getGoodsSaleRank(GoodsSellRankPrintReq req, ResponseListener<GoodsSellRankResp> listener) {
-        String url = ServerAddressUtil.getInstance().getGoodsSaleRank();
+        /*String url = ServerAddressUtil.getInstance().getGoodsSaleRank();
         OpsRequest.Executor<GoodsSellRankPrintReq, GoodsSellRankResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(GoodsSellRankResp.class)
-                .execute(listener, "getGoodsSaleRank");
+                .execute(listener, "getGoodsSaleRank");*/
     }
 
     @Override
     public void getGoodsSaleRankPrint(TransferReq<GoodsSellRankPrintReq> req, ResponseListener<MindTransferResp<GoodsSellRankPrintResp>> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         OpsRequest.Executor<TransferReq<GoodsSellRankPrintReq>, MindTransferResp<GoodsSellRankPrintResp>> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, GoodsSellRankPrintResp.class))
                 .interceptEnable(true)
                 .addRouter("/mind/innerApi/pos/print")
-                .execute(listener, "getGoodsSaleRankPrint");
+                .execute(listener, "getGoodsSaleRankPrint");*/
     }
 
     @Override
     public void getBusinessCharge(TransferReq<BusinessChargeReq> req, ResponseListener<MindTransferResp<BusinessChargeResp>> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         OpsRequest.Executor<TransferReq<BusinessChargeReq>, MindTransferResp<BusinessChargeResp>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseType(OpsRequest.getContentResponseType(MindTransferResp.class, BusinessChargeResp.class)).execute(listener, "getBusinessCharge");
+        executor.requestValue(req).responseType(OpsRequest.getContentResponseType(MindTransferResp.class, BusinessChargeResp.class)).execute(listener, "getBusinessCharge");*/
     }
 
     @Override
     public void batchUploadAuthLog(List<AuthorizedLog> authorizedLogList, ResponseListener<AuthLogResp> listener) {
-        String url = ServerAddressUtil.getInstance().getAuthLogUploadUrl();
+        /*String url = ServerAddressUtil.getInstance().getAuthLogUploadUrl();
         AuthLogReq logReq = new AuthLogReq();
         logReq.setAuthorizedLogs(authorizedLogList);
         OpsRequest.Executor<AuthLogReq, AuthLogResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(logReq)
                 .responseClass(AuthLogResp.class)
-                .execute(listener, "batchUploadAuthLog");
+                .execute(listener, "batchUploadAuthLog");*/
 
     }
 
     @Override
     public void acceptAddItem(TradeVo tradeVo, AddItemVo addItemVo, boolean isAcceptAutoTransferOpen, ResponseListener<TradeResp> listener) {
-        if (addItemVo == null) {
+        /*if (addItemVo == null) {
             return;
         }
 
@@ -3779,12 +3774,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor());
 
-        executor.execute(listener, "acceptAddItem");
+        executor.execute(listener, "acceptAddItem");*/
     }
 
     @Override
     public void refuseAddItem(AddItemVo addItemVo, ResponseListener<TradeResp> listener) {
-        if (addItemVo == null) {
+        /*if (addItemVo == null) {
             return;
         }
         String url = ServerAddressUtil.getInstance().refuseAddItem();
@@ -3796,30 +3791,30 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor());
 
-        executor.execute(listener, "refuseAddItem");
+        executor.execute(listener, "refuseAddItem");*/
     }
 
     @Override
     public void sendOrder(DispatchOrderReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().getSendOrderUrl();
+        /*String url = ServerAddressUtil.getInstance().getSendOrderUrl();
         OpsRequest.Executor<DispatchOrderReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(TradeResp.class)
                 .responseProcessor(new TradeRespProcessor())
-                .execute(listener, "sendOrder");
+                .execute(listener, "sendOrder");*/
     }
 
 
     @Override
     public void cancelDeliveryOrder(CancelDeliveryOrderReq req, ResponseListener<GatewayTransferResp<CancelDeliveryOrderResp>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String cancelOrderUrl = ServerAddressUtil.getInstance().getCancelDeliveryOrderUrl();
         TransferReq<GatewayTransferReq<CancelDeliveryOrderReq>> transferReq = new TransferReq<GatewayTransferReq<CancelDeliveryOrderReq>>(cancelOrderUrl, new GatewayTransferReq<CancelDeliveryOrderReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<CancelDeliveryOrderResp>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, CancelDeliveryOrderResp.class))
                 .responseProcessor(new CancelDeliveryOrderRespProcessor())
-                .execute(listener, transferUrl);
+                .execute(listener, transferUrl);*/
     }
 
     private static class CancelDeliveryOrderRespProcessor extends SaveDatabaseResponseProcessor<GatewayTransferResp<CancelDeliveryOrderResp>> {
@@ -3838,7 +3833,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void exChangeTable(TableTradeVo oldTableTradeVo, Tables newTable, ResponseListener<ExChangeTableResp> listener) {
-        String url = ServerAddressUtil.getInstance().transferDinnertable();
+        /*String url = ServerAddressUtil.getInstance().transferDinnertable();
         ExChangeTableReq req = new ExChangeTableReq();
         AuthUser user = Session.getAuthUser();
         if (user != null) {
@@ -3868,7 +3863,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseClass(ExChangeTableResp.class)
                 .responseProcessor(new ExChangeableRespProcessor())
-                .execute(listener, "exChangetable");
+                .execute(listener, "exChangetable");*/
     }
 
     /**
@@ -3894,25 +3889,25 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void invoiceQrcode(InvoiceQrcodeReq req, ResponseListener<GatewayTransferResp<InvoiceQrcodeResp>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String invoiceQrcodeUrl = ServerAddressUtil.getInstance().invoiceQrcode();
         TransferReq<GatewayTransferReq<InvoiceQrcodeReq>> transferReq = new TransferReq<GatewayTransferReq<InvoiceQrcodeReq>>(invoiceQrcodeUrl, new GatewayTransferReq<InvoiceQrcodeReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<InvoiceQrcodeResp>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, InvoiceQrcodeResp.class))
                 .responseProcessor(new InvoiceQrcodeRespProcessor())
-                .execute(listener, invoiceQrcodeUrl);//用gateway的url作为请求的tag
+                .execute(listener, invoiceQrcodeUrl);//用gateway的url作为请求的tag*/
     }
 
     @Override
     public void invoiceFHQrcode(FHInvoiceQrcodeReq req, ResponseListener<GatewayTransferResp<FHInvoiceQrcodeResp>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String invoiceFHQrcodeUrl = ServerAddressUtil.getInstance().invoiceFHQrcode();
         TransferReq<GatewayTransferReq<FHInvoiceQrcodeReq>> transferReq = new TransferReq<GatewayTransferReq<FHInvoiceQrcodeReq>>(invoiceFHQrcodeUrl, new GatewayTransferReq<FHInvoiceQrcodeReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<FHInvoiceQrcodeResp>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, FHInvoiceQrcodeResp.class))
-                .execute(listener, invoiceFHQrcodeUrl);//用gateway的url作为请求的tag
+                .execute(listener, invoiceFHQrcodeUrl);//用gateway的url作为请求的tag*/
     }
 
     /**
@@ -3923,13 +3918,13 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
      */
     @Override
     public void queryBalanceFH(FHQueryBalanceReq req, ResponseListener<GatewayTransferResp<FHQueryBalanceResp>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String queryBalanceFHUrl = ServerAddressUtil.getInstance().queryBalanceFH();
         TransferReq<GatewayTransferReq<FHQueryBalanceReq>> transferReq = new TransferReq<GatewayTransferReq<FHQueryBalanceReq>>(queryBalanceFHUrl, new GatewayTransferReq<FHQueryBalanceReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<FHQueryBalanceResp>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, FHQueryBalanceResp.class))
-                .execute(listener, queryBalanceFHUrl);//用gateway的url作为请求的tag
+                .execute(listener, queryBalanceFHUrl);//用gateway的url作为请求的tag*/
     }
 
     /**
@@ -3954,59 +3949,59 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void invoiceRevoke(InvoiceRevokeReq req, ResponseListener<GatewayTransferResp<Invoice>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String invoiceRevokeUrl = ServerAddressUtil.getInstance().invoiceRevoke();
         TransferReq<GatewayTransferReq<InvoiceRevokeReq>> transferReq = new TransferReq<GatewayTransferReq<InvoiceRevokeReq>>(invoiceRevokeUrl, new GatewayTransferReq<InvoiceRevokeReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<Invoice>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, Invoice.class))
                 .responseProcessor(new InvoiceRevokeRespProcessor())
-                .execute(listener, invoiceRevokeUrl);//用gateway的url作为请求的tag
+                .execute(listener, invoiceRevokeUrl);//用gateway的url作为请求的tag*/
     }
 
     @Override
     public void queryDeliveryFee(QueryDeliveryFeeReq req, ResponseListener<GatewayTransferResp<QueryDeliveryFeeResp>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String queryDeliveryFeeUrl = ServerAddressUtil.getInstance().queryDeliveryFee();
         TransferReq<GatewayTransferReq<QueryDeliveryFeeReq>> transferReq = new TransferReq<GatewayTransferReq<QueryDeliveryFeeReq>>(queryDeliveryFeeUrl, new GatewayTransferReq<QueryDeliveryFeeReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<QueryDeliveryFeeResp>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, QueryDeliveryFeeResp.class))
-                .execute(listener, queryDeliveryFeeUrl);//用gateway的url作为请求的tag
+                .execute(listener, queryDeliveryFeeUrl);//用gateway的url作为请求的tag*/
     }
 
     @Override
     public void batchQueryDeliveryFee(BatchQueryDeliveryFeeReq req, ResponseListener<GatewayTransferResp<JsonArray>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String batchQueryDeliveryFeeUrl = ServerAddressUtil.getInstance().batchQueryDeliveryFee();
         TransferReq<GatewayTransferReq<BatchQueryDeliveryFeeReq>> transferReq = new TransferReq<>(batchQueryDeliveryFeeUrl, new GatewayTransferReq<BatchQueryDeliveryFeeReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<JsonArray>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, JsonArray.class))
-                .execute(listener, batchQueryDeliveryFeeUrl);
+                .execute(listener, batchQueryDeliveryFeeUrl);*/
     }
 
     @Override
     public void deliveryOrderDispatch(DeliveryOrderDispatchReq req, ResponseListener<GatewayTransferResp<DeliveryOrderDispatchResp>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String deliveryOrderDispatchUrl = ServerAddressUtil.getInstance().deliveryOrderDispatch();
         TransferReq<GatewayTransferReq<DeliveryOrderDispatchReq>> transferReq = new TransferReq<GatewayTransferReq<DeliveryOrderDispatchReq>>(deliveryOrderDispatchUrl, new GatewayTransferReq<DeliveryOrderDispatchReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<DeliveryOrderDispatchResp>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, DeliveryOrderDispatchResp.class))
-                .execute(listener, deliveryOrderDispatchUrl);//用gateway的url作为请求的tag
+                .execute(listener, deliveryOrderDispatchUrl);//用gateway的url作为请求的tag*/
     }
 
     @Override
     public void deliveryOrderList(DeliveryOrderListReq req, ResponseListener<GatewayTransferResp<DeliveryOrderListResp>> listener) {
-        String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
+        /*String transferUrl = ServerAddressUtil.getInstance().getGatewayTransfer();
         String deliveryOrderListUrl = ServerAddressUtil.getInstance().deliveryOrderList();
         TransferReq<GatewayTransferReq<DeliveryOrderListReq>> transferReq = new TransferReq<GatewayTransferReq<DeliveryOrderListReq>>(deliveryOrderListUrl, new GatewayTransferReq<DeliveryOrderListReq>(req));
         OpsRequest.Executor<TransferReq, GatewayTransferResp<DeliveryOrderListResp>> executor = OpsRequest.Executor.create(transferUrl);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, DeliveryOrderListResp.class))
                 .responseProcessor(new DeliveryOrderListRespProcessor())
-                .execute(listener, deliveryOrderListUrl);//用gateway的url作为请求的tag
+                .execute(listener, deliveryOrderListUrl);//用gateway的url作为请求的tag*/
     }
 
     /**
@@ -4032,12 +4027,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void refundCheck(Long tradeId, Long paymentItemId, SimpleResponseListener<RefundCheckResp> listener) {
-        String url = ServerAddressUtil.getInstance().getRefundCheck();
+        /*String url = ServerAddressUtil.getInstance().getRefundCheck();
         RefundCheckRequest req = new RefundCheckRequest(tradeId, paymentItemId);
         OpsRequest.Executor<RefundCheckRequest, RefundCheckResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(RefundCheckResp.class)
-                .execute(listener, "refundCheck");
+                .execute(listener, "refundCheck");*/
     }
 
     @Override
@@ -4052,7 +4047,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void refundSubmit(Long tradeId, Long paymentItemId, BigDecimal refundFee, SimpleResponseListener<RefundSubmitResp> listener) {
-        String url = ServerAddressUtil.getInstance().getRefundSubmit();
+        /*String url = ServerAddressUtil.getInstance().getRefundSubmit();
         RefundSubmitRequest req = new RefundSubmitRequest(tradeId, paymentItemId, refundFee);
         OpsRequest.Executor<RefundSubmitRequest, RefundSubmitResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
@@ -4064,12 +4059,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                         DBHelperManager.saveEntities(helper, PaymentItem.class, resp.paymentItems);
                     }
                 })
-                .execute(listener, "refundSubmit");
+                .execute(listener, "refundSubmit");*/
     }
 
     @Override
     public void takeDish(TradeExtra tradeExtra, FragmentActivity activity, CalmResponseListener<ResponseObject<TakeDishResp>> listener) {
-        TakeDishReq req = new TakeDishReq();
+        /*TakeDishReq req = new TakeDishReq();
         req.setTradeId(tradeExtra.getTradeId());
         req.setTakeDishStatus(Integer.valueOf(TakeDishStatus.HAVE_TAKE_DISH.value()));
         req.setClientUpdateTime(System.currentTimeMillis());
@@ -4095,12 +4090,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                     }
                 })
                 .tag(ServerAddressUtil.getInstance().getChangeTakeDishStatusUrl())
-                .create();
+                .create();*/
     }
 
     @Override
     public void insertBuffetNoTable(TradeVo tradeVo, AuthUser waiter, ResponseListener<BuffetNoTableTradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().buffetNoTabletradeInsert();
+        /*String url = ServerAddressUtil.getInstance().buffetNoTabletradeInsert();
         tradeVo.getTrade().validateCreate();
         TradeReq tradeReq = toTradeReq(tradeVo);
         //增加默认税率
@@ -4130,17 +4125,17 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                         DBHelperManager.saveEntities(helper, TradeInitConfig.class, resp.getTradeInitConfigs());
                     }
                 })
-                .execute(listener, "buffetNoTableTradeCreate");
+                .execute(listener, "buffetNoTableTradeCreate");*/
     }
 
     @Override
     public void usePrivilege(Trade trade, BusinessType businessType, Long customerId, String entityCardNo, Collection<TradePrivilege> tradePrivileges, QSResponseListener<UsePrivilegeResp> listener) {
-        String usePrivilegeUrl = ServerAddressUtil.getInstance().getUsePrivilegeUrl();
+        /*String usePrivilegeUrl = ServerAddressUtil.getInstance().getUsePrivilegeUrl();
         UsePrivilegeReq req = toUsePrivilegeReq(trade, businessType, customerId, entityCardNo, tradePrivileges);
         QSOpsRequest.Executor<UsePrivilegeReq, UsePrivilegeResp> executor = QSOpsRequest.Executor.create(usePrivilegeUrl);
         executor.requestValue(req)
                 .responseClass(UsePrivilegeResp.class)
-                .execute(listener, "use_privilege");
+                .execute(listener, "use_privilege");*/
     }
 
     private UsePrivilegeReq toUsePrivilegeReq(Trade trade, BusinessType businessType, Long customerId, String entityCardNo, Collection<TradePrivilege> tradePrivileges) {
@@ -4209,7 +4204,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void requestAddFee(Long deliveryOrderId, Integer deliveryPlatform, Double amount, ResponseListener<GatewayTransferResp<AddFeeResp>> listener) {
-        AddFeeReq req = new AddFeeReq();
+        /*AddFeeReq req = new AddFeeReq();
         req.setShopIdenty(BaseApplication.sInstance.getShopIdenty());
         req.setDeliveryOrderId(deliveryOrderId);
         req.setDeliveryPlatform(deliveryPlatform);
@@ -4225,17 +4220,17 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(GatewayTransferResp.class, AddFeeResp.class))
                 .responseProcessor(new AddFeeRespProcessor())
-                .execute(listener, addFee);//用gateway的url作为请求的tag
+                .execute(listener, addFee);//用gateway的url作为请求的tag*/
     }
 
     @Override
     public void pay4QS(UsePayReq req, QSResponseListener<UsePayResp> listener) {
-        String pay4QSUrl = ServerAddressUtil.getInstance().getPay4QSUrl();
+        /*String pay4QSUrl = ServerAddressUtil.getInstance().getPay4QSUrl();
         QSOpsRequest.Executor<UsePayReq, UsePayResp> executor = QSOpsRequest.Executor.create(pay4QSUrl);
         executor.requestValue(req)
                 .responseClass(UsePayResp.class)
                 .responseProcessor(new UsePayRespProcessor())
-                .execute(listener, "pay4QS");
+                .execute(listener, "pay4QS");*/
     }
 
     private static class UsePayRespProcessor extends QSOpsRequest.SaveDatabaseResponseProcessor<UsePayResp> {
@@ -4320,37 +4315,37 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void bindDeliveryUser(BindOrderReq req, ResponseListener<BindOrderResp> listener) {
-        String url = ServerAddressUtil.getInstance().getBindOrderUrl();
+        /*String url = ServerAddressUtil.getInstance().getBindOrderUrl();
         OpsRequest.Executor<BindOrderReq, BindOrderResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new BindOrderRespProcessor())
                 .responseClass(BindOrderResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void creatUnionTrade(UnionTradeReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().getCreatUnionTradesUrl();
+        /*String url = ServerAddressUtil.getInstance().getCreatUnionTradesUrl();
         OpsRequest.Executor<UnionTradeReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void splitUnionTrade(UnionTradeSplitReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().getSplitUnionTradesUrl();
+        /*String url = ServerAddressUtil.getInstance().getSplitUnionTradesUrl();
         OpsRequest.Executor<UnionTradeSplitReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void modifyUnionMainTrade(TradeVo tradeVo, TradeUnionModifyMainWarpReq req, ResponseListener<TradeResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().getModifyUnionMainTrade();
+        /*String url = ServerAddressUtil.getInstance().getModifyUnionMainTrade();
         OpsRequest.Executor<TradeUnionModifyMainWarpReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
@@ -4360,12 +4355,12 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             AsyncNetworkManager.getInstance().addRequest(tradeVo, AsyncHttpType.UNION_MAIN_MODIFYTRADE, executor, listener, "modifyUnionMainTrade");
         } else {
             executor.execute(listener, url);
-        }
+        }*/
     }
 
     @Override
     public void modifyUnionSubTrade(TradeVo tradeVo, TradeUnionModifySubWarpReq req, ResponseListener<TradeResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().getModifyUnionSubTrade();
+        /*String url = ServerAddressUtil.getInstance().getModifyUnionSubTrade();
         OpsRequest.Executor<TradeUnionModifySubWarpReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
@@ -4374,27 +4369,27 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             AsyncNetworkManager.getInstance().addRequest(tradeVo, AsyncHttpType.UNION_SUB_MODIFYTRADE, executor, listener, "modifyUnionMainTrade");
         } else {
             executor.execute(listener, url);
-        }
+        }*/
     }
 
     @Override
     public void unionAndModifyUnionTrade(UnionAndModifyUnionTradeReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().getUnionAndModifyUrl();
+        /*String url = ServerAddressUtil.getInstance().getUnionAndModifyUrl();
         OpsRequest.Executor<UnionAndModifyUnionTradeReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void unionOperationDish(UnionTradeItemOperationReq req, ResponseListener<TradeItemResp> listener) {
-        String url = ServerAddressUtil.getInstance().getUnionTradeItemOperation();
+        /*String url = ServerAddressUtil.getInstance().getUnionTradeItemOperation();
         OpsRequest.Executor<UnionTradeItemOperationReq, TradeItemResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeItemRespProcessor())
                 .responseClass(TradeItemResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     /**
@@ -4425,7 +4420,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void modifyServiceUnionDish(DishServiceV2Req dishServiceReq, CalmResponseListener<ResponseObject<DishServiceV2Resp>> listener, TradeType type) {
-        String url;
+        /*String url;
         if (type == TradeType.UNOIN_TABLE_MAIN) {
             url = ServerAddressUtil.getInstance().modifyServiceUnionMainDish(); // 主单地址
         } else {
@@ -4449,7 +4444,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                 .successListener(listener)
                 .errorListener(listener)
                 .tag("modifyServiceUnionDish")
-                .create();
+                .create();*/
     }
 
     // add v8.5 by yutang for openplatform tradeInfo
@@ -4465,7 +4460,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void modifyTradeMemo(Trade trade, String newMemo, ResponseListener<ModifyTradeMemoResp> listener) {
-        final ModifyTradeMemoReq req = new ModifyTradeMemoReq();
+        /*final ModifyTradeMemoReq req = new ModifyTradeMemoReq();
         req.tradeId = trade.getId();
         req.serverUpdateTime = trade.getServerUpdateTime();
         req.tradeMemo = newMemo;
@@ -4488,22 +4483,22 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
                         return null;
                     }
                 }).responseClass(ModifyTradeMemoResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void buffetUnionTableCreate(BuffetUnionTradeReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().buffetUnionTableUrl();
+        /*String url = ServerAddressUtil.getInstance().buffetUnionTableUrl();
         OpsRequest.Executor<BuffetUnionTradeReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void buffetModifyUnionSubTrade(TradeVo tradeVo, TradeUnionModifySubWarpReq req, ResponseListener<TradeResp> listener, boolean isAsync) {
-        String url = ServerAddressUtil.getInstance().buffetModifyUnionSubTrade();
+        /*String url = ServerAddressUtil.getInstance().buffetModifyUnionSubTrade();
         OpsRequest.Executor<TradeUnionModifySubWarpReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
@@ -4512,16 +4507,16 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
             AsyncNetworkManager.getInstance().addRequest(tradeVo, AsyncHttpType.UNION_SUB_MODIFYTRADE, executor, listener, "modifyUnionMainTrade");
         } else {
             executor.execute(listener, url);
-        }
+        }*/
     }
 
     public void buffetSplitTrade(BuffetUnionTradeCancelReq req, ResponseListener<BuffetUnionTradeCancelResp> listener) {
-        String url = ServerAddressUtil.getInstance().buffetSplitTradeUrl();
+        /*String url = ServerAddressUtil.getInstance().buffetSplitTradeUrl();
         OpsRequest.Executor<BuffetUnionTradeCancelReq, BuffetUnionTradeCancelResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new BuffetUnionTradeCancelRespProcessor())
                 .responseClass(BuffetUnionTradeCancelResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     /**
@@ -4547,28 +4542,28 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
 
     @Override
     public void buffetUnionMainTradeModify(BuffetMainTradeModifyReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().buffetModifyUnionMainTrade();
+        /*String url = ServerAddressUtil.getInstance().buffetModifyUnionMainTrade();
         OpsRequest.Executor<BuffetMainTradeModifyReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
 
     }
 
     @Override
     public void buffetUnionFinish(BuffetMergeUnionReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().buffetUnionFinish();
+        /*String url = ServerAddressUtil.getInstance().buffetUnionFinish();
         OpsRequest.Executor<BuffetMergeUnionReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void buffetCreateMenu(TradeVo tradeVo, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().buffetCreateMenu();
+        /*String url = ServerAddressUtil.getInstance().buffetCreateMenu();
         BuffetCreateMenuReq req = new BuffetCreateMenuReq();
         req.setMainTrade(tradeVo.getTrade());
         TradeItem menuTradeItem = tradeVo.getMealShellVo().getTradeItem();
@@ -4606,54 +4601,54 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void memberWriteoff(WriteoffReq req, ResponseListener<WriteoffResp> listener) {
-        String url = ServerAddressUtil.getInstance().writeoffUrl();
+        /*String url = ServerAddressUtil.getInstance().writeoffUrl();
         OpsRequest.Executor<WriteoffReq, WriteoffResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(WriteoffResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void queryInvoiceNo(GetTaxNoReq req, ResponseListener<GetTaxNoResp> listener) {
-        String url = ServerAddressUtil.getInstance().getTaxNoUrl();
+        /*String url = ServerAddressUtil.getInstance().getTaxNoUrl();
         OpsRequest.Executor<GetTaxNoReq, GetTaxNoResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new GetTaxNoProcessor())
                 .timeout(6000)
                 .responseClass(GetTaxNoResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void createPrePayTrade(PrePayTradeReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().getPrePayTrade();
+        /*String url = ServerAddressUtil.getInstance().getPrePayTrade();
         OpsRequest.Executor<PrePayTradeReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void deletePrePayTrade(DeletePrePayTradeReq req, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().deletePrePayTrade();
+        /*String url = ServerAddressUtil.getInstance().deletePrePayTrade();
         OpsRequest.Executor<DeletePrePayTradeReq, TradeResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     /**
      * v8.12.0 口碑验证
      */
     public void koubeiVerification(String code, ResponseListener<KouBeiVerifyResp> listener) {
-        String url = ServerAddressUtil.getInstance().verifyKoubei();
+        /*String url = ServerAddressUtil.getInstance().verifyKoubei();
         KouBeiVerifyReq verifyReq = new KouBeiVerifyReq();
         verifyReq.verifyOrderId = code;
         verifyReq.shopId = ShopInfoCfg.getInstance().shopId;
@@ -4661,7 +4656,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(verifyReq)
                 .responseClass(KouBeiVerifyResp.class)
                 .responseProcessor(new KoubeiVerifyProcessor())
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     /**
@@ -4684,7 +4679,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
     }
 
     public void getWriteOffOnlinePayResult(String tradeNo, PayType payType, ResponseListener<WriteoffOnlineResultResp> listener) {
-        WriteoffOnlineResultReq req = new WriteoffOnlineResultReq();
+        /*WriteoffOnlineResultReq req = new WriteoffOnlineResultReq();
         req.outTradeNo = tradeNo;
         String url = null;
         if (payType == PayType.QCODE) {//顾客主扫
@@ -4695,31 +4690,31 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         OpsRequest.Executor<WriteoffOnlineResultReq, WriteoffOnlineResultResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(WriteoffOnlineResultResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     public void useEarnestDeduct(EarnestDeductReq req, ResponseListener<PayResp> listener) {
-        String url = ServerAddressUtil.getInstance().getEarnestToPayUrl();
+        /*String url = ServerAddressUtil.getInstance().getEarnestToPayUrl();
         OpsRequest.Executor<EarnestDeductReq, PayResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new PayRespProcessor())
                 .responseClass(PayResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void bookingRrePayRefund(PrePayRefundReq req, ResponseListener<PayResp> listener) {
-        String url = ServerAddressUtil.getInstance().prePayRefund();
+        /*String url = ServerAddressUtil.getInstance().prePayRefund();
         OpsRequest.Executor<PrePayRefundReq, PayResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseProcessor(new PayRespProcessor())
                 .responseClass(PayResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     @Override
     public void recisionUnionTrade(Long tradeId, Long serverUpdateTime, Reason reason, List<InventoryItemReq> inventoryItems, ResponseListener<TradeResp> listener) {
-        String url = ServerAddressUtil.getInstance().unionTradeRecision();
+        /*String url = ServerAddressUtil.getInstance().unionTradeRecision();
 
         TradeUnionDeleteReq req = new TradeUnionDeleteReq();
         req.tradeId = tradeId;
@@ -4739,7 +4734,7 @@ public class TradeOperatesImpl extends AbstractOpeartesImpl implements TradeOper
         executor.requestValue(req)
                 .responseProcessor(new TradeRespProcessor())
                 .responseClass(TradeResp.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
 }

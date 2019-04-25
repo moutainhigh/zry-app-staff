@@ -28,13 +28,13 @@ class BeautyCustomerOperatesImpl : AbstractOpeartesImpl, BeautyCustomerOperates 
      * 获取次卡服务
      */
     override fun getCardServiceInfo(userId: Long, customerId: Long, listener: ResponseListener<BeautyCardServiceResp>) {
-        val req = toBeautyCardServiceReq(userId, customerId)
+        /*val req = toBeautyCardServiceReq(userId, customerId)
         val transferUrl = ServerAddressUtil.getInstance().loyaltyTransfer()
         val transferReq = TransferReq<BeautyCardServiceReq>()
         transferReq.url = BeautyServerAddressUtil.cardServiceInfo()
         transferReq.setPostData(req)
         val executor = OpsRequest.Executor.create<TransferReq<BeautyCardServiceReq>, BeautyCardServiceResp>(transferUrl)
-        executor.requestValue(transferReq).responseClass(BeautyCardServiceResp::class.java).execute(listener, "getCardServiceInfo")
+        executor.requestValue(transferReq).responseClass(BeautyCardServiceResp::class.java).execute(listener, "getCardServiceInfo")*/
     }
 
     override fun getCardServiceInfo(userId: Long, customerId: Long, listener: YFResponseListener<YFResponseList<BeautyCardServiceInfo>>) {
@@ -68,13 +68,13 @@ class BeautyCustomerOperatesImpl : AbstractOpeartesImpl, BeautyCustomerOperates 
      * 卡服务历史
      */
     override fun queryConsumeProject(userId: Long, cardNo: String, listener: ResponseListener<BeautyCardServiceHistoryResp>) {
-        val req = toBeautyCardServiceHistortReq(userId, cardNo)
+        /*val req = toBeautyCardServiceHistortReq(userId, cardNo)
         val transferUrl = ServerAddressUtil.getInstance().loyaltyTransfer()
         val transferReq = TransferReq<BeautyCardServiceHistoryReq>()
         transferReq.url = BeautyServerAddressUtil.cardServiceHistory()
         transferReq.setPostData(req)
         val executor = OpsRequest.Executor.create<TransferReq<BeautyCardServiceHistoryReq>, BeautyCardServiceHistoryResp>(transferUrl)
-        executor.requestValue(transferReq).responseClass(BeautyCardServiceHistoryResp::class.java).execute(listener, "queryConsumeProject")
+        executor.requestValue(transferReq).responseClass(BeautyCardServiceHistoryResp::class.java).execute(listener, "queryConsumeProject")*/
     }
 
 

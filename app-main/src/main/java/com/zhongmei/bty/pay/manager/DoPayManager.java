@@ -630,7 +630,7 @@ public class DoPayManager extends DoPayApi<PayResp> {
                     }
                     break;
                 case ENTITY_CARD_CHANGE:
-                    ChangeCardReq changeCardReq = paymentInfo.getTradeVo().getChangeCardReq();
+                    /*ChangeCardReq changeCardReq = paymentInfo.getTradeVo().getChangeCardReq();
                     String url;
                     if (ServerSettingCache.getInstance().isJinChBusiness()) {
                         url = ServerAddressUtil.getInstance().getJCChangeCardUrl();
@@ -677,7 +677,7 @@ public class DoPayManager extends DoPayApi<PayResp> {
                                 }
                             })
                             .tag(url)
-                            .create();
+                            .create();*/
                     break;
                 case ONLINE_RECHARGE:
                 case ANONYMOUS_ENTITY_CARD_RECHARGE:
@@ -687,7 +687,7 @@ public class DoPayManager extends DoPayApi<PayResp> {
                         KeyAtDispatcher.getInstance().keyAtChargeCard(paymentInfo, savedCallback, callback);
                     }*/
                     // v8.3.1 金诚临时卡充值
-                    if (ServerSettingCache.getInstance().isJinChBusiness()) {
+                    /*if (ServerSettingCache.getInstance().isJinChBusiness()) {
                         JCRechargeCardReq jcRechargeCardReq = paymentInfo.getTradeVo().getRechargeCardReq();
                         String jcRechargeUrl = ServerAddressUtil.getInstance().getJCRechargeUrl();
                         new CalmNetWorkRequest.Builder<JCRechargeCardReq, JCRechargeCardResp>()
@@ -731,7 +731,7 @@ public class DoPayManager extends DoPayApi<PayResp> {
                                 })
                                 .tag(jcRechargeUrl)
                                 .create();
-                    }
+                    }*/
                     break;
                 case CARD:
                 case ANONYMOUS_ENTITY_CARD_SELL:
@@ -741,7 +741,7 @@ public class DoPayManager extends DoPayApi<PayResp> {
                         KeyAtDispatcher.getInstance().keyAtBindCard(paymentInfo, savedCallback, callback);
                     }*/
                     // v8.3.1 金诚临时卡绑卡
-                    if (ServerSettingCache.getInstance().isJinChBusiness()) {
+                    /*if (ServerSettingCache.getInstance().isJinChBusiness()) {
                         String jcBindUrl = ServerAddressUtil.getInstance().getJCBindCardUrl();
                         new CalmNetWorkRequest.Builder<JCBindCardReq, JCBindCardResp>()
                                 .requestContent(createJCBindCardReq(paymentInfo))
@@ -784,7 +784,7 @@ public class DoPayManager extends DoPayApi<PayResp> {
                                 })
                                 .tag(jcBindUrl)
                                 .create();
-                    }
+                    }*/
                     break;
                 case BEAUTY:
                     if (DinnerShopManager.getInstance().hasUnactivedPrivilege(paymentInfo.getTradeVo())) {

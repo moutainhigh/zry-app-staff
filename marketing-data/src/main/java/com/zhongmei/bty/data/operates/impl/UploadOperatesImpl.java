@@ -20,13 +20,13 @@ public class UploadOperatesImpl extends AbstractOpeartesImpl implements UploadOp
 
     @Override
     public void requestToken(TokenReq req, ResponseListener<TokenResp> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         String mindUrl = ServerAddressUtil.getInstance().getToken();
 
         TransferReq<TokenReq> transferReq = new TransferReq<>(mindUrl, req);
         OpsRequest.Executor<TransferReq, TokenResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq)
                 .responseClass(TokenResp.class)
-                .execute(listener, mindUrl);
+                .execute(listener, mindUrl);*/
     }
 }

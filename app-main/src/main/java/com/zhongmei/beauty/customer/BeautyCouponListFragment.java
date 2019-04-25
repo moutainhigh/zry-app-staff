@@ -323,7 +323,7 @@ public class BeautyCouponListFragment extends BasicFragment implements CouponsLa
 
 
     void sendCoupon(CouponVo vo) {
-        List<CustomerSendCouponReq.CouponNum> coups = new ArrayList<>();
+        /*List<CustomerSendCouponReq.CouponNum> coups = new ArrayList<>();
         final CustomerSendCouponReq req = new CustomerSendCouponReq();
         CustomerSendCouponReq.CouponNum coup = req.new CouponNum(vo.getCoupon().getId(), 1);
         coups.add(coup);
@@ -380,7 +380,7 @@ public class BeautyCouponListFragment extends BasicFragment implements CouponsLa
                         ToastUtil.showShortToast(error.getVolleyError().getMessage());
                     }
                 })
-                .create();
+                .create();*/
     }
 
     @Click({R.id.mBtn_sendCoupons, R.id.btn_cancel, R.id.btn_cancel_customer_type, R.id.mBtn_sendCoupons_customer_type})

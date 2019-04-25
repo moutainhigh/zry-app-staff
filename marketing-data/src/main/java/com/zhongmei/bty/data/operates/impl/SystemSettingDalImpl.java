@@ -74,14 +74,14 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void openAndCloseBusiness(OpenAndCloseReq req, ResponseListener<Object> listener) {
-        String url = ServerAddressUtil.getInstance().openAndCloseBusiness();
+        /*String url = ServerAddressUtil.getInstance().openAndCloseBusiness();
         OpsRequest.Executor<OpenAndCloseReq, Object> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(Object.class).execute(listener, "openAndCloseBusiness");
+        executor.requestValue(req).responseClass(Object.class).execute(listener, "openAndCloseBusiness");*/
     }
 
     @Override
     public void commercialSettings(List<CommercialCustomSettings> commercialCustomSettings, ResponseListener<List<CommercialCustomSettings>> listener) {
-        CommercialSettingsReq req = new CommercialSettingsReq();
+        /*CommercialSettingsReq req = new CommercialSettingsReq();
         req.setSettingItems(commercialCustomSettings);
 
         String url = ServerAddressUtil.getInstance().commercialSettings();
@@ -89,7 +89,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
         executor.requestValue(req)
                 .responseType(OpsRequest.getListContentResponseType(CommercialCustomSettings.class))
                 .responseProcessor(new CommercialCustomSettingsProcessor())
-                .execute(listener, "commercialSettings");
+                .execute(listener, "commercialSettings");*/
     }
 
     /***
@@ -256,12 +256,12 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void handoverClean(CashHandoverConfig config, ResponseListener<CashHandoverConfig> listener) {
-        String url = ServerAddressUtil.getInstance().handoverCleanSet();
+        /*String url = ServerAddressUtil.getInstance().handoverCleanSet();
         OpsRequest.Executor<CashHandoverConfig, CashHandoverConfig> executor = OpsRequest.Executor.create(url);
         executor.requestValue(config)
                 .responseClass(CashHandoverConfig.class)
                 .responseProcessor(new HandoverSetProcessor())
-                .execute(listener, "openAndCloseBusiness");
+                .execute(listener, "openAndCloseBusiness");*/
 
     }
 
@@ -304,7 +304,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void setTableNumberSetting(List<TableNumberSetting> tableNumberSettings, ResponseListener<TableNumberSettingResp> listener) {
-        String url = ServerAddressUtil.getInstance().tableNumberSetting();
+        /*String url = ServerAddressUtil.getInstance().tableNumberSetting();
 
         TableNumberSettingReq req = new TableNumberSettingReq();
         req.setTableNumberSettings(tableNumberSettings);
@@ -313,7 +313,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
         executor.requestValue(req)
                 .responseClass(TableNumberSettingResp.class)
                 .responseProcessor(new TableNumberSettingProcessor())
-                .execute(listener, "setTableNumberSetting");
+                .execute(listener, "setTableNumberSetting");*/
     }
 
     private static class TableNumberSettingProcessor extends SaveDatabaseResponseProcessor<TableNumberSettingResp> {
@@ -535,14 +535,14 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
      */
     @Override
     public void setHandoverType(int type, ResponseListener<MindTransferResp<CommercialCustomSettings>> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         String mindUrl = ServerAddressUtil.getInstance().getSaveSettingURL();
         TransferReq<CommercialCustomSettingsReq> transferReq = new TransferReq<>(mindUrl, toHandoverTypeReq("shop.fast.handover.switch", type));
         OpsRequest.Executor<TransferReq, MindTransferResp<CommercialCustomSettings>> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, CommercialCustomSettings.class))
                 .responseProcessor(new HandoverTypeRespProcessor())
-                .execute(listener, mindUrl);//用mind的url作为请求的tag
+                .execute(listener, mindUrl);//用mind的url作为请求的tag*/
     }
 
     private CommercialCustomSettingsReq toHandoverTypeReq(String key, int value) {
@@ -567,14 +567,14 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void updatePrintSort(int sort, ResponseListener<MindTransferResp<CommercialCustomSettings>> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         String mindUrl = ServerAddressUtil.getInstance().getSaveSettingURL();
         TransferReq<CommercialCustomSettingsReq> transferReq = new TransferReq<>(mindUrl, toHandoverTypeReq("ticket.order.type", sort));
         OpsRequest.Executor<TransferReq, MindTransferResp<CommercialCustomSettings>> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, CommercialCustomSettings.class))
                 .responseProcessor(new HandoverTypeRespProcessor())
-                .execute(listener, mindUrl);//用mind的url作为请求的tag
+                .execute(listener, mindUrl);//用mind的url作为请求的tag*/
     }
 
     @Override
@@ -594,19 +594,19 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void updateIsOpenShortName(int isOpen, ResponseListener<MindTransferResp<CommercialCustomSettings>> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         String mindUrl = ServerAddressUtil.getInstance().getSaveSettingURL();
         TransferReq<CommercialCustomSettingsReq> transferReq = new TransferReq<>(mindUrl, toHandoverTypeReq("ticket_kitchen_is_open_short_name", isOpen));
         OpsRequest.Executor<TransferReq, MindTransferResp<CommercialCustomSettings>> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, CommercialCustomSettings.class))
                 .responseProcessor(new HandoverTypeRespProcessor())
-                .execute(listener, mindUrl);//用mind的url作为请求的tag
+                .execute(listener, mindUrl);//用mind的url作为请求的tag*/
     }
 
     @Override
     public void updateSaveSetting(CommercialCustomSettingsReq req, ResponseListener<MindTransferResp<CommercialCustomSettings>> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         TransferReq<CommercialCustomSettingsReq> TransferReq = new TransferReq<CommercialCustomSettingsReq>();
         TransferReq.setPostData(req);
         TransferReq.setUrl(ServerAddressUtil.getInstance().mindUpdateSaveSetting());
@@ -614,7 +614,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
         executor.requestValue(TransferReq)
                 .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, CommercialCustomSettings.class))
                 .responseProcessor(new UpdateSaveSettingProcessor())
-                .execute(listener, "updateSaveSetting");
+                .execute(listener, "updateSaveSetting");*/
     }
 
     /***

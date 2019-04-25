@@ -2,15 +2,14 @@ package com.zhongmei.yunfu.sync;
 
 import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.yunfu.R;
-import com.zhongmei.yunfu.init.sync.AppUpdateCheck;
-import com.zhongmei.yunfu.init.sync.Check;
-import com.zhongmei.yunfu.init.sync.CheckListener;
-import com.zhongmei.yunfu.init.sync.ErpCheck;
-import com.zhongmei.bty.splash.check.PrintUpdateCheck;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.yunfu.context.util.NetworkUtil;
 import com.zhongmei.yunfu.context.util.helper.SpHelper;
+import com.zhongmei.yunfu.init.sync.AppUpdateCheck;
+import com.zhongmei.yunfu.init.sync.Check;
+import com.zhongmei.yunfu.init.sync.CheckListener;
+import com.zhongmei.yunfu.init.sync.ErpCheck;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -21,13 +21,13 @@ public class TradeModifyOperates {
     }
 
     public void requestModifyCustomer(Trade trade, CustomerResp customerNew, EcCard ecCard, ResponseListener<ModifyCustomerResp> listener) {
-        String url = ServerAddressUtil.getInstance().updateCustomer();
+        /*String url = ServerAddressUtil.getInstance().updateCustomer();
         TradeCustomerConvert tradeCustomerConvert = TradeCustomerConvert.newInstance();
         ModifyCustomerReq modifyCustomerReq = tradeCustomerConvert.toModifyCustomerReq(trade, customerNew, ecCard);
         OpsRequest.Executor<ModifyCustomerReq, ModifyCustomerResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(modifyCustomerReq)
                 .responseClass(ModifyCustomerResp.class)
                 .responseProcessor(new ModifyCustomerProcessor())
-                .execute(listener, "requestModifyCustomer");
+                .execute(listener, "requestModifyCustomer");*/
     }
 }

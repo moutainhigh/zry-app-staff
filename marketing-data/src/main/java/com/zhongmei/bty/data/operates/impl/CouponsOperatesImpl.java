@@ -31,21 +31,21 @@ public class CouponsOperatesImpl extends AbstractOpeartesImpl implements Coupons
 
     @Override
     public void getWeiXinCouponsDetail(WeiXinCouponsInfoReq weiXinCouponsInfoReq, ResponseListener<WeiXinCouponsInfoResp> listener) {
-        String url = ServerAddressUtil.getInstance().getWeixinCouponsDetailUrl();
+        /*String url = ServerAddressUtil.getInstance().getWeixinCouponsDetailUrl();
         OpsRequest.Executor<WeiXinCouponsInfoReq, WeiXinCouponsInfoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(weiXinCouponsInfoReq).responseClass(WeiXinCouponsInfoResp.class).execute(listener, "weixincardDetail");
+        executor.requestValue(weiXinCouponsInfoReq).responseClass(WeiXinCouponsInfoResp.class).execute(listener, "weixincardDetail");*/
     }
 
     @Override
     public void getWeiXinCouponsDetail(@NonNull String wxCouponsNo, ResponseListener<LoyaltyTransferResp<WxCouponsInfoResp>> listener) {
-        String url = ServerAddressUtil.getInstance().loyaltyTransfer();
+        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
         TransferReq<WxCouponsInfoReq> transferReq = new TransferReq<>();
         transferReq.setUrl(ServerAddressUtil.getInstance().getCoupInstanceByWxCardNumber());
         transferReq.setPostData(toWxCouponsInfoReq(wxCouponsNo));
         OpsRequest.Executor<TransferReq<WxCouponsInfoReq>, LoyaltyTransferResp<WxCouponsInfoResp>> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq)
                 .responseType(OpsRequest.getContentResponseType(LoyaltyTransferResp.class, WxCouponsInfoResp.class))
-                .execute(listener, "customerCoupons");
+                .execute(listener, "customerCoupons");*/
     }
 
     private WxCouponsInfoReq toWxCouponsInfoReq(String wxCouponsNo) {
@@ -59,19 +59,19 @@ public class CouponsOperatesImpl extends AbstractOpeartesImpl implements Coupons
 
     @Override
     public void getMeiTuanCouponsDetail(TuanGouCouponReq req, ResponseListener<TuanGouCouponDetail> listener) {
-        String url = ServerAddressUtil.getInstance().getMeiTuanCouponsDetailUrl();
+        /*String url = ServerAddressUtil.getInstance().getMeiTuanCouponsDetailUrl();
         OpsRequest.Executor<TuanGouCouponReq, TuanGouCouponDetail> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(TuanGouCouponDetail.class).execute(listener, "meituancouponDetail");
+        executor.requestValue(req).responseClass(TuanGouCouponDetail.class).execute(listener, "meituancouponDetail");*/
 
     }
 
     @Override
     public void ticketInfo(String serialNumber, ResponseListener<TicketInfo> listener) {
-        String url = ServerAddressUtil.getInstance().ticketInfo();
+        /*String url = ServerAddressUtil.getInstance().ticketInfo();
         TicketInfoReq req = new TicketInfoReq(serialNumber);
         OpsRequest.Executor<TicketInfoReq, TicketInfo> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(TicketInfo.class)
-                .execute(listener, "ticketInfo");
+                .execute(listener, "ticketInfo");*/
     }
 }

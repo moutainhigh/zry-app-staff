@@ -570,7 +570,7 @@ public class SupportFragment extends BasicFragment {
         @Override
         protected Void doInBackground(Void... params) {
             this.publishProgress(60);
-            try {
+            /*try {
                 File[] logFiles = OSLog.getLog().getLogFiles();
                 if (logFiles != null) {
                     for (File f : logFiles) {
@@ -581,7 +581,7 @@ public class SupportFragment extends BasicFragment {
                 }
             } catch (Exception e) {
                 Log.e(TAG, "", e);
-            }
+            }*/
 
             return null;
         }

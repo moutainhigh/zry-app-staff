@@ -112,19 +112,19 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     @Override
     public void insertOrModify(BookingVo bookingVo, ResponseListener<BookingResp> listener) {
-        String url = ServerAddressUtil.getInstance().creatOrUpdateBooking();
+        /*String url = ServerAddressUtil.getInstance().creatOrUpdateBooking();
 
         BookingReq bookingReq = toBookingReq(bookingVo);
         OpsRequest.Executor<BookingReq, BookingResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(bookingReq)
                 .responseClass(BookingResp.class)
                 .responseProcessor(new BookingProcessor(bookingVo))
-                .execute(listener, TAG);
+                .execute(listener, TAG);*/
 
     }
 
     public void submitBooking(BookingVo bookingVo, CalmResponseListener<ResponseObject<BookingResp>> listener) {
-        String url = ServerAddressUtil.getInstance().createBooking();
+        /*String url = ServerAddressUtil.getInstance().createBooking();
         BookingNewReq req = toBookingNewReq(bookingVo);
         CalmNetWorkRequest.with(BaseApplication.getInstance())
                 .url(url)
@@ -144,11 +144,11 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("submitBooking")
 //                .showLoading()
-                .create();
+                .create();*/
     }
 
     public void updateBooking(BookingVo bookingVo, CalmResponseListener<ResponseObject<BookingResp>> listener) {
-        String url = ServerAddressUtil.getInstance().updateBooking();
+        /*String url = ServerAddressUtil.getInstance().updateBooking();
         BookingNewReq bookingReq = toBookingNewReq(bookingVo);
         CalmNetWorkRequest.with(BaseApplication.getInstance())
                 .url(url)
@@ -168,12 +168,12 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("submitBooking")
 //                .showLoading()
-                .create();
+                .create();*/
     }
 
     @Override
     public void bookingDetail(Long bookingId, CalmResponseListener<ResponseObject<BookingDetailResp>> listener) {
-        final BookingDetailReq detailReq = new BookingDetailReq();
+        /*final BookingDetailReq detailReq = new BookingDetailReq();
         detailReq.setBookingId(bookingId);
         String url = ServerAddressUtil.getInstance().bookingDetail();
         new CalmNetWorkRequest.Builder<BookingDetailReq, BookingDetailResp>()
@@ -185,12 +185,12 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .showLoading()
                 .tag("bookingDetail")
-                .create();
+                .create();*/
     }
 
     @Override
     public void bookingArrivalShop(Fragment fragment, BookingVo bookingVo, CalmResponseListener<ResponseObject<BookingResp>> listener) {
-        String url = ServerAddressUtil.getInstance().bookingArrivalShop();
+        /*String url = ServerAddressUtil.getInstance().bookingArrivalShop();
         BookingNewReq bookingReq = toBookingNewReq(bookingVo);
         //老版本数据没有BookingPeriod，设置为null，避免传空对象导致出错
         if (bookingReq.getBookingType() == BookingType.NORMAL) {
@@ -219,12 +219,12 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("submitBooking")
                 .showLoading()
-                .create();
+                .create();*/
     }
 
     @Override
     public void confirmArrivalShop(Long bookingId, CalmResponseListener<ResponseObject<BookingConfirmArrivalShopResp>> listener) {
-        String url = ServerAddressUtil.getInstance().bookingConfirm();
+        /*String url = ServerAddressUtil.getInstance().bookingConfirm();
         HashMap<String, Object> bookingReq = new HashMap<>();
         bookingReq.put("bookingId", bookingId);
         CalmNetWorkRequest.with(BaseApplication.getInstance())
@@ -235,29 +235,29 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("confirmArrivalShop")
                 .showLoading()
-                .create();
+                .create();*/
     }
 
     @Override
     public void sendMessage(String orderUuid, ResponseListener<Boolean> listener) {
-        String url = ServerAddressUtil.getInstance().sendBookingMessage();
+        /*String url = ServerAddressUtil.getInstance().sendBookingMessage();
         OpsRequest.Executor<Object, Boolean> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(new SendMessageReq(orderUuid)).responseClass(Boolean.class).execute(listener, TAG);
+        executor.requestValue(new SendMessageReq(orderUuid)).responseClass(Boolean.class).execute(listener, TAG);*/
 
     }
 
     @Override
     public void bookingRecorde(String customerUuid, ResponseListener<BookingStatisticsResp> listener) {
-        String url = ServerAddressUtil.getInstance().bookingRecorde();
+        /*String url = ServerAddressUtil.getInstance().bookingRecorde();
         OpsRequest.Executor<BookingRecordeReq, BookingStatisticsResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(new BookingRecordeReq(customerUuid))
                 .responseClass(BookingStatisticsResp.class)
-                .execute(listener, TAG);
+                .execute(listener, TAG);*/
     }
 
     @Override
     public void queryBookingTablesByPeriod(Long orderTime, Long periodId, CalmResponseListener<ResponseObject<BookingGroupTableResq>> listener) {
-        BookingGroupTableReq req = new BookingGroupTableReq();
+        /*BookingGroupTableReq req = new BookingGroupTableReq();
         String time = new SimpleDateFormat("yyyy-MM-dd").format(orderTime);
         req.startTime = DateTimeUtils.formatDate(time + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
         req.endTime = DateTimeUtils.formatDate(time + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
@@ -281,7 +281,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("submitBooking")
 //                .showLoading()
-                .create();
+                .create();*/
     }
 
     @Override
@@ -298,7 +298,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     @Override
     public void bookingListPost(long startTime, long endTime, CalmResponseListener<ResponseObject<BookingListResp>> listener) {
-        BookingListReq req = new BookingListReq(startTime, endTime);
+        /*BookingListReq req = new BookingListReq(startTime, endTime);
         String url = ServerAddressUtil.getInstance().bookingList();
         CalmNetWorkRequest.with(BaseApplication.getInstance())
                 .url(url)
@@ -307,12 +307,12 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .successListener(listener)
                 .errorListener(listener)
                 .tag("bookingListPost")
-                .create();
+                .create();*/
     }
 
     @Override
     public void bookingQueryPost(String queryParam, CalmResponseListener<ResponseObject<BookingListResp>> listener) {
-        BookingQueryReq req = new BookingQueryReq(queryParam);
+        /*BookingQueryReq req = new BookingQueryReq(queryParam);
         String url = ServerAddressUtil.getInstance().bookingQueryV1();
         CalmNetWorkRequest.with(BaseApplication.getInstance())
                 .url(url)
@@ -321,12 +321,12 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .successListener(listener)
                 .errorListener(listener)
                 .tag("bookingQueryPost")
-                .create();
+                .create();*/
     }
 
     @Override
     public void bookingToDinnerSubmitPost(Fragment fragment, BookingVo bookingVo, Trade trade, CalmResponseListener<ResponseObject<OpenTableResp>> listener) {
-        BookingToDinnerSubmitReq req = new BookingToDinnerSubmitReq();
+        /*BookingToDinnerSubmitReq req = new BookingToDinnerSubmitReq();
         copyProperties(trade, req);
         Booking booking = bookingVo.getBooking();
         BookingToDinnerSubmitReq.BookingInfoBean bookingInfoBean = new BookingToDinnerSubmitReq.BookingInfoBean();
@@ -388,12 +388,12 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .showLoading()
                 .tag("bookingToDinnerSubmitPost")
-                .create();
+                .create();*/
     }
 
     @Override
     public void groupOpenTable(BookingVo bookingVo, TradeVo tradeVo, CalmResponseListener<ResponseObject<BookingGroupTradeResp>> listener) {
-        BookingGroupOpenReq req = toBookingGroupOpenReq(bookingVo, tradeVo);
+        /*BookingGroupOpenReq req = toBookingGroupOpenReq(bookingVo, tradeVo);
         //增加默认税率
         TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
         if (taxRateInfo != null && taxRateInfo.isTaxSupplyOpen()) {
@@ -434,7 +434,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("bookingToGroupDinner")
 //                .showLoading()
-                .create();
+                .create();*/
     }
 
     /**
@@ -713,7 +713,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     @Override
     public void bookingToUnionTable(Fragment fragment, BookingVo bookingVo, List<Tables> selectTables, CalmResponseListener<ResponseObject<TradeResp>> listener) {
-        String url = ServerAddressUtil.getInstance().toUnionTable();
+        /*String url = ServerAddressUtil.getInstance().toUnionTable();
         BookingToUnionSubmitReq bookingToUnionSubmitReq = toBookingUnionReq(bookingVo, selectTables);
         //增加默认税率
         TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
@@ -748,7 +748,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .showLoading()
                 .tag("bookingToUnionTable")
-                .create();
+                .create();*/
     }
 
     private BookingToUnionSubmitReq toBookingUnionReq(BookingVo bookingVo, List<Tables> selectTables) {
@@ -828,7 +828,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     @Override
     public void accept(Booking booking, List<BookingTable> bookingTableList, CalmResponseListener<ResponseObject<BookingAndTableResp>> listener) {
-        String url = ServerAddressUtil.getInstance().bookingAccept();
+        /*String url = ServerAddressUtil.getInstance().bookingAccept();
         BookingAndTableReq req = BookingAndTableReq.toBookingAndTableReq(booking, bookingTableList);
         CalmNetWorkRequest.with(BaseApplication.getInstance())
                 .url(url)
@@ -850,12 +850,12 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("submitBooking")
 //                .showLoading()
-                .create();
+                .create();*/
     }
 
     @Override
     public void refuse(Booking booking, String reason, CalmResponseListener<ResponseObject<BookingObjectResp>> listener) {
-        String url = ServerAddressUtil.getInstance().bookingRefuse();
+        /*String url = ServerAddressUtil.getInstance().bookingRefuse();
         HashMap<String, Object> req = new HashMap<>();
         req.put("bookingId", booking.getId());
         req.put("refusalReason", reason);
@@ -869,12 +869,12 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("submitBooking")
 //                .showLoading()
-                .create();
+                .create();*/
     }
 
     @Override
     public void cancelOrder(Long bookingId, String reason, CalmResponseListener<ResponseObject<BookingObjectResp>> listener) {
-        String url = ServerAddressUtil.getInstance().bookingCancel();
+        /*String url = ServerAddressUtil.getInstance().bookingCancel();
         HashMap<String, Object> req = new HashMap<>();
         req.put("orderID", bookingId);
         req.put("reason", reason);
@@ -888,18 +888,18 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 .errorListener(listener)
                 .tag("submitBooking")
 //                .showLoading()
-                .create();
+                .create();*/
     }
 
     @Override
     public void queryBookingNum(long beginTime, long endTime, ResponseListener<BookingQueryNumResp> listener) {
-        BookingQueryNumReq req = new BookingQueryNumReq();
+        /*BookingQueryNumReq req = new BookingQueryNumReq();
         req.setBeginTime(beginTime);
         req.setEndTime(endTime);
         String url = ServerAddressUtil.getInstance().bookingQueryNum();
         OpsRequest.Executor<BookingQueryNumReq, BookingQueryNumResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(BookingQueryNumResp.class)
-                .execute(listener, TAG);
+                .execute(listener, TAG);*/
     }
 }

@@ -171,46 +171,10 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
             case InitCheck.ERROR_CODE_VERSION:
                 ResetFragment.show(LoginInitActivity.this, ResetFragment.VERSION);
                 break;
-            case InitCheck.ERROR_CODE_AUTO_SET:
-                /*DialogUtil.showErrorConfirmDialog(getSupportFragmentManager(), R.string.get_shop_fail,
-                        R.string.selft_activation,
-                        R.string.cancel,
-                        new OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                SelfActivationActivity_.intent(LoginInitActivity.this).start();
-                                finish();
-                            }
-                        }, new OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                finish();
-                            }
-                        }, "selfActivationDialog");*/
-                /*try {
-                    AutoActivateDialog.show(this, new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            checkEnvironment();
-                        }
-                    }, new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }*/
-                break;
             case InitCheck.CHECK_UPDATE_APP:
                 showCheckUpdateAppDialog(initCheck);
                 break;
-            case InitCheck.CHECK_UPDATE_PRINT:
-                showCheckUpdatePrintDialog(initCheck);
-                break;
             case InitCheck.ERROR_VERSIONS_MATCHING:
-//                showVersionsSwitcherDialog(initCheck,error);
                 showVersionsErrorDialog(initCheck, error);
                 break;
             case InitCheck.ERROR_VERSIONS_FAILED:

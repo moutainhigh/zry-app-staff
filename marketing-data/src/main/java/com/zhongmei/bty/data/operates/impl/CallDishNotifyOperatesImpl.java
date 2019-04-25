@@ -26,12 +26,12 @@ public class CallDishNotifyOperatesImpl extends AbstractOpeartesImpl implements 
 
     @Override
     public void notifyVoice(NotifyReq req, ResponseListener<OrderNotify> listener) {
-        String url = ServerAddressUtil.getInstance().callDishNotifyUrl();
+        /*String url = ServerAddressUtil.getInstance().callDishNotifyUrl();
         OpsRequest.Executor<NotifyReq, OrderNotify> executor = OpsRequest.Executor.create(url);
         executor.requestValue(req)
                 .responseClass(OrderNotify.class)
                 .responseProcessor(new NotifyProcessor())
-                .execute(listener, TAG);
+                .execute(listener, TAG);*/
     }
 
     /**

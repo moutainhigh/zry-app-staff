@@ -477,7 +477,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
      * 会员积分修改
      */
     private void memberIntegralModification(int integral, int operateType, String reason) {
-        Long customerId = mCustomer.customerId;
+        /*Long customerId = mCustomer.customerId;
         MemberIntegralModificationReq req = new MemberIntegralModificationReq();
         req.setCustomerId(customerId);
         req.setIntegral(integral);
@@ -535,7 +535,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                         ToastUtil.showShortToast(error.getVolleyError().getMessage());
                     }
                 })
-                .create();
+                .create();*/
 
 //		Long customerId = mCustomer.customerId;
 //		CustomerOperates op = OperatesFactory.create(CustomerOperates.class);

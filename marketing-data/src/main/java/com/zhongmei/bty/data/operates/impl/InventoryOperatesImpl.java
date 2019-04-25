@@ -37,7 +37,7 @@ public class InventoryOperatesImpl extends AbstractOpeartesImpl implements Inven
     @Override
     public void updateDishSaleCount(DishSaleUpdateContract.DishSaleUpdateReq req,
                                     ResponseListener<DishSaleUpdateContract.DishSaleUpdateResp> listener) {
-        String supplyUrl = ServerAddressUtil.getInstance().getDishSaleUpdateUrl();
+        /*String supplyUrl = ServerAddressUtil.getInstance().getDishSaleUpdateUrl();
         TransferReq<DishSaleUpdateContract.DishSaleUpdateReq> transferReq = new TransferReq<>(supplyUrl, req);
 
         String url = ServerAddressUtil.getInstance().supplyTransfer();
@@ -45,12 +45,12 @@ public class InventoryOperatesImpl extends AbstractOpeartesImpl implements Inven
         executor.requestValue(transferReq)
                 .responseClass(DishSaleUpdateContract.DishSaleUpdateResp.class)
                 .responseProcessor(new UpdateDishSaleCountProcessor(req))
-                .execute(listener, supplyUrl);
+                .execute(listener, supplyUrl);*/
     }
 
     @Override
     public void getInventorySet(ResponseListener<InventorySetResp> listener) {
-        InventoryReq req = new InventoryReq();
+        /*InventoryReq req = new InventoryReq();
         req.setBrandIdenty(BaseApplication.getInstance().getBrandIdenty());
         req.setShopIdenty(BaseApplication.getInstance().getShopIdenty());
         String supplyUrl = ServerAddressUtil.getInstance().getSupplyInventorySet();
@@ -61,14 +61,14 @@ public class InventoryOperatesImpl extends AbstractOpeartesImpl implements Inven
         executor.requestValue(transferReq)
                 .addRouter("InventorySwitch")
                 .responseClass(InventorySetResp.class)
-                .execute(listener, supplyUrl);
+                .execute(listener, supplyUrl);*/
 
     }
 
     @Override
     public void getInventoryInfo(String time, ResponseListener<InventoryInfoResp> listener) {
 
-        InventoryReq req = new InventoryReq();
+        /*InventoryReq req = new InventoryReq();
         req.setBrandIdenty(BaseApplication.getInstance().getBrandIdenty());
         req.setShopIdenty(BaseApplication.getInstance().getShopIdenty());
         req.setQueryDate(time);
@@ -79,20 +79,20 @@ public class InventoryOperatesImpl extends AbstractOpeartesImpl implements Inven
         OpsRequest.Executor<TransferReq, InventoryInfoResp> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq)
                 .responseClass(InventoryInfoResp.class)
-                .execute(listener, supplyUrl);
+                .execute(listener, supplyUrl);*/
     }
 
     @Override
     public void postInventory(InventorySyncReq inventorySyncReq, ResponseListener<ResponseObjectExtra> listener) {
 
-        String url = ServerAddressUtil.getInstance().supplyTransfer();
+        /*String url = ServerAddressUtil.getInstance().supplyTransfer();
         String supplyUrl = ServerAddressUtil.getInstance().getSupplySyncInventory();
         TransferReq<InventorySyncReq> transferReq = new TransferReq<>(supplyUrl, inventorySyncReq);
 
         OpsRequest.Executor<TransferReq, ResponseObjectExtra> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq)
                 .responseClass(ResponseObjectExtra.class)
-                .execute(listener, url);
+                .execute(listener, url);*/
     }
 
     private static class UpdateDishSaleCountProcessor extends OpsRequest.SaveDatabaseResponseProcessor<DishSaleUpdateContract.DishSaleUpdateResp> {

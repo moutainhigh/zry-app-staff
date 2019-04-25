@@ -3,6 +3,7 @@ package com.zhongmei.yunfu.sync;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.zhongmei.yunfu.init.sync.AppUpdateCheck;
 import com.zhongmei.yunfu.init.sync.Check;
 import com.zhongmei.yunfu.init.sync.CheckListener;
 import com.zhongmei.yunfu.init.sync.SyncCheck;

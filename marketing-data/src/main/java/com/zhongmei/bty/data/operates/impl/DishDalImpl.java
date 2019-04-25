@@ -79,7 +79,7 @@ public class DishDalImpl extends AbstractOpeartesImpl implements DishDal {
 
     @Override
     public void clearStatus(ClearStatus newValue, List<String> dishUuids, ResponseListener<Boolean> listener) {
-        String url = ServerAddressUtil.getInstance().clearStatus();
+        /*String url = ServerAddressUtil.getInstance().clearStatus();
         DishClearStatusReq req = new DishClearStatusReq();
         req.setNewClearStatus(newValue);
         if (newValue == ClearStatus.CLEAR) {
@@ -92,7 +92,7 @@ public class DishDalImpl extends AbstractOpeartesImpl implements DishDal {
         executor.requestValue(req)
                 .responseClass(Boolean.class)
                 .responseProcessor(new ClearStatusRespProcessor(newValue, dishUuids))
-                .execute(listener, "clearStatus");
+                .execute(listener, "clearStatus");*/
     }
 
     /**

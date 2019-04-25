@@ -43,33 +43,31 @@ public class ErpOperatesImpl extends AbstractOpeartesImpl implements ErpOperates
 
     @Override
     public void getShopInfoById(Long shopId, ResponseListener<ShopInfoByIdResp> listener) {
-        String url = ServerAddressUtil.getInstance().getErpShopInfo();
+        /*String url = ServerAddressUtil.getInstance().getErpShopInfo();
         url += shopId;
         OpsRequest.Executor<String, ShopInfoByIdResp> executor = OpsRequest.Executor.create(url);
         executor.setMethod(Request.Method.GET)
                 .setHeaderType(HeaderType.HEADER_TYPE_ERP)
                 .responseClass(ShopInfoByIdResp.class)
-                .execute(listener, "getShopInfoById", true);
+                .execute(listener, "getShopInfoById", true);*/
     }
 
     @Override
     public void createTokenByPhoneNumber(String phoneNumber, ResponseListener<ErpCreatTokenResp> listener) {
-        String url = ServerAddressUtil.getInstance().createTokenByPhoneNumberUrl();
+        /*String url = ServerAddressUtil.getInstance().createTokenByPhoneNumberUrl();
         Map<String, String> params = new HashMap<String, String>();
         params.put("phone", phoneNumber);
         url = Utils.createGetUrl(url, params);
-        /*ErpGetRequest.ErpGetExecutor<ErpCreatTokenResp> executor = ErpGetRequest.ErpGetExecutor.create(url);
-        executor.responseClass(ErpCreatTokenResp.class).execute(listener, "getShopInfoById");*/
         OpsRequest.Executor<String, ErpCreatTokenResp> executor = OpsRequest.Executor.create(url);
         executor.setMethod(Request.Method.GET)
                 .setHeaderType(HeaderType.HEADER_TYPE_ERP)
                 .responseClass(ErpCreatTokenResp.class)
-                .execute(listener, "createTokenByPhoneNumber", true);
+                .execute(listener, "createTokenByPhoneNumber", true);*/
     }
 
     @Override
     public void doActiveDevice(String brandId, String shopNo, String mac, String deviceNo, Integer isMainPos, ResponseListener<SelfActivationResp> listener) {
-        String url = ServerAddressUtil.getInstance().activation();//接口还没有出
+        /*String url = ServerAddressUtil.getInstance().activation();//接口还没有出
         Map<String, String> params = new HashMap<String, String>();
         params.put("brandId", brandId);
         params.put("commercialId", shopNo);
@@ -82,15 +80,15 @@ public class ErpOperatesImpl extends AbstractOpeartesImpl implements ErpOperates
         url = Utils.createGetUrl(url, params);
 
 
-       /* ErpPostRequest.ErpPostExecutor<SelfActivationResp> executor= ErpPostRequest.ErpPostExecutor.create(url);
+       *//* ErpPostRequest.ErpPostExecutor<SelfActivationResp> executor= ErpPostRequest.ErpPostExecutor.create(url);
 //        ErpGetRequest.ErpGetExecutor<SelfActivationResp> executor = ErpGetRequest.ErpGetExecutor.create(url);
         executor.responseClass(SelfActivationResp.class).execute(listener, "activeDevice");
-*/
+*//*
         OpsRequest.Executor<String, SelfActivationResp> executor = OpsRequest.Executor.create(url);
         executor.setMethod(Request.Method.POST)
                 .setHeaderType(HeaderType.HEADER_TYPE_ERP)
                 .responseClass(SelfActivationResp.class)
-                .execute(listener, "activeDevice", true);
+                .execute(listener, "activeDevice", true);*/
     }
 
    /* @Override
@@ -106,16 +104,13 @@ public class ErpOperatesImpl extends AbstractOpeartesImpl implements ErpOperates
 
     @Override
     public void messagePushPosList(String id, ResponseListener<MessagePushPosListResp> listener) {
-        String url = ServerAddressUtil.getInstance().getMessagePushPosListUrl();
+        /*String url = ServerAddressUtil.getInstance().getMessagePushPosListUrl();
         url += id;
-       /* ErpGetRequest.ErpGetExecutor<MessagePushPosListResp> executor = ErpGetRequest.ErpGetExecutor.create(url);
-        executor.responseClass(MessagePushPosListResp.class).execute(listener, "messagePushPosList");*/
-
         OpsRequest.Executor<String, MessagePushPosListResp> executor = OpsRequest.Executor.create(url);
         executor.setMethod(Request.Method.GET)
                 .setHeaderType(HeaderType.HEADER_TYPE_ERP)
                 .responseClass(MessagePushPosListResp.class)
-                .execute(listener, "messagePushPosList", true);
+                .execute(listener, "messagePushPosList", true);*/
     }
 
 }

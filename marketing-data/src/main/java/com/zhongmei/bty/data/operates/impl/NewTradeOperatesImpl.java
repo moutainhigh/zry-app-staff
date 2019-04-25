@@ -35,16 +35,8 @@ public class NewTradeOperatesImpl extends TradeOperatesImpl {
     }
 
     public void newpay(Trade trade, NPaymentReq paymentReq, ResponseListener<PayResp> listener) {
-        /*if (KeyAt.isKeyAccount() && !isMemberPay(paymentReq.getPaymentItems())) {// moidify v8.7lolaty 会员不走大客户支付接口
-            // v8.7.0大客户支付接口
-            String url = KeyAtUrls.getInstance().keyAtPay();
-            KeyAtPayReq req = new KeyAtPayReq();
-            req.setCrmSystem(KeyAt.getKeyAccount());
-            executorPay(url, req, trade, paymentReq).execute(listener, "KeyAccount-Pay");
-        } else {*/
-        String url = ServerAddressUtil.getInstance().newPayUrl();
-        executorPay(url, new NPayReq(), trade, paymentReq).execute(listener, "newPay");
-        //}
+        /*String url = ServerAddressUtil.getInstance().newPayUrl();
+        executorPay(url, new NPayReq(), trade, paymentReq).execute(listener, "newPay");*/
     }
 
     /**

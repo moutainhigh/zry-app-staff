@@ -338,7 +338,7 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
 
     @Override
     public void clearDinnertable(IDinnertable dinnertable, ResponseListener<ClearDinnertableResp> listener) {
-        String url = ServerAddressUtil.getInstance().clearDinnertable();
+        /*String url = ServerAddressUtil.getInstance().clearDinnertable();
         ClearDinnertableReq req = new ClearDinnertableReq();
         req.setTableId(dinnertable.getId());
         req.setServerUpdateTime(dinnertable.getServerUpdateTime());
@@ -351,7 +351,7 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
         executor.requestValue(req)
                 .responseClass(ClearDinnertableResp.class)
                 .responseProcessor(new TablesRespProcessor())
-                .execute(listener, "clearDinnertable");
+                .execute(listener, "clearDinnertable");*/
     }
 
     /**

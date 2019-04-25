@@ -29,10 +29,10 @@ public class BeautyTradeOperatesImpl extends TradeOperatesImpl {
 
     @Override
     public void closeDetail(TransferReq transferReq, ResponseListener<TransferCloseBillData> listener) {
-        String url = ServerAddressUtil.getInstance().mindTransfer();
+        /*String url = ServerAddressUtil.getInstance().mindTransfer();
         OpsRequest.Executor<TransferReq, TransferCloseBillData> executor = OpsRequest.Executor.create(url);
         executor.requestValue(transferReq).responseClass(TransferCloseBillData.class).timeout(30000).execute(listener,
-                "doTransferCloseBill");
+                "doTransferCloseBill");*/
     }
 
     @Override

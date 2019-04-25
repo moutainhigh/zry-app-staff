@@ -23,9 +23,9 @@ public class TuanGouOperatesImpl implements TuanGouOperates, IOperates.ImplConte
 
     @Override
     public void getTuanGouCouponsDetail(TuanGouCouponReq req, ResponseListener<TuanGouCouponDetail> listener) {
-        String url = ServerAddressUtil.getInstance().getMeiTuanCouponsDetailUrl();
+        /*String url = ServerAddressUtil.getInstance().getMeiTuanCouponsDetailUrl();
         OpsRequest.Executor<TuanGouCouponReq, TuanGouCouponDetail> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(TuanGouCouponDetail.class).execute(listener, "meituancouponDetail");
+        executor.requestValue(req).responseClass(TuanGouCouponDetail.class).execute(listener, "meituancouponDetail");*/
 
 
     }

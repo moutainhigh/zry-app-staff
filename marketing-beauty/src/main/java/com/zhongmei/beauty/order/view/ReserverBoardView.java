@@ -13,6 +13,7 @@ import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.beauty.booking.interfaces.BeautyBookingTradeControlListener;
 import com.zhongmei.beauty.entity.ReserverItemVo;
 import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.util.DensityUtil;
 
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class ReserverBoardView extends AbsoluteLayout {
         while (curPaintHeight < height) {//画水平线
             curPaintHeight += itemHeight;
             index++;
-            canvas.drawLine(0, curPaintHeight - index, width, curPaintHeight - index, paint);
+            canvas.drawLine(0, curPaintHeight- 1, width, curPaintHeight- 1, paint);
         }
 
         float curPaintWidth = 0f;

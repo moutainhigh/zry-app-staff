@@ -27,7 +27,7 @@
 
         <LinearLayout
             android:id="@+id/orderDishLeftView"
-            android:layout_width="380dp"
+            android:layout_width="@dimen/beauty_height_left_cart"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:background="@color/beauty_bg_white"
@@ -43,7 +43,7 @@
             android:layout_height="fill_parent"
             android:focusableInTouchMode="true"
             android:focusable="true"
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="@dimen/beauty_height_middle_operator"
             android:layout_toRightOf="@id/orderDishLeftView"
             android:orientation="horizontal">
 

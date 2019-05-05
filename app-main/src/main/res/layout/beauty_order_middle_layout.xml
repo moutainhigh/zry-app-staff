@@ -6,7 +6,7 @@
 
     <LinearLayout
         android:id="@+id/vActionBar"
-        android:layout_width="100dp"
+        android:layout_width="@dimen/beauty_height_middle_operator"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="beauty_height_left_cart">450dp</dimen>
+    <dimen name="beauty_height_middle_operator">120dp</dimen>
+
+    <dimen name="beauty_height_product_item">95dp</dimen>
+    <dimen name="beauty_text_size_product_item_name">14sp</dimen>
+    <dimen name="beauty_text_size_product_item_price">12sp</dimen>
+    <integer name="beauty_rows_size">7</integer>
+</resources>

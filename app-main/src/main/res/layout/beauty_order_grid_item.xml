@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="75dp"
+    android:layout_height="@dimen/beauty_height_product_item"
     tools:background="@drawable/search_selected">
 
     <ImageView
@@ -23,7 +23,7 @@
         android:paddingTop="0dp"
         android:maxLines="1"
         android:textColor="@color/beauty_color_black"
-        android:textSize="12sp"
+        android:textSize="@dimen/beauty_text_size_product_item_name"
         tools:text="回锅肉" />
 
     <View
@@ -47,7 +47,7 @@
         android:paddingLeft="18dp"
         android:maxLines="1"
         android:textColor="@color/beauty_color_FF666666"
-        android:textSize="@dimen/text_10"
+        android:textSize="@dimen/beauty_text_size_product_item_price"
         tools:text="@string/zero" />
 
     <TextView

@@ -6,6 +6,7 @@ import android.widget.ListAdapter;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import com.zhongmei.beauty.order.adapter.BeautyProductAdapter;
 import com.zhongmei.bty.snack.orderdish.adapter.OrderDishListPagerAdapter;
+import com.zhongmei.yunfu.R;
 
 import java.util.List;
 
@@ -27,7 +28,7 @@ public abstract class BeautyOrderProductListPagerAdapter extends OrderDishListPa
 
     @Override
     protected int getNumRows() {
-        return 6;
+        return mContext.getResources().getInteger(R.integer.beauty_rows_size);
     }
 
     @Override

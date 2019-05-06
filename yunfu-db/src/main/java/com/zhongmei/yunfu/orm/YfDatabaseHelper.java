@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
+import com.zhongmei.bty.basemodule.commonbusiness.entity.CommercialCustomSettings;
 import com.zhongmei.yunfu.context.AppBuildConfig;
 import com.zhongmei.yunfu.context.Constant;
 import com.zhongmei.yunfu.db.IEntity;
@@ -143,6 +144,7 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(DishProperty.class);
         tables.add(DishSetmeal.class);
         tables.add(DishSetmealGroup.class);
+        tables.add(CommercialCustomSettings.class);
 
         /*tables.add(Coupon.class);
         tables.add(CouponRuleDish.class);

@@ -559,7 +559,7 @@ public class ServerSettingCache {
         mCommercialCustomSettingsMap.clear();
         if (Utils.isNotEmpty(commercialCustomSettingsList)) {
             for (CommercialCustomSettings commercialCustomSettings : commercialCustomSettingsList) {
-                mCommercialCustomSettingsMap.put(commercialCustomSettings.getKey(), commercialCustomSettings.getValue());
+                mCommercialCustomSettingsMap.put(commercialCustomSettings.getSettingKey(), commercialCustomSettings.getSettingValue());
             }
         }
     }
@@ -765,6 +765,15 @@ public class ServerSettingCache {
     //会员登录密码开关 add v8.8
     public boolean isCommercialNeedVerifPassword() {
         String value = mCommercialCustomSettingsMap.get("shop.memberPassInput.switch");
+        return "1".equals(value);
+    }
+
+    /**
+     * 会员支付是否需要密码
+     * @return
+     */
+    public boolean isNeedMemberPayPWDVerify(){
+        String value = mCommercialCustomSettingsMap.get("IS_CKECK_PASSWORD_DOPAY");
         return "1".equals(value);
     }
 

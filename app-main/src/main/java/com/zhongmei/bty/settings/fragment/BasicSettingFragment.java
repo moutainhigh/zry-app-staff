@@ -51,12 +51,12 @@ public class BasicSettingFragment extends BasicFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (customSetting != null && "2".equals(customSetting.getValue())) {
+        if (customSetting != null && "2".equals(customSetting.getSettingValue())) {
             changeOrderSelected(1);
         } else {
             changeOrderSelected(0);
         }
-        if (null != customSettingIsOpenShortName && "1".equals(customSettingIsOpenShortName.getValue())) {//开启
+        if (null != customSettingIsOpenShortName && "1".equals(customSettingIsOpenShortName.getSettingValue())) {//开启
             toggleOpenShortName.setChecked(true);
         } else {//关闭
             toggleOpenShortName.setChecked(false);

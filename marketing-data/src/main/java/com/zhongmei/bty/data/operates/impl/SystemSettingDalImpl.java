@@ -448,8 +448,8 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
             ElectronicInvoiceVo electronicInvoiceVo = new ElectronicInvoiceVo();
             //获取开关
             CommercialCustomSettings commercialCustomSettings = findCommercialCustomSettings(dbHelper, "invoice.shop.switch");
-            if (commercialCustomSettings != null && commercialCustomSettings.getValue() != null) {
-                electronicInvoiceVo.setSwitchOn("1".equals(commercialCustomSettings.getValue()));
+            if (commercialCustomSettings != null && commercialCustomSettings.getSettingValue() != null) {
+                electronicInvoiceVo.setSwitchOn("1".equals(commercialCustomSettings.getSettingValue()));
             } else {
                 electronicInvoiceVo.setSwitchOn(false);
             }

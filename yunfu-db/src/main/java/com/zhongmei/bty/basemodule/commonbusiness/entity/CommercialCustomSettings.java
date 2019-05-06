@@ -14,15 +14,10 @@ public class CommercialCustomSettings extends BasicEntityBase {
     private static final long serialVersionUID = 1L;
 
     public interface $ extends BasicEntityBase.$ {
-        /**
-         * shop_identy
-         */
-        public static final String shopIdenty = "shop_identy";
 
+        public static final String key = "setting_key";
 
-        public static final String key = "key";
-
-        public static final String value = "value";
+        public static final String value = "setting_value";
 
         /**
          * creator_id
@@ -46,14 +41,12 @@ public class CommercialCustomSettings extends BasicEntityBase {
 
     }
 
-    @DatabaseField(columnName = "shop_identy", canBeNull = false)
-    private Long shopIdenty;
 
-    @DatabaseField(columnName = "key", canBeNull = false)
-    private String key;
+    @DatabaseField(columnName = "setting_key", canBeNull = false)
+    private String settingKey;
 
-    @DatabaseField(columnName = "value", canBeNull = false)
-    private String value;
+    @DatabaseField(columnName = "setting_value", canBeNull = false)
+    private String settingValue;
 
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
@@ -68,28 +61,20 @@ public class CommercialCustomSettings extends BasicEntityBase {
     private String updatorName;
 
 
-    public Long getShopIdenty() {
-        return shopIdenty;
+    public String getSettingKey() {
+        return settingKey;
     }
 
-    public void setShopIdenty(Long shopIdenty) {
-        this.shopIdenty = shopIdenty;
+    public void setSettingKey(String key) {
+        this.settingKey = key;
     }
 
-    public String getKey() {
-        return key;
+    public String getSettingValue() {
+        return settingValue;
     }
 
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setSettingValue(String value) {
+        this.settingValue = value;
     }
 
     public Long getCreatorId() {
@@ -126,6 +111,6 @@ public class CommercialCustomSettings extends BasicEntityBase {
 
     @Override
     public boolean checkNonNull() {
-        return super.checkNonNull() && checkNonNull(shopIdenty, key, value);
+        return super.checkNonNull() && checkNonNull(settingKey, settingValue);
     }
 }

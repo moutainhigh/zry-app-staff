@@ -68,4 +68,14 @@
     <dimen name="order_center_toolbar_item_size">16sp</dimen>
     <dimen name="ordercenter_left_child_tab_size">16sp</dimen>
 
+
+
+    <dimen name="beauty_height_left_cart">380dp</dimen>
+    <dimen name="beauty_height_middle_operator">100dp</dimen>
+
+    <dimen name="beauty_height_product_item">75dp</dimen>
+    <dimen name="beauty_text_size_product_item_name">12sp</dimen>
+    <dimen name="beauty_text_size_product_item_price">10sp</dimen>
+    <integer name="beauty_rows_size">6</integer>
+
 </resources>

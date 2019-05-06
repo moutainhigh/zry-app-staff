@@ -826,7 +826,8 @@ public class MemberPayFragment extends BasePayFragment implements PayView {
                     mDoPayApi.doPay(this.getActivity(), this.mPaymentInfo, mPayOverCallback);
                 } else {
                     //modify  20170913 start
-                    if (mPaymentInfo.getCustomer().isNeedPassword(BigDecimal.valueOf(getInputValue()))) {
+//                    if (mPaymentInfo.getCustomer().isNeedPassword(BigDecimal.valueOf(getInputValue()))) {
+                    if (ServerSettingCache.getInstance().isNeedMemberPayPWDVerify()) {
                         showPasswordDialog(num, mPaymentInfo, this.getActivity(), mPayOverCallback);
                     } else {
                         payClick();

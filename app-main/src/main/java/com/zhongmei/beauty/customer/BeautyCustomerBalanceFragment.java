@@ -273,16 +273,17 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
 
     void initRadioButton(){
         //定义底部标签图片大小和位置
+        int size=getContext().getResources().getInteger(R.integer.member_recored_icon_size);
         Drawable customer_save_selector = getResources().getDrawable(R.drawable.customer_save_selector);
         //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
-        customer_save_selector.setBounds(0, 0, 36, 36);
+        customer_save_selector.setBounds(0, 0, size, size);
         //设置图片在文字的哪个方向
         customer_banlance_rb.setCompoundDrawables(customer_save_selector, null, null, null);
 
         //定义底部标签图片大小和位置
         Drawable customer_coupon_selector = getResources().getDrawable(R.drawable.customer_coupon_selector);
         //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
-        customer_coupon_selector.setBounds(0, 0, 36, 36);
+        customer_coupon_selector.setBounds(0, 0, size, size);
         //设置图片在文字的哪个方向
         customer_coupon_use_rb.setCompoundDrawables(customer_coupon_selector, null, null, null);
 
@@ -290,7 +291,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
         //定义底部标签图片大小和位置
         Drawable customer_jf_selector = getResources().getDrawable(R.drawable.customer_jf_selector);
         //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
-        customer_jf_selector.setBounds(0, 0, 36, 36);
+        customer_jf_selector.setBounds(0, 0, size, size);
         //设置图片在文字的哪个方向
         customer_integral_canuse_rb.setCompoundDrawables(customer_jf_selector, null, null, null);
 
@@ -298,7 +299,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
         //定义底部标签图片大小和位置
         Drawable customer_card_time_selector = getResources().getDrawable(R.drawable.customer_card_time_selector);
         //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
-        customer_card_time_selector.setBounds(0, 0, 36, 36);
+        customer_card_time_selector.setBounds(0, 0, size, size);
         //设置图片在文字的哪个方向
         customer_card_time_rb.setCompoundDrawables(customer_card_time_selector, null, null, null);
 
@@ -306,7 +307,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
         //定义底部标签图片大小和位置
         Drawable customer_weixin_selector = getResources().getDrawable(R.drawable.customer_weixin_selector);
         //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
-        customer_weixin_selector.setBounds(0, 0, 36, 36);
+        customer_weixin_selector.setBounds(0, 0, size, size);
         //设置图片在文字的哪个方向
         customer_wx_app_rb.setCompoundDrawables(customer_weixin_selector, null, null, null);
 
@@ -314,7 +315,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
         //定义底部标签图片大小和位置
         Drawable customer_order_history_selector = getResources().getDrawable(R.drawable.customer_order_history_selector);
         //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
-        customer_order_history_selector.setBounds(0, 0, 36, 36);
+        customer_order_history_selector.setBounds(0, 0, size, size);
         //设置图片在文字的哪个方向
         customer_expense_rb.setCompoundDrawables(customer_order_history_selector, null, null, null);
 

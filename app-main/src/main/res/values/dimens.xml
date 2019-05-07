@@ -67,15 +67,6 @@
     <dimen name="store_manager_toolbar_title_size">18sp</dimen>
     <dimen name="order_center_toolbar_item_size">16sp</dimen>
     <dimen name="ordercenter_left_child_tab_size">16sp</dimen>
-
-
-
-    <dimen name="beauty_height_left_cart">380dp</dimen>
-    <dimen name="beauty_height_middle_operator">100dp</dimen>
-
-    <dimen name="beauty_height_product_item">75dp</dimen>
-    <dimen name="beauty_text_size_product_item_name">12sp</dimen>
-    <dimen name="beauty_text_size_product_item_price">10sp</dimen>
-    <integer name="beauty_rows_size">6</integer>
-
+    <!-- 会员中心，会员记录anchor图标大小 -->
+    <integer name="member_recored_icon_size">36</integer>
 </resources>

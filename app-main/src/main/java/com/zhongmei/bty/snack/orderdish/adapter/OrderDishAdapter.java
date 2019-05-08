@@ -239,7 +239,7 @@ public class OrderDishAdapter extends BaseAdapter {
                 residue = String.format(residue, DecimalFormatUtil.formateInventoryNumber(dishVo.getInventoryNum()));
             } else {
                 residue = mContext.getString(R.string.order_sale_count_item);
-                residue = String.format(residue, DecimalFormatUtil.formateInventoryNumber(dishVo.getDishShop().getResidueTotal()));
+                residue = String.format(residue, DecimalFormatUtil.formateInventoryNumber(dishVo.getDishShop().getDishQty()));
             }
             tvResidue.setVisibility(View.VISIBLE);
         } else if (dishVo.getDishShop() != null && dishVo.getDishShop().getSaleType() == SaleType.WEIGHING) {

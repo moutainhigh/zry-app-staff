@@ -85,7 +85,10 @@ public class CreateItemTool {
         return shopcartItem;
     }
 
-    public static ShopcartItem createShopcartItem(long dishId) {
+    public static ShopcartItem createShopcartItem(Long dishId) {
+        if(dishId==null || dishId.longValue()==0){
+            return null;
+        }
         DishShop dishShop = DishCache.getDishHolder().get(dishId);
         if (dishShop == null)
             return null;

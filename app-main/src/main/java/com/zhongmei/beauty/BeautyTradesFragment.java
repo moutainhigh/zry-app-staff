@@ -145,7 +145,7 @@ public class BeautyTradesFragment extends BasicFragment implements CompoundButto
     @Override
     public void onDestroy() {
         if (mBeautyNotifyCache != null) {
-            mBeautyNotifyCache.onDestory();
+            mBeautyNotifyCache.removeNotifyListener(this);
             Log.e("TradesFragment", "mBeautyNotifyCache.onDestory()");
         }
         super.onDestroy();

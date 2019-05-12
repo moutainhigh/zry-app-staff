@@ -132,8 +132,8 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mBeautyNotifyCache != null) {
-            mBeautyNotifyCache.onDestory();
+        if(mBeautyNotifyCache!=null){
+            mBeautyNotifyCache.removeNotifyListener(this);
         }
     }
 }

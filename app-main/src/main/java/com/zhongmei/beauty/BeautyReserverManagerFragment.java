@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.zhongmei.beauty.booking.BeautyReserverBoardFragment;
 import com.zhongmei.beauty.booking.BeautyCancelBookingFragment;
@@ -14,6 +15,9 @@ import com.zhongmei.beauty.booking.bean.BeautyBookingVo;
 import com.zhongmei.beauty.booking.constants.BeautyBookingEnum;
 import com.zhongmei.beauty.booking.list.BeautyBookingListFragment;
 import com.zhongmei.beauty.dialog.BeautyCreateOrEditBookingDialog;
+import com.zhongmei.beauty.entity.BeautyNotifyEntity;
+import com.zhongmei.beauty.operates.BeautyNotifyCache;
+import com.zhongmei.beauty.widgets.XRadioGroup;
 import com.zhongmei.bty.basemodule.auth.application.BeautyApplication;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.yunfu.R;
@@ -27,6 +31,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.CheckedChange;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,17 +39,26 @@ import org.jetbrains.annotations.NotNull;
  * Created by demo on 2018/12/15
  */
 @EFragment(R.layout.beauty_reserver_manage_fragment)
-public class BeautyReserverManagerFragment extends BasicFragment {
+public class BeautyReserverManagerFragment extends BasicFragment implements BeautyNotifyCache.BeautyNotifyListener,XRadioGroup.OnCheckedChangeListener{
 
     @ViewById(R.id.rg_reserver_status)
-    protected RadioGroup rb_reserverStatus;
+    protected XRadioGroup rb_reserverStatus;
+
+    @ViewById(R.id.tv_undeal_trade_tip)
+    protected TextView tv_undealBookingTradeTip;
 
     protected BeautyBookingListFragment listFragment;
 
     private BeautyReserverBoardFragment reserverBoardFragment;
 
+    private BeautyNotifyCache mBeautyNotifyCache;
+
     @AfterViews
     protected void initView() {
+        mBeautyNotifyCache=BeautyNotifyCache.getInstance();
+        mBeautyNotifyCache.addNotifyListener(this);
+        mBeautyNotifyCache.start();
+        rb_reserverStatus.setOnCheckedChangeListener(this);
         rb_reserverStatus.check(R.id.rb_reserver_board);
     }
 
@@ -141,13 +155,19 @@ public class BeautyReserverManagerFragment extends BasicFragment {
         }
     };
 
-    @CheckedChange({R.id.rb_reserver_board, R.id.rb_reserver_trades, R.id.rb_reserver_outtime_trades, R.id.rb_reserver_cancel_trades, R.id.rb_reserver_unprocess})
-    public void onCheckedChanged(CompoundButton rb, boolean isChecked) {
-        if (!isChecked) {
-            return;
-        }
 
-        switch (rb.getId()) {
+    @UiThread
+    @Override
+    public void refreshNotifyNumbers(BeautyNotifyEntity notifyEntity) {
+        if(tv_undealBookingTradeTip!=null){
+            tv_undealBookingTradeTip.setVisibility(notifyEntity.getUnDealReserverNumber()<=0?View.GONE:View.VISIBLE);
+            tv_undealBookingTradeTip.setText(notifyEntity.getUnDealReserverNumber()+"");
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(XRadioGroup group, int checkedId) {
+        switch (checkedId) {
             case R.id.rb_reserver_board://预约看板
                 toReserverBoard();
                 break;
@@ -164,6 +184,13 @@ public class BeautyReserverManagerFragment extends BasicFragment {
                 toUnDealServicePage();
                 break;
         }
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mBeautyNotifyCache!=null){
+            mBeautyNotifyCache.removeNotifyListener(this);
+        }
     }
 }

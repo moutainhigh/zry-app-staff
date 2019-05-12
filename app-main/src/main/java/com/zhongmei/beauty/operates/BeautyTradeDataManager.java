@@ -92,6 +92,27 @@ public class BeautyTradeDataManager {
     }
 
     /**
+     * 查询未处理的订单数（目前只有小程序过来的订单）
+     * @param helper
+     * @return
+     * @throws Exception
+     */
+    public int queryUnDealReserverNumber(DatabaseHelper helper) throws Exception{
+        Dao<Booking, String> bookingDao = helper.getDao(Booking.class);
+        QueryBuilder bookingBuilder = bookingDao.queryBuilder();
+
+        long date = DateTimeUtils.getDayStart(new Date());
+
+        bookingBuilder.where()
+                .gt(Booking.$.serverCreateTime, date)
+                .and()
+                .eq(Booking.$.statusFlag, StatusFlag.VALID)
+                .and()
+                .eq(Booking.$.orderStatus, BookingOrderStatus.UNPROCESS);
+        return (int) bookingBuilder.countOf();
+    }
+
+    /**
      * 查询今日订单数
      *
      * @param helper

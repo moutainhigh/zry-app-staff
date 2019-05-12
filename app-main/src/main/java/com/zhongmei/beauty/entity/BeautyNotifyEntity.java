@@ -7,6 +7,7 @@ package com.zhongmei.beauty.entity;
 public class BeautyNotifyEntity {
     private int customerNumber;//到店人数
     private int reserverNumber;//预约单数
+    private int unDealReserverNumber;//未处理的订单数
     private int tradeNumber;//订单数
     private int memberNumber;//新增会员数
     private int todayReserverNumber;//今日预约数
@@ -58,5 +59,13 @@ public class BeautyNotifyEntity {
 
     public void setUnpaidTradeNumber(int unpaidTradeNumber) {
         this.unpaidTradeNumber = unpaidTradeNumber;
+    }
+
+    public int getUnDealReserverNumber() {
+        return unDealReserverNumber;
+    }
+
+    public void setUnDealReserverNumber(int unDealReserverNumber) {
+        this.unDealReserverNumber = unDealReserverNumber;
     }
 }

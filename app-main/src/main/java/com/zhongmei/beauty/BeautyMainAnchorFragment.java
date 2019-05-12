@@ -5,7 +5,10 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import com.zhongmei.beauty.entity.BeautyNotifyEntity;
 import com.zhongmei.beauty.interfaces.IBeautyAnchor;
+import com.zhongmei.beauty.operates.BeautyNotifyCache;
+import com.zhongmei.beauty.widgets.XRadioGroup;
 import com.zhongmei.bty.basemodule.auth.application.BeautyApplication;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
@@ -29,12 +32,20 @@ import org.androidannotations.annotations.ViewById;
  * Created by demo on 2018/12/15
  */
 @EFragment(R.layout.beauty_main_activity_anchor)
-public class BeautyMainAnchorFragment extends BasicFragment {
+public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNotifyCache.BeautyNotifyListener,XRadioGroup.OnCheckedChangeListener{
 
     @ViewById(R.id.tv_waiter)
     protected TextView tv_waiter;
 
+    @ViewById(R.id.rg_mundle_anchor)
+    protected XRadioGroup rg_mundleAnchor;
+
+    @ViewById(R.id.tv_undeal_trade_tip)
+    protected  TextView tv_undealBookingTradeTip;
+
     private IBeautyAnchor mBeautyAnchor;
+
+    private BeautyNotifyCache mNotifyCache;
 
     public void setBeautyAnchor(IBeautyAnchor iAnchor) {
         this.mBeautyAnchor = iAnchor;
@@ -46,13 +57,11 @@ public class BeautyMainAnchorFragment extends BasicFragment {
     @AfterViews
     public void init() {
         setWaiterInfo(Session.getAuthUser());
+        mNotifyCache=BeautyNotifyCache.getInstance();
+        mNotifyCache.addNotifyListener(this);
+        mNotifyCache.start();
+        rg_mundleAnchor.setOnCheckedChangeListener(this);
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
 
     /**
      * 设置服务员信息
@@ -65,7 +74,7 @@ public class BeautyMainAnchorFragment extends BasicFragment {
         }
     }
 
-    @Click({R.id.rb_anchor_reserver, R.id.btn_anchor_member, R.id.rb_anchor_technician, R.id.btn_anchor_notifycation, R.id.rb_anchor_cashier, R.id.rb_anchor_trades, R.id.rb_anchor_report, R.id.rb_anchor_shop, R.id.rb_anchor_refresh, R.id.tv_waiter})
+    @Click({ R.id.rb_anchor_refresh, R.id.tv_waiter})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_anchor_notifycation:
@@ -95,21 +104,40 @@ public class BeautyMainAnchorFragment extends BasicFragment {
         }
     }
 
-    @CheckedChange({R.id.rb_anchor_cashier, R.id.rb_anchor_trades, R.id.rb_anchor_report, R.id.rb_anchor_reserver, R.id.btn_anchor_member, R.id.rb_anchor_technician, R.id.rb_anchor_shop})
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        switch (compoundButton.getId()) {
+    @UiThread
+    protected void setChecked(int resid) {
+        View view = getActivity().findViewById(resid);
+        if (view != null && view instanceof RadioButton) {
+        }
+        ((RadioButton) view).setChecked(true);
+    }
+
+
+    @UiThread
+    @Override
+    public void refreshNotifyNumbers(BeautyNotifyEntity notifyEntity) {
+        if(tv_undealBookingTradeTip!=null){
+            tv_undealBookingTradeTip.setVisibility(notifyEntity.getUnDealReserverNumber()<=0?View.GONE:View.VISIBLE);
+            tv_undealBookingTradeTip.setText(notifyEntity.getUnDealReserverNumber()+"");
+        }
+
+    }
+
+    @Override
+    public void onCheckedChanged(XRadioGroup group, int checkedId) {
+        switch (checkedId) {
             case R.id.rb_anchor_cashier:
-                if (mBeautyAnchor != null && b) {
+                if (mBeautyAnchor != null) {
                     mBeautyAnchor.toCashier();
                 }
                 break;
             case R.id.rb_anchor_trades:
-                if (mBeautyAnchor != null && b) {
+                if (mBeautyAnchor != null) {
                     mBeautyAnchor.toTradeCenter();
                 }
                 break;
             case R.id.rb_anchor_report:
-                if (mBeautyAnchor == null || !b) {
+                if (mBeautyAnchor == null) {
                     break;
                 }
 
@@ -130,22 +158,22 @@ public class BeautyMainAnchorFragment extends BasicFragment {
 
                 break;
             case R.id.rb_anchor_reserver:
-                if (mBeautyAnchor != null && b) {
+                if (mBeautyAnchor != null) {
                     mBeautyAnchor.toReserverManager();
                 }
                 break;
             case R.id.rb_anchor_technician:
-                if (mBeautyAnchor != null && b) {
+                if (mBeautyAnchor != null) {
                     mBeautyAnchor.toTechniciaManage();
                 }
                 break;
             case R.id.btn_anchor_member:
-                if (mBeautyAnchor != null && b) {
+                if (mBeautyAnchor != null) {
                     mBeautyAnchor.toMemberCenter();
                 }
                 break;
             case R.id.rb_anchor_shop:
-                if (mBeautyAnchor == null || !b) {
+                if (mBeautyAnchor == null) {
                     break;
                 }
 
@@ -165,20 +193,14 @@ public class BeautyMainAnchorFragment extends BasicFragment {
                         });
                 break;
         }
-
-        if (!b) {
-            preCheckedResId = compoundButton.getId();
-        }
-
+        preCheckedResId = checkedId;
     }
 
-    @UiThread
-    protected void setChecked(int resid) {
-        View view = getActivity().findViewById(resid);
-        if (view != null && view instanceof RadioButton) {
+    @Override
+    public void onDestroy() {
+        if (mNotifyCache != null) {
+            mNotifyCache.onDestory();
         }
-        ((RadioButton) view).setChecked(true);
+        super.onDestroy();
     }
-
-
 }

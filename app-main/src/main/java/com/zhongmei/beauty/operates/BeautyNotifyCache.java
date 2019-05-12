@@ -118,6 +118,7 @@ public class BeautyNotifyCache {
         try {
             notifyEntity.setCustomerNumber(mTradeManager.queryCustomerNumber(helper));
             notifyEntity.setReserverNumber(mTradeManager.queryReserverNumber(helper));
+            notifyEntity.setUnDealReserverNumber(mTradeManager.queryUnDealReserverNumber(helper));
             notifyEntity.setTradeNumber(mTradeManager.queryTradeNumber(helper));
             notifyEntity.setMemberNumber(mTradeManager.queryMemberNumber());
             notifyEntity.setTodayReserverNumber(mTradeManager.queryTodayReserverNumber(helper));

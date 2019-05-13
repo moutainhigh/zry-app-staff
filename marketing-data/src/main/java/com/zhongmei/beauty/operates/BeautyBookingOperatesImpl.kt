@@ -12,6 +12,7 @@ import com.zhongmei.yunfu.context.base.BaseApplication
 import com.zhongmei.bty.commonmodule.data.operate.AbstractOpeartesImpl
 import com.zhongmei.bty.commonmodule.data.operate.IOperates
 import com.zhongmei.yunfu.db.entity.booking.Booking
+import com.zhongmei.yunfu.net.builder.NetworkRequest
 import com.zhongmei.yunfu.orm.DBHelperManager
 import com.zhongmei.yunfu.orm.DatabaseHelper
 import com.zhongmei.yunfu.resp.ResponseListener
@@ -60,13 +61,15 @@ class BeautyBookingOperatesImpl : AbstractOpeartesImpl, BeautyBookingOperates {
         CalmNetWorkRequest.with(BaseApplication.getInstance())
                 .url(BeautyServerAddressUtil.acceptOrRefuseBooking())
                 .requestContent(req)
-                .responseClass(BeautyAcceptOrRefuseReq::class.java)
+                .responseClass(BeautyBookingResp::class.java)
+                .responseProcessor(BeautyBookingProcessor())
                 .successListener(listener)
                 .errorListener(listener)
                 .with(activity)
                 .tag("acceptOrRefuseBookingTrade")
                 .showLoading()
                 .create()
+
 
     }
 
@@ -131,6 +134,13 @@ class BeautyBookingOperatesImpl : AbstractOpeartesImpl, BeautyBookingOperates {
                 DBHelperManager.saveEntities(helper, Booking::class.java, resp);
                 null
             }
+        }
+    }
+
+
+    class BeautyBookingProcessor : CalmDatabaseProcessor<BeautyBookingResp>() {
+        override fun transactionCallable(helper: DatabaseHelper?, resp: BeautyBookingResp?) {
+            DBHelperManager.saveEntities(helper, Booking::class.java, resp)
         }
     }
 

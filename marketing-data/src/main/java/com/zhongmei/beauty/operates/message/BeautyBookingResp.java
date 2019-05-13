@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @date 2018/7/23
  */
-public class BeautyBookingResp {
+public class BeautyBookingResp extends Booking{
 
     public Booking booking;
 

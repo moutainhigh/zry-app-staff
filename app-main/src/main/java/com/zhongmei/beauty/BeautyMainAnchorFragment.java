@@ -120,7 +120,7 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
     @Override
     public void refreshNotifyNumbers(BeautyNotifyEntity notifyEntity) {
         if(tv_undealBookingTradeTip!=null){
-            tv_undealBookingTradeTip.setVisibility(notifyEntity.getUnDealReserverNumber()<=0 || rb_server.isChecked()?View.GONE:View.VISIBLE);
+            tv_undealBookingTradeTip.setVisibility(notifyEntity.getUnDealReserverNumber()<=0?View.GONE:View.VISIBLE);
             tv_undealBookingTradeTip.setText(notifyEntity.getUnDealReserverNumber()+"");
         }
 
@@ -161,7 +161,6 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
 
                 break;
             case R.id.rb_anchor_reserver:
-                tv_undealBookingTradeTip.setVisibility(View.GONE);
                 if (mBeautyAnchor != null) {
                     mBeautyAnchor.toReserverManager();
                 }

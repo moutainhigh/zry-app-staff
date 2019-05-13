@@ -69,4 +69,5 @@
     <dimen name="ordercenter_left_child_tab_size">16sp</dimen>
     <!-- 会员中心，会员记录anchor图标大小 -->
     <integer name="member_recored_icon_size">36</integer>
+    <dimen name="reserver_tip_size">15dp</dimen>
 </resources>

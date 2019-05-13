@@ -480,8 +480,8 @@ public class PayOkDialog extends Dialog implements IPayConstParame {
                 EventBus.getDefault().post(new EventPayResult(true, mPaymentInfo.getTradeBusinessType()));
             }
         } else {
-            if (isFinishPay && mPaymentInfo.getTradeBusinessType() == BusinessType.ENTITY_CARD_CHANGE) {
-                EventBus.getDefault().post(new EventPayResult(true, BusinessType.ENTITY_CARD_CHANGE));
+            if (isFinishPay) {
+                EventBus.getDefault().post(new EventPayResult(true, mPaymentInfo.getTradeBusinessType()));
             }
         }
     }

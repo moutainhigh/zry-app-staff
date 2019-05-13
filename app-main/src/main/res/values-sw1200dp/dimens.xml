@@ -1,3 +1,4 @@
 <resources>
     <integer name="member_recored_icon_size">36</integer>
+    <dimen name="reserver_tip_size">15dp</dimen>
 </resources>

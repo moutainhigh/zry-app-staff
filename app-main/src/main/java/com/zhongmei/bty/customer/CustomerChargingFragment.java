@@ -37,6 +37,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.enums.CardStatus;
 import com.zhongmei.bty.basemodule.print.entity.PrintOperation;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.bty.basemodule.trade.event.ActionCloseOrderDishActivity;
 import com.zhongmei.bty.basemodule.trade.message.VerifyPayResp;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.commonmodule.database.enums.SendType;

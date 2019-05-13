@@ -181,6 +181,7 @@ public class BeautyReserverManagerFragment extends BasicFragment implements Beau
                 toCancelServicePage();
                 break;
             case R.id.rb_reserver_unprocess://未处理订单
+                tv_undealBookingTradeTip.setVisibility(View.GONE);
                 toUnDealServicePage();
                 break;
         }

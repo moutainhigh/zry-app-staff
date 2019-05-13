@@ -606,26 +606,26 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
 
     //充值成功回调处理
     public void onEventMainThread(EventPayResult eventPayResult) {
-        cleaUserVo();
-        if (eventPayResult.getType() == BusinessType.ONLINE_RECHARGE || eventPayResult.getType() == BusinessType.CARD_RECHARGE) {
-            if (from == FROM_CARD_SALE || from == FROM_MEMBER_CUSTOMER || from == FROM_CREATE_CUSTOMER) {
-                if (ecCard != null) { // 卡储值
-                    EventBus.getDefault().post(new EventSaleCardCharging(chargeMoney, sendMoney, eventPayResult, EventSaleCardCharging.ChargingType.CARD, ecCard));
-                } else {
-                    EventBus.getDefault().post(new EventSaleCardCharging(chargeMoney, sendMoney, eventPayResult));
-                }
-            }
-//            dismissConfirmDialog();//关闭核对框
-            //显示对话框
-            if (eventPayResult.isOnlinePay()) {//如果在线支付不返回余额
-                doChargePrint(chargeMoney, getAfterBalanceValue(), eventPayResult);
-                showPromptDialog(chargeMoney, getAfterBalanceValue(), eventPayResult.getType());
-            } else {//非在线支付有返回余额
-                AnonymousCardStoreResp content = (AnonymousCardStoreResp) eventPayResult.getContent();
-                //doChargePrint(chargeMoney, content.getValueCard(), eventPayResult);
-                showPromptDialog(chargeMoney, content.getValueCard(), eventPayResult.getType());
-            }
-        }
+//        cleaUserVo();
+//        if (eventPayResult.getType() == BusinessType.ONLINE_RECHARGE || eventPayResult.getType() == BusinessType.CARD_RECHARGE) {
+//            if (from == FROM_CARD_SALE || from == FROM_MEMBER_CUSTOMER || from == FROM_CREATE_CUSTOMER) {
+//                if (ecCard != null) { // 卡储值
+//                    EventBus.getDefault().post(new EventSaleCardCharging(chargeMoney, sendMoney, eventPayResult, EventSaleCardCharging.ChargingType.CARD, ecCard));
+//                } else {
+//                    EventBus.getDefault().post(new EventSaleCardCharging(chargeMoney, sendMoney, eventPayResult));
+//                }
+//            }
+////            dismissConfirmDialog();//关闭核对框
+//            //显示对话框
+//            if (eventPayResult.isOnlinePay()) {//如果在线支付不返回余额
+//                doChargePrint(chargeMoney, getAfterBalanceValue(), eventPayResult);
+//                showPromptDialog(chargeMoney, getAfterBalanceValue(), eventPayResult.getType());
+//            } else {//非在线支付有返回余额
+//                AnonymousCardStoreResp content = (AnonymousCardStoreResp) eventPayResult.getContent();
+//                //doChargePrint(chargeMoney, content.getValueCard(), eventPayResult);
+//                showPromptDialog(chargeMoney, content.getValueCard(), eventPayResult.getType());
+//            }
+//        }
         this.dismissAllowingStateLoss();
     }
 

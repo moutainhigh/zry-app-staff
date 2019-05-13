@@ -40,8 +40,8 @@
 
             <TextView
                 android:id="@+id/tv_undeal_trade_tip"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="@dimen/reserver_tip_size"
+                android:layout_height="@dimen/reserver_tip_size"
                 android:textSize="@dimen/text_10"
                 android:textColor="@color/text_white"
                 android:background="@drawable/shape_bg_cycle_red"

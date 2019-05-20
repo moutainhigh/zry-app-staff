@@ -70,7 +70,7 @@
     <string name="customer_mobile_regulation_error">手机号格式不正确,请重新输入</string>
     <string name="customer_erpcurrency_empty">没有国籍数据，请先同步国籍数据</string>
     <string name="customer_edit_face">人脸认证(%s)</string>
-    <string name="customer_login_desc_1">扫码设备已激活</string>
+    <string name="customer_login_desc_1">可使用读卡器读取会员卡号！</string>
     <string name="customer_login_desc_2">扫码枪已激活，登录二维码已在副屏显示</string>
     <string name="customer_login_read_card">刷卡登录</string>
     <string name="customer_face_login">人脸登录</string>

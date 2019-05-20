@@ -30,6 +30,7 @@ public class CustomerListResp extends CustomerListResp1 implements Parcelable {
         sourceName = pl.readString();
         sex = pl.readInt();
         modifyDateTime = pl.readString();
+
     }
 
     @Override

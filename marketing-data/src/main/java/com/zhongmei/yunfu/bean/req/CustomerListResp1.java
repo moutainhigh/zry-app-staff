@@ -56,4 +56,9 @@ public class CustomerListResp1 {
      * 是否已人脸认证
      */
     public Integer hasFaceCode;
+
+    /**
+     * 卡号
+     */
+    public String cardNo;
 }

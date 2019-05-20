@@ -71,6 +71,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     public Integer hasFaceCode;//是否有人脸识别码
     public String faceCode;//人脸识别码，只有详情页才下行
     public String peopleId;//第三方人脸识别服务器返回字段、只在详情才下行
+    public String cardNo;
 
     /**
      * 颜值得分
@@ -203,6 +204,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         bean.name = customerName;
         bean.mobile = mobile;
         bean.hasFaceCode = hasFaceCode;
+        bean.cardNo=cardNo;
         return bean;
     }
 
@@ -258,6 +260,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         json.put("localCreateDateTime", upgradeTime);
         json.put("uuid", synFlag);
         json.put("birthdate", birthday + "");
+        json.put("cardNo",cardNo);
         return json;
     }
 

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.zhongmei.beauty.customer.adapter.BeautyCustomerDetailProjectAdapter;
 import com.zhongmei.beauty.customer.constants.BeautyCustomerConstants;
+import com.zhongmei.beauty.customer.dialog.BeautyCustomerBindCardDialog;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount;
 import com.zhongmei.bty.basemodule.customer.CustomerLogin;
@@ -472,7 +473,7 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
 //            mCallLayout.setVisibility(View.GONE);
 //            mEditLayout.setVisibility(View.VISIBLE);
 //        }
-        mBindLayout.setVisibility(View.GONE);
+        mBindLayout.setVisibility(View.VISIBLE);
         mRecharge.setVisibility(View.GONE);
         mCreateOrder.setVisibility(View.GONE);
         mTitleLayout.setVisibility(View.GONE);
@@ -558,6 +559,7 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
         mEditLayout.setVisibility(View.VISIBLE);
         mRecharge.setVisibility(View.VISIBLE);
         mTakePhotoLayout.setVisibility(View.GONE);
+        mBindLayout.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -1346,20 +1348,25 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
         }
         switch (v.getId()) {
             case R.id.customer_bindcard: // 绑卡
-                /*MobclickAgentEvent.onEvent(UserActionCode.GK010005);
+                MobclickAgentEvent.onEvent(UserActionCode.GK010005);
                 if (mCustomer != null) {
-                    VerifyHelper.verifyAlert(getActivity(), CustomerApplication.PERMISSION_CUSTOMER_CARD_ENABLE,
-                            new VerifyHelper.Callback() {
-                                @Override
-                                public void onPositive(User user, String code, Auth.Filter filter) {
-                                    super.onPositive(user, code, filter);
-                                    Intent intent = new Intent(getActivity(), CumtomerSaleCardsActivity_.class);
-                                    intent.putExtra("customer", mCustomer);
-                                    intent.putExtra("customer_flag", CustomerContants.FLAG_CUSTOMER_BAND);
-                                    startActivity(intent);
-                                }
-                            });
-                }*/
+//                    VerifyHelper.verifyAlert(getActivity(), CustomerApplication.PERMISSION_CUSTOMER_CARD_ENABLE,
+//                            new VerifyHelper.Callback() {
+//                                @Override
+//                                public void onPositive(User user, String code, Auth.Filter filter) {
+//                                    super.onPositive(user, code, filter);
+//                                    Intent intent = new Intent(getActivity(), CumtomerSaleCardsActivity_.class);
+//                                    intent.putExtra("customer", mCustomer);
+//                                    intent.putExtra("customer_flag", CustomerContants.FLAG_CUSTOMER_BAND);
+//                                    startActivity(intent);
+//                                }
+//                            });
+                    BeautyCustomerBindCardDialog dialog = new BeautyCustomerBindCardDialog();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(BeautyCustomerConstants.KEY_CUSTOMER, mCustomer);
+                    dialog.setArguments(bundle);
+                    dialog.show(getChildFragmentManager(), "BeautyCustomerBindCardFragment");
+                }
                 break;
             case R.id.level_up: // 升级
                 MobclickAgentEvent.onEvent(UserActionCode.GK010006);

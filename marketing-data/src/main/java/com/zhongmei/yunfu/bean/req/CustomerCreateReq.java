@@ -26,5 +26,6 @@ public class CustomerCreateReq {
     public String environmentHobby;
     public String invoiceTitle;
     public String memo;
+    public String cardNo;
 
 }

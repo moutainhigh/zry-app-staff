@@ -1033,6 +1033,20 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
     }
 
     @Override
+    public void getCustomerByCardNo(String cardNo, boolean isNeedCredit, YFResponseListener<YFResponse<CustomerResp>> listener) {
+
+    }
+
+    @Override
+    public void customerBindCard(String cardNo, Long customerId, YFResponseListener<YFResponse<CustomerCreateResp>> listener) {
+        CustomerCreateReq req = toBindCardReq(customerId,cardNo);
+        String url = ServerAddressUtil.getInstance().customerBindCard();
+        JFRequest.Executor executor = JFRequest.create(url);
+        executor.requestValue(req)
+                .execute(listener, "saveCustomer");
+    }
+
+    @Override
     public void cancelGetCustomerById() {
         RequestManager.cancelAll("getCustomerById");
     }
@@ -1299,9 +1313,20 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
         req.nationalTelCode = customer.nationalTelCode;
         req.userId = Session.getAuthUser().getId();
         req.userName = Session.getAuthUser().getName();
+        req.cardNo=customer.cardNo;
         if (!TextUtils.isEmpty(customer.faceCode)) {
             req.faceCode = customer.faceCode;
         }
+        return req;
+    }
+
+    private CustomerCreateReq toBindCardReq(Long customerId,String cardNo){
+        CustomerCreateReq req = new CustomerCreateReq();
+        req.customerId=customerId;
+        req.cardNo=cardNo;
+        req.userId = Session.getAuthUser().getId();
+        req.userName = Session.getAuthUser().getName();
+        req.source=null;
         return req;
     }
 

@@ -287,6 +287,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
             default:
                 break;
         }
+        isShowQrCode();
     }
 
     void setupCountryView() {
@@ -296,12 +297,14 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
     }
 
     private void isShowQrCode() {
-        if (isOpenWeChat) {//没有开通微信公众号
-            mTvScanDesc.setText(getString(R.string.customer_login_desc_2));
+        if (loginType==LOGIN_MOBILE) {//没有开通微信公众号
+//            mTvScanDesc.setText(getString(R.string.customer_login_desc_2));
+            mTvScanDesc.setVisibility(View.GONE);
         } else {
+            mTvScanDesc.setVisibility(View.VISIBLE);
             mTvScanDesc.setText(getString(R.string.customer_login_desc_1));
         }
-        getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
+//        getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
     }
 
     private TextWatcher mTextWatcher = new TextWatcher() {
@@ -360,7 +363,8 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                 showPasswordDialog(inputNo, null);
                 break;
             case LOGIN_CARD:
-                getCardBaseInfo(inputNo);// v8.2支持刷卡登录会员，先校验卡，在校验手机
+                showPasswordDialog(inputNo);
+//                getCardBaseInfo(inputNo);// v8.2支持刷卡登录会员，先校验卡，在校验手机
                 break;
             default:
                 break;
@@ -385,6 +389,16 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         });
     }
 
+    private void showPasswordDialog(final String cardNO){
+        CustomerLogin.dinnerLoginByPhoneNo(getActivity(), cardNO, new CustomerLogin.DinnerLoginListener() {
+            @Override
+            public void login(PasswordDialog dialog, int needPswd, String password) {
+                boolean needPwd = needPswd == CustomerManager.NEED_PSWD;
+                    loginByCardNo(cardNO, needPwd, password, dialog);
+            }
+        });
+    }
+
     /*   * 获取卡的基本信息*/
     private void getCardBaseInfo(final String inputNo) {
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
@@ -404,7 +418,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                                                                            showPasswordDialog(baseCardInfo.getCardNum(), baseCardInfo.getCustomerId());
                                                                        }
                                                                    } else {
-                                                                       loginByCardNo(baseCardInfo.getCardNum());
+                                                                       showPasswordDialog(baseCardInfo.getCardNum());
                                                                    }
                                                                } else {
                                                                    String tips = CustomerManager.getInstance().getStatusName(baseCardInfo.getCardStatus());
@@ -434,81 +448,9 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
      * @Title: loginByCardNo
      * @Return void 返回类型
      */
-    private void loginByCardNo(final String inputNo) {
-        CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
-        ResponseListener<CardLoginResp> listener = new EventResponseListener<CardLoginResp>(UserActionEvent.DINNER_PAY_LOGIN_SWIPE_CARD) {
-
-            @Override
-            public void onResponse(ResponseObject<CardLoginResp> response) {
-                if (ResponseObject.isOk(response)) {
-                    final CardLoginResp resp = response.getContent();
-                    // 设置card的名称，从customer中获得
-                    final EcCard card = resp.getResult().getCardInstance();
-                    if (card.getCardType() == EntityCardType.ANONYMOUS_ENTITY_CARD) {
-                        ToastUtil.showShortToast(R.string.customer_login_not_member);
-                        mShowValue.setHint(R.string.customer_login_not_member);
-                        mShowValue.setBackgroundResource(R.drawable.customer_edit_error_bg);
-                        /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_VALIDATE_USER_FAIL, "", null, 0, true, 0); // 副屏显示
-                        DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
-                        mShowValue.requestFocus();
-                        mShowValue.setText("");
-                        mShowValue.startAnimation(shakeAnimation(6));
-                    } else {
-                        if (isLogin) {
-                            return;
-                        }
-                        if (card.getCardStatus() != CardStatus.ACTIVATED) {
-                            ToastUtil.showShortToast(R.string.card_disable);
-                        } else {
-                            EcCardKind ecCardKind = resp.getResult().getCardKind();
-                            if (ecCardKind.getIsNeedPwd() == Bool.YES && ServerSettingManager.isCommercialNeedVerifPassword()) {
-                                CustomerLogin.showMemberPasswordDialog(getActivity(), inputNo, new CustomerLogin.DinnerLoginListener() {
-                                    @Override
-                                    public void login(final PasswordDialog dialog, int needPswd, String password) {
-                                        verifyPwd(resp.getResult().getCustomer().getCustomerid(), password, new CalmResponseListener<ResponseObject<LoyaltyTransferResp>>() {
-                                            @Override
-                                            public void onError(NetError error) {
-                                                ToastUtil.showShortToast(error.getVolleyError().getMessage());
-                                            }
-
-                                            @Override
-                                            public void onSuccess(ResponseObject<LoyaltyTransferResp> data) {
-                                                if (data.getContent() != null) {
-                                                    if (data.getContent().getResult() != null && data.getContent().getCode() == 1) {
-                                                        if (dialog != null && dialog.isShowing()) {
-                                                            dialog.dismiss();
-                                                        }
-                                                        setLoginByCardNo(resp, card);
-                                                    } else {
-                                                        loginFail(data.getContent().getMessage(), false);
-                                                    }
-                                                } else {
-                                                    loginFail(data.getMessage(), false);
-                                                }
-                                            }
-                                        });
-
-                                    }
-                                });
-                            } else {
-                                setLoginByCardNo(resp, card);
-                            }
-                        }
-                    }
-                } else {
-                    String message = response.getMessage();
-                    // 副屏显示
-                    loginFail(message, false);
-                }
-                UserActionEvent.end(getEventName());
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                ToastUtil.showShortToast(error.getMessage());
-            }
-        };
-        operates.cardLogin(inputNo, LoadingResponseListener.ensure(listener, getChildFragmentManager()));
+    private void loginByCardNo(String input, boolean needPswd, final String pswd, final PasswordDialog dialog) {
+        CustomerManager.getInstance().customerLogin(CustomerLoginType.CARD_NO_ENTITY, input, pswd, needPswd, false, true,
+                getResponseMemberLogin(needPswd, dialog, UserActionEvent.DINNER_PAY_LOGIN_INPUT_MOBILE, CustomerLoginType.MOBILE));
     }
 
     private void verifyPwd(Long customerId, String pwd, CalmResponseListener listener) {

@@ -120,6 +120,14 @@ public class ServerAddressUtil {
     }
 
     /**
+     * 会员绑定会员卡
+     * @return
+     */
+    public String customerBindCard() {
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/customer/ecard/bind";
+    }
+
+    /**
      * 获取门店实体卡/匿名卡储值记录列表
      *
      * @return

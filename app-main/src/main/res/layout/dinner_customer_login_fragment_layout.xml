@@ -19,13 +19,11 @@
             android:gravity="center"
             android:textColor="@color/color_F85121"
             android:textSize="@dimen/text_13"
-            tools:text="@string/customer_login_desc_1"
-            android:visibility="invisible" />
+            tools:text="@string/customer_login_desc_1" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="37dp"
-            android:visibility="gone">
+            android:layout_height="37dp">
 
             <LinearLayout
                 android:id="@+id/ll_login_mobile"

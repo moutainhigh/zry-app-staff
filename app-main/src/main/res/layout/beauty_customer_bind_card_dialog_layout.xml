@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="373dp"
+        android:layout_height="340dp"
+        android:layout_gravity="center"
+        android:background="@drawable/order_center_operate_dialog_background"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="67dp">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/customer_to_entity_card"
+                android:textColor="#FFFF7901"
+                android:textSize="@dimen/dialog_operate_title_size" />
+
+            <ImageButton
+                android:id="@+id/ib_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/dinner_close"
+                android:clickable="true" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/gray_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/beauty_notify_textview_hint"
+                    android:text="会员名称：" />
+
+                <TextView
+                    android:id="@+id/tv_member_name"
+                    style="@style/beauty_notify_textview_value" />
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tv_card_hint"
+                    style="@style/beauty_notify_textview_hint"
+                    android:layout_height="35dp"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentLeft="true"
+                    android:text="会员卡号：" />
+
+                <EditText
+                    android:id="@+id/et_card_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_toRightOf="@id/tv_card_hint"
+                    android:background="@drawable/customer_detail_item_bg"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:paddingBottom="7dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="7dp"
+                    android:textSize="@dimen/text_16" />
+
+                <TextView
+                    style="@style/beauty_notify_textview_hint"
+                    android:layout_alignLeft="@id/et_card_no"
+                    android:layout_below="@id/et_card_no"
+                    android:text="*注:使用刷卡器读取会员卡信息!"
+                    android:textColor="@color/text_red_2"
+                    android:textSize="@dimen/text_10" />
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btn_bind"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/beauty_btn_main_selector"
+                android:text="绑定"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_16" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

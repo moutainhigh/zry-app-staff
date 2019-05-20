@@ -446,6 +446,22 @@ public interface CustomerOperates extends IOperates {
     void getCustomerById(Long customerId, boolean isNeedCredit, YFResponseListener<YFResponse<CustomerResp>> listener);
 
     /**
+     * 根据会员卡
+     * @param cardNo
+     * @param isNeedCredit
+     * @param listener
+     */
+    void getCustomerByCardNo(String cardNo, boolean isNeedCredit, YFResponseListener<YFResponse<CustomerResp>> listener);
+
+    /**
+     * 绑定会员卡
+     * @param cardNo
+     * @param customerId
+     * @param listener
+     */
+    void customerBindCard(String cardNo,Long customerId, YFResponseListener<YFResponse<CustomerCreateResp>> listener);
+
+    /**
      * 取消根据ID查询会员信息
      */
     void cancelGetCustomerById();

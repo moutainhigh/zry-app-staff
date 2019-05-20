@@ -14,6 +14,9 @@ public enum CustomerLoginType implements ValueEnum<Integer> {
     //"微信openid"
     WECHAT_OPENID(3),
 
+    //会员卡登陆
+    CARD_NO_ENTITY(4),
+
     //"微信会员卡卡号"
     WECHAT_MEMBERCARD_ID(101),
 

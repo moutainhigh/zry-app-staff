@@ -160,7 +160,7 @@
     <string name="member_logout">退出登录</string>
     <string name="customer_return_list">返回列表</string>
     <string name="customer_to_card_stroe">虚拟卡储值</string>
-    <string name="customer_to_entity_card">实体卡绑定</string>
+    <string name="customer_to_entity_card">会员卡绑定</string>
     <string name="customer_select_title">选择登录账户</string>
     <string name="online_pay_dialog_title">请选择扫码方式</string>
     <string name="online_pay_dialog_jc_value_card_title">请扫码</string>

@@ -54,6 +54,7 @@ import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.yunfu.context.session.core.auth.Auth;
 import com.zhongmei.yunfu.context.session.core.user.User;
+import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.context.util.helper.SpHelper;
 import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.yunfu.resp.EventResponseListener;
@@ -159,6 +160,12 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
     /*********************** 会员基本信息 **********************/
     @ViewById(R.id.detail_base)
     LinearLayout baseDetailLl;
+
+    @ViewById(R.id.layout_card)
+    LinearLayout layout_card;
+
+    @ViewById(R.id.tv_card_no)
+    TextView tv_cardNO;
 
     /****** 会员信息 消费总计 ******/
     @ViewById(R.id.tv_total_consume_content)
@@ -412,6 +419,7 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
         initUI();
         initTitleInfo();
         initBaseInfo();
+        initCardNo();
         initMemberInfo();
         initSwitchTitle();
     }
@@ -701,6 +709,19 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
         // FIXME 添加 会员累计消费 和 消费次数
 
     }
+
+    /**
+     * 设置卡号
+     */
+    private void initCardNo(){
+        if(Utils.isEmpty(mCustomer.entityCards)){
+            layout_card.setVisibility(View.GONE);
+        }else{
+            layout_card.setVisibility(View.VISIBLE);
+            tv_cardNO.setText(mCustomer.getCardNos());
+        }
+    }
+
 
     /**
      * 初始化会员信息

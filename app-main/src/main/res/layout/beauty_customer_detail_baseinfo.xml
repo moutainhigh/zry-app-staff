@@ -6,13 +6,45 @@
 
     <include
         layout="@layout/beauty_customer_detail_info"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:visibility="gone"
         android:background="@color/beauty_color_D9D9D9" />
+
+    <LinearLayout
+        android:id="@+id/layout_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="15dp"
+        android:paddingRight="20dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            style="@style/customer_info_item_left"
+            android:textSize="@dimen/text_16"
+            android:textColor="#333333"
+            android:text="@string/customer_card_num"/>
+
+        <TextView
+            android:id="@+id/tv_card_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:paddingLeft="5dp"
+            android:textColor="@color/beauty_color_FF9F00"
+            android:textSize="16sp" />
+
+        <ImageView
+            style="@style/customer_info_item_img"
+            android:contentDescription="@null"
+            android:visibility="gone"
+            android:src="@drawable/beauty_ic_yellow_right_arrow" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

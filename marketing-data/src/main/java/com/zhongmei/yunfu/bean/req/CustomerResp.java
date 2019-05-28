@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerStatistic;
 import com.zhongmei.bty.basemodule.customer.bean.ICustomerListBean;
 import com.zhongmei.bty.basemodule.customer.bean.ICustomerStatistic;
+import com.zhongmei.bty.basemodule.database.entity.customer.BeautyCardEntity;
+import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.db.entity.crm.CustomerGroupLevel;
 import com.zhongmei.yunfu.data.R;
 import com.zhongmei.bty.basemodule.commonbusiness.cache.PaySettingCache;
@@ -72,6 +74,8 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     public String faceCode;//人脸识别码，只有详情页才下行
     public String peopleId;//第三方人脸识别服务器返回字段、只在详情才下行
     public String cardNo;
+    public List<BeautyCardEntity> entityCards;//实体卡信息，与详情接口一起返回
+
 
     /**
      * 颜值得分
@@ -194,6 +198,17 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         }
     }
 
+    public String getCardNos(){
+        if(Utils.isNotEmpty(entityCards)){
+            StringBuffer cardNoBuf=new StringBuffer();
+            for (BeautyCardEntity beautyCardEntity : entityCards) {
+                cardNoBuf.append(beautyCardEntity.getCardNo()+",");
+            }
+           return  cardNoBuf.substring(0,cardNoBuf.length()-1);
+        }
+        return "";
+    }
+
     @Override
     public CustomerListResp getCustomerListBean() {
         CustomerListResp bean = new CustomerListResp();
@@ -261,6 +276,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         json.put("uuid", synFlag);
         json.put("birthdate", birthday + "");
         json.put("cardNo",cardNo);
+        json.put("entityCards",entityCards);
         return json;
     }
 

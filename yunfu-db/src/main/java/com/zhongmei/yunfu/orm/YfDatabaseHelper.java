@@ -31,6 +31,7 @@ import com.zhongmei.yunfu.db.entity.crm.CrmLevelStoreRule;
 import com.zhongmei.yunfu.db.entity.crm.CrmLevelStoreRuleDetail;
 import com.zhongmei.yunfu.db.entity.crm.CustomerGroupLevel;
 import com.zhongmei.yunfu.db.entity.crm.CustomerLevel;
+import com.zhongmei.yunfu.db.entity.crm.CustomerSaveRule;
 import com.zhongmei.yunfu.db.entity.discount.CoupRule;
 import com.zhongmei.yunfu.db.entity.discount.Coupon;
 import com.zhongmei.yunfu.db.entity.discount.CustomerScoreRule;
@@ -187,6 +188,7 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(TradeItemExtra.class);
         tables.add(TradeCreditLog.class);
         tables.add(CoupRule.class);
+        tables.add(CustomerSaveRule.class);
 
         BeautyDbHelperUtil.initTables(tables);
         TABLES = Collections.unmodifiableList(tables);

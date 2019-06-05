@@ -123,6 +123,11 @@ public enum PrivilegeType implements ValueEnum<Integer> {
     BARGAIN(25),
 
     /**
+     * 储值折扣
+     */
+    CHARGE(26),
+
+    /**
      * 未知的值
      *
      * @deprecated 为了避免转为enum出错而设置，不应直接使用

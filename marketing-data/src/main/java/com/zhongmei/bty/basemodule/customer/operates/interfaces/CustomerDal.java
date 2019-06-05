@@ -52,6 +52,14 @@ public interface CustomerDal extends IOperates {
     /**
      * 获取充值规则
      *
+     * @param
+     * @return
+     */
+    public RechargeRuleVo findRechargeRule() throws Exception;
+
+    /**
+     * 获取充值规则
+     *
      * @param cardKindId 实体卡别
      * @return
      */

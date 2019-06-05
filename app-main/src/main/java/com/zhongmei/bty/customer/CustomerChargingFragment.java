@@ -895,11 +895,12 @@ public class CustomerChargingFragment extends BasicFragment implements OnClickLi
             public RechargeRuleVo doInBackground(Void... params) {
                 RechargeRuleVo rechargeRuleVo = null;
                 try {
-                    if (ecCard != null) {
-                        rechargeRuleVo = dal.findRechargeRule(Long.valueOf(ecCard.getCardLevelId()));
-                    } else if (mCustomer != null) {
-                        rechargeRuleVo = dal.findRechargeRule(null);
-                    }
+//                    if (ecCard != null) {
+//                        rechargeRuleVo = dal.findRechargeRule(Long.valueOf(ecCard.getCardLevelId()));
+//                    } else if (mCustomer != null) {
+//                        rechargeRuleVo = dal.findRechargeRule(null);
+//                    }
+                    rechargeRuleVo=dal.findRechargeRule();
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
                 }

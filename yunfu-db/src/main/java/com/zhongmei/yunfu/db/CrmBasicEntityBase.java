@@ -37,7 +37,7 @@ public class CrmBasicEntityBase extends IdEntityBase {
         /**
          * brand_identy
          */
-        String brandId = "brand_id";
+        String brandId = "brand_identy";
 
     }
 
@@ -62,8 +62,8 @@ public class CrmBasicEntityBase extends IdEntityBase {
     /**
      * 品牌Identy
      */
-    @DatabaseField(columnName = "brand_id", canBeNull = false)
-    private Long brandId;
+    @DatabaseField(columnName = "brand_identy", canBeNull = false)
+    private Long brandIdenty;
 
 
     public Long getServerCreateTime() {
@@ -91,11 +91,11 @@ public class CrmBasicEntityBase extends IdEntityBase {
     }
 
     public Long getBrandId() {
-        return brandId;
+        return brandIdenty;
     }
 
     public void setBrandIdenty(Long brandIdenty) {
-        this.brandId = brandIdenty;
+        this.brandIdenty = brandIdenty;
     }
 
     @Override
@@ -110,6 +110,6 @@ public class CrmBasicEntityBase extends IdEntityBase {
 
     @Override
     public boolean checkNonNull() {
-        return super.checkNonNull() && checkNonNull(statusFlag, brandId);
+        return super.checkNonNull() && checkNonNull(statusFlag, brandIdenty);
     }
 }

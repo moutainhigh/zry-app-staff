@@ -1,5 +1,6 @@
 package com.zhongmei.bty.basemodule.customer.operates.impls;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.j256.ormlite.dao.Dao;
@@ -9,6 +10,7 @@ import com.zhongmei.bty.basemodule.customer.bean.DishMemberPrice;
 import com.zhongmei.bty.basemodule.customer.bean.RechargeRuleVo;
 import com.zhongmei.bty.basemodule.customer.bean.RechargeRuleVo.RechargeRuleDetailVo;
 import com.zhongmei.bty.basemodule.customer.entity.CrmCustomerLevelRightsDish;
+import com.zhongmei.bty.commonmodule.database.enums.SendType;
 import com.zhongmei.yunfu.db.entity.crm.CrmCustomerThreshold;
 import com.zhongmei.yunfu.db.entity.crm.CrmLevelStoreRule;
 import com.zhongmei.yunfu.db.entity.crm.CrmLevelStoreRuleDetail;
@@ -27,6 +29,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.EcCardLevelSetting;
 import com.zhongmei.bty.basemodule.devices.mispos.data.EcCardSettingDetail;
 import com.zhongmei.bty.basemodule.devices.mispos.enums.EntityCardType;
 import com.zhongmei.bty.basemodule.discount.entity.CrmCustomerLevelRights;
+import com.zhongmei.yunfu.db.entity.crm.CustomerSaveRule;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.yunfu.util.Checks;
 import com.zhongmei.bty.commonmodule.data.operate.AbstractOpeartesImpl;
@@ -330,6 +333,31 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
             }
             return vo;
         } finally {
+            DBHelperManager.releaseHelper(helper);
+        }
+    }
+
+
+    @Override
+    public RechargeRuleVo findRechargeRule() throws Exception {
+        DatabaseHelper helper = DBHelperManager.getHelper();
+        RechargeRuleVo vo = new RechargeRuleVo();
+        vo.setRuleDetailList(new ArrayList<RechargeRuleDetailVo>());
+        try {
+            Dao<CustomerSaveRule, Long> customerSaveRuleDao = helper.getDao(CustomerSaveRule.class);
+            List<CustomerSaveRule> customerSaveRules = customerSaveRuleDao.queryForAll();
+            if(Utils.isNotEmpty(customerSaveRules)){
+                vo.setIsFullSend(FullSend.YES);//满赠
+                vo.setSendType(SendType.FIXED);//固定金额
+                for (CustomerSaveRule customerSaveRule : customerSaveRules) {
+                    RechargeRuleDetailVo detailVo = new RechargeRuleDetailVo();
+                    detailVo.setFullValue(customerSaveRule.getStoredValue());
+                    detailVo.setSendValue(customerSaveRule.getGiveValue());
+                    vo.getRuleDetailList().add(detailVo);
+                }
+            }
+            return vo;
+        }finally {
             DBHelperManager.releaseHelper(helper);
         }
     }

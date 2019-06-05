@@ -850,15 +850,16 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
             public RechargeRuleVo doInBackground(Void... params) {
                 RechargeRuleVo rechargeRuleVo = null;
                 try {
-                    if (ecCard != null) {
-                        if (ecCard.getCardLevelId() == null) {
-                            rechargeRuleVo = dal.findRechargeRuleByKind(ecCard.getCardKindId());
-                        } else {
-                            rechargeRuleVo = dal.findRechargeRule(Long.valueOf(ecCard.getCardLevelId()));
-                        }
-                    } else if (mCustomer != null) {
-                        rechargeRuleVo = dal.findRechargeRule(null);
-                    }
+//                    if (ecCard != null) {
+//                        if (ecCard.getCardLevelId() == null) {
+//                            rechargeRuleVo = dal.findRechargeRuleByKind(ecCard.getCardKindId());
+//                        } else {
+//                            rechargeRuleVo = dal.findRechargeRule(Long.valueOf(ecCard.getCardLevelId()));
+//                        }
+//                    } else if (mCustomer != null) {
+//                        rechargeRuleVo = dal.findRechargeRule(null);
+//                    }
+                    rechargeRuleVo = dal.findRechargeRule();
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
                 }

@@ -1902,7 +1902,7 @@ public class BaseShoppingCart {
     }
 
     @Deprecated
-    public TradePrivilege buildMarketingPrivilege(TradePrivilege mTradePrivilege, TradeVo mTradeVo, BigDecimal privilageAoument) {
+    public TradePrivilege buildMarketingPrivilege(TradePrivilege mTradePrivilege, TradeVo mTradeVo, BigDecimal privilegeAoument) {
         if (mTradePrivilege == null) {
             mTradePrivilege = new TradePrivilege();
             mTradePrivilege.validateCreate();
@@ -1912,8 +1912,8 @@ public class BaseShoppingCart {
         }
 
         mTradePrivilege.setTradeUuid(mTradeVo.getTrade().getUuid());
-        mTradePrivilege.setPrivilegeAmount(privilageAoument);
-        mTradePrivilege.setPrivilegeValue(privilageAoument);
+        mTradePrivilege.setPrivilegeAmount(privilegeAoument);
+        mTradePrivilege.setPrivilegeValue(privilegeAoument);
         mTradePrivilege.setPrivilegeType(PrivilegeType.MARKTING);
         mTradePrivilege.setStatusFlag(StatusFlag.VALID);
         mTradePrivilege.setPrivilegeName(BaseApplication.sInstance.getString(R.string.marketing_campaign));
@@ -1993,13 +1993,13 @@ public class BaseShoppingCart {
     @Deprecated
     private void setMarktingTradePrivilegeOldVersion(TradeVo mTradeVo) {
         List<TradePlanActivity> listTP = mTradeVo.getTradePlanActivityList();
-        BigDecimal privilageAoument = BigDecimal.ZERO;
+        BigDecimal privilegeAoument = BigDecimal.ZERO;
         if (listTP != null && listTP.size() > 0) {
 
             Boolean haveValid = false;
             for (TradePlanActivity mTradePlanActivity : listTP) {
                 if (mTradePlanActivity.getStatusFlag() == StatusFlag.VALID && mTradePlanActivity.getRuleEffective() == ActivityRuleEffective.VALID) {
-                    privilageAoument = privilageAoument.add(mTradePlanActivity.getOfferValue());
+                    privilegeAoument = privilegeAoument.add(mTradePlanActivity.getOfferValue());
                     haveValid = true;
                 }
 
@@ -2012,8 +2012,8 @@ public class BaseShoppingCart {
 //				mTradePrivilege.setTradeUuid(mTradeVo.getTrade().getUuid());
 //				mTradePrivilege.setCreatorId(AuthUserCache.getAuthUser().getId());
 //				mTradePrivilege.setCreatorName(AuthUserCache.getAuthUser().getName());
-//				mTradePrivilege.setPrivilegeAmount(privilageAoument);
-//				mTradePrivilege.setPrivilegeValue(privilageAoument);
+//				mTradePrivilege.setPrivilegeAmount(privilegeAoument);
+//				mTradePrivilege.setPrivilegeValue(privilegeAoument);
 //				mTradePrivilege.setPrivilegeType(PrivilegeType.MARKTING);
 //				mTradePrivilege.setStatusFlag(StatusFlag.VALID);
 //				mTradePrivilege.setPrivilegeName("商品营销");
@@ -2024,15 +2024,15 @@ public class BaseShoppingCart {
                     for (TradePrivilege mTP : listTradePrivilege) {
                         if (mTP.getPrivilegeType() == PrivilegeType.MARKTING) {
                             isHave = true;
-                            buildMarketingPrivilege(mTP, mTradeVo, privilageAoument);
+                            buildMarketingPrivilege(mTP, mTradeVo, privilegeAoument);
                         }
                     }
                     if (!isHave) {
-                        listTradePrivilege.add(buildMarketingPrivilege(null, mTradeVo, privilageAoument));
+                        listTradePrivilege.add(buildMarketingPrivilege(null, mTradeVo, privilegeAoument));
                     }
                 } else {
                     listTradePrivilege = new ArrayList<TradePrivilege>();
-                    listTradePrivilege.add(buildMarketingPrivilege(null, mTradeVo, privilageAoument));
+                    listTradePrivilege.add(buildMarketingPrivilege(null, mTradeVo, privilegeAoument));
                     mTradeVo.setTradePrivileges(listTradePrivilege);
                 }
             } else {
@@ -2423,9 +2423,9 @@ public class BaseShoppingCart {
                 BigDecimal count = BigDecimal.ONE;
 
                 //重新设置优惠值
-                BigDecimal privilageAmount = item.getPrice().multiply(count);
-                item.getCouponPrivilegeVo().getTradePrivilege().setPrivilegeAmount(privilageAmount.negate());
-                item.getCouponPrivilegeVo().getTradePrivilege().setPrivilegeValue(privilageAmount);
+                BigDecimal privilegeAmount = item.getPrice().multiply(count);
+                item.getCouponPrivilegeVo().getTradePrivilege().setPrivilegeAmount(privilegeAmount.negate());
+                item.getCouponPrivilegeVo().getTradePrivilege().setPrivilegeValue(privilegeAmount);
 
                 BigDecimal depositValue = BigDecimal.ZERO;
                 //押金

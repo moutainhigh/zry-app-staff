@@ -858,7 +858,7 @@ public class MathShoppingCartTool {
      *
      */
 	
-	/*public static Map<Integer, BigDecimal> mathExtraCharge(TradeVo mTradeVo,List<IShopcartItem> iShopcartItem,BigDecimal privilageAfaterAmount) {
+	/*public static Map<Integer, BigDecimal> mathExtraCharge(TradeVo mTradeVo,List<IShopcartItem> iShopcartItem,BigDecimal privilegeAfaterAmount) {
 		
 		List<TradePrivilege> listPrivilege = mTradeVo.getTradePrivileges();
 		
@@ -961,7 +961,7 @@ public class MathShoppingCartTool {
 				}else {
 					mTradePrivilege = BuildPrivilegeTool.buildExtraChargePrivilege(mTradeVo,
 							oldPrivilege,
-							mExtraCharge,privilageAfaterAmount);
+							mExtraCharge,privilegeAfaterAmount);
 					// 是否参与折扣 1：是 2：否
 					if (mExtraCharge.getDiscountFlag() == Bool.YES) {
 

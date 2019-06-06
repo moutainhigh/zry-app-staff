@@ -147,7 +147,7 @@
     <string name="card_pay_not_set">未配置实体卡支付</string>
     <string name="card_login_success">实体卡登录成功</string>
     <string name="unknow_card_type">未知卡类型</string>
-    <string name="no_support_privilage">分步支付不支持带入会员价</string>
+    <string name="no_support_privilege">分步支付不支持带入会员价</string>
     <string name="cannot_auto_login_unknow_type">不能自动登录未知类型</string>
     <string name="pay_member_scanner_have_open">已激活</string>
     <string name="pay_online_st">在线支付</string>

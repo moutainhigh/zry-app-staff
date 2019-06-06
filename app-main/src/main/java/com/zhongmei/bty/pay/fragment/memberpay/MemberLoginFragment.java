@@ -1927,7 +1927,7 @@ public class MemberLoginFragment extends BasicFragment {
         if (mPaymentInfo.getTradeBusinessType() == BusinessType.SNACK || mPaymentInfo.getTradeBusinessType() == BusinessType.TAKEAWAY) {
             boolean isSelected = SharedPreferenceUtil.getSpUtil().getBoolean(SettingConstant.MEMBER_AUTO_PRIVILEGE, false);
             if (mPaymentInfo.getPaidPayment() != null && isSelected) {
-                ToastUtil.showLongToast(R.string.no_support_privilage);
+                ToastUtil.showLongToast(R.string.no_support_privilege);
                 return;
             }
 

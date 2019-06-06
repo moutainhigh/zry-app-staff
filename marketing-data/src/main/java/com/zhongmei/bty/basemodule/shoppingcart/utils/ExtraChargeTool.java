@@ -39,9 +39,9 @@ public class ExtraChargeTool {
         this.mTradeVo = mTradeVo;
     }
 
-    public static ExtraChargeTool countExtraCharge(TradeVo mTradeVo, List<IShopcartItem> iShopcartItem, BigDecimal privilageAfaterAmount) {
+    public static ExtraChargeTool countExtraCharge(TradeVo mTradeVo, List<IShopcartItem> iShopcartItem, BigDecimal privilegeAfaterAmount) {
         ExtraChargeTool extraChargeTool = new ExtraChargeTool(mTradeVo);
-        extraChargeTool.mathExtraCharge(mTradeVo, iShopcartItem, privilageAfaterAmount);
+        extraChargeTool.mathExtraCharge(mTradeVo, iShopcartItem, privilegeAfaterAmount);
         return extraChargeTool;
     }
 
@@ -103,7 +103,7 @@ public class ExtraChargeTool {
      * @Param @return 返回参与整单折扣的附加费金额
      * @Return BigDecimal 返回类型
      */
-    public void mathExtraCharge(TradeVo mTradeVo, List<IShopcartItem> iShopcartItem, BigDecimal privilageAfaterAmount) {
+    public void mathExtraCharge(TradeVo mTradeVo, List<IShopcartItem> iShopcartItem, BigDecimal privilegeAfaterAmount) {
 
         List<TradePrivilege> listPrivilege = mTradeVo.getTradePrivileges();
 
@@ -202,7 +202,7 @@ public class ExtraChargeTool {
                 if (!isServiceCharge(mTradeVo, mExtraCharge)) {
                     mTradePrivilege = BuildPrivilegeTool.buildExtraChargePrivilege(mTradeVo,
                             oldPrivilege,
-                            mExtraCharge, privilageAfaterAmount);
+                            mExtraCharge, privilegeAfaterAmount);
                     // 是否参与折扣 1：是 2：否
                     if (mExtraCharge.getDiscountFlag() == Bool.YES) {
 

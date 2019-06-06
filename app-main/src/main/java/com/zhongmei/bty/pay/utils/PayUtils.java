@@ -878,7 +878,7 @@ public class PayUtils {
             for (TradeItemVo itemVo : tradeVo.getTradeItemList()) {
                 tp = itemVo.getTradeItemPrivilege();
                 tradeItem = itemVo.getTradeItem();
-                if (tradeItem != null && tradeItem.isValid() && tp != null && tp.isValid() && (tp.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || tp.getPrivilegeType() == PrivilegeType.MEMBER_PRICE) && tp.getPrivilegeAmount() != null && tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
+                if (tradeItem != null && tradeItem.isValid() && tp != null && tp.isValid() && (tp.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || tp.getPrivilegeType() == PrivilegeType.MEMBER_PRICE || tp.getPrivilegeType() == PrivilegeType.MEMBER_REBATE)  && tp.getPrivilegeAmount() != null && tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
                     return true;
                 }
             }

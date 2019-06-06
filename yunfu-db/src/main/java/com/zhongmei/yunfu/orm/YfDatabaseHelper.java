@@ -7,6 +7,7 @@ import android.util.Log;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.zhongmei.bty.basemodule.commonbusiness.entity.CommercialCustomSettings;
+import com.zhongmei.bty.basemodule.discount.entity.CustomerDishPrivilege;
 import com.zhongmei.yunfu.context.AppBuildConfig;
 import com.zhongmei.yunfu.context.Constant;
 import com.zhongmei.yunfu.db.IEntity;
@@ -189,6 +190,7 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(TradeCreditLog.class);
         tables.add(CoupRule.class);
         tables.add(CustomerSaveRule.class);
+        tables.add(CustomerDishPrivilege.class);
 
         BeautyDbHelperUtil.initTables(tables);
         TABLES = Collections.unmodifiableList(tables);

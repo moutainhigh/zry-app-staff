@@ -222,7 +222,7 @@ public class BuffetUnionTrade extends IUnionTrade {
         if (integralCashPrivilegeVo != null) {
             TradePrivilege tradePrivilege = integralCashPrivilegeVo.getTradePrivilege();
             if (tradePrivilege != null
-                    && (tradePrivilege.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || tradePrivilege.getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+                    && (tradePrivilege.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || tradePrivilege.getPrivilegeType() == PrivilegeType.MEMBER_PRICE || tradePrivilege.getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
                 if (tradePrivilege.getStatusFlag() == StatusFlag.VALID) {
                     tradePrivilege.setStatusFlag(StatusFlag.INVALID);
                     tradePrivilege.validateUpdate();

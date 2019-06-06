@@ -1,5 +1,8 @@
 package com.zhongmei.bty.basemodule.customer.bean;
 
+import com.zhongmei.yunfu.db.enums.MemberPrivilegeType;
+import com.zhongmei.yunfu.util.ValueEnums;
+
 public class DishMemberPrice {
     private Double discount;// 会员折扣
 
@@ -28,11 +31,15 @@ public class DishMemberPrice {
         this.memberPrice = memberPrice;
     }
 
-    public int getPriceType() {
-        return priceType;
+    public MemberPrivilegeType getPriceType() {
+        return ValueEnums.toEnum(MemberPrivilegeType.class,priceType);
     }
 
-    public void setPriceType(int priceType) {
+    public void setPriceType(MemberPrivilegeType priceType) {
+        this.priceType = ValueEnums.toValue(priceType);
+    }
+
+    public void setPriceType(Integer priceType) {
         this.priceType = priceType;
     }
 

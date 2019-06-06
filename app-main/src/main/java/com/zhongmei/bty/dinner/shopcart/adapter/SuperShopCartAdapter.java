@@ -2150,6 +2150,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             // 会员价
             it.setMemberDiscount(true);
             it.setName(context.getResources().getString(R.string.dinner_memeber_price_label));
+        }else if (privilege.getPrivilegeType() == PrivilegeType.MEMBER_REBATE) {
+            // 会员折让
+            it.setMemberDiscount(true);
+            it.setName(context.getResources().getString(R.string.dinner_memeber_rebate_label));
         }
     }
 

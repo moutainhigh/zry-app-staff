@@ -2814,7 +2814,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         for (IShopcartItemBase item : mergeShopcartItem(dinnerShoppingCartVo)) {
             // 登出会员是，将菜品中所以得会员折扣和会员特价移除
             if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
-                    || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+                    || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
+                    || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
 
                 item.setPrivilege(null);
 

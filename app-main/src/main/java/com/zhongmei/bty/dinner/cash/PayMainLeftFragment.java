@@ -699,7 +699,8 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                         TradePrivilege tradePrivilege = shopcartItem.getPrivilege();
                         DinnerShopManager.getInstance().getShoppingCart().removeDishPrivilege(shopcartItem);
                         if (tradePrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
-                                && tradePrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE) {
+                                && tradePrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
+                                && tradePrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
                             // 如果是会员登录并且移除的不是会员折扣 恢复会员折扣
                             if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
                                 DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(shopcartItem, true, true);

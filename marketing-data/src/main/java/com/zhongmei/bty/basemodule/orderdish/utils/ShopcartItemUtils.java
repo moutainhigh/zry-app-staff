@@ -348,7 +348,7 @@ public final class ShopcartItemUtils {
         }
         // 优惠信息。会员折扣不复制
         TradePrivilege refPrivilege = theRef.getPrivilege();
-        if (refPrivilege != null && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE) {
+        if (refPrivilege != null && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
             TradePrivilege newPrivilege = newEntity(refPrivilege, theNew.getUuid());
             if (newPrivilege == null) {
                 return null;
@@ -477,7 +477,7 @@ public final class ShopcartItemUtils {
         }
         // 优惠信息。会员折扣不复制
         TradePrivilege refPrivilege = theRef.getPrivilege();
-        if (refPrivilege != null && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE) {
+        if (refPrivilege != null && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
             TradePrivilege newPrivilege = newEntity(refPrivilege, theNew.getUuid());
             theNew.setPrivilege(newPrivilege);
         }
@@ -779,7 +779,8 @@ public final class ShopcartItemUtils {
         TradePrivilege refPrivilege = theRef.getPrivilege();
         if (refPrivilege != null && refPrivilege.isValid()
                 && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
-                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE) {
+                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
+                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
             TradePrivilege newPrivilege = newEntity(refPrivilege, theNew.getUuid());
             theNew.setPrivilege(newPrivilege);
         }
@@ -1318,7 +1319,8 @@ public final class ShopcartItemUtils {
         TradePrivilege refPrivilege = setmealRef.getPrivilege();
         if (refPrivilege != null && refPrivilege.isValid()
                 && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
-                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE) {
+                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
+                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
             TradePrivilege newPrivilege = newEntity(refPrivilege, setmealNew.getUuid());
             setmealNew.setPrivilege(newPrivilege);
         }
@@ -1858,7 +1860,8 @@ public final class ShopcartItemUtils {
         TradePrivilege refPrivilege = setmealRef.getPrivilege();
         if (refPrivilege != null && refPrivilege.isValid()
                 && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
-                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE) {
+                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
+                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
             TradePrivilege newPrivilege = newEntity(refPrivilege, setmealNew.getUuid());
             setmealNew.setPrivilege(newPrivilege);
         }
@@ -2101,7 +2104,8 @@ public final class ShopcartItemUtils {
         TradePrivilege refPrivilege = ref.getPrivilege();
         if (refPrivilege != null && refPrivilege.isValid()
                 && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
-                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE) {
+                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
+                && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
             TradePrivilege newPrivilege = newEntity(refPrivilege, ref.getUuid());
             newItem.setPrivilege(newPrivilege);
         }

@@ -31,6 +31,7 @@ public class DiscountTool {
                 || type == PrivilegeType.GIVE
                 || type == PrivilegeType.AUTO_DISCOUNT
                 || type == PrivilegeType.MEMBER_PRICE
+                || type == PrivilegeType.MEMBER_REBATE
                 || item.getCouponPrivilegeVo() != null) {
             return true;
         }

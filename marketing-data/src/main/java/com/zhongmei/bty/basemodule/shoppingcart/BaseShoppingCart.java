@@ -1378,7 +1378,7 @@ public class BaseShoppingCart {
                 continue;
             }
 
-            if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+            if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
                 item.setPrivilege(null);
             }
 
@@ -1423,7 +1423,7 @@ public class BaseShoppingCart {
                 continue;
             }
 
-            if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+            if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
                 item.setPrivilege(null);
             }
 
@@ -1586,25 +1586,25 @@ public class BaseShoppingCart {
         DishMemberPrice mDishMemberPrice = null;
 
         //判断cardTempLetId会员卡对应的销售策略是否为null,如为null表示是虚拟会员登录，不为null表示实体卡登录
-        if (!isInMemberDay && mCardLevelSetting == null && mCustomer.levelId != null) {
-            mDishMemberPrice = operates.findDishMemberPriceByDishId(dishID, mCustomer.levelId);
-        } else if (isInMemberDay && crmMemberDay.getMemberPriceTempletId() != null && mCustomer.levelId != null) {
-            mDishMemberPrice = operates.queryMemberPrice(crmMemberDay.getMemberPriceTempletId(), dishID);
-        } else if (mCardLevelSetting != null && mCardLevelSetting.getMemberPriceTempletId() != null) {//如mCardLevelSetting.getMemberPriceTempletId()为空，这表示该卡没有会员价
-            mDishMemberPrice = operates.queryMemberPrice(mCardLevelSetting.getMemberPriceTempletId(), dishID);
-        }
+        mDishMemberPrice = operates.findDishMemberPriceByDishId(dishID, mCustomer.levelId);
+//        if (!isInMemberDay && mCardLevelSetting == null && mCustomer.levelId != null) {
+//            mDishMemberPrice = operates.findDishMemberPriceByDishId(dishID, mCustomer.levelId);
+//        } else if (isInMemberDay && crmMemberDay.getMemberPriceTempletId() != null && mCustomer.levelId != null) {
+//            mDishMemberPrice = operates.queryMemberPrice(crmMemberDay.getMemberPriceTempletId(), dishID);
+//        } else if (mCardLevelSetting != null && mCardLevelSetting.getMemberPriceTempletId() != null) {//如mCardLevelSetting.getMemberPriceTempletId()为空，这表示该卡没有会员价
+//            mDishMemberPrice = operates.queryMemberPrice(mCardLevelSetting.getMemberPriceTempletId(), dishID);
+//        }
         Long privilegeTime = tradeVo.getTrade().getServerCreateTime();
         if (privilegeTime == null) {
             privilegeTime = System.currentTimeMillis();
         }
-        if (mDishMemberPrice != null
-                && isInDate(privilegeTime, mDishMemberPrice.getPeriodStart(), mDishMemberPrice.getPeriodEnd())) {
+        if (mDishMemberPrice != null && isInDate(privilegeTime, mDishMemberPrice.getPeriodStart(), mDishMemberPrice.getPeriodEnd())) {
             TradePrivilege mTradePrivilege = BuildPrivilegeTool.mathMemberPrice(mIShopcartItemBase, mDishMemberPrice, tradeVo.getTrade().getUuid());
             mIShopcartItemBase.setPrivilege(mTradePrivilege);
         } else {
             //没有查到会员优惠，将之前的会员优惠移除v7.7添加
             TradePrivilege temp = mIShopcartItemBase.getPrivilege();
-            if (temp != null && (temp.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || temp.getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+            if (temp != null && (temp.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || temp.getPrivilegeType() == PrivilegeType.MEMBER_PRICE || temp.getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
                 List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
                 if (temp.getId() != null && tradePrivileges != null) {
                     for (TradePrivilege tradePrivilege : tradePrivileges) {
@@ -2071,6 +2071,7 @@ public class BaseShoppingCart {
                     || type == PrivilegeType.GIVE
                     || type == PrivilegeType.AUTO_DISCOUNT
                     || type == PrivilegeType.MEMBER_PRICE
+                    || type == PrivilegeType.MEMBER_REBATE
                     || type == PrivilegeType.WECHAT_CARD_COUPONS
                     || type == PrivilegeType.MARKTING
                     ) {
@@ -2379,7 +2380,7 @@ public class BaseShoppingCart {
                 if (tradeItemVo.getTradeItemPrivilege() != null) {
                     PrivilegeType privilegeType = tradeItemVo.getTradeItemPrivilege().getPrivilegeType();
                     //移菜或者复制菜品时会员价会带入，所以不移除
-                    if (privilegeType != PrivilegeType.MEMBER_PRICE && privilegeType != PrivilegeType.AUTO_DISCOUNT || isRemoveMemeberPrice) {
+                    if (privilegeType != PrivilegeType.MEMBER_REBATE && privilegeType != PrivilegeType.MEMBER_PRICE && privilegeType != PrivilegeType.AUTO_DISCOUNT || isRemoveMemeberPrice) {
                         if (tradeItemVo.getTradeItemPrivilege().getId() == null) {
                             tradeItemVo.setTradeItemPrivilege(null);
                         } else {

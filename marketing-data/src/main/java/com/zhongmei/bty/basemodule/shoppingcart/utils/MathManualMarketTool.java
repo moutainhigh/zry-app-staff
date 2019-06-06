@@ -22,6 +22,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
+import com.zhongmei.yunfu.db.enums.MemberPrivilegeType;
 import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
@@ -457,7 +458,7 @@ public class MathManualMarketTool {
         BigDecimal itemPrivilegeAmount = BigDecimal.ZERO;
         TradePrivilege tradePrivilege = item.getPrivilege();
         if (dishMemberPrice != null) {
-            if (dishMemberPrice.getPriceType() == 1) {
+            if (dishMemberPrice.getPriceType() == MemberPrivilegeType.DISCOUNT) {
                 // 特价折扣
                 if (tradePrivilege != null && tradePrivilege.isValid()) {
                     // 有优惠时计算方式,用会员优惠后的价格计算

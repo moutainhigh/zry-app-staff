@@ -14,6 +14,7 @@
     <string name="banquet_privilege">宴请</string>
     <string name="member_dish_discount">会员折扣</string>
     <string name="member_dish_price">会员特价</string>
+    <string name="member_dish_rebate">会员折让</string>
     <string name="week_day_sunday">星期日</string>
     <string name="week_day_monday">星期一</string>
     <string name="week_day_tuesday">星期二</string>

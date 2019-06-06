@@ -314,6 +314,7 @@ public class TradePrivilege extends DataEntityBase implements ICreator, IUpdator
     public boolean isCommonPrivilege() {
         if (getPrivilegeType() == PrivilegeType.DISCOUNT
                 || getPrivilegeType() == PrivilegeType.MEMBER_PRICE
+                ||getPrivilegeType() == PrivilegeType.MEMBER_REBATE
                 || getPrivilegeType() == PrivilegeType.REBATE
                 || getPrivilegeType() == PrivilegeType.FREE
                 || getPrivilegeType() == PrivilegeType.GIVE

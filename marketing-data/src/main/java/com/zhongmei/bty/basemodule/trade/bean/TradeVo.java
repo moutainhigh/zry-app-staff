@@ -441,6 +441,27 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return null;
     }
 
+
+    /**
+     *  获取会员折扣折让优惠
+     * @return
+     */
+    public TradePrivilege gettradePrivilegeMember(){
+        if (tradePrivileges != null) {
+            for (TradePrivilege mTradePrivilege : tradePrivileges) {
+                if (!mTradePrivilege.isValid()) {
+                    continue;
+                }
+                if (mTradePrivilege.getPrivilegeType() == PrivilegeType.MEMBER_PRICE
+                        || mTradePrivilege.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
+                        || mTradePrivilege.getPrivilegeType() == PrivilegeType.MEMBER_REBATE) {
+                    return mTradePrivilege;
+                }
+            }
+        }
+        return null;
+    }
+
     /**
      * @Title: getTradePrivilege
      * @Description: 获取整单手动折扣

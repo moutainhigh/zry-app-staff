@@ -350,7 +350,8 @@ public class ShoppingCart extends BaseShoppingCart {
 
         if (mShopcartItem.getPrivilege() != null
                 && (mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
-                || mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+                || mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
+                || mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
             setDishMemberPrivilege(fastFootShoppingCartVo, mShopcartItem, false);
         } else if ((value == null || mShopcartItem.getIsChangedPrice() == Bool.NO) && mShopcartItem.getPrivilege() == null) {
             setDishMemberPrivilege(fastFootShoppingCartVo, mShopcartItem, false);
@@ -604,6 +605,7 @@ public class ShoppingCart extends BaseShoppingCart {
         if (value.getPrivilege() != null
                 && (value.getPrivilege().getPrivilegeType() == PrivilegeType.DISCOUNT
                 || value.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
+                || value.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE
                 || value.getPrivilege().getPrivilegeType() == PrivilegeType.REBATE
                 || value.getPrivilege().getPrivilegeType() == PrivilegeType.FREE
                 || value.getPrivilege().getPrivilegeType() == PrivilegeType.GIVE
@@ -878,7 +880,8 @@ public class ShoppingCart extends BaseShoppingCart {
      */
     public void removeDishPrivilege(IShopcartItemBase mShopcartItem) {
         if (mShopcartItem.getPrivilege() != null && (mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
-                || mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+                || mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
+                || mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
             for (IShopcartItem item : mergeShopcartItem(fastFootShoppingCartVo)) {
                 if (item.getUuid().equals(mShopcartItem.getUuid())) {
                     item.setPrivilege(null);
@@ -935,7 +938,7 @@ public class ShoppingCart extends BaseShoppingCart {
     public boolean isHaveMemberPrivilege(Boolean isDinner) {
         for (IShopcartItemBase item : mergeShopcartItem(getShoppingCartVo())) {
             if (!isDinner) {
-                if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+                if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
                     return true;
                 }
             }
@@ -954,7 +957,8 @@ public class ShoppingCart extends BaseShoppingCart {
     public void removeMemberPrivilege() {
         for (IShopcartItemBase item : mergeShopcartItem(fastFootShoppingCartVo)) {
             if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
-                    || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+                    || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
+                    || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
                 item.setPrivilege(null);
                 item.setPrivilege(null);
             }
@@ -1915,7 +1919,8 @@ public class ShoppingCart extends BaseShoppingCart {
 
         if (mShopcartItemBase.getPrivilege() != null
                 && (mShopcartItemBase.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
-                || mShopcartItemBase.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE)) {
+                || mShopcartItemBase.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
+                || mShopcartItemBase.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
             setDishMemberPrivilege(fastFootShoppingCartVo, mShopcartItemBase, false);
         } else if ((value == null || mShopcartItemBase.getIsChangedPrice() == Bool.NO) && mShopcartItemBase.getPrivilege() == null) {
             setDishMemberPrivilege(fastFootShoppingCartVo, mShopcartItemBase, false);

@@ -1,6 +1,7 @@
 package com.zhongmei.yunfu.init.sync.bean;
 
 import com.zhongmei.bty.basemodule.commonbusiness.entity.CommercialCustomSettings;
+import com.zhongmei.bty.basemodule.discount.entity.CustomerDishPrivilege;
 import com.zhongmei.yunfu.db.entity.crm.CustomerSaveRule;
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
 import com.zhongmei.yunfu.db.entity.dish.DishSetmeal;
@@ -83,6 +84,8 @@ public class SyncContent implements NoProGuard {
     private SyncItem<DishSetmeal> dishSetMeal;
     private SyncItem<CommercialCustomSettings> commercialCustomSettings;
     private SyncItem<CustomerSaveRule> customerSaveRule;
+    private SyncItem<CustomerDishPrivilege> customerDishPrivilege;
+
 
 
     /*lateinit var collageCustomer: SyncItem<CollageCustomer>

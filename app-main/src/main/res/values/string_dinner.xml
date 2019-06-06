@@ -235,7 +235,8 @@
     <string name="dinner_batch_label">批量</string>
     <string name="dinner_all_discount_label">整单</string>
     <string name="dinner_all_discount_let">整单让价</string>
-    <string name="dinner_memeber_price_label">会员让价</string>
+    <string name="dinner_memeber_price_label">会员价优惠</string>
+    <string name="dinner_memeber_rebate_label">会员让价</string>
     <!--<string name="let_5">-5￥</string>-->
     <!--<string name="let_6">-6￥</string>-->
     <!--<string name="let_7">-7￥</string>-->

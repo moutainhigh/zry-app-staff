@@ -15,6 +15,7 @@ import com.zhongmei.bty.basemodule.discount.entity.ExtraCharge;
 import com.zhongmei.bty.basemodule.discount.enums.ExtraChargeCalcWay;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.yunfu.db.enums.MemberPrivilegeType;
 import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.db.entity.discount.TradePrivilege;
@@ -105,6 +106,19 @@ public class BuildPrivilegeTool {
                 if (TextUtils.isEmpty(mPrivilege.getPrivilegeName())) {
                     mPrivilege.setPrivilegeName(BaseApplication.sInstance.getResources().getString(R.string.dish_problems));
                 }
+            }else if(privilegeType == PrivilegeType.AUTO_DISCOUNT.value()){//重新计算会员折扣  商品总价*（1-（会员折扣*10）/100）
+                BigDecimal privilegeAmount = mShopcartItemBase.getActualAmount().multiply(MathDecimal.getDiscountValue(mPrivilege.getPrivilegeValue().multiply(BigDecimal.TEN))).negate();
+                privilegeAmount = MathDecimal.round(privilegeAmount, 2);
+                mPrivilege.setPrivilegeAmount(privilegeAmount);
+            }else if(privilegeType == PrivilegeType.MEMBER_PRICE.value()){
+                BigDecimal  privilegeAmount =  new BigDecimal(mPrivilege.getPrivilegeValue().toString()).multiply(mShopcartItemBase.getTotalQty());
+                privilegeAmount = privilegeAmount.subtract(mShopcartItemBase.getActualAmount());
+                privilegeAmount = MathDecimal.round(privilegeAmount, 2);
+                mPrivilege.setPrivilegeAmount(privilegeAmount);
+            }else if(privilegeType == PrivilegeType.MEMBER_REBATE.value()){
+                BigDecimal  privilegeAmount = new BigDecimal(mPrivilege.getPrivilegeValue().toString()).multiply(mShopcartItemBase.getTotalQty());
+                privilegeAmount = MathDecimal.round(privilegeAmount, 2).negate();//折让的价格就是，折让价格x商品数量
+                mPrivilege.setPrivilegeAmount(privilegeAmount);
             }
             correctGroupDishPrivilege(mShopcartItemBase);
         } else {
@@ -406,31 +420,43 @@ public class BuildPrivilegeTool {
 
         BigDecimal privilegeValue = BigDecimal.ZERO;
         BigDecimal privilegeAmount = BigDecimal.ZERO;
-        if (mDishMemberPrice.getPriceType() == 1) {// 会员折扣
-//            BigDecimal amount = mIShopcartItemBase.getActualAmount();
-            BigDecimal amount = mIShopcartItemBase.getAmount();
-            privilegeValue = new BigDecimal(mDishMemberPrice.getDiscount().toString());
-            privilegeValue = privilegeValue.multiply(BigDecimal.TEN);
-            privilegeAmount = amount.multiply(MathDecimal.getDiscountValue(privilegeValue)).negate();
-            privilegeAmount = MathDecimal.round(privilegeAmount, 2);
-            mTradePrivilege.setPrivilegeType(PrivilegeType.AUTO_DISCOUNT);
-            mTradePrivilege.setPrivilegeName(BaseApplication.sInstance.getResources().getString(R.string.member_dish_discount));
-        } else if (mDishMemberPrice.getPriceType() == 2) {// 会员特定价格
-//            BigDecimal amount = mIShopcartItemBase.getActualAmount();
-            BigDecimal amount = mIShopcartItemBase.getAmount();
-            if (mDishMemberPrice.getMemberPrice() == null) {
-                privilegeValue = amount;
-            } else {
-                privilegeValue =
-                        new BigDecimal(mDishMemberPrice.getMemberPrice().toString()).multiply(mIShopcartItemBase.getTotalQty());
-            }
-            privilegeAmount = privilegeValue.subtract(amount);
-            privilegeAmount = MathDecimal.round(privilegeAmount, 2);
-            mTradePrivilege.setPrivilegeType(PrivilegeType.MEMBER_PRICE);
-            mTradePrivilege.setPrivilegeName(BaseApplication.sInstance.getResources().getString(R.string.member_dish_price));
+
+        BigDecimal amount = mIShopcartItemBase.getAmount();
+
+        switch(mDishMemberPrice.getPriceType()){
+            case DISCOUNT://折扣
+                privilegeValue = new BigDecimal(mDishMemberPrice.getDiscount().toString());
+                privilegeValue = privilegeValue.multiply(BigDecimal.TEN);
+                privilegeAmount = amount.multiply(MathDecimal.getDiscountValue(privilegeValue)).negate();
+                privilegeAmount = MathDecimal.round(privilegeAmount, 2);
+                mTradePrivilege.setPrivilegeType(PrivilegeType.AUTO_DISCOUNT);
+                mTradePrivilege.setPrivilegeName(BaseApplication.sInstance.getResources().getString(R.string.member_dish_discount));
+                break;
+            case REBATE://折让
+                if (mDishMemberPrice.getMemberPrice() == null) {
+                    privilegeValue = amount;
+                } else {
+                    privilegeValue = new BigDecimal(mDishMemberPrice.getMemberPrice().toString()).multiply(mIShopcartItemBase.getTotalQty());
+                }
+                privilegeAmount = MathDecimal.round(privilegeValue, 2).negate();//折让的价格就是，折让价格x商品数量
+                mTradePrivilege.setPrivilegeType(PrivilegeType.MEMBER_REBATE);
+                mTradePrivilege.setPrivilegeName(BaseApplication.sInstance.getResources().getString(R.string.member_dish_rebate));
+                break;
+            case PRICE: //特价
+                if (mDishMemberPrice.getMemberPrice() == null) {
+                    privilegeValue = amount;
+                } else {
+                    privilegeValue =
+                            new BigDecimal(mDishMemberPrice.getMemberPrice().toString()).multiply(mIShopcartItemBase.getTotalQty());
+                }
+                privilegeAmount = privilegeValue.subtract(amount);
+                privilegeAmount = MathDecimal.round(privilegeAmount, 2);
+                mTradePrivilege.setPrivilegeType(PrivilegeType.MEMBER_PRICE);
+                mTradePrivilege.setPrivilegeName(BaseApplication.sInstance.getResources().getString(R.string.member_dish_price));
+                break;
         }
 
-        mTradePrivilege.setPrivilegeValue(privilegeValue);
+        mTradePrivilege.setPrivilegeValue(new BigDecimal(mDishMemberPrice.getDiscount()));//mDishMemberPrice.getDiscount()与mDishMemberPrice.getMemberPrice()数据一直
         mTradePrivilege.setPrivilegeAmount(privilegeAmount);
         return mTradePrivilege;
     }

@@ -1008,7 +1008,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
 
                 if (shopcartItemBase.getPrivilege() != null) {
                     PrivilegeType privilegeType = shopcartItemBase.getPrivilege().getPrivilegeType();
-                    if (privilegeType == PrivilegeType.MEMBER_PRICE || privilegeType == PrivilegeType.AUTO_DISCOUNT) {//会员优惠
+                    if (privilegeType == PrivilegeType.MEMBER_REBATE || privilegeType == PrivilegeType.MEMBER_PRICE || privilegeType == PrivilegeType.AUTO_DISCOUNT) {//会员优惠
                         holder.customAllowanceIv.setVisibility(View.VISIBLE);
                         holder.addtionPrice.setTextColor(context.getResources().getColor(R.color.customer_allowance));
                     } else {

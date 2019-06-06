@@ -10,6 +10,7 @@ import com.zhongmei.bty.basemodule.customer.bean.DishMemberPrice;
 import com.zhongmei.bty.basemodule.customer.bean.RechargeRuleVo;
 import com.zhongmei.bty.basemodule.customer.bean.RechargeRuleVo.RechargeRuleDetailVo;
 import com.zhongmei.bty.basemodule.customer.entity.CrmCustomerLevelRightsDish;
+import com.zhongmei.bty.basemodule.discount.entity.CustomerDishPrivilege;
 import com.zhongmei.bty.commonmodule.database.enums.SendType;
 import com.zhongmei.yunfu.db.entity.crm.CrmCustomerThreshold;
 import com.zhongmei.yunfu.db.entity.crm.CrmLevelStoreRule;
@@ -194,44 +195,26 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
         DatabaseHelper helper = DBHelperManager.getHelper();
 
         try {
-            Dao<CrmCustomerLevelRights, Long> dao = helper.getDao(CrmCustomerLevelRights.class);
-            List<CrmCustomerLevelRights> crmCustomerLevelRights =
+            Dao<CustomerDishPrivilege, Long> dao = helper.getDao(CustomerDishPrivilege.class);
+            List<CustomerDishPrivilege> customerDishPrivileges =
                     dao.queryBuilder()
-                            .selectColumns(CrmCustomerLevelRights.$.priceTempletId)
-                            .where().eq(CrmCustomerLevelRights.$.customerLevelId, levelId).query();
+                            .selectColumns(CustomerDishPrivilege.$.privilegeType, CustomerDishPrivilege.$.privilegeValue)
+                            .where().eq(CustomerDishPrivilege.$.dishId, dishId).
+                            and().eq(CustomerDishPrivilege.$.levelId, levelId).
+                            and().eq(CustomerDishPrivilege.$.statusFlag, StatusFlag.VALID).query();
 
-            if (crmCustomerLevelRights != null && crmCustomerLevelRights.size() > 0) {
-                if (crmCustomerLevelRights.get(0).getPriceTempletId() != null) {
-                    long priceTempletId = crmCustomerLevelRights.get(0).getPriceTempletId();
+            if (Utils.isNotEmpty(customerDishPrivileges)) {
+                CustomerDishPrivilege customerDishPrivilege = customerDishPrivileges.get(0);
 
-                    Dao<MemberPriceTemplet, Long> templetDao = helper.getDao(MemberPriceTemplet.class);
-                    MemberPriceTemplet templet = templetDao.queryBuilder()
-                            .selectColumns(MemberPriceTemplet.$.name,
-                                    MemberPriceTemplet.$.priceType,
-                                    MemberPriceTemplet.$.periodStart,
-                                    MemberPriceTemplet.$.periodEnd)
-                            .where().eq(MemberPriceTemplet.$.id, priceTempletId).queryForFirst();
-
-                    Dao<MemberPriceTempletDetail, Long> templetDetailDao =
-                            helper.getDao(MemberPriceTempletDetail.class);
-                    Where<MemberPriceTempletDetail, Long> where = templetDetailDao.queryBuilder()
-                            .selectColumns(MemberPriceTempletDetail.$.discount,
-                                    MemberPriceTempletDetail.$.memberPrice).where();
-                    where.and(where.eq(MemberPriceTempletDetail.$.priceTempletId, priceTempletId),
-                            where.eq(MemberPriceTempletDetail.$.brandDishId, dishId))
-                            .and().eq(MemberPriceTempletDetail.$.statusFlag, StatusFlag.VALID);
-                    List<MemberPriceTempletDetail> templeteDetails = where.query();
-
-                    if (templeteDetails != null && templeteDetails.size() > 0) {
+                    if (customerDishPrivilege != null) {
                         dishMemberPrice = new DishMemberPrice();
-                        dishMemberPrice.setDiscount(templeteDetails.get(0).getDiscount());
-                        dishMemberPrice.setMemberPrice(templeteDetails.get(0).getMemberPrice());
-                        dishMemberPrice.setPriceName(templet.getName());
-                        dishMemberPrice.setPriceType(templet.getPriceType());
-                        dishMemberPrice.setPeriodStart(templet.getPeriodStart());
-                        dishMemberPrice.setPeriodEnd(templet.getPeriodEnd());
+                        dishMemberPrice.setDiscount(customerDishPrivilege.getPrivilegeValue().doubleValue());
+                        dishMemberPrice.setMemberPrice(customerDishPrivilege.getPrivilegeValue().doubleValue());
+                        dishMemberPrice.setPriceName("会员优惠名称");
+                        dishMemberPrice.setPriceType(customerDishPrivilege.getPrivilegeType().value());
+                        dishMemberPrice.setPeriodStart("00:00");
+                        dishMemberPrice.setPeriodEnd("00:00");
                     }
-                }
 
             }
         } catch (Exception e) {
@@ -346,7 +329,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
         try {
             Dao<CustomerSaveRule, Long> customerSaveRuleDao = helper.getDao(CustomerSaveRule.class);
             List<CustomerSaveRule> customerSaveRules = customerSaveRuleDao.queryForAll();
-            if(Utils.isNotEmpty(customerSaveRules)){
+            if (Utils.isNotEmpty(customerSaveRules)) {
                 vo.setIsFullSend(FullSend.YES);//满赠
                 vo.setSendType(SendType.FIXED);//固定金额
                 for (CustomerSaveRule customerSaveRule : customerSaveRules) {
@@ -357,7 +340,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
                 }
             }
             return vo;
-        }finally {
+        } finally {
             DBHelperManager.releaseHelper(helper);
         }
     }
@@ -546,7 +529,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
             Brand brand = dao.queryBuilder().where()
                     .eq(Brand._statusFlag, 0).queryForFirst();
             if (brand != null) {
-				/*if(!TextUtils.isEmpty(brand.getWeixinAppId())){
+                /*if(!TextUtils.isEmpty(brand.getWeixinAppId())){
 					return true;
 				}else {*/
                 return false;

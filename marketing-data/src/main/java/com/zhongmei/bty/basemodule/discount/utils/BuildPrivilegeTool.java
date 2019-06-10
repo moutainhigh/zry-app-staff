@@ -2,6 +2,9 @@ package com.zhongmei.bty.basemodule.discount.utils;
 
 import android.text.TextUtils;
 
+import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
+import com.zhongmei.bty.basemodule.shoppingcart.bean.ShoppingCartVo;
+import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.yunfu.context.session.core.user.AuthUser;
 import com.zhongmei.yunfu.data.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItem;
@@ -15,6 +18,7 @@ import com.zhongmei.bty.basemodule.discount.entity.ExtraCharge;
 import com.zhongmei.bty.basemodule.discount.enums.ExtraChargeCalcWay;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.yunfu.db.enums.ChargePrivilegeType;
 import com.zhongmei.yunfu.db.enums.MemberPrivilegeType;
 import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.context.base.BaseApplication;
@@ -396,6 +400,54 @@ public class BuildPrivilegeTool {
 
         mIntegralCashPrivilegeVo.getTradePrivilege().setPrivilegeValue(privilegeValue);
         mIntegralCashPrivilegeVo.getTradePrivilege().setPrivilegeAmount(MathDecimal.round(privilegeAmount, 2).negate());
+    }
+
+    /**
+     * 根据pribilegeType 计算储值优惠
+     * @param mCustomer 会员信息
+     * @return
+     * type 1，储值折扣，2，储值赠送
+     */
+    public static TradePrivilege buildChargePrivilege(ShoppingCartVo mShoppingCartVo, CustomerResp mCustomer){
+        BigDecimal tradeAmout= DinnerShoppingCart.getInstance().getTradeAmoutCanDiscount(mShoppingCartVo);
+        BigDecimal fullValue=mCustomer.storedFullAmount;
+
+        //打折金额限制
+        if(tradeAmout.compareTo(fullValue)<0){
+            return null;
+        }
+
+        ChargePrivilegeType type=mCustomer.getStoredPrivilegeType();
+        BigDecimal privilegeValue=mCustomer.storedPrivilegeValue;
+
+        TradePrivilege chargePrivilege=new TradePrivilege();
+        chargePrivilege.validateCreate();
+        chargePrivilege.setUuid(SystemUtils.genOnlyIdentifier());
+        chargePrivilege.setTradeUuid(mShoppingCartVo.getmTradeVo().getTrade().getUuid());
+        chargePrivilege.setCreatorId(Session.getAuthUser().getId());
+        chargePrivilege.setCreatorName(Session.getAuthUser().getName());
+
+        chargePrivilege.setPrivilegeValue(privilegeValue);
+
+        BigDecimal mPrivilegeAmount=BigDecimal.ZERO;
+
+        switch (type){
+            case DISCOUNT:
+                chargePrivilege.setPrivilegeType(PrivilegeType.CHARGE_DISCOUNT);
+                mPrivilegeAmount=tradeAmout.multiply(MathDecimal.getDiscountValue(privilegeValue.multiply(BigDecimal.TEN)));
+                chargePrivilege.setPrivilegeName(String.format(BaseApplication.sInstance.getResources().getString(R.string.member_dish_charge_discount),privilegeValue.doubleValue()+""));
+                break;
+            case REBATE:
+                chargePrivilege.setPrivilegeType(PrivilegeType.CHARGE_REBATE);
+                mPrivilegeAmount=privilegeValue;
+                chargePrivilege.setPrivilegeName(BaseApplication.sInstance.getResources().getString(R.string.member_dish_charge_rebate));
+                break;
+        }
+
+        mPrivilegeAmount=MathDecimal.round(mPrivilegeAmount, 2).negate();//取反
+        chargePrivilege.setPrivilegeAmount(mPrivilegeAmount);
+
+        return chargePrivilege;
     }
 
     /**

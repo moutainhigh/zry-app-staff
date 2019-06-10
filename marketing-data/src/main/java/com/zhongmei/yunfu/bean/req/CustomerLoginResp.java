@@ -39,6 +39,9 @@ public class CustomerLoginResp implements Serializable, ICustomer {
     private Long brandId;//品牌id
     private Long commercialId;//顾客所属门店id
     private Integer hasFaceCode;//是否有人脸识别码
+    private Integer storedPrivilegeType; //储值支付优惠类型  折扣，折让
+    private BigDecimal storedPrivilegeValue; //储值支付优惠值
+    private BigDecimal storedFullAmount;
 
     /**
      * 国家英文名称(为空默认中国) = countryEN
@@ -242,6 +245,30 @@ public class CustomerLoginResp implements Serializable, ICustomer {
         this.hasFaceCode = hasFaceCode;
     }
 
+    public Integer getStoredPrivilegeType() {
+        return storedPrivilegeType;
+    }
+
+    public void setStoredPrivilegeType(Integer storedPrivilegeType) {
+        this.storedPrivilegeType = storedPrivilegeType;
+    }
+
+    public BigDecimal getStoredPrivilegeValue() {
+        return storedPrivilegeValue;
+    }
+
+    public void setStoredPrivilegeValue(BigDecimal storedPrivilegeValue) {
+        this.storedPrivilegeValue = storedPrivilegeValue;
+    }
+
+    public BigDecimal getStoredFullAmount() {
+        return storedFullAmount;
+    }
+
+    public void setStoredFullAmount(BigDecimal storedFullAmount) {
+        this.storedFullAmount = storedFullAmount;
+    }
+
     /***
      *
      * 判断是否停用
@@ -282,6 +309,9 @@ public class CustomerLoginResp implements Serializable, ICustomer {
         customer.nation = this.nation;//add v8.16 修复国际化bug
         customer.country = this.country;//add v8.16 修复国际化bug
         customer.nationalTelCode = this.nationalTelCode;//add v8.16 修复国际化bug
+        customer.storedPrivilegeType=this.storedPrivilegeType; //储值支付优惠类型  折扣，折让
+        customer.storedPrivilegeValue=this.storedPrivilegeValue; //储值支付优惠值
+        customer.storedFullAmount=this.storedFullAmount;
         if (cardList != null && cardList.size() > 0) {
             customer.cardList = new ArrayList<>();
             for (CustomerInfoResp.Card card : cardList) {

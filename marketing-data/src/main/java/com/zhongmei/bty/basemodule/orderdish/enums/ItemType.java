@@ -80,6 +80,8 @@ public enum ItemType implements ValueEnum<Integer> {
     APPLET_LABEL(33),
     //服务次卡中的子服务
     SERVER_CHILD_ITEM(34),
+    //会员储值打折
+    CHARGE_PRIVILEGE(35),
     /**
      * 未知的值
      *

@@ -404,6 +404,9 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                             .getColor(R.color.shopcat_item_coupon_unenabled));
                 }
                 break;
+            case CHARGE_PRIVILEGE:
+                iconDrawable = mAllDiscountIcon;
+                break;
         }
         if (item.getValue() != 0d) {
             holder.dish_price.setText(Utils.formatPrice(item.getValue()));// 价格
@@ -739,6 +742,17 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         }
     }
 
+    private void buildChargePrivilege(TradeVo tradeVo){
+        TradePrivilege chargePrivilege = tradeVo.getTradePrivilege(PrivilegeType.CHARGE_REBATE, PrivilegeType.CHARGE_DISCOUNT);
+        if(chargePrivilege != null && chargePrivilege.isValid()){
+            DishDataItem item = new DishDataItem(ItemType.CHARGE_PRIVILEGE);
+            item.setValue(chargePrivilege.getPrivilegeAmount().doubleValue());
+            item.setName(chargePrivilege.getPrivilegeName());
+
+            data.add(item);
+        }
+    }
+
     protected boolean buildDiscountData(TradeVo tradeVo, boolean isShowUnActive) {
         //是否有宴请或者免单
         boolean hasBanquetOrFree = false;
@@ -749,8 +763,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         // 超时费
         buildOutTimeCharge(tradeVo);
         // 整单打折
-        TradePrivilege tradePrivilege =
-                tradeVo.getTradePrivilege(PrivilegeType.FREE, PrivilegeType.DISCOUNT, PrivilegeType.REBATE);
+        TradePrivilege tradePrivilege = tradeVo.getTradePrivilege(PrivilegeType.FREE, PrivilegeType.DISCOUNT, PrivilegeType.REBATE);
         if (tradePrivilege != null && (tradePrivilege.isValid())) {
             //	isDiscountAll = true;// 整单折扣不为空，显示整单打折
             DishDataItem item = new DishDataItem(ItemType.ALL_DISCOUNT);
@@ -784,6 +797,9 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         } else {
             //isDiscountAll = false;
         }
+
+        //整单储值优惠
+        buildChargePrivilege(tradeVo);
 
         // 优惠劵
 

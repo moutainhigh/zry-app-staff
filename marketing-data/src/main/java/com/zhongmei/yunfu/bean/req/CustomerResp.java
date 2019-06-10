@@ -20,6 +20,8 @@ import com.zhongmei.bty.basemodule.devices.face.FaceFeatureVo;
 import com.zhongmei.bty.basemodule.devices.mispos.data.EcCard;
 import com.zhongmei.bty.basemodule.devices.mispos.enums.EntityCardType;
 import com.zhongmei.bty.basemodule.discount.entity.CrmCustomerLevelRights;
+import com.zhongmei.yunfu.db.enums.ChargePrivilegeType;
+import com.zhongmei.yunfu.db.enums.PrivilegeType;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 
@@ -75,6 +77,9 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     public String peopleId;//第三方人脸识别服务器返回字段、只在详情才下行
     public String cardNo;
     public List<BeautyCardEntity> entityCards;//实体卡信息，与详情接口一起返回
+    public Integer storedPrivilegeType; //储值支付优惠类型  折扣，折让
+    public BigDecimal storedPrivilegeValue; //储值支付优惠值
+    public BigDecimal storedFullAmount;
 
 
     /**
@@ -179,6 +184,10 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
 
     public void setCustomerLevel(CustomerGroupLevel customerLevel) {
         this.customerLevel = customerLevel;
+    }
+
+    public ChargePrivilegeType getStoredPrivilegeType() {
+        return ValueEnums.toEnum(ChargePrivilegeType.class,storedPrivilegeType);
     }
 
     /**

@@ -233,8 +233,14 @@ public class MathShoppingCartTool {
                     mathVo.taxableInAmount);
         }
         mathVo.taxableInAmount = mathVo.taxableInAmount.add(privilegeDishAmount.negate());
-
         mathVo.totalPrivilegeAmount = mathVo.totalPrivilegeAmount.add(mathVo.noDiscPrivilegeAmout);
+
+
+        //计算储值优惠金额
+        BigDecimal dishAmount=mathVo.saleAmount.subtract(privilegeDishAmount);//减去整单折扣的优惠金额
+        calculateChargePrivile(mTradeVo,mathVo,dishAmount);
+        mathVo.taxableInAmount = mathVo.taxableInAmount.add(mathVo.chargePriviegeAmount.negate());
+        mathVo.totalPrivilegeAmount = mathVo.totalPrivilegeAmount.add(mathVo.chargePriviegeAmount.negate());
 
         // 将不能参与整单折扣的附加费添加到订单总金额中
         mathVo.saleAmount = mathVo.saleAmount.add(extraChargeTool.getExtraChargeYes());
@@ -306,6 +312,36 @@ public class MathShoppingCartTool {
 
         mTradeVo.itemApportionList = PrivilegeApportionManager.getInstance().getApportionList();
         PrivilegeApportionManager.getInstance().finishMath(); // 结束优惠分摊计算
+    }
+
+
+    /**
+     * 计算储值优惠
+     * 需要在整单折扣上，折上折计算
+     * tradeVo  订单数据
+     * mathVo  零时存放数据
+     * dishAmount 可参与打折的总金额
+     */
+    private static void calculateChargePrivile(TradeVo tradeVo,MathVo mathVo,BigDecimal dishAmount){
+        TradePrivilege mTradePrivilege = tradeVo.getTradeChargePrivilege();
+        BigDecimal privilegeAmount=BigDecimal.ZERO;
+        if(mTradePrivilege!=null){
+            //计算优惠数据
+            switch (mTradePrivilege.getPrivilegeType()){
+                case CHARGE_DISCOUNT://储值折扣
+                    privilegeAmount=dishAmount.multiply(MathDecimal.getDiscountValue(mTradePrivilege.getPrivilegeValue().multiply(BigDecimal.TEN)));
+                    break;
+                case CHARGE_REBATE://储值折让
+                    privilegeAmount=mTradePrivilege.getPrivilegeValue();
+                    break;
+            }
+
+            privilegeAmount=MathDecimal.round(privilegeAmount, 2);
+            mathVo.chargePriviegeAmount=privilegeAmount;
+            mTradePrivilege.setPrivilegeAmount(privilegeAmount.negate());
+            mTradePrivilege.setChanged(true);
+
+        }
     }
 
 

@@ -89,6 +89,7 @@ import com.zhongmei.yunfu.db.enums.TradeType;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment.CommonDialogFragmentBuilder;
 import com.zhongmei.yunfu.util.EmptyUtils;
+import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.math.BigDecimal;
@@ -1347,6 +1348,7 @@ public class BaseShoppingCart {
         }
         return mSalesTradeVo;
     }
+
 
     /**
      * @Title: batchMemberPrivilege

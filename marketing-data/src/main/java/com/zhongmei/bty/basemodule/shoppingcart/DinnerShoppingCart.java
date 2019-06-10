@@ -4,6 +4,8 @@ import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.zhongmei.bty.basemodule.commonbusiness.cache.ServerSettingCache;
+import com.zhongmei.bty.commonmodule.database.enums.Status;
 import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
 import com.zhongmei.bty.basemodule.discount.bean.BanquetVo;
@@ -2713,6 +2715,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
         CustomerResp mCustomer = DinnerShopManager.getInstance().getLoginCustomer();
         batchMemberPrivilege(dinnerShoppingCartVo, mCustomer, true);
+        batchMemberChargePrivilege(dinnerShoppingCartVo, mCustomer);
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         // 重新计算营销活动
         MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
@@ -2728,6 +2731,21 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
+    }
+
+    /**
+     * 处理会员储值支付折扣信息
+     * @param mShoppingCartVo
+     * @param mCustomer
+     */
+    public void batchMemberChargePrivilege(ShoppingCartVo mShoppingCartVo, CustomerResp mCustomer){
+        //设置整单的储值折扣
+        if(!ServerSettingCache.getInstance().isChargePrivilegeWhenPay() && mShoppingCartVo.getmTradeVo().getTradeChargePrivilege()==null){//是否储值支付是才加入储值打折优惠  false 会员登陆就需要加入，true 储值支付的时候才加入
+            TradePrivilege chargePrivilege=BuildPrivilegeTool.buildChargePrivilege(mShoppingCartVo,mCustomer);
+            if(chargePrivilege!=null){
+                setDefineTradePrivilege(chargePrivilege,null,true,true);
+            }
+        }
     }
 
     /**
@@ -2803,6 +2821,42 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
     /**
+     * 移除所有的储值优惠
+     */
+    public void removeChargePrivilege(){
+        TradePrivilege privilege=dinnerShoppingCartVo.getmTradeVo().getTradeChargePrivilege();
+        if(privilege==null){
+            return;
+        }
+
+        if(privilege.getId()!=null){
+            privilege.setChanged(true);
+            privilege.setStatusFlag(StatusFlag.INVALID);
+        }else{
+            dinnerShoppingCartVo.getmTradeVo().getTradePrivileges().remove(privilege);
+        }
+    }
+
+    public void removeChargePrivilege(boolean needMath){
+        removeChargePrivilege();
+        if(!needMath){
+            return;
+        }
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+        // 计算订单总价格
+
+        MathShoppingCartTool.mathTotalPrice(shopcartItemList,dinnerShoppingCartVo.getmTradeVo());
+
+        for (int key : arrayListener.keySet()) {
+
+            arrayListener.get(key).batchPrivilege(shopcartItemList,
+
+                    dinnerShoppingCartVo.getmTradeVo());
+
+        }
+    }
+
+    /**
      * @Title: removeMemberPrivilege
      * @Description: 移除会员折扣
      * @Param TODO
@@ -2822,7 +2876,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
 
         }
-
     }
 
     /**
@@ -2830,6 +2883,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
      */
     public void removeAllMemberPrivileges() {
         removeMemberPrivilege();
+        removeChargePrivilege();
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
                 dinnerShoppingCartVo.getmTradeVo());
@@ -2858,6 +2912,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         //移除礼品劵
         removeAllGiftCoupon(false);
         removeMemberPrivilege();
+        removeChargePrivilege();//移除储值优惠金额
 
         // 移除营销活动
         removeTradePlanActivity(isNeedMathAndCallback, isMarketNeedCallback);

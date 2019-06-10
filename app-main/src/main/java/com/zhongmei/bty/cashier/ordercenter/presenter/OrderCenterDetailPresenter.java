@@ -1165,6 +1165,13 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 dataSet02.add(goodsAutoDiscountString);
             }
 
+            // 商品会员折让
+            String goodsMemberRebateString =
+                    getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.MEMBER_REBATE, isRefund);
+            if (!TextUtils.isEmpty(goodsMemberRebateString)) {
+                dataSet02.add(goodsMemberRebateString);
+            }
+
             // 商品会员价
             String goodsMemberPriceString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.MEMBER_PRICE, isRefund);
@@ -1182,6 +1189,18 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             List<String> orderDiscountStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.DISCOUNT, isRefund);
             if (Utils.isNotEmpty(orderDiscountStrings)) {
                 dataSet02.addAll(orderDiscountStrings);
+            }
+
+            // 会员储值打折
+            List<String> memberChargeDiscountStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.CHARGE_DISCOUNT, isRefund);
+            if (Utils.isNotEmpty(memberChargeDiscountStrings)) {
+                dataSet02.addAll(memberChargeDiscountStrings);
+            }
+
+            // 会员储值折让
+            List<String> memberChargeRebateStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.CHARGE_REBATE, isRefund);
+            if (Utils.isNotEmpty(memberChargeRebateStrings)) {
+                dataSet02.addAll(memberChargeRebateStrings);
             }
 
             // 整单让价
@@ -1443,6 +1462,9 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 case MEMBER_PRICE:
                     goodsPrivilegeAmountString = context.getString(R.string.dinner_order_center_goods_member_price,
                             Utils.formatPrice(goodsPrivilegeAmount.doubleValue()));
+                case MEMBER_REBATE:
+                    goodsPrivilegeAmountString = context.getString(R.string.dinner_order_center_goods_member_rebate,
+                            Utils.formatPrice(goodsPrivilegeAmount.doubleValue()));
                     break;
                 case PROBLEM:
                     goodsPrivilegeAmountString = context.getString(R.string.dinner_order_center_problem_dishes,
@@ -1564,6 +1586,14 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                             break;
                         case WECHAT_CARD_COUPONS:
                             orderPrivilegeString = mView.getViewActivity().getString(R.string.dinner_order_center_wechat_card_coupons,
+                                    Utils.formatPrice(orderPrivilegeAmount.doubleValue()));
+                            break;
+                        case CHARGE_DISCOUNT:
+                            orderPrivilegeString = mView.getViewActivity().getString(R.string.dinner_order_center_order_member_discount,
+                                    Utils.formatPrice(orderPrivilegeAmount.doubleValue()));
+                            break;
+                        case CHARGE_REBATE:
+                            orderPrivilegeString = mView.getViewActivity().getString(R.string.dinner_order_center_order_member_rebate,
                                     Utils.formatPrice(orderPrivilegeAmount.doubleValue()));
                             break;
                         default:

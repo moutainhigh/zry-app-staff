@@ -717,6 +717,9 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                 case ALL_DISCOUNT:
                     DinnerShopManager.getInstance().getShoppingCart().removeOrderPrivilege();
                     break;
+                case CHARGE_PRIVILEGE:
+                    DinnerShopManager.getInstance().getShoppingCart().removeChargePrivilege(true);
+                    break;
                 case ADDITIONAL:
                     ExtraCharge extraCharge = dishDataItem.getExtraCharge();
                     if (extraCharge != null) {

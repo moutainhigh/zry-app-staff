@@ -26,4 +26,7 @@ public class MathVo {
 
     //税费计算原始金额
     public BigDecimal taxableInAmount = BigDecimal.ZERO;
+
+    //储值优惠金额
+    public BigDecimal chargePriviegeAmount = BigDecimal.ZERO;
 }

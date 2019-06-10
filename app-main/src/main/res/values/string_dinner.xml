@@ -39,7 +39,10 @@
     <string name="dinner_order_center_goods_free">商品赠送：%1$s</string>
     <string name="dinner_order_center_goods_auto_discount">商品会员折扣：%1$s</string>
     <string name="dinner_order_center_goods_member_price">商品会员价：%1$s</string>
+    <string name="dinner_order_center_goods_member_rebate">商品会员折让：%1$s</string>
     <string name="dinner_order_center_order_discount">整单折扣：%1$s</string>
+    <string name="dinner_order_center_order_member_discount">会员储值折扣：%1$s</string>
+    <string name="dinner_order_center_order_member_rebate">会员储值折让：%1$s</string>
     <string name="dinner_order_center_order_rebate">整单让价：%1$s</string>
     <string name="dinner_order_center_order_free">整单免单：%1$s</string>
     <string name="dinner_order_center_order_banquet">宴请：%1$s</string>

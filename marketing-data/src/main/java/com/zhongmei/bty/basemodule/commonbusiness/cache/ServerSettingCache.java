@@ -206,15 +206,6 @@ public class ServerSettingCache {
         return outTimeInfo;
     }
 
-    /**
-     * 自助餐用餐限时开关
-     *
-     * @return
-     */
-    public boolean getBuffetTimeLimitEnable() {
-        String value = mCommercialCustomSettingsMap.get("buffet.setting.dinnerTime.switch");
-        return "1".equals(value);
-    }
 
     /**
      * 获取自助餐用餐显示限制(单位：分钟)
@@ -765,6 +756,16 @@ public class ServerSettingCache {
     //会员登录密码开关 add v8.8
     public boolean isCommercialNeedVerifPassword() {
         String value = mCommercialCustomSettingsMap.get("shop.memberPassInput.switch");
+        return "1".equals(value);
+    }
+
+
+    /**
+     * 是否在储值时使用储值折扣
+     * @return
+     */
+    public boolean isChargePrivilegeWhenPay() {
+        String value = mCommercialCustomSettingsMap.get("IS_NEED_SAVE_PAYMENT");
         return "1".equals(value);
     }
 

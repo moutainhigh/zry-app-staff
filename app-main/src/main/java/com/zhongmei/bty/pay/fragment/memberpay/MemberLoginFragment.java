@@ -1732,7 +1732,7 @@ public class MemberLoginFragment extends BasicFragment {
                             ToastUtil.showShortToast(R.string.customer_not_member);
                             return;
                         }
-                        setLoginCustomer(customer);
+                        setLoginCustomer(customer);//快餐，烘焙
                         //customer.queryLevelRightInfos();
                         if (mPaymentInfo.getTradeBusinessType() == BusinessType.SNACK && mPaymentInfo.getTradeVo().getTrade().getTradePayStatus() != TradePayStatus.PAYING
                                 && mPaymentInfo.getTradeVo() != null

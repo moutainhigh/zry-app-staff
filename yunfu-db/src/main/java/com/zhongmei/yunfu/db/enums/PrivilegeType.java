@@ -123,14 +123,19 @@ public enum PrivilegeType implements ValueEnum<Integer> {
     BARGAIN(25),
 
     /**
-     * 储值折扣
-     */
-    CHARGE(26),
-
-    /**
      * 会员折让
      */
-    MEMBER_REBATE(27),
+    MEMBER_REBATE(26),
+    /**
+     * 储值折扣
+     */
+    CHARGE_DISCOUNT(27),
+
+    /**
+     * 储值折让
+     */
+    CHARGE_REBATE(28),
+
 
 
     /**

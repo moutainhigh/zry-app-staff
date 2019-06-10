@@ -19,6 +19,7 @@ import com.zhongmei.bty.basemodule.discount.entity.ExtraCharge;
 import com.zhongmei.yunfu.db.entity.discount.TradeItemPlanActivity;
 import com.zhongmei.yunfu.db.entity.discount.TradePlanActivity;
 import com.zhongmei.yunfu.db.entity.discount.TradePrivilege;
+import com.zhongmei.yunfu.db.enums.ChargePrivilegeType;
 import com.zhongmei.yunfu.db.enums.CouponType;
 import com.zhongmei.bty.basemodule.discount.enums.UserType;
 import com.zhongmei.bty.basemodule.discount.utils.BuildPrivilegeTool;
@@ -94,6 +95,7 @@ import com.zhongmei.yunfu.db.enums.TradePayStatus;
 import com.zhongmei.yunfu.db.enums.TradeType;
 import com.zhongmei.yunfu.context.util.SystemUtils;
 import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -2740,10 +2742,48 @@ public class DinnerShoppingCart extends BaseShoppingCart {
      */
     public void batchMemberChargePrivilege(ShoppingCartVo mShoppingCartVo, CustomerResp mCustomer){
         //设置整单的储值折扣
-        if(!ServerSettingCache.getInstance().isChargePrivilegeWhenPay() && mShoppingCartVo.getmTradeVo().getTradeChargePrivilege()==null){//是否储值支付是才加入储值打折优惠  false 会员登陆就需要加入，true 储值支付的时候才加入
+        boolean checkSwitch=ServerSettingCache.getInstance().isChargePrivilegeWhenPay();
+        boolean isTure=(!checkSwitch && mCustomer.getCustomerType().equalsValue(CustomerType.MEMBER.value())) || (checkSwitch && mCustomer.getCustomerType().equalsValue(CustomerType.PAY.value()));
+        if(isTure && mShoppingCartVo.getmTradeVo().getTradeChargePrivilege()==null){//是否储值支付是才加入储值打折优惠  false 会员登陆就需要加入，true 储值支付的时候才加入
             TradePrivilege chargePrivilege=BuildPrivilegeTool.buildChargePrivilege(mShoppingCartVo,mCustomer);
             if(chargePrivilege!=null){
-                setDefineTradePrivilege(chargePrivilege,null,true,true);
+//                setDefineTradePrivilege(chargePrivilege,null,true,true);
+                List<TradePrivilege> tradePrivileges=mShoppingCartVo.getmTradeVo().getTradePrivileges();
+                if(tradePrivileges==null){
+                    mShoppingCartVo.getmTradeVo().setTradePrivileges(new ArrayList<TradePrivilege>());
+                }
+                mShoppingCartVo.getmTradeVo().getTradePrivileges().add(chargePrivilege);
+            }
+        }
+
+//        if(mShoppingCartVo.getmTradeVo().getTradeChargePrivilege()==null){//是否储值支付是才加入储值打折优惠  false 会员登陆就需要加入，true 储值支付的时候才加入
+//            mCustomer.storedFullAmount=BigDecimal.ZERO;
+//            mCustomer.storedPrivilegeType= ChargePrivilegeType.DISCOUNT.value();
+//            mCustomer.storedPrivilegeValue=new BigDecimal(8.5);
+//            TradePrivilege chargePrivilege=BuildPrivilegeTool.buildChargePrivilege(mShoppingCartVo,mCustomer);
+//            if(chargePrivilege!=null){
+//                setDefineTradePrivilege(chargePrivilege,null,true,true);
+//            }
+//        }
+    }
+
+    /**
+     *
+     */
+    public void batchMemberChargePrivilege(boolean needMath,boolean needListener){
+        CustomerResp mCustomer = DinnerShopManager.getInstance().getLoginCustomer();
+        batchMemberChargePrivilege(dinnerShoppingCartVo, mCustomer);
+
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+
+        if (needMath) {
+            MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
+        }
+        CheckGiftCouponIsActived(dinnerShoppingCartVo);
+        if (needListener) {
+            for (int key : arrayListener.keySet()) {
+                arrayListener.get(key).batchPrivilege(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
+
             }
         }
     }
@@ -2823,7 +2863,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     /**
      * 移除所有的储值优惠
      */
-    public void removeChargePrivilege(){
+    private void removeChargePrivilege(){
         TradePrivilege privilege=dinnerShoppingCartVo.getmTradeVo().getTradeChargePrivilege();
         if(privilege==null){
             return;
@@ -2837,7 +2877,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    public void removeChargePrivilege(boolean needMath){
+    public void removeChargePrivilege(boolean needMath,boolean needListener){
         removeChargePrivilege();
         if(!needMath){
             return;
@@ -2847,12 +2887,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,dinnerShoppingCartVo.getmTradeVo());
 
-        for (int key : arrayListener.keySet()) {
+        if(needListener){
+            for (int key : arrayListener.keySet()) {
 
-            arrayListener.get(key).batchPrivilege(shopcartItemList,
+                arrayListener.get(key).batchPrivilege(shopcartItemList,
 
-                    dinnerShoppingCartVo.getmTradeVo());
+                        dinnerShoppingCartVo.getmTradeVo());
 
+            }
         }
     }
 

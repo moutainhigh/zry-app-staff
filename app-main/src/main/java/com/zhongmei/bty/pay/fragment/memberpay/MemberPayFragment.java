@@ -32,7 +32,9 @@ import com.zhongmei.bty.basemodule.devices.mispos.dialog.ReadKeyboardDialogFragm
 import com.zhongmei.bty.basemodule.devices.mispos.enums.WorkStatus;
 import com.zhongmei.bty.basemodule.devices.mispos.event.EventReadKeyboard;
 import com.zhongmei.bty.basemodule.pay.enums.PayScene;
+import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
+import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
 import com.zhongmei.bty.cashier.shoppingcart.ShoppingCart;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
@@ -425,9 +427,11 @@ public class MemberPayFragment extends BasePayFragment implements PayView {
             autoInputValue();
             updateNotPayMent();
             refreshMemberPrice();
+            batchMemberChargePrivilege();
         } else {
             //隐藏时清空已输入金额
             clearInputData();
+            cleanMemberChargePrivilege();
           /*  DisplayServiceManager.updateDisplay(getActivity().getApplicationContext(),
                     DisplayServiceManager.buildPayMessage(DisplayUserInfo.COMMAND_CACEL, ""));*/
         }
@@ -1060,6 +1064,30 @@ public class MemberPayFragment extends BasePayFragment implements PayView {
         }
 
         return CustomerType.__UNKNOWN__;
+    }
+
+    /**
+     * 清除会员储值优惠信息
+     */
+    private void cleanMemberChargePrivilege(){
+        DinnerShoppingCart.getInstance().removeChargePrivilege(true,true);
+        RefreshTradeVoEvent event = new RefreshTradeVoEvent();
+        event.setLogin(true);
+        event.setTradeVo(DinnerShoppingCart.getInstance().getShoppingCartVo().getmTradeVo());
+        EventBus.getDefault().post(event);
+    }
+
+    /**
+     * 添加会员储值优惠信息
+     */
+    private void batchMemberChargePrivilege(){
+        DinnerShopManager.getInstance().setLoginCustomer(mCustomer);
+        DinnerShoppingCart.getInstance().batchMemberChargePrivilege(true, false);
+
+        RefreshTradeVoEvent event = new RefreshTradeVoEvent();
+        event.setLogin(true);
+        event.setTradeVo(DinnerShoppingCart.getInstance().getShoppingCartVo().getmTradeVo());
+        EventBus.getDefault().post(event);
     }
 
     private void refreshMemberPrice() {

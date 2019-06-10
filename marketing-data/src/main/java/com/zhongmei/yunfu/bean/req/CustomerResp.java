@@ -21,6 +21,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.EcCard;
 import com.zhongmei.bty.basemodule.devices.mispos.enums.EntityCardType;
 import com.zhongmei.bty.basemodule.discount.entity.CrmCustomerLevelRights;
 import com.zhongmei.yunfu.db.enums.ChargePrivilegeType;
+import com.zhongmei.yunfu.db.enums.CustomerType;
 import com.zhongmei.yunfu.db.enums.PrivilegeType;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
@@ -80,6 +81,8 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     public Integer storedPrivilegeType; //储值支付优惠类型  折扣，折让
     public BigDecimal storedPrivilegeValue; //储值支付优惠值
     public BigDecimal storedFullAmount;
+    private CustomerType customerType;
+
 
 
     /**
@@ -155,6 +158,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     public String getCustomerName(Context c) {
         return TextUtils.isEmpty(customerName) ? c.getString(R.string.customer_name_null) : customerName;
     }
+
 
     /**
      * 查询会员等级，积分抵现规则及会员折扣的菜品
@@ -355,6 +359,17 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
 
     public CustomerListResp.LoginType getLoginType() {
         return ValueEnums.toEnum(CustomerListResp.LoginType.class, loginType);
+    }
+
+    public CustomerType getCustomerType() {
+        if(customerType==null){
+            customerType=CustomerType.MEMBER;
+        }
+        return customerType;
+    }
+
+    public void setCustomerType(CustomerType customerType) {
+        this.customerType = customerType;
     }
 
     /**

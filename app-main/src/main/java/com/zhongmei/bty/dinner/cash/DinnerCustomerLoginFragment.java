@@ -592,6 +592,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                             CustomerResp customerNew = resp.getCustomer();
                             customerNew.setInitialValue();
                             customerNew.queryLevelRightInfos();
+                            customerNew.setCustomerType(CustomerType.MEMBER);
                             customerNew.needRefresh = false;
                             customerNew.customerLoginType = customerLoginType;
                             TradeCustomer tradeCustomer = CustomerManager.getInstance().getTradeCustomer(customerNew);

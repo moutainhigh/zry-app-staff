@@ -26,6 +26,7 @@ import com.zhongmei.bty.basemodule.trade.bean.OutTimeInfo;
 import com.zhongmei.bty.basemodule.trade.bean.TradeDealSettingVo;
 import com.zhongmei.bty.basemodule.trade.entity.TradeDealSetting;
 import com.zhongmei.bty.basemodule.trade.entity.TradeDealSettingItem;
+import com.zhongmei.yunfu.db.enums.CustomerType;
 import com.zhongmei.yunfu.util.EmptyUtils;
 import com.zhongmei.yunfu.context.util.ThreadUtils;
 import com.zhongmei.yunfu.orm.DBHelperManager;

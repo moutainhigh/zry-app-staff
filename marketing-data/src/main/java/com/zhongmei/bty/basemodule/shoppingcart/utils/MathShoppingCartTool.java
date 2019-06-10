@@ -237,7 +237,7 @@ public class MathShoppingCartTool {
 
 
         //计算储值优惠金额
-        BigDecimal dishAmount=mathVo.saleAmount.subtract(privilegeDishAmount);//减去整单折扣的优惠金额
+        BigDecimal dishAmount=mathVo.saleAmount.add(mathVo.totalPrivilegeAmount);//减去整单折扣的优惠金额
         calculateChargePrivile(mTradeVo,mathVo,dishAmount);
         mathVo.taxableInAmount = mathVo.taxableInAmount.add(mathVo.chargePriviegeAmount.negate());
         mathVo.totalPrivilegeAmount = mathVo.totalPrivilegeAmount.add(mathVo.chargePriviegeAmount.negate());

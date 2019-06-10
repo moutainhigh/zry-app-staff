@@ -2,6 +2,7 @@ package com.zhongmei.yunfu.bean.req;
 
 import com.zhongmei.bty.basemodule.customer.message.CustomerInfoResp;
 import com.zhongmei.bty.basemodule.customer.bean.ICustomer;
+import com.zhongmei.yunfu.db.enums.CustomerType;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.enums.Sex;
 
@@ -42,6 +43,7 @@ public class CustomerLoginResp implements Serializable, ICustomer {
     private Integer storedPrivilegeType; //储值支付优惠类型  折扣，折让
     private BigDecimal storedPrivilegeValue; //储值支付优惠值
     private BigDecimal storedFullAmount;
+    private CustomerType customerType;
 
     /**
      * 国家英文名称(为空默认中国) = countryEN
@@ -312,6 +314,7 @@ public class CustomerLoginResp implements Serializable, ICustomer {
         customer.storedPrivilegeType=this.storedPrivilegeType; //储值支付优惠类型  折扣，折让
         customer.storedPrivilegeValue=this.storedPrivilegeValue; //储值支付优惠值
         customer.storedFullAmount=this.storedFullAmount;
+        customer.setCustomerType(this.customerType);
         if (cardList != null && cardList.size() > 0) {
             customer.cardList = new ArrayList<>();
             for (CustomerInfoResp.Card card : cardList) {

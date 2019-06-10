@@ -117,6 +117,7 @@ public class MemberMainFragment extends BasicFragment implements IPaymentMenuTyp
             memberLoginFragment.setCashInfoManager(mPaymentInfo);
             memberLoginFragment.setAutoLogin(isautoLogin);//设置是否需要自动登录，需要TradeCumtor有值
             memberLoginFragment.setDefaultShowCode(isDefaultShowCode);
+            memberLoginFragment.setmCustomerType(CustomerType.PAY);
             memberLoginFragment.setDoPayApi(mDoPayApi);//add v8.11
             FragmentManager fragmentManager = getChildFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

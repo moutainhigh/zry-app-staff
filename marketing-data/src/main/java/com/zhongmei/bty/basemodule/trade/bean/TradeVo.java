@@ -56,6 +56,7 @@ import com.zhongmei.yunfu.db.enums.TradeType;
 import com.zhongmei.yunfu.context.util.GsonUtil;
 import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.bty.db.entity.VerifyKoubeiOrder;
+import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -535,10 +536,12 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
             if (tradePrivileges == null) {
                 tradePrivileges = new ArrayList<TradePrivilege>();
             } else {
-                removeTradePrivileges(PrivilegeType.DISCOUNT);
-                removeTradePrivileges(PrivilegeType.REBATE);
-                removeTradePrivileges(PrivilegeType.FREE);
-//				tradePrivileges.clear();
+                if(!ValueEnums.equalsValue(tradePrivilege.getPrivilegeType(),PrivilegeType.CHARGE_DISCOUNT.value()) && !ValueEnums.equalsValue(tradePrivilege.getPrivilegeType(),PrivilegeType.CHARGE_REBATE.value())){
+                    removeTradePrivileges(PrivilegeType.DISCOUNT);
+                    removeTradePrivileges(PrivilegeType.REBATE);
+                    removeTradePrivileges(PrivilegeType.FREE);
+//				    tradePrivileges.clear();
+                }
             }
             tradePrivileges.add(tradePrivilege);
         }

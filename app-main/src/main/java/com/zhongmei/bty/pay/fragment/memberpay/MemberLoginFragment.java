@@ -57,6 +57,7 @@ import com.zhongmei.bty.basemodule.pay.message.PayResp;
 import com.zhongmei.bty.basemodule.session.support.VerifyHelper;
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
 import com.zhongmei.bty.basemodule.shoppingcart.SeparateShoppingCart;
+import com.zhongmei.bty.basemodule.trade.bean.DinnertableTradeInfo;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
 import com.zhongmei.bty.cashier.shoppingcart.ShoppingCart;
@@ -218,6 +219,16 @@ public class MemberLoginFragment extends BasicFragment {
     MemberChooseTypePopWindow popWindow;
 
     List<MemberLoginTypeData> loginTypeDataList;
+
+    private CustomerType mCustomerType=CustomerType.MEMBER;
+
+    public CustomerType getmCustomerType() {
+        return mCustomerType;
+    }
+
+    public void setmCustomerType(CustomerType mCustomerType) {
+        this.mCustomerType = mCustomerType;
+    }
 
     public void setDefaultShowCode(boolean defaultShowCode) {
         isDefaultShowCode = defaultShowCode;
@@ -1476,6 +1487,7 @@ public class MemberLoginFragment extends BasicFragment {
             return;
         }*/
         PhoneResponseListener listener = new PhoneResponseListener(dialog);
+        listener.setCustomerType(mCustomerType);
         CustomerManager customerManager = CustomerManager.getInstance();
         if (customerId != null && customerId != 0) {
             customerManager.customerLogin(CustomerLoginType.MEMBER_ID, customerId.toString(), pswd, needPswd == 1, false, true, LoadingYFResponseListener.ensure(listener, getFragmentManager()));
@@ -1683,10 +1695,15 @@ public class MemberLoginFragment extends BasicFragment {
     private class PhoneResponseListener implements YFResponseListener<YFResponse<CustomerLoginResp>> {
         private PasswordDialog dialog;
         private boolean isLoginByCard;
+        private CustomerType customerType=CustomerType.MEMBER;
 
         public PhoneResponseListener setCustomerLoginType(CustomerLoginType customerLoginType) {
             this.customerLoginType = customerLoginType;
             return this;
+        }
+
+        public void setCustomerType(CustomerType customerType) {
+            this.customerType = customerType;
         }
 
         private CustomerLoginType customerLoginType;//add v8.5
@@ -1717,6 +1734,7 @@ public class MemberLoginFragment extends BasicFragment {
                     }
 
                     CustomerResp customer = resp.getCustomer();
+                    customer.setCustomerType(this.customerType);
                     if (customer != null) {
                         if (this.customerLoginType != null) {
                             customer.customerLoginType = this.customerLoginType;
@@ -1924,40 +1942,47 @@ public class MemberLoginFragment extends BasicFragment {
     }
 
     private void setLoginCustomer(CustomerResp customerNew) {
-        if (mPaymentInfo.getTradeBusinessType() == BusinessType.SNACK || mPaymentInfo.getTradeBusinessType() == BusinessType.TAKEAWAY) {
-            boolean isSelected = SharedPreferenceUtil.getSpUtil().getBoolean(SettingConstant.MEMBER_AUTO_PRIVILEGE, false);
-            if (mPaymentInfo.getPaidPayment() != null && isSelected) {
-                ToastUtil.showLongToast(R.string.no_support_privilege);
-                return;
-            }
+        DinnerShopManager.getInstance().setLoginCustomer(customerNew);
+        DinnerShoppingCart.getInstance().batchMemberChargePrivilege(true, false);
 
-            if (mPaymentInfo.isOrdered()) {
-                return;
-            }
-
-            if (isSelected) {
-                customerNew.queryLevelRightInfos();
-                CustomerManager.getInstance().setLoginCustomer(customerNew);
-                TradeCustomer tradeCustomer = CustomerManager.getInstance().getTradeCustomer(customerNew);
-                if (!customerNew.isMember()) {
-                    tradeCustomer.setCustomerType(CustomerType.CUSTOMER);
-                } else if (customerNew.card == null) {
-                    tradeCustomer.setCustomerType(CustomerType.MEMBER);
-                } else {
-                    tradeCustomer.setCustomerType(CustomerType.CARD);
-                    tradeCustomer.setEntitycardNum(customerNew.card.getCardNum());
-                }
-
-                ShoppingCart.getInstance().setFastFoodCustomer(tradeCustomer);
-                ShoppingCart.getInstance().memberPrivilege();// 设置购物车会员折扣
-            }
-
-            CustomerManager.getInstance().setLoginSource(1);
-            RefreshTradeVoEvent event = new RefreshTradeVoEvent();
-            event.setLogin(true);
-            event.setTradeVo(ShoppingCart.getInstance().createFastFoodOrder(false));
-            EventBus.getDefault().post(event);
-        }
+        RefreshTradeVoEvent event = new RefreshTradeVoEvent();
+        event.setLogin(true);
+        event.setTradeVo(DinnerShoppingCart.getInstance().getShoppingCartVo().getmTradeVo());
+        EventBus.getDefault().post(event);
+//        if (mPaymentInfo.getTradeBusinessType() == BusinessType.SNACK || mPaymentInfo.getTradeBusinessType() == BusinessType.TAKEAWAY) {
+//            boolean isSelected = SharedPreferenceUtil.getSpUtil().getBoolean(SettingConstant.MEMBER_AUTO_PRIVILEGE, false);
+//            if (mPaymentInfo.getPaidPayment() != null && isSelected) {
+//                ToastUtil.showLongToast(R.string.no_support_privilege);
+//                return;
+//            }
+//
+//            if (mPaymentInfo.isOrdered()) {
+//                return;
+//            }
+//
+//            if (isSelected) {
+//                customerNew.queryLevelRightInfos();
+//                CustomerManager.getInstance().setLoginCustomer(customerNew);
+//                TradeCustomer tradeCustomer = CustomerManager.getInstance().getTradeCustomer(customerNew);
+//                if (!customerNew.isMember()) {
+//                    tradeCustomer.setCustomerType(CustomerType.CUSTOMER);
+//                } else if (customerNew.card == null) {
+//                    tradeCustomer.setCustomerType(CustomerType.MEMBER);
+//                } else {
+//                    tradeCustomer.setCustomerType(CustomerType.CARD);
+//                    tradeCustomer.setEntitycardNum(customerNew.card.getCardNum());
+//                }
+//
+//                ShoppingCart.getInstance().setFastFoodCustomer(tradeCustomer);
+//                ShoppingCart.getInstance().memberPrivilege();// 设置购物车会员折扣
+//            }
+//
+//            CustomerManager.getInstance().setLoginSource(1);
+//            RefreshTradeVoEvent event = new RefreshTradeVoEvent();
+//            event.setLogin(true);
+//            event.setTradeVo(ShoppingCart.getInstance().createFastFoodOrder(false));
+//            EventBus.getDefault().post(event);
+//        }
     }
 
     /*@Override

@@ -275,7 +275,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                 DinnerShopManager.getInstance().getShoppingCart().removeOrderPrivilege();
                 break;
             case CHARGE_PRIVILEGE:
-                DinnerShopManager.getInstance().getShoppingCart().removeChargePrivilege(true);
+                DinnerShopManager.getInstance().getShoppingCart().removeChargePrivilege(true,true);
                 break;
             case ADDITIONAL:
                 ExtraCharge extraCharge = dishDataItem.getExtraCharge();

@@ -1798,6 +1798,11 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                     case PLATFORM:
                     case BUSINESS:
                     case VIP:
+                    case CHARGE_DISCOUNT:
+                    case CHARGE_REBATE:
+                    case MEMBER_PRICE:
+                    case MEMBER_REBATE:
+                    case AUTO_DISCOUNT:
                         totalPrivilegeAmount = totalPrivilegeAmount.add(tradePrivilege1.getPrivilegeAmount());
                     default:
                         break;

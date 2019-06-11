@@ -726,6 +726,12 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 return true;
             }
 
+            //储值优惠
+            TradePrivilege chargePrivilege = tradeVo.getTradeChargePrivilege();
+            if (chargePrivilege != null && chargePrivilege.getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
+                return true;
+            }
+
             // 平台优惠
             List<TradePromotion> tradePromotions = tradeVo.getTradePromotions();
             if (Utils.isNotEmpty(tradePromotions)) {

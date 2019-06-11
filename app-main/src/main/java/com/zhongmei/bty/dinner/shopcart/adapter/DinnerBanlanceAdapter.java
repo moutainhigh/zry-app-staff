@@ -261,7 +261,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
 
                 if (shopcartItem != null) {
                     if (shopcartItem.getActualAmount() != null) {
-                        holder.dish_price.setText("");
+//                        holder.dish_price.setText("");
                         holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedComboDishPrice));
                     } else {
                         holder.dish_price.setText("");

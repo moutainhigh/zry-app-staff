@@ -106,6 +106,8 @@ public class BeautyBookingUpdateReq extends BaseRequest {
      */
     public String orderDesc;
 
+    public String remark;
+
     public Long creatorId;
     public String creatorName;
 
@@ -143,6 +145,7 @@ public class BeautyBookingUpdateReq extends BaseRequest {
         this.clientCreateTime = booking.getClientCreateTime();
         this.bookingType = booking.getBookingType().value();
         this.orderDesc = remark;
+        this.remark=remark;
         this.commercialId = booking.getCommercialId();
         this.uuid = booking.getUuid();
         this.orderSource = 1;

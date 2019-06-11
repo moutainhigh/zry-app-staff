@@ -1546,7 +1546,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 }
                 createCardServiceHint(shopCartItem);
                 createApplet(shopCartItem);
-                createItemUser(shopCartItem);
+                createItemUser(shopCartItem,shopCartItem);
                 // 套餐外壳备注
                 createMemoItem(shopCartItem,
                         shopCartItem,
@@ -1623,7 +1623,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         createApplet(shopCartItem);
         createPropertiesItem(item);
         createExtraItem(item);
-        createItemUser(shopCartItem);
+        createItemUser(shopCartItem,shopCartItem);
 
         // 单菜备注
         createMemoItem(shopCartItem,
@@ -1674,6 +1674,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         createExtraItem(it);
         createSiglePrivilege(shopCartItem, child);
         // 字菜备注
+        createItemUser(child,null);
         createMemoItem(child,
                 shopCartItem,
                 data,
@@ -2035,16 +2036,16 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     /**
      * 创建服务关联的技师、销售
      */
-    private void createItemUser(IShopcartItem shopcartItem) {
-        if (Utils.isEmpty(shopcartItem.getTradeItemUserList())) {
+    private void createItemUser(IShopcartItemBase shopCartItemBase,IShopcartItem shopcartItem) {
+        if (Utils.isEmpty(shopCartItemBase.getTradeItemUserList())) {
             return;
         }
-        for (TradeUser tradeItemUser : shopcartItem.getTradeItemUserList()) {
+        for (TradeUser tradeItemUser : shopCartItemBase.getTradeItemUserList()) {
             if (tradeItemUser.getStatusFlag() == StatusFlag.INVALID) {
                 continue;
             }
             DishDataItem item = new DishDataItem(ItemType.ITEM_USER);
-            item.setBase(shopcartItem);
+            item.setBase(shopCartItemBase);
             item.setItem(shopcartItem);
             item.setTradeItemUser(tradeItemUser);
             item.setName(TradeUserUtil.getUserName(tradeItemUser));

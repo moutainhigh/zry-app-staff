@@ -343,6 +343,7 @@ public class DinnertableTradeInfo {
                 setmealItem.setTradeItemOperations(tradeItemVo.getTradeItemOperations());
                 setmealItem.setTradeItemExtraDinner(tradeItemVo.getTradeItemExtraDinner());
                 setmealItem.setTradeItemMainBatchRelList(tradeItemVo.getTradeItemMainBatchRelList());
+                setmealItem.setTradeItemUserList(tradeItemVo.getTradeItemUserList());
                 if (parent.isGroupDish()) {
                     setmealItem.setIsGroupDish(true);
                     setmealItem.setSigleDeskQuantity(ShopcartItemUtils.getDisplyQty(setmealItem, deskCount));

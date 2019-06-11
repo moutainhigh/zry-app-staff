@@ -282,7 +282,7 @@ public class BeautyPropertyUtil {
         if (!TextUtils.isEmpty(mParentUuid)) {
 
             mShopcartItem = mShoppingCart.getShopcartItemByUUID(mShoppingCart.getShoppingCartVo(), mParentUuid);
-            int size = mShopcartItem.getSetmealItems() == null ? 0 : mShopcartItem.getSetmealItems().size();
+            int size =( mShopcartItem==null || mShopcartItem.getSetmealItems() == null) ? 0 : mShopcartItem.getSetmealItems().size();
             for (int i = 0; i < size; i++) {
                 if (mShopcartItem.getSetmealItems().get(i).getUuid().equals(mUuid)) {
                     mSetmealShopcartItem = mShopcartItem.getSetmealItems().get(i);

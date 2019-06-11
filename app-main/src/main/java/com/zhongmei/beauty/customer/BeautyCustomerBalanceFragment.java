@@ -744,7 +744,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
             }
 
             phoneNum = mCustomer.mobile;// mobile
-            CustomerStoredBalanceReq req = new CustomerStoredBalanceReq(1, mCustomer.id);
+            CustomerStoredBalanceReq req = new CustomerStoredBalanceReq(1, mCustomer.customerId);
 
             op.getValuecardHistory(req,
                     LoadingYFResponseListener.ensure(new YFResponseListener<YFResponseList<CustomerStoredBalanceResp>>() {

@@ -280,6 +280,7 @@ public class BeautyPropertyUtil {
         mParentUuid = mDishDataItem.getBase().getParentUuid();
 
         if (!TextUtils.isEmpty(mParentUuid)) {
+
             mShopcartItem = mShoppingCart.getShopcartItemByUUID(mShoppingCart.getShoppingCartVo(), mParentUuid);
             int size = mShopcartItem.getSetmealItems() == null ? 0 : mShopcartItem.getSetmealItems().size();
             for (int i = 0; i < size; i++) {

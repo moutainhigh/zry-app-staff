@@ -1350,6 +1350,9 @@ public class BaseShoppingCart {
     }
 
 
+
+
+
     /**
      * @Title: batchMemberPrivilege
      * @Description: 批量对已加入购物车中的菜品设置会员价

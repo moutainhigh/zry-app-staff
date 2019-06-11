@@ -432,6 +432,7 @@ public class MemberPayFragment extends BasePayFragment implements PayView {
             //隐藏时清空已输入金额
             clearInputData();
             cleanMemberChargePrivilege();
+            notifyRefreshUI();
           /*  DisplayServiceManager.updateDisplay(getActivity().getApplicationContext(),
                     DisplayServiceManager.buildPayMessage(DisplayUserInfo.COMMAND_CACEL, ""));*/
         }
@@ -602,6 +603,7 @@ public class MemberPayFragment extends BasePayFragment implements PayView {
     public void onDestroy() {
         this.unregisterEventBus();
         super.onDestroy();
+        cleanMemberChargePrivilege();
     }
 
     /***
@@ -1070,7 +1072,12 @@ public class MemberPayFragment extends BasePayFragment implements PayView {
      * 清除会员储值优惠信息
      */
     private void cleanMemberChargePrivilege(){
-        DinnerShoppingCart.getInstance().removeChargePrivilege(true,true);
+        if(ServerSettingCache.getInstance().isChargePrivilegeWhenPay()){
+            DinnerShoppingCart.getInstance().removeChargePrivilege(true,true);
+        }
+    }
+
+    private void notifyRefreshUI(){
         RefreshTradeVoEvent event = new RefreshTradeVoEvent();
         event.setLogin(true);
         event.setTradeVo(DinnerShoppingCart.getInstance().getShoppingCartVo().getmTradeVo());
@@ -1084,10 +1091,7 @@ public class MemberPayFragment extends BasePayFragment implements PayView {
         DinnerShopManager.getInstance().setLoginCustomer(mCustomer);
         DinnerShoppingCart.getInstance().batchMemberChargePrivilege(true, false);
 
-        RefreshTradeVoEvent event = new RefreshTradeVoEvent();
-        event.setLogin(true);
-        event.setTradeVo(DinnerShoppingCart.getInstance().getShoppingCartVo().getmTradeVo());
-        EventBus.getDefault().post(event);
+        notifyRefreshUI();
     }
 
     private void refreshMemberPrice() {

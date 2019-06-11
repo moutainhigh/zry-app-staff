@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
+import com.zhongmei.beauty.customer.constants.BeautyCustomerConstants;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.base.MainBaseActivity;
 import com.zhongmei.yunfu.bean.req.CustomerResp;
@@ -47,7 +48,7 @@ public class BeautyCustomerChargingBalanceActivity extends MainBaseActivity {
         final String integarl = bundle.getString("integral");
         final String balance = bundle.getString("balance");
         final EcCardInfo ecCard = (EcCardInfo) bundle.getSerializable("ecCard");
-        final CustomerResp customer = (CustomerResp) bundle.getSerializable(KEY_CUSTOMER);
+        final CustomerResp customer = (CustomerResp) bundle.getSerializable(BeautyCustomerConstants.KEY_CUSTOMER);
         bindFragemnt(customer, type, integarl, ecCard, balance);
     }
 

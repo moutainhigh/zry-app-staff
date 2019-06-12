@@ -200,8 +200,10 @@ public class ServerAddressUtil {
      * @Return String 返回类型
      */
     public String getUpdateCheckApi() {
-        return getRemoteHost() + "/pos/check/update?shopId="
-                + ShopInfoCfg.getInstance().shopId + "&sys=android&v="
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/systemVersion/checkVersion?shopId="
+                + ShopInfoManager.getInstance().getShopInfo().getShopId() + "&brandId="+
+                ShopInfoManager.getInstance().getShopInfo().getBrandId()
+                +"&versionCode="
                 + SystemUtils.getVersionCode();
     }
 

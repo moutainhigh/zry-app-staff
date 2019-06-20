@@ -43,10 +43,21 @@ public enum PayModeId implements ValueEnum<Long> {
     /**
      * 优惠券
      */
-    COUPON(7L)
+    COUPON(7L),
+
+    /**
+     * 101自定义微信
+     */
+    OTHER_WX_PAY(101L),
+
+    /**
+     * 102自定义支付宝
+     */
+    OTHER_ALI_PAY(102L),
+
 
     /**以下是无用类型,后期删除*/
-    ,
+
     /**
      * 百度钱包
      */

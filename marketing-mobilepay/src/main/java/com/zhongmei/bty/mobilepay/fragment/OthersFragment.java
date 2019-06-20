@@ -6,6 +6,7 @@ package com.zhongmei.bty.mobilepay.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 
+import com.zhongmei.yunfu.db.enums.PayModeId;
 import com.zhongmei.yunfu.mobilepay.R;
 import com.zhongmei.bty.mobilepay.enums.PayActionPage;
 import com.zhongmei.bty.mobilepay.fragment.com.BasePayFragment;
@@ -244,6 +246,12 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
         if (mPaymentInfo == null) return;
         PayScene payScene = mPaymentInfo.getPayScene();
         List<PaymentModeShop> modeShopList = PaySettingCache.getOthersPaymentModeShops(payScene == PayScene.SCENE_CODE_CHARGE ? PayScene.SCENE_CODE_CHARGE.value() : PayScene.SCENE_CODE_SHOP.value());
+        if (modeShopList == null) {
+            modeShopList = new ArrayList<>();
+            modeShopList.add(createPaymentModeShop(PayModeId.OTHER_WX_PAY, "微信支付"));
+            modeShopList.add(createPaymentModeShop(PayModeId.OTHER_ALI_PAY, "支付宝支付"));
+        }
+
         List<PayModelItem> listData;
         listData = new ArrayList<PayModelItem>();
         if (modeShopList != null && modeShopList.size() > 0) {
@@ -263,12 +271,20 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
             adapter = new OtherPayModelAdapter(getActivity(), listData, mGridView);
             adapter.setHorizontalSize(mHorizontalSize);
             adapter.setCashInfoManager(mPaymentInfo);
-            if (mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT || mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_WRITEOFF || mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BOOKING_DEPOSIT) {//如果押金、销账不支持组合
+            //if (mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT || mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_WRITEOFF || mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BOOKING_DEPOSIT) {//如果押金、销账不支持组合
                 adapter.setSuportMulti(false);//
-            }
+            //}
             adapter.refreshView();
         }
         //modify 20170110
+    }
+
+    private PaymentModeShop createPaymentModeShop(PayModeId modeId, String modeIdName) {
+        PaymentModeShop paymentModeShop = new PaymentModeShop();
+        paymentModeShop.setErpModeId(modeId.value());
+        paymentModeShop.setName(modeIdName);
+        paymentModeShop.setFaceValue(mPaymentInfo.getTradeVo().getTrade().getTradeAmount());
+        return paymentModeShop;
     }
 
     private OtherPayModelAdapter adapter;

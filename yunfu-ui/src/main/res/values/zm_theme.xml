@@ -20,7 +20,7 @@
     <dimen name="zm_pay_radius_size">6dp</dimen>
     <color name="zm_pay_box_color">#F0F0F0</color>
 
-    <integer name="zm_pay_menu_count">5</integer>
+    <integer name="zm_pay_menu_count">6</integer>
 
     <item name="h5_webview" type="id" />
 

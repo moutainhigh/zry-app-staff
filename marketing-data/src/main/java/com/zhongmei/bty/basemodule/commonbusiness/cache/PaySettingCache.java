@@ -118,13 +118,13 @@ public class PaySettingCache {
         return LazySingletonHolder.INSTANCE.mPaymentModesMap.get(erpModeId);
     }
 
-    public static List<PaymentModeShop> getPaymentModeShopByType(Integer sceneCode, Integer paymentModeType) {
+    /*public static List<PaymentModeShop> getPaymentModeShopByType(Integer sceneCode, Integer paymentModeType) {
 
         if (LazySingletonHolder.INSTANCE.mPaymentModeContent != null)
             return LazySingletonHolder.INSTANCE.mPaymentModeContent.getPaymentModeShopByType(sceneCode, paymentModeType);
         else return null;
 
-    }
+    }*/
 
     public static MobilePaySettingHolder getMobilePaySettingHolder() {
         return LazySingletonHolder.INSTANCE.mMobilePaySettingHolder;

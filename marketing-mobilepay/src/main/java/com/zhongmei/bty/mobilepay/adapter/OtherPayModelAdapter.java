@@ -293,9 +293,9 @@ public class OtherPayModelAdapter {
             BigDecimal faceValue = nowItem.getPaymentModeShop().getFaceValue();
 
             if (faceValue != null) {
-                if (nowItem.getUsedValue() != null && nowItem.getUsedValue().compareTo(BigDecimal.ZERO) > 0) {// 有面值的并且已选中不做处理
+                /*if (nowItem.getUsedValue() != null && nowItem.getUsedValue().compareTo(BigDecimal.ZERO) > 0) {// 有面值的并且已选中不做处理
                     return;
-                }
+                }*/
                 if (notPayAmount.compareTo(BigDecimal.ZERO) <= 0) {
                     ToastUtil.showShortToast(R.string.amount_is_enough);
                     return;

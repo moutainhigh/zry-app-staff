@@ -335,7 +335,7 @@ public class PaymentMenuTool implements IPaymentMenuType {
                 break;
 
                 case PAY_MENU_TYPE_OTHERS://其它
-                    if (PaySettingCache.isSetPayModeGroup(this.mPayScene.value(), PayModelGroup.OTHER)) {
+                    /*if (PaySettingCache.isSetPayModeGroup(this.mPayScene.value(), PayModelGroup.OTHER))*/ {
                         PayMethodItem item = new PayMethodItem(PAY_MENU_TYPE_OTHERS);
                         item.payModelGroup = PayModelGroup.OTHER;
                         item.methodResId = R.drawable.pay_method_type_other_selector;

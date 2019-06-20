@@ -169,6 +169,16 @@ public class PayModelTool {
                             paymentItem.setChangeAmount(BigDecimal.valueOf(0));// 找零金额
                             paymentItem.setUsefulAmount(model.getUsedValue());// 实付款
                             break;
+                        case OTHER_WX_PAY:
+                        case OTHER_ALI_PAY:
+                            paymentItem.setPayModeId(model.getPayMode().value());//支付方式
+                            paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));//支付方式名称
+                            paymentItem.setPayModelGroup(PayModelGroup.OTHER);
+                            paymentItem.setRefundWay(RefundWay.NONEED_REFUND);
+                            paymentItem.setFaceAmount(model.getUsedValue());// 票面金额
+                            paymentItem.setChangeAmount(BigDecimal.valueOf(0));// 找零金额
+                            paymentItem.setUsefulAmount(model.getUsedValue());// 实付款
+                            break;
                         case POS_CARD://银联pos刷卡
                             paymentItem.setPayModeId(model.getPayMode().value());//支付方式
                             paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));//支付方式名称

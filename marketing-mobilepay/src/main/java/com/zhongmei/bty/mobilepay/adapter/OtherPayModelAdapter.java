@@ -424,16 +424,16 @@ public class OtherPayModelAdapter {
             holder.paymentMode.setBackgroundResource(R.drawable.payment_mode_other_select_bg);
             //holder.contentView.setBackgroundResource(R.drawable.pay_other_item_selected);
             if (faceValue != null) {
-                holder.paymentModeAdd.setVisibility(View.VISIBLE);
-                holder.paymentModeReduce.setVisibility(View.VISIBLE);
-                holder.paymentModeCount.setVisibility(View.VISIBLE);
-                holder.paymentModeCount.setText(payModelItem.getUsedCount() + "");
-                holder.paymentModeAmount.setVisibility(View.GONE);
+                //holder.paymentModeAdd.setVisibility(View.VISIBLE);
+                //holder.paymentModeReduce.setVisibility(View.VISIBLE);
+               // holder.paymentModeCount.setVisibility(View.VISIBLE);
+                //holder.paymentModeCount.setText(payModelItem.getUsedCount() + "");
+                //holder.paymentModeAmount.setVisibility(View.GONE);
                 holder.paymentModeFaceValue.setVisibility(View.VISIBLE);
                 //ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) holder.paymentModeFaceValue.getLayoutParams();
                 //params.setMargins(DensityUtil.dip2px(10), DensityUtil.dip2px(12),0,0);
                 //holder.paymentModeFaceValue.setLayoutParams(params);
-            } else {
+            } /*else {
                 holder.paymentModeAmount.setVisibility(View.VISIBLE);
                 holder.paymentModeFaceValue.setVisibility(View.GONE);
                 holder.paymentModeAdd.setVisibility(View.GONE);
@@ -449,7 +449,7 @@ public class OtherPayModelAdapter {
                         holder.paymentModeAmount.setText(mDefaultInputStr);
                     } else holder.paymentModeAmount.setText(null);
                 }
-            }
+            }*/
             holder.paymentModeFaceValue.setTextColor(Color.WHITE);
             holder.paymentModeCount.setTextColor(Color.BLACK);
             holder.paymentModeName.setTextColor(Color.WHITE);

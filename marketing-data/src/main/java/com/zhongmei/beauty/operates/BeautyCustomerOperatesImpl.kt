@@ -1,18 +1,16 @@
 package com.zhongmei.beauty.operates
 
-import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceAccount
-import com.zhongmei.yunfu.http.OpsRequest
-import com.zhongmei.bty.basemodule.commonbusiness.utils.ServerAddressUtil
-import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp
 import com.zhongmei.beauty.operates.message.*
 import com.zhongmei.beauty.utils.BeautyServerAddressUtil
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo
+import com.zhongmei.bty.basemodule.customer.bean.*
 import com.zhongmei.bty.commonmodule.data.operate.AbstractOpeartesImpl
 import com.zhongmei.bty.commonmodule.data.operate.IOperates
+import com.zhongmei.yunfu.bean.YFResponse
 import com.zhongmei.yunfu.bean.YFResponseList
+import com.zhongmei.yunfu.db.entity.TaskRemind
 import com.zhongmei.yunfu.http.RequestObject
 import com.zhongmei.yunfu.http.JFRequest
-import com.zhongmei.yunfu.resp.data.TransferReq
 import com.zhongmei.yunfu.resp.ResponseListener
 import com.zhongmei.yunfu.resp.YFResponseListener
 
@@ -53,6 +51,46 @@ class BeautyCustomerOperatesImpl : AbstractOpeartesImpl, BeautyCustomerOperates 
                 .execute(listener, "CustomerExpenseRecord")
     }
 
+
+    override fun getDocRecord(customerDocReq: CustomerDocRecordReq, listener: YFResponseListener<YFResponseList<CustomerDocRecordResp>>) {
+        var url = BeautyServerAddressUtil.getCustomerDoc()
+        val executor = JFRequest.create(url)
+        executor.requestValue(customerDocReq)
+                .execute(listener, "CustomerDocRecord")
+    }
+
+    override fun getTaskList(taskReq: TaskQueryReq, listener: YFResponseListener<YFResponseList<TaskRemind>>) {
+        var url = BeautyServerAddressUtil.getTask()
+        val executor = JFRequest.create(url)
+        executor.requestValue(taskReq)
+                .execute(listener, "taskRecord")
+    }
+
+    override fun getDocRecordDetail(docId: Long, listener: YFResponseListener<YFResponse<CustomerDocRecordResp>>) {
+        val req = mapOf("archivesId" to docId)
+        var url = BeautyServerAddressUtil.getCustomerDocDetail()
+        val executor = JFRequest.create(url)
+        executor.requestValue(req)
+                .execute(listener, "CustomerDocRecordDetail")
+    }
+
+    override fun saveDocRecord(docDetail: CustomerDocReq, listener: YFResponseListener<YFResponse<CustomerDocRecordResp>>) {
+        var url = BeautyServerAddressUtil.saveCustomerDoc()
+        val executor = JFRequest.create(url)
+        executor.requestValue(docDetail)
+                .execute(listener, "saveDocRecord")
+    }
+
+
+    override fun saveTask(taskReq: TaskCreateOrEditReq, listener: YFResponseListener<YFResponse<TaskRemind>>) {
+        var url = BeautyServerAddressUtil.saveTask()
+        if(taskReq.taskId!=null){
+            url = BeautyServerAddressUtil.saveEditTask()
+        }
+        val executor = JFRequest.create(url)
+        executor.requestValue(taskReq)
+                .execute(listener, "saveTask")
+    }
 
     /**
      * 转换 次卡服务信息 请求参数

@@ -1534,7 +1534,7 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
      * @param v
      */
     @Click({R.id.cus_jifen_ll, R.id.cus_yue_ll, R.id.cus_pwd_ll, R.id.cus_quan_ll,
-            R.id.cus_card_time_ll, R.id.cus_wxapp_ll, R.id.cus_expense_ll})
+            R.id.cus_card_time_ll, R.id.cus_wxapp_ll, R.id.cus_expense_ll,R.id.cus_doc_ll})
     protected void onClickBaseInfo(View v) {
         if (ClickManager.getInstance().isClicked()) {
             return;
@@ -1570,6 +1570,10 @@ public class BeautyCustomerDetailFragment extends BasicFragment {
                 break;
             case R.id.cus_wxapp_ll:
                 checkType = CustomerContants.TYPE_WX_APP;
+                checkPermiss(ChargingType.LIST);
+                break;
+            case R.id.cus_doc_ll:
+                checkType = CustomerContants.TYPE_DOCMENT;
                 checkPermiss(ChargingType.LIST);
                 break;
             case R.id.cus_expense_ll:

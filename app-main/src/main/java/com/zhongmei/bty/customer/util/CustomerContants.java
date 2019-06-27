@@ -54,4 +54,7 @@ public class CustomerContants {
     //消费记录
     public static final int TYPE_EXPENSE = 5;
 
+    //会员档案
+    public static final int TYPE_DOCMENT = 6;
+
 }

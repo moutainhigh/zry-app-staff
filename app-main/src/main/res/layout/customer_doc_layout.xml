@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/customer_balance_showdow"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/customer_account_padding"
+        android:layout_marginRight="@dimen/customer_account_padding"
+        android:background="#e5e8ec" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/customer_account_padding"
+        android:layout_marginLeft="@dimen/customer_account_padding"
+        android:layout_marginRight="@dimen/customer_account_padding">
+
+        <ListView
+            android:id="@+id/customer_doc_lv"
+            android:layout_width="350dp"
+            android:layout_height="match_parent"
+            android:background="@color/write"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"
+            android:listSelector="@color/transparent" />
+
+        <LinearLayout
+            android:id="@+id/layout_doc_detail"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/customer_doc_lv">
+            <include layout="@layout/member_doc_detail" />
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/doc_empty_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/customer_empty_icon" />
+
+    </RelativeLayout>
+
+</LinearLayout>

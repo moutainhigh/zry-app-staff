@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.zhongmei.yunfu.context.R;
@@ -1090,6 +1091,36 @@ public class DateTimeUtils {
         } else {
             return false;
         }
+    }
+
+
+    /**
+     * 截取掉前缀0以便转换为整数
+     *
+     */
+    public static int trimZero(@NonNull String text) {
+        try {
+            if (text.startsWith("0")) {
+                text = text.substring(1);
+            }
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            Log.e("DataUtils", e.getMessage());
+            return 0;
+        }
+    }
+
+    /**
+     * 月日时分秒，0-9前补0
+     */
+    @NonNull
+    public static String fillZero(int number) {
+        return number < 10 ? "0" + number : "" + number;
+    }
+
+    @NonNull
+    public static String fillZero(String number) {
+        return number.length() < 2 ? "0" + number : number;
     }
 
     /**

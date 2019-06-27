@@ -88,6 +88,14 @@
 
         <View style="@style/beauty_anchor_horizontal_line" />
 
+        <RadioButton
+            android:id="@+id/rb_anchor_task"
+            style="@style/beauty_main_anchor"
+            android:drawableTop="@drawable/icon_beauty_main_anchor_report"
+            android:text="任务" />
+
+        <View style="@style/beauty_anchor_horizontal_line" />
+
         <!--<RadioButton
             android:id="@+id/rb_anchor_refresh"
             style="@style/beauty_main_anchor"

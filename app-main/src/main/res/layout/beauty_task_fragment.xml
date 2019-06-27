@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/fl_content"
+        android:orientation="horizontal"
+        android:background="@drawable/beauty_shape_rect_gray_bg">
+
+        <com.zhongmei.beauty.widgets.DrawableCenterButton
+            android:id="@+id/btn_create_task"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/beauty_btn_operator_selector"
+            android:drawableLeft="@drawable/beauty_reserver_icon_add"
+            android:drawablePadding="5dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="left|center_vertical"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@string/beauty_create_task"
+            android:textColor="@color/beauty_text_white"
+            android:textSize="14sp" />
+
+        <RadioGroup
+            android:id="@+id/rg_status"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/beauty_shape_gray_bg"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_task"
+                style="@style/beauty_reserver_tab_style"
+                android:background="@drawable/beauty_reserver_tab_left_bg_selecgtor"
+                android:checked="true"
+                android:text="@string/beauty_vaild_task" />
+
+            <View style="@style/beauty_task_tab_vertical_line" />
+
+            <RadioButton
+                android:id="@+id/rb_outtime_task"
+                style="@style/beauty_reserver_tab_style"
+                android:background="@drawable/beauty_reserver_tab_right_bg_selecgtor"
+                android:text="@string/beauty_outtime_task" />
+
+            <View style="@style/beauty_task_tab_vertical_line" />
+
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:background="@color/bg_white"
+        android:orientation="horizontal">
+
+        <RadioGroup
+            android:id="@+id/rg_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb_today"
+                style="@style/beauty_reserver_board_rb"
+                android:checked="true"
+                android:text="@string/beauty_today" />
+
+            <RadioButton
+                android:id="@+id/rb_tomorrow"
+                style="@style/beauty_reserver_board_rb"
+                android:text="@string/beauty_tomorrow" />
+
+            <RadioButton
+                android:id="@+id/rb_after_tomorrow"
+                style="@style/beauty_reserver_board_rb"
+                android:text="@string/beauty_after_tomorrow" />
+
+            <RadioButton
+                android:id="@+id/rb_custom_date"
+                style="@style/beauty_reserver_board_rb"
+                android:drawableTop="@drawable/beauty_reserver_date_selector"
+                android:paddingRight="2dp" />
+
+            <TextView
+                android:id="@+id/tv_custom_date"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="8dp"
+                android:text="(自定义)"
+                android:textColor="@color/beauty_color_999999"
+                android:textSize="14sp" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_white"
+
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+
+        <com.aspsine.swipetoloadlayout.SwipeToLoadLayout
+            android:id="@+id/swipeToLoadLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:swipe_style="classic">
+
+            <com.aspsine.swipetoloadlayout.SwipeRefreshHeaderLayout
+                android:id="@id/swipe_refresh_header"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/beauty_notify_textview_hint"
+                    android:layout_gravity="center"
+                    android:text="@string/refresh" />
+            </com.aspsine.swipetoloadlayout.SwipeRefreshHeaderLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@id/swipe_target"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"></android.support.v7.widget.RecyclerView>
+
+            <com.aspsine.swipetoloadlayout.SwipeLoadMoreFooterLayout
+                android:id="@id/swipe_load_more_footer"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/beauty_notify_textview_hint"
+                    android:layout_gravity="center"
+                    android:text="@string/loadmore" />
+            </com.aspsine.swipetoloadlayout.SwipeLoadMoreFooterLayout>
+        </com.aspsine.swipetoloadlayout.SwipeToLoadLayout>
+
+        <TextView
+            android:id="@+id/iv_empty_view"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="23dp"
+            android:gravity="center"
+            android:textColor="@color/beauty_color_999999"
+            android:text="暂无任务哦"
+            android:drawableTop="@drawable/beauty_no_order_view" />
+    </RelativeLayout>
+
+
+</LinearLayout>

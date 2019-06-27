@@ -17,6 +17,7 @@
     <string name="beauty_trade_number_hint">订单数</string>
     <string name="beauty_member_number_hint">新增会员</string>
     <string name="beauty_create_trade">开单</string>
+    <string name="beauty_execute">执行</string>
     <string name="beauty_create_card">办卡</string>
     <string name="beauty_buy_server">服务次卡</string>
     <string name="beauty_charge">充值</string>
@@ -173,4 +174,10 @@
     <string name="the_card_is_not_member_card">该卡不是会员实体卡！</string>
 
     <string name="order_dish_trade_user">整单:%1$s</string>
+
+    <string name="beauty_create_task">新任务</string>
+    <string name="beauty_vaild_task">待执行</string>
+    <string name="beauty_outtime_task">已超时</string>
+
+    <string name="beauty_create_member_doc">新档案</string>
 </resources>

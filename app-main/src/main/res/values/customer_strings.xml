@@ -130,7 +130,9 @@
     <string name="customer_youhuiquan">可用优惠券</string>
     <string name="customer_wxapp_service">小程序服务</string>
     <string name="customer_expense_service">消费记录</string>
+    <string name="customer_docment">会员档案</string>
     <string name="customer_pasword">修改密码</string>
+    <string name="customer_doc">会员档案</string>
     <string name="customer_card_dialog_no">序号</string>
     <string name="customer_card_no">卡号</string>
     <string name="customer_detail_sex_women">%1$s女士</string>

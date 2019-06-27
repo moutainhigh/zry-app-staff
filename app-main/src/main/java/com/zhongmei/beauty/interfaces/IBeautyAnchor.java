@@ -56,4 +56,9 @@ public interface IBeautyAnchor {
      * @param v
      */
     void toShopSyncRefresh(View v);
+
+    /**
+     * 去任务管理中心
+     */
+    void toTaskCenter();
 }

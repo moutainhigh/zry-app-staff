@@ -234,4 +234,10 @@
     <string name="input_wechat_coupon_code">请录入微信卡券券号</string>
     <string name="check_ticket_str">验券</string>
     <string name="src_no_work_reject_toast">无网模式不支持此操作</string>
+
+    <string name="minute_unit">分</string>
+    <string name="hour_unit">时</string>
+
+    <string name="sure">确定</string>
+    <string name="select_time">请选择时间</string>
 </resources>

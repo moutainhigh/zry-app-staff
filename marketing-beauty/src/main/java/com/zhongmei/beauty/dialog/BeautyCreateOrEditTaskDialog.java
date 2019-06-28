@@ -45,8 +45,13 @@ import java.util.List;
  */
 
 public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements View.OnClickListener {
+    public static final int OPERATE_TYPE_NEW_CREATE=0x01;
+    public static final int OPERATE_TYPE_EDIT=0x02;
+    public static final int OPERATE_TYPE_SCAN=0x03;
 
     View parentView;
+
+    private TextView tv_title;
 
     private TextView tv_memberName;
 
@@ -61,7 +66,10 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
     private LinearLayout layout_executor;
     private TextView tv_executor;
     private EditText et_taskContent;
+    private LinearLayout layout_taskResult;
+    private TextView tv_taskResult;
 
+    private LinearLayout ll_bottom;
     private Button btn_submit;
     private ImageButton ib_close;
 
@@ -73,6 +81,8 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
     private CustomerResp mCustomer;
     private Date mSelectDate=new Date(System.currentTimeMillis());
 
+    private int curOperateType=OPERATE_TYPE_NEW_CREATE;
+
     public void setTaskOperatorListener(TaskOperatorLisnter taskOperatorListener) {
         this.taskOperatorListener = taskOperatorListener;
     }
@@ -83,6 +93,10 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
 
     public void setTaskInfo(TaskRemind task){
         this.mTask=task;
+    }
+
+    public void setOperatorType(int type){
+        this.curOperateType=type;
     }
 
     @Override
@@ -115,6 +129,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     /**
@@ -122,6 +137,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
      * @param view
      */
     private void initView(View view){
+        tv_title=(TextView)view.findViewById(R.id.tv_title);
         tv_memberName=(TextView)view.findViewById(R.id.tv_member_name);
         layout_tradeInfo=(LinearLayout)view.findViewById(R.id.layout_trade_info);
         tv_tradeNo=(TextView) view.findViewById(R.id.tv_trade_no);
@@ -135,7 +151,10 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
         layout_executor=(LinearLayout)view.findViewById(R.id.layout_executor);
         tv_executor=(TextView)view.findViewById(R.id.tv_executor);
         et_taskContent=(EditText) view.findViewById(R.id.et_task_content);
+        layout_taskResult=(LinearLayout) view.findViewById(R.id.layout_task_result);
+        tv_taskResult=(TextView)view.findViewById(R.id.tv_task_result);
 
+        ll_bottom =(LinearLayout)view.findViewById(R.id.ll_bottom);
         btn_submit=(Button) view.findViewById(R.id.btn_submit);
         ib_close=(ImageButton) view.findViewById(R.id.btn_close);
 
@@ -157,13 +176,39 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
         }
 
         if(mTask!=null){
-            tv_memberName.setText(mTask.getCustomerName());
+            if(!TextUtils.isEmpty(mTask.getCustomerName())){
+                tv_memberName.setVisibility(View.VISIBLE);
+                tv_memberName.setText(mTask.getCustomerName());
+            }
+
 //            tv_tradeNo.setText();
 //            et_taskContent.setText();
             et_taskTitle.setText(mTask.getTitle());
             et_taskContent.setText(mTask.getContent());
             mSelectDate=new Date(mTask.getRemindTime());
-            showTaskRemindTime(mSelectDate);
+
+            if(mTask.getStatus()==2){
+                layout_taskResult.setVisibility(View.VISIBLE);
+                tv_taskResult.setText(mTask.getTaskResult());
+            }
+        }
+        showTaskRemindTime(mSelectDate);
+
+        switch (curOperateType){
+            case OPERATE_TYPE_NEW_CREATE:
+                tv_title.setText("添加任务");
+                break;
+            case OPERATE_TYPE_EDIT:
+                tv_title.setText("编辑任务");
+                break;
+            case OPERATE_TYPE_SCAN:
+                tv_title.setText("查看详情");
+                ll_bottom.setVisibility(View.GONE);
+                et_taskTitle.setEnabled(false);
+                et_taskContent.setEnabled(false);
+                layout_executor.setOnClickListener(null);
+                layout_executeTime.setOnClickListener(null);
+                break;
         }
     }
 

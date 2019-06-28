@@ -21,17 +21,21 @@ import android.widget.TextView;
 import com.zhongmei.beauty.entity.UserVo;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerDocRecordResp;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerDocReq;
+import com.zhongmei.bty.basemodule.customer.bean.TaskCreateOrEditReq;
+import com.zhongmei.bty.commonmodule.view.calendar.CalendarTimeDialog;
 import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.yunfu.context.session.auth.IAuthUser;
 import com.zhongmei.yunfu.context.session.core.user.User;
+import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
 import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -65,6 +69,8 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
     private CustomerDocReq customerDocReq;
     private UserVo mExecutor;//执行人，默认为当前登陆的店员
     private CustomerResp mCustomer;
+
+    private Date mSelectDate=new Date(System.currentTimeMillis());
 
     public void setDocOperatorListener(DocOperatorLisnter docOperatorListener) {
         this.docOperatorListener = docOperatorListener;
@@ -104,6 +110,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     /**
@@ -151,6 +158,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
             et_taskTitle.setText(customerDocDetail.getTitle());
             et_taskContent.setText(customerDocDetail.getContent());
         }
+        showTaskRemindTime(mSelectDate);
     }
 
 
@@ -191,6 +199,8 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
             return false;
         }
 
+        TaskCreateOrEditReq taskReq=null;
+
         if(cb_createTask.isChecked()){
             String taskTitle=et_taskTitle.getText().toString().trim();
             if(TextUtils.isEmpty(taskTitle)){
@@ -210,9 +220,24 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
                 return false;
             }
 
+            taskReq=new TaskCreateOrEditReq();
+            taskReq.validateCreate();
+            taskReq.validateUpdate();
+            taskReq.setTitle(taskTitle);
+            taskReq.setContent(taskContent);
+            taskReq.setRemindTime(mSelectDate.getTime());
+            taskReq.setUserId(mExecutor.getUser().getId());
+            taskReq.setUserName(mExecutor.getUser().getName());
+            taskReq.setStatus(1);
+            taskReq.setType(1);
+
+            taskReq.setCustomerName(mCustomer.customerName);
+            taskReq.setCustomerId(mCustomer.customerId);
+            taskReq.setCustomerMobile(mCustomer.mobile);
         }
 
         customerDocReq = new CustomerDocReq();
+        customerDocReq.setTaskReq(taskReq);
 
         if(customerDocDetail==null){
             customerDocReq.validateCreate();
@@ -230,11 +255,23 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
         return true;
     }
 
+    private void showTaskRemindTime(Date date){
+        tv_taskTime.setText(DateTimeUtils.formatDate(date,DateTimeUtils.DATE_TIME_FORMAT));
+    }
+
     /**
      * 选择执行时间（用户自己选择）
      */
     private void selectExecuteTime(){
-        ToastUtil.showShortToast("选择执行时间");
+        CalendarTimeDialog mCalendarTimeDialog = new CalendarTimeDialog(getContext(), new CalendarTimeDialog.SelectedDateTimeListener() {
+            @Override
+            public void selectedDateTime(Date date, String time) {
+                mSelectDate=date;
+                showTaskRemindTime(mSelectDate);
+            }
+        },true);
+        mCalendarTimeDialog.setDefaultSelected(mSelectDate);
+        mCalendarTimeDialog.showDialog();
     }
 
     /**

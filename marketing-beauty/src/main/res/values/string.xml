@@ -26,7 +26,7 @@
     <string name="beauty_today_reserver">今日预约</string>
     <string name="beauty_unpaid_trade">待付订单</string>
     <string name="beauty_modify">修改</string>
-    、
+    <string name="beauty_scan">查看</string>    、
     <string name="beauty_accept">接受</string>
     <string name="beauty_delete">删除</string>
     <string name="beauty_trade_details">进入订单</string>
@@ -177,7 +177,7 @@
 
     <string name="beauty_create_task">新任务</string>
     <string name="beauty_vaild_task">待执行</string>
-    <string name="beauty_outtime_task">已超时</string>
+    <string name="beauty_executed_task">已执行</string>
 
     <string name="beauty_create_member_doc">新档案</string>
 </resources>

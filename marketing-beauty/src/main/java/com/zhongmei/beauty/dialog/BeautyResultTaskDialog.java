@@ -117,6 +117,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
             window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
             window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
     /**
@@ -236,6 +237,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
             mNewTaskReq.setCustomerName(mTask.getCustomerName());
             mNewTaskReq.setCustomerId(mTask.getCustomerId());
             mNewTaskReq.setCustomerMobile(mTask.getCustomerMobile());
+            mNewTaskReq.setCustomerDocId(mTask.getCustomerDocId());
             mNewTaskReq.setStatus(1);
         }
 

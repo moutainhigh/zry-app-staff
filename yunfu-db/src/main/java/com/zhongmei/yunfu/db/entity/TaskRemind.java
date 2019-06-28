@@ -52,7 +52,7 @@ public class TaskRemind extends DataEntityBase implements ICreator, IUpdator {
     private Integer type;//任务类型
 
     @DatabaseField(columnName = "status")
-    private Integer status;//任务状态，1 待执行，2，已完成
+    private Integer status=1;//任务状态，1 待执行，2，已完成
 
     @DatabaseField(columnName = "customer_doc_id")
     private Long customerDocId;//会员档案id

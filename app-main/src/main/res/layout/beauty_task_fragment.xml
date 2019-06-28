@@ -50,7 +50,7 @@
                 android:id="@+id/rb_outtime_task"
                 style="@style/beauty_reserver_tab_style"
                 android:background="@drawable/beauty_reserver_tab_right_bg_selecgtor"
-                android:text="@string/beauty_outtime_task" />
+                android:text="@string/beauty_executed_task" />
 
             <View style="@style/beauty_task_tab_vertical_line" />
 

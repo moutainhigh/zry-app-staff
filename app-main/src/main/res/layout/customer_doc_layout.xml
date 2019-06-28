@@ -21,30 +21,53 @@
         android:layout_marginLeft="@dimen/customer_account_padding"
         android:layout_marginRight="@dimen/customer_account_padding">
 
-        <ListView
-            android:id="@+id/customer_doc_lv"
-            android:layout_width="350dp"
-            android:layout_height="match_parent"
-            android:background="@color/write"
-            android:cacheColorHint="@android:color/transparent"
-            android:divider="@null"
-            android:listSelector="@color/transparent" />
 
-        <LinearLayout
-            android:id="@+id/layout_doc_detail"
+        <RelativeLayout
+            android:id="@+id/rl_list"
+            android:layout_width="350dp"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/customer_doc_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/write"
+                android:cacheColorHint="@android:color/transparent"
+                android:divider="@null"
+                android:listSelector="@color/transparent" />
+
+            <ImageView
+                android:id="@+id/doc_empty_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/customer_empty_icon" />
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_toRightOf="@id/customer_doc_lv">
-            <include layout="@layout/member_doc_detail" />
-        </LinearLayout>
+            android:layout_toRightOf="@id/rl_list">
+            <include
+                android:id="@+id/layout_doc_detail"
+                android:visibility="gone"
+                layout="@layout/member_doc_detail" />
 
 
-        <ImageView
-            android:id="@+id/doc_empty_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/customer_empty_icon" />
+            <TextView
+                android:id="@+id/customer_doc_detail_empty_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:contentDescription="@null"
+                android:drawablePadding="20dp"
+                android:drawableTop="@drawable/customer_empty_log"
+                android:gravity="center"
+                android:text="@string/customer_doc_detail_hint"
+                android:textSize="18sp" />
+        </RelativeLayout>
 
     </RelativeLayout>
 

@@ -247,6 +247,31 @@
                             android:hint="请输入任务内容" />
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/layout_task_result"
+                        style="@style/beauty.booking.create.item_layout"
+                        android:layout_height="70dp"
+                        android:visibility="gone"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:layout_gravity="top"
+                            android:text="    *" />
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:layout_gravity="top"
+                            android:text="任务结果：" />
+
+                        <TextView
+                            android:id="@+id/tv_task_result"
+                            style="@style/beauty.booking.create.edit_input"
+                            android:minLines="2"
+                            android:maxLength="200"
+                            android:gravity="left|top" />
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>

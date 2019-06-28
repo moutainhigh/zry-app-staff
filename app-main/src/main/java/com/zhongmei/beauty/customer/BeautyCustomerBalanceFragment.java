@@ -22,6 +22,8 @@ import com.zhongmei.atask.TaskContext;
 import com.zhongmei.beauty.dialog.BeautyCreateOrEditMemberDocDialog;
 import com.zhongmei.beauty.operates.BeautyCustomerOperates;
 import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp;
+import com.zhongmei.beauty.widgets.DocDetailsTaskView;
+import com.zhongmei.beauty.widgets.DocDetailsTaskView_;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo;
 import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
@@ -235,6 +237,9 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     @ViewById(R.id.layout_doc_detail)
     LinearLayout layout_docDetail;
 
+    @ViewById(R.id.customer_doc_detail_empty_hint)
+    TextView tv_docDetailsEmptyView;
+
     @ViewById(R.id.tv_doc_title)
     TextView tv_docTitle;
 
@@ -250,17 +255,9 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     @ViewById(R.id.layout_task_detail)
     LinearLayout layout_taskDetail;
 
-    @ViewById(R.id.tv_task_title)
-    TextView tv_taskTitle;
 
-    @ViewById(R.id.tv_task_time)
-    TextView tv_taskTime;
-
-    @ViewById(R.id.tv_task_content)
-    TextView tv_taskContent;
-
-    @ViewById(R.id.tv_task_result)
-    TextView tv_taskResult;
+    @ViewById(R.id.layout_task_items)
+    LinearLayout layout_taskItems;
 
 
     private int currentPage = 1;
@@ -1307,13 +1304,26 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     private void showDocDetail(CustomerDocRecordResp docDetail){
         if(docDetail!=null){
             layout_docDetail.setVisibility(View.VISIBLE);
+            tv_docDetailsEmptyView.setVisibility(View.GONE);
 
             tv_docTitle.setText(docDetail.getTitle());
             tv_docTime.setText(DateUtil.format(docDetail.getServerCreateTime()));
             tv_docContent.setText(docDetail.getContent());
 
             //任务提醒模块
+            //循环添加任务
+            if(Utils.isNotEmpty(docDetail.getListTask())){
+                layout_taskDetail.setVisibility(View.VISIBLE);
+                layout_taskItems.removeAllViews();
+                for(int i=0;i<docDetail.getListTask().size();i++){
+                    DocDetailsTaskView taskView =  DocDetailsTaskView_.build(getContext());
+                    taskView.refreshUI(docDetail.getListTask().get(i),++i);
 
+                    layout_taskItems.addView(taskView);
+                }
+
+
+            }
         }
 
     }

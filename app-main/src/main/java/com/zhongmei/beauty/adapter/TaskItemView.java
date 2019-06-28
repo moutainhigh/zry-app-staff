@@ -47,6 +47,9 @@ public class TaskItemView extends RelativeLayout implements View.OnClickListener
     @ViewById(R.id.tv_details)
     protected TextView tv_details;//任务详情
 
+    @ViewById(R.id.btn_scan)
+    protected Button btn_scan;
+
     @ViewById(R.id.btn_modify)
     protected Button btn_modify;
 
@@ -63,6 +66,7 @@ public class TaskItemView extends RelativeLayout implements View.OnClickListener
 
     @AfterViews
     public void init() {
+        btn_scan.setOnClickListener(this);
         btn_modify.setOnClickListener(this);
         btn_execute.setOnClickListener(this);
     }
@@ -75,6 +79,16 @@ public class TaskItemView extends RelativeLayout implements View.OnClickListener
         tv_remindTime.setText(DateUtil.format(mTask.getRemindTime()));
         tv_memberInfo.setText(getMemberInfo(mTask));
         tv_details.setText(task.getContent());
+
+        if(mTask.getStatus()==1){
+            btn_modify.setVisibility(View.VISIBLE);
+            btn_execute.setVisibility(View.VISIBLE);
+            btn_scan.setVisibility(View.GONE);
+        }else{
+            btn_modify.setVisibility(View.GONE);
+            btn_execute.setVisibility(View.GONE);
+            btn_scan.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -142,10 +156,17 @@ public class TaskItemView extends RelativeLayout implements View.OnClickListener
                     mOperateListener.taskException(mTask);
                 }
                 break;
+            case R.id.btn_scan:
+                if (mOperateListener != null) {
+                    mOperateListener.taskScan(mTask);
+                }
+                break;
         }
     }
 
     public interface OnOperateListener {
+        void taskScan(TaskRemind task);
+
         void taskModify(TaskRemind task);
 
         void taskException(TaskRemind task);

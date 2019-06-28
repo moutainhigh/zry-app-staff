@@ -17,7 +17,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="预约技师"
+                android:text="选择服务员"
                 android:textColor="@color/color_333333"
                 android:textSize="@dimen/text_20" />
 

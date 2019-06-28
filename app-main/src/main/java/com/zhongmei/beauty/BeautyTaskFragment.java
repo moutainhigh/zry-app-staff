@@ -208,10 +208,11 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
         operates.getTaskList(taskQueryReq, listener);
     }
 
-    private void showCreateDocDialog(TaskRemind task) {
+    private void showCreateDocDialog(TaskRemind task,int type) {
         dialog = new BeautyCreateOrEditTaskDialog();
         dialog.setTaskOperatorListener(this);
         dialog.setTaskInfo(task);
+        dialog.setOperatorType(type);
         dialog.show(getChildFragmentManager(), "BeautyCreateOrEditMemberDocDialog");
     }
 
@@ -308,7 +309,7 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
                 showCalendarDialog();
                 break;
             case R.id.btn_create_task:
-                showCreateDocDialog(null);
+                showCreateDocDialog(null,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_NEW_CREATE);
                 break;
         }
     }
@@ -341,7 +342,13 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
     @Override
     public void taskModify(TaskRemind task) {
         //修改任务
-        showCreateDocDialog(task);
+        showCreateDocDialog(task,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_EDIT);
+    }
+
+    @Override
+    public void taskScan(TaskRemind task) {
+        //查看任务，还是调用修改任务，只是不允许修改
+        showCreateDocDialog(task,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_SCAN);
     }
 
     @Override

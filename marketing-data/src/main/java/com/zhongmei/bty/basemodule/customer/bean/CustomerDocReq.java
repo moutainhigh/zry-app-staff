@@ -23,6 +23,8 @@ public class CustomerDocReq {
     private Long shopIdenty;
     private Long brandIdenty;
 
+    private TaskCreateOrEditReq taskReq;
+
     public Long getShopIdenty() {
         return shopIdenty;
     }
@@ -117,6 +119,14 @@ public class CustomerDocReq {
 
     public void setClientCreateTime(Long clientCreateTime) {
         this.clientCreateTime = clientCreateTime;
+    }
+
+    public TaskCreateOrEditReq getTaskReq() {
+        return taskReq;
+    }
+
+    public void setTaskReq(TaskCreateOrEditReq taskReq) {
+        this.taskReq = taskReq;
     }
 
     public Long getClientUpdateTime() {

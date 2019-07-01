@@ -17,14 +17,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/customer_account_padding"
-        android:layout_marginLeft="@dimen/customer_account_padding"
-        android:layout_marginRight="@dimen/customer_account_padding">
+        android:background="@color/beauty_bg_deep_gray"
+        android:padding="5dp">
 
 
         <RelativeLayout
             android:id="@+id/rl_list"
             android:layout_width="350dp"
+            android:background="@color/bg_white"
             android:layout_height="match_parent">
 
             <ListView
@@ -34,6 +34,7 @@
                 android:background="@color/write"
                 android:cacheColorHint="@android:color/transparent"
                 android:divider="@null"
+                android:scrollbars="none"
                 android:listSelector="@color/transparent" />
 
             <ImageView
@@ -49,6 +50,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:background="@color/bg_white"
             android:layout_toRightOf="@id/rl_list">
             <include
                 android:id="@+id/layout_doc_detail"

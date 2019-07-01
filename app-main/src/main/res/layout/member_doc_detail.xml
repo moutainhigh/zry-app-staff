@@ -2,29 +2,63 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_white"
     android:orientation="vertical">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/gray_bg">
 
         <TextView
             android:id="@+id/tv_doc_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
             android:layout_marginTop="10dp"
-            android:textSize="@dimen/text_16" />
+            android:textSize="@dimen/text_18" />
+
+        <TextView
+            android:id="@+id/tv_creator_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_doc_title"
+            android:text="建档人："
+            android:paddingLeft="5dp"
+            android:textColor="@color/text_deep_gray"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/tv_creator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_doc_title"
+            android:layout_toRightOf="@id/tv_creator_hint"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_14" />
+
+        <TextView
+            android:id="@+id/tv_create_time_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tv_creator_hint"
+            android:text="创建时间："
+            android:paddingLeft="5dp"
+            android:textColor="@color/text_deep_gray"
+            android:textSize="@dimen/text_14" />
 
         <TextView
             android:id="@+id/tv_doc_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_doc_title"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/text_gray"
-            android:textSize="@dimen/text_16" />
+            android:layout_below="@id/tv_creator_hint"
+            android:layout_toRightOf="@id/tv_create_time_hint"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/text_14" />
 
         <ImageView
             android:id="@+id/iv_doc_edit"
@@ -33,10 +67,12 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:visibility="gone"
-            android:src="@drawable/beauty_icon_customer_edit" />
+            android:src="@drawable/beauty_icon_customer_edit"
+            android:visibility="gone" />
     </RelativeLayout>
 
+
+    <View style="@style/beauty_horizontal_line" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -51,7 +87,7 @@
                 android:id="@+id/tv_doc_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="15dp"/>
+                android:padding="15dp" />
 
             <LinearLayout
                 android:id="@+id/layout_task_detail"
@@ -59,8 +95,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="vertical"
-                android:visibility="gone"
-                android:padding="15dp">
+                android:padding="15dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -74,7 +110,6 @@
                     android:orientation="vertical">
                     <!--动态添加任务item-->
                 </LinearLayout>
-
 
 
             </LinearLayout>

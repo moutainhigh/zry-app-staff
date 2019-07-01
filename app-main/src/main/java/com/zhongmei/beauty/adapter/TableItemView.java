@@ -14,6 +14,7 @@ import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.trade.bean.IDinnertableTrade;
 import com.zhongmei.bty.dinner.table.model.DinnertableModel;
 import com.zhongmei.bty.dinner.table.view.OnControlListener;
+import com.zhongmei.yunfu.util.ResourceUtils;
 
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
@@ -63,7 +64,7 @@ public class TableItemView extends RelativeLayout implements View.OnClickListene
         if (tableModel.getTradeCount() > 0) {
             IDinnertableTrade tradeModel = tableModel.getDinnertableTrades().get(0);
             tv_tradeNo.setBackgroundColor((getResources().getColor(R.color.beauty_transparent)));
-            tv_tradeNo.setText(tradeModel.getSn().toString());
+            tv_tradeNo.setText(tradeModel.getTradeAmount());
             iv_tip.setVisibility(View.VISIBLE);
         } else {
             //没有订单，设置开台UI

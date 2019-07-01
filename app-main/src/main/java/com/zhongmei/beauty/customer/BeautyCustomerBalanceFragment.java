@@ -243,6 +243,9 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     @ViewById(R.id.tv_doc_title)
     TextView tv_docTitle;
 
+    @ViewById(R.id.tv_creator)
+    TextView tv_creator;
+
     @ViewById(R.id.tv_doc_time)
     TextView tv_docTime;
 
@@ -1307,6 +1310,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
             tv_docDetailsEmptyView.setVisibility(View.GONE);
 
             tv_docTitle.setText(docDetail.getTitle());
+            tv_creator.setText(docDetail.getCreatorName());
             tv_docTime.setText(DateUtil.format(docDetail.getServerCreateTime()));
             tv_docContent.setText(docDetail.getContent());
 

@@ -13,5 +13,6 @@ class CustomerDocRecordResp {
     var customerId:Long =0 //会员id
     var customerName:String? = null//会员名称
     var listTask:List<TaskRemind>?=null//任务列表
+    var creatorName:String?=null//创建人名称
 
 }

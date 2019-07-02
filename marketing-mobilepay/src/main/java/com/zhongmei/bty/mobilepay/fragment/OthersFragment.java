@@ -248,8 +248,8 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
         List<PaymentModeShop> modeShopList = PaySettingCache.getOthersPaymentModeShops(payScene == PayScene.SCENE_CODE_CHARGE ? PayScene.SCENE_CODE_CHARGE.value() : PayScene.SCENE_CODE_SHOP.value());
         if (modeShopList == null) {
             modeShopList = new ArrayList<>();
-            modeShopList.add(createPaymentModeShop(PayModeId.OTHER_WX_PAY, "微信支付"));
-            modeShopList.add(createPaymentModeShop(PayModeId.OTHER_ALI_PAY, "支付宝支付"));
+            modeShopList.add(createPaymentModeShop(PayModeId.OTHER_WX_PAY, "(自)微信"));
+            modeShopList.add(createPaymentModeShop(PayModeId.OTHER_ALI_PAY, "(自)支付宝"));
         }
 
         List<PayModelItem> listData;

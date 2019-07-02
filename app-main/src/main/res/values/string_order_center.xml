@@ -143,6 +143,8 @@
     <string name="order_center_add_fee_max_error">小费金额必须小于30</string>
     <string name="order_center_add_fee_limit_error">小费金额最多只支持一位小数</string>
     <string name="order_center_rebind_delivery_user">修改派单</string>
+    <string name="order_center_create_member_doc">创建档案</string>
+    <string name="order_center_create_task">创建任务</string>
     <string name="please_select_sender_str">请选择配送员</string>
     <string name="select_sender_str">选择配送员</string>
     <string name="order_center_list_bind_delivery_user">派单</string>

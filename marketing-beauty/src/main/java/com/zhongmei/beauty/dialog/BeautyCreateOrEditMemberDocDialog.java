@@ -19,10 +19,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhongmei.beauty.entity.UserVo;
+import com.zhongmei.beauty.operates.BeautyCustomerOperates;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerDocRecordResp;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerDocReq;
 import com.zhongmei.bty.basemodule.customer.bean.TaskCreateOrEditReq;
+import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.commonmodule.view.calendar.CalendarTimeDialog;
+import com.zhongmei.yunfu.bean.YFResponse;
+import com.zhongmei.yunfu.bean.YFResponseList;
 import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
@@ -30,6 +34,9 @@ import com.zhongmei.yunfu.context.session.auth.IAuthUser;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.data.LoadingYFResponseListener;
+import com.zhongmei.yunfu.net.volley.VolleyError;
+import com.zhongmei.yunfu.resp.YFResponseListener;
 import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
 import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.yunfu.util.ToastUtil;
@@ -297,14 +304,43 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
         dialog.show(getChildFragmentManager(), "BeautyBookingWaiterDialog");
     }
 
+    private void saveDocDetail(CustomerDocReq docDetail){
+        if(docDetail!=null){
+
+            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponse<CustomerDocRecordResp>>() {
+
+                @Override
+                public void onResponse(YFResponse<CustomerDocRecordResp> response) {
+                    if (YFResponseList.isOk(response)) {
+                        //需要隐藏一下详情页面
+                        if(docOperatorListener!=null){
+                            docOperatorListener.save(response.getContent());
+                        }
+                        dismissAllowingStateLoss();
+                    } else {
+                        ToastUtil.showShortToast(response.getMessage());
+                    }
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+                    ToastUtil.showShortToast(error.getMessage());
+                }
+            }, getFragmentManager());
+
+            BeautyCustomerOperates operates = OperatesFactory.create(BeautyCustomerOperates.class);
+            operates.saveDocRecord(docDetail, listener);
+        }
+    }
+
 
 
     @Override
     public void onClick(View v) {
         if(v == btn_submit){
 
-            if(checkDataValid() && docOperatorListener!=null){
-                docOperatorListener.save(customerDocReq);
+            if(checkDataValid()){
+                saveDocDetail(customerDocReq);
             }
         }else if(v==ib_close){
             dismissAllowingStateLoss();
@@ -325,6 +361,6 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
 
 
     public interface DocOperatorLisnter{
-        public void save(CustomerDocReq docObj);
+        public void save(CustomerDocRecordResp docObj);
     }
 }

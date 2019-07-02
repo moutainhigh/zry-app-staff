@@ -652,9 +652,9 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     }
 
     @Override
-    public void save(CustomerDocReq docObj) {
+    public void save(CustomerDocRecordResp docObj) {
         //保存或创建文档
-        saveDocDetail(docObj);
+        getDocRecord();
     }
 
     /**
@@ -1274,34 +1274,6 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     }
 
 
-    private void saveDocDetail(CustomerDocReq docDetail){
-        if(docDetail!=null){
-
-            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponse<CustomerDocRecordResp>>() {
-
-                @Override
-                public void onResponse(YFResponse<CustomerDocRecordResp> response) {
-                    if (YFResponseList.isOk(response)) {
-                        //需要隐藏一下详情页面
-                        if(dialog!=null){
-                            dialog.dismissAllowingStateLoss();
-                        }
-                        getDocRecord();//重新获取一下新的数据
-                    } else {
-                        ToastUtil.showShortToast(response.getMessage());
-                    }
-                }
-
-                @Override
-                public void onError(VolleyError error) {
-                    ToastUtil.showShortToast(error.getMessage());
-                }
-            }, getFragmentManager());
-
-            BeautyCustomerOperates operates = OperatesFactory.create(BeautyCustomerOperates.class);
-            operates.saveDocRecord(docDetail, listener);
-        }
-    }
 
 
     private void showDocDetail(CustomerDocRecordResp docDetail){

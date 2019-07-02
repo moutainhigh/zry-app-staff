@@ -225,35 +225,6 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
     }
 
 
-    private void saveTask(TaskCreateOrEditReq taskReq){
-        if(taskReq!=null){
-            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponse<TaskRemind>>() {
-
-                @Override
-                public void onResponse(YFResponse<TaskRemind> response) {
-                    if (YFResponseList.isOk(response)) {
-                        //需要隐藏一下详情页面
-                        if(dialog!=null){
-                            dialog.dismissAllowingStateLoss();
-                        }
-                        requestTasks(true);//重新获取一下新的数据
-                    } else {
-                        ToastUtil.showShortToast(response.getMessage());
-                    }
-                }
-
-                @Override
-                public void onError(VolleyError error) {
-                    ToastUtil.showShortToast(error.getMessage());
-                }
-            }, getFragmentManager());
-
-            BeautyCustomerOperates operates = OperatesFactory.create(BeautyCustomerOperates.class);
-            operates.saveTask(taskReq, listener);
-        }
-    }
-
-
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch(checkedId){
@@ -334,9 +305,9 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
     }
 
     @Override
-    public void save(TaskCreateOrEditReq taskObj) {
-        //保存任务
-        saveTask(taskObj);
+    public void save(TaskRemind taskObj) {
+        //刷新数据
+        onRefresh();
     }
 
     @Override

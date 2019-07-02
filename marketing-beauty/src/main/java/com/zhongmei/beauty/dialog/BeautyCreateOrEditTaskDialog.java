@@ -19,11 +19,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhongmei.beauty.entity.UserVo;
+import com.zhongmei.beauty.operates.BeautyCustomerOperates;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerDocReq;
 import com.zhongmei.bty.basemodule.customer.bean.TaskCreateOrEditReq;
 import com.zhongmei.bty.basemodule.customer.bean.TaskQueryReq;
 import com.zhongmei.bty.basemodule.shopmanager.utils.DateTimeUtil;
+import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.commonmodule.view.calendar.CalendarTimeDialog;
+import com.zhongmei.yunfu.bean.YFResponse;
+import com.zhongmei.yunfu.bean.YFResponseList;
 import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
@@ -31,7 +35,10 @@ import com.zhongmei.yunfu.context.session.auth.IAuthUser;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.data.LoadingYFResponseListener;
 import com.zhongmei.yunfu.db.entity.TaskRemind;
+import com.zhongmei.yunfu.net.volley.VolleyError;
+import com.zhongmei.yunfu.resp.YFResponseListener;
 import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
 import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.yunfu.util.ToastUtil;
@@ -333,12 +340,44 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
         dialog.show(getChildFragmentManager(), "BeautyBookingWaiterDialog");
     }
 
+    /**
+     * 保存或创建任务
+     * @param taskReq
+     */
+    private void saveTask(TaskCreateOrEditReq taskReq){
+        if(taskReq!=null){
+            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponse<TaskRemind>>() {
+
+                @Override
+                public void onResponse(YFResponse<TaskRemind> response) {
+                    if (YFResponseList.isOk(response)) {
+                        //需要隐藏一下详情页面
+                       if(taskOperatorListener!=null){
+                           taskOperatorListener.save(response.getContent());
+                       }
+                       dismissAllowingStateLoss();
+                    } else {
+                        ToastUtil.showShortToast(response.getMessage());
+                    }
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+                    ToastUtil.showShortToast(error.getMessage());
+                }
+            }, getFragmentManager());
+
+            BeautyCustomerOperates operates = OperatesFactory.create(BeautyCustomerOperates.class);
+            operates.saveTask(taskReq, listener);
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
         if(v == btn_submit){
-            if(checkDataValid() && taskOperatorListener!=null){
-                taskOperatorListener.save(mTaskReq);
+            if(checkDataValid()){
+                saveTask(mTaskReq);
             }
         }else if(v==ib_close){
             dismissAllowingStateLoss();
@@ -350,6 +389,6 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
     }
 
     public interface TaskOperatorLisnter{
-        public void save(TaskCreateOrEditReq taskObj);
+        public void save(TaskRemind taskObj);
     }
 }

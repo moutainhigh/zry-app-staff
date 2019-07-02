@@ -21,12 +21,16 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.zhongmei.beauty.dialog.BeautyCreateOrEditMemberDocDialog;
+import com.zhongmei.beauty.dialog.BeautyCreateOrEditTaskDialog;
+import com.zhongmei.beauty.dialog.BeautyResultTaskDialog;
 import com.zhongmei.beauty.ordercenter.BeautyOrderCenterDetailPresenter;
 import com.zhongmei.bty.basemodule.auth.application.FastFoodApplication;
 import com.zhongmei.bty.basemodule.commonbusiness.cache.ServerSettingCache;
 import com.zhongmei.bty.basemodule.commonbusiness.entity.PartnerDeliveryPlatformConfig;
 import com.zhongmei.bty.basemodule.commonbusiness.entity.PartnerShopBiz;
 import com.zhongmei.bty.basemodule.commonbusiness.listener.SimpleResponseListener;
+import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
 import com.zhongmei.bty.basemodule.discount.entity.ExtraCharge;
 import com.zhongmei.bty.basemodule.orderdish.bean.TradeItemVo;
 import com.zhongmei.bty.basemodule.pay.bean.ElectronicInvoiceVo;
@@ -323,6 +327,12 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
 
     @ViewById(R.id.btn_rebind_delivery_user)
     Button btnRebindDeliveryUser;
+
+    @ViewById(R.id.btn_create_doc)
+    Button btnCreateDoc;
+
+    @ViewById(R.id.btn_create_task)
+    Button btnCreateTask;
 
     @ViewById(R.id.goods_info)
     LinearLayout goods_info;
@@ -753,6 +763,24 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         if (!ClickManager.getInstance().isClicked()) {
             mPresenter.doContinueRepay();
         }
+    }
+
+    @Click(R.id.btn_create_doc)
+    void clickCreateDoc(){
+        TradeCustomer tradeCustomer=mPresenter.getTradeCustomer();
+        if(tradeCustomer!=null){
+            BeautyCreateOrEditMemberDocDialog dialog = new BeautyCreateOrEditMemberDocDialog();
+            dialog.setCustomerInfo(CustomerManager.getInstance().getCustomer(tradeCustomer));
+            dialog.show(getChildFragmentManager(), "BeautyCreateOrEditMemberDocDialog");
+        }
+    }
+
+    @Click(R.id.btn_create_task)
+    void clickCreateTask(){
+        BeautyCreateOrEditTaskDialog dialog = new BeautyCreateOrEditTaskDialog();
+//        dialog.setCallBackListener(this);
+//        dialog.setTaskInfo(task);
+        dialog.show(getChildFragmentManager(), "BeautyResultTaskDialog");
     }
 
     @Click(R.id.fl_send_order)
@@ -2536,6 +2564,8 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         btnRecision.setVisibility(recisionTrade ? View.VISIBLE : View.GONE);//作废
         boolean refundTrade = mPresenter.showRefund();
         btnRefund.setVisibility(refundTrade ? View.VISIBLE : View.GONE);
+        btnCreateDoc.setVisibility(mPresenter.showCreateDoc()?View.VISIBLE:View.GONE);
+        btnCreateTask.setVisibility(mPresenter.showCreateTask()?View.VISIBLE:View.GONE);
         //mPresenter.showPrint() ? View.VISIBLE :
         btnPrint.setVisibility(View.GONE);//补打
         //mPresenter.showRetryRefund() ? View.VISIBLE :

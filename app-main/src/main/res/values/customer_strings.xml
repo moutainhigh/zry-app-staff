@@ -130,7 +130,9 @@
     <string name="customer_youhuiquan">可用优惠券</string>
     <string name="customer_wxapp_service">小程序服务</string>
     <string name="customer_expense_service">消费记录</string>
+    <string name="customer_docment">会员档案</string>
     <string name="customer_pasword">修改密码</string>
+    <string name="customer_doc">会员档案</string>
     <string name="customer_card_dialog_no">序号</string>
     <string name="customer_card_no">卡号</string>
     <string name="customer_detail_sex_women">%1$s女士</string>
@@ -166,6 +168,7 @@
     <string name="online_pay_dialog_jc_value_card_title">请扫码</string>
     <string name="gender_unknow">性别未知</string>
     <string name="customer_empty_hint">点击左边会员查看详情！</string>
+    <string name="customer_doc_detail_hint">点击档案查看详情！</string>
     <string name="can_not_execute">，不能进行此操作!</string>
     <!--<string name="customer_charging_fullmoney">¥%1$s</string>-->
     <string name="customer_charging_fullmoney_by_fixed">满{HBF}%1$s 赠{HBF}%2$s</string>

@@ -240,4 +240,5 @@
     <string name="display_pay_fail">支付失败</string>
     <string name="order_type_lable">交易类型：</string>
     <string name="order_amount_lable">交易金额：</string>
+    <string name="order_amount">{HBF}%1$s</string>
 </resources>

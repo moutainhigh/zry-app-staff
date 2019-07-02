@@ -86,6 +86,60 @@ public class BeautyServerAddressUtil {
     }
 
     /**
+     * 获取顾客档案
+     *
+     * @return
+     */
+    public static String getCustomerDoc() {
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/customerArchives/archivesList";
+    }
+
+    /**
+     * 获取顾客档案
+     *
+     * @return
+     */
+    public static String getTask() {
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/taskRemind/list";
+    }
+
+    /**
+     * 获取顾客档案
+     *
+     * @return
+     */
+    public static String saveCustomerDoc() {
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/customerArchives/addArchives";
+    }
+
+    /**
+     * 保存新任务信息
+     *
+     * @return
+     */
+    public static String saveTask() {
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/taskRemind/addTaskRemind";
+    }
+
+    /**
+     * 保存编辑任务信息
+     *
+     * @return
+     */
+    public static String saveEditTask() {
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/taskRemind/modfityTaskRemind";
+    }
+
+    /**
+     * 获取顾客档案详情
+     *
+     * @return
+     */
+    public static String getCustomerDocDetail() {
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/customerArchives/queryById";
+    }
+
+    /**
      * 交接历史查询
      *
      * @return

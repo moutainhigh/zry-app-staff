@@ -22,6 +22,7 @@ import com.zhongmei.yunfu.db.entity.ErpCommercialRelation;
 import com.zhongmei.yunfu.db.entity.MobilePaySetting;
 import com.zhongmei.yunfu.db.entity.OpenTime;
 import com.zhongmei.yunfu.db.entity.SyncMark;
+import com.zhongmei.yunfu.db.entity.TaskRemind;
 import com.zhongmei.yunfu.db.entity.booking.Booking;
 import com.zhongmei.yunfu.db.entity.booking.BookingSetting;
 import com.zhongmei.yunfu.db.entity.booking.BookingTable;
@@ -191,6 +192,7 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(CoupRule.class);
         tables.add(CustomerSaveRule.class);
         tables.add(CustomerDishPrivilege.class);
+        tables.add(TaskRemind.class);
 
         BeautyDbHelperUtil.initTables(tables);
         TABLES = Collections.unmodifiableList(tables);

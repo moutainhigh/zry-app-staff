@@ -162,6 +162,13 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
     }
 
     @Override
+    public void toTaskCenter() {
+        //去任务管理中心
+        BeautyTaskFragment beautyTaskFragment = BeautyTaskFragment_.builder().build();
+        replaceFragment(R.id.layout_contain_content, beautyTaskFragment, BeautyReserverManagerFragment.class.getSimpleName());
+    }
+
+    @Override
     public void onDrawerSlide(View drawerView, float slideOffset) {
 
     }

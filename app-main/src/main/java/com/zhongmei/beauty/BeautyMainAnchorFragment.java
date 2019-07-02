@@ -175,6 +175,11 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
                     mBeautyAnchor.toMemberCenter();
                 }
                 break;
+            case R.id.rb_anchor_task:
+                if (mBeautyAnchor != null) {
+                    mBeautyAnchor.toTaskCenter();
+                }
+                break;
             case R.id.rb_anchor_shop:
                 if (mBeautyAnchor == null) {
                     break;

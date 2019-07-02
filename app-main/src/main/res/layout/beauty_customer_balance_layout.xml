@@ -5,7 +5,7 @@
     android:background="@color/beauty_color_000000"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="@color/beauty_bg_black"
@@ -30,6 +30,7 @@
         <TextView
             android:id="@+id/page_title"
             style="@style/title_icon_style"
+            android:layout_toRightOf="@id/customer_charging_balance_back_btn"
             android:layout_width="fill_parent"
             android:layout_height="48dp"
             android:layout_gravity="center_vertical"
@@ -37,7 +38,26 @@
             android:scaleType="centerInside"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />
-    </LinearLayout>
+
+        <com.zhongmei.beauty.widgets.DrawableCenterButton
+            android:id="@+id/btn_create_doc"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/beauty_btn_operator_selector"
+            android:drawableLeft="@drawable/beauty_reserver_icon_add"
+            android:drawablePadding="5dp"
+            android:layout_marginRight="15dp"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:gravity="left|center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:text="@string/beauty_create_member_doc"
+            android:textColor="@color/beauty_text_white"
+            android:textSize="14sp" />
+
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -199,6 +219,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/beauty_color_000000" />
+
+                <RadioButton
+                    android:id="@+id/customer_doc_rb"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/beauty_customer_title_order_middle"
+                    android:button="@null"
+                    android:gravity="center|left"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="3dp"
+                    android:text="@string/customer_docment"
+                    android:textColor="@color/beauty_main_anchor_selector"
+                    android:drawableLeft="@drawable/icon_doc"
+                    android:textSize="@dimen/text_13" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/beauty_color_000000" />
             </RadioGroup>
         </RelativeLayout>
 
@@ -221,6 +261,9 @@
             <include
                 android:id="@+id/expense_layout"
                 layout="@layout/customer_expense_listview_layout" />
+
+            <include android:id="@+id/member_doc_layout"
+                layout="@layout/customer_doc_layout" />
 
             <GridView
                 android:id="@+id/customer_coupon_gridview"

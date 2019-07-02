@@ -16,9 +16,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.yunfu.commonmodule.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
+import com.zhongmei.yunfu.util.DensityUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -100,6 +100,7 @@ public class CalendarView extends View {
      * 设置标准日期
      *
      * @param markDates
+     * @author daixj@shishike.com
      */
     public void setMarkDate(List<Date> markDates) {
         if (markDates != null) {
@@ -282,12 +283,12 @@ public class CalendarView extends View {
         float cellX = (surface.cellWidth * (x - 1)) + (surface.cellWidth - surface.datePaint.measureText(text)) / 2f;
         canvas.drawText(text, cellX, cellY, surface.datePaint);
         // 计算是否需要绘制红点
-        if (drawRedPoint(monthFormat.format(curDate) + "-" + ((text.length() == 1) ? ("0" + text) : text))) {
+        if (drawRedPoint(monthFormat.format(curDate) + "-" + ( (text.length() == 1) ? ("0" + text) : text))){
             Rect rect = new Rect();
             surface.datePaint.getTextBounds(text, 0, text.length(), rect);
             int w = rect.width();
             int h = rect.height();
-            canvas.drawCircle(cellX + w / 2, cellY + h, 3, mRedPointPaint);
+            canvas.drawCircle(cellX + w + 6, cellY - h, 4, mRedPointPaint);
         }
     }
 
@@ -322,6 +323,7 @@ public class CalendarView extends View {
      * 画标准的背景
      *
      * @param canvas
+     * @author daixj@shishike.com
      */
     private void drawMarkBg(Canvas canvas, int index) {
         /** 设置标注日期颜色 */
@@ -349,6 +351,7 @@ public class CalendarView extends View {
      * @param d1
      * @param d2
      * @return
+     * @author daixj@shishike.com
      */
     private boolean isDateEqual(Date d1, Date d2) {
         return dateFormat.format(d1).equals(dateFormat.format(d2));
@@ -528,6 +531,7 @@ public class CalendarView extends View {
      *
      * @param date
      * @return
+     * @author daixj@shishike.com
      */
     private int getIndexByDate(Date date) {
         Calendar calendar = Calendar.getInstance();
@@ -579,6 +583,7 @@ public class CalendarView extends View {
     /**
      * 取消选中的日期
      *
+     * @Author renlx@shishike.com
      * @Title: clearSelect
      * @Return void 返回类型
      */
@@ -612,6 +617,7 @@ public class CalendarView extends View {
      *
      * @param date
      * @return
+     * @author daixj@shishike.com
      */
     private boolean isEarly(Date date) {
         if (date == null) {
@@ -706,7 +712,7 @@ public class CalendarView extends View {
             float temp = height / 7f;
             monthHeight = 0;
             weekHeight = (float) ((temp + temp * 0.3f) * 0.7);
-            cellHeight = (height - monthHeight - weekHeight) / 6f;
+            cellHeight = (height - monthHeight - weekHeight) / 6f - 8;//modify by goujiabo on 2019/5/14 考虑到第六行可能无法展示出来，所以将每行的高度缩小8px
             cellWidth = width / 7f;
             borderPaint = new Paint();
             borderPaint.setColor(borderColor);

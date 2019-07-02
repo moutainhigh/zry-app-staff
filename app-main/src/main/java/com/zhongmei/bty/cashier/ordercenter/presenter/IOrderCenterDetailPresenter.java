@@ -15,6 +15,7 @@ import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import com.zhongmei.bty.basemodule.trade.entity.TradeReceiveLog;
 import com.zhongmei.bty.basemodule.trade.message.InvoiceQrcodeReq;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
+import com.zhongmei.yunfu.db.entity.trade.TradeCustomer;
 import com.zhongmei.yunfu.db.enums.DeliveryPlatform;
 import com.zhongmei.yunfu.db.enums.InvalidType;
 import com.zhongmei.bty.commonmodule.database.enums.OrderActionEnum;
@@ -480,4 +481,18 @@ public interface IOrderCenterDetailPresenter {
 
     //获取用于展示的取餐号
     String getDisplayTakeNumber();
+
+    /**
+     * 是否显示创建档案按钮
+     * @return
+     */
+    boolean showCreateDoc();
+
+    /**
+     * 是否显示创建任务按钮
+     * @return
+     */
+    boolean showCreateTask();
+
+    TradeCustomer getTradeCustomer();
 }

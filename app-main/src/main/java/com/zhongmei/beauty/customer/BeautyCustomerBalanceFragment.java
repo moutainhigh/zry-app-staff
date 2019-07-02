@@ -19,18 +19,21 @@ import android.widget.TextView;
 
 import com.zhongmei.atask.SimpleAsyncTask;
 import com.zhongmei.atask.TaskContext;
+import com.zhongmei.beauty.dialog.BeautyCreateOrEditMemberDocDialog;
 import com.zhongmei.beauty.operates.BeautyCustomerOperates;
 import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp;
+import com.zhongmei.beauty.widgets.DocDetailsTaskView;
+import com.zhongmei.beauty.widgets.DocDetailsTaskView_;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo;
 import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
-import com.zhongmei.bty.basemodule.commonbusiness.utils.ServerAddressUtil;
+import com.zhongmei.bty.basemodule.customer.bean.CustomerDocRecordReq;
+import com.zhongmei.bty.basemodule.customer.bean.CustomerDocRecordResp;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp;
 import com.zhongmei.bty.basemodule.customer.bean.IntegralRecord;
 import com.zhongmei.bty.basemodule.customer.bean.coupon.CouponVo;
+import com.zhongmei.bty.basemodule.customer.bean.CustomerDocReq;
 import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
-import com.zhongmei.bty.basemodule.customer.message.MemberIntegralModificationReq;
-import com.zhongmei.bty.basemodule.customer.message.MemberIntegralModificationResp;
 import com.zhongmei.bty.basemodule.customer.message.NewMemberIntegralInfoResp;
 import com.zhongmei.bty.basemodule.customer.operates.CouponDal;
 import com.zhongmei.bty.basemodule.customer.operates.CustomerOperates;
@@ -47,10 +50,12 @@ import com.zhongmei.bty.basemodule.trade.bean.Reason;
 import com.zhongmei.bty.cashier.ordercenter.view.OrderCenterOperateDialogFragment;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
+import com.zhongmei.bty.commonmodule.util.DateUtil;
 import com.zhongmei.bty.commonmodule.view.NumberInputdialog;
 import com.zhongmei.bty.customer.adapter.ChargingRecordAdapter;
 import com.zhongmei.bty.customer.adapter.CouponAdapter;
 import com.zhongmei.bty.customer.adapter.CustomerCardTimeRecordAdapter;
+import com.zhongmei.bty.customer.adapter.CustomerDocRecordAdapter;
 import com.zhongmei.bty.customer.adapter.CustomerExpenseRecordAdapter;
 import com.zhongmei.bty.customer.adapter.CustomerWxAppRecordAdapter;
 import com.zhongmei.bty.customer.adapter.IntegralAdapter;
@@ -70,14 +75,10 @@ import com.zhongmei.yunfu.context.session.core.auth.Auth;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.data.LoadingYFResponseListener;
-import com.zhongmei.yunfu.http.CalmNetWorkRequest;
-import com.zhongmei.yunfu.net.builder.NetError;
-import com.zhongmei.yunfu.net.builder.NetworkRequest;
 import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.yunfu.resp.ResponseListener;
 import com.zhongmei.yunfu.resp.ResponseObject;
 import com.zhongmei.yunfu.resp.YFResponseListener;
-import com.zhongmei.yunfu.resp.data.TransferReq;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
 import com.zhongmei.yunfu.util.ToastUtil;
 
@@ -105,7 +106,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * 可用余额、积分、优惠券页面
  */
 @EFragment(R.layout.beauty_customer_balance_layout)
-public class BeautyCustomerBalanceFragment extends BasicFragment implements OnClickListener {
+public class BeautyCustomerBalanceFragment extends BasicFragment implements OnClickListener,CustomerDocRecordAdapter.OnItemCheckListener,BeautyCreateOrEditMemberDocDialog.DocOperatorLisnter{
 
     private static final String TAG = BeautyCustomerBalanceFragment.class.getSimpleName();
 
@@ -137,6 +138,9 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
 
     @ViewById(R.id.expense_layout)
     LinearLayout mExpenseLayout;
+
+    @ViewById(R.id.member_doc_layout)
+    LinearLayout mDocLayout;
 
     @ViewById(R.id.customer_canuse_intergral_value)
     TextView canuseIntergral;
@@ -190,8 +194,14 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     @ViewById(R.id.customer_expense_lv)
     ListView customer_expense_lv;
 
+    @ViewById(R.id.customer_doc_lv)
+    ListView customer_doc_lv;
+
     @ViewById(R.id.expense_empty_layout)
     View expense_empty_layout;
+
+    @ViewById(R.id.doc_empty_layout)
+    View doc_empty_layout;
 
     @ViewById(R.id.customer_banlance_rb)
     RadioButton customer_banlance_rb;
@@ -211,8 +221,47 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     @ViewById(R.id.customer_expense_rb)
     RadioButton customer_expense_rb;
 
+    @ViewById(R.id.customer_doc_rb)
+    RadioButton customer_doc_rb;
+
     @ViewById(R.id.page_title)
     TextView page_title;
+
+
+    /**
+     * 会员档案详情UI
+     */
+    @ViewById(R.id.btn_create_doc)
+    Button btn_createDoc;
+
+    @ViewById(R.id.layout_doc_detail)
+    LinearLayout layout_docDetail;
+
+    @ViewById(R.id.customer_doc_detail_empty_hint)
+    TextView tv_docDetailsEmptyView;
+
+    @ViewById(R.id.tv_doc_title)
+    TextView tv_docTitle;
+
+    @ViewById(R.id.tv_creator)
+    TextView tv_creator;
+
+    @ViewById(R.id.tv_doc_time)
+    TextView tv_docTime;
+
+    @ViewById(R.id.tv_doc_content)
+    TextView tv_docContent;
+
+    @ViewById(R.id.iv_doc_edit)
+    ImageView iv_docEdit;
+
+    @ViewById(R.id.layout_task_detail)
+    LinearLayout layout_taskDetail;
+
+
+    @ViewById(R.id.layout_task_items)
+    LinearLayout layout_taskItems;
+
 
     private int currentPage = 1;
 
@@ -239,6 +288,9 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
     private CustomerCardTimeRecordAdapter cardTimeRecordAdapter;
     private CustomerExpenseRecordAdapter expenseRecordAdapter;
     private CustomerWxAppRecordAdapter wxAppRecordAdapter;
+    private CustomerDocRecordAdapter docRecordAdapter;
+
+    BeautyCreateOrEditMemberDocDialog dialog;
 
     /**
      * 实体卡
@@ -319,6 +371,13 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
         //设置图片在文字的哪个方向
         customer_expense_rb.setCompoundDrawables(customer_order_history_selector, null, null, null);
 
+        //定义底部标签图片大小和位置
+        Drawable customer_icon_doc = getResources().getDrawable(R.drawable.icon_doc);
+        //当这个图片被绘制时，给他绑定一个矩形 ltrb规定这个矩形
+        customer_icon_doc.setBounds(0, 0, size, size);
+        //设置图片在文字的哪个方向
+        customer_doc_rb.setCompoundDrawables(customer_icon_doc, null, null, null);
+
 
     }
 
@@ -374,6 +433,11 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 setTabSelected(R.id.customer_wx_app_rb);
                 page_title.setText(getString(R.string.customer_wxapp_service));
                 break;
+            case CustomerContants.TYPE_DOCMENT:
+                balance_radioGroup.check(R.id.customer_doc_rb);
+                setTabSelected(R.id.customer_doc_rb);
+                page_title.setText(getString(R.string.customer_doc));
+                    break;
             case CustomerContants.TYPE_EXPENSE:
                 balance_radioGroup.check(R.id.customer_expense_rb);
                 setTabSelected(R.id.customer_expense_rb);
@@ -384,7 +448,7 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
         }
     }
 
-    @Click({R.id.customer_charging_balance_back_btn, R.id.btn_add_integral, R.id.btn_subtract_integral})
+    @Click({R.id.customer_charging_balance_back_btn, R.id.btn_add_integral, R.id.btn_subtract_integral,R.id.btn_create_doc})
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.customer_charging_balance_back_btn:
@@ -396,10 +460,21 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
             case R.id.btn_subtract_integral:
                 showDialog(getString(R.string.member_subtract_Integral), getString(R.string.member_input_Integral), SUBTRACT_INTEGRAL);
                 break;
+            case R.id.btn_create_doc:
+                //创建会员档案
+                showCreateDocDialog();
+                break;
             default:
                 break;
         }
 
+    }
+
+    private void showCreateDocDialog() {
+        dialog = new BeautyCreateOrEditMemberDocDialog();
+        dialog.setDocOperatorListener(this);
+        dialog.setCustomerInfo(mCustomer);
+        dialog.show(getChildFragmentManager(), "BeautyCreateOrEditMemberDocDialog");
     }
 
 
@@ -571,6 +646,17 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
         countIntergal(mIntegralList);
     }
 
+    @Override
+    public void onItemChecked(CustomerDocRecordResp docRecordItem) {
+        getDocDetail(docRecordItem);
+    }
+
+    @Override
+    public void save(CustomerDocRecordResp docObj) {
+        //保存或创建文档
+        getDocRecord();
+    }
+
     /**
      * RadioGroup OnCheckedChangeListener
      */
@@ -593,6 +679,8 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 gridView.setVisibility(View.GONE);
                 mBalanceLayout.setVisibility(View.VISIBLE);
                 mExpenseLayout.setVisibility(View.GONE);
+                mDocLayout.setVisibility(View.GONE);
+                btn_createDoc.setVisibility(View.GONE);
                 mBalanceLv.setAdapter(mChargingAdapter);
                 curCheck = CustomerContants.TYPE_BALANCE;
                 page_title.setText(getString(R.string.customer_banlance));
@@ -615,6 +703,8 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                     mPtr.setVisibility(View.GONE);
                     mCardIntegralLv.setAdapter(mIntegralAdapter);
                 }
+                mDocLayout.setVisibility(View.GONE);
+                btn_createDoc.setVisibility(View.GONE);
                 mBalanceLayout.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.GONE);
                 gridView.setVisibility(View.GONE);
@@ -627,6 +717,8 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 mIntegralLayout.setVisibility(View.GONE);
                 mBalanceLayout.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.GONE);
+                mDocLayout.setVisibility(View.GONE);
+                btn_createDoc.setVisibility(View.GONE);
                 gridView.setVisibility(View.VISIBLE);
                 curCheck = CustomerContants.TYPE_COUPON;
                 getCouponInfos();
@@ -636,6 +728,8 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 mIntegralLayout.setVisibility(View.GONE);
                 mBalanceLayout.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.GONE);
+                mDocLayout.setVisibility(View.GONE);
+                btn_createDoc.setVisibility(View.GONE);
                 gridView.setVisibility(View.VISIBLE);
                 curCheck = CustomerContants.TYPE_COUPON;
                 getCardTimeRecord();
@@ -645,6 +739,8 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 mIntegralLayout.setVisibility(View.GONE);
                 mBalanceLayout.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.GONE);
+                mDocLayout.setVisibility(View.GONE);
+                btn_createDoc.setVisibility(View.GONE);
                 gridView.setVisibility(View.VISIBLE);
                 curCheck = CustomerContants.TYPE_COUPON;
                 getWxAppRecord();
@@ -653,10 +749,25 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
                 page_title.setText(getString(R.string.customer_expense_service));
                 mIntegralLayout.setVisibility(View.GONE);
                 gridView.setVisibility(View.GONE);
+                mDocLayout.setVisibility(View.GONE);
+                btn_createDoc.setVisibility(View.GONE);
                 mExpenseLayout.setVisibility(View.VISIBLE);
                 mBalanceLayout.setVisibility(View.GONE);
                 curCheck = CustomerContants.TYPE_BALANCE;
                 getExpenseRecord();
+                break;
+            case R.id.customer_doc_rb:
+                //会员档案
+                mIntegralLayout.setVisibility(View.GONE);
+                gridView.setVisibility(View.GONE);
+                mExpenseLayout.setVisibility(View.GONE);
+                mBalanceLayout.setVisibility(View.GONE);
+                mDocLayout.setVisibility(View.VISIBLE);
+                btn_createDoc.setVisibility(View.VISIBLE);
+                page_title.setText(getString(R.string.customer_doc));
+                curCheck = CustomerContants.TYPE_DOCMENT;
+                getDocRecord();//获取会员档案
+                ToastUtil.showShortToast("会员档案");
                 break;
             default:
                 break;
@@ -1104,6 +1215,93 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
             OperatesFactory.create(BeautyCustomerOperates.class)
                     .getExpenseRecord(mCustomer.customerId, listener);
         }
+    }
+
+    private void getDocRecord() {
+        if (mCustomer != null) {
+            customer_doc_lv.setEmptyView(doc_empty_layout);
+            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponseList<CustomerDocRecordResp>>() {
+
+                @Override
+                public void onResponse(YFResponseList<CustomerDocRecordResp> response) {
+                    if (YFResponseList.isOk(response)) {
+                        docRecordAdapter = new CustomerDocRecordAdapter(getActivity(), response.getContent());
+                        docRecordAdapter.setCheckedListener(BeautyCustomerBalanceFragment.this);
+                        customer_doc_lv.setAdapter(docRecordAdapter);
+                    } else {
+                        ToastUtil.showShortToast(response.getMessage());
+                    }
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+                    ToastUtil.showShortToast(error.getMessage());
+                }
+            }, getFragmentManager());
+
+
+            CustomerDocRecordReq req=new CustomerDocRecordReq();
+            req.setCustomerId(mCustomer.customerId);
+
+            BeautyCustomerOperates operates = OperatesFactory.create(BeautyCustomerOperates.class);
+            operates.getDocRecord(req, listener);
+        }
+    }
+
+    private void getDocDetail(CustomerDocRecordResp docDetail){
+        if(docDetail!=null){
+
+            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponse<CustomerDocRecordResp>>() {
+
+                @Override
+                public void onResponse(YFResponse<CustomerDocRecordResp> response) {
+                    if (YFResponseList.isOk(response)) {
+                        showDocDetail(response.getContent());
+                    } else {
+                        ToastUtil.showShortToast(response.getMessage());
+                    }
+                }
+
+                @Override
+                public void onError(VolleyError error) {
+                    ToastUtil.showShortToast(error.getMessage());
+                }
+            }, getFragmentManager());
+
+            BeautyCustomerOperates operates = OperatesFactory.create(BeautyCustomerOperates.class);
+            operates.getDocRecordDetail(docDetail.getId(), listener);
+        }
+    }
+
+
+
+
+    private void showDocDetail(CustomerDocRecordResp docDetail){
+        if(docDetail!=null){
+            layout_docDetail.setVisibility(View.VISIBLE);
+            tv_docDetailsEmptyView.setVisibility(View.GONE);
+
+            tv_docTitle.setText(docDetail.getTitle());
+            tv_creator.setText(docDetail.getCreatorName());
+            tv_docTime.setText(DateUtil.format(docDetail.getServerCreateTime()));
+            tv_docContent.setText(docDetail.getContent());
+
+            //任务提醒模块
+            //循环添加任务
+            if(Utils.isNotEmpty(docDetail.getListTask())){
+                layout_taskDetail.setVisibility(View.VISIBLE);
+                layout_taskItems.removeAllViews();
+                for(int i=0;i<docDetail.getListTask().size();i++){
+                    DocDetailsTaskView taskView =  DocDetailsTaskView_.build(getContext());
+                    taskView.refreshUI(docDetail.getListTask().get(i),++i);
+
+                    layout_taskItems.addView(taskView);
+                }
+
+
+            }
+        }
+
     }
 
     /**

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/beauty_waiter_dialog_bg">
+
+    <RelativeLayout
+        android:layout_width="480dp"
+        android:layout_height="576dp">
+
+        <LinearLayout
+            android:id="@+id/ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="任务报告"
+                    android:textColor="@color/beauty_color_333333"
+                    android:textSize="@dimen/text_20" />
+
+                <TextView
+                    android:id="@+id/tv_member_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_title"
+                    android:layout_centerHorizontal="true"
+                    android:visibility="gone"
+                    android:textColor="@color/beauty_color_BCBCBC"
+                    android:textSize="@dimen/text_12" />
+
+                <ImageButton
+                    android:id="@+id/btn_close"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_property_close" />
+            </RelativeLayout>
+
+            <View style="@style/beauty.waiterdialog.h_line" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <View style="@style/beauty.waiterdialog.h_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="67dp">
+
+                <LinearLayout
+                    style="@style/beauty_layout_w_w_h_w"
+                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_submit"
+                        style="@style/beauty.booking.create.button"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="13dp"
+                        android:background="@drawable/beauty_booking_btn_submit_selector"
+                        android:text="完成"
+                        android:textColor="@color/beauty_color_white" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/slv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/ll_bottom"
+            android:layout_below="@id/ll_title"
+            android:fitsSystemWindows="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollbars="none">
+
+            <LinearLayout style="@style/beauty.booking.create.content_layout">
+
+                <LinearLayout
+                    android:id="@+id/layout_task_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:id="@+id/layout_member_info"
+                        android:visibility="gone"
+                        style="@style/beauty.booking.create.item_layout"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:text="         " />
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:text="受访者：" />
+
+                        <TextView
+                            android:id="@+id/tv_member_info"
+                            android:gravity="center_vertical"
+                            style="@style/beautyTaskValueTextViewStyle" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/beauty.booking.create.item_layout"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:text="     " />
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:text="任务标题：" />
+
+                        <TextView
+                            android:id="@+id/tv_task_title"
+                            android:gravity="center_vertical"
+                            style="@style/beautyTaskValueTextViewStyle" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        style="@style/beauty.booking.create.item_layout"
+                        android:layout_height="wrap_content"
+                        android:minHeight="47dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:text="     " />
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:text="任务内容：" />
+
+                        <TextView
+                            android:id="@+id/tv_task_content"
+                            android:gravity="center_vertical"
+                            style="@style/beautyTaskValueTextViewStyle"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/beauty.booking.create.item_layout"
+                        android:layout_height="70dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:layout_gravity="top"
+                            android:text="    *" />
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:layout_gravity="top"
+                            android:text="任务结果：" />
+
+                        <EditText
+                            android:id="@+id/et_task_result"
+                            style="@style/beauty.booking.create.edit_input"
+                            android:minLines="2"
+                            android:maxLength="200"
+                            android:gravity="left|top"
+                            android:hint="请输入任务结果" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+                <CheckBox
+                    android:id="@+id/cb_add_task"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_black"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:button="@null"
+                    android:drawableStart="@drawable/check_selector"
+                    android:drawablePadding="5dp"
+                    android:paddingLeft="15dp"
+                    android:text="二次任务提醒"/>
+
+
+                <!-- 任务UI -->
+                <LinearLayout
+                    android:id="@+id/layout_new_task_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="15dp"
+                    android:visibility="gone"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        style="@style/beauty.booking.create.item_layout"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:text="    *" />
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:text="任务标题：" />
+
+                        <EditText
+                            android:id="@+id/et_task_title"
+                            style="@style/beauty.booking.create.edit_input"
+                            android:hint="请输入任务标题" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/beauty.booking.create.item_layout"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:text="    *" />
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:text="提醒时间：" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_execute_time"
+                            style="@style/beauty.booking.create.child_item_layout">
+
+                            <TextView
+                                android:id="@+id/tv_task_time"
+                                style="@style/beauty.booking.create.child_item_text"
+                                android:text="请输入提醒时间" />
+
+                            <ImageView style="@style/beauty.booking.create.child_item_left_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_waiter"
+                        style="@style/beauty.booking.create.item_layout"
+                        android:gravity="center_vertical">
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:text="         *" />
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:text="执行人：" />
+
+                        <LinearLayout
+                            android:id="@+id/layout_executor"
+                            style="@style/beauty.booking.create.child_item_layout">
+
+                            <TextView
+                                android:id="@+id/tv_executor"
+                                style="@style/beauty.booking.create.child_item_text"
+                                android:text="请选择执行人" />
+
+                            <ImageView style="@style/beauty.booking.create.child_item_left_arrow" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/beauty.booking.create.item_layout"
+                        android:layout_height="70dp"
+                        android:gravity="center_vertical">
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_red"
+                            android:layout_gravity="top"
+                            android:text="    *" />
+
+                        <TextView
+                            style="@style/beauty.booking.create.text_title"
+                            android:layout_gravity="top"
+                            android:text="任务内容：" />
+
+                        <EditText
+                            android:id="@+id/et_task_content"
+                            style="@style/beauty.booking.create.edit_input"
+                            android:minLines="2"
+                            android:maxLength="200"
+                            android:gravity="left|top"
+                            android:hint="请输入任务内容" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </RelativeLayout>
+</FrameLayout>

@@ -368,6 +368,16 @@
                     android:id="@+id/btn_rebind_delivery_user"
                     style="@style/OrderCenterBottomButtonStyle"
                     android:text="@string/order_center_rebind_delivery_user" />
+
+                <Button
+                    android:id="@+id/btn_create_doc"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_center_create_member_doc" />
+
+                <Button
+                    android:id="@+id/btn_create_task"
+                    style="@style/OrderCenterBottomButtonStyle"
+                    android:text="@string/order_center_create_task" />
             </LinearLayout>
         </LinearLayout>
 

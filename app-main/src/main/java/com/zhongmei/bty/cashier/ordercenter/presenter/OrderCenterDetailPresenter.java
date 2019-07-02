@@ -76,6 +76,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeExtra;
 import com.zhongmei.yunfu.db.entity.trade.TradeItem;
 import com.zhongmei.yunfu.db.entity.trade.TradeReasonRel;
 import com.zhongmei.yunfu.db.entity.trade.TradeReturnInfo;
+import com.zhongmei.yunfu.db.entity.trade.TradeUser;
 import com.zhongmei.yunfu.db.enums.ActivityRuleEffective;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.yunfu.db.enums.BusinessType;
@@ -103,6 +104,7 @@ import com.zhongmei.yunfu.resp.ResponseObject;
 import com.zhongmei.yunfu.resp.data.GatewayTransferResp;
 import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.util.ToastUtil;
+import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -2866,6 +2868,23 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return null;
     }
 
+    @Override
+    public TradeCustomer getTradeCustomer() {
+        TradeVo tradeVo = getTradeVo();
+        List<TradeCustomer> tradeCustomers = tradeVo.getTradeCustomerList();
+        if(Utils.isEmpty(tradeCustomers)){
+            return null;
+        }
+
+        for (TradeCustomer tradeCustomer : tradeCustomers) {
+            if(ValueEnums.equalsValue(tradeCustomer.getCustomerType(),CustomerType.MEMBER.value())){
+                return tradeCustomer;
+            }
+        }
+
+        return null;
+    }
+
     protected DeliveryOrder getDeliveryOrder() {
         List<DeliveryOrderVo> deliveryOrderVos = getDeliveryOrderVos();
         if (Utils.isNotEmpty(deliveryOrderVos)) {
@@ -3380,5 +3399,19 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
     @Override
     public String getDisplayTakeNumber() {
         return "";
+    }
+
+    @Override
+    public boolean showCreateDoc() {
+        Trade trade = getTrade();
+        TradeCustomer tradeCustomer= getTradeCustomer();
+        return ValueEnums.equalsValue(trade.getTradeStatus(),TradeStatus.FINISH.value()) && tradeCustomer!=null;
+    }
+
+    @Override
+    public boolean showCreateTask() {
+        //订单状态为完成状态
+        Trade trade = getTrade();
+        return ValueEnums.equalsValue(trade.getTradeStatus(),TradeStatus.FINISH.value());
     }
 }

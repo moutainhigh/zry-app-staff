@@ -1,14 +1,17 @@
 package com.zhongmei.bty.basemodule.orderdish.bean;
 
+import com.zhongmei.bty.basemodule.orderdish.cache.DishCache;
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishUnitDictionary;
+import com.zhongmei.yunfu.db.entity.dish.DishTimeChargingRule;
 import com.zhongmei.yunfu.util.Decimal;
 import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.yunfu.db.enums.DishType;
 import com.zhongmei.yunfu.db.enums.IssueStatus;
 import com.zhongmei.yunfu.db.enums.SaleType;
+import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 import java.util.Set;
@@ -162,11 +165,29 @@ public class OrderDish {
     }
 
     public BigDecimal getActualAmount() {
+        //区分计算
+        if(ValueEnums.equalsValue(getDishShop().getSaleType(),SaleType.TIMECHARGING.value())){
+            return caculTimeChargingAmount();
+        }
         return mathActualAmount();
     }
 
     public BigDecimal mathActualAmount() {
         return totalQty == null ? BigDecimal.ZERO : MathDecimal.round(totalQty.multiply(getPrice()), 2);
+    }
+
+    /**
+     * 计算计时消费的费用
+     * 商品还没有生效，所以按照最低消费来算
+     * @return
+     */
+    private BigDecimal caculTimeChargingAmount() {
+        DishTimeChargingRule rule = DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(getDishShop().getId());
+        if (rule == null) {
+            return mathActualAmount();
+        }
+        //按照最低消费时间来算
+        return MathDecimal.round(rule.getStartChargingPrice().multiply(totalQty),2);
     }
 
     public String getBatchNo() {

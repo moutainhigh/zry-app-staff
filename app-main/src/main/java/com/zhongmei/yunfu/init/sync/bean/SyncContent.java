@@ -10,6 +10,7 @@ import com.zhongmei.yunfu.db.entity.dish.DishSetmealGroup;
 import com.zhongmei.yunfu.db.entity.discount.Coupon;
 import com.zhongmei.yunfu.db.entity.discount.CustomerScoreRule;
 import com.zhongmei.bty.basemodule.erp.bean.ErpCurrency;
+import com.zhongmei.yunfu.db.entity.dish.DishTimeChargingRule;
 import com.zhongmei.yunfu.db.entity.trade.Tables;
 import com.zhongmei.bty.sync.push.SysCmdResponse;
 import com.zhongmei.yunfu.context.util.NoProGuard;
@@ -86,7 +87,8 @@ public class SyncContent implements NoProGuard {
     private SyncItem<CommercialCustomSettings> commercialCustomSettings;
     private SyncItem<CustomerSaveRule> customerSaveRule;
     private SyncItem<CustomerDishPrivilege> customerDishPrivilege;
-    private SyncItem<TaskRemind> taskRemind;
+//    private SyncItem<TaskRemind> taskRemind;
+    private SyncItem<DishTimeChargingRule> dishTimeChargingRule;
 
 
 

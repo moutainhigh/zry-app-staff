@@ -53,6 +53,7 @@ import com.zhongmei.yunfu.db.entity.dish.DishPropertyType;
 import com.zhongmei.yunfu.db.entity.dish.DishSetmeal;
 import com.zhongmei.yunfu.db.entity.dish.DishSetmealGroup;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
+import com.zhongmei.yunfu.db.entity.dish.DishTimeChargingRule;
 import com.zhongmei.yunfu.db.entity.dish.TradeItemOperation;
 import com.zhongmei.yunfu.db.entity.trade.Payment;
 import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
@@ -192,7 +193,8 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(CoupRule.class);
         tables.add(CustomerSaveRule.class);
         tables.add(CustomerDishPrivilege.class);
-        tables.add(TaskRemind.class);
+//        tables.add(TaskRemind.class);
+        tables.add(DishTimeChargingRule.class);
 
         BeautyDbHelperUtil.initTables(tables);
         TABLES = Collections.unmodifiableList(tables);

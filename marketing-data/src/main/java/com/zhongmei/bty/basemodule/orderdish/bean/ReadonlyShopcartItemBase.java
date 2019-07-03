@@ -10,6 +10,7 @@ import com.zhongmei.bty.basemodule.orderdish.enums.ShopcartItemType;
 import com.zhongmei.bty.basemodule.shoppingcart.utils.AppletUtil;
 import com.zhongmei.bty.basemodule.shoppingcart.utils.CardServiceTool;
 import com.zhongmei.bty.basemodule.trade.entity.TradeItemMainBatchRel;
+import com.zhongmei.yunfu.db.entity.dish.DishTimeChargingRule;
 import com.zhongmei.yunfu.db.entity.trade.TradeUser;
 import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.db.entity.trade.TradeItem;
@@ -31,6 +32,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.bty.basemodule.orderdish.cache.DishCache;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.discount.bean.CouponPrivilegeVo;
+import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -233,6 +235,15 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
 
     @Override
     public BigDecimal getActualAmount() {
+        //区分是否需要计算，通过tradeItemSaleType
+        if(DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(tradeItem.getDishId())!=null){
+            BigDecimal actualAmount=caculTimeChargingAmount();
+            if(tradeItem.getActualAmount().compareTo(actualAmount)!=0){//不相等
+                tradeItem.setActualAmount(actualAmount);
+                tradeItem.setChanged(true);
+            }
+            return actualAmount;//计算时间
+        }
         return tradeItem.getActualAmount();
     }
 
@@ -402,6 +413,50 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
                 extraShopcartItem.setIssueStatus(mIssueStatus);
             }
         }
+    }
+
+    /**
+     * 计算计时消费的费用
+     * StartChargingTime小时内StartChargingPrice元
+     * 超过部分每ChargingUnit小时ChargingPrice元
+     * 其中：满FullUnit分钟算FullUnitCharging小时
+     *      不满NoFullUnit分钟算NoFullUnitCharging小时
+     * @return
+     */
+    private BigDecimal caculTimeChargingAmount() {
+        BigDecimal actualAmount = BigDecimal.ZERO;
+        DishTimeChargingRule rule = DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(tradeItem.getDishId());
+        if (rule == null) {
+            return tradeItem.getActualAmount();
+        }
+        BigDecimal currentTime = new BigDecimal(System.currentTimeMillis());
+        BigDecimal currentMintes = currentTime.subtract(new BigDecimal(tradeItem.getServerCreateTime())).divide(new BigDecimal(50 * 1000));
+        BigDecimal serviceTimeHour = new BigDecimal(Math.floor(currentMintes.divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_DOWN).doubleValue()));//
+
+
+        //不满最低时间，按照最低时间算
+        if (rule.getStartChargingTimes().compareTo(serviceTimeHour) >= 0) {
+            //按照最低消费时间来算
+            return MathDecimal.round(rule.getStartChargingPrice().multiply(tradeItem.getQuantity()),2);
+        }
+
+        //超过最低时间
+        BigDecimal overMinutes = currentMintes.divideAndRemainder(new BigDecimal(60))[1];//取余操作
+        if (rule.getFullUnit().compareTo(overMinutes) >= 0) {
+            //按不满算
+            serviceTimeHour = serviceTimeHour.add(rule.getNoFullUnitCharging());
+        } else {
+            //按满了算
+            serviceTimeHour = serviceTimeHour.add(rule.getFullUnitCharging());
+        }
+
+        //计算价格(最低消费)
+        actualAmount=actualAmount.add(rule.getStartChargingPrice().multiply(tradeItem.getQuantity()));//基础费用
+
+        //计算真实的价格（加上超过的部分费用）
+        serviceTimeHour = serviceTimeHour.subtract(rule.getStartChargingTimes());
+        actualAmount=actualAmount.add(serviceTimeHour.divide(rule.getChargingUnit(),2,BigDecimal.ROUND_HALF_DOWN).multiply(rule.getChargingPrice()).multiply(tradeItem.getQuantity()));
+        return MathDecimal.round(actualAmount,2);
     }
 
     public GuestPrinted getGuestPrinted() {

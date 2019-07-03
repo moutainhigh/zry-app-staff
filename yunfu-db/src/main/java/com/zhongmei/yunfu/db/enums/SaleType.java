@@ -15,6 +15,11 @@ public enum SaleType implements ValueEnum<Integer> {
      * 非称重商品
      */
     UNWEIGHING(2),
+
+    /**
+     * 按时间收费
+     */
+    TIMECHARGING(3),
     /**
      * 未知的值
      *

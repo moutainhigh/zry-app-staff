@@ -212,6 +212,7 @@ public class SaleCardDataModel {
             tradeItem.setDishId(dishShop.getId());
             tradeItem.setDishName(dishShop.getName());
             tradeItem.setSkuUuid(dishShop.getUuid());
+            tradeItem.setSaleType(dishShop.getSaleType());
         } /*else {
 			tradeItem.setSkuId(10L);
 			tradeItem.setSkuName("haha cards");

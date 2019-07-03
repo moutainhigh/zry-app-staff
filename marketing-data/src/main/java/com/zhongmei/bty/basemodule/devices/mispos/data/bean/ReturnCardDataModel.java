@@ -251,6 +251,7 @@ public class ReturnCardDataModel {
             tradeItem.setDishId(dishShop.getId());
             tradeItem.setDishName(dishShop.getName());
             tradeItem.setSkuUuid(dishShop.getUuid());
+            tradeItem.setSaleType(dishShop.getSaleType());
         } else {
             tradeItem.setDishId(0L);
             tradeItem.setDishName("not find dishshop");

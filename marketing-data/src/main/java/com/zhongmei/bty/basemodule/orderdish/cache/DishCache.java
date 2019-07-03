@@ -20,6 +20,7 @@ import com.zhongmei.yunfu.db.entity.dish.DishSetmeal;
 import com.zhongmei.yunfu.db.entity.dish.DishSetmealGroup;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishUnitDictionary;
+import com.zhongmei.yunfu.db.entity.dish.DishTimeChargingRule;
 import com.zhongmei.yunfu.db.enums.ChildDishType;
 import com.zhongmei.yunfu.db.entity.dish.DishBrandType;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
@@ -77,6 +78,14 @@ public class DishCache {
             Log.e(TAG, "refresh error!", e);
         }
         LazySingletonHolder.INSTANCE.checkData();
+    }
+
+    /**
+     * 返回商品价格计算规则
+     * @return
+     */
+    public static DishTimeChargingRulehHolder getDishTimeChargingRuleHolder(){
+        return LazySingletonHolder.INSTANCE.dishTimeChargingRuleHolder;
     }
 
     /**
@@ -180,6 +189,7 @@ public class DishCache {
     private final DishCyclePeriodHolder dishCyclePeriodHolder;
     private final DishHolder dishHolder;
     private final DishTypeHolder dishTypeHolder;
+    private final DishTimeChargingRulehHolder dishTimeChargingRuleHolder;
     private final ExtraHolder extraHolder;
     private final BasicHolder<DishPropertyType> propertyTypeHolder;
     private final PropertyHolder propertyHolder;
@@ -199,6 +209,7 @@ public class DishCache {
     private DishCache() {
         dishCyclePeriodHolder = new DishCyclePeriodHolder();
         dishHolder = new DishHolder(dishCyclePeriodHolder);
+        dishTimeChargingRuleHolder=new DishTimeChargingRulehHolder();
         dishTypeHolder = new DishTypeHolder(dishHolder);
         extraHolder = new ExtraHolder(dishHolder);
         propertyTypeHolder = new BasicHolder<DishPropertyType>(DishPropertyType.class) {
@@ -282,6 +293,7 @@ public class DishCache {
             _refresh(helper, dishCarteHolder);
             _refresh(helper, dishCarteDetailHolder);
             _refresh(helper, dishCarteNormsHolder);
+            _refresh(helper,dishTimeChargingRuleHolder);
             initDishLog();
             inited = true;
         } finally {
@@ -893,6 +905,37 @@ public class DishCache {
             return qb.query();
         }
     }
+
+    public static class DishTimeChargingRulehHolder extends BasicHolder<DishTimeChargingRule> {
+        protected Map<Long, DishTimeChargingRule> mDishChargingRuleMap;//dishId , DishTimeChargingRule
+
+        DishTimeChargingRulehHolder() {
+            super(DishTimeChargingRule.class);
+            mDishChargingRuleMap=new HashMap<Long,DishTimeChargingRule>();
+        }
+
+        public DishTimeChargingRule getRuleByDishId(Long dishId){
+            return mDishChargingRuleMap.get(dishId);
+        }
+
+        @Override
+        protected Map<Long, DishTimeChargingRule> cache(List<DishTimeChargingRule> list) {
+            mDishChargingRuleMap.clear();
+            for (DishTimeChargingRule dishTimeChargingRule : list) {
+                mDishChargingRuleMap.put(dishTimeChargingRule.getDishId(),dishTimeChargingRule);
+            }
+            return super.cache(list);
+        }
+
+        @Override
+        protected List<DishTimeChargingRule> query(DatabaseHelper helper, Dao<DishTimeChargingRule, Long> dao) throws Exception {
+            QueryBuilder<DishTimeChargingRule,Long> queryBuilder=dao.queryBuilder();
+            queryBuilder.where().eq(DishTimeChargingRule.$.statusFlag,StatusFlag.VALID);
+            List<DishTimeChargingRule> listData=queryBuilder.query();
+            return listData;
+        }
+    }
+
 
     /**
      * 菜品数据缓存
@@ -1604,6 +1647,7 @@ public class DishCache {
             Log.i(TAG, "setmeal.count=" + setmealHolder.getCount());
             Log.i(TAG, "setmealGroup.count=" + setmealGroupHolder.getCount());
             Log.i(TAG, "dishExtra.count=" + dishExtraHolder.getCount());
+            Log.i(TAG, "dishTimeChargingRuleHolder.count=" + dishTimeChargingRuleHolder.getCount());
         } catch (Exception e) {
             Log.e(TAG, "checkData error!", e);
         }

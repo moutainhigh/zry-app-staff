@@ -83,6 +83,26 @@ public class DishDataItem {
 
     private TradeUser tradeUser;
 
+    private String serverTime;//带单位X分钟
+
+    private String chargingRule;//计算规则
+
+    public String getServerTime() {
+        return serverTime;
+    }
+
+    public void setServerTime(String serverTime) {
+        this.serverTime = serverTime;
+    }
+
+    public String getChargingRule() {
+        return chargingRule;
+    }
+
+    public void setChargingRule(String chargingRule) {
+        this.chargingRule = chargingRule;
+    }
+
     public DishDataItem(ItemType type) {
         this.type = type;
     }

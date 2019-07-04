@@ -180,6 +180,11 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
     }
 
     @Override
+    public Long getServerCreateTime() {
+        return null;
+    }
+
+    @Override
     public String getParentUuid() {
         if (parent == null) {
             return null;

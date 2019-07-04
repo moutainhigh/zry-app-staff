@@ -153,6 +153,11 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
     }
 
     @Override
+    public Long getServerCreateTime() {
+        return tradeItem.getServerCreateTime();
+    }
+
+    @Override
     public String getParentUuid() {
         return tradeItem.getParentUuid();
     }
@@ -237,7 +242,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
     public BigDecimal getActualAmount() {
         //区分是否需要计算，通过tradeItemSaleType
         if(DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(tradeItem.getDishId())!=null){
-            BigDecimal actualAmount=caculTimeChargingAmount();
+            BigDecimal actualAmount=calculTimeChargingAmount();
             if(tradeItem.getActualAmount().compareTo(actualAmount)!=0){//不相等
                 tradeItem.setActualAmount(actualAmount);
                 tradeItem.setChanged(true);
@@ -423,14 +428,14 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
      *      不满NoFullUnit分钟算NoFullUnitCharging小时
      * @return
      */
-    private BigDecimal caculTimeChargingAmount() {
+    private BigDecimal calculTimeChargingAmount() {
         BigDecimal actualAmount = BigDecimal.ZERO;
         DishTimeChargingRule rule = DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(tradeItem.getDishId());
         if (rule == null) {
             return tradeItem.getActualAmount();
         }
         BigDecimal currentTime = new BigDecimal(System.currentTimeMillis());
-        BigDecimal currentMintes = currentTime.subtract(new BigDecimal(tradeItem.getServerCreateTime())).divide(new BigDecimal(50 * 1000));
+        BigDecimal currentMintes = currentTime.subtract(new BigDecimal(tradeItem.getServerCreateTime())).divide(new BigDecimal(60 * 1000),2,BigDecimal.ROUND_HALF_DOWN);
         BigDecimal serviceTimeHour = new BigDecimal(Math.floor(currentMintes.divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_DOWN).doubleValue()));//
 
 
@@ -442,12 +447,15 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
 
         //超过最低时间
         BigDecimal overMinutes = currentMintes.divideAndRemainder(new BigDecimal(60))[1];//取余操作
-        if (rule.getFullUnit().compareTo(overMinutes) >= 0) {
+        if (rule.getFullUnit()!=null && rule.getFullUnit().compareTo(overMinutes) <= 0) {
             //按不满算
-            serviceTimeHour = serviceTimeHour.add(rule.getNoFullUnitCharging());
-        } else {
-            //按满了算
             serviceTimeHour = serviceTimeHour.add(rule.getFullUnitCharging());
+        } else if(rule.getNoFullUnit()!=null && rule.getNoFullUnit().compareTo(overMinutes) < 0){
+            //按满了算
+            serviceTimeHour = serviceTimeHour.add(rule.getNoFullUnitCharging());
+        }else{
+            //普通计算
+            serviceTimeHour=serviceTimeHour.add(overMinutes.divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_DOWN));
         }
 
         //计算价格(最低消费)

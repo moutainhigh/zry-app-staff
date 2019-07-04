@@ -50,6 +50,8 @@ public interface IShopcartItemBase {
 
     Long getServerUpdateTime();
 
+    Long getServerCreateTime();
+
     String getParentUuid();
 
     DishShop getDishShop();

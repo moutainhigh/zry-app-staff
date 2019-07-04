@@ -241,4 +241,9 @@
     <string name="order_type_lable">交易类型：</string>
     <string name="order_amount_lable">交易金额：</string>
     <string name="order_amount">{HBF}%1$s</string>
+    <string name="dish_charging_rule">前%1$.2f小时%2$.2f元，每%3$.2f小时%4$.2f元</string>
+    <string name="dish_charging_limit_rule">，满%1$.2f分钟算%2$.2f小时</string>
+    <string name="dish_charging_limit_rule2">，不满%1$.2f分钟算%2$.2f小时</string>
+    <string name="dish_server_time">%d分钟</string>
+    <string name="dish_no_time">未开始计时</string>
 </resources>

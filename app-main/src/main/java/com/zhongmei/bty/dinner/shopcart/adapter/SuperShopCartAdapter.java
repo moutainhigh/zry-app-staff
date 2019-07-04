@@ -46,6 +46,7 @@ import com.zhongmei.bty.basemodule.trade.utils.DinnerUtils;
 import com.zhongmei.beauty.utils.TradeUserUtil;
 import com.zhongmei.bty.common.view.NumberEditText;
 import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
+import com.zhongmei.yunfu.db.entity.dish.DishTimeChargingRule;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.yunfu.db.enums.DishType;
 import com.zhongmei.yunfu.db.enums.InvalidType;
@@ -1486,6 +1487,37 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
     protected abstract void updateTrade(TradeVo tradeVo, boolean isShowUnActive);
 
+
+    private void setChargingRuleInfo(DishDataItem item,IShopcartItem shopcartItem){
+        DishTimeChargingRule rule=DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(shopcartItem.getSkuId());
+        if(rule==null){
+            return;
+        }
+
+        StringBuffer ruleInfo=new StringBuffer();
+        ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_rule),rule.getStartChargingTimes(),rule.getStartChargingPrice(),rule.getChargingUnit(),rule.getChargingPrice()));
+
+        if(rule.getFullUnit()!=null && rule.getFullUnitCharging()!=null){
+            ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_limit_rule),rule.getFullUnit(),rule.getFullUnitCharging()));
+        }
+
+        if(rule.getNoFullUnit()!=null && rule.getNoFullUnitCharging()!=null){
+            ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_limit_rule2),rule.getNoFullUnit(),rule.getNoFullUnitCharging()));
+        }
+
+        item.setChargingRule(ruleInfo.toString().trim());
+
+        if(shopcartItem.getId()==null){
+            //未开始即使
+            item.setServerTime(context.getResources().getString(R.string.dish_no_time));
+        }else{
+            //计算时间
+            Long currentTime=System.currentTimeMillis();
+            Long serverMinute=(currentTime-shopcartItem.getServerCreateTime())/(60*1000);
+            item.setServerTime(String.format(context.getResources().getString(R.string.dish_server_time),serverMinute));
+        }
+    }
+
     /**
      * @return 返回单菜和套餐外壳列表
      * @Description: 根据购物车菜品生成显示item并保存到data数组
@@ -1518,6 +1550,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     item.setCanEditNumber(true);
                 } else
                     item.setCanEditNumber(false);
+                setChargingRuleInfo(item,shopCartItem);
                 data.add(item);
                 comboAndSingleItems.add(item);
 
@@ -1618,6 +1651,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             item.setCanEditNumber(true);
         } else
             item.setCanEditNumber(false);
+        setChargingRuleInfo(item,shopCartItem);
         data.add(item);
         createCardServiceHint(shopCartItem);
         createApplet(shopCartItem);
@@ -2724,6 +2758,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         public RelativeLayout rl_extraInfo;//额外信息，美业使用
         public TextView tv_serverTimes;//服务次数
         public TextView tv_deadLines;//有效期
+
+        public LinearLayout layout_chargingRule;
+        public TextView tv_serverTime;
+        public TextView tv_chargingRule;
     }
 
     class PropertiesHolder {

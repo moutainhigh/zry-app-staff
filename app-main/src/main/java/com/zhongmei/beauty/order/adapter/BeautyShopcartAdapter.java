@@ -3,12 +3,14 @@ package com.zhongmei.beauty.order.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zhongmei.bty.basemodule.orderdish.adapter.DishQuantityAdapter;
 import com.zhongmei.bty.dinner.shopcart.adapter.SuperShopCartAdapter;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem;
@@ -75,6 +77,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         showNumEditView(item, holder);
         setItemSelectedBg(holder, item);
         setExtraInfo(holder,item); //设置服务购买中的次数，有效期
+        setChargingRule(holder,item);//这是规则信息
     }
 
     private void setExtraInfo(ViewHolder holder,DishDataItem item){
@@ -87,6 +90,18 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         //显示
         holder.tv_serverTimes.setText(getServerTimesHint(item.getBase()));
         holder.tv_deadLines.setText(getDeadLineHint(item.getBase()));
+    }
+
+    private void setChargingRule(ViewHolder holder,DishDataItem item){
+        if(TextUtils.isEmpty(item.getServerTime()) || TextUtils.isEmpty(item.getChargingRule())){
+            holder.layout_chargingRule.setVisibility(View.GONE);
+            return;
+        }
+
+        holder.layout_chargingRule.setVisibility(View.VISIBLE);
+        holder.tv_serverTime.setText(item.getServerTime());
+        holder.tv_chargingRule.setText(item.getChargingRule());
+
     }
 
     /**
@@ -149,6 +164,9 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         holder.rl_extraInfo=(RelativeLayout) contentView.findViewById(R.id.rl_extra_info);
         holder.tv_serverTimes=(TextView)contentView.findViewById(R.id.tv_server_times);
         holder.tv_deadLines=(TextView)contentView.findViewById(R.id.tv_dead_line);
+        holder.layout_chargingRule=(LinearLayout)contentView.findViewById(R.id.layout_charging_rule);
+        holder.tv_serverTime=(TextView)contentView.findViewById(R.id.tv_server_time);
+        holder.tv_chargingRule=(TextView)contentView.findViewById(R.id.tv_charging_rule);
         return contentView;
     }
 

@@ -436,7 +436,8 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         }
         BigDecimal currentTime = new BigDecimal(System.currentTimeMillis());
         BigDecimal currentMintes = currentTime.subtract(new BigDecimal(tradeItem.getServerCreateTime())).divide(new BigDecimal(60 * 1000),2,BigDecimal.ROUND_HALF_DOWN);
-        BigDecimal serviceTimeHour = new BigDecimal(Math.floor(currentMintes.divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_DOWN).doubleValue()));//
+        BigDecimal currentTimeParts = new BigDecimal(Math.floor(currentMintes.divide(rule.getChargingUnit().multiply(new BigDecimal(60)),2,BigDecimal.ROUND_HALF_DOWN).doubleValue()));//根据单位计算时间份数
+        BigDecimal serviceTimeHour = currentTimeParts.multiply(rule.getChargingUnit());//换成小时
 
 
         //不满最低时间，按照最低时间算
@@ -446,11 +447,11 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         }
 
         //超过最低时间
-        BigDecimal overMinutes = currentMintes.divideAndRemainder(new BigDecimal(60))[1];//取余操作
+        BigDecimal overMinutes = currentMintes.divideAndRemainder(rule.getChargingUnit().multiply(new BigDecimal(60)))[1];//取余操作
         if (rule.getFullUnit()!=null && rule.getFullUnit().compareTo(overMinutes) <= 0) {
             //按不满算
             serviceTimeHour = serviceTimeHour.add(rule.getFullUnitCharging());
-        } else if(rule.getNoFullUnit()!=null && rule.getNoFullUnit().compareTo(overMinutes) < 0){
+        } else if(rule.getNoFullUnit()!=null && rule.getNoFullUnit().compareTo(overMinutes) >= 0){
             //按满了算
             serviceTimeHour = serviceTimeHour.add(rule.getNoFullUnitCharging());
         }else{
@@ -462,6 +463,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         actualAmount=actualAmount.add(rule.getStartChargingPrice().multiply(tradeItem.getQuantity()));//基础费用
 
         //计算真实的价格（加上超过的部分费用）
+        Log.e("TimeCharging","serviceTimeHour:"+serviceTimeHour);
         serviceTimeHour = serviceTimeHour.subtract(rule.getStartChargingTimes());
         actualAmount=actualAmount.add(serviceTimeHour.divide(rule.getChargingUnit(),2,BigDecimal.ROUND_HALF_DOWN).multiply(rule.getChargingPrice()).multiply(tradeItem.getQuantity()));
         return MathDecimal.round(actualAmount,2);

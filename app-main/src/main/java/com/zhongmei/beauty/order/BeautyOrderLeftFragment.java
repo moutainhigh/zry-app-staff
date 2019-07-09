@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.zhongmei.beauty.order.util.BeautyPrePrintUtil;
+import com.zhongmei.bty.basemodule.shoppingcart.utils.MathShoppingCartTool;
+import com.zhongmei.yunfu.ShopInfoManager;
 import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.beauty.BeautyOrderActivity;
@@ -478,6 +480,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
                             @Override
                             public void onPositive(User user, String code, Auth.Filter filter) {
                                 super.onPositive(user, code, filter);
+                                mShopcarting.refreshDish();
                                 BeautyOrderManager.gotoPay(getActivity(), mShopcarting.createOrder());
                             }
                         });

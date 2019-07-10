@@ -137,6 +137,8 @@
                     android:drawableRight="@drawable/icon_delete"
                     android:gravity="center"
                     android:hint="@string/customer_login_hint"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:inputType="text"
                     android:maxLength="20"
                     android:textColor="#6B6D6C"

@@ -124,7 +124,7 @@ public class DinnerCustomerLoginDialogFragment extends DinnerCustomerLoginBasicD
                         @Override
                         public void onPositive(User user, String code, Auth.Filter filter) {
                             super.onPositive(user, code, filter);
-                            showSecondDisPlay("");
+//                            showSecondDisPlay("");
                             replaceChildFragment(R.id.login_frame_layout, customerRegisterFragment, DinnerCustomerRegisterFragment.TAG);
                             mIbBack.setVisibility(View.VISIBLE);
                             mIbClose.setVisibility(View.GONE);

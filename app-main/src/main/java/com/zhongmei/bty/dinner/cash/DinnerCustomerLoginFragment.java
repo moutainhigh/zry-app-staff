@@ -110,9 +110,6 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
     @ViewById(R.id.login_layout)
     LinearLayout mLlLoginLayout;
 
-    @ViewById(R.id.ll_error_view)
-    LinearLayout mLlFaceErrorView;
-
     @ViewById(R.id.tvScanDesc_Customer)
     TextView mTvScanDesc;
 
@@ -145,9 +142,6 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
 
     @ViewById(R.id.customer_verification)
     Button mLoginBtn;
-
-    @ViewById(R.id.member_register_root)
-    LinearLayout mRegiesterRoot;
 
     private ErpCurrency mErpCurrency;
 
@@ -192,9 +186,8 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
     }
 
     public void setShowLoginView() {
-        if (mLlLoginLayout != null && mLlFaceErrorView != null) {
+        if (mLlLoginLayout != null) {
             mLlLoginLayout.setVisibility(View.VISIBLE);
-            mLlFaceErrorView.setVisibility(View.GONE);
         }
     }
 
@@ -210,23 +203,23 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
     void init() {
         isOpenWeChat = getParentDialogFragment().settings[0];
         isNeedOpenId = getParentDialogFragment().settings[1];
+        mShowValue.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                Log.e("loginFragment",v+";hasFocus+"+hasFocus);
+            }
+        });
         EventBus.getDefault().register(this);
         initView();
     }
 
     private void initView() {
-        if (CustomerApplication.mCustomerBussinessType == CustomerAppConfig.CustomerBussinessType.BEAUTY) {
-            mLoginBtn.setBackgroundResource(R.drawable.beauty_login_btn_selector);
-//            if (mLaunchMode == BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE){
-//                mRegiesterRoot.setVisibility(View.GONE);
-//            }
-        }
         switchTitle();
         setupCountryView();
         isShowQrCode();
-        InputFilter[] filters = {new InputFilter.LengthFilter(20)};
-        mShowValue.setFilters(filters);
-        mShowValue.addTextChangedListener(mTextWatcher);
+//        InputFilter[] filters = {new InputFilter.LengthFilter(20)};
+//        mShowValue.setFilters(filters);
+//        mShowValue.addTextChangedListener(mTextWatcher);
         mShowValue.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -251,20 +244,10 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
             case LOGIN_MOBILE:
                 mShowValue.setText("");
                 mShowValue.setHint(getString(R.string.customer_login_hint));
-                if (CustomerApplication.mCustomerBussinessType == CustomerAppConfig.CustomerBussinessType.BEAUTY) {
-                    mTvLoginMobile.setTextColor(getResources().getColor(R.color.beauty_color_FF2283));
-                    mLlLoginMobile.setBackgroundColor(getResources().getColor(R.color.beauty_color_FFEFF6));
-                    mVLoginMobile.setBackgroundColor(getResources().getColor(R.color.beauty_color_FF2283));
-                } else {
-                    mTvLoginMobile.setTextColor(getResources().getColor(R.color.color_32ADF6));
-                    mLlLoginMobile.setBackgroundColor(Color.parseColor("#F1FAFF"));
-                    mVLoginMobile.setBackgroundColor(getResources().getColor(R.color.color_32ADF6));
-                }
                 mVLoginMobile.setVisibility(View.VISIBLE);
                 mTvLoginCard.setTextColor(getResources().getColor(R.color.color_999999));
                 mLlLoginCard.setBackgroundColor(getResources().getColor(R.color.bg_white));
                 mVLoginCard.setVisibility(View.INVISIBLE);
-                mLlCountry.setVisibility(View.GONE);
                 break;
             case LOGIN_CARD:
                 mShowValue.setText("");
@@ -272,17 +255,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                 mTvLoginMobile.setTextColor(getResources().getColor(R.color.color_999999));
                 mLlLoginMobile.setBackgroundColor(getResources().getColor(R.color.bg_white));
                 mVLoginMobile.setVisibility(View.INVISIBLE);
-                if (CustomerApplication.mCustomerBussinessType == CustomerAppConfig.CustomerBussinessType.BEAUTY) {
-                    mTvLoginCard.setTextColor(getResources().getColor(R.color.beauty_color_FF2283));
-                    mLlLoginCard.setBackgroundColor(getResources().getColor(R.color.beauty_color_FFEFF6));
-                    mVLoginCard.setBackgroundColor(getResources().getColor(R.color.beauty_color_FF2283));
-                } else {
-                    mTvLoginCard.setTextColor(getResources().getColor(R.color.color_32ADF6));
-                    mLlLoginCard.setBackgroundColor(Color.parseColor("#F1FAFF"));
-                    mVLoginCard.setBackgroundColor(getResources().getColor(R.color.color_32ADF6));
-                }
                 mVLoginCard.setVisibility(View.VISIBLE);
-                mLlCountry.setVisibility(View.GONE);
                 break;
             default:
                 break;
@@ -297,13 +270,13 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
     }
 
     private void isShowQrCode() {
-        if (loginType==LOGIN_MOBILE) {//没有开通微信公众号
-//            mTvScanDesc.setText(getString(R.string.customer_login_desc_2));
-            mTvScanDesc.setVisibility(View.GONE);
-        } else {
-            mTvScanDesc.setVisibility(View.VISIBLE);
-            mTvScanDesc.setText(getString(R.string.customer_login_desc_1));
-        }
+//        if (loginType==LOGIN_MOBILE) {//没有开通微信公众号
+////            mTvScanDesc.setText(getString(R.string.customer_login_desc_2));
+//            mTvScanDesc.setVisibility(View.GONE);
+//        } else {
+//            mTvScanDesc.setVisibility(View.VISIBLE);
+//            mTvScanDesc.setText(getString(R.string.customer_login_desc_1));
+//        }
 //        getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
     }
 
@@ -320,6 +293,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         @Override
         public void afterTextChanged(Editable s) {
             String inputStr = s.toString();
+            Log.e("loginFragment","inputStr:"+inputStr);
             if (inputStr.endsWith("\n")) {//处理回车事件
                 verification();
                 return;
@@ -341,7 +315,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                     mLoginBtn.setBackgroundResource(R.drawable.orderdish_clear_status_select_all_not_enabled);
                 }
             }
-            getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
+//            getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
         }
     };
 
@@ -352,6 +326,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         final String inputNo = mShowValue.getText().toString().replace("\n", "").trim();
         if (TextUtils.isEmpty(inputNo)) {
             ToastUtil.showShortToast(loginType == LOGIN_MOBILE ? R.string.customer_login_hint : R.string.customer_ordercenter_search_hint0);
+            mShowValue.requestFocus();
             return;
         }
         switchLogin(inputNo);
@@ -713,13 +688,15 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
      */
     private void loginFail(String message, boolean clearInput) {
         ToastUtil.showShortToast(message);
-        if (clearInput) {
-            mShowValue.setBackgroundResource(R.drawable.customer_edit_error_bg);
-            mShowValue.requestFocus();
-            mShowValue.setText("");
-            mShowValue.startAnimation(shakeAnimation(6));
-        }
-        getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
+        mShowValue.clearFocus();
+        mShowValue.setText("");
+        mShowValue.requestFocus();
+        mShowValue.findFocus();
+//        if (clearInput) {
+//
+////            mShowValue.startAnimation(shakeAnimation(6));
+//        }
+//        getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
     }
 
     public static Animation shakeAnimation(int counts) {
@@ -766,7 +743,6 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
      */
     private void showFaceLoginErrorView() {
         mLlLoginLayout.setVisibility(View.GONE);
-        mLlFaceErrorView.setVisibility(View.VISIBLE);
         if (listener != null) {
             listener.setType(DinnerCustomerLoginDialogFragment.UI_TYPE_FACE_ERROR);
         }
@@ -776,31 +752,31 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
 
     private void startScanQc() {
         mShowValue.requestFocus();
-        startScan();
+//        startScan();
     }
 
-    /* 开始扫码并获取焦点*/
-    private void startScan() {
-        mScanCodeManager = new ScanCodeManager(getActivity(), mShowValue, true);
-        mScanCodeManager.start(new ScanCode.ScanCodeReceivedListener() {
-            @Override
-            public void onScanCodeReceived(String data) {
-                if (!TextUtils.isEmpty(data)) {
-                    UserActionEvent.start(UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE);
-                    loginByWeixin(data);        //微信登录
-                }
-            }
-        });
-        // add v8.8 begin
-        DeWoScanCode.getInstance().registerReceiveDataListener(new DeWoScanCode.OnReceiveDataListener() {
-            @Override
-            public void onReceiveData(String data) {
-                UserActionEvent.start(UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE);
-                loginByWeixin(data);        //微信登录
-            }
-        });
-        // add v8.8 end
-    }
+//    /* 开始扫码并获取焦点*/
+//    private void startScan() {
+//        mScanCodeManager = new ScanCodeManager(getActivity(), mShowValue, true);
+//        mScanCodeManager.start(new ScanCode.ScanCodeReceivedListener() {
+//            @Override
+//            public void onScanCodeReceived(String data) {
+//                if (!TextUtils.isEmpty(data)) {
+//                    UserActionEvent.start(UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE);
+//                    loginByWeixin(data);        //微信登录
+//                }
+//            }
+//        });
+//        // add v8.8 begin
+//        DeWoScanCode.getInstance().registerReceiveDataListener(new DeWoScanCode.OnReceiveDataListener() {
+//            @Override
+//            public void onReceiveData(String data) {
+//                UserActionEvent.start(UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE);
+//                loginByWeixin(data);        //微信登录
+//            }
+//        });
+//        // add v8.8 end
+//    }
 
     /**
      * OpenId登录
@@ -843,9 +819,9 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
 
     @Override
     public void onPause() {
-        if (mScanCodeManager != null) { // 关闭扫码枪
-            mScanCodeManager.stop();
-        }
+//        if (mScanCodeManager != null) { // 关闭扫码枪
+//            mScanCodeManager.stop();
+//        }
         super.onPause();
     }
 

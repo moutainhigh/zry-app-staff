@@ -132,7 +132,7 @@ public class BeautyCustomerLoginDialogFragment extends DinnerCustomerLoginBasicD
             mIbBack.setVisibility(View.GONE);
             mIbClose.setVisibility(View.VISIBLE);
             mTvTitle.setText(getString(R.string.customer_menber_login));
-            customerLoginFragment.setShowLoginView();
+//            customerLoginFragment.setShowLoginView();
         } else if (type == UI_TYPE_REGISTER) {
             this.uiType = type;
             VerifyHelper.verifyAlert(getActivity(), CustomerApplication.PERMISSION_CUSTOMER_CREATE,
@@ -140,7 +140,7 @@ public class BeautyCustomerLoginDialogFragment extends DinnerCustomerLoginBasicD
                         @Override
                         public void onPositive(User user, String code, Auth.Filter filter) {
                             super.onPositive(user, code, filter);
-                            showSecondDisPlay("");
+//                            showSecondDisPlay("");
                             replaceChildFragment(R.id.login_frame_layout, customerRegisterFragment, DinnerCustomerRegisterFragment.TAG);
 //                            if (getArguments() != null && getArguments().getInt(BeautyCustomerConstants.KEY_CUSTOMER_LOGIN_FLAG , BeautyCustomerConstants.CustomerLoginLaunchMode.LOGIN) ==  BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE){
 //                                Bundle bundle = new Bundle();

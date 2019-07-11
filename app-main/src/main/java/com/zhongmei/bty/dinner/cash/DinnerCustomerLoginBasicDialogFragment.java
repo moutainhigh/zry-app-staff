@@ -44,13 +44,6 @@ public class DinnerCustomerLoginBasicDialogFragment extends BasicDialogFragment 
 
     public int uiType = UI_TYPE_LOGIN;
 
-    private DinnerCustomerLoginFragment customerLoginFragment;
-
-    private DinnerCustomerRegisterFragment customerRegisterFragment;
-
-    private Map<String, ErpCurrency> erpCurrencyMap;
-
-    private ErpCommercialRelationDal mErpDal;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -68,51 +61,6 @@ public class DinnerCustomerLoginBasicDialogFragment extends BasicDialogFragment 
         return dialog;
     }
 
-    /**
-     * 控制副二屏的显示
-     *
-     * @param phone
-     */
-    public void showSecondDisPlay(String phone) {
-        if (settings == null) {
-            /*DisplayUserInfo dUserInfo =
-                    DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_ACCOUNT_INPUT, "", null, 0, true, 0);
-            DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
-            return;
-        }
-        boolean secondDisPlayQrCode = true;
-        if (settings[0]) {//开通微信公众号
-            if (uiType == UI_TYPE_REGISTER && !settings[1]) {//关注即会员开关关闭
-                secondDisPlayQrCode = false;
-            }
-        } else {
-            secondDisPlayQrCode = false;
-        }
-        try {
-            if (secondDisPlayQrCode) {
-                //扫描二维码后请求地址
-                if (mBitmap == null) {
-                    requestUuid = SystemUtils.genOnlyIdentifier();
-                    String url = ServerAddressUtil.getInstance().getOpenIdUrl() + requestUuid;
-                    mBitmap = EncodingHandler.createQRCode(url, barcodeWH);
-                }
-            }
-
-        } catch (WriterException e) {
-            Log.e(TAG, "", e);
-        }
-        if (secondDisPlayQrCode) {//有二维码
-            //DisplayServiceManager.doUpdateLoginInfo(getActivity(), DisPlayLoginInfo.COMMAND_NORMAL, phone, mBitmap, uiType == UI_TYPE_REGISTER);
-        } else {
-            if (uiType == UI_TYPE_REGISTER) {//注册页没有二维码展示广告
-                DisplayServiceManager.doCancel(getActivity());
-            } else {//展示手机号输入
-                /*DisplayUserInfo dUserInfo =
-                        DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_ACCOUNT_INPUT, phone, null, 0, true, 0);
-                DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
-            }
-        }
-    }
 
     public interface CallbackListener {
         void setType(int uiType);

@@ -17,6 +17,7 @@
             android:layout_height="30dp"
             android:background="@color/color_FDF6EC"
             android:gravity="center"
+            android:visibility="gone"
             android:textColor="@color/color_F85121"
             android:textSize="@dimen/text_13"
             tools:text="@string/customer_login_desc_1" />
@@ -30,6 +31,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/beauty_color_FFEFF6"
                 android:orientation="vertical">
 
                 <TextView
@@ -39,14 +41,14 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="手机号登录"
-                    android:textColor="@color/color_32ADF6"
+                    android:textColor="@color/beauty_color_FF2283"
                     android:textSize="16sp" />
 
                 <View
                     android:id="@+id/v_login_mobile"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@color/color_32ADF6" />
+                    android:background="@color/beauty_color_FF2283" />
             </LinearLayout>
 
             <View
@@ -59,6 +61,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:background="@color/beauty_color_FFEFF6"
                 android:orientation="vertical">
 
                 <TextView
@@ -68,14 +71,14 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/customer_login_type_card"
-                    android:textColor="@color/color_999999"
+                    android:textColor="@color/beauty_color_FF2283"
                     android:textSize="16sp" />
 
                 <View
                     android:id="@+id/v_login_card"
                     android:layout_width="match_parent"
                     android:layout_height="3dp"
-                    android:background="@color/color_32ADF6" />
+                    android:background="@color/beauty_color_FF2283" />
             </LinearLayout>
         </LinearLayout>
 
@@ -133,17 +136,20 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:background="@drawable/input_price_edit_selector"
+                    android:background="@drawable/customer_edit_error_bg"
                     android:drawableRight="@drawable/icon_delete"
                     android:gravity="center"
                     android:hint="@string/customer_login_hint"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
+                    android:clickable="true"
                     android:inputType="text"
+                    android:singleLine="true"
                     android:maxLength="20"
                     android:textColor="#6B6D6C"
                     android:textColorHint="#9FA0A0"
-                    android:textSize="@dimen/text_16" />
+                    android:textSize="@dimen/text_16"  />
+
             </LinearLayout>
 
             <Button
@@ -151,99 +157,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="19dp"
-                android:background="@drawable/btn_blue_selector"
+                android:background="@drawable/beauty_login_btn_selector"
                 android:gravity="center"
                 android:text="@string/member_login"
                 android:textColor="#fefefe"
                 android:textSize="@dimen/text_16" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:layout_marginTop="43dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="2dp"
-                    android:layout_weight="6"
-                    android:background="@drawable/dinner_customer_dash_line" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="@string/customer_login_hint_login_type2"
-                    android:textColor="@color/color_bcbcbc"
-                    android:textSize="@dimen/text_12" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="2dp"
-                    android:layout_weight="6"
-                    android:background="@drawable/dinner_customer_dash_line" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="28dp"
-                android:paddingTop="28dp">
-
-                <LinearLayout
-                    style="@style/customer_login_dialog_layout"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/card_login"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/btn_customer_login_read_card" />
-
-                    <TextView
-                        style="@style/customer_login_dialog_btn_text"
-                        android:text="@string/customer_login_read_card" />
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/customer_login_dialog_layout"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/face_login"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/btn_customer_login_face" />
-
-                    <TextView
-                        style="@style/customer_login_dialog_btn_text"
-                        android:text="@string/customer_face_login" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/member_register_root"
-                    style="@style/customer_login_dialog_layout"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:id="@+id/member_register"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/btn_customer_login_regiest" />
-
-                    <TextView
-                        style="@style/customer_login_dialog_btn_text"
-                        android:text="@string/register_str" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <include layout="@layout/fragment_face_login_error" />
 </FrameLayout>
 

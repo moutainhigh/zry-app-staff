@@ -140,6 +140,7 @@ public class BeautyCustomerBindCardDialog extends BasicDialogFragment implements
                         dismissAllowingStateLoss();
                     } else {
                         ToastUtil.showShortToast(response.getMessage());
+                        et_cardNo.requestFocus();
                     }
                     UserActionEvent.end(UserActionEvent.CUSTOMER_CREATE);
                 } catch (Exception e) {

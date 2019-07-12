@@ -300,7 +300,7 @@ class BeautyOrderCustomerLoginFragment : BasicCustomerSearchFragment(), View.OnC
             R.id.beauty_order_customer_room -> {
                 showTablePopuwindow()
             }
-            R.id.beauty_order_customer_search_login -> BeautyCustomerLoginDialogFragment().show(activity.getSupportFragmentManager(), "DinnerCustomerLoginDialog")
+            R.id.beauty_order_customer_search_login -> BeautyCustomerLoginDialogFragment().show(childFragmentManager, "DinnerCustomerLoginDialog")
             R.id.beauty_order_customer_base_info -> showCustomerDetailDialog(mCustomer!!.customerId!!)
         }
     }

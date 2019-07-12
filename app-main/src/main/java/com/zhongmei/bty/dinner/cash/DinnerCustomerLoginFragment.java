@@ -633,7 +633,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                 EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));// 发送失败到ReadKeyboardDialogFragment
             }
         };
-        return LoadingYFResponseListener.ensure(response, getChildFragmentManager());
+        return LoadingYFResponseListener.ensure(response, getFragmentManager());
     }
 
     /**

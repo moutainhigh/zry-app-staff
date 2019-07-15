@@ -618,9 +618,6 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                         }
                         EventBus.getDefault().post(new EventReadKeyboard(false, msg));// 发送失败到ReadKeyboardDialogFragment
                         loginFail(msg, !needPswd);//不需要验证密码的模式下，要清空输入框
-                        if (customerLoginType == CustomerLoginType.FACE_CODE) {
-                            showFaceLoginErrorView();
-                        }
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
@@ -633,7 +630,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                 EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));// 发送失败到ReadKeyboardDialogFragment
             }
         };
-        return LoadingYFResponseListener.ensure(response, getFragmentManager());
+        return LoadingYFResponseListener.ensure(response, getSupportFragmentManager());
     }
 
     /**

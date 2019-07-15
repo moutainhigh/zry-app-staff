@@ -12,6 +12,7 @@ public class BeautyNotifyEntity {
     private int memberNumber;//新增会员数
     private int todayReserverNumber;//今日预约数
     private int unpaidTradeNumber;//待付款订单
+    private int taskNumber;
 
     public int getCustomerNumber() {
         return customerNumber;
@@ -67,5 +68,13 @@ public class BeautyNotifyEntity {
 
     public void setUnDealReserverNumber(int unDealReserverNumber) {
         this.unDealReserverNumber = unDealReserverNumber;
+    }
+
+    public int getTaskNumber() {
+        return taskNumber;
+    }
+
+    public void setTaskNumber(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 }

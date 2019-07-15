@@ -20,6 +20,7 @@ import com.zhongmei.yunfu.context.session.core.user.AuthUser;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
 import com.zhongmei.yunfu.util.DialogUtil;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.CheckedChange;
@@ -45,6 +46,9 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
 
     @ViewById(R.id.tv_undeal_trade_tip)
     protected  TextView tv_undealBookingTradeTip;
+
+    @ViewById(R.id.tv_task_number_tip)
+    protected TextView tv_taskNumberTip;
 
     private IBeautyAnchor mBeautyAnchor;
 
@@ -124,6 +128,18 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
             tv_undealBookingTradeTip.setText(notifyEntity.getUnDealReserverNumber()+"");
         }
 
+        if(tv_taskNumberTip!=null && tv_taskNumberTip.getTag(R.id.tv_task_number_tip)==null){
+            tv_taskNumberTip.setVisibility(notifyEntity.getTaskNumber()<=0?View.GONE:View.VISIBLE);
+            tv_taskNumberTip.setText(notifyEntity.getTaskNumber()+"");
+        }
+
+    }
+
+    private void hideTip(){
+        if(tv_taskNumberTip!=null){
+            tv_taskNumberTip.setVisibility(View.GONE);
+            tv_taskNumberTip.setTag(R.id.tv_task_number_tip,true);//点击之后不在显示
+        }
     }
 
     @Override
@@ -178,6 +194,7 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
             case R.id.rb_anchor_task:
                 if (mBeautyAnchor != null) {
                     mBeautyAnchor.toTaskCenter();
+                    hideTip();
                 }
                 break;
             case R.id.rb_anchor_shop:

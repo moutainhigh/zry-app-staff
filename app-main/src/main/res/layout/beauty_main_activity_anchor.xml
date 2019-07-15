@@ -88,11 +88,30 @@
 
         <View style="@style/beauty_anchor_horizontal_line" />
 
-        <RadioButton
-            android:id="@+id/rb_anchor_task"
-            style="@style/beauty_main_anchor"
-            android:drawableTop="@drawable/icon_beauty_main_anchor_task"
-            android:text="任务" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/rb_anchor_task"
+                style="@style/beauty_main_anchor"
+                android:drawableTop="@drawable/icon_beauty_main_anchor_task"
+                android:text="任务" />
+
+            <TextView
+                android:id="@+id/tv_task_number_tip"
+                android:layout_width="@dimen/reserver_tip_size"
+                android:layout_height="@dimen/reserver_tip_size"
+                android:textSize="@dimen/text_10"
+                android:textColor="@color/text_white"
+                android:background="@drawable/shape_bg_cycle_red"
+                android:gravity="center"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"/>
+        </RelativeLayout>
 
         <View style="@style/beauty_anchor_horizontal_line" />
 

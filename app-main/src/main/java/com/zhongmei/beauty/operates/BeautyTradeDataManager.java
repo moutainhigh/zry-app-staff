@@ -2,10 +2,15 @@ package com.zhongmei.beauty.operates;
 
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.zhongmei.bty.basemodule.customer.bean.TaskQueryReq;
 import com.zhongmei.bty.basemodule.customer.util.CustomerUtil;
+import com.zhongmei.yunfu.bean.YFResponseList;
+import com.zhongmei.yunfu.data.LoadingYFResponseListener;
+import com.zhongmei.yunfu.db.entity.TaskRemind;
 import com.zhongmei.yunfu.db.enums.BookingOrderStatus;
 import com.zhongmei.bty.commonmodule.util.DateUtil;
 import com.zhongmei.bty.customer.util.CustomerContants;
@@ -19,6 +24,7 @@ import com.zhongmei.bty.basemodule.trade.operates.TradeDal;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import com.zhongmei.beauty.entity.UnpaidTradeVo;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
+import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.yunfu.orm.DBHelperManager;
 import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.db.entity.trade.Payment;
@@ -30,6 +36,8 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.db.enums.TradeStatus;
 import com.zhongmei.yunfu.db.enums.TradeType;
 import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.resp.YFResponseListener;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -168,6 +176,25 @@ public class BeautyTradeDataManager {
                 .lt(Booking.$.startTime, endTime)
                 .and()
                 .eq(Booking.$.statusFlag, StatusFlag.VALID);
+        return (int) tradeBuilder.countOf();
+    }
+
+    /**
+     * 查询未付款订单
+     *
+     * @param helper
+     * @return
+     */
+    public int queryUnPaidTradeNumber(DatabaseHelper helper) throws Exception {
+        Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
+        QueryBuilder tradeBuilder = tradeDao.queryBuilder();
+        tradeBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY)
+                .and()
+                .in(Trade.$.tradeStatus, TradeStatus.CONFIRMED, TradeStatus.UNPROCESSED)
+                .and()
+                .eq(Trade.$.statusFlag, StatusFlag.VALID)
+                .and()
+                .in(Trade.$.tradeType, TradeType.SELL, TradeType.UNOIN_TABLE_SUB, TradeType.UNOIN_TABLE_MAIN);
         return (int) tradeBuilder.countOf();
     }
 
@@ -423,6 +450,24 @@ public class BeautyTradeDataManager {
         }
 
         return null;
+    }
+
+    public void getTaskNumberSync(YFResponseListener listener) {
+        TaskQueryReq taskQueryReq = new TaskQueryReq();
+        taskQueryReq.setPageNo(1);
+        taskQueryReq.setPageSize(20);
+        taskQueryReq.setRemindTime(getDate(0).getTime());
+        taskQueryReq.setStatus(1);
+        taskQueryReq.setType(1);
+
+        BeautyCustomerOperates operates = OperatesFactory.create(BeautyCustomerOperates.class);
+        operates.getTaskList(taskQueryReq, listener);
+    }
+
+    private Date getDate(int afterDay) {
+        Long curTime = System.currentTimeMillis();
+        Long tarTime = curTime + (afterDay * 24 * 60 * 60 * 1000);
+        return new Date(tarTime);
     }
 
 

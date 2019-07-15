@@ -6,12 +6,18 @@ import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.zhongmei.yunfu.bean.YFResponseList;
+import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.data.LoadingYFResponseListener;
+import com.zhongmei.yunfu.db.entity.TaskRemind;
 import com.zhongmei.yunfu.db.entity.booking.Booking;
 import com.zhongmei.beauty.entity.BeautyNotifyEntity;
 import com.zhongmei.beauty.entity.UnpaidTradeVo;
+import com.zhongmei.yunfu.net.volley.VolleyError;
 import com.zhongmei.yunfu.orm.DBHelperManager;
 import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
@@ -19,6 +25,8 @@ import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.db.enums.TradeStatus;
 import com.zhongmei.yunfu.db.enums.TradeType;
+import com.zhongmei.yunfu.resp.YFResponseListener;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -48,6 +56,8 @@ public class BeautyNotifyCache {
     private BeautyDataListener mBeautyDataListener;//数据刷新
 
     private int mRefreshModule = MODULE_RESERVER;
+
+    private BeautyNotifyEntity mNotifyEntity = new BeautyNotifyEntity();
 
     private BeautyNotifyCache() {
         if (mWorkerHandler == null) {
@@ -93,6 +103,7 @@ public class BeautyNotifyCache {
         if (mWorkerHandler != null) {
             mWorkerHandler.sendEmptyMessage(WorkerHandler.WHAT_QUERY_NOTIFY);
         }
+        getTodayTaskNumber();
     }
 
     public void startModuleCache(int module) {
@@ -113,23 +124,45 @@ public class BeautyNotifyCache {
      * @return
      */
     private BeautyNotifyEntity queryBeautyNotify() {
-        BeautyNotifyEntity notifyEntity = new BeautyNotifyEntity();
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            notifyEntity.setCustomerNumber(mTradeManager.queryCustomerNumber(helper));
-            notifyEntity.setReserverNumber(mTradeManager.queryReserverNumber(helper));
-            notifyEntity.setUnDealReserverNumber(mTradeManager.queryUnDealReserverNumber(helper));
-            notifyEntity.setTradeNumber(mTradeManager.queryTradeNumber(helper));
-            notifyEntity.setMemberNumber(mTradeManager.queryMemberNumber());
-            notifyEntity.setTodayReserverNumber(mTradeManager.queryTodayReserverNumber(helper));
-            notifyEntity.setUnpaidTradeNumber(queryUnPaidTradeNumber(helper));
+            mNotifyEntity.setCustomerNumber(mTradeManager.queryCustomerNumber(helper));
+            mNotifyEntity.setReserverNumber(mTradeManager.queryReserverNumber(helper));
+            mNotifyEntity.setUnDealReserverNumber(mTradeManager.queryUnDealReserverNumber(helper));
+            mNotifyEntity.setTradeNumber(mTradeManager.queryTradeNumber(helper));
+            mNotifyEntity.setMemberNumber(mTradeManager.queryMemberNumber());
+            mNotifyEntity.setTodayReserverNumber(mTradeManager.queryTodayReserverNumber(helper));
+            mNotifyEntity.setUnpaidTradeNumber(mTradeManager.queryUnPaidTradeNumber(helper));
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             DBHelperManager.releaseHelper(helper);
         }
 
-        return notifyEntity;
+        return mNotifyEntity;
+    }
+
+    /**
+     * 获取今日任务数量
+     */
+    private void getTodayTaskNumber(){
+        YFResponseListener listener = new YFResponseListener<YFResponseList<TaskRemind>>() {
+
+            @Override
+            public void onResponse(YFResponseList<TaskRemind> response) {
+                if (YFResponseList.isOk(response)) {
+                    int taskCount=response.getContent().size();
+                    refreshTaskNotify(taskCount);
+                }
+            }
+
+            @Override
+            public void onError(VolleyError error) {
+                ToastUtil.showShortToast(error.getMessage());
+            }
+        };
+
+        mTradeManager.getTaskNumberSync(listener);
     }
 
     /**
@@ -147,6 +180,20 @@ public class BeautyNotifyCache {
     }
 
     /**
+     * 刷新任务数量
+     * @param taskNumber
+     */
+    private void refreshTaskNotify(int taskNumber){
+        mNotifyEntity.setTaskNumber(taskNumber);
+        if (mNotifyListenerSet != null) {
+            Iterator iter = mNotifyListenerSet.iterator();
+            while (iter.hasNext()) {
+                ((BeautyNotifyListener) iter.next()).refreshNotifyNumbers(mNotifyEntity);
+            }
+        }
+    }
+
+    /**
      * 刷新订单数据
      */
     private void refreshTrades() {
@@ -157,24 +204,6 @@ public class BeautyNotifyCache {
     }
 
 
-    /**
-     * 查询未付款订单
-     *
-     * @param helper
-     * @return
-     */
-    private int queryUnPaidTradeNumber(DatabaseHelper helper) throws Exception {
-        Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
-        QueryBuilder tradeBuilder = tradeDao.queryBuilder();
-        tradeBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY)
-                .and()
-                .in(Trade.$.tradeStatus, TradeStatus.CONFIRMED, TradeStatus.UNPROCESSED)
-                .and()
-                .eq(Trade.$.statusFlag, StatusFlag.VALID)
-                .and()
-                .in(Trade.$.tradeType, TradeType.SELL, TradeType.UNOIN_TABLE_SUB, TradeType.UNOIN_TABLE_MAIN);
-        return (int) tradeBuilder.countOf();
-    }
 
 
     public class WorkerHandler extends Handler {

@@ -11,6 +11,7 @@ import com.zhongmei.beauty.operates.BeautyNotifyCache;
 import com.zhongmei.util.AsyncImage;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.ShopInfoManager;
+import com.zhongmei.yunfu.context.util.SystemUtils;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
 
 import org.androidannotations.annotations.AfterViews;
@@ -24,6 +25,9 @@ import org.androidannotations.annotations.ViewById;
  */
 @EFragment(R.layout.beauty_main_fragment_operator)
 public class BeautyMainOperatorFragment extends BasicFragment implements BeautyNotifyCache.BeautyNotifyListener {
+
+    @ViewById(R.id.tv_version)
+    TextView tv_version;
 
     @ViewById(R.id.iv_shop_logo)
     protected ImageView iv_shopLogo;
@@ -53,6 +57,7 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
     @AfterViews
     public void init() {
         showShopInfo();
+        setVersion(SystemUtils.getVersionName());
         initEnvrionment();
     }
 
@@ -78,6 +83,20 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
             ImageHandler.getInstance().loadImage(getActivity().getApplicationContext(), imageLoader);*/
             AsyncImage.showImg(getActivity(), iv_shopLogo, logoUrl, R.drawable.shop_icon);
         }
+
+    }
+
+    /**
+     * 设置版本号
+     * @param versionName
+     */
+    private void setVersion(String versionName){
+        if(TextUtils.isEmpty(versionName)){
+            tv_version.setVisibility(View.GONE);
+            return;
+        }
+
+        tv_version.setText("V"+versionName);
 
     }
 

@@ -9,6 +9,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,6 +49,10 @@ import org.androidannotations.annotations.ViewById;
 @SuppressLint("ResourceAsColor")
 @EActivity(R.layout.zm_login_layout_init)
 public class LoginInitActivity extends BaseActivity implements ILoginController {
+
+
+    @ViewById(R.id.tv_version)
+    TextView tv_version;
 
     @ViewById(R.id.login_progress)
     ProgressBar progressBar;
@@ -121,7 +126,23 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
 
     @AfterViews
     protected void initView() {
+        setVersion(SystemUtils.getVersionName());
         checkEnvironment();
+    }
+
+
+    /**
+     * 设置版本号
+     * @param versionName
+     */
+    private void setVersion(String versionName){
+        if(TextUtils.isEmpty(versionName)){
+            tv_version.setVisibility(View.GONE);
+            return;
+        }
+
+        tv_version.setText("V"+versionName);
+
     }
 
     private void checkEnvironment() {

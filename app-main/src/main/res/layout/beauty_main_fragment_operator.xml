@@ -55,6 +55,15 @@
             android:visibility="gone"
             android:src="@drawable/icon_system_target_tip" />
 
+        <TextView
+            android:id="@+id/tv_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#999999"
+            android:textStyle="italic"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/iv_shop_logo"/>
+
         <View
             style="@style/beauty_horizontal_line"
             android:layout_below="@id/iv_shop_logo"

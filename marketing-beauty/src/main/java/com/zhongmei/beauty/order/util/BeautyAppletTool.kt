@@ -181,6 +181,8 @@ class BeautyAppletTool {
                     return PrivilegeType.BARGAIN
                 3 ->
                     return PrivilegeType.SECKILL
+                4 ->
+                    return PrivilegeType.SPECIAL_PRICE
                 else ->
                     return PrivilegeType.__UNKNOWN__
             }
@@ -197,6 +199,8 @@ class BeautyAppletTool {
                     return context.resources.getString(R.string.beauty_applet_bargain)
                 PrivilegeType.SECKILL.value() ->
                     return context.resources.getString(R.string.beauty_applet_seckill)
+                PrivilegeType.SPECIAL_PRICE.value() ->
+                    return context.resources.getString(R.string.beauty_applet_special_price)
                 else ->
                     return ""
 

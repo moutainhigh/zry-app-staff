@@ -983,7 +983,9 @@ public class BaseShoppingCart {
         for (IShopcartItem item : iShopcartItem) {
             if (item.getStatusFlag() == StatusFlag.VALID) {
                 //判断菜品是否能参与整单打折
-                if (item.getEnableWholePrivilege() == Bool.YES) {
+                boolean isAppletService=item.getAppletPrivilegeVo()!=null && item.getAppletPrivilegeVo().isPrivilegeValid();//小程序服务,包括(拼团，秒杀，砍价，特价活动(增强秒杀））
+                boolean isCardService=item.getCardServicePrivilgeVo()!=null && item.getCardServicePrivilgeVo().isPrivilegeValid();//次卡服务
+                if (item.getEnableWholePrivilege() == Bool.YES && !isAppletService && !isCardService) {
                     noDiscountAllAmout = noDiscountAllAmout.add(item.getActualAmount());
                     if (item.getPrivilege() != null && item.getPrivilege().getPrivilegeAmount() != null && item.getPrivilege().isValid()) {
                         noDiscPrivilegeAmout = noDiscPrivilegeAmout.add(item.getPrivilege().getPrivilegeAmount());
@@ -1562,6 +1564,11 @@ public class BaseShoppingCart {
 
         //次卡服务不参与会员价
         if (mIShopcartItemBase.getCardServicePrivilgeVo() != null && mIShopcartItemBase.getCardServicePrivilgeVo().isPrivilegeValid()) {
+            return;
+        }
+
+        //小程序购买不参会员价
+        if(mIShopcartItemBase.getAppletPrivilegeVo()!=null && mIShopcartItemBase.getAppletPrivilegeVo().isPrivilegeValid()){
             return;
         }
 

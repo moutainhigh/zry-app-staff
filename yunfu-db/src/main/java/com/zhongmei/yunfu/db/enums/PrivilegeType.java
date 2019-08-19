@@ -123,6 +123,12 @@ public enum PrivilegeType implements ValueEnum<Integer> {
     BARGAIN(25),
 
     /**
+     * 特价活动
+     * 小程序短展现的UI跟秒杀类似，更多方式的奖励
+     */
+    SPECIAL_PRICE(29),
+
+    /**
      * 会员折让
      */
     MEMBER_REBATE(26),

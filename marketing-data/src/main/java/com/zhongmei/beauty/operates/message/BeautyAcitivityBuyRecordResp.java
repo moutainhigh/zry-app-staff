@@ -30,7 +30,7 @@ public class BeautyAcitivityBuyRecordResp extends ResponseObject<List<BeautyAcit
     public BigDecimal activityPrice;
 
     /**
-     * 活动类型（1拼团  2秒杀  3 砍价）
+     * 活动类型（1拼团  2秒杀  3 砍价,4 增强拼团）
      */
     public Integer type;
 

@@ -42,7 +42,7 @@ public class CustomerLoginResp implements Serializable, ICustomer {
     private Integer hasFaceCode;//是否有人脸识别码
     private Integer storedPrivilegeType; //储值支付优惠类型  折扣，折让
     private BigDecimal storedPrivilegeValue; //储值支付优惠值
-    private BigDecimal storedFullAmount;
+    private BigDecimal storedFullAmount=BigDecimal.ZERO;
     private CustomerType customerType;
 
     /**

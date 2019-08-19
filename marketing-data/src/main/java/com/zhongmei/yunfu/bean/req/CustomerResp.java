@@ -80,7 +80,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     public List<BeautyCardEntity> entityCards;//实体卡信息，与详情接口一起返回
     public Integer storedPrivilegeType; //储值支付优惠类型  折扣，折让
     public BigDecimal storedPrivilegeValue; //储值支付优惠值
-    public BigDecimal storedFullAmount;
+    public BigDecimal storedFullAmount=BigDecimal.ZERO;
     private CustomerType customerType;
 
 

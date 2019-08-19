@@ -589,7 +589,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                             }
                             DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
                             EventBus.getDefault().post(new EventReadKeyboard(true, ""));// 发送成功到ReadKeyboardDialogFragment
-                            DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
+//                            DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
                             if (mLaunchMode == BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE) {
                                 // 顾客登录跳转到选卡界面
 //                                showChargingDialog(customerNew , null);

@@ -47,7 +47,7 @@ class BeautyProgramDialog : Dialog {
         tv_original_price.paintFlags = Paint.SUBPIXEL_TEXT_FLAG
         tv_original_price.setText(mContext.resources.getString(R.string.beauty_orginal_price) + Utils.formatPrice(mProgram.costPrice.toDouble()))
         tv_price.setText(Utils.formatPrice(mProgram.activityPrice.toDouble()))
-        tv_content_label.setText(BeautyAppletTool.getAppletNameByType(mContext, mProgram.type))
+        tv_content_label.setText(BeautyAppletTool.getAppletNameByType(mContext, mProgram.type,mProgram.marketingName))
         tv_content.setText(mProgram.describe)
         bindListener()
     }

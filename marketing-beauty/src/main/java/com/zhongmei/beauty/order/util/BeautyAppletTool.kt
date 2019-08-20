@@ -123,7 +123,7 @@ class BeautyAppletTool {
 
             var appletPrivigeVo: AppletPrivilegeVo = AppletPrivilegeVo()
             var trade: Trade = DinnerShoppingCart.getInstance().order.trade
-            var tradePrivilege: TradePrivilege = BuildPrivilegeTool.buildPrivige(applet.id, trade.uuid, shopcartItem, getAppletPrivilegeType(applet.type), getAppletNameByType(context, applet.type))
+            var tradePrivilege: TradePrivilege = BuildPrivilegeTool.buildPrivige(applet.id, trade.uuid, shopcartItem, getAppletPrivilegeType(applet.type), applet.marketingName)
             appletPrivigeVo.tradePrivilege = tradePrivilege
             shopcartItem.appletPrivilegeVo = appletPrivigeVo
         }
@@ -191,20 +191,20 @@ class BeautyAppletTool {
         /**
          * 根据活动类型返回字符串
          */
-        fun getAppletNameByType(context: Context, type: Int): String {
+        fun getAppletNameByType(context: Context, type: Int,name:String): String {
+            val buffer= StringBuffer()
             when (type) {
-                PrivilegeType.COLLAGE.value() ->
-                    return context.resources.getString(R.string.beauty_applet_collage)
-                PrivilegeType.BARGAIN.value() ->
-                    return context.resources.getString(R.string.beauty_applet_bargain)
-                PrivilegeType.SECKILL.value() ->
-                    return context.resources.getString(R.string.beauty_applet_seckill)
-                PrivilegeType.SPECIAL_PRICE.value() ->
-                    return context.resources.getString(R.string.beauty_applet_special_price)
-                else ->
-                    return ""
-
+                1 ->
+                    buffer.append(context.resources.getString(R.string.beauty_applet_collage)+"-")
+                2 ->
+                    buffer.append(context.resources.getString(R.string.beauty_applet_bargain)+"-")
+                3 ->
+                    buffer.append(context.resources.getString(R.string.beauty_applet_seckill)+"-")
+                4 ->
+                    buffer.append(context.resources.getString(R.string.beauty_applet_special_price)+"-")
             }
+            buffer.append(name)
+            return buffer.toString()
         }
 
 

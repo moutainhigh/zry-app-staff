@@ -36,7 +36,7 @@ class BeautyProgramView : LinearLayout {
     private lateinit var appletList: ArrayList<BeautyAcitivityBuyRecordResp>;
 
     constructor(context: Context, changeListener: ChangePageListener, changeMiddlePageListener: IChangeMiddlePageListener) : super(context) {
-        mContext = context;
+        mContext = context
         mChangeListener = changeListener
         mChangeMiddlePageListener = changeMiddlePageListener
         setupView()

@@ -413,7 +413,7 @@ public class BuildPrivilegeTool {
         BigDecimal fullValue=mCustomer.storedFullAmount;
 
         //打折金额限制
-        if(tradeAmout.compareTo(fullValue)<0){
+        if(tradeAmout.compareTo(fullValue)<=0){
             return null;
         }
 

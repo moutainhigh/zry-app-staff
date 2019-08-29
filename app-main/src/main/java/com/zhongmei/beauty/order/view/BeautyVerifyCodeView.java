@@ -67,7 +67,7 @@ public class BeautyVerifyCodeView extends LinearLayout {
         String couponCode=et_code.getText().toString().trim();
 
         if(TextUtils.isEmpty(couponCode)){
-            ToastUtil.showShortToast("请输入券码！");
+            ToastUtil.showShortToast(R.string.input_coupon_code);
             return;
         }
 
@@ -93,13 +93,15 @@ public class BeautyVerifyCodeView extends LinearLayout {
                 if(response.isOk()){
                     //需要将活动加入到购物车
                     addActivityToCart(response.getContent());
+                }else{
+                    ToastUtil.showShortToast(response.getMessage());
                 }
-                ToastUtil.showShortToast(response.getMessage());
+
             }
 
             @Override
             public void onError(VolleyError error) {
-                ToastUtil.showShortToast("请求数据异常！");
+                ToastUtil.showShortToast(R.string.rquest_error);
             }
         };
 
@@ -113,14 +115,15 @@ public class BeautyVerifyCodeView extends LinearLayout {
      */
     private void addActivityToCart(BeautyActivityBuyRecordResp activity){
         if(activity==null){
-            ToastUtil.showShortToast("没有获取到可用的券！");
+            ToastUtil.showShortToast(R.string.obtain_no_coupons);
             return;
         }
 
         if(!BeautyAppletTool.Companion.isAddtoShopcart(activity)){
             BeautyAppletTool.Companion.addDishToShopcart(activity, mChangePageListener, mChangeMiddlePageListener, getContext());
+            ToastUtil.showShortToast(R.string.activity_in_cart);
         }else{
-            ToastUtil.showShortToast("该券已使用！");
+            ToastUtil.showShortToast(R.string.coupon_be_used);
         }
 
         et_code.setText("");

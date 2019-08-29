@@ -7,7 +7,7 @@ import com.zhongmei.bty.commonmodule.data.operate.message.BaseRequest;
  *
  * @date 2018/6/28
  */
-public class BeautyAcitivityBuyRecordReq extends BaseRequest {
+public class BeautyActivityByCodeReq extends BaseRequest {
 
-    public Long customerId;
+    public String code;
 }

@@ -21,7 +21,7 @@ import com.zhongmei.atask.SimpleAsyncTask;
 import com.zhongmei.atask.TaskContext;
 import com.zhongmei.beauty.dialog.BeautyCreateOrEditMemberDocDialog;
 import com.zhongmei.beauty.operates.BeautyCustomerOperates;
-import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp;
+import com.zhongmei.beauty.operates.message.BeautyActivityBuyRecordResp;
 import com.zhongmei.beauty.widgets.DocDetailsTaskView;
 import com.zhongmei.beauty.widgets.DocDetailsTaskView_;
 import com.zhongmei.bty.basemodule.auth.application.CustomerApplication;
@@ -32,7 +32,6 @@ import com.zhongmei.bty.basemodule.customer.bean.CustomerDocRecordResp;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerExpenseRecordResp;
 import com.zhongmei.bty.basemodule.customer.bean.IntegralRecord;
 import com.zhongmei.bty.basemodule.customer.bean.coupon.CouponVo;
-import com.zhongmei.bty.basemodule.customer.bean.CustomerDocReq;
 import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
 import com.zhongmei.bty.basemodule.customer.message.NewMemberIntegralInfoResp;
 import com.zhongmei.bty.basemodule.customer.operates.CouponDal;
@@ -1168,10 +1167,10 @@ public class BeautyCustomerBalanceFragment extends BasicFragment implements OnCl
 
     private void getWxAppRecord() {
         if (mCustomer != null) {
-            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponseList<BeautyAcitivityBuyRecordResp>>() {
+            YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponseList<BeautyActivityBuyRecordResp>>() {
 
                 @Override
-                public void onResponse(YFResponseList<BeautyAcitivityBuyRecordResp> response) {
+                public void onResponse(YFResponseList<BeautyActivityBuyRecordResp> response) {
                     if (YFResponseList.isOk(response)) {
                         wxAppRecordAdapter = new CustomerWxAppRecordAdapter(getActivity(), response.getContent());
                         gridView.setAdapter(wxAppRecordAdapter);

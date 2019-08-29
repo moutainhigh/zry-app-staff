@@ -1,6 +1,6 @@
 package com.zhongmei.beauty.operates
 
-import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp
+import com.zhongmei.beauty.operates.message.BeautyActivityBuyRecordResp
 import com.zhongmei.beauty.operates.message.BeautyCardServiceHistoryResp
 import com.zhongmei.beauty.operates.message.BeautyCardServiceResp
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo
@@ -75,5 +75,7 @@ interface BeautyCustomerOperates : IOperates {
      * @param customerId 顾客id
      * @param listener
      */
-    fun getActivityBuyRecord(customerId: Long, listener: YFResponseListener<YFResponseList<BeautyAcitivityBuyRecordResp>>)
+    fun getActivityBuyRecord(customerId: Long, listener: YFResponseListener<YFResponseList<BeautyActivityBuyRecordResp>>)
+
+    fun getActivityByCode(code:String,listener: YFResponseListener<YFResponse<BeautyActivityBuyRecordResp>>)
 }

@@ -1,7 +1,6 @@
 package com.zhongmei.beauty.operates.message;
 
 import com.zhongmei.yunfu.resp.ResponseObject;
-import com.zhongmei.yunfu.resp.data.LoyaltyTransferResp;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,7 +10,7 @@ import java.util.List;
  *
  * @date 2018/6/28
  */
-public class BeautyAcitivityBuyRecordResp extends ResponseObject<List<BeautyAcitivityBuyRecordResp>> {
+public class BeautyActivityBuyRecordResp extends ResponseObject<List<BeautyActivityBuyRecordResp>> {
 
 
     /**

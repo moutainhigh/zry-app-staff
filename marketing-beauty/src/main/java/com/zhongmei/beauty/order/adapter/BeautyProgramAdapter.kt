@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.zhongmei.yunfu.beauty.R
 import com.zhongmei.bty.basemodule.shopmanager.interfaces.ChangePageListener
-import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp
+import com.zhongmei.beauty.operates.message.BeautyActivityBuyRecordResp
 import com.zhongmei.beauty.order.util.BeautyAppletTool
 import com.zhongmei.beauty.order.util.IChangeMiddlePageListener
 import com.zhongmei.beauty.order.view.BeautyProgramDialog
@@ -23,7 +23,7 @@ class BeautyProgramAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private var mContext: Context
     private var mChangeListener: ChangePageListener
     private var mChangeMiddlePageListener: IChangeMiddlePageListener
-    private var mProgramList: ArrayList<BeautyAcitivityBuyRecordResp>? = ArrayList<BeautyAcitivityBuyRecordResp>()
+    private var mProgramList: ArrayList<BeautyActivityBuyRecordResp>? = ArrayList<BeautyActivityBuyRecordResp>()
 
     constructor(context: Context, changeListener: ChangePageListener, changeMiddlePageListener: IChangeMiddlePageListener) {
         mContext = context
@@ -36,14 +36,14 @@ class BeautyProgramAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
-    public fun refreshView(recordList: ArrayList<BeautyAcitivityBuyRecordResp>) {
+    public fun refreshView(recordList: ArrayList<BeautyActivityBuyRecordResp>) {
         mProgramList!!.clear()
         mProgramList!!.addAll(recordList)
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        var program: BeautyAcitivityBuyRecordResp = mProgramList!![position]
+        var program: BeautyActivityBuyRecordResp = mProgramList!![position]
         holder!!.itemView.tv_title.setText(program.marketingName)
         holder!!.itemView.tv_projects.setText("可用项目："+program.dishName)
         holder!!.itemView.tv_content.setText("有效期：" + DateUtil.formatDate(program.validityPeriod))
@@ -88,7 +88,7 @@ class BeautyProgramAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
     /**
      * 显示详情
      */
-    private fun showDetailDialog(program: BeautyAcitivityBuyRecordResp) {
+    private fun showDetailDialog(program: BeautyActivityBuyRecordResp) {
         var dialog: BeautyProgramDialog = BeautyProgramDialog(mContext, mChangeListener, mChangeMiddlePageListener)
         dialog.setData(program)
         dialog.show()

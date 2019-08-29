@@ -29,6 +29,8 @@ public interface IChangeMiddlePageListener {
     public static final int MARKET_ACTIVITY_PAGE = 6;
     //整单页
     public static final int COMMON_DEFINE_PAGE = 7;
+    //券验证
+    public static final int VERIFY_CODE=8;
 
     /**
      * 当前所处的页面

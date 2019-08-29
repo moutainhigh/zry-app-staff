@@ -12,7 +12,7 @@ import android.view.WindowManager
 import com.zhongmei.beauty.order.util.BeautyAppletTool
 import com.zhongmei.yunfu.beauty.R
 import com.zhongmei.bty.basemodule.shopmanager.interfaces.ChangePageListener
-import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp
+import com.zhongmei.beauty.operates.message.BeautyActivityBuyRecordResp
 import com.zhongmei.beauty.order.util.IChangeMiddlePageListener
 import com.zhongmei.yunfu.context.util.Utils
 import kotlinx.android.synthetic.main.beauty_program_detail.*
@@ -24,7 +24,7 @@ import kotlinx.android.synthetic.main.beauty_program_detail.*
 class BeautyProgramDialog : Dialog {
     private var mChangeListener: ChangePageListener
     private var mChangeMiddlePageListener: IChangeMiddlePageListener;
-    private lateinit var mProgram: BeautyAcitivityBuyRecordResp
+    private lateinit var mProgram: BeautyActivityBuyRecordResp
     private var mContext: Context
 
     constructor(cotext: Context, changeListener: ChangePageListener, changeMiddlePageListener: IChangeMiddlePageListener) : super(cotext) {
@@ -33,7 +33,7 @@ class BeautyProgramDialog : Dialog {
         mChangeMiddlePageListener = changeMiddlePageListener
     }
 
-    fun setData(program: BeautyAcitivityBuyRecordResp) {
+    fun setData(program: BeautyActivityBuyRecordResp) {
         mProgram = program
     }
 

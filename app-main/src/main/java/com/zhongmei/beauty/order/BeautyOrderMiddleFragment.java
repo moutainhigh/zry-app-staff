@@ -15,6 +15,8 @@ import com.zhongmei.beauty.interfaces.BeautyOrderOperatorListener;
 import com.zhongmei.beauty.order.event.ActionClearShopcart;
 import com.zhongmei.beauty.order.view.BeautySingleDiscountView;
 import com.zhongmei.beauty.order.view.BeautySingleDiscountView_;
+import com.zhongmei.beauty.order.view.BeautyVerifyCodeView;
+import com.zhongmei.beauty.order.view.BeautyVerifyCodeView_;
 import com.zhongmei.beauty.utils.TradeUserUtil;
 import com.zhongmei.bty.basemodule.discount.enums.DiscountType;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
@@ -116,6 +118,8 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     Button btn_table;//桌台选择
     @ViewById(R.id.btn_party)
     Button btn_party;//服务员选择
+    @ViewById(R.id.btn_verify_code)
+    Button btn_verifyCode;//验券
     @ViewById(R.id.btn_clearcart)
     Button btn_clearcart;//清空购物车
 
@@ -267,7 +271,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
 
 
     @Click({R.id.btn_card,R.id.btn_integral,R.id.btn_coupon,R.id.btn_activity,
-            R.id.btn_discount,R.id.btn_trade_remark,R.id.btn_table,R.id.btn_party,R.id.btn_clearcart,
+            R.id.btn_discount,R.id.btn_trade_remark,R.id.btn_table,R.id.btn_party,R.id.btn_verify_code,R.id.btn_clearcart,
             R.id.btn_extra,R.id.btn_trade_item_discount,R.id.btn_trade_item_party,R.id.btn_trade_item_remark,
             R.id.btn_cosmetologist, R.id.btn_adviser, R.id.btn_sale})
     public void onClick(View v) {
@@ -298,6 +302,9 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
                 break;
             case R.id.btn_party://整单销售员
                 showShopowner();
+                break;
+            case R.id.btn_verify_code:
+                showVerifyCode();
                 break;
             case R.id.btn_clearcart://清空购物车
                 clearCart();
@@ -410,6 +417,19 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         ViewUtil.setButtonSelected(vActionBar, btn_party);
         showWaiter( R.string.beauty_choice_trade_wiater, false);
         mChangeListener.changePage(IChangeMiddlePageListener.COMMON_DEFINE_PAGE, null);
+    }
+
+    /**
+     * 展示验券的UI
+     */
+    private void showVerifyCode(){
+        clearSingleItem();
+        clearButtonSelected();
+        ViewUtil.setButtonSelected(vActionBar, btn_verifyCode);
+        BeautyVerifyCodeView beautyVerifyCodeView = BeautyVerifyCodeView_.build(getActivity(), mChangePageListener, mChangeListener,getFragmentManager());
+        showCustomContentView(beautyVerifyCodeView);
+//        mBeautyActionManager.setSelectedView(selectedView);
+        mChangeListener.changePage(IChangeMiddlePageListener.VERIFY_CODE, null);
     }
 
     BeautyBaseWaiter.OnUserCheckedListener checkedListener = new BeautyBaseWaiter.OnUserCheckedListener() {

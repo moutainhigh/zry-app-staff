@@ -290,6 +290,8 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
             case IChangeMiddlePageListener.COMMON_DEFINE_PAGE:
                 mLeftFragment.clearAllSelected();
                 break;
+            case IChangeMiddlePageListener.VERIFY_CODE://验券
+                break;
         }
         if (lastMiddlePage == IChangeMiddlePageListener.DEFINE_DISCOUNT_PAGE || lastMiddlePage == IChangeMiddlePageListener.BATCH_DISCOUNT_PAGE) {
             mLeftFragment.goDefaultDiscountMode();

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp;
+import com.zhongmei.beauty.operates.message.BeautyActivityBuyRecordResp;
 import com.zhongmei.bty.commonmodule.util.DateUtil;
 import com.zhongmei.yunfu.R;
 
@@ -22,9 +22,9 @@ public class CustomerWxAppRecordAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private Context mContext;
-    private List<BeautyAcitivityBuyRecordResp> mCouponList;
+    private List<BeautyActivityBuyRecordResp> mCouponList;
 
-    public CustomerWxAppRecordAdapter(Context context, List<BeautyAcitivityBuyRecordResp> couponList) {
+    public CustomerWxAppRecordAdapter(Context context, List<BeautyActivityBuyRecordResp> couponList) {
         this.mContext = context;
         this.mCouponList = couponList;
         mInflater = LayoutInflater.from(mContext);
@@ -66,7 +66,7 @@ public class CustomerWxAppRecordAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         if (mCouponList != null) {
-            BeautyAcitivityBuyRecordResp item = mCouponList.get(position);
+            BeautyActivityBuyRecordResp item = mCouponList.get(position);
             viewHolder.tv_title.setText(item.marketingName);
             viewHolder.tv_projects.setText("可用项目:"+item.dishName);
             viewHolder.tv_content.setText("有效期:" + DateUtil.formatDate(item.validityPeriod));

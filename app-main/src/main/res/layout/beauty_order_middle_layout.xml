@@ -82,6 +82,12 @@
                 android:drawableTop="@drawable/beauty_order_top_btn_remark_selector"
                 android:text="@string/trade_remark" />
 
+            <Button
+                android:id="@+id/btn_verify_code"
+                style="@style/beauty_order_middle_btn"
+                android:drawableTop="@drawable/beauty_order_top_btn_verifycode_selector"
+                android:text="@string/verify_code" />
+
 
             <Button
                 android:id="@+id/btn_clearcart"

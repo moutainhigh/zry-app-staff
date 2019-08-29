@@ -10,8 +10,7 @@ import com.zhongmei.bty.basemodule.shopmanager.interfaces.ChangePageListener
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart
 import com.zhongmei.bty.basemodule.shoppingcart.utils.CreateItemTool
 import com.zhongmei.yunfu.db.entity.trade.TradePrivilegeApplet
-import com.zhongmei.yunfu.util.ValueEnums
-import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp
+import com.zhongmei.beauty.operates.message.BeautyActivityBuyRecordResp
 import com.zhongmei.yunfu.Constant
 import com.zhongmei.yunfu.db.entity.trade.Trade
 import com.zhongmei.yunfu.db.enums.DishType
@@ -35,14 +34,14 @@ class BeautyAppletTool {
 
     companion object {
         //添加小程序到购物车
-        fun addDishToShopcart(applet: BeautyAcitivityBuyRecordResp, mChangePageLisener: ChangePageListener, changeMiddlePageListener: IChangeMiddlePageListener, context: Context) {
+        fun addDishToShopcart(applet: BeautyActivityBuyRecordResp, mChangePageLisener: ChangePageListener, changeMiddlePageListener: IChangeMiddlePageListener, context: Context) {
             applet.isUsed = true
             //临时添加
             var shopcarItem = CreateItemTool.createShopcartItem(applet.dishId)
 
             if (shopcarItem == null) {
                 ToastUtil.showShortToast("没有查询到对应的商品信息")
-                return;
+                return
             }
 
             shopcarItem.changeQty(BigDecimal(applet.goodsNum))
@@ -63,7 +62,7 @@ class BeautyAppletTool {
         /**
          * 移除小程序
          */
-        fun removeApplet(app: BeautyAcitivityBuyRecordResp) {
+        fun removeApplet(app: BeautyActivityBuyRecordResp) {
             app.isUsed = false
             removeAppletById(app.id.toString())
         }
@@ -71,7 +70,7 @@ class BeautyAppletTool {
         /**
          * 购物车移除小程序时，更新显示
          */
-        fun doAppletRemove(shopcartItem: IShopcartItemBase, mProgramList: ArrayList<BeautyAcitivityBuyRecordResp>?): Boolean {
+        fun doAppletRemove(shopcartItem: IShopcartItemBase, mProgramList: ArrayList<BeautyActivityBuyRecordResp>?): Boolean {
             if (shopcartItem.appletPrivilegeVo == null || !shopcartItem.appletPrivilegeVo.isPrivilegeValid) {
                 return false
             }
@@ -119,7 +118,7 @@ class BeautyAppletTool {
         /**
          * 将活动关联shopcartItem
          */
-        fun doReleteApplet(shopcartItem: ShopcartItem, applet: BeautyAcitivityBuyRecordResp, context: Context) {
+        fun doReleteApplet(shopcartItem: ShopcartItem, applet: BeautyActivityBuyRecordResp, context: Context) {
 
             var appletPrivigeVo: AppletPrivilegeVo = AppletPrivilegeVo()
             var trade: Trade = DinnerShoppingCart.getInstance().order.trade
@@ -128,7 +127,7 @@ class BeautyAppletTool {
             shopcartItem.appletPrivilegeVo = appletPrivigeVo
         }
 
-        fun buildAppletPrivilege(shopcartItem: ShopcartItem, applet: BeautyAcitivityBuyRecordResp, trade: Trade, tradePrivilege: TradePrivilege): TradePrivilegeApplet {
+        fun buildAppletPrivilege(shopcartItem: ShopcartItem, applet: BeautyActivityBuyRecordResp, trade: Trade, tradePrivilege: TradePrivilege): TradePrivilegeApplet {
             var tradePrivilegeApplet: TradePrivilegeApplet = TradePrivilegeApplet()
             tradePrivilegeApplet.uuid = SystemUtils.genOnlyIdentifier()
             tradePrivilegeApplet.brandDishId = applet.dishId
@@ -148,7 +147,7 @@ class BeautyAppletTool {
         /**
          * 初始化小程序选中状态
          */
-        fun initAppletStatus(list: List<BeautyAcitivityBuyRecordResp>): ArrayList<BeautyAcitivityBuyRecordResp> {
+        fun initAppletStatus(list: List<BeautyActivityBuyRecordResp>): ArrayList<BeautyActivityBuyRecordResp> {
             var shopcartItemList = DinnerShoppingCart.getInstance().shoppingCartDish;
             if (Utils.isEmpty(shopcartItemList)) {
                 return ArrayList(list)
@@ -160,7 +159,7 @@ class BeautyAppletTool {
                 }
                 map.put(item.appletPrivilegeVo.activityId.toString(), item.appletPrivilegeVo.activityId.toString())
             }
-            var resultList = ArrayList<BeautyAcitivityBuyRecordResp>()
+            var resultList = ArrayList<BeautyActivityBuyRecordResp>()
             list.forEach { it ->
                 if (map[it.id.toString()] != null) {
                     it.isUsed = true
@@ -170,6 +169,28 @@ class BeautyAppletTool {
                 resultList.add(it)
             }
             return resultList
+        }
+
+        /**
+         * 判断活动是否添加到购物车
+         */
+        fun isAddtoShopcart(activity:BeautyActivityBuyRecordResp):Boolean{
+            var shopcartItemList = DinnerShoppingCart.getInstance().shoppingCartDish;
+            if (Utils.isEmpty(shopcartItemList)) {
+                return false
+            }
+
+            shopcartItemList.forEach continuing@{ item ->
+                if (item.appletPrivilegeVo == null || !item.appletPrivilegeVo.isPrivilegeValid) {
+                    return@continuing
+                }
+
+                if(item.appletPrivilegeVo.activityId==activity.id){
+                    return true
+                }
+            }
+
+            return false
         }
 
 

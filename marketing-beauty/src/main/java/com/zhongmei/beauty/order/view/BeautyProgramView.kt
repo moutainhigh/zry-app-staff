@@ -16,7 +16,7 @@ import com.zhongmei.bty.basemodule.customer.manager.CustomerManager
 import com.zhongmei.bty.basemodule.shopmanager.interfaces.ChangePageListener
 import com.zhongmei.yunfu.net.volley.VolleyError
 import com.zhongmei.beauty.operates.BeautyCustomerOperates
-import com.zhongmei.beauty.operates.message.BeautyAcitivityBuyRecordResp
+import com.zhongmei.beauty.operates.message.BeautyActivityBuyRecordResp
 import com.zhongmei.beauty.order.util.IChangeMiddlePageListener
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory
 import com.zhongmei.yunfu.util.ToastUtil
@@ -33,7 +33,7 @@ class BeautyProgramView : LinearLayout {
     private var mChangeMiddlePageListener: IChangeMiddlePageListener;
     lateinit var programAdapter: BeautyProgramAdapter
     //小程序list
-    private lateinit var appletList: ArrayList<BeautyAcitivityBuyRecordResp>;
+    private lateinit var appletList: ArrayList<BeautyActivityBuyRecordResp>;
 
     constructor(context: Context, changeListener: ChangePageListener, changeMiddlePageListener: IChangeMiddlePageListener) : super(context) {
         mContext = context
@@ -60,8 +60,8 @@ class BeautyProgramView : LinearLayout {
         var beautyOperate: BeautyCustomerOperates = OperatesFactory.create(BeautyCustomerOperates::class.java)
         var customerId = CustomerManager.getInstance().dinnerLoginCustomer.customerId
         beautyOperate.getActivityBuyRecord(
-                customerId, object : YFResponseListener<YFResponseList<BeautyAcitivityBuyRecordResp>> {
-            override fun onResponse(response: YFResponseList<BeautyAcitivityBuyRecordResp>?) {
+                customerId, object : YFResponseListener<YFResponseList<BeautyActivityBuyRecordResp>> {
+            override fun onResponse(response: YFResponseList<BeautyActivityBuyRecordResp>?) {
                 var recordList = response!!.content
                 if (Utils.isEmpty(recordList)) {
                     showEmptyView()

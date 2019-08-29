@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    android:orientation="vertical"
+    android:paddingLeft="26dp"
+    android:paddingRight="26dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/beauty_middle_content_titlte_style"
+        android:text="@string/check_ticket_str" />
+
+    <EditText
+        android:id="@+id/et_code"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/bg_round_rectangle"
+        android:gravity="center"
+        android:hint="@string/input_voucher_code"
+        android:longClickable="false"
+        android:maxLines="1"
+        android:paddingLeft="20dp"
+        android:textColor="@color/settings_normalword"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btn_check"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/check_ticket_str"
+        android:background="@drawable/beauty_btn_main_selector"
+        android:textColor="@color/text_white"
+        android:textSize="16sp" />
+</LinearLayout>

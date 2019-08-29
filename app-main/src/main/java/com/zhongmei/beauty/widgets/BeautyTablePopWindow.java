@@ -115,7 +115,7 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
         setWidth(DensityUtil.dip2px(MainApplication.getInstance(), 500f));
         setHeight(DensityUtil.dip2px(MainApplication.getInstance(), 550f));
 //        setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.beauty_icon_bg_dialog));
+        setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.beauty_bg_dialog));
         setFocusable(false);
         setOutsideTouchable(true);
 

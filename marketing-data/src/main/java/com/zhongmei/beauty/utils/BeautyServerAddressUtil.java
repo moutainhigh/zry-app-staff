@@ -227,6 +227,14 @@ public class BeautyServerAddressUtil {
     }
 
     /**
+     * 根据券码查询活动
+     * @return
+     */
+    public static String getActivityByCode() {
+        return ShopInfoManager.getInstance().getServerKey() + "/pos/wxTradeData/queryByCode";
+    }
+
+    /**
      * 获取预定列表
      *
      * @return

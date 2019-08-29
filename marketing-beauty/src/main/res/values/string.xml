@@ -75,6 +75,7 @@
     <string name="trade_extra">加项</string>
     <string name="choice_table">选择工作台</string>
     <string name="clean_shopping_cart">清除购物车</string>
+    <string name="verify_code">验券</string>
     <string name="beauty_order_center_count_service">次卡服务抵扣：%1$s(%2$s)</string>
     <string name="beauty_coupon_enable_user">无法使用该优惠券，没有找到对应的哟欧惠劵规则！</string>
 

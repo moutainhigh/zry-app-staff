@@ -86,7 +86,7 @@
                 android:id="@+id/btn_verify_code"
                 style="@style/beauty_order_middle_btn"
                 android:drawableTop="@drawable/beauty_order_top_btn_verifycode_selector"
-                android:text="@string/verify_code" />
+                android:text="@string/activity_check" />
 
 
             <Button

@@ -14,4 +14,7 @@
     <string name="obtain_no_coupons">没有获取到可用的券!</string>
     <string name="coupon_be_used">该券已使用!</string>
     <string name="activity_in_cart">活动已加入购物车!</string>
+    <string name="input_comsume_proof">手动输入消费凭证</string>
+    <string name="activity_check">活动核销</string>
+    <string name="check">核销</string>
 </resources>

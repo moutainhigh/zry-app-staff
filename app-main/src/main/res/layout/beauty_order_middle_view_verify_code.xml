@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/tv_title"
         style="@style/beauty_middle_content_titlte_style"
-        android:text="@string/check_ticket_str" />
+        android:text="@string/activity_check" />
 
     <EditText
         android:id="@+id/et_code"
@@ -19,9 +19,10 @@
         android:layout_marginTop="26dp"
         android:background="@drawable/bg_round_rectangle"
         android:gravity="center"
-        android:hint="@string/input_voucher_code"
+        android:hint="@string/input_comsume_proof"
         android:longClickable="false"
         android:maxLines="1"
+        android:maxLength="12"
         android:inputType="number"
         android:paddingLeft="20dp"
         android:textColor="@color/settings_normalword"
@@ -33,7 +34,7 @@
         android:layout_height="48dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="@string/check_ticket_str"
+        android:text="@string/check"
         android:background="@drawable/beauty_btn_main_selector"
         android:textColor="@color/text_white"
         android:textSize="16sp" />

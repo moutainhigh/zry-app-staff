@@ -44,7 +44,7 @@
     <string name="beauty_marketing_campaign_addfail_notchoose">请点选产品或者服务</string>
     <string name="beauty_marketing_campaign_addfail">添加的条目信息不满足活动规则，请检查条目选择</string>
     <string name="beauty_card_service_label">会员权益：次卡服务%1$s/抵扣%2$d次</string>
-    <string name="beauty_wx_service_label">会员权益：小程序活动%1$s/抵扣%2$d次</string>
+    <string name="beauty_wx_service_label">权益：小程序活动%1$s/抵扣%2$d次</string>
     <string name="beauty_orginal_price">原价：</string>
     <string name="beauty_customr_unlogin">请先登录</string>
     <string name="beauty_applet_collage">拼团</string>

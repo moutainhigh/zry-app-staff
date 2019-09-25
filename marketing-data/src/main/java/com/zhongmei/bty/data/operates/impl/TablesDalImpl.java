@@ -249,7 +249,7 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
             Map<Long, Tables> tablesFinder = new HashMap<Long, Tables>();
             List<Long> tablseIds = new ArrayList<Long>();
 //			List<Tables> tablesList = helper.getDao(Tables.class).queryForEq(Tables.$.statusFlag, StatusFlag.VALID);
-            List<Tables> tablesList = helper.getDao(Tables.class).queryBuilder().orderBy(Tables.$.sort, true).where().eq(Tables.$.statusFlag, StatusFlag.VALID).query();
+            List<Tables> tablesList = helper.getDao(Tables.class).queryBuilder().orderBy(Tables.$.id, true).where().eq(Tables.$.statusFlag, StatusFlag.VALID).query();
 //			for (Tables tables : tablesList) {
 //				tablesFinder.put(tables.getId(), tables);
 //				tablseIds.add(tables.getId());

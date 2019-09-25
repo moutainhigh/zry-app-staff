@@ -19,7 +19,7 @@ public class CustomerCouponResp implements Serializable {
     private BigDecimal discountValue;
     private Long endTime;//使用结束时间
     private BigDecimal fullValue;//满额
-    private Long id;
+    private Long id;//券id
     private String name;
     private String remark;
     private Long customerCouponId;//记录id

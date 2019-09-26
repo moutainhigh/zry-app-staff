@@ -411,13 +411,14 @@ public class BuildPrivilegeTool {
     public static TradePrivilege buildChargePrivilege(ShoppingCartVo mShoppingCartVo, CustomerResp mCustomer){
         BigDecimal tradeAmout= DinnerShoppingCart.getInstance().getTradeAmoutCanDiscount(mShoppingCartVo);
         BigDecimal fullValue=mCustomer.storedFullAmount;
+        ChargePrivilegeType type=mCustomer.getStoredPrivilegeType();
 
         //打折金额限制
-        if(tradeAmout.compareTo(fullValue)<=0){
+        if(tradeAmout.compareTo(fullValue)<=0 || type==null){
             return null;
         }
 
-        ChargePrivilegeType type=mCustomer.getStoredPrivilegeType();
+
         BigDecimal privilegeValue=mCustomer.storedPrivilegeValue;
 
         TradePrivilege chargePrivilege=new TradePrivilege();

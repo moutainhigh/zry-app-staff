@@ -191,6 +191,9 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     }
 
     public ChargePrivilegeType getStoredPrivilegeType() {
+        if(storedPrivilegeType==null){
+            return null;
+        }
         return ValueEnums.toEnum(ChargePrivilegeType.class,storedPrivilegeType);
     }
 

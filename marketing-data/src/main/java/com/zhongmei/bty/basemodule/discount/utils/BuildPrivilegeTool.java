@@ -680,7 +680,7 @@ public class BuildPrivilegeTool {
         mTradePrivilege.setPrivilegeType(PrivilegeType.COUPON);
         mTradePrivilege.setPrivilegeValue(BigDecimal.ZERO);
         mTradePrivilege.setPrivilegeAmount(BigDecimal.ZERO);
-        mTradePrivilege.setPromoId(mShopcartItemBase.getCouponPrivilegeVo().getCouponInfoId());
+        mTradePrivilege.setPromoId(mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().getPromoId());
         mTradePrivilege.setPrivilegeAmount(mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().getPrivilegeAmount().negate());
         mTradePrivilege.setPrivilegeValue(mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().getPrivilegeAmount());
         mTradePrivilege.setPrivilegeName(mShopcartItemBase.getCouponPrivilegeVo().getCoupon().getName());

@@ -114,7 +114,8 @@
     <string name="customer_input_name">*请输入会员姓名</string>
     <string name="customer_input_phone">*请输入电话号码</string>
     <string name="customer_input_password_first">*设置支付密码</string>
-    <string name="customer_input_password_second">*确认支付密码</string>
+    <string name="customer_input_password_second">*确认支付密码</string>\
+    <string name="customer_password_default_hint">*支付密码默认为电话号码后6位</string>
     <string name="customer_add">添加会员</string>
     <string name="slide_menu_customer">顾客</string>
     <string name="slide_menu_card_manager">实体卡管理</string>

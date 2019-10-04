@@ -230,9 +230,9 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
                         CouponPrivilegeVo couponPrivilegeVo = mCouponsManager.getCouponPrivilegeVo(currentVo);
                         //礼品券对应的商品不可用
                         if (!isGiftCouponEnable(currentVo, couponPrivilegeVo)) {
-
                             return;
                         }
+
                         boolean isOk = DinnerShopManager.getInstance().getShoppingCart().setGiftCouponPrivilege(couponPrivilegeVo);
                         //如果添加成功
                         if (isOk) {
@@ -260,7 +260,6 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
                         CouponPrivilegeVo couponPrivilegeVo = mCouponsManager.getCouponPrivilegeVo(currentVo);
                         //礼品券对应的商品不可用
                         if (!isGiftCouponEnable(currentVo, couponPrivilegeVo)) {
-
                             return;
                         }
                         boolean isOk = DinnerShopManager.getInstance().getShoppingCart().setGiftCouponPrivilege(couponPrivilegeVo);

@@ -3424,6 +3424,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                     break;
                 }
             }
+
+            //如果value为null,将当前shopItem加入购物车(使用礼品券，如果购物车有商品符合，直接给该商品加入优惠，否则将商品加入购物车)
+            if(value==null){
+                addDishToShoppingCart(tempItem,true);
+                shopcartItemList.add(tempItem);
+                value=tempItem;
+            }
+
         }
         if (value != null && value.getCouponPrivilegeVo() != null && value.getCouponPrivilegeVo().getTradePrivilege() != null && tempItem.getCouponPrivilegeVo() != null) {
             if (value.getCouponPrivilegeVo().getTradePrivilege().getPromoId().compareTo(

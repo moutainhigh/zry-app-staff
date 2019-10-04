@@ -92,10 +92,13 @@ public class CouponsManager {
                             shopcartItems = ShoppingCart.getInstance().mergeShopcartItem(ShoppingCart.getInstance().fastFootShoppingCartVo);
                         }
 
+                        Map<Long, Long> tempPromoId = new HashMap<Long, Long>();
+
                         if (shopcartItems != null && !shopcartItems.isEmpty()) {
                             for (IShopcartItem shopcartItem : shopcartItems) {
                                 if (shopcartItem != null && (shopcartItem.getStatusFlag() == StatusFlag.VALID) && shopcartItem.getCouponPrivilegeVo() != null && shopcartItem.getCouponPrivilegeVo().isValid()) {
-                                    promoIds.add(shopcartItem.getCouponPrivilegeVo().getTradePrivilege().getPromoId());
+                                    Long promoId = shopcartItem.getCouponPrivilegeVo().getTradePrivilege().getPromoId();
+                                    tempPromoId.put(promoId,promoId);
                                 }
                             }
                         }
@@ -104,7 +107,7 @@ public class CouponsManager {
 
                         if (list != null && !list.isEmpty()) {
 
-                            Map<Long, Long> tempPromoId = new HashMap<Long, Long>();
+
 
 //                           //设置购物车中已经有的整单优惠券
                             if (tradevo != null) {
@@ -124,7 +127,7 @@ public class CouponsManager {
                             for (CouponVo vo : mCouponVoList) {
                                 // 验证购物车当前的整单优惠劵
                                 if (tempPromoId != null && tempPromoId.size() > 0) {
-                                    if (tempPromoId.containsKey(vo.getCouponInfo().getId())) {
+                                    if (tempPromoId.containsKey(vo.getCouponInfo().getCustomerCouponId())) {
                                         vo.setSelected(true);
                                         data.setSelectedCouponVo(vo);
                                     }

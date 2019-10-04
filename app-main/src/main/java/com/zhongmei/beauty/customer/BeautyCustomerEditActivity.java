@@ -844,17 +844,21 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             String passwrod = mPassword.getText().toString();
             String passwrodSed = mPasswordSecond.getText().toString();
 
-            if (TextUtils.isEmpty(passwrod)) {
-                ToastUtil.showShortToast(R.string.customer_no_password);
-                return false;
-            } else if (passwrod.length() != 6) {
-                ToastUtil.showShortToast(R.string.customer_password_length_6);
-                return false;
-            } else if (!passwrod.equals(passwrodSed)) {
-                ToastUtil.showShortToast(R.string.customer_password_not_match);
-                return false;
+            if(TextUtils.isEmpty(passwrod)){
+                mCustomer.password = mCustomer.mobile.substring(mCustomer.mobile.length()-6,mCustomer.mobile.length());
+            }else{
+                if (TextUtils.isEmpty(passwrod)) {
+                    ToastUtil.showShortToast(R.string.customer_no_password);
+                    return false;
+                } else if (passwrod.length() != 6) {
+                    ToastUtil.showShortToast(R.string.customer_password_length_6);
+                    return false;
+                } else if (!passwrod.equals(passwrodSed)) {
+                    ToastUtil.showShortToast(R.string.customer_password_not_match);
+                    return false;
+                }
+                mCustomer.password=passwrod;
             }
-            mCustomer.password = passwrod;
         }
         SexUtils.setSex(mCustomer, mSex);
         if (groupId != null) {

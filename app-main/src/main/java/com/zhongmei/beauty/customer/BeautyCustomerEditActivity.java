@@ -840,6 +840,12 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 mCustomer.mobile = mPhonenum.getText().toString();
             //}
         }
+
+        if (TextUtils.isEmpty(mCustomer.mobile) || !NumberUtil.isCellPhone(mCustomer.mobile)) {
+            ToastUtil.showShortToast(getString(R.string.customer_mobile_regulation_error));
+            return false;
+        }
+
         if (type == CustomerActivity.PARAM_ADD && mMisPosInput == false) {
             String passwrod = mPassword.getText().toString();
             String passwrodSed = mPasswordSecond.getText().toString();
@@ -877,6 +883,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         if (!TextUtils.isEmpty(mFaceCode)) {
             mCustomer.faceCode = mFaceCode;
         }
+        mCustomer.localModifyDateTime = System.currentTimeMillis();
         return true;
     }
 
@@ -885,11 +892,6 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
      */
     private void insertOrUpdate() {
         if (setUpdateCustomerValue()) {
-            mCustomer.localModifyDateTime = System.currentTimeMillis();
-            if (TextUtils.isEmpty(mCustomer.mobile) || !NumberUtil.isCellPhone(mCustomer.mobile)) {
-                ToastUtil.showShortToast(getString(R.string.customer_mobile_regulation_error));
-                return;
-            }
             /*switch (type) {
                 case CustomerActivity.PARAM_ADD:// 使用新接口,添加国籍
                     doCreateCustomer(mCustomer, uniqueCode);

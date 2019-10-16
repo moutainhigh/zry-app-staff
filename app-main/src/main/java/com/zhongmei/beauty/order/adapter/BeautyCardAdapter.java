@@ -135,10 +135,10 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
     }
 
     private boolean inspectServiceCount(BeautyCardServiceInfo vo) {
-        if(vo.serviceTotalTime==-1){
+        if(vo.serviceTotalTime==-1|| vo.serviceRemainderTime == -1 ){
             return true;
         }
-        int count = vo.serviceTotalTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
+        int count = vo.serviceRemainderTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
         return count > 0;
     }
 
@@ -146,7 +146,7 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
         if(vo.serviceTotalTime==-1 || vo.serviceRemainderTime == -1){
             return "无限次数";
         }
-        int remainderCount = vo.serviceTotalTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
+        int remainderCount = vo.serviceRemainderTime - mBeautyCardManager.getCacheCountById(ServerPrivilegeType.COUNT_SERVER, vo.cardInstanceId);
         return String.format(mContext.getString(R.string.beauty_card_service_surplus_count), remainderCount);
     }
 

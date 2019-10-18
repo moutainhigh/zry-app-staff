@@ -28,9 +28,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 订单中心订单列表正餐Presenter
- */
+
 
 public class BeautyOrderCenterListPresenter extends OrderCenterListPresenter {
 
@@ -78,7 +76,6 @@ public class BeautyOrderCenterListPresenter extends OrderCenterListPresenter {
     public void addSaleNoteTab(List<Pair<String, Integer>> childTabs) {
         addChildTab(childTabs, R.string.sales_all, DbQueryConstant.SALES_ALL);
         addChildTab(childTabs, R.string.sales_unpaid, DbQueryConstant.SALES_UNPAID);
-//        addChildTab(childTabs, R.string.sales_paying, DbQueryConstant.SALES_PAYING);
         addChildTab(childTabs, R.string.sales_paid, DbQueryConstant.SALES_PAID);
         addChildTab(childTabs, R.string.sales_refunded, DbQueryConstant.SALES_REFUNDED);
         addChildTab(childTabs, R.string.sales_invalid, DbQueryConstant.SALES_INVALID);

@@ -10,65 +10,41 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 
 import java.math.BigDecimal;
 
-/**
- * TradeDeposit is a ORMLite bean type. Corresponds to the database table "trade_deposit"
- */
+
 @DatabaseTable(tableName = "trade_deposit")
 public class TradeDeposit extends UuidEntityBase implements Cloneable {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_deposit"
-     */
+
     public interface $ extends UuidEntityBase.$ {
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * trade_uuid
-         */
+
         public static final String tradeUuid = "trade_uuid";
 
-        /**
-         * id
-         */
+
         public static final String id = "id";
 
-        /**
-         * deposit_pay
-         */
+
         public static final String depositPay = "deposit_pay";
 
-        /**
-         * deposit_refund
-         */
+
         public static final String depositRefund = "deposit_refund";
 
-        /**
-         * status_flag
-         */
+
         public static final String statusFlag = "status_flag";
 
-        /**
-         * server_create_time
-         */
+
         public static final String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         public static final String serverUpdateTime = "server_update_time";
 
-        /**
-         * brand_identy
-         */
+
         public static final String brandIdenty = "brand_identy";
 
 
@@ -95,33 +71,23 @@ public class TradeDeposit extends UuidEntityBase implements Cloneable {
     @DatabaseField(columnName = "deposit_refund")
     private BigDecimal depositRefund;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 
-    /**
-     * 1按人数 2按订单
-     */
+
     @DatabaseField(columnName = "type")
     private Integer type;
 
@@ -241,8 +207,7 @@ public class TradeDeposit extends UuidEntityBase implements Cloneable {
     }
 
     public boolean isNeedToPay() {
-        //押金大于o 才可以支付押金
-        if (this.statusFlag == 1 && this.depositPay != null && this.depositPay.compareTo(BigDecimal.ZERO) == 1) {
+                if (this.statusFlag == 1 && this.depositPay != null && this.depositPay.compareTo(BigDecimal.ZERO) == 1) {
             return true;
         }
         return false;

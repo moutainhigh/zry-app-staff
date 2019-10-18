@@ -2,12 +2,7 @@ package com.zhongmei.bty.dinner.table.view;
 
 import com.zhongmei.bty.dinner.table.model.DinnertableModel;
 
-/**
- * 桌台区域内容视图，不带滚动功能
- *
- * @version: 1.0
- * @date 2015年9月6日
- */
+
 @SuppressWarnings("deprecation")
 public class DinnerZoneContentView extends ZoneContentView {
 

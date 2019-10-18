@@ -17,11 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Desc
- *
- * @created 2017/7/27
- */
+
 public class CustomerArrivalShopDalImpl extends AbstractOpeartesImpl implements CustomerArrivalShopDal {
 
     public CustomerArrivalShopDalImpl(IOperates.ImplContext context) {
@@ -40,8 +36,7 @@ public class CustomerArrivalShopDalImpl extends AbstractOpeartesImpl implements 
         } finally {
             LocalDBManager.releaseHelper();
         }
-        return customerArrivalShop;//如果出现异常，返回原对象
-    }
+        return customerArrivalShop;    }
 
     @Override
     public CustomerArrivalShop getLastByCustomerId(Long customerId) {
@@ -130,22 +125,18 @@ public class CustomerArrivalShopDalImpl extends AbstractOpeartesImpl implements 
                     .orderBy(CustomerArrivalShop.$.serverCreateTime, false).where()
                     .ge(CustomerArrivalShop.$.serverCreateTime, date.getTime());
 
-            //添加状态筛选
-            if (Utils.isNotEmpty(arriveStatusList)) {
+                        if (Utils.isNotEmpty(arriveStatusList)) {
                 where.and().in(CustomerArrivalShop.$.arrivalStatus, arriveStatusList);
             }
 
-            //添加桌台筛选
-            if (Utils.isNotEmpty(tableIds)) {
+                        if (Utils.isNotEmpty(tableIds)) {
                 where.and().in(CustomerArrivalShop.$.tableId, tableIds);
             }
 
-            //添加到点方式筛选
-            if (Utils.isNotEmpty(arriveWayList)) {
+                        if (Utils.isNotEmpty(arriveWayList)) {
                 where.and().in(CustomerArrivalShop.$.arrivalWay, arriveWayList);
             }
-            //添加处理状态筛选
-            if (Utils.isNotEmpty(OperateStatus)) {
+                        if (Utils.isNotEmpty(OperateStatus)) {
                 where.and().in(CustomerArrivalShop.$.operateStatus, OperateStatus);
             }
             customerArrivalShopList = where.query();

@@ -12,15 +12,9 @@ import java.net.NetworkInterface;
 
 public class MacAddressUtil {
 
-    /**
-     * android 6.0及以上、7.0以下 获取mac地址
-     *
-     * @param context
-     * @return
-     */
+
     public static String getMacAddress(Context context) {
-        // 如果是6.0以下，直接通过wifimanager获取
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             String macAddress0 = getMacAddress0(context);
             if (!TextUtils.isEmpty(macAddress0)) {
                 return macAddress0;
@@ -71,12 +65,7 @@ public class MacAddressUtil {
 
     }
 
-    /**
-     * Check whether accessing wifi state is permitted
-     *
-     * @param context
-     * @return
-     */
+
     private static boolean isAccessWifiStateAuthorized(Context context) {
         if (PackageManager.PERMISSION_GRANTED == context
                 .checkCallingOrSelfPermission("android.permission.ACCESS_WIFI_STATE")) {

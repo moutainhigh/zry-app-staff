@@ -67,10 +67,7 @@ import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @version: 1.0
- * @date 2015年9月18日
- */
+
 @SuppressLint("UseSparseArrays")
 public class DinnertableStateCache {
 
@@ -78,20 +75,14 @@ public class DinnertableStateCache {
 
     private BusinessType mBusinessType;
 
-    // 催菜数目
-    private long tradeItemOperationCount = 0;
+        private long tradeItemOperationCount = 0;
 
-    private boolean isFreshedFinish = true;//桌台刷新，是否刷新完成
-
+    private boolean isFreshedFinish = true;
     private static class LazySingletonHolder {
         private static final DinnertableStateCache INSTANCE = new DinnertableStateCache();
     }
 
-    /**
-     * 需要在UI线程中调用
-     *
-     * @param listener
-     */
+
     public static void open(OnDataChangeListener listener, BusinessType businessType) {
         LazySingletonHolder.INSTANCE._open(listener, businessType);
     }
@@ -104,9 +95,7 @@ public class DinnertableStateCache {
         LazySingletonHolder.INSTANCE._onResume();
     }
 
-    /**
-     * 需要在UI线程中调用
-     */
+
     public static void close() {
         LazySingletonHolder.INSTANCE._close();
     }
@@ -115,24 +104,10 @@ public class DinnertableStateCache {
         return LazySingletonHolder.INSTANCE._isClosed();
     }
 
-    /**
-     * 刷新所有缓存数据。将阻塞调用线程
-     *
-     * @throws Exception
-     */
-	/*public synchronized static void refresh() {
-		try {
-			LazySingletonHolder.INSTANCE._refresh();
-		} catch (Exception e) {
-			Log.e(TAG, "refresh error!", e);
-		}
-	}*/
 
-    /**
-     * 刷新所有缓存数据。将阻塞调用线程
-     *
-     * @throws Exception
-     */
+
+
+
     public static void querybyId(String id) {
         try {
             LazySingletonHolder.INSTANCE._querybyId(id);
@@ -145,10 +120,7 @@ public class DinnertableStateCache {
         return LazySingletonHolder.INSTANCE._getStateWrapperDatas();
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年9月18日
-     */
+
     public static interface OnDataChangeListener {
 
         void onDataChanged(Map<Long, StateWrapper> stateWrapperMap);
@@ -194,18 +166,8 @@ public class DinnertableStateCache {
         return !opened;
     }
 
-    /**
-     * 刷新所有缓存数据
-     *
-     * @throws Exception
-     */
-	/*synchronized void _refresh() {
-		try {
-			dataHolder.refresh();
-		} catch (Exception e) {
-			Log.e(TAG, "refresh dinnertable state error!", e);
-		}
-	}*/
+
+
 
     void _querybyId(String id) {
         try {
@@ -219,12 +181,7 @@ public class DinnertableStateCache {
         return dataHolder.getStateWrapperDatas();
     }
 
-    /**
-     * @param <>
-     * @param <>
-     * @version: 1.0
-     * @date 2015年9月18日
-     */
+
     private class DataHodler {
 
         private Map<Long, StateWrapper> stateWrapperDatas;
@@ -247,11 +204,6 @@ public class DinnertableStateCache {
 
 
         private Where buildTradeWhere(Where where, List<Long> tradeIds) throws Exception {
-//			if(mBusinessType== BusinessType.DINNER){
-//				where.in(Trade.$.businessType,mBusinessType,BusinessType.GROUP);
-//			}else{
-//				where.eq(Trade.$.businessType, mBusinessType);
-//			}
 
             where.in(Trade.$.businessType, BusinessType.DINNER, BusinessType.GROUP, BusinessType.BUFFET);
 
@@ -266,19 +218,14 @@ public class DinnertableStateCache {
                     .in(Trade.$.id, tradeIds.toArray());
         }
 
-        /**
-         * 查询或刷新，根据坐台id刷新数据，如果不传入桌台，则刷新所有的数据
-         *
-         * @param areaId
-         */
+
         private void queryAndRefresh(String areaId) {
             UserActionEvent.start(UserActionEvent.DINNER_TABLE_DATA_QUERY);
             long cur = System.currentTimeMillis();
 
             DatabaseHelper helper = DBHelperManager.getHelper();
             try {
-                // 查询Tables
-                long curTable = System.currentTimeMillis();
+                                long curTable = System.currentTimeMillis();
                 Dao<Tables, Long> tablesDao = helper.getDao(Tables.class);
                 QueryBuilder queryBuild = tablesDao.queryBuilder();
                 queryBuild.selectColumns(Tables.$.id, Tables.$.tableStatus, Tables.$.modifyDateTime);
@@ -301,8 +248,7 @@ public class DinnertableStateCache {
 
                 List<TradeMainSubRelation> trademainSubs = helper.getDao(TradeMainSubRelation.class).queryBuilder().query();
 
-                List<Long> unionTradeIds = new ArrayList<>();//存放所有联台单id(包括子单与主单id)
-                for (TradeMainSubRelation trademainSub : trademainSubs) {
+                List<Long> unionTradeIds = new ArrayList<>();                for (TradeMainSubRelation trademainSub : trademainSubs) {
                     if (!unionTradeIds.contains(trademainSub.getMainTradeId())) {
                         unionTradeIds.add(trademainSub.getMainTradeId());
                     }
@@ -310,11 +256,7 @@ public class DinnertableStateCache {
                     unionTradeIds.add(trademainSub.getSubTradeId());
                 }
 
-                // 查询TradeTable
-//					Calendar cad = Calendar.getInstance();
-//					cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
-//					cad.add(Calendar.DAY_OF_MONTH, -7);
-                Dao<TradeTable, String> tradeTableDao = helper.getDao(TradeTable.class);
+                                Dao<TradeTable, String> tradeTableDao = helper.getDao(TradeTable.class);
                 List<TradeTable> tradeTableListAll = tradeTableDao.queryBuilder()
                         .where()
                         .in(TradeTable.$.selfTableStatus, TableStatus.OCCUPIED, TableStatus.EMPTY)
@@ -322,7 +264,6 @@ public class DinnertableStateCache {
                         .in(TradeTable.$.tableId, tablesIds.toArray())
                         .or()
                         .in(TradeTable.$.tradeId, unionTradeIds)
-//							.and().gt(TradeTable.$.serverCreateTime,cad.getTime().getTime())
                         .query();
 
 
@@ -346,32 +287,7 @@ public class DinnertableStateCache {
                     }
                 }
 
-                // 查询Trade
-                Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
-//					List<Trade> tradeListAll = tradeDao.queryBuilder()
-//							.selectColumns(Trade.$.uuid,
-//									Trade.$.id,
-//									Trade.$.serverUpdateTime,
-//									Trade.$.tradeStatus,
-//									Trade.$.sourceId,
-//									Trade.$.saleAmount,
-//									Trade.$.tradeAmount,
-//									Trade.$.deliveryType,
-//									Trade.$.tradePayStatus
-//							)
-//							.where()
-//							.eq(Trade.$.businessType, mBusinessType)
-//							.and()
-//							.in(Trade.$.tradeStatus, TradeStatus.CONFIRMED, TradeStatus.UNPROCESSED)
-//							.and()
-//							.eq(Trade.$.statusFlag, StatusFlag.VALID)
-//							.and()
-//							.eq(Trade.$.tradeType, TradeType.SELL)
-//							.and()
-//							.in(Trade.$.id, tradeIdsList.toArray())
-//							// .and().gt(Trade.$.serverCreateTime,
-//							// cad.getTime().getTime())
-//							.query();
+                                Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
 
                 QueryBuilder tradeBuilder = tradeDao.queryBuilder();
                 tradeBuilder.selectColumns(Trade.$.uuid,
@@ -389,17 +305,10 @@ public class DinnertableStateCache {
                 buildTradeWhere(tradeBuilder.where(), tradeIdsList);
                 List<Trade> tradeListAll = tradeBuilder.query();
 
-//					List<Long> tradeIds=new ArrayList<>();
-//					if (Utils.isNotEmpty(tradeListAll)) {
-//						for (Trade trade : tradeListAll) {
-//							tradeIds.add(trade.getId());
-//						}
-//					}
 
                 Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
 
-                // 查询TradeExtra .and().notIn(TradeExtra.$.isPrinted,PrintStatus.FAILED,PrintStatus.PRINTING,PrintStatus.UNPRINT)
-                List<TradeExtra> tradeExtrasListAll = tradeExtraDao.queryBuilder()
+                                List<TradeExtra> tradeExtrasListAll = tradeExtraDao.queryBuilder()
                         .selectColumns(TradeExtra.$.tradeUuid,
                                 TradeExtra.$.serialNumber,
                                 TradeExtra.$.isPrinted,
@@ -425,8 +334,7 @@ public class DinnertableStateCache {
 
                 List<TradeItem> tradeItemListAll = null;
                 if (oldTradeIdsList.size() != 0) {
-                    // 查询TradeItem
-                    Dao<TradeItem, String> itemDao = helper.getDao(TradeItem.class);
+                                        Dao<TradeItem, String> itemDao = helper.getDao(TradeItem.class);
                     QueryBuilder<TradeItem, String> qb = itemDao.queryBuilder();
                     qb.selectColumns(TradeItem.$.tradeTableUuid,
                             TradeItem.$.issueStatus,
@@ -436,8 +344,7 @@ public class DinnertableStateCache {
                             TradeItem.$.actualAmount
                     );
                     Where<TradeItem, String> where = qb.where();
-                    //仅查询tradeExtra isPrinted为空的订单的tradeItems
-                    where.and(where.in(TradeItem.$.tradeId, oldTradeIdsList.toArray()),
+                                        where.and(where.in(TradeItem.$.tradeId, oldTradeIdsList.toArray()),
                             where.and(where.eq(TradeItem.$.statusFlag, StatusFlag.VALID),
                                     where.isNull(TradeItem.$.parentUuid).or().eq(TradeItem.$.parentUuid, ""),
                                     where.isNotNull(TradeItem.$.tradeTableUuid),
@@ -468,8 +375,7 @@ public class DinnertableStateCache {
                     SettradeMainSubRelation.add(tradeMainSubRelation.getMainTradeId());
                 }
 
-                //查询订单操作列表
-                Dao<PrintOperation, String> printOperationsDao = helper.getDao(PrintOperation.class);
+                                Dao<PrintOperation, String> printOperationsDao = helper.getDao(PrintOperation.class);
                 List<PrintOperation> printOperationsListAll = printOperationsDao.queryBuilder()
                         .selectColumns(PrintOperation.$.extendsStr, PrintOperation.$.opType)
                         .where()
@@ -477,8 +383,7 @@ public class DinnertableStateCache {
                         .query();
 
 
-                //将订单对应的预结单操作记录菜存入map
-                Map<Long, PrintOperation> printOperationMap = new HashMap<Long, PrintOperation>();
+                                Map<Long, PrintOperation> printOperationMap = new HashMap<Long, PrintOperation>();
                 if (printOperationsListAll != null) {
                     for (PrintOperation printOperation : printOperationsListAll) {
                         JSONObject extendsStr = null;
@@ -496,16 +401,8 @@ public class DinnertableStateCache {
                 }
 
 
-//					Dao<AsyncHttpRecord, String> httpRecordDao = helper.getDao(AsyncHttpRecord.class);
-//					//查询订单的http请求状态
-//					List<AsyncHttpRecord> httpRecords=httpRecordDao.queryBuilder()
-//							.orderBy(AsyncHttpRecord.$.clientUpdateTime,false)
-//							.where()
-//							.ne(AsyncHttpRecord.$.status, AsyncHttpState.SUCCESS)
-//							.query();
 
-                //查询加菜表
-                Dao<AddItemBatch, Long> addItemBatchDao = helper.getDao(AddItemBatch.class);
+                                Dao<AddItemBatch, Long> addItemBatchDao = helper.getDao(AddItemBatch.class);
                 List<AddItemBatch> addItemBatches = addItemBatchDao.queryBuilder()
                         .orderBy(AddItemBatch.$.serverCreateTime, true)
                         .where()
@@ -528,18 +425,6 @@ public class DinnertableStateCache {
                         .eq(AddItemRecord.$.statusFlag, StatusFlag.VALID)
                         .query();
 
-                //将订单http请求记录存入map
-//					Map<String, List<AsyncHttpRecord>> tradeHttpRecordMap = null;//订单上的异步记录
-//					if(httpRecords!=null){
-//						tradeHttpRecordMap = new HashMap<>();
-//						for(AsyncHttpRecord record:httpRecords){
-//							if(tradeHttpRecordMap.get(record.getTradeUuId())==null){
-//								List<AsyncHttpRecord> httpRecordList=new ArrayList<>();
-//								tradeHttpRecordMap.put(record.getTradeUuId(),httpRecordList);
-//							}
-//							tradeHttpRecordMap.get(record.getTradeUuId()).add(record);
-//						}
-//					}
 
                 Map<Long, List<AddItemRecord>> mapAdditemRecrods = null;
                 if (Utils.isNotEmpty(addItemRecords)) {
@@ -556,8 +441,7 @@ public class DinnertableStateCache {
                 }
 
 
-                //将加菜记录加入到map中
-                Map<Long, List<AddItemVo>> addItemMap = new HashMap<>();
+                                Map<Long, List<AddItemVo>> addItemMap = new HashMap<>();
                 if (Utils.isNotEmpty(addItemBatches)) {
                     for (AddItemBatch addItemBatch : addItemBatches) {
 
@@ -566,8 +450,7 @@ public class DinnertableStateCache {
                             addItemMap.put(addItemBatch.getTradeId(), addItemVos);
                         }
 
-                        //构建AddItemVo
-                        AddItemVo addItemVo = new AddItemVo();
+                                                AddItemVo addItemVo = new AddItemVo();
                         addItemVo.setmAddItemBatch(addItemBatch);
 
                         if (mapAdditemRecrods != null && mapAdditemRecrods.containsKey(addItemBatch.getId())) {
@@ -578,38 +461,24 @@ public class DinnertableStateCache {
                     }
                 }
 
-                Map<Long, List<TradeTableInfo>> ttInfosFinder = new HashMap<Long, List<TradeTableInfo>>();//key 桌台id
-                Map<String, DinnertableStatus> tradeTableStatusMap = new HashMap<String, DinnertableStatus>();//key tradeTableUUid
-
-                // 查三天之内的单据
-                // Calendar cad = Calendar.getInstance();
-                // cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
-                // cad.add(Calendar.DAY_OF_MONTH, -3);
-                Map<Long, BusinessType> tableTradeBusiness = new HashMap<>();
-                Map<Long, TradeTableInfo> mapSubTrade = new HashMap<>();//联台单子单集合
-                Map<Long, TradeTableInfo> mapMainTrade = new HashMap<>();//联台单主单集合
-                for (Trade trade : tradeListAll) {
-                    // 桌台过滤未确认的点评订单 20160428 begin
-                    if ((trade.getSource() == SourceId.DIANPING /*|| trade.getSource() == SourceId.XIN_MEI_DA*/)
+                Map<Long, List<TradeTableInfo>> ttInfosFinder = new HashMap<Long, List<TradeTableInfo>>();                Map<String, DinnertableStatus> tradeTableStatusMap = new HashMap<String, DinnertableStatus>();
+                                                                                Map<Long, BusinessType> tableTradeBusiness = new HashMap<>();
+                Map<Long, TradeTableInfo> mapSubTrade = new HashMap<>();                Map<Long, TradeTableInfo> mapMainTrade = new HashMap<>();                for (Trade trade : tradeListAll) {
+                                        if ((trade.getSource() == SourceId.DIANPING )
                             && (trade.getTradeStatus() == TradeStatus.UNPROCESSED || trade.getTradeStatus() == TradeStatus.FINISH)) {
                         continue;
                     }
 
-                    // 桌台过滤未确认的点评订单 20160428 end
-                    String uuid = trade.getUuid();
-                    // 流水号
-                    TradeExtra tradeExtra = tradeExtraMap.get(trade.getUuid());
+                                        String uuid = trade.getUuid();
+                                        TradeExtra tradeExtra = tradeExtraMap.get(trade.getUuid());
                     if (tradeExtra == null) {
                         continue;
                     }
 
-                    //设置订单菜品总额（不包含附加费）
-                    MathShoppingCartTool.setTradeDishAmount(trade, tradeItemMap.get(uuid));
+                                        MathShoppingCartTool.setTradeDishAmount(trade, tradeItemMap.get(uuid));
                     if (trade.getTradeStatus() == TradeStatus.CONFIRMED) {
-                        if (tradeExtraMap.get(uuid).getIsPrinted() == null || tradeExtra.getIsPrinted() == TradePrintStatus.__UNKNOWN__) {//老数据根据tradeItem计算订单状态
-
-                            // 菜品的出单状态
-                            List<TradeItem> itemList = tradeItemMap.get(uuid);
+                        if (tradeExtraMap.get(uuid).getIsPrinted() == null || tradeExtra.getIsPrinted() == TradePrintStatus.__UNKNOWN__) {
+                                                        List<TradeItem> itemList = tradeItemMap.get(uuid);
                             if (itemList != null) {
                                 for (TradeItem item : itemList) {
                                     String tradeUuid = item.getTradeUuid();
@@ -620,8 +489,7 @@ public class DinnertableStateCache {
                                     } else if (item.getServingStatus() == ServingStatus.SERVING) {
                                         status = DinnertableStatus.SERVING;
                                     } else if (issueStatus == IssueStatus.FINISHED) {
-                                        // 全退产生的数量为0的记录如果已经出单成功了，就排除掉
-                                        if (item.getQuantity().compareTo(BigDecimal.ZERO) == 0) {
+                                                                                if (item.getQuantity().compareTo(BigDecimal.ZERO) == 0) {
                                             continue;
                                         }
                                         status = DinnertableStatus.ISSUED;
@@ -635,10 +503,7 @@ public class DinnertableStateCache {
                                 }
                             }
 
-                        } else {//新数据根据tradeExtra计算订单状态
-
-//								DinnertableStatus status;
-//								TradeExtra tradeExtral=tradeExtraMap.get(uuid);
+                        } else {
                             String tradeUuid = trade.getUuid();
                             if (tradeExtra.getHasServing() == TradeServingStatus.SERVED) {
                                 tradeTableStatusMap.put(tradeUuid, DinnertableStatus.SERVING);
@@ -656,8 +521,7 @@ public class DinnertableStateCache {
                     }
 
 
-                    // 单据桌台
-                    List<TradeTable> tradeTableList = tradeTableMap.get(uuid);
+                                        List<TradeTable> tradeTableList = tradeTableMap.get(uuid);
                     if (tradeTableList != null) {
                         for (TradeTable tradeTable : tradeTableList) {
                             DinnertableStatus dishStatus = tradeTableStatusMap.get(tradeTable.getTradeUuid());
@@ -666,9 +530,7 @@ public class DinnertableStateCache {
                             }
 
                             PrintOperation preCashPrintOperation = printOperationMap.get(trade.getId());
-//								List<AsyncHttpRecord> httpRecord=tradeHttpRecordMap.get(trade.getUuid());//订单http请求信息
-                            List<AddItemVo> addItemVoList = addItemMap.get(trade.getId());//订单加菜信息
-
+                            List<AddItemVo> addItemVoList = addItemMap.get(trade.getId());
                             tableTradeBusiness.put(tradeTable.getTableId(), trade.getBusinessType());
 
                             TradeTableInfo ttInfo = new TradeTableInfo(trade, tradeTable,
@@ -681,25 +543,20 @@ public class DinnertableStateCache {
                             list.add(ttInfo);
 
                             if (ttInfo.tradeType == TradeType.UNOIN_TABLE_SUB
-                                    && (ttInfo.businessType == BusinessType.DINNER || ttInfo.businessType == BusinessType.BUFFET)) {//如果是联台子单
-
+                                    && (ttInfo.businessType == BusinessType.DINNER || ttInfo.businessType == BusinessType.BUFFET)) {
                                 mapSubTrade.put(ttInfo.tradeId, ttInfo);
                             }
                         }
-                    } else {//联台单是没有tradeTable数据的
-                        DinnertableStatus dishStatus = tradeTableStatusMap.get(trade.getUuid());
+                    } else {                        DinnertableStatus dishStatus = tradeTableStatusMap.get(trade.getUuid());
                         if (dishStatus == null) {
                             dishStatus = DinnertableStatus.UNISSUED;
                         }
 
                         PrintOperation preCashPrintOperation = printOperationMap.get(trade.getId());
-//								List<AsyncHttpRecord> httpRecord=tradeHttpRecordMap.get(trade.getUuid());//订单http请求信息
-                        List<AddItemVo> addItemVoList = addItemMap.get(trade.getId());//订单加菜信息
-
+                        List<AddItemVo> addItemVoList = addItemMap.get(trade.getId());
                         TradeTableInfo ttInfo = new TradeTableInfo(trade, new TradeTable(),
                                 dishStatus, preCashPrintOperation, addItemVoList);
-                        //联台单TradeTableInfo
-                        mapMainTrade.put(ttInfo.tradeId, ttInfo);
+                                                mapMainTrade.put(ttInfo.tradeId, ttInfo);
                     }
 
 
@@ -729,9 +586,7 @@ public class DinnertableStateCache {
                 }
 
 
-                //trade for end
-                Map<Long, StateWrapper> stateWrapperMap = new HashMap<Long, StateWrapper>();//存储所有桌台状态
-                for (Tables tables : tablesList) {
+                                Map<Long, StateWrapper> stateWrapperMap = new HashMap<Long, StateWrapper>();                for (Tables tables : tablesList) {
                     TradeTableInfo unionMainTrade = null;
                     List<TradeTableInfo> unionSubTrades = null;
 
@@ -740,16 +595,12 @@ public class DinnertableStateCache {
                         unionSubTrades = mapUnionSubTrades.get(unionMainTrade.tradeId);
                     }
 
-                    TableStateInfo stateInfo = new TableStateInfo(tables, tableTradeBusiness.get(tables.getId()));//桌台状态
-                    List<TradeTableInfo> ttInfos = ttInfosFinder.get(tables.getId());//桌台上的订单状态
-                    StateWrapper stateWrapper = new StateWrapper(stateInfo, ttInfos, unionMainTrade, unionSubTrades);//桌台状态
-                    stateWrapperMap.put(tables.getId(), stateWrapper);
+                    TableStateInfo stateInfo = new TableStateInfo(tables, tableTradeBusiness.get(tables.getId()));                    List<TradeTableInfo> ttInfos = ttInfosFinder.get(tables.getId());                    StateWrapper stateWrapper = new StateWrapper(stateInfo, ttInfos, unionMainTrade, unionSubTrades);                    stateWrapperMap.put(tables.getId(), stateWrapper);
                 }
 
                 stateWrapperDatas.putAll(stateWrapperMap);
 
-                // stateWrapperDatas = ;
-                Log.i(TAG, "stateWrapperDatas.count=" + stateWrapperDatas.size());
+                                Log.i(TAG, "stateWrapperDatas.count=" + stateWrapperDatas.size());
                 if (listener != null) {
                     listener.onDataChanged(stateWrapperDatas);
                 }
@@ -765,7 +616,6 @@ public class DinnertableStateCache {
 
 
         public void refresh() throws Exception {
-//			refreshOutTime();
             queryAndRefresh(null);
         }
 
@@ -808,12 +658,7 @@ public class DinnertableStateCache {
 
     private static final Uri URI_TRADE_INIT_CONFIG = DBHelperManager.getUri(TradeInitConfig.class);
 
-    /**
-     * 数据改变监听器
-     *
-     * @version: 1.0
-     * @date 2015年10月10日
-     */
+
     public void _onStop() {
     }
 
@@ -825,7 +670,6 @@ public class DinnertableStateCache {
 
         @Override
         public void onChange(Collection<Uri> uris) {
-            // add 20160525 yutang
 
             if (uris.contains(URI_TABLES) || uris.contains(URI_TRADE) || uris.contains(URI_TRADE_TABLE)
                     || uris.contains(URI_TRADE_ITEM)
@@ -868,8 +712,7 @@ public class DinnertableStateCache {
             if (uris.contains(URI_BOOKING)) {
                 Log.i("zhubo", "booking表变化");
                 BookingTablesManager manager = new BookingTablesManager();
-                //获取已预定桌台列表
-                HashMap<String, BookingTable> bookingMap = null;
+                                HashMap<String, BookingTable> bookingMap = null;
                 try {
                     bookingMap = manager.getCurrentPeriodBookingTables();
                 } catch (Exception e) {
@@ -885,10 +728,7 @@ public class DinnertableStateCache {
 
         @Override
         public void onChange(List<AsyncHttpRecord> allRecord) {
-            //将订单http请求记录存入map
-            Map<String, List<AsyncHttpRecord>> tradeHttpRecordMap = null;//订单上的异步记录
-            Map<Long, List<AsyncHttpRecord>> tableHttpRecordMap = null;//订单上的异步记录
-
+                        Map<String, List<AsyncHttpRecord>> tradeHttpRecordMap = null;            Map<Long, List<AsyncHttpRecord>> tableHttpRecordMap = null;
             if (allRecord != null) {
                 tableHttpRecordMap = new HashMap<>();
                 tradeHttpRecordMap = new HashMap<>();
@@ -921,229 +761,10 @@ public class DinnertableStateCache {
         }
     }
 
-    /**
-     *
 
-     * @version: 1.0
-     * @date 2015年9月18日
-     *
-     */
-//	public static class StateWrapper {
-//		public TradeTableInfo unionTableMainTrade;
-//
-//		public List<TradeTableInfo> unionTableSubTrades;
-//
-//		public final TableStateInfo tableStateInfo;
-//
-//		public final Collection<TradeTableInfo> tradeTableInfos;
-//
-//		StateWrapper(TableStateInfo tableStateInfo, Collection<TradeTableInfo> tradeTableInfos) {
-//			this.tableStateInfo = tableStateInfo;
-//			this.tradeTableInfos = tradeTableInfos;
-//		}
-//
-//
-//		StateWrapper(TableStateInfo tableStateInfo, Collection<TradeTableInfo> tradeTableInfos,TradeTableInfo unionTableMainTrade,List<TradeTableInfo> unionTableSubTrades) {
-//			this.tableStateInfo = tableStateInfo;
-//			this.tradeTableInfos = tradeTableInfos;
-//			this.unionTableMainTrade=unionTableMainTrade;
-//			this.unionTableSubTrades=unionTableSubTrades;
-//		}
-//	}
 
-    /**
-     *
 
-     * @version: 1.0
-     * @date 2015年9月18日
-     *
-     */
-//	public static class TableStateInfo {
-//
-//		public final Long id;
-//
-//		public final TableStatus tableStatus;
-//
-//		public final Long serverUpdateTime;
-//
-//		public final boolean isGroup;//团餐
-//
-//		public final boolean isBuffet;//团餐
-//
-//		public final boolean isDinner;//团餐
-//
-//		public TableStateInfo(Tables table,boolean isGroup,boolean isBuffet,boolean isDinner) {
-//			this.id = table.getId();
-//			this.tableStatus = table.getTableStatus();
-//			this.serverUpdateTime = table.verValue();
-//			this.isGroup=isGroup;
-//			this.isBuffet=isBuffet;
-//			this.isDinner=isDinner;
-//		}
-//
-//	}
 
-    /**
-     * 未结账的单据桌台信息
-     *
 
-     * @version: 1.0
-     * @date 2015年9月18日
-     *
-     */
-//	public static class TradeTableInfo implements Comparable<TradeTableInfo> {
-//
-//		/**
-//		 * trade_table.id
-//		 */
-//		public final Long id;
-//
-//		/**
-//		 * trade_table.uuid
-//		 */
-//		public final String uuid;
-//
-//		/**
-//		 * trade_table.server_update_time
-//		 */
-//		public final Long serverUpdateTime;
-//
-//		/**
-//		 * trade.uuid
-//		 */
-//		public final String tradeUuid;
-//
-//		/**
-//		 * trade.id
-//		 */
-//		public final Long tradeId;
-//
-//		/**
-//		 * trade.server_update_time
-//		 */
-//		public final Long tradeServerUpdateTime;
-//
-//		/**
-//		 * trade.client_update_time
-//		 */
-//		public final Long tradeClientUpdateTime;
-//
-//		/**
-//		 * trade.trade_status
-//		 */
-//		public final TradeStatus tradeStatus;
-//
-//		public final BusinessType businessType;
-//
-//		/**
-//		 * trade_extra.serial_number
-//		 */
-//		public final String serialNumber;
-//
-//		public final TradePayStatus tradePayStatus;
-//
-//		/**
-//		 * tables.id
-//		 */
-//		public final Long tableId;
-//
-//		/**
-//		 * trade_talbe.client_create_time
-//		 */
-//		public final Long startTimeMillis;
-//
-//		/**
-//		 * 单据在桌台的就餐人数
-//		 */
-//		public final int numberOfMeals;
-//
-//		public final DinnertableStatus dishStatus;
-//
-//		public final TradeType tradeType;
-//
-//		public BigDecimal tradeSaleAmount;//订单金额
-//
-//		public YesOrNo printPreCash=YesOrNo.NO;//是否已经打印预结单
-//		public List<AsyncHttpRecord> httpRecord;//订单相关httpqing
-//
-//		public List<AddItemVo> addItemVoList;//订单相关加菜数据
-//
-//
-//		public TradeTableInfo(Trade trade, TradeExtra tradeExtra, TradeTable tradeTable,
-//					   DinnertableStatus dishStatus,PrintOperation preCashPrintOperation,
-//					   List<AsyncHttpRecord> httpRecord,List<AddItemVo> addItemVoList) {
-//			this.id = tradeTable.getId();
-//			this.uuid = tradeTable.getUuid();
-//			if(tradeTable.verValue()==null){//联台主单没有tradeTable数据。该数据在订单转台的时候会用
-//				this.serverUpdateTime = tradeExtra.verValue();
-//				this.startTimeMillis = tradeExtra.getServerCreateTime();
-//			}else{
-//				this.serverUpdateTime = tradeTable.verValue();
-//				this.startTimeMillis = tradeTable.getServerCreateTime();
-//			}
-//
-//			this.tableId = tradeTable.getTableId();
-//			// this.startTimeMillis =
-//			// tradeTable.getClientCreateTime();
-//			this.numberOfMeals = tradeTable.getTablePeopleCount();
-//			this.tradeUuid = trade.getUuid();
-//			this.tradeId = trade.getId();
-//			this.tradeServerUpdateTime = trade.getServerUpdateTime();
-//			this.tradeStatus = trade.getTradeStatus();
-//			this.serialNumber = tradeExtra.getSerialNumber();
-//			this.dishStatus = dishStatus;
-////			tradeSaleAmount=trade.getDishAmount();
-//			tradeSaleAmount=trade.getTradeAmount();
-//			tradeClientUpdateTime=trade.getClientUpdateTime();
-//			printPreCash=preCashPrintOperation==null?YesOrNo.NO:YesOrNo.YES;
-////			this.httpRecord=httpRecord;
-//			this.addItemVoList=addItemVoList;
-//			this.tradePayStatus=trade.getTradePayStatus();
-//			this.businessType=trade.getBusinessType();
-//			this.tradeType=trade.getTradeType();
-//		}
-//
-//		public int getNumberOfMeals() {
-//			return numberOfMeals;
-//		}
-//
-//		@Override
-//		public int hashCode() {
-//			final int prime = 31;
-//			int result = 1;
-//			result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
-//			return result;
-//		}
-//
-//		@Override
-//		public boolean equals(Object obj) {
-//			if (this == obj)
-//				return true;
-//			if (obj == null)
-//				return false;
-//			if (getClass() != obj.getClass())
-//				return false;
-//			TradeTableInfo other = (TradeTableInfo)obj;
-//			if (uuid == null) {
-//				if (other.uuid != null)
-//					return false;
-//			} else if (!uuid.equals(other.uuid))
-//				return false;
-//			return true;
-//		}
-//
-//		@Override
-//		public int compareTo(TradeTableInfo another) {
-//			int v = startTimeMillis.compareTo(another.startTimeMillis);
-//			if (v == 0) {
-//				v = serialNumber.compareTo(another.serialNumber);
-//			}
-//			if (v == 0) {
-//				v = uuid.compareTo(another.uuid);
-//			}
-//			return v;
-//		}
-//
-//	}
 
 }

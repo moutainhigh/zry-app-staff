@@ -42,13 +42,10 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
-    //当前选中的菜品
-    private List<String> mSelectedUuids = new ArrayList<>();
+        private List<String> mSelectedUuids = new ArrayList<>();
     public List<Integer> mSelectPostions = new ArrayList<>();
 
     public BeautyShopcartAdapter(Context context) {
@@ -76,9 +73,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         super.showDishLayout(holder, item, position);
         showNumEditView(item, holder);
         setItemSelectedBg(holder, item);
-        setExtraInfo(holder,item); //设置服务购买中的次数，有效期
-        setChargingRule(holder,item);//这是规则信息
-    }
+        setExtraInfo(holder,item);         setChargingRule(holder,item);    }
 
     private void setExtraInfo(ViewHolder holder,DishDataItem item){
         if(!isServerComb(item)){
@@ -87,8 +82,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         }
 
         holder.rl_extraInfo.setVisibility(View.VISIBLE);
-        //显示
-        holder.tv_serverTimes.setText(getServerTimesHint(item.getBase()));
+                holder.tv_serverTimes.setText(getServerTimesHint(item.getBase()));
         holder.tv_deadLines.setText(getDeadLineHint(item.getBase()));
     }
 
@@ -104,11 +98,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
 
     }
 
-    /**
-     * 获取次数
-     * @param shopcartItemBase
-     * @return
-     */
+
     private String getServerTimesHint(IShopcartItemBase shopcartItemBase){
         DishShop dishShop=shopcartItemBase.getDishShop();
         String serverTimes=context.getResources().getString(R.string.server_times_unlimit);
@@ -120,11 +110,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         return String.format(context.getResources().getString(R.string.server_times_hint),serverTimes);
     }
 
-    /**
-     * 获取时间限制
-     * @param shopcartItemBase
-     * @return
-     */
+
     private String getDeadLineHint(IShopcartItemBase shopcartItemBase){
         DishShop dishShop=shopcartItemBase.getDishShop();
         String deadLine=context.getResources().getString(R.string.server_time_unlimit);
@@ -140,8 +126,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
                 case 3:
                     deadLine=dishShop.getMinNum()+context.getResources().getString(R.string.time_month);
                     break;
-                default://-1表示无限制
-                    deadLine=context.getResources().getString(R.string.server_time_unlimit);
+                default:                    deadLine=context.getResources().getString(R.string.server_time_unlimit);
                     break;
             }
         }
@@ -172,11 +157,8 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
 
     protected void showDiscountDrawable(ViewHolder holder, DishDataItem item) {
         if (isBatchDiscountModle && (item.getType() == ItemType.SINGLE || item.getType() == ItemType.COMBO)) {
-            // 单菜或套餐可以批量打折
-            // 批量赠送界面不处理不打折商品
-            if (item.getBase() != null) {
-                // 有营销活动或者后台设置了不能手动折扣，就不能批量折扣
-                if (DinnerCashManager.hasMarketActivity(tradeItemPlanActivityMap, item.getBase())
+                                    if (item.getBase() != null) {
+                                if (DinnerCashManager.hasMarketActivity(tradeItemPlanActivityMap, item.getBase())
                         || (!isBatchCoercionModel && item.getBase().getEnableWholePrivilege() == Bool.NO) || isCardService(item.getBase()) || isApplet(item.getBase())) {
                     Drawable checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_cannot_discount);
                     holder.dish_name.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
@@ -184,8 +166,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
                 } else {
                     itemSelect(item, holder);
                 }
-                // 菜品不能参与整单折扣
-            } else {
+                            } else {
                 Drawable checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_cannot_discount);
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(checkDrawable, null, null, null);
             }
@@ -196,11 +177,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         super.updateData(dataList, tradeVo, isShowInvalid);
     }
 
-    /**
-     * 构建整单用户
-     *
-     * @param tradeVo
-     */
+
     protected void buildTradeUser(TradeVo tradeVo) {
         if (Utils.isEmpty(tradeVo.getTradeUsers())) {
             return;
@@ -218,12 +195,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
 
     }
 
-    /**
-     * 数量编辑框显示
-     *
-     * @param item
-     * @param holder
-     */
+
     private void showNumEditView(DishDataItem item, ViewHolder holder) {
         final IShopcartItemBase shopcartItem = item.getBase();
         if (item.isCanEditNumber()) {
@@ -233,13 +205,11 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
             holder.dish_edit_num.setChangeListener(new NumberEditText.ChangeListener() {
                 @Override
                 public void onNumberChanged(BigDecimal number) {
-                    EventBus.getDefault().post(new ActionClose());//关闭属性界面
-                    if (shopcartItem instanceof ShopcartItem) {
+                    EventBus.getDefault().post(new ActionClose());                    if (shopcartItem instanceof ShopcartItem) {
                         ((ShopcartItem) shopcartItem).changeQty(number);
                     }
                     DinnerShoppingCart.getInstance().updateDinnerDish(shopcartItem, false);
-                    // notifyDataSetChanged();
-                }
+                                    }
             });
         } else {
             holder.dish_num.setVisibility(View.VISIBLE);
@@ -247,9 +217,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         }
     }
 
-    /**
-     * 刷新选中的条目
-     */
+
     public void refreshSelectedItems() {
         if (Utils.isNotEmpty(mSelectedUuids)) {
             doSelectedItems(new ArrayList<>(mSelectedUuids));
@@ -268,8 +236,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         notifyDataSetChanged();
     }
 
-    //不需要的父类功能
-    @Override
+        @Override
     protected void initAnchorLayout(ViewHolder holder, View convertView) {
     }
 
@@ -289,12 +256,7 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         return diyWh;
     }
 
-    /**
-     * 设置每项被选效果
-     *
-     * @param holder
-     * @param item
-     */
+
     private void setItemSelectedBg(ViewHolder holder, DishDataItem item) {
         if ((item.getType() == ItemType.SINGLE || item.getType() == ItemType.COMBO
                 || item.getType() == ItemType.CHILD || item.getType() == ItemType.WEST_CHILD) && item.isSelected()) {
@@ -304,15 +266,9 @@ public class BeautyShopcartAdapter extends DinnerBanlanceAdapter {
         }
     }
 
-    /**
-     * 批量选择菜品
-     *
-     * @param selectedUuids
-     * @return 返回选中的item
-     */
+
     public List<DishDataItem> doSelectedItems(List<String> selectedUuids) {
-        //先清空选中
-        mSelectedUuids.clear();
+                mSelectedUuids.clear();
         mSelectPostions.clear();
 
         List<DishDataItem> data = getAllData();

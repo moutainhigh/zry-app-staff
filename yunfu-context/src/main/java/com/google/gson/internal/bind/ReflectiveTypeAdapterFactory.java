@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2011 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.google.gson.internal.bind;
 
@@ -42,9 +28,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Type adapter that reflects over the fields and methods of a class.
- */
+
 public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
     private final ConstructorConstructor constructorConstructor;
     private final FieldNamingStrategy fieldNamingPolicy;
@@ -69,9 +53,7 @@ public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
         return !excluder.excludeClass(f.getType(), serialize) && !excluder.excludeField(f, serialize);
     }
 
-    /**
-     * first element holds the default name
-     */
+
     private List<String> getFieldNames(Field f) {
         SerializedName annotation = f.getAnnotation(SerializedName.class);
         if (annotation == null) {
@@ -98,8 +80,7 @@ public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
         Class<? super T> raw = type.getRawType();
 
         if (!Object.class.isAssignableFrom(raw)) {
-            return null; // it's a primitive!
-        }
+            return null;         }
 
         ObjectConstructor<T> constructor = constructorConstructor.get(type);
         return new Adapter<T>(constructor, getBoundFields(gson, type, raw));
@@ -109,8 +90,7 @@ public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
             final Gson context, final Field field, final String name,
             final TypeToken<?> fieldType, boolean serialize, boolean deserialize) {
         final boolean isPrimitive = Primitives.isPrimitive(fieldType.getRawType());
-        // special casing primitives here saves ~5% on Android...
-        JsonAdapter annotation = field.getAnnotation(JsonAdapter.class);
+                JsonAdapter annotation = field.getAnnotation(JsonAdapter.class);
         TypeAdapter<?> mapped = null;
         if (annotation != null) {
             mapped = jsonAdapterFactory.getTypeAdapter(
@@ -122,8 +102,7 @@ public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
         final TypeAdapter<?> typeAdapter = mapped;
         return new ReflectiveTypeAdapterFactory.BoundField(name, serialize, deserialize) {
             @SuppressWarnings({"unchecked", "rawtypes"})
-            // the type adapter and field type always agree
-            @Override
+                        @Override
             void write(JsonWriter writer, Object value)
                     throws IOException, IllegalAccessException {
                 Object fieldValue = field.get(value);
@@ -145,8 +124,7 @@ public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
             public boolean writeField(Object value) throws IOException, IllegalAccessException {
                 if (!serialized) return false;
                 Object fieldValue = field.get(value);
-                return fieldValue != value; // avoid recursion for example for Throwable.cause
-            }
+                return fieldValue != value;             }
         };
     }
 
@@ -171,8 +149,7 @@ public final class ReflectiveTypeAdapterFactory implements TypeAdapterFactory {
                 BoundField previous = null;
                 for (int i = 0, size = fieldNames.size(); i < size; ++i) {
                     String name = fieldNames.get(i);
-                    if (i != 0) serialize = false; // only serialize the default name
-                    BoundField boundField = createBoundField(context, field, name,
+                    if (i != 0) serialize = false;                     BoundField boundField = createBoundField(context, field, name,
                             TypeToken.get(fieldType), serialize, deserialize);
                     BoundField replaced = result.put(name, boundField);
                     if (previous == null) previous = replaced;

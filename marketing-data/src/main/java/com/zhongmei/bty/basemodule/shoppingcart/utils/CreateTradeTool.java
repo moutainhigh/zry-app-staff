@@ -62,13 +62,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2015年7月10日 上午11:27:22
- * @Description: 构建trade对象
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class CreateTradeTool {
 
     private static final String TAG = CreateTradeTool.class.getSimpleName();
@@ -77,14 +71,7 @@ public class CreateTradeTool {
 
         Trade mTrade = createTrade();
 
-       /* mTrade.setUuid(SystemUtils.genOnlyIdentifier());
 
-        // 所属领域:1:RESTAURANT:餐饮业
-        mTrade.setDomainType(DomainType.RESTAURANT);
-
-        mTrade.setBusinessType(BusinessType.SNACK);
-        mTrade.setTradePayForm(TradePayForm.OFFLINE);
-        mTrade.setStatusFlag(StatusFlag.VALID);*/
 
         if (Session.getAuthUser() != null) {
             mTrade.setCreatorId(Session.getAuthUser().getId());
@@ -93,68 +80,7 @@ public class CreateTradeTool {
             return;
         }
 
-        // mTrade.setLocalUpdateWho(localUpdateWho);
-        // mTrade.setLocalUpdateTime(localUpdateTime);
-        // mTrade.setServerCreateTime(serverCreateTime)
-        // mTrade.setServerUpdateTime(serverUpdateTime);
 
-      /*  // 为true表示此记录已经被修改
-        mTrade.setChanged(false);
-        // 品牌ID
-        mTrade.setBrandIdenty(BaseApplication.sInstance.getShopInfo().getLong(ShopInfo.GROUP_ID_KEY));
-        // 门店ID
-        mTrade.setShopIdenty(BaseApplication.sInstance.getShopInfo().getLong(ShopInfo.ID_KEY));
-        // 设备ID
-        mTrade.setDeviceIdenty(SystemUtils.getMacAddress());
-        // 营业日期，由服务端生成
-        // java.util.Date bizDate;
-
-        // 来源。如店内:1、微信等
-        // Long sourceId;
-        mTrade.setSource(SourceId.POS);
-        // 1:ANDROID 2:IPAD 3:官微 4:商微
-        mTrade.setSourceChild(SourceChild.ANDROID);
-
-        // 支付状态：1:UNPAID:未支付
-        // 2:PAYING:支付中，微信下单选择了在线支付但实际上未完成支付的 3:PAID:已支付
-        mTrade.setTradePayStatus(TradePayStatus.UNPAID);
-
-        // 默认订单类型为内用
-        // mTrade.setDeliveryType(DeliveryType.HERE);
-
-        // 各种优惠折扣的减免金额，销货时为负数，退货时为正数
-        mTrade.setPrivilegeAmount(new BigDecimal(0));
-
-        // 退货所对应的销货单
-        // Long relateTradeId;
-        // 原单UUID
-        // String relateTradeUuid;
-
-        // 销售金额，明细SALE_AMOUNT之和
-        mTrade.setSaleAmount(new BigDecimal(0));
-
-        // 单号
-        // String seqNo;
-
-        // 交易金额，等于SALE_AMOUNT与PRIVILEGE_AMOUNT之和
-        mTrade.setTradeAmount(new BigDecimal(0));
-
-        // 交易状态：1:UNPROCESSED:未处理 2:TEMPORARY:挂单，不需要厨房打印
-        // 3:CONFIRMED:已确认 4:FINISH:已完成(全部支付)
-        // 5:RETURNED:已退货 6:INVALID:已作废 7:REFUSED:已拒绝
-        mTrade.setTradeStatus(TradeStatus.CONFIRMED);
-
-        // 商品种类，默认传0
-        mTrade.setSkuKindCount(0);
-
-        // 交易时间
-        // java.util.Date tradeTime;
-        mTrade.setTradeTime((new Date()).getTime());
-
-        // 交易类型 1:SELL:售货 2:REFUND:退货
-        // com.zhongmei.bty.commonmodule.database.enums.TradeType
-        // tradeType;
-        mTrade.setTradeType(TradeType.SELL);*/ //mofiyf v8.3
 
         mTrade.validateCreate();
         mTradeVo.setTrade(mTrade);
@@ -166,8 +92,7 @@ public class CreateTradeTool {
         Trade trade = new Trade();
         trade.setUuid(SystemUtils.genOnlyIdentifier());
 
-        // 所属领域:1:RESTAURANT:餐饮业
-        trade.setDomainType(DomainType.RESTAURANT);
+                trade.setDomainType(DomainType.RESTAURANT);
 
         trade.setBusinessType(BusinessType.SNACK);
         trade.setTradePayForm(TradePayForm.OFFLINE);
@@ -178,95 +103,50 @@ public class CreateTradeTool {
             trade.setCreatorName(Session.getAuthUser().getName());
         }
 
-        // trade.setLocalUpdateWho(localUpdateWho);
-        // trade.setLocalUpdateTime(localUpdateTime);
-        // trade.setServerCreateTime(serverCreateTime)
-        // trade.setServerUpdateTime(serverUpdateTime);
 
-        // 为true表示此记录已经被修改
-        trade.setChanged(false);
-        // 品牌ID
-        trade.setBrandIdenty(ShopInfoManager.getInstance().getShopInfo().getBrandId());
-        // 门店ID
-        trade.setShopIdenty(ShopInfoManager.getInstance().getShopInfo().getShopId());
-//        Utils.toLong(ShopInfoCfg.getInstance().shopId)
-        // 设备ID
-        trade.setDeviceIdenty(SystemUtils.getMacAddress());
-        // 营业日期，由服务端生成
-        // java.util.Date bizDate;
+                trade.setChanged(false);
+                trade.setBrandIdenty(ShopInfoManager.getInstance().getShopInfo().getBrandId());
+                trade.setShopIdenty(ShopInfoManager.getInstance().getShopInfo().getShopId());
+                trade.setDeviceIdenty(SystemUtils.getMacAddress());
 
-        // 来源。如店内:1、微信等
-        // Long sourceId;
-        trade.setSource(SourceId.POS);
-        // 1:ANDROID 2:IPAD 3:官微 4:商微
-        trade.setSourceChild(SourceChild.ANDROID);
+                        trade.setSource(SourceId.POS);
+                trade.setSourceChild(SourceChild.ANDROID);
 
-        // 支付状态：1:UNPAID:未支付
-        // 2:PAYING:支付中，微信下单选择了在线支付但实际上未完成支付的 3:PAID:已支付
-        trade.setTradePayStatus(TradePayStatus.UNPAID);
+                        trade.setTradePayStatus(TradePayStatus.UNPAID);
 
-        // 默认订单类型为内用
-        // trade.setDeliveryType(DeliveryType.HERE);
 
-        // 各种优惠折扣的减免金额，销货时为负数，退货时为正数
-        trade.setPrivilegeAmount(new BigDecimal(0));
+                trade.setPrivilegeAmount(new BigDecimal(0));
 
-        // 退货所对应的销货单
-        // Long relateTradeId;
-        // 原单UUID
-        // String relateTradeUuid;
 
-        // 销售金额，明细SALE_AMOUNT之和
-        trade.setSaleAmount(new BigDecimal(0));
+                trade.setSaleAmount(new BigDecimal(0));
 
-        // 单号
-        // String seqNo;
 
-        // 交易金额，等于SALE_AMOUNT与PRIVILEGE_AMOUNT之和
-        trade.setTradeAmountBefore(new BigDecimal(0));
+                trade.setTradeAmountBefore(new BigDecimal(0));
         trade.setTradeAmount(new BigDecimal(0));
 
-        // 交易状态：1:UNPROCESSED:未处理 2:TEMPORARY:挂单，不需要厨房打印
-        // 3:CONFIRMED:已确认 4:FINISH:已完成(全部支付)
-        // 5:RETURNED:已退货 6:INVALID:已作废 7:REFUSED:已拒绝
-        trade.setTradeStatus(TradeStatus.CONFIRMED);
+                                trade.setTradeStatus(TradeStatus.CONFIRMED);
 
-        // 商品种类，默认传0
-        trade.setDishKindCount(0);
+                trade.setDishKindCount(0);
 
-        // 交易时间
-        // java.util.Date tradeTime;
-        trade.setTradeTime((new Date()).getTime());
+                        trade.setTradeTime((new Date()).getTime());
 
 
         trade.setTradePeopleCount(1);
 
-        // 交易类型 1:SELL:售货 2:REFUND:退货
-        // com.zhongmei.bty.commonmodule.database.enums.TradeType
-        // tradeType;
-        trade.setTradeType(TradeType.SELL);
+                                trade.setTradeType(TradeType.SELL);
         return trade;
     }
 
-    /**
-     * @Title: dishToTradeItem
-     * @Description: 将ShopcartItem转化为TradeItemVo
-     * @Param @param mShopcartItemBase
-     * @Param @param tradeUuid
-     * @Param @return TODO
-     * @Return TradeItemVo 返回类型
-     */
+
     public static TradeItemVo dishToTradeItem(ShopcartItemBase mShopcartItemBase, TradeVo mTradeVo, BigDecimal deskCount) {
 
         TradeItemVo mTradeItemVo = new TradeItemVo();
 
-        // 构建TradeItem
-        mTradeItemVo.setTradeItem(buildTradeItem(mShopcartItemBase, mTradeVo, deskCount));
+                mTradeItemVo.setTradeItem(buildTradeItem(mShopcartItemBase, mTradeVo, deskCount));
         mTradeItemVo.setTradeItemExtraDinner(mShopcartItemBase.getTradeItemExtraDinner());
         List<TradeItemProperty> tradeItemPropertyList = new ArrayList<TradeItemProperty>();
 
-        // 属性信息
-        List<IOrderProperty> listOrderProperty = mShopcartItemBase.getProperties();
+                List<IOrderProperty> listOrderProperty = mShopcartItemBase.getProperties();
         if (listOrderProperty != null) {
             for (IOrderProperty property : listOrderProperty) {
                 TradeItemProperty mTradeItemProperty = buildTradeItemProperty(mShopcartItemBase, property, deskCount);
@@ -274,27 +154,12 @@ public class CreateTradeTool {
             }
         }
 
-        // 规格信息
-        // Set<DishProperty> listProperty =
-        // mShopcartItemBase.getOrderDish().getStandards();
-        // if (listProperty != null && listProperty.size() >
-        // 0) {
-        // for (DishProperty mDishPropertyVo : listProperty)
-        // {
-        // TradeItemProperty mTradeItemProperty =
-        // buildTradeItemProperty(mShopcartItemBase,
-        // mDishPropertyVo);
-        // tradeItemPropertyList.add(mTradeItemProperty);
-        // }
-        //
-        // }
 
         mTradeItemVo.setTradeItemPropertyList(tradeItemPropertyList);
         TradePrivilege mTradePrivilege =
                 BuildPrivilegeTool.buildPrivilege(mShopcartItemBase, mTradeVo.getTrade().getUuid());
         mTradeItemVo.setTradeItemPrivilege(mTradePrivilege);
-        //折扣理由
-        if (mShopcartItemBase.getDiscountReasonRel() != null) {
+                if (mShopcartItemBase.getDiscountReasonRel() != null) {
             mTradeItemVo.setDiscountReason(mShopcartItemBase.getDiscountReasonRel());
         }
 
@@ -302,14 +167,12 @@ public class CreateTradeTool {
         if (couponPrivilegeVo != null)
             couponPrivilegeVo.setShopcartItem(null);
         mTradeItemVo.setCouponPrivilegeVo(couponPrivilegeVo);
-        //更新tradeid和tradeuuid，针对拆单时改变
-        if (couponPrivilegeVo != null && couponPrivilegeVo.getTradePrivilege() != null) {
+                if (couponPrivilegeVo != null && couponPrivilegeVo.getTradePrivilege() != null) {
             couponPrivilegeVo.getTradePrivilege().setTradeUuid(mTradeVo.getTrade().getUuid());
             couponPrivilegeVo.getTradePrivilege().setTradeId(mTradeVo.getTrade().getId());
         }
         if (mShopcartItemBase instanceof IShopcartItem) {
-            //设置菜品操作记录(只针对单菜和套餐外壳)
-            IShopcartItem iShopcartItem = (IShopcartItem) mShopcartItemBase;
+                        IShopcartItem iShopcartItem = (IShopcartItem) mShopcartItemBase;
             mTradeItemVo.setTradeItemOperations(iShopcartItem.getTradeItemOperations());
         } else if (mShopcartItemBase instanceof ISetmealShopcartItem) {
             ISetmealShopcartItem iShopcartItem = (ISetmealShopcartItem) mShopcartItemBase;
@@ -326,75 +189,44 @@ public class CreateTradeTool {
         return mTradeItemVo;
     }
 
-    /**
-     * @Title: buildTradeItem
-     * @Description: 构建TradeItem对象
-     * @Param @param mShopcartItem
-     * @Param @param tradeUuid
-     * @Param @return TODO
-     * @Return TradeItem 返回类型
-     */
+
     public static TradeItem buildTradeItem(ShopcartItemBase mShopcartItem, TradeVo mTradeVo, BigDecimal deskCount) {
         TradeItem mTradeItem = new TradeItem();
         mTradeItem.validateCreate();
-        if (mShopcartItem.creatorId != null) {//设置mShopcartItem带过来的creator
-            mTradeItem.setCreatorId(mShopcartItem.creatorId);
+        if (mShopcartItem.creatorId != null) {            mTradeItem.setCreatorId(mShopcartItem.creatorId);
             mTradeItem.setCreatorName(mShopcartItem.creatorName);
         }
         mTradeItem.validateUpdate();
-        // 本地生成的唯一标示
-        mTradeItem.setUuid(mShopcartItem.getUuid());
-        // 数量
-        mTradeItem.setQuantity(mShopcartItem.getTotalQty());
-        // 单价
-        mTradeItem.setPrice(mShopcartItem.getPrice());
-        // 金额
-        mTradeItem.setAmount(mShopcartItem.getAmount());
-        // 各种特征的金额合计
-        mTradeItem.setPropertyAmount(mShopcartItem.getPropertyAmount());
+                mTradeItem.setUuid(mShopcartItem.getUuid());
+                mTradeItem.setQuantity(mShopcartItem.getTotalQty());
+                mTradeItem.setPrice(mShopcartItem.getPrice());
+                mTradeItem.setAmount(mShopcartItem.getAmount());
+                mTradeItem.setPropertyAmount(mShopcartItem.getPropertyAmount());
         mTradeItem.setFeedsAmount(mShopcartItem.getFeedsAmount());
-        // 售价
-        mTradeItem.setActualAmount(mShopcartItem.getActualAmount());
-        // 父记录Id
-        // mTradeItem.setParentId(mShopcartItem.getParentId());
-        // 父记录UUID
-        mTradeItem.setParentUuid(mShopcartItem.getParentUuid());
-        // 商品名称
-        mTradeItem.setDishName(mShopcartItem.getSkuName());
-        // 商品UUID
-        mTradeItem.setSkuUuid(mShopcartItem.getSkuUuid());
+                mTradeItem.setActualAmount(mShopcartItem.getActualAmount());
+                                mTradeItem.setParentUuid(mShopcartItem.getParentUuid());
+                mTradeItem.setDishName(mShopcartItem.getSkuName());
+                mTradeItem.setSkuUuid(mShopcartItem.getSkuUuid());
         mTradeItem.setDishId(mShopcartItem.getSkuId());
-        // 是套餐明细时记录下明细分组ID
-        if (mShopcartItem instanceof SetmealShopcartItem) {
+                if (mShopcartItem instanceof SetmealShopcartItem) {
             SetmealShopcartItem setmealItem = (SetmealShopcartItem) mShopcartItem;
             mTradeItem.setDishSetmealGroupId(setmealItem.getSetmealGroupId());
         }
-        // 排序位
-        // mTradeItem.setSort();
-        // 交易订单ID
-        // mTradeItem.setTradeId();
-        // 备注
-        mTradeItem.setTradeMemo(mShopcartItem.getMemo());
+                                                mTradeItem.setTradeMemo(mShopcartItem.getMemo());
         mTradeItem.setType(mShopcartItem.getType());
 
-        // 单位名称
-        mTradeItem.setUnitName(mShopcartItem.getUnitName());
-        // 销售类型
-        mTradeItem.setSaleType(mShopcartItem.getSaleType());
+                mTradeItem.setUnitName(mShopcartItem.getUnitName());
+                mTradeItem.setSaleType(mShopcartItem.getSaleType());
         mTradeItem.setTradeUuid(mTradeVo.getTrade().getUuid());
         mTradeItem.setTradeId(mTradeVo.getTrade().getId());
-        // 打印状态
-        mTradeItem.setIssueStatus(mShopcartItem.getIssueStatus());
+                mTradeItem.setIssueStatus(mShopcartItem.getIssueStatus());
         boolean isGroupBusiness = mTradeVo.getTrade().getBusinessType() == BusinessType.GROUP;
-        // 设置TradeItem 的桌台信息,团餐团垫菜是多tradeTable，不关联到具体菜上
-        if (Utils.isNotEmpty(mTradeVo.getTradeTableList()) && !isGroupBusiness) {
+                if (Utils.isNotEmpty(mTradeVo.getTradeTableList()) && !isGroupBusiness) {
             mTradeItem.setTradeTableUuid(mTradeVo.getTradeTableList().get(0).getUuid());
             mTradeItem.setTradeTableId(mTradeVo.getTradeTableList().get(0).getId());
         }
-        // 设置菜品是否参与折扣
-        mTradeItem.setEnableWholePrivilege(mShopcartItem.getEnableWholePrivilege());
-        // 标记是否是自定义菜品
-        mTradeItem.setIsChangePrice(mShopcartItem.getIsChangePrice());
+                mTradeItem.setEnableWholePrivilege(mShopcartItem.getEnableWholePrivilege());
+                mTradeItem.setIsChangePrice(mShopcartItem.getIsChangePrice());
 
         mTradeItem.setRelateTradeItemId(mShopcartItem.getRelateTradeItemId());
         mTradeItem.setRelateTradeItemUuid(mShopcartItem.getRelateTradeItemUuid());
@@ -418,13 +250,7 @@ public class CreateTradeTool {
         return obj.toString();
     }
 
-    /**
-     * 关联餐标外壳
-     *
-     * @param mShopcartItem
-     * @param mTradeVo
-     * @param tradeItem
-     */
+
     private static void doRelateShell(ShopcartItemBase mShopcartItem, TradeVo mTradeVo, TradeItem tradeItem, BigDecimal deskCount) {
         if (!mShopcartItem.isGroupDish() || mTradeVo.getMealShellVo() == null) {
             return;
@@ -441,41 +267,26 @@ public class CreateTradeTool {
         tradeItem.setQuantity(quntity);
     }
 
-    /**
-     * @Title: buildTradeItemProperty
-     * @Description: 构建菜品规格
-     * @Param @return TODO
-     * @Return TradeItemProperty 返回类型
-     */
+
     public static TradeItemProperty buildTradeItemProperty(ShopcartItemBase mShopcartItemBase,
                                                            DishProperty mDishPropertyVo) {
 
-        // DishProperty mDishProperty =
-        // mDishPropertyVo.getProperty();
-        // DishPropertyType mDishPropertyType =
-        // mDishPropertyVo.getPropertyType();
 
         TradeItemProperty mTradeItemProperty = new TradeItemProperty();
-        // 金额，等于 PRICE * QTY (套餐外壳数量 x 套餐数量)
-        BigDecimal price = mDishPropertyVo.getReprice();
+                BigDecimal price = mDishPropertyVo.getReprice();
         BigDecimal qty = mShopcartItemBase.getTotalQty();
         BigDecimal amount = qty.multiply(price);
         mTradeItemProperty.setAmount(amount);
         mTradeItemProperty.setCreatorId(Session.getAuthUser().getId());
         mTradeItemProperty.setCreatorName(Session.getAuthUser().getName());
-        // 单价
-        mTradeItemProperty.setPrice(price);
+                mTradeItemProperty.setPrice(price);
         mTradeItemProperty.setPropertyName(mDishPropertyVo.getName());
-        // 该字段后期会去掉，目前占用PropertyType.TASTE
-        mTradeItemProperty.setPropertyType(mDishPropertyVo.getPropertyKind());
+                mTradeItemProperty.setPropertyType(mDishPropertyVo.getPropertyKind());
         mTradeItemProperty.setPropertyUuid(mDishPropertyVo.getUuid());
         mTradeItemProperty.setQuantity(qty);
-        // mTradeItemProperty.setTradeItemId();
-        mTradeItemProperty.setTradeItemUuid(mShopcartItemBase.getUuid());
+                mTradeItemProperty.setTradeItemUuid(mShopcartItemBase.getUuid());
 
-        // mTradeItemProperty.setUpdatorId();
-        // mTradeItemProperty.setUpdatorName();
-        mTradeItemProperty.setUuid(SystemUtils.genOnlyIdentifier());
+                        mTradeItemProperty.setUuid(SystemUtils.genOnlyIdentifier());
         mTradeItemProperty.setStatusFlag(StatusFlag.VALID);
         mTradeItemProperty.setUuid(SystemUtils.genOnlyIdentifier());
         mTradeItemProperty.validateCreate();
@@ -483,24 +294,15 @@ public class CreateTradeTool {
         return mTradeItemProperty;
     }
 
-    /**
-     * @Title: buildTradeItemProperty
-     * @Description: 构建菜品属性
-     * @Param @param mShopcartItemBase
-     * @Param @param mDishPropertyVo
-     * @Param @return TODO
-     * @Return TradeItemProperty 返回类型
-     */
+
     public static TradeItemProperty buildTradeItemProperty(ShopcartItemBase mShopcartItemBase,
                                                            IOrderProperty mOrderProperty, BigDecimal deskCount) {
 
         TradeItemProperty mTradeItemProperty = new TradeItemProperty();
-        // 金额，等于 PRICE * QTY (套餐外壳数量 x 套餐数量)
-        BigDecimal price = mOrderProperty.getPropertyPrice();
+                BigDecimal price = mOrderProperty.getPropertyPrice();
         BigDecimal qty = mShopcartItemBase.getTotalQty();
         BigDecimal amount = qty.multiply(price);
         mTradeItemProperty.setAmount(amount);
-        // 判断SERVER_ID_KEY是否为空，如果是为则不能进行类型转换并赋值给mTradeItemProperty的CreatoerId
 
         AuthUser authUser = Session.getAuthUser();
         if (authUser != null) {
@@ -508,19 +310,14 @@ public class CreateTradeTool {
             mTradeItemProperty.setCreatorName(authUser.getName());
         }
 
-        // 单价
-        mTradeItemProperty.setPrice(price);
+                mTradeItemProperty.setPrice(price);
         mTradeItemProperty.setPropertyName(mOrderProperty.getPropertyName());
-        // 该字段后期会去掉，目前占用PropertyType.TASTE
-        mTradeItemProperty.setPropertyType(mOrderProperty.getPropertyKind());
+                mTradeItemProperty.setPropertyType(mOrderProperty.getPropertyKind());
         mTradeItemProperty.setPropertyUuid(mOrderProperty.getPropertyUuid());
         mTradeItemProperty.setQuantity(qty);
-        // mTradeItemProperty.setTradeItemId();
-        mTradeItemProperty.setTradeItemUuid(mShopcartItemBase.getUuid());
+                mTradeItemProperty.setTradeItemUuid(mShopcartItemBase.getUuid());
 
-        // mTradeItemProperty.setUpdatorId();
-        // mTradeItemProperty.setUpdatorName();
-        mTradeItemProperty.setUuid(SystemUtils.genOnlyIdentifier());
+                        mTradeItemProperty.setUuid(SystemUtils.genOnlyIdentifier());
         mTradeItemProperty.setStatusFlag(StatusFlag.VALID);
         mTradeItemProperty.setUuid(SystemUtils.genOnlyIdentifier());
         mTradeItemProperty.validateCreate();
@@ -529,12 +326,7 @@ public class CreateTradeTool {
     }
 
 
-    /**
-     * 改变餐标下菜品属性价格
-     *
-     * @param mShopcartItem
-     * @param mTradeItemProperty
-     */
+
     private static void doChangeProperty(ShopcartItemBase mShopcartItem, TradeItemProperty mTradeItemProperty, BigDecimal deskCount) {
         if (!mShopcartItem.isGroupDish()) {
             return;
@@ -545,13 +337,7 @@ public class CreateTradeTool {
         mTradeItemProperty.setQuantity(quntity);
     }
 
-    /**
-     * @Title: createTradeVo
-     * @Description: 构建tradeVo
-     * @Param @param mTradeVo
-     * @Param @param mTakeOutInfo TODO
-     * @Return void 返回类型
-     */
+
     public static void createTradeVo(List<ShopcartItem> listShopcart, List<IShopcartItem> readonlyItem,
                                      TradeVo mTradeVo, TakeOutInfo mTakeOutInfo) {
 
@@ -562,8 +348,7 @@ public class CreateTradeTool {
             List<TradeItemVo> listItem = mTradeVo.getTradeItemList();
             for (int i = listItem.size() - 1; i >= 0; i--) {
                 TradeItemVo itemVo = listItem.get(i);
-                // 该出用于避免重复调用创建
-                if (itemVo.getTradeItem().getId() == null) {
+                                if (itemVo.getTradeItem().getId() == null) {
                     listItem.remove(i);
                 }
             }
@@ -584,26 +369,22 @@ public class CreateTradeTool {
             }
         }
 
-        boolean isAddItemMode = Utils.isNotEmpty(mTradeVo.getTradeItemList());//当订单里有之前点的菜品，认为是加菜模式
-        for (int i = 0; i < listShopcart.size(); i++) {
+        boolean isAddItemMode = Utils.isNotEmpty(mTradeVo.getTradeItemList());        for (int i = 0; i < listShopcart.size(); i++) {
             ShopcartItem mShopcartItem = listShopcart.get(i);
             TradeItemVo tradeItem = dishToTradeItem(mShopcartItem, mTradeVo, deskCount);
             tradeItem.getTradeItem().setSort(listTradeItem.size());
-            //如果是加菜模式，添加加菜标示
-            if (isAddItemMode) {
+                        if (isAddItemMode) {
                 tradeItem.getTradeItem().setItemSource(2);
             }
 
             createTradeItemExtra(mShopcartItem, tradeItem.getTradeItem(), mTradeVo);
 
-            // 如果菜品有桌台号则构建tradeItem时设置桌台编号
-            if (!TextUtils.isEmpty(mShopcartItem.getTradeTableUuid())) {
+                        if (!TextUtils.isEmpty(mShopcartItem.getTradeTableUuid())) {
                 tradeItem.getTradeItem().setTradeTableUuid(mShopcartItem.getTradeTableUuid());
             }
             listTradeItem.add(tradeItem);
 
-            // 套餐外壳、单菜加料
-            Collection<? extends ExtraShopcartItem> listExtra = mShopcartItem.getExtraItems();
+                        Collection<? extends ExtraShopcartItem> listExtra = mShopcartItem.getExtraItems();
             if (listExtra != null) {
                 for (ExtraShopcartItem extra : listExtra) {
                     TradeItemVo extraTrade = dishToTradeItem(extra, mTradeVo, deskCount);
@@ -616,8 +397,7 @@ public class CreateTradeTool {
                 }
             }
 
-            // 套餐子菜
-            List<SetmealShopcartItem> listSetmeal = mShopcartItem.getSetmealItems();
+                        List<SetmealShopcartItem> listSetmeal = mShopcartItem.getSetmealItems();
             if (listSetmeal != null) {
                 for (SetmealShopcartItem setmeal : listSetmeal) {
                     TradeItemVo setmealTrade = dishToTradeItem(setmeal, mTradeVo, deskCount);
@@ -625,8 +405,7 @@ public class CreateTradeTool {
                     if (!TextUtils.isEmpty(mShopcartItem.getTradeTableUuid())) {
                         setmealTrade.getTradeItem().setTradeTableUuid(mShopcartItem.getTradeTableUuid());
                     }
-                    //如果是加菜模式，添加加菜标示
-                    if (isAddItemMode) {
+                                        if (isAddItemMode) {
                         setmealTrade.getTradeItem().setItemSource(2);
                     }
                     setmealTrade.setShopcartItemType(mShopcartItem.getShopcartItemType());
@@ -634,8 +413,7 @@ public class CreateTradeTool {
 
                     createTradeItemExtra(setmeal, setmealTrade.getTradeItem(), mTradeVo);
 
-                    // 套餐子菜加料
-                    Collection<? extends ExtraShopcartItem> childListExtra = setmeal.getExtraItems();
+                                        Collection<? extends ExtraShopcartItem> childListExtra = setmeal.getExtraItems();
                     if (childListExtra != null) {
                         for (ExtraShopcartItem extraItem : childListExtra) {
                             TradeItemVo extraTrade = dishToTradeItem(extraItem, mTradeVo, deskCount);
@@ -652,22 +430,19 @@ public class CreateTradeTool {
 
         }
 
-        // 如果TradeVo中未构建TradeExtra则构建
-        if (mTradeVo.getTradeExtra() == null) {
+                if (mTradeVo.getTradeExtra() == null) {
             TradeExtra mTradeExtra = new TradeExtra();
             mTradeVo.setTradeExtra(mTradeExtra);
             mTradeVo.getTradeExtra().validateCreate();
         } else if (mTradeVo.getTradeExtra() != null && !mTradeVo.getTradeExtra().hasValidateCreate()) {
             mTradeVo.getTradeExtra().validateCreate();
         }
-        mTradeVo.getTradeExtra().setTradeId(mTradeVo.getTrade().getId());//add v8.5
-        mTradeVo.getTradeExtra().setTradeUuid(mTradeVo.getTrade().getUuid());
+        mTradeVo.getTradeExtra().setTradeId(mTradeVo.getTrade().getId());        mTradeVo.getTradeExtra().setTradeUuid(mTradeVo.getTrade().getUuid());
         if (mTradeVo.getTradeExtra().getUuid() == null) {
             mTradeVo.getTradeExtra().setUuid(SystemUtils.genOnlyIdentifier());
         }
 
-        // 如果没呼入电话，则将外面客户信息加入到呼入电话信息中，用户下单时创建新客户
-        if (mTakeOutInfo != null) {
+                if (mTakeOutInfo != null) {
             List<TradeCustomer> listCustomer = mTradeVo.getTradeCustomerList();
             if (listCustomer != null) {
                 Boolean isHadBook = false;
@@ -701,11 +476,7 @@ public class CreateTradeTool {
         }
     }
 
-    /**
-     * @Title: createTradeItemExtra
-     * @Description: 转换TradeItemExtra
-     * @Return TradeItemExtra 返回类型
-     */
+
 
     public static void createTradeItemExtra(ShopcartItemBase mShopcartItemBase, TradeItem tradeItem, TradeVo tradeVo) {
         if (mShopcartItemBase.getPack()) {
@@ -737,16 +508,9 @@ public class CreateTradeTool {
         }
     }
 
-    /**
-     * @Title: addReturnQTYTradeItemVo
-     * @Description: 将只读菜品中已经存在的tradeItem并且在tradeVo中不存在的数据添加到tradeItemList中（如：退菜生成的只读中存在的tradeItem但还未添加到tradeVo的数据添加进去）
-     * @Param @param listTradeItem
-     * @Param @param readonlyItem TODO
-     * @Return void 返回类型
-     */
+
     public static void addReadonlyTradeItemVo(List<TradeItemVo> listTradeItem, List<IShopcartItem> readonlyItem, BigDecimal oldDeskCount, BigDecimal newDeskCount) {
-        // 将退回商品中得tradeItem添加到trade中
-        Map<String, TradeItemVo> tempTradeItem = new HashMap<String, TradeItemVo>();
+                Map<String, TradeItemVo> tempTradeItem = new HashMap<String, TradeItemVo>();
         for (TradeItemVo mTradeItemVo : listTradeItem) {
             tempTradeItem.put(mTradeItemVo.getTradeItem().getUuid(), mTradeItemVo);
         }
@@ -757,12 +521,10 @@ public class CreateTradeTool {
 
                 TradeItemVo mTradeItemVo = tempTradeItem.get(mIShopcartItem.getUuid());
                 if (mTradeItemVo != null) {
-                    //设置菜品理由
-                    addReasons2TradeItemVo(mTradeItemVo, mIShopcartItem);
+                                        addReasons2TradeItemVo(mTradeItemVo, mIShopcartItem);
                     mTradeItemVo.setShopcartItemType(mIShopcartItem.getShopcartItemType());
                     mTradeItemVo.getTradeItem().setChanged(mIShopcartItem.isChanged());
-                    //子菜
-                    if (Utils.isNotEmpty(mIShopcartItem.getSetmealItems())) {
+                                        if (Utils.isNotEmpty(mIShopcartItem.getSetmealItems())) {
                         for (ISetmealShopcartItem setmealShopcartItem : mIShopcartItem.getSetmealItems()) {
                             TradeItemVo setmealItemVo = tempTradeItem.get(setmealShopcartItem.getUuid());
                             if (setmealItemVo != null) {
@@ -771,26 +533,22 @@ public class CreateTradeTool {
                         }
                     }
                 } else if (mIShopcartItem instanceof ReadonlyShopcartItemBase) {
-                    // 将退回菜品生成的新只读菜品转换为tradeItemVo
-                    ReadonlyShopcartItemBase mReadonlyShopcartItemBase = (ReadonlyShopcartItemBase) mIShopcartItem;
+                                        ReadonlyShopcartItemBase mReadonlyShopcartItemBase = (ReadonlyShopcartItemBase) mIShopcartItem;
                     TradeItemVo tradeItemVo = buildReadOnlyTradeItemVo(mReadonlyShopcartItemBase);
                     tradeItemVo.setShopcartItemType(mReadonlyShopcartItemBase.getShopcartItemType());
                     listTradeItem.add(tradeItemVo);
 
-                    // 如果是套餐则需要将子菜对应的tradeItem也添加到tradeVo中
-                    List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
+                                        List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
                     if (listSetmeal != null) {
                         for (ISetmealShopcartItem item : listSetmeal) {
                             ReadonlyShopcartItemBase readonlySetmeal = (ReadonlyShopcartItemBase) item;
                             if (item instanceof ReadonlyShopcartItemBase) {
                                 TradeItemVo setmealItemVo = buildReadOnlyTradeItemVo(readonlySetmeal);
-                                //子菜的类型和外壳一致
-                                setmealItemVo.setShopcartItemType(mIShopcartItem.getShopcartItemType());
+                                                                setmealItemVo.setShopcartItemType(mIShopcartItem.getShopcartItemType());
                                 listTradeItem.add(setmealItemVo);
                             }
 
-                            // 加料
-                            Collection<ReadonlyExtraShopcartItem> listExtra = readonlySetmeal.getExtraItems();
+                                                        Collection<ReadonlyExtraShopcartItem> listExtra = readonlySetmeal.getExtraItems();
                             if (listExtra != null) {
                                 for (ReadonlyExtraShopcartItem mReadonlyExtraShopcartItem : listExtra) {
                                     TradeItemVo extraItemVo = buildReadOnlyTradeItemVo(mReadonlyExtraShopcartItem);
@@ -802,8 +560,7 @@ public class CreateTradeTool {
                         }
                     }
 
-                    // 加料
-                    Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
+                                        Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
                     if (listExtra != null) {
                         for (ReadonlyExtraShopcartItem mReadonlyExtraShopcartItem : listExtra) {
                             TradeItemVo extraItemVo = buildReadOnlyTradeItemVo(mReadonlyExtraShopcartItem);
@@ -817,15 +574,9 @@ public class CreateTradeTool {
         }
     }
 
-    /**
-     * 拷贝菜品理由到tradeItemVo中
-     *
-     * @param tradeItemVo
-     * @param iShopcartItem
-     */
+
     private static void addReasons2TradeItemVo(TradeItemVo tradeItemVo, IShopcartItemBase iShopcartItem) {
-        // 将退菜理由数据信息添加到原单的tradeItem中
-        if (tradeItemVo != null) {
+                if (tradeItemVo != null) {
             if (iShopcartItem.getReturnQtyReason() != null) {
                 tradeItemVo.setRejectQtyReason(iShopcartItem.getReturnQtyReason());
             }
@@ -843,8 +594,7 @@ public class CreateTradeTool {
                 iShopcartItem.getCouponPrivilegeVo().getTradePrivilege().setTradeId(tradeItemVo.getTradeItem().getId());
             }
 
-            //设置菜品操作记录
-            tradeItemVo.setTradeItemOperations(iShopcartItem.getTradeItemOperations());
+                        tradeItemVo.setTradeItemOperations(iShopcartItem.getTradeItemOperations());
             tradeItemVo.setTradeItemExtraDinner(iShopcartItem.getTradeItemExtraDinner());
             tradeItemVo.setTradeItemUserList(iShopcartItem.getTradeItemUserList());
             tradeItemVo.setCardServicePrivilegeVo(iShopcartItem.getCardServicePrivilgeVo());
@@ -852,21 +602,14 @@ public class CreateTradeTool {
         }
     }
 
-    /**
-     * 团餐桌台数变化涉及菜品数量加减
-     *
-     * @param mIShopcartItem
-     * @param oldDeskCount   改桌之前的桌数
-     * @param newDeskCount   改桌之后的桌数
-     */
+
     private static void corretTradeItemQuantity(IShopcartItem mIShopcartItem, BigDecimal oldDeskCount, BigDecimal newDeskCount) {
         if (mIShopcartItem instanceof ReadonlyShopcartItemBase) {
             ReadonlyShopcartItemBase mReadonlyShopcartItemBase = (ReadonlyShopcartItemBase) mIShopcartItem;
             if (oldDeskCount == null || oldDeskCount.compareTo(newDeskCount) == 0 || !mIShopcartItem.isGroupDish()) {
                 return;
             }
-            //只有分组的菜品才调整数量
-            if (mReadonlyShopcartItemBase.isGroupDish()) {
+                        if (mReadonlyShopcartItemBase.isGroupDish()) {
                 corretTradeItemQuantity(mReadonlyShopcartItemBase.tradeItem, oldDeskCount, newDeskCount);
                 corretTradeItemPropertyQuantity(mReadonlyShopcartItemBase, oldDeskCount, newDeskCount);
             }
@@ -882,8 +625,7 @@ public class CreateTradeTool {
                         }
                     }
 
-                    // 加料
-                    Collection<ReadonlyExtraShopcartItem> listExtra = readonlySetmeal.getExtraItems();
+                                        Collection<ReadonlyExtraShopcartItem> listExtra = readonlySetmeal.getExtraItems();
                     if (listExtra != null) {
                         for (ReadonlyExtraShopcartItem mReadonlyExtraShopcartItem : listExtra) {
                             TradeItemVo extraItemVo = buildReadOnlyTradeItemVo(mReadonlyExtraShopcartItem);
@@ -894,8 +636,7 @@ public class CreateTradeTool {
                 }
             }
 
-            // 加料
-            Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
+                        Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
             if (listExtra != null) {
                 for (ReadonlyExtraShopcartItem mReadonlyExtraShopcartItem : listExtra) {
                     TradeItemVo extraItemVo = buildReadOnlyTradeItemVo(mReadonlyExtraShopcartItem);
@@ -907,8 +648,7 @@ public class CreateTradeTool {
     }
 
     private static void corretTradeItemQuantity(TradeItem tradeItem, BigDecimal oldDeskCount, BigDecimal newDeskCount) {
-        //只纠正有效的数据
-        if (tradeItem.getStatusFlag() == StatusFlag.INVALID) {
+                if (tradeItem.getStatusFlag() == StatusFlag.INVALID) {
             return;
         }
         BigDecimal newQuantitiy = newDeskCount.multiply(tradeItem.getQuantity()).divide(oldDeskCount);
@@ -916,12 +656,7 @@ public class CreateTradeTool {
         tradeItem.validateUpdate();
     }
 
-    /**
-     * 纠正属性数量
-     *
-     * @param oldDeskCount
-     * @param newDeskCount
-     */
+
     private static void corretTradeItemPropertyQuantity(ReadonlyShopcartItemBase mReadonlyShopcartItemBase, BigDecimal oldDeskCount, BigDecimal newDeskCount) {
         List<ReadonlyOrderProperty> listReadOnlyProperty = mReadonlyShopcartItemBase.getProperties();
         if (Utils.isEmpty(listReadOnlyProperty)) {
@@ -934,13 +669,7 @@ public class CreateTradeTool {
         }
     }
 
-    /**
-     * @Title: buildReadOnlyTradeItemVo
-     * @Description: 退菜生成的只读菜品构建TradeItemVo
-     * @Param @param shopcartItem
-     * @Param @return TODO
-     * @Return TradeItemVo 返回类型
-     */
+
     public static TradeItemVo buildReadOnlyTradeItemVo(ReadonlyShopcartItemBase shopcartItem) {
 
         TradeItemVo tradeItemVo = new TradeItemVo();
@@ -951,8 +680,7 @@ public class CreateTradeTool {
         tradeItemVo.setCouponPrivilegeVo(shopcartItem.getCouponPrivilegeVo());
         tradeItemVo.setTradeItemExtraDinner(shopcartItem.getTradeItemExtraDinner());
 
-        //拷贝菜品折扣的理由
-        if (shopcartItem.getDiscountReasonRel() != null) {
+                if (shopcartItem.getDiscountReasonRel() != null) {
             tradeItemVo.setDiscountReason(shopcartItem.getDiscountReasonRel());
         }
 
@@ -987,28 +715,17 @@ public class CreateTradeTool {
 
     }
 
-    /**
-     * 将 listShopcartItem 中的优惠复制到 mTradeVo中，使用
-     * tradeItem.relateTradeItemUuid进行对比
-     *
-     * @Title: updateTradeItemPrivilge
-     * @Description: 将IshopcartItem中的优惠信息赋给TradeVo中的TradeItem
-     * @Param @param mTradeVo
-     * @Param @param listShopcartItem TODO
-     * @Return void 返回类型
-     */
+
     public static void updateTradeItemPrivilgeOfRelate(TradeVo mTradeVo, List<IShopcartItem> listShopcartItem) {
 
         for (TradeItemVo tradeItemVo : mTradeVo.getTradeItemList()) {
             TradeItem tradeItem = tradeItemVo.getTradeItem();
             TradePrivilege oldTradePrivilege = tradeItemVo.getTradeItemPrivilege();
-            TradeReasonRel oldTradeReasonRel = tradeItemVo.getReasonLast2(); //.getDiscountReason();
-            for (IShopcartItem shopcartItem : listShopcartItem) {
+            TradeReasonRel oldTradeReasonRel = tradeItemVo.getReasonLast2();             for (IShopcartItem shopcartItem : listShopcartItem) {
                 if (shopcartItem.getUuid() != null
                         && shopcartItem.getUuid().equals(tradeItem.getUuid())) {
 
-                    //新单有
-                    TradeReasonRel newTradeReasonRel = shopcartItem.getDiscountReasonRel();
+                                        TradeReasonRel newTradeReasonRel = shopcartItem.getDiscountReasonRel();
                     if (shopcartItem.getInvalidType() == InvalidType.RETURN_QTY) {
                         newTradeReasonRel = shopcartItem.getReturnQtyReason();
                     }
@@ -1024,32 +741,13 @@ public class CreateTradeTool {
                             tradeItemVo.setDiscountReason(newTradeReasonRel);
                         }
                     } else {
-                        //新单没有，原单有 把原单的置为无效
-                        if (oldTradeReasonRel != null) {
+                                                if (oldTradeReasonRel != null) {
                             tradeItemVo.removeTradeReasonRel(oldTradeReasonRel, oldTradeReasonRel.getOperateType());
                         }
                     }
 
-                    //处理礼品劵
-//                    if (shopcartItem.getCouponPrivilegeVo() != null && shopcartItem.getCouponPrivilegeVo().getTradePrivilege() != null) {
-//                        if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
-//                            TradePrivilege newTradePrivilege = shopcartItem.getCouponPrivilegeVo().getTradePrivilege();
-//                            TradePrivilege mTradePrivilege = cloneTradePrivilege(newTradePrivilege);
-//                            TradePrivilege oldPrivilege = tradeItemVo.getCouponPrivilegeVo().getTradePrivilege();
-//                            mTradePrivilege.setCouponId(oldPrivilege.getId());
-//                            oldPrivilege.setChanged(true);
-//                        } else {
-//                            tradeItemVo.setCouponPrivilegeVo(shopcartItem.getCouponPrivilegeVo());
-//                        }
-//                    } else {
-//                        if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
-//                            tradeItemVo.getCouponPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
-//                            tradeItemVo.getCouponPrivilegeVo().getTradePrivilege().setChanged(true);
-//                        }
-//                    }
 
-                    // 新单有
-                    if (shopcartItem.getPrivilege() != null) {
+                                        if (shopcartItem.getPrivilege() != null) {
                         TradePrivilege mTradePrivilege = cloneTradePrivilege(shopcartItem.getPrivilege());
                         mTradePrivilege.setTradeId(tradeItem.getTradeId());
                         mTradePrivilege.setTradeUuid(tradeItem.getTradeUuid());
@@ -1066,8 +764,7 @@ public class CreateTradeTool {
                         break;
 
                     } else {
-                        // 新单沒有原单有
-                        if (oldTradePrivilege != null) {
+                                                if (oldTradePrivilege != null) {
                             if (tradeItem.getId() == null) {
                                 tradeItemVo.setTradeItemPrivilege(null);
                                 break;
@@ -1097,13 +794,7 @@ public class CreateTradeTool {
         return theNew;
     }
 
-    /**
-     * 创建桌位号对象
-     *
-     * @param shopcartItem
-     * @param tableSeat
-     * @return
-     */
+
     public static TradeItemExtraDinner buildTradeItemExtraDinner(IShopcartItem shopcartItem, TableSeat tableSeat) {
         if (tableSeat == null) {
             return null;

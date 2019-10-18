@@ -40,8 +40,7 @@ public class UpdateManager {
 
     @Deprecated
     public void init(Context context) {
-		/*mDownloadManager = (DownloadManager) context
-				.getSystemService(Context.DOWNLOAD_SERVICE);*/
+
     }
 
     public void download() {
@@ -68,37 +67,11 @@ public class UpdateManager {
         }
     }
 
-	/*public void downloadPrint() {
-		if (MainApplication.getInstance().getVersionInfo().hasUpdate()) {
-			String updateUrl = MainApplication.getInstance().getPrintVersionInfo()
-					.get(VersionInfo.UPDATE_URL_KEY);
-			if (!TextUtils.isEmpty(updateUrl) && URLUtil.isValidUrl(updateUrl)) {
-				if (UpdateManager.getInstance().isDownloadRunning()) {
-					ToastUtil.showLongToast(R.string.is_loading);
-					return;
-				} else {
-					ToastUtil.showLongToast(R.string.start_load_packet);
-					try {
-						download(updateUrl);
-					} catch (Exception e) {
-						Log.e(TAG, "", e);
-						ToastUtil.showLongToast(R.string.load_manager_not_open);
-					}
-
-				}
-			} else {
-				Resources res = MainApplication.getInstance().getResources();
-				ToastUtil.showLongToast(String.format(res.getString(R.string.error_level_up_address_format), updateUrl));
-			}
-		}
-	}*/
 
     public void download(String url) {
 
         Uri resource = Uri.parse(url);
         Request request = new Request(resource);
-//		request.setAllowedNetworkTypes(Request.NETWORK_MOBILE
-//				| Request.NETWORK_WIFI);
         request.setAllowedOverRoaming(false);
         MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         String mimeString = mimeTypeMap.getMimeTypeFromExtension(MimeTypeMap

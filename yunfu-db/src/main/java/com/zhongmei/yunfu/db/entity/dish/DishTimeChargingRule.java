@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.db.DataEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Created by dingzb on 2019/7/3.
- */
+
 @DatabaseTable(tableName = "dish_time_charging_rule")
 public class DishTimeChargingRule extends BasicEntityBase {
 
@@ -44,25 +42,17 @@ public class DishTimeChargingRule extends BasicEntityBase {
     @DatabaseField(columnName = "dish_id")
     private Long dishId;
     @DatabaseField(columnName = "start_charging_times")
-    private BigDecimal startChargingTimes; //默认时间
-    @DatabaseField(columnName = "start_charging_price")
-    private BigDecimal startChargingPrice; //默认价格
-
+    private BigDecimal startChargingTimes;     @DatabaseField(columnName = "start_charging_price")
+    private BigDecimal startChargingPrice;
     @DatabaseField(columnName = "charging_unit")
-    private BigDecimal chargingUnit; //增长单位
-    @DatabaseField(columnName = "charging_price")
-    private BigDecimal chargingPrice;//增长的价格
-
+    private BigDecimal chargingUnit;     @DatabaseField(columnName = "charging_price")
+    private BigDecimal chargingPrice;
     @DatabaseField(columnName = "full_unit")
-    private BigDecimal fullUnit;//计算条件，满多少分钟，算多少时间
-    @DatabaseField(columnName = "full_unit_charging")
-    private BigDecimal fullUnitCharging;//计算条件，当满了多少分钟后，算多少时间。
-
+    private BigDecimal fullUnit;    @DatabaseField(columnName = "full_unit_charging")
+    private BigDecimal fullUnitCharging;
     @DatabaseField(columnName = "no_full_unit")
-    private BigDecimal noFullUnit;//不满多少分钟，处理条件
-    @DatabaseField(columnName = "no_full_unit_charging")
-    private BigDecimal noFullUnitCharging;//计算条件，当不满多少分钟，算多少时间
-
+    private BigDecimal noFullUnit;    @DatabaseField(columnName = "no_full_unit_charging")
+    private BigDecimal noFullUnitCharging;
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
     @DatabaseField(columnName = "creator_name")

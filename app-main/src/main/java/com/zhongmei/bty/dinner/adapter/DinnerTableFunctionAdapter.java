@@ -14,15 +14,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class DinnerTableFunctionAdapter extends BaseAdapter {
     private Context mContext;
     private List<FunctionBean> mListFunction;
     private LayoutInflater mInflater;
-    private Set<Integer> mCheckFunction;//存放选中功能模块，存放标识为functionCode
-    private OnFunctionChangeListener mFunctionChangeListener;
+    private Set<Integer> mCheckFunction;    private OnFunctionChangeListener mFunctionChangeListener;
     private HoldView holdView = null;
     ;
 

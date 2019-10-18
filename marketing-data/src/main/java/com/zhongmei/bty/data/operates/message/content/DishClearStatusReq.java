@@ -6,12 +6,7 @@ import com.zhongmei.yunfu.db.enums.ClearStatus;
 import com.zhongmei.yunfu.util.ValueEnums;
 
 
-/**
- * 封装调用估清菜品接口所需的请求数据
- *
- * @version: 1.0
- * @date 2015年8月11日
- */
+
 public class DishClearStatusReq {
 
     private Integer newClearStatus;

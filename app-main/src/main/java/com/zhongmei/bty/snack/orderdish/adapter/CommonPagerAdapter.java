@@ -6,9 +6,7 @@ import android.view.ViewGroup;
 
 import java.util.List;
 
-/**
- * 通用的ViewPager适配器
- */
+
 public class CommonPagerAdapter extends PagerAdapter {
     private List<View> views;
 

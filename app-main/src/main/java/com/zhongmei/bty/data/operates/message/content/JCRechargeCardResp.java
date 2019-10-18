@@ -3,9 +3,7 @@ package com.zhongmei.bty.data.operates.message.content;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 import com.zhongmei.bty.basemodule.devices.mispos.data.bean.CardChangeInfo;
 
-/**
- * 金诚储值返回
- */
+
 
 public class JCRechargeCardResp {
 

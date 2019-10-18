@@ -22,9 +22,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by dingzb on 2019/2/28.
- */
+
 @EFragment(R.layout.dialog_update_hint)
 public class UpdateHintDialog extends DialogFragment implements DialogInterface.OnKeyListener,View.OnClickListener{
 
@@ -117,9 +115,6 @@ public class UpdateHintDialog extends DialogFragment implements DialogInterface.
     @Override
     public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent event) {
         if (keyCode == event.KEYCODE_HOME) {
-//            if (mCancelWithHomeKey) {
-//            dismiss();
-//            }
             if (getActivity() != null) {
                 getActivity().onKeyDown(keyCode, event);
             }

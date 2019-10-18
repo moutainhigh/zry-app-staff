@@ -117,9 +117,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 订单中心订单列表
- */
+
 @EFragment(R.layout.frg_order_center_list)
 public class OrderCenterListFragment extends BasicFragment implements IOrderCenterListView, UserGridAdapter.OnUserSelectedListener {
     private static final String TAG = OrderCenterListFragment.class.getSimpleName();
@@ -127,8 +125,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
     @ViewById(R.id.layout_titlebar)
     protected LinearLayout layout_titlebar;
 
-    //菜单按钮可呼出侧边栏
-    @ViewById(R.id.cashier_title_bar_menu_btn)
+        @ViewById(R.id.cashier_title_bar_menu_btn)
     protected ImageView mMenu;
 
     @ViewById(R.id.bind_delivery_user_and_send)
@@ -190,9 +187,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
 
     @ViewById(R.id.square_account_layout)
     RelativeLayout mSquareAccountLayout;
-    /**
-     * 用于点击了清账按钮后,显示额外的筛选布局
-     */
+
     @ViewById(R.id.square_account_filter_layout)
     LinearLayout mSquareAccountFilterLayout;
 
@@ -263,22 +258,17 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
     @ViewById(R.id.loading_view)
     LoadingSmallView mLoadingSmallView;
 
-    // v8.12.0 口碑
-    @ViewById(R.id.tv_order_center_koubei_verification)
+        @ViewById(R.id.tv_order_center_koubei_verification)
     TextView mKoubeiVerfication;
 
     private int mChildTab = -1;
 
     private int mSelectedProcessDelivery = 1;
 
-    /**
-     * 是否已经处理了外部传入的intenttab
-     */
+
     private boolean hasProcessIntentTab = false;
 
-    /**
-     * 子标签
-     */
+
     private List<Pair<String, Integer>> childTabs;
     private UserDialog userDialog;
     List<User> allUserList;
@@ -296,9 +286,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         }
     };
 
-    /**
-     * 筛选条件
-     */
+
     private List<android.util.Pair<String, ValueEnum>> filterConditions;
 
     private IOrderCenterListPresenter mPresenter;
@@ -330,37 +318,24 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
     public static final Uri URI_VERIFY_KOUBEI_ORDER = DBHelperManager.getUri(VerifyKoubeiOrder.class);
     private OrderCenterChangeObserver mDataObserver;
     private OrderNotifyChangeObserver mNotifyObserver;
-    /**
-     * 是否处于搜索
-     */
+
     private boolean isInSearchMode = false;
-    /**
-     * 是否是在清账模式
-     */
+
     private boolean isInSquareAccountMode = false;
 
-    //是否处于派单/下发模式
-    private boolean isInDeliveryMode = false;
+        private boolean isInDeliveryMode = false;
 
     public static String KEY_TAKE_MEAL_NOTICE = "key_take_meal_notice";
 
-    /**
-     * 第一类的最后点击项
-     */
+
     private int firstClickTab = DbQueryConstant.UNPROCESSED_ALL;
-    /**
-     * 第二类的最后点击项
-     */
+
     private int secondClickTab = DbQueryConstant.SALES_ALL;
-    /**
-     * 搜索范围选中的item位置
-     */
+
     private int searchPosition;
     private DeliveryPlatformPopupWindow mDeliveryPlatformPopupWindow;
 
-    /**
-     * 数据改变监听器
-     */
+
     private class OrderCenterChangeObserver implements DatabaseHelper.DataChangeObserver {
 
         @Override
@@ -430,10 +405,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
     }
 
 
-    /**
-     * @param fromType   来源：-1为快餐，1为正餐 2为自助餐
-     * @param currentTab 当前Tab栏位
-     */
+
     public static OrderCenterListFragment newInstance(int fromType, int currentTab) {
         return newInstance(fromType, currentTab, false);
     }
@@ -442,9 +414,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         return newInstance(fromType, currentTab, isSquareAccountMod, null);
     }
 
-    /**
-     * 添加配送取消的通知类型
-     */
+
     public static OrderCenterListFragment newInstance(int fromType, int currentTab, boolean isSquareAccountMod, NotificationType notificationType) {
         return newInstance(fromType, currentTab, isSquareAccountMod, notificationType, null);
     }
@@ -455,8 +425,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         args.putInt(Constant.EXTRA_CURRENT_TAB, currentTab);
         args.putBoolean(Constant.EXTRA_SQUARE_MOD, isSquareAccountMod);
         if (notificationType != null) {
-            //args.putSerializable(NotifyCenterUtil.EXTRA_NOTIFY_TYPE, notificationType);
-        }
+                    }
         args.putSerializable("filterCond", (Serializable) filterCond);
         OrderCenterListFragment orderCenterListFragment = new OrderCenterListFragment_();
         orderCenterListFragment.setArguments(args);
@@ -471,8 +440,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
             mFromType = arguments.getInt(Constant.EXTRA_FROM_TYPE);
             mTargetTab = arguments.getInt(Constant.EXTRA_CURRENT_TAB);
             mSquareModEnable = arguments.getBoolean(Constant.EXTRA_SQUARE_MOD);
-            //mNotificationType = (NotificationType) arguments.getSerializable(NotifyCenterUtil.EXTRA_NOTIFY_TYPE);
-            filterCond = (List<ValueEnum>) arguments.getSerializable("filterCond");
+                        filterCond = (List<ValueEnum>) arguments.getSerializable("filterCond");
         }
         initPresenter();
         registerDataObserver();
@@ -481,12 +449,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
 
     private void initTitleBarBg() {
         switch (mFromType) {
-            case OCConstant.FromType.FROM_TYPE_SNACK://快餐
-            case OCConstant.FromType.FROM_TYPE_DINNER://正餐
-            case OCConstant.FromType.FROM_TYPE_BUFFET://自助餐
-            case OCConstant.FromType.FROM_TYPE_GROUP://团餐
-            case OCConstant.FromType.FROM_TYPE_RETAIL://零售
-                layout_titlebar.setBackgroundColor(getResources().getColor(R.color.snack_title_bg));
+            case OCConstant.FromType.FROM_TYPE_SNACK:            case OCConstant.FromType.FROM_TYPE_DINNER:            case OCConstant.FromType.FROM_TYPE_BUFFET:            case OCConstant.FromType.FROM_TYPE_GROUP:            case OCConstant.FromType.FROM_TYPE_RETAIL:                layout_titlebar.setBackgroundColor(getResources().getColor(R.color.snack_title_bg));
                 mProcessBtn.setBackgroundResource(R.drawable.radiobutton_left);
                 mSalesNoteBtn.setBackgroundResource(R.drawable.radiobutton_right);
                 mProcessBtn.setTextColor(getResources().getColorStateList(R.color.handover_textcolor_selector));
@@ -494,8 +457,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
                 rgProcessDisplayGroup.setVisibility(View.VISIBLE);
                 tv_listTitle.setVisibility(View.GONE);
                 break;
-            case OCConstant.FromType.FROM_TYPE_BEAUTY://美业
-                layout_titlebar.setBackgroundColor(getResources().getColor(R.color.beauty_bg_white));
+            case OCConstant.FromType.FROM_TYPE_BEAUTY:                layout_titlebar.setBackgroundColor(getResources().getColor(R.color.beauty_bg_white));
                 mProcessBtn.setBackgroundResource(R.drawable.beauty_ordercenter_tab_left_selector);
                 mSalesNoteBtn.setBackgroundResource(R.drawable.beauty_ordercenter_tab_right_selector);
                 mSalesNoteBtn.setTextColor(getResources().getColorStateList(R.color.beauty_titlebar_tab_selector));
@@ -508,32 +470,21 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
 
     private void initPresenter() {
         switch (mFromType) {
-            case OCConstant.FromType.FROM_TYPE_SNACK://快餐
-                mPresenter = new SnackOrderCenterListPresenter(this);
+            case OCConstant.FromType.FROM_TYPE_SNACK:                mPresenter = new SnackOrderCenterListPresenter(this);
                 break;
-            case OCConstant.FromType.FROM_TYPE_DINNER://正餐
-                mPresenter = new DinnerOrderCenterListPresenter(this);
+            case OCConstant.FromType.FROM_TYPE_DINNER:                mPresenter = new DinnerOrderCenterListPresenter(this);
                 break;
-            case OCConstant.FromType.FROM_TYPE_BUFFET://自助餐
-                mPresenter = new BuffetOrderCenterListPresenter(this);
+            case OCConstant.FromType.FROM_TYPE_BUFFET:                mPresenter = new BuffetOrderCenterListPresenter(this);
                 break;
-            case OCConstant.FromType.FROM_TYPE_GROUP://团餐
-                mPresenter = new GroupOrderCenterListPresenter(this);
+            case OCConstant.FromType.FROM_TYPE_GROUP:                mPresenter = new GroupOrderCenterListPresenter(this);
                 break;
-            case OCConstant.FromType.FROM_TYPE_RETAIL://零售
-                //mPresenter = new RetailOrderCenterListPresenter(this);
-                break;
-            case OCConstant.FromType.FROM_TYPE_BEAUTY://美业
-                mPresenter = new BeautyOrderCenterListPresenter(this);
+            case OCConstant.FromType.FROM_TYPE_RETAIL:                                break;
+            case OCConstant.FromType.FROM_TYPE_BEAUTY:                mPresenter = new BeautyOrderCenterListPresenter(this);
                 break;
         }
     }
 
-    /**
-     * 判断当前是否为快餐模块
-     *
-     * @return 为true表示快餐模块，false表示正餐模块
-     */
+
     private boolean isFromSnack() {
         return mFromType == OCConstant.FromType.FROM_TYPE_SNACK || mFromType == OCConstant.FromType.FROM_TYPE_RETAIL;
     }
@@ -541,10 +492,8 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
     @AfterViews
     protected void initView() {
         if (mPresenter.showBackButton()) {
-            //initBackBtn();
-        } else {
-            //mBackPage.setVisibility(View.GONE);
-        }
+                    } else {
+                    }
 
         if (mPresenter.showMenuButton()) {
             mMenu.setVisibility(View.VISIBLE);
@@ -558,8 +507,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
             mRefresh.setVisibility(View.GONE);
         }
 
-        //刷新通知中心角标
-        allWaiter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                allWaiter.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
@@ -568,12 +516,10 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
             }
         });
 
-        //defaultCheck
-        mProcessBtn.setChecked(true);
+                mProcessBtn.setChecked(true);
         fetchChildTab();
 
-        //设置过滤条件
-        if (filterCond != null) {
+                if (filterCond != null) {
             if (filterConditions == null) {
                 filterConditions = new ArrayList<>();
             }
@@ -649,8 +595,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == mCenterListAdapter.getItemCount()) {
                     TradePaymentVo tradePaymentVo = (TradePaymentVo) mCenterListAdapter.getItem(mCenterListAdapter.getItemCount() - 1);
-                    if (tradePaymentVo != null) {//add v8.3
-                        TradeVo tradeVo = tradePaymentVo.getTradeVo();
+                    if (tradePaymentVo != null) {                        TradeVo tradeVo = tradePaymentVo.getTradeVo();
                         if (isInSearchMode) {
                             String keyword = mSearchContent.getText().toString();
                             if (keyword.isEmpty()) {
@@ -698,16 +643,13 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
                 }
             }
         });
-        //从通知中心 配送跳转到订单中心 直接进入待配送 下发
-        if (mNotificationType != null && NotificationType.DELIVERY_WAITING.equals(mNotificationType)) {
+                if (mNotificationType != null && NotificationType.DELIVERY_WAITING.equals(mNotificationType)) {
             bindDeliveryUserButtonClick();
         }
         initTitleBarBg();
     }
 
-    /**
-     * 保存点击状态为了后续恢复
-     */
+
     private void saveClickStateToRestore() {
         if (mProcessBtn.isChecked()) {
             firstClickTab = mChildTab;
@@ -744,12 +686,9 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         EventBus.getDefault().post(new EventSelectOrder(mChildTab, "", isInSquareAccountMode, isInDeliveryMode, mFromType));
     }
 
-    /**
-     * 判断来源
-     */
+
     private boolean processIntentData() {
-        if (!hasProcessIntentTab) {//只有第一次进来才没有值
-            List<Pair<String, Integer>> processTab = new ArrayList<Pair<String, Integer>>();
+        if (!hasProcessIntentTab) {            List<Pair<String, Integer>> processTab = new ArrayList<Pair<String, Integer>>();
             mPresenter.addProcessTab(processTab);
             List<Pair<String, Integer>> saleTab = new ArrayList<Pair<String, Integer>>();
             mPresenter.addSaleNoteTab(saleTab);
@@ -778,13 +717,11 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
             }
             mChildTabAdapter.setCheck(mProcessBtn.isChecked());
             hasProcessIntentTab = true;
-            //上面方法有清除查询条件的操作，所以这边重新组装查询条件
-            if (mNotificationType != null && mNotificationType == NotificationType.DELIVERY_CANCEL) {
+                        if (mNotificationType != null && mNotificationType == NotificationType.DELIVERY_CANCEL) {
                 if (filterConditions == null) {
                     filterConditions = new ArrayList<>();
                 }
-                // 非清帐模式
-                if (!isInSquareAccountMode) {
+                                if (!isInSquareAccountMode) {
                     filterConditions.add(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_detail_delivery_cancel), DeliveryOrderStatus.DELIVERY_CANCEL));
                     filterConditions.add(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_list_delivery_man_cancel), DeliveryOrderSubStatus.DELIVERY_MAN_CANCEL));
                     filterConditions.add(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_list_delivery_error_recreate_allow), DeliveryOrderSubStatus.DELIVERY_ERROR_RECREATE_ALLOW));
@@ -825,9 +762,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         setChildTabAndFillListData(isInChildTab());
     }
 
-    /**
-     * 判断当前tab里之前是不是存在,用于切换tab后的恢复
-     */
+
     private int isInChildTab() {
         for (int i = 0; i < childTabs.size(); i++) {
             Pair<String, Integer> pair = childTabs.get(i);
@@ -857,9 +792,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         return mProcessBtn.isChecked() ? DbQueryConstant.UNPROCESSED : DbQueryConstant.SALES;
     }
 
-    /**
-     * 关闭搜索筛选面板
-     */
+
     private void closeSearchAndFilterLayout() {
         searchIcon();
         mFilterTipLayout.setVisibility(View.GONE);
@@ -871,8 +804,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
     private void setChildTabAndFillListData(int index) {
         mChildTabView.setLayoutManager(new RecyclerGridLayoutManager(getActivity().getApplicationContext(), childTabs.size()));
         mChildTabAdapter.setItems(childTabs);
-        //设置第一项选中
-        mChildTabAdapter.setSelectItem(index);
+                mChildTabAdapter.setSelectItem(index);
         Pair<String, Integer> item = (Pair<String, Integer>) mChildTabAdapter.getItem(index);
         mChildTab = item.second;
         saveClickStateToRestore();
@@ -926,11 +858,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         fetchChildTab();
     }
 
-    /**
-     * 获取除京东外的所有来源
-     *
-     * @return
-     */
+
     public List<SourceId> getAllSourceNotJD() {
         List<SourceId> sourceIds = new ArrayList<>(Arrays.asList(SourceId.values()));
         sourceIds.remove(SourceId.JD_HOME);
@@ -977,9 +905,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         }
     }
 
-    /**
-     * 显示搜索按钮
-     */
+
     private void searchIcon() {
         mSearchBtn.setImageResource(R.drawable.order_center_search);
         mSearchBtn.setTag(0);
@@ -992,9 +918,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         refreshBindDeliveryUserLayout();
     }
 
-    /**
-     * 显示搜索面板和关闭图标
-     */
+
     private void searchMode() {
         mSearchBtn.setImageResource(R.drawable.close_icon);
         mSearchBtn.setTag(1);
@@ -1010,9 +934,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         setSearchContentHitAll();
     }
 
-    /**
-     * 搜索全部按钮点击
-     */
+
     @Click(R.id.order_center_search_type)
     void searchTypeClick() {
         FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -1116,9 +1038,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         }
     }
 
-    /**
-     * 取出筛选条件,用于展示
-     */
+
     private String selectFilterCondition() {
         StringBuilder builder = new StringBuilder();
         for (android.util.Pair<String, ValueEnum> condition : filterConditions) {
@@ -1126,8 +1046,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
                 builder.append(condition.first + "/");
             }
         }
-        //绑定外卖员模式下，移除配送方式
-        if (isInDeliveryMode) {
+                if (isInDeliveryMode) {
             for (int i = filterConditions.size() - 1; i >= 0; i--) {
                 android.util.Pair<String, ValueEnum> pair = filterConditions.get(i);
                 if (pair.second instanceof DeliveryType) {
@@ -1141,8 +1060,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
                 }
             }
         }
-        //清账模式或派单模式下,移除配送状态
-        if (isInSquareAccountMode || isInDeliveryMode) {
+                if (isInSquareAccountMode || isInDeliveryMode) {
             for (int i = filterConditions.size() - 1; i >= 0; i--) {
                 android.util.Pair<String, ValueEnum> pair = filterConditions.get(i);
                 if (pair.second instanceof DeliveryStatus
@@ -1189,12 +1107,10 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         mCenterListAdapter.setChildTab(mChildTab);
         if (mChildTab == DbQueryConstant.SALES_PAID
                 || mChildTab == DbQueryConstant.SALES_UNPAID) {
-//            salesPaidCommonMode(); update by dzb  清帐状态不显示
             if (mChildTab == DbQueryConstant.SALES_UNPAID) {
                 mSquareAccount.setVisibility(View.GONE);
             }
-            //读取设置项,不存在则打开
-            boolean takeMealNotice = SharedPreferenceUtil.getSpUtil().getBoolean(KEY_TAKE_MEAL_NOTICE, true);
+                        boolean takeMealNotice = SharedPreferenceUtil.getSpUtil().getBoolean(KEY_TAKE_MEAL_NOTICE, true);
             if (takeMealNotice) {
                 mTakeMealNotice.setChecked(true);
             } else {
@@ -1214,9 +1130,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         registerDataObserver();
     }
 
-    /**
-     * 清账
-     */
+
     @Click(R.id.square_account)
     void squareAccountClickMode() {
         mSquareAccountLayout.setVisibility(View.VISIBLE);
@@ -1283,9 +1197,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         }
     }
 
-    /**
-     * 取消清账
-     */
+
     @Click(R.id.order_center_cancel)
     void cancelClick() {
         if (user != null) {
@@ -1320,18 +1232,12 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         mConfirm.setVisibility(View.GONE);
     }
 
-    /**
-     * 是否支持广播叫号
-     *
-     * @return
-     */
+
     private boolean isTakeMealNotice() {
         return isFromSnack() || mFromType == OCConstant.FromType.FROM_TYPE_DINNER;
     }
 
-    /**
-     * 确认清账
-     */
+
     @Click(R.id.confirm_square_account)
     void confirmSquareAccountButtonClick() {
         mPresenter.deliveryPayment(mCenterListAdapter.getSelectedOrders());
@@ -1370,8 +1276,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         }
     }
 
-    //所有服务员被选中
-    private void allWaiterSelected() {
+        private void allWaiterSelected() {
         user = null;
         allWaiter.setChecked(true);
         selectWaiter.setChecked(false);
@@ -1389,8 +1294,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         selectWaiterSelected();
     }
 
-    //部分服务员被选中
-    private void selectWaiterSelected() {
+        private void selectWaiterSelected() {
         int titleResId;
         if (isFromSnack()) {
             allUserList = Session.getFunc(UserFunc.class).getUsers(FastFoodApplication.PERMISSION_FASTFOOD_SC);
@@ -1409,16 +1313,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
     @Override
     public void refreshNotifyCenterTip() {
         Activity activity = getActivity();
-        /*if (activity instanceof MainActivity) {
-            NotifyCenterView notifyCenterView = ((MainActivity) activity).getNotifyCenterView();
-            NotifyCenterManager.getInstance().refreshNotifyCenterTip(getActivity(), notifyCenterView, vNotifyCenterTip);
-        }*/ /*else if (activity instanceof RetailMainActivity) {
-            NotifyCenterView notifyCenterView = ((RetailMainActivity) activity).getNotifyCenterView();
-            NotifyCenterManager.getInstance().refreshNotifyCenterTip(getActivity(), notifyCenterView, vNotifyCenterTip);
-        }else if (activity instanceof BakeryMainActivity) {
-            NotifyCenterView notifyCenterView = ((BakeryMainActivity) activity).getNotifyCenterView();
-            NotifyCenterManager.getInstance().refreshNotifyCenterTip(getActivity(), notifyCenterView, vNotifyCenterTip);
-        }*/
+
     }
 
     @Override
@@ -1450,8 +1345,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
                     showEmptyView(true);
                     fireEmptyBus();
                 }
-            } else {//1为加载更多模式
-                if (!tradePaymentVos.isEmpty()) {
+            } else {                if (!tradePaymentVos.isEmpty()) {
                     mCenterListAdapter.addItem(tradePaymentVos);
                 }
             }
@@ -1515,15 +1409,13 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
                 condition.setDeliveryStatus(DeliveryStatus.REAL_DELIVERY);
                 condition.setPayModeId(PayModeId.CASH);
                 condition.setPaySource(PaySource.ON_MOBILE);
-                if (user != null) {//配送员信息
-                    String[] userInfo = {user.getId().toString(), user.getAccount()};
+                if (user != null) {                    String[] userInfo = {user.getId().toString(), user.getAccount()};
                     condition.setDeliveryInfo(userInfo);
                 }
             } else {
                 condition.setTradeStatus(Utils.entity2List(TradeStatus.SQUAREUP));
                 condition.setPayModeId(PayModeId.CASH);
-                if (Id != 0) {//服务员id
-                    condition.setUpdatorId(Id);
+                if (Id != 0) {                    condition.setUpdatorId(Id);
                 }
                 if (user != null && user.getId() != 0) {
                     condition.setUpdatorId(user.getId());
@@ -1538,10 +1430,8 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
             List<DeliveryOrderStatus> deliveryOrderStatuses = new ArrayList<>();
             deliveryOrderStatuses.add(DeliveryOrderStatus.WAITING_CREATE);
             condition.setDeliveryOrderStatuses(deliveryOrderStatuses);
-            if (mProcessDeliveryUser.isChecked()) {//派单模式
-                condition.setExcludeOfflineOrder(true);
-            } else { //下发模式
-                condition.setExcludePosOrder(true);
+            if (mProcessDeliveryUser.isChecked()) {                condition.setExcludeOfflineOrder(true);
+            } else {                 condition.setExcludePosOrder(true);
             }
         } else {
             condition.setUpdatorId(0);
@@ -1711,8 +1601,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
     }
 
     private void refreshBindDeliveryUserLayout() {
-        //当前子标签是否销货单-全部
-        if (DbQueryConstant.SALES_ALL == mChildTab && isFromSnack()) {
+                if (DbQueryConstant.SALES_ALL == mChildTab && isFromSnack()) {
             mCenterListAdapter.setCheckBoxVisibility(false);
             rlBindDeliveryUser.setVisibility(View.VISIBLE);
             tvBindDeliveryUserAndSend.setVisibility(View.VISIBLE);
@@ -1731,8 +1620,7 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
                 displayKouBeiScan();
             }
         }
-        mFilterBtn.setVisibility(View.GONE);//update by dzb
-        isInDeliveryMode = false;
+        mFilterBtn.setVisibility(View.GONE);        isInDeliveryMode = false;
         mCenterListAdapter.setInBindDeliveryUserMode(isInDeliveryMode);
     }
 
@@ -1798,11 +1686,8 @@ public class OrderCenterListFragment extends BasicFragment implements IOrderCent
         }
     }
 
-    /**
-     * 口碑
-     */
+
     private void displayKouBeiScan() {
-        // v8.12.0 口碑业务开通显示按钮
-        mKoubeiVerfication.setVisibility(mPresenter.isShowKoubeiVerification() ? View.VISIBLE : View.GONE);
+                mKoubeiVerfication.setVisibility(mPresenter.isShowKoubeiVerification() ? View.VISIBLE : View.GONE);
     }
 }

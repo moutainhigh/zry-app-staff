@@ -23,12 +23,8 @@ public class CheckUtil {
     private Check mCurrentCheck;
 
     public CheckUtil(Context context, CheckCallback allCheckListener) {
-        //mAllCheckList.add(new AppUpdateCheck(context));
-        //mAllCheckList.add(new PrintUpdateCheck(context));
-        //mAllCheckList.add(new InventoryCheck(context));
-        mAllCheckList.add(new SyncCheck(context));
-        //mAllCheckList.add(new OfflineCheck(context));
-        mAllCheckListener = allCheckListener;
+                                mAllCheckList.add(new SyncCheck(context));
+                mAllCheckListener = allCheckListener;
         for (Check item : mAllCheckList) {
             item.setCheckListener(mCheckListener);
         }

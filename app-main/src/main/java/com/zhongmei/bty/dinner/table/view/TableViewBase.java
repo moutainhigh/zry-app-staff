@@ -33,27 +33,17 @@ import com.zhongmei.bty.commonmodule.util.SpendTimeFormater;
 
 import java.util.List;
 
-/**
- * 正餐桌台视图
- *
- * @version: 1.0
- * @date 2015年8月26日
- */
+
 public class TableViewBase extends FrameLayout {
 
-//	private final List<DinnertableTradeView> mTradeViews;
 
     protected DinnertableModel mModel;
 
-    protected DinnertableStatus dinnertableStatus;//桌台最终状态
-
+    protected DinnertableStatus dinnertableStatus;
     protected RelativeLayout tradesGroup;
 
-    protected ImageView reserveIv;//当前就餐类型（团餐／自助餐／正餐）
-
-    protected ImageView bookingIv;//预定图标
-
-//	protected TableTradeViewBase tradeView;
+    protected ImageView reserveIv;
+    protected ImageView bookingIv;
 
     protected View vDinnerTable;
 
@@ -73,7 +63,6 @@ public class TableViewBase extends FrameLayout {
 
     public TableViewBase(Context context, AttributeSet attrs) {
         super(context, attrs);
-//		mTradeViews = new ArrayList<DinnertableTradeView>();
     }
 
     public DinnertableModel getModel() {
@@ -81,10 +70,8 @@ public class TableViewBase extends FrameLayout {
     }
 
     public void setModel(DinnertableModel model) {
-//		UserActionEvent.start(UserActionEvent.DINNER_TABLE_REFRESH);
         mModel = model;
         refresh();
-//		UserActionEvent.end(UserActionEvent.DINNER_TABLE_REFRESH);
     }
 
     protected TableTradeViewBase createTradeView(IDinnertableTrade tradeModel) {
@@ -107,10 +94,7 @@ public class TableViewBase extends FrameLayout {
         llTableHeader = (LinearLayout) findViewById(R.id.ll_table_header);
         tradesGroup = (RelativeLayout) findViewById(R.id.dinnertable_trades_group);
         tradesGroup.setBackgroundDrawable(null);
-//		mTradeViews.clear();
 
-//		tradeView=(TableTradeViewBase) findViewById(R.id.dinner_table_order_include);
-//		tradeView.setVisibility(View.GONE);
 
         DinnertableStatus status;
         if (mModel.getTableStatus() == TableStatus.EMPTY) {
@@ -122,35 +106,7 @@ public class TableViewBase extends FrameLayout {
         setTableNameAndPeopleCount(status);
 
         List<IDinnertableTrade> tradeModels = mModel.getDinnertableTrades();
-        //当订单数大于4时，只显示4个
-//		int size = tradeModels.size();
-//		if (size > 4) {
-//			ArrayList<IDinnertableTrade> subList = new ArrayList<IDinnertableTrade>();
-//			for (int i = size - 4; i < size; i++) {
-//				subList.add(tradeModels.get(i));
-//			}
-//			tradeModels = subList;
-//		}
 
-//		int max=-1;
-//		if(tradeModels!=null){
-//			max = tradeModels.size() - 1;
-//		}
-//
-//		for (int i = 0; i <= max; i++) {
-//			IDinnertableTrade tradeModel = tradeModels.get(i);
-//			DinnertableTradeView tradeView = createTradeView(tradeModel);
-//			tradesGroup.addView(tradeView);
-//			mTradeViews.add(tradeView);
-//			RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams)tradeView.getLayoutParams();
-//			layoutParams.leftMargin = (max - i) * 4;
-//			layoutParams.topMargin = i * 1;
-//			tradeView.setLayoutParams(layoutParams);
-//
-//			if (status.value > tradeView.getStatusOfView().value) {
-//				status = tradeModel.getStatus();
-//			}
-//		}
 
         ivEmptyTable = (ImageView) findViewById(R.id.iv_empty_table);
         tvTradeCount = (TextView) findViewById(R.id.tv_trade_count);
@@ -162,25 +118,12 @@ public class TableViewBase extends FrameLayout {
         reserveIv = (ImageView) findViewById(R.id.reserve_iv);
         bookingIv = (ImageView) findViewById(R.id.iv_booking_icon);
 
-//		boolean hasJoinTrade = false;//是否有联台订单
-        boolean showTradeMoney = SharedPreferenceUtil.getSpUtil().getBoolean(DinnerTableConstant.SHOW_TRADE_MONEY_KEY, true);//桌台上是否显示金额
-        if (Utils.isNotEmpty(tradeModels)) {
+        boolean showTradeMoney = SharedPreferenceUtil.getSpUtil().getBoolean(DinnerTableConstant.SHOW_TRADE_MONEY_KEY, true);        if (Utils.isNotEmpty(tradeModels)) {
             IDinnertableTrade tradeModel = tradeModels.get(0);
-//			tradeView.setVisibility(View.VISIBLE);
-//			tradeView.setEnabledDrag(false);
-//			tradeView.enablePreCashDisplay(true);
-//			tradeView.enableHttpRecord(false);
-//			tradeView.setModel(tradeModel);
             status = tradeModel.getStatus();
 
             setTradeCount(tradeModels);
 
-//			for(IDinnertableTrade model : tradeModels){
-//				if(model.getTradeType() == TradeType.UNOIN_TABLE_SUB){
-//					hasJoinTrade = true;
-//					break;
-//				}
-//			}
 
             tvTradeAmount.setVisibility(View.VISIBLE);
             tvTradeTime.setVisibility(View.VISIBLE);
@@ -201,19 +144,6 @@ public class TableViewBase extends FrameLayout {
 
         setTableHeaderAndBackground(status);
 
-//		if(hasJoinTrade) {
-//			if(joinDrawable != null){
-//				joinDrawable.setBounds(0, 0, joinDrawable.getMinimumWidth(), joinDrawable.getMinimumHeight());
-//				tvTradeAmount.setCompoundDrawables(joinDrawable, null, null, null);
-//			}
-//		} else {
-//			if(!showTradeMoney) {
-//				if (serialDrawable != null) {
-//					serialDrawable.setBounds(0, 0, serialDrawable.getMinimumWidth(), serialDrawable.getMinimumHeight());
-//					tvTradeAmount.setCompoundDrawables(serialDrawable, null, null, null);
-//				}
-//			}
-//		}
 
         setUnprocessMark();
 
@@ -224,67 +154,43 @@ public class TableViewBase extends FrameLayout {
         invalidate();
     }
 
-    /**
-     * 设置桌台标题和背景演示
-     *
-     * @param status
-     */
+
     private void setTableHeaderAndBackground(DinnertableStatus status) {
-//		Drawable joinDrawable = TableFragment.defaultJoinDrawable;;
-//		Drawable amountDrawable = TableFragment.defaultAmountDrawable;
-//		Drawable serialDrawable = TableFragment.defaultSerialDrawable;;
         Drawable timeDrawable = TableFragment.defaultTimeDrawable;
         ;
         ivEmptyTable.setVisibility(View.GONE);
         ivDoneTable.setVisibility(GONE);
         switch (status) {
             case EMPTY:
-//				tradesGroup.setBackgroundResource(R.drawable.dinnertable_trades_group_backgound);
-//				vDinnerTable.setBackgroundResource(R.drawable.dinnertable_bg_empty);
-//				vDinnerTable.setBackgroundResource(R.drawable.dinnertable_bg_shadow_empty);
                 llTableHeader.setBackgroundColor(getResources().getColor(R.color.transparent));
                 ivEmptyTable.setVisibility(View.VISIBLE);
                 break;
             case UNISSUED:
                 llTableHeader.setBackgroundResource(R.drawable.dinnertable_bg_unissued_top);
-//				vDinnerTable.setBackgroundResource(R.drawable.dinnertable_bg_unissued);
 
                 tvTradeAmount.setTextColor(Color.parseColor("#D89001"));
                 tvTradeTime.setTextColor(Color.parseColor("#D89001"));
 
-//				joinDrawable = TableFragment.unissueJoinDrawable;
-//				amountDrawable = TableFragment.unissueAmountDrawable;
-//				serialDrawable = TableFragment.unissueSerialDrawable;
                 timeDrawable = TableFragment.unissueTimeDrawable;
                 break;
             case ISSUED:
                 llTableHeader.setBackgroundResource(R.drawable.dinnertable_bg_issued_top);
-//				vDinnerTable.setBackgroundResource(R.drawable.dinnertable_bg_issued);
 
                 tvTradeAmount.setTextColor(Color.parseColor("#0FAAAA"));
                 tvTradeTime.setTextColor(Color.parseColor("#0FAAAA"));
 
-//				joinDrawable = TableFragment.issuedJoinDrawable;
-//				amountDrawable = TableFragment.issuedAmountDrawable;
-//				serialDrawable = TableFragment.issuedSerialDrawable;
                 timeDrawable = TableFragment.issuedTimeDrawable;
                 break;
             case SERVING:
                 llTableHeader.setBackgroundResource(R.drawable.dinnertable_bg_serving_top);
-//				vDinnerTable.setBackgroundResource(R.drawable.dinnertable_bg_serving);
 
                 tvTradeAmount.setTextColor(Color.parseColor("#0B64D3"));
                 tvTradeTime.setTextColor(Color.parseColor("#0B64D3"));
 
-//				joinDrawable = TableFragment.servedJoinDrawable;
-//				amountDrawable = TableFragment.servedAmountDrawable;
-//				serialDrawable = TableFragment.servedSerialDrawable;
                 timeDrawable = TableFragment.servedTimeDrawable;
                 break;
             case DONE:
-//				llTableHeader.setBackgroundColor(getResources().getColor(R.color.transparent));
                 llTableHeader.setBackgroundResource(R.drawable.dinnertable_bg_done_top);
-//				vDinnerTable.setBackgroundResource(R.drawable.dinnertable_bg_done);
                 ivDoneTable.setVisibility(VISIBLE);
                 break;
         }
@@ -295,9 +201,7 @@ public class TableViewBase extends FrameLayout {
         }
     }
 
-    /**
-     * 设置桌台名和桌台人数
-     */
+
     private void setTableNameAndPeopleCount(DinnertableStatus status) {
         TextView nameView = (TextView) findViewById(R.id.name);
         nameView.setText(mModel.getName());
@@ -310,11 +214,7 @@ public class TableViewBase extends FrameLayout {
                 : getResources().getColor(R.color.text_white));
     }
 
-    /**
-     * 设置订单的桌台数（1单时不显示）
-     *
-     * @param tradeModels
-     */
+
     private void setTradeCount(List<IDinnertableTrade> tradeModels) {
         if (tradeModels.size() > 1) {
             tvTradeCount.setVisibility(View.VISIBLE);
@@ -324,12 +224,7 @@ public class TableViewBase extends FrameLayout {
         }
     }
 
-    /**
-     * 显示订单金额／流水号；流水号模式下显示流水号，金额模式下显示订单金额；联台订单显示"联＋主单流水号"（不区分模式）
-     *
-     * @param tradeModel
-     * @param showTradeMoney
-     */
+
     private void setTradeAmount(IDinnertableTrade tradeModel, boolean showTradeMoney) {
         IDinnertableTrade joinMainTrade = mModel.getDinnerUnionMainTrade();
         if (joinMainTrade != null) {
@@ -343,21 +238,13 @@ public class TableViewBase extends FrameLayout {
         }
     }
 
-    /**
-     * 设置订单花费时间
-     *
-     * @param tradeModel
-     */
+
     private void setSpendTime(IDinnertableTrade tradeModel) {
         int spendTime = tradeModel.getSpendTime();
         tvTradeTime.setText(SpendTimeFormater.format(spendTime));
     }
 
-    /**
-     * 展示预结单标示
-     *
-     * @param tradeModel
-     */
+
     private void setPrepayMark(IDinnertableTrade tradeModel) {
         if (SharedPreferenceUtil.getSpUtil().getBoolean(TableFragment.SHOW_PRECASH_KEY, false) &&
                 tradeModel.getPreCashPrintStatus() == YesOrNo.YES) {
@@ -367,9 +254,7 @@ public class TableViewBase extends FrameLayout {
         }
     }
 
-    /**
-     * 展示未处理订单标示
-     */
+
     private void setUnprocessMark() {
         ImageView unProcessNumberView = (ImageView) findViewById(R.id.tv_unprocess_trade_number);
         if (mModel.getUnprocessTradeCount() > 0 || mModel.hasAddDish()) {
@@ -379,9 +264,7 @@ public class TableViewBase extends FrameLayout {
         }
     }
 
-    /**
-     * 展示桌台预定标示
-     */
+
     private void setBookingMark() {
         if (mModel.isReserved()) {
             bookingIv.setVisibility(View.VISIBLE);
@@ -391,12 +274,6 @@ public class TableViewBase extends FrameLayout {
     }
 
     void refreshSpendTime() {
-//		for (DinnertableTradeView tradeView : mTradeViews) {
-//			tradeView.refreshSpendTime();
-//		}
-//		if(tradeView!=null){
-//			tradeView.refreshSpendTime();
-//		}
 
         if (Utils.isNotEmpty(mModel.getDinnertableTrades())) {
             IDinnertableTrade tradeModel = mModel.getDinnertableTrades().get(0);
@@ -408,13 +285,11 @@ public class TableViewBase extends FrameLayout {
 
     void select() {
         View shade = findViewById(R.id.dinnertable_shade);
-//		shade.setVisibility(View.VISIBLE);
         shade.setBackgroundResource(R.drawable.dinnertable_shape_square);
     }
 
     void unselect() {
         View shade = findViewById(R.id.dinnertable_shade);
-//		shade.setVisibility(View.INVISIBLE);
         shade.setBackground(null);
     }
 
@@ -422,12 +297,7 @@ public class TableViewBase extends FrameLayout {
         return dinnertableStatus;
     }
 
-    /**
-     * @Date 2016/7/21
-     * @Description:
-     * @Param
-     * @Return
-     */
+
     public void showOpenTableButton(boolean show) {
         if (show) {
             ivEmptyTable.setVisibility(View.GONE);
@@ -437,12 +307,7 @@ public class TableViewBase extends FrameLayout {
 
     }
 
-    /**
-     * @Date 2016/8/12
-     * @Description:显示预定信息
-     * @Param
-     * @Return
-     */
+
     void refreshReserveStatus() {
         if (mModel.isReserved()) {
             reserveIv.setVisibility(View.VISIBLE);
@@ -462,16 +327,10 @@ public class TableViewBase extends FrameLayout {
         if (Utils.isNotEmpty(listAsyncRecord)) {
             showHttpRecord(listAsyncRecord.get(0));
         } else {
-            showHttpRecord(null);//隐藏
-        }
+            showHttpRecord(null);        }
     }
 
-    /**
-     * @Date 2016/10/13
-     * @Description:显示异步请求信息,根据桌台上的订单,在订单上拿到的异步失败的记录
-     * @Param
-     * @Return
-     */
+
     private void showHttpRecord(final AsyncHttpRecord record) {
         LinearLayout tableShadowLL = (LinearLayout) findViewById(R.id.table_shadow_ll);
 
@@ -486,8 +345,7 @@ public class TableViewBase extends FrameLayout {
         Button retryTv = (Button) findViewById(R.id.table_retry_tv);
         Button cancelTv = (Button) findViewById(R.id.table_cancel_tv);
 
-        //重试响应
-        retryTv.setOnClickListener(new OnClickListener() {
+                retryTv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 MobclickAgentEvent.onEvent(TableViewBase.this.getContext(), MobclickAgentEvent.dinnerAsyncHttpTableRetry);
@@ -499,8 +357,7 @@ public class TableViewBase extends FrameLayout {
         cancelTv.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //取消操作
-                AsyncNetworkManager.getInstance().cancel(record);
+                                AsyncNetworkManager.getInstance().cancel(record);
             }
         });
 

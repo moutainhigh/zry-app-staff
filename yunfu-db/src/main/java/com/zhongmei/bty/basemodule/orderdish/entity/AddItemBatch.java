@@ -8,9 +8,7 @@ import com.zhongmei.bty.commonmodule.database.enums.AddItemBatchStatus;
 import com.zhongmei.yunfu.db.enums.Sex;
 import com.zhongmei.yunfu.db.enums.SourceId;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @DatabaseTable(tableName = "add_item_batch")
 public class AddItemBatch extends ServerEntityBase {
@@ -39,32 +37,25 @@ public class AddItemBatch extends ServerEntityBase {
     }
 
 
-    //订单ID
-    @DatabaseField(columnName = "trade_id", index = true)
+        @DatabaseField(columnName = "trade_id", index = true)
     private Long tradeId;
 
-    //桌台ID
-    @DatabaseField(columnName = "table_id")
+        @DatabaseField(columnName = "table_id")
     private Long tableId;
 
-    //订单单号
-    @DatabaseField(columnName = "trade_no")
+        @DatabaseField(columnName = "trade_no")
     private String tradeNo;
 
-    //桌台名称
-    @DatabaseField(columnName = "table_name")
+        @DatabaseField(columnName = "table_name")
     private String tableName;
 
-    //加菜联系人
-    @DatabaseField(columnName = "contacts_name")
+        @DatabaseField(columnName = "contacts_name")
     private String contactsName;
 
-    //加菜联系人性别  性别 -1 未知 0女 1男
-    @DatabaseField(columnName = "contacts_sex")
+        @DatabaseField(columnName = "contacts_sex")
     private Integer contactsSex;
 
-    //1有待处理加菜 2全部加菜已处理
-    @DatabaseField(columnName = "handle_status")
+        @DatabaseField(columnName = "handle_status")
     private Integer handleStatus;
 
     @DatabaseField(columnName = "updator_id")

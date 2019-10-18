@@ -7,77 +7,49 @@ import com.zhongmei.yunfu.db.UuidEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.bty.commonmodule.database.enums.SubjectType;
 
-/**
- * AccountSubject is a ORMLite bean type. Corresponds to the database table "account_subject"
- */
+
 @DatabaseTable(tableName = "account_subject")
 public class AccountSubject extends UuidEntityBase {
     private static final long serialVersionUID = 1L;
 
 
-    /**
-     * The columns of table "account_subject"
-     */
+
     public interface $ extends UuidEntityBase.$ {
 
-        /**
-         * id
-         */
+
         public static final String id = "id";
 
-        /**
-         * id
-         */
+
         public static final String parentId = "parent_id";
 
-        /**
-         * status_flag
-         */
+
         public static final String statusFlag = "status_flag";
 
-        /**
-         * server_create_time
-         */
+
         public static final String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         public static final String serverUpdateTime = "server_update_time";
 
-        /**
-         * brand_identy
-         */
+
         public static final String brandIdenty = "brand_identy";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * type
-         */
+
         public static final String type = "type";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }
@@ -95,27 +67,19 @@ public class AccountSubject extends UuidEntityBase {
     @DatabaseField(columnName = "type", canBeNull = false)
     private Integer type;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 

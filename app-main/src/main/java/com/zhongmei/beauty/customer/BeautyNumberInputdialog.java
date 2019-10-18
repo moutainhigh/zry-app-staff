@@ -5,11 +5,7 @@ import android.content.Context;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.commonmodule.view.NumberInputdialog;
 
-/**
- * 美业输入
- *
- * @date 2018/6/25
- */
+
 public class BeautyNumberInputdialog extends NumberInputdialog {
     public BeautyNumberInputdialog(Context context, int theme) {
         super(context, theme);

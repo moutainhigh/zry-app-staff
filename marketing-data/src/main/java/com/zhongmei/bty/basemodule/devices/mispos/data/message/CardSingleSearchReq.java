@@ -7,7 +7,6 @@ public class CardSingleSearchReq {
 
     public String cardNo;
 
-    //public Integer cardStatus;
 
     public Long cardKindId;
 
@@ -39,13 +38,6 @@ public class CardSingleSearchReq {
         return this.cardNo;
     }
 
-//	public CardStatus getCardStatus() {
-//		return ValueEnums.toEnum(CardStatus.class, cardStatus);
-//	}
-//	
-//	public void setCardStatus(CardStatus cardStatus) {
-//		this.cardStatus = ValueEnums.toValue(cardStatus);
-//	}
 
     public void setCardKindId(Long cardKindId) {
         this.cardKindId = cardKindId;

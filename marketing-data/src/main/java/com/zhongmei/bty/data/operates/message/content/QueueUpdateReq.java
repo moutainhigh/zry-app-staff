@@ -1,72 +1,50 @@
 package com.zhongmei.bty.data.operates.message.content;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class QueueUpdateReq {
 
-    //排队唯一标示;
-    private String syncFlag;
+        private String syncFlag;
 
-    //顾客名称
-    private String name;
+        private String name;
 
-    //性别（0：女；1：男；-1：未知）
-    private String sex;
+        private String sex;
 
-    //手机号码
-    private String mobile;
+        private String mobile;
 
-    //电话号码
-    private String tel;
+        private String tel;
 
-    //桌台类型唯一标识
-    private String tableTypeServerId;
+        private String tableTypeServerId;
 
-    //桌台类型名称
-    private String tableTypeName;
+        private String tableTypeName;
 
-    //排队状态(0:排队中;1:入场;-1作废;-2取消)
-    private String queueStatus;
+        private String queueStatus;
 
-    //入场时间,queueStatus = 1时必须
-    private String inDateTime;
+        private String inDateTime;
 
-    //就餐人数
-    private int repastPersonCount;
+        private int repastPersonCount;
 
-    //是否清空(0：不清空；1：清空)
-    private int isZeroOped;
+        private int isZeroOped;
 
-    //排队来源,排队来源：Daodian：到店排队，weixin：微信排队，DianHua：电话排队，BaiduMap：百度排队
-    private String queueSource;
+        private String queueSource;
 
-    //排队凭证
-    private String queueProof;
+        private String queueProof;
 
-    //提醒方式
-    private String notifyType;
+        private String notifyType;
 
-    //队列编号
-    private long queueLineId;
+        private long queueLineId;
 
-    //微信id
-    private String weixinId;
+        private String weixinId;
 
-    //会员id
-    private long memberID;
+        private long memberID;
 
     private int isOfficial;
 
-    //预点菜关联的交易表ID 如果没有进行预点菜则为null或-1
-    private long tradeId;
+        private long tradeId;
 
     private String nationalTelCode;
 
-    private String country;//国家名
-
-    private String nation;//国家英文名
-
+    private String country;
+    private String nation;
     private String memo;
 
 

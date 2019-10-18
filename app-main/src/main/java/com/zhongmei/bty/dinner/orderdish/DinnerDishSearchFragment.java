@@ -80,21 +80,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @Date：2015年7月8日 下午2:16:01
- * @Description: 菜品搜索界面
- * @Version: 5.8
- * <p>
- * rights reserved.
- */
+
 @EFragment(R.layout.dinner_dish_search)
 public class DinnerDishSearchFragment extends MobclickAgentFragment implements TouchGridView.ItemTouchListener {
 
     public static String TAG = DinnerDishSearchFragment.class.getSimpleName() + "_search_type";
-    public static final int SEARCH_FROM_ORDER = 0;//点单搜索
-
-    public static final int SEARCH_FROM_TABLE = 1;//查找桌台搜索
-    public static final int ALL = 0;
+    public static final int SEARCH_FROM_ORDER = 0;
+    public static final int SEARCH_FROM_TABLE = 1;    public static final int ALL = 0;
 
     public static final int FIRST_LETTER = 1;
 
@@ -105,14 +97,11 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
     public static final int DISHNAME = 4;
 
     @ViewById(R.id.btn_close)
-    protected ImageButton btnClose;// 关闭界面按钮
-
+    protected ImageButton btnClose;
     @ViewById(R.id.et_search_content)
-    protected EditTextWithDeleteIcon etSearchContent;// 搜索按钮
-
+    protected EditTextWithDeleteIcon etSearchContent;
     @ViewById(R.id.gv_search_result)
-    protected TouchGridView gvSearchResult;// 搜索结果
-
+    protected TouchGridView gvSearchResult;
     @ViewById(R.id.search_type)
     protected RadioGroup searchTypeGroup;
 
@@ -141,13 +130,11 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
 
     private DinnerShoppingCart mShoppingCart;
 
-    private boolean isDishToChange = false;//是否因为点菜导致的跳转（套餐、变价和多规格商品等）
-
+    private boolean isDishToChange = false;
     private SerachAsyncTask mTask;
     private QuantityEditPopupWindow mPopupWindow;
 
-    //add 20170608 begin
-    public void setSearchFromListener(int searchFrom, ChooseSelectedDishListener listener) {
+        public void setSearchFromListener(int searchFrom, ChooseSelectedDishListener listener) {
         this.mSearchFrom = searchFrom;
         this.mChooseSelectedDishListener = listener;
     }
@@ -155,9 +142,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
     private int mSearchFrom;
     private ChooseSelectedDishListener mChooseSelectedDishListener;
 
-    //add 20170608 end
-    //add begin 20170615
-    public boolean keyboardIsHide() {
+            public boolean keyboardIsHide() {
         if (keyboard != null) {
             return keyboard.getVisibility() == View.GONE;
         } else {
@@ -172,8 +157,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         }
     }
 
-    //add end 20170615
-    private ModifyShoppingCartListener mShoppingCartListener = new ShoppingCartListener() {
+        private ModifyShoppingCartListener mShoppingCartListener = new ShoppingCartListener() {
         @Override
         public void addToShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo, ShopcartItem mShopcartItem) {
             updateItemView(mShopcartItem);
@@ -185,9 +169,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
             }
         }
 
-        /**
-         * 清空购物车
-         */
+
         @Override
         public void clearShoppingCart() {
             if (mAdapter != null) {
@@ -195,9 +177,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
             }
         }
 
-        /**
-         * 删除购物车中某一项
-         */
+
         @Override
         public void removeShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo,
                                        IShopcartItemBase mShopcartItemBase) {
@@ -221,11 +201,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         }
     };
 
-    /**
-     * 刷新指定菜品
-     *
-     * @param iShopcartItemBase 当前操作的菜品
-     */
+
     public void updateItemView(IShopcartItemBase iShopcartItemBase) {
         if (mAdapter != null) {
             List<DishVo> dishVos = mAdapter.getDishList();
@@ -255,8 +231,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
 
     @Override
     public void onDestroy() {
-        //不是因为点菜导致的页面切换，移除keyword
-        if (!isDishToChange) {
+                if (!isDishToChange) {
             SharedPreferenceUtil.getSpUtil().remove(Constant.SP_SEARCH_KEYWORD);
         }
 
@@ -267,75 +242,41 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
 
     @AfterViews
     protected void initView() {
-//		mAdapter = new DinnerDishSearchAdapter(getActivity(), new ArrayList<DishVo>());
-//		gvSearchResult.setAdapter(mAdapter);
-//		gvSearchResult.setListener(this);
-//		
-//		mDishManager = new DishManager();
-//		mDishManager.loadData();
-//		
-//		String keyWord = SharedPreferenceUtil.getSpUtil().getString(Constant.SP_SEARCH_KEYWORD, "");
-//		if (!TextUtils.isEmpty(keyWord)) {
-//			etSearchContent.setText(keyWord);
-//			SharedPreferenceUtil.getSpUtil().remove(Constant.SP_SEARCH_KEYWORD);
-//		}
-//		
-//		etSearchContent.setFocusable(true);
-//		etSearchContent.setFocusableInTouchMode(true);
-//		etSearchContent.requestFocus();
-//		etSearchContent.setOnFocusChangeListener(new OnFocusChangeListener() {
-//			
-//			@Override
-//			public void onFocusChange(View v, boolean hasFocus) {
-//				if (hasFocus) {
-//					etSearchContent.setText("");
-//				}
-//			}
-//		});
         mDishManager = new DishManager();
 
         initSearchResult();
         initSearchTypeGroup();
         initSearchContent();
         initKeyboard();
-        //modify begin 20170608
-        if (this.mSearchFrom == SEARCH_FROM_TABLE) {
+                if (this.mSearchFrom == SEARCH_FROM_TABLE) {
             btnClose.setVisibility(View.INVISIBLE);
         }
-        //modify end 20170608
-    }
+            }
 
     private void initSearchResult() {
         initAdapter();
         gvSearchResult.setNumColumns(4);
         gvSearchResult.setAdapter(mAdapter);
         gvSearchResult.setListener(this);
-        //modify begin 20170608
-        if (this.mSearchFrom == SEARCH_FROM_TABLE) {
+                if (this.mSearchFrom == SEARCH_FROM_TABLE) {
             mAdapter.setHidClearNumber(true);
             mAdapter.setCurrentSelected(-1);
         }
-        //modify end 20170608
-    }
+            }
 
     protected void initAdapter() {
         mAdapter = new DinnerDishSearchAdapter(getActivity(), new ArrayList<DishVo>(), 4);
     }
 
     private void initSearchContent() {
-        //套餐或者规格界面返回时，获取对应关键字
-        String keyWord = SharedPreferenceUtil.getSpUtil().getString(Constant.SP_SEARCH_KEYWORD, "");
+                String keyWord = SharedPreferenceUtil.getSpUtil().getString(Constant.SP_SEARCH_KEYWORD, "");
         if (!TextUtils.isEmpty(keyWord)) {
-//            etSearchContent.setText(keyWord);
-            //使用之前关键字进行搜索
-            if (mTask != null) {
+                        if (mTask != null) {
                 mTask.cancel(true);
             }
             mTask = new SerachAsyncTask(keyWord.toString());
             mTask.execute();
-//            SharedPreferenceUtil.getSpUtil().remove(Constant.SP_SEARCH_KEYWORD);//不再这里直接移除，以免再次点击套餐返回时，查询的关键字为空
         }
-//        forbiddenSoftKeyboard(etSearchContent);
         resetSearchContentFocus();
         etSearchContent.setOnKeyListener(new OnKeyListener() {
             @Override
@@ -349,20 +290,16 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         etSearchContent.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if (keyboard.getVisibility() != View.VISIBLE) {
-//                keyboard.setVisibility(View.VISIBLE);//dzb
-                etSearchContent.setText("");
+                                etSearchContent.setText("");
                 if (mAdapter != null) {
                     mAdapter.setDishList(null);
                 }
                 switchSoftInput(searchType, etSearchContent);
-                //}
-            }
+                            }
         });
         etSearchContent.setOnClearListener(new EditTextWithDeleteIcon.OnClearListener() {
             @Override
             public void AfterTextClear() {
-//                keyboard.setVisibility(View.VISIBLE);//dzb
                 etSearchContent.setText("");
                 if (mAdapter != null) {
                     mAdapter.setDishList(null);
@@ -386,8 +323,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
 
             @Override
             public void onClear() {
-                //etSearchContent.setText("");
-                keyboard.setVisibility(View.GONE);
+                                keyboard.setVisibility(View.GONE);
                 MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerOrderDishSearchKeyboardPackUp);
             }
 
@@ -445,8 +381,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
             case PRICE:
                 searchPrice.setChecked(true);
                 break;
-            case DISHNAME://呼出手写键盘
-                searchDishName.setChecked(true);
+            case DISHNAME:                searchDishName.setChecked(true);
                 break;
             default:
                 break;
@@ -486,8 +421,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         if (event.getAction() == KeyEvent.ACTION_UP) {
             int currentSelected = mAdapter.getCurrentSelected();
             switch (keyCode) {
-                //enter
-                case 160:
+                                case 160:
                 case 66:
                     if (mAdapter == null || mAdapter.getCount() <= 0)
                         return;
@@ -503,43 +437,35 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
                         QuantityEditPopupWindow mPopupWindow = new QuantityEditPopupWindow(getActivity(), shopcartItem, mListener);
                         mPopupWindow.showAtLocation(etSearchContent, Gravity.NO_GRAVITY, 0, 0);
 
-                        //选中菜品后，清空文字，但不清空已经查询出来的菜品，并打开键盘
-                        etSearchContent.setText("");
-//                        keyboard.setVisibility(View.VISIBLE);//dzb
+                                                etSearchContent.setText("");
                     } else
                         onTouch(currentSelected);
                     break;
-                //上下左右的事件
-                case 19: //上
-                    keyboard.setVisibility(View.GONE);
+                                case 19:                     keyboard.setVisibility(View.GONE);
                     if (currentSelected >= gvSearchResult.getNumColumns()) {
                         currentSelected = currentSelected - gvSearchResult.getNumColumns();
                     }
                     setSelected(currentSelected);
                     break;
-                case 20: //下
-                    keyboard.setVisibility(View.GONE);
+                case 20:                     keyboard.setVisibility(View.GONE);
                     if (currentSelected + gvSearchResult.getNumColumns() < gvSearchResult.getCount()) {
                         currentSelected = currentSelected + gvSearchResult.getNumColumns();
                     }
                     setSelected(currentSelected);
                     break;
-                case 21: //左
-                    keyboard.setVisibility(View.GONE);
+                case 21:                     keyboard.setVisibility(View.GONE);
                     if (currentSelected > 0) {
                         currentSelected--;
                     }
                     setSelected(currentSelected);
                     break;
-                case 22: //右
-                    keyboard.setVisibility(View.GONE);
+                case 22:                     keyboard.setVisibility(View.GONE);
                     if (currentSelected < gvSearchResult.getCount() - 1) {
                         currentSelected++;
                     }
                     setSelected(currentSelected);
                     break;
-                //1-9的事件 144为0的keyCode
-                case 144:
+                                case 144:
                 case 145:
                 case 146:
                 case 147:
@@ -551,8 +477,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
                 case 153:
                     etSearchContent.append((char) (keyCode - 144 + '0') + "");
                     break;
-                //a-z字母处理   29为a的keyCode
-                case 29:
+                                case 29:
                 case 30:
                 case 31:
                 case 32:
@@ -580,21 +505,17 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
                 case 54:
                     etSearchContent.append((char) (keyCode - 29 + 'A') + "");
                     break;
-                //退格键
-                case 67:
+                                case 67:
                     String text = etSearchContent.getText().toString();
                     if (text.length() > 0) {
                         etSearchContent.setText(text.subSequence(0, text.length() - 1));
                     }
                     break;
-                //-
-                case 156:
+                                case 156:
                     break;
-                //+
-                case 157:
+                                case 157:
                     break;
-                //.
-                case 158:
+                                case 158:
                     break;
             }
         }
@@ -604,13 +525,8 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
 
         @Override
         public void dataChange(ShopcartItem shopcartItem, boolean isContainProperties) {
-            /*if (shopcartItem.getDishShop().getClearStatus() == ClearStatus.CLEAR && !mShoppingCart.getIsSalesReturn()) {
-                ToastUtil.showShortToast(R.string.order_dish_sold_out);
-                return;
-            }
-            */
-            if (shopcartItem.getOrderDish().isCombo()) {// 套餐
-                saveInputKeyword();
+
+            if (shopcartItem.getOrderDish().isCombo()) {                saveInputKeyword();
 
                 if (mChangePageListener != null) {
                     mShoppingCart.addDishToShoppingCart(shopcartItem, false);
@@ -621,8 +537,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
                     bundle.putBoolean(Constant.NONEEDCHECK, true);
                     mChangePageListener.changePage(ChangePageListener.DISHCOMBO, bundle);
                 }
-            } else if (isContainProperties || shopcartItem.getIsChangePrice() == Bool.YES) {// 有属性
-                saveInputKeyword();
+            } else if (isContainProperties || shopcartItem.getIsChangePrice() == Bool.YES) {                saveInputKeyword();
 
                 if (mChangePageListener != null) {
                     mShoppingCart.addDishToShoppingCart(shopcartItem, false);
@@ -638,27 +553,19 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
 
                 mShoppingCart.addDishToShoppingCart(shopcartItem, true);
             }
-            /*mShoppingCart.addDishToShoppingCart(shopcartItem, true);*/
+
         }
     };
 
     public void setSelected(int selected) {
-        //gvSearchResult.getChildAt(mAdapter.getCurrentSelected()).setBackgroundColor(Color.TRANSPARENT);
-        //gvSearchResult.getChildAt(selected).setBackgroundResource(R.drawable.search_selected);
-        gvSearchResult.smoothScrollToPosition(selected);
+                        gvSearchResult.smoothScrollToPosition(selected);
         mAdapter.setCurrentSelected(selected);
     }
 
-    /**
-     * @Title: searchDish
-     * @Description: 搜索商品
-     * @Param @param s TODO
-     * @Return void 返回类型
-     */
+
     @AfterTextChange(R.id.et_search_content)
     protected void searchDish(Editable s) {
-        //输入框清空后，不在这里处理，因为需要不同的处理
-        if (TextUtils.isEmpty(s)) {
+                if (TextUtils.isEmpty(s)) {
             return;
         }
 
@@ -671,9 +578,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         mTask.execute();
     }
 
-    /**
-     * 搜索AsyncTask
-     */
+
     class SerachAsyncTask extends AsyncTask<Void, Void, DishInfo> {
 
         String keyWord;
@@ -698,12 +603,10 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
             super.onPostExecute(dishInfo);
             if (dishInfo != null && dishInfo.dishType == null && !dishInfo.scanResult && mAdapter != null) {
                 mAdapter.setDishList(dishInfo.dishList);
-                //modify begin 20170608
-                if (mSearchFrom == SEARCH_FROM_TABLE) {
+                                if (mSearchFrom == SEARCH_FROM_TABLE) {
                     mAdapter.setCurrentSelected(-1);
                 }
-                //modify end 20170608
-            }
+                            }
         }
     }
 
@@ -720,13 +623,10 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
             return;
         }
 
-//        keyboard.setVisibility(View.GONE);
         if (mAdapter != null) {
             final DishVo dishVo = (DishVo) mAdapter.getItem(postion);
             if (dishVo != null) {
-                //如果是查找桌台
-                //modify begin 20170608
-                if (this.mSearchFrom == SEARCH_FROM_TABLE) {
+                                                if (this.mSearchFrom == SEARCH_FROM_TABLE) {
                     if (this.mChooseSelectedDishListener != null) {
                         this.mChooseSelectedDishListener.onSelectedDish(dishVo);
                         mAdapter.setCurrentSelected(postion);
@@ -737,36 +637,24 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
                     }
                     dealDishVo(dishVo);
                 }
-                //modify end 20170608
-                //选中菜品后，清空文字，但不清空已经查询出来的菜品，并打开键盘
-                etSearchContent.setText("");
-                // keyboard.setVisibility(View.VISIBLE);
-            }
+                                                etSearchContent.setText("");
+                            }
         }
     }
 
-    /**
-     * @Title: dealDish
-     * @Description: 处理菜品
-     * @Param @param dishVo TODO
-     * @Return void 返回类型
-     */
+
     private void dealDishVo(DishVo dishVo) {
-        //套餐、多规格和变价商品会导致页面跳转，需要缓存keyword信息，此处不区别是否称重商品
-        if (dishVo.isCombo() || dishVo.isContainProperties() || dishVo.isChangePrice()) {
+                if (dishVo.isCombo() || dishVo.isContainProperties() || dishVo.isChangePrice()) {
             saveInputKeyword();
         } else {
             isDishToChange = false;
         }
 
-        //是否是联台主单
-        boolean isUnionMainTrade = mShoppingCart.getOrder().isUnionMainTrade();
-        //如果多规格菜品默认菜品被估清，那么从系列菜品中找到一个未被估清的菜品加入到购物车
-        if (dishVo.isContainProperties() && dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
+                boolean isUnionMainTrade = mShoppingCart.getOrder().isUnionMainTrade();
+                if (dishVo.isContainProperties() && dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
             DishShop dishShop;
             if (isUnionMainTrade) {
-                //联台主单只能找非称重的商品
-                dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
+                                dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
             } else {
                 dishShop = dishVo.getLeastResidueFromOtherDishs();
             }
@@ -775,8 +663,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         } else {
             if (dishVo.getDishShop().getSaleType() == SaleType.WEIGHING) {
                 if (isUnionMainTrade) {
-                    //联台主单获取其他规格的非称重商品，商品无多规格或者其他规格内找不到，提示联台主单不能添加称重商品
-                    DishShop dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
+                                        DishShop dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
                     if (dishShop != null) {
                         addOtherStandardSingleDish(dishVo, dishShop);
                     } else {
@@ -786,20 +673,14 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
                     addSingleDish(dishVo);
                 }
             } else {
-                if (dishVo.isCombo()) {// 套餐
-                    addUnweighCombo(dishVo);
-                } else {// 直接添加购物车
-                    addSingleDish(dishVo);
+                if (dishVo.isCombo()) {                    addUnweighCombo(dishVo);
+                } else {                    addSingleDish(dishVo);
                 }
             }
         }
     }
 
-    /**
-     * 添加单菜
-     *
-     * @param dishVo
-     */
+
     private void addSingleDish(DishVo dishVo) {
         if (dishVo.getDishShop().getSaleType() == SaleType.WEIGHING) {
             ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
@@ -812,15 +693,10 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         }
     }
 
-    /**
-     * 添加非称重套餐
-     *
-     * @param dishVo
-     */
+
     private void addUnweighCombo(DishVo dishVo) {
         if (mChangePageListener != null) {
-            // 构建一个套餐壳购物车
-            ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
+                        ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
             shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
             mShoppingCart.addDishToShoppingCart(shopcartItem, false);
 
@@ -832,12 +708,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         }
     }
 
-    /**
-     * 添加dishvo里其他规格的单菜菜品
-     *
-     * @param dishVo
-     * @param dishShop
-     */
+
     private void addOtherStandardSingleDish(DishVo dishVo, DishShop dishShop) {
         if (dishShop != null) {
             return;
@@ -860,16 +731,11 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
     private void addShoppingCart(ShopcartItem shopcartItem, Boolean isTempDish) {
         TradeVo tradeVo = mShoppingCart.getOrder();
         if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getBusinessType() == BusinessType.BUFFET) {
-            //DishCarte dishCarte = BuffetManager.getInstance().getCurComboVo(BuffetManager.getInstance().getBuffetComboList(tradeVo), tradeVo).getDishCarte();
-            //List<DishShop> shopList = DishCache.getDishCarteDetailHolder().getDishShopsByCarte(dishCarte.getUuid());
 
             boolean lastMode = DinnerShoppingCart.getInstance().getShoppingCartVo().isGroupMode();
-            /*if (shopList != null && shopList.contains(shopcartItem.getDishShop())) {
-                DinnerShoppingCart.getInstance().getShoppingCartVo().setGroupMode(true);
-            } else {*/
+
             DinnerShoppingCart.getInstance().getShoppingCartVo().setGroupMode(false);
-            //}
-            mShoppingCart.addDishToShoppingCart(shopcartItem, isTempDish);
+                        mShoppingCart.addDishToShoppingCart(shopcartItem, isTempDish);
             DinnerShoppingCart.getInstance().getShoppingCartVo().setGroupMode(lastMode);
         } else
             mShoppingCart.addDishToShoppingCart(shopcartItem, isTempDish);
@@ -877,9 +743,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
 
 
     private void saveInputKeyword() {
-        isDishToChange = true;//标示是因为点菜导致的页面跳转，在本页面销毁时，不会移除关键字
-        //保存关键字
-        String keyword = etSearchContent.getText().toString();
+        isDishToChange = true;                String keyword = etSearchContent.getText().toString();
         if (!TextUtils.isEmpty(keyword)) {
             SharedPreferenceUtil.getSpUtil().putString(Constant.SP_SEARCH_KEYWORD,
                     keyword);
@@ -889,8 +753,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
     @ItemLongClick(R.id.gv_search_result)
     public void myGridItemLongClicked(final DishVo dishVo) {
         if (dishVo.isContainProperties()) {
-            // 弹出估清界面
-            OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
+                        OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
             orderDishClearStatusFragment.setData(dishVo);
             orderDishClearStatusFragment.setOnCloseListener(new OnCloseListener() {
 
@@ -923,19 +786,12 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
         }
     }
 
-    /**
-     * @Title: requestClearStatus
-     * @Description: 请求更改估清状态
-     * @Param @param dishShop TODO
-     * @Return void 返回类型
-     */
+
     private void requestClearStatus(final DishVo dishVo, final ClearStatus newValue) {
         List<String> dishUuids = new ArrayList<String>();
         dishUuids.add(dishVo.getDishShop().getUuid());
 
-        /*
-         * 估清请求结果
-         */
+
         ResponseListener<Boolean> listener = new ResponseListener<Boolean>() {
 
             @Override

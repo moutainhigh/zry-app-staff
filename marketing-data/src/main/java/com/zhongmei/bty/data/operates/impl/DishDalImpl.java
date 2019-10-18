@@ -25,11 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- *
 
- *
- */
 public class DishDalImpl extends AbstractOpeartesImpl implements DishDal {
 
     public DishDalImpl(ImplContext context) {
@@ -79,28 +75,10 @@ public class DishDalImpl extends AbstractOpeartesImpl implements DishDal {
 
     @Override
     public void clearStatus(ClearStatus newValue, List<String> dishUuids, ResponseListener<Boolean> listener) {
-        /*String url = ServerAddressUtil.getInstance().clearStatus();
-        DishClearStatusReq req = new DishClearStatusReq();
-        req.setNewClearStatus(newValue);
-        if (newValue == ClearStatus.CLEAR) {
-            req.setOldClearStatus(ClearStatus.SALE);
-        } else {
-            req.setOldClearStatus(ClearStatus.CLEAR);
-        }
-        req.setUuids(dishUuids);
-        OpsRequest.Executor<DishClearStatusReq, Boolean> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(Boolean.class)
-                .responseProcessor(new ClearStatusRespProcessor(newValue, dishUuids))
-                .execute(listener, "clearStatus");*/
+
     }
 
-    /**
-     * 将PaymentResp保存到数据库的处理器
-     *
-     * @version: 1.0
-     * @date 2015年4月15日
-     */
+
     private static class ClearStatusRespProcessor extends SaveDatabaseResponseProcessor<Boolean> {
 
         private final ClearStatus newValue;

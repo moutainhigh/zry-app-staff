@@ -18,8 +18,7 @@ public class CustomerPopWindow extends PopupWindow {
 
 
     private Activity context;
-    //	private int width, height;
-    private View view;
+        private View view;
     OnItemClickListener listener;
     CustomerPopWindowAdapter adapter;
 
@@ -36,16 +35,6 @@ public class CustomerPopWindow extends PopupWindow {
         init();
     }
 
-//
-//	public PopWindow(View contentView, int width, int height, Activity context) {
-//
-//		super(contentView, width, height, false);
-//		this.context = context;
-//		this.view = contentView;
-//		this.setWidth(width);
-//		this.setHeight(height);
-//		init();
-//	}
 
     private void init() {
         view = LayoutInflater.from(context).inflate(R.layout.customer_pop_list, null);

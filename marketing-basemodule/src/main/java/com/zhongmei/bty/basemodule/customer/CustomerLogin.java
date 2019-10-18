@@ -31,12 +31,7 @@ public class CustomerLogin {
 
     public static PasswordDialog showMemberPasswordDialog(final FragmentActivity context, String input, final DinnerLoginListener listener) {
         final PasswordDialog dialog;
-        /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-                        "",
-                        null,
-                        0,
-                        true, 0);
-        DisplayServiceManager.updateDisplay(context, dUserInfo);*/
+
 
         dialog = new PasswordDialog(context) {
             @Override
@@ -46,13 +41,7 @@ public class CustomerLogin {
             }
         };
 
-        //名字为空时，显示电话号码
-//            if (!TextUtils.isEmpty(input)) {
-//                dialog.setMembeName(input);
-//            } else {
-//                dialog.setMembeName(context.getString(R.string.customer_sex_unknown));
-//            }
-        dialog.setMembeName(input);
+                dialog.setMembeName(input);
         dialog.setLisetner(new PasswordDialog.PasswordCheckLisetner() {
             @Override
             public void checkPassWord(String password) {
@@ -64,12 +53,7 @@ public class CustomerLogin {
 
             @Override
             public void showPassWord(String password) {
-                /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-                        password,
-                        null,
-                        0,
-                        false, 0);
-                DisplayServiceManager.updateDisplay(context, dUserInfo);*/
+
             }
 
             @Override
@@ -104,22 +88,11 @@ public class CustomerLogin {
         return dialog;
     }
 
-    /**
-     * 正餐微信扫码登录
-     *
-     * @param context
-     * @param listener
-     */
+
     @Deprecated
     public static void dinnerLoginWxNo(final FragmentActivity context, final DinnerLoginListener listener) {
         if (ServerSettingManager.isCommercialNeedVerifPassword()) {
-            /*DisplayUserInfo dUserInfo =
-                    DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-                            "",
-                            null,
-                            0,
-                            true, 0);
-            DisplayServiceManager.updateDisplay(context, dUserInfo);*/
+
 
             final PasswordDialog dialog = new PasswordDialog(context) {
                 @Override
@@ -129,8 +102,7 @@ public class CustomerLogin {
                 }
             };
 
-            //名字处显示微信扫码登录
-            dialog.setMemberContent(context.getString(R.string.customer_login_through_wechat_scan_code));
+                        dialog.setMemberContent(context.getString(R.string.customer_login_through_wechat_scan_code));
             dialog.setLisetner(new PasswordDialog.PasswordCheckLisetner() {
                 @Override
                 public void checkPassWord(String password) {
@@ -142,12 +114,7 @@ public class CustomerLogin {
 
                 @Override
                 public void showPassWord(String password) {
-                    /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-                            password,
-                            null,
-                            0,
-                            false, 0);
-                    DisplayServiceManager.updateDisplay(context, dUserInfo);*/
+
                 }
 
                 @Override

@@ -17,9 +17,7 @@ import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MobilePayModeChooseView extends LinearLayout implements View.OnClickListener {
 

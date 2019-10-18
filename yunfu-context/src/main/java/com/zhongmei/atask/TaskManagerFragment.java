@@ -2,16 +2,13 @@ package com.zhongmei.atask;
 
 import android.app.Fragment;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class TaskManagerFragment extends Fragment implements ITaskManagerFragment {
 
     private TaskManager taskManager;
 
     public TaskManagerFragment() {
-        //this(TaskContext, new ActivityFragmentLifecycle());
-    }
+            }
 
     @Override
     public void setTaskManager(TaskManager taskManager) {

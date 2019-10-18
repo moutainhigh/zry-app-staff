@@ -2,36 +2,22 @@ package com.zhongmei.yunfu.util;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 进位规则
- */
+
 public enum CarryBitRule implements ValueEnum<Integer> {
 
-    /**
-     * 四舍五入
-     */
+
     ROUND_UP(1),
 
-    /**
-     * 无条件进位
-     */
+
     CARRY(2),
 
-    /**
-     * 无条件抹去
-     */
+
     MALING(3),
 
-    /**
-     * 二舍为零三入为五，七舍为五八入为十
-     */
+
     THREE_EIGHT_UP(4),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

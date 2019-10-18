@@ -1,8 +1,6 @@
 package com.zhongmei.bty.basemodule.devices.mispos.data.message;
 
-/**
- * 实体卡积分记录请求
- */
+
 public class CardIntegralInfoReq {
     private String entityCardNo;
 

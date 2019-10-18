@@ -20,15 +20,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 同步任务管理器
- *
- * @created 2017/5/5
- */
+
 public class SyncRequestManager implements Runnable {
 
-    private final Object lock = new Object();// 锁对象
-    private Context context;
+    private final Object lock = new Object();    private Context context;
     private SyncModule syncModule;
     private SyncCheckListener checkListener;
     private Thread thread;
@@ -89,24 +84,18 @@ public class SyncRequestManager implements Runnable {
         SyncServiceUtil.log("start :同步开始");
         while (true) {
             Throwable exception = null;
-            //setCityCode();
-            try {
+                        try {
                 checkCancelled();
 
                 childException = null;
                 SyncModuleBean syncModuleBean = syncModule.getSyncModules();
-                //addChildRequestTask(context, syncModuleBean.getSyncModule(), syncModuleBean.isNotify(), true);
-                addChildRequestTask(context, syncModuleBean.getModuleAll(), syncModuleBean.isNotify(), false);
+                                addChildRequestTask(context, syncModuleBean.getModuleAll(), syncModuleBean.isNotify(), false);
                 waitChildThread();
 
                 SyncServiceUtil.log("同步执行完成");
 
-                // 触发自动接单、拒单服务
-                //PLog.i(PLog.QUICK_SERVICE_KEY, "启动处理云打印的service");
-                //TradeDealServiceUtil.startTradeDealService(context);
 
-                //请求失败次数重置（放在同步成功的最后一行）
-                SwitchServerManager.getInstance().reset();
+                                SwitchServerManager.getInstance().reset();
                 if (!syncModule.hasSyncModules()) {
                     boolean isInit = SyncServiceUtil.isNeedInit();
                     if (isInit) {
@@ -161,14 +150,7 @@ public class SyncRequestManager implements Runnable {
         }
     }
 
-    /**
-     * 添加任务线程
-     *
-     * @param context
-     * @param syncModule
-     * @param isNotify
-     * @param isSyncModule 是否同步module
-     */
+
     protected void addChildRequestTask(Context context, List<String> syncModule, boolean isNotify, boolean isSyncModule) {
         if (syncModule.size() > 0) {
             SyncRequestTask syncRequestTask = new SyncRequestTask(context, this, syncModule, isNotify, isSyncModule);
@@ -178,13 +160,7 @@ public class SyncRequestManager implements Runnable {
     }
 
     private void setCityCode() {
-        // 没有储存城市名称 重新获取一次
-        /*if (TextUtils.isEmpty(ShopInfoCfg.getInstance().city)) {
-            String city = AreaDBManager.getCity(ShopInfoCfg.getInstance().areaCode);
-            if (city != null) {
-                ShopInfoCfg.getInstance().city = city;
-            }
-        }*/
+
     }
 
     private void syncCheck(final Throwable err) {

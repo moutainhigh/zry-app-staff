@@ -8,10 +8,7 @@ import com.zhongmei.yunfu.db.enums.TradeStatus;
 
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年4月21日
- */
+
 public class TradeOpsReq {
 
     private Long tradeId;
@@ -27,16 +24,13 @@ public class TradeOpsReq {
     private String serialNumber;
     private Integer actionType;
     private Boolean reviseStock;
-    private Integer genBatchNo;//是否生成批次号（正餐接单接口）
-    public Long waiterId;
+    private Integer genBatchNo;    public Long waiterId;
     public String waiterName;
     private List<InventoryItemReq> returnInventoryItems;
 
-    // v8.12.0 口碑拒绝理由码
-    private String refuseCode;
+        private String refuseCode;
 
-    //口碑传桌台
-    private TradeTableRequest tradeTableRequest;
+        private TradeTableRequest tradeTableRequest;
 
     public List<InventoryItemReq> getRetInventoryItems() {
         return returnInventoryItems;

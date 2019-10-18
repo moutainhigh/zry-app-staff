@@ -72,14 +72,7 @@ public class CustomerLevelUpDialogFragment extends BasicDialogFragment {
     protected ImageButton mCountryBtn;
 
 
-    /*
-     * 先暂时去掉此部分，后续完善
-     *
-     * @ViewById(R.id.et_verify_code) EditText etVerifyCode;
-     *
-     * @ViewById(R.id.btn_get_verify_code) Button
-     * btnGetVerifyCode;
-     */
+
 
     @ViewById(R.id.pass_edit)
     protected EditTextWithDeleteIcon mPass;
@@ -95,9 +88,7 @@ public class CustomerLevelUpDialogFragment extends BasicDialogFragment {
 
     private CustomerResp mUpdateCustomer;
 
-    /**
-     * 当前商户国籍
-     */
+
     private ErpCurrency mErpCurrency;
 
     private List<ErpCurrency> mErpCurrencyList;
@@ -115,9 +106,7 @@ public class CustomerLevelUpDialogFragment extends BasicDialogFragment {
 
     @AfterViews
     protected void initData() {
-        mUpdateCustomer = mCustomer; //new CustomerNew2();
-        //mUpdateCustomer.putAll(mCustomer);
-    }
+        mUpdateCustomer = mCustomer;             }
 
     @AfterViews
     protected void initViews() {
@@ -150,8 +139,7 @@ public class CustomerLevelUpDialogFragment extends BasicDialogFragment {
         mName.setText(mCustomer.customerName);
         mMobile.setText(mCustomer.mobile);
 
-        // 设置生日
-        String brithdayStr = "";
+                String brithdayStr = "";
         if (!TextUtils.isEmpty(mCustomer.birthday)) {
             brithdayStr =
                     DateTimeUtils.formatDateTime(DateTimeUtils.formatDate(mCustomer.birthday), "yyyy-M-d");
@@ -166,11 +154,6 @@ public class CustomerLevelUpDialogFragment extends BasicDialogFragment {
 
     private void setupCountryView() {
         if (mErpCurrency != null) {
-//            if (SharedPreferenceUtil.getSpUtil().getString(Constant.DEFAULTLANGUAGE, ErpConstants.COUNTRY_ZN_CH).equals(ErpConstants.COUNTRY_ZN_CH)) {
-//                mCountry.setText(mErpCurrency.getCountryZh());
-//            } else {
-//                mCountry.setText(mErpCurrency.getCountryEn());
-//            }
             mCountry.setText(mErpCurrency.getAreaCode());
         }
     }
@@ -220,12 +203,7 @@ public class CustomerLevelUpDialogFragment extends BasicDialogFragment {
         }
     }
 
-    /**
-     * 显示国籍dialog
-     *
-     * @param erpCurrencyList
-     * @param currentErpCurrency
-     */
+
     public void showCountryDialog(List<ErpCurrency> erpCurrencyList, ErpCurrency currentErpCurrency) {
         if (erpCurrencyList == null || erpCurrencyList.size() == 0) {
             ToastUtil.showShortToast(getString(R.string.customer_erpcurrency_empty));
@@ -278,12 +256,7 @@ public class CustomerLevelUpDialogFragment extends BasicDialogFragment {
         return true;
     }
 
-    /**
-     * @Title: levelUp
-     * @Description: TODO 会员升级
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void levelUp() {
         mUpdateCustomer.mobile = mMobile.getText().toString();
         mUpdateCustomer.customerName = mName.getText().toString();

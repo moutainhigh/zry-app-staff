@@ -2,33 +2,19 @@ package com.zhongmei.bty.basemodule.commonbusiness.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum ReasonSource implements ValueEnum<Integer> {
 
-    /**
-     *
-     */
+
     ZHONGMEI(1),
 
-    /**
-     * 百度外卖
-     */
+
     BAIDU_TAKEOUT(4),
 
-    /**
-     * v8.12.0
-     */
+
     KOUBEI(5),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

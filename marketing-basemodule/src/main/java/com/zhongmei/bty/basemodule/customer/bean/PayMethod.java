@@ -4,20 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class PayMethod implements Serializable {
-    /**
-     * @date：2015-6-11 上午11:19:08
-     * @Description:TODO
-     */
+
     private static final long serialVersionUID = 1L;
 
     private String name;
 
-    private BigDecimal value;    //应收
-    private BigDecimal faceAmount; //实收（找零钱收到的）
-    private BigDecimal changeAmount; //找零
-    private BigDecimal usefulAmount;//找零后实收
-    private Long paymentType; //类型
-
+    private BigDecimal value;        private BigDecimal faceAmount;     private BigDecimal changeAmount;     private BigDecimal usefulAmount;    private Long paymentType;
 
     public String getName() {
         return name;

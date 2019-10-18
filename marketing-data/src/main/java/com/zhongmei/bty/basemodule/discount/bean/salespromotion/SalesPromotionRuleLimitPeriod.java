@@ -3,10 +3,8 @@ package com.zhongmei.bty.basemodule.discount.bean.salespromotion;
 import java.io.Serializable;
 
 public class SalesPromotionRuleLimitPeriod implements Serializable {
-    //开始时段
-    private String startPeriod;
-    //结束时段
-    private String endPeriod;
+        private String startPeriod;
+        private String endPeriod;
 
     public String getStartPeriod() {
         return startPeriod;

@@ -5,15 +5,9 @@ import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.db.enums.PayModeId;
 import com.zhongmei.yunfu.db.enums.PayModelGroup;
 
-/**
- * @Date：2015年10月17日
- * @Description:调账数据bean
- * @Version: 1.0
- */
+
 public class AccountItemBean {
-    private byte status = 0;//0,1
-    private String money = "";//
-    private long payModeId = PayModeId.CASH.value();
+    private byte status = 0;    private String money = "";    private long payModeId = PayModeId.CASH.value();
     private PayModelGroup payModeGroup = PayModelGroup.CASH;
     private String payModeName = MainApplication.getInstance().getString(R.string.returnguest_privilege_title);
 

@@ -15,10 +15,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * 订单相关的模块slide菜单
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(resName = "slidemenu_trade_slide_menu")
 public class TradeSlideMenuView extends SlideMenuView {
 

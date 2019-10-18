@@ -9,9 +9,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem;
 import com.zhongmei.bty.dinner.orderdish.DinnerDishMiddleFragment;
 import com.zhongmei.bty.basemodule.auth.application.DinnerGroupApplication;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class GroupTradeItemPropertyUtil extends TradeItemPropertyUtil {
 
@@ -26,9 +24,7 @@ public class GroupTradeItemPropertyUtil extends TradeItemPropertyUtil {
         controlSlideDishShow();
     }
 
-    /**
-     * 配菜时显示
-     */
+
     private void controlSlideDishShow() {
         if (isSlideDish()) {
             ViewUtil.setButtonEnabled(btnExtra, false);

@@ -14,32 +14,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
 
- */
 public class PaymentVo implements java.io.Serializable {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 支付主单
-     */
+
     private Payment payment;
 
-    /**
-     * 支付明细列表
-     */
+
     private List<PaymentItem> paymentItemList;
 
     private List<PaymentItemExtra> paymentItemExtraList;
 
-    private List<PaymentItemUnionpayVoReq> paymentCards;// 银联刷卡记录  add 20160218
-
-    private Map<Long, List<RefundExceptionReason>> refundExceptionReasonMap;//退款失败原因，key为PaymentItem的id
-
+    private List<PaymentItemUnionpayVoReq> paymentCards;
+    private Map<Long, List<RefundExceptionReason>> refundExceptionReasonMap;
     public Payment getPayment() {
         return payment;
     }
@@ -72,8 +62,7 @@ public class PaymentVo implements java.io.Serializable {
         this.refundExceptionReasonMap = refundExceptionReasonMap;
     }
 
-    public double getSubmitPayValue() {//获取上行提交的应付金额
-        double payValue = 0;
+    public double getSubmitPayValue() {        double payValue = 0;
         if (!Utils.isEmpty(paymentItemList)) {
             for (PaymentItem item : paymentItemList) {
                 if (item.getUsefulAmount() != null) {
@@ -84,8 +73,7 @@ public class PaymentVo implements java.io.Serializable {
         return payValue;
     }
 
-    public double getPaidAmount() {//add 20170801获取已付金额
-        double payValue = 0;
+    public double getPaidAmount() {        double payValue = 0;
         if (!Utils.isEmpty(paymentItemList)) {
             for (PaymentItem item : paymentItemList) {
                 if (item.getPayStatus() == TradePayStatus.PAID && item.getStatusFlag() == StatusFlag.VALID && item.getUsefulAmount() != null) {
@@ -133,26 +121,22 @@ public class PaymentVo implements java.io.Serializable {
     public PaymentVo clone() throws CloneNotSupportedException {
         try {
             PaymentVo paymentVo = new PaymentVo();
-            //拷贝payment
-            paymentVo.setPayment(copyEntity(payment, new Payment()));
-            //拷贝paymentItemList
-            if (paymentItemList != null) {
+                        paymentVo.setPayment(copyEntity(payment, new Payment()));
+                        if (paymentItemList != null) {
                 List<PaymentItem> paymentItems = new ArrayList<PaymentItem>();
                 for (PaymentItem paymentItem : paymentItemList) {
                     paymentItems.add(copyEntity(paymentItem, new PaymentItem()));
                 }
                 paymentVo.setPaymentItemList(paymentItems);
             }
-            //拷贝paymentItemExtraList
-            if (paymentItemExtraList != null) {
+                        if (paymentItemExtraList != null) {
                 List<PaymentItemExtra> paymentItemExtras = new ArrayList<PaymentItemExtra>();
                 for (PaymentItemExtra paymentItemExtra : paymentItemExtras) {
                     paymentItemExtras.add(copyEntity(paymentItemExtra, new PaymentItemExtra()));
                 }
                 paymentVo.setPaymentItemExtraList(paymentItemExtras);
             }
-            //拷贝paymentCards
-            if (paymentCards != null) {
+                        if (paymentCards != null) {
                 List<PaymentItemUnionpayVoReq> paymentCardList = new ArrayList<PaymentItemUnionpayVoReq>();
                 for (PaymentItemUnionpayVoReq paymentCard : paymentCards) {
                     paymentCardList.add(copyEntity(paymentCard, new PaymentItemUnionpayVoReq()));

@@ -2,32 +2,19 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * @version: 1.0
- * @date 2015年11月17日
- */
+
 public enum PerimissionType implements ValueEnum<Integer> {
 
-    /**
-     * 菜单
-     */
+
     MENU(1),
 
-    /**
-     * 按钮
-     */
+
     BUTTON(2),
 
-    /**
-     * 数据
-     */
+
     DATA(3),
 
-    /**
-     * 未知的值，为了避免转为enum出错设置的，不应该直接使用
-     *
-     * @deprecated
-     */
+
     @Deprecated
     __UNKNOWN__;
 

@@ -15,11 +15,7 @@ import com.zhongmei.yunfu.util.ToastUtil;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * 美业卡manager
- *
- * @date 2018/6/15
- */
+
 public class BeautyCardManager {
 
     public interface IBeautyCardListener {
@@ -36,9 +32,7 @@ public class BeautyCardManager {
 
     private static BeautyCardManager instance;
 
-    /**
-     * 通过优惠类型来处理次数
-     */
+
     public HashMap<ServerPrivilegeType, HashMap<Long, Integer>> mCacheDishShopVo = new HashMap<>();
 
 
@@ -49,12 +43,7 @@ public class BeautyCardManager {
         return instance;
     }
 
-    /**
-     * 初始化数据
-     * <p>
-     * 改单的时候调用
-     * 初始化购物车中的次卡服务
-     */
+
     public void init(List<IShopcartItem> items) {
         if (items != null && items.size() > 0) {
             HashMap<Long, Integer> numMap;
@@ -79,9 +68,7 @@ public class BeautyCardManager {
         }
     }
 
-    /**
-     * 添加商品到购物车
-     */
+
     public void addDishshopToShopCart(ServerPrivilegeType privilegeType, BeautyCardServiceInfo vo,DishShop dishShop, int position) {
 
         if (privilegeType != null && dishShop != null) {
@@ -92,8 +79,7 @@ public class BeautyCardManager {
                 if (numMap.containsKey(vo.cardInstanceId)) {
                     count = numMap.get(vo.cardInstanceId);
                     Log.i("BeautyCardManager", " brandDishId = [ " + dishShop.getBrandDishId() + " ] , oldCount = " + count);
-                    numMap.put(vo.cardInstanceId, count + dishShop.getDishIncreaseUnit().intValue()); // 添加起卖份数
-                    Log.i("BeautyCardManager", " brandDishId = [ " + dishShop.getBrandDishId() + " ] , newOldCount = " + numMap.get(dishShop.getBrandDishId()));
+                    numMap.put(vo.cardInstanceId, count + dishShop.getDishIncreaseUnit().intValue());                     Log.i("BeautyCardManager", " brandDishId = [ " + dishShop.getBrandDishId() + " ] , newOldCount = " + numMap.get(dishShop.getBrandDishId()));
                 } else {
                     Log.i("BeautyCardManager", " brandDishId = [ " + dishShop.getBrandDishId() + " ] ,  one = 1  !containsKey");
                     numMap.put(vo.cardInstanceId, dishShop.getDishIncreaseUnit().intValue());
@@ -113,18 +99,13 @@ public class BeautyCardManager {
         }
     }
 
-    /**
-     * 购物车移除商品
-     * 重新就算剩余数量，更新View
-     */
+
     public void removeDishshopFromShopCart(ServerPrivilegeType type, IShopcartItemBase mShopcartItem) {
         CardServicePrivilegeVo cardServicePrivilegeVo = mShopcartItem.getCardServicePrivilgeVo();
         removeDishshopFromShopCart(type, cardServicePrivilegeVo.getServerRecordId(), mShopcartItem.getTotalQty().intValue());
     }
 
-    /**
-     * 购物车移除商品
-     */
+
     public void removeDishshopFromShopCart(ServerPrivilegeType type, Long serverRecordId, Integer num) {
         if (serverRecordId != null) {
             if (mCacheDishShopVo.containsKey(type)) {
@@ -144,13 +125,7 @@ public class BeautyCardManager {
         }
     }
 
-    /**
-     * 获取已点的商品数量
-     *
-     * @param type           优惠类型
-     * @param serverRecordId 服务购买记录
-     * @return
-     */
+
     public int getCacheCountById(ServerPrivilegeType type, Long serverRecordId) {
         int count = 0;
         if (mCacheDishShopVo != null && mCacheDishShopVo.size() > 0) {
@@ -165,9 +140,7 @@ public class BeautyCardManager {
         return count;
     }
 
-    /**
-     * 退出manager
-     */
+
     public void exitCardManager() {
         mListener = null;
         mCacheDishShopVo.clear();

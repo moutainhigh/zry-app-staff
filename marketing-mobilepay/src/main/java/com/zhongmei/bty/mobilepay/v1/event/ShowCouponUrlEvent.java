@@ -1,10 +1,6 @@
 package com.zhongmei.bty.mobilepay.v1.event;
 
-/**
- * @Date： 16/9/27
- * @Description:
- * @Version: 1.0
- */
+
 public class ShowCouponUrlEvent {
 
     private String url;

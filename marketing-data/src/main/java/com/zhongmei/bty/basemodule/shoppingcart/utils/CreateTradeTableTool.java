@@ -14,20 +14,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2015年9月14日 下午7:47:32
- * @Description: 用于操作正餐订单数据信息
- * @Version: 1.0
- */
+
 public class CreateTradeTableTool {
 
-    /**
-     * @Title: openTable
-     * @Description: 添加开台信息
-     * @Param @param mTradeVo
-     * @Param @param mTradeTable TODO
-     * @Return void 返回类型
-     */
+
     public static void openTable(TradeVo mTradeVo, TradeTable mTradeTable) {
         List<TradeTable> mTradetables = mTradeVo.getTradeTableList();
         if (mTradetables == null) {
@@ -36,8 +26,7 @@ public class CreateTradeTableTool {
         }
         Boolean isHave = false;
         for (int i = 0; i < mTradetables.size(); i++) {
-            //判断是新加桌台还是修改桌台数据信息
-            TradeTable table = mTradetables.get(i);
+                        TradeTable table = mTradetables.get(i);
             if (mTradeTable.getUuid().equals(table.getUuid())) {
                 mTradetables.add(i, table);
                 isHave = true;
@@ -49,14 +38,7 @@ public class CreateTradeTableTool {
         }
     }
 
-    /**
-     * 改变桌台选择
-     *
-     * @param tradeTableList
-     * @param tables
-     * @param tradeUuid
-     * @return
-     */
+
     public static List<TradeTable> changeTables(List<TradeTable> tradeTableList, List<Tables> tables, String tradeUuid) {
         if (tradeTableList == null) {
             tradeTableList = new ArrayList<>();
@@ -99,8 +81,7 @@ public class CreateTradeTableTool {
         tradeTable.setTablePeopleCount(people);
         tradeTable.setTradeUuid(tradeUuid);
 
-        //设置登录操作员为默认服务员
-        AuthUser user = Session.getAuthUser();
+                AuthUser user = Session.getAuthUser();
         if (user != null) {
             tradeTable.setWaiterId(user.getId());
             tradeTable.setWaiterName(user.getName());

@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeUser;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 实体卡充值封装请求
- */
+
 public class CardRechargeReq extends RechargeReq {
     private String cardNum;
 
@@ -19,10 +17,8 @@ public class CardRechargeReq extends RechargeReq {
 
     private Integer onlinePay;
 
-    private TradeUser tradeUser;//add v8.1 销售员
-
-    private List<TradeUser> tradeUsers;  //add 20180312 增加多销售员支持
-
+    private TradeUser tradeUser;
+    private List<TradeUser> tradeUsers;
     private List<PaymentItemUnionpayVoReq> paymentCards;
 
     public String getCardNum() {

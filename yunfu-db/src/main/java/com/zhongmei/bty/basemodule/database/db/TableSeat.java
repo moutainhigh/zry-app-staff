@@ -4,46 +4,30 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.ServerEntityBase;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "table_seat")
 public class TableSeat extends ServerEntityBase {
 
     public interface $ extends ServerEntityBase.$ {
-        /**
-         * table_id
-         */
+
         public static final String tableId = "table_id";
 
-        /**
-         * seat_name
-         */
+
         public static final String seatName = "seat_name";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
     }
 

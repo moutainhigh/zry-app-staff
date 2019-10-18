@@ -26,16 +26,13 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * 微信订单控制
- */
+
 @EFragment(R.layout.dinner_auto_order_fragment)
 public class DinnerAutoOrderFragment extends Fragment {
 
     private static final String TAG = DinnerAutoOrderFragment.class.getSimpleName();
 
-    //自动接单ListView
-    @ViewById(R.id.auto_accept_list)
+        @ViewById(R.id.auto_accept_list)
     ListView mList;
 
     @ViewById(R.id.receive_type)
@@ -47,11 +44,9 @@ public class DinnerAutoOrderFragment extends Fragment {
     @ViewById(R.id.btn_weixin_accept_transfer_kitchen)
     Button btn_weixin_accept_transfer_kitchen;
 
-    //自动接单Adapter
-    private DinnerAutoAccepAdapter mAdapter;
+        private DinnerAutoAccepAdapter mAdapter;
 
-    //自动接受设置对象
-    private TradeDealSettingVo mAcceptVo;
+        private TradeDealSettingVo mAcceptVo;
 
     private boolean mServerAccSw = false;
 
@@ -64,9 +59,7 @@ public class DinnerAutoOrderFragment extends Fragment {
     }
 
 
-    /**
-     * 查询订单处理设置数据
-     */
+
     private void queryOrderSetting() {
 
         new Thread(new Runnable() {
@@ -88,9 +81,8 @@ public class DinnerAutoOrderFragment extends Fragment {
 
     Handler mHandler = new Handler() {
         public void dispatchMessage(Message msg) {
-            //设置自动接单
-            if (mAcceptVo != null && mAcceptVo.getTradeDealSetting() != null
-                /*&& mAcceptVo.getTradeDealSetting().getIsEnabled() == YesOrNo.YES*/) {
+                        if (mAcceptVo != null && mAcceptVo.getTradeDealSetting() != null
+                ) {
                 mAdapter.setDataSet(mAcceptVo.getTradeDealSettingItems());
                 receiveType.setVisibility(View.VISIBLE);
                 mList.setVisibility(View.VISIBLE);

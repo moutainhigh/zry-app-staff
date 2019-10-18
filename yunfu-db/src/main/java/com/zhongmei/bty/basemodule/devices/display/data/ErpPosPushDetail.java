@@ -6,27 +6,7 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * 对接erp的营销活动图片
- * <p>
- * CREATE TABLE `erp_pos_push_detail` (
- * `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '副屏推送ID',
- * `relation_id` bigint(20) NOT NULL COMMENT 'POS副屏推送ID - 表erp_pos_push_list [id] 字段''',
- * `pos_pic` varchar(200) DEFAULT NULL COMMENT 'OnPOS图片url',
- * `pos_mini_pic` varchar(200) DEFAULT NULL COMMENT 'OnPOS mini图片url',
- * `title` varchar(40) DEFAULT NULL COMMENT '标题',
- * `start_time` timestamp NULL DEFAULT NULL COMMENT '展示起始时间',
- * `end_time` timestamp NULL DEFAULT NULL COMMENT '展示截止时间',
- * `target` tinyint(4) DEFAULT NULL COMMENT '目标终端类型 1-OnPOS 2-OnPOS mini 3-全选',
- * `status_flag` tinyint(4) NOT NULL COMMENT '消息状态 1-有效 2-无效',
- * `server_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '数据创建时间',
- * `server_update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '消息更新时间',
- * `shop_identity` bigint(20) NOT NULL COMMENT '门店标识',
- * `brand_identity` bigint(20) DEFAULT NULL COMMENT '品牌标识',
- * PRIMARY KEY (`id`)
- * ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='POS副屏推送详情表';
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "erp_pos_push_detail")
 public class ErpPosPushDetail extends IdEntityBase {
 

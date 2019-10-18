@@ -26,11 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- * @param <E> Response的Content类型
- * @version: 1.0
- * @date 2015年4月15日
- */
+
 public class JFRequest<E> extends CalmGsonRequest<Object, E> {
 
     private static final String TAG = JFRequest.class.getSimpleName();
@@ -44,14 +40,12 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
     private JFRequest(int method, String url, Object requestContent, Type responseContentType, ListenerAdapter<E> listener,
                       ErrorListenerAdapter errorListner) {
         super(method, url, requestContent, responseContentType, listener, errorListner);
-        //setDataIntoHeader();
-    }
+            }
 
     private JFRequest(String url, String body, Type responseContentType, ListenerAdapter<E> listener,
                       ErrorListenerAdapter errorListner) {
         super(url, body, responseContentType, listener, errorListner);
-        //setDataIntoHeader();
-    }
+            }
 
     @Override
     protected E toResponseValue(String json, Type responseType) throws Exception {
@@ -66,11 +60,7 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
         this.mHeaderType = headerType;
     }
 
-    /**
-     * 设置ResponseObject的处理器
-     *
-     * @param processor
-     */
+
     void setResponseProcessor(ResponseProcessor<E> processor) {
         this.mProcessor = processor;
         if (processor != null) {
@@ -78,12 +68,7 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
         }
     }
 
-    /**
-     * 获取指定Content类型的ResponseObject对象的类型
-     *
-     * @param contentType
-     * @return
-     */
+
     static Type getResponseType(Type contentType) {
         return com.google.gson.internal.$Gson$Types.newParameterizedTypeWithOwner(null,
                 Type.class.cast(ResponseObject.class),
@@ -96,12 +81,7 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
                 classType);
     }
 
-    /**
-     * 获取当ResponseObject的content是List<?>时的Type
-     *
-     * @param classType content为List时列表元素的对象类型
-     * @return
-     */
+
     public static <T> Type getListContentResponseType(Class<T> classType) {
         Type type = com.google.gson.internal.$Gson$Types.newParameterizedTypeWithOwner(null, List.class, classType);
         return getResponseType(type);
@@ -112,30 +92,14 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
         return getResponseType(type);
     }
 
-    /**
-     * ResponseObject处理器。
-     * 在从网络获取到数据并转换成ResponseObject对象后将使用此处理器先进行处理(如保存到数据库)
-     *
-     * @param <E>
-     */
+
     public interface ResponseProcessor<E> {
 
-        /**
-         * 对response进行处理
-         *
-         * @param response
-         * @return
-         */
+
         E process(E response);
     }
 
-    /**
-     * 将数据保存到数据库的处理器
-     *
-     * @param <E>
-     * @version: 1.0
-     * @date 2015年4月15日
-     */
+
     public static abstract class SaveDatabaseResponseProcessor<E> implements ResponseProcessor<E> {
 
         public SaveDatabaseResponseProcessor() {
@@ -152,11 +116,7 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
             return response;
         }
 
-        /**
-         * 回复操作成功后将调用此方法将回复数据保存到数据库中
-         *
-         * @param resp
-         */
+
         public void saveToDatabase(E resp) throws Exception {
             DatabaseHelper helper = DBHelperManager.getHelper();
             try {
@@ -169,22 +129,12 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
             }
         }
 
-        /**
-         * 返回要在同一个数据库事务中执行的操作
-         *
-         * @param helper
-         * @param resp
-         * @return
-         */
+
         protected abstract Callable<Void> getCallable(final DatabaseHelper helper, final E resp) throws Exception;
 
     }
 
-    /**
-     * @param <E>
-     * @version: 1.0
-     * @date 2016/12/21
-     */
+
     static public abstract class DatabaseResponseProcessor<E> extends SaveDatabaseResponseProcessor<E> {
         @Override
         protected Callable<Void> getCallable(final DatabaseHelper helper, final E resp) throws Exception {
@@ -197,20 +147,11 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
             };
         }
 
-        /**
-         * 只需关心业务数据处事务已经在上层处理了
-         *
-         * @param helper
-         * @param resp
-         */
+
         protected abstract void transactionCallable(DatabaseHelper helper, E resp) throws Exception;
     }
 
-    /**
-     * @param <T>
-     * @version: 1.0
-     * @date 2015年4月19日
-     */
+
     private static class ListenerAdapter<T> extends EventListener<T> {
 
         private final YFResponseListener<T> mListener;
@@ -228,10 +169,7 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
         }
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年4月19日
-     */
+
     private static class ErrorListenerAdapter implements ErrorListener {
 
         private final YFResponseListener<?> mListener;
@@ -272,12 +210,7 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
         return new Executor(url);
     }
 
-    /**
-     * 负责发送Request
-     *
-     * @version: 1.0
-     * @date 2015年4月19日
-     */
+
     public static class Executor {
 
         private JFRequest request;
@@ -292,13 +225,9 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
 
         private Integer mTimeout;
 
-        private boolean interceptEnable;//异步拦截开关
-        private List<String> router = new ArrayList<>();//异步Task路由匹配
-
-        private int mMethod = Method.POST;//http方式
-
-        private int mHeaderType = HeaderType.HEADER_TYPE_SYNC;//header类型
-
+        private boolean interceptEnable;        private List<String> router = new ArrayList<>();
+        private int mMethod = Method.POST;
+        private int mHeaderType = HeaderType.HEADER_TYPE_SYNC;
         private Executor(String url) {
             this.mUrl = url;
             this.mRequestContent = null;
@@ -340,12 +269,7 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
             return this;
         }
 
-        /**
-         * 发送Request
-         *
-         * @param listener
-         * @param tag
-         */
+
         public <T> void execute(YFResponseListener<T> listener, Object tag) {
             ListenerAdapter listenerAdapter = new ListenerAdapter<>(listener);
             ErrorListenerAdapter errorListener = new ErrorListenerAdapter(listener);
@@ -416,8 +340,7 @@ public class JFRequest<E> extends CalmGsonRequest<Object, E> {
         ErrorListenerAdapter errorListener = new ErrorListenerAdapter(listener);
 
         JFRequest request = null;
-        if (!TextUtils.isEmpty(body)) {//使用之前生成好的body进行clone
-            request = new JFRequest(this.getUrl(), this.body, this.mResponseType, listenerAdapter, errorListener);
+        if (!TextUtils.isEmpty(body)) {            request = new JFRequest(this.getUrl(), this.body, this.mResponseType, listenerAdapter, errorListener);
             request.setHttpProperty(new DefaultHeaderInterceptor(request.getUrl()).getHeaders(this.mHeaderType));
             request.setTag(this.getTag());
             request.setResponseProcessor(this.mProcessor);

@@ -2,11 +2,7 @@ package com.zhongmei.bty.basemodule.customer.message;
 
 import java.util.List;
 
-/**
- * 顾客列表数据
- *
- * @date 2017/3/13 14:35
- */
+
 public class CustomerListResp {
 
     public int currentPage;
@@ -19,9 +15,7 @@ public class CustomerListResp {
 
     public int pageCount;
 
-    /**
-     * 服务器返回的查询时间
-     */
+
     public Long queryTime;
 
     public List<com.zhongmei.yunfu.bean.req.CustomerListResp> items;

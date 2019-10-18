@@ -6,46 +6,28 @@ import com.zhongmei.yunfu.data.R;
 import com.zhongmei.yunfu.util.ValueEnum;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * 会员实体卡状态
- */
+
 public enum CardStatus implements ValueEnum<Integer> {
 
-    /**
-     * 未制卡
-     */
+
     UNMAKECARD(0),
 
-    /**
-     * 未出售
-     */
+
     UNSELL(1),
 
-    /**
-     * 未激活
-     */
+
     UNACTIVATED(2),
 
-    /**
-     * 已激活
-     */
+
     ACTIVATED(3),
 
-    /**
-     * 已停用
-     */
+
     ISDISABLE(4),
 
-    /**
-     * 已废除
-     */
+
     ISCANCEL(5),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

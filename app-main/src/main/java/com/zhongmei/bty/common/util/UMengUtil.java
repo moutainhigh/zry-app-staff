@@ -13,9 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Method;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class UMengUtil {
 
     private static final String TAG = UMengUtil.class.getSimpleName();

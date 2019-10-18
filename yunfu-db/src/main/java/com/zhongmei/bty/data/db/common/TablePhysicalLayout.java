@@ -7,82 +7,52 @@ import com.zhongmei.yunfu.db.enums.IsDelete;
 import com.zhongmei.bty.entity.enums.LayoutType;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * TablePhysicalLayout is a ORMLite bean type. Corresponds to the database table "table_physical_layout"
- */
+
 @DatabaseTable(tableName = "table_physical_layout")
 public class TablePhysicalLayout extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "table_physical_layout"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * area_id
-         */
+
         public static final String areaId = "area_id";
 
-        /**
-         * brand_id
-         */
+
         public static final String brandId = "brand_id";
 
-        /**
-         * commercial_id
-         */
+
         public static final String commercialId = "commercial_id";
 
-        /**
-         * create_time
-         */
+
         public static final String createTime = "create_time";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * floor
-         */
+
         public static final String floor = "floor";
 
-        /**
-         * image_id
-         */
+
         public static final String imageId = "image_id";
 
-        /**
-         * is_delete
-         */
+
         public static final String isDelete = "is_delete";
 
-        /**
-         * layout_type
-         */
+
         public static final String layoutType = "layout_type";
 
-        /**
-         * physical_layout_name
-         */
+
         public static final String physicalLayoutName = "physical_layout_name";
 
-        /**
-         * publish_status
-         */
+
         public static final String publishStatus = "publish_status";
 
-        /**
-         * updater_id
-         */
+
         public static final String updaterId = "updater_id";
 
-        /**
-         * update_time
-         */
+
         public static final String updateTime = "update_time";
 
     }

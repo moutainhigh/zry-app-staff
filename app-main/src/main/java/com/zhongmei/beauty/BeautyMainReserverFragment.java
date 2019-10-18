@@ -30,9 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_main_reserver_fragment)
 public class BeautyMainReserverFragment extends BasicFragment implements TodayReserverItemView.OnOperateListener, BeautyBoardDataListener {
 
@@ -57,23 +55,16 @@ public class BeautyMainReserverFragment extends BasicFragment implements TodayRe
 
         mBeautyManager = new BeautyBoardManager();
 
-        initBookingTrade();//初始化预约订单数据
-
+        initBookingTrade();
     }
 
-    /**
-     * 初始化预约订单
-     */
+
     private void initBookingTrade() {
         mBeautyManager.getTodayUnServiceList(getActivity(), this, new Date());
     }
 
 
-    /**
-     * 改单
-     *
-     * @param mReserver
-     */
+
     @Override
     public void reserverModify(BeautyBookingVo mReserver) {
         BeautyCreateOrEditBookingDialog dialog = new BeautyCreateOrEditBookingDialog();
@@ -85,36 +76,28 @@ public class BeautyMainReserverFragment extends BasicFragment implements TodayRe
 
             @Override
             public void onEditListener(@NotNull BeautyBookingVo booking, @NotNull BeautyBookingResp resp) {
-                //开单成功之后,重新拉去数据
-                mBeautyManager.getTodayUnServiceList(getActivity(), BeautyMainReserverFragment.this, new Date());
+                                mBeautyManager.getTodayUnServiceList(getActivity(), BeautyMainReserverFragment.this, new Date());
             }
 
             @Override
             public void onCancelListener(@NotNull Booking booking) {
-                //开单成功之后,重新拉去数据
-                mBeautyManager.getTodayUnServiceList(getActivity(), BeautyMainReserverFragment.this, new Date());
+                                mBeautyManager.getTodayUnServiceList(getActivity(), BeautyMainReserverFragment.this, new Date());
             }
         });
         Bundle bundle = new Bundle();
-        bundle.putInt(BeautyBookingEnum.LAUNCHMODE_BOOKING_DIALOG, BeautyBookingEnum.BookingDialogLaunchMode.EDIT); // 编辑 CREATE创建
-        bundle.putSerializable(BeautyBookingEnum.DATA_BOOKING_DIALOG, mReserver);
+        bundle.putInt(BeautyBookingEnum.LAUNCHMODE_BOOKING_DIALOG, BeautyBookingEnum.BookingDialogLaunchMode.EDIT);         bundle.putSerializable(BeautyBookingEnum.DATA_BOOKING_DIALOG, mReserver);
         dialog.setArguments(bundle);
         dialog.show(getChildFragmentManager(), "showCreateBookingDialog");
     }
 
-    /**
-     * 开单
-     *
-     * @param mReserver
-     */
+
     @Override
     public void reserverCreateTrade(BeautyBookingVo mReserver) {
         BeautyOpenTradeManager manager = new BeautyOpenTradeManager();
         manager.openTrade(getActivity(), mReserver, new BeautyOpenTradeManager.OpenTradeCallBack() {
             @Override
             public void onOpenTradeSuccess() {
-                //开单成功之后,重新拉去数据
-                mBeautyManager.getTodayUnServiceList(getActivity(), BeautyMainReserverFragment.this, new Date());
+                                mBeautyManager.getTodayUnServiceList(getActivity(), BeautyMainReserverFragment.this, new Date());
             }
         });
     }

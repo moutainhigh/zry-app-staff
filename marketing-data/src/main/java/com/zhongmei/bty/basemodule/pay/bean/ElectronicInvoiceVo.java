@@ -6,9 +6,7 @@ import com.zhongmei.bty.basemodule.pay.entity.InvoiceTaxRate;
 
 import java.util.List;
 
-/**
- * 电子发票设置数据
- */
+
 
 public class ElectronicInvoiceVo implements java.io.Serializable {
     private static final long serialVersionUID = 1L;

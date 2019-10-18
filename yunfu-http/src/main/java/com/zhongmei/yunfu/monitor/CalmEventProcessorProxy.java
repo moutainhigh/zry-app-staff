@@ -3,9 +3,7 @@ package com.zhongmei.yunfu.monitor;
 import com.zhongmei.yunfu.net.builder.NetworkRequest;
 import com.zhongmei.yunfu.resp.UserActionEvent;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class CalmEventProcessorProxy<T> extends AbsEventListenerProxy implements NetworkRequest.ResponseProcessor<T> {
 

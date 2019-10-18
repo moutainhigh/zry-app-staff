@@ -6,31 +6,9 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 
 import java.math.BigDecimal;
 
-/*CREATE TABLE `dish_carte` (
-        `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增主键',
-        `brand_identy` bigint(20) NOT NULL COMMENT '品牌id',
-        `shop_identy` bigint(20) NOT NULL COMMENT '店铺id',
-        `uuid` varchar(100) NOT NULL COMMENT '菜单uuid',
-        `carte_code` varchar(100) NOT NULL COMMENT '菜单简码',
-        `name` varchar(100) NOT NULL COMMENT '菜单名称',
-        `price` decimal(10,2) NOT NULL COMMENT '菜单总价（用于团餐）',
-        `carte_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '菜单类型 : 1 自助餐 2 团餐',
-        `is_public` tinyint(4) NOT NULL DEFAULT '1' COMMENT '菜单类型 : 0 非通用模板 1 通用模板 2 自定义模板',
-        `soure` tinyint(4) NOT NULL DEFAULT '1' COMMENT '来源 : 1 后台 2 POS',
-        `is_disable` tinyint(4) DEFAULT '0' COMMENT '停用标识（0|1），0启用；1停用',
-        `statusFlag` tinyint(4) DEFAULT '0' COMMENT '删除标志,1正常 2无效',
-        `create_id` int(11) DEFAULT NULL COMMENT '创建人',
-        `server_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-        `update_id` int(11) DEFAULT NULL COMMENT '更新人',
-        `server_update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后编辑时间',
-        PRIMARY KEY (`id`),
-        UNIQUE KEY `unique_dish_carte` (`brand_identy`,`shop_identy`,`code`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='菜单信息';*/
 
-/**
- * 菜单模板表
- * Created by demo on 2018/12/15
- */
+
+
 @DatabaseTable(tableName = "dish_carte")
 public class DishCarte extends BasicEntityBase implements Cloneable {
 

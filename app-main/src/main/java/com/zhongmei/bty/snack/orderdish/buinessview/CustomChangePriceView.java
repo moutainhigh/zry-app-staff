@@ -29,9 +29,7 @@ import org.androidannotations.annotations.ViewById;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 菜品规格控件
- */
+
 @EViewGroup(R.layout.layout_custom_changeprice)
 public class CustomChangePriceView extends LinearLayout implements TextWatcher {
 
@@ -43,17 +41,14 @@ public class CustomChangePriceView extends LinearLayout implements TextWatcher {
     protected TextView tv_goodsPrice;
 
     @ViewById(R.id.tv_goodsRestore)
-    protected TextView tv_goodsRestore;//余额
-
+    protected TextView tv_goodsRestore;
     @ViewById(R.id.tv_dailyLimit)
-    protected TextView tv_dailyLimit;//每日限量
-
+    protected TextView tv_dailyLimit;
     @ViewById(R.id.layout_changePrice)
     protected LinearLayout layout_changePrice;
 
     @ViewById(R.id.et_changePrice)
-    protected EditText et_changePrice;//变价
-
+    protected EditText et_changePrice;
     private OnPriceChangeListener mPriceChangeListener;
 
     private OrderDish mOrderDish;
@@ -79,18 +74,7 @@ public class CustomChangePriceView extends LinearLayout implements TextWatcher {
         @Override
         public void dataChange(List<InventoryInfo> data) {
             setShowInventory(mOrderDish);
-            /*InventoryInfo inventoryInfo = InventoryCacheUtil.getInstance().getInventoryNumByDishUuid(mOrderDish.getSkuUuid());
-            if(inventoryInfo!=null) {
-                String unitName = mOrderDish.getUnitName();
-                if(TextUtils.isEmpty(unitName)){
-                    unitName="";
-                }
-                tv_goodsRestore.setText(String.format(getResources().getString(R.string.order_inventory_item), inventoryInfo.getInventoryQty().toString() + unitName));
-                tv_dailyLimit.setText("");
-            }else{
-                tv_goodsRestore.setText("");
-                tv_dailyLimit.setText("");
-            }*/
+
         }
     };
 
@@ -119,11 +103,7 @@ public class CustomChangePriceView extends LinearLayout implements TextWatcher {
         });
     }
 
-    /**
-     * 设置数据
-     *
-     * @param orderDish
-     */
+
     public void setData(OrderDish orderDish) {
         mOrderDish = orderDish;
         InventoryCacheUtil.getInstance().registerListener(ChangePageListener.PAGE_CHANGE_PRICE, inventoryDataChangeListener);
@@ -136,13 +116,11 @@ public class CustomChangePriceView extends LinearLayout implements TextWatcher {
                 .doubleValue()));
         setShowInventory(orderDish);
         if (orderDish.getIsChangePrice() == Bool.YES) {
-            //显示改价
-            layout_changePrice.setVisibility(View.VISIBLE);
+                        layout_changePrice.setVisibility(View.VISIBLE);
             et_changePrice.setText(Utils.formatPrice(MathDecimal.trimZero(orderDish.getPrice())
                     .doubleValue()));
         } else {
-            //隐藏改价
-            layout_changePrice.setVisibility(View.GONE);
+                        layout_changePrice.setVisibility(View.GONE);
         }
     }
 
@@ -151,8 +129,7 @@ public class CustomChangePriceView extends LinearLayout implements TextWatcher {
         if (TextUtils.isEmpty(unitName)) {
             unitName = "";
         }
-        if (InventoryCacheUtil.getInstance().getSaleSwitch()) {//展示库存
-            InventoryInfo inventoryInfo = InventoryCacheUtil.getInstance().getInventoryNumByDishUuid(orderDish.getSkuUuid());
+        if (InventoryCacheUtil.getInstance().getSaleSwitch()) {            InventoryInfo inventoryInfo = InventoryCacheUtil.getInstance().getInventoryNumByDishUuid(orderDish.getSkuUuid());
             if (inventoryInfo != null) {
                 tv_goodsRestore.setText(String.format(getResources().getString(R.string.order_inventory_item), inventoryInfo.getInventoryQty().toString() + unitName));
                 tv_dailyLimit.setText("");
@@ -160,8 +137,7 @@ public class CustomChangePriceView extends LinearLayout implements TextWatcher {
                 tv_goodsRestore.setText("");
                 tv_dailyLimit.setText("");
             }
-        } else {//没有库存数据
-            tv_goodsRestore.setText(String.format(getResources().getString(R.string.hint_restore), orderDish.getDishShop().getResidueTotal() + unitName));
+        } else {            tv_goodsRestore.setText(String.format(getResources().getString(R.string.hint_restore), orderDish.getDishShop().getResidueTotal() + unitName));
             tv_dailyLimit.setText(String.format(getResources().getString(R.string.hint_daily_limit_sale), orderDish.getDishShop().getSaleTotal() + unitName));
         }
 
@@ -175,8 +151,7 @@ public class CustomChangePriceView extends LinearLayout implements TextWatcher {
     }
 
     private void setChangedPrice(String price) {
-        //如果字符串仅包含货币符号，那么不做处理
-        String symbol = ShopInfoCfg.getInstance().getCurrencySymbol();
+                String symbol = ShopInfoCfg.getInstance().getCurrencySymbol();
         if (!symbol.equals(price)) {
             tv_goodsPrice.setText(price);
 

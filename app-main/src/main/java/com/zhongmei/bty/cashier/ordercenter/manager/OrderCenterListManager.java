@@ -71,16 +71,12 @@ import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.faceAmount;
 import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.paySource;
 import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.payStatus;
 
-/**
- * 订单中心订单列表Model，业务处理类主要负责数据库操作、网络操作
- */
+
 
 public class OrderCenterListManager implements IOrderCenterListManager {
     private static final String TAG = OrderCenterListManager.class.getSimpleName();
 
-    /**
-     * 一页数据
-     */
+
     public static final long PAGE_SIZE = 15L;
 
     protected TradeOperates mTradeOperates;
@@ -218,8 +214,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
         return Collections.emptyList();
     }
 
-    //口碑核销
-    protected VerifyKoubeiOrder getVerifyKoubeiOrder(DatabaseHelper helper, Trade trade) {
+        protected VerifyKoubeiOrder getVerifyKoubeiOrder(DatabaseHelper helper, Trade trade) {
         try {
             return helper.getDao(VerifyKoubeiOrder.class)
                     .queryBuilder()
@@ -249,13 +244,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
         return lastPayTime <= lastClosingTime;
     }
 
-    /**
-     * 获取交易扩展
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return TradeExtra
-     */
+
     private TradeExtra getTradeExtra(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeExtra.class)
@@ -278,13 +267,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
         return null;
     }
 
-    /**
-     * 获取交易押金
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return TradeExtra
-     */
+
     private TradeDeposit getTradeDeposit(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeDeposit.class)
@@ -300,13 +283,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
         return null;
     }
 
-    /**
-     * 获取桌台信息
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return getTradeTableList
-     */
+
     private List<TradeTable> getTradeTableList(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeTable.class)
@@ -322,13 +299,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
         return Collections.emptyList();
     }
 
-    /**
-     * 获取顾客信息
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return getTradeCustomerList
-     */
+
     private List<TradeCustomer> getTradeCustomerList(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeCustomer.class)
@@ -378,23 +349,14 @@ public class OrderCenterListManager implements IOrderCenterListManager {
         }
     }
 
-    /**
-     * 加载订单相关支付信息（仅取了部分表的部分字段）
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return List<PaymentVo>
-     * @throws Exception
-     */
+
     private List<PaymentVo> listPaymentVo(DatabaseHelper helper, String tradeUuid) throws Exception {
         List<PaymentVo> voList = new ArrayList<PaymentVo>();
 
         Dao<Payment, String> dao = helper.getDao(Payment.class);
         QueryBuilder<Payment, String> paymentBuild = dao.queryBuilder();
         paymentBuild.selectColumns(Payment.$.uuid, Payment.$.serverUpdateTime, Payment.$.paymentType);
-        //paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid)
-        //        .and().eq(Payment.$.isPaid, Bool.YES);
-        paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid);
+                        paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid);
         paymentBuild.orderBy(Payment.$.serverCreateTime, false);
         List<Payment> paymentList = paymentBuild.query();
 
@@ -453,8 +415,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
                     Trade.$.serverUpdateTime);
             createTradeWhere(helper, tradeQB, childTab, postion, keyword, condition, lastData);
             tradeQB.limit(PAGE_SIZE);
-            //新订单||取消请求升序排列
-            if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
+                        if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
                     || childTab == DbQueryConstant.UNPROCESSED_CANCEL_REQUEST
                     || childTab == DbQueryConstant.SALES_UNPAID) {
                 tradeQB.orderBy(Trade.$.serverUpdateTime, true);
@@ -473,8 +434,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
         Where<Trade, String> where = generateTradeBusinessTypeWhere(queryBuilder);
         where.and().eq(Trade.$.statusFlag, StatusFlag.VALID);
 
-        //偏移条件
-        if (lastData != null) {
+                if (lastData != null) {
             if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
                     || childTab == DbQueryConstant.UNPROCESSED_CANCEL_REQUEST
                     || childTab == DbQueryConstant.SALES_UNPAID) {
@@ -486,43 +446,35 @@ public class OrderCenterListManager implements IOrderCenterListManager {
             }
         }
 
-        //搜索条件
-        if (!TextUtils.isEmpty(keyword)) {
+                if (!TextUtils.isEmpty(keyword)) {
             Where<Trade, String> searchWhere = null;
             if (childTab == DbQueryConstant.UNPROCESSED_ALL) {
                 switch (position) {
-                    case 0://全部
-                        searchWhere = where.or(where.in(Trade.$.uuid, getTradeExtraQueryBuilder(helper, keyword)),
+                    case 0:                        searchWhere = where.or(where.in(Trade.$.uuid, getTradeExtraQueryBuilder(helper, keyword)),
                                 where.in(Trade.$.uuid, getTradeCustomerQueryBuilder(helper, keyword)));
                         break;
-                    case 1://流水号
-                        searchWhere = where.in(Trade.$.uuid, getSerialNumberQueryBuilder(helper, keyword));
+                    case 1:                        searchWhere = where.in(Trade.$.uuid, getSerialNumberQueryBuilder(helper, keyword));
                         break;
-                    case 2://手机号
-                        searchWhere = where.or(where.in(Trade.$.uuid, getReceiverPhoneQueryBuilder(helper, keyword)),
+                    case 2:                        searchWhere = where.or(where.in(Trade.$.uuid, getReceiverPhoneQueryBuilder(helper, keyword)),
                                 where.in(Trade.$.uuid, getTradeCustomerQueryBuilder(helper, keyword)));
                         break;
                 }
             } else {
                 switch (position) {
-                    case 0://全部
-                        if (Utils.isNum(keyword)) {
+                    case 0:                        if (Utils.isNum(keyword)) {
                             searchWhere = getTradeSearchWhere(helper, keyword, where);
                         } else {
                             searchWhere = where.or(where.in(Trade.$.uuid, getTradeExtraQueryBuilder(helper, keyword)),
                                     where.in(Trade.$.uuid, getTradeCustomerQueryBuilder(helper, keyword)));
                         }
                         break;
-                    case 1://流水号
-                        searchWhere = where.in(Trade.$.uuid, getSerialNumberQueryBuilder(helper, keyword));
+                    case 1:                        searchWhere = where.in(Trade.$.uuid, getSerialNumberQueryBuilder(helper, keyword));
                         break;
-                    case 2://订单金额
-                        if (Utils.isNum(keyword)) {
+                    case 2:                        if (Utils.isNum(keyword)) {
                             searchWhere = getTradeAmountSearchWhere(helper, keyword, where);
                         }
                         break;
-                    case 3://手机号
-                        searchWhere = where.or(where.in(Trade.$.uuid, getReceiverPhoneQueryBuilder(helper, keyword)),
+                    case 3:                        searchWhere = where.or(where.in(Trade.$.uuid, getReceiverPhoneQueryBuilder(helper, keyword)),
                                 where.in(Trade.$.uuid, getTradeCustomerQueryBuilder(helper, keyword)));
                         break;
                 }
@@ -532,8 +484,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
             }
         }
 
-        //筛选条件
-        if (condition != null) {
+                if (condition != null) {
             if (Utils.isNotEmpty(condition.getDeliveryTypes())) {
                 where.and().in(Trade.$.deliveryType, condition.getDeliveryTypes());
             }
@@ -565,8 +516,7 @@ public class OrderCenterListManager implements IOrderCenterListManager {
 
         }
 
-        //分栏条件
-        Where<Trade, String> tabWhere;
+                Where<Trade, String> tabWhere;
         switch (childTab) {
             case DbQueryConstant.UNPROCESSED_ALL:
                 tabWhere = where.or(
@@ -705,17 +655,14 @@ public class OrderCenterListManager implements IOrderCenterListManager {
         tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
 
         List<DeliveryStatus> tempStatus = new ArrayList<>();
-        //配送完成
-        if (deliveryStatuses.contains(DeliveryOrderStatus.REAL_DELIVERY)) {
+                if (deliveryStatuses.contains(DeliveryOrderStatus.REAL_DELIVERY)) {
             tempStatus.add(DeliveryStatus.SQUARE_UP);
             tempStatus.add(DeliveryStatus.REAL_DELIVERY);
         }
-        //配送中
-        if (deliveryStatuses.contains(DeliveryOrderStatus.DELIVERYING)) {
+                if (deliveryStatuses.contains(DeliveryOrderStatus.DELIVERYING)) {
             tempStatus.add(DeliveryStatus.DELIVERYING);
         }
-        //待配送
-        if (deliveryStatuses.contains(DeliveryOrderStatus.WAITING_PICK_UP)) {
+                if (deliveryStatuses.contains(DeliveryOrderStatus.WAITING_PICK_UP)) {
             tempStatus.add(DeliveryStatus.WAITINT_DELIVERY);
         }
         Where<TradeExtra, String> where = tradeExtraQB.where();

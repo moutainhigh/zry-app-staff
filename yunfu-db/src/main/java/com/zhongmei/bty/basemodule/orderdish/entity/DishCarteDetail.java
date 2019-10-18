@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * 菜品和菜单模板关联表
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "dish_carte_detail")
 public class DishCarteDetail extends BasicEntityBase {
 

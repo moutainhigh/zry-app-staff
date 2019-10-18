@@ -39,13 +39,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2016-4-5 下午4:32:39
- * @Description: 用于处理部分退卡
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class ReturnCardDataModel {
     private Map<Long, CardKindVo> mDataMap;
 
@@ -72,17 +66,12 @@ public class ReturnCardDataModel {
             for (CustomerSaleCardInfo cardInfo : list) {
                 mCards.add(new CardNumber(cardInfo.getCardNo(), cardInfo.getCardKindId(), cardInfo.getTradeItemId()));
                 mTradeAmount = mTradeAmount.add(cardInfo.getCardCost());
-//				if (cardInfo.getPrice() != null && cardInfo.getPrice().compareTo(BigDecimal.ZERO) > 0) {
-//					mTradeAmount = mTradeAmount.add(cardInfo.getPrice());
-//				}
                 addDataToMap(cardInfo);
             }
         }
     }
 
-    /**
-     * 生成CardNumber对象
-     */
+
     public CardNumber getCardNumber(String cardNo, Long cardKindId, Long srcTradeItemId) {
         return new CardNumber(cardNo, cardKindId, srcTradeItemId);
     }
@@ -99,11 +88,7 @@ public class ReturnCardDataModel {
         }
     }
 
-    /**
-     * @param businessType 业态区分
-     * @return
-     * @see CustomerAppConfig.CustomerBussinessType
-     */
+
     public TradeVo createTradeVo(Integer businessType) {
         TradeVo tradeVo = new TradeVo();
         Trade trade = creatTrade(businessType);
@@ -115,8 +100,7 @@ public class ReturnCardDataModel {
         for (Long key : mDataMap.keySet()) {
             vo = mDataMap.get(key);
             String tradeItemUuid = SystemUtils.genOnlyIdentifier();
-            //往mcards里关联tradeItemUuid
-            for (CardNumber cardNumber : mCards) {
+                        for (CardNumber cardNumber : mCards) {
                 if (cardNumber.getCardKindId().equals(key)) {
                     cardNumber.setRefundTradeItemUuid(tradeItemUuid);
                 }
@@ -128,8 +112,7 @@ public class ReturnCardDataModel {
     }
 
     public TradeVo createTradeVo() {
-        return createTradeVo(CustomerAppConfig.CustomerBussinessType.DINNER); // 默认正餐
-    }
+        return createTradeVo(CustomerAppConfig.CustomerBussinessType.DINNER);     }
 
     public List<PaymentVo> getReturnPayment(Trade trade) {
 
@@ -146,51 +129,29 @@ public class ReturnCardDataModel {
             payment.validateCreate();
 
             final List<PaymentItem> paymentItemList = new ArrayList<PaymentItem>();
-            // 收银员
-            String _operatorName =
+                        String _operatorName =
                     Session.getAuthUser() != null ? Session.getAuthUser()
                             .getName() : trade.getCreatorName();
             long _operatorId =
                     Session.getAuthUser() != null ? Session.getAuthUser()
                             .getId() : trade.getCreatorId();
 
-            // 设置支付信息
-            payment.setReceivableAmount(trade.getTradeAmount());// 可收金额
-
-            payment.setActualAmount(trade.getTradeAmount());// 实际收金额
-
-            payment.setExemptAmount(BigDecimal.ZERO);// 抹零金额
-            payment.setRelateUuid(trade.getUuid());// 主单uuid
-            payment.setRelateId(trade.getId());// 关联id
-            payment.setPaymentType(PaymentType.TRADE_REFUND);// 交易支付
-            // 生成PaymentUUID
-            payment.setUuid(SystemUtils.getBillNumber());
-            payment.setCreatorId(_operatorId);// 收银员id
-            payment.setCreatorName(_operatorName);// 收银员名字
-            payment.setUpdatorId(_operatorId);// 收银员id
-            payment.setUpdatorName(_operatorName);// 收银员名字
-
-            paymenVo.setPayment(payment);// 支付主单
-            paymenVo.setPaymentItemList(paymentItemList);// 支付明细列表
-
+                        payment.setReceivableAmount(trade.getTradeAmount());
+            payment.setActualAmount(trade.getTradeAmount());
+            payment.setExemptAmount(BigDecimal.ZERO);            payment.setRelateUuid(trade.getUuid());            payment.setRelateId(trade.getId());            payment.setPaymentType(PaymentType.TRADE_REFUND);                        payment.setUuid(SystemUtils.getBillNumber());
+            payment.setCreatorId(_operatorId);            payment.setCreatorName(_operatorName);            payment.setUpdatorId(_operatorId);            payment.setUpdatorName(_operatorName);
+            paymenVo.setPayment(payment);            paymenVo.setPaymentItemList(paymentItemList);
             PaymentItem paymentItem = new PaymentItem();
             paymentItem.setPaySource(PaySource.CASHIER);
             paymentItem.validateCreate();
-            // 生成UUID并缓存
-            paymentItem.setUuid(SystemUtils.getBillNumber());
+                        paymentItem.setUuid(SystemUtils.getBillNumber());
             paymentItem.setPaymentUuid(payment.getUuid());
             paymentItem.setPayModeId(PayModeId.CASH.value());
             paymentItem.setPayModelGroup(PayModelGroup.CASH);
             paymentItem.setRefundWay(RefundWay.NONEED_REFUND);
-            // 支付类型名称
-            paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
+                        paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
 
-            paymentItem.setFaceAmount(trade.getTradeAmount());// 票面金额
-            paymentItem.setChangeAmount(BigDecimal.ZERO);// 找零金额
-            paymentItem.setUsefulAmount(trade.getTradeAmount());// 实付款
-            paymentItem.setCreatorId(_operatorId);// 收银员id
-            paymentItem.setCreatorName(_operatorName);// 收银员名字
-
+            paymentItem.setFaceAmount(trade.getTradeAmount());            paymentItem.setChangeAmount(BigDecimal.ZERO);            paymentItem.setUsefulAmount(trade.getTradeAmount());            paymentItem.setCreatorId(_operatorId);            paymentItem.setCreatorName(_operatorName);
             paymentItemList.add(paymentItem);
         }
         return paymentVoList;
@@ -214,8 +175,7 @@ public class ReturnCardDataModel {
         trade.validateUpdate();
         trade.setDomainType(DomainType.RESTAURANT);
         trade.setBusinessType(BusinessType.CARD);
-        trade.setTradeType(TradeType.REFUND);//退货单
-        trade.setTradeTime((new Date()).getTime());
+        trade.setTradeType(TradeType.REFUND);        trade.setTradeTime((new Date()).getTime());
         trade.setTradeStatus(TradeStatus.CONFIRMED);
         trade.setDeliveryType(DeliveryType.HERE);
         trade.setSource(SourceId.POS);
@@ -267,8 +227,7 @@ public class ReturnCardDataModel {
         tradeItem.setType(DishType.CARD);
         tradeItem.setIssueStatus(IssueStatus.DIRECTLY);
         tradeItem.setEnableWholePrivilege(Bool.YES);
-        // tradeItem.setUnitName(unitName);
-        tradeItem.setStatusFlag(StatusFlag.VALID);
+                tradeItem.setStatusFlag(StatusFlag.VALID);
         return tradeItem;
     }
 
@@ -280,8 +239,7 @@ public class ReturnCardDataModel {
 
         private BigDecimal Price;
 
-        private List<CustomerSaleCardInfo> BaseData;// 基础数据
-
+        private List<CustomerSaleCardInfo> BaseData;
         public CardKindVo(Long cardKindId) {
             CardKindId = cardKindId;
             BaseData = new ArrayList<CustomerSaleCardInfo>();

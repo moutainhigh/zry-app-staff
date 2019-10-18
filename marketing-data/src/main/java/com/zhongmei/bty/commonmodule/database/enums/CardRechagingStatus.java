@@ -2,29 +2,17 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 卡储值权限
- */
+
 public enum CardRechagingStatus implements ValueEnum<Integer> {
 
-    /**
-     * 1：可用
-     */
+
     EFFECTIVE(1),
-    /**
-     * 2：不可用
-     */
+
     INVALID(2),
-    /**
-     * 未知
-     */
+
     UNKNOW(-1),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

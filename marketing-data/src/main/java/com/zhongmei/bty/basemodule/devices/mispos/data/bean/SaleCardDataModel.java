@@ -32,11 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2016-3-15 上午11:29:08
- * @Description: 处理售卡数据
- * @Version: 1.0
- */
+
 public class SaleCardDataModel {
     private Map<Long, CardKindVo> mDataMap;
 
@@ -80,13 +76,7 @@ public class SaleCardDataModel {
         }
     }
 
-    /**
-     * @param chargeMoney
-     * @param businessType         业务形态
-     * @param customerBusinessType 顾客业态区分  美业 or 其他
-     * @return
-     * @see CustomerAppConfig.CustomerBussinessType
-     */
+
     public TradeVo createMemberRechargeTradeVo(BigDecimal chargeMoney, BusinessType businessType, Integer customerBusinessType) {
         TradeVo tradeVo = new TradeVo();
         Trade trade = creatTrade(customerBusinessType);
@@ -105,13 +95,7 @@ public class SaleCardDataModel {
     public TradeVo createTradeVo(Integer businessType, final List<EcCardInfo> list) {
         initData(list);
         TradeVo tradeVo = new TradeVo();
-        /*
-         * TradeExtra tradeExtra = new TradeExtra();
-         * tradeExtra.validateCreate();
-         * tradeExtra.setUuid(SystemUtil
-         * .getSystemUtil().genOnlyIdentifier());
-         * tradeVo.setTradeExtra(tradeExtra);
-         */
+
 
         Trade trade = creatTrade(businessType);
         tradeVo.setTrade(trade);
@@ -128,8 +112,7 @@ public class SaleCardDataModel {
     }
 
     public TradeVo createTradeVo(final List<EcCardInfo> list) {
-        return createTradeVo(CustomerAppConfig.CustomerBussinessType.DINNER, list);// 默认正餐
-    }
+        return createTradeVo(CustomerAppConfig.CustomerBussinessType.DINNER, list);    }
 
     public TradeVo AddSaleTradeItem(TradeVo vo, EcCardInfo info) {
         TradeItemVo tradeItemVo = createTradeItemVo(1, vo.getTrade(), mDataMap.get(info.getCardKindId()));
@@ -205,19 +188,14 @@ public class SaleCardDataModel {
         DishShop dishShop = mCustomerDal.findDishopByEcCardKindId(vo.getCardKindId());
         TradeItem tradeItem = new TradeItem();
         tradeItem.validateCreate();
-        // tradeItem.validateUpdate();
-        tradeItem.setTradeUuid(tradeUuid);
+                tradeItem.setTradeUuid(tradeUuid);
         tradeItem.setUuid(SystemUtils.genOnlyIdentifier());
         if (dishShop != null) {
             tradeItem.setDishId(dishShop.getId());
             tradeItem.setDishName(dishShop.getName());
             tradeItem.setSkuUuid(dishShop.getUuid());
             tradeItem.setSaleType(dishShop.getSaleType());
-        } /*else {
-			tradeItem.setSkuId(10L);
-			tradeItem.setSkuName("haha cards");
-			tradeItem.setSkuUuid(SystemUtils.genOnlyIdentifier());
-		}*/
+        }
         tradeItem.setSort(sort);
         tradeItem.setPrice(vo.getPrice());
         tradeItem.setQuantity(BigDecimal.valueOf(vo.getCount()));
@@ -228,8 +206,7 @@ public class SaleCardDataModel {
         tradeItem.setType(DishType.CARD);
         tradeItem.setIssueStatus(IssueStatus.DIRECTLY);
         tradeItem.setEnableWholePrivilege(Bool.YES);
-        // tradeItem.setUnitName(unitName);
-        tradeItem.setStatusFlag(StatusFlag.VALID);
+                tradeItem.setStatusFlag(StatusFlag.VALID);
         return tradeItem;
     }
 
@@ -241,16 +218,14 @@ public class SaleCardDataModel {
 
         private BigDecimal Price;
 
-        private List<EcCardInfo> BaseData;// 基础数据
-
+        private List<EcCardInfo> BaseData;
         public CardKindVo(Long cardKindId) {
             CardKindId = cardKindId;
             BaseData = new ArrayList<EcCardInfo>();
         }
 
         public void addData(EcCardInfo cardinfo) {
-            BigDecimal cardPrice = BigDecimal.ZERO; // 卡售价
-            if (cardinfo.getPrice() != null) {
+            BigDecimal cardPrice = BigDecimal.ZERO;             if (cardinfo.getPrice() != null) {
                 cardPrice = cardinfo.getPrice();
             }
             Amount = Amount.add(cardinfo.getCardCost().add(cardPrice));

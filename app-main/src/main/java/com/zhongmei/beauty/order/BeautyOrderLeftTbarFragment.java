@@ -31,9 +31,7 @@ import org.androidannotations.annotations.ViewById;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_order_left_tar_layout)
 public class BeautyOrderLeftTbarFragment extends BasicFragment {
     @ViewById(R.id.beauty_serial_number)
@@ -51,8 +49,7 @@ public class BeautyOrderLeftTbarFragment extends BasicFragment {
     public void initView() {
         setRoomName("");
         if (isBuyServer(mBusType)) {
-            //隐藏房间信息
-            tv_room.setVisibility(View.GONE);
+                        tv_room.setVisibility(View.GONE);
             tv_beautyOrderTitle.setText(R.string.beauty_buy_service);
         }
     }
@@ -90,13 +87,10 @@ public class BeautyOrderLeftTbarFragment extends BasicFragment {
                 saleCard();
                 break;
             case R.id.btn_recharge:
-                // 充值
-                if (CustomerManager.getInstance().getDinnerLoginCustomer() != null) {
-                    // FIXME 添加会员卡选择，选择会员卡后充值
-                    showChargingCard();
+                                if (CustomerManager.getInstance().getDinnerLoginCustomer() != null) {
+                                        showChargingCard();
                 } else {
-                    // FIXME 添加会员登陆，登陆成功后选择会员卡，选择会员卡后充值
-                    new BeautyCustomerLoginDialogFragment().show(getActivity().getSupportFragmentManager(), "BeautyCustomerLoginDialogFragment");
+                                        new BeautyCustomerLoginDialogFragment().show(getActivity().getSupportFragmentManager(), "BeautyCustomerLoginDialogFragment");
                 }
                 break;
         }
@@ -111,9 +105,7 @@ public class BeautyOrderLeftTbarFragment extends BasicFragment {
         tv_room.setText(str_roomName);
     }
 
-    /**
-     * 充值卡选择
-     */
+
     private void showChargingCard() {
         BeautyCustomerCardDialogFragment dialog = new BeautyCustomerCardDialogFragment();
         Bundle bundle = new Bundle();

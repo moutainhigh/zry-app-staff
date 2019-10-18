@@ -43,20 +43,13 @@ import java.util.List;
 import com.zhongmei.ZMIntent;
 
 
-/**
- * 美业点菜页工具类
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyOrderManager {
 
     private static final String TAG = "BeautyOrderManager";
 
-    /**
-     * 初始化美业订单数据
-     *
-     * @param isEdit: 是否是编辑
-     */
+
     public static void initOrder(boolean isEdit, Long tradeId, Tables tables, BusinessType busType) {
         if (!isEdit) {
             doInit(tables, busType);
@@ -77,8 +70,7 @@ public class BeautyOrderManager {
         DinnerShoppingCart.getInstance().setOrderType(DinnerShoppingCart.getInstance().getShoppingCartVo(), DeliveryType.HERE);
         DinnerShoppingCart.getInstance().setDinnerOrderType(DeliveryType.HERE);
         DinnerShoppingCart.getInstance().setDominType(DinnerShoppingCart.getInstance().getShoppingCartVo(), DomainType.BEAUTY);
-        //默认为一人
-        DinnerShoppingCart.getInstance().getOrder().getTrade().setTradePeopleCount(1);
+                DinnerShoppingCart.getInstance().getOrder().getTrade().setTradePeopleCount(1);
     }
 
     private static void doEdit(Long tradeId) {
@@ -97,12 +89,7 @@ public class BeautyOrderManager {
     }
 
 
-    /**
-     * 美业下单、改单请求
-     *
-     * @param doPayApi
-     * @param paymentInfo
-     */
+
     public static void doBeautyTradePayRequest(DoPayApi doPayApi, IPaymentInfo paymentInfo, FragmentActivity activity, final IPayOverCallback callback, final ISavedCallback savedCallback) {
         BeautyOperates beautyOperates = OperatesFactory.create(BeautyOperates.class);
         if (paymentInfo.getTradeVo().getTrade().getId() != null) {
@@ -112,11 +99,7 @@ public class BeautyOrderManager {
         }
     }
 
-    /**
-     * 是否是购买次卡服务的业务
-     *
-     * @return
-     */
+
     public static boolean isBuyServerBus() {
         TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
         if (tradeVo != null && tradeVo.getTrade() != null) {
@@ -147,21 +130,14 @@ public class BeautyOrderManager {
             } else {
                 if (ResponseObject.isExisted(response)) {
                     updateCommon(mActivity, paymentInfo, savedCallback, true);
-                    /*doPayApi.getOnlinePayState(null, paymentInfo, mCurrentPaymentItemId, mCurrentPaymentItemUuid, new IOnlinePayOverCallback() {
-                        @Override
-                        public void onPayResult(Long paymentItemId, int payStatus) {
-                            updateCommon(mActivity,paymentInfo,savedCallback,true);
-                        }
-                    });*/
+
                 }
 
-                //其它改单失败情况
-                ToastUtil.showLongToast(response.getMessage());
+                                ToastUtil.showLongToast(response.getMessage());
                 if (callback != null) {
                     callback.onFinished(false, response.getStatusCode());
                 }
-                //保存后回调处理
-                if (savedCallback != null) {
+                                if (savedCallback != null) {
                     savedCallback.onSaved(false);
                 }
             }
@@ -170,8 +146,7 @@ public class BeautyOrderManager {
         @Override
         public void onError(NetError error) {
             ToastUtil.showLongToast(error.getVolleyError().getMessage());
-            //保存后回调处理
-            if (savedCallback != null) {
+                        if (savedCallback != null) {
                 savedCallback.onSaved(false);
             }
         }
@@ -185,8 +160,7 @@ public class BeautyOrderManager {
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                //显示咖啡杯
-                mDialogFragment = CalmLoadingDialogFragment.show(mContext.getSupportFragmentManager());
+                                mDialogFragment = CalmLoadingDialogFragment.show(mContext.getSupportFragmentManager());
             }
 
             @Override
@@ -202,42 +176,28 @@ public class BeautyOrderManager {
             }
 
             protected void onPostExecute(TradeVo tradeVo) {
-                //如果是正餐结算界面，刷新购物车数据 ,对接开放平台modify 20180129
-                updateDinnerTradeVo(tradeVo, mPaymentInfo);
+                                updateDinnerTradeVo(tradeVo, mPaymentInfo);
                 mPaymentInfo.setTradeVo(tradeVo);
-                mPaymentInfo.setOrdered(true);// 标识已经下单
-                //关闭咖啡杯
-                CalmLoadingDialogFragment.hide(mDialogFragment);
-                //保存成功后回调处理
-                if (mSavedCallback != null) {
+                mPaymentInfo.setOrdered(true);                                CalmLoadingDialogFragment.hide(mDialogFragment);
+                                if (mSavedCallback != null) {
                     mSavedCallback.onSaved(savedCallbackOk);
                 }
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    //更新购物车数据
-    private static void updateDinnerTradeVo(TradeVo tradeVo, IPaymentInfo mPaymentInfo) {
-        //先把原单会员拿出来，等reset方法玩了以后再放回去（临时方案，后续需要优化）
-        CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
-        DinnerShoppingCart.getInstance().updateBeautyDataFromTradeVo(tradeVo);//set callback false v8.10
-        CustomerManager.getInstance().setDinnerLoginCustomer(customer);
-        //刷新积分抵现
-        DinnerCashManager cashManager = new DinnerCashManager();
+        private static void updateDinnerTradeVo(TradeVo tradeVo, IPaymentInfo mPaymentInfo) {
+                CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
+        DinnerShoppingCart.getInstance().updateBeautyDataFromTradeVo(tradeVo);        CustomerManager.getInstance().setDinnerLoginCustomer(customer);
+                DinnerCashManager cashManager = new DinnerCashManager();
         if (customer != null) {
             if (customer.card == null) {
-                cashManager.updateIntegralCash(customer);//set callback false v8.10
-            } else {
-                cashManager.updateIntegralCash(customer.card);//set callback false v8.10
-            }
+                cashManager.updateIntegralCash(customer);            } else {
+                cashManager.updateIntegralCash(customer.card);            }
         }
     }
 
-    /**
-     * 保存订单
-     *
-     * @param dinnerShoppingCart
-     */
+
     public static void saveTrade(FragmentActivity activity, DinnerShoppingCart dinnerShoppingCart) {
         TradeVo tradeVo = dinnerShoppingCart.createOrder();
         if (tradeVo.getTrade().getId() == null) {
@@ -247,12 +207,7 @@ public class BeautyOrderManager {
         }
     }
 
-    /**
-     * 下单操作
-     *
-     * @param activity
-     * @param tradeVo
-     */
+
     public static void submitTrade(final FragmentActivity activity, TradeVo tradeVo) {
         BeautyOperates beautyOperates = OperatesFactory.create(BeautyOperates.class);
         beautyOperates.submitBeauty(tradeVo, new CalmResponseListener<ResponseObject<BeautyTradeResp>>() {
@@ -275,12 +230,7 @@ public class BeautyOrderManager {
 
     }
 
-    /**
-     * 改单操作
-     *
-     * @param activity
-     * @param tradeVo
-     */
+
     public static void modifyTrade(final FragmentActivity activity, TradeVo tradeVo) {
         BeautyOperates beautyOperates = OperatesFactory.create(BeautyOperates.class);
         beautyOperates.modifyBeauty(tradeVo, new CalmResponseListener<ResponseObject<BeautyTradeResp>>() {
@@ -303,17 +253,9 @@ public class BeautyOrderManager {
 
     }
 
-    /**
-     * 付款
-     *
-     * @param tradeVo
-     */
+
     public static void gotoPay(Activity activity, TradeVo tradeVo) {
-        /*Uri uri = Uri.parse("clam://pay.justpay.beauty.view");
-        Intent intent=new Intent();
-        intent.setData(uri);
-        intent.putExtra("tradeVo", tradeVo);
-        activity.startActivity(intent);*/
+
         ZMIntent.pay(activity, tradeVo);
     }
 
@@ -323,9 +265,7 @@ public class BeautyOrderManager {
         BeautyCardManager.getInstance().exitCardManager();
     }
 
-    /**
-     * 清空购物车菜品
-     */
+
     public static void clearShopcartDish() {
         DinnerShoppingCart.getInstance().removeAllDishs();
         DinnerShoppingCart.getInstance().setDinnerRemarks("");
@@ -334,13 +274,7 @@ public class BeautyOrderManager {
         DinnerShoppingCart.getInstance().removeOrderPrivilege();
     }
 
-    /**
-     * 是否有品项购物车显示
-     *
-     * @param tradeVo
-     * @param list
-     * @return
-     */
+
     public static boolean isShopcartCanDisplay(TradeVo tradeVo, List<IShopcartItem> list) {
 
         if (Utils.isNotEmpty(list)) {

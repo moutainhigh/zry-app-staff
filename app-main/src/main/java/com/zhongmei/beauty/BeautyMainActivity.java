@@ -32,18 +32,13 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.FragmentById;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * btn_anchor_member
- * Created by demo on 2018/12/15
- */
+
 @EActivity(R.layout.beauty_main_activity)
 public class BeautyMainActivity extends MainBaseActivity implements IBeautyAnchor, DrawerLayout.DrawerListener {
 
     @ViewById(R.id.dl_drawer)
     protected DrawerLayout mDrawerLayout;
 
-    //@ViewById(R.id.ncv_notify_center)
-    //protected NotifyCenterView mNotifyView;
 
     @FragmentById(R.id.fragment_titlebar)
     protected TitleBarFragment mTitleBarFragment;
@@ -71,8 +66,6 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
         mDrawerLayout.setFocusableInTouchMode(false);
         mDrawerLayout.setDrawerListener(this);
 
-        //mNotifyView.setActivity(this);
-        //mNotifyView.setEntranceType(EntranceType.BUFFET);
 
         toCashier();
     }
@@ -98,9 +91,7 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
 
     @Override
     public void toMemberCenter() {
-        //Intent intent = new Intent(this, BeautyCustomerActivity_.class);
-        //startActivity(intent);
-        BeautyCustomerContentFragment beautyCustomerContentFragment = BeautyCustomerContentFragment_.builder().build();
+                        BeautyCustomerContentFragment beautyCustomerContentFragment = BeautyCustomerContentFragment_.builder().build();
         replaceFragment(R.id.layout_contain_content, beautyCustomerContentFragment, BeautyCustomerContentFragment.class.getSimpleName());
     }
 
@@ -131,9 +122,6 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
 
     @Override
     public void toShopManagerCenter() {
-//        int tab = getIntent().getIntExtra(ShopManagementMainFragment.KEY_TAB, ShopManagementMainFragment.TAB_BALANCE);
-//        ShopManagementMainFragment mShopManagerFragment =ShopManagementMainFragment.newInstance(OCConstant.FromType.FROM_TYPE_BEAUTY, tab);
-//        replaceFragment(R.id.layout_contain_content, mShopManagerFragment, ShopManagementMainFragment.class.getSimpleName());
 
         ShopManagementWebViewFragment mShopManagerFragment = new ShopManagementWebViewFragment();
         replaceFragment(R.id.layout_contain_content, mShopManagerFragment, ShopManagementWebViewFragment.class.getSimpleName());
@@ -163,8 +151,7 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
 
     @Override
     public void toTaskCenter() {
-        //去任务管理中心
-        BeautyTaskFragment beautyTaskFragment = BeautyTaskFragment_.builder().build();
+                BeautyTaskFragment beautyTaskFragment = BeautyTaskFragment_.builder().build();
         replaceFragment(R.id.layout_contain_content, beautyTaskFragment, BeautyReserverManagerFragment.class.getSimpleName());
     }
 
@@ -175,13 +162,11 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
 
     @Override
     public void onDrawerOpened(View drawerView) {
-        //mNotifyView.open();
-    }
+            }
 
     @Override
     public void onDrawerClosed(View drawerView) {
-        //mNotifyView.hide();
-    }
+            }
 
     @Override
     public void onDrawerStateChanged(int newState) {
@@ -190,26 +175,22 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
 
     @Override
     protected void onResume() {
-        //mNotifyView.resume();
-        super.onResume();
+                super.onResume();
     }
 
     @Override
     protected void onPause() {
-        //mNotifyView.pause();
-        super.onPause();
+                super.onPause();
     }
 
     @Override
     protected void onStop() {
-        //mNotifyView.stop();
-        super.onStop();
+                super.onStop();
     }
 
 
     @Override
     protected void onDestroy() {
-        //mNotifyView.destroy();
-        super.onDestroy();
+                super.onDestroy();
     }
 }

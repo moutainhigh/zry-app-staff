@@ -45,9 +45,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by dingzb on 2019/6/25.
- */
+
 
 public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -74,8 +72,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
 
     private CustomerDocRecordResp customerDocDetail;
     private CustomerDocReq customerDocReq;
-    private UserVo mExecutor;//执行人，默认为当前登陆的店员
-    private CustomerResp mCustomer;
+    private UserVo mExecutor;    private CustomerResp mCustomer;
 
     private Date mSelectDate=new Date(System.currentTimeMillis());
 
@@ -105,11 +102,9 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
 
     private void setupWindow() {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getDialog().setCanceledOnTouchOutside(false);// 设置点击屏幕Dialog不消失
-        Window window = getDialog().getWindow();
+        getDialog().setCanceledOnTouchOutside(false);        Window window = getDialog().getWindow();
         if (window != null) {
-            //设置宽高
-            WindowManager.LayoutParams attributes = window.getAttributes();
+                        WindowManager.LayoutParams attributes = window.getAttributes();
             attributes.width = DensityUtil.dip2px(getActivity(), 460f);
             attributes.height = WindowManager.LayoutParams.WRAP_CONTENT;
             window.setAttributes(attributes);
@@ -120,10 +115,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
-    /**
-     * 初始化view
-     * @param view
-     */
+
     private void initView(View view){
         tv_memberName=(TextView)view.findViewById(R.id.tv_member_name);
         et_docTitle=(EditText) view.findViewById(R.id.et_doc_title);
@@ -150,9 +142,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
     }
 
 
-    /**
-     * 初始化数据
-     */
+
     private void initData(){
         showExecutor(null);
 
@@ -169,10 +159,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
     }
 
 
-    /**
-     * 显示执行人
-     * @param userVo
-     */
+
     private void showExecutor(UserVo userVo){
         if(userVo==null){
             IAuthUser authUser=ShopInfoCfg.getInstance().authUser;
@@ -190,9 +177,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
     }
 
 
-    /**
-     * 检查数据的有效性
-     */
+
     private boolean checkDataValid(){
         String docTitle=et_docTitle.getText().toString().trim();
         if(TextUtils.isEmpty(docTitle)){
@@ -266,9 +251,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
         tv_taskTime.setText(DateTimeUtils.formatDate(date,DateTimeUtils.DATE_TIME_FORMAT));
     }
 
-    /**
-     * 选择执行时间（用户自己选择）
-     */
+
     private void selectExecuteTime(){
         CalendarTimeDialog mCalendarTimeDialog = new CalendarTimeDialog(getContext(), new CalendarTimeDialog.SelectedDateTimeListener() {
             @Override
@@ -281,9 +264,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
         mCalendarTimeDialog.showDialog();
     }
 
-    /**
-     * 选择这行人，默认为当前服务员
-     */
+
     private void selectExecutor(){
         List<UserVo> selectUser=new ArrayList<UserVo>();
         selectUser.add(mExecutor);
@@ -299,8 +280,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
                 }
             }
         });
-        dialog.setSelectUsers(selectUser); // 编辑时传入锁定状态
-        dialog.setIsNotFreeUsers(new ArrayList<Long>());
+        dialog.setSelectUsers(selectUser);         dialog.setIsNotFreeUsers(new ArrayList<Long>());
         dialog.show(getChildFragmentManager(), "BeautyBookingWaiterDialog");
     }
 
@@ -312,8 +292,7 @@ public class BeautyCreateOrEditMemberDocDialog extends BasicDialogFragment imple
                 @Override
                 public void onResponse(YFResponse<CustomerDocRecordResp> response) {
                     if (YFResponseList.isOk(response)) {
-                        //需要隐藏一下详情页面
-                        if(docOperatorListener!=null){
+                                                if(docOperatorListener!=null){
                             docOperatorListener.save(response.getContent());
                         }
                         dismissAllowingStateLoss();

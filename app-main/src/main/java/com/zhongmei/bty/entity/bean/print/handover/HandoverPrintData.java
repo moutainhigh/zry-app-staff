@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 交接打印
- */
+
 
 public class HandoverPrintData implements Serializable {
 

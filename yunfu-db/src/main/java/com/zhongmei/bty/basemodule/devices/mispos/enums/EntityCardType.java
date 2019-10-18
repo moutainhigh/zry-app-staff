@@ -2,30 +2,18 @@ package com.zhongmei.bty.basemodule.devices.mispos.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 实体卡类型 1:会员实体卡  2:匿名实体卡
- */
+
 public enum EntityCardType implements ValueEnum<Integer> {
-    /**
-     * 权益会员实体卡
-     */
+
     CUSTOMER_ENTITY_CARD(1),
 
-    /**
-     * 匿名实体卡
-     */
+
     ANONYMOUS_ENTITY_CARD(2),
 
-    /**
-     * 会员实体卡
-     */
+
     GENERAL_CUSTOMER_CARD(3),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

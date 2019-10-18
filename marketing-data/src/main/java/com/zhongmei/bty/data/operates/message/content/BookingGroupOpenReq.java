@@ -8,11 +8,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * 开台请求
- * <p>
- * Created by demo on 2018/12/15
- */
+
 public class BookingGroupOpenReq extends Trade {
 
     public TradeExtra tradeExtra;
@@ -24,10 +20,5 @@ public class BookingGroupOpenReq extends Trade {
     public List<TradeTax> tradeTaxs;
     public List<TradeInitConfig> tradeInitConfigs;
 
-//    public BookingGroupOpenContentReq(){
-//        setBrandIdenty(BaseApplication.getInstance().getBrandIdenty());
-//        setShopIdenty(BaseApplication.getInstance().getShopIdenty());
-//        setDeviceIdenty(BaseApplication.getInstance().getDeviceIdenty());
-//    }
 
 }

@@ -14,21 +14,15 @@ import com.zhongmei.bty.pay.fragment.MainPayFragment_;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.resp.UserActionEvent;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyPayActivity extends MainBaseActivity implements IPayConstParame {
     private static final String TAG = BeautyPayActivity.class.getSimpleName();
     private static final String EXTRA_LAG_INFO = "lag_info";
     private MainPayFragment mMainPayFragment;
     private TradeVo mTradeVo;
-    private boolean isOrderCenter = false;//是否单据中心
-    private boolean isGroupPay = false;//是否分步
-    private int defaultPaymentMenuType = -1;//默认支付菜单
-    private int quickPayType = -1;
-    private PayScene payScene = PayScene.SCENE_CODE_SHOP;//支付场景
-
+    private boolean isOrderCenter = false;    private boolean isGroupPay = false;    private int defaultPaymentMenuType = -1;    private int quickPayType = -1;
+    private PayScene payScene = PayScene.SCENE_CODE_SHOP;
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
@@ -72,8 +66,7 @@ public class BeautyPayActivity extends MainBaseActivity implements IPayConstPara
     }
 
 
-    //支付界面初始化参数
-    private Bundle createArguments() {
+        private Bundle createArguments() {
         Bundle bundle = new Bundle();
         bundle.putBoolean("isOrderCenter", isOrderCenter);
         bundle.putBoolean("isOrdered", isOrderCenter);

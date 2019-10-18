@@ -88,8 +88,7 @@ public class DeliveryFeeDialogFragment extends DialogFragment implements View.On
             tradeAndDeliveryFee.sourceId = tradeVo.getTrade().getSource();
             tradeAndDeliveryFee.tradeNo = tradeVo.getTrade().getTradeNo();
             tradeAndDeliveryFee.serialNo = tradeVo.getTradeExtra().getThirdSerialNo();
-            // TODO: 2018/2/7  do better 可能顺序不对 导致id和fee对不上
-            tradeAndDeliveryFee.fee = deliveryFees.get(i).getFee();
+                        tradeAndDeliveryFee.fee = deliveryFees.get(i).getFee();
             tradeAndDeliveryFees.add(tradeAndDeliveryFee);
         }
         return tradeAndDeliveryFees;

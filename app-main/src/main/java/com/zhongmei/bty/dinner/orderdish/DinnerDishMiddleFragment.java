@@ -27,23 +27,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * 快餐点菜页中间栏位
- */
+
 @EFragment(R.layout.dinner_dish_middle)
 public class DinnerDishMiddleFragment extends MobclickAgentFragment {
     private static final String TAG = DinnerDishMiddleFragment.class.getSimpleName();
     public static final int DINNER_ORDER_MODE = 1;
-    //团餐配菜
-    public static final int GROUP_SLIDE_MODE = 2;
-    //团餐点菜
-    public static final int GROUP_ORDER_MODE = 3;
-    //自助餐
-    public static final int BUFFET_ORDER_MODE = 4;
+        public static final int GROUP_SLIDE_MODE = 2;
+        public static final int GROUP_ORDER_MODE = 3;
+        public static final int BUFFET_ORDER_MODE = 4;
 
     public static final int BOOKING_DISH_MODE = 5;
-    //西餐
-    public static final int WESTERN_DISH_MODE = 6;
+        public static final int WESTERN_DISH_MODE = 6;
 
     private IChangePageListener mListener;
 
@@ -57,8 +51,7 @@ public class DinnerDishMiddleFragment extends MobclickAgentFragment {
     private List<DishDataItem> mDishDataItems = new ArrayList<>();
 
     private boolean mIsCategory = false;
-    //当前是有什么场景调用
-    private int mCurrentMode = DINNER_ORDER_MODE;
+        private int mCurrentMode = DINNER_ORDER_MODE;
     private boolean isComboEditMode = false;
 
     @Override
@@ -90,11 +83,7 @@ public class DinnerDishMiddleFragment extends MobclickAgentFragment {
         this.isComboEditMode = isComboEditMode;
     }
 
-    /**
-     * 接收购物车子项被选中事件
-     *
-     * @param item
-     */
+
     public void doSelect(DishDataItem item) {
         mDishDataItems.clear();
         mDishDataItems.add(item);
@@ -109,8 +98,7 @@ public class DinnerDishMiddleFragment extends MobclickAgentFragment {
     @AfterViews
     public void initData() {
         if (Utils.isNotEmpty(mDishDataItems)) {
-            //单品操作
-            if (mIsCategory) {
+                        if (mIsCategory) {
                 categoryDishOperateUtil = new CategoryDishOperateUtil();
                 categoryDishOperateUtil.setOperateButton(getActivity(), mDishDataItems, getView(), mChangePageListener, mListener);
             } else if (mDishDataItems.size() == 1) {
@@ -130,8 +118,7 @@ public class DinnerDishMiddleFragment extends MobclickAgentFragment {
                 if (mCurrentMode == GROUP_SLIDE_MODE || mCurrentMode == BOOKING_DISH_MODE) {
                     itemOperateUtil.contorlSlideDishShow();
                 }
-                //批量操作
-            } else if (mDishDataItems.size() > 1) {
+                            } else if (mDishDataItems.size() > 1) {
                 batchTradeItemPropertyUtil = new BatchTradeItemPropertyUtil();
                 batchTradeItemPropertyUtil.setOperateButton(getActivity(), mDishDataItems, getView(), mChangePageListener, mListener);
                 batchTradeItemOperateUtil = new BatchTradeItemOperateUtil();
@@ -159,16 +146,10 @@ public class DinnerDishMiddleFragment extends MobclickAgentFragment {
     public interface IChangePageListener {
         void changePage(View contentView);
 
-        /**
-         * @param item 新增item才传，其余传null
-         */
+
         void closePage(ShopcartItem item);
 
-        /**
-         * 编辑模式改变
-         *
-         * @param isEditMode true：正在添加套餐
-         */
+
         void onEditModeChange(boolean isEditMode);
     }
 

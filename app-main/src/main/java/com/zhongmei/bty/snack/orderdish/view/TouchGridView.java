@@ -73,7 +73,6 @@ public class TouchGridView extends GridView {
 
     @Override
     public boolean isInTouchMode() {
-        // TODO Auto-generated method stub
-        return !(hasFocus() && !super.isInTouchMode());
+                return !(hasFocus() && !super.isInTouchMode());
     }
 }

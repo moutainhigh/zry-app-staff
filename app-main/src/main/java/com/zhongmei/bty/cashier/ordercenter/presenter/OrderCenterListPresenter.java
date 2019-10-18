@@ -21,9 +21,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 订单中心订单列表快餐Presenter
- */
+
 
 public abstract class OrderCenterListPresenter implements IOrderCenterListPresenter {
     protected IOrderCenterListView mView;
@@ -91,8 +89,7 @@ public abstract class OrderCenterListPresenter implements IOrderCenterListPresen
             asyncTask.cancel(true);
         }
         final int type = getType(trade);
-        if (type == 0) {//加载更多不显示loading
-            mView.hideEmptyAndListView();
+        if (type == 0) {            mView.hideEmptyAndListView();
             mView.showLoadingView();
         }
         asyncTask = new AsyncTask<Void, Void, List<TradePaymentVo>>() {
@@ -111,8 +108,7 @@ public abstract class OrderCenterListPresenter implements IOrderCenterListPresen
     }
 
     private int getType(Trade trade) {
-        //1为加载更多模式,0为正常加载模式
-        return trade == null ? 0 : 1;
+                return trade == null ? 0 : 1;
     }
 
     public void search(final int tab, final int position, final String keyword, final FilterCondition condition, final Trade trade) {
@@ -120,8 +116,7 @@ public abstract class OrderCenterListPresenter implements IOrderCenterListPresen
             asyncTask.cancel(true);
         }
         final int type = getType(trade);
-        if (type == 0) {//加载更多不显示loading
-            mView.hideEmptyAndListView();
+        if (type == 0) {            mView.hideEmptyAndListView();
             mView.showLoadingView();
         }
         asyncTask = new AsyncTask<Void, Void, List<TradePaymentVo>>() {
@@ -166,9 +161,7 @@ public abstract class OrderCenterListPresenter implements IOrderCenterListPresen
         tab.add(new Pair<>(name, id));
     }
 
-    /**
-     * 注册EventBus
-     */
+
     protected void registerEventBus() {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);

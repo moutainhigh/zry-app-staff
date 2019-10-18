@@ -10,11 +10,7 @@ import com.zhongmei.yunfu.db.Option;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.yunfu.db.enums.DishMakeStatus;
 
-/**
- * @Date： 2016/9/23
- * @Description:TradeItemExtra
- * @Version: 1.0
- */
+
 @DatabaseTable(tableName = "trade_item_extra")
 public class TradeItemExtra extends DataEntityBase implements ICreator, IUpdator, Option {
 
@@ -26,50 +22,32 @@ public class TradeItemExtra extends DataEntityBase implements ICreator, IUpdator
         }
     }
 
-    /**
-     * The columns of table "trade_item_extra"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * trade_item_id
-         */
+
         public static final String tradeItemId = "trade_item_id";
 
-        /**
-         * trade_item_uuid
-         */
+
         public static final String tradeItemUuid = "trade_item_uuid";
 
-        /**
-         * is_pack
-         */
+
         public static final String isPack = "is_pack";
 
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * dish_make_status
-         */
+
         public static final String dishMakeStatus = "dish_make_status";
 
     }
@@ -98,9 +76,7 @@ public class TradeItemExtra extends DataEntityBase implements ICreator, IUpdator
     @DatabaseField(columnName = "dish_make_status")
     private Integer dishMakeStatus;
 
-    /**
-     * 联台主中对应表的id
-     */
+
     private Long batchId;
 
     public Long getTradeItemId() {

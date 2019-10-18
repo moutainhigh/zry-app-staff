@@ -14,10 +14,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- * 组合支付开关设置界面
- */
+
 @EFragment(R.layout.setting_group_pay_set_fragment_layout)
 public class GroupPaySettingFragment extends Fragment {
 

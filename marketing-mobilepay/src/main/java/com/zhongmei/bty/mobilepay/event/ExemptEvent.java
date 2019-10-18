@@ -1,8 +1,6 @@
 package com.zhongmei.bty.mobilepay.event;
 
-/**
- * 发送抹零信息
- */
+
 public class ExemptEvent {
 
     private int eraseType;

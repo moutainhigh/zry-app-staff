@@ -5,21 +5,15 @@ import com.zhongmei.bty.basemodule.database.entity.shopmanager.CashHandover;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 交接返回数据
- */
+
 public class HandoverData extends CashHandover {
     private static final long serialVersionUID = 1L;
 
     private boolean editable;
 
-    private boolean haveUnpaid;//是否有未支付订单
-
-    private boolean haveUnClearAccount;//是否有未清账的数据
-
-    private Long bizDate;//营业时间
-    //	 收款明细
-    private List<HandoverItem> cashHandoverItems;
+    private boolean haveUnpaid;
+    private boolean haveUnClearAccount;
+    private Long bizDate;        private List<HandoverItem> cashHandoverItems;
 
     public List<HandoverItem> getCashHandoverItems() {
         return cashHandoverItems == null ? cashHandoverItems = new ArrayList<>() : cashHandoverItems;

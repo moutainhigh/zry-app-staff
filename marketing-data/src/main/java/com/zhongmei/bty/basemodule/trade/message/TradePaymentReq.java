@@ -2,12 +2,7 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import com.zhongmei.bty.basemodule.pay.message.PaymentReq;
 
-/**
- * 封装下单及收银的request数据
- *
- * @version: 1.0
- * @date 2015年4月22日
- */
+
 public class TradePaymentReq {
 
     private TradeReq trade;

@@ -28,11 +28,9 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.trade_list_layout)
-public class TradeGridView extends LinearLayout/* implements AdapterView.OnItemClickListener*/ {
+public class TradeGridView extends LinearLayout {
     @ViewById(R.id.trade_gv)
     GridView tradeGridView;
     TradeAdapter adapter;
@@ -50,7 +48,6 @@ public class TradeGridView extends LinearLayout/* implements AdapterView.OnItemC
     void initial() {
         adapter = new TradeAdapter(getContext());
         tradeGridView.setAdapter(adapter);
-//        tradeGridView.setOnItemClickListener(this);
     }
 
 
@@ -59,12 +56,7 @@ public class TradeGridView extends LinearLayout/* implements AdapterView.OnItemC
         adapter.setData(data, tableTradeVo);
     }
 
-    /**
-     * @Date 2016/9/28
-     * @Description:选择位置刷新
-     * @Param
-     * @Return
-     */
+
     public void choosePosition(int position) {
         adapter.curTableTradeVo = (DinnertableTradeVo) adapter.getItem(position);
         adapter.notifyDataSetChanged();
@@ -75,16 +67,12 @@ public class TradeGridView extends LinearLayout/* implements AdapterView.OnItemC
         itemClickLisenter = listener;
     }
 
-    /*@Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-        refreshTradeInWindow(position);
-    }*/
+
 
     private class TradeAdapter extends BaseAdapter {
         List<DinnertableTradeVo> data;
         LayoutInflater inflater;
-        DinnertableTradeVo curTableTradeVo;// 记录选中位置
-
+        DinnertableTradeVo curTableTradeVo;
         public TradeAdapter(Context context) {
             inflater = LayoutInflater.from(context);
 
@@ -172,8 +160,7 @@ public class TradeGridView extends LinearLayout/* implements AdapterView.OnItemC
                 }
             });
 
-            //modify by zhubo已支付的大众点评订单，不允许拖动
-            if (model.getStatus() == DinnertableStatus.EMPTY
+                        if (model.getStatus() == DinnertableStatus.EMPTY
                     || TradeSourceUtils.isTradeUnProcessed(model, SourceId.WECHAT)
                     || TradeSourceUtils.isTradePayedAndConfirmed(model, SourceId.DIANPING)
                     || TradeSourceUtils.isTradePayedAndConfirmed(model, SourceId.XIN_MEI_DA)
@@ -189,8 +176,7 @@ public class TradeGridView extends LinearLayout/* implements AdapterView.OnItemC
             }
 
 
-            // 微信订单标识 增加大众点评图标显示
-            if (TradeSourceUtils.isTradeUnProcessed(model, SourceId.WECHAT)) {
+                        if (TradeSourceUtils.isTradeUnProcessed(model, SourceId.WECHAT)) {
                 holder.tradeTypeTv.setVisibility(View.VISIBLE);
                 holder.tradeTypeTv.setImageResource(R.drawable.dinner_table_wechat);
             } else if (TradeSourceUtils.isTradePayedAndConfirmed(model, SourceId.DIANPING)) {
@@ -203,14 +189,12 @@ public class TradeGridView extends LinearLayout/* implements AdapterView.OnItemC
                 holder.tradeTypeTv.setVisibility(View.VISIBLE);
                 holder.tradeTypeTv.setImageResource(R.drawable.dinner_table_koubei);
             } else if (TradeSourceUtils.isTradePayedUnAcceptFromBAIDURICE(model) || TradeSourceUtils.isTradePayedAcceptedFromBAIDURICE(model)) {
-                //百度糯米订单图标显示
-                holder.tradeTypeTv.setVisibility(View.VISIBLE);
+                                holder.tradeTypeTv.setVisibility(View.VISIBLE);
                 holder.tradeTypeTv.setImageResource(R.drawable.dinner_table_nuomi);
             } else if (TradeSourceUtils.isTradePayedFromShuKe(model)) {
                 holder.tradeTypeTv.setVisibility(View.VISIBLE);
                 holder.tradeTypeTv.setImageResource(R.drawable.dinner_table_shuke);
-            } else if (TableInfoFragment.hasAddDish(model)) {//是否有加菜
-                holder.tradeTypeTv.setVisibility(View.VISIBLE);
+            } else if (TableInfoFragment.hasAddDish(model)) {                holder.tradeTypeTv.setVisibility(View.VISIBLE);
                 holder.tradeTypeTv.setImageResource(R.drawable.add_dish_icon);
             } else if (model.getDinnertableTrade().getPreCashPrintStatus() == YesOrNo.YES && SharedPreferenceUtil.getSpUtil().getBoolean(DinnertableFragment.SHOW_PRECASH_KEY, false)) {
                 holder.tradeTypeTv.setVisibility(View.VISIBLE);

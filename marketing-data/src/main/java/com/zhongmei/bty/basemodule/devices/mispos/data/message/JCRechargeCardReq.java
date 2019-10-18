@@ -5,37 +5,12 @@ import com.zhongmei.yunfu.db.enums.BusinessType;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * 金诚储值请求
- */
+
 
 public class JCRechargeCardReq implements Serializable {
-    Long userId;// 	操作人ID
-    String oldCardNum;// 	老卡卡号
-    String newCardNum;// 新卡卡号
-    String remark = "金诚充值";// 备注
-    Integer source;// 来源
-    Integer sourceChild;// 子来源
-
-    String tradeNo;// 	交易单号
-    BigDecimal tradeAmount;// 交易金额
-    String tradeMemo;// 备注
-    String uuid;
-    Long clientCreateTime;// 是	创建时间
-    Long clientUpdateTime;// 	是	修改时间
-    Long serverUpdateTime;// 	是	更新时间
-    Long creatorId;// 创建者
-    String creatorName;// 	创建者姓名
-    Long updatorId;// 修改人
-    String updatorName;// 	修改人姓名
-    Integer statusFlag;// 状态
-    Long bizDate;// 营业日期
-    Long tradeTime;// 交易时间
-    Integer cardType;// 卡类型
-    String mobile;//手机号码
-    String payPassword;//密码 //金诚使用
-    BigDecimal totalValueCard;//储值金额
-
+    Long userId;    String oldCardNum;    String newCardNum;    String remark = "金诚充值";    Integer source;    Integer sourceChild;
+    String tradeNo;    BigDecimal tradeAmount;    String tradeMemo;    String uuid;
+    Long clientCreateTime;    Long clientUpdateTime;    Long serverUpdateTime;    Long creatorId;    String creatorName;    Long updatorId;    String updatorName;    Integer statusFlag;    Long bizDate;    Long tradeTime;    Integer cardType;    String mobile;    String payPassword;    BigDecimal totalValueCard;
     public Integer getBusinessType() {
         return businessType;
     }
@@ -71,10 +46,7 @@ public class JCRechargeCardReq implements Serializable {
         this.entitycardNum = entitycardNum;
     }
 
-    Integer customerType;//来客类型 (默认3)
-    String entitycardNum;//卡号
-    boolean notNeedPwd;//是否开通小额免密支付
-
+    Integer customerType;    String entitycardNum;    boolean notNeedPwd;
     public String getMobile() {
         return mobile;
     }

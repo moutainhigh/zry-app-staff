@@ -16,8 +16,7 @@ public abstract class Check {
 
     private String mTitle;
 
-    // 是否可以继续下一个监测，默认是false
-    private boolean canContinue = false;
+        private boolean canContinue = false;
 
     private CheckListener mListener;
 
@@ -67,11 +66,9 @@ public abstract class Check {
         }
     }
 
-//	public abstract void running();
 
     public abstract void running(Set<String> modules);
 
-    //public abstract void running(Set<String> modules, CheckCompletedCallback callback);
 
     interface CheckCompletedCallback {
         void onCheckCompleted();

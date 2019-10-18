@@ -2,9 +2,7 @@ package com.zhongmei.bty.commonmodule.database.entity.local;
 
 import java.io.Serializable;
 
-/**
- * 此类用于从打印服务传递数据， 变量需要和打印服务的printInfo类保持一致
- */
+
 public class PrintInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -47,48 +45,33 @@ public class PrintInfo implements Serializable {
 
     public static final String COL_FAULT_CAUSE = "faultCause";
 
-    //	@DatabaseField(id = true, columnName = COL_INDENTIFER)
-    private String indentifer;
+        private String indentifer;
 
-    //	@DatabaseField(columnName = COL_CLASS_TYPE)
-    private int classType;
+        private int classType;
 
-    //	@DatabaseField(columnName = COL_ORDER_NUM)
-    private String orderNum;
+        private String orderNum;
 
-    //	@DatabaseField(columnName = COL_CONTENT)
-    private String content;
+        private String content;
 
-    //	@DatabaseField(columnName = COL_IP)
-    private String ip;
+        private String ip;
 
-    //	@DatabaseField(columnName = COL_PRINTER_NAME)
-    private String printerName;
+        private String printerName;
 
-    //	@DatabaseField(columnName = COL_PRINT_STATUS, dataType = DataType.INTEGER)
-    private int printStatus; // 0:未打印 1：已经打印 2：等待打印 -1:打印故障
+        private int printStatus;
+        private String saveTime;
 
-    //	@DatabaseField(columnName = COL_SAVE_TIME)
-    private String saveTime;
+        private long saveMillisTime;
 
-    //	@DatabaseField(columnName = COL_SAVE_MILLIS_TIME)
-    private long saveMillisTime;
+        private String ticketName;
 
-    //	@DatabaseField(columnName = COL_TICKET_NAME)
-    private String ticketName;
+        private String uuid;
 
-    //	@DatabaseField(columnName = COL_UUID)
-    private String uuid;
+        private String serialNumber;
 
-    //	@DatabaseField(columnName = COL_SERIAL_NUMBER, canBeNull = true)
-    private String serialNumber;
-
-    //	@DatabaseField(columnName = COL_FAULT_CAUSE, canBeNull = true)
-    private String faultCause;
+        private String faultCause;
 
     public PrintInfo() {
-        // TODO Auto-generated constructor stub
-    }
+            }
 
     public String getIndentifer() {
         return indentifer;

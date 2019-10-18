@@ -30,9 +30,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * 菜品规格控件
- */
+
 @EViewGroup(R.layout.layout_custom_standard)
 public class CustomStandardView extends LinearLayout implements View.OnClickListener {
     private static final String TAG = CustomStandardView.class.getSimpleName();
@@ -40,8 +38,7 @@ public class CustomStandardView extends LinearLayout implements View.OnClickList
     @ViewById(R.id.v_content)
     protected LinearLayout vContent;
 
-    // 选择的规格
-    private Set<DishProperty> mStandards;
+        private Set<DishProperty> mStandards;
 
     private DishPropertyManager manager;
 
@@ -109,14 +106,7 @@ public class CustomStandardView extends LinearLayout implements View.OnClickList
 
     }
 
-    /**
-     * 设置规格的名称
-     *
-     * @param textView
-     * @param typeIndex       类别的索引
-     * @param propertyIndex   属性在其类别下的索引
-     * @param propertyGroupVo
-     */
+
     private void setName(TextView textView, int typeIndex, int propertyIndex,
                          PropertyGroupVo<DishStandardVo> propertyGroupVo) {
         textView.setText(propertyGroupVo.getProperty(propertyIndex).getName());
@@ -127,19 +117,16 @@ public class CustomStandardView extends LinearLayout implements View.OnClickList
             textView.setOnClickListener(this);
         }
         DishStandardVo standardVo = propertyGroupVo.getPropertyList().get(propertyIndex);
-        //设置背景
-        if (standardVo.getClearStatus() == ClearStatus.CLEAR) {
+                if (standardVo.getClearStatus() == ClearStatus.CLEAR) {
             textView.setBackgroundResource(R.drawable.ic_dish_standard_clear_bg);
             if (mBaseShoppingCart.getIsSalesReturn()) {
-                //设置是否选中
-                if (propertyGroupVo.getPropertyList().get(propertyIndex).isSelected()) {
+                                if (propertyGroupVo.getPropertyList().get(propertyIndex).isSelected()) {
                     textView.setSelected(true);
                     mStandards.add(propertyGroupVo.getProperty(propertyIndex));
                 } else {
                     textView.setSelected(false);
                 }
-                //设置点击事件
-                switch (standardVo.getState()) {
+                                switch (standardVo.getState()) {
                     case DishStandardVo.ENABLE:
                         textView.setActivated(false);
                         break;
@@ -156,15 +143,13 @@ public class CustomStandardView extends LinearLayout implements View.OnClickList
             }
         } else {
             textView.setBackgroundResource(R.drawable.ic_dish_property_item_bg);
-            //设置是否选中
-            if (propertyGroupVo.getPropertyList().get(propertyIndex).isSelected()) {
+                        if (propertyGroupVo.getPropertyList().get(propertyIndex).isSelected()) {
                 textView.setSelected(true);
                 mStandards.add(propertyGroupVo.getProperty(propertyIndex));
             } else {
                 textView.setSelected(false);
             }
-            //设置点击事件
-            switch (standardVo.getState()) {
+                        switch (standardVo.getState()) {
                 case DishStandardVo.ENABLE:
                     textView.setActivated(false);
                     break;
@@ -178,17 +163,12 @@ public class CustomStandardView extends LinearLayout implements View.OnClickList
         }
     }
 
-    /**
-     * 添加规格的类别标题
-     *
-     * @param propertyGroup
-     */
+
     private void addTypeItem(PropertyGroupVo<DishStandardVo> propertyGroup) {
         TextView tv = new TextView(getContext());
         tv.setText(propertyGroup.getPropertyType().getName());
         tv.setTextSize(16);
-        //tv.setTextSize(DensityUtil.dip2px(16));
-        tv.setTextColor(getContext().getResources().getColor(R.color.dish_property_type_color));
+                tv.setTextColor(getContext().getResources().getColor(R.color.dish_property_type_color));
         LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT);
         params.topMargin = DensityUtil.dip2px(MainApplication.getInstance(), 12);
@@ -200,7 +180,6 @@ public class CustomStandardView extends LinearLayout implements View.OnClickList
                          PropertyGroupVo<DishStandardVo> propertyGroupVo) {
         TextView textView = new TextView(getContext());
         textView.setTextSize(16);
-//        textView.setTextSize(DensityUtil.dip2px(16));
         textView.setTextColor(getContext().getResources().getColorStateList(R.color.dish_type_text_selector));
         textView.setGravity(Gravity.CENTER);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,

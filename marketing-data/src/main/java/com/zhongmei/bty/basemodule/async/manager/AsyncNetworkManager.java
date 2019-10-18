@@ -73,31 +73,22 @@ import java.util.concurrent.Callable;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class AsyncNetworkManager {
 
     private final static String TAG = AsyncNetworkManager.class.getSimpleName();
 
-    private final static int AUTO_RETRY_TIME = 2 * 60 * 1000;//自动重试时限，单位ms
-
-    private final static int AUTO_RETRY_INTERVAL = 5 * 1000;//自动重试间隔时间
-
+    private final static int AUTO_RETRY_TIME = 2 * 60 * 1000;
+    private final static int AUTO_RETRY_INTERVAL = 5 * 1000;
     private final static String ASYNC_HANDLER_THREAD_TAG = "async_handler_thread";
 
     private static AsyncNetworkManager mInstance;
 
-    private HandlerThread mHandlerThread;//子线程，供Handler使用
-
-    private Handler mThreadHandler;//子线程交互的handler
-
-    private Handler mMainHandler;//主线程交互的handler
-
-    private List<AsyncHttpRecord> mListAllAsyncRecordCache;//缓存所有的异步操作纪录，其他模块的所有数据由这儿分发出去。
-
-    private List<AsyncHttpRecordChange> mAsyncRecordChangeListeners;//存放异步纪录改变之后的回调监听
-
+    private HandlerThread mHandlerThread;
+    private Handler mThreadHandler;
+    private Handler mMainHandler;
+    private List<AsyncHttpRecord> mListAllAsyncRecordCache;
+    private List<AsyncHttpRecordChange> mAsyncRecordChangeListeners;
     private DataChangeObserver observer;
 
     private AsyncQueryAllRecord queryAllTask;
@@ -131,38 +122,25 @@ public class AsyncNetworkManager {
         }
     }
 
-    /**
-     * 添加异步请求到队列中
-     *
-     * @param tradeVo
-     * @param executor
-     * @param listener
-     * @param tag
-     * @param <T>
-     */
+
     public <T> void addRequest(TradeVo tradeVo, final AsyncHttpType type, OpsRequest.Executor executor,
                                final ResponseListener<T> listener, String tag) {
         try {
             final AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
-            //先构建异步记录
-            final String recUuid = SystemUtils.genOnlyIdentifier();
+                        final String recUuid = SystemUtils.genOnlyIdentifier();
             String url = executor.getUrl();
             String reqJson = executor.getRequestJson();
-            //DinnerModifyPrintBean printBean = null;
-            if (listener != null) {
+                        if (listener != null) {
                 if (listener instanceof AsyncModifyResponseListener) {
                     AsyncModifyResponseListener modifyListener = (AsyncModifyResponseListener) listener;
-                    //printBean = modifyListener.printBean;
-                }
+                                    }
 
                 if (listener instanceof AsyncBatchModifyResponseListener) {
                     AsyncBatchModifyResponseListener modifyListener = (AsyncBatchModifyResponseListener) listener;
-                    //printBean = modifyListener.printBean;
-                }
+                                    }
             }
             final AsyncHttpRecord rec = createAsyncRecord(recUuid, tradeVo, type, url, reqJson);
-            //如果tradeid为空，先把状态置为失败，然后走没有tradeid的异步记录那套做处理
-            if (rec.getTradeId() == null && rec.getType() != AsyncHttpType.OPENTABLE) {
+                        if (rec.getTradeId() == null && rec.getType() != AsyncHttpType.OPENTABLE) {
                 asyncDal.update(rec, AsyncHttpState.FAILED, "");
                 noTradeIdModifyOrCash(rec, listener);
                 return;
@@ -205,8 +183,7 @@ public class AsyncNetworkManager {
                         protected Void doInBackground(Void... params) {
                             try {
                                 asyncDal.update(rec, AsyncHttpState.FAILED, error.getMessage());
-                                //设置异步记录给回调对象
-                                if (listener != null && listener instanceof AsyncResponseListener) {
+                                                                if (listener != null && listener instanceof AsyncResponseListener) {
                                     ((AsyncResponseListener) listener).setAsyncRec(rec);
                                 }
 
@@ -235,26 +212,17 @@ public class AsyncNetworkManager {
         }
     }
 
-    /**
-     * 对应异步记录没有tradeid时，进行改单／收银
-     *
-     * @param rec
-     * @param listener 改单／收银的回调
-     * @throws Exception
-     */
+
     private void noTradeIdModifyOrCash(AsyncHttpRecord rec, ResponseListener listener) throws Exception {
         TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
         TradeVo tradeVo = tradeDal.findTrade(rec.getTradeUuId());
-        //确实没有开台成功
-        if (tradeVo == null) {
-            //先开台
-            AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
+                if (tradeVo == null) {
+                        AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
             List<AsyncHttpRecord> openTableRecs = asyncDal.query(rec.getTradeUuId(), Arrays.asList(AsyncHttpType.OPENTABLE));
             if (Utils.isNotEmpty(openTableRecs)) {
                 AsyncHttpRecord openTableRec = openTableRecs.get(0);
                 if (openTableRec.getStatus() == AsyncHttpState.EXCUTING || openTableRec.getStatus() == AsyncHttpState.RETRING) {
-                    //对应的开台正在执行／重试
-                    Log.i(TAG, "正在开台／重试，请稍后重试！");
+                                        Log.i(TAG, "正在开台／重试，请稍后重试！");
                     return;
                 } else {
                     Log.i(TAG, "准备重试开台！");
@@ -263,11 +231,9 @@ public class AsyncNetworkManager {
                     doRequestRetry(openTableRec, openTableResponseListener, "retry");
                 }
             }
-            //已经开台成功了，只是数据没有刷新到异步记录里
-        } else {
+                    } else {
             if (hasBeenModified(tradeVo)) {
-                //订单开台成功后，已经被其他端修改了，删除要处理的异步记录
-                Log.i(TAG, "订单虽然已经存在了，但是被其他客户端更新！");
+                                Log.i(TAG, "订单虽然已经存在了，但是被其他客户端更新！");
                 mMainHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -277,44 +243,32 @@ public class AsyncNetworkManager {
                 DBHelperManager.deleteById(AsyncHttpRecord.class, rec.getUuid());
                 return;
             } else {
-                //订单已经开台了，刷新AsyncHttpRecord的数据，然后进行重试
-                Log.i(TAG, "刷新异步请求，准备重试异步改单／收银！");
+                                Log.i(TAG, "刷新异步请求，准备重试异步改单／收银！");
                 refreshReqJson(tradeVo, rec);
                 doRequestRetry(rec, listener, "retry");
             }
         }
     }
 
-    /**
-     * 异步重试
-     *
-     * @param rec
-     * @param listener
-     * @param <T>
-     */
+
     public <T> void retry(final AsyncHttpRecord rec, final ResponseListener<T> listener) {
         new Thread() {
             @Override
             public void run() {
                 try {
                     AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
-//                    AsyncHttpRecord rec = asyncDal.query(recUuid);
-                    //状态不是失败，退出重试
-                    if (rec == null || rec.getStatus() != AsyncHttpState.FAILED) {
+                                        if (rec == null || rec.getStatus() != AsyncHttpState.FAILED) {
                         return;
                     }
 
-//            doRequestRetry(rec, listener, "retry");
 
-                    //开台除外，并且没有取到tradeId的异步记录，要先做开台或刷新订单数据的操作
-                    if (rec.getTradeId() == null && rec.getType() != AsyncHttpType.OPENTABLE) {
+                                        if (rec.getTradeId() == null && rec.getType() != AsyncHttpType.OPENTABLE) {
                         noTradeIdModifyOrCash(rec, listener);
                     } else {
                         if (rec.getType() == AsyncHttpType.OPENTABLE) {
                             Trade trade = DBHelperManager.queryById(Trade.class, rec.getTradeUuId());
                             if (trade != null) {
-                                //订单已经下单成功了，直接删除开台的异步记录
-                                Log.i(TAG, "订单已经存在了，不再重试开台！");
+                                                                Log.i(TAG, "订单已经存在了，不再重试开台！");
                                 mMainHandler.post(new Runnable() {
                                     @Override
                                     public void run() {
@@ -342,18 +296,12 @@ public class AsyncNetworkManager {
             @Override
             public void run() {
                 try {
-           /* AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
-            asyncDal.deleteByUUID(record.getUuid());*/
-                    //统一调用线程安全的删除方法 modify 20170216
-                    AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
+
+                                        AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
                     asyncDal.deleteByUUID(record.getUuid());
                     DBHelperManager.deleteById(AsyncHttpRecord.class, record.getUuid());
                     if (record.getType() == AsyncHttpType.OPENTABLE) {
-                        //asyncDal.deleteByTradeUUID(record.getTradeUuId());
-                        //统一调用线程安全的删除方法 modify 20170216
-                        //这样删除会有问题的，服务器并没有删除 modify by dzb 20170302
-//                DBHelper.deleteById(Trade.class, record.getTradeUuId());
-                    }
+                                                                                            }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -362,25 +310,17 @@ public class AsyncNetworkManager {
         }.start();
     }
 
-    /**
-     * 订单是否被改过单
-     *
-     * @param tradeVo
-     * @return
-     * @throws Exception
-     */
+
     private boolean hasBeenModified(TradeVo tradeVo) throws Exception {
         if (tradeVo != null && tradeVo.getTrade() != null) {
             Trade trade = tradeVo.getTrade();
-            //订单对应的几个金额不为0时，说明已经被改单过
-            if (trade.getSaleAmount().compareTo(BigDecimal.ZERO) != 0
+                        if (trade.getSaleAmount().compareTo(BigDecimal.ZERO) != 0
                     || trade.getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0
                     || trade.getTradeAmount().compareTo(BigDecimal.ZERO) != 0
                     || trade.getTradeAmountBefore().compareTo(BigDecimal.ZERO) != 0) {
                 return true;
             }
-            //有菜品或者优惠时，说明已经被改单过
-            if (Utils.isNotEmpty(tradeVo.getTradeItemList()) || Utils.isNotEmpty(tradeVo.getTradePrivileges())) {
+                        if (Utils.isNotEmpty(tradeVo.getTradeItemList()) || Utils.isNotEmpty(tradeVo.getTradePrivileges())) {
                 return true;
             }
         }
@@ -407,13 +347,7 @@ public class AsyncNetworkManager {
         }
     }
 
-    /**
-     * 根据开台的订单信息，更新改单的请求数据
-     *
-     * @param tradeVo
-     * @param rec
-     * @throws Exception
-     */
+
     private void refreshModifyReqJson(TradeVo tradeVo, AsyncHttpRecord rec) throws Exception {
         if (rec == null || rec.getTradeId() != null || TextUtils.isEmpty(rec.getReqStr())) {
             return;
@@ -430,23 +364,20 @@ public class AsyncNetworkManager {
         TradeReq tradeReq = tradeNewReq.getTradeRequest();
         Long tradeId = null;
         String serialNumber = null;
-        //更新请求里，开台后相关的信息
-        if (tradeReq != null) {
+                if (tradeReq != null) {
             tradeReq.setRelatedId(tradeVo.getRelatedId());
             tradeReq.setRelatedType(tradeVo.getRelatedType());
             Trade trade = tradeVo.getTrade();
             if (trade != null) {
                 tradeId = trade.getId();
-                //更新订单基本信息
-                tradeReq.setId(trade.getId());
+                                tradeReq.setId(trade.getId());
                 tradeReq.setBizDate(trade.getBizDate());
                 tradeReq.setServerCreateTime(trade.getServerCreateTime());
                 tradeReq.setServerUpdateTime(trade.getServerUpdateTime());
                 tradeReq.setActionType(trade.getActionType());
             }
 
-            //更新tradeextra信息
-            TradeExtra tradeExtra = tradeVo.getTradeExtra();
+                        TradeExtra tradeExtra = tradeVo.getTradeExtra();
             if (tradeExtra != null) {
                 if (tradeReq.getTradeExtra() != null) {
                     Beans.copyProperties(tradeExtra, tradeReq.getTradeExtra(), "clientUpdateTime", "updatorId", "updatorName");
@@ -459,8 +390,7 @@ public class AsyncNetworkManager {
                 serialNumber = tradeExtra.getSerialNumber();
             }
 
-            //更新tradetable信息
-            if (Utils.isNotEmpty(tradeVo.getTradeTableList()) && Utils.isNotEmpty(tradeReq.getTradeTables())) {
+                        if (Utils.isNotEmpty(tradeVo.getTradeTableList()) && Utils.isNotEmpty(tradeReq.getTradeTables())) {
                 TradeTable tradeTable = tradeVo.getTradeTableList().get(0);
                 TradeTable reqTable = tradeReq.getTradeTables().get(0);
 
@@ -476,8 +406,7 @@ public class AsyncNetworkManager {
                 }
             }
 
-            //更新各个对象的tradeid
-            if (Utils.isNotEmpty(tradeReq.getTradeCustomers())) {
+                        if (Utils.isNotEmpty(tradeReq.getTradeCustomers())) {
                 for (TradeCustomer reqCustomer : tradeReq.getTradeCustomers()) {
                     reqCustomer.setTradeId(tradeId);
                 }
@@ -520,8 +449,7 @@ public class AsyncNetworkManager {
 
         AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
         RequestObject<TradeNewReq> requestObject = RequestObject.create(tradeNewReq);
-        requestObject.reqMarker = req.reqMarker;//拷贝原来请求的标签
-        String newReqJson = gson.toJson(requestObject);
+        requestObject.reqMarker = req.reqMarker;        String newReqJson = gson.toJson(requestObject);
         rec.setReqStr(newReqJson);
         rec.setTradeId(tradeId);
         rec.setSerialNumber(serialNumber);
@@ -532,24 +460,14 @@ public class AsyncNetworkManager {
 
     }
 
-    /**
-     * 构建一条异步记录对象
-     *
-     * @param tradeVo
-     * @param type
-     * @return
-     */
+
     private AsyncHttpRecord createAsyncRecord(String uuid, TradeVo tradeVo, AsyncHttpType type, String url, String jsonRequestStr) {
         final AsyncHttpRecord asyncHttpRecord = new AsyncHttpRecord();
         asyncHttpRecord.setUuid(uuid);
         asyncHttpRecord.validateCreate();
-        asyncHttpRecord.setStatus(AsyncHttpState.EXCUTING);//新建默认执行中
-        asyncHttpRecord.setReqUrl(url);
+        asyncHttpRecord.setStatus(AsyncHttpState.EXCUTING);        asyncHttpRecord.setReqUrl(url);
         asyncHttpRecord.setReqStr(jsonRequestStr);
-        //if (printBean != null) {
-        //asyncHttpRecord.setPrintBeanJson(new Gson().toJson(printBean));
-        //}
-        AuthUser user = Session.getAuthUser();
+                                AuthUser user = Session.getAuthUser();
         if (user != null) {
             asyncHttpRecord.setCreatorId(user.getId());
             asyncHttpRecord.setCreatorName(user.getName());
@@ -566,8 +484,7 @@ public class AsyncNetworkManager {
                 asyncHttpRecord.setTableName(tradeTable.getTableName());
                 asyncHttpRecord.setTableId(tradeTable.getTableId());
             }
-            //联台主单没有tradeTable
-            if (tradeVo.getTableId() != null) {
+                        if (tradeVo.getTableId() != null) {
                 asyncHttpRecord.setTableId(tradeVo.getTableId());
                 asyncHttpRecord.setTableName(tradeVo.getTableName());
             }
@@ -585,9 +502,7 @@ public class AsyncNetworkManager {
         }
         final DatabaseHelper helper = LocalDBManager.getHelper();
         try {
-            //更新后的数据插入数据库
-            // modify 20170216 start 添加事务来实现线程同步
-            helper.callInTransaction(new Callable<Void>() {
+                                    helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
                         throws Exception {
@@ -595,8 +510,7 @@ public class AsyncNetworkManager {
                     return null;
                 }
             });
-            // modify 20170216 end 添加事务来实现线程同步
-        } catch (Exception e) {
+                    } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         } finally {
             LocalDBManager.releaseHelper();
@@ -604,20 +518,16 @@ public class AsyncNetworkManager {
         return asyncHttpRecord;
     }
 
-    // 根据下行接口更新记录状态
-    private AsyncHttpRecord updateAsyncRecordByResponse(AsyncHttpRecord rec, AsyncHttpType type, AsyncDal asyncDal, ResponseObject response) throws Exception {
+        private AsyncHttpRecord updateAsyncRecordByResponse(AsyncHttpRecord rec, AsyncHttpType type, AsyncDal asyncDal, ResponseObject response) throws Exception {
         ActionAsyncFailed action = null;
         switch (type) {
-            case OPENTABLE://开台
-                action = new ActionOpenTableFailed();
+            case OPENTABLE:                action = new ActionOpenTableFailed();
                 break;
-            case MODIFYTRADE://改单
-            case UNION_MAIN_MODIFYTRADE:
+            case MODIFYTRADE:            case UNION_MAIN_MODIFYTRADE:
             case UNION_SUB_MODIFYTRADE:
                 action = new ActionModifyTradeFailed();
                 break;
-            case CASHER://收银
-                action = new ActionPayFailed();
+            case CASHER:                action = new ActionPayFailed();
                 break;
         }
 
@@ -625,38 +535,27 @@ public class AsyncNetworkManager {
             rec = asyncDal.update(rec, AsyncHttpState.SUCCESS, response.getMessage());
         } else {
             if (action != null) {
-                //业务失败，发送eventbus，通知界面弹框（只能删除数据）
-                action.asyncRec = rec;
+                                action.asyncRec = rec;
                 action.errorMsg = response.getMessage();
                 action.canRetry = false;
                 EventBus.getDefault().post(action);
             }
 
-            //直接再这里删除异步记录
-            asyncDal.deleteByUUID(rec.getUuid());
+                        asyncDal.deleteByUUID(rec.getUuid());
 
         }
 
         return rec;
     }
 
-    /**
-     * 执行异步重试
-     *
-     * @param rec
-     * @param listener
-     * @param tag
-     * @param <T>
-     */
+
     private <T> void doRequestRetry(final AsyncHttpRecord rec, final ResponseListener<T> listener, String tag) throws Exception {
-        //设置异步记录给回调对象
-        if (listener != null && listener instanceof AsyncResponseListener) {
+                if (listener != null && listener instanceof AsyncResponseListener) {
             ((AsyncResponseListener) listener).setAsyncRec(rec);
         }
 
         Class responseClass = TradeResp.class;
-        //考虑如果listener或者responseClass为空
-        OpsRequest.Executor<String, T> executor = OpsRequest.Executor.create(rec.getReqUrl());
+                OpsRequest.Executor<String, T> executor = OpsRequest.Executor.create(rec.getReqUrl());
         String reqStr = rec.getReqStr();
         switch (rec.getType()) {
             case OPENTABLE:
@@ -674,12 +573,9 @@ public class AsyncNetworkManager {
                 break;
         }
         executor.requestValue(reqStr);
-//                .responseClass(responseClass)
-//                .responseProcessor(TradeOperatesImpl.getPaymentRespProcessor());
 
         final AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
-        asyncDal.retryCountPlus(rec);//重试次数＋1
-        final String recUuid = rec.getUuid();
+        asyncDal.retryCountPlus(rec);        final String recUuid = rec.getUuid();
         ResponseListener<T> tempListener = new EventResponseListener<T>(EventResponseListener.getEventName(listener)) {
 
             public void onResponse(final ResponseObject<T> response) {
@@ -737,12 +633,7 @@ public class AsyncNetworkManager {
         asyncDal.update(rec, AsyncHttpState.RETRING, BaseApplication.sInstance.getString(R.string.async_is_retry));
     }
 
-    /**
-     * 自动重试异步请求
-     *
-     * @param recUuid
-     * @param sourceRec
-     */
+
     private void autoRetry(String recUuid, final AsyncHttpRecord sourceRec) throws Exception {
         if (!NetworkUtil.isNetworkConnected()) {
             mMainHandler.post(new Runnable() {
@@ -760,16 +651,13 @@ public class AsyncNetworkManager {
         AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
 
         final AsyncHttpRecord rec = asyncDal.query(recUuid);
-        //时限内自动重试
-        if (rec != null && rec.getClientCreateTime() != null
+                if (rec != null && rec.getClientCreateTime() != null
                 && (System.currentTimeMillis() - rec.getClientCreateTime()) <= AUTO_RETRY_TIME) {
-            //间隔时间，呈阶梯式增长
-            int delay = rec.getRetryCount().intValue() * AUTO_RETRY_INTERVAL;
+                        int delay = rec.getRetryCount().intValue() * AUTO_RETRY_INTERVAL;
             if (mThreadHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    //延时任务真正执行时，再进行一次时限判断
-                    if (rec != null && rec.getClientCreateTime() != null
+                                        if (rec != null && rec.getClientCreateTime() != null
                             && (System.currentTimeMillis() - rec.getClientCreateTime()) <= AUTO_RETRY_TIME) {
                         AsyncNetworkUtil.retryAsyncOperate(rec, sourceRec);
                     }
@@ -778,12 +666,7 @@ public class AsyncNetworkManager {
         }
     }
 
-    /**
-     * @Date 2016/10/14
-     * @Description:根据订单号查询是否有未成功的记录
-     * @Param
-     * @Return
-     */
+
     public boolean queryNotSuccess(Context context, Long tradeId) {
         AsyncHttpRecord record = null;
 
@@ -808,12 +691,7 @@ public class AsyncNetworkManager {
     }
 
 
-    /**
-     * @Date 2016/10/14
-     * @Description:根据订单号查询是否有未成功的记录，不提示
-     * @Param
-     * @Return
-     */
+
     public boolean queryNotSuccessNotTip(Long tradeId) {
         if (Utils.isEmpty(mListAllAsyncRecordCache)) {
             return false;
@@ -829,11 +707,7 @@ public class AsyncNetworkManager {
         return false;
     }
 
-    /**
-     * 主动调用查询，将查询的数据返回
-     *
-     * @param listener
-     */
+
     public void queryAllAsyncRecord(final AsyncHttpRecordChange listener) {
         mThreadHandler.post(new Runnable() {
             @Override
@@ -842,8 +716,7 @@ public class AsyncNetworkManager {
                     if (Utils.isEmpty(mListAllAsyncRecordCache)) {
                         mListAllAsyncRecordCache = queryAllAsyncRecord();
                     }
-                    //数据分发
-                    if (listener != null) {
+                                        if (listener != null) {
                         listener.onChange(mListAllAsyncRecordCache);
                     }
                 } catch (Exception e) {
@@ -872,9 +745,7 @@ public class AsyncNetworkManager {
         }
     }
 
-    /**
-     * 数据库数据更改后的监听
-     */
+
     private class DataChangeObserver implements DatabaseHelper.DataChangeObserver {
         @Override
         public void onChange(Collection<Uri> uris) {
@@ -894,8 +765,7 @@ public class AsyncNetworkManager {
             try {
                 synchronized (mListAllAsyncRecordCache) {
                     mListAllAsyncRecordCache = queryAllAsyncRecord();
-                    //数据分发
-                    if (Utils.isNotEmpty(mAsyncRecordChangeListeners)) {
+                                        if (Utils.isNotEmpty(mAsyncRecordChangeListeners)) {
                         for (AsyncHttpRecordChange mAsyncRecordChangeListener : mAsyncRecordChangeListeners) {
                             mAsyncRecordChangeListener.onChange(mListAllAsyncRecordCache);
                         }

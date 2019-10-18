@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.booking.bean;
 
 import com.zhongmei.bty.commonmodule.database.entity.Period;
 
-/**
- * 预订时间
- */
+
 public class BookingPeriodPopupVo {
     private boolean isSelect;
 

@@ -3,9 +3,7 @@ package com.zhongmei.bty.baseservice.util.peony.land;
 import android.os.AsyncTask;
 import android.support.v4.os.AsyncTaskCompat;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class Task<Result> {
 

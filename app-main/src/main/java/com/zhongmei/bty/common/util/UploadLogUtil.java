@@ -34,30 +34,24 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class UploadLogUtil {
 
     private final static String TAG = UploadLogUtil.class.getSimpleName();
     public final static String ACTION_UPLOAD_LOG = "action_upload_log";
-    private static int intervalTime = 24 * 60 * 60 * 1000;//间隔一天
-
+    private static int intervalTime = 24 * 60 * 60 * 1000;
     private static UploadManager uploadManager = new UploadManager();
 
     public static void startUploadLogAlarm(Context context) {
-        // 获取AlarmManager系统服务
-        AlarmManager manager = (AlarmManager) context
+                AlarmManager manager = (AlarmManager) context
                 .getSystemService(Context.ALARM_SERVICE);
 
-        // 包装需要执行Service的Intent
-        Intent intent = new Intent(context, UploadLogUtil.class);
+                Intent intent = new Intent(context, UploadLogUtil.class);
         intent.setAction(ACTION_UPLOAD_LOG);
         PendingIntent pendingIntent = PendingIntent.getService(context, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        // 触发服务的起始时间（次日0时）
-        Calendar calendar = Calendar.getInstance();
+                Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.add(Calendar.DATE, 1);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -66,8 +60,7 @@ public class UploadLogUtil {
         calendar.set(Calendar.MILLISECOND, 0);
         long triggerAtTime = calendar.getTimeInMillis();
 
-        // 使用AlarmManger的setRepeating方法设置定期执行的时间间隔（seconds秒）和需要执行的Service
-        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime,
+                manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime,
                 intervalTime, pendingIntent);
     }
 
@@ -114,8 +107,7 @@ public class UploadLogUtil {
                     @Override
                     public void complete(String s, ResponseInfo responseInfo, JSONObject jsonObject) {
                         if (responseInfo.isOK()) {
-                            //成功后，删除本地文件
-                            item.getFile().delete();
+                                                        item.getFile().delete();
                         }
                     }
                 }, null);
@@ -143,17 +135,13 @@ public class UploadLogUtil {
             String prefix = ShopInfoCfg.getInstance().shopId + "_"
                     + SystemUtils.getMacAddress().replace(":", "") + "_cashier_";
             String suffix = "_" + System.currentTimeMillis() + ".log";
-            List<FileAndNewNameMapItem> fileList = new ArrayList<FileAndNewNameMapItem>();//将需要的子文件信息存入到FileInfo里面
-            File[] fs = file.listFiles();
-            /*
-            如果路径下没有文件返回null
-			 */
+            List<FileAndNewNameMapItem> fileList = new ArrayList<FileAndNewNameMapItem>();            File[] fs = file.listFiles();
+
             if (fs == null || fs.length == 0) {
                 return null;
             }
 
-            //获取当前年月日
-            Calendar calendar = Calendar.getInstance();
+                        Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(System.currentTimeMillis());
             calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
@@ -164,8 +152,7 @@ public class UploadLogUtil {
             for (File f : fs) {
                 String fileName = f.getName().substring(0, f.getName().indexOf("."));
                 try {
-                    //获取文件年月日
-                    long fileDate = dateFormat.parse(fileName).getTime();
+                                        long fileDate = dateFormat.parse(fileName).getTime();
                     if (fileDate < nowDate) {
                         fileList.add(new FileAndNewNameMapItem(f, prefix + fileName + suffix));
                     }
@@ -223,11 +210,7 @@ public class UploadLogUtil {
     }
 
 
-    /**
-     * 取得路径下的符合条件的文件
-     *
-     * @param path 文件夹路径
-     */
+
     private static List<FileAndNewNameMapItem> findUploadLogFile(String path, String name
             , String date) {
         String tempNewName = SystemUtils.getMacAddress().replace(":", "") + "_" + System.currentTimeMillis();
@@ -235,11 +218,8 @@ public class UploadLogUtil {
 
         File file = new File(path);
         if (file.exists() && file.isDirectory()) {
-            List<FileAndNewNameMapItem> fileList = new ArrayList<>();//将需要的子文件信息存入到FileInfo里面
-            File[] fs = file.listFiles();
-            /*
-            如果路径下没有文件返回null
-			 */
+            List<FileAndNewNameMapItem> fileList = new ArrayList<>();            File[] fs = file.listFiles();
+
             if (fs == null || fs.length == 0) {
                 return null;
             }

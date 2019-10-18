@@ -4,65 +4,43 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 实体卡和会员储值信息
- */
+
 public class ChargingPrint implements Serializable {
-    /**
-     * @date：2015-6-11 上午11:18:43
-     */
+
     private static final long serialVersionUID = 1L;
 
-    // 客户名字
-    private String customerName;
+        private String customerName;
 
-    // 客户性别 0-》女 1-》男
-    private String customerSex;
+        private String customerSex;
 
-    // 判断是储值还是退货  0-》储值 1-》退货 2-》储值消费
-    private int chargingType;
+        private int chargingType;
 
-    //交易时间
-    private Long chargingTime;
+        private Long chargingTime;
 
-    // 充值或退货前金额
-    private BigDecimal beforeValuecard;
+        private BigDecimal beforeValuecard;
 
-    // 实收金额（给的钱）
-    private BigDecimal trueIncomeValuecard;
+        private BigDecimal trueIncomeValuecard;
 
-    // 实充金额
-    private BigDecimal chargeValuecard;
+        private BigDecimal chargeValuecard;
 
-    // 充值或退货后的余额
-    private BigDecimal endValuecard;
+        private BigDecimal endValuecard;
 
-    //充值前本金
-    private BigDecimal capitalStart;
-    //充值后本金
-    private BigDecimal capitalEnd;
-    //充值前赠送
-    private BigDecimal presentStart;
-    //充值后赠送
-    private BigDecimal presentEnd;
+        private BigDecimal capitalStart;
+        private BigDecimal capitalEnd;
+        private BigDecimal presentStart;
+        private BigDecimal presentEnd;
 
-    // 收银员name
-    private String userId;
+        private String userId;
 
-    // 商店名称
-    private String commercialName;
+        private String commercialName;
 
-    // 顾客电话号码
-    private String phoneNo;
+        private String phoneNo;
 
-    // 支付方式
-    private List<PayMethod> payMethods;
+        private List<PayMethod> payMethods;
 
-    // 会员积分
-    private String customerIntegral;
+        private String customerIntegral;
 
-    //实体卡号
-    private String cardNum;
+        private String cardNum;
 
     public String getCustomerName() {
         return customerName;

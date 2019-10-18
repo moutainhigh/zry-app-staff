@@ -28,9 +28,7 @@ import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class DishQuantityAdapter extends BaseAdapter {
     private Context mContext;
     private FragmentManager mFragmentManager;
@@ -40,8 +38,7 @@ public class DishQuantityAdapter extends BaseAdapter {
     private OnQuantityChangeListener mQuantityChangeListener;
     private List<TableSeat> mTableSeats;
     private OperateType mOperateType;
-    private boolean isAllowQuantity = true;//是否允许操作数量，默认允许
-
+    private boolean isAllowQuantity = true;
     public DishQuantityAdapter(Context mContext, FragmentManager fm, List<DishQuantityBean> moveShopcartItems) {
         this.mContext = mContext;
         this.mFragmentManager = fm;
@@ -111,11 +108,6 @@ public class DishQuantityAdapter extends BaseAdapter {
 
         holdView.tv_dishQuantity.setText(MathDecimal.trimZero(shopcartItem.quantity).toString());
 
-//        if(shopcartItem.shopcartItem.getSaleType().value() == SaleType.WEIGHING.value()){
-//            holdView.tv_dishQuantity.setText(String.valueOf(shopcartItem.quantity));
-//        }else {
-//            holdView.tv_dishQuantity.setText(String.valueOf(shopcartItem.quantity.intValue()));
-//        }
 
         if (Utils.isEmpty(mTableSeats) || !DinnerUtils.isWestStyle() || shopcartItem.shopcartItem.getType() != DishType.SINGLE) {
             holdView.rl_seatNo.setVisibility(View.GONE);
@@ -131,18 +123,12 @@ public class DishQuantityAdapter extends BaseAdapter {
         holdView.ib_decrease.setOnClickListener(quantityClickListener);
         holdView.rl_seatNo.setOnClickListener(quantityClickListener);
 
-        //设置button的状态
-        setBtnStatus(shopcartItem, holdView);
+                setBtnStatus(shopcartItem, holdView);
         return convertView;
     }
 
 
-    /**
-     * 控制数量操作后Button的状态
-     *
-     * @param shopcartItem
-     * @param holdView
-     */
+
     public void setBtnStatus(DishQuantityBean shopcartItem, ViewHold holdView) {
         ReadonlyShopcartItemBase readonlyShopcartItemBase = (ReadonlyShopcartItemBase) shopcartItem.shopcartItem;
         if (!isAllowQuantity) {
@@ -154,22 +140,19 @@ public class DishQuantityAdapter extends BaseAdapter {
         holdView.ib_increase.setVisibility(View.VISIBLE);
         holdView.ib_decrease.setVisibility(View.VISIBLE);
 
-        //称重商品或者商品数量为1
-        if (readonlyShopcartItemBase.getSaleType().value() == SaleType.WEIGHING.value() || shopcartItem.shopcartItem.getSingleQty().intValue() == 1) {
+                if (readonlyShopcartItemBase.getSaleType().value() == SaleType.WEIGHING.value() || shopcartItem.shopcartItem.getSingleQty().intValue() == 1) {
             holdView.ib_increase.setEnabled(false);
             holdView.ib_decrease.setEnabled(false);
             return;
         }
 
-        //如果商品数量达到最大值
-        if (shopcartItem.quantity.compareTo(shopcartItem.shopcartItem.getSingleQty()) == 0) {
+                if (shopcartItem.quantity.compareTo(shopcartItem.shopcartItem.getSingleQty()) == 0) {
             holdView.ib_increase.setEnabled(false);
             holdView.ib_decrease.setEnabled(true);
             return;
         }
 
-        //如果商品数量达到下限1
-        if (shopcartItem.quantity.compareTo(BigDecimal.ONE) <= 0) {
+                if (shopcartItem.quantity.compareTo(BigDecimal.ONE) <= 0) {
             holdView.ib_increase.setEnabled(true);
             holdView.ib_decrease.setEnabled(false);
             return;
@@ -202,8 +185,7 @@ public class DishQuantityAdapter extends BaseAdapter {
                     mQuantityChangeListener.onQuantityChange(mPosition, dishBean.quantity, isWeighing);
                 }
             } else if (v.getId() == R.id.rl_seat_no) {
-                //跳转到座位号选择
-                showChoiceSeatDialog(mPosition, dishBean);
+                                showChoiceSeatDialog(mPosition, dishBean);
             }
         }
     }
@@ -215,9 +197,7 @@ public class DishQuantityAdapter extends BaseAdapter {
                 .positiveLinstner(new View.OnClickListener() {
 
                     @Override
-                    public void onClick(final View arg0) {// 确定
-                        //返回一个座位号
-                        Object obj = arg0.getTag();
+                    public void onClick(final View arg0) {                                                Object obj = arg0.getTag();
                         if (mQuantityChangeListener != null) {
                             String seatName = null;
                             TableSeat tableSeat = null;
@@ -233,8 +213,7 @@ public class DishQuantityAdapter extends BaseAdapter {
                 .negativeLisnter(new View.OnClickListener() {
 
                     @Override
-                    public void onClick(View arg0) {// 取消
-                    }
+                    public void onClick(View arg0) {                    }
                 })
                 .build();
 
@@ -254,9 +233,7 @@ public class DishQuantityAdapter extends BaseAdapter {
         public TextView tv_seatNo;
     }
 
-    /**
-     * 移菜分数改变的回调
-     */
+
     public interface OnQuantityChangeListener {
         void onQuantityChange(int position, BigDecimal quantity, boolean isWeighing);
 

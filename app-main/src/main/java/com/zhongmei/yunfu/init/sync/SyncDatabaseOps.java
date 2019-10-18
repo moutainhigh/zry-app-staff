@@ -19,9 +19,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-/**
 
- */
 class SyncDatabaseOps {
 
     private static final SyncDatabaseOps INSTANCE = new SyncDatabaseOps();
@@ -37,13 +35,7 @@ class SyncDatabaseOps {
         return DBHelperManager.getTableName(genericClazz);
     }
 
-    /**
-     * 获取同步请求的content
-     *
-     * @param modules     同步请求上行中包含的表名称
-     * @param syncMarkMap
-     * @return
-     */
+
     public SyncContent querySyncContent(final List<String> modules, final Map<String, String> syncMarkMap) throws Exception {
         final SyncContent content = new SyncContent();
         SyncContent.callSyncContentFields(content.getClass(), new SyncContent.SyncContentFieldCall() {
@@ -85,14 +77,7 @@ class SyncDatabaseOps {
         return map;
     }
 
-    /**
-     * 将response中的数据存入数据库
-     *
-     * @param syncMarkMap
-     * @param response
-     * @param isInit      为true时表示是初始化
-     * @throws Exception
-     */
+
     public void save(SyncModule syncModule, List<String> modules, Map<String, String> syncMarkMap, SyncResponse response, boolean isInit) throws Exception {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
@@ -111,12 +96,7 @@ class SyncDatabaseOps {
                                        final Map<String, String> syncMarkMap,
                                        final SyncResponse syncContent,
                                        final boolean isInit) throws Exception {
-        /*callSyncContentFieldsAndValClear(syncModule, modules, syncMarkMap, syncContent, new SyncContentFieldCall() {
-            @Override
-            public void onCall(Field field, SyncItem<IEntity<?>> syncItem, Class<IEntity<?>> clazz) throws Exception {
-                doSyncCallable(helper, clazz, syncItem);
-            }
-        });*/
+
 
         helper.callInTransaction(new Callable<Void>() {
             @Override
@@ -131,8 +111,7 @@ class SyncDatabaseOps {
             }
         });
 
-        // 初始化时不通知数据变更
-        if (isInit) {
+                if (isInit) {
             helper.getChangeSupportable().clearChange();
         }
     }

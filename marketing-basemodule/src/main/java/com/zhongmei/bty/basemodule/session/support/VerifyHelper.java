@@ -78,13 +78,7 @@ public class VerifyHelper {
         return false;
     }
 
-	/*public static void getAlert(FragmentActivity activity, String authCode, Callback callback) {
-		get(authCode, new AlertCallback(activity, callback));
-	}
 
-	public static void getAlert(FragmentActivity activity, String authCode, Auth.Filter filter, Callback callback) {
-		get(authCode, filter, new AlertCallback(activity, callback));
-	}*/
 
     public static void get(String authCode, Callback callback) {
         get(authCode, null, callback);
@@ -162,7 +156,7 @@ public class VerifyHelper {
             }
 
             @Override
-            public void verify(String permission, boolean success) {/*empty*/}
+            public void verify(String permission, boolean success) {}
 
             @Override
             public void verify(User user, String permission, boolean success) {
@@ -255,8 +249,7 @@ public class VerifyHelper {
             map.put(FastFoodApplication.PERMISSION_FASTFOOD_PRIVILEDGE_DISCOUNT, AuthType.TYPE_PRIVILEGE_DISCOUNT);
             map.put(FastFoodApplication.PERMISSION_FASTFOOD_PRIVILEDGE_REBATE, AuthType.TYPE_PRIVILEGE_REBETE);
 
-            //美业权限
-            map.put(BeautyApplication.PERMISSION_BEAUTY_PRIVILEDGE, AuthType.TYPE_PRIVILEGE);
+                        map.put(BeautyApplication.PERMISSION_BEAUTY_PRIVILEDGE, AuthType.TYPE_PRIVILEGE);
             map.put(BeautyApplication.PERMISSION_BEAUTY_PRIVILEDGE_BANQUET, AuthType.TYPE_PRIVILIGE_BANQUET);
             map.put(BeautyApplication.PERMISSION_BEAUTY_PRIVILEDGE_FREE, AuthType.TYPE_PRIVILIGE_FREE);
             map.put(BeautyApplication.PERMISSION_BEAUTY_PRIVILEDGE_PRESENT, AuthType.TYPE_PRIVILIGE_PRESENT);
@@ -266,7 +259,6 @@ public class VerifyHelper {
             map.put(BeautyApplication.PERMISSION_BEAUTY_AUTO_MALING, AuthType.TYPE_MALING);
             map.put(BeautyApplication.PERMISSION_BEAUTY_CASH, AuthType.TYPE_CHECK_OUT);
 
-            //员工管理
 
         }
 
@@ -303,8 +295,7 @@ public class VerifyHelper {
         }
     }
 
-    //	------extends-------
-    public static Auth.Filter createMax(String name, BigDecimal value) {
+        public static Auth.Filter createMax(String name, BigDecimal value) {
         return new InnerFilter(InnerFilter.FLAG_MAX, name, value);
     }
 

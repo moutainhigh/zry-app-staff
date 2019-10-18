@@ -8,31 +8,21 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- *
 
- *
- */
 public class ServerEntityBase extends BasicEntityBase {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     protected interface $ extends BasicEntityBase.$ {
 
-        /**
-         * device_identy
-         */
+
         String deviceIdenty = "device_identy";
 
     }
 
 
-    /**
-     * 设备Identy
-     */
+
     @DatabaseField(columnName = "device_identy")
     private String deviceIdenty;
 

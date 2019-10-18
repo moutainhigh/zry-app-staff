@@ -2,27 +2,17 @@ package com.zhongmei.bty.basemodule.devices.mispos.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 卡状态
- */
+
 public enum CardIsBind implements ValueEnum<Integer> {
 
-    /**
-     * 已绑定
-     */
+
     YES(1),
 
-    /**
-     * 未绑定
-     */
+
     NO(2),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

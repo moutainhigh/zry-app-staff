@@ -47,9 +47,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BatchTradeItemPropertyUtil implements View.OnClickListener {
 
     private static final String TAG = BatchTradeItemPropertyUtil.class.getSimpleName();
@@ -58,46 +56,26 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
 
     private View mParentView;
 
-    //操作栏位
-    private LinearLayout vActionBar;
-    //内容栏位
-    private FrameLayout vContent;
-    //菜品数量
-    private CustomDishQuantityView vDishQuantity;
-    //规格
-    private Button btnStandard;
-    //做法
-    protected Button btnProperty;
-    //单品备注
-    private Button btnRemark;
-    //加料
-    protected Button btnExtra;
-    //变价
-    private Button btnChangePrice;
-    //变价标示
-    private ImageView btnChagepriceAnchor;
-    //分割线
-    private View vDivideLine;
+        private LinearLayout vActionBar;
+        private FrameLayout vContent;
+        private CustomDishQuantityView vDishQuantity;
+        private Button btnStandard;
+        protected Button btnProperty;
+        private Button btnRemark;
+        protected Button btnExtra;
+        private Button btnChangePrice;
+        private ImageView btnChagepriceAnchor;
+        private View vDivideLine;
 
-    /**
-     * 当前内容
-     */
+
     private View mCurrentContentView;
-    /**
-     * 空态页
-     */
+
     private CustomEmptyView mCustomEmptyView;
-    /**
-     * 做法页
-     */
+
     private TasteView mTasteView;
-    /**
-     * 加料页
-     */
+
     private ExtraView mExtraView;
-    /**
-     * 备注页
-     */
+
     private DinnerRemarkView mRemarkView;
 
     private String mMemo;
@@ -112,9 +90,7 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
     private AsyncTask mAsyncTask;
 
     private ArrayList<PropertyGroupVo<DishPropertyVo>> tasteGroupVo = new ArrayList<>();
-    /**
-     * 加料列表
-     */
+
     private List<ExtraInfo> extraInfoList = new ArrayList<>();
 
     private DinnerShoppingCart mShoppingCart;
@@ -141,8 +117,7 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
         btnChagepriceAnchor = (ImageView) mParentView.findViewById(R.id.btn_chageprice_anchor);
         vDivideLine = mParentView.findViewById(R.id.v_divide_line);
 
-        //批量模式下，不展示数量和规格
-        vDishQuantity.setVisibility(View.INVISIBLE);
+                vDishQuantity.setVisibility(View.INVISIBLE);
         btnStandard.setVisibility(View.GONE);
         btnChangePrice.setVisibility(View.GONE);
 
@@ -155,8 +130,7 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
     }
 
     private void setDishDataItems(List<DishDataItem> items) {
-        //过滤未生效的item
-        if (Utils.isNotEmpty(items)) {
+                if (Utils.isNotEmpty(items)) {
             for (DishDataItem item : items) {
                 if (item.getBase() instanceof ShopcartItem) {
                     shopcartItems.add((ShopcartItem) item.getBase());
@@ -176,8 +150,7 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
             loadProperties();
         }
 
-        //刷新内容页
-        showCustomContentView(null);
+                showCustomContentView(null);
     }
 
     private void loadProperties() {
@@ -195,21 +168,14 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
         }.execute();
     }
 
-    /**
-     * 刷新菜品属性内容
-     *
-     * @param batchDishPropertyVo
-     */
-    private void refreshView(BatchDishPropertyVo batchDishPropertyVo) {
-        //做法
-        setRecipe(batchDishPropertyVo);
 
-        //加料
-        setExtra(batchDishPropertyVo);
+    private void refreshView(BatchDishPropertyVo batchDishPropertyVo) {
+                setRecipe(batchDishPropertyVo);
+
+                setExtra(batchDishPropertyVo);
     }
 
-    //设置做法
-    private void setRecipe(BatchDishPropertyVo batchDishPropertyVo) {
+        private void setRecipe(BatchDishPropertyVo batchDishPropertyVo) {
         tasteGroupVo.clear();
 
         if (Utils.isNotEmpty(batchDishPropertyVo.propertyGroupVoList)) {
@@ -228,8 +194,7 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
         ViewUtil.setViewVisibility(btnProperty, View.VISIBLE);
     }
 
-    //设置加料
-    private void setExtra(BatchDishPropertyVo batchDishPropertyVo) {
+        private void setExtra(BatchDishPropertyVo batchDishPropertyVo) {
         extraInfoList.clear();
 
         if (batchDishPropertyVo.extraList != null) {
@@ -267,24 +232,13 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
         }
     }
 
-    /**
-     * 展示加料页
-     */
+
     private void showExtraView() {
         ViewUtil.setButtonSelected(vActionBar, btnExtra);
 
         if (mExtraView == null) {
             mExtraView = ExtraView_.build(mActivity, true);
             mExtraView.setListener(new OrderDishListenerImp() {
-//                @Override
-//                public void onAddMaterial(ExtraView.ExtraInfo extraInfo, BigDecimal qty) {
-//                    if(extraInfo != null && extraInfo.orderExtra != null){
-//                        if(qty == null){
-//                            qty = BigDecimal.ZERO;
-//                        }
-//                        extraInfo.orderExtra.setQty(qty, qty);
-//                    }
-//                }
 
                 @Override
                 public void onBatchAddExtra(List<ExtraInfo> extraInfoList) {
@@ -311,9 +265,7 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
         showCustomContentView(mExtraView);
     }
 
-    /**
-     * 展示做法页
-     */
+
     private void showPropertyView() {
         ViewUtil.setButtonSelected(vActionBar, btnProperty);
 
@@ -327,16 +279,14 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
                         return;
                     }
 
-                    Map<Long, OrderProperty> typePropertyMap = new HashMap<>();//存储propertypeid和OrderProperty
-                    for (OrderProperty property : propertyList) {
+                    Map<Long, OrderProperty> typePropertyMap = new HashMap<>();                    for (OrderProperty property : propertyList) {
                         typePropertyMap.put(property.getPropertyType().getId(), property);
                     }
 
                     for (ShopcartItem shopcartItem : shopcartItems) {
                         List<OrderProperty> itemProperties = shopcartItem.getProperties();
                         if (Utils.isNotEmpty(itemProperties)) {
-                            //移出与新增口味做法同类型的口味做法
-                            for (int i = itemProperties.size() - 1; i >= 0; i--) {
+                                                        for (int i = itemProperties.size() - 1; i >= 0; i--) {
                                 OrderProperty property = itemProperties.get(i);
                                 if (typePropertyMap.containsKey(property.getPropertyType().getId())) {
                                     itemProperties.remove(i);
@@ -344,15 +294,13 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
                             }
                         }
 
-                        //新增新加的口味做法
-                        if (itemProperties == null) {
+                                                if (itemProperties == null) {
                             itemProperties = new ArrayList<>();
                             shopcartItem.setProperties(itemProperties);
                         }
                         itemProperties.addAll(propertyList);
 
-                        //更新购物车
-                        mShoppingCart.updateDinnerDish(shopcartItem, false);
+                                                mShoppingCart.updateDinnerDish(shopcartItem, false);
                     }
                 }
             });
@@ -361,9 +309,7 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
         showCustomContentView(mTasteView);
     }
 
-    /**
-     * 展示备注页
-     */
+
     private void showRemarkView() {
         if (ClickManager.getInstance().isClicked(R.id.btn_remark)) {
             return;
@@ -396,11 +342,7 @@ public class BatchTradeItemPropertyUtil implements View.OnClickListener {
         showCustomContentView(mRemarkView);
     }
 
-    /**
-     * 刷新内容页
-     *
-     * @param customContentView
-     */
+
     private void showCustomContentView(View customContentView) {
         vContent.removeAllViews();
         if (customContentView == null) {

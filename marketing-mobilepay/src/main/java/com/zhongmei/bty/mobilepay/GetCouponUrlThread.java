@@ -15,11 +15,7 @@ import com.zhongmei.bty.mobilepay.v1.event.ShowCouponUrlEvent;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @Date： 16/9/26
- * @Description:
- * @Version: 1.0
- */
+
 public class GetCouponUrlThread extends Thread {
 
     @Override

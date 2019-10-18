@@ -20,16 +20,13 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class AsyncOpenTableResponseListener extends EventResponseListener<TradeResp> implements AsyncResponseListener<TradeResp> {
 
     private final static String TAG = AsyncOpenTableResponseListener.class.getSimpleName();
 
     protected AsyncHttpRecord asyncRec;
-    private AsyncHttpRecord asyncSourceRec;//引发开台的异步操作记录，如果没有则为null
-
+    private AsyncHttpRecord asyncSourceRec;
     public AsyncOpenTableResponseListener() {
     }
 
@@ -68,11 +65,9 @@ public class AsyncOpenTableResponseListener extends EventResponseListener<TradeR
                     Trade trade = response.getContent().getTrades().get(0);
                     AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_START_DESK, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
                 }
-                //成功后，重试引发开台的异步操作
-                if (asyncSourceRec != null && asyncSourceRec.getType() != null) {
+                                if (asyncSourceRec != null && asyncSourceRec.getType() != null) {
                     AsyncNetworkUtil.retryModifyOrCasher(asyncSourceRec);
-                    //查询这个订单对应的其他异步操作
-                } else {
+                                    } else {
                     AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
                     List<AsyncHttpType> types = new ArrayList<>();
                     types.add(AsyncHttpType.CASHER);
@@ -87,11 +82,6 @@ public class AsyncOpenTableResponseListener extends EventResponseListener<TradeR
                         }
                     }
                 }
-//            } else {//删除开台异步操作记录本身，和引发开台的异步操作记录
-//                DBHelper.deleteById(AsyncHttpRecord.class, asyncRec.getUuid());
-//                if(asyncSourceRec != null) {
-//                    DBHelper.deleteById(AsyncHttpRecord.class, asyncSourceRec.getUuid());
-//                }
             }
         } catch (Exception e) {
             Log.e(TAG, "", e);

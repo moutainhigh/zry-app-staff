@@ -11,11 +11,7 @@ import com.zhongmei.yunfu.db.entity.booking.BookingTradeItem;
 
 import java.util.List;
 
-/**
- * 编辑预定数据
- *
- * @date 2018/7/23
- */
+
 public class BeautyAcceptOrRefuseReq extends BaseRequest {
 
 

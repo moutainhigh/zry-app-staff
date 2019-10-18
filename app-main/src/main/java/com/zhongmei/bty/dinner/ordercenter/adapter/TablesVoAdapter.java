@@ -18,9 +18,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TablesVoAdapter extends BaseAdapter {
 
@@ -67,12 +65,7 @@ public class TablesVoAdapter extends BaseAdapter {
         return convertView;
     }
 
-    /**
-     * 绑定View
-     *
-     * @param convertView
-     * @param viewHolder
-     */
+
     private void bindData(View convertView, ViewHolder viewHolder) {
         viewHolder.layout = (RelativeLayout) convertView.findViewById(R.id.desk_layout);
         viewHolder.middleLayout = (LinearLayout) convertView.findViewById(R.id.desk_middle_layout);
@@ -109,12 +102,7 @@ public class TablesVoAdapter extends BaseAdapter {
         });
     }
 
-    /**
-     * 根据不同的状态设置不同背景与文字颜色
-     *
-     * @param viewHolder
-     * @param status
-     */
+
     private void setDeskStyleByState(ViewHolder viewHolder, TableStatus status) {
         switch (status) {
             case EMPTY:

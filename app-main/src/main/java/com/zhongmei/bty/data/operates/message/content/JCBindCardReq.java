@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeCustomer;
 import com.zhongmei.bty.basemodule.devices.mispos.data.CardSaleInfo;
 import com.zhongmei.bty.basemodule.orderdish.bean.TradeItemVo;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class JCBindCardReq extends Trade {
 

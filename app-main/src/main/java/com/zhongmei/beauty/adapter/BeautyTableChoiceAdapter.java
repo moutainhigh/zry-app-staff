@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BeautyTableChoiceAdapter extends RecyclerViewBaseAdapter<DinnertableModel, BeautyTableItemView> {
 
     private Context mContext;
@@ -45,8 +43,7 @@ public class BeautyTableChoiceAdapter extends RecyclerViewBaseAdapter<Dinnertabl
 
         if (tableSetChecked.contains(tableModel.getId())) {
             mapCheckedTable.put(tableModel.getId(), new TableInfo(tableModel, position));
-            tableSetChecked.remove(tableModel.getId());//清理数据
-        }
+            tableSetChecked.remove(tableModel.getId());        }
 
         tableView.refreshUI(tableModel, mapCheckedTable.containsKey(tableModel.getId()), new OnRBClickListener(tableModel, position));
     }
@@ -111,8 +108,7 @@ public class BeautyTableChoiceAdapter extends RecyclerViewBaseAdapter<Dinnertabl
 
             notifyDataSetChanged();
 
-            //接口会调，传出选中的桌台，有可能一个都没有选中
-        }
+                    }
     }
 
 

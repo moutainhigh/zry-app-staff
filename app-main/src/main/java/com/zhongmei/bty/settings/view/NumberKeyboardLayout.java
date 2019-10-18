@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.zhongmei.yunfu.R;
 
-//@EViewGroup(R.layout.numeric_keyboard_layout)
 public class NumberKeyboardLayout extends LinearLayout implements View.OnClickListener {
 
     private NumberClickListener listener;
@@ -23,9 +22,6 @@ public class NumberKeyboardLayout extends LinearLayout implements View.OnClickLi
         this.listener = listener;
     }
 
-    // @ViewById
-    // ImageView one, two, three, four, five, six, seven, eight, nine, zero,
-    //         delete, dot;
 
     public NumberKeyboardLayout(Context context) {
         super(context);

@@ -2,9 +2,7 @@ package com.zhongmei.atask;
 
 import android.os.AsyncTask;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public abstract class AbsAsyncTask<Progress, Result> extends AsyncTask<Void, Progress, Result> implements TaskCallback<Result> {
 
     @Override

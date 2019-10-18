@@ -10,15 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- * 支付结果处理工具
- */
+
 
 public class PayResultTool {
-    private PaymentVo mPaymentVo;//支付信息
-    private PayResp mPayResp;//支付返回信息
-    private List<PaymentItem> okList;
+    private PaymentVo mPaymentVo;    private PayResp mPayResp;    private List<PaymentItem> okList;
     private List<PaymentItem> errorList;
     private Map<String, PayResp.PItemResults> resultsMap;
     private double payOkAmount = 0;

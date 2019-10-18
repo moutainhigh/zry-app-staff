@@ -4,9 +4,7 @@ import android.os.Looper;
 
 import java.util.Collection;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ArgsUtils {
 

@@ -17,10 +17,7 @@ import java.util.List;
 
 public class EcCardInfo implements Serializable, ICustomerCardItem {
 
-    /**
-     * @date：2016-3-21 下午3:14:08
-     * @Description:TODO
-     */
+
     private static final long serialVersionUID = 1L;
 
     private Long id;
@@ -61,9 +58,7 @@ public class EcCardInfo implements Serializable, ICustomerCardItem {
 
     private BigDecimal integral;
 
-    /**
-     * 通过CardType来判断卡类别
-     */
+
     private Integer cardType;
 
     private Integer workStatus;
@@ -72,17 +67,11 @@ public class EcCardInfo implements Serializable, ICustomerCardItem {
 
     private Integer isBind;
 
-    //remainRealValue	剩余实储金额	Double
-//	remainSendValue	剩余赠送金额	Double
-//	remainPrepareValue	剩余预储金额	Double
-    // v8.5.0 新增储赠余额
-    private BigDecimal remainRealValue;
+            private BigDecimal remainRealValue;
     private BigDecimal remainSendValue;
     private BigDecimal remainPrepareValue;
 
-    /**
-     * 应售价
-     */
+
     private BigDecimal price;
 
     private Long validStartDay;
@@ -92,9 +81,7 @@ public class EcCardInfo implements Serializable, ICustomerCardItem {
     private Integer remainderTimes;
 
 
-    /**
-     * 卡是否有储值权限
-     */
+
     private Integer rightStatus;
 
 
@@ -414,85 +401,20 @@ public class EcCardInfo implements Serializable, ICustomerCardItem {
         return item;
     }
 
-    /**
-     * 卡状态
-     */
-    /*public enum WorkStatus implements ValueEnum<Integer> {
 
-     *//**
-     * 激活后可用
-     *//*
-        AVAILABLE_AFTER_ACTIVATION(1),
-        *//**
-     * 售卡后可用
-     *//*
-        AVAILABLE_AFTER_SALE(2),
 
-        *//**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     *//*
-        @Deprecated
-        __UNKNOWN__;
 
-        private final Helper<Integer> helper;
 
-        WorkStatus(Integer value) {
-            helper = Helper.valueHelper(value);
-        }
-
-        WorkStatus() {
-            helper = Helper.unknownHelper();
-        }
-
-        @Override
-        public Integer value() {
-            return helper.value();
-        }
-
-        @Override
-        public boolean equalsValue(Integer value) {
-            return helper.equalsValue(this, value);
-        }
-
-        @Override
-        public boolean isUnknownEnum() {
-            return helper.isUnknownEnum();
-        }
-
-        @Override
-        public void setUnknownValue(Integer value) {
-            helper.setUnknownValue(value);
-        }
-
-        @Override
-        public String toString() {
-            return "" + value();
-        }
-    }*/
-
-    /**
-     * 卡状态
-     */
     public enum CardIsBind implements ValueEnum<Integer> {
 
-        /**
-         * 已绑定
-         */
+
         YES(1),
 
-        /**
-         * 未绑定
-         */
+
         NO(2),
 
 
-        /**
-         * 未知的值
-         *
-         * @deprecated 为了避免转为enum出错而设置，不应直接使用
-         */
+
         @Deprecated
         __UNKNOWN__;
 

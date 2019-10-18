@@ -5,9 +5,7 @@ import com.zhongmei.bty.commonmodule.core.annotions.GET;
 import com.zhongmei.bty.commonmodule.core.annotions.PUT;
 import com.zhongmei.bty.commonmodule.core.annotions.SETTINGS;
 
-/**
 
- */
 @SETTINGS(name = "type1")
 public interface IPanelItemSettings_Type1 extends IPanelItemSettings {
 

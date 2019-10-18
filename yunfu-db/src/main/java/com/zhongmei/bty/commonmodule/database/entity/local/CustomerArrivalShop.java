@@ -12,27 +12,16 @@ import com.zhongmei.bty.commonmodule.database.enums.ArriveWay;
 
 import java.math.BigDecimal;
 
-/**
- * Desc
- *
- * @created 2017/7/27
- */
+
 @DatabaseTable(tableName = "customer_arrival_shop")
 public class CustomerArrivalShop extends EntityBase<Long> {
 
-    /**
-     * The columns of table "lyd_market_setting"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * status_flag
-         */
-        //String statusFlag = "status_flag";
 
-        /**
-         * server_create_time
-         */
+
+
         String serverCreateTime = "server_create_time";
 
 
@@ -57,45 +46,30 @@ public class CustomerArrivalShop extends EntityBase<Long> {
     @DatabaseField(columnName = "customer_name")
     public String customerName;
     @DatabaseField(columnName = "customer_sex")
-    public Integer customerSex; //顾客性别:-1 未知 0女 1男
-    @DatabaseField(columnName = "customer_phone")
-    public String customerPhone; //顾客手机号
-    @DatabaseField(columnName = "arrival_status")
-    public Integer arrivalStatus; //到店状态(1.已到店; 2.已离店;3.到店周围;4.离店)
-    @DatabaseField(columnName = "app_type")
-    public Integer appType; //应用类型
-    @DatabaseField(columnName = "table_id")
-    public Long tableId; //桌台ID
-    @DatabaseField(columnName = "table_name")
-    public String tableName; //桌台名称
-    @DatabaseField(columnName = "arrival_way")
-    public int arrivalWay; //到店方式(1.微信;2.熟客、3.pos扫描)
-
+    public Integer customerSex;     @DatabaseField(columnName = "customer_phone")
+    public String customerPhone;     @DatabaseField(columnName = "arrival_status")
+    public Integer arrivalStatus;     @DatabaseField(columnName = "app_type")
+    public Integer appType;     @DatabaseField(columnName = "table_id")
+    public Long tableId;     @DatabaseField(columnName = "table_name")
+    public String tableName;     @DatabaseField(columnName = "arrival_way")
+    public int arrivalWay;
     @DatabaseField(columnName = "server_create_time")
     public Long serverCreateTime;
     @DatabaseField(columnName = "send_coupon_count")
-    public int sendCouponCount; //发券次数
-
-    @DatabaseField(columnName = "uuid", canBeNull = false)//唯一标识
-    private String uuId;
+    public int sendCouponCount;
+    @DatabaseField(columnName = "uuid", canBeNull = false)    private String uuId;
     @DatabaseField(columnName = "operate_status", canBeNull = false)
-    public Integer operateStatus = 1; //处理状态(1.未处理; 2.已处理;)
-
+    public Integer operateStatus = 1;
     @DatabaseField(columnName = "customer_level")
-    public Integer level;//会员等级
-
+    public Integer level;
     @DatabaseField(columnName = "customer_level_name")
-    public String levelName;//会员等级名称
-
+    public String levelName;
     @DatabaseField(columnName = "customer_remainValue")
-    public BigDecimal remainValue;//会员余额
-
+    public BigDecimal remainValue;
     @DatabaseField(columnName = "customer_integral")
-    public Integer integral;//会员积分
-
+    public Integer integral;
     @DatabaseField(columnName = "customer_coupCount")
-    public Integer coupCount;//会员可用券数
-
+    public Integer coupCount;
     public String getUuId() {
         return uuId;
     }

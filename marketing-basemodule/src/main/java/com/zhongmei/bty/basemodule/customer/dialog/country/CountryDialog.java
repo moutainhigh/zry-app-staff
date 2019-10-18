@@ -24,11 +24,7 @@ import java.util.ListIterator;
 import java.util.Locale;
 import java.util.Map;
 
-/**
- * 国籍选择
- *
- * @date:2016年6月7日上午9:14:41
- */
+
 public class CountryDialog extends Dialog implements SideBar.OnTouchingLetterChangedListener, CountryGridAdapter.OnItemSelectedListener {
 
     private StickyGridHeadersGridView mGridView;
@@ -39,14 +35,10 @@ public class CountryDialog extends Dialog implements SideBar.OnTouchingLetterCha
 
     private Context mContext;
 
-    /**
-     * 汉字转换成拼音的类
-     */
+
     private CharacterParser characterParser;
 
-    /**
-     * 根据拼音来排列元数据
-     */
+
     private PinyinComparator pinyinComparator;
 
     private SideBar sideBar;
@@ -63,10 +55,8 @@ public class CountryDialog extends Dialog implements SideBar.OnTouchingLetterCha
 
     private ImageButton btn_close;
 
-    // 当前选择的user
-    private ErpCurrency currentCountry;
-    //gridview每行最多显示多少个元素
-    private static final int GRID_NUM_COUNT = 5;
+        private ErpCurrency currentCountry;
+        private static final int GRID_NUM_COUNT = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,11 +103,9 @@ public class CountryDialog extends Dialog implements SideBar.OnTouchingLetterCha
         }
         characterParser = CharacterParser.getInstance();
         mGirdList = filledData(country);
-        // 根据拼音首字母排序
-        pinyinComparator = new PinyinComparator();
+                pinyinComparator = new PinyinComparator();
         Collections.sort(mGirdList, pinyinComparator);
-        // 将首字母放到map中
-        int section = 0;
+                int section = 0;
         for (ListIterator<CountryGridItem> it = mGirdList.listIterator(); it.hasNext(); ) {
             CountryGridItem mGridItem = it.next();
             String letters = mGridItem.sortLetters;
@@ -133,38 +121,28 @@ public class CountryDialog extends Dialog implements SideBar.OnTouchingLetterCha
                 mGridItem.section = data.getSection();
                 int count = data.getCount() + 1;
                 data.setCount(count);
-                //向上取整
-                int lineNum = (int) Math.ceil(count / GRID_NUM_COUNT);
+                                int lineNum = (int) Math.ceil(count / GRID_NUM_COUNT);
                 data.setLineNum(lineNum);
             }
         }
     }
 
-    /**
-     * 为ListView填充数据
-     *
-     * @param
-     * @return
-     */
+
     private List<CountryGridItem> filledData(List<ErpCurrency> countryList) {
         List<CountryGridItem> mSortList = new ArrayList<>();
 
         for (int i = 0; i < countryList.size(); i++) {
             CountryGridItem gridItem = new CountryGridItem();
             ErpCurrency country = countryList.get(i);
-            gridItem.erpCurrency = country;//add v8.2
-            gridItem.countryEn = country.getCountryEn();
+            gridItem.erpCurrency = country;            gridItem.countryEn = country.getCountryEn();
             gridItem.countryZh = country.getCountryZh();
             gridItem.areaCode = country.getAreaCode();
             String sortString;
-            // 汉字转换成拼音
-            if (ErpConstants.isChinese()) {
+                        if (ErpConstants.isChinese()) {
                 sortString = characterParser.getSelling(country.getCountryZh()).substring(0, 1).toUpperCase(Locale.getDefault());
             } else {
-                sortString = country.getCountryEn().substring(0, 1).toUpperCase(Locale.getDefault()); // 英文
-            }
-            // 正则表达式，判断首字母是否是英文字母
-            if (sortString.matches("[A-Z]")) {
+                sortString = country.getCountryEn().substring(0, 1).toUpperCase(Locale.getDefault());             }
+                        if (sortString.matches("[A-Z]")) {
                 gridItem.sortLetters = sortString.toUpperCase(Locale.getDefault());
             } else {
                 gridItem.sortLetters = "#";
@@ -191,21 +169,16 @@ public class CountryDialog extends Dialog implements SideBar.OnTouchingLetterCha
         }
     }
 
-    // 前面有好多行,一个字母前面有多少行,不包括head
-    private int getPreLine(String s) {
-        // 已经比较的首字母
-        String comparedS = "";
-        // 总行数
-        int totalLineNum = 0;
-        // 临时存储的行数,由于第一行是0开始，初始值为0
-        int tempLineNum = 0;
+        private int getPreLine(String s) {
+                String comparedS = "";
+                int totalLineNum = 0;
+                int tempLineNum = 0;
         for (int i = 0; i < mGirdList.size(); i++) {
             CountryGridItem item = mGirdList.get(i);
             if (!item.sortLetters.equals(s)) {
                 if (TextUtils.isEmpty(comparedS)) {
                     comparedS = item.sortLetters;
                 }
-//				当前的和前一次不相同，行数添加
                 if (!item.sortLetters.equals(comparedS)) {
                     LetterData data = sectionMap.get(s);
                     tempLineNum = data.getLineNum();
@@ -236,9 +209,7 @@ public class CountryDialog extends Dialog implements SideBar.OnTouchingLetterCha
         void unSelected(Boolean unSelected);
     }
 
-    /**
-     * 拼音转换
-     */
+
     public class PinyinComparator implements Comparator<CountryGridItem> {
         public int compare(CountryGridItem o1, CountryGridItem o2) {
             if (o1.sortLetters.equals("@")

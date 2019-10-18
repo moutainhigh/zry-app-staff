@@ -8,73 +8,46 @@ import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.DayNumber;
 
-/**
- * DishCyclePeriod is a ORMLite bean type. Corresponds to the database table
- * "dish_cycle_period"
- */
+
 @DatabaseTable(tableName = "dish_cycle_period")
 public class DishCyclePeriod extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "auth_user"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * dish_id
-         */
+
         public static final String dishId = "dish_id";
 
-        /**
-         * day_number
-         */
+
         public static final String dayNumber = "day_number";
 
-        /**
-         * validity_start
-         */
+
         public static final String validityStart = "validity_start";
 
-        /**
-         * validity_end
-         */
+
         public static final String validityEnd = "validity_end";
 
-        /**
-         * period_start
-         */
+
         public static final String periodStart = "period_start";
 
-        /**
-         * period_end
-         */
+
         public static final String periodEnd = "period_end";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

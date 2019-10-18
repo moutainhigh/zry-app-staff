@@ -19,11 +19,7 @@ import com.zhongmei.yunfu.monitor.ResponseStringListener;
 import com.zhongmei.yunfu.net.volley.Response;
 import com.zhongmei.yunfu.net.volley.VolleyError;
 
-/**
- * 检查设备配置的商户信息
- *
- * @created 2017/05/09
- */
+
 public class ErpCheck {
 
     private static final String TAG = ErpCheck.class.getSimpleName();
@@ -32,8 +28,7 @@ public class ErpCheck {
 
     public ErpCheck(Context context) {
         this.mContext = context;
-        //super(context, context.getString(R.string.get_server_address), false);
-    }
+            }
 
     public void check(ErpCheckCallback callback) {
         this.checkCallback = callback;
@@ -70,10 +65,7 @@ public class ErpCheck {
                     return;
                 }
 
-                /*if (ShopInfoManager.getInstance().isExpired()) {
-                    error("[shop]" + mContext.getString(R.string.erp_check_error_expired));
-                    return;
-                }*/
+
 
                 Session.init(new SessionImpl(MainApplication.getInstance(), SessionImpl.AV1));
                 success(mContext.getString(R.string.request_server_address_success));
@@ -114,12 +106,7 @@ public class ErpCheck {
     }
 
     public interface ErpCheckCallback {
-        /**
-         * Erp检查回调
-         *
-         * @param errorCode 0正在执行 -1检查完成 其它为错误状态
-         * @param errorMsg
-         */
+
         void onErpCheck(int errorCode, String errorMsg, Throwable err);
     }
 }

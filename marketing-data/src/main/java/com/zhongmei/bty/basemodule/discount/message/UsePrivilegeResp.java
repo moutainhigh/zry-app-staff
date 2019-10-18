@@ -3,13 +3,10 @@ package com.zhongmei.bty.basemodule.discount.message;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 接口响应体
- */
+
 
 public class UsePrivilegeResp {
-    private List<Item> list;//结果列表
-
+    private List<Item> list;
 
     public List<Item> getList() {
         return list;
@@ -19,9 +16,7 @@ public class UsePrivilegeResp {
         this.list = list;
     }
 
-    /**
-     * 获取校验失败的优惠项
-     */
+
     public List<Item> getCheckFailedItems() {
         if (list != null) {
             List<Item> checkFailedItems = new ArrayList<Item>();
@@ -37,9 +32,7 @@ public class UsePrivilegeResp {
         return null;
     }
 
-    /**
-     * 获取核销失败的优惠项
-     */
+
     public List<Item> getUsageFailedItems() {
         if (list != null) {
             List<Item> usageFailedItems = new ArrayList<Item>();
@@ -56,11 +49,7 @@ public class UsePrivilegeResp {
     }
 
     public class Item {
-        private Integer checkStatus;//校验结果,为1000表成功
-        private Integer usageStatus;//核销结果，为1000表成功
-        private String uuid;//优惠uuid
-        private String resultMsg;//结果消息
-
+        private Integer checkStatus;        private Integer usageStatus;        private String uuid;        private String resultMsg;
         public Integer getCheckStatus() {
             return checkStatus;
         }

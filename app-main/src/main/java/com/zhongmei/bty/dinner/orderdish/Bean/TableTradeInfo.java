@@ -16,9 +16,7 @@ import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TableTradeInfo implements IDinnertableTrade {
     private int spendTime;
@@ -32,11 +30,6 @@ public class TableTradeInfo implements IDinnertableTrade {
     private TradeType tradeType;
 
     public void setSpendTime(int spendTime) {
-//        int minute = (int) (System.currentTimeMillis() - time) / (60 * 1000);
-//        if (minute < 0) {
-//            minute = -1;
-//        }
-//        spendTime = spendTime;
         this.spendTime = spendTime;
     }
 

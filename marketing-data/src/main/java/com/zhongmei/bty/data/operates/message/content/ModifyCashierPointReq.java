@@ -5,14 +5,10 @@ import com.zhongmei.yunfu.context.session.Session;
 import com.zhongmei.yunfu.context.session.core.user.AuthUser;
 import com.zhongmei.yunfu.db.ICreator;
 
-/**
- * 修复收银点打印机ID的请求
- */
+
 public class ModifyCashierPointReq {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     private Long printerDeviceId;

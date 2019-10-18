@@ -22,25 +22,16 @@ import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 import com.zhongmei.bty.basemodule.pay.message.PayResp;
 import com.zhongmei.yunfu.context.util.Utils;
 
-/**
- * Created by demo on 2018/12/15
- * 百度糯米券全部失败界面
- */
+
 
 public class BaiNuoAllErrorDialog extends Dialog implements View.OnClickListener {
     private String TAG = BaiNuoAllErrorDialog.class.getSimpleName();
-    private ImageView mCloseBT;//关闭按钮
-    private LinearLayout mErrorList;//失败列表
-    private PaymentVo mPaymentVo;//支付信息
-    private PayResp mPayResp;//支付返回信息
-    private IPayOverCallback mCallBack;
-    private IPaymentInfo mPaymentInfo;//
-
+    private ImageView mCloseBT;    private LinearLayout mErrorList;    private PaymentVo mPaymentVo;    private PayResp mPayResp;    private IPayOverCallback mCallBack;
+    private IPaymentInfo mPaymentInfo;
     private BaiNuoAllErrorDialog(Context context, int theme) {
         super(context, theme);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.pay_all_bainuo_error_dialog_layout);//新收银失败界面
-    }
+        setContentView(R.layout.pay_all_bainuo_error_dialog_layout);    }
 
     public BaiNuoAllErrorDialog(Activity context, IPaymentInfo paymentInfo, PaymentVo paymentVo, PayResp payResp, IPayOverCallback callBack) {
         this(context, R.style.custom_alert_dialog);
@@ -66,15 +57,12 @@ public class BaiNuoAllErrorDialog extends Dialog implements View.OnClickListener
                     mErrorList.addView(BaiNuoPartErrorDialog.getErrorItemView(getContext(), couponNoLabel + item.getRelateId(), result.getResultMsg()));
             }
         }
-        /*PayMessage payMessage = DisplayServiceManager.buildPayMessage(PayMessage.PAY_STATE_FAIL, "");
-        payMessage.setLabel(this.getContext().getString(R.string.pay_error));
-        DisplayServiceManager.updateDisplay(this.getContext().getApplicationContext(), payMessage);*/
+
     }
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.pay_error_close_button) {//关闭
-            this.dismiss();
+        if (view.getId() == R.id.pay_error_close_button) {            this.dismiss();
         }
     }
 
@@ -82,8 +70,7 @@ public class BaiNuoAllErrorDialog extends Dialog implements View.OnClickListener
         @Override
         public void onDismiss(DialogInterface dialogInterface) {
             try {
-                //刷新副2屏应收
-                DisplayServiceManager.updateDisplayPay(getContext().getApplicationContext(), mPaymentInfo.getActualAmount());
+                                DisplayServiceManager.updateDisplayPay(getContext().getApplicationContext(), mPaymentInfo.getActualAmount());
                 if (mCallBack != null) {
                     mCallBack.onFinished(true, 0);
                 }

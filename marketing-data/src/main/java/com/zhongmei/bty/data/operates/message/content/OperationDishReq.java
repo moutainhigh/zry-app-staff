@@ -4,11 +4,7 @@ import com.zhongmei.yunfu.db.entity.dish.TradeItemOperation;
 
 import java.util.List;
 
-/**
- * @Date： 17/8/21
- * @Description:
- * @Version: 1.0
- */
+
 public class OperationDishReq {
 
     private Long tradeId;

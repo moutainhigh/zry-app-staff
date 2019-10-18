@@ -5,11 +5,7 @@ import com.zhongmei.yunfu.net.volley.IUserEvent;
 import java.net.URI;
 import java.util.UUID;
 
-/**
- * Desc
- *
- * @created 2017/7/25
- */
+
 public abstract class AbsEventListener implements IUserEvent {
 
     protected String eventName;

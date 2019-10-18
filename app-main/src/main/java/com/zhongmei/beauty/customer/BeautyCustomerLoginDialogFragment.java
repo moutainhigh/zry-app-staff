@@ -38,9 +38,7 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 美业登录
- */
+
 public class BeautyCustomerLoginDialogFragment extends DinnerCustomerLoginBasicDialogFragment implements View.OnClickListener {
 
     public static final String TAG = BeautyCustomerLoginDialogFragment.class.getSimpleName();
@@ -132,7 +130,6 @@ public class BeautyCustomerLoginDialogFragment extends DinnerCustomerLoginBasicD
             mIbBack.setVisibility(View.GONE);
             mIbClose.setVisibility(View.VISIBLE);
             mTvTitle.setText(getString(R.string.customer_menber_login));
-//            customerLoginFragment.setShowLoginView();
         } else if (type == UI_TYPE_REGISTER) {
             this.uiType = type;
             VerifyHelper.verifyAlert(getActivity(), CustomerApplication.PERMISSION_CUSTOMER_CREATE,
@@ -140,13 +137,7 @@ public class BeautyCustomerLoginDialogFragment extends DinnerCustomerLoginBasicD
                         @Override
                         public void onPositive(User user, String code, Auth.Filter filter) {
                             super.onPositive(user, code, filter);
-//                            showSecondDisPlay("");
                             replaceChildFragment(R.id.login_frame_layout, customerRegisterFragment, DinnerCustomerRegisterFragment.TAG);
-//                            if (getArguments() != null && getArguments().getInt(BeautyCustomerConstants.KEY_CUSTOMER_LOGIN_FLAG , BeautyCustomerConstants.CustomerLoginLaunchMode.LOGIN) ==  BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE){
-//                                Bundle bundle = new Bundle();
-//                                bundle.putInt(BeautyCustomerConstants.KEY_CUSTOMER_REGIEST_FLAG , BeautyCustomerConstants.CustomerReiestLaunchMode.RECHARGE_REGIEST);
-//                                customerRegisterFragment.setArguments(bundle);
-//                            }
                             mIbBack.setVisibility(View.VISIBLE);
                             mIbClose.setVisibility(View.GONE);
                             mTvTitle.setText(getString(R.string.member_register));
@@ -185,8 +176,7 @@ public class BeautyCustomerLoginDialogFragment extends DinnerCustomerLoginBasicD
         if (DinnerShopManager.getInstance().getLoginCustomer() == null) {
             DisplayServiceManager.doCancel(getActivity());
         }
-        EventBus.getDefault().post(new EventLoginView(EventLoginView.TYPE_LOGIN_VIEW_END));//add v8.4
-        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().post(new EventLoginView(EventLoginView.TYPE_LOGIN_VIEW_END));        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

@@ -3,9 +3,7 @@ package com.zhongmei.bty.commonmodule.core.store;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-/**
- * 简单存储的SharedPreference实现类
- */
+
 public class SharedPreferenceStore implements IStore {
 
     private SharedPreferences sharedPreferences;

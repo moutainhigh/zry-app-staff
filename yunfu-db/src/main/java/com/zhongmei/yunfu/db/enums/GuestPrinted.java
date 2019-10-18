@@ -2,27 +2,15 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum GuestPrinted implements ValueEnum<Integer> {
 
-    /**
-     * 已打印
-     */
+
     PRINTED(1),
-    /**
-     * 未打印
-     */
+
     UNPRINT(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

@@ -4,35 +4,12 @@ import java.math.BigDecimal;
 
 public class CustomerStoredBalanceResp {
 
-    private int type; //记录类型1储值、2消费、3退款
-    private int source;// 来源，1为Calm，2为手机app，3为其他系统导入，4为微信，5支付宝，6商家官网，7百度,8
-    private String userId;// 操作员账号
-    private String userName;
-    private Long createDateTime;// 创建时间
-    private int paymentMode; //支付方式
-    private String paymentModeName; //支付方式名称
-    private BigDecimal addValuecard;// 本次操作新增的储值
-    private BigDecimal sendValuecard;// 本次冲值送的钱
-    private BigDecimal endValuecard;// 操作后会员的储值
+    private int type;     private int source;    private String userId;    private String userName;
+    private Long createDateTime;    private int paymentMode;     private String paymentModeName;     private BigDecimal addValuecard;    private BigDecimal sendValuecard;    private BigDecimal endValuecard;
+    private String seq;    private String memo;    private int isChange;
+    private String beforeValuecard;    private String cashValuecard;    private String bankValuecard;
 
-    private String seq;// 流水号
-    private String memo;// 调账原因
-    private int isChange;// 是否已调账（0：是，1：否）
-
-    private String beforeValuecard;// 操作前会员的储值
-    private String cashValuecard;// 现金冲入的钱
-    private String bankValuecard;// 银行卡冲入的钱
-
-    // loyal
-
-    private BigDecimal beforeRealValue; // 操作前余额实储金额
-    private BigDecimal beforeSendValue;    // 操作前余额赠送金额
-    private BigDecimal currentSendValue; // 本次操作赠送金额
-    private BigDecimal currentRealValue; // 本次操作实储金额
-    private BigDecimal endRealValue; // 操作后实储金额
-    private BigDecimal endSendValue; // 操作后赠送金额
-    private String cardNum; // 实体卡号
-
+    private BigDecimal beforeRealValue;     private BigDecimal beforeSendValue;        private BigDecimal currentSendValue;     private BigDecimal currentRealValue;     private BigDecimal endRealValue;     private BigDecimal endSendValue;     private String cardNum;
     public int getPaymentMode() {
         return paymentMode;
     }
@@ -217,11 +194,7 @@ public class CustomerStoredBalanceResp {
         this.cardNum = cardNum;
     }
 
-    /**
-     * 根据type过滤数据
-     *
-     * @return
-     */
+
     public boolean filterDataByType() {
         if (type == 0 || type == 1 || type == 2 || type == 3) {
             return true;

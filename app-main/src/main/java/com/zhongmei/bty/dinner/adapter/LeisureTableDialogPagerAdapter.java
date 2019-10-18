@@ -16,17 +16,14 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class LeisureTableDialogPagerAdapter extends PagerAdapter {
     private static final String TAG = LeisureTableDialogPagerAdapter.class.getSimpleName();
 
     private static final int ALL_COUNT = 0;
 
-    public static final int PAGE_SIZE = 5;// 每页显示队列
-
+    public static final int PAGE_SIZE = 5;
     private Context mContext;
 
     private List<Tables> emptTabls;
@@ -94,10 +91,8 @@ public class LeisureTableDialogPagerAdapter extends PagerAdapter {
         int size = subList.size();
         for (int i = 0; i < size; i++) {
             Integer integer = subList.get(i);
-            // 控件
-            final View itemView = itemViews[i];
-            // 名称
-            TextView tvName = (TextView) itemView.findViewById(R.id.table_area_name);
+                        final View itemView = itemViews[i];
+                        TextView tvName = (TextView) itemView.findViewById(R.id.table_area_name);
             TextView tvSelect = (TextView) itemView.findViewById(R.id.select);
             if (i == 4) {
                 View view1 = itemView.findViewById(R.id.view_line);
@@ -111,8 +106,7 @@ public class LeisureTableDialogPagerAdapter extends PagerAdapter {
                 tvName.setText(String.format(mContext.getString(R.string.batch_operation_table_people), integer));
             }
 
-            //itemView.setClickable(true);
-            itemView.setVisibility(View.VISIBLE);
+                        itemView.setVisibility(View.VISIBLE);
             itemView.setTag(subList.get(i));
             items.add(itemView);
             itemView.setClickable(true);

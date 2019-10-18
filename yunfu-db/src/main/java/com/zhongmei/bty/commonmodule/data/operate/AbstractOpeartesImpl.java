@@ -9,9 +9,7 @@ import com.zhongmei.bty.commonmodule.data.operate.IOperates.ImplContext;
 import com.zhongmei.yunfu.orm.DBHelperManager;
 import com.zhongmei.yunfu.orm.DatabaseHelper;
 
-/**
 
- */
 public class AbstractOpeartesImpl implements NoProGuard {
 
     private static final String TAG = AbstractOpeartesImpl.class.getSimpleName();

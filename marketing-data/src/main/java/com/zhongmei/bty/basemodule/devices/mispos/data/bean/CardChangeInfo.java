@@ -3,23 +3,12 @@ package com.zhongmei.bty.basemodule.devices.mispos.data.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * 换卡信息
- */
+
 
 public class CardChangeInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     private long id;
-    private long brandId;//品牌ID
-    private long commercialId;//门店ID
-    private String clientType;//客户端请求来源
-    private long userId;//操作用户ID
-    private String oldCardNum;//原卡号
-    private String newCardNum;//新卡号
-    private String tradeUuid;//订单Uuid
-    private BigDecimal payAmount;//换卡实际支付费用
-    private String remark;//换卡备注
-
+    private long brandId;    private long commercialId;    private String clientType;    private long userId;    private String oldCardNum;    private String newCardNum;    private String tradeUuid;    private BigDecimal payAmount;    private String remark;
     public long getId() {
         return id;
     }

@@ -2,10 +2,7 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 
 import java.io.Serializable;
 
-/**
- * 订单类型 统计
- * Created by demo on 2018/12/15
- */
+
 public class TradeTypeCount implements Serializable {
     private Double tradeAmount = 0.0;
     private String typeName;

@@ -13,10 +13,8 @@ public class ActionShowTrade {
 
     private DeliveryType type;
 
-    // 正餐用
-    private int orderType;
-    // 配送取消
-    private NotificationType notificationType;
+        private int orderType;
+        private NotificationType notificationType;
     private List<ValueEnum> filterConditions;
 
     public ActionShowTrade(String uuid, DeliveryType type, int orderType) {

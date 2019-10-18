@@ -50,9 +50,7 @@ import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.payModeId;
 import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.paySource;
 import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.payStatus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class GroupOrderCenterListManager extends OrderCenterListManager {
     private static final String TAG = GroupOrderCenterListManager.class.getSimpleName();
@@ -165,13 +163,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
         return lastPayTime <= lastClosingTime;
     }
 
-    /**
-     * 获取交易扩展
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return TradeExtra
-     */
+
     private TradeExtra getTradeExtra(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeExtra.class)
@@ -193,13 +185,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
         return null;
     }
 
-    /**
-     * 获取交易押金
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return TradeExtra
-     */
+
     private TradeDeposit getTradeDeposit(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeDeposit.class)
@@ -215,13 +201,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
         return null;
     }
 
-    /**
-     * 获取桌台信息
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return getTradeTableList
-     */
+
     private List<TradeTable> getTradeTableList(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeTable.class)
@@ -237,13 +217,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
         return Collections.emptyList();
     }
 
-    /**
-     * 获取顾客信息
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return getTradeCustomerList
-     */
+
     private List<TradeCustomer> getTradeCustomerList(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeCustomer.class)
@@ -260,8 +234,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
         return Collections.emptyList();
     }
 
-    //预订金记录 add v8.13
-    private List<TradeEarnestMoney> getTradeEarnestMoneyList(DatabaseHelper helper, Long tradeId) {
+        private List<TradeEarnestMoney> getTradeEarnestMoneyList(DatabaseHelper helper, Long tradeId) {
         try {
             List<TradeEarnestMoney> tradeEarnestMonies = helper.getDao(TradeEarnestMoney.class)
                     .queryBuilder()
@@ -273,23 +246,14 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
         return Collections.emptyList();
     }
 
-    /**
-     * 加载订单相关支付信息（仅取了部分表的部分字段）
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return List<PaymentVo>
-     * @throws Exception
-     */
+
     private List<PaymentVo> listPaymentVo(DatabaseHelper helper, String tradeUuid) throws Exception {
         List<PaymentVo> voList = new ArrayList<PaymentVo>();
 
         Dao<Payment, String> dao = helper.getDao(Payment.class);
         QueryBuilder<Payment, String> paymentBuild = dao.queryBuilder();
         paymentBuild.selectColumns(Payment.$.uuid, Payment.$.serverUpdateTime, Payment.$.paymentType);
-        //paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid)
-        //        .and().eq(Payment.$.isPaid, Bool.YES);
-        paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid);
+                        paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid);
         paymentBuild.orderBy(Payment.$.serverCreateTime, false);
         List<Payment> paymentList = paymentBuild.query();
 
@@ -347,8 +311,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
                     Trade.$.serverUpdateTime);
             createTradeWhere(helper, tradeQB, childTab, postion, keyword, condition, lastData);
             tradeQB.limit(PAGE_SIZE);
-            //新订单||取消请求升序排列
-            if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
+                        if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
                     || childTab == DbQueryConstant.UNPROCESSED_CANCEL_REQUEST) {
                 tradeQB.orderBy(Trade.$.serverUpdateTime, true);
             } else {
@@ -366,8 +329,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
         Where<Trade, String> where = generateTradeBusinessTypeWhere(queryBuilder);
         where.and().eq(Trade.$.statusFlag, StatusFlag.VALID);
 
-        //偏移条件
-        if (lastData != null) {
+                if (lastData != null) {
             if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
                     || childTab == DbQueryConstant.UNPROCESSED_CANCEL_REQUEST) {
                 where.and().ge(Trade.$.serverUpdateTime, lastData.getServerUpdateTime())
@@ -378,8 +340,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
             }
         }
 
-        //搜索条件
-        if (!TextUtils.isEmpty(keyword)) {
+                if (!TextUtils.isEmpty(keyword)) {
             Where<Trade, String> searchWhere = null;
             if (childTab == DbQueryConstant.UNPROCESSED_ALL) {
                 switch (position) {
@@ -428,8 +389,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
                 }
             } else {
                 switch (position) {
-                    case 0://全部
-                        if (Utils.isNum(keyword)) {
+                    case 0:                        if (Utils.isNum(keyword)) {
                             BigDecimal amount = MathDecimal.round(new BigDecimal(keyword), 2);
                             Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
                             QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
@@ -474,8 +434,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
                         searchWhere = where.in(Trade.$.uuid, tradeExtraQB);
                     }
                     break;
-                    case 2://订单金额
-                        if (Utils.isNum(keyword)) {
+                    case 2:                        if (Utils.isNum(keyword)) {
                             BigDecimal amount = MathDecimal.round(new BigDecimal(keyword), 2);
                             searchWhere = where.eq(Trade.$.tradeAmount, amount);
                         }
@@ -503,8 +462,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
             }
         }
 
-        //筛选条件
-        if (condition != null) {
+                if (condition != null) {
             if (Utils.isNotEmpty(condition.getDeliveryTypes())) {
                 where.and().in(Trade.$.deliveryType, condition.getDeliveryTypes());
             }
@@ -530,8 +488,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
             }
         }
 
-        //分栏条件
-        Where<Trade, String> tabWhere;
+                Where<Trade, String> tabWhere;
         switch (childTab) {
             case DbQueryConstant.UNPROCESSED_ALL:
                 tabWhere = where.or(where.or(where.eq(Trade.$.tradePayStatus, TradePayStatus.PAID), where.ne(Trade.$.tradePayForm, TradePayForm.ONLINE))
@@ -604,13 +561,7 @@ public class GroupOrderCenterListManager extends OrderCenterListManager {
         return paymentItemQB;
     }
 
-    /**
-     * 获取TradeExtra表serialNumber字段不为空的订单UUID
-     *
-     * @param helper
-     * @return
-     * @throws Exception
-     */
+
     private QueryBuilder<TradeExtra, String> getTradeExtraQueryBuilder(DatabaseHelper helper) throws Exception {
         Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
         QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();

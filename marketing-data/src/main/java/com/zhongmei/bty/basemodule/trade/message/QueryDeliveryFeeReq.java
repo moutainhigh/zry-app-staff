@@ -1,27 +1,19 @@
 package com.zhongmei.bty.basemodule.trade.message;
 
-/**
- * 查询配送费请求体
- */
+
 
 public class QueryDeliveryFeeReq {
-    //品牌Id
-    private Long brandId;
+        private Long brandId;
 
-    //商户Id
-    private Long shopId;
+        private Long shopId;
 
-    //订单Id
-    private Long tradeId;
+        private Long tradeId;
 
-    //订单号
-    private String tradeNo;
+        private String tradeNo;
 
-    //第三方订单号
-    private String thirdTranNo;
+        private String thirdTranNo;
 
-    //配送平台
-    private Integer deliveryPlatform;
+        private Integer deliveryPlatform;
 
     public Long getBrandId() {
         return brandId;

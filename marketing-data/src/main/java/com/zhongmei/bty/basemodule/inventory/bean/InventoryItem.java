@@ -8,33 +8,23 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class InventoryItem implements Serializable {
     private static final long serialVersionUID = 1L;
-    //初始化库存数的tag
-    public static final int TAG_INVENTORY_NUM = 1;
-    //初始化菜品增量的tag
-    public static final int TAG_STEP_NUM = 2;
+        public static final int TAG_INVENTORY_NUM = 1;
+        public static final int TAG_STEP_NUM = 2;
 
     private TradeItem tradeItem;
 
-    private BigDecimal returnInventoryNum;//实际扣库存数，默认为maxInventoryNum
-
-    private BigDecimal maxInventoryNum;//非称重商品的作废必传，默认为菜品数量
-
-    private BigDecimal tempReturnInventoryNum;//中间变量，用于存储未确认最终最作废量的值
-
-    private BigDecimal stepNum;//菜品增量，默认为1
-
-    private BigDecimal dishQuantity;//操作菜品的原数量，只有套餐才会使用，用于计算子菜的退库存数
-
+    private BigDecimal returnInventoryNum;
+    private BigDecimal maxInventoryNum;
+    private BigDecimal tempReturnInventoryNum;
+    private BigDecimal stepNum;
+    private BigDecimal dishQuantity;
     private boolean isGroupDish;
 
-    private List<TradeItem> childTradeItem;//套餐子菜
-
+    private List<TradeItem> childTradeItem;
     public InventoryItem(TradeItem tradeItem) {
         this.tradeItem = tradeItem;
         initData();
@@ -116,8 +106,7 @@ public class InventoryItem implements Serializable {
         }
         returnInventoryNum = maxInventoryNum;
         if (stepNum == null) {
-            //在内存中拿去
-            DishShop dishShop = DishCache.getDishHolder().get(tradeItem.getSkuUuid());
+                        DishShop dishShop = DishCache.getDishHolder().get(tradeItem.getSkuUuid());
             if (dishShop != null && dishShop.getStepNum() != null) {
                 stepNum = dishShop.getStepNum();
             } else {

@@ -4,57 +4,37 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.BasicEntityBase;
 
-/**
- * TradeDealSettingItem is a ORMLite bean type. Corresponds to the database table "trade_deal_setting_item"
- */
+
 @DatabaseTable(tableName = "trade_deal_setting_item")
 public class TradeDealSettingItem extends BasicEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_deal_setting_item"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * end_time
-         */
+
         public static final String endTime = "end_time";
 
-        /**
-         * order_num
-         */
+
         public static final String orderNum = "order_num";
 
-        /**
-         * setting_id
-         */
+
         public static final String settingId = "setting_id";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * start_time
-         */
+
         public static final String startTime = "start_time";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
     }

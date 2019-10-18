@@ -6,9 +6,7 @@ import android.os.Bundle;
 import com.zhongmei.yunfu.util.Checks;
 import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class AbstractMVPBaseDialogFragment<V extends IBaseView, P extends IBasePresenter<V>> extends BasicDialogFragment implements IBaseView {
     private static final String TAG = AbstractMVPBaseDialogFragment.class.getSimpleName();

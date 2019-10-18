@@ -99,11 +99,7 @@ public class ChoiceSeatDialogFragment extends CommonDialogFragment implements Ad
 
     @Override
     public void onClick(View view) {
-        /*switch (view.getId()) {
-            case R.id.ib_close:
-                dismiss();
-                break;
-        }*/
+
         super.onClick(view);
     }
 }

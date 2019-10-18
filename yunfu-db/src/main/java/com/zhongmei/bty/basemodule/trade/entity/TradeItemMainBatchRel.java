@@ -6,33 +6,7 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- * CREATE TABLE `trade_item_main_batch_rel` (
- * `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '服务端自增ID',
- * `main_item_id` bigint(20) NOT NULL COMMENT '主单关联的菜品ID',
- * `main_item_uuid` varchar(32) NOT NULL COMMENT '主单菜品的UUID',
- * `sub_item_Id` bigint(20) DEFAULT NULL COMMENT '子单菜品ID',
- * `sub_item_uuid` varchar(32) DEFAULT NULL COMMENT '子单菜品UUID',
- * `main_trade_id` bigint(20) NOT NULL COMMENT '主单ID',
- * `sub_trade_id` bigint(20) NOT NULL COMMENT '子单ID',
- * `parent_item_id` bigint(20) DEFAULT NULL COMMENT '商品是组合明细时，指向该明细的组合商品(即指向套餐主餐)',
- * `parent_item_uuid` varchar(32) DEFAULT NULL COMMENT '指向父记录的uuid，如果是子菜才有值，单菜此字段为空',
- * `relate_item_id` bigint(20) DEFAULT NULL COMMENT '当此记录是修改其他品项而来时记录被修改的品项ID',
- * `relate_item_uuid` varchar(32) DEFAULT NULL COMMENT '当此记录是修改其他品项而来时记录被修改的品项UUID',
- * `trade_table_id` bigint(20) DEFAULT NULL COMMENT '桌台ID',
- * `status_flag` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:VALID:有效的 2: INVALID: 无效的',
- * `server_create_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '服务端创建时间',
- * `server_update_time` timestamp(3) NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '服务端最后修改时间',
- * `brand_identy` bigint(20) NOT NULL COMMENT '品牌标识',
- * `shop_identy` bigint(20) NOT NULL COMMENT '门店标识',
- * `trade_item_num` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '菜品数量',
- * PRIMARY KEY (`id`),
- * KEY `idx_brand_identy_shop_identy` (`brand_identy`,`shop_identy`) USING BTREE,
- * KEY `idx_shop_identy_server_update_time` (`shop_identy`,`server_update_time`) USING BTREE,
- * KEY `idx_main_trade_id` (`main_trade_id`) USING BTREE
- * ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='联台菜品批次关系表'
- */
+
 
 @DatabaseTable(tableName = "trade_item_main_batch_rel")
 public class TradeItemMainBatchRel extends BasicEntityBase {
@@ -198,9 +172,7 @@ public class TradeItemMainBatchRel extends BasicEntityBase {
         this.relateItemUuid = relateItemUuid;
     }
 
-    /**
-     * 子单中主单批量菜拆出时，信息改变
-     */
+
     public void initSplitState() {
         setId(null);
         setSubItemId(null);

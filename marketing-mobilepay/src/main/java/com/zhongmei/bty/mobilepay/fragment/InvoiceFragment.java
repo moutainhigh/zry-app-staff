@@ -43,10 +43,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 电子发票的弹出层Fragment,主要负责电子发票的增加、删除、编辑等功能
- * Created by demo on 2018/12/15
- */
+
 
 public class InvoiceFragment extends BasicDialogFragment implements View.OnClickListener {
     private final static String TAG = "tag_invoice";
@@ -62,8 +59,7 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
     private TextView previewTitleTotalTxv;
     private ImageButton previewTitleDeleteIBtn;
     private RelativeLayout addTitleRlyt;
-    // private TextView addTitleAmountTxv;
-    private LinearLayout previewContentLlyt;
+        private LinearLayout previewContentLlyt;
     private ExpandPlusListView previewContentLv;
     private InvoiceView previewContentInvoiceView;
     private LinearLayout previewContentAddBtn;
@@ -88,32 +84,16 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
 
     private InvoiceAdapter invoiceAdapter;
 
-    /**
-     * 回传发票数据接口
-     */
+
     public interface Callback {
 
-        /**
-         * 回调函数
-         *
-         * @param flag             true：确定开票；false：取消开票
-         * @param invoiceQrcodeReq
-         * @param tradeVo
-         */
+
         void callback(boolean flag, InvoiceQrcodeReq invoiceQrcodeReq, TradeVo tradeVo);
 
 
     }
 
-    /**
-     * 显示电子发票的Dialog(Fragment)
-     *
-     * @param fragmentManager     {@link FragmentManager}
-     * @param tradeVo             {@link TradeVo}
-     * @param electronicInvoiceVo {@link ElectronicInvoiceVo}
-     * @param callback            {@link Callback}
-     * @see #show(FragmentManager, TradeVo, ElectronicInvoiceVo, BigDecimal, Callback)
-     */
+
     @Deprecated
     public static void show(FragmentManager fragmentManager,
                             TradeVo tradeVo,
@@ -128,15 +108,7 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
         show(fragmentManager, tradeVo, electronicInvoiceVo, actualAmount, callback);
     }
 
-    /**
-     * 显示电子发票的Dialog(Fragment)
-     *
-     * @param fragmentManager     {@link FragmentManager}
-     * @param tradeVo             {@link TradeVo}
-     * @param electronicInvoiceVo {@link ElectronicInvoiceVo}
-     * @param actualAmount        订单实付金额
-     * @param callback            {@link Callback}
-     */
+
     public static void show(FragmentManager fragmentManager,
                             TradeVo tradeVo,
                             ElectronicInvoiceVo electronicInvoiceVo,
@@ -181,8 +153,7 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
         previewTitleTotalTxv = ViewFinder.findViewById(view, R.id.fragment_invoice_title_preview_total);
         previewTitleDeleteIBtn = ViewFinder.findViewById(view, R.id.fragment_invoice_title_preview_delete);
         addTitleRlyt = ViewFinder.findViewById(view, R.id.fragment_invoice_title_add);
-        // addTitleAmountTxv = ViewFinder.findViewById(view, R.id.fragment_invoice_title_add_content);
-        previewContentLlyt = ViewFinder.findViewById(view, R.id.fragment_invoice_content_preview);
+                previewContentLlyt = ViewFinder.findViewById(view, R.id.fragment_invoice_content_preview);
         previewContentLv = ViewFinder.findViewById(view, R.id.fragment_invoice_content_preview_list);
         previewContentInvoiceView = ViewFinder.findViewById(view, R.id.fragment_invoice_content_preview_invoice);
         previewContentAddBtn = ViewFinder.findViewById(view, R.id.fragment_invoice_content_preview_add);
@@ -228,7 +199,6 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
 
             @Override
             public void onBackPressed() {
-//                super.onBackPressed();
                 previewTitleDeleteIBtn.performClick();
             }
         };
@@ -298,11 +268,7 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
         }
     }
 
-    /**
-     * 新增一条发票
-     *
-     * @param invoice
-     */
+
     private void addNewInvoice(Invoice invoice) {
         if (invoice == null) {
             return;
@@ -320,13 +286,7 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
         this.callback = callback;
     }
 
-    /**
-     * 设置当前显示的模式
-     *
-     * @param model 显示的model.
-     * @see #SCHEMA_PREVIEW
-     * @see #SCHEMA_ADD
-     */
+
     private void setCurrentSchema(int model, boolean animationEable) {
         if (currentSchema == model) {
             return;
@@ -344,11 +304,7 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
         }
     }
 
-    /**
-     * 使当前成为{@link #SCHEMA_PREVIEW}模式
-     *
-     * @param animationEnable 是否有过渡动画
-     */
+
     private void makePreviewSchema(boolean animationEnable) {
         if (animationEnable) {
             previewTitleRlyt.startAnimation(alphaInAnimation);
@@ -363,11 +319,7 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
         addContentLlyt.setVisibility(View.GONE);
     }
 
-    /**
-     * 使当前成为{@link #SCHEMA_ADD}模式
-     *
-     * @param animationEnable 是否有过渡动画
-     */
+
     private void makeAddSchema(boolean animationEnable) {
         if (animationEnable) {
             previewTitleRlyt.startAnimation(alphaOutAnimation);
@@ -398,12 +350,6 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
             String actualAmountStr = null;
             String totalAmountStr;
 
-//            Trade trade;
-//            BigDecimal tradeAmount = null;
-//            if (tradeVo != null && (trade = tradeVo.getTrade()) != null
-//                    && (tradeAmount = trade.getTradeAmount()) != null) {
-//                actualAmountStr = tradeAmount.toString();
-//            }
 
             actualAmountStr = actualAmount.toString();
 
@@ -455,20 +401,14 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
         return totalAmount;
     }
 
-    /**
-     * 创建电子发票获取开票二维码请求
-     *
-     * @param invoiceList
-     * @return
-     */
+
     private InvoiceQrcodeReq createInvoiceQrcodeReq(List<Invoice> invoiceList) {
         BigDecimal totalAmount = BigDecimal.ZERO;
         List<InvoiceQrcodeReq.GoodsInfo> goods = new ArrayList<InvoiceQrcodeReq.GoodsInfo>();
         for (Invoice invoice : invoiceList) {
             InvoiceQrcodeReq.GoodsInfo goodsInfo = createInvoiceItem(invoice);
             goods.add(goodsInfo);
-            //计算总金额
-            totalAmount = totalAmount.add(goodsInfo.getAmount());
+                        totalAmount = totalAmount.add(goodsInfo.getAmount());
         }
         InvoiceQrcodeReq invoiceQrcodeReq = new InvoiceQrcodeReq();
         invoiceQrcodeReq.setGoods(goods);
@@ -492,12 +432,7 @@ public class InvoiceFragment extends BasicDialogFragment implements View.OnClick
         return invoiceQrcodeReq;
     }
 
-    /**
-     * 电子发表明细
-     *
-     * @param invoice invoice
-     * @return
-     */
+
     private InvoiceQrcodeReq.GoodsInfo createInvoiceItem(Invoice invoice) {
         InvoiceQrcodeReq.GoodsInfo goodsInfo = new InvoiceQrcodeReq().new GoodsInfo();
         goodsInfo.setGoodsName(invoice.getInvoiceTaxRate().getInvoiceName());

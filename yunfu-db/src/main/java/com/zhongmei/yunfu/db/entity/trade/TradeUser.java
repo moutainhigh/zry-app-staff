@@ -6,18 +6,13 @@ import com.zhongmei.yunfu.db.enums.TradeScenceType;
 import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * 保存订单销售员数据
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "trade_user")
 public class TradeUser extends BasicEntityBase {
     private static final long serialVersionUID = 1L;
 
     public interface $ extends BasicEntityBase.$ {
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
         public static final String tradeItemUuid = "trade_item_uuid";
         public static final String tradeItemId = "trade_item_id";
@@ -39,8 +34,7 @@ public class TradeUser extends BasicEntityBase {
     private String userName;
 
     @DatabaseField(columnName = "type")
-    private Integer type;//类型，1 售服务 2售卡  3储值',
-
+    private Integer type;
     @DatabaseField(columnName = "role_id")
     private Long roleId;
 
@@ -54,10 +48,8 @@ public class TradeUser extends BasicEntityBase {
     private String tradeItemUuid;
 
     @DatabaseField(columnName = "is_assign")
-    private boolean IsAssign;//是否为指定
-
-    //仅供本地使用，来判断是否相等
-    private String uuid;
+    private boolean IsAssign;
+        private String uuid;
 
     public Long getTradeId() {
         return tradeId;

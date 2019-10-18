@@ -10,10 +10,7 @@ import com.zhongmei.beauty.enums.BeautyListType;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 美业预定vo对象
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyBookingVo implements Serializable {
 
@@ -26,8 +23,7 @@ public class BeautyBookingVo implements Serializable {
     private List<BookingTradeItemProperty> bookingTradeItemProperties;
     private List<BookingTradeItemUser> bookingTradeItemUsers;
 
-    //接口类型
-    private BeautyListType interfaceType;
+        private BeautyListType interfaceType;
 
     public Booking getBooking() {
         return booking;

@@ -1,8 +1,6 @@
 package com.zhongmei.bty.offline.backup.backup4qs;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class QSBackup {
 
     private static IQSBackup qsBackup;
@@ -23,11 +21,7 @@ public class QSBackup {
         }
     }
 
-    /**
-     * 离线数据是否上传完成,阻塞线程
-     *
-     * @return
-     */
+
     public static boolean isUploadFinish() {
         return qsBackup.isUploadFinish();
     }

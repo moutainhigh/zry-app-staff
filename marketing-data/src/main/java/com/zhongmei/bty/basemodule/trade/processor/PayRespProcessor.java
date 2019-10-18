@@ -23,10 +23,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- * 保存V3收银结果
- */
+
 
 public class PayRespProcessor extends OpsRequest.SaveDatabaseResponseProcessor<PayResp> {
 
@@ -49,10 +46,7 @@ public class PayRespProcessor extends OpsRequest.SaveDatabaseResponseProcessor<P
                 DBHelperManager.saveEntities(helper, PaymentItemExtra.class, resp.getPaymentItemExtras());
                 DBHelperManager.saveEntities(helper, TradeStatusLog.class, resp.getTradeStatusLogs());
                 DBHelperManager.saveEntities(helper, PrintOperation.class, resp.getPrintOperations());
-                DBHelperManager.saveEntities(helper, PaymentItemUnionpay.class, resp.getPaymentItemUnionpays());//add 20170313
-                DBHelperManager.saveEntities(helper, TradeDepositPayRelation.class, resp.getTradeDepositPayRelations());//add 20170707
-                DBHelperManager.saveEntities(helper, PaymentItemGrouponDish.class, resp.getPaymentItemGrouponDishes());//add 20171122
-                savePriveleResult(helper, resp.getTradePrivilegeResults());
+                DBHelperManager.saveEntities(helper, PaymentItemUnionpay.class, resp.getPaymentItemUnionpays());                DBHelperManager.saveEntities(helper, TradeDepositPayRelation.class, resp.getTradeDepositPayRelations());                DBHelperManager.saveEntities(helper, PaymentItemGrouponDish.class, resp.getPaymentItemGrouponDishes());                savePriveleResult(helper, resp.getTradePrivilegeResults());
                 return null;
             }
         };

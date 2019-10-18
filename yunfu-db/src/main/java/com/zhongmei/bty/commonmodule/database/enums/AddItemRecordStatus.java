@@ -2,32 +2,20 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 加菜记录处理状态
- */
+
 public enum AddItemRecordStatus implements ValueEnum<Integer> {
 
-    /**
-     * 未处理
-     */
+
     UNDEAL(1),
 
-    /**
-     * 已接受
-     */
+
     ACCEPTED(2),
 
-    /**
-     * 已拒绝
-     */
+
     REFUSED(3),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

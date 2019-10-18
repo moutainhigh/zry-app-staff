@@ -1,6 +1,4 @@
-/*
- * Copyright (c) 2017. Xi'an iRain IOT Technology service CO., Ltd (ShenZhen). All Rights Reserved.
- */
+
 package com.zhongmei.beauty.booking.groundrecycleradapter;
 
 import android.support.v7.widget.RecyclerView;
@@ -10,15 +8,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 分组的RecyclerViewAdapter
- *
- * @param <G>   Group类型
- * @param <GVH> ViewHolder of the group
- * @param <CVH> ViewHolder of the child
- * @version 2018-4-28 0.2.1
- * @since 2017-04-28 0.1
- */
+
 public abstract class GroupRecyclerAdapter<G, GVH extends RecyclerView.ViewHolder, CVH extends RecyclerView.ViewHolder>
         extends RecyclerView.Adapter {
 

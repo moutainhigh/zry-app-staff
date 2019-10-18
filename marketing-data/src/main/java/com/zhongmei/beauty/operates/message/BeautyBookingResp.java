@@ -9,11 +9,7 @@ import com.zhongmei.beauty.entity.BookingTradeItemUser;
 
 import java.util.List;
 
-/**
- * 预定响应
- *
- * @date 2018/7/23
- */
+
 public class BeautyBookingResp extends Booking{
 
     public Booking booking;

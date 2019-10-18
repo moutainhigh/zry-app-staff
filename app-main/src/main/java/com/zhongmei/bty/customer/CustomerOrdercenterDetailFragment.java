@@ -85,12 +85,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @Date：2016年3月14日 @Description:订单详情
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @EFragment(R.layout.customer_ordercenter_detail)
 public class CustomerOrdercenterDetailFragment extends BasicFragment {
     public static final String TAG = CustomerOrdercenterDetailFragment.class.getName();
@@ -105,35 +100,25 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
     ListView orderDetailList;
 
     @ViewById(R.id.left_tab_rl)
-    RelativeLayout leftTabRL;// 左边tab
-
+    RelativeLayout leftTabRL;
     @ViewById(R.id.left_tab_tv)
-    TextView leftTabTv;// 左边tab文字
-
+    TextView leftTabTv;
     @ViewById(R.id.left_tab_line)
-    View leftTabLine;// 左边tab指示线
-
+    View leftTabLine;
     @ViewById(R.id.middle_tab_rl)
-    RelativeLayout middleTabRL;// 中间tab
-
+    RelativeLayout middleTabRL;
     @ViewById(R.id.middle_tab_tv)
-    TextView middleTabTv;// 中间tab文字
-
+    TextView middleTabTv;
     @ViewById(R.id.middle_tab_line)
-    View middleTabLine;// 中间tab指示线
-
+    View middleTabLine;
     @ViewById(R.id.right_tab_rl)
-    RelativeLayout rightTabRL;// 右边tab
-
+    RelativeLayout rightTabRL;
     @ViewById(R.id.right_tab_tv)
-    TextView rightTabTv;// 右边tab文字
-
+    TextView rightTabTv;
     @ViewById(R.id.right_tab_line)
-    View rightTablLine;// 右边tab指示线
-
+    View rightTablLine;
     @ViewById(R.id.table_head_ll)
-    LinearLayout tableHeadLL;// 表头
-
+    LinearLayout tableHeadLL;
     @ViewById(R.id.head)
     ImageView headIv;
 
@@ -156,17 +141,13 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
     LinearLayout operateLL;
 
     @ViewById(R.id.refund_btn)
-    Button refundBtn;// 退货
-
+    Button refundBtn;
     @ViewById(R.id.print_btn)
-    Button printBtn;// 打印
-
+    Button printBtn;
     @ViewById(R.id.recision_btn)
-    Button recisionBtn;// 作废
-
+    Button recisionBtn;
     @ViewById(R.id.cancel_btn)
-    Button cancel_btn;// 取消按钮
-
+    Button cancel_btn;
     @ViewById(R.id.select_head_ll)
     LinearLayout selcetHeadLL;
 
@@ -177,8 +158,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
     TextView checkNumberTv;
 
     @ViewById(R.id.customer_memeber_tile)
-    LinearLayout customerMemberTitle;// 选项栏
-
+    LinearLayout customerMemberTitle;
     @ViewById(R.id.customer_entity_card_change_info_ll)
     LinearLayout llCustomerEntityCardChangeInfo;
 
@@ -199,38 +179,26 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
 
     private CustomerOrdercenterDetaillAdapter adapter;
 
-    private List<CustomerOrdercenterDetailCommonBean> leftCommonBeans;// 左tab数据
+    private List<CustomerOrdercenterDetailCommonBean> leftCommonBeans;
 
-    //private EntityCardChangeDetailBean middleBean;//中间tab数据(目前仅换卡存在中间tab)
 
-    //private List<CardSellCardsDetail> rightCardBeans;// 售卡数据
-
-    private List<CustomerOrdercenterDetailCommonBean> rightCommonBeans; // 右tab数据
-
+    private List<CustomerOrdercenterDetailCommonBean> rightCommonBeans;
     private List<CustomerOrdercenterDetailCommonBean> extraCommonBeans;
 
-    private int currentTabId = R.id.left_tab_rl;//当前选中的分栏Id
-
-    private WindowToken windowToken;// 属于哪个标题tab
-
-    private OrderCategory orderCategory;// 订单类别
-
-    private EntityCardType entityCardType; //实体卡类别
-
-    private boolean isCheckMode = false;// 是否是选择模式
-
-    private Trade currentTrade;// 保存当前订单信息（售卡记录详情）
-
+    private int currentTabId = R.id.left_tab_rl;
+    private WindowToken windowToken;
+    private OrderCategory orderCategory;
+    private EntityCardType entityCardType;
+    private boolean isCheckMode = false;
+    private Trade currentTrade;
     private CustomerOrderBean mOrderBean;
 
     private ReturnCardDataModel mReturnCardDataModel;
 
     private TradeOperates mTradeOperate;
 
-    private CustomerSellcardDetailResp sellcardDetailResp;// 售卡订单详情数据
-
-    private PaymentAndMemberResp paymentAndMemberResp;// 会员储值或者实体储值详情数据
-
+    private CustomerSellcardDetailResp sellcardDetailResp;
+    private PaymentAndMemberResp paymentAndMemberResp;
     @AfterViews
     protected void initView() {
         setupView();
@@ -266,50 +234,13 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         } else if (R.id.middle_tab_rl == tabId) {
             orderDetailList.setVisibility(View.GONE);
             llCustomerEntityCardChangeInfo.setVisibility(View.VISIBLE);
-            /*String orderNo = middleBean.getOrderNo();
-            if (TextUtils.isEmpty(orderNo)) {
-                tvOrderNo.setText(getString(R.string.customer_entity_card_change_info_order_no, ""));
-            } else {
-                tvOrderNo.setText(getString(R.string.customer_entity_card_change_info_order_no, middleBean.getOrderNo()));
-            }
 
-            String oldCardNo = middleBean.getOldCardNum();
-            if (TextUtils.isEmpty(oldCardNo)) {
-                tvOldCardNo.setText(getString(R.string.customer_entity_card_change_info_old_card_num, ""));
-            } else {
-                tvOldCardNo.setText(getString(R.string.customer_entity_card_change_info_old_card_num, middleBean.getOldCardNum()));
-            }
-
-            String oldCardStatus = middleBean.getOldCardStatus();
-            if (TextUtils.isEmpty(oldCardStatus)) {
-                tvOldCardStatus.setText(getString(R.string.customer_entity_card_change_info_old_card_status, ""));
-            } else {
-                tvOldCardStatus.setText(getString(R.string.customer_entity_card_change_info_old_card_status, middleBean.getOldCardStatus()));
-            }
-
-            String newCardNum = middleBean.getNewCardNum();
-            if (TextUtils.isEmpty(newCardNum)) {
-                tvNewCardNo.setText(getString(R.string.customer_entity_card_change_info_new_card_num, ""));
-            } else {
-                tvNewCardNo.setText(getString(R.string.customer_entity_card_change_info_new_card_num, middleBean.getNewCardNum()));
-            }
-
-            String newCardStatus = middleBean.getNewCardStatus();
-            if (TextUtils.isEmpty(newCardStatus)) {
-                tvNewCardStatus.setText(getString(R.string.customer_entity_card_change_info_new_card_status, ""));
-            } else {
-                tvNewCardStatus.setText(getString(R.string.customer_entity_card_change_info_new_card_status, middleBean.getNewCardStatus()));
-            }*/
         } else {
-            /*if (windowToken == WindowToken.CARD_SALE) {// 售卡详情
-                adapter = new CustomerOrdercenterDetaillAdapter(getActivity(), *//*rightCardBeans, CardSellCardsDetail.class*//*);
-            } else {*/
-            if (windowToken == WindowToken.MEMBER_STORE_VALUE) {// 会员储值
-                rightCommonBeans = filterMemberinfo(extraCommonBeans);
+
+            if (windowToken == WindowToken.MEMBER_STORE_VALUE) {                rightCommonBeans = filterMemberinfo(extraCommonBeans);
             }
             adapter = new CustomerOrdercenterDetaillAdapter(getActivity(), rightCommonBeans, CustomerOrdercenterDetailCommonBean.class);
-            //}
-            orderDetailList.setAdapter(adapter);
+                        orderDetailList.setAdapter(adapter);
             orderDetailList.setVisibility(View.VISIBLE);
             llCustomerEntityCardChangeInfo.setVisibility(View.GONE);
         }
@@ -333,8 +264,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         update(windowToken, currentTabId);
     }
 
-    //更新Tab
-    private void updateTab(int tabId) {
+        private void updateTab(int tabId) {
         currentTabId = tabId;
         if (R.id.right_tab_rl == tabId) {
             leftTabTv.setTextColor(getResources().getColor(R.color.customer_ordercenter_detail_tab_notchoose));
@@ -379,11 +309,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    /**
-     * @Date 2016年3月16日
-     * @Description: 获取售卡详情接口
-     * @Return void
-     */
+
     private void getCustomerSellCardDetailInfo(long tradeId) {
         CustomerSellcardDetailReq customerSellCardDetailReq = new CustomerSellcardDetailReq();
         Long userId = null;
@@ -430,11 +356,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
                 LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * 获取匿名实体卡销售详情
-     *
-     * @param tradeId
-     */
+
     private void getAnonymousEntityCardSellDetailInfo(Long tradeId) {
         CustomerOperates customerOperates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<CustomerSellcardDetailResp> listener = new ResponseListener<CustomerSellcardDetailResp>() {
@@ -478,12 +400,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         unregisterEventBus();
     }
 
-    /**
-     * @param event
-     * @Date 2016年3月16日
-     * @Description: 售卡记录点击事件接收
-     * @Return void
-     */
+
     public void onEventMainThread(final EventClickOrdercenterListItem event) {
         if (event.isEmpty) {
             mDetailFrame.setVisibility(View.GONE);
@@ -501,8 +418,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
 
         String[] tabStr = getResources().getStringArray(R.array.customer_ordercenter_detail_tab_text);
 
-        if (event.windowToken == WindowToken.CARD_SALE) {// 售卡详情
-            memberHeadInfo.setVisibility(View.GONE);
+        if (event.windowToken == WindowToken.CARD_SALE) {            memberHeadInfo.setVisibility(View.GONE);
             if (R.id.left_tab_rl == currentTabId || isCheckMode) {
                 tableHeadLL.setVisibility(View.GONE);
             } else {
@@ -595,31 +511,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         selcetHeadLL.setVisibility(View.GONE);
         customerMemberTitle.setVisibility(View.VISIBLE);
 
-			/*if (event.windowToken == WindowToken.CARD_STORE_VALUE) {// 实体卡记录详情
-				if (event.orderBean != null) {
-                    final CustomerSellOrderBean bean = event.orderBean;
-                    getCardAccount(event.orderBean.getCardNo(), new ResponseListener<CardAccountResp>() {
-                        @Override
-                        public void onResponse(ResponseObject<CardAccountResp> response) {
-                            CardAccountResp.CardAccountItem result = response.getContent().getResult();
-                            bean.setCardType(ValueEnums.toEnum(EntityCardType.class, result.cardBaseInfo.cardType));
-                            bean.setRemainValue(result.cardStoreAccount.remainValue);
-                            bean.setIntegral(result.cardIntegralAccount.integral);
-                            bean.setCardKindKame(result.cardBaseInfo.cardKindName);
-                            bean.setCardStatus(result.cardBaseInfo.cardStatus);
-                            saveCardInfo(bean);
-                        }
 
-                        @Override
-                        public void onError(VolleyError error) {
-
-                        }
-                    });
-				}
-				rightTabTv.setText(tabStr[1]);
-			} else {// 会员储值详情
-				rightTabTv.setText(tabStr[2]);
-			}*/
 
         if (event.orderBean != null) {
             initalOperateToolBar();
@@ -637,8 +529,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    //刷新中间的Tab
-    private void refreshMiddleTab() {
+        private void refreshMiddleTab() {
         if (windowToken != null && WindowToken.ENTITY_CARD_CHANGE == windowToken) {
             middleTabRL.setVisibility(View.VISIBLE);
         } else {
@@ -646,11 +537,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    /**
-     * @Date 2016年3月17日
-     * @Description: 售卡记录详情数据转换
-     * @Return void
-     */
+
     void sellCardDetailResponseConvert(CustomerSellcardDetailResp response) {
 
         if (response.getTrades() != null) {
@@ -671,8 +558,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             bean.setName(getString(R.string.customer_order_center_receivable));
             bean.setValue(payment.getReceivableAmount().toString());
             leftCommonBeans.add(bean);
-            // 虚拟会员无显示问题
-            BusinessType type = null;
+                        BusinessType type = null;
             if (currentTrade != null) {
                 type = currentTrade.getBusinessType();
             }
@@ -684,13 +570,11 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             }
         }
 
-        // 支付明细
-        if (response.getPaymentItems() != null) {
+                if (response.getPaymentItems() != null) {
             for (PaymentItem item : response.getPaymentItems()) {
                 if (item.getPayStatus() == TradePayStatus.PAID || item.getPayStatus() == TradePayStatus.REFUNDED) {
                     bean = new CustomerOrdercenterDetailCommonBean();
-                    bean.setName(PaySettingCache.getPayModeNameByModeId(item.getPayModeId()) + "：");// 用paymodeid去缓存里取支付方式的名称
-                    bean.setValue(item.getUsefulAmount().toString());
+                    bean.setName(PaySettingCache.getPayModeNameByModeId(item.getPayModeId()) + "：");                    bean.setValue(item.getUsefulAmount().toString());
                     leftCommonBeans.add(bean);
                 }
 
@@ -704,48 +588,10 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             leftCommonBeans.add(bean);
         }
 
-        /*if (rightCardBeans == null) {
-            rightCardBeans = new ArrayList<CardSellCardsDetail>();
-        } else {
-            rightCardBeans.clear();
-        }
-        // 解析卡状态列表
-        List<CardInfo> cardInfos = response.getCardInfos();
-        // 解析卡号详情
-        List<CustomerSaleCardInfo> cardSaleInfos = response.getCardSaleInfos();
-        if (cardSaleInfos != null) {
-            int size = cardSaleInfos.size();
-            for (int i = 0; i < size; i++) {
-                CardSellCardsDetail sellCardsDetail = new CardSellCardsDetail();
-                sellCardsDetail.setSerialNumber(String.valueOf(i));
-                CustomerSaleCardInfo tempInfo = cardSaleInfos.get(i);
-                sellCardsDetail.setCardNumber(tempInfo.getCardNo());
-                sellCardsDetail.setCardCategory(tempInfo.getCardKind());
-                sellCardsDetail.setCardStatus(getCardStatus(tempInfo.getCardNo(), cardInfos));
-                sellCardsDetail.setSellPrice(String.valueOf(tempInfo.getCardCost()));
-                sellCardsDetail.setDealStatus(getDealStatus(tempInfo));
 
-                if (sellCardsDetail.getCardStatus().equals(getString(R.string.eccard_unactive))
-                        && response.getTrades().get(0).getTradePayStatus() == TradePayStatus.PAID) {// 可选
-                    sellCardsDetail.setSelctType(SelectType.NOT_SELECT);
-                } else {// 不可选
-                    sellCardsDetail.setSelctType(SelectType.SELECT_INVALIATE);
-                }
-
-                sellCardsDetail.setCardSaleInfo(tempInfo);
-                rightCardBeans.add(sellCardsDetail);
-            }
-
-        }*/
     }
 
-    /**
-     * @param cardSaleInfo
-     * @return
-     * @Date 2016年4月7日
-     * @Description: 解析卡交易状态
-     * @Return String
-     */
+
     private String getDealStatus(CustomerSaleCardInfo cardSaleInfo) {
         int cardStatus = cardSaleInfo.getCardStatus();
         String result = null;
@@ -762,13 +608,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
 
     }
 
-    /**
-     * @param paymentUuid
-     * @param memberId
-     * @Date 2016年3月23日
-     * @Description: 查询支付和会员信息
-     * @Return void
-     */
+
     private void queryPaymentAndMember(String paymentUuid, long memberId, final OnPaymentAndMemberCallback callback) {
         PaymentAndMemberReq req = new PaymentAndMemberReq();
         req.setPaymentUuid(paymentUuid);
@@ -787,13 +627,11 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
                     paymentAndMemberResp = response.getContent();
                     queryPaymentAndMemberResponseConvert(response.getContent());
 
-                    // 刷新head
-                    nameTv.setText(extraCommonBeans.get(0).getValue());
+                                        nameTv.setText(extraCommonBeans.get(0).getValue());
                     sexTv.setText(extraCommonBeans.get(1).getValue());
                     memberLevelTv.setText(extraCommonBeans.get(2).getValue());
 
-                    //下个级别为null时改提示
-                    if (TextUtils.isEmpty(extraCommonBeans.get(3).getValue())) {
+                                        if (TextUtils.isEmpty(extraCommonBeans.get(3).getValue())) {
                         growValueTv.setText(getString(R.string.customer_ordercenter_detail_reach_top_level));
                     } else {
                         growValueTv.setText(getString(R.string.customer_ordercenter_detail_memberinfo_growvalue,
@@ -836,11 +674,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         customerOperates.queryPaymentAndMember(req, LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * 根据paymentUuid查询支付信息
-     *
-     * @param paymentUuid
-     */
+
     private void queryPayment(String paymentUuid, final OnPaymentAndMemberCallback callback) {
         CustomerOperates customerOperates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<PaymentAndMemberResp> listener = new ResponseListener<PaymentAndMemberResp>() {
@@ -900,8 +734,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             bean.setName(getString(R.string.customer_order_center_receivable));
             bean.setValue(payment.getReceivableAmount().toString());
             leftCommonBeans.add(bean);
-            // 虚拟会员无显示问题
-            BusinessType type = null;
+                        BusinessType type = null;
             if (currentTrade != null) {
                 type = currentTrade.getBusinessType();
             }
@@ -913,13 +746,11 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             }
         }
 
-        // 支付明细
-        if (response.getPaymentItems() != null) {
+                if (response.getPaymentItems() != null) {
             for (PaymentItem item : response.getPaymentItems()) {
                 if (item.getPayStatus() == TradePayStatus.PAID || item.getPayStatus() == TradePayStatus.REFUNDED) {
                     bean = new CustomerOrdercenterDetailCommonBean();
-                    bean.setName(PaySettingCache.getPayModeNameByModeId(item.getPayModeId()) + "：");// 用paymodeid去缓存里取支付方式的名称
-                    bean.setValue(item.getUsefulAmount().toString());
+                    bean.setName(PaySettingCache.getPayModeNameByModeId(item.getPayModeId()) + "：");                    bean.setValue(item.getUsefulAmount().toString());
                     leftCommonBeans.add(bean);
                 }
 
@@ -933,8 +764,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             leftCommonBeans.add(bean);
         }
 
-        // 解析额外的会员信息
-        if (response.getMembers() != null) {
+                if (response.getMembers() != null) {
             if (extraCommonBeans == null) {
                 extraCommonBeans = new ArrayList<CustomerOrdercenterDetailCommonBean>();
             } else {
@@ -949,8 +779,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
 
             tempBean = new CustomerOrdercenterDetailCommonBean();
             tempBean.setName("sex");
-            if (member.getSex() == null) {//modify by zhubo 2016-8-1解决空指针bug
-                tempBean.setValue(getString(R.string.gender_unknow));
+            if (member.getSex() == null) {                tempBean.setValue(getString(R.string.gender_unknow));
             } else if (member.getSex().equals("0")) {
                 tempBean.setValue(getString(R.string.lady));
             } else if (member.getSex().equals("1")) {
@@ -1008,12 +837,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
 
     }
 
-    /**
-     * @param orderBean
-     * @Date 2016年3月22日
-     * @Description:实体卡储值需保存实体卡信息 (点击列表传过来)
-     * @Return void
-     */
+
     void saveCardInfo(CardAccountResp.CardAccountItem orderBean) {
         if (rightCommonBeans == null) {
             rightCommonBeans = new ArrayList<CustomerOrdercenterDetailCommonBean>();
@@ -1044,13 +868,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         rightCommonBeans.add(bean);
     }
 
-    /**
-     * @param inputBeans
-     * @return
-     * @Date 2016年3月23日
-     * @Description: 过滤会员信息，去除头部信息
-     * @Return List<CustomerOrdercenterDetailCommonBean>
-     */
+
     private List<CustomerOrdercenterDetailCommonBean> filterMemberinfo(
             List<CustomerOrdercenterDetailCommonBean> inputBeans) {
         if (inputBeans == null) {
@@ -1066,12 +884,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         return result;
     }
 
-    /**
-     * @param views
-     * @Date 2016年3月31日
-     * @Description: 展示操作按钮
-     * @Return void
-     */
+
     private void showOperateButtons(View... views) {
         int count = operateLL.getChildCount();
 
@@ -1090,8 +903,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
                     } else if (i == views.length - 1) {
                         views[i].setBackgroundResource(R.drawable.customer_create_order_btn);
                     } else {
-                        //TODO 需要一个中间颜色
-                    }
+                                            }
                     views[i].setVisibility(View.VISIBLE);
                 }
             }
@@ -1101,11 +913,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    /**
-     * @Date 2016年3月31日
-     * @Description: 根据界面和订单类别显示操作按钮
-     * @Return void
-     */
+
     private void initalOperateToolBar() {
         switch (orderCategory) {
             case NOT_PAYED:
@@ -1125,14 +933,8 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    //刷新未支付底部操作栏
-    private void refreshNotPayedOperateToolBar() {
-        /*if (WindowToken.ENTITY_CARD_CHANGE == windowToken
-                || (windowToken == WindowToken.CARD_STORE_VALUE && entityCardType == EntityCardType.ANONYMOUS_ENTITY_CARD)) {
-            showOperateButtons(new View[]{});
-        } else {
-            showOperateButtons(recisionBtn);
-        }*/
+        private void refreshNotPayedOperateToolBar() {
+
 
         if (windowToken == WindowToken.CARD_SALE && orderCategory == OrderCategory.NOT_PAYED && currentTrade != null) {
             showOperateButtons(recisionBtn);
@@ -1141,17 +943,14 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    //刷新已支付底部操作栏
-    private void refreshPayedOperateToolBar() {
+        private void refreshPayedOperateToolBar() {
         if (WindowToken.ENTITY_CARD_CHANGE == windowToken) {
             showOperateButtons(new View[]{});
         } else {
-            //已支付匿名实体卡销售或储值记录无法退货、打印
-            if (entityCardType == EntityCardType.ANONYMOUS_ENTITY_CARD) {
+                        if (entityCardType == EntityCardType.ANONYMOUS_ENTITY_CARD) {
                 showOperateButtons(printBtn);
             } else {
-                //实体卡储值已结账记录如果是消费数据则只显示打印按钮
-                if ((windowToken != null && windowToken == WindowToken.CARD_STORE_VALUE) && (mOrderBean != null && mOrderBean.getStoreType() != null
+                                if ((windowToken != null && windowToken == WindowToken.CARD_STORE_VALUE) && (mOrderBean != null && mOrderBean.getStoreType() != null
                         && mOrderBean.getStoreType() == 2)) {
                     showOperateButtons(printBtn);
                 } else {
@@ -1161,13 +960,11 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    //刷新已作废底部操作栏
-    private void refreshInvalidOperateToolBar() {
+        private void refreshInvalidOperateToolBar() {
         if (WindowToken.ENTITY_CARD_CHANGE == windowToken) {
             showOperateButtons(new View[]{});
         } else {
-            //已作废匿名实体卡销售或储值记录无法打印
-            if (entityCardType == EntityCardType.ANONYMOUS_ENTITY_CARD) {
+                        if (entityCardType == EntityCardType.ANONYMOUS_ENTITY_CARD) {
                 showOperateButtons(new View[]{});
             } else {
                 showOperateButtons(printBtn);
@@ -1175,8 +972,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    //刷新已退货底部操作栏
-    private void refreshRefundOperateToolBar() {
+        private void refreshRefundOperateToolBar() {
         if (WindowToken.ENTITY_CARD_CHANGE == windowToken) {
             showOperateButtons(new View[]{});
         } else {
@@ -1195,8 +991,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
                 if (ClickManager.getInstance().isClicked()) {
                     return;
                 }
-                if (windowToken == WindowToken.CARD_SALE && orderCategory == OrderCategory.PAYED) {// 售卡-已结账
-                    if (isCheckMode) {
+                if (windowToken == WindowToken.CARD_SALE && orderCategory == OrderCategory.PAYED) {                    if (isCheckMode) {
                         VerifyHelper.verifyAlert(getActivity(), CustomerApplication.PERMISSION_CUSTOMER_STORE_CANCEL,
                                 new VerifyHelper.Callback() {
                                     @Override
@@ -1282,20 +1077,10 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 实体卡票据补打
-     */
+
     private void doEntityCardTicketReprint() {
         if (entityCardType == EntityCardType.ANONYMOUS_ENTITY_CARD) {
-            /*if (windowToken == WindowToken.CARD_SALE) {
-                if (orderCategory == OrderCategory.PAYED) {
-                    PrintTool.printAnonyCardTicket(sellcardDetailResp, false);
-                } else if (orderCategory == OrderCategory.RETURNED) {
-                    PrintTool.printAnonyCardTicket(sellcardDetailResp, true);
-                }
-            } else if (windowToken == WindowToken.CARD_STORE_VALUE) {
-                PrintTool.printAnonyCardTicket(mOrderBean.getCardNo(), null, paymentAndMemberResp);
-            }*/
+
         } else {
             if (windowToken == WindowToken.MEMBER_STORE_VALUE || windowToken == WindowToken.CARD_STORE_VALUE) {
                 if (orderCategory == OrderCategory.PAYED) {
@@ -1309,9 +1094,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 实体卡销售记录作废
-     */
+
     private void doEntityCardSaleRecordRecision() {
         if (windowToken == WindowToken.CARD_SALE && orderCategory == OrderCategory.NOT_PAYED && currentTrade != null) {
             if (entityCardType == EntityCardType.ANONYMOUS_ENTITY_CARD) {
@@ -1322,12 +1105,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
     }
 
-    /**
-     * @Title: doReterMember
-     * @Description: 会员撤销
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void doReterMember() {
         showReasonDialog(new OperateListener() {
             @Override
@@ -1360,9 +1138,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }, "");
     }
 
-    /**
-     * @Description: 退卡处理
-     */
+
     private void doReturnCards(Reason reason, List<CustomerSaleCardInfo> selectedCards) {
         boolean isReturnAll = adapter.isRefundAll(selectedCards);
         mReturnCardDataModel.initData(selectedCards);
@@ -1374,8 +1150,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             @Override
             public void onResponse(ResponseObject<SalesCardReturnResp> response) {
                 try {
-                    // 退卡成功
-                    if (ResponseObject.isOk(response)) {
+                                        if (ResponseObject.isOk(response)) {
                         ToastUtil.showShortToast(getString(R.string.back_card_success));
                         EntityCardMananger.printSaleCard(response.getContent());
                         showCheckMode(false);
@@ -1392,8 +1167,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             @Override
             public void onError(VolleyError error) {
                 try {
-                    // 退卡出错
-                    ToastUtil.showShortToast(error.getMessage());
+                                        ToastUtil.showShortToast(error.getMessage());
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
                 }
@@ -1413,8 +1187,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         isCheckMode = show;
 
         selcetHeadLL.setVisibility(show ? View.VISIBLE : View.GONE);
-        //初始化checkbox显示，解决切换item时，初始化错误的bug
-        if (show) {
+                if (show) {
             allCheckBox.setChecked(false);
             checkNumberTv.setText(getString(R.string.customer_ordercenter_detail_checktip, "0"));
         } else {
@@ -1432,12 +1205,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
 
     }
 
-    /**
-     * @param tradeId
-     * @Date 2016年4月5日
-     * @Description: 售卡记录作废
-     * @Return void
-     */
+
     private void saleCardRecordInvaliate(long tradeId, long serverUpdateTime) {
         CustomerSaleCardInvalidReq req = new CustomerSaleCardInvalidReq();
         req.setTradeId(tradeId);
@@ -1466,11 +1234,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         customerOperates.saleCardRecordInvaliate(req, LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * 匿名实体卡销售记录作废
-     *
-     * @param tradeId 销售记录Trade Id
-     */
+
     private void anonymousEntityCardSaleRecordInvalid(Long tradeId) {
         CustomerOperates customerOperates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<CustomerSaleCardInvalidResp> listener = new ResponseListener<CustomerSaleCardInvalidResp>() {
@@ -1495,11 +1259,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         customerOperates.anonymousEntityCardSaleRecordInvalid(tradeId, LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * @Date 2016年4月5日
-     * @Description: 实体卡储值撤销
-     * @Return void
-     */
+
     private void cardStoreValueRevoke(Reason reason) {
         CustomerOperates customerOperates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<Object> listener = new ResponseListener<Object>() {
@@ -1523,11 +1283,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         customerOperates.cardStoreValueRevokeReq(mOrderBean, reason, LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * @Date 2016年4月5日
-     * @Description: 更新父界面UI
-     * @Return void
-     */
+
     public void updateParentFragment() {
         CustomerOrdercenterFragment parentFragment =
                 (CustomerOrdercenterFragment) getFragmentManager().findFragmentByTag("CustomerOrdercenterFragment");
@@ -1550,13 +1306,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         dialog.show(getFragmentManager(), tag);
     }
 
-    /**
-     * @param cardNumber
-     * @return
-     * @Date 2016年4月7日
-     * @Description: 通过卡号获取卡状态
-     * @Return String
-     */
+
     private String getCardStatus(String cardNumber, List<CardInfo> cardInfos) {
         String result = "";
         String cardStatusCode = "";
@@ -1647,10 +1397,8 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
         }
 
 
-        // 支付明细
-        List<PaymentItem> paymentItems = response.getPaymentItems();
-        BigDecimal actualAmount = BigDecimal.ZERO;//实付金额
-        if (paymentItems != null) {
+                List<PaymentItem> paymentItems = response.getPaymentItems();
+        BigDecimal actualAmount = BigDecimal.ZERO;        if (paymentItems != null) {
             bean = new CustomerOrdercenterDetailCommonBean();
             bean.setName(getString(R.string.customer_order_center_pay_mode));
 
@@ -1679,43 +1427,9 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
             leftCommonBeans.add(bean);
         }
 
-        /*if (rightCardBeans == null) {
-            rightCardBeans = new ArrayList<CardSellCardsDetail>();
-        } else {
-            rightCardBeans.clear();
-        }
 
-        // 解析卡状态列表
-        List<CardInfo> cardInfos = response.getCardInfos();
-        //转换中间tab数据，即换卡数据
-        middleBean = new EntityCardChangeDetailBean();
-        if (currentTrade != null) {
-            middleBean.setOrderNo(currentTrade.getTradeNo());
-        }
-        List<CardChangeInfo> cardChangeInfos = response.getCardChangeInfos();
-        if (Utils.isNotEmpty(cardChangeInfos)) {
-            //由于目前仅支持单张换卡，故此处仅取第一条数据即可
-            CardChangeInfo cardChangeInfo = cardChangeInfos.get(0);
-            middleBean.setOldCardNum(cardChangeInfo.getOldCardNum());
-            middleBean.setOldCardStatus(getCardStatus(cardChangeInfo.getOldCardNum(), cardInfos));
-            middleBean.setNewCardNum(cardChangeInfo.getNewCardNum());
-            middleBean.setNewCardStatus(getCardStatus(cardChangeInfo.getNewCardNum(), cardInfos));
-        }*/
 
-        //获取状态为激活的那张卡
-        /*if (Utils.isNotEmpty(cardInfos)) {
-            String activatedCardNum = "";
-            for (CardInfo cardInfo : cardInfos) {
-                if ("3".equals(cardInfo.getCardStatus()) && middleBean.getNewCardNum().equals(cardInfo.getCardNum())) {
-                    activatedCardNum = cardInfo.getCardNum();
-                    break;
-                }
-            }
 
-            if (!TextUtils.isEmpty(activatedCardNum)) {
-                getCardDetailInfo(activatedCardNum);
-            }
-        }*/
     }
 
     private void getCardDetailInfo(String cardNo) {
@@ -1770,10 +1484,7 @@ public class CustomerOrdercenterDetailFragment extends BasicFragment {
     }
 
     private CardSingleSearchByTransReq toCardSingleSearchByTransReq(String cardNo) {
-        /*CardSingleSearchByTransReq singleSearchReq = SearchCardDataModel
-                .createCardSingleSearchByTransReq(100, CardStatus.UNSELL, cardNo, EntityCardCommercialType.SELL_SHOP.value(),
-                        EntityCardType.CUSTOMER_ENTITY_CARD.value(), EntityCardType.GENERAL_CUSTOMER_CARD.value());
-        return singleSearchReq;*/
+
         return null;
     }
 }

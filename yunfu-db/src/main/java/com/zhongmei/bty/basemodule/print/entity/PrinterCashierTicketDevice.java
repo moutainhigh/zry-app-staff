@@ -11,16 +11,12 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.UuidEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * PrinterCashierTicketDevice is a ORMLite bean type. Corresponds to the database table "printer_cashier_ticket_device"
- */
+
 @DatabaseTable(tableName = "printer_cashier_ticket_device")
 public class PrinterCashierTicketDevice extends UuidEntityBase implements ICreator, IUpdator {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "printer_cashier_ticket_device"
-     */
+
     public interface $ extends UuidEntityBase.$ {
         public static final String statusFlag = "status_flag";
         public static final String brandIdenty = "brand_identy";

@@ -13,9 +13,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EBean
 public class ExtraOrderAdapter extends
         RecyclerViewBaseAdapter<String, ExtraOrderItemView> {

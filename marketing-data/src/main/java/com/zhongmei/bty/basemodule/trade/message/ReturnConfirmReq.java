@@ -3,9 +3,7 @@ package com.zhongmei.bty.basemodule.trade.message;
 import com.zhongmei.yunfu.db.enums.TradeReturnInfoReturnStatus;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * 封装饿了么退单确认的请求数据
- */
+
 public class ReturnConfirmReq {
     Long tradeId;
 

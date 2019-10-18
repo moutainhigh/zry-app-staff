@@ -2,17 +2,10 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- * 关账明细Item
- */
+
 
 public class DetailsKeyValue {
-    private String name; //显示名称
-    private String value; //显示的值
-    private BigDecimal count; //数量
-    private String unit; //单位
-
+    private String name;     private String value;     private BigDecimal count;     private String unit;
     public String getName() {
         return name;
     }

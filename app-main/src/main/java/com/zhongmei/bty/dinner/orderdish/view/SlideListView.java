@@ -19,18 +19,11 @@ import android.widget.Scroller;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.util.DensityUtil;
 
-/**
- * @Date：2015年11月18日 @Description:
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class SlideListView extends ListView {
     private static final String TAG = SlideListView.class.getSimpleName();
 
-    /**
-     * 当前滑动的ListView position
-     */
+
     private int slidePosition;
 
     private int downY;
@@ -47,14 +40,10 @@ public class SlideListView extends ListView {
 
     private VelocityTracker velocityTracker;
 
-    /**
-     * 是否响应滑动，默认为不响应
-     */
+
     private boolean isSlide = false;
 
-    /**
-     * 滑动的最小距离
-     */
+
     private int mTouchSlop;
 
     private RemoveListener mRemoveListener;
@@ -63,10 +52,8 @@ public class SlideListView extends ListView {
 
     private boolean enableSlide = false;
 
-    private boolean isSlideBegin = true;//是否是刚开始滑动
-
-    private boolean isSlideToRight = true;//开始滑动方向
-
+    private boolean isSlideBegin = true;
+    private boolean isSlideToRight = true;
     public enum RemoveDirection {
         RIGHT, LEFT;
     }
@@ -83,9 +70,7 @@ public class SlideListView extends ListView {
 
     public SlideListView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        // screenWidth =
-        // ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getWidth();
-        scroller = new Scroller(context);
+                        scroller = new Scroller(context);
         mTouchSlop = ViewConfiguration.get(getContext()).getScaledTouchSlop();
         screenWidth = DensityUtil.dip2px(context, 409);
     }
@@ -102,8 +87,7 @@ public class SlideListView extends ListView {
             case MotionEvent.ACTION_DOWN: {
                 addVelocityTracker(event);
 
-                // 假如scroller滚动还没有结束，直接返回
-                if (!scroller.isFinished()) {
+                                if (!scroller.isFinished()) {
                     return super.dispatchTouchEvent(event);
                 }
                 downX = (int) event.getX();
@@ -111,21 +95,18 @@ public class SlideListView extends ListView {
 
                 slidePosition = pointToPosition(downX, downY);
 
-                // 无效的position, 不做任何处理
-                if (slidePosition == AdapterView.INVALID_POSITION) {
+                                if (slidePosition == AdapterView.INVALID_POSITION) {
                     return super.dispatchTouchEvent(event);
                 }
 
-                // 获取点击的item view
-                itemView = getChildAt(slidePosition - getFirstVisiblePosition());
+                                itemView = getChildAt(slidePosition - getFirstVisiblePosition());
                 break;
             }
             case MotionEvent.ACTION_MOVE: {
                 if (enableSlide) {
                     if (Math.abs(getScrollVelocity()) > SNAP_VELOCITY || (Math.abs(event.getX() - downX) > mTouchSlop
                             && Math.abs(event.getY() - downY) < mTouchSlop)) {
-                        // isSlide = true;
-                        if (isSlideBegin) {
+                                                if (isSlideBegin) {
                             if (event.getX() > downX) {
                                 isSlideToRight = true;
                             } else {
@@ -134,8 +115,7 @@ public class SlideListView extends ListView {
                             setSlideLayout(true);
                             isSlideBegin = false;
                         }
-                        if (isSlideToRight) {//右滑
-                            Log.i(TAG,
+                        if (isSlideToRight) {                            Log.i(TAG,
                                     "滑动position:" + slidePosition + "getFirstVisiblePosition:" + getFirstVisiblePosition());
                             if (canItemViewSlide(slidePosition)) {
                                 Log.i(TAG, "item can slide");
@@ -158,8 +138,7 @@ public class SlideListView extends ListView {
             case MotionEvent.ACTION_UP:
                 setSlideLayout(false);
                 recycleVelocityTracker();
-                isSlideBegin = true;//初始化开始滑动状态
-                isSlideToRight = true;
+                isSlideBegin = true;                isSlideToRight = true;
                 break;
         }
 
@@ -220,8 +199,7 @@ public class SlideListView extends ListView {
                     int deltaX = downX - x;
                     downX = x;
 
-                    // deltaX大于0向左滚动，小于0向右滚
-                    itemView.scrollBy(deltaX, 0);
+                                        itemView.scrollBy(deltaX, 0);
                     break;
                 case MotionEvent.ACTION_UP:
                     int velocityX = getScrollVelocity();
@@ -245,15 +223,12 @@ public class SlideListView extends ListView {
 
     @Override
     public void computeScroll() {
-        // 调用startScroll的时候scroller.computeScrollOffset()返回true，
-        if (scroller.computeScrollOffset()) {
-            // 让ListView item根据当前的滚动偏移量进行滚动
-            itemView.scrollTo(scroller.getCurrX(), scroller.getCurrY());
+                if (scroller.computeScrollOffset()) {
+                        itemView.scrollTo(scroller.getCurrX(), scroller.getCurrY());
 
             postInvalidate();
 
-            // 滚动动画结束的时候调用回调接口
-            if (scroller.isFinished()) {
+                        if (scroller.isFinished()) {
                 if (mRemoveListener == null) {
                     throw new NullPointerException("RemoveListener is null, we should called setRemoveListener()");
                 }
@@ -289,12 +264,7 @@ public class SlideListView extends ListView {
         void removeItem(RemoveDirection direction, int position);
     }
 
-    /**
-     * @param position
-     * @Date 2015年11月19日
-     * @Description: 保存滑动item
-     * @Return void
-     */
+
     public void addSlideItems(int position) {
         if (slidePositionList == null) {
             slidePositionList = new ArrayList<Integer>();

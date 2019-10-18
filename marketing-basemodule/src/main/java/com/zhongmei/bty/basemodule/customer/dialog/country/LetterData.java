@@ -1,19 +1,12 @@
 package com.zhongmei.bty.basemodule.customer.dialog.country;
 
-/**
- * 存储letter相关的数据
- *
- * @date:2016年6月13日上午9:49:20
- */
+
 public class LetterData {
-    // 首字母的顺序
-    int section;
+        int section;
 
-    // 一个字母下有多少行
-    int lineNum;
+        int lineNum;
 
-    // 一个字母下有多少item
-    int count;
+        int count;
 
     public int getSection() {
         return section;

@@ -8,11 +8,7 @@ import com.zhongmei.yunfu.context.UILoadingController;
 
 import java.lang.ref.WeakReference;
 
-/**
- * @param <T>
- * @version: 1.0
- * @date 2015年4月19日
- */
+
 public class LoadingResponseListenerNew<T> extends EventResponseListener<T> implements ResponseListener<T> {
 
     private final ResponseListener<T> mListener;
@@ -28,8 +24,7 @@ public class LoadingResponseListenerNew<T> extends EventResponseListener<T> impl
     }
 
     public void showLoadingDialog() {
-		/*mDialogFragment = CalmLoadingDialogFragment.show(mFragmentManager);
-		mFragmentManager.executePendingTransactions();*/
+
         Context context = mFragmentManager.get();
         if (context instanceof UILoadingController) {
             ((UILoadingController) context).showLoadingDialog();
@@ -38,16 +33,14 @@ public class LoadingResponseListenerNew<T> extends EventResponseListener<T> impl
 
     @Deprecated
     public void showLoadingDialogByAllowingStateLoss() {
-		/*mDialogFragment = CalmLoadingDialogFragment.showByAllowingStateLoss(mFragmentManager);
-		mFragmentManager.executePendingTransactions();*/
+
         showLoadingDialog();
     }
 
     private void dismissLoadingDialog() {
         Context context = mFragmentManager.get();
         if (context instanceof UILoadingController) {
-            //CalmLoadingDialogFragment.hide(mDialogFragment);
-            ((UILoadingController) context).dismissLoadingDialog();
+                        ((UILoadingController) context).dismissLoadingDialog();
             mFragmentManager.clear();
         }
     }
@@ -64,14 +57,7 @@ public class LoadingResponseListenerNew<T> extends EventResponseListener<T> impl
         mListener.onError(error);
     }
 
-    /**
-     * 确保获取到一个LoadingResponseListener对象
-     * 如果指定的listener不是LoadingResponseListener则创建一个LoadingResponseListener并返回
-     *
-     * @param listener
-     * @param fragmentManager
-     * @return
-     */
+
     public static <T> ResponseListener<T> ensure(ResponseListener<T> listener, Context fragmentManager) {
         if (listener instanceof LoadingResponseListenerNew) {
             return listener;

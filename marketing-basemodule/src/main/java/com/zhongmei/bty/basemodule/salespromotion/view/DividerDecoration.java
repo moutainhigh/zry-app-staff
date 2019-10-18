@@ -12,9 +12,7 @@ import android.view.View;
 import com.zhongmei.yunfu.basemodule.R;
 import com.zhongmei.yunfu.util.DensityUtil;
 
-/**
 
- */
 public class DividerDecoration extends RecyclerView.ItemDecoration {
 
     public int mColor;

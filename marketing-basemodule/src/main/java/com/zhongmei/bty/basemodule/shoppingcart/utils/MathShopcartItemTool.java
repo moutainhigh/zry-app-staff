@@ -14,37 +14,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MathShopcartItemTool {
 
-    /**
-     * 只计算主单菜品的价格
-     *
-     * @param shopcartItemList
-     * @return
-     */
+
     public static void mathMainShopcartItemsAmount(TradeVo tradeVo, List<IShopcartItem> shopcartItemList) {
         mathShopcartItemsAmount(tradeVo, shopcartItemList, true);
     }
 
-    /**
-     * 只计算子单菜品的价格
-     *
-     * @param shopcartItemList
-     * @return
-     */
+
     public static void mathSubShopcartItemsAmount(TradeVo tradeVo, List<IShopcartItem> shopcartItemList) {
         mathShopcartItemsAmount(tradeVo, shopcartItemList, false);
     }
 
-    /**
-     * @param tradeVo
-     * @param shopcartItemList
-     * @param isMainTrade      是否是主单
-     */
+
     private static void mathShopcartItemsAmount(TradeVo tradeVo, List<IShopcartItem> shopcartItemList, boolean isMainTrade) {
         BigDecimal totalAmount = BigDecimal.ZERO;
         BigDecimal saleAmount = BigDecimal.ZERO;
@@ -84,12 +68,7 @@ public class MathShopcartItemTool {
         trade.validateUpdate();
     }
 
-    /**
-     * 主单的shopcartItem是否参与计算
-     *
-     * @param item
-     * @return
-     */
+
     private static boolean isMainTradeItemCanMath(IShopcartItem item) {
         if (item.getStatusFlag() == StatusFlag.VALID && item.getShopcartItemType() == ShopcartItemType.MAINBATCH) {
             return true;
@@ -98,12 +77,7 @@ public class MathShopcartItemTool {
     }
 
 
-    /**
-     * 子单中的shopcarItem是否参与计算
-     *
-     * @param item
-     * @return
-     */
+
     private static boolean isSubTradeItemCanMath(IShopcartItem item) {
         if (!item.isGroupDish() && (item.getStatusFlag() == StatusFlag.VALID && (item.getShopcartItemType() == ShopcartItemType.SUB || item.getShopcartItemType() == ShopcartItemType.SUBBATCHMODIFY))) {
             return true;

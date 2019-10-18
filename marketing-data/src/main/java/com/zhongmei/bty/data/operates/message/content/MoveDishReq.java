@@ -16,21 +16,14 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class MoveDishReq {
 
     private final static String TAG = MoveDishReq.class.getName();
-    //补充
-    private Integer actionType;//1：移菜  2：复制菜品
-    private Integer moveAdd;//1：移动属性 2：不移动属性
-
+        private Integer actionType;    private Integer moveAdd;
     private Source source;
     private Target target;
-    private Long updatorId;//最后修改此记录的用户
-    private String updatorName;//最后修改者姓名
-
+    private Long updatorId;    private String updatorName;
     public MoveDishReq(Source source, Target target, Long updatorId, String updatorName, Integer actionType, Integer moveAdd) {
         this.source = source;
         this.target = target;

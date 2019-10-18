@@ -8,9 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class Auth implements IAuth {
 
@@ -37,7 +35,6 @@ public abstract class Auth implements IAuth {
             } else {
                 Map<String, String> detail = resource.detail;
                 for (Map.Entry<String, String> entry : detail.entrySet()) {
-//                    boolean access = filter.access(entry.getKey(), entry.getValue());
                     boolean access = filter.access(entry.getValue(), entry.getKey());
                     if (access) {
                         return true;
@@ -45,7 +42,7 @@ public abstract class Auth implements IAuth {
                 }
             }
         }
-        return false /*false*/;
+        return false ;
     }
 
     public final String getAuthDetail(String authCode) {

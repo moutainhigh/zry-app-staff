@@ -60,9 +60,7 @@ public class BeautyVerifyCodeView extends LinearLayout {
 
     }
 
-    /**
-     * 检查卷码
-     */
+
     private void checkCode(){
         String couponCode=et_code.getText().toString().trim();
 
@@ -71,28 +69,18 @@ public class BeautyVerifyCodeView extends LinearLayout {
             return;
         }
 
-//       不验证长度的原因，怕后期长度更改
-//        if(couponCode.length()!=6){
-//            ToastUtil.showShortToast("请输入正确的券码！");
-//            return;
-//        }
 
         checkCode(couponCode);
     }
 
-    /**
-     * 根据券码获取活动详情
-     * @param code
-     */
+
     private void checkCode(String code){
-        //网络请求
-        YFResponseListener listener=new YFResponseListener<YFResponse<BeautyActivityBuyRecordResp>>(){
+                YFResponseListener listener=new YFResponseListener<YFResponse<BeautyActivityBuyRecordResp>>(){
 
             @Override
             public void onResponse(YFResponse<BeautyActivityBuyRecordResp> response) {
                 if(response.isOk()){
-                    //需要将活动加入到购物车
-                    addActivityToCart(response.getContent());
+                                        addActivityToCart(response.getContent());
                 }else{
                     ToastUtil.showShortToast(response.getMessage());
                 }
@@ -109,10 +97,7 @@ public class BeautyVerifyCodeView extends LinearLayout {
         beautyOperate.getActivityByCode(code, LoadingYFResponseListener.ensure(listener,mFragmentManager));
     }
 
-    /**
-     * 添加活动到购物车
-     * @param activity
-     */
+
     private void addActivityToCart(BeautyActivityBuyRecordResp activity){
         if(activity==null){
             ToastUtil.showShortToast(R.string.obtain_no_coupons);

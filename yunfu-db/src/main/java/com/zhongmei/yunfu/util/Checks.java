@@ -2,11 +2,7 @@ package com.zhongmei.yunfu.util;
 
 import java.util.Collection;
 
-/**
- *
 
- *
- */
 public final class Checks {
 
     private Checks() {

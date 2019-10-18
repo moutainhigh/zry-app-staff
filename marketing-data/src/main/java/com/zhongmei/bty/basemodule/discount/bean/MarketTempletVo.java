@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MarketTempletVo implements java.io.Serializable {
-    /**
-     * @date：2016-5-20 下午1:40:39
-     * @Description:TODO
-     */
+
     private static final long serialVersionUID = 1L;
 
     private MemberPriceTemplet templet;
@@ -33,8 +30,7 @@ public class MarketTempletVo implements java.io.Serializable {
         return templet;
     }
 
-    // 判断是否存在某个菜品
-    public boolean isContainsDish(Long brandDishId) {
+        public boolean isContainsDish(Long brandDishId) {
         if (memberDishMap != null) {
             return memberDishMap.containsKey(brandDishId);
         } else {

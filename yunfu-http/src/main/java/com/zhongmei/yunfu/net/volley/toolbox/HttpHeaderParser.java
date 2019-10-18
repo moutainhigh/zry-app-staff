@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2011 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.zhongmei.yunfu.net.volley.toolbox;
 
@@ -25,18 +11,10 @@ import org.apache.http.protocol.HTTP;
 
 import java.util.Map;
 
-/**
- * Utility methods for parsing HTTP headers.
- */
+
 public class HttpHeaderParser {
 
-    /**
-     * Extracts a {@link Cache.Entry} from a {@link NetworkResponse}.
-     *
-     * @param response The network response to parse headers from
-     * @return a cache entry for the given response, or null if the response is
-     * not cacheable.
-     */
+
     public static Cache.Entry parseCacheHeaders(NetworkResponse response) {
         long now = System.currentTimeMillis();
 
@@ -83,15 +61,10 @@ public class HttpHeaderParser {
 
         serverEtag = headers.get("ETag");
 
-        // Cache-Control takes precedence over an Expires header, even if both
-        // exist and Expires
-        // is more restrictive.
-        if (hasCacheControl) {
+                                if (hasCacheControl) {
             softExpire = now + maxAge * 1000;
         } else if (serverDate > 0 && serverExpires >= serverDate) {
-            // Default semantic for Expire header in HTTP specification is
-            // softExpire.
-            softExpire = now + (serverExpires - serverDate);
+                                    softExpire = now + (serverExpires - serverDate);
         }
 
         Cache.Entry entry = new Cache.Entry();
@@ -105,23 +78,16 @@ public class HttpHeaderParser {
         return entry;
     }
 
-    /**
-     * Parse date in RFC1123 format, and return its value as epoch
-     */
+
     public static long parseDateAsEpoch(String dateStr) {
         try {
-            // Parse date in RFC1123 format if this header contains one
-            return DateUtils.parseDate(dateStr).getTime();
+                        return DateUtils.parseDate(dateStr).getTime();
         } catch (DateParseException e) {
-            // Date in invalid format, fallback to 0
-            return 0;
+                        return 0;
         }
     }
 
-    /**
-     * Returns the charset specified in the Content-Type of this header, or the
-     * HTTP default (ISO-8859-1) if none can be found.
-     */
+
     public static String parseCharset(Map<String, String> headers) {
         String contentType = headers.get(HTTP.CONTENT_TYPE);
         if (contentType != null) {

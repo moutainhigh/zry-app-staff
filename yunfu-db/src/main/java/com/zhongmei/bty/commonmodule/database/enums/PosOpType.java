@@ -2,26 +2,16 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 银联刷卡操作类型
- */
+
 public enum PosOpType implements ValueEnum<Integer> {
 
-    /**
-     * 付款
-     */
+
     PAY(1),
 
-    /**
-     * 退款
-     */
+
     REFUND(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

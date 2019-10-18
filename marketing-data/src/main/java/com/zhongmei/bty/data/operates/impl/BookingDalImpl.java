@@ -38,9 +38,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-/**
- * 预订单数据查询
- */
+
 public class BookingDalImpl extends AbstractOpeartesImpl implements BookingDal {
     private static final String TAG = BookingDalImpl.class.getSimpleName();
 
@@ -206,12 +204,7 @@ public class BookingDalImpl extends AbstractOpeartesImpl implements BookingDal {
             Dao<BookingTable, String> bookingTableDao = helper.getDao(BookingTable.class);
             List<BookingTable> bookingTableList = new ArrayList<BookingTable>();
             for (Booking booking : bookingList) {
-                /*
-                 * 由于服务器的booking_table表中没有记录booking.uuid，
-                 *
-                 * booking_table表在同步前order_id字段为null
-                 * ，同步后booking_uuid被置为null， 所以要比对这两个字段。
-                 */
+
                 List<BookingTable> list;
 
                 if (booking.getId() != null) {
@@ -295,11 +288,7 @@ public class BookingDalImpl extends AbstractOpeartesImpl implements BookingDal {
         try {
             Dao<Booking, String> bookingDao = helper.getDao(Booking.class);
             QueryBuilder<Booking, String> qb = bookingDao.queryBuilder();
-            qb.where().eq(Booking.$.uuid, uuid)/*.and().notIn(Booking.$.orderStatus,
-                BookingOrderStatus.CANCEL,
-				BookingOrderStatus.LEAVE,
-				BookingOrderStatus.REFUSED,
-				BookingOrderStatus.UNPROCESS)*/;
+            qb.where().eq(Booking.$.uuid, uuid);
             return qb.queryForFirst();
         } finally {
             DBHelperManager.releaseHelper(helper);
@@ -331,8 +320,7 @@ public class BookingDalImpl extends AbstractOpeartesImpl implements BookingDal {
             List<BookingTable> bookingTableList = qbBookingTable.query();
             bookVo.setBookingTableList(bookingTableList);
             bookVo.setBooking(booking);
-            QueryBuilder<BookingPeriod, String> qbBookingPeriodDao = helper.getDao(BookingPeriod.class); //v7.16添加预定时段
-            BookingPeriod period = qbBookingPeriodDao.where().eq(BookingPeriod.$.bookingId, booking.getId()).queryForFirst();
+            QueryBuilder<BookingPeriod, String> qbBookingPeriodDao = helper.getDao(BookingPeriod.class);             BookingPeriod period = qbBookingPeriodDao.where().eq(BookingPeriod.$.bookingId, booking.getId()).queryForFirst();
             bookVo.setBookingPeriod(period);
             Dao<Tables, String> tableDao = helper.getDao(Tables.class);
             QueryBuilder<Tables, String> qbTable = tableDao.queryBuilder();
@@ -493,32 +481,7 @@ public class BookingDalImpl extends AbstractOpeartesImpl implements BookingDal {
     }
 
 
-    /*public List<BookingTradeItemVo> findTradeItemVoByBooking(Booking booking) throws Exception {
-        final DatabaseHelper helper = DBHelperManager.getHelper();
-        try {
-            List<BookingTradeItem> tradeItemList;
-            List<BookingTradeItemProperty> tradeItemPropertyList;
-            List<BookingTradeItemVo> tradeItemVoList = new ArrayList<>();
-            Dao<BookingTradeItem, String> tradeItemDao = helper.getDao(BookingTradeItem.class);
-            Dao<BookingTradeItemProperty, String> tradeItemPropertyDao = helper.getDao(BookingTradeItemProperty.class);
-            QueryBuilder<BookingTradeItem, String> qbTradeItem = tradeItemDao.queryBuilder();
-            QueryBuilder<BookingTradeItemProperty, String> qbTradeItemProperty = tradeItemPropertyDao.queryBuilder();
-            tradeItemList = qbTradeItem.where().eq(BookingTradeItem.$.bookingUuid, booking.getUuid()).query();
-            if (tradeItemList != null && tradeItemList.size() > 0) {
-                BookingTradeItemVo tradeItemVo;
-                for (BookingTradeItem tradeItem : tradeItemList) {
-                    tradeItemPropertyList = qbTradeItemProperty.where().eq(BookingTradeItemProperty.$.bookingTradeItemUuid, tradeItem.getUuid()).query();
-                    tradeItemVo = new BookingTradeItemVo();
-                    tradeItemVo.setTradeItem(tradeItem);
-                    tradeItemVo.setTradeItemPropertyList(tradeItemPropertyList);
-                    tradeItemVoList.add(tradeItemVo);
-                }
-            }
-            return tradeItemVoList;
-        } finally {
-            DBHelperManager.releaseHelper(helper);
-        }
-    }*/
+
 
     @Override
     public List<CommercialOrderSource> listOrderSource() throws Exception {
@@ -590,12 +553,7 @@ public class BookingDalImpl extends AbstractOpeartesImpl implements BookingDal {
             Dao<BookingTable, String> bookingTableDao = helper.getDao(BookingTable.class);
             List<BookingTable> bookingTableList = new ArrayList<BookingTable>();
             for (Booking booking : bookingList) {
-                /*
-                 * 由于服务器的booking_table表中没有记录booking.uuid，
-                 *
-                 * booking_table表在同步前order_id字段为null
-                 * ，同步后booking_uuid被置为null， 所以要比对这两个字段。
-                 */
+
                 List<BookingTable> list;
 
                 if (booking.getId() != null) {
@@ -658,12 +616,7 @@ public class BookingDalImpl extends AbstractOpeartesImpl implements BookingDal {
             Dao<BookingTable, String> bookingTableDao = helper.getDao(BookingTable.class);
             List<BookingTable> bookingTableList = new ArrayList<>();
             for (Booking booking : bookingList) {
-                /*
-                 * 由于服务器的booking_table表中没有记录booking.uuid，
-                 *
-                 * booking_table表在同步前order_id字段为null
-                 * ，同步后booking_uuid被置为null， 所以要比对这两个字段。
-                 */
+
                 List<BookingTable> list;
 
                 if (booking.getId() != null) {
@@ -729,20 +682,7 @@ public class BookingDalImpl extends AbstractOpeartesImpl implements BookingDal {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             List<String> bookingTableUuidList = new ArrayList<>();
-            /*Dao<BookingTable, ?> bookingTableDao = helper.getDao(BookingTable.class);
-            List<BookingTable> bookingTableList = bookingTableDao.queryBuilder().where().in(BookingTable.$.bookingUuid, bookingVoMap.keySet()).query();
-            for (BookingTable bookingTable : bookingTableList) {
-                bookingTableUuidList.add(bookingTable.getUuid());
-                BookingVo bookingVo = bookingVoMap.get(bookingTable.getBookingUuid());
-                if (bookingVo != null) {
-                    List<BookingTable> bTableList = bookingVo.getBookingTableList();
-                    if (bTableList == null) {
-                        bTableList = new ArrayList<>();
-                        bookingVo.setBookingTableList(bTableList);
-                    }
-                    bTableList.add(bookingTable);
-                }
-            }*/
+
 
             for (BookingVo bookingVo : bookingVoMap.values()) {
                 bookingVo.tableAreaVoList = null;

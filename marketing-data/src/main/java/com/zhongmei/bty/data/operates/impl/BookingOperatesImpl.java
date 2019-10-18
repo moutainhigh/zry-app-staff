@@ -96,9 +96,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
-/**
- * 预订相关接口
- */
+
 @SuppressLint("SimpleDateFormat")
 public class BookingOperatesImpl extends AbstractOpeartesImpl implements BookingOperates {
 
@@ -112,176 +110,47 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     @Override
     public void insertOrModify(BookingVo bookingVo, ResponseListener<BookingResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().creatOrUpdateBooking();
 
-        BookingReq bookingReq = toBookingReq(bookingVo);
-        OpsRequest.Executor<BookingReq, BookingResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(bookingReq)
-                .responseClass(BookingResp.class)
-                .responseProcessor(new BookingProcessor(bookingVo))
-                .execute(listener, TAG);*/
 
     }
 
     public void submitBooking(BookingVo bookingVo, CalmResponseListener<ResponseObject<BookingResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().createBooking();
-        BookingNewReq req = toBookingNewReq(bookingVo);
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(req)
-                .responseClass(BookingResp.class)
-                .responseProcessor(new CalmDatabaseProcessor<BookingResp>() {
-                    @Override
-                    protected boolean isSuccessful(ResponseObject response) {
-                        return super.isSuccessful(response);
-                    }
 
-                    @Override
-                    protected void transactionCallable(DatabaseHelper helper, BookingResp resp) throws Exception {
-                    }
-                })
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("submitBooking")
-//                .showLoading()
-                .create();*/
     }
 
     public void updateBooking(BookingVo bookingVo, CalmResponseListener<ResponseObject<BookingResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().updateBooking();
-        BookingNewReq bookingReq = toBookingNewReq(bookingVo);
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(bookingReq)
-                .responseClass(BookingResp.class)
-                .responseProcessor(new CalmDatabaseProcessor<BookingResp>() {
-                    @Override
-                    protected boolean isSuccessful(ResponseObject response) {
-                        return super.isSuccessful(response);
-                    }
 
-                    @Override
-                    protected void transactionCallable(DatabaseHelper helper, BookingResp resp) throws Exception {
-                    }
-                })
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("submitBooking")
-//                .showLoading()
-                .create();*/
     }
 
     @Override
     public void bookingDetail(Long bookingId, CalmResponseListener<ResponseObject<BookingDetailResp>> listener) {
-        /*final BookingDetailReq detailReq = new BookingDetailReq();
-        detailReq.setBookingId(bookingId);
-        String url = ServerAddressUtil.getInstance().bookingDetail();
-        new CalmNetWorkRequest.Builder<BookingDetailReq, BookingDetailResp>()
-                .with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(detailReq)
-                .responseClass(BookingDetailResp.class)
-                .successListener(listener)
-                .errorListener(listener)
-                .showLoading()
-                .tag("bookingDetail")
-                .create();*/
+
     }
 
     @Override
     public void bookingArrivalShop(Fragment fragment, BookingVo bookingVo, CalmResponseListener<ResponseObject<BookingResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().bookingArrivalShop();
-        BookingNewReq bookingReq = toBookingNewReq(bookingVo);
-        //老版本数据没有BookingPeriod，设置为null，避免传空对象导致出错
-        if (bookingReq.getBookingType() == BookingType.NORMAL) {
-            bookingReq.setBookingPeriod(null);
-        }
-        //到店添加到店操作员（同步组调用loyalty逻辑走不通，周群力临上线前让加的）
-        IAuthUser user = IAuthUser.Holder.get();
-        if (user != null && user.getId() != null) {
-            bookingReq.setShopArriveUser(user.getId().toString());
-        }
-        CalmNetWorkRequest.with(fragment)
-                .url(url)
-                .requestContent(bookingReq)
-                .responseClass(BookingResp.class)
-                .responseProcessor(new CalmDatabaseProcessor<BookingResp>() {
-                    @Override
-                    protected boolean isSuccessful(ResponseObject response) {
-                        return super.isSuccessful(response);
-                    }
 
-                    @Override
-                    protected void transactionCallable(DatabaseHelper helper, BookingResp resp) throws Exception {
-                    }
-                })
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("submitBooking")
-                .showLoading()
-                .create();*/
     }
 
     @Override
     public void confirmArrivalShop(Long bookingId, CalmResponseListener<ResponseObject<BookingConfirmArrivalShopResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().bookingConfirm();
-        HashMap<String, Object> bookingReq = new HashMap<>();
-        bookingReq.put("bookingId", bookingId);
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(bookingReq)
-                .responseClass(BookingConfirmArrivalShopResp.class)
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("confirmArrivalShop")
-                .showLoading()
-                .create();*/
+
     }
 
     @Override
     public void sendMessage(String orderUuid, ResponseListener<Boolean> listener) {
-        /*String url = ServerAddressUtil.getInstance().sendBookingMessage();
-        OpsRequest.Executor<Object, Boolean> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(new SendMessageReq(orderUuid)).responseClass(Boolean.class).execute(listener, TAG);*/
+
 
     }
 
     @Override
     public void bookingRecorde(String customerUuid, ResponseListener<BookingStatisticsResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().bookingRecorde();
-        OpsRequest.Executor<BookingRecordeReq, BookingStatisticsResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(new BookingRecordeReq(customerUuid))
-                .responseClass(BookingStatisticsResp.class)
-                .execute(listener, TAG);*/
+
     }
 
     @Override
     public void queryBookingTablesByPeriod(Long orderTime, Long periodId, CalmResponseListener<ResponseObject<BookingGroupTableResq>> listener) {
-        /*BookingGroupTableReq req = new BookingGroupTableReq();
-        String time = new SimpleDateFormat("yyyy-MM-dd").format(orderTime);
-        req.startTime = DateTimeUtils.formatDate(time + " 00:00:00", "yyyy-MM-dd HH:mm:ss");
-        req.endTime = DateTimeUtils.formatDate(time + " 23:59:59", "yyyy-MM-dd HH:mm:ss");
-        req.periodId = periodId;
-        String url = ServerAddressUtil.getInstance().bookingTableListByTime();
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(req)
-                .responseClass(BookingGroupTableResq.class)
-                .responseProcessor(new CalmDatabaseProcessor<BookingGroupTableResq>() {
-                    @Override
-                    protected boolean isSuccessful(ResponseObject response) {
-                        return super.isSuccessful(response);
-                    }
 
-                    @Override
-                    protected void transactionCallable(DatabaseHelper helper, BookingGroupTableResq resp) throws Exception {
-                    }
-                })
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("submitBooking")
-//                .showLoading()
-                .create();*/
     }
 
     @Override
@@ -298,152 +167,25 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     @Override
     public void bookingListPost(long startTime, long endTime, CalmResponseListener<ResponseObject<BookingListResp>> listener) {
-        /*BookingListReq req = new BookingListReq(startTime, endTime);
-        String url = ServerAddressUtil.getInstance().bookingList();
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(req)
-                .responseClass(BookingListResp.class)
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("bookingListPost")
-                .create();*/
+
     }
 
     @Override
     public void bookingQueryPost(String queryParam, CalmResponseListener<ResponseObject<BookingListResp>> listener) {
-        /*BookingQueryReq req = new BookingQueryReq(queryParam);
-        String url = ServerAddressUtil.getInstance().bookingQueryV1();
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(req)
-                .responseClass(BookingListResp.class)
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("bookingQueryPost")
-                .create();*/
+
     }
 
     @Override
     public void bookingToDinnerSubmitPost(Fragment fragment, BookingVo bookingVo, Trade trade, CalmResponseListener<ResponseObject<OpenTableResp>> listener) {
-        /*BookingToDinnerSubmitReq req = new BookingToDinnerSubmitReq();
-        copyProperties(trade, req);
-        Booking booking = bookingVo.getBooking();
-        BookingToDinnerSubmitReq.BookingInfoBean bookingInfoBean = new BookingToDinnerSubmitReq.BookingInfoBean();
-        bookingInfoBean.bookingId = booking.getId();
-        bookingInfoBean.bookingUuid = booking.getUuid();
-        bookingInfoBean.bookingServerUpdateTime = booking.getServerUpdateTime();
-        bookingInfoBean.shopArriveUser = Session.getAuthUser().getName();
-        bookingInfoBean.shopArriveTime = new Date().getTime();
-        req.bookingInfo = bookingInfoBean;
-        TradeExtra tradeExtra = new TradeExtra();
-        tradeExtra.validateCreate();
-        tradeExtra.setTradeId(trade.getId());
-        tradeExtra.setTradeUuid(trade.getUuid());
-        tradeExtra.setUuid(SystemUtils.genOnlyIdentifier());
-        req.tradeExtra = tradeExtra;
 
-        //增加默认税率
-        TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
-        if (taxRateInfo != null && taxRateInfo.isTaxSupplyOpen()) {
-            TradeTax tradeTax = taxRateInfo.toTradeTax(null);
-            req.tradeTaxs = Arrays.asList(tradeTax);
-        }
-
-        //加入服务费
-        ExtraCharge serviceExtraCharge = ServerSettingCache.getInstance().getmServiceExtraCharge();
-        if (serviceExtraCharge != null && serviceExtraCharge.isAutoJoinTrade()) {
-            req.tradeInitConfigs = Arrays.asList(serviceExtraCharge.toTradeInitConfig());
-        }
-
-        String url = ServerAddressUtil.getInstance().toDinnerSubmit();
-        CalmNetWorkRequest.with(fragment)
-                .url(url)
-                .requestContent(req)
-                .responseClass(OpenTableResp.class)
-                .responseProcessor(new CalmDatabaseProcessor<OpenTableResp>() {
-                    @Override
-                    protected boolean isSuccessful(ResponseObject response) {
-                        return super.isSuccessful(response);
-                    }
-
-                    @Override
-                    protected void transactionCallable(DatabaseHelper helper, OpenTableResp resp) throws Exception {
-                        // 数据库操作
-                        DBHelperManager.saveEntities(helper, Trade.class, resp.trades);
-                        DBHelperManager.saveEntities(helper, TradeExtra.class, resp.tradeExtras);
-                        DBHelperManager.saveEntities(helper, TradeCustomer.class, resp.tradeCustomers);
-                        DBHelperManager.saveEntities(helper, TradePrivilege.class, resp.tradePrivileges);
-                        DBHelperManager.saveEntities(helper, TradeItem.class, resp.tradeItems);
-                        DBHelperManager.saveEntities(helper, TradeItemProperty.class, resp.tradeItemProperties);
-                        DBHelperManager.saveEntities(helper, TradeItemLog.class, resp.tradeItemLogs);
-                        DBHelperManager.saveEntities(helper, TradeStatusLog.class, resp.tradeStatusLogs);
-                        DBHelperManager.saveEntities(helper, TradeTable.class, resp.tradeTables);
-                        DBHelperManager.saveEntities(helper, TradeTax.class, resp.tradeTaxs);
-                        DBHelperManager.saveEntities(helper, TradeInitConfig.class, resp.tradeInitConfigs);
-                        DBHelperManager.saveEntities(helper, TradeEarnestMoney.class, resp.tradeEarnestMoneys);
-                    }
-                })
-                .successListener(listener)
-                .errorListener(listener)
-                .showLoading()
-                .tag("bookingToDinnerSubmitPost")
-                .create();*/
     }
 
     @Override
     public void groupOpenTable(BookingVo bookingVo, TradeVo tradeVo, CalmResponseListener<ResponseObject<BookingGroupTradeResp>> listener) {
-        /*BookingGroupOpenReq req = toBookingGroupOpenReq(bookingVo, tradeVo);
-        //增加默认税率
-        TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
-        if (taxRateInfo != null && taxRateInfo.isTaxSupplyOpen()) {
-            TradeTax tradeTax = taxRateInfo.toTradeTax(null);
-            req.tradeTaxs = Arrays.asList(tradeTax);
-        }
-        //加入服务费
-        ExtraCharge serviceExtraCharge = ServerSettingCache.getInstance().getmServiceExtraCharge();
-        if (serviceExtraCharge != null && serviceExtraCharge.isAutoJoinTrade()) {
-            req.tradeInitConfigs = Arrays.asList(serviceExtraCharge.toTradeInitConfig());
-        }
-        String url = ServerAddressUtil.getInstance().bookingToGroupDinner();
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(req)
-                .responseClass(BookingGroupTradeResp.class)
-                .responseProcessor(new CalmDatabaseProcessor<BookingGroupTradeResp>() {
-                    @Override
-                    protected boolean isSuccessful(ResponseObject response) {
-                        return super.isSuccessful(response);
-                    }
 
-                    @Override
-                    protected void transactionCallable(DatabaseHelper helper, BookingGroupTradeResp resp) throws Exception {
-                        DBHelperManager.saveEntities(helper, Trade.class, resp.trade);
-                        DBHelperManager.saveEntities(helper, TradeExtra.class, resp.tradeExtra);
-                        DBHelperManager.saveEntities(helper, TradeCustomer.class, resp.tradeCustomers);
-                        DBHelperManager.saveEntities(helper, TradeItem.class, resp.tradeItems);
-                        DBHelperManager.saveEntities(helper, TradeTable.class, resp.tradeTables);
-                        DBHelperManager.saveEntities(helper, TradeGroupInfo.class, resp.tradeGroup);
-                        DBHelperManager.saveEntities(helper, TradeUser.class, resp.tradeUser);
-                        DBHelperManager.saveEntities(helper, TradeTax.class, resp.tradeTaxs);
-                        DBHelperManager.saveEntities(helper, TradeInitConfig.class, resp.tradeInitConfigs);
-                        DBHelperManager.saveEntities(helper, TradeEarnestMoney.class, resp.tradeEarnestMoneys);
-                    }
-                })
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("bookingToGroupDinner")
-//                .showLoading()
-                .create();*/
     }
 
-    /**
-     * 构建开台数据
-     *
-     * @param bookingVo
-     * @param tradeVo
-     * @return
-     */
+
     private BookingGroupOpenReq toBookingGroupOpenReq(BookingVo bookingVo, TradeVo tradeVo) {
         BookingGroupOpenReq req = new BookingGroupOpenReq();
         copyProperties(tradeVo.getTrade(), req);
@@ -461,18 +203,14 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
             tradeUser.setChanged(true);
             tradeUser.setUserId(saleAuthUser.getId());
             tradeUser.setUserName(saleAuthUser.getName());
-            tradeUser.setStatusFlag(StatusFlag.VALID);//默认有效
-            tradeUser.setType(TradeScenceType.SALEDISH);//卖菜
-            tradeUser.setTradeId(tradeVo.getTrade().getId());
+            tradeUser.setStatusFlag(StatusFlag.VALID);            tradeUser.setType(TradeScenceType.SALEDISH);            tradeUser.setTradeId(tradeVo.getTrade().getId());
             tradeUser.setTradeUuid(tradeVo.getTrade().getUuid());
             req.tradeUser = tradeUser;
         }
         return req;
     }
 
-    /**
-     * 发送短信请求
-     */
+
     class SendMessageReq {
         private String serverId;
 
@@ -490,9 +228,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     }
 
-    /**
-     * 预订统计
-     */
+
     class BookingRecordeReq {
         private String customerSynFlag;
 
@@ -510,33 +246,22 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     }
 
-    /**
-     * 预订单转换成请求对象
-     *
-     * @param bookingVo
-     * @return
-     */
+
     private BookingReq toBookingReq(BookingVo bookingVo) {
         BookingDalImpl dal = new BookingDalImpl(getImplContext());
         BookingReq bookingReq = new BookingReq();
         Booking booking = bookingVo.getBooking();
-//        if (booking.getCancelOrderTime() != null) {
-//            bookingReq.setCancelOrderTime(dateTimeFormat.format(booking.getCancelOrderTime()));
-//        }
         bookingReq.setCancelOrderUser(booking.getCancelOrderUser());
         bookingReq.setCommercialId(booking.getCommercialId());
         bookingReq.setConsumeStandard(booking.getConsumeStandard());
         bookingReq.setCreatorID(booking.getCreatorId() + "");
         bookingReq.setCommercialGroup(booking.getCommercialGroup());
-        // 请求的cunstomerId是客户的uuid
-        bookingReq.setCustomerID(booking.getCustomerSynflag());
-        // 请求的本地用户标识是同步下来的 id
-        bookingReq.setCustomerLocalID(booking.getCommercialId());
+                bookingReq.setCustomerID(booking.getCustomerSynflag());
+                bookingReq.setCustomerLocalID(booking.getCommercialId());
         bookingReq.setCommercialName(booking.getCommercialName());
         bookingReq.setCommercialPhone(booking.getCommercialPhone());
         bookingReq.setCustomerSynflag(booking.getCustomerSynflag());
-        // bookingReq.setDeleted(booking.);
-        bookingReq.setEnvFavorite(booking.getEnvFavorite());
+                bookingReq.setEnvFavorite(booking.getEnvFavorite());
         bookingReq.setInnerOrderPerson(booking.getInnerOrderPerson());
         bookingReq.setIsImportant(booking.getIsImportant());
         bookingReq.setLocalCreateDateTime(booking.getClientCreateTime());
@@ -547,8 +272,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
         bookingReq.setBookingSource(booking.getBookingSource());
         bookingReq.setOrderStatus(booking.getOrderStatus());
         bookingReq.setOrderTime(booking.getOrderTime());
-        // 通过 periodId获取periodUUid
-        try {
+                try {
             Period period = dal.findPeriodById(booking.getPeriodID());
             bookingReq.setPeriodServerId(period.getUuid());
         } catch (Exception e) {
@@ -567,14 +291,6 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
             bookingReq.setCommercialGender(Sex.MALE);
         }
 
-//        if (booking.getShopArriveTime() != null) {
-//            bookingReq.setShopArriveTime(dateTimeFormat.format(booking.getShopArriveTime()));
-//        }
-//        bookingReq.setShopArriveUser(booking.getShopArriveUser());
-//        if (booking.getShopLeaveTime() != null) {
-//            bookingReq.setShopLeaveTime(dateTimeFormat.format(booking.getShopLeaveTime()));
-//        }
-//        bookingReq.setShopLeaveUser(booking.getShopLeaveUser());
 
         List<BookingTable> bookingTableList = bookingVo.getBookingTableList();
         List<BookingTableReq> bookingTableReqList = new ArrayList<BookingTableReq>();
@@ -598,9 +314,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
         return bookingReq;
     }
 
-    /**
-     * 预订单传唤成新的请求
-     */
+
     public BookingNewReq toBookingNewReq(BookingVo vo) {
         BookingNewReq req = new BookingNewReq();
         BookingDalImpl dal = new BookingDalImpl(getImplContext());
@@ -626,9 +340,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
             Period period = dal.findPeriodById(booking.getPeriodID());
             req.setPeriodUuid(period.getUuid());
             req.setPeriodID(booking.getPeriodID());
-            /*BookingPeriodReq periodReq = new BookingPeriodReq();
-            periodReq.setStartTime(vo.getBookingPeriod().getStartTime());
-			periodReq.setEndTime(vo.getBookingPeriod().getEndTime());*/
+
             req.setBookingPeriod(vo.getBookingPeriod());
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
@@ -644,31 +356,17 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
                 copyProperties(bookingTable, reqTable);
                 reqTable.setId(bookingTable.getBtid());
                 reqTable.setTableId(bookingTable.getTableID());
-//                try {
-//                    Tables table = dal.findTableById(bookingTable.getTableID());
-//                    reqTable.setTableName(table.getTableName());
-//                } catch (Exception e) {
-//                    Log.e(TAG, e.getMessage(), e);
-//                }
                 bookingTableGroupReqs.add(reqTable);
             }
             req.setBookingTables(bookingTableGroupReqs);
         }
-        //更新预定
-        req.setBookingId(booking.getId());
-//        req.setCancelOrderTime(booking.getCancelOrderTime());
+                req.setBookingId(booking.getId());
         req.setCancelOrderUser(booking.getCancelOrderUser());
         req.setRealConsume(booking.getRealConsume());
         req.setRealConsumeTime(booking.getRealConsumeTime());
         req.setRealConsumeUser(booking.getRealConsumeUser());
         req.setRr(booking.getRefusalReason());
-//        req.setShopArriveTime(booking.getShopArriveTime());
-//        req.setShopArriveUser(booking.getShopArriveUser());
-//        req.setShopLeaveTime(booking.getShopLeaveTime());
-//        req.setShopLeaveUser(booking.getShopLeaveUser());
         req.setModifyDateTime(booking.getServerUpdateTime());
-//        req.setCountry(booking.getCountry());
-//        req.setNation(booking.getNation());
         req.setNationalTelCode(booking.getNationalTelCode());
         List<BookingTradeItemVo> bookingTradeItemVoList = vo.getTradeItemVoList();
         List<BookingTradeItem> bookingTradeItemList = new ArrayList<>();
@@ -713,42 +411,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     @Override
     public void bookingToUnionTable(Fragment fragment, BookingVo bookingVo, List<Tables> selectTables, CalmResponseListener<ResponseObject<TradeResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().toUnionTable();
-        BookingToUnionSubmitReq bookingToUnionSubmitReq = toBookingUnionReq(bookingVo, selectTables);
-        //增加默认税率
-        TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
-        if (taxRateInfo != null && taxRateInfo.isTaxSupplyOpen()) {
-            TradeTax tradeTax = taxRateInfo.toTradeTax(null);
-            bookingToUnionSubmitReq.tradeTaxs = Arrays.asList(tradeTax);
-        }
-        //加入服务费
-        ExtraCharge serviceExtraCharge = ServerSettingCache.getInstance().getmServiceExtraCharge();
-        if (serviceExtraCharge != null && serviceExtraCharge.isAutoJoinTrade()) {
-            bookingToUnionSubmitReq.tradeInitConfigs = Arrays.asList(serviceExtraCharge.toTradeInitConfig());
-        }
-        CalmNetWorkRequest.with(fragment)
-                .url(url)
-                .requestContent(bookingToUnionSubmitReq)
-                .responseClass(TradeResp.class)
-                .responseProcessor(new CalmDatabaseProcessor<TradeResp>() {
-                    @Override
-                    protected boolean isSuccessful(ResponseObject response) {
-                        return super.isSuccessful(response);
-                    }
 
-                    @Override
-                    protected void transactionCallable(DatabaseHelper helper, TradeResp resp) throws Exception {
-                        TradeOperatesImpl.saveTradeResp(helper, resp);
-                        DBHelperManager.saveEntities(helper, TradeTax.class, resp.getTradeTaxs());
-                        DBHelperManager.saveEntities(helper, TradeInitConfig.class, resp.getTradeInitConfigs());
-                        DBHelperManager.saveEntities(helper, TradeEarnestMoney.class, resp.tradeEarnestMoneys);
-                    }
-                })
-                .successListener(listener)
-                .errorListener(listener)
-                .showLoading()
-                .tag("bookingToUnionTable")
-                .create();*/
     }
 
     private BookingToUnionSubmitReq toBookingUnionReq(BookingVo bookingVo, List<Tables> selectTables) {
@@ -759,8 +422,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
         req.modifyDateTime = bookingVo.getBooking().getServerUpdateTime();
         req.subList = BookingOpenTableUtils.createBookingUnionSubTradeList(bookingVo, selectTables);
         req.mainTrade = BookingOpenTableUtils.createBookingUnionMainTrade(bookingVo, selectTables);
-        //添加到店员（同步组调用loyalty逻辑走不通，周群力临上线前让加的）
-        IAuthUser user = IAuthUser.Holder.get();
+                IAuthUser user = IAuthUser.Holder.get();
         if (user != null) {
             req.shopArriveUserId = user.getId();
         }
@@ -768,12 +430,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
         return req;
     }
 
-    /**
-     * 将创建订单但保存数据保存到数据库的处理器
-     *
-     * @version: 1.0
-     * @date 2015年4月15日
-     */
+
     private static class BookingProcessor extends SaveDatabaseResponseProcessor<BookingResp> {
         private BookingVo bookingVo;
 
@@ -784,8 +441,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
         @Override
         public void saveToDatabase(BookingResp resp) throws Exception {
             super.saveToDatabase(resp);
-            //saveBaseInfo(Customer.class, resp.getCustomers());
-        }
+                    }
 
         @Override
         protected Callable<Void> getCallable(final DatabaseHelper helper, final BookingResp resp) {
@@ -793,8 +449,7 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
                 @Override
                 public Void call() throws Exception {
-                    // 先删除之前选中的桌台
-                    if (bookingVo.getBookingTableList() != null && bookingVo.getBookingTableList().size() > 0) {
+                                        if (bookingVo.getBookingTableList() != null && bookingVo.getBookingTableList().size() > 0) {
                         List<BookingTable> bookingTableList = new ArrayList<BookingTable>();
                         for (BookingTable bookingTable : bookingVo.getBookingTableList()) {
                             if (bookingTable.getBtid() != null && bookingTable.getStatus() == -1) {
@@ -828,78 +483,21 @@ public class BookingOperatesImpl extends AbstractOpeartesImpl implements Booking
 
     @Override
     public void accept(Booking booking, List<BookingTable> bookingTableList, CalmResponseListener<ResponseObject<BookingAndTableResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().bookingAccept();
-        BookingAndTableReq req = BookingAndTableReq.toBookingAndTableReq(booking, bookingTableList);
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(req)
-                .responseClass(BookingAndTableResp.class)
-                .responseProcessor(new CalmDatabaseProcessor<BookingAndTableResp>() {
-                    @Override
-                    protected boolean isSuccessful(ResponseObject response) {
-                        return super.isSuccessful(response);
-                    }
 
-                    @Override
-                    protected void transactionCallable(DatabaseHelper helper, BookingAndTableResp resp) throws Exception {
-                        DBHelperManager.saveEntities(helper, Booking.class, resp.booking);
-                        DBHelperManager.saveEntities(helper, BookingTable.class, resp.bookingTables);
-                    }
-                })
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("submitBooking")
-//                .showLoading()
-                .create();*/
     }
 
     @Override
     public void refuse(Booking booking, String reason, CalmResponseListener<ResponseObject<BookingObjectResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().bookingRefuse();
-        HashMap<String, Object> req = new HashMap<>();
-        req.put("bookingId", booking.getId());
-        req.put("refusalReason", reason);
-        req.put("modifyDateTime", booking.getServerUpdateTime());
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(req)
-                .responseClass(BookingObjectResp.class)
-                .responseProcessor(bookingObjectRespProcessor)
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("submitBooking")
-//                .showLoading()
-                .create();*/
+
     }
 
     @Override
     public void cancelOrder(Long bookingId, String reason, CalmResponseListener<ResponseObject<BookingObjectResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().bookingCancel();
-        HashMap<String, Object> req = new HashMap<>();
-        req.put("orderID", bookingId);
-        req.put("reason", reason);
-        req.put("cancelOrderUser", Session.getAuthUser().getId());
-        CalmNetWorkRequest.with(BaseApplication.getInstance())
-                .url(url)
-                .requestContent(req)
-                .responseClass(BookingObjectResp.class)
-                .responseProcessor(bookingObjectRespProcessor)
-                .successListener(listener)
-                .errorListener(listener)
-                .tag("submitBooking")
-//                .showLoading()
-                .create();*/
+
     }
 
     @Override
     public void queryBookingNum(long beginTime, long endTime, ResponseListener<BookingQueryNumResp> listener) {
-        /*BookingQueryNumReq req = new BookingQueryNumReq();
-        req.setBeginTime(beginTime);
-        req.setEndTime(endTime);
-        String url = ServerAddressUtil.getInstance().bookingQueryNum();
-        OpsRequest.Executor<BookingQueryNumReq, BookingQueryNumResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(BookingQueryNumResp.class)
-                .execute(listener, TAG);*/
+
     }
 }

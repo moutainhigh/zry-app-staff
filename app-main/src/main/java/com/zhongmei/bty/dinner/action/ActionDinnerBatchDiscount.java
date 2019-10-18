@@ -1,11 +1,9 @@
 package com.zhongmei.bty.dinner.action;
 
 public class ActionDinnerBatchDiscount {
-    //是否item可选
-    public Boolean isEditModle;
+        public Boolean isEditModle;
 
-    //整单打折
-    public Boolean isAllDiscount;
+        public Boolean isAllDiscount;
 
 
     public ActionDinnerBatchDiscount(Boolean isEditModle, Boolean isAllDiscount) {

@@ -11,107 +11,67 @@ import com.zhongmei.yunfu.db.enums.Bool;
 
 import java.math.BigDecimal;
 
-/**
- * 收款类型
- */
+
 @DatabaseTable(tableName = "payment_mode_shop")
 public class PaymentModeShop extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "payment_mode_shop"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * brand_mode_id
-         */
+
         public static final String brandModeId = "brand_mode_id";
 
-        /**
-         * erp_mode_id
-         */
+
         public static final String erpModeId = "erp_mode_id";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * alias_name
-         */
+
         public static final String aliasName = "alias_name";
 
-        /**
-         * face_value
-         */
+
         public static final String faceValue = "face_value";
 
-        /**
-         * payment_mode_type
-         */
+
         public static final String paymentModeType = "payment_mode_type";
 
-        /**
-         * is_change
-         */
+
         public static final String isChange = "is_change";
 
-        /**
-         * is_discount
-         */
+
         public static final String isDiscount = "is_discount";
 
-        /**
-         * is_invoice
-         */
+
         public static final String isInvoice = "is_invoice";
 
-        /**
-         * is_refund
-         */
+
         public static final String isRefund = "is_refund";
 
-        /**
-         * is_cure
-         */
+
         public static final String isCurd = "is_cure";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * enabled_flag
-         */
+
         public static final String enabledFlag = "enabled_flag";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
     }
@@ -122,69 +82,47 @@ public class PaymentModeShop extends BasicEntityBase implements ICreator, IUpdat
     @DatabaseField(columnName = "erp_mode_id", canBeNull = false)
     private Long erpModeId;
 
-    /**
-     * 支付方式名称
-     */
+
     @DatabaseField(columnName = "name", canBeNull = false)
     private String name;
 
-    /**
-     * 别名
-     */
+
     @DatabaseField(columnName = "alias_name")
     private String aliasName;
 
-    /**
-     * 面值
-     */
+
     @DatabaseField(columnName = "face_value")
     private BigDecimal faceValue;
 
-    /**
-     * 支付类型
-     */
+
     @DatabaseField(columnName = "payment_mode_type")
     private Integer paymentModeType;
 
-    /**
-     * 是否找零
-     */
+
     @DatabaseField(columnName = "is_change")
     private Integer isChange;
 
-    /**
-     * 是否打折
-     */
+
     @DatabaseField(columnName = "is_discount")
     private Integer isDiscount;
 
-    /**
-     * 是否发票
-     */
+
     @DatabaseField(columnName = "is_invoice")
     private Integer isInvoice;
 
-    /**
-     * 是否支持退货
-     */
+
     @DatabaseField(columnName = "is_refund")
     private Integer isRefund;
 
-    /**
-     * 是否被固化
-     */
+
     @DatabaseField(columnName = "is_cure")
     private Integer isCure;
 
-    /**
-     * 排序
-     */
+
     @DatabaseField(columnName = "sort")
     private Integer sort;
 
-    /**
-     * 是否被启用
-     */
+
     @DatabaseField(columnName = "enabled_flag")
     private Integer enabledFlag;
 

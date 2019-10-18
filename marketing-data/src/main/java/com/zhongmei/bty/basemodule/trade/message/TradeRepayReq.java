@@ -1,7 +1,6 @@
 package com.zhongmei.bty.basemodule.trade.message;
 
-/**
- */
+
 public class TradeRepayReq {
 
     private Long tradeId;
@@ -28,8 +27,7 @@ public class TradeRepayReq {
 
     private String reasonContent;
 
-    // v8.12.0 口碑反结账理由code
-    private String cancelCode;
+        private String cancelCode;
 
     public Long getTradeId() {
         return tradeId;

@@ -4,9 +4,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.OrderExtra;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ExtraInfo {
     public final OrderExtra orderExtra;

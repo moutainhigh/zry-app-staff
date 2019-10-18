@@ -5,8 +5,7 @@ import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 import java.math.BigDecimal;
 
 public class GrouponNuomiPayReq extends PaymentItemReq {
-    private GrouponNuomiPayReqItem paymentItemGroupon;//券信息
-
+    private GrouponNuomiPayReqItem paymentItemGroupon;
     public GrouponNuomiPayReq(PaymentItem paymentItem) {
         super(paymentItem);
         GrouponNuomiPayReqItem grouponNuomiPayReqItem = new GrouponNuomiPayReqItem();
@@ -28,13 +27,7 @@ public class GrouponNuomiPayReq extends PaymentItemReq {
     }
 
     public class GrouponNuomiPayReqItem {
-        private String dealTitle;//团单名称
-        private Long grouponId;//团购groupon.id
-        private BigDecimal marketPrice;//市场价(元)
-        private BigDecimal price;//销售价(元)
-        private String serialNo;//团购券码
-        private Integer useCount;//准备用掉的团购券张数
-
+        private String dealTitle;        private Long grouponId;        private BigDecimal marketPrice;        private BigDecimal price;        private String serialNo;        private Integer useCount;
         public String getDealTitle() {
             return dealTitle;
         }

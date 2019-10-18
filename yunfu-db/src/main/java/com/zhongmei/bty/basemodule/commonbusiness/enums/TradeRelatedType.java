@@ -2,25 +2,15 @@ package com.zhongmei.bty.basemodule.commonbusiness.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 从预定排队创建的订单的值
- */
+
 public enum TradeRelatedType implements ValueEnum<Integer> {
-    /**
-     * 预定
-     */
+
     BOOKING(1),
 
-    /**
-     * 排队
-     */
+
     QUEUE(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

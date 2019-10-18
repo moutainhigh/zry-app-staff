@@ -3,9 +3,7 @@ package com.zhongmei.bty.dinner.action;
 import com.zhongmei.bty.basemodule.orderdish.bean.SetmealShopcartItem;
 import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItem;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class OrderDishMes {
     boolean isClick;

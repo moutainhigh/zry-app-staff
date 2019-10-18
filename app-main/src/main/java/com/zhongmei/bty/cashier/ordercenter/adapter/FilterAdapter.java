@@ -20,9 +20,7 @@ import org.androidannotations.annotations.RootContext;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EBean
 public class FilterAdapter extends RecyclerViewBaseAdapter<FilterData, View> {
     private static final int VIEW_TYPE_HEAD = 0;
@@ -36,25 +34,15 @@ public class FilterAdapter extends RecyclerViewBaseAdapter<FilterData, View> {
         return selectPair;
     }
 
-    /**
-     * 设置已经选择的item,用于重新弹框的状态恢复
-     *
-     * @param selectPair
-     */
+
     public void setSelectCondition(List<Pair<String, ValueEnum>> selectPair) {
         this.selectPair = selectPair;
     }
 
-    /**
-     * 设置item选中
-     *
-     * @param position
-     * @return
-     */
+
     public void setItemSelect(int position) {
         Pair<String, ValueEnum> enumPair = (Pair<String, ValueEnum>) getItem(position);
-        if (selectPair.isEmpty()) {//不存在直接添加
-            selectPair.add(enumPair);
+        if (selectPair.isEmpty()) {            selectPair.add(enumPair);
             return;
         }
         isItemSelect(enumPair, true);
@@ -76,8 +64,7 @@ public class FilterAdapter extends RecyclerViewBaseAdapter<FilterData, View> {
                         mOnItemClickListener.onItemClick(v, position);
                     }
                     Pair<String, ValueEnum> enumPair = (Pair<String, ValueEnum>) getItem(position);
-                    if (isItemSelect(enumPair, true)) {//如果选中,取消选择状态
-                    } else {
+                    if (isItemSelect(enumPair, true)) {                    } else {
                         setItemSelect(position);
                     }
                     notifyDataSetChanged();
@@ -123,13 +110,7 @@ public class FilterAdapter extends RecyclerViewBaseAdapter<FilterData, View> {
         notifyDataSetChanged();
     }
 
-    /**
-     * 判断Item是否已经选中
-     *
-     * @param enumPair
-     * @param remove   是否从集合中移除该项
-     * @return
-     */
+
     private boolean isItemSelect(Pair<String, ValueEnum> enumPair, boolean remove) {
         for (Pair<String, ValueEnum> valueEnumPair : selectPair) {
             ValueEnum valueEnum = valueEnumPair.second;

@@ -26,30 +26,19 @@ import com.zhongmei.bty.basemodule.pay.message.PayResp;
 import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.yunfu.context.util.Utils;
 
-/**
- * 百糯券部分成功部分失败界面
- * Created by demo on 2018/12/15
- */
+
 
 public class BaiNuoPartErrorDialog extends Dialog implements View.OnClickListener {
     private String TAG = BaiNuoPartErrorDialog.class.getSimpleName();
     private final static int itemtextcolor = Color.parseColor("#999999");
-    private TextView mPayAmountTV;//显示 本次付款
-    private ImageView mCloseBT;//关闭按钮
-    private LinearLayout mOkList;//成功列表
-    private LinearLayout mErrorList;//失败列表
-    private PaymentVo mPaymentVo;//支付信息
-    private PayResp mPayResp;//支付返回信息
-    private IPayOverCallback mCallBack;
-    private IPaymentInfo mPaymentInfo;//
-    private Context mContext;
+    private TextView mPayAmountTV;    private ImageView mCloseBT;    private LinearLayout mOkList;    private LinearLayout mErrorList;    private PaymentVo mPaymentVo;    private PayResp mPayResp;    private IPayOverCallback mCallBack;
+    private IPaymentInfo mPaymentInfo;    private Context mContext;
 
     private BaiNuoPartErrorDialog(Context context, int theme) {
         super(context, theme);
         mContext = context;
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.pay_part_bainuo_error_dialog_layout);//新收银失败界面
-    }
+        setContentView(R.layout.pay_part_bainuo_error_dialog_layout);    }
 
     public BaiNuoPartErrorDialog(Activity context, IPaymentInfo paymentInfo, PaymentVo paymentVo, PayResp payResp, IPayOverCallback callBack) {
         this(context, R.style.custom_alert_dialog);
@@ -72,23 +61,19 @@ public class BaiNuoPartErrorDialog extends Dialog implements View.OnClickListene
         PayResultTool resultTool = new PayResultTool(mPaymentVo, mPayResp);
         mPayAmountTV.setText(CashInfoManager.formatCash(resultTool.getPayOkAmount()));
         String couponNoLabel = getContext().getString(R.string.coupon_number) + "：";
-        //成功列表
-        if (!Utils.isEmpty(resultTool.getPaymentItemList(true))) {
+                if (!Utils.isEmpty(resultTool.getPaymentItemList(true))) {
             for (PaymentItem item : resultTool.getPaymentItemList(true)) {
                 mOkList.addView(getItemView(getContext(), couponNoLabel + item.getRelateId(), CashInfoManager.formatCash(item.getUsefulAmount().doubleValue())));
             }
         }
-        //失败列表
-        if (!Utils.isEmpty(resultTool.getPaymentItemList(false))) {
+                if (!Utils.isEmpty(resultTool.getPaymentItemList(false))) {
             for (PaymentItem item : resultTool.getPaymentItemList(false)) {
                 PayResp.PItemResults result = resultTool.getPItemResultsByPaymentItemUUid(item.getUuid());
                 if (result != null && result.getResultMsg() != null)
                     mErrorList.addView(getErrorItemView(getContext(), couponNoLabel + item.getRelateId(), result.getResultMsg()));
             }
         }
-        /*PayMessage payMessage = DisplayServiceManager.buildPayMessage(PayMessage.PAY_STATE_FAIL, "");
-        payMessage.setLabel(this.getContext().getString(R.string.coupon_part_error_title));
-        DisplayServiceManager.updateDisplay(this.getContext().getApplicationContext(), payMessage);*/
+
     }
 
     @Override
@@ -169,8 +154,7 @@ public class BaiNuoPartErrorDialog extends Dialog implements View.OnClickListene
         @Override
         public void onDismiss(DialogInterface dialogInterface) {
             try {
-                //刷新副2屏应收
-                DisplayServiceManager.updateDisplayPay(getContext().getApplicationContext(), mPaymentInfo.getActualAmount());
+                                DisplayServiceManager.updateDisplayPay(getContext().getApplicationContext(), mPaymentInfo.getActualAmount());
                 if (mCallBack != null) {
                     mCallBack.onFinished(true, 1000);
                 }

@@ -6,9 +6,7 @@ import com.zhongmei.bty.basemodule.orderdish.entity.TradeItemExtraDinner;
 import com.zhongmei.yunfu.db.entity.trade.Tables;
 import com.zhongmei.yunfu.db.entity.trade.TradeTable;
 
-/**
- * 封装正餐换桌接口的返回数据
- */
+
 public class TransferDinnertableResp {
 
     private List<Tables> tables;

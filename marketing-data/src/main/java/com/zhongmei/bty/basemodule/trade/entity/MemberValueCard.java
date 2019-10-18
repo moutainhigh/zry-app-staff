@@ -2,23 +2,9 @@ package com.zhongmei.bty.basemodule.trade.entity;
 
 import java.math.BigDecimal;
 
-/**
- * 储值及支付返回值
- *
- * @version v8.5.0
- * @since 2018.01.11.
- */
+
 public class MemberValueCard {
 
-    // beforeRealValue	BigDecimal	是	操作前余额实储金额
-    // beforeSendValue	BigDecimal	是	操作前储值赠送余额
-    // beforePrepareValue	BigDecimal	是	操作前预储金额
-    // currentRealValue	BigDecimal	是	本次操作实储金额
-    // currentSendValue	BigDecimal	是	本次操作储值赠送金额
-    // currentPrepareValue	BigDecimal	是	本次操作预储金额
-    // endRealValue	BigDecimal	是	操作后余额实储金额
-    // endSendValue	BigDecimal	是	操作后储值赠送余额
-    // endPrepareValue	BigDecimal	是	操作后预储金额
 
     private BigDecimal beforeRealValue = BigDecimal.ZERO;
     private BigDecimal beforeSendValue = BigDecimal.ZERO;

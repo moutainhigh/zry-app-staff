@@ -22,12 +22,7 @@ import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-/**
- * @param <Q>
- * @param <R>
- * @version: 1.0
- * @date 2015年4月20日
- */
+
 public class JsonHttpCaller<Q, R> {
 
     protected static final String METHOD_POST = "POST";
@@ -78,12 +73,7 @@ public class JsonHttpCaller<Q, R> {
     public R call(Q requestObj) throws Exception {
         String originalUrl = url;
         URL url = new URL(originalUrl);
-        /*String originalHost = url.getHost();
-        // 同步接口获取IP
-        String ip = DNSCache.getInstance().getIpByHost(originalHost);
-        if (ip != null) {
-            url = new URL(originalUrl.replaceFirst(originalHost, ip));
-        }*/
+
 
         HttpURLConnection conn = createConnection(url);
         try {
@@ -94,9 +84,7 @@ public class JsonHttpCaller<Q, R> {
 
             boolean acceptCompress = HttpConstant.isAllowCompress(url.toString(), body);
             setConnectionParameters(conn, acceptCompress);
-            /*if (ip != null) {
-                conn.setRequestProperty("Host", originalHost);
-            }*/
+
 
             DataOutputStream ops = new DataOutputStream(getOutputStream(conn, acceptCompress, body));
             ops.write(body);

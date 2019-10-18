@@ -43,9 +43,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by dingzb on 2019/6/25.
- */
+
 
 public class BeautyResultTaskDialog extends BasicDialogFragment implements View.OnClickListener ,CompoundButton.OnCheckedChangeListener{
 
@@ -76,8 +74,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
     private TaskRemind mTask;
     private TaskCreateOrEditReq mTaskReq;
     private TaskCreateOrEditReq mNewTaskReq;
-    private UserVo mExecutor;//执行人，默认为当前登陆的店员
-    private Date mSelectDate=new Date(System.currentTimeMillis());
+    private UserVo mExecutor;    private Date mSelectDate=new Date(System.currentTimeMillis());
 
     public void setCallBackListener(CallBackListener listener) {
         this.callBackListener = listener;
@@ -105,11 +102,9 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
 
     private void setupWindow() {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getDialog().setCanceledOnTouchOutside(false);// 设置点击屏幕Dialog不消失
-        Window window = getDialog().getWindow();
+        getDialog().setCanceledOnTouchOutside(false);        Window window = getDialog().getWindow();
         if (window != null) {
-            //设置宽高
-            WindowManager.LayoutParams attributes = window.getAttributes();
+                        WindowManager.LayoutParams attributes = window.getAttributes();
             attributes.width = DensityUtil.dip2px(getActivity(), 460f);
             attributes.height = WindowManager.LayoutParams.WRAP_CONTENT;
             window.setAttributes(attributes);
@@ -120,10 +115,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
-    /**
-     * 初始化view
-     * @param view
-     */
+
     private void initView(View view){
         layout_taskInfo=(LinearLayout) view.findViewById(R.id.layout_task_info);
         layout_memberInfo=(LinearLayout)view.findViewById(R.id.layout_member_info);
@@ -153,9 +145,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
     }
 
 
-    /**
-     * 初始化数据
-     */
+
     private void initData(){
         showExecutor(null);
 
@@ -175,10 +165,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
     }
 
 
-    /**
-     * 显示执行人
-     * @param userVo
-     */
+
     private void showExecutor(UserVo userVo){
         if(userVo==null){
             IAuthUser authUser=ShopInfoCfg.getInstance().authUser;
@@ -200,9 +187,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
     }
 
 
-    /**
-     * 检查数据的有效性
-     */
+
     private boolean checkDataValid(){
         String taskResult = et_taskResult.getText().toString().trim();
 
@@ -252,9 +237,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
     }
 
 
-    /**
-     * 选择执行时间（用户自己选择）
-     */
+
     private void selectExecuteTime(){
         CalendarTimeDialog  mCalendarTimeDialog = new CalendarTimeDialog(getContext(), new CalendarTimeDialog.SelectedDateTimeListener() {
             @Override
@@ -267,9 +250,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
         mCalendarTimeDialog.showDialog();
     }
 
-    /**
-     * 选择这行人，默认为当前服务员
-     */
+
     private void selectExecutor(){
         List<UserVo> selectUser=new ArrayList<UserVo>();
         selectUser.add(mExecutor);
@@ -285,8 +266,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
                 }
             }
         });
-        dialog.setSelectUsers(selectUser); // 编辑时传入锁定状态
-        dialog.setIsNotFreeUsers(new ArrayList<Long>());
+        dialog.setSelectUsers(selectUser);         dialog.setIsNotFreeUsers(new ArrayList<Long>());
         dialog.show(getChildFragmentManager(), "BeautyBookingWaiterDialog");
     }
 
@@ -297,8 +277,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
             @Override
             public void onResponse(YFResponse<TaskRemind> response) {
                 if (YFResponseList.isOk(response)) {
-                    //需要隐藏一下详情页面
-                    if(callBackListener!=null){
+                                        if(callBackListener!=null){
                         callBackListener.onSuccess(response.getContent());
                     }
                     dismissAllowingStateLoss();
@@ -322,8 +301,7 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
             @Override
             public void onResponse(YFResponse<TaskRemind> response) {
                 if (YFResponseList.isOk(response)) {
-                    //需要隐藏一下详情页面
-                    resultTask();
+                                        resultTask();
                 } else {
                     ToastUtil.showShortToast(response.getMessage());
                 }
@@ -350,10 +328,8 @@ public class BeautyResultTaskDialog extends BasicDialogFragment implements View.
         if(v == btn_submit){
             if(checkDataValid()){
                 if(mNewTaskReq!=null){
-                    createTask();//先创建任务
-                }else{
-                    resultTask();//直接结束任务
-                }
+                    createTask();                }else{
+                    resultTask();                }
             }
         }else if(v==ib_close){
             dismissAllowingStateLoss();

@@ -7,13 +7,10 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BuffetComboVo implements Serializable {
-    private BigDecimal totalCount = BigDecimal.ZERO;//总人数
-    private DishCarte dishCarte;
+    private BigDecimal totalCount = BigDecimal.ZERO;    private DishCarte dishCarte;
     private List<DishCarteDetail> dishCarteDetails;
     private List<CustomerTypeBean> dishCarteNorms;
 

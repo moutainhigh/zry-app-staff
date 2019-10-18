@@ -16,9 +16,7 @@ import com.zhongmei.bty.dinner.table.model.DinnertableModel;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.beauty_tablechoice_item_view)
 public class BeautyTableItemView extends LinearLayout {
 

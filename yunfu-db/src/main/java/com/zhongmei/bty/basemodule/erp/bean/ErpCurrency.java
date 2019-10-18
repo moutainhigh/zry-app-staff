@@ -6,110 +6,48 @@ import com.zhongmei.bty.basemodule.erp.util.ErpConstants;
 import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.bty.commonmodule.database.entity.base.OldEntityBase;
 
-/**
- * 国籍数据
- * <p>
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "erp_currency")
 public class ErpCurrency extends OldEntityBase {
 
 
-//    CREATE TABLE `erp_currency` (
-//            `id` bigint(20) NOT NULL AUTO_INCREMENT,
-//  `country_zh` varchar(100) DEFAULT NULL COMMENT '国家(中文)',
-//            `country_en` varchar(100) DEFAULT NULL COMMENT '国家(英文)',
-//            `area_code` varchar(20) DEFAULT NULL COMMENT '地区电话区码',
-//            `phone_regulation` varchar(120) DEFAULT NULL COMMENT '电话号码验证规则:如正则表达式',
-//            `currency_encode` varchar(20) DEFAULT NULL COMMENT '货币编码',
-//            `currency` varchar(30) DEFAULT NULL COMMENT '货币名称',
-//            `currency_symbol` varchar(10) DEFAULT NULL COMMENT '货币符号,类似$,￥等等',
-//            `language_encode` varchar(20) DEFAULT NULL COMMENT '语系编码',
-//            `language_name` varchar(100) DEFAULT NULL COMMENT '语系名称',
-//            `language_default` varchar(30) DEFAULT NULL COMMENT '默认语系',
-//            `time_difference` double(5,2) DEFAULT NULL COMMENT '时差',
-//            `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-//            `creator_id` bigint(20) DEFAULT NULL COMMENT '创建人ID',
-//            `creator_name` varchar(50) DEFAULT NULL COMMENT '创建人姓名',
-//            `updator_name` varchar(50) DEFAULT NULL COMMENT '修改人姓名',
-//            `updator_id` bigint(20) DEFAULT NULL COMMENT '修改人ID',
-//            `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
-//            `status` tinyint(4) DEFAULT '0' COMMENT '是否有效 0:有效 -1:无效',
-//    PRIMARY KEY (`id`)
-//) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8 COMMENT='币种语言表'
 
     public interface $ extends BasicEntityBase.$ {
-        /**
-         * 国家(中文)
-         */
+
         String countryZh = "country_zh";
-        /**
-         * 国家(英文)
-         */
+
         String countryEn = "country_en";
-        /**
-         * 地区电话区码
-         */
+
         String areaCode = "area_code";
-        /**
-         * 电话号码验证规则:如正则表达式
-         */
+
         String phoneRegulation = "phone_regulation";
-        /**
-         * 货币编码
-         */
+
         String currencyEncode = "currency_encode";
-        /**
-         * 货币名称
-         */
+
         String currency = "currency";
-        /**
-         * 货币符号,类似$,￥等等
-         */
+
         String currencySymbol = "currency_symbol";
-        /**
-         * 语系编码
-         */
+
         String languageEncode = "language_encode";
-        /**
-         * 语系名称
-         */
+
         String languageName = "language_name";
-        /**
-         * 默认语系
-         */
+
         String languageDefault = "language_default";
-        /**
-         * 时差
-         */
+
         String timeDifference = "time_difference";
-        /**
-         * 创建时间
-         */
+
         String createTime = "create_time";
-        /**
-         * 创建人ID
-         */
+
         String creatorId = "creator_id";
-        /**
-         * 创建人姓名
-         */
+
         String creatorName = "creator_name";
-        /**
-         * 修改人姓名
-         */
+
         String updator_name = "updatorName";
-        /**
-         * 修改人ID
-         */
+
         String updatorId = "updator_id";
-        /**
-         * 修改时间
-         */
+
         String updateTime = "update_time";
-        /**
-         * 是否有效 0:有效 -1:无效
-         */
+
         String status = "status";
     }
 

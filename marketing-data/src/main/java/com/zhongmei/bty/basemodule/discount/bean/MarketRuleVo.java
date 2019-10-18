@@ -18,50 +18,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @Date：2016-5-20 下午1:49:40
- * @Description: 营销活动展示主业务信息
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class MarketRuleVo implements java.io.Serializable {
-    /**
-     * @date：2016-5-20 下午1:40:27
-     * @Description
-     */
+
     private static final long serialVersionUID = 1L;
 
-    private MarketActivityRule marketActivityRule;// 规则
+    private MarketActivityRule marketActivityRule;
+    private MarketPlan marketPlan;
+        private PromotionType promotionType;
 
-    private MarketPlan marketPlan;// 活动主表
+        private ActivityType activityType;
 
-    // 优惠类型
-    private PromotionType promotionType;
+        private Set<UserType> userTypes;
 
-    // 营销方式：1单商品 2多商品
-    private ActivityType activityType;
+        private Set<BusinessType> businessTypes;
 
-    // 用户类型
-    private Set<UserType> userTypes;
+        private Set<DeliveryType> deliveryTypes;
 
-    // 订单类型（正餐、快餐）
-    private Set<BusinessType> businessTypes;
+        private MarketTempletVo templetVo;
 
-    // 单据类型
-    private Set<DeliveryType> deliveryTypes;
+        private Map<Long, MarketActivityDish> marketActivityDishMap;
 
-    // 特价菜（可能为空）
-    private MarketTempletVo templetVo;
+        private List<Integer> activityPos;
 
-    // 部分参与菜品（可能为空）
-    private Map<Long, MarketActivityDish> marketActivityDishMap;
-
-    // 参与终端
-    private List<Integer> activityPos;
-
-    // 星期几
-    private List<Integer> weekdayList;
+        private List<Integer> weekdayList;
 
     public MarketRuleVo() {
     }
@@ -105,8 +85,7 @@ public class MarketRuleVo implements java.io.Serializable {
         this.activityType = activityType;
     }
 
-    // 参与人群
-    public boolean isContainsUserType(UserType type) {
+        public boolean isContainsUserType(UserType type) {
         if (userTypes != null) {
             return userTypes.contains(type);
         } else {
@@ -130,8 +109,7 @@ public class MarketRuleVo implements java.io.Serializable {
         this.userTypes = userTypes;
     }
 
-    // 单据类型
-    public boolean isContainsBusinessType(BusinessType type) {
+        public boolean isContainsBusinessType(BusinessType type) {
         if (businessTypes != null) {
             return businessTypes.contains(type);
         } else {
@@ -139,8 +117,7 @@ public class MarketRuleVo implements java.io.Serializable {
         }
     }
 
-    // 就餐方式
-    public boolean isContainsDeliveryType(DeliveryType type) {
+        public boolean isContainsDeliveryType(DeliveryType type) {
         if (deliveryTypes != null) {
             return deliveryTypes.contains(type);
         } else {
@@ -148,8 +125,7 @@ public class MarketRuleVo implements java.io.Serializable {
         }
     }
 
-    // 是否所有商品参与
-    public boolean isAllDish() {
+        public boolean isAllDish() {
         if (marketActivityRule != null && marketActivityRule.getAllDish() != null) {
             return marketActivityRule.getAllDish() == 1;
         }
@@ -185,8 +161,7 @@ public class MarketRuleVo implements java.io.Serializable {
         this.templetVo = templetVo;
     }
 
-    // 部分商品 判断是否存在某个菜品
-    private boolean isContainsDish(DishShop dishShop) {
+        private boolean isContainsDish(DishShop dishShop) {
         if (dishShop == null) {
             return false;
         }
@@ -195,14 +170,12 @@ public class MarketRuleVo implements java.io.Serializable {
             return true;
         }
 
-        //判断菜品类型的营销活动
-        MarketActivityDish activityDish = marketActivityDishMap.get(dishShop.getBrandDishId());
+                MarketActivityDish activityDish = marketActivityDishMap.get(dishShop.getBrandDishId());
         if (activityDish != null && activityDish.getType() != null && activityDish.getType() == MarketActivityDish.MARKET_ACTIVITY_DISH) {
             return true;
         }
 
-        //判断中类类型的营销活动
-        MarketActivityDish activityDishType = marketActivityDishMap.get(dishShop.getDishTypeId());
+                MarketActivityDish activityDishType = marketActivityDishMap.get(dishShop.getDishTypeId());
         if (activityDishType != null && activityDishType.getType() != null && activityDishType.getType() == MarketActivityDish.MARKET_ACTIVITY_DISH_TYPE) {
             return true;
         }
@@ -261,20 +234,17 @@ public class MarketRuleVo implements java.io.Serializable {
         return true;
     }
 
-    // 当前时间是否可用
-    public boolean IsEnableCurrent() {
+        public boolean IsEnableCurrent() {
         MarketActivityRule rule = this.marketActivityRule;
         if (rule != null) {
             Long currTimeStap = System.currentTimeMillis();
-            // 如果有时间段限制
-            if (rule.getLimitPeriod() == 2) {
+                        if (rule.getLimitPeriod() == 2) {
                 if (currTimeStap > DateTimeUtils.getTime(rule.getPeriodEnd())
                         || currTimeStap < DateTimeUtils.getTime(rule.getPeriodStart())) {
                     return false;
                 }
             }
-            // 如果有星期限制(目前默认都限制)
-            if (true) {
+                        if (true) {
                 int currentWeek = DateTimeUtils.getCurrentDayOfWeekName();
                 if (!this.isContainsWeekDay(currentWeek)) {
                     return false;
@@ -286,36 +256,26 @@ public class MarketRuleVo implements java.io.Serializable {
         }
     }
 
-    /**
-     * 根据菜品判断该活动是否可用
-     *
-     * @param dishShop 菜品
-     * @return
-     */
+
     public boolean isDishEnableUsed(DishShop dishShop) {
         if (dishShop == null) {
             return false;
         }
 
-        //是否是特价菜优惠
-        if (isSpecialPriceDish(dishShop.getBrandDishId())) {
+                if (isSpecialPriceDish(dishShop.getBrandDishId())) {
             return true;
         }
 
-        //商品营销优惠
-        if (isAllDish()) {//所有菜品/中类都参加
-            return true;
+                if (isAllDish()) {            return true;
         }
 
         if (marketActivityRule == null || marketActivityRule.getAllDish() == null) {
             return false;
         }
-        if (marketActivityRule.getAllDish() == 2) {  //部分商品可用
-            if (isPlanActivityDishOrType(dishShop)) {
+        if (marketActivityRule.getAllDish() == 2) {              if (isPlanActivityDishOrType(dishShop)) {
                 return true;
             }
-        } else if (marketActivityRule.getAllDish() == 3) { //部分商品不可用
-            if (!isPlanActivityDishOrType(dishShop)) {
+        } else if (marketActivityRule.getAllDish() == 3) {             if (!isPlanActivityDishOrType(dishShop)) {
                 return true;
             }
         }
@@ -332,12 +292,7 @@ public class MarketRuleVo implements java.io.Serializable {
         return false;
     }
 
-    /**
-     * 商品是否可以参加当前营销活动
-     *
-     * @param dishShop
-     * @return
-     */
+
     public boolean isPlanActivityDishOrType(DishShop dishShop) {
         return isContainsDish(dishShop);
     }

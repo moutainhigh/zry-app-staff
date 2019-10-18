@@ -1,9 +1,6 @@
 package com.zhongmei.yunfu.context.data;
 
-/**
- * 打印二维码，饿了么配置
- * Created by demo on 2018/12/15
- */
+
 public class ReceiptInfo {
 
     public String title;

@@ -38,8 +38,7 @@ public class YfProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        //mOpenHelper = OpenHelperManager.getHelper(getContext(), CalmDatabaseHelper.class);
-        return true;
+                return true;
     }
 
     private SQLiteDatabaseHelper getDbHelper() {
@@ -58,8 +57,7 @@ public class YfProvider extends ContentProvider {
         try {
             ContentProviderResult[] results = super.applyBatch(operations);
             boolean success = true;
-            // 增返回uri，删改返回count
-            for (ContentProviderResult result : results) {
+                        for (ContentProviderResult result : results) {
                 if (result.uri == null && result.count == -1) {
                     success = false;
                     break;
@@ -88,14 +86,9 @@ public class YfProvider extends ContentProvider {
 
     @Override
     public String getType(Uri uri) {
-        //int oldTableCount = DataBaseTableList.getAllTableList().size();
-        int newTableCount = YfDatabaseHelper.TABLES.size();
+                int newTableCount = YfDatabaseHelper.TABLES.size();
         int i = sUriMatcher.match(uri);
-		/*if (i < oldTableCount) {
-			return DataBaseUtils.getTableName(DataBaseTableList.getAllTableList().get(i));
-		} else if (i < (oldTableCount+newTableCount)) {
-			return DBHelperManager.getTableName(CalmDatabaseHelper.TABLES.get(i-oldTableCount));
-		}*/
+
         if (i < newTableCount) {
             return DBHelperManager.getTableName(YfDatabaseHelper.TABLES.get(i));
         }
@@ -113,25 +106,7 @@ public class YfProvider extends ContentProvider {
         Uri noteUri = null;
         String table = getType(uri);
 
-		/*if (isCommonDataTable(table)) {
-			long dateTime1 = System.currentTimeMillis();
-			if (values
-					.containsKey(CommonDataBaseInfo.COMMON_CREATE_DATETIME_KEY) == false
-					|| TextUtils
-							.isEmpty(values
-									.getAsString(CommonDataBaseInfo.COMMON_CREATE_DATETIME_KEY))) {
-				values.put(CommonDataBaseInfo.COMMON_CREATE_DATETIME_KEY,
-						dateTime1);
-			}
-			if (values
-					.containsKey(CommonDataBaseInfo.COMMON_MODIFY_DATETIME_KEY) == false
-					|| TextUtils
-							.isEmpty(values
-									.getAsString(CommonDataBaseInfo.COMMON_MODIFY_DATETIME_KEY))) {
-				values.put(CommonDataBaseInfo.COMMON_MODIFY_DATETIME_KEY,
-						dateTime1);
-			}
-		}*/
+
         SQLiteDatabase db = getDbHelper().getWritableDatabase();
         long rowId = db.replace(table, "", values);
         if (rowId > 0) {
@@ -148,14 +123,7 @@ public class YfProvider extends ContentProvider {
         return noteUri;
     }
 
-	/*private boolean isCommonDataTable(String table) {
-		for (Class<?> cls : DataBaseTableList.getSyncTableList()) {
-			if (DataBaseUtils.getTableName(cls).equals(table)) {
-				return true;
-			}
-		}
-		return false;
-	}*/
+
 
     @Override
     public int delete(Uri uri, String where, String[] whereArgs) {
@@ -182,17 +150,7 @@ public class YfProvider extends ContentProvider {
             valuesTmp = new ContentValues();
         }
         String table = getType(uri);
-		/*if (isCommonDataTable(table)) {
-			long dateTime1 = System.currentTimeMillis();
-			if (values
-					.containsKey(CommonDataBaseInfo.COMMON_MODIFY_DATETIME_KEY) == false
-					|| TextUtils
-							.isEmpty(values
-									.getAsString(CommonDataBaseInfo.COMMON_MODIFY_DATETIME_KEY))) {
-				values.put(CommonDataBaseInfo.COMMON_MODIFY_DATETIME_KEY,
-						dateTime1);
-			}
-		}*/
+
         SQLiteDatabase db = getDbHelper().getWritableDatabase();
         try {
             db.update(table, valuesTmp, selection, selectionArgs);

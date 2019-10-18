@@ -5,19 +5,14 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.orm.SQLiteDatabaseHelper;
 import com.zhongmei.bty.commonmodule.database.db.base.SuperDBManager;
 
-/**
- * local.db manager类
- * Created by demo on 2018/12/15
- */
+
 
 public class LocalDBManager extends SuperDBManager {
 
     protected static volatile SQLiteDatabaseHelper mSqLiteDatabaseHelper = null;
     protected static int instanceCount = 0;
 
-    /**
-     * @return
-     */
+
     public static DatabaseHelper getHelper() {
         synchronized (LocalDBManager.class) {
             if (mSqLiteDatabaseHelper == null) {

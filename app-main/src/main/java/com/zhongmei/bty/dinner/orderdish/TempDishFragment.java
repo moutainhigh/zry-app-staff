@@ -36,9 +36,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @EFragment(R.layout.fragment_orderdish_temp_dish)
 public class TempDishFragment extends BasicDialogFragment {
@@ -47,29 +45,24 @@ public class TempDishFragment extends BasicDialogFragment {
     protected Button btn_close;
 
     @ViewById(R.id.layout_temp_dish_name)
-    protected LinearLayout layout_showTempDishName;//临时商品名称显示
-    @ViewById(R.id.tv_temp_dish_name)
+    protected LinearLayout layout_showTempDishName;    @ViewById(R.id.tv_temp_dish_name)
     protected TextView tv_tempDishName;
     @ViewById(R.id.ib_edit)
     protected ImageButton ib_edit;
 
     @ViewById(R.id.layout_edit_temp_dish_name)
-    protected LinearLayout layout_editTempDishName;//临时商品名称编辑
-    @ViewById(R.id.et_dish_name)
+    protected LinearLayout layout_editTempDishName;    @ViewById(R.id.et_dish_name)
     protected EditText et_tempDishName;
     @ViewById(R.id.ib_clear_input)
     protected ImageButton ib_clean;
 
     @ViewById(R.id.tv_total_fee)
-    protected TextView tv_totalFee;//商品总价
-
+    protected TextView tv_totalFee;
 
     @ViewById(R.id.et_tempDishPrice)
-    protected EditText et_dishPrice;//商品价格
-
+    protected EditText et_dishPrice;
     @ViewById(R.id.et_temp_dish_weigh)
-    protected EditText et_tempDishweigh;//商品重量(数量)
-
+    protected EditText et_tempDishweigh;
 
     @ViewById(R.id.btn_add_to_cart)
     protected Button btn_addToCart;
@@ -78,8 +71,7 @@ public class TempDishFragment extends BasicDialogFragment {
     protected NumberKeyBoard mKeyBorad;
 
     private DishVo mDishVo;
-    //货币符号
-    String symbol = "";
+        String symbol = "";
 
     @NonNull
     @Override
@@ -140,8 +132,6 @@ public class TempDishFragment extends BasicDialogFragment {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            ([0-9]*)?+(.[0-9]{0,2})?$
-//            decimal(10,2)
             String matchStr = "^" + symbol + "\\d{0,8}+(\\.\\d{0,2})?$";
             if (matchStr.startsWith("^$")) {
                 matchStr = "^\\$\\d{0,8}+(\\.\\d{0,2})?$";
@@ -249,9 +239,7 @@ public class TempDishFragment extends BasicDialogFragment {
         }
     }
 
-    /**
-     * 添加临时菜到购物车
-     */
+
     private boolean addTempDishToShopcart() {
         if (TextUtils.isEmpty(et_tempDishName.getText()) || TextUtils.isEmpty(et_dishPrice.getText())
                 || TextUtils.isEmpty(et_tempDishweigh.getText())) {
@@ -259,8 +247,7 @@ public class TempDishFragment extends BasicDialogFragment {
             return false;
         }
         String dishName = et_tempDishName.getText().toString().trim();
-        //价格去人民币符号
-        String price = et_dishPrice.getText().toString();
+                String price = et_dishPrice.getText().toString();
         price = price.replace(symbol, "0");
         String weight = et_tempDishweigh.getText().toString();
         BigDecimal weightDecimal = new BigDecimal(weight);

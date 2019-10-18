@@ -57,10 +57,7 @@ public class IntelligentCash {
             possibleList.remove(6);
         }
 
-        /*
-         * Money other = new Money(1, 0);
-         * possibleList.add(other);
-         */
+
         return possibleList;
     }
 
@@ -78,8 +75,7 @@ public class IntelligentCash {
 
     private static boolean isNumeric(String str) {
         java.util.regex.Pattern pattern =
-                java.util.regex.Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$"); // 锟叫讹拷小锟斤拷锟斤拷锟�2位锟斤拷锟斤拷锟街碉拷锟斤拷锟斤拷锟斤拷式
-        java.util.regex.Matcher match = pattern.matcher(str);
+                java.util.regex.Pattern.compile("^(([1-9]{1}\\d*)|([0]{1}))(\\.(\\d){0,2})?$");         java.util.regex.Matcher match = pattern.matcher(str);
         if (match.matches() == false) {
             return false;
         } else {

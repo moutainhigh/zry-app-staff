@@ -1,8 +1,6 @@
 package com.zhongmei.bty.customer.views;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -24,8 +22,6 @@ import org.androidannotations.annotations.ViewById;
 @EFragment(R.layout.customer_save_dialog)
 public class SaveCustomerDailog extends BasicDialogFragment {
 
-//    @ViewById(R.id.progressbar)
-//    private ProgressBar progressBar;
 
 
     @ViewById(R.id.card_btn)

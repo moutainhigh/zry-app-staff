@@ -13,9 +13,7 @@ import com.zhongmei.bty.dinner.orderdish.DinnerDishSetmealFragment;
 
 import org.androidannotations.annotations.EFragment;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_dish_setmeal)
 public class BeautySetmealFragment extends DinnerDishSetmealFragment {
 

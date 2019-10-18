@@ -18,8 +18,7 @@ import java.util.Locale;
 
 public class DateTimeUtils {
 
-    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";// "(dd/MM/yyyy)";
-
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
     public static final String QUERY_DATE_FORMAT = "yyyy-MM-dd";
 
     public static final String DEFAULT_WEEK_FORMAT = "E";
@@ -66,9 +65,7 @@ public class DateTimeUtils {
 
     };
 
-    /**
-     * @return yyyy-MM-dd HH:mm
-     */
+
     public static String getCurrentDateTime() {
         return mYMDHMDateTime.get().format(System.currentTimeMillis());
     }
@@ -86,9 +83,7 @@ public class DateTimeUtils {
         return sdf.format(timeInMills);
     }
 
-    /**
-     * @return yyyy-MM-dd HH:mm
-     */
+
     public static String formatDateTime(long timemillis) {
         return mYMDHMDateTime.get().format(timemillis);
     }
@@ -110,22 +105,14 @@ public class DateTimeUtils {
         return date;
     }
 
-    /**
-     * yyyy/MM/dd HH:mm
-     *
-     * @param date
-     * @return
-     */
+
     public static String formatDateSlash(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_TIME_YYYY_MM_DD_HH_MM, Locale.getDefault());
         String dateString = sdf.format(date);
         return dateString;
     }
 
-    /**
-     * @param selectedDate yyyy-MM-dd
-     * @return
-     */
+
     public static long formatDate(String selectedDate) {
         SimpleDateFormat sdf = mYMDDateTime.get();
         try {
@@ -138,10 +125,7 @@ public class DateTimeUtils {
         return 0;
     }
 
-    /**
-     * @param selectedDate yyyy-MM-dd
-     * @return
-     */
+
     public static long formatDate(String selectedDate, String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         try {
@@ -154,16 +138,8 @@ public class DateTimeUtils {
         return 0;
     }
 
-    /**
-     * @param date
-     * @return yyyy-MM-dd
-     */
+
     public static String formatDate(Long date) {
-//		if (date == null) {
-//			return "";
-//		}
-//		SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_DATE_FORMAT, Locale.getDefault());
-//		return sdf.format(new Date(date));
         return formatDate(date, DEFAULT_DATE_FORMAT);
     }
 
@@ -175,21 +151,14 @@ public class DateTimeUtils {
         return sdf.format(new Date(date));
     }
 
-    /**
-     * @param date
-     * @return E
-     */
+
     public static int formatWeek(long date) {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         cal.setTime(new Date(date));
         return cal.get(Calendar.DAY_OF_WEEK);
     }
 
-    /**
-     * @param step
-     * @param base
-     * @return (yyyy - MM - dd)
-     */
+
     public static String getDisplayDate(long initTime, int step, int base) {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         cal.setTime(new Date(initTime));
@@ -206,14 +175,12 @@ public class DateTimeUtils {
         return cal.getTime();
     }
 
-    // 获取系统星期几 1 周周日，2周一，3周二。。。
-    public static int getCurrentDayOfWeek() {
+        public static int getCurrentDayOfWeek() {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         return cal.get(Calendar.DAY_OF_WEEK);
     }
 
-    // 获取星期几 1 周一，2周二，3周三。。。
-    public static int getCurrentDayOfWeekName() {
+        public static int getCurrentDayOfWeekName() {
         int weekDayName = -1;
         int weekDay = getCurrentDayOfWeek();
 
@@ -229,11 +196,7 @@ public class DateTimeUtils {
         return weekDayName;
     }
 
-    /**
-     * @param step
-     * @param base
-     * @return E
-     */
+
     public static String getDisplayWeek(long initTime, int step, int base) {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         cal.setTime(new Date(initTime));
@@ -252,12 +215,7 @@ public class DateTimeUtils {
         return sdf.format(timeTmp);
     }
 
-    /**
-     * For Booking
-     *
-     * @param date yyyy-MM-dd
-     * @return E
-     */
+
     public static String getDisplayWeek(String date) {
         try {
             String[] dates = date.split("-");
@@ -289,10 +247,7 @@ public class DateTimeUtils {
 
     }
 
-    /**
-     * @param date yyyy
-     * @return
-     */
+
     public static Date formatStringToDate(String date) {
         try {
             String[] dates = date.split("-");
@@ -304,12 +259,7 @@ public class DateTimeUtils {
         }
     }
 
-    /**
-     * For Booking
-     *
-     * @param date yyyy-MM-dd
-     * @return yyyy-MM-dd
-     */
+
     public static String getDisplayDate(String date, int step) {
         try {
             String[] dates = date.split("-");
@@ -323,11 +273,7 @@ public class DateTimeUtils {
         }
     }
 
-    /**
-     * @param hour
-     * @param step
-     * @return HH
-     */
+
     public static String getDisplayHour(String hour, int step) {
         try {
             Calendar cal = Calendar.getInstance(Locale.getDefault());
@@ -340,11 +286,7 @@ public class DateTimeUtils {
         }
     }
 
-    /**
-     * @param minute
-     * @param step
-     * @return mm
-     */
+
     public static String getDisplayMinute(String minute, int step) {
         try {
             Calendar cal = Calendar.getInstance(Locale.getDefault());
@@ -357,28 +299,20 @@ public class DateTimeUtils {
         }
     }
 
-    /**
-     * @param date
-     * @return yyyy-MM-dd
-     */
+
     public static String formatDate(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(QUERY_DATE_FORMAT, Locale.getDefault());
         return sdf.format(date);
     }
 
-    /**
-     * @param date
-     * @return yyyy-MM-dd
-     */
+
     public static String formatDate(Date date, String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format, Locale.getDefault());
         return sdf.format(date);
     }
 
 
-    /**
-     * @return yyyy-MM-dd
-     */
+
     public static String getCurrentDate() {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         return sdf.format(System.currentTimeMillis());
@@ -389,21 +323,13 @@ public class DateTimeUtils {
         return cal.getTime().getTime();
     }
 
-    /**
-     * @return HH:mm
-     */
+
     public static String getCurrentTime() {
         SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
         return sdf.format(System.currentTimeMillis());
     }
 
-    /**
-     * 获取日期时差 单位：分钟
-     *
-     * @param beginDateTime
-     * @param endDateTime
-     * @return
-     */
+
     public static String getSubMinute(Context context, String beginDateTime, String endDateTime) {
         SimpleDateFormat myFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         try {
@@ -426,10 +352,7 @@ public class DateTimeUtils {
 
     }
 
-    /**
-     * @param oldDate format: yyyy-MM-dd
-     * @return
-     */
+
     public static String getAge(String oldDate) {
         if (oldDate == null) {
             return null;
@@ -445,10 +368,7 @@ public class DateTimeUtils {
         return "";
     }
 
-    /**
-     * @param orderTime yyyy-MM-dd HH:mm
-     * @return yyyy-MM-dd HH:mm:ss
-     */
+
     public static String formatBookingTime(String orderTime) {
         try {
             String[] dateTime = orderTime.split(" ");
@@ -468,10 +388,7 @@ public class DateTimeUtils {
         }
     }
 
-    /**
-     * @param orderTime yyyy-MM-dd HH:mm:ss
-     * @return yyyy-MM-dd HH:mm
-     */
+
     public static String formatBookingTime2(String orderTime) {
         try {
             String[] dateTime = orderTime.split(" ");
@@ -491,10 +408,7 @@ public class DateTimeUtils {
         }
     }
 
-    /**
-     * @param dateTime yyyy-MM-dd HH:mm:ss
-     * @return yyyy-MM-dd
-     */
+
     public static String formatAppClientDateTime(String dateTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         try {
@@ -506,10 +420,7 @@ public class DateTimeUtils {
         return null;
     }
 
-    /**
-     * @param dateTime yyyy-MM-dd HH:mm:ss
-     * @return HH:mm
-     */
+
     public static String formatAppClientTime(String dateTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         try {
@@ -521,10 +432,7 @@ public class DateTimeUtils {
         return null;
     }
 
-    /**
-     * @param dateTime yyyy-MM-dd HH:mm:ss
-     * @return HH:mm
-     */
+
     public static String formatYudingTime(String dateTime) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         try {
@@ -536,27 +444,13 @@ public class DateTimeUtils {
         return null;
     }
 
-    /**
-     * 格式化通话时间
-     *
-     * @param ms
-     * @return
-     */
+
     public static String formatCalledTime(long ms) {
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss", Locale.getDefault());
         return sdf.format(ms);
     }
 
-    /**
-     * 判断给定的时间是否早于当前时间
-     *
-     * @param year
-     * @param month
-     * @param date
-     * @param hourOfDay
-     * @param minute
-     * @return
-     */
+
     public static boolean beforeCurrentDateTime(int year, int month, int date, int hourOfDay, int minute) {
         Calendar calParam = Calendar.getInstance(Locale.getDefault());
         calParam.set(year, month - 1, date, hourOfDay, minute);
@@ -564,14 +458,7 @@ public class DateTimeUtils {
         return r < 0;
     }
 
-    /**
-     * 判断给定的日期是否晚于当前日期
-     *
-     * @param year
-     * @param month
-     * @param date
-     * @return
-     */
+
     public static boolean afterCurrentDate(int year, int month, int date) {
         Calendar calParam = Calendar.getInstance(Locale.getDefault());
         calParam.set(year, month - 1, date);
@@ -579,24 +466,14 @@ public class DateTimeUtils {
         return r > 0;
     }
 
-    /**
-     * 设置系统自动确定日期、时间及时区
-     *
-     * @param context
-     * @return
-     */
+
     public static boolean setSystemAutoDateTime(Context context) {
         boolean autoTimeEnabled = getAutoState(context, Settings.System.AUTO_TIME);
         boolean autoTimeZoneEnabled = getAutoState(context, Settings.System.AUTO_TIME_ZONE);
         if (!autoTimeEnabled) {
-            Settings.System.putInt(context.getContentResolver(), Settings.System.AUTO_TIME, 1);// auto
-            // time
-        }
+            Settings.System.putInt(context.getContentResolver(), Settings.System.AUTO_TIME, 1);                    }
         if (!autoTimeZoneEnabled) {
-            Settings.System.putInt(context.getContentResolver(), Settings.System.AUTO_TIME_ZONE, 1);// auto
-            // time
-            // zone
-        }
+            Settings.System.putInt(context.getContentResolver(), Settings.System.AUTO_TIME_ZONE, 1);                                }
         autoTimeEnabled = getAutoState(context, Settings.System.AUTO_TIME);
         autoTimeZoneEnabled = getAutoState(context, Settings.System.AUTO_TIME_ZONE);
         return (autoTimeEnabled && autoTimeZoneEnabled);
@@ -614,11 +491,7 @@ public class DateTimeUtils {
         return System.currentTimeMillis() + "";
     }
 
-    /**
-     * @param dateTime      yyyy-MM-dd HH:mm:ss
-     * @param amountSeconds
-     * @return
-     */
+
     public static boolean beforeCurrentDateTime(String dateTime, int amountSeconds) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         try {
@@ -632,10 +505,7 @@ public class DateTimeUtils {
         return false;
     }
 
-    /**
-     * @param dateArgs yyyy-MM-dd
-     * @return
-     */
+
     public static boolean afterYesterday(String dateArgs) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
@@ -650,13 +520,7 @@ public class DateTimeUtils {
         return false;
     }
 
-    /**
-     * 计算两个时间点之间的分钟数，时间的格式必须是yyyy-MM-dd HH:mm:ss
-     *
-     * @param afterTime
-     * @param beforeTime
-     * @return
-     */
+
     public static int getSecondBetweenTime(String afterTime, String beforeTime) {
         SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
         Date begin = null;
@@ -667,15 +531,12 @@ public class DateTimeUtils {
         } catch (ParseException e) {
             return 0;
         }
-        long between = (end.getTime() - begin.getTime()) / 1000;// 除以1000是为了转换成秒
-
+        long between = (end.getTime() - begin.getTime()) / 1000;
         int second = (int) between / 60;
         return second;
     }
 
-    /**
-     * @return HH:mm
-     */
+
     public static String getHHmm(long time) {
         SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
         return sdf.format(time);
@@ -709,30 +570,18 @@ public class DateTimeUtils {
         return begin.getTime();
     }
 
-    /**
-     * 当前时间后days天的 23.59.59
-     *
-     * @param days
-     * @return
-     */
+
     public static long afterDays(int days) {
         long currentEndTime = getCurrentDayEnd();
         return currentEndTime + days * 24 * 60 * 60 * 1000;
     }
 
-    /**
-     * 当前时间的前多少天
-     *
-     * @param days
-     * @return
-     */
+
     public static long beforeDays(int days) {
         return getCurrentDayStart() - days * 24 * 60 * 60 * 1000;
     }
 
-    /**
-     * 格式：yyyy-MM-dd HH:mm:ss
-     */
+
     public static long getTime(String time) {
         SimpleDateFormat dfs = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         String s = dfs.format(System.currentTimeMillis());
@@ -748,11 +597,7 @@ public class DateTimeUtils {
     }
 
 
-    /**
-     * @param date
-     * @return
-     * @throws ParseException
-     */
+
     public static Date onlyDate(Date date) {
         if (date == null) {
             return date;
@@ -772,13 +617,7 @@ public class DateTimeUtils {
         }
     }
 
-    /**
-     * TODO:输入一个时间，获取该时间的时间戳
-     *
-     * @param @param  dateString
-     * @param @return
-     * @param @throws ParseException
-     */
+
     public static long string2Timestamp(String dateString) {
         long temp = 0;
         try {
@@ -789,11 +628,7 @@ public class DateTimeUtils {
         return temp;
     }
 
-    /**
-     * 获取某个日期的开始时间
-     *
-     * @return
-     */
+
     public static long getDayStart(Date date) {
         SimpleDateFormat dfs = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         String time = dfs.format(date);
@@ -808,11 +643,7 @@ public class DateTimeUtils {
         return begin.getTime();
     }
 
-    /**
-     * 获取某个日期的结束时间
-     *
-     * @return
-     */
+
     public static long getDayEnd(Date date) {
         SimpleDateFormat dfs = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         String time = dfs.format(date);
@@ -827,12 +658,7 @@ public class DateTimeUtils {
         return begin.getTime();
     }
 
-    /**
-     * 根据时段 HH:mm 重设日期
-     *
-     * @param date   要改变的日期
-     * @param period HH:mm
-     */
+
     public static Date resetDate(Date date, String period) {
         if (date == null) {
             return null;
@@ -848,23 +674,13 @@ public class DateTimeUtils {
         return calendar.getTime();
     }
 
-    /**
-     * 根据日期 获得 HH:mm时间
-     *
-     * @param date
-     * @return HH:mm
-     */
+
     public static String getFormatHHMM(Date date) {
         SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
         return dateFormat.format(date.getTime());
     }
 
-    /**
-     * 格式化日期到分钟
-     *
-     * @param date 返回日期对象
-     * @return
-     */
+
     public static Date formatDateMinutes(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_TIME_FORMAT, Locale.getDefault());
         String dateString = sdf.format(date);
@@ -876,43 +692,29 @@ public class DateTimeUtils {
         return rdate;
     }
 
-    /**
-     * @return MM-dd HH:mm
-     */
+
     public static String getMMdd() {
         return mMDHMDateTime.get().format(System.currentTimeMillis());
     }
 
-    /**
-     * @return MM-dd HH:mm:ss
-     */
+
     public static String getMMddss() {
         return getMMddss(System.currentTimeMillis());
     }
 
-    /**
-     * @return MM-dd HH:mm:ss
-     */
+
     public static String getMMddss(Object time) {
         SimpleDateFormat format = new SimpleDateFormat("MM-dd HH:mm:ss");
         mMDHMDateTime.set(format);
         return mMDHMDateTime.get().format(time);
     }
 
-    /**
-     * @return MM-dd HH:mm
-     */
+
     public static String formatMMdd(long timemillis) {
         return mMDHMDateTime.get().format(timemillis);
     }
 
-    /**
-     * 计算和当前时间相差多少分钟或者小时
-     *
-     * @param saveTime
-     * @return
-     * @date:2015年8月31日
-     */
+
     public static String calMinute(long saveTime) {
         if (saveTime < 1) {
             return "0min";
@@ -935,10 +737,7 @@ public class DateTimeUtils {
         return (int) day;
     }
 
-    /**
-     * @Description: 将"yyyyMMddHHmmss"格式日期转换成timestap
-     * @Param "yyyyMMddHHmmss" datetime
-     */
+
     public static Long parseStringDateTime(String datetime) {
         Long timestap = null;
         try {
@@ -953,12 +752,7 @@ public class DateTimeUtils {
         return timestap;
     }
 
-    /**
-     * 获取星期几（Calendar.DAY_OF_WEEK）
-     *
-     * @param date
-     * @return
-     */
+
     public static int getDayNumber(long date) {
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         cal.setTime(new Date(date));
@@ -974,11 +768,7 @@ public class DateTimeUtils {
         return dayOfWeek;
     }
 
-    /**
-     * 获取系统时间七天前的日期
-     *
-     * @return yyyyMMdd
-     */
+
     @SuppressLint("SimpleDateFormat")
     public static Date getDate() {
         Calendar c = Calendar.getInstance();
@@ -987,10 +777,7 @@ public class DateTimeUtils {
         return date;
     }
 
-    /**
-     * @param date "yyyymmdd"
-     * @return
-     */
+
     public static Date stringToDate(String date) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         Date tempDate = null;
@@ -1003,11 +790,7 @@ public class DateTimeUtils {
 
     }
 
-    /**
-     * @param date
-     * @param format
-     * @return
-     */
+
     public static Date string2DateByFormat(String format, String date) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         Date tempDate = null;
@@ -1020,13 +803,7 @@ public class DateTimeUtils {
 
     }
 
-    /**
-     * 判断时段是否比date日期更早
-     *
-     * @param date 传入的日期包括时分秒
-     * @param time 时间点
-     * @return true 更早 false 更晚
-     */
+
     public static boolean isEarly(Date date, String time) {
         if (date == null) {
             return false;
@@ -1047,15 +824,7 @@ public class DateTimeUtils {
         return false;
     }
 
-    /**
-     * @Title: isInPeriod
-     * @Description: 判断日期中的时间点是否在时段中
-     * @Param @param date 需要比较的日期包括时分
-     * @Param @param periodStart 开始时段　eg: 9:00
-     * @Param @param periodEnd 结束时段 eg 12:00
-     * @Param @return TODO
-     * @Return boolean 返回类型
-     */
+
     public static boolean isInPeriod(Date date, String periodStart, String periodEnd) {
         if (date == null || periodStart == null || periodEnd == null) {
             return false;
@@ -1075,13 +844,7 @@ public class DateTimeUtils {
         return false;
     }
 
-    /**
-     * 判读啊是否是同一天
-     *
-     * @param day1
-     * @param day2
-     * @return
-     */
+
     public static boolean isSameDay(Date day1, Date day2) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String ds1 = sdf.format(day1);
@@ -1094,10 +857,7 @@ public class DateTimeUtils {
     }
 
 
-    /**
-     * 截取掉前缀0以便转换为整数
-     *
-     */
+
     public static int trimZero(@NonNull String text) {
         try {
             if (text.startsWith("0")) {
@@ -1110,9 +870,7 @@ public class DateTimeUtils {
         }
     }
 
-    /**
-     * 月日时分秒，0-9前补0
-     */
+
     @NonNull
     public static String fillZero(int number) {
         return number < 10 ? "0" + number : "" + number;
@@ -1123,9 +881,7 @@ public class DateTimeUtils {
         return number.length() < 2 ? "0" + number : number;
     }
 
-    /**
-     * 格式：yyyy-MM-dd HH:mm
-     */
+
     public static long getMMDDtoLong(String time) {
         SimpleDateFormat dfs = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
         String s = dfs.format(System.currentTimeMillis());

@@ -2,66 +2,36 @@ package com.zhongmei.bty.basemodule.database.queue;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 预订单来源
- */
+
 public enum QueueOrderSource implements ValueEnum<String> {
 
     NONE("NONE"),
-    // 代订
-    DaiDingYuDing("DaiDingYuDing"),
-    // 到店
-    DaoDian("DaoDian"),
-    // 大众点评
-    DaZhongDianPing("DaZhongDianPing"),
-    // 美团
-    MeiTuan("MeiTuan"),
-    // 百度糯米
-    Nuomi("Nuomi"),
-    // 微信
-    WeiXin("weixin"),
-    // 订餐小秘书
-    XiaoMiShu("XiaoMiShu"),
-    // 找位
-    ZhaoWei("ZhaoWei"),
-    // 手机
-    ShouJiYuDing("ShouJiYuDing"),
-    // 电话
-    DianHuaYuDing("DianHuaYuDing"),
-    // 淘点点
-    TaoDianDian("TaoDianDian"),
-    // 百度地图
-    BaiduDitu("BaiduDitu"),
-    // 直达号
-    ZhiDaHao("ZhiDaHao"),
-    // 百度直达号
-    Baidu("Baidu"),
-    // Enjoy
-    Enjoy("Enjoy"),
-    // 自助
-    SelfHelp("SelfHelp"),
-    // 支付宝
-    Alipay("Alipay"),
-    // 商户官网
-    Shop("Shop"),
-    // 百度外卖
-    BaiduWaiMai("BaiduWaiMai"),
-    //
-    DianHua("DianHua"),
-    // 到店取号
-    Daodian("Daodian"),
-    // APP取号
-    App("App"),
-    // 百度取号
-    BaiduMap("BaiduMap"),
-    //美大排队
-    MeiDaQueue("XINMEIDA"),
+        DaiDingYuDing("DaiDingYuDing"),
+        DaoDian("DaoDian"),
+        DaZhongDianPing("DaZhongDianPing"),
+        MeiTuan("MeiTuan"),
+        Nuomi("Nuomi"),
+        WeiXin("weixin"),
+        XiaoMiShu("XiaoMiShu"),
+        ZhaoWei("ZhaoWei"),
+        ShouJiYuDing("ShouJiYuDing"),
+        DianHuaYuDing("DianHuaYuDing"),
+        TaoDianDian("TaoDianDian"),
+        BaiduDitu("BaiduDitu"),
+        ZhiDaHao("ZhiDaHao"),
+        Baidu("Baidu"),
+        Enjoy("Enjoy"),
+        SelfHelp("SelfHelp"),
+        Alipay("Alipay"),
+        Shop("Shop"),
+        BaiduWaiMai("BaiduWaiMai"),
+        DianHua("DianHua"),
+        Daodian("Daodian"),
+        App("App"),
+        BaiduMap("BaiduMap"),
+        MeiDaQueue("XINMEIDA"),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

@@ -24,9 +24,7 @@ import java.lang.reflect.Proxy;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/**
- * 用于控制全局的配置管理
- */
+
 public class SettingManager {
 
     private static final String PREFIX = "@Settings@_";
@@ -34,16 +32,9 @@ public class SettingManager {
     private static StoreFactory storeFactory;
     private static Map<String, ISettings> pool = new WeakHashMap<>();
 
-    /**
-     * 初始化设置管理器，请注意：该方法必须在主线程中调用
-     *
-     * @param context 上下文环境
-     * @throws RuntimeException 在子线程中调用时抛出该异常
-     * @deprecated
-     */
+
     public static synchronized void init(Context context) {
-        //ArgsUtils.mustInMainThread("");
-        if (storeFactory == null) {
+                if (storeFactory == null) {
             storeFactory = new StoreFactory(context) {
                 @Override
                 protected IStore onCreate(Context context, String name) {
@@ -53,13 +44,7 @@ public class SettingManager {
         }
     }
 
-    /**
-     * 根据接口类型获取该类型的实现类
-     *
-     * @param interfaceClassT 设置接口类，请注意：这里必须为接口类型，不能为Class或其它类型
-     * @param <T>             设置接口的子类型{@link ISettings}
-     * @return 返回目标设置接口类的实现类
-     */
+
     public static <T extends ISettings> T getSettings(Class<T> interfaceClassT) {
         init(BaseApplication.sInstance);
         ArgsUtils.notNull(storeFactory, "Please call init() at first");
@@ -184,7 +169,6 @@ public class SettingManager {
         }
 
         private static String keyOfMethod(Method method) {
-//            return cls.getName() + method.getName();
             return method.toString();
         }
 

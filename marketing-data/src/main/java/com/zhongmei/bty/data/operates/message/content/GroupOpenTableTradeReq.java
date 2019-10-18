@@ -15,11 +15,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 封装团餐开台Trade相关数据
- *
- * @date 2017/6/28 17:55
- */
+
 public class GroupOpenTableTradeReq extends Trade implements NationInfoInterface {
 
     private static final long serialVersionUID = 1L;
@@ -30,8 +26,7 @@ public class GroupOpenTableTradeReq extends Trade implements NationInfoInterface
     public List<TradeTable> tradeTables;
     public List<TradeItemReq> tradeItems;
     public TradeGroupInfo tradeGroup;
-    public TradeUser tradeUser;//add 20170916 订单推销员
-    public List<TradeTax> tradeTaxs;
+    public TradeUser tradeUser;    public List<TradeTax> tradeTaxs;
     public List<TradeInitConfig> tradeInitConfigs;
 
     @Override

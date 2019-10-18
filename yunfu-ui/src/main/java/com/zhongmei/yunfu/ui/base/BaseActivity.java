@@ -31,11 +31,7 @@ import de.greenrobot.event.EventBus;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Date：2016年3月21日 上午11:05:43
- * @Description: 该父类只用于判断是登录的父类还是其他父类，用于验收是否登录
- * @Version: 1.0
- */
+
 public class BaseActivity extends FragmentActivity implements UILoadingController {
 
     private static final String TAG = BaseActivity.class.getSimpleName();
@@ -79,13 +75,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
 
     }
 
-    /**
-     * @Title: addFragment
-     * @Description: 添加碎片
-     * @Param mFragmentVo 碎片对象
-     * @Param isAnim 是否有动画
-     * @Return void 返回类型
-     */
+
     public void addFragment(FragmentVo mFragmentVo, Boolean isAnim) {
         if (getSupportFragmentManager() != null) {
             FragmentTransaction fragmentTransaction;
@@ -101,13 +91,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         }
     }
 
-    /**
-     * @Title: showFragment
-     * @Description: 显示碎片
-     * @Param mFragmentVo
-     * @Param isAnim TODO
-     * @Return void 返回类型
-     */
+
     public void showFragment(Fragment mFragment, Boolean isAnim) {
         if (getSupportFragmentManager() != null) {
             FragmentTransaction fragmentTransaction;
@@ -143,25 +127,14 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
 
     }
 
-    /**
-     * @Title: hideFragment
-     * @Description: 隐藏碎片
-     * @Param mFragment TODO
-     * @Return void 返回类型
-     */
+
     protected void hideFragment(Fragment mFragment) {
         FragmentTransaction fragmentTransaction = getFragmentTransaction(getSupportFragmentManager());
         fragmentTransaction.hide(mFragment);
         fragmentTransaction.commit();
     }
 
-    /**
-     * @Title: replaceFragment
-     * @Description: 当个替换碎片
-     * @Param mFragmentVo
-     * @Param isAnim TODO
-     * @Return void 返回类型
-     */
+
     protected void replaceFragment(FragmentVo mFragmentVo, Boolean isAnim) {
         FragmentTransaction fragmentTransaction;
         if (isAnim) {
@@ -174,13 +147,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         fragmentTransaction.commitAllowingStateLoss();
     }
 
-    /**
-     * @Title: replaceFragment
-     * @Description: 批量替换碎片
-     * @Param @param listFragment：要替换的碎片列表
-     * @Param @param isAnim 是否需要动画
-     * @Return void 返回类型
-     */
+
     protected void replaceFragment(List<FragmentVo> listFragment, Boolean isAnim) {
         if (listFragment != null && listFragment.size() > 0) {
             FragmentTransaction fragmentTransaction;
@@ -200,12 +167,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
 
     }
 
-    /**
-     * @Title: removeFragment
-     * @Description: 移除碎片
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     protected void removeFragment(Fragment mFragment, String tag) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.remove(mFragment);
@@ -213,9 +175,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         fragmentTransaction.commitAllowingStateLoss();
     }
 
-    /**
-     * 根据tag移除fragment
-     */
+
     protected void removeFragmentByTag(String tag) {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentByTag(tag);
@@ -227,13 +187,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         }
     }
 
-    /**
-     * @Title: removeFragment
-     * @Description: 批量移除碎片
-     * @Param listFragment
-     * @Param isAnim TODO
-     * @Return void 返回类型
-     */
+
     protected void removeFragments(List<FragmentVo> listFragment, Boolean isAnim) {
         if (listFragment != null && listFragment.size() > 0) {
             FragmentTransaction fragmentTransaction;
@@ -253,24 +207,17 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
 
     public FragmentTransaction getFragmentTransaction(FragmentManager mFragmentManager) {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-        /*fragmentTransaction.setCustomAnimations(R.animator.fragment_right_enter,
-                R.animator.fragment_right_exit,
-                R.animator.fragment_pop_right_exit,
-                R.animator.fragment_pop_right_enter);*/
+
         return fragmentTransaction;
     }
 
-    /**
-     * 设置当软件盘出现时，touch事件是否直接被销毁
-     */
+
     public void setConsumeTouchEventWhenKeyBoardShow(boolean consumeTouchEventWhenKeyBoardShow) {
         this.consumeTouchEventWhenKeyBoardShow = consumeTouchEventWhenKeyBoardShow;
     }
 
 
-    /**
-     * 设置当软件盘出现时，touch事件是否直接被销毁
-     */
+
     public void setIsConsumeTochTransEvent(boolean isConsumeTochTransEvent) {
         this.mIsConsumeTochTransEvent = isConsumeTochTransEvent;
     }
@@ -286,8 +233,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
                         .positiveLinstner(new OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                // stub
-                                Intent intent = new Intent("com.zhongmei.bty.phone.call.disconnect");
+                                                                Intent intent = new Intent("com.zhongmei.bty.phone.call.disconnect");
                                 startActivity(intent);
                             }
 
@@ -325,9 +271,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         registerEventBus();
     }
 
-    /**
-     * 判断软键盘是否弹出
-     */
+
     private boolean keyboradIsShow() {
         InputMethodManager imm = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm.isActive() && this.getCurrentFocus() != null) {
@@ -346,8 +290,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         if (consumeTouchEventWhenKeyBoardShow && deelInputKeyboard()) {
             return true;
         }
-        //pointerIndex out of range 针对此异常处理
-        try {
+                try {
             return super.dispatchTouchEvent(ev);
         } catch (IllegalArgumentException e) {
             Log.e(TAG, e.getMessage(), e);
@@ -367,9 +310,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         return this.getClass().getName();
     }
 
-    /**
-     * 删除fragment的子fragment，确保程序的安全性(在fragment摧毁时调用)
-     */
+
     protected void tryRemoveChildFragment(FragmentManager fm, String tag) {
         Fragment fragment = fm.findFragmentByTag(tag);
         if (fragment != null) {
@@ -379,9 +320,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         }
     }
 
-    /**
-     * 删除fragment的子fragment，确保程序的安全性(在fragment摧毁时调用)
-     */
+
     protected void tryRemoveTargetFragment(FragmentManager fm, String tag) {
         Fragment fragment = fm.findFragmentByTag(tag);
         if (fragment != null) {
@@ -423,9 +362,7 @@ public class BaseActivity extends FragmentActivity implements UILoadingControlle
         return super.onKeyDown(keyCode, event);
     }
 
-    /**
-     * 注册EventBus
-     */
+
     protected void registerEventBus() {
         try {
             if (!EventBus.getDefault().isRegistered(this)) {

@@ -14,9 +14,7 @@ import com.zhongmei.bty.dinner.vo.DinnerConnectTablesAreaVo;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TablesAreaPopupAdapter extends BaseAdapter {
     private List<DinnerConnectTablesAreaVo> areaVoList;
@@ -47,8 +45,7 @@ public class TablesAreaPopupAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        TextView name;// 类型
-    }
+        TextView name;    }
 
     @SuppressLint("InflateParams")
     @Override

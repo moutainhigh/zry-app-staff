@@ -2,20 +2,13 @@ package com.zhongmei.bty.basemodule.devices.mispos.data.message;
 
 import com.zhongmei.bty.basemodule.trade.message.TradePaymentReq;
 
-/**
- * @Date：2015年12月16日 下午6:49:37
- * @Description: 封装无单退货的数据
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class SalesReturnTradePaymentReq extends TradePaymentReq {
     private Long reasonId;
 
     private String reasonContent;
 
-    private boolean reviseStock;//是否需要恢复库存
-
+    private boolean reviseStock;
     public boolean isReviseStock() {
         return reviseStock;
     }

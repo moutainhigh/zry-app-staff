@@ -2,11 +2,7 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 
-/**
- * @Date： 2018/5/31
- * @Description:
- * @Version: 1.0
- */
+
 public class PrePayTradeReq {
 
     private Long bookingId;

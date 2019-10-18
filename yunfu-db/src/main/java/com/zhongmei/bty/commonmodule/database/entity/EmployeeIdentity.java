@@ -9,26 +9,17 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 
-/**
- * 用户身份信息，talent 提供
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "employee_identity")
 public class EmployeeIdentity extends CommonEntityBase implements ICreator, IUpdator {
 
 
     public interface $ extends CommonEntityBase.$ {
-        /**
-         * authUserId
-         */
+
         public static final String authUserId = "authuser_id";
-        /**
-         * identityCode
-         */
+
         public static final String identityCode = "identity_code";
-        /**
-         * enableStatus
-         */
+
         String enableStatus = "enable_status";
     }
 
@@ -63,8 +54,7 @@ public class EmployeeIdentity extends CommonEntityBase implements ICreator, IUpd
     public Long institutionIdentityId;
 
     @DatabaseField(columnName = "enable_status", defaultValue = "1")
-    public Integer enableStatus;//是否停用，1.启用 2.停用
-
+    public Integer enableStatus;
     @Override
     public Long getCreatorId() {
         return this.creatorId;

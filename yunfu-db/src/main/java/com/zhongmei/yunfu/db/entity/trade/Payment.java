@@ -11,92 +11,58 @@ import com.zhongmei.yunfu.db.enums.PaymentType;
 
 import java.math.BigDecimal;
 
-/**
- * Payment is a ORMLite bean type. Corresponds to the database table "payment"
- */
+
 @DatabaseTable(tableName = "payment")
 public class Payment extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "payment"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * actual_amount
-         */
+
         public static final String actualAmount = "actual_amount";
 
-        /**
-         * biz_date
-         */
+
         public static final String bizDate = "biz_date";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * exempt_amount
-         */
+
         public static final String exemptAmount = "exempt_amount";
 
-        /**
-         * handover_uuid
-         */
+
         public static final String handoverUuid = "handover_uuid";
 
-        /**
-         * memo
-         */
+
         public static final String memo = "memo";
 
-        /**
-         * payment_time
-         */
+
         public static final String paymentTime = "payment_time";
 
-        /**
-         * payment_type
-         */
+
         public static final String paymentType = "payment_type";
 
-        /**
-         * receivable_amount
-         */
+
         public static final String receivableAmount = "receivable_amount";
 
-        /**
-         * relate_id
-         */
+
         public static final String relateId = "relate_id";
 
-        /**
-         * relate_uuid
-         */
+
         public static final String relateUuid = "relate_uuid";
 
-        /**
-         * is_paid
-         */
+
         public static final String isPaid = "is_paid";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }
@@ -149,8 +115,7 @@ public class Payment extends DataEntityBase implements ICreator, IUpdator {
     private BigDecimal beforePrivilegeAmount;
 
     @DatabaseField(columnName = "shop_actual_amount", canBeNull = false)
-    private BigDecimal shopActualAmount;//暂时不需要同步 add20161217添加了数据库字段
-
+    private BigDecimal shopActualAmount;
     public java.math.BigDecimal getActualAmount() {
         return actualAmount;
     }

@@ -9,9 +9,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class UnpaidTradeVo extends TradeVo {
     private List<TradeCustomer> mTradeCustomers;

@@ -17,8 +17,7 @@ public class HomeWatcher {
 
     private InnerRecevier mRecevier;
 
-    // 回调接口
-    public interface OnHomePressedListener {
+        public interface OnHomePressedListener {
         public void onHomePressed();
 
         public void onHomeLongPressed();
@@ -30,27 +29,19 @@ public class HomeWatcher {
         mFilter = new IntentFilter(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
     }
 
-    /**
-     * 设置监听
-     *
-     * @param listener
-     */
+
     public void setOnHomePressedListener(OnHomePressedListener listener) {
         mListener = listener;
     }
 
-    /**
-     * 开始监听，注册广播
-     */
+
     public void startWatch() {
         if (mRecevier != null) {
             mContext.registerReceiver(mRecevier, mFilter);
         }
     }
 
-    /**
-     * 停止监听，注销广播
-     */
+
     public void stopWatch() {
         if (mRecevier != null) {
             mContext.unregisterReceiver(mRecevier);
@@ -62,9 +53,7 @@ public class HomeWatcher {
         mRecevier = null;
     }
 
-    /**
-     * 广播接收者
-     */
+
     class InnerRecevier extends BroadcastReceiver {
         final String SYSTEM_DIALOG_REASON_KEY = "reason";
 
@@ -83,11 +72,9 @@ public class HomeWatcher {
                     Log.i(TAG, "action:" + action + ",reason:" + reason);
                     if (mListener != null) {
                         if (reason.equals(SYSTEM_DIALOG_REASON_HOME_KEY)) {
-                            // 短按home键
-                            mListener.onHomePressed();
+                                                        mListener.onHomePressed();
                         } else if (reason.equals(SYSTEM_DIALOG_REASON_RECENT_APPS)) {
-                            // 长按home键
-                            mListener.onHomeLongPressed();
+                                                        mListener.onHomeLongPressed();
                         }
                     }
                 }

@@ -13,11 +13,7 @@ import com.zhongmei.yunfu.bean.req.CustomerListResp;
 
 import java.util.List;
 
-/**
- * 项目
- *
- * @date 2017/3/13 15:09
- */
+
 public class BeautyCustomerDetailProjectAdapter1 extends RecyclerView.Adapter<BeautyCustomerDetailProjectAdapter1.ViewHolder> {
 
     private final int S_HEADER_VIEW = 0x01;
@@ -33,9 +29,7 @@ public class BeautyCustomerDetailProjectAdapter1 extends RecyclerView.Adapter<Be
         this.mContext = context;
     }
 
-    /**
-     * 创建view
-     */
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view;
@@ -49,9 +43,7 @@ public class BeautyCustomerDetailProjectAdapter1 extends RecyclerView.Adapter<Be
         return new ViewHolder(view, viewType);
     }
 
-    /**
-     * 赋值数据
-     */
+
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         viewHolder.line.setVisibility(View.VISIBLE);
@@ -60,8 +52,7 @@ public class BeautyCustomerDetailProjectAdapter1 extends RecyclerView.Adapter<Be
             viewHolder.remainCount.setText(R.string.beauty_customer_detail_project_item_title_remain_count);
         } else {
             if (position - 1 == 7) {
-                // 最后一行数据
-                viewHolder.line.setVisibility(View.GONE);
+                                viewHolder.line.setVisibility(View.GONE);
             }
             viewHolder.name.setText("护理 " + position);
             viewHolder.remainCount.setText(String.format(mContext.getString(R.string.beauty_customer_detail_card_project_item_remain_count), position));
@@ -83,10 +74,7 @@ public class BeautyCustomerDetailProjectAdapter1 extends RecyclerView.Adapter<Be
         }
     }
 
-    /**
-     * @description (ViewHolder 绑定Item点击事件 和 item 长按事件)
-     * @time 2015年6月1日
-     */
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView name, totalCount, remainCount;

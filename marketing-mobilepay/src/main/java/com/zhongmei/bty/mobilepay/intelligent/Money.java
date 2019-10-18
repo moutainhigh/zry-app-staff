@@ -1,17 +1,10 @@
 package com.zhongmei.bty.mobilepay.intelligent;
 
 public class Money {
-    /**
-     * @date��2014��12��19�� ����11:20:22
-     * @Description:type��0 is default as has cash money,type=1 is other and has
-     * no money
-     */
+
     private int type;
 
-    /**
-     * @date��2014��12��19�� ����11:20:26
-     * @Description:the value of cash money
-     */
+
     private long value;
 
     public Money(long value) {

@@ -11,10 +11,7 @@ import com.zhongmei.yunfu.context.util.manager.SwitchServerManager;
 
 import java.text.DecimalFormat;
 
-/**
- * Created by demo on 2018/12/15
- * 门店配置信息
- */
+
 public class ShopInfoCfg {
 
     private static final String TAG = ShopInfoCfg.class.getSimpleName();
@@ -27,14 +24,11 @@ public class ShopInfoCfg {
 
     private static SpHelper spHelper;
     private UserState userState = UserState.UNKNOWN;
-    //public ShopInfo shopInfo;
-    public IAuthUser authUser;
+        public IAuthUser authUser;
     public String city;
-    //private String currencySymbol; //国籍
-    private ICurrency currency;
+        private ICurrency currency;
     private VersionInfo appVersionInfo;
     private VersionInfo printVersionInfo;
-    //private Locale locale;
 
     private IShopInfo shopInfo;
 
@@ -53,15 +47,9 @@ public class ShopInfoCfg {
     public String bindDeviceType;
     public int mealType;
     public int usingDeviceType;
-    public String currencyNo;// 货币编码
-    public String currencySymbol;//货币符号
-    // v8.12.0 口碑商户标示
-    public int channelSource;
-    public String taxIDNumber;//商户唯一税号
-    public String timeZone;//商户所在国家时区
-
-    // v8.15.0 第一语言，第二语言
-    public String firstLanguage;
+    public String currencyNo;    public String currencySymbol;        public int channelSource;
+    public String taxIDNumber;    public String timeZone;
+        public String firstLanguage;
     public String secondLanguage;
 
     private ShopInfoCfg(IShopInfo response) {
@@ -157,8 +145,7 @@ public class ShopInfoCfg {
 
     public void logout() {
         setUserState(userState != UserState.UNKNOWN ? userState.BIND : UserState.UNKNOWN);
-        //instance = null;
-    }
+            }
 
     public VersionInfo getAppVersionInfo() {
         if (appVersionInfo == null) {
@@ -198,11 +185,7 @@ public class ShopInfoCfg {
         return userState == UserState.LOGIN;
     }
 
-    /**
-     * 判断是否有显示权限，默认为有显示权限
-     *
-     * @return
-     */
+
     public boolean hasDisplay(String[] arrayAppCode) {
         if (arrayAppCode != null) {
             for (String _code : arrayAppCode) {
@@ -214,11 +197,7 @@ public class ShopInfoCfg {
         return false;
     }
 
-    /**
-     * 改方法已过时，请调用 SwitchServerManager.getInstance().getServerKey()
-     *
-     * @return
-     */
+
     @Deprecated
     public String getServerKey() {
         return SwitchServerManager.getInstance().getServerKey();
@@ -228,11 +207,7 @@ public class ShopInfoCfg {
         return shopInfo;
     }
 
-    /**
-     * 是否为美食城业态 true-是，false-否；
-     *
-     * @return
-     */
+
     public boolean isDelicaciesMeal() {
         return shopInfo != null && shopInfo.isDelicaciesMeal();
     }
@@ -281,73 +256,17 @@ public class ShopInfoCfg {
         return shopInfo != null && shopInfo.isExpired();
     }
 
-    /*public String getUIShopId(Context context) {
-        return context.getString(R.string.commonmodule_shop_id) + shopId;
-    }
 
-    public String getUICommercialName(Context context) {
-        return context.getString(R.string.commonmodule_shop_name) + commercialName;
-    }
 
-    public String getUICommercialGroupId(Context context) {
-        return context.getString(R.string.commonmodule_shop_group_id) + commercialGroupId;
-    }
+        public interface ShopMonitorCode {
 
-    public String getUICommercialGroupName(Context context) {
-        return context.getString(R.string.commonmodule_shop_group_name) + commercialGroupName;
-    }
-
-    public String getUIcommercialAddress(Context context) {
-        return context.getString(R.string.commonmodule_shop_address) + commercialAddress;
-    }
-
-    public String getUICommercialPhone(Context context) {
-        return context.getString(R.string.commonmodule_shop_phone) + commercialPhone;
-    }
-
-    public String getUItabletNumber(Context context) {
-        return context.getString(R.string.commonmodule_settings_pos_id) + getTabletNumberFormat();
-    }
-
-    public String getUISyncUrl(Context context) {
-        return context.getString(R.string.commonmodule_shop_server) + SwitchServerManager.getInstance().getServerKey();
-    }
-
-    public enum Biz {
-
-        DINNER(1),
-        SNACK(2);
-
-        int value;
-
-        Biz(int value) {
-            this.value = value;
-        }
-
-        public static Biz valueOf(int value) {
-            for (Biz biz : Biz.values()) {
-                if (value == biz.value) {
-                    return biz;
-                }
-            }
-            return SNACK;
-        }
-    }*/
-
-    //add v8.7
-    public interface ShopMonitorCode {
-        /* hnxt,表示海南信投,fhxm表示烽火*/
-        final String MONITOR_CODE_HNXT = "hnxt";//海南信投
-        final String MONITOR_CODE_FHXM = "fhxm";//烽火科技
-    }
+        final String MONITOR_CODE_HNXT = "hnxt";        final String MONITOR_CODE_FHXM = "fhxm";    }
 
     public boolean isMonitorCode(String code) {
         return shopInfo != null && shopInfo.isMonitorCode(code);
     }
 
-    /**
-     * "Y######.00"格式 将金额格式化添加货币符号
-     */
+
     public static String formatCash(double value) {
         DecimalFormat df = new DecimalFormat("0.00");
         try {

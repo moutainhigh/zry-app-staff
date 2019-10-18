@@ -52,25 +52,18 @@ public abstract class CommonSalesPromotionView extends LinearLayout implements E
         mAdapter.setDataSet(listSalesPromotionRuleVo(), getSelectedSalesPromotionRules(), getCustomerNew());
         lvSalesPromotion.setAdapter(mAdapter);
 
-        //遍历所有Group,将所有项设置成默认展开
-        int groupCount = lvSalesPromotion.getCount();
+                int groupCount = lvSalesPromotion.getCount();
         for (int i = 0; i < groupCount; i++) {
             lvSalesPromotion.expandGroup(i);
         }
     }
 
-    /**
-     * 获取规则数据，此方法不能阻塞调用县城
-     */
+
     public List<SalesPromotionRuleVo> listSalesPromotionRuleVo() {
         return reSort(SalesPromotionConvertHelper.getInstance().getSalesPromotionRuleVos());
     }
 
-    /**
-     * 对促销活动列表重新排序
-     *
-     * @param salesPromotionRuleVos 促销活动列表
-     */
+
     private List<SalesPromotionRuleVo> reSort(List<SalesPromotionRuleVo> salesPromotionRuleVos) {
         if (Utils.isNotEmpty(salesPromotionRuleVos)) {
             List<SalesPromotionRuleVo> sortedSalesPromotionRuleVos = new ArrayList<SalesPromotionRuleVo>();
@@ -147,37 +140,21 @@ public abstract class CommonSalesPromotionView extends LinearLayout implements E
         this.mCallback = callback;
     }
 
-    /**
-     * 返回当前登录的顾客信息
-     */
+
     public abstract CustomerResp getCustomerNew();
 
-    /**
-     * 获取已选择的促销活动
-     */
+
     public abstract List<Long> getSelectedSalesPromotionRules();
 
-    /**
-     * 促销活动回调接口
-     */
+
     public interface Callback {
-        /**
-         * 进入手动添加促销活动模式
-         *
-         * @param salesPromotionRuleVo 被添加的促销活动
-         */
+
         void enterManualAddSalesPromotionMode(@NonNull SalesPromotionRuleVo salesPromotionRuleVo);
 
-        /**
-         * 退出手动添加促销活动模式
-         */
+
         void exitManualAddSalesPromotionMode();
 
-        /**
-         * 删除指定的促销活动
-         *
-         * @param salesPromotionRuleVo 被删除的促销活动
-         */
+
         void removeSalesPromotion(@NonNull SalesPromotionRuleVo salesPromotionRuleVo);
     }
 }

@@ -17,11 +17,7 @@ public interface ISession {
         void onUnbind(AuthUser user);
     }
 
-    /*public interface Callback {
-        void onBindSuccess();
 
-        void onBindError(String message);
-    }*/
 
     public interface SessionFunc {
 

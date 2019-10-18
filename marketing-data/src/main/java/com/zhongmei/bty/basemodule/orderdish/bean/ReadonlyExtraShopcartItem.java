@@ -6,10 +6,7 @@ import com.zhongmei.bty.basemodule.orderdish.utils.ShopcartItemUtils;
 import com.zhongmei.yunfu.db.entity.trade.TradeItem;
 import com.zhongmei.yunfu.db.entity.trade.TradeReasonRel;
 
-/**
- * @version: 1.0
- * @date 2015年9月20日
- */
+
 public class ReadonlyExtraShopcartItem extends ReadonlyShopcartItemBase implements IExtraShopcartItem {
 
     private final ReadonlyShopcartItemBase parent;

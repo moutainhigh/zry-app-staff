@@ -2,32 +2,20 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 会员优惠类型
- */
+
 public enum MemberPrivilegeType implements ValueEnum<Integer> {
 
-    /**
-     * 折扣
-     */
+
     DISCOUNT(1),
 
-    /**
-     * 折让
-     */
+
     REBATE(2),
 
-    /**
-     * 特价
-     */
+
     PRICE(3),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

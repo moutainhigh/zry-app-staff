@@ -46,9 +46,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class LeisureTableDialogFragment extends BasicDialogFragment
         implements View.OnClickListener {
@@ -63,11 +61,9 @@ public class LeisureTableDialogFragment extends BasicDialogFragment
     private ListView mListView;
 
     private RelativeLayout mEmptyView, mLeftLayout, mRightLayout;
-    //
 
     private TablesDal tablesDal;
-    //空闲桌台集合
-    private List<Tables> emptTabls;
+        private List<Tables> emptTabls;
 
     private List<CommercialArea> tableAreas;
 
@@ -259,7 +255,6 @@ public class LeisureTableDialogFragment extends BasicDialogFragment
         mListAdapter.setListener(new EmptyTablesListAdapter.OnItemBtnClickListener() {
             @Override
             public void onClick(final EmptyTableVo vo) {
-//                ToastUtil.showShortToast(vo.getEmptyTables().getTableName());
                 VerifyHelper.verifyAlert(getActivity(), DinnerApplication.PERMISSION_DINNER_CREATE,
                         new VerifyHelper.Callback() {
                             @Override

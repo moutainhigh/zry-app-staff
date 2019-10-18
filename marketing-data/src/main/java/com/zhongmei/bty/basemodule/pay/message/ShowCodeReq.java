@@ -5,9 +5,7 @@ import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 import java.math.BigDecimal;
 
 public class ShowCodeReq extends PaymentItemReq {
-    private String authCode;//扫码支付授权码
-    private BigDecimal noDiscountAmount;//不参与折扣的金额
-
+    private String authCode;    private BigDecimal noDiscountAmount;
     public ShowCodeReq(PaymentItem paymentItem) {
         super(paymentItem);
         authCode = paymentItem.getAuthCode();

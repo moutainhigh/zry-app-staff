@@ -18,9 +18,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.beauty_lv_item_scheduling)
 public class SchedulingItemView extends RelativeLayout {
 

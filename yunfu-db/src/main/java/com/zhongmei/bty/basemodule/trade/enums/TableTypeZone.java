@@ -2,38 +2,21 @@ package com.zhongmei.bty.basemodule.trade.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * @version: 1.0
- * @date 2015年7月10日
- */
+
 public enum TableTypeZone implements ValueEnum<Integer> {
 
-    /**
-     * 大厅
-     */
+
     HALL(0),
-    /**
-     * 包厢
-     */
+
     ROOM(1),
-    /**
-     * 卡座
-     */
+
     SEAT(2),
-    /**
-     * 露台
-     */
+
     BALCONY(3),
-    /**
-     * 其他
-     */
+
     OTHER(4),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

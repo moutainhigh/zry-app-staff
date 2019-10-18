@@ -2,18 +2,12 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import java.math.BigDecimal;
 
-/**
- * @Date： 16/5/19
- * @Description:
- * @Version: 1.0
- */
+
 public class DepositRefundReq {
 
     private Long tradeId;
     private BigDecimal depositRefund;
-    private Long payModeId;//-3
-    private String payModeName;//现金
-    private Long reasonId;
+    private Long payModeId;    private String payModeName;    private Long reasonId;
     private String reasonContent;
     private Long clientUpdateTime;
     private Long updatorId;

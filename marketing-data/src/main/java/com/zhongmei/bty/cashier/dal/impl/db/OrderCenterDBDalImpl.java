@@ -61,9 +61,7 @@ import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.faceAmount;
 import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.paySource;
 import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.payStatus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderCenterDal {
 
     private static final long PAGE_SIZE = 15L;
@@ -90,8 +88,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
             QueryBuilder<Trade, String> tradeQB = tradeDao.queryBuilder();
             createTradeWhere(dbHelper, tradeQB, childTab, position, keyword, condition, lastData);
             tradeQB.limit(PAGE_SIZE);
-            //新订单||取消请求升序排列
-            if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
+                        if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
                     || childTab == DbQueryConstant.UNPROCESSED_CANCEL_REQUEST
                     || childTab == DbQueryConstant.SALES_UNPAID) {
                 tradeQB.orderBy(Trade.$.serverUpdateTime, true);
@@ -146,8 +143,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
         Where<Trade, String> where = tradeQB.where();
         where.eq(Trade.$.statusFlag, StatusFlag.VALID).and().ge(Trade.$.bizDate, getMinBizDate());
         String localDevId = BaseApplication.getInstance().getDeviceIdenty();
-        //(本机下单||非离线订单)=过滤非本机的离线订单
-        where.and().or(where.eq(Trade.$.deviceIdenty, localDevId), where.ne(Trade.$.sourceChild, SourceChild.OFFLINE.value()));
+                where.and().or(where.eq(Trade.$.deviceIdenty, localDevId), where.ne(Trade.$.sourceChild, SourceChild.OFFLINE.value()));
         where.and().in(Trade.$.businessType, BusinessType.SNACK, BusinessType.TAKEAWAY);
         if (lastData != null) {
             if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
@@ -164,32 +160,24 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
             Where<Trade, String> searchWhere = null;
             if (childTab == DbQueryConstant.UNPROCESSED_ALL) {
                 switch (position) {
-                    case 0://全部
-
+                    case 0:
                         searchWhere = where.or(where.in(Trade.$.uuid, getTradeExtraQueryBuilder(dbHelper, keyword)),
                                 where.in(Trade.$.uuid, getTradeCustomerQueryBuilder(dbHelper, keyword)),
                                 where.in(Trade.$.uuid, getTakeNumberByTradeExtra(dbHelper, keyword)));
                         break;
-                    case 1://流水号
-                        searchWhere = where.in(Trade.$.uuid, getSerialNumberQueryBuilder(dbHelper, keyword));
+                    case 1:                        searchWhere = where.in(Trade.$.uuid, getSerialNumberQueryBuilder(dbHelper, keyword));
                         break;
-                    case 2://手机号
-                        searchWhere = where.or(where.in(Trade.$.uuid, getReceiverPhoneQueryBuilder(dbHelper, keyword)),
+                    case 2:                        searchWhere = where.or(where.in(Trade.$.uuid, getReceiverPhoneQueryBuilder(dbHelper, keyword)),
                                 where.in(Trade.$.uuid, getTradeCustomerQueryBuilder(dbHelper, keyword)));
                         break;
-                    case 3:// 号牌
-                        // v8.12.0 号牌只查询POS下单
-                        searchWhere = where.eq(Trade.$.sourceId, SourceId.POS).and().in(Trade.$.uuid, getNumberPlateQueryBuilder(dbHelper, keyword));
+                    case 3:                                                searchWhere = where.eq(Trade.$.sourceId, SourceId.POS).and().in(Trade.$.uuid, getNumberPlateQueryBuilder(dbHelper, keyword));
                         break;
-                    case 4: // 取餐号
-                        // v8.12.0 查询非POS下单
-                        searchWhere = where.ne(Trade.$.sourceId, SourceId.POS).and().in(Trade.$.uuid, getTakeNumberByTradeExtra(dbHelper, keyword));
+                    case 4:                                                 searchWhere = where.ne(Trade.$.sourceId, SourceId.POS).and().in(Trade.$.uuid, getTakeNumberByTradeExtra(dbHelper, keyword));
                         break;
                 }
             } else {
                 switch (position) {
-                    case 0://全部
-                        if (Utils.isNum(keyword)) {
+                    case 0:                        if (Utils.isNum(keyword)) {
                             searchWhere = getTradeSearchWhere(dbHelper, keyword, where);
                         } else {
                             searchWhere = where.or(where.in(Trade.$.uuid, getTradeExtraQueryBuilder(dbHelper, keyword)),
@@ -197,25 +185,18 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
                                     where.in(Trade.$.uuid, getTakeNumberByTradeExtra(dbHelper, keyword)));
                         }
                         break;
-                    case 1://流水号
-                        searchWhere = where.in(Trade.$.uuid, getSerialNumberQueryBuilder(dbHelper, keyword));
+                    case 1:                        searchWhere = where.in(Trade.$.uuid, getSerialNumberQueryBuilder(dbHelper, keyword));
                         break;
-                    case 2://订单金额
-                        if (Utils.isNum(keyword)) {
+                    case 2:                        if (Utils.isNum(keyword)) {
                             searchWhere = getTradeAmountSearchWhere(keyword, where);
                         }
                         break;
-                    case 3://手机号
-                        searchWhere = where.or(where.in(Trade.$.uuid, getReceiverPhoneQueryBuilder(dbHelper, keyword)),
+                    case 3:                        searchWhere = where.or(where.in(Trade.$.uuid, getReceiverPhoneQueryBuilder(dbHelper, keyword)),
                                 where.in(Trade.$.uuid, getTradeCustomerQueryBuilder(dbHelper, keyword)));
                         break;
-                    case 4:// 号牌
-                        // v8.12.0 号牌只查询POS下单
-                        searchWhere = where.eq(Trade.$.sourceId, SourceId.POS).in(Trade.$.uuid, getNumberPlateQueryBuilder(dbHelper, keyword));
+                    case 4:                                                searchWhere = where.eq(Trade.$.sourceId, SourceId.POS).in(Trade.$.uuid, getNumberPlateQueryBuilder(dbHelper, keyword));
                         break;
-                    case 5: // 取餐号
-                        // v8.12.0 查询非POS下单
-                        searchWhere = where.ne(Trade.$.sourceId, SourceId.POS).and().in(Trade.$.uuid, getTakeNumberByTradeExtra(dbHelper, keyword));
+                    case 5:                                                 searchWhere = where.ne(Trade.$.sourceId, SourceId.POS).and().in(Trade.$.uuid, getTakeNumberByTradeExtra(dbHelper, keyword));
                         break;
                 }
             }
@@ -224,8 +205,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
             }
         }
 
-        //筛选条件
-        if (condition != null) {
+                if (condition != null) {
             if (Utils.isNotEmpty(condition.getDeliveryTypes())) {
                 where.and().in(Trade.$.deliveryType, condition.getDeliveryTypes());
             }
@@ -248,26 +228,21 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
             if (condition.getDeliveryStatus() != null) {
                 where.and().in(Trade.$.uuid, getTradeExtraQueryBuilder(dbHelper, condition.getDeliveryStatus(), condition.isHasBindDeliveryUser()));
             } else if (Utils.isNotEmpty(condition.getDeliveryOrderStatuses())) {
-                //单独处理待下发状态，解决当tradeExtra表没有及时更新的情况下(有deliveryOrder数据，但是没有来得及同步tradeExtra表)，只查询tradeExtra表会查询出待接单的订单
-                if (condition.getDeliveryOrderStatuses().size() == 1
-                        && condition.getDeliveryOrderStatuses().contains(DeliveryOrderStatus.WAITING_CREATE)) { //只有待下发
-                    //tradeExtra为待下发
-                    Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
+                                if (condition.getDeliveryOrderStatuses().size() == 1
+                        && condition.getDeliveryOrderStatuses().contains(DeliveryOrderStatus.WAITING_CREATE)) {                                         Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
                     QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
                     tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
                     tradeExtraQB.where().eq(TradeExtra.$.deliveryStatus, DeliveryStatus.WAITINT_DELIVERY)
                             .and().isNull(TradeExtra.$.deliveryUserId)
                             .and().eq(TradeExtra.$.deliveryPlatform, DeliveryPlatform.MERCHANT);
-                    //所有deliveryOrder记录
-                    Dao<DeliveryOrder, String> deliveryOrderDao = dbHelper.getDao(DeliveryOrder.class);
+                                        Dao<DeliveryOrder, String> deliveryOrderDao = dbHelper.getDao(DeliveryOrder.class);
                     QueryBuilder<DeliveryOrder, String> deliveryOrderQB = deliveryOrderDao.queryBuilder();
                     deliveryOrderQB.selectColumns(DeliveryOrder.$.tradeUuid);
                     deliveryOrderQB.where()
                             .eq(DeliveryOrder.$.statusFlag, YesOrNo.YES)
                             .and()
                             .eq(DeliveryOrder.$.enableFlag, YesOrNo.YES);
-                    //没有deliveryOrder记录并且tradeExtra也是待下发
-                    Where<Trade, String> deliverStatusWhere = where
+                                        Where<Trade, String> deliverStatusWhere = where
                             .and(where.and(where.notIn(Trade.$.uuid, deliveryOrderQB)
                                     , where.in(Trade.$.uuid, tradeExtraQB))
                                     , where.or(where.eq(Trade.$.tradeStatus, TradeStatus.CONFIRMED), where.eq(Trade.$.tradeStatus, TradeStatus.FINISH)))
@@ -275,10 +250,8 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
                             .and().eq(Trade.$.businessType, BusinessType.TAKEAWAY);
                     where.and(where, deliverStatusWhere);
                 } else {
-                    //老配送状态
-                    QueryBuilder<TradeExtra, String> deliveryStatusQueryBuilder = getDeliveryStatusQueryBuilder(dbHelper, condition.getDeliveryOrderStatuses());
-                    //新配送状态
-                    QueryBuilder<DeliveryOrder, String> deliveryOrderStatusQueryBuilder = getDeliveryOrderStatusQueryBuilder(dbHelper, condition.getDeliveryOrderStatuses(), condition.getDeliveryOrderSubStatuses());
+                                        QueryBuilder<TradeExtra, String> deliveryStatusQueryBuilder = getDeliveryStatusQueryBuilder(dbHelper, condition.getDeliveryOrderStatuses());
+                                        QueryBuilder<DeliveryOrder, String> deliveryOrderStatusQueryBuilder = getDeliveryOrderStatusQueryBuilder(dbHelper, condition.getDeliveryOrderStatuses(), condition.getDeliveryOrderSubStatuses());
                     if (deliveryStatusQueryBuilder == null) {
                         Where<Trade, String> deliverStatusWhere = where.and(where.in(Trade.$.uuid, deliveryOrderStatusQueryBuilder), where.or(where.eq(Trade.$.tradeStatus, TradeStatus.CONFIRMED), where.eq(Trade.$.tradeStatus, TradeStatus.FINISH)))
                                 .and().eq(Trade.$.deliveryType, DeliveryType.SEND)
@@ -370,8 +343,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
         return where;
     }
 
-    //获取最小营业日
-    private Long getMinBizDate() {
+        private Long getMinBizDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(DateTimeUtils.getCurrentDayStart());
         calendar.add(Calendar.DAY_OF_MONTH, -2);
@@ -459,8 +431,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
                     }
                 } else {
                     switch (position) {
-                        case 0://全部
-                            if (Utils.isNum(keyword)) {
+                        case 0:                            if (Utils.isNum(keyword)) {
                                 BigDecimal amount = MathDecimal.round(new BigDecimal(keyword), 2);
                                 Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
                                 QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
@@ -505,8 +476,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
                             searchWhere = where.in(Trade.$.uuid, tradeExtraQB);
                         }
                         break;
-                        case 2://订单金额
-                            if (Utils.isNum(keyword)) {
+                        case 2:                            if (Utils.isNum(keyword)) {
                                 BigDecimal amount = MathDecimal.round(new BigDecimal(keyword), 2);
                                 searchWhere = where.eq(Trade.$.tradeAmount, amount);
                             }
@@ -533,8 +503,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
                 }
             }
 
-            //筛选条件
-            if (condition != null) {
+                        if (condition != null) {
                 if (Utils.isNotEmpty(condition.getDeliveryTypes())) {
                     where.and().in(Trade.$.deliveryType, condition.getDeliveryTypes());
                 }
@@ -632,9 +601,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
             Dao<Payment, String> dao = dbHelper.getDao(Payment.class);
             QueryBuilder<Payment, String> paymentBuild = dao.queryBuilder();
             paymentBuild.selectColumns(Payment.$.uuid, Payment.$.serverUpdateTime, Payment.$.paymentType);
-            //paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid)
-            //        .and().eq(Payment.$.isPaid, Bool.YES);
-            paymentBuild.where().eq(Payment.$.relateUuid, tradeUUID);
+                                    paymentBuild.where().eq(Payment.$.relateUuid, tradeUUID);
             paymentBuild.orderBy(Payment.$.serverCreateTime, false);
             List<Payment> paymentList = paymentBuild.query();
 
@@ -802,8 +769,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
         tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
         tradeExtraQB.where().like(TradeExtra.$.serialNumber, "%" + keyWord + "%")
                 .or().like(TradeExtra.$.receiverPhone, "%" + keyWord + "%")
-                .or().like(TradeExtra.$.numberPlate, "%" + keyWord + "%"); // v8.7.0 添加号牌查询
-
+                .or().like(TradeExtra.$.numberPlate, "%" + keyWord + "%");
         return tradeExtraQB;
     }
 
@@ -845,9 +811,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
         return tradeExtraQB;
     }
 
-    /**
-     * v8.7.0 根据号牌查询
-     */
+
     private QueryBuilder<TradeExtra, String> getNumberPlateQueryBuilder(DatabaseHelper dbHelper, String keyWord) throws Exception {
         Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
         QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
@@ -856,9 +820,7 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
         return tradeExtraQB;
     }
 
-    /**
-     * v8.12.0 桌台号 非POS下为取餐号
-     */
+
     private QueryBuilder<TradeExtra, String> getTakeNumberByTradeExtra(DatabaseHelper dbHelper, String keyWord) throws Exception {
         Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
         QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
@@ -884,27 +846,23 @@ public class OrderCenterDBDalImpl extends AbstractOpeartesImpl implements OrderC
     }
 
     private QueryBuilder<TradeExtra, String> getDeliveryStatusQueryBuilder(DatabaseHelper dbHelper, List<DeliveryOrderStatus> deliveryStatuses) throws Exception {
-        if (deliveryStatuses.contains(DeliveryOrderStatus.REAL_DELIVERY)) {//配送完成
-            Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
+        if (deliveryStatuses.contains(DeliveryOrderStatus.REAL_DELIVERY)) {            Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
             QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
             tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
             tradeExtraQB.where().eq(TradeExtra.$.deliveryStatus, DeliveryStatus.SQUARE_UP).or().eq(TradeExtra.$.deliveryStatus, DeliveryStatus.REAL_DELIVERY);
             return tradeExtraQB;
-        } else if (deliveryStatuses.contains(DeliveryOrderStatus.DELIVERYING)) {//配送中
-            Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
+        } else if (deliveryStatuses.contains(DeliveryOrderStatus.DELIVERYING)) {            Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
             QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
             tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
             tradeExtraQB.where().eq(TradeExtra.$.deliveryStatus, DeliveryStatus.DELIVERYING);
             return tradeExtraQB;
-        } else if (deliveryStatuses.contains(DeliveryOrderStatus.WAITING_PICK_UP)) {//待配送-已派单
-            Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
+        } else if (deliveryStatuses.contains(DeliveryOrderStatus.WAITING_PICK_UP)) {            Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
             QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
             tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
             tradeExtraQB.where().eq(TradeExtra.$.deliveryStatus, DeliveryStatus.WAITINT_DELIVERY)
                     .and().isNotNull(TradeExtra.$.deliveryUserId);
             return tradeExtraQB;
-        } else if (deliveryStatuses.contains(DeliveryOrderStatus.WAITING_ACCEPT)) {//待配送-未派单
-            Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
+        } else if (deliveryStatuses.contains(DeliveryOrderStatus.WAITING_ACCEPT)) {            Dao<TradeExtra, String> tradeExtraDao = dbHelper.getDao(TradeExtra.class);
             QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
             tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
             tradeExtraQB.where().eq(TradeExtra.$.deliveryStatus, DeliveryStatus.WAITINT_DELIVERY)

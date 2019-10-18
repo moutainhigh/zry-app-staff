@@ -50,14 +50,12 @@ public class DishTypeInflateEx {
 
     private VerticalViewPager viewPager;
 
-    private int mPageSize = 6;// 每页个数
-    private int mLayoutResId = R.layout.item_dish_type_ex;
+    private int mPageSize = 6;    private int mLayoutResId = R.layout.item_dish_type_ex;
     private int mResId = R.drawable.dish_type_item_bg;
     private int mIvArrBg = R.drawable.dish_type_arr;
     private int mMoreResId = -1;
 
-    private int mEmptyResId = -1;//之所以默认值设为-1,是因为正餐不用设空项背景
-
+    private int mEmptyResId = -1;
     private float mTextSize = 22;
 
     private ColorStateList mTextColors;
@@ -101,9 +99,7 @@ public class DishTypeInflateEx {
         mTextColors = mContext.getResources().getColorStateList(resId);
     }
 
-    /**
-     * 页数
-     */
+
     private int getPageCount() {
         return (list.size() + mPageSize - 1) / mPageSize;
     }
@@ -174,16 +170,9 @@ public class DishTypeInflateEx {
 
                 @Override
                 public void onClick(View v) {
-                    //if(ClickManager.getInstance().isClicked())		//限制点击速度
-                    //	return;
-                    boolean sw = v.getId() != currentItem;
-                    //if (v.getId() == currentItem)
-                    //	return;
-                    //lastSelectView.setSelected(false);
-                    setSelectedView(lastSelectView, false);
-                    //v.setSelected(true);
-                    if (sw)    //有切换
-                        mSelectTxt = MainApplication.getInstance().getResources().getString(R.string.snack_all);
+                                                            boolean sw = v.getId() != currentItem;
+                                                                                setSelectedView(lastSelectView, false);
+                                        if (sw)                            mSelectTxt = MainApplication.getInstance().getResources().getString(R.string.snack_all);
                     setSelectedView(v, true);
                     currentItem = v.getId();
                     lastSelectView = v;
@@ -217,8 +206,7 @@ public class DishTypeInflateEx {
         }
         viewPager.setAdapter(new CommonPagerAdapter(views));
 
-        // 若数据发生变化（lasType不为空），则选中之前选择的item
-        currentItem = 0;
+                currentItem = 0;
         currentPage = 0;
         boolean isLastTypeMap = false;
         if (lasType != null && Utils.isNotEmpty(list)) {
@@ -231,17 +219,11 @@ public class DishTypeInflateEx {
                 }
             }
         }
-        // 若lastType没有匹配上，则默认选中第一项
-        if (!isLastTypeMap) {
+                if (!isLastTypeMap) {
             lasType = list.get(0);
         }
-        /*
-		if (listener != null) {
-			listener.onChangeTypeExListener(lasType, true);
-		}
-		*/
-        //设置当前选中页面
-        viewPager.setCurrentItem(currentPage, true);
+
+                viewPager.setCurrentItem(currentPage, true);
         lastSelectView = ((LinearLayout) views.get(currentPage)).getChildAt(currentItem % mPageSize);
         setSelectedView(lastSelectView, true);
     }
@@ -300,8 +282,7 @@ public class DishTypeInflateEx {
         params.weight = 1;
         params.gravity = Gravity.CENTER;
         params.topMargin = DensityUtil.dip2px(MainApplication.getInstance(), 14);
-        params.leftMargin = 0;//DensityUtil.dip2px(14);
-        params.rightMargin = DensityUtil.dip2px(MainApplication.getInstance(), 12);
+        params.leftMargin = 0;        params.rightMargin = DensityUtil.dip2px(MainApplication.getInstance(), 12);
         if (position == mPageSize - 1) {
             params.bottomMargin = DensityUtil.dip2px(MainApplication.getInstance(), 5);
         } else {
@@ -312,13 +293,8 @@ public class DishTypeInflateEx {
     }
 
     private class ViewPagerScroller extends Scroller {
-        private int mScrollDuration = 400; // 滑动速度
+        private int mScrollDuration = 400;
 
-        /**
-         * 设置速度速度
-         *
-         * @param duration
-         */
         public void setScrollDuration(int duration) {
             this.mScrollDuration = duration;
         }

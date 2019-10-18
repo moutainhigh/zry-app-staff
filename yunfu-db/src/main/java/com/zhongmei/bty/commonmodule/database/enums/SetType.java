@@ -2,26 +2,16 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 桌台/号牌设置
- */
+
 public enum SetType implements ValueEnum<Integer> {
 
-    /**
-     * 桌台
-     */
+
     TABLE(1),
 
-    /**
-     * 号牌
-     */
+
     NUMPLATE(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

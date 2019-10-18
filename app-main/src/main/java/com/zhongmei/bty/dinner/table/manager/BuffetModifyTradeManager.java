@@ -29,10 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date 2016/7/26
- * @Description:改单操作
- */
+
 public class BuffetModifyTradeManager {
     private TradeVo mTradeVo;
     private int customerNum;
@@ -40,8 +37,7 @@ public class BuffetModifyTradeManager {
 
     private AuthUser mWaiter;
 
-    //保存改动前的人数和服务员
-    private int customerNumOld;
+        private int customerNumOld;
     private Long userIdOld;
     private String userNameOld;
     private TradeDeposit oldDeposit;
@@ -55,10 +51,8 @@ public class BuffetModifyTradeManager {
 
     public DinnerShoppingCart mShoppingCart;
 
-    private boolean isFirstChange = false;//是否第一次选择套餐
-
-    private TradeUser tradeUser;//add v8.1 销售员
-
+    private boolean isFirstChange = false;
+    private TradeUser tradeUser;
     public boolean isFirstChange() {
         return isFirstChange;
     }
@@ -92,16 +86,13 @@ public class BuffetModifyTradeManager {
     }
 
     public void finishChangeTable(ResponseListener<TradeResp> listener) {
-        modifyTradeVo();//更新其他信息
-        changeTable(listener); //调用改单操作
-    }
+        modifyTradeVo();        changeTable(listener);     }
 
 
     private void modifyTradeVo() {
         TradeTable tradeTable = getOpenTableInfo(mTradeVo);
         if (tradeTable != null) {
-            //保存改动前的人数和服务员
-            customerNumOld = tradeTable.getTablePeopleCount();
+                        customerNumOld = tradeTable.getTablePeopleCount();
             userIdOld = tradeTable.getWaiterId();
             userNameOld = tradeTable.getWaiterName();
 
@@ -113,8 +104,7 @@ public class BuffetModifyTradeManager {
         oldDeliVerType = mTradeVo.getTrade().getDeliveryType();
 
 
-        //如果是套餐，才会设置套餐相关的数据
-        mTradeVo.getTrade().setTradePeopleCount(customerNum);
+                mTradeVo.getTrade().setTradePeopleCount(customerNum);
 
         if (mTradeVo.getTradeDeposit() != null) {
             oldDeposit = mTradeVo.getTradeDeposit().clone();
@@ -125,11 +115,8 @@ public class BuffetModifyTradeManager {
             mTradeVo.setTradeDeposit(mTradeDeposit);
         }
 
-        //将修改的人数放入tradeBuffetPeople中。
-        if (mTradeVo.getMealShellVo() == null) {//重新设置
-            mShoppingCart.setMealShellVo(comboVo, mWaiter);
-        } else {//更新
-            oldMealShellVo = mTradeVo.getMealShellVo().clone();
+                if (mTradeVo.getMealShellVo() == null) {            mShoppingCart.setMealShellVo(comboVo, mWaiter);
+        } else {            oldMealShellVo = mTradeVo.getMealShellVo().clone();
             Map<Long, CustomerTypeBean> mapCustomerType = null;
             BigDecimal totalAmount = BigDecimal.ZERO;
             if (comboVo != null && Utils.isNotEmpty(comboVo.getDishCarteNorms())) {
@@ -165,9 +152,7 @@ public class BuffetModifyTradeManager {
                 }
             }
         }
-        //将改动信息存入购物车
-        if (this.tradeUser != null) {//add v8.1 销售员
-            mShoppingCart.setTradeUser(this.tradeUser);
+                if (this.tradeUser != null) {            mShoppingCart.setTradeUser(this.tradeUser);
         }
         mShoppingCart.updateTable(tradeTable);
         mShoppingCart.setOrderBusinessType(mShoppingCart.getShoppingCartVo(), BusinessType.BUFFET);
@@ -183,12 +168,7 @@ public class BuffetModifyTradeManager {
         mTradeOperates.modifyBuffet(mTradeVo, LoadingResponseListener.ensure(listener, activity.getSupportFragmentManager()));
     }
 
-    /**
-     * @Date 2016/10/27
-     * @Description:网络请求失败重置tradetable
-     * @Param
-     * @Return
-     */
+
     public void resetCusomerNumberAndWaiter() {
         if (isFirstChange) {
             return;

@@ -14,9 +14,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = AsyncUuidRecord.$.name)
 public class AsyncUuidRecord implements IEntity<String> {
 

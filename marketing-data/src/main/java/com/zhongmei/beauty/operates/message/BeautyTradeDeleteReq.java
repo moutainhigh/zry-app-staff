@@ -5,16 +5,12 @@ import com.zhongmei.bty.basemodule.trade.message.RecisionDinnerReq;
 
 import java.util.List;
 
-/**
- * 作废订单请求V2
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyTradeDeleteReq {
     private RecisionDinnerReq obsoleteRequest;
     List<InventoryItemReq> returnInventoryItems;
-    private boolean reviseStock = true;//退换库存
-
+    private boolean reviseStock = true;
     public List<InventoryItemReq> getReturnInventoryItems() {
         return returnInventoryItems;
     }

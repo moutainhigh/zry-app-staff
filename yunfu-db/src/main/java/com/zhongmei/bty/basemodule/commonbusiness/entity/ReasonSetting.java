@@ -9,63 +9,41 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * TradeItemProperty is a ORMLite bean type. Corresponds to the database table "reason_setting"
- */
+
 @DatabaseTable(tableName = "reason_setting")
 public class ReasonSetting extends BasicEntityBase implements ICreator, IUpdator {
 
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "reason_setting"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * content
-         */
+
         public static final String content = "content";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * source
-         */
+
         public static final String source = "source";
 
-        /**
-         * type
-         */
+
         public static final String type = "type";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * uuid
-         */
+
         public static final String uuid = "uuid";
 
     }
@@ -97,8 +75,7 @@ public class ReasonSetting extends BasicEntityBase implements ICreator, IUpdator
     @DatabaseField(columnName = "uuid")
     private String uuid;
 
-    // v8.12.0 口碑拒绝理由码
-    private String contentCode;
+        private String contentCode;
 
     public String getContent() {
         return content;

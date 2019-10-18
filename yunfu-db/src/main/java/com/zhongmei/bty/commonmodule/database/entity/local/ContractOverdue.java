@@ -4,17 +4,13 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * 合同到期
- */
+
 @DatabaseTable(tableName = "contract_overdue")
 public class ContractOverdue extends EntityBase<Long> {
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         public static final String id = "id";
         public static String shopId = "shopId";
         public static String serviceId = "serviceId";
@@ -30,46 +26,32 @@ public class ContractOverdue extends EntityBase<Long> {
     @DatabaseField(columnName = "id", canBeNull = false, id = true)
     private Long id;
 
-    /*
-     * 服务名称
-     */
+
     @DatabaseField(columnName = "serviceName", canBeNull = false)
     private String serviceName;
 
     @DatabaseField(columnName = "serviceId")
     private Long serviceId;
 
-    /*
-     * 到期日期
-     */
+
     @DatabaseField(columnName = "expireDate", canBeNull = false)
     private long expireDate;
-    /*
-     * 剩余天数
-     */
+
     @DatabaseField(columnName = "remainDays", canBeNull = false)
     private int remainDays;
-    /*
-     * 销售人员姓名
-     */
+
     @DatabaseField(columnName = "salesName", canBeNull = false)
     private String salesName;
-    /*
-     * 销售人员电话
-     */
+
     @DatabaseField(columnName = "salesPhone")
     private String salesPhone;
 
 
-    /*
-     * 创建时间
-     */
+
     @DatabaseField(columnName = "time")
     private long time;
 
-    /**
-     * 店铺编号;
-     */
+
     @DatabaseField(columnName = "shopId", canBeNull = false)
     private String shopId;
 

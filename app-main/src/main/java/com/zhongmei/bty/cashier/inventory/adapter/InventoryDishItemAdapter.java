@@ -18,9 +18,7 @@ import com.zhongmei.yunfu.db.enums.SaleType;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class InventoryDishItemAdapter extends BaseAdapter {
 
@@ -90,13 +88,11 @@ public class InventoryDishItemAdapter extends BaseAdapter {
         holder.subtract.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //减
-                if (tradeItem.getSaleType() == SaleType.WEIGHING || inventoryItem.isGroupDish()) {
+                                if (tradeItem.getSaleType() == SaleType.WEIGHING || inventoryItem.isGroupDish()) {
                     holder.dishNum.setText(0 + "");
                 } else {
                     BigDecimal qty = new BigDecimal(holder.dishNum.getText().toString().trim()).subtract(inventoryItem.getStepNum());
-                    //不能小于0
-                    if (qty.compareTo(BigDecimal.ZERO) < 0) {
+                                        if (qty.compareTo(BigDecimal.ZERO) < 0) {
                         qty = BigDecimal.ZERO;
                     }
                     holder.dishNum.setText(bigDecimalToString(qty) + "");
@@ -107,13 +103,11 @@ public class InventoryDishItemAdapter extends BaseAdapter {
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //加
-                if (tradeItem.getSaleType() == SaleType.WEIGHING || inventoryItem.isGroupDish()) {
+                                if (tradeItem.getSaleType() == SaleType.WEIGHING || inventoryItem.isGroupDish()) {
                     holder.dishNum.setText(bigDecimalToString(tradeItem.getQuantity()) + "");
                 } else {
                     BigDecimal qty = new BigDecimal(holder.dishNum.getText().toString().trim()).add(inventoryItem.getStepNum());
-                    //不能大于最大值
-                    if (qty.compareTo(inventoryItem.getMaxInventoryNum()) > 0) {
+                                        if (qty.compareTo(inventoryItem.getMaxInventoryNum()) > 0) {
                         qty = inventoryItem.getMaxInventoryNum();
                     }
                     holder.dishNum.setText(bigDecimalToString(qty) + "");

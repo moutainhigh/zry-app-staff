@@ -2,21 +2,13 @@ package com.zhongmei.bty.basemodule.trade.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 发票来源
- */
+
 public enum InvoiceSource implements ValueEnum<Integer> {
 
-    /**
-     * 优识云创
-     */
+
     UKNOWER(-40),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

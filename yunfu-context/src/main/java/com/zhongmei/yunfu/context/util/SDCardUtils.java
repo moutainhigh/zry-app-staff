@@ -10,9 +10,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public final class SDCardUtils {
 
@@ -20,21 +18,12 @@ public final class SDCardUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    /**
-     * 判断SD卡是否可用
-     *
-     * @return true : 可用<br>false : 不可用
-     */
+
     public static boolean isSDCardEnable() {
         return Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState());
     }
 
-    /**
-     * 获取SD卡路径
-     * <p>先用shell，shell失败再普通方法获取，一般是/storage/emulated/0/</p>
-     *
-     * @return SD卡路径
-     */
+
     public static String getSDCardPath() {
         if (!isSDCardEnable()) return null;
         String cmd = "cat /proc/mounts";
@@ -63,21 +52,13 @@ public final class SDCardUtils {
         return Environment.getExternalStorageDirectory().getPath() + File.separator;
     }
 
-    /**
-     * 获取SD卡data路径
-     *
-     * @return SD卡data路径
-     */
+
     public static String getDataPath() {
         if (!isSDCardEnable()) return null;
         return Environment.getExternalStorageDirectory().getPath() + File.separator + "data" + File.separator;
     }
 
-    /**
-     * 获取SD卡剩余空间
-     *
-     * @return SD卡剩余空间
-     */
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static String getFreeSpace() {
         if (!isSDCardEnable()) return null;
@@ -88,11 +69,7 @@ public final class SDCardUtils {
         return ConvertUtils.byte2FitMemorySize(availableBlocks * blockSize);
     }
 
-    /**
-     * 获取SD卡信息
-     *
-     * @return SDCardInfo
-     */
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static String getSDCardInfo() {
         if (!isSDCardEnable()) return null;

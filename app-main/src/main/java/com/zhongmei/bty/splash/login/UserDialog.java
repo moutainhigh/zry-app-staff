@@ -26,9 +26,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-/**
- * @date:2016年6月7日上午9:14:41
- */
+
 public class UserDialog extends Dialog implements SideBar.OnTouchingLetterChangedListener, UserGridAdapter.OnItemClikListener {
 
     private StickyGridHeadersGridView mGridView;
@@ -39,14 +37,10 @@ public class UserDialog extends Dialog implements SideBar.OnTouchingLetterChange
 
     protected Context mContext;
 
-    /**
-     * 汉字转换成拼音的类
-     */
+
     protected CharacterParser characterParser;
 
-    /**
-     * 根据拼音来排列元数据
-     */
+
     private PinyinComparator pinyinComparator;
 
     private SideBar sideBar;
@@ -63,10 +57,8 @@ public class UserDialog extends Dialog implements SideBar.OnTouchingLetterChange
 
     protected ImageButton btn_close;
 
-    // 当前选择的user
-    private User currentUser;
-    //gridview每行最多显示多少个元素
-    private static final int GRID_NUM_COUNT = 5;
+        private User currentUser;
+        private static final int GRID_NUM_COUNT = 5;
 
     protected int titleResId = -1;
 
@@ -131,11 +123,9 @@ public class UserDialog extends Dialog implements SideBar.OnTouchingLetterChange
         }
         characterParser = CharacterParser.getInstance();
         mGirdList = filledData(userList);
-        // 根据拼音首字母排序
-        pinyinComparator = new PinyinComparator();
+                pinyinComparator = new PinyinComparator();
         Collections.sort(mGirdList, pinyinComparator);
-        // 将首字母放到map中
-        int section = 0;
+                int section = 0;
         for (ListIterator<UserGridItem> it = mGirdList.listIterator(); it.hasNext(); ) {
             UserGridItem mGridItem = it.next();
             String letters = mGridItem.getSortLetters();
@@ -151,34 +141,25 @@ public class UserDialog extends Dialog implements SideBar.OnTouchingLetterChange
                 mGridItem.setSection(data.getSection());
                 int count = data.getCount() + 1;
                 data.setCount(count);
-                //向上取整
-                int lineNum = (int) Math.ceil(count / GRID_NUM_COUNT);
+                                int lineNum = (int) Math.ceil(count / GRID_NUM_COUNT);
                 data.setLineNum(lineNum);
             }
         }
     }
 
-    /**
-     * 为ListView填充数据
-     *
-     * @param
-     * @return
-     */
+
     protected List<UserGridItem> filledData(List<User> userList) {
         List<UserGridItem> mSortList = new ArrayList<UserGridItem>();
 
         for (int i = 0; i < userList.size(); i++) {
             UserGridItem gridItem = new UserGridItem();
             User authUser = userList.get(i);
-            gridItem.setUser(authUser);//add v8.2
-            gridItem.setUserName(authUser.getDisplayName());
+            gridItem.setUser(authUser);            gridItem.setUserName(authUser.getDisplayName());
             gridItem.setUserId(authUser.getId());
-            // 汉字转换成拼音
-            String pinyin = characterParser.getSelling(authUser.getDisplayName());
+                        String pinyin = characterParser.getSelling(authUser.getDisplayName());
             String sortString = pinyin.substring(0, 1).toUpperCase(Locale.getDefault());
 
-            // 正则表达式，判断首字母是否是英文字母
-            if (sortString.matches("[A-Z]")) {
+                        if (sortString.matches("[A-Z]")) {
                 gridItem.setSortLetters(sortString.toUpperCase(Locale.getDefault()));
             } else {
                 gridItem.setSortLetters("#");
@@ -206,21 +187,16 @@ public class UserDialog extends Dialog implements SideBar.OnTouchingLetterChange
         }
     }
 
-    // 前面有好多行,一个字母前面有多少行,不包括head
-    private int getPreLine(String s) {
-        // 已经比较的首字母
-        String comparedS = "";
-        // 总行数
-        int totalLineNum = 0;
-        // 临时存储的行数,由于第一行是0开始，初始值为0
-        int tempLineNum = 0;
+        private int getPreLine(String s) {
+                String comparedS = "";
+                int totalLineNum = 0;
+                int tempLineNum = 0;
         for (int i = 0; i < mGirdList.size(); i++) {
             UserGridItem item = mGirdList.get(i);
             if (!item.getSortLetters().equals(s)) {
                 if (TextUtils.isEmpty(comparedS)) {
                     comparedS = item.getSortLetters();
                 }
-//				当前的和前一次不相同，行数添加
                 if (!item.getSortLetters().equals(comparedS)) {
                     LetterData data = sectionMap.get(s);
                     tempLineNum = data.getLineNum();

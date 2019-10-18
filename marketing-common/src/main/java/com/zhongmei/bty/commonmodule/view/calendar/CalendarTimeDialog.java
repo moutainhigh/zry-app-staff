@@ -57,8 +57,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
 
     private CalendarView[] calendarViews;
 
-    //时间控件
-    private TimePickerView mTpvTime;
+        private TimePickerView mTpvTime;
     private Button mBtnConfirm;
 
     private SildeDirection mDirection = SildeDirection.NO_SILDE;
@@ -75,8 +74,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
     private String mStrMinute = "0";
     private SelectedDateTimeListener mSelectedDateTimeListener;
 
-    //是否显示时间
-    private boolean isShowTime = true;
+        private boolean isShowTime = true;
 
     @Override
     public void OnItemClick(Date downDate) {
@@ -101,13 +99,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
         owner = (context instanceof Activity) ? (Activity) context : null;
     }
 
-    /**
-     * 构造函数
-     *
-     * @param context:上下文对象
-     * @param itemListener:回调监听
-     * @param isShowTime:是否显示时间（eg:营业日传false，自然日传true）
-     */
+
     public CalendarTimeDialog(Context context, SelectedDateTimeListener itemListener, boolean isShowTime) {
         this(context, itemListener);
         this.isShowTime = isShowTime;
@@ -166,13 +158,11 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
             }
         });
 
-        // 获取日历中年月 ya[0]为年，ya[1]为月（格式大家可以自行在日历控件中改）
-        calendarLeft.setOnClickListener(new View.OnClickListener() {
+                calendarLeft.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // 点击上一月 同样返回年月
-                mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
+                                mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
             }
         });
 
@@ -180,8 +170,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
 
             @Override
             public void onClick(View v) {
-                // 点击下一月
-                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
             }
         });
 
@@ -234,8 +223,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
                         calendarView.clearSelect();
                     }
                 }
-                // 扩展某些查询的功能需要
-                if (queryListener != null && currentDate != null) {
+                                if (queryListener != null && currentDate != null) {
                     queryListener.onQuery(currentDate);
                 }
             }
@@ -251,9 +239,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
         });
     }
 
-    /**
-     * 计算方向
-     */
+
     private void measureDirection(int position) {
 
         if (position > mCurrentIndex) {
@@ -265,8 +251,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
         mCurrentIndex = position;
     }
 
-    // 更新日历视图
-    private void updateCalendarView(int position) {
+        private void updateCalendarView(int position) {
         mShowViews = adapter.getAllItems();
         if (mDirection == SildeDirection.RIGHT) {
             mShowViews[position % mShowViews.length].clickRightMonth();
@@ -300,9 +285,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
         markDateList = null;
     }
 
-    /**
-     * 设置默认选中的日期
-     */
+
     public void setDefaultSelected(Date date) {
         this.defaultSeDate = date;
         mData = this.defaultSeDate;
@@ -318,8 +301,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
         CalendarView calendarView = calendarViews[mCurrentIndex % calendarViews.length];
         if (defaultSeDate != null) {
             calendarView.setDefaultSelected(defaultSeDate);
-            //设置时间
-            String hour = DateTimeUtils.formatDate(defaultSeDate, "HH");
+                        String hour = DateTimeUtils.formatDate(defaultSeDate, "HH");
             String minute = DateTimeUtils.formatDate(defaultSeDate, "mm");
             mTpvTime.setSelectedTime(DateTimeUtils.fillZero(hour), DateTimeUtils.fillZero(minute));
         }
@@ -346,12 +328,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
         }
     }
 
-    /**
-     * 是否比当前月早
-     *
-     * @return 早返回true
-     * @author daixj@shishike.com
-     */
+
     private boolean isEarly(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -403,10 +380,7 @@ public class CalendarTimeDialog extends Dialog implements CalendarView.OnMonthCh
     }
 
     public interface SelectedDateTimeListener {
-        /**
-         * @param date：日期
-         * @param time：时间
-         */
+
         void selectedDateTime(Date date, String time);
     }
 }

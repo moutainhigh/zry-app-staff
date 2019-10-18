@@ -31,24 +31,18 @@ public class BookingVo implements Serializable {
 
     private BookingPeriod bookingPeriod;
 
-    /**
-     * 团餐模版
-     */
+
     private BookingMealShellVo mealShellVo;
 
 
     private List<BookingTradeItemVo> tradeItemVoList;
 
-    private Integer isPreOrder; // 1-是 2-否
-    private BigDecimal oldDeskCount = null;
+    private Integer isPreOrder;     private BigDecimal oldDeskCount = null;
 
-    /**
-     * 销售员
-     */
+
     private AuthUser saleAuthUser;
 
-    //给打印使用的字段
-    public List<TablesCommercialAreaVo> tableAreaVoList;
+        public List<TablesCommercialAreaVo> tableAreaVoList;
 
     private BookingDepositInfo bookingDepositInfo;
 

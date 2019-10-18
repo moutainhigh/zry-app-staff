@@ -5,20 +5,12 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.EcCardInfo;
 
 import java.math.BigDecimal;
 
-/**
- * 售卡处  充值 成功 event
- * <p>
- * Created by demo on 2018/12/15
- */
+
 public class EventSaleCardCharging {
 
-    /**
-     * 标记储值类型
-     */
+
     public enum ChargingType {
-        CUSTOMER, // 虚拟会员
-        CARD // 卡
-    }
+        CUSTOMER,         CARD     }
 
     public EventSaleCardCharging(BigDecimal chargeMoney, BigDecimal sendMoney, EventPayResult payResult) {
         this.chargeMoney = chargeMoney;
@@ -34,28 +26,18 @@ public class EventSaleCardCharging {
         this.ecCardInfo = ecCardInfo;
     }
 
-    /**
-     * 充值金额
-     */
+
     public BigDecimal chargeMoney;
 
-    /**
-     * 充值返回结果
-     */
+
     public EventPayResult payResult;
 
-    /**
-     * 赠送金额
-     */
+
     public BigDecimal sendMoney;
 
-    /**
-     * 储值类型
-     */
+
     public ChargingType chargingType;
 
-    /**
-     * 卡信息
-     */
+
     public EcCardInfo ecCardInfo;
 }

@@ -5,11 +5,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 import android.util.Log;
 
-/**
- * Desc
- *
- * @created 2017/9/13
- */
+
 public abstract class ScanCode {
 
     protected static final String TAG = ScanCode.class.getSimpleName();

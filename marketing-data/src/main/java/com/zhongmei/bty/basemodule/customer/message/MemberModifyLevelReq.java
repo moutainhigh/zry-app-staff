@@ -6,17 +6,12 @@ import com.zhongmei.bty.commonmodule.data.operate.message.BaseRequest;
 public class MemberModifyLevelReq extends BaseRequest {
 
     private Integer appType = 1;
-    /**
-     * 操作人ID
-     * 必
-     */
+
     private Long userId;
 
     private String name;
 
-    /**
-     * 必填
-     */
+
     private Long customerId;
 
     private Long levelId;

@@ -5,87 +5,56 @@ import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.enums.Sex;
 
-/**
- * 合成语音记录
- */
+
 @DatabaseTable(tableName = "baidu_synthetic_speech")
 public class BaiduSyntheticSpeech extends LocalEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "sync_mark"
-     */
+
     public interface $ extends LocalEntityBase.$ {
 
-        /**
-         * content
-         */
+
         public static final String context = "content";
 
-        /**
-         * sex
-         */
+
         public static final String sex = "sex";
 
-        /**
-         * speed
-         */
+
         public static final String speed = "speed";
 
-        /**
-         * type
-         */
+
         public static final String type = "type";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * 排队叫号模板类型
-         */
+
         public static final String queueVoiceType = "queue_voice_type";
 
     }
 
-    /**
-     * 名称
-     */
+
     @DatabaseField(columnName = "name")
     private String name;
 
-    /**
-     * 播放内容
-     */
+
     @DatabaseField(columnName = "content")
     private String content;
 
-    /**
-     * 播放性别
-     */
+
     @DatabaseField(columnName = "sex")
     private Integer sex;
 
-    /**
-     * 1最慢， 3较慢 ，5正常， 7较快， 9 最快
-     */
+
     @DatabaseField(columnName = "speed")
     private Integer speed;
 
-    /**
-     * 1，叫号语音，2，广播语音
-     */
+
     @DatabaseField(columnName = "type")
     private Integer type;
 
-    /**
-     * 排队叫号模板类型：
-     * 0：普通叫号模板
-     * 1：智能叫号，入场模板
-     * 2：智能叫号，下一个排队叫号模板
-     */
+
     @DatabaseField(columnName = "queue_voice_type")
     private Integer queueVoiceType;
 

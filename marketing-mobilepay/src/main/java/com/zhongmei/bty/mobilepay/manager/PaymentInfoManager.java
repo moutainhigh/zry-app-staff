@@ -32,65 +32,39 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 保存支付相关的信息.
- */
+
 
 public class PaymentInfoManager implements IPaymentInfo {
-    // 是否订单中心，判断是否打印下单
-    private boolean isOrderCenter;
-    // 是否已经下单，判断走收银还是下单及收银
-    private boolean isOrdered;
+        private boolean isOrderCenter;
+        private boolean isOrdered;
 
     private boolean isSplit;
-    //是否已经打印
-    private boolean isPrintedOk;
-    // 抹零方式
-    private int mEraseType = 8;
-    //是否开发票
-    private boolean isOpenElectronicInvoice;
-    //抹零金额
-    private double mExemptAmount;
-    //当前要支付的订单
-    private TradeVo mTradeVo;
-    // 原单数据(拆单时调用)
-    private TradeVo sourceTradeVo;
-    //当前输入的支付金额
-    private GroupPay mInputPayModels;
-    //保存会员相关信息
-    private transient CusomerPayInfo mCusomerPayInfo;
-    //已经支付信息
-    private PaidPaymentRecord mPaidPaymentRecords;
-    private String paymentUuid;// 支付uuid
-    private String id;//当前对象实例ID add 20170708
-    private transient IUpdateUICallback mUILitenner;
-    private transient IFinishPayCallback mFinishPayCallback;//add 20180123
-    private int defaultPaymentMenuType = -1;//默認支付方式
-    private PayScene mPayScene = PayScene.SCENE_CODE_SHOP;//add 20170704
-    // v8.6.0 快捷支付增加字段
-    private int quickPayType = -1;
-    private PayActionPage mPayActionPage = PayActionPage.COMPAY; //add 20180309  sign pay activity 默认快餐界面
-    private Boolean isGroupPay = true;
+        private boolean isPrintedOk;
+        private int mEraseType = 8;
+        private boolean isOpenElectronicInvoice;
+        private double mExemptAmount;
+        private TradeVo mTradeVo;
+        private TradeVo sourceTradeVo;
+        private GroupPay mInputPayModels;
+        private transient CusomerPayInfo mCusomerPayInfo;
+        private PaidPaymentRecord mPaidPaymentRecords;
+    private String paymentUuid;    private String id;    private transient IUpdateUICallback mUILitenner;
+    private transient IFinishPayCallback mFinishPayCallback;    private int defaultPaymentMenuType = -1;    private PayScene mPayScene = PayScene.SCENE_CODE_SHOP;        private int quickPayType = -1;
+    private PayActionPage mPayActionPage = PayActionPage.COMPAY;     private Boolean isGroupPay = true;
 
-    //工厂方法构建器
-    public static synchronized PaymentInfoManager getNewInstance(IUpdateUICallback updateUICallback) {
+        public static synchronized PaymentInfoManager getNewInstance(IUpdateUICallback updateUICallback) {
         return new PaymentInfoManager(updateUICallback);
     }
 
-    //构造方法1
-    private PaymentInfoManager() {
-        // 初始化输入的支付数据
-        this.mInputPayModels = new GroupPay();
-        //初始化会员相关信息
-        this.mCusomerPayInfo = new CusomerPayInfo();
-        //初始化已经付款记录
-        this.mPaidPaymentRecords = new PaidPaymentRecord();
+        private PaymentInfoManager() {
+                this.mInputPayModels = new GroupPay();
+                this.mCusomerPayInfo = new CusomerPayInfo();
+                this.mPaidPaymentRecords = new PaidPaymentRecord();
 
         this.id = SystemUtils.genOnlyIdentifier();
     }
 
-    //构造方法2
-    private PaymentInfoManager(IUpdateUICallback updateUICallback) {
+        private PaymentInfoManager(IUpdateUICallback updateUICallback) {
         this();
         this.mUILitenner = updateUICallback;
     }
@@ -101,9 +75,7 @@ public class PaymentInfoManager implements IPaymentInfo {
             ThreadUtils.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mUILitenner.updatePaymentInfo();//刷新应收
-                    // EventBus.getDefault().post(new ExemptEventUpdate(getEraseType())); //刷新输入框 modify v8.5
-                }
+                    mUILitenner.updatePaymentInfo();                                    }
             });
         }
     }
@@ -124,9 +96,7 @@ public class PaymentInfoManager implements IPaymentInfo {
                 ThreadUtils.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mUILitenner.updatePaymentInfo();//刷新应收
-                        EventBus.getDefault().post(new ExemptEventUpdate(getEraseType())); //刷新输入框 modify v8.5
-                    }
+                        mUILitenner.updatePaymentInfo();                        EventBus.getDefault().post(new ExemptEventUpdate(getEraseType()));                     }
                 });
             }
         } else {
@@ -148,14 +118,12 @@ public class PaymentInfoManager implements IPaymentInfo {
     }
 
     public double getReceivableAmount() {
-        //当前应支付的金额=（应收-已收）//抹零是在该基础上抹
-        return CashInfoManager.floatSubtract(getTradeAmount(), getPaidAmount());
+                return CashInfoManager.floatSubtract(getTradeAmount(), getPaidAmount());
     }
 
     @Override
     public Double getActualAmount() {
-        //当前要支付的金额=（应收-已收-抹零）//对应UI上的未收
-        if (this.getPayScene() == PayScene.SCENE_CODE_BAKERY_BOOKING) {
+                if (this.getPayScene() == PayScene.SCENE_CODE_BAKERY_BOOKING) {
             return CashInfoManager.floatSubtract(mTradeVo.getBakeryBookingAmount().add(mTradeVo.getPayDepositAmount()).doubleValue(), getExemptAmount());
         }
 
@@ -164,8 +132,7 @@ public class PaymentInfoManager implements IPaymentInfo {
 
     @Override
     public double getTradeAmount() {
-        //如果是付押金，获取押金金额 add 20170706
-        if (this.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && this.mTradeVo.isNeedToPayDeposit()) {
+                if (this.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && this.mTradeVo.isNeedToPayDeposit()) {
             return this.mTradeVo.getTradeDeposit().getDepositPay().doubleValue();
         }
 
@@ -175,13 +142,11 @@ public class PaymentInfoManager implements IPaymentInfo {
         }
 
 
-        //订单金额:对应UI上的应收
-        return this.mTradeVo.getTrade().getTradeAmount().doubleValue();
+                return this.mTradeVo.getTrade().getTradeAmount().doubleValue();
     }
 
     public double getSaleAmount() {
-        //订单金额:对应UI上的折前
-        return this.mTradeVo.getTrade().getSaleAmount().doubleValue();
+                return this.mTradeVo.getTrade().getSaleAmount().doubleValue();
     }
 
     @Override
@@ -196,8 +161,7 @@ public class PaymentInfoManager implements IPaymentInfo {
 
     @Override
     public double getNotPayMent() {
-        //还剩金额=（应收-抹零-已收-已输入金额）***其它支付要用改方法
-        return CashInfoManager.floatSubtract(getTradeAmount(), (getExemptAmount() + getPaidAmount() + mInputPayModels.getGroupAmount()));
+                return CashInfoManager.floatSubtract(getTradeAmount(), (getExemptAmount() + getPaidAmount() + mInputPayModels.getGroupAmount()));
     }
 
     @Override
@@ -233,8 +197,7 @@ public class PaymentInfoManager implements IPaymentInfo {
     }
 
     @Override
-    public void setEraseType(int eraseType) {//设置抹零方式
-        mEraseType = eraseType;
+    public void setEraseType(int eraseType) {        mEraseType = eraseType;
     }
 
     @Override
@@ -245,11 +208,9 @@ public class PaymentInfoManager implements IPaymentInfo {
 
     @Override
     public boolean enablePay() {
-        if (DoPayUtils.isSupportGroupPay(this, PaySettingCache.isSupportGroupPay())) {//如果支持组合支付
-            return this.mInputPayModels.getGroupAmount() > 0 ? true : false;
+        if (DoPayUtils.isSupportGroupPay(this, PaySettingCache.isSupportGroupPay())) {            return this.mInputPayModels.getGroupAmount() > 0 ? true : false;
         } else {
-            return this.mInputPayModels.getGroupAmount() >= this.getActualAmount();//不分步支付，输入金额必须大于等于应付金额
-        }
+            return this.mInputPayModels.getGroupAmount() >= this.getActualAmount();        }
     }
 
     @Override
@@ -302,8 +263,7 @@ public class PaymentInfoManager implements IPaymentInfo {
     @Override
     public void setCustomer(CustomerResp customer) {
         this.mCusomerPayInfo.setCustomer(customer);
-        this.setPrintMemeberInfoByCustomer();//add v8.4
-    }
+        this.setPrintMemeberInfoByCustomer();    }
 
     @Override
     public void setCardCustomer(CustomerResp customer) {
@@ -345,19 +305,12 @@ public class PaymentInfoManager implements IPaymentInfo {
         this.mCusomerPayInfo.setMemberResp(memberResp);
     }
 
-    //已支付金额（已经到账）
-    public double getPaidAmount() {
+        public double getPaidAmount() {
         return this.mPaidPaymentRecords.getPaidAmount();
     }
 
-    //是否可以抹零（如果已经抹零，不能再抹零）
-    public boolean enableExempt() {
-        /*if (mPayScene == PayScene.SCENE_CODE_BUFFET_DEPOSIT || mPayScene == PayScene.SCENE_CODE_WRITEOFF || mPayScene == PayScene.SCENE_CODE_BOOKING_DEPOSIT || mPayScene == PayScene.SCENE_CODE_BAKERY_BOOKING_DEPOSIT)//付押金不支持抹零,销账不支持
-            return false;
-        if (this.isNeedToPayDeposit()) {//付押金前不支持抹零
-            return false;
-        }
-        return (mPaidPaymentRecords.getPaiExemptAmount() > 0 && mPaidPaymentRecords.getPaidAmount() > 0) ? false : true;*/
+        public boolean enableExempt() {
+
         return false;
     }
 
@@ -423,18 +376,15 @@ public class PaymentInfoManager implements IPaymentInfo {
         this.mPayScene = scene;
     }
 
-    //是否需要付押金
-    @Override
+        @Override
     public boolean isNeedToPayDeposit() {
         if (this.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT) {
             return false;
         }
-        //押金有效，大于零，且未支付，需要交押金
-        if (this.getTradeBusinessType() == BusinessType.BOOKING_LIST && this.getTradeAmount() > 0 && this.getTradeVo().isNeedToPayDeposit()) {
+                if (this.getTradeBusinessType() == BusinessType.BOOKING_LIST && this.getTradeAmount() > 0 && this.getTradeVo().isNeedToPayDeposit()) {
             return (!this.getTradeVo().isPaidTradeposit());
         }
-        //押金有效，大于零，且未支付，需要交押金
-        if (this.getTradeBusinessType() == BusinessType.BUFFET && this.getTradeAmount() > 0 && this.getTradeVo().isNeedToPayDeposit()) {
+                if (this.getTradeBusinessType() == BusinessType.BUFFET && this.getTradeAmount() > 0 && this.getTradeVo().isNeedToPayDeposit()) {
             return (!this.getTradeVo().isPaidTradeposit());
         }
         return false;
@@ -465,13 +415,11 @@ public class PaymentInfoManager implements IPaymentInfo {
         this.quickPayType = quickPayType;
     }
 
-    public void setFinishPayCallback(IFinishPayCallback finishPayCallback) {//add 20180123
-        this.mFinishPayCallback = finishPayCallback;
+    public void setFinishPayCallback(IFinishPayCallback finishPayCallback) {        this.mFinishPayCallback = finishPayCallback;
     }
 
     @Override
-    public void doFinish() {//add 20180123
-        if (this.mFinishPayCallback != null) {
+    public void doFinish() {        if (this.mFinishPayCallback != null) {
             this.mFinishPayCallback.finishPay();
         }
     }
@@ -500,20 +448,16 @@ public class PaymentInfoManager implements IPaymentInfo {
     }
 
     public void setPrintMemeberInfoByCard() {
-        // 如果是有实体卡信息
-        if (this.getCustomer() == null && this.getEcCard() != null) {
+                if (this.getCustomer() == null && this.getEcCard() != null) {
             CustomerLoginResp loginResp = new CustomerLoginResp();
             loginResp.setCustomerId(this.getEcCard().getId());
 
             loginResp.setLevel(this.getEcCard().getCardLevel().getCardLevelName());
             loginResp.setSex(Sex.MALE);
 
-            BigDecimal integralAccount = new BigDecimal(0);// 会员积分
-            BigDecimal valueCardAccount = new BigDecimal(this.getMemberCardBalance());// 会员余额
-            switch (this.getEcCard().getCardType()) {
+            BigDecimal integralAccount = new BigDecimal(0);            BigDecimal valueCardAccount = new BigDecimal(this.getMemberCardBalance());            switch (this.getEcCard().getCardType()) {
                 case CUSTOMER_ENTITY_CARD:
-                    // 得到 integralAccount 的值 valueCardAccount的值
-                    if (this.getEcCard().getIntegralAccount() == null) {
+                                        if (this.getEcCard().getIntegralAccount() == null) {
                         integralAccount = BigDecimal.valueOf(0);
                     } else {
                         if (this.getEcCard().getIntegralAccount().getIntegral() == null) {
@@ -528,35 +472,29 @@ public class PaymentInfoManager implements IPaymentInfo {
                     break;
                 case ANONYMOUS_ENTITY_CARD:
                     integralAccount = BigDecimal.valueOf(0);
-                    loginResp.setCustomerName("");//匿名卡不需要传入名字
-
+                    loginResp.setCustomerName("");
                     break;
 
                 default:
                     break;
 
             }
-            loginResp.setIntegralBalance(integralAccount);// 会员积分
-            loginResp.setValueCardBalance(valueCardAccount);// 会员余额
-            this.setMemberResp(loginResp);
+            loginResp.setIntegralBalance(integralAccount);            loginResp.setValueCardBalance(valueCardAccount);            this.setMemberResp(loginResp);
         }
     }
 
-    //add v8.14
-    public void addPaymentRecord(PaymentVo paymentVo) {
+        public void addPaymentRecord(PaymentVo paymentVo) {
         this.mPaidPaymentRecords.addPaymentRecord(paymentVo);
         if (this.mUILitenner != null) {
             ThreadUtils.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mUILitenner.updatePaymentInfo();//刷新应收
-                }
+                    mUILitenner.updatePaymentInfo();                }
             });
         }
     }
 
-    //add v8.14
-    public List<PaymentVo> getPaymentRecords() {
+        public List<PaymentVo> getPaymentRecords() {
         return this.mPaidPaymentRecords.getPaidPayments();
     }
 
@@ -571,20 +509,14 @@ public class PaymentInfoManager implements IPaymentInfo {
         return permissionCode;
     }
 
-    //根据登录会员生成打印信息 add v8.4
-    private void setPrintMemeberInfoByCustomer() {
-        // 如果是有实体卡信息
-        if (this.getCustomer() != null) {
+        private void setPrintMemeberInfoByCustomer() {
+                if (this.getCustomer() != null) {
             CustomerLoginResp loginResp = new CustomerLoginResp();
             loginResp.setCustomerId(this.getCustomer().customerId);
             loginResp.setLevel(this.getCustomer().levelName);
             loginResp.setSex(this.getCustomer().sex);
-            BigDecimal integralAccount = new BigDecimal(this.getCustomer().integral == null ? 0 : this.getCustomer().integral);// 会员积分
-            BigDecimal valueCardAccount = new BigDecimal(this.getCustomer().remainValue == null ? 0 : this.getCustomer().remainValue);// 会员余额
-
-            loginResp.setIntegralBalance(integralAccount);// 会员积分
-            loginResp.setValueCardBalance(valueCardAccount);// 会员余额
-            this.setMemberResp(loginResp);
+            BigDecimal integralAccount = new BigDecimal(this.getCustomer().integral == null ? 0 : this.getCustomer().integral);            BigDecimal valueCardAccount = new BigDecimal(this.getCustomer().remainValue == null ? 0 : this.getCustomer().remainValue);
+            loginResp.setIntegralBalance(integralAccount);            loginResp.setValueCardBalance(valueCardAccount);            this.setMemberResp(loginResp);
         }
     }
 }

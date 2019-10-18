@@ -8,30 +8,15 @@ import com.zhongmei.yunfu.db.entity.trade.Trade;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @Date： 16/6/29
- * @Description:
- * @Version: 1.0
- */
+
 public class AnonymousCardStoreResp {
 
     private Trade trade;
     private Payment payment;
     private List<PaymentItem> paymentItems;
-    private BigDecimal valueCard = BigDecimal.ZERO;//余额
-
+    private BigDecimal valueCard = BigDecimal.ZERO;
     private List<PrintOperation> printOperations;
-    // beforeRealValue	BigDecimal	是	操作前余额实储金额
-    // beforeSendValue	BigDecimal	是	操作前储值赠送余额
-    // beforePrepareValue	BigDecimal	是	操作前预储金额
-    // currentRealValue	BigDecimal	是	本次操作实储金额
-    // currentSendValue	BigDecimal	是	本次操作储值赠送金额
-    // currentPrepareValue	BigDecimal	是	本次操作预储金额
-    // endRealValue	BigDecimal	是	操作后余额实储金额
-    // endSendValue	BigDecimal	是	操作后储值赠送余额
-    // endPrepareValue	BigDecimal	是	操作后预储金额
-    // v8.5.0 修改 匿名卡储值返回
-    private BigDecimal beforeRealValue = BigDecimal.ZERO;
+                                            private BigDecimal beforeRealValue = BigDecimal.ZERO;
     private BigDecimal beforeSendValue = BigDecimal.ZERO;
     private BigDecimal beforePrepareValue = BigDecimal.ZERO;
     private BigDecimal currentRealValue = BigDecimal.ZERO;

@@ -6,9 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * @date 2015年8月10日下午2:35:08
- */
+
 public class CalendarViewPager extends ViewPager {
 
     public CalendarViewPager(Context context, AttributeSet attrs) {
@@ -20,11 +18,6 @@ public class CalendarViewPager extends ViewPager {
         return super.dispatchTouchEvent(ev);
     }
 
-//	@Override
-//	public boolean onInterceptTouchEvent(MotionEvent arg0) {
-//		//屏蔽viewpager的touch事件
-//		return false;
-//	}
 
     @Override
     public boolean onTouchEvent(MotionEvent arg0) {

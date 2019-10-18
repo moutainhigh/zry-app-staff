@@ -30,10 +30,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 可以显示多行内容的确定框.
- */
+
 @EFragment(R.layout.customer_list_dialog_layout)
 public class ListPromptDialogFragment extends BasicDialogFragment implements OnClickListener, OnKeyListener {
 
@@ -43,13 +40,7 @@ public class ListPromptDialogFragment extends BasicDialogFragment implements OnC
     private int iconType;
     protected List<String> mContentList;
 
-    /*public static final int ICON_ERROR = R.drawable.commonmodule_dialog_icon_error;
 
-    public static final int ICON_SUCCESS = R.drawable.commonmodule_dialog_icon_success;
-
-    public static final int ICON_WARNING = R.drawable.common_dialog_icon_warning;
-
-    public static final int ICON_HINT = R.drawable.commonmodule_dialog_icon_hint;*/
 
     @ViewById(R.id.common_dialog_title)
     protected TextView mTitle;
@@ -119,9 +110,7 @@ public class ListPromptDialogFragment extends BasicDialogFragment implements OnC
         return this;
     }
 
-    /**
-     * 刷新ListView的数据
-     */
+
     public void refreshListData(List<String> printerStatusInfoList) {
         mContentList = printerStatusInfoList;
         if (mAdapter != null) {
@@ -185,8 +174,7 @@ public class ListPromptDialogFragment extends BasicDialogFragment implements OnC
         @Override
         public View getView(int i, View convertView, ViewGroup viewGroup) {
 
-            // TODO Auto-generated method stub
-            ViewHolder viewHolder = null;
+                        ViewHolder viewHolder = null;
             if (convertView == null) {
                 convertView = LayoutInflater.from(mContext).inflate(R.layout.printer_staus_adapter, null);
                 viewHolder = new ViewHolder();

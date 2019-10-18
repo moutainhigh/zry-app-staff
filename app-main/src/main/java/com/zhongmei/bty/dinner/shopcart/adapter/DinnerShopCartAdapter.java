@@ -59,40 +59,23 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @Description: 正餐购物车商品展示适配器基类
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class DinnerShopCartAdapter extends SuperShopCartAdapter {
 
     private final static String TAG = DinnerShopCartAdapter.class.getSimpleName();
 
     private Drawable mDishServingIcon;
 
-    private ListView parentListView;// 上级view
+    private ListView parentListView;
+    private PrintOperationOpType opType;
+    private boolean isInDesk = false;        private boolean isDishItemCanDelete = true;
 
-    private PrintOperationOpType opType;// check模式操作类型
+        private boolean isShowWake = true;
+        private boolean isExistKds = false;
+        private List<String> mSelectedUuids = new ArrayList<>();
+        public List<Integer> mSelectPostions = new ArrayList<>();
 
-    private boolean isInDesk = false;//是否在桌台
-    //菜品item是否可以删除
-    private boolean isDishItemCanDelete = true;
 
-    //是否显示等叫、起菜、催菜，和kds的制作状态
-    private boolean isShowWake = true;
-    //是否对接了kds
-    private boolean isExistKds = false;
-    //当前选中的菜品
-    private List<String> mSelectedUuids = new ArrayList<>();
-    //    改菜选择的位置
-    public List<Integer> mSelectPostions = new ArrayList<>();
-
-    /**
-     * @param context
-     * @Constructor
-     * @Description 构造函数，
-     */
     public DinnerShopCartAdapter(Context context) {
         init(context);
     }
@@ -100,8 +83,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        //桌台和点菜界面只有菜品能操作,中类也能操作
-        boolean isCanOperate = false;
+                boolean isCanOperate = false;
         int type = getItemViewType(position);
         if (type == DISH_TYPE || type == TITLE_CATEGORY || type == TITLE_TYPE) {
             isCanOperate = true;
@@ -142,22 +124,13 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
     }
 
 
-    /**
-     * @Title: bindData
-     * @Description: 根据数据和坐标设置显示样式
-     * @Param @param holder
-     * @Param @param item 显示数据
-     * @Param @param position 坐标
-     * @Return void 返回类型
-     */
+
     protected void showDishLayout(ViewHolder holder, final DishDataItem item, int position) {
         final IShopcartItemBase shopcartItem = item.getBase();
         holder.mainLayout.setAlpha(1f);
 
-        updateDishCheck(holder, item);// 显示菜品选择checkbox
-
-        hideOperateTags(holder);// 隐藏标签
-        if (holder.issueTimeTv != null) {
+        updateDishCheck(holder, item);
+        hideOperateTags(holder);        if (holder.issueTimeTv != null) {
             holder.issueTimeTv.setVisibility(View.INVISIBLE);
         }
         holder.tvWeighFlag.setVisibility(View.GONE);
@@ -168,14 +141,11 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
             holder.dish_edit_num.setChangeListener(new NumberEditText.ChangeListener() {
                 @Override
                 public void onNumberChanged(BigDecimal number) {
-                    doSelectedItem("no");//清空当前获取焦点的item
-                    EventBus.getDefault().post(new ActionClose());//关闭属性界面
-                    if (shopcartItem instanceof ShopcartItem) {
+                    doSelectedItem("no");                    EventBus.getDefault().post(new ActionClose());                    if (shopcartItem instanceof ShopcartItem) {
                         ((ShopcartItem) shopcartItem).changeQty(number);
                     }
                     DinnerShoppingCart.getInstance().updateDinnerDish(shopcartItem, false);
-                    // notifyDataSetChanged();
-                }
+                                    }
             });
         } else {
             holder.dish_num.setVisibility(View.VISIBLE);
@@ -185,29 +155,22 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         setDishLayoutValue(item, holder);
         showDishBatServing(holder, item);
         switch (item.getType()) {
-            case SINGLE:// 单菜
-                showSingleOrComboDish(holder, item, shopcartItem, position, true);
+            case SINGLE:                showSingleOrComboDish(holder, item, shopcartItem, position, true);
                 break;
-            case COMBO:// 套餐
-            case WEST_CHILD:
+            case COMBO:            case WEST_CHILD:
                 showSingleOrComboDish(holder, item, shopcartItem, position, false);
-//                showWestComboIcon(holder,item.getType());
                 break;
-            case CHILD:// 套餐子菜
-                showChildDish(holder, item);
+            case CHILD:                showChildDish(holder, item);
                 break;
             default:
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 break;
         }
         showDishDesc(holder, item, shopcartItem, item.getType());
-        updateReturnOrModifyDishItem(holder, item);// 显示退菜/改菜信息
-        showStand(item, holder);
+        updateReturnOrModifyDishItem(holder, item);        showStand(item, holder);
         setTopLine(holder.topLine, item, position);
         setItemSelectedBg(holder, item);
-        setDeleteIcon(item, holder);// 设置删除图标
-        setGray(holder, item);// 设置透明度
-    }
+        setDeleteIcon(item, holder);        setGray(holder, item);    }
 
     private void showWestComboIcon(ViewHolder viewHolder, ItemType itemType) {
         if (!DinnerUtils.isWestStyle() || itemType != ItemType.COMBO || isSlideDish || isDishCheckMode) {
@@ -218,13 +181,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         viewHolder.dish_name.setCompoundDrawablesWithIntrinsicBounds(westDrawable, null, null, null);
     }
 
-    /**
-     * 显示子菜桌位号等信息
-     *
-     * @param holder
-     * @param item
-     * @param shopcartItem
-     */
+
     private void showDishDesc(ViewHolder holder, DishDataItem item, IShopcartItemBase shopcartItem, ItemType itemType) {
         if (holder.dish_desc == null) {
             return;
@@ -252,33 +209,21 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * 展示单菜／套餐外壳的样式
-     *
-     * @param holder
-     * @param item
-     * @param shopcartItem
-     * @param position
-     * @param isSingle     true表示单菜，false表示套餐外壳
-     */
+
     private void showSingleOrComboDish(ViewHolder holder, DishDataItem item, IShopcartItemBase shopcartItem,
                                        int position, boolean isSingle) {
         holder.topLine.setVisibility(View.VISIBLE);
-//                holder.dishView.setLayoutParams(getNoComboDiyWh(context));
         int dp5 = DensityUtil.dip2px(context, 5);
         holder.dishView.setPadding(dp5, dp5, dp5, dp5);
         holder.dish_name.setTextAppearance(context, R.style.dinnerOrderTextStyle);
         if (shopcartItem != null) {
             if (isInDesk)
-                showIssueTime(holder, item.getItem(), item);//展示传送后厨时间
-            showRemindDish(holder, shopcartItem);
+                showIssueTime(holder, item.getItem(), item);            showRemindDish(holder, shopcartItem);
             if ((item.getType() == ItemType.WEST_CHILD || item.getType() == ItemType.CHILD)) {
                 showOperateTag(holder, item, true);
             } else {
-                showOperateTag(holder, item, false);// 展示等叫或者起菜
-            }
-            if (isSingle && isExistKds && !item.isDishServing()) {//套餐外壳不需要展示kds制作状态
-                showKdsMakeStatus(holder, shopcartItem);
+                showOperateTag(holder, item, false);            }
+            if (isSingle && isExistKds && !item.isDishServing()) {                showKdsMakeStatus(holder, shopcartItem);
             }
 
             if (isBatchDiscountModle || isDishCheckMode) {
@@ -286,16 +231,13 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
                 holder.dish_name.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
                 resetIcon(shopcartItem, holder);
 
-                // 排除删除、暂停、拆单状态
-                if (isInDesk && shopcartItem.getIssueStatus() != IssueStatus.PAUSE
+                                if (isInDesk && shopcartItem.getIssueStatus() != IssueStatus.PAUSE
                         && shopcartItem.getStatusFlag() != StatusFlag.INVALID
                         && shopcartItem.getInvalidType() != InvalidType.SPLIT
                         && !isWakeUp(shopcartItem)) {
                     resetServingIcon(item, shopcartItem, holder);
-                    if (shopcartItem.getShopcartItemType() == null || shopcartItem.getShopcartItemType() != ShopcartItemType.MAINSUB) { // 主单的子单菜不允许滑动
-                        if (shopcartItem.getTotalQty() != null && shopcartItem.getTotalQty().doubleValue() != 0) {
-                            addSlideItems(position);// 可以滑动
-                        }
+                    if (shopcartItem.getShopcartItemType() == null || shopcartItem.getShopcartItemType() != ShopcartItemType.MAINSUB) {                         if (shopcartItem.getTotalQty() != null && shopcartItem.getTotalQty().doubleValue() != 0) {
+                            addSlideItems(position);                        }
                     }
                 }
             }
@@ -306,11 +248,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         updatePrintState(shopcartItem, holder);
     }
 
-    /**
-     * 展示套餐子菜的样式
-     *
-     * @param holder
-     */
+
     protected void showChildDish(ViewHolder holder, DishDataItem item) {
         IShopcartItemBase shopcartItem = item.getBase();
         int dp5 = DensityUtil.dip2px(context, 5);
@@ -331,23 +269,16 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
             showOperateTag(holder, item, true);
             showRemindDish(holder, shopcartItem);
         }
-        //套餐子菜需要显示kds菜品制作状态
-        if (isExistKds && !item.isDishServing()) { //未上菜
-            showKdsMakeStatus(holder, shopcartItem);
+                if (isExistKds && !item.isDishServing()) {             showKdsMakeStatus(holder, shopcartItem);
         }
     }
 
-    /**
-     * 判断是否等叫
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     private boolean isWakeUp(IShopcartItemBase shopcartItem) {
         if (shopcartItem instanceof ReadonlyShopcartItem) {
             List<TradeItemOperation> tradeItemOperations = ((ReadonlyShopcartItem) shopcartItem).getTradeItemOperations();
             if (tradeItemOperations != null) {
-                if (hasOperationOpType(tradeItemOperations, PrintOperationOpType.WAKE_UP) /*&& !hasOperationOpType(tradeItemOperations, PrintOperationOpType.RISE_DISH)*/) {
+                if (hasOperationOpType(tradeItemOperations, PrintOperationOpType.WAKE_UP) ) {
                     return true;
                 }
             }
@@ -355,13 +286,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         return false;
     }
 
-    /**
-     * 是否存在operationOpType类型s
-     *
-     * @param tradeItemOperations
-     * @param operationOpType
-     * @return
-     */
+
     private boolean hasOperationOpType(List<TradeItemOperation> tradeItemOperations, PrintOperationOpType operationOpType) {
         for (TradeItemOperation operation : tradeItemOperations) {
             if (operation.getOpType() == operationOpType
@@ -372,18 +297,12 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         return false;
     }
 
-    /**
-     * 显示kds划菜状态
-     *
-     * @param holder
-     * @param item
-     */
+
     private void showDishBatServing(final ViewHolder holder, final DishDataItem item) {
         holder.tv_dish_bat_serving.setVisibility(View.GONE);
         final IShopcartItemBase shopcartItem = item.getBase();
         if (!(isBatchDiscountModle || isDishCheckMode)) {
-            // 排除删除、暂停、拆单状态
-            if (isInDesk
+                        if (isInDesk
                     && shopcartItem.getIssueStatus() != IssueStatus.PAUSE
                     && shopcartItem.getStatusFlag() != StatusFlag.INVALID
                     && shopcartItem.getInvalidType() != InvalidType.SPLIT) {
@@ -406,30 +325,21 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
             holder.tv_dish_bat_serving.setVisibility(View.GONE);
         } else {
             switch (item.getType()) {
-                case SINGLE:// 单菜
-                    if (shopcartItem.getSaleType() == SaleType.WEIGHING) {
-                        //holder.tv_dish_bat_serving.setVisibility(View.VISIBLE);
-                        //holder.tv_dish_bat_serving.setText(context.getString(R.string.dish_bat_serving_all));
-                    } else {
+                case SINGLE:                    if (shopcartItem.getSaleType() == SaleType.WEIGHING) {
+                                                                    } else {
                         BigDecimal singleQty = shopcartItem.getSingleQty();
                         BigDecimal surplusQty = singleQty.subtract(kdsScratchDishQty);
                         if (surplusQty.compareTo(BigDecimal.ZERO) <= 0) {
-                            //holder.tv_dish_bat_serving.setVisibility(View.VISIBLE);
-                            //holder.tv_dish_bat_serving.setText(context.getString(R.string.dish_bat_serving_all));
-                        } else {
+                                                                                } else {
                             holder.tv_dish_bat_serving.setVisibility(View.VISIBLE);
                             holder.tv_dish_bat_serving.setText(String.format(context.getString(R.string.dish_bat_serving), MathDecimal.toTrimZeroString(kdsScratchDishQty), MathDecimal.toTrimZeroString(surplusQty)));
                         }
                     }
                     break;
-                case COMBO:// 套餐
-                    //只处理全划或全取消，子菜状态这里不处理
-                    BigDecimal singleQty = shopcartItem.getSingleQty();
+                case COMBO:                                        BigDecimal singleQty = shopcartItem.getSingleQty();
                     BigDecimal surplusQty = singleQty.subtract(kdsScratchDishQty);
                     if (surplusQty.compareTo(BigDecimal.ZERO) <= 0) {
-                        //holder.tv_dish_bat_serving.setVisibility(View.VISIBLE);
-                        //holder.tv_dish_bat_serving.setText(context.getString(R.string.dish_bat_serving_all));
-                    }
+                                                                    }
                     break;
             }
         }
@@ -440,13 +350,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         initialDishCheckStatus();
     }
 
-    /**
-     * @Description: 更新数据并刷新ui
-     * @Param @param dataList 购物车菜品
-     * @Param @param tradeVo
-     * @Param @param isShowInvalid 是否显示无效
-     * @Return void 返回类型
-     */
+
     public void updateData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
         initCommonData(tradeVo);
         if (tradeVo.isUnionMainTrade()) {
@@ -454,24 +358,13 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         } else {
             updateSigleDeskData(dataList);
         }
-        initialDishCheckStatus();// 初始化菜品选择状态，等叫等
-        updateTrade(tradeVo, isShowInvalid);// 构建整单属性显示对象并刷新列表
-        initialRelateDishInfo();// 初始化退菜数据
-    }
+        initialDishCheckStatus();        updateTrade(tradeVo, isShowInvalid);        initialRelateDishInfo();    }
 
-    /**
-     * 正餐单桌购物车显示数据构建
-     *
-     * @param dataList
-     */
+
     private void updateSigleDeskData(List<IShopcartItem> dataList) {
-        ShopCartDataVo unSaveVo = new ShopCartDataVo(null);// 未提交的数据
-        ShopCartDataVo unPrintVo = new ShopCartDataVo(null);// 已经提交未打印的数据
-        ShopCartDataModel printModel = new ShopCartDataModel();// 已经提交打印的数据
-
+        ShopCartDataVo unSaveVo = new ShopCartDataVo(null);        ShopCartDataVo unPrintVo = new ShopCartDataVo(null);        ShopCartDataModel printModel = new ShopCartDataModel();
         if (dataList != null && dataList.size() > 0) {
-            // 遍历购物车中的菜品，对菜品进行分组
-            for (int i = 0; i < dataList.size(); i++) {
+                        for (int i = 0; i < dataList.size(); i++) {
 
                 IShopcartItem shopCartItem = dataList.get(i);
 
@@ -482,15 +375,12 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
                     continue;
                 }
 
-                //累计商品数量
-                sumAllDishCount(shopCartItem);
-                // 如果id为空算未提交
-                if (shopCartItem.getId() == null) {
+                                sumAllDishCount(shopCartItem);
+                                if (shopCartItem.getId() == null) {
 
                     unSaveVo.addData(shopCartItem);
                 } else {
-                    // 如果打印流水为空算未出单
-                    if (TextUtils.isEmpty(shopCartItem.getBatchNo())) {
+                                        if (TextUtils.isEmpty(shopCartItem.getBatchNo())) {
                         unPrintVo.addData(shopCartItem);
                     } else {
                         printModel.addData(shopCartItem.getBatchNo(), shopCartItem);
@@ -498,32 +388,21 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
                 }
             }
         }
-        // 未生效菜品转换显示的item
-        if (!unSaveVo.isEmpty()) {
+                if (!unSaveVo.isEmpty()) {
             DishDataItem item = new DishDataItem(ItemType.LABEL_UNSAVE);
             item.setName(context.getString(R.string.dinner_cart_unsave_label));
             data.add(item);
-            //String uuid = unSaveVo.getData().get(unSaveVo.getData().size()-1).getUuid();
-            createItems(unSaveVo.getData(), data);
-            /*
-            for (DishDataItem item1 : data){
-                if(item1.getItem() != null && uuid.equals(item1.getItem().getUuid())){
-                    item1.setCanEditNumber(true);
-                    break;
-                }
-            }
-            */
+                        createItems(unSaveVo.getData(), data);
+
 
         }
-        // 未打印菜品转换显示的item
-        if (!unPrintVo.isEmpty()) {
+                if (!unPrintVo.isEmpty()) {
             DishDataItem item = new DishDataItem(ItemType.LABEL_SAVE_UNPRINTED);
             item.setName(context.getString(R.string.dinner_cart_save_unprint_label));
             data.add(item);
             createItems(unPrintVo.getData(), data);
         }
-        // 已出单菜品转换显示的item
-        if (!printModel.isEmpty()) {
+                if (!printModel.isEmpty()) {
             Map<String, ShopCartDataVo> map = printModel.getData();
             for (String key : map.keySet()) {
                 DishDataItem item = new DishDataItem(ItemType.LABEL_SAVE_PRINTED);
@@ -534,12 +413,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * 构建正餐联桌数据
-     *
-     * @param dataList
-     * @param tradeVo
-     */
+
     private void updateUnionDeskData(List<IShopcartItem> dataList, TradeVo tradeVo) {
         if (Utils.isEmpty(dataList)) {
             return;
@@ -547,8 +421,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
 
         List<IShopcartItem> mainList = new ArrayList<>();
         Map<Long, TradeTable> tradeTableMap = tradeVo.getSubTableMap();
-        //key:tradeTableId
-        Map<Long, List<IShopcartItem>> tableItemMap = new LinkedHashMap<>();
+                Map<Long, List<IShopcartItem>> tableItemMap = new LinkedHashMap<>();
         for (int i = dataList.size() - 1; i >= 0; i--) {
             IShopcartItem shopCartItem = dataList.get(i);
             if (shopCartItem.getStatusFlag() == StatusFlag.INVALID
@@ -557,13 +430,11 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
                     && (shopCartItem.getInvalidType() != InvalidType.MODIFY_DISH)) {
                 continue;
             }
-            //累计商品数量
-            sumAllDishCount(shopCartItem);
+                        sumAllDishCount(shopCartItem);
             if (shopCartItem.getShopcartItemType() == ShopcartItemType.MAINBATCH || shopCartItem.getShopcartItemType() == ShopcartItemType.SUBBATCH) {
                 mainList.add(shopCartItem);
             } else {
-                //按桌分組
-                List singleDeskList = tableItemMap.get(shopCartItem.getTradeTableId());
+                                List singleDeskList = tableItemMap.get(shopCartItem.getTradeTableId());
                 if (singleDeskList == null) {
                     singleDeskList = new ArrayList();
                     tableItemMap.put(shopCartItem.getTradeTableId(), singleDeskList);
@@ -572,8 +443,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
             }
         }
 
-        //显示主单菜品数据
-        if (!mainList.isEmpty()) {
+                if (!mainList.isEmpty()) {
             DishDataItem item = new DishDataItem(ItemType.TITLE_ITEM);
             item.setName(context.getResources().getString(R.string.dinner_union_trade));
             data.add(item);
@@ -615,39 +485,24 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         return null;
     }
 
-    /**
-     * @Description: 展示trade里的整单信息
-     * @Param @param tradeVo
-     * @Param @param isShowUnActive  是否显示未激活的数据
-     * @Param @param isBalance 是否显示折扣
-     * @Return void 返回类型
-     */
+
     protected void updateTrade(TradeVo tradeVo, boolean isShowUnActive) {
-        //移菜拖动模式不显示整单优惠等信息
-        if (DinnerDishTradeInfoFragment.isMoveDishDragMode()) {
+                if (DinnerDishTradeInfoFragment.isMoveDishDragMode()) {
             return;
         }
-        // 整单
-        if (tradeVo != null && tradeVo.getTrade() != null) {
+                if (tradeVo != null && tradeVo.getTrade() != null) {
             buildTradeMemo(tradeVo);
         }
     }
 
-    /**
-     * 刷新选中的条目
-     */
+
     public void refreshSelectedItems() {
         if (Utils.isNotEmpty(mSelectedUuids)) {
             doSelectedItems(new ArrayList<>(mSelectedUuids));
         }
     }
 
-    /**
-     * 修改那项被选中
-     *
-     * @param selectedUuid
-     * @return 返回选中的item
-     */
+
     public DishDataItem doSelectedItem(String selectedUuid) {
         List<DishDataItem> dishDataItems = doSelectedItems(Utils.asList(selectedUuid));
         if (Utils.isNotEmpty(dishDataItems)) {
@@ -658,8 +513,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
     }
 
     public void doSelectedTitleItme(long id) {
-        //先清空选中
-        mSelectedUuids.clear();
+                mSelectedUuids.clear();
         mSelectPostions.clear();
         List<DishDataItem> data = getAllData();
         if (Utils.isEmpty(data)) {
@@ -676,15 +530,9 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         notifyDataSetChanged();
     }
 
-    /**
-     * 批量选择菜品
-     *
-     * @param selectedUuids
-     * @return 返回选中的item
-     */
+
     public List<DishDataItem> doSelectedItems(List<String> selectedUuids) {
-        //先清空选中
-        mSelectedUuids.clear();
+                mSelectedUuids.clear();
         mSelectPostions.clear();
 
         List<DishDataItem> data = getAllData();
@@ -709,18 +557,13 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         return selectedItems;
     }
 
-    /**
-     * 改变中类下菜品选中的数量
-     *
-     * @param item
-     */
+
     public void changeCateSelecteCount(DishDataItem item) {
         Long changedItemTypeId = getDishTypeId(item);
         if (changedItemTypeId == null) {
             return;
         }
-        //当前改变的分类item选中数
-        int typeSelectedCount = 0;
+                int typeSelectedCount = 0;
         DishDataItem categoryItem = null;
         boolean isHasUnChecked = false;
         for (DishDataItem dishDataItem : data) {
@@ -748,20 +591,14 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * 根据中类获取中类下的菜品,针对西餐模式
-     *
-     * @param item
-     * @return
-     */
+
     public List<DishDataItem> getDishDataItemsByCate(DishDataItem item) {
         Long changedItemTypeId = item.getDishTypeId();
         List<DishDataItem> dishDataItemList = new ArrayList<>();
         if (changedItemTypeId == null) {
             return dishDataItemList;
         }
-        //当前改变的分类item选中数
-        DishDataItem categoryItem = null;
+                DishDataItem categoryItem = null;
         boolean isHasUnChecked = false;
         for (DishDataItem dishDataItem : data) {
             if (dishDataItem.getType() == ItemType.TITLE_ITEM && (dishDataItem.getDishTypeId().compareTo(changedItemTypeId) == 0)) {
@@ -788,9 +625,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         return dishTypeId;
     }
 
-    /**
-     * 清除所有的选中状态
-     */
+
     public void clearAllSelected() {
         mSelectedUuids.clear();
         List<DishDataItem> data = getAllData();
@@ -803,13 +638,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
     }
 
 
-    /**
-     * 显示催菜
-     *
-     * @Title: showRemindDish
-     * @Param @param holder
-     * @Return void 返回类型
-     */
+
     private void showRemindDish(ViewHolder holder, IShopcartItemBase shopcartItem) {
         if (isShowWake && (shopcartItem instanceof IShopcartItem || shopcartItem instanceof ReadonlySetmealShopcartItem)) {
             List<TradeItemOperation> tradeItemOperations = shopcartItem.getTradeItemOperations();
@@ -836,12 +665,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         holder.tv_remind_dish.setVisibility(View.GONE);
     }
 
-    /**
-     * 显示kds菜品制作状态
-     *
-     * @param holder
-     * @param shopcartItem
-     */
+
     private void showKdsMakeStatus(ViewHolder holder, IShopcartItemBase shopcartItem) {
         if (isShowWake && shopcartItem instanceof ReadonlyShopcartItemBase) {
             TradeItemExtra tradeItemExtra = ((ReadonlyShopcartItemBase) shopcartItem).getTradeItemExtra();
@@ -876,12 +700,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
     }
 
 
-    /**
-     * 设置每项被选效果
-     *
-     * @param holder
-     * @param item
-     */
+
     private void setItemSelectedBg(ViewHolder holder, DishDataItem item) {
         if ((item.getType() == ItemType.SINGLE || item.getType() == ItemType.COMBO
                 || item.getType() == ItemType.CHILD || item.getType() == ItemType.WEST_CHILD) && item.isSelected()) {
@@ -904,13 +723,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * @param shopcartItem
-     * @param holder
-     * @Date 2015年11月19日
-     * @Description: 改变上菜状态
-     * @Return void
-     */
+
     private void resetServingIcon(DishDataItem item, IShopcartItemBase shopcartItem, ViewHolder holder) {
         if (item.isDishServing()) {
             holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishServingIcon, null, null, null);
@@ -922,25 +735,17 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * @param position
-     * @Date 2015年11月19日
-     * @Description: 滑菜时调用
-     * @Return void
-     */
+
     public boolean refreshItem(int position) {
         if (data == null)
             return false;
-        if (position <= data.size() - 1) {// modify by zhubo
-            // 2016-5-30防止数组越界
-            final DishDataItem item = data.get(position);
+        if (position <= data.size() - 1) {                        final DishDataItem item = data.get(position);
             if (item.getType() == ItemType.WEST_CHILD) {
                 ToastUtil.showLongToast(context.getResources().getString(R.string.dinner_child_cannot_slide));
                 return false;
             }
             if (item.getBase().getShopcartItemType() == ShopcartItemType.MAINSUB) {
-                ToastUtil.showLongToast(context.getResources().getString(R.string.dinner_child_main_sub_cannot_slide)); // v8.4 主单子单菜不允许划菜
-                return false;
+                ToastUtil.showLongToast(context.getResources().getString(R.string.dinner_child_main_sub_cannot_slide));                 return false;
             }
             item.setDishServing(!item.isDishServing());
             notifyDataSetChanged();
@@ -949,11 +754,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
 
     }
 
-    /**
-     * @Date 2015年11月19日
-     * @Description: 初始化上菜状态标识
-     * @Return void
-     */
+
     protected void initialServingStatus() {
         if (data == null || data.size() == 0)
             return;
@@ -965,21 +766,13 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * @Date 2015年11月20日
-     * @Description: 取消批量上菜选择操作，刷新界面
-     * @Return void
-     */
+
     public void cancelServingStatusOperate() {
         initialServingStatus();
         notifyDataSetChanged();
     }
 
-    /**
-     * @Date 2015年11月25日
-     * @Description: 初始化item滑动状态
-     * @Return void
-     */
+
     protected void resetSlideItems() {
         if (parentListView == null)
             return;
@@ -989,11 +782,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * @Date 2015年12月17日
-     * @Description: 初始化退菜信息
-     * @Return void
-     */
+
     void initialRelateDishInfo() {
         if (data == null || data.size() == 0)
             return;
@@ -1021,14 +810,9 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * @Date 2015年12月17日
-     * @Description:刷新退菜信息
-     * @Return void
-     */
+
     protected void updateReturnOrModifyDishItem(ViewHolder holder, final DishDataItem item) {
-        // 退菜／改菜原菜item刷新
-        if (item.isReturnDishItem() || item.isModifyDishItem()) {
+                if (item.isReturnDishItem() || item.isModifyDishItem()) {
             holder.dish_name.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
         } else {
             holder.dish_name.getPaint().setFlags(Paint.ANTI_ALIAS_FLAG);
@@ -1038,9 +822,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
                 && relateItem.getBase() != null) {
             IShopcartItemBase relateShopcartItem = relateItem.getBase();
             if (relateShopcartItem.getInvalidType() == InvalidType.RETURN_QTY) {
-                String returnQty = MathDecimal.toTrimZeroString(relateShopcartItem.getReturnQty().negate());//退菜数
-                String originalQty = MathDecimal.toTrimZeroString(relateShopcartItem.getSingleQty());//原菜数
-                holder.returnDishLL.setVisibility(View.VISIBLE);
+                String returnQty = MathDecimal.toTrimZeroString(relateShopcartItem.getReturnQty().negate());                String originalQty = MathDecimal.toTrimZeroString(relateShopcartItem.getSingleQty());                holder.returnDishLL.setVisibility(View.VISIBLE);
                 holder.returnDishQuantityTv.setText(context.getString(R.string.dinner_order_dish_return_dish_quantity,
                         originalQty, returnQty));
                 if (relateShopcartItem.getReturnQtyReason() != null) {
@@ -1052,8 +834,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
             } else if (relateShopcartItem.getInvalidType() == InvalidType.MODIFY_DISH) {
                 holder.returnDishLL.setVisibility(View.VISIBLE);
                 holder.returnDishQuantityTv.setText(R.string.modify_dish);
-                holder.returnDishReasonTv.setText("");//改菜还没有原因
-            } else {
+                holder.returnDishReasonTv.setText("");            } else {
                 holder.returnDishLL.setVisibility(View.GONE);
             }
         } else {
@@ -1064,32 +845,19 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
     }
 
 
-    /**
-     * @Date 2016年4月26日
-     * @Description: 展示菜品操作check模式
-     * @Return void
-     */
+
     public void showDishCheckMode(boolean isCheckMode, PrintOperationOpType type) {
         isDishCheckMode = isCheckMode;
         opType = type;
         notifyDataSetChanged();
     }
 
-    /**
-     * @Date 2016年4月26日
-     * @Description: 全选所有菜品
-     * @Return void
-     */
+
     public void checkAllDish(boolean check) {
         checkAllDish(check, false);
     }
 
-    /**
-     * @return
-     * @Date 2016年4月26日
-     * @Description: 判断是否全选所有菜品
-     * @Return boolean
-     */
+
     public boolean isCheckedAll() {
         if (data == null || data.size() == 0)
             return false;
@@ -1108,11 +876,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         return isCheckAll;
     }
 
-    /**
-     * 根据中类进行选择与反选
-     *
-     * @param item
-     */
+
     public void doSelectedByType(DishDataItem item) {
         int selectedCount = 0;
         if (item.getDishTypeId() == null || typeMap == null) {
@@ -1135,26 +899,16 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
             }
             if (item.getCheckStatus() == DishCheckStatus.CHECKED) {
                 dishDataItem.setCheckStatus(DishCheckStatus.CHECKED);
-//                if (getOpType() != null) {
-//                    dishDataItem.getItem().addOperation(getOpType());
-//                }
                 selectedCount++;
             } else {
                 dishDataItem.setCheckStatus(DishCheckStatus.NOT_CHECK);
-//                if (getOpType() != null) {
-//                    dishDataItem.getItem().removeOperation(getOpType());
-//                }
             }
         }
         item.setCount(selectedCount);
     }
 
 
-    /**
-     * @Date 2016年4月27日
-     * @Description: 获取需要展示的标签，0不展示 1等叫 2起菜 3取消等叫 4取消起菜
-     * @Return void
-     */
+
     private byte getDishOperateTag(ViewHolder holder, final DishDataItem item, boolean isChild) {
         byte result = 0;
         List<TradeItemOperation> tradeItemOperations = item.getItem().getTradeItemOperations();
@@ -1183,11 +937,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
 
     }
 
-    /**
-     * @Date 2016年4月27日
-     * @Description: 展示等叫或者起菜
-     * @Return void
-     */
+
     protected void showOperateTag(ViewHolder holder, final DishDataItem item, boolean isChild) {
         byte tag = getDishOperateTag(holder, item, isChild);
         if (tag == 0 || !isShowWake) {
@@ -1219,17 +969,12 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
 
     }
 
-    /**
-     * @Date 2016年4月27日
-     * @Description: 初始化checkbox状态
-     * @Return void
-     */
+
     public void initialDishCheckStatus() {
         if (!isDishCheckMode) {
             return;
         }
-        //排除移菜选择界面
-        if (DinnerDishTradeInfoFragment.isMoveDishDragMode()) {
+                if (DinnerDishTradeInfoFragment.isMoveDishDragMode()) {
             return;
         }
         if (Utils.isEmpty(data)) {
@@ -1306,12 +1051,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         this.opType = opType;
     }
 
-    /**
-     * @param holder
-     * @Date 2016年4月29日
-     * @Description: 隐藏等叫，起菜，崔菜标签
-     * @Return void
-     */
+
     private void hideOperateTags(ViewHolder holder) {
         holder.dishPrepareTv.setVisibility(View.GONE);
         holder.dishMakeTv.setVisibility(View.GONE);
@@ -1320,11 +1060,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
     }
 
 
-    /**
-     * @Date 2016年5月18日
-     * @Description: 初始化移菜第二个界面checkbox状态
-     * @Return void
-     */
+
     public List<IShopcartItem> initialMoveDishDragModeCheckStatus2() {
         if (!isDishCheckMode) {
             return null;
@@ -1352,9 +1088,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         initDishCheckStatus();
     }
 
-    /**
-     * 需要选择菜品时，初始化选择状态
-     */
+
     public void initDishCheckStatus() {
         if (!isDishCheckMode) {
             return;
@@ -1405,7 +1139,6 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
                         }
                         item.setCheckStatus(DishCheckStatus.CHECKED);
                         if (!isMoveDish && getOpType() != null) {
-//                            item.getItem().addOperation(getOpType());
                         }
                     }
                 } else {
@@ -1419,22 +1152,12 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
         notifyDataSetChanged();
     }
 
-    /**
-     * @Date 2016/7/28
-     * @Description:移菜或者复制菜品全选
-     * @Param
-     * @Return
-     */
+
     public void checkAllDishForMoveDish(boolean check) {
         checkAllDish(check, true);
     }
 
-    /**
-     * @Date 2016/9/2
-     * @Description:展示传送后厨时间
-     * @Param
-     * @Return
-     */
+
     private void showIssueTime(ViewHolder holder, IShopcartItem shopcartItem, DishDataItem item) {
         if (SharedPreferenceUtil.getSpUtil().getBoolean(DinnertableFragment.SHOW_ISSUE_TIME_KEY, false)) {
             boolean isQuntityZero = shopcartItem.getSingleQty().compareTo(new BigDecimal(0)) == 0 ? true : false;
@@ -1462,12 +1185,7 @@ public class DinnerShopCartAdapter extends SuperShopCartAdapter {
 
     }
 
-    /**
-     * @Date 2016/9/2
-     * @Description:获取传送后厨时间
-     * @Param
-     * @Return
-     */
+
     private String getIssueTime(IShopcartItem shopcartItem) {
         Log.i("zhubo", "获取出单时间");
         if (shopcartItem instanceof ReadonlyShopcartItem) {

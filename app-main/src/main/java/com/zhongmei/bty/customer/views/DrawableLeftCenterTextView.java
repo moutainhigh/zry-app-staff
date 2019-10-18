@@ -6,9 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DrawableLeftCenterTextView extends TextView {
 

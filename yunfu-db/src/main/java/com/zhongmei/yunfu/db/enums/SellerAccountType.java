@@ -2,29 +2,16 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 收款账号类型
- *
- * @version: 1.0
- * @date 2015年5月18日
- */
+
 public enum SellerAccountType implements ValueEnum<Integer> {
 
-    /**
-     * 账号
-     */
+
     SELF(1),
 
-    /**
-     * 商家账号
-     */
+
     MERCHANT(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

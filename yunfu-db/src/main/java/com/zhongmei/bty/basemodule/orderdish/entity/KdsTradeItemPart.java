@@ -7,11 +7,7 @@ import com.zhongmei.yunfu.db.AbsBasicEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Desc
- *
- * @created 2017/6/8
- */
+
 @DatabaseTable(tableName = "kds_trade_item_part")
 public class KdsTradeItemPart extends AbsBasicEntityBase {
 
@@ -27,9 +23,6 @@ public class KdsTradeItemPart extends AbsBasicEntityBase {
     public long clientCreateTime;
     @DatabaseField
     public long clientUpdateTime;
-    //public int statusFlag;
-    //public long serverCreateTime;
-    //public long serverUpdateTime;
 
     public interface $ extends BasicEntityBase.$ {
 

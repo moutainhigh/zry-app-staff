@@ -32,21 +32,13 @@ import java.util.List;
 import java.util.Map;
 
 
-/**
- * 联台shopcart 工具类
- * Created by demo on 2018/12/15
- */
+
 
 public class DinnerUnionShopcartUtil {
 
     private static final String TAG = "DinnerUnionShopcartUtil";
 
-    /**
-     * 将子单菜加入shopcartItemLIst
-     *
-     * @param tradeInfo
-     * @param shopcartItemLIst
-     */
+
     public static void initMainTradeSubItems(DinnertableTradeInfo tradeInfo, List<IShopcartItem> shopcartItemLIst) {
         if (Utils.isEmpty(tradeInfo.getSubTradeInfoList())) {
             return;
@@ -63,13 +55,11 @@ public class DinnerUnionShopcartUtil {
                 continue;
             }
             for (IShopcartItem iShopcartItem : shopcartItemList) {
-                //主单只保存有效的菜品
-                if (iShopcartItem.getStatusFlag() == StatusFlag.INVALID) {
+                                if (iShopcartItem.getStatusFlag() == StatusFlag.INVALID) {
                     continue;
                 }
                 ReadonlyShopcartItem newShopcartItem = null;
-                //tradeItem仍然是一个对象
-                if (iShopcartItem instanceof ReadonlyShopcartItem) {
+                                if (iShopcartItem instanceof ReadonlyShopcartItem) {
                     newShopcartItem = (ReadonlyShopcartItem) iShopcartItem;
                     newShopcartItem = ShopcartItemUtils.copyReadonlyShopcartItem(newShopcartItem, true);
                     if (newShopcartItem == null) {
@@ -83,12 +73,7 @@ public class DinnerUnionShopcartUtil {
         tradeInfo.getTradeVo().getTrade().setTradePeopleCount(totalPeople);
     }
 
-    /**
-     * 将子单菜加入shopcartItemLIst
-     *
-     * @param tradeInfo
-     * @param oldShopcartItemList
-     */
+
     public static void initBuffetMainTradeSubItems(DinnertableTradeInfo tradeInfo, List<IShopcartItem> oldShopcartItemList) {
         if (Utils.isEmpty(tradeInfo.getSubTradeInfoList())) {
             return;
@@ -105,23 +90,17 @@ public class DinnerUnionShopcartUtil {
                 continue;
             }
             for (IShopcartItem iShopcartItem : shopcartItemList) {
-                //主单只保存有效的菜品,过滤无效、退菜退完的菜品
-                if (iShopcartItem.getStatusFlag() == StatusFlag.INVALID || MathDecimal.isZero(iShopcartItem.getTotalQty())) {
+                                if (iShopcartItem.getStatusFlag() == StatusFlag.INVALID || MathDecimal.isZero(iShopcartItem.getTotalQty())) {
                     continue;
                 }
                 iShopcartItem.setShopcartItemType(ShopcartItemType.MAINSUB);
-                //购物车createOrder后会把子单tradeItem加入主单  避免重复添加
-                if (!oldShopcartItemMap.containsKey(iShopcartItem.getUuid()))
+                                if (!oldShopcartItemMap.containsKey(iShopcartItem.getUuid()))
                     oldShopcartItemList.add(iShopcartItem);
             }
         }
     }
 
-    /**
-     * 子单设置主单批量菜
-     *
-     * @param shopcartItemList
-     */
+
     public static void initSubTradeBatchItem(DinnertableTradeInfo mainTradeInfo, DinnertableTradeInfo currentTradeInfo, List<IShopcartItem> shopcartItemList) {
 
         if (mainTradeInfo == null || Utils.isEmpty(mainTradeInfo.getItems()) || mainTradeInfo.getTradeVo() == null) {
@@ -130,14 +109,12 @@ public class DinnerUnionShopcartUtil {
 
         Map<Long, TradeItemMainBatchRelExtra> batchRelExtraMap = new HashMap<>();
         initBatchExtraMap(batchRelExtraMap, mainTradeInfo.getTradeVo(), currentTradeInfo.getTradeVo().getTrade().getId());
-        //当前订单的tradeUuid
-        String currentTradeUuid = currentTradeInfo.getTradeVo().getTrade().getUuid();
+                String currentTradeUuid = currentTradeInfo.getTradeVo().getTrade().getUuid();
         for (IShopcartItem iShopcartItem : mainTradeInfo.getItems()) {
             if (iShopcartItem.getShopcartItemType() != ShopcartItemType.MAINBATCH || iShopcartItem.getStatusFlag() == StatusFlag.INVALID) {
                 continue;
             }
-            //主单退菜参生的数据，子单不显示
-            if (MathDecimal.isZero(iShopcartItem.getTotalQty())) {
+                        if (MathDecimal.isZero(iShopcartItem.getTotalQty())) {
                 continue;
             }
             ReadonlyShopcartItem newShopcartItem = null;
@@ -147,8 +124,7 @@ public class DinnerUnionShopcartUtil {
                     continue;
                 }
                 Long tradeId = currentTradeInfo.getTradeVo().getTrade().getId();
-                //这个菜是否和这单有关联
-                TradeItemMainBatchRel relTradeItemMainBatchRel = getCurrentBatchRel(oldShopcartItem, tradeId);
+                                TradeItemMainBatchRel relTradeItemMainBatchRel = getCurrentBatchRel(oldShopcartItem, tradeId);
                 if (relTradeItemMainBatchRel == null) {
                     continue;
                 }
@@ -187,13 +163,7 @@ public class DinnerUnionShopcartUtil {
         }
     }
 
-    /**
-     * 生成子单中批量菜的item，it与uuid 使用  TradeItemMainBatchRel 中的id
-     *
-     * @param oldShopcartItem
-     * @param batchRelExtraMap
-     * @return
-     */
+
     private static ReadonlyShopcartItem doVirtualShopcartItem(ReadonlyShopcartItem oldShopcartItem, TradeItemMainBatchRel tradeItemMainBatchRel, Map<Long, TradeItemMainBatchRelExtra> batchRelExtraMap, Long tradeId, String tradeUuid) {
         TradeItem newTradeItem = new TradeItem();
         ReadonlyShopcartItem newShopcartItem = null;
@@ -205,8 +175,7 @@ public class DinnerUnionShopcartUtil {
 
         BigDecimal newQty = doRelateItemKey(newTradeItem, tradeItemMainBatchRel, tradeUuid);
 
-        //设置子单批量菜为实际的数量
-        newShopcartItem = new ReadonlyShopcartItem(newTradeItem, oldShopcartItem.getReturnQtyReason());
+                newShopcartItem = new ReadonlyShopcartItem(newTradeItem, oldShopcartItem.getReturnQtyReason());
         if (newQty != null) {
             newShopcartItem.modifyQty(newQty);
         }
@@ -223,8 +192,7 @@ public class DinnerUnionShopcartUtil {
         if (Utils.isNotEmpty(oldShopcartItem.getSetmealItems())) {
             newShopcartItem.setSetmealItems(new ArrayList<ReadonlySetmealShopcartItem>());
             for (ISetmealShopcartItem setmealShopcartItem : oldShopcartItem.getSetmealItems()) {
-                //子菜数量和价格改变
-                ReadonlySetmealShopcartItem setmealItem = ((ReadonlySetmealShopcartItem) setmealShopcartItem);
+                                ReadonlySetmealShopcartItem setmealItem = ((ReadonlySetmealShopcartItem) setmealShopcartItem);
                 TradeItem oldSetTradeItem = setmealItem.tradeItem;
                 TradeItem newSetTradeItem = new TradeItem();
                 try {
@@ -257,12 +225,7 @@ public class DinnerUnionShopcartUtil {
         return newShopcartItem;
     }
 
-    /**
-     * 子单虚拟加料
-     *
-     * @param oldShopcartItem
-     * @param newShopcartItem
-     */
+
     private static void doVirtualExtraItem(ReadonlyShopcartItemBase oldShopcartItem, ReadonlyShopcartItemBase newShopcartItem, Long tradeId, String tradeUuid) {
         if (oldShopcartItem.getExtraItems() != null) {
             newShopcartItem.setExtraItems(new ArrayList<ReadonlyExtraShopcartItem>());
@@ -343,8 +306,7 @@ public class DinnerUnionShopcartUtil {
         }
         List<TradeItemOperation> newOperationList = new ArrayList<>();
         for (TradeItemOperation tradeItemOperation : operationList) {
-            //无效记录不虚拟
-            if (tradeItemOperation.getStatusFlag() == StatusFlag.INVALID) {
+                        if (tradeItemOperation.getStatusFlag() == StatusFlag.INVALID) {
                 continue;
             }
             TradeItemOperation newTradeItemOpeartion = new TradeItemOperation();

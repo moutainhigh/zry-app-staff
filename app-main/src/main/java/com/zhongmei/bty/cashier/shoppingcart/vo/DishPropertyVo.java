@@ -2,18 +2,11 @@ package com.zhongmei.bty.cashier.shoppingcart.vo;
 
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
 
-/**
- * 对属性的封装
- *
- * @version: 1.0
- * @date 2015年7月9日
- */
+
 public class DishPropertyVo {
 
     private DishProperty property;
-    /**
-     * 是否选中
-     */
+
     private boolean selected;
 
     public DishPropertyVo(DishProperty property, boolean selected) {

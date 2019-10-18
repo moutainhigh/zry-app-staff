@@ -36,9 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.dinner_all_table_list_fragment)
 public class DinnerAllTableListFragment extends BasicFragment {
 
@@ -104,7 +102,6 @@ public class DinnerAllTableListFragment extends BasicFragment {
     public void initEmpty() {
         mBusinessType = ((BatchOperationTableDialogFragment) getParentFragment()).getmBusinessType();
         initObject();
-//        asynAreaData();
     }
 
     @Override
@@ -119,12 +116,9 @@ public class DinnerAllTableListFragment extends BasicFragment {
 
 
     private void initObject() {
-        /*if (mBusinessType == BusinessType.BUFFET) {
-            manager = new BuffetTableBatchOperationManager();
-        } else if (mBusinessType == BusinessType.DINNER) {*/
+
         manager = new DinnerTableBatchOperationManager();
-        //}
-        manager.register(new DinnerTableBatchOperationManager.OnDataChangedListener() {
+                manager.register(new DinnerTableBatchOperationManager.OnDataChangedListener() {
             @Override
             public void onChanged() {
                 asynAreaData();
@@ -196,8 +190,7 @@ public class DinnerAllTableListFragment extends BasicFragment {
         refreshView();
     }
 
-    //移除已选桌台
-    public void removeSelectedTable(DinnerConnectTablesVo vo) {
+        public void removeSelectedTable(DinnerConnectTablesVo vo) {
         if (vo != null) {
             selectedTablesVoMap.remove(vo.tables.getId());
             refreshView();
@@ -401,9 +394,7 @@ public class DinnerAllTableListFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 打开时段过滤窗口
-     */
+
     @SuppressLint("InflateParams")
     private void initAreaPopupWindow() {
         TablesAreaPopupAdapter adapter = new TablesAreaPopupAdapter(this.getActivity(), tablesAreaVoList);

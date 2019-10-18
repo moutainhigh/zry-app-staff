@@ -18,17 +18,11 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
 
-/**
- * 公告弹窗
- *
- * @created 2017/7/3
- */
+
 @SuppressLint("ValidFragment")
 public class CommonNoticeDialog<T> extends BasicDialogFragment {
 
-    /*public interface OnItemClickListener<T> {
-        void OnItemClick(DialogFragment dialog, List<T> item);
-    }*/
+
 
     TextView tvTitle;
     TextView tvSubTitle;

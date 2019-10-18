@@ -25,10 +25,7 @@ import com.zhongmei.bty.basemodule.trade.message.TradeResp;
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 
-/**
- * @Date 2016/7/26
- * @Description:开台操作封装
- */
+
 public class ChangeTableManager {
     private DinnertableTradeVo dinnertableTradeVo;
     private DinnerShoppingCart mShoppingCart;
@@ -37,8 +34,7 @@ public class ChangeTableManager {
     private Long userId;
     private String userName;
 
-    //保存改动前的人数和服务员
-    private int customerNumOld;
+        private int customerNumOld;
     private Long userIdOld;
     private String userNameOld;
 
@@ -75,8 +71,7 @@ public class ChangeTableManager {
     public void modifyTradeVo() {
         TradeTable tradeTable = TableInfoFragment.getDataManager().getOpenTableInfo(dinnertableTradeVo);
         if (tradeTable != null) {
-            //保存改动前的人数和服务
-            customerNumOld = tradeTable.getTablePeopleCount();
+                        customerNumOld = tradeTable.getTablePeopleCount();
             userIdOld = tradeTable.getWaiterId();
             userNameOld = tradeTable.getWaiterName();
 
@@ -86,18 +81,14 @@ public class ChangeTableManager {
             tradeTable.setChanged(true);
         }
 
-        //修改人数，解决修改人数后附加费不变的bug
-        dinnertableTradeVo.getTradeVo().getTrade().setTradePeopleCount(customerNum);
-        //modify by zhubo 2015-10-30 resetOrderFromTable方法参数调整
-        DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnertableTradeVo.getDinnertableTrade(), dinnertableTradeVo.getTradeVo());
+                dinnertableTradeVo.getTradeVo().getTrade().setTradePeopleCount(customerNum);
+                DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnertableTradeVo.getDinnertableTrade(), dinnertableTradeVo.getTradeVo());
         mShoppingCart.resetOrderFromTable(dinnertableTradeVo.getUnionMainTradeInfo(), tradeInfo, true);
 
-        //将改动信息存入购物车
-        mShoppingCart.updateTable(tradeTable);
+                mShoppingCart.updateTable(tradeTable);
         mShoppingCart.setTradeUser(this.tradeUser);
         mShoppingCart.setOrderBusinessType(mShoppingCart.getShoppingCartVo(), mBusinessType);
         mShoppingCart.setOrderType(mShoppingCart.getShoppingCartVo(), DeliveryType.HERE);
-        //还需要写入tradeVo到购物车
 
     }
 
@@ -149,12 +140,7 @@ public class ChangeTableManager {
 
     }
 
-    /**
-     * @Date 2016/10/27
-     * @Description:网络请求失败重置tradetable
-     * @Param
-     * @Return
-     */
+
     private void resetCusomerNumberAndWaiter() {
         TradeTable tradeTable = TableInfoFragment.getDataManager().getOpenTableInfo(dinnertableTradeVo);
         tradeTable.setTablePeopleCount(customerNumOld);

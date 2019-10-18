@@ -4,9 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.GridView;
 
-/**
- * 自定义可适应ScrollView的GridView
- */
+
 public class ScrollGridView extends GridView {
     public ScrollGridView(Context context) {
         super(context);

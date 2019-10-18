@@ -18,9 +18,7 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_fragment_employee_manage)
 public class BeautyEmployeeFragment extends BasicFragment {
 

@@ -1,8 +1,6 @@
 package com.zhongmei.bty.mobilepay.fragment;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 
 import android.os.Bundle;
@@ -54,8 +52,7 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
     private ScrollView mGridView;
 
 
-    private int mHorizontalSize = 3;//水平列数
-
+    private int mHorizontalSize = 3;
 
     public static OthersFragment newInstance(IPaymentInfo info, DoPayApi doPayApi) {
         OthersFragment f = new OthersFragment();
@@ -108,36 +105,27 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        //隐藏时清空已输入金额
-        mPaymentInfo.getOtherPay().clear();
+                mPaymentInfo.getOtherPay().clear();
         if (!hidden) {
-            loadDatas();//重新加载view对象
-            updateNotPayMent();
+            loadDatas();            updateNotPayMent();
             DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
         } else {
-           /* DisplayServiceManager.updateDisplay(getActivity().getApplicationContext(),
-                    DisplayServiceManager.buildPayMessage(DisplayUserInfo.COMMAND_CACEL, ""));*/
+
         }
         super.onHiddenChanged(hidden);
     }
 
-    /**
-     * @Title: updateNotPayMent
-     * @Description: 刷新未支付或找零、溢收
-     * @Return void 返回类型
-     */
+
     private void updateNotPayMent() {
         if (mPaymentInfo != null && mPaymentInfo.getOtherPay() != null && mPaymentInfo.getOtherPay().getGroupAmount() > 0) {
             double restAmout = mPaymentInfo.getNotPayMent();
             if (restAmout == 0) {
                 mPayAlterTV.setVisibility(View.GONE);
             } else {
-                //还剩
-                if (restAmout > 0) {
+                                if (restAmout > 0) {
                     mPayAlterTV.setText(this.getActivity().getString(R.string.pay_rest_payment_text) + CashInfoManager.formatCash(restAmout));
                 } else {
-                    //溢收
-                    mPayAlterTV.setText(String.format(this.getActivity().getString(R.string.more_pay_cash_text), CashInfoManager.formatCash(0 - restAmout)));
+                                        mPayAlterTV.setText(String.format(this.getActivity().getString(R.string.more_pay_cash_text), CashInfoManager.formatCash(0 - restAmout)));
                 }
                 mPayAlterTV.setVisibility(View.VISIBLE);
             }
@@ -149,17 +137,10 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
             DoPayUtils.updatePayEnable(getActivity(), mPay, enablePay());
     }
 
-    //获取用户输入金额
-    public double getInputValue() {
+        public double getInputValue() {
         return this.mPaymentInfo.getOtherPay().getGroupAmount();
     }
-  /*  public boolean enablePay() {
-        if (isSuportGroupPay()) {//如果支持组合支付
-            return this.mPaymentInfo.getOtherPay().getGroupAmount() > 0 ? true : false;
-        } else {
-            return this.mPaymentInfo.getOtherPay().getGroupAmount() >= this.mPaymentInfo.getActualAmount();//不分步支付，输入金额必须大于等于应付金额
-        }
-    }*/
+
 
     @Override
     public void onDestroy() {
@@ -175,13 +156,11 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
 
                     final double restAmout = mPaymentInfo.getNotPayMent();
 
-                    //如果有溢收
-                    if (restAmout < 0) {
+                                        if (restAmout < 0) {
                         List<PayModelItem> payModelItemList = mPaymentInfo.getOtherPay().getAllPayModelItems();
                         if (payModelItemList != null) {
                             for (PayModelItem payModelItem : payModelItemList) {
-                                //add v8.16 自定义输入不支持溢收
-                                if (payModelItem.getPaymentModeShop() != null && payModelItem.getPaymentModeShop().getFaceValue() == null) {
+                                                                if (payModelItem.getPaymentModeShop() != null && payModelItem.getPaymentModeShop().getFaceValue() == null) {
                                     ToastUtil.showShortToast(R.string.auto_input_paymode_not_paymore);
                                     return;
                                 }
@@ -224,11 +203,7 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
         public void onFinished(boolean isOK, int errorCode) {
             try {
                 if (isOK) {
-                    //清空已输入金额
-                    // mPaymentInfo.getOtherPay().clear();
-                    loadDatas();//重新加载view对象
-                    // updateNotPayMent();
-                    DoPayUtils.updatePayEnable(getActivity(), mPay, enablePay());
+                                                            loadDatas();                                        DoPayUtils.updatePayEnable(getActivity(), mPay, enablePay());
                 } else {
                     mPay.setEnabled(true);
                 }
@@ -238,12 +213,9 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
         }
     };
 
-    /**
-     * 加载数据
-     */
+
     public void loadDatas() {
-        //缓存里面获取其它支付方式
-        if (mPaymentInfo == null) return;
+                if (mPaymentInfo == null) return;
         PayScene payScene = mPaymentInfo.getPayScene();
         List<PaymentModeShop> modeShopList = PaySettingCache.getOthersPaymentModeShops(payScene == PayScene.SCENE_CODE_CHARGE ? PayScene.SCENE_CODE_CHARGE.value() : PayScene.SCENE_CODE_SHOP.value());
         if (modeShopList == null) {
@@ -256,8 +228,7 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
         listData = new ArrayList<PayModelItem>();
         if (modeShopList != null && modeShopList.size() > 0) {
             for (PaymentModeShop modeShop : modeShopList) {
-                //小于零的其它支付是系统默认的，暂不展示,用户自定义的都大于0
-                if (modeShop.getErpModeId() < 0) {
+                                if (modeShop.getErpModeId() < 0) {
                     continue;
                 }
                 PayModelItem item = new PayModelItem(modeShop);
@@ -271,13 +242,9 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
             adapter = new OtherPayModelAdapter(getActivity(), listData, mGridView);
             adapter.setHorizontalSize(mHorizontalSize);
             adapter.setCashInfoManager(mPaymentInfo);
-            //if (mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT || mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_WRITEOFF || mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BOOKING_DEPOSIT) {//如果押金、销账不支持组合
-                adapter.setSuportMulti(false);//
-            //}
-            adapter.refreshView();
+                            adapter.setSuportMulti(false);                        adapter.refreshView();
         }
-        //modify 20170110
-    }
+            }
 
     private PaymentModeShop createPaymentModeShop(PayModeId modeId, String modeIdName) {
         PaymentModeShop paymentModeShop = new PaymentModeShop();
@@ -289,30 +256,18 @@ public class OthersFragment extends BasePayFragment implements View.OnClickListe
 
     private OtherPayModelAdapter adapter;
 
-    /***
-     * 监听抹零事件,抹零后清空所有输入金额
-     *
-     * @param event
-     */
+
     public void onEventMainThread(ExemptEventUpdate event) {
         if (this.isAdded() && !this.isHidden()) {
-            //add v8.16 解决bug start 如果是正餐结算，订单金额变化不清空输入金额,抹零操作会清空
-            if (mPaymentInfo.getPayActionPage() == PayActionPage.BALANCE && !event.isExempt()) {
+                        if (mPaymentInfo.getPayActionPage() == PayActionPage.BALANCE && !event.isExempt()) {
                 updateNotPayMent();
-            } else { //add v8.16  解决bug end
-                mPaymentInfo.getOtherPay().clear();//清空已输入金额
-                loadDatas();//重新加载view对象
-                updateNotPayMent();
+            } else {                 mPaymentInfo.getOtherPay().clear();                loadDatas();                updateNotPayMent();
                 DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
             }
         }
     }
 
-    /**
-     * 刷新
-     *
-     * @param selectEvent
-     */
+
     public void onEventMainThread(PaymentModeOtherChangeEvent selectEvent) {
         updateNotPayMent();
     }

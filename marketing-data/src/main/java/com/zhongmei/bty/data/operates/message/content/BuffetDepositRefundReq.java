@@ -2,11 +2,7 @@ package com.zhongmei.bty.data.operates.message.content;
 
 import java.math.BigDecimal;
 
-/**
- * @Date： 17/7/3
- * @Description:
- * @Version: 1.0
- */
+
 public class BuffetDepositRefundReq {
 
     private Long tradeId;

@@ -7,41 +7,22 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Created by demo on 2018/12/15
- *
- * Created by demo on 2018/12/15
- * 美团点评团购券查询结果信息
- *
- */
+
 
 public class TuanGouCouponDetail implements IGroupBuyingCoupon {
-    Long grouponId;//团购活动id
-    String serialNumber;
-    String buyDate;//购买时间
-    String mobile;//手机号码
-    int status;//团购劵状态(1-可用，2-不可用)
-    String statusDesc;
+    Long grouponId;    String serialNumber;
+    String buyDate;    String mobile;    int status;    String statusDesc;
     int minConsume;
     int maxConsume;
-    String dealTitle;//券名称
-    Long dealId;//团单id
-    int canCancel;//是否可撤销，1-是，0-否
-    Long beginTime;
+    String dealTitle;    Long dealId;    int canCancel;    Long beginTime;
     Long endTime;
-    private BigDecimal marketPrice = BigDecimal.ZERO;//市场价（面值）
-    private BigDecimal price = BigDecimal.ZERO; // 售价
-    String remark;//备注
-    int couponType = -1;// 1-代金券 2-套餐券  add v8.3
-    private List<CouponDishLimit> dishMapping;//add v8.3
-
+    private BigDecimal marketPrice = BigDecimal.ZERO;    private BigDecimal price = BigDecimal.ZERO;     String remark;    int couponType = -1;    private List<CouponDishLimit> dishMapping;
     public Long getGrouponId() {
         return grouponId;
     }
 
     public String getSerialNumber() {
-        // return "1383317503870";
-        return serialNumber;
+                return serialNumber;
     }
 
     public String getBuyDate() {

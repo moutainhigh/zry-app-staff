@@ -19,9 +19,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.fragment_prepay_setting)
 public class PrepaySettingFragment extends BasicFragment {
 

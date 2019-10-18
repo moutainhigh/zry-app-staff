@@ -8,17 +8,11 @@ public class MemberCheckCodeReq {
 
     private String mobile;
 
-    /**
-     * 国家英文名称(为空默认中国) = countryEN
-     */
+
     private String nation;
-    /**
-     * 国家中文名称(为空默认中国) = countryZH
-     */
+
     private String country;
-    /**
-     * 电话国际区码(为空默认中国) = AreaCode
-     */
+
     private String nationalTelCode;
 
     public MemberCheckCodeReq(int type, String customerUuid, String mobile) {

@@ -66,7 +66,7 @@ public class UpdateFragment extends Fragment {
     @AfterViews
     protected void init() {
         Resources res = getActivity().getResources();
-        VersionInfo versionInfo = ShopInfoCfg.getInstance().getAppVersionInfo(); //MainApplication.getInstance().getVersionInfo();
+        VersionInfo versionInfo = ShopInfoCfg.getInstance().getAppVersionInfo();
         tvCurrentVersion.setText(res
                 .getString(R.string.settings_current_version)
                 + "："
@@ -85,7 +85,7 @@ public class UpdateFragment extends Fragment {
             tvUpdateTime.setText(getString(R.string.publish_time, "2018-08-07"));
         }
 
-        VersionInfo printVersionInfo = ShopInfoCfg.getInstance().getPrintVersionInfo(); //MainApplication.getInstance().getPrintVersionInfo();
+        VersionInfo printVersionInfo = ShopInfoCfg.getInstance().getPrintVersionInfo();
         if (printVersionInfo.hasUpdate()) {
             mDoPrintUpgrade.setVisibility(View.VISIBLE);
             tvPrintUpdateTime.setVisibility(View.VISIBLE);
@@ -116,7 +116,6 @@ public class UpdateFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        //显示打印服务版本号
         String printVersionName = AppUtils.getAppVersionName(getActivity(), Constant.PRINT_SERVICE_PACKAGE_NAME);
         if (printVersionName != null) {
             tvPrintVersion.setVisibility(View.VISIBLE);
@@ -180,12 +179,7 @@ public class UpdateFragment extends Fragment {
         return "https://demo.com/downadmin/api/getreleasedate?app=printer&&version=" + printVersionName;
     }
 
-    /**
-     * 获取升级版本名
-     *
-     * @param versionInfo
-     * @return
-     */
+
     private String getUpdateVersionName(VersionInfo versionInfo) {
         String versionName = versionInfo.getVersionName();
         if (TextUtils.isEmpty(versionName)) {
@@ -201,12 +195,7 @@ public class UpdateFragment extends Fragment {
         return versionName;
     }
 
-    /**
-     * 根据版本号生成版本名
-     *
-     * @param versionCode
-     * @return
-     */
+
     private String convertVersionName(long versionCode) {
         long baseNo = 2110000000;
 
@@ -227,7 +216,6 @@ public class UpdateFragment extends Fragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            //接收安装广播
             if (Intent.ACTION_PACKAGE_ADDED.equals(intent.getAction())) {
                 String packageName = intent.getDataString();
                 if (("package:" + Constant.PRINT_SERVICE_PACKAGE_NAME).equals(packageName)

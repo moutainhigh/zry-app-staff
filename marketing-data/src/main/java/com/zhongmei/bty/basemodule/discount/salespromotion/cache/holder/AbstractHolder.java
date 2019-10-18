@@ -10,9 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class AbstractHolder<T extends IdEntityBase> implements DataHolder<T> {
 

@@ -14,36 +14,23 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.util.List;
 
-/**
- * 正餐桌台批量操作的桌台Vo
- * Created by demo on 2018/12/15
- */
+
 
 public class DinnerConnectTablesVo {
 
-    /**
-     * 桌台信息
-     */
+
     public Tables tables;
 
-    /**
-     * 区域名字
-     */
+
     public String areaName;
 
-    /**
-     * 是否选中
-     */
+
     public boolean isSelected;
 
-    /**
-     * 是否联台
-     */
+
     public boolean isConnected;
 
-    /**
-     * 联台信息
-     */
+
     public List<TradeMainSubRelation> tradeMainSubRelationList;
 
     public List<TradeTable> tradeTableList;
@@ -53,19 +40,15 @@ public class DinnerConnectTablesVo {
     public List<TradeEarnestMoney> tradeEarnestMoneyList;
 
     public boolean enableUnion() {
-        //空桌台
-        if (Utils.isEmpty(this.tradeList) || this.tables.getTableStatus() == TableStatus.EMPTY) {
+                if (Utils.isEmpty(this.tradeList) || this.tables.getTableStatus() == TableStatus.EMPTY) {
             return true;
-        } else {//占桌
-            if (this.tradeList.size() == 1 && Utils.isEmpty(tradeEarnestMoneyList)) {//一桌一单情况
-                Trade trade = tradeList.get(0);
+        } else {            if (this.tradeList.size() == 1 && Utils.isEmpty(tradeEarnestMoneyList)) {                Trade trade = tradeList.get(0);
                 if (trade != null && isCanUnionTrade(trade)) {
                     return true;
                 } else {
                     return false;
                 }
-            } else {//其它一桌多单情况
-                return false;
+            } else {                return false;
             }
         }
     }

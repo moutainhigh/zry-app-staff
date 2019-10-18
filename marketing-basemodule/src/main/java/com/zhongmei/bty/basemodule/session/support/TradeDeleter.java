@@ -18,9 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TradeDeleter {
 
@@ -63,8 +61,7 @@ public class TradeDeleter {
                 public Object call() throws Exception {
                     Log.i(TAG, "Clear expired data...");
                     TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
-                    // 保留最近7天的记录，7天前未结账的正餐单据也保留
-                    Calendar calendar = Calendar.getInstance();
+                                        Calendar calendar = Calendar.getInstance();
                     calendar.setTimeInMillis(DateTimeUtils.getCurrentDayStart());
                     calendar.add(Calendar.DAY_OF_MONTH, -6);
                     long minBizDate = calendar.getTimeInMillis();
@@ -90,12 +87,9 @@ public class TradeDeleter {
 
     private Long lastClearTime = null;
 
-    /**
-     * 清除7天之前的单据记录
-     */
+
     private void clearExpired() {
-        // 最后一次清除的时间是在20个小时之前，就执行一次清除
-        long currentTime = System.currentTimeMillis();
+                long currentTime = System.currentTimeMillis();
         if (lastClearTime != null && currentTime - lastClearTime < 20 * 3600 * 1000) {
             return;
         }

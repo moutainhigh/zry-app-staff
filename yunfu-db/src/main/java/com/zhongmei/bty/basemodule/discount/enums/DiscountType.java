@@ -4,40 +4,21 @@ import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
 import com.zhongmei.yunfu.util.ValueEnum;
 import com.zhongmei.yunfu.db.enums.OperateType;
 
-/**
- * 折扣表
- *
- * @date:2016年2月15日下午5:59:23
- */
+
 public enum DiscountType implements ValueEnum<Integer> {
-    //整单折扣
-    ALLDISCOUNT(1),
-    //	整单让价
-    ALLLET(2),
-    //	批量折扣
-    BATCHDISCOUNT(3),
-    //	批量让价
-    BATCHLET(4),
-    //整单赠送
-    ALL_FREE(5),
-    //批量赠送
-    BATCH_GIVE(6),
-    //批量问题菜品
-    BATCH_PROBLEM(7),
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+        ALLDISCOUNT(1),
+        ALLLET(2),
+        BATCHDISCOUNT(3),
+        BATCHLET(4),
+        ALL_FREE(5),
+        BATCH_GIVE(6),
+        BATCH_PROBLEM(7),
+
     @Deprecated
     __UNKNOWN__;
 
 
-    /**
-     * 获取当前交易理由类型
-     *
-     * @return
-     */
+
     public static OperateType getOperateType(DiscountType currentDiscountType) {
         switch (currentDiscountType) {
             case ALLDISCOUNT:
@@ -59,20 +40,14 @@ public enum DiscountType implements ValueEnum<Integer> {
         }
     }
 
-    /**
-     * 获取理由类型
-     *
-     * @param currentDiscountType
-     * @return
-     */
+
     public static ReasonType getReasonType(DiscountType currentDiscountType) {
         switch (currentDiscountType) {
             case ALLDISCOUNT:
             case ALLLET:
                 return ReasonType.TRADE_DISCOUNT;
             case ALL_FREE:
-                return ReasonType.__UNKNOWN__; //TRADE_BANQUET|TRADE_FREE这里有可能是名单，这里的类型不确定
-            case BATCHDISCOUNT:
+                return ReasonType.__UNKNOWN__;             case BATCHDISCOUNT:
             case BATCHLET:
             case BATCH_PROBLEM:
                 return ReasonType.TRADE_SINGLE_DISCOUNT;

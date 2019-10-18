@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 
 import java.util.concurrent.Callable;
 
-/**
- * @since 2018.05.17.
- */
+
 public class ModifyCustomerProcessor extends OpsRequest.SaveDatabaseResponseProcessor<ModifyCustomerResp> {
 
     @Override

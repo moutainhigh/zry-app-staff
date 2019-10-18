@@ -30,11 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * 多选框公共类
- *
- * @created 2017/7/3
- */
+
 @SuppressLint("ValidFragment")
 public class CommonMultiChoiceDialog<T> extends BasicDialogFragment {
 

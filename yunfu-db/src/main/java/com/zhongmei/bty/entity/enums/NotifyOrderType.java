@@ -2,41 +2,25 @@ package com.zhongmei.bty.entity.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 业务通知类型
- */
+
 
 public enum NotifyOrderType implements ValueEnum<Integer> {
 
-    /**
-     * 预订
-     */
+
     BOOKING(1),
 
-    /**
-     * 排队
-     */
+
     QUEUE(2),
 
-    /**
-     * 外卖
-     */
+
     TAKEAWAY(3),
-    /**
-     *
-     */
+
     ORDERALL(4),
 
-    /**
-     * 订单
-     */
+
     TRADE(5),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated __UNKNOWN__;
 
     private final Helper<Integer> helper;

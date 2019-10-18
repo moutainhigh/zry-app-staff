@@ -19,9 +19,7 @@ import android.widget.Scroller;
 
 import java.util.List;
 
-/**
- * Reference to ScrollView and HorizontalScrollView
- */
+
 public class HVScrollView extends FrameLayout {
     static final int ANIMATED_SCROLL_GAP = 250;
 
@@ -32,69 +30,39 @@ public class HVScrollView extends FrameLayout {
     private final Rect mTempRect = new Rect();
     private Scroller mScroller;
 
-    /**
-     * Flag to indicate that we are moving focus ourselves. This is so the code
-     * that watches for focus changes initiated outside this ScrollView knows
-     * that it does not have to do anything.
-     */
+
     private boolean mScrollViewMovedFocus;
 
-    /**
-     * Position of the last motion event.
-     */
+
     private float mLastMotionY;
     private float mLastMotionX;
 
-    /**
-     * True when the layout has changed but the traversal has not come through
-     * yet. Ideally the view hierarchy would keep track of this for us.
-     */
+
     private boolean mIsLayoutDirty = true;
 
-    /**
-     * The child to give focus to in the event that a child has requested focus
-     * while the layout is dirty. This prevents the scroll from being wrong if
-     * the child has not been laid out before requesting focus.
-     */
+
     private View mChildToScrollTo = null;
 
-    /**
-     * True if the user is currently dragging this ScrollView around. This is
-     * not the same as 'is being flinged', which can be checked by
-     * mScroller.isFinished() (flinging begins when the user lifts his finger).
-     */
+
     private boolean mIsBeingDragged = false;
 
-    /**
-     * Determines speed during touch scrolling
-     */
+
     private VelocityTracker mVelocityTracker;
 
-    /**
-     * When set to true, the scroll view measure its child to make it fill the
-     * currently visible area.
-     */
+
     private boolean mFillViewport;
 
-    /**
-     * Whether arrow scrolling is animated.
-     */
+
     private boolean mSmoothScrollingEnabled = true;
 
     private int mTouchSlop;
     private int mMinimumVelocity;
     private int mMaximumVelocity;
 
-    /**
-     * ID of the active pointer. This is used to retain consistency during
-     * drags/flings if multiple pointers are used.
-     */
+
     private int mActivePointerId = INVALID_POINTER;
 
-    /**
-     * Sentinel value for no current active pointer. Used by
-     * {@link #mActivePointerId}.
-     */
+
     private static final int INVALID_POINTER = -1;
 
     private boolean mFlingEnabled = true;
@@ -168,10 +136,7 @@ public class HVScrollView extends FrameLayout {
         return 1.0f;
     }
 
-    /**
-     * @return The maximum amount this scroll view will scroll in response to an
-     * arrow event.
-     */
+
     public int getMaxScrollAmountV() {
         return (int) (MAX_SCROLL_FACTOR * (getBottom() - getTop()));
     }
@@ -228,9 +193,7 @@ public class HVScrollView extends FrameLayout {
         super.addView(child, index, params);
     }
 
-    /**
-     * @return Returns true this ScrollView can be scrolled
-     */
+
     private boolean canScrollV() {
         View child = getChildAt(0);
         if (child != null) {
@@ -249,23 +212,12 @@ public class HVScrollView extends FrameLayout {
         return false;
     }
 
-    /**
-     * Indicates whether this ScrollView's content is stretched to fill the
-     * viewport.
-     *
-     * @return True if the content fills the viewport, false otherwise.
-     */
+
     public boolean isFillViewport() {
         return mFillViewport;
     }
 
-    /**
-     * Indicates this ScrollView whether it should stretch its content height to
-     * fill the viewport or not.
-     *
-     * @param fillViewport True to stretch the content's height to the viewport's
-     *                     boundaries, false otherwise.
-     */
+
     public void setFillViewport(boolean fillViewport) {
         if (fillViewport != mFillViewport) {
             mFillViewport = fillViewport;
@@ -273,18 +225,12 @@ public class HVScrollView extends FrameLayout {
         }
     }
 
-    /**
-     * @return Whether arrow scrolling will animate its transition.
-     */
+
     public boolean isSmoothScrollingEnabled() {
         return mSmoothScrollingEnabled;
     }
 
-    /**
-     * Set whether arrow scrolling will animate its transition.
-     *
-     * @param smoothScrollingEnabled whether arrow scrolling will animate its transition
-     */
+
     public void setSmoothScrollingEnabled(boolean smoothScrollingEnabled) {
         mSmoothScrollingEnabled = smoothScrollingEnabled;
     }
@@ -323,18 +269,10 @@ public class HVScrollView extends FrameLayout {
 
     @Override
     public boolean dispatchKeyEvent(KeyEvent event) {
-        // Let the focused view and/or our descendants get the key first
-        return super.dispatchKeyEvent(event) || executeKeyEvent(event);
+                return super.dispatchKeyEvent(event) || executeKeyEvent(event);
     }
 
-    /**
-     * You can call this function yourself to have the scroll view perform
-     * scrolling from a key event, just as if the event had been dispatched to
-     * it by the view hierarchy.
-     *
-     * @param event The key event to execute.
-     * @return Return true if the event was handled, else false.
-     */
+
     public boolean executeKeyEvent(KeyEvent event) {
         mTempRect.setEmpty();
 
@@ -396,16 +334,9 @@ public class HVScrollView extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        /*
-         * This method JUST determines whether we want to intercept the motion.
-         * If we return true, onMotionEvent will be called and we do the actual
-         * scrolling there.
-         */
 
-        /*
-         * Shortcut the most recurring case: the user is in the dragging state
-         * and he is moving his finger. We want to intercept this motion.
-         */
+
+
         final int action = ev.getAction();
         if ((action == MotionEvent.ACTION_MOVE) && (mIsBeingDragged)) {
             return true;
@@ -413,21 +344,12 @@ public class HVScrollView extends FrameLayout {
 
         switch (action & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_MOVE: {
-                /*
-                 * mIsBeingDragged == false, otherwise the shortcut would have
-                 * caught it. Check whether the user has moved far enough from
-                 * his original down touch.
-                 */
 
-                /*
-                 * Locally do absolute value. mLastMotionY is set to the y value
-                 * of the down event.
-                 */
+
+
                 final int activePointerId = mActivePointerId;
                 if (activePointerId == INVALID_POINTER) {
-                    // If we don't have a valid id, the touch down wasn't on
-                    // content.
-                    break;
+                                                            break;
                 }
 
                 final int pointerIndex = ev.findPointerIndex(activePointerId);
@@ -454,26 +376,19 @@ public class HVScrollView extends FrameLayout {
                     break;
                 }
 
-                /*
-                 * Remember location of down touch. ACTION_DOWN always refers to
-                 * pointer index 0.
-                 */
+
                 mLastMotionY = y;
                 mLastMotionX = x;
                 mActivePointerId = ev.getPointerId(0);
 
-                /*
-                 * If being flinged and user touches the screen, initiate drag;
-                 * otherwise don't. mScroller.isFinished should be false when
-                 * being flinged.
-                 */
+
                 mIsBeingDragged = !mScroller.isFinished();
                 break;
             }
 
             case MotionEvent.ACTION_CANCEL:
             case MotionEvent.ACTION_UP:
-                /* Release the drag */
+
                 mIsBeingDragged = false;
                 mActivePointerId = INVALID_POINTER;
                 break;
@@ -482,10 +397,7 @@ public class HVScrollView extends FrameLayout {
                 break;
         }
 
-        /*
-         * The only time we want to intercept motion events is if we are in the
-         * drag mode.
-         */
+
         return mIsBeingDragged;
     }
 
@@ -493,10 +405,7 @@ public class HVScrollView extends FrameLayout {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN && ev.getEdgeFlags() != 0) {
-            // Don't handle edge touches immediately -- they may actually belong
-            // to one of our
-            // descendants.
-            return false;
+                                                return false;
         }
 
         if (mVelocityTracker == null) {
@@ -514,24 +423,19 @@ public class HVScrollView extends FrameLayout {
                     return false;
                 }
 
-                /*
-                 * If being flinged and user touches, stop the fling. isFinished
-                 * will be false if being flinged.
-                 */
+
                 if (!mScroller.isFinished()) {
                     mScroller.abortAnimation();
                 }
 
-                // Remember where the motion event started
-                mLastMotionY = y;
+                                mLastMotionY = y;
                 mLastMotionX = x;
                 mActivePointerId = ev.getPointerId(0);
                 break;
             }
             case MotionEvent.ACTION_MOVE:
                 if (mIsBeingDragged) {
-                    // Scroll to follow the motion event
-                    final int activePointerIndex = ev.findPointerIndex(mActivePointerId);
+                                        final int activePointerIndex = ev.findPointerIndex(mActivePointerId);
                     final float y = ev.getY(activePointerIndex);
                     final int deltaY = (int) (mLastMotionY - y);
                     mLastMotionY = y;
@@ -550,10 +454,6 @@ public class HVScrollView extends FrameLayout {
                         velocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
                         int initialVelocitx = (int) velocityTracker.getXVelocity();
                         int initialVelocity = (int) velocityTracker.getYVelocity();
-                        // int initialVelocitx = (int)
-                        // velocityTracker.getXVelocity(mActivePointerId);
-                        // int initialVelocity = (int)
-                        // velocityTracker.getYVelocity(mActivePointerId);
 
                         if (getChildCount() > 0) {
                             if (Math.abs(initialVelocitx) > initialVelocitx
@@ -594,9 +494,7 @@ public class HVScrollView extends FrameLayout {
         final int pointerIndex = (ev.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
         final int pointerId = ev.getPointerId(pointerIndex);
         if (pointerId == mActivePointerId) {
-            // This was our active pointer going up. Choose a new
-            // active pointer and adjust accordingly.
-            final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
+                                    final int newPointerIndex = pointerIndex == 0 ? 1 : 0;
             mLastMotionX = ev.getX(newPointerIndex);
             mLastMotionY = ev.getY(newPointerIndex);
             mActivePointerId = ev.getPointerId(newPointerIndex);
@@ -606,33 +504,13 @@ public class HVScrollView extends FrameLayout {
         }
     }
 
-    /**
-     * <p>
-     * Finds the next focusable component that fits in the specified bounds.
-     * </p>
-     *
-     * @param topFocus look for a candidate is the one at the top of the bounds if
-     *                 topFocus is true, or at the bottom of the bounds if topFocus
-     *                 is false
-     * @param top      the top offset of the bounds in which a focusable must be
-     *                 found
-     * @param bottom   the bottom offset of the bounds in which a focusable must be
-     *                 found
-     * @return the next focusable component in the bounds or null if none can be
-     * found
-     */
+
     private View findFocusableViewInBoundsV(boolean topFocus, int top, int bottom) {
 
         List<View> focusables = getFocusables(View.FOCUS_FORWARD);
         View focusCandidate = null;
 
-        /*
-         * A fully contained focusable is one where its top is below the bound's
-         * top, and its bottom is above the bound's bottom. A partially
-         * contained focusable is one where some part of it is within the
-         * bounds, but it also has some part that is not within bounds. A fully
-         * contained focusable is preferred to a partially contained focusable.
-         */
+
         boolean foundFullyContainedFocusable = false;
 
         int count = focusables.size();
@@ -642,15 +520,12 @@ public class HVScrollView extends FrameLayout {
             int viewBottom = view.getBottom();
 
             if (top < viewBottom && viewTop < bottom) {
-                /*
-                 * the focusable is in the target area, it is a candidate for
-                 * focusing
-                 */
+
 
                 final boolean viewIsFullyContained = (top < viewTop) && (viewBottom < bottom);
 
                 if (focusCandidate == null) {
-                    /* No candidate, take this one */
+
                     focusCandidate = view;
                     foundFullyContainedFocusable = viewIsFullyContained;
                 } else {
@@ -659,26 +534,16 @@ public class HVScrollView extends FrameLayout {
 
                     if (foundFullyContainedFocusable) {
                         if (viewIsFullyContained && viewIsCloserToBoundary) {
-                            /*
-                             * We're dealing with only fully contained views, so
-                             * it has to be closer to the boundary to beat our
-                             * candidate
-                             */
+
                             focusCandidate = view;
                         }
                     } else {
                         if (viewIsFullyContained) {
-                            /*
-                             * Any fully contained view beats a partially
-                             * contained view
-                             */
+
                             focusCandidate = view;
                             foundFullyContainedFocusable = true;
                         } else if (viewIsCloserToBoundary) {
-                            /*
-                             * Partially contained view beats another partially
-                             * contained view if it's closer
-                             */
+
                             focusCandidate = view;
                         }
                     }
@@ -694,13 +559,7 @@ public class HVScrollView extends FrameLayout {
         List<View> focusables = getFocusables(View.FOCUS_FORWARD);
         View focusCandidate = null;
 
-        /*
-         * A fully contained focusable is one where its left is below the
-         * bound's left, and its right is above the bound's right. A partially
-         * contained focusable is one where some part of it is within the
-         * bounds, but it also has some part that is not within bounds. A fully
-         * contained focusable is preferred to a partially contained focusable.
-         */
+
         boolean foundFullyContainedFocusable = false;
 
         int count = focusables.size();
@@ -710,15 +569,12 @@ public class HVScrollView extends FrameLayout {
             int viewRight = view.getRight();
 
             if (left < viewRight && viewLeft < right) {
-                /*
-                 * the focusable is in the target area, it is a candidate for
-                 * focusing
-                 */
+
 
                 final boolean viewIsFullyContained = (left < viewLeft) && (viewRight < right);
 
                 if (focusCandidate == null) {
-                    /* No candidate, take this one */
+
                     focusCandidate = view;
                     foundFullyContainedFocusable = viewIsFullyContained;
                 } else {
@@ -727,26 +583,16 @@ public class HVScrollView extends FrameLayout {
 
                     if (foundFullyContainedFocusable) {
                         if (viewIsFullyContained && viewIsCloserToBoundary) {
-                            /*
-                             * We're dealing with only fully contained views, so
-                             * it has to be closer to the boundary to beat our
-                             * candidate
-                             */
+
                             focusCandidate = view;
                         }
                     } else {
                         if (viewIsFullyContained) {
-                            /*
-                             * Any fully contained view beats a partially
-                             * contained view
-                             */
+
                             focusCandidate = view;
                             foundFullyContainedFocusable = true;
                         } else if (viewIsCloserToBoundary) {
-                            /*
-                             * Partially contained view beats another partially
-                             * contained view if it's closer
-                             */
+
                             focusCandidate = view;
                         }
                     }
@@ -757,19 +603,7 @@ public class HVScrollView extends FrameLayout {
         return focusCandidate;
     }
 
-    /**
-     * <p>
-     * Handles scrolling in response to a "home/end" shortcut press. This method
-     * will scroll the view to the top or bottom and give the focus to the
-     * topmost/bottommost component in the new visible area. If no component is
-     * a good candidate for focus, this scrollview reclaims the focus.
-     * </p>
-     *
-     * @param direction the scroll direction: {@link View#FOCUS_UP} to go
-     *                  the top of the view or {@link View#FOCUS_DOWN} to
-     *                  go the bottom
-     * @return true if the key event is consumed by this method, false otherwise
-     */
+
     public boolean fullScrollV(int direction) {
         boolean down = direction == View.FOCUS_DOWN;
         int height = getHeight();
@@ -808,20 +642,7 @@ public class HVScrollView extends FrameLayout {
         return scrollAndFocusH(direction, mTempRect.left, mTempRect.right);
     }
 
-    /**
-     * <p>
-     * Scrolls the view to make the area defined by <code>top</code> and
-     * <code>bottom</code> visible. This method attempts to give the focus to a
-     * component visible in this area. If no component can be focused in the new
-     * visible area, the focus is reclaimed by this scrollview.
-     * </p>
-     *
-     * @param direction the scroll direction: {@link View#FOCUS_UP} to go
-     *                  upward {@link View#FOCUS_DOWN} to downward
-     * @param top       the top offset of the new area to be made visible
-     * @param bottom    the bottom offset of the new area to be made visible
-     * @return true if the key event is consumed by this method, false otherwise
-     */
+
     private boolean scrollAndFocusV(int direction, int top, int bottom) {
         boolean handled = true;
 
@@ -878,12 +699,7 @@ public class HVScrollView extends FrameLayout {
         return handled;
     }
 
-    /**
-     * Handle scrolling in response to an up or down arrow click.
-     *
-     * @param direction The direction corresponding to the arrow key that was pressed
-     * @return True if we consumed the event, false otherwise
-     */
+
     public boolean arrowScrollV(int direction) {
 
         View currentFocused = findFocus();
@@ -901,8 +717,7 @@ public class HVScrollView extends FrameLayout {
             doScrollY(scrollDelta);
             nextFocused.requestFocus(direction);
         } else {
-            // no new focus
-            int scrollDelta = maxJump;
+                        int scrollDelta = maxJump;
 
             if (direction == View.FOCUS_UP && getScrollY() < scrollDelta) {
                 scrollDelta = getScrollY();
@@ -924,17 +739,9 @@ public class HVScrollView extends FrameLayout {
         }
 
         if (currentFocused != null && currentFocused.isFocused() && isOffScreenV(currentFocused)) {
-            // previously focused item still has focus and is off screen, give
-            // it up (take it back to ourselves)
-            // (also, need to temporarily force FOCUS_BEFORE_DESCENDANTS so we
-            // are
-            // sure to
-            // get it)
-            final int descendantFocusability = getDescendantFocusability(); // save
-            setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+                                                                                    final int descendantFocusability = getDescendantFocusability();             setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
             requestFocus();
-            setDescendantFocusability(descendantFocusability); // restore
-        }
+            setDescendantFocusability(descendantFocusability);         }
         return true;
     }
 
@@ -955,8 +762,7 @@ public class HVScrollView extends FrameLayout {
             doScrollX(scrollDelta);
             nextFocused.requestFocus(direction);
         } else {
-            // no new focus
-            int scrollDelta = maxJump;
+                        int scrollDelta = maxJump;
 
             if (direction == View.FOCUS_LEFT && getScrollX() < scrollDelta) {
                 scrollDelta = getScrollX();
@@ -977,24 +783,13 @@ public class HVScrollView extends FrameLayout {
         }
 
         if (currentFocused != null && currentFocused.isFocused() && isOffScreenH(currentFocused)) {
-            // previously focused item still has focus and is off screen, give
-            // it up (take it back to ourselves)
-            // (also, need to temporarily force FOCUS_BEFORE_DESCENDANTS so we
-            // are
-            // sure to
-            // get it)
-            final int descendantFocusability = getDescendantFocusability(); // save
-            setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
+                                                                                    final int descendantFocusability = getDescendantFocusability();             setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
             requestFocus();
-            setDescendantFocusability(descendantFocusability); // restore
-        }
+            setDescendantFocusability(descendantFocusability);         }
         return true;
     }
 
-    /**
-     * @return whether the descendant of this scroll view is scrolled off
-     * screen.
-     */
+
     private boolean isOffScreenV(View descendant) {
         return !isWithinDeltaOfScreenV(descendant, 0, getHeight());
     }
@@ -1003,10 +798,7 @@ public class HVScrollView extends FrameLayout {
         return !isWithinDeltaOfScreenH(descendant, 0);
     }
 
-    /**
-     * @return whether the descendant of this scroll view is within delta pixels
-     * of being on the screen.
-     */
+
     private boolean isWithinDeltaOfScreenV(View descendant, int delta, int height) {
         descendant.getDrawingRect(mTempRect);
         offsetDescendantRectToMyCoords(descendant, mTempRect);
@@ -1023,11 +815,7 @@ public class HVScrollView extends FrameLayout {
                 && (mTempRect.left - delta) <= (getScrollX() + getWidth());
     }
 
-    /**
-     * Smooth scroll by a Y delta
-     *
-     * @param delta the number of pixels to scroll by on the Y axis
-     */
+
     private void doScrollY(int delta) {
         if (delta != 0) {
             if (mSmoothScrollingEnabled) {
@@ -1048,16 +836,10 @@ public class HVScrollView extends FrameLayout {
         }
     }
 
-    /**
-     * Like {@link View#scrollBy}, but scroll smoothly instead of immediately.
-     *
-     * @param dx the number of pixels to scroll by on the X axis
-     * @param dy the number of pixels to scroll by on the Y axis
-     */
+
     public void smoothScrollBy(int dx, int dy) {
         if (getChildCount() == 0) {
-            // Nothing to do.
-            return;
+                        return;
         }
         long duration = AnimationUtils.currentAnimationTimeMillis() - mLastScroll;
         if (duration > ANIMATED_SCROLL_GAP) {
@@ -1084,22 +866,12 @@ public class HVScrollView extends FrameLayout {
         mLastScroll = AnimationUtils.currentAnimationTimeMillis();
     }
 
-    /**
-     * Like {@link #scrollTo}, but scroll smoothly instead of immediately.
-     *
-     * @param x the position where to scroll on the X axis
-     * @param y the position where to scroll on the Y axis
-     */
+
     public final void smoothScrollTo(int x, int y) {
         smoothScrollBy(x - getScrollX(), y - getScrollY());
     }
 
-    /**
-     * <p>
-     * The scroll range of a scroll view is the overall height of all of its
-     * children.
-     * </p>
-     */
+
     @Override
     protected int computeVerticalScrollRange() {
         final int count = getChildCount();
@@ -1160,27 +932,7 @@ public class HVScrollView extends FrameLayout {
     @Override
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
-            // This is called at drawing time by ViewGroup. We don't want to
-            // re-show the scrollbars at this point, which scrollTo will do,
-            // so we replicate most of scrollTo here.
-            //
-            // It's a little odd to call onScrollChanged from inside the
-            // drawing.
-            //
-            // It is, except when you remember that computeScroll() is used to
-            // animate scrolling. So unless we want to defer the
-            // onScrollChanged()
-            // until the end of the animated scrolling, we don't really have a
-            // choice here.
-            //
-            // I agree. The alternative, which I think would be worse, is to
-            // post
-            // something and tell the subclasses later. This is bad because
-            // there
-            // will be a window where mScrollX/Y is different from what the app
-            // thinks it is.
-            //
-            int x = mScroller.getCurrX();
+                                                                                                                                                                                                                                                            int x = mScroller.getCurrX();
             int y = mScroller.getCurrY();
 
             if (getChildCount() > 0) {
@@ -1191,20 +943,15 @@ public class HVScrollView extends FrameLayout {
             }
             awakenScrollBars();
 
-            // Keep on drawing until the animation has finished.
-            postInvalidate();
+                        postInvalidate();
         }
     }
 
-    /**
-     * Scrolls the view to the given child.
-     *
-     * @param child the View to scroll to
-     */
+
     private void scrollToChild(View child) {
         child.getDrawingRect(mTempRect);
 
-        /* Offset from child's local coordinates to ScrollView coordinates */
+
         offsetDescendantRectToMyCoords(child, mTempRect);
 
         int scrollDeltaV = computeScrollDeltaToGetChildRectOnScreenV(mTempRect);
@@ -1215,14 +962,7 @@ public class HVScrollView extends FrameLayout {
         }
     }
 
-    /**
-     * If rect is off screen, scroll just enough to get it (or at least the
-     * first screen size chunk of it) on screen.
-     *
-     * @param rect      The rectangle.
-     * @param immediate True to scroll immediately without animation
-     * @return true if scrolling was performed
-     */
+
     private boolean scrollToChildRect(Rect rect, boolean immediate) {
         final int deltaV = computeScrollDeltaToGetChildRectOnScreenV(rect);
         final int deltaH = computeScrollDeltaToGetChildRectOnScreenH(rect);
@@ -1237,14 +977,7 @@ public class HVScrollView extends FrameLayout {
         return scroll;
     }
 
-    /**
-     * Compute the amount to scroll in the Y direction in order to get a
-     * rectangle completely on the screen (or, if taller than the screen, at
-     * least the first screen size chunk of it).
-     *
-     * @param rect The rect.
-     * @return The scroll delta.
-     */
+
     protected int computeScrollDeltaToGetChildRectOnScreenV(Rect rect) {
         if (getChildCount() == 0)
             return 0;
@@ -1255,53 +988,37 @@ public class HVScrollView extends FrameLayout {
 
         int fadingEdge = getVerticalFadingEdgeLength();
 
-        // leave room for top fading edge as long as rect isn't at very top
-        if (rect.top > 0) {
+                if (rect.top > 0) {
             screenTop += fadingEdge;
         }
 
-        // leave room for bottom fading edge as long as rect isn't at very
-        // bottom
-        if (rect.bottom < getChildAt(0).getHeight()) {
+                        if (rect.bottom < getChildAt(0).getHeight()) {
             screenBottom -= fadingEdge;
         }
 
         int scrollYDelta = 0;
 
         if (rect.bottom > screenBottom && rect.top > screenTop) {
-            // need to move down to get it in view: move down just enough so
-            // that the entire rectangle is in view (or at least the first
-            // screen size chunk).
 
             if (rect.height() > height) {
-                // just enough to get screen size chunk on
-                scrollYDelta += (rect.top - screenTop);
+                                scrollYDelta += (rect.top - screenTop);
             } else {
-                // get entire rect at bottom of screen
-                scrollYDelta += (rect.bottom - screenBottom);
+                                scrollYDelta += (rect.bottom - screenBottom);
             }
 
-            // make sure we aren't scrolling beyond the end of our content
-            int bottom = getChildAt(0).getBottom();
+                        int bottom = getChildAt(0).getBottom();
             int distanceToBottom = bottom - screenBottom;
             scrollYDelta = Math.min(scrollYDelta, distanceToBottom);
 
         } else if (rect.top < screenTop && rect.bottom < screenBottom) {
-            // need to move up to get it in view: move up just enough so that
-            // entire rectangle is in view (or at least the first screen
-            // size chunk of it).
 
             if (rect.height() > height) {
-                // screen size chunk
-                scrollYDelta -= (screenBottom - rect.bottom);
+                                scrollYDelta -= (screenBottom - rect.bottom);
             } else {
-                // entire rect at top
-                scrollYDelta -= (screenTop - rect.top);
+                                scrollYDelta -= (screenTop - rect.top);
             }
 
-            // make sure we aren't scrolling any further than the top our
-            // content
-            scrollYDelta = Math.max(scrollYDelta, -getScrollY());
+                                    scrollYDelta = Math.max(scrollYDelta, -getScrollY());
         }
         return scrollYDelta;
     }
@@ -1316,53 +1033,37 @@ public class HVScrollView extends FrameLayout {
 
         int fadingEdge = getHorizontalFadingEdgeLength();
 
-        // leave room for left fading edge as long as rect isn't at very left
-        if (rect.left > 0) {
+                if (rect.left > 0) {
             screenLeft += fadingEdge;
         }
 
-        // leave room for right fading edge as long as rect isn't at very right
-        if (rect.right < getChildAt(0).getWidth()) {
+                if (rect.right < getChildAt(0).getWidth()) {
             screenRight -= fadingEdge;
         }
 
         int scrollXDelta = 0;
 
         if (rect.right > screenRight && rect.left > screenLeft) {
-            // need to move right to get it in view: move right just enough so
-            // that the entire rectangle is in view (or at least the first
-            // screen size chunk).
 
             if (rect.width() > width) {
-                // just enough to get screen size chunk on
-                scrollXDelta += (rect.left - screenLeft);
+                                scrollXDelta += (rect.left - screenLeft);
             } else {
-                // get entire rect at right of screen
-                scrollXDelta += (rect.right - screenRight);
+                                scrollXDelta += (rect.right - screenRight);
             }
 
-            // make sure we aren't scrolling beyond the end of our content
-            int right = getChildAt(0).getRight();
+                        int right = getChildAt(0).getRight();
             int distanceToRight = right - screenRight;
             scrollXDelta = Math.min(scrollXDelta, distanceToRight);
 
         } else if (rect.left < screenLeft && rect.right < screenRight) {
-            // need to move right to get it in view: move right just enough so
-            // that
-            // entire rectangle is in view (or at least the first screen
-            // size chunk of it).
 
             if (rect.width() > width) {
-                // screen size chunk
-                scrollXDelta -= (screenRight - rect.right);
+                                scrollXDelta -= (screenRight - rect.right);
             } else {
-                // entire rect at left
-                scrollXDelta -= (screenLeft - rect.left);
+                                scrollXDelta -= (screenLeft - rect.left);
             }
 
-            // make sure we aren't scrolling any further than the left our
-            // content
-            scrollXDelta = Math.max(scrollXDelta, -getScrollX());
+                                    scrollXDelta = Math.max(scrollXDelta, -getScrollX());
         }
         return scrollXDelta;
     }
@@ -1373,32 +1074,16 @@ public class HVScrollView extends FrameLayout {
             if (!mIsLayoutDirty) {
                 scrollToChild(focused);
             } else {
-                // The child may not be laid out yet, we can't compute the
-                // scroll yet
-                mChildToScrollTo = focused;
+                                                mChildToScrollTo = focused;
             }
         }
         super.requestChildFocus(child, focused);
     }
 
-    /**
-     * When looking for focus in children of a scroll view, need to be a little
-     * more careful not to give focus to something that is scrolled off screen.
-     * <p>
-     * This is more expensive than the default {@link ViewGroup}
-     * implementation, otherwise this behavior might have been made the default.
-     */
+
     @Override
     protected boolean onRequestFocusInDescendants(int direction, Rect previouslyFocusedRect) {
 
-        // convert from forward / backward notation to up / down / left / right
-        // (ugh).
-        // TODO: FUCK
-        // if (direction == View.FOCUS_FORWARD) {
-        // direction = View.FOCUS_RIGHT;
-        // } else if (direction == View.FOCUS_BACKWARD) {
-        // direction = View.FOCUS_LEFT;
-        // }
 
         final View nextFocus = previouslyFocusedRect == null ? FocusFinder.getInstance().findNextFocus(this,
                 null, direction) : FocusFinder.getInstance().findNextFocusFromRect(this,
@@ -1408,17 +1093,13 @@ public class HVScrollView extends FrameLayout {
             return false;
         }
 
-        // if (isOffScreenH(nextFocus)) {
-        // return false;
-        // }
 
         return nextFocus.requestFocus(direction, previouslyFocusedRect);
     }
 
     @Override
     public boolean requestChildRectangleOnScreen(View child, Rect rectangle, boolean immediate) {
-        // offset into coordinate space of this scroll view
-        rectangle.offset(child.getLeft() - child.getScrollX(), child.getTop() - child.getScrollY());
+                rectangle.offset(child.getLeft() - child.getScrollX(), child.getTop() - child.getScrollY());
 
         return scrollToChildRect(rectangle, immediate);
     }
@@ -1433,14 +1114,12 @@ public class HVScrollView extends FrameLayout {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         mIsLayoutDirty = false;
-        // Give a child focus if it needs it
-        if (mChildToScrollTo != null && isViewDescendantOf(mChildToScrollTo, this)) {
+                if (mChildToScrollTo != null && isViewDescendantOf(mChildToScrollTo, this)) {
             scrollToChild(mChildToScrollTo);
         }
         mChildToScrollTo = null;
 
-        // Calling this with the present values causes it to re-clam them
-        scrollTo(getScrollX(), getScrollY());
+                scrollTo(getScrollX(), getScrollY());
     }
 
     @Override
@@ -1451,10 +1130,7 @@ public class HVScrollView extends FrameLayout {
         if (null == currentFocused || this == currentFocused)
             return;
 
-        // If the currently-focused view was visible on the screen when the
-        // screen was at the old height, then scroll the screen to make that
-        // view visible with the new screen height.
-        if (isWithinDeltaOfScreenV(currentFocused, 0, oldh)) {
+                                if (isWithinDeltaOfScreenV(currentFocused, 0, oldh)) {
             currentFocused.getDrawingRect(mTempRect);
             offsetDescendantRectToMyCoords(currentFocused, mTempRect);
             int scrollDelta = computeScrollDeltaToGetChildRectOnScreenV(mTempRect);
@@ -1470,10 +1146,7 @@ public class HVScrollView extends FrameLayout {
         }
     }
 
-    /**
-     * Return true if child is an descendant of parent, (or equal to the
-     * parent).
-     */
+
     private boolean isViewDescendantOf(View child, View parent) {
         if (child == parent) {
             return true;
@@ -1483,13 +1156,7 @@ public class HVScrollView extends FrameLayout {
         return (theParent instanceof ViewGroup) && isViewDescendantOf((View) theParent, parent);
     }
 
-    /**
-     * Fling the scroll view
-     *
-     * @param velocityY The initial velocity in the Y direction. Positive numbers mean
-     *                  that the finger/cursor is moving down the screen, which means
-     *                  we want to scroll towards the top.
-     */
+
     public void fling(int velocityX, int velocityY) {
         if (getChildCount() > 0) {
             int width = getWidth() - getPaddingRight() - getPaddingLeft();
@@ -1501,36 +1168,15 @@ public class HVScrollView extends FrameLayout {
             mScroller.fling(getScrollX(), getScrollY(), velocityX, velocityY, 0, Math.max(0, right - width),
                     0, Math.max(0, bottom - height));
 
-            // final boolean movingDown = velocityX > 0 || velocityY > 0;
-            //
-            // View newFocused =
-            // findFocusableViewInMyBoundsV(movingDown, mScroller.getFinalY(),
-            // findFocus());
-            // if (newFocused == null) {
-            // newFocused = this;
-            // }
-            //
-            // if (newFocused != findFocus()
-            // && newFocused.requestFocus(movingDown ? View.FOCUS_DOWN :
-            // View.FOCUS_UP)) {
-            // mScrollViewMovedFocus = true;
-            // mScrollViewMovedFocus = false;
-            // }
 
             invalidate();
         }
     }
 
-    /**
-     * {@inheritDoc}
-     * <p>
-     * <p>
-     * This version also clamps the scrolling to the bounds of our child.
-     */
+
     @Override
     public void scrollTo(int x, int y) {
-        // we rely on the fact the View.scrollBy calls scrollTo.
-        if (getChildCount() > 0) {
+                if (getChildCount() > 0) {
             View child = getChildAt(0);
             x = clamp(x, getWidth() - getPaddingRight() - getPaddingLeft(), child.getWidth());
             y = clamp(y, getHeight() - getPaddingBottom() - getPaddingTop(), child.getHeight());
@@ -1542,22 +1188,11 @@ public class HVScrollView extends FrameLayout {
 
     private int clamp(int n, int my, int child) {
         if (my >= child || n < 0) {
-            /*
-             * my >= child is this case: |--------------- me ---------------|
-             * |------ child ------| or |--------------- me ---------------|
-             * |------ child ------| or |--------------- me ---------------|
-             * |------ child ------|
-             *
-             * n < 0 is this case: |------ me ------| |-------- child --------|
-             * |-- mScrollX --|
-             */
+
             return 0;
         }
         if ((my + n) > child) {
-            /*
-             * this case: |------ me ------| |------ child ------| |-- mScrollX
-             * --|
-             */
+
             return child - my;
         }
         return n;

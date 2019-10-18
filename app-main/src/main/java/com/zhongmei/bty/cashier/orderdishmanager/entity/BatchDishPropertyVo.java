@@ -6,10 +6,7 @@ import com.zhongmei.bty.cashier.shoppingcart.vo.PropertyGroupVo;
 
 import java.util.List;
 
-/**
- * 批量菜品公共口味做法加料等
- * Created by demo on 2018/12/15
- */
+
 
 public class BatchDishPropertyVo {
 

@@ -7,19 +7,15 @@ import org.json.JSONObject;
 
 import com.google.gson.Gson;
 
-/**
 
- */
 public class JsonUtil {
-    // 对象转换为JSON字符串
-    public synchronized static String objectToJson(Object object) {
+        public synchronized static String objectToJson(Object object) {
         Gson gson = new Gson();
         String json = gson.toJson(object);
         return json;
     }
 
-    // JSON字符串转换为对象
-    public synchronized static <T> T jsonToObject(String json, Class<T> c) {
+        public synchronized static <T> T jsonToObject(String json, Class<T> c) {
         Gson gson = new Gson();
         return gson.fromJson(json, c);
     }

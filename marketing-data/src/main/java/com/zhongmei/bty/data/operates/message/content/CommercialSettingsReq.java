@@ -4,9 +4,7 @@ import com.zhongmei.bty.basemodule.commonbusiness.entity.CommercialCustomSetting
 
 import java.util.List;
 
-/**
- * 门店设置请求体
- */
+
 public class CommercialSettingsReq {
     List<CommercialCustomSettings> settingItems;
 

@@ -10,9 +10,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "trade_buffet_people")
 public class TradeBuffetPeople extends BasicEntityBase implements Cloneable, ICreator, IUpdator {
 

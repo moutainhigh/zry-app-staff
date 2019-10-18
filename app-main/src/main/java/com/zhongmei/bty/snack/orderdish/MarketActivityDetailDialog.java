@@ -23,13 +23,7 @@ import com.zhongmei.bty.basemodule.discount.enums.UserType;
 import com.zhongmei.bty.basemodule.discount.bean.MarketRuleVo;
 import com.zhongmei.yunfu.util.MathDecimal;
 
-/**
- * @Date： 16/4/28
- * @Description: 活动详情
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class MarketActivityDetailDialog extends BasicDialogFragment {
 
     private MarketRuleVo mRuleVo;
@@ -73,31 +67,25 @@ public class MarketActivityDetailDialog extends BasicDialogFragment {
             }
         });
         if (mRuleVo != null) {
-            // 活动名称
-            mName.setText(mRuleVo.getMarketPlan().getPlanName());
-            // 类型
-            String condition = "";
+                        mName.setText(mRuleVo.getMarketPlan().getPlanName());
+                        String condition = "";
             switch (mRuleVo.getPromotionType()) {
-                case MINUS: // 满减
-                    mType.setText(R.string.full_cut);
+                case MINUS:                     mType.setText(R.string.full_cut);
 
                     if (mRuleVo.getMarketActivityRule().getPayment() != null)
                         condition += getString(R.string.full) + MathDecimal.trimZero(mRuleVo.getMarketActivityRule().getPayment());
                     if (mRuleVo.getMarketActivityRule().getReduce() != null)
                         condition += getString(R.string.cut) + MathDecimal.trimZero(mRuleVo.getMarketActivityRule().getReduce());
                     break;
-                case DISCOUNT: // 折扣
-                    mType.setText(R.string.discount);
+                case DISCOUNT:                     mType.setText(R.string.discount);
                     if (mRuleVo.getMarketActivityRule().getName() != null)
                         condition = mRuleVo.getMarketActivityRule().getName();
                     break;
-                case GIFT: // 赠送
-                    mType.setText(R.string.give);
+                case GIFT:                     mType.setText(R.string.give);
                     if (mRuleVo.getMarketActivityRule().getName() != null)
                         condition = mRuleVo.getMarketActivityRule().getName();
                     break;
-                case SPECAILPRICE: // 特价
-                    mType.setText(R.string.special_price);
+                case SPECAILPRICE:                     mType.setText(R.string.special_price);
                     if (mRuleVo.getMarketActivityRule().getName() != null)
                         condition = mRuleVo.getMarketActivityRule().getName();
                     break;
@@ -105,11 +93,9 @@ public class MarketActivityDetailDialog extends BasicDialogFragment {
                     break;
             }
             mCondition.setText(condition);
-            // 活动日期
-            mDate.setText(mRuleVo.getMarketPlan().getPlanStartDay() + "-" + mRuleVo.getMarketPlan().getPlanEndDay());
+                        mDate.setText(mRuleVo.getMarketPlan().getPlanStartDay() + "-" + mRuleVo.getMarketPlan().getPlanEndDay());
         }
-        // 时间段
-        String time = "";
+                String time = "";
         if (mRuleVo.getMarketActivityRule().getPeriodStart() != null)
             time += mRuleVo.getMarketActivityRule().getPeriodStart();
         if (mRuleVo.getMarketActivityRule().getPeriodEnd() != null)
@@ -117,8 +103,7 @@ public class MarketActivityDetailDialog extends BasicDialogFragment {
 
         mTime.setText(time);
 
-        // 参与人群
-        String customer = "";
+                String customer = "";
         if (mRuleVo.isContainsUserType(UserType.MEMBER)) {
             customer += getString(R.string.customer_member);
         }
@@ -129,8 +114,7 @@ public class MarketActivityDetailDialog extends BasicDialogFragment {
         }
 
         mCustomer.setText(customer);
-        // 单据类型
-        String deliveryType = "";
+                String deliveryType = "";
         if (mRuleVo.isContainsDeliveryType(DeliveryType.HERE)) {
             deliveryType += getString(R.string.order_here);
         }
@@ -150,8 +134,7 @@ public class MarketActivityDetailDialog extends BasicDialogFragment {
             else deliveryType += "、" + getString(R.string.packup);
         }
         mDeliveryType.setText(deliveryType);
-        // 活动终端
-        List<Integer> pos = mRuleVo.getActivityPos();
+                List<Integer> pos = mRuleVo.getActivityPos();
         String activityPos = "";
         if (pos != null) {
             if (pos.contains(1)) {

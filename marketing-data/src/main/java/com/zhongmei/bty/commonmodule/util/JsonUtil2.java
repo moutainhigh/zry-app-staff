@@ -11,12 +11,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
 
- */
 public class JsonUtil2 {
-    // 对象转换为JSON字符串
-    static Gson gson;
+        static Gson gson;
 
     public synchronized static String objectToJson(Object object) {
 
@@ -26,8 +23,7 @@ public class JsonUtil2 {
         return json;
     }
 
-    // 深度复制obj列表
-    public synchronized static <T> List<T> deepCopyObjectList(List<T> objList, Type type) {
+        public synchronized static <T> List<T> deepCopyObjectList(List<T> objList, Type type) {
         if (gson == null)
             gson = new Gson();
         return jsonToObject(objectToJson(objList), type);
@@ -40,22 +36,19 @@ public class JsonUtil2 {
         }.getType());
     }
 
-    // 深度复制obj
-    public synchronized static <T> T deepCopyObject(T obj, Class<T> c) {
+        public synchronized static <T> T deepCopyObject(T obj, Class<T> c) {
         if (gson == null)
             gson = new Gson();
         return jsonToObject(objectToJson(obj), c);
     }
 
-    // JSON字符串转换为对象
-    public synchronized static <T> T jsonToObject(String json, Class<T> c) {
+        public synchronized static <T> T jsonToObject(String json, Class<T> c) {
         if (gson == null)
             gson = new Gson();
         return gson.fromJson(json, c);
     }
 
-    // JSON字符串转换为对象,主要使用场景是具有泛型特性
-    public synchronized static <T> T jsonToObject(String json, Type type) {
+        public synchronized static <T> T jsonToObject(String json, Type type) {
         if (gson == null)
             gson = new Gson();
         return gson.fromJson(json, type);

@@ -117,75 +117,56 @@ import de.greenrobot.event.EventBus;
 
 import static com.zhongmei.yunfu.db.enums.BusinessType.DINNER;
 
-/**
- * @date:2015年9月14日下午5:25:02 结算左侧显示界面
- */
+
 @EFragment(R.layout.fragment_dinner_paymain_left)
 public class PayMainLeftFragment extends MobclickAgentFragment {
 
     private static final String TAG = PayMainLeftFragment.class.getSimpleName();
-    //默认界面
-    private static final int DEFAULT_MODE = 1;
-    //拆单界面
-    private static final int SPLIT_MODE = 2;
+        private static final int DEFAULT_MODE = 1;
+        private static final int SPLIT_MODE = 2;
 
-    //当前所处的界面模式
-    private int mCurrentMode = DEFAULT_MODE;
+        private int mCurrentMode = DEFAULT_MODE;
 
-    // 移除所有的折扣
-    private final int FLAG_REMOVE_ALLDISCOUNT = 3;
+        private final int FLAG_REMOVE_ALLDISCOUNT = 3;
 
-    private final int FLAG_REMOVE_COUPON = 1;// 移除优惠劵
-
-    private final int FLAG_REMOVE_INTEGRAL = 2;// 移除积分
-
-    private final int FLAG_REMOVE_GIFT_COUPON = 4;// 移除礼品劵
-
-    private final int FLAG_REMOVE_WEIXINCODE_COUPON = 5;//移除微信卡劵
-
+    private final int FLAG_REMOVE_COUPON = 1;
+    private final int FLAG_REMOVE_INTEGRAL = 2;
+    private final int FLAG_REMOVE_GIFT_COUPON = 4;
+    private final int FLAG_REMOVE_WEIXINCODE_COUPON = 5;
     @ViewById(R.id.dinner_balance_back)
     ImageButton btn_back;
 
     @ViewById(R.id.tv_table_name)
     TextView tvTableName;
 
-    // 价格
-    @ViewById(R.id.dinner_balance_price)
+        @ViewById(R.id.dinner_balance_price)
     TextView txt_price;
 
     @ViewById(R.id.buffet_orgin_price)
     TextView tvOrignPrice;
 
-//    @ViewById(R.id.dinner_balance_add)
-//    Button btn_add;
 
-    // 菜品显示的view
-    @ViewById(R.id.dinner_balance_ticket_list)
+        @ViewById(R.id.dinner_balance_ticket_list)
     SwipeMenuListView mSwipeListView;
 
     @ViewById(R.id.tv_select_all)
     TextView tvSelectAll;
 
-    // 清空折扣按钮btn_cl
-    Button btn_clean;
+        Button btn_clean;
 
     @ViewById(R.id.dinner_balance_main)
     LinearLayout mainLayout;
 
-    // 营销活动check操作栏
-    @ViewById(R.id.marketing_campaign_operate_ll)
+        @ViewById(R.id.marketing_campaign_operate_ll)
     LinearLayout marketingCampaignOperateLL;
 
-    //清空支付单
-    @ViewById(R.id.dinner_invert_selection_btn)
+        @ViewById(R.id.dinner_invert_selection_btn)
     Button btn_invert;
 
-    // 取消选择
-    @ViewById(R.id.cancel_choose_dish_btn)
+        @ViewById(R.id.cancel_choose_dish_btn)
     Button cancelChooseDishBtn;
 
-    // 加入活动
-    @ViewById(R.id.cancel_choose_dish_btn)
+        @ViewById(R.id.cancel_choose_dish_btn)
     Button okChooseDishBtn;
 
     @ViewById(R.id.have_no_dish_layout)
@@ -195,8 +176,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
     View haveNoDishImage;
 
     @ViewById(R.id.goods_total_number)
-    TextView allDishCountTV;//商品总数
-
+    TextView allDishCountTV;
     @ViewById(R.id.tv_pay_label)
     TextView tvPayLabel;
 
@@ -205,54 +185,38 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
     View bottomView;
 
     private Context mContext;
-    //原单购物车
-    private DinnerShoppingCart mShoppingCart;
-    //拆单购物车
-    private SeparateShoppingCart mSepShoppingCart;
+        private DinnerShoppingCart mShoppingCart;
+        private SeparateShoppingCart mSepShoppingCart;
     private List<IShopcartItem> mListOrderDishshopVo = null;
 
     private ArrayList<IShopcartItemBase> listDishData = new ArrayList<IShopcartItemBase>();
 
-    // 购物车所选商品
-    private TradeVo mTradeVo = null;
+        private TradeVo mTradeVo = null;
 
     private DinnerBanlanceAdapter selectedDishAdapter;
 
     private String totalPrice = "";
 
-    // 是否所有的菜品选择
-    private boolean isAllSelect = false;
+        private boolean isAllSelect = false;
 
-    // 是否是批量折扣模式
-    private boolean isBatchDiscountMode = false;
+        private boolean isBatchDiscountMode = false;
 
-    // 积分优化劵移除变量
-    private boolean isRemove = false;
+        private boolean isRemove = false;
 
-    // 是否在批量赠送界面
-    //private boolean isBatchFreeMode = false;
 
     private TradeOperates mTradeOperates;
 
-    private MarketRuleVo marketRuleVo;// 选择模式对应的营销活动
-
+    private MarketRuleVo marketRuleVo;
     private View tv_split, tv_print;
     private boolean isDoDelete;
 
-    /* private TradeVo mSourceTradeVo;
 
-     private boolean isOrderCenter;*/
-    //是否正在拆单中
-    private boolean isSpliting = false;
-    //是否是二维码保存中
-    private boolean isBarCodeSaving = false;
+        private boolean isSpliting = false;
+        private boolean isBarCodeSaving = false;
 
     private DinnerCashManager dinnerCashManager;
-    //是否是初始化
-    private boolean isInit = true;
-    private int localPrepayPrintCount = 0;//本机打印预结单次数
-    //是否在分布支付中，或者
-    private boolean isPaying = false;
+        private boolean isInit = true;
+    private int localPrepayPrintCount = 0;        private boolean isPaying = false;
 
     private boolean enableSplitTrade = true;
 
@@ -260,9 +224,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
-        /*if (getArguments() != null) {
-            isOrderCenter = getArguments().getBoolean("isOrderCenter");
-        }*/
+
         if (mTradeOperates == null)
             mTradeOperates = OperatesFactory.create(TradeOperates.class);
         mShoppingCart = DinnerShopManager.getInstance().getShoppingCart();
@@ -308,14 +270,10 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         initBottom();
         registerOldListener();
         this.registerEventBus();
-        //if (mLoadingFinish != null) {
-        //    mLoadingFinish.loadingFinish();
-        //}
-        onMInit();
+                                onMInit();
     }
 
-    //    @Override
-    protected void onMInit() {
+        protected void onMInit() {
         initAdapter();
         setTableName();
         calPrice(mListOrderDishshopVo, mTradeVo);
@@ -329,8 +287,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         updateEnableSplit(this.enableSplitTrade);
     }
 
-    //add v8.5 for openflatform
-    public void setEnableSplitTrade(boolean enableSplitTrade) {
+        public void setEnableSplitTrade(boolean enableSplitTrade) {
         this.enableSplitTrade = enableSplitTrade;
 
     }
@@ -342,11 +299,8 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
             tv_split.setVisibility(View.GONE);
         }
     }
-    //add v8.5 for openflatform
 
-    /**
-     * 设置结账界面的桌台名称
-     */
+
     private void setTableName() {
         DinnertableTradeInfo info = mShoppingCart.getDinnertableTradeInfo();
         if (info != null && info.getTradeVo() != null && Utils.isNotEmpty(info.getTradeVo().getTradeTableList())) {
@@ -367,20 +321,17 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
     private void initShoppingcartData() {
         mListOrderDishshopVo = mShoppingCart.mergeShopcartItem(mShoppingCart.getShoppingCartVo());
-//        mListOrderDishshopVo = mShoppingCart.filterDishList(mListOrderDishshopVo, false);
         mTradeVo = mShoppingCart.getOrder();
     }
 
-    //更新商品总数 yutang add 20160809 start
-    private void updateAllDishCount() {
+        private void updateAllDishCount() {
         if (selectedDishAdapter == null) {
             return;
         }
         selectedDishAdapter.updateCountView(getActivity(), allDishCountTV);
     }
 
-    //滑动到购物车底部
-    private void gotoListViewBottom() {
+        private void gotoListViewBottom() {
         if (isInit) {
             return;
         }
@@ -388,12 +339,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
             mSwipeListView.setSelection(selectedDishAdapter.getCount() - 1);
     }
 
-    /**
-     * 默认显示模式
-     *
-     * @Title: goDisplayMode
-     * @Return void 返回类型
-     */
+
     private void goDefaultDisplayMode(boolean isInit) {
         mCurrentMode = DEFAULT_MODE;
         isSpliting = false;
@@ -409,10 +355,8 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
         btn_clean.setVisibility(View.GONE);
         selectedDishAdapter.setDiscountModleNoNotify(isBatchDiscountMode);
-//        selectedDishAdapter.setShowWake(false);
         selectedDishAdapter.setShowRightAnchor(false);
         selectedDishAdapter.setIsDiscountAll(false);
-//        selectedDishAdapter.setDishItemCanDelete(false);
         selectedDishAdapter.isShowMemeberDiscount(true);
         selectedDishAdapter.setCanRemoveMarketActivity(true);
         if (marketingCampaignOperateLL.getVisibility() == View.VISIBLE) {
@@ -424,9 +368,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         setSelectBtn(false);
     }
 
-    /**
-     * 拆单界面
-     */
+
     private void goSplitMode() {
         bindMenuListener(true);
         DinnerShopManager.getInstance().setSepartShopCart(true);
@@ -440,8 +382,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         selectedDishAdapter.setDiscountModleNoNotify(false);
         registerListener();
         updateAllDishCount();
-        //从默认购物车进入拆单模式时
-        if (mCurrentMode != SPLIT_MODE) {
+                if (mCurrentMode != SPLIT_MODE) {
             dinnerCashManager.copyDinnerToSepart();
         }
         updateData(mSepShoppingCart.getShoppingCartItems(), mSepShoppingCart.getOrder(), true);
@@ -450,9 +391,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
     }
 
 
-    /**
-     * 默认不显示折扣模式,控制折扣选择框后界面的显示
-     */
+
     private void goDefaultDiscountMode() {
         if (tvSelectAll.isShown()) {
             tvSelectAll.setVisibility(View.GONE);
@@ -462,18 +401,12 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         selectedDishAdapter.setIsDiscountAll(false);
         if (mCurrentMode == DEFAULT_MODE) {
             selectedDishAdapter.setDishCheckMode(false);
-//            selectedDishAdapter.setDishItemCanDelete(false);
         }
         selectedDishAdapter.setDiscountModle(isBatchDiscountMode);
         setSelectBtn(false);
     }
 
-    /**
-     * 批量打折模式
-     *
-     * @Title: goBatchDiscountMode
-     * @Return void 返回类型
-     */
+
     private void goBatchDiscountMode() {
         tvSelectAll.setVisibility(View.VISIBLE);
         btn_clean.setVisibility(View.VISIBLE);
@@ -482,11 +415,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         selectedDishAdapter.setDiscountModle(isBatchDiscountMode);
     }
 
-    /**
-     * @Title: goAllDiscountMode
-     * @Description: 整单折扣模式
-     * @Return void 返回类型
-     */
+
     private void goAllDiscountMode() {
         tvSelectAll.setVisibility(View.GONE);
         btn_clean.setVisibility(View.VISIBLE);
@@ -519,14 +448,12 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         if (tv_split == null) {
             return;
         }
-        //联台主单不能拆单,交了预定金不能拆单
-        if (mTradeVo != null && (mTradeVo.isUnionMainTrade() || mTradeVo.getTradeEarnestMoney() > 0)) {
+                if (mTradeVo != null && (mTradeVo.isUnionMainTrade() || mTradeVo.getTradeEarnestMoney() > 0)) {
             tv_split.setVisibility(View.GONE);
             return;
         }
 
-        //自助单独处理  mTradeVo!=null && mTradeVo.getTrade().getBusinessType() == BusinessType.BUFFET && mTradeVo.getMealShellVo()!=null
-        if (isPaying || mTradeVo != null && mTradeVo.getTrade().getBusinessType() == BusinessType.BUFFET && mTradeVo.getMealShellVo() != null) {
+                if (isPaying || mTradeVo != null && mTradeVo.getTrade().getBusinessType() == BusinessType.BUFFET && mTradeVo.getMealShellVo() != null) {
             tv_print.setBackgroundResource(R.drawable.btn_blue_selector);
             tv_split.setBackgroundResource(R.drawable.btn_gray_disabled_shape);
             tv_split.setEnabled(false);
@@ -552,8 +479,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         if (mTradeVo != null && mTradeVo.getTrade() != null) {
             switch (mTradeVo.getTrade().getBusinessType()) {
                 case BUFFET:
-                    //mTradeVo.setMinConsum(BuffetManager.getMinConsum(mTradeVo));
-                    selectedDishAdapter = new BuffetBanlanceAdapter(mContext);
+                                        selectedDishAdapter = new BuffetBanlanceAdapter(mContext);
                     selectedDishAdapter.updateOutTimeFeeItem(mTradeVo);
                     selectedDishAdapter.updateMinconsum(mTradeVo);
                     break;
@@ -572,12 +498,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
     }
 
 
-    /**
-     * 注册item事件
-     *
-     * @Title: bindItemListener
-     * @Return void 返回类型
-     */
+
     private void bindItemListener(boolean isEnabled) {
         if (!isEnabled) {
             return;
@@ -590,12 +511,10 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                     if (dishDataItem == null || dishDataItem.getBase() == null) {
                         return;
                     }
-                    // 已下单的子菜，不允许操作
-                    if (dishDataItem.getBase() instanceof ReadonlySetmealShopcartItem) {
+                                        if (dishDataItem.getBase() instanceof ReadonlySetmealShopcartItem) {
                         return;
                     }
-                    // 未打印出单的就被删除的菜，不能做任何操作
-                    if (TextUtils.isEmpty(dishDataItem.getBase().getBatchNo())
+                                        if (TextUtils.isEmpty(dishDataItem.getBase().getBatchNo())
                             && dishDataItem.getBase().getStatusFlag() == StatusFlag.INVALID
                             && dishDataItem.getBase().getInvalidType() != InvalidType.SPLIT) {
                         return;
@@ -605,10 +524,8 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                         return;
                     }
                     if (isBatchDiscountMode) {
-                        //针对批量折扣点击处理
-                        selectedDishAdapter.doEditModeItemClick(dishDataItem, position);
+                                                selectedDishAdapter.doEditModeItemClick(dishDataItem, position);
                     } else if (selectedDishAdapter.isDishCheckMode()) {
-//                        针对营销活动点击处理
                         if (dishDataItem.getCheckStatus() == DishCheckStatus.CHECKED) {
                             dishDataItem.setCheckStatus(DishCheckStatus.NOT_CHECK);
                             selectedDishAdapter.notifyDataSetChanged();
@@ -625,12 +542,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         });
     }
 
-    /**
-     * 注册滑动删除事件
-     *
-     * @Title: bindMenuListener
-     * @Return void 返回类型
-     */
+
     private void bindMenuListener(boolean isEnabled) {
         mSwipeListView.setOnMenuItemClickListener(new OnMenuItemClickListener() {
             @Override
@@ -641,12 +553,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         });
     }
 
-    /**
-     * 删除item项
-     *
-     * @Title: deleteItem
-     * @Param @param position
-     */
+
     private void deleteItem(int position) {
         final DishDataItem dishDataItem = selectedDishAdapter.getItem(position);
         if (dishDataItem == null) {
@@ -662,8 +569,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                 case EXCISE_TAX:
                     ToastUtil.showLongToast(R.string.tax_cannot_delete);
                     break;
-                // 优惠券
-                case COUPONS:
+                                case COUPONS:
                     if (dishDataItem.getCouponPrivilegeVo().isUsed()) {
                         ToastUtil.showLongToast(R.string.dinner_privilege_used);
                         return;
@@ -671,8 +577,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                     DinnerShopManager.getInstance().getShoppingCart().removeCouponPrivilege(dishDataItem.getCouponPrivilegeVo(), true);
                     sendCouponAction(dishDataItem.getCouponPrivilegeVo());
                     break;
-                // 积分
-                case INTERGRAL:
+                                case INTERGRAL:
                     if (dishDataItem.getIntegralCashPrivilegeVo().isUsed()) {
                         ToastUtil.showLongToast(R.string.dinner_privilege_used);
                         return;
@@ -680,8 +585,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                     DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();
                     sendIntegralAction();
                     break;
-                // 微信卡券
-                case WECHAT_CARD_COUPONS:
+                                case WECHAT_CARD_COUPONS:
                     if (dishDataItem.getWeiXinCouponsVo() != null
                             && dishDataItem.getWeiXinCouponsVo().getmTradePrivilege() != null) {
                         if (dishDataItem.getWeiXinCouponsVo().isUsed()) {
@@ -701,8 +605,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                         if (tradePrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
                                 && tradePrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
                                 && tradePrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
-                            // 如果是会员登录并且移除的不是会员折扣 恢复会员折扣
-                            if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
+                                                        if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
                                 DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(shopcartItem, true, true);
                             }
                         }
@@ -713,8 +616,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                 case COMBO_MEMO:
                 case ALL_MEMO:
                     break;
-                // 整单折扣移除
-                case ALL_DISCOUNT:
+                                case ALL_DISCOUNT:
                     DinnerShopManager.getInstance().getShoppingCart().removeOrderPrivilege();
                     break;
                 case CHARGE_PRIVILEGE:
@@ -725,10 +627,8 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                     if (extraCharge != null) {
                         if (extraCharge.getCode().equals(ExtraManager.BUFFET_OOUTTIME_CODE)) {
                             ToastUtil.showShortToast(R.string.buffet_outtimefee_delete);
-//                            DinnerShopManager.getInstance().getShoppingCart().removeOutTimePrivilege(dishDataItem.getTradePlanActivityUuid());
                         } else if (extraCharge.getCode().equals(ExtraManager.BUFFET_MIN_CONSUM)) {
-                            //mTradeVo.setEnableMinConsum(false);
-                            DinnerShopManager.getInstance().getShoppingCart().removeMinconsumExtra();
+                                                        DinnerShopManager.getInstance().getShoppingCart().removeMinconsumExtra();
                         } else if (extraCharge.getCode().equals(ExtraManager.SERVICE_CONSUM)) {
                             ToastUtil.showShortToast(R.string.server_consum_delete);
                         } else {
@@ -739,17 +639,14 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                 case SERVICE:
                     ToastUtil.showShortToast(R.string.server_consum_delete);
                     break;
-                case BANQUET_PRIVILIGE://移除宴请
-                    DinnerShopManager.getInstance().getShoppingCart().removeBanquet();
+                case BANQUET_PRIVILIGE:                    DinnerShopManager.getInstance().getShoppingCart().removeBanquet();
                     break;
                 case GIFT_COUPON:
-                    //移除礼品劵
-                    IShopcartItem item = dishDataItem.getItem();
+                                        IShopcartItem item = dishDataItem.getItem();
                     if (item != null && item.getCouponPrivilegeVo() != null && item.getCouponPrivilegeVo().getTradePrivilege() != null) {
                         ShoppingCartVo shoppingCartVo = DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo();
                         DinnerShopManager.getInstance().getShoppingCart().removeGiftCouponePrivilege(item.getCouponPrivilegeVo().getTradePrivilege().getPromoId(), shoppingCartVo, true);
-                        // 移除礼品劵后,恢复会员折扣
-                        if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
+                                                if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
                             DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(item, true, true);
                         }
                         ActionSeparateDeleteCoupon coupon = new ActionSeparateDeleteCoupon();
@@ -759,9 +656,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                     break;
                 case SINGLE:
                 case COMBO:
-                    // 这一项要在最后
-                    // 将菜品状态设置为未拆单
-                    DinnerShoppingCart.getInstance()
+                                                            DinnerShoppingCart.getInstance()
                             .resetSeparateDish(dishDataItem.getItem().getRelateTradeItemUuid());
                     mSepShoppingCart.removeShoppingCart(dishDataItem.getItem());
                     DinnerShopManager.getInstance().checkTradeIsNegative(mSepShoppingCart.getOrder(), dishDataItem.getItem(), getFragmentManager());
@@ -771,14 +666,12 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                     if (dishDataItem.isPaid()) {
                         ToastUtil.showShortToast(R.string.buffet_deposit_paid_not_delete);
                     } else {
-                        DinnerShopManager.getInstance().getShoppingCart().removeDeposit();//移除押金
-                    }
+                        DinnerShopManager.getInstance().getShoppingCart().removeDeposit();                    }
 
                     break;
             }
         } else {
-            // 将菜品状态设置为未拆单
-            DinnerShoppingCart.getInstance().resetSeparateDish(dishDataItem.getItem().getRelateTradeItemUuid());
+                        DinnerShoppingCart.getInstance().resetSeparateDish(dishDataItem.getItem().getRelateTradeItemUuid());
             mSepShoppingCart.removeShoppingCart(dishDataItem.getItem());
             DinnerShopManager.getInstance().checkTradeIsNegative(mShoppingCart.getOrder(), dishDataItem.getItem(), getFragmentManager());
             initShoppingcartData();
@@ -806,11 +699,9 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
             switch (v.getId()) {
                 case R.id.dinner_balance_tosplit_layout:
                     if (selectedDishAdapter == null) {
-                        //未初始化完成，不允许拆单
-                        return;
+                                                return;
                     }
-                    //团餐不允许拆单
-                    if (mTradeVo.getTrade().getBusinessType() == BusinessType.GROUP) {
+                                        if (mTradeVo.getTrade().getBusinessType() == BusinessType.GROUP) {
                         ToastUtil.showLongToast(R.string.group_cannot_split);
                         return;
                     }
@@ -818,8 +709,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                         ToastUtil.showLongToast(R.string.dinner_opentable_unfinished);
                         return;
                     }
-                    //自助餐不允许拆单
-                    if (mTradeVo.getTrade().getBusinessType() == BusinessType.BUFFET) {
+                                        if (mTradeVo.getTrade().getBusinessType() == BusinessType.BUFFET) {
                         ToastUtil.showLongToast(R.string.buffet_cannot_split);
                         return;
                     }
@@ -840,8 +730,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
                                 @Override
                                 public void onPositive(User user, String code, Auth.Filter filter) {
-                                    //modiyf begin 20170608 拆单先保存原单
-                                    ResponseListener<TradeResp> listener = new ResponseListener<TradeResp>() {
+                                                                        ResponseListener<TradeResp> listener = new ResponseListener<TradeResp>() {
 
                                         @Override
                                         public void onResponse(ResponseObject<TradeResp> response) {
@@ -862,12 +751,10 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
                                                 protected void onPostExecute(TradeVo vo) {
                                                     try {
-                                                        //先把原单会员拿出来，等reset方法玩了以后再放回去（临时方案，后续需要优化）
-                                                        CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
+                                                                                                                CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
                                                         DinnerShoppingCart.getInstance().updateDataFromTradeVo(vo, true);
                                                         CustomerManager.getInstance().setDinnerLoginCustomer(customer);
-                                                        //进入拆单模式
-                                                        goSplitMode();
+                                                                                                                goSplitMode();
 
                                                         noticeRefreshCustomerUI(getActivity(), false);
                                                     } catch (Exception e) {
@@ -882,17 +769,14 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                                             ToastUtil.showLongToast(error.getMessage());
                                         }
                                     };
-                                    //首次点拆单按钮要保存原订单，修改拆单时不用保存
-                                    if (!DinnerShopManager.getInstance().isSepartShopCart()) {
+                                                                        if (!DinnerShopManager.getInstance().isSepartShopCart()) {
                                         mTradeOperates.modifyDinner(mShoppingCart.createOrder(), LoadingResponseListener.ensure(listener, PayMainLeftFragment.this.getChildFragmentManager()));
                                     } else {
-                                        //进入拆单模式
-                                        goSplitMode();
+                                                                                goSplitMode();
 
                                         noticeRefreshCustomerUI(getActivity(), false);
                                     }
-                                    //modiyf end 20170608 拆单先保存原单
-                                }
+                                                                    }
                             });
                     break;
                 case R.id.rl_pay_print:
@@ -910,43 +794,24 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                             DinnerShopManager.getInstance().localPrepayPrintCountPlus(tradeUuid);
                         }
 
-                        //判断本机是否允许多次打印预结单
-                        boolean allowMultiPrepayticket = SpHelper.getDefault().getBoolean(Constant.ALLOW_MULTI_PREPAY_TICKET, true);
+                                                boolean allowMultiPrepayticket = SpHelper.getDefault().getBoolean(Constant.ALLOW_MULTI_PREPAY_TICKET, true);
                         if (!allowMultiPrepayticket) {
                             if (localPrepayPrintCount > 0) {
                                 ToastUtil.showShortToast(R.string.not_allow_multi_prepay_ticket);
                                 return;
                             }
                             if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getId() != null) {
-                                /*Long tradeId = tradeVo.getTrade().getId();
-                                //PrintOperationDal printOperationDal = OperatesFactory.create(PrintOperationDal.class);
-                                try {
-                                    List<PrintOperation> prepayOperations = printOperationDal.findPrepayOperationForTrade(tradeId);
-                                    if (Utils.isNotEmpty(prepayOperations)) {
-                                        ToastUtil.showShortToast(R.string.not_allow_multi_prepay_ticket);
-                                        return;
-                                    }
-                                } catch (Exception e) {
-                                    Log.e(TAG, e.getMessage(), e);
-                                }*/
+
                             }
                         }
-                        //联台主单本地打印
-                        if (tradeVo != null && tradeVo.isUnionMainTrade()) {
+                                                if (tradeVo != null && tradeVo.isUnionMainTrade()) {
                             TradeVo printVo = DinnerShopManager.getInstance().getShoppingCart().createOrder();
-                            /*PrintOperationOperates printOperationOperates = OperatesFactory.create(PrintOperationOperates.class);
-                            if (tradeVo.getTrade().getBusinessType() == BusinessType.BUFFET) {//add v9.0
-                                printVo = BuffetMergeUnionManager.createBuffeUnionGroupDishParent(printVo);//构建餐标打印
-                            }*/
-                            //DinnerShopManager.getInstance().doWillPayPrint(mListOrderDishshopVo, getActivity(), printOperationOperates, printVo);
-                            return;
+
+                                                        return;
                         }
-                        //modiyf begin 20170608 打印预结单先保存原单
-                        //如果是原单
-                        if (!DinnerShopManager.getInstance().isSepartShopCart()) {
+                                                                        if (!DinnerShopManager.getInstance().isSepartShopCart()) {
                             if (tradeVo != null && tradeVo.getTrade() != null) {
-                                //如果没开台提示先开台
-                                if (tradeVo.getTrade().getId() == null) {
+                                                                if (tradeVo.getTrade().getId() == null) {
                                     ToastUtil.showShortToast(R.string.open_table_please);
                                     return;
                                 }
@@ -974,21 +839,14 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                                     mTradeOperates.modifyDinner(newTradeVo, LoadingResponseListener.ensure(listener, PayMainLeftFragment.this.getChildFragmentManager()));
                                 }
                             }
-                        } else { //拆单
-                            // 打印预结单
-                            //TradeVo printVo = SeparateShoppingCart.getInstance().createSeparateOrder();
-                            //PrintOperationOperates printOperationOperates = OperatesFactory.create(PrintOperationOperates.class);
-                            //DinnerShopManager.getInstance().doWillPayPrint(mListOrderDishshopVo, getActivity(), printOperationOperates, printVo);
-                        }
-                        //modiyf end 20170608 打印预结单先保存原单
-                    }
+                        } else {                                                                                                                                         }
+                                            }
                     break;
                 case R.id.dinner_balance_back:
                     doBack();
                     break;
                 case R.id.btn_clean:
-                    // 移除所有的优惠
-                    if (isPaying) {
+                                        if (isPaying) {
                         return;
                     }
                     MobclickAgentEvent.onEvent(UserActionCode.ZC030012);
@@ -997,8 +855,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                     DinnerShopManager.getInstance().getShoppingCart().removeAllItemsPrivilege();
                     break;
                 case R.id.dinner_invert_selection_btn:
-                    //清空支付单
-                    doClearSplit();
+                                        doClearSplit();
                     break;
             }
         }
@@ -1023,53 +880,33 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
             protected void onPostExecute(TradeVo vo) {
                 try {
-                    //先把原单会员拿出来，等reset方法玩了以后再放回去（临时方案，后续需要优化）
-                    CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
+                                        CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
                     DinnerShoppingCart.getInstance().updateDataFromTradeVo(vo, true);
                     CustomerManager.getInstance().setDinnerLoginCustomer(customer);
                     noticeRefreshCustomerUI(getActivity(), false);
-                    // 打印预结单
-                    //PrintOperationOperates printOperationOperates = OperatesFactory.create(PrintOperationOperates.class);
-                    //DinnerShopManager.getInstance().doWillPayPrint(mListOrderDishshopVo, getActivity(), printOperationOperates, vo);
-                } catch (Exception e) {
+                                                                            } catch (Exception e) {
                     Log.e(TAG, "", e);
                 }
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    /**
-     * 通知结账界面刷新会员信息
-     *
-     * @param activity                传入DinnerPayActivity进行内部判断
-     * @param needRefreshCustomerData 是否需要刷新会员数据（积分、余额等），即是否需要重新调用登录接口
-     */
+
     private void noticeRefreshCustomerUI(FragmentActivity activity, boolean needRefreshCustomerData) {
         CustomerResp customerNew = DinnerShopManager.getInstance().getLoginCustomer();
         if (customerNew != null) {
             customerNew.needRefresh = needRefreshCustomerData;
         }
 
-        //刷新会员信息显示
-        if (activity != null) {
-            /*Fragment fragment = activity.getSupportFragmentManager().findFragmentById(R.id.orderDishPrivilegeView);
-            if (fragment != null && fragment instanceof DinnerPriviligeItemsFragment) {
-                EventBus.getDefault().post(new ActionRefreshDinnerCustomer());
-            } else {*/
+                if (activity != null) {
+
                 EventBus.getDefault().post(new ActionDinnerPrilivige(ActionDinnerPrilivige.DinnerPriviligeType.PRIVILIGE_ITEMS));
-            //}
-        } else {
+                    } else {
             EventBus.getDefault().post(new ActionDinnerPrilivige(ActionDinnerPrilivige.DinnerPriviligeType.PRIVILIGE_ITEMS));
         }
     }
 
-    /**
-     * 更新数据
-     *
-     * @Title: updateData
-     * @Param @param dataList
-     * @Return void 返回类型
-     */
+
     public void updateData(List<IShopcartItem> dataList, TradeVo tradeVo) {
         updateData(dataList, tradeVo, true);
     }
@@ -1081,8 +918,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         UserActionEvent.start(UserActionEvent.DINNER_PAY_SHOPCART_DISPLAY);
         mListOrderDishshopVo = dataList;
 
-        //没有菜品时&没有餐标时，删除所有附加费、服务费及消费税
-        if (Utils.isEmpty(dataList) && tradeVo.getMealShellVo() == null) {
+                if (Utils.isEmpty(dataList) && tradeVo.getMealShellVo() == null) {
             tradeVo.setTradeTaxs(null);
             tradeVo.setTradeInitConfigs(null);
             tradeVo.setExtraChargeMap(null);
@@ -1109,7 +945,6 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
         calPrice(dataList, tradeVo);
 
-        // 判断是否显示空态页
 
         if (selectedDishAdapter.getAllData() != null && selectedDishAdapter.getAllData().size() != 0) {
             haveNoDishLayout.setVisibility(View.GONE);
@@ -1122,24 +957,16 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
             selectedDishAdapter.notifyDataSetChanged();
         }
         setBottomEnabled();
-        //更新商品总数
-        updateAllDishCount();
+                updateAllDishCount();
         UserActionEvent.end(UserActionEvent.DINNER_PAY_SHOPCART_DISPLAY);
     }
 
-    /**
-     * 计算价格
-     *
-     * @Title: calPrice
-     * @Param @param dataList
-     * @Return void 返回类型
-     */
+
     private void calPrice(List<IShopcartItem> dataList, TradeVo tradeVo) {
         try {
             if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getTradeAmount() != null) {
                 totalPrice = tradeVo.getTrade().getTradeAmount().toString();
-                totalPrice = CashInfoManager.formatCashAmount(Double.valueOf(totalPrice));// 先格式化应付金额
-            } else {
+                totalPrice = CashInfoManager.formatCashAmount(Double.valueOf(totalPrice));            } else {
                 totalPrice = "0.00";
             }
         } catch (Exception e) {
@@ -1151,11 +978,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         tvOrignPrice.setVisibility(View.GONE);
     }
 
-    /**
-     * 进入折扣界面时处理
-     *
-     * @param action
-     */
+
     public void onEventMainThread(ActionDinnerBatchDiscount action) {
         boolean isMoveToBottom = false;
         selectedDishAdapter.setDiscountModle(action.isEditModle);
@@ -1174,15 +997,8 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
             gotoListViewBottom();
     }
 
-    // 处理批量赠送，批量赠送时，不可打折商品也可以打折
-    public void onEventMainThread(ActionDinnerBatchFree action) {
-        //isBatchFreeMode = action.isBatchFree();
-        /*if (action.isBatchFree()) {
-            // 设置所有item可选择
-            selectedDishAdapter.setBatchFreeMode(true);
-        } else {
-            selectedDishAdapter.setBatchFreeMode(false);
-        }*/
+        public void onEventMainThread(ActionDinnerBatchFree action) {
+
 
         boolean oldBatchCoercionModel = selectedDishAdapter.isBatchCoercionModel();
         selectedDishAdapter.setBatchCoercionModel(action.isBatchCoercionModel());
@@ -1192,8 +1008,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                 tvSelectAll.setVisibility(View.GONE);
             } else {
                 tvSelectAll.setVisibility(View.VISIBLE);
-                //如果从问题菜品切回其它tab项，则去除所有选择数据
-                if (oldBatchCoercionModel) {
+                                if (oldBatchCoercionModel) {
                     setSelectBtn(false);
                     selectedDishAdapter.checkCancelAll();
                     selectedDishAdapter.notifyDataSetChanged();
@@ -1215,12 +1030,10 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     }
 
-    // 保存结算数据
-    public void onEventMainThread(ActionSaveData action) {
+        public void onEventMainThread(ActionSaveData action) {
         if (mTradeOperates == null)
             mTradeOperates = OperatesFactory.create(TradeOperates.class);
-        // 没有可结算品项不能跳转
-        TradeVo tradeVo = DinnerShoppingCart.getInstance().createOrder();
+                TradeVo tradeVo = DinnerShoppingCart.getInstance().createOrder();
         if (tradeVo.getTrade() != null && tradeVo.getTrade().getId() == null) {
             ToastUtil.showShortToast(R.string.open_table_please);
             return;
@@ -1242,8 +1055,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
         TradeVo target = null;
         if (!DinnerShopManager.getInstance().isSepartShopCart()) {
-            // 保存原单
-            target = mShoppingCart.createOrder();
+                        target = mShoppingCart.createOrder();
             if (target.getTrade().getBusinessType() == BusinessType.GROUP) {
                 modifygroup(target, false);
             } else if (target.getTrade().getBusinessType() == BusinessType.BUFFET) {
@@ -1253,27 +1065,20 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                         LoadingResponseListener.ensure(DinnerShopManager.getInstance().getSaveResponseListener(getActivity()), getFragmentManager()));
             }
         } else {
-            // 拆单支付，要克隆原单的TradeVo对象，因为还可能不支付就再点返回
-            target = mSepShoppingCart.createSeparateOrder();
+                        target = mSepShoppingCart.createSeparateOrder();
             ShoppingCartVo shoppingCartVo = DinnerShoppingCart.getInstance().getShoppingCartVo();
             TradeVo sourceRef = mShoppingCart.createOrder();
             TradeVo sourceNew = sourceRef.clone();
             MathShoppingCartTool.mathTotalPrice(DinnerShoppingCart.getInstance().mergeShopcartItem(shoppingCartVo),
                     sourceNew);
-            // 拆单保存要克隆原单的TradeVo对象，因为还可能不支付就再点返回
-            mTradeOperates.tradeSplitDinner(sourceNew,
+                        mTradeOperates.tradeSplitDinner(sourceNew,
                     target,
                     LoadingResponseListener.ensure(DinnerShopManager.getInstance().getSaveResponseListener(getActivity()), getFragmentManager()));
         }
     }
 
 
-    /**
-     * 自助改单请求
-     *
-     * @param target
-     * @param isPrePrint
-     */
+
     private void modifyBuffet(final TradeVo target, final boolean isPrePrint) {
         final TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
         ResponseListener listener = new ResponseListener<Void>() {
@@ -1295,12 +1100,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         tradeOperates.modifyBuffet(target, LoadingResponseListener.ensure(listener, getActivity().getSupportFragmentManager()));
     }
 
-    /**
-     * 保存结算信息改单请求
-     *
-     * @param target
-     * @param isPrePrint 是否是预结单打印
-     */
+
     private void modifygroup(final TradeVo target, final boolean isPrePrint) {
         final CalmLoadingDialogFragment dialogFragment = CalmLoadingDialogFragment.showByAllowingStateLoss(getActivity().getSupportFragmentManager());
         GroupOperates groupOperates = OperatesFactory.create(GroupOperates.class);
@@ -1327,11 +1127,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }, true);
     }
 
-    /**
-     * @Title: doClearSelected
-     * @Description:
-     * @Return void 返回类型
-     */
+
     private void doClearSelected() {
         if (selectedDishAdapter != null) {
             for (DishDataItem dish : selectedDishAdapter.getAllData()) {
@@ -1368,9 +1164,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         @Override
         public void create(SwipeMenu menu) {
             swipeMenu = menu;
-            // Create different menus depending on the type
-            //对应
-            switch (menu.getViewType()) {
+                                    switch (menu.getViewType()) {
                 case SuperShopCartAdapter.SIGLE_PRIVILEGE_TYPE:
                 case SuperShopCartAdapter.PRIVILEGE_TYPE:
                 case SuperShopCartAdapter.BUFFET_EXTRA:
@@ -1391,14 +1185,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     };
 
-    /**
-     * 改变全选按钮选择
-     *
-     * @Title: setSelectBtn
-     * @Description:
-     * @Param @param isUsed
-     * @Return void 返回类型
-     */
+
     private void setSelectBtn(boolean isSelected) {
         if (!isSelected) {
             tvSelectAll.setText(getResources().getString(R.string.dinner_select_all));
@@ -1409,34 +1196,15 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * 更改全选状态
-     *
-     * @Title: onEventMainThread
-     * @Description:
-     * @Param @param select
-     * @Return void 返回类型
-     */
+
     public void onEventMainThread(EventSelectDish select) {
-        //if (tvSelectAll.isShown() || selectedDishAdapter.isDiscountModle()) {
-        List<IShopcartItem> list = DinnerShopManager.getInstance().getCanDiscountData(mListOrderDishshopVo);
+                List<IShopcartItem> list = DinnerShopManager.getInstance().getCanDiscountData(mListOrderDishshopVo);
         List<IShopcartItemBase> selectedList = DinnerShopManager.getInstance().getAllSelectData(selectedDishAdapter.getAllData());
         setSelectView(list, selectedList);
-        // 需要打折的数据
 
-//            List<IShopcartItemBase> bselectedList = new ArrayList<IShopcartItemBase>();
-//            if (selectedList != null) {
-//                for (DishDataItem dishItem : selectedList) {
-//                    IShopcartItemBase itemBase = dishItem.getBase();
-//                    if (itemBase != null && itemBase.isUsed()) {
-//                        bselectedList.add(itemBase);
-//                    }
-//                }
-//            }
         DinnerShopManager.getInstance().getShoppingCart().batchDishPrivilege(selectedList);
 
-        //}
-    }
+            }
 
     public void dealSplitPay(SeparateEvent event) {
         switch (event.getStatus()) {
@@ -1445,8 +1213,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                 break;
             case SeparateEvent.EVENT_SEPARATE_PAYED:
                 isBarCodeSaving = false;
-                goDefaultDisplayMode(false);//返回原单
-
+                goDefaultDisplayMode(false);
                 noticeRefreshCustomerUI(getActivity(), true);
                 break;
             case SeparateEvent.EVENT_RESOURCE_PAYING:
@@ -1457,13 +1224,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * 更新全选 取消全选文字
-     *
-     * @Title: setSelectView
-     * @Param @param srcList
-     * @Return void 返回类型
-     */
+
     private void setSelectView(List<IShopcartItem> srcList, List<IShopcartItemBase> selectedList) {
         if (srcList != null) {
             if (selectedList != null) {
@@ -1479,14 +1240,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * 全选操作
-     *
-     * @Title: doSelectAll
-     * @Description:
-     * @Param
-     * @Return void 返回类型
-     */
+
     @Click(R.id.tv_select_all)
     void doSelectAll() {
         if (!ClickManager.getInstance().isClicked()) {
@@ -1503,12 +1257,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * 全选操作
-     *
-     * @Title: setSelectAll
-     * @Return void 返回类型
-     */
+
     public void doSelectAll(boolean isSelect) {
         if (selectedDishAdapter == null) {
             return;
@@ -1526,8 +1275,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
             for (DishDataItem dish : selectedDishAdapter.getAllData()) {
                 if (dish.getType() == ItemType.SINGLE
                         || dish.getType() == ItemType.COMBO) {
-                    // && dish.getBase().getEnableWholePrivilege() == Bool.YES
-                    if (dish.getBase() != null) {
+                                        if (dish.getBase() != null) {
                         if (selectedDishAdapter.isDiscountModle()
                                 && DinnerCashManager.hasMarketActivity(selectedDishAdapter.getTradeItemPlanActivityMap(), dish.getBase()) || dish.getBase().getEnableWholePrivilege() == Bool.NO) {
                             continue;
@@ -1553,17 +1301,11 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         selectedDishAdapter.notifyDataSetChanged();
     }
 
-    /**
-     * 先设置折扣再在订单列表中全选
-     *
-     * @Title: batchSetDiscount
-     * @Return void 返回类型
-     */
+
     public void batchSetDiscount() {
         listDishData.clear();
         for (DishDataItem dish : selectedDishAdapter.getAllData()) {
-            // && dish.getBase().getEnableWholePrivilege() == Bool.YES
-            if ((dish.getBase() != null && dish.getBase().isSelected())
+                        if ((dish.getBase() != null && dish.getBase().isSelected())
                     && (dish.getType() == ItemType.SINGLE
                     || dish.getType() == ItemType.COMBO)) {
                 IShopcartItemBase mShopcartItemBase = dish.getBase();
@@ -1575,15 +1317,9 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         DinnerShopManager.getInstance().getShoppingCart().batchDishPrivilege(listDishData);
     }
 
-    /**
-     * 支付之前验证优惠券和积分抵现是否生效或满足规则
-     *
-     * @Title: checkCouponAndIntegralCash
-     * @Return void 返回类型
-     */
+
     private boolean checkCouponAndIntegralCash() {
-        // 判断积分抵现和优惠价是否满足使用规则
-        boolean isCouponInvalid = DinnerShopManager.getInstance().isCouponInvalid();
+                boolean isCouponInvalid = DinnerShopManager.getInstance().isCouponInvalid();
         boolean isIntegralCashInvalid = DinnerShopManager.getInstance().isIntegralCashInvalid();
         boolean isGiftCoupon = DinnerShopManager.getInstance().isHasUnActiveGiftCoupon(DinnerShopManager.getInstance().getShoppingCart().getOrder());
         boolean isWeixinCode = DinnerShopManager.getInstance().isHasUnActiveWeixinCode();
@@ -1624,12 +1360,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         return true;
     }
 
-    /**
-     * @Title: checkRemoveCouponDialog
-     * @Description: 购物车中有未满足条件的优惠卷时弹出该提示框
-     * @Param @param tag
-     * @Return Boolean 返回类型
-     */
+
     private Boolean checkInvalidDialog(int title, int positiveText, final int tag, final int removeType) {
         isRemove = false;
         CommonDialogFragmentBuilder cb = new CommonDialogFragmentBuilder(MainApplication.getInstance());
@@ -1643,19 +1374,14 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                     public void onClick(View arg0) {
                         if (removeType == FLAG_REMOVE_COUPON) {
                             DinnerShopManager.getInstance().getShoppingCart().removeAllInvalidCoupon(DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo(), true);
-//                            sendCouponAction(null); // 删除优惠劵
 
                         } else if (removeType == FLAG_REMOVE_INTEGRAL) {
 
-                            DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();// 删除积分
-                            sendIntegralAction();
+                            DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();                            sendIntegralAction();
 
                         } else if (removeType == FLAG_REMOVE_ALLDISCOUNT) {
                             DinnerShopManager.getInstance().getShoppingCart().removeAllInvalidCoupon(DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo(), true);
-                            DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();// 删除积分
-//                            sendCouponAction(null); // 删除优惠劵
-                            sendIntegralAction();// 删除积分
-                        } else if (removeType == FLAG_REMOVE_GIFT_COUPON) {
+                            DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();                            sendIntegralAction();                        } else if (removeType == FLAG_REMOVE_GIFT_COUPON) {
                             DinnerShopManager.getInstance().getShoppingCart().removeAllInValidGiftCoupon(true);
                         } else if (removeType == FLAG_REMOVE_WEIXINCODE_COUPON) {
                             DinnerShopManager.getInstance().getShoppingCart().removeAllInUnActiveWeixinCode(true);
@@ -1671,11 +1397,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
     }
 
 
-    /**
-     * @Date 2016年5月21日
-     * @Description: 营销活动菜品check mode
-     * @Return void
-     */
+
     public void showMarketingCampaignDishCheckMode(boolean show, MarketRuleVo marketRuleVo) {
         if (show) {
             selectedDishAdapter.setDishCheckMode(true);
@@ -1701,12 +1423,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
     }
 
-    /**
-     * @param view
-     * @Date 2016年5月22日
-     * @Description:
-     * @Return void
-     */
+
     @Click({R.id.cancel_choose_dish_btn, R.id.ok_choose_dish_btn})
     void clickMarketingCampaignButtons(View view) {
         switch (view.getId()) {
@@ -1734,11 +1451,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * @Date 2016年5月25日
-     * @Description: 取消左侧活动列表选择状态
-     * @Return void
-     */
+
     private void cancelSelectInMarketActivityFragment() {
         DinnerMarketActivityFragment marketFragment = (DinnerMarketActivityFragment) getFragmentManager()
                 .findFragmentByTag(DinnerMarketActivityFragment.class.getSimpleName());
@@ -1755,9 +1468,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * 清空支付单
-     */
+
     private void doClearSplit() {
         MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerSettleSplitInvertSelect);
         List<IShopcartItem> tempList = mShoppingCart.getAllValidShopcartItem(mShoppingCart.getShoppingCartDish());
@@ -1776,9 +1487,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
                 });
     }
 
-    /**
-     * 显示总单页
-     */
+
     private void showTotalPage(boolean isShow) {
         if (isShow) {
             ActionDinnerPrilivige actionDinnerPrilivige = new ActionDinnerPrilivige(ActionDinnerPrilivige.DinnerPriviligeType.SHOWTAOTALPAGE);
@@ -1789,9 +1498,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * 注册原单购物车的监听
-     */
+
     private void registerOldListener() {
         mShoppingCart.registerListener(ShoppingCartListerTag.DINNER_DISH_BALANCE_SHOW, new ShoppingCartListener() {
             @Override
@@ -1847,15 +1554,13 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
             @Override
             public void addWeiXinCouponsPrivilege(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-                // TODO Auto-generated method stub
-                updateData(mListOrderDishshopVo, mTradeVo);
+                                updateData(mListOrderDishshopVo, mTradeVo);
                 gotoListViewBottom();
             }
 
             @Override
             public void removeWeiXinCouponsPrivilege(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-                // TODO Auto-generated method stub
-                updateData(mListOrderDishshopVo, mTradeVo);
+                                updateData(mListOrderDishshopVo, mTradeVo);
                 gotoListViewBottom();
             }
 
@@ -1929,8 +1634,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
             public void separateOrder(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
                 List<IShopcartItem> oldShopcartItemList = mShoppingCart.getShoppingCartDish();
                 if (!dealSplitToOld()) {
-                    //倒序和总单的数据一致
-                    if (listOrderDishshopVo != null)
+                                        if (listOrderDishshopVo != null)
                         Collections.reverse(listOrderDishshopVo);
                     updateData(listOrderDishshopVo, mTradeVo);
                 }
@@ -1940,8 +1644,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
             public void removeShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo, IShopcartItem mShopcartItem) {
                 updateData(listOrderDishshopVo, mTradeVo);
                 updateMarketActivityFragment();
-                //如果不是批量折扣且不是拆单yutang add 20160809 start
-                if (!isBatchDiscountMode && !isDoDelete) {
+                                if (!isBatchDiscountMode && !isDoDelete) {
                     gotoListViewBottom();
                 }
                 if (isDoDelete) {
@@ -1978,15 +1681,13 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
             @Override
             public void addWeiXinCouponsPrivilege(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-                // TODO Auto-generated method stub
-                updateData(listOrderDishshopVo, mTradeVo);
+                                updateData(listOrderDishshopVo, mTradeVo);
                 gotoListViewBottom();
             }
 
             @Override
             public void removeWeiXinCouponsPrivilege(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-                // TODO Auto-generated method stub
-                updateData(listOrderDishshopVo, mTradeVo);
+                                updateData(listOrderDishshopVo, mTradeVo);
                 gotoListViewBottom();
             }
 
@@ -2034,24 +1735,19 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
         });
     }
 
-    /**
-     * 处理拆单到原单
-     */
+
     private synchronized boolean dealSplitToOld() {
         boolean isToOld = false;
         List<IShopcartItem> oldShopcartItemList = mShoppingCart.getShoppingCartDish();
         if (mSepShoppingCart.isAllOrder(oldShopcartItemList) || mSepShoppingCart.getShoppingCartItems().isEmpty()) {
-            //原单支付
-            mSepShoppingCart.unRegisterListenerByTag(ShoppingCartListerTag.DINNER_BALANCE_SPLIT);
+                        mSepShoppingCart.unRegisterListenerByTag(ShoppingCartListerTag.DINNER_BALANCE_SPLIT);
             showTotalPage(false);
             goDefaultDisplayMode(false);
             DinnerShopManager.getInstance().resetSepShopcart();
             CustomerManager.getInstance().setSeparateLoginCustomer(null);
-//            mSepShoppingCart.clearShoppingCart();
             oldShopcartItemList = mShoppingCart.filterDishList(oldShopcartItemList, false);
             updateData(oldShopcartItemList, mShoppingCart.getOrder());
-            //通知结算界面刷新会员
-            EventBus.getDefault().post(new ActionRefreshDinnerCustomer());
+                        EventBus.getDefault().post(new ActionRefreshDinnerCustomer());
             isToOld = true;
 
             noticeRefreshCustomerUI(getActivity(), false);
@@ -2066,8 +1762,7 @@ public class PayMainLeftFragment extends MobclickAgentFragment {
 
     @Override
     public void onPause() {
-        //针对点击了营销活动，又返回点菜界面
-        if (selectedDishAdapter.isDishCheckMode()) {
+                if (selectedDishAdapter.isDishCheckMode()) {
             selectedDishAdapter.setDishCheckMode(false);
             selectedDishAdapter.setMarketRuleVo(null);
         }

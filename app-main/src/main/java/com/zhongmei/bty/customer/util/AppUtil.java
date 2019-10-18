@@ -24,9 +24,7 @@ public class AppUtil {
     }
 
 
-    /**
-     * 电话号码加星保护
-     **/
+
     private static String star = "****";
     private static StringBuilder newNo;
 
@@ -49,16 +47,9 @@ public class AppUtil {
         return newNo.toString();
     }
 
-    /**
-     * 如果设置了电话号码隐私保护，显示加星的号码，否则显示正常号码
-     *
-     * @param normalTel
-     * @return
-     */
+
     public static String getTel(String normalTel) {
-        /*if (SpHelper.getDefault().getBoolean(QueueSettingSwitchFragment.MOBILE_PRIVACY, false)) {
-            return getHideTel(normalTel);
-        }*/
+
         return normalTel;
     }
 

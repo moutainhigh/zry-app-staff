@@ -13,42 +13,29 @@ import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 订单详情界面加载数据
- */
+
 
 public class LoadResult {
-    //订单数据
-    private TradePaymentVo mTradePaymentVo;
+        private TradePaymentVo mTradePaymentVo;
 
-    //退货原单数据
-    private TradePaymentVo oriTradePaymentVo;
+        private TradePaymentVo oriTradePaymentVo;
 
-    //与订单相关的反结账数据
-    private List<TradePaymentVo> mRepeatTradePaymentVos;
+        private List<TradePaymentVo> mRepeatTradePaymentVos;
 
-    //与订单相关的拆单数据
-    private List<TradePaymentVo> mSpliteTradePaymentVos;
+        private List<TradePaymentVo> mSpliteTradePaymentVos;
 
-    //退单申请数据
-    private TradeReturnInfo mTradeReturnInfo;
+        private TradeReturnInfo mTradeReturnInfo;
 
-    //订单开发票记录
-    private Invoice mInvoice;
+        private Invoice mInvoice;
 
-    /**
-     * 达达配送是否开启
-     */
+
     private boolean hasDaDaSwitchOn = false;
 
-    //电子发票设置数据
-    private ElectronicInvoiceVo mElectronicInvoiceVo;
+        private ElectronicInvoiceVo mElectronicInvoiceVo;
 
-    //商户开通的第三方配送平台数据,仅包含后台打开的
-    private Map<Integer, PartnerShopBiz> mDeliverylatformPartnerShopBizMap;
+        private Map<Integer, PartnerShopBiz> mDeliverylatformPartnerShopBizMap;
 
-    //商户开通的第三方配送平台数据
-    private SparseArray<String> mDeliverylatformPartnerShopBizSparseArray;
+        private SparseArray<String> mDeliverylatformPartnerShopBizSparseArray;
 
     private Long lastClosingTime;
 

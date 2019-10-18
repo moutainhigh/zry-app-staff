@@ -8,24 +8,16 @@ import com.zhongmei.yunfu.db.entity.crm.CrmLevelStoreRuleDetail;
 import com.zhongmei.bty.basemodule.customer.enums.FullSend;
 import com.zhongmei.bty.commonmodule.database.enums.SendType;
 
-/**
- * 充值规则Vo
- */
+
 public class RechargeRuleVo {
 
-    /**
-     * 是否满赠
-     */
+
     private FullSend isFullSend;
 
-    /**
-     * 赠送类型
-     */
+
     private SendType sendType;
 
-    /**
-     * 赠送规则明细
-     */
+
     private List<RechargeRuleDetailVo> RuleDetailList;
 
     public FullSend getIsFullSend() {
@@ -54,26 +46,16 @@ public class RechargeRuleVo {
 
     public static class RechargeRuleDetailVo {
 
-        /**
-         * 满值
-         */
+
         private BigDecimal fullValue;
 
-        /**
-         * 赠送金额
-         */
+
         private BigDecimal sendValue;
 
-        /**
-         * 赠送百分比
-         */
+
         private BigDecimal sendRate;
 
-        /**
-         * 实体卡充值规则映射
-         *
-         * @param ecCardSettingDetail
-         */
+
         public void setRule(EcCardSettingDetail ecCardSettingDetail) {
             this.fullValue = ecCardSettingDetail.getFullValue();
             this.sendValue = ecCardSettingDetail.getSendValue();

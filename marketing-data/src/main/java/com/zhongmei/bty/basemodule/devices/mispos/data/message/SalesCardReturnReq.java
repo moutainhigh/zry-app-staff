@@ -5,13 +5,7 @@ import java.util.List;
 import com.zhongmei.bty.basemodule.trade.message.TradePaymentReq;
 import com.zhongmei.bty.basemodule.devices.mispos.data.bean.ReturnCardDataModel.CardNumber;
 
-/**
- * @Date：2016-4-5 下午5:57:09
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class SalesCardReturnReq {
     private Long refundWay;
 

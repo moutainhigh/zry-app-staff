@@ -4,82 +4,52 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * 队列
- */
+
 @DatabaseTable(tableName = "commercial_queue_line")
 public class CommercialQueueLine extends EntityBase<Long> {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * commercial_id
-         */
+
         String commercialId = "commercial_id";
 
-        /**
-         * brand_id
-         */
+
         String brandId = "brand_id";
 
-        /**
-         * is_delete
-         */
+
         String isDelete = "is_delete";
 
-        /**
-         * queue_ame
-         */
+
         String queueName = "queue_name";
 
-        /**
-         * min_person_count
-         */
+
         String minPersonCount = "min_person_count";
 
-        /**
-         * creator_id
-         */
+
         String creatorId = "creator_id";
 
-        /**
-         * memo
-         */
+
         String memo = "memo";
 
-        /**
-         * updateTime
-         */
+
         String updateTime = "update_ime";
 
-        /**
-         * queue_char
-         */
+
         String queueChar = "queue_char";
 
-        /**
-         * max_person_count
-         */
+
         String maxPersonCount = "max_person_count";
 
-        /**
-         * create_time
-         */
+
         String createTime = "create_time";
 
-        /**
-         * updater_d
-         */
+
         String updaterId = "updater_d";
 
     }
@@ -87,48 +57,34 @@ public class CommercialQueueLine extends EntityBase<Long> {
     @DatabaseField(columnName = "id", id = true, canBeNull = false)
     private Long id;
 
-    /**
-     * 商户id
-     */
+
     @DatabaseField(columnName = "commercial_id")
     private Long commercialId;
 
     @DatabaseField(columnName = "brand_id")
     private Long brandId;
 
-    /**
-     * 是否删除(0 否; -1 是)
-     */
+
     @DatabaseField(columnName = "is_delete", canBeNull = false)
     private Integer isDelete;
 
-    /**
-     * 队列名称
-     */
+
     @DatabaseField(columnName = "queue_name")
     private String queueName;
 
-    /**
-     * 队列包含最小人数
-     */
+
     @DatabaseField(columnName = "min_person_count")
     private Integer minPersonCount;
 
-    /**
-     * 队列包含最大人数
-     */
+
     @DatabaseField(columnName = "max_person_count")
     private Integer maxPersonCount;
 
-    /**
-     * 备注
-     */
+
     @DatabaseField(columnName = "memo")
     private String memo;
 
-    /**
-     * 排队代号(A-Z，除了I、O)
-     */
+
     @DatabaseField(columnName = "queue_char")
     private String queueChar;
 

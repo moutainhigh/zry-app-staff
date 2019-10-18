@@ -4,11 +4,7 @@ import android.content.Context;
 
 import com.zhongmei.bty.basemodule.devices.scaner.innerscanner.InnerScannerManager1;
 
-/**
- * 内置扫码枪
- *
- * @created 2017/9/13
- */
+
 public class InternalScanCode extends ScanCode implements ScanDataReceivedListener {
 
     private InnerScannerManager1 mScannerManager;

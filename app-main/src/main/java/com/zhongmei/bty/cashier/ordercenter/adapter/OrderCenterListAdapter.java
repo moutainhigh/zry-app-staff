@@ -84,9 +84,7 @@ import java.util.Set;
 
 import static com.zhongmei.bty.basemodule.trade.settings.IPanelItemSettings.SERIAL_DESK_MODE;
 
-/**
- * 订单中心列表适配器
- */
+
 @EBean
 public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePaymentVo, ListItemView> {
     private SparseBooleanArray mSelectedPositions = new SparseBooleanArray();
@@ -104,8 +102,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
     private Set<String> pressedNumberSet;
 
     private int checkTab = DbQueryConstant.UNPROCESSED;
-    //取号通知开关
-    public boolean takeMealNotice = SharedPreferenceUtil.getSpUtil().getBoolean(OrderCenterListFragment.KEY_TAKE_MEAL_NOTICE, true);
+        public boolean takeMealNotice = SharedPreferenceUtil.getSpUtil().getBoolean(OrderCenterListFragment.KEY_TAKE_MEAL_NOTICE, true);
 
     public IPanelItemSettings settings = SettingManager.getSettings(IPanelItemSettings.class);
 
@@ -116,9 +113,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
     public static final String WEICHAT = "weichat";
 
     private IOrderCenterListPresenter mPresenter;
-    /**
-     * 外部选中的子标签
-     */
+
     private int mChildTab;
 
     private boolean isFromDinner = false;
@@ -145,8 +140,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
     @Override
     public void setItems(List<TradePaymentVo> items) {
         super.setItems(items);
-        //加载数据时选择第一项
-        selectPosition = 0;
+                selectPosition = 0;
         clearSelectBoxAndNotify();
     }
 
@@ -162,7 +156,6 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         items.clear();
         clearSelectBoxAndNotify();
         notifyItemRangeRemoved(0, itemSize);
-//        notifyDataSetChanged();
     }
 
     private void setItemChecked(int position, boolean isChecked) {
@@ -176,7 +169,6 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         int startPosition = getItemCount();
         items.addAll(tradeVos);
         notifyItemRangeInserted(startPosition, tradeVos.size());
-//        notifyDataSetChanged();
     }
 
     private boolean isItemChecked(int position) {
@@ -254,8 +246,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
             @Override
             public void onClick(View v) {
                 CallDishNotifyOperatesImpl.NotifyReq broadcastNotifyReq = (CallDishNotifyOperatesImpl.NotifyReq) v.getTag();
-                playBroadcastNotice(broadcastNotifyReq.getSerialNo()); //tradePaymentVo.getTradeVo().getTradeExtra().getNumberPlate();
-
+                playBroadcastNotice(broadcastNotifyReq.getSerialNo());
                 v.setSelected(true);
                 pressedNumberSet = pressedNumber.getStringSet(IS_BROADCAST_PRESSED_KEY, null);
                 if (pressedNumberSet == null) {
@@ -315,15 +306,13 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         setUnionLabel(view.getUnionLabel(), tradePaymentVo);
     }
 
-    //播放广播通知
-    private void playBroadcastNotice(String serialNo) {
+        private void playBroadcastNotice(String serialNo) {
         String content = context.getString(R.string.order_center_list_take_meal_notice_broadcast, serialNo);
         BaiduSyntheticSpeech speech = BaiduSyntheticSpeech.create(content, Sex.FEMALE);
         MediaPlayerQueueManager.getInstance().play(MediaPlayerQueueManager.MEDIA_TYPE_BROADCAST_NOTICE, speech);
     }
 
-    //设置是否取餐的状态
-    private void setTakeDishStatus(TextView takeDishStatus, TradeVo tradeVo) {
+        private void setTakeDishStatus(TextView takeDishStatus, TradeVo tradeVo) {
         Trade trade = tradeVo.getTrade();
         TradeExtra tradeExtra = tradeVo.getTradeExtra();
         if (trade != null
@@ -336,11 +325,9 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
                 && TradeStatus.REFUSED != trade.getTradeStatus()
                 && TradeStatus.CANCELLED != trade.getTradeStatus()) {
             if (TakeDishStatus.HAVE_TAKE_DISH == tradeExtra.getCallDishStatus()) {
-//                takeDishStatus.setImageResource(R.drawable.have_take_dish);
                 takeDishStatus.setBackgroundResource(R.drawable.lable_bg_green_4dd5b7_2px_radius);
                 takeDishStatus.setText(R.string.order_center_label_ready_table_food);
             } else if (TakeDishStatus.NOT_TAKE_DISH == tradeExtra.getCallDishStatus()) {
-//                takeDishStatus.setImageResource(R.drawable.not_take_dish);
                 takeDishStatus.setBackgroundResource(R.drawable.lable_bg_orange_fdaf33_2px_radius);
                 takeDishStatus.setText(R.string.order_center_label_not_take_food);
             }
@@ -364,12 +351,10 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
                 && DeliveryStatus.WAITINT_DELIVERY == tradeExtra.getDeliveryStatus()) {
             String deliveryUserId = tradeExtra.getDeliveryUserId();
             if (TextUtils.isEmpty(deliveryUserId)) {
-//                view.setImageResource(R.drawable.ic_order_center_delivery_status_unbind);
                 view.setBackgroundResource(R.drawable.lable_bg_orange_border_fdaf33_2px_radius);
                 view.setTextColor(Color.parseColor("#FDAF33"));
                 view.setText(R.string.order_center_detail_delivery_status_unbind);
             } else {
-//                view.setImageResource(R.drawable.ic_order_center_delivery_status_bind);
                 view.setTextColor(Color.parseColor("#4DD5B7"));
                 view.setBackgroundResource(R.drawable.lable_bg_green_border_4dd5b7_2px_radius);
                 view.setText(R.string.order_center_detail_delivery_status_bind);
@@ -380,12 +365,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         }
     }
 
-    /**
-     * 设置订单状态
-     *
-     * @param statusLayout   statusLayout
-     * @param tradePaymentVo tradePaymentVo
-     */
+
     private void setOrderStatus(LinearLayout statusLayout, TradePaymentVo tradePaymentVo) {
         TradeVo tradeVo = tradePaymentVo.getTradeVo();
         statusLayout.removeAllViews();
@@ -397,40 +377,22 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
             DeliveryOrderVo deliveryOrderVo = getDeliveryOrderVo(tradePaymentVo.getDeliveryOrderVoList());
             if (deliveryOrderVo != null) {
                 DeliveryOrderStatus deliveryOrderStatus = deliveryOrderVo.getDeliveryOrder().getDeliveryStatus();
-                if (DeliveryOrderStatus.WAITING_CREATE == deliveryOrderStatus) {//待下发
-//                    createStatusView(statusLayout, R.drawable.ic_order_center_list_waiting_create);
-                    createStatusView(statusLayout, R.drawable.lable_bg_orange_fdaf33_2px_radius, R.string.order_center_detail_waiting_create);
-                } else if (DeliveryOrderStatus.WAITING_ACCEPT == deliveryOrderStatus) {//待结单
-//                    createStatusView(statusLayout, R.drawable.ic_order_center_list_waiting_accept);
-                    createStatusView(statusLayout, R.drawable.lable_bg_deeppink_ff5ea8_2px_radius, R.string.order_center_detail_waiting_accept);
-                } else if (DeliveryOrderStatus.WAITING_PICK_UP == deliveryOrderStatus) {//待取货
-//                    createStatusView(statusLayout, R.drawable.ic_order_center_list_waiting_pick_up);
-                    createStatusView(statusLayout, R.drawable.lable_bg_purple_9180f8_2px_radius, R.string.order_center_detail_waiting_pick_up);
-                } else if (DeliveryOrderStatus.DELIVERYING == deliveryOrderStatus) {//配送中
-//                    createStatusView(statusLayout, R.drawable.ic_order_center_list_deliverying);
-                    createStatusView(statusLayout, R.drawable.lable_bg_blue_359fff_2px_radius, R.string.order_center_detail_deliverying);
-                } else if (DeliveryOrderStatus.REAL_DELIVERY == deliveryOrderStatus) {//配送完成
-//                    createStatusView(statusLayout, R.drawable.ic_order_center_list_real_delivery);
-                    createStatusView(statusLayout, R.drawable.lable_bg_green_4dd5b7_2px_radius, R.string.order_center_detail_real_delivery);
-                } else if (DeliveryOrderStatus.DELIVERY_CANCEL == deliveryOrderStatus) {//配送取消
-//                    createStatusView(statusLayout, R.drawable.ic_order_center_list_delivery_cancel);
-                    createStatusView(statusLayout, R.drawable.lable_bg_deeppink_ff5ea8_2px_radius, R.string.order_center_detail_delivery_cancel);
+                if (DeliveryOrderStatus.WAITING_CREATE == deliveryOrderStatus) {                    createStatusView(statusLayout, R.drawable.lable_bg_orange_fdaf33_2px_radius, R.string.order_center_detail_waiting_create);
+                } else if (DeliveryOrderStatus.WAITING_ACCEPT == deliveryOrderStatus) {                    createStatusView(statusLayout, R.drawable.lable_bg_deeppink_ff5ea8_2px_radius, R.string.order_center_detail_waiting_accept);
+                } else if (DeliveryOrderStatus.WAITING_PICK_UP == deliveryOrderStatus) {                    createStatusView(statusLayout, R.drawable.lable_bg_purple_9180f8_2px_radius, R.string.order_center_detail_waiting_pick_up);
+                } else if (DeliveryOrderStatus.DELIVERYING == deliveryOrderStatus) {                    createStatusView(statusLayout, R.drawable.lable_bg_blue_359fff_2px_radius, R.string.order_center_detail_deliverying);
+                } else if (DeliveryOrderStatus.REAL_DELIVERY == deliveryOrderStatus) {                    createStatusView(statusLayout, R.drawable.lable_bg_green_4dd5b7_2px_radius, R.string.order_center_detail_real_delivery);
+                } else if (DeliveryOrderStatus.DELIVERY_CANCEL == deliveryOrderStatus) {                    createStatusView(statusLayout, R.drawable.lable_bg_deeppink_ff5ea8_2px_radius, R.string.order_center_detail_delivery_cancel);
                 }
             } else {
                 if (tradeExtra != null) {
                     DeliveryStatus deliveryStatus = tradeExtra.getDeliveryStatus();
                     if (DeliveryStatus.WAITINT_DELIVERY == deliveryStatus) {
                         String deliveryUserId = tradeExtra.getDeliveryUserId();
-                        if (!TextUtils.isEmpty(deliveryUserId) || DeliveryPlatform.MERCHANT != tradeExtra.getDeliveryPlatform()) {//待取货
-//                            createStatusView(statusLayout, R.drawable.ic_order_center_list_waiting_pick_up);
-                            createStatusView(statusLayout, R.drawable.lable_bg_purple_9180f8_2px_radius, R.string.order_center_detail_waiting_pick_up);
+                        if (!TextUtils.isEmpty(deliveryUserId) || DeliveryPlatform.MERCHANT != tradeExtra.getDeliveryPlatform()) {                            createStatusView(statusLayout, R.drawable.lable_bg_purple_9180f8_2px_radius, R.string.order_center_detail_waiting_pick_up);
                         }
-                    } else if (DeliveryStatus.DELIVERYING == deliveryStatus) {//配送中
-//                        createStatusView(statusLayout, R.drawable.ic_order_center_list_deliverying);
-                        createStatusView(statusLayout, R.drawable.lable_bg_blue_359fff_2px_radius, R.string.order_center_detail_deliverying);
-                    } else {//配送完成
-//                        createStatusView(statusLayout, R.drawable.ic_order_center_list_real_delivery);
-                        createStatusView(statusLayout, R.drawable.lable_bg_green_4dd5b7_2px_radius, R.string.order_center_detail_real_delivery);
+                    } else if (DeliveryStatus.DELIVERYING == deliveryStatus) {                        createStatusView(statusLayout, R.drawable.lable_bg_blue_359fff_2px_radius, R.string.order_center_detail_deliverying);
+                    } else {                        createStatusView(statusLayout, R.drawable.lable_bg_green_4dd5b7_2px_radius, R.string.order_center_detail_real_delivery);
                     }
                 }
             }
@@ -438,7 +400,6 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
 
         if (trade.getTradeType() == TradeType.SELL_FOR_REPEAT
                 || trade.getTradeType() == TradeType.REFUND_FOR_REPEAT) {
-//            createStatusView(statusLayout, R.drawable.order_center_status_fjz_icon);
             createStatusView(statusLayout, R.drawable.lable_bg_blue_359fff_2px_radius, R.string.dinner_order_center_repay);
         }
 
@@ -447,44 +408,31 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
                 && trade.getTradeStatus() != TradeStatus.RETURNED
                 && (mChildTab == DbQueryConstant.SALES_PAID || mChildTab == DbQueryConstant.SALES_ALL)
                 && isPayInCashAndFromMobile(tradePaymentVo)) {
-//            createStatusView(statusLayout, R.drawable.order_center_status_qz_icon);
             createStatusView(statusLayout, R.drawable.lable_bg_purple_border_9180f8_2px_radius, R.string.order_center_stay_closeout, Color.parseColor("#9180f8"));
         }
 
         if (trade.getTradeStatus() == TradeStatus.SQUAREUP
                 && (mChildTab == DbQueryConstant.SALES_PAID || mChildTab == DbQueryConstant.SALES_ALL)) {
-//            createStatusView(statusLayout, R.drawable.order_center_status_qz_icon);
             createStatusView(statusLayout, R.drawable.lable_bg_purple_border_9180f8_2px_radius, R.string.order_center_stay_closeout, Color.parseColor("#9180f8"));
         }
 
-        if (trade.getTradeStatus() == TradeStatus.CREDIT) {// 挂账
-//            createStatusView(statusLayout, R.drawable.credit);
-            createStatusView(statusLayout, R.drawable.lable_bg_purple_9180f8_2px_radius, R.string.order_center_dinner_bill);
+        if (trade.getTradeStatus() == TradeStatus.CREDIT) {            createStatusView(statusLayout, R.drawable.lable_bg_purple_9180f8_2px_radius, R.string.order_center_dinner_bill);
         }
 
         if (trade.getTradePayStatus() == TradePayStatus.REFUNDING) {
-//            createStatusView(statusLayout, R.drawable.order_center_status_tkz_icon);
             createStatusView(statusLayout, R.drawable.lable_bg_blue_359fff_2px_radius, R.string.order_center_refunding);
         } else if (trade.getTradePayStatus() == TradePayStatus.REFUND_FAILED) {
-//            createStatusView(statusLayout, R.drawable.order_center_status_tsb_icon);
             createStatusView(statusLayout, R.drawable.lable_bg_red_ff513a_2px_radius, R.string.order_center_label_refund_failed);
         }
 
-        //已支付订单才显示押金未退标识
-        TradeDeposit tradeDeposit = tradeVo.getTradeDeposit();
+                TradeDeposit tradeDeposit = tradeVo.getTradeDeposit();
         if (trade.getTradePayStatus() == TradePayStatus.PAID
                 && tradeDeposit != null && tradeDeposit.getDepositRefund() == null) {
-//            createStatusView(statusLayout, R.drawable.deposit_not_refundable);
             createStatusView(statusLayout, R.drawable.lable_bg_orange_fdaf33_2px_radius, R.string.order_center_label_deposit_not_returned);
         }
     }
 
-    /**
-     * 显示订单相关状态在流水号后面。相关方法{@link #setOrderStatus(android.widget.LinearLayout, com.zhongmei.bty.basemodule.trade.bean.TradePaymentVo)}
-     *
-     * @param statusLayout
-     * @param tradePaymentVo
-     */
+
     private void setOrderStatusTop(LinearLayout statusLayout, TradePaymentVo tradePaymentVo) {
         statusLayout.removeAllViews();
         TradeVo tradeVo = tradePaymentVo.getTradeVo();
@@ -510,12 +458,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         return null;
     }
 
-    /**
-     * 待清账的一个判断条件
-     *
-     * @param tradePaymentVo
-     * @return
-     */
+
     private boolean isPayInCashAndFromMobile(TradePaymentVo tradePaymentVo) {
         List<PaymentVo> paymentVoList = tradePaymentVo.getPaymentVoList();
         if (Utils.isEmpty(paymentVoList)) {
@@ -559,11 +502,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         parent.addView(view);
     }
 
-    /**
-     * 设置叫号view是否显示,及显示哪几个
-     *
-     * @param view
-     */
+
     private void setCallNumber(ListItemView view, TradeVo tradeVo) {
         Trade trade = tradeVo.getTrade();
         String tradeUuid = trade.getUuid();
@@ -594,8 +533,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
                 } else {
                     broadcast.setSelected(false);
                 }
-                //设置广播的tag
-                broadcast.setTag(toNotifyReq(1, tradeUuid, null, serialNumber, tradeNo));
+                                broadcast.setTag(toNotifyReq(1, tradeUuid, null, serialNumber, tradeNo));
                 more.setVisibility(View.VISIBLE);
                 List<String> record = new ArrayList<>();
                 final String IVR = "ivr";
@@ -697,18 +635,12 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         return value != null && value > 0;
     }
 
-    /**
-     * 设置金额
-     *
-     * @param expectTime
-     * @param tradePaymentVo
-     */
+
     private void setCash(TextView expectTime, TradePaymentVo tradePaymentVo) {
         if (tradePaymentVo.getTradeUnionType() == TradeUnionType.UNION_SUB) {
             expectTime.setText(R.string.check_amount_in_order_detail);
         } else {
-            //订单金额
-            BigDecimal amount = tradePaymentVo.getTradeVo().getTrade().getTradeAmount();
+                        BigDecimal amount = tradePaymentVo.getTradeVo().getTrade().getTradeAmount();
             expectTime.setText(ShopInfoCfg.formatCurrencySymbol(amount));
         }
     }
@@ -738,20 +670,11 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         return faceAmount.setScale(2, BigDecimal.ROUND_DOWN);
     }
 
-    /**
-     * 设置流水号
-     *
-     * @param view
-     * @param tradeVo
-     */
+
     private void setSerialNumber(TextView view, TradeVo tradeVo) {
         Trade trade = tradeVo.getTrade();
         TradeExtra tradeExtra = tradeVo.getTradeExtra();
-        // TODO: 2018/2/7 已修改
-      /*  if (DbQueryConstant.SALES_ALL == mChildTab) {
-            view.setText(getDeliveryAddress(tradeVo.getTradeExtra()));
-            view.setVisibility(View.VISIBLE);
-        } else*/
+
         {
             if (trade != null) {
                 String serialNumber = trade.getSerialNumber();
@@ -764,8 +687,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
                     }
                 } else {
                     view.setVisibility(View.VISIBLE);
-                    // v8.12.0 修改显示流水号
-                    String text = context.getString(R.string.dinner_order_center_list_serial_number, serialNumber);
+                                        String text = context.getString(R.string.dinner_order_center_list_serial_number, serialNumber);
                     String thirdSerialNo = getThirdSerialNo(tradeExtra);
                     if (!TextUtils.isEmpty(thirdSerialNo)) {
                         text += "-" + context.getString(R.string.third_serial, thirdSerialNo);
@@ -778,12 +700,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         }
     }
 
-    /**
-     * 设置联台单标示
-     *
-     * @param view
-     * @param tradePaymentVo
-     */
+
     private void setUnionLabel(TextView view, TradePaymentVo tradePaymentVo) {
         if (tradePaymentVo.getTradeUnionType() == null) {
             view.setVisibility(View.GONE);
@@ -808,12 +725,10 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         }
     }
 
-    //获取配送地址
-    private String getDeliveryAddress(TradeExtra tradeExtra) {
+        private String getDeliveryAddress(TradeExtra tradeExtra) {
         if (tradeExtra != null) {
             String deliveryAddress = tradeExtra.getDeliveryAddress();
-            //地址长度大于15位时，截取前15位其余用省略号结尾
-            if (!TextUtils.isEmpty(deliveryAddress) && deliveryAddress.length() > 15) {
+                        if (!TextUtils.isEmpty(deliveryAddress) && deliveryAddress.length() > 15) {
                 deliveryAddress = deliveryAddress.substring(0, 15) + "...";
             }
 
@@ -823,28 +738,17 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         return "";
     }
 
-    /**
-     * 获取第三方流水号
-     *
-     * @param tradeExtra
-     * @return
-     */
+
     public String getThirdSerialNo(TradeExtra tradeExtra) {
         return tradeExtra != null ? tradeExtra.getThirdSerialNo() : "";
     }
 
-    /**
-     * 设置桌台
-     *
-     * @param view
-     * @param tradeVo
-     */
+
     private void setTableName(TextView view, TradeVo tradeVo) {
         List<TradeTable> tradeTableList = tradeVo.getTradeTableList();
         if (Utils.isNotEmpty(tradeTableList)) {
             BigDecimal deskCount = tradeVo.getDeskCount();
-            //大于一桌只显示桌数
-            if (deskCount.compareTo(BigDecimal.ONE) > 0) {
+                        if (deskCount.compareTo(BigDecimal.ONE) > 0) {
                 String deskCountString = String.format(context.getString(R.string.group_order_item_desknum), deskCount.toString());
                 view.setText(deskCountString);
             } else {
@@ -855,8 +759,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
             view.setVisibility(View.VISIBLE);
         } else {
             TradeExtra tradeExtra = tradeVo.getTradeExtra();
-            //号牌
-            String numberPlate = getNumberPlate(tradeExtra);
+                        String numberPlate = getNumberPlate(tradeExtra);
             if (!TextUtils.isEmpty(numberPlate)) {
                 view.setVisibility(View.VISIBLE);
                 if (settings != null) {
@@ -878,9 +781,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         }
     }
 
-    /**
-     * v8.12.0 号牌左边名称显示 POS订单显示号牌 非POS订单显示取餐号
-     */
+
     private int getLeftDisplayForNumberPlate(SourceId sourceId) {
         switch (sourceId) {
             case POS:
@@ -890,9 +791,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         }
     }
 
-    /**
-     * v8.12.0 桌台左边名称显示 POS订单显示桌台 非POS订单显示取餐号
-     */
+
     private int getLeftDisplayForTable(SourceId sourceId) {
         switch (sourceId) {
             case POS:
@@ -902,33 +801,18 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         }
     }
 
-    /**
-     * 获取交易号牌
-     *
-     * @param tradeExtra
-     * @return
-     */
+
     public String getNumberPlate(TradeExtra tradeExtra) {
         return tradeExtra == null ? "" : tradeExtra.getNumberPlate();
     }
 
-    /**
-     * 设置订单时间
-     *
-     * @param view
-     * @param trade
-     */
+
     private void setOrderTime(TextView view, Trade trade) {
         Long serverUpdateTime = trade.getServerUpdateTime();
         view.setText(DateTimeUtils.getDisplayTime(serverUpdateTime));
     }
 
-    /**
-     * 设置期望时间
-     *
-     * @param view
-     * @param tradeVo
-     */
+
     private void setExpectTime(TextView view, TradeVo tradeVo) {
         Trade trade = tradeVo.getTrade();
         TradeExtra tradeExtra = tradeVo.getTradeExtra();
@@ -965,9 +849,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         }
     }
 
-    /**
-     * 设置订单来源图标
-     */
+
     private void setSourceIcon(ImageView icon, Trade trade) {
         SourceId sourceId = trade.getSource();
         if (sourceId != null) {
@@ -1015,13 +897,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         }
     }
 
-    /**
-     * 设置收货号码
-     *
-     * @param view
-     * @param tradeExtra
-     * @param tradeExtraSecrecyPhone
-     */
+
     private void setPhone(TextView view, TradeExtra tradeExtra, TradeExtraSecrecyPhone tradeExtraSecrecyPhone) {
         if (tradeExtra != null) {
             String phone = getReceiverPhone(tradeExtra, tradeExtraSecrecyPhone);
@@ -1046,17 +922,9 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         return "";
     }
 
-    /**
-     * 设置收货地址
-     *
-     * @param view
-     * @param tradeExtra
-     */
+
     private void setAddress(TextView view, TradeExtra tradeExtra) {
-        //当前子标签为销货单-全部时,不展示地址
-      /*  if (DbQueryConstant.SALES_ALL == mChildTab && isInBindDeliveryUserMode) {
-            view.setVisibility(View.GONE);
-        } else */
+
         {
             if (tradeExtra != null) {
                 String address = tradeExtra.getDeliveryAddress();
@@ -1110,11 +978,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
     }
 
 
-    /**
-     * 子标签
-     *
-     * @param tab
-     */
+
     public void setChildTab(int tab) {
         if (tab == DbQueryConstant.SALES_UNPAID || tab == DbQueryConstant.SALES_PAID) {
             mCallNumberLayoutVisible = true;
@@ -1124,11 +988,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         this.mChildTab = tab;
     }
 
-    /**
-     * 大的页面tab标签
-     *
-     * @param checkTab
-     */
+
     public void setCheckTab(int checkTab) {
         this.checkTab = checkTab;
     }
@@ -1148,11 +1008,7 @@ public class OrderCenterListAdapter extends RecyclerViewBaseAdapter<TradePayment
         notifyDataSetChanged();
     }
 
-    /**
-     * 获取已选择的订单列表
-     *
-     * @return
-     */
+
     public List<TradeVo> getSelectedOrders() {
         List<TradeVo> tradeVoList = new ArrayList<TradeVo>();
         for (int i = 0; i < getItemCount(); i++) {

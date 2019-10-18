@@ -5,20 +5,12 @@ import com.zhongmei.yunfu.util.ValueEnum;
 
 public enum TakeDishStatus implements ValueEnum<Byte> {
 
-    /**
-     * 已经取餐
-     */
+
     HAVE_TAKE_DISH((byte) 1),
-    /**
-     * 没有取餐
-     */
+
     NOT_TAKE_DISH((byte) 0),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

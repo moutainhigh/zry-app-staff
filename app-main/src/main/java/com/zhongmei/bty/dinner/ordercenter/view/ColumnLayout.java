@@ -44,10 +44,8 @@ public class ColumnLayout extends LinearLayout {
 
     private IOrderCenterDetailPresenter presenter;
 
-    private int mColumns = 1;// 列数
-
-    private static Map<Long, Integer> exceptionCodeMap = new HashMap<>();//key是code，value是对应的textresid
-
+    private int mColumns = 1;
+    private static Map<Long, Integer> exceptionCodeMap = new HashMap<>();
     static {
         exceptionCodeMap.put(3107L, R.string.wallet_refund_fail_3107);
         exceptionCodeMap.put(3105L, R.string.wallet_refund_fail_3105);
@@ -123,8 +121,7 @@ public class ColumnLayout extends LinearLayout {
                 child.setPadding(0, DensityUtil.dip2px(MainApplication.getInstance(), 12), 0, DensityUtil.dip2px(MainApplication.getInstance(), 12));
                 layout.addView(child);
 
-                // 设置数据
-                int index = i * mColumns + j;
+                                int index = i * mColumns + j;
                 if (index < size) {
                     String s = dataSet.get(index);
                     TextView textView = (TextView) child.findViewById(R.id.column_layout_item_text);
@@ -142,13 +139,7 @@ public class ColumnLayout extends LinearLayout {
         setPaymentModes(tradeVo, paymentItemGroupons, false);
     }
 
-    /**
-     * 该方法提供填充团购劵详情,目前只有美团券在使用,后期可扩展其他券详情展示
-     *
-     * @param tradeVo
-     * @param payModeDetailsBeanList
-     * @param isRefundAmount         是否有可能金额 true有 false无退金额
-     */
+
     public void setPaymentModes(final TradeVo tradeVo, List<PayModeDetailsBean> payModeDetailsBeanList, boolean isRefundAmount) {
         removeAllViews();
         if (payModeDetailsBeanList == null || payModeDetailsBeanList.isEmpty()) {
@@ -160,8 +151,7 @@ public class ColumnLayout extends LinearLayout {
             View view = mLayoutInflater.inflate(R.layout.layout_order_discountticket, null);
             TextView tv_nameAndFee = (TextView) view.findViewById(R.id.tv_nameAndFee);
             TextView tvPayStatus = (TextView) view.findViewById(R.id.tv_order_pay_status);
-            //TextView tvExtraAmount = (TextView) view.findViewById(R.id.tv_extra_amount);
-            TextView btnSalesRefund = (TextView) view.findViewById(R.id.btn_order_refund);
+                        TextView btnSalesRefund = (TextView) view.findViewById(R.id.btn_order_refund);
             TextView tv_foldDetails = (TextView) view.findViewById(R.id.tv_foldDetails);
             Button tv_refreshState = (Button) view.findViewById(R.id.tv_refreshState);
             TextView btnRefundFailedReason = (TextView) view.findViewById(R.id.tv_refund_failed_reason);
@@ -179,23 +169,19 @@ public class ColumnLayout extends LinearLayout {
             if (paymentItem.getPayStatus() != null) {
                 switch (payModeDetailsBean.getPaymentItem().getPayStatus()) {
                     case PAID:
-//                        tvPayStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.pay_status_paid, 0);
                         tvPayStatus.setTextSize(DensityUtil.sp2px(mContext, 7));
                         tvPayStatus.setTextColor(mContext.getResources().getColor(R.color.color_ffffff));
                         tvPayStatus.setBackgroundResource(R.drawable.lable_bg_gray_d4d4d4_2px_radius);
                         tvPayStatus.setText(R.string.record_payed);
                         break;
                     case REFUNDING:
-//                        tvPayStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.pay_status_refunding, 0);
                         tvPayStatus.setTextSize(DensityUtil.sp2px(mContext, 7));
                         tvPayStatus.setTextColor(mContext.getResources().getColor(R.color.color_ffffff));
                         tvPayStatus.setBackgroundResource(R.drawable.lable_bg_orange_fdaf33_2px_radius);
                         tvPayStatus.setText(R.string.order_center_refunding);
                         break;
                     case REFUNDED:
-//                        tvPayStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.pay_status_refunded, 0);
-                        if (PayModeId.EARNEST_DEDUCT.value().equals(paymentItem.getPayModeId())) {//预付金抵扣不退款
-                            break;
+                        if (PayModeId.EARNEST_DEDUCT.value().equals(paymentItem.getPayModeId())) {                            break;
                         }
                         tvPayStatus.setTextSize(DensityUtil.sp2px(mContext, 7));
                         tvPayStatus.setTextColor(mContext.getResources().getColor(R.color.color_ffffff));
@@ -203,15 +189,11 @@ public class ColumnLayout extends LinearLayout {
                         tvPayStatus.setText(R.string.refund_done);
                         break;
                     default:
-                        //tv_nameAndFee.append("  ");
-//                        tvPayStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-                        String[] tradePayStatus = mContext.getResources().getStringArray(R.array.trade_pay_status);
+                                                String[] tradePayStatus = mContext.getResources().getStringArray(R.array.trade_pay_status);
                         String s = tradePayStatus[payModeDetailsBean.getPaymentItem().getPayStatus().value() - 1];
                         SpannableString spanString = new SpannableString(s);
                         ForegroundColorSpan span = new ForegroundColorSpan(Color.RED);
-                        /*if (payModeDetailsBean.getPaymentItem().getPayStatus() == TradePayStatus.PAID || payModeDetailsBean.getPaymentItem().getPayStatus() == TradePayStatus.REFUNDED) {
-                            span = new ForegroundColorSpan(Color.parseColor("#555555"));
-                        }*/
+
                         spanString.setSpan(span, 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                         tvPayStatus.setText(spanString);
                         break;
@@ -225,8 +207,7 @@ public class ColumnLayout extends LinearLayout {
                 case ALIPAY:
                     if (isRefundAmount && isShowRefund(payModeDetailsBeanList, payModeDetailsBean)) {
                         btnSalesRefund.setVisibility(View.VISIBLE);
-                        btnSalesRefund.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);//下划线
-                        btnSalesRefund.setOnClickListener(new OnClickListener() {
+                        btnSalesRefund.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);                        btnSalesRefund.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 final Long paymentItemId = payModeDetailsBean.getPaymentItem().getId();
@@ -235,8 +216,7 @@ public class ColumnLayout extends LinearLayout {
                         });
                     }
 
-                    //显示退款失败原因
-                    RefundExceptionReason refundExceptionReason = payModeDetailsBean.getNewestRefundExceptionReason();
+                                        RefundExceptionReason refundExceptionReason = payModeDetailsBean.getNewestRefundExceptionReason();
                     if (paymentItem.getPayStatus() == TradePayStatus.REFUND_FAILED && refundExceptionReason != null
                             && refundExceptionReason.getExceptionCode() != null) {
                         btnRefundFailedReason.setVisibility(View.VISIBLE);
@@ -252,23 +232,17 @@ public class ColumnLayout extends LinearLayout {
                     break;
                 case BAINUO_TUANGOU:
                 case MEITUAN_TUANGOU:
-                    /*BigDecimal extraAmount = getItemExtraAmount(payModeDetailsBean);
-                    if (extraAmount.doubleValue() > 0) {
-                        tvExtraAmount.setText(mContext.getString(R.string.dinner_order_center_payinfo_extra,
-                                Utils.formatPrice(extraAmount.doubleValue())));
-                    }*/
+
                     break;
                 default:
                     break;
             }
 
-            //是否显示优惠劵
-            if (payModeDetailsBean.getPayModeItems() != null && payModeDetailsBean.getPayModeItems().size() > 0) {
+                        if (payModeDetailsBean.getPayModeItems() != null && payModeDetailsBean.getPayModeItems().size() > 0) {
                 tv_ticketTitle.setText(String.format(mContext.getString(R.string.dinner_ordercenter_ticket_info), payModeDetailsBean.getPayModeName()));
                 DiscountTicketAdapter ticketAdapter = new DiscountTicketAdapter(mContext, payModeDetailsBean.getPayModeItems());
                 slv_discountTickets.setAdapter(ticketAdapter);
-                layout_ticketDetals.setVisibility(View.GONE);//默认关闭
-                tv_foldDetails.setVisibility(View.VISIBLE);
+                layout_ticketDetals.setVisibility(View.GONE);                tv_foldDetails.setVisibility(View.VISIBLE);
                 tv_foldDetails.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -288,9 +262,7 @@ public class ColumnLayout extends LinearLayout {
                 tv_foldDetails.setVisibility(View.GONE);
             }
 
-            //判断已使用第三方支付，退货。状态未返回，刷新状态值
-//            if (payModeDetailsBean.getPaymentType() != null) {
-                if ((paymentItem.getPayModeId() == PayModeId.WEIXIN_PAY.value()
+                            if ((paymentItem.getPayModeId() == PayModeId.WEIXIN_PAY.value()
                         || paymentItem.getPayModeId() == PayModeId.ALIPAY.value()
                         || paymentItem.getPayModeId() == PayModeId.BAIFUBAO.value())
                         && (paymentItem.getPayStatus() == TradePayStatus.REFUNDING
@@ -311,21 +283,13 @@ public class ColumnLayout extends LinearLayout {
                         }
                     }
                 });
-//            } else {
-//                tv_refreshState.setVisibility(View.GONE);
-//            }
 
             addView(view);
 
         }
     }
 
-    /**
-     * 计算溢收金额
-     *
-     * @param paymentVo
-     * @return
-     */
+
     private BigDecimal getItemExtraAmount(PayModeDetailsBean paymentVo) {
         BigDecimal extraAmount = BigDecimal.ZERO;
         if (paymentVo.getPaymentType() == PaymentType.TRADE_SELL
@@ -341,21 +305,14 @@ public class ColumnLayout extends LinearLayout {
         return extraAmount;
     }
 
-    /**
-     * 是否存在退款记录
-     *
-     * @param paymentGroup
-     * @param payModeDetailsBean
-     * @return
-     */
+
     private boolean isShowRefund(List<PayModeDetailsBean> paymentGroup, PayModeDetailsBean payModeDetailsBean) {
         PaymentItem paymentItem = payModeDetailsBean.getPaymentItem();
         BigDecimal paymentItemTotal = payModeDetailsBean.getPayModeTotalDenomination().subtract(paymentItem.getChangeAmount());
         if (paymentItem.getPayStatus() != null
                 && paymentItem.getPayStatus() == TradePayStatus.PAID
                 && paymentItemTotal.doubleValue() > 0) {
-            //判断是否存在退款中的记录，如果有则不显示退款
-            for (final PayModeDetailsBean bean : paymentGroup) {
+                        for (final PayModeDetailsBean bean : paymentGroup) {
                 TradePayStatus payStatus = bean.getPaymentItem().getPayStatus();
                 if (payStatus != null && payStatus == TradePayStatus.REFUNDING) {
                     return false;
@@ -368,24 +325,16 @@ public class ColumnLayout extends LinearLayout {
         return false;
     }
 
-    /**
-     * 获取当前一笔支付记录的退款总金额
-     *
-     * @param paymentItem
-     * @param paymentGroup
-     * @return
-     */
+
     private BigDecimal getRefundAmount(PaymentItem paymentItem, List<PayModeDetailsBean> paymentGroup) {
-        //当前已支付的记录减去当前支付已退款记录,如现金支付记录1 - 现金退款记录1
-        BigDecimal refundAmountTotal = BigDecimal.ZERO;
+                BigDecimal refundAmountTotal = BigDecimal.ZERO;
         Long payModeId = paymentItem.getPayModeId();
         if (payModeId != null) {
             for (final PayModeDetailsBean bean : paymentGroup) {
                 String relateId = bean.getPaymentItem().getRelateId();
                 if (relateId != null && relateId.equals(String.valueOf(paymentItem.getId()))) {
                     Long _payModeId = bean.getPaymentItem().getPayModeId();
-                    //判断是否相同支付方式
-                    if (_payModeId != null && _payModeId.compareTo(payModeId) == 0) {
+                                        if (_payModeId != null && _payModeId.compareTo(payModeId) == 0) {
                         TradePayStatus payStatus = bean.getPaymentItem().getPayStatus();
                         if (payStatus != null && (payStatus == TradePayStatus.REFUNDED || payStatus == TradePayStatus.REFUNDING)) {
                             refundAmountTotal = refundAmountTotal.add(bean.getPayModeTotalDenomination().abs());

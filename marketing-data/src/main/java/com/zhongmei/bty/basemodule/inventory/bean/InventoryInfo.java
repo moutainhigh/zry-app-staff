@@ -2,11 +2,7 @@ package com.zhongmei.bty.basemodule.inventory.bean;
 
 import java.math.BigDecimal;
 
-/**
- * @Date： 2017/2/28
- * @Description:库存数据对象
- * @Version: 1.0
- */
+
 public class InventoryInfo {
 
     private String uuid;

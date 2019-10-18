@@ -3,9 +3,7 @@ package com.zhongmei.bty.basemodule.trade.enums;
 import com.zhongmei.yunfu.basemodule.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public enum OperateType {
 

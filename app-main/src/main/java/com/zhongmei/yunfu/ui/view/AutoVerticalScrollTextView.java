@@ -13,19 +13,14 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-/**
- * 自动垂直滚动的TextView
- */
+
 public class AutoVerticalScrollTextView extends TextSwitcher implements ViewSwitcher.ViewFactory {
 
     private Context mContext;
 
-    //mInUp,mOutUp分别构成向下翻页的进出动画
-    private Rotate3dAnimation mInUp;
+        private Rotate3dAnimation mInUp;
     private Rotate3dAnimation mOutUp;
-    //private int textColor = Color.BLACK;
-    //private int textSize = 10;
-    private AttributeSet attrs;
+            private AttributeSet attrs;
 
     public AutoVerticalScrollTextView(Context context) {
         this(context, null);
@@ -35,20 +30,7 @@ public class AutoVerticalScrollTextView extends TextSwitcher implements ViewSwit
         super(context, attrs);
         mContext = context;
         this.attrs = attrs;
-        /*final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AutoVerticalScrollTextView);
-        final int N = a.getIndexCount();
-        for (int i = 0; i < N; i++) {
-            int attr = a.getIndex(i);
-            switch (attr) {
-                case R.styleable.AutoVerticalScrollTextView_textColor:
-                    textColor = a.getColor(i, textColor);
-                    break;
-                case R.styleable.AutoVerticalScrollTextView_textSize:
-                    textSize = a.getDimensionPixelSize(i, textSize);
-                    break;
-            }
-        }
-        a.recycle();*/
+
 
         init();
     }
@@ -57,16 +39,11 @@ public class AutoVerticalScrollTextView extends TextSwitcher implements ViewSwit
         setFactory(this);
         mInUp = createAnim(true, true);
         mOutUp = createAnim(false, true);
-        setInAnimation(mInUp);//当View显示时动画资源ID
-        setOutAnimation(mOutUp);//当View隐藏是动画资源ID。
-    }
+        setInAnimation(mInUp);        setOutAnimation(mOutUp);    }
 
     private Rotate3dAnimation createAnim(boolean turnIn, boolean turnUp) {
         Rotate3dAnimation rotation = new Rotate3dAnimation(turnIn, turnUp);
-        rotation.setDuration(200);//执行动画的时间
-        rotation.setFillAfter(false);//是否保持动画完毕之后的状态
-        rotation.setInterpolator(new AccelerateInterpolator());//设置加速模式
-        return rotation;
+        rotation.setDuration(200);        rotation.setFillAfter(false);        rotation.setInterpolator(new AccelerateInterpolator());        return rotation;
     }
 
     @Override
@@ -75,29 +52,19 @@ public class AutoVerticalScrollTextView extends TextSwitcher implements ViewSwit
         super.setText(text);
     }
 
-    //这里返回的TextView，就是我们看到的View,可以设置自己想要的效果
-    @Override
+        @Override
     public View makeView() {
         TextView textView = new TextView(mContext, attrs);
         textView.setSingleLine(true);
         textView.setEllipsize(TextUtils.TruncateAt.END);
-        //textView.setGravity(Gravity.LEFT);
-        //textView.setGravity(Gravity.CENTER_VERTICAL);
-        //textView.setTextColor(textColor);
-        //textView.setTextSize(textSize);
-        //textView.setTextSize(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10, getResources().getDisplayMetrics()));
-        //textView.setTextColor(getResources().getColor(R.color.color_666666));
-        return textView;
+                                                        return textView;
     }
 
-    //定义动作，向上滚动翻页
-    public void next() {
-        //显示动画
-        if (getInAnimation() != mInUp) {
+        public void next() {
+                if (getInAnimation() != mInUp) {
             setInAnimation(mInUp);
         }
-        //隐藏动画
-        if (getOutAnimation() != mOutUp) {
+                if (getOutAnimation() != mOutUp) {
             setOutAnimation(mOutUp);
         }
     }

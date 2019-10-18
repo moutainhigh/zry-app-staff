@@ -22,10 +22,7 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 选择座位号view
- */
+
 @EViewGroup(R.layout.experience_layout_seat)
 public class SeatView extends LinearLayout {
 
@@ -115,8 +112,7 @@ public class SeatView extends LinearLayout {
     private void inflateRecipe() {
         experience_layout.removeAllViews();
         if (mPropertyGroupVos != null && mPropertyGroupVos.size() > 0) {
-            //addPropertyTypeTitle(propertyGroupVo);
-            int rowCount = mPropertyGroupVos.size();
+                        int rowCount = mPropertyGroupVos.size();
             for (int i = 0; i < rowCount; i++) {
                 View rootView =
                         LayoutInflater.from(getContext()).inflate(R.layout.experience_item_seat, experience_layout, false);
@@ -128,13 +124,7 @@ public class SeatView extends LinearLayout {
         }
     }
 
-    /**
-     * 设置口味做法的名称和价格
-     *
-     * @param rootView
-     * @param rowIndex 属性在其类别下的索引
-     * @param chooseVo
-     */
+
     private void setItemView(View rootView, int rowIndex, ChooseVo<TableSeat> chooseVo) {
         TextView tvName = (TextView) rootView.findViewById(R.id.text_name);
         tvName.setText(chooseVo.getProperty().getSeatName());
@@ -172,13 +162,7 @@ public class SeatView extends LinearLayout {
     }
 
 
-    /**
-     * 选中或取消某一属性
-     *
-     * @param v
-     * @param pos
-     * @param select
-     */
+
     private void setPropertySelectable(View v, int pos, boolean select) {
         int childCount = experience_layout.getChildCount();
         for (int i = 0; i < childCount; i++) {

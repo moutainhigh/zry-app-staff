@@ -5,11 +5,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.enums.CardStatus;
 import com.zhongmei.bty.basemodule.devices.mispos.enums.EntityCardType;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * @Date： 2017/5/10
- * @Description:卡基本信息返回
- * @Version: 1.0
- */
+
 public class CardBaseInfoResp extends CardBaseResp<BaseCardInfo> {
 
     public class BaseCardInfo {

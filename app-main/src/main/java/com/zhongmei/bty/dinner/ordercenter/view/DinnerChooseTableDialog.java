@@ -136,11 +136,9 @@ public class DinnerChooseTableDialog extends BasicDialogFragment {
         try {
             boolean allowMultTrades = ServerSettingManager.allowMultiTradesOnTable();
             List<Tables> tables = tablesDal.listAllPhysicalLayoutTables();
-            // 筛选出所有可用的桌台
-            for (int i = tables.size() - 1; i >= 0; i--) {
+                        for (int i = tables.size() - 1; i >= 0; i--) {
                 if (tables.get(i).getTableStatus() == TableStatus.EMPTY) {
-                    // 空闲桌台保留
-                    continue;
+                                        continue;
                 } else if (allowMultTrades && tables.get(i).getTableStatus() == TableStatus.OCCUPIED) {
                     continue;
                 }
@@ -289,8 +287,7 @@ public class DinnerChooseTableDialog extends BasicDialogFragment {
             Tables table = (Tables) getItem(position);
             holder.table_name.setText(table.getTableName());
             if (selectedTable != null && selectedTable.getId().equals(table.getId())) {
-                // 选中桌号
-                holder.table_name.setTextColor(context.getResources().getColor(R.color.text_white));
+                                holder.table_name.setTextColor(context.getResources().getColor(R.color.text_white));
                 holder.table_name.setBackgroundResource(R.drawable.dinner_table_press);
             } else {
                 holder.table_name.setBackgroundResource(R.drawable.dinner_table_normal);

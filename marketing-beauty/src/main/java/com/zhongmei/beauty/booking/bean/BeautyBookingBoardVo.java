@@ -7,18 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyBookingBoardVo {
 
-    private List<BookingTradeItemUser> mTechnicians;//技师列表
-    private Map<Long, ArrayList<ReserverItemVo>> mMapBookingItemVos;//根据技师id，存储对应的预定信息
-    private List<BeautyBookingVo> mNoTechnicianBookingItemVos;//储存没有技师的预定单列表
-
-    private List<BeautyBookingVo> mBookingItemVos;//储存有技师的预定单列表
-
+    private List<BookingTradeItemUser> mTechnicians;    private Map<Long, ArrayList<ReserverItemVo>> mMapBookingItemVos;    private List<BeautyBookingVo> mNoTechnicianBookingItemVos;
+    private List<BeautyBookingVo> mBookingItemVos;
     public List<BookingTradeItemUser> getmTechnicians() {
         return mTechnicians;
     }

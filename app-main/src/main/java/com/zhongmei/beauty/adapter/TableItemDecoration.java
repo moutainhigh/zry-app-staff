@@ -6,9 +6,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TableItemDecoration extends RecyclerView.ItemDecoration {
     private int mHorizontalPadding = 0;
@@ -33,6 +31,5 @@ public class TableItemDecoration extends RecyclerView.ItemDecoration {
 
         outRect.top = pos < spanCount ? 0 : mVerticalPadding;
         outRect.left = mHorizontalPadding;
-//        super.getItemOffsets(outRect, view, parent, state);
     }
 }

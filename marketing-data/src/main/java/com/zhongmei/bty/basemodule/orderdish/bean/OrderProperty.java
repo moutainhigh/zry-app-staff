@@ -6,11 +6,7 @@ import com.zhongmei.yunfu.db.enums.PropertyKind;
 
 import java.math.BigDecimal;
 
-/**
- * @Date：2015年7月13日 上午11:40:05
- * @Description: 菜品属性选择对象
- * @Version: 1.0
- */
+
 public class OrderProperty implements IOrderProperty {
 
     private final DishPropertyType propertyType;

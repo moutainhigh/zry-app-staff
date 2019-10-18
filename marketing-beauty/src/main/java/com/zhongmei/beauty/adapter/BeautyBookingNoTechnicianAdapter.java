@@ -8,9 +8,7 @@ import com.zhongmei.beauty.booking.interfaces.BeautyBookingTradeControlListener;
 import com.zhongmei.yunfu.ui.view.recycler.ViewWrapper;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BeautyBookingNoTechnicianAdapter extends RecyclerViewBaseAdapter<BeautyBookingVo, ReserverNoTechnicianItemView> {
 
     private Context mContext;

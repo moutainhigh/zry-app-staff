@@ -4,40 +4,24 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.DataEntityBase;
 
-/**
- * ClosingAccountRecord is a ORMLite bean type. Corresponds to the database table "closing_account_record"
- */
+
 @DatabaseTable(tableName = "closing_account_record")
 public class ClosingAccountRecord extends DataEntityBase {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "closing_account_record"
-     */
+
     public interface $ extends DataEntityBase.$ {
-        /**
-         * belong_date
-         */
+
         public static final String belongDate = "belong_date";
-        /**
-         * start_time
-         */
+
         public static final String startTime = "start_time";
-        /**
-         * end_time
-         */
+
         public static final String endTime = "end_time";
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
-        /**
-         * creator_account
-         */
+
         public static final String creatorAccount = "creator_account";
     }
 

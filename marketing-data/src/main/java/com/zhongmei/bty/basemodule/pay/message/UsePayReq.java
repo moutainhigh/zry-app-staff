@@ -20,14 +20,10 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 接口请求体
- */
+
 
 public class UsePayReq {
-    private Base base;//基本信息
-    private Payment payment;//支付信息
-
+    private Base base;    private Payment payment;
     public UsePayReq(NPayReq payReq) {
         this.base = toBase(payReq);
         this.payment = toPayment(payReq);
@@ -65,8 +61,7 @@ public class UsePayReq {
         return base;
     }
 
-    //构建基本信息
-    private Base toBase(Trade trade) {
+        private Base toBase(Trade trade) {
         Base base = new Base();
         AuthUser authUser = Session.getAuthUser();
         if (authUser != null) {
@@ -83,62 +78,41 @@ public class UsePayReq {
     private Payment toPayment(NPayReq payReq) {
         NPaymentReq newPaymentReq = payReq.getPayment();
         Payment payment = new Payment();
-        List<PaymentItemReq> aliItemScanCodes = new ArrayList<PaymentItemReq>();//支付宝主扫支付明细
-        List<ShowCodeReq> aliItemShowCodes = new ArrayList<ShowCodeReq>();//支付宝被扫支付明细
-        List<PaymentItemReq> baiduItemScanCodes = new ArrayList<PaymentItemReq>();//百度钱包主扫支付明细
-        List<ShowCodeReq> baiduItemShowCodes = new ArrayList<ShowCodeReq>();//百度钱包被扫支付明细
-        List<PaymentItemReq> weixinItemScanCodes = new ArrayList<PaymentItemReq>();//微信主扫支付明细
-        List<ShowCodeReq> weixinItemShowCodes = new ArrayList<ShowCodeReq>();//微信被扫支付明细
-        List<ShowCodeReq> flashItemShowCodes = new ArrayList<ShowCodeReq>();//闪惠被扫支付明细
-        List<EntityCardValueReq> entityCardValues = new ArrayList<EntityCardValueReq>();//实体卡储值支付明细
-        List<MemberValueReq> itemMemberValues = new ArrayList<MemberValueReq>();//虚拟账号储值支付明细
-        List<TmpCardValueReq> tmpCardValues = new ArrayList<TmpCardValueReq>();//匿名卡储值支付明细
-        List<GrouponMeituanPayReq> itemGrouponMeituanPays = new ArrayList<GrouponMeituanPayReq>();//美团团购券支付明细
-        List<GrouponNuomiPayReq> itemGrouponNuomiPays = new ArrayList<GrouponNuomiPayReq>();//糯米团购券支付明细
-
+        List<PaymentItemReq> aliItemScanCodes = new ArrayList<PaymentItemReq>();        List<ShowCodeReq> aliItemShowCodes = new ArrayList<ShowCodeReq>();        List<PaymentItemReq> baiduItemScanCodes = new ArrayList<PaymentItemReq>();        List<ShowCodeReq> baiduItemShowCodes = new ArrayList<ShowCodeReq>();        List<PaymentItemReq> weixinItemScanCodes = new ArrayList<PaymentItemReq>();        List<ShowCodeReq> weixinItemShowCodes = new ArrayList<ShowCodeReq>();        List<ShowCodeReq> flashItemShowCodes = new ArrayList<ShowCodeReq>();        List<EntityCardValueReq> entityCardValues = new ArrayList<EntityCardValueReq>();        List<MemberValueReq> itemMemberValues = new ArrayList<MemberValueReq>();        List<TmpCardValueReq> tmpCardValues = new ArrayList<TmpCardValueReq>();        List<GrouponMeituanPayReq> itemGrouponMeituanPays = new ArrayList<GrouponMeituanPayReq>();        List<GrouponNuomiPayReq> itemGrouponNuomiPays = new ArrayList<GrouponNuomiPayReq>();
         List<NPaymentItemReq> paymentItems = newPaymentReq.getPaymentItemList();
         if (Utils.isNotEmpty(paymentItems)) {
             for (PaymentItem paymentItem : paymentItems) {
                 PayModeId payModeId = ValueEnums.toEnum(PayModeId.class, paymentItem.getPayModeId());
                 switch (payModeId) {
-                    case ALIPAY://支付宝
-                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
+                    case ALIPAY:                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
                             aliItemShowCodes.add(new ShowCodeReq(paymentItem));
                         } else if (paymentItem.getPaymentItemExtra().getPayType() == PayType.QCODE) {
                             aliItemScanCodes.add(new PaymentItemReq(paymentItem));
                         }
                         break;
-                    case BAIFUBAO://百度钱包
-                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
+                    case BAIFUBAO:                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
                             baiduItemShowCodes.add(new ShowCodeReq(paymentItem));
                         } else if (paymentItem.getPaymentItemExtra().getPayType() == PayType.QCODE) {
                             baiduItemScanCodes.add(new PaymentItemReq(paymentItem));
                         }
                         break;
-                    case WEIXIN_PAY://微信支付
-                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
+                    case WEIXIN_PAY:                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
                             weixinItemShowCodes.add(new ShowCodeReq(paymentItem));
                         } else if (paymentItem.getPaymentItemExtra().getPayType() == PayType.QCODE) {
                             weixinItemScanCodes.add(new PaymentItemReq(paymentItem));
                         }
                         break;
-                    case MEITUAN_FASTPAY://美团闪付
-                        flashItemShowCodes.add(new ShowCodeReq(paymentItem));
+                    case MEITUAN_FASTPAY:                        flashItemShowCodes.add(new ShowCodeReq(paymentItem));
                         break;
-                    case ENTITY_CARD://会员实体卡
-                        entityCardValues.add(new EntityCardValueReq(paymentItem));
+                    case ENTITY_CARD:                        entityCardValues.add(new EntityCardValueReq(paymentItem));
                         break;
-                    case MEMBER_CARD://虚拟卡会员余额
-                        itemMemberValues.add(new MemberValueReq(paymentItem));
+                    case MEMBER_CARD:                        itemMemberValues.add(new MemberValueReq(paymentItem));
                         break;
-                    case ANONYMOUS_ENTITY_CARD://匿名实体卡余额
-                        tmpCardValues.add(new TmpCardValueReq(paymentItem));
+                    case ANONYMOUS_ENTITY_CARD:                        tmpCardValues.add(new TmpCardValueReq(paymentItem));
                         break;
-                    case MEITUAN_TUANGOU://美团团购
-                        itemGrouponMeituanPays.add(new GrouponMeituanPayReq(paymentItem));
+                    case MEITUAN_TUANGOU:                        itemGrouponMeituanPays.add(new GrouponMeituanPayReq(paymentItem));
                         break;
-                    case BAINUO_TUANGOU://百度糯米券
-                        itemGrouponNuomiPays.add(new GrouponNuomiPayReq(paymentItem));
+                    case BAINUO_TUANGOU:                        itemGrouponNuomiPays.add(new GrouponNuomiPayReq(paymentItem));
                         break;
                 }
             }
@@ -160,65 +134,43 @@ public class UsePayReq {
         return payment;
     }
 
-    //构建支付信息
-    private UsePayReq.Payment toPayment(PaymentVo paymentVo) {
+        private UsePayReq.Payment toPayment(PaymentVo paymentVo) {
         Payment payment = new Payment();
-        List<PaymentItemReq> aliItemScanCodes = new ArrayList<PaymentItemReq>();//支付宝主扫支付明细
-        List<ShowCodeReq> aliItemShowCodes = new ArrayList<ShowCodeReq>();//支付宝被扫支付明细
-        List<PaymentItemReq> baiduItemScanCodes = new ArrayList<PaymentItemReq>();//百度钱包主扫支付明细
-        List<ShowCodeReq> baiduItemShowCodes = new ArrayList<ShowCodeReq>();//百度钱包被扫支付明细
-        List<PaymentItemReq> weixinItemScanCodes = new ArrayList<PaymentItemReq>();//微信主扫支付明细
-        List<ShowCodeReq> weixinItemShowCodes = new ArrayList<ShowCodeReq>();//微信被扫支付明细
-        List<ShowCodeReq> flashItemShowCodes = new ArrayList<ShowCodeReq>();//闪惠被扫支付明细
-        List<EntityCardValueReq> entityCardValues = new ArrayList<EntityCardValueReq>();//实体卡储值支付明细
-        List<MemberValueReq> itemMemberValues = new ArrayList<MemberValueReq>();//虚拟账号储值支付明细
-        List<TmpCardValueReq> tmpCardValues = new ArrayList<TmpCardValueReq>();//匿名卡储值支付明细
-        List<GrouponMeituanPayReq> itemGrouponMeituanPays = new ArrayList<GrouponMeituanPayReq>();//美团团购券支付明细
-        List<GrouponNuomiPayReq> itemGrouponNuomiPays = new ArrayList<GrouponNuomiPayReq>();//糯米团购券支付明细
-
+        List<PaymentItemReq> aliItemScanCodes = new ArrayList<PaymentItemReq>();        List<ShowCodeReq> aliItemShowCodes = new ArrayList<ShowCodeReq>();        List<PaymentItemReq> baiduItemScanCodes = new ArrayList<PaymentItemReq>();        List<ShowCodeReq> baiduItemShowCodes = new ArrayList<ShowCodeReq>();        List<PaymentItemReq> weixinItemScanCodes = new ArrayList<PaymentItemReq>();        List<ShowCodeReq> weixinItemShowCodes = new ArrayList<ShowCodeReq>();        List<ShowCodeReq> flashItemShowCodes = new ArrayList<ShowCodeReq>();        List<EntityCardValueReq> entityCardValues = new ArrayList<EntityCardValueReq>();        List<MemberValueReq> itemMemberValues = new ArrayList<MemberValueReq>();        List<TmpCardValueReq> tmpCardValues = new ArrayList<TmpCardValueReq>();        List<GrouponMeituanPayReq> itemGrouponMeituanPays = new ArrayList<GrouponMeituanPayReq>();        List<GrouponNuomiPayReq> itemGrouponNuomiPays = new ArrayList<GrouponNuomiPayReq>();
         List<PaymentItem> paymentItems = paymentVo.getPaymentItemList();
         if (Utils.isNotEmpty(paymentItems)) {
             for (PaymentItem paymentItem : paymentItems) {
                 PayModeId payModeId = ValueEnums.toEnum(PayModeId.class, paymentItem.getPayModeId());
                 switch (payModeId) {
-                    case ALIPAY://支付宝
-                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
+                    case ALIPAY:                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
                             aliItemShowCodes.add(new ShowCodeReq(paymentItem));
                         } else if (paymentItem.getPaymentItemExtra().getPayType() == PayType.QCODE) {
                             aliItemScanCodes.add(new PaymentItemReq(paymentItem));
                         }
                         break;
-                    case BAIFUBAO://百度钱包
-                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
+                    case BAIFUBAO:                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
                             baiduItemShowCodes.add(new ShowCodeReq(paymentItem));
                         } else if (paymentItem.getPaymentItemExtra().getPayType() == PayType.QCODE) {
                             baiduItemScanCodes.add(new PaymentItemReq(paymentItem));
                         }
                         break;
-                    case WEIXIN_PAY://微信支付
-                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
+                    case WEIXIN_PAY:                        if (paymentItem.getPaymentItemExtra().getPayType() == PayType.SCAN) {
                             weixinItemShowCodes.add(new ShowCodeReq(paymentItem));
                         } else if (paymentItem.getPaymentItemExtra().getPayType() == PayType.QCODE) {
                             weixinItemScanCodes.add(new PaymentItemReq(paymentItem));
                         }
                         break;
-                    case MEITUAN_FASTPAY://美团闪付
-                        flashItemShowCodes.add(new ShowCodeReq(paymentItem));
+                    case MEITUAN_FASTPAY:                        flashItemShowCodes.add(new ShowCodeReq(paymentItem));
                         break;
-                    case ENTITY_CARD://会员实体卡
-                        entityCardValues.add(new EntityCardValueReq(paymentItem));
+                    case ENTITY_CARD:                        entityCardValues.add(new EntityCardValueReq(paymentItem));
                         break;
-                    case MEMBER_CARD://虚拟卡会员余额
-                        itemMemberValues.add(new MemberValueReq(paymentItem));
+                    case MEMBER_CARD:                        itemMemberValues.add(new MemberValueReq(paymentItem));
                         break;
-                    case ANONYMOUS_ENTITY_CARD://匿名实体卡余额
-                        tmpCardValues.add(new TmpCardValueReq(paymentItem));
+                    case ANONYMOUS_ENTITY_CARD:                        tmpCardValues.add(new TmpCardValueReq(paymentItem));
                         break;
-                    case MEITUAN_TUANGOU://美团团购
-                        itemGrouponMeituanPays.add(new GrouponMeituanPayReq(paymentItem));
+                    case MEITUAN_TUANGOU:                        itemGrouponMeituanPays.add(new GrouponMeituanPayReq(paymentItem));
                         break;
-                    case BAINUO_TUANGOU://百度糯米券
-                        itemGrouponNuomiPays.add(new GrouponNuomiPayReq(paymentItem));
+                    case BAINUO_TUANGOU:                        itemGrouponNuomiPays.add(new GrouponNuomiPayReq(paymentItem));
                         break;
                 }
             }
@@ -241,13 +193,7 @@ public class UsePayReq {
     }
 
     public static class Base {
-        private Long bizDate;//营业日
-        private Integer bizType;//业务类型
-        private Long operateId;//操作人Id
-        private String operateName;//操作人姓名
-        private String tradeUuid;//订单Uuid
-        private String tradeNo;//订单号
-
+        private Long bizDate;        private Integer bizType;        private Long operateId;        private String operateName;        private String tradeUuid;        private String tradeNo;
         public Long getBizDate() {
             return bizDate;
         }
@@ -298,20 +244,7 @@ public class UsePayReq {
     }
 
     public class Payment {
-        private List<PaymentItemReq> aliItemScanCodes;//支付宝主扫支付明细
-        private List<ShowCodeReq> aliItemShowCodes;//支付宝被扫支付明细
-        private List<PaymentItemReq> baiduItemScanCodes;//百度钱包主扫支付明细
-        private List<ShowCodeReq> baiduItemShowCodes;//百度钱包被扫支付明细
-        private List<EntityCardValueReq> entityCardValues;//实体卡储值支付明细
-        private List<ShowCodeReq> flashItemShowCodes;//闪惠被扫支付明细
-        private List<GrouponMeituanPayReq> itemGrouponMeituanPays;//美团团购券支付明细
-        private List<GrouponNuomiPayReq> itemGrouponNuomiPays;//糯米团购券支付明细
-        private List<MemberValueReq> itemMemberValues;//虚拟账号储值支付明细
-        private PaymentInfo paymentInfo;//payment信息
-        private List<TmpCardValueReq> tmpCardValues;//匿名卡储值支付明细
-        private List<PaymentItemReq> weixinItemScanCodes;//微信主扫支付明细
-        private List<ShowCodeReq> weixinItemShowCodes;//微信被扫支付明细
-
+        private List<PaymentItemReq> aliItemScanCodes;        private List<ShowCodeReq> aliItemShowCodes;        private List<PaymentItemReq> baiduItemScanCodes;        private List<ShowCodeReq> baiduItemShowCodes;        private List<EntityCardValueReq> entityCardValues;        private List<ShowCodeReq> flashItemShowCodes;        private List<GrouponMeituanPayReq> itemGrouponMeituanPays;        private List<GrouponNuomiPayReq> itemGrouponNuomiPays;        private List<MemberValueReq> itemMemberValues;        private PaymentInfo paymentInfo;        private List<TmpCardValueReq> tmpCardValues;        private List<PaymentItemReq> weixinItemScanCodes;        private List<ShowCodeReq> weixinItemShowCodes;
         public List<PaymentItemReq> getAliItemScanCodes() {
             return aliItemScanCodes;
         }
@@ -417,12 +350,7 @@ public class UsePayReq {
         }
 
         public class PaymentInfo {
-            private BigDecimal actualAmount;//实收金额
-            private BigDecimal exemptAmount;//抹零金额
-            private Integer paymentType;//付款类型
-            private BigDecimal receivableAmount;//应付金额
-            private String uuid;//唯一标识
-
+            private BigDecimal actualAmount;            private BigDecimal exemptAmount;            private Integer paymentType;            private BigDecimal receivableAmount;            private String uuid;
             public PaymentInfo(PaymentVo paymentVo) {
                 actualAmount = paymentVo.getPayment().getActualAmount();
                 exemptAmount = paymentVo.getPayment().getExemptAmount();

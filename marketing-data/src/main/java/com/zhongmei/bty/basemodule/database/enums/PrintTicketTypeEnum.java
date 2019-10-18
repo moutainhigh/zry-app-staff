@@ -5,10 +5,7 @@ import android.text.TextUtils;
 import com.zhongmei.yunfu.data.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * @version: 1.0
- * @date 2015年7月10日
- */
+
 public enum PrintTicketTypeEnum {
 
     CUSTOMER(R.string.ticket_note),
@@ -42,11 +39,6 @@ public enum PrintTicketTypeEnum {
     LABEL(R.string.label);
 
 
-//    LAG(R.string.dinner_own_bill),
-//    RISE_DISH(R.string.ticket_rise_dish_order),
-//    REMIND_DISH(R.string.ticket_remind_dish),
-//    ,
-//    SALE_CARD(R.string.ticket_sale_card);
 
     private int valueResId;
 

@@ -17,9 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-/**
- * 语音数据
- */
+
 public class BaiduSyntheticSpeechDalImpl extends AbstractOpeartesImpl implements BaiduSyntheticSpeechDal {
     private static final String TAG = BaiduSyntheticSpeechDalImpl.class.getSimpleName();
 
@@ -31,8 +29,7 @@ public class BaiduSyntheticSpeechDalImpl extends AbstractOpeartesImpl implements
     public void saveQueue(final BaiduSyntheticSpeech speech) throws Exception {
         final DatabaseHelper helper = LocalDBManager.getHelper();
         try {
-            // modify 20170217 start 添加事务来实现线程同步
-            helper.callInTransaction(new Callable<Void>() {
+                        helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
                         throws Exception {
@@ -40,7 +37,6 @@ public class BaiduSyntheticSpeechDalImpl extends AbstractOpeartesImpl implements
                     return null;
                 }
             });
-            // modify 20170217 end 添加事务来实现线程同步
 
         } finally {
             LocalDBManager.releaseHelper();
@@ -51,8 +47,7 @@ public class BaiduSyntheticSpeechDalImpl extends AbstractOpeartesImpl implements
     public void saveQueueList(final List<BaiduSyntheticSpeech> speechList) throws Exception {
         final DatabaseHelper helper = LocalDBManager.getHelper();
         try {
-            // modify 20170217 start 添加事务来实现线程同步
-            helper.callInTransaction(new Callable<Void>() {
+                        helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
                         throws Exception {
@@ -60,7 +55,6 @@ public class BaiduSyntheticSpeechDalImpl extends AbstractOpeartesImpl implements
                     return null;
                 }
             });
-            // modify 20170217 end 添加事务来实现线程同步
 
         } finally {
             LocalDBManager.releaseHelper();
@@ -71,8 +65,7 @@ public class BaiduSyntheticSpeechDalImpl extends AbstractOpeartesImpl implements
     public void updateQueue(final BaiduSyntheticSpeech speech) throws Exception {
         final DatabaseHelper helper = LocalDBManager.getHelper();
         try {
-            // modify 20170217 start 添加事务来实现线程同步
-            helper.callInTransaction(new Callable<Void>() {
+                        helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
                         throws Exception {
@@ -80,8 +73,7 @@ public class BaiduSyntheticSpeechDalImpl extends AbstractOpeartesImpl implements
                     return null;
                 }
             });
-            // modify 20170217 end 添加事务来实现线程同步
-        } finally {
+                    } finally {
             LocalDBManager.releaseHelper();
         }
     }

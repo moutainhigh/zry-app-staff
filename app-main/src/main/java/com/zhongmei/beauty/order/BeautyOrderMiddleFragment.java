@@ -69,9 +69,6 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
 
 @EFragment(R.layout.beauty_order_middle_layout)
 public class BeautyOrderMiddleFragment extends BasicFragment implements IOperateListener {
@@ -82,51 +79,39 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     @ViewById(R.id.vActionBar)
     LinearLayout vActionBar;
 
-    /**
-     * 当前内容
-     */
+
     private View mCurrentContentView;
-    /**
-     * 空态页
-     */
+
     private CustomEmptyView mCustomEmptyView;
 
-    /**
-     * 会员相关操作
-     */
+
     @ViewById(R.id.layout_member_operate)
     LinearLayout layout_member_operate;
     @ViewById(R.id.btn_card)
-    Button btn_card; //次卡
+    Button btn_card;
     @ViewById(R.id.btn_integral)
-    Button btn_integral; //积分
+    Button btn_integral;
     @ViewById(R.id.btn_coupon)
-    Button btn_coupon; //优惠卷
+    Button btn_coupon;
     @ViewById(R.id.btn_activity)
-    Button btn_activity; //活动
+    Button btn_activity;
 
-    /**
-     * 整单操作
-     */
     @ViewById(R.id.layout_trade_operate)
     LinearLayout layout_trade_operate;
     @ViewById(R.id.btn_discount)
-    Button btn_discount;//折扣
+    Button btn_discount;
     @ViewById(R.id.btn_trade_remark)
-    Button btn_trade_remark;//备注
+    Button btn_trade_remark;
     @ViewById(R.id.btn_table)
-    Button btn_table;//桌台选择
+    Button btn_table;
     @ViewById(R.id.btn_party)
-    Button btn_party;//服务员选择
+    Button btn_party;
     @ViewById(R.id.btn_verify_code)
-    Button btn_verifyCode;//验券
+    Button btn_verifyCode;
     @ViewById(R.id.btn_clearcart)
-    Button btn_clearcart;//清空购物车
+    Button btn_clearcart;
 
 
-    /**
-     * 单品操作
-     */
     @ViewById(R.id.layout_trade_item_operate)
     LinearLayout layout_trade_item_operate;
     @ViewById(R.id.btn_extra)
@@ -138,7 +123,6 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     @ViewById(R.id.btn_trade_item_remark)
     Button btn_trade_item_remark;
 
-    //规格
     @ViewById(R.id.btn_standard)
     Button btnStandard;
 
@@ -163,7 +147,6 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     protected CommonPagerAdapter mCommonPagerAdapter;
 
     private IChangeMiddlePageListener mChangeListener;
-    //当前选中的购物车条目
     private DishDataItem mDishDataItem;
     BeautyPropertyUtil beautyPropertyUtil = null;
 
@@ -223,7 +206,6 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
 
             @Override
             public void onPageSelected(int i) {
-                //目前只有两页
                 if (i > 0) {
                     ivSwitchPage.setImageResource(R.drawable.ic_switch_page_pre);
                 } else {
@@ -242,7 +224,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
 
     private void initPropertyUtil() {
         beautyPropertyUtil = new BeautyPropertyUtil(getActivity(), mChangePageListener, this, mChangeListener);
-        beautyPropertyUtil.initView(vActionBar, btn_extra, btnRemark,btn_trade_item_remark);
+        beautyPropertyUtil.initView(vActionBar, btn_extra, btnRemark, btn_trade_item_remark);
     }
 
     private void initBtnSelected() {
@@ -257,12 +239,12 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         showStandard();
     }
 
-    private void switchOperate(boolean isTrade){
-        if(isTrade){
+    private void switchOperate(boolean isTrade) {
+        if (isTrade) {
             layout_trade_operate.setVisibility(View.VISIBLE);
             layout_trade_item_operate.setVisibility(View.GONE);
-            layout_member_operate.setVisibility(CustomerManager.getInstance().getDinnerLoginCustomer()==null?View.GONE:View.VISIBLE);
-        }else{
+            layout_member_operate.setVisibility(CustomerManager.getInstance().getDinnerLoginCustomer() == null ? View.GONE : View.VISIBLE);
+        } else {
             layout_trade_operate.setVisibility(View.GONE);
             layout_trade_item_operate.setVisibility(View.VISIBLE);
             layout_member_operate.setVisibility(View.GONE);
@@ -270,56 +252,56 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     }
 
 
-    @Click({R.id.btn_card,R.id.btn_integral,R.id.btn_coupon,R.id.btn_activity,
-            R.id.btn_discount,R.id.btn_trade_remark,R.id.btn_table,R.id.btn_party,R.id.btn_verify_code,R.id.btn_clearcart,
-            R.id.btn_extra,R.id.btn_trade_item_discount,R.id.btn_trade_item_party,R.id.btn_trade_item_remark,
+    @Click({R.id.btn_card, R.id.btn_integral, R.id.btn_coupon, R.id.btn_activity,
+            R.id.btn_discount, R.id.btn_trade_remark, R.id.btn_table, R.id.btn_party, R.id.btn_verify_code, R.id.btn_clearcart,
+            R.id.btn_extra, R.id.btn_trade_item_discount, R.id.btn_trade_item_party, R.id.btn_trade_item_remark,
             R.id.btn_cosmetologist, R.id.btn_adviser, R.id.btn_sale})
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_card: //会员次卡
+            case R.id.btn_card:
                 showCustomerCard();
                 break;
-            case R.id.btn_integral://会员积分
+            case R.id.btn_integral:
                 showIntegral();
                 break;
-            case R.id.btn_coupon: //会员优惠卷
+            case R.id.btn_coupon:
                 showCoupon();
                 break;
-            case R.id.btn_activity: //会员活动
+            case R.id.btn_activity:
                 showMarketActivity();
                 break;
-            case R.id.btn_discount: //整单折扣
+            case R.id.btn_discount:
                 showDiscount(DiscountType.ALLDISCOUNT);
                 break;
-            case R.id.btn_trade_remark://整单备注
+            case R.id.btn_trade_remark:
                 showRemark();
                 ViewUtil.setButtonSelected(vActionBar, btn_trade_remark);
                 break;
-            case R.id.btn_table://选择工作台
-                if(mOperatorListener!=null){
+            case R.id.btn_table:
+                if (mOperatorListener != null) {
                     mOperatorListener.onTableClick();
                 }
                 break;
-            case R.id.btn_party://整单销售员
+            case R.id.btn_party:
                 showShopowner();
                 break;
             case R.id.btn_verify_code:
                 showVerifyCode();
                 break;
-            case R.id.btn_clearcart://清空购物车
+            case R.id.btn_clearcart:
                 clearCart();
                 break;
-            case R.id.btn_extra: //项目
+            case R.id.btn_extra:
                 showExtra();
                 break;
             case R.id.btn_trade_item_discount:
                 showSingleDiscount();
                 break;
-            case R.id.btn_trade_item_party://单品服务员
-                showWaiter(R.string.beauty_choice_trade_item_wiater,false);
+            case R.id.btn_trade_item_party:
+                showWaiter(R.string.beauty_choice_trade_item_wiater, false);
                 ViewUtil.setButtonSelected(vActionBar, btn_trade_item_party);
                 break;
-            case R.id.btn_trade_item_remark://单品备注
+            case R.id.btn_trade_item_remark:
                 showRemark();
                 ViewUtil.setButtonSelected(vActionBar, btn_trade_item_remark);
                 break;
@@ -337,16 +319,12 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     }
 
 
-    /**
-     * 清空购物车
-     */
     private void clearCart() {
         BeautyOrderManager.clearShopcartDish();
         EventBus.getDefault().post(new ActionClearShopcart());
         EventBus.getDefault().post(new ActionClose());
     }
 
-    //目前只有两页，在第二页则返回第一页，在第一页则前往第二页
     @Click(R.id.iv_switch_page)
     protected void clickSwitchPageButton() {
         if (vvpOrderAction.getCurrentItem() > 0) {
@@ -364,11 +342,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     }
 
 
-    /**
-     * 显示技师
-     */
     private void showCosmetologist() {
-        //技师只处理单品
         if (mDishDataItem == null) {
             ToastUtil.showLongToast(R.string.beauty_consmetologist_unselected);
             return;
@@ -377,7 +351,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         ViewUtil.setButtonSelected(vActionBar, btnCosmetologist);
         boolean isHasPointView = true;
 
-        showWaiter( R.string.beauty_choice_technician, isHasPointView);
+        showWaiter(R.string.beauty_choice_technician, isHasPointView);
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, mDishDataItem.getBase().getUuid());
     }
 
@@ -397,9 +371,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         showCustomContentView(beautyWaiter);
     }
 
-    /**
-     * 顾问
-     */
+
     private void showAdviser() {
         clearSingleItem();
         mBeautyActionManager.clearSelectedView();
@@ -408,34 +380,28 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         mChangeListener.changePage(IChangeMiddlePageListener.COMMON_DEFINE_PAGE, null);
     }
 
-    /**
-     * 店长
-     */
+
     private void showShopowner() {
         clearSingleItem();
         mBeautyActionManager.clearSelectedView();
         ViewUtil.setButtonSelected(vActionBar, btn_party);
-        showWaiter( R.string.beauty_choice_trade_wiater, false);
+        showWaiter(R.string.beauty_choice_trade_wiater, false);
         mChangeListener.changePage(IChangeMiddlePageListener.COMMON_DEFINE_PAGE, null);
     }
 
-    /**
-     * 展示验券的UI
-     */
-    private void showVerifyCode(){
+
+    private void showVerifyCode() {
         clearSingleItem();
         clearButtonSelected();
         ViewUtil.setButtonSelected(vActionBar, btn_verifyCode);
-        BeautyVerifyCodeView beautyVerifyCodeView = BeautyVerifyCodeView_.build(getActivity(), mChangePageListener, mChangeListener,getFragmentManager());
+        BeautyVerifyCodeView beautyVerifyCodeView = BeautyVerifyCodeView_.build(getActivity(), mChangePageListener, mChangeListener, getFragmentManager());
         showCustomContentView(beautyVerifyCodeView);
-//        mBeautyActionManager.setSelectedView(selectedView);
         mChangeListener.changePage(IChangeMiddlePageListener.VERIFY_CODE, null);
     }
 
     BeautyBaseWaiter.OnUserCheckedListener checkedListener = new BeautyBaseWaiter.OnUserCheckedListener() {
         @Override
         public void onUserCheckedChange(boolean isDefine) {
-            //通知购物车更新
             DinnerShoppingCart.getInstance().updateUserInfo();
         }
     };
@@ -443,19 +409,14 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     private void showOrderActionView(View selectedView, int type) {
         switch (type) {
             case BeautyOpActionVo.TYPE_CUSTOMER:
-//                showCustomerCard(selectedView);
                 break;
             case BeautyOpActionVo.TYPE_INTEGRAL:
-//                showIntegral(selectedView);
                 break;
             case BeautyOpActionVo.TYPE_COUPONS:
-//                showCoupon(selectedView);
                 break;
             case BeautyOpActionVo.TYPE_DISCOUNT:
-//                showDiscount(selectedView);
                 break;
             case BeautyOpActionVo.TYPE_ACTIVITY:
-//                showMarketActivity(selectedView);
                 break;
             case BeautyOpActionVo.TYPE_WEIXINCODE:
                 showWeixinCode(selectedView);
@@ -465,9 +426,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         }
     }
 
-    /**
-     * 会员卡
-     */
+
     public void showCustomerCard() {
         clearSingleItem();
         clearButtonSelected();
@@ -476,29 +435,23 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, null);
     }
 
-    /**
-     * 积分
-     */
+
     public void showIntegral() {
         clearSingleItem();
         clearButtonSelected();
         ViewUtil.setButtonSelected(vActionBar, btn_integral);
         showCustomContentView(BeautyIntegralView_.build(getActivity()));
-//        mBeautyActionManager.setSelectedView(selectedView);
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, null);
     }
 
 
-    /**
-     * 参与者
-     */
     public void showParty(final TradeVo tradeVo) {
 
         List<UserVo> mUserVos = new ArrayList<>();
 
-        if (mDishDataItem != null) {//获取当前选中商品的服务技师
+        if (mDishDataItem != null) {
             mUserVos = getDishItemUserVos(mDishDataItem.getItem().getTradeItemUserList());
-        } else {//查询当前订单销售员
+        } else {
             mUserVos = getTradeUserVos(tradeVo);
         }
 
@@ -507,9 +460,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         dialog.setOnBeautyWaiterListener(new BeautyBookingWaiterDialog.OnBeautyWaiterListener() {
             @Override
             public void onChoiceUserListener(@Nullable List<? extends UserVo> userVos) {
-                //当前选中的tradeUser
-                if (mDishDataItem != null) {//tradeItemUser
-                    //处理DishItemUser
+                if (mDishDataItem != null) {
                     UserVo userVo = null;
                     if (userVos != null && userVos.size() > 0) {
                         userVo = userVos.get(0);
@@ -520,21 +471,20 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
                     if (userVos != null && userVos.size() > 0) {
                         userVo = userVos.get(0);
                     }
-                    //处理整单销售员
                     updateTradeUser(tradeVo, userVo);
                 }
             }
         });
         dialog.setDishDataItem(mDishDataItem);
-        dialog.setSelectUsers(mUserVos); // 已选择的
-        dialog.setIsNotFreeUsers(new ArrayList<Long>());//被占用的，
+        dialog.setSelectUsers(mUserVos);
+        dialog.setIsNotFreeUsers(new ArrayList<Long>());
         dialog.show(getSupportFragmentManager(), "BeautyBookingWaiterDialog");
     }
 
     private void updateDishItemPary(DishDataItem dishItem, UserVo userVo) {
-        if (userVo != null) {//作废之前的
+        if (userVo != null) {
             TradeUserUtil.addTradeItemUsers(userVo.getUser(), mDishDataItem.getBase(), userVo.isOppoint());
-        } else {//新增一个
+        } else {
             TradeUserUtil.removeTradeItemusers(null, mDishDataItem.getBase());
         }
 
@@ -556,48 +506,37 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         DinnerShoppingCart.getInstance().updateUserInfo();
     }
 
-    /**
-     * 优惠劵
-     */
+
     public void showCoupon() {
         clearSingleItem();
         clearButtonSelected();
         ViewUtil.setButtonSelected(vActionBar, btn_coupon);
         beautyCouponView = BeautyCouponView_.build(getActivity());
         showCustomContentView(beautyCouponView);
-//        mBeautyActionManager.setSelectedView(selectedView);
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, null);
     }
 
-    /**
-     * 折扣
-     */
+
     public void showDiscount(DiscountType type) {
         clearSingleItem();
         clearButtonSelected();
         ViewUtil.setButtonSelected(vActionBar, btn_discount);
-        showCustomContentView(BeautyDiscountView_.build(getActivity(),type));
-//        mBeautyActionManager.setSelectedView(selectedView);
+        showCustomContentView(BeautyDiscountView_.build(getActivity(), type));
         mChangeListener.changePage(IChangeMiddlePageListener.DEFINE_DISCOUNT_PAGE, null);
     }
 
-    /**
-     * 单品打折
-     */
-    public void showSingleDiscount(){
+
+    public void showSingleDiscount() {
         if (mDishDataItem == null) {
             ToastUtil.showLongToast(R.string.beauty_consmetologist_unselected);
             return;
         }
         ViewUtil.setButtonSelected(vActionBar, btn_trade_item_discount);
-        showCustomContentView(BeautySingleDiscountView_.build(getActivity(),mDishDataItem));
-//        mBeautyActionManager.setSelectedView(selectedView);
+        showCustomContentView(BeautySingleDiscountView_.build(getActivity(), mDishDataItem));
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, mDishDataItem.getBase().getUuid());
     }
 
-    /**
-     * 显示加项
-     */
+
     public void showExtra() {
         if (beautyPropertyUtil != null) {
             beautyPropertyUtil.showExtra();
@@ -606,9 +545,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         }
     }
 
-    /**
-     * 显示整单备注
-     */
+
     public void showRemark() {
         if (beautyPropertyUtil != null) {
             beautyPropertyUtil.showRemarkView();
@@ -616,22 +553,17 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         }
     }
 
-    /**
-     * 营销活动
-     */
+
     public void showMarketActivity() {
         clearSingleItem();
         clearButtonSelected();
         ViewUtil.setButtonSelected(vActionBar, btn_activity);
         beautyActivityView = BeautyActivityView_.build(getActivity(), mChangePageListener, mChangeListener);
         showCustomContentView(beautyActivityView);
-//        mBeautyActionManager.setSelectedView(selectedView);
         mChangeListener.changePage(IChangeMiddlePageListener.MARKET_ACTIVITY_PAGE, null);
     }
 
-    /**
-     * 微信卡劵
-     */
+
     private void showWeixinCode(View selectedView) {
         clearSingleItem();
         clearButtonSelected();
@@ -641,9 +573,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         doCancel();
     }
 
-    /**
-     * 清楚单品数据
-     */
+
     private void clearSingleItem() {
         mDishDataItem = null;
         switchOperate(true);
@@ -652,9 +582,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         }
     }
 
-    /**
-     * 取消添加营销活动
-     */
+
     public void cancelMarketView() {
         if (beautyActivityView != null) {
             beautyActivityView.cancelSelected();
@@ -662,9 +590,6 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     }
 
 
-    /**
-     * @param customContentView
-     */
     public void showCustomContentView(View customContentView) {
         vContent.removeAllViews();
         vContent.setVisibility(View.VISIBLE);
@@ -710,9 +635,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
         Log.e("MiddleFragment", "FaceRoundView.....>");
     }
 
-    /**
-     * 推出fragment显示
-     */
+
     public void doCancel() {
         hideContent();
         clearSingleItem();
@@ -728,7 +651,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
             mBeautyActionManager.clearSelectedView();
         }
 
-        if(mOperatorListener!=null){
+        if (mOperatorListener != null) {
             mOperatorListener.onClearSelected();
         }
     }
@@ -777,9 +700,6 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     }
 
 
-    /**
-     * 获取TradeUser
-     */
     private List<UserVo> getTradeUserVos(TradeVo tradeVo) {
         List<UserVo> userVos = new ArrayList<>();
         if (tradeVo != null && tradeVo.getTradeUser() != null) {

@@ -22,11 +22,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @Date： 17/2/28
- * @Description:
- * @Version: 1.0
- */
+
 public class DinnerMenuSettingFragment extends Fragment implements RadioGroup.OnCheckedChangeListener,
         View.OnClickListener {
 

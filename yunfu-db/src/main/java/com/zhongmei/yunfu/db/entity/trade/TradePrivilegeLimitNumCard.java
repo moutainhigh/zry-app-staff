@@ -6,14 +6,7 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.ServerEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * 优惠和次卡的关联
- * Title:TradePrivilegeLimitNumCard.java
- * Description:
- * Copyright: Copyright (c) 2012
- *
- * @version 1.0 2018年06月14日 16:00
- */
+
 @DatabaseTable(tableName = "trade_privilege_limitnumcard")
 public class TradePrivilegeLimitNumCard extends ServerEntityBase {
 

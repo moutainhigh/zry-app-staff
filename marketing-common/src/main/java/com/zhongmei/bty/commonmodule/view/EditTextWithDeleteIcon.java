@@ -37,11 +37,9 @@ public class EditTextWithDeleteIcon extends EditText {
         this.onClearListener = onClearListener;
     }
 
-    // 初始化edittext 控件
-    private void initEditText() {
+        private void initEditText() {
         setEditTextDrawable();
-        addTextChangedListener(new TextWatcher() { // 对文本内容改变进行监听   
-            @Override
+        addTextChangedListener(new TextWatcher() {             @Override
             public void afterTextChanged(Editable paramEditable) {
                 EditTextWithDeleteIcon.this.setEditTextDrawable();
             }
@@ -52,7 +50,6 @@ public class EditTextWithDeleteIcon extends EditText {
 
             @Override
             public void onTextChanged(CharSequence paramCharSequence, int paramInt1, int paramInt2, int paramInt3) {
-//                EditTextWithDeleteIcon.this.setEditTextDrawable();
             }
         });
         this.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -64,8 +61,7 @@ public class EditTextWithDeleteIcon extends EditText {
         });
     }
 
-    // 控制图片的显示   
-    public void setEditTextDrawable() {
+        public void setEditTextDrawable() {
         if (getText().toString().length() == 0 || !hasFocus()) {
             setCompoundDrawables(null, null, null, null);
             flag = false;
@@ -83,16 +79,12 @@ public class EditTextWithDeleteIcon extends EditText {
 
     }
 
-    /**
-     * 添加触摸事件 点击之后 出现 清空editText的效果
-     */
+
     @Override
     public boolean onTouchEvent(MotionEvent paramMotionEvent) {
         if ((this.dRight != null) && (paramMotionEvent.getAction() == 1) && flag) {
             this.rBounds = this.dRight.getBounds();
-//            int i = (int) paramMotionEvent.getRawX();// 距离屏幕的距离
-            int i = (int) paramMotionEvent.getX();//距离边框的距离
-            if (i > getWidth() - this.rBounds.width() - getPaddingRight() - getPaddingLeft()) {
+            int i = (int) paramMotionEvent.getX();            if (i > getWidth() - this.rBounds.width() - getPaddingRight() - getPaddingLeft()) {
                 setText("");
                 if (onClearListener != null) {
                     onClearListener.AfterTextClear();
@@ -108,11 +100,7 @@ public class EditTextWithDeleteIcon extends EditText {
         return super.onTouchEvent(paramMotionEvent);
     }
 
-    /**
-     * 显示右侧X图片的
-     * <p>
-     * 左上右下
-     */
+
     @Override
     public void setCompoundDrawables(Drawable paramDrawable1, Drawable paramDrawable2, Drawable paramDrawable3, Drawable paramDrawable4) {
         if (paramDrawable3 != null)
@@ -121,8 +109,7 @@ public class EditTextWithDeleteIcon extends EditText {
     }
 
     public interface OnClearListener {
-        //点击关闭进行清空
-        public void AfterTextClear();
+                public void AfterTextClear();
     }
 
 }

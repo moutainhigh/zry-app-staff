@@ -26,11 +26,7 @@ import com.zhongmei.yunfu.ui.view.recycler.RecyclerLinearLayoutManager;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 人员封装
- *
- * @date 2018/6/14 15:15
- */
+
 public class BeautyWaiterView extends LinearLayout implements UserItemView.OnUserItemCheckListener {
 
     protected ViewGroup include_emptyStatus;
@@ -70,10 +66,7 @@ public class BeautyWaiterView extends LinearLayout implements UserItemView.OnUse
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    /**
-     * @param context
-     * @param isHasPointView 是否有指定view
-     */
+
     public BeautyWaiterView(Context context, boolean isHasPointView) {
         super(context);
         this.mContext = context;
@@ -93,19 +86,14 @@ public class BeautyWaiterView extends LinearLayout implements UserItemView.OnUse
         lv_content.setLayoutManager(manager);
     }
 
-    /**
-     * 当前被选中的人员
-     *
-     * @param users
-     */
+
     public void refreshView(Role role, UserVo users) {
         mListUserVo = getUserByIdentity(role, users);
         UserAdapter adapter = getAdapter();
         adapter.setItems(mListUserVo);
         lv_content.setAdapter(adapter);
         if (Utils.isEmpty(mListUserVo)) {
-            //设置空态页
-            lv_content.setVisibility(View.GONE);
+                        lv_content.setVisibility(View.GONE);
             include_emptyStatus.setVisibility(View.VISIBLE);
         } else {
             lv_content.setVisibility(View.VISIBLE);
@@ -113,11 +101,7 @@ public class BeautyWaiterView extends LinearLayout implements UserItemView.OnUse
         }
     }
 
-    /**
-     * 返回人员列表
-     *
-     * @return
-     */
+
     protected List<UserVo> getUserByIdentity(Role role, UserVo userVo) {
         List<UserVo> listUserVo = new ArrayList<>();
         List<User> userList = Session.getFunc(UserFunc.class).getUsers();
@@ -183,11 +167,7 @@ public class BeautyWaiterView extends LinearLayout implements UserItemView.OnUse
         void onUserCheckData(UserVo user);
     }
 
-    /**
-     * 获取销售员
-     *
-     * @return
-     */
+
     public int getIdentity() {
         return mIndetity;
     }

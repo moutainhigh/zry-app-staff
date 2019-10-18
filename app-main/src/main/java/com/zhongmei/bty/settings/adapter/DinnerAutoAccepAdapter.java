@@ -14,13 +14,7 @@ import com.zhongmei.bty.basemodule.trade.entity.TradeDealSettingItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Date：2015年9月14日 下午6:14:31
- * @Description: 正餐自动接单设置界面适配器
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class DinnerAutoAccepAdapter extends BaseAdapter {
     private Context context;
 

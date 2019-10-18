@@ -40,9 +40,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @EFragment(R.layout.beauty_table_fragment)
 public class BeautyTableFragment extends TableFragmentBase implements ITableOperator, OnControlListener {
@@ -132,8 +130,7 @@ public class BeautyTableFragment extends TableFragmentBase implements ITableOper
 
     @UiThread
     @Override
-    public void refreshZones(List<ZoneModel> zoneModes) {//刷新区域，刷新桌台
-        Log.e("BeautyTable", "refreshZones");
+    public void refreshZones(List<ZoneModel> zoneModes) {        Log.e("BeautyTable", "refreshZones");
         custom_zoneIndicator.setZones(zoneModes);
         if (mCurZone == null && Utils.isNotEmpty(zoneModes)) {
             mCurZone = zoneModes.get(0);
@@ -179,11 +176,9 @@ public class BeautyTableFragment extends TableFragmentBase implements ITableOper
     @Override
     public boolean onSelect(DinnertableModel dinnertableModel, TableViewBase dinnertableView) {
         if (Utils.isNotEmpty(dinnertableModel.getDinnertableTrades())) {
-            //查询订单
-            showOrderDish(dinnertableModel.getDinnertableTrades().get(0).getTradeId());
+                        showOrderDish(dinnertableModel.getDinnertableTrades().get(0).getTradeId());
         } else {
-            //创建坐台
-            createOrderDish(createTable(dinnertableModel));
+                        createOrderDish(createTable(dinnertableModel));
         }
 
         return false;
@@ -205,11 +200,7 @@ public class BeautyTableFragment extends TableFragmentBase implements ITableOper
         startActivity(mIntent);
     }
 
-    /**
-     * 构建TradeTable数据
-     *
-     * @param dinnertableModel
-     */
+
     private Tables createTable(DinnertableModel dinnertableModel) {
         Tables tables = new Tables();
         tables.setId(dinnertableModel.getId());

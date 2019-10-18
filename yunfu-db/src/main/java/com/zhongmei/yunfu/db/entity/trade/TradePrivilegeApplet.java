@@ -7,10 +7,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 
 import java.math.BigDecimal;
 
-/**
- * 小程序优惠关联表
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "trade_privilege_applet")
 public class TradePrivilegeApplet extends ServerEntityBase {
 
@@ -28,36 +25,27 @@ public class TradePrivilegeApplet extends ServerEntityBase {
 
     @DatabaseField(columnName = "uuid")
     private String uuid;
-    //订单id
-    @DatabaseField(columnName = "trade_id")
+        @DatabaseField(columnName = "trade_id")
     private Long tradeId;
-    //    订单uuid
-    @DatabaseField(columnName = "trade_uuid")
+        @DatabaseField(columnName = "trade_uuid")
     private String tradeUuid;
-    //    订单优惠id
-    @DatabaseField(columnName = "trade_privilege_id")
+        @DatabaseField(columnName = "trade_privilege_id")
     private Long tradePrivilegeId;
-    //    关联trade_privilege 的uuid
-    @DatabaseField(columnName = "trade_privilege_uuid")
+        @DatabaseField(columnName = "trade_privilege_uuid")
     private String tradePrivilegeUuid;
-    //    订单商品id
-    @DatabaseField(columnName = "trade_item_id")
+        @DatabaseField(columnName = "trade_item_id")
     private Long tradeItemId;
     @DatabaseField(columnName = "trade_item_uuid")
     private String tradeItemUuid;
-    //    品牌商品id
-    @DatabaseField(columnName = "brand_dish_id")
+        @DatabaseField(columnName = "brand_dish_id")
     private Long brandDishId;
-    //    品牌商品名
-    @DatabaseField(columnName = "brand_dish_name")
+        @DatabaseField(columnName = "brand_dish_name")
     private String brandDishName;
     @DatabaseField(columnName = "brand_dish_num")
     private BigDecimal brandDishNum;
-    //    小程序活动id
-    @DatabaseField(columnName = "activity_id")
+        @DatabaseField(columnName = "activity_id")
     private String activityId;
-    //    会员id
-    @DatabaseField(columnName = "customer_id")
+        @DatabaseField(columnName = "customer_id")
     private Long customerId;
 
     public String getUuid() {

@@ -15,13 +15,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-/**
- * @Date：2015年11月2日 下午6:14:17
- * @Description: TODO 充赠规则对话框适配器
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class RechargeRuleDialogFragmentAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 

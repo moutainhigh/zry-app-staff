@@ -1,9 +1,6 @@
 package com.zhongmei.bty.basemodule.trade.message;
 
-/**
- * Created by demo on 2018/12/15
- * 销账接口下行处理
- */
+
 
 public class WriteoffResp {
     private Long tradeId;

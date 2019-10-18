@@ -9,57 +9,37 @@ import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.bty.commonmodule.database.enums.UserDeliveryStatus;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * AuthUserShop is a ORMLite bean type. Corresponds to the database table "auth_user_shop"
- */
+
 @DatabaseTable(tableName = "auth_user_shop")
 public class AuthUserShop extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "auth_user_shop"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * delivery_status
-         */
+
         public static final String deliveryStatus = "delivery_status";
 
-        /**
-         * is_login
-         */
+
         public static final String isLogin = "is_login";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * user_id
-         */
+
         public static final String userId = "user_id";
 
     }

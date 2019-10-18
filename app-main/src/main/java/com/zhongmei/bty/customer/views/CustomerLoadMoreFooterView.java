@@ -10,13 +10,10 @@ import android.widget.TextView;
 import com.aspsine.swipetoloadlayout.SwipeLoadMoreFooterLayout;
 import com.zhongmei.yunfu.R;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class CustomerLoadMoreFooterView extends SwipeLoadMoreFooterLayout {
     private TextView tvLoadMore;
     private ImageView ivProgress;
-//    private ProgressBar progressBar;
 
     private int mFooterHeight;
 
@@ -42,18 +39,15 @@ public class CustomerLoadMoreFooterView extends SwipeLoadMoreFooterLayout {
         super.onFinishInflate();
         tvLoadMore = (TextView) findViewById(R.id.tvLoadMore);
         ivProgress = (ImageView) findViewById(R.id.ivProgress);
-//        progressBar = (ProgressBar) findViewById(R.id.progressbar);
     }
 
     @Override
     public void onPrepare() {
-//        ivSuccess.setVisibility(GONE);
     }
 
     @Override
     public void onMove(int y, boolean isComplete, boolean automatic) {
         if (!isComplete) {
-//            ivSuccess.setVisibility(GONE);
             ivProgress.setVisibility(GONE);
             if (-y >= mFooterHeight) {
                 tvLoadMore.setText(R.string.customer_loader_more_move_up);
@@ -67,7 +61,6 @@ public class CustomerLoadMoreFooterView extends SwipeLoadMoreFooterLayout {
     public void onLoadMore() {
         ivProgress.clearAnimation();
         ivProgress.startAnimation(rotateCircle);
-//        ivProgress.setVisibility(VISIBLE);
         tvLoadMore.setText(R.string.customer_loader_more_loading);
         ivProgress.setVisibility(VISIBLE);
     }
@@ -82,12 +75,10 @@ public class CustomerLoadMoreFooterView extends SwipeLoadMoreFooterLayout {
         tvLoadMore.setText(R.string.customer_loader_more_complete);
         ivProgress.clearAnimation();
         ivProgress.setVisibility(GONE);
-//        ivSuccess.setVisibility(VISIBLE);
     }
 
     @Override
     public void onReset() {
         ivProgress.clearAnimation();
-//        ivSuccess.setVisibility(GONE);
     }
 }

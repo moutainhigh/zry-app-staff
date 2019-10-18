@@ -27,9 +27,7 @@ import com.zhongmei.bty.basemodule.auth.application.DinnerApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class GroupOrderCenterListPresenter extends OrderCenterListPresenter {
     public GroupOrderCenterListPresenter(IOrderCenterListView view) {

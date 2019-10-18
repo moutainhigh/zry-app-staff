@@ -5,9 +5,7 @@ import com.zhongmei.yunfu.context.session.core.user.AuthUser;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class AbsAuth extends Auth {
 

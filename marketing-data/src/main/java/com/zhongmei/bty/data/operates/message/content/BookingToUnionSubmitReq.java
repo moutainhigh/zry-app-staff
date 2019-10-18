@@ -6,10 +6,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * 预订多桌开联台req
- * Created by demo on 2018/12/15
- */
+
 
 public class BookingToUnionSubmitReq {
 

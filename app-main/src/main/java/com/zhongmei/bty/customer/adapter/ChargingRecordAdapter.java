@@ -22,30 +22,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * 消费记录Adapter
- */
+
 @SuppressLint("SimpleDateFormat")
 public class ChargingRecordAdapter extends BaseAdapter {
 
-    /**
-     * 储值
-     */
+
     private static final int TYPE_CHARGING = 1;
 
-    /**
-     * 消费
-     */
+
     private static final int TYPE_EXPENSE = 2;
 
-    /**
-     * 退款
-     */
+
     private static final int TYPE_REFUND = 3;
 
-    /**
-     * 调账
-     */
+
     private static final int TYPE_CAHNGE_BALANCE = 4;
 
     private LayoutInflater mInflater;
@@ -61,12 +51,7 @@ public class ChargingRecordAdapter extends BaseAdapter {
     private OnRecordItemClickListener mOnRecordItemClickListener;
 
     public interface OnRecordItemClickListener {
-        /**
-         * 补打
-         *
-         * @param history  记录
-         * @param authUser 经手人
-         */
+
         void onRePrint(CustomerStoredBalanceResp history, String authUser);
     }
 
@@ -145,9 +130,7 @@ public class ChargingRecordAdapter extends BaseAdapter {
                         viewHolder.give.setVisibility(View.GONE);
                     }
                     viewHolder.balance.setText(recharging);
-                    //viewHolder.type.setVisibility(View.VISIBLE);
-                    //viewHolder.type.setText(chargingRecord.getPaymentModeName());
-                    viewHolder.otherBalanceLayout.setVisibility(View.GONE);
+                                                            viewHolder.otherBalanceLayout.setVisibility(View.GONE);
                     viewHolder.charingBalanceLayout.setVisibility(View.VISIBLE);
                     viewHolder.balanceReprint.setVisibility(View.INVISIBLE);
                 }
@@ -156,28 +139,21 @@ public class ChargingRecordAdapter extends BaseAdapter {
                     viewHolder.otherBalance.setText(String.format(mContext.getString(R.string.customer_account_list_consume), chargingRecord.getAddValuecard()));
                     viewHolder.otherBalanceLayout.setVisibility(View.VISIBLE);
                     viewHolder.charingBalanceLayout.setVisibility(View.GONE);
-                    //viewHolder.type.setVisibility(View.INVISIBLE);
-                    //viewHolder.type.setText(chargingRecord.getPaymentModeName());
-                    viewHolder.balanceReprint.setVisibility(View.INVISIBLE);
+                                                            viewHolder.balanceReprint.setVisibility(View.INVISIBLE);
                     break;
                 case TYPE_REFUND:
-                    if (chargingRecord.getAddValuecard().doubleValue() > 0) {// 退款
-                        viewHolder.otherBalance.setText(String.format(mContext.getString(R.string.customer_account_list_refund), chargingRecord.getAddValuecard()));
+                    if (chargingRecord.getAddValuecard().doubleValue() > 0) {                        viewHolder.otherBalance.setText(String.format(mContext.getString(R.string.customer_account_list_refund), chargingRecord.getAddValuecard()));
                         viewHolder.charingBalanceLayout.setVisibility(View.GONE);
                         viewHolder.otherBalanceLayout.setVisibility(View.VISIBLE);
-                        //viewHolder.type.setVisibility(View.INVISIBLE);
-                        //viewHolder.type.setText(chargingRecord.getPaymentModeName());
-                    }
+                                                                    }
                     viewHolder.balanceReprint.setVisibility(View.INVISIBLE);
                     break;
                 case TYPE_CAHNGE_BALANCE:
-                    if (chargingRecord.getAddValuecard().doubleValue() < 0) {// 调账
-                        String recharging = mContext.getString(R.string.customer_change_balance_value, chargingRecord.getAddValuecard());
+                    if (chargingRecord.getAddValuecard().doubleValue() < 0) {                        String recharging = mContext.getString(R.string.customer_change_balance_value, chargingRecord.getAddValuecard());
                         String giving = mContext.getString(R.string.customer_account_list_giving, chargingRecord.getSendValuecard());
                         viewHolder.balance.setText(recharging);
                         viewHolder.give.setText(giving);
-                        //viewHolder.type.setVisibility(View.INVISIBLE);
-                        viewHolder.otherBalanceLayout.setVisibility(View.GONE);
+                                                viewHolder.otherBalanceLayout.setVisibility(View.GONE);
                         viewHolder.charingBalanceLayout.setVisibility(View.VISIBLE);
                     }
                     viewHolder.balanceReprint.setVisibility(View.INVISIBLE);

@@ -2,9 +2,7 @@ package com.zhongmei.analysis;
 
 import java.util.HashMap;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class PerformanceActionData {
     private String shopId;
     private String macAddress;

@@ -9,77 +9,49 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.CustomerType;
 import com.zhongmei.yunfu.db.enums.Sex;
 
-/**
- * TradeCustomer is a ORMLite bean type. Corresponds to the database table "trade_customer"
- */
+
 @DatabaseTable(tableName = "trade_customer")
 public class TradeCustomer extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_customer"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * customer_id
-         */
+
         public static final String customerId = "customer_id";
 
-        /**
-         * customer_name
-         */
+
         public static final String customerName = "customer_name";
 
-        /**
-         * customer_phone
-         */
+
         public static final String customerPhone = "customer_phone";
 
-        /**
-         * customer_sex
-         */
+
         public static final String customerSex = "customer_sex";
 
-        /**
-         * customer_type
-         */
+
         public static final String customerType = "customer_type";
 
-        /**
-         * entitycard_num
-         */
+
         public static final String entitycardNum = "entitycard_num";
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * trade_uuid
-         */
+
         public static final String tradeUuid = "trade_uuid";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

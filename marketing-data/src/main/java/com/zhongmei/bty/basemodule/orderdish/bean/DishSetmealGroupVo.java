@@ -5,10 +5,7 @@ import com.zhongmei.yunfu.util.MathDecimal;
 
 import java.math.BigDecimal;
 
-/**
- * @version: 1.0
- * @date 2015年7月8日
- */
+
 public class DishSetmealGroupVo {
 
     private DishSetmealGroup setmealGroup;

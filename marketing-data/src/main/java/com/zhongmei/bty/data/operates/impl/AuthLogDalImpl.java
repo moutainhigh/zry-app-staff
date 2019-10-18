@@ -16,9 +16,7 @@ import com.zhongmei.bty.commonmodule.data.operate.IOperates;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
     private static final String Tag = "AuthLogDalImpl";
@@ -31,8 +29,7 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
     public void insert(final AuthorizedLog authorizedLog) {
         final DatabaseHelper helper = LocalDBManager.getHelper();
         try {
-            // modify 20170217 start 添加事务来实现线程同步
-            final Dao<AuthorizedLog, String> authorizedDal = helper.getDao(AuthorizedLog.class);
+                        final Dao<AuthorizedLog, String> authorizedDal = helper.getDao(AuthorizedLog.class);
             helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
@@ -41,8 +38,7 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
                     return null;
                 }
             });
-            // modify 20170217 end 添加事务来实现线程同步
-        } catch (Exception e) {
+                    } catch (Exception e) {
             Log.e(Tag, e.getMessage());
         } finally {
             LocalDBManager.releaseHelper();
@@ -53,8 +49,7 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
     public void update(final AuthorizedLog authorizedLog) {
         DatabaseHelper helper = LocalDBManager.getHelper();
         try {
-            // modify 20170217 start 添加事务来实现线程同步
-            final Dao<AuthorizedLog, String> authorizedDal = helper.getDao(AuthorizedLog.class);
+                        final Dao<AuthorizedLog, String> authorizedDal = helper.getDao(AuthorizedLog.class);
             helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
@@ -63,8 +58,7 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
                     return null;
                 }
             });
-            // modify 20170217 end 添加事务来实现线程同步
-        } catch (Exception e) {
+                    } catch (Exception e) {
             Log.e(Tag, e.getMessage());
         } finally {
             LocalDBManager.releaseHelper();
@@ -74,10 +68,8 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
     @Override
     public void delete(String uuid) {
         try {
-            // modify 20170217 start 添加事务来实现线程同步
-            DBHelperManager.deleteById(AuthorizedLog.class, uuid);
-            // modify 20170217 end 添加事务来实现线程同步
-        } catch (Exception e) {
+                        DBHelperManager.deleteById(AuthorizedLog.class, uuid);
+                    } catch (Exception e) {
             Log.e(Tag, e.getMessage());
         }
     }
@@ -108,8 +100,7 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
             authorizedDal = helper.getDao(AuthorizedLog.class);
             QueryBuilder<AuthorizedLog, String> builder = authorizedDal.queryBuilder();
             if (count == -1) {
-                //-1不限制条数
-                builder.orderBy(AuthorizedLog.$.clientCreateTime, true)
+                                builder.orderBy(AuthorizedLog.$.clientCreateTime, true)
                         .where().eq(AuthorizedLog.$.statusFlag, StatusFlag.VALID);
             } else {
                 builder.orderBy(AuthorizedLog.$.clientCreateTime, true).limit(count)
@@ -138,8 +129,7 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
                     return null;
                 }
             });
-            // modify 20170217 end 添加事务来实现线程同步
-        } catch (Exception e) {
+                    } catch (Exception e) {
             Log.e(Tag, e.getMessage());
         } finally {
             LocalDBManager.releaseHelper();
@@ -150,8 +140,7 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
     public void batchDelete(final List<AuthorizedLog> authLogList) {
         final DatabaseHelper helper = LocalDBManager.getHelper();
         try {
-            // modify 20170217 start 添加事务来实现线程同步
-            final Dao<AuthorizedLog, Integer> authorizedDal = helper.getDao(AuthorizedLog.class);
+                        final Dao<AuthorizedLog, Integer> authorizedDal = helper.getDao(AuthorizedLog.class);
             helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
@@ -160,8 +149,7 @@ public class AuthLogDalImpl extends AbstractOpeartesImpl implements AuthLogDal {
                     return null;
                 }
             });
-            // modify 20170217 end 添加事务来实现线程同步
-        } catch (Exception e) {
+                    } catch (Exception e) {
             Log.e(Tag, e.getMessage());
         } finally {
             LocalDBManager.releaseHelper();

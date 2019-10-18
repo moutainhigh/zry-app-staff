@@ -73,9 +73,7 @@ import com.zhongmei.bty.data.operates.impl.UploadOperatesImpl;
 
 import java.util.HashMap;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BeautyOperateData {
     public static HashMap<Class, Class> sOperataDataMap = new HashMap<>();
 
@@ -101,8 +99,7 @@ public class BeautyOperateData {
         sOperataDataMap.put(ErpCommercialRelationDal.class, ErpCommercialRelationDalImpl.class);
         sOperataDataMap.put(MarketDal.class, MarketDaoImpl.class);
         sOperataDataMap.put(CouponsOperates.class, CouponsOperatesImpl.class);
-        //sOperataDataMap.put(ShopManagerOperates.class, ShopManagerOperatesImpl.class);
-        sOperataDataMap.put(AuthLogDal.class, AuthLogDalImpl.class);
+                sOperataDataMap.put(AuthLogDal.class, AuthLogDalImpl.class);
         sOperataDataMap.put(UploadOperates.class, UploadOperatesImpl.class);
         sOperataDataMap.put(AsyncDal.class, AsyncDalImpl.class);
         sOperataDataMap.put(CommercialDal.class, CommercialImpl.class);

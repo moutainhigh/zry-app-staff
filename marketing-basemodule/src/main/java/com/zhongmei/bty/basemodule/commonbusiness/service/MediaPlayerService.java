@@ -12,9 +12,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MediaPlayerService implements MediaPlayer.OnCompletionListener {
     private final String TAG = MediaPlayerService.class.getSimpleName();
@@ -67,7 +65,6 @@ public class MediaPlayerService implements MediaPlayer.OnCompletionListener {
             if (mMediaplayer != null) {
                 mMediaplayer.reset();
             }
-//            mMediaplayer=MediaPlayer.create(this, Uri.parse(filePath));
             FileInputStream localFileInputStream = new FileInputStream(filePath);
             mMediaplayer.setDataSource(localFileInputStream.getFD());
             localFileInputStream.close();
@@ -137,8 +134,7 @@ public class MediaPlayerService implements MediaPlayer.OnCompletionListener {
 
     @Override
     public void onCompletion(MediaPlayer mp) {
-        //播放完成
-        if (mMediaPlayCompleteListener != null) {
+                if (mMediaPlayCompleteListener != null) {
             mMediaPlayCompleteListener.onCompletion(mp);
         }
     }

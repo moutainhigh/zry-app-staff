@@ -14,10 +14,7 @@ import com.zhongmei.yunfu.init.sync.ErpCheck;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 网络环境监测
- * Created by demo on 2018/12/15
- */
+
 public class ShopBaseInitCheck extends AbsInitCheck {
 
     public ShopBaseInitCheck() {
@@ -49,7 +46,6 @@ public class ShopBaseInitCheck extends AbsInitCheck {
 
                 checkProgress(ShopBaseInitCheck.this, 50, errorMsg);
                 if (errorCode == -1) {
-//                    checkProgress(ShopBaseInitCheck.this, 100, MainApplication.getInstance().getString(R.string.login_check_device));
                     checkUpdateAll();
                 }
             }
@@ -59,8 +55,7 @@ public class ShopBaseInitCheck extends AbsInitCheck {
     private void checkUpdateAll() {
         List<Check> checkList = new ArrayList<>();
         checkList.add(new AppUpdateCheck(MainApplication.getInstance()));
-        //checkList.add(new PrintUpdateCheck(MainApplication.getInstance()));
-        checkUpdate(checkList, 0);
+                checkUpdate(checkList, 0);
     }
 
     private void checkUpdate(final List<Check> checkList, final int index) {
@@ -95,8 +90,7 @@ public class ShopBaseInitCheck extends AbsInitCheck {
 
             @Override
             public void onError(Check check, String errorMsg, Throwable err) {
-                //这里检查更新失败，不影响初始化下一部
-                onSuccess(check, errorMsg);
+                                onSuccess(check, errorMsg);
             }
         });
         check.running(null);
@@ -112,9 +106,7 @@ public class ShopBaseInitCheck extends AbsInitCheck {
             return InitCheck.CHECK_UPDATE_APP;
         }
 
-        /*if (check instanceof PrintUpdateCheck) {
-            return InitCheck.CHECK_UPDATE_PRINT;
-        }*/
+
 
         return 0;
     }

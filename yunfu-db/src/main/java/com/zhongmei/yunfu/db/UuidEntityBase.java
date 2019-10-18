@@ -2,17 +2,12 @@ package com.zhongmei.yunfu.db;
 
 import com.j256.ormlite.field.DatabaseField;
 
-/**
- * @version: 1.0
- * @date 2015年9月11日
- */
+
 public abstract class UuidEntityBase extends EntityBase<String> {
     private static final long serialVersionUID = 1L;
 
     protected interface $ {
-        /**
-         * uuid
-         */
+
         String uuid = "uuid";
     }
 

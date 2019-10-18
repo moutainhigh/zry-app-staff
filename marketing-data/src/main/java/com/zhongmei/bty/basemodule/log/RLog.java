@@ -10,16 +10,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * 由于商品模块现在属于零售,所以期望将商品日志放入零售日志里面,便于查询线上商品问题
- * 但商品又属于BaseModule,所以将零售日志提入到BaseModule里面,后续可能考虑移除到Retail模块里去
- * 零售日志搭建,对外暴露使用的入口
- */
+
 public class RLog {
     public static final String FOLDER_NAME = "calm_retail";
     public static final String RETAIL_KEY_TAG = "RETAIL_LOG";
-    // 由于商品划入零售模块,所以零售日志需要添加商品日志信息
-    public static final String DISH_KEY_TAG = "DISH_LOG";
+        public static final String DISH_KEY_TAG = "DISH_LOG";
     public static final String BAKERY_KEY_TAG = "BAKERY_LOG";
 
     private static SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
@@ -31,8 +26,7 @@ public class RLog {
     static {
         sLogAction = RetailLogAction.getInstance();
         sLogAction.setDisplayCommand(true);
-        // save sdcard config
-        sLogAction.setSaveSdcard(true);
+                sLogAction.setSaveSdcard(true);
         sLogAction.setFolderName(FOLDER_NAME);
 
         sCurrentDate = getCurrentDate();
@@ -99,8 +93,7 @@ public class RLog {
         if (!versionWrite || !TextUtils.equals(sCurrentDate, getCurrentDate())) {
             sCurrentDate = getCurrentDate();
             sLogAction.setFolderName(FOLDER_NAME);
-            //writeLog("零售客户端版本号: ", BuildConfig.VERSION_NAME);
-            versionWrite = true;
+                        versionWrite = true;
         }
         writeLog(tag, msg);
     }
@@ -119,8 +112,7 @@ public class RLog {
         return result;
     }
 
-    // 刷新内存中日志
-    public static void logFlush() {
+        public static void logFlush() {
         for (int i = 0; i < 10; i++) {
             writeEmptyLog();
         }

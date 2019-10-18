@@ -15,9 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyTableTradeCache extends TableTradeCacheBase {
     private final String TAG = BeautyTableTradeCache.class.getSimpleName();
@@ -27,15 +25,13 @@ public class BeautyTableTradeCache extends TableTradeCacheBase {
         DatabaseHelper dbHelper = getDBHelper();
 
         try {
-            //获取Tables
-            List<Tables> tables = getTablesByZoneID(dbHelper, zoneId);
+                        List<Tables> tables = getTablesByZoneID(dbHelper, zoneId);
             List<Long> tableIds = new ArrayList<>();
             for (Tables table : tables) {
                 tableIds.add(table.getId());
             }
 
-            //获取TradeTable
-            List<TradeTable> tradeTables = getTradeTableByTables(dbHelper, tableIds);
+                        List<TradeTable> tradeTables = getTradeTableByTables(dbHelper, tableIds);
             List<Long> tradeIds = new ArrayList<>();
             Map<Long, List<TradeTable>> mapTradeTables = new HashMap<>();
             if (tradeTables != null) {
@@ -49,11 +45,9 @@ public class BeautyTableTradeCache extends TableTradeCacheBase {
                 }
             }
 
-            //获取订单信息
-            List<Trade> trades = getTradeByTradeIds(dbHelper, tradeIds);
+                        List<Trade> trades = getTradeByTradeIds(dbHelper, tradeIds);
             Map<Long, Trade> mapTrades = new HashMap<>();
-            if (trades != null) {//重新加载有效的订单id
-                tableIds.clear();
+            if (trades != null) {                tableIds.clear();
                 for (Trade trade : trades) {
                     tableIds.add(trade.getId());
 
@@ -62,22 +56,10 @@ public class BeautyTableTradeCache extends TableTradeCacheBase {
             }
 
 
-//            //获取订单额外信息
-//            List<TradeExtra> tradeExtras=getTradeExtraByTradeIds(dbHelper,tradeIds);
-//            Map<Long,TradeExtra> mapTradeExtras=new HashMap<>();
-//            if(tradeExtras!=null){
-//                for (TradeExtra tradeExtra : tradeExtras) {
-//                    mapTradeExtras.put(tradeExtra.getTradeId(),tradeExtra);
-//                }
-//            }
 
 
             Map<Long, List<TradeTableInfo>> ttInfosFinder = new HashMap<>();
             for (Trade trade : trades) {
-//                TradeExtra tradeExtra=mapTradeExtras.get(trade.getId());
-//                if(tradeExtra==null){
-//                    continue;
-//                }
 
 
                 List<TradeTable> tradeTableList = mapTradeTables.get(trade.getId());
@@ -96,12 +78,8 @@ public class BeautyTableTradeCache extends TableTradeCacheBase {
             }
 
 
-            Map<Long, StateWrapper> stateWrapperMap = new HashMap<Long, StateWrapper>();//存储所有桌台状态
-            for (Tables table : tables) {
-                TableStateInfo stateInfo = new TableStateInfo(table, BusinessType.BEAUTY);//桌台状态
-                List<TradeTableInfo> ttInfos = ttInfosFinder.get(table.getId());//桌台上的订单状态
-                StateWrapper stateWrapper = new StateWrapper(stateInfo, ttInfos);//桌台状态
-                stateWrapperMap.put(table.getId(), stateWrapper);
+            Map<Long, StateWrapper> stateWrapperMap = new HashMap<Long, StateWrapper>();            for (Tables table : tables) {
+                TableStateInfo stateInfo = new TableStateInfo(table, BusinessType.BEAUTY);                List<TradeTableInfo> ttInfos = ttInfosFinder.get(table.getId());                StateWrapper stateWrapper = new StateWrapper(stateInfo, ttInfos);                stateWrapperMap.put(table.getId(), stateWrapper);
             }
 
 

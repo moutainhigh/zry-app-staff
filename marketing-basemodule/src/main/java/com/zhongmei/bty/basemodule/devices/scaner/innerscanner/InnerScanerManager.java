@@ -11,10 +11,7 @@ import android.util.Log;
 import com.zhongmei.bty.basemodule.devices.display.manager.DisplayServiceManager;
 import com.zhongmei.bty.basemodule.devices.scaner.ScanDataReceivedListener;
 
-/**
- * Created by demo on 2018/12/15
- * 新集成内置扫码器管理器,该工具是跨进程调用，通过广播接收扫描数据（ 目前仅限在线支付扫描调用）
- */
+
 
 public class InnerScanerManager implements IScannerManager {
     private static final String TAG = InnerScanerManager.class.getSimpleName();

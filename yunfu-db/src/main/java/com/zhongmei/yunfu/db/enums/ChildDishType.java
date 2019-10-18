@@ -2,26 +2,16 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 套餐子菜类型
- */
+
 public enum ChildDishType implements ValueEnum<Integer> {
 
-    /**
-     * 套餐子菜
-     */
+
     CHILD(1),
 
-    /**
-     * 加料
-     */
+
     EXTRA(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

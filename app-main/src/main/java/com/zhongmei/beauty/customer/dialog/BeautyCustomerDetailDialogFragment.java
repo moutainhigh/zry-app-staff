@@ -27,11 +27,7 @@ import com.zhongmei.bty.customer.event.EventRefreshDetail;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 美业顾客详情弹窗
- *
- * @date 2018/6/22 17:11
- */
+
 public class BeautyCustomerDetailDialogFragment extends BasicDialogFragment implements View.OnClickListener {
 
     public static final String TAG = BeautyCustomerDetailDialogFragment.class.getSimpleName();
@@ -50,12 +46,7 @@ public class BeautyCustomerDetailDialogFragment extends BasicDialogFragment impl
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(getActivity(), getTheme());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                | View.SYSTEM_UI_LAYOUT_FLAGS | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
         Window window = dialog.getWindow();
-//        View decorView = window.getDecorView();
-//        decorView.setSystemUiVisibility(uiOptions);
         window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         setCancelable(false);
         return dialog;
@@ -80,7 +71,6 @@ public class BeautyCustomerDetailDialogFragment extends BasicDialogFragment impl
     }
 
     private void showDetailFragment() {
-//        BeautyCustomerDetailFragment fragment = new BeautyCustomerDetailFragment_();
         Bundle bundle = new Bundle();
         bundle.putLong(BeautyCustomerConstants.KEY_CUSTOMER_ID, getArguments().getLong(BeautyCustomerConstants.KEY_CUSTOMER_ID));
         bundle.putInt(BeautyCustomerConstants.KEY_CUSTOMER_PAGE_FROM, BeautyCustomerConstants.CustomerDetailFrom.DIALOG_TO_DETAIL);

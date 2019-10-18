@@ -10,14 +10,10 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.UuidEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * PrinterCashierTicket is a ORMLite bean type. Corresponds to the database table "cashier_ticket"
- */
+
 @DatabaseTable(tableName = "printer_cashier_ticket")
 public class PrinterCashierTicket extends UuidEntityBase implements ICreator, IUpdator {
-    /**
-     * The columns of table "printer_cashier_ticket"
-     */
+
     public interface $ extends UuidEntityBase.$ {
         public static final String statusFlag = "status_flag";
         public static final String brandIdenty = "brand_identy";
@@ -253,9 +249,7 @@ public class PrinterCashierTicket extends UuidEntityBase implements ICreator, IU
     @Override
     public void validateUpdate() {
         setChanged(true);
-        // 更新收银点-出票口时，也传递creator_id和creator_name,由mind那边去填入updator的id和name
-        // 相当于接口中的creator_id和creator_name既指定了创建者也指定了操作者，数据库中区分由mind那边区分
-        if (this instanceof ICreator) {
+                        if (this instanceof ICreator) {
             IAuthUser user = IAuthUser.Holder.get();
             if (user != null) {
                 ICreator creator = this;

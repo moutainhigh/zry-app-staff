@@ -1,9 +1,6 @@
 package com.zhongmei.yunfu.sync;
 
-/**
- * 初始化检查接口
- * Created by demo on 2018/12/15
- */
+
 public interface InitCheck {
 
     int CHECK_UPDATE_APP = 0x00000001;
@@ -30,8 +27,7 @@ public interface InitCheck {
 
     CheckType getType();
 
-    //在子线程中调用
-    void check(InitCheckCallback callback);
+        void check(InitCheckCallback callback);
 
     void cancel();
 

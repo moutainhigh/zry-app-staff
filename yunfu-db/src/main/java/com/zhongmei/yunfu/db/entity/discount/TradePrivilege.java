@@ -9,92 +9,58 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.PrivilegeType;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * TradePrivilege is a ORMLite bean type. Corresponds to the database table "trade_privilege"
- */
+
 @DatabaseTable(tableName = "trade_privilege")
 public class TradePrivilege extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_privilege"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * coupon_id
-         */
+
         public static final String couponId = "coupon_id";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * privilege_amount
-         */
+
         public static final String privilegeAmount = "privilege_amount";
 
-        /**
-         * privilege_type
-         */
+
         public static final String privilegeType = "privilege_type";
 
-        /**
-         * privilege_value
-         */
+
         public static final String privilegeValue = "privilege_value";
 
-        /**
-         * surcharge_name
-         */
+
         public static final String surchargeName = "surcharge_name";
 
-        /**
-         * privilege_name
-         */
+
         public static final String privilegeName = "privilege_name";
 
-        /**
-         * promo_id
-         */
+
         public static final String promoId = "promo_id";
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * trade_item_id
-         */
+
         public static final String tradeItemId = "trade_item_id";
 
-        /**
-         * trade_item_uuid
-         */
+
         public static final String tradeItemUuid = "trade_item_uuid";
 
-        /**
-         * trade_uuid
-         */
+
         public static final String tradeUuid = "trade_uuid";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }
@@ -295,17 +261,14 @@ public class TradePrivilege extends DataEntityBase implements ICreator, IUpdator
         return tradePrivilege;
     }
 
-    //是否保存过服务器
-    public boolean isSaveServer() {
+        public boolean isSaveServer() {
         if (getId() != null) {
             return true;
         }
         return false;
     }
 
-    /**
-     * 设置为无效
-     */
+
     public void setInValid() {
         this.setStatusFlag(StatusFlag.INVALID);
         this.validateUpdate();
@@ -324,11 +287,7 @@ public class TradePrivilege extends DataEntityBase implements ICreator, IUpdator
         return false;
     }
 
-    /**
-     * 是否是小程序优惠
-     *
-     * @return
-     */
+
     public boolean isAppletPrivilege() {
         if (getPrivilegeType() == PrivilegeType.COLLAGE ||
                 getPrivilegeType() == PrivilegeType.SECKILL

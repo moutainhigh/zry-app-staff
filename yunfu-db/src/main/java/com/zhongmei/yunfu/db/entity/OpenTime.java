@@ -7,40 +7,26 @@ import com.zhongmei.yunfu.db.enums.IsNextDay;
 import com.zhongmei.bty.commonmodule.database.entity.base.OldEntityBase;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * Trade is a ORMLite bean type. Corresponds to the database table "tables"
- */
+
 @DatabaseTable(tableName = "open_time")
 public class OpenTime extends OldEntityBase {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "tables"
-     */
+
     public interface $ extends OldEntityBase.$ {
 
-        /**
-         * uuid
-         */
+
         String uuid = "uuid";
 
-        /**
-         * business_time_type
-         */
+
         String businessTimeType = "business_time_type";
 
-        /**
-         * closing_time
-         */
+
         String closingTime = "closing_time";
 
-        /**
-         * is_next_day
-         */
+
         String isNextDay = "is_next_day";
 
         String endTime = "end_time";
@@ -49,19 +35,13 @@ public class OpenTime extends OldEntityBase {
 
         String type = "type";
 
-        /**
-         * week
-         */
+
         String week = "week";
 
-        /**
-         * create_time
-         */
+
         String createTime = "create_time";
 
-        /**
-         * modify_time
-         */
+
         String modifyTime = "modify_time";
 
     }

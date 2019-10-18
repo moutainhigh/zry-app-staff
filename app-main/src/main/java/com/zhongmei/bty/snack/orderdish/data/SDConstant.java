@@ -1,26 +1,16 @@
 package com.zhongmei.bty.snack.orderdish.data;
 
-/**
- * SD:SnackDish
- */
+
 
 public final class SDConstant {
     public static final class FromType {
-        public final static int FROM_TYPE_SNACK = -1;// 来源于快餐
-        public static final int FROM_TYPE_DINNER = 1;// 来源于正餐
-        public static final int FROM_TYPE_BUFFET = 2;// 来源于自助餐
-        public static final int FROM_TYPE_GROUP = 3;// 来源于团餐
-        public static final int FROM_TYPE_RETAIL = 4;// 来源于零售
-        public static final int FROM_OPEN_API = 5;// 来源于开放平台
-    }
+        public final static int FROM_TYPE_SNACK = -1;        public static final int FROM_TYPE_DINNER = 1;        public static final int FROM_TYPE_BUFFET = 2;        public static final int FROM_TYPE_GROUP = 3;        public static final int FROM_TYPE_RETAIL = 4;        public static final int FROM_OPEN_API = 5;    }
 
     public static final class Extra {
         public static final String EXTRA_FROM_TYPE = "extra_from_type";
     }
 
-    /**
-     * 统计类，无需国际化
-     */
+
     public static final class MobClick {
 
         public static final String SNACK_ORDER_GOODS_FEED = "快餐-加料点击量";

@@ -2,27 +2,15 @@ package com.zhongmei.bty.basemodule.customer.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum CouponRuleType implements ValueEnum<Integer> {
 
-    /**
-     * 固定金额
-     */
+
     FIXED_AMOUNT(1),
-    /**
-     * 区间反比
-     */
+
     INVERSE_RANGE(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

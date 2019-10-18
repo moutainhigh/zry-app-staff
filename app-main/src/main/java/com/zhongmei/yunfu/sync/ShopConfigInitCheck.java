@@ -7,17 +7,12 @@ import com.zhongmei.util.SettingManager;
 import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.yunfu.R;
 
-/**
- * 获取门店配置信息
- * Created by demo on 2018/12/15
- */
+
 public class ShopConfigInitCheck extends AbsInitCheck {
 
     public ShopConfigInitCheck() {
         super(CheckType.ConfigInitCheck);
-        //Application appContext = MainApplication.getInstance();
-        //initPluginSDK(appContext);
-    }
+                    }
 
     @Override
     public void handleCheck(InitCheckCallback callback) {
@@ -30,28 +25,11 @@ public class ShopConfigInitCheck extends AbsInitCheck {
     protected void onInit() {
         super.onInit();
         Application appContext = MainApplication.getInstance();
-        //initPluginSDK(appContext);
 
-        // 需要放在initCommonUtil()之后执行，因为initShopInfo()需要读取SharedPreferenceUtil里面的数据
-        //initLocalInfo();
-        SettingManager.init(appContext);
-//        DBManager.getDefault().init(appContext);
-        UpdateManager.getInstance().init(appContext); // Luo for update the APK
-        //ContractManager.getInstance().requestContractExpireData(null);
-    }
+                        SettingManager.init(appContext);
+        UpdateManager.getInstance().init(appContext);             }
 
-    /**
-     * 初始化第三方的插件
-     *
-     * @param appContext
-     */
-    /*private void initPluginSDK(Application appContext) {
-        //百度地址
-        try {
-            SDKInitializer.initialize(appContext);
-        } catch (Throwable e) {
-            e.printStackTrace();
-        }
-    }*/
+
+
 
 }

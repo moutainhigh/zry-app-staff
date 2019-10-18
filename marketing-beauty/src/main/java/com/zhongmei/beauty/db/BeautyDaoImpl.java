@@ -20,27 +20,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyDaoImpl {
     private static final String TAG = "BeautyDaoImpl";
 
-    /**
-     * 查询所有的tradeItemUser
-     *
-     * @param identity 根据用户类型
-     * @return
-     */
+
     public static List<TradeUser> getTradeItemListByIdentity(int identity, BusinessType businessType) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             List tradeIds = queryUnFinishedTrades(businessType);
             Dao<TradeUser, String> tradeItemUserrDao = helper.getDao(TradeUser.class);
             return tradeItemUserrDao.queryBuilder().where()
-//                    .eq(TradeUser.$.userType,identity)
-//                    .and()
                     .eq(TradeUser.$.statusFlag, StatusFlag.VALID)
                     .and().in(TradeUser.$.tradeId, tradeIds)
                     .query();
@@ -52,12 +43,7 @@ public class BeautyDaoImpl {
         }
     }
 
-    /**
-     * 查询未完成的订单
-     *
-     * @param businessType
-     * @return List<Long> tradeIds集合
-     */
+
     private static List<Long> queryUnFinishedTrades(BusinessType businessType) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
@@ -83,12 +69,7 @@ public class BeautyDaoImpl {
         }
     }
 
-    /**
-     * 查询指定行业下的技师、顾问、店长
-     *
-     * @param businessType
-     * @return
-     */
+
     public static List<TradeUser> getTradeUserListNo(BusinessType businessType) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
@@ -96,7 +77,6 @@ public class BeautyDaoImpl {
             Dao<TradeUser, String> tradeUserDao = helper.getDao(TradeUser.class);
             return tradeUserDao.queryBuilder().where()
                     .eq(TradeUser.$.statusFlag, StatusFlag.VALID)
-//                    .and().in(TradeUser.$.userType, TradeUserType.SHOPOWER, TradeUserType.ADVISER, TradeUserType.TECHNICIAN)
                     .and().in(TradeUser.$.tradeId, tradeIds)
                     .query();
         } catch (SQLException e) {

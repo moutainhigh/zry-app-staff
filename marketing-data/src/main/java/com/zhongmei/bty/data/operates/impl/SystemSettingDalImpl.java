@@ -61,9 +61,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.Callable;
 
-/**
 
- */
 public class SystemSettingDalImpl extends AbstractOpeartesImpl implements SystemSettingDal {
 
     private final static String TAG = SystemSettingDalImpl.class.getSimpleName();
@@ -74,27 +72,15 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void openAndCloseBusiness(OpenAndCloseReq req, ResponseListener<Object> listener) {
-        /*String url = ServerAddressUtil.getInstance().openAndCloseBusiness();
-        OpsRequest.Executor<OpenAndCloseReq, Object> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(Object.class).execute(listener, "openAndCloseBusiness");*/
+
     }
 
     @Override
     public void commercialSettings(List<CommercialCustomSettings> commercialCustomSettings, ResponseListener<List<CommercialCustomSettings>> listener) {
-        /*CommercialSettingsReq req = new CommercialSettingsReq();
-        req.setSettingItems(commercialCustomSettings);
 
-        String url = ServerAddressUtil.getInstance().commercialSettings();
-        OpsRequest.Executor<CommercialSettingsReq, List<CommercialCustomSettings>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseType(OpsRequest.getListContentResponseType(CommercialCustomSettings.class))
-                .responseProcessor(new CommercialCustomSettingsProcessor())
-                .execute(listener, "commercialSettings");*/
     }
 
-    /***
-     * 门店设置数据存储
-     */
+
     private static class CommercialCustomSettingsProcessor extends SaveDatabaseResponseProcessor<List<CommercialCustomSettings>> {
 
         @Override
@@ -169,30 +155,22 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
                 SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
                 Date close = dateTimeFormat.parse(dateFormat.format(now) + closingTime);
 
-                // 跨天
-                if (isNextDay == IsNextDay.YES) {
-                    // 比歇业时间大，取今天日期
-                    if (now.after(close)) {
+                                if (isNextDay == IsNextDay.YES) {
+                                        if (now.after(close)) {
                         return onlyDate;
-                        // 比歇业时间小，取昨天日期
-                    } else {
-                        // 减一天
-                        Calendar c = Calendar.getInstance();
+                                            } else {
+                                                Calendar c = Calendar.getInstance();
                         c.setTime(onlyDate);
                         c.add(Calendar.DAY_OF_MONTH, -1);
                         return c.getTime();
                     }
-                    // 不跨天
-                } else {
-                    // 比歇业时间大，取明天日期
-                    if (now.after(close)) {
-                        // 加一天
-                        Calendar c = Calendar.getInstance();
+                                    } else {
+                                        if (now.after(close)) {
+                                                Calendar c = Calendar.getInstance();
                         c.setTime(onlyDate);
                         c.add(Calendar.DAY_OF_MONTH, +1);
                         return c.getTime();
-                        // 比歇业时间小，取今天日期
-                    } else {
+                                            } else {
                         return onlyDate;
                     }
                 }
@@ -225,8 +203,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
             tradeDealSettingVo.setTradeDealSetting(tradeDealSetting);
 
             if (tradeDealSetting != null) {
-                // 交易自动处理时段表
-                List<TradeDealSettingItem> tradeDealSettingItems =
+                                List<TradeDealSettingItem> tradeDealSettingItems =
                         helper.getDao(TradeDealSettingItem.class).queryForEq(TradeDealSettingItem.$.settingId,
                                 tradeDealSetting.getId());
                 tradeDealSettingVo.setTradeDealSettingItems(tradeDealSettingItems);
@@ -256,12 +233,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void handoverClean(CashHandoverConfig config, ResponseListener<CashHandoverConfig> listener) {
-        /*String url = ServerAddressUtil.getInstance().handoverCleanSet();
-        OpsRequest.Executor<CashHandoverConfig, CashHandoverConfig> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(config)
-                .responseClass(CashHandoverConfig.class)
-                .responseProcessor(new HandoverSetProcessor())
-                .execute(listener, "openAndCloseBusiness");*/
+
 
     }
 
@@ -281,11 +253,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
         }
     }
 
-    /***
-     *
 
-     *
-     */
     private static class HandoverSetProcessor extends SaveDatabaseResponseProcessor<CashHandoverConfig> {
 
         @Override
@@ -304,16 +272,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void setTableNumberSetting(List<TableNumberSetting> tableNumberSettings, ResponseListener<TableNumberSettingResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().tableNumberSetting();
 
-        TableNumberSettingReq req = new TableNumberSettingReq();
-        req.setTableNumberSettings(tableNumberSettings);
-
-        OpsRequest.Executor<TableNumberSettingReq, TableNumberSettingResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(TableNumberSettingResp.class)
-                .responseProcessor(new TableNumberSettingProcessor())
-                .execute(listener, "setTableNumberSetting");*/
     }
 
     private static class TableNumberSettingProcessor extends SaveDatabaseResponseProcessor<TableNumberSettingResp> {
@@ -351,8 +310,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public List<CashHandoverConfig> listCashConfigs() throws Exception {
-        // TODO Auto-generated method stub
-        DatabaseHelper helper = DBHelperManager.getHelper();
+                DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             Dao<CashHandoverConfig, Long> configDao = helper.getDao(CashHandoverConfig.class);
             List<CashHandoverConfig> configs = configDao.queryForAll();
@@ -377,8 +335,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
             List<AccountSubject> parentSub = subjects.query();
 
             for (AccountSubject subject : parentSub) {
-                //查询子科目
-                subjects.where().eq(AccountSubject.$.parentId, subject.getId())
+                                subjects.where().eq(AccountSubject.$.parentId, subject.getId())
                         .and()
                         .eq(AccountSubject.$.statusFlag, StatusFlag.VALID);
                 List<AccountSubject> childsubjects = subjects.query();
@@ -392,8 +349,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
                     childSubInfos.add(childSubInfo);
                 }
 
-                //父科目信息
-                SubjectInfo info = new SubjectInfo();
+                                SubjectInfo info = new SubjectInfo();
                 info.setmSubject(subject);
                 info.setParent(true);
                 info.setChildSubInfo(childSubInfos);
@@ -446,22 +402,19 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
         DatabaseHelper dbHelper = DBHelperManager.getHelper();
         try {
             ElectronicInvoiceVo electronicInvoiceVo = new ElectronicInvoiceVo();
-            //获取开关
-            CommercialCustomSettings commercialCustomSettings = findCommercialCustomSettings(dbHelper, "invoice.shop.switch");
+                        CommercialCustomSettings commercialCustomSettings = findCommercialCustomSettings(dbHelper, "invoice.shop.switch");
             if (commercialCustomSettings != null && commercialCustomSettings.getSettingValue() != null) {
                 electronicInvoiceVo.setSwitchOn("1".equals(commercialCustomSettings.getSettingValue()));
             } else {
                 electronicInvoiceVo.setSwitchOn(false);
             }
-            //获取电子发票设置信息
-            Dao<ElectronicInvoice, String> electronicInvoiceDao = dbHelper.getDao(ElectronicInvoice.class);
+                        Dao<ElectronicInvoice, String> electronicInvoiceDao = dbHelper.getDao(ElectronicInvoice.class);
             QueryBuilder<ElectronicInvoice, String> electronicInvoiceStringQueryBuilder = electronicInvoiceDao.queryBuilder();
             electronicInvoiceStringQueryBuilder.where().eq(ElectronicInvoice.$.statusFlag, StatusFlag.VALID);
             electronicInvoiceStringQueryBuilder.orderBy(ElectronicInvoice.$.serverUpdateTime, false);
             ElectronicInvoice electronicInvoice = electronicInvoiceStringQueryBuilder.queryForFirst();
             electronicInvoiceVo.setElectronicInvoice(electronicInvoice);
-            //电子发票税率
-            if (electronicInvoice != null) {
+                        if (electronicInvoice != null) {
                 Dao<InvoiceTaxRate, String> invoiceTaxRateDao = dbHelper.getDao(InvoiceTaxRate.class);
                 List<InvoiceTaxRate> invoiceTaxRates = invoiceTaxRateDao.queryBuilder().where().eq(InvoiceTaxRate.$.invoiceId, electronicInvoice.getId()).query();
                 electronicInvoiceVo.setInvoiceTaxRates(invoiceTaxRates);
@@ -527,22 +480,10 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
         }
     }
 
-    /**
-     * 设置交接方式
-     *
-     * @param type     交接类型
-     * @param listener
-     */
+
     @Override
     public void setHandoverType(int type, ResponseListener<MindTransferResp<CommercialCustomSettings>> listener) {
-        /*String url = ServerAddressUtil.getInstance().mindTransfer();
-        String mindUrl = ServerAddressUtil.getInstance().getSaveSettingURL();
-        TransferReq<CommercialCustomSettingsReq> transferReq = new TransferReq<>(mindUrl, toHandoverTypeReq("shop.fast.handover.switch", type));
-        OpsRequest.Executor<TransferReq, MindTransferResp<CommercialCustomSettings>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq)
-                .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, CommercialCustomSettings.class))
-                .responseProcessor(new HandoverTypeRespProcessor())
-                .execute(listener, mindUrl);//用mind的url作为请求的tag*/
+
     }
 
     private CommercialCustomSettingsReq toHandoverTypeReq(String key, int value) {
@@ -567,14 +508,7 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void updatePrintSort(int sort, ResponseListener<MindTransferResp<CommercialCustomSettings>> listener) {
-        /*String url = ServerAddressUtil.getInstance().mindTransfer();
-        String mindUrl = ServerAddressUtil.getInstance().getSaveSettingURL();
-        TransferReq<CommercialCustomSettingsReq> transferReq = new TransferReq<>(mindUrl, toHandoverTypeReq("ticket.order.type", sort));
-        OpsRequest.Executor<TransferReq, MindTransferResp<CommercialCustomSettings>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq)
-                .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, CommercialCustomSettings.class))
-                .responseProcessor(new HandoverTypeRespProcessor())
-                .execute(listener, mindUrl);//用mind的url作为请求的tag*/
+
     }
 
     @Override
@@ -594,32 +528,15 @@ public class SystemSettingDalImpl extends AbstractOpeartesImpl implements System
 
     @Override
     public void updateIsOpenShortName(int isOpen, ResponseListener<MindTransferResp<CommercialCustomSettings>> listener) {
-        /*String url = ServerAddressUtil.getInstance().mindTransfer();
-        String mindUrl = ServerAddressUtil.getInstance().getSaveSettingURL();
-        TransferReq<CommercialCustomSettingsReq> transferReq = new TransferReq<>(mindUrl, toHandoverTypeReq("ticket_kitchen_is_open_short_name", isOpen));
-        OpsRequest.Executor<TransferReq, MindTransferResp<CommercialCustomSettings>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq)
-                .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, CommercialCustomSettings.class))
-                .responseProcessor(new HandoverTypeRespProcessor())
-                .execute(listener, mindUrl);//用mind的url作为请求的tag*/
+
     }
 
     @Override
     public void updateSaveSetting(CommercialCustomSettingsReq req, ResponseListener<MindTransferResp<CommercialCustomSettings>> listener) {
-        /*String url = ServerAddressUtil.getInstance().mindTransfer();
-        TransferReq<CommercialCustomSettingsReq> TransferReq = new TransferReq<CommercialCustomSettingsReq>();
-        TransferReq.setPostData(req);
-        TransferReq.setUrl(ServerAddressUtil.getInstance().mindUpdateSaveSetting());
-        OpsRequest.Executor<TransferReq<CommercialCustomSettingsReq>, MindTransferResp<CommercialCustomSettings>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(TransferReq)
-                .responseType(OpsRequest.getContentResponseType(MindTransferResp.class, CommercialCustomSettings.class))
-                .responseProcessor(new UpdateSaveSettingProcessor())
-                .execute(listener, "updateSaveSetting");*/
+
     }
 
-    /***
-     * 门店设置数据存储
-     */
+
     private static class UpdateSaveSettingProcessor extends SaveDatabaseResponseProcessor<MindTransferResp<CommercialCustomSettings>> {
 
         @Override

@@ -34,9 +34,7 @@ import java.math.BigDecimal;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.beauty_integral_to_cash)
 public class BeautyIntegralView extends LinearLayout {
     private static final String TAG = BeautyIntegralView.class.getSimpleName();
@@ -97,11 +95,7 @@ public class BeautyIntegralView extends LinearLayout {
         EventBus.getDefault().register(this);
     }
 
-    /**
-     * 监听拆单购物车的事件，删除积分抵现
-     *
-     * @param action
-     */
+
     public void onEventMainThread(ActionSeparateDeleteIntegral action) {
         tbUserIntegral.setChecked(false);
     }
@@ -118,8 +112,7 @@ public class BeautyIntegralView extends LinearLayout {
                         return;
                     }
 
-                    //会员
-                    long integral = customer.integral == null ? 0 : customer.integral;
+                                        long integral = customer.integral == null ? 0 : customer.integral;
                     if (integral <= 0) {
                         ToastUtil.showShortToast(R.string.intergral_is_zero);
                         tbUserIntegral.setChecked(false);
@@ -137,28 +130,6 @@ public class BeautyIntegralView extends LinearLayout {
                         }
                     }
 
-//                    if (customer.card == null) {
-//
-//                    } else {
-//                        //实体卡
-//                        EcCard card = customer.card;
-//                        long integral = card.getIntegralAccount() != null ? card.getIntegralAccount().getIntegral() : 0;
-//                        if (integral <= 0) {
-//                            ToastUtil.showShortToast(R.string.intergral_is_zero);
-//                            tbUserIntegral.setChecked(false);
-//                        } else {
-//                            EcCardLevelSetting cardLevelSetting = card.getCardLevelSetting();
-//                            if (cardLevelSetting != null && cardLevelSetting.getIsExchangeCash() == Bool.YES) {
-//                                IntegralCashPrivilegeVo integralCashPrivilegeVo = new IntegralCashPrivilegeVo();
-//                                integralCashPrivilegeVo.setIntegral(new BigDecimal(integral));
-//                                integralCashPrivilegeVo.setRule(cardLevelSetting);
-//                                DinnerShopManager.getInstance().getShoppingCart().setIntegralCash(integralCashPrivilegeVo, true, true);
-//                            } else {
-//                                ToastUtil.showShortToast(R.string.have_no_level_rights);
-//                                tbUserIntegral.setChecked(false);
-//                            }
-//                        }
-//                    }
                 } else {
                     DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();
                 }

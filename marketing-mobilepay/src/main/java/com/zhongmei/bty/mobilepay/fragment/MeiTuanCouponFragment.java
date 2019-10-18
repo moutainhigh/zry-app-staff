@@ -65,10 +65,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 美团劵界面
- */
+
 public class MeiTuanCouponFragment extends BasePayFragment implements View.OnClickListener, CommonCheckCouponsView.CouponsListener {
 
     private final String TAG = MeiTuanCouponFragment.class.getSimpleName();
@@ -90,12 +87,10 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
 
     private LinearLayout contentLayout;
 
-    private GroupPay mGroupPay;//已经加入的券金额
-
+    private GroupPay mGroupPay;
     private MeituanCouponDishAdapter mTuanGouCouponAdapter;
 
-    private List<PaymentItemDishRelateImpl> mGroupDishes;//已经关联券的菜品
-
+    private List<PaymentItemDishRelateImpl> mGroupDishes;
     private TuanGouOperates mCouponsOperates;
 
     private PaymentItemDal paymentItemDal;
@@ -161,8 +156,7 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         mCheckCouponsView.getEdit().setInputType(InputType.TYPE_CLASS_NUMBER);
         mCheckCouponsView.getEdit().setHint(getString(R.string.pay_input_meituan_code_alter));
         mCheckCouponsView.getEdit().setHintTextColor(getResources().getColor(R.color.print_line_gray));
-        // mCheckCouponsView.getEdit().setText("311374050992");
-        mCheckCouponsView.getEdit().addTextChangedListener(new TextWatcher() {
+                mCheckCouponsView.getEdit().addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
@@ -174,8 +168,7 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
             @Override
             public void afterTextChanged(Editable s) {
                 String content = s.toString();
-                //限制输入长度16位
-                if (!TextUtils.isEmpty(content)) {
+                                if (!TextUtils.isEmpty(content)) {
                     mCheckCouponsView.getEdit().setSelection(content.length());
                     if (content.length() > 16) {
                         content = content.substring(0, content.length() - 1);
@@ -186,13 +179,11 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         });
         updateView();
         findGroupDishs();
-        // v8.6.0 快捷支付扫码界面默认弹出
-        if (mPaymentInfo != null && mPaymentInfo.getQuickPayType() == IPayConstParame.ONLIEN_SCAN_TYPE_ACTIVE) {
+                if (mPaymentInfo != null && mPaymentInfo.getQuickPayType() == IPayConstParame.ONLIEN_SCAN_TYPE_ACTIVE) {
             ThreadUtils.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mCheckCouponsView.startScan();// modify v8.14
-                    mPaymentInfo.setQuickPayType(-1);
+                    mCheckCouponsView.startScan();                    mPaymentInfo.setQuickPayType(-1);
                 }
             });
         }
@@ -216,10 +207,8 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
             updateView();
             DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
         } else {
-            //隐藏时清空已输入金额
-            clearInput();
-           /* DisplayServiceManager.updateDisplay(getActivity().getApplicationContext(),
-                    DisplayServiceManager.buildPayMessage(DisplayUserInfo.COMMAND_CACEL, ""));*/
+                        clearInput();
+
         }
         super.onHiddenChanged(hidden);
     }
@@ -230,11 +219,9 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         public void onFinished(boolean isOK, int statusCode) {
             try {
                 if (isOK) {
-                    //隐藏时清空已输入金额
-                    clearInput();
+                                        clearInput();
                     updateView();
-                    findGroupDishs();//查询菜品与券关联关系
-                } else {
+                    findGroupDishs();                } else {
                     updateNotPayMent();
                 }
             } catch (Exception e) {
@@ -249,23 +236,17 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         super.onDestroy();
     }
 
-    /**
-     * @Title: updateNotPayMent
-     * @Description: 刷新未支付或找零、溢收
-     * @Return void 返回类型
-     */
+
     private void updateNotPayMent() {
         if (mGroupPay.getGroupAmount() > 0) {
             double restAmout = getRestAmount();
             if (restAmout == 0) {
                 mPayAlterTV.setVisibility(View.GONE);
             } else {
-                //还剩
-                if (restAmout > 0) {
+                                if (restAmout > 0) {
                     mPayAlterTV.setText(this.getActivity().getString(R.string.pay_rest_payment_text) + CashInfoManager.formatCash(restAmout));
                 } else {
-                    //溢收
-                    mPayAlterTV.setText(String.format(this.getActivity().getString(R.string.more_pay_cash_text), CashInfoManager.formatCash(0 - restAmout)));
+                                        mPayAlterTV.setText(String.format(this.getActivity().getString(R.string.more_pay_cash_text), CashInfoManager.formatCash(0 - restAmout)));
                 }
                 mPayAlterTV.setVisibility(View.VISIBLE);
             }
@@ -276,25 +257,17 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         DoPayUtils.updatePayEnable(getActivity(), mPay, enablePay());
     }
 
-    //获取用户输入金额
-    public double getInputValue() {
+        public double getInputValue() {
         return this.mGroupPay.getGroupAmount();
     }
 
-    /*public boolean enablePay() {
-        if (isSuportGroupPay()) {//如果支持组合支付
-            return mGroupPay.getGroupAmount() > 0;
-        } else {
-            return mGroupPay.getGroupAmount() >= mPaymentInfo.getActualAmount();//不分步支付，输入金额必须大于等于应付金额
-        }
-    }*/
+
 
     private double getRestAmount() {
         return mPaymentInfo.getActualAmount() - mGroupPay.getGroupAmount();
     }
 
-    //清空所有输入
-    private void clearInput() {
+        private void clearInput() {
         mGroupPay.clear();
         mPaymentInfo.getOtherPay().clear();
         mTuanGouCouponAdapter.updateData();
@@ -304,8 +277,7 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         if (this.isAdded() && !this.isHidden()) {
             clearInput();
             updateView();
-            //刷新副屏
-            DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
+                        DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
         }
     }
 
@@ -315,11 +287,8 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
             if (!ClickManager.getInstance().isClicked()) {
                 if (doPayChecked(false)) {
                     if (mGroupPay.getGroupAmount() > 0) {
-                        final double restAmout = 0 - getRestAmount();//溢收金额
-                        if (restAmout > 0) {//溢收
-                            List<PayModelItem> items = mGroupPay.getAllPayModelItems();
-                            //百糯券一张对应一个paymentitem
-                            for (PayModelItem item : items) {
+                        final double restAmout = 0 - getRestAmount();                        if (restAmout > 0) {                            List<PayModelItem> items = mGroupPay.getAllPayModelItems();
+                                                        for (PayModelItem item : items) {
                                 if (item.getTuanGouCouponDetail() != null && item.getTuanGouCouponDetail().getMarketPrice().doubleValue() < restAmout) {
                                     ToastUtil.showLongToast(getString(R.string.baidu_nuomi_coupon_not_support_more));
                                     return;
@@ -387,14 +356,11 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
 
     @Override
     public void getCouponsNo(String ticketNo) {
-        if (this.mPaymentInfo.isNeedToPayDeposit()) {//验券前先判断是否交押金 add 20180202
-            PayDepositPromptDialog.start(this.getActivity(), mDoPayApi, this.mPaymentInfo);
-        } else if (this.isNeedToDeductionEarnest()) {//验券前先判断是否抵扣预付金 add 8.14
-            this.showBookingDeductionDialog();
+        if (this.mPaymentInfo.isNeedToPayDeposit()) {            PayDepositPromptDialog.start(this.getActivity(), mDoPayApi, this.mPaymentInfo);
+        } else if (this.isNeedToDeductionEarnest()) {            this.showBookingDeductionDialog();
         } else {
             if (!TextUtils.isEmpty(ticketNo) && Utils.isNum(ticketNo)) {
-                //一次只能用一类
-                if (mGroupPay.size() >= MAX_COUPON_SIZE) {
+                                if (mGroupPay.size() >= MAX_COUPON_SIZE) {
                     ToastUtil.showLongToastCenter(this.getActivity(), String.format(getResources().getString(R.string.coupon_size_limit_one_time), MAX_COUPON_SIZE + ""));
                     return;
                 }
@@ -425,14 +391,12 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         return false;
     }
 
-    //显示设置券数量界面
-    private void showSetCountDialog(final TuanGouCouponDetail meiTuanCouponDetail) {
+        private void showSetCountDialog(final TuanGouCouponDetail meiTuanCouponDetail) {
         MeiTuanTicketDialog dialog = new MeiTuanTicketDialog(this.getActivity(), meiTuanCouponDetail.getMaxConsume(), mPaymentInfo.getNotPayMent(), meiTuanCouponDetail, mSetCouponsListenner);
         dialog.show();
     }
 
-    //根据券号查询券信息
-    private void requestCouponInfo(String serialNumber) {
+        private void requestCouponInfo(String serialNumber) {
         TuanGouCouponReq req = new TuanGouCouponReq(PayModeId.MEITUAN_TUANGOU.value(), serialNumber);
         req.setDishUuids(DoPayUtils.getTradeDishIds(mPaymentInfo.getTradeVo()));
         mCouponsOperates.getTuanGouCouponsDetail(req, LoadingResponseListener.ensure(mCheckCouponListener, this.getFragmentManager()));
@@ -443,13 +407,10 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         @Override
         public void onResponse(ResponseObject<TuanGouCouponDetail> response) {
             try {
-                if (ResponseObject.isOk(response)) {//成功
-                    {
+                if (ResponseObject.isOk(response)) {                    {
                         TuanGouCouponDetail tuanGouCouponDetail = response.getContent();
-                        //如果可用
-                        if (isEnableCoupon(tuanGouCouponDetail)) {
-                            //如果团单号相同，算同一券
-                            if (mGroupPay.size() > 0 && mGroupPay.isContainsPayModel(PayModeId.MEITUAN_TUANGOU)) {
+                                                if (isEnableCoupon(tuanGouCouponDetail)) {
+                                                        if (mGroupPay.size() > 0 && mGroupPay.isContainsPayModel(PayModeId.MEITUAN_TUANGOU)) {
                                 for (PayModelItem item : mGroupPay.getAllPayModelItems()) {
                                     if (item.getPayMode() == PayModeId.MEITUAN_TUANGOU && item.getTuanGouCouponDetail() != null) {
                                         if (tuanGouCouponDetail.getDealId() != null && tuanGouCouponDetail.getDealId().equals(item.getTuanGouCouponDetail().getDealId())) {
@@ -459,29 +420,23 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
                                     }
                                 }
                             }
-                            //正餐添加菜品限制
-                            if (mPaymentInfo.getTradeBusinessType() == BusinessType.DINNER) {
-                                //判断是否有优惠
-                                if (isHavePrivilege()) {
-                                    //如果有优惠已经支付,且有支付记录，不容许使用美团券
-                                    if (mPaymentInfo.getPaidAmount() > 0) {
+                                                        if (mPaymentInfo.getTradeBusinessType() == BusinessType.DINNER) {
+                                                                if (isHavePrivilege()) {
+                                                                        if (mPaymentInfo.getPaidAmount() > 0) {
                                         {
                                             ToastUtil.showLongToast(R.string.coupon_use_limit_alter);
                                             return;
                                         }
                                     }
                                 }
-                                //直接移除所有优惠
-                                if (mPaymentInfo.isSplit()) {
+                                                                if (mPaymentInfo.isSplit()) {
                                     SeparateShoppingCart.getInstance().removeAllTradeVoPrivileges();
                                 } else {
                                     DinnerShoppingCart.getInstance().removeAllTradeVoPrivileges();
                                 }
-                                //如果有多张券可以选择，弹出券数量对话框
-                                showSetCountDialog(tuanGouCouponDetail);
+                                                                showSetCountDialog(tuanGouCouponDetail);
                             } else {
-                                //显示设置券数量对话框
-                                showSetCountDialog(tuanGouCouponDetail);
+                                                                showSetCountDialog(tuanGouCouponDetail);
                             }
                         } else {
                             if (tuanGouCouponDetail != null)
@@ -507,8 +462,7 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
             }
         }
     };
-    //点击确定后的回调操作
-    MeiTuanTicketDialog.SetMeiTuanCouponsListener mSetCouponsListenner = new MeiTuanTicketDialog.SetMeiTuanCouponsListener() {
+        MeiTuanTicketDialog.SetMeiTuanCouponsListener mSetCouponsListenner = new MeiTuanTicketDialog.SetMeiTuanCouponsListener() {
 
         @Override
         public void setMeiTuanCoupons(TuanGouCouponDetail tuanGouCouponDetail, int usedCount) {
@@ -516,8 +470,7 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         }
     };
 
-    //获取菜品与券关联关系
-    public List<ICouponDishRelate> getCouponDishRelates() {
+        public List<ICouponDishRelate> getCouponDishRelates() {
         List<ICouponDishRelate> couponDishRelateList = new ArrayList<ICouponDishRelate>();
         if (mGroupDishes != null && mGroupDishes.size() > 0) {
             couponDishRelateList.addAll(mGroupDishes);
@@ -536,20 +489,17 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
 
     private void checkCoupon(TuanGouCouponDetail tuanGouCouponDetail, int usedCount) {
         if (mPaymentInfo.getTradeBusinessType() == BusinessType.DINNER) {
-            //如果限制菜品
-            if (tuanGouCouponDetail.getLimitDish() != null && tuanGouCouponDetail.getLimitDish().size() > 0) {
+                        if (tuanGouCouponDetail.getLimitDish() != null && tuanGouCouponDetail.getLimitDish().size() > 0) {
                 MeituanDishVo meituanDishVo = MeituanMathUtil.matchAndMath(mPaymentInfo.getTradeVo(), tuanGouCouponDetail, usedCount, getCouponDishRelates());
                 if (meituanDishVo == null || meituanDishVo.isMatchEnable == false) {
                     ToastUtil.showShortToast(R.string.coupon_is_not_enable_used);
                     return;
                 }
                 createMeituanPayModeItem(tuanGouCouponDetail, meituanDishVo.matchCount, meituanDishVo.matchAmount, meituanDishVo);
-            } else {//如果不限制就取面值
-                BigDecimal usedValue = tuanGouCouponDetail.getMarketPrice().multiply(new BigDecimal(usedCount));
+            } else {                BigDecimal usedValue = tuanGouCouponDetail.getMarketPrice().multiply(new BigDecimal(usedCount));
                 createMeituanPayModeItem(tuanGouCouponDetail, usedCount, usedValue, null);
             }
-        } else {//快餐不用判断产品限制
-            BigDecimal usedValue = tuanGouCouponDetail.getMarketPrice().multiply(new BigDecimal(usedCount));
+        } else {            BigDecimal usedValue = tuanGouCouponDetail.getMarketPrice().multiply(new BigDecimal(usedCount));
             createMeituanPayModeItem(tuanGouCouponDetail, usedCount, usedValue, null);
         }
     }
@@ -570,8 +520,7 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         if (mPaymentInfo != null && mPaymentInfo.getTradeVo() != null && mPaymentInfo.getTradeVo().getTrade() != null && mPaymentInfo.getTradeVo().getTrade().getId() != null)
             ThreadUtils.runOnWorkThread(new Runnable() {
                 @Override
-                public void run() {//modify v8.8 解耦合
-                    List<PaymentItemGrouponDish> paymentItemGrouponDishList = paymentItemDal.findPaymentItemGroupDishsByTradeId(mPaymentInfo.getTradeVo().getTrade().getId());
+                public void run() {                    List<PaymentItemGrouponDish> paymentItemGrouponDishList = paymentItemDal.findPaymentItemGroupDishsByTradeId(mPaymentInfo.getTradeVo().getTrade().getId());
                     if (paymentItemGrouponDishList != null && !paymentItemGrouponDishList.isEmpty()) {
                         mGroupDishes = new ArrayList<PaymentItemDishRelateImpl>();
                         for (PaymentItemGrouponDish paymentItemGrouponDish : paymentItemGrouponDishList) {
@@ -588,18 +537,10 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
     }
 
     private static class MeituanCouponViewHolder {
-        TextView serialNumberTV;//序列号
-        TextView couponType;//券类别
-        TextView countTV;//张数
-        TextView faceAmountTV;// 面额
-        TextView amountTV;//金额
-        ImageButton removeBT;//删除
-        LinearLayout dishInfoView;//菜品详情
-    }
+        TextView serialNumberTV;        TextView couponType;        TextView countTV;        TextView faceAmountTV;        TextView amountTV;        ImageButton removeBT;        LinearLayout dishInfoView;    }
 
     private static class MeituanCouponDishAdapter {
-        private GroupPay mGroupPay;//已经加入的券金额
-        private LinearLayout contentView;
+        private GroupPay mGroupPay;        private LinearLayout contentView;
         private Context mContext;
         private TuanGouCouponListenser mTuanGouCouponListenser;
 
@@ -628,11 +569,8 @@ public class MeiTuanCouponFragment extends BasePayFragment implements View.OnCli
         public void setViewHodler(MeituanCouponViewHolder viewHolder, final PayModelItem item) {
             if (item != null) {
                 viewHolder.serialNumberTV.setText(item.getTuanGouCouponDetail().getSerialNumber());
-                //券类型
-                if (item.getTuanGouCouponDetail().getCouponType() == 1) {//代金券
-                    viewHolder.couponType.setText(mContext.getString(R.string.coupon_type_cash_label));
-                } else if (item.getTuanGouCouponDetail().getCouponType() == 2) {//套餐券
-                    viewHolder.couponType.setText(mContext.getString(R.string.coupon_type_group_dish_label));
+                                if (item.getTuanGouCouponDetail().getCouponType() == 1) {                    viewHolder.couponType.setText(mContext.getString(R.string.coupon_type_cash_label));
+                } else if (item.getTuanGouCouponDetail().getCouponType() == 2) {                    viewHolder.couponType.setText(mContext.getString(R.string.coupon_type_group_dish_label));
                 } else {
                     viewHolder.couponType.setText("");
                 }

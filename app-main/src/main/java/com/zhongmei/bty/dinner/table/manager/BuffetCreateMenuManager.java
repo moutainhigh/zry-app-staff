@@ -11,9 +11,7 @@ import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
 import com.zhongmei.yunfu.resp.ResponseListener;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BuffetCreateMenuManager extends BuffetModifyTradeManager {
 

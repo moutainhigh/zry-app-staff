@@ -36,15 +36,7 @@ public class SyncModuleBean {
     protected List<String> getModuleInner(boolean syncModule) {
         List<String> result = new ArrayList<>();
         for (String module : syncModules) {
-            /*if (syncModule) {
-                if (hyalineModule.contains(module)) {
-                    result.add(module);
-                }
-            } else {
-                if (!hyalineModule.contains(module)) {
-                    result.add(module);
-                }
-            }*/
+
             if (isAddModule(module, syncModule)) {
                 result.add(module);
             }

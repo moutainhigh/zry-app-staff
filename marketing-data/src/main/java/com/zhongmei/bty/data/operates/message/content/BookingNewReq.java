@@ -10,59 +10,33 @@ import com.zhongmei.yunfu.db.enums.BookingType;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 封装预订创建或修改请求
- */
+
 public class BookingNewReq extends BaseRequest {
 
-    /**
-     * 创建和更新的共有部分
-     */
 
-    private String carDetailed;//	客户车牌号
 
-    private String consumeStandard;//消费标准
-
-    private Long creatorID;//经手人
-
-    private String commercialGroup;//客户分组
-
-    private String commercialName;//客户名称
-
-    private String commercialMobile;//客户电话
-
-    private String envFavorite;//环境喜好
-
-    private String innerOrderPerson;//代订人
-
-    private Integer isImportant;//是否重点预订 0——普通 1——重点
-
-    private Long clientCreateTime;//本地创建时间毫秒
-
-    private Long clientUpdateTime;//本地修改时间
-
-    private String memo;//备注
-
-    private Integer orderNumber;//预订人数
-
-    private Integer orderSource;//订单来源
-
-    private Integer orderStatus;//订单状态
-
-    private String orderDesc;//预定描述
-
-    private Long orderTime;//预订时间
-
-    private Long periodID;//时段id
-
-    private String periodUuid;//时段uuid
-
+    private String carDetailed;
+    private String consumeStandard;
+    private Long creatorID;
+    private String commercialGroup;
+    private String commercialName;
+    private String commercialMobile;
+    private String envFavorite;
+    private String innerOrderPerson;
+    private Integer isImportant;
+    private Long clientCreateTime;
+    private Long clientUpdateTime;
+    private String memo;
+    private Integer orderNumber;
+    private Integer orderSource;
+    private Integer orderStatus;
+    private String orderDesc;
+    private Long orderTime;
+    private Long periodID;
+    private String periodUuid;
     private Long userid;
 
-    public String nation;    //国家英文名称(为空默认中国)	否	String
-    public String country;    //国家中文名称(为空默认中国)	否	String
-    public String nationalTelCode;    //电话国际区码(为空默认中国)	否	String
-
+    public String nation;        public String country;        public String nationalTelCode;
     private List<BookingTableGroupReq> bookingTables;
 
     private List<BookingTradeItem> bookingTradeItems;
@@ -71,52 +45,34 @@ public class BookingNewReq extends BaseRequest {
 
     private BookingGroupInfo bookingGroupInfo;
 
-    /**
-     * 必填
-     */
-    private Integer commercialGender;//性别
 
-    private String uuid;//booking——uuid
-
+    private Integer commercialGender;
+    private String uuid;
     private Integer notifyCount;
 
     private Integer boxFirst;
 
     private BookingPeriod bookingPeriod;
 
-    private Integer bookingType;//0 默认 1 正餐 2 团餐
+    private Integer bookingType;
 
-    /**--------------------------------------------------------------------------------------------*/
-    /**
-     * updateBooking
-     */
-    private Long cancelOrderTime;//取消预订操作时间
 
-    private String cancelOrderUser;//取消操作员
-
-    private int deleted;//是否删除
-
-    private BigDecimal realConsume;//实际消费金额
-
-    private Long realConsumeTime;//实际消费金额修改时间
-
-    private String realConsumeUser;//实际消费操作员
-
-    private String refusalReason;//拒绝理由
-
-    private Long shopArriveTime;//到店时间
-
-    private String shopArriveUser;//到店操作员
-
-    private Long shopLeaveTime;//离店时间
-
-    private String shopLeaveUser;//离店操作员
-
+    private Long cancelOrderTime;
+    private String cancelOrderUser;
+    private int deleted;
+    private BigDecimal realConsume;
+    private Long realConsumeTime;
+    private String realConsumeUser;
+    private String refusalReason;
+    private Long shopArriveTime;
+    private String shopArriveUser;
+    private Long shopLeaveTime;
+    private String shopLeaveUser;
     private Long bookingId;
 
     private Long modifyDateTime;
 
-    /*-------------------------------------------------------------------------------------------------*/
+
 
     public BookingType getBookingType() {
         return ValueEnums.toEnum(BookingType.class, bookingType);

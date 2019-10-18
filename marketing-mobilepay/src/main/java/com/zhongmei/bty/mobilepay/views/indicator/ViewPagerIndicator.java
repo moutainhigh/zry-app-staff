@@ -17,9 +17,7 @@ import com.zhongmei.yunfu.mobilepay.R;
 import com.zhongmei.OSLog;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ViewPagerIndicator extends LinearLayout implements Indicator {
 
@@ -92,7 +90,6 @@ public class ViewPagerIndicator extends LinearLayout implements Indicator {
 
     @Override
     public void setShowDividers(int showDividers) {
-//        Always
         super.setShowDividers(SHOW_DIVIDER_MIDDLE);
     }
 
@@ -236,7 +233,6 @@ public class ViewPagerIndicator extends LinearLayout implements Indicator {
 
                 @Override
                 public void onInvalidated() {
-//                    empty
                 }
             });
         }
@@ -270,7 +266,6 @@ public class ViewPagerIndicator extends LinearLayout implements Indicator {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
-//            super.destroyItem(container, position, object);
         }
 
         @Override
@@ -281,7 +276,6 @@ public class ViewPagerIndicator extends LinearLayout implements Indicator {
         }
 
         private LinearLayout getLinearLayoutForPage(int position) {
-//            TODO:add view pool
             LinearLayout linearLayout = new LinearLayout(context);
             linearLayout.setLayoutParams(new ViewGroup.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -292,9 +286,6 @@ public class ViewPagerIndicator extends LinearLayout implements Indicator {
                 linearLayout.setDividerDrawable(proxy.getDividerDrawable());
                 linearLayout.setShowDividers(proxy.getShowDividers());
             }
-//            linearLayout.setDividerDrawable(context.getResources()
-//                    .getDrawable(R.drawable.shape_pay_method_divider_line_horizental));
-//            linearLayout.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
 
             ViewGroup.LayoutParams layoutParams = null;
 

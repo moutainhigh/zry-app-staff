@@ -34,10 +34,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 菜品作法view
- */
+
 @EViewGroup(R.layout.experience_layout)
 public class TasteView extends LinearLayout implements View.OnClickListener, ExpandableListView.OnChildClickListener, ExpandableListView.OnGroupClickListener {
 
@@ -60,8 +57,7 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
 
     private OrderDishListenerImp mListener;
 
-    private boolean mIsUnFold = true;//是否打开，默认打开
-
+    private boolean mIsUnFold = true;
     private boolean isBatchMode = false;
 
     public OrderDishListenerImp getListener() {
@@ -134,8 +130,7 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
 
                     if (mListener != null) {
                         mListener.onBatchAddProperty(orderProperties);
-                        //回调后取消选中做法
-                        clearSelected();
+                                                clearSelected();
                     }
                     break;
                 default:
@@ -160,15 +155,13 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
         mExlv_taste.setAdapter(mTasteAdapter);
 
 
-        boolean isFold = SpHelper.getDefault().getBoolean(SpHelper.DINNER_FOLD_PRACTICE, false);//默认不折叠
-
+        boolean isFold = SpHelper.getDefault().getBoolean(SpHelper.DINNER_FOLD_PRACTICE, false);
         if (mPropertyGroupVos != null && mPropertyGroupVos.size() > 0) {
             for (int typeIndex = 0; typeIndex < mPropertyGroupVos.size(); typeIndex++) {
                 PropertyGroupVo<DishPropertyVo> propertyGroupVo = mPropertyGroupVos.get(typeIndex);
 
                 if (mIsUnFold || !isFold) {
-                    mExlv_taste.expandGroup(typeIndex);//展开
-                }
+                    mExlv_taste.expandGroup(typeIndex);                }
 
                 if (propertyGroupVo != null && propertyGroupVo.getPropertyList().size() > 0) {
                     List<DishPropertyVo> dishPropertyVos = propertyGroupVo.getPropertyList();
@@ -187,14 +180,7 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
         }
     }
 
-    /**
-     * 设置口味做法的名称和价格
-     *
-     * @param rootView
-     * @param typeIndex       类别的索引
-     * @param propertyIndex   属性在其类别下的索引
-     * @param propertyGroupVo
-     */
+
     private void setNameAndPrice(View rootView, int typeIndex, int propertyIndex,
                                  PropertyGroupVo<DishPropertyVo> propertyGroupVo) {
 
@@ -210,7 +196,6 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
             OrderProperty property =
                     new OrderProperty(propertyGroupVo.getPropertyType(), propertyGroupVo.getProperty(propertyIndex));
             mListener.addExperience(property, false);
-//            mSelectedViews.add(parentView);
             parentView.setSelected(true);
         } else {
             parentView.setSelected(false);
@@ -230,11 +215,7 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
         }
     }
 
-    /**
-     * 添加口味做法的类别标题
-     *
-     * @param dishProperties
-     */
+
     private void addPropertyTypeTitle(PropertyGroupVo<DishPropertyVo> dishProperties) {
         if (dishProperties != null && dishProperties.getPropertyList().size() > 0) {
             TextView tv = new TextView(getContext());
@@ -252,31 +233,9 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
 
     @Override
     public void onClick(View v) {
-//        Position vPos = (Position)v.getTag();
-//        for (int i = 0; i < mSelectedViews.size(); i++) {
-//            Position position = (Position)mSelectedViews.get(i).getTag();
-//            // 同一类别
-//            if (position.getFirst() == vPos.getFirst()) {
-//                if (position.getSecond() == vPos.getSecond()) {
-//                    setPropertySelectable(v, vPos, false);
-//                } else {
-//                    setPropertySelectable(v, vPos, true);
-//                    setPropertySelectable(mSelectedViews.get(i), position, false);
-//                }
-//
-//                return;
-//            }
-//        }
-//
-//        setPropertySelectable(v, vPos, true);
     }
 
-    /**
-     * 根据位置获取对应的OrderProperty
-     *
-     * @param pos
-     * @return
-     */
+
     private OrderProperty getOrderProperty(Position pos) {
         if (pos.getFirst() >= 0 && pos.getFirst() < mPropertyGroupVos.size()) {
             PropertyGroupVo<DishPropertyVo> dishPropertyGroupVo = mPropertyGroupVos.get(pos.getFirst());
@@ -290,12 +249,7 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
         return null;
     }
 
-    /**
-     * 选中或取消某一属性
-     *
-     * @param pos
-     * @param select
-     */
+
     private void setPropertySelectable(Position pos, boolean select) {
         if (pos.getFirst() >= 0 && pos.getFirst() < mPropertyGroupVos.size()) {
             PropertyGroupVo<DishPropertyVo> dishPropertyGroupVo = mPropertyGroupVos.get(pos.getFirst());
@@ -314,9 +268,7 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
         }
     }
 
-    /**
-     * 取消选中
-     */
+
     private void clearSelected() {
         if (Utils.isNotEmpty(mPropertyGroupVos)) {
             for (PropertyGroupVo<DishPropertyVo> propertyGroupVo : mPropertyGroupVos) {
@@ -340,8 +292,7 @@ public class TasteView extends LinearLayout implements View.OnClickListener, Exp
         Position vPos = new Position(groupIndex, childIndex);
         for (int i = 0; i < mSelectedViews.size(); i++) {
             Position position = mSelectedViews.get(i);
-            // 同一类别
-            if (position.getFirst() == vPos.getFirst()) {
+                        if (position.getFirst() == vPos.getFirst()) {
                 if (position.getSecond() == vPos.getSecond()) {
                     setPropertySelectable(position, false);
                 } else {

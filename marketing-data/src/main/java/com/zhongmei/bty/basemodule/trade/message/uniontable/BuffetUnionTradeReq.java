@@ -34,29 +34,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BuffetUnionTradeReq {
 
     public Trade tradeCreateRequest;
     public TradeDeposit deposit;
-    public TradeItem menuTradeItem;//餐标
-    public List<TradeBuffetPeople> peoples;
-    public List<EmptyTableTrade> emptyTableTrades;//空桌台构建订单信息
-    public List<BTrade> trades;//已有订单
-    public List<TradeTax> taxs;//消费税
-    public List<TradeUser> tradeUsers;
+    public TradeItem menuTradeItem;    public List<TradeBuffetPeople> peoples;
+    public List<EmptyTableTrade> emptyTableTrades;    public List<BTrade> trades;    public List<TradeTax> taxs;    public List<TradeUser> tradeUsers;
     public List<TradeInitConfig> tradeInitConfigs;
 
     public BuffetUnionTradeReq(BigDecimal subTradesToatalAmount, DishMenuVo dishMenuVo, List<TradeBuffetPeople> subTradeBuffetPeoples,
                                List<Tables> emptyTablesList, List<Trade> subTrades) {
-        //获取总人数
-        BigDecimal totalPeopleCount = getTotalPeopleCount(subTradeBuffetPeoples);
+                BigDecimal totalPeopleCount = getTotalPeopleCount(subTradeBuffetPeoples);
 
-        //押金＋子单saleamount之和＋消费税＋空桌餐标价格
-        tradeCreateRequest = createTradeCreateRequest(subTradesToatalAmount);
+                tradeCreateRequest = createTradeCreateRequest(subTradesToatalAmount);
         deposit = createDeposit(tradeCreateRequest.getUuid(), totalPeopleCount);
         menuTradeItem = createMenuTradeItem(dishMenuVo, totalPeopleCount, subTradeBuffetPeoples);
         peoples = createTradeBuffetPeople(tradeCreateRequest.getUuid(), subTradeBuffetPeoples);
@@ -64,8 +56,7 @@ public class BuffetUnionTradeReq {
         trades = createBTrades(subTrades);
 
 
-        //this.taxs = createTradeTax();
-    }
+            }
 
     public void setTaxs(List<TradeTax> taxs) {
         this.taxs = taxs;
@@ -94,60 +85,35 @@ public class BuffetUnionTradeReq {
         tradeCreateRequest.setUuid(SystemUtils.genOnlyIdentifier());
         tradeCreateRequest.setTradeNo(SystemUtils.getBillNumber());
 
-        // 所属领域:1:RESTAURANT:餐饮业
-        tradeCreateRequest.setDomainType(DomainType.RESTAURANT);
+                tradeCreateRequest.setDomainType(DomainType.RESTAURANT);
 
         tradeCreateRequest.setBusinessType(BusinessType.BUFFET);
         tradeCreateRequest.setTradePayForm(TradePayForm.OFFLINE);
         tradeCreateRequest.setStatusFlag(StatusFlag.VALID);
 
-        // 来源。如店内:1、微信等
-        // Long sourceId;
-        tradeCreateRequest.setSource(SourceId.POS);
-        // 1:ANDROID 2:IPAD 3:官微 4:商微
-        tradeCreateRequest.setSourceChild(SourceChild.ANDROID);
+                        tradeCreateRequest.setSource(SourceId.POS);
+                tradeCreateRequest.setSourceChild(SourceChild.ANDROID);
 
-        // 支付状态：1:UNPAID:未支付
-        // 2:PAYING:支付中，微信下单选择了在线支付但实际上未完成支付的 3:PAID:已支付
-        tradeCreateRequest.setTradePayStatus(TradePayStatus.UNPAID);
+                        tradeCreateRequest.setTradePayStatus(TradePayStatus.UNPAID);
 
-        // 默认订单类型为内用
-        tradeCreateRequest.setDeliveryType(DeliveryType.HERE);
+                tradeCreateRequest.setDeliveryType(DeliveryType.HERE);
 
-        // 各种优惠折扣的减免金额，销货时为负数，退货时为正数
-        tradeCreateRequest.setPrivilegeAmount(new BigDecimal(0));
+                tradeCreateRequest.setPrivilegeAmount(new BigDecimal(0));
 
-        // 退货所对应的销货单
-        // Long relateTradeId;
-        // 原单UUID
-        // String relateTradeUuid;
 
-        // 销售金额，明细SALE_AMOUNT之和
-        tradeCreateRequest.setSaleAmount(amount);
+                tradeCreateRequest.setSaleAmount(amount);
 
-        // 单号
-        // String seqNo;
 
-        // 交易金额，等于SALE_AMOUNT与PRIVILEGE_AMOUNT之和
-        tradeCreateRequest.setTradeAmountBefore(amount);
+                tradeCreateRequest.setTradeAmountBefore(amount);
         tradeCreateRequest.setTradeAmount(amount);
 
-        // 交易状态：1:UNPROCESSED:未处理 2:TEMPORARY:挂单，不需要厨房打印
-        // 3:CONFIRMED:已确认 4:FINISH:已完成(全部支付)
-        // 5:RETURNED:已退货 6:INVALID:已作废 7:REFUSED:已拒绝
-        tradeCreateRequest.setTradeStatus(TradeStatus.CONFIRMED);
+                                tradeCreateRequest.setTradeStatus(TradeStatus.CONFIRMED);
 
-        // 商品种类，默认传0
-        tradeCreateRequest.setDishKindCount(0);
+                tradeCreateRequest.setDishKindCount(0);
 
-        // 交易时间
-        // java.util.Date tradeTime;
-        tradeCreateRequest.setTradeTime((new Date()).getTime());
+                        tradeCreateRequest.setTradeTime((new Date()).getTime());
 
-        // 交易类型 1:SELL:售货 2:REFUND:退货
-        // com.zhongmei.bty.commonmodule.database.enums.TradeType
-        // tradeType;
-        tradeCreateRequest.setTradeType(TradeType.SELL);
+                                tradeCreateRequest.setTradeType(TradeType.SELL);
         tradeCreateRequest.setBizDate(DateTimeUtils.getCurrentDayStart());
 
         return tradeCreateRequest;
@@ -241,7 +207,6 @@ public class BuffetUnionTradeReq {
         menuTradeItem.setDishId(dishMenuVo.getSkuId());
         menuTradeItem.setDishName(dishMenuVo.getSkuName());
         menuTradeItem.setSkuUuid(dishMenuVo.getSkuUuid());
-//        mTradeItem.setTradeMemo(mDishMenuVo.getName());
         menuTradeItem.setStatusFlag(StatusFlag.VALID);
         menuTradeItem.setType(DishType.BUFFET_COMBO_SHELL);
         menuTradeItem.setPropertyAmount(BigDecimal.ZERO);
@@ -254,7 +219,7 @@ public class BuffetUnionTradeReq {
 
     private List<EmptyTableTrade> createEmptyTableTrades(List<Tables> tablesList) {
         if (Utils.isNotEmpty(tablesList)) {
-            /*设置登录操作员为默认服务员*/
+
             AuthUser user = Session.getAuthUser();
             List<EmptyTableTrade> emptyTableTrades = new ArrayList<>();
             for (Tables tables : tablesList) {

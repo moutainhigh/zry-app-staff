@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.session.support;
 
 import com.zhongmei.yunfu.context.session.auth.IAuthUser;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class IAuthUserProxy implements IAuthUser {
 

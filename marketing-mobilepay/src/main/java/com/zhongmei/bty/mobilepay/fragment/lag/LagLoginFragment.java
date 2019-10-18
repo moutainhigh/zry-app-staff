@@ -58,9 +58,7 @@ import java.util.regex.Pattern;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class LagLoginFragment extends BasicFragment implements View.OnClickListener {
 
     private final String TAG = LagLoginFragment.class.getSimpleName();
@@ -82,12 +80,9 @@ public class LagLoginFragment extends BasicFragment implements View.OnClickListe
 
     private LoginListener mListener;
 
-    private DoPayApi mDoPayApi;//add v8.9
-    private IPaymentInfo mPaymentInfo;
+    private DoPayApi mDoPayApi;    private IPaymentInfo mPaymentInfo;
 
-    /**
-     * 当前商户国籍
-     */
+
     private ErpCurrency mErpCurrency;
 
     private Map<String, ErpCurrency> erpCurrencyMap;
@@ -179,14 +174,11 @@ public class LagLoginFragment extends BasicFragment implements View.OnClickListe
     protected void initView() {
         if (getActivity().getWindow()
                 .getAttributes().softInputMode == WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED) {
-            // 隐藏软键盘
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         }
         mNumberKeyBorad.setCurrentInput(show_value);
         NumberKeyBoardUtils.setTouchListener(show_value);
-        /*DisplayUserInfo dUserInfo =
-                DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_ACCOUNT_INPUT, "", null, 0, true, 0);
-        DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
         show_value.requestFocus();
         show_value.setFocusable(true);
         submitBtnClickable();
@@ -206,9 +198,7 @@ public class LagLoginFragment extends BasicFragment implements View.OnClickListe
             public void afterTextChanged(Editable s) {
                 submitBtnClickable();
                 if (isShowAccount) {
-                    /*DisplayUserInfo dUserInfo = DisplayServiceManager
-                            .buildDUserInfo(DisplayUserInfo.COMMAND_ACCOUNT_INPUT, s.toString(), null, 0, false, 0);
-                    DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
                 } else {
                     isShowAccount = true;
                 }
@@ -271,12 +261,7 @@ public class LagLoginFragment extends BasicFragment implements View.OnClickListe
         }
     }
 
-    /**
-     * 显示国籍dialog
-     *
-     * @param erpCurrencyList
-     * @param currentErpCurrency
-     */
+
     public void showCountryDialog(List<ErpCurrency> erpCurrencyList, ErpCurrency currentErpCurrency) {
         if (erpCurrencyList == null || erpCurrencyList.size() == 0) {
             ToastUtil.showShortToast(getString(R.string.pay_erpcurrency_enpty_hint));
@@ -305,13 +290,11 @@ public class LagLoginFragment extends BasicFragment implements View.OnClickListe
             ToastUtil.showShortToast(R.string.customer_login_hint);
             return;
         }
-        // 直接使用手机号登录
-        loginByPhoneNo(inputNo);
+                loginByPhoneNo(inputNo);
     }
 
 
-    //新登录接口
-    protected void loginByPhoneNo(final String inputNo) {
+        protected void loginByPhoneNo(final String inputNo) {
         if (!TextUtils.isEmpty(inputNo)
                 && mErpCurrency != null
                 && !TextUtils.isEmpty(mErpCurrency.getPhoneRegulation())
@@ -330,14 +313,12 @@ public class LagLoginFragment extends BasicFragment implements View.OnClickListe
                             return;
                         }
 
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                        if (resp.customerIsDisable()) {                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                             return;
                         }
 
                         CustomerResp customer = resp.getCustomer();
-                        //customer.setCoupons(infoResp.getCoupons());
-                        if (!customer.isMember()) {
+                                                if (!customer.isMember()) {
                             ToastUtil.showShortToast(R.string.customer_not_member);
                             return;
                         }
@@ -348,20 +329,14 @@ public class LagLoginFragment extends BasicFragment implements View.OnClickListe
                         isShowAccount = false;
                         show_value.setText("");
 
-                        //DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
-                        EventBus.getDefault().post(new DisplayUserInfoEvent());//modify v8.9
-                        //List<CustomerInfoResp.Card> cards = customer.getOtherCardList();
-                        if (mListener != null) {
+                                                EventBus.getDefault().post(new DisplayUserInfoEvent());                                                if (mListener != null) {
                             mListener.onPhoneSuccess(customer);
                         }
                     } else {
                         ToastUtil.showShortToast(response.getMessage());
                         show_value.setBackgroundResource(R.drawable.customer_edit_error_bg);
 
-                            /*DisplayUserInfo dUserInfo = DisplayServiceManager
-                                    .buildDUserInfo(DisplayUserInfo.COMMAND_VALIDATE_USER_FAIL, "", null, 0, true, 0);
 
-                            DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
 
                         show_value.requestFocus();
                         isShowAccount = false;
@@ -388,8 +363,7 @@ public class LagLoginFragment extends BasicFragment implements View.OnClickListe
 
     public static Animation shakeAnimation(int counts) {
         Animation translateAnimation = new TranslateAnimation(0, 15, 0, 0);
-        // 设置一个循环加速器，使用传入的次数就会出现摆动的效果。
-        translateAnimation.setInterpolator(new CycleInterpolator(counts));
+                translateAnimation.setInterpolator(new CycleInterpolator(counts));
         translateAnimation.setDuration(500);
 
         return translateAnimation;

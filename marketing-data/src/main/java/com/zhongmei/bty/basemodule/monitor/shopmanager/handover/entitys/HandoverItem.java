@@ -4,9 +4,7 @@ import com.zhongmei.bty.basemodule.database.entity.shopmanager.CashHandoverItem;
 
 import java.math.BigDecimal;
 
-/**
- * 交接收款明细
- */
+
 public class HandoverItem extends CashHandoverItem {
     private static final long serialVersionUID = 1L;
 
@@ -16,10 +14,8 @@ public class HandoverItem extends CashHandoverItem {
 
     private BigDecimal refundAmount;
 
-    private BigDecimal consumeStoreMoney; //实储消费金额(只有当支付方式为储值消费时可能有值，其余支付方式为null)
-
-    private BigDecimal consumeStoreSendMoney; //储值赠送消费金额(只有当支付方式为储值消费时可能有值，其余支付方式为null)
-
+    private BigDecimal consumeStoreMoney;
+    private BigDecimal consumeStoreSendMoney;
     public Integer getPayCount() {
         return payCount;
     }

@@ -6,82 +6,52 @@ import com.zhongmei.yunfu.db.enums.LimitBookingUnit;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * 预订设置
- */
+
 @DatabaseTable(tableName = "booking_setting")
 public class BookingSetting extends EntityBase<Long> {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * commercial_id
-         */
+
         String commercialId = "commercial_id";
 
-        /**
-         * brand_id
-         */
+
         String brandId = "brand_id";
 
-        /**
-         * limit_booking_number
-         */
+
         String limitBookingNumber = "limit_booking_number";
 
-        /**
-         * limit_booking_unit
-         */
+
         String limitBookingUnit = "limit_booking_unit";
 
-        /**
-         * keep_time
-         */
+
         String keepTime = "keep_time";
 
-        /**
-         * limit_service_time
-         */
+
         String limitServiceTime = "limit_service_time";
 
-        /**
-         * order_menu
-         */
+
         String orderMenu = "order_menu";
 
-        /**
-         * is_delete
-         */
+
         String isDelete = "is_delete";
 
-        /**
-         * creator_id
-         */
+
         String creatorId = "creator_id";
 
-        /**
-         * updateTime
-         */
+
         String updateTime = "update_ime";
 
-        /**
-         * create_time
-         */
+
         String createTime = "create_time";
 
-        /**
-         * updater_d
-         */
+
         String updaterId = "updater_d";
 
     }
@@ -89,48 +59,34 @@ public class BookingSetting extends EntityBase<Long> {
     @DatabaseField(columnName = "id", id = true, canBeNull = false)
     private Long id;
 
-    /**
-     * 商户id
-     */
+
     @DatabaseField(columnName = "commercial_id")
     private Long commercialId;
 
     @DatabaseField(columnName = "brand_id")
     private Long brandId;
 
-    /**
-     * 是否删除(0 否; 1 是)
-     */
+
     @DatabaseField(columnName = "is_delete", canBeNull = false)
     private Integer isDelete;
 
-    /**
-     * 预订限制数量
-     */
+
     @DatabaseField(columnName = "limit_booking_number")
     private Integer limitBookingNumber;
 
-    /**
-     * 预订限制单位
-     */
+
     @DatabaseField(columnName = "limit_booking_unit")
     private Integer limitBookingUnit;
 
-    /**
-     * 预定保留时长
-     */
+
     @DatabaseField(columnName = "keep_time")
     private String keepTime;
 
-    /**
-     * 平均就餐时间
-     */
+
     @DatabaseField(columnName = "limit_service_time")
     private String limitServiceTime;
 
-    /**
-     * 是否预点菜（0开启，1关闭）
-     */
+
     @DatabaseField(columnName = "order_menu")
     private Integer orderMenu;
 

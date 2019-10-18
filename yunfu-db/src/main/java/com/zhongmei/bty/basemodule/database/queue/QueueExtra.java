@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * 排队扩展表
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "queue_extra")
 public class QueueExtra extends IdEntityBase {
 

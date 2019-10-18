@@ -8,9 +8,7 @@ import com.zhongmei.yunfu.db.DataEntityBase;
 import com.zhongmei.bty.commonmodule.database.enums.AuthType;
 import com.zhongmei.bty.commonmodule.database.enums.OrderActionEnum;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "authorized_log")
 public class AuthorizedLog extends DataEntityBase {
     public interface $ extends DataEntityBase.$ {
@@ -32,69 +30,47 @@ public class AuthorizedLog extends DataEntityBase {
     @DatabaseField(columnName = "trade_id")
     Long tradeId;
 
-    /**
-     * '订单号trade.uuid'
-     */
+
     @DatabaseField(columnName = "trade_uuid")
     String tradeUuid;
 
-    /**
-     * 指关联订单日志的操作type
-     */
+
     @DatabaseField(columnName = "order_type")
     String orderType;
 
-    /**
-     * 授权操作类型 code
-     */
+
     @DatabaseField(columnName = "auth_type")
     Integer authType;
 
-    /**
-     * 授权操作文字描述
-     */
+
     @DatabaseField(columnName = "auth_type_desc")
     String authTypeDesc;
 
-    /**
-     * 权限时间
-     */
+
     @DatabaseField(columnName = "auth_time")
 
     Long authTime;
-    /**
-     * 授权人Id
-     */
+
     @DatabaseField(columnName = "auth_user_id")
     Long authUserId;
 
-    /**
-     * 授权人名称
-     */
+
     @DatabaseField(columnName = "auth_user_name")
     String authUserName;
 
-    /**
-     * 授权内容描述
-     */
+
     @DatabaseField(columnName = "auth_content")
     String authContent;
 
-    /**
-     * 关联订单请求的唯一标识
-     */
+
     @DatabaseField(columnName = "version_uuid")
     String versionUuid;
 
-    /**
-     * 操作人id，当前登录用户的id
-     */
+
     @DatabaseField(columnName = "operate_id")
     Long operateId;
 
-    /**
-     * 操作人名，当前登录用户的名字
-     */
+
     @DatabaseField(columnName = "operate_name")
     String operateName;
 

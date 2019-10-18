@@ -6,17 +6,13 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * 积分规则
- */
+
 @DatabaseTable(tableName = "customer_score_rule")
 public class CustomerScoreRule extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "crm_customer_level_rights"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
 
@@ -24,111 +20,73 @@ public class CustomerScoreRule extends IdEntityBase {
 
         public final String convertValue = "convert_value";
 
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
 
-        /**
-         * client_create_time
-         */
+
         String clientCreateTime = "client_create_time";
 
-        /**
-         * client_update_time
-         */
+
         String clientUpdateTime = "client_update_time";
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * shop_identy
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * device_identy
-         */
+
         String deviceIdenty = "device_identy";
 
     }
 
-    /**
-     * 积分抵扣限制Type
-     */
+
     @DatabaseField(columnName = "type", canBeNull = false)
     private Integer type;
 
 
-    /**
-     * 积分抵现规则
-     */
+
     @DatabaseField(columnName = "convert_value", canBeNull = false)
     private Integer convertValue;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 
-    /**
-     * 客户端创建时间
-     */
+
     @DatabaseField(columnName = "client_create_time")
     private Long clientCreateTime;
 
-    /**
-     * 客户端最后修改时间
-     */
+
     @DatabaseField(columnName = "client_update_time")
     private Long clientUpdateTime;
 
-    /**
-     * 门店Identy
-     */
+
     @DatabaseField(columnName = "shop_identy", canBeNull = false)
     private Long shopIdenty;
 
-    /**
-     * 设备Identy
-     */
+
     @DatabaseField(columnName = "device_identy")
     private String deviceIdenty;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 

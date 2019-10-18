@@ -14,9 +14,7 @@ import com.zhongmei.yunfu.R;
 
 import java.util.List;
 
-/**
- * 微信小程序记录
- */
+
 @SuppressLint("SimpleDateFormat")
 public class CustomerWxAppRecordAdapter extends BaseAdapter {
 

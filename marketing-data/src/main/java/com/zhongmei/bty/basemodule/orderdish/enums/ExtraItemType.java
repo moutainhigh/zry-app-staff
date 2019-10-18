@@ -1,25 +1,16 @@
 package com.zhongmei.bty.basemodule.orderdish.enums;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
 public enum ExtraItemType implements ValueEnum<Integer> {
 
-    DEPOSIT(1), // 押金
-
-    OUTTIME_FEE(2), // 超时费
-
-    MIN_CONSUM(3), // 最低消费附加
+    DEPOSIT(1),
+    OUTTIME_FEE(2),
+    MIN_CONSUM(3),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
     @Deprecated
     __UNKNOWN__;
 

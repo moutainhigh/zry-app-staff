@@ -39,13 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * @Date：2015年9月22日 上午18:28:04
- * @Description: 票据中心详细 商品信息adapter
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class DinnerBillCenterDishAdapter extends BaseAdapter {
     private Context mContext;
 
@@ -181,13 +175,11 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
     private void bindView(ViewHolder holder, int position) {
         TradeDishDataItem tradeDishDataItem = (TradeDishDataItem) getItem(position);
         int itemViewType = getItemViewType(position);
-        int type = tradeDishDataItem.getType();// 菜品类型
-        TradeItemVo tradeItemVo = tradeDishDataItem.getTradeItemVo();
+        int type = tradeDishDataItem.getType();        TradeItemVo tradeItemVo = tradeDishDataItem.getTradeItemVo();
         switch (itemViewType) {
             case 0:
                 TradeItem tradeItem = tradeItemVo.getTradeItem();
-                // 设置菜品名称、数量、价格、口味、做法格式
-                if (type == TradeDishDataItem.ITEM_TYPE_COMBO_CHILD) {
+                                if (type == TradeDishDataItem.ITEM_TYPE_COMBO_CHILD) {
                     holder.llDishView.setLayoutParams(getIsComboDiyWh(mContext));
                     holder.tvDishName.setTextSize(16);
                     holder.tvDishName.setPadding(DensityUtil.dip2px(MainApplication.getInstance(), 24), 0, 0, 0);
@@ -198,8 +190,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                                     tradeDishDataItem.getParentTradeItemVo().getTradeItem(),
                                     null);
                     holder.tvDishNum.setText(MathDecimal.toTrimZeroString(dishnum));
-                    // holder.tvDishNum.setText(MathDecimal.toTrimZeroString(tradeItem.getQuantity()));
-                    if (tradeItem.getPrice().compareTo(BigDecimal.ZERO) != 0) {
+                                        if (tradeItem.getPrice().compareTo(BigDecimal.ZERO) != 0) {
                         holder.tvSingleDishPrice.setText(Utils.formatPrice(tradeItem.getPrice().doubleValue()));
                     } else {
                         holder.tvSingleDishPrice.setText("");
@@ -226,10 +217,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                     holder.tvDishName.setTextSize(16);
                     if (tradeDishDataItem.isHasAllOrderDiscount()) {
                         holder.tvDishName.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-                        // 不显示整单打折的图标
-                        // holder.tvDishName.setCompoundDrawablesWithIntrinsicBounds(mAllOrderDiscount,
-                        // null, null, null);
-                    } else {
+                                                                                            } else {
                         holder.tvDishName.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                     }
 
@@ -258,27 +246,22 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                     holder.tvExtraName.setPadding(DensityUtil.dip2px(MainApplication.getInstance(), 24), 0, 0, 0);
                 }
 
-                /**
-                 * 口味做法
-                 */
+
                 List<TradeItemProperty> propertyList = buildDataTool.filterTradeItemProperty(tradeItemVo, PropertyKind.PROPERTY);
                 if (Utils.isNotEmpty(propertyList)) {
                     holder.tvPropertyName.setText(getPropertyName(propertyList));
-                    holder.tvPropertyQuantity.setVisibility(View.GONE);// 现在不需要显示口味做法的数量
-                    holder.tvPropertyQuantity.setText(MathDecimal.toTrimZeroString(getPropertyQuantity(propertyList)));
+                    holder.tvPropertyQuantity.setVisibility(View.GONE);                    holder.tvPropertyQuantity.setText(MathDecimal.toTrimZeroString(getPropertyQuantity(propertyList)));
                     holder.tvPropertyAmount.setText(Utils.formatPrice(getPropertyAmount(propertyList).doubleValue()));
                     holder.llDishProperty.setVisibility(View.VISIBLE);
                 } else {
                     holder.llDishProperty.setVisibility(View.GONE);
                 }
 
-                // 加料
-                setExtraView(tradeDishDataItem, holder);
+                                setExtraView(tradeDishDataItem, holder);
                 break;
 
             case 1:
-                // 设置折扣以及备注格式
-                if (type == TradeDishDataItem.ITEM_TYPE_COMBO_CHILD_MEMO) {
+                                if (type == TradeDishDataItem.ITEM_TYPE_COMBO_CHILD_MEMO) {
                     holder.llDishPrivilege.setLayoutParams(getIsComboDiyWh(mContext));
                     holder.tvPrivilegeType.setPadding(DensityUtil.dip2px(MainApplication.getInstance(), 48), 0, 0, 0);
                     holder.tvDishMemo.setLayoutParams(getIsComboDiyWh(mContext));
@@ -290,9 +273,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                     holder.tvDishMemo.setPadding(DensityUtil.dip2px(MainApplication.getInstance(), 24), 0, 0, 0);
                 }
 
-                /**
-                 * 菜品折扣
-                 */
+
                 TradePrivilege tradePrivilege = tradeItemVo.getTradeItemPrivilege();
                 TradeReasonRel tradeReasonRel = tradeItemVo.getDiscountReason();
                 if (tradePrivilege != null) {
@@ -336,8 +317,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                             holder.llDishPrivilege.setVisibility(View.VISIBLE);
                             break;
                         case MEMBER_PRICE:
-                            // 会员价。会员让价
-                            holder.tvPrivilegeType.setText(mContext.getString(R.string.member_price));
+                                                        holder.tvPrivilegeType.setText(mContext.getString(R.string.member_price));
                             holder.tvPrivilegeAmount.setText(Utils.formatPrice(tradePrivilege.getPrivilegeAmount()
                                     .doubleValue()));
                             holder.llDishPrivilege.setVisibility(View.VISIBLE);
@@ -347,8 +327,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                             break;
                     }
                 } else {
-                    //礼品券add 2016.10.21
-                    if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
+                                        if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
                         tradePrivilege = tradeItemVo.getCouponPrivilegeVo().getTradePrivilege();
                         holder.tvPrivilegeType.setText(mContext.getString(R.string.coupon_gift) + "(" + tradePrivilege.getPrivilegeName() + ")");
                         holder.tvPrivilegeAmount.setText(Utils.formatPrice(tradePrivilege.getPrivilegeAmount()
@@ -359,9 +338,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                     }
                 }
 
-                /**
-                 * 菜品备注
-                 */
+
                 String memoarrays = buildTradeMemos(tradeItemVo);
                 if (!TextUtils.isEmpty(memoarrays)) {
                     holder.tvDishMemo.setText(mContext.getString(R.string.order_center_detail_memo, memoarrays));
@@ -374,19 +351,15 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                 String ruleName = "";
 
                 if (ruleName != null) {
-                    ruleName = mContext.getString(R.string.activity_title) + tradeDishDataItem.getTradePlanActivity().getRuleName();//营销活动
-                    //holder.tvPlanActivity.setText("【活动】"+ruleName);
-
+                    ruleName = mContext.getString(R.string.activity_title) + tradeDishDataItem.getTradePlanActivity().getRuleName();
                 } else {
                     ruleName = mContext.getString(R.string.activity_title);
-                    //holder.tvPlanActivity.setText("【活动】");
-                }
+                                    }
                 SpannableStringBuilder stringBuilder = new SpannableStringBuilder(ruleName);
                 ForegroundColorSpan colorSpan = new ForegroundColorSpan(mContext.getResources().getColor(R.color.market_activity_red));
                 stringBuilder.setSpan(colorSpan, 0, 4, Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
                 holder.tvPlanActivity.setText(stringBuilder);
-                BigDecimal totalBigDecimal = tradeDishDataItem.getTradePlanActivity().getOfferValue();//总金额
-
+                BigDecimal totalBigDecimal = tradeDishDataItem.getTradePlanActivity().getOfferValue();
                 holder.tvPlanPrice.setText(Utils.formatPrice(totalBigDecimal.doubleValue()));
                 if (position + 1 >= mDataSet.size()) {
                     holder.v_line.setVisibility(View.GONE);
@@ -434,15 +407,12 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
                 }
             }
             holder.tvExtraName.setText(extraName);
-            // holder.tvExtraQuantity.setText(MathDecimal.toTrimZeroString(getExtraQuantity(tradeDishDataItem)));
-            holder.tvExtraQuantity.setText(MathDecimal.toTrimZeroString(extraQuantity));
-            holder.tvExtraQuantity.setVisibility(View.GONE);// 现在不需要显示加料的数量
-            holder.tvExtraAmount.setText(Utils.formatPrice(getExtraAmount(extraList).doubleValue()));
+                        holder.tvExtraQuantity.setText(MathDecimal.toTrimZeroString(extraQuantity));
+            holder.tvExtraQuantity.setVisibility(View.GONE);            holder.tvExtraAmount.setText(Utils.formatPrice(getExtraAmount(extraList).doubleValue()));
             holder.llDishExtra.setVisibility(View.VISIBLE);
         } else {
             holder.llDishExtra.setVisibility(View.GONE);
-            holder.tvExtraQuantity.setVisibility(View.GONE);// 现在不需要显示加料的数量
-        }
+            holder.tvExtraQuantity.setVisibility(View.GONE);        }
     }
 
     private LinearLayout.LayoutParams getIsComboDiyWh(Context context) {
@@ -465,8 +435,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
     }
 
 
-    //根据TradePlanActivity来排序
-    private Map<TradePlanActivity, List<TradeItemVo>> sortMapByKey(Map<TradePlanActivity, List<TradeItemVo>> oriMap) {
+        private Map<TradePlanActivity, List<TradeItemVo>> sortMapByKey(Map<TradePlanActivity, List<TradeItemVo>> oriMap) {
         if (oriMap == null || oriMap.isEmpty()) {
             return null;
         }
@@ -488,9 +457,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
     }
 
 
-    /**
-     * 拼接加料文本
-     */
+
     private String getExtraName(List<TradeItemVo> extraList, BigDecimal parentItemQuantity) {
         StringBuilder sb = new StringBuilder();
         if (Utils.isNotEmpty(extraList)) {
@@ -517,9 +484,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
         List<TradeItemVo> extraList = mextraList;
         if (Utils.isNotEmpty(extraList)) {
             for (TradeItemVo tradeItemVo : extraList) {
-                // quantity =
-                // quantity.add(tradeItemVo.getTradeItem().getQuantity());
-                quantity = quantity.add(MathDecimal.div(tradeItemVo.getTradeItem().getQuantity(), parentItemQuantity));
+                                                quantity = quantity.add(MathDecimal.div(tradeItemVo.getTradeItem().getQuantity(), parentItemQuantity));
 
             }
         }
@@ -575,13 +540,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
         return sb.toString();
     }
 
-    /**
-     * @Title: getPropertyName
-     * @Description: 拼接属性名称
-     * @Param @param tradeItemPropertyList
-     * @Param @return TODO
-     * @Return String 返回类型
-     */
+
     private String getPropertyName(List<TradeItemProperty> tradeItemPropertyList) {
         StringBuilder sb = new StringBuilder();
         if (Utils.isNotEmpty(tradeItemPropertyList)) {
@@ -598,13 +557,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
         return sb.toString();
     }
 
-    /**
-     * @Title: getPropertyQuantity
-     * @Description: 返回属性数量
-     * @Param @param tradeItemPropertyList
-     * @Param @return TODO
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal getPropertyQuantity(List<TradeItemProperty> tradeItemPropertyList) {
         BigDecimal quantity = BigDecimal.ZERO;
 
@@ -617,13 +570,7 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
         return quantity;
     }
 
-    /**
-     * @Title: getPropertyAmount
-     * @Description: 返回属性变价
-     * @Param @param tradeItemPropertyList
-     * @Param @return TODO
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal getPropertyAmount(List<TradeItemProperty> tradeItemPropertyList) {
         BigDecimal amount = BigDecimal.ZERO;
 
@@ -673,44 +620,31 @@ public class DinnerBillCenterDishAdapter extends BaseAdapter {
 
         LinearLayout llDishView;
 
-        TextView tvDishName;// 菜品名称
-
-        TextView tvDishNum;// 菜品数量
-
-        TextView tvDishPrice;// 菜品价格
-
-        TextView tvSingleDishPrice;// 菜品单价价格
-
-        LinearLayout llDishProperty;// 菜品属性，包括做法、口味
-
+        TextView tvDishName;
+        TextView tvDishNum;
+        TextView tvDishPrice;
+        TextView tvSingleDishPrice;
+        LinearLayout llDishProperty;
         TextView tvPropertyName;
 
         TextView tvPropertyQuantity;
 
         TextView tvPropertyAmount;
 
-        LinearLayout llDishExtra;// 加料
-
+        LinearLayout llDishExtra;
         TextView tvExtraName;
 
         TextView tvExtraQuantity;
 
         TextView tvExtraAmount;
 
-        LinearLayout llDishPrivilege;// 菜品折扣
-
-        TextView tvPrivilegeType;// 折扣类型
-
-        TextView tvPrivilegeAmount;// 折扣数量
-
-        TextView tvDishMemo;// 菜品备注
-
-        TextView tvPlanActivity;//营销活动
-
-        TextView tvPlanPrice;//营销活动总金额
-
-        View v_line;//营销横线
-    }
+        LinearLayout llDishPrivilege;
+        TextView tvPrivilegeType;
+        TextView tvPrivilegeAmount;
+        TextView tvDishMemo;
+        TextView tvPlanActivity;
+        TextView tvPlanPrice;
+        View v_line;    }
 
 
 }

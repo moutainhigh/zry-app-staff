@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.db.ServerEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- * 菜品与券关联表
- */
+
 @DatabaseTable(tableName = "payment_item_groupon_dish")
 public class PaymentItemGrouponDish extends ServerEntityBase {
     public interface $ extends ServerEntityBase.$ {
@@ -24,8 +21,7 @@ public class PaymentItemGrouponDish extends ServerEntityBase {
 
     @DatabaseField(columnName = "trade_id", canBeNull = false)
     private Long tradeId;
-    /* @DatabaseField(columnName = "trade_item_id")
-     private Long tradeItemId;*/
+
     @DatabaseField(columnName = "trade_item_uuid")
     private String tradeItemUuid;
     @DatabaseField(columnName = "payment_item_id")

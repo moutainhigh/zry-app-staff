@@ -22,9 +22,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.layout_doc_details_task_view)
 public class DocDetailsTaskView extends RelativeLayout  {
 
@@ -58,8 +56,7 @@ public class DocDetailsTaskView extends RelativeLayout  {
 
     public void refreshUI(TaskRemind task,int index) {
         mTask = task;
-        //设置UI信息
-        tv_taskIndex.setText("提醒任务 "+index);
+                tv_taskIndex.setText("提醒任务 "+index);
         tv_title.setText(mTask.getTitle()+getTaskStatus(mTask.getStatus()));
         tv_content.setText(mTask.getContent());
         tv_remindTime.setText(DateUtil.format(mTask.getRemindTime()));

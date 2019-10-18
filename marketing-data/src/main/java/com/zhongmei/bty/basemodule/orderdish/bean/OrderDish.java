@@ -16,28 +16,19 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import java.math.BigDecimal;
 import java.util.Set;
 
-/**
- * @version: 1.0
- * @date 2015年7月10日
- */
+
 public class OrderDish {
 
     public final DishAndStandards dish;
 
     private BigDecimal singleQty = BigDecimal.ZERO;
-    /**
-     * 菜品实际数量，受父级影响
-     */
+
     private BigDecimal totalQty = BigDecimal.ZERO;
 
-    /**
-     * 时价商品的单价
-     */
+
     private BigDecimal definePrice = null;
 
-    /**
-     * 改变的名称
-     */
+
     private String defineName = null;
 
     public OrderDish(DishAndStandards dish) {
@@ -56,29 +47,17 @@ public class OrderDish {
         return dish.getDishType();
     }
 
-    /**
-     * 是否为组合套餐
-     *
-     * @return
-     */
+
     public boolean isCombo() {
         return dish.isCombo();
     }
 
-    /**
-     * 是否可以修改单价
-     *
-     * @return
-     */
+
     public Bool getIsChangePrice() {
         return dish.getIsChangePrice();
     }
 
-    /**
-     * 是否已估清
-     *
-     * @return
-     */
+
     public boolean isClear() {
         return dish.isClear();
     }
@@ -112,7 +91,6 @@ public class OrderDish {
 
     public String getUnitName() {
         return dish.getDishShop().getUnitName();
-//		return dish.getUnit() == null ? null : dish.getUnit().getName();
     }
 
     public BigDecimal getPrice() {
@@ -126,11 +104,7 @@ public class OrderDish {
         return definePrice;
     }
 
-    /**
-     * 修改商品的单价
-     *
-     * @param price
-     */
+
     public void changePrice(BigDecimal price) {
         if (getIsChangePrice() == Bool.YES) {
             definePrice = price;
@@ -154,8 +128,7 @@ public class OrderDish {
     }
 
     public void setQty(BigDecimal singleQty, BigDecimal totalQty) {
-        if (getSaleType() == SaleType.WEIGHING) {//称重商品保留三位小数位
-            this.singleQty = new BigDecimal(MathDecimal.toTrimThreeZeroString(singleQty));
+        if (getSaleType() == SaleType.WEIGHING) {            this.singleQty = new BigDecimal(MathDecimal.toTrimThreeZeroString(singleQty));
             this.totalQty = new BigDecimal(MathDecimal.toTrimThreeZeroString(totalQty));
         } else {
             this.singleQty = Decimal.valueOf(singleQty);
@@ -165,8 +138,7 @@ public class OrderDish {
     }
 
     public BigDecimal getActualAmount() {
-        //区分计算
-        if(ValueEnums.equalsValue(getDishShop().getSaleType(),SaleType.TIMECHARGING.value())){
+                if(ValueEnums.equalsValue(getDishShop().getSaleType(),SaleType.TIMECHARGING.value())){
             return caculTimeChargingAmount();
         }
         return mathActualAmount();
@@ -176,18 +148,13 @@ public class OrderDish {
         return totalQty == null ? BigDecimal.ZERO : MathDecimal.round(totalQty.multiply(getPrice()), 2);
     }
 
-    /**
-     * 计算计时消费的费用
-     * 商品还没有生效，所以按照最低消费来算
-     * @return
-     */
+
     private BigDecimal caculTimeChargingAmount() {
         DishTimeChargingRule rule = DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(getDishShop().getId());
         if (rule == null) {
             return mathActualAmount();
         }
-        //按照最低消费时间来算
-        return MathDecimal.round(rule.getStartChargingPrice().multiply(totalQty),2);
+                return MathDecimal.round(rule.getStartChargingPrice().multiply(totalQty),2);
     }
 
     public String getBatchNo() {

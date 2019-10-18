@@ -2,42 +2,25 @@ package com.zhongmei.bty.mobilepay.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 团购券状态
- * Created by demo on 2018/12/15
- */
+
 public enum TicketInfoStatus implements ValueEnum<Integer> {
 
-    /**
-     * 券码不存在
-     */
+
     NON_EXISTENT(-1),
 
-    /**
-     * 未使用
-     */
+
     NOT_USED(1),
 
-    /**
-     * 已使用
-     */
+
     USED(2),
 
-    /**
-     * 已过期
-     */
+
     EXPIRED(3),
 
-    /**
-     * 已退款
-     */
+
     REFUNDED(4),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

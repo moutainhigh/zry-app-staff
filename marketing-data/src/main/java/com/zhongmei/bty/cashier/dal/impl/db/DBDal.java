@@ -9,10 +9,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 
 import java.sql.SQLException;
 
-/**
- * 数据库数据访问层封装顶级类
- * Created by demo on 2018/12/15
- */
+
 public abstract class DBDal extends BaseDal {
 
     private DatabaseHelper dbHelper;

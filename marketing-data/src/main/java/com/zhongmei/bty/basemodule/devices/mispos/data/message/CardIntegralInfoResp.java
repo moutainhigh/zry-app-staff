@@ -5,9 +5,7 @@ import java.util.List;
 
 import com.zhongmei.bty.basemodule.devices.mispos.data.message.CardIntegralInfoResp.CardIntegralInfo;
 
-/**
- * 实体卡积分记录返回
- */
+
 public class CardIntegralInfoResp extends CardBaseResp<List<CardIntegralInfo>> {
 
     public static class CardIntegralInfo {
@@ -15,10 +13,7 @@ public class CardIntegralInfoResp extends CardBaseResp<List<CardIntegralInfo>> {
 
         private BigDecimal addIntegral;
 
-        /**
-         * 积分操作类型(0:消费获得积分,1:抽奖扣积分,2积分抵现,3:消费获得积分退回,4:抵现积分退回
-         * ,5:换卡积分转账)',
-         */
+
         private Integer operateType;
 
         private BigDecimal endIntegral;

@@ -18,17 +18,14 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.input.NumberKeyBoardUtils;
 
-/**
- * @date 2015年7月23日下午5:36:44
- */
+
 
 @EBean
 public class CommonKeyBorad {
 
     private EditText mShowValue;
 
-    private boolean isEnabled = true;// 键盘是否可用
-
+    private boolean isEnabled = true;
     private String defaultSuffix = "";
 
     private int maxLength;
@@ -123,12 +120,6 @@ public class CommonKeyBorad {
         }
 
         mShowValue.setSelection(mShowValue.length() - defaultSuffix.length());
-        // modify by dzb indexOutOfBound Exception.
-//		if(index == mShowValue.length() - defaultSuffix.length()){
-//			mShowValue.setSelection(mShowValue.length() - defaultSuffix.length());
-//		}else{
-//			mShowValue.setSelection(index+1);
-//		}
 
     }
 
@@ -146,14 +137,9 @@ public class CommonKeyBorad {
 
         String src = mShowValue.getText().toString().trim();
         if (src.length() == defaultSuffix.length() + 1) {
-            //如果是最后一个数字 删两次
-            mShowValue.setText("");
-//			mShowValue.setSelection(defaultSuffix.length()+1);
-//			mShowValue.onKeyDown(keyCode, keyEventDown); // editNumber
-//			mShowValue.onKeyUp(keyCode, keyEventUp);
+                        mShowValue.setText("");
         }
-        mShowValue.onKeyDown(keyCode, keyEventDown); // editNumber
-        mShowValue.onKeyUp(keyCode, keyEventUp);
+        mShowValue.onKeyDown(keyCode, keyEventDown);         mShowValue.onKeyUp(keyCode, keyEventUp);
     }
 
     private int getSelctedPosition() {
@@ -172,11 +158,7 @@ public class CommonKeyBorad {
         return "";
     }
 
-    /**
-     * 设置当前编辑栏
-     *
-     * @param input
-     */
+
     public void setCurrentInput(EditText input) {
         if (input != null) {
             input.requestFocus();
@@ -197,11 +179,7 @@ public class CommonKeyBorad {
         this.isEnabled = isEnabled;
     }
 
-    /**
-     * 数字后面的默认值显示
-     *
-     * @param defaultSuffix
-     */
+
     public void setDefaultSuffix(String defaultSuffix) {
         this.defaultSuffix = defaultSuffix;
     }

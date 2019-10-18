@@ -8,40 +8,26 @@ import com.zhongmei.yunfu.db.enums.Bool;
 
 import java.math.BigDecimal;
 
-/**
- * invoice_tax_rate is a ORMLite bean type. Corresponds to the database table "invoice_tax_rate"
- */
+
 @DatabaseTable(tableName = "invoice_tax_rate")
 public class InvoiceTaxRate extends CommonEntityBase {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "invoice_tax_rate"
-     */
+
     public interface $ extends CommonEntityBase.$ {
-        /**
-         * 电子发票ID
-         */
+
         String invoiceId = "invoiceId";
 
-        /**
-         * 开票项目
-         */
+
         String invoiceName = "invoice_name";
 
-        /**
-         * 编码
-         */
+
         String invoiceCode = "invoice_code";
 
-        /**
-         * 税率
-         */
+
         String taxRate = "tax_rate";
 
-        /**
-         * is_default
-         */
+
         String isDefault = "is_default";
     }
 

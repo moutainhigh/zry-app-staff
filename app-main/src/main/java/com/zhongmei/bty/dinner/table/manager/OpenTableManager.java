@@ -45,10 +45,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/**
- * @Date 2016/7/26
- * @Description:开台操作封装
- */
+
 public class OpenTableManager {
     private DinnertableVo dinnertableVo;
     private DinnerShoppingCart mShoppingCart;
@@ -74,8 +71,7 @@ public class OpenTableManager {
                 mShoppingCart.openTable(tradeTable);
                 if (tradeTable == null || mShoppingCart.getShoppingCartVo().getmTradeVo().getTradeTableList() == null) {
                     ToastUtil.showLongToast(R.string.dinnertable_opentable_exception);
-                    cancel(true);//解决openTableRequest中的空指针bug
-                }
+                    cancel(true);                }
                 super.onPreExecute();
             }
 
@@ -84,13 +80,6 @@ public class OpenTableManager {
                 mShoppingCart.setOrderBusinessType(mShoppingCart.getShoppingCartVo(), mBusinessType);
                 mShoppingCart.setOrderType(mShoppingCart.getShoppingCartVo(), DeliveryType.HERE);
                 mShoppingCart.setDinnerOrderType(DeliveryType.HERE);
-//                        if(mBusinessType==BusinessType.BUFFET){
-//                            //设置默认套菜
-//                            List<BuffetComboVo> listComboVo = BuffetManager.getInstance().getBuffetComboList();
-//                            if(Utils.isNotEmpty(listComboVo)){
-//                                mShoppingCart.setMealShellVo(listComboVo.get(0),null);
-//                            }
-//                        }
                 TradeVo tradeVo = mShoppingCart.createOrder(mShoppingCart.getShoppingCartVo(), false);
                 openTableRequest(tradeVo);
                 return tradeVo;
@@ -106,12 +95,7 @@ public class OpenTableManager {
 
     }
 
-    /**
-     * @Date 2016/7/26
-     * @Description:存储开台信息
-     * @Param
-     * @Return
-     */
+
     private TradeTable createTradeVo() {
         TradeTable tradeTable = new TradeTable();
         tradeTable.setTableId(dinnertableVo.getTableId());
@@ -123,8 +107,7 @@ public class OpenTableManager {
         tradeTable.setTablePeopleCount(customerNum);
         tradeTable.setMemo("");
 
-        //设置登录操作员为默认服务员
-        AuthUser user = Session.getAuthUser();
+                AuthUser user = Session.getAuthUser();
         if (user != null) {
             tradeTable.setWaiterId(user.getId());
             tradeTable.setWaiterName(user.getName());
@@ -133,64 +116,39 @@ public class OpenTableManager {
         return tradeTable;
     }
 
-    /**
-     * @Date 2016/7/26
-     * @Description: 调用开台接口
-     * @Param
-     * @Return
-     */
+
     private void openTableRequest(TradeVo mTradeVo) {
         TradeOperates mTradeOperates = OperatesFactory.create(TradeOperates.class);
-//        final TradeVo mTradeVo = mShoppingCart.createOrder(mShoppingCart.getShoppingCartVo(), false);
         FragmentActivity activity = (FragmentActivity) context;
         final TableInfoFragment fragment = (TableInfoFragment) activity.getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
-//        gotoDishWindow(mTradeVo);
         final String tableName;
-//        if(mTradeVo.getTradeTableList().size() > 0) {
-//            tableName = mTradeVo.getTradeTableList().get(0).getTableName();
-//        } else {
-//            tableName = null;
-//        }
         ResponseListener<TradeResp> listener = new EventResponseListener<TradeResp>(UserActionEvent.DINNER_TABLE_OPEN) {
 
             @Override
             public void onResponse(ResponseObject<TradeResp> response) {
                 if (ResponseObject.isOk(response)) {
-//                    CLog.i(CLog.FS_TAG_KEY, "桌台 " + tableName + " 开台成功！");
-                    //成功后默认选中桌台，方便刷新
-//                    DinnertableManager.selectedDinnertableId = dinnertableVo.getDinnertable().getId();
-                    ToastUtil.showShortToast(response.getMessage());
+                                        ToastUtil.showShortToast(response.getMessage());
 
-                    //保存授权记录
-                    List<Trade> trades = response.getContent().getTrades();
+                                        List<Trade> trades = response.getContent().getTrades();
                     if (trades != null && !trades.isEmpty()) {
                         Trade trade = trades.get(0);
                         AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_START_DESK, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
                     }
 
-                    //跳转
-//                    gotoDishWindow(response.getContent());
-                } else {
+                                    } else {
                     if (response != null && !TextUtils.isEmpty(response.getMessage())) {
-//                        CLog.w(CLog.FS_TAG_KEY, "桌台 " + tableName + " 开台失败：" + response.getMessage());
                         ToastUtil.showShortToast(response.getMessage());
                     } else {
-//                        CLog.w(CLog.FS_TAG_KEY, "桌台 " + tableName + " 开台失败：没有返回失败原因！");
                         ToastUtil.showShortToast(R.string.diner_submit_failed);
                     }
                     AuthLogManager.getInstance().clear();
-//                    TableInfoContentBean.needJumpToDishWindow=false;
-                    fragment.enableAddOrderBtn(true);//恢复按钮可用
-                }
+                    fragment.enableAddOrderBtn(true);                }
             }
 
             @Override
             public void onError(VolleyError error) {
-//                CLog.e(CLog.FS_TAG_KEY, "桌台 " + tableName + " 开台失败：" + error.getMessage());
                 ToastUtil.showShortToast(error.getMessage());
-//                TableInfoContentBean.needJumpToDishWindow=false;
-                fragment.enableAddOrderBtn(true);//恢复按钮可用
-            }
+                fragment.enableAddOrderBtn(true);            }
         };
 
         IDinnertable dinnertable = dinnertableVo.getDinnertable();
@@ -202,12 +160,7 @@ public class OpenTableManager {
         }
     }
 
-    /**
-     * @Date 2016/10/27
-     * @Description:跳转到点菜界面
-     * @Param
-     * @Return
-     */
+
     private void gotoDishWindow(TradeResp resp) {
         Trade trade = resp.getTrades().get(0);
         TradeExtra tradeExtra = resp.getTradeExtras().get(0);
@@ -217,8 +170,6 @@ public class OpenTableManager {
                 DinnertableStatus.UNISSUED, null, null);
 
         DinnertableTradeModel tradeModel = new DinnertableTradeModel(tradeTableInfo, dinnertableVo.getDinnertable());
-//        TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
-//        String tradeUuid = tradeModel.getTradeUuid();
         try {
             TradeVo tradeVo = new TradeVo();
             tradeVo.setTrade(trade);
@@ -227,16 +178,12 @@ public class OpenTableManager {
             tradeTableList.add(tradeTable);
             tradeVo.setTradeTableList(tradeTableList);
 
-//          TradeVo tradeVo = tradeDal.findTrade(tradeUuid, false);
             DinnertableTradeInfo info = DinnertableTradeInfo.create(tradeModel, tradeVo);
 
             DinnerShoppingCart.getInstance().resetOrderFromTable(info, true);
-            //((DinnerMainActivity) context).showOrderDish();
 
             OpentablePopWindow.getInstance(context).hide();
-            //TableInfoFragment fragment = (TableInfoFragment) ((DinnerMainActivity) context).getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
-            //fragment.enableAddOrderBtn(true);
-        } catch (Exception e) {
+                                } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -252,22 +199,14 @@ public class OpenTableManager {
                 DinnertableStatus.UNISSUED, null, null);
 
         DinnertableTradeModel tradeModel = new DinnertableTradeModel(tradeTableInfo, dinnertableVo.getDinnertable());
-//        TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
-//        String tradeUuid = tradeModel.getTradeUuid();
         try {
-//          TradeVo tradeVo = tradeDal.findTrade(tradeUuid, false);
             DinnertableTradeInfo info = DinnertableTradeInfo.create(tradeModel, tradeVo);
 
             DinnerShoppingCart.getInstance().resetOrderFromTable(info, true);
-            //((TableMainActivity) context).showOrderDish();
 
-            //tradevo恢复为未更改
-//            tradeVo.setChangedFalse();//提处到外部
 
             OpentablePopWindow.getInstance(context).hide();
-            //TableInfoFragment fragment = (TableInfoFragment) ((TableMainActivity) context).getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
-            //fragment.enableAddOrderBtn(true);
-        } catch (Exception e) {
+                                } catch (Exception e) {
             e.printStackTrace();
         }
 

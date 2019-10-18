@@ -10,10 +10,7 @@ import com.zhongmei.bty.mobilepay.bean.PayModelItem;
 
 import java.io.Serializable;
 
-/**
- * Created by demo on 2018/12/15
- * R 在线支付轮训结果
- */
+
 
 public abstract class DoPayApi<R> extends OnlinePayApi<R> implements Serializable {
     private static final long serialVersionUID = 1L;

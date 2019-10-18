@@ -41,11 +41,7 @@ import com.zhongmei.yunfu.util.ToastUtil;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @Date： 17/6/16
- * @Description:
- * @Version: 1.0
- */
+
 public class DepositInfoDialog extends Dialog implements View.OnClickListener, NumberInputdialog.InputOverListener {
 
     private FragmentActivity mContext;
@@ -110,8 +106,7 @@ public class DepositInfoDialog extends Dialog implements View.OnClickListener, N
 
         layout_depositWay.setVisibility(View.VISIBLE);
         tv_depositWay.setText(vo.getTradeDepositPaymentItem().getPayModeName());
-        //mTvDepositValue.setText("￥" + "30.00");
-    }
+            }
 
     public static DepositInfoDialog show(Context context, TradeVo vo) {
         DepositInfoDialog depositInfoDialog = new DepositInfoDialog(context, vo);
@@ -130,9 +125,7 @@ public class DepositInfoDialog extends Dialog implements View.OnClickListener, N
                 showNumberInputDialog();
                 break;
             case R.id.btn_ok:
-                if (!ClickManager.getInstance().isClicked()) {//防双击
-                    //验证退押金权限
-                    VerifyHelper.verifyAlert(mContext, DinnerApplication.PERMISSION_DINNER_CASH,
+                if (!ClickManager.getInstance().isClicked()) {                                        VerifyHelper.verifyAlert(mContext, DinnerApplication.PERMISSION_DINNER_CASH,
                             new VerifyHelper.Callback() {
                                 @Override
                                 public void onPositive(User user, String code, Auth.Filter filter) {
@@ -152,8 +145,7 @@ public class DepositInfoDialog extends Dialog implements View.OnClickListener, N
                                         ToastUtil.showShortToast(R.string.depostit_value_isnull);
                                         return;
                                     }
-                                    //modify v9.0 如果是联台主单,先合单再退押金
-                                    if (mTradeVo.getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN && mTradeVo.getTrade().getTradePayStatus() == TradePayStatus.PREPAID) {
+                                                                        if (mTradeVo.getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN && mTradeVo.getTrade().getTradePayStatus() == TradePayStatus.PREPAID) {
                                         mainTradeFinishAndDepositRefund(mTradeVo.getTradeDepositPayRelation().getPaymentItemId(), temp);
                                     } else {
                                         backDeposit(mTradeVo.getTrade(), mTradeVo.getTradeDepositPayRelation().getPaymentItemId(), temp);
@@ -170,9 +162,7 @@ public class DepositInfoDialog extends Dialog implements View.OnClickListener, N
         mTvDepositValue.setText(ShopInfoCfg.formatCurrencySymbol(inputContent));
     }
 
-    /**
-     * 显示自定义输入框
-     */
+
     private void showNumberInputDialog() {
         double inputvalue = mTradeVo.getTradeDeposit().getDepositPay().doubleValue();
         double maxValue = inputvalue;
@@ -192,15 +182,12 @@ public class DepositInfoDialog extends Dialog implements View.OnClickListener, N
         ResponseListener<PayResp> listener = LoadingResponseListener.ensure(responseListener, mContext.getSupportFragmentManager());
         Reason reason = null;
 
-        if (trade.getTradePayStatus() == TradePayStatus.PREPAID) {//调用完成并退押金接口
-            mTradeOperates.buffetFinishAndDepositRefund(trade.getId(), depositRefund, paymentitemId, reason, listener);
-        } else {//调用退押金接口
-            mTradeOperates.buffetDepositRefund(trade.getId(), depositRefund, paymentitemId, reason, listener);
+        if (trade.getTradePayStatus() == TradePayStatus.PREPAID) {            mTradeOperates.buffetFinishAndDepositRefund(trade.getId(), depositRefund, paymentitemId, reason, listener);
+        } else {            mTradeOperates.buffetDepositRefund(trade.getId(), depositRefund, paymentitemId, reason, listener);
         }
     }
 
-    // add v9.0  start 主单退押金接口
-    private void mainTradeFinishAndDepositRefund(final Long paymentitemId, final BigDecimal depositRefund) {
+        private void mainTradeFinishAndDepositRefund(final Long paymentitemId, final BigDecimal depositRefund) {
 
         final TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
         ResponseListener<TradeResp> unionistener = new ResponseListener<TradeResp>() {
@@ -209,11 +196,9 @@ public class DepositInfoDialog extends Dialog implements View.OnClickListener, N
             public void onResponse(ResponseObject<TradeResp> response) {
                 if (ResponseObject.isOk(response)) {
                     ToastUtil.showLongToast(response.getMessage());
-                    //合单成功后退押金接口
-                    ResponseListener<PayResp> listener = LoadingResponseListener.ensure(responseListener, mContext.getSupportFragmentManager());
+                                        ResponseListener<PayResp> listener = LoadingResponseListener.ensure(responseListener, mContext.getSupportFragmentManager());
                     Reason reason = null;
-                    //调用退押金接口
-                    tradeOperates.buffetDepositRefund(mTradeVo.getTrade().getId(), depositRefund, paymentitemId, reason, listener);
+                                        tradeOperates.buffetDepositRefund(mTradeVo.getTrade().getId(), depositRefund, paymentitemId, reason, listener);
                 } else {
                     ToastUtil.showLongToast(response.getMessage());
                 }
@@ -224,24 +209,17 @@ public class DepositInfoDialog extends Dialog implements View.OnClickListener, N
                 ToastUtil.showLongToast(error.getMessage());
             }
         };
-        /*try {
-            tradeOperates.buffetUnionFinish(BuffetMergeUnionManager.createBuffetMergeUnionReq(mTradeVo), LoadingResponseListener.ensure(unionistener, mContext.getSupportFragmentManager()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+
     }
 
-    // add v9.0  start 主单退押金接口
-    private ResponseListener<PayResp> responseListener = new ResponseListener<PayResp>() {
+        private ResponseListener<PayResp> responseListener = new ResponseListener<PayResp>() {
         @Override
         public void onResponse(ResponseObject<PayResp> response) {
             if (ResponseObject.isOk(response)) {
                 List<PaymentItem> list = response.getContent().getPaymentItems();
                 for (PaymentItem item : list) {
                     if (item.getPayModeId() == PayModeId.CASH.value()) {
-                        //PRTPrintContentQueue.getCommonPrintQueue().openMoneyBox(null);
-                        //IPrintHelper.Holder.getInstance().openMoneyBox();
-                    }
+                                                                    }
                 }
                 CalmResponseToastFragment.newInstance(CalmResponseToastFragment.SUCCESS, mContext.getString(R.string.order_deposit_refund_success_message), null)
                         .show(mContext.getSupportFragmentManager(), "backDeposit");

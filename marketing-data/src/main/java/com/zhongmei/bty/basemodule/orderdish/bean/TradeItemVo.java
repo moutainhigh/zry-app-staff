@@ -27,94 +27,56 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
 
- *
- */
 public class TradeItemVo implements java.io.Serializable, NoProGuard {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     private static final String TAG = TradeItemVo.class.getSimpleName();
 
-    /**
-     * 交易明细
-     */
+
     private TradeItem tradeItem;
 
-    /**
-     * 单品优惠
-     */
+
     private TradePrivilege tradeItemPrivilege;
 
-    /**
-     * 明细的特征列表
-     */
+
     private List<TradeItemProperty> tradeItemPropertyList;
 
-    /**
-     * 单菜的各种理由（退菜理由、折扣理由）
-     */
+
     private List<TradeReasonRel> reasonRelList;
 
-    /**
-     * 实体卡列表
-     */
+
     private List<CardSaleInfo> cardSaleInfos;
 
-    /**
-     * 菜品操作记录列表
-     */
+
     private List<TradeItemOperation> tradeItemOperations;
 
-    /**
-     * 礼品券优惠
-     */
+
     private CouponPrivilegeVo couponPrivilegeVo;
 
-    /**
-     * TradeItem扩展表(目前记录是否打包)
-     */
+
     private TradeItemExtra tradeItemExtra;
 
-    private BigDecimal kdsScratchDishQty; //已划菜份数
+    private BigDecimal kdsScratchDishQty;
 
-    /**
-     * 座位号
-     */
     private TradeItemExtraDinner tradeItemExtraDinner;
 
-    /**
-     * 篮子信息
-     */
-    //private DishItemTypeAndSort dishItemTypeAndSort;
 
-    private BigDecimal modifyQuantity; //改菜数量
-    /**
-     * 联台批量菜关联表
-     */
+
+    private BigDecimal modifyQuantity;
     private List<TradeItemMainBatchRel> tradeItemMainBatchRelList;
 
-    /**
-     * 产品或者服务与user关联表
-     */
+
     private List<TradeUser> tradeItemUserList;
-    /**
-     * 卡服务
-     */
+
     private CardServicePrivilegeVo cardServicePrivilegeVo;
 
     private AppletPrivilegeVo appletPrivilegeVo;
 
     private ShopcartItemType shopcartItemType = ShopcartItemType.COMMON;
 
-    // ***********************************************************
-    // * 特别注意！添加属性时要注意修改clone()方法与isChanged()方法
-    // ***********************************************************
 
 
     public CouponPrivilegeVo getCouponPrivilegeVo() {
@@ -166,11 +128,7 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
         setReason(rejectQtyReason, OperateType.ITEM_RETURN_QTY);
     }
 
-    /**
-     * 此方法已失效，请调用{@link #getReasonLast()}支持所有菜品折扣类型理由
-     *
-     * @return
-     */
+
     @Deprecated
     public TradeReasonRel getDiscountReason() {
         return getReason(OperateType.ITEM_GIVE);
@@ -199,11 +157,7 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
         return null;
     }
 
-    /**
-     * 获取最新理由，也就是最后一条（不区分有效无效）
-     *
-     * @return
-     */
+
     public TradeReasonRel getReasonLast2() {
         if (reasonRelList != null && reasonRelList.size() > 0) {
             return reasonRelList.get(reasonRelList.size() - 1);
@@ -216,8 +170,7 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
             reasonRelList = new ArrayList<>();
         }
 
-        //存在时，拷贝属性
-        for (TradeReasonRel tradeReasonRel : reasonRelList) {
+                for (TradeReasonRel tradeReasonRel : reasonRelList) {
             if (tradeReasonRel.getOperateType() == operateType) {
                 try {
                     Beans.copyProperties(reason, tradeReasonRel);
@@ -229,8 +182,7 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
             }
         }
 
-        //不存在，直接添加
-        reasonRelList.add(reason);
+                reasonRelList.add(reason);
     }
 
     public void removeTradeReasonRel(TradeReasonRel tradeReasonRel, OperateType operateType) {
@@ -295,11 +247,9 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
         TradeItemVo vo = new TradeItemVo();
         try {
             if (tradeItem != null) {
-//				vo.setTradeItem(TradeVo.copyEntity(tradeItem, new TradeItem()));
                 vo.setTradeItem(tradeItem.clone());
             }
             if (tradeItemPrivilege != null) {
-//				vo.setTradeItemPrivilege(TradeVo.copyEntity(tradeItemPrivilege, new TradePrivilege()));
                 vo.setTradeItemPrivilege(tradeItemPrivilege.clone());
             }
             if (couponPrivilegeVo != null) {
@@ -308,7 +258,6 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
             if (tradeItemPropertyList != null) {
                 List<TradeItemProperty> newList = new ArrayList<TradeItemProperty>();
                 for (TradeItemProperty source : tradeItemPropertyList) {
-//					newList.add(TradeVo.copyEntity(source, new TradeItemProperty()));
                     newList.add(source.clone());
                 }
                 vo.setTradeItemPropertyList(newList);
@@ -334,8 +283,7 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
                 }
                 vo.setCardSaleInfos(newCardSaleInfoList);
             }
-            //菜品操作记录
-            if (tradeItemOperations != null) {
+                        if (tradeItemOperations != null) {
                 List<TradeItemOperation> tradeItemOperationList = new ArrayList<TradeItemOperation>();
                 for (TradeItemOperation source : tradeItemOperations) {
                     tradeItemOperationList.add(Beans.copyEntity(source, new TradeItemOperation()));
@@ -376,12 +324,7 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
         return null;
     }
 
-    /**
-     * 异步操作时更新和tradeId相关的信息
-     *
-     * @param tradeId
-     * @param tradeUuid
-     */
+
     public void updateAsyncTradeInfo(Long tradeId, String tradeUuid, TradeTable tradeTable) {
         if (tradeItem != null) {
             tradeItem.setTradeId(tradeId);
@@ -454,20 +397,12 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
         this.tradeItemExtra = tradeItemExtra;
     }
 
-    /**
-     * 是否是打包商品
-     *
-     * @return
-     */
+
     public boolean isPack() {
         return this.tradeItemExtra != null && this.tradeItemExtra.getIsPack() != null && this.tradeItemExtra.getIsPack() == Bool.YES;
     }
 
-    /**
-     * 是否有礼品劵
-     *
-     * @return
-     */
+
     public boolean isHasCouponPrivileage() {
         return couponPrivilegeVo != null && couponPrivilegeVo.getTradePrivilege() != null;
     }
@@ -500,13 +435,7 @@ public class TradeItemVo implements java.io.Serializable, NoProGuard {
         this.modifyQuantity = modifyQuantity;
     }
 
-    /*public DishItemTypeAndSort getDishItemTypeAndSort() {
-        return dishItemTypeAndSort;
-    }
 
-    public void setDishItemTypeAndSort(DishItemTypeAndSort dishItemTypeAndSort) {
-        this.dishItemTypeAndSort = dishItemTypeAndSort;
-    }*/
 
     public List<TradeItemMainBatchRel> getTradeItemMainBatchRelList() {
         return tradeItemMainBatchRelList;

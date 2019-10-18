@@ -7,9 +7,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.zhongmei.yunfu.net.request.VolleyNetworkManager;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class NetworkProvider {
 
     public static class Builder {

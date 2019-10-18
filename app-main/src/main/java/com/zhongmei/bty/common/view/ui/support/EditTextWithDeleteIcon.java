@@ -17,11 +17,7 @@ import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- * <p>
- * <br>这是参照项目中
- */
+
 public class EditTextWithDeleteIcon extends EditText {
 
     private static final String TAG = EditTextWithDeleteIcon.class.getSimpleName();
@@ -51,11 +47,9 @@ public class EditTextWithDeleteIcon extends EditText {
         this.onClearListener = onClearListener;
     }
 
-    // 初始化edittext 控件
-    private void initEditText() {
+        private void initEditText() {
         setEditTextDrawable();
-        addTextChangedListener(new TextWatcher() { // 对文本内容改变进行监听
-            @Override
+        addTextChangedListener(new TextWatcher() {             @Override
             public void afterTextChanged(Editable paramEditable) {
             }
 
@@ -110,16 +104,12 @@ public class EditTextWithDeleteIcon extends EditText {
 
     }
 
-    /**
-     * 添加触摸事件 点击之后 出现 清空editText的效果
-     */
+
     @Override
     public boolean onTouchEvent(MotionEvent paramMotionEvent) {
         if ((this.dRight != null) && (paramMotionEvent.getAction() == 1) && isFocused()) {
             this.rBounds = this.dRight.getBounds();
-//            int i = (int) paramMotionEvent.getRawX();// 距离屏幕的距离
-            int i = (int) paramMotionEvent.getX();//距离边框的距离
-            if (i > getWidth() - this.rBounds.width()) {
+            int i = (int) paramMotionEvent.getX();            if (i > getWidth() - this.rBounds.width()) {
                 setText(ShopInfoCfg.getInstance().getCurrencySymbol());
                 if (onClearListener != null) {
                     onClearListener.AfterTextClear();
@@ -134,11 +124,7 @@ public class EditTextWithDeleteIcon extends EditText {
         return super.onTouchEvent(paramMotionEvent);
     }
 
-    /**
-     * 显示右侧X图片的
-     * <p>
-     * 左上右下
-     */
+
     @Override
     public void setCompoundDrawables(Drawable paramDrawable1, Drawable paramDrawable2, Drawable paramDrawable3, Drawable paramDrawable4) {
         if (paramDrawable3 != null)

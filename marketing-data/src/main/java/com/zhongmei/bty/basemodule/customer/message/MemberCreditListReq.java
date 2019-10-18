@@ -6,28 +6,20 @@ import java.util.List;
 
 public class MemberCreditListReq extends BaseRequest {
 
-    /**
-     * 必填
-     */
+
     private Long customerId;
 
-    /**
-     * 操作类型 1：挂账，2：销帐,3：挂账反结账，4：销帐反结账
-     */
+
     private List<Integer> opType;
 
     private Long beginTime;
 
     private Long endTime;
 
-    /**
-     * 当前页（默认1）
-     */
+
     private Integer currentPage;
 
-    /**
-     * 每页显示数据条数（默认10）
-     */
+
     private Integer pageSize;
 
     public void setCustomerId(Long customerId) {

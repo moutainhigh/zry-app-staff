@@ -10,57 +10,36 @@ import android.widget.FrameLayout;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * @version: 1.0
- * @date 2015年9月8日
- */
+
 public final class ViewUtils {
     private ViewUtils() {
     }
 
-    /**
-     * 空单颜色
-     */
+
     static final int COLOR_TRADE_EMPTY = Color.parseColor("#6C747D");
 
-    /**
-     * 未出单单据颜色
-     */
+
     static final int COLOR_TRADE_UNISSUED = Color.parseColor("#FBB305");
 
-    /**
-     * 已出单单据颜色
-     */
+
     static final int COLOR_TRADE_ISSUED = Color.parseColor("#2CB8B1");
 
-    /**
-     * 已上菜单据颜色
-     */
+
     static final int COLOR_TRADE_SERVING = Color.parseColor("#3AB3FB");
 
-    /**
-     * 半透明的空单颜色
-     */
+
     static final int COLOR_TRADE_EMPTY_TRANSPARENT = Color.parseColor("#806C747D");
 
-    /**
-     * 半透明的未出单单据颜色
-     */
+
     static final int COLOR_TRADE_UNISSUED_TRANSPARENT = Color.parseColor("#80FBB305");
 
-    /**
-     * 半透明的已出单单据颜色
-     */
+
     static final int COLOR_TRADE_ISSUED_TRANSPARENT = Color.parseColor("#802CB8B1");
 
-    /**
-     * 半透明的已上菜单据颜色
-     */
+
     static final int COLOR_TRADE_SERVING_TRANSPARENT = Color.parseColor("#803AB3FB");
 
-    /**
-     *
-     */
+
     static final int COLOR_BEAUTY_ZONE_INDICATOR = Color.parseColor("#EE5E1F");
 
     static final int COLOR_ZONE_INDICATOR = Color.parseColor("#838C94");
@@ -78,17 +57,13 @@ public final class ViewUtils {
     }
 
 
-    /*public static BuffetTableView inflateBuffettableView(Context context) {
-        return inflateView(context, R.layout.buffettable_square);
-    }*/
+
 
     public static DinnertableTradeView inflateTradeView(Context context) {
         return inflateView(context, R.layout.dinnertable_trade);
     }
 
-    /*public static BuffetTableTradeView inflateBuffetTradeView(Context context) {
-        return inflateView(context, R.layout.buffettable_trade);
-    }*/
+
 
     public static ViewGroup inflateZoneIndicatorItem(Context context) {
         return inflateView(context, R.layout.dinnertable_zone_indicator_item);
@@ -103,9 +78,7 @@ public final class ViewUtils {
         return inflateView(context, R.layout.view_dinner_number_waiter);
     }
 
-    /*public static BuffetNumberAndWaiterViewTable inflateBuffetNumberAndWaiterPanel(Context context) {
-        return inflateView(context, R.layout.buffet_number_and_waiter_table);
-    }*/
+
 
     @SuppressWarnings("unchecked")
     public static <V> V inflateView(Context context, int id) {

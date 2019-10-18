@@ -14,9 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AdapterImpl implements Session.Adapter {
 
@@ -34,8 +32,7 @@ public class AdapterImpl implements Session.Adapter {
     @Override
     public List<Uri> getDataObserverUris() {
         List<Uri> list = new ArrayList<>();
-        //list.add(DBHelperManager.getUri(AuthUserPermission.class));
-        list.add(DBHelperManager.getUri(AuthDataPermission.class));
+                list.add(DBHelperManager.getUri(AuthDataPermission.class));
         return list;
     }
 

@@ -23,10 +23,7 @@ import com.zhongmei.yunfu.util.MathDecimal;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 主要是用户编辑、展示电子发票的视图(与具体业务有关，该视图不具有通用性)
- * Created by demo on 2018/12/15
- */
+
 
 public class InvoiceView extends LinearLayout implements View.OnClickListener {
 

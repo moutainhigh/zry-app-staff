@@ -11,31 +11,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.math.BigDecimal;
 
-/**
- * 消费税率设置表
- * Created by demo on 2018/12/15
- * CREATE TABLE `commercial_tax` (
- * `id` bigint(20) NOT NULL COMMENT 'id',
- * `brand_identy` bigint(20) NOT NULL COMMENT '品牌id',
- * `shop_identy` bigint(20) NOT NULL COMMENT '门店id',
- * `tax_code` varchar(20) NOT NULL COMMENT '消费税编码',
- * `tax_desc` varchar(300) DEFAULT NULL COMMENT '对税编码的描述',
- * `tax_rate` decimal(10,2) NOT NULL COMMENT '税率,如5.00表示5%， 0.5表示5‰(千分之五)',
- * `effect_type` int(11) DEFAULT '1' COMMENT '是否加入订单计算,1:加入订单，2： 不加入',
- * `discount_type` int(11) DEFAULT '1' COMMENT '折扣类型，1：after discount, 2, before discount',
- * `tax_kind` varchar(10) DEFAULT 'GST' COMMENT '税的种类, VAT, GST',
- * `tax_method` varchar(10) DEFAULT 'Supply' COMMENT '计算方式,Supply:卖出,Purchase买入',
- * `status_flag` tinyint(4) NOT NULL COMMENT '1:VALID:有效的,2:INVALID:无效的',
- * `creator_id` bigint(20) DEFAULT NULL COMMENT '创建者ID',
- * `creator_name` varchar(30) DEFAULT NULL COMMENT '创建者姓名',
- * `updater_id` bigint(20) DEFAULT NULL COMMENT '更新者ID',
- * `updater_name` varchar(30) DEFAULT NULL COMMENT '更新者姓名',
- * `server_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '服务器创建时间',
- * `server_update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '服务器更新时间',
- * PRIMARY KEY (`id`),
- * KEY `idx_brand_identy_shop_identy` (`brand_identy`,`shop_identy`) USING BTREE
- * ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='门店消费税及税率配置'
- */
+
 @DatabaseTable(tableName = "tax_rate_info")
 public class TaxRateInfo extends EntityBase<Long> {
     private static final long serialVersionUID = 1L;
@@ -43,11 +19,9 @@ public class TaxRateInfo extends EntityBase<Long> {
     public interface $ {
         String brandId = "brand_id";
         String shopId = "shop_id";
-        //String isTaxOpen="is_tax_open";
-        String taxId = "tax_id";
+                String taxId = "tax_id";
         String taxCode = "tax_code";
-        //String taxName = "tax_name";
-        String taxDesc = "tax_desc";
+                String taxDesc = "tax_desc";
         String taxRate = "tax_rate";
         String effectType = "effect_type";
         String discountType = "discount_type";
@@ -61,15 +35,11 @@ public class TaxRateInfo extends EntityBase<Long> {
     Long brandId;
     @DatabaseField(columnName = $.shopId)
     Long shopId;
-    //@DatabaseField(columnName = "is_tax_open")
-    //Integer isTaxOpen;
-    @DatabaseField(columnName = $.taxId, id = true)
+            @DatabaseField(columnName = $.taxId, id = true)
     Long taxId;
     @DatabaseField(columnName = $.taxCode)
     String taxCode;
-    //@DatabaseField(columnName = "tax_name")
-    //String taxName;
-    @DatabaseField(columnName = $.taxDesc)
+            @DatabaseField(columnName = $.taxDesc)
     String taxDesc;
     @DatabaseField(columnName = $.taxRate)
     BigDecimal taxRate;

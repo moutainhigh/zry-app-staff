@@ -5,30 +5,20 @@ import com.zhongmei.yunfu.util.ValueEnum;
 public enum CustomerLoginType implements ValueEnum<Integer> {
 
 
-    //"手机号码"
-    MOBILE(1),
+        MOBILE(1),
 
-    //"顾客customerId"
-    MEMBER_ID(2),
+        MEMBER_ID(2),
 
-    //"微信openid"
-    WECHAT_OPENID(3),
+        WECHAT_OPENID(3),
 
-    //会员卡登陆
-    CARD_NO_ENTITY(4),
+        CARD_NO_ENTITY(4),
 
-    //"微信会员卡卡号"
-    WECHAT_MEMBERCARD_ID(101),
+        WECHAT_MEMBERCARD_ID(101),
 
-    //"人脸faceCode"
-    FACE_CODE(104),
+        FACE_CODE(104),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated __UNKNOWN__;
 
     private final Helper<Integer> helper;

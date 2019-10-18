@@ -21,9 +21,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.order_center_trade_memo_dialog_fragment)
 public class OrderCenterTradeMemoDialogFragment extends BasicDialogFragment {
 

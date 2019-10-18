@@ -3,9 +3,7 @@ package com.zhongmei.analysis;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class StatisticsHandler {
     private static final StatisticsHandler INSTANCE = new StatisticsHandler();
     private Handler mHandler;

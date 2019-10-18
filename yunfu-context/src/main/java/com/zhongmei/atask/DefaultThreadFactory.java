@@ -5,9 +5,7 @@ import android.os.AsyncTask;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DefaultThreadFactory implements ThreadFactory {
 

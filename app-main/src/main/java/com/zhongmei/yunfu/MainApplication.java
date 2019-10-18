@@ -38,16 +38,9 @@ import com.zhongmei.yunfu.orm.YfDBHelperFunc;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * @Date：2014年11月4日 上午11:27:38
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class MainApplication extends BaseApplication {
-    // MainActivty的状态 是否start 0-->stop,1-->start
-    private int status;
+        private int status;
 
     public int getStatus() {
         return status;
@@ -79,8 +72,7 @@ public class MainApplication extends BaseApplication {
                 AuthLogManager.getInstance().setOpsVersion(request.getOpVersionUUID());
             }
         });
-        //如果是主进程(包名和进程名称相同)才做初始化业务 add yutang 20170117
-        if (this.getPackageName().equals(AppUtils.getCurProcessName(this))) {
+                if (this.getPackageName().equals(AppUtils.getCurProcessName(this))) {
             Log.e("MainApplication", "MainApplication  process:" + AppUtils.getCurProcessName(this));
             OSLog.info("onCreate");
 
@@ -90,8 +82,7 @@ public class MainApplication extends BaseApplication {
             initLocalInfo();
         }
         Log.e("MainApplication", "MainApplication start times: " + (System.currentTimeMillis() - starttime) + "process:" + AppUtils.getCurProcessName(this));
-        // 置入一个不设防的VmPolicy（不设置的话 7.0以上一调用拍照功能就崩溃了）
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
         }
@@ -117,22 +108,14 @@ public class MainApplication extends BaseApplication {
         }
     }
 
-    /**
-     * api安全验证数据信息加密信息设置
-     * SHA-256(kry-api-token=登录认证token&kry-api-shop-id=门店ID^512&kry-api-timestamp=客户端时间戳)
-     */
+
     public Map<String, String> tokenEncrypt() {
         String shopId = ShopInfoCfg.getInstance().shopId;
         String token = SharedPreferenceUtil.getSpUtil().getString(HttpConstant.TOKENENCRYPT, "");
         return HttpConstant.tokenEncrypt(shopId, token);
     }
 
-    /**
-     * @Title: initSystemUtil
-     * @Description: 初始化系统工具相关
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     @Override
     protected void initCommonInfo() {
         initDBHelperManager();
@@ -152,35 +135,28 @@ public class MainApplication extends BaseApplication {
     public void onAppExit() {
         super.onAppExit();
         Session.unbind();
-        //PushServiceManager.stopPushService();
-        SyncServiceUtil.stopService(this);
+                SyncServiceUtil.stopService(this);
         ShopInfoManager.getInstance().logout();
     }
 
-//    ---------Session
 
     private void initSession() {
         Session.registerCallback(new Session.BindListener() {
             @Override
             public void onBind(AuthUser user) {
-//                刷新IAuthUser
                 IAuthUser.Holder.refresh(user);
                 ShopInfoCfg.getInstance().login(new IAuthUserProxy(user.getId(), user.getName()));
 
-                // erp设置关闭缓存
-                PaySettingCache.doStop();
+                                PaySettingCache.doStop();
                 MarketRuleCache.doStop();
-                // erp设置开启缓存
-                PaySettingCache.doInit(MainApplication.this);
+                                PaySettingCache.doInit(MainApplication.this);
                 MarketRuleCache.doStart();
 
-                //删除7天的订单记录
-                TradeDeleter.deleteIfNecessary();
+                                TradeDeleter.deleteIfNecessary();
             }
 
             @Override
             public void onUnbind(AuthUser user) {
-//               把IAuthUser置位空
                 IAuthUser.Holder.refresh(null);
                 ShopInfoCfg.getInstance().logout();
             }

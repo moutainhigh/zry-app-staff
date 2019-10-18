@@ -3,9 +3,7 @@ package com.zhongmei.yunfu.context.util;
 import java.io.Closeable;
 import java.io.IOException;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public final class CloseUtils {
 
@@ -13,11 +11,7 @@ public final class CloseUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    /**
-     * 关闭IO
-     *
-     * @param closeables closeables
-     */
+
     public static void closeIO(Closeable... closeables) {
         if (closeables == null) return;
         for (Closeable closeable : closeables) {
@@ -31,11 +25,7 @@ public final class CloseUtils {
         }
     }
 
-    /**
-     * 安静关闭IO
-     *
-     * @param closeables closeables
-     */
+
     public static void closeIOQuietly(Closeable... closeables) {
         if (closeables == null) return;
         for (Closeable closeable : closeables) {

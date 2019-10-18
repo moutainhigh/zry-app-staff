@@ -1,18 +1,13 @@
 package com.zhongmei.bty.settings.bean;
 
-/**
- *
 
- *
- */
 public class SexOrSpeedVo {
 
     private int value;
 
     private String name;
 
-    // 0:未选中 1：选中
-    private boolean selectedState;
+        private boolean selectedState;
 
     public int getValue() {
         return value;

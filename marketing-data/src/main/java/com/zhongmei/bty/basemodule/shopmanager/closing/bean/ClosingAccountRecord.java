@@ -2,33 +2,12 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 
 import java.io.Serializable;
 
-/**
- * 关账记录
- */
+
 public class ClosingAccountRecord implements Serializable {
 
-    /**
-     * @date：2015年12月18日 上午10:14:02
-     * @Description:TODO
-     */
-    private static final long serialVersionUID = 1L;
-    private Long id;                    // 服务端自增ID
-    private Long belongDate;            // 归账日
-    private Long startTime;        // 开始时间（上次关账时间）
-    private Long endTime;          // 结束时间（本次关账时间）
-    private String deviceIdenty;        // 发起操作的设备ID
-    private Long creatorId;             // 操作人ID
-    private String creatorName;         // 操作员名称
-    private Long brandIdenty;           // 品牌标识
-    private Long shopIdenty;            // 门店标识
-    private Integer statusFlag;         // 1:VALID:有效的\\r\\n2:INVALID:无效的
-    private String uuid;                // UUID，本笔记录唯一值
-    private Long clientCreateTime; // PAD本地创建时间
-    private Long clientUpdateTime; // PAD本地最后修改时间
-    private Long serverCreateTime; // 服务端创建时间
-    private Long serverUpdateTime; // 服务端最后修改时间
-    private Long creatorAccount;        // 操作员账号
 
+    private static final long serialVersionUID = 1L;
+    private Long id;                        private Long belongDate;                private Long startTime;            private Long endTime;              private String deviceIdenty;            private Long creatorId;                 private String creatorName;             private Long brandIdenty;               private Long shopIdenty;                private Integer statusFlag;             private String uuid;                    private Long clientCreateTime;     private Long clientUpdateTime;     private Long serverCreateTime;     private Long serverUpdateTime;     private Long creatorAccount;
     public Long getId() {
         return id;
     }

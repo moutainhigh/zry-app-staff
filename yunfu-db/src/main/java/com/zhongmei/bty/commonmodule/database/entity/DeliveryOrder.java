@@ -12,102 +12,62 @@ import com.zhongmei.bty.commonmodule.database.enums.DeliveryOrderType;
 import com.zhongmei.yunfu.db.enums.DeliveryPlatform;
 import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 
-/**
- * @Date： 2017/7/25
- * @Description:配送记录
- * @Version: 1.0
- */
+
 @DatabaseTable(tableName = "delivery_order")
 public class DeliveryOrder extends IdEntityBase {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "delivery_order"
-     */
+
     public interface $ extends IdEntityBase.$ {
-        /**
-         * uuid
-         */
+
         String uuid = "uuid";
 
-        /**
-         * trade_id
-         */
+
         String tradeId = "trade_id";
 
-        /**
-         * trade_uuid
-         */
+
         String tradeUuid = "trade_uuid";
 
-        /**
-         * deliverer_id
-         */
+
         String delivererId = "deliverer_id";
 
-        /**
-         * deliverer_name
-         */
+
         String delivererName = "deliverer_name";
 
-        /**
-         * deliverer_phone
-         */
+
         String delivererPhone = "deliverer_phone";
 
-        /**
-         * delivery_status
-         */
+
         String delivererStatus = "delivery_status";
 
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
 
-        /**
-         * cancel_flag
-         */
+
         String cancelFlag = "cancel_flag";
 
-        /**
-         * opreate_source
-         */
+
         String operateSource = "operate_source";
 
-        /**
-         * delivery_platform
-         */
+
         String deliveryPlatform = "delivery_platform";
 
-        /**
-         * enable_flag
-         */
+
         String enableFlag = "enable_flag";
 
-        /**
-         * sub_delivery_status
-         */
+
         String subDeliveryStatus = "sub_delivery_status";
 
-        /**
-         * order_type
-         */
+
         String orderType = "order_type";
     }
 
@@ -133,33 +93,23 @@ public class DeliveryOrder extends IdEntityBase {
     @DatabaseField(columnName = "delivery_status", canBeNull = false)
     private Integer deliveryStatus;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 
-    /**
-     * 是否可以取消（1-可以，0-不可以）
-     */
+
     @DatabaseField(columnName = "cancel_flag")
     private Integer cancelFlag;
 

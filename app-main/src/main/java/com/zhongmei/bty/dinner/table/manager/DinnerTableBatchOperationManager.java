@@ -32,9 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DinnerTableBatchOperationManager {
 
@@ -48,26 +46,17 @@ public class DinnerTableBatchOperationManager {
 
     private List<Tables> tablesList;
 
-    /**
-     * key areaID
-     * value tables
-     */
+
     private Map<Long, List<Tables>> tablesListMap;
 
     private List<TradeTable> tradeTableList;
 
-    /**
-     * key tableId
-     * value tradeTable
-     */
+
     private Map<Long, List<TradeTable>> tradeTableListMap;
 
     private List<Trade> tradeList;
 
-    /**
-     * key tradeId
-     * value trade
-     */
+
     public Map<Long, Trade> tradeMap;
 
     private List<DinnerConnectTablesVo> tablesVoList;
@@ -341,11 +330,7 @@ public class DinnerTableBatchOperationManager {
         this.mOnChangedListener = listener;
         ContentResolver resolver = MainApplication.getInstance().getContentResolver();
         Uri mUri = DBHelperManager.getUri(TradeMainSubRelation.class);
-//        Uri mTablesUri = DBHelperManager.getUri(Tables.class);
-//        Uri mTradeTableUri = DBHelperManager.getUri(TradeTable.class);
         resolver.registerContentObserver(mUri, true, mObserver);
-//        resolver.registerContentObserver(mTablesUri, true, mObserver);
-//        resolver.registerContentObserver(mTradeTableUri, true, mObserver);
         if (mOnChangedListener != null) {
             mOnChangedListener.onChanged();
         }
@@ -354,14 +339,10 @@ public class DinnerTableBatchOperationManager {
     public void unregister() {
         ContentResolver resolver = MainApplication.getInstance().getContentResolver();
         resolver.unregisterContentObserver(mObserver);
-//        resolver.unregisterContentObserver(mObserver);
-//        resolver.unregisterContentObserver(mObserver);
         mOnChangedListener = null;
     }
 
-    /**
-     * 监听器
-     */
+
     private class DataObserver extends ContentObserver {
         public DataObserver() {
             super(new Handler());

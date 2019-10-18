@@ -10,14 +10,8 @@ import android.text.TextUtils;
 
 public class ActivityUtil {
 
-    private static Class topActivityClazz;//最上层activity对应的类
+    private static Class topActivityClazz;
 
-    /**
-     * 判断某个界面是否在前台
-     *
-     * @param context
-     * @param className 某个界面名称
-     */
     public static boolean isForeground(Context context, String className) {
         if (context == null || TextUtils.isEmpty(className)) {
             return false;

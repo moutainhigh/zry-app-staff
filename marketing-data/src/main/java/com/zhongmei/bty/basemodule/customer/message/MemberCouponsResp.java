@@ -5,18 +5,10 @@ import com.zhongmei.yunfu.bean.req.CustomerCouponResp;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MemberCouponsResp {
-    private int currentPage;//当前也
-    private int pageSize;//每页长度
-    private int totalRows;//总行数
-    private int startRow;//开始记录数
-    private int[] showPageNums;//需要展示的页码
-    private int totalPage;//总页数
-    private List<CustomerCouponResp> items;
+    private int currentPage;    private int pageSize;    private int totalRows;    private int startRow;    private int[] showPageNums;    private int totalPage;    private List<CustomerCouponResp> items;
 
 
     public int getCurrentPage() {

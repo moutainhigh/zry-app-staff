@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.orm.IDBHelperFunc;
 import com.zhongmei.bty.commonmodule.database.db.local.LocalDBManager;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class LocalDBHelperFunc implements IDBHelperFunc {
     @Override

@@ -16,115 +16,75 @@ import java.math.BigDecimal;
 @DatabaseTable(tableName = "crm_level_store_rule")
 public class CrmLevelStoreRule extends CrmBasicEntityBase implements ICreator, IUpdator {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "crm_customer_level_rights"
-     */
+
     public interface $ extends CrmBasicEntityBase.$ {
 
-        /**
-         * is_full_send
-         */
+
         public static final String isFullSend = "is_full_send";
 
-        /**
-         * send_type
-         */
+
         public static final String sendType = "send_type";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * coupon_type
-         */
+
         String couponType = "coupon_type";
     }
 
-    /**
-     * 是否满赠 0 是 1 否
-     */
+
     @DatabaseField(columnName = "is_full_send")
     private Integer isFullSend;
 
-    /**
-     * 赠送方式 1元 2比例
-     */
+
     @DatabaseField(columnName = "send_type")
     private Integer sendType;
 
-    /**
-     * 创建者id
-     */
+
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
 
-    /**
-     * 创建者名称
-     */
+
     @DatabaseField(columnName = "creator_name")
     private String creatorName;
 
-    /**
-     * 更新者id
-     */
+
     @DatabaseField(columnName = "updator_id")
     private Long updatorId;
 
-    /**
-     * 最后修改者姓名
-     */
+
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
-    /**
-     * 优惠方式
-     */
+
     @DatabaseField(columnName = "coupon_type")
     private Integer couponType;
 
-    /**
-     * 扣款顺序 1：按比例 2：先实储后赠送 3：先赠送后实储
-     */
+
     @DatabaseField(columnName = "consume_order")
     private Integer consumeOrder;
 
-    /**
-     * 储值门店分组Id
-     */
+
     @DatabaseField(columnName = "group_id")
     private Long groupId;
 
-    /**
-     * 是否支持免密支付：0，不支持；1，支持
-     */
+
     @DatabaseField(columnName = "pay_no_pwd")
     private Integer payNoPwd;
 
-    /**
-     * 免密支付的额度：-1表示不限额
-     */
+
     @DatabaseField(columnName = "pay_no_pwd_amount")
     private BigDecimal payNoPwdAmount;
 

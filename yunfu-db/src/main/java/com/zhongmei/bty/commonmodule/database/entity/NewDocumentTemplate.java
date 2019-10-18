@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * 票据模版
- */
+
 @DatabaseTable(tableName = "new_document_template")
 public class NewDocumentTemplate extends IdEntityBase {
     private static final long serialVersionUID = 1L;
@@ -17,97 +15,59 @@ public class NewDocumentTemplate extends IdEntityBase {
 
     public static int ENABLE_FALSE = 2;
 
-    /**
-     * The columns of table "new_document_template"
-     */
+
     public interface $ extends IdEntityBase.$ {
-        /**
-         * 预览图地址
-         */
+
         String url = "url";
-        /**
-         * 名称
-         */
+
         String name = "name";
 
-        /**
-         * 对象属性值
-         */
+
         String value = "value";
 
-        /**
-         * 票据类型(1.结账单&挂账单  2.预结单  3.客看单)
-         */
+
         String documentType = "document_type";
 
-        /**
-         * 基准模版
-         */
+
         String baseTemplet = "base_templet";
 
-        /**
-         * 预览的json内容
-         */
+
         String content = "content";
 
-        /**
-         * 是否默认模版(1.是,2.否)
-         */
+
         String defaultTemplet = "default_templet";
 
-        /**
-         * 是否启用(1.启用,2.禁用)
-         */
+
         String enableFlag = "enable_flag";
 
-        /**
-         * 状态标识(1:有效2:无效)
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * 品牌id
-         */
+
         String brandIdenty = "brand_identy";
 
-        /**
-         * 门店id
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * 服务器创建时间
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * 服务器更新时间
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * 创建者ID
-         */
+
         String creatorId = "creator_id";
 
-        /**
-         * 创建者名字
-         */
+
         String creatorName = "creator_name";
 
-        /**
-         * 更新者ID
-         */
+
         String updatorId = "updator_id";
 
-        /**
-         * 更新者名字
-         */
+
         String updatorName = "updator_name";
 
-        /**
-         * 模板的版本号
-         */
+
         String templateVersion = "template_version";
     }
 

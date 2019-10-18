@@ -4,17 +4,11 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MeituanDishVo {
     public List<MeituanDishItemVo> matchDishItemVoList;
-    public BigDecimal matchAmount = BigDecimal.ZERO;//  合计抵扣金额
-    public int usedCount;//输入使用张数
-    public int matchCount = 0;//匹配张数
-    public boolean isMatchEnable = false;//是否满足使用条件(默认不满足 false)
-
+    public BigDecimal matchAmount = BigDecimal.ZERO;    public int usedCount;    public int matchCount = 0;    public boolean isMatchEnable = false;
     public MeituanDishVo(int usedCount) {
         this.usedCount = usedCount;
     }

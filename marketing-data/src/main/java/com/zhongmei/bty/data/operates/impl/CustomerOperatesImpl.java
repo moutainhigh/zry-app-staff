@@ -145,10 +145,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- * @version: 1.0
- * @date 2015年5月8日
- */
+
 @SuppressLint("SimpleDateFormat")
 public class CustomerOperatesImpl extends AbstractOpeartesImpl implements CustomerOperates {
 
@@ -162,27 +159,17 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void editCustomer(CustomerResp customerNew, ResponseListener<CustomerEditResp> listener) throws JSONException {
-        /*String url = ServerAddressUtil.getInstance().editCustomer();
-        OpsRequest.Executor<CustomerEditReq, CustomerEditResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(new CustomerEditReq().fromCustomer(customerNew)).responseClass(CustomerEditResp.class).execute(listener, "editCustomer");*/
+
     }
 
     @Override
     public void login(CustomerLoginReq loginReq, ResponseListener<CustomerLoginResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().memberLogin();
-        OpsRequest.Executor<CustomerLoginReq, CustomerLoginResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(loginReq).responseClass(CustomerLoginResp.class).execute(listener, "memberLogin");*/
+
     }
 
     @Override
     public void customerLogin(CustomerLoginReq loginReq, ResponseListener<MemberLoginVoResp> listener) {
-        //使用透传接口
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<CustomerLoginReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().customerLogin());
-        transferReq.setPostData(loginReq);
-        OpsRequest.Executor<TransferReq<CustomerLoginReq>, MemberLoginVoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(MemberLoginVoResp.class).execute(listener, "customerLoginNew");*/
+
     }
 
     @Override
@@ -195,13 +182,7 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void getCustomerCoupons(MemberCouponsReq couponsReq, ResponseListener<MemberCouponsVoResp> listener) {
-        //使用透传接口
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<MemberCouponsReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().memberCoupons());
-        transferReq.setPostData(couponsReq);
-        OpsRequest.Executor<TransferReq<MemberCouponsReq>, MemberCouponsVoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(MemberCouponsVoResp.class).execute(listener, "customerCoupons");*/
+
     }
 
     @Override
@@ -213,66 +194,39 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void getCustomerCards(MemberCardsReq cardsReq, ResponseListener<LoyaltyTransferResp<MemberCardsResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<MemberCardsReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().memberCards());
-        transferReq.setPostData(cardsReq);
-        OpsRequest.Executor<TransferReq<MemberCardsReq>, LoyaltyTransferResp<MemberCardsResp>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseType(OpsRequest.getContentResponseType(LoyaltyTransferResp.class, MemberCardsResp.class)).execute(listener, "customerCards");*/
+
     }
 
 
     @Override
     public void memberRecharge(MemberRechargeReq rechargeReq, ResponseListener<MemberRechargeResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().memberRecharge();
-        rechargeReq.setSource(1);
-        OpsRequest.Executor<MemberRechargeReq, MemberRechargeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(rechargeReq).responseClass(MemberRechargeResp.class).execute(listener, "memberRecharge");*/
+
     }
 
     @Override
     public void cardRecharge(CardRechargeReq rechargeReq, ResponseListener<CardRechargeResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().cardRecharge();
-        OpsRequest.Executor<CardRechargeReq, CardRechargeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(rechargeReq).responseClass(CardRechargeResp.class).execute(listener, "cardRecharge");*/
+
     }
 
     @Override
     public void findCustomerInfo(CustomerInfoReq couponinfoReq, ResponseListener<CustomerInfoResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().customerInfo();
-        OpsRequest.Executor<CustomerInfoReq, CustomerInfoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(couponinfoReq)
-                .responseClass(CustomerInfoResp.class)
-                .execute(listener, "findCouponInfo");*/
+
     }
 
     @Override
     public void getCheckCode(MemberCheckCodeReq checkCodeReq, ResponseListener<MemberCheckCodeResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().memberCheckCode();
-        OpsRequest.Executor<MemberCheckCodeReq, MemberCheckCodeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(checkCodeReq)
-                .responseClass(MemberCheckCodeResp.class)
-                .execute(listener, "memberCheckCode");*/
+
     }
 
     @Override
     public void validateCheckCode(MemberValidateCheckCodeReq validateCheckCodeReq,
                                   ResponseListener<MemberValidateCheckCodeResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().memberValidateCheckCode();
-        OpsRequest.Executor<MemberValidateCheckCodeReq, MemberValidateCheckCodeResp> executor =
-                OpsRequest.Executor.create(url);
-        executor.requestValue(validateCheckCodeReq)
-                .responseClass(MemberValidateCheckCodeResp.class)
-                .execute(listener, "memberValidateCheckCode");*/
+
     }
 
     @Override
     public void modifyPassword(MemberResetPswdReq resetPswdReq, ResponseListener<MemberResetPswdResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().memberModifyPswd();
-        OpsRequest.Executor<MemberResetPswdReq, MemberResetPswdResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(resetPswdReq)
-                .responseClass(MemberResetPswdResp.class)
-                .execute(listener, "memberResetPswd");*/
+
     }
 
     @Override
@@ -295,45 +249,27 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void upgradeCustomer(MemberUpgradeReq req, CustomerResp customer, ResponseListener<MemberUpgradeResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().upgradeMemberUrl();
-        OpsRequest.Executor<MemberUpgradeReq, MemberUpgradeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(MemberUpgradeResp.class)
-                //.responseProcessor(new UpgradeCustomerRespProcessor(customer))
-                .execute(listener, "memberUpgrade");*/
+
     }
 
     @Override
     public void createCustomer(CustomerResp customer, String uniqueCode, ResponseListener<MemberCreateResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().creatMemeberUrl();
-        MemberCreateReq req = toMemberCreateReq(customer, uniqueCode);
-        OpsRequest.Executor<MemberCreateReq, MemberCreateResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(MemberCreateResp.class)
-                .execute(listener, "memberCreate");*/
+
     }
 
     @Override
     public void queryMemberByUniqueCode(String uniqueCode, ResponseListener<MemberCreateResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().queueMemeberUrl();
-        MemberQueueReq req = new MemberQueueReq();
-        req.setUniqueCode(uniqueCode);
-        OpsRequest.Executor<MemberQueueReq, MemberCreateResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(MemberCreateResp.class).execute(listener, "memberQueue");*/
+
     }
 
     @Override
     public void cardLogin(String cardNo, ResponseListener<CardLoginResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().cardLogin();
-        CardLoginReq req = toCardLoginReq(cardNo);
-        OpsRequest.Executor<CardLoginReq, CardLoginResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(CardLoginResp.class).execute(listener, "cardLogin");*/
+
     }
 
     private CardLoginReq toCardLoginReq(String cardNo) {
         CardLoginReq req = new CardLoginReq(cardNo);
-        req.setSource(1);//1表示来自on os
-        AuthUser user = Session.getAuthUser();
+        req.setSource(1);        AuthUser user = Session.getAuthUser();
         if (user != null) {
             req.setUserId(user.getId());
         }
@@ -342,30 +278,13 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void cardLoginNew(String cardNum, ResponseListener<LoyaltyMindTransferResp<NewCardLoginResp>> listener) {
-        /*Long brandId = BaseApplication.getInstance().getBrandIdenty();
-        Long commercialId = BaseApplication.getInstance().getShopIdenty();
-        Long userId = -1L;
-        AuthUser user = Session.getAuthUser();
-        if (user != null) {
-            userId = user.getId();
-        }
 
-        String transferUrl = ServerAddressUtil.getInstance().newCardLogin() + "?brandId=" + brandId +
-                "&commercialId=" + commercialId + "&userId=" + userId + "&appType=1&cardNum=" + cardNum;*/
 
-        //PrintSettingDal printSettingDal = OperatesFactory.create(PrintSettingDal.class);
-        //printSettingDal.loyaltyMindTransfer(transferUrl, new Object(), NewCardLoginResp.class, listener);
-    }
+                    }
 
     @Override
     public void getMemberCards(Long customerId, String mobile, ResponseListener<MemberCardResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getMemeberCardUrl();
-        MemberCardReq req = new MemberCardReq();
-        req.setCreateId(Session.getAuthUser().getId());
-        req.setCustomerId(customerId);
-        req.setMobile(mobile);
-        OpsRequest.Executor<MemberCardReq, MemberCardResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(MemberCardResp.class).execute(listener, "memberCreate");*/
+
     }
 
 
@@ -376,37 +295,23 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void rangeSearchCards(CardRangeSearchReq req, ResponseListener<CardRangeSearchResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getRangeSearchCardsUrl();
 
-        OpsRequest.Executor<CardRangeSearchReq, CardRangeSearchResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(CardRangeSearchResp.class).execute(listener, "rangeSearchCards");*/
 
     }
 
     @Override
     public void singleSearchCards(CardSingleSearchReq req, ResponseListener<CardRangeSearchResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getSingleSearchCardsUrl();
 
-        OpsRequest.Executor<CardSingleSearchReq, CardRangeSearchResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(CardRangeSearchResp.class).execute(listener, "singleSearchCards");*/
     }
 
     @Override
     public void singleSearchCardsByTrans(CardSingleSearchByTransReq req, ResponseListener<CardSingleSearchResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<CardSingleSearchByTransReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().getSingleSearchCardsUrlByTrans());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CardSingleSearchByTransReq>, CardSingleSearchResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(CardSingleSearchResp.class).execute(listener, "singleSearchCardsByTrans");*/
+
     }
 
     @Override
     public void activateCards(CardActivateReq req, ResponseListener<CardActivateResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getActiviteCardsUrl();
 
-        OpsRequest.Executor<CardActivateReq, CardActivateResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req).responseClass(CardActivateResp.class).execute(listener, "activateCards");*/
 
     }
 
@@ -420,11 +325,7 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
         req.setSex(customer.sex + "");
         req.setAddress(customer.address);
-//		String birthday = customer.birthday;
-//		if (!TextUtils.isEmpty(birthday)) {
-//			Date time = new Date(Long.valueOf(birthday));
         req.setBirthday(customer.birthday);
-//		}
         req.setConsumePwd(customer.password);
         req.setEnvironmentHobby(customer.hobby);
         req.setGroupId(customer.groupId);
@@ -445,30 +346,18 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
     @Override
     public void getValueIntegralHistory(MemberIntegralInfoReq req, ResponseListener<MemberIntegralInfoResp> listener) {
 
-        /*String url = ServerAddressUtil.getInstance().memberIntegralHistory();
-        OpsRequest.Executor<MemberIntegralInfoReq, MemberIntegralInfoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(MemberIntegralInfoResp.class)
-                .execute(listener, "memberIntegralHistory");*/
+
     }
 
 
     @Override
     public void getCardIntegralHistory(CardIntegralInfoReq req, ResponseListener<CardIntegralInfoResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().cardIntegralHistory();
-        OpsRequest.Executor<CardIntegralInfoReq, CardIntegralInfoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(CardIntegralInfoResp.class)
-                .execute(listener, "getCardIntegralHistory");*/
+
     }
 
-    /**
-     * 查询会员请求
-     */
+
     static class MemberQueueReq {
-        /**
-         * 旧会员唯一标识
-         */
+
         private String uniqueCode;
 
         public String getUniqueCode() {
@@ -480,9 +369,7 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
         }
     }
 
-    /**
-     * 会员地址请求
-     */
+
     class MemberAddressReq {
 
         private Long memberID;
@@ -496,21 +383,16 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
         }
     }
 
-    /**
-     * 创建会员请求类
-     */
+
     static class MemberCreateReq {
-        /**
-         * 旧会员唯一标识
-         */
+
         private String uniqueCode;
 
         private String mobile;
 
         private Long userId;
 
-        // 1988/03/01
-        private String birthday;
+                private String birthday;
 
         private String sex;
 
@@ -530,17 +412,11 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
         private Long groupId;
 
-        /**
-         * 国家英文名称(为空默认中国) = countryEN
-         */
+
         private String nation;
-        /**
-         * 国家中文名称(为空默认中国) = countryZH
-         */
+
         private String country;
-        /**
-         * 电话国际区码(为空默认中国) = AreaCode
-         */
+
         private String nationalTelCode;
 
         private String faceCode;
@@ -682,56 +558,32 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
         }
     }
 
-    /**
-     * @Date 2016年3月16日
-     * @Description: 获取售卡记录
-     * @Param
-     */
+
     @Override
     public void getCustomerSellCardOrders(CustomerSellcardReq sellcardReq,
                                           ResponseListener<List<CustomerSellcardResp>> listener) {
-        /*String url = ServerAddressUtil.getInstance().getCustomerSellCardOrders();
-        OpsRequest.Executor<CustomerSellcardReq, List<CustomerSellcardResp>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(sellcardReq)
-                .responseType(OpsRequest.getListContentResponseType(CustomerSellcardResp.class))
-                .execute(listener, "getCustomerSellCardOrders");*/
+
 
     }
 
     @Override
     public void getEntityCardChangeOrders(CustomerSellcardReq entityCardChangeReq, ResponseListener<List<CustomerSellcardResp>> listener
     ) {
-        /*String url = ServerAddressUtil.getInstance().getEntityCardChangeOrders();
-        OpsRequest.Executor<CustomerSellcardReq, List<CustomerSellcardResp>> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(entityCardChangeReq)
-                .responseType(OpsRequest.getListContentResponseType(CustomerSellcardResp.class))
-                .execute(listener, "getEntityCardChangeOrders");*/
+
     }
 
-    /**
-     * @Date 2016年3月16日
-     * @Description: 获取售卡详情
-     * @Param
-     */
+
     @Override
     public void getCustomerSellCardDetailInfo(CustomerSellcardDetailReq sellcardReq,
                                               ResponseListener<CustomerSellcardDetailResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getCustomerSellCardDetailInfo();
-        OpsRequest.Executor<CustomerSellcardDetailReq, CustomerSellcardDetailResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(sellcardReq)
-                .responseClass(CustomerSellcardDetailResp.class)
-                .execute(listener, "getCustomerSellCardDetailInfo");*/
+
 
     }
 
     @Override
     public void getEntityCardChangeDetailInfo(Long tradeId, ResponseListener<EntityCardChangeDetailResp> listener
     ) {
-        /*String url = ServerAddressUtil.getInstance().getEntityCardChangeDetailInfo();
-        OpsRequest.Executor<CustomerSellcardDetailReq, EntityCardChangeDetailResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(toEntityCardChangeDetailReq(tradeId))
-                .responseClass(EntityCardChangeDetailResp.class)
-                .execute(listener, "getEntityCardChangeDetailInfo");*/
+
     }
 
     private CustomerSellcardDetailReq toEntityCardChangeDetailReq(Long tradeId) {
@@ -745,29 +597,14 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void getAnonymousEntityCardSellDetailInfo(Long tradeId, ResponseListener<CustomerSellcardDetailResp> listener) {
-        /*CustomerSellcardDetailReq requestContent = new CustomerSellcardDetailReq();
-        requestContent.setTradeId(tradeId);
 
-        String url = ServerAddressUtil.getInstance().getAnonymousEntityCardSellDetailInfo();
-        OpsRequest.Executor<CustomerSellcardDetailReq, CustomerSellcardDetailResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(requestContent)
-                .responseClass(CustomerSellcardDetailResp.class)
-                .execute(listener, "getAnonymousEntityCardDetailInfo");*/
     }
 
-    /**
-     * @Date 2016年3月22日
-     * @Description: 查询实体卡储值记录
-     * @Param
-     */
+
     @Override
     public void getCardStoreValueList(CustomerCardStoreValueReq cardStoreValueReq,
                                       ResponseListener<CustomerCardStoreValueResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getCardStoreValueList();
-        OpsRequest.Executor<CustomerCardStoreValueReq, CustomerCardStoreValueResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(cardStoreValueReq)
-                .responseClass(CustomerCardStoreValueResp.class)
-                .execute(listener, "getCardStoreValueList");*/
+
     }
 
     @Override
@@ -787,46 +624,23 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
                 .execute(listener, "getEntityCardStoreHistory");
     }
 
-    /**
-     * @Date 2016年3月22日
-     * @Description: 查询支付和会员信息
-     * @Param
-     */
+
     @Override
     public void queryPaymentAndMember(PaymentAndMemberReq req,
                                       ResponseListener<PaymentAndMemberResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().queryPaymentAndMember();
-        OpsRequest.Executor<PaymentAndMemberReq, PaymentAndMemberResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(PaymentAndMemberResp.class)
-                .execute(listener, "queryPaymentAndMember");*/
+
     }
 
     @Override
     public void queryPayment(String paymentUuid, ResponseListener<PaymentAndMemberResp> listener) {
-        /*PaymentAndMemberReq requestContent = new PaymentAndMemberReq();
-        requestContent.setPaymentUuid(paymentUuid);
 
-        String url = ServerAddressUtil.getInstance().queryPayment();
-        OpsRequest.Executor<PaymentAndMemberReq, PaymentAndMemberResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(requestContent)
-                .responseClass(PaymentAndMemberResp.class)
-                .execute(listener, "queryPayment");*/
     }
 
-    /**
-     * @Date 2016年3月22日
-     * @Description:查询会员储值记录
-     * @Param
-     */
+
     @Override
     public void getMemberStoreValueList(CustomerMemberStoreValueReq req,
                                         ResponseListener<CustomerMemberStoreValueResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getMemberStoreValueList();
-        OpsRequest.Executor<CustomerMemberStoreValueReq, CustomerMemberStoreValueResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(CustomerMemberStoreValueResp.class)
-                .execute(listener, "getMemberStoreValueList");*/
+
     }
 
     @Override
@@ -847,33 +661,17 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
                 .execute(listener, "getMemberStoreHistory");
     }
 
-    /**
-     * @Date 2016年4月5日
-     * @Description: 售卡记录作废
-     * @Param
-     */
+
     @Override
     public void saleCardRecordInvaliate(CustomerSaleCardInvalidReq req,
                                         ResponseListener<CustomerSaleCardInvalidResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().saleCardRecordInvaliate();
-        OpsRequest.Executor<CustomerSaleCardInvalidReq, CustomerSaleCardInvalidResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(CustomerSaleCardInvalidResp.class)
-                .execute(listener, "saleCardRecordInvaliate");*/
+
     }
 
-    /**
-     * @Date 2016年4月5日
-     * @Description: 实体卡储值撤销
-     * @Param
-     */
+
     @Override
     public void cardStoreValueRevokeReq(CustomerOrderBean orderBean, Reason reason, ResponseListener<Object> listener) {
-        /*String url = ServerAddressUtil.getInstance().cardStoreValueRevoke();
-        OpsRequest.Executor<CustomerCardStoreValueRevokeReq, Object> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(toCustomerCardStoreValueRevokeReq(orderBean, reason))
-                .responseClass(Object.class)
-                .execute(listener, "cardStoreValueRevokeReq");*/
+
 
     }
 
@@ -908,21 +706,12 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
         return req;
     }
 
-    /**
-     * @Date 2016年4月5日
-     * @Description: 会员储值撤销
-     * @Param
-     */
+
     @Override
     public void memberStoreValueRevokeReq(CustomerMemberStoreValueRevokeReq req,
                                           ResponseListener<CustomerMemberStoreValueRevokeResp> listener) {
 
-        /*String url = ServerAddressUtil.getInstance().memberStoreValueRevoke();
-        OpsRequest.Executor<CustomerMemberStoreValueRevokeReq, CustomerMemberStoreValueRevokeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseProcessor(new CustomerMemberStoreRevokeRespProcessor())
-                .responseClass(CustomerMemberStoreValueRevokeResp.class)
-                .execute(listener, "memberStoreValueRevokeReq");*/
+
     }
 
     private static class CustomerMemberStoreRevokeRespProcessor extends OpsRequest.SaveDatabaseResponseProcessor<CustomerMemberStoreValueRevokeResp> {
@@ -945,32 +734,17 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void anonymousEntityCardSaleRecordInvalid(Long tradeId, ResponseListener<CustomerSaleCardInvalidResp> listener) {
-        /*CustomerSaleCardInvalidReq req = new CustomerSaleCardInvalidReq();
-        req.setTradeId(tradeId);
 
-        String url = ServerAddressUtil.getInstance().anonymousEntityCardSaleRecordInvalid();
-        OpsRequest.Executor<CustomerSaleCardInvalidReq, CustomerSaleCardInvalidResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(CustomerSaleCardInvalidResp.class)
-                .execute(listener, "anonymousEntityCardSaleRecordInvalid");*/
     }
 
     @Override
     public void getAnoymousCardTradeInfo(AnonymousCardTradeReq req, ResponseListener<AnonymousCardTradeResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getAnoymousCardTradeUrl();
-        OpsRequest.Executor<AnonymousCardTradeReq, AnonymousCardTradeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(AnonymousCardTradeResp.class)
-                .execute(listener, "anonymousCardTrade");*/
+
     }
 
     @Override
     public void queryAnoymousCardStorePayMode(@NonNull String cardNo, ResponseListener<AnonymousCardStorePayModeResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getQueryTempCardStorePayModeUrl();
-        OpsRequest.Executor<AnonymousCardTradeReq, AnonymousCardStorePayModeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(toAnonymousCardTradeReq(cardNo))
-                .responseClass(AnonymousCardStorePayModeResp.class)
-                .execute(listener, "queryAnoymousCardStorePayMode");*/
+
     }
 
     private AnonymousCardTradeReq toAnonymousCardTradeReq(String cardNo) {
@@ -982,11 +756,7 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void returnAnoymousCard(ReturnAnonymousCardReq req, ResponseListener<ReturnAnonymousCardResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().returnAnoymousCardUrl();
-        OpsRequest.Executor<ReturnAnonymousCardReq, ReturnAnonymousCardResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(ReturnAnonymousCardResp.class)
-                .execute(listener, "returnAnonymousCard");*/
+
     }
 
     @Override
@@ -1000,27 +770,13 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void getCustomerById(Long customerId, boolean isNeedCredit, ResponseListener<com.zhongmei.bty.basemodule.customer.message.CustomerResp> listener) {
-        /*CustomerReq req = new CustomerReq();
-        req.brandId = BaseApplication.getInstance().getBrandIdenty();//品牌id
-        req.commercialId = BaseApplication.getInstance().getShopIdenty();
-        req.clientType = "pos";
-        req.customerId = customerId;
-        if (isNeedCredit) {
-            req.isNeedCredit = 1;
-        }
-        String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<CustomerReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().getCustomerDetailById());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CustomerReq>, com.zhongmei.bty.basemodule.customer.message.CustomerResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(com.zhongmei.bty.basemodule.customer.message.CustomerResp.class).execute(listener, "getCustomerById");*/
+
     }
 
     @Override
     public void getCustomerById(Long customerId, boolean isNeedCredit, YFResponseListener<YFResponse<CustomerResp>> listener) {
         CustomerReq req = new CustomerReq();
-        req.brandId = BaseApplication.getInstance().getBrandIdenty();//品牌id
-        req.commercialId = BaseApplication.getInstance().getShopIdenty();
+        req.brandId = BaseApplication.getInstance().getBrandIdenty();        req.commercialId = BaseApplication.getInstance().getShopIdenty();
         req.clientType = "pos";
         req.customerId = customerId;
         if (isNeedCredit) {
@@ -1058,62 +814,13 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void getCustomerByType(Long loginType, String loginId, ResponseListener<CustomerMobileVo> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        CustomerRequest req = new CustomerRequest(loginType, loginId);
-        TransferReq request = new TransferReq(ServerAddressUtil.getInstance().getCustomerByType(), req);
-        OpsRequest.Executor<TransferReq, CustomerMobileVo> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(request)
-                .responseClass(CustomerMobileVo.class)
-                .execute(listener, "findCustomerByPhone");*/
+
     }
 
-//    @Override
-//    public void queryCustomerListByCondition(String nameOrMobile, String cardNum, String openId, String groupId, String customerType, String levelId, int pageSize, int currentPage,boolean isCache, Long minCustomerId,ResponseListener<CustomerListVoResp> listener) {
-//        //使用透传接口
-//        CustomerListReq req = new CustomerListReq();
-//        CustomerListReq.CustomerListReqBean bean = req.new CustomerListReqBean();
-//        bean.brandId = BaseApplication.getInstance().getBrandIdenty();//品牌id
-//        if (!TextUtils.isEmpty(nameOrMobile)) {
-//            bean.nameOrMobile = nameOrMobile;
-//        }
-//        if (!TextUtils.isEmpty(cardNum)) {
-//            bean.cardNum = cardNum;
-//        }
-//        if (!TextUtils.isEmpty(openId)) {
-//            bean.openId = openId;
-//        }
-//        if (!TextUtils.isEmpty(groupId)) {
-//            bean.groupId = groupId;
-//        }
-//        if (!TextUtils.isEmpty(customerType)) {
-//            bean.customerType = customerType;
-//        }
-//        if (!TextUtils.isEmpty(levelId)) {
-//            bean.levelId = levelId;
-//        }
-//        if (!isCache){ // 是否使用缓存,不使用缓存 需要传该字段
-//            bean.refresh = "Y";
-//        }
-//        bean.minCustomerId = minCustomerId;
-//        req.pageSize = 10;
-//        req.currentPage = currentPage;
-//        req.bean = bean;
-//        String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-//        TransferReq<CustomerListReq> transferReq = new TransferReq<>();
-//        transferReq.setUrl(ServerAddressUtil.getInstance().queryCustomerList());
-//        transferReq.setPostData(req);
-//        OpsRequest.Executor<TransferReq<CustomerListReq>, CustomerListVoResp> executor = OpsRequest.Executor.create(url);
-//        executor.requestValue(transferReq).responseClass(CustomerListVoResp.class).execute(listener, "queryCustomerListByCondition");
-//    }
 
     @Override
     public void queryCustomerListByCondition(CustomerListReq req, ResponseListener<CustomerListVoResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<CustomerListReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().queryCustomerList());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CustomerListReq>, CustomerListVoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(CustomerListVoResp.class).execute(listener, "queryCustomerListByCondition");*/
+
     }
 
     @Override
@@ -1131,76 +838,32 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void queryMemberAddressById(Long memberId, ResponseListener<MemberAddressResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().getMemberAddressUrl();
-        OpsRequest.Executor<MemberAddressReq, MemberAddressResp> executor = OpsRequest.Executor.create(url);
-        MemberAddressReq req = new MemberAddressReq();
-        req.setMemberID(memberId);
-        executor.requestValue(req)
-                .responseClass(MemberAddressResp.class)
-                .execute(listener, "queryMemberAddressById");*/
+
     }
 
     @Override
     public void getCardBaseInfo(String cardNum, ResponseListener<CardBaseInfoResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        CardBaseInfoReq req = new CardBaseInfoReq();
-        req.setCardNum(cardNum);
-        TransferReq<CardBaseInfoReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().getCardBaseInfoUrl());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CardBaseInfoReq>, CardBaseInfoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(CardBaseInfoResp.class).execute(listener, "getCardBaseInfo");*/
+
     }
 
     @Override
     public void getCardAccount(String cardNum, ResponseListener<CardAccountResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        CardAccountReq req = new CardAccountReq();
-        req.setCardNum(cardNum);
-        TransferReq<CardAccountReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().getCardAccount());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CardAccountReq>, CardAccountResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(CardAccountResp.class).execute(listener, "getCardAccount");*/
+
     }
 
     @Override
     public void getCardInfoByNum(CardSingleSearchByTransReq req, ResponseListener<CustomerCardInfoResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<CardSingleSearchByTransReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().getCardInfoUrlByNum());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CardSingleSearchByTransReq>, CustomerCardInfoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(CustomerCardInfoResp.class).execute(listener, "getCardInfoByNum");*/
+
     }
 
     @Override
     public void memberIntegralModification(Long customerId, int integral, Integer operateType, ResponseListener<MemberIntegralModificationResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        MemberIntegralModificationReq req = new MemberIntegralModificationReq();
-        req.setCustomerId(customerId);
-        req.setIntegral(integral);
-        req.setOperateType(operateType);
-        req.setSource(1);
-        req.setUserId(Session.getAuthUser().getId());
-        TransferReq<MemberIntegralModificationReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().integralModification());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<MemberIntegralModificationReq>, MemberIntegralModificationResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(MemberIntegralModificationResp.class).execute(listener, "memberIntegralModification");*/
+
     }
 
     @Override
     public void newMemberIntegralInfo(Long customerId, Integer currentPage, Long lastId, ResponseListener<NewMemberIntegralInfoResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        String url2 = ServerAddressUtil.getInstance().newQueryIntegralDetail() + "&customerId=" + customerId + "&currentPage=" + currentPage;
-        if (lastId != null) {
-            url2 += "&lastId=" + lastId;
-        }
-        TransferReq<Object> transferReq = new TransferReq<>();
-        transferReq.setUrl(url2);
-        OpsRequest.Executor<TransferReq, NewMemberIntegralInfoResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(NewMemberIntegralInfoResp.class).execute(listener, "memberIntegralModification");*/
+
     }
 
     @Override
@@ -1216,33 +879,17 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void bindCardInstance(CardActivateReq req, ResponseListener<CardActivateResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<CardActivateReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().getBindCardInstance());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CardActivateReq>, CardActivateResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(CardActivateResp.class).execute(listener, "activateCards");*/
+
     }
 
     @Override
     public void activateCardsV2(CardActiveReqV2 req, ResponseListener<CardActiveRespV2> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<CardActiveReqV2> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().getCardBindCardInstance());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CardActiveReqV2>, CardActiveRespV2> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(CardActiveRespV2.class).execute(listener, "activateCardsV2");*/
+
     }
 
     @Override
     public void createCustomerV2(CustomerResp customer, String uniqueCode, ResponseListener<MemberCreateResp> listener) {
-        /*CustomerCreateReq req = toMemberCreateV2Req(customer);
-        String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<CustomerCreateReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().createMemberByMobile());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<CustomerCreateReq>, MemberCreateResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(MemberCreateResp.class).execute(listener, "createCustomerV2");*/
+
     }
 
     @Override
@@ -1256,31 +903,15 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void createMemberByPresetCustomer(CustomerResp customer, String uniqueCode, ResponseListener<MemberCreateResp> listener) {
-        /*MemberCreateOldCustomerV2Req req = toMemberCreateOldCustomerV2Req(customer, uniqueCode);
-        String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        TransferReq<MemberCreateOldCustomerV2Req> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().createMemberByPresetCustomer());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<MemberCreateOldCustomerV2Req>, MemberCreateResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(MemberCreateResp.class).execute(listener, "createMemberByPresetCustomer");*/
+
     }
 
     @Override
     public void createMemberByPresetCustomer(CustomerResp customer, String uniqueCode, YFResponseListener<YFResponse<CustomerCreateResp>> listener) {
-        /*MemberCreateOldCustomerV2Req req = toMemberCreateOldCustomerV2Req(customer, uniqueCode);
-        String url = ServerAddressUtil.getInstance().createMemberByPresetCustomer();
-        JFRequest.Executor executor = JFRequest.create(url);
-        executor.requestValue(req)
-                .execute(listener, "saveCustomer");*/
+
     }
 
-    /**
-     * 通过预制顾客创建会员 实体
-     *
-     * @param customer
-     * @param uniqueCode
-     * @return
-     */
+
     private MemberCreateOldCustomerV2Req toMemberCreateOldCustomerV2Req(CustomerResp customer, String uniqueCode) {
         MemberCreateOldCustomerV2Req req = new MemberCreateOldCustomerV2Req();
         req.cloneReq(toMemberCreateV2Req(customer));
@@ -1288,12 +919,7 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
         return req;
     }
 
-    /**
-     * v2 创建会员请求参数
-     *
-     * @param customer
-     * @return
-     */
+
     private CustomerCreateReq toMemberCreateV2Req(CustomerResp customer) {
         CustomerCreateReq req = new CustomerCreateReq();
         req.customerId = customer.customerId;
@@ -1332,142 +958,37 @@ public class CustomerOperatesImpl extends AbstractOpeartesImpl implements Custom
 
     @Override
     public void bindCustomerFaceCode(Long customerId, String faceId, ResponseListener<BindCustomerFaceCodeResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().loyaltyTransfer();
-        BindCustomerFaceCodeReq req = new BindCustomerFaceCodeReq();
-        req.setUserId(Session.getAuthUser().getId());
-        req.setCustomerId(customerId);
-        req.setFaceCode(faceId);
-        TransferReq<BindCustomerFaceCodeReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().saveCustomerFaceCode());
-        transferReq.setPostData(req);
-        OpsRequest.Executor<TransferReq<BindCustomerFaceCodeReq>, BindCustomerFaceCodeResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(BindCustomerFaceCodeResp.class).execute(listener, "createCustomerV2");*/
+
     }
 
     @Override
     public void memberModifyLevel(FragmentActivity fragment, Long customerId, Long levelId, CalmResponseListener<ResponseObject<LoyaltyTransferResp>> listener) {
-        /*String transferUrl = ServerAddressUtil.getInstance().loyaltyTransfer();
-        String url = ServerAddressUtil.getInstance().memberModifyLevel();
-        MemberModifyLevelReq req = new MemberModifyLevelReq();
-        req.setCustomerId(customerId);
-        req.setLevelId(levelId);
-        req.setUserId(Session.getAuthUser() == null ? null : Session.getAuthUser().getId());
-        req.setName(Session.getAuthUser() == null ? null : Session.getAuthUser().getName());
 
-        TransferReq<MemberModifyLevelReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(url);
-        transferReq.setPostData(req);
-        CalmNetWorkRequest.with(fragment)
-                .url(transferUrl)
-                .requestContent(transferReq)
-                .responseClass(LoyaltyTransferResp.class)
-                .showLoading()
-                .errorListener(listener)
-                .successListener(listener)
-                .tag("memberModifyLevel")
-                .create();*/
     }
 
     @Override
     public void validationMemberPwd(FragmentActivity fragment, MemberVerifyPwdReq req, CalmResponseListener<ResponseObject<LoyaltyTransferResp>> listener) {
-        /*String transferUrl = ServerAddressUtil.getInstance().loyaltyTransfer();
-        String url = ServerAddressUtil.getInstance().verifyMemberPassword()
-                + req.toString();
-        TransferReq<MemberVerifyPwdReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(url);
-        CalmNetWorkRequest.with(fragment)
-                .url(transferUrl)
-                .requestContent(transferReq)
-                .responseClass(LoyaltyTransferResp.class)
-                .showLoading()
-                .errorListener(listener)
-                .successListener(listener)
-                .tag("validationMemberPwd")
-                .create();*/
+
     }
 
     @Override
     public void memberModifyMobile(FragmentActivity fragment, Long customerId, String oldMobile, String newMobile, ErpCurrency currency, CalmResponseListener<ResponseObject<LoyaltyTransferResp>> listener) {
-        /*String transferUrl = ServerAddressUtil.getInstance().loyaltyTransfer();
-        String url = ServerAddressUtil.getInstance().memberModifyMobile();
-        MemberModifyMobileReq req = new MemberModifyMobileReq();
-        req.setCustomerId(customerId);
-        req.setNewMobile(newMobile);
-        req.setOldMobile(oldMobile);
-        req.setCountry(currency.getCountryZh());
-        req.setNation(currency.getCountryEn());
-        req.setNationalTelCode(currency.getAreaCode());
-        req.setUserId(Session.getAuthUser() == null ? null : Session.getAuthUser().getId());
 
-        TransferReq<MemberModifyMobileReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(url);
-        transferReq.setPostData(req);
-        CalmNetWorkRequest.with(fragment)
-                .url(transferUrl)
-                .requestContent(transferReq)
-                .responseClass(LoyaltyTransferResp.class)
-                .showLoading()
-                .errorListener(listener)
-                .successListener(listener)
-                .tag("memberModifyMobile")
-                .create();*/
     }
 
     @Override
     public void memberCreditList(FragmentActivity fragment, MemberCreditListReq req, boolean isShowLoading, CalmResponseListener<ResponseObject<MemberCreditListResp>> listener) {
-        /*String transferUrl = ServerAddressUtil.getInstance().loyaltyTransfer();
-        String url = ServerAddressUtil.getInstance().memberCreditList();
-        TransferReq<MemberCreditListReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(url);
-        transferReq.setPostData(req);
-        CalmNetWorkRequest.Builder builder = CalmNetWorkRequest.with(fragment)
-                .url(transferUrl)
-                .requestContent(transferReq)
-                .responseClass(MemberCreditListResp.class)
-                .errorListener(listener)
-                .successListener(listener)
-                .tag("memberCreditList");
-        if (isShowLoading) {
-            builder.showLoading();
-        }
-        builder.create();*/
+
 
     }
 
     @Override
     public void getSendCouponList(FragmentActivity fragment, CalmResponseListener<ResponseObject<CustomerDirectCouponListV2Resp>> listener) {
-        /*TransferReq<Object> transferReq = new TransferReq<>();
-        transferReq.setUrl(ServerAddressUtil.getInstance().customerDirectCouponListV2());
-        new CalmNetWorkRequest.Builder<TransferReq<Object>, ResponseObject<CustomerDirectCouponListV2Resp>>()
-                .with(fragment)
-                .url(ServerAddressUtil.getInstance().loyaltyTransfer())
-                .requestContent(transferReq)
-                .responseClass(CustomerDirectCouponListV2Resp.class)
-                .showLoading()
-                .tag("getDirectCouponList")
-                .successListener(listener)
-                .errorListener(listener)
-                .create();*/
+
     }
 
     @Override
     public void getCustomTimes(CustomTimesReq req, boolean isShowLoading, CalmResponseListener<ResponseObject<CustomTimesResp>> listener) {
-        /*String transferUrl = ServerAddressUtil.getInstance().loyaltyTransfer();
-        String url = ServerAddressUtil.getInstance().customTimes();
-        TransferReq<CustomTimesReq> transferReq = new TransferReq<>();
-        transferReq.setUrl(url);
-        transferReq.setPostData(req);
-        CalmNetWorkRequest.Builder builder = CalmNetWorkRequest.with(getContext())
-                .url(transferUrl)
-                .timeout(2000)
-                .requestContent(transferReq)
-                .responseClass(CustomTimesResp.class)
-                .errorListener(listener)
-                .successListener(listener)
-                .tag(url);
-        if (isShowLoading) {
-            builder.showLoading();
-        }
-        builder.create();*/
+
     }
 }

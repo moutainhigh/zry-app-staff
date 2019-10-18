@@ -2,13 +2,9 @@ package com.zhongmei.bty.basemodule.salespromotion.event;
 
 import com.zhongmei.bty.basemodule.discount.bean.salespromotion.SalesPromotionRuleVo;
 
-/**
- * 手动添加促销活动模式事件
- */
-public class ManualAddSalesPromotionEvent {
-    private boolean mEnterManualAddSalesPromotionMode;//true为进入手动添加促销活动模式，false为退出手动添加促销活动模式
-    private SalesPromotionRuleVo mSalesPromotionRuleVo;//进入手动添加促销活动模式时不为null，退出手动添加促销活动模式为null
 
+public class ManualAddSalesPromotionEvent {
+    private boolean mEnterManualAddSalesPromotionMode;    private SalesPromotionRuleVo mSalesPromotionRuleVo;
     public ManualAddSalesPromotionEvent(boolean enterManualAddSalesPromotionMode) {
         this.mEnterManualAddSalesPromotionMode = enterManualAddSalesPromotionMode;
     }

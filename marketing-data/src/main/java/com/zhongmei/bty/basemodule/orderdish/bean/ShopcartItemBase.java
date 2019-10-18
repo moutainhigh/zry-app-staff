@@ -34,109 +34,67 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @version: 1.0
- * @date 2015年7月10日
- */
+
 public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcartItemBase {
 
     private static final String TAG = ShopcartItemBase.class.getSimpleName();
 
     protected final String uuid;
-    /**
-     * 商品信息
-     */
+
     public final T orderDish;
-    /**
-     *
-     */
+
     public final ItemMetadata metadata;
     protected final ShopcartItemBase<?> parent;
-    /**
-     * 优惠信息
-     */
+
     private TradePrivilege privilege;
-    /**
-     * 属性。做法、口味
-     */
+
     private List<OrderProperty> properties;
-    /**
-     * 加料列表
-     */
+
     private Map<String, ExtraShopcartItem> extraItemMap;
-    /**
-     * 此条目所属的桌台信息记录的UUID
-     */
+
     private String tradeTableUuid;
-    /**
-     * 此条目所属的桌台信息记录的ID
-     */
+
     private Long tradeTableId;
-    /**
-     * 有效(无效)状态
-     */
+
     private StatusFlag statusFlag;
-    /**
-     * 导致无效的原因类型
-     */
+
     private InvalidType invalidType;
-    /**
-     * 返回此条目的来源条目ID(即是由哪个条目进行拆单或修改而来的)
-     */
+
     private Long relateTradeItemId;
     private String relateTradeItemUuid;
-    /**
-     *
-     */
+
     private boolean selected;
-    /**
-     * 购物车菜品加入循序
-     */
+
     private int index;
 
-    /**
-     * 是否打包
-     */
+
 
     private boolean isPack = false;
 
-    /**
-     * 是否退回库存
-     */
+
     private boolean isReturnInventory;
 
-    /**
-     * 优惠券信息
-     */
+
     private CouponPrivilegeVo couponPrivilegeVo;
-    /**
-     * 团餐或者自助餐组点菜品
-     */
+
     private boolean isGroupDish = false;
 
-    /**
-     * 座位号
-     */
+
     private TradeItemExtraDinner tradeItemExtraDinner;
 
-    /**
-     * 催菜列表
-     */
+
     private List<TradeItemOperation> tradeItemOperations;
 
     private ShopcartItemType shopcartItemType = ShopcartItemType.COMMON;
 
-    //主单批量菜关联
-    private List<TradeItemMainBatchRel> tradeItemMainBatchRelList;
+        private List<TradeItemMainBatchRel> tradeItemMainBatchRelList;
 
     private List<TradeUser> tradeItemUserList;
 
     public Long creatorId;
     public String creatorName;
-    //次卡项目优惠vo
-    CardServicePrivilegeVo cardServicePrivilegeVo;
-    //小程序优惠vo
-    AppletPrivilegeVo appletPrivilegeVo;
+        CardServicePrivilegeVo cardServicePrivilegeVo;
+        AppletPrivilegeVo appletPrivilegeVo;
 
     protected ShopcartItemBase(String uuid, T orderDish) {
         this(uuid, orderDish, null);
@@ -304,20 +262,12 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         metadata.memo = memo;
     }
 
-    /**
-     * 修改商品的单价
-     *
-     * @param price
-     */
+
     public void changePrice(BigDecimal price) {
         orderDish.changePrice(price);
     }
 
-    /**
-     * 修改商品名称
-     *
-     * @param name name
-     */
+
     public void changeName(String name) {
         orderDish.setDefineName(name);
     }
@@ -330,8 +280,7 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
     @Override
     public void setIssueStatus(IssueStatus issueStatus) {
         metadata.issueStatus = issueStatus;
-        //更新加料的打印状态
-        if (Utils.isNotEmpty(getExtraItems())) {
+                if (Utils.isNotEmpty(getExtraItems())) {
             for (ExtraShopcartItem extraShopcartItem : getExtraItems()) {
                 extraShopcartItem.setIssueStatus(issueStatus);
             }
@@ -341,8 +290,7 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
     @Override
     public void setIssueStatusWithoutSetmeal(IssueStatus issueStatus) {
         metadata.issueStatus = issueStatus;
-        //更新加料的打印状态
-        if (Utils.isNotEmpty(getExtraItems())) {
+                if (Utils.isNotEmpty(getExtraItems())) {
             for (ExtraShopcartItem extraShopcartItem : getExtraItems()) {
                 extraShopcartItem.setIssueStatus(issueStatus);
             }
@@ -398,21 +346,13 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         this.selected = isSelected;
     }
 
-    /**
-     * 获取不受父条目影响的单份数量
-     *
-     * @return
-     */
+
     @Override
     public BigDecimal getSingleQty() {
         return orderDish.getSingleQty();
     }
 
-    /**
-     * 获取受父条目影响的数量
-     *
-     * @return
-     */
+
     @Override
     public BigDecimal getTotalQty() {
         return orderDish.getTotalQty();
@@ -462,46 +402,31 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         return null;
     }
 
-    /**
-     * 设置加料数量
-     *
-     * @param extra
-     * @param singleQty 为0时表示删除加料
-     */
+
     public void setExtra(OrderExtra extra, BigDecimal singleQty) {
         String skuUuid = extra.getSkuUuid();
         if (singleQty == null || singleQty.compareTo(BigDecimal.ZERO) < 0) {
-            // 删除加料条目
-            extraItemMap.remove(skuUuid);
+                        extraItemMap.remove(skuUuid);
         } else if (singleQty.compareTo(BigDecimal.ZERO) == 0) {
-            // 修改加料条目的数量
-            ExtraShopcartItem extraItem = extraItemMap.get(skuUuid);
+                        ExtraShopcartItem extraItem = extraItemMap.get(skuUuid);
             BigDecimal totalQty = ShopcartItemUtils.computeTotalQty(singleQty, this);
             extraItem.setIsGroupDish(isGroupDish);
             extraItem.getOrderDish().setQty(singleQty, totalQty);
-            // 删除加料条目
-            extraItemMap.remove(skuUuid);
+                        extraItemMap.remove(skuUuid);
         } else {
             ExtraShopcartItem extraItem = extraItemMap.get(skuUuid);
             if (extraItem == null) {
-                // 新增加料条目
-                String extraItemUuid = SystemUtils.genOnlyIdentifier();
+                                String extraItemUuid = SystemUtils.genOnlyIdentifier();
                 extraItem = new ExtraShopcartItem(extraItemUuid, extra, this);
                 extraItemMap.put(skuUuid, extraItem);
             }
             extraItem.setIsGroupDish(isGroupDish);
-            // 修改加料条目的数量
-            BigDecimal totalQty = ShopcartItemUtils.computeTotalQty(singleQty, this);
+                        BigDecimal totalQty = ShopcartItemUtils.computeTotalQty(singleQty, this);
             extraItem.getOrderDish().setQty(singleQty, totalQty);
         }
     }
 
-    /**
-     * 获取加料的数量
-     *
-     * @param extra
-     * @return
-     */
+
     public BigDecimal getExtraQty(OrderExtra extra) {
         String skuUuid = extra.getSkuUuid();
         ExtraShopcartItem extraItem = extraItemMap.get(skuUuid);
@@ -514,22 +439,14 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         return qty;
     }
 
-    /**
-     * 修改数量。此方法将同时修改受父条目影响的数量以及子条目的数量
-     *
-     * @param singleQty
-     */
+
     public void changeQty(BigDecimal singleQty) {
-        /*
-         * 1、本条目为非称重商品时：加料总数量=加料数量*本商品总数量
-         * 2、本条目为称重商品但父条目为非称重商品时：加料总数量=加料数量*父条目总数量
-         */
+
         BigDecimal totalQty = ShopcartItemUtils.computeTotalQty(singleQty, parent);
         orderDish.setQty(singleQty, totalQty);
 
         BigDecimal qtyRef = ShopcartItemUtils.getParentQtyRef(this);
-        if (qtyRef != null && qtyRef.compareTo(BigDecimal.ZERO) != 0) { //update by Zhaos 之前判断为one
-            for (ExtraShopcartItem extraItem : extraItemMap.values()) {
+        if (qtyRef != null && qtyRef.compareTo(BigDecimal.ZERO) != 0) {             for (ExtraShopcartItem extraItem : extraItemMap.values()) {
                 BigDecimal extraSingleQty = extraItem.getSingleQty();
                 BigDecimal extraTotalQty = extraSingleQty.multiply(qtyRef);
                 extraItem.getOrderDish().setQty(extraSingleQty, extraTotalQty);
@@ -659,19 +576,12 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         return true;
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年11月3日
-     */
+
     static class ItemMetadata {
-        /**
-         * 出单状态
-         */
+
         private IssueStatus issueStatus = IssueStatus.DIRECTLY;
 
-        /**
-         * 备注
-         */
+
         private String memo;
     }
 
@@ -750,8 +660,7 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         if (getStatusFlag() == StatusFlag.INVALID) {
             return CANNOT_WAKE_UP;
         }
-        //数目为0的才，不能等叫
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return CANNOT_WAKE_UP;
         }
         if (getIssueStatus() == IssueStatus.PAUSE) {
@@ -775,8 +684,7 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         if (getStatusFlag() == StatusFlag.INVALID) {
             return false;
         }
-        //数目为0的才，不能等叫
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return false;
         }
 
@@ -803,12 +711,10 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         if (getStatusFlag() == StatusFlag.INVALID) {
             return false;
         }
-        //数目为0的才，不能起菜
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return false;
         }
-        // 已上菜的菜品，不能起菜
-        if (getServingStatus() == ServingStatus.SERVING) {
+                if (getServingStatus() == ServingStatus.SERVING) {
             return false;
         }
 
@@ -842,12 +748,10 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         if (getStatusFlag() == StatusFlag.INVALID) {
             return false;
         }
-        //数目为0的才，不能起菜
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return false;
         }
-        // 已上菜的菜品，不能起菜
-        if (getServingStatus() == ServingStatus.SERVING) {
+                if (getServingStatus() == ServingStatus.SERVING) {
             return false;
         }
 
@@ -878,8 +782,7 @@ public abstract class ShopcartItemBase<T extends OrderDish> implements IShopcart
         boolean needAdd = false;
         switch (opType) {
             case WAKE_UP:
-                // 已有未保存的等叫，就不能再添加等叫了，以免重复
-                if (!hasWakeUp()) {
+                                if (!hasWakeUp()) {
                     needAdd = true;
                 }
                 break;

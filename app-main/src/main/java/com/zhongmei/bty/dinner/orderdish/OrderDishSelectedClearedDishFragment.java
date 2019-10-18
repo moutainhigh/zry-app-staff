@@ -32,23 +32,17 @@ import org.androidannotations.annotations.ViewById;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.dinner_orderdish_selected_cleared_dish)
 public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment implements DishClearStatusManager.IViewer {
     @ViewById(R.id.gv_content)
-    TouchGridView gvContent;//gridview
-
+    TouchGridView gvContent;
     @ViewById(R.id.cb_select_all)
-    CheckBox cbSelectAll;//全选、取消全选
-
+    CheckBox cbSelectAll;
     @ViewById(R.id.title)
-    TextView titleTV;//标题
-
+    TextView titleTV;
     @ViewById(R.id.btn_bottom)
-    Button btnBottom;//确定按钮
-
+    Button btnBottom;
     private DishClearStatusManager mDishClearStatusManager;
 
     private OrderDishClearStatusAdapter mAdapter;
@@ -63,8 +57,7 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
 
     private List<PropertyGroupVo<DishStandardVo>> mStandardGroupList;
 
-    //设置初始数据
-    public void setData(DishVo dishVo) {
+        public void setData(DishVo dishVo) {
         mDishVo = dishVo;
         if (dishVo != null && dishVo.getSelectedDishs() != null) {
             oldSelectedDishShop.clear();
@@ -72,13 +65,11 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
         }
     }
 
-    //确定时回调接口
-    public void setOnCloseListener(OnCloseListener onCloseListener) {
+        public void setOnCloseListener(OnCloseListener onCloseListener) {
         mOnCloseListener = onCloseListener;
     }
 
-    //取消选择回调接口
-    public void setCancelSelectedListener(DinnerDishBatchUpdateDishStatusFragment.CancelSelectedListener cancelSelectedListener) {
+        public void setCancelSelectedListener(DinnerDishBatchUpdateDishStatusFragment.CancelSelectedListener cancelSelectedListener) {
         this.mCancelSelectedListener = cancelSelectedListener;
     }
 
@@ -116,9 +107,7 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
     void clickBottomButton() {
         if (mAdapter != null) {
             List<DishAndStandards> selectedProperty = mAdapter.getSelectedProperty();
-            clearOldData();//删除已经选择的数据
-            if (selectedProperty != null && selectedProperty.size() > 0) {//如果有选择数据
-                List<DishShop> list = new ArrayList<DishShop>(selectedProperty.size());
+            clearOldData();            if (selectedProperty != null && selectedProperty.size() > 0) {                List<DishShop> list = new ArrayList<DishShop>(selectedProperty.size());
                 for (DishAndStandards dishStandard : selectedProperty) {
                     list.add(dishStandard.getDishShop());
                 }
@@ -126,8 +115,7 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
                     this.mDishVo.setSelected(true);
                     this.mDishVo.setSelectedDishs(list);
                 }
-            } else {//如果没有选择
-                this.mDishVo.setSelected(false);
+            } else {                this.mDishVo.setSelected(false);
                 this.mDishVo.setSelectedDishs(null);
             }
             if (this.mOnCloseListener != null) {
@@ -137,8 +125,7 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
         }
     }
 
-    //清空已经选择的数据
-    private void clearOldData() {
+        private void clearOldData() {
         if (!oldSelectedDishShop.isEmpty()) {
             for (DishShop shop : oldSelectedDishShop) {
                 if (mCancelSelectedListener != null)
@@ -160,8 +147,7 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
             btnBottom.setEnabled(true);
             mAdapter.setSelectedProperty(selectProperty);
 
-            // 仅仅是全选按钮状态
-            cbSelectAll.setOnCheckedChangeListener(null);
+                        cbSelectAll.setOnCheckedChangeListener(null);
             if (selectProperty.size() == mAdapter.getCount()) {
                 cbSelectAll.setChecked(true);
                 cbSelectAll.setText(R.string.order_dish_cancel_select_all);
@@ -201,8 +187,7 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
                         dataList.add(dishStand);
                     }
                 }
-                //如果已经有选择
-                if (!dataList.isEmpty()) {
+                                if (!dataList.isEmpty()) {
                     mAdapter.setSelectedProperty(dataList);
                 }
             }
@@ -213,8 +198,7 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
         setCheckAllAndClearButtonStatus();
     }
 
-    //选择框切换回调接口
-    private CompoundButton.OnCheckedChangeListener mCheckedChangeListener =
+        private CompoundButton.OnCheckedChangeListener mCheckedChangeListener =
             new CompoundButton.OnCheckedChangeListener() {
 
                 @Override
@@ -226,13 +210,11 @@ public class OrderDishSelectedClearedDishFragment extends BasicDialogFragment im
                     }
                     if (mAdapter != null) {
                         List<DishAndStandards> dataSet = null;
-                        //如果全选
-                        if (isChecked) {
+                                                if (isChecked) {
                             dataSet = new ArrayList<DishAndStandards>(mAdapter.getDataSet());
                         }
                         mAdapter.setSelectedProperty(dataSet);
-                        // mDishClearStatusManager.filter(mClearStatus, null);
-                    }
+                                            }
                 }
             };
 }

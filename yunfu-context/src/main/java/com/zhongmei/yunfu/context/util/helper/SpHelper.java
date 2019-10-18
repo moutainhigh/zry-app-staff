@@ -11,9 +11,7 @@ import com.zhongmei.yunfu.context.base.BaseApplication;
 
 import java.util.Set;
 
-/**
- * @date 2014-10-20
- */
+
 public class SpHelper {
 
     private static SpHelper mInstance;
@@ -38,30 +36,18 @@ public class SpHelper {
     public static final String SP_IP_ADDRESS = "ip_address";
     public static final String SP_CUR_BUFFET_UUID = "cur_buffet_uuid";
 
-    //人脸采集
-    public static final String FACE_COLLECTED = "allow_face_collection";
-    //顾客到店提醒
-    public static final String CUSTOMER_GOIN_REMIND = "customer_go_in_remind";
-    //微信提醒
-    public static final String WEIXIN_REMIND = "weixin_remind";
-    //人脸识别提醒
-    public static final String FACE_REMIND = "face_remind";
-    //Ibeacon
-    public static final String IBEACON_REMIND = "Ibeacon_remind";
-    // 顾客到店提醒标识
-    public static final String CUSTOMER_ARRIVE_DOT = "customer_arrive_dot";
-    // 顾客到店滚动提醒开关
-    public static final String CUSTOMER_ARRIVE_NOTICE = "customer_arrive_notice";
-    //正餐点餐弹起操作栏
-    public static final String DINNER_ORDER_DISH_OPEN_OPERATION = "dinner_order_dish_open_operation";
-    //正餐做法分类折叠
-    public static final String DINNER_FOLD_PRACTICE = "dinner_fold_practice";
-    //估清自动排到后面
-    public static final String DINNER_CLEAR_SORT_SETTING = "dinner_clear_sort_setting";
-    //菜品语言设置
-    public static final String DINNER_DISH_LANGUAGE = "dinner_dish_language";
-    //钱箱关联的打印机SP对应的key
-    public static final String SETTING_MONEY_BOX_IP = "setting_money_box_ip";
+        public static final String FACE_COLLECTED = "allow_face_collection";
+        public static final String CUSTOMER_GOIN_REMIND = "customer_go_in_remind";
+        public static final String WEIXIN_REMIND = "weixin_remind";
+        public static final String FACE_REMIND = "face_remind";
+        public static final String IBEACON_REMIND = "Ibeacon_remind";
+        public static final String CUSTOMER_ARRIVE_DOT = "customer_arrive_dot";
+        public static final String CUSTOMER_ARRIVE_NOTICE = "customer_arrive_notice";
+        public static final String DINNER_ORDER_DISH_OPEN_OPERATION = "dinner_order_dish_open_operation";
+        public static final String DINNER_FOLD_PRACTICE = "dinner_fold_practice";
+        public static final String DINNER_CLEAR_SORT_SETTING = "dinner_clear_sort_setting";
+        public static final String DINNER_DISH_LANGUAGE = "dinner_dish_language";
+        public static final String SETTING_MONEY_BOX_IP = "setting_money_box_ip";
 
     public static final String APP_UPDATE_NOT_SECOND_REMIND = "app_update_not_second_remind";
 
@@ -207,37 +193,17 @@ public class SpHelper {
         return mContext.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE).edit();
     }
 
-    /**
-     * @Title: getStringSet
-     * @Description: 获取数组
-     * @Param @param key
-     * @Param @param values
-     * @Param @return TODO
-     * @Return Set<String> 返回类型
-     */
+
     public Set<String> getStringSet(String key, Set<String> values) {
         return getSharedPreferences().getStringSet(key, values);
     }
 
-    /**
-     * @Title: remove
-     * @Description: 移除某一个键值对
-     * @Param @param key
-     * @Param @return TODO
-     * @Return boolean 返回类型
-     */
+
     public boolean remove(String key) {
         return getSharedPreferencesEditor().remove(key).commit();
     }
 
-    /**
-     * @Title: putStringSet
-     * @Description: 存储set数组
-     * @Param @param key
-     * @Param @param values
-     * @Param @return TODO
-     * @Return boolean 返回类型
-     */
+
     public boolean putStringSet(String key, Set<String> values) {
         return getSharedPreferencesEditor().putStringSet(key, values)
                 .commit();

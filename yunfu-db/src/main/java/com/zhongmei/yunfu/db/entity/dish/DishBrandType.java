@@ -8,82 +8,52 @@ import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.Bool;
 
-/**
- * DishBrandType is a ORMLite bean type. Corresponds to the database table "dish_brand_type"
- */
+
 @DatabaseTable(tableName = "dish_brand_type")
 public class DishBrandType extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "dish_brand_type"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * alias_name
-         */
+
         public static final String aliasName = "alias_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * dish_type_desc
-         */
+
         public static final String dishTypeDesc = "dish_type_desc";
 
-        /**
-         * enabled_flag
-         */
+
         public static final String enabledFlag = "enabled_flag";
 
-        /**
-         * is_order
-         */
+
         public static final String isOrder = "is_order";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * parent_id
-         */
+
         public static final String parentId = "parent_id";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * type_code
-         */
+
         public static final String typeCode = "type_code";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * uuid
-         */
+
         public static final String uuid = "uuid";
 
     }
@@ -113,8 +83,7 @@ public class DishBrandType extends BasicEntityBase implements ICreator, IUpdator
     private Long parentId;
 
     @DatabaseField(columnName = "sort", canBeNull = false)
-    private Integer sort;//菜品品类的sort排序值
-
+    private Integer sort;
     @DatabaseField(columnName = "type_code")
     private String typeCode;
 

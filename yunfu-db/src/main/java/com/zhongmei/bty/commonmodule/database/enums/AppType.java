@@ -4,117 +4,61 @@ import com.zhongmei.yunfu.util.ValueEnum;
 import com.zhongmei.yunfu.db.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * 性别
- */
+
 public enum AppType implements ValueEnum<Integer> {
 
-    /**
-     * iPad排队预订
-     */
+
     IPAD_QUEUE_BOOKING(0),
-    /**
-     * iPad正餐自助
-     */
+
     IPAD_DINNER_KIOSK(1),
-    /**
-     * iPad快餐自助
-     */
+
     IPAD_SNACK_KIOSK(2),
-    /**
-     * 所有安卓PAD端
-     */
+
     ANDROID_POS(5),
-    /**
-     * kmobile－ios
-     */
+
     IOS_ASSISTANT(7),
-    /**
-     * kmobile－安卓
-     */
+
     ANDROID_ASSISTANT(8),
-    /**
-     * osmobile
-     */
+
     OS_MOBILE(12),
-    /**
-     * 安卓熟客
-     */
+
     ANDROID_SHUKE(21),
-    /**
-     * ios熟客
-     */
+
     IOS_SHUKE(22),
-    /**
-     * gateway
-     */
+
     GATEWAY(30),
-    /**
-     * 微信
-     */
+
     WEHCHAT(1001),
-    /**
-     * 百度直达号
-     */
+
     BAIDU_ZHIDAHAO(1002),
-    /**
-     * 商户官网
-     */
+
     MERCHANT_HOME(1003),
-    /**
-     * 找位
-     */
+
     FIND_SEAT(1004),
-    /**
-     * 百度地图排队
-     */
+
     BAIDU_MAP_QUEUE(1005),
-    /**
-     * 百度糯米预订
-     */
+
     BAIDU_RICE_BOOKING(1006),
-    /**
-     * 百度糯米排队
-     */
+
     BAIDU_RICE_QUEUE(1007),
-    /**
-     * 百度外卖
-     */
+
     BAIDU_TAKEOUT(1008),
-    /**
-     * 呼叫中心
-     */
+
     CALL_CENTER(1009),
-    /**
-     * 支付宝
-     */
+
     ALIPAY(1010),
-    /**
-     * 百度钱包
-     */
+
     BAIDU_WALLET(1011),
-    /**
-     * 百度糯米
-     */
+
     BAIDU_RICE(1012),
-    /**
-     * 商户后台（b.kry）
-     */
+
     B_KRY(2001),
-    /**
-     * ERP
-     */
+
     ERP(3001),
-    /**
-     * SCM
-     */
+
     SCM(4001),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 
@@ -207,7 +151,7 @@ public enum AppType implements ValueEnum<Integer> {
             case BAIDU_RICE:
                 return getString(R.string.commonmodule_order_baidu_rice);
             case B_KRY:
-                return getString(R.string.commonmodule_b_kry);
+                return getString(R.string.commonmodule_b_zmyf);
             case ERP:
                 return getString(R.string.commonmodule_erp);
             case SCM:

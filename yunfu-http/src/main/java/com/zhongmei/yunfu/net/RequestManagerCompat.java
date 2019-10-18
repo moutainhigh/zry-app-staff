@@ -7,9 +7,7 @@ import com.zhongmei.OSLog;
 
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class RequestManagerCompat {
 

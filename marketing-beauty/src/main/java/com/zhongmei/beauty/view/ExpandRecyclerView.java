@@ -5,9 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ExpandRecyclerView extends RecyclerView {
     public ExpandRecyclerView(Context context) {

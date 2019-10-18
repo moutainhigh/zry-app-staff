@@ -1,15 +1,9 @@
 package com.zhongmei.yunfu.resp.data;
 
-/**
- * Gateway通用返回结果
- */
+
 
 public class GatewayTransferRespBase extends TransferResp {
 
-    //    code	Integer	是	错误码；0：成功；其他 表示异常码
-//    message	string	是	错误说明
-//    message_uuid	string	是	消息uuid
-//    result	cardInfo	是	消费卡信息
 
     private Integer code;
     private String message;

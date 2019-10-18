@@ -2,19 +2,14 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import java.util.List;
 
-/**
- * 配送订单批量查询请求体
- */
+
 
 public class DeliveryOrderListReq {
-    //品牌编号
-    private Long brandId;
+        private Long brandId;
 
-    //门店编号
-    private Long shopId;
+        private Long shopId;
 
-    //订单Id列表
-    private List<Long> orderIds;
+        private List<Long> orderIds;
 
     public Long getBrandId() {
         return brandId;

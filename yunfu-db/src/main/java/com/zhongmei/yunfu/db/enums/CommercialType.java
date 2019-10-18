@@ -4,31 +4,19 @@ import com.zhongmei.yunfu.util.ValueEnum;
 
 public enum CommercialType implements ValueEnum<Integer> {
 
-    /**
-     * 用券门店
-     */
+
     COUPON_SHOP(1),
 
-    /**
-     * 消费门店
-     */
+
     CONSUME_SHOP(2),
 
-    /**
-     * 升级会员门店
-     */
+
     MEMBER_UPGRADE_SHOP(3),
 
-    /**
-     * 会员加入门店
-     */
+
     MEMBER_JOIN_SHOP(4),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

@@ -4,10 +4,7 @@ import com.zhongmei.bty.basemodule.inventory.message.InventoryItemReq;
 
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年4月21日
- */
+
 public class TradeRefundReq {
 
     private Long tradeId;
@@ -18,8 +15,7 @@ public class TradeRefundReq {
     private String operateName;
     private boolean reviseStock;
     private List<InventoryItemReq> returnInventoryItems;
-    // v8.12.0 口碑退货理由code
-    private String cancelCode;
+        private String cancelCode;
 
     public Long getTradeId() {
         return tradeId;

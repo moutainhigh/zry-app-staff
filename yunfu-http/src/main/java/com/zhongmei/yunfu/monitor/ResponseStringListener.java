@@ -10,9 +10,7 @@ import com.zhongmei.yunfu.resp.UserActionEvent;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class ResponseStringListener<T extends IResponse> extends EventListener<String> {
 
@@ -53,8 +51,7 @@ public abstract class ResponseStringListener<T extends IResponse> extends EventL
     static public Type getSuperclassTypeParameter(Class<?> subclass) {
         Type superclass = subclass.getGenericSuperclass();
         if (superclass instanceof Class) {
-            //throw new RuntimeException("Missing type parameter.");
-            superclass = subclass.getGenericInterfaces()[0];
+                        superclass = subclass.getGenericInterfaces()[0];
         }
         ParameterizedType parameterized = (ParameterizedType) superclass;
         return $Gson$Types.canonicalize(parameterized.getActualTypeArguments()[0]);

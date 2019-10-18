@@ -22,9 +22,7 @@ import com.zhongmei.yunfu.ui.base.BaseActivity;
 import com.zhongmei.yunfu.util.DialogUtil;
 import com.zhongmei.yunfu.util.MobclickAgentEvent;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MainBaseActivity extends BaseActivity {
     private static final String TAG = MainBaseActivity.class.getSimpleName();
@@ -42,14 +40,11 @@ public class MainBaseActivity extends BaseActivity {
         Class topActivityClazz = ActivityUtil.getTopActivityClazz();
         Class clazz = getClass();
         if (topActivityClazz != null && topActivityClazz.equals(clazz)) {
-            //相等时，说明不是其他activity切换，而是其他应用导致该应用到后台
-            ActivityUtil.setTopActivityClazz(null);
+                        ActivityUtil.setTopActivityClazz(null);
         }
     }
 
-    /**
-     * 开台失败处理
-     */
+
     public void onEventMainThread(final ActionOpenTableFailed action) {
         boolean needOperate = ActivityUtils.isForeground(this, this.getClass().getName());
         if (needOperate) {
@@ -64,8 +59,7 @@ public class MainBaseActivity extends BaseActivity {
 
                                 @Override
                                 public void onClick(View arg0) {
-                                    //重试改单
-                                    MobclickAgentEvent.onEvent(MainBaseActivity.this, MobclickAgentEvent.dinnerAsyncHttpDailoRetry);
+                                                                        MobclickAgentEvent.onEvent(MainBaseActivity.this, MobclickAgentEvent.dinnerAsyncHttpDailoRetry);
                                     AsyncOpenTableResponseListener listener = new AsyncOpenTableResponseListener();
                                     AsyncNetworkManager.getInstance().retry(asyncRec, listener);
                                 }
@@ -74,8 +68,7 @@ public class MainBaseActivity extends BaseActivity {
 
                                 @Override
                                 public void onClick(View arg0) {
-                                    //忽略
-                                    MobclickAgentEvent.onEvent(MainBaseActivity.this, MobclickAgentEvent.dinnerAsyncHttpDailoIgnore);
+                                                                        MobclickAgentEvent.onEvent(MainBaseActivity.this, MobclickAgentEvent.dinnerAsyncHttpDailoIgnore);
                                 }
                             },
                             "modify_trade_failed");
@@ -93,9 +86,7 @@ public class MainBaseActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 改单打印失败处理
-     */
+
     public void onEventMainThread(final ActionModifyTradePrintFailed action) {
         if (ActivityUtils.isForeground(this, this.getClass().getName())) {
             if (action.receiptSendData == null && action.kitchenAllSendData == null
@@ -103,8 +94,7 @@ public class MainBaseActivity extends BaseActivity {
                 return;
             }
 
-            //可以重试的才弹框
-            StringBuilder sb = new StringBuilder();
+                        StringBuilder sb = new StringBuilder();
             if (action.receiptSendData != null) {
                 sb.append(action.receiptTicketType.value() + "、");
             }
@@ -132,9 +122,7 @@ public class MainBaseActivity extends BaseActivity {
     }
 
 
-    /**
-     * 服务铃播放结束
-     */
+
     public void onEventMainThread(SpeechCallStopEvent selectEvent) {
         MediaPlayerQueueManager.getInstance().onCompletion(null);
     }

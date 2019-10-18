@@ -4,10 +4,7 @@ import java.util.List;
 
 import com.zhongmei.bty.basemodule.trade.bean.IZone;
 
-/**
- * @version: 1.0
- * @date 2015年8月19日
- */
+
 public class ZoneModel implements IZone {
 
     private Long id;

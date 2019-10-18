@@ -94,10 +94,8 @@ public class CountryGridAdapter extends BaseAdapter implements StickyGridHeaders
                 if (mListener != null) {
                     item.isSelected = true;
                     if (ErpConstants.isChinese()) {
-                        mListener.onSelected(item.id, item.countryZh, item.erpCurrency);//modify v8.3
-                    } else {
-                        mListener.onSelected(item.id, item.countryEn, item.erpCurrency);//modify v8.3
-                    }
+                        mListener.onSelected(item.id, item.countryZh, item.erpCurrency);                    } else {
+                        mListener.onSelected(item.id, item.countryEn, item.erpCurrency);                    }
                 }
             }
         });
@@ -129,16 +127,12 @@ public class CountryGridAdapter extends BaseAdapter implements StickyGridHeaders
         public TextView mTextView;
     }
 
-    /**
-     * 根据gridView的当前位置获取分类的首字母的Char ascii值
-     */
+
     public int getSectionForPosition(int position) {
         return list.get(position).sortLetters.charAt(0);
     }
 
-    /**
-     * 根据分类的首字母的Char ascii值获取其第一次出现该首字母的位置
-     */
+
     public int getPositionForSection(int section) {
         for (int i = 0; i < getCount(); i++) {
             String sortStr = list.get(i).sortLetters;
@@ -153,19 +147,12 @@ public class CountryGridAdapter extends BaseAdapter implements StickyGridHeaders
 
     @Override
     public long getHeaderId(int position) {
-        // TODO Auto-generated method stub
-        return list.get(position).section;
+                return list.get(position).section;
     }
 
 
     public interface OnItemSelectedListener {
-        /**
-         * 选择事件
-         *
-         * @param countryId   国籍id
-         * @param name        国籍名
-         * @param erpCurrency 国籍对象
-         */
+
         void onSelected(Long countryId, String name, ErpCurrency erpCurrency);
     }
 

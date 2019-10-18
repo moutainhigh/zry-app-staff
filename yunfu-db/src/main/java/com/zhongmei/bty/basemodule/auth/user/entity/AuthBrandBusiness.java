@@ -6,41 +6,26 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * 品牌业务表
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "auth_brand_business")
 public class AuthBrandBusiness extends BasicEntityBase implements ICreator, IUpdator {
 
-    /**
-     * The columns of table "auth_brand_business"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * business_id
-         */
+
         public static final String businessId = "business_id";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

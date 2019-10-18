@@ -7,73 +7,47 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.IsDelete;
 
-/**
- * CommercialArea is a ORMLite bean type. Corresponds to the database table "commercial_area"
- */
+
 @DatabaseTable(tableName = "table_area")
 public class CommercialArea extends AbsBasicEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "commercial_area"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * area_code
-         */
+
         public static final String areaCode = "area_code";
 
-        /**
-         * area_name
-         */
+
         public static final String areaName = "area_name";
 
 
-        /**
-         * floor
-         */
+
         public static final String floor = "floor";
 
-        /**
-         * is_delete
-         */
+
         public static final String isDelete = "is_delete";
 
-        /**
-         * is_smoking
-         */
+
         public static final String isSmoking = "is_smoking";
 
-        /**
-         * memo
-         */
+
         public static final String memo = "memo";
 
-        /**
-         * table_type_id
-         */
+
         public static final String tableTypeId = "table_type_id";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * shop_identy
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * device_identy
-         */
+
         String deviceIdenty = "device_identy";
 
     }

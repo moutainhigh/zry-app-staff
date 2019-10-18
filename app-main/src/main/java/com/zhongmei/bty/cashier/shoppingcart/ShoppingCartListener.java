@@ -22,7 +22,6 @@ public class ShoppingCartListener implements ModifyShoppingCartListener {
 
     @Override
     public void addToShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo, ShopcartItem mShopcartItem) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -33,26 +32,22 @@ public class ShoppingCartListener implements ModifyShoppingCartListener {
 
     @Override
     public void addTempSetmealData(IShopcartItem mShopcartItem) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeSetmealData() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeSetmealChild(IShopcartItem OrderDishshopVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo,
                                    IShopcartItemBase mShopcartItemBase) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -63,68 +58,57 @@ public class ShoppingCartListener implements ModifyShoppingCartListener {
 
     @Override
     public void orderDiscount(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeDiscount(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo, IShopcartItem mShopcartItem) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void updateDish(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void clearShoppingCart() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void setRemark(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeRemark(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo, IShopcartItem mShopcartItem) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeSetmealRemark(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo,
                                     ISetmealShopcartItem setmeal) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void setCardNo(String cardNo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void setOrderUserMessage(TakeOutInfo entity) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void setCustomer(TradeCustomer customer) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void batchPrivilege(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -135,13 +119,11 @@ public class ShoppingCartListener implements ModifyShoppingCartListener {
 
     @Override
     public void resetOrder(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void setCouponPrivi1lege(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -153,37 +135,31 @@ public class ShoppingCartListener implements ModifyShoppingCartListener {
 
     @Override
     public void setIntegralCash(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeIntegralCash(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void updateShoppingcartData() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void separateOrder(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void addExtraCharge(TradeVo mTradeVo, Map<Long, ExtraCharge> arrayExtraCharge) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeExtraCharge(TradeVo mTradeVo, Long extraChargeId) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -194,33 +170,28 @@ public class ShoppingCartListener implements ModifyShoppingCartListener {
 
     @Override
     public void addMarketActivity(TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
 
     }
 
     @Override
     public void removeMarketActivity(TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
 
     }
 
     @Override
     public void exception(String message) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void addWeiXinCouponsPrivilege(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void removeWeiXinCouponsPrivilege(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-        // TODO Auto-generated method stub
 
     }
 

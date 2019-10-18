@@ -9,13 +9,10 @@ import android.widget.Button;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DrawableCenterButton extends Button {
-    private float drawableCenterMargin = -1f;//-1默认表示居中
-
+    private float drawableCenterMargin = -1f;
     public DrawableCenterButton(Context context) {
         this(context, null);
     }

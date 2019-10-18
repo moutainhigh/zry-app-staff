@@ -55,10 +55,7 @@ import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.Timer;
 
-/**
- * 移动支付主界面，支持一码付
- * Created on 2018/6/4.
- */
+
 public class MobilePayDialog extends BasicDialogFragment implements CompoundButton.OnCheckedChangeListener, IPayConstParame, View.OnClickListener {
 
     public static final String TAG = MobilePayDialog.class.getSimpleName();
@@ -85,30 +82,21 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
 
     private static final int INTERVALTIME = 3000;
 
-    private volatile int mMaxTimeoutMs = 0;// 秒表到记时
-
-    private static final int TIME_OUT_MS = 291;// 超时秒数
-
+    private volatile int mMaxTimeoutMs = 0;
+    private static final int TIME_OUT_MS = 291;
     private static final int WHAT_PAYSTATUS = 1;
 
     private static final int WHAT_UPDATE_TIME = 2;
 
-    private static final int WHAT_BARCODE_TIMEOUT = 3;// 二维码超时
-
-    private static final int WHAT_SHOW_PAYSTATUS_BUTTON = 5;//显示获取支付状态按钮
-
+    private static final int WHAT_BARCODE_TIMEOUT = 3;
+    private static final int WHAT_SHOW_PAYSTATUS_BUTTON = 5;
     private static int BARCODE_FAIL = 2;
-    //扫描成功后正在支付中
-    private static int BARCODE_PAYING = 3;
+        private static int BARCODE_PAYING = 3;
 
-    private boolean isBQ = false;// 是否已经生成过二维码
-
-    private boolean isOnPaying = false;// 是否正在支付
-
-    private Timer mUpdateTimeTimer;//超时计时器
-
-    private int requestPayStatusCount = 0;// 请求支付状态次数
-
+    private boolean isBQ = false;
+    private boolean isOnPaying = false;
+    private Timer mUpdateTimeTimer;
+    private int requestPayStatusCount = 0;
     private long mCurrentPaymentItemId;
 
     private String mCurrentPaymentItemUuid = null;
@@ -121,8 +109,7 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
 
     private PayModelItem mPayModelItem;
 
-    private String mTimeOutFormat;//add v8.15
-
+    private String mTimeOutFormat;
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(getActivity(), getTheme());
@@ -174,8 +161,7 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         if (mPayModelItem != null) {
             mTvAmount.setText(getString(R.string.pay_for) + " " + CashInfoManager.formatCash(mPayModelItem.getUsedValue().doubleValue()));
         }
-        mTimeOutFormat = getResources().getString(R.string.alipaytimeout);//二维码倒记时格式
-        this.registerEventBus();
+        mTimeOutFormat = getResources().getString(R.string.alipaytimeout);        this.registerEventBus();
         return view;
     }
 
@@ -187,8 +173,7 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
 
     @Override
     public void onStop() {
-        stopUpdateTimeTimer();//add v8.15
-        super.onStop();
+        stopUpdateTimeTimer();        super.onStop();
     }
 
     @Override
@@ -204,8 +189,7 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
     }
 
     void bindView(View container) {
-        mDoPayApi.setCurrentPaymentInfoId(mPaymentInfo.getId());//设置当前支付id
-        mIbClose = (ImageButton) container.findViewById(R.id.back);
+        mDoPayApi.setCurrentPaymentInfoId(mPaymentInfo.getId());        mIbClose = (ImageButton) container.findViewById(R.id.back);
         mTvTitle = (TextView) container.findViewById(R.id.tv_title);
         mTvAmount = (CurrencyTextView) container.findViewById(R.id.tv_amount);
         mRgLayout = (RadioGroup) container.findViewById(R.id.rg_scan_type);
@@ -232,15 +216,12 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
             mRbScan.setChecked(false);
             mRbCode.setChecked(true);
-        } else {//默认扫码枪
-            mRbScan.setChecked(true);
+        } else {            mRbScan.setChecked(true);
             mRbCode.setChecked(false);
         }
     }
 
-    /**
-     * 显示注销对话框
-     */
+
     private void showHintDialog() {
         String html = "<b>" + getString(R.string.pay_online_dialog_title) + "</b><br/>";
         html += "<small>" + getString(R.string.pay_online_exit_scan_dialog_hint1) + "</small><br/>";
@@ -280,7 +261,6 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
             mRbScan.setVisibility(View.VISIBLE);
             scanPayFragment = MobilePayScanFragment.newInstance(mPaymentInfo, mobilePayCallBack);
             replaceChildFragment(R.id.fl_fragment, scanPayFragment, MobilePayScanFragment.TAG);
-            // updateMiniDiplay(mCurrentScanType, null);
 
         } else if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
             stopUpdateTimeTimer();
@@ -313,8 +293,7 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         }
     }
 
-    //让生成的二维码失效
-    public void clearBarCode() {
+        public void clearBarCode() {
         if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE && isBQ) {
             Message message = new Message();
             message.what = WHAT_BARCODE_TIMEOUT;
@@ -324,10 +303,7 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         }
     }
 
-    /**
-     * @Description: 刷新未支付或找零
-     * @Return void 返回类型
-     */
+
     public void onEventMainThread(ExemptEventUpdate event) {
         if (this.isAdded() && !this.isHidden()) {
             if (mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_SHOP) {
@@ -336,34 +312,23 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         }
     }
 
-    /**
-     * 接收推送消息
-     */
+
     public void onEventMainThread(PushPayRespEvent event) {
-        // 收到长连接发送过来的通知。
-        try {
-            //PLog.d(PLog.TAG_CALLPRINT_KEY, "info:推送v3第三方支付:时间戳:" + System.currentTimeMillis() + ",TradeUuid:" + event.getTradeUuid() + ",position:" + TAG + "->onEventMainThread()");
-            PayResp result = event.getPushPayMent().getContent();
-            // 3成功
-            mDoPayApi.doVerifyPayResp(getActivity(), mPaymentInfo, result, onlinePayCallback);// 处理收银结果
-        } catch (Exception e) {
+                try {
+                        PayResp result = event.getPushPayMent().getContent();
+                        mDoPayApi.doVerifyPayResp(getActivity(), mPaymentInfo, result, onlinePayCallback);        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * 取消查询订单状态
-     */
+
     private void stopGetPayStatus() {
-        RequestManager.cancelAll("paystatus");// 移除网络请求
-        if (mHandler != null) {
+        RequestManager.cancelAll("paystatus");        if (mHandler != null) {
             mHandler.removeMessages(WHAT_PAYSTATUS);
         }
     }
 
-    /**
-     * 发送获取订单状态消息
-     */
+
     private void sendGetPayStatusMessage() {
         Message message = new Message();
         message.what = WHAT_PAYSTATUS;
@@ -378,15 +343,13 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
             mHandler.sendMessageDelayed(message, 5000);
 
         } else if (requestPayStatusCount == 0) {
-            //如果是付款码首次轮训等待3秒，如果是被扫等待2秒 modify v8.11
-            if (mCurrentScanType == ONLIEN_SCAN_TYPE_ACTIVE) {
+                        if (mCurrentScanType == ONLIEN_SCAN_TYPE_ACTIVE) {
                 mHandler.sendMessageDelayed(message, 2000);
             } else {
                 mHandler.sendMessageDelayed(message, INTERVALTIME);
             }
         } else {
-            //前30次轮训间隔半秒 modify v8.11
-            mHandler.sendMessageDelayed(message, 500);
+                        mHandler.sendMessageDelayed(message, 500);
         }
         requestPayStatusCount++;
     }
@@ -404,10 +367,8 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         mPaymentInfo.getOtherPay().clear();
         mPaymentInfo.getOtherPay().addPayModelItem(mPayModelItem);
         mCurrentPaymentItemUuid = mPayModelItem.getUuid();
-        mDoPayApi.setOnlinePaymentItemUuid(mPayModelItem.getUuid());//add 20170525 默认当前支付的uuid(解决超时情况有推送结果但是没有出票问题)
-        codePayFragment.showBarcodeType(ShowBarcodeView.SHOW_QR_CODE_ING);
-        //生成二维码
-        mDoPayApi.getOnlinePayBarcode(getActivity(), mPaymentInfo, mPayModelItem, onlinePayCallback);
+        mDoPayApi.setOnlinePaymentItemUuid(mPayModelItem.getUuid());        codePayFragment.showBarcodeType(ShowBarcodeView.SHOW_QR_CODE_ING);
+                mDoPayApi.getOnlinePayBarcode(getActivity(), mPaymentInfo, mPayModelItem, onlinePayCallback);
     }
 
     public void doPayByAuthCode(String authCode, PayModeId payModeId) {
@@ -430,13 +391,11 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         mPaymentInfo.getOtherPay().clear();
         mPaymentInfo.getOtherPay().addPayModelItem(mPayModelItem);
         mCurrentPaymentItemUuid = mPayModelItem.getUuid();
-        mDoPayApi.setOnlinePaymentItemUuid(mPayModelItem.getUuid());//add 20170525 默认当前支付的uuid(解决超时情况有推送结果但是没有出票问题)
-        mDoPayApi.onlinePayByAuthCode(getActivity(), mPaymentInfo, mPayModelItem, onlinePayCallback);
+        mDoPayApi.setOnlinePaymentItemUuid(mPayModelItem.getUuid());        mDoPayApi.onlinePayByAuthCode(getActivity(), mPaymentInfo, mPayModelItem, onlinePayCallback);
     }
 
     private void getResult() {
-        //没有支付明细ID 或者界面关闭 不轮询
-        if (!DoPayApi.OnlineDialogShowing || mCurrentPaymentItemUuid == null) {
+                if (!DoPayApi.OnlineDialogShowing || mCurrentPaymentItemUuid == null) {
             return;
         }
         mDoPayApi.getOnlinePayState(getActivity(), mPaymentInfo, mCurrentPaymentItemId, mCurrentPaymentItemUuid, onlinePayCallback);
@@ -450,12 +409,10 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         mDoPayApi.getOnlinePayStateOfThird(getActivity(), mPaymentInfo, mCurrentPaymentItemId, mCurrentPaymentItemUuid, onlinePayCallback);
     }
 
-    //add 20171024  start 获取支付状态按钮
-    private void sendShowGetPayStateButtonMS() {
+        private void sendShowGetPayStateButtonMS() {
         Message message = new Message();
         message.what = WHAT_SHOW_PAYSTATUS_BUTTON;
-        mHandler.sendMessageDelayed(message, 1000 * 12);//等待10秒显示
-    }
+        mHandler.sendMessageDelayed(message, 1000 * 12);    }
 
     private void sendBarCodeTimeOutMs() {
         requestPayStatusCount = 0;
@@ -469,19 +426,16 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         sendBarCodeTimeOutMs();
 
         sendGetPayStatusMessage();
-        //add 20171014 显示获取状态按钮
-        sendShowGetPayStateButtonMS();
+                sendShowGetPayStateButtonMS();
     }
 
-    //开启超时到计时
-    private void startUpdateTimeTimer() {
+        private void startUpdateTimeTimer() {
         stopUpdateTimeTimer();
         mUpdateTimeTimer = new Timer();
         mUpdateTimeTimer.scheduleAtFixedRate(new UpdateTimeTask(), 0, 1000);
     }
 
-    //停止计时
-    private void stopUpdateTimeTimer() {
+        private void stopUpdateTimeTimer() {
         if (mUpdateTimeTimer != null) {
             mUpdateTimeTimer.cancel();
             mHandler.removeMessages(WHAT_UPDATE_TIME);
@@ -489,32 +443,12 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         }
     }
 
-    // 刷新2屏
-    private void updateMiniDiplay(int payWay, Bitmap bitmap) {
+        private void updateMiniDiplay(int payWay, Bitmap bitmap) {
         updateMiniDiplayWithUrl(payWay, null, bitmap, false);
     }
 
     private void updateMiniDiplayWithUrl(int payWay, String codeUrl, Bitmap bitmap, boolean isUseUrl) {
-        /*try {
-            //mLastBarcode = bitmap;
-            DisplayBarcode dBarcode =
-                    DisplayServiceManager.buildDBarcode(payWay,
-                            String.valueOf(mPayModelItem.getUsedValue()),
-                            bitmap,
-                            mPayModelItem.getPayMode().value());
-            dBarcode.setCodeUrl(codeUrl);
-            dBarcode.setUseUrl(isUseUrl);
-            if (mPayModelItem.getPayMode() == PayModeId.MOBILE_PAY)//如果是移动支付，生成副屏支持的方式
-            {
-                dBarcode.setPayType(MobliePayMenuTool.getPayTypeByScanType(payWay));
-            } else {
-                dBarcode.setPayType(MobliePayMenuTool.getPayTypeByMode(mPayModelItem.getPayMode()));
-            }
-            DisplayServiceManager.updateDisplay(getActivity().getApplicationContext(), dBarcode);
-        } catch (Exception e) {
-            // Log.e(TAG, "", e);
-            e.printStackTrace();
-        }*/
+
     }
 
 
@@ -526,8 +460,7 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
                         getResult();
                         break;
                     case WHAT_BARCODE_TIMEOUT:
-                        //如果扫码模式才刷新UI
-                        if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
+                                                if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
                             stopUpdateTimeTimer();
                             codePayFragment.hidTimeoutAlert();
                             codePayFragment.showBarcodeType(ShowBarcodeView.SHOW_QR_CODE_INVALID);
@@ -554,20 +487,16 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         }
     };
 
-    OnlinePayCallback onlinePayCallback = new OnlinePayCallback() {//在线支付回调
-
+    OnlinePayCallback onlinePayCallback = new OnlinePayCallback() {
 
         @Override
         public void onBarcodeScuess(Long paymentItemId, Bitmap bitmap, String codeUrl, boolean isCodeUrl) {
             if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
                 isBQ = true;
                 mCurrentPaymentItemId = paymentItemId;
-                // 副屏显示二维码
-                updateMiniDiplayWithUrl(mCurrentScanType, codeUrl, bitmap, true);
-                // 显示二维码
-                codePayFragment.showBarcode(bitmap);
-                // 开始轮训获取支付结果
-                startGetPayStatus();
+                                updateMiniDiplayWithUrl(mCurrentScanType, codeUrl, bitmap, true);
+                                codePayFragment.showBarcode(bitmap);
+                                startGetPayStatus();
 
                 if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
                     mMaxTimeoutMs = TIME_OUT_MS;
@@ -588,8 +517,7 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         public void onAuthCodeScuess(Long paymentItemId) {
             isOnPaying = false;
             mCurrentPaymentItemId = paymentItemId;
-            // 开始轮训获取支付结果
-            startGetPayStatus();
+                        startGetPayStatus();
         }
 
         @Override
@@ -603,13 +531,8 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
 
         @Override
         public void onPayResult(Long paymentItemId, int payStatus) {
-            if (TradePayStatus.PAID.value() == payStatus) {//支付成功
-                DoPayApi.OnlineDialogShowing = false;//add v8.5及时标记退出在线支付界面
-                stopGetPayStatus();// 取消查询订单状态
-                dismiss();
-            } else if (TradePayStatus.PAID_FAIL.value() == payStatus) {//支付失败
-                stopGetPayStatus();// 取消查询订单状态
-                if (mCurrentScanType == ONLIEN_SCAN_TYPE_ACTIVE) {
+            if (TradePayStatus.PAID.value() == payStatus) {                DoPayApi.OnlineDialogShowing = false;                stopGetPayStatus();                dismiss();
+            } else if (TradePayStatus.PAID_FAIL.value() == payStatus) {                stopGetPayStatus();                if (mCurrentScanType == ONLIEN_SCAN_TYPE_ACTIVE) {
                     scanPayFragment.showBarcodeType(ShowBarcodeView.SHOW_SCAN_TO_CUSTOMER);
                 }
             } else {
@@ -640,23 +563,17 @@ public class MobilePayDialog extends BasicDialogFragment implements CompoundButt
         }
     };
 
-    /**
-     * 二维码扫码枪界面接口
-     */
+
     public interface MobilePayCallBack {
 
-        void payByAuthCode(String authCode, PayModeId payModeId);//扫码枪事件
-
-        void getPayBarcode(PayModeId payModeId);//
-
+        void payByAuthCode(String authCode, PayModeId payModeId);
+        void getPayBarcode(PayModeId payModeId);
         void getPayState();
 
         void stopUpdateOutTime();
     }
 
-    /**
-     * 二维码到计时
-     */
+
     class UpdateTimeTask extends java.util.TimerTask {
         @Override
         public void run() {

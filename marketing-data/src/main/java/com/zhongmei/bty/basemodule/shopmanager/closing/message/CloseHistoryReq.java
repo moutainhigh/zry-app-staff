@@ -1,13 +1,9 @@
 package com.zhongmei.bty.basemodule.shopmanager.closing.message;
 
-/**
- * @date:2015年12月17日下午4:49:13
- */
+
 public class CloseHistoryReq {
-    //开始时间
-    String startTime;
-    //结束时间
-    String endTime;
+        String startTime;
+        String endTime;
 
     public String getStartTime() {
         return startTime;

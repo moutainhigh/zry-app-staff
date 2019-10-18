@@ -31,14 +31,7 @@ import java.lang.ref.WeakReference;
 import de.greenrobot.event.EventBus;
 
 
-/**
- * 实现读取得DialogFrament
- *
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 
 public class ReadKeyboardDialogFragment extends BasicDialogFragment implements OnClickListener, OnKeyListener {
 
@@ -50,36 +43,22 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
     public static final int ICON_FAILED = R.drawable.mispos_uion_password_fail;
 
-    protected TextView reminder_msg_tv;// 刷卡提示信息
-
-    protected Button close_button;// 关闭按钮。
-
-    protected ImageView center_iv;// 中间显示图片
-
-    protected TextView show_info_tv;// 显示结果信息的TextView
-
-    protected Button try_again_button;// 再次尝试BUTTON
-
-    OnClickListener mcloseListener;// 关闭按钮监听器(外部传入的点击监听器)
-
-    OnClickListener mtryAgainListener;// 再次尝试按钮监听器(外部传入的点击监听器)
-
-    CardOvereCallback mPosOvereCallback;// 由外部传入的监听器。用来返回刷卡的结果。
-
+    protected TextView reminder_msg_tv;
+    protected Button close_button;
+    protected ImageView center_iv;
+    protected TextView show_info_tv;
+    protected Button try_again_button;
+    OnClickListener mcloseListener;
+    OnClickListener mtryAgainListener;
+    CardOvereCallback mPosOvereCallback;
     private static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;
 
-    UiHandler handler;// 自动隐藏Dialog使用的Handler
-
-    NewLiandiposManager.OnTransListener onTransListener;// 刷卡功能管理类监听器
-
-    private boolean isSuccess = false;// 判断是否刷卡成功返回结果
-
-    private PosTransLog resultTranLog;// 刷卡返回的结果
-
-    private NewLDResponse errLDResponse;// 刷卡返回的错误信息
-
-    private long delaytime = 3 * 1000;// 自动隐藏刷卡成功或者失败界面的时间。默认为2S
-
+    UiHandler handler;
+    NewLiandiposManager.OnTransListener onTransListener;
+    private boolean isSuccess = false;
+    private PosTransLog resultTranLog;
+    private NewLDResponse errLDResponse;
+    private long delaytime = 3 * 1000;
     private int readyCountDown = 120;
 
     private CountDownHandler countDownHandler;
@@ -134,21 +113,15 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
     }
 
     private void initViewById(View view) {
-        reminder_msg_tv = (TextView) view.findViewById(R.id.reminder_msg_tv);// 提示信息的TextView
-
-        close_button = (Button) view.findViewById(R.id.close_button);// 关闭按钮。
-
-        center_iv = (ImageView) view.findViewById(R.id.center_iv);// 中间显示图片
-
-        show_info_tv = (TextView) view.findViewById(R.id.show_info_tv);// 显示结果信息的TextView
-
-        try_again_button = (Button) view.findViewById(R.id.try_again_button);// 再次尝试BUTTON
-        getDialog().getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED, FLAG_HOMEKEY_DISPATCHED);
+        reminder_msg_tv = (TextView) view.findViewById(R.id.reminder_msg_tv);
+        close_button = (Button) view.findViewById(R.id.close_button);
+        center_iv = (ImageView) view.findViewById(R.id.center_iv);
+        show_info_tv = (TextView) view.findViewById(R.id.show_info_tv);
+        try_again_button = (Button) view.findViewById(R.id.try_again_button);        getDialog().getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED, FLAG_HOMEKEY_DISPATCHED);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         this.setCancelable(false);
 
-        show_info_tv.getPaint().setFakeBoldText(true);// 设置文字粗体
-
+        show_info_tv.getPaint().setFakeBoldText(true);
         close_button.setOnClickListener(this);
 
         try_again_button.setOnClickListener(this);
@@ -158,22 +131,13 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
     }
 
-    /**
-     * 进行刷卡操作。
-     *
-     * @Title: doPos
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void doPos() {
         isSuccess = false;
         resultTranLog = null;
         errLDResponse = null;
 
-        changeViewByType(UionViewStaus.Credit_card_Ready, "");// 准备刷卡操作
-        startCountDown();// 开始倒计时
-
+        changeViewByType(UionViewStaus.Credit_card_Ready, "");        startCountDown();
         onTransListener = new NewLiandiposManager.OnTransListener() {
 
             @Override
@@ -184,8 +148,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
             @Override
             public void onStart() {
                 Log.d(TAG, TAG + "----------------onStart()");
-                changeViewByType(UionViewStaus.Credit_card_operating, "");// 界面需要展示
-                stopCountDown();
+                changeViewByType(UionViewStaus.Credit_card_operating, "");                stopCountDown();
             }
 
             @Override
@@ -194,8 +157,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
                 isSuccess = false;
                 resultTranLog = null;
                 errLDResponse = ldResponse;
-                changeViewByType(UionViewStaus.Credit_card_fail, "");//
-                stopCountDown();
+                changeViewByType(UionViewStaus.Credit_card_fail, "");                stopCountDown();
 
             }
 
@@ -205,20 +167,15 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
                 stopCountDown();
 
                 isSuccess = true;
-                resultTranLog = log;// 设置结果，成功赋值。
-                errLDResponse = null;
-                // changeViewByType(UionViewStaus.Credit_card_success,
-                // "");
-                mPosOvereCallback.onSuccess(resultTranLog.getKeyValue());
-                //取到resultTranLog.getKeyValue() 是（小写32位）MD5加密的
+                resultTranLog = log;                errLDResponse = null;
+                                                mPosOvereCallback.onSuccess(resultTranLog.getKeyValue());
 
             }
 
         };
         Log.d(TAG, TAG + ":doPos()");
 
-        NewLiandiposManager.getInstance().startReadKeyboardNum(getActivity().getApplicationContext(), onTransListener);// 读取键盘值
-
+        NewLiandiposManager.getInstance().startReadKeyboardNum(getActivity().getApplicationContext(), onTransListener);
     }
 
     public void setCloseListener(OnClickListener listener) {
@@ -292,14 +249,12 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
             }
 
-            // dimissUionDialog();
-            dismissAllowingStateLoss();
+                        dismissAllowingStateLoss();
         }
         if (view.equals(try_again_button)) {
             doPos();
             if (handler != null) {
-                handler.removeCallbacksAndMessages(null);// 重试的时候，应该移除隐藏Dialog
-            }
+                handler.removeCallbacksAndMessages(null);            }
             if (mtryAgainListener != null) {
                 mtryAgainListener.onClick(view);
 
@@ -319,22 +274,11 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
     public interface CardOvereCallback {
 
-        public void onSuccess(String keybord);// 返回的key值
-
+        public void onSuccess(String keybord);
         public void onFail(NewLDResponse ldResponse);
     }
 
-    /**
-     * 展示UI都应该调用这个方法
-     *
-     * @Title: changeViewByType
-     * @Description: TODO
-     * @Param @param staus
-     * @Param @param money TODO 在UionViewStaus=
-     * Credit_card_Ready或者Credit_card_operating时候显示金额
-     * ，为其它值的时候没作用
-     * @Return void 返回类型
-     */
+
     public void changeViewByType(UionViewStaus staus, String money) {
         if (getActivity() == null) {
             return;
@@ -371,9 +315,6 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
                 }
 
                 showinfo = errorInfo;
-//				if (!PosConnectManager.isPosConnected()) {
-//					showinfo = getString(R.string.card_device_no_connent);
-//				}
 
                 show_credit_card_fail(showinfo, "");
 
@@ -386,15 +327,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
     }
 
-    /**
-     * 显示准备刷卡的UI
-     *
-     * @Title: show_credit_card_Ready
-     * @Description: TODO
-     * @Param @param showinfo 显示结果信息
-     * @Param @param money TODO 显示金额
-     * @Return void 返回类型
-     */
+
 
     private void show_credit_card_Ready(String showinfo, String money) {
 
@@ -407,15 +340,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
         try_again_button.setVisibility(View.INVISIBLE);
     }
 
-    /**
-     * 显示正在刷卡中的UI
-     *
-     * @Title: show_credit_card_operating
-     * @Description: TODO
-     * @Param @param showinfo 显示信息
-     * @Param @param money TODO 显示刷卡金额
-     * @Return void 返回类型
-     */
+
     private void show_credit_card_operating(String showinfo, String money) {
         center_iv.setVisibility(View.VISIBLE);
         center_iv.setBackgroundResource(ICON_READY_SINGLE);
@@ -426,15 +351,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
         try_again_button.setVisibility(View.INVISIBLE);
     }
 
-    /**
-     * 显示刷卡成功的UI
-     *
-     * @Title: show_credit_card_success
-     * @Description: TODO
-     * @Param @param showinfo 显示展示信息
-     * @Param @param money TODO 显示金额，这里金额的View会隐藏起来 所以可以不用填写
-     * @Return void 返回类型
-     */
+
 
     private void show_credit_card_success(String showinfo, String money) {
         center_iv.setVisibility(View.VISIBLE);
@@ -447,15 +364,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
         hideDialogDelayed();
     }
 
-    /**
-     * 显示刷卡失败的UI
-     *
-     * @Title: show_credit_card_fail
-     * @Description: TODO
-     * @Param @param showinfo 显示展示信息
-     * @Param @param money TODO 显示金额，这里金额的View会隐藏起来 所以可以不用填写
-     * @Return void 返回类型
-     */
+
     private void show_credit_card_fail(String showinfo, String money) {
         center_iv.setVisibility(View.VISIBLE);
         center_iv.setBackgroundResource(ICON_FAILED);
@@ -468,14 +377,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
         hideDialogDelayed();
     }
 
-    /**
-     * 根据状态显示中间图片的方法
-     *
-     * @Title: showReadyCenter
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void showReadyCenterView() {
 
         center_iv.setVisibility(View.VISIBLE);
@@ -483,14 +385,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
     }
 
-    /**
-     * 当弹出刷卡成功或者刷卡失败的时候，自动在2S后隐藏Dialog
-     *
-     * @Title: hideDialogDelayed
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void hideDialogDelayed() {
         if (handler != null) {
             handler.sendEmptyMessageDelayed(0, delaytime);
@@ -498,28 +393,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
     }
 
-    // /**
-    // * 隐藏Dialog 当点击Close按钮的时候隐藏并回调方法，2后自动隐藏会回调该方法
-    // *
 
-    // * @Title: dimissUionDialog
-    // * @Return void 返回类型
-    // */
-    // private void dimissUionDialog() {
-    // dismissAllowingStateLoss();
-    // if (mPosOvereCallback != null) {
-    // if (!isSuccess) {// 根据isSuccess的值来判断是否成功
-    // if (errLDResponse == null) {// 如果未空的时候。
-    //
-    // }
-    // mPosOvereCallback.onFail(errLDResponse);
-    // } else {
-    // mPosOvereCallback.onSuccess(resultTranLog.getKeyValue());
-    // }
-    //
-    // }
-    //
-    // }
 
     public static class UiHandler extends Handler {
         private SoftReference<ReadKeyboardDialogFragment> weakReference;
@@ -547,21 +421,10 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
     }
 
     private enum UionViewStaus {
-        Credit_card_Ready, // 请进行刷卡操作（准备进行刷卡）
-        Credit_card_operating, // 刷卡进行中
-        Credit_card_success, // 刷卡成功
-        Credit_card_fail // 刷卡失败
-
+        Credit_card_Ready,         Credit_card_operating,         Credit_card_success,         Credit_card_fail
     }
 
-    /**
-     * 开始倒计时
-     *
-     * @Title: startCountDown
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void startCountDown() {
         if (countDownHandler != null) {
             countDownHandler.sendEmptyMessageDelayed(0, 1000);
@@ -569,14 +432,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
     }
 
-    /**
-     * 停止倒计时
-     *
-     * @Title: stopCountDown
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void stopCountDown() {
         readyCountDown = 120;
         if (countDownHandler != null) {
@@ -585,15 +441,7 @@ public class ReadKeyboardDialogFragment extends BasicDialogFragment implements O
 
     }
 
-    /**
-     * 倒计时120秒的Handler
-     *
-     * @Date：2016-4-6 下午4:25:48
-     * @Description: TODO
-     * @Version: 1.0
-     * <p>
-     * rights reserved.
-     */
+
     private static class CountDownHandler extends Handler {
         private WeakReference<ReadKeyboardDialogFragment> weakReference;
 

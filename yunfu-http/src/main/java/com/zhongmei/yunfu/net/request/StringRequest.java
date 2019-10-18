@@ -1,8 +1,6 @@
 package com.zhongmei.yunfu.net.request;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 import com.zhongmei.yunfu.net.volley.AuthFailureError;
 import com.zhongmei.yunfu.net.volley.NetworkResponse;
@@ -14,9 +12,7 @@ import com.zhongmei.yunfu.net.volley.toolbox.HttpHeaderParser;
 
 import java.io.UnsupportedEncodingException;
 
-/**
- * A canned request for retrieving the response body at a given URL as a String.
- */
+
 public class StringRequest extends StatisticsRequest<String> {
     protected Listener<String> mListener;
     protected String mRequestBody;
@@ -25,14 +21,7 @@ public class StringRequest extends StatisticsRequest<String> {
         super(method, url, listener);
     }
 
-    /**
-     * Creates a new request with the given method.
-     *
-     * @param method        the request {@link Method} to use
-     * @param url           URL to fetch the string at
-     * @param listener      Listener to receive the String response
-     * @param errorListener Error listener, or null to ignore errors
-     */
+
     public StringRequest(int method, String url, Listener<String> listener,
                          ErrorListener errorListener) {
         super(method, url, errorListener);

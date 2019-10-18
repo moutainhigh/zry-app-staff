@@ -6,9 +6,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.message.MemberCardResp.Me
 
 import java.util.List;
 
-/**
- * 会员实体卡返回类型
- */
+
 public class MemberCardResp extends CardBaseResp<MemberCard> {
 
     public class MemberCard {

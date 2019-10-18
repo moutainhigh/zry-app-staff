@@ -15,113 +15,53 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.math.BigDecimal;
 
-/**
- * ExtraCharge is a ORMLite bean type. Corresponds to the database table "extra_charge"
- * <p>
- * CREATE TABLE `extra_charge` (
- * `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
- * `name` varchar(50) NOT NULL COMMENT '名称',
- * `code` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL DEFAULT '' COMMENT '编码',
- * `calc_way` tinyint(4) NOT NULL DEFAULT '1' COMMENT '计算方式:1,按例比;2,按人数;3,固定金额;4、最低消费;5,按人数/时间 计费',
- * `content` decimal(10,2) NOT NULL,
- * `min_consume` decimal(10,2) DEFAULT NULL COMMENT '最低消费',
- * `content_by_time` decimal(10,2) DEFAULT '0.00' COMMENT '每多少时间产生一次计费, 单位为分钟',
- * `brand_identy` bigint(20) NOT NULL COMMENT '品牌ID',
- * `shop_identy` bigint(20) DEFAULT NULL COMMENT '门店ID',
- * `order_flag` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否加入订单;1:是;2:否',
- * `discount_flag` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否参与折扣;1:是;2:否',
- * `status_flag` tinyint(4) NOT NULL DEFAULT '1' COMMENT '逻辑删除标志;1:否;2:是',
- * `enabled_flag` tinyint(4) NOT NULL DEFAULT '1' COMMENT '启用标识;1:是;2:否',
- * `delete_flag` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否可删除标识;1:是;2:否',
- * `creator_name` varchar(32) DEFAULT NULL COMMENT '创建人名称',
- * `creator_id` bigint(20) DEFAULT NULL COMMENT '创建人ID',
- * `updator_name` varchar(32) DEFAULT NULL COMMENT '更新人名称',
- * `updator_id` bigint(20) DEFAULT NULL COMMENT '更新人ID',
- * `server_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '服务器创建时间',
- * `server_update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '服务器更新时间',
- * `business_type` tinyint(4) DEFAULT NULL COMMENT '门店的业态,例如 正餐 80,快餐 81',
- * `tax_code` varchar(20) DEFAULT NULL COMMENT '附加费关联税费的code',
- * `privilege_flag` tinyint(4) DEFAULT NULL COMMENT '服务费是在优惠前计算还是优惠后计算,1:优惠前计算 2:优惠后计算',
- * `enable_table_area` tinyint(4) DEFAULT '2' COMMENT '是否启用桌台区域关联，1启用 2不启用',
- * PRIMARY KEY (`id`),
- * KEY `idx_brand_shop_name` (`brand_identy`,`shop_identy`,`name`) USING BTREE,
- * KEY `idx_shop_identy_server_update_time` (`brand_identy`,`shop_identy`,`server_update_time`) USING BTREE
- * ) ENGINE=InnoDB AUTO_INCREMENT=87958597611257857 DEFAULT CHARSET=utf8 COMMENT='附加费配置表';
- */
+
 @DatabaseTable(tableName = "extra_charge")
 public class ExtraCharge extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "extra_charge"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * calc_way
-         */
+
         public static final String calcWay = "calc_way";
 
-        /**
-         * content
-         */
+
         public static final String content = "content";
 
-        /**
-         * order_flag
-         */
+
         public static final String orderFlag = "order_flag";
 
-        /**
-         * discount_flag
-         */
+
         public static final String discountFlag = "discount_flag";
 
-        /**
-         * enabled_flag
-         */
+
         public static final String enabledFlag = "enabled_flag";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * code
-         */
+
         public static final String code = "code";
 
-        /**
-         * content_by_time
-         */
+
         public static final String contentByTime = "content_by_time";
 
         String businessType = "business_type";
@@ -312,11 +252,7 @@ public class ExtraCharge extends BasicEntityBase implements ICreator, IUpdator {
         this.privilegeFlag = privilegeFlag;
     }
 
-    /**
-     * 是否自动加入订单
-     *
-     * @return
-     */
+
     public boolean isAutoJoinTrade() {
         return getOrderFlag() == Bool.YES;
     }
@@ -333,11 +269,7 @@ public class ExtraCharge extends BasicEntityBase implements ICreator, IUpdator {
         this.enableTableArea = enableTableArea;
     }
 
-    /**
-     * 是否启用桌台区域关联
-     *
-     * @return
-     */
+
     public boolean isTableAreaEnable() {
         return Utils.equals(enableTableArea, 1);
     }
@@ -380,12 +312,7 @@ public class ExtraCharge extends BasicEntityBase implements ICreator, IUpdator {
     }
 
     static public class ServiceCharge {
-        public Long id; //主键
-        public String name; //名称
-        public Integer calcWay; //计算方式:1,按例比;2,按人数;3,固定金额;4、最低消费;5,按人数/香蕉费',
-        public String feeRate; //计算值
-        public Integer discountType; //折扣类型，1：after discount-折扣后, 2, before discount-折扣前
-
+        public Long id;         public String name;         public Integer calcWay;         public String feeRate;         public Integer discountType;
         public Integer getPrivilegeFlag() {
             return Utils.equals(discountType, 2) ? 1 : 2;
         }

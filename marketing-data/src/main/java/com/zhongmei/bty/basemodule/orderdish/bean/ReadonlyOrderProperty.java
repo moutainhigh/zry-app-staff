@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeItemProperty;
 import com.zhongmei.yunfu.db.enums.PropertyKind;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * @version: 1.0
- * @date 2015年9月20日
- */
+
 public class ReadonlyOrderProperty implements IOrderProperty {
 
     public final TradeItemProperty tradeItemProperty;

@@ -2,31 +2,19 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 抵现限制类型
- */
+
 public enum LimitType implements ValueEnum<Integer> {
 
-    /**
-     * 无上限
-     */
+
     NO_LIMIT(1),
 
-    /**
-     * 积分个数限制
-     */
+
     INTEGRAL_LIMIT(2),
 
-    /**
-     * 金额百分比限制
-     */
+
     AMOUNT_LIMIT(3),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

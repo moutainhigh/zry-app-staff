@@ -4,70 +4,44 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.BasicEntityBase;
 
-/**
- * electronic_invoice is a ORMLite bean type. Corresponds to the database table "electronic_invoice"
- */
+
 @DatabaseTable(tableName = "electronic_invoice")
 public class ElectronicInvoice extends BasicEntityBase {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "invoice"
-     */
+
     public interface $ extends BasicEntityBase.$ {
-        /**
-         * 商户Id
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * 纳税人名称
-         */
+
         String taxpayerName = "taxpayer_name";
 
-        /**
-         * 纳税人识别号
-         */
+
         String taxpayerNumber = "taxpayer_number";
 
-        /**
-         * 地址
-         */
+
         String address = "address";
 
-        /**
-         * 座机号
-         */
+
         String telephone = "telephone";
 
-        /**
-         * 开户行
-         */
+
         String bankOfDeposit = "bank_of_deposit";
 
-        /**
-         * 账号
-         */
+
         String accountNumber = "account_number";
 
-        /**
-         * 创建者名称
-         */
+
         String creatorName = "creator_name";
 
-        /**
-         * 创建者id
-         */
+
         String creatorId = "creator_id";
 
-        /**
-         * 最后修改者姓名
-         */
+
         String updatorName = "updator_name";
 
-        /**
-         * 更新者id
-         */
+
         String updator_id = "updator_id";
     }
 

@@ -27,9 +27,7 @@ import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 订单中心订单列表正餐Presenter
- */
+
 
 public class DinnerOrderCenterListPresenter extends OrderCenterListPresenter {
 
@@ -70,9 +68,8 @@ public class DinnerOrderCenterListPresenter extends OrderCenterListPresenter {
     public void addProcessTab(List<Pair<String, Integer>> processTab) {
         addChildTab(processTab, R.string.unprocessed_all, DbQueryConstant.UNPROCESSED_ALL);
         addChildTab(processTab, R.string.unprocessed_new_order, DbQueryConstant.UNPROCESSED_NEW_ORDER);
-        /* addChildTab(processTab, R.string.unprocessed_dinner_invalid, DbQueryConstant.UNPROCESSED_INVALID);*/
-        //modify v8.15 添加取消请求和取消
-        addChildTab(processTab, R.string.unprocessed_cancel_request, DbQueryConstant.UNPROCESSED_CANCEL_REQUEST);
+
+                addChildTab(processTab, R.string.unprocessed_cancel_request, DbQueryConstant.UNPROCESSED_CANCEL_REQUEST);
         addChildTab(processTab, R.string.unprocessed_invalid, DbQueryConstant.UNPROCESSED_INVALID);
     }
 

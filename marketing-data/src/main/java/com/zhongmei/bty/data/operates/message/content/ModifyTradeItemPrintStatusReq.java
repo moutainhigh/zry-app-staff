@@ -18,19 +18,15 @@ public class ModifyTradeItemPrintStatusReq {
 
     private List<PrintOperation> printOperations;
 
-    private List<TradeItemOperation> tradeItemOperations;//需要修改的菜品操作记录
-
-    private List<TradeItemOperation> kitchenTradeItemOperations;//需要生成的菜品操作记录（打印后厨）
-
+    private List<TradeItemOperation> tradeItemOperations;
+    private List<TradeItemOperation> kitchenTradeItemOperations;
     public ModifyTradeItemPrintStatusReq(List<TradeItem> tis, List<PrintOperation> pos, List<TradeItemOperation> tios) {
-        //需要生成打印后厨记录的菜品id
-        List<Long> tradeItemIdList = new ArrayList<>();
+                List<Long> tradeItemIdList = new ArrayList<>();
         if (Utils.isNotEmpty(tis)) {
             tradeItems = new ArrayList<TradeItem>();
             for (TradeItem ti : tis) {
                 tradeItems.add(filterTradeItemFields(ti));
-                //打印成功或失败的菜品，生成对应的打印后厨记录
-                if (ti.getIssueStatus() == IssueStatus.FINISHED || ti.getIssueStatus() == IssueStatus.FAILED) {
+                                if (ti.getIssueStatus() == IssueStatus.FINISHED || ti.getIssueStatus() == IssueStatus.FAILED) {
                     tradeItemIdList.add(ti.getId());
                 }
             }
@@ -45,8 +41,7 @@ public class ModifyTradeItemPrintStatusReq {
             tradeItemOperations = new ArrayList<TradeItemOperation>();
             for (TradeItemOperation tio : tios) {
                 tradeItemOperations.add(filterTradeItemFields(tio));
-                //等叫的菜品，不需要生成后厨打印记录
-                if (tio.getOpType() == PrintOperationOpType.WAKE_UP) {
+                                if (tio.getOpType() == PrintOperationOpType.WAKE_UP) {
                     tradeItemIdList.remove(tio.getTradeItemId());
                 }
             }
@@ -54,11 +49,7 @@ public class ModifyTradeItemPrintStatusReq {
         makeKitchenPrintTradeItemOperation(tradeItemIdList);
     }
 
-    /**
-     * 生成后厨打印记录
-     *
-     * @param tradeItemIdList
-     */
+
     private void makeKitchenPrintTradeItemOperation(Collection<Long> tradeItemIdList) {
         if (Utils.isNotEmpty(tradeItemIdList)) {
             kitchenTradeItemOperations = new ArrayList<>();
@@ -73,13 +64,7 @@ public class ModifyTradeItemPrintStatusReq {
         }
     }
 
-    /**
-     * 筛选请求中需要的TradeItem字段
-     *
-     * @Title: filterTradeItemFields
-     * @Param @param ti
-     * @Return TradeItem 返回类型
-     */
+
     private TradeItem filterTradeItemFields(TradeItem ti) {
         TradeItem tradeItem = new TradeItem();
         tradeItem.setId(ti.getId());
@@ -90,13 +75,7 @@ public class ModifyTradeItemPrintStatusReq {
         return tradeItem;
     }
 
-    /**
-     * 筛选请求中需要的PrintOperation字段
-     *
-     * @Title: filterPrintOperationFields
-     * @Param @param po
-     * @Return PrintOperation 返回类型
-     */
+
     private PrintOperation filterPrintOperationFields(PrintOperation po) {
         PrintOperation printOperation = new PrintOperation();
         printOperation.setId(po.getId());
@@ -106,13 +85,7 @@ public class ModifyTradeItemPrintStatusReq {
         return printOperation;
     }
 
-    /**
-     * 筛选请求中需要的TradeItemOperation字段
-     *
-     * @Title: filterTradeItemFields
-     * @Param @param tio
-     * @Return TradeItemOperation 返回类型
-     */
+
     private TradeItemOperation filterTradeItemFields(TradeItemOperation tio) {
         TradeItemOperation tradeItemOperation = new TradeItemOperation();
         tradeItemOperation.setId(tio.getId());

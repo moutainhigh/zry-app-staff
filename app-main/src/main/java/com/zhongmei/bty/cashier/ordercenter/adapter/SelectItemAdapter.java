@@ -34,9 +34,7 @@ public class SelectItemAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    /**
-     * 当前选中的门店ID
-     */
+
     public void currenCheckId(String id) {
         mCurrenCheckId = id;
     }

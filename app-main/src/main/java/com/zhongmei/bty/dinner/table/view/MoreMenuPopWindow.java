@@ -38,32 +38,22 @@ import com.zhongmei.bty.dinner.util.UnionUtil;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @Description:桌台信息页菜单栏
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class MoreMenuPopWindow extends PopupWindow implements View.OnTouchListener, View.OnClickListener {
     private View parentView;
 
     private FragmentActivity activity;
 
-    private TextView moveDishTv;//移菜按钮
-
-    private TextView copyDishTv;//复制按钮
-
-    private TextView makeDishTv;//等叫按钮
-
-    private TextView urgeDishTv;//崔菜
-
+    private TextView moveDishTv;
+    private TextView copyDishTv;
+    private TextView makeDishTv;
+    private TextView urgeDishTv;
 
     private int contentWidth;
 
     private TableInfoFragment tableInfoFragment;
 
-    public static OperateType operateType;//是移菜还是复制
-
+    public static OperateType operateType;
 
     public MoreMenuPopWindow(FragmentActivity activity, View parentView, int contentWidth) {
         super();
@@ -87,7 +77,6 @@ public class MoreMenuPopWindow extends PopupWindow implements View.OnTouchListen
         contentView.getLayoutParams().width = contentWidth;
 
         tableInfoFragment = (TableInfoFragment) activity.getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
-//		setAnimationStyle(R.style.dinner_table_info_waiterwindow_style);
 
         moveDishTv = (TextView) view.findViewById(R.id.move_dish_tv);
         copyDishTv = (TextView) view.findViewById(R.id.copy_dish_tv);
@@ -161,17 +150,12 @@ public class MoreMenuPopWindow extends PopupWindow implements View.OnTouchListen
         return true;
     }
 
-    /**
-     * @Date 2016年4月25日
-     * @Description:
-     * @Param
-     */
+
     @Override
     public void onClick(View v) {
         hide();
         switch (v.getId()) {
-            case R.id.move_dish_tv://移菜
-                MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsMovedish);
+            case R.id.move_dish_tv:                MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsMovedish);
                 VerifyHelper.verifyAlert(activity, DinnerApplication.PERMISSION_DINNER_MOVE_DISH,
                         new VerifyHelper.Callback() {
                             @Override
@@ -182,17 +166,14 @@ public class MoreMenuPopWindow extends PopupWindow implements View.OnTouchListen
                             }
                         });
                 break;
-            case R.id.copy_dish_tv://复制
-                MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsCopydish);
+            case R.id.copy_dish_tv:                MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsCopydish);
                 operateType = OperateType.COPY_DISH;
                 showDishCheckMode();
                 break;
-            case R.id.dish_make_tv://起菜
-                MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsMakedish);
+            case R.id.dish_make_tv:                MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsMakedish);
                 showDishOperateCheckMode(PrintOperationOpType.RISE_DISH);
                 break;
-            case R.id.dish_urge_tv://崔菜
-                MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsUrgedish);
+            case R.id.dish_urge_tv:                MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsUrgedish);
                 showDishOperateCheckMode(PrintOperationOpType.REMIND_DISH);
                 break;
             default:
@@ -201,18 +182,13 @@ public class MoreMenuPopWindow extends PopupWindow implements View.OnTouchListen
 
     }
 
-    /**
-     * @Date 2016年4月26日
-     * @Description: 列表展示出checkbox
-     * @Return void
-     */
+
     public void showDishCheckMode() {
         TableInfoContentBean tableInfoContentBean = tableInfoFragment.talbeInfoContentBean;
         DinnertableTradeVo dinnertableTradeVo = tableInfoContentBean.getDinnerTableTradeVo();
         TradeVo tradeVo = dinnertableTradeVo.getTradeVo();
 
-        //微信未接收订单，大众点评已付订单不允许移菜
-        if (dinnertableTradeVo == null || dinnertableTradeVo.getStatus() == DinnertableStatus.EMPTY) {
+                if (dinnertableTradeVo == null || dinnertableTradeVo.getStatus() == DinnertableStatus.EMPTY) {
             ToastUtil.showShortToast(R.string.dinner_move_dish_emptytrade);
             return;
         } else if (TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.WECHAT)) {
@@ -241,16 +217,14 @@ public class MoreMenuPopWindow extends PopupWindow implements View.OnTouchListen
             return;
         }
 
-        //无产品的情况
-        if ((tradeVo.getTradeItemList() == null || tradeVo.getTradeItemList().size() == 0)
+                if ((tradeVo.getTradeItemList() == null || tradeVo.getTradeItemList().size() == 0)
                 && (Utils.isEmpty(tradeVo.getCouponPrivilegeVoList()) || tradeVo.getIntegralCashPrivilegeVo() == null ||
                 tradeVo.getTradePrivilege() == null)) {
             ToastUtil.showShortToast(R.string.dinner_move_dish_no_dish);
             return;
         }
 
-        //排除非法项
-        boolean hasDish = false;
+                boolean hasDish = false;
         for (TradeItemVo itemVo : tradeVo.getTradeItemList()) {
             if (itemVo.getTradeItem().getStatusFlag() == StatusFlag.VALID && itemVo.getTradeItem().getQuantity().doubleValue() != 0) {
                 hasDish = true;
@@ -270,36 +244,14 @@ public class MoreMenuPopWindow extends PopupWindow implements View.OnTouchListen
         EventBus.getDefault().post(obj);
     }
 
-//	public enum OperateType{
-//		MOVE_DISH(BaseApplication.sInstance.getResources().getString(R.string.dinner_movedish)),
-//		COPY_DISH(BaseApplication.sInstance.getResources().getString(R.string.dinner_copydish)),
-//		TRANSFER_TABLE(BaseApplication.sInstance.getResources().getString(R.string.dinner_change_table)),
-//		MARGE_TRADE(BaseApplication.sInstance.getResources().getString(R.string.dinner_mix_trade));
-//
-//		private String typeName;
-//
-//		private OperateType(String typeName){
-//			this.typeName=typeName;
-//		}
-//
-//		public String desc() {
-//			return typeName;
-//		}
-//	}
 
-    /**
-     * @Date 2016/10/10
-     * @Description:点击等叫、崔菜后的响应
-     * @Param
-     * @Return
-     */
+
     public void showDishOperateCheckMode(PrintOperationOpType opType) {
         TableInfoContentBean tableInfoContentBean = tableInfoFragment.talbeInfoContentBean;
         DinnertableTradeVo dinnertableTradeVo = tableInfoContentBean.getDinnerTableTradeVo();
         TradeVo tradeVo = dinnertableTradeVo.getTradeVo();
 
-        //微信未接收订单，大众点评已付订单不允许移菜
-        if (dinnertableTradeVo == null || dinnertableTradeVo.getStatus() == DinnertableStatus.EMPTY) {
+                if (dinnertableTradeVo == null || dinnertableTradeVo.getStatus() == DinnertableStatus.EMPTY) {
             ToastUtil.showShortToast(R.string.dinner_dishoperate_emptytrade);
             return;
         } else if (TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.WECHAT)) {
@@ -328,14 +280,12 @@ public class MoreMenuPopWindow extends PopupWindow implements View.OnTouchListen
             return;
         }
 
-        //无产品的情况
-        if (tradeVo.getTradeItemList() == null || tradeVo.getTradeItemList().size() == 0) {
+                if (tradeVo.getTradeItemList() == null || tradeVo.getTradeItemList().size() == 0) {
             ToastUtil.showShortToast(R.string.dinner_dishoperate_no_dish);
             return;
         }
 
-        //排除非法项
-        boolean hasDish = false;
+                boolean hasDish = false;
         for (TradeItemVo itemVo : tradeVo.getTradeItemList()) {
             if (itemVo.getTradeItem().getStatusFlag() == StatusFlag.VALID && itemVo.getTradeItem().getQuantity().doubleValue() != 0) {
                 hasDish = true;

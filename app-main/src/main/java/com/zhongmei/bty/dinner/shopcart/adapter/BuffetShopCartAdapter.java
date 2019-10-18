@@ -22,9 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * create by dzb 2017/06/26
- */
+
 public class BuffetShopCartAdapter extends DinnerShopCartAdapter {
     private Context mContext;
     private Map<Integer, List<IShopcartItem>> dishGroup = null;
@@ -34,11 +32,7 @@ public class BuffetShopCartAdapter extends DinnerShopCartAdapter {
 
     protected BigDecimal shellActumalAmount = BigDecimal.ZERO;
 
-    /**
-     * @param context
-     * @Constructor
-     * @Description 构造函数，
-     */
+
     public BuffetShopCartAdapter(Context context) {
         super(context);
         this.mContext = context;
@@ -49,26 +43,17 @@ public class BuffetShopCartAdapter extends DinnerShopCartAdapter {
         initCommonData(tradeVo);
         updateGroupData(dataList, tradeVo, false);
 
-        initialDishCheckStatus();// 初始化菜品选择状态，等叫等
-        updateTrade(tradeVo, isShowInvalid);// 构建整单属性显示对象并刷新列表
-        initialRelateDishInfo();// 初始化退菜数据
-    }
+        initialDishCheckStatus();        updateTrade(tradeVo, isShowInvalid);        initialRelateDishInfo();    }
 
 
-    /**
-     * 获取餐标下菜品的实际价格
-     *
-     * @return
-     */
+
     public BigDecimal getShellActumalAmount() {
         return shellActumalAmount;
     }
 
 
     public void updateGroupData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
-        this.data.clear();// 清空数据
-        sortByTime(dataList);//排序
-
+        this.data.clear();        sortByTime(dataList);
         MealShellVo mealShellVo = tradeVo.getMealShellVo();
 
         if (mealShellVo != null && Utils.isNotEmpty(tradeVo.getTradeBuffetPeoples())) {
@@ -85,19 +70,16 @@ public class BuffetShopCartAdapter extends DinnerShopCartAdapter {
                 data.add(dishDataItem);
             }
         } else if (mealShellVo != null && mealShellVo.getDishMenuVo() != null) {
-            //针对联台子单没有TradeBuffetPeople
-            DishDataItem dishDataItem = new DishDataItem(ItemType.BUFFET_TRADE_PEOPLE);
+                        DishDataItem dishDataItem = new DishDataItem(ItemType.BUFFET_TRADE_PEOPLE);
             dishDataItem.setName(mealShellVo.getDishMenuVo().getSkuName());
             data.add(dishDataItem);
         }
 
 
         this.mAllDishCount = BigDecimal.ZERO;
-        //根据菜品类型分组
-        dishGroup = new HashMap<Integer, List<IShopcartItem>>();
+                dishGroup = new HashMap<Integer, List<IShopcartItem>>();
         if (dataList != null && dataList.size() > 0) {
-            // 遍历购物车中的菜品，对菜品进行分组
-            for (int i = 0; i < dataList.size(); i++) {
+                        for (int i = 0; i < dataList.size(); i++) {
 
                 IShopcartItem shopCartItem = dataList.get(i);
 
@@ -108,12 +90,10 @@ public class BuffetShopCartAdapter extends DinnerShopCartAdapter {
                     continue;
                 }
 
-                //累计商品数量
-                sumAllDishCount(shopCartItem);
+                                sumAllDishCount(shopCartItem);
 
                 if (shopCartItem.isGroupDish()) {
-                    //说明是套餐内的
-                    if (!dishGroup.containsKey(comboVoGroup)) {
+                                        if (!dishGroup.containsKey(comboVoGroup)) {
                         dishGroup.put(comboVoGroup, new ArrayList<IShopcartItem>());
                     }
                     dishGroup.get(comboVoGroup).add(shopCartItem);
@@ -184,11 +164,7 @@ public class BuffetShopCartAdapter extends DinnerShopCartAdapter {
         }
     }
 
-    /**
-     * 返回菜品分组显示
-     *
-     * @return
-     */
+
     public Map<Integer, List<IShopcartItem>> getGroup() {
         return dishGroup;
     }

@@ -49,9 +49,7 @@ import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchListener, AdapterView.OnItemClickListener, DinnerTableFunctionAdapter.OnFunctionChangeListener, View.OnClickListener {
 
     private Context mContext;
@@ -93,8 +91,7 @@ public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchLi
 
     public MoreFunctionPopWindow(Context context, BusinessType businessType) {
         super(context);
-        //初始化popuwindow
-        this.mContext = context;
+                this.mContext = context;
         this.mBusinessType = businessType;
         initView(context);
         initData(context);
@@ -141,7 +138,6 @@ public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchLi
         mFunctionAdapter.setFunctionChangeListener(this);
         slv_function.setAdapter(mFunctionAdapter);
 
-//       EventBus.getDefault().post(new EventFunctionChange(null,false,mFunctionAdapter.getCheckFunctionNum(),mFunctionAdapter.getCount()));
     }
 
     public void initItemChecked(Set<Integer> checkItems) {
@@ -190,13 +186,10 @@ public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchLi
     }
 
 
-    /**
-     * 数据获取
-     */
+
     private void getBusinessData() {
         setLoading(true);
-        //数据获取
-        TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
+                TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
         ResponseListener<MindTransferResp<BusinessChargeResp>> listener = new ResponseListener<MindTransferResp<BusinessChargeResp>>() {
             @Override
             public void onResponse(ResponseObject<MindTransferResp<BusinessChargeResp>> response) {
@@ -219,11 +212,7 @@ public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchLi
         tradeOperates.getBusinessCharge(businessChargeReq, listener);
     }
 
-    /**
-     * 设置家在UI
-     *
-     * @param loading
-     */
+
     private void setLoading(boolean loading) {
         layout_controller.setVisibility(View.VISIBLE);
         layout_dataContainer.setVisibility(View.GONE);
@@ -237,9 +226,7 @@ public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchLi
     }
 
 
-    /**
-     * 显示试试概况数据
-     */
+
     private void showBusinessData(BusinessChargeResp resp) {
         layout_dataContainer.setVisibility(View.VISIBLE);
         layout_controller.setVisibility(View.GONE);
@@ -255,17 +242,12 @@ public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchLi
         tv_tableAvgFee.setText(tableAvgFee);
     }
 
-    /**
-     * 创建实时概况请求参数
-     *
-     * @return
-     */
+
     private TransferReq<BusinessChargeReq> createGoodlsSellRankReq() {
         TransferReq<BusinessChargeReq> businessChargeReq = new TransferReq<BusinessChargeReq>();
 
         BusinessChargeReq req = new BusinessChargeReq();
-        //设置请求数据
-        req.setBrandId(MainApplication.getInstance().getBrandIdenty());
+                req.setBrandId(MainApplication.getInstance().getBrandIdenty());
         req.setShopId(MainApplication.getInstance().getShopIdenty());
         businessChargeReq.setPostData(req);
         businessChargeReq.setUrl("/mind/innerApi/fs/desktopBusinessStat");
@@ -279,16 +261,12 @@ public class MoreFunctionPopWindow extends PopupWindow implements View.OnTouchLi
         switch (v.getId()) {
             case R.id.tv_goto_search_table:
                 MobclickAgentEvent.onEvent(mContext, DinnerMobClickAgentEvent.tableMoreFunctionSearchTable);
-                //Intent intent = new Intent(mContext, SearchTableActivity_.class);
-                Bundle bundle = new Bundle();
+                                Bundle bundle = new Bundle();
                 bundle.putSerializable("BusinessType", mBusinessType);
-                //intent.putExtras(bundle);
-                //mContext.startActivity(intent);
-                this.dismiss();
+                                                this.dismiss();
                 break;
             case R.id.btn_get_business_data:
-                //权限验证
-                MobclickAgentEvent.onEvent(mContext, DinnerMobClickAgentEvent.tableMoreFunctionBusinessInfo);
+                                MobclickAgentEvent.onEvent(mContext, DinnerMobClickAgentEvent.tableMoreFunctionBusinessInfo);
                 VerifyHelper.verifyAlert((FragmentActivity) mContext, DinnerApplication.PERMISSION_DINNER_BUSINESS_CHARGE,
                         new VerifyHelper.Callback() {
                             @Override

@@ -11,12 +11,7 @@ import com.zhongmei.yunfu.db.entity.discount.TradePrivilegeExtra;
 
 import java.util.List;
 
-/**
- * 封装Payment相关的实时请求回复的数据
- *
- * @version: 1.0
- * @date 2015年4月15日
- */
+
 public class PaymentResp extends TradeResp {
 
     private List<Payment> payments;

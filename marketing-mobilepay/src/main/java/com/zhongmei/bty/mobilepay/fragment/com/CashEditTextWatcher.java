@@ -12,19 +12,12 @@ import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- * 支付金额输入框监听器，统一处理支付金额输入逻辑,暂时不支持溢收
- */
+
 
 public class CashEditTextWatcher implements TextWatcher {
     private static final String TAG = CashEditTextWatcher.class.getSimpleName();
-    private IPaymentInfo mPaymentInfo;//支付信息
-    private EditText mCashInputET;//金额输入框
-    private String mSymbol;//货币符号
-    private PayView mPayView;
-    private boolean isSuportPayMore;//是否支持溢收
-
+    private IPaymentInfo mPaymentInfo;    private EditText mCashInputET;    private String mSymbol;    private PayView mPayView;
+    private boolean isSuportPayMore;
     public CashEditTextWatcher setSuportPayMore(boolean suportPayMore) {
         isSuportPayMore = suportPayMore;
         return this;
@@ -71,22 +64,18 @@ public class CashEditTextWatcher implements TextWatcher {
             }
 
             String valueStr = content.replace(mSymbol, "").trim();
-            if (TextUtils.isEmpty(valueStr)) {//modify v8.11
-                content = "";
+            if (TextUtils.isEmpty(valueStr)) {                content = "";
                 ismodify = true;
             } else if (!CashInfoManager.isMatchCashFormat(valueStr)) {
                 content = content.substring(0, content.length() - 1);
                 ismodify = true;
-                if (isSuportPayMore) {//提示金额太大
-                    mPayView.inputMoreAlter();//只有现金输入会提醒
-                }
+                if (isSuportPayMore) {                    mPayView.inputMoreAlter();                }
             } else {
                 if (!isSuportPayMore) {
                     try {
                         double value = Double.valueOf(valueStr);
                         BigDecimal shouldAmount = BigDecimal.valueOf(mPaymentInfo.getActualAmount());
-                        if (BigDecimal.valueOf(value).compareTo(shouldAmount) > 0) {// 产生溢收后不允许输入现金
-                            content = content.substring(0, content.length() - 1);
+                        if (BigDecimal.valueOf(value).compareTo(shouldAmount) > 0) {                            content = content.substring(0, content.length() - 1);
                             ismodify = true;
                             mPayView.inputMoreAlter();
                         }

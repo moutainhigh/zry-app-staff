@@ -16,11 +16,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-/**
- * 附加费的adpater
- *
- * @date:2016年3月10日下午3:13:49
- */
+
 public class DinnerExtraAdapter extends BaseAdapter {
 
     private Context mContext;
@@ -40,30 +36,26 @@ public class DinnerExtraAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        if (mExtraChargeList == null)
+                if (mExtraChargeList == null)
             return 0;
         return mExtraChargeList.size();
     }
 
     @Override
     public DinnerExtraChargeVo getItem(int position) {
-        // TODO Auto-generated method stub
 
         return mExtraChargeList.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
 
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
-        ViewHolder viewHolder = null;
+                ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.dinner_extra_item, null);
             viewHolder = new ViewHolder();
@@ -80,35 +72,21 @@ public class DinnerExtraAdapter extends BaseAdapter {
     }
 
     private void bindData(ViewHolder viewHolder, DinnerExtraChargeVo extraChargeVo, int position) {
-        // TODO Auto-generated method stub
-        viewHolder.cb_status.setOnCheckedChangeListener(null);
+                viewHolder.cb_status.setOnCheckedChangeListener(null);
         ExtraCharge extraCharge = extraChargeVo.getExtrageCharge();
-        //服务费不允许操作
-        if (extraChargeVo.isServiceCharge()) {
+                if (extraChargeVo.isServiceCharge()) {
             viewHolder.cb_status.setEnabled(false);
             viewHolder.pview.setAlpha(0.3f);
         } else {
             viewHolder.pview.setAlpha(1f);
         }
         viewHolder.tv_name.setText(extraCharge.getName());
-        //根据不同计算方式设置附加费说明
-        viewHolder.tv_content.setText(getStringByCalcWay(extraCharge));
+                viewHolder.tv_content.setText(getStringByCalcWay(extraCharge));
 
         viewHolder.cb_status.setChecked(extraChargeVo.isSelected());
 
         viewHolder.cb_status.setOnCheckedChangeListener(new CheckChangeListener(position));
 
-//		if (extraChargeVo.isSelected()) {
-//			viewHolder.tv_name.setTextColor(mContext.getResources().getColor(R.color.text_blue));
-//			viewHolder.tv_content.setTextColor(mContext.getResources().getColor(R.color.text_blue));
-//			viewHolder.cb_status.setVisibility(View.VISIBLE);
-//			viewHolder.pview.setBackgroundResource(R.drawable.bg_dinner_discount_pressed);
-//		} else {
-//			viewHolder.tv_name.setTextColor(mContext.getResources().getColor(R.color.orderdish_text_black));
-//			viewHolder.tv_content.setTextColor(mContext.getResources().getColor(R.color.orderdish_text_black));
-//			viewHolder.cb_status.setVisibility(View.GONE);
-//			viewHolder.pview.setBackgroundResource(R.drawable.bg_dinner_discount_normal);
-//		}
     }
 
     public void resetData(List<DinnerExtraChargeVo> extraChargeList) {
@@ -152,9 +130,7 @@ public class DinnerExtraAdapter extends BaseAdapter {
         CheckBox cb_status;
     }
 
-    /**
-     * 根据附加费计算方式返回具体说明格式
-     */
+
     private String getStringByCalcWay(ExtraCharge extraChage) {
         String calcWayDesc = "";
         switch (extraChage.getCalcWay()) {

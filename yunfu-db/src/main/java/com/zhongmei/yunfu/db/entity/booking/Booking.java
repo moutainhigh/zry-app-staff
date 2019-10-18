@@ -11,54 +11,37 @@ import com.zhongmei.yunfu.db.enums.Sex;
 
 import java.math.BigDecimal;
 
-/**
- * 预订单
- */
+
 @DatabaseTable(tableName = "booking")
 public class Booking extends DataEntityBase {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ extends DataEntityBase.$ {
-        /**
-         * commercial_id
-         */
+
         String customerID = "customer_id";
 
         String customerName = "customer_name";
 
-        String customerGender = "customer_gender";//新增
-
-        String customerMobile = "customer_phone";//更新过
-
-        String startTime = "start_time";//新增
-
-        String endTime = "end_time";//新增
-
-        String tableId = "table_id";//新增
-
-        String tableName = "table_name";//新增
-
-        String customerNumber = "customer_number";//新增
-
+        String customerGender = "customer_gender";
+        String customerMobile = "customer_phone";
+        String startTime = "start_time";
+        String endTime = "end_time";
+        String tableId = "table_id";
+        String tableName = "table_name";
+        String customerNumber = "customer_number";
         String orderStatus = "order_status";
 
-        String remark = "remark";//更新
-
+        String remark = "remark";
         String cancelOrderTime = "cancel_order_time";
 
-        String bookingResource = "booking_source";//更新 orderSource
-
+        String bookingResource = "booking_source";
         String bookingType = "booking_type";
 
         String confirmed = "confirmed";
 
-        String brandIdenty = "brand_identy"; //新增
-
-        String shopIdenty = "shop_identy"; //新增
-
+        String brandIdenty = "brand_identy";
+        String shopIdenty = "shop_identy";
         String creatorID = "creator_id";
 
         String creatorName = "creator_name";
@@ -109,93 +92,62 @@ public class Booking extends DataEntityBase {
 
     }
 
-    /**
-     * 会员id
-     */
+
     @DatabaseField(columnName = "commercialId")
     private Long commercialId;
 
-    /**
-     * 会员名称
-     */
+
     @DatabaseField(columnName = "commercialName")
     private String commercialName;
 
-    /**
-     * 客户手机号
-     */
+
     @DatabaseField(columnName = "commercialPhone")
     private String commercialPhone;
 
-    /**
-     * 性别 0女 1 男
-     */
+
     @DatabaseField(columnName = "commercialGender")
     private Integer commercialGender;
 
-    /**
-     * 排序
-     */
+
     @DatabaseField(columnName = "sort")
     private Integer sort;
 
-    /**
-     * 预订开始时间
-     */
+
     @DatabaseField(columnName = "start_time")
     private Long startTime;
 
-    /**
-     * 预订结束时间
-     */
+
     @DatabaseField(columnName = "end_time")
     private Long endTime;
 
-    /**
-     * 桌台id
-     */
+
     @DatabaseField(columnName = "table_id")
     private Long tableId;
 
-    /**
-     * 桌台名称
-     */
+
     @DatabaseField(columnName = "table_name")
     private String tableName;
 
-    /**
-     * 预定人数
-     */
+
     @DatabaseField(columnName = "customer_num")
     private Integer customerNum;
 
-    /**
-     * 订单状态
-     * -1:用户未到店,1:用户到店,2:用户离店,9:已取消,-2:未处理,-3:已拒绝,-4:逾期未到店',
-     */
+
     @DatabaseField(columnName = "order_status")
     private Integer orderStatus;
 
-    /**
-     * 备注
-     */
+
     @DatabaseField(columnName = "remark")
     private String remark;
 
-    /**
-     * 订单来源
-     */
+
     @DatabaseField(columnName = "booking_source")
     private Integer bookingSource;
 
-    /**
-     * 订单类型 1美业
-     */
+
     @DatabaseField(columnName = "booking_type")
     private Integer bookingType;
 
-//	@DatabaseField(columnName = "confirmed")
-//	private boolean confirmed; //标记用户预定确认. 未确认:0 已确认: 1
 
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
@@ -210,95 +162,65 @@ public class Booking extends DataEntityBase {
     private String updatorName;
 
 
-    /**
-     * 0普通 1重点
-     */
+
     @DatabaseField(columnName = "is_important")
     private Integer isImportant;
 
-    /**
-     * 时段id
-     */
+
     @DatabaseField(columnName = "period_id")
     private Long periodID;
 
-    /**
-     * 对应客户表的synFlay
-     */
+
     @DatabaseField(columnName = "customer_synflag")
     private String customerSynflag;
 
-    /**
-     * 客户分组
-     */
+
     @DatabaseField(columnName = "customer_group")
     private String commercialGroup;
 
 
-    /**
-     * 消费标准
-     */
+
     @DatabaseField(columnName = "consumer_standard")
     private String consumeStandard;
 
 
-    /**
-     * 内部预订代订人
-     */
+
     @DatabaseField(columnName = "inner_order_person")
     private String innerOrderPerson;
 
 
-    /**
-     * 客户环境喜好
-     */
+
     @DatabaseField(columnName = "env_favorite")
     private String envFavorite;
 
-    /**
-     * 取消预订操作人
-     */
+
     @DatabaseField(columnName = "cancel_order_user")
     private String cancelOrderUser;
 
-    /**
-     * 消费时间
-     */
+
     @DatabaseField(columnName = "real_consume_time")
     private Long realConsumeTime;
 
-    /**
-     * 消费金额
-     */
+
     @DatabaseField(columnName = "real_consume")
     private BigDecimal realConsume;
 
-    /**
-     * 消费操作人人
-     */
+
     @DatabaseField(columnName = "real_consume_user")
     private String realConsumeUser;
 
-    /**
-     * 拒绝原因
-     */
+
     @DatabaseField(columnName = "refusal_reason")
     private String refusalReason;
 
 
     @DatabaseField(columnName = "nationalTelCode")
-    private String nationalTelCode;    //电话国际区码(为空默认中国)	否	String
+    private String nationalTelCode;
 
 
-    /**
-     * 备注
-     */
     public String orderDesc;
 
-    //////////////////////////////以下是扩展字段////////////////////////////
-    public Long levelId; //	等级Id
-    public boolean collectPrepayment; //是否有预付金
-
+        public Long levelId;     public boolean collectPrepayment;
     public String getCommercialName() {
         return commercialName;
     }
@@ -486,11 +408,9 @@ public class Booking extends DataEntityBase {
     }
 
     public void setConfirmed(boolean confirmed) {
-//		this.confirmed = confirmed;
     }
 
     public void setConfirmed(Boolean confirmed) {
-//		this.confirmed = confirmed;
     }
 
     @Override
@@ -574,38 +494,12 @@ public class Booking extends DataEntityBase {
         this.remark = remark;
     }
 
-    /*public String getCreatorName() {
-		List<User> authUserList = Session.getFunc(UserFunc.class).getUsers();
-		if (authUserList != null) {
-			for (User user : authUserList) {
-				if (creatorID != null && creatorID.equals(user.getId())) {
-					return user.getName();
-				}
-			}
-		}
-		return null;
-	}*/
 
-    /**
-     * 内部预订代订人
-     */
-	/*public String getInnerOrderPersonName() {
-		List<User> authUserList = Session.getFunc(UserFunc.class).getUsers();
-		if (authUserList != null) {
-			for (User user : authUserList) {
-				if (innerOrderPerson != null && innerOrderPerson.equals(user.getId())) {
-					return user.getName();
-				}
-			}
-		}
-		return null;
-	}*/
 
-    /**
-     * 判断是否老数据预订
-     *
-     * @return
-     */
+
+
+
+
     public boolean isOldInterface() {
         return getBookingType() == BookingType.NORMAL;
     }

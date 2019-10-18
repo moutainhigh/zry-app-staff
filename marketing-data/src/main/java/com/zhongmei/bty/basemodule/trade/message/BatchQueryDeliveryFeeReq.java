@@ -2,18 +2,13 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import java.util.List;
 
-/**
- * 查询配送费请求体
- */
+
 
 public class BatchQueryDeliveryFeeReq {
-    //品牌Id
-    private Long brandId;
+        private Long brandId;
 
-    //商户Id
-    private Long shopId;
-    //配送平台
-    private Integer deliveryPlatform;
+        private Long shopId;
+        private Integer deliveryPlatform;
 
     private List<DeliverFeeOrder> orders;
 
@@ -50,14 +45,11 @@ public class BatchQueryDeliveryFeeReq {
     }
 
     public static class DeliverFeeOrder {
-        //订单Id
-        private Long tradeId;
+                private Long tradeId;
 
-        //订单号
-        private String tradeNo;
+                private String tradeNo;
 
-        //第三方订单号
-        private String thirdTranNo;
+                private String thirdTranNo;
 
         public Long getTradeId() {
             return tradeId;

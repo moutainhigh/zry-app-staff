@@ -27,10 +27,6 @@ public enum TicketTypeEnum {
     INVOICE(21, 1, "发票申请单"),
 
     KITCHENALL(14, 2, "厨总单"),
-    //增加等叫,起菜,催菜的单独票据
-//    WAKEUP(23,2,"等叫单"),
-//    RISE(24,2,"起菜单"),
-//    REMIND(25,2,"催菜单"),
 
     TRANSFERTABLE(16, 2, "转台单"),
     MERGETABLE(18, 2, "合台单"),
@@ -42,12 +38,9 @@ public enum TicketTypeEnum {
     public static final int FRONT_CODE = 0x1;
     public static final int KITCHEN_CODE = 0x2;
 
-    private Integer code; // 票据code,相当于ID 唯一标识
-
-    private String name; // 票据名称
-
-    private Integer type; // 票据类型,前台票据还是后厨票据
-
+    private Integer code;
+    private String name;
+    private Integer type;
     TicketTypeEnum(Integer code, Integer type, String name) {
         this.code = code;
         this.type = type;
@@ -94,12 +87,6 @@ public enum TicketTypeEnum {
                 return mResources.getString(R.string.ticket_invoice);
             case KITCHENALL:
                 return mResources.getString(R.string.ticket_kitchenorder);
-//            case WAKEUP:
-//                return mResources.getString(R.string.ticket_kitchen_wakeup);
-//            case RISE:
-//                return mResources.getString(R.string.ticket_kitchen_rise);
-//            case REMIND:
-//                return mResources.getString(R.string.ticket_kitchen_remind);
             case TRANSFERTABLE:
                 return mResources.getString(R.string.ticket_transfer_table);
             case MERGETABLE:
@@ -116,32 +103,9 @@ public enum TicketTypeEnum {
         return type;
     }
 
-    /*public static List<TicketDocumentBean> getTicketDocumentBeanList(final int type) {
-        return getTicketDocumentBeanList(type, false);
-    }*/
 
-    /*public static List<TicketDocumentBean> getTicketDocumentBeanList(final int type, boolean checked) {
-        List<TicketDocumentBean> list = new ArrayList<>();
-        TicketTypeEnum[] defaultTypes = TicketTypeEnum.values();
-        for (TicketTypeEnum defaultType : defaultTypes) {
-            if (type == defaultType.getType()) {
-                TicketDocumentBean bean = new TicketDocumentBean();
-                bean.setTicketId((long) defaultType.getCode());
-                bean.setTicketName(defaultType.getName());
-                bean.setPrintCount(1);
-                bean.setChecked(checked);
-                bean.setIsPrintAllSubDish(StatusFlag.VALID.value());
-                if (defaultType == CHECK_OUT) {
-                    bean.setDeliveryType(CashierMealType.registerCashierType(0, CashierMealType.TYPE_HERE, CashierMealType.TYPE_SEND,
-                            CashierMealType.TYPE_TAKE, CashierMealType.TYPE_CARRY));
-                } else {
-                    bean.setDeliveryType(0);
-                }
-                list.add(bean);
-            }
-        }
-        return list;
-    }*/
+
+
 
     public static TicketTypeEnum toEnum(Integer ticketType) {
         if (ticketType == null) {

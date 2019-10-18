@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import java.util.List;
 
-/**
- * 订单下发配送平台返回体
- */
+
 
 public class DeliveryOrderDispatchResp {
     private List<FailOrder> failOrders;
@@ -18,10 +16,8 @@ public class DeliveryOrderDispatchResp {
     }
 
     public class FailOrder {
-        //订单ID
-        private Long orderId;
-        //失败原因
-        private String reason;
+                private Long orderId;
+                private String reason;
 
         public Long getOrderId() {
             return orderId;

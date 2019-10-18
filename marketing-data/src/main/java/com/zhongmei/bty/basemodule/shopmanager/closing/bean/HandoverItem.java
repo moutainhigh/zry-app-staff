@@ -1,15 +1,11 @@
 package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 
-/**
- * @date:2015年12月25日下午2:40:20
- */
+
 public class HandoverItem {
 
-    // pad编号
-    Integer padNo;
+        Integer padNo;
 
-    // 交接对象
-    HandoverCloseItem handover;
+        HandoverCloseItem handover;
 
     public Integer getPadNo() {
         return padNo;

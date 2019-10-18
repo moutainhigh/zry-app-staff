@@ -21,10 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 
-/**
- * @Date 2016/10/20
- * @Description:加菜单转换为TradeVo
- */
+
 public class CreateTradeVoFromAdddish {
     public static TradeVo create(AddItemVo addItemVo, DinnertableTradeVo dinnertableTradeVo) {
         List<AddItemRecord> records = addItemVo.getmAddItemRecords();
@@ -52,8 +49,7 @@ public class CreateTradeVoFromAdddish {
         CreateTradeTool.buildMainTradeVo(tradeVo);
         tradeVo.getTrade().setId(0L);
 
-        // 查询TradeItemProperty
-        Map<String, List<TradeItemProperty>> tradeItemPropertyListMap = new HashMap<String, List<TradeItemProperty>>();
+                Map<String, List<TradeItemProperty>> tradeItemPropertyListMap = new HashMap<String, List<TradeItemProperty>>();
 
         for (TradeItemProperty property : tradeItemProperties) {
             property.setChanged(true);
@@ -69,8 +65,7 @@ public class CreateTradeVoFromAdddish {
         List<TradeItemVo> tiVoList = new ArrayList<TradeItemVo>();
         TradeTable tradeTable = dinnertableTradeVo.getTradeVo().getTradeTableList().get(0);
         for (TradeItem tradeItem : tradeItems) {
-            //设置tradeTableUUid和tradetableId
-            if (tradeTable != null) {
+                        if (tradeTable != null) {
                 tradeItem.setTradeTableUuid(tradeTable.getUuid());
                 tradeItem.setTradeTableId(tradeTable.getId());
             }
@@ -79,8 +74,7 @@ public class CreateTradeVoFromAdddish {
             tradeItem.setChanged(true);
             tiVo.setTradeItem(tradeItem);
 
-            // 明细属性列表
-            List<TradeItemProperty> tips = tradeItemPropertyListMap.get(tradeItem.getUuid());
+                        List<TradeItemProperty> tips = tradeItemPropertyListMap.get(tradeItem.getUuid());
             tiVo.setTradeItemPropertyList(tips);
             tiVoList.add(tiVo);
         }

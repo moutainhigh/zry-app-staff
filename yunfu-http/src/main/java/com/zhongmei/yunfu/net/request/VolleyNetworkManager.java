@@ -14,9 +14,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class VolleyNetworkManager {
     private static final int TIMEOUT_MS = 10000;
 
@@ -32,12 +30,7 @@ public class VolleyNetworkManager {
         return sInstance;
     }
 
-    /**
-     * 发送请求
-     *
-     * @param context
-     * @param request
-     */
+
     public void executeRequest(Context context, NetworkRequest request) {
         VolleyRequest volleyRequest = createRequest(request);
         if (volleyRequest == null) {
@@ -75,16 +68,14 @@ public class VolleyNetworkManager {
         request.setTimeout(timeout);
     }
 
-    // 设置返回处理器
-    private void setResponseProcessor(VolleyRequest request, NetworkRequest.ResponseProcessor processor) {
+        private void setResponseProcessor(VolleyRequest request, NetworkRequest.ResponseProcessor processor) {
         if (processor == null) {
             return;
         }
         request.setResponseProcessor(processor);
     }
 
-    // 设置请求头
-    private void setRequestHeader(VolleyRequest volleyRequest, Map<String, String> header) {
+        private void setRequestHeader(VolleyRequest volleyRequest, Map<String, String> header) {
         if (header == null || header.isEmpty()) {
             return;
         }

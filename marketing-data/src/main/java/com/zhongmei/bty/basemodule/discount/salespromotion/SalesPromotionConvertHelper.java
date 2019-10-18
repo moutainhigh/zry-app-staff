@@ -32,14 +32,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 促销中转器
- * Created by demo on 2018/12/15
- */
+
 
 public class SalesPromotionConvertHelper {
-    private static final int WEEK_DAY_LENGTH = 7;//促销活动日期设置字符串长度
-
+    private static final int WEEK_DAY_LENGTH = 7;
     private static SalesPromotionConvertHelper mInstance = new SalesPromotionConvertHelper();
 
     private List<SalesPromotionRuleVo> mSalesPromotionRuleVos = new ArrayList<>();
@@ -65,11 +61,7 @@ public class SalesPromotionConvertHelper {
         mSalesPromotionRuleVos.addAll(salesPromotionRuleVoList);
     }
 
-    /**
-     * 获取所有的促销规则 转换成对应的SalesPromotionRuleVo
-     *
-     * @return
-     */
+
     public List<SalesPromotionRuleVo> getSalesPromotionRuleVos() {
         if (mSalesPromotionRuleVos.size() == 0) {
             buildSalesPromotionRuleVo();
@@ -77,11 +69,7 @@ public class SalesPromotionConvertHelper {
         return mSalesPromotionRuleVos;
     }
 
-    /**
-     * 获取所有的促销规则集合
-     *
-     * @return
-     */
+
     private static List<SalesPromotionRuleVo> convertToSalesPromotionRuleVo(List<LoytMruleActivityDish> loytMruleActivityDishes, List<LoytMruleMarketRule> loytMruleMarketRules, List<LoytMrulePlan> loytMrulePlans, List<LoytMrulePolicyDish> loytMrulePolicyDishes) {
         List<SalesPromotionRuleVo> salesPromotionRuleVos = new ArrayList<>();
 
@@ -110,12 +98,7 @@ public class SalesPromotionConvertHelper {
         return salesPromotionRuleVos;
     }
 
-    /**
-     * 将策略商品 存到Map中  减少后面使用的循环次数
-     *
-     * @param loytMrulePolicyDishes
-     * @param loytMrulePolicyDishesMap
-     */
+
     private static void storeLoytMrulePolicyDishesMap(List<LoytMrulePolicyDish> loytMrulePolicyDishes, Map<Long, List<LoytMrulePolicyDish>> loytMrulePolicyDishesMap) {
         for (LoytMrulePolicyDish loytMrulePolicyDish : loytMrulePolicyDishes) {
             Long planId = loytMrulePolicyDish.getPlanId();
@@ -131,12 +114,7 @@ public class SalesPromotionConvertHelper {
 
     }
 
-    /**
-     * 活动商品  存到Map中  减少后面使用的循环次数 优化
-     *
-     * @param loytMruleActivityDishes
-     * @param loytMruleActivityDishesMap
-     */
+
     private static void storeLoytMruleActivityDishesMap(List<LoytMruleActivityDish> loytMruleActivityDishes, Map<Long, List<LoytMruleActivityDish>> loytMruleActivityDishesMap) {
         for (LoytMruleActivityDish loytMruleActivityDish : loytMruleActivityDishes) {
             Long planId = loytMruleActivityDish.getPlanId();
@@ -151,32 +129,21 @@ public class SalesPromotionConvertHelper {
         }
     }
 
-    /**
-     * 营销方案 存到Map中  减少后面使用的循环次数 优化
-     *
-     * @param loytMrulePlans
-     * @param loytMrulePlanMap
-     */
+
     private static void storeLoytMrulePlanMap(List<LoytMrulePlan> loytMrulePlans, Map<Long, LoytMrulePlan> loytMrulePlanMap) {
         for (LoytMrulePlan loytMrulePlan : loytMrulePlans) {
             loytMrulePlanMap.put(loytMrulePlan.getId(), loytMrulePlan);
         }
     }
 
-    /**
-     * 该活动下
-     *
-     * @param loytMruleActivityDishes
-     * @return
-     */
+
     private static List<SalesPromotionDish> convertLoytMruleActivityDishToSalesPromotionDish(List<LoytMruleActivityDish> loytMruleActivityDishes) {
         List<SalesPromotionDish> salesPromotionDishes = new ArrayList<>();
         SalesPromotionDish salesPromotionDish;
         if (loytMruleActivityDishes != null) {
             DishManager dishManager = new DishManager();
             for (LoytMruleActivityDish loytMruleActivityDish : loytMruleActivityDishes) {
-                if (loytMruleActivityDish.getDishType() == 1) {//1-子菜品，2-中类菜品
-                    DishVo dishVo = dishManager.getDishVoByBrandDishId(loytMruleActivityDish.getDishId());
+                if (loytMruleActivityDish.getDishType() == 1) {                    DishVo dishVo = dishManager.getDishVoByBrandDishId(loytMruleActivityDish.getDishId());
                     if (dishVo != null) {
                         salesPromotionDish = new SalesPromotionDish();
                         salesPromotionDish.setRelateId(loytMruleActivityDish.getDishId());
@@ -201,20 +168,14 @@ public class SalesPromotionConvertHelper {
         return salesPromotionDishes;
     }
 
-    /**
-     * 并且
-     *
-     * @param loytMruleActivityDishes
-     * @return
-     */
+
     private static List<SalesPromotionPolicyDish> convertLoytMrulePolicyDishToSalesPromotionPolicyDish(List<LoytMrulePolicyDish> loytMruleActivityDishes) {
         List<SalesPromotionPolicyDish> salesPromotionDishes = new ArrayList<>();
         SalesPromotionPolicyDish salesPromotionDish;
         DishManager dishManager = new DishManager();
         if (loytMruleActivityDishes != null) {
             for (LoytMrulePolicyDish loytMrulePolicyDish : loytMruleActivityDishes) {
-                if (loytMrulePolicyDish.getDishType() == 1) {//1-子菜品，2-中类菜品
-                    DishVo dishVo = dishManager.getDishVoByBrandDishId(loytMrulePolicyDish.getDishId());
+                if (loytMrulePolicyDish.getDishType() == 1) {                    DishVo dishVo = dishManager.getDishVoByBrandDishId(loytMrulePolicyDish.getDishId());
                     if (dishVo != null) {
                         salesPromotionDish = new SalesPromotionPolicyDish();
                         salesPromotionDish.setRelateId(loytMrulePolicyDish.getDishId());
@@ -238,11 +199,7 @@ public class SalesPromotionConvertHelper {
         return salesPromotionDishes;
     }
 
-    /**
-     * @param loytMruleMarketRule
-     * @param loytMrulePlan
-     * @return
-     */
+
     private static SalesPromotionRule convertLoytMruleMarketRuleToSalesPromotionRule(LoytMruleMarketRule loytMruleMarketRule, LoytMrulePlan loytMrulePlan) {
         if (loytMruleMarketRule != null) {
             SalesPromotionRule salesPromotionRule = new SalesPromotionRule();
@@ -276,12 +233,10 @@ public class SalesPromotionConvertHelper {
             salesPromotionRule.setPolicyValue2(loytMruleMarketRule.getPolicyValue2());
             salesPromotionRule.setServerCreateTime(loytMruleMarketRule.getServerCreateTime());
 
-            //营销方案
-            salesPromotionRule.setPlanName(loytMrulePlan.getName());
+                        salesPromotionRule.setPlanName(loytMrulePlan.getName());
             salesPromotionRule.setPlanId(loytMrulePlan.getId());
             salesPromotionRule.setCouponShare(1 == loytMrulePlan.getCouponShared());
-            //营销周期
-            SalesPromotionValidityPeriod salesPromotionValidityPeriod = new SalesPromotionValidityPeriod();
+                        SalesPromotionValidityPeriod salesPromotionValidityPeriod = new SalesPromotionValidityPeriod();
             salesPromotionValidityPeriod.setStartDate(loytMrulePlan.getStartTime());
             salesPromotionValidityPeriod.setEndDate(loytMrulePlan.getEndTime());
             salesPromotionRule.setValidityPeriod(salesPromotionValidityPeriod);
@@ -300,9 +255,7 @@ public class SalesPromotionConvertHelper {
                 int key = i + 1;
                 SalesPromotionWeekday salesPromotionWeekday = weekdaySparseArray.get(key);
                 if (salesPromotionWeekday != null) {
-                    int value = weekDay.charAt(i) - (int) ('0');//转为'0～9'的数字
-                    boolean enable = (value == 1);//1为打开，其他为关闭
-                    salesPromotionWeekday.setEnable(enable);
+                    int value = weekDay.charAt(i) - (int) ('0');                    boolean enable = (value == 1);                    salesPromotionWeekday.setEnable(enable);
                 }
             }
         }
@@ -311,14 +264,7 @@ public class SalesPromotionConvertHelper {
 
     private static SparseArray<SalesPromotionWeekday> createDefaultSalesPromotionWeekdaySparseArray() {
         SparseArray<SalesPromotionWeekday> weekday = new SparseArray<SalesPromotionWeekday>();
-        weekday.put(1, createSalesPromotionWeekday(1, true));//星期天
-        weekday.put(2, createSalesPromotionWeekday(2, true));//星期一
-        weekday.put(3, createSalesPromotionWeekday(3, true));//星期二
-        weekday.put(4, createSalesPromotionWeekday(4, true));//星期三
-        weekday.put(5, createSalesPromotionWeekday(5, true));//星期四
-        weekday.put(6, createSalesPromotionWeekday(6, true));//星期五
-        weekday.put(7, createSalesPromotionWeekday(7, true));//星期六
-        return weekday;
+        weekday.put(1, createSalesPromotionWeekday(1, true));        weekday.put(2, createSalesPromotionWeekday(2, true));        weekday.put(3, createSalesPromotionWeekday(3, true));        weekday.put(4, createSalesPromotionWeekday(4, true));        weekday.put(5, createSalesPromotionWeekday(5, true));        weekday.put(6, createSalesPromotionWeekday(6, true));        weekday.put(7, createSalesPromotionWeekday(7, true));        return weekday;
     }
 
     private static SalesPromotionWeekday createSalesPromotionWeekday(int number, boolean enable) {

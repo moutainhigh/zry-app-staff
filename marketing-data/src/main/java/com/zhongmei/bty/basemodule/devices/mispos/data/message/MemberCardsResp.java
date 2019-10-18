@@ -4,19 +4,10 @@ import com.zhongmei.bty.basemodule.customer.message.CustomerInfoResp;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MemberCardsResp {
-    private int currentPage;//当前页
-    private int pageSize;//当前页
-    private int totalRows;//当前页
-    private int startRow;//开始记录数
-    private int[] showPageNums;//需要展现的页码
-    private int totalPage;//总页码数
-    private List<CustomerInfoResp.Card> items;//实体卡列表
-
+    private int currentPage;    private int pageSize;    private int totalRows;    private int startRow;    private int[] showPageNums;    private int totalPage;    private List<CustomerInfoResp.Card> items;
     public int getCurrentPage() {
         return currentPage;
     }

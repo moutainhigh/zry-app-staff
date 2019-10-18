@@ -50,9 +50,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.Date;
 
-/**
- * Created by dingzb on 2019/6/24.
- */
+
 @EFragment(R.layout.beauty_task_fragment)
 public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCheckedChangeListener,View.OnClickListener,OnRefreshListener, OnLoadMoreListener ,BeautyCreateOrEditTaskDialog.TaskOperatorLisnter,TaskItemView.OnOperateListener,BeautyResultTaskDialog.CallBackListener
 {
@@ -69,8 +67,7 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
     @ViewById(R.id.rb_custom_date)
     protected RadioButton rb_customDate;
     @ViewById(R.id.tv_custom_date)
-    protected TextView tv_customDate;//自定义时间
-
+    protected TextView tv_customDate;
     @ViewById(R.id.swipeToLoadLayout)
     protected SwipeToLoadLayout stl_refreshDataLayout;
     @ViewById(R.id.swipe_refresh_header)
@@ -86,8 +83,7 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
     private Date selectedDate;
 
     private CalendarDialog calendarDialog;
-    private int taskStatus=1;//1可执行的，2已超时的
-
+    private int taskStatus=1;
     private TaskQueryReq taskQueryReq = new TaskQueryReq();
 
     @Bean
@@ -113,8 +109,7 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
         rg_status.setOnCheckedChangeListener(this);
         rg_date.setOnCheckedChangeListener(this);
 
-        selectedDate = getDate(0);//初始化时间
-        taskQueryReq.setPageNo(1);
+        selectedDate = getDate(0);        taskQueryReq.setPageNo(1);
         taskQueryReq.setPageSize(20);
         taskQueryReq.setRemindTime(selectedDate.getTime());
         taskQueryReq.setStatus(taskStatus);
@@ -124,23 +119,14 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
 
 
 
-    /**
-     * 拿到N天之后的当前时间
-     * 今天 0，明天 1；
-     *
-     * @param afterDay
-     * @return
-     */
+
     private Date getDate(int afterDay) {
         Long curTime = System.currentTimeMillis();
         Long tarTime = curTime + (afterDay * 24 * 60 * 60 * 1000);
         return new Date(tarTime);
     }
 
-    /**
-     * 自定义日期
-     * @param date
-     */
+
     private void setCustomDate(Date date) {
         if (date == null) {
             String custom = getResources().getString(com.zhongmei.yunfu.beauty.R.string.beauty_custom);
@@ -153,9 +139,7 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
 
     }
 
-    /**
-     * 展示日期弹框
-     */
+
     private void showCalendarDialog() {
         calendarDialog = new CalendarDialog(getActivity(), listner);
         calendarDialog.setDefaultSelected(selectedDate);
@@ -229,13 +213,11 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch(checkedId){
             case R.id.rb_task:
-                taskStatus=1;//可执行的
-                taskQueryReq.setStatus(taskStatus);
+                taskStatus=1;                taskQueryReq.setStatus(taskStatus);
                 requestTasks(true);
                 break;
             case R.id.rb_outtime_task:
-                taskStatus=2;//过期的
-                taskQueryReq.setStatus(taskStatus);
+                taskStatus=2;                taskQueryReq.setStatus(taskStatus);
                 requestTasks(true);
                 break;
             case R.id.rb_today:
@@ -306,31 +288,26 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
 
     @Override
     public void save(TaskRemind taskObj) {
-        //刷新数据
-        onRefresh();
+                onRefresh();
     }
 
     @Override
     public void taskModify(TaskRemind task) {
-        //修改任务
-        showCreateDocDialog(task,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_EDIT);
+                showCreateDocDialog(task,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_EDIT);
     }
 
     @Override
     public void taskScan(TaskRemind task) {
-        //查看任务，还是调用修改任务，只是不允许修改
-        showCreateDocDialog(task,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_SCAN);
+                showCreateDocDialog(task,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_SCAN);
     }
 
     @Override
     public void taskException(TaskRemind task) {
-        //执行任务
-        showExecuteDialog(task);
+                showExecuteDialog(task);
     }
 
     @Override
     public void onSuccess(TaskRemind task) {
-        //刷新数据
-        onRefresh();
+                onRefresh();
     }
 }

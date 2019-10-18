@@ -6,54 +6,34 @@ import com.zhongmei.bty.basemodule.trade.enums.TableTypeZone;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.bty.commonmodule.database.entity.base.OldEntityBase;
 
-/**
- * Trade is a ORMLite bean type. Corresponds to the database table "table_type"
- */
+
 @DatabaseTable(tableName = "table_type")
 public class TableType extends OldEntityBase {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "table_type"
-     */
+
     public interface $ extends OldEntityBase.$ {
 
-        /**
-         * table_type_name
-         */
+
         String tableTypeName = "table_type_name";
 
-        /**
-         * table_type_zone
-         */
+
         String tablePersonCount = "tableType";
 
-        /**
-         * sort
-         */
+
         String sort = "sort";
 
-        /**
-         * uuid
-         */
+
         String uuid = "uuid";
 
-        /**
-         * commercial_id
-         */
+
         String commercialID = "commercial_id";
 
-        /**
-         * create_date_time
-         */
+
         String createDateTime = "create_date_time";
 
-        /**
-         * modify_date_time
-         */
+
         String modifyDateTime = "modify_date_time";
 
     }
@@ -67,9 +47,7 @@ public class TableType extends OldEntityBase {
     @DatabaseField(columnName = "table_type_zone")
     private Integer tableType;
 
-    /**
-     * 排序
-     */
+
     @DatabaseField(columnName = "sort")
     private Integer sort;
 

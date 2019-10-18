@@ -2,16 +2,12 @@ package com.zhongmei.bty.entity.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public enum QueueProofType implements ValueEnum<String> {
 
-    //短信
-    MMS("mms"),
+        MMS("mms"),
 
-    //打印
-    PRINT("print"),
+        PRINT("print"),
 
 
     @Deprecated

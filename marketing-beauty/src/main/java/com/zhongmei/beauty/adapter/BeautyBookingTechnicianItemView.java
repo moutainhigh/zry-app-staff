@@ -8,9 +8,7 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.yunfu.context.session.core.user.User;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BeautyBookingTechnicianItemView extends RelativeLayout {
 
     private TextView tv_name;

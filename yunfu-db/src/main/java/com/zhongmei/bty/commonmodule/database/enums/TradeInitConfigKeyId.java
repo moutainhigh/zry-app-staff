@@ -4,18 +4,9 @@ import com.zhongmei.yunfu.util.ValueEnum;
 
 public enum TradeInitConfigKeyId implements ValueEnum<Integer> {
 
-    CURRENCY_TYPE(1), //货币类型
-    SERVICE_CHARGE_RATE(2),//服务费费率
-    /**
-     * {@link KouBeiNumberType}
-     */
-    KOU_BEI_NUMBER_TYPE(3),//口碑 桌台号:1,号牌:2
+    CURRENCY_TYPE(1),     SERVICE_CHARGE_RATE(2),
+    KOU_BEI_NUMBER_TYPE(3),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
     @Deprecated
     __UNKNOWN__;
 

@@ -10,10 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 关账明细表
- * Created by demo on 2018/12/15
- */
+
 public class CloseBillDataInfo implements Serializable {
 
     public static final int stateTotalBillList = 1 << 1;
@@ -34,205 +31,126 @@ public class CloseBillDataInfo implements Serializable {
             | stateDishBigTypeList
             | stateThirdTakeOutList;
 
-    /*****新增******/
+
     private Long id;
 
-    private List<OrderSale> orderSaleList;//订单销售实收
-
+    private List<OrderSale> orderSaleList;
     private String orderSaleAmount;
 
-    private List<OrderSale> orderSaleInnerList;//订单销售实收（店内）
-
-    private String orderSaleAmountInner;//店内销售实收（店内）
-
-    private List<KeyValue> chargeOffsList; //销账收入
-
+    private List<OrderSale> orderSaleInnerList;
+    private String orderSaleAmountInner;
+    private List<KeyValue> chargeOffsList;
     private String chargeOffsAmount;
 
-    private List<KeyValue> expendAccountList;//支出
-    private String bookingActualAmount;//预定金
-
-    private List<KeyValue> bookingPayList;//预定金支付列表
-
+    private List<KeyValue> expendAccountList;    private String bookingActualAmount;
+    private List<KeyValue> bookingPayList;
     private String expendAccount;
 
-    private List<KeyValue> otherIncomeList;//其他收入
-
+    private List<KeyValue> otherIncomeList;
     private String otherIncomeAmount;
 
-    private List<KeyValue> hangAccountList;//挂账
-
+    private List<KeyValue> hangAccountList;
     private String hangAccountAmount;
 
     private List<DishKeyValue> dishSaleUp;
 
-    private String memberConsumeAmount;//储值消费金额
+    private String memberConsumeAmount;
+    private String returnAmount;
+    private BigDecimal closeBillAmount;
+    private BigDecimal closeBillAmountInner;
+    private BigDecimal onOffCreditAmount;
+    private List<PrivilegeItem> privilegeGroups;
+    private List<PrivilegeItem> privilegeInnerGroups;
+    private List<DetailsKeyValue> actualDetailList;
+    private List<DetailsKeyValue> actualDetailInnerList;
+    private List<DetailsKeyValue> totalBillList;
+    private List<DetailsKeyValue> totalBillInnerList;
+    private List<DetailsKeyValue> hangBillList;
 
-    private String returnAmount;//退货金额;
 
-    private BigDecimal closeBillAmount;//关账总金额
-
-    private BigDecimal closeBillAmountInner;//关账总金额(店内)
-
-    private BigDecimal onOffCreditAmount;//当日挂账且当日销账金额
-
-    private List<PrivilegeItem> privilegeGroups;//优惠项目跟明细
-
-    private List<PrivilegeItem> privilegeInnerGroups;//优惠项目跟明细（店内）
-
-    private List<DetailsKeyValue> actualDetailList;//销售实收明细
-
-    private List<DetailsKeyValue> actualDetailInnerList;//销售实收明细(店内)
-
-    private List<DetailsKeyValue> totalBillList;//关账总金额明细
-
-    private List<DetailsKeyValue> totalBillInnerList;//关账总金额明细（店内）
-
-    private List<DetailsKeyValue> hangBillList;//挂账
-    /******新增结束******/
-
-    /**
-     * 归账日
-     */
     private String belongDate;
-    /**
-     * 开始时间
-     */
+
     private String startDate;
-    /**
-     * 结束时间
-     */
+
     private String endDate;
-    /**
-     * 营业概况
-     */
+
     private BizAmountInfo bizInfo;
 
-    /**
-     * 营业概况
-     */
+
     private BizAmountInfo bizInfoInner;
 
 
-    /**
-     * 营业概况  总额
-     */
+
     private String bizAmount;
 
-    /**
-     * 营业概况  总额(店内)
-     */
+
     private String bizAmountInner;
 
-    private String dd;//test
+    private String dd;
 
 
-    /**
-     * 收入类型
-     */
     private List<ReceiptPayType> busAmountList;
 
-    /**
-     * 营业收入  总额
-     */
+
     private String bizComeAmount;
 
-    /**
-     * 储值实收
-     */
+
     private List<ReceiptPayType> memberAmountList;
 
-    /**
-     * 订单类型  总额
-     */
+
     private String bizMemberAmount;
 
-    /**
-     * 订单销售实收
-     */
+
     private List<TradeTypeCount> tradeTypeList;
 
-    /**
-     * 订单类型  总额
-     */
+
     private String tradeTypeAmount;
 
-    /**
-     * 核数
-     */
+
     private List<TradeAVGCount> checkTradeList;
 
-    /**
-     * 核数  总额
-     */
+
     private String checkAmount;
 
-    /**
-     * 销售商品(中类)
-     */
+
     private List<BillDishTypeInfo> dishTypeList;
 
-    /**
-     * 销售商品(大类)
-     */
+
     @SerializedName("typeBigList")
     private List<BillDishTypeInfo> dishBigTypeList;
 
-    /**
-     * 商品  总额
-     */
+
     private String dishAmount;
 
-    /**
-     * 折扣优惠明细
-     */
+
     private DiscountDetailVo discountDetailVo;
 
-    /**
-     * 折扣优惠明细  总额
-     */
+
     private String discountAmount;
-    /**
-     * 请求返回信息
-     */
+
     private String message;
-    /**
-     * 请求状态 1成功 0 失败
-     */
+
     private Integer status;
 
-    /**
-     * 操作人ID
-     */
+
     private String creatorId;
-    /**
-     * 操作员名称
-     */
+
     private String creatorName;
-    //挂账金额
-    private BigDecimal onCredit;
-    //销账金额
-    private BigDecimal offCredit;
+        private BigDecimal onCredit;
+        private BigDecimal offCredit;
 
-    //挂账笔数
-    private Integer onCreditNum;
+        private Integer onCreditNum;
 
-    //优惠总金额 包含促销
-    private BigDecimal privilegeAmountTotal;
+        private BigDecimal privilegeAmountTotal;
 
-    //优惠总金额 包含促销(店内)
-    private BigDecimal privilegeInnerAmountTotal;
+        private BigDecimal privilegeInnerAmountTotal;
 
-    //销账笔数
-    private Integer offCreditNum;
+        private Integer offCreditNum;
 
-    //押金
-    private TradeDeposit tradeDeposit;
+        private TradeDeposit tradeDeposit;
 
-    //附加费总额
-    private BigDecimal extraChargeSum;
-    // 收押金总额
-    private BigDecimal depositPaySum;
+        private BigDecimal extraChargeSum;
+        private BigDecimal depositPaySum;
 
     public List<OrderSale> getOrderSaleInnerList() {
         return orderSaleInnerList;
@@ -306,19 +224,13 @@ public class CloseBillDataInfo implements Serializable {
         this.privilegeInnerAmountTotal = privilegeInnerAmountTotal;
     }
 
-    //退押金总额
-    private BigDecimal depositRefundSum;
-    //退押益收
-    private BigDecimal depositAmount;
+        private BigDecimal depositRefundSum;
+        private BigDecimal depositAmount;
 
-    private BigDecimal busThirdAmount;//第三方平台实收金额
-
-    private BigDecimal thirdUsefulAmount;//第三方预计实付
-
-    private BigDecimal expectedTotalAmount;//预计总收款
-
-    private List<ThirtyPayDetails> busThirdAmountList;//第三方营业收入，订单销售实收
-
+    private BigDecimal busThirdAmount;
+    private BigDecimal thirdUsefulAmount;
+    private BigDecimal expectedTotalAmount;
+    private List<ThirtyPayDetails> busThirdAmountList;
     public String getBelongDate() {
         return belongDate;
     }
@@ -792,12 +704,7 @@ public class CloseBillDataInfo implements Serializable {
         this.bookingPayList = bookingPayList;
     }
 
-    /**
-     * 判断当前板块统计是否选中
-     *
-     * @param _state
-     * @return
-     */
+
     public boolean isItemChecked(int _state) {
         return (state & _state) == _state;
     }
@@ -821,11 +728,7 @@ public class CloseBillDataInfo implements Serializable {
         }
     }
 
-    /**
-     * 清除未选择项
-     *
-     * @param titleBeanList
-     */
+
     public void setItemChecked(List<TitleBean> titleBeanList) {
         state = 0;
         for (TitleBean bean : titleBeanList) {

@@ -4,18 +4,14 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.IdEntityBase;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @DatabaseTable(tableName = "loyt_mrule_plan")
 public class LoytMrulePlan extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "loyt_mrule_plan"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
         public static final String name = "name";
@@ -46,62 +42,44 @@ public class LoytMrulePlan extends IdEntityBase {
     }
 
     @DatabaseField(columnName = "name")
-    private String name;//方案名称
-
+    private String name;
     @DatabaseField(columnName = "brand_id")
-    private Long brandId;//商户Id
-
+    private Long brandId;
     @DatabaseField(columnName = "plan_type")
-    private int planType;//1,新会员招募 2,升级会员赠券 3,精准营销 4,消费满额赠券 5,储值赠券 6,生日营销 7,抽奖营销 8,预订营销 9,排队营销 10,单商品营销 11,多商品营销 12,关怀信息推送 13,分享营销 14,进店领券 15,评分赠券 16,支付有礼17,消费频次激励18,消费累计满额赠券  19满量促销,20满额促销21, 买赠活动 22, 单一价
-
+    private int planType;
     @DatabaseField(columnName = "plan_state")
     private int planState;
-    ;//1, 新建2, 进行中3, 暂停4, 结束
-
+    ;
     @DatabaseField(columnName = "start_time")
     private String startTime;
-    ;//营销周期开始时间
-
+    ;
     @DatabaseField(columnName = "end_time")
     private String endTime;
-    ;//营销周期结束时间
-
+    ;
     @DatabaseField(columnName = "limit_commercial")
-    private int limitCommercial;//是否限制参与门店
-
+    private int limitCommercial;
     @DatabaseField(columnName = "coupon_shared")
-    private int couponShared;//多商品营销中的配置，未来可能还会有其他的同享类型，到时再增加相应的标识字段
-
+    private int couponShared;
     @DatabaseField(columnName = "limit_period")
-    private int limitPeriod;//是否限制时段
-
+    private int limitPeriod;
     @DatabaseField(columnName = "start_period")
-    private String startPeriod;//控制到分钟，格式：HH:mm
-
+    private String startPeriod;
     @DatabaseField(columnName = "end_period")
-    private String endPeriod;//控制到分钟，格式：HH:mm
-
+    private String endPeriod;
     @DatabaseField(columnName = "limit_week")
-    private int limitWeek;//是否限制星期
-
+    private int limitWeek;
     @DatabaseField(columnName = "week_day")
-    private String weekDay;//星期1，2，3，4，5，6，7
-
+    private String weekDay;
     @DatabaseField(columnName = "stack_rule")
-    private int stackRule;//是否叠加
-
+    private int stackRule;
     @DatabaseField(columnName = "apply_crowd")
-    private int applyCrowd;//适用人群：1.会员，2.非会员，3.不限，4.人群标签
-
+    private int applyCrowd;
     @DatabaseField(columnName = "crowd_tag_id")
-    private int crowdTagId;//人群标签Id
-
+    private int crowdTagId;
     @DatabaseField(columnName = "description")
-    private String description;//方案描述
-
+    private String description;
     @DatabaseField(columnName = "deleted_flag")
-    private int deletedFlag;//0未删除，1已删除
-
+    private int deletedFlag;
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
 
@@ -292,8 +270,7 @@ public class LoytMrulePlan extends IdEntityBase {
 
     @Override
     public boolean isValid() {
-        return deletedFlag == 0;//0未删除，1已删除
-    }
+        return deletedFlag == 0;    }
 
     @Override
     public Long verValue() {

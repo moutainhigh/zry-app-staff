@@ -13,11 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * @Date：2015年9月29日 下午2:35:40
- * @Description: TODO
- * @Version: 1.0
- */
+
 public abstract class AbstractSpinerAdapter<T> extends BaseAdapter {
 
     public static interface IOnItemSelectListener {

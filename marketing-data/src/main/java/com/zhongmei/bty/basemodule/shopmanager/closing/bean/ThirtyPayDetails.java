@@ -2,16 +2,10 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ThirtyPayDetails {
-    private String payName;//支付方式名称
-    private BigDecimal payAmount;//第三方实收金额
-    private BigDecimal thirdUsefulAmount;//第三方预计实付金额
-    private int itemCount;//笔数
-
+    private String payName;    private BigDecimal payAmount;    private BigDecimal thirdUsefulAmount;    private int itemCount;
     public String getPayName() {
         return payName;
     }

@@ -39,13 +39,6 @@ public class ObservableScrollView extends ScrollView {
             mListener.scrollYPostion(t);
         }
 
-//		if (oldt > t && oldt - t > SCROLLLIMIT) {
-//			if (mListener != null)
-//				mListener.scrollOritention(SCROLL_DOWN);
-//		} else if (oldt < t && t - oldt > SCROLLLIMIT) {
-//			if (mListener != null)
-//				mListener.scrollOritention(SCROLL_UP);
-//		}
     }
 
     public void setScrollListener(ScrollListener l) {

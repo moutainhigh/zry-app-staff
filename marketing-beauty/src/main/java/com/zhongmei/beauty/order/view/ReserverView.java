@@ -16,9 +16,7 @@ import com.zhongmei.beauty.entity.ReserverItemVo;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ReserverView extends LinearLayout implements BeautyBookingTradeControlListener {
     private final String TAG = ReserverView.class.getSimpleName();

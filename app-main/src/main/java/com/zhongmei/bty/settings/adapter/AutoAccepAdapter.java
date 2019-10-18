@@ -20,13 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @Date：2015年9月14日 下午6:14:31
- * @Description: 自动接单设置界面适配器
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class AutoAccepAdapter extends BaseAdapter {
     private Context context;
 
@@ -74,8 +68,7 @@ public class AutoAccepAdapter extends BaseAdapter {
         TradeDealSettingItem tradeDealSettingItem = (TradeDealSettingItem) getItem(position);
         viewHolder.showTime.setText(context.getString(R.string.time_frame_msg, tradeDealSettingItem.getStartTime(), tradeDealSettingItem.getEndTime()));
         viewHolder.showSingles.setText(context.getString(R.string.order_number_msg, tradeDealSettingItem.getOrderNum()));
-        // 设置项开关
-        Set<String> keys =
+                Set<String> keys =
                 SpHelper.getDefault().getStringSet(Constant.SP_AUTO_ACCEPT_SWITCH, new HashSet<String>());
         final String key = TradeDealServiceUtil.generateAutoAcceptSettingKey(tradeDealSettingItem.getId());
         viewHolder.toggleButton.setChecked(keys.contains(key));

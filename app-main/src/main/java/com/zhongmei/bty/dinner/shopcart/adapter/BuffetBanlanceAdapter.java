@@ -31,44 +31,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * create by dzb 2017/06/26
- */
+
 public class BuffetBanlanceAdapter extends DinnerBanlanceAdapter {
     private Context mContext;
     private Map<Integer, List<IShopcartItem>> dishGroup = null;
 
     protected BigDecimal shellActumalAmount = BigDecimal.ZERO;
 
-    /**
-     * @param context
-     * @Constructor
-     * @Description 构造函数，
-     */
+
     public BuffetBanlanceAdapter(Context context) {
         super(context);
         this.mContext = context;
     }
 
 
-    /**
-     * 获取餐标下菜品的实际价格
-     *
-     * @return
-     */
+
     public BigDecimal getShellActumalAmount() {
         return shellActumalAmount;
     }
 
 
     public void updateGroupData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
-        this.data.clear();// 清空数据
-        this.mAllDishCount = BigDecimal.ZERO;
+        this.data.clear();        this.mAllDishCount = BigDecimal.ZERO;
 
         this.dishGroup = BuffetAdapterUtil.buildBuffetShopcartData(context, tradeVo, dataList, data, this);
-        updateTrade(tradeVo, isShowInvalid);// 构建整单属性显示对象并刷新列表
-//        updateOutTimeFeeItem(tradeVo);
-    }
+        updateTrade(tradeVo, isShowInvalid);    }
 
 
     protected void buildExtraCharge(TradeVo tradeVo) {
@@ -77,9 +64,7 @@ public class BuffetBanlanceAdapter extends DinnerBanlanceAdapter {
             for (TradePrivilege tradePrivilege : tradeprivileges) {
                 if (tradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL && tradePrivilege.isValid()) {
                     DishDataItem item = new DishDataItem(ItemType.ADDITIONAL);
-                    // 下个迭代使用这个name
-                    // item.setName(tradePrivilege.getSurchargeName());
-                    ExtraCharge extraCharge = tradeVo.getMinconExtraCharge();
+                                                            ExtraCharge extraCharge = tradeVo.getMinconExtraCharge();
                     if (extraCharge != null && extraCharge.getStatusFlag() == StatusFlag.VALID
                             && tradePrivilege.getPromoId() != null && extraCharge.getId().compareTo(tradePrivilege.getPromoId()) == 0) {
                         item.setExtraType(ExtraItemType.MIN_CONSUM);
@@ -93,9 +78,7 @@ public class BuffetBanlanceAdapter extends DinnerBanlanceAdapter {
                     double value = tradePrivilege == null ? 0 : tradePrivilege.getPrivilegeAmount().doubleValue();
                     item.setValue(value);
                     item.setExtraCharge(extraCharge);
-                    //if(extraCharge.getCode().equals(ExtraManager.BUFFET_MIN_CONSUM))
-                    //    item.setExtraType(ExtraItemType.MIN_CONSUM);
-                    data.add(item);
+                                                            data.add(item);
                 }
             }
         }
@@ -132,9 +115,7 @@ public class BuffetBanlanceAdapter extends DinnerBanlanceAdapter {
     };
 
     @Override
-    public void updateOutTimeFeeItem(TradeVo tradeVo) {//计算超时费用
-        //计算附加费
-        boolean outTimeFeeEnable = ServerSettingCache.getInstance().getBuffetOutTimeFeeEnable();
+    public void updateOutTimeFeeItem(TradeVo tradeVo) {                boolean outTimeFeeEnable = ServerSettingCache.getInstance().getBuffetOutTimeFeeEnable();
 
         if (!outTimeFeeEnable) {
             if (Utils.isNotEmpty(tradeVo.getOutTimeFeePrivaleges())) {
@@ -149,20 +130,17 @@ public class BuffetBanlanceAdapter extends DinnerBanlanceAdapter {
 
         OutTimeInfo outTimeInfo = ServerSettingCache.getInstance().getBuffetOutTimeFeeRule();
 
-        long spendMinute = (System.currentTimeMillis() - tradeVo.getTrade().getServerCreateTime()) / (60 * 1000);//就餐用时（分钟）
-
+        long spendMinute = (System.currentTimeMillis() - tradeVo.getTrade().getServerCreateTime()) / (60 * 1000);
         long diffTime = outTimeInfo.getLimitTimeLine() - spendMinute;
 
-        if (diffTime > 0) {//还没有超时
-            return;
+        if (diffTime > 0) {            return;
         }
 
         int outTimeCount = (int) Math.ceil(Math.abs((double) diffTime) / outTimeInfo.getOutTimeUnit());
 
         BigDecimal mOutTimeFee = BigDecimal.valueOf(outTimeCount).multiply(outTimeInfo.getOutTimeFee()).multiply(BigDecimal.valueOf(tradeVo.getTrade().getTradePeopleCount()));
 
-        String hint = String.format(mContext.getResources().getString(R.string.buffet_outtime_hint), Math.abs(diffTime) + "", MathDecimal.toDecimalFormatString(outTimeInfo.getOutTimeFee()), MathDecimal.toDecimalFormatString(outTimeInfo.getOutTimeUnit()));//50/60分钟
-
+        String hint = String.format(mContext.getResources().getString(R.string.buffet_outtime_hint), Math.abs(diffTime) + "", MathDecimal.toDecimalFormatString(outTimeInfo.getOutTimeFee()), MathDecimal.toDecimalFormatString(outTimeInfo.getOutTimeUnit()));
 
         BigDecimal tradeOutTimeFee = BigDecimal.ZERO;
         List<TradePrivilege> tradeprivileges = tradeVo.getTradePrivileges();
@@ -176,8 +154,7 @@ public class BuffetBanlanceAdapter extends DinnerBanlanceAdapter {
 
         for (TradePrivilege tradePrivilege : tradeprivileges) {
             if (tradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL && tradePrivilege.getPromoId() != null && extraChargeOutTime.getId().compareTo(tradePrivilege.getPromoId()) == 0) {
-                tradePrivilege.setStatusFlag(StatusFlag.VALID);//全部设置为有效
-                tmpOutTimePrivilege.add(tradePrivilege);
+                tradePrivilege.setStatusFlag(StatusFlag.VALID);                tmpOutTimePrivilege.add(tradePrivilege);
             }
         }
 
@@ -192,8 +169,7 @@ public class BuffetBanlanceAdapter extends DinnerBanlanceAdapter {
         }
 
         for (int i = 0; i < outTimeCountDiff; i++) {
-            //加入超时费
-            tradeprivileges.add(buildOutTimeTradePrivilege(extraChargeOutTime, null, tradeVo));
+                        tradeprivileges.add(buildOutTimeTradePrivilege(extraChargeOutTime, null, tradeVo));
         }
 
         MathShoppingCartTool.mathTotalPrice(DinnerShoppingCart.getInstance().getShoppingCartDish(), tradeVo);
@@ -207,11 +183,7 @@ public class BuffetBanlanceAdapter extends DinnerBanlanceAdapter {
                 extraCharge, BigDecimal.ZERO);
     }
 
-    /**
-     * 返回菜品分组显示
-     *
-     * @return
-     */
+
     public Map<Integer, List<IShopcartItem>> getGroup() {
         return dishGroup;
     }

@@ -11,10 +11,7 @@ import com.zhongmei.yunfu.db.entity.trade.Payment;
 
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年4月22日
- */
+
 public class TradePaymentResp extends TradeResp {
 
     private List<Payment> payments;
@@ -31,8 +28,7 @@ public class TradePaymentResp extends TradeResp {
 
     private List<PaymentItemGroupon> paymentItemGroupons;
 
-    // v8.5.0 新增 返回卡充值信息
-    private List<MemberValueCard> memberValuecard;
+        private List<MemberValueCard> memberValuecard;
 
     public List<Payment> getPayments() {
         return payments;

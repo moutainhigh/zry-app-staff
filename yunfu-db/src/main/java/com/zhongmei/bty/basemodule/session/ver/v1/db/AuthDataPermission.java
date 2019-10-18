@@ -4,42 +4,28 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.BasicEntityBase;
 
-/**
- * AuthDataPerimission is a ORMLite bean type. Corresponds to the database table "auth_data_permission"
- */
+
 @DatabaseTable(tableName = "auth_data_permission")
 public class AuthDataPermission extends BasicEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "auth_data_permission"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * content
-         */
+
         public static final String content = "content";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * permission_id
-         */
+
         public static final String permissionId = "permission_id";
 
-        /**
-         * role_id
-         */
+
         public static final String roleId = "role_id";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
     }

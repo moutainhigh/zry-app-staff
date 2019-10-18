@@ -10,15 +10,10 @@ import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Desc
- *
- * @created 2017/6/19
- */
+
 public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks {
 
-    private List<SoftReference<Activity>> activityList = new ArrayList<>();//管理程序中所有activity
-    private AppExitCallback appExitCallback;
+    private List<SoftReference<Activity>> activityList = new ArrayList<>();    private AppExitCallback appExitCallback;
     private AppExitCallback finishExitCallback;
 
     public interface AppExitCallback {
@@ -29,22 +24,14 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         this.appExitCallback = appExitCallback;
     }
 
-    /**
-     * 添加activity
-     *
-     * @param activity
-     */
+
     public void addActivity(Activity activity) {
         synchronized (activityList) {
             activityList.add(new SoftReference<>(activity));
         }
     }
 
-    /**
-     * 移出activity
-     *
-     * @param activity
-     */
+
     public void removeActivity(Activity activity) {
         synchronized (activityList) {
             for (int i = activityList.size() - 1; i >= 0; i--) {
@@ -56,9 +43,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         }
     }
 
-    /**
-     * 结束所有activity
-     */
+
     public void finishAllActivity(AppExitCallback callback) {
         this.finishExitCallback = callback;
         synchronized (activityList) {
@@ -76,11 +61,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         }
     }
 
-    /**
-     * 获取当前
-     *
-     * @return
-     */
+
     public Activity getCurrentActivity() {
         for (int i = activityList.size() - 1; i >= 0; i--) {
             SoftReference<Activity> softReference = activityList.get(i);

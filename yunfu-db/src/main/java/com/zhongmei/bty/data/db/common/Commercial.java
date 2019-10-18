@@ -6,26 +6,18 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.EntityBase;
 import com.zhongmei.bty.entity.enums.CommercialStatus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "commercial")
 public class Commercial extends EntityBase<Long> {
 
     public interface $ {
-        /**
-         * commercialID
-         */
+
         public static final String commercialID = "commercial_id";
 
-        /**
-         * status
-         */
+
         public static final String status = "status";
 
-        /**
-         * server_update_time
-         */
+
         public static final String modifyDateTime = "server_update_time";
     }
 

@@ -16,9 +16,7 @@ import com.zhongmei.yunfu.resp.data.GatewayTransferResp;
 
 import java.util.Locale;
 
-/**
- * 加消费Presenter
- */
+
 public class AddFeePresenter implements IAddFeePresenter {
 
     IAddFeeView iView;
@@ -82,8 +80,7 @@ public class AddFeePresenter implements IAddFeePresenter {
             ToastUtil.showShortToast(R.string.order_center_add_fee_max_error);
             return;
         }
-        // 判断金额
-        Double amount = total + point / 10d;
+                Double amount = total + point / 10d;
 
         ResponseListener<GatewayTransferResp<AddFeeResp>> listener = LoadingResponseListener
                 .ensure(new ResponseListener<GatewayTransferResp<AddFeeResp>>() {
@@ -113,8 +110,7 @@ public class AddFeePresenter implements IAddFeePresenter {
     @Override
     public void numClick(int num) {
         switch (num) {
-            case -1: // point
-                if (hasPoint) {
+            case -1:                 if (hasPoint) {
                     return;
                 }
                 if (total >= limit) {
@@ -123,8 +119,7 @@ public class AddFeePresenter implements IAddFeePresenter {
                 }
                 hasPoint = true;
                 break;
-            case -2: // delete
-                if (hasPoint && point != 0) {
+            case -2:                 if (hasPoint && point != 0) {
                     point = 0;
                 } else if (hasPoint) {
                     hasPoint = false;
@@ -136,8 +131,7 @@ public class AddFeePresenter implements IAddFeePresenter {
                 if (hasPoint) {
                     int result = point * 10 + num;
                     if (result >= 10) {
-                        // 小费金额最多只支持一位小数
-                        ToastUtil.showShortToast(R.string.order_center_add_fee_limit_error);
+                                                ToastUtil.showShortToast(R.string.order_center_add_fee_limit_error);
                     } else {
                         point = num;
                     }
@@ -151,13 +145,10 @@ public class AddFeePresenter implements IAddFeePresenter {
                 }
                 break;
         }
-        // 验证限制
-        checkValueLimit();
+                checkValueLimit();
     }
 
-    /**
-     * 验证限制（单元测试用）
-     */
+
     @SuppressWarnings("WeakerAccess")
     void checkValueLimit() {
         if (total > limit || (total == limit && (point > 0 || (point == 0 && hasPoint)))) {
@@ -165,15 +156,12 @@ public class AddFeePresenter implements IAddFeePresenter {
             total = limit;
             point = 0;
         }
-        // 判断
-        iView.setMinusEnable(total > 0 || (total == 0 && point > 0));
+                iView.setMinusEnable(total > 0 || (total == 0 && point > 0));
         iView.setPlusEnable(total < limit);
         iView.setFeeValue(feeValue());
     }
 
-    /**
-     * 显示数据
-     */
+
     String feeValue() {
         if (hasPoint && point == 0) {
             return String.format(Locale.CHINA, ShopInfoCfg.getInstance().getCurrencySymbol() + "%d.", total);

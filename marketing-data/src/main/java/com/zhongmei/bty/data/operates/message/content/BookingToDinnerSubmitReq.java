@@ -8,11 +8,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * Desc
- *
- * @created 2017/8/26
- */
+
 public class BookingToDinnerSubmitReq extends Trade {
 
     public BookingInfoBean bookingInfo;

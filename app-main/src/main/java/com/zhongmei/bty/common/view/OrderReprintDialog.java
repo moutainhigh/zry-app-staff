@@ -72,8 +72,7 @@ public class OrderReprintDialog extends BasicDialogFragment implements OnItemCli
 
     private static final String DEPOSIT = "deposit";
 
-    private final static String CREDIT = "credit";//挂账
-
+    private final static String CREDIT = "credit";
     @ViewById(R.id.ordercenter_reprint_listview)
     ListView mListView;
 
@@ -194,8 +193,7 @@ public class OrderReprintDialog extends BasicDialogFragment implements OnItemCli
 
     @Click(R.id.ordercenter_reprint_cancel)
     protected void cancel() {
-        //finish();
-        dismiss();
+                dismiss();
     }
 
     @Override
@@ -247,8 +245,7 @@ public class OrderReprintDialog extends BasicDialogFragment implements OnItemCli
     private void getKitchenCellArray() {
         List<PrinterCashierTicket> printerDocuments = null;
         try {
-            //printerDocuments = OperatesFactory.create(PrintSettingDal.class).listKitchenPrinterDocument(trade.getUuid());
-        } catch (Exception e) {
+                    } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
 
@@ -261,8 +258,7 @@ public class OrderReprintDialog extends BasicDialogFragment implements OnItemCli
     }
 
     private void addPrintTicket(Trade trade) {
-        if (trade.getBusinessType() == BusinessType.BEAUTY) {//美业只打印结账单
-            if (trade.getTradePayStatus() == TradePayStatus.PAID) {
+        if (trade.getBusinessType() == BusinessType.BEAUTY) {            if (trade.getTradePayStatus() == TradePayStatus.PAID) {
                 mDatas.add(new TicketType(CASH, printTypes.get(CASH), false));
             }
         } else if (trade.getBusinessType() == BusinessType.DINNER || trade.getBusinessType() == BusinessType.BUFFET || trade.getBusinessType() == BusinessType.GROUP) {
@@ -272,8 +268,7 @@ public class OrderReprintDialog extends BasicDialogFragment implements OnItemCli
             addBeautyPrintTIckety(trade);
         }
 
-        if (mFromType != OCConstant.FromType.FROM_TYPE_RETAIL && mFromType != OCConstant.FromType.FROM_TYPE_BEAUTY) {//过滤美业业务
-            addKitchenPrintTicket();
+        if (mFromType != OCConstant.FromType.FROM_TYPE_RETAIL && mFromType != OCConstant.FromType.FROM_TYPE_BEAUTY) {            addKitchenPrintTicket();
         }
         addLabel(trade);
     }
@@ -281,45 +276,36 @@ public class OrderReprintDialog extends BasicDialogFragment implements OnItemCli
     private void addBeautyPrintTIckety(Trade trade) {
         if (trade.getTradePayStatus() == TradePayStatus.PAID) {
             mDatas.add(new TicketType(CASH, printTypes.get(CASH), false));
-            // 未结账
-        }
+                    }
     }
 
     private void addDinnerNativePrintTicket(Trade trade) {
-        // 已退货
-        if (trade.getTradeStatus() == TradeStatus.RETURNED || trade.getTradePayStatus() == TradePayStatus.REFUND_FAILED
+                if (trade.getTradeStatus() == TradeStatus.RETURNED || trade.getTradePayStatus() == TradePayStatus.REFUND_FAILED
                 || trade.getTradePayStatus() == TradePayStatus.REFUNDED
                 || trade.getTradePayStatus() == TradePayStatus.REFUNDING) {
             mDatas.add(new TicketType(REFUND, printTypes.get(REFUND), false));
-            // 已作废
-        } else if (trade.getTradeStatus() == TradeStatus.INVALID) {
+                    } else if (trade.getTradeStatus() == TradeStatus.INVALID) {
             mDatas.add(new TicketType(CANCEL, printTypes.get(CANCEL), false));
-            // 已结账
-        } else if (trade.getTradePayStatus() == TradePayStatus.PAID) {
+                    } else if (trade.getTradePayStatus() == TradePayStatus.PAID) {
             mDatas.add(new TicketType(CUSTOMER, printTypes.get(CUSTOMER), false));
             mDatas.add(new TicketType(CASH, printTypes.get(CASH), false));
-            // 未结账
-        } else if (trade.getTradePayStatus() == TradePayStatus.UNPAID) {
+                    } else if (trade.getTradePayStatus() == TradePayStatus.UNPAID) {
             mDatas.add(new TicketType(CUSTOMER, printTypes.get(CUSTOMER), false));
             mDatas.add(new TicketType(PRECASH, printTypes.get(PRECASH), false));
         }
     }
 
     private void addNativePrintTicket(Trade trade) {
-        // 已退货
-        if (trade.getTradeStatus() == TradeStatus.RETURNED) {
+                if (trade.getTradeStatus() == TradeStatus.RETURNED) {
             mDatas.add(new TicketType(REFUND, printTypes.get(REFUND), false));
-            // 已作废
-        } else if (trade.getTradeStatus() == TradeStatus.INVALID) {
+                    } else if (trade.getTradeStatus() == TradeStatus.INVALID) {
             mDatas.add(new TicketType(CANCEL, printTypes.get(CANCEL), false));
         } else {
             mDatas.add(new TicketType(RECEIPT, printTypes.get(RECEIPT), false));
         }
     }
 
-    /**
-     * 添加补打标签,暂只用于快餐、外卖
-     */
+
     private void addLabel(Trade trade) {
         if ((trade.getBusinessType() == BusinessType.SNACK || trade.getBusinessType() == BusinessType.TAKEAWAY || trade.getBusinessType() == BusinessType.DINNER)
                 && (trade.getTradeStatus() == TradeStatus.CONFIRMED || trade.getTradeStatus() == TradeStatus.FINISH)) {
@@ -338,34 +324,21 @@ public class OrderReprintDialog extends BasicDialogFragment implements OnItemCli
         }
     }
 
-    /**
-     * 添加押金单
-     *
-     * @param tradeVo
-     */
+
     private void addDepositTicket(TradeVo tradeVo) {
         if (showDepositTicket(tradeVo)) {
             mDatas.add(new TicketType(DEPOSIT, printTypes.get(DEPOSIT), false));
         }
     }
 
-    /**
-     * 添加挂账单
-     *
-     * @param tradeVo
-     */
+
     private void addCreditTicket(TradeVo tradeVo) {
         if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getTradeStatus() == TradeStatus.CREDIT) {
             mDatas.add(new TicketType(CREDIT, printTypes.get(CREDIT), false));
         }
     }
 
-    /**
-     * 是否可以展示押金单选项
-     *
-     * @param tradeVo
-     * @return
-     */
+
     private boolean showDepositTicket(TradeVo tradeVo) {
         if (tradeVo != null) {
             if (tradeVo.getTrade().getBusinessType() == BusinessType.BUFFET && tradeVo.isPaidTradeposit()) {
@@ -374,8 +347,7 @@ public class OrderReprintDialog extends BasicDialogFragment implements OnItemCli
 
             Trade trade = tradeVo.getTrade();
             TradeDeposit tradeDeposit = tradeVo.getTradeDeposit();
-            //带押金的已支付订单，在未退押金情况下，可展示押金单选项
-            if (trade.getTradePayStatus() == TradePayStatus.PAID
+                        if (trade.getTradePayStatus() == TradePayStatus.PAID
                     && tradeDeposit != null
                     && tradeDeposit.getDepositPay() != null
                     && tradeDeposit.getDepositRefund() == null) {

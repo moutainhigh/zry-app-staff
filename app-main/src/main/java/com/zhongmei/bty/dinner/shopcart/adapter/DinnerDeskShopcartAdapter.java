@@ -16,10 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * 桌台购物车界面视图adapter
- * Created by demo on 2018/12/15
- */
+
 
 public class DinnerDeskShopcartAdapter extends DinnerShopCartAdapter {
 
@@ -45,11 +42,7 @@ public class DinnerDeskShopcartAdapter extends DinnerShopCartAdapter {
     public void updateData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
         ArrayList<DishDataItem> oldData = new ArrayList<>(data);
         refreshData(dataList, tradeVo, isShowInvalid);
-        initialMoveDishCheckStatus();//初始化移菜/复制菜品 选择状态
-        initialServingStatus();// 初始化上菜状态
-        resetSlideItems();// 初始化item滑动状态
-        //处理划菜时，不被刷新导致划菜状态丢失
-        if (oldData.size() > 0 && data.size() > 0) {
+        initialMoveDishCheckStatus();        initialServingStatus();        resetSlideItems();                if (oldData.size() > 0 && data.size() > 0) {
             for (DishDataItem item : data) {
                 if (item.getBase() != null) {
                     DishDataItem dishDataItem = getDishDataItem(oldData, item.getBase().getId());
@@ -66,12 +59,7 @@ public class DinnerDeskShopcartAdapter extends DinnerShopCartAdapter {
         super.updateData(dataList, tradeVo, isShowInvalid);
     }
 
-    /**
-     * @Title: getIsComboDiyWh
-     * @Description: 设置子菜显示样式
-     * @Param @param context
-     * @Return LinearLayout.LayoutParams 返回类型
-     */
+
     public RelativeLayout.LayoutParams getIsComboDiyWh(Context context) {
         int left = DensityUtil.dip2px(context, 427);
         int topOrBottom = DensityUtil.dip2px(context, 5);
@@ -82,12 +70,7 @@ public class DinnerDeskShopcartAdapter extends DinnerShopCartAdapter {
         return diyWh;
     }
 
-    /**
-     * @Title: getNoComboDiyWh
-     * @Description: 获取普通菜品边距
-     * @Param @param context
-     * @Return LinearLayout.LayoutParams 返回类型
-     */
+
     public RelativeLayout.LayoutParams getNoComboDiyWh(Context context) {
         int top = (int) context.getResources().getDimension(R.dimen.dinner_shoppingCard_dishName_margin);
         int bottom = (int) context.getResources().getDimension(R.dimen.dinner_shoppingCard_dishName_margin);

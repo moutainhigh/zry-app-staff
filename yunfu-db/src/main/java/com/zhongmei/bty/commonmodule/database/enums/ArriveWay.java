@@ -4,29 +4,17 @@ import com.zhongmei.yunfu.util.ValueEnum;
 import com.zhongmei.yunfu.db.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * 性别
- */
+
 public enum ArriveWay implements ValueEnum<Integer> {
 
-    /**
-     * 微信
-     */
+
     WECHAT(1),
-    /**
-     * 熟客
-     */
+
     SHUKE(2),
-    /**
-     * 人脸识别
-     */
+
     FACE_RECOGNITION(3),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

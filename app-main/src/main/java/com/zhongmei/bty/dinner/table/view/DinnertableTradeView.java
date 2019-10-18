@@ -8,12 +8,7 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.trade.bean.IDinnertableTrade;
 
-/**
- * 桌台订单视图
- *
- * @version: 1.0
- * @date 2015年9月2日
- */
+
 public class DinnertableTradeView extends TableTradeViewBase {
 
     private static final String TAG = DinnertableTradeView.class.getSimpleName();

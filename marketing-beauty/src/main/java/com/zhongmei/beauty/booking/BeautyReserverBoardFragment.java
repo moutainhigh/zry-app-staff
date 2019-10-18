@@ -52,9 +52,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BeautyReserverBoardFragment extends BasicFragment implements IHVScrollListener, View.OnClickListener, RadioButton.OnCheckedChangeListener, BeautyBoardDataListener, BeautyBookingTradeControlListener, BeautyCreateOrEditBookingDialog.OnBookingListener {
     private final String TAG = BeautyReserverBoardFragment.class.getSimpleName();
     private View rootView;
@@ -65,8 +63,7 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
     private LinearLayout layout_technicianShaft;
     private BeautyBookingTimeShaft custom_BookingTimeShaft;
     private TextView tv_noTechnicianTradeNumber;
-    private LinearLayout layout_allotTechnician;//待服务技师
-
+    private LinearLayout layout_allotTechnician;
     private BeautyNoTechnicianTrades custom_notechnicianTrades;
 
     private RadioButton rb_today;
@@ -168,8 +165,7 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
     }
 
     private void loadReserverData(List<User> technicians, Map<Long, ArrayList<ReserverItemVo>> mapReserverItemVos) {
-        //加载数据，网络请求
-        List<ReserverItemVo> listItemVo = new ArrayList<>();
+                List<ReserverItemVo> listItemVo = new ArrayList<>();
 
         if (technicians == null) {
             return;
@@ -188,13 +184,7 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
         }
     }
 
-    /**
-     * 计算预约服务在看板上的位置
-     *
-     * @param technicianIndex
-     * @param reserverItemVos
-     * @return
-     */
+
     private List<ReserverItemVo> calculateReserverItemPosition(int technicianIndex, List<ReserverItemVo> reserverItemVos) {
         Float itemWidth = getResources().getDimension(R.dimen.beauty_reserver_board_item_width);
         Float itemHeight = getResources().getDimension(R.dimen.beauty_reserver_board_item_height);
@@ -218,9 +208,7 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
         return reserverItemVos;
     }
 
-    /**
-     * 展示日期弹框
-     */
+
     private void showCalendarDialog() {
         calendarDialog = new CalendarDialog(getActivity(), listner);
         calendarDialog.setDefaultSelected(selectedDate);
@@ -264,8 +252,7 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
     @Override
     public void onClick(View v) {
         if (v == layout_allotTechnician) {
-            //待选择技师
-            if (custom_notechnicianTrades.getVisibility() == View.GONE) {
+                        if (custom_notechnicianTrades.getVisibility() == View.GONE) {
                 showNoTechnicianPop(true);
             }
         } else if (v == rb_customDate) {
@@ -293,13 +280,7 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
         mBeautyManager.getUnServiceList(getActivity(), this, date);
     }
 
-    /**
-     * 拿到N天之后的当前时间
-     * 今天 0，明天 1；
-     *
-     * @param afterDay
-     * @return
-     */
+
     private Date getDate(int afterDay) {
         Long curTime = System.currentTimeMillis();
         Long tarTime = curTime + (afterDay * 24 * 60 * 60 * 1000);
@@ -313,26 +294,18 @@ public class BeautyReserverBoardFragment extends BasicFragment implements IHVScr
             return;
         }
 
-        if (buttonView == rb_today) {//今天
-            selectedDate = getDate(0);
-        } else if (buttonView == rb_tomorrow) {//明天
-            selectedDate = getDate(1);
-        } else if (buttonView == rb_afterTomorrow) {//后天
-            selectedDate = getDate(2);
-        } else if (buttonView == rb_customDate) {//自定义日期
-            //自定义日期，比较特殊，回掉请求数据
-            setCustomDate(selectedDate);
+        if (buttonView == rb_today) {            selectedDate = getDate(0);
+        } else if (buttonView == rb_tomorrow) {            selectedDate = getDate(1);
+        } else if (buttonView == rb_afterTomorrow) {            selectedDate = getDate(2);
+        } else if (buttonView == rb_customDate) {                        setCustomDate(selectedDate);
             return;
         }
 
-        //刷新数据
-        setCustomDate(null);
+                setCustomDate(null);
         requestBookindTrade(selectedDate);
     }
 
-    /**
-     * 刷新businessType
-     */
+
     private void refreshBusinessTime() {
         Long startTime = mBeautyManager.getStartBusinessType(selectedDate);
         Long stopTme = mBeautyManager.getStopBusinessType(selectedDate);

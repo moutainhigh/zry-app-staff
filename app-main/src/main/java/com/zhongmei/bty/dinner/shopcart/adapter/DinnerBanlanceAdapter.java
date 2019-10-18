@@ -47,36 +47,22 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 结账购物车界面视图adapter
- *
- * @date:2015年9月14日下午6:35:00
- */
+
 public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
     private static final String TAG = DinnerBanlanceAdapter.class.getSimpleName();
 
     protected Context mContext;
 
-    //是否显示右边的箭头
-    private boolean isShowRightAnchor = false;
-    //    是否显示左边的箭头
-    private boolean isShowLeftAnchor = false;
+        private boolean isShowRightAnchor = false;
+        private boolean isShowLeftAnchor = false;
 
-    private Drawable mAllDiscountIcon;// 整单打折图标
-    private Drawable mAllFreeReasonIcon;// 整单免单理由图标
+    private Drawable mAllDiscountIcon;    private Drawable mAllFreeReasonIcon;
+    private Drawable mBanquetIcon;
+    private Drawable mAllMemoIcon;    protected Drawable mCouponEnabledIcon, mCouponUnEnabledIcon, mIntegralEnableIcon, mIntegralUnEnableIcon, mMinConsumIcon, mServicIcon;
+        private Drawable mExtraIcon;
 
-    private Drawable mBanquetIcon;// 整单宴请图标
-
-    private Drawable mAllMemoIcon;// 整单备注图标
-    protected Drawable mCouponEnabledIcon, mCouponUnEnabledIcon, mIntegralEnableIcon, mIntegralUnEnableIcon, mMinConsumIcon, mServicIcon;
-    // 附加费icon
-    private Drawable mExtraIcon;
-
-    // 未参加营销活动的菜品列表
-    private List<DishDataItem> unMarketActivityItems = new ArrayList<DishDataItem>();
-    private MarketRuleVo marketRuleVo;// 左侧选中的营销活动
-    protected boolean canRemoveMarketActivity = false;// 是否可以删除营销活动
-
+        private List<DishDataItem> unMarketActivityItems = new ArrayList<DishDataItem>();
+    private MarketRuleVo marketRuleVo;    protected boolean canRemoveMarketActivity = false;
     public DinnerBanlanceAdapter(Context context) {
         init(context);
         mContext = context;
@@ -144,20 +130,12 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         isShowLeftAnchor = showLeftAnchor;
     }
 
-    /**
-     * 是否为批量打折模式
-     *
-     * @return
-     */
+
     public boolean isDiscountModle() {
         return isBatchDiscountModle;
     }
 
-    /**
-     * @Title: setDiscountModle
-     * @Description: 切换模式，true 显示批量打折，false 不为批量折扣模式正常显示
-     * @Return void 返回类型
-     */
+
     public void setDiscountModle(Boolean isDiscountModle) {
         this.isBatchDiscountModle = isDiscountModle;
         isBatchCoercionModel = false;
@@ -168,11 +146,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         this.isBatchDiscountModle = isDiscountModle;
     }
 
-    /**
-     * 批量折扣显示是否受折扣限制
-     *
-     * @param isBatchCoercionModel true 不受后台折扣限制, false 受后台折扣限制
-     */
+
     public void setBatchCoercionModel(boolean isBatchCoercionModel) {
         this.isBatchCoercionModel = isBatchCoercionModel;
         if (isBatchCoercionModel) {
@@ -185,20 +159,12 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         return isBatchCoercionModel;
     }
 
-    /**
-     * @Title: setIsDiscountAll
-     * @Description:是否整单打折
-     * @Return void 返回类型
-     */
+
     public void setIsDiscountAll(boolean isDiscountAllMode) {
         this.isDiscountAllMode = isDiscountAllMode;
     }
 
-    /**
-     * @Title: isShowMemeberDiscount
-     * @Description: 是否显示会员折扣
-     * @Return void 返回类型
-     */
+
     public void isShowMemeberDiscount(boolean isShow) {
         isShowAllDiscount = isShow;
     }
@@ -232,9 +198,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         holder.dish_num.setVisibility(View.VISIBLE);
         setDishLayoutValue(item, holder);
         switch (item.getType()) {
-            case SINGLE:// 单菜
-            case COMBO:// 套餐
-                holder.topLine.setVisibility(View.VISIBLE);
+            case SINGLE:            case COMBO:                holder.topLine.setVisibility(View.VISIBLE);
                 holder.dishView.setLayoutParams(getNoComboDiyLiWh(context));
                 holder.dish_name.setTextAppearance(context, R.style.dinnerOrderTextStyle);
                 if (shopcartItem != null) {
@@ -250,8 +214,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 }
                 updatePrintState(shopcartItem, holder);
                 break;
-            case CHILD:// 套餐子菜
-                holder.topLine.setVisibility(View.GONE);
+            case CHILD:                holder.topLine.setVisibility(View.GONE);
 
                 holder.dishView.setLayoutParams(getIsComboDiyLiWh(context));
                 holder.dish_name.setTextAppearance(context, R.style.dinnerMemoStyle);
@@ -261,7 +224,6 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
 
                 if (shopcartItem != null) {
                     if (shopcartItem.getActualAmount() != null) {
-//                        holder.dish_price.setText("");
                         holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedComboDishPrice));
                     } else {
                         holder.dish_price.setText("");
@@ -270,24 +232,18 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 }
                 break;
             default:
-//                holder.labelName.setTextAppearance(context, R.style.dinnerLabelUnsave);
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 break;
         }
         showStand(item, holder);
         setTopLine(holder.topLine, item, position);
-        setDeleteIcon(item, holder);// 设置删除图标
-        setGray(holder, item);// 设置透明度
-        setAnchor(holder, item);
+        setDeleteIcon(item, holder);        setGray(holder, item);        setAnchor(holder, item);
     }
 
     protected void showDiscountDrawable(ViewHolder holder, DishDataItem item) {
         if (isBatchDiscountModle && (item.getType() == ItemType.SINGLE || item.getType() == ItemType.COMBO)) {
-            // 单菜或套餐可以批量打折
-            // 批量赠送界面不处理不打折商品
-            if (item.getBase() != null) {
-                // 有营销活动或者后台设置了不能手动折扣，就不能批量折扣
-                if (DinnerCashManager.hasMarketActivity(tradeItemPlanActivityMap, item.getBase())
+                                    if (item.getBase() != null) {
+                                if (DinnerCashManager.hasMarketActivity(tradeItemPlanActivityMap, item.getBase())
                         || (!isBatchCoercionModel && item.getBase().getEnableWholePrivilege() == Bool.NO)) {
                     Drawable checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_cannot_discount);
                     holder.dish_name.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
@@ -295,8 +251,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 } else {
                     itemSelect(item, holder);
                 }
-                // 菜品不能参与整单折扣
-            } else {
+                            } else {
                 Drawable checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_cannot_discount);
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(checkDrawable, null, null, null);
             }
@@ -324,12 +279,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         return getExtraDiyWh(left, 0, 0, 0);
     }
 
-    /**
-     * @Title: getIsComboDiyWh
-     * @Description: 设置子菜显示样式
-     * @Param @param context
-     * @Return LinearLayout.LayoutParams 返回类型
-     */
+
     public LinearLayout.LayoutParams getIsComboDiyLiWh(Context context) {
         int left = DensityUtil.dip2px(context, 18);
         int topOrBottom = DensityUtil.dip2px(context, 5);
@@ -340,12 +290,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         return diyWh;
     }
 
-    /**
-     * @Title: getNoComboDiyWh
-     * @Description: 获取普通菜品边距
-     * @Param @param context
-     * @Return LinearLayout.LayoutParams 返回类型
-     */
+
     public LinearLayout.LayoutParams getNoComboDiyLiWh(Context context) {
         int top = (int) context.getResources().getDimension(R.dimen.dinner_shoppingCard_dishName_margin);
         int bottom = (int) context.getResources().getDimension(R.dimen.dinner_shoppingCard_dishName_margin);
@@ -368,8 +313,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         Drawable iconDrawable = null;
         switch (item.getType()) {
             case EXCISE_TAX:
-            case ADDITIONAL:// 附加费
-                iconDrawable = mExtraIcon;
+            case ADDITIONAL:                iconDrawable = mExtraIcon;
                 if (item.getExtraType() == ExtraItemType.MIN_CONSUM) {
                     iconDrawable = mMinConsumIcon;
                 }
@@ -377,15 +321,11 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
             case SERVICE:
                 iconDrawable = mServicIcon;
                 break;
-            case ALL_DISCOUNT:// 整单打折
-                iconDrawable = mAllDiscountIcon;
+            case ALL_DISCOUNT:                iconDrawable = mAllDiscountIcon;
                 break;
-            case BANQUET_PRIVILIGE://宴请信息
-                iconDrawable = mBanquetIcon;
+            case BANQUET_PRIVILIGE:                iconDrawable = mBanquetIcon;
                 break;
-            case COUPONS:// 优惠劵
-            case WECHAT_CARD_COUPONS://微信卡券
-
+            case COUPONS:            case WECHAT_CARD_COUPONS:
                 if (item.isEnabled()) {
                     iconDrawable = mCouponEnabledIcon;
                 } else {
@@ -395,8 +335,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 }
                 break;
             case INTERGRAL:
-                // 积分抵现
-                if (item.isEnabled()) {
+                                if (item.isEnabled()) {
                     iconDrawable = mIntegralEnableIcon;
                 } else {
                     iconDrawable = mIntegralUnEnableIcon;
@@ -409,14 +348,10 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 break;
         }
         if (item.getValue() != 0d) {
-            holder.dish_price.setText(Utils.formatPrice(item.getValue()));// 价格
-        } else {
-            holder.dish_price.setText("");// 价格
-        }
+            holder.dish_price.setText(Utils.formatPrice(item.getValue()));        } else {
+            holder.dish_price.setText("");        }
         if (!TextUtils.isEmpty(item.getName())) {
-            holder.dish_name.setText(item.getName()); // 菜名
-            holder.dish_price.setText(Utils.formatPrice(item.getValue()));// 价格
-            holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
+            holder.dish_name.setText(item.getName());             holder.dish_price.setText(Utils.formatPrice(item.getValue()));            holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
             if (TextUtils.isEmpty(item.getTradeReason())) {
                 holder.dish_memo.setVisibility(View.GONE);
             } else {
@@ -458,9 +393,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         sepHolder.viewGraySeperator.setVisibility(View.VISIBLE);
     }
 
-    /**
-     * 设置左右箭头显示
-     */
+
     protected void setAnchor(ViewHolder holder, DishDataItem item) {
         if (item == null || item.getBase() == null || item.getBase().getStatusFlag() == null) {
             holder.imgAnchorLeft.setVisibility(View.INVISIBLE);
@@ -487,12 +420,10 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
     public void updateData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
         data.clear();
         deskCount = tradeVo.getDeskCount();
-        this.initAllDishCount(BigDecimal.ZERO);//设置商品总数初始值
-        if (tradeVo == null) {
+        this.initAllDishCount(BigDecimal.ZERO);        if (tradeVo == null) {
             return;
         }
-        //累计商品数量
-        sumAllDishCount(dataList);
+                sumAllDishCount(dataList);
         initialTradeItemPlanActivity(tradeVo.getTradeItemPlanActivityList());
 
         unMarketActivityItems.clear();
@@ -505,23 +436,17 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         createMarketActivityItems(marketActivityVos, data);
 
         if (Utils.isNotEmpty(marketActivityVos) && Utils.isNotEmpty(unMarketActivityDataList)) {
-            // 营销活动和未参加营销活动的菜品之间，用灰色间隔线隔开
-            DishDataItem item = new DishDataItem(ItemType.GRAY_SEPERATOR);
-            // 不需要topline
-            item.setNeedTopLine(false);
+                        DishDataItem item = new DishDataItem(ItemType.GRAY_SEPERATOR);
+                        item.setNeedTopLine(false);
             data.add(item);
         }
 
         if (Utils.isNotEmpty(unMarketActivityDataList)) {
-            ShopCartDataVo unSaveVo = new ShopCartDataVo(null);// 未提交的数据
-            ShopCartDataVo savedVo = new ShopCartDataVo(null);// 已经提交未打印的数据
-            if (unMarketActivityDataList != null && unMarketActivityDataList.size() > 0) {
-                // 遍历购物车中的菜品，对菜品进行分组
-                for (int i = 0; i < unMarketActivityDataList.size(); i++) {
+            ShopCartDataVo unSaveVo = new ShopCartDataVo(null);            ShopCartDataVo savedVo = new ShopCartDataVo(null);            if (unMarketActivityDataList != null && unMarketActivityDataList.size() > 0) {
+                                for (int i = 0; i < unMarketActivityDataList.size(); i++) {
                     IShopcartItem shopCartItem = unMarketActivityDataList.get(i);
 
-                    // 如果id为空算未提交
-                    if (shopCartItem instanceof ShopcartItem) {
+                                        if (shopCartItem instanceof ShopcartItem) {
                         unSaveVo.addData(shopCartItem);
                     } else {
                         savedVo.addData(shopCartItem);
@@ -535,12 +460,10 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 unMarketActivityItems.addAll(createItems(savedVo.getData(), data));
             }
             if (Utils.isNotEmpty(unMarketActivityItems)) {
-                // 未参加营销活动的菜品，第一道不需要topline
-                unMarketActivityItems.get(0).setNeedTopLine(false);
+                                unMarketActivityItems.get(0).setNeedTopLine(false);
             }
         }
-        //如果处于活动菜品选择状态，需要初始化check状态  && isDishCheckMode()
-        if (getMarketRuleVo() != null) {
+                if (getMarketRuleVo() != null) {
             setMarketActivityItemsCheckStatus(getMarketRuleVo(), tradeVo.getTradeItemPlanActivityList());
             DinnerShopManager.getInstance().getShoppingCart().doDishActivityIsCheck(getUnMarketActivityItems(), getMarketRuleVo());
         }
@@ -548,15 +471,9 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         updateTrade(tradeVo, isShowInvalid);
     }
 
-    /**
-     * 分组数据展示
-     *
-     * @param dataList
-     * @param tradeVo
-     */
+
     public void updateGroupData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
-        this.initAllDishCount(BigDecimal.ZERO);//设置商品总数初始值
-        super.updateGroupData(dataList, tradeVo, isShowInvalid);
+        this.initAllDishCount(BigDecimal.ZERO);        super.updateGroupData(dataList, tradeVo, isShowInvalid);
         updateTrade(tradeVo, isShowInvalid);
     }
 
@@ -593,12 +510,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
 
     }
 
-    /**
-     * @Title: doEditModeItemClick
-     * @Description: 处理编辑模式上item的点击事件, 做优惠操作
-     * @Param @param item
-     * @Return void 返回类型
-     */
+
     public void doEditModeItemClick(DishDataItem item, int position) {
         IShopcartItemBase shopcartItem = item.getBase();
         if (shopcartItem == null) {
@@ -612,15 +524,13 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 return;
             }
         }
-//         整单折扣时不能打折的菜品
         if (!isBatchCoercionModel && shopcartItem.getEnableWholePrivilege() == Bool.NO) {
             ToastUtil.showShortToast(R.string.cannot_discount);
             return;
         }
 
 
-        // 本项价格小于让价价格不让选择
-        double currentPrice = shopcartItem.getActualAmount().doubleValue();
+                double currentPrice = shopcartItem.getActualAmount().doubleValue();
         TradePrivilege tradePrivilege = DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().getDishTradePrivilege();
         if (tradePrivilege != null) {
             if (tradePrivilege.getPrivilegeType() == PrivilegeType.REBATE) {
@@ -636,7 +546,6 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
 
             if (selectedItem.getBase().isSelected()) {
                 selectedItem.getBase().setSelected(false);
-//				SeparateShoppingCart.getInstance().getShoppingCartVo().setDishTradePrivilege(null);
             } else {
                 if (isBatchCoercionModel) {
                     checkCancelAll();
@@ -651,9 +560,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
 
     }
 
-    /**
-     * 取消所有选中
-     */
+
     public void checkCancelAll() {
         for (DishDataItem dish : getAllData()) {
             if (dish.getType() == ItemType.SINGLE
@@ -679,11 +586,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         DinnerShopManager.getInstance().getShoppingCart().batchDishPrivilege(listDishData, false);
     }
 
-    /**
-     * 初始化菜品对应营销活动，将菜品uuid和对应的营销活动对象存储再map种
-     *
-     * @param tipaList
-     */
+
     protected void initialTradeItemPlanActivity(List<TradeItemPlanActivity> tipaList) {
         tradeItemPlanActivityMap.clear();
         if (Utils.isNotEmpty(tipaList)) {
@@ -693,13 +596,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * 生成营销活动对应的条目
-     *
-     * @Title: createMarketActivityItems
-     * @Param @param marketActivityVos
-     * @Return void 返回类型
-     */
+
     protected void createMarketActivityItems(List<MarketActivityVo> marketActivityVos, ArrayList<DishDataItem> data) {
         if (Utils.isNotEmpty(marketActivityVos)) {
             for (MarketActivityVo marketActivityVo : marketActivityVos) {
@@ -709,15 +606,13 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 dishDataItem.setName(tradePlanActivity.getRuleName());
                 dishDataItem.setValue(tradePlanActivity.getOfferValue() == null ? 0 : tradePlanActivity.getOfferValue()
                         .doubleValue());
-                // 营销活动条目不需要topline
-                dishDataItem.setNeedTopLine(false);
+                                dishDataItem.setNeedTopLine(false);
                 data.add(dishDataItem);
 
                 ArrayList<DishDataItem> temp = new ArrayList<DishDataItem>();
                 createItems(marketActivityVo.getShopcartItems(), temp);
                 if (Utils.isNotEmpty(temp)) {
-                    // 营销活动下面第一道菜，不需要topline
-                    temp.get(0).setNeedTopLine(false);
+                                        temp.get(0).setNeedTopLine(false);
                     data.addAll(temp);
                 }
             }
@@ -731,11 +626,9 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
     @Override
     protected void updateTrade(TradeVo tradeVo, boolean isShowUnActive) {
         isHasBanquetOrFree = false;
-        // 整单
-        if (tradeVo != null && tradeVo.getTrade() != null) {
+                if (tradeVo != null && tradeVo.getTrade() != null) {
             buildTradeUser(tradeVo);
-            // 如果显示会员折扣
-            if (isShowAllDiscount) {
+                        if (isShowAllDiscount) {
                 isHasBanquetOrFree = buildDiscountData(tradeVo, isShowUnActive);
             }
             buildTradeMemo(tradeVo);
@@ -754,25 +647,18 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
     }
 
     protected boolean buildDiscountData(TradeVo tradeVo, boolean isShowUnActive) {
-        //是否有宴请或者免单
-        boolean hasBanquetOrFree = false;
-        //服务费
-        buildServiceCharge(tradeVo);
-        // 附加费
-        buildExtraCharge(tradeVo);
-        // 超时费
-        buildOutTimeCharge(tradeVo);
-        // 整单打折
-        TradePrivilege tradePrivilege = tradeVo.getTradePrivilege(PrivilegeType.FREE, PrivilegeType.DISCOUNT, PrivilegeType.REBATE);
+                boolean hasBanquetOrFree = false;
+                buildServiceCharge(tradeVo);
+                buildExtraCharge(tradeVo);
+                buildOutTimeCharge(tradeVo);
+                TradePrivilege tradePrivilege = tradeVo.getTradePrivilege(PrivilegeType.FREE, PrivilegeType.DISCOUNT, PrivilegeType.REBATE);
         if (tradePrivilege != null && (tradePrivilege.isValid())) {
-            //	isDiscountAll = true;// 整单折扣不为空，显示整单打折
-            DishDataItem item = new DishDataItem(ItemType.ALL_DISCOUNT);
+                        DishDataItem item = new DishDataItem(ItemType.ALL_DISCOUNT);
             item.setValue(tradePrivilege.getPrivilegeAmount().doubleValue());
             if (tradePrivilege.getPrivilegeType() == PrivilegeType.FREE) {
                 item.setName(context.getResources().getString(R.string.freethisOrder));
                 hasBanquetOrFree = true;
-                // 免单理由
-                TradeReasonRel reason = tradeVo.getOperateReason(OperateType.TRADE_DINNER_FREE);
+                                TradeReasonRel reason = tradeVo.getOperateReason(OperateType.TRADE_DINNER_FREE);
                 if (reason != null) {
                     item.setTradeReason(context.getResources().getString(R.string.order_free_reason) + "："
                             + reason.getReasonContent());
@@ -795,18 +681,14 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
 
             data.add(item);
         } else {
-            //isDiscountAll = false;
-        }
+                    }
 
-        //整单储值优惠
-        buildChargePrivilege(tradeVo);
+                buildChargePrivilege(tradeVo);
 
-        // 优惠劵
 
         buildCoupon(tradeVo, isShowUnActive);
 
-        // 积分抵现
-        if (tradeVo.getIntegralCashPrivilegeVo() != null) {
+                if (tradeVo.getIntegralCashPrivilegeVo() != null) {
             DishDataItem item = new DishDataItem(ItemType.INTERGRAL);
             item.setIntegralCashPrivilegeVo(tradeVo.getIntegralCashPrivilegeVo());
             TradePrivilege privilege = tradeVo.getIntegralCashPrivilegeVo().getTradePrivilege();
@@ -814,20 +696,16 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                 item.setValue(privilege.getPrivilegeAmount().doubleValue());
             }
 
-            // 积分抵现是否生效
-            if (tradeVo.getIntegralCashPrivilegeVo().isActived()) {
+                        if (tradeVo.getIntegralCashPrivilegeVo().isActived()) {
                 item.setEnabled(true);
                 int value =
-                        privilege.getPrivilegeValue() == null ? 0 : privilege.getPrivilegeValue().intValue();// 积分
-                int amount =
-                        privilege.getPrivilegeAmount() == null ? 0 : privilege.getPrivilegeAmount().intValue();// 抵现（为负）
-                item.setName(ResourceUtils.getString(R.string.use_integralcash, value, (0 - amount)));
+                        privilege.getPrivilegeValue() == null ? 0 : privilege.getPrivilegeValue().intValue();                int amount =
+                        privilege.getPrivilegeAmount() == null ? 0 : privilege.getPrivilegeAmount().intValue();                item.setName(ResourceUtils.getString(R.string.use_integralcash, value, (0 - amount)));
             } else {
                 item.setEnabled(false);
                 item.setName(context.getString(R.string.intergral_ineffective));
             }
-            // 如果积分抵现有效或者允许显示无效的，加入显示列表
-            if ((!tradeVo.getIntegralCashPrivilegeVo().isActived() && isShowUnActive
+                        if ((!tradeVo.getIntegralCashPrivilegeVo().isActived() && isShowUnActive
                     || tradeVo.getIntegralCashPrivilegeVo().isActived())
                     && tradeVo.getIntegralCashPrivilegeVo().isPrivilegeValid()
                     ) {
@@ -855,12 +733,10 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
                         }
                     }
 
-                    // 微信卡券是否生效
-                    if (weiXinCouponsVo.isActived()) {
+                                        if (weiXinCouponsVo.isActived()) {
                         item.setEnabled(true);
                     }
-                    // 如果优惠劵有效或者允许显示无效的，加入显示列表
-                    if (!weiXinCouponsVo.isActived() && isShowUnActive
+                                        if (!weiXinCouponsVo.isActived() && isShowUnActive
                             || weiXinCouponsVo.isActived()) {
                         data.add(item);
                     }
@@ -870,13 +746,11 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
 
         buildTax(tradeVo);
 
-        //宴请信息
-        if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null && tradeVo.getBanquetVo().getTradePrivilege().isValid()) {
+                if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null && tradeVo.getBanquetVo().getTradePrivilege().isValid()) {
             DishDataItem banquetItem = new DishDataItem(ItemType.BANQUET_PRIVILIGE);
             banquetItem.setName(tradeVo.getBanquetVo().getTradePrivilege().getPrivilegeName());
             banquetItem.setValue(tradeVo.getBanquetVo().getTradePrivilege().getPrivilegeAmount().doubleValue());
-            // 宴请理由
-            TradeReasonRel reason = tradeVo.getOperateReason(OperateType.TRADE_BANQUET);
+                        TradeReasonRel reason = tradeVo.getOperateReason(OperateType.TRADE_BANQUET);
             if (reason != null) {
                 banquetItem.setTradeReason(context.getResources().getString(R.string.reason_banquet_title) + "："
                         + reason.getReasonContent());
@@ -892,9 +766,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
     protected void buildTradeUser(TradeVo tradeVo) {
     }
 
-    /**
-     * 累计商品数量
-     */
+
     private void sumAllDishCount(List<IShopcartItem> dataList) {
         if (dataList != null) {
             for (IShopcartItem shopCartItem : dataList) {
@@ -903,24 +775,17 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * 设置已经参加营销活动对应的菜品的选种状态
-     *
-     * @param marketRuleVo
-     * @param tipaList
-     */
+
     public void setMarketActivityItemsCheckStatus(MarketRuleVo marketRuleVo, List<TradeItemPlanActivity> tipaList) {
         Map<String, DishDataItem> dishDataItemFinder = new HashMap<String, DishDataItem>();
         for (DishDataItem item : data) {
-            //单菜或套餐外壳
-            if (item.getBase() != null && (item.getType() == ItemType.SINGLE || item.getType() == ItemType.COMBO)) {
+                        if (item.getBase() != null && (item.getType() == ItemType.SINGLE || item.getType() == ItemType.COMBO)) {
                 String uuid = item.getBase().getUuid();
                 dishDataItemFinder.put(uuid, item);
             }
         }
 
-        //已经参加过这个营销活动的菜品
-        List<String> curMarketActivityItemUuids = new ArrayList<String>();
+                List<String> curMarketActivityItemUuids = new ArrayList<String>();
         List<String> otherMarketActivityItemUuids = new ArrayList<String>();
         if (Utils.isNotEmpty(tipaList)) {
             for (TradeItemPlanActivity tipa : tipaList) {
@@ -935,16 +800,14 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
             }
         }
 
-        //添加当前营销活动同样规则的DishDataItem到列表中
-        for (String uuid : curMarketActivityItemUuids) {
+                for (String uuid : curMarketActivityItemUuids) {
             DishDataItem item = dishDataItemFinder.get(uuid);
             if (item != null) {
                 item.setCheckStatus(DishDataItem.DishCheckStatus.CHECKED);
             }
         }
 
-        //将其他营销活动对应的DishDataItem置为不可选
-        for (String uuid : otherMarketActivityItemUuids) {
+                for (String uuid : otherMarketActivityItemUuids) {
             DishDataItem item = dishDataItemFinder.get(uuid);
             if (item != null) {
                 item.setCheckStatus(DishDataItem.DishCheckStatus.INVALIATE_CHECK);
@@ -952,25 +815,16 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         }
     }
 
-    /**
-     * 查找营销活动对应的菜品
-     *
-     * @Title: makeMarketActivityVos
-     * @Param @param tradeVo
-     * @Param @param unMarketActivityDataList
-     * @Return List<MarketActivityVo> 返回类型
-     */
+
     private List<MarketActivityVo> makeMarketActivityVos(TradeVo tradeVo, List<IShopcartItem> unMarketActivityDataList) {
         List<MarketActivityVo> marketActivityVos = new ArrayList<MarketActivityVo>();
         if (Utils.isNotEmpty(tradeVo.getTradePlanActivityList())
                 && Utils.isNotEmpty(tradeVo.getTradeItemPlanActivityList())) {
-            // 构建菜品查找容器
-            Map<String, IShopcartItem> shopcartItemFinder = new HashMap<String, IShopcartItem>();
+                        Map<String, IShopcartItem> shopcartItemFinder = new HashMap<String, IShopcartItem>();
             for (IShopcartItem shopcartItem : unMarketActivityDataList) {
                 shopcartItemFinder.put(shopcartItem.getUuid(), shopcartItem);
             }
-            // 构建营销活动菜品对象查找容器
-            Map<String, List<TradeItemPlanActivity>> tipaListFinder =
+                        Map<String, List<TradeItemPlanActivity>> tipaListFinder =
                     new HashMap<String, List<TradeItemPlanActivity>>();
             for (TradeItemPlanActivity tipa : tradeVo.getTradeItemPlanActivityList()) {
                 if (tipa.getStatusFlag() == StatusFlag.INVALID) {
@@ -994,13 +848,11 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
 
                 String tradePlanUuid = tradePlanActivity.getUuid();
 
-                // 查找对应的TradeItemPlanActivity列表
-                List<TradeItemPlanActivity> tipaList = tipaListFinder.get(tradePlanUuid);
+                                List<TradeItemPlanActivity> tipaList = tipaListFinder.get(tradePlanUuid);
                 if (Utils.isNotEmpty(tipaList)) {
                     List<IShopcartItem> shopcartItems = new ArrayList<IShopcartItem>();
                     for (TradeItemPlanActivity tipa : tipaList) {
-                        // 查找菜品
-                        String tradeItemUuid = tipa.getTradeItemUuid();
+                                                String tradeItemUuid = tipa.getTradeItemUuid();
                         IShopcartItem shopcartItem = shopcartItemFinder.remove(tradeItemUuid);
                         if (shopcartItem != null) {
                             shopcartItems.add(shopcartItem);
@@ -1026,8 +878,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
         this.canRemoveMarketActivity = canRemoveMarketActivity;
     }
 
-    //计算超时费
-    public void updateOutTimeFeeItem(TradeVo tradeVo) {
+        public void updateOutTimeFeeItem(TradeVo tradeVo) {
     }
 
     ;
@@ -1038,9 +889,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
             for (TradePrivilege tradePrivilege : tradeprivileges) {
                 if (tradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL && tradePrivilege.isValid()) {
                     DishDataItem item = new DishDataItem(ItemType.ADDITIONAL);
-                    // 下个迭代使用这个name
-                    // item.setName(tradePrivilege.getSurchargeName());
-                    ExtraCharge extraCharge = tradeVo.getMinconExtraCharge();
+                                                            ExtraCharge extraCharge = tradeVo.getMinconExtraCharge();
                     if (extraCharge != null && extraCharge.getStatusFlag() == StatusFlag.VALID
                             && tradePrivilege.getPromoId() != null && extraCharge.getId().compareTo(tradePrivilege.getPromoId()) == 0) {
                         item.setExtraType(ExtraItemType.MIN_CONSUM);
@@ -1067,10 +916,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
             extraCharge = ExtraManager.getMinconsumExtra();
             tradeVo.setMinconExtraCharge(extraCharge);
         }
-        /*BigDecimal minConsum = BuffetManager.getMinConsum(tradeVo);
-        if (extraCharge == null || extraCharge.getStatusFlag() == StatusFlag.INVALID
-                || minConsum == null || minConsum.compareTo(BigDecimal.ZERO) < 1)
-            return;*/
+
         List<TradePrivilege> tradeprivileges = tradeVo.getTradePrivileges();
 
         if (tradeprivileges == null) {
@@ -1089,11 +935,7 @@ public class DinnerBanlanceAdapter extends SuperShopCartAdapter {
             tradeprivileges.add(minPrivilege);
         }
 
-        minPrivilege.setStatusFlag(StatusFlag.VALID);//全部设置为有效
-
-        //minPrivilege.setPrivilegeValue(minConsum);
-        //minPrivilege.setPrivilegeValue(new BigDecimal(200));
-        tradeVo.setEnableMinConsum(true);
-//        tradeVo.setMinconExtraCharge(extraCharge);
+        minPrivilege.setStatusFlag(StatusFlag.VALID);
+                        tradeVo.setEnableMinConsum(true);
     }
 }

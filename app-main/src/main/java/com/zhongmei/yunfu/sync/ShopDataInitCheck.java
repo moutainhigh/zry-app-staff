@@ -3,10 +3,7 @@ package com.zhongmei.yunfu.sync;
 import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.yunfu.R;
 
-/**
- * 同步门店数据
- * Created by demo on 2018/12/15
- */
+
 public class ShopDataInitCheck extends AbsInitCheck {
 
     private CheckUtil mCheckUtil;

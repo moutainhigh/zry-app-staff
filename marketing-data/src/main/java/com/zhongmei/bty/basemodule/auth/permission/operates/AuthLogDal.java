@@ -5,11 +5,7 @@ import com.zhongmei.bty.commonmodule.data.operate.IOperates;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * <p>
- * 授权记录操作数据库的工具类
- */
+
 
 public interface AuthLogDal extends IOperates {
 
@@ -23,9 +19,7 @@ public interface AuthLogDal extends IOperates {
 
     public List<AuthorizedLog> queryList(long count);
 
-    //批量删除
-    public void batchDelete(List<AuthorizedLog> authLogList);
+        public void batchDelete(List<AuthorizedLog> authLogList);
 
-    //批量保存
-    public void batchSave(List<AuthorizedLog> authLogList);
+        public void batchSave(List<AuthorizedLog> authLogList);
 }

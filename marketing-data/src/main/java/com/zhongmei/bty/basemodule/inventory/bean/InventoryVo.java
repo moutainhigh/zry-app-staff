@@ -9,17 +9,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class InventoryVo implements Serializable, NoProGuard {
     private static final long serialVersionUID = 1L;
 
-    private HashMap<String, InventoryItem> returnInventoryItemMap;//扣库存的数据，包含套餐外壳未携带子菜
-
-    private List<TradeItem> newAddDishList;//新增的菜品
-
+    private HashMap<String, InventoryItem> returnInventoryItemMap;
+    private List<TradeItem> newAddDishList;
     public HashMap<String, InventoryItem> getReturnInventoryItemMap() {
         return returnInventoryItemMap;
     }
@@ -38,9 +34,5 @@ public class InventoryVo implements Serializable, NoProGuard {
         }
         this.newAddDishList.removeAll(newAddDishList);
         this.newAddDishList.addAll(newAddDishList);
-//        Set<TradeItem> tradeItemSet = new HashSet<>();
-//        tradeItemSet.addAll(this.newAddDishList);
-//        this.newAddDishList.clear();
-//        this.newAddDishList.addAll(tradeItemSet);
     }
 }

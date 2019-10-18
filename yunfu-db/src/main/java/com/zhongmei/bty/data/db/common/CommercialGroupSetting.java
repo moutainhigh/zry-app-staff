@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "commercial_group_setting")
 public class CommercialGroupSetting extends IdEntityBase {
     private static final long serialVersionUID = 1L;
@@ -27,125 +25,73 @@ public class CommercialGroupSetting extends IdEntityBase {
     }
 
     public interface $ {
-        /**
-         * commercialGroupId
-         */
+
         public static final String commercialGroupId = "commercialGroupId";
-        /**
-         * isIntegral
-         */
+
         public static final String isIntegral = "isIntegral";
-        /**
-         * integralScale
-         */
+
         public static final String integralScale = "integralScale";
-        /**
-         * isCoupons
-         */
+
         public static final String isCoupons = "isCoupons";
-        /**
-         * isValueCard
-         */
+
         public static final String isValueCard = "isValueCard";
-        /**
-         * isShareCustomer
-         */
+
         public static final String isShareCustomer = "isShareCustomer";
-        /**
-         * status
-         */
+
         public static final String status = "status";
-        /**
-         * createDateTime
-         */
+
         public static final String createDateTime = "createDateTime";
-        /**
-         * modifyDateTime
-         */
+
         public static final String modifyDateTime = "modifyDateTime";
-        /**
-         * currency_encode
-         */
+
         public static final String currency_encode = "currency_encode";
-        /**
-         * language_default
-         */
+
         public static final String languageDefault = "language_default";
-        /**
-         * language_second
-         */
+
         public static final String languageSecond = "language_second";
-        /**
-         * isSupply
-         */
+
         public static final String isSupply = "is_supply";
 
     }
 
-    /**
-     * 商户主ID
-     */
+
     @DatabaseField(columnName = "commercialGroupId")
     private Long commercialGroupId;
 
-    /**
-     * 是否开通积分
-     */
+
     @DatabaseField(columnName = "isIntegral")
     private int isIntegral;
-    /**
-     * 积分比例
-     */
+
     @DatabaseField(columnName = "integralScale")
     private BigDecimal integralScale;
-    /**
-     * 是否下发优惠券
-     */
+
     @DatabaseField(columnName = "isCoupons")
     private int isCoupons;
-    /**
-     * 是否开通储值
-     */
+
     @DatabaseField(columnName = "isValueCard")
     private int isValueCard;
-    /**
-     * 是否共享客户基础数据
-     */
+
     @DatabaseField(columnName = "isShareCustomer")
     private int isShareCustomer;
-    /**
-     * 创建时间
-     */
+
     @DatabaseField(columnName = "createDateTime")
     private Long createDateTime;
-    /**
-     * 修改时间
-     */
+
     @DatabaseField(columnName = "modifyDateTime")
     private Long modifyDateTime;
-    /**
-     * 记录是否有效
-     */
+
     @DatabaseField(columnName = "status")
     private int status;
-    /**
-     * 货币编码
-     */
+
     @DatabaseField(columnName = "currency_encode")
     private String currencyEncode;
-    /**
-     * 默认语系
-     */
+
     @DatabaseField(columnName = "language_default")
     private String languageDefault;
-    /**
-     * 第二语言
-     */
+
     @DatabaseField(columnName = "language_second")
     private String languageSecond;
-    /**
-     * 是否开通供应链
-     */
+
     @DatabaseField(columnName = "is_supply")
     private int isSupply;
 

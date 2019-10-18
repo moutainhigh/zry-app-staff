@@ -14,10 +14,8 @@ import java.util.List;
 
 public class CustomerInfoResp implements Serializable {
 
-    private Double valuecard;// 储值余额
-
-    private Long integral;// 积分余额
-
+    private Double valuecard;
+    private Long integral;
     private List<CustomerCouponResp> coupons;
 
     private List<Card> cards;
@@ -116,9 +114,7 @@ public class CustomerInfoResp implements Serializable {
 
 
     public static class Card implements Serializable {
-        /**
-         * @date：2016-5-19 下午2:17:31
-         */
+
         private static final long serialVersionUID = 1L;
 
         private Long id;
@@ -159,9 +155,7 @@ public class CustomerInfoResp implements Serializable {
 
         private Long validEndDay;
 
-        /**
-         * 卡是否有储值权限 权益状态1：可用 2：不可用，受周期控制，为2时，服务账户冻结，不返积分、不享受储赠
-         */
+
         private Integer rightStatus;
 
 

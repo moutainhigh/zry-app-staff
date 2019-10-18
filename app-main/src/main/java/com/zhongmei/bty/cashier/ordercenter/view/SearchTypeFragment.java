@@ -26,9 +26,7 @@ import org.androidannotations.annotations.ViewById;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.order_center_search_type_layout)
 public class SearchTypeFragment extends BasicDialogFragment {
 

@@ -9,88 +9,56 @@ import com.zhongmei.yunfu.db.enums.PrintOperationOpType;
 import com.zhongmei.yunfu.db.enums.PrintStatus;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * PrintOperation is a ORMLite bean type. Corresponds to the database table "print_operation"
- */
+
 @DatabaseTable(tableName = "print_operation")
 public class PrintOperation extends ServerEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "print_operation"
-     */
+
     public interface $ extends ServerEntityBase.$ {
 
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * op_type
-         */
+
         public static final String opType = "op_type";
 
-        /**
-         * source_trade_id
-         */
+
         public static final String sourceTradeId = "source_trade_id";
 
-        /**
-         * source_table_id
-         */
+
         public static final String sourceTableId = "source_table_id";
 
-        /**
-         * target_trade_id
-         */
+
         public static final String targetTradeId = "target_trade_id";
 
-        /**
-         * target_table_id
-         */
+
         public static final String targetTableId = "target_table_id";
 
-        /**
-         * source_serial_number
-         */
+
         public static final String sourceSerialNumber = "source_serial_number";
 
-        /**
-         * target_serial_number
-         */
+
         public static final String targetSerialNumber = "target_serial_number";
 
-        /**
-         * print_status
-         */
+
         public static final String printStatus = "print_status";
 
-        /**
-         * cash_points
-         */
+
         public static final String cashPoints = "cash_points";
 
-        /**
-         * extends_str
-         */
+
         public static final String extendsStr = "extends_str";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }
@@ -125,15 +93,11 @@ public class PrintOperation extends ServerEntityBase implements ICreator, IUpdat
     @DatabaseField(columnName = "print_status", canBeNull = false)
     private Integer printStatus;
 
-    /**
-     * 扩展字段
-     */
+
     @DatabaseField(columnName = "extends_str")
     private String extendsStr;
 
-    /**
-     * 收银点
-     */
+
     @DatabaseField(columnName = "cash_points")
     private String cashPoints;
 
@@ -143,8 +107,7 @@ public class PrintOperation extends ServerEntityBase implements ICreator, IUpdat
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
-    public Integer localPrintStatus; //本地打印状态
-
+    public Integer localPrintStatus;
     public Long getCreatorId() {
         return creatorId;
     }

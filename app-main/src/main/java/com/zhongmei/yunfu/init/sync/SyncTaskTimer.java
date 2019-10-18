@@ -12,10 +12,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-/**
- * 任务定时器，定时把同步表添加到同步池
- * Created by demo on 2018/12/15
- */
+
 public class SyncTaskTimer {
 
     private final ScheduledExecutorService scheduledExecService;

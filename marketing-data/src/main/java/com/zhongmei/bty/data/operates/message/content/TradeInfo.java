@@ -2,13 +2,9 @@ package com.zhongmei.bty.data.operates.message.content;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class TradeInfo {
-    private String uuid;//充值订单uuid
-    private BigDecimal totalValueCard;//充值订单金额
-    private String tradeNo;
+    private String uuid;    private BigDecimal totalValueCard;    private String tradeNo;
     private Long creatorId;
     private String creatorName;
     private Long updatorId;

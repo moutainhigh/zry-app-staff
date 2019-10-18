@@ -77,14 +77,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 购物车
- *
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class ShoppingCart extends BaseShoppingCart {
 
     private static final String TAG = ShoppingCart.class.getSimpleName();
@@ -96,14 +89,11 @@ public class ShoppingCart extends BaseShoppingCart {
 
     private TradeVo mOldTradeVo;
 
-    //加菜数据
-    private ArrayList<TradeItem> mAddTradeItems;
+        private ArrayList<TradeItem> mAddTradeItems;
 
-    //删菜数据
-    private ArrayList<TradeItem> mDeleteTradeItems;
+        private ArrayList<TradeItem> mDeleteTradeItems;
 
-    //发生库存改变的菜品
-    private List<IShopcartItem> mReduceItems;
+        private List<IShopcartItem> mReduceItems;
 
     private List<IShopcartItem> mAddChangeItems;
 
@@ -123,14 +113,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return instance;
     }
 
-    /**
-     * 注册购物车监听
-     *
-     * @Title: registerListener
-     * @Description: TODO
-     * @Param @param mModifyShoppingCartListener TODO
-     * @Return void 返回类型
-     */
+
     public void registerListener(int listenerTag, ModifyShoppingCartListener mModifyShoppingCartListener) {
         arrayListener.put(listenerTag, mModifyShoppingCartListener);
         if (BuildConfig.DEBUG) {
@@ -138,12 +121,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: unRegisterListener
-     * @Description: 清空所有监听队列
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void unRegisterListener() {
         arrayListener.clear();
         if (BuildConfig.DEBUG) {
@@ -151,12 +129,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: unRegisterListenerByTag
-     * @Description: 根据监听tag反注册监听
-     * @Param @param tag TODO
-     * @Return void 返回类型
-     */
+
     public void unRegisterListenerByTag(int tag) {
         arrayListener.remove(tag);
         if (BuildConfig.DEBUG) {
@@ -164,14 +137,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 设置号牌
-     *
-     * @Title: setCardNo
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void setCardNo(String cardNo) {
         checkNeedBuildMainOrder(fastFootShoppingCartVo.getmTradeVo());
 
@@ -186,14 +152,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 设置桌台
-     *
-     * @Title: setTable
-     * @Description: TODO
-     * @Param @param tradeTable TODO
-     * @Return void 返回类型
-     */
+
     public void setTable(List<Tables> mTables) {
         checkNeedBuildMainOrder(fastFootShoppingCartVo.getmTradeVo());
 
@@ -212,8 +171,7 @@ public class ShoppingCart extends BaseShoppingCart {
                 tradeTable.setTableName(table.getTableName());
                 tradeTable.setTradeUuid(fastFootShoppingCartVo.getmTradeVo().getTrade().getUuid());
                 tradeTable.validateCreate();
-                // 自助时，如有一单多桌，则第一个桌子添加全部人数，其他桌台记人数为0
-                if (i == 0) {
+                                if (i == 0) {
                     tradeTable
                             .setTablePeopleCount(fastFootShoppingCartVo.getmTradeVo().getTrade().getTradePeopleCount());
                 } else {
@@ -230,7 +188,6 @@ public class ShoppingCart extends BaseShoppingCart {
                 }
 
             }
-            // fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setNumberPlate("");
 
             fastFootShoppingCartVo.getmTradeVo().setTradeTableList(tradeTableList);
 
@@ -253,12 +210,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return fastFootShoppingCartVo.getmTables();
     }
 
-    /**
-     * @Title: addPeople
-     * @Description: 添加就餐人数
-     * @Param count TODO
-     * @Return void 返回类型
-     */
+
     public void addPeople(int count) {
         checkNeedBuildMainOrder(fastFootShoppingCartVo.getmTradeVo());
         if (fastFootShoppingCartVo.getmTradeVo().getTrade() != null) {
@@ -268,15 +220,13 @@ public class ShoppingCart extends BaseShoppingCart {
             arrayListener.get(key).setTradePeopleCount(count);
         }
 
-        // 将人数添加到桌台
-        List<TradeTable> listTradeTable = fastFootShoppingCartVo.getmTradeVo().getTradeTableList();
+                List<TradeTable> listTradeTable = fastFootShoppingCartVo.getmTradeVo().getTradeTableList();
         if (listTradeTable != null) {
             for (TradeTable mTradeTable : listTradeTable) {
                 mTradeTable.setTablePeopleCount(count);
             }
         }
-        // 计算订单总价格
-        List<IShopcartItem> allItem = mergeShopcartItem(fastFootShoppingCartVo);
+                List<IShopcartItem> allItem = mergeShopcartItem(fastFootShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(allItem, fastFootShoppingCartVo.getmTradeVo());
 
         CheckGiftCouponIsActived(fastFootShoppingCartVo);
@@ -287,14 +237,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: addShippingToCart
-     * @Description: 添加菜品到购物车
-     * @Param @param mShopcartItem
-     * @Param @param isTempDish ture:是临时保存菜品 false:不是临时保存菜品
-     * 是时时加入购物车
-     * @Return void 返回类型
-     */
+
     public void addtFastFoodDishToCart(ShopcartItem mShopcartItem, Boolean isTempDish) {
         addOneDishToCart(mShopcartItem, isTempDish);
         mathDishPriceAndPrivilege(mShopcartItem);
@@ -304,14 +247,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: addBatchDishToCart
-     * @Description: 批量添加菜品到购物车
-     * @Param @param shopcartItems
-     * @Param @param isTempDish ture:是临时保存菜品 false:不是临时保存菜品
-     * 是时时加入购物车
-     * @Return void 返回类型
-     */
+
     public void addBatchDishToCart(List<ShopcartItem> shopcartItems, Boolean isTempDish) {
         if (Utils.isNotEmpty(shopcartItems)) {
             for (ShopcartItem item : shopcartItems) {
@@ -325,14 +261,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: addSigleDishToCart
-     * @Description: 添加一个菜品到购物车
-     * @Param @param mShopcartItem
-     * @Param @param isTempDish ture:是临时保存菜品 false:不是临时保存菜品
-     * 是时时加入购物车
-     * @Return void 返回类型
-     */
+
     private void addOneDishToCart(ShopcartItem mShopcartItem, Boolean isTempDish) {
         if (mShopcartItem == null) {
             return;
@@ -361,18 +290,12 @@ public class ShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: mathDishPriceAndPrivilege
-     * @Description: 当前菜品的优惠、营销活动、重新计算价格
-     * @Param @param mShopcartItem
-     * @Return void 返回类型
-     */
+
     private void mathDishPriceAndPrivilege(ShopcartItem mShopcartItem) {
         List<IShopcartItem> allIttem = mergeShopcartItem(fastFootShoppingCartVo);
         autoAddSalesPromotion(fastFootShoppingCartVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(allIttem, fastFootShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(allIttem, fastFootShoppingCartVo.getmTradeVo());
 
         CheckGiftCouponIsActived(fastFootShoppingCartVo);
         if (BuildConfig.DEBUG) {
@@ -384,13 +307,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: isAddTempDish
-     * @Description: 变更临时菜品状态
-     * @Param @param mShopcartItem
-     * @Param @param isAdd isAdd true:确认临时套餐，false:移除临时套餐
-     * @Return void 返回类型
-     */
+
     public void isCheckAdd(ShopcartItem mShopcartItem, Boolean isAdd) {
         if (!isAdd) {
             removeDish(fastFootShoppingCartVo, mShopcartItem);
@@ -398,30 +315,9 @@ public class ShoppingCart extends BaseShoppingCart {
         fastFootShoppingCartVo.setTempShopItem(null);
     }
 
-    /**
-     * @Title: setFastFoodCustomer
-     * @Description: 设置登录会员
-     * @Param @param mTradeCustomer TODO
-     * @Return void 返回类型
-     */
+
     public void setFastFoodCustomer(TradeCustomer mTradeCustomer) {
-        // // 如果为null表示注销会员登录
-        // if (mTradeCustomer == null) {
-        // List<TradeCustomer> listCustomer =
-        // fastFootShoppingCartVo.getmTradeVo().getTradeCustomerList();
-        // if (listCustomer != null) {
-        // for (int i = listCustomer.size() - 1; i >= 0;
-        // i--) {
-        // TradeCustomer customer = listCustomer.get(i);
-        // if (customer.getCustomerType() ==
-        // CustomerType.MEMBER) {
-        // listCustomer.remove(i);
-        // break;
-        // }
-        // }
-        // }
-        // }
-        if (mTradeCustomer == null) {
+                                                                                                                                        if (mTradeCustomer == null) {
             setOpenIdenty(fastFootShoppingCartVo, "");
         }
         setCustomer(fastFootShoppingCartVo, mTradeCustomer);
@@ -434,14 +330,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return fastFootShoppingCartVo.getArrayTradeCustomer();
     }
 
-    /**
-     * 设置呼入电话关联的用户信息即预订客户信息
-     *
-     * @Title: setCallCustomer
-     * @Description: TODO
-     * @Param @param mTradeCustomer TODO
-     * @Return void 返回类型
-     */
+
     public void setCallCustomer(TradeCustomer mTradeCustomer) {
         if (fastFootShoppingCartVo.getArrayTradeCustomer() == null) {
             fastFootShoppingCartVo.setArrayTradeCustomer(new HashMap<Integer, TradeCustomer>());
@@ -450,14 +339,7 @@ public class ShoppingCart extends BaseShoppingCart {
         fastFootShoppingCartVo.getArrayTradeCustomer().put(CustomerType.BOOKING.value(), mTradeCustomer);
     }
 
-    /**
-     * 设置外卖地址
-     *
-     * @Title: setAddress
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void setAddress(TakeOutInfo entity) {
         fastFootShoppingCartVo.setmTakeOutInfo(entity);
 
@@ -467,18 +349,14 @@ public class ShoppingCart extends BaseShoppingCart {
             if (fastFootShoppingCartVo.getmTradeVo().getTradeExtra() == null) {
                 fastFootShoppingCartVo.getmTradeVo().setTradeExtra(new TradeExtra());
             }
-            // 发票抬头
-            fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setInvoiceTitle(entity.getInvoiceTitle());
-            // 期望送达时间
-            fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setExpectTime(entity.getExpectTime());
+                        fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setInvoiceTitle(entity.getInvoiceTitle());
+                        fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setExpectTime(entity.getExpectTime());
 
-            // 收货人电话
-            fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverPhone(entity.getReceiverTel());
+                        fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverPhone(entity.getReceiverTel());
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setNation(entity.getNation());
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setCountry(entity.getCountry());
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setNationalTelCode(entity.getNationalTelCode());
-            // 收货人姓名
-            fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverName(entity.getReceiverName());
+                        fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverName(entity.getReceiverName());
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setDeliveryAddressId(entity.getDeliveryAddressID());
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setDeliveryAddress(entity.getDeliveryAddress());
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverSex(entity.getReceiverSex());
@@ -487,17 +365,13 @@ public class ShoppingCart extends BaseShoppingCart {
             if (fastFootShoppingCartVo.getmTradeVo().getTradeExtra() == null) {
                 return;
             }
-            // 发票抬头
-            fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setInvoiceTitle("");
-            // 期望送达时间
-            fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setExpectTime(null);
-            // 收货人电话
-            fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverPhone("");
+                        fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setInvoiceTitle("");
+                        fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setExpectTime(null);
+                        fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverPhone("");
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setNation("");
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setCountry("");
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setNationalTelCode("");
-            // 收货人姓名
-            fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverName("");
+                        fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverName("");
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setDeliveryAddressId(null);
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setDeliveryAddress("");
             fastFootShoppingCartVo.getmTradeVo().getTradeExtra().setReceiverSex(null);
@@ -509,20 +383,10 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: setCouponPrivilege
-     * @Description: 设置优惠劵
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void setCouponPrivilege(CouponPrivilegeVo mCouponPrivilegeVo) {
-        // 移除手动折扣（因手动整单折扣与优惠劵不可并存）
-        // fastFootShoppingCartVo.getmTradeVo().setTradePrivileges(null);
-        // //移除免单理由
-        // removeFreeReason();
-        checkNeedBuildMainOrder(fastFootShoppingCartVo.getmTradeVo());
-        //礼品券赠菜
-        if (mCouponPrivilegeVo.getCoupon().getCouponType() == CouponType.GIFT
+                                        checkNeedBuildMainOrder(fastFootShoppingCartVo.getmTradeVo());
+                if (mCouponPrivilegeVo.getCoupon().getCouponType() == CouponType.GIFT
                 && mCouponPrivilegeVo.getShopcartItem() != null) {
 
             setGiftCouponPrivilege(mCouponPrivilegeVo);
@@ -530,8 +394,7 @@ public class ShoppingCart extends BaseShoppingCart {
         } else {
             removeOrderTreadePrivilege(fastFootShoppingCartVo.getmTradeVo());
             BuildPrivilegeTool.buildCouponPrivilege(fastFootShoppingCartVo.getmTradeVo(), mCouponPrivilegeVo);
-            // 计算订单总价格
-            MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                     fastFootShoppingCartVo.getmTradeVo());
         }
 
@@ -546,12 +409,7 @@ public class ShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: setGiftCouponPrivilege
-     * @Description: 礼品优惠劵
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     private void setGiftCouponPrivilege(CouponPrivilegeVo mCouponPrivilegeVo) {
 
@@ -559,8 +417,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
         boolean marketFlag = false;
 
-        //判断些菜是否已经参加营销活动
-        List<TradeItemPlanActivity> tradeItemPlanActivityList = fastFootShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList();
+                List<TradeItemPlanActivity> tradeItemPlanActivityList = fastFootShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList();
         if (tradeItemPlanActivityList != null && tradeItemPlanActivityList.size() > 0) {
             for (IShopcartItem item : mergeShopcartItem(fastFootShoppingCartVo)) {
                 for (TradeItemPlanActivity tradeItemPlanActivity : tradeItemPlanActivityList) {
@@ -575,9 +432,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
 
         IShopcartItem value = null;
-        if (!marketFlag) {//如果没有参加营销活动
-            //判断是否已经包含礼品券
-            for (IShopcartItem item : mergeShopcartItem(fastFootShoppingCartVo)) {
+        if (!marketFlag) {                        for (IShopcartItem item : mergeShopcartItem(fastFootShoppingCartVo)) {
                 if (item.getStatusFlag() == StatusFlag.VALID
                         && item.getDishShop().getBrandDishId().equals(tempItem.getDishShop().getBrandDishId())
                         && item.getSingleQty().compareTo(tempItem.getSingleQty()) == 0 && item.getCouponPrivilegeVo() == null) {
@@ -615,8 +470,7 @@ public class ShoppingCart extends BaseShoppingCart {
         if (value instanceof ShopcartItem) {
             addtFastFoodDishToCart((ShopcartItem) value, false);
         } else {
-            // 计算订单总价格
-            MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                     fastFootShoppingCartVo.getmTradeVo());
 
             CheckGiftCouponIsActived(fastFootShoppingCartVo);
@@ -629,24 +483,12 @@ public class ShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: removeCouponPrivilege
-     * @Description: 移除优惠劵
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeCouponPrivilege() {
-        // 移除优惠劵
-        removeAllCouponPrivilege(fastFootShoppingCartVo, true);
+                removeAllCouponPrivilege(fastFootShoppingCartVo, true);
     }
 
-    /**
-     * @Title: checkIsHaveWXC
-     * @Description: 验证微信卡卷是否已存在
-     * @Param code
-     * @Param @return TODO true:已存在，false:未存在
-     * @Return Boolean 返回类型
-     */
+
     public Boolean checkIsHaveWXC(String code) {
         code = getNewWxCode(code);
         List<WeiXinCouponsVo> listWX = fastFootShoppingCartVo.getmTradeVo().getmWeiXinCouponsVo();
@@ -663,16 +505,10 @@ public class ShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: addWeiXinCouponsPrivilege
-     * @Description: 添加微信卡卷
-     * @Param mWeiXinCouponsInfo TODO
-     * @Return void 返回类型
-     */
+
     public void addWeiXinCouponsPrivilege(WeiXinCouponsInfo mWeiXinCouponsInfo) {
         addWeiXinCouponsVo(fastFootShoppingCartVo.getmTradeVo(), mWeiXinCouponsInfo);
-        // 计算订单总价格
-        List<IShopcartItem> shopcartItemList = mergeShopcartItem(fastFootShoppingCartVo);
+                List<IShopcartItem> shopcartItemList = mergeShopcartItem(fastFootShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
 
@@ -681,18 +517,12 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeWeiXinCouponsPrivilege
-     * @Description: 移除微信卡卷
-     * @Param tradePrivileges
-     * @Return void 返回类型
-     */
+
     public void removeWeiXinCouponsPrivilege(List<TradePrivilege> tradePrivileges) {
         for (TradePrivilege tradePrivilege : tradePrivileges) {
             removeWeiXinCouponsVo(fastFootShoppingCartVo.getmTradeVo(), tradePrivilege);
         }
-        // 计算订单总价格
-        List<IShopcartItem> shopcartItemList = mergeShopcartItem(fastFootShoppingCartVo);
+                List<IShopcartItem> shopcartItemList = mergeShopcartItem(fastFootShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
 
@@ -701,16 +531,10 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeAllWXC
-     * @Description: 移除所有微信卡卷
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeAllWXC() {
         fastFootShoppingCartVo.getmTradeVo().getmWeiXinCouponsVo().clear();
-        // 计算订单总价格
-        List<IShopcartItem> shopcartItemList = mergeShopcartItem(fastFootShoppingCartVo);
+                List<IShopcartItem> shopcartItemList = mergeShopcartItem(fastFootShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
 
@@ -719,21 +543,11 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 设置手动整单打折
-     *
-     * @Title: setOrderDiscount
-     * @Description: TODO
-     * @Param @param type
-     * @Param @param dishcount TODO
-     * @Return void 返回类型
-     */
+
     public void setOrderPrivilege(TradePrivilege tradePrivilege, Reason mReason) {
         checkNeedBuildMainOrder(fastFootShoppingCartVo.getmTradeVo());
 
-        // 移除优惠劵（因优惠劵与手动整单折扣不可并存）
-//		fastFootShoppingCartVo.getmTradeVo().setCouponPrivilege(null);
-        removeAllCouponPrivilege(fastFootShoppingCartVo, true);
+                removeAllCouponPrivilege(fastFootShoppingCartVo, true);
 
         if (tradePrivilege != null) {
             tradePrivilege.setUuid(SystemUtils.genOnlyIdentifier());
@@ -744,26 +558,14 @@ public class ShoppingCart extends BaseShoppingCart {
         }
 
         fastFootShoppingCartVo.getmTradeVo().replaceTradePrivilege(tradePrivilege);
-        // 设置免单理由
-        if (tradePrivilege.getPrivilegeType() == PrivilegeType.FREE && mReason != null) {
+                if (tradePrivilege.getPrivilegeType() == PrivilegeType.FREE && mReason != null) {
             setTradeFreeReasonRel(fastFootShoppingCartVo.getmTradeVo(), mReason, OperateType.TRADE_FASTFOOD_FREE);
         } else {
             removeFreeReason(fastFootShoppingCartVo.getmTradeVo());
         }
 
-        // 如果有使用折扣卷则移除折扣卷
-        // if
-        // (fastFootShoppingCartVo.getmTradeVo().getCouponPrivilege()
-        // != null && fastFootShoppingCartVo.getmTradeVo()
-        // .getCouponPrivilege()
-        // .getCoupon()
-        // .getCouponType()
-        // .value() != CouponType.GIFT.value()) {
-        // fastFootShoppingCartVo.getmTradeVo().setCouponPrivilege(null);
-        // }
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -773,43 +575,13 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     *
 
-     * @Title: removeFreeReason
-     * @Description: 移除免单理由
-     * @Param TODO
-     * @Return void 返回类型
-     */
-    // private void removeFreeReason() {
-    // // 移除免单理由
-    // List<TradeReasonRel> listReason =
-    // fastFootShoppingCartVo.getmTradeVo().getTradeReasonRelList();
-    // if (listReason != null) {
-    // for (int i = 0; i < listReason.size(); i++) {
-    // if (listReason.get(i).getOperateType() ==
-    // OperateType.TRADE_FASTFOOD_FREE) {
-    // listReason.remove(i);
-    // }
-    // }
-    // }
-    // }
 
-    /**
-     * @Title: removeOrderPrivilege
-     * @Description: 移除优惠券整单打折并计算
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeOrderPrivilege() {
-        // fastFootShoppingCartVo.getmTradeVo().setTradePrivileges(null);
-        //
-        // // 移除免单理由
-        // removeFreeReason();
-        removeAllCouponPrivilege(fastFootShoppingCartVo, false);
+                                        removeAllCouponPrivilege(fastFootShoppingCartVo, false);
         removeOrderTreadePrivilege(fastFootShoppingCartVo.getmTradeVo());
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -820,17 +592,11 @@ public class ShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: removeOrderPrivilege
-     * @Description: 移除手动整单打折并计算
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeOrderTradePrivilege() {
         removeOrderTreadePrivilege(fastFootShoppingCartVo.getmTradeVo());
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -840,12 +606,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: batchPrivilege
-     * @Description: 批量折扣
-     * @Param @param listShopcartItem TODO
-     * @Return void 返回类型
-     */
+
     public void batchPrivilege(List<IShopcartItemBase> listShopcartItem) {
 
         for (IShopcartItemBase item : listShopcartItem) {
@@ -862,8 +623,7 @@ public class ShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -872,12 +632,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeDishPrivilege
-     * @Description: 移除菜品折扣
-     * @Param @param mShopcartItem TODO
-     * @Return void 返回类型
-     */
+
     public void removeDishPrivilege(IShopcartItemBase mShopcartItem) {
         if (mShopcartItem.getPrivilege() != null && (mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
                 || mShopcartItem.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
@@ -906,8 +661,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
         autoAddSalesPromotion(fastFootShoppingCartVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeDiscount(mergeShopcartItem(fastFootShoppingCartVo),
@@ -916,17 +670,11 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: memberPrivilege
-     * @Description: 设置会员折扣
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void memberPrivilege() {
         batchMemberPrivilege(fastFootShoppingCartVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -948,12 +696,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: removeMemberPrivilege
-     * @Description: 移除会员折扣
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeMemberPrivilege() {
         for (IShopcartItemBase item : mergeShopcartItem(fastFootShoppingCartVo)) {
             if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
@@ -965,8 +708,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
         autoAddSalesPromotion(fastFootShoppingCartVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -975,23 +717,15 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: setIntegralCash
-     * @Description: 设置积分抵现
-     * @Param @param mCrmCustomerLevelRights
-     * @Param @param integra TODO
-     * @Return void 返回类型
-     */
+
     public void setIntegralCash(IntegralCashPrivilegeVo mIntegralCashPrivilegeVo) {
 
         if (mIntegralCashPrivilegeVo == null || !mIntegralCashPrivilegeVo.hasRule()
                 || mIntegralCashPrivilegeVo.getIntegral().compareTo(BigDecimal.ZERO) == 0) {
             return;
         }
-        // 设置积分抵现优惠信息
-        BuildPrivilegeTool.buildCashPrivilege(mIntegralCashPrivilegeVo, fastFootShoppingCartVo.getmTradeVo());
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                BuildPrivilegeTool.buildCashPrivilege(mIntegralCashPrivilegeVo, fastFootShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).setIntegralCash(mergeShopcartItem(fastFootShoppingCartVo),
@@ -1001,16 +735,10 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeIntegralCash
-     * @Description: 移除会员积分抵现
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeIntegralCash() {
         fastFootShoppingCartVo.getmTradeVo().setIntegralCashPrivilegeVo(null);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeIntegralCash(mergeShopcartItem(fastFootShoppingCartVo),
@@ -1020,26 +748,15 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeAllPrivilegeForCustomer
-     * @Description: 移除会员相关的所有优惠信息
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeAllPrivilegeForCustomer() {
-        // 移除会员积分抵现
-        fastFootShoppingCartVo.getmTradeVo().setIntegralCashPrivilegeVo(null);
-        // 移除优惠劵
-//		fastFootShoppingCartVo.getmTradeVo().setCouponPrivilege(null);
-        removeAllCouponPrivilege(fastFootShoppingCartVo, false);
-        //移除礼品券
-        removeAllGiftPrivilege();
+                fastFootShoppingCartVo.getmTradeVo().setIntegralCashPrivilegeVo(null);
+                removeAllCouponPrivilege(fastFootShoppingCartVo, false);
+                removeAllGiftPrivilege();
 
-        // 移除会员折扣
-        removeMemberPrivilege();
+                removeMemberPrivilege();
 
-        // 移除tradeVo中的登录会员
-        List<TradeCustomer> listCustomer = fastFootShoppingCartVo.getmTradeVo().getTradeCustomerList();
+                List<TradeCustomer> listCustomer = fastFootShoppingCartVo.getmTradeVo().getTradeCustomerList();
         if (listCustomer != null) {
             for (int i = listCustomer.size() - 1; i >= 0; i--) {
                 TradeCustomer customer = listCustomer.get(i);
@@ -1053,19 +770,13 @@ public class ShoppingCart extends BaseShoppingCart {
                 }
             }
         }
-        // 移除临时保存的会员信息
-        if (fastFootShoppingCartVo.getArrayTradeCustomer() != null) {
+                if (fastFootShoppingCartVo.getArrayTradeCustomer() != null) {
             fastFootShoppingCartVo.getArrayTradeCustomer().remove(CustomerType.MEMBER.value());
             fastFootShoppingCartVo.getArrayTradeCustomer().remove(CustomerType.CARD.value());
         }
     }
 
-    /**
-     * @Title: removeAllGiftCoupon
-     * @Description: 移除所有的礼品券
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeAllGiftPrivilege() {
         for (IShopcartItem item : mergeShopcartItem(fastFootShoppingCartVo)) {
             if (item.getCouponPrivilegeVo() != null && item.getCouponPrivilegeVo().getTradePrivilege() != null) {
@@ -1073,23 +784,16 @@ public class ShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(mergeShopcartItem(fastFootShoppingCartVo),
                     fastFootShoppingCartVo.getmTradeVo());
-//			arrayListener.get(key).removeCouponPrivilege();
         }
     }
 
-    /**
-     * @param listExtraCharge TODO
-     * @Title: addExtraCharge
-     * @Description: 添加服务费
-     * @Return void 返回类型
-     */
+
 
     public void addExtraCharge(List<ExtraCharge> listExtraCharge) {
 
@@ -1113,7 +817,6 @@ public class ShoppingCart extends BaseShoppingCart {
 
         }
         fastFootShoppingCartVo.getmTradeVo().setExtraChargeMap(extraChargeMap);
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
 
@@ -1131,12 +834,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @param id TODO 附件费ID
-     * @Title: removeExtraCharge
-     * @Description: 根据附加费id移除附加费
-     * @Return void 返回类型
-     */
+
 
     public void removeExtraCharge(Long id) {
 
@@ -1144,8 +842,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
         removeTradePrivilege(PrivilegeType.ADDITIONAL, fastFootShoppingCartVo.getmTradeVo());
 
-        if (isHereOrTake()) {//如果内向或自取移动餐盒费要移除菜品上的打包标记
-            Map<Long, ExtraCharge> extraChargeMap = fastFootShoppingCartVo.getmTradeVo().getExtraChargeMap();
+        if (isHereOrTake()) {            Map<Long, ExtraCharge> extraChargeMap = fastFootShoppingCartVo.getmTradeVo().getExtraChargeMap();
             boolean hasChf = false;
             if (extraChargeMap != null) {
                 for (Long key : extraChargeMap.keySet()) {
@@ -1164,7 +861,6 @@ public class ShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
 
@@ -1180,14 +876,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 设置整单备注
-     *
-     * @Title: setComment
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void setFastFoodRemarks(String remarks) {
         setRemarks(fastFootShoppingCartVo, remarks);
         for (int key : arrayListener.keySet()) {
@@ -1196,12 +885,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeDishRemark
-     * @Description: 移除菜品备注
-     * @Param @param mShopcartItem TODO
-     * @Return void 返回类型
-     */
+
     public void removeFastFoodRemark(ShopcartItem mShopcartItem) {
         OperateShoppingCart.removeDishRemark(fastFootShoppingCartVo.getmTradeVo(),
                 fastFootShoppingCartVo.getListOrderDishshopVo(),
@@ -1213,12 +897,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeSetmealRemark
-     * @Description: 移除子菜备注
-     * @Param @param mSetmeal TODO
-     * @Return void 返回类型
-     */
+
     public void removeFastFoodSetmealRemark(SetmealShopcartItem mSetmeal) {
         removeSetmealRemark(fastFootShoppingCartVo, mSetmeal);
 
@@ -1229,12 +908,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeRemark
-     * @Description: 移除整单备注
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeRemark() {
         fastFootShoppingCartVo.getmTradeVo().getTrade().setTradeMemo("");
         for (int key : arrayListener.keySet()) {
@@ -1244,46 +918,31 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: createFastFoodOrder
-     * @Description: 构建订单数据信息
-     * @Param @param isGuaDan
-     * @Param @return TODO
-     * @Return TradeVo 返回类型
-     */
+
     public TradeVo createFastFoodOrder(Boolean isGuaDan) {
 
         TradeVo tradeVo = createOrder(fastFootShoppingCartVo, isGuaDan);
         CreateTradeTool.updateTradeItemPrivilgeOfRelate(tradeVo, mergeShopcartItem(fastFootShoppingCartVo));
 
-        if (isReturnCash() && mOldTradeVo != null) {//反结单删除的数据需要标记为无效
-
+        if (isReturnCash() && mOldTradeVo != null) {
             buildReturnCashTradeVo(tradeVo);
         }
 
-        //非挂单那么保存营销活动优惠，营销活动优惠不影响订单金额，仅用于后台统计
-        //将TradeStatus为挂单状态的订单修正为已确认
-        if (!isGuaDan) {
+                        if (!isGuaDan) {
             setMarktingTradePrivilege(tradeVo);
             TradeStatus tradeStatus = tradeVo.getTrade().getTradeStatus();
             if (tradeStatus == TradeStatus.TEMPORARY) {
                 tradeVo.getTrade().setTradeStatus(TradeStatus.CONFIRMED);
             }
         }
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
-        if (isReturnCash()) { //反结账的单子添加退库存
-            tradeVo.inventoryVo = getInventoryVo(tradeVo);
+        if (isReturnCash()) {             tradeVo.inventoryVo = getInventoryVo(tradeVo);
         }
         return tradeVo;
     }
 
-    /**
-     * @Title: setTradeLog
-     * @Description: 设置订单日志
-     * @Return void 返回类型
-     */
+
     private void setTradeLog() {
         try {
             int validItem = 0;
@@ -1319,9 +978,7 @@ public class ShoppingCart extends BaseShoppingCart {
                 }
 
             }
-            /*PLog.d(PLog.QUICK_SERVICE_KEY, "info:快餐下单菜品数据" + "订单号:" + tradeVo.getTrade().getTradeNo()
-                    + ";有效菜品个数:" + validItem + ";金额：" + validDishAmount.toString() + ";无效菜品个数：" + unValidItem + ";金额：" + unValidDishAmount);
-            PLog.d(PLog.QUICK_SERVICE_KEY, "info：快餐下单优惠数据" + "订单号" + tradeVo.getTrade().getTradeNo() + ";优惠信息" + sb.toString() + ";订单金额：" + tradeVo.getTrade().getTradeAmount());*/
+
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         }
@@ -1330,19 +987,13 @@ public class ShoppingCart extends BaseShoppingCart {
     private void setAfterTradeLog(TradeVo tradeVo) {
         try {
             List<IShopcartItem> items = mergeShopcartItem(fastFootShoppingCartVo);
-            //PLog.d(PLog.QUICK_SERVICE_KEY, "info:快餐构建订单后数据" + "订单号:" + tradeVo.getTrade().getTradeNo() + ";菜品数量：" + items.size() + ";订单金额:" + tradeVo.getTrade().getTradeAmount());
-        } catch (Exception e) {
+                    } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         }
 
     }
 
-    /**
-     * @Title: buildReturnCashTradeVo
-     * @Description: 生成反结TradeVo
-     * @Param @param tradeVo
-     * @Return void 返回类型
-     */
+
 
     private void buildReturnCashTradeVo(TradeVo tradeVo) {
         tradeVo.getTrade().setChanged(true);
@@ -1366,15 +1017,13 @@ public class ShoppingCart extends BaseShoppingCart {
             TradeItem tradeItem = ordTradeItemVo.getTradeItem();
             if (mNewTradeItemVos.containsKey(tradeItem.getUuid())) {
                 TradeItemVo newTradeItemVo = mNewTradeItemVos.get(tradeItem.getUuid());
-                //处理礼品劵
-                if (newTradeItemVo.getCouponPrivilegeVo() == null && ordTradeItemVo.getCouponPrivilegeVo() != null) {
+                                if (newTradeItemVo.getCouponPrivilegeVo() == null && ordTradeItemVo.getCouponPrivilegeVo() != null) {
                     ordTradeItemVo.getCouponPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
                     ordTradeItemVo.getCouponPrivilegeVo().getTradePrivilege().setChanged(true);
                     newTradeItemVo.setCouponPrivilegeVo(ordTradeItemVo.getCouponPrivilegeVo());
                 }
 
-                // 单菜折扣
-                if (newTradeItemVo.getTradeItemPrivilege() == null && ordTradeItemVo.getTradeItemPrivilege() != null) {
+                                if (newTradeItemVo.getTradeItemPrivilege() == null && ordTradeItemVo.getTradeItemPrivilege() != null) {
                     TradePrivilege tradePrivilege = CreateTradeTool.cloneTradePrivilege(ordTradeItemVo.getTradeItemPrivilege());
                     tradePrivilege.setStatusFlag(StatusFlag.INVALID);
                     tradePrivilege.setChanged(true);
@@ -1387,8 +1036,7 @@ public class ShoppingCart extends BaseShoppingCart {
             if (!mNewTradeItemVos.containsKey(tradeItem.getUuid())
                     || (mNewTradeItemVos.containsKey(tradeItem.getUuid())
                     && mNewTradeItemVos.get(tradeItem.getUuid()).getTradeItem().getStatusFlag() == StatusFlag.INVALID)) {
-                //删菜
-                mDeleteTradeItems.add(ordTradeItemVo.getTradeItem());
+                                mDeleteTradeItems.add(ordTradeItemVo.getTradeItem());
                 if (ordTradeItemVo.getTradeItem().getId() == null) {
                     tradeItem.setStatusFlag(StatusFlag.INVALID);
                     tradeItem.setChanged(true);
@@ -1422,30 +1070,11 @@ public class ShoppingCart extends BaseShoppingCart {
             }
         }
 
-//        List<TradeItemVo> oldTradeItemList = mOldTradeVo.getTradeItemList();
-//        for (String key : mNewTradeItemVos.keySet()) {
-//            for (TradeItemVo tradeItemVo : oldTradeItemList) {
-//                TradeItem tradeItem = tradeItemVo.getTradeItem();
-//                String uuid = tradeItem.getUuid();
-//                if (!key.equals(uuid) && !deleteTradeItemVo.contains(tradeItemVo)) {
-//                    mAddTradeItems.add(mNewTradeItemVos.get(key).getTradeItem());
-//                }
-//            }
-//        }
 
 
-//        for (TradeItemVo tradeItemVo : oldTradeItemList) {
-//            String oldTradeItemUuid = tradeItemVo.getTradeItem().getUuid();
-//            for (String key : mNewTradeItemVos.keySet()) {
-//                if (!key.equals(oldTradeItemUuid)) {
-//                    mAddTradeItems.add(mNewTradeItemVos.get(key).getTradeItem());
-//                }
-//            }
-//        }
         tradeVo.getTradeItemList().addAll(deleteTradeItemVo);
 
-        //将所有打包标记添加
-        if (mOldTradeVo.getTradeItemList() != null) {
+                if (mOldTradeVo.getTradeItemList() != null) {
             for (TradeItemVo tradeItemVo : mOldTradeVo.getTradeItemList()) {
                 if (tradeItemVo.getTradeItemExtra() != null) {
                     tradeItemVo.getTradeItemExtra().setClientCreateTime(System.currentTimeMillis());
@@ -1460,16 +1089,13 @@ public class ShoppingCart extends BaseShoppingCart {
             }
         }
 
-        //对原单，新单的打包数据处理
-        if (mOldTradeVo.getTradeItemExtraList() != null) {
-            if (tradeVo.getTradeItemExtraList() == null) {//新单没有，原单所有标记无效
-                for (TradeItemExtra tradeItemExtra : mOldTradeVo.getTradeItemExtraList()) {
+                if (mOldTradeVo.getTradeItemExtraList() != null) {
+            if (tradeVo.getTradeItemExtraList() == null) {                for (TradeItemExtra tradeItemExtra : mOldTradeVo.getTradeItemExtraList()) {
                     tradeItemExtra.setStatusFlag(StatusFlag.INVALID);
                     tradeItemExtra.setIsPack(Bool.NO);
                 }
                 tradeVo.setTradeItemExtraList(mOldTradeVo.getTradeItemExtraList());
-            } else {//新单有，需把没有的标记为无效
-                Map<String, TradeItemExtra> temp = new HashMap<String, TradeItemExtra>();
+            } else {                Map<String, TradeItemExtra> temp = new HashMap<String, TradeItemExtra>();
                 for (TradeItemExtra tradeItemExtra1 : tradeVo.getTradeItemExtraList()) {
                     temp.put(tradeItemExtra1.getUuid(), tradeItemExtra1);
                 }
@@ -1484,22 +1110,17 @@ public class ShoppingCart extends BaseShoppingCart {
             }
         }
 
-        //押金
-        if (mOldTradeVo.getTradeDeposit() != null) {
-            if (tradeVo.getTradeDeposit() != null) {//原单，新单都有，把原单信息更新了给新单
-                mOldTradeVo.getTradeDeposit().setDepositPay(tradeVo.getTradeDeposit().getDepositPay());
+                if (mOldTradeVo.getTradeDeposit() != null) {
+            if (tradeVo.getTradeDeposit() != null) {                mOldTradeVo.getTradeDeposit().setDepositPay(tradeVo.getTradeDeposit().getDepositPay());
                 mOldTradeVo.getTradeDeposit().setDepositRefund(tradeVo.getTradeDeposit().getDepositRefund());
                 tradeVo.setTradeDeposit(mOldTradeVo.getTradeDeposit());
-            } else {//原单有，新单没有标记无效
-                mOldTradeVo.getTradeDeposit().setStatusFlag(StatusFlag.INVALID);
+            } else {                mOldTradeVo.getTradeDeposit().setStatusFlag(StatusFlag.INVALID);
                 tradeVo.setTradeDeposit(mOldTradeVo.getTradeDeposit());
             }
         }
 
-        //顾客
-        if (mOldTradeVo.getTradeCustomerList() != null) {
-            if (tradeVo.getTradeCustomerList() == null) {//原单有，新单没有，把会员标记无效
-                List<TradeCustomer> temp = new ArrayList<TradeCustomer>();
+                if (mOldTradeVo.getTradeCustomerList() != null) {
+            if (tradeVo.getTradeCustomerList() == null) {                List<TradeCustomer> temp = new ArrayList<TradeCustomer>();
                 for (TradeCustomer tradeCustomer : mOldTradeVo.getTradeCustomerList()) {
                     tradeCustomer.setStatusFlag(StatusFlag.INVALID);
                     tradeCustomer.setChanged(true);
@@ -1515,13 +1136,11 @@ public class ShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 设置整单优惠和附加费
-        List<TradePrivilege> oldTp = mOldTradeVo.getTradePrivileges();
+                List<TradePrivilege> oldTp = mOldTradeVo.getTradePrivileges();
         List<TradePrivilege> newTp = tradeVo.getTradePrivileges();
 
         if (oldTp != null) {
-            // 新单
-            Map<String, TradePrivilege> newTpMap = new HashMap<String, TradePrivilege>();
+                        Map<String, TradePrivilege> newTpMap = new HashMap<String, TradePrivilege>();
 
             for (TradePrivilege sPrivilege : newTp) {
                 sPrivilege.setChanged(true);
@@ -1561,16 +1180,14 @@ public class ShoppingCart extends BaseShoppingCart {
                     tradeVo.getTradePrivileges().add(sPrivilege);
                 } else {
                     try {
-                        //Beans.copyProperties(sPrivilege, newTpMap.get(key));
-                    } catch (Exception e) {
+                                            } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
         }
 
-        //营销活动
-        if (Utils.isNotEmpty(mOldTradeVo.getTradePlanActivityList()) && Utils.isEmpty(tradeVo.getTradePlanActivityList())) {
+                if (Utils.isNotEmpty(mOldTradeVo.getTradePlanActivityList()) && Utils.isEmpty(tradeVo.getTradePlanActivityList())) {
             for (TradePlanActivity tradePlanActivity : mOldTradeVo.getTradePlanActivityList()) {
                 if (tradePlanActivity.getId() == null || tradePlanActivity.getId().longValue() == 0) {
                     tradePlanActivity.setStatusFlag(StatusFlag.INVALID);
@@ -1612,24 +1229,20 @@ public class ShoppingCart extends BaseShoppingCart {
 
         }
 
-        // 设置积分
-        if (IntegralCashPrivilegeVo.isNotNull(mOldTradeVo.getIntegralCashPrivilegeVo())) {
+                if (IntegralCashPrivilegeVo.isNotNull(mOldTradeVo.getIntegralCashPrivilegeVo())) {
 
             if (IntegralCashPrivilegeVo.isNotNull(tradeVo.getIntegralCashPrivilegeVo())) {
-                //将原单的ID给新单
-                copyOnlyData(tradeVo.getIntegralCashPrivilegeVo().getTradePrivilege(), mOldTradeVo.getIntegralCashPrivilegeVo().getTradePrivilege());
+                                copyOnlyData(tradeVo.getIntegralCashPrivilegeVo().getTradePrivilege(), mOldTradeVo.getIntegralCashPrivilegeVo().getTradePrivilege());
                 tradeVo.getIntegralCashPrivilegeVo().setTradePrivilege(mOldTradeVo.getIntegralCashPrivilegeVo().getTradePrivilege());
                 tradeVo.getIntegralCashPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.VALID);
             } else {
-                //原单的优惠设置无效给新单
-                mOldTradeVo.getIntegralCashPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
+                                mOldTradeVo.getIntegralCashPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
                 mOldTradeVo.getIntegralCashPrivilegeVo().getTradePrivilege().setChanged(true);
                 tradeVo.setIntegralCashPrivilegeVo(mOldTradeVo.getIntegralCashPrivilegeVo());
             }
         }
 
-        //整单优惠券处理
-        List<CouponPrivilegeVo> oldCouponPrivilegeVoList = mOldTradeVo.getCouponPrivilegeVoList();
+                List<CouponPrivilegeVo> oldCouponPrivilegeVoList = mOldTradeVo.getCouponPrivilegeVoList();
         if (oldCouponPrivilegeVoList != null) {
             List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
             Map<String, CouponPrivilegeVo> mapCouponPrivilegeVos = new HashMap<>();
@@ -1652,21 +1265,14 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: restorder
-     * @Description: TODO
-     * @Param @param mTradeVo
-     * @Param @param listOrderDishshopVo TODO
-     * @Return void 返回类型
-     */
+
     public void restorder(TradeVo restTradeVo, List<ShopcartItem> mListOrderDishshopVo) {
         clearShoppingCart();
         fastFootShoppingCartVo = new ShoppingCartVo();
 
         fastFootShoppingCartVo.setmTradeVo(restTradeVo);
 
-        // 修改挂单状态为确认状态
-        fastFootShoppingCartVo.getmTradeVo().getTrade().setTradeStatus(TradeStatus.CONFIRMED);
+                fastFootShoppingCartVo.getmTradeVo().getTrade().setTradeStatus(TradeStatus.CONFIRMED);
         fastFootShoppingCartVo.getmTradeVo().setTradeItemList(null);
         TradeExtra tradeExtra = fastFootShoppingCartVo.getmTradeVo().getTradeExtra();
         if (tradeExtra == null) {
@@ -1679,8 +1285,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
         resetSelectDishQTY(fastFootShoppingCartVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         CheckGiftCouponIsActived(fastFootShoppingCartVo);
@@ -1690,14 +1295,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 获取整单打折信息
-     *
-     * @Title: getOrderDiscount
-     * @Description: TODO
-     * @Param @return TODO
-     * @Return OrderDetailPrivilege 返回类型
-     */
+
     public TradePrivilege getOrderPrivilege() {
         if (fastFootShoppingCartVo.getmTradeVo() != null) {
             return fastFootShoppingCartVo.getmTradeVo().getTradePrivilege();
@@ -1719,35 +1317,23 @@ public class ShoppingCart extends BaseShoppingCart {
         return fastFootShoppingCartVo.getShowPropertyPageDishUUID();
     }
 
-    /**
-     * @Title: resetOrderDish
-     * @Description: 订单回执
-     * @Param @param mTradeVo TODO
-     * @Return void 返回类型
-     */
+
     public void resetOrderDish(TradeVo mTradeVo) {
         clearShoppingCart();
         List<ShopcartItem> listShopcart = CreateDishTool.tradeToDish(mTradeVo);
         fastFootShoppingCartVo.getListOrderDishshopVo().addAll(listShopcart);
         resetSelectDishQTY(fastFootShoppingCartVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo), mTradeVo);
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo), mTradeVo);
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).resetOrder(mergeShopcartItem(fastFootShoppingCartVo), mTradeVo);
         }
     }
 
-    /**
-     * @Title: removeDinnerDish
-     * @Description: 根据菜品将整个菜品（单菜、套餐、子菜）移除购车
-     * @Param @param mShopcartItemBase TODO
-     * @Return void 返回类型
-     */
+
     public void removeFastFoodDish(IShopcartItemBase mShopcartItemBase) {
         removeDish(fastFootShoppingCartVo, mShopcartItemBase);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         CheckGiftCouponIsActived(fastFootShoppingCartVo);
@@ -1759,20 +1345,11 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeFastFoodShoppingcartItem
-     * @Description: 从购物车中删除单菜或删除套餐子菜
-     * @Param @param mShopcartItem
-     * @Param @param mSetmealShopcartItem
-     * @Param @param mChangePageListener
-     * @Param @param mFragmentManager TODO
-     * @Return void 返回类型
-     */
+
     public void removeFastFoodShoppingcartItem(IShopcartItem mShopcartItem, SetmealShopcartItem mSetmealShopcartItem,
                                                ChangePageListener mChangePageListener, FragmentManager mFragmentManager) {
 
-        //记录该菜营销活动ID
-        long ruelId = -1;
+                long ruelId = -1;
         List<TradeItemPlanActivity> tradeItemPlanActivities = fastFootShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList();
         if (tradeItemPlanActivities != null) {
             for (TradeItemPlanActivity tradeItemPlanActivity : tradeItemPlanActivities) {
@@ -1809,8 +1386,7 @@ public class ShoppingCart extends BaseShoppingCart {
         memberPrivilege();
         removeAllChf();
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         CheckGiftCouponIsActived(fastFootShoppingCartVo);
@@ -1825,15 +1401,9 @@ public class ShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * 用于换菜操作是删除菜品
-     *
-     * @param mShopcartItem
-     * @param mSetmealShopcartItem
-     */
+
     public void removeFastFoodShoppingcartItemNoCheck(IShopcartItem mShopcartItem, SetmealShopcartItem mSetmealShopcartItem) {
-        //记录该菜营销活动ID
-        long ruelId = -1;
+                long ruelId = -1;
         List<TradeItemPlanActivity> tradeItemPlanActivities = fastFootShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList();
         if (tradeItemPlanActivities != null) {
             for (TradeItemPlanActivity tradeItemPlanActivity : tradeItemPlanActivities) {
@@ -1860,8 +1430,7 @@ public class ShoppingCart extends BaseShoppingCart {
                 mShopcartItem,
                 true,
                 true);
-        boolean autoMemberPrivilege;//判断是否自动带入会员优惠
-        if (ruelId == -1) {
+        boolean autoMemberPrivilege;        if (ruelId == -1) {
             autoMemberPrivilege = false;
         } else {
             autoMemberPrivilege = true;
@@ -1875,14 +1444,12 @@ public class ShoppingCart extends BaseShoppingCart {
             }
         }
 
-        if (autoMemberPrivilege) {//移除菜后，营销活动被移除需重新带入会员优惠
-            memberPrivilege();
+        if (autoMemberPrivilege) {            memberPrivilege();
         }
 
         removeAllChf();
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         CheckGiftCouponIsActived(fastFootShoppingCartVo);
@@ -1895,19 +1462,9 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: updateDinnerDish
-     * @Description: 修改正餐菜品信息
-     * @Param @param mShopcartItemBase
-     * @Param @param isTempDish TODO
-     * @Return void 返回类型
-     */
+
     public void updateFastFoodDish(IShopcartItemBase mShopcartItemBase, Boolean isTempDish) {
-        /*updateDish(fastFootShoppingCartVo, mShopcartItemBase, isTempDish);
-        // 计算订单总价格
-		MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
-			fastFootShoppingCartVo.getmTradeVo());
-		resetSelectDishQTY(fastFootShoppingCartVo);*/
+
 
         IShopcartItem value = getShopcartItemFromList(fastFootShoppingCartVo, mShopcartItemBase.getUuid());
 
@@ -1931,7 +1488,6 @@ public class ShoppingCart extends BaseShoppingCart {
         List<IShopcartItem> allIttem = mergeShopcartItem(fastFootShoppingCartVo);
 
         autoAddSalesPromotion(fastFootShoppingCartVo);
-        // 计算订单总价格
 
         removeAllChf();
 
@@ -1946,14 +1502,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 获取订单中所有菜品
-     *
-     * @Title: getShoppingCartDish
-     * @Description: TODO
-     * @Param @return TODO
-     * @Return List<Dish_Order_Entity> 返回类型
-     */
+
     public List<IShopcartItem> getShoppingCartDish() {
         return mergeShopcartItem(fastFootShoppingCartVo);
     }
@@ -1966,9 +1515,7 @@ public class ShoppingCart extends BaseShoppingCart {
         fastFootShoppingCartVo.setTempShopItem(tempShopItem);
     }
 
-    /**
-     * 获取订单数据
-     */
+
     public TradeVo getOrder() {
         return fastFootShoppingCartVo.getmTradeVo();
     }
@@ -1978,12 +1525,7 @@ public class ShoppingCart extends BaseShoppingCart {
         fastFootShoppingCartVo.getmTradeVo().setIsSalesReturn(isSalesReturn);
     }
 
-    /**
-     * @Title: getIsSalesReturn
-     * @Description: 获取判断当前订单是否是无单退货
-     * @Param @return TODO
-     * @Return Boolean 返回类型
-     */
+
     @Override
     public Boolean getIsSalesReturn() {
         return fastFootShoppingCartVo.getmTradeVo().getIsSalesReturn();
@@ -1993,32 +1535,17 @@ public class ShoppingCart extends BaseShoppingCart {
         return fastFootShoppingCartVo;
     }
 
-    /**
-     * @Title: getDeliveryType
-     * @Description: 获取票据类型
-     * @Param @return TODO
-     * @Return DeliveryType 返回类型
-     */
+
     public DeliveryType getDeliveryType() {
         return fastFootShoppingCartVo.getmTradeVo().getTrade().getDeliveryType();
     }
 
-    /**
-     * @Title: getAddTradeItems
-     * @Description: 获取加菜数据
-     * @Param @return @TODO
-     * @Return ArrayList<TradeItem> 返回类型
-     */
+
     public ArrayList<TradeItem> getAddTradeItems() {
         return mAddTradeItems;
     }
 
-    /**
-     * @Title: getDeleteTradeItems
-     * @Description: 获取删菜数据
-     * @Param @return @TODO
-     * @Return ArrayList<TradeItem> 返回类型
-     */
+
     public ArrayList<TradeItem> getDeleteTradeItems() {
         return mDeleteTradeItems;
     }
@@ -2031,12 +1558,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return mAddChangeItems;
     }
 
-    /**
-     * @Title: removeAll
-     * @Description: 移除所有估清商品
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeGuQingProducts(ChangePageListener mChangePageListener, FragmentManager mFragmentManager) {
         List<ShopcartItem> listShopCartItem = fastFootShoppingCartVo.getListOrderDishshopVo();
 
@@ -2059,12 +1581,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: haveGuQingProduct
-     * @Description: 购物车中是否含有已估清菜品
-     * @Param @return TODO
-     * @Return Boolean 返回类型
-     */
+
     public Boolean haveGuQingProduct() {
         List<ShopcartItem> listShopCartItem = fastFootShoppingCartVo.getListOrderDishshopVo();
 
@@ -2085,13 +1602,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return false;
     }
 
-    /**
-     * @Title: addTradeDeposit
-     * @Description: 根据人数添加押金
-     * @Param peopleCount 就餐人数
-     * @Param money 人均金额
-     * @Return void 返回类型
-     */
+
     public void addTradeDeposit(BigDecimal peopleCount, BigDecimal money) {
         if (peopleCount != null && money != null) {
 
@@ -2106,8 +1617,7 @@ public class ShoppingCart extends BaseShoppingCart {
             mTradeDeposit.setStatusFlag(StatusFlag.VALID);
 
             fastFootShoppingCartVo.getmTradeVo().setTradeDeposit(mTradeDeposit);
-            // 计算订单总价格
-            MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                     fastFootShoppingCartVo.getmTradeVo());
             for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).updateShoppingcartData();
@@ -2115,35 +1625,23 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: addTradeDeposit
-     * @Description: 根据订单金额添加押金
-     * @Param value TODO
-     * @Return void 返回类型
-     */
+
     private void addTradeDeposit(BigDecimal value) {
 
     }
 
-    /**
-     * @Title: addTradeDeposit
-     * @Description: 添加押金
-     * @Param @param mDepositInfo TODO
-     * @Return void 返回类型
-     */
+
     public void addTradeDeposit(DepositInfo mDepositInfo) {
         if (mDepositInfo != null) {
             BigDecimal depositPay = BigDecimal.ZERO;
             switch (mDepositInfo.getType()) {
-                case 1://按人计算押金(默认)
-                    Integer peopleCount = fastFootShoppingCartVo.getmTradeVo().getTrade().getTradePeopleCount();
+                case 1:                    Integer peopleCount = fastFootShoppingCartVo.getmTradeVo().getTrade().getTradePeopleCount();
                     if (peopleCount != null && mDepositInfo.getValue() != null) {
                         depositPay = mDepositInfo.getValue().multiply(new BigDecimal(peopleCount));
                     }
                     break;
 
-                case 2://按订单算押金
-                    if (mDepositInfo.getValue() != null) {
+                case 2:                    if (mDepositInfo.getValue() != null) {
                         depositPay = mDepositInfo.getValue();
                     }
                     break;
@@ -2161,8 +1659,7 @@ public class ShoppingCart extends BaseShoppingCart {
             mTradeDeposit.setStatusFlag(StatusFlag.VALID);
 
             fastFootShoppingCartVo.getmTradeVo().setTradeDeposit(mTradeDeposit);
-            // 计算订单总价格
-            MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                     fastFootShoppingCartVo.getmTradeVo());
             for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).updateShoppingcartData();
@@ -2171,30 +1668,17 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeTradeDeposit
-     * @Description: 移除订单押金
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void removeTradeDeposit() {
         fastFootShoppingCartVo.getmTradeVo().setTradeDeposit(null);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateShoppingcartData();
         }
     }
 
-    /**
-     * 清空购物车
-     *
-     * @Title: clearShoppingCart
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void clearShoppingCart() {
         CustomerManager.getInstance().setLoginCustomer(null);
         CustomerManager.getInstance().setAccounts(null);
@@ -2206,12 +1690,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 判断订单中是否包含此类优惠类型
-     *
-     * @param mPrivilegeType
-     * @return true:包含 false:不包含
-     */
+
     public boolean havePrivilegeByType(PrivilegeType mPrivilegeType) {
         List<TradePrivilege> listTP = fastFootShoppingCartVo.getmTradeVo().getTradePrivileges();
         if (listTP != null) {
@@ -2224,14 +1703,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return false;
     }
 
-    /**
-     * @Title: addMarketActivity
-     * @Description: 添加活动规则到单据中
-     * @Param @param marketDishVo 活动规则相关的vo
-     * @Param @param selectedItemList 这次活动选择的商品
-     * @Param @return TODO
-     * @Return boolean 返回类型 true:添加生效，false：添加失败
-     */
+
     public boolean addMarketActivity(MarketRuleVo marketDishVo, List<IShopcartItem> selectedItemList) {
 
         if (!MathManualMarketTool.isCanAddMarket(selectedItemList,
@@ -2240,18 +1712,15 @@ public class ShoppingCart extends BaseShoppingCart {
                 false)) {
             return false;
         }
-        //移除宴请
-        removeBanquetOnly(fastFootShoppingCartVo.getmTradeVo());
+                removeBanquetOnly(fastFootShoppingCartVo.getmTradeVo());
         MathManualMarketTool.mathManualAddMarket(selectedItemList,
                 fastFootShoppingCartVo.getmTradeVo(),
                 marketDishVo,
                 false);
 
-        //如果选择的菜品有礼品券优惠移除
-        removeGiftCouponPrivilege(selectedItemList, fastFootShoppingCartVo);
+                removeGiftCouponPrivilege(selectedItemList, fastFootShoppingCartVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).addMarketActivity(fastFootShoppingCartVo.getmTradeVo());
@@ -2259,30 +1728,20 @@ public class ShoppingCart extends BaseShoppingCart {
         return true;
     }
 
-    /**
-     * @Title: checkMarketActivity
-     * @Description: 用于会员退出时校验营销活动是否有效
-     */
+
     public void checkMarketActivity() {
         if (fastFootShoppingCartVo.getListIShopcatItem() == null)
             return;
 
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeMarketActivity(fastFootShoppingCartVo.getmTradeVo());
         }
     }
 
-    /**
-     * @Title: getPlanUsageCountById
-     * @Description: 根据规则id获取在订单中营销活动使用次数
-     * @Param @param ruleId
-     * @Param @return TODO
-     * @Return int 返回类型
-     */
+
     public int getPlanUsageCountById(Long ruleId) {
         int count = 0;
         List<TradePlanActivity> listPlan = fastFootShoppingCartVo.getmTradeVo().getTradePlanActivityList();
@@ -2298,26 +1757,12 @@ public class ShoppingCart extends BaseShoppingCart {
         return count;
     }
 
-    /**
-     * 获取订单中所有菜品
-     *
-     * @Title: getShoppingCartDish
-     * @Description: TODO
-     * @Param @return TODO
-     * @Return List<Dish_Order_Entity> 返回类型
-     */
+
     public List<IShopcartItem> getShoppingCartItems() {
         return mergeShopcartItem(fastFootShoppingCartVo);
     }
 
-    /**
-     * 将反结账返回的TradeVo转换成ShoppingCart需要的对象
-     *
-     * @Title: resetOrderFromOrderCenter
-     * @Description: TODO
-     * @Param @return TODO
-     * @Return 返回类型
-     */
+
     public void resetOrderFromOrderCenter(TradeVo tradeVo, List<Tables> tables) {
         clearShoppingCart();
 
@@ -2333,8 +1778,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
         if (tradeVo.getTrade() != null
                 && (tradeVo.getTrade().getDeliveryType() == DeliveryType.TAKE
-                || tradeVo.getTrade().getDeliveryType() == DeliveryType.SEND)) {//外送或自取需转换收货人信息
-            toTakeoutInfo(tradeVo);
+                || tradeVo.getTrade().getDeliveryType() == DeliveryType.SEND)) {            toTakeoutInfo(tradeVo);
         }
 
         List<IShopcartItem> items = DinnertableTradeInfo.buildShopcartItem(tradeVo);
@@ -2351,8 +1795,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
         CheckGiftCouponIsActived(fastFootShoppingCartVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -2361,12 +1804,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: toTakeoutInfo
-     * @Description: TradeExtra转成TakeOutInfo
-     * @Param @return TODO
-     * @Return void 返回类型
-     */
+
 
     private void toTakeoutInfo(TradeVo tradeVo) {
         TakeOutInfo takeOutInfo = new TakeOutInfo();
@@ -2386,8 +1824,7 @@ public class ShoppingCart extends BaseShoppingCart {
             takeOutInfo.setInvoiceTitle(tradeExtra.getInvoiceTitle());
             fastFootShoppingCartVo.setmTakeOutInfo(takeOutInfo);
 
-            //因为下单时会根据收货人信息创建顾客信息，故移除
-            List<TradeCustomer> listCustomer = tradeVo.getTradeCustomerList();
+                        List<TradeCustomer> listCustomer = tradeVo.getTradeCustomerList();
             if (listCustomer != null) {
                 for (int i = listCustomer.size() - 1; i >= 0; i--) {
                     if (listCustomer.get(i).getCustomerType() == CustomerType.BOOKING) {
@@ -2400,12 +1837,7 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: isReturnCash
-     * @Description: 判断当前订单是否是反结账单
-     * @Param @return TODO
-     * @Return Boolean 返回类型
-     */
+
     public Boolean isReturnCash() {
         TradeType mTradeType;
         if (fastFootShoppingCartVo.getmTradeVo() != null && fastFootShoppingCartVo.getmTradeVo().getTrade() != null) {
@@ -2417,12 +1849,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return false;
     }
 
-    /**
-     * @Title: isHereOrTake
-     * @Description: 判断当前票据类型是否内用和自取
-     * @Param @return TODO
-     * @Return Boolean 返回类型
-     */
+
     public boolean isHereOrTake() {
         if (fastFootShoppingCartVo.getmTradeVo() != null && fastFootShoppingCartVo.getmTradeVo().getTrade() != null) {
             if (fastFootShoppingCartVo.getmTradeVo().getTrade().getDeliveryType() == DeliveryType.HERE ||
@@ -2434,12 +1861,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return false;
     }
 
-    /**
-     * @Title: haveExtraChargeChf
-     * @Description: 判断是否已经添加餐盒费
-     * @Param @return TODO
-     * @Return Boolean 返回类型
-     */
+
     public Boolean haveExtraChargeChf() {
         if (fastFootShoppingCartVo.getmTradeVo() != null) {
             Map<Long, ExtraCharge> extraChargeMap = fastFootShoppingCartVo.getmTradeVo().getExtraChargeMap();
@@ -2457,20 +1879,14 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: resetPack
-     * @Description: 重置菜品打包标记
-     * @Param @return TODO
-     * @Return 返回类型
-     */
+
     public void resetPack() {
 
         for (IShopcartItem item : mergeShopcartItem(fastFootShoppingCartVo)) {
             item.setPack(false);
         }
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                 fastFootShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -2480,12 +1896,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: removeAllChf
-     * @Description: 判断是否要移除餐盒费
-     * @Param @return TODO
-     * @Return 返回类型
-     */
+
 
     public void removeAllChf() {
         if (isHereOrTake()) {
@@ -2495,8 +1906,7 @@ public class ShoppingCart extends BaseShoppingCart {
                     count++;
                 }
             }
-            if (count == 0) {//没有一个菜品打包移除餐盒费
-                if (fastFootShoppingCartVo.getmTradeVo() != null) {
+            if (count == 0) {                if (fastFootShoppingCartVo.getmTradeVo() != null) {
                     Map<Long, ExtraCharge> extraChargeMap = fastFootShoppingCartVo.getmTradeVo().getExtraChargeMap();
                     if (extraChargeMap != null) {
                         for (Map.Entry<Long, ExtraCharge> entry : extraChargeMap.entrySet()) {
@@ -2515,12 +1925,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: removeAllExtraChage
-     * @Description: 移除所有餐盒费
-     * @Param @return TODO
-     * @Return 返回类型
-     */
+
 
     public void removeAllExtraChage() {
         if (fastFootShoppingCartVo.getmTradeVo() != null) {
@@ -2530,8 +1935,7 @@ public class ShoppingCart extends BaseShoppingCart {
                 extraChargeMap.clear();
                 removeTradePrivilege(PrivilegeType.ADDITIONAL, fastFootShoppingCartVo.getmTradeVo());
 
-                // 计算订单总价格
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
+                                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(fastFootShoppingCartVo),
                         fastFootShoppingCartVo.getmTradeVo());
 
                 for (int key : arrayListener.keySet()) {
@@ -2543,31 +1947,17 @@ public class ShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @param couponPrivilegeVo
-     * @Title: isAllowAddCoupon
-     * @Description: 是否允许加入整单的优惠劵
-     * @Return true  允许，false 不允许
-     */
+
     public boolean isAllowAddCoupon(CouponPrivilegeVo couponPrivilegeVo) {
         return isAllowAddCoupon(fastFootShoppingCartVo, couponPrivilegeVo);
     }
 
-    /**
-     * @param couponPrivilegeVo
-     * @param isNeedListener
-     * @Title: removeCouponPrivilege
-     * @Description: 移除单张优惠券
-     */
+
     public void removeCouponPrivilege(CouponPrivilegeVo couponPrivilegeVo, boolean isNeedListener) {
         removeCouponPrivilege(fastFootShoppingCartVo, couponPrivilegeVo, isNeedListener);
     }
 
-    /**
-     * @param openId
-     * @Title: setOpenIdenty
-     * @Description: 设置openId
-     */
+
     public void setOpenIdenty(String openId) {
         setOpenIdenty(fastFootShoppingCartVo, openId);
     }
@@ -2593,17 +1983,14 @@ public class ShoppingCart extends BaseShoppingCart {
     public void removeShoppingcartItem(ShoppingCartVo mShoppingCartVo, IShopcartItem mShopcartItem,
                                        SetmealShopcartItem mSetmealShopcartItem, ChangePageListener mChangePageListener,
                                        FragmentManager mFragmentManager) {
-        // 如果是已下单菜品删除则只需修改菜品状态为无效
-        if (mShopcartItem.getId() != null) {
+                if (mShopcartItem.getId() != null) {
             removeReadonlyShopcartItem(mShoppingCartVo, (ReadonlyShopcartItem) mShopcartItem);
             return;
         }
 
-        // 表示删除的是整个套餐或单菜
-        if (mSetmealShopcartItem == null) {
+                if (mSetmealShopcartItem == null) {
             removeDish(mShoppingCartVo, mShopcartItem);
-            // 判断删除的是当前正在操作的菜品
-            if (mShoppingCartVo.getTempShopItem() != null
+                        if (mShoppingCartVo.getTempShopItem() != null
                     && mShoppingCartVo.getTempShopItem().getUuid().equals(mShopcartItem.getUuid())) {
                 mShoppingCartVo.setTempShopItem(null);
                 if (mChangePageListener != null) {
@@ -2613,13 +2000,11 @@ public class ShoppingCart extends BaseShoppingCart {
                 }
             }
         } else {
-            // 删除的是套餐子菜
-            switch (mShopcartItem.getSetmealManager().testModify(mSetmealShopcartItem, BigDecimal.ZERO)) {
+                        switch (mShopcartItem.getSetmealManager().testModify(mSetmealShopcartItem, BigDecimal.ZERO)) {
                 case SUCCESSFUL:
                     removeDish(mShoppingCartVo, mSetmealShopcartItem);
                     mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
-                    // 如果当前打开的删除子菜的属性界面则需要跳转
-                    if (mShoppingCartVo.getIndexPage() == ChangePageListener.DISHPROPERTY
+                                        if (mShoppingCartVo.getIndexPage() == ChangePageListener.DISHPROPERTY
                             && mShoppingCartVo.getShowPropertyPageDishUUID().equals(mSetmealShopcartItem.getUuid())
                             && mChangePageListener != null) {
                         Bundle bundle = new Bundle();
@@ -2636,8 +2021,7 @@ public class ShoppingCart extends BaseShoppingCart {
 
                     break;
                 default:
-                    // 删除的子菜正处于当前操作套餐 并且不处在删除子菜列表界面
-                    if (mShoppingCartVo.getTempShopItem() != null
+                                        if (mShoppingCartVo.getTempShopItem() != null
                             && mShopcartItem.getUuid().equals(mShoppingCartVo.getTempShopItem().getUuid())
                             && mShoppingCartVo.getIndexPage() == ChangePageListener.DISHCOMBO) {
                         removeDish(mShoppingCartVo, mSetmealShopcartItem);
@@ -2647,8 +2031,7 @@ public class ShoppingCart extends BaseShoppingCart {
                             && mShopcartItem.getUuid().equals(mShoppingCartVo.getTempShopItem().getUuid())
                             && mShoppingCartVo.getIndexPage() == ChangePageListener.DISHPROPERTY
                             && mShoppingCartVo.getShowPropertyPageDishUUID().equals(mSetmealShopcartItem.getUuid())) {
-                        // 删除的子菜正处于当前操作套餐 并且不处在删除子菜属性界面
-                        removeDish(mShoppingCartVo, mSetmealShopcartItem);
+                                                removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
 
                         if (mChangePageListener != null) {
@@ -2663,22 +2046,19 @@ public class ShoppingCart extends BaseShoppingCart {
                             && mShopcartItem.getUuid().equals(mShoppingCartVo.getTempShopItem().getUuid())
                             && mShoppingCartVo.getIndexPage() == ChangePageListener.DISHPROPERTY
                             && !mShoppingCartVo.getShowPropertyPageDishUUID().equals(mSetmealShopcartItem.getUuid())) {
-                        // 删除的子菜正处于当前操作套餐，并且当前所处属性界面不是删除子菜属性界面
-                        removeDish(mShoppingCartVo, mSetmealShopcartItem);
+                                                removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
 
                     } else if (mShoppingCartVo.getTempShopItem() != null
                             && !mShopcartItem.getUuid().equals(mShoppingCartVo.getTempShopItem().getUuid())) {
-                        // 删除的子菜不是当前正在操作的菜品
-                        isCheckVaild(mShoppingCartVo,
+                                                isCheckVaild(mShoppingCartVo,
                                 ChangePageListener.DISHCOMBO,
                                 mChangePageListener,
                                 mFragmentManager,
                                 mShopcartItem,
                                 mSetmealShopcartItem);
                     } else {
-                        // 当前没有操作菜品
-                        removeDish(mShoppingCartVo, mSetmealShopcartItem);
+                                                removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
 
                         if (mChangePageListener != null) {
@@ -2696,11 +2076,9 @@ public class ShoppingCart extends BaseShoppingCart {
 
     public void isCheckVaild(ShoppingCartVo mShoppingCartVo, int mPageNo, ChangePageListener mChangePageListener,
                              FragmentManager mFragmentManager, IShopcartItem mShopcartItem, SetmealShopcartItem mSetmealShopcartItem) {
-        // 操作菜品跟当前菜品不是同一个菜，并且当前操作菜品不满足条件
-        if (mShoppingCartVo.getTempShopItem() != null && mShoppingCartVo.getTempShopItem().getSetmealManager() != null
+                if (mShoppingCartVo.getTempShopItem() != null && mShoppingCartVo.getTempShopItem().getSetmealManager() != null
                 && !mShoppingCartVo.getTempShopItem().getSetmealManager().isValid()) {
-            // 当前选择套餐满未满足套餐选择规则则填出对话框 确认是否离开此界面
-            showCheckDialog(mShoppingCartVo,
+                        showCheckDialog(mShoppingCartVo,
                     mPageNo,
                     mChangePageListener,
                     mFragmentManager,
@@ -2708,8 +2086,7 @@ public class ShoppingCart extends BaseShoppingCart {
                     mSetmealShopcartItem);
 
         } else {
-            // 当前操作菜品满足规则。则跳转到因删除导致不满足套餐规则的菜品中
-            removeDish(mShoppingCartVo, mSetmealShopcartItem);
+                        removeDish(mShoppingCartVo, mSetmealShopcartItem);
             mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
 
             if (mChangePageListener != null) {
@@ -2735,22 +2112,19 @@ public class ShoppingCart extends BaseShoppingCart {
                     @Override
                     public void onClick(View arg0) {
 
-                        // 删除菜品
-                        if (mSetmealShopcartItem != null) {
+                                                if (mSetmealShopcartItem != null) {
                             ShopcartItem deleteShopcartItem =
                                     getShopcartItemByUUID(mShoppingCartVo, mSetmealShopcartItem.getParentUuid());
                             deleteShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
                             removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         }
 
-                        // 移除临时未完成套餐
-                        if (mShoppingCartVo.getTempShopItem() != null) {
+                                                if (mShoppingCartVo.getTempShopItem() != null) {
                             isCheckAdd(mShoppingCartVo, mShoppingCartVo.getTempShopItem(), false);
                             mShoppingCartVo.setTempShopItem(null);
                         }
 
-                        // 调整界面
-                        if (mChangePageListener != null) {
+                                                if (mChangePageListener != null) {
                             Bundle bundle = new Bundle();
                             bundle.putString(Constant.EXTRA_SHOPCART_ITEM_UUID,
                                     mShopcartItem != null ? mShopcartItem.getUuid() : "");
@@ -2759,8 +2133,7 @@ public class ShoppingCart extends BaseShoppingCart {
                             mChangePageListener.changePage(mPageNo, bundle);
                         }
 
-                        // 计算订单总价格
-                        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(mShoppingCartVo),
+                                                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(mShoppingCartVo),
                                 mShoppingCartVo.getmTradeVo());
                         for (int key : arrayListener.keySet()) {
                             arrayListener.get(key).removeShoppingCart(mergeShopcartItem(mShoppingCartVo),
@@ -2808,13 +2181,7 @@ public class ShoppingCart extends BaseShoppingCart {
         return map;
     }
 
-    /**
-     * @Title: doDishActivityIsCheck
-     * @Description: 选择活动后，组装菜品是否可选
-     * @Param @param unItemList 未参加活动的菜品
-     * @Param @param ruleVo TODO选择的活动
-     * @Return void 返回类型
-     */
+
     public void doDishActivityIsCheck(List<DishDataItem> unItemList, MarketRuleVo ruleVo) {
         if (unItemList == null || unItemList.isEmpty() || ruleVo == null) {
             return;
@@ -2829,30 +2196,17 @@ public class ShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * 添加促销活动到购物车
-     *
-     * @param salesPromotionRuleVo  指定促销活动
-     * @param selectedShopcartItems 选择的购物车条目
-     */
+
     public void addSalesPromotion(SalesPromotionRuleVo salesPromotionRuleVo, List<IShopcartItem> selectedShopcartItems) {
         addSalesPromotion(fastFootShoppingCartVo, salesPromotionRuleVo, selectedShopcartItems, CustomerManager.getInstance().getLoginCustomer());
     }
 
-    /**
-     * 从购物车删除促销活动
-     *
-     * @param planId 促销活动方案Id
-     */
+
     public void removeSalesPromotion(Long planId) {
         removeSalesPromotion(fastFootShoppingCartVo, planId, CustomerManager.getInstance().getLoginCustomer(), false);
     }
 
-    /**
-     * 从购物车删除促销活动
-     *
-     * @param tradePlanUuid TradePlanActivity的UUID
-     */
+
     public void removeSalesPromotion(String tradePlanUuid) {
         removeSalesPromotion(fastFootShoppingCartVo, tradePlanUuid, CustomerManager.getInstance().getLoginCustomer(), false);
     }

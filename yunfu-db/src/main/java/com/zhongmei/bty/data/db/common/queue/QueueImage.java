@@ -4,14 +4,10 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * 排队
- */
+
 @DatabaseTable(tableName = "queue_image")
 public class QueueImage extends EntityBase<Long> {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ {
@@ -38,21 +34,15 @@ public class QueueImage extends EntityBase<Long> {
 
     }
 
-    /**
-     * 商户id
-     */
+
     @DatabaseField(columnName = "commercial_id")
     private Long commercialID;
 
-    /**
-     * 创建时间
-     */
+
     @DatabaseField(columnName = "create_date_time")
     private Long createDateTime;
 
-    /**
-     * 更新时间
-     */
+
     @DatabaseField(columnName = "modify_date_time")
     private Long modifyDateTime;
 
@@ -62,8 +52,7 @@ public class QueueImage extends EntityBase<Long> {
     @DatabaseField(columnName = "id", id = true, canBeNull = false)
     private Long id;
 
-    //1视频 0图片
-    @DatabaseField(columnName = "type")
+        @DatabaseField(columnName = "type")
     private Integer type;
 
     @DatabaseField(columnName = "backgroud_img_url")

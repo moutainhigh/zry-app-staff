@@ -35,9 +35,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public final class LogUtils {
 
@@ -58,19 +56,17 @@ public final class LogUtils {
     private static final int JSON = 0x20;
     private static final int XML = 0x30;
     private static ExecutorService executor;
-    private static String defaultDir;// log默认存储目录
-    private static String dir;       // log存储目录
-
-    private static boolean sLogSwitch = true; // log总开关，默认开
-    private static boolean sLog2ConsoleSwitch = true; // logcat是否打印，默认打印
-    private static String sGlobalTag = null; // log标签
-    private static boolean sTagIsSpace = true; // log标签是否为空白
-    private static boolean sLogHeadSwitch = true; // log头部开关，默认开
-    private static boolean sLog2FileSwitch = false;// log写入文件开关，默认关
-    private static boolean sLogBorderSwitch = true; // log边框开关，默认开
-    private static int sConsoleFilter = V;    // log控制台过滤器
-    private static int sFileFilter = V;    // log文件过滤器
-
+    private static String defaultDir;
+    private static String dir;
+    private static boolean sLogSwitch = true;
+    private static boolean sLog2ConsoleSwitch = true;
+    private static String sGlobalTag = null;
+    private static boolean sTagIsSpace = true;
+    private static boolean sLogHeadSwitch = true;
+    private static boolean sLog2FileSwitch = false;
+    private static boolean sLogBorderSwitch = true;
+    private static int sConsoleFilter = V;
+    private static int sFileFilter = V;
     private static final String FILE_SEP = System.getProperty("file.separator");
     private static final String LINE_SEP = System.getProperty("line.separator");
     private static final String TOP_BORDER = "╔═══════════════════════════════════════════════════════════════════════════════════════════════════";

@@ -4,9 +4,7 @@ import com.zhongmei.yunfu.db.entity.trade.Trade;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class JCReturnAnonymousCardResp {
     public void setCardInfo(JCReturnCardInfo cardInfo) {

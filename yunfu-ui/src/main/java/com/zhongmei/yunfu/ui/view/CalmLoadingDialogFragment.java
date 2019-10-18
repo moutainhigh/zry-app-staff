@@ -56,9 +56,7 @@ public class CalmLoadingDialogFragment extends BasicDialogFragment {
     public void onStart() {
         super.onStart();
         imageView.setImageResource(R.drawable.commonmodule_loading_animation);
-//		animationDrawable = (AnimationDrawable)getResources().getDrawable(R.drawable.calm_loading_animation);
 
-//		animationDrawable = (AnimationDrawable)imageView.getDrawable(R.drawable.calm_loading_animation);
         animationDrawable = (AnimationDrawable) imageView.getDrawable();
         animationDrawable.start();
     }
@@ -97,12 +95,7 @@ public class CalmLoadingDialogFragment extends BasicDialogFragment {
         return dialogFragment;
     }
 
-    /**
-     * 添加咖啡杯调用方法
-     *
-     * @param manager
-     * @return
-     */
+
     public static CalmLoadingDialogFragment showByAllowingStateLoss(FragmentManager manager) {
         CalmLoadingDialogFragment dialogFragment = CalmLoadingDialogFragment_.builder().build();
         isShowing = true;

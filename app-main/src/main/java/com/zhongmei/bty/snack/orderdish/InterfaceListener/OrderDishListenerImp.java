@@ -8,9 +8,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.OrderProperty;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class OrderDishListenerImp implements OrderDishInterfaceListener {
     @Override
     public void setDiscount(TradePrivilege mTradePrivilege) {

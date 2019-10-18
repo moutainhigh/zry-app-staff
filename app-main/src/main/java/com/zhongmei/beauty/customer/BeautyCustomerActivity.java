@@ -76,8 +76,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
     TextView customer_title_layout;
 
     @ViewById(R.id.customer_ordercenter_titletab_rg)
-    RadioGroup ordercenterTitletabRg;// 订单中心tab
-
+    RadioGroup ordercenterTitletabRg;
     @ViewById(R.id.ivCreate_Customer)
     DrawableCenterTextView ivCreateCustomer;
 
@@ -123,38 +122,31 @@ public class BeautyCustomerActivity extends MainBaseActivity {
     @ViewById(R.id.shop_management)
     RadioButton shopManagement;
 
-    // 遮罩层
-    @ViewById(R.id.view_shadow)
+        @ViewById(R.id.view_shadow)
     protected View viewShadow;
 
-    // 左侧菜单
-    @ViewById
+        @ViewById
     protected View left_menu;
 
     @ViewById(R.id.slideView)
     protected FrameLayout slideView;
 
-    // 主窗体
-    @ViewById(R.id.customer_content)
+        @ViewById(R.id.customer_content)
     protected RelativeLayout main_frame;
 
-    // 当前登录名称
-    @ViewById(R.id.tv_current_name)
+        @ViewById(R.id.tv_current_name)
     protected TextView tvCurrentName;
 
-    // 当前Id
-    @ViewById(R.id.tv_current_id)
+        @ViewById(R.id.tv_current_id)
     protected TextView tvCurrentId;
 
     @ViewById(R.id.tip_img)
     protected ImageView mTipImg;
 
-    // 通知上的订单数
-    @ViewById(R.id.view_notify_tip)
+        @ViewById(R.id.view_notify_tip)
     TextView viewNotifyCenterTip;
 
-    // 通知上的其他数
-    @ViewById(R.id.view_notify_tip_other)
+        @ViewById(R.id.view_notify_tip_other)
     TextView viewNotifyCenterOtherTip;
 
     private boolean isLeftShown = false;
@@ -174,17 +166,10 @@ public class BeautyCustomerActivity extends MainBaseActivity {
 
     private BeautyCustomerContentFragment mCustomerContentFragment;
 
-    // 实体卡入口选择界面
-    //private EntityCardManagementFragment mEntityCardManagementFragment;
 
-    // 单据中心
-    private CustomerOrdercenterFragment mCustomerOrderFragment;
+        private CustomerOrdercenterFragment mCustomerOrderFragment;
 
-    /**
-     * 侧边菜单按钮点击
-     *
-     * @param event
-     */
+
     @SuppressLint("WrongConstant")
     public void onEventMainThread(SideMenuClickEvent event) {
         if (drawer.isDrawerOpen(Gravity.START)) {
@@ -193,11 +178,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
         switchLeftMenu();
     }
 
-    /**
-     * 订单刷新按钮点击
-     *
-     * @param event
-     */
+
     @SuppressLint("WrongConstant")
     public void onEventMainThread(OrderRefreshClickEvent event) {
         if (drawer.isDrawerOpen(Gravity.START)) {
@@ -253,7 +234,6 @@ public class BeautyCustomerActivity extends MainBaseActivity {
                 switch (v.getId()) {
                     case R.id.customer_manager:
                         MobclickAgentEvent.onEvent(UserActionCode.GK030001);
-//                        titleRightView.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f));
                         showCustomerListFragment();
                         mPrinterTitleLayout.setVisibility(View.VISIBLE);
                         break;
@@ -264,7 +244,6 @@ public class BeautyCustomerActivity extends MainBaseActivity {
                         break;
                     case R.id.card_order:
                         MobclickAgentEvent.onEvent(UserActionCode.GK030003);
-//                        titleRightView.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f));
                         showCustomerOrderFragment();
                         mPrinterTitleLayout.setVisibility(View.VISIBLE);
                         break;
@@ -279,12 +258,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
 
     };
 
-    /**
-     * @Title: showCustomerListFragment
-     * @Description: 会员管理界面
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void showCustomerListFragment() {
         if (lastPage == BeautyCustomerConstants.CustomerPage.PAGE_CUSTOMER) {
             return;
@@ -298,30 +272,19 @@ public class BeautyCustomerActivity extends MainBaseActivity {
         lastPage = BeautyCustomerConstants.CustomerPage.PAGE_CUSTOMER;
     }
 
-    /**
-     * @Title: showCustomerCardFragment
-     * @Description: 会员实体卡界面
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void showCustomerCardFragment() {
         if (lastPage == BeautyCustomerConstants.CustomerPage.PAGE_CARD) {
             return;
         }
         titleRightView.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 0f));
         customer_title_layout.setText(getResources().getString(R.string.slide_menu_card_manager));
-        //mEntityCardManagementFragment = new EntityCardManagementFragment_();
-        //replaceFragment(R.id.customer_content, mEntityCardManagementFragment, mEntityCardManagementFragment.getClass().getName());
-        customer_title_layout.setVisibility(View.VISIBLE);
+                        customer_title_layout.setVisibility(View.VISIBLE);
         ordercenterTitletabRg.setVisibility(View.GONE);
         lastPage = BeautyCustomerConstants.CustomerPage.PAGE_CARD;
     }
 
-    /**
-     * @Date 2016年3月24日
-     * @Description: 展示订单界面
-     * @Return void
-     */
+
     private void showCustomerOrderFragment() {
         titleRightView.setLayoutParams(new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1f));
         if (lastPage == BeautyCustomerConstants.CustomerPage.PAGE_ORDER) {
@@ -329,8 +292,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
         }
         customer_title_layout.setText(getResources().getString(R.string.slide_menu_card_order));
         mCustomerOrderFragment = new CustomerOrdercenterFragment_();
-        // 获取会员订单中心选中tab
-        switch (ordercenterTitletabRg.getCheckedRadioButtonId()) {
+                switch (ordercenterTitletabRg.getCheckedRadioButtonId()) {
             case R.id.card_sell_rb:
                 mCustomerOrderFragment.setArguments(createOrderFragmentArguments(WindowToken.CARD_SALE));
                 setTabSelected(R.id.card_sell_rb);
@@ -382,12 +344,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
         return bundle;
     }
 
-    /**
-     * @Title: setTabSelected
-     * @Description: 设置tab背景选择
-     * @Param @param viewId TODO
-     * @Return void 返回类型
-     */
+
     private void setTabSelected(int viewId) {
         switch (viewId) {
             case R.id.card_sell_rb:
@@ -432,22 +389,17 @@ public class BeautyCustomerActivity extends MainBaseActivity {
         this.onBackPressed();
     }
 
-    /*
-     * 处理菜单侧边栏的显示和隐藏
-     */
+
     @SuppressLint("WrongConstant")
     @Click(R.id.iv_title_bar_menu)
     void onClickMenu() {
-        // 点击标题栏菜单按钮
-        if (drawer.isDrawerOpen(Gravity.START)) {
+                if (drawer.isDrawerOpen(Gravity.START)) {
             drawer.closeDrawer(Gravity.START);
         }
         switchLeftMenu();
     }
 
-    /*
-     * 处理通知中心的显示隐藏
-     */
+
     @SuppressLint("WrongConstant")
     @Click(R.id.iv_queue_notify_center)
     void onClickNotifyCenter() {
@@ -458,14 +410,12 @@ public class BeautyCustomerActivity extends MainBaseActivity {
         }
     }
 
-    // 点击遮罩
-    @Click(R.id.view_shadow)
+        @Click(R.id.view_shadow)
     void clickViewShadow() {
         setLeftMenu(false);
     }
 
-    // 退出
-    @Click(R.id.tv_current_name)
+        @Click(R.id.tv_current_name)
     void clickLoginOut() {
         Session.unbind();
         Intent intent = new Intent(BeautyCustomerActivity.this, LoginActivity.class);
@@ -489,9 +439,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
     }
 
 
-    /**
-     * 显示或隐藏左侧菜单
-     */
+
     private void switchLeftMenu() {
         setLeftMenu(!isLeftShown);
     }
@@ -533,15 +481,13 @@ public class BeautyCustomerActivity extends MainBaseActivity {
                 left_menu.setVisibility(View.VISIBLE);
                 doAnimation(this, slideView, R.animator.fragment_slide_right_exit);
                 doAnimation(this, left_menu, R.animator.fragment_slide_left_enter);
-                // 展开左侧菜单时，显示遮罩
-                viewShadow.setVisibility(View.VISIBLE);
+                                viewShadow.setVisibility(View.VISIBLE);
             }
         } else {
             if (isLeftShown) {
                 doAnimation(this, slideView, R.animator.fragment_slide_right_enter);
                 doAnimation(this, left_menu, R.animator.fragment_slide_left_exit);
-                // 关闭左侧菜单时，隐藏遮罩
-                viewShadow.setVisibility(View.GONE);
+                                viewShadow.setVisibility(View.GONE);
             }
         }
         isLeftShown = visible;
@@ -557,7 +503,7 @@ public class BeautyCustomerActivity extends MainBaseActivity {
         if (null != tvCurrentName && Session.getAuthUser() != null) {
             tvCurrentName.setText(Session.getAuthUser().getName());
         }
-        tvCurrentId.setText("NO:" + /*no[1]*/ ShopInfoCfg.getInstance().getTabletNumberFormat());
+        tvCurrentId.setText("NO:" +  ShopInfoCfg.getInstance().getTabletNumberFormat());
     }
 
     public void initTitleBarColor() {

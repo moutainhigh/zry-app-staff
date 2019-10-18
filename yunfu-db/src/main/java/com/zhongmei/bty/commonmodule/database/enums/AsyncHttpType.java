@@ -2,39 +2,26 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 异步网络请求业务
- */
-public enum AsyncHttpType implements ValueEnum<Integer> {
-    //	改单操作
-    MODIFYTRADE(1),
-    //	收银操作
-    CASHER(2),
-    //开台操作
-    OPENTABLE(3),
-    //联台主单改单
-    UNION_MAIN_MODIFYTRADE(4),
-    //联台子单改单
-    UNION_SUB_MODIFYTRADE(5),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+public enum AsyncHttpType implements ValueEnum<Integer> {
+        MODIFYTRADE(1),
+        CASHER(2),
+        OPENTABLE(3),
+        UNION_MAIN_MODIFYTRADE(4),
+        UNION_SUB_MODIFYTRADE(5),
+
+
     @Deprecated
     __UNKNOWN__;
 
     private final Helper<Integer> helper;
 
     private AsyncHttpType(Integer value) {
-        // TODO Auto-generated constructor stub
-        helper = Helper.valueHelper(value);
+                helper = Helper.valueHelper(value);
     }
 
     private AsyncHttpType() {
-        // TODO Auto-generated constructor stub
-        helper = Helper.unknownHelper();
+                helper = Helper.unknownHelper();
     }
 
     @Override

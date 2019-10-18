@@ -44,9 +44,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.beauty_coupons)
 public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.CouponSelectedCallback {
 
@@ -54,8 +52,7 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
     private int CASH_COUPON_COUNT = 1;
 
     @ViewById(R.id.coupons_view)
-    LinearLayout mCouponsLL;// 优惠券显示 布局
-
+    LinearLayout mCouponsLL;
     @ViewById(R.id.include_empty_status)
     View emptyView;
 
@@ -65,27 +62,19 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
 
     private final int COUPON_TYPE_CUSTOMER = 1;
 
-    private final int COUPON_PAGE_1 = 1;// 不可用
+    private final int COUPON_PAGE_1 = 1;
+    private final int COUPON_PAGE_2 = 2;
+    private final int COUPON_PAGE_3 = 3;
+    private CouponsLayoutView rebateView;
+    private CouponsLayoutView discountView;
+    private CouponsLayoutView giftView;
+    private CouponsLayoutView cashView;
 
-    private final int COUPON_PAGE_2 = 2;// 可用
-
-    private final int COUPON_PAGE_3 = 3;// 失效
-
-    private CouponsLayoutView rebateView;// 满减券
-
-    private CouponsLayoutView discountView;// 折扣券
-
-    private CouponsLayoutView giftView;// 礼品券
-
-    private CouponsLayoutView cashView;// 现金券
-
-    /*private CouponVo mLastSeletedCouponVo;*/
-    private Set<CouponVo> mSelectedCpupons = new HashSet<CouponVo>();//已经选择的券
+    private Set<CouponVo> mSelectedCpupons = new HashSet<CouponVo>();
     private CustomerOperates operates;
 
     private CouponsManager mCouponsManager;
 
-    // private DinnerShoppingCart mDinnerShoppingCart;
 
     private int mCouponType = COUPON_TYPE_CUSTOMER;
 
@@ -112,12 +101,6 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
     }
 
 
-    /**
-     * @Title: onEventMainThread
-     * @Description: 从购物车删除优惠劵, 刷新UI
-     * @Param
-     * @Return void 返回类型
-     */
     public void onEventMainThread(ActionSeparateDeleteCoupon event) {
         if (event.id != null) {
             Iterator<CouponVo> iterator = mSelectedCpupons.iterator();
@@ -132,11 +115,7 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
         }
     }
 
-    /**
-     * 清空购物车事件
-     *
-     * @param event
-     */
+
     public void onEventMainThread(ActionClearShopcart event) {
         Iterator<CouponVo> iterator = mSelectedCpupons.iterator();
         while (iterator.hasNext()) {
@@ -147,10 +126,8 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
         }
     }
 
-    //移除上次选择的优惠劵从购物车
     private void removeLastCouponFromShoppingCart(CouponVo currentVo) {
         updateSelectedView(currentVo);
-        // 从购物车移除
         DinnerShoppingCart dinnerShoppingCart = DinnerShopManager.getInstance().getShoppingCart();
         List<Long> promeIdList = new ArrayList<Long>();
         promeIdList.add(currentVo.getCouponInfo().getCustomerCouponId());
@@ -158,7 +135,6 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
         mSelectedCpupons.remove(currentVo);
     }
 
-    //移除整单类型券
     private void removeAllTradeCoupons() {
         Iterator<CouponVo> iterator = mSelectedCpupons.iterator();
         while (iterator.hasNext()) {
@@ -175,7 +151,6 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
                 iterator.remove();
             }
         }
-        // 从购物车移除
         DinnerShoppingCart dinnerShoppingCart = DinnerShopManager.getInstance().getShoppingCart();
         dinnerShoppingCart.removeAllCouponPrivilege(dinnerShoppingCart.getShoppingCartVo(), true);
     }
@@ -188,7 +163,6 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
         }
     }
 
-    //判断礼品券的商品是否可用
     private boolean isGiftCouponEnable(CouponVo currentVo, CouponPrivilegeVo couponPrivilegeVo) {
         if (couponPrivilegeVo.getShopcartItem() == null) {
             ToastUtil.showShortToast(R.string.the_goods_of_gift_coupon_is_not_exist);
@@ -205,14 +179,10 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
         return true;
     }
 
-    /*
-     * 点击item 时回调
-     */
+
     @Override
     public void onCouponSelected(CouponVo currentVo, CouponType type) {
-        //如果已经选择做删除炒作
         if (mSelectedCpupons.contains(currentVo)) {
-            // 如果是单菜礼品券
             if (isTradeItemGiftCoupon(currentVo)) {
                 ShoppingCartVo shoppingCartVo = DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo();
                 DinnerShopManager.getInstance().getShoppingCart().removeGiftCouponePrivilege(mCouponsManager.getCouponPrivilegeVo(currentVo).getTradePrivilege().getPromoId(), shoppingCartVo, true);
@@ -223,18 +193,15 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
             }
 
         } else {
-            //如果没有就新加
             if (mSelectedCpupons.isEmpty()) {
                 if (currentVo.isSelected()) {
                     if (currentVo.getCouponInfo().getCouponType() == CouponType.GIFT && isTradeItemGiftCoupon(currentVo)) {
                         CouponPrivilegeVo couponPrivilegeVo = mCouponsManager.getCouponPrivilegeVo(currentVo);
-                        //礼品券对应的商品不可用
                         if (!isGiftCouponEnable(currentVo, couponPrivilegeVo)) {
                             return;
                         }
 
                         boolean isOk = DinnerShopManager.getInstance().getShoppingCart().setGiftCouponPrivilege(couponPrivilegeVo);
-                        //如果添加成功
                         if (isOk) {
                             mSelectedCpupons.add(currentVo);
                         } else {
@@ -242,7 +209,6 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
                             ToastUtil.showLongToast(mActivity.getString(R.string.dinner_shopcart_Coupon_canot_use));
                         }
                     } else {
-                        // 添加到购物车
                         DinnerShoppingCart dinnerShoppingCart = DinnerShopManager.getInstance().getShoppingCart();
                         if (BigDecimal.ZERO.compareTo(dinnerShoppingCart.getShoppingCartVo().getmTradeVo().getTrade().getTradeAmount()) == 0) {
                             ToastUtil.showLongToast(R.string.dinner_order_amount_zero_error);
@@ -254,16 +220,14 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
                     }
                 }
                 updateSelectedView(currentVo);
-            } else {//切换券
+            } else {
                 if (currentVo.getCouponInfo().getCouponType() == CouponType.GIFT && isTradeItemGiftCoupon(currentVo)) {
                     if (currentVo.isSelected()) {
                         CouponPrivilegeVo couponPrivilegeVo = mCouponsManager.getCouponPrivilegeVo(currentVo);
-                        //礼品券对应的商品不可用
                         if (!isGiftCouponEnable(currentVo, couponPrivilegeVo)) {
                             return;
                         }
                         boolean isOk = DinnerShopManager.getInstance().getShoppingCart().setGiftCouponPrivilege(couponPrivilegeVo);
-                        //如果不是赠菜只能使用一张
                         if (isOk) {
                             mSelectedCpupons.add(currentVo);
                         } else {
@@ -286,11 +250,9 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
                     }
                     boolean isAllowAdd = dinnerShoppingCart.isAllowAddCoupon(dinnerShoppingCart.getShoppingCartVo(), couponPrivilegeVo);
                     if (!isAllowAdd) {
-                        //移除整单优惠券
                         removeAllTradeCoupons();
                     }
                     if (couponPrivilegeVo.getCoupon().getCouponType() == CouponType.CASH) {
-                        //如果是代金券判断张数
                         if (getDefineCouponCount() >= CASH_COUPON_COUNT) {
                             currentVo.setSelected(false);
                             ToastUtil.showLongToast(R.string.coupon_over_count_error);
@@ -298,7 +260,6 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
                         }
                     }
                     if (currentVo.isSelected()) {
-                        // 添加到购物车
                         DinnerShopManager.getInstance().getShoppingCart().setCouponPrivilege(couponPrivilegeVo, true, true);
 
                         mSelectedCpupons.add(currentVo);
@@ -309,9 +270,7 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
         }
     }
 
-    /**
-     * 获取整单优惠劵选择的数量
-     */
+
     private int getDefineCouponCount() {
         Iterator iterator = mSelectedCpupons.iterator();
         int defineCouponCount = 0;
@@ -324,36 +283,29 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
         return defineCouponCount;
     }
 
-    /**
-     * 根据item 更新gridview
-     *
-     * @Title: updateSelectedView
-     * @Description: TODO
-     * @Param @param vo TODO
-     * @Return void 返回类型
-     */
+
     private void updateSelectedView(CouponVo vo) {
         if (vo == null)
             return;
 
         switch (vo.getCouponInfo().getCouponType()) {
 
-            case REBATE:// 满减券
+            case REBATE:
                 if (rebateView != null)
                     rebateView.updateViews();
                 break;
 
-            case DISCOUNT:// 折扣券
+            case DISCOUNT:
                 if (discountView != null) {
                     discountView.updateViews();
                 }
                 break;
-            case GIFT:// 礼品券
+            case GIFT:
                 if (giftView != null) {
                     giftView.updateViews();
                 }
                 break;
-            case CASH:// 代金卷
+            case CASH:
                 if (cashView != null) {
                     cashView.updateViews();
                 }
@@ -363,57 +315,41 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
         }
     }
 
-    /**
-     * CouponsManager 返回查询结果
-     *
-     * @Title: onEventMainThread
-     * @Description: TODO
-     * @Param @param eventdata TODO
-     * @Return void 返回类型
-     */
+
     public void onEventMainThread(EventCouponVoResult eventdata) {
-        // onClickEnable(true);
 
         mCouponsLL.removeAllViews();
         mSelectedCpupons.clear();
         mSelectedCpupons.addAll(eventdata.getSelectedCoupons());
         boolean isNothing = true;
-        // 如果有代金卷
         if (eventdata.getCashCoupons() != null) {
             isNothing = false;
             cashView = CouponsLayoutView_.build(mContext, this, CouponType.CASH);
             cashView.setData(eventdata.getCashCoupons(), 1);
             mCouponsLL.addView(cashView);
-        } // 如果有满减劵
+        }
         if (eventdata.getRebateCoupons() != null) {
             isNothing = false;
             rebateView = CouponsLayoutView_.build(mContext, this, CouponType.REBATE);
             rebateView.setData(eventdata.getRebateCoupons(), 1);
             mCouponsLL.addView(rebateView);
-        } // 如果有折扣卷
+        }
         if (eventdata.getDiscountCoupons() != null) {
             isNothing = false;
             discountView = CouponsLayoutView_.build(mContext, this, CouponType.DISCOUNT);
             discountView.setData(eventdata.getDiscountCoupons(), 1);
             mCouponsLL.addView(discountView);
-        } // 如果有礼品卷
+        }
         if (eventdata.getGiftCoupons() != null) {
             isNothing = false;
             giftView = CouponsLayoutView_.build(mContext, this, CouponType.GIFT);
             giftView.setData(eventdata.getGiftCoupons(), 1);
             mCouponsLL.addView(giftView);
         }
-        // 如果没有优惠劵，提醒用户
         if (isNothing) {
             mCouponsLL.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
         }
-        mCouponsLL.post(new Runnable() {
-            @Override
-            public void run() {
-//                dismissLoadingProgressDialog();
-            }
-        });
     }
 
     private void loadCoupons() {
@@ -447,22 +383,18 @@ public class BeautyCouponView extends LinearLayout implements CouponsLayoutView.
             @Override
             public void onResponse(YFResponseList<CustomerCouponResp> response) {
                 if (YFResponseList.isOk(response)) {
-                    // 异步加载界面
                     mCouponsManager.loadData(response.getContent());
                 } else {
-//                    dismissLoadingProgressDialog();
                     ToastUtil.showShortToast(response.getMessage());
                 }
             }
 
             @Override
             public void onError(VolleyError error) {
-//                dismissLoadingProgressDialog();
                 ToastUtil.showShortToast(error.getMessage());
             }
         });
 
-//        showLoadingProgressDialog();
 
     }
 

@@ -32,9 +32,7 @@ public class ExtraChargeTool {
 
     private TradeVo mTradeVo;
     private Map<Integer, BigDecimal> privilegeMap = new HashMap<Integer, BigDecimal>();
-    private TradePrivilege serviceTradePrivilege; //服务费
-    private ExtraCharge serviceExtraCharge; //服务费规则
-
+    private TradePrivilege serviceTradePrivilege;     private ExtraCharge serviceExtraCharge;
     private ExtraChargeTool(TradeVo mTradeVo) {
         this.mTradeVo = mTradeVo;
     }
@@ -53,13 +51,7 @@ public class ExtraChargeTool {
         return serviceTradePrivilege;
     }
 
-    /**
-     * 计算服务费
-     *
-     * @param saleAmount          折扣前金额
-     * @param discountAfterAmount 折扣后金额
-     * @return
-     */
+
     public BigDecimal chargeService(BigDecimal saleAmount, BigDecimal discountAfterAmount) {
         if (serviceTradePrivilege != null) {
             TradePrivilege mTradePrivilege;
@@ -96,13 +88,7 @@ public class ExtraChargeTool {
         return result == null ? BigDecimal.ZERO : result;
     }
 
-    /**
-     * @Title: mathExtraCharge
-     * @Description: 计算附加费
-     * @Param mTradeVo
-     * @Param @return 返回参与整单折扣的附加费金额
-     * @Return BigDecimal 返回类型
-     */
+
     public void mathExtraCharge(TradeVo mTradeVo, List<IShopcartItem> iShopcartItem, BigDecimal privilegeAfaterAmount) {
 
         List<TradePrivilege> listPrivilege = mTradeVo.getTradePrivileges();
@@ -119,22 +105,17 @@ public class ExtraChargeTool {
             mTradeVo.setTradePrivileges(new ArrayList<TradePrivilege>());
             listPrivilege = mTradeVo.getTradePrivileges();
         }
-        //end
 
-        // 参与整单折扣的附加费总金额
-        BigDecimal extraChageYes = BigDecimal.ZERO;
+                BigDecimal extraChageYes = BigDecimal.ZERO;
 
-        // 附加费总金额
-        BigDecimal extraChageNo = BigDecimal.ZERO;
+                BigDecimal extraChageNo = BigDecimal.ZERO;
 
         if (listPrivilege != null) {
 
-            // 先移除所有附加费
-            for (int i = listPrivilege.size() - 1; i >= 0; i--) {
+                        for (int i = listPrivilege.size() - 1; i >= 0; i--) {
 
                 TradePrivilege mTradePrivilege = listPrivilege.get(i);
-                // 该折扣信息是附加费折扣信息
-                if ((mTradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL
+                                if ((mTradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL
                         || mTradePrivilege.getPrivilegeType() == PrivilegeType.SERVICE)
                         && mTradePrivilege.getStatusFlag() == StatusFlag.VALID) {
                     temPrivileges.put(mTradePrivilege.getPromoId(), mTradePrivilege);
@@ -146,8 +127,7 @@ public class ExtraChargeTool {
                     if (outTimeFeeEnable && outFee != null && MathDecimal.isLongEqual(mTradePrivilege.getPromoId(), outFee.getId())) {
                         continue;
                     }
-                    //服务端附加费被作废,作废tradePrivilege记录
-                    if (mTradePrivilege.getStatusFlag() == StatusFlag.VALID && extraChargeMap.get(mTradePrivilege.getPromoId()) == null) {
+                                        if (mTradePrivilege.getStatusFlag() == StatusFlag.VALID && extraChargeMap.get(mTradePrivilege.getPromoId()) == null) {
                         if (!isServiceCharge(mTradeVo, mTradePrivilege)) {
                             mTradePrivilege.setInValid();
                         }
@@ -158,11 +138,9 @@ public class ExtraChargeTool {
 
         }
 
-        //添加服务费
-        addServiceCharge(mTradeVo, temPrivileges, listPrivilege);
+                addServiceCharge(mTradeVo, temPrivileges, listPrivilege);
 
-        // 添加所有附加费(服务费除外)，其中temPrivileges记录已加入过的附加费，这种只需修改附加费金额
-        for (Long key : extraChargeMap.keySet()) {
+                for (Long key : extraChargeMap.keySet()) {
 
             ExtraCharge mExtraCharge = extraChargeMap.get(key);
 
@@ -172,9 +150,7 @@ public class ExtraChargeTool {
                 boxTradePrivilege.setPrivilegeAmount(BigDecimal.ZERO);
                 Map<String, IShopcartItem> temp = new HashMap<String, IShopcartItem>();
                 for (IShopcartItem item : iShopcartItem) {
-                    /**
-                     * 如果item.getDishShop()为null表示下单后对已经参与附加费的菜品在后台进行了删除操作，然后在重新加入到购物车中是拿不到dishshop数据的。但这类商品是不需要重新计算餐盒费的，直接已经计算过了
-                     */
+
                     if (item.getDishShop() != null && item.getDishShop().getBoxQty() != null && item.getDishShop().getBoxQty().compareTo(BigDecimal.ZERO) != 0) {
                         if (temp.get(item.getDishShop().getUuid()) == null) {
                             mathMealFee(mTradeVo, iShopcartItem, boxTradePrivilege, item, mExtraCharge);
@@ -182,8 +158,7 @@ public class ExtraChargeTool {
                         temp.put(item.getDishShop().getUuid(), item);
                     }
                 }
-                //是否参与折扣 1：是 2：否
-                if (mExtraCharge.getDiscountFlag() == Bool.YES) {
+                                if (mExtraCharge.getDiscountFlag() == Bool.YES) {
                     extraChageYes = extraChageYes.add(boxTradePrivilege.getPrivilegeAmount());
                 } else {
                     extraChageNo = extraChageNo.add(boxTradePrivilege.getPrivilegeAmount());
@@ -192,19 +167,15 @@ public class ExtraChargeTool {
                     listPrivilege.add(boxTradePrivilege);
                 }
             } else {
-                // 其中temPrivileges.get(mExtraCharge.getId())也可能返回null，返回null表示该种附加费是新增附加费
-                TradePrivilege oldPrivilege = temPrivileges.get(mExtraCharge.getId());
-                //这儿不处理最低消费
-                if (ExtraManager.isMinConsum(mExtraCharge))
+                                TradePrivilege oldPrivilege = temPrivileges.get(mExtraCharge.getId());
+                                if (ExtraManager.isMinConsum(mExtraCharge))
                     continue;
-                //服务费，服务费不参与整单折扣，只计算商品金额
-                TradePrivilege mTradePrivilege = null;
+                                TradePrivilege mTradePrivilege = null;
                 if (!isServiceCharge(mTradeVo, mExtraCharge)) {
                     mTradePrivilege = BuildPrivilegeTool.buildExtraChargePrivilege(mTradeVo,
                             oldPrivilege,
                             mExtraCharge, privilegeAfaterAmount);
-                    // 是否参与折扣 1：是 2：否
-                    if (mExtraCharge.getDiscountFlag() == Bool.YES) {
+                                        if (mExtraCharge.getDiscountFlag() == Bool.YES) {
 
                         extraChageYes = extraChageYes.add(mTradePrivilege.getPrivilegeAmount());
 
@@ -227,15 +198,13 @@ public class ExtraChargeTool {
 
         privilegeMap.put(EXTRACHARGENO, extraChageNo);
 
-        //计算超时费
-        privilegeMap = mathOutTimeExtraCharge(mTradeVo, privilegeMap);
+                privilegeMap = mathOutTimeExtraCharge(mTradeVo, privilegeMap);
 
         mTradeVo.setDiscountExtracharge(extraChageYes);
     }
 
     private void addServiceCharge(TradeVo mTradeVo, Map<Long, TradePrivilege> temPrivileges, List<TradePrivilege> resultPrivilegeList) {
-        //快餐不使用服务费
-        if (mTradeVo.getTrade().getBusinessType() == BusinessType.SNACK || mTradeVo.getTrade().getBusinessType() == BusinessType.TAKEAWAY) {
+                if (mTradeVo.getTrade().getBusinessType() == BusinessType.SNACK || mTradeVo.getTrade().getBusinessType() == BusinessType.TAKEAWAY) {
             return;
         }
 
@@ -264,14 +233,9 @@ public class ExtraChargeTool {
         }
     }
 
-    /**
-     * 是否是服务费,快餐和外卖不使用服务费
-     *
-     * @param mExtraCharge
-     * @return
-     */
+
     public static boolean isServiceCharge(TradeVo tradeVo, ExtraCharge mExtraCharge) {
-        if (mExtraCharge != null && mExtraCharge.getCode() != null && mExtraCharge.getCode().equalsIgnoreCase(ExtraManager.SERVICE_CONSUM) /*&& mExtraCharge.isAutoJoinTrade()*/) {
+        if (mExtraCharge != null && mExtraCharge.getCode() != null && mExtraCharge.getCode().equalsIgnoreCase(ExtraManager.SERVICE_CONSUM) ) {
             return true;
         }
         return false;
@@ -282,13 +246,7 @@ public class ExtraChargeTool {
         return serviceCharge != null && Utils.equals(serviceCharge.id, mTradePrivilege.getPromoId());
     }
 
-    /**
-     * 超时费计算
-     *
-     * @param mTradeVo
-     * @param extraChargePrivilegeMap
-     * @return
-     */
+
     public static Map<Integer, BigDecimal> mathOutTimeExtraCharge(TradeVo mTradeVo, Map<Integer, BigDecimal> extraChargePrivilegeMap) {
         boolean outTimeEnable = ServerSettingCache.getInstance().getBuffetOutTimeFeeEnable();
 
@@ -299,18 +257,15 @@ public class ExtraChargeTool {
 
         ExtraCharge mOutTimeRule = ServerSettingCache.getInstance().getmOutTimeRule();
 
-        // 参与整单折扣的附加费总金额
-        BigDecimal extraChageYes = extraChargePrivilegeMap.get(EXTRACHARGEYES);
+                BigDecimal extraChageYes = extraChargePrivilegeMap.get(EXTRACHARGEYES);
 
-        // 附加费总金额
-        BigDecimal extraChageNo = extraChargePrivilegeMap.get(EXTRACHARGENO);
+                BigDecimal extraChageNo = extraChargePrivilegeMap.get(EXTRACHARGENO);
 
         List<TradePrivilege> listPrivilege = mTradeVo.getTradePrivileges();
 
         for (TradePrivilege outTimePrivilege : listPrivilege) {
             if (outTimePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL && outTimePrivilege.getPromoId() != null && outTimePrivilege.getPromoId().longValue() == mOutTimeRule.getId().longValue()) {
-                // 是否参与折扣 1：是 2：否
-                if (mOutTimeRule.getDiscountFlag() == Bool.YES) {
+                                if (mOutTimeRule.getDiscountFlag() == Bool.YES) {
                     extraChageYes = extraChageYes.add(outTimePrivilege.getPrivilegeAmount());
                 } else {
                     extraChageNo = extraChageNo.add(outTimePrivilege.getPrivilegeAmount());
@@ -324,43 +279,27 @@ public class ExtraChargeTool {
         return extraChargePrivilegeMap;
     }
 
-    /**
-     * @Title: mathMealFee
-     * @Description: 计算餐盒费
-     * @Param mTradeVo
-     * @Param mTradePrivilege
-     * @Param item TODO
-     * @Return void 返回类型
-     */
+
     public static void mathMealFee(TradeVo tradeVo, List<IShopcartItem> iShopcartItem, TradePrivilege mTradePrivilege, IShopcartItem item, ExtraCharge mExtraCharge) {
-        //一个点了多少个菜
-        BigDecimal totalQty = BigDecimal.ZERO;
+                BigDecimal totalQty = BigDecimal.ZERO;
         DeliveryType deliveryType = tradeVo.getTrade().getDeliveryType();
         if (iShopcartItem != null) {
             for (IShopcartItem mIShopcartItem : iShopcartItem) {
                 if (mIShopcartItem.getSkuUuid().equals(item.getSkuUuid()) && mIShopcartItem.getStatusFlag() == StatusFlag.VALID
                         && (((deliveryType == DeliveryType.HERE || deliveryType == DeliveryType.TAKE) && mIShopcartItem.getPack())
-                        || (deliveryType == DeliveryType.CARRY || deliveryType == DeliveryType.SEND || tradeVo.getIsSalesReturn()))) {//内用、自取有打包标记才计算、外带外送无单退直接计算
-                    totalQty = totalQty.add(mIShopcartItem.getTotalQty());
+                        || (deliveryType == DeliveryType.CARRY || deliveryType == DeliveryType.SEND || tradeVo.getIsSalesReturn()))) {                    totalQty = totalQty.add(mIShopcartItem.getTotalQty());
                 }
             }
         }
-        //需要餐盒的份数
-        BigDecimal part = BigDecimal.ONE;
-        //一组需配置的餐盒数量
-        BigDecimal boxQty = item.getDishShop().getBoxQty();
-        //多少个菜配置一个餐盒
-        BigDecimal dishQtyp = item.getDishShop().getDishQty();
+                BigDecimal part = BigDecimal.ONE;
+                BigDecimal boxQty = item.getDishShop().getBoxQty();
+                BigDecimal dishQtyp = item.getDishShop().getDishQty();
 
 
-        //单菜数量大于配置一组餐盒费要求的菜品数据
-        if (totalQty.compareTo(dishQtyp) > 0) {
-            //取余
-            BigDecimal remainder = totalQty.divideAndRemainder(dishQtyp)[1];
-            //整除
-            BigDecimal count = totalQty.divideToIntegralValue(dishQtyp);
-            //如count>0表示当前所点菜品数量满足搭配多次次餐盒,
-            if (remainder.compareTo(BigDecimal.ZERO) == 0) {
+                if (totalQty.compareTo(dishQtyp) > 0) {
+                        BigDecimal remainder = totalQty.divideAndRemainder(dishQtyp)[1];
+                        BigDecimal count = totalQty.divideToIntegralValue(dishQtyp);
+                        if (remainder.compareTo(BigDecimal.ZERO) == 0) {
                 part = count;
             } else {
                 part = count.add(BigDecimal.ONE);

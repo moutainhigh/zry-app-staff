@@ -27,25 +27,19 @@ public class CustomerCalmStringRequest extends CalmStringRequest {
         try {
             JSONObject jsonObject = new JSONObject(response);
             status = jsonObject.getInt("status");
-            // workaround for server
-            if (status == 1000 || status == 0) {
+                        if (status == 1000 || status == 0) {
                 if (mSuccessListener != null) {
                     mSuccessListener.onResponse(response);
                 }
             } else {
                 if (jsonObject.has("message")) {
-                    // 无论成功或者失败，都要提示用户相应的服务器返回的信息
-                    String message = jsonObject.getString("message");
+                                        String message = jsonObject.getString("message");
                     if (!TextUtils.isEmpty(message))
                         ToastUtil.showShortToast(message);
                 }
             }
 			
-			/*if (jsonObject.has("content")) {
-				JSONObject jsonObj = new JSONObject(jsonObject.optString("content"));
-				BaseResponseSession session = new BaseResponseSession();
-				session.parseContent(mContext, jsonObj.toString());
-			}*/
+
         } catch (JSONException e) {
             Log.e(TAG, "", e);
         }

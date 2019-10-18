@@ -14,15 +14,11 @@ import java.lang.ref.WeakReference;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class SdcardDataStore<T> implements IDataStore<T, String> {
     public static final String SDCARD_DIR_NAME = "statistics";
     public static final String SDCARD_FILE_NAME = "performance_";
-    private static final long TIME_SLOT = 5 * 60 * 1000; // 5分钟
-    private static final int SIZE_SLOT = 20; // 20条数据
-
+    private static final long TIME_SLOT = 5 * 60 * 1000;     private static final int SIZE_SLOT = 20;
     private WeakReference<Context> mContextWeakRef;
     private LinkedBlockingQueue<T> mLinkedBlockingQueue = new LinkedBlockingQueue<>();
 
@@ -135,8 +131,7 @@ public class SdcardDataStore<T> implements IDataStore<T, String> {
     }
 
     private boolean shouldSaveData() {
-        // 存储的条数超过20条
-        int size = mLinkedBlockingQueue.size();
+                int size = mLinkedBlockingQueue.size();
         if (size >= SIZE_SLOT) {
             return true;
         }

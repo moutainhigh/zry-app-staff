@@ -29,41 +29,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * 附加费管理的类
- *
- * @date:2016年3月11日上午11:03:50
- */
+
 public class ExtraManager {
 
     private static final String TAG = "ExtraManager";
 
     private Context mContext;
-    //餐盒费的code
-    public static final String mealFee = "CHF";
+        public static final String mealFee = "CHF";
 
-    //配送费的code
-    public static final String DELIVERY_FEE = "PSF";
+        public static final String DELIVERY_FEE = "PSF";
 
-    //自助超时费
-    public static final String BUFFET_OOUTTIME_CODE = "ZZCSF";
+        public static final String BUFFET_OOUTTIME_CODE = "ZZCSF";
 
-    //最低消费差额
-    public static final String BUFFET_MIN_CONSUM = "ZDXFCE";
-    //服务费
-    public static final String SERVICE_CONSUM = "SERVICE_CHARGE";
+        public static final String BUFFET_MIN_CONSUM = "ZDXFCE";
+        public static final String SERVICE_CONSUM = "SERVICE_CHARGE";
 
     public ExtraManager() {
-        // TODO Auto-generated constructor stub
-    }
+            }
 
-    /**
-     * @param isNeedMealFee 是否需要餐盒费
-     * @Title: getExtraListVo
-     * @Description: 获取附加费列表包装的list
-     * @Param @return TODO
-     * @Return List<DinnerExtraChrge> 返回类型
-     */
+
     public List<DinnerExtraChargeVo> getExtraListVo(boolean isDinner, boolean isNeedMealFee, boolean needDeliveryFee) {
         ExtraChargeDal extraChargeDal = OperatesFactory.create(ExtraChargeDal.class);
         try {
@@ -75,12 +59,10 @@ public class ExtraManager {
                         continue;
                     }
 
-                    //若不需要配送费，则移除配送费
-                    if (!needDeliveryFee && extraCharge.getCode() != null && DELIVERY_FEE.equals(extraCharge.getCode())) {
+                                        if (!needDeliveryFee && extraCharge.getCode() != null && DELIVERY_FEE.equals(extraCharge.getCode())) {
                         continue;
                     }
-                    //快餐和外卖不需要服务费
-                    if (!isDinner && extraCharge.getCode() != null && SERVICE_CONSUM.equals(extraCharge.getCode())) {
+                                        if (!isDinner && extraCharge.getCode() != null && SERVICE_CONSUM.equals(extraCharge.getCode())) {
                         continue;
                     }
 
@@ -100,13 +82,7 @@ public class ExtraManager {
         return getAutoOrderExtraMap(null, extraChargeMap, isHasAuto);
     }
 
-    /**
-     * @Title: getAutoOrderExtraList
-     * @Description: 获得自动加入订单的附加费列表
-     * @Param extraChargeMap 原单的附加费
-     * isHasAuto:是否包含后台设置的知道带入订单的附加费 true：包含
-     * @Return Map<Long       ,       ExtraCharge> 返回类型
-     */
+
     public static List<ExtraCharge> getAutoOrderExtraMap(TradeVo tradeVo, Map<Long, ExtraCharge> extraChargeMap, boolean isHasAuto) {
         Map<Long, ExtraCharge> cloneMap = cloneExtraMap(extraChargeMap);
         List<ExtraCharge> extraList = null;
@@ -123,25 +99,18 @@ public class ExtraManager {
                 cloneMap = new HashMap<Long, ExtraCharge>();
             }
             for (ExtraCharge ex : extraList) {
-                // 正餐屏蔽餐盒费
-                if (!cloneMap.containsKey(ex.getId()) && !mealFee.equalsIgnoreCase(ex.getCode())) {
+                                if (!cloneMap.containsKey(ex.getId()) && !mealFee.equalsIgnoreCase(ex.getCode())) {
                     tempList.add(ex);
                 }
             }
         }
-        // 将原单的附加费加入到列表
-        if (cloneMap != null) {
+                if (cloneMap != null) {
             tempList.addAll(cloneMap.values());
         }
         return tempList;
     }
 
-    /**
-     * @Title: getAutoOrderList
-     * @Description: 返回从数据库中查询的自动加入订单的附加费
-     * @Param @return TODO
-     * @Return List<ExtraCharge> 返回类型
-     */
+
     public static List<ExtraCharge> getAutoOrderExtraList() {
         List<ExtraCharge> extraList = new ArrayList<ExtraCharge>();
         ExtraChargeDal extraChargeDal = OperatesFactory.create(ExtraChargeDal.class);
@@ -177,12 +146,7 @@ public class ExtraManager {
         return result;
     }
 
-    /**
-     * 根据区域获取附近加费
-     *
-     * @param tradeVo
-     * @return
-     */
+
     public List<DinnerExtraChargeVo> getExtraListVoByCommercialArea(TradeVo tradeVo) {
         List<DinnerExtraChargeVo> result = new ArrayList<>();
         try {
@@ -231,19 +195,12 @@ public class ExtraManager {
         return commercialAreasIds;
     }
 
-    /**
-     * @Title: getExtraListVo
-     * @Description: TODO
-     * @Param @param tradeVo
-     * @Param @return TODO
-     * @Return List<DinnerExtraChargeVo> 返回类型
-     */
+
     public List<DinnerExtraChargeVo> getExtraListVo(TradeVo tradeVo, boolean isDinner) {
         if (tradeVo.getExtraChargeMap() == null) {
             return getExtraListVo(isDinner, false, true);
         }
-        //
-        Collection<ExtraCharge> sourceExtraList = tradeVo.getExtraChargeMap().values();
+                Collection<ExtraCharge> sourceExtraList = tradeVo.getExtraChargeMap().values();
         List<DinnerExtraChargeVo> extraList = getExtraListVo(isDinner, false, true);
         if (extraList != null) {
             for (DinnerExtraChargeVo extraChargeVo : extraList) {
@@ -257,13 +214,7 @@ public class ExtraManager {
         return extraList;
     }
 
-    /**
-     * @Title: resetSelectById
-     * @Description: 将指定id附加费 状态设为不选择
-     * @Param @param extraVoList
-     * @Param @param extraChargeId TODO
-     * @Return void 返回类型
-     */
+
     public void resetSelectById(List<DinnerExtraChargeVo> extraVoList, Long extraChargeId) {
         for (DinnerExtraChargeVo exVo : extraVoList) {
             ExtraCharge ex = exVo.getExtrageCharge();
@@ -273,14 +224,7 @@ public class ExtraManager {
         }
     }
 
-    /**
-     * @Title: getExtraChargeById
-     * @Description: 根据id获得附加费对象
-     * @Param @param tradeVo
-     * @Param @param extraChargeId
-     * @Param @return TODO
-     * @Return ExtraCharge 返回类型
-     */
+
     public static ExtraCharge getExtraChargeById(TradeVo tradeVo, Long extraChargeId) {
         Map<Long, ExtraCharge> extraChargeMap = tradeVo.getExtraChargeMap();
         if (extraChargeMap == null || extraChargeId == null) {
@@ -289,13 +233,7 @@ public class ExtraManager {
         return extraChargeMap.get(extraChargeId);
     }
 
-    /**
-     * @Title: cloneExtraMap
-     * @Description: 克隆map
-     * @Param @param extraChargeMap
-     * @Param @return TODO
-     * @Return Map<Long       ,       ExtraCharge> 返回类型
-     */
+
     public static Map<Long, ExtraCharge> cloneExtraMap(Map<Long, ExtraCharge> extraChargeMap) {
         if (extraChargeMap == null || extraChargeMap.isEmpty() || extraChargeMap.values() == null) {
             return null;
@@ -309,19 +247,13 @@ public class ExtraManager {
                     tempMap.put(extraCharge.getId(), targetCharge);
                 }
             } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                                e.printStackTrace();
             }
         }
         return tempMap;
     }
 
-    /**
-     * @Title: getExtraChargeChf
-     * @Description: 获取餐盒费规则
-     * @Param @return TODO
-     * @Return ExtraCharge 返回类型
-     */
+
 
     public static ExtraCharge getExtraChargeChf() {
         ExtraCharge extraCharge = null;
@@ -335,11 +267,7 @@ public class ExtraManager {
     }
 
 
-    /**
-     * 获取最低消费附加费选项
-     *
-     * @return
-     */
+
     public static ExtraCharge getMinconsumExtra() {
 
         DatabaseHelper helper = DBHelperManager.getHelper();
@@ -357,8 +285,7 @@ public class ExtraManager {
         return null;
     }
 
-    //是否是最低消费
-    public static boolean isMinConsum(ExtraCharge extraCharge) {
+        public static boolean isMinConsum(ExtraCharge extraCharge) {
         if (extraCharge == null) {
             return false;
         }

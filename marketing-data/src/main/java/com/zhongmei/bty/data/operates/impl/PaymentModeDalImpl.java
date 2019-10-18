@@ -20,9 +20,7 @@ import com.zhongmei.yunfu.db.enums.PayModelGroup;
 import com.zhongmei.bty.basemodule.pay.operates.PaymentModeDal;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * 付款类型
- */
+
 public class PaymentModeDalImpl extends AbstractOpeartesImpl implements PaymentModeDal {
     private static final String TAG = PaymentModeDalImpl.class.getSimpleName();
 
@@ -37,8 +35,7 @@ public class PaymentModeDalImpl extends AbstractOpeartesImpl implements PaymentM
             Dao<PaymentModeShop, Long> paymentModeDao = helper.getDao(PaymentModeShop.class);
             QueryBuilder<PaymentModeShop, Long> qb = paymentModeDao.queryBuilder();
             qb.selectColumns(PaymentModeShop.$.erpModeId, PaymentModeShop.$.name, PaymentModeShop.$.faceValue, PaymentModeShop.$.paymentModeType, PaymentModeShop.$.isRefund, PaymentModeShop.$.sort, PaymentModeShop.$.enabledFlag, PaymentModeShop.$.shopIdenty);
-            qb.orderBy(PaymentModeShop.$.serverUpdateTime, true);//add v.8.2
-            qb.where().eq(PaymentModeShop.$.enabledFlag, Bool.YES);
+            qb.orderBy(PaymentModeShop.$.serverUpdateTime, true);            qb.where().eq(PaymentModeShop.$.enabledFlag, Bool.YES);
             return qb.query();
         } finally {
             DBHelperManager.releaseHelper(helper);

@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2011 Google Inc.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.google.gson.internal.bind;
 
@@ -57,9 +43,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
-/**
- * Type adapters for basic types.
- */
+
 public final class TypeAdapters {
     private TypeAdapters() {
         throw new UnsupportedOperationException();
@@ -141,8 +125,7 @@ public final class TypeAdapters {
                 in.nextNull();
                 return null;
             } else if (peek == JsonToken.STRING) {
-                // support strings for compatibility with GSON 1.7
-                return Boolean.parseBoolean(in.nextString());
+                                return Boolean.parseBoolean(in.nextString());
             }
             return in.nextBoolean();
         }
@@ -153,10 +136,7 @@ public final class TypeAdapters {
         }
     };
 
-    /**
-     * Writes a boolean as a string. Useful for map keys, where booleans aren't
-     * otherwise permitted.
-     */
+
     public static final TypeAdapter<Boolean> BOOLEAN_AS_STRING = new TypeAdapter<Boolean>() {
         @Override
         public Boolean read(JsonReader in) throws IOException {
@@ -419,7 +399,7 @@ public final class TypeAdapters {
                 in.nextNull();
                 return null;
             }
-            /* coerce booleans to strings for backwards compatibility */
+
             if (peek == JsonToken.BOOLEAN) {
                 return Boolean.toString(in.nextBoolean());
             }
@@ -561,8 +541,7 @@ public final class TypeAdapters {
                 in.nextNull();
                 return null;
             }
-            // regrettably, this should have included both the host name and the host address
-            return InetAddress.getByName(in.nextString());
+                        return InetAddress.getByName(in.nextString());
         }
 
         @Override
@@ -606,8 +585,7 @@ public final class TypeAdapters {
     public static final TypeAdapterFactory CURRENCY_FACTORY = newFactory(Currency.class, CURRENCY);
 
     public static final TypeAdapterFactory TIMESTAMP_FACTORY = new TypeAdapterFactory() {
-        @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
-        @Override
+        @SuppressWarnings("unchecked")         @Override
         public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
             if (typeToken.getRawType() != Timestamp.class) {
                 return null;
@@ -859,8 +837,7 @@ public final class TypeAdapters {
                 return null;
             }
             if (!rawType.isEnum()) {
-                rawType = rawType.getSuperclass(); // handle anonymous subclasses
-            }
+                rawType = rawType.getSuperclass();             }
             return (TypeAdapter<T>) new EnumTypeAdapter(rawType);
         }
     };
@@ -868,8 +845,7 @@ public final class TypeAdapters {
     public static <TT> TypeAdapterFactory newFactory(
             final TypeToken<TT> type, final TypeAdapter<TT> typeAdapter) {
         return new TypeAdapterFactory() {
-            @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
-            @Override
+            @SuppressWarnings("unchecked")             @Override
             public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
                 return typeToken.equals(type) ? (TypeAdapter<T>) typeAdapter : null;
             }
@@ -879,8 +855,7 @@ public final class TypeAdapters {
     public static <TT> TypeAdapterFactory newFactory(
             final Class<TT> type, final TypeAdapter<TT> typeAdapter) {
         return new TypeAdapterFactory() {
-            @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
-            @Override
+            @SuppressWarnings("unchecked")             @Override
             public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
                 return typeToken.getRawType() == type ? (TypeAdapter<T>) typeAdapter : null;
             }
@@ -895,8 +870,7 @@ public final class TypeAdapters {
     public static <TT> TypeAdapterFactory newFactory(
             final Class<TT> unboxed, final Class<TT> boxed, final TypeAdapter<? super TT> typeAdapter) {
         return new TypeAdapterFactory() {
-            @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
-            @Override
+            @SuppressWarnings("unchecked")             @Override
             public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
                 Class<? super T> rawType = typeToken.getRawType();
                 return (rawType == unboxed || rawType == boxed) ? (TypeAdapter<T>) typeAdapter : null;
@@ -913,8 +887,7 @@ public final class TypeAdapters {
     public static <TT> TypeAdapterFactory newFactoryForMultipleTypes(final Class<TT> base,
                                                                      final Class<? extends TT> sub, final TypeAdapter<? super TT> typeAdapter) {
         return new TypeAdapterFactory() {
-            @SuppressWarnings("unchecked") // we use a runtime check to make sure the 'T's equal
-            @Override
+            @SuppressWarnings("unchecked")             @Override
             public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> typeToken) {
                 Class<? super T> rawType = typeToken.getRawType();
                 return (rawType == base || rawType == sub) ? (TypeAdapter<T>) typeAdapter : null;
@@ -928,10 +901,7 @@ public final class TypeAdapters {
         };
     }
 
-    /**
-     * Returns a factory for all subtypes of {@code typeAdapter}. We do a runtime check to confirm
-     * that the deserialized type matches the type requested.
-     */
+
     public static <T1> TypeAdapterFactory newTypeHierarchyFactory(
             final Class<T1> clazz, final TypeAdapter<T1> typeAdapter) {
         return new TypeAdapterFactory() {

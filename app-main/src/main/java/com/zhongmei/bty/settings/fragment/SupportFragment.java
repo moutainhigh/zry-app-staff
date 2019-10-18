@@ -60,8 +60,7 @@ import java.util.List;
 public class SupportFragment extends BasicFragment {
     private static final String TAG = SupportFragment.class.getSimpleName();
 
-    public static final int FROM_TYPE_RETAIL = 1;// 来源于零售
-
+    public static final int FROM_TYPE_RETAIL = 1;
     @ViewById(R.id.settings_progress_extend)
     View mProgressParentView;
 
@@ -105,32 +104,23 @@ public class SupportFragment extends BasicFragment {
     private static final int HIDE_PROGRESS = 0;
 
     ProgressTask mProgressTask;
-    //保存需要上传的所有文件
-    List<FileAndNewNameMapItem> listFiles = new ArrayList<>();
+        List<FileAndNewNameMapItem> listFiles = new ArrayList<>();
     private String[] uploadFileName = new String[]{
             "printer",
             "calm_printer",
             "snack"
     };
-    //需要上传的文件路径
-    private String[] uploadFilePaths = new String[]{
+        private String[] uploadFilePaths = new String[]{
             getExternalStorageDirectory() + BaseLogAction.S_BRAND_NAME + "/logs/" + uploadFileName[0],
             getExternalStorageDirectory() + BaseLogAction.S_BRAND_NAME + "/logs/" + uploadFileName[1],
             getExternalStorageDirectory() + BaseLogAction.S_BRAND_NAME + "/logs/" + uploadFileName[2]
     };
 
-    /*
-    文件上传到服务器后的名字
-    商户号 + 日期 + 业务类别 + mac地址 + 时间搓
-    例如: erp/810005040_20170203_calm_printer_e076ad7671a_148123213123
-     */
+
     private String newName = null;
-    // mac地址加时间搓
-    private String tempNewName = null;
-    //是否所有文件都长传成功
-    private Boolean isAllSuccefull = true;
-    //没有上传成功的文件名字
-    private StringBuilder failFiles = new StringBuilder();
+        private String tempNewName = null;
+        private Boolean isAllSuccefull = true;
+        private StringBuilder failFiles = new StringBuilder();
 
     Context mContext;
 
@@ -225,14 +215,12 @@ public class SupportFragment extends BasicFragment {
             return;
         }
 
-        //showLoadingProgressDialog();
-        btnUseractionSubmit.setEnabled(false);
+                btnUseractionSubmit.setEnabled(false);
         btnUseractionSubmit.setText(MainApplication.getInstance().getText(R.string.update_running));
         QiniuUploadHandler.doOneKeyUpload(file, getUserActionFileName(file), new UpCompletionHandler() {
             @Override
             public void complete(String s, ResponseInfo responseInfo, JSONObject jsonObject) {
-                //dismissLoadingProgressDialog();
-                btnUseractionSubmit.setEnabled(true);
+                                btnUseractionSubmit.setEnabled(true);
                 btnUseractionSubmit.setText(MainApplication.getInstance().getText(R.string.settings_log_submit));
                 if (!responseInfo.isOK()) {
                     ToastUtil.showShortToast(R.string.update_fail);
@@ -267,8 +255,7 @@ public class SupportFragment extends BasicFragment {
     }
 
     private void initFileNewName() {
-        // 构造tempNewName
-        tempNewName = SystemUtils.getMacAddress().replace(":", "") + "_" + System.currentTimeMillis();
+                tempNewName = SystemUtils.getMacAddress().replace(":", "") + "_" + System.currentTimeMillis();
         newName = ShopInfoCfg.getInstance().shopId + "_";
     }
 
@@ -277,27 +264,7 @@ public class SupportFragment extends BasicFragment {
         if (ClickManager.getInstance().isClicked()) {
             return;
         }
-        /*LogUploader.upload(new LogUploader.Callback() {
-            @Override
-            public void onStart() {
-                ToastUtil.showShortToast("准备上传款餐日志");
-            }
 
-            @Override
-            public void onUploading() {
-                ToastUtil.showLongToast("快餐日志上传中");
-            }
-
-            @Override
-            public void onSuccess() {
-                ToastUtil.showShortToast("快餐日志上传成功");
-            }
-
-            @Override
-            public void onError(String message) {
-                ToastUtil.showShortToast("失败:" + message);
-            }
-        });*/
     }
 
     @Click(R.id.btn_upload_print_log)
@@ -374,9 +341,7 @@ public class SupportFragment extends BasicFragment {
     }
 
 
-    /**
-     * 七牛上传文件
-     */
+
     private void qiniuUpload(String token) {
         String dir = getEnvironmentDir();
         for (FileAndNewNameMapItem item : listFiles) {
@@ -396,16 +361,12 @@ public class SupportFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 全部文件上传完成后处理界面显示
-     */
+
     private void resetStatue() {
         if (null != listFiles) {
             listFiles.clear();
         }
-        /*
-        是否有上传失败的文件，有则提示失败
-		*/
+
         if (isAllSuccefull) {
             ToastUtil.showShortToast(R.string.upload_success);
         } else {
@@ -438,15 +399,12 @@ public class SupportFragment extends BasicFragment {
 
     private void prepareFiles() {
         initFileNewName();
-        /*
-        准备上传的文件，放到list里
-		 */
+
         if (null != listFiles && listFiles.size() != 0) {
             listFiles.clear();
         }
         for (int i = 0; i < uploadFilePaths.length; i++) {
-            //取得print log的最新7个文件
-            List<FileAndNewNameMapItem> fileList = findFileOf7(uploadFilePaths[i], uploadFileName[i]);
+                        List<FileAndNewNameMapItem> fileList = findFileOf7(uploadFilePaths[i], uploadFileName[i]);
             if (fileList != null) {
                 listFiles.addAll(fileList);
             }
@@ -454,19 +412,12 @@ public class SupportFragment extends BasicFragment {
     }
 
 
-    /**
-     * 取得路径下的最新7个文件
-     *
-     * @param path 文件夹路径
-     */
+
     private List<FileAndNewNameMapItem> findFileOf7(String path, String name) {
         File file = new File(path);
         if (file.exists() && file.isDirectory()) {
-            List<FileAndNewNameMapItem> fileList = new ArrayList<>();//将需要的子文件信息存入到FileInfo里面
-            File[] fs = file.listFiles();
-            /*
-            如果路径下没有文件返回null
-			 */
+            List<FileAndNewNameMapItem> fileList = new ArrayList<>();            File[] fs = file.listFiles();
+
             if (fs == null || fs.length == 0) {
                 return null;
             }
@@ -474,11 +425,8 @@ public class SupportFragment extends BasicFragment {
             for (File f : fs) {
                 fileList.add(new FileAndNewNameMapItem(f, newName + f.getName() + "_" + name + "_" + tempNewName));
             }
-            Collections.sort(fileList, new FileComparator());//通过重写Comparator的实现类
+            Collections.sort(fileList, new FileComparator());
 
-			/*
-            返回最新5个文件
-			 */
             if (fs.length <= 7) {
                 return fileList;
             }
@@ -570,18 +518,7 @@ public class SupportFragment extends BasicFragment {
         @Override
         protected Void doInBackground(Void... params) {
             this.publishProgress(60);
-            /*try {
-                File[] logFiles = OSLog.getLog().getLogFiles();
-                if (logFiles != null) {
-                    for (File f : logFiles) {
-                        UploadFile.uploadLogFile(MainApplication.getInstance(),
-                                ServerAddressUtil.getInstance().getLogAddApi(),
-                                new File(f.getPath()));
-                    }
-                }
-            } catch (Exception e) {
-                Log.e(TAG, "", e);
-            }*/
+
 
             return null;
         }

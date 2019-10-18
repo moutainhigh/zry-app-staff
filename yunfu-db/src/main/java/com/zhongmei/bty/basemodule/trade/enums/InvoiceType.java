@@ -2,36 +2,22 @@ package com.zhongmei.bty.basemodule.trade.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 发票消费类型
- */
+
 public enum InvoiceType implements ValueEnum<Integer> {
 
-    /**
-     * 餐饮
-     */
+
     FOOD(1),
 
-    /**
-     * 储值
-     */
+
     STORED_VALUE(2),
 
-    /**
-     * 零售
-     */
+
     RETAIL(3),
 
-    /**
-     * 其他
-     */
+
     OTHER(4),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

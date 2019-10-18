@@ -7,10 +7,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 创建链桌请求数据
- */
+
 
 public class UnionTradeReq {
 

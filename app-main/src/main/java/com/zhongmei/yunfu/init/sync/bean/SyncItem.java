@@ -5,13 +5,7 @@ import com.zhongmei.yunfu.context.util.NoProGuard;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 与同步Request和Response中content中的某一项对应
- *
- * @param <T>
- * @version: 1.0
- * @date 2015年4月15日
- */
+
 public class SyncItem<T> implements NoProGuard, Serializable {
 
     private String lastSyncMarker;

@@ -10,9 +10,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DeliveryOrderVo implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -62,12 +60,7 @@ public class DeliveryOrderVo implements Serializable {
         return null;
     }
 
-    /**
-     * @param source
-     * @param target
-     * @return
-     * @throws Exception
-     */
+
     private static <T> T copyEntity(T source, T target) throws Exception {
         Beans.copyProperties(source, target);
         return target;

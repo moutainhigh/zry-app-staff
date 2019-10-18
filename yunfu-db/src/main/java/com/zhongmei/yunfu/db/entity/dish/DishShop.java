@@ -13,320 +13,155 @@ import com.zhongmei.yunfu.db.enums.SaleType;
 
 import java.math.BigDecimal;
 
-/**
- * DishShop is a ORMLite bean type. Corresponds to the database table "dish_shop"
- */
+
 @DatabaseTable(tableName = "dish_shop")
 public class DishShop extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-//    CREATE TABLE `dish_shop` (
-//            `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '自增id : 自增id',
-//            `uuid` varchar(50) NOT NULL COMMENT '门店菜品uuid : 唯一标识',
-//            `brand_dish_id` bigint(20) NOT NULL COMMENT '品牌菜品id : 品牌菜品id',
-//            `brand_dish_uuid` varchar(50) NOT NULL COMMENT '品牌菜品uuid : 品牌菜品uuid',
-//            `dish_type_id` bigint(20) DEFAULT NULL COMMENT '菜品类型id : 菜品类型id',
-//            `dish_code` varchar(100) DEFAULT NULL COMMENT '菜品编码 : 菜品编码',
-//            `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '菜品类型 : 菜品种类 0:单菜 1:套餐 2:加料 3:实体卡',
-//            `name` varchar(100) NOT NULL COMMENT '菜品名称 : 菜品名称',
-//            `alias_name` varchar(100) DEFAULT NULL COMMENT '别名 : 别名',
-//            `short_name` varchar(100) DEFAULT NULL COMMENT '短名称',
-//            `alias_short_name` varchar(100) DEFAULT NULL COMMENT '别名：短名称',
-//            `dish_name_index` varchar(100) DEFAULT NULL COMMENT '菜品名称索引(首字母) : 菜品名称索引(首字母)',
-//            `barcode` varchar(120) DEFAULT NULL COMMENT '条形码 : 条形码',
-//            `unit_id` bigint(20) DEFAULT NULL COMMENT '单位id : 单位id',
-//            `weight` decimal(10,2) DEFAULT '0.00' COMMENT '单位换算称重',
-//            `market_price` decimal(10,2) NOT NULL COMMENT '原价 : 原价',
-//            `sort` int(11) NOT NULL COMMENT '排序 : 排序',
-//            `dish_desc` varchar(500) DEFAULT NULL COMMENT '菜品描述 : 菜品描述',
-//            `video_url` varchar(300) DEFAULT NULL COMMENT '视频地址 : 视频地址',
-//            `wm_type` tinyint(4) DEFAULT NULL COMMENT '库存类型 : 1、预制商品2、现制商品3、外购商品4、原物料5、半成品',
-//            `sale_type` tinyint(4) DEFAULT '1' COMMENT '销售类型 : 1 称重销售',
-//            `dish_increase_unit` decimal(6,2) NOT NULL DEFAULT '1.00' COMMENT '起卖份数 : 起卖份数',
-//            `is_single` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否允许单点 : 1 允许 2不允许',
-//            `is_discount_all` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否允许整单打折 : 1 允许 2不允许',
-//            `source` tinyint(4) NOT NULL DEFAULT '1' COMMENT '来源：1  on_mind，2 on_mobile',
-//            `is_send_outside` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否允许外送 : 1 允许 2不允许',
-//            `is_order` tinyint(4) NOT NULL DEFAULT '1' COMMENT '是否允许堂食1.允许2.不允许',
-//            `def_property` tinyint(4) NOT NULL DEFAULT '1' COMMENT '商品自定义属性：1.普通商品；2.自定义商品',
-//            `step_num` decimal(6,2) NOT NULL DEFAULT '1.00' COMMENT '增量设置',
-//            `min_num` int(11) NOT NULL DEFAULT '0' COMMENT '适合人群（小） : 适合人群（小）',
-//            `max_num` int(11) NOT NULL DEFAULT '0' COMMENT '适合人群（大） : 适合人群（大）',
-//            `clear_status` tinyint(4) NOT NULL DEFAULT '1' COMMENT '估清 : 1：在售 ，2：卖光',
-//            `is_manual` tinyint(1) DEFAULT NULL COMMENT '是否手动操作在售或者估清',
-//            `sale_total` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '每日售卖总数 : 每日售卖总数',
-//            `residue_total` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '剩余总数 : 剩余总数',
-//            `sale_total_wechat` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '外卖可售数量 : 外卖可售数量',
-//            `residue_total_wechat` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '外卖剩余数量',
-//            `valid_time` time NOT NULL COMMENT '时间段起始时间 : 时间段起始时间',
-//            `unvalid_time` time NOT NULL COMMENT '时间段截止时间 : 时间段截止时间',
-//            `scene` varchar(50) NOT NULL COMMENT '销售场景 : 商户终端、微信、自助点餐。（3位二进制组合，“1”为可售，“0”为不可售，如“110”表示“商户终端-可售、微信-可售、自助点餐-不可售”）',
-//            `shop_identy` bigint(20) NOT NULL COMMENT '商户id : 商户id',
-//            `brand_identy` bigint(20) NOT NULL COMMENT '品牌id : 品牌id',
-//            `enabled_flag` tinyint(4) DEFAULT '1' COMMENT '启用停用标识 : 区别与StatusFlag，启用停用的作用是该数据是有效数据，但是被停用。 1:启用;2:停用',
-//            `sku_key` varchar(100) DEFAULT NULL COMMENT '商品唯一编号 : 商品唯一编号，用算法生成',
-//            `product_id` bigint(20) DEFAULT NULL COMMENT '所属SPU id',
-//            `has_standard` tinyint(4) NOT NULL DEFAULT '2' COMMENT '是否有规格 : 是否有规格 1 是  2  不是',
-//            `dish_qty` decimal(6,3) NOT NULL DEFAULT '1.000' COMMENT '商品数量',
-//            `box_qty` tinyint(4) NOT NULL DEFAULT '1' COMMENT '餐盒数量',
-//            `status_flag` tinyint(4) NOT NULL DEFAULT '1' COMMENT '状态标识 : 状态标识 1:启用 2:禁用',
-//            `creator_name` varchar(32) DEFAULT NULL COMMENT '创建者名称 : 创建者名称',
-//            `creator_id` bigint(20) DEFAULT NULL COMMENT '创建者id : 创建者id',
-//            `updator_name` varchar(32) DEFAULT NULL COMMENT '最后修改者姓名 : 最后修改者姓名',
-//            `updator_id` bigint(20) DEFAULT NULL COMMENT '更新者id : 更新者id',
-//            `server_create_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '服务器创建时间 : 服务器创建时间',
-//            `server_update_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '服务器更新时间',
-//            `curr_remain_total` bigint(20) DEFAULT NULL COMMENT '当前可销售数量，NULL代表没有限制',
-//            `is_change_price` tinyint(4) DEFAULT '2' COMMENT '是否允许变价: 1 允许 2不允许',
-//    PRIMARY KEY (`id`),
-//    UNIQUE KEY `uuid` (`uuid`),
-//    KEY `idx_shop_identy_server_update_time` (`shop_identy`,`server_update_time`),
-//    KEY `idx_brand_dish_id` (`brand_dish_id`),
-//    KEY `idx_brand_identy` (`brand_identy`),
-//    KEY `idx_server_update_time` (`server_update_time`),
-//    KEY `idx_shop_identy_dish_code` (`shop_identy`,`dish_code`(5)),
-//    KEY `idx_product_id` (`product_id`)
-//            ) ENGINE=InnoDB AUTO_INCREMENT=116584307522459649 DEFAULT CHARSET=utf8 COMMENT='门店菜品'
 
-    /**
-     * The columns of table "dish_shop"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * alias_name
-         */
+
         public static final String aliasName = "alias_name";
 
-        /**
-         * barcode
-         */
+
         public static final String barcode = "barcode";
 
-        /**
-         * brand_dish_id
-         */
+
         public static final String brandDishId = "brand_dish_id";
 
-        /**
-         * brand_dish_uuid
-         */
+
         public static final String brandDishUuid = "brand_dish_uuid";
 
-        /**
-         * clear_status
-         */
+
         public static final String clearStatus = "clear_status";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * dish_code
-         */
+
         public static final String dishCode = "dish_code";
 
-        /**
-         * dish_desc
-         */
+
         public static final String dishDesc = "dish_desc";
 
-        /**
-         * dish_increase_unit
-         */
+
         public static final String dishIncreaseUnit = "dish_increase_unit";
 
-        /**
-         * dish_name_index
-         */
+
         public static final String dishNameIndex = "dish_name_index";
 
-        /**
-         * dish_type_id
-         */
+
         public static final String dishTypeId = "dish_type_id";
 
-        /**
-         * enabled_flag
-         */
+
         public static final String enabledFlag = "enabled_flag";
 
-        /**
-         * has_standard
-         */
+
         public static final String hasStandard = "has_standard";
 
-        /**
-         * is_change_price
-         */
+
         public static final String isChangePrice = "is_change_price";
 
-        /**
-         * is_discount_all
-         */
+
         public static final String isDiscountAll = "is_discount_all";
 
-        /**
-         * is_send_outside
-         */
+
         public static final String isSendOutside = "is_send_outside";
 
-        /**
-         * is_single
-         */
+
         public static final String isSingle = "is_single";
 
-        /**
-         * market_price
-         */
+
         public static final String marketPrice = "market_price";
 
-        /**
-         * max_num
-         */
+
         public static final String maxNum = "max_num";
 
-        /**
-         * min_num
-         */
+
         public static final String minNum = "min_num";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * residue_total
-         */
+
         public static final String residueTotal = "residue_total";
 
-        /**
-         * residue_total_wechat
-         */
+
         public static final String residueTotalWechat = "residue_total_wechat";
 
-        /**
-         * sale_total
-         */
+
         public static final String saleTotal = "sale_total";
 
-        /**
-         * sale_total_wechat
-         */
+
         public static final String saleTotalWechat = "sale_total_wechat";
 
-        /**
-         * sale_type
-         */
+
         public static final String saleType = "sale_type";
 
-        /**
-         * scene
-         */
+
         public static final String scene = "scene";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * sku_key
-         */
+
         public static final String skuKey = "sku_key";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * step_num
-         */
+
         public static final String stepNum = "step_num";
 
-        /**
-         * type
-         */
+
         public static final String type = "type";
 
-        /**
-         * unit_id
-         */
+
         public static final String unitId = "unit_id";
 
-        /**
-         * unvalid_time
-         */
+
         public static final String unvalidTime = "unvalid_time";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * uuid
-         */
+
         public static final String uuid = "uuid";
 
-        /**
-         * valid_time
-         */
+
         public static final String validTime = "valid_time";
 
-        /**
-         * video_url
-         */
+
         public static final String videoUrl = "video_url";
 
-        /**
-         * wm_type
-         */
+
         public static final String wmType = "wm_type";
 
-        /**
-         * short_name
-         */
+
         public static final String shortName = "short_name";
 
-        /**
-         * alias_short_name
-         */
+
         public static final String aliasShortName = "alias_short_name";
 
-        /**
-         * dish_qty
-         */
+
         public static final String dishQty = "dish_qty";
 
-        /**
-         * box_qty
-         */
+
         public static final String boxQty = "box_qty";
 
-        /**
-         * weight
-         */
+
         public static final String weight = "weight";
 
-        /**
-         * 单位
-         */
+
         public static final String unitName = "unit_name";
     }
 
@@ -829,12 +664,7 @@ public class DishShop extends BasicEntityBase implements ICreator, IUpdator {
         this.unitName = unitName;
     }
 
-    /**
-     * 是否是临时菜
-     *
-     * @param tempDishCode
-     * @return
-     */
+
     public boolean isTempDish(String tempDishCode) {
         if (this.dishCode != null && tempDishCode.equalsIgnoreCase(dishCode)) {
             return true;
@@ -842,11 +672,7 @@ public class DishShop extends BasicEntityBase implements ICreator, IUpdator {
         return false;
     }
 
-    /**
-     * 是否是套餐
-     *
-     * @return
-     */
+
     public boolean isCombo() {
         return getType() == DishType.COMBO;
     }

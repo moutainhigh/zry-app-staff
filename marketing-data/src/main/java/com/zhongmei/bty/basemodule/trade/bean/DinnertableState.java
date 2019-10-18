@@ -5,10 +5,7 @@ import com.zhongmei.yunfu.db.enums.TableStatus;
 
 import java.io.Serializable;
 
-/**
- * @version: 1.0
- * @date 2015年9月25日
- */
+
 public class DinnertableState implements Serializable {
 
     private Long id;

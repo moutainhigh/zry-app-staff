@@ -9,66 +9,40 @@ import com.zhongmei.yunfu.db.UuidEntityBase;
 import com.zhongmei.bty.commonmodule.database.enums.PosBusinessType;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * Model class of 银联刷卡记录.
- *
- * @version $Id$
- */
+
 @DatabaseTable(tableName = "payment_item_unionpay")
 public class PaymentItemUnionpay extends UuidEntityBase implements ICreator {
 
-    /**
-     * serialVersionUID.
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "payment_item_unionpay"
-     */
+
     public interface $ extends UuidEntityBase.$ {
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * shop_identy
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * device_identy
-         */
+
         String deviceIdenty = "device_identy";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
         public static final String paymentItemId = "payment_item_id";
@@ -85,7 +59,6 @@ public class PaymentItemUnionpay extends UuidEntityBase implements ICreator {
 
         public static final String batchNumber = "batch_number";
 
-        //public static final String terminalNumber = "terminal_number";
 
         public static final String posChannelId = "pos_channel_id";
 
@@ -97,121 +70,83 @@ public class PaymentItemUnionpay extends UuidEntityBase implements ICreator {
 
     }
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 
-    /**
-     * 门店Identy
-     */
+
     @DatabaseField(columnName = "shop_identy", canBeNull = false)
     private Long shopIdenty;
 
-    /**
-     * 设备Identy
-     */
+
     @DatabaseField(columnName = "device_identy")
     private String deviceIdenty;
 
     @DatabaseField(columnName = "id")
     private Long id;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 
     @DatabaseField(columnName = "payment_item_id")
     private Long paymentItemId;
 
-    /**
-     * 支付明细uuid.
-     */
+
     @DatabaseField(columnName = "payment_item_uuid")
     private String paymentItemUuid;
 
-    /**
-     * 交易日期.
-     */
+
     @DatabaseField(columnName = "trans_date")
     private Long transDate;
 
-    /**
-     * 交易类型.
-     */
+
     @DatabaseField(columnName = "trans_type")
     private Integer transType;
 
-    /**
-     * 金额.
-     */
+
     @DatabaseField(columnName = "amount")
     private Long amount;
 
-    /**
-     * 费率.
-     */
+
     @DatabaseField(columnName = "rates")
     private Double rates;
 
-    /**
-     * 手续费.
-     */
+
     @DatabaseField(columnName = "fee")
     private Double fee;
 
-    /**
-     * 系统参考号.
-     */
+
     @DatabaseField(columnName = "host_serial_number")
     private String hostSerialNumber;
 
-    /**
-     * 流水号.
-     */
+
     @DatabaseField(columnName = "pos_trace_number")
     private String posTraceNumber;
 
-    /**
-     * 批次号.
-     */
+
     @DatabaseField(columnName = "batch_number")
     private String batchNumber;
 
-    /** 终端号. *//*
-	@DatabaseField(columnName = "terminal_number")
-	private String terminalNumber;*/
 
-    /**
-     * pos渠道id.
-     */
+
+
     @DatabaseField(columnName = "pos_channel_id")
     private Long posChannelId;
 
-    /**
-     * 银行卡id.
-     */
+
     @DatabaseField(columnName = "payment_card_id")
     private Long paymentCardId;
 
-    /**
-     * 刷卡pos设备id.
-     */
+
     @DatabaseField(columnName = "payment_device_id")
     private Long paymentDeviceId;
 
@@ -221,9 +156,7 @@ public class PaymentItemUnionpay extends UuidEntityBase implements ICreator {
     @DatabaseField(columnName = "creator_name")
     private String creatorName;
 
-    /**
-     * 刷卡pos设备id.
-     */
+
     @DatabaseField(columnName = "appname")
     private String appname;
 
@@ -283,38 +216,22 @@ public class PaymentItemUnionpay extends UuidEntityBase implements ICreator {
         this.serverUpdateTime = serverUpdateTime;
     }
 
-    /**
-     * Set the 支付明细uuid.
-     *
-     * @param paymentItemUuid 支付明细uuid
-     */
+
     public void setPaymentItemUuid(String paymentItemUuid) {
         this.paymentItemUuid = paymentItemUuid;
     }
 
-    /**
-     * Get the 支付明细uuid.
-     *
-     * @return 支付明细uuid
-     */
+
     public String getPaymentItemUuid() {
         return this.paymentItemUuid;
     }
 
-    /**
-     * Set the 金额.
-     *
-     * @param amount 金额
-     */
+
     public void setAmount(Long amount) {
         this.amount = amount;
     }
 
-    /**
-     * Get the 金额.
-     *
-     * @return 金额
-     */
+
     public Long getAmount() {
         return this.amount;
     }
@@ -431,13 +348,7 @@ public class PaymentItemUnionpay extends UuidEntityBase implements ICreator {
         this.batchNumber = batchNumber;
     }
 	
-	/*public String getTerminalNumber() {
-		return terminalNumber;
-	}
-	
-	public void setTerminalNumber(String terminalNumber) {
-		this.terminalNumber = terminalNumber;
-	}*/
+
 
     @Override
     public Long verValue() {

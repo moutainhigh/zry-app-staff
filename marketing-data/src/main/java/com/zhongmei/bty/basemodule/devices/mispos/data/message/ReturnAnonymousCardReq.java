@@ -2,15 +2,10 @@ package com.zhongmei.bty.basemodule.devices.mispos.data.message;
 
 import com.zhongmei.bty.basemodule.trade.message.TradePaymentReq;
 
-/**
- * @Date： 2016/6/30
- * @Description:匿名卡退卡请求对象
- * @Version: 1.0
- */
+
 public class ReturnAnonymousCardReq {
 
-    private TradePaymentReq refundContent;//部分退时传入的订单和收银记录
-
+    private TradePaymentReq refundContent;
     private Long creatorId;
 
     private String creatorName;

@@ -2,35 +2,22 @@ package com.zhongmei.bty.basemodule.discount.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 营销方式
- *
- * @date:2016年4月27日下午3:14:14
- */
+
 public enum ActivityType implements ValueEnum<Integer> {
-    //	单商品活动
-    SINGLE(1),
-    //	多商品活动
-    MULTI(2),
-    ALL(-100),//所有活动类型，只用于本地查询使用
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+        SINGLE(1),
+        MULTI(2),
+    ALL(-100),
     @Deprecated
     __UNKNOWN__;
 
     private final Helper<Integer> helper;
 
     private ActivityType(Integer value) {
-        // TODO Auto-generated constructor stub
-        helper = Helper.valueHelper(value);
+                helper = Helper.valueHelper(value);
     }
 
     private ActivityType() {
-        // TODO Auto-generated constructor stub
-        helper = Helper.unknownHelper();
+                helper = Helper.unknownHelper();
     }
 
     @Override

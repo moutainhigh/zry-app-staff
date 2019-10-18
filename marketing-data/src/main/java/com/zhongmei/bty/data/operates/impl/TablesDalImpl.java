@@ -57,10 +57,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-/**
- * @version: 1.0
- * @date 2015年7月27日
- */
+
 @SuppressLint("UseSparseArrays")
 public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
 
@@ -137,22 +134,19 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
     public List<Tables> listAllPhysicalLayoutTables() throws SQLException {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            //查询已发布的有效物理布局
-            Dao<TablePhysicalLayout, Long> tplDao = helper.getDao(TablePhysicalLayout.class);
+                        Dao<TablePhysicalLayout, Long> tplDao = helper.getDao(TablePhysicalLayout.class);
             QueryBuilder<TablePhysicalLayout, Long> tplQb = tplDao.queryBuilder().selectColumns(TablePhysicalLayout.$.id);
             Where<TablePhysicalLayout, Long> tplWhere = tplQb.where();
             tplWhere.and(tplWhere.eq(TablePhysicalLayout.$.layoutType, LayoutType.AREA),
                     tplWhere.eq(TablePhysicalLayout.$.publishStatus, 2),
                     tplWhere.eq(TablePhysicalLayout.$.isDelete, IsDelete.VALID));
-            //查询已发布的有效物理布局下的桌台位置
-            Dao<TablePosition, Long> tpDao = helper.getDao(TablePosition.class);
+                        Dao<TablePosition, Long> tpDao = helper.getDao(TablePosition.class);
             QueryBuilder<TablePosition, Long> tpQb = tpDao.queryBuilder().selectColumns(TablePosition.$.tableId);
             Where<TablePosition, Long> tpWhere = tpQb.where();
             tpWhere.and(tpWhere.eq(TablePosition.$.layoutType, LayoutType.AREA),
                     tpWhere.eq(TablePosition.$.isDelete, IsDelete.VALID),
                     tpWhere.in(TablePosition.$.layoutId, tplQb));
-            //查询桌台位置对应的桌台
-            Dao<Tables, Long> tableDao = helper.getDao(Tables.class);
+                        Dao<Tables, Long> tableDao = helper.getDao(Tables.class);
             Where<Tables, Long> tableWhere = tableDao.queryBuilder().orderBy(Tables.$.sort, true).where();
             return tableWhere.and(tableWhere.eq(Tables.$.statusFlag, Status.VALID),
                     tableWhere.ne(Tables.$.tableStatus, TableStatus.LOCKING),
@@ -248,52 +242,15 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
 
             Map<Long, Tables> tablesFinder = new HashMap<Long, Tables>();
             List<Long> tablseIds = new ArrayList<Long>();
-//			List<Tables> tablesList = helper.getDao(Tables.class).queryForEq(Tables.$.statusFlag, StatusFlag.VALID);
             List<Tables> tablesList = helper.getDao(Tables.class).queryBuilder().orderBy(Tables.$.id, true).where().eq(Tables.$.statusFlag, StatusFlag.VALID).query();
-//			for (Tables tables : tablesList) {
-//				tablesFinder.put(tables.getId(), tables);
-//				tablseIds.add(tables.getId());
-//			}
 
             Map<Long, DinnertableWrapper> wrapperFinder = new LinkedHashMap<Long, DinnertableWrapper>();
-//
-//			Dao<TablePhysicalLayout, Long> layoutDao = helper.getDao(TablePhysicalLayout.class);
-//			QueryBuilder<TablePhysicalLayout, Long> subQb = layoutDao.queryBuilder();
-//			subQb.selectColumns(TablePhysicalLayout.$.id)
-//					.where()
-//					.eq(TablePhysicalLayout.$.layoutType, LayoutType.AREA)
-//					.and()
-//					.eq(TablePhysicalLayout.$.publishStatus, 2);
-//			Dao<TablePosition, Long> tpDao = helper.getDao(TablePosition.class);
-//			List<TablePosition> tpList = tpDao.queryBuilder().where().in(TablePosition.$.layoutId, subQb).query();
 
 
-//			Map<Long,List<TableSeat>> mapTableSeat=new HashMap<Long,List<TableSeat>>();
 
-//			if(Utils.isNotEmpty(tablseIds)){
-//				Dao<TableSeat,Long> seatDao=helper.getDao(TableSeat.class);
-//				QueryBuilder<TableSeat,Long> seatQueryBuild = seatDao.queryBuilder();
-//				seatQueryBuild.selectColumns(TableSeat.$.id,TableSeat.$.tableId,TableSeat.$.seatName)
-//						.where()
-//						.in(TableSeat.$.tableId, tablseIds)
-//						.and()
-//						.eq(TableSeat.$.statusFlag, StatusFlag.VALID);
-//				List<TableSeat> tableSeats=seatQueryBuild.query();
-//
-//				if(Utils.isNotEmpty(tableSeats)){
-//					for (TableSeat tableSeat : tableSeats) {
-//						if(!mapTableSeat.containsKey(tableSeat.getTableId())){
-//							mapTableSeat.put(tableSeat.getTableId(),new ArrayList<TableSeat>());
-//						}
-//
-//						mapTableSeat.get(tableSeat.getTableId()).add(tableSeat);
-//					}
-//				}
-//			}
 
 
             for (Tables tables : tablesList) {
-//				Tables tables = tablesFinder.get(tp.getTableId());
                 if (tables == null) {
                     continue;
                 }
@@ -301,29 +258,12 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
                 if (area == null) {
                     continue;
                 }
-//				if (tp.getxAxis() == null || tp.getyAxis() == null) {
-//					continue;
-//				}
                 DinnertableWrapper wrapper = new DinnertableWrapper();
                 wrapper.setId(tables.getId());
-                wrapper.setUuid(tables.getUuid());//
-                wrapper.setName(tables.getTableName());
+                wrapper.setUuid(tables.getUuid());                wrapper.setName(tables.getTableName());
                 wrapper.setTableStatus(tables.getTableStatus());
                 wrapper.setServerUpdateTime(tables.verValue());
                 wrapper.setNumberOfSeats(tables.getTablePersonCount());
-//				wrapper.setX(tp.getxAxis());
-//				wrapper.setY(tp.getyAxis());
-//				wrapper.setTableSeats(mapTableSeat.get(tables.getId()));
-//				if (tp.getWidth() == null) {
-//					wrapper.setWidth(DinnertableWrapper.MIN_WIDTH);
-//				} else {
-//					wrapper.setWidth(Math.max(DinnertableWrapper.MIN_WIDTH, tp.getWidth()));
-//				}
-//				if (tp.getHeight() == null) {
-//					wrapper.setHeight(DinnertableWrapper.MIN_HEIGHT);
-//				} else {
-//					wrapper.setHeight(Math.max(DinnertableWrapper.MIN_HEIGHT, tp.getHeight()));
-//				}
                 wrapper.setZoneId(area.getId());
                 wrapper.setZoneCode(area.getAreaCode());
                 wrapper.setZoneName(area.getAreaName());
@@ -338,28 +278,10 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
 
     @Override
     public void clearDinnertable(IDinnertable dinnertable, ResponseListener<ClearDinnertableResp> listener) {
-        /*String url = ServerAddressUtil.getInstance().clearDinnertable();
-        ClearDinnertableReq req = new ClearDinnertableReq();
-        req.setTableId(dinnertable.getId());
-        req.setServerUpdateTime(dinnertable.getServerUpdateTime());
-        AuthUser user = Session.getAuthUser();
-        if (user != null) {
-            req.setUpdatorId(user.getId());
-            req.setUpdatorName(user.getName());
-        }
-        OpsRequest.Executor<ClearDinnertableReq, ClearDinnertableResp> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(req)
-                .responseClass(ClearDinnertableResp.class)
-                .responseProcessor(new TablesRespProcessor())
-                .execute(listener, "clearDinnertable");*/
+
     }
 
-    /**
-     * 将TradeResp保存到数据库的处理器
-     *
-     * @version: 1.0
-     * @date 2015年4月15日
-     */
+
     private static class TablesRespProcessor extends SaveDatabaseResponseProcessor<ClearDinnertableResp> {
 
         @Override
@@ -461,8 +383,7 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
     public int countTotalPersonCount(Long tabelId) throws Exception {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 查三天之内的单据
-            Calendar cad = Calendar.getInstance();
+                        Calendar cad = Calendar.getInstance();
             cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             cad.add(Calendar.DAY_OF_MONTH, -3);
             Dao<TradeTable, Long> tradeTableDao = helper.getDao(TradeTable.class);
@@ -512,17 +433,14 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
 
         if (table != null) {
             dinnerTable.setTableId(tableId);
-            // 桌台桌位数
-            dinnerTable.setTableSeatCount(table.getTablePersonCount());
-            // 桌台区域名称
-            CommercialArea area = findAreaById(table.getAreaId());
+                        dinnerTable.setTableSeatCount(table.getTablePersonCount());
+                        CommercialArea area = findAreaById(table.getAreaId());
             dinnerTable.setTableZoneName(area.getAreaName());
         } else {
             dinnerTable.setTableSeatCount(0);
             dinnerTable.setTableZoneName("");
         }
-        // 桌台就餐总人数
-        dinnerTable.setTableMealCount(tableId == null ? 0 : countTotalPersonCount(tableId));
+                dinnerTable.setTableMealCount(tableId == null ? 0 : countTotalPersonCount(tableId));
         return dinnerTable;
     }
 
@@ -545,13 +463,11 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
     public List<Trade> findTradesInTable(TradeTable tradeTable) throws SQLException {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 查询table上的三天内的trade数
-            Calendar cad = Calendar.getInstance();
+                        Calendar cad = Calendar.getInstance();
             cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             cad.add(Calendar.DAY_OF_MONTH, -3);
             Dao<TradeTable, String> tradeTableDao = helper.getDao(TradeTable.class);
-            //查询桌子上所有的tradeTable
-            QueryBuilder<TradeTable, String> tradeTableQb = tradeTableDao.queryBuilder();
+                        QueryBuilder<TradeTable, String> tradeTableQb = tradeTableDao.queryBuilder();
             tradeTableQb.selectColumns(TradeTable.$.tradeId).where()
                     .eq(TradeTable.$.tableId, tradeTable.getTableId())
                     .and().eq(TradeTable.$.statusFlag, StatusFlag.VALID);
@@ -616,8 +532,7 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
                     tableTardeVo.setCommercialArea(areaFinder.get(table.getAreaId()).getCommercialArea());
                 }
 
-                if (table.getTableStatus() == TableStatus.OCCUPIED && haveLimitServiceTime) {//有设置就餐时长并且桌台状为就餐中才查询订单
-                    TradeTable tradeTable = helper.getDao(TradeTable.class)
+                if (table.getTableStatus() == TableStatus.OCCUPIED && haveLimitServiceTime) {                    TradeTable tradeTable = helper.getDao(TradeTable.class)
                             .queryBuilder()
                             .orderBy(TradeTable.$.id, false)
                             .orderBy(TradeTable.$.serverUpdateTime, false)
@@ -638,8 +553,7 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
                         tableTardeVo.setTrade(trade);
 
                         if (trade != null) {
-                            // 交易扩展
-                            TradeExtra tradeExtra =
+                                                        TradeExtra tradeExtra =
                                     helper.getDao(TradeExtra.class)
                                             .queryBuilder()
                                             .where()
@@ -647,12 +561,10 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
                                             .queryForFirst();
                             tableTardeVo.setTradeExtra(tradeExtra);
 
-                            // 就餐时长
-                            if (trade.getUuid() != null) {
+                                                        if (trade.getUuid() != null) {
                                 List<TradeStatusLog> tradeStatusLogList = new ArrayList<TradeStatusLog>();
 
-                                //开始时间(TradeStatus = 4  && tradePayStatus = 3 order by serverCreateTime )的第一条数据表示开始时间
-                                TradeStatusLog startTradeStatusLog = helper.getDao(TradeStatusLog.class)
+                                                                TradeStatusLog startTradeStatusLog = helper.getDao(TradeStatusLog.class)
                                         .queryBuilder()
                                         .orderBy(TradeStatusLog.$.serverCreateTime, true)
                                         .where()
@@ -666,8 +578,7 @@ public class TablesDalImpl extends AbstractOpeartesImpl implements TablesDal {
                                     tradeStatusLogList.add(startTradeStatusLog);
                                 }
 
-                                //结束时间(tradeStatus -1表示就餐结束，方案很不好，求后面优化)
-                                TradeStatusLog endTradeStatusLog = helper.getDao(TradeStatusLog.class)
+                                                                TradeStatusLog endTradeStatusLog = helper.getDao(TradeStatusLog.class)
                                         .queryBuilder()
                                         .where()
                                         .eq(TradeStatusLog.$.tradeUuid, trade.getUuid())

@@ -34,9 +34,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class SalesPromotionChoosePurchaseGoodsFragment extends BasicDialogFragment implements View.OnClickListener {
 
     private static String SALE_PROMOTION_RULE_VO = "salesPromotionRuleVo";
@@ -213,9 +211,7 @@ public class SalesPromotionChoosePurchaseGoodsFragment extends BasicDialogFragme
             return dishVos.size();
         }
 
-        /**
-         * "￥######.00"格式 将金额格式化
-         */
+
         public static String formatPrice(double value) {
             try {
                 DecimalFormat df = new DecimalFormat("0.00");
@@ -229,7 +225,6 @@ public class SalesPromotionChoosePurchaseGoodsFragment extends BasicDialogFragme
                 }
             } catch (Exception e) {
 
-//                Log.e(TAG,"",e);
 
                 return value + "";
             }

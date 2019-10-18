@@ -2,26 +2,15 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * @version: 1.0
- * @date 2015年7月10日
- */
+
 public enum Bool implements ValueEnum<Integer> {
 
-    /**
-     * 是
-     */
+
     YES(1),
-    /**
-     * 否
-     */
+
     NO(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

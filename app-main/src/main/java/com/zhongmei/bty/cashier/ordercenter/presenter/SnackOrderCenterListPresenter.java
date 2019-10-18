@@ -57,9 +57,7 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 订单中心订单列表快餐Presenter
- */
+
 
 public class SnackOrderCenterListPresenter extends OrderCenterListPresenter {
 
@@ -234,10 +232,8 @@ public class SnackOrderCenterListPresenter extends OrderCenterListPresenter {
         filterData.addItem(new android.util.Pair<String, ValueEnum>(SourceId.OPEN_PLATFORM.desc(), SourceId.OPEN_PLATFORM));
         filterDatas.add(filterData);
 
-        if (!mView.isInSquareAccountMode()) {//非清账模式下才展示筛选
-            filterData = new FilterData(getString(R.string.delivery_status));
-            //filterData.addItem(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_detail_waiting_create), DeliveryOrderStatus.WAITING_CREATE));
-            filterData.addItem(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_detail_waiting_accept), DeliveryOrderStatus.WAITING_ACCEPT));
+        if (!mView.isInSquareAccountMode()) {            filterData = new FilterData(getString(R.string.delivery_status));
+                        filterData.addItem(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_detail_waiting_accept), DeliveryOrderStatus.WAITING_ACCEPT));
             filterData.addItem(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_detail_waiting_pick_up), DeliveryOrderStatus.WAITING_PICK_UP));
             filterData.addItem(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_detail_deliverying), DeliveryOrderStatus.DELIVERYING));
             filterData.addItem(new android.util.Pair<String, ValueEnum>(getString(R.string.order_center_detail_real_delivery), DeliveryOrderStatus.REAL_DELIVERY));
@@ -278,9 +274,7 @@ public class SnackOrderCenterListPresenter extends OrderCenterListPresenter {
             protected List<PartnerShopBiz> doInBackground(List<TradeVo>[] tradeVos) {
                 try {
                     SystemSettingDal systemSettingDal = OperatesFactory.create(SystemSettingDal.class);
-                    //查询商户开通的外卖配送平台
-                    List<PartnerShopBiz> deliveryPlatformPartnerShopBizs = systemSettingDal.queryPartnerShopBiz(3, true);//业务类型（1-外卖，2-点餐，3-配送，4-发票
-                    Map<Integer, PartnerShopBiz> deliveryPlatformPartnerShopBizMap = new HashMap<>();
+                                        List<PartnerShopBiz> deliveryPlatformPartnerShopBizs = systemSettingDal.queryPartnerShopBiz(3, true);                    Map<Integer, PartnerShopBiz> deliveryPlatformPartnerShopBizMap = new HashMap<>();
                     if (Utils.isNotEmpty(deliveryPlatformPartnerShopBizs)) {
                         for (PartnerShopBiz partnerShopBiz : deliveryPlatformPartnerShopBizs) {
                             deliveryPlatformPartnerShopBizMap.put(partnerShopBiz.getSource(), partnerShopBiz);
@@ -288,12 +282,10 @@ public class SnackOrderCenterListPresenter extends OrderCenterListPresenter {
                     }
                     for (TradeVo tradeVo : tradeVos[0]) {
                         Trade trade = tradeVo.getTrade();
-                        //饿了么众包只能派送饿了么订单
-                        if (trade.getSource() != SourceId.ELEME) {
+                                                if (trade.getSource() != SourceId.ELEME) {
                             deliveryPlatformPartnerShopBizMap.remove(DeliveryPlatform.ELEME_ZHONGBAO.value());
                         }
-                        //美团众包只能派送美团订单
-                        if (trade.getSource() != SourceId.MEITUAN_TAKEOUT) {
+                                                if (trade.getSource() != SourceId.MEITUAN_TAKEOUT) {
                             deliveryPlatformPartnerShopBizMap.remove(DeliveryPlatform.MEITUAN_ZHONGBAO.value());
                         }
                     }
@@ -358,8 +350,7 @@ public class SnackOrderCenterListPresenter extends OrderCenterListPresenter {
             @Override
             public void onResponse(final ResponseObject<GatewayTransferResp<DeliveryOrderDispatchResp>> response) {
                 if (ResponseObject.isOk(response)) {
-                    if (response.getContent().isOk()) {//成功或部分成功部分失败的场景
-                        List<DeliveryOrderDispatchResp.FailOrder> failOrders = response.getContent().getResult().getFailOrders();
+                    if (response.getContent().isOk()) {                        List<DeliveryOrderDispatchResp.FailOrder> failOrders = response.getContent().getResult().getFailOrders();
                         if (Utils.isNotEmpty(failOrders)) {
                             mView.showDispatchFailOrderListAlert(OrderCenterBeanConverter.listDispatchFailOrder(tradeVos, failOrders));
                         } else {
@@ -382,8 +373,7 @@ public class SnackOrderCenterListPresenter extends OrderCenterListPresenter {
                                 mView.showToast(error.getMessage());
                             }
                         }, mView.getViewFragmentManager()));
-                    } else if (response.getContent().getCode() == 2000) {//全部失败的场景
-                        List<DeliveryOrderDispatchResp.FailOrder> failOrders = response.getContent().getResult().getFailOrders();
+                    } else if (response.getContent().getCode() == 2000) {                        List<DeliveryOrderDispatchResp.FailOrder> failOrders = response.getContent().getResult().getFailOrders();
                         mView.showDispatchFailOrderListAlert(OrderCenterBeanConverter.listDispatchFailOrder(tradeVos, failOrders));
                     } else {
                         mView.showToast(response.getContent().getMessage());

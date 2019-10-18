@@ -6,30 +6,10 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.ConditionType;
 
-/**
- * @Date：2016-4-21 下午4:04:42
- * @Description:
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @DatabaseTable(tableName = "market_dynamic_condition")
 public class MarketDynamicCondition extends IdEntityBase {
-    /*
-     * `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT
-     * '信息ID', `plan_id` bigint(20) DEFAULT NULL COMMENT
-     * '方案ID', `condition_type` tinyint(4) DEFAULT NULL
-     * COMMENT '条件类型(1:首次消费门店, 2:客户类别, 3:客户分组, 4:自助预订来源,
-     * 5:参与门店)', `condition_value` int(11) DEFAULT NULL
-     * COMMENT '值', `creator_id` bigint(20) DEFAULT NULL
-     * COMMENT '创建人', `create_time` timestamp NOT NULL
-     * DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-     * `updater_id` bigint(20) DEFAULT NULL COMMENT '修改人',
-     * `update_time` timestamp NOT NULL DEFAULT
-     * CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT
-     * '修改时间', `is_delete` tinyint(4) DEFAULT NULL COMMENT
-     * '是否删除(0 否; -1 是)',
-     */
+
 
     private static final long serialVersionUID = 1L;
 

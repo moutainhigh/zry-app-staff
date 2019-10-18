@@ -12,9 +12,7 @@ import com.zhongmei.bty.basemodule.commonbusiness.enums.ReasonType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @since 2018.06.09.
- */
+
 public class KouBeiReasonManage {
 
     public static KouBeiReasonManage newInstance() {

@@ -41,8 +41,7 @@ public class RefuseDialog extends Dialog {
     }
 
     private void init() {
-        // TODO Auto-generated method stub
-        back = (ImageButton) findViewById(R.id.close);
+                back = (ImageButton) findViewById(R.id.close);
         sure = (Button) findViewById(R.id.sure);
         refuse_result5 = (RadioButton) findViewById(R.id.refuse_result5);
         refuse_result1 = (RadioButton) findViewById(R.id.refuse_result1);
@@ -55,8 +54,7 @@ public class RefuseDialog extends Dialog {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                RefuseDialog.this.dismiss();
+                                RefuseDialog.this.dismiss();
             }
 
         });
@@ -64,8 +62,7 @@ public class RefuseDialog extends Dialog {
 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                // TODO Auto-generated method stub
-                if (refuse_result5.isChecked() && refuse_result.getCheckedRadioButtonId() != -1) {
+                                if (refuse_result5.isChecked() && refuse_result.getCheckedRadioButtonId() != -1) {
                     refuse_result5.setChecked(false);
                     et.clearFocus();
                 }
@@ -76,8 +73,7 @@ public class RefuseDialog extends Dialog {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                // TODO Auto-generated method stub
-                if (hasFocus) {
+                                if (hasFocus) {
                     if (refuse_result.getCheckedRadioButtonId() != -1) {
                         refuse_result.check(-1);
                     }
@@ -97,7 +93,6 @@ public class RefuseDialog extends Dialog {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
 
                 if (lisetner != null) {
 

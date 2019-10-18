@@ -60,19 +60,13 @@ public class SpinerPopWindow extends PopupWindow implements OnItemClickListener 
             int totalHeight = 0;
             if (mAdapter.getCount() > 0 && mAdapter.getCount() < 5) {
                 View listItem = mAdapter.getView(0, null, mListView);
-                listItem.measure(0, 0); // 计算子项View 的宽高
-                totalHeight = listItem.getMeasuredHeight() * mAdapter.getCount(); // 统计所有子项的总高度
-            } else {
+                listItem.measure(0, 0);                 totalHeight = listItem.getMeasuredHeight() * mAdapter.getCount();             } else {
                 View listItem = mAdapter.getView(0, null, mListView);
-                listItem.measure(0, 0); // 计算子项View 的宽高
-                totalHeight = listItem.getMeasuredHeight() * 5;
+                listItem.measure(0, 0);                 totalHeight = listItem.getMeasuredHeight() * 5;
             }
             ViewGroup.LayoutParams params = mListView.getLayoutParams();
             params.height = totalHeight;
-//					+ (mListView.getDividerHeight() * (mAdapter.getCount() - 1));
-            // listView.getDividerHeight()获取子项间分隔符占用的高度
-            // params.height最后得到整个ListView完整显示需要的高度
-            mListView.setLayoutParams(params);
+                                    mListView.setLayoutParams(params);
         }
     }
 

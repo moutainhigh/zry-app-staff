@@ -30,9 +30,7 @@ import org.androidannotations.annotations.ViewById;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 喜好/备注/分组
- */
+
 @EFragment(R.layout.dinner_customer_memo)
 public class DinnerRemarkFragment extends BasicFragment {
 
@@ -78,8 +76,7 @@ public class DinnerRemarkFragment extends BasicFragment {
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
+                super.onDestroy();
     }
 
     private void queryCustomerById(Long customerId) {
@@ -120,9 +117,7 @@ public class DinnerRemarkFragment extends BasicFragment {
     }
 
 
-    /**
-     * 根据groupId 获取GroupName
-     */
+
     private String getGroupName(Long groupId) {
         try {
             CustomerDal customerDal = OperatesFactory.create(CustomerDal.class);

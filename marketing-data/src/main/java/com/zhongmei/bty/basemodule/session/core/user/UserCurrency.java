@@ -7,9 +7,7 @@ import com.zhongmei.bty.basemodule.erp.operates.ErpCommercialRelationDal;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.yunfu.context.data.ICurrency;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class UserCurrency implements ICurrency {
 

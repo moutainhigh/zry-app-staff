@@ -7,18 +7,14 @@ import com.zhongmei.beauty.entity.BookingTradeItemUser;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BookingTradeItemVo implements Serializable {
 
     private BookingTradeItem tradeItem;
 
     private List<BookingTradeItemProperty> tradeItemPropertyList;
-    /**
-     * 美业技师
-     */
+
     private List<BookingTradeItemUser> bookingTradeItemUsers;
 
     public BookingTradeItem getTradeItem() {

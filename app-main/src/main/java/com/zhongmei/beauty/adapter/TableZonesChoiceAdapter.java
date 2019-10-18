@@ -14,9 +14,7 @@ import com.zhongmei.bty.dinner.table.model.ZoneModel;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TableZonesChoiceAdapter extends BaseAdapter {
 

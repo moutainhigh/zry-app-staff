@@ -49,23 +49,15 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_customer_coupon_list_dialog)
 public class BeautyCouponListFragment extends BasicFragment implements CouponsLayoutView.CouponSelectedCallback {
 
-    /**
-     * 普通
-     */
+
     public final static int LAUNCHMODE_NORMAL = 0;
-    /**
-     * 优惠券
-     */
+
     public final static int LAUNCHMODE_PRIVLIGES = 1;
-    /**
-     * 顾客
-     */
+
     public final static int LAUNCHMODE_CUSTOMER = 2;
 
     public final static String KEY_LAUNCH_MODE = "launchMode";
@@ -81,8 +73,6 @@ public class BeautyCouponListFragment extends BasicFragment implements CouponsLa
     @ViewById(R.id.btn_cancel)
     protected Button mBtnCancel;
 
-//    @ViewById(R.id.btn_cancel_space)
-//    protected View mVwCancelSpace;
 
     @ViewById(R.id.tvTitle_CouponList)
     protected TextView mTvTitle;
@@ -114,18 +104,12 @@ public class BeautyCouponListFragment extends BasicFragment implements CouponsLa
 
     private List<CouponVo> discountList;
 
-    private List<CouponVo> rebateList;// 满减券
-
-    private List<CouponVo> giftList;// 礼品券
-
-    private CouponsLayoutView cashView;// 代金券
-
-    private CouponsLayoutView discountView;// 折扣券
-
-    private CouponsLayoutView rebateView;// 满减券
-
-    private CouponsLayoutView giftView;// 礼品券
-
+    private List<CouponVo> rebateList;
+    private List<CouponVo> giftList;
+    private CouponsLayoutView cashView;
+    private CouponsLayoutView discountView;
+    private CouponsLayoutView rebateView;
+    private CouponsLayoutView giftView;
     private Context context;
 
     public CustomerArrivalShop customer;
@@ -182,12 +166,7 @@ public class BeautyCouponListFragment extends BasicFragment implements CouponsLa
         getDate();
     }
 
-    /**
-     * 获取bundle
-     *
-     * @param launchMode
-     * @return
-     */
+
     public Bundle createArguments(int launchMode, CustomerResp customer) {
         Bundle bundle = new Bundle();
         bundle.putInt(KEY_LAUNCH_MODE, launchMode);
@@ -198,7 +177,6 @@ public class BeautyCouponListFragment extends BasicFragment implements CouponsLa
     private void setupView() {
         if (mFlag == LAUNCHMODE_NORMAL) {
             mBtnCancel.setVisibility(View.VISIBLE);
-//            mVwCancelSpace.setVisibility(View.VISIBLE);
         } else if (mFlag == LAUNCHMODE_CUSTOMER) {
             mBtnClose.setVisibility(View.VISIBLE);
             if (mCustomerNew != null) {
@@ -214,7 +192,6 @@ public class BeautyCouponListFragment extends BasicFragment implements CouponsLa
             mTvTitleDesc.setTextColor(getResources().getColor(R.color.color_999999));
             mBtnCancel.setVisibility(View.GONE);
             mBtnCancel.setBackgroundResource(R.drawable.beauty_customer_detail_pink_order_btn1);
-//            mVwCancelSpace.setVisibility(View.GONE);
         }
     }
 
@@ -323,64 +300,7 @@ public class BeautyCouponListFragment extends BasicFragment implements CouponsLa
 
 
     void sendCoupon(CouponVo vo) {
-        /*List<CustomerSendCouponReq.CouponNum> coups = new ArrayList<>();
-        final CustomerSendCouponReq req = new CustomerSendCouponReq();
-        CustomerSendCouponReq.CouponNum coup = req.new CouponNum(vo.getCoupon().getId(), 1);
-        coups.add(coup);
-        req.setCustomerId(customerId);
-        req.setCouponInfoList(coups);
-        TransferReq<CustomerSendCouponReq> transferReq = new TransferReq<>();
-        transferReq.setPostData(req);
-        transferReq.setUrl(ServerAddressUtil.getInstance().customerSendCoupons());
-        new CalmNetWorkRequest.Builder<TransferReq<CustomerSendCouponReq>, CustomerSendCouponResp>()
-                .with(getActivity())
-                .url(ServerAddressUtil.getInstance().loyaltyTransfer())
-                .requestContent(transferReq)
-                .responseClass(CustomerSendCouponResp.class)
-                .showLoading()
-                .tag("CustomerSendCoupon")
-                .successListener(new NetworkRequest.OnSuccessListener<ResponseObject<CustomerSendCouponResp>>() {
-                    @Override
-                    public void onSuccess(ResponseObject<CustomerSendCouponResp> data) {
-                        if (data.getContent() != null) {
-                            if (data.getContent().getResult() != null) {
-                                if (mFlag == LAUNCHMODE_NORMAL) {
-                                    customer.sendCouponCount++;
-                                    try {
-                                        if (mCallback != null) {//发券成功回调操作
-                                            mCallback.onSendCoupon(customer.sendCouponCount);
-                                        }
-                                        dal.update(customer);
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                } else if (mFlag == LAUNCHMODE_PRIVLIGES) {
-                                    if (DinnerShopManager.getInstance().getLoginCustomer() != null)
-                                        DinnerShopManager.getInstance().getLoginCustomer().needRefresh = true;
-                                }
-                                ToastUtil.showShortToast(getString(R.string.customer_send_coup_label) + getString(R.string.uion_key_bord_success));
-                                isChanged = true;
-                                getDate();
-                            } else {
-                                if (mCustomerNew.coupCount == null) {
-                                    mCustomerNew.coupCount = 0;
-                                }
-                                mCustomerNew.coupCount++;
-                                mCallback.onSendCoupon(mCustomerNew.coupCount);
-                                ToastUtil.showShortToast(data.getContent().getErrorMessage());
-                            }
-                        } else {
-                            ToastUtil.showShortToast(data.getMessage());
-                        }
-                    }
-                })
-                .errorListener(new NetworkRequest.OnErrorListener() {
-                    @Override
-                    public void onError(NetError error) {
-                        ToastUtil.showShortToast(error.getVolleyError().getMessage());
-                    }
-                })
-                .create();*/
+
     }
 
     @Click({R.id.mBtn_sendCoupons, R.id.btn_cancel, R.id.btn_cancel_customer_type, R.id.mBtn_sendCoupons_customer_type})

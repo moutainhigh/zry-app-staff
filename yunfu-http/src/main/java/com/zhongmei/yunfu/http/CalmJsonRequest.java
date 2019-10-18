@@ -29,9 +29,7 @@ public class CalmJsonRequest extends CalmRequest<JSONObject> {
         mRequest = new BusinessJsonObjectRequest(method, url, jsonRequest, this, this, changeOld);
     }
 
-    /**
-     * @param timeout 单位ms
-     */
+
     public void setTimeout(int timeout) {
         mRequest.setRetryPolicy(new DefaultRetryPolicy(timeout, 0, 0));
     }
@@ -44,14 +42,11 @@ public class CalmJsonRequest extends CalmRequest<JSONObject> {
         try {
             status = response.getInt("status");
 
-            // Luo for the donot have this message content
-            if (response.has("message")) {
-                // 无论成功或者失败，都要提示用户相应的服务器返回的信息
-                String message = response.getString("message");
+                        if (response.has("message")) {
+                                String message = response.getString("message");
                 if (!TextUtils.isEmpty(message)) {
                     Log.d(TAG, "info:打印服务器返回的数据是:" + message + ";position:BusinessJsonRequest->onResponse");
-                    // ToastUtil.showShortToast(message);
-                }
+                                    }
             }
 
             if (mSuccessListener != null) {

@@ -6,13 +6,9 @@ import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 会员虚拟卡充值收银信息上行数据
- */
+
 public class PaymentInfo {
-    private String uuid;//支付UUid
-    private BigDecimal receivableAmount;
+    private String uuid;    private BigDecimal receivableAmount;
     private BigDecimal exemptAmount;
     private BigDecimal actualAmount;
     private Long clientCreateTime;

@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.context.util.ArgsUtils;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/**
 
- */
 public abstract class StoreFactory {
 
     private Map<String, IStore> cache = new WeakHashMap<>();

@@ -91,9 +91,7 @@ import java.util.List;
 
 import static com.zhongmei.bty.basemodule.auth.application.DinnerApplication.PERMISSION_DINNER_REFUND;
 
-/**
- * 订单中心订单详情正餐Presenter
- */
+
 public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter {
     private PayAsyncTask payAsyncTask;
     private RecisionAsyncTask recisionAsyncTask;
@@ -118,8 +116,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
     }
 
     private void goPay() {
-        // 如果是0元直接走闪接
-        if (getTradeVo().getTrade().getTradeAmount().compareTo(BigDecimal.ZERO) == 0) {
+                if (getTradeVo().getTrade().getTradeAmount().compareTo(BigDecimal.ZERO) == 0) {
             DoPayManager.getInstance().fastCashPay(mView.getViewActivity(), getTradeVo(), true, new IPayOverCallback() {
 
                 @Override
@@ -151,22 +148,19 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         Trade trade = tradeVo.getTrade();
         List<TradeTable> tradeTables = tradeVo.getTradeTableList();
         if (Utils.isEmpty(tradeTables)) {
-            //下单时未选桌台，接受要选择桌台
-            setTableAndAcceptDinner(tradeVo);
+                        setTableAndAcceptDinner(tradeVo);
         } else {
             Long tableId = tradeTables.get(0).getTableId();
             try {
                 Tables table = DBHelperManager.queryById(Tables.class, tableId);
                 if (table != null && table.isValid()) {
-                    //大众点评的单子，如果桌台被其他订单占用时，需要重新选择桌台
-                    if ((trade.getSource() == SourceId.DIANPING /*|| trade.getSource() == SourceId.XIN_MEI_DA*/) && !isTableUseful(table)) {
+                                        if ((trade.getSource() == SourceId.DIANPING ) && !isTableUseful(table)) {
                         setTableAndAcceptDinner(tradeVo);
                     } else {
                         acceptDinner(tradeVo);
                     }
                 } else {
-                    //桌台不存在或无效，需要重新选择桌台
-                    setTableAndAcceptDinner(tradeVo);
+                                        setTableAndAcceptDinner(tradeVo);
                 }
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
@@ -178,11 +172,8 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         Trade trade = tradeVo.getTrade();
         TradeExtra tradeExtra = tradeVo.getTradeExtra();
         boolean allowMultTrades = ServerSettingManager.allowMultiTradesOnTable();
-        if (trade.getDeliveryType() == DeliveryType.HERE) {//内用
-            if (!tradeVo.isAppointmentOrder()) {//无预约时间
-                kouBeiOrderHereAccept(tradeVo);
-            } else {//预约时间
-                String expectTime = DateUtil.format(tradeExtra.getExpectTime());
+        if (trade.getDeliveryType() == DeliveryType.HERE) {            if (!tradeVo.isAppointmentOrder()) {                kouBeiOrderHereAccept(tradeVo);
+            } else {                String expectTime = DateUtil.format(tradeExtra.getExpectTime());
                 String hint = allowMultTrades ?
                         String.format(mView.getViewActivity().getString(R.string.koubei_accept_order_appointment_hint2), expectTime) : String.format(mView.getViewActivity().getString(R.string.koubei_accept_order_appointment_hint), expectTime);
                 DialogUtil.showHintConfirmDialog(mView.getViewFragmentManager(),
@@ -202,11 +193,8 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                             }
                         }, "");
             }
-        } else if (trade.getDeliveryType() == DeliveryType.TAKE) {//外带
-            if (!tradeVo.isAppointmentOrder()) {//无预约时间
-                acceptDinner(tradeVo);
-            } else {//预约时间
-                String expectTime = DateUtil.format(tradeExtra.getExpectTime());
+        } else if (trade.getDeliveryType() == DeliveryType.TAKE) {            if (!tradeVo.isAppointmentOrder()) {                acceptDinner(tradeVo);
+            } else {                String expectTime = DateUtil.format(tradeExtra.getExpectTime());
                 String hint =
                         String.format(mView.getViewActivity().getString(R.string.koubei_accept_order_appointment_hint3), expectTime);
                 DialogUtil.showHintConfirmDialog(mView.getViewFragmentManager(),
@@ -229,17 +217,11 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }
     }
 
-    /**
-     * 口碑内用接受
-     *
-     * @param tradeVo
-     */
+
     private void kouBeiOrderHereAccept(TradeVo tradeVo) {
         List<TradeTable> tradeTables = tradeVo.getTradeTableList();
-        if (Utils.isEmpty(tradeTables)) {//无桌
-            setTableAndAcceptDinner(tradeVo);
-        } else {//有桌
-            try {
+        if (Utils.isEmpty(tradeTables)) {            setTableAndAcceptDinner(tradeVo);
+        } else {            try {
                 Long tableId = tradeTables.get(0).getTableId();
                 Tables table = DBHelperManager.queryById(Tables.class, tableId);
                 if (table != null && table.isValid()) {
@@ -257,12 +239,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }
     }
 
-    /**
-     * 桌台是否没被占用，true表示没被占用（可用），false表示被占用（不可用）
-     *
-     * @param table
-     * @return
-     */
+
     private boolean isTableUseful(Tables table) {
         return table.getTableStatus() == TableStatus.EMPTY
                 || (ServerSettingManager.allowMultiTradesOnTable()
@@ -280,13 +257,11 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                 mView.showToast(response.getMessage());
                 if (ResponseObject.isOk(response)) {
                     try {
-                        // 查询新的tradevo数据
-                        String tradeUuid = tradeVo.getTrade().getUuid();
+                                                String tradeUuid = tradeVo.getTrade().getUuid();
                         final TradeVo newTradeVo = mManager.findTrade(tradeUuid);
                         Trade newTrade = newTradeVo.getTrade();
 
                         Long expectTime = tradeVo.getTradeExtra() == null ? null : tradeVo.getTradeExtra().getExpectTime();
-                        //AlarmService.setDinnerAlarmPrint(BaseApplication.sInstance, tradeVo, isPaid, isSendKitchen, expectTime);
 
                         AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_ACCPET_ORDER, newTrade.getId(), newTrade.getUuid(), newTrade.getClientUpdateTime());
                     } catch (Exception e) {
@@ -330,12 +305,10 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                                 mView.showToast(response.getMessage());
                                 if (ResponseObject.isOk(response)) {
                                     try {
-                                        // 查询新的tradevo数据
-                                        String tradeUuid = tradeVo.getTrade().getUuid();
+                                                                                String tradeUuid = tradeVo.getTrade().getUuid();
                                         final TradeVo newTradeVo = mManager.findTrade(tradeUuid);
 
                                         Long expectTime = tradeVo.getTradeExtra() == null ? null : tradeVo.getTradeExtra().getExpectTime();
-                                        //AlarmService.setDinnerAlarmPrint(BaseApplication.sInstance, tradeVo, isPaid, isSendKitchen, expectTime);
 
                                     } catch (Exception e) {
                                         Log.e(TAG, e.getMessage(), e);
@@ -388,8 +361,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                     null,
                     "offline_refund");
         } else {
-            if (tradePaymentVo.getTradeVo().getTradeEarnestMoney() > 0) {//如果有预付金，提示退货不退预付金
-                DialogUtil.showWarnConfirmDialog(mView.getViewFragmentManager(),
+            if (tradePaymentVo.getTradeVo().getTradeEarnestMoney() > 0) {                DialogUtil.showWarnConfirmDialog(mView.getViewFragmentManager(),
                         R.string.dinner_order_center_refund_earnest_not_fefund,
                         R.string.order_center_refund_ok,
                         R.string.order_center_refund_cancel,
@@ -413,8 +385,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
             @Override
             public void onPositive(User user, String code, Auth.Filter filter) {
                 PaymentItem bnItem = getPaymentItem(tradePaymentVo.getPaymentVoList(), PayModeId.BAINUO_TUANGOU);
-                if (bnItem != null && (bnItem.getPayStatus() == TradePayStatus.PAID || bnItem.getPayStatus() == TradePayStatus.PAYING)) {//订单以百度糯米团购券支付，订单不允许退货
-                    String title = mView.getViewActivity().getString(R.string.refund_alert_bainuo_exist);
+                if (bnItem != null && (bnItem.getPayStatus() == TradePayStatus.PAID || bnItem.getPayStatus() == TradePayStatus.PAYING)) {                    String title = mView.getViewActivity().getString(R.string.refund_alert_bainuo_exist);
                     CommonDialogFragment.CommonDialogFragmentBuilder commonDialogFragmentBuilder = new CommonDialogFragment.CommonDialogFragmentBuilder(MainApplication.getInstance());
                     commonDialogFragmentBuilder.iconType(CommonDialogFragment.ICON_WARNING)
                             .title(title)
@@ -429,10 +400,8 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                             .show(mView.getViewFragmentManager(), "refund_alert");
                     return;
                 }
-                //add v8.9 口碑 start
-                bnItem = getPaymentItem(tradePaymentVo.getPaymentVoList(), PayModeId.KOUBEI_TUANGOU);
-                if (bnItem != null && (bnItem.getPayStatus() == TradePayStatus.PAID || bnItem.getPayStatus() == TradePayStatus.PAYING)) {//订单以百度糯米团购券支付，订单不允许退货
-                    String title = mView.getViewActivity().getString(R.string.refund_alert_koubei_exist);
+                                bnItem = getPaymentItem(tradePaymentVo.getPaymentVoList(), PayModeId.KOUBEI_TUANGOU);
+                if (bnItem != null && (bnItem.getPayStatus() == TradePayStatus.PAID || bnItem.getPayStatus() == TradePayStatus.PAYING)) {                    String title = mView.getViewActivity().getString(R.string.refund_alert_koubei_exist);
                     CommonDialogFragment.CommonDialogFragmentBuilder commonDialogFragmentBuilder = new CommonDialogFragment.CommonDialogFragmentBuilder(MainApplication.getInstance());
                     commonDialogFragmentBuilder.iconType(CommonDialogFragment.ICON_WARNING)
                             .title(title)
@@ -447,18 +416,14 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                             .show(mView.getViewFragmentManager(), "refund_alert");
                     return;
                 }
-                //add v8.9 口碑 end
-                final DinnerPosManager posManager = new DinnerPosManager();
-                final PaymentItem paymentItem = posManager.getPosPaymentItem(tradePaymentVo.getPaymentVoList());// 使用原单的交易信息
-                if (paymentItem != null) {
+                                final DinnerPosManager posManager = new DinnerPosManager();
+                final PaymentItem paymentItem = posManager.getPosPaymentItem(tradePaymentVo.getPaymentVoList());                if (paymentItem != null) {
                     try {
                         PaymentItemDal paymentItemDal = OperatesFactory.create(PaymentItemDal.class);
-                        // 查询刷卡交易信息
-                        PaymentItemUnionpayVo vo =
+                                                PaymentItemUnionpayVo vo =
                                 paymentItemDal.findPaymentItemUnionpayVoByPaymentItemId(paymentItem.getId());
 
-                        // 判断银联pos交易是否已经被结算，如果已结算要给出提示
-                        if (vo != null && vo.getPaymentDevice() != null && vo.getPaymentItemUnionpay() != null
+                                                if (vo != null && vo.getPaymentDevice() != null && vo.getPaymentItemUnionpay() != null
                                 && !NewLiandiposManager.getInstance()
                                 .canRepeal(NewLiandiposManager.RefundRef.valueOf(vo.getPaymentItemUnionpay(), vo.getPaymentDevice()))) {
                             DialogUtil.showWarnConfirmDialog(mView.getViewFragmentManager(),
@@ -490,8 +455,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
     @Override
     public void doRecision() {
         TradeVo tradeVo = getTradeVo();
-        if (tradeVo.getTradeEarnestMoney() > 0) {//如果有预付金，提示作废不退预付金
-            DialogUtil.showWarnConfirmDialog(mView.getViewFragmentManager(),
+        if (tradeVo.getTradeEarnestMoney() > 0) {            DialogUtil.showWarnConfirmDialog(mView.getViewFragmentManager(),
                     R.string.dinner_order_center_recision_earnest_not_fefund,
                     R.string.dinner_ok,
                     R.string.dinner_cancel,
@@ -508,8 +472,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }
     }
 
-    private void recision() {//作废
-        if (recisionAsyncTask != null) {
+    private void recision() {        if (recisionAsyncTask != null) {
             recisionAsyncTask.cancel(true);
             recisionAsyncTask = null;
         }
@@ -539,10 +502,8 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
 
     @Override
     protected void performRepayOrder(TradePaymentVo tradePaymentVo) {
-        //add v8.9 口碑 start
-        PaymentItem bnItem = getPaymentItem(tradePaymentVo.getPaymentVoList(), PayModeId.KOUBEI_TUANGOU);
-        if (bnItem != null && (bnItem.getPayStatus() == TradePayStatus.PAID || bnItem.getPayStatus() == TradePayStatus.PAYING)) {//订单以百度糯米团购券支付，订单不允许退货
-            String title = mView.getViewActivity().getString(R.string.repay_alert_koubei_exist);
+                PaymentItem bnItem = getPaymentItem(tradePaymentVo.getPaymentVoList(), PayModeId.KOUBEI_TUANGOU);
+        if (bnItem != null && (bnItem.getPayStatus() == TradePayStatus.PAID || bnItem.getPayStatus() == TradePayStatus.PAYING)) {            String title = mView.getViewActivity().getString(R.string.repay_alert_koubei_exist);
             CommonDialogFragment.CommonDialogFragmentBuilder commonDialogFragmentBuilder = new CommonDialogFragment.CommonDialogFragmentBuilder(MainApplication.getInstance());
             commonDialogFragmentBuilder.iconType(CommonDialogFragment.ICON_WARNING)
                     .title(title)
@@ -557,10 +518,8 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                     .show(mView.getViewFragmentManager(), "repay_alert");
             return;
         }
-        //add v8.9 口碑 end
-        bnItem = getPaymentItem(tradePaymentVo.getPaymentVoList(), PayModeId.BAINUO_TUANGOU);
-        if (bnItem != null && (bnItem.getPayStatus() == TradePayStatus.PAID || bnItem.getPayStatus() == TradePayStatus.PAYING)) {//订单以百度糯米团购券支付，订单不允许退货
-            String title = mView.getViewActivity().getString(R.string.repay_alert_bainuo_exist);
+                bnItem = getPaymentItem(tradePaymentVo.getPaymentVoList(), PayModeId.BAINUO_TUANGOU);
+        if (bnItem != null && (bnItem.getPayStatus() == TradePayStatus.PAID || bnItem.getPayStatus() == TradePayStatus.PAYING)) {            String title = mView.getViewActivity().getString(R.string.repay_alert_bainuo_exist);
             CommonDialogFragment.CommonDialogFragmentBuilder commonDialogFragmentBuilder = new CommonDialogFragment.CommonDialogFragmentBuilder(MainApplication.getInstance());
             commonDialogFragmentBuilder.iconType(CommonDialogFragment.ICON_WARNING)
                     .title(title)
@@ -618,13 +577,11 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
     @Override
     public void doPrint(String tag) {
         TradeVo tradeVo = getTradeVo();
-        // 拒绝不出单
-        if (tradeVo == null || tradeVo.getTrade() == null || tradeVo.getTrade().getTradeStatus() == TradeStatus.REFUSED) {
+                if (tradeVo == null || tradeVo.getTrade() == null || tradeVo.getTrade().getTradeStatus() == TradeStatus.REFUSED) {
             ToastUtil.showLongToast(R.string.order_center_detail_can_not_print);
             return;
         }
-        //没有品项不能出单
-        if (Utils.isEmpty(tradeVo.getTradeItemList())) {
+                if (Utils.isEmpty(tradeVo.getTradeItemList())) {
             ToastUtil.showLongToast(R.string.no_menu);
             return;
         }
@@ -694,15 +651,12 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         } else if (ReasonType.TRADE_REPEATED.equalsValue(reasonType)) {
             doRepayRequest(result, tradeVo);
         }
-        if (ReasonType.REFUSE_RETURN.equalsValue(reasonType) || ReasonType.AGREE_RETURN.equalsValue(reasonType)) {  //同意或拒绝退单
-            doReturnRequest(result, tradeVo, reasonType, requestUuid);
+        if (ReasonType.REFUSE_RETURN.equalsValue(reasonType) || ReasonType.AGREE_RETURN.equalsValue(reasonType)) {              doReturnRequest(result, tradeVo, reasonType, requestUuid);
         }
         return false;
     }
 
-    /**
-     * 执行反结账请求
-     */
+
     private void doRepayRequest(final OrderCenterOperateDialogFragment.OperateResult result, TradeVo tradeVo) {
         if (tradeVo == null || result == null) {
             return;
@@ -730,23 +684,11 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }, mView.getViewFragmentManager()));
     }
 
-    /**
-     * 对反结账返回的单子进行验证并进入逻辑
-     */
+
     private void RefundNewTradAndToDish(List<Trade> trades) {
-        // 反结账会产生3个单子
-        Trade refundTrade = DinnerPosManager.getTradeByTradeType(trades, TradeType.REFUND_FOR_REPEAT);// 退货单
-        Trade sellTrade = DinnerPosManager.getTradeByTradeStatus(trades, TradeStatus.REPEATED);//反结账的原单
-        final Trade newTrade = DinnerPosManager.getTradeByTradeStatus(trades, TradeStatus.CONFIRMED);// 反结账产生的新单
-        if (refundTrade != null) {
-            // 打印反结账产生的退货单
-//            PrintContentQueue.getInstance().printDinnerRefundTrade(refundTrade.getUuid(), Calm.PRINT_TYPE_REFUND,
-//                    false, new OnSimplePrintListener(PrintTicketTypeEnum.REFUND));
-            //IPrintHelper.Holder.getInstance().printDinnerRedundOrderTicket(refundTrade.getUuid(), false, new PRTOnSimplePrintListener(PrintTicketTypeEnum.REFUND));
-            // 判断是否有POS支付的PaymentItem
-            if (new DinnerPosManager().getPosPaymentItem(refundTrade.getRelateTradeUuid()) != null) {
-                // 有
-                try {
+                Trade refundTrade = DinnerPosManager.getTradeByTradeType(trades, TradeType.REFUND_FOR_REPEAT);        Trade sellTrade = DinnerPosManager.getTradeByTradeStatus(trades, TradeStatus.REPEATED);        final Trade newTrade = DinnerPosManager.getTradeByTradeStatus(trades, TradeStatus.CONFIRMED);        if (refundTrade != null) {
+                                                if (new DinnerPosManager().getPosPaymentItem(refundTrade.getRelateTradeUuid()) != null) {
+                                try {
                     new DinnerPosManager().posRefundForRepay(sellTrade,
                             refundTrade,
                             mView.getViewFragmentManager(),
@@ -771,9 +713,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }
     }
 
-    /**
-     * 查找反结账生成的新单并进入点菜界面
-     */
+
     private void RefundNewToDish(Trade sell_Trade) {
         if (sell_Trade != null && sell_Trade.getTradeStatus() == TradeStatus.CONFIRMED) {
             try {
@@ -785,9 +725,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }
     }
 
-    /**
-     * 执行退货请求
-     */
+
     private void doRefundRequest(final OrderCenterOperateDialogFragment.OperateResult result, TradeVo tradeVo) {
         if (tradeVo == null) {
             return;
@@ -799,27 +737,19 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
             public void onResponse(ResponseObject<TradePaymentResp> response) {
                 ToastUtil.showLongToast(response.getMessage());
                 if (ResponseObject.isOk(response)) {
-                    // 打印退货单
-                    List<Trade> trades = response.getContent().getTrades();
+                                        List<Trade> trades = response.getContent().getTrades();
                     if (Utils.isNotEmpty(trades)) {
                         Trade refundTrade = DinnerPosManager.getTradeByTradeType(trades, TradeType.REFUND);
                         if (refundTrade != null) {
-                            //IPrintHelper.Holder.getInstance().printDinnerRedundOrderTicket(refundTrade.getUuid(), false, new PRTOnSimplePrintListener(PrintTicketTypeEnum.REFUND));
-                            if (result.isPrintChecked) {
-                                //IPrintHelper.Holder.getInstance().printRefundKitchenAllTicket(refundTrade.getUuid(), false, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.KITCHENALL));
-                                //IPrintHelper.Holder.getInstance().printRefundKitchenCellTicket(refundTrade.getUuid(), null, false, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.KITCHENCELL));
-                            }
+                                                        if (result.isPrintChecked) {
+                                                                                            }
                         }
-                        //订单支付方式中包含现金，则退货后打开钱箱
-                        if (isPayInCash(response.getContent().getPaymentItems())) {
-                            //PRTPrintContentQueue.getCommonPrintQueue().openMoneyBox(null);
-                            //IPrintHelper.Holder.getInstance().openMoneyBox();
-                        }
+                                                if (isPayInCash(response.getContent().getPaymentItems())) {
+                                                                                }
 
                         Trade sellTrade = null;
                         for (Trade trade : trades) {
-                            if (trade.getTradeType() != TradeType.REFUND) {//不是退货类型的，就是原单，原单类型不确定，只有这样取了
-                                sellTrade = trade;
+                            if (trade.getTradeType() != TradeType.REFUND) {                                sellTrade = trade;
                             }
                         }
                         try {
@@ -846,9 +776,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                 LoadingResponseListener.ensure(listener, mView.getViewFragmentManager()));
     }
 
-    /**
-     * 执行作废请求
-     */
+
     private void doRecisionRequest(final OrderCenterOperateDialogFragment.OperateResult result, TradeVo tradeVo) {
         if (tradeVo == null) {
             return;
@@ -865,8 +793,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                 List<Trade> trades = tablesDal.findTradesInTable(tradeTable);
                 dinnertableState.setTableStatus(trades.size() > 1 ? TableStatus.OCCUPIED : TableStatus.EMPTY);
 
-                // 查询table
-                Tables table = DBHelperManager.queryById(Tables.class, tradeTable.getTableId());
+                                Tables table = DBHelperManager.queryById(Tables.class, tradeTable.getTableId());
                 if (table != null) {
                     dinnertableState.setModifyDateTime(table.getModifyDateTime());
                 }
@@ -886,13 +813,10 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                             ToastUtil.showShortToast(R.string.dinner_recision_failed);
                         }
                     } else {
-                        // 打印作废单
-                        Trade trade = response.getContent().trade;
+                                                Trade trade = response.getContent().trade;
                         if (trade != null) {
                             String uuid = trade.getUuid();
-                            //PRTPrintOperator operator = new PRTPrintOperator();
-                            //operator.printCancelTicket(uuid, null, result.isPrintChecked, false);
-                            AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CANCEL_ORDER, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
+                                                                                    AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CANCEL_ORDER, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
                         }
                     }
                 }
@@ -917,9 +841,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }
     }
 
-    /**
-     * 执行拒绝请求
-     */
+
     private void doRefuseRequest(final OrderCenterOperateDialogFragment.OperateResult result, TradeVo tradeVo) {
         if (tradeVo == null) {
             return;
@@ -1028,8 +950,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
             return false;
         }
         TradeVo tradeVo = getTradeVo();
-        if (tradeVo != null && tradeVo.getTradeEarnestMoney() > 0) {// add v8.13 付了预定金不容许返结账
-            return false;
+        if (tradeVo != null && tradeVo.getTradeEarnestMoney() > 0) {            return false;
         }
         Trade trade = getTrade();
         if (trade != null) {
@@ -1049,21 +970,13 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         return false;
     }
 
-    /**
-     * 判断是否已关账订单
-     *
-     * @return 返回true表示已经关账订单，返回false标识未关账订单
-     */
+
     private boolean isClosedOrder() {
         Long lastClosingTime = mLoadResult.getLastClosingTime();
         return getTradePayTime() <= lastClosingTime;
     }
 
-    /**
-     * 获取订单支付时间
-     *
-     * @return Long
-     */
+
     private Long getTradePayTime() {
         List<PaymentVo> paymentVoList = getPaymentVoList();
         if (Utils.isNotEmpty(paymentVoList)) {
@@ -1076,11 +989,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         return System.currentTimeMillis();
     }
 
-    /**
-     * 判断是否第三方订单
-     *
-     * @return 返回true标识第三方平台订单，返回false标识非第三方平台订单
-     */
+
     private boolean isThirdPartyOrder() {
         Trade trade = getTrade();
         if (trade != null) {
@@ -1124,8 +1033,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                 if (trade.getSource() == SourceId.BAIDU_RICE) {
                     return false;
                 }
-                double exceptAmount = 0;//抹零金额
-                TradePaymentVo tradePaymentVo = getTradePaymentVo().clone();
+                double exceptAmount = 0;                TradePaymentVo tradePaymentVo = getTradePaymentVo().clone();
                 if (tradePaymentVo != null && tradePaymentVo.getPaymentVoList() != null && tradePaymentVo.getPaymentVoList().size() > 0) {
                     for (PaymentVo paymentVo : tradePaymentVo.getPaymentVoList()) {
                         if (paymentVo.getPayment() != null && paymentVo.getPayment().getPaymentType() == PaymentType.TRADE_SELL && paymentVo.getPayment().getExemptAmount() != null && paymentVo.getPayment().getExemptAmount().doubleValue() > 0) {
@@ -1134,8 +1042,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                     }
                 }
                 TradeVo tradeVo = getTradeVo();
-                if (tradeVo != null && tradeVo.getTradeEarnestMoney() > 0 && tradeVo.getTradeEarnestMoney() >= (trade.getTradeAmount().doubleValue() - exceptAmount)) {// add v8.13 付了预定金且大于应付不许退货
-                    return false;
+                if (tradeVo != null && tradeVo.getTradeEarnestMoney() > 0 && tradeVo.getTradeEarnestMoney() >= (trade.getTradeAmount().doubleValue() - exceptAmount)) {                    return false;
                 }
                 return !isClosedOrder();
             }
@@ -1194,7 +1101,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
             TradePayStatus tradePayStatus = trade.getTradePayStatus();
             TradePayForm tradePayForm = trade.getTradePayForm();
             SourceId sourceId = trade.getSource();
-            if (tradePayStatus == TradePayStatus.PAID && (trade.getSource() == SourceId.DIANPING /*|| trade.getSource() == SourceId.XIN_MEI_DA*/)
+            if (tradePayStatus == TradePayStatus.PAID && (trade.getSource() == SourceId.DIANPING )
                     && trade.getTradeStatus() == TradeStatus.UNPROCESSED) {
                 return false;
             }
@@ -1281,8 +1188,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                             public void onPositive(User user, String code, Auth.Filter filter) {
                                 super.onPositive(user, code, filter);
                                 try {
-                                    mView.goToDishWindow(getTradeVo().clone());// 跳转到购物车
-                                } catch (Exception e) {
+                                    mView.goToDishWindow(getTradeVo().clone());                                } catch (Exception e) {
                                     Log.e(TAG, "clickContinueRepay", e);
                                 }
                             }
@@ -1360,11 +1266,8 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }
     }
 
-    //addd v8.15 begin  口碑订单取消时 同意或取消操作
 
-    /**
-     * 同意口碑取消订单
-     */
+
     @Override
     public void doAcceptReturn() {
         final TradePaymentVo tradePaymentVo = getTradePaymentVo().clone();
@@ -1378,9 +1281,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                 });
     }
 
-    /**
-     * 拒绝口碑取消订单
-     */
+
     @Override
     public void doRefuseReturn() {
         TradePaymentVo tradePaymentVo = getTradePaymentVo().clone();
@@ -1388,9 +1289,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
     }
 
 
-    /**
-     * 执行退单请求
-     */
+
     private void doReturnRequest(final OrderCenterOperateDialogFragment.OperateResult result, final TradeVo tradeVo, int reasonType, String requestUuid) {
         if (tradeVo == null) {
             return;
@@ -1403,27 +1302,18 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
                 mView.showToast(response.getMessage());
                 if (ResponseObject.isOk(response) && returnStatus == TradeReturnInfoReturnStatus.AGREE) {
                     Trade trade = tradeVo.getTrade();
-                    //如果已付款，打印退货单
-                    if (trade.getTradePayStatus() == TradePayStatus.PAID) {
+                                        if (trade.getTradePayStatus() == TradePayStatus.PAID) {
                         if (trade != null) {
-                            //IPrintHelper.Holder.getInstance().printDinnerRedundOrderTicket(trade.getUuid(), false, new PRTOnSimplePrintListener(PrintTicketTypeEnum.REFUND));
-                            if (result.isPrintChecked) {
-                                //IPrintHelper.Holder.getInstance().printRefundKitchenAllTicket(trade.getUuid(), false, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.KITCHENALL));
-                                //IPrintHelper.Holder.getInstance().printRefundKitchenCellTicket(trade.getUuid(), null, false, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.KITCHENCELL));
-                            }
+                                                        if (result.isPrintChecked) {
+                                                                                            }
                         }
-                    } else if (trade.getTradePayStatus() == TradePayStatus.UNPAID) { //打印作废单
-                        //PRTPrintOperator operator = new PRTPrintOperator();
-                        //operator.printCancelTicket(trade.getUuid(), null, result.isPrintChecked, false);
-                    }
+                    } else if (trade.getTradePayStatus() == TradePayStatus.UNPAID) {                                                                     }
 
-                    //取消定时打印
-                    Long expectTime = null;
+                                        Long expectTime = null;
                     if (tradeVo.getTradeExtra().getExpectTime() != null) {
                         expectTime = tradeVo.getTradeExtra().getExpectTime();
                     }
-                    //AlarmService.cancelAlarmPrint(mView.getViewActivity(), trade.getUuid(), expectTime);
-                }
+                                    }
             }
 
             @Override
@@ -1434,12 +1324,7 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         }, mView.getViewFragmentManager()));
     }
 
-    /**
-     * 获取该退票记录UUID
-     *
-     * @param tradeReturnInfo 退单信息
-     * @return
-     */
+
     public String getRequestUuid(TradeReturnInfo tradeReturnInfo) {
         if (tradeReturnInfo != null) {
             return tradeReturnInfo.getUuid();
@@ -1452,5 +1337,4 @@ public class DinnerOrderCenterDetailPresenter extends OrderCenterDetailPresenter
         return sourceId == SourceId.BAIDU_TAKEOUT ? ReasonSource.BAIDU_TAKEOUT
                 : sourceId == SourceId.KOU_BEI ? ReasonSource.KOUBEI : ReasonSource.ZHONGMEI;
     }
-    //addd v8.15 begin  口碑订单取消时 同意或取消操作
-}
+    }

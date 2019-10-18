@@ -2,21 +2,14 @@ package com.zhongmei.bty.basemodule.pay.bean;
 
 import java.io.Serializable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PaymentCard implements Serializable {
-    private String cardNumber;// 银行卡号
-
-    private String cardName;// 发卡行名称
-
-    private String expireDate;// 有效期
-
-    private String issNumber;// 发卡行号
-
-    private String issName;// 发卡行名称
-
+    private String cardNumber;
+    private String cardName;
+    private String expireDate;
+    private String issNumber;
+    private String issName;
     private Long creatorId;
     private String creatorName;
 

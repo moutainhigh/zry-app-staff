@@ -53,36 +53,15 @@ public class SexUtils {
         return isFemale ? FEMALE_INT_FLAG + "" : MALE_INT_FLAG + "";
     }
 	
-	/*public static String getHonorific(Customer customer) {
-		if (TextUtils.isEmpty(customer.get(Customer.NAME_KEY))) {
-			return "()";
-		}
-		String sex;
-		switch (getSex(customer.get(Customer.SEX_KEY))) {
-			case MALE:
-				sex = MainApplication.getInstance().getResources().getString(R.string.customer_sex_male);
-				break;
-			
-			case FEMALE:
-				sex = MainApplication.getInstance().getResources().getString(R.string.customer_sex_female);
-				break;
-			default:
-				return "(" + customer.get(Customer.NAME_KEY) + ")";
-				
-		}
-		return "(" + customer.get(Customer.NAME_KEY).substring(0, 1) + sex + ")";
-	}*/
+
 
     public static void setSex(CustomerResp customer, CompoundButton male, CompoundButton female) {
         if (male.isChecked()) {
             customer.sex = Integer.valueOf(MALE_INT_FLAG);
-//			customer.set(Customer.SEX_KEY, MALE_INT_FLAG);
         } else if (female.isChecked()) {
             customer.sex = Integer.valueOf(FEMALE_INT_FLAG);
-//			customer.set(Customer.SEX_KEY, FEMALE_INT_FLAG);
         } else {
             customer.sex = Integer.valueOf(UNKNOWN_INT_FLAG);
-//			customer.set(Customer.SEX_KEY, UNKNOWN_INT_FLAG);
         }
     }
 

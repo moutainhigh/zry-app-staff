@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.enums.PrivilegeUseStatus;
 
-/**
- * 优惠扩展表，判断优惠是否被核销
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "trade_privilege_extra")
 public class TradePrivilegeExtra extends BasicEntityBase {
 

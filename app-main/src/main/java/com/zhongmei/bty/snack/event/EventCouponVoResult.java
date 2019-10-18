@@ -8,22 +8,17 @@ import com.zhongmei.bty.basemodule.customer.bean.coupon.CouponVo;
 
 public class EventCouponVoResult {
 
-    private List<CouponVo> rebateCoupons;// 满减券
-
-    private List<CouponVo> discountCoupons;// 折扣券
-
-    private List<CouponVo> giftCoupons;// 礼品券
-
-    private List<CouponVo> cashCoupons;// 现金券
-
+    private List<CouponVo> rebateCoupons;
+    private List<CouponVo> discountCoupons;
+    private List<CouponVo> giftCoupons;
+    private List<CouponVo> cashCoupons;
     private CouponVo selectedCouponVo;
 
     public List<CouponVo> getSelectedCoupons() {
         return selectedCoupons;
     }
 
-    private List<CouponVo> selectedCoupons = new ArrayList<CouponVo>();//支持多种券时使用
-
+    private List<CouponVo> selectedCoupons = new ArrayList<CouponVo>();
     public List<CouponVo> getRebateCoupons() {
         return rebateCoupons;
     }

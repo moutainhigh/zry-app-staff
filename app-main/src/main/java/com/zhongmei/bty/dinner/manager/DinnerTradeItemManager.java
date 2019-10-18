@@ -50,9 +50,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DinnerTradeItemManager {
 
@@ -65,20 +63,12 @@ public class DinnerTradeItemManager {
         return instance;
     }
 
-    //删除未生效操作
-    public static final int DELETE_NOT_TAKE_EFFECT = 1;
-    //删除为生效操作
-    public static final int DELETE_TAKE_EFFECT = 2;
-    //赠送操作
-    public static final int GIVE = 3;
-    //作废操作
-    public static final int CANCELLED = 4;
+        public static final int DELETE_NOT_TAKE_EFFECT = 1;
+        public static final int DELETE_TAKE_EFFECT = 2;
+        public static final int GIVE = 3;
+        public static final int CANCELLED = 4;
 
-    /**
-     * 该菜是否已赠送
-     *
-     * @return
-     */
+
     public boolean hasGiven(IShopcartItemBase shopcartItemBase) {
         TradePrivilege privilege = shopcartItemBase.getPrivilege();
         return privilege != null
@@ -86,20 +76,11 @@ public class DinnerTradeItemManager {
                 && privilege.getStatusFlag() == StatusFlag.VALID;
     }
 
-    /**
-     * 删除品项
-     *
-     * @param shopcartItemBase
-     * @param parentUuid
-     * @param mChangePageListener
-     * @param mActivity
-     */
+
     public void deleteItem(IShopcartItemBase shopcartItemBase, String parentUuid,
                            ChangePageListener mChangePageListener, FragmentActivity mActivity) {
-        // 删除未下单的子菜（已下单的子菜暂不允许操作）
-        if (shopcartItemBase instanceof SetmealShopcartItem) {
-            // 先获取外壳
-            ShopcartItem shopcartItem = DinnerShoppingCart.getInstance().
+                if (shopcartItemBase instanceof SetmealShopcartItem) {
+                        ShopcartItem shopcartItem = DinnerShoppingCart.getInstance().
                     getShopcartItemByUUID(DinnerShoppingCart.getInstance().getShoppingCartVo(), parentUuid);
             DinnerShoppingCart.getInstance().removeDinnerShoppingcartItem(shopcartItem,
                     (SetmealShopcartItem) shopcartItemBase,
@@ -109,17 +90,14 @@ public class DinnerTradeItemManager {
             return;
         }
 
-        // 删除单菜或套餐外壳
-        if (shopcartItemBase instanceof IShopcartItem) {
+                if (shopcartItemBase instanceof IShopcartItem) {
             DinnerShoppingCart.getInstance().removeDinnerShoppingcartItem((IShopcartItem) shopcartItemBase,
                     null, mChangePageListener, mActivity.getSupportFragmentManager());
-            // 没批次号的菜就不用更新打印状态，反正都不会打印了
-            if (!TextUtils.isEmpty(shopcartItemBase.getBatchNo())) {
+                        if (!TextUtils.isEmpty(shopcartItemBase.getBatchNo())) {
                 DinnerShoppingCart.getInstance().updatePrintStatus(shopcartItemBase,
                         IssueStatus.DIRECTLY);
             }
-            //已下单的菜品，更新客看单状态为未打印
-            if (shopcartItemBase instanceof ReadonlyShopcartItem) {
+                        if (shopcartItemBase instanceof ReadonlyShopcartItem) {
                 ((ReadonlyShopcartItem) shopcartItemBase).setGuestPrinted(GuestPrinted.UNPRINT);
             }
         }
@@ -133,15 +111,9 @@ public class DinnerTradeItemManager {
         DinnerShoppingCart.getInstance().setShopcartItemPrivilege(shopcartItemBase, reason);
     }
 
-    /**
-     * 弹出导致金额未负的弹框
-     *
-     * @param mActivity
-     * @param runnable
-     */
+
     public void showTradeAmountNegativeDialog(FragmentActivity mActivity, final Runnable runnable) {
-        //退菜导致订单金额为负时，弹框进行提示
-        TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
+                TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
         if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getTradeAmount().compareTo(BigDecimal.ZERO) < 0) {
             DialogUtil.showErrorConfirmDialog(mActivity.getSupportFragmentManager(), R.string.operation_make_amount_negative, R.string.go_on_opearation,
                     R.string.cancel_operation, null, new View.OnClickListener() {
@@ -155,16 +127,9 @@ public class DinnerTradeItemManager {
         }
     }
 
-    /**
-     * 弹出导致金额未负的弹框
-     * 关于库存的操作
-     *
-     * @param mActivity
-     * @param runnable
-     */
+
     public void showTradeAmountNegativeDialog(FragmentActivity mActivity, final int type, final IShopcartItemBase shopcartItemBase, final List<InventoryItem> inventoryItemList, final Runnable runnable) {
-        //退菜导致订单金额为负时，弹框进行提示
-        TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
+                TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
         if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getTradeAmount().compareTo(BigDecimal.ZERO) < 0) {
             DialogUtil.showErrorConfirmDialog(mActivity.getSupportFragmentManager(), R.string.operation_make_amount_negative, R.string.go_on_opearation,
                     R.string.cancel_operation, new View.OnClickListener() {
@@ -185,16 +150,9 @@ public class DinnerTradeItemManager {
         }
     }
 
-    /**
-     * 弹出导致金额未负的弹框
-     * 关于库存的操作
-     *
-     * @param mActivity
-     * @param runnable
-     */
+
     public void showTradeAmountNegativeDialog(FragmentActivity mActivity, final Runnable runnable, final Runnable inventoryRunnable) {
-        //退菜导致订单金额为负时，弹框进行提示
-        TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
+                TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
         if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getTradeAmount().compareTo(BigDecimal.ZERO) < 0) {
             DialogUtil.showErrorConfirmDialog(mActivity.getSupportFragmentManager(), R.string.operation_make_amount_negative, R.string.go_on_opearation,
                     R.string.cancel_operation, new View.OnClickListener() {
@@ -236,10 +194,7 @@ public class DinnerTradeItemManager {
         }
     }
 
-    /**
-     * 关于有关联菜品的未出单的菜品进行删菜
-     * 改单是要扣减库存
-     */
+
     private void deductionInventory(IShopcartItemBase shopcartItemBase) {
         List<TradeItem> tradeItemList = new ArrayList<>();
         TradeItem tradeItem = null;
@@ -265,15 +220,9 @@ public class DinnerTradeItemManager {
         DinnerShoppingCart.getInstance().getInventoryVo().addNewAddDishList(tradeItemList);
     }
 
-    /**
-     * 自助弹出导致金额未负的弹框
-     *
-     * @param mActivity
-     * @param runnable
-     */
+
     public void showBuffetTradeAmountNegativeDialog(FragmentActivity mActivity, final Runnable runnable) {
-        //退菜导致订单金额为负时，弹框进行提示
-        TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
+                TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
         if (tradeVo == null || tradeVo.getTrade() == null || tradeVo.getTrade().getTradeAmount() == null || tradeVo.getPaidAmount() == null)
             return;
         if (Utils.isNotEmpty(tradeVo.getCouponPrivilegeVoList())) {
@@ -308,15 +257,9 @@ public class DinnerTradeItemManager {
         }
     }
 
-    /**
-     * 自助弹出导致金额未负的弹框
-     *
-     * @param mActivity
-     * @param runnable
-     */
+
     public void showBuffetTradeAmountNegativeDialog(FragmentActivity mActivity, final Runnable runnable, final Runnable inventoryRunnable) {
-        //退菜导致订单金额为负时，弹框进行提示
-        TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
+                TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
         if (tradeVo == null || tradeVo.getTrade() == null || tradeVo.getTrade().getTradeAmount() == null || tradeVo.getPaidAmount() == null)
             return;
         if (Utils.isNotEmpty(tradeVo.getCouponPrivilegeVoList())) {
@@ -360,32 +303,21 @@ public class DinnerTradeItemManager {
     }
 
 
-    /**
-     * 取消对菜品的删除操作
-     *
-     * @param shopcartItemBase
-     * @param parentUuid
-     */
+
     public void cancelDeleteItem(IShopcartItemBase shopcartItemBase, String parentUuid) {
         if (shopcartItemBase instanceof ReadonlyShopcartItem) {
             DinnerShoppingCart.getInstance().recoverInvalidDish((ReadonlyShopcartItem) shopcartItemBase);
         } else if (shopcartItemBase instanceof ShopcartItem) {
             DinnerShoppingCart.getInstance().addDishToShoppingCart((ShopcartItem) shopcartItemBase, false);
         } else if (shopcartItemBase instanceof SetmealShopcartItem) {
-            // 先获取外壳
-            ShopcartItem shopcartItem = DinnerShoppingCart.getInstance().
+                        ShopcartItem shopcartItem = DinnerShoppingCart.getInstance().
                     getShopcartItemByUUID(DinnerShoppingCart.getInstance().getShoppingCartVo(), parentUuid);
             shopcartItem.addSetmeal((SetmealShopcartItem) shopcartItemBase);
             DinnerShoppingCart.getInstance().updateDinnerDish(shopcartItem, false);
         }
     }
 
-    /**
-     * 菜品是否参与了营销活动
-     *
-     * @param shopcartItemBase
-     * @return
-     */
+
     public boolean hasMarketActivity(IShopcartItemBase shopcartItemBase) {
         TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
         if (tradeVo != null && Utils.isNotEmpty(tradeVo.getTradeItemPlanActivityList())) {
@@ -400,12 +332,7 @@ public class DinnerTradeItemManager {
         return false;
     }
 
-    /**
-     * 是否为未生效的readonlyshopcartitem
-     *
-     * @param base
-     * @return
-     */
+
     public boolean isUnsavedReadonly(IShopcartItemBase base) {
         if (base != null && (base instanceof ReadonlyShopcartItem) && base.getId() == null) {
             return true;
@@ -413,12 +340,7 @@ public class DinnerTradeItemManager {
         return false;
     }
 
-    /**
-     * 部分退菜产生的item
-     *
-     * @param base
-     * @return
-     */
+
     public boolean isReturnDish(IShopcartItemBase base) {
         if (base != null && (base instanceof ReadonlyShopcartItem) && !TextUtils.isEmpty(base.getRelateTradeItemUuid())) {
             return true;
@@ -426,11 +348,7 @@ public class DinnerTradeItemManager {
         return false;
     }
 
-    /**
-     * 是否全退
-     *
-     * @return
-     */
+
     public boolean isDishReturnAll(DishDataItem dishDataItem) {
         IShopcartItemBase base = dishDataItem.getBase();
         if (base != null && (base instanceof ReadonlyShopcartItem) && !TextUtils.isEmpty(base.getRelateTradeItemUuid())
@@ -441,11 +359,7 @@ public class DinnerTradeItemManager {
     }
 
 
-    /**
-     * 判断当前菜品是否为套餐
-     *
-     * @return
-     */
+
     public boolean isCombo(ShopcartItemBase<?> realItemBase) {
         if (realItemBase != null) {
             return realItemBase.getOrderDish().isCombo();
@@ -454,11 +368,7 @@ public class DinnerTradeItemManager {
         return false;
     }
 
-    /**
-     * 是否保存过服务器(未出单或者已出单),并且有效
-     *
-     * @return
-     */
+
     public boolean isSaved(DishDataItem dishDataItem) {
         if (dishDataItem != null && dishDataItem.getBase() != null) {
             return dishDataItem.getBase().getId() != null;
@@ -466,13 +376,7 @@ public class DinnerTradeItemManager {
         return false;
     }
 
-    /**
-     * 判断菜品的选中状态
-     *
-     * @param dataItem
-     * @param opType
-     * @return
-     */
+
     public DishDataItem.DishCheckStatus getDishCheckStatus(DishDataItem dataItem, PrintOperationOpType opType) {
         if (opType == null) {
             return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
@@ -489,11 +393,7 @@ public class DinnerTradeItemManager {
                     status = getShopCartItemCheckStatus(iSetmealShopcartItem, opType);
                 if (status == DishDataItem.DishCheckStatus.CHECKED)
                     return status;
-                /*
-                if(iSetmealShopcartItem != null && (getShopCartItemCheckStatus(iSetmealShopcartItem, opType) == DishDataItem.DishCheckStatus.NOT_CHECK
-                        || getShopCartItemCheckStatus(iSetmealShopcartItem, opType) == DishDataItem.DishCheckStatus.CHECKED))
-                    return getShopCartItemCheckStatus(iSetmealShopcartItem, opType);
-                */
+
             }
             return status;
         } else {
@@ -521,50 +421,29 @@ public class DinnerTradeItemManager {
         }
     }
 
-    /**
-     * 获取等叫模式下菜品的选中状态
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     public DishDataItem.DishCheckStatus getWakeUpCheckStatus(IShopcartItemBase shopcartItem) {
         int canWakUp = shopcartItem.canWakeUp();
         switch (canWakUp) {
-            case IShopcartItem.NOT_WAKE_UP:// 未等叫
-                return DishDataItem.DishCheckStatus.NOT_CHECK;
-            case IShopcartItem.HAS_WAKE_UP:// 已等叫
-                return DishDataItem.DishCheckStatus.CHECKED;
-            case IShopcartItem.CANNOT_WAKE_UP:// 禁用
-                return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
+            case IShopcartItem.NOT_WAKE_UP:                return DishDataItem.DishCheckStatus.NOT_CHECK;
+            case IShopcartItem.HAS_WAKE_UP:                return DishDataItem.DishCheckStatus.CHECKED;
+            case IShopcartItem.CANNOT_WAKE_UP:                return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
             default:
                 return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
         }
     }
 
-    /**
-     * 获取起菜模式下菜品的选中状态
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     private DishDataItem.DishCheckStatus getRiseUpCheckStatus(IShopcartItemBase shopcartItem) {
-        if (shopcartItem.canRiseDish()) {// 未起菜
-            return DishDataItem.DishCheckStatus.NOT_CHECK;
-        } else {// 禁用
-            return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
+        if (shopcartItem.canRiseDish()) {            return DishDataItem.DishCheckStatus.NOT_CHECK;
+        } else {            return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
         }
     }
 
 
-    /**
-     * 获取取消等叫模式下菜品的选中状态
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     public DishDataItem.DishCheckStatus getWakeUpCancelCheckStatus(IShopcartItemBase shopcartItem) {
-        if (shopcartItem == null || shopcartItem.getId() == null)    //未保存的菜品
-            return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
+        if (shopcartItem == null || shopcartItem.getId() == null)                return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
         boolean canCancelWakUp = shopcartItem.canWakeUpCancel();
         if (canCancelWakUp)
             return DishDataItem.DishCheckStatus.NOT_CHECK;
@@ -572,47 +451,28 @@ public class DinnerTradeItemManager {
             return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
     }
 
-    /**
-     * 获取取消起菜模式下菜品的选中状态
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     public DishDataItem.DishCheckStatus getRiseUpCancelCheckStatus(IShopcartItemBase shopcartItem) {
-        if (shopcartItem == null || shopcartItem.getId() == null)    //未保存的菜品
-            return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
+        if (shopcartItem == null || shopcartItem.getId() == null)                return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
         if (shopcartItem.canRiseDishCancel()) {
             return DishDataItem.DishCheckStatus.NOT_CHECK;
-        } else {// 禁用
-            return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
+        } else {            return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
         }
     }
 
 
-    /**
-     * 获取催菜模式下菜品的选中状态
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     private DishDataItem.DishCheckStatus getRemindDishCheckStatus(IShopcartItemBase shopcartItem) {
-        if (shopcartItem.canRemindDish()) {// 可以催菜
-            return DishDataItem.DishCheckStatus.NOT_CHECK;
+        if (shopcartItem.canRemindDish()) {            return DishDataItem.DishCheckStatus.NOT_CHECK;
         } else {
             return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
         }
     }
 
-    /**
-     * 获取批量操作模式下菜品的选中状态
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     private DishDataItem.DishCheckStatus getBatchOperationCheckStatus(IShopcartItemBase shopcartItem) {
         if (shopcartItem.getStatusFlag() == StatusFlag.VALID) {
-            //已出单数目为0的菜品，不能进行批量操作
-            if (!TextUtils.isEmpty(shopcartItem.getBatchNo())
+                        if (!TextUtils.isEmpty(shopcartItem.getBatchNo())
                     && shopcartItem.getSingleQty().compareTo(BigDecimal.ZERO) == 0) {
                 return DishDataItem.DishCheckStatus.INVALIATE_CHECK;
             } else {
@@ -623,32 +483,25 @@ public class DinnerTradeItemManager {
         }
     }
 
-    /**
-     * 给trade内的各项数据绑定tradeid
-     *
-     * @param tradeVo
-     */
+
     public void bindTradeId(TradeVo tradeVo) {
         if (tradeVo == null) {
             return;
         }
 
-        // 获取tradeid
-        Long tradeId = null;
+                Long tradeId = null;
         if (tradeVo.getTrade() != null) {
             tradeId = tradeVo.getTrade().getId();
         }
 
-        // 会员绑定tradeid
-        List<TradeCustomer> customerList = tradeVo.getTradeCustomerList();
+                List<TradeCustomer> customerList = tradeVo.getTradeCustomerList();
         if (customerList != null) {
             for (TradeCustomer tradeCustomer : customerList) {
                 tradeCustomer.setTradeId(tradeId);
             }
         }
 
-        // 菜品折扣绑定tradeid
-        for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
+                for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
             if (tradeItemVo.getTradeItemPrivilege() != null
                     && tradeItemVo.getTradeItemPrivilege().getTradeId() != tradeId) {
                 tradeItemVo.getTradeItemPrivilege().setTradeId(tradeId);
@@ -687,29 +540,23 @@ public class DinnerTradeItemManager {
                                         DishOptListener optlistener) {
 
         TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
-        //List<String> kitchenUUIDs = DinnerPrintUtil.getNoBatchNo(dataItems);
-        if (tradeVo.isUnionMainTrade() || tradeVo.isUnionSubTrade()) {
+                if (tradeVo.isUnionMainTrade() || tradeVo.isUnionSubTrade()) {
             for (DishDataItem item : dataItems) {
                 if (TextUtils.isEmpty(item.getBase().getBatchNo()))
                     item.getBase().setIssueStatus(IssueStatus.ISSUING);
                 if (TextUtils.isEmpty(item.getItem().getBatchNo()))
-                    item.getItem().setIssueStatusWithoutSetmeal(IssueStatus.ISSUING);//只改套餐本身的，避免其他子菜受到影响
-
-                // 子单修改主单菜时，需要先调用拆菜
-                ShopcartItemUtils.splitBatchItem(item.getItem());
+                    item.getItem().setIssueStatusWithoutSetmeal(IssueStatus.ISSUING);
+                                ShopcartItemUtils.splitBatchItem(item.getItem());
             }
             tradeVo = DinnerShoppingCart.getInstance().createOrder();
 
-            //OperationDishListener listener = new OperationDishListener(dataItems, opType, tradeVo, kitchenUUIDs, optlistener);
-            DinnerDishManager.getInstance().addSelectedTradeItemOperations(dataItems, opType);
-            //listener.preparePrintData();
-            /*DinnerUnionManager.unionTradeOperationDish(tradeVo, DinnerShoppingCart.getInstance().getShoppingCartDish(), DinnerShoppingCart.getInstance().getMainTradeInfo(), dataItems,
-                    LoadingResponseListener.ensure(listener, fragmentManager), tradeOperates);*/
+                        DinnerDishManager.getInstance().addSelectedTradeItemOperations(dataItems, opType);
+
         } else {
             List<Long> selectedItemIds = DinnerDishManager.getInstance().getSingleAndComboIds(dataItems);
 
             if (selectedItemIds.isEmpty() || selectedItemIds.size() < dataItems.size()
-                    /*|| !kitchenUUIDs.isEmpty()*/ || (adapter != null && DinnerDishManager.getInstance().isChanged(adapter.getAllData()))) {
+                     || (adapter != null && DinnerDishManager.getInstance().isChanged(adapter.getAllData()))) {
 
                 DinnerDishManager.getInstance().removeInvoidTradeItemOperations(dataItems);
 
@@ -717,44 +564,26 @@ public class DinnerTradeItemManager {
                     if (TextUtils.isEmpty(item.getBase().getBatchNo()))
                         item.getBase().setIssueStatus(IssueStatus.ISSUING);
                     if (TextUtils.isEmpty(item.getItem().getBatchNo()))
-                        item.getItem().setIssueStatusWithoutSetmeal(IssueStatus.ISSUING);//只改套餐本身的，避免其他子菜受到影响
-                }
+                        item.getItem().setIssueStatusWithoutSetmeal(IssueStatus.ISSUING);                }
                 tradeVo = DinnerShoppingCart.getInstance().createOrder();
 
-                //团餐餐标
-                /*if (tradeVo.getMealShellVo() != null && tradeVo.getMealShellVo().getTradeItem() != null)
-                    kitchenUUIDs.add(tradeVo.getMealShellVo().getTradeItem().getUuid());*/
 
-                //OperationModifyDishListener modifyDishListener = new OperationModifyDishListener(opType, tradeVo, dataItems, kitchenUUIDs, fragmentManager, optlistener);
-                // modifyDishListener.preparePrintData();
-                //tradeOperates.modifyDinner(tradeVo, LoadingResponseListener.ensure(modifyDishListener, fragmentManager));
-            } else {
-                //OperationDishListener listener = new OperationDishListener(dataItems, opType, tradeVo, kitchenUUIDs, optlistener);
-                DinnerDishManager.getInstance().addSelectedTradeItemOperations(dataItems, opType);
-                //tradeOperates.operationDish(tradeVo.getTrade().getId(), opType, dataItems, LoadingResponseListener.ensure(listener, fragmentManager));
-            }
+
+                                                            } else {
+                                DinnerDishManager.getInstance().addSelectedTradeItemOperations(dataItems, opType);
+                            }
         }
 
     }
 
 
-    /**
-     * 菜品是否必须全退
-     *
-     * @param shopcartItemBase
-     * @return
-     */
+
     public static boolean isMustReturnAll(IShopcartItemBase shopcartItemBase) {
         return shopcartItemBase.getSaleType() != SaleType.UNWEIGHING || shopcartItemBase.isGroupDish()
                 || shopcartItemBase.getShopcartItemType() == ShopcartItemType.MAINBATCH;
     }
 
-    /**
-     * 是否是普通（非联台相关菜品）非称重商品
-     *
-     * @param shopcartItemBase
-     * @return
-     */
+
     public static boolean isCommonUnweightDish(IShopcartItemBase shopcartItemBase) {
         return shopcartItemBase.getShopcartItemType() == ShopcartItemType.COMMON &&
                 shopcartItemBase.getSaleType() == SaleType.UNWEIGHING;

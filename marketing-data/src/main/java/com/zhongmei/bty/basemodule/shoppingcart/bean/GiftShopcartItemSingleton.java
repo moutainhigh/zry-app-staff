@@ -6,9 +6,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class GiftShopcartItemSingleton {
 
@@ -33,7 +31,6 @@ public class GiftShopcartItemSingleton {
         }
     }
 
-    //活动赠送商品
-    protected List<ShopcartItem> listPolicyDishshopVos = new ArrayList<ShopcartItem>();
+        protected List<ShopcartItem> listPolicyDishshopVos = new ArrayList<ShopcartItem>();
 
 }

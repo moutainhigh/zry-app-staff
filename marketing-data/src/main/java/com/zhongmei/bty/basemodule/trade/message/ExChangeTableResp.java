@@ -5,11 +5,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeTable;
 
 import java.util.List;
 
-/**
- * @Date： 2016/11/8
- * @Description:快餐换桌返回对象
- * @Version: 1.0
- */
+
 public class ExChangeTableResp {
 
     private List<Tables> tables;

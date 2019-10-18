@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import java.io.Serializable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class CancelDeliveryOrderReq implements Serializable {
     private long shopIdenty;

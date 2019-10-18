@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.db.entity.dish.DishProperty;
 import com.zhongmei.yunfu.db.entity.dish.DishSetmeal;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 
-/**
- * @version: 1.0
- * @date 2015年7月27日
- */
+
 public class OrderExtra extends OrderSetmeal {
 
     public OrderExtra(DishShop dishShop, DishSetmeal setmeal) {

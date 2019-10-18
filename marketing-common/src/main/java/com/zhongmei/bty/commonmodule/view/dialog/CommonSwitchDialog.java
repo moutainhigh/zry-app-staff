@@ -24,9 +24,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(resName = "common_switch_diglog_layout")
 public class CommonSwitchDialog extends BasicDialogFragment implements
         View.OnClickListener, DialogInterface.OnKeyListener {
@@ -51,16 +49,7 @@ public class CommonSwitchDialog extends BasicDialogFragment implements
     @FragmentArg("categoryText")
     protected String categoryText;
 
-    /* public static final int ICON_ERROR = R.drawable.common_dialog_icon_error;
 
-     public static final int ICON_SUCCESS = R.drawable.common_dialog_icon_success;
-
-     public static final int ICON_WARNING = R.drawable.common_dialog_icon_warning;
-
-     public static final int ICON_HINT = R.drawable.common_dialog_icon_hint;
-
-     public static final int ICON_ASK = R.drawable.common_dialog_icon_ask;
- */
     @ViewById(resName = "common_dialog_title")
     protected TextView mTitle;
 

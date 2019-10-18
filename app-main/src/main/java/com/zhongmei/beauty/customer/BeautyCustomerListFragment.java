@@ -89,10 +89,7 @@ import de.greenrobot.event.EventBus;
 public class BeautyCustomerListFragment extends BasicFragment implements LoaderManager.LoaderCallbacks<Cursor>, OnRefreshListener, OnLoadMoreListener, BeautyCustomerListAdapter.OnRecyclerViewListener {
     private static final String TAG = BeautyCustomerListFragment.class.getSimpleName();
 
-    private final int SEARCHTYPE_NOMAL = 0x01;//关键字查询
-    private final int SEARCHTYPE_POSTCARD = 0x02; //刷卡查询
-    private final int SEARCHTYPE_SCANCODE = 0x03; //扫码查询
-
+    private final int SEARCHTYPE_NOMAL = 0x01;    private final int SEARCHTYPE_POSTCARD = 0x02;     private final int SEARCHTYPE_SCANCODE = 0x03;
     @ViewById(R.id.customer_search_edit)
     protected EditText mSearchEdit;
 
@@ -129,13 +126,13 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
     Handler initPopWinHandler = null;
 
-    /* 会员等级 */
+
     private List<CustomerBaseBean> mCustomerLevelList = new ArrayList<CustomerBaseBean>();
 
-    /* 客户分组 */
+
     private List<CustomerBaseBean> mCustomerGroupList = new ArrayList<CustomerBaseBean>();
 
-    /* 顾客类型 */
+
     private List<CustomerBaseBean> mCustomerTypeList = new ArrayList<CustomerBaseBean>();
 
     private CustomerPopWindowAdapter mLevelAdatper;
@@ -150,56 +147,37 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
     private CustomerPopWindow mTypePop;
 
-    /**
-     * 手机号或者姓名
-     */
+
     private String mSearchCondition = "";
-    /**
-     * 顾客等级
-     */
+
     private String mLevelCondition = "";
-    /**
-     * 顾客分组
-     */
+
     private String mGroupCondition = "";
-    /**
-     * 顾客类型
-     */
+
     private String mTypeCondition = "";
 
-    /* 顾客类型，值:会员，非会员 */
+
     private String[] mTypeCustomerValue = new String[3];
 
     private ScanPopupWindow scanPopupWindow;
 
     private int mSearchType = SEARCHTYPE_NOMAL;
-    /**
-     * 页码标记 页码
-     */
+
     private int mCurrentPage = 1;
-    /**
-     * 页码标记 查询时间
-     */
+
     private Long mQueryTime;
 
-    /**** 标记位 ****/
-    private boolean mIsRefresh = true; // 刚进入默认刷新
 
+    private boolean mIsRefresh = true;
     private final int PAGESIZE = 40;
 
-    /**
-     * 第一次进入app时，使用缓存数据
-     */
+
     private boolean mIsCache = true;
 
-    /**
-     * 标记是否支持上拉刷新
-     */
+
     private boolean mIsSupportLoadMore = true;
 
-    /**
-     * 顾客请求对象
-     */
+
     private CustomerOperates mCustomerOperates;
 
     private CustomerFragmentReplaceListener replaceListener;
@@ -220,8 +198,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
     @AfterViews
     public void initView() {
-        // 取消点击空白区域隐藏软键盘的效果
-        if (getActivity() instanceof MainBaseActivity) {
+                if (getActivity() instanceof MainBaseActivity) {
             ((MainBaseActivity) getActivity()).setIsConsumeTochTransEvent(true);
         }
 
@@ -255,11 +232,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         registerEventBus();
     }
 
-    /**
-     * 隐藏软键盘
-     *
-     * @return
-     */
+
     private boolean deelInputKeyboard() {
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         return imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(),
@@ -267,20 +240,16 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
     }
 
     private void initLoaderManager() {
-        getLoaderManager().initLoader(0, null, this);// 查询customerLevel
-        getLoaderManager().initLoader(1, null, this);// 查询customerGroup
-    }
+        getLoaderManager().initLoader(0, null, this);        getLoaderManager().initLoader(1, null, this);    }
 
     private void setupRecycelerView() {
-        // 设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         rvContent.setHasFixedSize(true);
         rvContent.setLayoutManager(linearLayoutManager);
         mCustomerListAdapter = new BeautyCustomerListAdapter(getActivity(), mCustomerList);
-        // 绑定事件
-        mCustomerListAdapter.setOnRecyclerViewListener(this);
+                mCustomerListAdapter.setOnRecyclerViewListener(this);
         rvContent.setAdapter(mCustomerListAdapter);
         rvContent.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -296,8 +265,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
                 if (newState == RecyclerView.SCROLL_STATE_IDLE
                         && lastVisibleItemPosition == totalItemCount - 1
                         && visibleItemCount > 0 && mCustomerListAdapter.getItemCount() > 0) {
-                    //加载更多
-                    swipeToLoadLayout.setLoadingMore(true);
+                                        swipeToLoadLayout.setLoadingMore(true);
                 }
             }
         });
@@ -318,8 +286,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
     @Override
     public void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
+                super.onResume();
     }
 
 
@@ -353,9 +320,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         };
     }
 
-    /**
-     * 点选类型 会员／非会员
-     */
+
     private OnItemClickListener typeItemSelectListener = new OnItemClickListener() {
 
         @Override
@@ -367,19 +332,14 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
             if (TextUtils.isEmpty(text)) {
                 return;
             }
-            if (mTypeCustomerValue[1].equals(text)) {// 会员
-                mTypeCondition = "2";
+            if (mTypeCustomerValue[1].equals(text)) {                mTypeCondition = "2";
                 mType.setText(mTypeCustomerValue[1]);
-            } else if (mTypeCustomerValue[2].equals(text)) {// 非会员
-                mTypeCondition = "1";
+            } else if (mTypeCustomerValue[2].equals(text)) {                mTypeCondition = "1";
                 mType.setText(mTypeCustomerValue[2]);
-            } else {// 全部顾客
-                mTypeCondition = "";
+            } else {                mTypeCondition = "";
                 mType.setText(mTypeCustomerValue[0]);
             }
-//			filter();
-            // TODO 查询数据
-            refreshData();
+                        refreshData();
             mTypePop.dismiss();
         }
     };
@@ -393,8 +353,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
             }
             mGroupCondition = mGroupAdatper.getId(arg2);
             mGroup.setText(mGroupAdatper.getName(arg2));
-            // TODO 查询数据
-            refreshData();
+                        refreshData();
             mGroupPop.dismiss();
         }
 
@@ -409,15 +368,12 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
             }
             mLevelCondition = mLevelAdatper.getId(arg2);
             mLevel.setText(mLevelAdatper.getName(arg2));
-            // TODO 查询数据
-            refreshData();
+                        refreshData();
             mLevelPop.dismiss();
         }
     };
 
-    /**
-     * 判断是否正在刷新或者加载更多
-     */
+
     private boolean isRefreshOrLoad() {
         return (swipeToLoadLayout.isRefreshing() || swipeToLoadLayout.isLoadingMore()) ? true : false;
     }
@@ -436,13 +392,10 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         }
 
         mTypeAdapter = new CustomerPopWindowAdapter(getActivity(), mCustomerTypeList);
-        // mType.setAdapter(adapter);
-        initPopWinHandler.sendEmptyMessage(3);
+                initPopWinHandler.sendEmptyMessage(3);
     }
 
-    /**
-     * 清除输入框中的输入项目
-     */
+
     @Click(R.id.ivDelete_Customer)
     public void clearEditText() {
         clearEditTextFocus();
@@ -450,9 +403,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
     }
 
-    /**
-     * 清除焦点
-     */
+
     private void clearEditTextFocus() {
         if (mSearchEdit.hasFocus()) {
             mSearchEdit.setFocusable(false);
@@ -480,9 +431,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
                 }
                 break;
             case R.id.customer_type:
-                /*if (mTypePop != null && !mTypePop.isShowing()) {
-                    mTypePop.showAsDropDown(mType, (mType.getWidth() - 150) / 2, 0);
-                }*/
+
                 break;
             case R.id.ib_scan_code:
                 DisplayServiceManager.doCancel(getActivity());
@@ -576,61 +525,24 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
 
     private void postCard() {
-        /*ReadCardDialogFragment readCardDialogFragment = new ReadCardDialogFragment.UionCardDialogFragmentBuilder()
-                .buildReadCardId(ReadCardDialogFragment.UionCardStaus.READ_CARD_ID_SINGLE,
-                        new ReadCardDialogFragment.CardOvereCallback() {
 
-                            @Override
-                            public void onSuccess(ReadCardDialogFragment.UionCardStaus status, String number) {
-                                mSearchEdit.setText("");
-                                mSearchCondition = number;
-                                refreshData();
-                            }
-
-                            @Override
-                            public void onFail(ReadCardDialogFragment.UionCardStaus status, String rejCodeExplain) {
-                                if (!TextUtils.isEmpty(rejCodeExplain)) {
-                                    ToastUtil.showShortToast(rejCodeExplain);
-                                }
-                                mSearchType = SEARCHTYPE_NOMAL;
-                            }
-                        });
-        readCardDialogFragment.show(getFragmentManager(), "get_cardno");
-        readCardDialogFragment.setCloseListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //关闭刷卡dialog
-                mSearchType = SEARCHTYPE_NOMAL;
-            }
-        });*/
     }
 
-    /**
-     * 更新了数据刷新列表
-     */
+
     public void onEventMainThread(EventCreateOrEditCustomer event) {
-        if (event.type == CustomerActivity.PARAM_ADD) { // 添加
-            refreshData();
-        } else { // 编辑
-            refreshByItem(mCustomerListAdapter.getCurrentPosition(), event.bean);
+        if (event.type == CustomerActivity.PARAM_ADD) {             refreshData();
+        } else {             refreshByItem(mCustomerListAdapter.getCurrentPosition(), event.bean);
         }
     }
 
-    /**
-     * 升级了会员
-     */
+
     public void onEventMainThread(DetailRefreshEvent event) {
         if (event.customer != null) {
             refreshByItem(mCustomerListAdapter.getCurrentPosition(), event.customer.getCustomerListBean());
         }
     }
 
-    /**
-     * 刷新数据
-     *
-     * @param position
-     * @param bean
-     */
+
     private void refreshByItem(int position, CustomerListResp bean) {
         CustomerListResp listResp = mCustomerList.get(position);
         if (listResp != null) {
@@ -646,9 +558,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         }
     }
 
-    /**
-     * 重置 顾客类型 分组 等级查询调教
-     */
+
     private void resetTypeCondiction() {
         mTypeCondition = "";
         mGroupCondition = "";
@@ -660,12 +570,10 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
     private void setupEditText() {
         mSearchEdit.addTextChangedListener(new TextWatcher() {
-            private String oldKeyWord; // 改变之前的文字
-
+            private String oldKeyWord;
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO 改变中
-                String keyWord = s.toString();
+                                String keyWord = s.toString();
                 if (!TextUtils.isEmpty(keyWord)) {
                     if (keyWord.length() == 1 && keyWord.contains(" ")) {
                         keyWord = keyWord.replaceAll(" ", "");
@@ -684,8 +592,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO 改变前
-                String keyWord = s.toString();
+                                String keyWord = s.toString();
                 if (keyWord.contains(" ")) {
                     oldKeyWord = keyWord.replaceAll(" ", "");
                 }
@@ -693,8 +600,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
             @Override
             public void afterTextChanged(Editable s) {
-                // TODO 改变后
-                if (mSearchType == SEARCHTYPE_SCANCODE) {
+                                if (mSearchType == SEARCHTYPE_SCANCODE) {
                     if (scanPopupWindow != null && scanPopupWindow.isShowing()) {
                         scanPopupWindow.dismiss();
                     }
@@ -738,22 +644,14 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         return null;
     }
 
-    /**
-     * 查询顾客分组信息
-     *
-     * @return
-     */
+
     private Loader<Cursor> queryCustomerGroup() {
         String orderBy = CustomerGroupLevel.$.id + " ASC";
         return new CursorLoader(getActivity(), DBHelperManager.getUri(CustomerGroupLevel.class), null,
                 null, null, orderBy);
     }
 
-    /**
-     * 查询顾客等级
-     *
-     * @return
-     */
+
     private Loader<Cursor> queryCustomerLevel() {
         return new CursorLoader(getActivity(), DBHelperManager.getUri(CustomerLevel.class), null,
                 null, null, null);
@@ -780,45 +678,33 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
     public void onLoaderReset(Loader<Cursor> loader) {
     }
 
-    /**
-     * 把顾客分组传给顾客列表，会员列表的adapter里只有分组的Id，可以通过id把name取出来
-     */
+
     private void setGroupForAdapter() {
         TreeMap<String, String> groupMap = new TreeMap<String, String>();
-        // 从1开始，去掉加入的默认值
-        for (int i = 1; i < mCustomerGroupList.size(); i++) {
+                for (int i = 1; i < mCustomerGroupList.size(); i++) {
             groupMap.put(mCustomerGroupList.get(i).getId(), mCustomerGroupList.get(i).getName());
         }
         mCustomerListAdapter.setGroupMap(groupMap);
     }
 
-    /**
-     * 把会员等级传给顾客列表，会员列表的adapter里只有会员等级的Id，可以通过id把name取出来
-     */
+
     private void setLevelforAdapter() {
         TreeMap<String, String> levelMap = new TreeMap<String, String>();
-        // 从1开始，去掉加入的默认值
-        for (int i = 1; i < mCustomerLevelList.size(); i++) {
+                for (int i = 1; i < mCustomerLevelList.size(); i++) {
 
             levelMap.put(mCustomerLevelList.get(i).getId(), mCustomerLevelList.get(i).getName());
         }
         mCustomerListAdapter.setLevelMap(levelMap);
     }
 
-    /**
-     * 读取customergroup表中的数据
-     *
-     * @param cursor
-     */
+
     private void groupListAddData(Cursor cursor) {
         mCustomerGroupList.clear();
-        // 加入默认显示的值 点击后会显示全部
-        CustomerGroupBean l = new CustomerGroupBean();
+                CustomerGroupBean l = new CustomerGroupBean();
         l.setId("");
         l.setName(getString(R.string.customer_group_default));
         mCustomerGroupList.add(l);
-        // 加入数据库读取的数据
-        if (cursor != null) {
+                if (cursor != null) {
             while (cursor.moveToNext()) {
                 CustomerGroupBean group = new CustomerGroupBean();
                 group.setId(cursor.getString(cursor.getColumnIndex(CustomerGroupLevel.$.id)));
@@ -832,20 +718,14 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         mGroupAdatper = new CustomerPopWindowAdapter(getActivity(), mCustomerGroupList);
     }
 
-    /**
-     * 读取customerlevel表中的数据
-     *
-     * @param cursor
-     */
+
     private void levelListAddData(Cursor cursor) {
         mCustomerLevelList.clear();
-        // 加入默认显示的值 点击后会显示全部
-        CustomerLevelBean l = new CustomerLevelBean();
+                CustomerLevelBean l = new CustomerLevelBean();
         l.setId("");
         l.setName(getString(R.string.customer_level_default));
         mCustomerLevelList.add(l);
-        // 加入数据库读取的数据
-        if (cursor != null) {
+                if (cursor != null) {
             while (cursor.moveToNext()) {
                 CustomerLevelBean level = new CustomerLevelBean();
                 level.setId(cursor.getString(cursor.getColumnIndex(CustomerLevel.$.id)));
@@ -862,8 +742,7 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
 
     @Override
     public void onStop() {
-        // TODO Auto-generated method stub
-        super.onStop();
+                super.onStop();
     }
 
     @Override
@@ -903,40 +782,29 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         }
     }
 
-    /**
-     * 发送Event刷新详情
-     *
-     * @param id
-     */
+
     private void sendEventRefresh(Long id) {
         EventBus.getDefault().post(new EventRefreshDetail(id));
     }
 
-    /**
-     * 清空 初始化 数据
-     */
+
     private void initRequest() {
         mCurrentPage = 1;
-        mIsRefresh = true; // 允许刷新
-        mIsSupportLoadMore = true;
+        mIsRefresh = true;         mIsSupportLoadMore = true;
         mQueryTime = null;
         if (mSearchType == SEARCHTYPE_POSTCARD || mSearchType == SEARCHTYPE_SCANCODE) {
             resetTypeCondiction();
         }
     }
 
-    /**
-     * 扫码 或者 二维码
-     */
+
     private void scanCardOrWeChat() {
         mSearchType = SEARCHTYPE_NOMAL;
         mIsSupportLoadMore = false;
         mSearchCondition = "";
     }
 
-    /**
-     * 刷新数据
-     */
+
     private void refreshData() {
         swipeToLoadLayout.post(new Runnable() {
             @Override
@@ -946,17 +814,13 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         });
     }
 
-    /**
-     * 刷新
-     */
+
     private void refreshAllData() {
         initRequest();
         queryCustomerList();
     }
 
-    /**
-     * 查询顾客列表
-     */
+
     private void queryCustomerList() {
         mCustomerOperates.cancelQueryCustomerListByCondition();
         YFResponseListener<YFResponseList<CustomerListResp>> responseListener = new YFResponseListener<YFResponseList<CustomerListResp>>() {
@@ -969,13 +833,10 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
                     mCurrentPage++;
                     List<CustomerListResp> list = response.getContent();
                     if (list != null && list.size() > 0) {
-                        if (mIsRefresh) {// 刷新
-                            mCustomerList.clear();
+                        if (mIsRefresh) {                            mCustomerList.clear();
                             mCustomerList.addAll(list);
                             mCustomerListAdapter.notifyDataAll();
-                        } else {// 更多
-                            int positionStart = mCustomerList.size(); // 初始位置
-                            mCustomerList.addAll(list);
+                        } else {                            int positionStart = mCustomerList.size();                             mCustomerList.addAll(list);
                             mCustomerListAdapter.notifyItemRangeInserted(positionStart, list.size());
                         }
                         if (mIsRefresh) {
@@ -1006,27 +867,20 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
             }
         };
         if (mSearchType == SEARCHTYPE_SCANCODE) {
-            // 微信
-            mCustomerOperates.queryCustomerListByCondition(getCustomerListReq(), responseListener);
+                        mCustomerOperates.queryCustomerListByCondition(getCustomerListReq(), responseListener);
             scanCardOrWeChat();
         } else if (mSearchType == SEARCHTYPE_POSTCARD) {
-            // 刷卡
-            mCustomerOperates.queryCustomerListByCondition(getCustomerListReq(), responseListener);
+                        mCustomerOperates.queryCustomerListByCondition(getCustomerListReq(), responseListener);
             scanCardOrWeChat();
         } else {
             mCustomerOperates.queryCustomerListByCondition(getCustomerListReq(), responseListener);
         }
     }
 
-    /**
-     * 组装上传参数
-     *
-     * @return req 列表请求参数
-     */
+
     private CustomerListReq getCustomerListReq() {
         CustomerListReq bean = new CustomerListReq(mCurrentPage, PAGESIZE);
-        bean.brandId = MainApplication.getInstance().getBrandIdenty();//品牌id
-        if (mSearchType == SEARCHTYPE_SCANCODE) {
+        bean.brandId = MainApplication.getInstance().getBrandIdenty();        if (mSearchType == SEARCHTYPE_SCANCODE) {
             bean.openId = mSearchCondition;
         } else if (mSearchType == SEARCHTYPE_POSTCARD) {
             bean.cardNum = mSearchCondition;
@@ -1042,16 +896,13 @@ public class BeautyCustomerListFragment extends BasicFragment implements LoaderM
         if (!TextUtils.isEmpty(mLevelCondition)) {
             bean.levelId = mLevelCondition;
         }
-        if (!mIsCache) { // 是否使用缓存,不使用缓存 需要传该字段
-            bean.refresh = "Y";
+        if (!mIsCache) {             bean.refresh = "Y";
         }
         bean.queryTime = mQueryTime;
         return bean;
     }
 
-    /**
-     * 刷新完成，停用刷新控件
-     */
+
     private void refreshOver() {
         if (mCustomerList.size() == 0) {
             mEmpty.setVisibility(View.VISIBLE);

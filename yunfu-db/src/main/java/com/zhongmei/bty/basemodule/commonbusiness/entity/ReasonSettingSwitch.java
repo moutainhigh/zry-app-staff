@@ -6,74 +6,35 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * @date 2016/12/26 15:00
- * <p>
- * CREATE TABLE reason_setting_switch (
- * id bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
- * brand_identy bigint(20) DEFAULT NULL COMMENT '品牌id',
- * shop_identy bigint(20) NOT NULL COMMENT '商户id',
- * reason_value varchar(50) NOT NULL COMMENT '理由code',
- * enable_switch tinyint(4) NOT NULL COMMENT '开关属性 1:打开 2:关闭',
- * status_flag tinyint(4) NOT NULL DEFAULT 1 COMMENT '状态标识  1:启用 2:禁用',
- * creator_id bigint(20) NOT NULL COMMENT '创建人id',
- * creator_name varchar(32) NOT NULL COMMENT '创建人名称',
- * updator_id bigint(20) NOT NULL COMMENT '修改人id',
- * updator_name varchar(32) NOT NULL COMMENT '修改人名称',
- * server_create_time timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP (3) COMMENT '服务器创建时间',
- * server_update_time timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP (3) ON UPDATE CURRENT_TIMESTAMP (3) COMMENT '服务器更新时间',
- * PRIMARY KEY (id),
- * UNIQUE INDEX idx_brand_shop_key (brand_identy, shop_identy, scenario_code),
- * INDEX idx_shop_identy_server_update_time (shop_identy, server_update_time)
- * )
- * ENGINE = INNODB
- * AUTO_INCREMENT = 255879
- * AVG_ROW_LENGTH = 107
- * CHARACTER SET utf8
- * COLLATE utf8_general_ci
- * COMMENT = '理由开关设置表';
- * </p>
- */
+
 @DatabaseTable(tableName = "reason_setting_switch")
 public class ReasonSettingSwitch extends IdEntityBase {
 
-    //enableSwitch开关属性 1:打开 2:关闭
-    public static final int SWITCH_ON = 1;
+        public static final int SWITCH_ON = 1;
     public static final int SWITCH_OFF = 2;
 
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
-    private Long brandIdenty; //'品牌id'
-
+    private Long brandIdenty;
     @DatabaseField(columnName = "shop_identy", canBeNull = false)
-    private Long shopIdenty; //'商户id'
-
+    private Long shopIdenty;
     @DatabaseField(columnName = "reason_value")
-    private String reasonValue; //'理由code'
-
+    private String reasonValue;
     @DatabaseField(columnName = "enable_switch")
-    private Integer enableSwitch; //'开关属性 1:打开 2:关闭'
-
+    private Integer enableSwitch;
     @DatabaseField(columnName = "status_flag")
-    private Integer statusFlag; //'状态标识  1:启用 2:禁用'
-
+    private Integer statusFlag;
     @DatabaseField(columnName = "creator_id")
-    private Long creatorId; //'创建人id'
-
+    private Long creatorId;
     @DatabaseField(columnName = "creator_name")
-    private String creatorName; //'创建人名称'
-
+    private String creatorName;
     @DatabaseField(columnName = "updator_id")
-    private Long updatorId; //'修改人id',
-
+    private Long updatorId;
     @DatabaseField(columnName = "updator_name")
-    private String updatorName; //'修改人名称'
-
+    private String updatorName;
     @DatabaseField(columnName = "server_create_time")
-    private Long serverCreateTime; //'服务器创建时间'
-
+    private Long serverCreateTime;
     @DatabaseField(columnName = "server_update_time")
-    private Long serverUpdateTime; //'服务器更新时间'
-
+    private Long serverUpdateTime;
     @Override
     public boolean isValid() {
         return ValueEnums.equalsValue(StatusFlag.VALID, statusFlag);
@@ -177,14 +138,10 @@ public class ReasonSettingSwitch extends IdEntityBase {
         return super.checkNonNull() && checkNonNull(brandIdenty, shopIdenty);
     }
 
-    /**
-     * The columns of table "reason_setting_switch"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
 
         String shopIdenty = "shop_identy";

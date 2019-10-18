@@ -1,8 +1,6 @@
 package com.zhongmei.bty.data.operates.message.content;
 
-/**
- * 封装排队请求
- */
+
 public class QueueModifyReq {
 
     private String synFlag;

@@ -1,8 +1,6 @@
 package com.zhongmei.yunfu.resp.data;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class MindTransferRespBase extends TransferResp {
 
     protected boolean success;

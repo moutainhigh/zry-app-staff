@@ -38,21 +38,15 @@ import org.androidannotations.annotations.ViewById;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by dingzb on 2019/5/14.
- */
+
 
 public class BeautyCustomerBindCardDialog extends BasicDialogFragment implements View.OnClickListener{
     private final String TAG=BeautyCustomerBindCardDialog.class.getSimpleName();
 
-    private ImageButton ib_close; //关闭按钮
-
-    private TextView tv_memberName; //会员名称
-
-    private EditText et_cardNo; //会员编号
-
-    private Button btn_bind; //绑定按钮
-
+    private ImageButton ib_close;
+    private TextView tv_memberName;
+    private EditText et_cardNo;
+    private Button btn_bind;
     private CustomerResp mCustomer;
 
     @Override
@@ -123,8 +117,7 @@ public class BeautyCustomerBindCardDialog extends BasicDialogFragment implements
             return;
         }
         mCustomer.cardNo=cardNo;
-        //网络请求
-        doCreateCustomer(mCustomer);
+                doCreateCustomer(mCustomer);
     }
 
 
@@ -155,11 +148,8 @@ public class BeautyCustomerBindCardDialog extends BasicDialogFragment implements
             }
 
         };
-        //if (TextUtils.isEmpty(uniqueCode)) {
-        oper.customerBindCard(customer.cardNo,customer.customerId, LoadingYFResponseListener.ensure(listener, getFragmentManager()));
-        /*} else {
-            oper.createMemberByPresetCustomer(customer, uniqueCode, LoadingYFResponseListener.ensure(listener, getSupportFragmentManager()));
-        }*/
+                oper.customerBindCard(customer.cardNo,customer.customerId, LoadingYFResponseListener.ensure(listener, getFragmentManager()));
+
     }
 
 }

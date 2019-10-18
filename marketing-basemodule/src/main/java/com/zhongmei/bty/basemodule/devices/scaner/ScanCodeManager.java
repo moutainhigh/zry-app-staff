@@ -6,11 +6,7 @@ import android.widget.EditText;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Desc
- *
- * @created 2017/9/13
- */
+
 public class ScanCodeManager extends ScanCode {
 
     List<ScanCode> scanCodeList = new ArrayList<>();
@@ -18,8 +14,7 @@ public class ScanCodeManager extends ScanCode {
     public ScanCodeManager(Context context, EditText editText, boolean isAllowInput) {
         scanCodeList.add(new InternalScanCode(context));
         scanCodeList.add(new CefcScanCode(editText, isAllowInput));
-        //scanCodeList.add(new DeWoScanCode());
-    }
+            }
 
     @Override
     public void start() {

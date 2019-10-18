@@ -4,9 +4,7 @@ import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 import com.zhongmei.bty.basemodule.pay.message.PaymentItemReq;
 
 public class MemberValueReq extends PaymentItemReq {
-    private String consumePassword;//会员密码
-    private Long customerId;//会员账号ID
-
+    private String consumePassword;    private Long customerId;
     public MemberValueReq(PaymentItem paymentItem) {
         super(paymentItem);
         customerId = paymentItem.getPaymentItemExtra().getCustomerId();

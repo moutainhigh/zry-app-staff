@@ -27,26 +27,20 @@ import java.lang.reflect.Method;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- * 验券控件
- */
+
 public class CommonCheckCouponsView extends LinearLayout implements View.OnClickListener {
 
     private static final String TAG = CommonCheckCouponsView.class.getSimpleName();
 
     private Context mContext;
 
-    //扫描Button
-    private ImageButton mScanBtn;
+        private ImageButton mScanBtn;
 
     private EditText mValue;
 
-    //验券Button
-    private Button mCheckBtn;
+        private Button mCheckBtn;
 
-    //是否显示系统键盘
-    private boolean isShowSystemKeryBoard = false;
+        private boolean isShowSystemKeryBoard = false;
 
     private CouponsListener mListener = null;
 
@@ -80,9 +74,7 @@ public class CommonCheckCouponsView extends LinearLayout implements View.OnClick
         });
     }
 
-    /**
-     * 初始化layout
-     */
+
     private void init(Context context) {
         LayoutInflater.from(context).inflate(R.layout.comm_check_coupons_layout, this);
         mScanBtn = (ImageButton) findViewById(R.id.scan_btn);
@@ -91,7 +83,6 @@ public class CommonCheckCouponsView extends LinearLayout implements View.OnClick
         mValue.addTextChangedListener(textWatcher);
         mCheckBtn = (Button) findViewById(R.id.check_btn);
         mCheckBtn.setOnClickListener(this);
-//        setKeyBoardValue(false);
         resisterDeWoScanCode();
     }
 
@@ -122,18 +113,12 @@ public class CommonCheckCouponsView extends LinearLayout implements View.OnClick
         return mValue;
     }
 
-    /**
-     * 清除内容
-     */
+
     public void cleanEditText() {
         mValue.setText("");
     }
 
-    /**
-     * 设置是否隐藏系统键盘
-     *
-     * @param flag true:显示 false：隐藏
-     */
+
     public void setKeyBoardValue(boolean flag) {
         this.isShowSystemKeryBoard = flag;
         forbiddenSoftKeyboard();
@@ -153,9 +138,7 @@ public class CommonCheckCouponsView extends LinearLayout implements View.OnClick
     }
 
 
-    /**
-     * 设置系统隐藏与显示
-     */
+
     private void forbiddenSoftKeyboard() {
 
         try {
@@ -176,9 +159,7 @@ public class CommonCheckCouponsView extends LinearLayout implements View.OnClick
         }
     }
 
-    /**
-     * 开启扫描
-     */
+
     public void startScan() {
         scanPopupWindow = new ScanPopupWindow(mContext);
         scanPopupWindow.showAtLocation(mScanBtn, Gravity.NO_GRAVITY, 0, 0);
@@ -197,8 +178,7 @@ public class CommonCheckCouponsView extends LinearLayout implements View.OnClick
                     if (scanPopupWindow != null) {
                         scanPopupWindow.dismiss();
                     }
-                    if (mListener != null) {//add v8.9
-                        mListener.getCouponsNo(mValue.getText().toString().trim());
+                    if (mListener != null) {                        mListener.getCouponsNo(mValue.getText().toString().trim());
                     }
                 }
             }
@@ -214,15 +194,11 @@ public class CommonCheckCouponsView extends LinearLayout implements View.OnClick
 
     public interface CouponsListener {
 
-        /**
-         * 券号
-         */
+
         public void getCouponsNo(String ticketNo);
     }
 
-    /**
-     * 设置Listener
-     */
+
     public void setCouponsListener(CouponsListener vListener) {
         this.mListener = vListener;
     }

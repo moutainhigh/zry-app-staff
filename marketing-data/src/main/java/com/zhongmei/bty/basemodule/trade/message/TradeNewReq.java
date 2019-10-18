@@ -8,11 +8,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeCustomer;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 封装Trade相关的实时请求的Request数据
- *
- * @Date：2017-9-15 下午6:30:02
- */
+
 public class TradeNewReq implements NationInfoInterface {
 
     private TradeReq tradeRequest;

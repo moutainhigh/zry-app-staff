@@ -16,25 +16,15 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class LogAction {
-    private int maxChangeSize = 10;//最大缓存日志条数
-    private boolean canChangeFolderName;
+    private int maxChangeSize = 10;    private boolean canChangeFolderName;
     private boolean saveSdcard;
     private boolean displayCommand;
     private String folderPath;
     private String logPath;
-    private AtomicInteger currentCacheSize = new AtomicInteger();//日志缓存计数
-    private StringBuffer logCacheSB = new StringBuffer();//日志缓存
-    private Timer timer;//主要用于执行一分钟一次检查
-    private TimerTask timerTask;//主要用于执行空闲时间中存储内存缓存中的日志
-    public static LogAction instance;
+    private AtomicInteger currentCacheSize = new AtomicInteger();    private StringBuffer logCacheSB = new StringBuffer();    private Timer timer;    private TimerTask timerTask;    public static LogAction instance;
     private static final Executor THREAD_POOL_EXECUTOR = Executors.newFixedThreadPool(1);
 
-    /*public static LogAction getInstance() {
-        if (instance == null) {
-            instance = new LogAction();
-        }
-        return instance;
-    }*/
+
 
     public LogAction() {
         this.saveSdcard = false;
@@ -65,8 +55,7 @@ public class LogAction {
         }
     }
 
-    //在最后一次调用日志后启动任务（在空闲时间将缓存中的日志写到文件中）
-    private synchronized void beginCountDown() {
+        private synchronized void beginCountDown() {
         if (timer != null) {
             timer.cancel();
             timer.purge();
@@ -90,8 +79,7 @@ public class LogAction {
         timer.schedule(timerTask, 60 * 1000, 60 * 1000);
     }
 
-    //写数据到SD中的文件
-    private void writeFileSdcardFile(final String content) {
+        private void writeFileSdcardFile(final String content) {
         THREAD_POOL_EXECUTOR.execute(new Runnable() {
             @Override
             public void run() {

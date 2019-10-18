@@ -6,9 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.ListView;
 
-/**
- * 该listView会展开全部item
- */
+
 @SuppressLint("NewApi")
 public class ScrollListView extends ListView {
     private boolean enableScroll = true;

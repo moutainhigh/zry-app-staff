@@ -6,117 +6,73 @@ import com.zhongmei.yunfu.db.EntityBase;
 import com.zhongmei.bty.commonmodule.database.enums.PosOpType;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * PosTransLog is a ORMLite bean type. Corresponds to the database table "pos_trans_log"
- */
+
 @DatabaseTable(tableName = "pos_trans_log")
 public class PosTransLog extends LocalEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "pos_trans_log"
-     */
+
     public interface $ extends LocalEntityBase.$ {
 
-        /**
-         * acq_number
-         */
+
         public static final String acqNumber = "acq_number";
 
-        /**
-         * amount
-         */
+
         public static final String amount = "amount";
 
-        /**
-         * app_name
-         */
+
         public static final String appName = "app_name";
 
-        /**
-         * batch_number
-         */
+
         public static final String batchNumber = "batch_number";
 
-        /**
-         * card_name
-         */
+
         public static final String cardName = "card_name";
 
-        /**
-         * card_number
-         */
+
         public static final String cardNumber = "card_number";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * expire_date
-         */
+
         public static final String expireDate = "expire_date";
 
-        /**
-         * host_serial_number
-         */
+
         public static final String hostSerialNumber = "host_serial_number";
 
-        /**
-         * iss_name
-         */
+
         public static final String issName = "iss_name";
 
-        /**
-         * iss_number
-         */
+
         public static final String issNumber = "iss_number";
 
-        /**
-         * merchant_name
-         */
+
         public static final String merchantName = "merchant_name";
 
-        /**
-         * merchant_number
-         */
+
         public static final String merchantNumber = "merchant_number";
 
-        /**
-         * pos_op_type
-         */
+
         public static final String posOpType = "pos_op_type";
 
-        /**
-         * pos_trace_number
-         */
+
         public static final String posTraceNumber = "pos_trace_number";
 
-        /**
-         * terminal_number
-         */
+
         public static final String terminalNumber = "terminal_number";
 
-        /**
-         * trans_date
-         */
+
         public static final String transDate = "trans_date";
 
-        /**
-         * trans_time
-         */
+
         public static final String transTime = "trans_time";
 
-        /**
-         * trans_type
-         */
+
         public static final String transType = "trans_type";
 
 
@@ -127,16 +83,13 @@ public class PosTransLog extends LocalEntityBase {
 
     }
 
-    // 系统参考号
-    @DatabaseField(columnName = "host_serial_number", canBeNull = false)
+        @DatabaseField(columnName = "host_serial_number", canBeNull = false)
     private String hostSerialNumber;
 
-    // 收单行号
-    @DatabaseField(columnName = "acq_number")
+        @DatabaseField(columnName = "acq_number")
     private String acqNumber;
 
-    // 流水号（凭证号）
-    @DatabaseField(columnName = "pos_trace_number", canBeNull = false)
+        @DatabaseField(columnName = "pos_trace_number", canBeNull = false)
     private String posTraceNumber;
 
     @DatabaseField(columnName = "amount", canBeNull = false)

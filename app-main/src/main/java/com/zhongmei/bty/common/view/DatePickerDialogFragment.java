@@ -29,21 +29,17 @@ public class DatePickerDialogFragment extends BasicDialogFragment implements
         public MyDatePickerDialog(Context context, OnDateSetListener callBack,
                                   int year, int monthOfYear, int dayOfMonth) {
             super(context, callBack, year, monthOfYear, dayOfMonth);
-            // TODO Auto-generated constructor stub
-        }
+                    }
 
         public MyDatePickerDialog(Context context, int theme,
                                   OnDateSetListener callBack, int year, int monthOfYear,
                                   int dayOfMonth) {
             super(context, theme, callBack, year, monthOfYear, dayOfMonth);
-            // TODO Auto-generated constructor stub
-        }
+                    }
 
         @Override
         protected void onStop() {
-            // wo should not call the onDateSet when we cancel.
-            // super.onStop();
-        }
+                                }
     }
 
     public static interface DateSetListener {

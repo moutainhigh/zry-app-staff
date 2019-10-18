@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.db.enums.PayModeId;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.IdEntityBase;
 
-/**
- * Created by demo on 2018/12/15
- * wallet开通移动支付设置信息
- */
+
 @DatabaseTable(tableName = "mobile_pay_setting")
 public class MobilePaySetting extends IdEntityBase {
 
@@ -61,8 +58,7 @@ public class MobilePaySetting extends IdEntityBase {
     }
 
     @Override
-    public Long verValue() {//每次同步都覆盖
-        return getId();
+    public Long verValue() {        return getId();
     }
 
     public Long getBrandId() {

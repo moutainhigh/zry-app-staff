@@ -26,23 +26,17 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class TableManagerBase {
     private final String TAG = TableManagerBase.class.getSimpleName();
 
     private BookingTablesManager bookingTablesManager;
 
-    /**
-     * 所有桌台区域。key为ZoneModel.id(tableArea.id)
-     */
+
     protected final Map<Long, ZoneModel> zoneModelFinder;
 
-    /**
-     * 所有桌台。key为DinnertableModel.id(table.id)
-     */
+
     protected final Map<Long, DinnertableModel> dinnertableFinder;
 
     private ExecutorService executorService;
@@ -126,15 +120,11 @@ public abstract class TableManagerBase {
     }
 
     private void doLoadDate() throws Exception {
-        //获取已预定桌台列表
-//        HashMap<String, BookingTable> bookingMap = bookingTablesManager.getCurrentPeriodBookingTables();
 
-        // 从数，据库中获取区域和桌台的基本信息存放到zoneModelFinder中
-        TablesDal dal = OperatesFactory.create(TablesDal.class);
+                TablesDal dal = OperatesFactory.create(TablesDal.class);
         Collection<TablesDal.DinnertableWrapper> wrappers = dal.listDinnertables();
         Log.i(TAG, "TableWrapper.size=" + wrappers.size());
-        //刷新桌台开台异步
-        for (TablesDal.DinnertableWrapper wrapper : wrappers) {
+                for (TablesDal.DinnertableWrapper wrapper : wrappers) {
             ZoneModel zoneModel = zoneModelFinder.get(wrapper.getZoneId());
             if (zoneModel == null) {
                 zoneModel = new ZoneModel();
@@ -158,15 +148,8 @@ public abstract class TableManagerBase {
             dinnertableModel.setUuid(wrapper.getUuid());
             dinnertableModel.setTableStatus(wrapper.getTableStatus());
             dinnertableModel.setTableSeats(wrapper.getTableSeats());
-            //设置桌台预定状态
-//            if (bookingMap.get(wrapper.getUuid()) == null) {
-//                dinnertableModel.setReserved(false);
-//            } else {
-//                dinnertableModel.setReserved(true);
-//            }
 
-            // 计算区域的大小
-            int minWidth = wrapper.getWidth() + dinnertableModel.getX();
+                        int minWidth = wrapper.getWidth() + dinnertableModel.getX();
             if (zoneModel.getWidth() < minWidth) {
                 zoneModel.setWidth(minWidth);
             }

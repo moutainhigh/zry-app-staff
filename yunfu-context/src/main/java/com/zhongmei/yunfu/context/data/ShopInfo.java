@@ -6,11 +6,8 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 门店配置信息
- */
-public class ShopInfo /*extends ResponseBoss*/ implements IShopInfo {
+
+public class ShopInfo  implements IShopInfo {
 
     public String deviceID;
     private Integer isMainPos;
@@ -32,35 +29,20 @@ public class ShopInfo /*extends ResponseBoss*/ implements IShopInfo {
     public String permission;
     public String payType;
     public String areaId;
-    public String firstLanguage; //系统第一语言
-    public String secondLanguage; //系统第二语言
-    public String existKdsDevice;
-    public Long currencyId; //国籍
-    private String currencyNo;//货币编码
-    private String currencySymbol;//货币符号
-    public String bindDeviceType;
+    public String firstLanguage;     public String secondLanguage;     public String existKdsDevice;
+    public Long currencyId;     private String currencyNo;    private String currencySymbol;    public String bindDeviceType;
     public String mealTypeCode;
     public String mealTypeName;
     public String deviceType;
     public String functionNumber;
     public String firstName;
     public int mealType;
-    //public long isUnionpay;
-    //public long bankChannelId;
-    //public double bankRates;
-    public int isDelicaciesMeal; //是否为美食城业态 1-是，2-否；
-    public int usingDeviceType; //使用设备类型1-消费端，2-收银端。
-    public String monitorCode; //一种为none,表示无开关配置信息，也是默认；一种为hnxt,表示海南信投,fhxm表示烽火
-    //public String shopInfos;
-    public List<ReceiptInfo> receiptInfos;
+                public int isDelicaciesMeal;     public int usingDeviceType;     public String monitorCode;         public List<ReceiptInfo> receiptInfos;
     public String telAreaCode;
     public boolean expired;
     public Integer face;
-    // v8.12.0 口碑一体机商户标示：11
-    public int channelSource;
-    public String taxIDNumber;//商户所在国家时区
-    public String timeZone;//商户唯一税号
-
+        public int channelSource;
+    public String taxIDNumber;    public String timeZone;
 
     public String mainMealName;
 
@@ -185,11 +167,7 @@ public class ShopInfo /*extends ResponseBoss*/ implements IShopInfo {
         return usingDeviceType;
     }
 
-    /**
-     * 是否为美食城业态 true-是，false-否；
-     *
-     * @return
-     */
+
     @Override
     public boolean isDelicaciesMeal() {
         return isDelicaciesMeal == 1;
@@ -202,8 +180,7 @@ public class ShopInfo /*extends ResponseBoss*/ implements IShopInfo {
 
     @Override
     public boolean isExistKdsDevice() {
-        //return existKdsDevice != 2;
-        return !"2".equals(existKdsDevice);
+                return !"2".equals(existKdsDevice);
     }
 
     @Override
@@ -234,16 +211,8 @@ public class ShopInfo /*extends ResponseBoss*/ implements IShopInfo {
         return currencySymbol;
     }
 
-    /**
-     * 根据类型获取打印饿了么配置信息
-     *
-     * @param type
-     * @return
-     */
-    /*public String getReceiptInfoURL(ReceiptInfo.Type type) {
-        ReceiptInfo receiptInfo = getReceiptInfo(type);
-        return receiptInfo != null ? receiptInfo.jumpUrl : null;
-    }*/
+
+
     @Override
     public ReceiptInfo getReceiptInfo(ReceiptInfo.Type type) {
         if (receiptInfos != null) {
@@ -277,8 +246,7 @@ public class ShopInfo /*extends ResponseBoss*/ implements IShopInfo {
 
     @Override
     public boolean isMonitorCode(String code) {
-        /*if (ShopMonitorCode.MONITOR_CODE_FHXM.equals(code))
-            return true;*/
+
 
         if (this.monitorCode != null && code != null) {
             return this.monitorCode.equals(code);

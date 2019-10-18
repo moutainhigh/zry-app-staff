@@ -1,16 +1,8 @@
 package com.zhongmei.bty.basemodule.customer.message;
 
-/**
- * 查询支付信息和会员信息请求数据
- *
- * @version: 1.0
- * @date 2015年5月13日
- */
-public class PaymentAndMemberReq {
-    private String paymentUuid;//支付uuid
-    private long userId;//操作员id
-    private long memberId;//会员id
 
+public class PaymentAndMemberReq {
+    private String paymentUuid;    private long userId;    private long memberId;
     public String getPaymentUuid() {
         return paymentUuid;
     }

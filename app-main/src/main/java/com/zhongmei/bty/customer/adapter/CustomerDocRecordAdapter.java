@@ -22,9 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 消费记录
- */
+
 public class CustomerDocRecordAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
@@ -83,13 +81,6 @@ public class CustomerDocRecordAdapter extends BaseAdapter {
         }
         if (mRecordList != null) {
 
-//            if(position % 2 == 1){
-//                viewHolder.itemView.setBackgroundColor(Color.parseColor("#F1F1F1"));
-//                viewHolder.itemView.setTag(R.id.itemView,"#F1F1F1");
-//            }else{
-//                viewHolder.itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
-//                viewHolder.itemView.setTag(R.id.itemView,"#FFFFFF");
-//            }
 
             final CustomerDocRecordResp record = mRecordList.get(position);
             viewHolder.tv_createDate.setText(formatter.format(new Date(record.getServerCreateTime())));

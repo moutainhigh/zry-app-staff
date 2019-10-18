@@ -139,16 +139,12 @@ public class MemberLoginFragment extends BasicFragment {
 
     private final String TAG = MemberLoginFragment.class.getSimpleName();
 
-    private int barcodeWH = 180;// 微信二维码宽度
-
+    private int barcodeWH = 180;
     private static final int WHAT_PAYSTATUS = 1;
-    private static final int WHAT_SHOW_PAYSTATUS_BUTTON = 5;//显示获取支付状态按钮
-   /* @ViewById(R.id.scan_barcode_input_et)
-    EditText mScanInputET;//扫码输入框*/
+    private static final int WHAT_SHOW_PAYSTATUS_BUTTON = 5;
 
     @ViewById(R.id.show_value)
-    EditText show_value;//账号输入框
-
+    EditText show_value;
     @ViewById(R.id.customer_verification)
     Button customer_verification;
 
@@ -159,8 +155,7 @@ public class MemberLoginFragment extends BasicFragment {
     TextView mFreshCodeBT;
 
     @ViewById(R.id.member_login_paycoder_label)
-    TextView mScanCodeLBTV;//状态提示语
-
+    TextView mScanCodeLBTV;
     @ViewById(R.id.pay_member_rlt)
     RelativeLayout mMemberRlt;
 
@@ -176,38 +171,24 @@ public class MemberLoginFragment extends BasicFragment {
     @ViewById(R.id.tvAreaCodes)
     TextView mTvCountry;
 
-    private double mValueCardBalance = 0;// 会员余额
-
-    private long mIntegralBalance;// 会员积分
-    //add 20160714 start
-    private IPaymentInfo mPaymentInfo;
-    private DoPayApi mDoPayApi;//add v8.11
-    private String mActualValue = "";//实际数据
-
-    private String mDisplayValue = "";//显示的数据
-
+    private double mValueCardBalance = 0;
+    private long mIntegralBalance;        private IPaymentInfo mPaymentInfo;
+    private DoPayApi mDoPayApi;    private String mActualValue = "";
+    private String mDisplayValue = "";
     private boolean isShowAccount = true;
 
-    private boolean isAutoLogin = false;//是否需要自动登录
-
-    private boolean isDefaultShowCode = false;//false默认初始化就显示付款码
-
+    private boolean isAutoLogin = false;
+    private boolean isDefaultShowCode = false;
     private boolean isShow = false;
 
-    //限制最大输入字符数
-    private final int maxTextLength = 20;
+        private final int maxTextLength = 20;
     private ScanCodeManager mScanCodeManager;
     private long mCurrentPaymentItemId;
     private String mCurrentPaymentItemUuid = null;
-    private Double mLastAmount;//当前金额
-    private Bitmap bitmap = null;//当前二维码
-    private String codeUrl = null;//当前二维码Url
-    private DeWoScanCode mDeWoScanCode;
+    private Double mLastAmount;    private Bitmap bitmap = null;    private String codeUrl = null;    private DeWoScanCode mDeWoScanCode;
     private NewTradeOperatesImpl tradeOperates = OperatesFactory.create(NewTradeOperatesImpl.class);
 
-    /**
-     * 当前商户国籍
-     */
+
     private ErpCurrency mErpCurrency;
 
     private Map<String, ErpCurrency> erpCurrencyMap;
@@ -249,9 +230,7 @@ public class MemberLoginFragment extends BasicFragment {
         switch (v.getId()) {
             case R.id.customer_verification:
                 if (!ClickManager.getInstance().isClicked()) {
-                    // 收银台会员手机登录量
-                    doLogin();//modif  v8.7
-                }
+                                        doLogin();                }
                 break;
             case R.id.back:
                 DisplayServiceManager.doCancel(getActivity());
@@ -302,18 +281,14 @@ public class MemberLoginFragment extends BasicFragment {
                 clearText();
                 break;
             case R.id.pay_member_login_openscanner_button:
-                startScanner();//开启扫描枪
-                ToastUtil.showShortToast(R.string.pay_member_scanner_have_open);
+                startScanner();                ToastUtil.showShortToast(R.string.pay_member_scanner_have_open);
                 break;
             case R.id.member_login_paycoder_button:
-                // isDefaultShowCode = true;
-                // 收银台会员被扫登录量
-                MobclickAgentEvent.onEvent(getActivity(), SDConstant.MobClick.SNACK_PAY_MEMBER_LOGIN_SCANED);
+                                                MobclickAgentEvent.onEvent(getActivity(), SDConstant.MobClick.SNACK_PAY_MEMBER_LOGIN_SCANED);
                 if (this.mPaymentInfo.isNeedToPayDeposit()) {
                     PayDepositPromptDialog.start(this.getActivity(), mDoPayApi, this.mPaymentInfo);
                 } else if (this.isNeedToDeductionEarnest()) {
-                    this.showBookingDeductionDialog();//先判断是否抵扣预付金 add 8.14
-                } else {
+                    this.showBookingDeductionDialog();                } else {
                     if (this.mPaymentInfo.getActualAmount() == 0) {
                         ToastUtil.showShortToast(R.string.pay_zero_cannot_use);
                         return;
@@ -325,66 +300,28 @@ public class MemberLoginFragment extends BasicFragment {
                                         @Override
                                         public void onPositive(User user, String code, Auth.Filter filter) {
                                             super.onPositive(user, code, filter);
-                                            getMemberPayCode();//生成付款码
-                                        }
+                                            getMemberPayCode();                                        }
                                     });
                         } else {
-                            getMemberPayCode();//生成付款码
-                        }
+                            getMemberPayCode();                        }
                     }
                 }
                 break;
-           /* case R.id.check_payresult_bt:
-                checkPayResult();//checkout 查询支付结果
-                break;*/
-            case R.id.btn_face_login://add v8.5 人脸登录
-                /*boolean available = BaiduFaceRecognition.getInstance().checkFaceServer();
-                if (!available) {
-                    FacecognitionActivity.showFaceServerWarmDialog(getContext(), getChildFragmentManager());
-                    return;
-                }
-                // 收银台会员刷脸登录量
-                MobclickAgentEvent.onEvent(getActivity(), SDConstant.MobClick.SNACK_PAY_MEMBER_LOGIN_FACE);
-                startActivityForResult(BaiduFaceRecognition.getInstance().getRecognitionFaceIntent(true), FaceRequestCodeConstant.RC_PAY_LOGIN);*/
+
+            case R.id.btn_face_login:
                 break;
             case R.id.rlAreaCode:
                 showCountryDialog(new ArrayList<>(erpCurrencyMap.values()), mErpCurrency);
                 break;
-            /*case R.id.ll_login_type:
-                if(popWindow != null){
-                    popWindow.refreshData(loginTypeDataList, uiType);
-                    popWindow.showAsDropDown(mLlLoginType,-10,0);
-                }
-                break;*/
+
             default:
                 break;
         }
     }
 
-    /**
-     * v8.16.0刷卡登录快捷登录提取方法
-     */
+
     private void onCardLoginClick() {
-        // 收银台会员刷卡登录量
-        /*MobclickAgentEvent.onEvent(getActivity(), SDConstant.MobClick.SNACK_PAY_MEMBER_LOGIN_CARD);
-        new ReadCardDialogFragment.UionCardDialogFragmentBuilder()
-                .buildReadCardId(ReadCardDialogFragment.UionCardStaus.READ_CARD_ID_SINGLE,
-                        new ReadCardDialogFragment.CardOvereCallback() {
 
-                            @Override
-                            public void onSuccess(ReadCardDialogFragment.UionCardStaus status, String number) {
-                                getCardBaseInfo(number);
-                            }
-
-                            @Override
-                            public void onFail(ReadCardDialogFragment.UionCardStaus status, String rejCodeExplain) {
-                                if (!TextUtils.isEmpty(rejCodeExplain)) {
-                                    ToastUtil.showShortToast(rejCodeExplain);
-                                }
-                            }
-
-                        })
-                .show(getFragmentManager(), "get_cardno");*/
     }
 
     @Override
@@ -395,8 +332,7 @@ public class MemberLoginFragment extends BasicFragment {
 
     @AfterViews
     protected void init() {
-        mDoPayApi.setCurrentPaymentInfoId(mPaymentInfo.getId());///当前支付界面id add 20170708
-        initAreaCode();
+        mDoPayApi.setCurrentPaymentInfoId(mPaymentInfo.getId());        initAreaCode();
         isShow = true;
     }
 
@@ -443,14 +379,10 @@ public class MemberLoginFragment extends BasicFragment {
             customer_verification.setVisibility(View.GONE);
             show_value.setVisibility(View.GONE);
         }
-        mActualValue = "";//初始化实际值
-        disPlayInput("");// modify v8.4
-        initKeyBoard();
+        mActualValue = "";        disPlayInput("");        initKeyBoard();
         initPopup();
         doAutoLogin();
-        updateTradeAmount();//add v8.4
-        updateFreshCodeBT();//add v8.4
-        initJinCheng();
+        updateTradeAmount();        updateFreshCodeBT();        initJinCheng();
     }
 
     void initKeyBoard() {
@@ -526,19 +458,11 @@ public class MemberLoginFragment extends BasicFragment {
         }
     }
 
-    //副屏显示空input//add v8.4
-    private void disPlayInput(String input) {
-        /*DisplayUserInfo dUserInfo =
-                DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_ACCOUNT_INPUT, input, null, 0, true, 0);
-        DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+        private void disPlayInput(String input) {
+
     }
 
-    /**
-     * 显示国籍dialog
-     *
-     * @param erpCurrencyList
-     * @param currentErpCurrency
-     */
+
     public void showCountryDialog(List<ErpCurrency> erpCurrencyList, ErpCurrency currentErpCurrency) {
         if (erpCurrencyList == null || erpCurrencyList.size() == 0) {
             ToastUtil.showShortToast(getString(com.zhongmei.yunfu.mobilepay.R.string.pay_erpcurrency_enpty_hint));
@@ -559,21 +483,15 @@ public class MemberLoginFragment extends BasicFragment {
         isShow = !hidden;
         if (!hidden) {
             disPlayInput("");
-            startScanner();//开启扫描枪
-            if (DensityUtil.isHaveMiniScreen(this.getActivity())) {//add v8.4
-                if (this.bitmap != null && codeUrl != null) {
-                    if (isAmountChange()) {//如果金额变动，手动生成二维码
-                        //getMemberPayCode();//生成新的副屏二维码
-                        updateTradeAmount();
+            startScanner();            if (DensityUtil.isHaveMiniScreen(this.getActivity())) {                if (this.bitmap != null && codeUrl != null) {
+                    if (isAmountChange()) {                                                updateTradeAmount();
                         this.bitmap = null;
-                        updateFreshCodeBT();//add v8.4
-                    } else {
+                        updateFreshCodeBT();                    } else {
                         updateMiniDiplayWithUrl(1, codeUrl, bitmap, true);
                     }
                 }
             }
-            //isDefaultShowCode = true;
-        } else {
+                    } else {
             stopScanner();
             stopGetPayStatus();
         }
@@ -587,28 +505,21 @@ public class MemberLoginFragment extends BasicFragment {
 
     @Override
     public void onDestroyView() {
-        stopScanner();  //关闭扫描枪 add v8.5.6
-        mHandler.removeCallbacksAndMessages(null);
+        stopScanner();          mHandler.removeCallbacksAndMessages(null);
         super.onDestroyView();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        startScanner();//开启扫描枪 add v8.5.6
-    }
+        startScanner();    }
 
     @Override
     public void onPause() {
         super.onPause();
-        stopScanner();//关闭扫描枪 add v8.5.6
-    }
+        stopScanner();    }
 
-    /**
-     * 在末尾添加一个字符
-     *
-     * @param text
-     */
+
     private void append(CharSequence text) {
         if (show_value.getText() != null) {
             show_value.setSelection(show_value.getText().length());
@@ -619,42 +530,33 @@ public class MemberLoginFragment extends BasicFragment {
         StringBuilder sb = new StringBuilder(mActualValue);
         sb.append(text);
         mActualValue = sb.toString();
-        //mDisplayValue = Utils.useStarReplace(mActualValue, 3, 4);
-        mDisplayValue = mActualValue;
+                mDisplayValue = mActualValue;
         int index = show_value.getSelectionStart();
         show_value.getText().insert(index, text);
-//        show_value.setText(mDisplayValue);
         Selection.setSelection(show_value.getText(), show_value.getText().length());
     }
 
-    /**
-     * 删除最后一个字符
-     */
+
     private void deleteTheLast() {
         if (mActualValue.length() > 0) {
             StringBuilder sb = new StringBuilder(mActualValue);
             sb.deleteCharAt(sb.length() - 1);
             mActualValue = sb.toString();
-            //mDisplayValue = Utils.useStarReplace(mActualValue, 3, 4);
-            mDisplayValue = mActualValue;
+                        mDisplayValue = mActualValue;
             show_value.setText(mDisplayValue);
             Selection.setSelection(show_value.getText(), show_value.getText().length());
         }
     }
 
-    /**
-     * 清除文本
-     */
+
     private void clearText() {
         mActualValue = "";
-        //mDisplayValue = Utils.useStarReplace(mActualValue, 3, 4);
-        mDisplayValue = mActualValue;
+                mDisplayValue = mActualValue;
         show_value.setText(mDisplayValue);
         Selection.setSelection(show_value.getText(), show_value.getText().length());
     }
 
-    //手机号输入框监听器1
-    private View.OnKeyListener mShowValueETOnKeyListener = new View.OnKeyListener() {
+        private View.OnKeyListener mShowValueETOnKeyListener = new View.OnKeyListener() {
 
         @Override
         public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -667,8 +569,7 @@ public class MemberLoginFragment extends BasicFragment {
         }
     };
 
-    //手机号输入框监听器2
-    private TextWatcher mTextWatcher = new TextWatcher() {
+        private TextWatcher mTextWatcher = new TextWatcher() {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -682,26 +583,20 @@ public class MemberLoginFragment extends BasicFragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-            //add  v8.7 start
-            String inputStr = s.toString();
-            if (inputStr.endsWith("\n") && !TextUtils.isEmpty(mActualValue)) {//处理回车事件
-                doLogin();
+                        String inputStr = s.toString();
+            if (inputStr.endsWith("\n") && !TextUtils.isEmpty(mActualValue)) {                doLogin();
                 return;
             }
-            //add  v8.7 end
-            setButton();
+                        setButton();
             if (isShowAccount) {
-                disPlayInput(s.toString());//modify v8.4
-            } else {
+                disPlayInput(s.toString());            } else {
                 isShowAccount = true;
             }
         }
     };
 
-    //add  v8.7  start
-    private void doLogin() {
-        // 收银台会员手机登录量
-        MobclickAgentEvent.onEvent(getActivity(), SDConstant.MobClick.SNACK_PAY_MEMBER_LOGIN_PHONE);
+        private void doLogin() {
+                MobclickAgentEvent.onEvent(getActivity(), SDConstant.MobClick.SNACK_PAY_MEMBER_LOGIN_PHONE);
         if (mPaymentInfo != null && mPaymentInfo.isDinner()) {
             VerifyHelper.verifyAlert(getActivity(), BeautyApplication.PERMISSION_CUSTOMER_LOGIN,
                     new VerifyHelper.Callback() {
@@ -715,22 +610,12 @@ public class MemberLoginFragment extends BasicFragment {
             verification(mActualValue, null, false);
         }
     }
-    //add  v8.7 end
-    //add v8.4 start
 
-    /***
-     * 监听抹零事件
-     *
-     * @param event
-     */
+
     public void onEventMainThread(ExemptEventUpdate event) {
         if (this.isAdded() && this.isShow && DensityUtil.isHaveMiniScreen(this.getActivity())) {
-            if (isAmountChange()) {//金额发生变化
-                if (isDefaultShowCode || bitmap != null) {
-                    // getMemberPayCode();//生成新的副屏二维码
-                    //刷新副屏，显示输入框
-                    disPlayInput(show_value.getText().toString());// modify v8.5
-                    bitmap = null;
+            if (isAmountChange()) {                if (isDefaultShowCode || bitmap != null) {
+                                                            disPlayInput(show_value.getText().toString());                    bitmap = null;
                     updateFreshCodeBT();
                 }
                 updateTradeAmount();
@@ -738,28 +623,24 @@ public class MemberLoginFragment extends BasicFragment {
         }
     }
 
-    //正餐会员登录和退出
-    public void onEventMainThread(EventLoginView event) {
+        public void onEventMainThread(EventLoginView event) {
         if (this.isAdded() && this.isShow && DensityUtil.isHaveMiniScreen(this.getActivity())) {
             if (event.getOperateType() == EventLoginView.TYPE_LOGIN_VIEW_START) {
                 this.stopScanner();
             } else if (event.getOperateType() == EventLoginView.TYPE_LOGIN_VIEW_END) {
                 this.disPlayInput("");
                 this.startScanner();
-                //如果已经生成过二维码，客显直接显示二维码
-                if (this.bitmap != null && codeUrl != null) {
+                                if (this.bitmap != null && codeUrl != null) {
                     updateMiniDiplayWithUrl(1, codeUrl, bitmap, true);
                 } else {
                     if (this.isDefaultShowCode)
-                        getMemberPayCode();//生成新的副屏二维码
-                }
+                        getMemberPayCode();                }
             }
         }
     }
 
     private void updateFreshCodeBT() {
-        //add v8.11 如果销账，不生成二维码支付
-        if (mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_WRITEOFF) {
+                if (mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_WRITEOFF) {
             mFreshCodeBT.setVisibility(View.INVISIBLE);
             mScanCodeLBTV.setVisibility(View.INVISIBLE);
             return;
@@ -779,8 +660,7 @@ public class MemberLoginFragment extends BasicFragment {
     }
 
 
-    //设置当前应付金额
-    private void updateTradeAmount() {
+        private void updateTradeAmount() {
         if (this.mPaymentInfo != null) {
             mLastAmount = this.mPaymentInfo.getActualAmount();
         }
@@ -793,9 +673,7 @@ public class MemberLoginFragment extends BasicFragment {
         return false;
     }
 
-    /**
-     * 开始扫码并获取焦点
-     */
+
     private void startScanner() {
         stopScanner();
         mScanCodeManager = new ScanCodeManager(getActivity(), show_value, true);
@@ -830,22 +708,18 @@ public class MemberLoginFragment extends BasicFragment {
         this.unRegisterDewoScan();
     }
 
-    //扫码回调处理
-    ScanCode.ScanCodeReceivedListener mScanCodeReceivedListener = new ScanCode.ScanCodeReceivedListener() {
+        ScanCode.ScanCodeReceivedListener mScanCodeReceivedListener = new ScanCode.ScanCodeReceivedListener() {
         @Override
         public void onScanCodeReceived(String data) {
             loginByScanCode(data);
         }
     };
 
-    //modify 20180205  start修改交互，扫码去掉了选择框，直接登录
-    private void loginByScanCode(String data) {
-        // 收银台会员主扫登录量
-        MobclickAgentEvent.onEvent(getActivity(), SDConstant.MobClick.SNACK_PAY_MEMBER_LOGIN_SCAN);
+        private void loginByScanCode(String data) {
+                MobclickAgentEvent.onEvent(getActivity(), SDConstant.MobClick.SNACK_PAY_MEMBER_LOGIN_SCAN);
         if (this.getActivity() != null && !this.getActivity().isDestroyed() && this.isAdded()) {
             if (!TextUtils.isEmpty(data)) {
-                if (data.contains(":")) { //如果是token，包含有冒号,直接调用token登录接口，
-                    loginByWeixin(data);
+                if (data.contains(":")) {                     loginByWeixin(data);
                 } else {
                     verification(data, null, false);
                 }
@@ -853,78 +727,37 @@ public class MemberLoginFragment extends BasicFragment {
             }
         }
     }
-    //modify 20180205  end修改交互，扫码去掉了选择框，直接登录
-   /* ScanMemberCodeDialog.ScanMemberCodeListenner mCodeListenner = new ScanMemberCodeDialog.ScanMemberCodeListenner() {
 
 
-        @Override
-        public void doLogin(String code) {
-            UserActionEvent.start(UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE);
-            loginByWeixin(code);
-        }
-
-        @Override
-        public void doPay(String code) {
-            if (mPaymentInfo.isNeedToPayDeposit()) {
-                PayDepositPromptDialog.start(getActivity(), mPaymentInfo);
-            } else {
-                doWeiXinCustomerScanPay(code);
-            }
-        }
-
-        @Override
-        public void onClose() {
-            if (show_value != null)
-                show_value.requestFocus();
-        }
-    };
-*///modify 20180205 去掉没用的代码
-
-    /**
-     * @Description: 如果已经下单，直接获取url，如果没下单，先下单，再生成url
-     */
     private void getMemberPayCode() {
         if (mPaymentInfo == null || mPaymentInfo.getTradeVo() == null) {
             return;
         }
         TradeVo tradeVo = mPaymentInfo.getTradeVo();
-        // 如果已经下单
-        if (mPaymentInfo.isOrdered()) {
+                if (mPaymentInfo.isOrdered()) {
             getMemberPayUrl(tradeVo.getTrade());
 
         } else {
             ISavedCallback savedCallback = new ISavedCallback() {
                 @Override
-                public void onSaved(boolean isOk) {//保存成功回调
-                    try {
+                public void onSaved(boolean isOk) {                    try {
                         if (isOk) {
                             mPaymentInfo.setOrdered(true);
                             ToastUtil.showLongToast(R.string.pay_wechat_trade_insert_success);
-                            //BakeryPayFactory.newInstance().toNotifyRefreshStatus();
-                            ShoppingCart.getInstance().clearShoppingCart();
-                            // 获取二维码
-                            getMemberPayUrl(mPaymentInfo.getTradeVo().getTrade());
+                                                        ShoppingCart.getInstance().clearShoppingCart();
+                                                        getMemberPayUrl(mPaymentInfo.getTradeVo().getTrade());
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             };
-            /*if (!BakeryPayData.getInstance().isUnKnown()) {
-                if (BakeryPayData.getInstance().getBakeryForm() == BakeryForm.PAY_ONLY) {
-                    getMemberPayUrl(tradeVo.getTrade());
-                } else {
-                    BakeryPayFactory.newInstance().toSaveOrderForBakery(getActivity(), mPaymentInfo, savedCallback);
-                }
-            } else {*/
+
             mDoPayApi.saveTrade(this.getActivity(), mPaymentInfo, null, savedCallback);
-            //}
-        }
+                    }
     }
 
-    /**
-     * 获取微信支付的url并生成二维码
-     */
+
 
     private void getMemberPayUrl(Trade trade) {
         if (trade == null) {
@@ -944,13 +777,11 @@ public class MemberLoginFragment extends BasicFragment {
                         mCurrentPaymentItemUuid = resp.getPaymentItemResults().get(0).getPaymentItemUuid();
                         mDoPayApi.setOnlinePaymentItemUuid(resp.getPaymentItemResults().get(0).getPaymentItemUuid());
                         Map addition = resp.getPaymentItemResults().get(0).getAddition();
-                        //判断订单时间戳有没有更新 (生成二维码时间戳会更新)add v8.2
-                        if (!Utils.isEmpty(resp.getTrades())) {
+                                                if (!Utils.isEmpty(resp.getTrades())) {
                             Trade trade = resp.getTrades().get(0);
                             if (trade.getServerUpdateTime() > mPaymentInfo.getTradeVo().getTrade().getServerUpdateTime()) {
                                 mPaymentInfo.getTradeVo().setTrade(trade);
-                                //刷新拆单购物车数据
-                                if (mPaymentInfo.isSplit()) {
+                                                                if (mPaymentInfo.isSplit()) {
                                     SeparateShoppingCart.getInstance().updateDataWithTrade(trade);
                                 } else {
                                     DinnerShoppingCart.getInstance().updateDataWithTrade(trade);
@@ -958,14 +789,10 @@ public class MemberLoginFragment extends BasicFragment {
                             }
                         }
                         codeUrl = (String) addition.get("codeUrl");
-                        // 生成副屏二维码
-                        bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
-                        // 客显显示二维码//
-                        updateMiniDiplayWithUrl(1, codeUrl, bitmap, true);
-                        // 开始轮训获取支付状态
-                        sendGetPayStatusMessage();
-                       /* //現在查询结果
-                        sendShowCheckPayResultMS();*/
+                                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
+                                                updateMiniDiplayWithUrl(1, codeUrl, bitmap, true);
+                                                sendGetPayStatusMessage();
+
 
                         updateFreshCodeBT();
                     } else {
@@ -987,48 +814,22 @@ public class MemberLoginFragment extends BasicFragment {
                 }
             }
         };
-        PayModelItem payModelItem = new PayModelItem(PayModeId.MEMBER_CARD);//
-        payModelItem.setUsedValue(BigDecimal.valueOf(this.mPaymentInfo.getActualAmount()));
+        PayModelItem payModelItem = new PayModelItem(PayModeId.MEMBER_CARD);        payModelItem.setUsedValue(BigDecimal.valueOf(this.mPaymentInfo.getActualAmount()));
 
         payModelItem.setUuid(SystemUtils.genOnlyIdentifier());
 
         payModelItem.setPayType(PayType.QCODE);
         mPaymentInfo.getOtherPay().clear();
         mPaymentInfo.getOtherPay().addPayModelItem(payModelItem);
-        mDoPayApi.setOnlinePaymentItemUuid(payModelItem.getUuid());//add 20170525 默认当前支付的uuid(解决超时情况有推送结果但是没有出票问题)
-        /*if (!BakeryPayData.getInstance().isUnKnown()) {
-            // 烘焙单独收银（由于listener不公用，所以重新赋值单独支付）
-            if (BakeryPayData.getInstance().getBakeryForm() != BakeryForm.PAY_ONLY) {
-                PayForm form = new PayForm();
-                form.serverUpdateTime = trade.getServerUpdateTime();
-                form.uuid = trade.getUuid();
-                form.id = trade.getId();
-                BakeryPayData.getInstance().setBakeryForm(BakeryForm.PAY_ONLY).setPayForm(form);
-            }
-            BakeryPayData.getInstance().pay(mPaymentInfo, LoadingResponseListener.ensure(listener, getFragmentManager()));
-        } else {*/
+        mDoPayApi.setOnlinePaymentItemUuid(payModelItem.getUuid());
         tradeOperates.newpay(trade, new PaymentReqTool(mPaymentInfo).creatPaymentReq(), LoadingResponseListener.ensure(listener, getFragmentManager()));
-        //}
-    }
+            }
 
     private void updateMiniDiplayWithUrl(int payWay, String codeUrl, Bitmap bitmap, boolean isUseUrl) {
-        /*try {
-            DisplayBarcode dBarcode =
-                    DisplayServiceManager.buildDBarcode(payWay,
-                            String.valueOf(this.mPaymentInfo.getActualAmount()),
-                            bitmap,
-                            PayModeId.MEMBER_CARD.value());
-            dBarcode.setCodeUrl(codeUrl);
-            dBarcode.setUseUrl(isUseUrl);
-            DisplayServiceManager.updateDisplay(getActivity().getApplicationContext(), dBarcode);
-        } catch (Exception e) {
-            // Log.e(TAG, "", e);
-            e.printStackTrace();
-        }*/
+
     }
 
-    //轮训支付结果
-    private void getPayStatusForS() {
+        private void getPayStatusForS() {
         ResponseListener<PayResp> listener = new ResponseListener<PayResp>() {
 
             @Override
@@ -1037,8 +838,7 @@ public class MemberLoginFragment extends BasicFragment {
                     if (ResponseObject.isOk(response)) {
                         PayResp result = response.getContent();
 
-                        mDoPayApi.doVerifyPayResp(getActivity(), mPaymentInfo, result, mOnlinePayOverCallback);// 处理收银结果
-                        return;
+                        mDoPayApi.doVerifyPayResp(getActivity(), mPaymentInfo, result, mOnlinePayOverCallback);                        return;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -1056,9 +856,7 @@ public class MemberLoginFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 发送获取订单状态消息
-     */
+
     private void sendGetPayStatusMessage() {
         Message message = new Message();
         message.what = WHAT_PAYSTATUS;
@@ -1066,12 +864,9 @@ public class MemberLoginFragment extends BasicFragment {
         mHandler.sendMessageDelayed(message, 3000);
     }
 
-    /**
-     * 取消查询订单状态
-     */
+
     private void stopGetPayStatus() {
-        RequestManager.cancelAll("paystatus");// 移除网络请求
-        if (mHandler != null) {
+        RequestManager.cancelAll("paystatus");        if (mHandler != null) {
             mHandler.removeMessages(WHAT_PAYSTATUS);
         }
     }
@@ -1082,83 +877,26 @@ public class MemberLoginFragment extends BasicFragment {
                 case WHAT_PAYSTATUS:
                     getPayStatusForS();
                     break;
-               /* case WHAT_SHOW_PAYSTATUS_BUTTON:
-                    showCheckPayResultBT();
-                    break;*/
+
                 default:
                     break;
             }
         }
     };
-    // add v8.4 在线支付回调处理
-    IOnlinePayOverCallback mOnlinePayOverCallback = new IOnlinePayOverCallback() {
+        IOnlinePayOverCallback mOnlinePayOverCallback = new IOnlinePayOverCallback() {
 
         @Override
         public void onPayResult(Long paymentItemId, int payStatus) {
             if (TradePayStatus.PAID.value() == payStatus) {
-                stopGetPayStatus();// 取消查询订单状态
-                //BakeryPayFactory.newInstance().toNotifyRefreshAndPrint(mPaymentInfo);
-            } else if (TradePayStatus.PAID_FAIL.value() == payStatus) {
-                stopGetPayStatus();// 取消查询订单状态
-                //BakeryPayFactory.newInstance().toNotifyRefreshStatus();
-            } else {
+                stopGetPayStatus();                            } else if (TradePayStatus.PAID_FAIL.value() == payStatus) {
+                stopGetPayStatus();                            } else {
                 sendGetPayStatusMessage();
             }
         }
     };
-    /*IPayOverCallback mPayOverCallback = new IPayOverCallback() {
-
-        @Override
-        public void onFinished(boolean isOk) {
-            try {
-                if (isOk) {
-
-                }
-            } catch (Exception e) {
-                Log.e(TAG, e.getMessage(), e);
-            }
-        }
-    };
-
-    private void doWeiXinCustomerScanPay(String tokenJson) {
-        if (!TextUtils.isEmpty(tokenJson) && tokenJson.contains(":") && tokenJson.length() > 5) {
-            String tokens[] = tokenJson.split(":");
-            if (tokens != null) {
-                String customerId = tokens[0];
-                String token = tokens[1];
-                if (!TextUtils.isEmpty(customerId) && Utils.isNum(customerId) && !TextUtils.isEmpty(token)) {
-                    UserActionEvent.start(UserActionEvent.DINNER_PAY_SETTLE_STORE);
-                    PayModelItem payModelItem = new PayModelItem(PayModeId.MEMBER_CARD);//
-                    payModelItem.setUsedValue(BigDecimal.valueOf(this.mPaymentInfo.getActualAmount()));
-                    payModelItem.setPasswordType(PasswordType.TOKEN_CODE);
-                    payModelItem.setPayType(null);
-                    payModelItem.setUuid(SystemUtils.genOnlyIdentifier());
-                    try {
-                        this.mPaymentInfo.setCustomerId(Long.valueOf(customerId).longValue());
-                    } catch (Exception e) {
-                        Log.e(TAG, "", e);
-                    }
-                    this.mPaymentInfo.setMemberPassword(token);
-                    this.mPaymentInfo.getOtherPay().clear();
-                    this.mPaymentInfo.getOtherPay().addPayModelItem(payModelItem);//添加会员储值支付方式
-
-                    DoPayManager.getInstance().doPay(this.getActivity(), this.mPaymentInfo, mPayOverCallback);
-                } else {
-                    ToastUtil.showShortToast(R.string.pay_data_format_not_ok);
-                }
-            }
-        } else {
-            ToastUtil.showShortToast(R.string.pay_data_format_not_ok);
-        }
-    }*///modify 20180205 去掉没用的代码
-//add v8.4 end
 
     private void loginCard(String cardNo) {
-        // 大客户雅座拦截
-        /*if (KeyAt.getKeyAtType() == KeyAtType.YAZUO) {
-            requestCardLogin(cardNo);
-            return;
-        }*/
+
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<CardLoginResp> listener = LoadingResponseListener.ensure(new CardResponseListener(), getFragmentManager());
         operates.cardLogin(cardNo, listener);
@@ -1170,16 +908,13 @@ public class MemberLoginFragment extends BasicFragment {
             try {
                 if (ResponseObject.isOk(response)) {
                     CardLoginResp resp = response.getContent();
-                    // 设置card的名称，从customer中获得
-                    EcCard card = resp.getResult().getCardInstance();
+                                        EcCard card = resp.getResult().getCardInstance();
                     if (card.getCardType() == EntityCardType.CUSTOMER_ENTITY_CARD) {
                         if (!PaySettingCache.isErpModeID(mPaymentInfo.getPayScene().value(), PayModeId.ENTITY_CARD.value())) {
-                            // 如果商户没有配置实体卡支付就直接返回
-                            ToastUtil.showShortToast(R.string.card_pay_not_set);
+                                                        ToastUtil.showShortToast(R.string.card_pay_not_set);
                             return;
                         }
-                        // ToastUtil.showShortToast(R.string.no_right_login_customer_entity_card);放开登录功能
-                        CustomerV5 customerv5 = resp.getResult().getCustomer();
+                                                CustomerV5 customerv5 = resp.getResult().getCustomer();
                         card.setName(customerv5.getName());
                         card.setCardLevel(resp.getResult().getCardLevel());
                         card.setCardLevelSetting(resp.getResult().getCardLevelSetting());
@@ -1189,16 +924,14 @@ public class MemberLoginFragment extends BasicFragment {
                         card.setCardKind(resp.getResult().getCardKind());
                         card.setCustomer(customerv5);
 
-                        // 余额
-                        if (card.getValueCardAccount() != null
+                                                if (card.getValueCardAccount() != null
                                 && card.getValueCardAccount().getRemainValue() != null) {
                             mValueCardBalance = card.getValueCardAccount().getRemainValue();
                         } else {
                             mValueCardBalance = 0;
                         }
                         if (card.getIntegralAccount() != null && card.getIntegralAccount().getIntegral() != null) {
-                            // 积分
-                            mIntegralBalance = card.getIntegralAccount().getIntegral();
+                                                        mIntegralBalance = card.getIntegralAccount().getIntegral();
                         } else {
                             mIntegralBalance = 0;
                         }
@@ -1220,12 +953,7 @@ public class MemberLoginFragment extends BasicFragment {
 
                     } else if (card.getCardType() == EntityCardType.ANONYMOUS_ENTITY_CARD) {
 
-                        /*
-                        if (mPaymentInfo.isDinner()) {
-                            ToastUtil.showShortToast(R.string.the_card_is_not_member_card);
-                            return;
-                        }
-                        */
+
 
                         EcCardKind ecCardKind = resp.getResult().getCardKind();
                         if (ecCardKind != null && !isConsumeShop(ecCardKind.getId())) {
@@ -1239,8 +967,7 @@ public class MemberLoginFragment extends BasicFragment {
                         } else {
                             mValueCardBalance = 0;
                         }
-                        mIntegralBalance = 0;// 临时卡没有积分。
-
+                        mIntegralBalance = 0;
                         card.setEctempAccount(ectempAccount);
                         card.setName(getString(R.string.anonymous_entity));
                         card.setCardLevel(resp.getResult().getCardLevel());
@@ -1281,12 +1008,7 @@ public class MemberLoginFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 判断当前门店是否消费门店
-     *
-     * @param cardKindId
-     * @return
-     */
+
     private boolean isConsumeShop(Long cardKindId) {
         try {
             CustomerDal customerDal = OperatesFactory.create(CustomerDal.class);
@@ -1303,11 +1025,7 @@ public class MemberLoginFragment extends BasicFragment {
         return false;
     }
 
-    /**
-     * 会员登录
-     *
-     * @param mobile 手机号
-     */
+
     private void verification(final String mobile, final Long customerId, boolean auto) {
         if (customerId == null) {
             if (TextUtils.isEmpty(mobile)) {
@@ -1318,12 +1036,7 @@ public class MemberLoginFragment extends BasicFragment {
         loginByPhoneNo(mobile, customerId, auto);
     }
 
-    /**
-     * 使用手机号登录,默认不需要密码验证
-     *
-     * @Title: loginByPhoneNo
-     * @Return void 返回类型
-     */
+
     private void loginByPhoneNo(final String inputNo, final Long customerId, boolean auto) {
         if (auto) {
             loginByPhoneNo(inputNo, customerId, 2, null, null);
@@ -1335,15 +1048,13 @@ public class MemberLoginFragment extends BasicFragment {
                 }
                 loginByPhoneNo(inputNo, customerId, 2, null, null);
             } else {
-                getLoginInfoByInput(inputNo);//一个接口一个接口尝试
-            }
+                getLoginInfoByInput(inputNo);            }
         }
     }
 
     private CustomerSelectDialog mSelectDialog = null;
 
-    //将输入当成卡号去查询 查询不到卡信息时，将输入当成手机号去查询
-    private void getLoginInfoByInput(final String inputNo) {
+        private void getLoginInfoByInput(final String inputNo) {
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<CardBaseInfoResp> listener =
                 LoadingResponseListener.ensure(new EventResponseListener<CardBaseInfoResp>() {
@@ -1360,8 +1071,7 @@ public class MemberLoginFragment extends BasicFragment {
                                                                                && !TextUtils.isEmpty(baseCardInfo.getCustomerId().toString())) {
                                                                            loginByCustomerId(baseCardInfo.getCustomerId(), true);
                                                                        } else {
-                                                                           //do nothing
-                                                                       }
+                                                                                                                                                  }
                                                                    } else {
                                                                        loginCard(baseCardInfo.getCardNum());
                                                                    }
@@ -1386,113 +1096,16 @@ public class MemberLoginFragment extends BasicFragment {
         operates.getCardBaseInfo(inputNo, listener);
     }
 
-   /* private void checkMemeber(final String inputNo) {
-        ResponseListener<MemberLoginVoResp> listener = new ResponseListener<MemberLoginVoResp>() {
-            @Override
-            public void onResponse(ResponseObject<MemberLoginVoResp> response) {
-                try {
-                    if (ResponseObject.isOk(response) && MemberLoginVoResp.isOk(response.getContent())) {
-                        MemberLoginResp resp = response.getContent().getResult();
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
-                            return;
-                        }
-                        if (!resp.getCustomer().isMember()) {
-                            ToastUtil.showShortToast(R.string.customer_not_member);
-                            return;
-                        }
-                        List<CustomerInfoResp.Card> cards = resp.getCardList();
 
-                        //权益卡
-                        List<CustomerInfoResp.Card> temp = new ArrayList<CustomerInfoResp.Card>();
-                        if (!Utils.isEmpty(cards)) {
-                            for (CustomerInfoResp.Card card : cards) {
-                                if (card.getCardType() != EntityCardType.GENERAL_CUSTOMER_CARD) {
-                                    temp.add(card);
-                                }
-                            }
-                        }
-                        if (Utils.isEmpty(temp)) {
-                            //虚拟账号登录
-                            loginByPhoneNo(inputNo, null, 2, null, null);
-                            return;
-                        }
-                        if (resp.getIsDisable() == 1 && temp.size() == 1) {
-                            loginCard(temp.get(0).getCardNum());
-                            return;
-                        }
 
-                        List<String> accounts = new ArrayList<>();
-                        if (resp.getIsDisable() != 1) {
-                            JSONObject jsonObject = new JSONObject();
-                            jsonObject.put("name", getString(R.string.customer_login_virtual_card));
-                            jsonObject.put("type", 1);
-                            jsonObject.put("num", inputNo);
-                            accounts.add(jsonObject.toString());
-                        }
-                        for (CustomerInfoResp.Card card : cards) {
-                            if (card.getCardStatus() == CardStatus.ACTIVATED
-                                    && card.getCardType() != EntityCardType.GENERAL_CUSTOMER_CARD) {
-                                JSONObject jsonObject = new JSONObject();
-                                jsonObject.put("mobile", resp.getMobile());
-                                jsonObject.put("name", card.getCardKindName());
-                                jsonObject.put("type", 2);
-                                jsonObject.put("num", card.getCardNum());
-                                accounts.add(jsonObject.toString());
-                            }
-                        }
-
-                        //setLoginCustomer(resp.getCustomer());
-                        CustomerManager.getInstance().setAccounts(accounts);
-                        if (mSelectDialog == null) {
-                            mSelectDialog = new CustomerSelectDialog();
-                            mSelectDialog.setResponseListener(new PhoneResponseListener(null), new CardResponseListener());
-                        }
-                        if (!mSelectDialog.isAdded())
-                            mSelectDialog.show(getFragmentManager(), "CustomerSelectDialog");
-                    } else {
-                        String msg;
-                        if (response.getContent() != null) {
-                            msg = response.getContent().getErrorMessage();
-                        } else {
-                            msg = getString(R.string.display_login_error);
-                        }
-                        ToastUtil.showLongToast(msg);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.e(TAG, "", e);
-                }
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                ToastUtil.showLongToast(error.getMessage());
-            }
-        };
-        if (getFragmentManager() != null)
-            CustomerManager.getInstance().customerLogin(CustomerLoginType.MOBILE, inputNo, null, false, false, true, LoadingResponseListener.ensure(listener, getFragmentManager()));
-    }*///modify 20180205 去掉没用的代码
-
-    /**
-     * 使用手机号登录
-     *
-     * @Title: loginByPhoneNo
-     * @Return void 返回类型
-     */
     private void loginByPhoneNo(final String inputNo, final Long customerId, final int needPswd, final String pswd, final PasswordDialog dialog) {
-        // 大客户雅座拦截
-        /*if (KeyAt.getKeyAtType() == KeyAtType.YAZUO) {
-            requestCheckMember(inputNo, String.valueOf(customerId));
-            return;
-        }*/
+
         PhoneResponseListener listener = new PhoneResponseListener(dialog);
         listener.setCustomerType(mCustomerType);
         CustomerManager customerManager = CustomerManager.getInstance();
         if (customerId != null && customerId != 0) {
             customerManager.customerLogin(CustomerLoginType.MEMBER_ID, customerId.toString(), pswd, needPswd == 1, false, true, LoadingYFResponseListener.ensure(listener, getFragmentManager()));
         } else if (!TextUtils.isEmpty(inputNo)) {
-//            customerManager.customerLogin(CustomerLoginType.MOBILE, inputNo, pswd, needPswd == 1, false, true, LoadingResponseListener.ensure(listener, getFragmentManager()));
             String telCode = mErpCurrency != null && mErpCurrency.getAreaCode() != null ? mErpCurrency.getAreaCode() : null;
             String country = mErpCurrency != null && mErpCurrency.getCountryZh() != null ? mErpCurrency.getCountryZh() : null;
             String nation = mErpCurrency != null && mErpCurrency.getCountryEn() != null ? mErpCurrency.getCountryEn() : null;
@@ -1502,189 +1115,17 @@ public class MemberLoginFragment extends BasicFragment {
     }
 
 
-    //使用手机号登录成功处理
-    /*private void loginByPhoneNoSuccess(CustomerResp customer) {
-        if (customer != null) {
-            if (!customer.isMember()) {
-                ToastUtil.showShortToast(R.string.customer_not_member);
-                return;
-            }
-            setLoginCustomer(customer);
-            if (mPaymentInfo.getTradeBusinessType() == BusinessType.SNACK && mPaymentInfo.getTradeVo().getTrade().getTradePayStatus() != TradePayStatus.PAYING
-                    && mPaymentInfo.getTradeVo() != null
-                    && mPaymentInfo.getTradeVo().getTradeExtra() != null
-                    && TextUtils.isEmpty(mPaymentInfo.getTradeVo().getTradeExtra().getOpenIdenty())) {//快餐并且没有openIdenty
-                if (!TextUtils.isEmpty(customer.openId)) {//顾客有openId
-                    mPaymentInfo.getTradeVo().getTradeExtra().setChanged(true);
-                    mPaymentInfo.getTradeVo().getTradeExtra().setOpenIdenty(customer.openId);
-                }
-            }
-            mValueCardBalance = customer.remainValue;
-            if (customer.integral == null) {
-                mIntegralBalance = 0;
-            } else {
-                mIntegralBalance = customer.integral;
-            }
 
-            mPaymentInfo.setEcCard(null);
-            mPaymentInfo.setCustomer(customer);
-            mPaymentInfo.setMemberCardBalance(mValueCardBalance);
-            mPaymentInfo.setMemberIntegral(mIntegralBalance);
-            if (mSelectDialog != null)
-                mSelectDialog.dismiss();
-            //这行需在后面
-            postLoginSuccess();
-        }
-    }*/
 
-    /**
-     * 使用手机号登录
-     * 1.只有手机号
-     * 2.手机号下有卡号（弹出选择框选择使用什么登录）
-     *
-     * @Title: loginByPhoneNo
-     * @Return void 返回类型
-     */
-    /*private void loginByPhoneNo(final String inputNo) {
-        ResponseListener<MemberLoginVoResp> listener = new ResponseListener<MemberLoginVoResp>() {
-            @Override
-            public void onResponse(ResponseObject<MemberLoginVoResp> response) {
-                if (ResponseObject.isOk(response) && MemberLoginVoResp.isOk(response.getContent())) {
-                    final CustomerLoginResp resp = response.getContent().getResult();
-                    final List<CustomerInfoResp.Card> cards = resp.getCardList();
-                    if (resp.customerIsDisable() && cards == null) {//当前账号冻结
-                        ToastUtil.showShortToast(R.string.order_dish_member_disabled);
-                        return;
-                    } else if (resp.customerIsDisable()) {
-                        if (cards != null && cards.size() > 0) {
-                            List<String> accounts = new ArrayList<>();
-                            for (CustomerInfoResp.Card card : cards) {
-                                if (card.getCardStatus() == CardStatus.ACTIVATED
-                                        && card.getCardType() != EntityCardType.GENERAL_CUSTOMER_CARD) {
-                                    try {
-                                        JSONObject jsonObject = new JSONObject();
-                                        jsonObject.put("mobile", resp.getMobile());
-                                        jsonObject.put("name", card.getCardKindName());
-                                        jsonObject.put("type", 2);
-                                        jsonObject.put("num", card.getCardNum());
-                                        accounts.add(jsonObject.toString());
-                                    } catch (Exception e) {
-                                        Log.e(TAG, "", e);
-                                    }
-                                }
-                            }
-                            if (accounts.size() > 1) {
-                                CustomerManager.getInstance().setAccounts(accounts);
-                                if (mSelectDialog == null) {
-                                    mSelectDialog = new CustomerSelectDialog();
-                                    mSelectDialog.setResponseListener(new PhoneResponseListener(null), new CardResponseListener());
-                                }
-                                if (!mSelectDialog.isAdded())
-                                    mSelectDialog.show(getFragmentManager(), "CustomerSelectDialog");
-                            } else if (accounts.size() == 1) {
-                                for (CustomerInfoResp.Card card : cards) {
-                                    if (card.getCardStatus() == CardStatus.ACTIVATED) {
-                                        loginCard(card.getCardNum());
-                                        break;
-                                    }
-                                }
-                            } else {
-                                ToastUtil.showShortToast(R.string.all_account_disable);
-                            }
-                            return;
-                        }
-                    }
-                    new AsyncTask<Void, Void, CustomerResp>() {
 
-                        @Override
-                        protected CustomerResp doInBackground(Void... params) {
-                            CustomerResp customerNew = resp.getCustomer();
-                            customerNew.queryLevelRightInfos();
-                            return customerNew;
-                        }
 
-                        @Override
-                        protected void onPostExecute(CustomerResp customer) {
-                            super.onPostExecute(customer);
-                            customer.integral = resp.getIntegral() == null ? 0 : resp.getIntegral();
-                            if (cards != null && cards.size() > 0) {
-                                List<String> accounts = new ArrayList<>();
-                                try {
-                                    if (!resp.customerIsDisable()) {
-                                        JSONObject jsonObject = new JSONObject();
-                                        jsonObject.put("name", getString(R.string.customer_login_virtual_card));
-                                        jsonObject.put("type", 1);
-                                        jsonObject.put("num", customer.mobile);
-                                        accounts.add(jsonObject.toString());
-                                    }
-                                    for (CustomerInfoResp.Card card : cards) {
-                                        if (card.getCardType() != EntityCardType.GENERAL_CUSTOMER_CARD) {
-                                            JSONObject jsonObject = new JSONObject();
-                                            jsonObject.put("mobile", resp.getMobile());
-                                            jsonObject.put("name", card.getCardKindName());
-                                            jsonObject.put("type", 2);
-                                            jsonObject.put("num", card.getCardNum());
-                                            accounts.add(jsonObject.toString());
-                                        }
-                                    }
-                                    if (accounts.size() > 1) {
-                                        CustomerManager.getInstance().setAccounts(accounts);
-                                        if (mSelectDialog == null) {
-                                            mSelectDialog = new CustomerSelectDialog();
-                                            mSelectDialog.setResponseListener(new PhoneResponseListener(null), new CardResponseListener());
-                                        }
-                                        if (!mSelectDialog.isAdded()) {
-                                            mSelectDialog.show(getFragmentManager(), "CustomerSelectDialog");
-                                        }
-                                        return;
-                                    }
-                                } catch (Exception e) {
-                                    Log.e(TAG, "", e);
-                                }
-                            }
-                            loginByPhoneNoSuccess(customer);
-                        }
-                    }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-                } else {
-                    String msg;
-                    if (response.getContent() != null) {
-                        msg = response.getContent().getErrorMessage();
-                    } else {
-                        msg = getString(R.string.display_login_error);
-                    }
-                    ToastUtil.showLongToast(msg);
-                    EventBus.getDefault().post(new EventReadKeyboard(false, msg));// 发送失败到ReadKeyboardDialogFragment
-                }
-
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                ToastUtil.showLongToast(error.getMessage());
-                EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));// 发送失败到ReadKeyboardDialogFragment
-            }
-        };
-
-        CustomerManager customerManager = CustomerManager.getInstance();
-
-//        customerManager.customerLogin(CustomerLoginType.MOBILE, inputNo, null, false, false, true, LoadingResponseListener.ensure(listener, getFragmentManager()));
-        String telCode = mErpCurrency != null && mErpCurrency.getAreaCode() != null ? mErpCurrency.getAreaCode() : null;
-        String country = mErpCurrency != null && mErpCurrency.getCountryZh() != null ? mErpCurrency.getCountryZh() : null;
-        String nation = mErpCurrency != null && mErpCurrency.getCountryEn() != null ? mErpCurrency.getCountryEn() : null;
-        CustomerManager.getInstance().customerLoginByMobile(inputNo, telCode, country, nation, null, false, false, true,
-                LoadingYFResponseListener.ensure(listener, getFragmentManager()));
-    }*/
     private void loginByCustomerId(Long customerId, boolean isloginByCard) {
         PhoneResponseListener listener = new PhoneResponseListener(null, isloginByCard);
         CustomerManager customerManager = CustomerManager.getInstance();
         customerManager.customerLogin(CustomerLoginType.MEMBER_ID, customerId.toString(), null, false, false, true, LoadingYFResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * 微信登录
-     *
-     * @param number
-     */
+
     private void loginByWeixin(String number) {
         YFResponseListener<YFResponse<CustomerLoginResp>> listener = new PhoneResponseListener(null).setCustomerLoginType(CustomerLoginType.WECHAT_MEMBERCARD_ID);
         CustomerManager customerManager = CustomerManager.getInstance();
@@ -1706,8 +1147,7 @@ public class MemberLoginFragment extends BasicFragment {
             this.customerType = customerType;
         }
 
-        private CustomerLoginType customerLoginType;//add v8.5
-
+        private CustomerLoginType customerLoginType;
         public PhoneResponseListener(PasswordDialog dialog) {
             this.dialog = dialog;
         }
@@ -1728,8 +1168,7 @@ public class MemberLoginFragment extends BasicFragment {
                         dialog.dismiss();
                     }
                     final CustomerLoginResp resp = response.getContent();
-                    if (resp.customerIsDisable()) {//当前账号冻结
-                        ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                    if (resp.customerIsDisable()) {                        ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                         return;
                     }
 
@@ -1739,8 +1178,7 @@ public class MemberLoginFragment extends BasicFragment {
                         if (this.customerLoginType != null) {
                             customer.customerLoginType = this.customerLoginType;
                         }
-                        //如果结算时会员已经登录，判断是不是人脸登录,如果是要标记
-                        if (customer.customerId != null && DinnerShopManager.getInstance().getLoginCustomer() != null && customer.customerId.equals(DinnerShopManager.getInstance().getLoginCustomer().customerId)) {
+                                                if (customer.customerId != null && DinnerShopManager.getInstance().getLoginCustomer() != null && customer.customerId.equals(DinnerShopManager.getInstance().getLoginCustomer().customerId)) {
                             if (DinnerShopManager.getInstance().getLoginCustomer().customerLoginType == CustomerLoginType.FACE_CODE) {
                                 customer.customerLoginType = CustomerLoginType.FACE_CODE;
                             }
@@ -1750,14 +1188,10 @@ public class MemberLoginFragment extends BasicFragment {
                             ToastUtil.showShortToast(R.string.customer_not_member);
                             return;
                         }
-                        setLoginCustomer(customer);//快餐，烘焙
-                        //customer.queryLevelRightInfos();
-                        if (mPaymentInfo.getTradeBusinessType() == BusinessType.SNACK && mPaymentInfo.getTradeVo().getTrade().getTradePayStatus() != TradePayStatus.PAYING
+                        setLoginCustomer(customer);                                                if (mPaymentInfo.getTradeBusinessType() == BusinessType.SNACK && mPaymentInfo.getTradeVo().getTrade().getTradePayStatus() != TradePayStatus.PAYING
                                 && mPaymentInfo.getTradeVo() != null
                                 && mPaymentInfo.getTradeVo().getTradeExtra() != null
-                                && TextUtils.isEmpty(mPaymentInfo.getTradeVo().getTradeExtra().getOpenIdenty())) {//快餐并且没有openIdenty
-                            if (!TextUtils.isEmpty(customer.openId)) {//顾客有openId
-                                mPaymentInfo.setOrdered(false);
+                                && TextUtils.isEmpty(mPaymentInfo.getTradeVo().getTradeExtra().getOpenIdenty())) {                            if (!TextUtils.isEmpty(customer.openId)) {                                mPaymentInfo.setOrdered(false);
                                 mPaymentInfo.getTradeVo().getTradeExtra().setChanged(true);
                                 mPaymentInfo.getTradeVo().getTradeExtra().setOpenIdenty(customer.openId);
                             }
@@ -1775,8 +1209,7 @@ public class MemberLoginFragment extends BasicFragment {
                         mPaymentInfo.setMemberIntegral(mIntegralBalance);
                         if (mSelectDialog != null)
                             mSelectDialog.dismiss();
-                        //这行需在后面
-                        postLoginSuccess();
+                                                postLoginSuccess();
                     }
                 } else {
 
@@ -1805,8 +1238,7 @@ public class MemberLoginFragment extends BasicFragment {
 
     public static Animation shakeAnimation(int counts) {
         Animation translateAnimation = new TranslateAnimation(0, 15, 0, 0);
-        // 设置一个循环加速器，使用传入的次数就会出现摆动的效果。
-        translateAnimation.setInterpolator(new CycleInterpolator(counts));
+                translateAnimation.setInterpolator(new CycleInterpolator(counts));
         translateAnimation.setDuration(500);
 
         return translateAnimation;
@@ -1819,12 +1251,7 @@ public class MemberLoginFragment extends BasicFragment {
                 customer_verification.setEnabled(true);
                 customer_verification.setTextColor(getActivity().getResources().getColor(R.color.text_white));
                 customer_verification.setBackgroundResource(R.drawable.btn_blue_selector);
-//                if (show_value.getTag().equals(CustomerLogin.CUSTOMERLOGIN)) {
-//                    show_value.setBackgroundResource(R.drawable.customer_edit_bg);
-//                    show_value.setHint(R.string.customer_login_hint);
-//                }
-                mActualValue = show_value.getText().toString().replace("\n", "").trim();//add 20170223 外接键盘输入
-            } else {
+                mActualValue = show_value.getText().toString().replace("\n", "").trim();            } else {
                 customer_verification.setEnabled(false);
                 customer_verification.setTextColor(getActivity().getResources().getColor(R.color.text_black));
                 customer_verification.setBackgroundResource(R.drawable.pay_dopay_btn_bg);
@@ -1832,28 +1259,21 @@ public class MemberLoginFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 发送替换会员登录界面的成功的EventBus
-     */
+
     public void postLoginSuccess() {
         EventBus.getDefault().post(new MemberLoginEvent(false));
     }
 
 
-    /**
-     * 自动登录
-     */
+
     private void doAutoLogin() {
         if (mPaymentInfo == null) {
             return;
         }
-        CustomerResp mCustomer = mPaymentInfo.getCustomer();//mCustomer和mecCard不能并存
-        EcCard mecCard = mPaymentInfo.getEcCard();//mCustomer和mecCard不能并存
-        TradeCustomer memberCustomer = null;
+        CustomerResp mCustomer = mPaymentInfo.getCustomer();        EcCard mecCard = mPaymentInfo.getEcCard();        TradeCustomer memberCustomer = null;
         TradeCustomer memberCustomerCard = null;
         if (mecCard == null && mCustomer == null && mPaymentInfo.getTradeVo() != null) {
-            // 没有登录会员,看看单据里面是否有会员
-            List<TradeCustomer> tradeCustomerList = mPaymentInfo.getTradeVo().getTradeCustomerList();
+                        List<TradeCustomer> tradeCustomerList = mPaymentInfo.getTradeVo().getTradeCustomerList();
 
             if (tradeCustomerList != null && tradeCustomerList.size() > 0) {
                 for (TradeCustomer tadeCustomer : tradeCustomerList) {
@@ -1870,21 +1290,16 @@ public class MemberLoginFragment extends BasicFragment {
                 }
             }
         }
-        if (mCustomer != null) {// 标识已登录会员 直接显示会员余额信息
-        } else if (mecCard != null) {
+        if (mCustomer != null) {        } else if (mecCard != null) {
         } else if (memberCustomer != null || memberCustomerCard != null) {
-            //需要自动登录
-            if (isAutoLogin()) {
-                if (memberCustomer != null && memberCustomerCard == null) {//虚拟会员登录
-                    verification(memberCustomer.getCustomerPhone(), memberCustomer.getCustomerId(), true);
-                } else if (memberCustomerCard != null) {//实体卡登录
-                    loginCard(memberCustomerCard.getEntitycardNum());
+                        if (isAutoLogin()) {
+                if (memberCustomer != null && memberCustomerCard == null) {                    verification(memberCustomer.getCustomerPhone(), memberCustomer.getCustomerId(), true);
+                } else if (memberCustomerCard != null) {                    loginCard(memberCustomerCard.getEntitycardNum());
                 } else {
                     ToastUtil.showLongToast(R.string.cannot_auto_login_unknow_type);
                 }
             }
-        } else {// 需要登录 显示登录界面
-        }
+        } else {        }
     }
 
     public boolean isAutoLogin() {
@@ -1895,9 +1310,7 @@ public class MemberLoginFragment extends BasicFragment {
         isAutoLogin = autoLogin;
     }
 
-    /**
-     * 获取卡的基本信息
-     */
+
     private void getCardBaseInfo(String cardNum) {
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<CardBaseInfoResp> listener =
@@ -1913,9 +1326,7 @@ public class MemberLoginFragment extends BasicFragment {
                                                                    if (baseCardInfo.getCardType() == EntityCardType.GENERAL_CUSTOMER_CARD) {
                                                                        if (baseCardInfo.getCustomerId() != null
                                                                                && !TextUtils.isEmpty(baseCardInfo.getCustomerId().toString())) {
-                                                                           // loginByPhoneNo(null, baseCardInfo.getCustomerId(), true);
-                                                                           loginByCustomerId(baseCardInfo.getCustomerId(), true);//modify 20170913
-                                                                       }
+                                                                                                                                                      loginByCustomerId(baseCardInfo.getCustomerId(), true);                                                                       }
                                                                    } else {
                                                                        loginCard(baseCardInfo.getCardNum());
                                                                    }
@@ -1949,136 +1360,28 @@ public class MemberLoginFragment extends BasicFragment {
         event.setLogin(true);
         event.setTradeVo(DinnerShoppingCart.getInstance().getShoppingCartVo().getmTradeVo());
         EventBus.getDefault().post(event);
-//        if (mPaymentInfo.getTradeBusinessType() == BusinessType.SNACK || mPaymentInfo.getTradeBusinessType() == BusinessType.TAKEAWAY) {
-//            boolean isSelected = SharedPreferenceUtil.getSpUtil().getBoolean(SettingConstant.MEMBER_AUTO_PRIVILEGE, false);
-//            if (mPaymentInfo.getPaidPayment() != null && isSelected) {
-//                ToastUtil.showLongToast(R.string.no_support_privilege);
-//                return;
-//            }
-//
-//            if (mPaymentInfo.isOrdered()) {
-//                return;
-//            }
-//
-//            if (isSelected) {
-//                customerNew.queryLevelRightInfos();
-//                CustomerManager.getInstance().setLoginCustomer(customerNew);
-//                TradeCustomer tradeCustomer = CustomerManager.getInstance().getTradeCustomer(customerNew);
-//                if (!customerNew.isMember()) {
-//                    tradeCustomer.setCustomerType(CustomerType.CUSTOMER);
-//                } else if (customerNew.card == null) {
-//                    tradeCustomer.setCustomerType(CustomerType.MEMBER);
-//                } else {
-//                    tradeCustomer.setCustomerType(CustomerType.CARD);
-//                    tradeCustomer.setEntitycardNum(customerNew.card.getCardNum());
-//                }
-//
-//                ShoppingCart.getInstance().setFastFoodCustomer(tradeCustomer);
-//                ShoppingCart.getInstance().memberPrivilege();// 设置购物车会员折扣
-//            }
-//
-//            CustomerManager.getInstance().setLoginSource(1);
-//            RefreshTradeVoEvent event = new RefreshTradeVoEvent();
-//            event.setLogin(true);
-//            event.setTradeVo(ShoppingCart.getInstance().createFastFoodOrder(false));
-//            EventBus.getDefault().post(event);
-//        }
     }
 
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == FaceRequestCodeConstant.RC_PAY_LOGIN && resultCode == Activity.RESULT_OK) {
-            String faceCode = data.getStringExtra(BaiduFaceRecognition.KEY_FACE_CODE);
-            ResponseListener<MemberLoginVoResp> listener = new PhoneResponseListener(null).setCustomerLoginType(CustomerLoginType.FACE_CODE);
-            CustomerManager.getInstance().customerLogin(CustomerLoginType.FACE_CODE, faceCode, "", false, false, true, LoadingResponseListener.ensure(listener, getFragmentManager()));
-            FaceFeature faceFeature = (FaceFeature) data.getSerializableExtra(BaiduFaceRecognition.KEY_FACE_FEATURE);
-            if (faceFeature != null) {
-                ToastUtil.showLongToast("Beauty:" + faceFeature.getFaceScoreDescribe() + "\nAge:" + faceFeature.getAge() + "\nGender:" + faceFeature.getGender() + "\nFaceType:" + faceFeature.getFaceType() + "-" + faceFeature.getFaceTypeDescribe());
-            }
-        }
-    }*/
 
-    //判断是否要做预付金抵扣
-    private boolean isNeedToDeductionEarnest() {
+
+        private boolean isNeedToDeductionEarnest() {
         if (this.mPaymentInfo.getPaidAmount() <= 0 && this.mPaymentInfo.getTradeVo().getTradeEarnestMoney() > 0) {
             return true;
         }
         return false;
     }
 
-    //显示预付金抵扣界面
-    public void showBookingDeductionDialog() {
+        public void showBookingDeductionDialog() {
         int optype = this.mPaymentInfo.getTradeVo().getTradeEarnestMoney() > this.mPaymentInfo.getActualAmount() ? 2 : 1;
         BookingDeductionRefundDialog.start(getFragmentManager(), mPaymentInfo, mDoPayApi, optype);
     }
 
-    /**
-     * 大客户loyalty登录
-     */
-    /*private void requestCheckMember(String phone, String memberId) {
-        KeyAtCheckMemberListener keyAtCheckMemberListener = new KeyAtCheckMemberListener(getActivity(), null, new KeyAtCardLoginCallBackImpl() {
-            @Override
-            public void onRespCallBack(KeyAtLoginResp keyAtLoginResp) {
-                requestSuccess(keyAtLoginResp);
-            }
-        });
-        KeyAtDispatcher.getInstance().keyAtCheckMember(phone, memberId, LoadingResponseListener.ensure(keyAtCheckMemberListener, getSupportFragmentManager()));
-    }*/
 
-    /**
-     * 大客户卡登陆
-     */
-    /*private void requestCardLogin(String cardNo) {
-        KeyAtCardLoginListener keyAtCardLoginListener = new KeyAtCardLoginListener(getActivity(), new KeyAtRespCallBackImpl<KeyAtLoginResp>() {
-            @Override
-            public void onRespCallBack(KeyAtLoginResp keyAtLoginResp) {
-                requestSuccess(keyAtLoginResp);
-            }
-        });
-        KeyAtDispatcher.getInstance().keyAtCardLogin(cardNo, null, LoadingResponseListener.ensure(keyAtCardLoginListener, getSupportFragmentManager()));
-    }*/
 
-    /**
-     * 回调处理
-     */
-    /*private void requestSuccess(KeyAtLoginResp keyAtLoginResp) {
-        if (!PaySettingCache.isErpModeID(mPaymentInfo.getPayScene().value(), PayModeId.ENTITY_CARD.value())) {
-            // 如果商户没有配置实体卡支付就直接返回
-            ToastUtil.showShortToast(R.string.card_pay_not_set);
-            return;
-        }
-        CustomerResp customerNew = keyAtLoginResp.customer;
-        KeyAtCard keyAtCard = keyAtLoginResp.memberCard;
-        KeyAtLoginConvert convert = KeyAtLoginConvert.newInstance();
-        // 卡
-        EcCard ecCard = convert.convertEcCard(keyAtCard, customerNew);
-        // 余额
-        if (ecCard.getValueCardAccount() != null
-                && ecCard.getValueCardAccount().getRemainValue() != null) {
-            mValueCardBalance = ecCard.getValueCardAccount().getRemainValue();
-        } else {
-            mValueCardBalance = 0;
-        }
-        if (ecCard.getIntegralAccount() != null && ecCard.getIntegralAccount().getIntegral() != null) {
-            // 积分
-            mIntegralBalance = ecCard.getIntegralAccount().getIntegral();
-        } else {
-            mIntegralBalance = 0;
-        }
 
-        mPaymentInfo.setEcCard(ecCard);
-        mPaymentInfo.setCustomer(null);
-        customerNew.card = null;
-        mPaymentInfo.setCardCustomer(customerNew);
-        mPaymentInfo.setMemberCardBalance(mValueCardBalance);
-        mPaymentInfo.setMemberIntegral(mIntegralBalance);
 
-        ToastUtil.showShortToast(R.string.card_login_success);
-        if (mSelectDialog != null)
-            mSelectDialog.dismiss();
 
-        setLoginCustomer(customerNew);
-        postLoginSuccess();
-    }*/
+
+
+
 }

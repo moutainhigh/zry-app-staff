@@ -10,15 +10,11 @@ import com.zhongmei.yunfu.net.HttpConstant;
 import java.lang.reflect.Type;
 import java.util.UUID;
 
-/**
- * @version: 1.0
- * @date 2015年4月20日
- */
+
 public class SyncHttpCaller extends JsonHttpCaller<SyncRequest, SyncResponse> {
 
     public SyncHttpCaller(String url) {
         super(url, Type.class.cast(SyncResponse.class));
-//		setHttpProperty(Constant._KRY_GLOBAL_MSG_ID, UUID.randomUUID().toString());
         setDataIntoHeader();
         setGsonBuilder(Gsons.gsonBuilder());
         setConnectTimeout(20 * 1000);

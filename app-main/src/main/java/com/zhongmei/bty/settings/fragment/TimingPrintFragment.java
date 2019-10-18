@@ -122,11 +122,7 @@ public class TimingPrintFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 选中时间间隔，30min，60min，90min和120min
-     *
-     * @param tv
-     */
+
     private void selectTimingType(TextView tv) {
         tv.setSelected(true);
         Drawable drawable = getActivity().getResources().getDrawable(R.drawable.print_cashbox_select);
@@ -135,20 +131,14 @@ public class TimingPrintFragment extends BasicFragment {
         tv.setTextColor(getActivity().getResources().getColor(R.color.color_32ADF6));
     }
 
-    /**
-     * 取消选中时间间隔
-     *
-     * @param tv
-     */
+
     private void cancelSelectTimingType(TextView tv) {
         tv.setSelected(false);
         tv.setCompoundDrawables(null, null, null, null);
         tv.setTextColor(getActivity().getResources().getColor(R.color.color_333333));
     }
 
-    /**
-     * 读取定时打印配置信息
-     */
+
     private void getTiminPrintMin() {
         try {
             CashHandoverConfig config = dal.findCashHandoverConfig(3);
@@ -170,11 +160,7 @@ public class TimingPrintFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 设置定时打印
-     *
-     * @param value
-     */
+
     private void setTimingPrintMin(int value) {
         ResponseListener<CashHandoverConfig> listener = new ResponseListener<CashHandoverConfig>() {
 
@@ -210,11 +196,7 @@ public class TimingPrintFragment extends BasicFragment {
 
     }
 
-    /**
-     * 设置定时打印选中显示效果
-     *
-     * @param flag
-     */
+
     private void setSelectTimingType(int flag) {
         TextView[] tvMin = {tvMin30, tvMin60, tvMin90, tvMin120};
         int[] timingPrint =

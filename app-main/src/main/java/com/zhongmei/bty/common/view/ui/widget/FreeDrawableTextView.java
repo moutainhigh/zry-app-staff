@@ -5,9 +5,7 @@ import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class FreeDrawableTextView extends TextView {
     public FreeDrawableTextView(Context context) {

@@ -4,34 +4,22 @@ import java.io.Serializable;
 
 import com.zhongmei.bty.commonmodule.database.entity.local.BaiduSyntheticSpeech;
 
-/**
- * 声音列表
- */
+
 public class QueueVoiceVo implements Serializable {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
     private String name;
-    /**
-     * 是否选中
-     */
+
     private boolean isSelected;
 
-    /**
-     * 1合成 2 下载
-     */
+
     private int type;
 
-    /**
-     * 合成声音
-     */
+
     private BaiduSyntheticSpeech speech;
 
-    /**
-     * 下载文件路径
-     */
+
     private String path;
 
     public boolean isSelected() {

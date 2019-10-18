@@ -21,20 +21,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @version: 1.0
- * @date 2015年7月27日
- */
+
 public interface TablesDal extends IOperates {
 
     List<TableType> listTableType() throws Exception;
 
-    /**
-     * 捞取所有有效的桌台区域
-     *
-     * @return
-     * @throws Exception
-     */
+
     List<CommercialArea> listTableArea() throws Exception;
 
     List<Tables> listTables() throws Exception;
@@ -43,120 +35,57 @@ public interface TablesDal extends IOperates {
 
     List<TableSeat> listTableSeatsByTableId(Long tableId) throws Exception;
 
-    /**
-     * 查询有对应物理布局信息的桌台(不限制桌台是否可预订)
-     *
-     * @Title: listPhysicalLayoutTables
-     * @Param @return
-     * @Return List<Tables> 返回类型
-     */
+
     List<Tables> listAllPhysicalLayoutTables() throws SQLException;
 
-    /**
-     * 查询符合正餐展示条件的区域
-     *
-     * @return 返回对应的区域列表
-     * @throws Exception
-     */
+
     List<CommercialArea> listDinnerArea() throws Exception;
 
-    /**
-     * 根据桌台状态查询符合正餐展示条件的桌台
-     *
-     * @return 返回对应的台列表
-     * @throws Exception
-     */
+
     List<Tables> listDinnerEmptyTablesByStatus(TableStatus tableStatus) throws Exception;
 
-    /**
-     * 列出某区域下的所有桌台
-     *
-     * @param areaId 区域ID
-     * @return
-     * @throws Exception
-     */
+
     List<Tables> listTablesByAreaId(Long areaId) throws Exception;
 
     List<Tables> listTables(Long tableTypeId) throws Exception;
 
     Collection<DinnertableWrapper> listDinnertables() throws Exception;
 
-    /**
-     * 清台。此方法不阻塞调用线程
-     *
-     * @param dinnertable
-     * @param listener
-     */
+
     void clearDinnertable(IDinnertable dinnertable, ResponseListener<ClearDinnertableResp> listener);
 
-    /**
-     * 通过tableID查找区域
-     *
-     * @param tableId
-     * @return
-     */
+
     CommercialArea listArea(Long tableId) throws Exception;
 
     Map<CommercialArea, List<Tables>> listAreaByTableId(Long... tableId) throws Exception;
 
-    /**
-     * @param tabelId
-     * @return
-     */
+
     Tables findTablesById(Long tabelId) throws Exception;
 
-    /**
-     * @param areaId
-     * @return
-     * @throws Exception
-     */
+
     CommercialArea findAreaById(Long areaId) throws Exception;
 
     List<CommercialArea> findAreaById(List<Long> areaId) throws Exception;
 
-    /**
-     * @param tabelId
-     * @return
-     * @throws Exception
-     */
+
     int countTotalPersonCount(Long tabelId) throws Exception;
 
-    /**
-     * 通过单据获取桌台数据
-     *
-     * @return
-     */
+
     DinnerTableInfo getDinnerTableByTradeVo(TradeVo tradeVo) throws Exception;
 
-    /**
-     * 查询桌台区域
-     *
-     * @return
-     */
+
     List<TableAreaPopupVo> findAllTableAreaVo() throws Exception;
 
-    /**
-     * 查询快餐桌台(包括桌台区域、桌台、桌台上Trade)
-     */
+
     List<SnackTableVo> findSnackTableVo(boolean haveLimitServiceTime) throws Exception;
 
-    /**
-     * 获取桌台上的所有订单
-     *
-     * @return
-     * @throws SQLException
-     * @Title: findTradesInTable
-     * @Return void 返回类型
-     */
+
     List<Trade> findTradesInTable(TradeTable tradeTable) throws SQLException;
 
 
-    //根据桌台id及状态查询桌台
-    public List<Tables> findTablesByIds(List<Long> tableIds, TableStatus status) throws Exception;
+        public List<Tables> findTablesByIds(List<Long> tableIds, TableStatus status) throws Exception;
 
-    /**
-     * 通过状态查找桌台
-     */
+
     List<Tables> listTables(TableStatus tableStatus) throws Exception;
 
     List<Tables> listValidTables() throws Exception;
@@ -165,18 +94,14 @@ public interface TablesDal extends IOperates {
 
     long countOfTablesByPeopleCount(int minPeopleCount, int maxPeopleCount) throws SQLException;
 
-    /**
-     * @version: 1.0
-     * @date 2015年9月19日
-     */
+
     class DinnertableWrapper {
 
         public static final int MIN_WIDTH = 105;
 
         public static final int MIN_HEIGHT = 105;
 
-        private String uuid;//桌子uuid
-
+        private String uuid;
         private Long id;
 
         private String name;

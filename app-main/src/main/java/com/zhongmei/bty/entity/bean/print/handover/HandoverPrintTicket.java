@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 交接打印
- */
+
 
 public class HandoverPrintTicket implements Serializable {
 
@@ -23,18 +21,13 @@ public class HandoverPrintTicket implements Serializable {
     private long endTime;
 
     private String handoverUserName;
-    //销货单数
-    private int saleOrderCount;
-    //退货单数
-    private int refundOrderCount;
-    //储值单数
-    private int saleValuecardCount;
-    //储值退货数
-    private int refundValuecardCount;
+        private int saleOrderCount;
+        private int refundOrderCount;
+        private int saleValuecardCount;
+        private int refundValuecardCount;
 
 
-    //挂单次数
-    private int billCount;
+        private int billCount;
 
     private BigDecimal totalAmount;
 

@@ -13,11 +13,8 @@ public class PayKeyPanel implements View.OnClickListener {
 
     private EditText mShowValue;
 
-    private boolean isDefaultValue = false;//是否是自带值
-
-    private boolean isEnabled = true;//键盘是否可用
-    //add 20160714 start
-
+    private boolean isDefaultValue = false;
+    private boolean isEnabled = true;
     private TextView mOne;
     private TextView mTwo;
     private TextView mThree;
@@ -132,9 +129,7 @@ public class PayKeyPanel implements View.OnClickListener {
         }
     }
 
-    /**
-     * 清除默认值
-     */
+
     private void clearDefaultValue() {
         if (isDefaultValue) {
             mShowValue.setText("");
@@ -149,11 +144,7 @@ public class PayKeyPanel implements View.OnClickListener {
         return "";
     }
 
-    /**
-     * 设置当前编辑栏
-     *
-     * @param input
-     */
+
     public void setCurrentInput(EditText input) {
         if (input != null) {
             input.requestFocus();

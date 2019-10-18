@@ -8,9 +8,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 
 import java.util.Collection;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DataObserver implements DatabaseHelper.DataChangeObserver {
 

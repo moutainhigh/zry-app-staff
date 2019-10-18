@@ -13,9 +13,7 @@ import com.zhongmei.OSLog;
 import com.zhongmei.yunfu.context.R;
 import com.zhongmei.yunfu.context.ui.SystemExceptionActivity;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
 
@@ -35,12 +33,10 @@ public class AppExceptionHandler implements Thread.UncaughtExceptionHandler {
     }
 
     private void notice(final Thread thread, final Throwable ex) {
-//        noticeWithActivity(thread, ex);
         new Thread() {
             @Override
             public void run() {
                 Looper.prepare();
-//                noticeWithDialog(thread, ex);
                 noticeWithActivity(thread, ex);
                 Looper.loop();
             }

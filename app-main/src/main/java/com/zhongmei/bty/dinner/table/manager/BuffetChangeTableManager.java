@@ -35,10 +35,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date 2016/7/26
- * @Description:开台操作封装
- */
+
 public class BuffetChangeTableManager {
     protected DinnertableTradeVo dinnertableTradeVo;
     protected DinnerShoppingCart mShoppingCart;
@@ -47,8 +44,7 @@ public class BuffetChangeTableManager {
     private Long userId;
     private String userName;
 
-    //保存改动前的人数和服务员
-    protected int customerNumOld;
+        protected int customerNumOld;
     private Long userIdOld;
     private String userNameOld;
     protected TradeDeposit oldDeposit;
@@ -60,8 +56,7 @@ public class BuffetChangeTableManager {
 
     protected TradeDeposit mTradeDeposit;
 
-    public AuthUser salesman; //add  v8.1 销售员
-
+    public AuthUser salesman;
     public BuffetChangeTableManager(DinnertableTradeVo dinnertableTradeVo, List<CustomerTypeBean> listCustomer, int customerNum, Context context, BusinessType businessType) {
         this.dinnertableTradeVo = dinnertableTradeVo;
         mShoppingCart = DinnerShoppingCart.getInstance();
@@ -99,8 +94,7 @@ public class BuffetChangeTableManager {
         if (tradeTable == null) {
             return;
         }
-        //保存改动前的人数和服务员
-        customerNumOld = tradeTable.getTablePeopleCount();
+                customerNumOld = tradeTable.getTablePeopleCount();
         userIdOld = tradeTable.getWaiterId();
         userNameOld = tradeTable.getWaiterName();
 
@@ -111,32 +105,22 @@ public class BuffetChangeTableManager {
         }
 
         tradeTable.setTablePeopleCount(customerNum);
-//        //需要获取waiterId
-//        Long userId = 0L;
-//        if(waiterNameTv.getTag() != null){
-//            userId = Long.valueOf(waiterNameTv.getTag().toString());
-//        }
         tradeTable.setWaiterId(userId);
-//        tradeTable.setWaiterName(waiterNameTv.getText().toString());
         tradeTable.setWaiterName(userName);
         tradeVo.getTrade().setTradePeopleCount(customerNum);
         if (depositChanged(mTradeDeposit, tradeVo)) {
             mTradeDeposit.setChanged(true);
             tradeVo.setTradeDeposit(mTradeDeposit);
         }
-        //modify by zhubo 2015-10-30 resetOrderFromTable方法参数调整
-        DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnertableTradeVo.getDinnertableTrade(), tradeVo);
+                DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnertableTradeVo.getDinnertableTrade(), tradeVo);
         mShoppingCart.resetOrderFromTable(tradeInfo, true);
 
-        //将改动信息存入购物车
-        mShoppingCart.updateTable(tradeTable);
+                mShoppingCart.updateTable(tradeTable);
         mShoppingCart.setOrderBusinessType(mShoppingCart.getShoppingCartVo(), mBusinessType);
         mShoppingCart.setOrderType(mShoppingCart.getShoppingCartVo(), tradeVo.getTrade().getDeliveryType());
-        //还需要写入tradeVo到购物车
 
 
-        //将修改的人数放入tradeBuffetPeople中。
-        Map<Long, CustomerTypeBean> mapCustomerType = null;
+                Map<Long, CustomerTypeBean> mapCustomerType = null;
         BigDecimal totalAmount = BigDecimal.ZERO;
         if (Utils.isNotEmpty(mListCustomer)) {
             mapCustomerType = new HashMap<>();
@@ -168,11 +152,9 @@ public class BuffetChangeTableManager {
                 }
             }
         }
-        //add start  v8.1 销售员
-        if (salesman != null) {
+                if (salesman != null) {
             if (mShoppingCart.getTradeUser() != null) {
-                //如果发生修改
-                if (!salesman.getId().equals(mShoppingCart.getTradeUser().getUserId())) {
+                                if (!salesman.getId().equals(mShoppingCart.getTradeUser().getUserId())) {
                     mShoppingCart.getTradeUser().setUserId(salesman.getId());
                     mShoppingCart.getTradeUser().setUserName(salesman.getName());
                     mShoppingCart.getTradeUser().setChanged(true);
@@ -182,8 +164,7 @@ public class BuffetChangeTableManager {
                 mShoppingCart.setTradeUser(PayUtils.creatTradeUser(tradeVo.getTrade(), salesman));
             }
         }
-        //add  end v8.1 销售员
-        MathShoppingCartTool.mathTotalPrice(mShoppingCart.getShoppingCartDish(), dinnertableTradeVo.getTradeVo());
+                MathShoppingCartTool.mathTotalPrice(mShoppingCart.getShoppingCartDish(), dinnertableTradeVo.getTradeVo());
     }
 
     protected boolean depositChanged(TradeDeposit tradeposit, TradeVo tradeVo) {
@@ -228,12 +209,7 @@ public class BuffetChangeTableManager {
         mTradeOperates.modifyBuffet(mTradeVo, LoadingResponseListener.ensure(listener, activity.getSupportFragmentManager()));
     }
 
-    /**
-     * @Date 2016/10/27
-     * @Description:网络请求失败重置tradetable
-     * @Param
-     * @Return
-     */
+
     public void resetCusomerNumberAndWaiter() {
         TradeTable tradeTable = TableInfoFragment.getDataManager().getOpenTableInfo(dinnertableTradeVo);
         tradeTable.setTablePeopleCount(customerNumOld);

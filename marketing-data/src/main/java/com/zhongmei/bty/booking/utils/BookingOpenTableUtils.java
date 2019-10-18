@@ -26,9 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BookingOpenTableUtils {
 

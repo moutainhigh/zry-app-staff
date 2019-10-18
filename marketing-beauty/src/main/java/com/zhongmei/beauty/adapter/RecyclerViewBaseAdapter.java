@@ -10,12 +10,7 @@ import com.zhongmei.yunfu.ui.view.recycler.ViewWrapper;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * create by dzb 2018-04-17
- *
- * @param <T>
- * @param <V>
- */
+
 public abstract class RecyclerViewBaseAdapter<T, V extends View> extends RecyclerView.Adapter<ViewWrapper<V>> {
     protected List<T> items = new ArrayList<>();
 

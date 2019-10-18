@@ -29,10 +29,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 加料View
- */
+
 @EViewGroup(R.layout.add_material_view)
 public class ExtraView extends LinearLayout {
 
@@ -188,8 +185,7 @@ public class ExtraView extends LinearLayout {
                         mList.get(v.getId()).setQty(BigDecimal.ONE);
                         mListener.onAddMaterial(mList.get(v.getId()), BigDecimal.valueOf(1));
                     }
-                    // ll.setVisibility(View.VISIBLE);
-                }
+                                    }
             });
             minus.setId(i);
             minus.setOnClickListener(new OnClickListener() {
@@ -289,12 +285,10 @@ public class ExtraView extends LinearLayout {
     private void clearSelected() {
         if (Utils.isNotEmpty(rootViews)) {
             for (int i = 0; i < rootViews.size() - 1; i++) {
-                //清空数据中的数目
-                ExtraInfo extraInfo = mList.get(i);
+                                ExtraInfo extraInfo = mList.get(i);
                 extraInfo.qty = BigDecimal.ZERO;
 
-                //清空选中状态
-                LinearLayout rootView = rootViews.get(i);
+                                LinearLayout rootView = rootViews.get(i);
                 if (rootView.isSelected()) {
                     TextView text_price = (TextView) rootView.findViewById(R.id.text_price);
                     LinearLayout ll = (LinearLayout) rootView.findViewById(R.id.count_ll0);

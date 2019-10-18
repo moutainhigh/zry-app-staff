@@ -12,23 +12,11 @@ import com.zhongmei.bty.basemodule.pay.bean.PaymentVo;
 
 import java.util.List;
 
-/**
- * 订单中心的数据库操作封装接口类
- * Created by demo on 2018/12/15
- */
+
 public interface OrderCenterOperates extends IOperates {
 
 
-    /**
-     * 查询订单
-     *
-     * @param childTab  选中的子tab
-     * @param position
-     * @param keyword
-     * @param condition
-     * @param lastData
-     * @return
-     */
+
     List<Trade> queryTrade(int childTab, int position, String keyword, FilterCondition condition, Trade lastData);
 
     List<PaymentVo> getPaymentVos(String tradeUUID) throws OperateException;

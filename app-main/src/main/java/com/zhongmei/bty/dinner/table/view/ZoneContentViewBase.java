@@ -13,12 +13,7 @@ import com.zhongmei.yunfu.db.entity.booking.BookingTable;
 
 import java.util.HashMap;
 
-/**
- * 楼层视图的基类
- *
- * @version: 1.0
- * @date 2015年9月6日
- */
+
 @SuppressWarnings("deprecation")
 abstract class ZoneContentViewBase extends AbsoluteLayout {
 
@@ -33,7 +28,6 @@ abstract class ZoneContentViewBase extends AbsoluteLayout {
         mScrollView = scrollView;
         dinnertableViewFinder = new LongSparseArray<TableViewBase>();
         mTableViewCache = new LruCache<>(100);
-//		setBackgroundResource(R.drawable.dinnertable_zone_view_border);
     }
 
     protected ZoneModel getModel() {
@@ -41,7 +35,6 @@ abstract class ZoneContentViewBase extends AbsoluteLayout {
     }
 
     protected void setModel(ZoneModel model) {
-//		UserActionEvent.start(UserActionEvent.DINNER_TABLE_ZONE_REFRESH);
         mModel = model;
         dinnertableViewFinder.clear();
 
@@ -51,8 +44,7 @@ abstract class ZoneContentViewBase extends AbsoluteLayout {
                 removeDinnertableView((TableViewBase) view);
             }
         }
-        // 创建桌台
-        if (mModel.getDinnertableModels() != null) {
+                if (mModel.getDinnertableModels() != null) {
             for (DinnertableModel dinnertableModel : mModel.getDinnertableModels()) {
                 TableViewBase dinnertableView = null;
 
@@ -71,13 +63,11 @@ abstract class ZoneContentViewBase extends AbsoluteLayout {
                     dinnertableView.setOnDragListener(getOnDragListener());
                     dinnertableView.setOnClickListener(getOnClickListener());
                 }
-//				DinnertableView dinnertableView=createDinnertableView(dinnertableModel);//原来的方式
                 addView(dinnertableView);
                 dinnertableViewFinder.put(dinnertableModel.getId(), dinnertableView);
 
             }
         }
-//		UserActionEvent.end(UserActionEvent.DINNER_TABLE_ZONE_REFRESH);
     }
 
     public abstract OnDragListener getOnDragListener();
@@ -86,17 +76,6 @@ abstract class ZoneContentViewBase extends AbsoluteLayout {
 
     protected abstract TableViewBase createDinnertableView(DinnertableModel dinnertableModel);
 
-//	protected abstract DinnertableView createDinnertableView(DinnertableModel dinnertableModel) {
-//		DinnertableView dinnertableView = ViewUtils.inflateDinnertableView(getContext());
-//		int width = DensityUtil.dip2px(dinnertableModel.getWidth() + 8);
-//		int height = DensityUtil.dip2px(dinnertableModel.getHeight() + 8);
-//		int x = DensityUtil.dip2px(dinnertableModel.getX());
-//		int y = DensityUtil.dip2px(dinnertableModel.getY());
-//		LayoutParams layoutParams = new LayoutParams(width, height, x, y);
-//		dinnertableView.setLayoutParams(layoutParams);
-//		dinnertableView.setModel(dinnertableModel);
-//		return dinnertableView;
-//	}
 
     protected LayoutParams getTableViewLayoutParams(DinnertableModel dinnertableModel) {
         int width = DensityUtil.dip2px(MainApplication.getInstance(), dinnertableModel.getWidth() + 8);
@@ -157,12 +136,7 @@ abstract class ZoneContentViewBase extends AbsoluteLayout {
         }
     }
 
-    /**
-     * @Date 2016/8/12
-     * @Description:刷新桌台预定状态
-     * @Param
-     * @Return
-     */
+
     void refreshReserveStatus(HashMap<String, BookingTable> bookingMap) {
         for (int i = dinnertableViewFinder.size() - 1; i >= 0; i--) {
             TableViewBase dinnertableView = dinnertableViewFinder.valueAt(i);
@@ -178,10 +152,7 @@ abstract class ZoneContentViewBase extends AbsoluteLayout {
     }
 
 
-    /**
-     * 刷新异步开台记录在桌台上的展示
-     * 在DinnerTableStateCache中更新了异步记录，这边只是刷新一下。线程间通讯
-     */
+
     public void refreshOpenTableStatus() {
         for (int i = dinnertableViewFinder.size() - 1; i >= 0; i--) {
             TableViewBase dinnertableView = dinnertableViewFinder.valueAt(i);

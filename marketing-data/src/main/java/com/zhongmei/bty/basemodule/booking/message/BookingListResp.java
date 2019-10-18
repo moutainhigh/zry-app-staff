@@ -5,11 +5,7 @@ import com.zhongmei.yunfu.db.entity.booking.Booking;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Desc
- *
- * @created 2017/8/24
- */
+
 public class BookingListResp {
 
     public List<BookingResposeBean> bookingRespose;

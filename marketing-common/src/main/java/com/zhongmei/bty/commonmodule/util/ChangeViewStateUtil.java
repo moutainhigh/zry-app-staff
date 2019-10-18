@@ -11,19 +11,13 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.commonmodule.R;
 import com.zhongmei.yunfu.util.ToastUtil;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ChangeViewStateUtil {
     private static final String TAG = ChangeViewStateUtil.class.getSimpleName();
 
 
-    /**
-     * 还原成正常的drawable
-     *
-     * @param view
-     */
+
     private static void resetOriginDrawable(View view) {
         if (view instanceof ImageView) {
             Drawable drawable = (Drawable) view.getTag(R.id.origin_src_drawable);
@@ -74,11 +68,7 @@ public class ChangeViewStateUtil {
         }
     }
 
-    /**
-     * 根据网络状态设置view的点击事件
-     *
-     * @param view
-     */
+
     private static void setViewClickByNetworkState(View view, final int msgId, final boolean networkAvailable) {
         if (networkAvailable) {
             view.setOnTouchListener(null);
@@ -96,18 +86,7 @@ public class ChangeViewStateUtil {
         }
     }
 
-   /* private static void setViewOfflineClick(View view) {
-        view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    ToastUtil.showShortToast(R.string.src_no_work_reject_toast);
-                    return true;
-                }
-                return false;
-            }
-        });
-    }*/
+
 
     private static void setViewOnlineClick(View view) {
         view.setOnTouchListener(new View.OnTouchListener() {
@@ -142,16 +121,7 @@ public class ChangeViewStateUtil {
         setOffline(view);
     }
 
-    /*public static void setViewOffline(View view) {
-        setViewOfflineState(view);
-        setViewOfflineClick(view);
-    }
 
-    public static void setViewOnline(View view) {
-        setViewOnlineState(view);
-        setViewOnlineClick(view);
-       // setViewClickByNetworkState(view, R.string.no_work_reject_toast, true);
-    }*/
 
     private static void setViewOnlineState(View view) {
         if (view instanceof ViewGroup) {

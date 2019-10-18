@@ -2,15 +2,10 @@ package com.zhongmei.bty.basemodule.customer.message;
 
 import com.zhongmei.yunfu.bean.req.CustomerRefReq;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MemberCouponsReq extends CustomerRefReq {
-    private String clientType;//客户端请求来源
-    private Long brandId;//品牌ID
-    private Long commercialId;//门店ID
-
+    private String clientType;    private Long brandId;    private Long commercialId;
     public String getClientType() {
         return clientType;
     }

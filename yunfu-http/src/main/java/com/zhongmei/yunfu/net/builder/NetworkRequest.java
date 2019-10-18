@@ -6,23 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
-public class NetworkRequest {
-    private int method; // 请求的http方式
-    private String url; //请求的url
-    private Object content; //请求的内容
-    private Map<String, String> header; //请求的头
-    private int timeout; //超时时间
-    private ResponseProcessor processor; // 对于网络数据返回的处理
-    private OnSuccessListener successListener; // 网络请求成功的回调
-    private OnErrorListener errorListener; // 网络请求失败的回调
-    private Type responseContentType; // 返回数据的类型
-    private Object tag; // 设置request的tag
-    private List<RequestInterceptor> requestInterceptors = new ArrayList<>(); //请求的拦截器
-    private boolean interceptEnable;//异步拦截
 
+public class NetworkRequest {
+    private int method;     private String url;     private Object content;     private Map<String, String> header;     private int timeout;     private ResponseProcessor processor;     private OnSuccessListener successListener;     private OnErrorListener errorListener;     private Type responseContentType;     private Object tag;     private List<RequestInterceptor> requestInterceptors = new ArrayList<>();     private boolean interceptEnable;
     public NetworkRequest(Builder builder) {
         this.method = builder.method;
         this.url = builder.url;
@@ -95,18 +81,12 @@ public class NetworkRequest {
     }
 
     public static class Builder {
-        private int method = HttpMethod.POST; // 默认请求方式为post
-        private String url;
+        private int method = HttpMethod.POST;         private String url;
         private Object content;
         private HashMap<String, String> header;
         private int timeout = -1;
-        private ResponseProcessor processor; // 对于网络数据返回的处理
-        private OnSuccessListener successListener; // 网络请求成功的回调
-        private OnErrorListener errorListener; // 网络请求失败的回调
-        private Type responseContentType; // 返回数据的类型
-        private Object tag;
-        private boolean interceptEnable;//异步拦截
-
+        private ResponseProcessor processor;         private OnSuccessListener successListener;         private OnErrorListener errorListener;         private Type responseContentType;         private Object tag;
+        private boolean interceptEnable;
         public NetworkRequest build() {
             return new NetworkRequest(this);
         }
@@ -167,39 +147,27 @@ public class NetworkRequest {
         }
     }
 
-    /**
-     * 对于网络返回数据的进一步处理
-     */
+
     public interface ResponseProcessor<R> {
         R process(R response);
     }
 
-    /**
-     * 网络请求成功的回调
-     *
-     * @param <T>
-     */
+
     public interface OnSuccessListener<T> {
         void onSuccess(T data);
     }
 
-    /**
-     * 网络请求失败的回调
-     */
+
     public interface OnErrorListener {
         void onError(NetError error);
     }
 
-    /**
-     * 对于请求的拦截
-     */
+
     public interface RequestInterceptor {
         NetworkRequest intercept(NetworkRequest request);
     }
 
-    /**
-     * Supported request methods.
-     */
+
     public interface HttpMethod {
         int DEPRECATED_GET_OR_POST = -1;
         int GET = 0;

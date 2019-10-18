@@ -15,10 +15,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年9月20日
- */
+
 public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IShopcartItem {
 
     private List<ReadonlySetmealShopcartItem> setmealItems;
@@ -27,11 +24,8 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
 
     private TradeReasonRel returnQtyReason;
 
-    //tradePlanActivity表的uuid
-    private String tradePlanUuid;
-    /**
-     * 理由rel
-     */
+        private String tradePlanUuid;
+
     private TradeReasonRel reasonRel;
 
     public ReadonlyShopcartItem(TradeItem tradeItem) {
@@ -103,11 +97,7 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
 
     @Override
     public ReadonlyShopcartItem returnQty(BigDecimal qty, TradeReasonRel reason) {
-		/*if (getStatusFlag() != StatusFlag.VALID || getInvalidType() == InvalidType.DELETE
-				|| getInvalidType() == InvalidType.RETURN_QTY || getInvalidType() == InvalidType.SPLIT
-				|| getInvalidType() == InvalidType.MODIFY_DISH) {
-			throw new RuntimeException("The item's state is wrong!");
-		}*/
+
         if (reason == null) {
             returnQtyReason = null;
         } else {
@@ -134,10 +124,7 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
 
     @Override
     public void cancelReturnQty() {
-		/*if (returnQtyReason == null || getInvalidType() != InvalidType.RETURN_QTY
-			|| getStatusFlag() != StatusFlag.INVALID) {
-			throw new RuntimeException("The item's state is wrong!");
-		}*/
+
 
         if (returnQtyReason != null) {
             if (returnQtyReason.getId() == null) {
@@ -228,14 +215,12 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
 
     @Override
     public String getTradePlanUUID() {
-        // TODO Auto-generated method stub
-        return tradePlanUuid;
+                return tradePlanUuid;
     }
 
     @Override
     public void setTradePlanUUID(String tradePlanUuid) {
-        // TODO Auto-generated method stub
-        this.tradePlanUuid = tradePlanUuid;
+                this.tradePlanUuid = tradePlanUuid;
     }
 
     @Override
@@ -267,8 +252,7 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
 
     @Override
     public boolean isWaiting() {
-        //套餐是否等待中，需要判断所有子菜，有一个子菜不是等待中，就返回false，即不是等待中
-        if (hasSetmeal()) {
+                if (hasSetmeal()) {
             for (ReadonlySetmealShopcartItem setmeal : setmealItems) {
                 if (!setmeal.isWaiting()) {
                     return false;
@@ -289,8 +273,7 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
     @Override
     public void setIssueStatus(IssueStatus mIssueStatus) {
         super.setIssueStatus(mIssueStatus);
-        //更新子菜的打印状态
-        if (Utils.isNotEmpty(getSetmealItems())) {
+                if (Utils.isNotEmpty(getSetmealItems())) {
             for (ReadonlySetmealShopcartItem setmealShopcartItem : getSetmealItems()) {
                 setmealShopcartItem.setIssueStatus(mIssueStatus);
             }
@@ -300,8 +283,7 @@ public class ReadonlyShopcartItem extends ReadonlyShopcartItemBase implements IS
     @Override
     public void setGuestPrinted(GuestPrinted guestPrinted) {
         super.setGuestPrinted(guestPrinted);
-        //更新子菜的打印状态
-        if (Utils.isNotEmpty(getSetmealItems())) {
+                if (Utils.isNotEmpty(getSetmealItems())) {
             for (ReadonlySetmealShopcartItem setmealShopcartItem : getSetmealItems()) {
                 setmealShopcartItem.setGuestPrinted(guestPrinted);
             }

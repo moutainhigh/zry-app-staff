@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.EntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "app_privilege")
 public class AppPrivilege extends EntityBase<String> {
 
@@ -30,9 +28,7 @@ public class AppPrivilege extends EntityBase<String> {
     }
 
     public interface $ extends BasicEntityBase.$ {
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
         public static final String appId = "appId";
@@ -48,24 +44,16 @@ public class AppPrivilege extends EntityBase<String> {
         public static final String clientType = "client_type";
 
         public static final String clientName = "client_name";
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
 
     }
@@ -97,27 +85,19 @@ public class AppPrivilege extends EntityBase<String> {
     @DatabaseField(columnName = "client_name")
     private String clientName;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     protected Integer statusFlag;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 

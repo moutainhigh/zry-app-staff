@@ -6,9 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 
-/**
- * @date 2015年8月5日上午10:31:26
- */
+
 public class CalendarViewAdapter<V extends View> extends PagerAdapter {
     public static final String TAG = "CalendarViewAdapter";
     private V[] views;

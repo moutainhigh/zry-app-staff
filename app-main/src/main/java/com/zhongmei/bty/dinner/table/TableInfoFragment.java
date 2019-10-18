@@ -84,11 +84,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 
-/**
- * @Date：2015年9月5日
- * @Description:桌台详情页
- * @Version: 1.0
- */
+
 @EFragment(R.layout.dinner_table_info)
 public abstract class TableInfoFragment extends BasicFragment {
     private static final String TAG = TableInfoFragment.class.getSimpleName();
@@ -105,8 +101,7 @@ public abstract class TableInfoFragment extends BasicFragment {
     protected ImageButton closeBtn;
 
     @ViewById(R.id.delete_trade_ll)
-    protected View deleteButton;//删除按钮
-
+    protected View deleteButton;
     @ViewById(R.id.delete_trade_iv)
     protected ImageView deleteIv;
 
@@ -125,27 +120,22 @@ public abstract class TableInfoFragment extends BasicFragment {
     @ViewById(R.id.hint_tv)
     protected TextView messageTv;
 
-    // 全选按钮
-    @ViewById(R.id.allcheck_cb)
+        @ViewById(R.id.allcheck_cb)
     protected CheckBox allCheckCb;
 
-    // check顶部栏
-    @ViewById(R.id.dish_operate_checkbar)
+        @ViewById(R.id.dish_operate_checkbar)
     protected LinearLayout dishOperateCheckbar;
 
-    // 选择数目展示
-    @ViewById(R.id.check_number_tv)
+        @ViewById(R.id.check_number_tv)
     protected TextView checkNumberTv;
 
-    //展示人数和服务员的蓝色背景条
-    @ViewById(R.id.ll_number_and_waiter)
+        @ViewById(R.id.ll_number_and_waiter)
     protected LinearLayout llNumberAndWaiter;
 
     @ViewById(R.id.ll_number_and_waiter_viewgroup)
     protected LinearLayout ll_numberAndWaiterGroup;
 
-    //展示修改人数和服务员时的三角tip
-    @ViewById(R.id.iv_number_and_waiter_tip)
+        @ViewById(R.id.iv_number_and_waiter_tip)
     public ImageView ivNumberAndWaiterTip;
 
     @ViewById(R.id.tv_customer_count)
@@ -160,8 +150,7 @@ public abstract class TableInfoFragment extends BasicFragment {
     @ViewById(R.id.trade_fl)
     protected FrameLayout fl_tradeview;
 
-    //标题订单
-    @ViewById(R.id.trade_view2)
+        @ViewById(R.id.trade_view2)
     protected DinnertableTradeView tradeView;
 
     @ViewById(R.id.more_btn)
@@ -170,27 +159,22 @@ public abstract class TableInfoFragment extends BasicFragment {
     @ViewById(R.id.trade_back_iv)
     protected ImageView tradeBackIv;
 
-    //订单来源图标
-    @ViewById(R.id.trade_type_iv)
+        @ViewById(R.id.trade_type_iv)
     protected ImageView tradeTypeIv;
 
-    //订单下标
-    @ViewById(R.id.indicator_iv)
+        @ViewById(R.id.indicator_iv)
     protected ImageView indicatorIv;
 
-    //添加新订单
-    @ViewById(R.id.add_order_btn)
+        @ViewById(R.id.add_order_btn)
     protected ImageView addOrderBtn;
 
     @ViewById(R.id.add_order_tv)
     protected TextView addOrderTv;
 
-    //起菜，崔菜标题
-    @ViewById(R.id.dish_operate_title_ll)
+        @ViewById(R.id.dish_operate_title_ll)
     protected LinearLayout dishOperateTitleLL;
 
-    //起菜，崔菜标题
-    @ViewById(R.id.operate_name_tv)
+        @ViewById(R.id.operate_name_tv)
     protected TextView operateNameTv;
 
     @ViewById(R.id.add_item_batch_view)
@@ -209,32 +193,24 @@ public abstract class TableInfoFragment extends BasicFragment {
     protected TextView tvAppointmentOrderHint;
 
     @Bean
-    public TableInfoContentBean talbeInfoContentBean;// 商品信息和开台信息区域
-
+    public TableInfoContentBean talbeInfoContentBean;
     public static DataManage dataManage;
 
     private ZoneView zoneView;
 
-    private static boolean enableServing = false;//是否开启滑菜功能
-
-    protected DinnertableTradeVo dinnertableTradeVo;//选中的订单
-
+    private static boolean enableServing = false;
+    protected DinnertableTradeVo dinnertableTradeVo;
     protected TableFragmentBase dinnertableFragment;
 
-    EventDinnertableVoNotice event;//保存桌台更新数据
-
-    static int currentPosition = 0;// 记录选中位置
-
-    private int choosePositionAddItem = -1;//加菜列表选中位置
-
+    EventDinnertableVoNotice event;
+    static int currentPosition = 0;
+    private int choosePositionAddItem = -1;
     private static int unionTradePositon = 0;
 
     private int mTradeModelType = DataManage.MODELTYPE_UNION;
 
-    MoreMenuPopWindow moreMenuPopWindow;//菜单弹框
-
-    private List<IShopcartItem> shopcartItemsAddDish;//微信加菜
-
+    MoreMenuPopWindow moreMenuPopWindow;
+    private List<IShopcartItem> shopcartItemsAddDish;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -250,7 +226,6 @@ public abstract class TableInfoFragment extends BasicFragment {
         indicatorIv.setVisibility(View.INVISIBLE);
 
         registerEventBus();
-        //DatabaseHelper.Registry.register(kdsObserver);
 
         dinnertableFragment = (TableFragmentBase) getFragmentManager().findFragmentByTag(TableFragmentBase.TAG_TABLE_FRAGMENT);
         if (zoneView != null) {
@@ -330,12 +305,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         return null;
     }
 
-    /**
-     * 判断是否同一桌台
-     *
-     * @param oldDinnertableTradeVo
-     * @return
-     */
+
     private boolean equalTable(DinnertableTradeVo oldDinnertableTradeVo) {
         if (oldDinnertableTradeVo != null && dinnertableTradeVo != null && dinnertableTradeVo.getInfo() != null) {
             DinnertableTradeInfo oldTableInfo = oldDinnertableTradeVo.getInfo();
@@ -346,11 +316,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         return false;
     }
 
-    /**
-     * @Date 2015-9-15
-     * @Description: 刷新头部信息
-     * @Return void
-     */
+
     public void refreshHeadInfo() {
         String tableName = dataManage.getTableName();
         tableIdTv.setText(tableName);
@@ -361,15 +327,13 @@ public abstract class TableInfoFragment extends BasicFragment {
             floorTv.setText(dataManage.getFloor());
         }
 
-        //刷新添加订单按钮
-        if (addOrderBtn.getTag() != null) {
+                if (addOrderBtn.getTag() != null) {
             addOrderBtn.setImageResource(R.drawable.dinner_table_info_add_order);
             addOrderTv.setVisibility(View.GONE);
             addOrderBtn.setTag(null);
         }
 
-        //刷新时隐藏订单栏
-        if (tradeGridView.getVisibility() == View.VISIBLE) {
+                if (tradeGridView.getVisibility() == View.VISIBLE) {
             tradeGridView.setVisibility(View.GONE);
             indicatorIv.setVisibility(View.INVISIBLE);
         }
@@ -395,8 +359,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         switch (v.getId()) {
             case R.id.close_btn:
                 MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerTableClickCloseButton);
-                //移菜操作时不能关闭界面
-                if (DinnerShopCartAdapter.isDishCheckMode()) {
+                                if (DinnerShopCartAdapter.isDishCheckMode()) {
                     post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_OPERATE));
                 }
 
@@ -405,27 +368,23 @@ public abstract class TableInfoFragment extends BasicFragment {
                 }
                 getView().setVisibility(View.INVISIBLE);
                 break;
-            case R.id.back_iv://移菜拖动界面返回按钮
-                post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_OPERATE));
+            case R.id.back_iv:                post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_OPERATE));
                 if (event != null) {
                     post(event);
                 }
                 break;
             case R.id.fl_join_trade:
-                //展开联台组订单
-                if (!ClickManager.getInstance().isClicked()) {
+                                if (!ClickManager.getInstance().isClicked()) {
                     showUnion();
                 }
                 break;
             case R.id.trade_view2:
                 if (!ClickManager.getInstance().isClicked()) {
                     MobclickAgentEvent.onEvent(getActivity(), DinnerMobClickAgentEvent.tableDetailsTradeSwitch);
-                    if (dataManage.isAddItemModel(mTradeModelType)) {//加菜模式时点击刷新订单
-                        setTradeModelType(DataManage.MODELTYPE_NOMAL);
+                    if (dataManage.isAddItemModel(mTradeModelType)) {                        setTradeModelType(DataManage.MODELTYPE_NOMAL);
                         refreshView();
                         choosePositionAddItem = -1;
-                    } else {//非加菜模式时点击显示订单列表
-                        MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerDetailsTradesClick);
+                    } else {                        MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerDetailsTradesClick);
                         setTradeModelType(DataManage.MODELTYPE_NOMAL);
                         ivJoinTradeIndicator.setVisibility(View.INVISIBLE);
                         if (tradeGridView.getVisibility() == View.VISIBLE) {
@@ -456,8 +415,7 @@ public abstract class TableInfoFragment extends BasicFragment {
                         return;
                     }
 
-                    //判断是否有订单是否可操作
-                    if (dinnertableTradeVo != null && AsyncNetworkManager.getInstance().queryNotSuccess(getActivity(), dinnertableTradeVo.getTradeVo().getTrade().getId())) {
+                                        if (dinnertableTradeVo != null && AsyncNetworkManager.getInstance().queryNotSuccess(getActivity(), dinnertableTradeVo.getTradeVo().getTrade().getId())) {
                         return;
                     }
 
@@ -474,17 +432,11 @@ public abstract class TableInfoFragment extends BasicFragment {
                 break;
             case R.id.add_order_btn:
                 if (v.getTag() == null) {
-                    // 不允许一桌多单
-                    if (!ServerSettingManager.allowMultiTradesOnTable()) {
+                                        if (!ServerSettingManager.allowMultiTradesOnTable()) {
                         ToastUtil.showShortToast(R.string.dinner_table_opentable_tip);
                         return;
                     }
 
-                    //正在开台中
-//						if(((DinnertableModel)dataManage.getDinnerTableVo().getDinnertable()).asyncOpeningTable()){
-//							ToastUtil.showShortToast(getString(R.string.dinner_table_opening_table));
-//							return;
-//						}
 
                     MobclickAgentEvent.onEvent(getActivity(), DinnerMobClickAgentEvent.tableDetailsCreateTrade);
                     addOrderBtn.setImageResource(R.drawable.dinner_table_info_add_order2);
@@ -493,8 +445,7 @@ public abstract class TableInfoFragment extends BasicFragment {
                 } else {
                     MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerTableDetailsOpenTrade);
                     if (!ClickManager.getInstance().isClicked(R.id.add_order_btn)) {
-                        enableAddOrderBtn(false);//点击后禁用，跳转后可用
-
+                        enableAddOrderBtn(false);
                         VerifyHelper.verifyAlert(getActivity(),
                                 DinnerApplication.PERMISSION_DINNER_CREATE,
                                 new VerifyHelper.Callback() {
@@ -517,12 +468,10 @@ public abstract class TableInfoFragment extends BasicFragment {
 
     public void showUnion() {
         MobclickAgentEvent.onEvent(getActivity(), DinnerMobClickAgentEvent.tableDetailsUnionTradeSwitch);
-        if (dataManage.isAddItemModel(mTradeModelType)) {//加菜模式时点击刷新订单
-            setTradeModelType(DataManage.MODELTYPE_NOMAL);
+        if (dataManage.isAddItemModel(mTradeModelType)) {            setTradeModelType(DataManage.MODELTYPE_NOMAL);
             refreshView();
             choosePositionAddItem = -1;
-        } else {//非加菜模式时点击显示联台单列表
-            MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerDetailsTradesClick);
+        } else {            MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerDetailsTradesClick);
             setTradeModelType(DataManage.MODELTYPE_UNION);
             indicatorIv.setVisibility(View.INVISIBLE);
             if (tradeGridView.getVisibility() == View.VISIBLE) {
@@ -544,11 +493,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 检查支付状态，如果在支付中，不允许做其他的操作，只允许结账
-     *
-     * @return true 检查通过
-     */
+
     public boolean checkPayStatus() {
         if (dinnertableTradeVo == null || dinnertableTradeVo.getTradeVo() == null)
             return true;
@@ -561,8 +506,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         if (moreMenuPopWindow != null && moreMenuPopWindow.isShowing()) {
             moreMenuPopWindow.dismiss();
         }
-        dishOperateTitleLL.setVisibility(View.GONE);//熄屏隐藏催菜的title Layout
-        super.onStop();
+        dishOperateTitleLL.setVisibility(View.GONE);        super.onStop();
     }
 
     @Override
@@ -570,16 +514,13 @@ public abstract class TableInfoFragment extends BasicFragment {
         Log.i(TAG, "onDestroy");
         talbeInfoContentBean.unregisterEventBus();
         unregisterEventBus();
-        //释放资源
-        if (dataManage != null) {
+                if (dataManage != null) {
             dataManage.release();
             dataManage = null;
         }
-        //初始化静态变量
-        DinnerDishTradeInfoFragment.setMoveDishDragMode(false);
+                DinnerDishTradeInfoFragment.setMoveDishDragMode(false);
         DinnerShopCartAdapter.setDishCheckMode(false);
-        //DatabaseHelper.Registry.register(kdsObserver);
-        super.onDestroy();
+                super.onDestroy();
     }
 
     public void onEventMainThread(EventDinnertableVoNotice event) {
@@ -591,8 +532,7 @@ public abstract class TableInfoFragment extends BasicFragment {
 
         this.enableServing = event.enableServing;
         Log.i(TAG, "enableServing:" + enableServing);
-        //setModel
-        DataManage oldDataManage = dataManage;
+                DataManage oldDataManage = dataManage;
         dataManage = new DataManage(event.dinnertableVo);
         getView().setVisibility(View.VISIBLE);
         reSetTradeTypeModel(oldDataManage, dataManage);
@@ -605,12 +545,10 @@ public abstract class TableInfoFragment extends BasicFragment {
             TableInfoFragment.setUnionTradePositon(0);
         }
 
-        if (!newDataManager.isUnionTrade() && newDataManager.isUnionModel(mTradeModelType)) {//如果有联台单，默认选中联台单
-            setTradeModelType(DataManage.MODELTYPE_NOMAL);
+        if (!newDataManager.isUnionTrade() && newDataManager.isUnionModel(mTradeModelType)) {            setTradeModelType(DataManage.MODELTYPE_NOMAL);
         }
 
-        if (isAddDishMode()) {//如果是加才模式，刷新View后变为普通模式
-            setTradeModelType(DataManage.MODELTYPE_NOMAL);
+        if (isAddDishMode()) {            setTradeModelType(DataManage.MODELTYPE_NOMAL);
         }
 
         oldDataManager = null;
@@ -630,10 +568,7 @@ public abstract class TableInfoFragment extends BasicFragment {
     }
 
     public static class DataManage {
-        public static final int MODELTYPE_NOMAL = 0x10;//普通订单模式
-        public static final int MODELTYPE_ADDTIEM = 0x20;//加菜单模式
-        public static final int MODELTYPE_UNION = 0x30;//联台单模式
-        private DinnertableVo dinnerTableVo;
+        public static final int MODELTYPE_NOMAL = 0x10;        public static final int MODELTYPE_ADDTIEM = 0x20;        public static final int MODELTYPE_UNION = 0x30;        private DinnertableVo dinnerTableVo;
 
 
         public DataManage(DinnertableVo dinnertableVo) {
@@ -668,12 +603,7 @@ public abstract class TableInfoFragment extends BasicFragment {
             return tradeModelType == MODELTYPE_UNION;
         }
 
-        /**
-         * @return
-         * @Date 2015年9月21日
-         * @Description: 获取桌台人数信息
-         * @Return String
-         */
+
         public String getTableCustomerNumberInfo() {
             int realCustomerNum = 0;
             for (DinnertableTradeVo tradeVo : dinnerTableVo.getDinnertableTradeVos()) {
@@ -684,12 +614,7 @@ public abstract class TableInfoFragment extends BasicFragment {
             return result;
         }
 
-        /**
-         * @return
-         * @Date 2015年12月14日
-         * @Description: 获取桌台所有订单实际人数
-         * @Return int
-         */
+
         public int getTableRealCustomerNumber() {
             int realCustomerNum = 0;
             for (DinnertableTradeVo tradeVo : dinnerTableVo.getDinnertableTradeVos()) {
@@ -699,13 +624,7 @@ public abstract class TableInfoFragment extends BasicFragment {
             return realCustomerNum;
         }
 
-        /**
-         * @param position
-         * @return
-         * @Date 2015年9月21日
-         * @Description: 获取订单信息
-         * @Return String
-         */
+
         public String getTradeInfo(int position) {
             if (dinnerTableVo.getDinnertableTradeVos() == null || dinnerTableVo.getDinnertableTradeVos().size() == 0) {
                 return "";
@@ -722,18 +641,12 @@ public abstract class TableInfoFragment extends BasicFragment {
                     break;
                 }
             }
-            String result = tradeVo.getSn() + "-" + getSpendTime(tradeVo)/*+"-"+tradeVo.getNumberOfMeals()+"/"+tradeCustomerNum*/;
+            String result = tradeVo.getSn() + "-" + getSpendTime(tradeVo);
             return result;
 
         }
 
-        /**
-         * @param position
-         * @return
-         * @Date 2015年10月22日
-         * @Description: 获取tradeSn
-         * @Return String
-         */
+
         public String getTradeSn(int position) {
             if (dinnerTableVo.getDinnertableTradeVos() == null || dinnerTableVo.getDinnertableTradeVos().size() == 0) {
                 return "";
@@ -746,13 +659,7 @@ public abstract class TableInfoFragment extends BasicFragment {
             return tradeVo.getSn();
         }
 
-        /**
-         * @param position
-         * @return
-         * @Date 2015年10月22日
-         * @Description: 获取订单时间
-         * @Return String
-         */
+
         public String getTradeSpendtime(int position) {
             if (dinnerTableVo.getDinnertableTradeVos() == null || dinnerTableVo.getDinnertableTradeVos().size() == 0) {
                 return "";
@@ -799,13 +706,7 @@ public abstract class TableInfoFragment extends BasicFragment {
             return SpendTimeFormater.format(spendTime);
         }
 
-        /**
-         * @param position
-         * @return
-         * @Date 2015年9月21日
-         * @Description: 获取单个订单数据
-         * @Return DinnertableTradeVo
-         */
+
         public DinnertableTradeVo getTradeObjcet(int position, int tradeTypeModel) {
             List<DinnertableTradeVo> tradeVos = null;
             if (isUnionModel(tradeTypeModel)) {
@@ -850,13 +751,7 @@ public abstract class TableInfoFragment extends BasicFragment {
             return null;
         }
 
-        /**
-         * @param tradeVo
-         * @return
-         * @Date 2015年9月21日
-         * @Description: 获取单子在当前桌子上的开台信息
-         * @Return TradeTable
-         */
+
         public TradeTable getOpenTableInfo(DinnertableTradeVo tradeVo) {
             List<TradeTable> tables = tradeVo.getTradeVo().getTradeTableList();
             TradeTable tradeTable = null;
@@ -872,13 +767,7 @@ public abstract class TableInfoFragment extends BasicFragment {
             return tradeTable;
         }
 
-        /**
-         * @param tradeInfo
-         * @return
-         * @Date 2015年11月11日
-         * @Description: 在点菜界面中使用
-         * @Return TradeTable
-         */
+
         public static TradeTable getOpenTableInfoInDish(DinnertableTradeInfo tradeInfo) {
             if (tradeInfo != null && tradeInfo.getTradeVo() != null) {
                 List<TradeTable> tables = tradeInfo.getTradeVo().getTradeTableList();
@@ -944,8 +833,7 @@ public abstract class TableInfoFragment extends BasicFragment {
                         || TradeSourceUtils.isTradePayedAndConfirmed(tradeVo, SourceId.DIANPING)
                         || TradeSourceUtils.isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.XIN_MEI_DA)
                         || TradeSourceUtils.isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.KOU_BEI)) {
-                    //已完成的订单不显示删除按钮
-                    post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_FINISH));
+                                        post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_FINISH));
                 } else {
                     post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_OPERATE));
                 }
@@ -958,14 +846,8 @@ public abstract class TableInfoFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 选中指定订单
-     *
-     * @Title: selectTrade
-     * @Return void 返回类型
-     */
+
     public void selectTrade(Long tradeId) {
-//		tableInfoOrdersBean.selectTrade(tradeId);
     }
 
     public enum DragStatus {
@@ -988,12 +870,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         return enableServing;
     }
 
-    /**
-     * @Date 2016/6/12
-     * @Description:展示移菜拖动模式
-     * @Param
-     * @Return
-     */
+
     public void showMoveDishDragMode(boolean show) {
         if (show) {
             dinnertableFragment.enableDinnertableClick(false);
@@ -1019,12 +896,7 @@ public abstract class TableInfoFragment extends BasicFragment {
 
     }
 
-    /**
-     * @Date 2016/6/15
-     * @Description:接收移菜结果通知
-     * @Param
-     * @Return
-     */
+
     public void onEventMainThread(EventMoveDishNotice event) {
         if (event.result) {
             post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_OPERATE));
@@ -1032,12 +904,7 @@ public abstract class TableInfoFragment extends BasicFragment {
 
     }
 
-    /**
-     * @Date 2016/7/19
-     * @Description: 点选菜品后刷新拖动订单View
-     * @Param
-     * @Return
-     */
+
     public void refreshMovedishDragView() {
         DinnerDishTradeInfoFragment tradeInfoFragment = (DinnerDishTradeInfoFragment) getFragmentManager().findFragmentByTag("dinner_table_page0");
         DinnertableTradeModelMoveDish modelMoveDish = (DinnertableTradeModelMoveDish) movedishDragView.getModel();
@@ -1045,19 +912,12 @@ public abstract class TableInfoFragment extends BasicFragment {
         modelMoveDish.setItems(items);
         modelMoveDish.setCopyDishItemSize(items.size());
         movedishDragView.setModel(modelMoveDish);
-        //选择数量为0时不允许拖动
-        movedishDragView.setEnabledDrag(items.size() == 0 ? false : true);
+                movedishDragView.setEnabledDrag(items.size() == 0 ? false : true);
     }
 
-    /**
-     * @Date 2016/7/19
-     * @Description:初始化移菜/复制 标题栏
-     * @Param
-     * @Return
-     */
+
     public void refreshDishCheckTitleBar() {
-        //初始化拖动订单显示
-        DinnertableTradeModelMoveDish modelMoveDish = new DinnertableTradeModelMoveDish(talbeInfoContentBean.tradeInfoFragment.getSelectedDishAdapter().getCheckedIShopcartItems().size());
+                DinnertableTradeModelMoveDish modelMoveDish = new DinnertableTradeModelMoveDish(talbeInfoContentBean.tradeInfoFragment.getSelectedDishAdapter().getCheckedIShopcartItems().size());
         modelMoveDish.setSourceTradeVo(talbeInfoContentBean.getDinnerTableTradeVo());
 
         DinnerDishTradeInfoFragment tradeInfoFragment = (DinnerDishTradeInfoFragment) getFragmentManager().findFragmentByTag("dinner_table_page0");
@@ -1066,11 +926,8 @@ public abstract class TableInfoFragment extends BasicFragment {
 
         String keyStr = null;
         if (MoreMenuPopWindow.operateType == OperateType.MOVE_DISH) {
-            keyStr = getActivity().getString(R.string.dinner_movedish);//"移菜";
-            modelMoveDish.setModeType((byte) 0, 0);
-        } else {//复制
-            keyStr = getActivity().getString(R.string.dinner_copy);//"复制";
-            modelMoveDish.setModeType((byte) 1, 0);
+            keyStr = getActivity().getString(R.string.dinner_movedish);            modelMoveDish.setModeType((byte) 0, 0);
+        } else {            keyStr = getActivity().getString(R.string.dinner_copy);            modelMoveDish.setModeType((byte) 1, 0);
         }
 
         movedishDragView.setModel(modelMoveDish);
@@ -1080,24 +937,14 @@ public abstract class TableInfoFragment extends BasicFragment {
 
     }
 
-    /**
-     * @Date 2016/7/21
-     * @Description:刷新复制菜品次数
-     * @Param
-     * @Return
-     */
+
     public void addCopydishTimes() {
         DinnertableTradeModelMoveDish modelMoveDish = (DinnertableTradeModelMoveDish) movedishDragView.getModel();
         modelMoveDish.setModeType((byte) 1, modelMoveDish.getCopyCount() + 1);
         movedishDragView.setModel(modelMoveDish);
     }
 
-    /**
-     * @Date 2016/7/28
-     * @Description:初始化移菜/复制 checkbar状态
-     * @Param
-     * @Return
-     */
+
     public void initialDishAllCheckBar(boolean show) {
         if (show) {
             dishOperateCheckbar.setVisibility(View.VISIBLE);
@@ -1117,13 +964,11 @@ public abstract class TableInfoFragment extends BasicFragment {
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.allcheck_cb) {// 全选按钮
-                talbeInfoContentBean.tradeInfoFragment.getSelectedDishAdapter().checkAllDishForMoveDish(allCheckCb.isChecked());
+            if (v.getId() == R.id.allcheck_cb) {                talbeInfoContentBean.tradeInfoFragment.getSelectedDishAdapter().checkAllDishForMoveDish(allCheckCb.isChecked());
                 checkNumberTv.setText(getString(R.string.dinner_orderdish_dishcheck_number,
                         String.valueOf(talbeInfoContentBean.tradeInfoFragment.getSelectedDishAdapter().getCheckedNumber())));
                 if (DinnerDishTradeInfoFragment.isMoveDishDragMode()) {
-                    refreshMovedishDragView();//全选后刷新拖动订单
-                }
+                    refreshMovedishDragView();                }
             }
 
         }
@@ -1152,9 +997,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         }
 
         if (!ClickManager.getInstance().isClicked()) {
-            //未接受订单不允许修改人数服务员
-            if (TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.WECHAT) //TradeSourceUtils.isTradeFromWeixinUnproccess(dinnertableTradeVo)
-                    || TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.DIANPING)
+                        if (TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.WECHAT)                     || TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.DIANPING)
                     || TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.XIN_MEI_DA)
                     || TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.KOU_BEI)
                     || TradeSourceUtils.isTradePayedUnAcceptFromFAMILIAR(dinnertableTradeVo)
@@ -1169,8 +1012,7 @@ public abstract class TableInfoFragment extends BasicFragment {
                 return;
             }
 
-            //判断是否有订单是否可操作
-            if (AsyncNetworkManager.getInstance().queryNotSuccess(getActivity(), dinnertableTradeVo.getTradeVo().getTrade().getId())) {
+                        if (AsyncNetworkManager.getInstance().queryNotSuccess(getActivity(), dinnertableTradeVo.getTradeVo().getTrade().getId())) {
                 return;
             }
 
@@ -1191,20 +1033,17 @@ public abstract class TableInfoFragment extends BasicFragment {
 
     public boolean hideNumberAndWaiterWindow(MotionEvent event) {
         if (ll_numberAndWaiterGroup != null && ll_numberAndWaiterGroup.getVisibility() == View.VISIBLE) {
-            //点击事件的屏幕坐标
-            int touchScreenX = (int) event.getRawX();
+                        int touchScreenX = (int) event.getRawX();
             int touchScreenY = (int) event.getRawY();
 
-            //服务员和人数的左上角坐标和尺寸
-            int[] locations = new int[2];
+                        int[] locations = new int[2];
             ll_numberAndWaiterGroup.getLocationOnScreen(locations);
             int x = locations[0];
-            int y = locations[1];/*- ll_numberAndWaiterGroup.getHeight();//包含展示人数和服务员的蓝条区域*/
+            int y = locations[1];
             int width = ll_numberAndWaiterGroup.getWidth();
-            int height = ll_numberAndWaiterGroup.getHeight()/*+viewNumberAndWaiter.getHeight()*/;
+            int height = ll_numberAndWaiterGroup.getHeight();
 
-            //点击事件在人数和服务员视图外时，隐藏人数和服务员视图
-            if (!(touchScreenX >= x && touchScreenX <= (x + width)
+                        if (!(touchScreenX >= x && touchScreenX <= (x + width)
                     && touchScreenY >= y && touchScreenY <= (y + height))) {
                 ll_numberAndWaiterGroup.setVisibility(View.GONE);
                 ivNumberAndWaiterTip.setVisibility(View.GONE);
@@ -1214,31 +1053,11 @@ public abstract class TableInfoFragment extends BasicFragment {
         return false;
     }
 
-//	/**
 
-//	 * @Date 2016/9/23
-//	 * @Description: 判断人数框是否可见
-//	 * @Param
-//	 * @Return
-//	 */
-//	public boolean isNumberAndWaiterWindowVisible(){
-//		if(viewNumberAndWaiter!=null&&viewNumberAndWaiter.getVisibility()==View.VISIBLE){
-//			return true;
-//		}else{
-//			return false;
-//		}
-//
-//	}
 
-    /**
-     * @Date 2016/9/23
-     * @Description:初始化人数和服务员
-     * @Param
-     * @Return
-     */
+
     protected void updateNumberAndWaiter() {
-        //查询当前订单人数和服务员
-        TradeVo tradeVo = dinnertableTradeVo.getTradeVo();
+                TradeVo tradeVo = dinnertableTradeVo.getTradeVo();
         String customerCount = "";
         String waiterName = "";
         if (tradeVo != null && Utils.isNotEmpty(tradeVo.getTradeTableList())) {
@@ -1260,12 +1079,9 @@ public abstract class TableInfoFragment extends BasicFragment {
         tvWaiterName.setText(String.format(getString(R.string.dinner_waiter_hint), waiterName));
     }
 
-    /**
-     * 刷新联台订单入口展示
-     */
+
     private void refreshJoinTradeView() {
-        //联台组展示入口
-        if (isShowJoinTrade()) {
+                if (isShowJoinTrade()) {
             flJoinTrade.setVisibility(View.VISIBLE);
             tvJoinTableDown.setVisibility(View.VISIBLE);
             ivJoinTradeIndicator.setVisibility(View.INVISIBLE);
@@ -1274,15 +1090,9 @@ public abstract class TableInfoFragment extends BasicFragment {
         }
     }
 
-    /**
-     * @Date 2016/9/26
-     * @Description:刷新订单view
-     * @Param
-     * @Return
-     */
+
     private void refreshTradeView() {
-        //订单数量>1需要显示订单背景
-        if (dataManage.getAllTrade().size() > 1 && dinnertableTradeVo.getTableId() == dataManage.getTableId()) {
+                if (dataManage.getAllTrade().size() > 1 && dinnertableTradeVo.getTableId() == dataManage.getTableId()) {
             tradeBackIv.setVisibility(View.VISIBLE);
         } else {
             tradeBackIv.setVisibility(View.INVISIBLE);
@@ -1307,33 +1117,21 @@ public abstract class TableInfoFragment extends BasicFragment {
         } else {
             addOrderBtn.setVisibility(View.VISIBLE);
         }
-//		tradeView.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				isAddDishMode=false;
-//				refreshView();
-//				choosePositionAddItem=-1;
-//			}
-//		});
 
-        //modify by zhubo已支付的大众点评订单，不允许拖动
-        if (dinnertableTradeVo.getStatus() == DinnertableStatus.EMPTY
-                || TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.WECHAT) //TradeSourceUtils.isTradeFromWeixinUnproccess(dinnertableTradeVo)
-                || TradeSourceUtils.isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.DIANPING)
+                if (dinnertableTradeVo.getStatus() == DinnertableStatus.EMPTY
+                || TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.WECHAT)                 || TradeSourceUtils.isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.DIANPING)
                 || TradeSourceUtils.isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.XIN_MEI_DA)
                 || TradeSourceUtils.isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.KOU_BEI)
                 || TradeSourceUtils.isTradePayedUnAcceptFromBAIDURICE(dinnertableTradeVo)
                 || TradeSourceUtils.isTradePayedUnAcceptFromFAMILIAR(dinnertableTradeVo)
                 || TradeSourceUtils.isTradePayedUnAcceptFromOpenPlatform(dinnertableTradeVo)
                 || TradeSourceUtils.isTradePayedFromShuKe(dinnertableTradeVo)
-                || TableInfoContentBean.isAsyncHttpExcuting(dinnertableTradeVo)) {//add isAsyncHttpExcuting() by dzb
-            tradeView.setEnabledDrag(false);
+                || TableInfoContentBean.isAsyncHttpExcuting(dinnertableTradeVo)) {            tradeView.setEnabledDrag(false);
         } else {
             tradeView.setEnabledDrag(true);
         }
 
-        // 微信订单标识 增加大众点评图标显示
-        if (TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.WECHAT)) {
+                if (TradeSourceUtils.isTradeUnProcessed(dinnertableTradeVo, SourceId.WECHAT)) {
             tradeTypeIv.setVisibility(View.VISIBLE);
             tradeTypeIv.setImageResource(R.drawable.dinner_table_wechat);
         } else if (TradeSourceUtils.isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.DIANPING)) {
@@ -1346,14 +1144,12 @@ public abstract class TableInfoFragment extends BasicFragment {
             tradeTypeIv.setVisibility(View.VISIBLE);
             tradeTypeIv.setImageResource(R.drawable.dinner_table_koubei);
         } else if (TradeSourceUtils.isTradePayedUnAcceptFromBAIDURICE(dinnertableTradeVo) || TradeSourceUtils.isTradePayedAcceptedFromBAIDURICE(dinnertableTradeVo)) {
-            //百度糯米订单图标显示
-            tradeTypeIv.setVisibility(View.VISIBLE);
+                        tradeTypeIv.setVisibility(View.VISIBLE);
             tradeTypeIv.setImageResource(R.drawable.dinner_table_nuomi);
         } else if (TradeSourceUtils.isTradePayedFromShuKe(dinnertableTradeVo)) {
             tradeTypeIv.setVisibility(View.VISIBLE);
             tradeTypeIv.setImageResource(R.drawable.dinner_table_shuke);
-        } else if (hasAddDish(dinnertableTradeVo)) {//是否有加菜
-            tradeTypeIv.setVisibility(View.VISIBLE);
+        } else if (hasAddDish(dinnertableTradeVo)) {            tradeTypeIv.setVisibility(View.VISIBLE);
             tradeTypeIv.setImageResource(R.drawable.add_dish_icon);
         } else if (dinnertableTradeVo.getDinnertableTrade().getPreCashPrintStatus() == YesOrNo.YES && SharedPreferenceUtil.getSpUtil().getBoolean(TableFragment.SHOW_PRECASH_KEY, false)) {
             tradeTypeIv.setVisibility(View.VISIBLE);
@@ -1364,25 +1160,15 @@ public abstract class TableInfoFragment extends BasicFragment {
 
     }
 
-    /**
-     * 刷新TradeView上的异步操作订单详情也
-     *
-     * @param event
-     */
+
     public void onEventMainThread(EventRefreshTradeAsyncHttp event) {
         if (tradeView != null) {
             tradeView.showHttpRecord();
         }
     }
 
-    /**
-     * @Date 2016/9/26
-     * @Description:开台
-     * @Param
-     * @Return
-     */
+
     private void finishOpenTable() {
-//		TableInfoContentBean.needJumpToDishWindow=true;
         setCurrentPosition(dataManage.getAllTrade().size());
         OpentablePopWindow.isQuickOpentable = true;
         OpenTableManager manager = new OpenTableManager(dataManage.getDinnerTableVo(), getEmptyTradeDefaultCustomerNumber(), getActivity(), dinnertableFragment.getBussinessType());
@@ -1397,12 +1183,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         }
     }
 
-    /**
-     * @Date 2016/9/27
-     * @Description:隐藏订单弹框
-     * @Param
-     * @Return
-     */
+
     public boolean hideTradeGridWindow(MotionEvent event) {
         if (tradeGridView != null && tradeGridView.getVisibility() == View.VISIBLE) {
             if (!DensityUtil.isRangeOfView(tradeGridView, event)) {
@@ -1415,12 +1196,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         return false;
     }
 
-    /**
-     * @Date 2016/9/27
-     * @Description:隐藏开台按钮
-     * @Param
-     * @Return
-     */
+
     public boolean hideOpenTableWindow(MotionEvent event) {
         return hideOpenTableWindow(event, false);
     }
@@ -1438,12 +1214,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         return false;
     }
 
-    /**
-     * @Date 2016/9/28
-     * @Description:选择订单后刷新界面
-     * @Param
-     * @Return
-     */
+
     private void chooseTrade(int position) {
         tradeGridView.choosePosition(position);
         indicatorIv.setVisibility(View.INVISIBLE);
@@ -1453,12 +1224,7 @@ public abstract class TableInfoFragment extends BasicFragment {
     }
 
 
-    /**
-     * @Date 2016/9/28
-     * @Description:选择订单后刷新界面
-     * @Param
-     * @Return
-     */
+
     private void chooseUnionTrade(int position) {
         tradeGridView.choosePosition(position);
         ivJoinTradeIndicator.setVisibility(View.INVISIBLE);
@@ -1472,32 +1238,19 @@ public abstract class TableInfoFragment extends BasicFragment {
         addOrderBtn.setEnabled(enable);
     }
 
-    /**
-     * @Date 2016/10/8
-     * @Description:获取默认开台人数
-     * @Param
-     * @Return
-     */
+
     private int getEmptyTradeDefaultCustomerNumber() {
         int realCustomerNumber = TableInfoFragment.getDataManager().getTableRealCustomerNumber();
         int tableMaxCustomerNumber = TableInfoFragment.getDataManager().getMaxSeatNuber();
         int defaultCustomerNumber = 0;
-        if (realCustomerNumber == 0) {//桌台没有订单
-            defaultCustomerNumber = tableMaxCustomerNumber;
-        } else if (realCustomerNumber < tableMaxCustomerNumber) {//桌台未坐满
-            defaultCustomerNumber = tableMaxCustomerNumber - realCustomerNumber;
-        } else {//桌台已坐满
-            defaultCustomerNumber = 2;
+        if (realCustomerNumber == 0) {            defaultCustomerNumber = tableMaxCustomerNumber;
+        } else if (realCustomerNumber < tableMaxCustomerNumber) {            defaultCustomerNumber = tableMaxCustomerNumber - realCustomerNumber;
+        } else {            defaultCustomerNumber = 2;
         }
         return defaultCustomerNumber;
     }
 
-    /**
-     * @Date 2016/10/20
-     * @Description:刷新加菜单列表
-     * @Param
-     * @Return
-     */
+
     public void refreshAddItemBatchView() {
         List<AddItemBatchBean> beans = getAddItemBatchBean();
         if (beans == null) {
@@ -1517,18 +1270,12 @@ public abstract class TableInfoFragment extends BasicFragment {
                     talbeInfoContentBean.tradeInfoFragment.updateOrderDishList(shopcartItems, addDishTradeVo, false, false, false);
                     post(new ActionTableInfoBottomBarStatus(BottomBarStatus.CHOOSE_ADD_DISH_ITEM));
 
-                    shopcartItemsAddDish = shopcartItems;//保存选中的加菜
-                }
+                    shopcartItemsAddDish = shopcartItems;                }
             });
         }
     }
 
-    /**
-     * @Date 2016/10/20
-     * @Description:获取加菜单列表数据
-     * @Param
-     * @Return
-     */
+
     private List<AddItemBatchBean> getAddItemBatchBean() {
         DinnertableTradeModel model = (DinnertableTradeModel) dinnertableTradeVo.getDinnertableTrade();
         List<AddItemVo> addItemVos = model.getAddItemVos();
@@ -1550,12 +1297,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         }
     }
 
-    /**
-     * @Date 2016/10/20
-     * @Description:获取选中的加菜数据
-     * @Param
-     * @Return
-     */
+
     public AddItemVo getChooseAddItemVo() {
         if (dinnertableTradeVo == null) {
             return null;
@@ -1572,12 +1314,7 @@ public abstract class TableInfoFragment extends BasicFragment {
         return shopcartItemsAddDish;
     }
 
-    /**
-     * @Date 2016/10/21
-     * @Description:是否有加菜数据
-     * @Param
-     * @Return
-     */
+
     public static boolean hasAddDish(DinnertableTradeVo dinnertableTradeVo) {
         DinnertableTradeModel model = (DinnertableTradeModel) dinnertableTradeVo.getDinnertableTrade();
         List<AddItemVo> addItemVos = model.getAddItemVos();
@@ -1594,12 +1331,10 @@ public abstract class TableInfoFragment extends BasicFragment {
     }
 
     public void resetView() {
-        //判断一下状态
-        dinnertableFragment.enableDinnertableClick(true);
+                dinnertableFragment.enableDinnertableClick(true);
 
         titleRL.setVisibility(View.VISIBLE);
         moveDishTopbarRL.setVisibility(View.GONE);
-//		talbeInfoContentBean.showMoveDishDragMode(false);
 
         talbeInfoContentBean.resetView();
     }

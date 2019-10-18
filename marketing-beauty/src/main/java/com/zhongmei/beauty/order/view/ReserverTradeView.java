@@ -10,9 +10,7 @@ import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.beauty.booking.bean.BeautyBookingVo;
 import com.zhongmei.yunfu.db.enums.Sex;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ReserverTradeView extends LinearLayout {
     private BeautyBookingVo mReserverTradeVo;

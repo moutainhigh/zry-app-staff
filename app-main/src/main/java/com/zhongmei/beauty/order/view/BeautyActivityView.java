@@ -19,10 +19,7 @@ import com.zhongmei.bty.basemodule.shopmanager.interfaces.ChangePageListener;
 import com.zhongmei.beauty.order.util.IChangeMiddlePageListener;
 import com.zhongmei.yunfu.util.ToastUtil;
 
-/**
- * 美业活动view
- * Created by demo on 2018/12/15
- */
+
 
 @EViewGroup(R.layout.beauty_activity_view)
 public class BeautyActivityView extends LinearLayout {
@@ -53,11 +50,6 @@ public class BeautyActivityView extends LinearLayout {
     @AfterViews
     void initView() {
         showProgramView();
-//        if(CustomerManager.getInstance().getDinnerLoginCustomer()!=null){
-//            showProgramView();
-//        }else{
-//            showMarketActivityView();
-//        }
     }
 
 
@@ -93,9 +85,7 @@ public class BeautyActivityView extends LinearLayout {
         layout_content.addView(beautyMarketActivityView);
     }
 
-    /**
-     * 退出所有的营销活动选择
-     */
+
     public void cancelSelected() {
         if (beautyMarketActivityView != null)
             beautyMarketActivityView.cancelSelected();

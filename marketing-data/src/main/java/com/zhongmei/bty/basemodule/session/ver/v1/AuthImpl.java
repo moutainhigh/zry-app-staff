@@ -15,9 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AuthImpl extends AbsAuth {
 
@@ -25,34 +23,9 @@ public class AuthImpl extends AbsAuth {
     protected void onLoad(User user, Map<String, Resource> map) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            /*Dao<AuthUserPermission, Long> userPermissionDao = helper.getDao(AuthUserPermission.class);
-            Dao<AuthDataPermission, Long> dataPermissionDao = helper.getDao(AuthDataPermission.class);
-            QueryBuilder<AuthUserPermission, Long> aupQB = userPermissionDao.queryBuilder();
-            aupQB.selectColumns(AuthUserPermission.$.permissionId,
-                    AuthUserPermission.$.permissionCode,
-                    AuthUserPermission.$.roleId);
-            List<AuthUserPermission> userPermissionList
-                    = aupQB.where().eq(AuthUserPermission.$.userId, user.getId()).query();
-            for (AuthUserPermission userPermission : userPermissionList) {
-                String code = userPermission.getPermissionCode();
-                QueryBuilder<AuthDataPermission, Long> adpQB = dataPermissionDao.queryBuilder();
-                adpQB.selectColumns(AuthDataPermission.$.name, AuthDataPermission.$.content);
-                List<AuthDataPermission> dataPermissionList
-                        = adpQB.where().eq(AuthDataPermission.$.permissionId, userPermission.getPermissionId())
-                        .and().eq(AuthDataPermission.$.roleId, userPermission.getRoleId())
-                        .query();
 
-                Map<String, String> detail = new HashMap<>();
 
-                for (AuthDataPermission authDataPermission : dataPermissionList) {
-                    detail.put(authDataPermission.getName(), authDataPermission.getContent());
-                }
-                Resource resource = new Resource(code, detail);
-                map.put(code, resource);
-            }*/
-
-            //查询权限对应的角色
-            Dao<AuthRolePermission, Long> rolePermissionDao = helper.getDao(AuthRolePermission.class);
+                        Dao<AuthRolePermission, Long> rolePermissionDao = helper.getDao(AuthRolePermission.class);
             QueryBuilder<AuthRolePermission, Long> rolePermissionQueryBuilder = rolePermissionDao.queryBuilder();
             rolePermissionQueryBuilder.selectColumns(AuthRolePermission._permissionId);
             rolePermissionQueryBuilder.where().eq(AuthRolePermission._statusFlag, StatusFlag.VALID)

@@ -55,9 +55,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.fragment_dinner_dishclear_list)
 public class DinnerDishClearListDialogFragment extends BasicDialogFragment implements ViewPager.OnPageChangeListener {
 
@@ -77,17 +75,14 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
     protected Button close_button;
 
     @ViewById(R.id.batchupdate_button)
-    protected Button batchUpdateButton;//批量上架
-    @ViewById(R.id.descipe)
-    protected TextView descipe;//长按描述TextView
-
+    protected Button batchUpdateButton;    @ViewById(R.id.descipe)
+    protected TextView descipe;
     protected DinnerDishListPagerAdapter mAdapter;
 
     private LoadDishTask mTask;
 
     private int mCurrentIndex = 0;
-    private DishInfo mDishInfo;//当前数据
-    protected DishManager mDishManager;
+    private DishInfo mDishInfo;    protected DishManager mDishManager;
     private OnCloseListener mOnCloseListener;
 
     @Override
@@ -121,8 +116,7 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
 
             @Override
             public void doItemTouch(DishVo dishVo) {
-                // onTouch(dishVo);
-            }
+                            }
 
             @Override
             public void doItemLongClick(DishVo dishVo) {
@@ -165,8 +159,7 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
 
     public void myGridItemLongClicked(final DishVo dishVo) {
         if (dishVo.isContainProperties()) {
-            // 弹出估清界面
-            OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
+                        OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
             orderDishClearStatusFragment.setData(dishVo);
             orderDishClearStatusFragment.setOnCloseListener(new OnCloseListener() {
 
@@ -195,19 +188,12 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
     }
 
 
-    /**
-     * @Title: requestClearStatus
-     * @Description: 请求更改估清状态
-     * @Param @param dishShop TODO
-     * @Return void 返回类型
-     */
+
     private void requestClearStatus(final DishVo dishVo, final ClearStatus newValue) {
         List<String> dishUuids = new ArrayList<String>();
         dishUuids.add(dishVo.getDishShop().getUuid());
 
-        /*
-         * 估清请求结果
-         */
+
         ResponseListener<Boolean> listener = new ResponseListener<Boolean>() {
 
             @Override
@@ -262,12 +248,9 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
 
     public void onEventMainThread(EventDishChangedNotice eventDishChangedNotice) {
         Log.e("onEventMainThread", " received  EventDishChangedNotice");
-        loadData();//数据变化时重新加载
-    }
+        loadData();    }
 
-    /**
-     * 加载数据
-     */
+
     private void loadData() {
         if (mTask != null) {
             mTask.cancel(true);
@@ -292,8 +275,7 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
         protected void onPostExecute(DishInfo dishInfo) {
             if (isAdded() && dishInfo != null && mAdapter != null) {
                 if (Utils.isNotEmpty(dishInfo.dishList)) {
-                    mDishInfo = dishInfo;//add yutang
-                    mAdapter.setDataSet(dishInfo.dishList);
+                    mDishInfo = dishInfo;                    mAdapter.setDataSet(dishInfo.dishList);
                     createIndex(mCurrentIndex, mAdapter.getCount());
 
                     vpDishList.setVisibility(View.VISIBLE);
@@ -312,14 +294,7 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
         }
     }
 
-    /**
-     * 创建索引
-     *
-     * @Title: createIndex
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void createIndex(int currentIndex, int totalSize) {
         llDots.removeAllViews();
 

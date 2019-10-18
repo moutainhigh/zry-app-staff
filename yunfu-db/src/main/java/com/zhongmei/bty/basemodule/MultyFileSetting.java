@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "multy_file_setting")
 public class MultyFileSetting extends BasicEntityBase implements ICreator, IUpdator {
 
@@ -27,9 +25,7 @@ public class MultyFileSetting extends BasicEntityBase implements ICreator, IUpda
         String fileType = "file_type";
         String carouselInterval = "carousel_interval";
         String groupFlag = "group_flag";
-        /**
-         * 是否启用（1-是，2-否）
-         */
+
         String enableFlag = "enable_flag";
     }
 

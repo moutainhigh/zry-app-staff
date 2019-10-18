@@ -2,27 +2,17 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 加菜记录处理状态
- */
+
 public enum AddItemBatchStatus implements ValueEnum<Integer> {
 
-    /**
-     * 有待处理加菜
-     */
+
     HASDEALTRADE(1),
 
-    /**
-     * 全部加菜已处理
-     */
+
     DEALED(2),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

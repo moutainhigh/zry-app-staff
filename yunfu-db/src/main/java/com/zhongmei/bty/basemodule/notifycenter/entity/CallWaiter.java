@@ -8,10 +8,7 @@ import com.zhongmei.yunfu.db.CommonEntityBase;
 import com.zhongmei.yunfu.db.enums.SourceId;
 import com.zhongmei.yunfu.context.util.Utils;
 
-/**
- * 服务铃
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "call_waiter")
 public class CallWaiter extends CommonEntityBase {
 
@@ -73,8 +70,7 @@ public class CallWaiter extends CommonEntityBase {
     @DatabaseField(columnName = "waiter_name")
     private String waiterName;
 
-    //对应的枚举类CallWaiterType 该字段可能存放多个枚举值以"｜"隔开
-    @DatabaseField(columnName = "content_code")
+        @DatabaseField(columnName = "content_code")
     private String contentCode;
 
     @DatabaseField(columnName = "content")
@@ -214,8 +210,7 @@ public class CallWaiter extends CommonEntityBase {
         return super.hashCode() + (count == null ? 0 : count.hashCode());
     }
 
-    //本地冗余字段，用于通知中心的展示
-    private String tableName = "";
+        private String tableName = "";
 
     private String serialNumber = "";
 

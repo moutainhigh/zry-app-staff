@@ -10,9 +10,7 @@ import android.view.View;
 import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.yunfu.util.DensityUtil;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ItemDivider extends RecyclerView.ItemDecoration {
     private Drawable mDrawable;

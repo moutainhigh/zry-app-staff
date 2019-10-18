@@ -18,9 +18,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-/**
- * 百度语音
- */
+
 public class SpeechSynthesizerUtil {
     private final String TAG = SpeechSynthesizerUtil.class.getSimpleName();
 
@@ -38,11 +36,7 @@ public class SpeechSynthesizerUtil {
 
     private static SpeechSynthesizerUtil speechUtil;
 
-    /**
-     * 单例
-     *
-     * @return
-     */
+
     public static SpeechSynthesizerUtil getInstance() {
         if (speechUtil == null) {
             speechUtil = new SpeechSynthesizerUtil();
@@ -50,9 +44,7 @@ public class SpeechSynthesizerUtil {
         return speechUtil;
     }
 
-    /**
-     * 初始化
-     */
+
     public void init() {
         try {
             initialEnv();
@@ -77,22 +69,16 @@ public class SpeechSynthesizerUtil {
         this.mSpeechSynthesizer = SpeechSynthesizer.getInstance();
         this.mSpeechSynthesizer.setContext(BaseApplication.sInstance);
         this.mSpeechSynthesizer.setSpeechSynthesizerListener(new Listener());
-        // 文本模型文件路径 (离线引擎使用)
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_TEXT_MODEL_FILE,
+                this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_TEXT_MODEL_FILE,
                 mSampleDirPath + "/" + TEXT_MODEL_NAME);
-        // 声学模型文件路径 (离线引擎使用)
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_SPEECH_MODEL_FILE,
+                this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_TTS_SPEECH_MODEL_FILE,
                 mSampleDirPath + "/" + SPEECH_FEMALE_MODEL_NAME);
-        // 请替换为语音开发者平台上注册应用得到的App ID (离线授权)
-        this.mSpeechSynthesizer.setAppId("6428171");
-        // 请替换为语音开发者平台注册应用得到的apikey和secretkey (在线授权)
-        this.mSpeechSynthesizer.setApiKey("dfpUrSKoKtDgUg2LMBhcYGnS", "NPCplw9Y6CMxLvST0ReNnoviGGeNOArZ");
+                this.mSpeechSynthesizer.setAppId("6428171");
+                this.mSpeechSynthesizer.setApiKey("dfpUrSKoKtDgUg2LMBhcYGnS", "NPCplw9Y6CMxLvST0ReNnoviGGeNOArZ");
         this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEAKER, SpeechSynthesizer.SPEAKER_FEMALE);
         this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_MIX_MODE, SpeechSynthesizer.MIX_MODE_DEFAULT);
-        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "9");//音量，取值范围[0, 9]，数值越大，音量越大
-        mSpeechSynthesizer.loadModel(mSampleDirPath + "/" + SPEECH_MALE_MODEL_NAME, null);
-        // 授权检测接口
-        Log.i(TAG, "before auth");
+        this.mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "9");        mSpeechSynthesizer.loadModel(mSampleDirPath + "/" + SPEECH_MALE_MODEL_NAME, null);
+                Log.i(TAG, "before auth");
         AuthInfo authInfo = this.mSpeechSynthesizer.auth(TtsMode.MIX);
         Log.i(TAG, "after auth");
         if (authInfo.isSuccess()) {
@@ -113,13 +99,7 @@ public class SpeechSynthesizerUtil {
         }
     }
 
-    /**
-     * 将sample工程需要的资源文件拷贝到SD卡中使用（授权文件为临时授权文件，请注册正式授权）
-     *
-     * @param isCover 是否覆盖已存在的目标文件
-     * @param source
-     * @param dest
-     */
+
     private void copyFromAssetsToSdcard(boolean isCover, String source, String dest) {
         File file = new File(dest);
         if (isCover || (!isCover && !file.exists())) {
@@ -154,16 +134,11 @@ public class SpeechSynthesizerUtil {
         }
     }
 
-    /**
-     *
 
-     *
-     */
     private class Listener implements SpeechSynthesizerListener {
 
         @Override
         public void onError(String arg0, SpeechError arg1) {
-            // TODO Auto-generated method stub
 
         }
 
@@ -178,7 +153,6 @@ public class SpeechSynthesizerUtil {
 
         @Override
         public void onSpeechStart(String arg0) {
-            // TODO Auto-generated method stub
 
         }
 
@@ -194,18 +168,12 @@ public class SpeechSynthesizerUtil {
 
         @Override
         public void onSynthesizeStart(String arg0) {
-            // TODO Auto-generated method stub
 
         }
 
     }
 
-    /**
-     * 叫号
-     *
-     * @param speech
-     * @param num
-     */
+
     public void speakCall(BaiduSyntheticSpeech speech, String num) {
         if (mSpeechSynthesizer != null) {
             mSpeechSynthesizer.stop();
@@ -217,19 +185,14 @@ public class SpeechSynthesizerUtil {
                 mSpeechSynthesizer.loadModel(mSampleDirPath + "/" + SPEECH_FEMALE_MODEL_NAME, null);
             }
             mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEED, speech.getSpeed().toString());
-            mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "9");//音量，取值范围[0, 9]，数值越大，音量越大
-            String content = speech.getContent();
+            mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "9");            String content = speech.getContent();
             String format = BaseApplication.sInstance.getResources().getString(R.string.voice_number_toast);
             String newContent = content.replace(format, num);
             mSpeechSynthesizer.speak(newContent);
         }
     }
 
-    /**
-     * 播音
-     *
-     * @param speech
-     */
+
     public void speak(BaiduSyntheticSpeech speech) {
         if (mSpeechSynthesizer != null) {
             mSpeechSynthesizer.stop();
@@ -241,8 +204,7 @@ public class SpeechSynthesizerUtil {
                 mSpeechSynthesizer.loadModel(mSampleDirPath + "/" + SPEECH_FEMALE_MODEL_NAME, null);
             }
             mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_SPEED, speech.getSpeed().toString());
-            mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "9");//音量，取值范围[0, 9]，数值越大，音量越大
-            mSpeechSynthesizer.speak(speech.getContent());
+            mSpeechSynthesizer.setParam(SpeechSynthesizer.PARAM_VOLUME, "9");            mSpeechSynthesizer.speak(speech.getContent());
         }
     }
 

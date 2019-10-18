@@ -4,30 +4,20 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.CommonEntityBase;
 
-/**
- * sync_dict is a ORMLite bean type. Corresponds to the database table "sync_dict"
- */
+
 @DatabaseTable(tableName = "sync_dict")
 public class SyncDict extends CommonEntityBase {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "sync_dict"
-     */
+
     public interface $ extends CommonEntityBase.$ {
-        /**
-         * 字典类型,详见 sync_dict_type表
-         */
+
         String type = "type";
 
-        /**
-         * 代码
-         */
+
         String code = "code";
 
-        /**
-         * 名称
-         */
+
         String name = "name";
     }
 

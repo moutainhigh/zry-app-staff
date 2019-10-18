@@ -11,10 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 团餐菜品构建
- * Created by demo on 2018/12/15
- */
+
 
 public class GroupOrderCenterDataBuildTool extends DinnerOrderCenterDetailDataBuildTool {
 
@@ -24,8 +21,7 @@ public class GroupOrderCenterDataBuildTool extends DinnerOrderCenterDetailDataBu
         if (isquit) {
             tradeItemVos = getInvalidTradeItemList(tradeVo.getTradeItemList(), InvalidType.RETURN_QTY);
         } else {
-            tradeItemVos = getValidTradeItemList(tradeVo.getTradeItemList());//TradeItemVo获取有效的Traditem的Vo
-        }
+            tradeItemVos = getValidTradeItemList(tradeVo.getTradeItemList());        }
         if (tradeItemVos == null) {
             return null;
         }
@@ -37,33 +33,28 @@ public class GroupOrderCenterDataBuildTool extends DinnerOrderCenterDetailDataBu
         }
 
         List<TradeItemVo> itemVos = new LinkedList<TradeItemVo>();
-        // 先分出单品(含套餐外壳)、套餐明细、加料，存放套餐明细和加料的map的key为父条目的uuid
-        Map<String, List<TradeItemVo>> setmealFinder = new HashMap<String, List<TradeItemVo>>();
+                Map<String, List<TradeItemVo>> setmealFinder = new HashMap<String, List<TradeItemVo>>();
         Map<String, List<TradeItemVo>> extraFinder = new HashMap<String, List<TradeItemVo>>();
         for (TradeItemVo itemVo : tradeItemVos) {
             TradeItem tradeItem = itemVo.getTradeItem();
             switch (tradeItem.getType()) {
                 case SINGLE:
                     if (tradeItem.getParentUuid() != null && !isGroupItem(shellTradeItem, tradeItem.getParentUuid())) {
-                        // 套餐明细
-                        List<TradeItemVo> list = setmealFinder.get(tradeItem.getParentUuid());
+                                                List<TradeItemVo> list = setmealFinder.get(tradeItem.getParentUuid());
                         if (list == null) {
                             list = new ArrayList<TradeItemVo>();
                             setmealFinder.put(tradeItem.getParentUuid(), list);
                         }
                         list.add(itemVo);
                     } else {
-                        // 单品
-                        itemVos.add(itemVo);
+                                                itemVos.add(itemVo);
                     }
                     break;
 
-                case COMBO: // 套餐外壳
-                    itemVos.add(itemVo);
+                case COMBO:                     itemVos.add(itemVo);
                     break;
 
-                case EXTRA: // 加料
-                    List<TradeItemVo> list = extraFinder.get(tradeItem.getParentUuid());
+                case EXTRA:                     List<TradeItemVo> list = extraFinder.get(tradeItem.getParentUuid());
                     if (list == null) {
                         list = new ArrayList<TradeItemVo>();
                         extraFinder.put(tradeItem.getParentUuid(), list);
@@ -77,10 +68,8 @@ public class GroupOrderCenterDataBuildTool extends DinnerOrderCenterDetailDataBu
         }
 
 
-        List<TradeDishDataItem> tradeDishDataItemList = new ArrayList<TradeDishDataItem>();//生成需要返回的List<TradeDishDataItem>
-        List<TradeDishDataItem> nohavetradeDishDataItemList = buildTradeDishDataItemList(itemVos, null, hasAllOrderDiscount, setmealFinder, extraFinder, isquit);
-        //添加餐标外壳
-        if (shellTradeItem != null) {
+        List<TradeDishDataItem> tradeDishDataItemList = new ArrayList<TradeDishDataItem>();        List<TradeDishDataItem> nohavetradeDishDataItemList = buildTradeDishDataItemList(itemVos, null, hasAllOrderDiscount, setmealFinder, extraFinder, isquit);
+                if (shellTradeItem != null) {
             TradeItemVo shellItemVo = new TradeItemVo();
             shellItemVo.setTradeItem(shellTradeItem);
             TradeDishDataItem tradeDishDataItem = new TradeDishDataItem(TradeDishDataItem.ITEM_TYPE_COMBO, shellItemVo, null,
@@ -91,13 +80,7 @@ public class GroupOrderCenterDataBuildTool extends DinnerOrderCenterDetailDataBu
         return tradeDishDataItemList;
     }
 
-    /**
-     * 是否是团餐下的菜品
-     *
-     * @param shellTradeItem
-     * @param parentUuid
-     * @return
-     */
+
     private boolean isGroupItem(TradeItem shellTradeItem, String parentUuid) {
         if (shellTradeItem == null) {
             return false;

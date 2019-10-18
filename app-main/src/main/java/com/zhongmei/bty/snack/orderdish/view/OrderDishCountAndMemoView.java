@@ -34,9 +34,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.OrderDish;
 import com.zhongmei.bty.basemodule.orderdish.bean.OrderSetmeal;
 import com.zhongmei.yunfu.util.MathDecimal;
 
-/**
- * 备注和折扣
- */
+
 @EViewGroup(R.layout.order_dish_count_and_memo)
 public class OrderDishCountAndMemoView extends LinearLayout implements OnClickListener {
 
@@ -164,41 +162,35 @@ public class OrderDishCountAndMemoView extends LinearLayout implements OnClickLi
                     return null;
                 }
 
-                // 非称重商品，不能输入小数点
-                if (mOrderDish.getDishShop().getSaleType() != SaleType.WEIGHING && ".".equals(source.toString())) {
+                                if (mOrderDish.getDishShop().getSaleType() != SaleType.WEIGHING && ".".equals(source.toString())) {
                     ToastUtil.showShortToast(R.string.order_dish_cannot_input_decimal);
                     return "";
                 }
 
                 String strDest = null;
                 if (dend > dstart) {
-                    // 去掉dest中选中的部分
-                    CharSequence csTemp = dest.subSequence(dstart, dend);
+                                        CharSequence csTemp = dest.subSequence(dstart, dend);
                     strDest = dest.toString().replace(csTemp.toString(), "");
                 } else {
                     strDest = dest.toString();
                 }
 
-                // 小数点补0
-                if (TextUtils.isEmpty(strDest) && (source.equals(".") || source.equals("0"))) {
+                                if (TextUtils.isEmpty(strDest) && (source.equals(".") || source.equals("0"))) {
                     return "0.";
                 }
 
                 StringBuilder sbDest = new StringBuilder(strDest);
                 sbDest.insert(dstart, source);
-                // 把输入的字加进去，查看是否超过两位小数，或者大于999
-                int dotIndex = sbDest.indexOf(".");
+                                int dotIndex = sbDest.indexOf(".");
                 if (dotIndex >= 0) {
-                    // 小数，大于999或者多于两位小数，返回空
-                    if (dotIndex > 3) {
+                                        if (dotIndex > 3) {
                         ToastUtil.showShortToast(R.string.inputThreeInt);
                         return "";
                     } else if (sbDest.length() - (dotIndex + 1) > 2) {
                         ToastUtil.showShortToast(R.string.inputTwoADecimal);
                         return "";
                     }
-                    // 整数，大于999，返回空
-                } else if (sbDest.length() > 3) {
+                                    } else if (sbDest.length() > 3) {
                     ToastUtil.showShortToast(R.string.inputThreeInt);
                     return "";
                 }
@@ -219,17 +211,13 @@ public class OrderDishCountAndMemoView extends LinearLayout implements OnClickLi
         edit_memo.setText(memo);
     }
 
-    /**
-     * 显示称重提示
-     */
+
     public void setVisibleWeightTips() {
         weight_tips.setVisibility(View.VISIBLE);
         reduce_add_layout.setVisibility(View.GONE);
     }
 
-    /**
-     * 隐藏称重提示
-     */
+
     public void setGoneWeightTips() {
         weight_tips.setVisibility(View.GONE);
         reduce_add_layout.setVisibility(View.VISIBLE);
@@ -240,8 +228,7 @@ public class OrderDishCountAndMemoView extends LinearLayout implements OnClickLi
         if (!TextUtils.isEmpty(text_count.getText().toString())) {
             BigDecimal count = new BigDecimal(text_count.getText().toString());
             BigDecimal newCount = count.add(genStepNum(mOrderDish.getDishShop()));
-            // 不能大于1000
-            if (newCount.compareTo(new BigDecimal(1000)) < 0) {
+                        if (newCount.compareTo(new BigDecimal(1000)) < 0) {
                 text_count.setText(MathDecimal.toTrimZeroString(newCount));
                 text_count.setSelection(text_count.getText().toString().length());
             }
@@ -253,8 +240,7 @@ public class OrderDishCountAndMemoView extends LinearLayout implements OnClickLi
     void reduce() {
         if (!TextUtils.isEmpty(text_count.getText().toString())) {
             BigDecimal stepNum = genStepNum(mOrderDish.getDishShop());
-            // 起卖份数
-            BigDecimal increaseUnit = mOrderDish.getDishShop().getDishIncreaseUnit();
+                        BigDecimal increaseUnit = mOrderDish.getDishShop().getDishIncreaseUnit();
             if (mOrderDish instanceof OrderSetmeal) {
                 OrderSetmeal orderSetmeal = (OrderSetmeal) mOrderDish;
                 increaseUnit = orderSetmeal.getSetmeal().getLeastCellNum();
@@ -286,9 +272,7 @@ public class OrderDishCountAndMemoView extends LinearLayout implements OnClickLi
         if (selectedQty == null) {
             return;
         }
-        // 选择数量不能小于起卖份数
-        // 起卖份数
-        BigDecimal increaseUnit = mOrderDish.getDishShop().getDishIncreaseUnit();
+                        BigDecimal increaseUnit = mOrderDish.getDishShop().getDishIncreaseUnit();
         if (mOrderDish instanceof OrderSetmeal) {
             OrderSetmeal orderSetmeal = (OrderSetmeal) mOrderDish;
             increaseUnit = orderSetmeal.getSetmeal().getLeastCellNum();
@@ -369,17 +353,10 @@ public class OrderDishCountAndMemoView extends LinearLayout implements OnClickLi
                 edit_memo.setText(memo + "," + tag);
             }
         }
-        // 控制光标位置
-        edit_memo.setSelection(edit_memo.getText().toString().trim().length());
+                edit_memo.setSelection(edit_memo.getText().toString().trim().length());
     }
 
-    /**
-     * @Title: getStepNum
-     * @Description: 生成每一次添加的步值, 主要是为了容错
-     * @Param @param dishShop
-     * @Param @return TODO
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal genStepNum(DishShop dishShop) {
         BigDecimal stepNum = dishShop.getStepNum();
         if (stepNum != null && stepNum.compareTo(BigDecimal.ZERO) > 0) {

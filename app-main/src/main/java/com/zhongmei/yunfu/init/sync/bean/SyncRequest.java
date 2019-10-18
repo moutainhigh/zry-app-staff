@@ -6,12 +6,7 @@ import com.zhongmei.yunfu.init.sync.SyncConstant;
 import com.zhongmei.yunfu.init.sync.SyncServiceUtil;
 import com.zhongmei.yunfu.context.util.NoProGuard;
 
-/**
- * 封装同步用的Request
- *
- * @version: 1.0
- * @date 2015年4月15日
- */
+
 public class SyncRequest implements NoProGuard {
 
     private SyncContent content;
@@ -34,11 +29,7 @@ public class SyncRequest implements NoProGuard {
         return create(context, content, notify ? 0 : 1);
     }
 
-    /**
-     * @param content
-     * @param
-     * @return syncType：0 推送同步；1.1分钟增量同步；2.10分钟全量同步
-     */
+
     public static SyncRequest create(Context context, SyncContent content, int syncType) {
         SyncRequest request = new SyncRequest();
         request.setContent(content);

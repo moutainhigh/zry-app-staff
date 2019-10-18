@@ -85,11 +85,9 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
     @ViewById(R.id.login_system_data_state_tv)
     AutoVerticalScrollTextView systemDataStateTv;
 
-    /*@ViewById(R.id.login_check_hint)
-    protected TextView mCheckTitle;*/
 
-    /*@ViewById(R.id.show_value)
-    protected TextView mPassword;*/
+
+
 
     private AnimationDrawable mAnimDrawable;
     private PrintInstallReceiver mPrintInstallReceiver;
@@ -101,10 +99,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //OneApmUtil.initOneApm(getApplicationContext());
-        //AuthUserCache.unbind();
-        //PushServiceManager.stopPushService();
-        if (mPrintInstallReceiver == null) {
+                                if (mPrintInstallReceiver == null) {
             mPrintInstallReceiver = new PrintInstallReceiver();
             IntentFilter filter = new IntentFilter();
             filter.addAction(Intent.ACTION_PACKAGE_ADDED);
@@ -131,10 +126,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
     }
 
 
-    /**
-     * 设置版本号
-     * @param versionName
-     */
+
     private void setVersion(String versionName){
         if(TextUtils.isEmpty(versionName)){
             tv_version.setVisibility(View.GONE);
@@ -165,19 +157,15 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
                 autoSetConfig(initCheck, error, err);
                 return;
             }
-            //会有 sdcard下 Android/data/的目录不能及时创建的问题，所以初始化完成后调用图片查询
-            //DisplayServiceManager.sendBootBroadCast(MainApplication.getInstance());
 
             initCommonManager(true, error);
             UserActionEvent.end(UserActionEvent.INIT_PROCESS);
-            //checkUpdate();
-            startHome();
+                        startHome();
         }
     };
 
     private void autoSetConfig(final InitCheck initCheck, String error, Throwable err) {
-        //处理自助激活，自助配置及DB版本问题弹窗
-        int errorCode = initCheck.getErrorCode(error);
+                int errorCode = initCheck.getErrorCode(error);
         switch (errorCode) {
             case InitCheck.ERROR_CODE_DEVICE:
                 DialogUtil.showErrorConfirmDialog(getSupportFragmentManager(), R.string.device_auth_file, R.string.quite,
@@ -185,8 +173,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
                             @Override
                             public void onClick(View view) {
                                 BaseApplication.sInstance.finishAllActivity(null);
-                                //System.exit(0);
-                            }
+                                                            }
                         }, true, "get device auth fail");
                 break;
             case InitCheck.ERROR_CODE_VERSION:
@@ -214,17 +201,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
                         }, true, "get device auth fail");
                 break;
             case InitCheck.ERROR_NETWORK:
-                /*ContractRenewalDialog.show(this, new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        checkEnvironment();
-                    }
-                }, new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });*/
+
                 showInitErrorDialog(initCheck, initCheck.getErrorMessage(error),
                         getString(R.string.login_action_settings),
                         new OnClickListener() {
@@ -257,7 +234,6 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
         UpdateHintDialog.UpdateHintDialogBuilder builder = new UpdateHintDialog.UpdateHintDialogBuilder(MainApplication.getInstance())
                 .title("系统版本升级"+ShopInfoCfg.getInstance().getAppVersionInfo().getVersionName())
                 .message(ShopInfoCfg.getInstance().getAppVersionInfo().getVersionDes())
-//                .title(getApplicationContext().getResources().getString(R.string.login_new_update))
                 .positiveText(R.string.common_submit_update)
                 .positiveLinstner(new OnClickListener() {
 
@@ -333,20 +309,14 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
                 .message(String.format(getString(R.string.login_check_error_exit_message), error))
                 .messageDetail(detail, detailTitleListener)
                 .iconType(CommonDialogFragment.ICON_WARNING)
-                .positiveText(/*R.string.login_retry*/ positiveText)
-                .positiveListener(/*new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        checkEnvironment();
-                    }
-                }*/ positiveLinstner)
+                .positiveText( positiveText)
+                .positiveListener( positiveLinstner)
                 .negativeText(R.string.login_quiet)
                 .negativeLisnter(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         BaseApplication.sInstance.finishAllActivity(null);
-                        //System.exit(0);
-                    }
+                                            }
                 });
 
         CommonDialogFragmentExt mDialogFragment = builder.build();
@@ -361,8 +331,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
                     @Override
                     public void onClick(View view) {
                         BaseApplication.sInstance.finishAllActivity(null);
-                        //System.exit(0);
-                    }
+                                            }
                 }, true, "get device auth fail");
     }
 
@@ -372,8 +341,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
                     @Override
                     public void onClick(View view) {
                         BaseApplication.sInstance.finishAllActivity(null);
-                        //System.exit(0);
-                    }
+                                            }
                 }, true, "get device auth fail");
     }
 
@@ -476,18 +444,14 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
 
     private void startHome() {
         ShopInfoCfg.getInstance().setUserState(ShopInfoCfg.UserState.INIT);
-//        CalmHomeActivity.start(this);
-        // v8.15.0 国际化业务修改
-        LoginActivity.start(this);
+                LoginActivity.start(this);
         finish();
     }
 
     protected void initCommonManager(boolean isFreshCash, final String hint) {
         queryUser();
         displayShopId();
-        /*if (hint != null) {
-            mCheckTitle.setText(hint);
-        }*/
+
         if (mAnimDrawable != null) {
             if (mAnimDrawable.isRunning()) mAnimDrawable.stop();
         }
@@ -495,8 +459,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
 
     @Background
     protected void queryUser() {
-        // 分两次拦截exception，主要是为了前边出异常不会引起查询数据的继续执行
-        try {
+                try {
             SystemUtils.setAutoTime(this.getContentResolver());
             SystemUtils.setTime1224(this.getContentResolver());
         } catch (Exception e) {
@@ -506,8 +469,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-        if (keyCode == KeyEvent.KEYCODE_HOME) {
+                if (keyCode == KeyEvent.KEYCODE_HOME) {
             return false;
         }
         return super.onKeyDown(keyCode, event);
@@ -515,8 +477,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
 
     @Override
     public boolean onKeyLongPress(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-        if (keyCode == KeyEvent.KEYCODE_HOME) {
+                if (keyCode == KeyEvent.KEYCODE_HOME) {
             return true;
         }
         return super.onKeyLongPress(keyCode, event);
@@ -526,8 +487,7 @@ public class LoginInitActivity extends BaseActivity implements ILoginController 
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            // 接收安装广播
-            if (Intent.ACTION_PACKAGE_ADDED.equals(intent.getAction())) {
+                        if (Intent.ACTION_PACKAGE_ADDED.equals(intent.getAction())) {
                 String packageName = intent.getDataString();
                 if (("package:" + Constant.PRINT_SERVICE_PACKAGE_NAME).equals(packageName)) {
                     if (mPrintDownloadApkDialog != null) {

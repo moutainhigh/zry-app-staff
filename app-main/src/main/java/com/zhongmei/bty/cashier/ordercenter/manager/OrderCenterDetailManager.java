@@ -76,9 +76,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 订单中心订单详情Model，业务处理类主要负责数据库操作、网络操作
- */
+
 
 public class OrderCenterDetailManager implements IOrderCenterDetailManager {
     private static final String TAG = OrderCenterDetailManager.class.getSimpleName();
@@ -205,12 +203,9 @@ public class OrderCenterDetailManager implements IOrderCenterDetailManager {
     @Override
     public void retryRefund(TradeVo relateTradeVo, TradeVo tradeVo, ResponseListener<TradePaymentResp> listener) {
         TradeStatus tradeStatus = tradeVo.getTrade().getTradeStatus();
-        if (tradeStatus == TradeStatus.RETURNED) {//当前订单状态是已退货，说明是退货或反结账产生的退货单，使用退货接口进行退款
-            //退货接口退款，使用原单
-            mTradeOperates.refund(relateTradeVo, new Reason(), null, listener);
+        if (tradeStatus == TradeStatus.RETURNED) {                        mTradeOperates.refund(relateTradeVo, new Reason(), null, listener);
         } else {
-            //微信退款接口进行退款，使用退货单
-            mTradeOperates.weixinRefund(tradeVo, new Reason(), listener);
+                        mTradeOperates.weixinRefund(tradeVo, new Reason(), listener);
         }
     }
 
@@ -328,8 +323,7 @@ public class OrderCenterDetailManager implements IOrderCenterDetailManager {
     public List<PartnerShopBiz> queryDeliverylatformPartnerShopBiz() {
         try {
             SystemSettingDal systemSettingDal = OperatesFactory.create(SystemSettingDal.class);
-            return systemSettingDal.queryPartnerShopBiz(3, false);//业务类型（1-外卖，2-点餐，3-配送，4-发票
-        } catch (Exception e) {
+            return systemSettingDal.queryPartnerShopBiz(3, false);        } catch (Exception e) {
             Log.e(TAG, "" + e.toString());
         }
 
@@ -469,10 +463,8 @@ public class OrderCenterDetailManager implements IOrderCenterDetailManager {
                 setUnionMainTradeItemToSubTradeItem(tradePaymentVo, trade);
             }
 
-            //配送信息
-            tradePaymentVo.setDeliveryOrderVoList(listDeliveryOrderVo(tradeUuid));
-            //发票信息
-            TradeInvoice tradeInvoice = getTradeInvoice(tradePaymentVo.getTradeVo().getTrade().getId());
+                        tradePaymentVo.setDeliveryOrderVoList(listDeliveryOrderVo(tradeUuid));
+                        TradeInvoice tradeInvoice = getTradeInvoice(tradePaymentVo.getTradeVo().getTrade().getId());
             tradePaymentVo.getTradeVo().setTradeInvoice(tradeInvoice);
         }
 
@@ -483,8 +475,7 @@ public class OrderCenterDetailManager implements IOrderCenterDetailManager {
         if (tradePaymentVo != null && tradePaymentVo.getTradeVo() != null) {
             loadResult.setTradeReturnInfo(findTradeReturnInfo(tradePaymentVo.getTradeVo().getTrade().getId()));
             loadResult.setInvoice(findInvoice(tradePaymentVo.getTradeVo().getTrade().getId()));
-            //查询原单，主要针对于退货单
-            if (tradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.REFUND ||
+                        if (tradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.REFUND ||
                     tradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.REFUND_FOR_REPEAT ||
                     tradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.REFUND_FOR_REVERSAL) {
                 String oriTradeUuid = tradePaymentVo.getTradeVo().getTrade().getRelateTradeUuid();
@@ -498,8 +489,7 @@ public class OrderCenterDetailManager implements IOrderCenterDetailManager {
         }
         loadResult.setHasDaDaSwitchOn(ServerSettingCache.getInstance().getDadaSwitchEnable());
         loadResult.setElectronicInvoiceVo(PaySettingCache.getElectronicInvoiceVo());
-        //查询商户开通的外卖配送平台
-        List<PartnerShopBiz> allDeliveryPlatformPartnerShopBizs = queryDeliverylatformPartnerShopBiz();
+                List<PartnerShopBiz> allDeliveryPlatformPartnerShopBizs = queryDeliverylatformPartnerShopBiz();
         SparseArray<String> deliveryPlatformPartnerShopBizSparseArray = new SparseArray<String>();
         Map<Integer, PartnerShopBiz> deliveryPlatformPartnerShopBizMap = new HashMap<Integer, PartnerShopBiz>();
         if (Utils.isNotEmpty(allDeliveryPlatformPartnerShopBizs)) {
@@ -545,20 +535,17 @@ public class OrderCenterDetailManager implements IOrderCenterDetailManager {
                 TradeItemVo mainTradeItemVo = mainTradeItemVoList.get(i);
                 TradeItemMainBatchRel tradeItemRel = tradeItemRelMap.get(mainTradeItemVo.getTradeItem().getId());
                 if (tradeItemRel == null) {
-                    mainTradeItemVoList.remove(i);//移除子单已经不存在的批量菜
-
+                    mainTradeItemVoList.remove(i);
                     continue;
                 } else {
                     BigDecimal itemCount = tradeItemRel.getTradeItemNum();
                     BigDecimal itemRate = mainTradeItemVo.getTradeItem().getQuantity().divide(itemCount);
-                    //菜品
-                    mainTradeItemVo.getTradeItem().setQuantity(itemCount);
+                                        mainTradeItemVo.getTradeItem().setQuantity(itemCount);
                     mainTradeItemVo.getTradeItem().setAmount(mainTradeItemVo.getTradeItem().getAmount().divide(itemRate));
                     mainTradeItemVo.getTradeItem().setActualAmount(mainTradeItemVo.getTradeItem().getActualAmount().divide(itemRate));
                     mainTradeItemVo.getTradeItem().setFeedsAmount(mainTradeItemVo.getTradeItem().getFeedsAmount().divide(itemRate));
                     mainTradeItemVo.getTradeItem().setPropertyAmount(mainTradeItemVo.getTradeItem().getPropertyAmount().divide(itemRate));
-                    //属性
-                    List<TradeItemProperty> mainTradeItemPropertyList = mainTradeItemVo.getTradeItemPropertyList();
+                                        List<TradeItemProperty> mainTradeItemPropertyList = mainTradeItemVo.getTradeItemPropertyList();
                     if (Utils.isNotEmpty(mainTradeItemPropertyList)) {
                         for (TradeItemProperty mainTradeItemProperty : mainTradeItemPropertyList) {
                             TradeItemMainBatchRelExtra tradeItemPropertyRel = tradeItemRelExtraMap.get(mainTradeItemProperty.getId());

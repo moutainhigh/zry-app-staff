@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PrePayRefundReq {
 
@@ -18,12 +16,9 @@ public class PrePayRefundReq {
 
     private String updatorName;
 
-    private BigDecimal refundAmount;//退款金额
-
-    private BigDecimal deductionAmount;//抵扣金额
-
-    private BigDecimal exemptAmount;//抹零金额
-
+    private BigDecimal refundAmount;
+    private BigDecimal deductionAmount;
+    private BigDecimal exemptAmount;
     public void setTradeId(Long tradeId) {
         this.tradeId = tradeId;
     }

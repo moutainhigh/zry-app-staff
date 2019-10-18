@@ -83,10 +83,7 @@ import java.util.Map;
 import de.greenrobot.event.EventBus;
 
 
-/**
- * 美业收银工具类
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyDoPayApi extends DoPayApi<PayResp> {
     private static final String TAG = "BeautyDoPayApi";
@@ -112,15 +109,13 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
     private void pay(final FragmentActivity context, final IPaymentInfo paymentInfo, IPayOverCallback callback, final ResponseListener<PayResp> payListener) {
         final NewTradeOperatesImpl tradeOperates = OperatesFactory.create(NewTradeOperatesImpl.class);
         final PaymentVo paymentVo = paymentInfo.getTradePaymentVo();
-        //检测支付数据是否正确
-        if (!this.checkInputPaymentInfo(context, paymentVo)) {
+                if (!this.checkInputPaymentInfo(context, paymentVo)) {
             if (callback != null) {
                 callback.onFinished(false, 0);
             }
             return;
         }
-        //应付金额不能为负
-        if (paymentInfo.getActualAmount() < 0) {
+                if (paymentInfo.getActualAmount() < 0) {
             ToastUtil.showShortToast(R.string.pay_negative_not_pay);
             if (callback != null) {
                 callback.onFinished(false, 0);
@@ -128,34 +123,27 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
             return;
         }
         if (paymentInfo.getTradeVo().getTrade().getTradePayStatus() == TradePayStatus.PAYING) {
-            //美业使用新的接口
-            tradeOperates.beautyPay(paymentInfo.getTradeVo().getTrade(), new PaymentReqTool(paymentInfo).creatPaymentReq(),
+                        tradeOperates.beautyPay(paymentInfo.getTradeVo().getTrade(), new PaymentReqTool(paymentInfo).creatPaymentReq(),
                     LoadingResponseListener.ensure(payListener, context.getSupportFragmentManager()));
         } else {
             ISavedCallback savedCallback = new ISavedCallback() {
 
                 @Override
                 public void onSaved(boolean isOk) {
-                    if (isOk) {//v3 收银接口
-                        //美业使用新的接口
-                        tradeOperates.beautyPay(paymentInfo.getTradeVo().getTrade(), new PaymentReqTool(paymentInfo).creatPaymentReq(),
+                    if (isOk) {                                                tradeOperates.beautyPay(paymentInfo.getTradeVo().getTrade(), new PaymentReqTool(paymentInfo).creatPaymentReq(),
                                 LoadingResponseListener.ensure(payListener, context.getSupportFragmentManager()));
                     }
                 }
             };
-            //保存订单数据
-            saveTrade(context, paymentInfo, callback, savedCallback);
+                        saveTrade(context, paymentInfo, callback, savedCallback);
         }
     }
 
-    //检测用户输入支付金额是否正确
-    private boolean checkInputPaymentInfo(Context context, PaymentVo paymentVo) {
+        private boolean checkInputPaymentInfo(Context context, PaymentVo paymentVo) {
         if (paymentVo != null) {
             Payment payment = paymentVo.getPayment();
-            //检测抹零金额正确否（实际该收金额(应收-抹零)）
-            if (payment != null) {
-                //抹零 = 应收-实际该收金额
-                BigDecimal emptyAmount = payment.getReceivableAmount().subtract(payment.getActualAmount());
+                        if (payment != null) {
+                                BigDecimal emptyAmount = payment.getReceivableAmount().subtract(payment.getActualAmount());
                 if (emptyAmount.compareTo(payment.getExemptAmount()) != 0) {
                     ToastUtil.showShortToast(context.getString(R.string.pay_cash_emptyamount_is_error));
                     return false;
@@ -164,17 +152,14 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                 ToastUtil.showShortToast(context.getString(R.string.pay_cash_paymentinfo_empty_alter));
                 return false;
             }
-            //检测找零金额正确否（找零<= 面值-应付）
-            if (!Utils.isEmpty(paymentVo.getPaymentItemList())) {
+                        if (!Utils.isEmpty(paymentVo.getPaymentItemList())) {
                 for (PaymentItem item : paymentVo.getPaymentItemList()) {
-                    //如果应付小于0 ，不容许支付
-                    if (item.getUsefulAmount().compareTo(BigDecimal.ZERO) == -1) {
+                                        if (item.getUsefulAmount().compareTo(BigDecimal.ZERO) == -1) {
                         ToastUtil.showShortToast(context.getString(R.string.pay_negative_not_pay));
                         return false;
                     }
                     BigDecimal changeAmount = item.getFaceAmount().subtract(item.getUsefulAmount());
-                    //如果找零大于面值-应付不容许支付
-                    if ((item.getChangeAmount().compareTo(changeAmount) == 1)) {
+                                        if ((item.getChangeAmount().compareTo(changeAmount) == 1)) {
                         ToastUtil.showShortToast(context.getString(R.string.pay_cash_changeamount_is_error));
                         return false;
                     }
@@ -208,16 +193,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
 
     @Override
     public void doPrint(IPaymentInfo paymentInfo, String tradeUuid, boolean isPrintLabel, boolean isPrintKitchen, boolean isOpenMoneyBox, boolean isPintPayTick) {
-        //如果有现金支付开弹钱箱
-        /*if (isOpenMoneyBox && paymentInfo.getOtherPay().isContainsPayModel(PayModeId.CASH)) {
-            //PRTPrintContentQueue.getCommonPrintQueue().openMoneyBox(null);
-            IPrintHelper.Holder.getInstance().openMoneyBox();
-        }
-        if (isPintPayTick) {
-                //modify v8.8 替换新接口
-                IPrintHelper.Holder.getInstance().printDinnerPayTicket(tradeUuid, paymentInfo.getMemberResp(), false, false, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.CASH));
-            PLog.d(PLog.TAG_CALLPRINT_KEY, "info:正餐收银调用结账单打印接口printDinnerPayTicket（）;tradeUuid:" + tradeUuid + ",position:" + TAG + "->doPrint()");
-        }*/
+
     }
 
     @Override
@@ -227,8 +203,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
             @Override
             public void onFinished(boolean isOK, int statusCode) {
                 if (!isOK) {
-                    onlinePayCallback.onBarcodeError();//生成二维码失败
-                }
+                    onlinePayCallback.onBarcodeError();                }
             }
         };
         ResponseListener<PayResp> onLinePayListener = new ResponseListener<PayResp>() {
@@ -241,35 +216,29 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                         Bitmap bitmap = null;
                         Bitmap logo = null;
                         final PayResp.PItemResults paymentItem = resp.getPaymentItemResults().get(0);
-                        //获取支付明细uuid,用于推送
-                        setOnlinePaymentItemUuid(paymentItem.getPaymentItemUuid());
+                                                setOnlinePaymentItemUuid(paymentItem.getPaymentItemUuid());
                         Map addition = resp.getPaymentItemResults().get(0).getAddition();
                         final String codeUrl = (String) addition.get("codeUrl");
-                        //打印押金单 add 20170707 start
-                        if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {
+                                                if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {
                             DepositPayOver depositPayOver = new DepositPayOver(resp);
                             EventBus.getDefault().post(depositPayOver);
                         }
-                        //判断订单时间戳有没有更新 add v8.2
-                        if (!Utils.isEmpty(resp.getTrades())) {
+                                                if (!Utils.isEmpty(resp.getTrades())) {
                             Trade trade = resp.getTrades().get(0);
                             if (trade.getServerUpdateTime() > paymentInfo.getTradeVo().getTrade().getServerUpdateTime()) {
                                 paymentInfo.getTradeVo().setTrade(trade);
                                 DinnerShoppingCart.getInstance().updateDataWithTrade(trade);
                             }
                         }
-                        //打印押金单 add 20170707 end
-                        switch (payModelItem.getPayMode()) {
+                                                switch (payModelItem.getPayMode()) {
 
-                            case ALIPAY:  // 支付宝方式
-                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
+                            case ALIPAY:                                  bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
                                 logo = BitmapFactory.decodeResource(context.getResources(), com.zhongmei.yunfu.mobilepay.R.drawable.pay_online_alipay);
                                 bitmap = EncodingHandler.addQRCodeLogo(bitmap, logo);
                                 onlinePayCallback.onBarcodeScuess(paymentItem.getPaymentItemId(), bitmap, codeUrl, true);
                                 break;
 
-                            case BAIFUBAO:// 百度钱包
-                                if (!TextUtils.isEmpty(codeUrl) && URLUtil.isValidUrl(codeUrl)) {
+                            case BAIFUBAO:                                if (!TextUtils.isEmpty(codeUrl) && URLUtil.isValidUrl(codeUrl)) {
                                     CalmImageRequest imageRequest =
                                             new CalmImageRequest(codeUrl, new Response.Listener<Bitmap>() {
 
@@ -292,39 +261,31 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                                     onlinePayCallback.onBarcodeError();
                                 }
                                 break;
-                            case WEIXIN_PAY:// 微信
-                                // 生成二维码
-                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
-                                // 客显显示二维码
-                                logo = BitmapFactory.decodeResource(context.getResources(), com.zhongmei.yunfu.mobilepay.R.drawable.pay_online_weixin);
+                            case WEIXIN_PAY:                                                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
+                                                                logo = BitmapFactory.decodeResource(context.getResources(), com.zhongmei.yunfu.mobilepay.R.drawable.pay_online_weixin);
                                 bitmap = EncodingHandler.addQRCodeLogo(bitmap, logo);
                                 onlinePayCallback.onBarcodeScuess(paymentItem.getPaymentItemId(), bitmap, codeUrl, true);
                                 break;
-                            case MEITUAN_FASTPAY://点评闪付
-
+                            case MEITUAN_FASTPAY:
                                 bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
                                 onlinePayCallback.onBarcodeScuess(paymentItem.getPaymentItemId(), bitmap, codeUrl, true);
                                 break;
 
-                            case JIN_CHENG:// 金诚
-                                // 生成二维码
-                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
+                            case JIN_CHENG:                                                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
                                 logo = BitmapFactory.decodeResource(context.getResources(), com.zhongmei.yunfu.mobilepay.R.drawable.pay_other_jin_cheng);
                                 bitmap = EncodingHandler.addQRCodeLogo(bitmap, logo);
                                 onlinePayCallback.onBarcodeScuess(paymentItem.getPaymentItemId(), bitmap, codeUrl, true);
                                 break;
 
                             case MEMBER_CARD:
-                                // 生成二维码
-                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
+                                                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
                                 logo = BitmapFactory.decodeResource(context.getResources(), com.zhongmei.yunfu.mobilepay.R.drawable.pay_online_member_card);
                                 bitmap = EncodingHandler.addQRCodeLogo(bitmap, logo);
                                 onlinePayCallback.onBarcodeScuess(paymentItem.getPaymentItemId(), bitmap, codeUrl, true);
                                 break;
 
                             default:
-                                // 生成二维码
-                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
+                                                                bitmap = EncodingHandler.createQRCode(codeUrl, barcodeWH);
                                 bitmap = EncodingHandler.addQRCodeLogo(bitmap, logo);
                                 onlinePayCallback.onBarcodeScuess(paymentItem.getPaymentItemId(), bitmap, codeUrl, true);
                                 break;
@@ -342,8 +303,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
             public void onError(VolleyError error) {
                 try {
                     ToastUtil.showLongToast(error.getMessage());
-                    // 获取二维码失败
-                    onlinePayCallback.onBarcodeError();
+                                        onlinePayCallback.onBarcodeError();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -354,8 +314,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
 
     @Override
     public void onlinePayByAuthCode(final FragmentActivity context, final IPaymentInfo paymentInfo, final PayModelItem payModelItem, final OnlinePayCallback onlinePayCallback) {
-        if (payModelItem.getPayMode() == PayModeId.JIN_CHENG_VALUE_CARD) {//如果是金城充值，走金城支付 add v8.14 for 在线支付解耦
-            this.doJCValueCardScanPay(context, paymentInfo, payModelItem.getAuthCode());
+        if (payModelItem.getPayMode() == PayModeId.JIN_CHENG_VALUE_CARD) {            this.doJCValueCardScanPay(context, paymentInfo, payModelItem.getAuthCode());
             return;
         }
         IPayOverCallback payOverCallback = new IPayOverCallback() {
@@ -371,23 +330,17 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
             @Override
             public void onResponse(ResponseObject<PayResp> response) {
                 try {
-                    // 支付结束
-                    PayResp resp = response.getContent();
+                                        PayResp resp = response.getContent();
                     if (ResponseObject.isOkExisted(response) && !Utils.isEmpty(resp.getPaymentItems())) {
-                        //获取支付明细uuid,用于推送
-                        final PaymentItem paymentItem = resp.getPaymentItems().get(0);
+                                                final PaymentItem paymentItem = resp.getPaymentItems().get(0);
                         setOnlinePaymentItemUuid(paymentItem.getUuid());
                         onlinePayCallback.onAuthCodeScuess(paymentItem.getId());
-                        //打印押金单 add 20170707 start
-                        if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {
+                                                if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {
                             DepositPayOver depositPayOver = new DepositPayOver(resp);
                             EventBus.getDefault().post(depositPayOver);
                         }
-                        //打印押金单 add 20170707 end
-                        UserActionEvent.end(getUserActionEventName(payModelItem.getPayMode()));
-                        //add 20170724 如果支付成功直接处理结果
-                        doVerifyPayResp(context, paymentInfo, resp, onlinePayCallback);// 处理收银结果
-                    } else {
+                                                UserActionEvent.end(getUserActionEventName(payModelItem.getPayMode()));
+                                                doVerifyPayResp(context, paymentInfo, resp, onlinePayCallback);                    } else {
                         onlinePayCallback.onAuthCodeError();
                         payErrorHandler(context, response, paymentInfo, onlinePayCallback);
                     }
@@ -399,8 +352,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
 
             @Override
             public void onError(VolleyError error) {
-                try {// 支付结束
-                    ToastUtil.showLongToast(error.getMessage());
+                try {                    ToastUtil.showLongToast(error.getMessage());
                     onlinePayCallback.onAuthCodeError();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -410,8 +362,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
         this.pay(context, paymentInfo, payOverCallback, onLinePayListener);
     }
 
-    //金城充值卡充值,看美业是否接入?
-    private void doJCValueCardScanPay(final FragmentActivity context, final IPaymentInfo paymentInfo, String authCode) {
+        private void doJCValueCardScanPay(final FragmentActivity context, final IPaymentInfo paymentInfo, String authCode) {
 
     }
 
@@ -440,12 +391,10 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                         Trade trade = paymentInfo.getTradeVo().getTrade();
                         if (result.getTrades() != null && !result.getTrades().isEmpty())
                             trade = result.getTrades().get(0);
-                        //如果是购物消费场景（解决押金在线一直轮训问题），且已经支付成功，且支付完成，但是订单状态没改成完成或预支付，继续轮训 modify v8.7
-                        if (paymentInfo.getPayScene() != PayScene.SCENE_CODE_BUFFET_DEPOSIT && isPaidScuess(result, paymentItemUuid) && paymentInfo.getActualAmount() <= paymentInfo.getOtherPay().getGroupAmount() && !DoPayUtils.isTradePaidOver(trade)) {
+                                                if (paymentInfo.getPayScene() != PayScene.SCENE_CODE_BUFFET_DEPOSIT && isPaidScuess(result, paymentItemUuid) && paymentInfo.getActualAmount() <= paymentInfo.getOtherPay().getGroupAmount() && !DoPayUtils.isTradePaidOver(trade)) {
                             onlinePayOverCallback.onPayResult(null, TradePayStatus.PAYING.value());
                         } else {
-                            doVerifyPayResp(context, paymentInfo, result, onlinePayOverCallback);// 处理收银结果
-                        }
+                            doVerifyPayResp(context, paymentInfo, result, onlinePayOverCallback);                        }
                         return;
                     }
                 } catch (Exception e) {
@@ -461,8 +410,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
         };
     }
 
-    //判断是否支付成功 addv8.7
-    public final boolean isPaidScuess(PayResp result, String paymentItemUuid) {
+        public final boolean isPaidScuess(PayResp result, String paymentItemUuid) {
         List<PaymentItem> paymentItems = result.getPaymentItems();
         if (TextUtils.isEmpty(paymentItemUuid)
                 || paymentItems == null || paymentItems.isEmpty()) {
@@ -486,8 +434,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                 || paymentItems == null || paymentItems.isEmpty() || context == null) {
             return;
         }
-        //如果不是当前支付界面发起的支付，不处理  add 20170708
-        if (!paymentInfo.getId().equals(getCurrentPaymentInfoId())) {
+                if (!paymentInfo.getId().equals(getCurrentPaymentInfoId())) {
             return;
         }
 
@@ -506,20 +453,13 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
         if (paymentItem != null) {
             final PaymentItem item = paymentItem;
             if (item.getPayStatus() == TradePayStatus.PAID) {
-                //播放收款成功语音提示
-                snackPaidRemind(context, item);
-                setOnlinePaymentItemUuid(null);//支付成功后清空标识
-                paymentInfo.getTradeVo().setTrade(result.getTrades().get(0));
-                //如果剩余金额小于等于零，表示已经已经完成支付
-                if (DoPayUtils.isTradePaidOver(paymentInfo.getTradeVo().getTrade())) {
-                    //add begin v9.0
-                    boolean isPintPayTick = true;// 是否打印结账单
-                    //如果有消费税，先不打印结账单或消费单
-                    if (DoPayUtils.isHaveTradeTax(paymentInfo.getTradeVo())) {
+                                snackPaidRemind(context, item);
+                setOnlinePaymentItemUuid(null);                paymentInfo.getTradeVo().setTrade(result.getTrades().get(0));
+                                if (DoPayUtils.isTradePaidOver(paymentInfo.getTradeVo().getTrade())) {
+                                        boolean isPintPayTick = true;                                        if (DoPayUtils.isHaveTradeTax(paymentInfo.getTradeVo())) {
                         isPintPayTick = false;
                     }
-                    //add end v9.0
-                    if (paymentInfo.getCustomer() == null && paymentInfo.getEcCard() != null) {
+                                        if (paymentInfo.getCustomer() == null && paymentInfo.getEcCard() != null) {
                         paymentInfo.setPrintMemeberInfoByCard();
                     }
                     if (!paymentInfo.isDinner() && paymentInfo.getTradeVo().getTrade().getTradeType() == TradeType.SELL_FOR_REPEAT) {
@@ -532,12 +472,9 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                     )) {
                         MemberPayChargeEvent memberPayChargeEvent = new MemberPayChargeEvent();
                         memberPayChargeEvent.setmValueCardBalance(BigDecimal.valueOf(CashInfoManager.floatSubtract(paymentInfo.getMemberCardBalance(), paymentInfo.getOtherPay().getGroupActualAmount())));
-                        EventBus.getDefault().post(memberPayChargeEvent);//发送EVENTBUS到会员支付界面MemberPayFragment
-                    }
-                    //new GetCouponUrlThread().start();
+                        EventBus.getDefault().post(memberPayChargeEvent);                    }
 
-                    // 打印
-                    if (!paymentInfo.isPrintedOk()) {
+                                        if (!paymentInfo.isPrintedOk()) {
                         EventBus.getDefault().post(new StopPayStatusTimer(true));
                         Trade trade = paymentInfo.getTradeVo().getTrade();
                         if (result.getPrintOperations() != null && !result.getPrintOperations().isEmpty()
@@ -552,14 +489,12 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                                 e.printStackTrace();
                             }
                         }
-                        // 如果是订单中心的内用且是Android端下的订单，要打印厨房单
-                        if (paymentInfo.isOrderCenter() && trade.getDeliveryType() == DeliveryType.HERE
+                                                if (paymentInfo.isOrderCenter() && trade.getDeliveryType() == DeliveryType.HERE
                                 && trade.getSource() == SourceId.POS && trade.getSourceChild() == SourceChild.ANDROID) {
                             doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), true, true, true, isPintPayTick);
                             paymentInfo.setPrintedOk(true);
                         } else {
-                            //换卡收银不打印,交预付金不打印(add v8.14)
-                            if (paymentInfo.getTradeBusinessType() != BusinessType.ENTITY_CARD_CHANGE && paymentInfo.getPayScene() != PayScene.SCENE_CODE_BOOKING_DEPOSIT) {
+                                                        if (paymentInfo.getTradeBusinessType() != BusinessType.ENTITY_CARD_CHANGE && paymentInfo.getPayScene() != PayScene.SCENE_CODE_BOOKING_DEPOSIT) {
                                 doPrint(paymentInfo, paymentInfo.getTradeVo().getTrade().getUuid(), !paymentInfo.isOrderCenter(), !paymentInfo.isOrderCenter(), true, isPintPayTick);
                                 paymentInfo.setPrintedOk(true);
                             }
@@ -567,9 +502,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                         AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHECK_OUT, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
                     }
 
-                } else {// 继续收银
-                    //如果正餐支付中不能改单
-                    if (paymentInfo.getPayScene() != PayScene.SCENE_CODE_BUFFET_DEPOSIT) {
+                } else {                                        if (paymentInfo.getPayScene() != PayScene.SCENE_CODE_BUFFET_DEPOSIT) {
                         if (paymentInfo.isSplit()) {
                             EventBus.getDefault().post(new SeparateEvent(SeparateEvent.EVENT_SEPARATE_PAYING));
                         } else {
@@ -582,12 +515,10 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                             ) {
                         MemberPayChargeEvent memberPayChargeEvent = new MemberPayChargeEvent();
                         memberPayChargeEvent.setmValueCardBalance(BigDecimal.valueOf(CashInfoManager.floatSubtract(paymentInfo.getMemberCardBalance(), paymentInfo.getOtherPay().getGroupActualAmount())));
-                        EventBus.getDefault().post(memberPayChargeEvent);//发送EVENTBUS到会员支付界面MemberPayFragment
-                    }
+                        EventBus.getDefault().post(memberPayChargeEvent);                    }
                 }
 
-                //打印储值消费单
-                if (paymentInfo.getOtherPay().isContainsPayModel(PayModeId.MEMBER_CARD)
+                                if (paymentInfo.getOtherPay().isContainsPayModel(PayModeId.MEMBER_CARD)
                         && Utils.isNotEmpty(result.getPaymentItemExtras())) {
                     PaymentItemExtra paymentItemExtra = result.getPaymentItemExtras().get(0);
                     Long customerId = paymentItemExtra.getCustomerId();
@@ -604,10 +535,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                                     CustomerResp customerNew = resp.getCustomer();
                                     try {
                                         BeautyPayPrintUtil.memberPayPrint(customerNew, null, result);
-                                            /*PLog.d(PLog.TAG_CALLPRINT_KEY,
-                                                    "info:收银调用储值消费单打印接口printCardOrMemberCharge（）;tradeUuid:" + paymentInfo.getTradeVo().getTrade()
-                                                            .getUuid()
-                                                            + ",position:" + TAG + "->ChargingPayPrint()");*/
+
                                     } catch (Exception e) {
                                         Log.e(TAG, "", e);
                                     }
@@ -623,16 +551,13 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                     }
                 }
 
-                //打印押金单 add 20170707 start
-                if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {
+                                if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT && paymentInfo.getTradeBusinessType() == BusinessType.BUFFET) {
                     DepositPayOver depositPayOver = new DepositPayOver(result);
                     EventBus.getDefault().post(depositPayOver);
                     BeautyPayPrintUtil.printDepositTicket(paymentInfo.getTradeVo().getTrade().getUuid());
                     paymentInfo.setPrintedOk(true);
                 }
-                //打印押金单 add 20170707 end
-                //未完成的订单或者要开电子发票刷新已收金额
-                if (paymentInfo.getTradeVo().getTrade().getTradeStatus() != TradeStatus.FINISH || paymentInfo.isOpenElectronicInvoice()) {
+                                                if (paymentInfo.getTradeVo().getTrade().getTradeStatus() != TradeStatus.FINISH || paymentInfo.isOpenElectronicInvoice()) {
                     new AsyncTask<Void, Void, List<PaymentVo>>() {
                         @Override
                         protected List<PaymentVo> doInBackground(Void... params) {
@@ -647,10 +572,8 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                         }
 
                         protected void onPostExecute(List<PaymentVo> data) {
-                            // 通知ui更新
-                            paymentInfo.setPaidPaymentRecords(data);
-                            //显示收银结果
-                            if (payOverCallback != null) {
+                                                        paymentInfo.setPaidPaymentRecords(data);
+                                                        if (payOverCallback != null) {
                                 payOverCallback.onPayResult(item.getId(), item.getPayStatus().value());
                             }
                             DoPayUtils.showPayOkDialog(context, BeautyDoPayApi.this, paymentInfo, false, IPayConstParame.OP_TYPE_DOPAY);
@@ -700,9 +623,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
         switch (response.getStatusCode()) {
             case ResponseObject.COUPON_CHECK_FAILED:
             case ResponseObject.COUPON_FAILED:
-                //如果正餐， 本地移除
-                if (paymentInfo.getPayActionPage() == PayActionPage.BALANCE) {//modify 20180130
-                    BeautyCheckDialog.showDinnerRemoveCouponDilog(context, paymentInfo, response.getMessage(), response.getContent().getPromoIds());
+                                if (paymentInfo.getPayActionPage() == PayActionPage.BALANCE) {                    BeautyCheckDialog.showDinnerRemoveCouponDilog(context, paymentInfo, response.getMessage(), response.getContent().getPromoIds());
 
                 } else {
                     ToastUtil.showLongToast(response.getMessage());
@@ -710,9 +631,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                 break;
             case ResponseObject.WEIXINCODE_CHECK_FAILED:
             case ResponseObject.WEIXIN_COUPON_FAILED:
-                //如果正餐，关闭收银界面, 本地移除微信优惠券
-                if (paymentInfo.getPayActionPage() == PayActionPage.BALANCE) {//modify 20180130
-                    BeautyCheckDialog.showDinnerRemoveWeixinCouponDilog(context, response.getMessage(), response.getContent().getPromoIds(), paymentInfo);
+                                if (paymentInfo.getPayActionPage() == PayActionPage.BALANCE) {                    BeautyCheckDialog.showDinnerRemoveWeixinCouponDilog(context, response.getMessage(), response.getContent().getPromoIds(), paymentInfo);
 
                 } else {
                     ToastUtil.showLongToast(response.getMessage());
@@ -727,15 +646,12 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                 AuthLogManager.getInstance().clear();
                 if (response.getContent() != null) {
                     if (!Utils.isEmpty(response.getContent().getTrades())) {
-                        //获取最新订单
-                        paymentInfo.getTradeVo().setTrade(response.getContent().getTrades().get(0));
+                                                paymentInfo.getTradeVo().setTrade(response.getContent().getTrades().get(0));
 
                         DinnerShoppingCart.getInstance().updateDataFromTradeVo(paymentInfo.getTradeVo());
-                        paymentInfo.setOrdered(true);//add 20180130
-
+                        paymentInfo.setOrdered(true);
                     }
-                    //刷新支付数据
-                    if (!Utils.isEmpty(response.getContent().getPayments())) {
+                                        if (!Utils.isEmpty(response.getContent().getPayments())) {
                         new AsyncTask<Void, Void, List<PaymentVo>>() {
                             @Override
                             protected List<PaymentVo> doInBackground(Void... params) {
@@ -750,8 +666,7 @@ public class BeautyDoPayApi extends DoPayApi<PayResp> {
                             }
 
                             protected void onPostExecute(List<PaymentVo> data) {
-                                // 通知ui更新
-                                paymentInfo.setPaidPaymentRecords(data);
+                                                                paymentInfo.setPaidPaymentRecords(data);
                             }
                         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                     }

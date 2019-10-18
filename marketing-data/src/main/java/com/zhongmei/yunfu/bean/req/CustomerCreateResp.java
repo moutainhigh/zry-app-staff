@@ -11,149 +11,91 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class CustomerCreateResp implements Serializable, ICustomerListBean, ICustomer {
-    /**
-     * 会员识别号
-     */
+
     private String uniqueCode;
 
-    /**
-     * 顾客id
-     */
+
     private String id;
 
-    /**
-     * 商户id
-     */
+
     private String commercialid;
 
-    /**
-     * 品牌id
-     */
+
     private String brandid;
 
-    /**
-     * 发票抬头
-     */
+
     private String invoice;
 
-    /**
-     * 洗好
-     */
+
     private String birthday;
 
-    /**
-     * 备注
-     */
+
     private String profile;
 
-    /**
-     * 会员名称
-     */
+
     private String name;
 
-    /**
-     * 成为会员时间
-     */
+
     private String upgradeTime;
 
-    /**
-     * 用户喜好
-     */
+
     private String hobby;
 
-    /**
-     * 性别
-     */
+
     private Integer gender;
 
-    /**
-     * 地址
-     */
+
     private String address;
 
-    /**
-     * 分组
-     */
+
     private String groupId;
 
-    /**
-     * 启用
-     */
+
     private Integer enabledFlag;
 
-    /**
-     * 级别
-     */
+
     private String groupLevelId;
 
-    /**
-     * 会员等级
-     */
+
     private String groupLevel;
 
-    /**
-     * 服务器创建时间
-     */
+
     private String serverCreateTime;
 
-    /**
-     * 服务器更新时间
-     */
+
     private String serverUpdateTime;
 
-    /**
-     * 积分
-     */
+
     private BigDecimal integral;
 
-    /**
-     * 余额
-     */
+
     private BigDecimal storedBalance;
 
-    /**
-     * 手机
-     */
+
     private String mobile;
 
-    /**
-     * 固话
-     */
+
     private String telephone;
 
-    /**
-     * 分机
-     */
+
     private String ext;
 
-    /**
-     * 邮箱
-     */
+
     private String email;
 
-    /**
-     * 门店名称
-     */
+
     private String commercialName;
 
-    /**
-     * 操作人Id
-     */
+
     private String userid;
 
-    /**
-     * 来源
-     */
+
     private Integer source;
 
-    /**
-     * 同步
-     */
+
     private String uuid;
 
-    /**
-     * 同步
-     */
+
     private Integer hasFaceCode;
 
     public String getUuid() {

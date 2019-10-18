@@ -53,9 +53,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOperates {
 
@@ -66,7 +64,6 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
 
     @Override
     public void submitBeauty(TradeVo tradeVo, CalmResponseListener<ResponseObject<BeautyTradeResp>> listener, FragmentActivity activity) {
-//        BeautyTradeReq beautyTradeReq=toBeaurtyReq(tradeVo,true);
         BeautyModifyReq beautyTradeReq = toBeautyModifyReq(tradeVo);
         CalmNetWorkRequest.with(BaseApplication.getInstance())
                 .url(BeautyServerAddressUtil.submit())
@@ -158,23 +155,19 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
         List<TradePlanActivity> tradePlanActivities = new ArrayList<TradePlanActivity>();
         List<TradeItemPlanActivity> tradeItemPlanActivities = new ArrayList<TradeItemPlanActivity>();
         List<TradeUser> tradeItemUserList = new ArrayList<>();
-//        List<TradePrivilegeLimitNumCardSku> tradePrivilegeLimitNumCardSkuList=new ArrayList<>();
         List<TradePrivilegeApplet> appletList = new ArrayList<>();
         if (Utils.isNotEmpty(tradeVo.getTradeReasonRelList())) {
             tradeReasonRels.addAll(tradeVo.getTradeReasonRelList());
         }
-        // 营销活动
-        if (Utils.isNotEmpty(tradeVo.getTradePlanActivityList())) {
+                if (Utils.isNotEmpty(tradeVo.getTradePlanActivityList())) {
             tradePlanActivities.addAll(tradeVo.getTradePlanActivityList());
         }
         if (Utils.isNotEmpty(tradeVo.getTradeItemPlanActivityList())) {
             tradeItemPlanActivities.addAll(tradeVo.getTradeItemPlanActivityList());
         }
 
-        // 会员
-        if (Utils.isNotEmpty(tradeVo.getTradeCustomerList())) {
-            // 由于后台统计需要下单顾客(customerType为1的记录)，所以有登录会员时，如果没有下单顾客，就用登录会员补上
-            List<TradeCustomer> tradeCustomerList = new ArrayList<TradeCustomer>();
+                if (Utils.isNotEmpty(tradeVo.getTradeCustomerList())) {
+                        List<TradeCustomer> tradeCustomerList = new ArrayList<TradeCustomer>();
             TradeCustomer bookingTradeCustomer = null;
             TradeCustomer memberTradeCustomer = null;
             for (TradeCustomer tc : tradeVo.getTradeCustomerList()) {
@@ -193,30 +186,18 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                     }
                 }
             }
-            //如果没有就不需要复制了 update 2019.04.04
-//            if (memberTradeCustomer != null && bookingTradeCustomer == null) {
-//                bookingTradeCustomer = new TradeCustomer();
-//                copyProperties(memberTradeCustomer, bookingTradeCustomer);
-//                bookingTradeCustomer.setId(null);
-//                bookingTradeCustomer.setServerUpdateTime(null);
-//                bookingTradeCustomer.setUuid(SystemUtils.genOnlyIdentifier());
-//                bookingTradeCustomer.setCustomerType(CustomerType.BOOKING);
-//                tradeCustomerList.add(bookingTradeCustomer);
-//            }
 
             req.setTradeCustomers(tradeCustomerList);
         }
 
-        // 优惠
-        if (tradeVo.getTradePrivileges() != null) {
+                if (tradeVo.getTradePrivileges() != null) {
             for (TradePrivilege tp : tradeVo.getTradePrivileges()) {
                 tp.setTradeId(tradeVo.getTrade().getId());
                 tp.setDeviceIdenty(BaseApplication.getInstance().getDeviceIdenty());
                 tradePrivileges.add(tp);
             }
         }
-        //优惠劵
-        if (tradeVo.getCouponPrivilegeVoList() != null) {
+                if (tradeVo.getCouponPrivilegeVoList() != null) {
             for (CouponPrivilegeVo couponPrivilegeVo : tradeVo.getCouponPrivilegeVoList()) {
                 if (couponPrivilegeVo != null) {
                     TradePrivilege tp = couponPrivilegeVo.getTradePrivilege();
@@ -227,8 +208,7 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                 }
             }
         }
-        //宴请
-        if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null) {
+                if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null) {
             TradePrivilege tp = tradeVo.getBanquetVo().getTradePrivilege();
             if (tp.getId() != null || tp.getStatusFlag() == StatusFlag.VALID) {
                 tp.setTradeId(tradeVo.getTrade().getId());
@@ -237,8 +217,7 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
         }
         if (tradeVo.getIntegralCashPrivilegeVo() != null) {
             TradePrivilege tp = tradeVo.getIntegralCashPrivilegeVo().getTradePrivilege();
-            //异步改为使用uuid判断
-            if (!TextUtils.isEmpty(tp.getUuid()) || tp.getStatusFlag() == StatusFlag.VALID) {
+                        if (!TextUtils.isEmpty(tp.getUuid()) || tp.getStatusFlag() == StatusFlag.VALID) {
                 tp.setTradeId(tradeVo.getTrade().getId());
                 tradePrivileges.add(tp);
             }
@@ -256,8 +235,7 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
         }
 
 
-        // 菜品
-        if (tradeVo.getTradeItemList() != null) {
+                if (tradeVo.getTradeItemList() != null) {
             for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
                 TradeItem tradeItem = tradeItemVo.getTradeItem();
                 TradeItemReq tradeItemReq = new TradeItemReq();
@@ -269,10 +247,8 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                 boolean invalid = (tradeItem.getStatusFlag() != StatusFlag.VALID);
                 if (tradeItemVo.getTradeItemPrivilege() != null) {
                     TradePrivilege tp = tradeItemVo.getTradeItemPrivilege();
-                    //add 20161102
-                    if (tp.getStatusFlag() == StatusFlag.VALID || tp.getId() != null || !TextUtils.isEmpty(tp.getUuid())) {
-                        // 无效的商品对应的优惠也置为无效
-                        if (invalid && tp.getStatusFlag() != StatusFlag.INVALID) {
+                                        if (tp.getStatusFlag() == StatusFlag.VALID || tp.getId() != null || !TextUtils.isEmpty(tp.getUuid())) {
+                                                if (invalid && tp.getStatusFlag() != StatusFlag.INVALID) {
                             tp.setStatusFlag(StatusFlag.INVALID);
                             tp.setChanged(true);
                         }
@@ -284,8 +260,7 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                 if (tradeItemVo.getTradeItemPropertyList() != null) {
                     List<TradeItemProperty> itemProperties = tradeItemVo.getTradeItemPropertyList();
                     for (TradeItemProperty ip : itemProperties) {
-                        // 无效的商品对应的属性也置为无效
-                        if (invalid && ip.getStatusFlag() != StatusFlag.INVALID) {
+                                                if (invalid && ip.getStatusFlag() != StatusFlag.INVALID) {
                             ip.setStatusFlag(StatusFlag.INVALID);
                             ip.setChanged(true);
                         }
@@ -303,13 +278,11 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                     }
                 }
 
-                //礼品券
-                if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
+                                if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
                     TradePrivilege tp = tradeItemVo.getCouponPrivilegeVo().getTradePrivilege();
                     if (tradeItemVo.getCouponPrivilegeVo().isActived()
                             || tp.getId() != null) {
-                        // 无效的商品对应的优惠也置为无效
-                        if (invalid && tp.getStatusFlag() != StatusFlag.INVALID) {
+                                                if (invalid && tp.getStatusFlag() != StatusFlag.INVALID) {
                             tp.setStatusFlag(StatusFlag.INVALID);
                             tp.setChanged(true);
                         }
@@ -334,16 +307,6 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                         tradePrivileges.add(cPrivilege);
                     }
 
-//                    TradePrivilegeLimitNumCard  tradePrivilegeLimitNumCard=tradeItemVo.getCardServicePrivilegeVo().getTradePrivilegeLimitNumCard();
-//                    if(tradePrivilegeLimitNumCard!=null){
-//                        tradePrivilegeLimitNumCard.setTradeId(tradeVo.getTrade().getId());
-//                        tradePrivilegeLimitNumCards.add(tradePrivilegeLimitNumCard);
-//                    }
-//                    TradePrivilegeLimitNumCardSku tradePrivilegeLimitNumCardSku=tradeItemVo.getCardServicePrivilegeVo().getTradePrivilegeLimitNumCardSku();
-//                    if(tradePrivilegeLimitNumCardSku!=null){
-//                        tradePrivilegeLimitNumCardSku.setTradeId(tradeVo.getTrade().getId());
-//                        tradePrivilegeLimitNumCardSkuList.add(tradePrivilegeLimitNumCardSku);
-//                    }
 
                 }
 
@@ -360,11 +323,9 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
 
         TradeTable tradeTable = Utils.isNotEmpty(tradeVo.getTradeTableList()) ? tradeVo.getTradeTableList().get(0) : null;
 
-        // 过滤掉没有改变的菜和属性，只保留有改动的
-        if (isFilterChange) {
+                if (isFilterChange) {
             for (int i = tradeItems.size() - 1; i >= 0; i--) {
-                // 未修改的
-                if (!tradeItems.get(i).isChanged()) {
+                                if (!tradeItems.get(i).isChanged()) {
                     tradeItems.remove(i);
                 } else {
                     if (tradeTable != null) {
@@ -393,8 +354,7 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                 if (!tradeItemPlanActivity.isChanged()) {
                     tradeItemPlanActivities.remove(i);
                 } else if (tradeItemPlanActivity.getTradeUuid() == null) {
-                    // 处理点菜界面传送后厨时无tradeUuid问题
-                    tradeItemPlanActivity.setTradeUuid(tradeVo.getTrade().getUuid());
+                                        tradeItemPlanActivity.setTradeUuid(tradeVo.getTrade().getUuid());
                 }
             }
 
@@ -413,8 +373,7 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
             }
             List<TradeExtra> tradeExtraList = new ArrayList<TradeExtra>();
             if (tradeVo.getTradeExtra() != null) {
-                if (isFilterChange) {//modify v8.4 过滤没改变的
-                    if (tradeVo.getTradeExtra().isChanged()) {
+                if (isFilterChange) {                    if (tradeVo.getTradeExtra().isChanged()) {
                         tradeExtraList.add(tradeVo.getTradeExtra());
                         req.setTradeExtra(tradeVo.getTradeExtra());
                     }
@@ -430,8 +389,7 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
             if (!tradeItemPlanActivities.isEmpty()) {
                 req.setTradeItemPlanActivities(tradeItemPlanActivities);
             }
-            //菜品打包
-            if (tradeVo.getTradeItemExtraList() != null) {
+                        if (tradeVo.getTradeItemExtraList() != null) {
                 req.setTradeItemExtras(tradeVo.getTradeItemExtraList());
             }
 
@@ -466,7 +424,6 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
                 }
             }
             req.setTradeTables(tradeTableList);
-//            req.setTradePrivilegeLimitNumCardSkus(tradePrivilegeLimitNumCardSkuList);
             req.setTradePrivilegeApplets(appletList);
             req.setDeviceIdenty(BaseApplication.sInstance.getDeviceIdenty());
         }
@@ -483,7 +440,6 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
 
     public static void saveData(DatabaseHelper helper, BeautyTradeResp resp) throws Exception {
         DBHelperManager.saveEntities(helper, Trade.class, resp.getTrade());
-//       DBHelperManager.saveEntities(helper, TradeExtra.class, resp.getTradeExtra());
         DBHelperManager.saveEntities(helper, TradePrivilege.class, resp.getTradePrivileges());
         DBHelperManager.saveEntities(helper, TradeCustomer.class, resp.getTradeCustomers());
         DBHelperManager.saveEntities(helper, TradeItem.class, resp.getTradeItems());
@@ -495,8 +451,6 @@ public class BeautyOperatesImpl extends AbstractOpeartesImpl implements BeautyOp
         DBHelperManager.saveEntities(helper, TradeReasonRel.class, resp.getTradeReasonRels());
         DBHelperManager.saveEntities(helper, TradeUser.class, resp.getTradeUsers());
         DBHelperManager.saveEntities(helper, TradeTable.class, resp.getTradeTables());
-//       DBHelperManager.saveEntities(helper,TradePrivilegeLimitNumCard.class,resp.getTradePrivilegeLimitNumCards());
-//       DBHelperManager.saveEntities(helper,TradePrivilegeLimitNumCardSku.class,resp.getTradePrivilegeLimitNumCardSkus());
         DBHelperManager.saveEntities(helper, Tables.class, resp.getTables());
         DBHelperManager.saveEntities(helper, TradePrivilegeApplet.class, resp.getTradePrivilegeApplets());
     }

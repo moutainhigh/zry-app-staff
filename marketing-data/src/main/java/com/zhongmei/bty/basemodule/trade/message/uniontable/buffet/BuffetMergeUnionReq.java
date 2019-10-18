@@ -8,10 +8,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeItemProperty;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 自助合单请求
- */
+
 
 public class BuffetMergeUnionReq {
     public BuffetMainTrade tradeReq;
@@ -21,8 +18,7 @@ public class BuffetMergeUnionReq {
     public List<TradeItemExtra> tradeItemExtraReqList;
     public List<TradePrivilege> tradePrivilegeReqList;
 
-    //主单请求体
-    public static class BuffetMainTrade {
+        public static class BuffetMainTrade {
         private Long mainTradeId;
         private String mainTradeUuid;
         private Long serverUpdateTime;
@@ -34,8 +30,7 @@ public class BuffetMergeUnionReq {
         }
     }
 
-    //子单请求体
-    public static class BuffetSubTrade {
+        public static class BuffetSubTrade {
         private Long subTradeId;
 
         public BuffetSubTrade(Trade trade) {

@@ -12,10 +12,7 @@ import java.math.BigDecimal;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-/**
- * @version: 1.0
- * @date 2015年8月11日
- */
+
 public class DishAndStandards {
 
     private final DishShop dishShop;
@@ -70,11 +67,7 @@ public class DishAndStandards {
         return dishShop.getSaleType();
     }
 
-    /**
-     * 是否为组合套餐
-     *
-     * @return
-     */
+
     public boolean isCombo() {
         return dishShop.getType() == DishType.COMBO;
     }
@@ -83,20 +76,12 @@ public class DishAndStandards {
         return dishShop.getType()==DishType.SERVER_COMBO_PART ||dishShop.getType()==DishType.SERVER_COMBO_ALL;
     }
 
-    /**
-     * 是否可以修改单价
-     *
-     * @return
-     */
+
     public Bool getIsChangePrice() {
         return dishShop.getIsChangePrice();
     }
 
-    /**
-     * 是否已估清
-     *
-     * @return
-     */
+
     public boolean isClear() {
         return dishShop.getClearStatus() == ClearStatus.CLEAR;
     }
@@ -115,14 +100,7 @@ public class DishAndStandards {
         return standards.contains(standard);
     }
 
-    /**
-     * 返回-1：传入规格有些不在本商品规格之列。<br/>
-     * 返回0：传入规格与本商品规格完全相同。<br/>
-     * 返回1：传入规格是本商品规格的子集。<br/>
-     *
-     * @param standardSet
-     * @return
-     */
+
     public int compareStandards(Set<DishProperty> standardSet) {
         int sizeThis = standards.size();
         int sizeParam = standardSet.size();

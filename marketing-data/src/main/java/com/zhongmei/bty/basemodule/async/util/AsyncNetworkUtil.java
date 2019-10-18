@@ -13,16 +13,10 @@ import com.zhongmei.bty.commonmodule.database.entity.local.AsyncHttpRecord;
 import com.zhongmei.bty.commonmodule.database.enums.AsyncHttpState;
 import com.zhongmei.bty.commonmodule.database.enums.AsyncHttpType;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class AsyncNetworkUtil {
 
-    /**
-     * 重试异步改单
-     *
-     * @param asyncRec
-     */
+
     public static void retryAsyncModifyTrade(AsyncHttpRecord asyncRec) {
         if (asyncRec == null || asyncRec.getType() == null) {
             return;
@@ -41,12 +35,7 @@ public class AsyncNetworkUtil {
         }
     }
 
-    /**
-     * 重试异步操作
-     *
-     * @param asyncRec
-     * @param sourceRec 开台需要传递此参数，表示触发开台的操作
-     */
+
     public static void retryAsyncOperate(AsyncHttpRecord asyncRec, AsyncHttpRecord sourceRec) {
         if (asyncRec == null || asyncRec.getType() == null) {
             return;
@@ -74,12 +63,7 @@ public class AsyncNetworkUtil {
         }
     }
 
-    /**
-     * 获取异步订单操作的提示信息
-     *
-     * @param record
-     * @return
-     */
+
     public static String getAsyncOperateTip(AsyncHttpRecord record) {
         if (record != null) {
             String operateType = "";
@@ -109,11 +93,7 @@ public class AsyncNetworkUtil {
         return null;
     }
 
-    /**
-     * 重试异步改单和收银
-     *
-     * @param rec
-     */
+
     public static void retryModifyOrCasher(AsyncHttpRecord rec) {
         switch (rec.getType()) {
             case MODIFYTRADE:
@@ -132,12 +112,7 @@ public class AsyncNetworkUtil {
         }
     }
 
-    /**
-     * 获取异步展示流水号
-     *
-     * @param record
-     * @return
-     */
+
     public static String getSerialNumber(AsyncHttpRecord record) {
         String serialNumber = "";
 
@@ -158,11 +133,7 @@ public class AsyncNetworkUtil {
         return serialNumber;
     }
 
-    /**
-     * 获取业务跟状态提示语
-     *
-     * @return
-     */
+
     public static String getType(AsyncHttpType type) {
 
         String mType = "Unknow";
@@ -170,8 +141,7 @@ public class AsyncNetworkUtil {
             case UNION_MAIN_MODIFYTRADE:
             case UNION_SUB_MODIFYTRADE:
             case MODIFYTRADE:
-                //改单操作
-                mType = BaseApplication.sInstance.getString(R.string.async_modify_order);
+                                mType = BaseApplication.sInstance.getString(R.string.async_modify_order);
                 break;
             case CASHER:
                 mType = BaseApplication.sInstance.getString(R.string.async_pay_for);
@@ -185,12 +155,7 @@ public class AsyncNetworkUtil {
 
     }
 
-    /**
-     * 获取异步操作状态
-     *
-     * @param status
-     * @return
-     */
+
     public static String getStatus(AsyncHttpState status) {
         String mStatus = "Unknow";
         switch (status) {

@@ -4,9 +4,7 @@ import com.zhongmei.yunfu.resp.data.LoyaltyTransferResp;
 import com.zhongmei.bty.basemodule.customer.bean.IntegralRecord;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MemberIntegralModificationResp extends LoyaltyTransferResp<MemberIntegralModificationResp.IntegralItemData> {
 
@@ -14,26 +12,16 @@ public class MemberIntegralModificationResp extends LoyaltyTransferResp<MemberIn
 
         Long id;
 
-        Integer beforeIntegral;// 储值之前的积分余额
-
-        Integer addIntegral;// 增加的积分
-
-        Integer endIntegral;// 增加积分之后的余额
-
-        String userId;// 操作员
-
-        Long commercialId;// 商户Id
-
-        Long commercialGroupId;// 品牌编号
-
-        Long commercialMemberId;// 会员编号
-
-        Long createDateTime;// 创建时间
-
-        Long modifyDateTime;// 修改时间
-
-        Integer status;// 有效状态
-
+        Integer beforeIntegral;
+        Integer addIntegral;
+        Integer endIntegral;
+        String userId;
+        Long commercialId;
+        Long commercialGroupId;
+        Long commercialMemberId;
+        Long createDateTime;
+        Long modifyDateTime;
+        Integer status;
         String memo;
 
     }

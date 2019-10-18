@@ -34,148 +34,65 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICustomerListBean, ICustomerStatistic {
+public class CustomerResp  implements Serializable, ICustomerListBean, ICustomerStatistic {
 
     private static final long serialVersionUID = 2319959790769528162L;
-    public static final int SEX_FEMALE = 0; //女
-    public static final int SEX_MALE = 1; //男
-
-    public Long brandId; //	品牌ID
-    public Long memberId; //	memberId
-    public Long customerId; //	顾客Id
-    public Long customerMainId; //	顾客主Id
-    public String customerName; //	顾客名字
-    public String mobile; //	手机号码
-    public String tel;
-    public Integer sex; //	性别Code
-    public Long levelId; //	等级Id
-    public Long level; //	等级数（1~5）
-    public String levelName; //	等级名称
-    public String memo; //	备注
-    public String hobby; //	口味喜好
-    public String invoice; //	发票开头
-    public String invoiceTitle;
-    public String address; //	地址
-    public String entityCard; //	会员卡号(非实体卡)
-    public Long groupId; //	分组ID
-    public String groupName; //	分组名称
-    public String birthday; //	生日
-    public Integer isDisable; //	会员停用：1.是停用; 2.否
-    public String openId; //	微信openID
-    public Double remainValue; //	当前虚拟会员储值余额
-    public Long integral; //	当前积分
-    public Integer cardCount; //	实体卡数量
-    public Integer coupCount; //	优惠券数量
-    public Double creditableValue; //	可挂账总额度
-    public Double remainCreditValue; //	可挂账余额
-    public Double usedCreditValue; //	已挂账金额
-    public String password;//会员密码，创建会员接口用
-    public Long commercialId;//顾客所属门店id
-    public String commercialName;//顾客所属门店名称
-    public List<CustomerCardItem> cardList;
-    public Integer hasFaceCode;//是否有人脸识别码
-    public String faceCode;//人脸识别码，只有详情页才下行
-    public String peopleId;//第三方人脸识别服务器返回字段、只在详情才下行
-    public String cardNo;
-    public List<BeautyCardEntity> entityCards;//实体卡信息，与详情接口一起返回
-    public Integer storedPrivilegeType; //储值支付优惠类型  折扣，折让
-    public BigDecimal storedPrivilegeValue; //储值支付优惠值
-    public BigDecimal storedFullAmount=BigDecimal.ZERO;
+    public static final int SEX_FEMALE = 0;     public static final int SEX_MALE = 1;
+    public Long brandId;     public Long memberId;     public Long customerId;     public Long customerMainId;     public String customerName;     public String mobile;     public String tel;
+    public Integer sex;     public Long levelId;     public Long level;     public String levelName;     public String memo;     public String hobby;     public String invoice;     public String invoiceTitle;
+    public String address;     public String entityCard;     public Long groupId;     public String groupName;     public String birthday;     public Integer isDisable;     public String openId;     public Double remainValue;     public Long integral;     public Integer cardCount;     public Integer coupCount;     public Double creditableValue;     public Double remainCreditValue;     public Double usedCreditValue;     public String password;    public Long commercialId;    public String commercialName;    public List<CustomerCardItem> cardList;
+    public Integer hasFaceCode;    public String faceCode;    public String peopleId;    public String cardNo;
+    public List<BeautyCardEntity> entityCards;    public Integer storedPrivilegeType;     public BigDecimal storedPrivilegeValue;     public BigDecimal storedFullAmount=BigDecimal.ZERO;
     private CustomerType customerType;
 
 
 
-    /**
-     * 颜值得分
-     */
+
     public int faceGrade;
 
 
-    /**
-     * 国家英文名称(为空默认中国) = countryEN
-     */
+
     public String nation;
-    /**
-     * 国家中文名称(为空默认中国) = countryZH
-     */
+
     public String country;
-    /**
-     * 电话国际区码(为空默认中国) = AreaCode
-     */
+
     public String nationalTelCode;
 
 
     public Long localModifyDateTime;
-    /**
-     * 同步唯一标示 老Customer的Customer 的Uuid 和 serverId
-     */
+
     public String synFlag;
 
     public Integer source = 1;
-    /**
-     * 客户类型  0 手机注册顾客，1,微信注册顾客,2,座机注册顾客 , 6，为权益卡号顾客
-     */
+
     public Integer loginType;
-    /**
-     * 注册标示 对应loginType，0 手机；1 openId；2 座机
-     */
+
     public String loginId;
-    public Long modifyDateTime; // 最后数据更新时间
-    public Long upgradeTime; // 会员创建时间
-
-    ////以下是扩展字段用于业务后期会删除，此属性接口不给予返回////
-    public CustomerGroupLevel customerLevel;// 会员等级名称信息
-    public CrmCustomerLevelRights customerLevelRights;// 会员等级权限信息
-    public List<Long> customerLevelRightsDishs;// 享受会员折扣的菜品ids
-
-    public EcCard card; //实体卡，如果不为空表示实体卡登录，否则为虚拟会员
-    public boolean needRefresh = false; //是否需要刷新会员信息(重新登录)
-    public List<CustomerInfoResp.Card> otherCardList; //会员下其他实体卡列表，在会员切换功能中使用
-    public boolean isLoginByCard;// 是否用登录卡登录
-
-    //冗余字段，用来处理编辑接口下行数据
-    public Long id;
+    public Long modifyDateTime;     public Long upgradeTime;
+        public CustomerGroupLevel customerLevel;    public CrmCustomerLevelRights customerLevelRights;    public List<Long> customerLevelRightsDishs;
+    public EcCard card;     public boolean needRefresh = false;     public List<CustomerInfoResp.Card> otherCardList;     public boolean isLoginByCard;
+        public Long id;
     public String name;
 
-    public CustomerLoginType customerLoginType; // 本地loginType
-    //人脸打分vo
-    public FaceFeatureVo mFaceFeatureVo;
+    public CustomerLoginType customerLoginType;         public FaceFeatureVo mFaceFeatureVo;
 
     public boolean isMember() {
-        return true; //levelId != null;
-    }
+        return true;     }
 
     public boolean isDisabled() {
         return isDisable != null && isDisable == 1;
     }
 
-    /**
-     * 获取顾客姓名
-     *
-     * @param c
-     * @return
-     */
+
     public String getCustomerName(Context c) {
         return TextUtils.isEmpty(customerName) ? c.getString(R.string.customer_name_null) : customerName;
     }
 
 
-    /**
-     * 查询会员等级，积分抵现规则及会员折扣的菜品
-     */
+
     public void queryLevelRightInfos() {
         try {
             if (levelId != null) {
-//                CustomerDal customerDal = OperatesFactory.create(CustomerDal.class);
-//                CustomerGroupLevel levelObj = customerDal.findCustomerGroupLevelByLevelId(levelId);// 查询等级
-//                setCustomerLevel(levelObj);
-//                customerLevelRights = customerDal.findCustomerLevelRightsByLevelId(levelId);// 查询等级权限
-//                if (customerLevelRights != null) {
-//                    List<CrmCustomerLevelRightsDish> list =
-//                            customerDal.findCustomerLevelRightsDishsByLevelRightId(customerLevelRights.getId());
-//                    setCustomerLevelRightsDishs(list);// 查询等级享受折扣菜品列表
-//                }
-//                setCustomerLevelRights(customerLevelRights);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -197,11 +114,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         return ValueEnums.toEnum(ChargePrivilegeType.class,storedPrivilegeType);
     }
 
-    /**
-     * @Title: setCustomerLevelRightsDishs
-     * @Description: 设置会员享受折扣的菜品列表
-     * @Return void 返回类型
-     */
+
     public void setCustomerLevelRightsDishs(List<CrmCustomerLevelRightsDish> dishs) {
         if (dishs != null && !dishs.isEmpty()) {
             customerLevelRightsDishs = new ArrayList<>(10);
@@ -248,12 +161,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         return statistic;
     }
 
-    /**
-     * 顾客编辑时的上传参数封装
-     *
-     * @return
-     * @throws JSONException
-     */
+
     public JSONObject toJson() throws JSONException {
         JSONObject json = new JSONObject();
         json.put("address", address);
@@ -296,9 +204,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         return json;
     }
 
-    /**
-     * 对会员积分、余额、实体卡数目和优惠券数目设置初始值
-     */
+
     public void setInitialValue() {
         if (integral == null) {
             integral = 0L;
@@ -314,11 +220,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         }
     }
 
-    /**
-     * 判断是否有会员卡
-     *
-     * @return false 无  true 有
-     */
+
     public boolean hasCustomerEntityCard() {
         if (cardList == null || cardList.size() == 0) {
             return false;
@@ -332,8 +234,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         return false;
     }
 
-    //add start 20170913 for card pwd
-    private boolean isLoginCardNeedPwd() {
+        private boolean isLoginCardNeedPwd() {
         if (otherCardList == null || otherCardList.size() == 0) {
             return false;
         } else {
@@ -347,18 +248,13 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
     }
 
     public boolean isNeedPassword(BigDecimal amount) {
-        //会员卡登陆走会员卡的免密支付逻辑
-        if (this.isLoginByCard) {
+                if (this.isLoginByCard) {
             return isLoginCardNeedPwd();
         }
-        //add v8.5 人脸登录和微信免密支付不需要密码
-        if (this.customerLoginType == CustomerLoginType.FACE_CODE || this.customerLoginType == CustomerLoginType.WECHAT_MEMBERCARD_ID) {
+                if (this.customerLoginType == CustomerLoginType.FACE_CODE || this.customerLoginType == CustomerLoginType.WECHAT_MEMBERCARD_ID) {
             return false;
         }
-        //手机号，会员id等登录走会员密码支付逻辑 add v8.13
-        return !PaySettingCache.isCanPayNoPwd(amount);//使用免密支付开关
-    }
-    //add end 20170913 for card pwd
+                return !PaySettingCache.isCanPayNoPwd(amount);    }
 
     public CustomerListResp.LoginType getLoginType() {
         return ValueEnums.toEnum(CustomerListResp.LoginType.class, loginType);
@@ -375,11 +271,7 @@ public class CustomerResp /*extends DataBaseInfo*/ implements Serializable, ICus
         this.customerType = customerType;
     }
 
-    /**
-     * 是否有人脸
-     *
-     * @return
-     */
+
     public boolean hasFaceCode() {
         if (hasFaceCode == null) {
             return false;

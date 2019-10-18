@@ -2,11 +2,7 @@ package com.zhongmei.yunfu.http;
 
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * 实时请求数据的封装类
- *
- * @param <T>
- */
+
 public class QSRequestObject<T> {
 
     private Long brandId;

@@ -35,9 +35,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @EFragment(R.layout.fragment_order_display_device_setting)
 public class OrderDisplayDeviceSettingFragment extends BasicFragment {
@@ -54,8 +52,7 @@ public class OrderDisplayDeviceSettingFragment extends BasicFragment {
     void initView() {
         mSystemSettingDal = OperatesFactory.create(SystemSettingDal.class);
 
-        //加载当前门店下的设备列表
-        AsyncTaskCompat.executeParallel(new AsyncTask<Void, Void, OrderDisplayDeviceSettingItem>() {
+                AsyncTaskCompat.executeParallel(new AsyncTask<Void, Void, OrderDisplayDeviceSettingItem>() {
             @Override
             protected OrderDisplayDeviceSettingItem doInBackground(Void... params) {
                 OrderDisplayDeviceSettingItem item = new OrderDisplayDeviceSettingItem();
@@ -81,8 +78,7 @@ public class OrderDisplayDeviceSettingFragment extends BasicFragment {
     }
 
     private class OrderDisplayDeviceListAdapter extends CommonAdapter<InitSystem> {
-        //选中的设备
-        private String mSelectedDeviceId;
+                private String mSelectedDeviceId;
 
         public OrderDisplayDeviceListAdapter(Context context, int layoutId, List<InitSystem> datas, String defaultSelectedDeviceId) {
             super(context, layoutId, datas);
@@ -98,8 +94,7 @@ public class OrderDisplayDeviceSettingFragment extends BasicFragment {
                 cbState.setChecked(false);
             }
 
-            //设置名称
-            TextView tvName = (TextView) holder.getConvertView().findViewById(R.id.tv_name);
+                        TextView tvName = (TextView) holder.getConvertView().findViewById(R.id.tv_name);
             String name = getString(R.string.fragment_order_display_device_setting_device_name, initSystem.getPadNo().toString());
             String mainPos = "";
             if (initSystem.getIsMainPos() == 0) {
@@ -129,8 +124,7 @@ public class OrderDisplayDeviceSettingFragment extends BasicFragment {
             @Override
             public void onResponse(ResponseObject<MindTransferResp<CommercialCustomSettings>> response) {
                 if (MindTransferResp.isOk(response.getContent())
-                        && mOrderDisplayDeviceListAdapter != null) {//为200表示操作成功
-                    mOrderDisplayDeviceListAdapter.mSelectedDeviceId = value;
+                        && mOrderDisplayDeviceListAdapter != null) {                    mOrderDisplayDeviceListAdapter.mSelectedDeviceId = value;
                     mOrderDisplayDeviceListAdapter.notifyDataSetChanged();
                 }
                 ToastUtil.showShortToast(response.getMessage());
@@ -145,9 +139,7 @@ public class OrderDisplayDeviceSettingFragment extends BasicFragment {
         mSystemSettingDal.updateSaveSetting(req, LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * 该页面设置数据
-     */
+
     private class OrderDisplayDeviceSettingItem {
         private String deviceId;
         private List<InitSystem> initSystems;

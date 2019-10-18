@@ -8,10 +8,7 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * 商品扩展表
- * Created by demo on 2018/12/15
- */
+
 
 @DatabaseTable(tableName = "trade_item_extra_takeaway")
 public class TradeItemExtraTakeaway extends IdEntityBase implements ICreator, IUpdator {

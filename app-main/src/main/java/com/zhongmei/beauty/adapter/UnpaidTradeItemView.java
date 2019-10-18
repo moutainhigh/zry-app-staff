@@ -24,9 +24,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.beauty_unpaid_trade_item)
 public class UnpaidTradeItemView extends RelativeLayout implements View.OnClickListener {
 
@@ -52,8 +50,7 @@ public class UnpaidTradeItemView extends RelativeLayout implements View.OnClickL
     protected TextView tv_status;
 
     @ViewById(R.id.tv_time)
-    protected TextView tv_time;//开单时间
-
+    protected TextView tv_time;
     @ViewById(R.id.btn_delete)
     protected Button btn_delete;
 

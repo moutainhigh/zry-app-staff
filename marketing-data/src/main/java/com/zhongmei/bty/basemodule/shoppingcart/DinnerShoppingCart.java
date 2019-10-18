@@ -106,13 +106,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-/**
- * @Date：2015年10月11日 上午9:50:00
- * @Description: 正餐购物车
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class DinnerShoppingCart extends BaseShoppingCart {
 
     private static final String TAG = DinnerShoppingCart.class.getSimpleName();
@@ -120,22 +114,15 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     private static DinnerShoppingCart instance = null;
 
     protected ShoppingCartVo dinnerShoppingCartVo = new ShoppingCartVo();
-    //主单的tradeInfo对象
-    protected DinnertableTradeInfo mainTradeInfo;
+        protected DinnertableTradeInfo mainTradeInfo;
 
     public DinnertableTradeInfo getCurrentTradeInfo() {
         return currentTradeInfo;
     }
 
-    //当前选择单据的tradeInfo对象
-    protected DinnertableTradeInfo currentTradeInfo;
+        protected DinnertableTradeInfo currentTradeInfo;
 
-    /**
-     * @Title: getInstance
-     * @Description: 获取正餐购物车单例
-     * @Param @return TODO
-     * @Return DinnerShoppingCart 返回类型
-     */
+
     public static DinnerShoppingCart getInstance() {
         synchronized (DinnerShoppingCart.class) {
             if (instance == null) {
@@ -150,14 +137,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         setOpenIdenty(getShoppingCartVo(), openIdenty);
     }
 
-    /**
-     * 注册购物车监听
-     *
-     * @Title: registerListener
-     * @Description: TODO
-     * @Param @param mModifyShoppingCartListener TODO
-     * @Return void 返回类型
-     */
+
     public void registerListener(int listenerTag, ModifyShoppingCartListener mModifyShoppingCartListener) {
         arrayListener.put(listenerTag, mModifyShoppingCartListener);
         if (AppBuildConfig.DEBUG) {
@@ -165,12 +145,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: unRegisterListener
-     * @Description: 清空所有监听队列
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void unRegisterListener() {
         arrayListener.clear();
         if (AppBuildConfig.DEBUG) {
@@ -178,12 +153,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: unRegisterListenerByTag
-     * @Description: 根据监听tag反注册监听
-     * @Param @param tag TODO
-     * @Return void 返回类型
-     */
+
     public void unRegisterListenerByTag(int tag) {
         arrayListener.remove(tag);
         if (AppBuildConfig.DEBUG) {
@@ -191,32 +161,17 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: setDinnerBusinessType
-     * @Description: 设置正餐业务形态
-     * @Param @param mBusinessType TODO
-     * @Return void 返回类型
-     */
+
     public void setDinnerBusinessType(BusinessType mBusinessType) {
         setOrderBusinessType(dinnerShoppingCartVo, mBusinessType);
     }
 
-    /**
-     * @Title: setDinnerOrderType
-     * @Description: 设置正餐票据类型
-     * @Param @param orderType TODO
-     * @Return void 返回类型
-     */
+
     public void setDinnerOrderType(DeliveryType orderType) {
         setOrderType(dinnerShoppingCartVo, orderType);
     }
 
-    /**
-     * 设置自助餐的套餐信息
-     *
-     * @param comboVo
-     * @param waiter
-     */
+
     public void setMealShellVo(BuffetComboVo comboVo, AuthUser waiter) {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
         if (waiter == null) {
@@ -261,12 +216,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return tradeBuffetPeople;
     }
 
-    /**
-     * @Title: openTable
-     * @Description: 开台
-     * @Param @param mTradeTable TODO
-     * @Return void 返回类型
-     */
+
     public void openTable(TradeTable mTradeTable) {
         if (mTradeTable == null) {
             return;
@@ -281,17 +231,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         dinnerShoppingCartVo.getmTradeVo().setTradeTableList(mTradetables);
     }
 
-    /**
-     * @Title: updateTable
-     * @Description: 更新桌台信息
-     * @Param @param mTradeTable TODO
-     * @Return void 返回类型
-     */
+
     public void updateTable(TradeTable mTradeTable) {
         List<TradeTable> listTradeTable = dinnerShoppingCartVo.getmTradeVo().getTradeTableList();
 
-        if (Utils.isEmpty(listTradeTable)) {//联台主单没有tradeTable数据
-            return;
+        if (Utils.isEmpty(listTradeTable)) {            return;
         }
 
         for (int i = 0; i < listTradeTable.size(); i++) {
@@ -303,20 +247,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: setDinnerCustomer
-     * @Description: 设置登录会员
-     * @Param @param mTradeCustomer TODO
-     * @Return void 返回类型
-     */
+
     public void setDinnerCustomer(TradeCustomer mTradeCustomer) {
         if (dinnerShoppingCartVo.getArrayTradeCustomer() == null) {
             dinnerShoppingCartVo.setArrayTradeCustomer(new HashMap<Integer, TradeCustomer>());
         }
 
         if (mTradeCustomer == null) {
-            // 如果原订单中有会员信息则将该会员信息设置为无效并存放起来
-            if (dinnerShoppingCartVo.getmTradeMemer() != null) {
+                        if (dinnerShoppingCartVo.getmTradeMemer() != null) {
                 dinnerShoppingCartVo.getmTradeMemer().setStatusFlag(StatusFlag.INVALID);
                 dinnerShoppingCartVo.getArrayTradeCustomer().put(null, dinnerShoppingCartVo.getmTradeMemer());
             }
@@ -345,9 +283,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 将shoppingCartVo中的tradeCustomer移除
-     */
+
     private void removeAllArrayTradeCustomer() {
         dinnerShoppingCartVo.getArrayTradeCustomer().remove(CustomerType.MEMBER.value());
         dinnerShoppingCartVo.getArrayTradeCustomer().remove(CustomerType.CUSTOMER.value());
@@ -355,12 +291,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: addTable
-     * @Description: 为订单添加桌台
-     * @Param @param mTradeTable TODO
-     * @Return void 返回类型
-     */
+
     public void addTable(TradeTable mTradeTable) {
         if (mTradeTable == null) {
             return;
@@ -371,11 +302,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         CreateTradeTableTool.openTable(dinnerShoppingCartVo.getmTradeVo(), mTradeTable);
     }
 
-    /**
-     * 创建或者更新tradeTable
-     *
-     * @param tablesList
-     */
+
     public void updateOrCreateTables(List<Tables> tablesList, boolean isCallback) {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
         dinnerShoppingCartVo.getmTradeVo().setTradeTableList(CreateTradeTableTool
@@ -391,12 +318,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: getDinnertableTradeVo
-     * @Description: 获取订单桌台信息
-     * @Param @return TODO
-     * @Return DinnertableTradeVo 返回类型
-     */
+
     public DinnertableTradeInfo getDinnertableTradeInfo() {
         return dinnerShoppingCartVo.getDinnertableTradeInfo();
     }
@@ -405,13 +327,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return mainTradeInfo;
     }
 
-    /**
-     * 是否需要设置分组
-     *
-     * @param mShopcartItem
-     * @param isTempDish
-     * @param isNeedSetGroup
-     */
+
     public void addDishToShoppingCart(ShopcartItem mShopcartItem, Boolean isTempDish, boolean isNeedSetGroup) {
         if (mShopcartItem == null) {
             return;
@@ -419,13 +335,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         if (isNeedSetGroup)
             mShopcartItem.setIsGroupDish(dinnerShoppingCartVo.isGroupMode());
         addShippingToCart(dinnerShoppingCartVo, mShopcartItem, isTempDish);
-        //有宴请的情况下会员折扣不生效
-        if (!isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
+                if (!isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
             setDishMemberPrivilege(dinnerShoppingCartVo, mShopcartItem, CustomerManager.getInstance().getDinnerLoginCustomer(), false);
         }
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).addToShoppingCart(allIttem, dinnerShoppingCartVo.getmTradeVo(), mShopcartItem);
@@ -433,11 +347,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * 获取子单数量
-     *
-     * @return
-     */
+
     public BigDecimal getSubTradeCount() {
         if (getOrder() == null || getOrder().getTrade() == null)
             return BigDecimal.ONE;
@@ -447,43 +357,26 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             return BigDecimal.ONE;
     }
 
-    /**
-     * @Title: addDishToShoppingCart
-     * @Description: 正餐添加菜品到购物车
-     * @Param @param mShopcartItem
-     * @Param @param isTempDish TODO
-     * @Return void 返回类型
-     */
+
     public void addDishToShoppingCart(ShopcartItem mShopcartItem, Boolean isTempDish) {
         addDishToShoppingCart(mShopcartItem, isTempDish, true);
     }
 
-    /**
-     * 恢复已删除菜品
-     *
-     * @param shopcartItemBase
-     */
+
     public void recoverInvalidDish(ReadonlyShopcartItemBase shopcartItemBase) {
         shopcartItemBase.recoveryDelete();
 
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
         }
     }
 
-    /**
-     * @Title: removeDinnerTradeItem
-     * @Description: 根据TradeItemVo移除数据
-     * @Param @param mTradeItemVo TODO
-     * @Return void 返回类型
-     */
+
     public void removeDinnerTradeItem(TradeItemVo mTradeItemVo) {
         ShopcartItem mShopcartItem = removeTradeItem(dinnerShoppingCartVo, mTradeItemVo);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeShoppingCart(mergeShopcartItem(dinnerShoppingCartVo),
@@ -492,16 +385,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeDinnerDish
-     * @Description: 根据菜品将整个菜品（单菜、套餐）移除购车
-     * @Param @param shopcartItem TODO
-     * @Return void 返回类型
-     */
+
     public void removeDinnerDish(IShopcartItem shopcartItem) {
         removeDish(dinnerShoppingCartVo, shopcartItem);
-        // 判断当前操作菜品是套餐壳或者单菜，并且该菜品是因退回菜品/修改菜品新产生的数据。
-        if (!TextUtils.isEmpty(shopcartItem.getRelateTradeItemUuid())
+                if (!TextUtils.isEmpty(shopcartItem.getRelateTradeItemUuid())
                 && Utils.isNotEmpty(dinnerShoppingCartVo.getListIShopcatItem())) {
             IShopcartItemBase iShopcartItem = getIShopcartItemByUUID(dinnerShoppingCartVo, shopcartItem.getRelateTradeItemUuid());
             if (iShopcartItem instanceof ReadonlyShopcartItem) {
@@ -515,8 +402,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 }
             }
         }
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
@@ -526,15 +412,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeFastFoodShoppingcartItem
-     * @Description: 从购物车中删除单菜或删除套餐子菜
-     * @Param @param mShopcartItem
-     * @Param @param mSetmealShopcartItem
-     * @Param @param mChangePageListener
-     * @Param @param mFragmentManager TODO
-     * @Return void 返回类型
-     */
+
     public void removeDinnerShoppingcartItem(IShopcartItem mShopcartItem, SetmealShopcartItem mSetmealShopcartItem,
                                              ChangePageListener mChangePageListener, FragmentManager mFragmentManager) {
 
@@ -544,8 +422,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 mChangePageListener,
                 mFragmentManager);
 
-        // 判断当前操作菜品是套餐壳或者单菜，并且该菜品是因退回菜品/修改菜品新产生的数据。
-        if (mSetmealShopcartItem == null && !TextUtils.isEmpty(mShopcartItem.getRelateTradeItemUuid())
+                if (mSetmealShopcartItem == null && !TextUtils.isEmpty(mShopcartItem.getRelateTradeItemUuid())
                 && Utils.isNotEmpty(dinnerShoppingCartVo.getListIShopcatItem())) {
             IShopcartItem iShopcartItem = getIShopcartItemByUUID(dinnerShoppingCartVo, mShopcartItem.getRelateTradeItemUuid());
             if (iShopcartItem instanceof ReadonlyShopcartItem) {
@@ -562,15 +439,13 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         resetSelectDishQTY(dinnerShoppingCartVo);
         List<IShopcartItem> allShopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算营销活动,解绑
-        MathManualMarketTool.removeShopcartItem(dinnerShoppingCartVo.getmTradeVo(),
+                MathManualMarketTool.removeShopcartItem(dinnerShoppingCartVo.getmTradeVo(),
                 allShopcartItemList,
                 mShopcartItem,
                 true,
                 false);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(allShopcartItemList, dinnerShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(allShopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeShoppingCart(allShopcartItemList,
@@ -583,18 +458,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         removeDish(dinnerShoppingCartVo, mShopcartItem);
         resetSelectDishQTY(dinnerShoppingCartVo);
         List<IShopcartItem> allShopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算营销活动,解绑
-        MathManualMarketTool.removeShopcartItem(dinnerShoppingCartVo.getmTradeVo(),
+                MathManualMarketTool.removeShopcartItem(dinnerShoppingCartVo.getmTradeVo(),
                 allShopcartItemList,
                 mShopcartItem,
                 true,
                 false);
     }
 
-    /**
-     * 移除小程序item
-     * @param shopcartItem
-     */
+
     public void removeAppletItem(IShopcartItem shopcartItem){
         removeDinnerShoppingcartItem(shopcartItem);
         for (int key : arrayListener.keySet()) {
@@ -602,24 +473,17 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: returnQTY
-     * @Description: TODO
-     * @Param @param mShopcartItem 退回菜品新生成的数据
-     * @Return void 返回类型
-     */
+
     public void returnQTY(IShopcartItem mShopcartItem) {
         OperateShoppingCart.addToReadOnlyShoppingCart(dinnerShoppingCartVo.getmTradeVo(),
                 dinnerShoppingCartVo.getListIShopcatItem(),
                 mShopcartItem);
         resetSelectDishQTY(dinnerShoppingCartVo);
-        // 重新计算营销活动
-        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(),
+                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(),
                 mergeShopcartItem(dinnerShoppingCartVo),
                 true,
                 false);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(mergeShopcartItem(dinnerShoppingCartVo),
@@ -627,12 +491,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: modifyDish
-     * @Description: TODO
-     * @Param @param mShopcartItem 改菜新生成的数据
-     * @Return void 返回类型
-     */
+
     public void modifyDish(ShopcartItem mShopcartItem) {
         if (dinnerShoppingCartVo.getDinnertableTradeInfo() != null) {
             DinnertableTradeInfo info = dinnerShoppingCartVo.getDinnertableTradeInfo();
@@ -641,30 +500,21 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         OperateShoppingCart.addToShoppingCart(dinnerShoppingCartVo.getmTradeVo(),
                 dinnerShoppingCartVo.getListOrderDishshopVo(),
                 mShopcartItem);
-        //有宴请的情况下会员折扣不生效
-        if (!isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
+                if (!isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
             setDishMemberPrivilege(dinnerShoppingCartVo, mShopcartItem, CustomerManager.getInstance().getDinnerLoginCustomer(), false);
         }
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).addToShoppingCart(allIttem, dinnerShoppingCartVo.getmTradeVo(), mShopcartItem);
         }
     }
 
-    /**
-     * @Title: updateDinnerDish
-     * @Description: 修改正餐菜品信息
-     * @Param @param mShopcartItemBase
-     * @Param @param isTempDish TODO
-     * @Return void 返回类型
-     */
+
     public void updateDinnerDish(IShopcartItemBase mShopcartItemBase, Boolean isTempDish) {
         updateDish(dinnerShoppingCartVo, mShopcartItemBase, isTempDish);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         resetSelectDishQTY(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
@@ -674,11 +524,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * * @Description: 修改正餐菜品信息
-     *
-     * @param dataItems
-     */
+
     public void updateDinnerDish(List<DishDataItem> dataItems) {
         for (DishDataItem item : dataItems) {
             if ((item.getType() == ItemType.WEST_CHILD || item.getType() == ItemType.CHILD) && item.getBase() != null)
@@ -687,8 +533,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 updateDish(dinnerShoppingCartVo, item.getItem(), false);
         }
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         resetSelectDishQTY(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
@@ -697,11 +542,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 更新菜品操作
-     *
-     * @param itemOperations
-     */
+
     public void updateOperations(List<TradeItemOperation> itemOperations) {
         HashMap<Long, List<TradeItemOperation>> map = new HashMap<>();
         for (TradeItemOperation operation : itemOperations) {
@@ -727,8 +568,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         resetSelectDishQTY(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
@@ -737,78 +577,42 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: getDinnerShopcartItem
-     * @Description: TODO
-     * @Param @param 根据套餐、子菜 或套餐子菜uuid从购物车中获取未下过单的菜品信息
-     * @Param @return TODO
-     * @Return ShopcartItem 返回类型
-     */
+
     public ShopcartItem getDinnerShopcartItem(String uuid) {
         return getShopcartItem(dinnerShoppingCartVo, uuid);
     }
 
-    /**
-     * @Title: getDinnerShoppingCartItem
-     * @Description: 根据套餐、子菜 或套餐子菜uuid获取菜品信息
-     * @Param @param uuid
-     * @Param @return TODO
-     * @Return IShopcartItem 返回类型
-     */
+
     public IShopcartItemBase getDinnerShoppingCartItem(String uuid) {
         return getIShopcartItem(dinnerShoppingCartVo, uuid);
     }
 
-    /**
-     * @Title: getDinnerShoppingCartItem
-     * @Description: 根据套餐、子菜 或套餐子菜uuid获取菜品信息
-     * @Param @param uuid
-     * @Param @return TODO
-     * @Return IShopcartItem 返回类型
-     */
+
     public IShopcartItemBase getDinnerShoppingCartItem(Long id) {
         return getIShopcartItem(dinnerShoppingCartVo, id);
     }
 
-    /**
-     * @Title: getDinnerDishSelectQTY
-     * @Description: 获取正餐中菜品选中数量
-     * @Param @return TODO
-     * @Return Map<String       ,       BigDecimal> 返回类型
-     */
+
     public Map<String, BigDecimal> getDinnerDishSelectQTY() {
         return getDishSelectQTY(dinnerShoppingCartVo);
     }
 
-    /**
-     * 获取票据类型
-     */
+
     public DeliveryType getOrderType() {
         return dinnerShoppingCartVo.getmTradeVo().getTrade().getDeliveryType();
     }
 
-    /**
-     * 获取订单数据
-     */
+
     public TradeVo getOrder() {
         return dinnerShoppingCartVo.getmTradeVo();
     }
 
-    /**
-     * 获取正餐中菜品添加品项数量
-     */
+
     public int getSelectDishCount() {
         return mergeShopcartItem(dinnerShoppingCartVo).size();
     }
 
-    /**
-     * 获取订单中所有菜品
-     *
-     * @Title: getShoppingCartDish
-     * @Description: TODO
-     * @Param @return TODO
-     * @Return List<Dish_Order_Entity> 返回类型
-     */
+
     public List<IShopcartItem> getShoppingCartDish() {
         return mergeShopcartItem(dinnerShoppingCartVo);
     }
@@ -817,12 +621,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         dinnerShoppingCartVo.setmTradeVo(mTradeVo);
     }
 
-    /**
-     * @Title: resetOrderFromTable
-     * @Description: TODO
-     * @Param dinnertableTradeInfo
-     * @Return void 返回类型
-     */
+
     public void resetOrderFromTable(DinnertableTradeInfo dinnertableTradeInfo, boolean isCallback) {
         resetOrderFromTable(null, dinnertableTradeInfo, isCallback);
     }
@@ -832,11 +631,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         resetOrderFromTable(mainInfo, currentTradeInfo, false, isCallback);
     }
 
-    /**
-     * @param mainInfo          主单info
-     * @param currentTradeInfo  当前选中订单info
-     * @param isBUnionMainTrade 合单收银之前是否是联台主单
-     */
+
     public void resetOrderFromTable(DinnertableTradeInfo mainInfo, DinnertableTradeInfo currentTradeInfo, boolean isBUnionMainTrade, boolean isCallback) {
         boolean isGroupMode = dinnerShoppingCartVo.isGroupMode();
         clearShoppingCart(isCallback);
@@ -848,8 +643,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         setDeskId(currentTradeInfo);
         initTableTradeInfo(mainInfo, currentTradeInfo);
 
-        //add v8.1 销售员
-        if (currentTradeInfo.getTradeVo() != null)
+                if (currentTradeInfo.getTradeVo() != null)
             dinnerShoppingCartVo.setTradeUser(currentTradeInfo.getTradeVo().getTradeUser());
         List<IShopcartItem> listShopcartItem = currentTradeInfo.getItems();
         if (listShopcartItem != null) {
@@ -868,13 +662,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         convertCustomerToArrayCustomer();
         resetSelectDishQTY(dinnerShoppingCartVo);
 
-        //modify 20161213
-        if (getOrder().getTrade().getTradePayStatus() != TradePayStatus.PAYING) {
+                if (getOrder().getTrade().getTradePayStatus() != TradePayStatus.PAYING) {
             MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), currentTradeInfo.getTradeVo());
             CheckGiftCouponIsActived(dinnerShoppingCartVo);
         }
-        //modify 20161213
-        if (isCallback) {
+                if (isCallback) {
             for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).resetOrder(mergeShopcartItem(dinnerShoppingCartVo),
                         dinnerShoppingCartVo.getmTradeVo());
@@ -890,12 +682,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         currentTradeInfo.getTradeVo().setTableName(currentTradeInfo.getiDinnertableTrade().getDinnertable().getName());
     }
 
-    /**
-     * 将tradeinfo缓存到购物车，方便连桌计算,跳到点菜界面或者结算界面时调用
-     *
-     * @param mainInfo         不是连桌时，可传空
-     * @param currentTradeInfo 当前选择的tradeInfo对象
-     */
+
     public void initTableTradeInfo(DinnertableTradeInfo mainInfo, DinnertableTradeInfo currentTradeInfo) {
         this.mainTradeInfo = mainInfo;
         this.currentTradeInfo = currentTradeInfo;
@@ -920,8 +707,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
     private void convertCustomerToArrayCustomer() {
-        // 保存订单中的登录会员信息
-        List<TradeCustomer> listTradeCustomer = dinnerShoppingCartVo.getmTradeVo().getTradeCustomerList();
+                List<TradeCustomer> listTradeCustomer = dinnerShoppingCartVo.getmTradeVo().getTradeCustomerList();
         if (listTradeCustomer != null) {
             for (TradeCustomer mCustomer : listTradeCustomer) {
                 if (dinnerShoppingCartVo.getArrayTradeCustomer() == null) {
@@ -948,43 +734,30 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @param tradeVo
-     * @param isUnionMainTrade 是否是联台主单
-     */
+
     public void updateTradeVoNoTradeInfo(TradeVo tradeVo, boolean isUnionMainTrade, boolean isCallback) {
         DinnertableTradeInfo dinnertableTradeInfo = new DinnertableTradeInfo(tradeVo);
         dinnerShoppingCartVo.setDinnertableTradeInfo(dinnertableTradeInfo);
         resetOrderFromTable(null, dinnertableTradeInfo, isUnionMainTrade, isCallback);
     }
 
-    /**
-     * 更新联台主单tradevo到购物车
-     *
-     * @param tradeVoList
-     */
+
     public void updateUnionMainTradeInfo(List<TradeVo> tradeVoList) {
         List<DinnertableTradeInfo> subTradeInfos = new ArrayList<>();
         mainTradeInfo = getTableTradeInfo(tradeVoList, subTradeInfos);
         resetOrderFromTable(mainTradeInfo, mainTradeInfo, true);
     }
 
-    /**
-     * 只更新开台数据
-     *
-     * @param tradeVo
-     */
+
     public void updateTradeVoNoTradeInfo(TradeVo tradeVo) {
         updateTradeVoNoTradeInfo(tradeVo, false, true);
     }
 
-    //modify 20170608 begin
-    public void updateDataFromTradeVo(TradeVo tradeVo) {
+        public void updateDataFromTradeVo(TradeVo tradeVo) {
         this.updateDataFromTradeVo(tradeVo, true);
     }
 
-    public void updateDataWithTrade(Trade trade) {//add 20171103
-        if (trade != null && this.dinnerShoppingCartVo != null && this.dinnerShoppingCartVo.getmTradeVo() != null) {
+    public void updateDataWithTrade(Trade trade) {        if (trade != null && this.dinnerShoppingCartVo != null && this.dinnerShoppingCartVo.getmTradeVo() != null) {
             this.dinnerShoppingCartVo.getmTradeVo().setTrade(trade);
         }
     }
@@ -997,14 +770,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         dinnertableTradeInfo.setTradeVo(tradeVo);
         resetOrderFromTable(dinnertableTradeInfo, isCallback);
     }
-    //modify 20170608 end
 
-    /**
-     * 刷新购物车的催菜
-     *
-     * @Title: refreshRemindDish
-     * @Return void 返回类型
-     */
+
     public void refreshTradeItemOperations(Map<String, List<TradeItemOperation>> tradeItemOperationMap) {
         if (dinnerShoppingCartVo == null || dinnerShoppingCartVo.getDinnertableTradeInfo() == null) {
             return;
@@ -1033,13 +800,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
     public void updateBeautyDataFromTradeVo(TradeVo tradeVo, boolean isCallback) {
-        //余额充值时，不用更新购物车。
-        if (tradeVo == null || dinnerShoppingCartVo == null || tradeVo.getTrade().getBusinessType().equalsValue(BusinessType.ONLINE_RECHARGE.value())) {
+                if (tradeVo == null || dinnerShoppingCartVo == null || tradeVo.getTrade().getBusinessType().equalsValue(BusinessType.ONLINE_RECHARGE.value())) {
             return;
         }
 
-        if (dinnerShoppingCartVo.getDinnertableTradeInfo() != null){ // 美业有可能有桌台有可能没有
-            DinnertableTradeInfo dinnertableTradeInfo = dinnerShoppingCartVo.getDinnertableTradeInfo();
+        if (dinnerShoppingCartVo.getDinnertableTradeInfo() != null){             DinnertableTradeInfo dinnertableTradeInfo = dinnerShoppingCartVo.getDinnertableTradeInfo();
             dinnertableTradeInfo.setTradeVo(tradeVo);
             resetOrderFromTable(dinnertableTradeInfo,isCallback);
         } else {
@@ -1048,12 +813,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 为菜品批量添加操作记录
-     *
-     * @Title: addTradeItemOperations
-     * @Return void 返回类型 key表示菜品，value表示要添加的操作记录类型
-     */
+
     public void addTradeItemOperations(Map<IShopcartItemBase, PrintOperationOpType> map) {
         if (dinnerShoppingCartVo == null || dinnerShoppingCartVo.getDinnertableTradeInfo() == null) {
             return;
@@ -1090,12 +850,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 为菜品批量添加操作记录
-     *
-     * @Title: removeTradeItemOperations
-     * @Return void 返回类型 key表示菜品，value表示要添加的操作记录类型
-     */
+
     public void removeTradeItemOperations(Map<IShopcartItemBase, PrintOperationOpType> map) {
         if (dinnerShoppingCartVo == null || dinnerShoppingCartVo.getDinnertableTradeInfo() == null) {
             return;
@@ -1116,12 +871,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         if (dinnerShoppingCartVo == null || tradeItems == null) {
             return;
         }
-        /*
-         * 在对菜品进行打印后，
-         * 服务端会修改tradeItem的issueStatus和serverUpdateTime，
-         * 这时购物车中的tradeItem与服务器上的就不一致了
-         * ，所以需要更新购物车中菜品的时间戳和出单状态。
-         */
+
 
         boolean itemRefreshed = false;
         if (Utils.isNotEmpty(tradeItems)) {
@@ -1142,8 +892,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-        //更新菜品的tradeItemOperation
-        if (Utils.isNotEmpty(tradeItemOperations)) {
+                if (Utils.isNotEmpty(tradeItemOperations)) {
             for (TradeItemOperation tradeItemOperation : tradeItemOperations) {
                 if (tradeItemOperation.getTradeItemId() == null) {
                     continue;
@@ -1181,14 +930,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 从数据库中获取数据刷新购物车中的条目。此方法将阻塞调用线程。
-     * 在对购物车的菜品进行了保存后，应该传入null参数全部刷新。 在对菜品进行打印后，应该传入List
-     * <TradeItem>刷新被打印的菜品。
-     *
-     * @param tradeItems 为null时全部刷新，在对菜品打印成功后传入被打印后的菜品
-     * @throws Exception
-     */
+
     public void resetShopcartItemFromDB(List<TradeItem> tradeItems) {
         if (dinnerShoppingCartVo == null || dinnerShoppingCartVo.getDinnertableTradeInfo() == null) {
             return;
@@ -1220,8 +962,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         Map<String, IShopcartItem> modifyDishsMap = new HashMap<>();
         if (orderDishsStore != null && !orderDishsStore.isEmpty()) {
             for (IShopcartItem iShopcartItem : orderDishsStore) {
-                if (iShopcartItem.isChanged())       //已修改菜品
-                    modifyDishsMap.put(iShopcartItem.getUuid(), iShopcartItem);
+                if (iShopcartItem.isChanged())                           modifyDishsMap.put(iShopcartItem.getUuid(), iShopcartItem);
             }
         }
 
@@ -1274,12 +1015,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 dinnerShoppingCartVo.setmTradeVo(dinnertableTradeInfo.getTradeVo());
             }
         } catch (Exception e) {
-            //LogUtil.writeLog("resetShopcartItemFromDBEx", e.toString());
-            e.printStackTrace();
+                        e.printStackTrace();
         }
 
-        //add v8.1 销售员
-        if (currentTradeInfo.getTradeVo() != null)
+                if (currentTradeInfo.getTradeVo() != null)
             dinnerShoppingCartVo.setTradeUser(currentTradeInfo.getTradeVo().getTradeUser());
         List<IShopcartItem> listShopcartItem = currentTradeInfo.getItems();
         if (listShopcartItem != null) {
@@ -1294,8 +1033,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         convertCustomerToArrayCustomer();
         resetSelectDishQTY(dinnerShoppingCartVo);
 
-        //modify 20161213
-        if (getOrder().getTrade().getTradePayStatus() != TradePayStatus.PAYING) {
+                if (getOrder().getTrade().getTradePayStatus() != TradePayStatus.PAYING) {
             MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), currentTradeInfo.getTradeVo());
             CheckGiftCouponIsActived(dinnerShoppingCartVo);
         }
@@ -1324,19 +1062,13 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
 
-        //modify 20161213
-        for (int key : arrayListener.keySet()) {
+                for (int key : arrayListener.keySet()) {
             arrayListener.get(key).resetOrder(mergeShopcartItem(dinnerShoppingCartVo),
                     dinnerShoppingCartVo.getmTradeVo());
         }
     }
 
-    /**
-     * 获取主单子单DinnertableTradeInfo
-     *
-     * @param tradeVos
-     * @param subInfos
-     */
+
     public static DinnertableTradeInfo getTableTradeInfo(List<TradeVo> tradeVos, List<DinnertableTradeInfo> subInfos) {
         DinnertableTradeInfo mainInfo = null;
         subInfos.clear();
@@ -1358,13 +1090,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return mainInfo;
     }
 
-    /**
-     * @Title: updatePrintStatus
-     * @Description: 设置菜品停止出单打印
-     * @Param @param mShopcartItemBase
-     * @Param @param mIssueStatus TODO
-     * @Return void 返回类型
-     */
+
     public void updatePrintStatus(IShopcartItemBase mShopcartItemBase, IssueStatus mIssueStatus) {
         List<IShopcartItem> listDish = mergeShopcartItem(dinnerShoppingCartVo);
         Map<String, IssueStatus> uuidIssueStatusMap = new HashMap<>();
@@ -1372,12 +1098,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             for (IShopcartItem mIShopcartItem : listDish) {
                 if (mIShopcartItem.getUuid().equals(mShopcartItemBase.getUuid())) {
                     boolean isIssueStatusFinished = false;
-                    // 修改子菜打印状态
-                    List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
+                                        List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
                     if (listSetmeal != null && !listSetmeal.isEmpty()) {
                         for (ISetmealShopcartItem setmeal : listSetmeal) {
-                            //判断状态是否已出单
-                            if (isIssueStatusFinished(mIssueStatus, setmeal)) {
+                                                        if (isIssueStatusFinished(mIssueStatus, setmeal)) {
                                 isIssueStatusFinished = true;
                                 uuidIssueStatusMap.put(setmeal.getUuid(), IssueStatus.FINISHED);
                                 setmeal.setIssueStatus(IssueStatus.FINISHED);
@@ -1403,10 +1127,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
         if (Utils.isNotEmpty(listTradeItem)) {
             for (TradeItemVo item : listTradeItem) {
-                /*if (item.getTradeItem().getUuid().equals(mShopcartItemBase.getUuid())
-                        || TextUtils.equals(item.getTradeItem().getParentUuid(), mShopcartItemBase.getUuid())) {
-                    item.getTradeItem().setIssueStatus(mIssueStatus);
-                }*/
+
                 IssueStatus issueStatus = uuidIssueStatusMap.get(item.getTradeItem().getUuid());
                 if (issueStatus != null) {
                     item.getTradeItem().setIssueStatus(issueStatus);
@@ -1424,14 +1145,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 && !TextUtils.isEmpty(setmeal.getBatchNo());
     }
 
-    /**
-     * 设置整单备注
-     *
-     * @Title: setComment
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void setDinnerRemarks(String remarks) {
         setRemarks(dinnerShoppingCartVo, remarks);
         for (int key : arrayListener.keySet()) {
@@ -1440,12 +1154,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: resetSeparateDish
-     * @Description: 恢复已拆单菜品
-     * @Param @param uuid TODO
-     * @Return void 返回类型
-     */
+
     public void resetSeparateDish(String uuid) {
         List<IShopcartItem> itemList = mergeShopcartItem(dinnerShoppingCartVo);
         for (IShopcartItem shopcartItem : itemList) {
@@ -1455,16 +1164,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 break;
             }
         }
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(itemList, dinnerShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(itemList, dinnerShoppingCartVo.getmTradeVo());
     }
 
-    /**
-     * @Title: getOrderAmount
-     * @Description: 获取商品总价，除优惠和附加费
-     * @Param @return TODO
-     * @Return BigDecimal 返回类型
-     */
+
     public BigDecimal getOrderAmount() {
         BigDecimal saleAmount = dinnerShoppingCartVo.getmTradeVo().getTrade().getSaleAmount();
         List<TradePrivilege> listPrivilege = dinnerShoppingCartVo.getmTradeVo().getTradePrivileges();
@@ -1485,8 +1188,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // add 20160614 start
-        List<IShopcartItem> listShopcarItems = mergeShopcartItem(dinnerShoppingCartVo);
+                List<IShopcartItem> listShopcarItems = mergeShopcartItem(dinnerShoppingCartVo);
         if (listShopcarItems != null) {
             TradePrivilege privilege = null;
             for (IShopcartItem item : listShopcarItems) {
@@ -1498,32 +1200,20 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 }
             }
         }
-        // add 20160614 end
-        return saleAmount;
+                return saleAmount;
     }
 
-    /**
-     * @Title: setTradePeopleCount
-     * @Description: 设置订单就餐人数
-     * @Param @param count TODO
-     * @Return void 返回类型
-     */
+
     public void setTradePeopleCount(int count) {
         if (dinnerShoppingCartVo.getmTradeVo() != null && dinnerShoppingCartVo.getmTradeVo().getTrade() != null) {
             dinnerShoppingCartVo.getmTradeVo().getTrade().setTradePeopleCount(count);
         }
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
     }
 
 
-    /**
-     * @Title: isReturnCash
-     * @Description: 判断当前订单是否是反结账单
-     * @Param @return TODO
-     * @Return Boolean 返回类型
-     */
+
     public Boolean isReturnCash() {
         TradeType mTradeType = null;
         if (dinnerShoppingCartVo.getmTradeVo() != null && dinnerShoppingCartVo.getmTradeVo().getTrade() != null) {
@@ -1534,16 +1224,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
         return false;
 
-        // // 测试用
-        // return true;
-    }
+                    }
 
-    /**
-     * @Title: filterByTable
-     * @Description: 根据桌台过滤菜品
-     * @Param @param tableId TODO
-     * @Return void 返回类型
-     */
+
     public void filterByTable(String tableId) {
 
     }
@@ -1572,40 +1255,30 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         dinnerShoppingCartVo.setIndexPage(indexPage);
     }
 
-    /**
-     * @Title: createDinnerTradeVo
-     * @Description: 创建正餐订单
-     * @Param @return TODO
-     * @Return TradeVo 返回类型
-     */
+
     public TradeVo createDinnerTradeVo() {
         TradeVo mTradeVo = createOrder(dinnerShoppingCartVo, false);
 
-        // 将退回商品中得tradeItem添加到trade中
-        List<TradeItemVo> listTradeItem = mTradeVo.getTradeItemList();
+                List<TradeItemVo> listTradeItem = mTradeVo.getTradeItemList();
         Map<String, TradeItemVo> tempTradeItem = new HashMap<String, TradeItemVo>();
         for (TradeItemVo mTradeItemVo : listTradeItem) {
             tempTradeItem.put(mTradeItemVo.getTradeItem().getUuid(), mTradeItemVo);
         }
 
-        // 获取所以只读菜品
-        if (dinnerShoppingCartVo.getListIShopcatItem() != null) {
+                if (dinnerShoppingCartVo.getListIShopcatItem() != null) {
             for (IShopcartItem mIShopcartItem : dinnerShoppingCartVo.getListIShopcatItem()) {
 
-                // 将退菜理由数据信息添加到原单的tradeItem中
-                TradeItemVo mTradeItemVo = tempTradeItem.get(mIShopcartItem.getUuid());
+                                TradeItemVo mTradeItemVo = tempTradeItem.get(mIShopcartItem.getUuid());
                 if (mTradeItemVo != null && mTradeItemVo.getRejectQtyReason() != null) {
                     mTradeItemVo.setRejectQtyReason(mIShopcartItem.getReturnQtyReason());
                 }
-                // 将退回菜品生成的新只读菜品转换为tradeItemVo
-                if (tempTradeItem.get(mIShopcartItem.getUuid()) == null
+                                if (tempTradeItem.get(mIShopcartItem.getUuid()) == null
                         && mIShopcartItem instanceof ReadonlyShopcartItemBase) {
 
                     ReadonlyShopcartItemBase mReadonlyShopcartItemBase = (ReadonlyShopcartItemBase) mIShopcartItem;
                     listTradeItem.add(CreateTradeTool.buildReadOnlyTradeItemVo(mReadonlyShopcartItemBase));
 
-                    // 如果是套餐则需要将子菜对应的tradeItem也添加到tradeVo中
-                    List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
+                                        List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
                     if (listSetmeal != null) {
                         for (ISetmealShopcartItem item : listSetmeal) {
                             ReadonlyShopcartItemBase readonlySetmeal = (ReadonlyShopcartItemBase) item;
@@ -1613,8 +1286,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                                 listTradeItem.add(CreateTradeTool.buildReadOnlyTradeItemVo(readonlySetmeal));
                             }
 
-                            // 加料
-                            Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
+                                                        Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
                             if (listExtra != null) {
                                 for (ReadonlyExtraShopcartItem mReadonlyExtraShopcartItem : listExtra) {
                                     listTradeItem
@@ -1624,8 +1296,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                         }
                     }
 
-                    // 加料
-                    Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
+                                        Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
                     if (listExtra != null) {
                         for (ReadonlyExtraShopcartItem mReadonlyExtraShopcartItem : listExtra) {
                             listTradeItem.add(CreateTradeTool.buildReadOnlyTradeItemVo(mReadonlyExtraShopcartItem));
@@ -1636,30 +1307,20 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 将营销活动添加到TradePrivilege中
-        setMarktingTradePrivilege(mTradeVo);
+                setMarktingTradePrivilege(mTradeVo);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
 
         return mTradeVo;
     }
 
-    /**
-     * @Title: setDishPrivilege
-     * @Description: 设置菜品折扣
-     * @Param mIShopcartItemBase
-     * @Param mPrivilege TODO
-     * @Return void 返回类型
-     */
+
     public void setShopcartItemPrivilege(IShopcartItemBase mIShopcartItemBase, Reason reason) {
-        //礼品劵和单品优惠不共存
-        removeShopcartItemCoupon(mIShopcartItemBase);
+                removeShopcartItemCoupon(mIShopcartItemBase);
 
         BuildPrivilegeTool.buildPrivilege(mIShopcartItemBase, dinnerShoppingCartVo.getmTradeVo().getTrade().getUuid());
-        //添加理由
-        if (reason != null) {
+                if (reason != null) {
             if (mIShopcartItemBase.getDiscountReasonRel() != null) {
                 mIShopcartItemBase.getDiscountReasonRel().setReasonContent(reason.getContent());
                 mIShopcartItemBase.getDiscountReasonRel().setReasonId(reason.getId());
@@ -1672,10 +1333,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         } else {
             mIShopcartItemBase.setDiscountReasonRel(null);
         }
-        //移除宴请
-        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
-        //判断该菜是否已有tradeItem
-        List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
+                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+                List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
         if (listTradeItem != null) {
             for (TradeItemVo item : listTradeItem) {
                 if (item.getTradeItem().getUuid().equals(mIShopcartItemBase.getUuid())) {
@@ -1692,8 +1351,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).batchPrivilege(mergeShopcartItem(dinnerShoppingCartVo),
@@ -1703,12 +1361,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: removeShopcarItemPrivilege
-     * @Description: 移除菜品折扣
-     * @Param @param mIShopcartItemBase TODO
-     * @Return void 返回类型
-     */
+
     public void removeShopcarItemPrivilege(IShopcartItemBase mShopcartItem) {
         TradePrivilege mTradePrivilege = mShopcartItem.getPrivilege();
         if (mTradePrivilege == null) {
@@ -1721,8 +1374,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                     || mTradePrivilege.getPrivilegeType() == PrivilegeType.GIVE) {
                 mShopcartItem.setPrivilege(null);
                 mShopcartItem.setDiscountReasonRel(null);
-                //判断该菜是否已有tradeItem
-                List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
+                                List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
                 if (listTradeItem != null) {
                     for (TradeItemVo item : listTradeItem) {
                         if (item.getTradeItem().getUuid().equals(mShopcartItem.getUuid())) {
@@ -1746,8 +1398,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             mShopcartItem.getDiscountReasonRel().validateUpdate();
         }
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).batchPrivilege(mergeShopcartItem(dinnerShoppingCartVo),
@@ -1755,9 +1406,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 在需要处理订单金额为负时处理
-     */
+
     public void mathNegativeTrade() {
         if (dinnerShoppingCartVo.getmTradeVo().getTrade() != null && dinnerShoppingCartVo.getmTradeVo().getTrade().getTradeAmount().compareTo(BigDecimal.ZERO) < 0) {
             List<TradePrivilege> tradePrivilegeList = dinnerShoppingCartVo.getmTradeVo().getTradePrivileges();
@@ -1776,9 +1425,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * 删除整单让价
-     */
+
     public void removeTradeRebate() {
         if (getOrder() != null && Utils.isNotEmpty(getOrder().getTradePrivileges())) {
             List<TradePrivilege> privilegeList = getOrder().getTradePrivileges();
@@ -1792,8 +1439,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                     }
 
                     List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-                    // 计算订单总价格
-                    MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+                                        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
                     for (int key : arrayListener.keySet()) {
                         arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
                     }
@@ -1803,9 +1449,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 修改订单人数
-     */
+
     public void modifyCustomerCount(int customerCount) {
         TradeVo tradeVo = getOrder();
         if (tradeVo != null && tradeVo.getTrade() != null && Utils.isNotEmpty(tradeVo.getTradeTableList())) {
@@ -1816,51 +1460,35 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             tradeVo.getTrade().setTradePeopleCount(customerCount);
 
             List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-            // 计算订单总价格
-            MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+                        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
             for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
             }
         }
     }
 
-    /**
-     * 刷新菜品
-     */
+
     public void refreshDish() {
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
         }
     }
 
-    /**
-     * 编辑押金
-     */
+
     public void modifyDeposit(Double value) {
         dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setChanged(true);
         dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setUnitPrice(BigDecimal.valueOf(value));
         dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setDepositPay(BigDecimal.valueOf(value));
-        dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setType(3);        //自定义押金类型
-        List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+        dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setType(3);                List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
+                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
         }
     }
 
-    /**
-     * 清空购物车
-     *
-     * @param isNeedCallback 是否需要回调
-     * @Title: clearShoppingCart
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void clearShoppingCart(boolean isNeedCallback) {
         dinnerShoppingCartVo = new ShoppingCartVo();
         if (!isNeedCallback) {
@@ -1875,12 +1503,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         clearShoppingCart(true);
     }
 
-    /**
-     * @Date 2016/9/1
-     * @Description:获取传入购物车的 IDinnertableTrade
-     * @Param
-     * @Return
-     */
+
     public IDinnertableTrade getIDinnertableTrade() {
         DinnertableTradeInfo tradeInfo = dinnerShoppingCartVo.getDinnertableTradeInfo();
         if (tradeInfo != null) {
@@ -1892,24 +1515,17 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 重新计算包括营销活动的解绑
-     */
+
     public void onlyMath() {
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
 
         MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(),
                 allIttem, true, false);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
 
     }
 
-    /**
-     * 购物车中是否包含有效菜品
-     *
-     * @return
-     */
+
     public boolean hasValidItems() {
         List<IShopcartItem> mListOrderDishshopVo = mergeShopcartItem(dinnerShoppingCartVo);
         for (IShopcartItem shopcartItem : mListOrderDishshopVo) {
@@ -1922,27 +1538,15 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    //各种优惠计算
 
-    /**
-     * @Title: setDefineTradePrivilege
-     * @Description: 设置手动整单折扣
-     * @Param tradePrivilege
-     * @Param mReason
-     * @Param needMath 是否需要计算订单金额：默认为计算 true 计算 false 不计算
-     * @Param needListener 是否需要回调：true 需要回调 false 不需要回调
-     * @Return void 返回类型
-     */
+
 
     public void setDefineTradePrivilege(TradePrivilege tradePrivilege, Reason mReason, Boolean needMath,
                                         Boolean needListener) {
 
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
-        //移除宴请
-        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
-        // 移除优惠劵（因优惠劵与手动整单折扣不可并存）
-//        dinnerShoppingCartVo.getmTradeVo().setCouponPrivilege(null);
-        removeAllCouponPrivilege(dinnerShoppingCartVo, false);
+                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+                removeAllCouponPrivilege(dinnerShoppingCartVo, false);
         if (tradePrivilege != null) {
             if (tradePrivilege.getId() == null) {
                 tradePrivilege.setUuid(SystemUtils.genOnlyIdentifier());
@@ -1956,7 +1560,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         dinnerShoppingCartVo.getmTradeVo().replaceTradePrivilege(tradePrivilege);
 
-        // 设置免单理由
 
         if (mReason != null) {
             if (tradePrivilege.getPrivilegeType() == PrivilegeType.FREE || tradePrivilege.getPrivilegeType() == PrivilegeType.GIVE) {
@@ -1977,8 +1580,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
-        if (needMath) {
+                if (needMath) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         }
 
@@ -1991,17 +1593,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: removeOrderPrivilege
-     * @Description: 移除手动整单打折并计算
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public void removeOrderPrivilege() {
         removeOrderTreadePrivilege(dinnerShoppingCartVo.getmTradeVo());
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2017,9 +1613,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 折扣设置
-     */
+
     public void setDishPrivilege(TradePrivilege mPrivilege, Reason reason) {
         setDishPrivilege(mPrivilege, reason, null);
     }
@@ -2032,12 +1626,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
                 for (IShopcartItemBase mShopcartItemBase : mergeShopcartItem(dinnerShoppingCartVo)) {
 
-                    // 判断是否包含在选中的菜品中
 
                     if (mShopcartItemBase.getUuid().equals(uuid)) {
 
-                        //礼品劵和单品优惠不共存
-                        removeShopcartItemCoupon(mShopcartItemBase);
+                                                removeShopcartItemCoupon(mShopcartItemBase);
 
                         if (mPrivilege != null) {
 
@@ -2063,10 +1655,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
                         } else {
 
-//                            mShopcartItemBase.setPrivilege(null);
-                            //移除折扣的同时移除理由
-//                            mShopcartItemBase.setDiscountReasonRel(null);
-                            if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
+                                                        if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
                                 mShopcartItemBase.getPrivilege().setInValid();
                             }
                             if (mShopcartItemBase.getDiscountReasonRel() != null && mShopcartItemBase.getDiscountReasonRel().getId() != null) {
@@ -2082,7 +1671,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 }
 
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2104,18 +1692,15 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         if (dinnerShoppingCartVo.getDinnerListShopcartItem() != null) {
 
-            // 是你选中要打折的菜品，而我们实际需要修改的却是购物车中实际的菜品
 
             for (IShopcartItemBase mdinnerShopcartItemBase : dinnerShoppingCartVo.getDinnerListShopcartItem()) {
 
                 for (IShopcartItemBase mShopcartItemBase : mergeShopcartItem(dinnerShoppingCartVo)) {
 
-                    // 判断是否包含在选中的菜品中
 
                     if (mdinnerShopcartItemBase.getUuid().equals(mShopcartItemBase.getUuid())) {
 
-                        //礼品劵和单品优惠不共存
-                        removeShopcartItemCoupon(mShopcartItemBase);
+                                                removeShopcartItemCoupon(mShopcartItemBase);
 
                         if (mPrivilege != null) {
 
@@ -2141,10 +1726,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
                         } else {
 
-//                            mShopcartItemBase.setPrivilege(null);
-                            //移除折扣的同时移除理由
-//                            mShopcartItemBase.setDiscountReasonRel(null);
-                            if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
+                                                        if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
                                 mShopcartItemBase.getPrivilege().setInValid();
                             }
                             if (mShopcartItemBase.getDiscountReasonRel() != null && mShopcartItemBase.getDiscountReasonRel().getId() != null) {
@@ -2163,7 +1745,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2180,12 +1761,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: batchDishPrivilege
-     * @Description: 批量添加选中菜品进行折扣
-     * @Param @param listShopcartItem TODO
-     * @Return void 返回类型
-     */
+
     public void batchDishPrivilege(List<IShopcartItemBase> listShopcartItem) {
         batchDishPrivilege(listShopcartItem, true);
     }
@@ -2193,8 +1769,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     public void batchDishPrivilege(List<IShopcartItemBase> listShopcartItem, boolean isRemoveBanquet) {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
 
-        //移除宴请
-        if (isRemoveBanquet) {
+                if (isRemoveBanquet) {
             removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
         }
 
@@ -2213,8 +1788,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             for (IShopcartItem sitem : mergeShopcartItem(dinnerShoppingCartVo)) {
 
                 if (item.getUuid().equals(sitem.getUuid())) {
-                    //礼品劵和单品优惠不共存
-                    if (sitem.getCouponPrivilegeVo() != null && sitem.getCouponPrivilegeVo().getTradePrivilege() != null) {
+                                        if (sitem.getCouponPrivilegeVo() != null && sitem.getCouponPrivilegeVo().getTradePrivilege() != null) {
                         if (sitem.getCouponPrivilegeVo().getTradePrivilege().getId() != null) {
                             sitem.getCouponPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
                             sitem.getCouponPrivilegeVo().getTradePrivilege().setChanged(true);
@@ -2247,7 +1821,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2263,12 +1836,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: getDishPrivilege
-     * @Description: 获取单菜折扣比例设置信息
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public TradePrivilege getDishPrivilege() {
 
@@ -2277,12 +1845,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: removeDishPrivilege
-     * @Description: 移除菜品优惠折扣
-     * @Param @param mIshopcartItem TODO
-     * @Return void 返回类型
-     */
+
 
     public void removeDishPrivilege(IShopcartItem mIshopcartItem) {
 
@@ -2303,9 +1866,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 重新计算营销活动
-        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
-        // 计算订单总价格
+                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2321,12 +1882,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: removeAllDishPrivilege
-     * @Description: 移除所有选择菜品折扣信息
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public void removeAllSelectedPrivilege() {
 
@@ -2348,7 +1904,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2380,7 +1935,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2396,21 +1950,13 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: removeAllItemsPrivilege
-     * @Description: 移除所有菜品单品折扣信息
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public void removeAllItemsPrivilege() {
         removeAllItemsPrivilege(true, true);
     }
 
-    /**
-     * @param isNeedCallback 是否需要回调
-     * @param isRemoveSaved  是否移菜保存过的数据
-     */
+
     private void removeAllItemsPrivilege(boolean isNeedCallback, boolean isRemoveSaved) {
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         dinnerShoppingCartVo.setDishTradePrivilege(null);
@@ -2423,7 +1969,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2440,27 +1985,16 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: setCouponPrivilege
-     * @Description: 设置优惠劵价
-     * @Param mCouponPrivilegeVo
-     * @Param needMath 是否需要计算订单金额：默认为计算 true 计算 false 不计算
-     * @Param needListener 是否需要回调：true 需要回调 false 不需要回调
-     * @Return void 返回类型
-     */
+
     public void setCouponPrivilege(CouponPrivilegeVo mCouponPrivilegeVo, Boolean needMath, Boolean needListener) {
 
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
-        //移除宴请
-        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
-        // 移除手动整单折扣（因手动整单折扣与优惠劵不可并存）
-        removeOrderTreadePrivilege(dinnerShoppingCartVo.getmTradeVo());
-        //未核销过的才创建新的
-        if (!mCouponPrivilegeVo.isUsed())
+                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+                removeOrderTreadePrivilege(dinnerShoppingCartVo.getmTradeVo());
+                if (!mCouponPrivilegeVo.isUsed())
             BuildPrivilegeTool.buildCouponPrivilege(dinnerShoppingCartVo.getmTradeVo(), mCouponPrivilegeVo);
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
-        if (needMath) {
+                if (needMath) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         }
 
@@ -2473,12 +2007,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * 添加优惠劵，包括单菜的礼品劵
-     */
+
     public boolean setCoupon(CouponPrivilegeVo mCouponPrivilegeVo, Boolean needMath, Boolean needListener) {
-        //单品礼品劵
-        if (mCouponPrivilegeVo.getCoupon().getCouponType() == CouponType.GIFT
+                if (mCouponPrivilegeVo.getCoupon().getCouponType() == CouponType.GIFT
                 && mCouponPrivilegeVo.getShopcartItem() != null) {
             return setGiftCouponPrivilege(mCouponPrivilegeVo);
         } else {
@@ -2494,18 +2025,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         removeCouponPrivilege(dinnerShoppingCartVo, couponPrivilegeVo, isNeedListener);
     }
 
-    /**
-     * @Title: addWeiXinCouponsPrivilege
-     * @Description: 添加微信卡卷
-     * @Param mWeiXinCouponsInfo TODO
-     * @Return void 返回类型
-     */
+
     public void addWeiXinCouponsPrivilege(WeiXinCouponsInfo mWeiXinCouponsInfo) {
-        //移除宴请
-        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
         addWeiXinCouponsVo(dinnerShoppingCartVo.getmTradeVo(), mWeiXinCouponsInfo);
-        // 计算订单总价格
-        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+                List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
 
@@ -2515,16 +2039,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeWeiXinCouponsPrivilege
-     * @Description: 移除微信卡卷
-     * @Param mTradePrivilege TODO
-     * @Return void 返回类型
-     */
+
     public void removeWeiXinCouponsPrivilege(TradePrivilege mTradePrivilege) {
         removeWeiXinCouponsVo(dinnerShoppingCartVo.getmTradeVo(), mTradePrivilege);
-        // 计算订单总价格
-        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+                List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
 
@@ -2534,9 +2052,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除所有的微信卡劵
-     */
+
     public void removeAllWeiXinCouponsPrivilege() {
         if (dinnerShoppingCartVo.getmTradeVo().getmWeiXinCouponsVo() != null) {
             for (WeiXinCouponsVo weixinCouponsVo : dinnerShoppingCartVo.getmTradeVo().getmWeiXinCouponsVo()) {
@@ -2545,11 +2061,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除微信卡劵优惠
-     *
-     * @param promoIds
-     */
+
     public void removeWeiXinCoupons(List<Long> promoIds) {
         if (promoIds == null || promoIds.isEmpty()) {
             return;
@@ -2563,8 +2075,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 WeiXinCouponsVo couponsVo = listWX.get(i);
                 TradePrivilege tradePrivilege = couponsVo.getmTradePrivilege();
                 if (tradePrivilege != null && tradePrivilege.getPromoId() != null && tradePrivilege.getPromoId().longValue() == promoId.longValue()) {
-                    //保存过服务器
-                    if (tradePrivilege.getId() != null) {
+                                        if (tradePrivilege.getId() != null) {
                         tradePrivilege.setStatusFlag(StatusFlag.INVALID);
                         tradePrivilege.setChanged(true);
                         couponsVo.setActived(false);
@@ -2575,8 +2086,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 计算订单总价格
-        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+                List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeWeiXinCouponsPrivilege(shopcartItemList,
@@ -2585,22 +2095,13 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: setIntegralCash
-     * @Description: 设置积分抵现
-     * @Param @param mCrmCustomerLevelRights
-     * @Param @param integra TODO
-     * @Param needMath 是否需要计算订单金额：默认为计算 true 计算 false 不计算
-     * @Param needListener 是否需要回调：true 需要回调 false 不需要回调
-     * @Return void 返回类型
-     */
+
 
     public void setIntegralCash(IntegralCashPrivilegeVo mIntegralCashPrivilegeVo, Boolean needMath,
                                 Boolean needListener) {
 
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
-        //移除宴请
-        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
         if (mIntegralCashPrivilegeVo == null) {
 
             return;
@@ -2609,15 +2110,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         if (!mIntegralCashPrivilegeVo.hasRule() || mIntegralCashPrivilegeVo.getIntegral().compareTo(BigDecimal.ZERO) == 0 || mIntegralCashPrivilegeVo.isUsed()) {
 
-            //设置一个临时的IntegralCashPrivilegeVo，供登录会员后进行刷新
-            dinnerShoppingCartVo.getmTradeVo().setIntegralCashPrivilegeVo(mIntegralCashPrivilegeVo);
+                        dinnerShoppingCartVo.getmTradeVo().setIntegralCashPrivilegeVo(mIntegralCashPrivilegeVo);
         } else {
-            // 设置积分抵现优惠信息
-            BuildPrivilegeTool.buildCashPrivilege(mIntegralCashPrivilegeVo, dinnerShoppingCartVo.getmTradeVo());
+                        BuildPrivilegeTool.buildCashPrivilege(mIntegralCashPrivilegeVo, dinnerShoppingCartVo.getmTradeVo());
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
-        if (needMath) {
+                if (needMath) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         }
 
@@ -2631,9 +2129,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 更新积分
-     */
+
     public void updateIntegral(boolean needListener) {
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
@@ -2644,12 +2140,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeIntegralCash
-     * @Description: 移除会员积分抵现
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public void removeIntegralCash() {
         removeIntegralCash(true);
@@ -2667,8 +2158,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-        // 计算订单总价格
-        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+                List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
                 dinnerShoppingCartVo.getmTradeVo());
@@ -2683,15 +2173,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除押金
-     */
+
     public void removeDeposit() {
         TradeDeposit tradeDeposit = dinnerShoppingCartVo.getmTradeVo().getTradeDeposit();
         if (tradeDeposit != null) {
             tradeDeposit.setInvalid();
-            MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());//重新计算金额
-
+            MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());
             for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).removeDeposit(dinnerShoppingCartVo.getmTradeVo());
             }
@@ -2700,17 +2187,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: memberPrivilege
-     * @Description: 设置会员折扣
-     * @Param needMath 是否需要计算订单金额：默认为计算 true 计算 false 不计算
-     * @Param needListener 是否需要回调：true 需要回调 false 不需要回调
-     * @Return void 返回类型
-     */
+
 
     public void memberPrivilege(Boolean needMath, Boolean needListener) {
-        //有宴请，不能添加会员折扣
-        if (isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
+                if (isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
             return;
         }
 
@@ -2719,10 +2199,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         batchMemberPrivilege(dinnerShoppingCartVo, mCustomer, true);
         batchMemberChargePrivilege(dinnerShoppingCartVo, mCustomer);
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 重新计算营销活动
-        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
-        // 计算订单总价格
-        if (needMath) {
+                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+                if (needMath) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         }
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
@@ -2735,19 +2213,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 处理会员储值支付折扣信息
-     * @param mShoppingCartVo
-     * @param mCustomer
-     */
+
     public void batchMemberChargePrivilege(ShoppingCartVo mShoppingCartVo, CustomerResp mCustomer){
-        //设置整单的储值折扣
-        boolean checkSwitch=ServerSettingCache.getInstance().isChargePrivilegeWhenPay();
+                boolean checkSwitch=ServerSettingCache.getInstance().isChargePrivilegeWhenPay();
         boolean isTure=(!checkSwitch && mCustomer.getCustomerType().equalsValue(CustomerType.MEMBER.value())) || (checkSwitch && mCustomer.getCustomerType().equalsValue(CustomerType.PAY.value()));
-        if(isTure && mShoppingCartVo.getmTradeVo().getTradeChargePrivilege()==null){//是否储值支付是才加入储值打折优惠  false 会员登陆就需要加入，true 储值支付的时候才加入
-            TradePrivilege chargePrivilege=BuildPrivilegeTool.buildChargePrivilege(mShoppingCartVo,mCustomer);
+        if(isTure && mShoppingCartVo.getmTradeVo().getTradeChargePrivilege()==null){            TradePrivilege chargePrivilege=BuildPrivilegeTool.buildChargePrivilege(mShoppingCartVo,mCustomer);
             if(chargePrivilege!=null){
-//                setDefineTradePrivilege(chargePrivilege,null,true,true);
                 List<TradePrivilege> tradePrivileges=mShoppingCartVo.getmTradeVo().getTradePrivileges();
                 if(tradePrivileges==null){
                     mShoppingCartVo.getmTradeVo().setTradePrivileges(new ArrayList<TradePrivilege>());
@@ -2756,20 +2227,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-//        if(mShoppingCartVo.getmTradeVo().getTradeChargePrivilege()==null){//是否储值支付是才加入储值打折优惠  false 会员登陆就需要加入，true 储值支付的时候才加入
-//            mCustomer.storedFullAmount=BigDecimal.ZERO;
-//            mCustomer.storedPrivilegeType= ChargePrivilegeType.DISCOUNT.value();
-//            mCustomer.storedPrivilegeValue=new BigDecimal(8.5);
-//            TradePrivilege chargePrivilege=BuildPrivilegeTool.buildChargePrivilege(mShoppingCartVo,mCustomer);
-//            if(chargePrivilege!=null){
-//                setDefineTradePrivilege(chargePrivilege,null,true,true);
-//            }
-//        }
     }
 
-    /**
-     *
-     */
+
     public void batchMemberChargePrivilege(boolean needMath,boolean needListener){
         CustomerResp mCustomer = DinnerShopManager.getInstance().getLoginCustomer();
         batchMemberChargePrivilege(dinnerShoppingCartVo, mCustomer);
@@ -2788,23 +2248,16 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: memberPrivilege
-     * @Description: 设置菜品会员折扣
-     * @Param @param mIShopcartItemBase TODO
-     * @Return void 返回类型
-     */
+
 
     public void memberPrivilege(IShopcartItemBase mIShopcartItemBase, boolean isNeedMath, boolean isNeedListener) {
-        //如果有宴请不进行会员折扣操作
-        if (isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
+                if (isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
             return;
         }
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
         setDishMemberPrivilege(dinnerShoppingCartVo, mIShopcartItemBase, DinnerShopManager.getInstance().isSepartShopCart());
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
 
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2822,12 +2275,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: memberPrivilegeForSelected
-     * @Description: 选中的菜品设置会员折扣，批量折扣被移除时调用
-     * @Param @param mIShopcartItemBase TODO
-     * @Return void 返回类型
-     */
+
 
     public void memberPrivilegeForSelected() {
 
@@ -2841,10 +2289,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 重新计算营销活动
-        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
 
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2860,9 +2306,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 移除所有的储值优惠
-     */
+
     private void removeChargePrivilege(){
         TradePrivilege privilege=dinnerShoppingCartVo.getmTradeVo().getTradeChargePrivilege();
         if(privilege==null){
@@ -2883,7 +2327,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             return;
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,dinnerShoppingCartVo.getmTradeVo());
 
@@ -2898,18 +2341,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeMemberPrivilege
-     * @Description: 移除会员折扣
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public void removeMemberPrivilege() {
 
         for (IShopcartItemBase item : mergeShopcartItem(dinnerShoppingCartVo)) {
-            // 登出会员是，将菜品中所以得会员折扣和会员特价移除
-            if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
+                        if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
                     || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
                     || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
 
@@ -2920,9 +2357,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除会员价带计算
-     */
+
     public void removeAllMemberPrivileges() {
         removeMemberPrivilege();
         removeChargePrivilege();
@@ -2936,36 +2371,22 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @param isMarketNeedCallback 营销活动是否需要回调
-     * @Title: removeAllPrivilegeForCustomer
-     * @Description: 移除会员相关的所有优惠信息
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public void removeAllPrivilegeForCustomer(boolean isNeedMathAndCallback, boolean isMarketNeedCallback) {
 
-        // 移除会员积分抵现
-        removeIntegralCash(false);
-        // 移除优惠劵
-        removeAllCouponPrivilege(dinnerShoppingCartVo, false);
-        // 移除会员折扣
-        //移除礼品劵
-        removeAllGiftCoupon(false);
+                removeIntegralCash(false);
+                removeAllCouponPrivilege(dinnerShoppingCartVo, false);
+                        removeAllGiftCoupon(false);
         removeMemberPrivilege();
-        removeChargePrivilege();//移除储值优惠金额
-
-        // 移除营销活动
-        removeTradePlanActivity(isNeedMathAndCallback, isMarketNeedCallback);
+        removeChargePrivilege();
+                removeTradePlanActivity(isNeedMathAndCallback, isMarketNeedCallback);
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         removeAllCardServicePrivilege(shopcartItemList);
-        // 计算营销活动
-        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
         if (!isNeedMathAndCallback) {
             return;
         }
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -2981,18 +2402,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * 移除所有的次卡服务优惠
-     */
+
     private void removeAllCardServicePrivilege(List<IShopcartItem> shopcartItemList) {
         for (IShopcartItem iShopcartItem : shopcartItemList) {
             CardServiceTool.removeService(iShopcartItem);
         }
     }
 
-    /**
-     * @param isCustomer true表示移除会员相关的，false表示移除所有的
-     */
+
     public void removeTradePlanActivity(boolean isCustomer, boolean isnNeedCallback) {
         List<TradePlanActivity> tradePlanActivities = dinnerShoppingCartVo.getmTradeVo().getTradePlanActivityList();
         List<TradeItemPlanActivity> tradeItemPlanActivities =
@@ -3001,8 +2418,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             for (int i = 0; i < tradePlanActivities.size(); i++) {
                 TradePlanActivity tradePlanActivity = tradePlanActivities.get(i);
                 if (isCustomer) {
-                    // 查询是不是会员的
-                    MarketRuleVo marketRuleVo = MarketRuleCache.getMarketDishVoByRule(tradePlanActivity.getRuleId());
+                                        MarketRuleVo marketRuleVo = MarketRuleCache.getMarketDishVoByRule(tradePlanActivity.getRuleId());
                     if (marketRuleVo != null && Utils.isNotEmpty(marketRuleVo.getUserTypes())
                             && marketRuleVo.getUserTypes().size() == 1
                             && marketRuleVo.getUserTypes().contains(UserType.MEMBER)) {
@@ -3012,8 +2428,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                                 true);
                     }
                 } else {
-                    // 挨个移除
-                    MathManualMarketTool.unBindTradePlanByTradePlanUuid(tradePlanActivities,
+                                        MathManualMarketTool.unBindTradePlanByTradePlanUuid(tradePlanActivities,
                             tradeItemPlanActivities,
                             tradePlanActivity.getUuid(),
                             true);
@@ -3027,12 +2442,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @param
-     * @Title: addExtraCharge
-     * @Description: 添加服务费
-     * @Return void 返回类型
-     */
+
 
     public void addExtraCharge(List<ExtraCharge> listExtraCharge, Boolean needMath, Boolean needListener) {
 
@@ -3058,8 +2468,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
         dinnerShoppingCartVo.getmTradeVo().setExtraChargeMap(extraChargeMap);
 
-        // 计算订单总价格
-        if (needMath) {
+                if (needMath) {
             MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                     dinnerShoppingCartVo.getmTradeVo());
         }
@@ -3074,12 +2483,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @param id TODO 附件费ID
-     * @Title: removeExtraCharge
-     * @Description: 根据附加费id移除附加费
-     * @Return void 返回类型
-     */
+
 
     public void removeExtraCharge(Long id) {
         if (dinnerShoppingCartVo.getmTradeVo().getExtraChargeMap() == null) {
@@ -3088,7 +2492,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         dinnerShoppingCartVo.getmTradeVo().getExtraChargeMap().remove(id);
         removeTradePrivilege(PrivilegeType.ADDITIONAL, dinnerShoppingCartVo.getmTradeVo());
 
-        // 计算订单总价格
 
         MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
 
@@ -3104,8 +2507,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     public void removeMinconsumExtra() {
         dinnerShoppingCartVo.getmTradeVo().setEnableMinConsum(false);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
 
                 dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
@@ -3116,11 +2518,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除超时费
-     *
-     * @param uuid
-     */
+
     public void removeOutTimePrivilege(String uuid) {
         removeOuttimeCharge(uuid, dinnerShoppingCartVo.getmTradeVo());
 
@@ -3132,13 +2530,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: checkIsHaveWXC
-     * @Description: 验证微信卡卷是否已存在
-     * @Param code
-     * @Param @return TODO true:已存在，false:未存在
-     * @Return Boolean 返回类型
-     */
+
     public Boolean checkIsHaveWXC(String code) {
         code = getNewWxCode(code);
         List<WeiXinCouponsVo> listWX = dinnerShoppingCartVo.getmTradeVo().getmWeiXinCouponsVo();
@@ -3154,14 +2546,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return false;
     }
 
-    /**
-     * @Title: addMarketActivity
-     * @Description: 添加活动规则到单据中
-     * @Param @param marketDishVo 活动规则相关的vo
-     * @Param @param selectedItemList 这次活动选择的商品
-     * @Param @return TODO
-     * @Return boolean 返回类型 true:添加生效，false：添加失败
-     */
+
     public boolean addMarketActivity(MarketRuleVo marketDishVo, List<IShopcartItem> selectedItemList) {
 
         if (!MathManualMarketTool.isCanAddMarket(selectedItemList,
@@ -3170,17 +2555,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 true)) {
             return false;
         }
-        //移除宴请
-        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
-        //如果选择的菜品有礼品券优惠移除
-        removeGiftInMarkertActivity(selectedItemList);
+                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+                removeGiftInMarkertActivity(selectedItemList);
         MathManualMarketTool.mathManualAddMarket(selectedItemList,
                 dinnerShoppingCartVo.getmTradeVo(),
                 marketDishVo,
                 true);
 
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).addMarketActivity(dinnerShoppingCartVo.getmTradeVo());
@@ -3188,12 +2570,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return true;
     }
 
-    /**
-     * @Title: removeGiftInMarkertActivity
-     * @Description: 删除掉已经参与营销活动商品的礼品券优惠
-     * @Param @param List<IShopcartItem> selectedItemList已选择的营销活动菜品
-     * @Return void 返回类型
-     */
+
     public void removeGiftInMarkertActivity(List<IShopcartItem> selectedItemList) {
         for (IShopcartItem item : mergeShopcartItem(dinnerShoppingCartVo)) {
             for (IShopcartItem selectItem : selectedItemList) {
@@ -3205,12 +2582,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: removeMarketActivity
-     * @Description: 删除单据中的活动
-     * @Param @param tradePlanUuid tradePlanActivity表的uuid
-     * @Return void 返回类型
-     */
+
     public void removeMarketActivity(String tradePlanUuid) {
         TradeVo mTradeVo = dinnerShoppingCartVo.getmTradeVo();
         MathManualMarketTool.unBindTradePlanByTradePlanUuid(mTradeVo.getTradePlanActivityList(),
@@ -3219,8 +2591,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 true);
         CustomerResp customer = DinnerShopManager.getInstance().getLoginCustomer();
         batchMemberPrivilege(dinnerShoppingCartVo, customer, true);
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -3228,13 +2599,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * @Title: doDishActivityIsCheck
-     * @Description: 选择活动后，组装菜品是否可选
-     * @Param @param unItemList 未参加活动的菜品
-     * @Param @param ruleVo TODO选择的活动
-     * @Return void 返回类型
-     */
+
     public void doDishActivityIsCheck(List<DishDataItem> unItemList, MarketRuleVo ruleVo) {
         if (unItemList == null || unItemList.isEmpty() || ruleVo == null) {
             return;
@@ -3248,9 +2613,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 宴请
-     */
+
     public void doBanquet(Reason reason) {
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         removePrivilegeNotBanquet(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
@@ -3267,30 +2630,21 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除宴请外的优惠
-     */
+
     public void removePrivilegeNotBanquet(List<IShopcartItem> shopcartItemList, TradeVo mTradeVo) {
-        // 移除会员积分抵现
-        removeIntegralCash();
-        // 移除优惠劵
-        removeAllCouponPrivilege(dinnerShoppingCartVo, false);
-        // 移除会员折扣
+                removeIntegralCash();
+                removeAllCouponPrivilege(dinnerShoppingCartVo, false);
 
         removeMemberPrivilege();
         removeAllItemsPrivilege();
         removeOrderPrivilege();
         removeAllWeixinCoupon(mTradeVo);
 
-        // 移除营销活动
-        MathManualMarketTool.removeAllActivity(mTradeVo);
-        // 计算营销活动
-        MathManualMarketTool.mathMarketPlan(mTradeVo, shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+                MathManualMarketTool.removeAllActivity(mTradeVo);
+                MathManualMarketTool.mathMarketPlan(mTradeVo, shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
     }
 
-    /**
-     * 移除宴请
-     */
+
     public void removeBanquet() {
         removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
         MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());
@@ -3299,14 +2653,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 清空结算界面中所有选中的数据
-     *
-     * @Title: removeAllDinnerListItems
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public void removeAllDinnerListItems() {
 
@@ -3314,13 +2661,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     }
 
-    /**
-     * @Title: getPlanUsageCountById
-     * @Description: 根据规则id获取在订单中营销活动使用次数
-     * @Param @param ruleId
-     * @Param @return TODO
-     * @Return int 返回类型
-     */
+
     public int getPlanUsageCountById(Long ruleId) {
         int count = 0;
         List<TradePlanActivity> listPlan = dinnerShoppingCartVo.getmTradeVo().getTradePlanActivityList();
@@ -3336,13 +2677,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return count;
     }
 
-    /***
 
-     * @Title: setTradeActivity
-     * @Description: 将原单活动添加到拆单购物车
-     * @Param @param tradePlanList TODO
-     * @Return void 返回类型
-     */
     public void setTradeActivity(List<TradePlanActivity> tradePlanList, List<TradeItemPlanActivity> tradeItemPlanList) {
         TradeVo tradeVo = dinnerShoppingCartVo.getmTradeVo();
         if (tradePlanList != null) {
@@ -3353,12 +2688,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 判断订单中是否包含此类优惠类型
-     *
-     * @param mPrivilegeType
-     * @return true:包含 false:不包含
-     */
+
     public boolean havePrivilegeByType(PrivilegeType mPrivilegeType) {
         List<TradePrivilege> listTP = dinnerShoppingCartVo.getmTradeVo().getTradePrivileges();
         if (listTP == null) {
@@ -3373,12 +2703,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * @Title: setGiftCouponPrivilege
-     * @Description: 礼品优惠劵
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
 
     public boolean setGiftCouponPrivilege(CouponPrivilegeVo mCouponPrivilegeVo) {
 
@@ -3388,8 +2713,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
         boolean marketFlag = false;
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-        //判断些菜是否已经参加营销活动
-        List<TradeItemPlanActivity> tradeItemPlanActivityList = dinnerShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList();
+                List<TradeItemPlanActivity> tradeItemPlanActivityList = dinnerShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList();
         if (tradeItemPlanActivityList != null && tradeItemPlanActivityList.size() > 0) {
             for (IShopcartItem item : shopcartItemList) {
                 for (TradeItemPlanActivity tradeItemPlanActivity : tradeItemPlanActivityList) {
@@ -3407,11 +2731,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
         IShopcartItem value = null;
-        if (!marketFlag) {//如果没有参加营销活动
-            //判断是否已经包含礼品券,礼品劵生效的条件是和菜品数量一致
-            for (IShopcartItem item : shopcartItemList) {
-                //过滤掉无效的菜品
-                if (item.getStatusFlag() == StatusFlag.INVALID || item.getDishShop() == null
+        if (!marketFlag) {                        for (IShopcartItem item : shopcartItemList) {
+                                if (item.getStatusFlag() == StatusFlag.INVALID || item.getDishShop() == null
                         || tempItem.getDishShop() == null) {
                     continue;
                 }
@@ -3425,8 +2746,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 }
             }
 
-            //如果value为null,将当前shopItem加入购物车(使用礼品券，如果购物车有商品符合，直接给该商品加入优惠，否则将商品加入购物车)
-            if(value==null){
+                        if(value==null){
                 addDishToShoppingCart(tempItem,true);
                 shopcartItemList.add(tempItem);
                 value=tempItem;
@@ -3456,8 +2776,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 value.setPrivilege(null);
             }
         }
-        // 计算订单总价格
-        MathShoppingCartTool.mathTotalPrice(shopcartItemList,
+                MathShoppingCartTool.mathTotalPrice(shopcartItemList,
                 dinnerShoppingCartVo.getmTradeVo());
 
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
@@ -3468,9 +2787,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * 移除所有的礼品劵
-     */
+
     public void removeAllGiftCoupon(boolean isNeedListener) {
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         for (IShopcartItem shopcartItem : shopcartItemList) {
@@ -3493,9 +2810,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除所有无效的礼品劵
-     */
+
     public void removeAllInValidGiftCoupon(boolean isNeedListener) {
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         for (IShopcartItem shopcartItem : shopcartItemList) {
@@ -3520,9 +2835,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除所有未激活的微信卡劵
-     */
+
     public void removeAllInUnActiveWeixinCode(boolean isNeedListener) {
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         List<WeiXinCouponsVo> weiXinCouponsVoList = getShoppingCartVo().getmTradeVo().getmWeiXinCouponsVo();
@@ -3541,11 +2854,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 更新tradevo和shopcartItem的关系
-     *
-     * @return
-     */
+
     public TradeVo createOrder() {
         TradeVo tradeVo = createOrder(dinnerShoppingCartVo, false);
         CreateTradeTool.updateTradeItemPrivilgeOfRelate(tradeVo, mergeShopcartItem(dinnerShoppingCartVo));
@@ -3555,13 +2864,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * \
-     * 移除shopcarteItem中的礼品劵
-     */
+
     public void removeShopcartItemCoupon(IShopcartItemBase mShopcartItemBase) {
-        //礼品劵和单品优惠不共存
-        if (mShopcartItemBase.getCouponPrivilegeVo() != null && mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege() != null) {
+                if (mShopcartItemBase.getCouponPrivilegeVo() != null && mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege() != null) {
             if (mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().getId() != null) {
                 mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
                 mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().setChanged(true);
@@ -3571,13 +2876,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 更新异步开台信息
-     *
-     * @param trade
-     * @param mTradeTable
-     * @param tradeExtra
-     */
+
     public void updateAsyncOpenTableInfo(Trade trade, TradeTable mTradeTable, TradeExtra tradeExtra, List<TradeInitConfig> tradeInitConfigs, List<TradeTax> tradeTaxs) {
         Long tradeId = trade.getId();
         String tradeUuid = trade.getUuid();
@@ -3585,12 +2884,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         if (tradeVo == null || tradeId == null || mTradeTable == null) {
             return;
         }
-        //更新trade
-        tradeVo.getTrade().setId(tradeId);
+                tradeVo.getTrade().setId(tradeId);
         tradeVo.getTrade().setServerCreateTime(trade.getServerCreateTime());
         tradeVo.getTrade().setServerUpdateTime(trade.getServerUpdateTime());
         tradeVo.getTrade().setTradeNo(trade.getTradeNo());
-//        tradeVo.getTrade().setTradeTime(trade.getTradeTime());
 
         List<TradeTable> tradeTableList = tradeVo.getTradeTableList();
         if (Utils.isNotEmpty(tradeTableList)) {
@@ -3688,17 +2985,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 tradeTax.setTradeId(tradeId);
             }
         }
-        //异步更新付加费 v8.15 修复bug
-        if (Utils.isNotEmpty(tradeInitConfigs)) {
+                if (Utils.isNotEmpty(tradeInitConfigs)) {
             tradeVo.setTradeInitConfigs(tradeInitConfigs);
         }
-        //异步更新消费税 v8.15 修复bug
-        if (Utils.isNotEmpty(tradeTaxs)) {
+                if (Utils.isNotEmpty(tradeTaxs)) {
             tradeVo.setTradeTaxs(tradeTaxs);
         }
 
-        //刷新DinnertableTradeInfo
-        if (dinnerShoppingCartVo != null && dinnerShoppingCartVo.getDinnertableTradeInfo() != null
+                if (dinnerShoppingCartVo != null && dinnerShoppingCartVo.getDinnertableTradeInfo() != null
                 && dinnerShoppingCartVo.getDinnertableTradeInfo().getiDinnertableTrade() != null
                 && dinnerShoppingCartVo.getDinnertableTradeInfo().getiDinnertableTrade().getDinnertable() != null) {
             IDinnertable dinnertable = dinnerShoppingCartVo.getDinnertableTradeInfo().getiDinnertableTrade().getDinnertable();
@@ -3710,11 +3004,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 当前订单是否支付中
-     *
-     * @return
-     */
+
     public boolean isPaying() {
         if (getOrder() != null && getOrder().getTrade() != null) {
             TradePayStatus tradePayStatus = getOrder().getTrade().getTradePayStatus();
@@ -3724,24 +3014,13 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    /**
-     * 将菜单和开台数据带入购物车
-     *
-     * @param dishMenuVo 模板可能为null
-     */
+
     public void addMenuToShopcart(DishMenuVo dishMenuVo, TradeVo tradeVo) {
         updateTradeVoNoTradeInfo(tradeVo);
         GroupShoppingCartTool.addMenuToShopcart(dishMenuVo, this);
     }
 
-    /**
-     * 团餐开台
-     *
-     * @param dishMenuVo    模板可能为null
-     * @param tableList     选中的桌台
-     * @param tradeCustomer 顾客信息
-     * @param groupInfo     团餐信息
-     */
+
     public void openGroupTable(DishMenuVo dishMenuVo, List<Tables> tableList, TradeCustomer tradeCustomer, TradeGroupInfo groupInfo) {
         if (dishMenuVo == null || tableList == null) {
             return;
@@ -3749,8 +3028,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
         setDinnerBusinessType(BusinessType.GROUP);
         setDinnerOrderType(DeliveryType.HERE);
-        //设置餐标外壳
-        MealShellVo mealHullVo = new MealShellVo();
+                MealShellVo mealHullVo = new MealShellVo();
         BigDecimal count = new BigDecimal(tableList.size());
         mealHullVo.buildHell(dishMenuVo, count);
         mealHullVo.setTradeRelate(dinnerShoppingCartVo.getmTradeVo().getTrade());
@@ -3783,20 +3061,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());
     }
 
-    /**
-     * 设置前一次的桌台数
-     */
+
     public void setOldDeskCount() {
         dinnerShoppingCartVo.getmTradeVo().setOldDeskCount(dinnerShoppingCartVo.getmTradeVo().getDeskCount());
     }
 
-    /**
-     * 团餐修改桌台时构建数据
-     *
-     * @param dishMenuVo
-     * @param tablesList
-     * @param groupInfo
-     */
+
     public void modifyGroup(DishMenuVo dishMenuVo, List<Tables> tablesList, TradeCustomer tradeCustomer, TradeGroupInfo groupInfo) {
         modifyTables(tablesList);
         MealShellVo mealShellVo = dinnerShoppingCartVo.getmTradeVo().getMealShellVo();
@@ -3806,25 +3076,19 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             tradeCustomer.setTradeUuid(dinnerShoppingCartVo.getmTradeVo().getTrade().getUuid());
             dinnerShoppingCartVo.getmTradeVo().getTradeCustomerList().add(tradeCustomer);
         }
-        //改tradeItem数量
-        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());
+                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());
         TradeVo tradeVo = createOrder(dinnerShoppingCartVo, false);
         CreateTradeTool.updateTradeItemPrivilgeOfRelate(tradeVo, mergeShopcartItem(dinnerShoppingCartVo));
     }
 
-    /**
-     * 修改桌台
-     *
-     * @param tableList
-     */
+
     public void modifyTables(List<Tables> tableList) {
         List<TradeTable> oldTables = dinnerShoppingCartVo.getmTradeVo().getTradeTableList();
         if (Utils.isEmpty(oldTables)) {
             buildTradeTables(tableList);
         }
         Map<Long, Tables> newTableMap = new HashMap<>();
-        //为了不影响原来的list 外层有应用
-        List<Tables> newTablesList = new ArrayList<>();
+                List<Tables> newTablesList = new ArrayList<>();
         for (Tables tables : tableList) {
             newTableMap.put(tables.getId(), tables);
             newTablesList.add(tables);
@@ -3848,12 +3112,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         dinnerShoppingCartVo.getmTradeVo().getTradeTableList().addAll(newTradeTableList);
     }
 
-    /**
-     * 通过桌台构建tradeTable
-     *
-     * @param tableList
-     * @return
-     */
+
     private List<TradeTable> buildTradeTables(List<Tables> tableList) {
 
         List<TradeTable> tradeTableList = new ArrayList<TradeTable>();
@@ -3884,12 +3143,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return tradeTable;
     }
 
-    /**
-     * 是否是自助餐模式下的菜品
-     *
-     * @param iShopcartItemBase
-     * @return
-     */
+
     public boolean isBuffetDish(IShopcartItemBase iShopcartItemBase) {
         if (getOrder() != null && getOrder().getMealShellVo() != null) {
             MealShellVo mealShellVo = getOrder().getMealShellVo();
@@ -3922,24 +3176,20 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return dinnerShoppingCartVo.getInventoryVo();
     }
 
-    //获取销售员add v8.1
-    public TradeUser getTradeUser() {
+        public TradeUser getTradeUser() {
         if (this.dinnerShoppingCartVo != null) {
             return dinnerShoppingCartVo.getTradeUser();
         }
         return null;
     }
 
-    // 添加销售员add v8.1
-    public void setTradeUser(TradeUser tradeUser) {
+        public void setTradeUser(TradeUser tradeUser) {
         if (this.dinnerShoppingCartVo != null) {
             this.dinnerShoppingCartVo.setTradeUser(tradeUser);
         }
     }
 
-    /**
-     * 移除tradeVo中的所有优惠
-     */
+
     public void removeAllTradeVoPrivileges() {
         removeAllPrivilegeForCustomer(false, true);
         removeOrderTreadePrivilege(dinnerShoppingCartVo.getmTradeVo());
@@ -3949,9 +3199,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         removeAllItemsPrivilege();
     }
 
-    /**
-     * 移出针对联台主单中的所有优惠
-     */
+
     public void removeAllUnionTradeVoPrivileges() {
         removeAllPrivilegeForCustomer(false, true);
         removeOrderTreadePrivilege(dinnerShoppingCartVo.getmTradeVo());
@@ -3962,37 +3210,27 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         removeAllItemsPrivilege(false, false);
     }
 
-    /**
-     * 移除所有的附加费
-     */
+
     private void removeAllExtrages() {
         if (dinnerShoppingCartVo.getmTradeVo().getExtraChargeMap() != null)
             dinnerShoppingCartVo.getmTradeVo().getExtraChargeMap().clear();
         removeTradePrivilege(PrivilegeType.ADDITIONAL, dinnerShoppingCartVo.getmTradeVo());
     }
 
-    /**
-     * 更新技师、用户信息等改变
-     */
+
     public void updateUserInfo() {
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateUserInfo();
         }
     }
 
-    /**
-     * 添加次卡服务
-     *
-     * @param dishShop
-     */
+
     public void addCardService(DishShop dishShop, Long serverRecordId) {
         ShopcartItem shopcartItem = CardServiceTool.createCardService(getOrder().getTrade(), dishShop, serverRecordId);
         addDishToShoppingCart(shopcartItem, false);
     }
 
-    /**
-     * 移除所有的菜品
-     */
+
     public void removeAllDishs() {
         for (IShopcartItem shopcartItem : mergeShopcartItem(dinnerShoppingCartVo)) {
             if (shopcartItem.getId() != null) {
@@ -4007,9 +3245,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
     }
 
-    /**
-     * 移除所有的tradeUser
-     */
+
     public void removeAllTradeUser() {
         List<TradeUser> tradeUserList = dinnerShoppingCartVo.getmTradeVo().getTradeUsers();
         if (Utils.isEmpty(tradeUserList)) {

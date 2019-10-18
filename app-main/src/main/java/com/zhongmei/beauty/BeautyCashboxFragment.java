@@ -37,29 +37,7 @@ public class BeautyCashboxFragment extends Fragment {
 
     @AfterViews
     void init() {
-        // 从数据库取得所有的打印机列表信息
-        /*try {
-            PrintSettingDal dal = OperatesFactory.create(PrintSettingDal.class);
-            printerInfo = dal.listPrinter(PrinterKind.RECEIPT);
-            Collections.sort(printerInfo, new PrinterComparator());
-            CashBoxPrinterListAdapter listAdapter = new CashBoxPrinterListAdapter(getActivity(), printerInfo);
-            listAdapter.setSelectPrinter(SpHelper.getDefault().getString(SpHelper.SETTING_MONEY_BOX_IP));
-            if (printerInfo != null && printerInfo.size() > 0) {
-                listAdapter.setPositionListener(new PositionListener() {
 
-                    @Override
-                    public void itemClick(PrinterDevice printer) {
-                        choosePrinter = printer;
-                        SpHelper.getDefault().putString(SpHelper.SETTING_MONEY_BOX_IP, printer.getAddress());
-                        tv_choose_Name.setText(printer.getDeviceName() + "(" + printer.getAddress() + ")");
-                    }
-
-                });
-                listAdapter.initView(devicesList);
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "", e);
-        }*/
     }
 
     @Click({R.id.btn_test_cashbox})

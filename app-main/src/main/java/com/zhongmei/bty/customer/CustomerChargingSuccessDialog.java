@@ -22,11 +22,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * 充值成功的dialog
- *
- * @date 2017/4/12 14:46
- */
+
 @EFragment(R.layout.customer_charging_success_dialog)
 public class CustomerChargingSuccessDialog extends BasicDialogFragment implements OnKeyListener {
 

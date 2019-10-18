@@ -32,34 +32,18 @@ import com.zhongmei.bty.basemodule.pay.bean.ElectronicInvoiceVo;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class InvoicePopupHelper {
 
-    //--------------------------电子发票/开票项目的PopupWindow---------------------------------------
 
-    /**
-     * 电子发票弹出层的数据回调接口
-     */
+
     public interface OnSelectedListener {
-        /**
-         * 当某一个电子发票税率(开票项目)被选择时调用
-         *
-         * @param invoiceTaxRate {@link InvoiceTaxRate}
-         */
+
         void onSelected(InvoiceTaxRate invoiceTaxRate);
     }
 
-    /**
-     * 弹出电子发票的PopupWindow
-     *
-     * @param context            上下文Context
-     * @param invoice            {@link Invoice}
-     * @param anchorView         弹出层的"锚",即参照视图
-     * @param onSelectedListener 回调接口 {@link OnSelectedListener}
-     */
+
     public static void showInvoiceItems(final Context context,
                                         final Invoice invoice,
                                         View anchorView,
@@ -75,8 +59,6 @@ public class InvoicePopupHelper {
         listView.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT));
         listView.setPadding(10, 10, 10, 10);
-//        listView.setBackgroundResource(R.drawable.ic_invoice_popup_bg);
-//        listView.setBackground(context.getResources().getDrawable(R.drawable.ic_invoice_popup_bg));
         listView.setDivider(new ColorDrawable(Color.parseColor("#DBE0E6")));
         listView.setDividerHeight(1);
         listView.setFadingEdgeLength(0);
@@ -156,19 +138,11 @@ public class InvoicePopupHelper {
                 0);
     }
 
-    //--------------------------支付Item的PopupWindow---------------------------------------
-    public interface OnPaymentItemCallback {
+        public interface OnPaymentItemCallback {
         boolean onDelete(PaymentItem paymentItem);
     }
 
-    /**
-     * 弹出单次收银的支付次数列表(注:在收银的业务里，可以把每一次收银分多次分别支付)
-     *
-     * @param context               上下文
-     * @param paymentItems          每一次支付的列表
-     * @param anchorView            弹出层的“锚”，即参照视图
-     * @param onPaymentItemCallback 弹出层的回调接口 {@link OnPaymentItemCallback}
-     */
+
 
     public static void showPaymentItemList(final Context context, final IPaymentInfo paymentInfo, List<PaymentItem> paymentItems,
                                            View anchorView,
@@ -227,15 +201,13 @@ public class InvoicePopupHelper {
                 final PaymentItem paymentItem = (PaymentItem) getItem(position);
                 if (paymentItem != null) {
                     String modeName = paymentItem.getPayModeName();
-                    //显示押金标识
-                    if (paymentInfo.getTradeBusinessType() == BusinessType.BUFFET && paymentInfo.getTradeVo().getTradeDepositPaymentItem() != null) {
+                                        if (paymentInfo.getTradeBusinessType() == BusinessType.BUFFET && paymentInfo.getTradeVo().getTradeDepositPaymentItem() != null) {
                         if (paymentItem.equals(paymentInfo.getTradeVo().getTradeDepositPaymentItem())) {
                             modeName = modeName + "(" + context.getString(R.string.pay_deposit_text) + ")";
                         }
                     }
                     viewHolder.nameTxv.setText(modeName + " " + ShopInfoCfg.formatCurrencySymbol(" " + paymentItem.getUsefulAmount()));
-                    //闪惠和美团券要显示优惠金额
-                    if (PayModeId.MEITUAN_FASTPAY.value().equals(paymentItem.getPayModeId())) {
+                                        if (PayModeId.MEITUAN_FASTPAY.value().equals(paymentItem.getPayModeId())) {
                         double youhuiAmount = paymentItem.getUsefulAmount().subtract(paymentItem.getFaceAmount()).doubleValue();
                         StringBuilder stringBuild = new StringBuilder();
                         stringBuild.append(context.getString(R.string.pay_paid_privilege));
@@ -250,8 +222,7 @@ public class InvoicePopupHelper {
                         public void onClick(View v) {
                             if (onPaymentItemCallback != null) {
                                 if (onPaymentItemCallback.onDelete(paymentItem)) {
-                                   /* innerPaymentItems.remove(paymentItem);
-                                    notifyDataSetChanged();*/
+
                                     if (innerPaymentItems.isEmpty()) {
                                         popupWindow.dismiss();
                                     }

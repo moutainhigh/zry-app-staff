@@ -49,9 +49,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * 菜品批次设置
- */
+
 public class DinnerDishSequenceFragment extends BasicFragment implements View.OnClickListener {
 
     public interface DishSequenceCallback {
@@ -64,12 +62,7 @@ public class DinnerDishSequenceFragment extends BasicFragment implements View.On
     DinnerShoppingCart mShoppingCart;
     DishSequenceCallback dishSequenceCallback;
 
-    /*public static DinnerDishSequenceFragment show(FragmentActivity fragmentActivity, DishSequenceCallback callback) {
-        DinnerDishSequenceFragment fragment = new DinnerDishSequenceFragment();
-        fragment.setDishSequenceCallback(callback);
-        fragment.show(fragmentActivity.getSupportFragmentManager(), "DinnerDishSequenceFragment");
-        return fragment;
-    }*/
+
 
     public static DinnerDishSequenceFragment show(FragmentManager fragmentManager, @IdRes int containerViewId,
                                                   DinnerShoppingCart dinnerShoppingCart, DishSequenceCallback callback) {
@@ -99,9 +92,7 @@ public class DinnerDishSequenceFragment extends BasicFragment implements View.On
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        //getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        slideListView = findViewById(R.id.dish_sequence_lv);
+                        slideListView = findViewById(R.id.dish_sequence_lv);
         dish_item_total = findViewById(R.id.dish_item_total);
         findViewById(R.id.dish_sequence_btn_ok).setOnClickListener(this);
         findViewById(R.id.dish_sequence_btn_cancel).setOnClickListener(this);
@@ -191,15 +182,13 @@ public class DinnerDishSequenceFragment extends BasicFragment implements View.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.dish_sequence_btn_ok:
-                //dismiss();
-                getFragmentManager().popBackStackImmediate();
+                                getFragmentManager().popBackStackImmediate();
                 if (dishSequenceCallback != null) {
                     dishSequenceCallback.onDishSequence(dishSequenceAdapter.getData());
                 }
                 break;
             case R.id.dish_sequence_btn_cancel:
-                //dismiss();
-                getFragmentManager().beginTransaction().remove(this).commitNow();
+                                getFragmentManager().beginTransaction().remove(this).commitNow();
                 break;
         }
     }
@@ -207,8 +196,7 @@ public class DinnerDishSequenceFragment extends BasicFragment implements View.On
     static class DishSequenceBean {
         static final int SequenceTypeGroup = 1;
         static final int SequenceTypeChild = 0;
-        int sequenceType; //0内容，1标题
-        IShopcartItemBase shopcartItem;
+        int sequenceType;         IShopcartItemBase shopcartItem;
         int sort;
         boolean isChecked;
 
@@ -260,8 +248,7 @@ public class DinnerDishSequenceFragment extends BasicFragment implements View.On
                 ShopcartItemBase item = (ShopcartItemBase) shopcartItem;
                 List<OrderProperty> orderProperties = item.getProperties();
                 if (orderProperties != null && orderProperties.size() > 0) {
-                    //return orderProperties.get(0).getPropertyName();
-                    StringBuffer buffer = new StringBuffer();
+                                        StringBuffer buffer = new StringBuffer();
                     for (Iterator<OrderProperty> it = orderProperties.iterator(); it.hasNext(); ) {
                         OrderProperty dishShop = it.next();
                         if (dishShop.getProperty().getPropertyKind() == propertyKind) {
@@ -278,8 +265,7 @@ public class DinnerDishSequenceFragment extends BasicFragment implements View.On
                 ReadonlyShopcartItemBase readonlyShopcartItem = (ReadonlyShopcartItemBase) shopcartItem;
                 List<ReadonlyOrderProperty> orderPropertyList = readonlyShopcartItem.getProperties();
                 if (orderPropertyList != null && orderPropertyList.size() > 0) {
-                    //return orderPropertyList.get(0).tradeItemProperty.getPropertyName();
-                    StringBuffer buffer = new StringBuffer();
+                                        StringBuffer buffer = new StringBuffer();
                     for (Iterator<ReadonlyOrderProperty> it = orderPropertyList.iterator(); it.hasNext(); ) {
                         ReadonlyOrderProperty orderProperty = it.next();
                         if (orderProperty.getPropertyKind() == propertyKind) {
@@ -484,15 +470,7 @@ public class DinnerDishSequenceFragment extends BasicFragment implements View.On
             dish_ingredient_name_tv.setVisibility(TextUtils.isEmpty(item.getIngredientsName()) ? View.GONE : View.VISIBLE);
             dish_memo_name_tv.setText(getStringRes(R.string.remark_str, item.getMemoName()));
             dish_memo_name_tv.setVisibility(TextUtils.isEmpty(item.getMemoName()) ? View.GONE : View.VISIBLE);
-            /*dish_name_cb.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    item.isChecked = dish_name_cb.isChecked();
-                    if (itemCheckListener != null) {
-                        itemCheckListener.onItemCheck(v, dish_name_cb.isChecked());
-                    }
-                }
-            });*/
+
             convertView.setEnabled(item.isCheckEnabled());
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -14,88 +14,55 @@ import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 
-/**
- * PaymentItem is a ORMLite bean type. Corresponds to the
- * database table "payment_item"
- */
+
 @DatabaseTable(tableName = "payment_item")
 public class PaymentItem extends DataEntityBase implements ICreator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "payment_item"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * change_amount
-         */
+
         public static final String changeAmount = "change_amount";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * face_amount
-         */
+
         public static final String faceAmount = "face_amount";
 
-        /**
-         * payment_id
-         */
+
         public static final String paymentId = "payment_id";
 
-        /**
-         * payment_uuid
-         */
+
         public static final String paymentUuid = "payment_uuid";
 
-        /**
-         * pay_memo
-         */
+
         public static final String payMemo = "pay_memo";
 
-        /**
-         * pay_mode_id
-         */
+
         public static final String payModeId = "pay_mode_id";
 
-        /**
-         * pay_model_group
-         */
+
         public static final String payModelGroup = "pay_model_group";
 
-        /**
-         * pay_mode_name
-         */
+
         public static final String payModeName = "pay_mode_name";
 
-        /**
-         * pay_status
-         */
+
         public static final String payStatus = "pay_status";
 
-        /**
-         * relate_id
-         */
+
         public static final String relateId = "relate_id";
 
-        /**
-         * useful_amount
-         */
+
         public static final String usefulAmount = "useful_amount";
 
-        /**
-         * pay_source
-         */
+
         public static final String paySource = "pay_source";
 
         public static final String quantity = "quantity";
@@ -152,18 +119,12 @@ public class PaymentItem extends DataEntityBase implements ICreator {
 
     private PaymentItemExtra paymentItemExtra;
 
-    private PaymentItemUnionCardReq paymentItemUnionPay;//add 20161129 for pos cards
-
-    private PaymentItemGroupon paymentItemGroupon;//美团券信息 add 20160926
-
-    private String authCode;//付款码，支付上行数据
-
-    private String consumePassword;//会员付款密码
-
-    private Integer type;//add 20170612 for customer password type
-
-    private Integer isDeposit;//add 20170706 for deposit 1 支付押金 2不是支付押金  默认2
-
+    private PaymentItemUnionCardReq paymentItemUnionPay;
+    private PaymentItemGroupon paymentItemGroupon;
+    private String authCode;
+    private String consumePassword;
+    private Integer type;
+    private Integer isDeposit;
     public Integer getType() {
         return type;
     }
@@ -188,8 +149,7 @@ public class PaymentItem extends DataEntityBase implements ICreator {
         this.noDiscountAmount = noDiscountAmount;
     }
 
-    private BigDecimal noDiscountAmount;//不参与优惠金额
-
+    private BigDecimal noDiscountAmount;
     public java.math.BigDecimal getChangeAmount() {
         return changeAmount;
     }

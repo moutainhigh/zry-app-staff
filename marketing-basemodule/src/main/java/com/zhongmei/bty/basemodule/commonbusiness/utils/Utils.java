@@ -8,9 +8,7 @@ import com.zhongmei.bty.basemodule.trade.settings.IPanelItemSettings_Type3;
 import com.zhongmei.bty.basemodule.trade.settings.IPanelItemSettings_Type4;
 import com.zhongmei.bty.commonmodule.component.IPanelSettings;
 
-/**
 
- */
 public class Utils {
 
     public static IPanelItemSettings getCurrentIpanelItemSettings() {

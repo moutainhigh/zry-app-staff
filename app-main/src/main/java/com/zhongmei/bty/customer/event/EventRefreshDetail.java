@@ -1,8 +1,6 @@
 package com.zhongmei.bty.customer.event;
 
-/**
- * 顾客明细刷新
- */
+
 public class EventRefreshDetail {
     public Long customerId;
 

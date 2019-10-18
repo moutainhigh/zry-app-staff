@@ -14,9 +14,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.HashMap;
 
-/**
 
- */
 public class OperatesFactory {
 
     private static HashMap<Class, Class> sOperateMap = new HashMap<>();
@@ -51,8 +49,7 @@ public class OperatesFactory {
             throw new RuntimeException(classType + " class don't have the constructor **(Context)");
         }
 
-        //监听业务数据方法执行时间
-        if (sBuildType > 0) {
+                if (sBuildType > 0) {
             try {
                 return (T) DynamicProxy.bind(obj);
             } catch (Throwable e) {
@@ -63,10 +60,7 @@ public class OperatesFactory {
         return (T) obj;
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年6月26日
-     */
+
     private static class ImplContexImpl implements ImplContext {
 
         private Context context;

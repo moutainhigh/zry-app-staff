@@ -24,9 +24,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.order_center_broadcast_layout)
 public class BroadcastFloatFragment extends BasicDialogFragment {
 

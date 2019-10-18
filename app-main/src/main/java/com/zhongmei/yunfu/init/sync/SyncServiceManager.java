@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * 同步服务管理器
- */
+
 public class SyncServiceManager {
 
     private SyncModule syncModule;

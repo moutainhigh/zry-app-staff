@@ -11,10 +11,7 @@ import com.zhongmei.yunfu.context.util.SystemUtils;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * 团餐或者自助餐餐标or套餐外壳vo
- * Created by demo on 2018/12/15
- */
+
 
 public class BookingMealShellVo implements Serializable, Cloneable {
 
@@ -49,11 +46,7 @@ public class BookingMealShellVo implements Serializable, Cloneable {
         this.mDishMenuVo = dishMenuVo;
     }
 
-    /**
-     * 标记当前模版是否是通用模版
-     *
-     * @param isDefault
-     */
+
     public void setIsDefaultDishMenu(boolean isDefault) {
         if (mDishMenuVo == null) {
             return;
@@ -61,11 +54,7 @@ public class BookingMealShellVo implements Serializable, Cloneable {
         mDishMenuVo.setIsDefault(isDefault);
     }
 
-    /**
-     * 当前模版是否是默认模版
-     *
-     * @return
-     */
+
     public boolean isDefaultDishMenu() {
         if (mDishMenuVo == null) {
             return false;
@@ -73,17 +62,6 @@ public class BookingMealShellVo implements Serializable, Cloneable {
         return mDishMenuVo.getIsDefault();
     }
 
-//    /**
-//     * 设置和trade关联
-//     * @param trade
-//     */
-//    public void setTradeRelate(Trade trade){
-//        if(tradeItem==null){
-//            return;
-//        }
-//        this.tradeItem.setTradeUuid(trade.getUuid());
-//        this.tradeItem.setTradeId(trade.getId());
-//    }
 
     public String getSkuName() {
         if (tradeItem != null) {
@@ -132,7 +110,6 @@ public class BookingMealShellVo implements Serializable, Cloneable {
         tradeItem.setQuantity(count);
         if (!TextUtils.isEmpty(dishMenuVo.getSkuName()))
             tradeItem.setDishName(dishMenuVo.getSkuName());
-//        tradeItem.setTradeMemo(dishMenuVo.getName());
         tradeItem.setPrice(dishMenuVo.getPrice());
         if (dishMenuVo.getSkuId() != null)
             tradeItem.setDishId(dishMenuVo.getSkuId());
@@ -149,12 +126,7 @@ public class BookingMealShellVo implements Serializable, Cloneable {
         return buildHell(mDishMenuVo, type);
     }
 
-    /**
-     * 创建餐标外壳
-     *
-     * @param defaultDishMenuVo
-     * @return
-     */
+
     public BookingTradeItem buildHell(DishMenuVo defaultDishMenuVo, DishType type) {
         return buildHell(defaultDishMenuVo, type, BigDecimal.ONE);
     }
@@ -171,7 +143,6 @@ public class BookingMealShellVo implements Serializable, Cloneable {
         mTradeItem.setDishId(mDishMenuVo.getSkuId());
         mTradeItem.setDishName(mDishMenuVo.getSkuName());
         mTradeItem.setDishUuid(mDishMenuVo.getSkuUuid());
-//        mTradeItem.setTradeMemo(mDishMenuVo.getName());
         mTradeItem.setStatusFlag(StatusFlag.VALID);
         mTradeItem.setType(type);
         mTradeItem.setPrice(mDishMenuVo.getPrice());
@@ -193,7 +164,6 @@ public class BookingMealShellVo implements Serializable, Cloneable {
         mTradeItem.setDishId(mDishMenuVo.getSkuId());
         mTradeItem.setDishName(mDishMenuVo.getSkuName());
         mTradeItem.setDishUuid(mDishMenuVo.getSkuUuid());
-//        mTradeItem.setTradeMemo(mDishMenuVo.getName());
         mTradeItem.setStatusFlag(StatusFlag.VALID);
         mTradeItem.setType(type);
         mTradeItem.setPropertyAmount(BigDecimal.ZERO);

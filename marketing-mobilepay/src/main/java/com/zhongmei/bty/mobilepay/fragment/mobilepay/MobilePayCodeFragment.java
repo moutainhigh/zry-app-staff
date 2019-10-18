@@ -26,10 +26,7 @@ import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 import java.util.List;
 
 
-/**
- * 移动支付二维码展示界面
- * Created by demo on 2018/12/15
- */
+
 public class MobilePayCodeFragment extends BasicFragment implements View.OnClickListener, ShowBarcodeView.OnChickRetryListener {
 
     public static final String TAG = MobilePayCodeFragment.class.getSimpleName();

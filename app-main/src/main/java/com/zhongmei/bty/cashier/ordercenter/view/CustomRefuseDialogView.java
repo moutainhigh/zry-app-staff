@@ -130,12 +130,7 @@ public class CustomRefuseDialogView extends Dialog {
             switch (arg0.getId()) {
                 case R.id.close:
                     if (mEnableTitleClose) {
-                        // CalmDialogView.this.dismiss();
-                        // if (negListener != null) {
-                        // negListener.onClick(CalmDialogView.this,
-                        // R.id.neg_btn);
-                        // }
-                        if (closeListener != null) {
+                                                                                                                                                if (closeListener != null) {
                             closeListener.onClick(CustomRefuseDialogView.this, R.id.close);
                         }
                     }
@@ -241,9 +236,7 @@ public class CustomRefuseDialogView extends Dialog {
 
     @Override
     public void setTitle(CharSequence title) {
-        // TODO Auto-generated method stub
-        // super.setTitle(title);
-        mTitle = null;
+                        mTitle = null;
         mSpannedTitle = title;
         if (titleView != null) {
             titleView.setVisibility(View.VISIBLE);
@@ -251,70 +244,5 @@ public class CustomRefuseDialogView extends Dialog {
         }
     }
 
-//	private String refuseMsg = "";
-//	
-//	private Context context;
-//	
-//	public CustomRefuseDialogView(Context context, String title) {
-//		super(context);
-//		
-//		this.context = context;
-//		if (TextUtils.isEmpty(title)) {
-//			title = "理由";
-//		}
-//		setTitle(title);
-//		resetDialogUI();
-//	}
-//	
-//	/**
-//	 * <pre>
-//	 * 参数说明:
-//	 * 返回类型:@return void
-//	 * 方法说明: 去掉CalmDialogView里的text, 增加RadioGroup，并重新设置dialog的高度
-//	 * 修改历史:
-//	 *    修改人员:yanyan 修改日期:2014-9-22 下午6:35:45
-//	 *    修改目的:
-//	 * </pre>
-//	 */
-//	private void resetDialogUI() {
-//		// 重设高度
-//		LinearLayout dialogHeight = getDialogLinearLayout();
-//		android.view.ViewGroup.LayoutParams lp = dialogHeight.getLayoutParams();
-//		lp.height = 350;
-//		
-//		// 去掉text
-//		getScrollView().setVisibility(View.GONE);
-//		
-//		// 增加RadioGroup
-//		// 暂时写死，以后需要从数据库中读取数据
-//		View v = LayoutInflater.from(context).inflate(R.layout.refuse_order, null);
-//		
-//		ScrollView sv = getScrollViewForCustom();
-//		sv.setVisibility(View.VISIBLE);
-//		sv.addView(v);
-//		
-//		setRaidoListener(v);
-//		
-//	}
-//	
-//	private void setRaidoListener(final View v) {
-//		RadioGroup rg = (RadioGroup)v.findViewById(R.id.refuse_result);
-//		RadioButton btn = (RadioButton)v.findViewById(rg.getCheckedRadioButtonId());
-//		refuseMsg = btn.getText().toString();
-//		
-//		rg.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-//			
-//			@Override
-//			public void onCheckedChanged(RadioGroup group, int checkedId) {
-//				RadioButton btn = (RadioButton)v.findViewById(checkedId);
-//				refuseMsg = btn.getText().toString();
-//			}
-//		});
-//		
-//	}
-//	
-//	public String getRefuseMsg() {
-//		return refuseMsg;
-//	}
 
 }

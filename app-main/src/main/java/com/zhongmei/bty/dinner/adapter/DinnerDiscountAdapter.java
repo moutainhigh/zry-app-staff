@@ -13,9 +13,7 @@ import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.dinner.vo.DiscountShopVo;
 import com.zhongmei.bty.basemodule.discount.entity.DiscountShop;
 
-/**
- * @date:2016年2月16日上午10:24:22
- */
+
 public class DinnerDiscountAdapter extends BaseAdapter {
     private Context mContext;
 
@@ -34,16 +32,14 @@ public class DinnerDiscountAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
-        if (discountList == null)
+                if (discountList == null)
             return 0;
         return discountList.size();
     }
 
     @Override
     public DiscountShopVo getItem(int position) {
-        // TODO Auto-generated method stub
-        if (discountList.size() > position) {
+                if (discountList.size() > position) {
             return discountList.get(position);
         }
         return null;
@@ -51,15 +47,13 @@ public class DinnerDiscountAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
 
         return position;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // TODO Auto-generated method stub
-        ViewHolder viewHolder = null;
+                ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.dinner_discount_item, null);
             convertView.setBackgroundResource(mBgResId);
@@ -74,8 +68,7 @@ public class DinnerDiscountAdapter extends BaseAdapter {
     }
 
     private void bindData(ViewHolder viewHolder, final DiscountShopVo discoutShopVo, final int position) {
-        // TODO Auto-generated method stub
-        if (discoutShopVo == null) {
+                if (discoutShopVo == null) {
             return;
         }
         DiscountShop discountShop = discoutShopVo.getDiscountShop();

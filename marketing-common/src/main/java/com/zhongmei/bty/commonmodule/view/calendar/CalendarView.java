@@ -28,9 +28,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * 日历控件 功能：获得点选的日期区间
- */
+
 public class CalendarView extends View {
     private final static String TAG = "anCalendar";
 
@@ -42,36 +40,25 @@ public class CalendarView extends View {
 
     private Date selectedEndDate;
 
-    private static Date curDate; // 当前日历显示的月
-
-    private Date today; // 今天的日期文字显示红色
-
-    private static Date downDate; // 手指按下状态时临时日期
-
-    private Date showFirstDate, showLastDate; // 日历显示的第一个日期和最后一个日期
-
-    private int downIndex = -1; // 按下的格子索引
-
+    private static Date curDate;
+    private Date today;
+    private static Date downDate;
+    private Date showFirstDate, showLastDate;
+    private int downIndex = -1;
     private Calendar calendar;
 
     private Surface surface;
 
-    // 最多显示多少个日期
-    private int maxCell = 42;
+        private int maxCell = 42;
 
-    private int[] date = new int[maxCell]; // 日历显示数字
+    private int[] date = new int[maxCell];
+    private int curStartIndex, curEndIndex;
 
-    private int curStartIndex, curEndIndex; // 当前显示的日历起始的索引
-
-    /**
-     * 标注日期
-     */
     private final List<Date> markDates;
 
     private int touchSlop;
 
-    // 给控件设置监听事件
-    private OnItemClickListener onItemClickListener;
+        private OnItemClickListener onItemClickListener;
 
     private OnMonthChangeListener monthChangeListener;
 
@@ -96,12 +83,7 @@ public class CalendarView extends View {
         init();
     }
 
-    /**
-     * 设置标准日期
-     *
-     * @param markDates
-     * @author daixj@shishike.com
-     */
+
     public void setMarkDate(List<Date> markDates) {
         if (markDates != null) {
             this.markDates.clear();
@@ -120,26 +102,17 @@ public class CalendarView extends View {
         surface = new Surface();
         surface.density = getResources().getDisplayMetrics().density;
         setBackgroundColor(surface.bgColor);
-        // 红点的相关设置
-        mRedPointPaint = new Paint();
+                mRedPointPaint = new Paint();
         mRedPointPaint.setAntiAlias(true);
         mRedPointPaint.setColor(Color.RED);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // surface.width =
-        // getResources().getDisplayMetrics().widthPixels *
-        // 1 / 2;
-        surface.height = (int) (getResources().getDisplayMetrics().heightPixels * 7 / 10);
+                                surface.height = (int) (getResources().getDisplayMetrics().heightPixels * 7 / 10);
         if (MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.EXACTLY) {
             surface.width = MeasureSpec.getSize(widthMeasureSpec);
         }
-        // if (View.MeasureSpec.getMode(heightMeasureSpec)
-        // == View.MeasureSpec.EXACTLY) {
-        // surface.height =
-        // View.MeasureSpec.getSize(heightMeasureSpec);
-        // }
 
         widthMeasureSpec = MeasureSpec.makeMeasureSpec(surface.width, MeasureSpec.EXACTLY);
         heightMeasureSpec = MeasureSpec.makeMeasureSpec(surface.height, MeasureSpec.EXACTLY);
@@ -159,8 +132,7 @@ public class CalendarView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        int backHeight = DensityUtil.dip2px(BaseApplication.sInstance, 50);// 星期灰色背景的高度
-        canvas.drawRect(0, surface.monthHeight + 1, surface.width, surface.monthHeight + backHeight, surface.backPaint);
+        int backHeight = DensityUtil.dip2px(BaseApplication.sInstance, 50);        canvas.drawRect(0, surface.monthHeight + 1, surface.width, surface.monthHeight + backHeight, surface.backPaint);
         canvas.drawLine(0, surface.monthHeight + 1, surface.width, surface.monthHeight + 1, surface.linePaint);
         canvas.drawLine(0,
                 surface.monthHeight + backHeight + 1,
@@ -175,15 +147,11 @@ public class CalendarView extends View {
             canvas.drawText(surface.weekText[i], weekTextX, weekTextY, surface.weekPaint);
         }
 
-        // 计算日期
-        calculateDate();
-        // 按下状态，选择状态背景色
-        if (!isToday(downDate, new Date(System.currentTimeMillis()))) {
+                calculateDate();
+                if (!isToday(downDate, new Date(System.currentTimeMillis()))) {
             drawDownOrSelectedBg(canvas);
         }
-        // write date number
-        // today index
-        int todayIndex = -1;
+                        int todayIndex = -1;
         calendar.setTime(curDate);
         String curYearAndMonth = calendar.get(Calendar.YEAR) + "" + calendar.get(Calendar.MONTH);
         calendar.setTime(today);
@@ -194,16 +162,14 @@ public class CalendarView extends View {
         }
         for (int i = 0; i < maxCell; i++) {
             int color = surface.textColor;
-            // 上一个月 与下一个月的日期不画
-            if (isLastMonth(i)) {
+                        if (isLastMonth(i)) {
                 color = surface.borderColor;
                 continue;
             } else if (isNextMonth(i)) {
                 color = surface.borderColor;
                 continue;
             }
-            // 将今天之前的日期置灰色
-            if (!isShowBefore && curYearAndMonth.equals(todayYearAndMonth) && i < todayIndex) {
+                        if (!isShowBefore && curYearAndMonth.equals(todayYearAndMonth) && i < todayIndex) {
                 color = surface.borderColor;
             }
 
@@ -231,11 +197,9 @@ public class CalendarView extends View {
         if (monthStart == 1) {
             monthStart = 8;
         }
-        monthStart -= 1; // 以日为开头-1，以星期一为开头-2
-        curStartIndex = monthStart;
+        monthStart -= 1;         curStartIndex = monthStart;
         date[monthStart] = 1;
-        // last month
-        if (monthStart > 0) {
+                if (monthStart > 0) {
             calendar.set(Calendar.DAY_OF_MONTH, 0);
             int dayInmonth = calendar.get(Calendar.DAY_OF_MONTH);
             for (int i = monthStart - 1; i >= 0; i--) {
@@ -246,8 +210,7 @@ public class CalendarView extends View {
         }
 
         showFirstDate = calendar.getTime();
-        // this month
-        calendar.setTime(curDate);
+                calendar.setTime(curDate);
         calendar.add(Calendar.MONTH, 1);
         calendar.set(Calendar.DAY_OF_MONTH, 0);
         int monthDay = calendar.get(Calendar.DAY_OF_MONTH);
@@ -255,25 +218,19 @@ public class CalendarView extends View {
             date[monthStart + i] = i + 1;
         }
         curEndIndex = monthStart + monthDay;
-        // next month
-        for (int i = monthStart + monthDay; i < maxCell; i++) {
+                for (int i = monthStart + monthDay; i < maxCell; i++) {
             date[i] = i - (monthStart + monthDay) + 1;
         }
 
         if (curEndIndex < maxCell) {
-            // 显示了下一月的
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
+                        calendar.add(Calendar.DAY_OF_MONTH, 1);
         }
         calendar.set(Calendar.DAY_OF_MONTH, date[41]);
         showLastDate = calendar.getTime();
         updateMonth();
     }
 
-    /**
-     * @param canvas
-     * @param index
-     * @param text
-     */
+
     private void drawCellText(Canvas canvas, int index, String text, int color) {
         int x = getXByIndex(index);
         int y = getYByIndex(index);
@@ -282,8 +239,7 @@ public class CalendarView extends View {
                 surface.monthHeight + surface.weekHeight + (y - 1) * surface.cellHeight + surface.cellHeight * 3 / 4f;
         float cellX = (surface.cellWidth * (x - 1)) + (surface.cellWidth - surface.datePaint.measureText(text)) / 2f;
         canvas.drawText(text, cellX, cellY, surface.datePaint);
-        // 计算是否需要绘制红点
-        if (drawRedPoint(monthFormat.format(curDate) + "-" + ( (text.length() == 1) ? ("0" + text) : text))){
+                if (drawRedPoint(monthFormat.format(curDate) + "-" + ( (text.length() == 1) ? ("0" + text) : text))){
             Rect rect = new Rect();
             surface.datePaint.getTextBounds(text, 0, text.length(), rect);
             int w = rect.width();
@@ -292,11 +248,7 @@ public class CalendarView extends View {
         }
     }
 
-    /**
-     * @param canvas
-     * @param index
-     * @param color
-     */
+
     private void drawCellBg(Canvas canvas, int index, int color, boolean isToday) {
         if (index == -1) {
             return;
@@ -307,8 +259,7 @@ public class CalendarView extends View {
 
         float cellY = surface.monthHeight + surface.weekHeight + (float) ((y - 1.0 / 3) * surface.cellHeight);
         float cellX = (float) (surface.cellWidth * (x - 0.5));
-        //如果日期大于10 修正圆心坐标
-        if (x >= 10) {
+                if (x >= 10) {
             cellX += 12;
         }
         canvas.drawCircle(cellX, cellY, (float) (surface.cellHeight / 3), surface.cellBgPaint);
@@ -319,14 +270,9 @@ public class CalendarView extends View {
         }
     }
 
-    /**
-     * 画标准的背景
-     *
-     * @param canvas
-     * @author daixj@shishike.com
-     */
+
     private void drawMarkBg(Canvas canvas, int index) {
-        /** 设置标注日期颜色 */
+
         if (markDates != null) {
             Date indexDate = getDateByIndex(index);
             if (indexDate == null) {
@@ -345,14 +291,7 @@ public class CalendarView extends View {
         }
     }
 
-    /**
-     * 比较两个日期的日是否相等
-     *
-     * @param d1
-     * @param d2
-     * @return
-     * @author daixj@shishike.com
-     */
+
     private boolean isDateEqual(Date d1, Date d2) {
         return dateFormat.format(d1).equals(dateFormat.format(d2));
     }
@@ -372,8 +311,7 @@ public class CalendarView extends View {
     }
 
     private void drawDownOrSelectedBg(Canvas canvas) {
-        // down and not up
-        if (downDate != null && isMonthEqual(downDate, curDate)) {
+                if (downDate != null && isMonthEqual(downDate, curDate)) {
             if (downIndex == -1) {
                 downIndex = getIndexByDate(downDate);
             }
@@ -385,8 +323,7 @@ public class CalendarView extends View {
         for (int i = startIndex; i < endIndex; i++) {
             calendar.set(Calendar.DAY_OF_MONTH, date[i]);
             Date temp = calendar.getTime();
-            // Log.d(TAG, "temp:" + temp.toLocaleString());
-            if (temp.compareTo(selectedStartDate) == 0) {
+                        if (temp.compareTo(selectedStartDate) == 0) {
                 section[0] = i;
             }
             if (temp.compareTo(selectedEndDate) == 0) {
@@ -419,26 +356,21 @@ public class CalendarView extends View {
     }
 
     private int getXByIndex(int i) {
-        return i % 7 + 1; // 1 2 3 4 5 6 7
-    }
+        return i % 7 + 1;     }
 
     private int getYByIndex(int i) {
         if (curStartIndex >= 7) {
-            return i / 7; // 1 2 3 4 5
-        }
-        return i / 7 + 1; // 1 2 3 4 5 6
-    }
+            return i / 7;         }
+        return i / 7 + 1;     }
 
-    // 获得当前应该显示的年月
-    public String getYearAndmonth() {
+        public String getYearAndmonth() {
         calendar.setTime(curDate);
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         return year + "-" + month;
     }
 
-    // 上一月
-    public String clickLeftMonth() {
+        public String clickLeftMonth() {
         calendar.setTime(curDate);
         calendar.add(Calendar.MONTH, -1);
         curDate = calendar.getTime();
@@ -447,8 +379,7 @@ public class CalendarView extends View {
         return getYearAndmonth();
     }
 
-    // 下一月
-    public String clickRightMonth() {
+        public String clickRightMonth() {
         calendar.setTime(curDate);
         calendar.add(Calendar.MONTH, 1);
         curDate = calendar.getTime();
@@ -463,19 +394,16 @@ public class CalendarView extends View {
         monthChangeListener.onMonthChange(curDate);
     }
 
-    // 设置日历时间
-    public void setCalendarData(Date date) {
+        public void setCalendarData(Date date) {
         calendar.setTime(date);
         invalidate();
     }
 
-    // 获取日历时间
-    public void getCalendatData() {
+        public void getCalendatData() {
         calendar.getTime();
     }
 
-    // 给控件设置监听事件
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener, OnMonthChangeListener changeListener) {
+        public void setOnItemClickListener(OnItemClickListener onItemClickListener, OnMonthChangeListener changeListener) {
         this.onItemClickListener = onItemClickListener;
         this.monthChangeListener = changeListener;
     }
@@ -487,9 +415,7 @@ public class CalendarView extends View {
     }
 
     private void setSelectedDateByCoor(float x, float y) {
-        // change month
-        // cell click down
-        if (y > surface.monthHeight + surface.weekHeight) {
+                        if (y > surface.monthHeight + surface.weekHeight) {
             int m = (int) (Math.floor(x / surface.cellWidth) + 1);
             int n =
                     (int) (Math.floor((y - (surface.monthHeight + surface.weekHeight)) / Float.valueOf(surface.cellHeight)) + 1);
@@ -526,13 +452,7 @@ public class CalendarView extends View {
         return date;
     }
 
-    /**
-     * 根据日期获得索引
-     *
-     * @param date
-     * @return
-     * @author daixj@shishike.com
-     */
+
     private int getIndexByDate(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
@@ -580,13 +500,7 @@ public class CalendarView extends View {
         return true;
     }
 
-    /**
-     * 取消选中的日期
-     *
-     * @Author renlx@shishike.com
-     * @Title: clearSelect
-     * @Return void 返回类型
-     */
+
     public void clearSelect() {
         if (downIndex == -1 && downDate == null) {
             return;
@@ -596,8 +510,7 @@ public class CalendarView extends View {
         invalidate();
     }
 
-    // 监听接口
-    public interface OnItemClickListener {
+        public interface OnItemClickListener {
 
         void OnItemClick(Date downDate);
     }
@@ -606,19 +519,12 @@ public class CalendarView extends View {
         void onMonthChange(Date date);
     }
 
-    // 是否比当前早
-    private boolean isEarlyByIndex(int index) {
+        private boolean isEarlyByIndex(int index) {
         Date date = getDateByIndex(index);
         return isEarly(date);
     }
 
-    /**
-     * 是否比今天更早
-     *
-     * @param date
-     * @return
-     * @author daixj@shishike.com
-     */
+
     private boolean isEarly(Date date) {
         if (date == null) {
             return false;
@@ -638,24 +544,16 @@ public class CalendarView extends View {
         return false;
     }
 
-    /**
-     * 1. 布局尺寸 2. 文字颜色，大小 3. 当前日期的颜色，选择的日期颜色
-     */
+
     private class Surface {
         public float density;
 
-        public int width; // 整个控件的宽度
-
-        public int height; // 整个控件的高度
-
-        public float monthHeight; // 显示月的高度
-
-        public float weekHeight; // 显示星期的高度
-
-        public float cellWidth; // 日期方框宽度
-
-        public float cellHeight; // 日期方框高度
-
+        public int width;
+        public int height;
+        public float monthHeight;
+        public float weekHeight;
+        public float cellWidth;
+        public float cellHeight;
         public float borderWidth;
 
         public int bgColor = Color.parseColor("#FFFFFF");
@@ -678,10 +576,8 @@ public class CalendarView extends View {
 
         public Paint monthPaint;
 
-        public Paint linePaint;// 星期的灰线
-
-        public Paint backPaint;// 星期的灰色背景
-
+        public Paint linePaint;
+        public Paint backPaint;
         public Paint weekPaint;
 
         public Paint datePaint;
@@ -692,8 +588,7 @@ public class CalendarView extends View {
 
         public Paint cellBgPaint;
 
-        public Path boxPath; // 边框路径
-
+        public Path boxPath;
         public String[] weekText = {
                 getResources().getString(R.string.sunday),
                 getResources().getString(R.string.monday),
@@ -712,8 +607,7 @@ public class CalendarView extends View {
             float temp = height / 7f;
             monthHeight = 0;
             weekHeight = (float) ((temp + temp * 0.3f) * 0.7);
-            cellHeight = (height - monthHeight - weekHeight) / 6f - 8;//modify by goujiabo on 2019/5/14 考虑到第六行可能无法展示出来，所以将每行的高度缩小8px
-            cellWidth = width / 7f;
+            cellHeight = (height - monthHeight - weekHeight) / 6f - 8;            cellWidth = width / 7f;
             borderPaint = new Paint();
             borderPaint.setColor(borderColor);
             borderPaint.setStyle(Style.STROKE);

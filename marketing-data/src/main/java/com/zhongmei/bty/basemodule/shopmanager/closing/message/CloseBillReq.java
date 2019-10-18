@@ -1,28 +1,18 @@
 package com.zhongmei.bty.basemodule.shopmanager.closing.message;
 
-/**
- * 关账请求数据
- *
- * @date:2015年12月14日下午1:53:54
- */
+
 public class CloseBillReq {
-    // 创建者id
-    private Long creatorId;
+        private Long creatorId;
 
-    // 创建者姓名
-    private String creatorName;
+        private String creatorName;
 
-    // 唯一标识
-    private String uuid;
+        private String uuid;
 
-    // 客户端创建时间
-    private String clientCreateTime;
+        private String clientCreateTime;
 
-    // 客户端修改时间
-    private String clientUpdateTime;
+        private String clientUpdateTime;
 
-    // 操作人id
-    private Long creatorAccount;
+        private Long creatorAccount;
 
     public Long getCreatorId() {
         return creatorId;

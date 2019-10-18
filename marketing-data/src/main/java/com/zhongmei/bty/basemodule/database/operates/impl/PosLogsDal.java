@@ -12,9 +12,7 @@ import com.zhongmei.bty.commonmodule.database.entity.local.PosTransLog;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PosLogsDal {
     static final String TAG = PosLogsDal.class.getSimpleName();
@@ -69,8 +67,7 @@ public class PosLogsDal {
         final DatabaseHelper helper = LocalDBManager.getHelper();
         try {
             Dao<PosTransLog, String> posLogDao = helper.getDao(PosTransLog.class);
-            posRecords = posLogDao.queryForAll();// 查询pos的刷卡交易记录
-
+            posRecords = posLogDao.queryForAll();
         } catch (Exception e) {
             Log.e(TAG, "queryAllPosTransLog  error!", e);
         } finally {

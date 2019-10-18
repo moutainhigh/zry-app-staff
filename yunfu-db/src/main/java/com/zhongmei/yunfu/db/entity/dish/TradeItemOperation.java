@@ -12,9 +12,7 @@ import com.zhongmei.yunfu.db.enums.PrintStatus;
 @DatabaseTable(tableName = "trade_item_operation")
 public class TradeItemOperation extends ServerEntityBase implements ICreator, IUpdator {
 
-    /**
-     * @date：2016-4-21 上午8:52:15
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ extends ServerEntityBase.$ {
@@ -27,24 +25,16 @@ public class TradeItemOperation extends ServerEntityBase implements ICreator, IU
 
         public static final String printOperationId = "print_operation_id";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
     }
 
@@ -72,9 +62,7 @@ public class TradeItemOperation extends ServerEntityBase implements ICreator, IU
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
-    /**
-     * 联台主中对应表的id
-     */
+
     private Long batchId;
 
     public Long getTradeItemId() {
@@ -151,9 +139,7 @@ public class TradeItemOperation extends ServerEntityBase implements ICreator, IU
         this.tradeItemUuid = tradeItemUuid;
     }
 
-    /**
-     * 菜品名称、桌台号、流水号；临时存储，不插入数据库
-     */
+
     private String skuName;
     private String tableName;
     private String serialNumber;

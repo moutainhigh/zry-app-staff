@@ -85,13 +85,6 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             return null;
-//			Dao<CrmCustomerLevelRights, Long> paymentModeDao = helper.getDao(CrmCustomerLevelRights.class);
-//			QueryBuilder<CrmCustomerLevelRights, Long> qb = paymentModeDao.queryBuilder();
-//			qb.where().eq(CrmCustomerLevelRights.$.customerLevelId, levelId);
-//			List<CrmCustomerLevelRights> list = qb.query();
-//			if (list != null && !list.isEmpty()) {
-//				return list.get(0);
-//			}
         } catch (Exception e) {
             Log.e(TAG, "", e);
         } finally {
@@ -147,11 +140,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
         }
     }
 
-    /**
-     * @Date 2016年2月17日
-     * @Description: 根据菜品id查寻会员折扣和会员价
-     * @Param
-     */
+
     public DishMemberPrice findDishMemberPriceByDishId(long dishId) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
@@ -182,14 +171,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
         return null;
     }
 
-    /**
-     * @param dishId
-     * @param levelId
-     * @return
-     * @Date 2016年2月17日
-     * @Description: 根据会员电话号码和菜品id 查寻菜品会员价和会员折扣
-     * @Return DishMemberPrice
-     */
+
     public DishMemberPrice findDishMemberPriceByDishId(long dishId, long levelId) {
         DishMemberPrice dishMemberPrice = null;
         DatabaseHelper helper = DBHelperManager.getHelper();
@@ -272,8 +254,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
         RechargeRuleVo vo = new RechargeRuleVo();
         vo.setRuleDetailList(new ArrayList<RechargeRuleDetailVo>());
         try {
-            if (cardLevelId != null) {// 实体卡
-                Dao<EcCardLevelSetting, Long> ecCardLevelSettingDao = helper.getDao(EcCardLevelSetting.class);
+            if (cardLevelId != null) {                Dao<EcCardLevelSetting, Long> ecCardLevelSettingDao = helper.getDao(EcCardLevelSetting.class);
                 QueryBuilder<EcCardLevelSetting, Long> build = ecCardLevelSettingDao.queryBuilder();
                 build.where().eq(EcCardLevelSetting.$.cardLevelId, cardLevelId);
                 EcCardLevelSetting ecCardLevelSetting = build.queryForFirst();
@@ -293,8 +274,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
                         }
                     }
                 }
-            } else {// 会员
-                Dao<CrmLevelStoreRule, Long> crmLevelStoreRuleDao = helper.getDao(CrmLevelStoreRule.class);
+            } else {                Dao<CrmLevelStoreRule, Long> crmLevelStoreRuleDao = helper.getDao(CrmLevelStoreRule.class);
                 List<CrmLevelStoreRule> crmLevelStoreRuleList = crmLevelStoreRuleDao.queryForAll();
                 if (crmLevelStoreRuleList != null && crmLevelStoreRuleList.size() > 0) {
                     CrmLevelStoreRule crmLevelStoreRule = crmLevelStoreRuleList.get(0);
@@ -330,9 +310,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
             Dao<CustomerSaveRule, Long> customerSaveRuleDao = helper.getDao(CustomerSaveRule.class);
             List<CustomerSaveRule> customerSaveRules = customerSaveRuleDao.queryForAll();
             if (Utils.isNotEmpty(customerSaveRules)) {
-                vo.setIsFullSend(FullSend.YES);//满赠
-                vo.setSendType(SendType.FIXED);//固定金额
-                for (CustomerSaveRule customerSaveRule : customerSaveRules) {
+                vo.setIsFullSend(FullSend.YES);                vo.setSendType(SendType.FIXED);                for (CustomerSaveRule customerSaveRule : customerSaveRules) {
                     RechargeRuleDetailVo detailVo = new RechargeRuleDetailVo();
                     detailVo.setFullValue(customerSaveRule.getStoredValue());
                     detailVo.setSendValue(customerSaveRule.getGiveValue());
@@ -364,14 +342,11 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
         vo.setRuleDetailList(new ArrayList<RechargeRuleDetailVo>());
         try {
             EcCardKind ecCardKind = findEcCardKindById(cardKindId);
-            //判断实体卡是否支持储值
-            if (ecCardKind != null && ecCardKind.getIsValueCard() == Bool.YES) {
-                //是否储值赠送
-                boolean isSend = ecCardKind.getIsSend() == Bool.YES;
+                        if (ecCardKind != null && ecCardKind.getIsValueCard() == Bool.YES) {
+                                boolean isSend = ecCardKind.getIsSend() == Bool.YES;
                 vo.setIsFullSend(isSend ? FullSend.YES : FullSend.NO);
 
-                //赠送类型
-                if (vo.getIsFullSend() == FullSend.YES) {
+                                if (vo.getIsFullSend() == FullSend.YES) {
                     Dao<EcCardLevelSetting, Long> ecCardLevelSettingDao = helper.getDao(EcCardLevelSetting.class);
                     QueryBuilder<EcCardLevelSetting, Long> build = ecCardLevelSettingDao.queryBuilder();
                     build.where().eq(EcCardLevelSetting.$.cardLevelId, cardLevelId);
@@ -381,8 +356,7 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
                     }
                 }
 
-                //储值规则明细
-                Dao<EcCardSettingDetail, Long> ecCardLevelSettingDetailDao = helper.getDao(EcCardSettingDetail.class);
+                                Dao<EcCardSettingDetail, Long> ecCardLevelSettingDetailDao = helper.getDao(EcCardSettingDetail.class);
                 QueryBuilder<EcCardSettingDetail, Long> qb = ecCardLevelSettingDetailDao.queryBuilder();
                 qb.where().eq(EcCardSettingDetail.$.cardLevelId, cardLevelId);
                 List<EcCardSettingDetail> ecCardSettingDetailList = qb.query();
@@ -529,12 +503,9 @@ public class CustomerDalImpl extends AbstractOpeartesImpl implements CustomerDal
             Brand brand = dao.queryBuilder().where()
                     .eq(Brand._statusFlag, 0).queryForFirst();
             if (brand != null) {
-                /*if(!TextUtils.isEmpty(brand.getWeixinAppId())){
-					return true;
-				}else {*/
+
                 return false;
-                //}
-            }
+                            }
         } finally {
             DBHelperManager.releaseHelper(helper);
         }

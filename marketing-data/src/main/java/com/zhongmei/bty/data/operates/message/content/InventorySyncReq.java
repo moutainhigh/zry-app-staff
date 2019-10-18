@@ -4,9 +4,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class InventorySyncReq {
 
     private Long brandId;

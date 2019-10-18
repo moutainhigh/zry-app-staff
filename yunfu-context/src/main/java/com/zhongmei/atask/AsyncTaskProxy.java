@@ -1,8 +1,6 @@
 package com.zhongmei.atask;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public final class AsyncTaskProxy<Result> extends AbsAsyncTask<Void, Result> {
 
     private TaskManager taskManager;

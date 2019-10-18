@@ -2,29 +2,17 @@ package com.zhongmei.bty.entity.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * @Date： 2017/3/2
- * @Description:库存退回选择样式
- * @Version: 1.0
- */
+
 public enum InventoryShowType implements ValueEnum<Integer> {
 
-    /**
-     * 只展示库存退回选择
-     */
+
     ONLY_SHOW_INVENTORY(1),
 
-    /**
-     * 库存退回与其它内容一起展示
-     */
+
     SHOW_OTHER_DATA(2),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

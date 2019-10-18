@@ -1,9 +1,6 @@
 package com.zhongmei.bty.commonmodule.util;
 
-/**
- * Created by demo on 2018/12/15
- * 用System.Runtime类获取虚拟机堆的情况
- */
+
 public class MemUtil {
 
     public static long getTotalHeapSizeWithMB() {

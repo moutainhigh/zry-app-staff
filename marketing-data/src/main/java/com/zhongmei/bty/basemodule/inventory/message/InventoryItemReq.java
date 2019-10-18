@@ -3,9 +3,7 @@ package com.zhongmei.bty.basemodule.inventory.message;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class InventoryItemReq implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -14,16 +12,14 @@ public class InventoryItemReq implements Serializable {
 
     private String dishUuid;
 
-    private BigDecimal quantity;    //退库存数量
-
+    private BigDecimal quantity;
     private String dishName;
 
     private BigDecimal amount;
 
     private BigDecimal price;
 
-    private BigDecimal returnQuantity; //退货数量
-
+    private BigDecimal returnQuantity;
     public String getSkuUuid() {
         return dishUuid;
     }

@@ -4,32 +4,22 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * PosSettlementLog is a ORMLite bean type. Corresponds to the database table "pos_settlement_log"
- */
+
 @DatabaseTable(tableName = "pos_settlement_log")
 public class PosSettlementLog extends LocalEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "pos_settlement_log"
-     */
+
     public interface $ extends LocalEntityBase.$ {
 
-        /**
-         * terminal_number
-         */
+
         public static final String terminalNumber = "terminal_number";
 
-        /**
-         * trans_date
-         */
+
         public static final String transDate = "trans_date";
 
-        /**
-         * trans_time
-         */
+
         public static final String transTime = "trans_time";
 
     }

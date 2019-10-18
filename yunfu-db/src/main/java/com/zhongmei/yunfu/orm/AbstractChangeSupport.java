@@ -12,19 +12,15 @@ import java.util.Set;
 import com.zhongmei.yunfu.orm.DatabaseHelper.ChangeSupportable;
 import com.zhongmei.yunfu.db.IEntity;
 
-/**
 
- */
 public abstract class AbstractChangeSupport implements ChangeSupportable {
 
     private final ThreadLocal<Set<Class<?>>> mThreadLocal;
 
-    private final ThreadLocal<Map<Uri, List<Object>>> mThreadLocalData; //add 20170316   数据库监听回调返回原始数据
-
+    private final ThreadLocal<Map<Uri, List<Object>>> mThreadLocalData;
     protected AbstractChangeSupport() {
         mThreadLocal = new ThreadLocal<Set<Class<?>>>();
-        mThreadLocalData = new ThreadLocal<Map<Uri, List<Object>>>(); //add 20170316   数据库监听回调返回原始数据
-    }
+        mThreadLocalData = new ThreadLocal<Map<Uri, List<Object>>>();     }
 
     @Override
     public final void addChange(Class<?> tableClass) {
@@ -36,8 +32,7 @@ public abstract class AbstractChangeSupport implements ChangeSupportable {
         tables.add(tableClass);
     }
 
-    //add 20170316 begin  数据库监听回调返回原始数据
-    @Override
+        @Override
     public <T extends IEntity<?>> void addChange(Class<?> tableClass, List<T> entities) {
         this.addChange(tableClass);
         List<Object> list = this.createDataContainer(tableClass);
@@ -81,8 +76,7 @@ public abstract class AbstractChangeSupport implements ChangeSupportable {
         }
     }
 
-    //add 20170316 end  数据库监听回调返回原始数据
-    @Override
+        @Override
     public final boolean isChange() {
         Set<Class<?>> tables = mThreadLocal.get();
         if (tables == null) {
@@ -93,8 +87,7 @@ public abstract class AbstractChangeSupport implements ChangeSupportable {
 
     @Override
     public final void clearChange() {
-        clearLocalData(); //add 20170316 数据库监听回调返回原始数据
-
+        clearLocalData();
         Set<Class<?>> tables = mThreadLocal.get();
         if (tables == null) {
             return;
@@ -111,10 +104,8 @@ public abstract class AbstractChangeSupport implements ChangeSupportable {
         mThreadLocal.set(null);
         notifyChange(tables.toArray(new Class<?>[0]));
 
-        doDataChangeNotify(tables); //add 20170316数据库监听回调返回原始数据
-    }
+        doDataChangeNotify(tables);     }
 
     protected abstract void notifyChange(Class<?>... tables);
 
-    protected abstract void notifyChange(Set<Uri> tables, Map<Uri, List<Object>> dataMap);//add 20170316  数据库监听回调返回原始数据
-}
+    protected abstract void notifyChange(Set<Uri> tables, Map<Uri, List<Object>> dataMap);}

@@ -4,11 +4,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 
 import java.util.concurrent.Callable;
 
-/**
- * Desc
- *
- * @created 2017/6/12
- */
+
 public abstract class CalmDatabaseProcessor<E> extends SaveDatabaseResponseProcessor<E> {
 
 
@@ -23,11 +19,6 @@ public abstract class CalmDatabaseProcessor<E> extends SaveDatabaseResponseProce
         };
     }
 
-    /**
-     * 只需关心业务数据处事务已经在上层处理了
-     *
-     * @param helper
-     * @param resp
-     */
+
     protected abstract void transactionCallable(DatabaseHelper helper, E resp) throws Exception;
 }

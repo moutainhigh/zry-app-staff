@@ -12,11 +12,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * 团餐开台Trade回执
- * <p>
- * Created by demo on 2018/12/15
- */
+
 public class GroupTradeResp {
 
     public Trade trade;
@@ -29,8 +25,7 @@ public class GroupTradeResp {
 
     public List<TradeTable> tradeTables;
 
-    public TradeGroupInfo tradeGroup;  // v7.15 添加团餐信息表
-    public TradeUser tradeUser;
+    public TradeGroupInfo tradeGroup;      public TradeUser tradeUser;
 
     public List<TradeTax> tradeTaxs;
     public List<TradeInitConfig> tradeInitConfigs;

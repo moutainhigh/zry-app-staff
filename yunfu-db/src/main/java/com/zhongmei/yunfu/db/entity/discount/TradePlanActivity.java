@@ -8,11 +8,7 @@ import com.zhongmei.yunfu.db.enums.ActivityRuleEffective;
 
 import java.math.BigDecimal;
 
-/**
- * Model class of trade_plan_activity.
- *
- * @version $Id$
- */
+
 @DatabaseTable(tableName = "trade_plan_activity")
 public class TradePlanActivity extends DataEntityBase {
 
@@ -40,49 +36,34 @@ public class TradePlanActivity extends DataEntityBase {
         public static final String ruleEffective = "rule_effective";
     }
 
-    /**
-     * 关联tradeID.
-     */
+
     @DatabaseField(columnName = "trade_id")
     private Long tradeId;
 
-    /**
-     * 关联tradeUuid.
-     */
+
     @DatabaseField(columnName = "trade_uuid")
     private String tradeUuid;
 
-    /**
-     * 营销活动ID.
-     */
+
     @DatabaseField(columnName = "rule_id", canBeNull = false)
     private Long ruleId;
 
-    /**
-     * 营销名称.
-     */
+
     @DatabaseField(columnName = "rule_name")
     private String ruleName;
 
-    /**
-     * 优惠金额.
-     */
+
     @DatabaseField(columnName = "offer_value", canBeNull = false)
     private BigDecimal offerValue;
 
-    /**
-     * 营销方案id.
-     */
+
     @DatabaseField(columnName = "plan_id", canBeNull = false)
     private Long planId;
-    /**
-     * 活动使用次数
-     */
+
     @DatabaseField(columnName = "plan_usage_count")
     private Integer planUsageCount;
 
-    //营销活动是否生效，主要针对快餐koisk业务需要,
-    @DatabaseField(columnName = "rule_effective")
+        @DatabaseField(columnName = "rule_effective")
     private Integer ruleEffective;
 
     public Long getTradeId() {
@@ -149,30 +130,19 @@ public class TradePlanActivity extends DataEntityBase {
         this.ruleEffective = ValueEnums.toValue(ruleEffective);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public int hashCode() {
         return super.hashCode();
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public boolean equals(Object obj) {
         return super.equals(obj);
     }
 
-    /**
-     * @Title: copyTradePlanActivity
-     * @Description: 拷贝
-     * @Param fromTradePlanActivity
-     * @Param toTradePlanActivity
-     * @Param @return TODO
-     * @Return TradePlanActivity 返回类型
-     */
+
     public TradePlanActivity copyTradePlanActivity(TradePlanActivity fromTradePlanActivity, TradePlanActivity toTradePlanActivity) {
         toTradePlanActivity.setId(fromTradePlanActivity.getId());
         toTradePlanActivity.setUuid(fromTradePlanActivity.getUuid());

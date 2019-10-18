@@ -13,10 +13,7 @@ import com.zhongmei.yunfu.db.enums.DishType;
 
 import java.util.List;
 
-/**
- * 负责DishLog的日志添加,查询
- * Created by demo on 2018/12/15
- */
+
 public class DishLogManager {
 
     public static void queryDishFromDb() {

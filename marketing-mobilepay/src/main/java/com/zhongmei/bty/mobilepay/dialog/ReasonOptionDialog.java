@@ -34,9 +34,7 @@ import java.util.Comparator;
 import java.util.List;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ReasonOptionDialog extends Dialog implements View.OnClickListener {
     private String TAG = ReasonOptionDialog.class.getSimpleName();
@@ -76,11 +74,9 @@ public class ReasonOptionDialog extends Dialog implements View.OnClickListener {
     }
 
 
-    // 在xml里面初始化
-    public void initView(String titleStr, String title2Str, ReasonType reasonType) {
+        public void initView(String titleStr, String title2Str, ReasonType reasonType) {
         this.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        //初始化输入法
-        this.mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                this.mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         listView = (ListView) findViewById(R.id.listView);
         inputMyET = (MyEditText) findViewById(R.id.user_defined_text);
         TextView title = (TextView) findViewById(R.id.dialog_title);
@@ -101,12 +97,7 @@ public class ReasonOptionDialog extends Dialog implements View.OnClickListener {
                 if (adapter != null || listView.getCount() != 0) {
                     setCurrentPosion(-1);
                 }
-                inputMyET.setFocusable(true);//设置输入框可聚集
-                inputMyET.setFocusableInTouchMode(true);//设置触摸聚焦
-                inputMyET.requestFocus();//请求焦点
-                inputMyET.findFocus();//获取焦点
-                mInputMethodManager.showSoftInput(inputMyET, InputMethodManager.SHOW_FORCED);// 显示输入法
-            }
+                inputMyET.setFocusable(true);                inputMyET.setFocusableInTouchMode(true);                inputMyET.requestFocus();                inputMyET.findFocus();                mInputMethodManager.showSoftInput(inputMyET, InputMethodManager.SHOW_FORCED);            }
         });
 
         adapter = new ReasonAdapter(mContext);
@@ -119,8 +110,7 @@ public class ReasonOptionDialog extends Dialog implements View.OnClickListener {
                 inputMyET.setHint(getContext().getString(R.string.reason_type_self_define_reason));
                 inputMyET.setFocusable(false);
                 if (mInputMethodManager.isActive()) {
-                    mInputMethodManager.hideSoftInputFromWindow(inputMyET.getWindowToken(), 0);// 隐藏输入法
-                }
+                    mInputMethodManager.hideSoftInputFromWindow(inputMyET.getWindowToken(), 0);                }
             }
         });
         startAsyncTask();
@@ -138,9 +128,7 @@ public class ReasonOptionDialog extends Dialog implements View.OnClickListener {
         }
     }
 
-    /**
-     * 隐藏自定义输入理由
-     */
+
     public void setDefinedGone() {
         if (inputMyET != null) {
             inputMyET.setVisibility(View.GONE);
@@ -149,11 +137,9 @@ public class ReasonOptionDialog extends Dialog implements View.OnClickListener {
 
     public void finishComposing() {
         Log.d(TAG, "finishComposing");
-//		clearUserDifinedFocus();
         inputMyET.setFocusable(true);
         inputMyET.setFocusableInTouchMode(true);
-        //setUserDefinedTextListener();
-    }
+            }
 
 
     @Override
@@ -245,49 +231,25 @@ public class ReasonOptionDialog extends Dialog implements View.OnClickListener {
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {
-        // 获取ListView对应的Adapter
-        ListAdapter listAdapter = listView.getAdapter();
+                ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
             return;
         }
         int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) { // listAdapter.getCount()返回数据项的数目
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0); // 计算子项View 的宽高
-            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
-        }
+        for (int i = 0; i < listAdapter.getCount(); i++) {             View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);             totalHeight += listItem.getMeasuredHeight();         }
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight
                 + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        // listView.getDividerHeight()获取子项间分隔符占用的高度
-        // params.height最后得到整个ListView完整显示需要的高度
-        listView.setLayoutParams(params);
+                        listView.setLayoutParams(params);
     }
-//	private void setListViewHeightBasedOnChildren(ListView listView) {
-//		ListAdapter listAdapter = listView.getAdapter();
-//		if (listAdapter == null) {
-//			return;
-//		}
-//		int singleHeight = 0;
-//		for (int i = 0; i < listAdapter.getCount(); i++) {
-//			View listItem = listAdapter.getView(i, null, listView);
-//			listItem.measure(0, 0);
-//			singleHeight = listItem.getMeasuredHeight();
-//			break;
-//		}
-//		Log.d(TAG, "singleHeight-->"+singleHeight);
-//		listView.setLayoutParams(new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-//				66 * listAdapter.getCount()));
-//	}
 
 
     public Reason getReason() {
         ReasonSetting reason = null;
         boolean isSelfDifinedReason = false;
-        //加入自定义reason
-        ReasonSetting userDefinedReason = new ReasonSetting();
-        // 如果数据有效
-        if (isReasonDataValid() && adapter != null && adapter.getCurrentCheckedItem() != -1 && reasonList.size() > 0) {
+                ReasonSetting userDefinedReason = new ReasonSetting();
+                if (isReasonDataValid() && adapter != null && adapter.getCurrentCheckedItem() != -1 && reasonList.size() > 0) {
             reason = (ReasonSetting) adapter.getItem(adapter.getCurrentCheckedItem());
         } else {
             if (adapter != null && adapter.getCurrentCheckedItem() == -1
@@ -295,8 +257,7 @@ public class ReasonOptionDialog extends Dialog implements View.OnClickListener {
                     && reasonList.size() > 0
                     && !inputMyET.getText().toString()
                     .equals(mContext.getResources().getString(R.string.reason_type_self_define_reason))) {
-                //读取自定义resaon
-                reason = userDefinedReason;
+                                reason = userDefinedReason;
                 isSelfDifinedReason = true;
             } else {
                 if (!TextUtils.isEmpty(inputMyET.getText().toString())

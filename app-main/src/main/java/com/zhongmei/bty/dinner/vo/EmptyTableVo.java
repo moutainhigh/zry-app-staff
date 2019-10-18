@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.db.entity.trade.Tables;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class EmptyTableVo {
 

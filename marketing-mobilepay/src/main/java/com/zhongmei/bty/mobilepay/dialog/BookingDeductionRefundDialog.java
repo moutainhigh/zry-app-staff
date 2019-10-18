@@ -43,10 +43,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- * 预定金抵扣退款
- */
+
 
 public class BookingDeductionRefundDialog extends BasicDialogFragment implements View.OnClickListener {
 
@@ -118,14 +115,9 @@ public class BookingDeductionRefundDialog extends BasicDialogFragment implements
         return view;
     }
 
-    /**
-     * 绑定控件
-     */
+
     private void bindView(View view) {
-        /*if (opType == OP_TYPE_DEDUCTION_AND_REFUND) {
-            PrePayMessage payMessage = createPrePayMessage();
-            DisplayServiceManager.updateDisplay(getContext(), payMessage);
-        }*/
+
         mIbClose = (ImageButton) view.findViewById(R.id.back);
         mTvTitle = (TextView) view.findViewById(R.id.tv_title);
         mTvTitleContent = (TextView) view.findViewById(R.id.tv_title_content);
@@ -140,22 +132,9 @@ public class BookingDeductionRefundDialog extends BasicDialogFragment implements
         mBtnSubmit.setOnClickListener(this);
     }
 
-    /*private PrePayMessage createPrePayMessage() {
-        PrePayMessage payMessage = new PrePayMessage();
-        payMessage.setPayType(PrePayMessage.PAY_TYPE_NONE);
-        TradeVo tradeVo = mPaymentInfo.getTradeVo();
-        double restAmount = CashInfoManager.floatSubtract(tradeVo.getTradeEarnestMoney(), mPaymentInfo.getActualAmount());
-        payMessage.setLabel(getString(R.string.handover_cash));
-        payMessage.setMessage(CashInfoManager.formatCash(restAmount));
-        payMessage.setPrePayPrice(CashInfoManager.formatCash(tradeVo.getTradeEarnestMoney()));
-        payMessage.setDiscountPrice(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));
-        payMessage.setRefundPrice(CashInfoManager.formatCash(restAmount));
-        return payMessage;
-    }*/
 
-    /**
-     * 选择UI
-     */
+
+
     private void switchView() {
         if (opType == OP_TYPE_DEDUCTION_AND_REFUND) {
             mTvTitle.setText(R.string.prepayment_deduction_and_refunt);
@@ -172,21 +151,14 @@ public class BookingDeductionRefundDialog extends BasicDialogFragment implements
         }
     }
 
-    /**
-     * 初始化数据
-     */
+
     private void initView() {
         TradeVo tradeVo = mPaymentInfo.getTradeVo();
-        mTvTradeInfo.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));//订单未收金额
-        if (opType == OP_TYPE_DEDUCTION_AND_PAY) {
-            mTvDeductionInfo.setText(CashInfoManager.formatCash(tradeVo.getTradeEarnestMoney()));//抵扣金额
-            double restAmount = CashInfoManager.floatSubtract(mPaymentInfo.getActualAmount(), tradeVo.getTradeEarnestMoney());
-            mTvResidueInfo.setText(CashInfoManager.formatCash(restAmount));//尾款金额或者退款金额
-        } else {
-            mTvDeductionInfo.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));//抵扣金额
-            double restAmount = CashInfoManager.floatSubtract(tradeVo.getTradeEarnestMoney(), mPaymentInfo.getActualAmount());
-            mTvResidueInfo.setText(CashInfoManager.formatCash(restAmount));//尾款金额或者退款金额
-        }
+        mTvTradeInfo.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));        if (opType == OP_TYPE_DEDUCTION_AND_PAY) {
+            mTvDeductionInfo.setText(CashInfoManager.formatCash(tradeVo.getTradeEarnestMoney()));            double restAmount = CashInfoManager.floatSubtract(mPaymentInfo.getActualAmount(), tradeVo.getTradeEarnestMoney());
+            mTvResidueInfo.setText(CashInfoManager.formatCash(restAmount));        } else {
+            mTvDeductionInfo.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));            double restAmount = CashInfoManager.floatSubtract(tradeVo.getTradeEarnestMoney(), mPaymentInfo.getActualAmount());
+            mTvResidueInfo.setText(CashInfoManager.formatCash(restAmount));        }
         initPrepaymentView(tradeVo.getTradeEarnestMoneys());
     }
 
@@ -243,9 +215,7 @@ public class BookingDeductionRefundDialog extends BasicDialogFragment implements
         public void onFinished(boolean isOK, int statusCode) {
             try {
                 if (isOK) {
-                    dismiss();//如果抵扣成功，关闭界面
-                    EventBus.getDefault().post(new ExemptEventUpdate(mPaymentInfo.getEraseType())); //刷新输入框
-                }
+                    dismiss();                    EventBus.getDefault().post(new ExemptEventUpdate(mPaymentInfo.getEraseType()));                 }
             } catch (Exception e) {
                 Log.e(TAG, "", e);
             }
@@ -253,16 +223,14 @@ public class BookingDeductionRefundDialog extends BasicDialogFragment implements
     };
 
     private PayModelItem getPayModelItemTypePay() {
-        PayModelItem item = new PayModelItem(PayModeId.EARNEST_DEDUCT);//订金抵扣
-        double faceValue = mPaymentInfo.getTradeVo().getTradeEarnestMoney();
+        PayModelItem item = new PayModelItem(PayModeId.EARNEST_DEDUCT);        double faceValue = mPaymentInfo.getTradeVo().getTradeEarnestMoney();
         item.setChangeAmount(BigDecimal.ZERO);
         item.setUsedValue(BigDecimal.valueOf(faceValue));
         return item;
     }
 
     private PayModelItem getPayModelItemTypeRefund() {
-        PayModelItem item = new PayModelItem(PayModeId.EARNEST_DEDUCT);//订金抵扣
-        double faceValue = mPaymentInfo.getActualAmount();
+        PayModelItem item = new PayModelItem(PayModeId.EARNEST_DEDUCT);        double faceValue = mPaymentInfo.getActualAmount();
         item.setChangeAmount(BigDecimal.ZERO);
         item.setUsedValue(BigDecimal.valueOf(faceValue));
         return item;

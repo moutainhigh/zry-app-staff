@@ -2,15 +2,10 @@ package com.zhongmei.bty.basemodule.devices.mispos.data;
 
 import java.io.Serializable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class EctempAccount implements Serializable {
 
-    /**
-     * serverCreateTime : 2016-06-28 17:15:37 serverUpdateTime : 2016-06-28 17:27:55 creatorId : 999 updatorId : 999
-     * statusFlag : 1 id : 1 brandId : 3268 cardInstanceId : 44416 remainValue : 100 totalValue : 100 version : 1
-     */
+
     private static final long serialVersionUID = 1L;
     private String serverCreateTime;
 
@@ -28,10 +23,8 @@ public class EctempAccount implements Serializable {
 
     private Long cardInstanceId;
 
-    private Double remainValue;// 储值余额
-
-    private Double totalValue;// 累计储值
-
+    private Double remainValue;
+    private Double totalValue;
     private int version;
 
     public String getServerCreateTime() {

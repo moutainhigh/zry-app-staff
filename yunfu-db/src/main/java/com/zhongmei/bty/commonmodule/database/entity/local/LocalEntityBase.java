@@ -5,52 +5,34 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.UuidEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- *
 
- *
- */
 public class LocalEntityBase extends UuidEntityBase {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     protected interface $ extends UuidEntityBase.$ {
 
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * client_create_time
-         */
+
         String clientCreateTime = "client_create_time";
 
-        /**
-         * client_update_time
-         */
+
         String clientUpdateTime = "client_update_time";
 
     }
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 客户端创建时间
-     */
+
     @DatabaseField(columnName = "client_create_time", canBeNull = false)
     private Long clientCreateTime;
 
-    /**
-     * 客户端最后修改时间
-     */
+
     @DatabaseField(columnName = "client_update_time")
     private Long clientUpdateTime;
 

@@ -115,26 +115,15 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @Date：2015-9-6
- * @Description: 商品信息和开台信息标题和内容封装
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @EBean
 public class TableInfoContentBean {
-    private List<View> listViews; // Tab页面列表
-
-    private int offset = 0;// 动画图片偏移量
-
-    private int bmpW;// 动画图片宽度
-
-//    public static boolean needJumpToDishWindow = false;//是否需要跳转到点菜界面
+    private List<View> listViews;
+    private int offset = 0;
+    private int bmpW;
 
     @ViewById(R.id.newtrade_operate_ll)
-    LinearLayout newTradeOperateLL;//微信订单操作栏
-
+    LinearLayout newTradeOperateLL;
     @ViewById(R.id.accept_btn)
     Button acceptBtn;
 
@@ -163,25 +152,20 @@ public class TableInfoContentBean {
     LinearLayout finishTradeLL;
 
     @ViewById(R.id.move_dish_operate_ll)
-    LinearLayout moveDishOperateLL;//移菜选择按钮
-
+    LinearLayout moveDishOperateLL;
     @ViewById(R.id.cancel_move_dish_ll)
-    LinearLayout cancelMoveDishLL;//移菜拖动界面取消按钮
-
+    LinearLayout cancelMoveDishLL;
     @ViewById(R.id.settle_btn)
-    Button settleBtn;//结算按钮
-
+    Button settleBtn;
     @ViewById(R.id.order_dish_btn)
     Button mBtnOrderDish;
 
     @ViewById(R.id.change_table_ll)
-    LinearLayout changeTableLL;//该单保存
-
+    LinearLayout changeTableLL;
     @ViewById(R.id.cancel_move_dish_btn)
     Button cancelMoveDishBtn;
 
-    //起菜、崔菜底部栏
-    @ViewById(R.id.dish_operate_bottombar_ll)
+        @ViewById(R.id.dish_operate_bottombar_ll)
     LinearLayout dishOperateLL;
 
     @ViewById(R.id.cancel_btn_dishoperate)
@@ -197,8 +181,7 @@ public class TableInfoContentBean {
 
     TableInfoFragment tableInfoFragment;
 
-    public DinnerDishTradeInfoFragment tradeInfoFragment;//商品页
-
+    public DinnerDishTradeInfoFragment tradeInfoFragment;
     private TableFragmentBase tableFragment;
 
 
@@ -215,18 +198,15 @@ public class TableInfoContentBean {
             R.id.save_change_table_btn, R.id.cancel_btn_dishoperate, R.id.done_btn_dishoperate})
     void onclick(View v) {
         switch (v.getId()) {
-            case R.id.accept_btn://接受
-                if (!ClickManager.getInstance().isClicked()) {
+            case R.id.accept_btn:                if (!ClickManager.getInstance().isClicked()) {
                     MobclickAgentEvent.onEvent(context, DinnerMobClickAgentEvent.tableDetailsAccept);
                     if (newTradeOperateLL.getTag() == null) {
                         verifyAccept();
                     } else {
-                        //判断是否有订单是否可操作
-                        if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
+                                                if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
                             return;
                         }
-                        //微信加菜，要先接受原订单
-                        if (dinnerTableTradeVo.getTradeVo().getTrade().getTradeStatus() == TradeStatus.UNPROCESSED) {
+                                                if (dinnerTableTradeVo.getTradeVo().getTrade().getTradeStatus() == TradeStatus.UNPROCESSED) {
                             ToastUtil.showShortToast(R.string.dinner_table_need_accept_original);
                             return;
                         }
@@ -236,14 +216,12 @@ public class TableInfoContentBean {
                 }
 
                 break;
-            case R.id.refuse_btn://拒绝
-                if (!ClickManager.getInstance().isClicked()) {
+            case R.id.refuse_btn:                if (!ClickManager.getInstance().isClicked()) {
                     MobclickAgentEvent.onEvent(context, DinnerMobClickAgentEvent.tableDetailsRefuse);
                     if (newTradeOperateLL.getTag() == null) {
                         verifyRefuse();
                     } else {
-                        //判断是否有订单是否可操作
-                        if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
+                                                if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
                             return;
                         }
                         refuseAddItem();
@@ -254,26 +232,20 @@ public class TableInfoContentBean {
                 break;
             case R.id.done_btn:
                 if (!ClickManager.getInstance().isClicked()) {
-//                    TableInfoContentBean.needJumpToDishWindow = true;
-                    post(new ActionOpenTable());//开台
-
+                    post(new ActionOpenTable());
                 }
                 break;
 
             case R.id.save_btn:
                 if (!ClickManager.getInstance().isClicked()) {
                     MobclickAgentEvent.onEvent(context, DinnerMobClickAgentEvent.tableDetailsSure);
-                    //判断是否有订单是否可操作
-                    if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
+                                        if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
                         return;
                     }
-                    post(new ActionSaveDishService());//保存菜品状态
-                }
+                    post(new ActionSaveDishService());                }
                 break;
-            case R.id.cancel_btn://取消滑菜操作
-                if (dinnerTableTradeVo != null) {
-                    //百糯先付订单未接受时,百糯先付订单接受后 不改变按钮状态
-                    if (TradeSourceUtils.isTradePayedUnAcceptFromBAIDURICE(dinnerTableTradeVo)) {
+            case R.id.cancel_btn:                if (dinnerTableTradeVo != null) {
+                                        if (TradeSourceUtils.isTradePayedUnAcceptFromBAIDURICE(dinnerTableTradeVo)) {
                         MobclickAgentEvent.onEvent(context, DinnerMobClickAgentEvent.tableDetailsCancel);
                         post(new ActionTableInfoBottomBarStatus(BottomBarStatus.NEW_TRADE_OPERATE));
                         break;
@@ -284,9 +256,7 @@ public class TableInfoContentBean {
                 }
                 post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_OPERATE));
                 break;
-            case R.id.settle_btn://结账
-                //判断是否有订单是否可操作
-                if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
+            case R.id.settle_btn:                                if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
                     return;
                 }
 
@@ -297,35 +267,15 @@ public class TableInfoContentBean {
                     }
                 }
 
-//                TradeVo tradeVo = dinnerTableTradeVo.getTradeVo();
-//                if(tradeVo != null && tradeVo.getTradePrivileges() != null && tradeVo.getTradePrivileges().size() >0
-//                        || tradeVo.getTrade().getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0
-//                        || (tradeVo.getExtraChargeMap() != null && tradeVo.getExtraChargeMap().size() != 0)){
-//
-//                    new CommonDialogFragment.CommonDialogFragmentBuilder().title(activity.getResources().getString(R.string.can_not_into_pay))
-//                            .iconType(R.drawable.common_dialog_icon_warning)
-//                            .negativeText(R.string.know)
-//                            .negativeLisnter(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View arg0) {
-//                                    return;
-//                                }
-//                            })
-//                            .build()
-//                            .show(activity.getSupportFragmentManager(), activity.getClass().getSimpleName());
-//                }else{
                 if (!ClickManager.getInstance().isClicked()) {
                     MobclickAgentEvent.onEvent(activity, MobclickAgentEvent.dinnerTableClickPayButton);
                     verifyPay();
                 }
 
-//                }
 
                 break;
-            case R.id.pay_btn://结算（没用）
-                if (!ClickManager.getInstance().isClicked()) {
-                    //判断是否有订单是否可操作
-                    if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
+            case R.id.pay_btn:                if (!ClickManager.getInstance().isClicked()) {
+                                        if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
                         return;
                     }
 
@@ -334,8 +284,7 @@ public class TableInfoContentBean {
                 }
 
                 break;
-            case R.id.order_dish_btn://点菜
-                if (!TradeStatusUtil.checkPayStatus(tableInfoFragment.getDinnerTableTradeVo()) && tableInfoFragment.getBusinessType() != BusinessType.BUFFET) {
+            case R.id.order_dish_btn:                if (!TradeStatusUtil.checkPayStatus(tableInfoFragment.getDinnerTableTradeVo()) && tableInfoFragment.getBusinessType() != BusinessType.BUFFET) {
                     ToastUtil.showShortToast(context.getString(R.string.dinner_paying));
                     return;
                 }
@@ -348,8 +297,7 @@ public class TableInfoContentBean {
                 }
 
                 if (!ClickManager.getInstance().isClicked()) {
-                    //判断是否有订单是否可操作
-                    if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
+                                        if (AsyncNetworkManager.getInstance().queryNotSuccess(context, dinnerTableTradeVo.getTradeVo().getTrade().getId())) {
                         return;
                     }
 
@@ -363,13 +311,11 @@ public class TableInfoContentBean {
                 MobclickAgentEvent.onEvent(activity, DinnerMobClickAgentEvent.tableDetailsFinish);
                 finishTrade(dinnerTableTradeVo.getTradeVo().getTrade().getId());
                 break;
-            case R.id.cancel_choose_dish_btn://取消移菜
-                if (!ClickManager.getInstance().isClicked()) {
+            case R.id.cancel_choose_dish_btn:                if (!ClickManager.getInstance().isClicked()) {
                     post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_OPERATE));
                 }
                 break;
-            case R.id.start_move_dish_btn://开始移菜
-                if (!ClickManager.getInstance().isClicked()) {
+            case R.id.start_move_dish_btn:                if (!ClickManager.getInstance().isClicked()) {
                     if (tradeInfoFragment.getSelectedDishAdapter().getCheckedNumber() == 0) {
                         ToastUtil.showShortToast(R.string.dinner_move_dish_not_choosedish);
                         return;
@@ -390,22 +336,17 @@ public class TableInfoContentBean {
                 break;
             case R.id.open_table_btn:
                 if (!ClickManager.getInstance().isClicked()) {
-//                    TableInfoContentBean.needJumpToDishWindow = false;
-                    post(new ActionOpenTable());//只开台不跳转
-
+                    post(new ActionOpenTable());
                 }
 
                 break;
             case R.id.save_change_table_btn:
                 if (!ClickManager.getInstance().isClicked()) {
-                    post(new ActionOpenTable());//改台（修改人数）
-                }
+                    post(new ActionOpenTable());                }
                 break;
-            case R.id.cancel_btn_dishoperate://取消起菜或者崔菜
-                cancelDishOperate();
+            case R.id.cancel_btn_dishoperate:                cancelDishOperate();
                 break;
-            case R.id.done_btn_dishoperate://完成起菜或者崔菜
-                finishDishOperate();
+            case R.id.done_btn_dishoperate:                finishDishOperate();
                 break;
             default:
                 break;
@@ -414,11 +355,9 @@ public class TableInfoContentBean {
 
     public void initialContent() {
         FragmentManager manager = activity.getSupportFragmentManager();
-//        tableInfoFragment = (TableInfoFragment) activity.getSupportFragmentManager().findFragmentByTag(DinnertableFragment.CONTROL_FRAGMENT_TAG);
         tableInfoFragment = tableFragment.getInfoFragment();
         tradeInfoFragment = new DinnerDishTradeInfoFragment_();
-        // 初始化参数
-        Bundle bundle = new Bundle();
+                Bundle bundle = new Bundle();
         bundle.putInt(DinnerDishTradeInfoFragment.DISHSHOPCART_PAGE, DinnerDishTradeInfoFragment.PAGE_TABLE);
         tradeInfoFragment.setArguments(bundle);
         tradeInfoFragment.setBusinessType(tableFragment.getBussinessType());
@@ -429,15 +368,7 @@ public class TableInfoContentBean {
 
     public void refreshView(final DinnertableTradeVo tradeVo) {
         dinnerTableTradeVo = tradeVo;
-       /* // 开台后刷新时需要跳转
-        if(needJumpToDishWindow){
-            goToDishWindow();
-            needJumpToDishWindow=false;
 
-            OpentablePopWindow.getInstance(activity).hide();
-            tableInfoFragment.enableAddOrderBtn(true);
-            return;
-        }*/
 
         refreshGoodsInfo(tradeVo);
         showOperateButton(tradeVo);
@@ -453,12 +384,7 @@ public class TableInfoContentBean {
         }
     }
 
-    /**
-     * @param tradeVo
-     * @Date 2015年9月25日
-     * @Description: 刷新商品信息列表
-     * @Return void
-     */
+
     private void refreshGoodsInfo(DinnertableTradeVo tradeVo) {
         if (tradeInfoFragment != null) {
             if (tradeVo != null && tradeVo.getItems() != null) {
@@ -470,11 +396,7 @@ public class TableInfoContentBean {
         }
     }
 
-    /**
-     * @Date 2015年11月2日
-     * @Description: 显示微信操作栏
-     * @Return void
-     */
+
     public void showOperateButton(DinnertableTradeVo tradeVo) {
         if (isTradeEmpty(tradeVo)) {
             post(new ActionTableInfoBottomBarStatus(BottomBarStatus.OPENTABLE));
@@ -486,8 +408,7 @@ public class TableInfoContentBean {
                     || TradeSourceUtils.isTradePayedAndConfirmed(tradeVo, SourceId.KOU_BEI)
                     || TradeSourceUtils.isTradePayedAcceptedFromBAIDURICE(tradeVo)
                     || TradeSourceUtils.isTradePayedFromShuKe(tradeVo)
-                    || TradeSourceUtils.isTradePayedFromOpenFlatform(tradeVo)) {//展示完成交易按钮
-                post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_FINISH));
+                    || TradeSourceUtils.isTradePayedFromOpenFlatform(tradeVo)) {                post(new ActionTableInfoBottomBarStatus(BottomBarStatus.TRADE_FINISH));
             } else {
                 if (tradeInfoFragment.isDishServingModify()) {
                     post(new ActionTableInfoBottomBarStatus(BottomBarStatus.DISH_SERVING_MODIFY));
@@ -514,10 +435,8 @@ public class TableInfoContentBean {
             if (dinnerTableTradeVo.getTradeVo().getTrade().getSource() == SourceId.KOU_BEI) {
                 final TradeVo tradeVo = dinnerTableTradeVo.getTradeVo();
                 TradeExtra tradeExtra = dinnerTableTradeVo.getTradeVo().getTradeExtra();
-                if (!tradeVo.isAppointmentOrder()) {//无预约时间
-                    acceptKouBeiOrder(tradeVo);
-                } else {//预约时间
-                    boolean allowMultTrades = ServerSettingManager.allowMultiTradesOnTable();
+                if (!tradeVo.isAppointmentOrder()) {                    acceptKouBeiOrder(tradeVo);
+                } else {                    boolean allowMultTrades = ServerSettingManager.allowMultiTradesOnTable();
                     String expectTime = DateUtil.format(tradeExtra.getExpectTime());
                     String hint = allowMultTrades ?
                             String.format(activity.getString(R.string.koubei_accept_order_appointment_hint2), expectTime) : String.format(activity.getString(R.string.koubei_accept_order_appointment_hint), expectTime);
@@ -565,7 +484,6 @@ public class TableInfoContentBean {
 
                                 TradeVo tradeVo = dinnerTableTradeVo.getTradeVo();
                                 Long expectTime = tradeVo.getTradeExtra() == null ? null : tradeVo.getTradeExtra().getExpectTime();
-                                //AlarmService.setDinnerAlarmPrint(context, tradeVo, isPaid, isSendKitchen, expectTime);
 
                                 Trade trade = tradeVo.getTrade();
                                 AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_ACCPET_ORDER, trade.getId(), tradeUuid, trade.getClientUpdateTime());
@@ -579,11 +497,7 @@ public class TableInfoContentBean {
                         public void onError(VolleyError error) {
                             AuthLogManager.getInstance().clear();
                             ToastUtil.showLongToast(error.getMessage());
-                            // 测试
-                            // EventBus.getDefault().post(new
-                            // EventInsertDinnerNotice(tradeUuid,
-                            // tableId));
-                        }
+                                                                                                                                        }
 
                     }, activity.getSupportFragmentManager()));
         }
@@ -623,7 +537,6 @@ public class TableInfoContentBean {
                                 ToastUtil.showLongToast(response.getMessage());
                                 if (ResponseObject.isOk(response)) {
                                     Long expectTime = tradeVo.getTradeExtra() == null ? null : tradeVo.getTradeExtra().getExpectTime();
-                                    //AlarmService.setDinnerAlarmPrint(context, tradeVo, isPaid, isSendKitchen, expectTime);
 
                                     Trade trade = tradeVo.getTrade();
                                     AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_ACCPET_ORDER, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
@@ -695,8 +608,7 @@ public class TableInfoContentBean {
         TradeOperates httpImpl = OperatesFactory.create(TradeOperates.class);
         Reason reason = result.reason;
         final boolean isPrintChecked = result.isPrintChecked;
-        //String uuid = mTradePaymentVo.getTradeVo().getTrade().getUuid();
-        switch (reasonType) {
+                switch (reasonType) {
             case RejectReason.REASON_TYPE_REFUSE:
                 tradeVo = dinnerTableTradeVo.getTradeVo();
                 if (tradeVo == null) {
@@ -730,8 +642,7 @@ public class TableInfoContentBean {
         return false;
     }
 
-    // 拒绝
-    void refuse() {
+        void refuse() {
         if (dinnerTableTradeVo != null && dinnerTableTradeVo.getTradeVo() != null) {
             final String tradeUuid = dinnerTableTradeVo.getTradeVo().getTrade().getUuid();
 
@@ -785,11 +696,7 @@ public class TableInfoContentBean {
         }
     }
 
-    /**
-     * 用EventBus发送一个事件
-     *
-     * @param obj
-     */
+
     public void post(Object obj) {
         EventBus.getDefault().post(obj);
     }
@@ -829,7 +736,6 @@ public class TableInfoContentBean {
             case TRADE_OPERATE:
                 showOperateView(tradeOperateLL);
                 showMoveDishCheckMode(false);
-//              settleBtn.setText(R.string.dinner_table_settlebutton);
 
                 break;
             case DISH_SERVING_MODIFY:
@@ -867,12 +773,7 @@ public class TableInfoContentBean {
 
     }
 
-    /**
-     * @param views
-     * @Date 2015年11月20日
-     * @Description: 显示操作栏
-     * @Return void
-     */
+
     void showOperateView(View... views) {
         for (int i = 0; i < bottomOperateLL.getChildCount(); i++) {
             bottomOperateLL.getChildAt(i).setVisibility(View.GONE);
@@ -890,53 +791,25 @@ public class TableInfoContentBean {
         }
     }
 
-    /**
-     * @Date 2015年11月20日
-     * @Description: 点菜响应
-     * @Return void
-     */
+
     private void goToDishWindow() {
-        // 将订单数据写入购物车
-        if (dinnerTableTradeVo == null || dinnerTableTradeVo.getStatus() == DinnertableStatus.EMPTY) {
+                if (dinnerTableTradeVo == null || dinnerTableTradeVo.getStatus() == DinnertableStatus.EMPTY) {
 
         } else {
-            //modify by zhubo 2015-10-30 resetOrderFromTable方法参数调整
-            DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnerTableTradeVo.getDinnertableTrade(), dinnerTableTradeVo.getTradeVo());
+                        DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnerTableTradeVo.getDinnertableTrade(), dinnerTableTradeVo.getTradeVo());
             DinnerShoppingCart.getInstance().resetOrderFromTable(dinnerTableTradeVo.getUnionMainTradeInfo(), dinnerTableTradeVo.getInfo(), true);
-            // 显示点菜界面
-            //((TableMainActivity) activity).showOrderDish();
 
         }
     }
 
 
     private void verifyPay() {
-//        boolean isOk = VerifyPermissionUtils.alertVerifyPermissInputDialog(activity,
-//                DinnerApplication.PERMISSION_DINNER_CASH,
-//                new PermissionVerify() {
-//                    @Override
-//                    public void verify(String permission, boolean success) {
-//                        if (success && permission.equals(DinnerApplication.PERMISSION_DINNER_CASH)) {
-//                            pay();
-//                        }
-//
-//                    }
-//                });
-//        if (isOk)
-//        VerifyPermissionUtils.verifyRun(activity, DinnerApplication.PERMISSION_DINNER_CASH, new Runnable() {
-//            @Override
-//            public void run() {
-//                pay();
-//            }
-//        });
-        if (dinnerTableTradeVo.isNeedFinishTrade()) {//如果订单支付完成调用完结操作
-            if (dinnerTableTradeVo.isNeedReturnDeposit()) {
+        if (dinnerTableTradeVo.isNeedFinishTrade()) {            if (dinnerTableTradeVo.isNeedReturnDeposit()) {
                 MobclickAgentEvent.onEvent(activity, BuffetMobClickAgentEvent.buffetTableDetailsFinishReturndeposit);
                 DepositInfoDialog.show(activity, dinnerTableTradeVo.getTradeVo());
             } else {
                 MobclickAgentEvent.onEvent(activity, BuffetMobClickAgentEvent.buffetTradeDetailsBuffetFinish);
-                //如果是联台主单完成，调用主单合单接口 add v9.0
-                if (dinnerTableTradeVo.getTradeVo().getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
+                                if (dinnerTableTradeVo.getTradeVo().getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
                     finishBuffetUnitTrade(dinnerTableTradeVo);
                 } else {
                     finishTrade(dinnerTableTradeVo.getTradeVo().getTrade().getId());
@@ -947,11 +820,7 @@ public class TableInfoContentBean {
         }
     }
 
-    /**
-     * @Date 2015年11月26日
-     * @Description: 收银
-     * @Return void
-     */
+
     private void pay() {
         MobclickAgentEvent.onEvent(context, DinnerMobClickAgentEvent.tableDetailsCheckout);
         TradeVo tradeVo = dinnerTableTradeVo.getTradeVo();
@@ -961,15 +830,13 @@ public class TableInfoContentBean {
             return;
         }
         List<IShopcartItem> shopcartItemList = getShopCartDishItems();
-        //无品项的情况
-        if ((tradeVo == null || tradeVo.getTradeItemList() == null || tradeVo.getTradeItemList().size() == 0)
+                if ((tradeVo == null || tradeVo.getTradeItemList() == null || tradeVo.getTradeItemList().size() == 0)
                 && (Utils.isEmpty(tradeVo.getCouponPrivilegeVoList()) || tradeVo.getIntegralCashPrivilegeVo() == null || tradeVo.getTradePrivilege() == null)
                 && Utils.isEmpty(tradeVo.getTradeBuffetPeoples()) && Utils.isEmpty(shopcartItemList)) {
             ToastUtil.showShortToast(context.getString(R.string.dinner_no_unpain_dish));
             return;
         }
-        //排除已提交或者已打印的删除项
-        boolean canPay = false;
+                boolean canPay = false;
         for (IShopcartItem shopcartItem : shopcartItemList) {
             if (shopcartItem.getStatusFlag() == StatusFlag.VALID && shopcartItem.getTotalQty().doubleValue() != 0) {
                 canPay = true;
@@ -986,21 +853,12 @@ public class TableInfoContentBean {
             return;
         }
 
-//        if (tradeVo.getTrade().getTradeAmount().compareTo(BigDecimal.ZERO) < 0) {
-//            ToastUtil.showShortToast("收银金额不能为负，请重新结算!");
-//        } else {
-        //解决跳转闪烁问题
-        //modify 20161213 start
-        if (tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PAYING && tradeVo.getTrade().getBusinessType() != BusinessType.BUFFET) {
+                        if (tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PAYING && tradeVo.getTrade().getBusinessType() != BusinessType.BUFFET) {
             DoPayManager.gotoPayActivity(activity, tradeVo, true);
         } else {
-            //正餐收银界面
-            DinnerShoppingCart.getInstance().resetOrderFromTable(dinnerTableTradeVo.getUnionMainTradeInfo(), dinnerTableTradeVo.getInfo(), true);
-            //PayManager.gotoDinnerPayUI(activity, null, tradeVo, false, false);
-        }
-        //modify 20161213 end
-//        }
-    }
+                        DinnerShoppingCart.getInstance().resetOrderFromTable(dinnerTableTradeVo.getUnionMainTradeInfo(), dinnerTableTradeVo.getInfo(), true);
+                    }
+            }
 
     private void goSettlePage() {
         if (dinnerTableTradeVo == null || dinnerTableTradeVo.getStatus() == DinnertableStatus.EMPTY) {
@@ -1008,17 +866,10 @@ public class TableInfoContentBean {
         } else {
             DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.create(dinnerTableTradeVo.getDinnertableTrade(), dinnerTableTradeVo.getTradeVo());
             DinnerShoppingCart.getInstance().resetOrderFromTable(tradeInfo, true);
-            //Intent intent = new Intent(activity, DinnerOrderDishMainActivity.class);
-            //intent.putExtra(DinnerOrderDishMainActivity.IS_DEFAULT_SETTLE, true);
-            //activity.startActivity(intent);
-        }
+                                            }
     }
 
-    /**
-     * 异步操作进行中
-     *
-     * @return
-     */
+
     public static boolean isAsyncHttpExcuting(DinnertableTradeVo dinnertableTradeVo) {
         boolean excuting = false;
 
@@ -1031,8 +882,7 @@ public class TableInfoContentBean {
         return excuting;
     }
 
-    //联台主单完成接口 add v9.0
-    private void finishBuffetUnitTrade(DinnertableTradeVo tableTradeVo) {
+        private void finishBuffetUnitTrade(DinnertableTradeVo tableTradeVo) {
         TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
         ResponseListener<TradeResp> listener = new ResponseListener<TradeResp>() {
 
@@ -1051,18 +901,10 @@ public class TableInfoContentBean {
                 ToastUtil.showLongToast(error.getMessage());
             }
         };
-        /*try {
-            tradeOperates.buffetUnionFinish(BuffetMergeUnionManager.createBuffetMergeUnionReq(tableTradeVo.getTradeVo()), LoadingResponseListener.ensure(listener, activity.getSupportFragmentManager()));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
+
     }
 
-    /**
-     * @Date 2016年4月28日
-     * @Description: 完成大众点评已支付订单
-     * @Return void
-     */
+
     private void finishTrade(Long tradeId) {
         TradeOperates mTradeOperates = OperatesFactory.create(TradeOperates.class);
         ResponseListener<TradeFinishResp> listener = new ResponseListener<TradeFinishResp>() {
@@ -1071,8 +913,7 @@ public class TableInfoContentBean {
             public void onResponse(ResponseObject<TradeFinishResp> response) {
                 if (ResponseObject.isOk(response)) {
                     ToastUtil.showLongToast(response.getMessage());
-                    //modify by zhubo 2016-5-18 解决完成订单后，点击开台按钮提示未清台的bug
-                    TableInfoFragment fragment = (TableInfoFragment) activity.getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
+                                        TableInfoFragment fragment = (TableInfoFragment) activity.getSupportFragmentManager().findFragmentByTag(DinnerTableConstant.CONTROL_FRAGMENT_TAG);
                     if (fragment != null) {
                         fragment.onClick(fragment.closeBtn);
                     }
@@ -1090,12 +931,7 @@ public class TableInfoContentBean {
         mTradeOperates.tradeFinish(tradeId, LoadingResponseListener.ensure(listener, activity.getSupportFragmentManager()));
     }
 
-    /**
-     * @Date 2016/6/8
-     * @Description:是否进入移菜选择模式
-     * @Param
-     * @Return
-     */
+
     public void showMoveDishCheckMode(boolean show) {
         DinnerDishTradeInfoFragment tradeInfoFragment = (DinnerDishTradeInfoFragment) activity.getSupportFragmentManager().findFragmentByTag("dinner_table_page0");
         if (tradeInfoFragment == null) return;
@@ -1111,53 +947,39 @@ public class TableInfoContentBean {
             } else {
                 updateCancelMoveDishBtn((byte) 1);
             }
-            showOperateView(cancelMoveDishLL);//moveDishOperateLL
-
+            showOperateView(cancelMoveDishLL);
             tableInfoFragment.addItemBatchView.setVisibility(View.GONE);
 
             tableInfoFragment.llNumberAndWaiter.setVisibility(View.GONE);
             tableInfoFragment.titleRL.setVisibility(View.GONE);
             tableInfoFragment.moveDishTopbarRL.setVisibility(View.VISIBLE);
-            tableFragment.enableDinnertableClick(false);//禁止点击桌台
-
-            tableInfoFragment.refreshDishCheckTitleBar();//刷新选择菜品标题栏
-            tableInfoFragment.initialDishAllCheckBar(true);
+            tableFragment.enableDinnertableClick(false);
+            tableInfoFragment.refreshDishCheckTitleBar();            tableInfoFragment.initialDishAllCheckBar(true);
         } else {
             adapter.setDishCheckMode(false);
             tradeInfoFragment.setMoveDishDragMode(false);
             tradeInfoFragment.enableSlideDishItem();
 
-            //判断单子是否有加菜单
-            tableInfoFragment.refreshAddItemBatchView();
+                        tableInfoFragment.refreshAddItemBatchView();
 
             tableInfoFragment.llNumberAndWaiter.setVisibility(View.VISIBLE);
             tableInfoFragment.titleRL.setVisibility(View.VISIBLE);
             tableInfoFragment.moveDishTopbarRL.setVisibility(View.GONE);
 
-            tableFragment.enableDinnertableClick(true);//允许点击桌台
-            tableInfoFragment.initialDishAllCheckBar(false);
+            tableFragment.enableDinnertableClick(true);            tableInfoFragment.initialDishAllCheckBar(false);
         }
         tradeInfoFragment.updateOrderDishList(dinnerTableTradeVo.getItems(), dinnerTableTradeVo.getTradeVo());
 
 
     }
 
-    /**
-     * 获取购物车中数据
-     *
-     * @return
-     */
+
     private List<IShopcartItem> getShopCartDishItems() {
         DinnerDishTradeInfoFragment tradeInfoFragment = (DinnerDishTradeInfoFragment) activity.getSupportFragmentManager().findFragmentByTag("dinner_table_page0");
         return tradeInfoFragment.getSelectedDishAdapter().getAllIShopcartItems();
     }
 
-    /**
-     * @Date 2016/6/12
-     * @Description:移菜拖动界面展示
-     * @Param
-     * @Return
-     */
+
     public void showMoveDishDragMode(boolean show) {
         DinnerDishTradeInfoFragment tradeInfoFragment = (DinnerDishTradeInfoFragment) activity.getSupportFragmentManager().findFragmentByTag("dinner_table_page0");
         DinnerShopCartAdapter adapter = tradeInfoFragment.getSelectedDishAdapter();
@@ -1184,12 +1006,7 @@ public class TableInfoContentBean {
         return dinnerTableTradeVo;
     }
 
-    /**
-     * @Date 2016/7/27
-     * @Description:更新取消移菜/取消复制/完成复制按钮
-     * @Param
-     * @Return
-     */
+
     public void updateCancelMoveDishBtn(byte type) {
         if (type == 0) {
             cancelMoveDishBtn.setText(R.string.dinner_move_dish_cancel_button);
@@ -1211,18 +1028,12 @@ public class TableInfoContentBean {
         }
     }
 
-    /**
-     * @Date 2016/10/9
-     * @Description:等叫起菜选择模式
-     * @Param
-     * @Return
-     */
+
     public void showDishOperateCheckMode(boolean show, PrintOperationOpType opType) {
         DinnerDishTradeInfoFragment tradeInfoFragment = (DinnerDishTradeInfoFragment) activity.getSupportFragmentManager().findFragmentByTag("dinner_table_page0");
         if (tradeInfoFragment == null) return;
         DinnerShopCartAdapter adapter = tradeInfoFragment.getSelectedDishAdapter();
-        tradeInfoFragment.setEnableSlide(!show);//如果是等叫模式,不允许滑动
-        if (show) {
+        tradeInfoFragment.setEnableSlide(!show);        if (show) {
             adapter.setDishCheckMode(true);
             adapter.setOpType(opType);
             tradeInfoFragment.setMoveDishDragMode(false);
@@ -1235,13 +1046,10 @@ public class TableInfoContentBean {
             tableInfoFragment.llNumberAndWaiter.setVisibility(View.GONE);
             tableInfoFragment.titleRL.setVisibility(View.GONE);
             tableInfoFragment.dishOperateTitleLL.setVisibility(View.VISIBLE);
-            tableFragment.enableDinnertableClick(false);//禁止点击桌台
-
-//            tableInfoFragment.refreshDishCheckTitleBar();//刷新选择菜品标题栏
+            tableFragment.enableDinnertableClick(false);
             tableInfoFragment.initialDishAllCheckBar(true);
 
-            // 等叫时，不需要取消按钮
-            if (opType == PrintOperationOpType.WAKE_UP) {
+                        if (opType == PrintOperationOpType.WAKE_UP) {
                 dishOperateCancelBtn.setVisibility(View.GONE);
                 tableInfoFragment.operateNameTv.setText(context.getString(R.string.dinner_orderdish_dish_prepare));
             } else if (opType == PrintOperationOpType.RISE_DISH) {
@@ -1262,21 +1070,13 @@ public class TableInfoContentBean {
             tableInfoFragment.titleRL.setVisibility(View.VISIBLE);
             tableInfoFragment.dishOperateTitleLL.setVisibility(View.GONE);
 
-            tableFragment.enableDinnertableClick(true);//允许点击桌台
-            tableInfoFragment.initialDishAllCheckBar(false);
+            tableFragment.enableDinnertableClick(true);            tableInfoFragment.initialDishAllCheckBar(false);
             tradeInfoFragment.updateOrderDishList(dinnerTableTradeVo.getItems(), dinnerTableTradeVo.getTradeVo());
         }
         tradeInfoFragment.enableSlideDishItem();
-//        adapter.notifyDataSetChanged();
-//        tradeInfoFragment.updateOrderDishList(dinnerTableTradeVo.getItems(), dinnerTableTradeVo.getTradeVo());
     }
 
-    /**
-     * @Date 2016/10/9
-     * @Description:取消起菜或者崔菜
-     * @Param
-     * @Return
-     */
+
     private void cancelDishOperate() {
         final DinnerShopCartAdapter adapter = tradeInfoFragment.getSelectedDishAdapter();
         final PrintOperationOpType opType = adapter.getOpType();
@@ -1284,8 +1084,7 @@ public class TableInfoContentBean {
         if (opType == null) {
             return;
         }
-        // 催菜和起菜点击取消按钮时，移除已选择条目中添加在内存中的起菜和催菜
-        switch (opType) {
+                switch (opType) {
             case RISE_DISH:
             case REMIND_DISH:
                 List<DishDataItem> selectedItems = adapter.getCheckItems();
@@ -1300,12 +1099,7 @@ public class TableInfoContentBean {
         showDishOperateCheckMode(false, null);
     }
 
-    /**
-     * @Date 2016/10/9
-     * @Description:
-     * @Param
-     * @Return
-     */
+
     private void finishDishOperate() {
         final DinnerShopCartAdapter adapter = tradeInfoFragment.getSelectedDishAdapter();
         final PrintOperationOpType opType = adapter.getOpType();
@@ -1357,12 +1151,7 @@ public class TableInfoContentBean {
     }
 
 
-    /**
-     * @Date 2016/10/20
-     * @Description:接受加菜
-     * @Param
-     * @Return
-     */
+
     @Background
     protected void acceptAddItem() {
         List<TradeItemVo> tradeItemVos = dinnerTableTradeVo.getTradeVo().getTradeItemList();
@@ -1380,8 +1169,7 @@ public class TableInfoContentBean {
         DinnerShoppingCart shoppingCart = DinnerShoppingCart.getInstance();
         shoppingCart.resetOrderFromTable(tradeInfo, true);
 
-        //循环加菜
-        List<IShopcartItem> items = tableInfoFragment.getShopcartItemsAddDish();
+                List<IShopcartItem> items = tableInfoFragment.getShopcartItemsAddDish();
         if (items != null) {
             for (IShopcartItem item : items) {
                 shoppingCart.addReadOnlyShippingToCart(shoppingCart.getShoppingCartVo(), item, false);
@@ -1390,22 +1178,19 @@ public class TableInfoContentBean {
 
         final TradeVo tradeVo = shoppingCart.createOrder(shoppingCart.getShoppingCartVo(), false);
 
-        // 获取tradeid
-        Long tradeId = null;
+                Long tradeId = null;
         if (tradeVo.getTrade() != null) {
             tradeId = tradeVo.getTrade().getId();
         }
 
-        // 会员绑定tradeid
-        List<TradeCustomer> customerList = tradeVo.getTradeCustomerList();
+                List<TradeCustomer> customerList = tradeVo.getTradeCustomerList();
         if (customerList != null) {
             for (TradeCustomer tradeCustomer : customerList) {
                 tradeCustomer.setTradeId(tradeId);
             }
         }
 
-        // 菜品折扣绑定tradeid
-        for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
+                for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
             if (tradeItemVo.getTradeItemPrivilege() != null
                     && tradeItemVo.getTradeItemPrivilege().getTradeId() != tradeId) {
                 tradeItemVo.getTradeItemPrivilege().setTradeId(tradeId);
@@ -1433,14 +1218,8 @@ public class TableInfoContentBean {
                         listAddItemUUIDs.add(tradeItem.getUuid());
                     }
 
-                    //打印客看单
-                    //boolean isFirstPrintCustom = DinnerPrintUtil.isFirstPrintCustom(tradeVo);
-                    //IPrintHelper.Holder.getInstance().printCustomerTicket(tradeUUid, listAddItemUUIDs, null, null, isFirstPrintCustom, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.CUSTOMER));
-                    //打印后厨单
-                    if (isAcceptAutoTransferOpen) {
-                        //boolean isFirstPrintKitchen = DinnerPrintUtil.isFirstPrintKitchen(tradeVo);
-                        //DinnerPrintUtil.printKitchenTicketAfterAcceptOrder(tradeVo.getTrade().getUuid(), listAddItemUUIDs, isFirstPrintKitchen);
-                    }
+                                                                                                    if (isAcceptAutoTransferOpen) {
+                                                                    }
                 }
             }
 
@@ -1450,19 +1229,13 @@ public class TableInfoContentBean {
             }
         };
 
-        //重新计算价格
-        MathShoppingCartTool.mathTotalPrice(DinnerShoppingCart.getInstance().getShoppingCartDish(), tradeVo);
+                MathShoppingCartTool.mathTotalPrice(DinnerShoppingCart.getInstance().getShoppingCartDish(), tradeVo);
 
         tradeOperates.acceptAddItem(tradeVo, tableInfoFragment.getChooseAddItemVo(), isAcceptAutoTransferOpen,
                 LoadingResponseListener.ensure(listener, tableInfoFragment.getFragmentManager()));
     }
 
-    /**
-     * @Date 2016/10/20
-     * @Description:拒绝加菜
-     * @Param
-     * @Return
-     */
+
     private void refuseAddItem() {
         TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
         ResponseListener<TradeResp> listener = new EventResponseListener<TradeResp>(UserActionEvent.DINNER_TRADE_ITEM_ADD_REFUSE) {
@@ -1480,12 +1253,7 @@ public class TableInfoContentBean {
                 LoadingResponseListener.ensure(listener, tableInfoFragment.getFragmentManager()));
     }
 
-    /**
-     * @Date 2016/10/24
-     * @Description:是否是加菜模式
-     * @Param
-     * @Return
-     */
+
     public boolean isAddDishMode() {
         String tag = (String) newTradeOperateLL.getTag();
         if (newTradeOperateLL.getVisibility() == View.VISIBLE && tag.equals("add_dish")) {
@@ -1505,12 +1273,10 @@ public class TableInfoContentBean {
         DinnerDishTradeInfoFragment tradeInfoFragment = (DinnerDishTradeInfoFragment) activity.getSupportFragmentManager().findFragmentByTag("dinner_table_page0");
         if (tradeInfoFragment == null) return;
         DinnerShopCartAdapter adapter = tradeInfoFragment.getSelectedDishAdapter();
-        tradeInfoFragment.setEnableSlide(true);//如果是等叫模式,不允许滑动
-        adapter.setDishCheckMode(false);
+        tradeInfoFragment.setEnableSlide(true);        adapter.setDishCheckMode(false);
         tradeInfoFragment.setMoveDishDragMode(false);
         showOperateView(tradeOperateLL);
 
-//        tableInfoFragment.refreshAddItemBatchView();
 
         tradeInfoFragment.enableSlideDishItem();
         adapter.notifyDataSetChanged();

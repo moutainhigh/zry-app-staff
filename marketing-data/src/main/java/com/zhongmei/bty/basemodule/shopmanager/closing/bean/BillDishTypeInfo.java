@@ -3,31 +3,18 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 菜品类别信息表
- * Created by demo on 2018/12/15
- */
+
 public class BillDishTypeInfo implements Serializable {
-    /**
-     * 菜品类别Id
-     */
+
     private Long dishTypeId;
-    /**
-     * 菜品类别名称
-     */
+
     private String typeName;
-    /**
-     * 菜品类别下的菜品明细
-     */
+
     private List<BillDishInfo> billDishInfoList;
 
-    /**
-     * 数量
-     */
+
     private String quantity;
-    /**
-     * 总价
-     */
+
     private String actualAmount;
 
 

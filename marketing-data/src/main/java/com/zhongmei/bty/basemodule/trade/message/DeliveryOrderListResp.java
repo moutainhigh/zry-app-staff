@@ -5,9 +5,7 @@ import com.zhongmei.bty.commonmodule.database.entity.DeliveryOrder;
 
 import java.util.List;
 
-/**
- * 配送订单批量查询返回体
- */
+
 
 public class DeliveryOrderListResp {
     List<DeliveryOrder> orders;

@@ -8,26 +8,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- * <p>
- * `id` bigint(20) NOT NULL AUTO_INCREMENT,
- * `trade_id` bigint(20) NOT NULL COMMENT '订单id',
- * `tax_type` varchar(20) NOT NULL COMMENT '税类型',
- * `tax_type_name` varchar(45) NOT NULL COMMENT '税类型名称',
- * `tax_plan` varchar(45) NOT NULL COMMENT '税收方案',
- * `tax_amount` decimal(10,2) NOT NULL COMMENT '税收金额',
- * `
- * ` bigint(20) NOT NULL,
- * `brand_identy` bigint(20) DEFAULT NULL,
- * `status_flag` int(11) NOT NULL DEFAULT '1' COMMENT '数据有效状态 :1 有效 2:无效',
- * `client_create_time` timestamp(3) NULL DEFAULT NULL,
- * `client_update_time` timestamp(3) NULL DEFAULT NULL,
- * `server_create_time` timestamp(3) NULL DEFAULT CURRENT_TIMESTAMP(3),
- * `server_update_time` timestamp(3) NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
- * `uuid` varchar(45) NOT NULL,
- * `taxable_income` decimal(10,2) NOT NULL COMMENT '应纳税所得额',
- */
+
 
 @DatabaseTable(tableName = "trade_tax")
 public class TradeTax extends BasicEntityBase {

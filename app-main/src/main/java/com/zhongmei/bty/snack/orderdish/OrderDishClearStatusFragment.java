@@ -61,13 +61,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @Date：2015年8月12日 下午3:28:08
- * @Description: 菜品估清以及上架界面
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @EFragment(R.layout.order_dish_clear_status)
 public class OrderDishClearStatusFragment extends BasicDialogFragment implements IViewer, OnCheckedChangeListener {
     @ViewById(R.id.rg_clear_status_tab)
@@ -170,21 +164,14 @@ public class OrderDishClearStatusFragment extends BasicDialogFragment implements
         }
     }
 
-    /**
-     * @Title: requestClearStatus
-     * @Description: 请求更改估清状态
-     * @Param @param dishShop TODO
-     * @Return void 返回类型
-     */
+
     private void requestClearStatus(List<DishAndStandards> selectedProperty, final ClearStatus newValue) {
         List<String> dishUuids = new ArrayList<String>();
         for (DishAndStandards dishAndStandards : selectedProperty) {
             dishUuids.add(dishAndStandards.getDishShop().getUuid());
         }
 
-        /*
-         * 估清请求结果
-         */
+
         ResponseListener<Boolean> listener = new ResponseListener<Boolean>() {
 
             @Override
@@ -218,12 +205,6 @@ public class OrderDishClearStatusFragment extends BasicDialogFragment implements
                         String info = name + getString(R.string.tClearstatus);
                         ToastUtil.showLongToast(info);
                     }
-//
-//					if (newValue == ClearStatus.SALE) {
-//						ToastUtil.showLongToast(R.string.nClearstatus);
-//					} else {
-//						ToastUtil.showLongToast(R.string.yClearstatus);
-//					}
                 } else if (1100 == response.getStatusCode()) {
                     if (newValue == ClearStatus.SALE) {
                         ToastUtil.showLongToast(R.string.nClearstatusNeedSync);
@@ -265,8 +246,7 @@ public class OrderDishClearStatusFragment extends BasicDialogFragment implements
             }
             mAdapter.setSelectedProperty(selectProperty);
 
-            // 仅仅是全选按钮状态
-            cbSelectAll.setOnCheckedChangeListener(null);
+                        cbSelectAll.setOnCheckedChangeListener(null);
             if (selectProperty.size() == mAdapter.getCount()) {
                 cbSelectAll.setChecked(true);
                 cbSelectAll.setText(R.string.order_dish_cancel_select_all);
@@ -299,9 +279,7 @@ public class OrderDishClearStatusFragment extends BasicDialogFragment implements
         setCheckAllButtonStatus(dishList);
     }
 
-    /**
-     * 刷新底部清账栏位状态
-     */
+
     private void setClearButtonStatus() {
         if (mAdapter != null && Utils.isNotEmpty(mAdapter.getSelectedProperty())) {
             btnBottom.setEnabled(true);
@@ -310,16 +288,10 @@ public class OrderDishClearStatusFragment extends BasicDialogFragment implements
         }
     }
 
-    /**
-     * 刷新全选/取消全选状态
-     *
-     * @param dishList 当前展示菜品
-     */
+
     private void setCheckAllButtonStatus(List<DishAndStandards> dishList) {
-        //设置是否可以点击
-        cbSelectAll.setEnabled(Utils.isNotEmpty(dishList));
-        //设置是否全选
-        cbSelectAll.setOnCheckedChangeListener(null);
+                cbSelectAll.setEnabled(Utils.isNotEmpty(dishList));
+                cbSelectAll.setOnCheckedChangeListener(null);
         if (mAdapter != null && mAdapter.isAllSelected(dishList)) {
             cbSelectAll.setChecked(true);
             cbSelectAll.setText(R.string.order_dish_cancel_select_all);
@@ -354,14 +326,12 @@ public class OrderDishClearStatusFragment extends BasicDialogFragment implements
             clearStatusPopupWindow.setOutsideTouchable(true);
             clearStatusPopupWindow.setBackgroundDrawable(new BitmapDrawable());
         }
-        // 控制弹出框最大高度
-        if (propertyGroupVo.getPropertyList().size() >= 4) {
+                if (propertyGroupVo.getPropertyList().size() >= 4) {
             clearStatusPopupWindow.setHeight(DensityUtil.dip2px(MainApplication.getInstance(), 227));
         } else {
             clearStatusPopupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
         }
-        // 控制显示位置
-        int x = -((DensityUtil.dip2px(MainApplication.getInstance(), 194) - anchor.getWidth()) / 2);
+                int x = -((DensityUtil.dip2px(MainApplication.getInstance(), 194) - anchor.getWidth()) / 2);
         int y = DensityUtil.dip2px(MainApplication.getInstance(), 5);
         clearStatusPopupWindow.showAsDropDown(anchor, x, y);
 
@@ -399,9 +369,7 @@ public class OrderDishClearStatusFragment extends BasicDialogFragment implements
         });
     }
 
-    /**
-     * 获取当前规格集
-     */
+
     private Set<DishProperty> getCurrentStandards() {
         Set<DishProperty> standards = new HashSet<DishProperty>();
         int size = llStandardType.getChildCount();
@@ -430,8 +398,7 @@ public class OrderDishClearStatusFragment extends BasicDialogFragment implements
             for (int i = 0; i < size; i++) {
                 LinearLayout.LayoutParams layoutParams =
                         new LinearLayout.LayoutParams(DensityUtil.dip2px(MainApplication.getInstance(), 140), LinearLayout.LayoutParams.MATCH_PARENT);
-                // 最后一个控件不需要右边间距
-                if (i < size - 1) {
+                                if (i < size - 1) {
                     layoutParams.rightMargin = DensityUtil.dip2px(MainApplication.getInstance(), 18);
                 }
 

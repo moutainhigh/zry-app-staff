@@ -71,44 +71,34 @@ public class PaymentAdapter extends BaseExpandableListAdapter {
 
             switch (Integer.valueOf(String.valueOf(paymentItem.getPayModeId()))) {
                 case -1:
-                    // -1:会员卡余额
-                    holder.im.setImageResource(R.drawable.pay_member_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_member_icon_new);
                     break;
                 case -2:
-                    // 优惠券
-                    holder.im.setImageResource(R.drawable.pay_coupons_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_coupons_icon_new);
                     break;
                 case -3:
-                    // 现金
-                    holder.im.setImageResource(R.drawable.pay_cash_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_cash_icon_new);
                     break;
                 case -4:
-                    // 银行卡
-                    holder.im.setImageResource(R.drawable.pay_union_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_union_icon_new);
                     break;
                 case -5:
-                    // 微信支付
-                    holder.im.setImageResource(R.drawable.pay_wechat_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_wechat_icon_new);
                     break;
                 case -6:
-                    // 支付宝
-                    holder.im.setImageResource(R.drawable.pay_alipay_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_alipay_icon_new);
                     break;
                 case -7:
-                    // 百度钱包
-                    holder.im.setImageResource(R.drawable.pay_baiduqianbao_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_baiduqianbao_icon_new);
                     break;
                 case -8:
-                    // 百度直达号
-                    holder.im.setImageResource(R.drawable.pay_baiduzhida_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_baiduzhida_icon_new);
                     break;
                 case -9:
-                    // 积分抵现
-                    holder.im.setImageResource(R.drawable.pay_integral_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_integral_icon_new);
                     break;
                 default:
-                    // 其他
-                    holder.im.setImageResource(R.drawable.pay_other_icon_new);
+                                        holder.im.setImageResource(R.drawable.pay_other_icon_new);
                     break;
             }
 
@@ -185,60 +175,46 @@ public class PaymentAdapter extends BaseExpandableListAdapter {
 
             switch ((int) (paymentItem.getPayModeId() + 0)) {
                 case -1:
-                    // -1:会员卡余额
-                    sb.append(paymentModeName[0] + ",");
+                                        sb.append(paymentModeName[0] + ",");
                     break;
                 case -2:
-                    // 优惠券
-                    sb.append(paymentModeName[1] + ",");
+                                        sb.append(paymentModeName[1] + ",");
                     break;
                 case -3:
-                    // 现金
-                    sb.append(paymentModeName[2] + ",");
+                                        sb.append(paymentModeName[2] + ",");
                     break;
                 case -4:
-                    // 银行卡
-                    sb.append(paymentModeName[3] + ",");
+                                        sb.append(paymentModeName[3] + ",");
                     break;
                 case -5:
-                    // 微信支付
-                    sb.append(paymentModeName[4] + ",");
+                                        sb.append(paymentModeName[4] + ",");
                     break;
                 case -6:
-                    // 支付宝
-                    sb.append(paymentModeName[5] + ",");
+                                        sb.append(paymentModeName[5] + ",");
                     break;
                 case -7:
-                    // 百度钱包
-                    sb.append(paymentModeName[6] + ",");
+                                        sb.append(paymentModeName[6] + ",");
                     break;
                 case -8:
-                    // 百度直达号
-                    sb.append(paymentModeName[7] + ",");
+                                        sb.append(paymentModeName[7] + ",");
                     break;
                 case -9:
-                    // 积分抵现
-                    sb.append(paymentModeName[8] + ",");
+                                        sb.append(paymentModeName[8] + ",");
                     break;
                 case -10:
-                    // 百度地图
-                    sb.append(paymentModeName[9] + ",");
+                                        sb.append(paymentModeName[9] + ",");
                     break;
                 case -11:
-                    // 银联POS刷卡
-                    sb.append(paymentModeName[10] + ",");
+                                        sb.append(paymentModeName[10] + ",");
                     break;
                 case -12:
-                    //百糯到店付
-                    sb.append(paymentModeName[11] + ",");
+                                        sb.append(paymentModeName[11] + ",");
                     break;
                 case -13:
-                    //百度外卖
-                    sb.append(paymentModeName[12] + ",");
+                                        sb.append(paymentModeName[12] + ",");
                     break;
                 default:
-                    // 其他
-                    sb.append(paymentModeName[13] + ",");
+                                        sb.append(paymentModeName[13] + ",");
                     break;
             }
 

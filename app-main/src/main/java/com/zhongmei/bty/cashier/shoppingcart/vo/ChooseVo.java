@@ -1,17 +1,10 @@
 package com.zhongmei.bty.cashier.shoppingcart.vo;
 
-/**
- * 选择类
- *
- * @version: 1.0
- * @date 2015年7月9日
- */
+
 public class ChooseVo<T> {
 
     private T property;
-    /**
-     * 是否选中
-     */
+
     private boolean selected;
 
     public ChooseVo(T property, boolean selected) {

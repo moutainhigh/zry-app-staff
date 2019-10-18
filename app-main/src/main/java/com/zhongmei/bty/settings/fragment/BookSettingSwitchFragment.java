@@ -11,16 +11,13 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * 常用开关
- */
+
 @EFragment(R.layout.settings_book_switch)
 public class BookSettingSwitchFragment extends BasicFragment {
     private static final String TAG = BookSettingSwitchFragment.class.getSimpleName();
 
 
-    //到店是否开台
-    public static final String BOOK_IN_SWITCH = "bookingInSwtich";
+        public static final String BOOK_IN_SWITCH = "bookingInSwtich";
 
 
     @ViewById(R.id.book_come_in_open_switch)

@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.ui.view.recycler.ViewWrapper;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BeautyBookingTechnicianAdapter extends RecyclerViewBaseAdapter<User, BeautyBookingTechnicianItemView> {
 
     private Context mContext;

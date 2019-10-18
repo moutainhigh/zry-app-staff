@@ -1,8 +1,6 @@
 package com.zhongmei.bty.basemodule.erp.message;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class ShopInfoByIdResp {
 
     private CommercialConfig commercialConfig;
@@ -18,8 +16,7 @@ public class ShopInfoByIdResp {
     public static class CommercialConfig {
         private String brandId;
         private String brandName;
-        private String contacts;//品牌负责人
-        private String deptId;
+        private String contacts;        private String deptId;
         private String deptName;
         private String commercialId;
         private String commercialName;

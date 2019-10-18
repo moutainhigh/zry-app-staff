@@ -2,44 +2,28 @@ package com.zhongmei.bty.basemodule.commonbusiness.message;
 
 import com.zhongmei.yunfu.context.util.SystemUtils;
 
-/**
- * Gateway通用请求体
- */
+
 
 public class GatewayTransferReq<T> {
-    /**
-     * vender
-     */
+
     private Integer vender;
 
-    /**
-     * 平台
-     */
+
     private String platform;
 
-    /**
-     * 设备
-     */
+
     private String device_id;
 
-    /**
-     * 版本
-     */
+
     private String version;
 
-    /**
-     * 时间戳
-     */
+
     private Long timestamp;
 
-    /**
-     * 原始调用端请求id
-     */
+
     private String req_id;
 
-    /**
-     * 签名
-     */
+
     private String sign;
 
     private T content;

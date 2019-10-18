@@ -1,8 +1,6 @@
 package com.zhongmei.yunfu.context.util.peony.land;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class ExtraRunnable<T> implements Runnable {
 

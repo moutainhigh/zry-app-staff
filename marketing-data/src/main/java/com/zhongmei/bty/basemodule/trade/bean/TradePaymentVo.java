@@ -8,10 +8,7 @@ import com.zhongmei.yunfu.db.enums.TradeType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年5月13日
- */
+
 public class TradePaymentVo implements java.io.Serializable {
     private static final String TAG = TradePaymentVo.class.getSimpleName();
 
@@ -86,18 +83,15 @@ public class TradePaymentVo implements java.io.Serializable {
     public TradePaymentVo clone() {
         TradePaymentVo tradePaymentVo = new TradePaymentVo();
         try {
-            //拷贝tradeVo
-            tradePaymentVo.setTradeVo(tradeVo.clone());
-            //拷贝paymentVoList
-            if (paymentVoList != null) {
+                        tradePaymentVo.setTradeVo(tradeVo.clone());
+                        if (paymentVoList != null) {
                 List<PaymentVo> paymentVos = new ArrayList<PaymentVo>();
                 for (PaymentVo paymentVo : paymentVoList) {
                     paymentVos.add(paymentVo.clone());
                 }
                 tradePaymentVo.setPaymentVoList(paymentVos);
             }
-            //拷贝mDeliveryOrderVoList
-            if (mDeliveryOrderVoList != null) {
+                        if (mDeliveryOrderVoList != null) {
                 List<DeliveryOrderVo> deliveryOrderVos = new ArrayList<DeliveryOrderVo>();
                 for (DeliveryOrderVo deliveryOrderVo : mDeliveryOrderVoList) {
                     deliveryOrderVos.add(deliveryOrderVo.clone());

@@ -7,40 +7,23 @@ import com.zhongmei.yunfu.db.entity.trade.Trade;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * v8.4 修改划菜对象，添加抽象方法获取主单id 和 子单id
- */
+
 public class DishServiceV2Req {
 
-    /**
-     * 普通划菜数据
-     */
+
     public List<TradeItemsBean> tradeItems;
 
-    /**
-     * 联台划菜数据
-     */
+
     public List<TradeItemsBean> itemServings;
 
-    /**
-     * 主单Trade(如果是批量菜，则非空;如果是子单菜可以为空 , 普通菜不传)
-     */
+
     public Trade mainTrade;
 
-    /**
-     * 子单Trade(如果是批量菜，则非空;如果是子单菜可以为空 , 普通菜不传)
-     */
+
     public Trade subTrade;
 
-    /**
-     * 主单TradeId(如果是批量菜，则非空;如果是子单菜可以为空 , 普通菜不传)
-     */
+
     public Long tradeId;
-//
-//    /**
-//     * 子单TradeId(如果是批量菜，则非空;如果是子单菜可以为空 , 普通菜不传)
-//     */
-//    public Long subTradeId = getSunTradeId();
 
     public static class TradeItemsBean {
         public Long id;
@@ -57,13 +40,7 @@ public class DishServiceV2Req {
         return bean;
     }
 
-    /**
-     * 普通单划菜
-     *
-     * @param id
-     * @param servingStatus
-     * @param serverUpdateTime
-     */
+
     public void addTradeItem(Long id, Integer servingStatus, Long serverUpdateTime) {
         if (tradeItems == null) {
             tradeItems = new ArrayList<>();
@@ -71,13 +48,7 @@ public class DishServiceV2Req {
         tradeItems.add(getTradeItem(id, servingStatus, serverUpdateTime));
     }
 
-    /**
-     * 设置联台子单划菜数据
-     *
-     * @param id               批量菜数据ID
-     * @param servingStatus    服务器更新时间
-     * @param serverUpdateTime 批量菜当前的服务状态：1.未上菜；2.已上菜
-     */
+
     public void addUionMainItemServings(Long id, Integer servingStatus, Long serverUpdateTime) {
         if (itemServings == null) {
             itemServings = new ArrayList<>();
@@ -85,14 +56,7 @@ public class DishServiceV2Req {
         itemServings.add(getTradeItem(id, servingStatus, serverUpdateTime));
     }
 
-    /**
-     * 设置联台子单划菜数据
-     *
-     * @param id               批量菜数据ID
-     * @param servingStatus    服务器更新时间
-     * @param serverUpdateTime 批量菜当前的服务状态：1.未上菜；2.已上菜
-     * @param type             批量菜当前的服务状态：1.未上菜；2.已上菜
-     */
+
     public void addUionSubItemServings(Long id, Integer servingStatus, Long serverUpdateTime, Type type) {
         if (itemServings == null) {
             itemServings = new ArrayList<>();
@@ -115,10 +79,8 @@ public class DishServiceV2Req {
 
     public enum Type implements ValueEnum<Integer> {
 
-        // 主单菜
-        MAINBATCH(1),
-        // 子单菜
-        SUB(2);
+                MAINBATCH(1),
+                SUB(2);
 
         private final Helper<Integer> helper;
 
@@ -156,17 +118,6 @@ public class DishServiceV2Req {
         }
     }
 
-//    /**
-//     * 主单TradeId(如果是批量菜，则非空;如果是子单菜可以为空 , 普通菜不传)
-//     * @return 主单TradeId
-//     */
-//    public abstract Long getMainTradeId();
-//
-//    /**
-//     * 子单TradeId(如果是子单操作才传，否则为null)
-//     * @return 子单TradeId
-//     */
-//    public abstract Long getSunTradeId();
 
 
 }

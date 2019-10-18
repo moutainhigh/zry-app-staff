@@ -1,11 +1,6 @@
 package com.zhongmei.bty.data.operates.message.content;
 
-/**
- * 封装正餐清台接口的请求数据
- *
- * @version: 1.0
- * @date 2015年9月23日
- */
+
 public class ClearDinnertableReq {
 
     private Long tableId;

@@ -8,10 +8,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- * 查询消费税号后保存工具
- */
+
 
 public class GetTaxNoProcessor extends OpsRequest.SaveDatabaseResponseProcessor<GetTaxNoResp> {
 

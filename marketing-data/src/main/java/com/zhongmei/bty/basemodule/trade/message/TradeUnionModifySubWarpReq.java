@@ -3,10 +3,7 @@ package com.zhongmei.bty.basemodule.trade.message;
 import com.zhongmei.bty.basemodule.inventory.message.InventoryChangeReq;
 import com.zhongmei.yunfu.db.entity.trade.TradeExtra;
 
-/**
- * 联台子单改单请求
- * Created by demo on 2018/12/15
- */
+
 
 public class TradeUnionModifySubWarpReq {
     private TradeUnionModifySubReq modifyRequest;

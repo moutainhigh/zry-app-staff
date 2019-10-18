@@ -9,9 +9,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 
-/**
- * Coupon is a ORMLite bean type. Corresponds to the database table "coupon"
- */
+
 @DatabaseTable(tableName = "coupon")
 public class Coupon extends IdEntityBase {
 
@@ -28,38 +26,24 @@ public class Coupon extends IdEntityBase {
         public final String remark = "remark";
         public final String dishId = "dish_id";
         public final String dishName = "dish_name";
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * shop_identy
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * device_identy
-         */
+
         String deviceIdenty = "device_identy";
     }
 
@@ -96,34 +80,24 @@ public class Coupon extends IdEntityBase {
     @DatabaseField(columnName = "dish_name")
     private String dishName;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 
 
-    /**
-     * 门店Identy
-     */
+
     @DatabaseField(columnName = "shop_identy", canBeNull = false)
     private Long shopIdenty;
 
-    /**
-     * 设备Identy
-     */
+
     @DatabaseField(columnName = "device_identy")
     private String deviceIdenty;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
@@ -266,9 +240,7 @@ public class Coupon extends IdEntityBase {
         this.serverUpdateTime = serverUpdateTime;
     }
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     @Override

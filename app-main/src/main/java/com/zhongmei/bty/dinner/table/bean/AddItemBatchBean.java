@@ -2,12 +2,7 @@ package com.zhongmei.bty.dinner.table.bean;
 
 import com.zhongmei.bty.basemodule.orderdish.bean.AddItemVo;
 
-/**
- * @Date 2016/10/18
- * @Description:
- * @Param
- * @Return
- */
+
 public class AddItemBatchBean {
     private String sequenceNumber;
     private Long time;

@@ -25,13 +25,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * 快餐订单动作管理器
- */
+
 public class BeautyOrderActionManager {
-    /**
-     * 订单操作按钮回调
-     */
+
     public interface IOrderActionListener {
         void onDataChanged();
 
@@ -39,18 +35,13 @@ public class BeautyOrderActionManager {
     }
 
     private List<BeautyOpActionVo> mOrderActionVos = new ArrayList<BeautyOpActionVo>();
-    //记录所有子View方便查询
-    private SparseArray<View> allChildViews = new SparseArray<View>();
+        private SparseArray<View> allChildViews = new SparseArray<View>();
     private Context mContext;
     private IOrderActionListener mListener;
     private View mSelectedView;
-    /**
-     * 默认每页个数
-     */
+
     private int mDefaultPageSize;
-    /**
-     * 实际每页个数
-     */
+
     private int mPageSize;
 
     private LayoutInflater mLayoutInflater;
@@ -63,9 +54,7 @@ public class BeautyOrderActionManager {
         mLayoutInflater = LayoutInflater.from(mContext);
     }
 
-    /**
-     * 加载订单操作数据
-     */
+
     public void loadData() {
         AsyncTask<Void, Void, List<BeautyOpActionVo>> asyncTask = new AsyncTask<Void, Void, List<BeautyOpActionVo>>() {
             @Override
@@ -74,8 +63,7 @@ public class BeautyOrderActionManager {
                 IPanelItemSettings iPanelItemSettings = SettingManager.getSettings(IPanelItemSettings.class);
                 List<BeautyOpActionVo> orderActionVoList = new ArrayList<BeautyOpActionVo>();
 
-                //会员卡
-                addIf(true, orderActionVoList,
+                                addIf(true, orderActionVoList,
                         new BeautyOpActionVo(BeautyOpActionVo.TYPE_CUSTOMER,
                                 mContext.getString(R.string.beauty_card), resources.getDrawable(R.drawable.beauty_m_card_selector)));
 
@@ -84,32 +72,28 @@ public class BeautyOrderActionManager {
                         new BeautyOpActionVo(BeautyOpActionVo.TYPE_INTEGRAL,
                                 mContext.getString(R.string.customer_integral),
                                 resources.getDrawable(R.drawable.beauty_m_integral_selector)));
-                //优惠券
-                addIf(true,
+                                addIf(true,
                         orderActionVoList,
                         new BeautyOpActionVo(BeautyOpActionVo.TYPE_COUPONS,
                                 mContext.getString(R.string.beauty_coupon),
                                 resources.getDrawable(R.drawable.beauty_m_coupon_selector)));
 
 
-                //折扣
-                addIf(true,
+                                addIf(true,
                         orderActionVoList,
                         new BeautyOpActionVo(BeautyOpActionVo.TYPE_DISCOUNT,
                                 mContext.getString(R.string.discount),
                                 resources.getDrawable(R.drawable.beauty_m_discount_selector)));
 
 
-                //营销活动
-                addIf(true,
+                                addIf(true,
                         orderActionVoList,
                         new BeautyOpActionVo(BeautyOpActionVo.TYPE_ACTIVITY,
                                 mContext.getString(R.string.beauty_activity_title),
                                 resources.getDrawable(R.drawable.beauty_m_market_selector)));
 
 
-                //微信卡劵
-                addIf(true,
+                                addIf(true,
                         orderActionVoList,
                         new BeautyOpActionVo(BeautyOpActionVo.TYPE_WEIXINCODE,
                                 mContext.getString(R.string.coupon_code_WeChat_label),
@@ -143,9 +127,7 @@ public class BeautyOrderActionManager {
         return mOrderActionVos == null ? 0 : (mOrderActionVos.size() + mPageSize - 1) / mPageSize;
     }
 
-    /**
-     * 是否展示切页按钮
-     */
+
     public boolean showSwitchPage() {
         return mOrderActionVos != null && mOrderActionVos.size() > mDefaultPageSize;
     }
@@ -252,11 +234,7 @@ public class BeautyOrderActionManager {
         mPageSize = pageSize;
     }
 
-    /**
-     * 刷新会员是否开启
-     *
-     * @param isEnabled
-     */
+
     public void refreshCustomer(boolean isEnabled) {
         View view = getNeedSelectedView(BeautyOpActionVo.TYPE_CUSTOMER);
         setViewEnabled(view, isEnabled);

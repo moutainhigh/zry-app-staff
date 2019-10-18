@@ -1,10 +1,4 @@
-/**
- * @Title: ChangeTradeItemPrintStatusResp.java
- * @Package com.zhongmei.bty.data.operates.message.content
- * @Description: TODO
- * @date 2015-9-25 下午4:41:29
- * @version V1.0
- */
+
 package com.zhongmei.bty.basemodule.orderdish.message;
 
 import com.zhongmei.yunfu.db.entity.dish.TradeItemOperation;
@@ -18,9 +12,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeItemProperty;
 
 import java.util.List;
 
-/**
- * 对返回的TradeItem数据的封装
- */
+
 public class TradeItemResp {
 
     private List<Trade> trades;

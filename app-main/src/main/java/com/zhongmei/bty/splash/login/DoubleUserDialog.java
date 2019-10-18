@@ -12,11 +12,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * @Date： 2018/3/8
- * @Description:
- * @Version: 1.0
- */
+
 public class DoubleUserDialog extends UserDialog {
 
     private List<AuthUser> currentUsers;
@@ -55,15 +51,12 @@ public class DoubleUserDialog extends UserDialog {
         for (int i = 0; i < userList.size(); i++) {
             UserGridItem gridItem = new UserGridItem();
             User authUser = userList.get(i);
-            gridItem.setUser(authUser);//add v8.2
-            gridItem.setUserName(authUser.getDisplayName());
+            gridItem.setUser(authUser);            gridItem.setUserName(authUser.getDisplayName());
             gridItem.setUserId(authUser.getId());
-            // 汉字转换成拼音
-            String pinyin = characterParser.getSelling(authUser.getDisplayName());
+                        String pinyin = characterParser.getSelling(authUser.getDisplayName());
             String sortString = pinyin.substring(0, 1).toUpperCase(Locale.getDefault());
 
-            // 正则表达式，判断首字母是否是英文字母
-            if (sortString.matches("[A-Z]")) {
+                        if (sortString.matches("[A-Z]")) {
                 gridItem.setSortLetters(sortString.toUpperCase(Locale.getDefault()));
             } else {
                 gridItem.setSortLetters("#");

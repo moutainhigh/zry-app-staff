@@ -11,21 +11,13 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 子单取消联台请求数据结构
- */
+
 
 public class BuffetUnionTradeCancelResp {
 
     private List<Trade> trades;
-    private List<TradeTax> tradeTaxs; //税率
-    public List<TradeInitConfig> tradeInitConfigs;
-    private List<TradeDeposit> tradeDeposits; //押金
-    private List<TradeBuffetPeople> tradeBuffetPeoples; //餐标人数
-    private List<TradeMainSubRelation> tradeMainSubRelations; //联台单关联表
-    private TradeTable tradeTable; //桌台人数
-    private List<TradeItem> tradeItems;
+    private List<TradeTax> tradeTaxs;     public List<TradeInitConfig> tradeInitConfigs;
+    private List<TradeDeposit> tradeDeposits;     private List<TradeBuffetPeople> tradeBuffetPeoples;     private List<TradeMainSubRelation> tradeMainSubRelations;     private TradeTable tradeTable;     private List<TradeItem> tradeItems;
 
     public List<Trade> getTrades() {
         return trades;

@@ -11,15 +11,7 @@ import com.zhongmei.yunfu.db.entity.discount.CoupRule;
 import com.zhongmei.yunfu.db.entity.discount.Coupon;
 
 
-/**
- * 操作coupon表(优惠券模板)及coup_rule(优惠券规则)表的接口
- *
- * @Date：2015-8-11 上午10:29:24
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public interface CouponDal extends IOperates {
 
     public Coupon findCouponById(Long couponId) throws Exception;

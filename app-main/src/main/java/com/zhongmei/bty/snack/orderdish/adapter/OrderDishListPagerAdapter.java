@@ -37,12 +37,9 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
 
     private long INTERVALTIME = 0L;
 
-    private boolean isEditMode;//yutang add 添加编辑模式
-
-    private boolean isHidClearNumber;//yutang add 是否显示估清数量
-
-    private int mGridHeight = 0;//设置整个GridView高度
-    protected int dishCardType;
+    private boolean isEditMode;
+    private boolean isHidClearNumber;
+    private int mGridHeight = 0;    protected int dishCardType;
 
     public OrderDishListPagerAdapter(Context context, List<DishVo> dataSet) {
         this.mContext = context;
@@ -63,8 +60,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         GridView gridView = (GridView) mLayoutInflater.inflate(R.layout.order_dish_list_page, container, false);
-        gridView.setId(position);//以当前页position为id
-        gridView.setNumColumns(getNumColumns());
+        gridView.setId(position);        gridView.setNumColumns(getNumColumns());
         gridView.setVerticalScrollBarEnabled(false);
         gridView.setOnTouchListener(new OnTouchListener() {
 
@@ -89,8 +85,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
                     return;
                 }
 
-                // 如果点击的是需要弹出新界面的菜品则在500毫秒内不能点击其他其他，反之则没有时间间隔
-                if (item.isCombo()) {
+                                if (item.isCombo()) {
 
                     if (!isItemClicked()) {
                         doItemTouch(item);
@@ -122,12 +117,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         return gridView;
     }
 
-    /**
-     * 刷新指定菜品
-     *
-     * @param gridView 需要被刷新的GridView
-     * @param dishUuid 当前操作的菜品的uuid
-     */
+
     public void updateItemView(GridView gridView, String dishUuid) {
         if (gridView != null) {
             OrderDishAdapter mOrderDishAdapter = (OrderDishAdapter) gridView.getAdapter();
@@ -145,24 +135,14 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         }
     }
 
-    /**
-     * 刷新指定菜品列表
-     *
-     * @param gridView  需要被刷新的GridView
-     * @param dishUuids 当前操作的菜品列表
-     */
+
     public void updateItemView(GridView gridView, List<String> dishUuids) {
         for (String dishUuid : dishUuids) {
             updateItemView(gridView, dishUuid);
         }
     }
 
-    /**
-     * 刷新指定菜品列表
-     *
-     * @param gridView    需要被刷新的GridView
-     * @param dishShopMap 当前操作的菜品列表
-     */
+
     public void updateItemView(GridView gridView, Map<String, DishShop> dishShopMap) {
         if (gridView != null) {
             OrderDishAdapter orderDishAdapter = (OrderDishAdapter) gridView.getAdapter();
@@ -176,7 +156,6 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
                         dishVo.getDishShop().setClearStatus(dishShopMap.get(dishVo.getSkuUuid()).getClearStatus());
                         isChange = true;
                     }
-//                   规格菜的刷新
                     if (dishVo != null && dishShopMap != null && dishVo.getOtherDishs() != null && dishVo.getOtherDishs().size() > 0) {
                         Map<String, DishShop> voDishMap = dishVo.getOtherDishs();
                         for (String key : voDishMap.keySet()) {
@@ -193,12 +172,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         }
     }
 
-    /**
-     * 刷新指定菜品列表库存
-     *
-     * @param gridView         需要被刷新的GridView
-     * @param inventoryInfoMap 库存变更列表
-     */
+
     public void updateItemInventory(GridView gridView, Map<String, InventoryInfo> inventoryInfoMap) {
         if (gridView != null) {
             OrderDishAdapter orderDishAdapter = (OrderDishAdapter) gridView.getAdapter();
@@ -224,12 +198,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         return PagerAdapter.POSITION_NONE;
     }
 
-    /**
-     * @Title: setDataSet
-     * @Description: 刷新界面
-     * @Param @param dataSet TODO
-     * @Return void 返回类型
-     */
+
     public void setDataSet(List<DishVo> dataSet) {
         mDataSet.clear();
         if (dataSet != null) {
@@ -244,13 +213,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         super.notifyDataSetChanged();
     }
 
-    /**
-     * @Title: getSubDataSet
-     * @Description: 截取子数据
-     * @Param @param position
-     * @Param @return TODO
-     * @Return List<TradeVo> 返回类型
-     */
+
     private List<DishVo> getSubDataSet(int position) {
         int start = position * getPageSize();
         int end = Math.min((position + 1) * getPageSize(), mDataSet.size());
@@ -289,8 +252,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         return orderDishAdapter;
     }
 
-    //设置编辑模式 yutang add 20160809
-    public void setEditMode(boolean isEdit) {
+        public void setEditMode(boolean isEdit) {
         this.isEditMode = isEdit;
     }
 
@@ -318,9 +280,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         return mGridHeight;
     }
 
-    /**
-     * 返回当前点菜页列数
-     */
+
     protected int getNumColumns() {
         return SettingManager.getSettings(IPanelItemSettings.class).getOrderPageColumns();
     }
@@ -329,19 +289,12 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         return 5;
     }
 
-    /**
-     * 每页显示的菜品数
-     */
+
     protected int getPageSize() {
         return getNumColumns() * getNumRows();
     }
 
-    /**
-     * @Title: doItemTouch
-     * @Description: 套餐子菜被点击
-     * @Param @param dishVo TODO
-     * @Return void 返回类型
-     */
+
     public abstract void doItemTouch(DishVo dishVo);
 
     public abstract void doItemLongClick(DishVo dishVo);

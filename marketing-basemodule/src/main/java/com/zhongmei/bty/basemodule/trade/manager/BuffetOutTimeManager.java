@@ -12,17 +12,11 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BuffetOutTimeManager {
 
-    /**
-     * 自助餐超时费计算
-     *
-     * @param tradeVo
-     */
+
     public static BigDecimal calculateOutTimeFee(TradeVo tradeVo) {
         BigDecimal outTimeFee = BigDecimal.ZERO;
 
@@ -35,13 +29,11 @@ public class BuffetOutTimeManager {
         OutTimeInfo outTimeInfo = ServerSettingCache.getInstance().getBuffetOutTimeFeeRule();
 
         long mServerTime = System.currentTimeMillis() - tradeVo.getTrade().getClientCreateTime();
-        long timeMinute = mServerTime / (60 * 1000);//用餐时长（分钟）
-
+        long timeMinute = mServerTime / (60 * 1000);
         long diffTime = outTimeInfo.getLimitTimeLine() - timeMinute;
 
         if (diffTime < 0) {
-            //计算超时费
-            double outTimeCount = Math.ceil(Math.abs((double) diffTime) / outTimeInfo.getOutTimeUnit());
+                        double outTimeCount = Math.ceil(Math.abs((double) diffTime) / outTimeInfo.getOutTimeUnit());
             outTimeFee = BigDecimal.valueOf(outTimeCount).multiply(outTimeInfo.getOutTimeFee()).multiply(BigDecimal.valueOf(tradeVo.getTrade().getTradePeopleCount()));
         }
 
@@ -49,12 +41,7 @@ public class BuffetOutTimeManager {
     }
 
 
-    /**
-     * 计算已支付的超时费
-     *
-     * @param tradeVo
-     * @return
-     */
+
     public static BigDecimal getPaidOutTimeFee(TradeVo tradeVo) {
         BigDecimal paidOutTimeFee = BigDecimal.ZERO;
 
@@ -79,16 +66,10 @@ public class BuffetOutTimeManager {
 
     }
 
-    /**
-     * 获取已经支付过的超时费金额
-     *
-     * @param tradeVo
-     * @return
-     */
+
     public static int getPaidOutTimeFeeCount(TradeVo tradeVo) {
         int count = 0;
-        if (tradeVo.getTrade().getTradePayStatus() == TradePayStatus.UNPAID) {//如果未支付的，直接返回0
-            return count;
+        if (tradeVo.getTrade().getTradePayStatus() == TradePayStatus.UNPAID) {            return count;
         }
         List<TradePrivilege> listPrivilege = tradeVo.getTradePrivileges();
         ExtraCharge outTimeExtraCharge = ServerSettingCache.getInstance().getmOutTimeRule();
@@ -105,12 +86,7 @@ public class BuffetOutTimeManager {
     }
 
 
-    /**
-     * 计算超时费用
-     *
-     * @param outTime 超时时间
-     * @return
-     */
+
     public static BigDecimal calculOutTimeFee(long outTime, OutTimeInfo outTimeInfo, TradeVo tradeVo, BigDecimal peopleCount) {
         BigDecimal outTimeFee = BigDecimal.ZERO;
         int paidOutTimeCount = getPaidOutTimeFeeCount(tradeVo);
@@ -119,16 +95,11 @@ public class BuffetOutTimeManager {
         }
 
         double outTimeCount = Math.ceil(Math.abs((double) outTime) / outTimeInfo.getOutTimeUnit()) - paidOutTimeCount;
-        //未支付的超时费
-        BigDecimal unPaidOutTimeFee = BigDecimal.valueOf(outTimeCount).multiply(outTimeInfo.getOutTimeFee()).multiply(peopleCount);
+                BigDecimal unPaidOutTimeFee = BigDecimal.valueOf(outTimeCount).multiply(outTimeInfo.getOutTimeFee()).multiply(peopleCount);
         return outTimeFee.add(unPaidOutTimeFee);
     }
 
-    /**
-     * 计算超时费用
-     *
-     * @return
-     */
+
     public static BigDecimal calculOutTimeFee(TradeVo tradeVo) {
         BigDecimal outTimeFee = BigDecimal.ZERO;
 
@@ -141,12 +112,10 @@ public class BuffetOutTimeManager {
         OutTimeInfo outTimeInfo = ServerSettingCache.getInstance().getBuffetOutTimeFeeRule();
 
         long mServerTime = System.currentTimeMillis() - tradeVo.getTrade().getClientCreateTime();
-        long timeMinute = mServerTime / (60 * 1000);//用餐时长（分钟）
-
+        long timeMinute = mServerTime / (60 * 1000);
         long diffTime = outTimeInfo.getLimitTimeLine() - timeMinute;
 
-        if (diffTime >= 0) {//没有超时
-            return outTimeFee;
+        if (diffTime >= 0) {            return outTimeFee;
         }
 
         return calculOutTimeFee(diffTime, outTimeInfo, tradeVo, BigDecimal.valueOf(tradeVo.getTrade().getTradePeopleCount()));

@@ -12,108 +12,68 @@ import com.zhongmei.bty.commonmodule.database.enums.TrueOrFalse;
 
 import java.math.BigDecimal;
 
-/**
- * 积分规则
- */
+
 @DatabaseTable(tableName = "crm_customer_level_rights")
 public class CrmCustomerLevelRights extends CrmBasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "crm_customer_level_rights"
-     */
+
     public interface $ extends CrmBasicEntityBase.$ {
 
 
-        /**
-         * customer_level_id
-         */
+
         public static final String customerLevelId = "customer_level_id";
 
-        /**
-         * consume_value
-         */
+
         public static final String consumeValue = "consume_value";
 
-        /**
-         * consume_gain_value
-         */
+
         public static final String consumeGainValue = "consume_gain_value";
 
-        /**
-         * is_gain_all
-         */
+
         public static final String isGainAll = "is_gain_all";
 
-        /**
-         * is_exchange_cash
-         */
+
         public static final String isExchangeCash = "is_exchange_cash";
 
-        /**
-         * exchange_integral_value
-         */
+
         public static final String exchangeIntegralValue = "exchange_integral_value";
 
-        /**
-         * exchange_cash_value
-         */
+
         public static final String exchangeCashValue = "exchange_cash_value";
 
-        /**
-         * limit_type
-         */
+
         public static final String limitType = "limit_type";
 
-        /**
-         * limit_integral
-         */
+
         public static final String limitIntegral = "limit_integral";
 
-        /**
-         * discount
-         */
+
         public static final String discount = "discount";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * carry_bit_rule
-         */
+
         public static final String carryBitRule = "carry_bit_rule";
 
-        /**
-         * is_discount_all
-         */
+
         public static final String isDiscountAll = "is_discount_all";
 
-        /**
-         * is_discount
-         */
+
         public static final String isDiscount = "is_discount";
 
-        /**
-         * is_integral
-         */
+
         public static final String isIntegral = "is_integral";
 
 
@@ -121,69 +81,47 @@ public class CrmCustomerLevelRights extends CrmBasicEntityBase implements ICreat
 
     }
 
-    /**
-     * 绑定的会员价方案id
-     */
+
     @DatabaseField(columnName = "price_templet_id")
     private Long priceTempletId;
 
-    /**
-     * 会员等级id
-     */
+
     @DatabaseField(columnName = "customer_level_id", canBeNull = false)
     private Long customerLevelId;
 
-    /**
-     * 消费值
-     */
+
     @DatabaseField(columnName = "consume_value")
     private BigDecimal consumeValue;
 
-    /**
-     * 获取积分值
-     */
+
     @DatabaseField(columnName = "consume_gain_value")
     private BigDecimal consumeGainValue;
 
-    /**
-     * '是否全部可积分,0:是，1：否',
-     */
+
     @DatabaseField(columnName = "is_gain_all")
     private Integer isGainAll;
 
-    /**
-     * '是否抵现,0:是，1：否',
-     */
+
     @DatabaseField(columnName = "is_exchange_cash")
     private Integer isExchangeCash;
 
-    /**
-     * 抵现消耗积分
-     */
+
     @DatabaseField(columnName = "exchange_integral_value")
     private BigDecimal exchangeIntegralValue;
 
-    /**
-     * 抵现金额
-     */
+
     @DatabaseField(columnName = "exchange_cash_value")
     private BigDecimal exchangeCashValue;
 
-    /**
-     * 抵现限制类型(1,无上限，2积分个数限制 3 金额百分比限制)',
-     */
+
     @DatabaseField(columnName = "limit_type")
     private Integer limitType;
 
-    /**
-     * 限制可用积分
-     */
+
     @DatabaseField(columnName = "limit_integral")
     private BigDecimal limitIntegral;
 
-    /**
-     * 折扣
-     */
+
     @DatabaseField(columnName = "discount")
     private BigDecimal discount;
 
@@ -199,27 +137,19 @@ public class CrmCustomerLevelRights extends CrmBasicEntityBase implements ICreat
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
-    /**
-     * 进位规则 1：四舍五入，2 无条件进位 3, 无条件抹零
-     */
+
     @DatabaseField(columnName = "carry_bit_rule")
     private Integer carryBitRule;
 
-    /**
-     * 是否全部享受商品折扣
-     */
+
     @DatabaseField(columnName = "is_discount_all")
     private Integer isDiscountAll;
 
-    /**
-     * 是否折扣
-     */
+
     @DatabaseField(columnName = "is_discount")
     private Integer isDiscount;
 
-    /**
-     * 是否积分
-     */
+
     @DatabaseField(columnName = "is_integral")
     private Integer isIntegral;
 

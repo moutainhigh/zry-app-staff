@@ -3,9 +3,7 @@ package com.zhongmei.bty.mobilepay.event;
 import com.zhongmei.bty.basemodule.pay.message.PayResp;
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DepositPayOver {
     private PayResp payResp;

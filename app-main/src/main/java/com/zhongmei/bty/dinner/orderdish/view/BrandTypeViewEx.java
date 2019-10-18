@@ -31,11 +31,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * @Date： 17/6/7
- * @Description: 三级菜单选择器
- * @Version: 1.0
- */
+
 public class BrandTypeViewEx extends LinearLayout implements DishTypeInflateEx.ChangeTypeListener, View.OnClickListener, AdapterView.OnItemClickListener {
 
 
@@ -181,8 +177,7 @@ public class BrandTypeViewEx extends LinearLayout implements DishTypeInflateEx.C
         @Override
         protected void onPostExecute(DishBrandTypes dishBrandTypes) {
             if (mDishTypeInflate.getLastType().getId().longValue() != dishBrandType.getId().longValue())
-                return; //防点击错乱
-
+                return;
             if (dishBrandTypes != null && mDishTwoTypeAdapter != null
                     && dishBrandTypes.dishTypeList != null && Utils.isNotEmpty(dishBrandTypes.dishTypeList)) {
                 mLastDishType = dishBrandTypes.dishTypeList.get(0);

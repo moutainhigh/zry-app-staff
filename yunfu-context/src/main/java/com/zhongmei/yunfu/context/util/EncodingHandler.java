@@ -19,8 +19,7 @@ public final class EncodingHandler {
 
     private static final int BLACK = 0xFF000000;
     private static final int WHITE = 0xFFFFFFFF;
-    private static final int PADDING_SIZE_MIN = 5; // 最小留白长度, 单位: px
-
+    private static final int PADDING_SIZE_MIN = 5;
     public static Bitmap encodeBarCodeAsBitmap(String contents,
                                                BarcodeFormat format, int desiredWidth, int desiredHeight) {
         final int WHITE = 0xFFFFFFFF;
@@ -32,15 +31,13 @@ public final class EncodingHandler {
             result = writer.encode(contents, format, desiredWidth,
                     desiredHeight, null);
         } catch (WriterException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+                        e.printStackTrace();
         }
 
         int width = result.getWidth();
         int height = result.getHeight();
         int[] pixels = new int[width * height];
-        // All are 0, or black, by default
-        for (int y = 0; y < height; y++) {
+                for (int y = 0; y < height; y++) {
             int offset = y * width;
             for (int x = 0; x < width; x++) {
                 pixels[offset + x] = result.get(x, y) ? BLACK : WHITE;
@@ -66,8 +63,7 @@ public final class EncodingHandler {
         boolean isFirstBlackPoint = false;
         int startX = 0;
         int startY = 0;
-        //
-        for (int y = 0; y < height; y++) {
+                for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 if (matrix.get(x, y)) {
                     if (isFirstBlackPoint == false) {
@@ -85,8 +81,7 @@ public final class EncodingHandler {
         Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
 
-        // 剪切中间的二维码区域，减少padding区域
-        if (startX <= PADDING_SIZE_MIN) return bitmap;
+                if (startX <= PADDING_SIZE_MIN) return bitmap;
 
         int x1 = startX - PADDING_SIZE_MIN;
         int y1 = startY - PADDING_SIZE_MIN;
@@ -99,12 +94,7 @@ public final class EncodingHandler {
         return bitmapQR;
     }
 
-    /**
-     * @Description: 为图标添加LOGO
-     * @Param Bitmap src
-     * @Param Bitmap logo
-     * @Return Bitmap 返回类型
-     */
+
     public static Bitmap addQRCodeLogo(Bitmap src, Bitmap logo) {
         if (src == null) {
             return null;
@@ -113,8 +103,7 @@ public final class EncodingHandler {
         if (logo == null) {
             return src;
         }
-        // 获取图片的宽高
-        int srcWidth = src.getWidth();
+                int srcWidth = src.getWidth();
         int srcHeight = src.getHeight();
         int logoWidth = logo.getWidth();
         int logoHeight = logo.getHeight();
@@ -125,8 +114,7 @@ public final class EncodingHandler {
         if (logoWidth == 0 || logoHeight == 0) {
             return src;
         }
-        // logo大小为二维码整体大小的1/5
-        float scaleFactor = srcWidth * 1.0f / 8 / logoWidth;
+                float scaleFactor = srcWidth * 1.0f / 8 / logoWidth;
         Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
         try {
             Canvas canvas = new Canvas(bitmap);

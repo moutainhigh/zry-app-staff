@@ -20,16 +20,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PayMethodIndicatorAdapter extends Indicator.Adapter {
 
     private Context context;
     private List<PayMethodItem> dataList;
-    private int columns = 6;//默认列数
-
+    private int columns = 6;
     public PayMethodIndicatorAdapter(Context context) {
         this.context = context;
         this.dataList = new ArrayList<>();
@@ -108,7 +105,6 @@ public class PayMethodIndicatorAdapter extends Indicator.Adapter {
 
     @Override
     public View getView(Indicator indicator, int position) {
-//        目前Indicator并没有对最小单元的子视图加入回收功能，所以这里可以不采用ViewHolder模式。
 
         View view = LayoutInflater.from(context).inflate(R.layout.pay_method_item, null, false);
 
@@ -124,8 +120,7 @@ public class PayMethodIndicatorAdapter extends Indicator.Adapter {
         methodNameTxv.setSelected(item.isSelected);
         methodNameTxv.setText(item.methodName);
         methodIconImg.setImageResource(item.methodResId);
-        //如果禁用，不允许点击  add 20170411 yutang
-        if (item.enabled == false) {
+                if (item.enabled == false) {
             methodIconImg.setEnabled(false);
             methodNameTxv.setEnabled(false);
             view.setEnabled(false);

@@ -12,12 +12,7 @@ import com.zhongmei.yunfu.db.enums.TradeStatus;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 实体卡储值记录
- *
- * @version: 1.0
- * @date 2015年5月13日
- */
+
 public class CustomerCardStoreValueResp extends CardBaseResp<List<CardStoreValueItem>> {
 
     public static class CardStoreValueItem {
@@ -25,29 +20,19 @@ public class CustomerCardStoreValueResp extends CardBaseResp<List<CardStoreValue
 
         private Long storeDate;
 
-        /**
-         * 卡号
-         */
+
         private String cardNum;
 
-        /**
-         * 储值金额
-         */
+
         private BigDecimal addValue;
 
-        /**
-         * 赠送金额
-         */
+
         private BigDecimal sendValue;
 
-        /**
-         * 每次储值后的余额
-         */
+
         private BigDecimal endValue;
 
-        /**
-         * 经手人
-         */
+
         private String userName;
 
         private String deviceIdenty;
@@ -64,8 +49,7 @@ public class CustomerCardStoreValueResp extends CardBaseResp<List<CardStoreValue
 
         private int cardStatus;
 
-        private Integer addValueType;//储值类型 1：现金，2:银行卡
-
+        private Integer addValueType;
         private Long tradeId;
 
         private Long tradeClientCreateTime;
@@ -80,32 +64,22 @@ public class CustomerCardStoreValueResp extends CardBaseResp<List<CardStoreValue
 
         private Integer businessType;
 
-        private Integer type;//记录类型 0：储值，1：退款，2：调账,3：消费，4：换卡储值调账
-
-        private Integer tempCardBizType;//临时卡记录类型0：储值，1:消费，2:消费退款，3：退卡退款'
-
-        private Integer cardType;//实体卡类型 1:会员实体卡  2:匿名实体卡
-
-        private BigDecimal beforeRealValue; // 操作前余额实储金额
-
-        private BigDecimal beforeSendValue;    // 操作前余额赠送金额
-
+        private Integer type;
+        private Integer tempCardBizType;
+        private Integer cardType;
+        private BigDecimal beforeRealValue;
+        private BigDecimal beforeSendValue;
         private BigDecimal beforePrepareValue;
 
-        private BigDecimal currentSendValue; // 本次操作赠送金额
-
-        private BigDecimal currentRealValue; // 本次操作实储金额
-
+        private BigDecimal currentSendValue;
+        private BigDecimal currentRealValue;
         private BigDecimal currentPrepareValue;
 
-        private BigDecimal endRealValue; // 操作后实储金额
-
-        private BigDecimal endSendValue; // 操作后赠送金额
-
+        private BigDecimal endRealValue;
+        private BigDecimal endSendValue;
         private BigDecimal endPrepareValue;
 
-        private Integer accountStatus; //1已到账、0未到账。
-        private Integer tradeStatus;
+        private Integer accountStatus;         private Integer tradeStatus;
         private Integer tradePayStatus;
 
         public AccountStatus getAccountStatus() {
@@ -371,8 +345,7 @@ public class CustomerCardStoreValueResp extends CardBaseResp<List<CardStoreValue
 
         public CustomerStoredBalanceResp getMemberValuecardHistory() {
             CustomerStoredBalanceResp history = new CustomerStoredBalanceResp();
-            history.setType(0);//储值
-            history.setCreateDateTime(getStoreDate());
+            history.setType(0);            history.setCreateDateTime(getStoreDate());
             history.setAddValuecard(getAddValue());
             if (getAddValueType() == 1) {
                 history.setCashValuecard(getAddValue().toPlainString());

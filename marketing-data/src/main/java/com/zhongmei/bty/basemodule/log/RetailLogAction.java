@@ -11,9 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * 专供零售记录日志的Action,进行真正的日志记录
- */
+
 public class RetailLogAction extends BaseLogAction {
     public static final String TAG = BaseLogAction.class.getName();
     private static final int S_PRINT_MAX_SIZE = 10;

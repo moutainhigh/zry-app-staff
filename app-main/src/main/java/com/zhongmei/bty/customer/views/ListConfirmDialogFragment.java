@@ -48,8 +48,7 @@ public class ListConfirmDialogFragment extends BasicDialogFragment {
 
     private OnClickListener mListener = null;
 
-    private String account;//账号
-
+    private String account;
     public void setAccount(String account) {
         this.account = account;
     }
@@ -62,10 +61,8 @@ public class ListConfirmDialogFragment extends BasicDialogFragment {
         this.chargeAmonut = chargeAmonut;
     }
 
-    private String phoneNumber;//电话号码
-
-    private BigDecimal chargeAmonut;//充值金额
-
+    private String phoneNumber;
+    private BigDecimal chargeAmonut;
     private static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;
 
     @AfterViews
@@ -73,37 +70,24 @@ public class ListConfirmDialogFragment extends BasicDialogFragment {
         getDialog().getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED, FLAG_HOMEKEY_DISPATCHED);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        /*if (mItemStrings.length == 4) {
-			mCount.setText(mItemStrings[0]);
-			mPhone.setText(mItemStrings[1]);
-			//mAmount.setText(String.valueOf(new BigDecimal(mItemStrings[2])));
-			mAmount.setText(String.format(CashInfoManager.CASH_FORMAT,mItemStrings[2]));
-			//mType.setText(mItemStrings[3]);
 
-			mTitle.setText(getString(R.string.customer_confirm));
-		}*/
-        mTitle.setText(getString(R.string.customer_confirm));//标题
-        //账号
-        if (account != null) {
+        mTitle.setText(getString(R.string.customer_confirm));                if (account != null) {
             mCount.setText(account);
         } else {
             mCount.setText("");
         }
 
-        //电话
-        if (phoneNumber != null) {
+                if (phoneNumber != null) {
             mPhone.setText(phoneNumber);
         } else {
             mPhone.setText("");
         }
         String amountString = "";
-        //充值金额
-        if (chargeAmonut != null) {
+                if (chargeAmonut != null) {
             amountString = ShopInfoCfg.formatCurrencySymbol(chargeAmonut.toString());
             mAmount.setText(amountString);
         }
-        //DisplayServiceManager.doUpdateRecharge(getActivity(), DisplayRecharge.COMMOND_RECHARGE_SHOW,amountString,account);
-    }
+            }
 
     protected void setItemList(String[] items) {
         mItemStrings = items;
@@ -115,12 +99,10 @@ public class ListConfirmDialogFragment extends BasicDialogFragment {
 
             case R.id.ok:
                 if (!ClickManager.getInstance().isClicked(R.id.ok, 600)) {
-                    //Log.e("测试代码","测试代码防止双击----"+System.currentTimeMillis());
-                    if (mListener != null) {
+                                        if (mListener != null) {
                         mListener.onClick(v);
                     }
                 }
-                //dismiss();
 
                 break;
             case R.id.back:
@@ -137,15 +119,7 @@ public class ListConfirmDialogFragment extends BasicDialogFragment {
         mListener = listener;
     }
 
-	/*public static void show(String[] array, String title, FragmentManager fm, OnClickListener listener) {
 
-		ListConfirmDialogFragment dialogFragment = ListConfirmDialogFragment_.builder().mTitleString(title).build();
-		dialogFragment.setItemList(array);
-		dialogFragment.setCancelable(false);
-		dialogFragment.setOnConfirmClick(listener);
-		dialogFragment.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-		dialogFragment.show(fm, ListConfirmDialogFragment.class.getSimpleName());
-	}*/
 
     static class ViewHolder {
         TextView infoTextView;

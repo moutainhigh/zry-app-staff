@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.ServerEntityBase;
 import com.zhongmei.bty.commonmodule.database.enums.AddItemRecordStatus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "add_item_record")
 public class AddItemRecord extends ServerEntityBase {
 
@@ -32,41 +30,32 @@ public class AddItemRecord extends ServerEntityBase {
         public static final String updatorName = "updator_name";
     }
 
-    //订单ID
-    @DatabaseField(columnName = "trade_id", index = true)
+        @DatabaseField(columnName = "trade_id", index = true)
     private Long tradeId;
 
-    //桌台ID
-    @DatabaseField(columnName = "table_id")
+        @DatabaseField(columnName = "table_id")
     private Long tableId;
 
-    //加菜批次ID 同时添加多个菜的批次ID相同 关联add_item_batch
-    @DatabaseField(columnName = "batch_id")
+        @DatabaseField(columnName = "batch_id")
     private Long batchId;
 
-    //mock_trade_item_data中的主菜的uuid
-    @DatabaseField(columnName = "mock_trade_item_uuid")
+        @DatabaseField(columnName = "mock_trade_item_uuid")
     private String mockTradeItemUuid;
 
-    //包含一个或多个tradeItem、tradeItemProperty的json
-    @DatabaseField(columnName = "mock_trade_item_data")
+        @DatabaseField(columnName = "mock_trade_item_data")
     private String mockTradeItemData;
 
-    //处理状态 1未处理 2已接受 3已拒绝
-    @DatabaseField(columnName = "handle_status")
+        @DatabaseField(columnName = "handle_status")
     private Integer handleStatus;
 
-    //关联微信端进行加菜操作的顾客ID
-    @DatabaseField(columnName = "customer_id")
+        @DatabaseField(columnName = "customer_id")
     private Long customerId;
 
 
-    //进行接受OR拒绝的操作员ID
-    @DatabaseField(columnName = "updator_id")
+        @DatabaseField(columnName = "updator_id")
     private Long updatorId;
 
-    //进行接受OR拒绝的操作员
-    @DatabaseField(columnName = "updator_name")
+        @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
 

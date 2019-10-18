@@ -34,9 +34,7 @@ import com.zhongmei.yunfu.resp.ResponseObject;
 
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TradeRespProcessor extends OpsRequest.SaveDatabaseResponseProcessor<TradeResp> {
 
@@ -53,9 +51,7 @@ public class TradeRespProcessor extends OpsRequest.SaveDatabaseResponseProcessor
     @Override
     public ResponseObject<TradeResp> process(final ResponseObject<TradeResp> response) {
         if (isSuccessful(response) && mGenSn) {
-            // 生成一个新的流水号
-            //PrHelper.getDefault().generateSerialNumber();
-        }
+                                }
         return super.process(response);
     }
 
@@ -63,8 +59,7 @@ public class TradeRespProcessor extends OpsRequest.SaveDatabaseResponseProcessor
     public void saveToDatabase(TradeResp resp)
             throws Exception {
         super.saveToDatabase(resp);
-        //saveBaseInfo(Customer.class, resp.getCustomers());
-    }
+            }
 
     @Override
     protected Callable<Void> getCallable(final DatabaseHelper helper, final TradeResp resp) {
@@ -99,13 +94,10 @@ public class TradeRespProcessor extends OpsRequest.SaveDatabaseResponseProcessor
         DBHelperManager.saveEntities(helper, TradePlanActivity.class, resp.getTradePlanActivitys());
         DBHelperManager.saveEntities(helper, TradeItemPlanActivity.class, resp.getTradeItemPlanActivitys());
         DBHelperManager.saveEntities(helper, TradeItemExtra.class, resp.getTradeItemExtras());
-        DBHelperManager.saveEntities(helper, TradePromotion.class, resp.getTradePromotions());//add 20161117
-        DBHelperManager.saveEntities(helper, Trade.class, resp.getTrades());
+        DBHelperManager.saveEntities(helper, TradePromotion.class, resp.getTradePromotions());        DBHelperManager.saveEntities(helper, Trade.class, resp.getTrades());
         DBHelperManager.saveEntities(helper, TradeReceiveLog.class, resp.getTradeReceiveLogs());
         DBHelperManager.saveEntities(helper, TradeBuffetPeople.class, resp.getTradeBuffetPeoples());
-        DBHelperManager.saveEntities(helper, TradeGroupInfo.class, resp.getTradeGroup()); // v7.15 添加团餐信息表
-        DBHelperManager.saveEntities(helper, TradeUser.class, resp.getTradeUser()); // v8.1 添加销售员
-        DBHelperManager.saveEntities(helper, TradeItemExtraDinner.class, resp.getTradeItemExtraDinners());
+        DBHelperManager.saveEntities(helper, TradeGroupInfo.class, resp.getTradeGroup());         DBHelperManager.saveEntities(helper, TradeUser.class, resp.getTradeUser());         DBHelperManager.saveEntities(helper, TradeItemExtraDinner.class, resp.getTradeItemExtraDinners());
         DBHelperManager.saveEntities(helper, TradeTax.class, resp.getTradeTaxs());
         DBHelperManager.saveEntities(helper, TradeInitConfig.class, resp.getTradeInitConfigs());
     }

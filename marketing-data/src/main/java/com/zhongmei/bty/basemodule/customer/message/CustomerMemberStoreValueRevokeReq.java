@@ -1,11 +1,7 @@
 package com.zhongmei.bty.basemodule.customer.message;
 
 
-/**
- * @Date：2016年4月5日
- * @Description:会员储值撤销请求
- * @Version: 1.0
- */
+
 public class CustomerMemberStoreValueRevokeReq {
     private Long customerId;
     private Long tradeId;

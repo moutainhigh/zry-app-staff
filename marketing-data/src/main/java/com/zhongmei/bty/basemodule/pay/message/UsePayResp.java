@@ -7,13 +7,10 @@ import com.zhongmei.yunfu.db.entity.discount.TradePromotion;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 接口相应体
- */
+
 
 public class UsePayResp {
-    private List<PaymentItemResult> paymentItemResults;//支付明细结果列表
-
+    private List<PaymentItemResult> paymentItemResults;
     public List<PaymentItemResult> getPaymentItemResults() {
         return paymentItemResults;
     }
@@ -24,10 +21,7 @@ public class UsePayResp {
 
     public class PaymentItemResult {
         private PaymentItemAddition addition;
-        private String paymentItemUuid;//支付明细uuid
-        private String resultMsg;//结果信息
-        private Integer resultStatus;//结果状态码
-
+        private String paymentItemUuid;        private String resultMsg;        private Integer resultStatus;
         public PaymentItemAddition getAddition() {
             return addition;
         }

@@ -11,189 +11,117 @@ import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 
 import java.math.BigDecimal;
 
-/**
- * Invoice is a ORMLite bean type. Corresponds to the database table "invoice"
- */
+
 @DatabaseTable(tableName = "invoice")
 public class Invoice extends IdEntityBase {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "invoice"
-     */
+
     public interface $ extends IdEntityBase.$ {
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
 
-        /**
-         * 商户Id
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * 消费类型(1-餐饮消费，2-储值消费，3-零售，4-其他)
-         */
+
         String type = "type";
 
-        /**
-         * 来源：-40优识云创
-         */
+
         String source = "source";
 
-        /**
-         * 开票唯一识别码
-         */
+
         String uuid = "uuid";
 
-        /**
-         * 消费订单id，挂单开票必传，就餐对应的trade.id，储值对应的是储值记录的id
-         */
+
         String orderId = "order_id";
 
-        /**
-         * POS操作人编号
-         */
+
         String drawerNo = "drawer_no";
 
-        /**
-         * 开票人/POS操作人名称
-         */
+
         String drawer = "drawer";
 
-        /**
-         * 价税合计金额=合计金额+合计税额
-         */
+
         String totalAmount = "total_amount";
 
-        /**
-         * 合计金额
-         */
+
         String amount = "amount";
 
-        /**
-         * 合计税额
-         */
+
         String taxAmount = "tax_amount";
 
-        /**
-         * 纳税人名称
-         */
+
         String taxpayerName = "taxpayer_name";
 
-        /**
-         * 纳税人识别号
-         */
+
         String taxpayerNo = "taxpayer_no";
 
-        /**
-         * 纳税人地址
-         */
+
         String taxpayerAddr = "taxpayer_addr";
 
-        /**
-         * 纳税人电话
-         */
+
         String taxpayerTel = "taxpayer_tel";
 
-        /**
-         * 开户行及账号
-         */
+
         String taxpayerBankAccount = "taxpayer_bank_account";
 
-        /**
-         * 发票开具状态(0-已申请开票，1-开票中，2-已开票成功，3-开票失败，4-冲红中，5-冲红成功，6-冲红失败)
-         */
+
         String status = "status";
 
-        /**
-         * 发票抬头
-         */
+
         String invoiceTitle = "invoice_title";
 
-        /**
-         * 收票人手机号
-         */
+
         String collectorPhone = "collector_phone";
 
-        /**
-         * 请求流水号
-         */
+
         String issueCode = "issue_code";
 
-        /**
-         * 请求流水号
-         */
+
         String revoke_code = "revoke_code";
 
-        /**
-         * 发票号码
-         */
+
         String invoiceNo = "invoice_no";
 
-        /**
-         * 发票代码
-         */
+
         String invoiceCode = "invoice_code";
 
-        /**
-         * 开票时间
-         */
+
         String invoiceDate = "invoice_date";
 
-        /**
-         * 发票下载路径PDF
-         */
+
         String pdfUrl = "pdf_url";
 
-        /**
-         * 发票下载路径image,多张用英文逗号分割
-         */
+
         String imgUrl = "img_url";
 
-        /**
-         * 是否允许重开
-         */
+
         String reIssue = "re_issue";
     }
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 

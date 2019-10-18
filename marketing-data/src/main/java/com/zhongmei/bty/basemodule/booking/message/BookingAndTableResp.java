@@ -5,9 +5,7 @@ import com.zhongmei.yunfu.db.entity.booking.BookingTable;
 
 import java.util.List;
 
-/**
- * 接收数据
- */
+
 public class BookingAndTableResp {
 
     public Booking booking;

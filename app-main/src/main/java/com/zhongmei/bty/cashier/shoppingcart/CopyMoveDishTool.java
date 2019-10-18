@@ -36,67 +36,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2016年6月7日 下午5:58:15
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class CopyMoveDishTool {
-    /**
-     * 原单
-     */
+
     public static int SOURCE = 1;
-    /**
-     * 目标单
-     */
+
     public static int TARGET = 2;
 
-    /**
-     * @Title: moveDish
-     * @Description: 移菜功能
-     * @Param fromTradeVo：被移菜品所以订单
-     * @Param toTradeVo：菜品移向目标订单
-     * @Param listShopcartItem
-     * @Param @return TODO
-     * @Return Map<String       ,       TradeVo> 返回类型
-     */
+
     public Map<Integer, TradeVo> moveDish(DinnertableTradeInfo fromTradeVo, DinnertableTradeInfo toTradeVo, TradeTable mTradeTable, List<DishQuantityBean> qutityBeanList) {
         return rellayCopy(fromTradeVo, toTradeVo, mTradeTable, null, qutityBeanList, true, true);
     }
 
 
-    /**
-     * @Title: copyDish
-     * @Description: 复制菜品功能
-     * @Param fromTradeVo：被复制菜品所以订单
-     * @Param toTradeVo：菜品复制到的目标订单
-     * @Param listShopcartItem
-     * @Param @return TODO
-     * @Return TradeVo 返回类型
-     */
+
     public Map<Integer, TradeVo> copyDish(DinnertableTradeInfo fromTradeVo, DinnertableTradeInfo toTradeVo, TradeTable mTradeTable,
                                           List<IShopcartItem> listShopcartItem, List<DishQuantityBean> qutityBeanList, boolean isCopyDishProperty) {
         return rellayCopy(fromTradeVo, toTradeVo, mTradeTable, listShopcartItem, qutityBeanList, false, isCopyDishProperty);
     }
 
 
-    /**
-     * @param fromTradeVo
-     * @param toTradeVo
-     * @param mTradeTable
-     * @param listShopcartItem
-     * @param qutityBeanList
-     * @param isMove           是否是移菜
-     *                         * @return
-     */
+
     public Map<Integer, TradeVo> rellayCopy(DinnertableTradeInfo fromTradeVo, DinnertableTradeInfo toTradeVo, TradeTable mTradeTable,
                                             List<IShopcartItem> listShopcartItem, List<DishQuantityBean> qutityBeanList, boolean isMove, boolean isCopyDishProperty) {
         Map<Integer, TradeVo> tempMap = new HashMap<Integer, TradeVo>();
 
-        //将原单中要移除的菜品从原单中移除
-        DinnerShoppingCart oDinnerShoppingCart = DinnerShoppingCart.getInstance();
+                DinnerShoppingCart oDinnerShoppingCart = DinnerShoppingCart.getInstance();
         oDinnerShoppingCart.resetOrderFromTable(fromTradeVo, true);
         if (isMove) {
             if (qutityBeanList != null) {
@@ -111,10 +76,8 @@ public class CopyMoveDishTool {
             }
 
             TradeVo oTradeVo = oDinnerShoppingCart.createDinnerTradeVo();
-            //原单的所有优惠移除
-            BaseShoppingCart.removeAllPrivilige(oTradeVo, true, true, false);
-            //移菜后重新计算营销活动和价格
-            List<IShopcartItem> shopcartItemList = oDinnerShoppingCart.mergeShopcartItem(oDinnerShoppingCart.getShoppingCartVo());
+                        BaseShoppingCart.removeAllPrivilige(oTradeVo, true, true, false);
+                        List<IShopcartItem> shopcartItemList = oDinnerShoppingCart.mergeShopcartItem(oDinnerShoppingCart.getShoppingCartVo());
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, oTradeVo);
             tempMap.put(SOURCE, oTradeVo);
             oDinnerShoppingCart.clearShoppingCart();
@@ -171,32 +134,27 @@ public class CopyMoveDishTool {
         Map<String, TradeItemPlanActivity> tradeItemPlanActivityMap = BaseShoppingCart.covertItemPlanListToMap(nTradeVo.getTradeItemPlanActivityList());
         if (targetIshopcartList != null) {
             for (IShopcartItem mIShopcartItem : targetIshopcartList) {
-                //是否有会员的营销活动，营销活动和会员不共存问题
-                boolean isHasTradePlan = BaseShoppingCart.isHasMemberPlanActivity(mIShopcartItem, tradeItemPlanActivityMap);
+                                boolean isHasTradePlan = BaseShoppingCart.isHasMemberPlanActivity(mIShopcartItem, tradeItemPlanActivityMap);
                 if (customer != null && !isHasBanquet && !isHasTradePlan) {
                     nDinnerShoppingCart.setDishMemberPrivilege(nDinnerShoppingCart.getShoppingCartVo(), mIShopcartItem, customer, false);
                 }
             }
         }
 
-        //只有空闲桌台才需要增加服务费与消费税
-        if (nTradeVo.getTrade().getId() == null) {
-            //增加默认税率
-            TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
+                if (nTradeVo.getTrade().getId() == null) {
+                        TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
             if (taxRateInfo != null && taxRateInfo.isTaxSupplyOpen()) {
                 TradeTax tradeTax = taxRateInfo.toTradeTax(null);
                 nTradeVo.setTradeTaxs(Arrays.asList(tradeTax));
             }
 
-            //加入服务费
-            ExtraCharge serviceExtraCharge = ServerSettingCache.getInstance().getmServiceExtraCharge();
+                        ExtraCharge serviceExtraCharge = ServerSettingCache.getInstance().getmServiceExtraCharge();
             if (serviceExtraCharge != null && serviceExtraCharge.isAutoJoinTrade()) {
                 nTradeVo.setTradeInitConfigs(Arrays.asList(serviceExtraCharge.toTradeInitConfig()));
             }
         }
 
         MathShoppingCartTool.mathTotalPrice(targetIshopcartList, nTradeVo);
-//		nDinnerShoppingCart.createOrder();
         tempMap.put(TARGET, nTradeVo);
         nDinnerShoppingCart.clearShoppingCart();
         return tempMap;
@@ -224,19 +182,13 @@ public class CopyMoveDishTool {
         return tradeItemExtraDinner;
     }
 
-    /**
-     * 创建临时IShopcartItem 主要用于价格计算
-     *
-     * @param dishQuantityBean 移的菜的封装对象
-     * @param isNew:是否对目标单
-     */
+
     public IShopcartItem buildNewShopcarItem(DishQuantityBean dishQuantityBean, boolean isNew) {
         IShopcartItem oShopcartItem = dishQuantityBean.shopcartItem;
         BigDecimal nItemAmount = BigDecimal.ZERO;
         BigDecimal quntity = dishQuantityBean.getQuantity();
         BigDecimal totalAmount = oShopcartItem.getAmount().add(oShopcartItem.getPropertyAmount()).add(oShopcartItem.getFeedsAmount());
-        //子菜价格
-        if (oShopcartItem.getSetmealItems() != null) {
+                if (oShopcartItem.getSetmealItems() != null) {
             for (ISetmealShopcartItem item : oShopcartItem.getSetmealItems()) {
                 totalAmount = totalAmount.add(item.getActualAmount());
             }
@@ -260,9 +212,7 @@ public class CopyMoveDishTool {
         return readonlyShopcartItemBase;
     }
 
-    /**
-     * 建立没有属性价格的tradeItem
-     */
+
     public IShopcartItem buildNoPropertyShopcartItem(IShopcartItem mShopcartItem, DinnertableTradeInfo toTradeVo) {
         TradeVo mTradeVo = null;
         if (toTradeVo != null) {
@@ -270,16 +220,11 @@ public class CopyMoveDishTool {
         }
 
         TradeItem mTradeItem = new TradeItem();
-        // 本地生成的唯一标示
-        mTradeItem.setUuid(mShopcartItem.getUuid());
-        // 数量
-        mTradeItem.setQuantity(mShopcartItem.getTotalQty());
-        // 单价
-        mTradeItem.setPrice(mShopcartItem.getPrice());
-        // 金额,不包括优惠
-        mTradeItem.setAmount(mShopcartItem.getAmount());
-        // 各种特征的金额合计
-        mTradeItem.setPropertyAmount(BigDecimal.ZERO);
+                mTradeItem.setUuid(mShopcartItem.getUuid());
+                mTradeItem.setQuantity(mShopcartItem.getTotalQty());
+                mTradeItem.setPrice(mShopcartItem.getPrice());
+                mTradeItem.setAmount(mShopcartItem.getAmount());
+                mTradeItem.setPropertyAmount(BigDecimal.ZERO);
         mTradeItem.setFeedsAmount(BigDecimal.ZERO);
         BigDecimal propertyAmount = mShopcartItem.getPropertyAmount();
         if (propertyAmount == null) {
@@ -292,8 +237,7 @@ public class CopyMoveDishTool {
         BigDecimal actualAmount = mShopcartItem.getActualAmount().subtract(propertyAmount).subtract(feedsAmount);
         mTradeItem.setActualAmount(actualAmount);
         BigDecimal setmealPropertyAmount = BigDecimal.ZERO;
-        //子菜价格
-        if (mShopcartItem.getSetmealItems() != null) {
+                if (mShopcartItem.getSetmealItems() != null) {
             for (ISetmealShopcartItem item : mShopcartItem.getSetmealItems()) {
                 if (item.getPropertyAmount() != null) {
                     setmealPropertyAmount = setmealPropertyAmount.add(item.getPropertyAmount());
@@ -305,47 +249,31 @@ public class CopyMoveDishTool {
         }
         actualAmount = actualAmount.subtract(setmealPropertyAmount);
         mTradeItem.setActualAmount(actualAmount);
-        // 售价
-        // 父记录UUID
-        mTradeItem.setParentUuid(mShopcartItem.getParentUuid());
-        // 商品名称
-        mTradeItem.setDishName(mShopcartItem.getSkuName());
-        // 商品UUID
-        mTradeItem.setSkuUuid(mShopcartItem.getSkuUuid());
+                        mTradeItem.setParentUuid(mShopcartItem.getParentUuid());
+                mTradeItem.setDishName(mShopcartItem.getSkuName());
+                mTradeItem.setSkuUuid(mShopcartItem.getSkuUuid());
         mTradeItem.setDishId(mShopcartItem.getSkuId());
-        // 是套餐明细时记录下明细分组ID
-        if (mShopcartItem instanceof SetmealShopcartItem) {
+                if (mShopcartItem instanceof SetmealShopcartItem) {
             SetmealShopcartItem setmealItem = (SetmealShopcartItem) mShopcartItem;
             mTradeItem.setDishSetmealGroupId(setmealItem.getSetmealGroupId());
         }
-        // 排序位
-        // mTradeItem.setSort();
-        // 交易订单ID
-        // mTradeItem.setTradeId();
-        // 备注
-        mTradeItem.setTradeMemo(mShopcartItem.getMemo());
+                                                mTradeItem.setTradeMemo(mShopcartItem.getMemo());
         mTradeItem.setType(mShopcartItem.getType());
 
-        // 单位名称
-        mTradeItem.setUnitName(mShopcartItem.getUnitName());
-        // 销售类型
-        mTradeItem.setSaleType(mShopcartItem.getSaleType());
+                mTradeItem.setUnitName(mShopcartItem.getUnitName());
+                mTradeItem.setSaleType(mShopcartItem.getSaleType());
         if (mTradeVo != null && mTradeVo.getTrade() != null) {
             mTradeItem.setTradeUuid(mTradeVo.getTrade().getUuid());
             mTradeItem.setTradeId(mTradeVo.getTrade().getId());
         }
-//		// 打印状态
         mTradeItem.setIssueStatus(mShopcartItem.getIssueStatus());
 
-        // 设置TradeItem 的桌台信息
-        if (mTradeVo != null && Utils.isNotEmpty(mTradeVo.getTradeTableList())) {
+                if (mTradeVo != null && Utils.isNotEmpty(mTradeVo.getTradeTableList())) {
             mTradeItem.setTradeTableUuid(mTradeVo.getTradeTableList().get(0).getUuid());
             mTradeItem.setTradeTableId(mTradeVo.getTradeTableList().get(0).getId());
         }
-        // 设置菜品是否参与折扣
-        mTradeItem.setEnableWholePrivilege(mShopcartItem.getEnableWholePrivilege());
-        // 标记是否是自定义菜品
-        mTradeItem.setIsChangePrice(mShopcartItem.getIsChangePrice());
+                mTradeItem.setEnableWholePrivilege(mShopcartItem.getEnableWholePrivilege());
+                mTradeItem.setIsChangePrice(mShopcartItem.getIsChangePrice());
 
         mTradeItem.setRelateTradeItemId(mShopcartItem.getRelateTradeItemId());
         mTradeItem.setRelateTradeItemUuid(mShopcartItem.getRelateTradeItemUuid());

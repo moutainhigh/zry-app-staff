@@ -9,72 +9,46 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.bty.commonmodule.database.enums.PerimissionType;
 import com.zhongmei.bty.commonmodule.database.enums.PlatformType;
 
-/**
- * AuthUserPerimission is a ORMLite bean type. Corresponds to the database table "auth_user_permission"
- */
+
 @DatabaseTable(tableName = "auth_user_permission")
 public class AuthUserPermission extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "auth_user_permission"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * permission_code
-         */
+
         public static final String permissionCode = "permission_code";
 
-        /**
-         * permission_id
-         */
+
         public static final String permissionId = "permission_id";
 
-        /**
-         * platform
-         */
+
         public static final String platform = "platform";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * type
-         */
+
         public static final String type = "type";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * user_id
-         */
+
         public static final String userId = "user_id";
 
-        /**
-         * role_id
-         */
+
         public static final String roleId = "role_id";
 
     }

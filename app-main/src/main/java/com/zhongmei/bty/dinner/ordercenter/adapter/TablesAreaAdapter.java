@@ -61,15 +61,12 @@ public abstract class TablesAreaAdapter extends PagerAdapter {
         List<TablesAreaVo> subList = getSubDataSet(position);
         int size = subList.size();
         for (int i = 0; i < size; i++) {
-            // 数据
-            final TablesAreaVo vo = subList.get(i);
+                        final TablesAreaVo vo = subList.get(i);
             final CommercialArea area = vo.getTablesArea();
 
-            // 控件
-            View itemView = itemViews[i];
+                        View itemView = itemViews[i];
 
-            // 名称
-            TextView tvName = (TextView) itemView.findViewById(R.id.areaName);
+                        TextView tvName = (TextView) itemView.findViewById(R.id.areaName);
             TextView tvCount = (TextView) itemView.findViewById(R.id.areaIdleTableNum);
             tvName.setText(area.getAreaName());
             tvCount.setText(Utils.isNotEmpty(vo.getTablesVoList()) ? vo.getTablesVoList().size() + "" : "0");
@@ -107,9 +104,7 @@ public abstract class TablesAreaAdapter extends PagerAdapter {
         }
     }
 
-    /**
-     * @param
-     */
+
     public abstract void selectArea(TablesAreaVo vo);
 
     @Override
@@ -123,9 +118,7 @@ public abstract class TablesAreaAdapter extends PagerAdapter {
         return PagerAdapter.POSITION_NONE;
     }
 
-    /**
-     * @param dataSet
-     */
+
     public void setDataSet(List<TablesAreaVo> dataSet) {
         mDataSet.clear();
         if (Utils.isNotEmpty(dataSet)) {
@@ -135,10 +128,7 @@ public abstract class TablesAreaAdapter extends PagerAdapter {
         notifyDataSetChanged();
     }
 
-    /**
-     * @param position
-     * @return
-     */
+
     private List<TablesAreaVo> getSubDataSet(int position) {
         int start = position * ItemResIds.length;
         int end = Math.min((position + 1) * ItemResIds.length, mDataSet.size());

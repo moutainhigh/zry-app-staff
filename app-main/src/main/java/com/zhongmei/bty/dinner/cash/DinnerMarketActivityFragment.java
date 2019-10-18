@@ -41,13 +41,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @Date：2016-5-3 上午11:06:02
- * @Description: 营销活动展示
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @EFragment(R.layout.dinner_market_activity_fragment)
 public class DinnerMarketActivityFragment extends BasicFragment implements AdapterView.OnItemClickListener {
 
@@ -60,34 +54,21 @@ public class DinnerMarketActivityFragment extends BasicFragment implements Adapt
 
     private MarketVo mLastMarketVo;
 
-    private PayMainLeftFragment payMainLeftFragment;// 右侧购物车界面
-
+    private PayMainLeftFragment payMainLeftFragment;
     @AfterViews
     void init() {
-        // 获取正餐当前有用的活动信息
-        UserType typeUser = null;
+                UserType typeUser = null;
         CustomerResp customer = DinnerShopManager.getInstance().getLoginCustomer();
         if (customer != null) {
             typeUser = UserType.MEMBER;
         } else {
             typeUser = UserType.MEMBERNON;
         }
-        // 缓存获取当前可参与活动
-        List<MarketRuleVo> ruleVoList =
+                List<MarketRuleVo> ruleVoList =
                 MarketRuleCache.getFilteredMarketRule(typeUser, BusinessType.DINNER, DeliveryType.HERE);
-        /*
-         * List<IShopcartItem> items =
-         * SeparateShoppingCart.getInstance()
-         * .mergeShopcartItem
-         * (SeparateShoppingCart.getInstance
-         * ().getShoppingCartVo()); // 根据购物车过滤
-         * List<MarketRuleVo> marketruleVoList =
-         * MatketDishManager
-         * .filterShoppingCartRule(ruleVoList, items);
-         */
+
         List<MarketRuleVo> marketruleVoList = ruleVoList;
-        // 构建适配器数据
-        mMarketVoList = createMarketVo(marketruleVoList);
+                mMarketVoList = createMarketVo(marketruleVoList);
 
         mSingleActivity.setNumColumns(1);
 
@@ -123,8 +104,7 @@ public class DinnerMarketActivityFragment extends BasicFragment implements Adapt
                     bg.setBackgroundColor(mContext.getResources().getColor(R.color.transparent));
 
                 }
-                // 使用次数
-                int count = DinnerShopManager.getInstance().getShoppingCart().getPlanUsageCountById(rule.getId());
+                                int count = DinnerShopManager.getInstance().getShoppingCart().getPlanUsageCountById(rule.getId());
                 TextView countTV = (TextView) holder.getView(R.id.tv_count);
                 if (count > 0) {
                     countTV.setText(count + "");
@@ -143,22 +123,18 @@ public class DinnerMarketActivityFragment extends BasicFragment implements Adapt
                 holder.setText(R.id.tv_date, date);
                 String text = null;
                 switch (marketVo.getRuleVo().getPromotionType()) {
-                    case MINUS: // 满减
-
+                    case MINUS:
                         holder.setBackgroundRes(R.id.type_title, R.drawable.marketing_card_minus);
                         text = ShopInfoCfg.getInstance().getCurrencySymbol() + MathDecimal.trimZero(rule.getReduce());
                         break;
-                    case DISCOUNT: // 折扣
-
+                    case DISCOUNT:
                         holder.setBackgroundRes(R.id.type_title, R.drawable.marketing_card_discount);
                         text = MathDecimal.trimZero(rule.getDiscount()) + getResources().getString(R.string.discount1);
                         break;
-                    case GIFT: // 赠送
-                        holder.setBackgroundRes(R.id.type_title, R.drawable.marketing_card_gift);
+                    case GIFT:                         holder.setBackgroundRes(R.id.type_title, R.drawable.marketing_card_gift);
                         text = getResources().getString(R.string.give);
                         break;
-                    case SPECAILPRICE: // 特价
-
+                    case SPECAILPRICE:
                         holder.setBackgroundRes(R.id.type_title, R.drawable.marketing_card_specail_price);
                         text = getResources().getString(R.string.special_price);
                         break;
@@ -172,24 +148,21 @@ public class DinnerMarketActivityFragment extends BasicFragment implements Adapt
         mSingleActivity.setAdapter(mAdapter);
     }
 
-    // 取消选择并刷新界面
-    public void cancelSelected() {
+        public void cancelSelected() {
         if (mLastMarketVo != null && mLastMarketVo.isSelected) {
             mLastMarketVo.setSelected(false);
         }
         updateAdapterView();
     }
 
-    // 刷新界面
-    public void updateAdapterView() {
+        public void updateAdapterView() {
         if (mAdapter != null)
             mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // 如果有整单折扣，就不参与营销活动
-        if (DinnerShopManager.getInstance().getShoppingCart().havePrivilegeByType(PrivilegeType.FREE)
+                if (DinnerShopManager.getInstance().getShoppingCart().havePrivilegeByType(PrivilegeType.FREE)
                 || DinnerShopManager.getInstance().getShoppingCart().havePrivilegeByType(PrivilegeType.DISCOUNT)
                 || DinnerShopManager.getInstance().getShoppingCart().havePrivilegeByType(PrivilegeType.REBATE)) {
 
@@ -258,13 +231,7 @@ public class DinnerMarketActivityFragment extends BasicFragment implements Adapt
         return list;
     }
 
-    /**
-     * @Date：2016-5-24 下午2:33:28
-     * @Description: 封装UI要用的营销活动信息
-     * @Version: 1.0
-     * <p>
-     * rights reserved.
-     */
+
     private static class MarketVo {
         private MarketRuleVo ruleVo;
 
@@ -274,12 +241,8 @@ public class DinnerMarketActivityFragment extends BasicFragment implements Adapt
 
         public MarketVo(MarketRuleVo marketRuleVo) {
             ruleVo = marketRuleVo;
-            if (ruleVo.getPromotionType() == PromotionType.SPECAILPRICE) {// 如果特价
-                // 6.9
-                // 不支持特价菜
-
-            } else {// 其它优惠
-                if (ruleVo.isAllDish()) {
+            if (ruleVo.getPromotionType() == PromotionType.SPECAILPRICE) {
+            } else {                if (ruleVo.isAllDish()) {
                     disNames = MainApplication.getInstance().getString(R.string.dinner_formcenter_goods_all);
                 } else {
                     List<MarketActivityDish> dishList = ruleVo.getMarketActivityDishList();

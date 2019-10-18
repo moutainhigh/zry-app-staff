@@ -2,29 +2,17 @@ package com.zhongmei.bty.basemodule.print.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 是否打印枚举
- * <p>
- * Created by demo on 2018/12/15
- */
+
 
 public enum IsPrint implements ValueEnum<Integer> {
 
-    /**
-     * 不打印
-     */
+
     NOPRINT(2),
 
-    /**
-     * 打印
-     */
+
     PRINT(1),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

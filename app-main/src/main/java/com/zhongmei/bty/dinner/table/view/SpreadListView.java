@@ -5,9 +5,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.ListView;
 
-/**
- * 该listView会展开全部item
- */
+
 @SuppressLint("NewApi")
 public class SpreadListView extends ListView {
     public SpreadListView(Context context) {

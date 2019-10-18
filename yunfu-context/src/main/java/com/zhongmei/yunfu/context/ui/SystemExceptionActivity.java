@@ -10,9 +10,7 @@ import android.view.View;
 import com.zhongmei.yunfu.context.util.HomeWatcher;
 import com.zhongmei.yunfu.context.R;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class SystemExceptionActivity extends android.app.Activity implements HomeWatcher.OnHomePressedListener {
     private HomeWatcher mHomeWatcher;
 
@@ -25,9 +23,7 @@ public class SystemExceptionActivity extends android.app.Activity implements Hom
             @Override
             public void onClick(View v) {
                 finish();
-                /*Intent intent = new Intent();
-                intent.setComponent(new ComponentName("com.zhongmei.bty", "com.zhongmei.bty.splash.login.LoginInitActivity_"));
-                ExceptionHandlerActivity.this.startActivity(intent);*/
+
 
                 System.exit(1);
             }

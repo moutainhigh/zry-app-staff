@@ -27,13 +27,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.math.BigDecimal;
 
-/**
- * @Date：2015年10月9日 下午2:36:06
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 
 @EFragment(R.layout.dinner_title_bar)
 public class TitleBarFragment extends BasicFragment {
@@ -64,9 +58,7 @@ public class TitleBarFragment extends BasicFragment {
 
     private final static float MAX_BATTERY_HEIGHT = 10;
 
-    /**
-     * 显示灰色背景，团餐配菜时不一样显示
-     */
+
     public void showGrayBg() {
         setBgColor(R.color.titlebar_bg2);
     }
@@ -75,12 +67,7 @@ public class TitleBarFragment extends BasicFragment {
         contentLayout.setBackgroundColor(getResources().getColor(color));
     }
 
-    /**
-     * @Title: registerBatteryReceiver
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void registerBatteryReceiver() {
         BatteryReceiverManager.getReceiver().registerObserver(batteryChangedListener);
     }
@@ -108,12 +95,7 @@ public class TitleBarFragment extends BasicFragment {
         }
     };
 
-    /**
-     * @Title: registerWiFiReceiver
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void registerWiFiReceiver() {
         try {
             IntentFilter intentFilter = new IntentFilter(WifiManager.RSSI_CHANGED_ACTION);
@@ -173,66 +155,11 @@ public class TitleBarFragment extends BasicFragment {
         }
     };
 
-    /*Transporter.Callback offlineDataUploadListener = new Transporter.Callback() {
-        RotateAnimation mLoadingAnimation = null;
 
-        @Override
-        public void onUploading(List<Entity> entities) {
-            startLoadingAnimation();
-            offlineUploadDescriptionTv.setText(getString(R.string.status_bar_upload_uploading));
-        }
-
-        @Override
-        public void onUploadSuccess(List<Entity> entities) {
-            stopLoadingAnimation();
-            offlineUploadDescriptionTv.setText(getString(R.string.status_bar_upload_success));
-            offlineUploadStatusImg.setImageResource(R.drawable.status_bar_upload_success);
-        }
-
-        @Override
-        public void onUploadError(List<Entity> entities, String message) {
-            stopLoadingAnimation();
-            offlineUploadDescriptionTv.setText(getString(R.string.status_bar_upload_fail));
-            offlineUploadStatusImg.setImageResource(R.drawable.status_bar_upload_fail);
-        }
-
-        private String getString(int stringId) {
-            return BaseApplication.getInstance().getResources().getString(stringId);
-        }
-
-        private void createLoadingAnimation() {
-            if(mLoadingAnimation == null) {
-                mLoadingAnimation = new RotateAnimation(0,360,
-                        Animation.RELATIVE_TO_SELF, 0.5f,
-                        Animation.RELATIVE_TO_SELF, 0.5f);
-                mLoadingAnimation.setRepeatCount(Animation.INFINITE);
-                mLoadingAnimation.setDuration(1000);
-                mLoadingAnimation.setInterpolator(new LinearInterpolator());
-            }
-        }
-
-        private void startLoadingAnimation() {
-            if(mLoadingAnimation == null) {
-                createLoadingAnimation();
-            }
-            offlineUploadStatsuLl.setVisibility(View.VISIBLE);
-            offlineUploadStatusImg.setVisibility(View.GONE);
-            offlineUploadLoadImg.setVisibility(View.VISIBLE);
-            offlineUploadLoadImg.startAnimation(mLoadingAnimation);
-        }
-        private void stopLoadingAnimation() {
-            offlineUploadStatsuLl.setVisibility(View.VISIBLE);
-            offlineUploadStatusImg.setVisibility(View.VISIBLE);
-            offlineUploadLoadImg.clearAnimation();
-            offlineUploadLoadImg.setVisibility(View.GONE);
-        }
-    };*/
 
     private void registerOfflineUpdateReceiver() {
-        //QSBackup.registerCallback(offlineDataUploadListener);
-    }
+            }
 
     private void unRegisterOfflineUpdateReceiver() {
-        //QSBackup.unRegisterCallback(offlineDataUploadListener);
-    }
+            }
 }

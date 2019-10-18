@@ -25,10 +25,7 @@ import com.zhongmei.bty.basemodule.commonbusiness.manager.QueuePlayServiceManage
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 顾客到店相关业务工具类
- */
+
 
 public class CustomerNoticeHelper {
     public static void updateOperateStatus(final CustomerArrivalShop customer) {
@@ -48,27 +45,19 @@ public class CustomerNoticeHelper {
         }
     }
 
-    //是否开启顾客到店滚动提示
-    public static boolean isOpenCustomerNotice() {
+        public static boolean isOpenCustomerNotice() {
         return SpHelper.getDefault().getBoolean(SpHelper.CUSTOMER_ARRIVE_NOTICE, true);
     }
 
-    //顾客到店语音叫号
-    public static void callCustomerArrive(Context context, CustomerArrivalShop customer) {
+        public static void callCustomerArrive(Context context, CustomerArrivalShop customer) {
         if (context == null || customer == null) {
             return;
         }
         String content = getCustomerName(context, customer) + getCustomerStatus(context, customer.arrivalStatus);
-       /* BaiduSyntheticSpeech speech = new BaiduSyntheticSpeech();
-        speech.setType(1);
-        speech.setContent(content);
-        speech.setSex(Sex.FEMALE);
-        speech.setSpeed(5);*/// modify 20180130
-        QueuePlayServiceManager.playAudition(content);
+               QueuePlayServiceManager.playAudition(content);
     }
 
-    //拼接会员显示名称
-    public static String getCustomerName(Context context, CustomerArrivalShop customer) {
+        public static String getCustomerName(Context context, CustomerArrivalShop customer) {
         if (context == null || customer == null) {
             return " ";
         }
@@ -86,8 +75,7 @@ public class CustomerNoticeHelper {
         return name;
     }
 
-    //拼接会员显示状态
-    public static String getCustomerStatus(Context context, int arriveStatus) {
+        public static String getCustomerStatus(Context context, int arriveStatus) {
         if (context == null) {
             return " ";
         }
@@ -106,8 +94,7 @@ public class CustomerNoticeHelper {
 
     public static void updateCustomerArrivalInfo(Context context, CustomerArrivalShop customerArrivalShop, CustomerInfoViewHolder viewHolder) {
         if (customerArrivalShop != null && viewHolder != null) {
-            if (viewHolder.levelTV != null) {//等级
-                StringBuilder sbLevel = new StringBuilder();
+            if (viewHolder.levelTV != null) {                StringBuilder sbLevel = new StringBuilder();
                 if (!TextUtils.isEmpty(customerArrivalShop.levelName)) {
                     sbLevel.append(customerArrivalShop.levelName);
                 }
@@ -119,39 +106,31 @@ public class CustomerNoticeHelper {
                 viewHolder.levelTV.setText(sbLevel.toString());
             }
 
-            if (viewHolder.statusTV != null) {//到店状态
-                viewHolder.statusTV.setText(getCustomerStatus(context, customerArrivalShop.arrivalStatus));
+            if (viewHolder.statusTV != null) {                viewHolder.statusTV.setText(getCustomerStatus(context, customerArrivalShop.arrivalStatus));
             }
             if (viewHolder.nameTV != null) {
                 viewHolder.nameTV.setText(getCustomerName(context, customerArrivalShop));
             }
 
-            if (viewHolder.phoneTV != null) {//手机号
-                viewHolder.phoneTV.setText(TextUtils.isEmpty(customerArrivalShop.customerPhone) ? " " : customerArrivalShop.customerPhone);
+            if (viewHolder.phoneTV != null) {                viewHolder.phoneTV.setText(TextUtils.isEmpty(customerArrivalShop.customerPhone) ? " " : customerArrivalShop.customerPhone);
             }
-            if (viewHolder.arriveTypeTV != null) {//到店方式
-                ArriveWay arriveWay = customerArrivalShop.getArrivalWay();
+            if (viewHolder.arriveTypeTV != null) {                ArriveWay arriveWay = customerArrivalShop.getArrivalWay();
                 if (arriveWay != null) {
                     viewHolder.arriveTypeTV.setText(arriveWay.getName() + "");
                 } else {
                     viewHolder.arriveTypeTV.setText(" ");
                 }
             }
-            if (viewHolder.tableTV != null) {//桌台号
-                viewHolder.tableTV.setText(TextUtils.isEmpty(customerArrivalShop.tableName) ? " " : customerArrivalShop.tableName);
+            if (viewHolder.tableTV != null) {                viewHolder.tableTV.setText(TextUtils.isEmpty(customerArrivalShop.tableName) ? " " : customerArrivalShop.tableName);
             }
-            if (viewHolder.balanceTV != null) {//会员余额
-                viewHolder.balanceTV.setText(customerArrivalShop.remainValue == null ? " " : customerArrivalShop.remainValue.toString());
+            if (viewHolder.balanceTV != null) {                viewHolder.balanceTV.setText(customerArrivalShop.remainValue == null ? " " : customerArrivalShop.remainValue.toString());
             }
-            if (viewHolder.integralTV != null) {//会员积分
-                viewHolder.integralTV.setText(customerArrivalShop.integral == null ? " " : customerArrivalShop.integral + "");
+            if (viewHolder.integralTV != null) {                viewHolder.integralTV.setText(customerArrivalShop.integral == null ? " " : customerArrivalShop.integral + "");
             }
 
-            if (viewHolder.couponCountTV != null) {//发券数
-                viewHolder.couponCountTV.setText(customerArrivalShop.sendCouponCount + context.getResources().getString(R.string.sheet));
+            if (viewHolder.couponCountTV != null) {                viewHolder.couponCountTV.setText(customerArrivalShop.sendCouponCount + context.getResources().getString(R.string.sheet));
             }
-            //如果是人脸识别方式，要去服务器查询余额积分
-            if (customerArrivalShop.getArrivalWay() == ArriveWay.FACE_RECOGNITION) {
+                        if (customerArrivalShop.getArrivalWay() == ArriveWay.FACE_RECOGNITION) {
                 findCustomerInfoById(customerArrivalShop.customerId, viewHolder);
             }
         }
@@ -199,11 +178,9 @@ public class CustomerNoticeHelper {
                     CustomerResp customer = response.getContent().result;
                     if (customer != null) {
                         try {
-                            if (viewHolder.balanceTV != null) {//会员余额
-                                viewHolder.balanceTV.setText(customer.remainValue == null ? " " : customer.remainValue.toString());
+                            if (viewHolder.balanceTV != null) {                                viewHolder.balanceTV.setText(customer.remainValue == null ? " " : customer.remainValue.toString());
                             }
-                            if (viewHolder.integralTV != null) {//会员积分
-                                viewHolder.integralTV.setText(customer.integral == null ? " " : customer.integral + "");
+                            if (viewHolder.integralTV != null) {                                viewHolder.integralTV.setText(customer.integral == null ? " " : customer.integral + "");
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -231,16 +208,5 @@ public class CustomerNoticeHelper {
     }
 
     public static class CustomerInfoViewHolder {
-        public TextView statusTV;//状态
-        public TextView nameTV;//姓名
-        public TextView levelTV;//等级
-        public TextView phoneTV;//手机号
-        public TextView arriveTypeTV;//到店方式
-        public TextView tableTV;//桌台名称
-        public TextView balanceTV;//会员余额
-        public TextView integralTV;//会员积分
-        public TextView tradeTimeTV;//消费次数
-        public TextView tradeAmountTV;//消费金额
-        public TextView couponCountTV;//券数
-    }
+        public TextView statusTV;        public TextView nameTV;        public TextView levelTV;        public TextView phoneTV;        public TextView arriveTypeTV;        public TextView tableTV;        public TextView balanceTV;        public TextView integralTV;        public TextView tradeTimeTV;        public TextView tradeAmountTV;        public TextView couponCountTV;    }
 }

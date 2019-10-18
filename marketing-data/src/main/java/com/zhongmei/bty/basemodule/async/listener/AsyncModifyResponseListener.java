@@ -12,20 +12,15 @@ import com.zhongmei.yunfu.resp.ResponseObject;
 import com.zhongmei.yunfu.resp.UserActionEvent;
 import com.zhongmei.yunfu.util.ToastUtil;
 
-/**
- * 异步改单回调
- * Created by demo on 2018/12/15
- */
+
 public class AsyncModifyResponseListener extends EventResponseListener<TradeResp> implements AsyncResponseListener<TradeResp> {
 
     private final static String TAG = AsyncModifyResponseListener.class.getSimpleName();
 
     protected AsyncHttpRecord asyncRec;
 
-    //public DinnerModifyPrintBean printBean;
 
-    public boolean isDinner = true;//正餐使用解藕后的打印，自助暂时使用以前的那套
-
+    public boolean isDinner = true;
     public AsyncModifyResponseListener() {
     }
 
@@ -48,9 +43,7 @@ public class AsyncModifyResponseListener extends EventResponseListener<TradeResp
             switch (response.getStatusCode()) {
                 case ResponseObject.OK:
                     if (asyncRec != null) {
-                        //PRTPrintOperator operator = new PRTPrintOperator();
-                        //operator.printTradeModifyTicket(printBean);
-                        AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHANGE_ORDER, asyncRec.getTradeId(), asyncRec.getTradeUuId(), asyncRec.getTradeUpdateTime());
+                                                                        AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHANGE_ORDER, asyncRec.getTradeId(), asyncRec.getTradeUuId(), asyncRec.getTradeUpdateTime());
                     }
                     break;
             }

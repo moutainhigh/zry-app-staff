@@ -9,17 +9,13 @@ import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 
-/**
- * TradePromotion is a ORMLite bean type. Corresponds to the database table "trade_promotion"
- */
+
 @DatabaseTable(tableName = "trade_promotion")
 public class TradePromotion extends DataEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_promotion"
-     */
+
     public interface $ extends BasicEntityBase.$ {
         String shopIdenty = "shop_identy";
         String desc = "desc";
@@ -52,8 +48,7 @@ public class TradePromotion extends DataEntityBase {
     private Integer source;
 
     @DatabaseField(columnName = "payment_item_id")
-    private Long paymentItemId;//add 20161220
-
+    private Long paymentItemId;
     @DatabaseField(columnName = "payment_item_uuid")
     private String paymentItemUuid;
 

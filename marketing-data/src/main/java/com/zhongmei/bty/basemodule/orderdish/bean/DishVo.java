@@ -18,10 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @version: 1.0
- * @date 2015年7月8日
- */
+
 public class DishVo {
 
     protected final DishAndStandards dish;
@@ -30,26 +27,18 @@ public class DishVo {
         return otherDishs;
     }
 
-    /**
-     * 同系列其他商品
-     */
+
     private Map<String, DishShop> otherDishs;
 
-    /**
-     * 同系列商品中单价最低值
-     */
+
     private BigDecimal minPrice;
 
-    /**
-     * 同系列商品中单价最高值
-     */
+
     private BigDecimal maxPrice;
 
     private boolean containProperties;
-    private boolean isSelected;//是否被选中
-
-    private BigDecimal inventoryNum;//库存数量
-
+    private boolean isSelected;
+    private BigDecimal inventoryNum;
 
     public List<DishShop> getSelectedDishs() {
         return selectedDishs;
@@ -59,8 +48,7 @@ public class DishVo {
         this.selectedDishs = selectedDishs;
     }
 
-    private List<DishShop> selectedDishs;//被选中的菜品
-
+    private List<DishShop> selectedDishs;
     public boolean isSelected() {
         return isSelected;
     }
@@ -118,11 +106,7 @@ public class DishVo {
         this.inventoryNum = inventoryNum;
     }
 
-    /**
-     * 取得其他没有沽清的菜品中余量最小的那个菜
-     *
-     * @return
-     */
+
     public DishShop getLeastResidueFromOtherDishs() {
         DishShop lessDishShop = null;
         boolean first = true;
@@ -147,11 +131,7 @@ public class DishVo {
         return lessDishShop;
     }
 
-    /**
-     * 取得其他没有沽清的菜品中余量最小的那个非称重商品
-     *
-     * @return
-     */
+
     public DishShop getLeastUnweighResidueFromOtherDishs() {
         DishShop lessDishShop = null;
         boolean first = true;
@@ -177,13 +157,10 @@ public class DishVo {
         return lessDishShop;
     }
 
-    /**
-     * 是否已估清
-     */
+
     public boolean isClear() {
         if (dish.isClear()) {
-            // 其他规格都估清了才返回true
-            for (DishShop dishShop : otherDishs.values()) {
+                        for (DishShop dishShop : otherDishs.values()) {
                 if (dishShop.getClearStatus() != ClearStatus.CLEAR) {
                     return false;
                 }
@@ -245,12 +222,7 @@ public class DishVo {
         otherDishs.put(dishShop.getUuid(), dishShop);
     }
 
-    /**
-     * 如果指定UUID的商品与当前商品是同一个或同一系列不同规格就返回true
-     *
-     * @param skuUuid
-     * @return
-     */
+
     public boolean isSameSeries(String skuUuid) {
         return getSkuUuid().equals(skuUuid) || otherDishs.get(skuUuid) != null;
     }
@@ -284,16 +256,13 @@ public class DishVo {
         return true;
     }
 
-    /**
-     * 是否有菜品已估清
-     */
+
     public boolean isHaveClear() {
         if (dish.isClear()) {
             return true;
 
         } else {
-            // 其他规格都估清了才返回true
-            for (DishShop dishShop : otherDishs.values()) {
+                        for (DishShop dishShop : otherDishs.values()) {
                 if (dishShop.getClearStatus() == ClearStatus.CLEAR) {
                     return true;
                 }
@@ -303,11 +272,7 @@ public class DishVo {
 
     }
 
-    /**
-     * 获取该菜品下面的规格名称
-     *
-     * @return
-     */
+
     public String getStandardName() {
         Set<DishProperty> dishProperties = getStandards();
 

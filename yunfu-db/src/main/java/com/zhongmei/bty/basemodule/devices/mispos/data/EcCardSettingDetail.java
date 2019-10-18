@@ -8,83 +8,55 @@ import com.zhongmei.yunfu.db.CrmBasicEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * 实体卡充值规则
- */
+
 @DatabaseTable(tableName = "ec_card_setting_detail")
 public class EcCardSettingDetail extends CrmBasicEntityBase
         implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "ec_valuecard_setting_detail"
-     */
+
     public interface $ extends CrmBasicEntityBase.$ {
 
-        /**
-         * card_level_id
-         */
+
         public static final String cardLevelId = "card_level_id";
 
-        /**
-         * full_value
-         */
+
         public static final String fullValue = "full_value";
 
-        /**
-         * send_value
-         */
+
         public static final String sendValue = "send_value";
 
-        /**
-         * send_rate
-         */
+
         public static final String sendRate = "send_rate";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }
 
-    /**
-     * 卡种等级id
-     */
+
     @DatabaseField(columnName = "card_level_id")
     private Long cardLevelId;
 
-    /**
-     * 满值
-     */
+
     @DatabaseField(columnName = "full_value")
     private BigDecimal fullValue;
 
-    /**
-     * 赠送金额
-     */
+
     @DatabaseField(columnName = "send_value")
     private BigDecimal sendValue;
 
-    /**
-     * 赠送百分比
-     */
+
     @DatabaseField(columnName = "send_rate")
     private BigDecimal sendRate;
 

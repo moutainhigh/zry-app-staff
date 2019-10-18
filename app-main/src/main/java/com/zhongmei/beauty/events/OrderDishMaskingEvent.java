@@ -1,8 +1,6 @@
 package com.zhongmei.beauty.events;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class OrderDishMaskingEvent {
     private boolean isShowMasking = false;

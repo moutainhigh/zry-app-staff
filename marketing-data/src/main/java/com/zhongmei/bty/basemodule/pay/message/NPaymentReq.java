@@ -3,10 +3,7 @@ package com.zhongmei.bty.basemodule.pay.message;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * v3支付请求专用
- * Created by demo on 2018/12/15
- */
+
 
 public class NPaymentReq {
     private Integer paymentType;
@@ -15,8 +12,7 @@ public class NPaymentReq {
     private BigDecimal exemptAmount;
     private BigDecimal actualAmount;
     private BigDecimal shopActualAmount;
-    private int recycleStatus = 1; //正常
-    List<NPaymentItemReq> paymentItems;
+    private int recycleStatus = 1;     List<NPaymentItemReq> paymentItems;
 
     public Integer getPaymentType() {
         return paymentType;

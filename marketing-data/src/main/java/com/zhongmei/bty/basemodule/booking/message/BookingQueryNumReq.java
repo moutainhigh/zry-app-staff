@@ -1,10 +1,6 @@
 package com.zhongmei.bty.basemodule.booking.message;
 
-/**
- * @Date： 2018/6/29
- * @Description:
- * @Version: 1.0
- */
+
 public class BookingQueryNumReq {
 
 

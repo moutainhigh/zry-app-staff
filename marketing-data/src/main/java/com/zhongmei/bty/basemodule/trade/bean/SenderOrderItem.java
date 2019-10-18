@@ -7,44 +7,28 @@ import java.util.List;
 public class SenderOrderItem {
     private TradeVo traderVo;
 
-    /**
-     * 送餐状态
-     */
+
     private String deliveryStatus;
 
-    /**
-     * 客户名字
-     */
+
     private String customerName;
 
-    /**
-     * 客户电话
-     */
+
     private String customerPhone;
 
-    /**
-     * 付款方式
-     */
+
     private String paymentMethond;
 
-    /**
-     * 付款集合
-     */
+
     private List<PaymentVo> paymentList;
 
-    /**
-     * 清账状态
-     */
+
     private String cleanStatus;
 
-    /**
-     * 是否能清账
-     */
+
     private boolean isCanClean;
 
-    /**
-     * 是否选中
-     */
+
     private boolean isSelected;
 
     public TradeVo getTraderVo() {

@@ -47,17 +47,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- * @version: 1.0
- * @date 2015年7月13日
- */
+
 public class DishCache {
 
     private static final String TAG = DishCache.class.getSimpleName();
-    //临时菜编码 tes：BQL002
-    public static final String TEMPDISHCODE = "kry_linshicai";
-    //商品数据关键的URI
-    private static final Uri S_URI_DISH_SHOP = DBHelperManager.getUri(DishShop.class);
+        public static final String TEMPDISHCODE = "zmyf_linshicai";
+        private static final Uri S_URI_DISH_SHOP = DBHelperManager.getUri(DishShop.class);
     private static final Uri S_URI_DISH_BRAND_TYPE = DBHelperManager.getUri(DishBrandType.class);
 
     private static class LazySingletonHolder {
@@ -68,9 +63,7 @@ public class DishCache {
         return LazySingletonHolder.INSTANCE.inited;
     }
 
-    /**
-     * 刷新所有缓存数据
-     */
+
     public synchronized static void refresh() {
         try {
             LazySingletonHolder.INSTANCE._refresh();
@@ -80,108 +73,77 @@ public class DishCache {
         LazySingletonHolder.INSTANCE.checkData();
     }
 
-    /**
-     * 返回商品价格计算规则
-     * @return
-     */
+
     public static DishTimeChargingRulehHolder getDishTimeChargingRuleHolder(){
         return LazySingletonHolder.INSTANCE.dishTimeChargingRuleHolder;
     }
 
-    /**
-     * 返回属性分类缓存数据
-     */
+
     public static DataHolder<DishPropertyType> getPropertyTypeHolder() {
         return LazySingletonHolder.INSTANCE.propertyTypeHolder;
     }
 
-    /**
-     * 返回属性缓存数据
-     */
+
     public static PropertyHolder getPropertyHolder() {
         return LazySingletonHolder.INSTANCE.propertyHolder;
     }
 
-    /**
-     * 返回菜品分类缓存数据
-     */
+
     public static DataHolder<DishBrandType> getDishTypeHolder() {
         return LazySingletonHolder.INSTANCE.dishTypeHolder;
     }
 
-    /**
-     * 返回菜品缓存数据
-     */
+
     public static DishHolder getDishHolder() {
         return LazySingletonHolder.INSTANCE.dishHolder;
     }
 
-    /**
-     * 返回加料缓存数据
-     */
+
     public static ExtraHolder getExtraHolder() {
         return LazySingletonHolder.INSTANCE.extraHolder;
     }
 
-    /**
-     * 返回菜品属性缓存数据
-     */
+
     public static DishPropertyHolder getDishPropertyHolder() {
         return LazySingletonHolder.INSTANCE.dishPropertyHolder;
     }
 
-    /**
-     * 返回套餐明细缓存数据
-     */
+
     public static DishSetmealHolder getSetmealHolder() {
         return LazySingletonHolder.INSTANCE.setmealHolder;
     }
 
-    /**
-     * 返回套餐分组缓存数据
-     */
+
     public static DataHolder<DishSetmealGroup> getSetmealGroupHolder() {
         return LazySingletonHolder.INSTANCE.setmealGroupHolder;
     }
 
-    /**
-     * 返回菜品加料缓存数据
-     */
+
     public static DishExtraHolder getDishExtraHolder() {
         return LazySingletonHolder.INSTANCE.dishExtraHolder;
     }
 
-    /**
-     * 返回单位缓存数据
-     */
+
     public static DataHolder<DishUnitDictionary> getUnitHolder() {
         return LazySingletonHolder.INSTANCE.unitHolder;
     }
 
-    /**
-     * 返回模版缓存
-     */
+
     public static DishCarteHolder getDishCarteHolder() {
         return LazySingletonHolder.INSTANCE.dishCarteHolder;
     }
 
-    /**
-     * 返回模版菜单
-     */
+
     public static DishCarteDetailHolder getDishCarteDetailHolder() {
         return LazySingletonHolder.INSTANCE.dishCarteDetailHolder;
     }
 
-    /**
-     * 返回模版人数
-     */
+
     public static DishCarteNormsHolder getDishCarteNormsHolder() {
         return LazySingletonHolder.INSTANCE.dishCarteNormsHolder;
     }
 
-    /**
-     * 返回临时菜dishshop
-     */
+
     public static DishShop getTempDishShop() {
         return LazySingletonHolder.INSTANCE.tempDishShop;
     }
@@ -201,8 +163,7 @@ public class DishCache {
     private final DishCarteHolder dishCarteHolder;
     private final DishCarteDetailHolder dishCarteDetailHolder;
     private final DishCarteNormsHolder dishCarteNormsHolder;
-    //临时菜的dishShop
-    private static DishShop tempDishShop;
+        private static DishShop tempDishShop;
 
     private boolean inited = false;
 
@@ -272,9 +233,7 @@ public class DishCache {
         dishCarteNormsHolder = new DishCarteNormsHolder();
     }
 
-    /**
-     * 刷新所有缓存数据
-     */
+
     synchronized void _refresh() throws Exception {
         Log.i(TAG, "refresh...");
         long startTime = System.currentTimeMillis();
@@ -304,8 +263,7 @@ public class DishCache {
                 + MemUtil.getUsedHeapSizeWithMB() + "MB");
     }
 
-    // 初始化缓存的时候,记录下商品的信息
-    private void initDishLog() {
+        private void initDishLog() {
         RLog.i(RLog.DISH_KEY_TAG, "初始化操作, dishHolder 商品size : " + Utils.size(dishHolder.getAll()));
         RLog.i(RLog.DISH_KEY_TAG, "初始化操作, dishTypeHolder 商品中类size : " + Utils.size(dishTypeHolder.getAll()));
     }
@@ -316,69 +274,40 @@ public class DishCache {
         holder.registenObserver();
     }
 
-    /**
-     * 数据缓存对象
-     *
-     * @version: 1.0
-     * @date 2015年7月14日
-     */
+
     public static interface DataHolder<T extends BasicEntityBase> {
 
-        /**
-         * 刷新缓存数据
-         */
+
         void refresh() throws Exception;
 
-        /**
-         * 获取所有对象(包含循环菜品，for商品设置)
-         */
+
         Collection<T> getSetAll();
 
-        /**
-         * 返回包含的对象个数
-         */
+
         int getCount();
 
-        /**
-         * 获取所有对象
-         */
+
         Collection<T> getAll();
 
-        /**
-         * 根据ID获取对象
-         */
+
         T get(Long id);
 
-        /**
-         * 返回符合给定过滤规则的对象列表
-         */
+
         List<T> filter(DataFilter<T> filter);
 
-        /**
-         * 返回符合后台给定过滤规则的对象列表(包含循环菜品，for设置中的商品设置)
-         */
+
         List<T> filterSet(DataFilter<T> filter);
     }
 
-    /**
-     * 数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月13日
-     */
+
     public static interface DataFilter<T extends BasicEntityBase> {
 
-        /**
-         * 返回true表示此entity是符合条件的
-         */
+
         boolean accept(T entity);
 
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年7月14日
-     */
+
     private static abstract class AbstractHolder<T extends BasicEntityBase> implements DataHolder<T> {
         @Override
         public synchronized void refresh() throws Exception {
@@ -446,10 +375,7 @@ public class DishCache {
 
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年7月13日
-     */
+
     private static abstract class BasicHolder<T extends BasicEntityBase> extends AbstractHolder<T> {
 
         private final Class<T> classType;
@@ -457,33 +383,24 @@ public class DishCache {
         private DatabaseHelper.DataChangeObserver observer;
         private Map<Long, T> datas;
 
-        //private final HandlerThread mRefreshThread;
-        BasicHolder(Class<T> classType) {
+                BasicHolder(Class<T> classType) {
             this.classType = classType;
             uri = DBHelperManager.getUri(classType);
             datas = new LinkedHashMap<Long, T>();
-            //modify  20170908 替换provider 监听
-            /*mRefreshThread=new HandlerThread(getClass().getSimpleName());
-            mRefreshThread.setDaemon(true);
-			mRefreshThread.start();
-			mRefreshThread.getLooper().toString();*/
+
         }
 
         void registenObserver() {
             if (observer == null) {
-                //modify  20170908 替换provider 监听
-                /*observer = new DataObserver(this,new Handler(mRefreshThread.getLooper()));*/
+
                 observer = new DataObserver(this, uri);
             }
-            //BaseApplication.getInstance().getContentResolver().registerContentObserver(uri, true, observer);
-            DatabaseHelper.Registry.register(observer);
+                        DatabaseHelper.Registry.register(observer);
         }
 
         void unregistenObserver() {
             if (observer != null) {
-                //modify  20170908 替换provider 监听
-                //BaseApplication.getInstance().getContentResolver().unregisterContentObserver(observer);
-                DatabaseHelper.Registry.unregister(observer);
+                                                DatabaseHelper.Registry.unregister(observer);
                 observer = null;
             }
         }
@@ -525,15 +442,9 @@ public class DishCache {
         protected abstract List<T> query(DatabaseHelper helper, Dao<T, Long> dao) throws Exception;
     }
 
-    /**
-     * 菜单循环周期表
-     *
-     * @version: 1.0
-     * @date 2015年7月14日
-     */
-    public static class DishCyclePeriodHolder extends BasicHolder<DishCyclePeriod> {
-        private Map<Long, List<DishCyclePeriod>> mDishCycleMap = new LinkedHashMap<Long, List<DishCyclePeriod>>();//add 20180328 优化循环菜单
 
+    public static class DishCyclePeriodHolder extends BasicHolder<DishCyclePeriod> {
+        private Map<Long, List<DishCyclePeriod>> mDishCycleMap = new LinkedHashMap<Long, List<DishCyclePeriod>>();
         public DishCyclePeriodHolder() {
             super(DishCyclePeriod.class);
         }
@@ -556,27 +467,14 @@ public class DishCache {
             return qb.orderBy(DishCyclePeriod.$.serverUpdateTime, false).query();
         }
 
-        /**
-         * 判断指定菜品是否有效
-         */
+
         public boolean isValidDish(Long brandDishId) {
-            //根据指定brandDishId获取循环菜品数据
-            //modify begin  20180328 优化循环菜单
-			/*List<DishCyclePeriod> dishCyclePeriods = new ArrayList<DishCyclePeriod>();
-			Collection<DishCyclePeriod> allDishCyclePeriods = getAll();
-			for (DishCyclePeriod dishCyclePeriod : allDishCyclePeriods) {
-				if (dishCyclePeriod.getDishId().equals(brandDishId)) {
-					dishCyclePeriods.add(dishCyclePeriod);
-				}
-			}*/
+
             List<DishCyclePeriod> dishCyclePeriods = mDishCycleMap.get(brandDishId);
-            //modify end  20180328 优化循环菜单
-            //循环菜品数据为0，表示这个菜品没有进入循环菜品设置，那么这个菜一直有效
-            if (dishCyclePeriods == null || dishCyclePeriods.isEmpty()) {
+                                    if (dishCyclePeriods == null || dishCyclePeriods.isEmpty()) {
                 return true;
             } else {
-                //遍历指定菜品查询出分时段数据，判断菜品是否有效
-                for (DishCyclePeriod dishCyclePeriod : dishCyclePeriods) {
+                                for (DishCyclePeriod dishCyclePeriod : dishCyclePeriods) {
                     if (isValid(dishCyclePeriod)) {
                         return true;
                     }
@@ -586,8 +484,7 @@ public class DishCache {
             }
         }
 
-        //add 20180328  start 优化循环菜单
-        private void updateDishCyclePeriodMap(List<DishCyclePeriod> list) {
+                private void updateDishCyclePeriodMap(List<DishCyclePeriod> list) {
             mDishCycleMap.clear();
             for (DishCyclePeriod dcPeriod : list) {
                 if (dcPeriod.getDishId() != null) {
@@ -608,24 +505,18 @@ public class DishCache {
             this.updateDishCyclePeriodMap(list);
             return super.cache(list);
         }
-        //add 20180328  end 优化循环菜单
 
-        /**
-         * 判断当前时间指定菜品是否有效
-         */
+
         private boolean isValid(DishCyclePeriod dishCyclePeriod) {
             long currentTimeMillis = System.currentTimeMillis();
-            //判断菜品有效的日期序号是否与今天日期序号相等
-            int currentDayNumber = DateTimeUtils.getDayNumber(currentTimeMillis);
+                        int currentDayNumber = DateTimeUtils.getDayNumber(currentTimeMillis);
             if (!dishCyclePeriod.getDayNumber().equalsValue(currentDayNumber)) {
                 return false;
             }
 
-            //判断菜品是否在有效期日期以内，例如 YYYY-MM-DD
-            String periodStart = dishCyclePeriod.getPeriodStart();
+                        String periodStart = dishCyclePeriod.getPeriodStart();
             String periodEnd = dishCyclePeriod.getPeriodEnd();
-            Date onlyDate = DateTimeUtils.onlyDate(new Date());//当天日期
-            if (!TextUtils.isEmpty(periodStart) && !TextUtils.isEmpty(periodEnd)) {
+            Date onlyDate = DateTimeUtils.onlyDate(new Date());            if (!TextUtils.isEmpty(periodStart) && !TextUtils.isEmpty(periodEnd)) {
                 Date periodStartDate = new Date(DateTimeUtils.formatDate(periodStart));
                 Date periodEndDate = new Date(DateTimeUtils.formatDate(periodEnd));
                 if (periodStartDate.compareTo(onlyDate) > 0 || periodEndDate.compareTo(onlyDate) < 0) {
@@ -643,14 +534,12 @@ public class DishCache {
                 }
             }
 
-            //判断菜品是否在有效时间段以内,例如hh:mm:ss
-            long validityStartTime = DateTimeUtils.getTime(dishCyclePeriod.getValidityStart());
+                        long validityStartTime = DateTimeUtils.getTime(dishCyclePeriod.getValidityStart());
             if (validityStartTime > currentTimeMillis) {
                 return false;
             }
 
-            //判断菜品是否在有效时间段以内,例如hh:mm:ss
-            long validityEndTime = DateTimeUtils.getTime(dishCyclePeriod.getValidityEnd());
+                        long validityEndTime = DateTimeUtils.getTime(dishCyclePeriod.getValidityEnd());
             if (validityEndTime < currentTimeMillis) {
                 return false;
             }
@@ -661,12 +550,8 @@ public class DishCache {
 
     public static class DishCarteDetailHolder extends BasicHolder<DishCarteDetail> {
         private final List<OnDataChangeListener> listeners;
-        private Map<Long, List<DishCarteDetail>> carteDishNorms;//根据菜单类型缓存套餐模版
-        //private Map<String,List<DishShop>> dishShopByCarteId;
-        private Map<String, List<DishShop>> dishShopByCarteUuid;
-        private Map<String, Map<Long, List<DishShop>>> dishShopByDishType;//根据分类缓存菜品
-        private Map<String, Map<Long, Map<String, DishShop>>> dishShopMapByDishType;//根据分类缓存菜品
-        private DishHolder mDishHolder;
+        private Map<Long, List<DishCarteDetail>> carteDishNorms;                private Map<String, List<DishShop>> dishShopByCarteUuid;
+        private Map<String, Map<Long, List<DishShop>>> dishShopByDishType;        private Map<String, Map<Long, Map<String, DishShop>>> dishShopMapByDishType;        private DishHolder mDishHolder;
         private DishCarteHolder mDishCarteHolder;
 
         public void removeDataChangeListener(OnDataChangeListener listener) {
@@ -684,9 +569,7 @@ public class DishCache {
             this.mDishCarteHolder = dishCarteHolder;
         }
 
-        /**
-         * 根据指定类型的所有菜品信息
-         */
+
         public List<DishShop> getDishShopsByType(String carteUuid, Long dishTypeId) {
             Map<Long, List<DishShop>> listMap = dishShopByDishType.get(carteUuid);
             if (listMap != null) {
@@ -706,9 +589,7 @@ public class DishCache {
             return null;
         }
 
-        /**
-         * 根据UUID来获取菜单
-         */
+
         public List<DishShop> getDishShopsByCarte(String dishCarteUuid) {
             return dishShopByCarteUuid.get(dishCarteUuid);
         }
@@ -794,8 +675,7 @@ public class DishCache {
 
     public static class DishCarteNormsHolder extends BasicHolder<DishCarteNorms> {
         private final List<OnDataChangeListener> listeners;
-        private Map<Long, List<DishCarteNorms>> carteTypeDishNorms;//根据菜单类型缓存套餐模版
-
+        private Map<Long, List<DishCarteNorms>> carteTypeDishNorms;
         public void removeDataChangeListener(OnDataChangeListener listener) {
             listeners.remove(listener);
         }
@@ -845,8 +725,7 @@ public class DishCache {
 
     public static class DishCarteHolder extends BasicHolder<DishCarte> {
         private final List<OnDataChangeListener> listeners;
-        private Map<Integer, List<DishCarte>> carteTypeDish;//根据菜单类型缓存套餐模版
-
+        private Map<Integer, List<DishCarte>> carteTypeDish;
         public void removeDataChangeListener(OnDataChangeListener listener) {
             listeners.remove(listener);
         }
@@ -872,13 +751,6 @@ public class DishCache {
 
                 carteTypeDish.get(dishCarte.getCarteType()).add(dishCarte);
             }
-//			DishCarte dishCarte=new DishCarte();
-//			dishCarte.setId(1l);
-//			dishCarte.setUuid("dkdksdfwerjoqivndkalkdj");
-//			dishCarte.setPrice(BigDecimal.ZERO);
-//			dishCarte.setName("298套餐");
-//			carteTypeDish.put(2,new ArrayList<DishCarte>());
-//			carteTypeDish.get(2).add(dishCarte);
             return super.cache(list);
         }
 
@@ -907,8 +779,7 @@ public class DishCache {
     }
 
     public static class DishTimeChargingRulehHolder extends BasicHolder<DishTimeChargingRule> {
-        protected Map<Long, DishTimeChargingRule> mDishChargingRuleMap;//dishId , DishTimeChargingRule
-
+        protected Map<Long, DishTimeChargingRule> mDishChargingRuleMap;
         DishTimeChargingRulehHolder() {
             super(DishTimeChargingRule.class);
             mDishChargingRuleMap=new HashMap<Long,DishTimeChargingRule>();
@@ -937,12 +808,7 @@ public class DishCache {
     }
 
 
-    /**
-     * 菜品数据缓存
-     *
-     * @version: 1.0
-     * @date 2015年7月14日
-     */
+
     public static class DishHolder extends BasicHolder<DishShop> {
 
         private final List<OnDataChangeListener> listeners;
@@ -970,9 +836,7 @@ public class DishCache {
             listeners.remove(listener);
         }
 
-        /**
-         * 获取指定uuid的对象
-         */
+
         public DishShop get(String uuid) {
             DishShop dishShop = uuidDishMap.get(uuid);
             if (dishShop != null && !dishCyclePeriodHolder.isValidDish(dishShop.getBrandDishId())) {
@@ -981,16 +845,13 @@ public class DishCache {
             return dishShop;
         }
 
-        /**
-         * 获取指定分类下所有的菜品
-         */
+
 
         public List<DishShop> getDishShopByType(Long typeId) {
             List<DishShop> temp = dishInTypeMap.get(typeId);
             List<DishShop> dishShops = new ArrayList<DishShop>();
             if (temp != null) {
-                //过滤无效菜品和临时菜
-                for (DishShop dishShop : temp) {
+                                for (DishShop dishShop : temp) {
                     if (dishShop != null && dishCyclePeriodHolder.isValidDish(dishShop.getBrandDishId()) && !dishShop.isTempDish(TEMPDISHCODE)) {
                         dishShops.add(dishShop);
                     }
@@ -1000,24 +861,19 @@ public class DishCache {
         }
 
 
-        /**
-         * 获取指定分类下所有的菜品 不做什么条件过滤
-         */
+
         public List<DishShop> getDishShopAllByType(Long typeId) {
             return dishInTypeMap.get(typeId);
         }
 
 
-        /**
-         * 获取指定分类下有效的菜品 不包含称重商品  变价商品 和套餐
-         */
+
 
         public List<DishShop> getPrintDishShopByType(Long typeId) {
             List<DishShop> temp = dishInTypeMap.get(typeId);
             List<DishShop> dishShops = new ArrayList<DishShop>();
             if (temp != null) {
-                //过滤无效菜品和临时菜
-                for (DishShop dishShop : temp) {
+                                for (DishShop dishShop : temp) {
                     if (!dishShop.isCombo() && dishShop.getSaleType() != SaleType.WEIGHING && dishShop.getIsChangePrice() != Bool.YES) {
                         dishShops.add(dishShop);
                     }
@@ -1026,9 +882,7 @@ public class DishCache {
             return dishShops;
         }
 
-        /**
-         * 获取指定分类下有效的菜品 不包含称重商品 和套餐
-         */
+
 
         public List<DishShop> getBindDishShopByType(Long typeId) {
             List<DishShop> temp = dishInTypeMap.get(typeId);
@@ -1065,9 +919,7 @@ public class DishCache {
             return resultList;
         }
 
-        /**
-         * 获取指定uuid的对象(包含循环菜品，for商品设置)
-         */
+
         public DishShop getSet(String uuid) {
             return uuidDishMap.get(uuid);
         }
@@ -1088,11 +940,9 @@ public class DishCache {
 
         @Override
         protected List<DishShop> query(DatabaseHelper helper, Dao<DishShop, Long> dao) throws Exception {
-            //查询临时菜
-            QueryBuilder<DishShop, Long> tempDishQb = dao.queryBuilder();
+                        QueryBuilder<DishShop, Long> tempDishQb = dao.queryBuilder();
             tempDishShop = tempDishQb.where().eq(DishShop.$.dishCode, TEMPDISHCODE).queryForFirst();
-            // 只列出可用的菜品，排除实体卡商品和临时菜
-            QueryBuilder<DishShop, Long> qb = dao.queryBuilder();
+                        QueryBuilder<DishShop, Long> qb = dao.queryBuilder();
             qb.selectColumns(DishShop.$.id,
                     DishShop.$.statusFlag,
                     DishShop.$.serverCreateTime,
@@ -1131,7 +981,6 @@ public class DishCache {
                     DishShop.$.maxNum,
                     DishShop.$.wmType);
             qb.where().eq(DishShop.$.statusFlag, StatusFlag.VALID).and().ne(DishShop.$.type, DishType.CARD);
-//			.and().ne(DishShop.$.dishCode,TEMPDISHCODE)
             return qb.orderBy(DishShop.$.sort, true).orderBy(DishShop.$.brandDishId, true)
                     .query();
         }
@@ -1145,8 +994,7 @@ public class DishCache {
             Map<Long, List<DishShop>> dishsMap = new LinkedHashMap<Long, List<DishShop>>();
             Set<Long> typeIds = new HashSet<Long>();
             for (DishShop entity : list) {
-                // DishShop中使用brandDishId，但uuid使用dishShop自己的uuid
-                Long dishId = entity.getId();
+                                Long dishId = entity.getId();
                 String dishUuid = entity.getUuid();
                 if (entity.getType() == DishType.EXTRA) {
                     extras.put(dishId, entity);
@@ -1178,8 +1026,7 @@ public class DishCache {
         @Override
         protected void renewDatas(Map<Long, DishShop> theNew) {
             super.renewDatas(theNew);
-            //在主线程里面回调
-            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
                     for (OnDataChangeListener listener : listeners) {
@@ -1194,12 +1041,7 @@ public class DishCache {
         }
     }
 
-    /**
-     * 加料数据缓存
-     *
-     * @version: 1.0
-     * @date 2015年7月14日
-     */
+
     public static class ExtraHolder extends AbstractHolder<DishShop> {
 
         private final DishHolder dishHolder;
@@ -1208,9 +1050,7 @@ public class DishCache {
             this.dishHolder = dishHolder;
         }
 
-        /**
-         * 获取指定uuid的对象
-         */
+
         public DishShop get(String uuid) {
             return dishHolder.uuidExtraMap.get(uuid);
         }
@@ -1225,12 +1065,7 @@ public class DishCache {
         }
     }
 
-    /**
-     * 菜品分类数据缓存
-     *
-     * @version: 1.0
-     * @date 2015年7月14日
-     */
+
     private static class DishTypeHolder extends BasicHolder<DishBrandType> {
 
         private DishHolder dishHolder;
@@ -1256,27 +1091,17 @@ public class DishCache {
                     DishBrandType.$.uuid);
             qb.where().eq(DishBrandType.$.enabledFlag, Bool.YES);
             return qb.orderBy(DishBrandType.$.sort, true)
-//					.orderBy(DishBrandType.$.id, true)
                     .query();
         }
 
         @Override
         protected void cacheEntity(Map<Long, DishBrandType> map, DishBrandType entity) {
-            // 过滤掉没有菜品的分类
-			/*
-			if (dishHolder.containsTypeId(entity.getId())) {
-				super.cacheEntity(map, entity);
-			}*/
+
             super.cacheEntity(map, entity);
         }
     }
 
-    /**
-     * 套餐明细数据缓存
-     *
-     * @version: 1.0
-     * @date 2015年7月14日
-     */
+
     public static class DishSetmealHolder extends BasicHolder<DishSetmeal> {
 
         private Map<String, DishSetmeal> keySetmealMap;
@@ -1318,7 +1143,6 @@ public class DishCache {
                             DishSetmeal.$.leastCellNum,
                             DishSetmeal.$.price)
                     .orderBy(DishSetmeal.$.sort, true)
-//					.orderBy(DishSetmeal.$.id, true)
                     .query();
         }
 
@@ -1351,13 +1175,7 @@ public class DishCache {
             return setmeals;
         }
 
-        /**
-         * 生成套餐明细的KEY
-         *
-         * @param comboDishId 套餐对应的商品ID
-         * @param childDishId 明细对应的商品ID
-         * @param groupId     明细的分组ID，可以为null
-         */
+
         private String toKey(Long comboDishId, Long childDishId, Long groupId) {
             if (groupId == null) {
                 groupId = 0L;
@@ -1367,12 +1185,7 @@ public class DishCache {
 
     }
 
-    /**
-     * 菜品加料缓存数据
-     *
-     * @version: 1.0
-     * @date 2015年7月14日
-     */
+
     public static class DishExtraHolder extends AbstractHolder<DishSetmeal> {
 
         private final DishSetmealHolder dishSetmealHolder;
@@ -1386,9 +1199,7 @@ public class DishCache {
             return dishSetmealHolder.keyDishExtraMap.get(key);
         }
 
-        /**
-         * 获取公共加料对应的DishSetmeal
-         */
+
         public DishSetmeal get(Long childDishId) {
             if (dishSetmealHolder.dishExtraMap != null && !dishSetmealHolder.dishExtraMap.isEmpty()) {
                 for (DishSetmeal dishSetmeal : dishSetmealHolder.dishExtraMap.values()) {
@@ -1412,12 +1223,7 @@ public class DishCache {
 
     }
 
-    /**
-     * 属性基础数据缓存
-     *
-     * @version: 1.0
-     * @date 2015年7月27日
-     */
+
     public static class PropertyHolder extends BasicHolder<DishProperty> {
 
         private Map<String, DishProperty> uuidPropertyMap;
@@ -1453,7 +1259,6 @@ public class DishCache {
                     DishProperty.$.uuid);
             qb.where().eq(DishProperty.$.statusFlag, StatusFlag.VALID);
             return qb.orderBy(DishProperty.$.sort, true)
-//					.orderBy(DishProperty.$.id, true)
                     .query();
         }
 
@@ -1477,12 +1282,7 @@ public class DishCache {
         }
     }
 
-    /**
-     * 商品属性数据缓存
-     *
-     * @version: 1.0
-     * @date 2015年7月31日
-     */
+
     public static class DishPropertyHolder extends BasicHolder<DishBrandProperty> {
 
         private Map<String, DishBrandProperty> keyMap;
@@ -1522,7 +1322,6 @@ public class DishCache {
                             DishBrandProperty.$.propertyId,
                             DishBrandProperty.$.propertyKind)
                     .orderBy(DishBrandProperty.$.propertyId, true)
-//					.orderBy(DishBrandProperty.$.id, true)
                     .query();
         }
 
@@ -1530,14 +1329,12 @@ public class DishCache {
         protected Map<Long, DishBrandProperty> cache(List<DishBrandProperty> list) {
             Map<Long, DishBrandProperty> map = new LinkedHashMap<Long, DishBrandProperty>();
             Map<String, DishBrandProperty> keyDishProperties = new HashMap<String, DishBrandProperty>();
-            //缓存规格集
-            Map<Long, List<DishBrandProperty>> keyPropertys = new HashMap<Long, List<DishBrandProperty>>();
+                        Map<Long, List<DishBrandProperty>> keyPropertys = new HashMap<Long, List<DishBrandProperty>>();
             for (DishBrandProperty entity : list) {
                 map.put(entity.getId(), entity);
                 keyDishProperties.put(toKey(entity.getDishId(), entity.getPropertyId()), entity);
 
-                //过滤规格集
-                if (entity.getPropertyKind() == PropertyKind.STANDARD) {
+                                if (entity.getPropertyKind() == PropertyKind.STANDARD) {
                     if (keyPropertys.containsKey(entity.getDishId())) {
                         keyPropertys.get(entity.getDishId()).add(entity);
                     } else {
@@ -1557,34 +1354,9 @@ public class DishCache {
         }
     }
 
-    /**
-     * 数据改变监听器
-     */
-	/*private static class DataObserver extends ContentObserver {
-		
-		private final BasicHolder<?> holder;
 
-		public DataObserver(BasicHolder<?> holder,Handler handler) {
-			super(handler);
-			this.holder = holder;
-		}
-		
-		@Override
-		public boolean deliverSelfNotifications() {
-			return true;
-		}
-		
-		@Override
-		public void onChange(boolean selfChange) {
-			try {
-				holder.refresh();
-			} catch (Exception e) {
-				Log.e(TAG, "refresh error!", e);
-			}
-		}
-	}*/
-    //modify  20170908 替换provider 监听
-    private static class DataObserver implements DatabaseHelper.DataChangeObserver {
+
+        private static class DataObserver implements DatabaseHelper.DataChangeObserver {
 
         private final BasicHolder<?> holder;
         private final Uri uri;
@@ -1609,8 +1381,7 @@ public class DishCache {
         @Override
         public void onChange(Collection<Uri> uris) {
             if (uris.contains(uri)) {
-                ThreadUtils.runOnWorkThread(new Runnable() {//add v8.1 添加线程池工具替换
-                    public void run() {
+                ThreadUtils.runOnWorkThread(new Runnable() {                    public void run() {
                         try {
                             recordDishLog(true);
                             holder.refresh();
@@ -1624,10 +1395,7 @@ public class DishCache {
         }
     }
 
-    /**
-     * @version: 1.0
-     * @date 2016年3月14日
-     */
+
     public static interface OnDataChangeListener {
 
         void onDataChanged();

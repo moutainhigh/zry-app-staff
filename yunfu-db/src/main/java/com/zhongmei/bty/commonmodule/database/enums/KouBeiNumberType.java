@@ -4,19 +4,11 @@ import com.zhongmei.yunfu.util.ValueEnum;
 
 
 public enum KouBeiNumberType implements ValueEnum<Integer> {
-    /**
-     * 桌台
-     */
+
     TABLE(1),
-    /**
-     * 号牌
-     */
+
     PLATE(2),
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

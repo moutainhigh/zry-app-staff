@@ -7,60 +7,38 @@ import java.util.ArrayList;
 
 public class ActionReprintType {
 
-    /**
-     * 客看单
-     */
+
     private boolean isPrintCustomer = false;
 
-    /**
-     * 预结单
-     */
+
     private boolean isPrintPrecash = false;
 
-    /**
-     * 结账单
-     */
+
     private boolean isPrintCash = false;
 
-    /**
-     * 作废单
-     */
+
     private boolean isPrintCancel = false;
 
-    /**
-     * 退货单
-     */
+
     private boolean isPrintRefund = false;
 
-    /**
-     * 消费清单
-     */
+
     private boolean isPrintReceipt = false;
 
-    /**
-     * 厨打总单
-     */
+
     private boolean isPrintKitchenAll = false;
 
 
-    /**
-     * 挂账单
-     */
+
     private boolean isPrintCredit = false;
 
-    /**
-     * 打印的堂口单据的出票口列表
-     */
+
     private ArrayList<PrinterCashierTicket> mPrintKitchenCellList;
 
-    /**
-     * 押金单
-     */
+
     private boolean isPrintDeposit = false;
 
-    /**
-     * 标签
-     */
+
     private boolean isPrintLabel = false;
 
     private Trade trade;

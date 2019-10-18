@@ -25,10 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- * 构建取消联台上行数据
- */
+
 
 public class DinnerSplitUnionManager {
     private TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
@@ -54,8 +51,7 @@ public class DinnerSplitUnionManager {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //生成拆单请求数据包括库存
-            if (subTradeVo != null && mainTradeVo != null) {
+                        if (subTradeVo != null && mainTradeVo != null) {
                 if (Utils.isNotEmpty(mainTradeVo.getTradeEarnestMoneys()) && Utils.isNotEmpty(subTradeListForMainTrade) && subTradeListForMainTrade.size() == 1) {
                     return null;
                 }
@@ -78,21 +74,17 @@ public class DinnerSplitUnionManager {
         }
     }
 
-    //生成拆单请求数据包括库存
-    private UnionTradeSplitReq initDinnertableTradeInfos(TradeVo mainTradeVo, TradeVo subTradeVo) {
+        private UnionTradeSplitReq initDinnertableTradeInfos(TradeVo mainTradeVo, TradeVo subTradeVo) {
         UnionTradeSplitReq splitReq = null;
-        //复制主单消费税到子单
-        BuffetUnionTrade.copyMainTradeTaxToSubTradeTax(mainTradeVo, subTradeVo);
+                BuffetUnionTrade.copyMainTradeTaxToSubTradeTax(mainTradeVo, subTradeVo);
         BuffetUnionTrade.copyMainTradeInitConfigToSubTradeInitConfig(mainTradeVo, subTradeVo);
 
         DinnertableTradeInfo mainDinnertableTradeInfo = new DinnertableTradeInfo(mainTradeVo);
         DinnertableTradeInfo subDinnertableTradeInfo = new DinnertableTradeInfo(subTradeVo);
 
         List<IShopcartItem> subTradeShopcartItems = new ArrayList<IShopcartItem>(subDinnertableTradeInfo.getItems());
-        //出始化子单批量菜
-        DinnerUnionShopcartUtil.initSubTradeBatchItem(mainDinnertableTradeInfo, subDinnertableTradeInfo, subTradeShopcartItems);
-        //遍历子单菜品，拆除主单的批量菜
-        /* BigDecimal batchItemAmountSum = BigDecimal.ZERO;//子单批量菜总价*/
+                DinnerUnionShopcartUtil.initSubTradeBatchItem(mainDinnertableTradeInfo, subDinnertableTradeInfo, subTradeShopcartItems);
+
         if (Utils.isNotEmpty(subTradeShopcartItems)) {
             for (IShopcartItem iShopcartItem : subTradeShopcartItems) {
                 if (iShopcartItem.getStatusFlag() == StatusFlag.VALID && iShopcartItem.getShopcartItemType() == ShopcartItemType.SUBBATCH) {
@@ -100,13 +92,9 @@ public class DinnerSplitUnionManager {
                 }
             }
         }
-        //计算主单金额（主单-子单联台菜金额）
-        MathShopcartItemTool.mathMainShopcartItemsAmount(mainTradeVo, mainDinnertableTradeInfo.getItems());
-        //计算子单金额
-        MathShopcartItemTool.mathSubShopcartItemsAmount(subTradeVo, subTradeShopcartItems);
-        //生成拆单库存
-        splitReq = new UnionTradeSplitReq();//取消联台请求
-        UnionTradeSplitReq.TradeUnionSplitSubReq tradeRequest = new UnionTradeSplitReq.TradeUnionSplitSubReq();
+                MathShopcartItemTool.mathMainShopcartItemsAmount(mainTradeVo, mainDinnertableTradeInfo.getItems());
+                MathShopcartItemTool.mathSubShopcartItemsAmount(subTradeVo, subTradeShopcartItems);
+                splitReq = new UnionTradeSplitReq();        UnionTradeSplitReq.TradeUnionSplitSubReq tradeRequest = new UnionTradeSplitReq.TradeUnionSplitSubReq();
         tradeRequest.setMainTrade(mainTradeVo.getTrade());
         tradeRequest.setSubTrade(subTradeVo.getTrade());
         tradeRequest.setMainTradeTaxs(mainTradeVo.getTradeTaxs());

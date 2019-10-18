@@ -6,11 +6,7 @@ import com.zhongmei.yunfu.db.enums.PayModeId;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * @Date： 2016/7/20
- * @Description:收支管理科目下的支付信息
- * @Version: 1.0
- */
+
 public class PaymentsPayInfo implements Serializable {
 
     private Long payModeId;

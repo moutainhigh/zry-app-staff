@@ -2,12 +2,7 @@ package com.zhongmei.bty.data.operates.message.content;
 
 import com.zhongmei.bty.basemodule.trade.message.TradePaymentReq;
 
-/**
- * 封装支付反结账产生的新单时的接口请求数据
- *
- * @version: 1.0
- * @date 2015年11月28日
- */
+
 public class PaymentOfRepeatReq {
 
     private PayDinnerReq actual;

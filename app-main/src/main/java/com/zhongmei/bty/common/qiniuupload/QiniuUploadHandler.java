@@ -16,43 +16,22 @@ import com.zhongmei.yunfu.net.volley.VolleyError;
 
 import java.io.File;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class QiniuUploadHandler {
 
-    /**
-     * 获取七牛上传的token
-     *
-     * @param responseListener 回调方法
-     */
+
     public static void getUploadToken(ResponseListener<TokenResp> responseListener) {
         UploadOperates operates = OperatesFactory.create(UploadOperates.class);
         operates.requestToken(new TokenReq(1), responseListener);
     }
 
-    /**
-     * 上传文件到七牛
-     *
-     * @param file              需要上传的文件
-     * @param key               自定义的key
-     * @param token             上传的token
-     * @param completionHandler 上传成功或者失败的回调
-     * @param options           上传的参数设置
-     */
+
     public static void doUpload(File file, String key, String token, UpCompletionHandler completionHandler, UploadOptions options) {
         UploadManager uploadManager = new UploadManager();
         uploadManager.put(file, key, token, completionHandler, options);
     }
 
-    /**
-     * 一键上传，同时获取token和上传文件
-     *
-     * @param file              需要上传的文件
-     * @param key               文件key
-     * @param completionHandler 上传成功或者失败的回调
-     * @param options           上传的参数设置
-     */
+
     public static void doOneKeyUpload(final File file, final String key, final UpCompletionHandler completionHandler, final UploadOptions options) {
         getUploadToken(new ResponseListener<TokenResp>() {
             @Override

@@ -4,8 +4,7 @@ import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 import com.zhongmei.bty.basemodule.pay.message.PaymentItemReq;
 
 public class TmpCardValueReq extends PaymentItemReq {
-    private String entityNo;//会员匿名卡卡号
-
+    private String entityNo;
     public TmpCardValueReq(PaymentItem paymentItem) {
         super(paymentItem);
         entityNo = paymentItem.getPaymentItemExtra().getEntityNo();

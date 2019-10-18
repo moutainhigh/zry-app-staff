@@ -9,10 +9,7 @@ import android.widget.Button;
 
 import com.zhongmei.yunfu.util.ResourceUtils;
 
-/**
- * 支持货币符
- * Created by demo on 2018/12/15
- */
+
 public class CurrencyButton extends Button implements ICurrencyView {
 
     private Context context;

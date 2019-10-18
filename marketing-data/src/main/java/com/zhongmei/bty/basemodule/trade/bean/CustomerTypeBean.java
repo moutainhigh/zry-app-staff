@@ -6,9 +6,7 @@ import com.zhongmei.bty.basemodule.orderdish.entity.DishCarteNorms;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class CustomerTypeBean extends DishCarteNorms implements Serializable {
     private BigDecimal count;

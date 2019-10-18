@@ -64,10 +64,7 @@ public interface IShopInfo {
 
     String getCurrencySymbol();
 
-    /*public String getReceiptInfoURL(ReceiptInfo.Type type) {
-        ReceiptInfo receiptInfo = getReceiptInfo(type);
-        return receiptInfo != null ? receiptInfo.jumpUrl : null;
-    }*/
+
     ReceiptInfo getReceiptInfo(ReceiptInfo.Type type);
 
     boolean isExpired();
@@ -97,25 +94,17 @@ public interface IShopInfo {
         }
     }
 
-    //add v8.7
-    public interface ShopMonitorCode {
-        /* hnxt,表示海南信投,fhxm表示烽火*/
-        final String MONITOR_CODE_HNXT = "hnxt";//海南信投
-        final String MONITOR_CODE_FHXM = "fhxm";//烽火科技
-    }
+        public interface ShopMonitorCode {
 
-    // v8.12.0 口碑商户
-    int getChannelSource();
+        final String MONITOR_CODE_HNXT = "hnxt";        final String MONITOR_CODE_FHXM = "fhxm";    }
 
-    //商户唯一税号
-    String getTaxIDNumber();
+        int getChannelSource();
 
-    //商户所在国家时区
-    String getTimeZone();
+        String getTaxIDNumber();
 
-    // v8.15.0 第一语言
-    String getFirstLanguage();
+        String getTimeZone();
 
-    // v8.15.0 第二语言
-    String getSecondLanguage();
+        String getFirstLanguage();
+
+        String getSecondLanguage();
 }

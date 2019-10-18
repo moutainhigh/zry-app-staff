@@ -6,27 +6,18 @@ import com.zhongmei.yunfu.bean.req.CustomerResp;
 
 import java.io.Serializable;
 
-/**
- * 保存储值支付相关信息(会员相关信息和匿名卡相关信息)
- */
+
 
 public class CusomerPayInfo implements Serializable {
-    private long customerId;//会员服务器id
-
-    private double memberCardBalance;// 会员余额
-
-    private long memberIntegral;// 会员积分
-
-    private CustomerResp customer;// 会员姓名
-
-    public CustomerResp cardCustomer; //临时添加: 实体卡储值需要
-
+    private long customerId;
+    private double memberCardBalance;
+    private long memberIntegral;
+    private CustomerResp customer;
+    public CustomerResp cardCustomer;
     private EcCard ecCard;
 
-    private String memberPassword;// 会员支付密码
-
-    private CustomerLoginResp memberResp;// 会员储值信息
-
+    private String memberPassword;
+    private CustomerLoginResp memberResp;
     public long getCustomerId() {
         return customerId;
     }

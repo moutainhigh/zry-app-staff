@@ -28,11 +28,7 @@ import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 附加费界面
- *
- * @date:2016年3月10日上午9:22:20
- */
+
 @EFragment(R.layout.dinner_extra)
 public class DinnerExtraChargeFragment extends BasicFragment implements OnItemClickListener, DinnerExtraAdapter.OnStatusChangeListner {
 
@@ -53,7 +49,6 @@ public class DinnerExtraChargeFragment extends BasicFragment implements OnItemCl
         extraAdapter = new DinnerExtraAdapter(getActivity(), extraVoList);
         extraAdapter.setmStatusChangeListener(this);
         mGridView.setAdapter(extraAdapter);
-//		mGridView.setOnItemClickListener(this);
         DinnerShopManager.getInstance().getShoppingCart().registerListener(ShoppingCartListerTag.DINNER_EXTRA, listener);
     }
 
@@ -76,12 +71,7 @@ public class DinnerExtraChargeFragment extends BasicFragment implements OnItemCl
         }
     }
 
-    /**
-     * @Title: loadExraData
-     * @Description: 加载附加费数据
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void initExraData() {
         extraManager = new ExtraManager();
         extraVoList = extraManager.getExtraListVoByCommercialArea(DinnerShopManager.getInstance().getShoppingCart().getOrder());
@@ -89,15 +79,13 @@ public class DinnerExtraChargeFragment extends BasicFragment implements OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // TODO Auto-generated method stub
 
 
     }
 
     @Override
     public void onDestroy() {
-        // TODO Auto-generated method stub
-        super.onDestroy();
+                super.onDestroy();
         DinnerShopManager.getInstance().getShoppingCart().unRegisterListenerByTag(ShoppingCartListerTag.DINNER_EXTRA);
     }
 
@@ -106,11 +94,9 @@ public class DinnerExtraChargeFragment extends BasicFragment implements OnItemCl
         DinnerExtraChargeVo extraChagreVo = extraAdapter.getItem(position);
         ExtraCharge extraCharge = extraChagreVo.getExtrageCharge();
         if (!isCheck) {
-            // 从购物车移除附加费
-            DinnerShopManager.getInstance().getShoppingCart().removeExtraCharge(extraCharge.getId());
+                        DinnerShopManager.getInstance().getShoppingCart().removeExtraCharge(extraCharge.getId());
         } else {
-            // 添加附加费入购物车
-            List<ExtraCharge> exCharges = new ArrayList<ExtraCharge>();
+                        List<ExtraCharge> exCharges = new ArrayList<ExtraCharge>();
             exCharges.add(extraCharge);
             DinnerShopManager.getInstance().getShoppingCart().addExtraCharge(exCharges, true, true);
         }

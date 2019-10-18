@@ -2,11 +2,7 @@ package com.zhongmei.bty.data.operates.message.content;
 
 import java.math.BigDecimal;
 
-/**
- * @Date：2016年4月5日
- * @Description:实体卡储值撤销
- * @Version: 1.0
- */
+
 public class CustomerCardStoreValueRevokeReq {
     private long tradeId;
     private Long reasonId;

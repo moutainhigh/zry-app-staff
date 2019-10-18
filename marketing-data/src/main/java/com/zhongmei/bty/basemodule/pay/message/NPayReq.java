@@ -2,10 +2,7 @@ package com.zhongmei.bty.basemodule.pay.message;
 
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 
-/**
- * v3支付请求专用
- * Created by demo on 2018/12/15
- */
+
 
 public class NPayReq {
     private long operateId;
@@ -58,10 +55,7 @@ public class NPayReq {
     public static class TradeInfoReq {
         private long id;
         private long serverUpdateTime;
-        private String tradeUuid;//可选参数，服务端接口不需要这个参数，这个参数是异步机制需要的
-        private Integer businessType;//可选参数，服务端接口不需要这个参数，这个参数是异步机制需要的
-        private String tradeNo;//订单号
-
+        private String tradeUuid;        private Integer businessType;        private String tradeNo;
         public long getId() {
             return id;
         }

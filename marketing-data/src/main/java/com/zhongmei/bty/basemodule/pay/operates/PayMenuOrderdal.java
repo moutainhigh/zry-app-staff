@@ -13,9 +13,7 @@ import com.zhongmei.bty.commonmodule.database.db.local.LocalDBManager;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PayMenuOrderdal {
     private final String TAG = "PayMenuOrderdal";

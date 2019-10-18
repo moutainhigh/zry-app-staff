@@ -14,10 +14,7 @@ import android.widget.TextView;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * @date 2015/12/14
- * @description 显示打印选项部分
- */
+
 public class PrintLayout extends LinearLayout
         implements OnCheckedChangeListener {
     private static final String TAG = PrintLayout.class.getName();

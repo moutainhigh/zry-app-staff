@@ -14,20 +14,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * create by dzb 2017/06/26
- */
+
 public class BuffetDeskShopCartAdapter extends DinnerDeskShopcartAdapter {
     private Context mContext;
     private Map<Integer, List<IShopcartItem>> dishGroup = null;
 
     protected BigDecimal shellActumalAmount = BigDecimal.ZERO;
 
-    /**
-     * @param context
-     * @Constructor
-     * @Description 构造函数，
-     */
+
     public BuffetDeskShopCartAdapter(Context context) {
         super(context);
         this.mContext = context;
@@ -37,25 +31,17 @@ public class BuffetDeskShopCartAdapter extends DinnerDeskShopcartAdapter {
     public void updateData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
         initCommonData(tradeVo);
         updateGroupData(dataList, tradeVo, false);
-        initialDishCheckStatus();// 初始化菜品选择状态，等叫等
-        updateTrade(tradeVo, isShowInvalid);// 构建整单属性显示对象并刷新列表
-        initialRelateDishInfo();// 初始化退菜数据
-    }
+        initialDishCheckStatus();        updateTrade(tradeVo, isShowInvalid);        initialRelateDishInfo();    }
 
 
-    /**
-     * 获取餐标下菜品的实际价格
-     *
-     * @return
-     */
+
     public BigDecimal getShellActumalAmount() {
         return shellActumalAmount;
     }
 
 
     public void updateGroupData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
-        this.data.clear();// 清空数据
-        this.mAllDishCount = BigDecimal.ZERO;
+        this.data.clear();        this.mAllDishCount = BigDecimal.ZERO;
 
         this.dishGroup = BuffetAdapterUtil.buildBuffetShopcartData(context, tradeVo, dataList, data, this);
     }
@@ -75,11 +61,7 @@ public class BuffetDeskShopCartAdapter extends DinnerDeskShopcartAdapter {
         }
     }
 
-    /**
-     * 返回菜品分组显示
-     *
-     * @return
-     */
+
     public Map<Integer, List<IShopcartItem>> getGroup() {
         return dishGroup;
     }

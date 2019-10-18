@@ -2,29 +2,17 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 销售类型
- */
+
 public enum SaleType implements ValueEnum<Integer> {
 
-    /**
-     * 称重商品
-     */
+
     WEIGHING(1),
-    /**
-     * 非称重商品
-     */
+
     UNWEIGHING(2),
 
-    /**
-     * 按时间收费
-     */
+
     TIMECHARGING(3),
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

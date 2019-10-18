@@ -7,41 +7,24 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public class SalesPromotionRule implements Serializable {
-    //规则唯一标示
-    private Long id;
+        private Long id;
 
-    //方案唯一标示(规则属于方案)
-    private Long planId;
-    //方案名称
-    private String planName;
-    //是否与优惠券同享
-    private boolean isCouponShare;
-    //有效期
-    private SalesPromotionValidityPeriod validityPeriod;
-    //限制时段，为null则不限制；反之则限制
-    private SalesPromotionRuleLimitPeriod limitPeriod;
-    //星期设置，为null则不限制；反之则限制
-    private SparseArray<SalesPromotionWeekday> weekDay;
-    //是否叠加
-    private boolean stackRule;
-    //适用人群
-    private int applyCrowd;
-    //营销科目类型
-    private int marketSubjectType;
-    //规则科目类型
-    private int ruleSubjectType;
-    //规则逻辑
-    private int ruleLogic;
-    //逻辑比较值
-    private BigDecimal logicValue;
-    //策略科目类型
-    private int policySubjectType;
-    //策略细节Id
-    private int policyDetailType;
-    //策略值1
-    private BigDecimal policyValue1 = BigDecimal.ZERO;
-    //策略值2
-    private String policyValue2;
+        private Long planId;
+        private String planName;
+        private boolean isCouponShare;
+        private SalesPromotionValidityPeriod validityPeriod;
+        private SalesPromotionRuleLimitPeriod limitPeriod;
+        private SparseArray<SalesPromotionWeekday> weekDay;
+        private boolean stackRule;
+        private int applyCrowd;
+        private int marketSubjectType;
+        private int ruleSubjectType;
+        private int ruleLogic;
+        private BigDecimal logicValue;
+        private int policySubjectType;
+        private int policyDetailType;
+        private BigDecimal policyValue1 = BigDecimal.ZERO;
+        private String policyValue2;
 
     private Long serverCreateTime;
 

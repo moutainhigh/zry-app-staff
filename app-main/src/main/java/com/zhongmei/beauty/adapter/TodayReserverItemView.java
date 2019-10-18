@@ -23,9 +23,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.beauty_reserver_item)
 public class TodayReserverItemView extends RelativeLayout implements View.OnClickListener {
 
@@ -45,8 +43,7 @@ public class TodayReserverItemView extends RelativeLayout implements View.OnClic
     protected TextView tv_technician;
 
     @ViewById(R.id.tv_time)
-    protected TextView tv_time;//到店日期
-
+    protected TextView tv_time;
     @ViewById(R.id.btn_modify)
     protected Button btn_modify;
 
@@ -69,8 +66,7 @@ public class TodayReserverItemView extends RelativeLayout implements View.OnClic
 
     public void refreshUI(BeautyBookingVo reserver) {
         mReserver = reserver;
-        //设置UI信息
-        iv_memberHeader.setBackgroundResource(getCustomerHead(mReserver.getBooking().getCommercialGender()));
+                iv_memberHeader.setBackgroundResource(getCustomerHead(mReserver.getBooking().getCommercialGender()));
         tv_name.setText(mReserver.getBooking().getCommercialName());
         tv_phone.setText(mReserver.getBooking().getCommercialPhone());
         tv_servers.setText(getTradeItemInfo(mReserver.getBookingTradeItemVos()));
@@ -79,12 +75,7 @@ public class TodayReserverItemView extends RelativeLayout implements View.OnClic
     }
 
 
-    /**
-     * 获取技师
-     *
-     * @param 服务Item
-     * @return
-     */
+
     public String getTechnicial(List<BookingTradeItemVo> tradeItemVos) {
         if (Utils.isEmpty(tradeItemVos) || Utils.isEmpty(tradeItemVos.get(0).getBookingTradeItemUsers())) {
             return "未指定";
@@ -94,12 +85,7 @@ public class TodayReserverItemView extends RelativeLayout implements View.OnClic
     }
 
 
-    /**
-     * 获取会员头像
-     *
-     * @param sex
-     * @return
-     */
+
     private int getCustomerHead(Sex sex) {
         int headRes = com.zhongmei.yunfu.beauty.R.drawable.beauty_customer_default;
         if (sex == Sex.FEMALE) {

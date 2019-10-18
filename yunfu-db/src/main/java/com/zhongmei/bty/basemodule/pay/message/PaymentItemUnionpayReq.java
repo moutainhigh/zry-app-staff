@@ -5,78 +5,48 @@ import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.io.Serializable;
 
-/**
- * @Date：2016-2-18 下午12:52:29
- * @Description: TODO
- * @Version: 1.0
- */
+
 public class PaymentItemUnionpayReq implements Serializable {
 
     private String uuid;
 
-    /**
-     * 支付明细uuid.
-     */
+
     private String paymentItemUuid;
 
-    /**
-     * 交易日期.
-     */
+
     private Long transDate;
 
-    /**
-     * 交易类型.
-     */
+
     private Integer transType;
 
-    /**
-     * 金额.
-     */
+
     private Integer amount;
 
-    /**
-     * 费率.
-     */
+
     private Double rates;
 
-    /**
-     * 手续费.
-     */
+
     private Double fee;
 
-    /**
-     * 系统参考号.
-     */
+
     private String hostSerialNumber;
 
-    /**
-     * 流水号.
-     */
+
     private String posTraceNumber;
 
-    /**
-     * 批次号.
-     */
+
     private String batchNumber;
 
-    /**
-     * 终端号.
-     */
+
     private String terminalNumber;
 
-    /**
-     * pos渠道id.
-     */
+
     private Long posChannelId;
 
-    /**
-     * 刷卡pos设备id.
-     */
+
     private Long paymentDeviceId;
 
-    /**
-     * 刷卡pos设备id.
-     */
+
     private String appname;
 
     private Long creatorId;

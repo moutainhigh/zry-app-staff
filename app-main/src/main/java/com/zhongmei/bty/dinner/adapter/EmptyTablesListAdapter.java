@@ -13,9 +13,7 @@ import com.zhongmei.bty.dinner.vo.EmptyTableVo;
 
 import java.util.ArrayList;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class EmptyTablesListAdapter extends BaseAdapter {
     private Context context;

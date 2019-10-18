@@ -21,11 +21,7 @@ import com.zhongmei.yunfu.R;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * @Date： 16/5/23
- * @Description:
- * @Version: 1.0
- */
+
 public class CalmResponseToastFragment extends BasicDialogFragment {
 
 

@@ -20,11 +20,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date： 16/11/29
- * @Description:v3支付请求专用
- * @Version: 1.0
- */
+
 public class PayResp implements Serializable {
     private List<Trade> trades;
     private List<TradeTable> tradeTables;
@@ -38,13 +34,9 @@ public class PayResp implements Serializable {
     private List<TradePromotion> tradePromotions;
     private List<TradeStatusLog> tradeStatusLogs;
     private List<PrintOperation> printOperations;
-    private List<PaymentItemUnionpay> paymentItemUnionpays;//add 20170313
-    private List<TradeDepositPayRelation> tradeDepositPayRelations;//add 20170707 押金关联表
-    private List<PaymentItemGrouponDish> paymentItemGrouponDishes;//add v8.3美团券与菜品关联表
-    private List<TradeCustomer> tradeCustomers;
+    private List<PaymentItemUnionpay> paymentItemUnionpays;    private List<TradeDepositPayRelation> tradeDepositPayRelations;    private List<PaymentItemGrouponDish> paymentItemGrouponDishes;    private List<TradeCustomer> tradeCustomers;
     private TradeDeposit tradeDeposit;
-    private List<Long> promoIds;//仅微信卡券验证失败(返回码1302)时使用此字段、礼品券
-    private int status;
+    private List<Long> promoIds;    private int status;
     private String message;
 
     public List<TradeCustomer> getTradeCustomers() {
@@ -159,8 +151,7 @@ public class PayResp implements Serializable {
         this.tradeDeposit = tradeDeposit;
     }
 
-    //add 20170516 start
-    public String getTopPaymentItemResultMsg() {
+        public String getTopPaymentItemResultMsg() {
         String resultMsg = null;
 
         if (paymentItemResults != null && paymentItemResults.size() > 0) {
@@ -179,7 +170,6 @@ public class PayResp implements Serializable {
         }
         return resultStatus;
     }
-//add 20170516 end
 
     public List<TradeDepositPayRelation> getTradeDepositPayRelations() {
         return tradeDepositPayRelations;
@@ -222,8 +212,7 @@ public class PayResp implements Serializable {
         private long paymentItemId;
         private String paymentItemUuid;
         private int resultStatus;
-        private int subResultStatus;//add v8.15    1表示用户正在输入密码
-        private Map addition;
+        private int subResultStatus;        private Map addition;
         private String resultMsg;
 
         public long getPaymentItemId() {

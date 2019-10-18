@@ -33,12 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * 封装桌台单据的相关信息，供购物车展示时使用。
- *
- * @version: 1.0
- * @date 2015年10月29日
- */
+
 public class DinnertableTradeInfo {
 
     private static final String TAG = DinnertableTradeInfo.class.getSimpleName();
@@ -47,57 +42,38 @@ public class DinnertableTradeInfo {
 
     private Long tradeTableId;
 
-    /**
-     * 流水号
-     */
+
     private String serialNumber;
 
-    /**
-     * 返回就餐人数
-     */
+
     int numberOfMeals;
 
-    /**
-     * 耗时，单位分钟
-     */
+
     int spendTime;
 
-    /**
-     * 桌台名称
-     */
+
     String tableName;
 
-    /**
-     * 桌台座位数
-     */
+
     int tableSeatCount;
 
-    /**
-     * 桌台上的总就餐人数
-     */
+
     int tableMealCount;
 
-    /**
-     * 桌台所在的区域
-     */
+
     String tableZoneName;
 
     TradeType tradeType;
 
-    /**
-     * 整个单据
-     */
+
     private TradeVo tradeVo;
 
-    /**
-     * 菜品列表
-     */
+
     private List<IShopcartItem> items;
 
     private IDinnertableTrade iDinnertableTrade;
 
-    //联台子单列表
-    private List<DinnertableTradeInfo> subTradeInfoList;
+        private List<DinnertableTradeInfo> subTradeInfoList;
 
     private DinnertableTradeInfo() {
     }
@@ -160,11 +136,7 @@ public class DinnertableTradeInfo {
         items = buildShopcartItem(tradeVo);
     }
 
-    /**
-     * @param tradeVo
-     * @param dinnerTable 桌台信息
-     * @return
-     */
+
     public static DinnertableTradeInfo create(TradeVo tradeVo, DinnerTableInfo dinnerTable) {
         DinnertableTradeInfo info = new DinnertableTradeInfo();
         if (Utils.isNotEmpty(tradeVo.getTradeTableList())) {
@@ -213,7 +185,6 @@ public class DinnertableTradeInfo {
         info.tradeType = tradeVo.getTrade().getTradeType();
         info.numberOfMeals = tradeVo.getTrade().getTradePeopleCount();
         info.iDinnertableTrade = new NoTableBuffetTradeModel(tradeTableInfo);
-//        info.iDinnertableTrade.refreshSpendTime();
         info.setTradeVo(tradeVo);
         return info;
     }
@@ -237,12 +208,7 @@ public class DinnertableTradeInfo {
         return status;
     }
 
-    /**
-     * 将TradeVo对象反转为购物车条目
-     *
-     * @param tradeVo
-     * @return
-     */
+
 
     public static List<IShopcartItem> buildShopcartItem(TradeVo tradeVo) {
         String shellUuid = "";
@@ -288,8 +254,7 @@ public class DinnertableTradeInfo {
             TradeItem tradeItem = tradeItemVo.getTradeItem();
             if (tradeItem == null)
                 continue;
-            // 全退时会产生一条数量为0的新记录，为了子条目能计算单份数量，需要从被全退的记录中取出退菜数量
-            if (tradeItem.getQuantity() != null && tradeItem.getQuantity().compareTo(BigDecimal.ZERO) == 0) {
+                        if (tradeItem.getQuantity() != null && tradeItem.getQuantity().compareTo(BigDecimal.ZERO) == 0) {
                 BigDecimal qty;
                 TradeItemVo relateItemVo = parentFinder.get(tradeItem.getRelateTradeItemUuid());
                 if (relateItemVo != null && relateItemVo.getTradeItem().getInvalidType() == InvalidType.RETURN_QTY) {
@@ -310,8 +275,7 @@ public class DinnertableTradeInfo {
             item.setExtraItems(new ArrayList<ReadonlyExtraShopcartItem>());
             item.setSetmealItems(new ArrayList<ReadonlySetmealShopcartItem>());
             item.setTradeItemOperations(tradeItemVo.getTradeItemOperations());
-            item.setKdsScratchDishQty(tradeItemVo.getKdsScratchDishQty()); //添加Kds划菜数
-            item.setTradeItemExtraDinner(tradeItemVo.getTradeItemExtraDinner());
+            item.setKdsScratchDishQty(tradeItemVo.getKdsScratchDishQty());             item.setTradeItemExtraDinner(tradeItemVo.getTradeItemExtraDinner());
             item.setTradeItemMainBatchRelList(tradeItemVo.getTradeItemMainBatchRelList());
             item.setTradeItemUserList(tradeItemVo.getTradeItemUserList());
             item.setCardServicePrivilegeVo(tradeItemVo.getCardServicePrivilegeVo());
@@ -326,8 +290,7 @@ public class DinnertableTradeInfo {
             item.setShopcartItemType(shopcartItemType);
             items.add(item);
         }
-        // 套餐子菜
-        Map<String, ReadonlySetmealShopcartItem> setmealFinder = new HashMap<String, ReadonlySetmealShopcartItem>();
+                Map<String, ReadonlySetmealShopcartItem> setmealFinder = new HashMap<String, ReadonlySetmealShopcartItem>();
         for (TradeItemVo tradeItemVo : setmealList) {
             TradeItem tradeItem = tradeItemVo.getTradeItem();
             String parentUuid = tradeItem.getParentUuid();
@@ -353,8 +316,7 @@ public class DinnertableTradeInfo {
                 setmealFinder.put(tradeItem.getUuid(), setmealItem);
             }
         }
-        // 加料
-        for (TradeItemVo tradeItemVo : extraList) {
+                for (TradeItemVo tradeItemVo : extraList) {
             TradeItem tradeItem = tradeItemVo.getTradeItem();
             String parentUuid = tradeItem.getParentUuid();
             ReadonlyShopcartItem parent = singleFinder.get(parentUuid);
@@ -383,8 +345,7 @@ public class DinnertableTradeInfo {
                 }
             }
         }
-        // 恢复全退的菜品的数量为0
-        for (TradeItem item : allReturnsMap) {
+                for (TradeItem item : allReturnsMap) {
             item.setQuantity(BigDecimal.ZERO);
         }
         return items;

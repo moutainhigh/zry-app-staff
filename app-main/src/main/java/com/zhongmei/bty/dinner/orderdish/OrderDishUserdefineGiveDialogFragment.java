@@ -34,9 +34,7 @@ import org.androidannotations.annotations.ViewById;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.order_dish_userdefine_give)
 public class OrderDishUserdefineGiveDialogFragment extends BasicDialogFragment {
 
@@ -53,12 +51,9 @@ public class OrderDishUserdefineGiveDialogFragment extends BasicDialogFragment {
 
     public BigDecimal maxCount = BigDecimal.ZERO;
 
-    public boolean mReasonSwitch;//理由开关
-
-    public boolean isNeedReturnInventory = true;//是否需要退回库存
-
-    public List<InventoryItem> mInventoryItemList;//库存数据
-
+    public boolean mReasonSwitch;
+    public boolean isNeedReturnInventory = true;
+    public List<InventoryItem> mInventoryItemList;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +84,6 @@ public class OrderDishUserdefineGiveDialogFragment extends BasicDialogFragment {
     @AfterViews
     void initView() {
         setCount();
-//        setReturnInventoryLayout();
         setReasonLayout();
     }
 
@@ -97,14 +91,6 @@ public class OrderDishUserdefineGiveDialogFragment extends BasicDialogFragment {
         etCount.setText(MathDecimal.toTrimZeroString(maxCount));
     }
 
-//    private void setReturnInventoryLayout(){
-//        if(isNeedReturnInventory && Utils.isNotEmpty(mInventoryItemList)){
-//            inventoryLayout.setVisibility(View.VISIBLE);
-//            inventoryLayout.refreshView(mInventoryItemList);
-//        } else {
-//            inventoryLayout.setVisibility(View.GONE);
-//        }
-//    }
 
     private void setReasonLayout() {
         if (mReasonSwitch) {
@@ -169,8 +155,7 @@ public class OrderDishUserdefineGiveDialogFragment extends BasicDialogFragment {
 
                 if (itemGiveListener != null) {
                     List<InventoryItem> inventoryItemList = null;
-                    if (isNeedReturnInventory && count.compareTo(maxCount) < 0) {//非全部赠送时，需要退回库存
-                        inventoryItemList = mInventoryItemList;
+                    if (isNeedReturnInventory && count.compareTo(maxCount) < 0) {                        inventoryItemList = mInventoryItemList;
                     }
                     itemGiveListener.onConfirm(reason, count, inventoryItemList);
                 }

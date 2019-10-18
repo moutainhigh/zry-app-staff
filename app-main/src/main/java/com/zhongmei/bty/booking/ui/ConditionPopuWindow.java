@@ -14,9 +14,7 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.context.util.ConvertUtils;
 
-/**
- * 排队条件筛选弹窗
- */
+
 public class ConditionPopuWindow extends PopupWindow {
     private Activity context;
 
@@ -26,9 +24,7 @@ public class ConditionPopuWindow extends PopupWindow {
 
     private PopupItemClick itemClick;
 
-    /**
-     * 选择过后是否隐藏弹窗
-     */
+
     private boolean isHiden;
 
     public ConditionPopuWindow(Activity context, TextView textView, PopupItemClick itemClick, boolean isHiden) {

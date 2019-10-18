@@ -40,42 +40,28 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 菜品批量操作工具类，支持删除／作废和赠送操作
- * Created by demo on 2018/12/15
- */
+
 
 public class BatchTradeItemOperateUtil implements View.OnClickListener {
 
-    private final static int DELETE_OR_RETURN_MODE = 1;//删除／作废
-//    private final static int CONFIRM_DELETE_MODE = 2;//确认删除
-//    private final static int REFUND_MODE = 3;//作废商品
-
-    private final static int GIVE_MODE = 1;//赠送
-    private final static int CANCEL_GIVE_MODE = 2;//取消赠送
-
+    private final static int DELETE_OR_RETURN_MODE = 1;
+    private final static int GIVE_MODE = 1;    private final static int CANCEL_GIVE_MODE = 2;
     private FragmentActivity mActivity;
 
     private View mParentView;
 
-    //删除／作废商品
-    private Button btnDeleteItem;
-    //暂停／恢复打印
-    private Button btnPausePrint;
-    // 重打厨总
-    private Button btnReprintKitchenAll;
-    // 重打堂口
-    private Button btnReprintKitchenCell;
-    // 赠送
-    private Button btnGive;
+        private Button btnDeleteItem;
+        private Button btnPausePrint;
+        private Button btnReprintKitchenAll;
+        private Button btnReprintKitchenCell;
+        private Button btnGive;
 
     private Button btnWakeup;
     private Button btnMake;
 
     private Drawable deleteDrawable, confirmDeleteDrawble, returnGoodsDrawable, giveDrawable, cancelGiveDrawable;
 
-    //退菜理由框
-    private ReturnGoodsReasonView rgrvReturnReason;
+        private ReturnGoodsReasonView rgrvReturnReason;
 
     private ChangePageListener mChangePageListener;
 
@@ -85,15 +71,8 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
 
     private List<InventoryItem> inventoryItemList;
 
-    private List<DishDataItem> takeEffectItems;//已生效（已出单&&已生效未出单）
-    private List<DishDataItem> notTakeEffectItems;//未生效和已生效数量为0
-    private List<DishDataItem> unPrintAddTakeEffectItems;//已生效未出单
-    private List<DishDataItem> printedItems;//已出单
-
-    boolean hasSavedItem = false;//有没有未出单（已经生效）的菜品
-    boolean hasPrintedItem = false;//有没有已打印的菜品
-    boolean hasUngiveItem = false;//有没有未赠送的菜品
-
+    private List<DishDataItem> takeEffectItems;    private List<DishDataItem> notTakeEffectItems;    private List<DishDataItem> unPrintAddTakeEffectItems;    private List<DishDataItem> printedItems;
+    boolean hasSavedItem = false;    boolean hasPrintedItem = false;    boolean hasUngiveItem = false;
     public void setOperateButton(FragmentActivity activity, List<DishDataItem> items, View parentView, ChangePageListener changePageListener, DinnerDishMiddleFragment.IChangePageListener listener) {
         mActivity = activity;
         mParentView = parentView;
@@ -105,8 +84,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
     }
 
     private void initView() {
-        //批量模式下，只展示删除／作废和赠送／取消赠送
-        btnDeleteItem = (Button) mParentView.findViewById(R.id.btn_delete);
+                btnDeleteItem = (Button) mParentView.findViewById(R.id.btn_delete);
         btnDeleteItem.setVisibility(View.VISIBLE);
         btnPausePrint = (Button) mParentView.findViewById(R.id.btn_pause);
         btnPausePrint.setVisibility(View.GONE);
@@ -129,12 +107,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
     }
 
     private void initDrawable() {
-        // 初始化按钮图标
-//        pauseDrawable = mActivity.getResources().getDrawable(R.drawable.dinner_pause_print);
-//        pauseDrawable.setBounds(0, 0, pauseDrawable.getMinimumWidth(), pauseDrawable.getMinimumHeight());
-//        pausePressedDrawable = mActivity.getResources().getDrawable(R.drawable.dinner_resume_print);
-//        pausePressedDrawable.setBounds(0, 0, pausePressedDrawable.getMinimumWidth(), pausePressedDrawable.getMinimumHeight());
-        deleteDrawable = mActivity.getResources().getDrawable(R.drawable.dinner_dish_delete);
+                deleteDrawable = mActivity.getResources().getDrawable(R.drawable.dinner_dish_delete);
         deleteDrawable.setBounds(0, 0, deleteDrawable.getMinimumWidth(), deleteDrawable.getMinimumHeight());
         confirmDeleteDrawble = mActivity.getResources().getDrawable(R.drawable.dinner_dish_del_confirm);
         confirmDeleteDrawble.setBounds(0, 0, confirmDeleteDrawble.getMinimumWidth(), confirmDeleteDrawble.getMinimumHeight());
@@ -153,14 +126,12 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
             for (int i = items.size() - 1; i >= 0; i--) {
                 DishDataItem item = items.get(i);
                 IShopcartItemBase shopcartItemBase = item.getBase();
-                //无效菜品不计入判断,并移出
-                if (shopcartItemBase.getStatusFlag() == StatusFlag.INVALID) {
+                                if (shopcartItemBase.getStatusFlag() == StatusFlag.INVALID) {
                     items.remove(i);
                     continue;
                 }
 
-                //已出单数目为0的菜品不计入判断，并移出
-                if (shopcartItemBase.getSingleQty().compareTo(BigDecimal.ZERO) == 0
+                                if (shopcartItemBase.getSingleQty().compareTo(BigDecimal.ZERO) == 0
                         && !TextUtils.isEmpty(shopcartItemBase.getBatchNo())) {
                     items.remove(i);
                     continue;
@@ -185,11 +156,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
     }
 
     private void initData(List<DishDataItem> items) {
-        notTakeEffectItems = new ArrayList<>();//未生效
-        takeEffectItems = new ArrayList<>();//已生效
-        unPrintAddTakeEffectItems = new ArrayList<>();//未打印已生效
-        printedItems = new ArrayList<>();//已出单
-        if (Utils.isNotEmpty(items)) {
+        notTakeEffectItems = new ArrayList<>();        takeEffectItems = new ArrayList<>();        unPrintAddTakeEffectItems = new ArrayList<>();        printedItems = new ArrayList<>();        if (Utils.isNotEmpty(items)) {
             for (DishDataItem item : items) {
                 IShopcartItemBase shopcartItemBase = item.getBase();
                 if (TextUtils.isEmpty(shopcartItemBase.getBatchNo())) {
@@ -202,19 +169,14 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
                         unPrintAddTakeEffectItems.add(item);
                     }
                 } else {
-                    //记录已打印的菜品，供批量退菜使用
-                    takeEffectItems.add(item);
+                                        takeEffectItems.add(item);
                     printedItems.add(item);
                 }
             }
         }
     }
 
-    /**
-     * 设置删除按钮样式
-     *
-     * @param mode 1表示删除品项，2表示确认删除，3表示作废商品
-     */
+
     private void setDeleteBtn(int mode) {
         switch (mode) {
             case DELETE_OR_RETURN_MODE:
@@ -222,16 +184,6 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
                 btnDeleteItem.setText(R.string.delete_or_return_item);
                 btnDeleteItem.setTextColor(mActivity.getResources().getColor(R.color.text_pay_other_black));
                 break;
-//            case CONFIRM_DELETE_MODE:
-//                btnDeleteItem.setCompoundDrawables(null, confirmDeleteDrawble, null, null);
-//                btnDeleteItem.setText(R.string.confirm_delete);
-//                btnDeleteItem.setTextColor(mActivity.getResources().getColor(R.color.text_red_2));
-//                break;
-//            case REFUND_MODE:
-//                btnDeleteItem.setCompoundDrawables(null, returnGoodsDrawable, null, null);
-//                btnDeleteItem.setText(R.string.return_goods);
-//                btnDeleteItem.setTextColor(mActivity.getResources().getColor(R.color.text_pay_other_black));
-//                break;
             default:
                 btnDeleteItem.setCompoundDrawables(null, deleteDrawable, null, null);
                 btnDeleteItem.setText(R.string.delete_or_return_item);
@@ -240,11 +192,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         }
     }
 
-    /**
-     * 设置赠送按钮样式
-     *
-     * @param mode 1表示赠送，2表示取消赠送
-     */
+
     private void setGiveBtn(int mode) {
         switch (mode) {
             case GIVE_MODE:
@@ -273,8 +221,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
 
         switch (v.getId()) {
             case R.id.btn_delete:
-                if (hasSavedItem || hasPrintedItem) {//有未出单／已出单的菜品，进行权限验证
-                    VerifyHelper.verifyAlert(mActivity, DinnerApplication.PERMISSION_DINNER_BATCH_DELETE_OR_RETURN,
+                if (hasSavedItem || hasPrintedItem) {                    VerifyHelper.verifyAlert(mActivity, DinnerApplication.PERMISSION_DINNER_BATCH_DELETE_OR_RETURN,
                             new VerifyHelper.Callback() {
                                 @Override
                                 public void onPositive(User user, String code, Auth.Filter filter) {
@@ -309,19 +256,13 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
                 }, null, "delete_or_return_item_tip");
     }
 
-    /**
-     * 删除／作废商品
-     */
+
     private void deleteOrReturnItems() {
         deleteItems(notTakeEffectItems);
         returnTakeEffectItems(takeEffectItems);
     }
 
-    /**
-     * 对未生效的菜品进行删除操作
-     *
-     * @param notTakeEffectItems
-     */
+
     private void deleteItems(List<DishDataItem> notTakeEffectItems) {
         if (Utils.isEmpty(notTakeEffectItems)) {
             return;
@@ -330,8 +271,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         for (DishDataItem item : notTakeEffectItems) {
             IShopcartItemBase shopcartItemBase = item.getBase();
             IShopcartItem shopcartItem = item.getItem();
-            //删除品项
-            DinnerTradeItemManager.getInstance().deleteItem(shopcartItemBase, shopcartItem.getUuid(),
+                        DinnerTradeItemManager.getInstance().deleteItem(shopcartItemBase, shopcartItem.getUuid(),
                     mChangePageListener, mActivity);
             if (!DinnerTradeItemManager.getInstance().isSaved(item) &&
                     !TextUtils.isEmpty(shopcartItemBase.getRelateTradeItemUuid())) {
@@ -344,10 +284,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         }
     }
 
-    /**
-     * 关于有关联菜品的未出单的菜品进行删菜
-     * 改单是要扣减库存
-     */
+
     private void deductionInventory(ReadonlyShopcartItem shopcartItem) {
         if (shopcartItem == null) return;
         List<TradeItem> tradeItemList = new ArrayList<>();
@@ -368,20 +305,14 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         DinnerShoppingCart.getInstance().getInventoryVo().addNewAddDishList(tradeItemList);
     }
 
-    /**
-     * 对已生效的菜品进行批量退菜
-     *
-     * @param takeEffectItems
-     */
+
     private void returnTakeEffectItems(List<DishDataItem> takeEffectItems) {
         if (Utils.isEmpty(takeEffectItems)) {
             return;
         }
         ReasonDal reasonDal = OperatesFactory.create(ReasonDal.class);
         boolean needReturnReason = reasonDal.isReasonSwitchOpen(ReasonType.ITEM_RETURN_QTY);
-//        boolean needReturnInventory = InventoryCacheUtil.getInstance().getSaleSwitch();
-        boolean needReturnInventory = true;//临时方案
-        if (needReturnInventory) {
+        boolean needReturnInventory = true;        if (needReturnInventory) {
             if (needReturnReason) {
                 showReturnReasonDialog(takeEffectItems, true, Utils.isEmpty(printedItems) ? false : true);
             } else {
@@ -398,12 +329,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         }
     }
 
-    /**
-     * 执行批量退菜
-     *
-     * @param printedItems
-     * @param reason
-     */
+
     private void doReturnItems(List<DishDataItem> printedItems, Reason reason) {
         if (Utils.isNotEmpty(printedItems)) {
             for (DishDataItem item : printedItems) {
@@ -413,11 +339,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         }
     }
 
-    /**
-     * 展示退菜理由弹框
-     *
-     * @param dishDataItemList
-     */
+
     private void showReturnReasonDialog(final List<DishDataItem> dishDataItemList, final boolean isShowReturnInventoryLayout, final boolean isShowReason) {
         rgrvReturnReason = new ReturnGoodsReasonView_();
         rgrvReturnReason.isBatchMode = true;
@@ -444,38 +366,26 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         rgrvReturnReason.show(mActivity.getSupportFragmentManager(), "returnReason");
     }
 
-    /**
-     * 退菜结果处理
-     *
-     * @param shopcartItemBase 原菜
-     * @param returnCount      退菜份数
-     * @param returnReason     退菜原因
-     */
+
     private void doReturnItem(final IShopcartItemBase shopcartItemBase, BigDecimal returnCount, Reason returnReason) {
         if (!(shopcartItemBase instanceof ReadonlyShopcartItem)) {
             return;
         }
 
-        //构造原因对象
-        TradeReasonRel tradeReasonRel = null;
+                TradeReasonRel tradeReasonRel = null;
         if (returnReason != null) {
             tradeReasonRel = new TradeReasonRel();
             tradeReasonRel.setReasonId(returnReason.getId());
             tradeReasonRel.setReasonContent(returnReason.getContent());
         }
-        //构造退菜新菜
-        IShopcartItem shopcartItem = ((IShopcartItem) shopcartItemBase).returnQty(returnCount.negate(), tradeReasonRel);
-        //拷贝原菜的赠送
-        if (DinnerTradeItemManager.getInstance().hasGiven(shopcartItemBase)) {
+                IShopcartItem shopcartItem = ((IShopcartItem) shopcartItemBase).returnQty(returnCount.negate(), tradeReasonRel);
+                if (DinnerTradeItemManager.getInstance().hasGiven(shopcartItemBase)) {
             DinnerTradeItemManager.getInstance().give(shopcartItem, null);
         }
-        //退菜新菜加入购物车
-        DinnerShoppingCart.getInstance().returnQTY(shopcartItem);
+                DinnerShoppingCart.getInstance().returnQTY(shopcartItem);
     }
 
-    /**
-     * 赠送操作
-     */
+
     private void showGiveReasonDialog() {
         if (Utils.isEmpty(items)) {
             return;
@@ -517,12 +427,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         dialog.show(mActivity.getSupportFragmentManager(), "discount");
     }
 
-    /**
-     * 执行批量赠送
-     *
-     * @param unsendItems
-     * @param reason
-     */
+
     private void doGiveItems(List<DishDataItem> unsendItems, Reason reason) {
         for (DishDataItem item : unsendItems) {
             IShopcartItemBase shopcartItemBase = item.getBase();
@@ -530,9 +435,7 @@ public class BatchTradeItemOperateUtil implements View.OnClickListener {
         }
     }
 
-    /**
-     * 执行批量取消赠送
-     */
+
     private void doCancelGiveItems() {
         if (Utils.isEmpty(items)) {
             return;

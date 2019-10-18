@@ -8,77 +8,49 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.enums.PropertyKind;
 
-/**
- * TradeItemProperty is a ORMLite bean type. Corresponds to the database table "trade_item_property"
- */
+
 @DatabaseTable(tableName = "trade_item_property")
 public class TradeItemProperty extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_item_property"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * amount
-         */
+
         public static final String amount = "amount";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * price
-         */
+
         public static final String price = "price";
 
-        /**
-         * property_name
-         */
+
         public static final String propertyName = "property_name";
 
-        /**
-         * property_type
-         */
+
         public static final String propertyType = "property_type";
 
-        /**
-         * property_uuid
-         */
+
         public static final String propertyUuid = "property_uuid";
 
-        /**
-         * quantity
-         */
+
         public static final String quantity = "quantity";
 
-        /**
-         * trade_item_id
-         */
+
         public static final String tradeItemId = "trade_item_id";
 
-        /**
-         * trade_item_uuid
-         */
+
         public static final String tradeItemUuid = "trade_item_uuid";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }
@@ -119,9 +91,7 @@ public class TradeItemProperty extends DataEntityBase implements ICreator, IUpda
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
-    /**
-     * 联台主中对应表的id
-     */
+
     private Long batchId;
 
     public java.math.BigDecimal getAmount() {

@@ -21,19 +21,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * Created by demo on 2018/12/15
- * <p>
- * 权限记录表manager
- */
+
 
 public class AuthLogManager {
 
     private static AuthLogManager authLogManager = null;
     private Map<AuthType, AuthorizedLog> authLogMap = new HashMap<AuthType, AuthorizedLog>();
     private AtomicInteger lock = new AtomicInteger();
-    //    操作版本,每一次服务请求生成
-    private String opsVersionUuid;
+        private String opsVersionUuid;
 
     public static AuthLogManager getInstance() {
         if (authLogManager == null) {
@@ -42,12 +37,7 @@ public class AuthLogManager {
         return authLogManager;
     }
 
-    /**
-     * 有授权操作时保存到缓存
-     *
-     * @param authType
-     * @param authDesc
-     */
+
     public synchronized void putAuthLog(AuthType authType, String authDesc, User user) {
         if (user == null || authType == null) {
             return;
@@ -72,11 +62,7 @@ public class AuthLogManager {
         authLog.setChanged(true);
     }
 
-    /**
-     * 通过authType 移除log
-     *
-     * @param authType
-     */
+
     public void removeAuthLog(AuthType authType) {
         synchronized (lock) {
             authLogMap.remove(authType);
@@ -94,19 +80,12 @@ public class AuthLogManager {
         this.opsVersionUuid = versionUuid;
     }
 
-    /**
-     * 刷新数据到数据库
-     * 如果没有tradeId则传null
-     *
-     * @param updateTime  订单更新时间
-     * @param orderAction
-     */
+
     public synchronized void flush(final OrderActionEnum orderAction, final Long tradeId, final String tradeUuid, final Long updateTime) {
         if (authLogMap.isEmpty() || TextUtils.isEmpty(opsVersionUuid)) {
             return;
         }
-        //避免并发操作authLogMap影响
-        final List<AuthorizedLog> authorizedLogList = new ArrayList<AuthorizedLog>();
+                final List<AuthorizedLog> authorizedLogList = new ArrayList<AuthorizedLog>();
         authorizedLogList.addAll(authLogMap.values());
         synchronized (lock) {
             authLogMap.clear();
@@ -136,35 +115,20 @@ public class AuthLogManager {
     }
 
 
-    /**
-     * 刷新没有网络请求的记录
-     *
-     * @param orderAction
-     * @param tradeId
-     * @param tradeUuid
-     * @param updateTime
-     */
+
     public synchronized void flushNoQuest(final OrderActionEnum orderAction, final Long tradeId, final String tradeUuid, final Long updateTime) {
         setOpsVersion(SystemUtils.genOnlyIdentifier());
         flush(orderAction, tradeId, tradeUuid, updateTime);
         opsVersionUuid = null;
     }
 
-    /**
-     * 保存数据到数据库
-     *
-     * @param authorizedLogList
-     */
+
     public void saveToDatabase(List<AuthorizedLog> authorizedLogList) {
         AuthLogDal dal = OperatesFactory.create(AuthLogDal.class);
         dal.batchSave(authorizedLogList);
     }
 
-    /**
-     * 批量删除数据库中的数据
-     *
-     * @param authLogList
-     */
+
     public void deleteLogs(final List<AuthorizedLog> authLogList) {
         if (authLogList == null || authLogList.isEmpty()) {
             return;
@@ -185,20 +149,13 @@ public class AuthLogManager {
         deleteLogs(resp.getAuthorizedLogs());
     }
 
-    /**
-     * 每次查询count条数据
-     *
-     * @param count
-     * @return
-     */
+
     public List<AuthorizedLog> queryList(long count) {
         AuthLogDal dal = OperatesFactory.create(AuthLogDal.class);
         return dal.queryList(count);
     }
 
-    /**
-     * 清除数据
-     */
+
     public void clear() {
         synchronized (lock) {
             authLogMap.clear();
@@ -206,9 +163,7 @@ public class AuthLogManager {
         opsVersionUuid = null;
     }
 
-    /**
-     * 销毁时处理
-     */
+
     public void destory() {
         clear();
         authLogManager = null;

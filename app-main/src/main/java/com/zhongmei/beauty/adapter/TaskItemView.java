@@ -24,9 +24,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.beauty_task_item)
 public class TaskItemView extends RelativeLayout implements View.OnClickListener {
 
@@ -45,8 +43,7 @@ public class TaskItemView extends RelativeLayout implements View.OnClickListener
     protected TextView tv_memberInfo;
 
     @ViewById(R.id.tv_details)
-    protected TextView tv_details;//任务详情
-
+    protected TextView tv_details;
     @ViewById(R.id.btn_scan)
     protected Button btn_scan;
 
@@ -73,8 +70,7 @@ public class TaskItemView extends RelativeLayout implements View.OnClickListener
 
     public void refreshUI(TaskRemind task) {
         mTask = task;
-        //设置UI信息
-        tv_userName.setText(mTask.getUserName());
+                tv_userName.setText(mTask.getUserName());
         tv_title.setText(mTask.getTitle());
         tv_remindTime.setText(DateUtil.format(mTask.getRemindTime()));
         tv_memberInfo.setText(getMemberInfo(mTask));

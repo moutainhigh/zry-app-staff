@@ -3,10 +3,7 @@ package com.zhongmei.bty.basemodule.async.event;
 import com.zhongmei.bty.basemodule.database.enums.PrintTicketTypeEnum;
 import com.zhongmei.bty.basemodule.database.print.db.SendData;
 
-/**
- * 改单打印失败的action
- * Created by demo on 2018/12/15
- */
+
 public class ActionModifyTradePrintFailed {
 
     private String tableName;

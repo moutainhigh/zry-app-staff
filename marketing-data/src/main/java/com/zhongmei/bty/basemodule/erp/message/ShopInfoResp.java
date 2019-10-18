@@ -8,8 +8,7 @@ public class ShopInfoResp extends ShopInfo implements IResponse {
     private int status;
     private int code;
     private String message;
-    private String messageId;//适配erp接口
-
+    private String messageId;
     @Override
     public boolean isOk() {
         return status == 0;

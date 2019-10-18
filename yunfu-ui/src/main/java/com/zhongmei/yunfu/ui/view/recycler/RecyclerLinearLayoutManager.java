@@ -4,9 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class RecyclerLinearLayoutManager extends LinearLayoutManager {
 

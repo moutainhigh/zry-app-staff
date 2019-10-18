@@ -10,21 +10,11 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 正餐自助改单请求结构
- */
+
 
 public class BuffetMainTradeModifyReq {
 
-    public UnionBuffetTrade mainTrade;//主单
-    public TradeExtra tradeExtra;//主单
-    public List<TradeReasonRel> tradeReasonRels;//主单
-    public List<TradeCustomer> tradeCustomers;//主单
-    public List<TradeTax> mainTradeTaxs;//主单
-    public List<TradePrivilege> mainTradePrivileges;//主单
-    public TradeDeposit tradeDeposit;//主单
-
+    public UnionBuffetTrade mainTrade;    public TradeExtra tradeExtra;    public List<TradeReasonRel> tradeReasonRels;    public List<TradeCustomer> tradeCustomers;    public List<TradeTax> mainTradeTaxs;    public List<TradePrivilege> mainTradePrivileges;    public TradeDeposit tradeDeposit;
     public List<UnionBuffetTrade> subTrades;
     public List<TradePrivilege> subTradePrivileges;
     public List<TradeTax> subTradeTaxs;

@@ -4,20 +4,13 @@ package com.zhongmei.bty.basemodule.discount.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * 微信卡券信息
- * Created by demo on 2018/12/15
- */
+
 public class WeiXinCashCouponsInfo implements Serializable {
 
-    private BigDecimal least_cost;//起用金额（单位为分）
-
-    private BigDecimal reduce_cost;//减免金额（单位为分）
-
-    private WeiXinCouponsBaseInfo base_info;//基本信息
-
-    private String title;//卡券名
-
+    private BigDecimal least_cost;
+    private BigDecimal reduce_cost;
+    private WeiXinCouponsBaseInfo base_info;
+    private String title;
     public BigDecimal getLeast_cost() {
         return least_cost.divide(new BigDecimal(100));
     }
@@ -56,8 +49,7 @@ public class WeiXinCashCouponsInfo implements Serializable {
             this.title = title;
         }
 
-        private String title;//卡券名
-
+        private String title;
     }
 
 

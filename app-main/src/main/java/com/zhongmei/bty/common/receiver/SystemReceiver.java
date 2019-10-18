@@ -19,12 +19,9 @@ public class SystemReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         if (SYSTEM_RECEIVER_NETWORK_ACTION.equals(action)) {
             try {
-                // CalmHintDialog dialog = new CalmHintDialog(context);
-                // dialog.show();
-                Intent intents = new Intent();
+                                                Intent intents = new Intent();
                 intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                // intents.setClass(context, CalmHintDialog.class);
-                context.startActivity(intents);
+                                context.startActivity(intents);
             } catch (Exception e) {
                 OSLog.error(e, "");
             }
@@ -34,14 +31,11 @@ public class SystemReceiver extends BroadcastReceiver {
                     DownloadManager.EXTRA_DOWNLOAD_ID, 0));
             doUpdateApp();
         } else if (UploadLogUtil.ACTION_UPLOAD_LOG.equals(action)) {
-            //Caishier日志自动上传广播
-            UploadLogUtil.uploadCashierLog();
+                        UploadLogUtil.uploadCashierLog();
         }
     }
 
-    /**
-     * 执行下载完成监听，更新app
-     */
+
     private void doUpdateApp() {
         new Thread(new Runnable() {
             @Override

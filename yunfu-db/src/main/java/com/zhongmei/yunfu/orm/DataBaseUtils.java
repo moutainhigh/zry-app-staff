@@ -43,39 +43,7 @@ public class DataBaseUtils {
         return tableName.tableName();
     }
 
-    /*public static <T extends DataBaseInfo> List<T> cursor2List(
-            Class<? extends DataBaseInfo> cls, Cursor cursor) {
-        ArrayList<T> list = new ArrayList<T>();
-        for (cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
-            T dataBaseInfo = (T) ReflectHelper.newInstance(cls.getName());
-            dataBaseInfo.initFromCursor(cursor);
-            list.add(dataBaseInfo);
-        }
-        return list;
-    }*/
 
-    /*public static <T> T queryOneObject(Context context, Class<T> cls, String serverId) {
-        if (TextUtils.isEmpty(serverId) || context == null) {
-            return null;
-        }
-        DataBaseInfo dataBaseInfo = (DataBaseInfo) ReflectHelper
-                .newInstance(cls.getName());
-        Cursor cursor = context.getApplicationContext()
-                .getContentResolver()
-                .query(getUri(cls), null,
-                        dataBaseInfo.pkKey() + "=?",
-                        new String[]{serverId}, null);
-        try {
-            if (cursor != null && !cursor.isAfterLast() && cursor.getCount() > 0) {
-                cursor.moveToFirst();
-                dataBaseInfo.initFromCursor(cursor);
-            }
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
 
-        return (T) dataBaseInfo;
-    }*/
+
 }

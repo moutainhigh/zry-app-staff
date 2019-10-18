@@ -24,23 +24,14 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/***
- * 展示抹零弹出框
- *
 
- */
 public class ErasePopupHelper {
 
-    public final static int REMOVE_CENT = 0; // 抹分
-
-    public final static int REMOVE_DIME = 1; // 抹角
-
-    public final static int REMOVE_YUAN = 2; // 抹元
-
-    public final static int REMOVE_AUTO = 3; // 自定义输入
-
-    public final static int REMOVE_NOTHING = -1; // 取消抹零
-
+    public final static int REMOVE_CENT = 0;
+    public final static int REMOVE_DIME = 1;
+    public final static int REMOVE_YUAN = 2;
+    public final static int REMOVE_AUTO = 3;
+    public final static int REMOVE_NOTHING = -1;
     private static ErasePopupHelper sPopupManager = new ErasePopupHelper();
 
     private List<EraseItem> smallList = new ArrayList<EraseItem>(4);
@@ -63,11 +54,7 @@ public class ErasePopupHelper {
         }
     }
 
-    /**
-     * @Title: updateAllItem
-     * @Description: 更新列表
-     * @Return void 返回类型
-     */
+
     private void updateAllItem(IPaymentInfo cashInfoManager) {
         for (EraseItem item : smallList) {
             if (cashInfoManager.getEraseType() == item.type) {
@@ -78,13 +65,7 @@ public class ErasePopupHelper {
         }
     }
 
-    /**
-     * @Title: initPopwindow
-     * @Description: 初始化对话框
-     * @Param Activity context
-     * @Param Button removeChange
-     * @Return void 返回类型
-     */
+
     public void initPopwindow(Activity context, Button removeChange, final IPaymentInfo cashInfoManager) {
         updateAllItem(cashInfoManager);
         if (mPopupWindow == null) {
@@ -146,22 +127,15 @@ public class ErasePopupHelper {
             mPopupWindow.setOutsideTouchable(true);
             mPopupWindow.update();
             mPopupWindow.setBackgroundDrawable(new ColorDrawable(Color.argb(0, 0, 0, 0)));
-            // mPopupWindow.setBackgroundDrawable(new
-            // ColorDrawable(Color.WHITE));
-        }
+                                }
         if (mPopupWindow != null && mPopupWindow.isShowing()) {
             mPopupWindow.dismiss();
         } else {
-            // mPopupWindow.update();
-            mPopupWindow.showAsDropDown(removeChange, -94, 5);
+                        mPopupWindow.showAsDropDown(removeChange, -94, 5);
         }
     }
 
-    /**
-     * @Title: disposePopuWindow
-     * @Description: 清空列表数据
-     * @Return void 返回类型
-     */
+
     public void disposePopuWindow() {
         if (mPopupWindow != null) {
             mPopupWindow.dismiss();
@@ -170,9 +144,7 @@ public class ErasePopupHelper {
         }
     }
 
-    /**
 
-     */
     public static class EraseItem {
         public int type;
 
@@ -185,20 +157,9 @@ public class ErasePopupHelper {
         }
     }
 
-    /*public static synchronized void showLongToastCenter(Context context, String msg) {
-        if (context != null) {
-            if (sToastView == null) {
-                sToastView = new CalmToastView(context.getApplicationContext());
-            }
-            sToastView.setGravity(Gravity.CENTER, 0, -45);
-            sToastView.setMessage(msg);
-            sToastView.setDuration(Toast.LENGTH_LONG);
-            sToastView.show();
-        }
-    }*/
 
-    //设置抹零按钮样式
-    public static void setExemptButtonEraseType(Context context, Button exemptbutton, int eraseType) {
+
+        public static void setExemptButtonEraseType(Context context, Button exemptbutton, int eraseType) {
         switch (eraseType) {
             case ErasePopupHelper.REMOVE_CENT:
                 setEraseButtonStyle(exemptbutton,

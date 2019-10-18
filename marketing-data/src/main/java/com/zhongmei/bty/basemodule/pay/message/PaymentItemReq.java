@@ -10,17 +10,7 @@ import com.zhongmei.yunfu.db.enums.Bool;
 import java.math.BigDecimal;
 
 public class PaymentItemReq {
-    protected BigDecimal changeAmount;//找零金额
-    protected BigDecimal faceAmount;//票面金额
-    protected Integer isRefund;//是否支持退款 1：是；2：否
-    protected Long payModeId;//支付方式
-    protected String payModeName;//支付方式名称
-    protected Integer payModelGroup;//支付类型
-    protected Integer paySource;//支付来源
-    protected Integer refundWay;//退款方式，1：无需退款 2：自动退款 3：手动退款
-    protected BigDecimal usefulAmount;//实付金额
-    protected String uuid;//uuid
-
+    protected BigDecimal changeAmount;    protected BigDecimal faceAmount;    protected Integer isRefund;    protected Long payModeId;    protected String payModeName;    protected Integer payModelGroup;    protected Integer paySource;    protected Integer refundWay;    protected BigDecimal usefulAmount;    protected String uuid;
     public PaymentItemReq(PaymentItem paymentItem) {
         changeAmount = paymentItem.getChangeAmount();
         faceAmount = paymentItem.getFaceAmount();

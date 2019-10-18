@@ -2,26 +2,16 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 美业服务优惠类型
- */
+
 public enum ServerPrivilegeType implements ValueEnum<Integer> {
 
-    /**
-     * 次卡服务
-     */
+
     COUNT_SERVER(1),
 
-    /**
-     * 小程序活动
-     */
+
     WX_ACTIVITY(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

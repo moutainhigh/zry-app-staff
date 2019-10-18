@@ -28,10 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- * 构建取消联台上行数据
- */
+
 
 public class BuffetSplitUnionManager {
     private TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
@@ -65,10 +62,8 @@ public class BuffetSplitUnionManager {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //生成拆单请求数据包括库存
-            if (subTradeVo != null && mainTradeVo != null) {
-                splitReq = new BuffetUnionTradeCancelReq(); //initDinnertableTradeInfos(mainTradeVo, subTradeVo);
-            }
+                        if (subTradeVo != null && mainTradeVo != null) {
+                splitReq = new BuffetUnionTradeCancelReq();             }
             return splitReq;
         } else {
             return null;
@@ -86,22 +81,14 @@ public class BuffetSplitUnionManager {
         }
     }
 
-    //生成拆单请求数据包括库存
-    private BuffetUnionTradeCancelReq initDinnertableTradeInfos(TradeVo mainTradeVo, TradeVo subTradeVo) {
+        private BuffetUnionTradeCancelReq initDinnertableTradeInfos(TradeVo mainTradeVo, TradeVo subTradeVo) {
         return createBuffetUnionTradeCancelReq(mainTradeVo, subTradeVo, true);
     }
 
-    /**
-     * 生成请求数据
-     *
-     * @param mainTradeVo
-     * @param subTradeVo
-     * @return
-     */
+
     public BuffetUnionTradeCancelReq createBuffetUnionTradeCancelReq(TradeVo mainTradeVo, TradeVo subTradeVo, boolean calculateCurrentSubTrade) {
         calculateTradePrice(mainTradeVo, subTradeList, subTradeVo, calculateCurrentSubTrade);
-        BuffetUnionTradeCancelReq splitReq = new BuffetUnionTradeCancelReq();//取消联台请求
-        BuffetUnionTradeCancelReq.TradeUnionReq tradeUnionReq = new BuffetUnionTradeCancelReq.TradeUnionReq();
+        BuffetUnionTradeCancelReq splitReq = new BuffetUnionTradeCancelReq();        BuffetUnionTradeCancelReq.TradeUnionReq tradeUnionReq = new BuffetUnionTradeCancelReq.TradeUnionReq();
         tradeUnionReq.setMainTrade(mainTradeVo.getTrade());
         tradeUnionReq.setSubTrade(subTradeVo.getTrade());
         tradeUnionReq.setMainTradeBuffetPeoples(mainTradeVo.getTradeBuffetPeoples());
@@ -151,12 +138,7 @@ public class BuffetSplitUnionManager {
         return null;
     }
 
-    /**
-     * 计算主单及子单价格
-     *
-     * @param mainTradeVo
-     * @param subTradeVo
-     */
+
     public void calculateTradePrice(TradeVo mainTradeVo, List<TradeVo> subTradeList, TradeVo subTradeVo, boolean calculateCurrentSubTrade) {
         DinnertableTradeInfo mainDinnertableTradeInfo = new DinnertableTradeInfo(mainTradeVo);
         for (TradeVo tradeVo : subTradeList) {
@@ -172,10 +154,8 @@ public class BuffetSplitUnionManager {
     private void calculateTradePrice(DinnertableTradeInfo mainDinnertableTradeInfo, TradeVo subTradeVo) {
         DinnertableTradeInfo subDinnertableTradeInfo = new DinnertableTradeInfo(subTradeVo);
         List<IShopcartItem> subTradeShopcartItems = new ArrayList<IShopcartItem>(subDinnertableTradeInfo.getItems());
-        //出始化子单批量菜
-        DinnerUnionShopcartUtil.initSubTradeBatchItem(mainDinnertableTradeInfo, subDinnertableTradeInfo, subTradeShopcartItems);
-        //遍历子单菜品，拆除主单的批量菜
-        /* BigDecimal batchItemAmountSum = BigDecimal.ZERO;//子单批量菜总价*/
+                DinnerUnionShopcartUtil.initSubTradeBatchItem(mainDinnertableTradeInfo, subDinnertableTradeInfo, subTradeShopcartItems);
+
         if (Utils.isNotEmpty(subTradeShopcartItems)) {
             for (IShopcartItem iShopcartItem : subTradeShopcartItems) {
                 if (iShopcartItem.getStatusFlag() == StatusFlag.VALID && iShopcartItem.getShopcartItemType() == ShopcartItemType.SUBBATCH) {
@@ -183,26 +163,15 @@ public class BuffetSplitUnionManager {
                 }
             }
         }
-        //计算主单金额（主单-子单联台菜金额）
-        //MathShopcartItemTool.mathMainShopcartItemsAmount(mainTradeVo, mainDinnertableTradeInfo.getItems());
-        //计算子单金额
-        //MathShopcartItemTool.mathSubShopcartItemsAmount(subTradeVo, subTradeShopcartItems);
 
-        //重新计算餐标价格
-        countMealShellVo(subTradeVo);
+                countMealShellVo(subTradeVo);
 
-        //计算主单-子单金额
-        MathShoppingCartTool.mathTotalPrice(subTradeShopcartItems, subTradeVo);
+                MathShoppingCartTool.mathTotalPrice(subTradeShopcartItems, subTradeVo);
 
-        //把所有子单菜统计到主单
-        mainDinnertableTradeInfo.getItems().addAll(subTradeShopcartItems);
+                mainDinnertableTradeInfo.getItems().addAll(subTradeShopcartItems);
     }
 
-    /**
-     * 计算餐标价格
-     *
-     * @param tradeVo
-     */
+
     private void countMealShellVo(TradeVo tradeVo) {
         if (tradeVo.getMealShellVo() != null) {
             BigDecimal totalAmount = BigDecimal.ZERO;

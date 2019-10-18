@@ -18,9 +18,7 @@ import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-/**
- * 次卡消费记录
- */
+
 @SuppressLint("SimpleDateFormat")
 public class CustomerCardTimeRecordAdapter extends BaseAdapter {
 
@@ -62,8 +60,7 @@ public class CustomerCardTimeRecordAdapter extends BaseAdapter {
             viewHolder = new ViewHolder();
             convertView = mInflater.inflate(R.layout.customer_record_card_time_item, parent, false);
             viewHolder.name = (TextView) convertView.findViewById(R.id.tv_name);
-            //viewHolder.all_num = (TextView) convertView.findViewById(R.id.tv_all_num);
-            viewHolder.usable_num = (TextView) convertView.findViewById(R.id.tv_usable_num);
+                        viewHolder.usable_num = (TextView) convertView.findViewById(R.id.tv_usable_num);
             viewHolder.tv_expired_date = (TextView) convertView.findViewById(R.id.tv_expired_date);
             convertView.setTag(viewHolder);
         } else {

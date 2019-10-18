@@ -67,15 +67,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PayUtils {
     private static final String TAG = PayUtils.class.getSimpleName();
 
-    //判断订单金额是否为负
-    public static boolean isNegativeTradeAmount(TradeVo tradeVo) {
+        public static boolean isNegativeTradeAmount(TradeVo tradeVo) {
         boolean result = false;
         if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getTradeAmount() != null) {
             if (tradeVo.getTrade().getTradeAmount().compareTo(BigDecimal.ZERO) < 0) {
@@ -85,18 +82,15 @@ public class PayUtils {
         return result;
     }
 
-    //判断订单是否满足异步
-    public static boolean isConditionAsync(TradeVo tradeVo) {
+        public static boolean isConditionAsync(TradeVo tradeVo) {
         if (tradeVo == null) {
             return false;
         }
-        //拆出来新单不支持异步
-        if (tradeVo.getTrade() != null && tradeVo.getTrade().getTradeType() == TradeType.SPLIT) {
+                if (tradeVo.getTrade() != null && tradeVo.getTrade().getTradeType() == TradeType.SPLIT) {
             return false;
         }
         List<TradeCustomer> customerList = tradeVo.getTradeCustomerList();
-        //如果有会员不走异步
-        if (customerList != null && customerList.size() > 0) {
+                if (customerList != null && customerList.size() > 0) {
             for (TradeCustomer customer : customerList) {
                 if ((CustomerType.MEMBER == customer.getCustomerType() || CustomerType.CUSTOMER == customer.getCustomerType() || CustomerType.CARD == customer.getCustomerType())
                         && customer.getStatusFlag() == StatusFlag.VALID) {
@@ -105,8 +99,7 @@ public class PayUtils {
             }
         }
         List<WeiXinCouponsVo> weiXinCouponsVoList = tradeVo.getmWeiXinCouponsVo();
-        //如果有微信卡卷不走异步
-        if (weiXinCouponsVoList != null && weiXinCouponsVoList.size() > 0) {
+                if (weiXinCouponsVoList != null && weiXinCouponsVoList.size() > 0) {
             for (WeiXinCouponsVo wxcVo : weiXinCouponsVoList) {
                 if (wxcVo.getmTradePrivilege() != null && wxcVo.getmTradePrivilege().getStatusFlag() == StatusFlag.VALID) {
                     return false;
@@ -124,8 +117,7 @@ public class PayUtils {
         return true;
     }
 
-    //判断是否只有现金支付
-    public static boolean isOnlyCashPayment(PaymentVo vo) {
+        public static boolean isOnlyCashPayment(PaymentVo vo) {
         if (vo != null && vo.getPaymentItemList() != null && vo.getPaymentItemList().size() == 1) {
             Long modeId = vo.getPaymentItemList().get(0).getPayModeId();
             return PayModeId.CASH.value().equals(modeId);
@@ -141,14 +133,7 @@ public class PayUtils {
         }
     }
 
-   /* public static void findSourceTradePaymentVos(final IPaymentInfo paymentInfo) {
-        if (paymentInfo.getSourceTradeVo() != null) {
-            Trade trade = paymentInfo.getSourceTradeVo().getTrade();
-            if (trade != null && trade.getId() != null) {
-                findTradePayments(paymentInfo, trade);
-            }
-        }
-    }*/
+
 
     private static void findTradePayments(final IPaymentInfo paymentInfo, Trade trade) {
         if (paymentInfo != null && trade.getUuid() != null) {
@@ -159,30 +144,22 @@ public class PayUtils {
             } catch (Exception e) {
                 Log.e(TAG, "", e);
             }
-            // 通知ui更新
-            paymentInfo.setPaidPaymentRecords(list);
+                        paymentInfo.setPaidPaymentRecords(list);
         }
     }
 
 
-    //显示支付成功界面
-    public static void showPayOkDialog(FragmentActivity context, IPaymentInfo paymentInfo, boolean isAsync) {
+        public static void showPayOkDialog(FragmentActivity context, IPaymentInfo paymentInfo, boolean isAsync) {
         try {
-            //add v8.13 begin 预付金抵扣
-            int opType = IPayConstParame.OP_TYPE_DOPAY;//收银
-            if (paymentInfo.getOtherPay().getAllPayModelItems() != null && !paymentInfo.getOtherPay().getAllPayModelItems().isEmpty()) {
+                        int opType = IPayConstParame.OP_TYPE_DOPAY;            if (paymentInfo.getOtherPay().getAllPayModelItems() != null && !paymentInfo.getOtherPay().getAllPayModelItems().isEmpty()) {
                 PayModelItem payModelItem = paymentInfo.getOtherPay().getAllPayModelItems().get(0);
                 if (payModelItem != null && payModelItem.getPayMode() == PayModeId.EARNEST_DEDUCT) {
                     if (paymentInfo.getTradeVo().getTradeEarnestMoney() > (paymentInfo.getTradeAmount() - paymentInfo.getExemptAmount())) {
-                        opType = IPayConstParame.OP_TYPE_DEDUCTION_REFUND;//订金抵扣退款
-                    } else {
-                        opType = IPayConstParame.OP_TYPE_DEDUCTION;//订金抵扣退款
-                    }
+                        opType = IPayConstParame.OP_TYPE_DEDUCTION_REFUND;                    } else {
+                        opType = IPayConstParame.OP_TYPE_DEDUCTION;                    }
                 }
             }
-            //add v8.13 end 预付金抵扣
-            //如果包含消费税且支付完成，显示获取消费税号界面 modify v8.11
-            if (DoPayUtils.isHaveTradeTax(paymentInfo.getTradeVo()) && DoPayUtils.isTradePaidOver(paymentInfo.getTradeVo().getTrade())) {
+                                    if (DoPayUtils.isHaveTradeTax(paymentInfo.getTradeVo()) && DoPayUtils.isTradePaidOver(paymentInfo.getTradeVo().getTrade())) {
                 DoPayUtils.showGetTaxNoPayOkDialog(context, DoPayManager.getInstance(), paymentInfo, opType);
             } else {
                 DoPayUtils.showPayOkDialog(context, DoPayManager.getInstance(), paymentInfo, isAsync, opType);
@@ -192,14 +169,11 @@ public class PayUtils {
         }
     }
 
-    //显示支付成功界面
-    public static void showPayOkDialog(FragmentActivity context, IPaymentInfo paymentInfo, boolean isAsync, int operateType) {
+        public static void showPayOkDialog(FragmentActivity context, IPaymentInfo paymentInfo, boolean isAsync, int operateType) {
         try {
-            //如果包含消费税且支付完成，显示获取消费税号界面 modify v8.11
-            if (DoPayUtils.isHaveTradeTax(paymentInfo.getTradeVo()) && DoPayUtils.isTradePaidOver(paymentInfo.getTradeVo().getTrade())) {
+                        if (DoPayUtils.isHaveTradeTax(paymentInfo.getTradeVo()) && DoPayUtils.isTradePaidOver(paymentInfo.getTradeVo().getTrade())) {
                 DoPayUtils.showGetTaxNoPayOkDialog(context, DoPayManager.getInstance(), paymentInfo, operateType);
-            } else {//原来支付成功界面
-                DoPayUtils.showPayOkDialog(context, DoPayManager.getInstance(), paymentInfo, isAsync, operateType);
+            } else {                DoPayUtils.showPayOkDialog(context, DoPayManager.getInstance(), paymentInfo, isAsync, operateType);
             }
         } catch (Exception e) {
             Log.e(TAG, "", e);
@@ -210,8 +184,7 @@ public class PayUtils {
         showPayOkDialog(context, paymentInfo, false);
     }
 
-    //显示支付失败界面
-    public static void showPayErrorDialog(FragmentActivity context, IPaymentInfo paymentInfo, String errorReason, IPayOverCallback callBack, int errorCode) {
+        public static void showPayErrorDialog(FragmentActivity context, IPaymentInfo paymentInfo, String errorReason, IPayOverCallback callBack, int errorCode) {
         DoPayUtils.showPayErrorDialog(context, DoPayManager.getInstance(), paymentInfo, errorReason, callBack, errorCode);
     }
 
@@ -219,15 +192,7 @@ public class PayUtils {
         showPayErrorDialog(context, paymentInfo, errorReason, callBack, 0);
     }
 
-    /**
-     * @Description: 移除优惠劵或作废订单对话
-     * @Param context Activity
-     * @Param title String
-     * @Param tradeVo TradeVo
-     * @Param isDinner boolean
-     * @Param isOrderCenter boolean
-     * @Return void 返回类型
-     */
+
     public static void showRemoveCouponOrDelTradeDialog(final FragmentActivity context, final IPaymentInfo paymentInfo, String title, final List<Long> promoIdList) {
         try {
             CommonDialogFragment.CommonDialogFragmentBuilder dialogBuilder = new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
@@ -250,13 +215,10 @@ public class PayUtils {
                                     try {
                                         if (ResponseObject.isOk(response)) {
                                             TradeDal mTradeDal = OperatesFactory.create(TradeDal.class);
-                                            // 替换trade对象
-                                            String tradeUuid = paymentInfo.getTradeVo().getTrade().getUuid();
-                                            //更新tradeVo
-                                            TradeVo tradeVo = mTradeDal.findTrade(tradeUuid);
+                                                                                        String tradeUuid = paymentInfo.getTradeVo().getTrade().getUuid();
+                                                                                        TradeVo tradeVo = mTradeDal.findTrade(tradeUuid);
                                             paymentInfo.setTradeVo(tradeVo);
-                                            if (paymentInfo.isDinner() && !paymentInfo.isOrderCenter()) { //如果正餐收银界面
-                                                SeparateShoppingCart.getInstance().resetShopcartItemFromDB(null);
+                                            if (paymentInfo.isDinner() && !paymentInfo.isOrderCenter()) {                                                 SeparateShoppingCart.getInstance().resetShopcartItemFromDB(null);
                                                 DinnerShoppingCart.getInstance().resetShopcartItemFromDB(null);
                                             }
                                             paymentInfo.setOrdered(true);
@@ -310,18 +272,10 @@ public class PayUtils {
         }
     }
 
-    /**
-     * @Title: recisionTradeRequest
-     * @Description: 作废订单操作交付
-     * @Param @param fragmentManager
-     * @Param @param reason
-     * @Param @param tradeVo
-     * @Return void 返回类型
-     */
+
     public static void recisionTradeRequest(final FragmentActivity context, Reason reason, final TradeVo tradeVo, final boolean isPrintKitchen) {
         TradeOperates tradeOperate = OperatesFactory.create(TradeOperates.class);
-        // 作废订单操作
-        tradeOperate.recision(tradeVo, reason, null,
+                tradeOperate.recision(tradeVo, reason, null,
                 LoadingResponseListener.ensure(new ResponseListener<TradeResp>() {
 
                                                    @Override
@@ -333,17 +287,10 @@ public class PayUtils {
                                                                Trade trade = tradeVo.getTrade();
                                                                if (trade.getBusinessType() == BusinessType.SNACK && trade.getTradePayStatus() == TradePayStatus.UNPAID && trade.getSource() == SourceId.POS && trade.getDeliveryType() == DeliveryType.HERE) {
 
-                                                                   //不打作废单
-                                                               } else if (trade.getBusinessType() == BusinessType.SNACK && trade.getTradeType() == TradeType.SELL_FOR_REPEAT) {
-                                                                   //不打作废单
-                                                               } else {
-                                                                   //CashierPrintManager manager = new CashierPrintManager();
-                                                                   //manager.printTrade(tradeVo.getTrade().getUuid(), Calm.PRINT_TYPE_DESTROY, null, true, false, isPrintKitchen);
-                                                               }
-                                                               //关闭快餐支付界面
-                                                               /*if (context instanceof PayActivity) {
-                                                                   context.finish();
-                                                               }*/
+                                                                                                                                  } else if (trade.getBusinessType() == BusinessType.SNACK && trade.getTradeType() == TradeType.SELL_FOR_REPEAT) {
+                                                                                                                                  } else {
+                                                                                                                                                                                                     }
+
                                                            } else {
 
                                                                showErrorDialog(context, context.getSupportFragmentManager(), response.getMessage());
@@ -368,13 +315,7 @@ public class PayUtils {
                         context.getSupportFragmentManager()));
     }
 
-    /**
-     * @Title: showErrorDialog
-     * @Description: 显示错误对话框
-     * @Param @param fragmentManager
-     * @Param @param errortitle
-     * @Return void 返回类型
-     */
+
     public static void showErrorDialog(Context context, final FragmentManager fragmentManager, String errortitle) {
         try {
             new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(errortitle)
@@ -396,12 +337,7 @@ public class PayUtils {
         }
     }
 
-    /**
-     * 根据promoId获取对应优惠
-     *
-     * @param promoIds
-     * @return
-     */
+
     public static List<TradePrivilege> getWeiXinCouponsPrivileges(IPaymentInfo paymentInfo, List<Long> promoIds) {
         List<TradePrivilege> weiXinCouponsPrivileges = new ArrayList<TradePrivilege>();
 
@@ -413,8 +349,7 @@ public class PayUtils {
         return weiXinCouponsPrivileges;
     }
 
-    //显示快餐移除微信卡卷或作废订单对话框
-    public static void showRemoveWeiXinCouponsOrDelTradeDialog(final FragmentActivity context, final IPaymentInfo paymentInfo, String title, List<Long> promoIds) {
+        public static void showRemoveWeiXinCouponsOrDelTradeDialog(final FragmentActivity context, final IPaymentInfo paymentInfo, String title, List<Long> promoIds) {
 
         try {
             final List<TradePrivilege> tradePrivileges = PayUtils.getWeiXinCouponsPrivileges(paymentInfo, promoIds);
@@ -430,8 +365,7 @@ public class PayUtils {
                             }
 
                             TradeOperates tradeOperate = OperatesFactory.create(TradeOperates.class);
-                            // 移除优惠劵操作
-                            tradeOperate.batchunbindCoupon(paymentInfo.getTradeVo().getTrade().getId(), tradePrivileges,
+                                                        tradeOperate.batchunbindCoupon(paymentInfo.getTradeVo().getTrade().getId(), tradePrivileges,
                                     LoadingResponseListener.ensure(new ResponseListener<TradeResp>() {
 
                                         @Override
@@ -439,13 +373,10 @@ public class PayUtils {
                                             try {
                                                 if (ResponseObject.isOk(response)) {
                                                     TradeDal mTradeDal = OperatesFactory.create(TradeDal.class);
-                                                    // 替换trade对象
-                                                    String tradeUuid = paymentInfo.getTradeVo().getTrade().getUuid();
-                                                    //更新tradeVo
-                                                    TradeVo tradeVo = mTradeDal.findTrade(tradeUuid);
+                                                                                                        String tradeUuid = paymentInfo.getTradeVo().getTrade().getUuid();
+                                                                                                        TradeVo tradeVo = mTradeDal.findTrade(tradeUuid);
                                                     paymentInfo.setTradeVo(tradeVo);
-                                                    if (paymentInfo.isDinner() && !paymentInfo.isOrderCenter()) { //如果正餐收银界面
-                                                        SeparateShoppingCart.getInstance().resetShopcartItemFromDB(null);
+                                                    if (paymentInfo.isDinner() && !paymentInfo.isOrderCenter()) {                                                         SeparateShoppingCart.getInstance().resetShopcartItemFromDB(null);
                                                         DinnerShoppingCart.getInstance().resetShopcartItemFromDB(null);
                                                     }
                                                     paymentInfo.setOrdered(true);
@@ -500,8 +431,7 @@ public class PayUtils {
         }
     }
 
-    //显示正餐移除优惠劵对话框
-    public static void showDinnerRemoveCouponDilog(final FragmentActivity context, final IPaymentInfo paymentInfo, String title, final List<Long> promoIds) {
+        public static void showDinnerRemoveCouponDilog(final FragmentActivity context, final IPaymentInfo paymentInfo, String title, final List<Long> promoIds) {
 
         new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                 .iconType(CommonDialogFragment.ICON_WARNING)
@@ -511,8 +441,7 @@ public class PayUtils {
                     @Override
                     public void onClick(View arg0) {
                         try {
-                            //移除优惠劵包括单品礼品劵
-                            if (promoIds != null) {
+                                                        if (promoIds != null) {
                                 DinnerShoppingCart dinnerShoppingCart = DinnerShopManager.getInstance().getShoppingCart();
                                 dinnerShoppingCart.removeCouponPrivilege(dinnerShoppingCart.getShoppingCartVo(), promoIds, true);
                                 DinnerShopManager.getInstance().getShoppingCart().removeGiftCouponePrivilege(promoIds, dinnerShoppingCart.getShoppingCartVo(), true);
@@ -527,8 +456,7 @@ public class PayUtils {
 
     }
 
-    //显示正餐移除微信卡卷对话框
-    public static void showDinnerRemoveWeixinCouponDilog(final FragmentActivity context, String title, final List<Long> promoIds) {
+        public static void showDinnerRemoveWeixinCouponDilog(final FragmentActivity context, String title, final List<Long> promoIds) {
 
         new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                 .iconType(CommonDialogFragment.ICON_WARNING)
@@ -538,8 +466,7 @@ public class PayUtils {
                     @Override
                     public void onClick(View arg0) {
                         try {
-                            //移除微信劵
-                            DinnerShopManager.getInstance().getShoppingCart().removeWeiXinCoupons(promoIds);
+                                                        DinnerShopManager.getInstance().getShoppingCart().removeWeiXinCoupons(promoIds);
                         } catch (Exception e) {
                             Log.e(TAG, "", e);
                         }
@@ -550,8 +477,7 @@ public class PayUtils {
 
     }
 
-    //快餐直接购物车移除优惠劵
-    public static void showRemoveCouponDialog(final FragmentActivity context, String title, final List<Long> coupIds) {
+        public static void showRemoveCouponDialog(final FragmentActivity context, String title, final List<Long> coupIds) {
         try {
             new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                     .iconType(CommonDialogFragment.ICON_WARNING)
@@ -561,13 +487,9 @@ public class PayUtils {
                         @Override
                         public void onClick(View arg0) {
                             try {
-                                // 从购物车移除优惠劵
-                                ShoppingCart.getInstance().removeGiftCouponePrivilege(coupIds, ShoppingCart.getInstance().getShoppingCartVo(), false);
+                                                                ShoppingCart.getInstance().removeGiftCouponePrivilege(coupIds, ShoppingCart.getInstance().getShoppingCartVo(), false);
                                 ShoppingCart.getInstance().removeCouponPrivilege(ShoppingCart.getInstance().fastFootShoppingCartVo, coupIds, true);
-                                //关闭快餐支付界面
-                                /*if (context instanceof PayActivity) {
-                                    context.finish();
-                                }*/
+
                             } catch (Exception e) {
 
                                 Log.e(TAG, "", e);
@@ -583,8 +505,7 @@ public class PayUtils {
         }
     }
 
-    //快餐直接购物车移除微信卡券
-    public static void showRemoveWeiXinCouponsDialog(final FragmentActivity context, String title, final List<TradePrivilege> tradePrivileges) {
+        public static void showRemoveWeiXinCouponsDialog(final FragmentActivity context, String title, final List<TradePrivilege> tradePrivileges) {
         try {
             new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                     .iconType(CommonDialogFragment.ICON_WARNING)
@@ -594,14 +515,10 @@ public class PayUtils {
                         @Override
                         public void onClick(View arg0) {
                             try {
-                                // 从购物车移除优惠劵
-                                if (tradePrivileges != null) {
+                                                                if (tradePrivileges != null) {
                                     ShoppingCart.getInstance().removeWeiXinCouponsPrivilege(tradePrivileges);
                                 }
-                                //关闭快餐支付界面
-                                /*if (context instanceof PayActivity) {
-                                    context.finish();
-                                }*/
+
                             } catch (Exception e) {
 
                                 Log.e(TAG, "", e);
@@ -617,8 +534,7 @@ public class PayUtils {
         }
     }
 
-    //正餐移除购物车积分
-    public static void showRemoveDinnerIntegralDialog(final FragmentActivity context, String title) {
+        public static void showRemoveDinnerIntegralDialog(final FragmentActivity context, String title) {
         new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                 .iconType(CommonDialogFragment.ICON_WARNING)
                 .positiveText(R.string.pay_unbind_Integral)
@@ -627,8 +543,7 @@ public class PayUtils {
                     @Override
                     public void onClick(View arg0) {
                         try {
-                            // 从购物车移除积分
-                            DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();
+                                                        DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();
                         } catch (Exception e) {
                             Log.e(TAG, "", e);
                         }
@@ -654,21 +569,17 @@ public class PayUtils {
                             }
                         }
                         TradeOperates tradeOperate = OperatesFactory.create(TradeOperates.class);
-                        // 移除积分操作
-                        tradeOperate.unbindIntegral(req, LoadingResponseListener.ensure(new ResponseListener<TradeResp>() {
+                                                tradeOperate.unbindIntegral(req, LoadingResponseListener.ensure(new ResponseListener<TradeResp>() {
 
                             @Override
                             public void onResponse(ResponseObject<TradeResp> response) {
                                 try {
                                     if (ResponseObject.isOk(response)) {
                                         TradeDal mTradeDal = OperatesFactory.create(TradeDal.class);
-                                        // 替换trade对象
-                                        String tradeUuid = paymentInfo.getTradeVo().getTrade().getUuid();
-                                        //更新tradeVo
-                                        TradeVo tradeVo = mTradeDal.findTrade(tradeUuid);
+                                                                                String tradeUuid = paymentInfo.getTradeVo().getTrade().getUuid();
+                                                                                TradeVo tradeVo = mTradeDal.findTrade(tradeUuid);
                                         paymentInfo.setTradeVo(tradeVo);
-                                        if (paymentInfo.isDinner() && !paymentInfo.isOrderCenter()) { //如果正餐收银界面
-                                            SeparateShoppingCart.getInstance().resetShopcartItemFromDB(null);
+                                        if (paymentInfo.isDinner() && !paymentInfo.isOrderCenter()) {                                             SeparateShoppingCart.getInstance().resetShopcartItemFromDB(null);
                                             DinnerShoppingCart.getInstance().resetShopcartItemFromDB(null);
                                         }
                                         paymentInfo.setOrdered(true);
@@ -718,8 +629,7 @@ public class PayUtils {
         dialogBuilder.build().show(context.getSupportFragmentManager(), "RemoveIntegralOrDelTradeDialog");
     }
 
-    //快餐直接购物车移除积分
-    public static void showRemoveIntegralDialog(Context context, final FragmentManager fragmentManager, String title) {
+        public static void showRemoveIntegralDialog(Context context, final FragmentManager fragmentManager, String title) {
         try {
             new CommonDialogFragment.CommonDialogFragmentBuilder(context).title(title)
                     .iconType(CommonDialogFragment.ICON_WARNING)
@@ -729,8 +639,7 @@ public class PayUtils {
                         @Override
                         public void onClick(View arg0) {
                             try {
-                                ShoppingCart.getInstance().removeIntegralCash();// 从购物车移除积分
-
+                                ShoppingCart.getInstance().removeIntegralCash();
                             } catch (Exception e) {
 
                                 Log.e(TAG, "", e);
@@ -746,10 +655,8 @@ public class PayUtils {
         }
     }
 
-    //判断是否是储值支付
-    public static boolean isMemberPay(List<PaymentItem> paidItems) {
-        //同一订单不允许相同账号重复支付
-        if (!Utils.isEmpty(paidItems)) {
+        public static boolean isMemberPay(List<PaymentItem> paidItems) {
+                if (!Utils.isEmpty(paidItems)) {
             for (PaymentItem item : paidItems) {
                 if (PayModeId.MEMBER_CARD.value().equals(item.getPayModeId()) ||
                         PayModeId.ENTITY_CARD.value().equals(item.getPayModeId())
@@ -762,41 +669,9 @@ public class PayUtils {
         return false;
     }
 
-    /*public static double formatInputCash(String inputValue) {
-        double value = 0;
-        while (!TextUtils.isEmpty(inputValue) && !Character.isDigit(inputValue.charAt(0))) {
-            inputValue = inputValue.substring(1);
-        }
-        if (!TextUtils.isEmpty(inputValue)) {
-            try {
-                value = Double.valueOf(inputValue);
-            } catch (NumberFormatException e) {
-                Log.e(TAG, e.getMessage(), e);
-            }
-        }
-        return value;
-    }*/
 
-   /* //判断是否支持组合支付工具
-    public static boolean isSupportGroupPay(IPaymentInfo paymentInfo, boolean isSetToSupportGroupPay) {
-        //如果是金诚商户 不支持分步支付
-        if (ServerSettingCache.getInstance().isJinChBusiness()) {
-            return false;
-        }
-        if (paymentInfo != null) {
-            if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT) {
-                return false;
-            } else {
-                switch (paymentInfo.getTradeBusinessType()) {
-                    case GROUP:
-                        return false;
-                    default:
-                        return isSetToSupportGroupPay;
-                }
-            }
-        }
-        return isSetToSupportGroupPay;
-    }*/
+
+
 
     public static TradeUser creatTradeUser(Trade trade, AuthUser authUser) {
         if (trade == null || authUser == null) {
@@ -807,28 +682,18 @@ public class PayUtils {
         tradeUser.setUserId(authUser.getId());
         tradeUser.setUserName(authUser.getName());
         tradeUser.setTradeId(trade.getId());
-        tradeUser.setStatusFlag(StatusFlag.VALID);//默认有效
-        if (trade.getBusinessType() != null) {
+        tradeUser.setStatusFlag(StatusFlag.VALID);        if (trade.getBusinessType() != null) {
             switch (trade.getBusinessType()) {
-                case CARD://售卡
-                case ANONYMOUS_ENTITY_CARD_SELL:
+                case CARD:                case ANONYMOUS_ENTITY_CARD_SELL:
                     tradeUser.setType(TradeScenceType.SALECARD);
-//                    tradeUser.setUserType(TradeUserType.MARKETMAN);//默认服务员
                     break;
-                case ONLINE_RECHARGE://充值
-                case CARD_RECHARGE:
+                case ONLINE_RECHARGE:                case CARD_RECHARGE:
                     tradeUser.setType(TradeScenceType.STORAGE_RECHARGE);
-//                    tradeUser.setUserType(TradeUserType.MARKETMAN);//默认服务员
                     break;
-                case ANONYMOUS_ENTITY_CARD_SELL_AND_RECHARGE://售卡及 充值
-                case ANONYMOUS_ENTITY_CARD_RECHARGE://临时卡售卡及 充值
-                    tradeUser.setType(TradeScenceType.SALECARD);
-//                    tradeUser.setUserType(TradeUserType.MARKETMAN);//默认服务员
+                case ANONYMOUS_ENTITY_CARD_SELL_AND_RECHARGE:                case ANONYMOUS_ENTITY_CARD_RECHARGE:                    tradeUser.setType(TradeScenceType.SALECARD);
                     break;
                 default:
-                    tradeUser.setType(TradeScenceType.SALEDISH);//卖菜
-//                    tradeUser.setUserType(TradeUserType.SALESMAN);//默认销售员
-                    break;
+                    tradeUser.setType(TradeScenceType.SALEDISH);                    break;
             }
         }
         return tradeUser;
@@ -844,34 +709,25 @@ public class PayUtils {
         tradeUser.setUserId(user.getId());
         tradeUser.setUserName(user.getName());
         tradeUser.setTradeId(trade.getId());
-        tradeUser.setStatusFlag(StatusFlag.VALID);//默认有效
-        if (trade.getBusinessType() != null) {
+        tradeUser.setStatusFlag(StatusFlag.VALID);        if (trade.getBusinessType() != null) {
             switch (trade.getBusinessType()) {
-                case CARD://售卡
-                case ANONYMOUS_ENTITY_CARD_SELL:
+                case CARD:                case ANONYMOUS_ENTITY_CARD_SELL:
                     tradeUser.setType(TradeScenceType.SALECARD);
-//                    tradeUser.setUserType(userVo.getTradeUserType());//默认服务员
                     break;
-                case ONLINE_RECHARGE://充值
-                case CARD_RECHARGE:
+                case ONLINE_RECHARGE:                case CARD_RECHARGE:
                     tradeUser.setType(TradeScenceType.STORAGE_RECHARGE);
                     break;
-                case ANONYMOUS_ENTITY_CARD_SELL_AND_RECHARGE://售卡及 充值
-                case ANONYMOUS_ENTITY_CARD_RECHARGE://临时卡售卡及 充值
-                    tradeUser.setType(TradeScenceType.SALECARD);
+                case ANONYMOUS_ENTITY_CARD_SELL_AND_RECHARGE:                case ANONYMOUS_ENTITY_CARD_RECHARGE:                    tradeUser.setType(TradeScenceType.SALECARD);
                     break;
                 default:
-                    tradeUser.setType(TradeScenceType.SALEDISH);//卖菜
-                    break;
+                    tradeUser.setType(TradeScenceType.SALEDISH);                    break;
             }
-//            tradeUser.setUserType(userVo.getTradeUserType());//默认服务员
         }
         return tradeUser;
     }
 
 
-    // 判断订单是否有会员价
-    public static boolean isTradeWithMemberPrice(TradeVo tradeVo) {
+        public static boolean isTradeWithMemberPrice(TradeVo tradeVo) {
         if (tradeVo != null && tradeVo.getTradeItemList() != null) {
             TradePrivilege tp = null;
             TradeItem tradeItem = null;
@@ -886,8 +742,7 @@ public class PayUtils {
         return false;
     }
 
-    //获取订单中的登录会员
-    public static TradeCustomer getTradeCustomer(TradeVo tradeVo) {
+        public static TradeCustomer getTradeCustomer(TradeVo tradeVo) {
         if (tradeVo != null && tradeVo.getTradeCustomerList() != null) {
             List<TradeCustomer> tradeCustomerList = tradeVo.getTradeCustomerList();
             for (TradeCustomer tradeCustomer : tradeCustomerList) {
@@ -900,17 +755,14 @@ public class PayUtils {
     }
 
 
-    //判断是否挂账
-    public static boolean isSupportLagPay(IPaymentInfo paymentInfo, boolean isSupportLag) {
+        public static boolean isSupportLagPay(IPaymentInfo paymentInfo, boolean isSupportLag) {
         if (paymentInfo != null) {
-            if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT) {//自助交押金不支持挂账
-                return false;
+            if (paymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT) {                return false;
             } else {
                 switch (paymentInfo.getTradeBusinessType()) {
                     case GROUP:
                     case DINNER:
-                        if (paymentInfo.getTradeVo().getTradeEarnestMoney() > 0) {//add v8.13 预定金不支持挂账
-                            return false;
+                        if (paymentInfo.getTradeVo().getTradeEarnestMoney() > 0) {                            return false;
                         }
                         return isSupportLag;
                     default:
@@ -932,8 +784,7 @@ public class PayUtils {
         }
     }
 
-    // 只有调用通用PayActivity 才会调用此方法 add v8.14
-    public static DoPayApi doPayApiFactory(String className) {
+        public static DoPayApi doPayApiFactory(String className) {
         if (DoPayManager.class.getSimpleName().equals(className)) {
             return DoPayManager.getInstance();
         } else {

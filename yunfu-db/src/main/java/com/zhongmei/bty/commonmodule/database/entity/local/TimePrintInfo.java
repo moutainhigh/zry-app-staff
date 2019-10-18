@@ -70,20 +70,17 @@ public class TimePrintInfo extends EntityBase<Long> {
     @Override
     public boolean isValid() {
 
-        // TODO Auto-generated method stub
-        return true;
+                return true;
     }
 
     @Override
     public Long pkValue() {
-        // TODO Auto-generated method stub
-        return id;
+                return id;
     }
 
     @Override
     public Long verValue() {
-        // TODO Auto-generated method stub
-        return null;
+                return null;
     }
 
     @Override

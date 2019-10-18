@@ -4,42 +4,25 @@ import com.zhongmei.bty.basemodule.trade.bean.DinnertableState;
 
 import java.util.List;
 
-/**
- * 用于封装作废正餐请求数据
- *
- * @version: 1.0
- * @date 2015年9月25日
- */
+
 public class RecisionDinnerReq {
 
-    /**
-     * 订单id
-     */
+
     private Long tradeId;
 
-    /**
-     * 服务器更新时间
-     */
+
     private Long serverUpdateTime;
 
-    /**
-     * 最后修改此记录的用户
-     */
+
     private Long updatorId;
 
-    /**
-     * 最后修改者姓名
-     */
+
     private String updatorName;
 
-    /**
-     * 理由id
-     */
+
     private Long reasonId;
 
-    /**
-     * 理由信息
-     */
+
     private String reasonContent;
 
     private List<DinnertableState> tables;

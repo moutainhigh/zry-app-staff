@@ -94,18 +94,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @Date：2017年6月7日 上午11:05:14
- * @Description: 点菜首页
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public abstract class DishHomePageFragment extends MobclickAgentFragment implements OnPageChangeListener, BrandTypeListener, OnClickListener {
 
     private final static String TAG = DishHomePageFragment.class.getSimpleName();
-    //索引最大个数
-    private static final int MAX_INDEX_COUNT = 7;
+        private static final int MAX_INDEX_COUNT = 7;
 
     protected ChangePageListener mChangePageListener;
 
@@ -121,17 +114,14 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     private DishBrandType mSelectDishType;
 
-    // 扫码对话框
-    private QuantityEditPopupWindow mPopupWindow;
+        private QuantityEditPopupWindow mPopupWindow;
 
     private LoadingFinish mLoadingFinish;
-    //是否允许添加临时菜
-    protected boolean isAllowAddTempDish = false;
+        protected boolean isAllowAddTempDish = false;
 
     private TempDishFragment tempDishFragment = null;
 
-    //自助餐套餐ID
-    private String mCarteUuid = null;
+        private String mCarteUuid = null;
     private boolean mIsSingle = false;
 
     private RelativeLayout mMainView;
@@ -181,9 +171,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     abstract public View getBrandTypeView();
 
-    /**
-     * 购物车事件回调
-     */
+
     private ModifyShoppingCartListener mShoppingCartListener = new ShoppingCartListener() {
         public void addToShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo, ShopcartItem mShopcartItem) {
             refreshPartVisibleGridViews(mShopcartItem);
@@ -193,16 +181,12 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             refreshAllVisibleGridViews();
         }
 
-        /**
-         * 清空购物车
-         */
+
         public void clearShoppingCart() {
             refreshAllVisibleGridViews();
         }
 
-        /**
-         * 删除购物车子项
-         */
+
         public void removeShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo,
                                        IShopcartItemBase mShopcartItemBase) {
             refreshPartVisibleGridViews(mShopcartItemBase);
@@ -231,27 +215,21 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         }
     };
 
-    /**
-     * 局部刷新viewpager中可见的GridView（一般为当前页、前一页、后一页）
-     */
+
     private void refreshPartVisibleGridViews(IShopcartItemBase iShopcartItemBase) {
         if (mAdapter != null && iShopcartItemBase != null) {
             GridView gridView = (GridView) mVpDishList.findViewById(mCurrentIndex);
             mAdapter.updateItemView(gridView, iShopcartItemBase.getSkuUuid());
 
-            // 前一页
-            GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
+                        GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
             mAdapter.updateItemView(prevGridView, iShopcartItemBase.getSkuUuid());
 
-            // 后一页
-            GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
+                        GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
             mAdapter.updateItemView(nextGridView, iShopcartItemBase.getSkuUuid());
         }
     }
 
-    /**
-     * 局部刷新viewpager中可见的GridView（一般为当前页、前一页、后一页）
-     */
+
     private void refreshPartVisibleGridViews(List<IShopcartItem> iShopcartItems) {
         if (mAdapter != null) {
             List<String> dishUuids = new ArrayList<String>();
@@ -264,51 +242,41 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             GridView gridView = (GridView) mVpDishList.findViewById(mCurrentIndex);
             mAdapter.updateItemView(gridView, dishUuids);
 
-            // 前一页
-            GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
+                        GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
             mAdapter.updateItemView(prevGridView, dishUuids);
 
-            // 后一页
-            GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
+                        GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
             mAdapter.updateItemView(nextGridView, dishUuids);
         }
     }
 
-    /**
-     * 局部刷新viewpager中可见的GridView（一般为当前页、前一页、后一页）
-     */
+
     private void refreshPartVisibleGridViews(Map<String, DishShop> dishShopMap) {
         if (mAdapter != null) {
             GridView gridView = (GridView) mVpDishList.findViewById(mCurrentIndex);
             mAdapter.updateItemView(gridView, dishShopMap);
 
-            // 前一页
-            GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
+                        GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
             mAdapter.updateItemView(prevGridView, dishShopMap);
 
-            // 后一页
-            GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
+                        GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
             mAdapter.updateItemView(nextGridView, dishShopMap);
         }
     }
 
-    /**
-     * 全局刷新viewpager中可见的GridView（一般为当前页、前一页、后一页）
-     */
+
     private void refreshAllVisibleGridViews() {
         GridView gridView = (GridView) mVpDishList.findViewById(mCurrentIndex);
         if (gridView != null && gridView.getAdapter() != null) {
             ((BaseAdapter) gridView.getAdapter()).notifyDataSetChanged();
         }
 
-        // 前一页
-        GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
+                GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
         if (prevGridView != null && prevGridView.getAdapter() != null) {
             ((BaseAdapter) prevGridView.getAdapter()).notifyDataSetChanged();
         }
 
-        // 后一页
-        GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
+                GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
         if (nextGridView != null && nextGridView.getAdapter() != null) {
             ((BaseAdapter) nextGridView.getAdapter()).notifyDataSetChanged();
         }
@@ -390,14 +358,11 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     }
 
     private void dealDishVo(DishVo dishVo) {
-        //是否是联台主单
-        boolean isUnionMainTrade = mShoppingCart.getOrder().isUnionMainTrade();
-        //如果多规格菜品默认菜品被估清，那么从系列菜品中找到一个未被估清的菜品加入到购物车
-        if (dishVo.isContainProperties() && dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
+                boolean isUnionMainTrade = mShoppingCart.getOrder().isUnionMainTrade();
+                if (dishVo.isContainProperties() && dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
             DishShop dishShop;
             if (isUnionMainTrade) {
-                //联台主单只能找非称重的商品
-                dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
+                                dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
             } else {
                 dishShop = dishVo.getLeastResidueFromOtherDishs();
             }
@@ -406,8 +371,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         } else {
             if (dishVo.getDishShop().getSaleType() == SaleType.WEIGHING) {
                 if (isUnionMainTrade) {
-                    //联台主单获取其他规格的非称重商品，商品无多规格或者其他规格内找不到，提示联台主单不能添加称重商品
-                    DishShop dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
+                                        DishShop dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
                     if (dishShop != null) {
                         addOtherStandardSingleDish(dishVo, dishShop);
                     } else {
@@ -417,22 +381,16 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
                     addSingleDish(dishVo);
                 }
             } else {
-                if (dishVo.isCombo()) {// 套餐
-                    addUnweighCombo(dishVo);
+                if (dishVo.isCombo()) {                    addUnweighCombo(dishVo);
                 } else if(dishVo.isServerComBoPart()){
                     addServerComboPart(dishVo);
-                }else {// 直接添加购物车
-                    addSingleDish(dishVo);
+                }else {                    addSingleDish(dishVo);
                 }
             }
         }
     }
 
-    /**
-     * 添加单菜
-     *
-     * @param dishVo
-     */
+
     private void addSingleDish(DishVo dishVo) {
         if (dishVo.getDishShop().getSaleType() == SaleType.WEIGHING) {
             ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
@@ -446,24 +404,15 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         }
     }
 
-    /**
-     * 获取称重数量编辑框背景宽度
-     *
-     * @return
-     */
+
     protected int getQuanPopLeftWidth() {
         return -1;
     }
 
-    /**
-     * 添加非称重套餐
-     *
-     * @param dishVo
-     */
+
     private void addUnweighCombo(DishVo dishVo) {
         if (mChangePageListener != null) {
-            // 构建一个套餐壳购物车
-            ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
+                        ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
             shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
             mShoppingCart.addDishToShoppingCart(shopcartItem, false);
 
@@ -476,22 +425,16 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     }
 
 
-    /**
-     * 次卡服务部分
-     * @param dishVo
-     */
+
     private void addServerComboPart(DishVo dishVo) {
         if (mChangePageListener != null) {
-            // 构建一个套餐壳购物车
-            ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
+                        ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
             shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
 
-            //查询所有的此卡服务子商品
-            List<DishSetmeal> dishSetmeals = DishCache.getSetmealHolder().getDishSetmealByDishId(dishVo.getDishShop().getId());
+                        List<DishSetmeal> dishSetmeals = DishCache.getSetmealHolder().getDishSetmealByDishId(dishVo.getDishShop().getId());
 
             if(Utils.isNotEmpty(dishSetmeals)){
-                //添加到购物车
-                List<SetmealShopcartItem> dishChildMeals=new ArrayList<>();
+                                List<SetmealShopcartItem> dishChildMeals=new ArrayList<>();
                 for (DishSetmeal dishSetmeal : dishSetmeals) {
                     DishShop dishShop=DishCache.getDishHolder().get(dishSetmeal.getChildDishId());
                     if(dishShop==null){
@@ -512,12 +455,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         }
     }
 
-    /**
-     * 添加dishvo里其他规格的单菜菜品
-     *
-     * @param dishVo
-     * @param dishShop
-     */
+
     private void addOtherStandardSingleDish(DishVo dishVo, DishShop dishShop) {
         if (dishShop == null) {
             return;
@@ -540,8 +478,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     public void myGridItemLongClicked(final DishVo dishVo) {
         if (dishVo.isContainProperties()) {
-            // 弹出估清界面
-            OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
+                        OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
             orderDishClearStatusFragment.setData(dishVo);
             orderDishClearStatusFragment.setOnCloseListener(new OnCloseListener() {
 
@@ -568,19 +505,12 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         }
     }
 
-    /**
-     * @Title: requestClearStatus
-     * @Description: 请求更改估清状态
-     * @Param @param dishShop TODO
-     * @Return void 返回类型
-     */
+
     private void requestClearStatus(final DishVo dishVo, final ClearStatus newValue) {
         List<String> dishUuids = new ArrayList<String>();
         dishUuids.add(dishVo.getDishShop().getUuid());
 
-        /*
-         * 估清请求结果
-         */
+
         ResponseListener<Boolean> listener = new ResponseListener<Boolean>() {
 
             @Override
@@ -605,11 +535,6 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
                         ToastUtil.showLongToast(info);
                     }
 
-//                    if (newValue == ClearStatus.SALE) {
-//                        ToastUtil.showLongToast(R.string.nClearstatus);
-//                    } else {
-//                        ToastUtil.showLongToast(R.string.yClearstatus);
-//                    }
                 } else if (1100 == response.getStatusCode()) {
                     if (newValue == ClearStatus.SALE) {
                         ToastUtil.showLongToast(R.string.nClearstatusNeedSync);
@@ -719,8 +644,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
                 if (Utils.isNotEmpty(dishInfo.dishList)) {
                     mAdapter.setDataSet(dishInfo.dishList);
                     createIndex(mCurrentIndex, mAdapter.getCount());
-                    //每次切换中类后，默认回到第一页
-                    mVpDishList.setCurrentItem(0, false);
+                                        mVpDishList.setCurrentItem(0, false);
                     mVpDishList.setVisibility(View.VISIBLE);
                     mLlDots.setVisibility(View.VISIBLE);
                     mIvDishTypeEmpty.setVisibility(View.GONE);
@@ -749,8 +673,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             mLoadingFinish.loadingFinish();
 
 
-        mVBrandType.setVisibility(isBuyServerBusiness()?View.GONE:View.VISIBLE);//如果是购买服务，不显示种类选择框
-
+        mVBrandType.setVisibility(isBuyServerBusiness()?View.GONE:View.VISIBLE);
         UserActionEvent.end(UserActionEvent.DINNER_DISH_DISPLAY);
     }
 
@@ -775,8 +698,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     }
 
     private void setTempDishBtn() {
-        //查询是否设置了临时菜
-        isAllowAddTempDish = mDishManager.isHasTempDish();
+                isAllowAddTempDish = mDishManager.isHasTempDish();
         if (isAllowAddTempDish) {
             mBtnTempDish.setVisibility(View.VISIBLE);
         } else {
@@ -784,9 +706,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         }
     }
 
-    /**
-     * 计算整个GridView高度，GridView高度=屏幕高度(不包含底部导航栏)-titlebar高度-底部索引栏高度
-     */
+
     protected int calculateGridHeight() {
         int height = getResources().getDisplayMetrics().heightPixels;
         int titlebarHeight = getResources().getDimensionPixelSize(R.dimen.status_bar_height);
@@ -804,11 +724,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         MobclickAgentEvent.onEvent(getActivity(), MobclickAgentEvent.dinnerOrderDishSearch);
     }
 
-    /**
-     * 剩余可售数量变化
-     *
-     * @param event
-     */
+
     public void onEventMainThread(EventDishChangedNotice event) {
         if (event != null) {
             refreshPartVisibleGridViews(event.residueTotalChangedMap);
@@ -816,14 +732,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     }
 
 
-    /**
-     * 创建索引
-     *
-     * @Title: createIndex
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void createIndex(int currentIndex, int totalSize) {
         mLlDots.removeAllViews();
 
@@ -864,11 +773,9 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             mLlDots.getChildAt(currentIndex).setSelected(true);
         }
 
-        //设置scrollview宽度
-        ViewGroup.LayoutParams layoutParams = mHsvDots.getLayoutParams();
+                ViewGroup.LayoutParams layoutParams = mHsvDots.getLayoutParams();
         if (totalSize > MAX_INDEX_COUNT) {
-            //最多显示五个半
-            layoutParams.width = DensityUtil.dip2px(MainApplication.getInstance(), 29) * MAX_INDEX_COUNT +
+                        layoutParams.width = DensityUtil.dip2px(MainApplication.getInstance(), 29) * MAX_INDEX_COUNT +
                     DensityUtil.dip2px(MainApplication.getInstance(), 10) * MAX_INDEX_COUNT;
         } else {
             layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -897,18 +804,15 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     public void onPageSelected(int position) {
         columnSelectIndex = position;
         for (int i = 0; i < mLlDots.getChildCount(); i++) {
-            //拿到被选中的视图
-            View checkView = mLlDots.getChildAt(position);
+                        View checkView = mLlDots.getChildAt(position);
             if (checkView == null) continue;
 
             int k = checkView.getMeasuredWidth();
             int l = checkView.getLeft();
             int i2 = l + k / 2 - maxWidth / 2;
-            //滚动View
-            mHsvDots.smoothScrollTo(i2, 0);
+                        mHsvDots.smoothScrollTo(i2, 0);
         }
-        //判断是否选中
-        for (int j = 0; j < mLlDots.getChildCount(); j++) {
+                for (int j = 0; j < mLlDots.getChildCount(); j++) {
             View checkView = mLlDots.getChildAt(j);
             boolean isCheck;
             if (j == position) {
@@ -929,11 +833,8 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
         @Override
         public void dataChange(ShopcartItem shopcartItem, boolean isContainProperties) {
-            // TODO Auto-generated method stub
-            if (shopcartItem.getOrderDish().isCombo()) {// 套餐
-                if (mChangePageListener != null) {
-                    // 构建一个套餐壳购物车
-                    shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
+                        if (shopcartItem.getOrderDish().isCombo()) {                if (mChangePageListener != null) {
+                                        shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
                     mShoppingCart.addDishToShoppingCart(shopcartItem, false);
 
                     Bundle bundle = new Bundle();
@@ -980,8 +881,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             return;
         }
         MobclickAgentEvent.onEvent(UserActionCode.ZC020012);
-        //添加临时菜
-        tempDishFragment = new TempDishFragment_();
+                tempDishFragment = new TempDishFragment_();
         tempDishFragment.setDishVo(mDishManager.getTempDishVo());
         tempDishFragment.show(getFragmentManager(), "TempDishFragment");
     }
@@ -994,9 +894,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         }
     }
 
-    /**
-     * 隐藏临时菜、估清列表、扫码枪等按钮
-     */
+
     protected void hideControlBtn() {
         isAllowAddTempDish = false;
         mBtnTempDish.setVisibility(View.GONE);
@@ -1020,15 +918,13 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
                         mAdapter.updateItemInventory(gridView, inventoryInfoMap);
                     }
 
-                    // 前一页
-                    View prevView = mVpDishList.findViewById(mCurrentIndex - 1);
+                                        View prevView = mVpDishList.findViewById(mCurrentIndex - 1);
                     if (prevView != null) {
                         GridView prevGridView = (GridView) prevView;
                         mAdapter.updateItemInventory(prevGridView, inventoryInfoMap);
                     }
 
-                    // 后一页
-                    View nextView = mVpDishList.findViewById(mCurrentIndex + 1);
+                                        View nextView = mVpDishList.findViewById(mCurrentIndex + 1);
                     if (nextView != null) {
                         GridView nextGridView = (GridView) nextView;
                         mAdapter.updateItemInventory(nextGridView, inventoryInfoMap);

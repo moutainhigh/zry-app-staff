@@ -46,13 +46,9 @@ public class DishQuantityAndSeatEditDialogFragment extends CommonDialogFragment 
     public LinearLayout ll_property;
 
     @ViewById(resName = "print_kitchen_cb")
-    public CheckBox printKitchenCb;//是否传送后厨
+    public CheckBox printKitchenCb;
 
-    //@ViewById(resName = "copy_dish_property_cb")
-    //public CheckBox copyDishPropertyCb;//是否复制菜品属性
 
-  /*  @ViewById(resName = "ib_close)
-    ImageButton ib_close;*/
 
     public List<DishQuantityBean> mDishQuantityBeans = new ArrayList<>();
 
@@ -66,27 +62,20 @@ public class DishQuantityAndSeatEditDialogFragment extends CommonDialogFragment 
     protected void initView() {
         super.initView();
         super.mNegativeButton.setText("");
-        //初始化数据
-        mDishQuantityAdapter = new DishQuantityAdapter(getActivity(), getFragmentManager(), mDishQuantityBeans);
+                mDishQuantityAdapter = new DishQuantityAdapter(getActivity(), getFragmentManager(), mDishQuantityBeans);
         mDishQuantityAdapter.setOnQuantityChangeListener(this);
         mDishQuantityAdapter.setTableSeats(mTableSeats);
         mDishQuantityAdapter.setmOperateType(mOperateType);
         lv_dishQuantity.setAdapter(mDishQuantityAdapter);
-//        setListViewHeightBasedOnChildren(lv_dishQuantity);
         showProperty();
         showHeaddTitle();
-//        mPositiveButton.setTag(R.id.dinner_table_dish_data,mDishQuantityBeans);
-//        mPositiveButton.setTag(R.id.dinner_table_dish_property,new CheckBox[]{printKitchenCb,copyDishPropertyCb});
-        //ib_close.setOnClickListener(this);
-    }
+            }
 
     public void setmOperateType(OperateType mOperateType) {
         this.mOperateType = mOperateType;
     }
 
-    /**
-     * 是否选中后厨，复制菜品属性
-     */
+
     private void showProperty() {
         if (mOperateType != null && mOperateType == OperateType.COPY_DISH) {
             ll_property.setVisibility(View.VISIBLE);
@@ -125,32 +114,23 @@ public class DishQuantityAndSeatEditDialogFragment extends CommonDialogFragment 
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {
-        // 获取ListView对应的Adapter
-        ListAdapter listAdapter = listView.getAdapter();
+                ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
             return;
         }
         int totalHeight = 0;
         if (listAdapter.getCount() < 5) {
-            for (int i = 0; i < listAdapter.getCount(); i++) { // listAdapter.getCount()返回数据项的数目
-                View listItem = listAdapter.getView(i, null, listView);
-                listItem.measure(0, 0); // 计算子项View 的宽高
-                totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
-            }
+            for (int i = 0; i < listAdapter.getCount(); i++) {                 View listItem = listAdapter.getView(i, null, listView);
+                listItem.measure(0, 0);                 totalHeight += listItem.getMeasuredHeight();             }
         } else {
-            for (int i = 0; i < 5; i++) { // listAdapter.getCount()返回数据项的数目
-                View listItem = listAdapter.getView(i, null, listView);
-                listItem.measure(0, 0); // 计算子项View 的宽高
-                totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
-            }
+            for (int i = 0; i < 5; i++) {                 View listItem = listAdapter.getView(i, null, listView);
+                listItem.measure(0, 0);                 totalHeight += listItem.getMeasuredHeight();             }
         }
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight
                 + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        // listView.getDividerHeight()获取子项间分隔符占用的高度
-        // params.height最后得到整个ListView完整显示需要的高度
-        listView.setLayoutParams(params);
+                        listView.setLayoutParams(params);
     }
 
     @Override
@@ -166,12 +146,7 @@ public class DishQuantityAndSeatEditDialogFragment extends CommonDialogFragment 
 
     }
 
-    /**
-     * 设置座位号名称
-     *
-     * @param position
-     * @param seatName
-     */
+
     @Override
     public void onChoiceSeats(int position, String seatName) {
         View contentView = (View) lv_dishQuantity.getChildAt(position - lv_dishQuantity.getFirstVisiblePosition());
@@ -210,11 +185,7 @@ public class DishQuantityAndSeatEditDialogFragment extends CommonDialogFragment 
 
     @Override
     public void onClick(View view) {
-        /*switch (view.getId()) {
-            case R.id.ib_close:
-                dismiss();
-                break;
-        }*/
+
         super.onClick(view);
     }
 }

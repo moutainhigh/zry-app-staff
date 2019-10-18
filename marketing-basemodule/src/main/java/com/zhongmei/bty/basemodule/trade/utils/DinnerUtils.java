@@ -14,17 +14,11 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DinnerUtils {
 
-    /**
-     * 是否是西餐样式
-     *
-     * @return
-     */
+
     public static boolean isWestStyle() {
         DinnerWesternIPanelSettings iPanelSettings = SettingManager.getSettings(DinnerWesternIPanelSettings.class);
         int currentPanel = iPanelSettings.getPanel();
@@ -34,11 +28,7 @@ public class DinnerUtils {
         return false;
     }
 
-    /**
-     * 西餐界面显示是否是中类排序
-     *
-     * @return
-     */
+
     public static boolean isMediumStyle() {
         DinnerWesternDishSortSettings iPanelSettings = SettingManager.getSettings(DinnerWesternDishSortSettings.class);
         int currentPanel = iPanelSettings.getType();
@@ -48,11 +38,7 @@ public class DinnerUtils {
         return false;
     }
 
-    /**
-     * 按中类排序显示
-     *
-     * @return
-     */
+
     public static boolean isServingStyle() {
         DinnerWesternDishSortSettings iPanelSettings = SettingManager.getSettings(DinnerWesternDishSortSettings.class);
         int currentPanel = iPanelSettings.getType();
@@ -62,13 +48,7 @@ public class DinnerUtils {
         return false;
     }
 
-    /**
-     * 获取菜品列表中单菜和套餐外壳的id
-     *
-     * @Title: getSingleAndComboUuids
-     * @Param @param dishDataItems
-     * @Return List<String> 返回类型
-     */
+
     public static List<String> getSingleAndComboUuids(List<DishDataItem> dishDataItems) {
         List<String> selectedItemUuids = new ArrayList<String>();
         for (DishDataItem item : dishDataItems) {
@@ -120,13 +100,7 @@ public class DinnerUtils {
         return selectedItemUuids;
     }
 
-    /**
-     * 取未保存的操作
-     *
-     * @param iShopcartItem
-     * @param opType
-     * @return
-     */
+
     private static boolean isAddOpType(ISetmealShopcartItem iShopcartItem, PrintOperationOpType opType) {
         List<TradeItemOperation> operations = iShopcartItem.getTradeItemOperations();
         if (operations == null || operations.isEmpty())

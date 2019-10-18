@@ -24,9 +24,7 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.commonmodule.R;
 import com.zhongmei.bty.commonmodule.view.calendar.CalendarView.OnItemClickListener;
 
-/**
- * @date 2015年8月4日下午4:52:59
- */
+
 public class CalendarDialog extends Dialog implements CalendarView.OnMonthChangeListener, OnKeyListener {
     private static final String TAG = CalendarDialog.class.getSimpleName();
 
@@ -124,13 +122,11 @@ public class CalendarDialog extends Dialog implements CalendarView.OnMonthChange
             }
         });
 
-        // 获取日历中年月 ya[0]为年，ya[1]为月（格式大家可以自行在日历控件中改）
-        calendarLeft.setOnClickListener(new View.OnClickListener() {
+                calendarLeft.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // 点击上一月 同样返回年月
-                mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
+                                mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
             }
         });
 
@@ -138,8 +134,7 @@ public class CalendarDialog extends Dialog implements CalendarView.OnMonthChange
 
             @Override
             public void onClick(View v) {
-                // 点击下一月
-                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
+                                mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
             }
         });
     }
@@ -165,8 +160,7 @@ public class CalendarDialog extends Dialog implements CalendarView.OnMonthChange
                         calendarView.clearSelect();
                     }
                 }
-                // 扩展某些查询的功能需要
-                if (queryListener != null && currentDate != null) {
+                                if (queryListener != null && currentDate != null) {
                     queryListener.onQuery(currentDate);
                 }
             }
@@ -182,9 +176,7 @@ public class CalendarDialog extends Dialog implements CalendarView.OnMonthChange
         });
     }
 
-    /**
-     * 计算方向
-     */
+
     private void measureDirection(int position) {
 
         if (position > mCurrentIndex) {
@@ -196,8 +188,7 @@ public class CalendarDialog extends Dialog implements CalendarView.OnMonthChange
         mCurrentIndex = position;
     }
 
-    // 更新日历视图
-    private void updateCalendarView(int position) {
+        private void updateCalendarView(int position) {
         mShowViews = adapter.getAllItems();
         if (mDirection == SildeDirection.RIGHT) {
             mShowViews[position % mShowViews.length].clickRightMonth();
@@ -231,9 +222,7 @@ public class CalendarDialog extends Dialog implements CalendarView.OnMonthChange
         markDateList = null;
     }
 
-    /**
-     * 设置默认选中的日期
-     */
+
     public void setDefaultSelected(Date date) {
         this.defaultSeDate = date;
     }
@@ -270,11 +259,7 @@ public class CalendarDialog extends Dialog implements CalendarView.OnMonthChange
         }
     }
 
-    /**
-     * 是否比当前月早
-     *
-     * @return 早返回true
-     */
+
     private boolean isEarly(Date date) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());

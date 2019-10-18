@@ -19,9 +19,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyTradeResp implements Serializable {
     private Trade trade;
@@ -38,8 +36,7 @@ public class BeautyTradeResp implements Serializable {
     private List<TradeTax> tradeTaxs;
     private List<TradeTable> tradeTables;
 
-    //次卡服务关联表
-    private List<TradePrivilegeLimitNumCard> tradePrivilegeLimitNumCards;
+        private List<TradePrivilegeLimitNumCard> tradePrivilegeLimitNumCards;
 
     private List<TradePrivilegeApplet> tradePrivilegeApplets;
 

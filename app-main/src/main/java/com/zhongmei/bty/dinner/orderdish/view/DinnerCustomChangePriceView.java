@@ -17,9 +17,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 
 @EViewGroup(R.layout.dinner_custom_changeprice)

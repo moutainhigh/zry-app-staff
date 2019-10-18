@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class RulePlanHolder extends BasicHolder<LoytMrulePlan> {
 
     public RulePlanHolder() {

@@ -2,15 +2,11 @@ package com.zhongmei.bty.basemodule.trade.message;
 
 import java.util.List;
 
-/**
- * 批量解绑优惠券接口请求体
- */
+
 public class TradeBatchUnbindCouponReq {
     private Long tradeId;
-    private String tradeUuid;//可选参数，用于快餐异步机制
-    private List<Long> tradePrivilegeIds;
-    private List<String> tradePrivilegeUuids;//可选参数，用于快餐异步机制
-
+    private String tradeUuid;    private List<Long> tradePrivilegeIds;
+    private List<String> tradePrivilegeUuids;
     public Long getTradeId() {
         return tradeId;
     }

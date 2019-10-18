@@ -14,14 +14,11 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Date：2018/6/5 14:54
- */
+
 public abstract class MobilePayModeChoosePagerAdapter extends PagerAdapter {
     private static final String TAG = MobilePayModeChoosePagerAdapter.class.getSimpleName();
 
-    public static final int PAGE_SIZE = 3;// 每页显示队列
-
+    public static final int PAGE_SIZE = 3;
     public List<MobilePayMenuItem> menuItemList;
 
     private Context mContext;
@@ -58,10 +55,8 @@ public abstract class MobilePayModeChoosePagerAdapter extends PagerAdapter {
         List<MobilePayMenuItem> subList = getSubDataSet(position);
         int size = subList.size();
         for (int i = 0; i < size; i++) {
-            // 数据
-            final MobilePayMenuItem data = subList.get(i);
-            // 控件
-            TextView itemView = itemViews[i];
+                        final MobilePayMenuItem data = subList.get(i);
+                        TextView itemView = itemViews[i];
             itemView.setText(subList.get(i).menuName);
             itemView.setTag(data);
             itemView.setVisibility(View.VISIBLE);
@@ -105,11 +100,7 @@ public abstract class MobilePayModeChoosePagerAdapter extends PagerAdapter {
         }
     }
 
-    /**
-     * 选择桌位数
-     *
-     * @param data
-     */
+
     public abstract void selectArea(MobilePayMenuItem data);
 
     @Override
@@ -131,10 +122,7 @@ public abstract class MobilePayModeChoosePagerAdapter extends PagerAdapter {
         notifyDataSetChanged();
     }
 
-    /**
-     * @param position
-     * @return
-     */
+
     private List<MobilePayMenuItem> getSubDataSet(int position) {
         int start = position * PAGE_SIZE;
         int end = Math.min((position + 1) * PAGE_SIZE, menuItemList.size());

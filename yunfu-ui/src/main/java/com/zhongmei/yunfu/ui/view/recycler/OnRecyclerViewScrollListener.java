@@ -5,9 +5,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class OnRecyclerViewScrollListener extends RecyclerView.OnScrollListener {
 
@@ -37,8 +35,7 @@ public class OnRecyclerViewScrollListener extends RecyclerView.OnScrollListener 
         super.onScrolled(recyclerView, dx, dy);
 
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-        //  int lastVisibleItemPosition = -1;
-        if (layoutManagerType == null) {
+                if (layoutManagerType == null) {
             if (layoutManager instanceof LinearLayoutManager) {
                 layoutManagerType = LAYOUT_MANAGER_TYPE.LINEAR;
             } else if (layoutManager instanceof GridLayoutManager) {
@@ -100,8 +97,7 @@ public class OnRecyclerViewScrollListener extends RecyclerView.OnScrollListener 
     }
 
     public interface CallBack {
-        //底部
-        public void onBottom();
+                public void onBottom();
     }
 }
 

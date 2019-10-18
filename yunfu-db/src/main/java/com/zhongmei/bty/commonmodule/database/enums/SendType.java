@@ -2,27 +2,15 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum SendType implements ValueEnum<Integer> {
 
-    /**
-     * 固定金额
-     */
+
     FIXED(1),
-    /**
-     * 比例
-     */
+
     RATIO(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

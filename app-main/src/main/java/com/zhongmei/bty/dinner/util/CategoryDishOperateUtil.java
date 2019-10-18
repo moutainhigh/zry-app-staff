@@ -28,11 +28,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date： 17/9/15
- * @Description:
- * @Version: 1.0
- */
+
 public class CategoryDishOperateUtil implements View.OnClickListener, DishOptListener {
 
     private static final String TAG = CategoryDishOperateUtil.class.getSimpleName();
@@ -41,36 +37,24 @@ public class CategoryDishOperateUtil implements View.OnClickListener, DishOptLis
 
     private View mParentView;
 
-    //内容栏位
-    private FrameLayout vContent;
-    //菜品数量
-    private CustomDishQuantityView vDishQuantity;
-    //规格
-    private Button btnStandard;
-    //做法
-    protected Button btnProperty;
-    //单品备注
-    private Button btnRemark;
-    //加料
-    protected Button btnExtra;
-    //变价
-    private Button btnChangePrice;
-    //分割线
-    private View vDivideLine;
+        private FrameLayout vContent;
+        private CustomDishQuantityView vDishQuantity;
+        private Button btnStandard;
+        protected Button btnProperty;
+        private Button btnRemark;
+        protected Button btnExtra;
+        private Button btnChangePrice;
+        private View vDivideLine;
 
     private Button btnDeleteItem;
 
     private Button btnPausePrint;
 
-    // 重打厨总
-    private Button btnReprintKitchenAll;
+        private Button btnReprintKitchenAll;
 
-    // 重打堂口
-    private Button btnReprintKitchenCell;
-    //    赠送
-    private Button btnGive;
-    //换菜
-    private Button btn_replace;
+        private Button btnReprintKitchenCell;
+        private Button btnGive;
+        private Button btn_replace;
 
     private Button btnWakeup;
     private Button btnWakeupCancel;
@@ -80,9 +64,7 @@ public class CategoryDishOperateUtil implements View.OnClickListener, DishOptLis
 
     private Map<String, List<TradeItemOperation>> mUnOpItemOperation = new HashMap<>();
 
-    /**
-     * 空态页
-     */
+
     private CustomEmptyView mCustomEmptyView;
 
 
@@ -121,10 +103,8 @@ public class CategoryDishOperateUtil implements View.OnClickListener, DishOptLis
         btnDeleteItem = (Button) mParentView.findViewById(R.id.btn_delete);
         btnPausePrint = (Button) mParentView.findViewById(R.id.btn_pause);
         btnGive = (Button) mParentView.findViewById(R.id.btn_give);
-        //重打堂口
-        btnReprintKitchenCell = (Button) mParentView.findViewById(R.id.btn_reprint_kitchen_cell);
-        //重打厨打
-        btnReprintKitchenAll = (Button) mParentView.findViewById(R.id.btn_reprint_kitchen_all);
+                btnReprintKitchenCell = (Button) mParentView.findViewById(R.id.btn_reprint_kitchen_cell);
+                btnReprintKitchenAll = (Button) mParentView.findViewById(R.id.btn_reprint_kitchen_all);
         btn_replace = (Button) mParentView.findViewById(R.id.btn_replace);
 
         btnWakeup = (Button) mParentView.findViewById(R.id.btn_prepare);
@@ -166,8 +146,7 @@ public class CategoryDishOperateUtil implements View.OnClickListener, DishOptLis
     }
 
     private void setDishDataItems(List<DishDataItem> items) {
-        //过滤未生效的item
-        canMake = false;
+                canMake = false;
         canMakeCancel = false;
         canWakeup = false;
         canWakeupCancel = false;
@@ -178,21 +157,14 @@ public class CategoryDishOperateUtil implements View.OnClickListener, DishOptLis
             while (iterator.hasNext()) {
                 DishDataItem item = iterator.next();
                 IShopcartItemBase shopcartItemBase = item.getBase();
-                //无效菜品不计入判断,并移出
-                if (shopcartItemBase == null || shopcartItemBase.getStatusFlag() == StatusFlag.INVALID) {
+                                if (shopcartItemBase == null || shopcartItemBase.getStatusFlag() == StatusFlag.INVALID) {
                     iterator.remove();
                     continue;
                 }
                 if (item.getType() != ItemType.SINGLE && item.getType() != ItemType.COMBO && item.getType() != ItemType.WEST_CHILD) {
                     continue;
                 }
-                /*
-                if(Utils.isEmpty(item.getBase().getTradeItemOperations())){
-                    canWakeup = true;
-                    canMake = true;
-                    continue;
-                }
-                */
+
 
                 if (DinnerTradeItemManager.getInstance().getDishCheckStatus(item, PrintOperationOpType.WAKE_UP) == DishDataItem.DishCheckStatus.NOT_CHECK)
                     canWakeup = true;
@@ -236,26 +208,22 @@ public class CategoryDishOperateUtil implements View.OnClickListener, DishOptLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_prepare:      //等叫
-            {
+            case R.id.btn_prepare:                  {
                 backuDishpDataItems(items);
                 DinnerTradeItemManager.getInstance().dishOperation(PrintOperationOpType.WAKE_UP, getOptDish(PrintOperationOpType.WAKE_UP), mActivity.getSupportFragmentManager(), this);
                 break;
             }
-            case R.id.btn_make:         //起菜
-            {
+            case R.id.btn_make:                     {
                 backuDishpDataItems(items);
                 DinnerTradeItemManager.getInstance().dishOperation(PrintOperationOpType.RISE_DISH, getOptDish(PrintOperationOpType.RISE_DISH), mActivity.getSupportFragmentManager(), this);
                 break;
             }
-            case R.id.btn_cancel_prepare:   //取消等叫
-            {
+            case R.id.btn_cancel_prepare:               {
                 backuDishpDataItems(items);
                 DinnerTradeItemManager.getInstance().dishOperation(PrintOperationOpType.WAKE_UP_CANCEL, getOptDish(PrintOperationOpType.WAKE_UP_CANCEL), mActivity.getSupportFragmentManager(), this);
                 break;
             }
-            case R.id.btn_cancel_make:      //取消起菜
-            {
+            case R.id.btn_cancel_make:                  {
                 backuDishpDataItems(items);
                 DinnerTradeItemManager.getInstance().dishOperation(PrintOperationOpType.RISE_DISH_CANCEL, getOptDish(PrintOperationOpType.RISE_DISH_CANCEL), mActivity.getSupportFragmentManager(), this);
                 break;
@@ -307,8 +275,7 @@ public class CategoryDishOperateUtil implements View.OnClickListener, DishOptLis
         if (mListener != null) {
             mListener.closePage(null);
         }
-        //setDishDataItems(items);
-    }
+            }
 
     @Override
     public void onFail(PrintOperationOpType type, List<DishDataItem> dataItems) {

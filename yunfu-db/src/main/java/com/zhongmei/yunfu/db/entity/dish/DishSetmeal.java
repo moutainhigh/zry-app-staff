@@ -9,87 +9,55 @@ import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * DishSetmeal is a ORMLite bean type. Corresponds to the database table "dish_setmeal"
- */
+
 @DatabaseTable(tableName = "dish_setmeal")
 public class DishSetmeal extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "dish_setmeal"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * child_dish_id
-         */
+
         public static final String childDishId = "child_dish_id";
 
-        /**
-         * child_dish_type
-         */
+
         public static final String childDishType = "child_dish_type";
 
-        /**
-         * combo_dish_type_id
-         */
+
         public static final String comboDishTypeId = "combo_dish_type_id";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * dish_id
-         */
+
         public static final String dishId = "dish_id";
 
-        /**
-         * is_default
-         */
+
         public static final String isDefault = "is_default";
 
-        /**
-         * is_multi
-         */
+
         public static final String isMulti = "is_multi";
 
-        /**
-         * is_replace
-         */
+
         public static final String isReplace = "is_replace";
 
-        /**
-         * least_cell_num
-         */
+
         public static final String leastCellNum = "least_cell_num";
 
-        /**
-         * price
-         */
+
         public static final String price = "price";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

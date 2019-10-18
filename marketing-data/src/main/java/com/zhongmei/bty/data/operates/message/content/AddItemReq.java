@@ -5,9 +5,7 @@ import com.zhongmei.bty.basemodule.orderdish.entity.AddItemRecord;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AddItemReq {
 
@@ -16,8 +14,7 @@ public class AddItemReq {
     private long batchId;
     private long tradeId;
     private String updatorName;
-    private List<AddItemRecord> weixinAddItemInfo;//只需要id,serviceUpdateTime;
-    private TradeReq trade;
+    private List<AddItemRecord> weixinAddItemInfo;    private TradeReq trade;
     public Integer genBatchNo;
 
     public long getUpdatorId() {

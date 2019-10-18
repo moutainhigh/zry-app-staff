@@ -5,47 +5,31 @@ import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.DataEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 
-/**
- * TradeItemLog is a ORMLite bean type. Corresponds to the database table "trade_item_log"
- */
+
 @DatabaseTable(tableName = "trade_item_log")
 public class TradeItemLog extends DataEntityBase implements ICreator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_item_log"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * quantity
-         */
+
         public static final String quantity = "quantity";
 
-        /**
-         * reason_content
-         */
+
         public static final String reasonContent = "reason_content";
 
-        /**
-         * trade_item_id
-         */
+
         public static final String tradeItemId = "trade_item_id";
 
-        /**
-         * trade_item_uuid
-         */
+
         public static final String tradeItemUuid = "trade_item_uuid";
 
     }

@@ -47,17 +47,13 @@ import com.zhongmei.bty.mobilepay.utils.DoPayUtils;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 银联支付输入界面
- */
+
 
 public class UnionFragment extends BasePayFragment implements PosConnectManager.PosConnectListener, View.OnClickListener, PayView {
     private final String TAG = UnionFragment.class.getSimpleName();
     private Context mContext;
     private PayKeyPanel mNumberKeyBorad;
-    private PosConnectManager mPosConnectManager;// 银联pos连接管理
-
+    private PosConnectManager mPosConnectManager;
     private TextView mUnionPayUnreceived;
     private LinearLayout mInputLayout;
     private RelativeLayout mInput;
@@ -80,8 +76,7 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // mPaymentInfo = (IPaymentInfo) getArguments().getSerializable("paymentInfo");
-    }
+            }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -116,8 +111,7 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
         updateNotPayMent();
         registerEventBus();
         setVewEvents();
-        getCurrentPosStatus();// 刷新pos连接情况
-    }
+        getCurrentPosStatus();    }
 
     private void assignViews(View view) {
         mUnionPayUnreceived = (TextView) view.findViewById(R.id.union_pay_unreceived);
@@ -139,10 +133,8 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
             mNumberKeyBorad.setEnabled(true);
             DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
         } else {
-            //隐藏时清空已输入金额
-            clearInputData();
-           /* DisplayServiceManager.updateDisplay(getActivity().getApplicationContext(),
-                    DisplayServiceManager.buildPayMessage(DisplayUserInfo.COMMAND_CACEL, ""));*/
+                        clearInputData();
+
         }
         super.onHiddenChanged(hidden);
     }
@@ -153,8 +145,7 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
         if (vId == R.id.pay) {
             if (!ClickManager.getInstance().isClicked()) {
                 if (doPayChecked(false)) {
-                    //准备支付
-                    preparePay();
+                                        preparePay();
                 }
             }
         } else if (vId == R.id.cash_pay_edit_value) {
@@ -166,19 +157,13 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
         }
     }
 
-    /**
-     * 设置编辑框改变事件
-     */
+
     private void setVewEvents() {
-        //modify 20180309
-        mCashPayEditValue.addTextChangedListener(new CashEditTextWatcher(this, this.mPaymentInfo, mCashPayEditValue, ShopInfoCfg.getInstance().getCurrencySymbol()));
+                mCashPayEditValue.addTextChangedListener(new CashEditTextWatcher(this, this.mPaymentInfo, mCashPayEditValue, ShopInfoCfg.getInstance().getCurrencySymbol()));
 
     }
 
-    /**
-     * @Description: 刷新pos连接情况
-     * @Return void 返回类型
-     */
+
     private void getCurrentPosStatus() {
         if (PaySettingCache.isUnionpay()) {
             updatePosStatusIcon(PosConnectManager.isPosConnected());
@@ -205,7 +190,6 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
                 if (isOK) {
                     mNumberKeyBorad.setEnabled(true);
                     mCashPayEditValue.setText("");
-                    //  DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
 
                 } else {
                     mNumberKeyBorad.setEnabled(true);
@@ -227,11 +211,7 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
         super.onDestroy();
     }
 
-    /***
-     * 监听抹零事件
-     *
-     * @param event
-     */
+
     public void onEventMainThread(ExemptEventUpdate event) {
         if (this.isAdded() && !this.isHidden()) {
             mCashPayEditValue.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));
@@ -240,11 +220,7 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
         }
     }
 
-    /**
-     * @Title: updateNotPayMent
-     * @Description: 刷新未支付或找零
-     * @Return void 返回类型
-     */
+
     public void updateNotPayMent() {
         double inputvalue = getInputValue();
         double notpayvalue = mPaymentInfo.getActualAmount();
@@ -280,42 +256,27 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
             mPaymentInfo.getOtherPay().clear();
     }
 
-   /* //add begin 20170424 for 组合支付开关
-    private boolean enablePay() {
-        if (isSuportGroupPay()) {//如果支持组合支付
-            return getInputValue() > 0;
-        } else {
-            return getInputValue() >= mPaymentInfo.getActualAmount();//不分步支付，输入金额必须大于等于应付金额
-        }
-    }*/
 
-    //add end 20170424 for 组合支付开关
-    @Override
+
+        @Override
     public void onConnected() {
-        getCurrentPosStatus();// 刷新pos连接情况
-
+        getCurrentPosStatus();
     }
 
     @Override
     public void onDisconnected() {
-        getCurrentPosStatus(); // 刷新pos连接情况
-    }
+        getCurrentPosStatus();     }
 
-    //获取输入金额
-    public double getInputValue() {
+        public double getInputValue() {
         String inputValueStr = mCashPayEditValue.getText().toString();
         return DoPayUtils.formatInputCash(inputValueStr);
     }
 
-    //点击结账按钮调用
-    private void preparePay() {
+        private void preparePay() {
         UserActionEvent.start(UserActionEvent.DINNER_PAY_SETTLE_UNION);
-        if (PaySettingCache.isUnionpay()) {//如果是pos机
-            //同一订单不允许相同账号重复支付
-            List<PaymentItem> paidItems = mPaymentInfo.getPaidPaymentItems();
+        if (PaySettingCache.isUnionpay()) {                        List<PaymentItem> paidItems = mPaymentInfo.getPaidPaymentItems();
             if (!Utils.isEmpty(paidItems)) {
-                //PaymentItemDal paymentItemDal = OperatesFactory.create(PaymentItemDal.class);
-                for (PaymentItem item : paidItems) {
+                                for (PaymentItem item : paidItems) {
                     if (PayModeId.POS_CARD.value().equals(item.getPayModeId())) {
                         ToastUtil.showShortToast(R.string.pay_union_pos_pay_repay_alter);
                         return;
@@ -325,9 +286,7 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
             mNumberKeyBorad.setEnabled(false);
             mPay.setEnabled(false);
             checkUnionPosPay(mPayOverCallback);
-        } else {//银联记账模式
-            //调用收银接口
-            mNumberKeyBorad.setEnabled(false);
+        } else {                        mNumberKeyBorad.setEnabled(false);
             mPay.setEnabled(false);
             this.mPaymentInfo.getOtherPay().clear();
             this.mPaymentInfo.getOtherPay().addPayModelItem(getPayModelItem());
@@ -336,15 +295,10 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
         }
     }
 
-    //生成支付信息对象(PayModelItem 将转换成paymentItem)
-    private PayModelItem getPayModelItem() {
+        private PayModelItem getPayModelItem() {
         PayModelItem item = null;
-        if (PaySettingCache.isUnionpay()) {//如果是pos机
-            item = new PayModelItem(PayModeId.POS_CARD);
-            item.setPosTransLog(this.mPosTransLog);//刷卡日志
-        } else {//银联记账模式
-            item = new PayModelItem(PayModeId.BANK_CARD);//银行卡记账
-        }
+        if (PaySettingCache.isUnionpay()) {            item = new PayModelItem(PayModeId.POS_CARD);
+            item.setPosTransLog(this.mPosTransLog);        } else {            item = new PayModelItem(PayModeId.BANK_CARD);        }
         item.setUsedValue(BigDecimal.valueOf(this.getInputValue()));
         return item;
     }
@@ -360,48 +314,36 @@ public class UnionFragment extends BasePayFragment implements PosConnectManager.
         return isPos;
     }
 
-    //验证银联付款
-    private void checkUnionPosPay(final IPayOverCallback callback) {
-        //如果pos机连接正常
-        if (PosConnectManager.isPosConnected()) {
-            if (this.mPosTransLog != null && this.isPosUnionPayed(this.mPosTransLog))// 已经有刷卡记录了,直接收银
-            {
-                //调用收银接口
-                this.mPaymentInfo.getOtherPay().clear();
+        private void checkUnionPosPay(final IPayOverCallback callback) {
+                if (PosConnectManager.isPosConnected()) {
+            if (this.mPosTransLog != null && this.isPosUnionPayed(this.mPosTransLog))            {
+                                this.mPaymentInfo.getOtherPay().clear();
                 this.mPaymentInfo.getOtherPay().addPayModelItem(getPayModelItem());
                 if (mDoPayApi != null)
                     mDoPayApi.doPay(this.getActivity(), this.mPaymentInfo, mPayOverCallback);
             } else {
-                doUnionPosProcess(getInputValue(), this.getActivity(), callback);// 进入银联刷卡
-            }
+                doUnionPosProcess(getInputValue(), this.getActivity(), callback);            }
         } else {
-            callback.onFinished(false, 0);// 失败回调
-            ToastUtil.showLongToastCenter(this.getActivity(), getString(R.string.pay_pos_connection_closed));
+            callback.onFinished(false, 0);            ToastUtil.showLongToastCenter(this.getActivity(), getString(R.string.pay_pos_connection_closed));
         }
     }
 
-    /**
-     * @Description: 开启pos 刷卡
-     */
+
     private void doUnionPosProcess(final double unionPayAmount, final FragmentActivity context, final IPayOverCallback callback) {
-        // 如果用集成pos机收银
-        UionPayDialogFragment uionPayDialogFragment = new UionPayDialogFragment.UionPayDialogFragmentBuilder()
+                UionPayDialogFragment uionPayDialogFragment = new UionPayDialogFragment.UionPayDialogFragmentBuilder()
                 .closeListener(null).buildPay(BigDecimal.valueOf(unionPayAmount),
                         mPaymentInfo.getTradeVo().getTrade().getTradeNo(),
                         new UionPayDialogFragment.PosOvereCallback() {
 
                             @Override
                             public void onFinished(UionPayDialogFragment.UionPayStaus status, boolean issuccess, PosTransLog log, NewLDResponse ldResponse) {
-                                if (issuccess) {// 扣款成功
-                                    // 调用付款方法
-                                    mPosTransLog = log;
+                                if (issuccess) {                                                                        mPosTransLog = log;
                                     mPaymentInfo.getOtherPay().clear();
                                     mPaymentInfo.getOtherPay().addPayModelItem(getPayModelItem());
                                     if (mDoPayApi != null)
                                         mDoPayApi.doPay(getActivity(), mPaymentInfo, mPayOverCallback);
 
-                                } else {// 扣款失败
-                                    callback.onFinished(false, 0);
+                                } else {                                    callback.onFinished(false, 0);
                                 }
                             }
                         });

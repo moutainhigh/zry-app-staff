@@ -27,9 +27,7 @@ import com.zhongmei.bty.basemodule.auth.application.DinnerApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 订单中心订单列表正餐Presenter
- */
+
 
 public class BuffetOrderCenterListPresenter extends OrderCenterListPresenter {
 

@@ -27,18 +27,13 @@ import java.net.SocketException;
 import java.util.Enumeration;
 
 
-/**
- * Created by demo on 2018/12/15
- * 生成ip 二维码让扫码
- */
+
 
 public class IPQRCodeDialog extends Dialog implements View.OnClickListener {
     private Activity mContext;
-    private ImageView mCloseBT;//关闭按钮
-    private ImageView mQRIV;
+    private ImageView mCloseBT;    private ImageView mQRIV;
     private TextView mIPTV;
-    private int barcodeWH = 300;// 微信二维码宽度
-
+    private int barcodeWH = 300;
     public static void start(Activity context) {
         IPQRCodeDialog dialog = new IPQRCodeDialog(context);
         dialog.show();
@@ -92,11 +87,9 @@ public class IPQRCodeDialog extends Dialog implements View.OnClickListener {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = manager.getActiveNetworkInfo();
         if (activeNetwork != null && activeNetwork.isConnected()) {
-            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {//当前使用无线网络
-                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI) {                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
                 WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                String ipAddress = intIP2StringIP(wifiInfo.getIpAddress());//得到IPV4地址
-                return ipAddress;
+                String ipAddress = intIP2StringIP(wifiInfo.getIpAddress());                return ipAddress;
 
             } else {
                 try {
@@ -125,8 +118,7 @@ public class IPQRCodeDialog extends Dialog implements View.OnClickListener {
     }
 
     private class IpQRInfo {
-        private String hip;//pos机ip
-
+        private String hip;
         public IpQRInfo(String ip) {
             this.hip = ip;
         }

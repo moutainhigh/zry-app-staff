@@ -15,11 +15,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * 团餐开台Trade回执
- * <p>
- * Created by demo on 2018/12/15
- */
+
 public class OpenTableResp {
 
     public List<Trade> trades;
@@ -31,8 +27,7 @@ public class OpenTableResp {
     public List<TradeItemLog> tradeItemLogs;
     public List<TradeStatusLog> tradeStatusLogs;
     public List<TradeTable> tradeTables;
-    //public List<Tables> tables;
-    public List<TradeTax> tradeTaxs;
+        public List<TradeTax> tradeTaxs;
     public List<TradeInitConfig> tradeInitConfigs;
     public List<TradeEarnestMoney> tradeEarnestMoneys;
 

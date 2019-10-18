@@ -4,9 +4,7 @@ import java.util.List;
 
 import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 
-/**
- * 充值封装请求
- */
+
 public class RechargeReq {
     private Long customerId;
 
@@ -14,8 +12,7 @@ public class RechargeReq {
 
     private String tradeNo;
 
-    private String tradeUuid;//add 20160719
-
+    private String tradeUuid;
     public Long getTradeId() {
         return tradeId;
     }
@@ -24,8 +21,7 @@ public class RechargeReq {
         this.tradeId = tradeId;
     }
 
-    private Long tradeId;//add 20160719
-
+    private Long tradeId;
     private Long clientCreateTime;
 
     private Long clientUpdateTime;

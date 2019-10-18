@@ -10,10 +10,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 
-/**
- * CashHandover is a ORMLite bean type. Corresponds to the
- * database table "cash_handover"
- */
+
 @DatabaseTable(tableName = "cash_handover")
 public class CashHandover extends DataEntityBase implements ICreator, IUpdator {
 
@@ -27,112 +24,68 @@ public class CashHandover extends DataEntityBase implements ICreator, IUpdator {
         this.calibrateStatus = calibrateStatus;
     }
 
-    /**
-     * The columns of table "cash_handover"
-     */
+
     public interface $ extends DataEntityBase.$ {
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * end_time
-         */
+
         public static final String endTime = "end_time";
 
-        /**
-         * handover_date
-         */
+
         public static final String handoverDate = "handover_date";
 
-        /**
-         * handover_user_id
-         */
+
         public static final String handoverUserId = "handover_user_id";
 
-        /**
-         * handover_user_name
-         */
+
         public static final String handoverUserName = "handover_user_name";
 
-        /**
-         * refund_order_count
-         */
+
         public static final String refundOrderCount = "refund_order_count";
 
-        /**
-         * sale_order_count
-         */
+
         public static final String saleOrderCount = "sale_order_count";
 
-        /**
-         * start_time
-         */
+
         public static final String startTime = "start_time";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * 日营业额合计
-         */
+
         public static final String totalAmount = "total_amount";
 
-        /**
-         * 开机合计
-         */
+
         public static final String totalCashBoxAmount = "total_cash_box_amount";
 
-        /**
-         * 交接合计
-         */
+
         public static final String totalActualAmount = "total_handover_amount";
 
-        /**
-         * 差额合计
-         */
+
         public static final String totalDiffAmount = "total_diff_amount";
 
-        /**
-         * first
-         */
+
         public static final String first = "first";
 
-        /**
-         * bizDate
-         */
+
         public static final String bizDate = "biz_date";
 
-        /**
-         * is_restat
-         */
+
         public static final String isRestat = "is_restat";
 
-        /**
-         * 当前pos的挂账笔数
-         */
+
         public static final String creditNum = "credit_num";
 
-        /**
-         * 当前pos的挂账金额
-         */
+
         public static final String creditAmount = "credit_amount";
-        /**
-         * 交接类型 1明交接 2 暗交接
-         */
+
         public static final String type = "type";
 
 
@@ -214,9 +167,7 @@ public class CashHandover extends DataEntityBase implements ICreator, IUpdator {
         this.type = type;
     }
 
-    /**
-     * 是否累加 1累加  2清零
-     */
+
     @DatabaseField(columnName = "is_restat")
     private Integer isRestat;
 

@@ -20,9 +20,7 @@ import com.zhongmei.yunfu.ui.view.recycler.RecyclerLinearLayoutManager;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyNoTechnicianTrades extends LinearLayout implements View.OnClickListener, BeautyBookingTradeControlListener {
 

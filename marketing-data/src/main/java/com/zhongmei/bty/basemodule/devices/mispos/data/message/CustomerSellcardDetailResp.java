@@ -11,11 +11,7 @@ import com.zhongmei.yunfu.db.entity.trade.PaymentItem;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 import com.zhongmei.yunfu.db.entity.trade.TradeItem;
 
-/**
- * @Date：2016年3月16日
- * @Description:售卡订单详情查询响应
- * @Version: 1.0
- */
+
 public class CustomerSellcardDetailResp {
     List<Trade> trades;
     List<TradeItem> tradeItems;
@@ -24,8 +20,7 @@ public class CustomerSellcardDetailResp {
     List<CustomerSaleCardInfo> cardSaleInfos;
     List<CardInfo> cardInfos;
 
-    // v8.6.0 匿名卡补打
-    private List<MemberValueCard> memberValuecard;
+        private List<MemberValueCard> memberValuecard;
 
     public List<MemberValueCard> getMemberValuecard() {
         return memberValuecard;

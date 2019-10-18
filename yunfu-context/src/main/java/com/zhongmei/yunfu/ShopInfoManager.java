@@ -8,10 +8,7 @@ import com.zhongmei.yunfu.context.util.manager.SwitchServerManager;
 
 import java.util.regex.Pattern;
 
-/**
- * Created by demo on 2018/12/15
- * 门店配置信息
- */
+
 public class ShopInfoManager {
 
     public enum UserState {
@@ -28,7 +25,6 @@ public class ShopInfoManager {
     private UserState userState = UserState.UNKNOWN;
     public ShopInfo shopInfo;
     public IAuthUser authUser;
-    //private ICurrency currency;
 
     private ShopInfoManager(ShopInfo response) {
         setUserState(response != null ? UserState.BIND : UserState.UNKNOWN);
@@ -82,8 +78,7 @@ public class ShopInfoManager {
 
     public void logout() {
         setUserState(userState != UserState.UNKNOWN ? userState.BIND : UserState.UNKNOWN);
-        //instance = null;
-    }
+            }
 
     public void setUserState(UserState state) {
         this.userState = state;
@@ -116,11 +111,7 @@ public class ShopInfoManager {
         return userState == UserState.LOGIN;
     }
 
-    /**
-     * 改方法已过时，请调用 SwitchServerManager.getInstance().getServerKey()
-     *
-     * @return
-     */
+
     public String getServerKey() {
         return MARKETING_SERVER_HOST;
     }
@@ -129,9 +120,7 @@ public class ShopInfoManager {
         return shopInfo != null ? shopInfo : new ShopInfo();
     }
 
-    /*public void setCurrency(ICurrency currency) {
-        this.currency = currency;
-    }*/
+
 
     public ICurrency getCurrency() {
         return new ICurrency() {

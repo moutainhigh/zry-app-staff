@@ -4,15 +4,10 @@ import com.zhongmei.bty.basemodule.pay.bean.PaymentCard;
 
 import java.io.Serializable;
 
-/**
- * 银行卡交易相关信息.
- */
+
 
 public class PaymentItemUnionCardReq implements Serializable {
-    private PaymentItemUnionpayReq record;//交易明细
-    private PaymentCard paymentCard;//交易卡信息
-    private PaymentDeviceReq paymentDevice;//交易终端信息
-
+    private PaymentItemUnionpayReq record;    private PaymentCard paymentCard;    private PaymentDeviceReq paymentDevice;
     public PaymentItemUnionpayReq getRecord() {
         return record;
     }

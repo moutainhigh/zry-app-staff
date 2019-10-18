@@ -4,9 +4,7 @@ import com.zhongmei.bty.router.PathURI;
 import com.zhongmei.yunfu.basemodule.R;
 
 public class PhoneApplication extends AuthorizedApplication {
-    /**
-     * 电话权限
-     */
+
     public static final String PERMISSION_PHONE = "pos:dh";
 
     public PhoneApplication() {
@@ -15,8 +13,7 @@ public class PhoneApplication extends AuthorizedApplication {
 
     @Override
     public void initMainPermission() {
-        //setMainPermission(PERMISSION_PHONE);
-        setSystemApp(false);
+                setSystemApp(false);
     }
 
     @Override
@@ -26,13 +23,11 @@ public class PhoneApplication extends AuthorizedApplication {
 
     @Override
     public void setIcon() {
-        //setIcon(R.drawable.phone_app_icon_selector);
-    }
+            }
 
     @Override
     public void setLockIcon() {
-        //setLockIcon(R.drawable.phone_app_lock_icon);
-    }
+            }
 
     @Override
     public void setSort() {

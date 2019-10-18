@@ -17,11 +17,7 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 
-/**
- * 自助激活设备
- *
- * @created 2017/7/3
- */
+
 @SuppressLint("ValidFragment")
 public class ExitLoginRemindDialog extends CommonDialogFragment {
 
@@ -60,8 +56,7 @@ public class ExitLoginRemindDialog extends CommonDialogFragment {
                     setTitleText(countDown);
                 } else {
                     dismissAllowingStateLoss();
-                    //LoginActivity.logoutDialog(getActivity());
-                }
+                                    }
             }
         }, 1500);
 

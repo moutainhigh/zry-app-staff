@@ -6,12 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
-/**
- * 支持直接拖放的视图
- *
- * @version: 1.0
- * @date 2015年9月2日
- */
+
 public abstract class DirectDragableView extends LinearLayout {
 
     private static final int OFFSET_DP = 5;
@@ -34,7 +29,6 @@ public abstract class DirectDragableView extends LinearLayout {
         if (mEnabledDrag) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
-//	    			requestDisallowInterceptTouchEvent(true);
                     mDownX = event.getX();
                     mDownY = event.getY();
                     mDraging = false;
@@ -54,7 +48,6 @@ public abstract class DirectDragableView extends LinearLayout {
                         callOnClick();
                     }
                     mDraging = false;
-//	    			requestDisallowInterceptTouchEvent(false);
                     break;
             }
         }

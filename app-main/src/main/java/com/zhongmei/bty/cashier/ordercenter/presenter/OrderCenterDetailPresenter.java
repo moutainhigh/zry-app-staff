@@ -116,9 +116,7 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 订单中心订单详情Presenter
- */
+
 
 public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPresenter {
     public static final String TAG = OrderCenterDetailPresenter.class.getSimpleName();
@@ -127,11 +125,9 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
     private String uuid;
     protected IOrderCenterDetailView mView;
     protected IOrderCenterDetailManager mManager;
-    //protected CashierPrintManager manager = null;
-    private LoadTradeAsyncTask mLoadTradeAsyncTask;
+        private LoadTradeAsyncTask mLoadTradeAsyncTask;
     protected LoadResult mLoadResult;
-    //当前栏位
-    protected int mCurrentTab = DbQueryConstant.UNPROCESSED_ALL;
+        protected int mCurrentTab = DbQueryConstant.UNPROCESSED_ALL;
     protected boolean isSquareAccountMode = false;
     protected boolean isBindDeliveryUserMode = false;
 
@@ -218,8 +214,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                     info = context.getString(R.string.dinner_orderdish_staus_is,
                             ValueEnumsToStringUtils.gettradePayStatusNameToString(nowTradePayStatus));
 
-                    //已结账的单子（销货单、拆单、反结账新单等）退款后更新退款状态，要刷新界面
-                    if (resp.getTrade() != null && resp.getTrade().getTradePayStatus() == TradePayStatus.PAID) {
+                                        if (resp.getTrade() != null && resp.getTrade().getTradePayStatus() == TradePayStatus.PAID) {
                         EventBus.getDefault().post(new EventSelectOrderRefresh());
                     }
                 }
@@ -338,12 +333,9 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return Collections.emptyList();
     }
 
-    /**
-     * 判断这笔已支付订单支付方式中是否包含金诚相关支付方式
-     */
+
     protected boolean isPayInJinCheng() {
-        //判断是否使用金诚APP支付
-        List<PaymentItem> jinChengPaymentItems = getPaymentItems(PayModeId.JIN_CHENG);
+                List<PaymentItem> jinChengPaymentItems = getPaymentItems(PayModeId.JIN_CHENG);
         if (Utils.isNotEmpty(jinChengPaymentItems)) {
             for (PaymentItem paymentItem : jinChengPaymentItems) {
                 if (paymentItem.getPayStatus() == TradePayStatus.PAID) {
@@ -352,8 +344,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             }
         }
 
-        //判断是否使用金诚会员卡支付
-        List<PaymentItem> memberCardPaymentItems = getPaymentItems(PayModeId.MEMBER_CARD);
+                List<PaymentItem> memberCardPaymentItems = getPaymentItems(PayModeId.MEMBER_CARD);
         if (Utils.isNotEmpty(memberCardPaymentItems)
                 && ServerSettingCache.getInstance().isJinChBusiness()) {
             for (PaymentItem paymentItem : memberCardPaymentItems) {
@@ -362,8 +353,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
         }
-        //是否使用金城匿名卡支付
-        List<PaymentItem> anonymousCardPaymentItems = getPaymentItems(PayModeId.ANONYMOUS_ENTITY_CARD);
+                List<PaymentItem> anonymousCardPaymentItems = getPaymentItems(PayModeId.ANONYMOUS_ENTITY_CARD);
         if (Utils.isNotEmpty(anonymousCardPaymentItems)
                 && ServerSettingCache.getInstance().isJinChBusiness()) {
             for (PaymentItem paymentItem : anonymousCardPaymentItems) {
@@ -375,12 +365,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return false;
     }
 
-    /**
-     * 二次退款
-     *
-     * @param relateTradeVo 原单数据
-     * @param tradeVo       当前订单
-     */
+
     private void retryRefund(TradeVo relateTradeVo, TradeVo tradeVo) {
         ResponseListener<TradePaymentResp> listener = new ResponseListener<TradePaymentResp>() {
             @Override
@@ -397,11 +382,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         mManager.retryRefund(relateTradeVo, tradeVo, LoadingResponseListener.ensure(listener, mView.getViewFragmentManager()));
     }
 
-    /**
-     * posCard二次退款
-     *
-     * @param tradeVo tradeVo
-     */
+
     protected void posCardRefund(TradeVo tradeVo) {
         try {
             new DinnerPosManager().retryPosRefund(tradeVo, mView.getViewFragmentManager());
@@ -410,9 +391,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         }
     }
 
-    /**
-     * 加载数据的异步任务
-     */
+
     private class LoadTradeAsyncTask extends AsyncTask<String, Void, LoadResult> {
         private String mTradeUuid;
 
@@ -456,8 +435,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                     mView.showSpliteTrades(mLoadResult.getmSpliteTradePaymentVos());
                     mView.showRejectGoodsInfo(tradeVo);
                     mView.showDetailTitle(tradePaymentVo);
-                    refreshDeliveryInfoView(tradePaymentVo);//展示外包信息
-                    mView.showDeliveryInfo(tradePaymentVo);
+                    refreshDeliveryInfoView(tradePaymentVo);                    mView.showDeliveryInfo(tradePaymentVo);
                     mView.showHandlerButton();
                     mView.showGoodsInfo(tradePaymentVo, mManager.getValidTradeItemList(tradeVo.getTradeItemList()), result.getOriTradePaymentVo());
                     mView.showAdditionaltPrivilegeInfo(tradeVo);
@@ -466,8 +444,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                     mView.showOperateReasonInfo(tradeVo);
                     mView.showRePayedTrades(result.getRepeatTradePaymentVos());
                     mView.showTaxInfo(tradeVo);
-                    refreshDeliveryCancelTip(); //订单配送取消信息
-                }
+                    refreshDeliveryCancelTip();                 }
             }
         }
     }
@@ -477,20 +454,16 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         Trade trade = tradeVo.getTrade();
         TradeExtra tradeExtra = tradeVo.getTradeExtra();
         if (showDeliveryInfoView(trade, tradeExtra)) {
-            //展示配送员信息
-            mView.refreshDeliveryUserInfoView(tradePaymentVo);
-            //展示配送平台
-            mView.refreshDeliveryPlatformInfoView(tradePaymentVo);
-            //展示小费信息
-            mView.refreshTipInfoView(tradePaymentVo);
+                        mView.refreshDeliveryUserInfoView(tradePaymentVo);
+                        mView.refreshDeliveryPlatformInfoView(tradePaymentVo);
+                        mView.refreshTipInfoView(tradePaymentVo);
             mView.showDeliveryInfoView(true);
         } else {
             mView.showDeliveryInfoView(false);
         }
     }
 
-    //判断是否展示配送信息
-    private boolean showDeliveryInfoView(Trade trade, TradeExtra tradeExtra) {
+        private boolean showDeliveryInfoView(Trade trade, TradeExtra tradeExtra) {
         if (trade != null && tradeExtra != null) {
             if (trade.getBusinessType() == BusinessType.TAKEAWAY
                     && trade.getDeliveryType() == DeliveryType.SEND
@@ -507,8 +480,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return false;
     }
 
-    //获取配送平台
-    protected DeliveryPlatform getDeliveryPlatform() {
+        protected DeliveryPlatform getDeliveryPlatform() {
         DeliveryPlatform deliveryPlatform = null;
         DeliveryOrder deliveryOrder = getDeliveryOrder();
         if (deliveryOrder != null) {
@@ -522,8 +494,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return deliveryPlatform;
     }
 
-    //刷新配送取消
-    private void refreshDeliveryCancelTip() {
+        private void refreshDeliveryCancelTip() {
         if (isDeliveryCancelOrder()) {
             DeliveryOrder deliveryOrder = getDeliveryOrder();
             String formatDateTime = DateTimeUtils.formatDateTime(deliveryOrder.getServerUpdateTime());
@@ -537,8 +508,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         }
     }
 
-    //是否配送取消订单
-    private boolean isDeliveryCancelOrder() {
+        private boolean isDeliveryCancelOrder() {
         DeliveryOrder deliveryOrder = getDeliveryOrder();
         return deliveryOrder != null
                 && deliveryOrder.getDeliveryStatus() == DeliveryOrderStatus.DELIVERY_CANCEL
@@ -563,11 +533,9 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 });
     }
 
-    //获取订单反结账的权限码
-    protected abstract String getRepayPermissionCode();
+        protected abstract String getRepayPermissionCode();
 
-    //执行订单反结账
-    protected abstract void performRepayOrder(TradePaymentVo tradePaymentVo);
+        protected abstract void performRepayOrder(TradePaymentVo tradePaymentVo);
 
     @Override
     public void doContinueRepay() {
@@ -594,8 +562,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 });
     }
 
-    //获取电子发票开票最大金额(超过这个金额不允许开票)
-    private BigDecimal getInvoiceQrcodeMaxAmount(TradePaymentVo tradePaymentVo) {
+        private BigDecimal getInvoiceQrcodeMaxAmount(TradePaymentVo tradePaymentVo) {
         TradeVo tradeVo = tradePaymentVo.getTradeVo();
         BigDecimal actualAmount = getShiFuAmount(tradePaymentVo.getPaymentVoList());
         if (tradeVo.getTradeDeposit() != null && tradeVo.getTradeDeposit().getDepositPay() != null) {
@@ -625,8 +592,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                             deskNo = tradeVo.getTradeExtra() == null ? "" : tradeVo.getTradeExtra().getSerialNumber();
                         }
                         String amount = String.valueOf(response.getContent().getResult().getInvoice().getTotalAmount());
-                        //DinnerPrintHelper.getInstance().printInvoiceTicket(url, tradeNo, deskNo, amount);
-                    }
+                                            }
                     AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_INVOICE_QRCODE, getTrade().getId(), getTrade().getUuid(), getTrade().getClientUpdateTime());
                 } else {
                     mView.showToast(response.getMessage());
@@ -658,8 +624,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 });
     }
 
-    //获取作废发票的权限码
-    protected abstract String getInvoicePermissionCode();
+        protected abstract String getInvoicePermissionCode();
 
     @Override
     public void performInvoiceRevoke(String invoiceUuid) {
@@ -722,20 +687,17 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
     @Override
     public boolean showPrivilegeInfo(TradeVo tradeVo) {
         if (tradeVo != null) {
-            // 整单优惠
-            TradePrivilege tradePrivilege = tradeVo.getTradePrivilege();
+                        TradePrivilege tradePrivilege = tradeVo.getTradePrivilege();
             if (tradePrivilege != null && tradePrivilege.getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
                 return true;
             }
 
-            //储值优惠
-            TradePrivilege chargePrivilege = tradeVo.getTradeChargePrivilege();
+                        TradePrivilege chargePrivilege = tradeVo.getTradeChargePrivilege();
             if (chargePrivilege != null && chargePrivilege.getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
                 return true;
             }
 
-            // 平台优惠
-            List<TradePromotion> tradePromotions = tradeVo.getTradePromotions();
+                        List<TradePromotion> tradePromotions = tradeVo.getTradePromotions();
             if (Utils.isNotEmpty(tradePromotions)) {
                 for (TradePromotion tradePromotion : tradePromotions) {
                     if (tradePromotion != null
@@ -748,8 +710,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            // 商品优惠
-            List<TradeItemVo> tradeItemVos = getValidTradeItemList(tradeVo.getTradeItemList());
+                        List<TradeItemVo> tradeItemVos = getValidTradeItemList(tradeVo.getTradeItemList());
             if (Utils.isNotEmpty(tradeItemVos)) {
                 for (TradeItemVo tradeItemVo : tradeItemVos) {
                     if (tradeItemVo.getTradeItemPrivilege() != null
@@ -761,8 +722,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            // 优惠券
-            List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
+                        List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
             if (couponPrivilegeVoList != null) {
                 for (CouponPrivilegeVo couponPrivilegeVo : couponPrivilegeVoList) {
                     if (couponPrivilegeVo != null) {
@@ -771,19 +731,16 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            //宴请
-            if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege().getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
+                        if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege().getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
                 return true;
             }
 
-            // 积分抵现
-            IntegralCashPrivilegeVo integralCashPrivilegeVo = tradeVo.getIntegralCashPrivilegeVo();
+                        IntegralCashPrivilegeVo integralCashPrivilegeVo = tradeVo.getIntegralCashPrivilegeVo();
             if (integralCashPrivilegeVo != null && integralCashPrivilegeVo.getTradePrivilege().getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
                 return true;
             }
 
-            //微信卡券信息
-            if (null != tradeVo.getmWeiXinCouponsVo()) {
+                        if (null != tradeVo.getmWeiXinCouponsVo()) {
                 for (WeiXinCouponsVo weiXinCouponsVo : tradeVo.getmWeiXinCouponsVo()) {
                     TradePrivilege tradePrivilege1 = weiXinCouponsVo.getmTradePrivilege();
                     if (tradePrivilege1 != null && tradePrivilege1.getPrivilegeAmount().compareTo(BigDecimal.ZERO) != 0) {
@@ -792,8 +749,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            //营销活动
-            List<TradePlanActivity> list = tradeVo.getTradePlanActivityList();
+                        List<TradePlanActivity> list = tradeVo.getTradePlanActivityList();
             if (null != list) {
                 for (TradePlanActivity tradePlanActivity : list) {
                     if (tradePlanActivity != null && tradePlanActivity.getStatusFlag() == StatusFlag.VALID
@@ -833,8 +789,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             List<String> dataSet02 = new ArrayList<String>();
 
             List<String> dataSet04 = new ArrayList<String>();
-            // 营销活动
-            List<TradePlanActivity> list = tradeVo.getTradePlanActivityList();
+                        List<TradePlanActivity> list = tradeVo.getTradePlanActivityList();
             if (null != list) {
                 for (TradePlanActivity tradePlanActivity : list) {
                     if (tradePlanActivity != null && tradePlanActivity.getStatusFlag() == StatusFlag.VALID
@@ -849,42 +804,36 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                         String ruleName;
                         String activityTitle = context.getResources().getString(R.string.activity_title);
                         if (tradePlanActivity.getRuleName() != null) {
-                            ruleName = activityTitle + tradePlanActivity.getRuleName() + " (" + Utils.formatPrice(offerValue.doubleValue()) + ")";//营销活动
-                        } else {
+                            ruleName = activityTitle + tradePlanActivity.getRuleName() + " (" + Utils.formatPrice(offerValue.doubleValue()) + ")";                        } else {
                             ruleName = activityTitle + " (" + Utils.formatPrice(offerValue.doubleValue()) + ")";
                         }
                         dataSet04.add(ruleName);
                     }
                 }
             }
-            // 商品折扣
-            String goodsDiscountString =
+                        String goodsDiscountString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.DISCOUNT, isRefund);
             if (!TextUtils.isEmpty(goodsDiscountString)) {
                 dataSet02.add(goodsDiscountString);
             }
 
-            // 平台优惠
-            String platformPrivilegeString = getPlatformPrivilegeString(context, tradeVo.getTradePromotions(), isRefund);
+                        String platformPrivilegeString = getPlatformPrivilegeString(context, tradeVo.getTradePromotions(), isRefund);
             if (!TextUtils.isEmpty(platformPrivilegeString)) {
                 dataSet02.add(platformPrivilegeString);
             }
 
-            // 商品让价
-            String goodsRebateString =
+                        String goodsRebateString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.REBATE, isRefund);
             if (!TextUtils.isEmpty(goodsRebateString)) {
                 dataSet02.add(goodsRebateString);
             }
-            // 优惠券
-            String goodsCouponString =
+                        String goodsCouponString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.COUPON, isRefund);
             if (!TextUtils.isEmpty(goodsCouponString)) {
                 dataSet02.add(goodsCouponString);
             }
 
-            //礼品券
-            for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
+                        for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
                 if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
                     String goodsGiftCouponString =
                             getGoodsGiftPrivilegeString(context, tradeItemVo, PrivilegeType.COUPON, isRefund);
@@ -894,52 +843,44 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            // 商品赠送
-            String goodsFreeString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.FREE, isRefund);
+                        String goodsFreeString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.FREE, isRefund);
             if (!TextUtils.isEmpty(goodsFreeString)) {
                 dataSet02.add(goodsFreeString);
             }
 
-            // 商品赠送(新版本)
-            String goodsGiveString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.GIVE, isRefund);
+                        String goodsGiveString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.GIVE, isRefund);
             if (!TextUtils.isEmpty(goodsGiveString)) {
                 dataSet02.add(goodsGiveString);
             }
 
-            // 商品会员折扣
-            String goodsAutoDiscountString =
+                        String goodsAutoDiscountString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.AUTO_DISCOUNT, isRefund);
             if (!TextUtils.isEmpty(goodsAutoDiscountString)) {
                 dataSet02.add(goodsAutoDiscountString);
             }
 
-            // 商品会员价
-            String goodsMemberPriceString =
+                        String goodsMemberPriceString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.MEMBER_PRICE, isRefund);
             if (!TextUtils.isEmpty(goodsMemberPriceString)) {
                 dataSet02.add(goodsMemberPriceString);
             }
 
-            // 问题菜品
-            String problemDishesString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.PROBLEM, isRefund);
+                        String problemDishesString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.PROBLEM, isRefund);
             if (!TextUtils.isEmpty(problemDishesString)) {
                 dataSet02.add(problemDishesString);
             }
 
-            // 整单打折
-            List<String> orderDiscountStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.DISCOUNT, isRefund);
+                        List<String> orderDiscountStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.DISCOUNT, isRefund);
             if (Utils.isNotEmpty(orderDiscountStrings)) {
                 dataSet02.addAll(orderDiscountStrings);
             }
 
-            // 整单让价
-            List<String> orderRebateStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.REBATE, isRefund);
+                        List<String> orderRebateStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.REBATE, isRefund);
             if (Utils.isNotEmpty(orderRebateStrings)) {
                 dataSet02.addAll(orderRebateStrings);
             }
 
-            // 整单微信卡卷优惠
-            if (null != tradeVo.getmWeiXinCouponsVo()) {
+                        if (null != tradeVo.getmWeiXinCouponsVo()) {
                 for (WeiXinCouponsVo weiXinCouponsVo : tradeVo.getmWeiXinCouponsVo()) {
                     TradePrivilege tradePrivilege = weiXinCouponsVo.getmTradePrivilege();
                     if (tradePrivilege != null) {
@@ -958,32 +899,27 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            // 整单免单
-            List<String> orderFreeStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.FREE, isRefund);
+                        List<String> orderFreeStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.FREE, isRefund);
             if (Utils.isNotEmpty(orderFreeStrings)) {
                 dataSet02.addAll(orderFreeStrings);
             }
 
-            // 整单平台优惠
-            List<String> orderPlatformStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.PLATFORM, isRefund);
+                        List<String> orderPlatformStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.PLATFORM, isRefund);
             if (Utils.isNotEmpty(orderPlatformStrings)) {
                 dataSet02.addAll(orderPlatformStrings);
             }
 
-            // 整单商户优惠
-            List<String> orderBusinessStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.BUSINESS, isRefund);
+                        List<String> orderBusinessStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.BUSINESS, isRefund);
             if (Utils.isNotEmpty(orderBusinessStrings)) {
                 dataSet02.addAll(orderBusinessStrings);
             }
 
-            // 整单熟客优惠
-            List<String> orderVipStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.VIP, isRefund);
+                        List<String> orderVipStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.VIP, isRefund);
             if (Utils.isNotEmpty(orderVipStrings)) {
                 dataSet02.addAll(orderVipStrings);
             }
 
             List<String> dataSetReason = new ArrayList<String>();
-            // 整单理由
 
             String orderFreeReasonString = getTradeReasonRel(context, tradeVo);
             if (!TextUtils.isEmpty(orderFreeReasonString)) {
@@ -996,8 +932,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             clPri02.setData(dataSet02);
             view.findViewById(R.id.v_line_pri_02).setVisibility(Utils.isNotEmpty(dataSet02) ? View.VISIBLE : View.GONE);
             List<String> dataSet03 = new ArrayList<String>();
-            // 卡券折扣
-            List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
+                        List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
             if (couponPrivilegeVoList != null) {
                 for (CouponPrivilegeVo couponPrivilegeVo : couponPrivilegeVoList) {
                     String orderCouponString = getCouponPrivilegeString(context, couponPrivilegeVo, isRefund);
@@ -1006,14 +941,12 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                     }
                 }
             }
-            // 积分优惠
-            String orderIntegralcashString =
+                        String orderIntegralcashString =
                     getIntegralcashPrivilegeString(context, tradeVo.getIntegralCashPrivilegeVo(), isRefund);
             if (!TextUtils.isEmpty(orderIntegralcashString)) {
                 dataSet03.add(orderIntegralcashString);
             }
-            //宴请
-            if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null) {
+                        if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null) {
                 String banquetPrivilegeAmountString;
                 if (isRefund) {
                     banquetPrivilegeAmountString = context.getString(R.string.dinner_order_center_order_banquet,
@@ -1055,8 +988,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             }
 
 
-            // 优惠小计
-            TextView tv_pri_actual = (TextView) view.findViewById(R.id.tv_pri_actual);
+                        TextView tv_pri_actual = (TextView) view.findViewById(R.id.tv_pri_actual);
             TextView tv_pri_actual_amount = (TextView) view.findViewById(R.id.tv_pri_actual_amount);
             BigDecimal totalPrivilegeAmount;
             if (isRefund) {
@@ -1083,8 +1015,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             List<String> dataSet02 = new ArrayList<String>();
 
             List<String> dataSet04 = new ArrayList<String>();
-            // 营销活动
-            List<TradePlanActivity> list = tradeVo.getTradePlanActivityList();
+                        List<TradePlanActivity> list = tradeVo.getTradePlanActivityList();
             if (null != list) {
                 for (TradePlanActivity tradePlanActivity : list) {
                     if (tradePlanActivity != null && tradePlanActivity.getStatusFlag() == StatusFlag.VALID
@@ -1099,43 +1030,37 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                         String ruleName;
                         String activityTitle = context.getResources().getString(R.string.activity_title);
                         if (tradePlanActivity.getRuleName() != null) {
-                            ruleName = activityTitle + tradePlanActivity.getRuleName() + " (" + Utils.formatPrice(offerValue.doubleValue()) + ")";//营销活动
-                        } else {
+                            ruleName = activityTitle + tradePlanActivity.getRuleName() + " (" + Utils.formatPrice(offerValue.doubleValue()) + ")";                        } else {
                             ruleName = activityTitle + " (" + Utils.formatPrice(offerValue.doubleValue()) + ")";
                         }
                         dataSet04.add(ruleName);
                     }
                 }
             }
-            // 商品折扣
-            String goodsDiscountString =
+                        String goodsDiscountString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.DISCOUNT, isRefund);
             if (!TextUtils.isEmpty(goodsDiscountString)) {
                 dataSet02.add(goodsDiscountString);
             }
 
-            // 平台优惠
-            String platformPrivilegeString = getPlatformPrivilegeString(context, tradeVo.getTradePromotions(), isRefund);
+                        String platformPrivilegeString = getPlatformPrivilegeString(context, tradeVo.getTradePromotions(), isRefund);
             if (!TextUtils.isEmpty(platformPrivilegeString)) {
                 dataSet02.add(platformPrivilegeString);
             }
 
-            // 商品让价
-            String goodsRebateString =
+                        String goodsRebateString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.REBATE, isRefund);
             if (!TextUtils.isEmpty(goodsRebateString)) {
                 dataSet02.add(goodsRebateString);
             }
 
-            // 优惠券
-            String goodsCouponString =
+                        String goodsCouponString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.COUPON, isRefund);
             if (!TextUtils.isEmpty(goodsCouponString)) {
                 dataSet02.add(goodsCouponString);
             }
 
-            //礼品券
-            for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
+                        for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
                 if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
                     String goodsGiftCouponString =
                             getGoodsGiftPrivilegeString(context, tradeItemVo, PrivilegeType.COUPON, isRefund);
@@ -1145,8 +1070,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
 
 
-                //次卡服务
-                if (tradeItemVo.getCardServicePrivilegeVo() != null && tradeItemVo.getCardServicePrivilegeVo().getTradePrivilege() != null) {
+                                if (tradeItemVo.getCardServicePrivilegeVo() != null && tradeItemVo.getCardServicePrivilegeVo().getTradePrivilege() != null) {
                     String cardString = getCountServicePrivilegeString(context, tradeItemVo, PrivilegeType.CARD_SERVICE, isRefund);
                     if (!TextUtils.isEmpty(cardString)) {
                         dataSet04.add(cardString);
@@ -1154,71 +1078,60 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            // 商品赠送
-            String goodsFreeString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.FREE, isRefund);
+                        String goodsFreeString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.FREE, isRefund);
             if (!TextUtils.isEmpty(goodsFreeString)) {
                 dataSet02.add(goodsFreeString);
             }
 
-            // 商品赠送(新版本)
-            String goodsGiveString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.GIVE, isRefund);
+                        String goodsGiveString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.GIVE, isRefund);
             if (!TextUtils.isEmpty(goodsGiveString)) {
                 dataSet02.add(goodsGiveString);
             }
 
-            // 商品会员折扣
-            String goodsAutoDiscountString =
+                        String goodsAutoDiscountString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.AUTO_DISCOUNT, isRefund);
             if (!TextUtils.isEmpty(goodsAutoDiscountString)) {
                 dataSet02.add(goodsAutoDiscountString);
             }
 
-            // 商品会员折让
-            String goodsMemberRebateString =
+                        String goodsMemberRebateString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.MEMBER_REBATE, isRefund);
             if (!TextUtils.isEmpty(goodsMemberRebateString)) {
                 dataSet02.add(goodsMemberRebateString);
             }
 
-            // 商品会员价
-            String goodsMemberPriceString =
+                        String goodsMemberPriceString =
                     getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.MEMBER_PRICE, isRefund);
             if (!TextUtils.isEmpty(goodsMemberPriceString)) {
                 dataSet02.add(goodsMemberPriceString);
             }
 
-            // 问题菜品
-            String problemDishesString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.PROBLEM, isRefund);
+                        String problemDishesString = getGoodsPrivilegeString(context, tradeVo.getTradeItemList(), PrivilegeType.PROBLEM, isRefund);
             if (!TextUtils.isEmpty(problemDishesString)) {
                 dataSet02.add(problemDishesString);
             }
 
-            // 整单打折
-            List<String> orderDiscountStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.DISCOUNT, isRefund);
+                        List<String> orderDiscountStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.DISCOUNT, isRefund);
             if (Utils.isNotEmpty(orderDiscountStrings)) {
                 dataSet02.addAll(orderDiscountStrings);
             }
 
-            // 会员储值打折
-            List<String> memberChargeDiscountStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.CHARGE_DISCOUNT, isRefund);
+                        List<String> memberChargeDiscountStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.CHARGE_DISCOUNT, isRefund);
             if (Utils.isNotEmpty(memberChargeDiscountStrings)) {
                 dataSet02.addAll(memberChargeDiscountStrings);
             }
 
-            // 会员储值折让
-            List<String> memberChargeRebateStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.CHARGE_REBATE, isRefund);
+                        List<String> memberChargeRebateStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.CHARGE_REBATE, isRefund);
             if (Utils.isNotEmpty(memberChargeRebateStrings)) {
                 dataSet02.addAll(memberChargeRebateStrings);
             }
 
-            // 整单让价
-            List<String> orderRebateStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.REBATE, isRefund);
+                        List<String> orderRebateStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.REBATE, isRefund);
             if (Utils.isNotEmpty(orderRebateStrings)) {
                 dataSet02.addAll(orderRebateStrings);
             }
 
-            // 整单微信卡卷优惠
-            if (null != tradeVo.getmWeiXinCouponsVo()) {
+                        if (null != tradeVo.getmWeiXinCouponsVo()) {
                 for (WeiXinCouponsVo weiXinCouponsVo : tradeVo.getmWeiXinCouponsVo()) {
                     TradePrivilege tradePrivilege = weiXinCouponsVo.getmTradePrivilege();
                     if (tradePrivilege != null) {
@@ -1244,32 +1157,27 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            // 整单免单
-            List<String> orderFreeStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.FREE, isRefund);
+                        List<String> orderFreeStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.FREE, isRefund);
             if (Utils.isNotEmpty(orderFreeStrings)) {
                 dataSet02.addAll(orderFreeStrings);
             }
 
-            // 整单平台优惠
-            List<String> orderPlatformStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.PLATFORM, isRefund);
+                        List<String> orderPlatformStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.PLATFORM, isRefund);
             if (Utils.isNotEmpty(orderPlatformStrings)) {
                 dataSet02.addAll(orderPlatformStrings);
             }
 
-            // 整单商户优惠
-            List<String> orderBusinessStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.BUSINESS, isRefund);
+                        List<String> orderBusinessStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.BUSINESS, isRefund);
             if (Utils.isNotEmpty(orderBusinessStrings)) {
                 dataSet02.addAll(orderBusinessStrings);
             }
 
-            // 整单熟客优惠
-            List<String> orderVipStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.VIP, isRefund);
+                        List<String> orderVipStrings = getOrderPrivilegeStrings(tradeVo, PrivilegeType.VIP, isRefund);
             if (Utils.isNotEmpty(orderVipStrings)) {
                 dataSet02.addAll(orderVipStrings);
             }
 
             List<String> dataSetReason = new ArrayList<String>();
-            // 整单理由
 
             String orderFreeReasonString = getTradeReasonRel(context, tradeVo);
             if (!TextUtils.isEmpty(orderFreeReasonString)) {
@@ -1282,8 +1190,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             clPri02.setData(dataSet02);
             view.findViewById(R.id.v_line_pri_02).setVisibility(Utils.isNotEmpty(dataSet02) ? View.VISIBLE : View.GONE);
             List<String> dataSet03 = new ArrayList<String>();
-            // 卡券折扣
-            List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
+                        List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
             if (couponPrivilegeVoList != null) {
                 for (CouponPrivilegeVo couponPrivilegeVo : couponPrivilegeVoList) {
                     String orderCouponString = getCouponPrivilegeString(context, couponPrivilegeVo, isRefund);
@@ -1292,14 +1199,12 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                     }
                 }
             }
-            // 积分优惠
-            String orderIntegralcashString =
+                        String orderIntegralcashString =
                     getIntegralcashPrivilegeString(context, tradeVo.getIntegralCashPrivilegeVo(), isRefund);
             if (!TextUtils.isEmpty(orderIntegralcashString)) {
                 dataSet03.add(orderIntegralcashString);
             }
-            //宴请
-            if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null) {
+                        if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null) {
                 String banquetPrivilegeAmountString;
                 if (isRefund) {
                     banquetPrivilegeAmountString = context.getString(R.string.dinner_order_center_order_banquet,
@@ -1341,8 +1246,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             }
 
 
-            // 优惠小计
-            TextView tv_pri_actual = (TextView) view.findViewById(R.id.tv_pri_actual);
+                        TextView tv_pri_actual = (TextView) view.findViewById(R.id.tv_pri_actual);
             TextView tv_pri_actual_amount = (TextView) view.findViewById(R.id.tv_pri_actual_amount);
 
             BigDecimal totalPrivilegeAmount;
@@ -1375,15 +1279,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return platformPrivilegeString;
     }
 
-    /**
-     * 获取次卡服务优惠信息
-     *
-     * @param context
-     * @param tradeItemVo
-     * @param privilegeType
-     * @param isrefund
-     * @return
-     */
+
     private String getCountServicePrivilegeString(Context context, TradeItemVo tradeItemVo,
                                                   PrivilegeType privilegeType, boolean isrefund) {
         String countServicePrivilegeAmountString = "";
@@ -1420,12 +1316,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
     }
 
 
-    /**
-     * 获取次卡服务名称
-     *
-     * @param tradeItemVo
-     * @return
-     */
+
     private static String getCountServiceName(TradeItemVo tradeItemVo) {
         if (tradeItemVo.getCardServicePrivilegeVo() != null
                 && tradeItemVo.getCardServicePrivilegeVo().getTradePrivilege().getPrivilegeType() == PrivilegeType.CARD_SERVICE
@@ -1437,13 +1328,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return "";
     }
 
-    /**
-     * @Title: getGoodsPrivilegeString
-     * @Description: 获取商品优惠
-     * @Param @param tradeItemVos
-     * @Param @param privilegeType
-     * @Return String 返回类型
-     */
+
     private String getGoodsPrivilegeString(Context context, List<TradeItemVo> tradeItemVos,
                                            PrivilegeType privilegeType, Boolean isRefund) {
         BigDecimal goodsPrivilegeAmount = getGoodsPrivilegeAmount(tradeItemVos, privilegeType, isRefund);
@@ -1496,13 +1381,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return goodsPrivilegeAmount;
     }
 
-    /**
-     * @Title: getGoodsGiftPrivilegeString
-     * @Description: 获取商品礼品券优惠
-     * @Param @param tradeItemVo
-     * @Param @param privilegeType
-     * @Return String 返回类型
-     */
+
     private String getGoodsGiftPrivilegeString(Context context, TradeItemVo tradeItemVo,
                                                PrivilegeType privilegeType, boolean isrefund) {
         String goodsPrivilegeAmountString = "";
@@ -1518,12 +1397,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return goodsPrivilegeAmountString;
     }
 
-    /**
-     * 获取优惠券名称
-     *
-     * @param tradeItemVo tradeItemVos
-     * @return
-     */
+
     private static String getCouponName(TradeItemVo tradeItemVo) {
         if (tradeItemVo.getCouponPrivilegeVo() != null
                 && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege().getPrivilegeType() == PrivilegeType.COUPON
@@ -1551,10 +1425,8 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return goodsPrivilegeAmount;
     }
 
-    //获取指定类型的整单优惠并拼接为字符串
-    private List<String> getOrderPrivilegeStrings(TradeVo tradeVo, PrivilegeType privilegeType, boolean isRefund) {
-        //指定优惠类型的整单优惠
-        List<TradePrivilege> tradePrivileges = getTradePrivileges(tradeVo, privilegeType);
+        private List<String> getOrderPrivilegeStrings(TradeVo tradeVo, PrivilegeType privilegeType, boolean isRefund) {
+                List<TradePrivilege> tradePrivileges = getTradePrivileges(tradeVo, privilegeType);
         if (Utils.isNotEmpty(tradePrivileges)) {
             List<String> orderPrivilegeStrings = new ArrayList<String>();
             for (TradePrivilege tradePrivilege : tradePrivileges) {
@@ -1620,13 +1492,11 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return Collections.emptyList();
     }
 
-    //获取指定优惠类型的整单优惠
-    private List<TradePrivilege> getTradePrivileges(TradeVo tradeVo, PrivilegeType privilegeType) {
+        private List<TradePrivilege> getTradePrivileges(TradeVo tradeVo, PrivilegeType privilegeType) {
         if (tradeVo != null) {
             List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
             if (tradePrivileges != null) {
-                //指定优惠类型的整单优惠
-                List<TradePrivilege> specifiedTradePrivileges = new ArrayList<TradePrivilege>();
+                                List<TradePrivilege> specifiedTradePrivileges = new ArrayList<TradePrivilege>();
 
                 for (TradePrivilege tradePrivilege : tradePrivileges) {
                     if (tradePrivilege.getPrivilegeType() == privilegeType) {
@@ -1641,8 +1511,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return Collections.emptyList();
     }
 
-    // 查询整单理由TradeReasonRel
-    private String getTradeReasonRel(Context context, TradeVo tradeVo) {
+        private String getTradeReasonRel(Context context, TradeVo tradeVo) {
         if (hasTradePrivilege(tradeVo, PrivilegeType.FREE)) {
             TradeReasonRel operateReason;
             if (mView.isFromSnack()) {
@@ -1677,8 +1546,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         }
     }
 
-    // 查询是否有优惠
-    private static boolean hasTradePrivilege(TradeVo tradeVo, PrivilegeType privilegeType) {
+        private static boolean hasTradePrivilege(TradeVo tradeVo, PrivilegeType privilegeType) {
         List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
         if (Utils.isNotEmpty(tradePrivileges)) {
             for (TradePrivilege tradePrivilege : tradePrivileges) {
@@ -1691,12 +1559,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return false;
     }
 
-    /**
-     * @Title: getCouponPrivilegeString
-     * @Description: 获取卡券折扣
-     * @Param @param couponPrivilegeVo
-     * @Return String 返回类型
-     */
+
     private static String getCouponPrivilegeString(Context context, CouponPrivilegeVo couponPrivilegeVo, boolean isRefund) {
         String couponPrivilegeAmountString = "";
         if (couponPrivilegeVo != null) {
@@ -1741,12 +1604,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return couponPrivilegeAmountString;
     }
 
-    /**
-     * @Title: getIntegralcashPrivilegeString
-     * @Description: 获取积分优惠
-     * @Param @param integralCashPrivilegeVo
-     * @Return String 返回类型
-     */
+
     public static String getIntegralcashPrivilegeString(Context context,
                                                         IntegralCashPrivilegeVo integralCashPrivilegeVo, boolean isRefund) {
         String integralcashPrivilegeAmountString = "";
@@ -1771,8 +1629,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return integralcashPrivilegeAmountString;
     }
 
-    //获取宴请理由
-    private static String getBanquetReason(Context context, TradeVo tradeVo) {
+        private static String getBanquetReason(Context context, TradeVo tradeVo) {
         if (tradeVo.getBanquetVo() != null && tradeVo.getBanquetVo().getTradePrivilege() != null && tradeVo.getBanquetVo().getTradePrivilege().isValid()) {
             TradeReasonRel operateReason = tradeVo.getOperateReason(OperateType.TRADE_BANQUET);
             if (operateReason == null) {
@@ -1785,12 +1642,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return null;
     }
 
-    /**
-     * @Title: getTotalPrivilegeAmount
-     * @Description: 获取优惠总金额，有四部分组成，包括：整单折扣、商品折扣、优惠券、积分抵现
-     * @Param @param tradeVo
-     * @Return BigDecimal 返回类型
-     */
+
     public static BigDecimal getTotalPrivilegeAmount(TradeVo tradeVo) {
         BigDecimal totalPrivilegeAmount = BigDecimal.ZERO;
 
@@ -1798,9 +1650,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         if (tradePrivileges != null) {
 
             for (TradePrivilege tradePrivilege1 : tradePrivileges) {
-                switch (tradePrivilege1.getPrivilegeType()) {// 整单折扣
-                    // 整单优惠
-                    case DISCOUNT:
+                switch (tradePrivilege1.getPrivilegeType()) {                                        case DISCOUNT:
                     case REBATE:
                     case FREE:
                     case PLATFORM:
@@ -1818,8 +1668,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             }
         }
 
-        // 平台优惠
-        List<TradePromotion> tradePromotions = tradeVo.getTradePromotions();
+                List<TradePromotion> tradePromotions = tradeVo.getTradePromotions();
         if (Utils.isNotEmpty(tradePromotions)) {
             for (TradePromotion tradePromotion : tradePromotions) {
                 if (tradePromotion != null
@@ -1832,8 +1681,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             }
         }
 
-        // 优惠券
-        List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
+                List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
         if (couponPrivilegeVoList != null && couponPrivilegeVoList.size() > 0) {
             for (CouponPrivilegeVo couponPrivilegeVo : couponPrivilegeVoList) {
                 if (couponPrivilegeVo != null && couponPrivilegeVo.getTradePrivilege() != null) {
@@ -1841,25 +1689,21 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
         }
-        //宴请
-        BanquetVo bVo = tradeVo.getBanquetVo();
+                BanquetVo bVo = tradeVo.getBanquetVo();
         if (bVo != null) {
             totalPrivilegeAmount = totalPrivilegeAmount.add(bVo.getTradePrivilege().getPrivilegeAmount());
         }
-        // 积分抵现
-        IntegralCashPrivilegeVo integralCashPrivilegeVo = tradeVo.getIntegralCashPrivilegeVo();
+                IntegralCashPrivilegeVo integralCashPrivilegeVo = tradeVo.getIntegralCashPrivilegeVo();
         if (integralCashPrivilegeVo != null && integralCashPrivilegeVo.getTradePrivilege() != null) {
             totalPrivilegeAmount = totalPrivilegeAmount.add(integralCashPrivilegeVo.getTradePrivilege().getPrivilegeAmount());
         }
-        // 商品折扣
-        List<TradeItemVo> tradeItemVos = tradeVo.getTradeItemList();
+                List<TradeItemVo> tradeItemVos = tradeVo.getTradeItemList();
         if (tradeItemVos != null) {
             for (TradeItemVo tradeItemVo : tradeItemVos) {
                 if (tradeItemVo != null && tradeItemVo.getTradeItemPrivilege() != null) {
                     totalPrivilegeAmount = totalPrivilegeAmount.add(tradeItemVo.getTradeItemPrivilege().getPrivilegeAmount());
                 }
-                //礼品券 add 20161021
-                if (tradeItemVo != null && tradeItemVo.getCouponPrivilegeVo() != null) {
+                                if (tradeItemVo != null && tradeItemVo.getCouponPrivilegeVo() != null) {
                     totalPrivilegeAmount = totalPrivilegeAmount.add(tradeItemVo.getCouponPrivilegeVo().getTradePrivilege().getPrivilegeAmount());
                 }
             }
@@ -1874,8 +1718,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
 
             }
         }
-        //营销活动
-        List<TradePlanActivity> list = tradeVo.getTradePlanActivityList();
+                List<TradePlanActivity> list = tradeVo.getTradePlanActivityList();
         if (null != list) {
             for (TradePlanActivity tradePlanActivity : list) {
                 if (tradePlanActivity != null && tradePlanActivity.getStatusFlag() == StatusFlag.VALID
@@ -1897,14 +1740,12 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         if (tradeVo != null) {
 
             Trade trade = tradeVo.getTrade();
-            if (tradeVo.getTradeEarnestMoney() > 0) {//如果有预付金的要显示支付信息
-                return true;
+            if (tradeVo.getTradeEarnestMoney() > 0) {                return true;
             }
             if (null != trade && trade.getTradePayStatus() != TradePayStatus.PAID) {
                 return false;
             }
-            // 整单优惠
-            TradePrivilege tradePrivilege = tradeVo.getTradePrivilege();
+                        TradePrivilege tradePrivilege = tradeVo.getTradePrivilege();
             if (tradePrivilege != null) {
                 return true;
             }
@@ -1914,8 +1755,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 return true;
             }
 
-            // 会员
-            List<TradeCustomer> tradeCustomers = tradeVo.getTradeCustomerList();
+                        List<TradeCustomer> tradeCustomers = tradeVo.getTradeCustomerList();
             if (Utils.isNotEmpty(tradeCustomers)) {
                 for (TradeCustomer tradeCustomer : tradeCustomers) {
                     if (tradeCustomer.getCustomerType() == CustomerType.MEMBER) {
@@ -1924,8 +1764,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            // 商品优惠
-            List<TradeItemVo> tradeItemVos = getValidTradeItemList(tradeVo.getTradeItemList());
+                        List<TradeItemVo> tradeItemVos = getValidTradeItemList(tradeVo.getTradeItemList());
             if (Utils.isNotEmpty(tradeItemVos)) {
                 for (TradeItemVo tradeItemVo : tradeItemVos) {
                     if (tradeItemVo.getTradeItemPrivilege() != null) {
@@ -1934,14 +1773,12 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 }
             }
 
-            // 优惠券
-            List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
+                        List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
             if (couponPrivilegeVoList != null && couponPrivilegeVoList.size() > 0) {
                 return true;
             }
 
-            // 积分抵现
-            IntegralCashPrivilegeVo integralCashPrivilegeVo = tradeVo.getIntegralCashPrivilegeVo();
+                        IntegralCashPrivilegeVo integralCashPrivilegeVo = tradeVo.getIntegralCashPrivilegeVo();
             if (integralCashPrivilegeVo != null) {
                 return true;
             }
@@ -1956,8 +1793,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
 
         TradeVo tradeVo = tradePaymentVo.getTradeVo();
 
-        if (tradeVo.getTradeDeposit() != null && isRefund) {//退货单
-            tradeVo.getTradeDeposit().setDepositPay(tradeVo.getTradeDeposit().getDepositPay().multiply(new BigDecimal(-1)));
+        if (tradeVo.getTradeDeposit() != null && isRefund) {            tradeVo.getTradeDeposit().setDepositPay(tradeVo.getTradeDeposit().getDepositPay().multiply(new BigDecimal(-1)));
             tradeVo.getTradeDeposit().setDepositRefund(tradeVo.getTradeDeposit().getDepositRefund().multiply(new BigDecimal(-1)));
         }
 
@@ -1965,40 +1801,34 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
 
         ColumnLayout cl00 = (ColumnLayout) view.findViewById(R.id.cl_00);
         List<String> dataSet0 = new ArrayList<String>();
-        // 商品金额
-        String goodsAmountString = getGoodsAmountString(context, tradeVo, isRefund);
+                String goodsAmountString = getGoodsAmountString(context, tradeVo, isRefund);
         if (!TextUtils.isEmpty(goodsAmountString)) {
             dataSet0.add(goodsAmountString);
         }
-        //附加金额
-        String exchargeAmountString = getExchargeAmountString(context, tradeVo, isRefund);
+                String exchargeAmountString = getExchargeAmountString(context, tradeVo, isRefund);
         if (!TextUtils.isEmpty(exchargeAmountString)) {
             dataSet0.add(exchargeAmountString);
         }
-        // 优惠小计
-        BigDecimal totalPrivilegeAmount;
+                BigDecimal totalPrivilegeAmount;
         if (isRefund) {
             totalPrivilegeAmount = getTotalPrivilegeAmount(tradeVo).negate();
         } else {
             totalPrivilegeAmount = getTotalPrivilegeAmount(tradeVo);
         }
         if (totalPrivilegeAmount.compareTo(BigDecimal.ZERO) != 0) {
-            // 加一个填充位
-            if (Utils.isEmpty(dataSet0)) {
+                        if (Utils.isEmpty(dataSet0)) {
                 dataSet0.add("");
             }
             dataSet0.add(context.getString(R.string.dinner_order_center_total_privilege,
                     Utils.formatPrice(totalPrivilegeAmount.doubleValue())));
         }
-        // 进位规则
-        String carryRuleString = getCarryRuleAmountString(context, tradeVo);
+                String carryRuleString = getCarryRuleAmountString(context, tradeVo);
         if (!TextUtils.isEmpty(carryRuleString)) {
             dataSet0.add(carryRuleString);
         }
         cl00.setData(dataSet0);
         view.findViewById(R.id.v_line_00).setVisibility(Utils.isNotEmpty(dataSet0) ? View.VISIBLE : View.GONE);
-        //押金
-        ColumnLayout cl10 = (ColumnLayout) view.findViewById(R.id.cl_10);
+                ColumnLayout cl10 = (ColumnLayout) view.findViewById(R.id.cl_10);
         List<String> dataSet10 = new ArrayList<String>();
         String depositAmountString = getDepositAmountString(context, tradeVo);
         if (!TextUtils.isEmpty(depositAmountString)) {
@@ -2007,8 +1837,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             dataSet10.add(depositAmountString);
             cl10.setData(dataSet10);
         }
-        //预付金 v8.13 add
-        if (tradeVo.getTradeEarnestMoney() > 0) {
+                if (tradeVo.getTradeEarnestMoney() > 0) {
             String earnestAmountString = getEarnestAmountString(context, tradeVo);
             if (!TextUtils.isEmpty(earnestAmountString)) {
                 cl10.setVisibility(View.VISIBLE);
@@ -2018,21 +1847,18 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             }
         }
         List<String> dataSet05 = new ArrayList<String>();
-        // 应收or应退
-        String yingShouAmountString = getYingShouAmountString(context, paymentVos, tradeVo, isRefund);
+                String yingShouAmountString = getYingShouAmountString(context, paymentVos, tradeVo, isRefund);
         if (!TextUtils.isEmpty(yingShouAmountString)) {
             dataSet05.add(yingShouAmountString);
         }
-        // 抹零
-        String exemptAmountString = getExemptAmountString(context, paymentVos, isRefund);
+                String exemptAmountString = getExemptAmountString(context, paymentVos, isRefund);
         if (!TextUtils.isEmpty(exemptAmountString)) {
             dataSet05.add(exemptAmountString);
         }
         ColumnLayout cl05 = (ColumnLayout) view.findViewById(R.id.cl_05);
         cl05.setData(dataSet05);
         view.findViewById(R.id.v_line_05).setVisibility(Utils.isNotEmpty(dataSet05) ? View.VISIBLE : View.GONE);
-        //押金
-        ColumnLayout cl06 = (ColumnLayout) view.findViewById(R.id.cl_06);
+                ColumnLayout cl06 = (ColumnLayout) view.findViewById(R.id.cl_06);
         List<String> dataSet06 = new ArrayList<String>();
         TradeDeposit tradeDeposit = tradeVo.getTradeDeposit();
         if (tradeDeposit != null && tradeDeposit.getDepositPay() != null) {
@@ -2054,29 +1880,25 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 view.findViewById(R.id.v_line_06).setVisibility(View.VISIBLE);
             }
         }
-        // 支付方式分组金额
-        List<PayModeDetailsBean> payModeList = getPayModeList(context, paymentVos, tradeVo);
+                List<PayModeDetailsBean> payModeList = getPayModeList(context, paymentVos, tradeVo);
         ColumnLayout cl01 = (ColumnLayout) view.findViewById(R.id.cl_01);
         cl01.setPresenter(this);
         cl01.setPaymentModes(tradeVo, payModeList, isRefundAmount(isRefund, tradeVo, paymentVos));
         view.findViewById(R.id.v_line_01).setVisibility(View.GONE);
 
         List<String> dataSet33 = new ArrayList<String>();
-        // 溢收
-        String extraAmountString = getExtraAmountString(context, paymentVos, tradeVo);
+                String extraAmountString = getExtraAmountString(context, paymentVos, tradeVo);
         if (!TextUtils.isEmpty(extraAmountString)) {
             dataSet33.add(extraAmountString);
         }
-        // 找零
-        String changeAmountString = getChangeAmountString(context, paymentVos, tradeVo);
+                String changeAmountString = getChangeAmountString(context, paymentVos, tradeVo);
         if (!TextUtils.isEmpty(changeAmountString)) {
             dataSet33.add(changeAmountString);
         }
         ColumnLayout cl33 = (ColumnLayout) view.findViewById(R.id.cl_33);
         cl33.setData(dataSet33);
         view.findViewById(R.id.v_line_33).setVisibility(Utils.isNotEmpty(dataSet33) ? View.VISIBLE : View.GONE);
-        // 收款人
-        TextView tvPayee = (TextView) view.findViewById(R.id.tv_payee);
+                TextView tvPayee = (TextView) view.findViewById(R.id.tv_payee);
         String payeeName = getPayee(paymentVos);
         if (!TextUtils.isEmpty(payeeName)) {
             tvPayee.setText(context.getString(R.string.dinner_order_center_payee, payeeName));
@@ -2114,15 +1936,13 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             BigDecimal tradeAmount = tradeVo.getTrade().getTradeAmount();
             BigDecimal actualAmount = getFaceOrUsefullAmount(paymentVos);
             BigDecimal exemptAmount = getExemptAmount(paymentVos);
-            //实收 - 溢收 > 应收(商品金额 - 抹零)
-            BigDecimal extraAmount = getExtraAmount(paymentVos);
+                        BigDecimal extraAmount = getExtraAmount(paymentVos);
             return actualAmount.subtract(extraAmount).doubleValue() > tradeAmount.subtract(exemptAmount).doubleValue();
         }
         return false;
     }
 
-    //商品金额
-    private String getGoodsAmountString(Context context, TradeVo tradeVo, boolean isRefund) {
+        private String getGoodsAmountString(Context context, TradeVo tradeVo, boolean isRefund) {
         BigDecimal totalAmount = BigDecimal.ZERO;
         BigDecimal exemptAmount = BigDecimal.ZERO;
         BigDecimal actualAmount = tradeVo.getTrade().getSaleAmount();
@@ -2130,8 +1950,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 Utils.transferDot2(tradeVo.getTrade().getPrivilegeAmount().add(exemptAmount.negate()).toString());
         if (!TextUtils.isEmpty(discountAmount)) {
             List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
-            // 附加费总和
-            if (tradePrivileges != null) {
+                        if (tradePrivileges != null) {
                 for (TradePrivilege tradePrivilege : tradeVo.getTradePrivileges()) {
                     if (tradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL) {
                         BigDecimal privilegeAmount = tradePrivilege.getPrivilegeAmount();
@@ -2153,16 +1972,14 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
 
     }
 
-    //预付金
-    private String getEarnestAmountString(Context context, TradeVo tradeVo) {
+        private String getEarnestAmountString(Context context, TradeVo tradeVo) {
         if (tradeVo != null && tradeVo.getTradeEarnestMoney() > 0) {
             return context.getString(R.string.dinner_order_center_earnest_amount, Utils.formatPrice(tradeVo.getTradeEarnestMoney()));
         }
         return "";
     }
 
-    //附加费
-    private String getExchargeAmountString(Context context, TradeVo tradeVo, boolean isRefund) {
+        private String getExchargeAmountString(Context context, TradeVo tradeVo, boolean isRefund) {
         BigDecimal exemptAmount = BigDecimal.ZERO;
         List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
         if (tradePrivileges == null) {
@@ -2183,12 +2000,10 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return "";
     }
 
-    // 获取进位规则的
-    private String getCarryRuleAmountString(Context context, TradeVo tradeVo) {
+        private String getCarryRuleAmountString(Context context, TradeVo tradeVo) {
         BigDecimal before = tradeVo.getTrade().getTradeAmountBefore();
         BigDecimal after = tradeVo.getTrade().getTradeAmount();
-        if (before == null) {// 旧数据中可能没有TradeAmountBefore这个字段
-            before = after;
+        if (before == null) {            before = after;
             return "";
         }
         BigDecimal sub = after.subtract(before);
@@ -2199,12 +2014,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return context.getResources().getString(R.string.dinner_billcenter_carry, Utils.formatPrice(sub.negate().doubleValue()));
     }
 
-    /**
-     * @Title: getReceivableAmountString
-     * @Description: 获取应收金额(可收 - 抹零金额)
-     * @Param @param paymentVos
-     * @Return String 返回类型
-     */
+
     private String getYingShouAmountString(Context context, List<PaymentVo> paymentVos, TradeVo tradeVo, boolean isRefund) {
         BigDecimal yingShouAmount = BigDecimal.ZERO;
         int name;
@@ -2228,12 +2038,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return yingShouAmountString;
     }
 
-    /**
-     * @Title: getExemptAmountString
-     * @Description: 获取抹零
-     * @Param @param paymentVos
-     * @Return String 返回类型
-     */
+
     private String getExemptAmountString(Context context, List<PaymentVo> paymentVos, boolean isRefund) {
         BigDecimal exemptAmount = getExemptAmount(paymentVos);
         String exemptAmountString = "";
@@ -2250,12 +2055,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return exemptAmountString;
     }
 
-    /**
-     * 订单抹零金额
-     *
-     * @param paymentVos
-     * @return
-     */
+
     public BigDecimal getExemptAmount(List<PaymentVo> paymentVos) {
         BigDecimal exemptAmount = BigDecimal.ZERO;
         for (PaymentVo paymentVo : paymentVos) {
@@ -2283,12 +2083,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         }
     }
 
-    /**
-     * @Title: getPayModelList
-     * @Description: 获取支付方式分组文本列表
-     * @Param @param paymentItems
-     * @Return List<String> 返回类型
-     */
+
     private List<PayModeDetailsBean> getPayModeList(Context context, List<PaymentVo> paymentVos, TradeVo tradeVo) {
         LongSparseArray<PaymentItemWrapper> paymentItemArray = new LongSparseArray<>();
         Map<Long, List<RefundExceptionReason>> allRefundExceptionReasonMap = new HashMap<>();
@@ -2296,8 +2091,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             for (PaymentVo paymentVo : paymentVos) {
                 if (paymentVo.getPayment().getPaymentType() == PaymentType.TRADE_SELL
                         || paymentVo.getPayment().getPaymentType() == PaymentType.TRADE_REFUND) {
-                    //添加paymentvo下所有的退款失败原因
-                    Map<Long, List<RefundExceptionReason>> refundExceptionReasonMap = paymentVo.getRefundExceptionReasonMap();
+                                        Map<Long, List<RefundExceptionReason>> refundExceptionReasonMap = paymentVo.getRefundExceptionReasonMap();
                     if (refundExceptionReasonMap != null && !refundExceptionReasonMap.isEmpty()) {
                         allRefundExceptionReasonMap.putAll(refundExceptionReasonMap);
                     }
@@ -2397,12 +2191,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return faceAmount;
     }
 
-    /**
-     * @Title: getTotalExtraAmountString
-     * @Description: 获取溢收金额
-     * @Param @param paymentItems
-     * @Return String 返回类型
-     */
+
     private String getExtraAmountString(Context context, List<PaymentVo> paymentVos, TradeVo tradeVo) {
         BigDecimal extraAmount = getExtraAmount(paymentVos);
 
@@ -2416,12 +2205,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return extraAmountString;
     }
 
-    /**
-     * 计算溢收金额
-     *
-     * @param paymentVos
-     * @return
-     */
+
     private BigDecimal getExtraAmount(List<PaymentVo> paymentVos) {
         BigDecimal extraAmount = BigDecimal.ZERO;
         for (PaymentVo paymentVo : paymentVos) {
@@ -2442,8 +2226,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return extraAmount;
     }
 
-    //押金金额
-    private String getDepositAmountString(Context context, TradeVo tradeVo) {
+        private String getDepositAmountString(Context context, TradeVo tradeVo) {
         TradeDeposit tradeDeposit = tradeVo.getTradeDeposit();
         String str = "";
         if (tradeDeposit != null && tradeDeposit.getDepositPay() != null) {
@@ -2457,12 +2240,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return str;
     }
 
-    /**
-     * @Title: getChangeAmount
-     * @Description: 获取找零
-     * @Param @param paymentVos
-     * @Return String 返回类型
-     */
+
     private String getChangeAmountString(Context context, List<PaymentVo> paymentVos, TradeVo tradeVo) {
         String changeAmountString = "";
         BigDecimal changeAmount = getChangeAmount(paymentVos, tradeVo);
@@ -2474,13 +2252,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return changeAmountString;
     }
 
-    /**
-     * 计算找零
-     *
-     * @param paymentVos
-     * @param tradeVo
-     * @return
-     */
+
     private BigDecimal getChangeAmount(List<PaymentVo> paymentVos, TradeVo tradeVo) {
         BigDecimal changeAmount = BigDecimal.ZERO;
         TradeType tradeType = tradeVo.getTrade().getTradeType();
@@ -2500,12 +2272,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return changeAmount;
     }
 
-    /**
-     * @Title: getPayee
-     * @Description: 获取收款人
-     * @Param @param paymentVos
-     * @Return String 返回类型
-     */
+
     private String getPayee(List<PaymentVo> paymentVos) {
         if (paymentVos != null && !paymentVos.isEmpty()) {
             PaymentVo paymentVo = paymentVos.get(0);
@@ -2518,13 +2285,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return "";
     }
 
-    /**
-     * @Title: getShiShouAmount
-     * @Description: 获取实收金额
-     * @Param @param context
-     * @Param @param paymentVos
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal getShiShouAmount(TradeVo tradeVo, List<PaymentVo> paymentVos, boolean isRefund) {
         TradePayStatus tradePayStatus = tradeVo.getTrade().getTradePayStatus();
         BigDecimal shiShouAmount = BigDecimal.ZERO;
@@ -2595,11 +2356,9 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 });
     }
 
-    //获取订单接受的权限码
-    protected abstract String getAcceptPermissionCode();
+        protected abstract String getAcceptPermissionCode();
 
-    //执行接受订单
-    protected abstract void performAcceptOrder(TradePaymentVo tradePaymentVo);
+        protected abstract void performAcceptOrder(TradePaymentVo tradePaymentVo);
 
     @Override
     public void doRefuse() {
@@ -2684,9 +2443,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             return false;
         }
 
-        //有一种情况下，订单展示电话按钮
-        //1、未处理订单
-        return isUnprocessedNewOrder();
+                        return isUnprocessedNewOrder();
     }
 
     @Override
@@ -2710,28 +2467,18 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             return false;
         }
 
-        //有三种情况下，订单不展示打印按钮
-        //1、未处理订单
-        //2、支付中订单
-        //3、已拒绝/取消订单
-        //不为以上三种情况，均会显示打印按钮
-        return !isUnprocessedNewOrder()
+                                                return !isUnprocessedNewOrder()
                 && !isSalesPaying()
                 && !isUnprocessedInvalid();
     }
 
-    /**
-     * 判断是否联台子单
-     *
-     * @return
-     */
+
     private boolean isUnionSubOrderType() {
         Trade trade = getTrade();
         return trade != null && trade.getTradeType() == TradeType.UNOIN_TABLE_SUB;
     }
 
-    //是否未处理新订单
-    private boolean isUnprocessedNewOrder() {
+        private boolean isUnprocessedNewOrder() {
         Trade trade = getTrade();
         if (trade != null) {
             TradeStatus tradeStatus = trade.getTradeStatus();
@@ -2744,8 +2491,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return false;
     }
 
-    //是否销货单支付中
-    private boolean isSalesPaying() {
+        private boolean isSalesPaying() {
         Trade trade = getTrade();
         if (trade != null) {
             TradeStatus tradeStatus = trade.getTradeStatus();
@@ -2757,8 +2503,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return false;
     }
 
-    //是否未处理已拒绝/取消
-    private boolean isUnprocessedInvalid() {
+        private boolean isUnprocessedInvalid() {
         Trade trade = getTrade();
         if (trade != null) {
             SourceId sourceId = trade.getSource();
@@ -2903,12 +2648,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return uuid;
     }
 
-    /**
-     * 判断这笔已支付订单支付方式中是否包含现金
-     *
-     * @param paymentItems
-     * @return
-     */
+
     public boolean isPayInCash(List<PaymentItem> paymentItems) {
         if (Utils.isNotEmpty(paymentItems)) {
             for (PaymentItem paymentItem : paymentItems) {
@@ -2922,12 +2662,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
     }
 
 
-    /**
-     * 第三方支付
-     *
-     * @param
-     * @return
-     */
+
     public boolean isRefundingInThird(PaymentItem paymentItem) {
         if (paymentItem != null) {
             if (paymentItem.getPayStatus() == TradePayStatus.REFUNDING && PayModeId.WEIXIN_PAY.equalsValue(paymentItem.getPayModeId()) || PayModeId.ALIPAY.equalsValue(paymentItem.getPayModeId())) {
@@ -2938,11 +2673,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return false;
     }
 
-    /**
-     * 判断订单是否已支付栏位下
-     *
-     * @return 为true为已支付订单，反之则不是
-     */
+
     public boolean isPaid() {
         Trade trade = getTrade();
         if (trade != null) {
@@ -2958,9 +2689,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
     }
 
 
-    /**
-     * 判断订单是否未支付或支付完成
-     */
+
     public boolean isUnPaidOrPaid() {
         Trade trade = getTrade();
         if (trade != null) {
@@ -3069,40 +2798,34 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
 
         ColumnLayout cl00 = (ColumnLayout) view.findViewById(R.id.cl_00);
         List<String> dataSet0 = new ArrayList<String>();
-        // 商品金额
-        String goodsAmountString = getGoodsAmountString(context, tradeVo, isRefund);
+                String goodsAmountString = getGoodsAmountString(context, tradeVo, isRefund);
         if (!TextUtils.isEmpty(goodsAmountString)) {
             dataSet0.add(goodsAmountString);
         }
-        //附加金额
-        String exchargeAmountString = getExchargeAmountString(context, tradeVo, isRefund);
+                String exchargeAmountString = getExchargeAmountString(context, tradeVo, isRefund);
         if (!TextUtils.isEmpty(exchargeAmountString)) {
             dataSet0.add(exchargeAmountString);
         }
-        // 优惠小计
-        BigDecimal totalPrivilegeAmount;
+                BigDecimal totalPrivilegeAmount;
         if (isRefund) {
             totalPrivilegeAmount = getTotalPrivilegeAmount(tradeVo).negate();
         } else {
             totalPrivilegeAmount = getTotalPrivilegeAmount(tradeVo);
         }
         if (totalPrivilegeAmount.compareTo(BigDecimal.ZERO) != 0) {
-            // 加一个填充位
-            if (Utils.isEmpty(dataSet0)) {
+                        if (Utils.isEmpty(dataSet0)) {
                 dataSet0.add("");
             }
             dataSet0.add(context.getString(R.string.dinner_order_center_total_privilege,
                     Utils.formatPrice(totalPrivilegeAmount.doubleValue())));
         }
-        // 进位规则
-        String carryRuleString = getCarryRuleAmountString(context, tradeVo);
+                String carryRuleString = getCarryRuleAmountString(context, tradeVo);
         if (!TextUtils.isEmpty(carryRuleString)) {
             dataSet0.add(carryRuleString);
         }
         cl00.setData(dataSet0);
         view.findViewById(R.id.v_line_00).setVisibility(Utils.isNotEmpty(dataSet0) ? View.VISIBLE : View.GONE);
-        //押金
-        ColumnLayout cl10 = (ColumnLayout) view.findViewById(R.id.cl_10);
+                ColumnLayout cl10 = (ColumnLayout) view.findViewById(R.id.cl_10);
         List<String> dataSet10 = new ArrayList<String>();
         String depositAmountString = getDepositAmountString(context, tradeVo);
         if (!TextUtils.isEmpty(depositAmountString)) {
@@ -3112,21 +2835,18 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
             cl10.setData(dataSet10);
         }
         List<String> dataSet05 = new ArrayList<String>();
-        // 应收or应退
-        String yingShouAmountString = getYingShouAmountString(context, paymentVos, tradeVo, isRefund);
+                String yingShouAmountString = getYingShouAmountString(context, paymentVos, tradeVo, isRefund);
         if (!TextUtils.isEmpty(yingShouAmountString)) {
             dataSet05.add(yingShouAmountString);
         }
-        // 抹零
-        String exemptAmountString = getExemptAmountString(context, paymentVos, isRefund);
+                String exemptAmountString = getExemptAmountString(context, paymentVos, isRefund);
         if (!TextUtils.isEmpty(exemptAmountString) && tradeVo.getTrade().getTradePayStatus() != TradePayStatus.UNPAID) {
             dataSet05.add(exemptAmountString);
         }
         ColumnLayout cl05 = (ColumnLayout) view.findViewById(R.id.cl_05);
         cl05.setData(dataSet05);
         view.findViewById(R.id.v_line_05).setVisibility(Utils.isNotEmpty(dataSet05) ? View.VISIBLE : View.GONE);
-        //押金
-        ColumnLayout cl06 = (ColumnLayout) view.findViewById(R.id.cl_06);
+                ColumnLayout cl06 = (ColumnLayout) view.findViewById(R.id.cl_06);
         List<String> dataSet06 = new ArrayList<String>();
         TradeDeposit tradeDeposit = tradeVo.getTradeDeposit();
         if (tradeDeposit != null && tradeDeposit.getDepositPay() != null) {
@@ -3148,28 +2868,24 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
                 view.findViewById(R.id.v_line_06).setVisibility(View.VISIBLE);
             }
         }
-        // 支付方式分组金额
-        List<PayModeDetailsBean> payModeList = getPayModeList(context, paymentVos, tradeVo);
+                List<PayModeDetailsBean> payModeList = getPayModeList(context, paymentVos, tradeVo);
         ColumnLayout cl01 = (ColumnLayout) view.findViewById(R.id.cl_01);
         cl01.setPaymentModes(tradeVo, payModeList);
         view.findViewById(R.id.v_line_01).setVisibility(View.GONE);
 
         List<String> dataSet33 = new ArrayList<String>();
-        // 溢收
-        String extraAmountString = getExtraAmountString(context, paymentVos, tradeVo);
+                String extraAmountString = getExtraAmountString(context, paymentVos, tradeVo);
         if (!TextUtils.isEmpty(extraAmountString)) {
             dataSet33.add(extraAmountString);
         }
-        // 找零
-        String changeAmountString = getChangeAmountString(context, paymentVos, tradeVo);
+                String changeAmountString = getChangeAmountString(context, paymentVos, tradeVo);
         if (!TextUtils.isEmpty(changeAmountString)) {
             dataSet33.add(changeAmountString);
         }
         ColumnLayout cl33 = (ColumnLayout) view.findViewById(R.id.cl_33);
         cl33.setData(dataSet33);
         view.findViewById(R.id.v_line_33).setVisibility(Utils.isNotEmpty(dataSet33) ? View.VISIBLE : View.GONE);
-        // 收款人
-        TextView tvPayee = (TextView) view.findViewById(R.id.tv_payee);
+                TextView tvPayee = (TextView) view.findViewById(R.id.tv_payee);
         String payeeName = getPayee(paymentVos);
         if (!TextUtils.isEmpty(payeeName)) {
             tvPayee.setText(context.getString(R.string.dinner_order_center_payee, payeeName));
@@ -3201,13 +2917,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return view;
     }
 
-    /**
-     * 获取订单实收金额
-     *
-     * @param paymentVos
-     * @param isRefund
-     * @return
-     */
+
     private BigDecimal getShiShouAmount(List<PaymentVo> paymentVos, boolean isRefund) {
         BigDecimal shiShouAmount = BigDecimal.ZERO;
         for (PaymentVo paymentVo : paymentVos) {
@@ -3228,8 +2938,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         return shiShouAmount;
     }
 
-    //获取顾客实付金额
-    protected BigDecimal getShiFuAmount(List<PaymentVo> paymentVos) {
+        protected BigDecimal getShiFuAmount(List<PaymentVo> paymentVos) {
         BigDecimal shiFuAmount = BigDecimal.ZERO;
         if (Utils.isNotEmpty(paymentVos)) {
             for (PaymentVo paymentVo : paymentVos) {
@@ -3307,9 +3016,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
         throw new UnsupportedOperationException();
     }
 
-    /**
-     * 数据改变监听器
-     */
+
     private class OrderCenterChangeObserver implements DatabaseHelper.DataChangeObserver {
 
         @Override
@@ -3349,8 +3056,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
     }
 
     @Override
-    public void getTaxNoByTradeId(Long tradeId) {//add v8.11 添加查询税号并入库
-        TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
+    public void getTaxNoByTradeId(Long tradeId) {        TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
         GetTaxNoReq req = new GetTaxNoReq();
         req.tradeId = tradeId;
         ResponseListener getTaxNoListenner = new ResponseListener<GetTaxNoResp>() {
@@ -3410,8 +3116,7 @@ public abstract class OrderCenterDetailPresenter implements IOrderCenterDetailPr
 
     @Override
     public boolean showCreateTask() {
-        //订单状态为完成状态
-        Trade trade = getTrade();
+                Trade trade = getTrade();
         return ValueEnums.equalsValue(trade.getTradeStatus(),TradeStatus.FINISH.value());
     }
 }

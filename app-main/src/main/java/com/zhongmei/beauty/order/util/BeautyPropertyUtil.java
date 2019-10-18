@@ -68,25 +68,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyPropertyUtil {
 
-    /**
-     * 规格页
-     */
+
     private CustomStandardView mCustomStandardView;
-    /**
-     * 备注页
-     */
+
     private BeautyRemarkView mRemarkView;
 
-    //购物车条目UUID
-    private String mUuid;
-    //购物车父条目UUID，可为空
-    private String mParentUuid;
+        private String mUuid;
+        private String mParentUuid;
 
     private boolean isFirst = true;
     private List<PropertyGroupVo<DishStandardVo>> standardGroupList;
@@ -97,19 +89,13 @@ public class BeautyPropertyUtil {
     private Button btnRemark;
     private Button btnTradeItemRemark;
 
-    /**
-     * 加料页
-     */
+
     private BeautyExtraView mExtraView;
 
-    /**
-     * 加料列表
-     */
+
     private List<ExtraInfo> extraInfoList = new ArrayList<>();
 
-    /**
-     * 当前内容
-     */
+
     private View mCurrentContentView;
 
     protected BigDecimal mSelectedQty;
@@ -117,8 +103,7 @@ public class BeautyPropertyUtil {
     private TradePrivilege mTradePrivilege;
     private TradeReasonRel mDiscountReason;
 
-    //若当前菜品不为空，那么此DishSetmealManager不为空
-    protected DishSetmealManager mDishSetmealManager;
+        protected DishSetmealManager mDishSetmealManager;
 
     private int mTargetPageNo = -1;
     Context mContext;
@@ -134,8 +119,7 @@ public class BeautyPropertyUtil {
     protected ShopcartItemBase<?> mRealItemBase;
     private IShopcartItemBase mShopcartItemBase;
     private String mMemo;
-    // 当前是否有菜品加入
-    protected boolean added = true;
+        protected boolean added = true;
 
     private boolean isOrderRemark = true;
     private LinearLayout vActionBar;
@@ -166,14 +150,6 @@ public class BeautyPropertyUtil {
     }
 
     protected void initData() {
-//        if (mTargetPageNo == -1 && TextUtils.isEmpty(mDishDataItem.getBase().getUuid())
-//                || DinnerTradeItemManager.getInstance().isSaved(mDishDataItem)) {
-//            initSavedData();
-//            showRemarkView();
-//        } else {
-//            initSelectData();
-//            showDefaultView();
-//        }
 
         initSelectData();
         showDefaultView();
@@ -187,22 +163,10 @@ public class BeautyPropertyUtil {
 
         ViewUtil.setButtonEnabled(btnStandard, false);
         ViewUtil.setButtonEnabled(btnRemark, true);
-//        if (isSavedValidSingleOrComboItem()) {
-////            btnStandard.setText(R.string.dish_combo_modify);
-//            btnStandard.setEnabled(false);
-//            btnRemark.setEnabled(false);
-//        } else {
-//            btnStandard.setText(R.string.dish_standard);
-//            btnStandard.setEnabled(false);
-//        }
-//        btnStandard.setAlpha(0.5f);
-        //刷新内容页
-        iOperateListener.showCustomContentView(null);
+                iOperateListener.showCustomContentView(null);
     }
 
-    /**
-     * 修改按钮激活
-     */
+
     public void doActiveModifyBtn() {
         btnStandard.setAlpha(1);
         btnStandard.setText(R.string.dish_combo_modify);
@@ -210,11 +174,7 @@ public class BeautyPropertyUtil {
         ViewUtil.setButtonSelected(vActionBar, btnStandard);
     }
 
-    /**
-     * 是否为已保存的有效单菜或套餐外壳（全退的0条目除外）
-     *
-     * @return
-     */
+
     public boolean isSavedValidSingleOrComboItem() {
         if (mDishDataItem.getBase() == null) {
             return false;
@@ -222,32 +182,18 @@ public class BeautyPropertyUtil {
 
         return mDishDataItem.getBase().getStatusFlag() == StatusFlag.VALID
                 && DinnerTradeItemManager.getInstance().isSaved(mDishDataItem)
-                && !DinnerTradeItemManager.getInstance().isDishReturnAll(mDishDataItem)//全退菜品不能修改
-                && !DinnerTradeItemManager.getInstance().isUnsavedReadonly(mDishDataItem.getBase())//未生效的readonlyshopcartitem不能修改
-                && !(mDishDataItem.getBase() instanceof ISetmealShopcartItem);//套餐子菜不能修改
-    }
+                && !DinnerTradeItemManager.getInstance().isDishReturnAll(mDishDataItem)                && !DinnerTradeItemManager.getInstance().isUnsavedReadonly(mDishDataItem.getBase())                && !(mDishDataItem.getBase() instanceof ISetmealShopcartItem);    }
 
     protected void initSelectData() {
         initCommonData(mDishDataItem);
-        //加载数据
-        mDishPropertyManager = new DishPropertyManager();
-        //套餐不加载属性
-        if (mRealItemBase != null && !DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
+                mDishPropertyManager = new DishPropertyManager();
+                if (mRealItemBase != null && !DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
             loadProperties();
             mDishSetmealManager = mShopcartItem.getSetmealManager();
         }else{
-            //设置加项目不可用，同时开启备注
-            initSavedData();
+                        initSavedData();
             showRemarkView();
         }
-//        if (mDishDataItem.getBase() != null && mDishDataItem.getBase().getStatusFlag() == StatusFlag.VALID
-//                && mDishDataItem.getBase().getDishShop() != null && mDishDataItem.getBase().getDishShop().getClearStatus()
-//                == ClearStatus.SALE
-//                ) {
-//            ViewUtil.setButtonEnabled(btnRemark, true);
-//        } else {
-//            ViewUtil.setButtonEnabled(btnRemark, false);
-//        }
     }
 
     private void modifyCombo() {
@@ -264,11 +210,7 @@ public class BeautyPropertyUtil {
         doActiveModifyBtn();
     }
 
-    /**
-     * 不加载属性
-     *
-     * @param dishDataItem
-     */
+
     public void initCommonData(DishDataItem dishDataItem) {
         mDishDataItem = dishDataItem;
         initValue();
@@ -329,7 +271,6 @@ public class BeautyPropertyUtil {
 
             @Override
             protected void onPostExecute(EventDishPropertiesNotice eventDishPropertiesNotice) {
-//                refreshView(eventDishPropertiesNotice);
                 setExtra(eventDishPropertiesNotice.dishPropertiesVo);
             }
         }.execute();
@@ -341,23 +282,17 @@ public class BeautyPropertyUtil {
         }
     }
 
-    /**
-     * 刷新菜品属性内容
-     *
-     * @param eventDishPropertiesNotice
-     */
+
     private void refreshView(EventDishPropertiesNotice eventDishPropertiesNotice) {
         if (eventDishPropertiesNotice != null && eventDishPropertiesNotice.dishPropertiesVo != null && eventDishPropertiesNotice.uuid.equals(mUuid)) {
-            // 规格（规格切换不成功时，直接返回）
-            if (!setStandard(eventDishPropertiesNotice)) {
+                        if (!setStandard(eventDishPropertiesNotice)) {
                 return;
             }
 
             OrderDish orderDish = eventDishPropertiesNotice.dishPropertiesVo.getOrderDish();
             if (orderDish != null
                     && (orderDish.getDishShop().getClearStatus() == ClearStatus.SALE || mShoppingCart.getIsSalesReturn())) {
-                // 清除老的规格属性,并添加新的规格属性
-                ArrayList<OrderProperty> newProperties = new ArrayList<OrderProperty>();
+                                ArrayList<OrderProperty> newProperties = new ArrayList<OrderProperty>();
                 for (OrderProperty orderProperty : properties) {
                     if (orderProperty.getPropertyKind() != PropertyKind.STANDARD) {
                         newProperties.add(orderProperty);
@@ -376,13 +311,11 @@ public class BeautyPropertyUtil {
             } else {
                 properties.clear();
             }
-            //菜品加入购物车
-            addOrderDishToCart(eventDishPropertiesNotice);
+                        addOrderDishToCart(eventDishPropertiesNotice);
         }
     }
 
-    //设置加料
-    private void setExtra(DishPropertiesVo batchDishPropertyVo) {
+        private void setExtra(DishPropertiesVo batchDishPropertyVo) {
         extraInfoList.clear();
 
         if (batchDishPropertyVo.getExtraList() != null) {
@@ -404,15 +337,13 @@ public class BeautyPropertyUtil {
 
     }
 
-    //设置规格
-    protected boolean setStandard(EventDishPropertiesNotice eventDishPropertiesNotice) {
+        protected boolean setStandard(EventDishPropertiesNotice eventDishPropertiesNotice) {
         standardGroupList.clear();
         if (eventDishPropertiesNotice.dishPropertiesVo.getStandardGroupList() != null) {
             standardGroupList.addAll(eventDishPropertiesNotice.dishPropertiesVo.getStandardGroupList());
         }
 
-        //如果当前菜品为套餐壳子，不展示规格（套餐壳子也没有规格）
-        if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
+                if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
             btnStandard.setText(R.string.dish_combo_modify);
             btnStandard.setAlpha(1);
             ViewUtil.setButtonEnabled(btnStandard, true);
@@ -436,9 +367,7 @@ public class BeautyPropertyUtil {
         return true;
     }
 
-    /**
-     * 菜品加入购物车
-     */
+
     private void addOrderDishToCart(EventDishPropertiesNotice eventDishPropertiesNotice) {
         OrderDish orderDish = eventDishPropertiesNotice.dishPropertiesVo.getOrderDish();
         if (orderDish != null
@@ -459,31 +388,24 @@ public class BeautyPropertyUtil {
                     }
                 }
             } else {
-                //数量
-                BigDecimal singleQty = mShopcartItem.getSingleQty();
-                // 获取原来的关联原菜id和uuid
-                Long relateId = null;
+                                BigDecimal singleQty = mShopcartItem.getSingleQty();
+                                Long relateId = null;
                 String relateUuid = null;
                 if (mShopcartItem != null) {
                     relateId = mShopcartItem.getRelateTradeItemId();
                     relateUuid = mShopcartItem.getRelateTradeItemUuid();
                 }
 
-                //加料
-                List<ExtraShopcartItem> extraItems = new ArrayList<>();
-                DishShop dishShop = orderDish.getDishShop();//新选的dishshop
-                if (dishShop == null) {
+                                List<ExtraShopcartItem> extraItems = new ArrayList<>();
+                DishShop dishShop = orderDish.getDishShop();                if (dishShop == null) {
                     return;
                 }
-                // 获取到商品的加料信息
-                DishPropertyManager.DishExtraFilter dishExtraFilter = new DishPropertyManager.DishExtraFilter(dishShop);
+                                DishPropertyManager.DishExtraFilter dishExtraFilter = new DishPropertyManager.DishExtraFilter(dishShop);
                 List<DishSetmeal> dishExtraList = DishCache.getDishExtraHolder().filter(dishExtraFilter);
-                //菜品加料为空，使用的是公共库，所有加料都可以直接加进去
-                if (Utils.isEmpty(dishExtraList)) {
+                                if (Utils.isEmpty(dishExtraList)) {
                     extraItems.addAll(mShopcartItem.getExtraItems());
                 } else {
-                    //缓存菜品的私有加料库
-                    Map<Long, DishSetmeal> setmealMap = new HashMap<>();
+                                        Map<Long, DishSetmeal> setmealMap = new HashMap<>();
                     for (DishSetmeal setmeal : dishExtraList) {
                         if (setmeal.getChildDishType() == ChildDishType.EXTRA) {
                             setmealMap.put(setmeal.getChildDishId(), setmeal);
@@ -495,9 +417,7 @@ public class BeautyPropertyUtil {
                             continue;
                         }
 
-                        //判断菜品私有加料库，有没有当前加料
-                        Long extraId = extraItem.getOrderDish().getSetmeal().getChildDishId();//加料对应菜品的品牌菜id
-                        DishSetmeal setmeal = setmealMap.get(extraId);
+                                                Long extraId = extraItem.getOrderDish().getSetmeal().getChildDishId();                        DishSetmeal setmeal = setmealMap.get(extraId);
                         if (setmeal != null) {
                             extraItem.getOrderDish().setSetmeal(setmeal);
                             extraItems.add(extraItem);
@@ -505,9 +425,7 @@ public class BeautyPropertyUtil {
                     }
                 }
 
-                //属性
-                //先移除所有口味做法，避免重复
-                if (Utils.isNotEmpty(properties)) {
+                                                if (Utils.isNotEmpty(properties)) {
                     for (int i = properties.size() - 1; i >= 0; i--) {
                         OrderProperty property = properties.get(0);
                         if (property.getPropertyKind() == PropertyKind.PROPERTY) {
@@ -515,12 +433,9 @@ public class BeautyPropertyUtil {
                         }
                     }
                 }
-                // 获取到商品的属性信息
-                DishPropertyFilter dishPropertyFilter = new DishPropertyFilter(dishShop);
+                                DishPropertyFilter dishPropertyFilter = new DishPropertyFilter(dishShop);
                 List<DishBrandProperty> dishBrandPropertyList = DishCache.getDishPropertyHolder().filter(dishPropertyFilter);
-                //菜品属性信息为空，使用的是公共库，所有属性都可以直接加进去
-                boolean hasDishProperty = false;//是否有口味做法
-                for (DishBrandProperty brandProperty : dishBrandPropertyList) {
+                                boolean hasDishProperty = false;                for (DishBrandProperty brandProperty : dishBrandPropertyList) {
                     if (brandProperty.getPropertyKind() == PropertyKind.PROPERTY) {
                         hasDishProperty = true;
                     }
@@ -532,8 +447,7 @@ public class BeautyPropertyUtil {
                         }
                     }
                 } else {
-                    //缓存菜品的私有属性库
-                    Map<Long, DishBrandProperty> brandPropertyMap = new HashMap<>();
+                                        Map<Long, DishBrandProperty> brandPropertyMap = new HashMap<>();
                     for (DishBrandProperty brandProperty : dishBrandPropertyList) {
                         if (brandProperty.getPropertyKind() == PropertyKind.PROPERTY) {
                             brandPropertyMap.put(brandProperty.getPropertyId(), brandProperty);
@@ -545,27 +459,22 @@ public class BeautyPropertyUtil {
                             continue;
                         }
 
-                        //判断菜品私有属性库，有没有当前属性
-                        Long propertyId = property.getProperty().getId();//加料对应菜品的品牌菜id
-                        DishBrandProperty brandProperty = brandPropertyMap.get(propertyId);
+                                                Long propertyId = property.getProperty().getId();                        DishBrandProperty brandProperty = brandPropertyMap.get(propertyId);
                         if (brandProperty != null) {
                             properties.add(property);
                         }
                     }
                 }
 
-                //备注
-                String memo = mShopcartItem.getMemo();
+                                String memo = mShopcartItem.getMemo();
                 boolean isGroupDish = mShopcartItem.isGroupDish();
                 ShopcartItemType shopcartItemType = mShopcartItem.getShopcartItemType();
-                // 因为orderDish对象已经变了，所以要创建新的条目
-                mShopcartItem = new ShopcartItem(mShopcartItem.getUuid(), orderDish);
+                                mShopcartItem = new ShopcartItem(mShopcartItem.getUuid(), orderDish);
                 BigDecimal increaseUnit = MathDecimal.trimZero(orderDish.getDishShop().getDishIncreaseUnit());
                 if (shopcartItemType == ShopcartItemType.MAINBATCH && increaseUnit != null) {
                     increaseUnit = increaseUnit.multiply(mShoppingCart.getOrder().getSubTradeCount());
                 }
-                // 拷贝对应属性
-                mShopcartItem.changeQty(increaseUnit);
+                                mShopcartItem.changeQty(increaseUnit);
                 mShopcartItem.setRelateInfo(relateId, relateUuid);
                 mShopcartItem.setExtraItems(extraItems);
                 mShopcartItem.setProperties(properties);
@@ -595,21 +504,16 @@ public class BeautyPropertyUtil {
         if (isSavedValidSingleOrComboItem()) {
             btnStandard.setAlpha(0.4f);
             showRemarkView();
-//        } else if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
-//            doActiveModifyBtn();
         } else if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
             modifyCombo();
         } else {
             btnStandard.setAlpha(1);
-//            showStandardView();
             showExtra();
         }
     }
 
 
-    /**
-     * 展示规格页
-     */
+
     public void showStandardView() {
         ViewUtil.setButtonSelected(vActionBar, btnStandard);
         if (mCustomStandardView == null) {
@@ -628,11 +532,7 @@ public class BeautyPropertyUtil {
         mChangeListener.changePage(IChangeMiddlePageListener.DEFAULT_PAGE, mUuid);
     }
 
-    /**
-     * 展示备注页
-     *
-     * @param
-     */
+
     public void showRemarkView() {
         ViewUtil.setButtonSelected(vActionBar, mShopcartItemBase==null?btnRemark:btnTradeItemRemark);
         mRemarkView = BeautyRemarkView_.build(mContext, mShopcartItemBase, mShoppingCart.getShoppingCartVo().getmTradeVo().getTrade().getTradeMemo(), true);
@@ -656,9 +556,7 @@ public class BeautyPropertyUtil {
         Log.e("BeautyPropertyUtils", "showRemark.....>");
     }
 
-    /**
-     * 显示加项
-     */
+
     public void showExtra() {
         ViewUtil.setButtonEnabled(btnStandard,true);
         ViewUtil.setButtonSelected(vActionBar, btnStandard);
@@ -666,15 +564,6 @@ public class BeautyPropertyUtil {
         if (mExtraView == null) {
             mExtraView = BeautyExtraView_.build(mContext);
             mExtraView.setListener(new OrderDishListenerImp() {
-//                @Override
-//                public void onAddMaterial(ExtraView.ExtraInfo extraInfo, BigDecimal qty) {
-//                    if(extraInfo != null && extraInfo.orderExtra != null){
-//                        if(qty == null){
-//                            qty = BigDecimal.ZERO;
-//                        }
-//                        extraInfo.orderExtra.setQty(qty, qty);
-//                    }
-//                }
 
                 @Override
                 public void onAddMaterial(ExtraInfo extraInfo, BigDecimal count) {
@@ -700,9 +589,7 @@ public class BeautyPropertyUtil {
     }
 
 
-    /**
-     * 显示属性（加项）
-     */
+
     public void showProperty() {
         if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
             modifyCombo();
@@ -711,12 +598,7 @@ public class BeautyPropertyUtil {
         }
     }
 
-    /**
-     * 单品或套餐的属性数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月15日
-     */
+
     private static class DishPropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;

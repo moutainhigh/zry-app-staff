@@ -6,18 +6,13 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * 促销规则表
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "loyt_mrule_market_rule")
 public class LoytMruleMarketRule extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "loyt_mrule_market_rule"
-     */
+
     public interface $ extends IdEntityBase.$ {
         public static final String name = "name";
         public static final String brandId = "brand_id";

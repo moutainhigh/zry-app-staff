@@ -10,10 +10,8 @@ import java.math.BigDecimal;
 public abstract class ZMIntent {
 
     public static void pay(Context context, TradeVo tradeVo) {
-        //Uri uri = Uri.parse("clam://pay.justpay.beauty.view");
-        Intent intent = new Intent();
-        //intent.setData(uri);
-        intent.setClassName(context.getPackageName(), "com.zhongmei.beauty.pay.BeautyPayActivity");
+                Intent intent = new Intent();
+                intent.setClassName(context.getPackageName(), "com.zhongmei.beauty.pay.BeautyPayActivity");
         intent.putExtra("tradeVo", tradeVo);
         context.startActivity(intent);
     }

@@ -13,11 +13,7 @@ import com.zhongmei.bty.dinner.orderdish.view.DishTwoTypeItemView;
 
 import java.util.List;
 
-/**
- * @Date： 17/3/6
- * @Description:
- * @Version: 1.0
- */
+
 public class DishTwoTypeAdapter extends BaseAdapter {
 
     private List<DishBrandType> mDatas;
@@ -37,14 +33,12 @@ public class DishTwoTypeAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
-        return null;
+                return null;
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return 0;
+                return 0;
     }
 
     @Override

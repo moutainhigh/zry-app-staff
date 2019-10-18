@@ -5,9 +5,7 @@ import android.text.TextUtils;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class ResourceUtils {
 
     private static final String CURRENCY_SYMBOL = "\\{HBF\\}";

@@ -23,9 +23,7 @@ import java.math.BigDecimal;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 自动下载, 并安装
- */
+
 public class DownloadApkDialog {
 
     private static final String TAG = DownloadApkDialog.class.getSimpleName();
@@ -77,9 +75,7 @@ public class DownloadApkDialog {
         mDownloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         mInfo = info;
         mUrl = info.getDownloadUrl();
-        //leiliang
-//        mUrl = "http://119.6.238.89:9999/down.androidgame-store.com/201602171005/C5BA789BB4777A3B96BAC5E6CA3897F7/new/game1/38/97638/altosadventure_1455501554099.apk?f=web_1";
-    }
+            }
 
     public DownloadApkDialog star() {
         return star(false);
@@ -90,9 +86,6 @@ public class DownloadApkDialog {
             show();
         }
         try {
-//            if (true) {
-//                throw new NullPointerException("");
-//            }
             if (mDownloadId > 0) {
                 mDownloadManager.remove(mDownloadId);
             }
@@ -104,8 +97,7 @@ public class DownloadApkDialog {
             listenDownloadStatus(mDownloadId);
         } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
-            //加个延时，防止组件还没有创建出来
-            new Handler().postDelayed(new Runnable() {
+                        new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     mDialogFragment.setMessage(mContext.getString(R.string.update_download_failed));
@@ -145,8 +137,6 @@ public class DownloadApkDialog {
 
     public void show() {
         mDialogFragment.show(mContext.getSupportFragmentManager(), "DownloadApkDialog");
-//        isDownloading = false;
-//        EventBus.getDefault().unregister(this);
     }
 
 
@@ -158,7 +148,6 @@ public class DownloadApkDialog {
             mDialogFragment.btn_positive.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    star(true);
                     mDownloadManager = (DownloadManager) mContext.getSystemService(
                             Context.DOWNLOAD_SERVICE);
                     star(true);
@@ -212,8 +201,6 @@ public class DownloadApkDialog {
 
         mDialogFragment.setMessage(mContext.getString(R.string.update_download_detail));
         if (event.totalBytes > 0)  {
-//            mDialogFragment.setMessage(mContext.getString(R.string.update_download_detail) + formatDownloadByteCount(event.downloadBytes) + "M/" + formatDownloadByteCount(event.totalBytes) + "M --- " +
-//                    event.downloadBytes * 100 / event.totalBytes + "%");
             mDialogFragment.setProgress(event.downloadBytes * 100 / event.totalBytes);
         }
     }
@@ -227,21 +214,16 @@ public class DownloadApkDialog {
     public long download(String url) throws Exception {
         Uri resource = Uri.parse(url);
         Request request = new Request(resource);
-//        request.setAllowedNetworkTypes(Request.NETWORK_MOBILE
-//                | Request.NETWORK_WIFI);
         request.setAllowedOverRoaming(false);
-        // 设置文件类型
-        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+                MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
         String mimeString = mimeTypeMap.getMimeTypeFromExtension(MimeTypeMap
                 .getFileExtensionFromUrl(url));
         request.setMimeType(mimeString);
-        // 在通知栏中显示
-        request.setShowRunningNotification(true);
+                request.setShowRunningNotification(true);
         request.setVisibleInDownloadsUi(true);
         File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/download/kry." + mInfo.getVersionCode() + ".apk");
         file.delete();
-        // sdcard的目录下的download文件夹
-        request.setDestinationInExternalPublicDir("/download/", "kry." + mInfo.getVersionCode() + ".apk");
+                request.setDestinationInExternalPublicDir("/download/", "kry." + mInfo.getVersionCode() + ".apk");
         request.setTitle(mContext.getString(R.string.download_request_title));
         mDownloadManager = (DownloadManager) mContext.getSystemService(
                 Context.DOWNLOAD_SERVICE);

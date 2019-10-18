@@ -10,37 +10,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @param <ID>
- * @version: 1.0
- * @date 2015年9月11日
- */
+
 public abstract class EntityBase<ID> implements IEntity<ID> {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 为true表示此记录已经被修改
-     */
+
     private boolean changed = false;
 
-    /**
-     * 如果此记录已经被修改则返回true，否则返回false
-     *
-     * @return
-     */
+
     public boolean isChanged() {
         return changed;
     }
 
-    /**
-     * 设置此记录的修改状态。在修改记录时要将此属性设置为true
-     *
-     * @param changed
-     */
+
     public void setChanged(boolean changed) {
         this.changed = changed;
     }

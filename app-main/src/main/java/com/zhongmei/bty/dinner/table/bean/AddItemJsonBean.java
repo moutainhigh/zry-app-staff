@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeItemProperty;
 import java.util.List;
 
 
-/**
- * @Date 2016/10/20
- * @Description:add_item_record mock_trade_item_data字段封装
- */
+
 public class AddItemJsonBean {
     List<TradeItem> tradeItems;
     List<TradeItemProperty> tradeItemProperties;

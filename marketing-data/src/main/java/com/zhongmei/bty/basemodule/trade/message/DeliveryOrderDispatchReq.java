@@ -3,19 +3,13 @@ package com.zhongmei.bty.basemodule.trade.message;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 订单下发配送平台请求体
- */
+
 
 public class DeliveryOrderDispatchReq {
-    //品牌ID
-    private Long brandId;
-    //门店ID
-    private Long shopId;
-    //目标配送平台
-    private Integer deliveryPlatform;
-    //下发配送订单信息
-    private List<DispatchOrder> orders;
+        private Long brandId;
+        private Long shopId;
+        private Integer deliveryPlatform;
+        private List<DispatchOrder> orders;
 
     public Long getBrandId() {
         return brandId;
@@ -50,18 +44,12 @@ public class DeliveryOrderDispatchReq {
     }
 
     public static class DispatchOrder {
-        //订单ID
-        private Long orderId;
-        //订单号
-        private String orderNo;
-        //是否重发配送单(正整数，0-否，>1-是,0标识首次下发，>1标识第n次下发，如3标识第三次下发请求)默认传0标识未知
-        private Integer isResend;
-        //配送费金额
-        private BigDecimal deliveryFee;
-        //配送订单类型（1-派送，2-取件,默认传1）
-        private Integer orderType;
-        //前配送平台编码
-        private Integer lastDeliveryPlatform;
+                private Long orderId;
+                private String orderNo;
+                private Integer isResend;
+                private BigDecimal deliveryFee;
+                private Integer orderType;
+                private Integer lastDeliveryPlatform;
 
         public Long getOrderId() {
             return orderId;

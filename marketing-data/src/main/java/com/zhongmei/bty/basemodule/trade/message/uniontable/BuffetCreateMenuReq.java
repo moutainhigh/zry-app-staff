@@ -8,9 +8,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeItem;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BuffetCreateMenuReq {
 
@@ -20,8 +18,7 @@ public class BuffetCreateMenuReq {
 
     private List<TradeBuffetPeople> tradeBuffetPeoples;
 
-    private TradeItem menuTradeItem;//餐标
-
+    private TradeItem menuTradeItem;
     private TradeDeposit tradeDeposit;
 
     public void setMainTrade(Trade mainTrade) {

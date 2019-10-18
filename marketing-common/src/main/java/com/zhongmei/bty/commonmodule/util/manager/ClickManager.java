@@ -30,13 +30,7 @@ public class ClickManager {
         INTERVAL_TIME = iNTERVAL_TIME;
     }
 
-    /**
-     * @Title: isClicked
-     * @Description: TODO
-     * @Param @param resId
-     * @Param @return 同一个按键500毫秒内只能点击一次
-     * @Return boolean 返回类型
-     */
+
     public boolean isClicked(int resId) {
         long lastClickTime = 0L;
         if (mViewClickedMap.containsKey(resId)) {
@@ -52,13 +46,7 @@ public class ClickManager {
     }
 
 
-    /**
-     * @Title: isClicked
-     * @Description: TODO
-     * @Param @param resId
-     * @Param @return 同一个按键500毫秒内只能点击一次
-     * @Return boolean 返回类型
-     */
+
     public boolean isClicked(int resId, long time) {
         long lastClickTime = 0L;
         if (mViewClickedMap.containsKey(resId)) {
@@ -73,12 +61,7 @@ public class ClickManager {
         return false;
     }
 
-    /**
-     * @Title: isClicked
-     * @Description: 所有点击事件在500毫秒内部能重复点击
-     * @Param @return TODO
-     * @Return boolean 返回类型
-     */
+
     public boolean isClicked() {
         long current = System.currentTimeMillis();
         long timeD = current - lastClickTime;
@@ -89,12 +72,7 @@ public class ClickManager {
         return false;
     }
 
-    /**
-     * 1秒限制
-     *
-     * @param resId
-     * @return
-     */
+
     public boolean isClickedLong(int resId) {
         long lastClickTime = 0;
         if (mViewClickedMap.containsKey(resId)) {

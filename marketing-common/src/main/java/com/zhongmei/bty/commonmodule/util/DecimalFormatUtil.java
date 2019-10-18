@@ -3,9 +3,7 @@ package com.zhongmei.bty.commonmodule.util;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DecimalFormatUtil {
 

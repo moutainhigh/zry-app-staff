@@ -22,12 +22,7 @@ public class TradeSourceUtils {
         return dinnertableTradeVo.getTradeVo().getTrade().getSource() == sourceId;
     }
 
-    /**
-     * 第三方平台下单
-     *
-     * @param tradeVo
-     * @return
-     */
+
     public static boolean isOtherPlatformTrade(DinnertableTradeVo tradeVo) {
         return isTradeUnProcessed(tradeVo, SourceId.WECHAT)
                 || isTradeUnProcessed(tradeVo, SourceId.XIN_MEI_DA)
@@ -37,12 +32,7 @@ public class TradeSourceUtils {
                 || isTradePayedUnAcceptFromOpenPlatform(tradeVo);
     }
 
-    /**
-     * 是否是百度糯米已支付未接受的单据
-     *
-     * @param dinnertableTradeVo
-     * @return
-     */
+
     public static boolean isTradePayedUnAcceptFromBAIDURICE(DinnertableTradeVo dinnertableTradeVo) {
 
         if (dinnertableTradeVo == null || dinnertableTradeVo.getTradeVo() == null
@@ -64,35 +54,19 @@ public class TradeSourceUtils {
         return isTradeUnProcessed(tradeVo, SourceId.WECHAT);
     }
 
-    /**
-     * 判断熟客下单的未处理订单
-     *
-     * @param dinnertableTradeVo
-     * @return
-     */
+
     public static boolean isTradePayedUnAcceptFromFAMILIAR(DinnertableTradeVo dinnertableTradeVo) {
         return isTradeUnProcessed(dinnertableTradeVo, SourceId.FAMILIAR);
     }
 
 
-    /**
-     * 判断开放平台下单的未处理订单
-     *
-     * @param dinnertableTradeVo
-     * @return
-     */
+
     public static boolean isTradePayedUnAcceptFromOpenPlatform(DinnertableTradeVo dinnertableTradeVo) {
         return isTradeUnProcessed(dinnertableTradeVo, SourceId.OPEN_PLATFORM);
     }
 
 
-    /**
-     * 判断是否为未处理订单
-     *
-     * @param dinnertableTradeVo
-     * @param sourceId           订单来源
-     * @return
-     */
+
     public static boolean isTradeUnProcessed(DinnertableTradeVo dinnertableTradeVo, SourceId sourceId) {
         if (dinnertableTradeVo == null
                 || dinnertableTradeVo.getDinnertableTrade() == null
@@ -120,12 +94,7 @@ public class TradeSourceUtils {
         return false;
     }
 
-    /**
-     * 是否是百度糯米已支付已接受的单据
-     *
-     * @param dinnertableTradeVo
-     * @return
-     */
+
     public static boolean isTradePayedAcceptedFromBAIDURICE(DinnertableTradeVo dinnertableTradeVo) {
         return isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.BAIDU_RICE);
     }
@@ -138,13 +107,7 @@ public class TradeSourceUtils {
         return isTradePayedAndConfirmed(dinnertableTradeVo, SourceId.OPEN_PLATFORM);
     }
 
-    /**
-     * 已支付已确认
-     *
-     * @param dinnertableTradeVo
-     * @param sourceId
-     * @return
-     */
+
     public static boolean isTradePayedAndConfirmed(DinnertableTradeVo dinnertableTradeVo, SourceId sourceId) {
         if (dinnertableTradeVo == null || dinnertableTradeVo.getTradeVo() == null
                 || dinnertableTradeVo.getStatus() == DinnertableStatus.EMPTY) {

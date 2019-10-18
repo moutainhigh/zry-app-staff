@@ -16,17 +16,12 @@ import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年9月20日
- */
+
 public class DinnertableTradeModel implements IDinnertableTrade {
 
     private final TradeTableInfo tradeTableInfo;
     private final IDinnertable dinnertable;
-    /**
-     * 耗时，根据startTime计算
-     */
+
     private int spendTime;
 
     public DinnertableTradeModel(TradeTableInfo tradeTableInfo, IDinnertable dinnertable) {
@@ -158,7 +153,6 @@ public class DinnertableTradeModel implements IDinnertableTrade {
 
     @Override
     public String getTradeAmount() {
-//		Log.i("zhubo","tradeTableInfo"+tradeTableInfo);
         if (tradeTableInfo.tradeSaleAmount == null) {
             return ShopInfoCfg.formatCurrencySymbol(String.valueOf(0));
         } else {
@@ -199,12 +193,7 @@ public class DinnertableTradeModel implements IDinnertableTrade {
         return dinnertable.getName();
     }
 
-    /**
-     * @Date 2016/10/13
-     * @Description:获取http请求数据
-     * @Param
-     * @Return
-     */
+
     public AsyncHttpRecord getAsyncHttpRecord() {
         if (tradeTableInfo.httpRecord != null && tradeTableInfo.httpRecord.size() > 0) {
             return tradeTableInfo.httpRecord.get(0);
@@ -212,12 +201,7 @@ public class DinnertableTradeModel implements IDinnertableTrade {
         return null;
     }
 
-    /**
-     * @Date 2016/10/20
-     * @Description:获取订单对应加菜数据
-     * @Param
-     * @Return
-     */
+
     public List<AddItemVo> getAddItemVos() {
         return tradeTableInfo.addItemVoList;
     }

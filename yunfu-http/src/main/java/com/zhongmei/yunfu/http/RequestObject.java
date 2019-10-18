@@ -7,11 +7,7 @@ import com.zhongmei.yunfu.context.util.SystemUtils;
 
 import java.util.List;
 
-/**
- * 实时请求数据的封装类
- *
- * @param <T>
- */
+
 public class RequestObject<T> implements NoProGuard {
 
     private static final transient RequestObjectObservable mInterceptCreate = new RequestObjectObservable();
@@ -28,8 +24,7 @@ public class RequestObject<T> implements NoProGuard {
     private String versionName;
     private String appType;
     private String timeZone;
-    //每一次请求的操作唯一标识
-    private String opVersionUUID;
+        private String opVersionUUID;
     public Long userId;
     public String userName;
     public String reqMarker;
@@ -155,10 +150,8 @@ public class RequestObject<T> implements NoProGuard {
         request.setTimeZone(ShopInfoCfg.getInstance().timeZone);
         String opsUuid = SystemUtils.genOnlyIdentifier();
         request.setOpVersionUUID(opsUuid);
-        //AuthLogManager.getInstance().setOpsVersion(opsUuid);
-        if (needReqMarker) {
-            request.reqMarker = SystemUtils.genOnlyIdentifier();//幂等重试标签，目前只针对部分接口开放
-        }
+                if (needReqMarker) {
+            request.reqMarker = SystemUtils.genOnlyIdentifier();        }
         request.setContent(content);
         if (content instanceof NationInfoInterface) {
             NationInfoInterface nationInfoInterface = (NationInfoInterface) content;

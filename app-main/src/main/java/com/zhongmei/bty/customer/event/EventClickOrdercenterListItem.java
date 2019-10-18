@@ -6,13 +6,7 @@ import com.zhongmei.bty.customer.CustomerOrdercenterFragment.WindowToken;
 import com.zhongmei.bty.basemodule.customer.bean.CustomerSellOrderBean;
 import com.zhongmei.bty.basemodule.devices.mispos.enums.EntityCardType;
 
-/**
- * @Date：2016年3月16日
- * @Description:点击售卡记录发送事件
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class EventClickOrdercenterListItem {
     public OrderCategory orderCategory;
 

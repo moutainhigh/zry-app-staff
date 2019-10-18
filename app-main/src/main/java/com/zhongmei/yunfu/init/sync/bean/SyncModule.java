@@ -10,15 +10,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * 同步数据模块
- *
- * @created 2017/5/4.
- */
+
 public class SyncModule {
 
-    private static final Set<String> waitSyncModules = new LinkedHashSet<>();//等待同步的表，包含all表示同步所有的表，其他的表一次存储表名。
-    private volatile boolean isNotify = false;
+    private static final Set<String> waitSyncModules = new LinkedHashSet<>();    private volatile boolean isNotify = false;
 
     public boolean hasSyncModules() {
         synchronized (waitSyncModules) {
@@ -60,18 +55,13 @@ public class SyncModule {
         putSyncModules(modules, false);
     }
 
-    /**
-     * 缓存需要同步的表
-     *
-     * @param modules
-     */
+
     public void putSyncModules(Collection<String> modules, boolean isNotify) {
         synchronized (waitSyncModules) {
             SyncServiceUtil.info(String.format("putSyncModules[%d]: %s", modules.size(), modules));
             if (modules != null) {
                 waitSyncModules.addAll(modules);
-                //nofify的优先级要高于其它
-                if (isNotify) {
+                                if (isNotify) {
                     this.isNotify = isNotify;
                 }
 
@@ -84,11 +74,7 @@ public class SyncModule {
         void onWait();
     }
 
-    /**
-     * 排除不在syncContent的module
-     *
-     * @param modules
-     */
+
     public static void excludeModule(Collection<String> modules) {
         Set<String> syncModuleAll = SyncContent.getSyncModuleAll();
         List<String> removeList = new ArrayList<>();

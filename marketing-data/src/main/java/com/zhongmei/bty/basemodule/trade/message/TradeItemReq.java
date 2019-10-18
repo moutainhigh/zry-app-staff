@@ -5,10 +5,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeItem;
 
 import java.util.List;
 
-/**
- * @date：2016-3-18 上午10:16:08
- * @Description:
- */
+
 public class TradeItemReq extends TradeItem {
 
     private static final long serialVersionUID = 1L;

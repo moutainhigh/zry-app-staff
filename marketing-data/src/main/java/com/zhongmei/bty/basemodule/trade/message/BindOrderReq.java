@@ -7,15 +7,10 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BindOrderReq {
-    private Long userId;  //配送员 ID
-    private String userName; //	配送员名
-    private List<TradeInfo> tradeInfos;//订单信息
-
+    private Long userId;      private String userName;     private List<TradeInfo> tradeInfos;
     public Long getUserId() {
         return userId;
     }
@@ -53,9 +48,7 @@ public class BindOrderReq {
     }
 
     private class TradeInfo {
-        private Long tradeId;//当前订单的ID
-        private Long tradeExtraServerUpdateTime;//tradeExtra的服务器时间
-
+        private Long tradeId;        private Long tradeExtraServerUpdateTime;
         public Long getTradeId() {
             return tradeId;
         }

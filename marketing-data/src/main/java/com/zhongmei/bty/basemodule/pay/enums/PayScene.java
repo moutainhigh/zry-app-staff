@@ -4,51 +4,30 @@ import com.zhongmei.yunfu.util.ValueEnum;
 
 import java.io.Serializable;
 
-/**
- * 支付场景值枚举
- * Created by demo on 2018/12/15
- */
+
 
 
 public enum PayScene implements ValueEnum<Integer>, Serializable {
 
-    /**
-     * 充值
-     */
+
     SCENE_CODE_CHARGE(1),
 
-    /**
-     * 购物消费
-     */
+
     SCENE_CODE_SHOP(2),
-    /**
-     * 会员销账
-     */
+
     SCENE_CODE_WRITEOFF(3),
 
-    /**
-     * 烘焙预定
-     */
+
     SCENE_CODE_BAKERY_BOOKING(4),
 
-    /**
-     * 正餐自助交押金
-     */
+
     SCENE_CODE_BUFFET_DEPOSIT(5),
-    /**
-     * 预定交定金
-     */
+
     SCENE_CODE_BOOKING_DEPOSIT(6),
-    /**
-     * 烘焙押金
-     */
+
     SCENE_CODE_BAKERY_BOOKING_DEPOSIT(7),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

@@ -14,126 +14,78 @@ import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 
-/**
- * EcCardKind is a ORMLite bean type. Corresponds to the database table "ec_card_kind"
- */
+
 @DatabaseTable(tableName = "ec_card_kind")
 public class EcCardKind extends CrmBasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "ec_card_kind"
-     */
+
     public interface $ extends CrmBasicEntityBase.$ {
 
-        /**
-         * card_kind_name
-         */
+
         public static final String cardKindName = "card_kind_name";
 
-        /**
-         * is_need_cost
-         */
+
         public static final String isNeedCost = "is_need_cost";
 
-        /**
-         * card_cost
-         */
+
         public static final String cardCost = "card_cost";
 
-        /**
-         * is_need_pwd
-         */
+
         public static final String isNeedPwd = "is_need_pwd";
 
-        /**
-         * is_integral
-         */
+
         public static final String isIntegral = "is_integral";
 
-        /**
-         * is_discount
-         */
+
         public static final String isDiscount = "is_discount";
 
-        /**
-         * is_value_card
-         */
+
         public static final String isValueCard = "is_value_card";
 
-        /**
-         * is_send
-         */
+
         public static final String isSend = "is_send";
 
-        /**
-         * max_batch_num
-         */
+
         public static final String maxBatchNum = "max_batch_num";
 
-        /**
-         * max_seq_num
-         */
+
         public static final String maxSeqNum = "max_seq_num";
 
-        /**
-         * card_seq_num
-         */
+
         public static final String cardSeqNum = "card_seq_num";
 
-        /**
-         * card_kind_status
-         */
+
         public static final String cardKindStatus = "card_kind_status";
 
-        /**
-         * is_made
-         */
+
         public static final String isMade = "is_made";
 
-        /**
-         * dish_brand_id
-         */
+
         public static final String dishBrandId = "dish_brand_id";
 
-        /**
-         * dish_type_id
-         */
+
         public static final String dishTypeId = "dish_type_id";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * card_type
-         */
+
         public static final String cardType = "card_type";
 
-        /**
-         * work_status
-         */
+
         public static final String workStatus = "work_status";
-        /**
-         * price
-         */
+
         public static final String price = "price";
     }
 
@@ -197,14 +149,10 @@ public class EcCardKind extends CrmBasicEntityBase implements ICreator, IUpdator
     @DatabaseField(columnName = "card_type")
     private Integer cardType;
 
-    @DatabaseField(columnName = "price_Limit")//add v8.2 添加会员权益卡权益开关
-    public Integer priceLimit;//0:不限制。1:使用储值支付',
+    @DatabaseField(columnName = "price_Limit")    public Integer priceLimit;
+    @DatabaseField(columnName = "work_status")     public Integer workStatus;
 
-    @DatabaseField(columnName = "work_status") // v8.3 卡状态
-    public Integer workStatus;
-
-    @DatabaseField(columnName = "price") // beauty 添加下行售价
-    public BigDecimal price;
+    @DatabaseField(columnName = "price")     public BigDecimal price;
 
     public void setWorkStatus(WorkStatus workStatus) {
         this.workStatus = ValueEnums.toValue(workStatus);

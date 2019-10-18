@@ -5,11 +5,7 @@ import com.zhongmei.bty.commonmodule.database.enums.SubjectType;
 
 import java.math.BigDecimal;
 
-/**
- * @Date： 2016/7/21
- * @Description:收支录入请求对象
- * @Version: 1.0
- */
+
 public class PaymentsInputReq {
 
     private String name;
@@ -34,14 +30,10 @@ public class PaymentsInputReq {
 
     private Long shopIdenty;
 
-    private Long accountSubjectId;//account_subject表的主键
-
-    private String bizDate;//营业日期
-
-    private BigDecimal amount;//交易记录金额，收入是为正，支出时为负
-
-    private Long payModeId;//支付方式ID
-
+    private Long accountSubjectId;
+    private String bizDate;
+    private BigDecimal amount;
+    private Long payModeId;
     private String payModeName;
 
     public String getDeviceIdenty() {

@@ -11,11 +11,7 @@ import com.zhongmei.yunfu.util.Checks;
 import com.zhongmei.yunfu.ui.view.CalmLoadingDialogFragment;
 import com.zhongmei.yunfu.context.UILoadingController;
 
-/**
- * @param <T>
- * @version: 1.0
- * @date 2015年4月19日
- */
+
 public class LoadingResponseListener<T> extends EventResponseListener<T> implements ResponseListener<T>, UILoadingController {
 
     private final ResponseListener<T> mListener;
@@ -68,14 +64,7 @@ public class LoadingResponseListener<T> extends EventResponseListener<T> impleme
         mListener.onError(error);
     }
 
-    /**
-     * 确保获取到一个LoadingResponseListener对象
-     * 如果指定的listener不是LoadingResponseListener则创建一个LoadingResponseListener并返回
-     *
-     * @param listener
-     * @param fragmentManager
-     * @return
-     */
+
     public static <T> ResponseListener<T> ensure(ResponseListener<T> listener, FragmentManager fragmentManager) {
         if (listener instanceof LoadingResponseListener) {
             return listener;

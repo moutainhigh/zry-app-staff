@@ -4,9 +4,7 @@ import com.zhongmei.bty.basemodule.trade.settings.IPanelItemSettings;
 import com.zhongmei.bty.commonmodule.core.annotions.GET;
 import com.zhongmei.bty.commonmodule.core.annotions.SETTINGS;
 
-/**
 
- */
 @SETTINGS(name = "type2")
 public interface IPanelItemSettings_Type2 extends IPanelItemSettings {
 

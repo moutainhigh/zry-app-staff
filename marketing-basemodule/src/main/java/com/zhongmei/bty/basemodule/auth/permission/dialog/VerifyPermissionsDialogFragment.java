@@ -56,11 +56,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @Date：2015年9月29日 下午3:22:32
- * @Description: 权限校验对话框
- * @Version: 1.0
- */
+
 
 @EFragment(resName = "auth_permission_verify_permission_dialog")
 public class VerifyPermissionsDialogFragment extends BasicDialogFragment implements
@@ -127,22 +123,12 @@ public class VerifyPermissionsDialogFragment extends BasicDialogFragment impleme
         this.tag = tag;
     }
 
-    /**
-     * @Title: setSpinnerData
-     * @Description: TODO 设置下拉框数据
-     * @Param @param list TODO
-     * @Return void 返回类型
-     */
+
     public void setSpinnerData(List<User> list) {
         userList = list;
     }
 
-    /**
-     * 设置授权操作点信息
-     *
-     * @param authType
-     * @param authDesc
-     */
+
     public void setAuthLogData(AuthType authType, String authDesc) {
         this.authType = authType;
         this.authDesc = authDesc;
@@ -206,8 +192,7 @@ public class VerifyPermissionsDialogFragment extends BasicDialogFragment impleme
         } else {
             if (Session.getFunc(UserFunc.class)
                     .checkPassword(currentAuthUser, password.getInputPassword())) {
-                // 密码校验成功，回调加对话框消失
-                saveAuthCache();
+                                saveAuthCache();
                 if (null != listener) {
                     if (listener instanceof PermissionVerify2) {
                         ((PermissionVerify2) listener).verify(currentAuthUser, tag, true);
@@ -217,8 +202,7 @@ public class VerifyPermissionsDialogFragment extends BasicDialogFragment impleme
                 }
                 this.dismiss();
             } else {
-                // 密码校验失败
-                password.startAnimation(Utils.shakeAnimation(3));
+                                password.startAnimation(Utils.shakeAnimation(3));
                 Message message = Message.obtain();
                 message.what = 2;
                 handler.sendMessageDelayed(message, 600);
@@ -232,9 +216,7 @@ public class VerifyPermissionsDialogFragment extends BasicDialogFragment impleme
 
     }
 
-    /**
-     * 保存auth到缓存
-     */
+
     private void saveAuthCache() {
         if (authType == null || authType == AuthType.__UNKNOWN__ || currentAuthUser == null) {
             return;
@@ -329,49 +311,23 @@ public class VerifyPermissionsDialogFragment extends BasicDialogFragment impleme
             this.getActivity().onKeyDown(keyCode, event);
             return false;
         }
-        //add 20170321 begin 添加外接键盘输入
-        if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_NUMPAD_DOT) {//删除键
-            password.deleteText(false);
+                if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_NUMPAD_DOT) {            password.deleteText(false);
             showError(false);
             return true;
         }
-        if (event.getAction() == KeyEvent.ACTION_DOWN && ClickManager.isNumber(keyCode)) {//数字键
-            password.setText(event.getNumber() + "");
+        if (event.getAction() == KeyEvent.ACTION_DOWN && ClickManager.isNumber(keyCode)) {            password.setText(event.getNumber() + "");
             showError(false);
             return true;
         }
-        //消费回车键
-        if (keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER) {
+                if (keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER) {
             return true;
         }
-        //add 20170321 end 添加外接键盘输入
-        return false;
+                return false;
     }
 
-    //add v8.16  start人脸授权
-	/*@Click(resName = "btn_face_pick")
-	public void startFace() {
-		boolean available = BaiduFaceRecognition.getInstance().checkFaceServer();
-		if (!available) {
-			if (Session.getAuthUser() != null) {
-				FacecognitionActivity.showFaceServerWarmDialog(getContext(), getChildFragmentManager());
-			} else {
-				DialogUtil.showHintConfirmDialog(getChildFragmentManager(), getString(R.string.talent_open_face_alter),
-						R.string.talent_know_alter, null, false, "confirm_band_face");
-			}
-			return;
-		}
-		startActivityForResult(BaiduFaceRecognition.getInstance().getRecognitionFaceIntent(), RC_TALENT_FACE_PERMISSION);
-	}*/
 
-	/*@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == RC_TALENT_FACE_PERMISSION && resultCode == Activity.RESULT_OK) {
-			String faceCode = data.getStringExtra(BaiduFaceRecognition.KEY_FACE_CODE);
-			facePermissionCheck(faceCode);
-		}
-	}*/
+
+
 
 
     private void facePermissionCheck(final String faceCode) {
@@ -395,8 +351,7 @@ public class VerifyPermissionsDialogFragment extends BasicDialogFragment impleme
                     if (user != null) {
                         if (userList != null && userList.size() > 0) {
                             for (User loginer : userList) {
-                                if (loginer.equals(user)) {//配当前有登录权限的用户
-                                    permissionUser(user);
+                                if (loginer.equals(user)) {                                    permissionUser(user);
                                     return;
                                 }
                             }
@@ -412,15 +367,12 @@ public class VerifyPermissionsDialogFragment extends BasicDialogFragment impleme
                 }
             }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
         } else {
-            //人脸认证失败
 
         }
     }
 
-    private static int RC_TALENT_FACE_PERMISSION = 0X004;//人脸授权
-
-    //绑定user 到 session
-    private void permissionUser(final User user) {
+    private static int RC_TALENT_FACE_PERMISSION = 0X004;
+        private void permissionUser(final User user) {
         saveAuthCache();
         if (null != listener) {
             if (listener instanceof PermissionVerify2) {
@@ -431,5 +383,4 @@ public class VerifyPermissionsDialogFragment extends BasicDialogFragment impleme
         }
         this.dismiss();
     }
-    //add v8.16  end人脸授权
-}
+    }

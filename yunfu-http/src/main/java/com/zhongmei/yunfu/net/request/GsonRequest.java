@@ -1,8 +1,6 @@
 package com.zhongmei.yunfu.net.request;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,17 +21,13 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-/**
- * @param <Q> Request数据类型
- * @param <R> Response数据类型
- */
+
 public class GsonRequest<Q, R> extends StatisticsRequest<R> {
 
     private static final String TAG = GsonRequest.class.getSimpleName();
 
     private static final boolean isDebug = true;
 
-    // public static final String PROTOCOL_CHARSET = "utf-8";
 
     public static final String PROTOCOL_CONTENT_TYPE = "application/json; charset=" + PROTOCOL_CHARSET;
 
@@ -57,43 +51,17 @@ public class GsonRequest<Q, R> extends StatisticsRequest<R> {
         makeBodyStr();
     }
 
-    /**
-     * @param url
-     * @param requestObject 要POST的数据
-     * @param responseType  Response数据要转成的对象类型
-     * @param listener
-     * @param errorListener
-     */
+
     public GsonRequest(String url, Q requestObject, Type responseType, Response.Listener<R> listener,
                        Response.ErrorListener errorListener) {
-        /*super(Method.POST, url, errorListener);
-        Checks.verifyNotNull(responseType, "responseType");
-        Checks.verifyNotNull(listener, "listener");
-        this.mRequestObject = requestObject;
-        this.mResponseType = responseType;
-        this.mListener = listener;
-        mGson = Gsons.gsonBuilder().create();
-        makeBodyStr();*/
+
         this(Method.POST, url, requestObject, responseType, listener, errorListener);
     }
 
-    /**
-     * @param url
-     * @param body
-     * @param responseType
-     * @param listener
-     * @param errorListener
-     */
+
     public GsonRequest(String url, String body, Type responseType, Response.Listener<R> listener,
                        Response.ErrorListener errorListener) {
-        /*super(Method.POST, url, errorListener);
-        Checks.verifyNotNull(responseType, "responseType");
-        Checks.verifyNotNull(listener, "listener");
-        this.body = body;
-        this.mListener = listener;
-        this.mRequestObject = null;
-        this.mResponseType = responseType;
-        mGson = Gsons.gsonBuilder().create();*/
+
         this(Method.POST, url, body, responseType, listener, errorListener);
     }
 
@@ -109,9 +77,7 @@ public class GsonRequest<Q, R> extends StatisticsRequest<R> {
         mGson = Gsons.gsonBuilder().create();
     }
 
-    /**
-     * @param timeout 单位ms
-     */
+
     public void setTimeout(int timeout) {
         this.setRetryPolicy(new DefaultRetryPolicy(timeout, 0, 0));
     }
@@ -145,11 +111,7 @@ public class GsonRequest<Q, R> extends StatisticsRequest<R> {
         }
     }
 
-    /**
-     * 获取body字符串
-     *
-     * @return
-     */
+
     public String getBodyStr() {
         if (TextUtils.isEmpty(body)) {
             makeBodyStr();
@@ -158,9 +120,7 @@ public class GsonRequest<Q, R> extends StatisticsRequest<R> {
         return body;
     }
 
-    /**
-     * 生成body字符串
-     */
+
     private void makeBodyStr() {
         if (mRequestObject instanceof String) {
             body = (String) mRequestObject;

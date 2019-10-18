@@ -17,9 +17,7 @@ import com.zhongmei.yunfu.resp.ResponseListener;
 import com.zhongmei.bty.data.operates.impl.TradeOperatesImpl;
 import com.zhongmei.bty.data.operates.message.content.NullReq;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyTradeOperatesImpl extends TradeOperatesImpl {
 
@@ -29,10 +27,7 @@ public class BeautyTradeOperatesImpl extends TradeOperatesImpl {
 
     @Override
     public void closeDetail(TransferReq transferReq, ResponseListener<TransferCloseBillData> listener) {
-        /*String url = ServerAddressUtil.getInstance().mindTransfer();
-        OpsRequest.Executor<TransferReq, TransferCloseBillData> executor = OpsRequest.Executor.create(url);
-        executor.requestValue(transferReq).responseClass(TransferCloseBillData.class).timeout(30000).execute(listener,
-                "doTransferCloseBill");*/
+
     }
 
     @Override

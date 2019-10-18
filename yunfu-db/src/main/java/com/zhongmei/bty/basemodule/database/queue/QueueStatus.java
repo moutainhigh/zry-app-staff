@@ -2,35 +2,21 @@ package com.zhongmei.bty.basemodule.database.queue;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 排队状态 0:排队中;1:入场;-1作废;-2取消
- */
+
 public enum QueueStatus implements ValueEnum<Integer> {
-    /**
-     * 排队中
-     */
+
     QUEUEING(0),
 
-    /**
-     * 入场
-     */
+
     ADMISSION(1),
 
-    /**
-     * 作废 过号
-     */
+
     INVALID(-1),
 
-    /**
-     * 取消
-     */
+
     CANCEL(-2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

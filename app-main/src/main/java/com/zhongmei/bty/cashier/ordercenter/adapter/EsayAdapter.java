@@ -12,15 +12,7 @@ import android.widget.BaseAdapter;
 
 import com.zhongmei.bty.basemodule.orderdish.bean.TradeItemVo;
 
-/**
- * 简单自定义布局Adapter , <br>
- * 使用时直接new一个子类传入对应的{@link AdapterData}, {@link AdapterView}
- * 即可
- *
- * @param <T> List, Grid中的列表数据类型
- * @param <K> 列表中的自定义View
- * @date 2014-7-23
- */
+
 public abstract class EsayAdapter<T extends TradeItemVo, K extends AdapterView<T>> extends BaseAdapter {
     private static final String TAG = EsayAdapter.class.getSimpleName();
 

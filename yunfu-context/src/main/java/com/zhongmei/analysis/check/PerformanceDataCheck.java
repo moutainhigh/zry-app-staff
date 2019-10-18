@@ -5,9 +5,7 @@ import android.text.TextUtils;
 import com.zhongmei.analysis.PerformanceActionData;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PerformanceDataCheck implements IDataCheck<PerformanceActionData> {
 

@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class RouteIntent {
 

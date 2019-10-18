@@ -19,11 +19,9 @@ public class CommonCheckboxDialogFragment extends CommonDialogFragment implement
         OnClickListener, OnKeyListener {
 
     @ViewById(R.id.print_kitchen_cb)
-    CheckBox printKitchenCb;//是否传送后厨
-
+    CheckBox printKitchenCb;
     @ViewById(R.id.copy_dish_property_cb)
-    CheckBox copyDishPropertyCb;//是否复制菜品属性
-
+    CheckBox copyDishPropertyCb;
 
     @AfterViews
     protected void initView() {

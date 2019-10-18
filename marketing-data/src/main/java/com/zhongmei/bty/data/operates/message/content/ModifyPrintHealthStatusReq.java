@@ -3,14 +3,10 @@ package com.zhongmei.bty.data.operates.message.content;
 import com.zhongmei.bty.commonmodule.database.enums.HealthStatus;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * 修改打印机健康状态请求体
- * Created by demo on 2018/12/15
- */
+
 public class ModifyPrintHealthStatusReq {
 
-    private Long id;//打印机id
-
+    private Long id;
     private Long updatorId;
 
     private String uuid;

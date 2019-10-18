@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-//import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -20,8 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-public class ViewHolder //extends RecyclerView.ViewHolder
-{
+public class ViewHolder {
     private SparseArray<View> mViews;
     private int mPosition;
     private View mConvertView;
@@ -29,8 +27,7 @@ public class ViewHolder //extends RecyclerView.ViewHolder
     private int mLayoutId;
 
     public ViewHolder(Context context, View itemView, ViewGroup parent, int position) {
-        //super(itemView);
-        mContext = context;
+                mContext = context;
         mConvertView = itemView;
         mPosition = position;
         mViews = new SparseArray<View>();
@@ -55,12 +52,7 @@ public class ViewHolder //extends RecyclerView.ViewHolder
     }
 
 
-    /**
-     * 通过viewId获取控件
-     *
-     * @param viewId
-     * @return
-     */
+
     public <T extends View> T getView(int viewId) {
         View view = mViews.get(viewId);
         if (view == null) {
@@ -74,13 +66,7 @@ public class ViewHolder //extends RecyclerView.ViewHolder
         return mConvertView;
     }
 
-    /**
-     * 设置TextView的值
-     *
-     * @param viewId
-     * @param text
-     * @return
-     */
+
     public ViewHolder setText(int viewId, String text) {
         TextView tv = getView(viewId);
         tv.setText(text);
@@ -134,8 +120,7 @@ public class ViewHolder //extends RecyclerView.ViewHolder
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             getView(viewId).setAlpha(value);
         } else {
-            // Pre-honeycomb hack to set Alpha value
-            AlphaAnimation alpha = new AlphaAnimation(value, value);
+                        AlphaAnimation alpha = new AlphaAnimation(value, value);
             alpha.setDuration(0);
             alpha.setFillAfter(true);
             getView(viewId).startAnimation(alpha);
@@ -214,9 +199,7 @@ public class ViewHolder //extends RecyclerView.ViewHolder
         return this;
     }
 
-    /**
-     * 关于事件的
-     */
+
     public ViewHolder setOnClickListener(int viewId,
                                          View.OnClickListener listener) {
         View view = getView(viewId);

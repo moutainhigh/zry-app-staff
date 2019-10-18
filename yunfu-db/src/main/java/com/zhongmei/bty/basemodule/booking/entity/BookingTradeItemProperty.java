@@ -9,9 +9,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "booking_trade_item_property")
 public class BookingTradeItemProperty extends ServerEntityBase {
 
@@ -47,95 +45,65 @@ public class BookingTradeItemProperty extends ServerEntityBase {
 
     }
 
-    /**
-     * 自动创建的uuid
-     */
+
     @DatabaseField(columnName = "uuid")
     private String uuid;
 
-    /**
-     * 服务端自增ID
-     */
+
     @DatabaseField(columnName = "booking_trade_item_id")
     private Long bookingTradeItemId;
 
-    /**
-     * 关联BOOKING_TRADE_ITEM的UUID
-     */
+
     @DatabaseField(columnName = "booking_trade_item_uuid")
     private String bookingTradeItemUuid;
 
-    /**
-     * 属性类别：(待口味、做法等统一后可以考虑取消此字段)  1:TASTE:口味  2:RECIPE:做法
-     */
+
     @DatabaseField(columnName = "property_type")
     private Integer propertyType;
 
-    /**
-     * 属性UUID，对应口味或做法的主键id（uuid）
-     */
+
     @DatabaseField(columnName = "property_uuid")
     private String propertyUuid;
 
-    /**
-     * 属性名称
-     */
+
     @DatabaseField(columnName = "property_name")
     private String propertyName;
 
-    /**
-     * 单价
-     */
+
     @DatabaseField(columnName = "price")
     private BigDecimal price;
 
-    /**
-     * 数量
-     */
+
     @DatabaseField(columnName = "quantity")
     private BigDecimal quantity;
 
-    /**
-     * '金额，等于 PRICE * QTY'
-     */
+
     @DatabaseField(columnName = "amount")
     private BigDecimal amount;
 
 
-    /**
-     * PAD本地创建时间
-     */
+
     @DatabaseField(columnName = "client_create_time")
     private Long clientCreateTime;
 
-    /**
-     * PAD本地最后修改时间
-     */
+
     @DatabaseField(columnName = "client_update_time")
     private Long clientUpdateTime;
 
 
-    /**
-     * 创建者，创建此记录的系统用户
-     */
+
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
 
-    /**
-     * 创建者，创建者姓名
-     */
+
     @DatabaseField(columnName = "creator_name")
     private String creatorName;
 
-    /**
-     * 最后修改此记录的用户
-     */
+
     @DatabaseField(columnName = "updator_id")
     private Long updatorId;
 
-    /**
-     * 最后修改者姓名
-     */
+
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 

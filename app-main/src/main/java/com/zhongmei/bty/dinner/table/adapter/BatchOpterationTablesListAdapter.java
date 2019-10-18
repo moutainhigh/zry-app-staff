@@ -18,9 +18,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BatchOpterationTablesListAdapter extends BaseAdapter {
     private Context context;

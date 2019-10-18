@@ -10,14 +10,10 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * 零售的baseViewHolder
- */
+
 public class CommonRecyclerlViewHolder extends RecyclerView.ViewHolder {
 
-    /**
-     * Views indexed with their IDs
-     */
+
     private final SparseArray<View> mViews;
 
     public View mConvertView;

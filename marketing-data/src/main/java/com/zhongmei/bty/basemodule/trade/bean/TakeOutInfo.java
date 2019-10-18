@@ -14,12 +14,9 @@ public class TakeOutInfo implements Serializable {
     private Long expectTime;
     private Sex receiverSex;
     private Long customerID;
-    //国家英文名称
-    private String nation;
-    //国家中文名称
-    private String country;
-    //电话国际区码
-    private String nationalTelCode;
+        private String nation;
+        private String country;
+        private String nationalTelCode;
 
     public Long getCustomerID() {
         return customerID;

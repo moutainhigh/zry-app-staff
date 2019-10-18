@@ -17,11 +17,7 @@ import java.util.List;
 
 import static com.zhongmei.bty.mobilepay.bean.MemberLoginTypeData.UI_TYPE_MOBILE;
 
-/**
- *
 
- *
- */
 public class MemberLoginTypeChooseAdapter extends BaseAdapter {
 
     private Context mContext;

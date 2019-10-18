@@ -4,10 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.CommonEntityBase;
 
-/**
- * 虚拟会员会员价限制开关配置
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "crm_customer_rights_config")
 public class CrmCustomerRightsConfig extends CommonEntityBase {
     public interface $ extends CommonEntityBase.$ {

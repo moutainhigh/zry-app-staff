@@ -10,9 +10,7 @@ import com.zhongmei.yunfu.db.ServerEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * 挂账记录表 Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "trade_credit_log")
 public class TradeCreditLog extends ServerEntityBase implements ICreator {
 
@@ -43,9 +41,7 @@ public class TradeCreditLog extends ServerEntityBase implements ICreator {
     @DatabaseField(columnName = "customer_phone")
     private String customerPhone;
 
-    /**
-     * The columns of table "trade_reason_rel"
-     */
+
     public interface $ extends BasicEntityBase.$ {
         String tradeId = "trade_id";
 

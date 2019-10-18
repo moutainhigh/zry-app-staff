@@ -6,40 +6,26 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * Created by demo on 2018/12/15
- * 支付方式场景关联表
- */
+
 @DatabaseTable(tableName = "payment_mode_scene")
 public class PaymentModeScene extends BasicEntityBase implements ICreator, IUpdator {
-    /* public static final Integer SCENE_CODE_CHARGE = 1;//充值
-     public static final Integer SCENE_CODE_SHOP = 2;//购物*/
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "payment_mode_scene"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * brand_mode_id
-         */
+
         public static final String shopErpModeId = "shop_erp_mode_id";
 
         public static final String sceneCode = "scene_code";
 
     }
 
-    /**
-     * 支付方式Id
-     */
-    @DatabaseField(columnName = "shop_erp_mode_id")//与payment_mode_shop表的erpModeId对应,
-    private Long shopErpModeId;
-    /**
-     * 场景编码
-     */
-    @DatabaseField(columnName = "scene_code")//1 为储值充值 ；2  销售支付',
-    private Integer sceneCode;
+
+    @DatabaseField(columnName = "shop_erp_mode_id")    private Long shopErpModeId;
+
+    @DatabaseField(columnName = "scene_code")    private Integer sceneCode;
 
 
     @DatabaseField(columnName = "creator_id")

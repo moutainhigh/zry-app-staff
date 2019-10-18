@@ -33,9 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @date:2016年4月27日下午2:59:56
- */
+
 public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
 
     private static final String Tag = "MarketDaoImpl";
@@ -46,12 +44,10 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
 
     @Override
     public List<MarketActivityRule> queryAllRule() {
-        // TODO Auto-generated method stub
-        DatabaseHelper helper = DBHelperManager.getHelper();
+                DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             String date = DateTimeUtils.getCurrentDate();
-            // 过滤门店
-            Long shopIdenty = BaseApplication.sInstance.getShopIdenty() == null
+                        Long shopIdenty = BaseApplication.sInstance.getShopIdenty() == null
                     ? 0L : BaseApplication.sInstance.getShopIdenty();
 
             Dao<MarketPlanCommercialRel, String> planRelDao = helper.getDao(MarketPlanCommercialRel.class);
@@ -62,8 +58,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
                     .and()
                     .eq(MarketPlanCommercialRel.$.statusFlag, StatusFlag.VALID);
 
-            // 过滤出pos终端conditionType(11),conditionValue(1)
-            Dao<MarketDynamicCondition, String> conditionDao = helper.getDao(MarketDynamicCondition.class);
+                        Dao<MarketDynamicCondition, String> conditionDao = helper.getDao(MarketDynamicCondition.class);
             QueryBuilder<MarketDynamicCondition, String> conditionQB = conditionDao.queryBuilder();
             conditionQB.selectColumns(MarketDynamicCondition.$.planId);
             conditionQB.where()
@@ -77,8 +72,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
             Dao<MarketPlan, Long> planDao = helper.getDao(MarketPlan.class);
             QueryBuilder<MarketPlan, Long> planBuilder = planDao.queryBuilder();
 
-            // 过滤有效时间 eg:12月8号-12月25号
-            planBuilder.orderBy(MarketPlan.$.serverUpdateTime, false)
+                        planBuilder.orderBy(MarketPlan.$.serverUpdateTime, false)
                     .selectColumns(MarketPlan.$.id)
                     .where()
                     .le(MarketPlan.$.planStartDay, date)
@@ -90,8 +84,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
                     .in(MarketPlan.$.id, conditionQB);
             Dao<MarketActivityRule, Long> ruleDao = helper.getDao(MarketActivityRule.class);
             List<MarketActivityRule> marketRuleList = null;
-            // 通过builder外键关联查询
-            QueryBuilder<MarketActivityRule, Long> ruleBuilder = ruleDao.queryBuilder();
+                        QueryBuilder<MarketActivityRule, Long> ruleBuilder = ruleDao.queryBuilder();
             marketRuleList =
                     ruleBuilder.orderBy(MarketActivityRule.$.serverUpdateTime, false)
                             .where()
@@ -109,13 +102,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * com.zhongmei.bty.basemodule.discount.operates.interfaces.MarketDal#queryMarketPlanList
-     * () 过滤出当前时间的pos终端有效的营销活动
-     */
+
     @Override
     public List<MarketPlan> queryMarketPlanList() {
         List<MarketPlan> list = null;
@@ -123,8 +110,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
         try {
 
             String date = DateTimeUtils.getCurrentDate();
-            // 过滤门店
-            Long shopIdenty = BaseApplication.sInstance.getShopIdenty() == null
+                        Long shopIdenty = BaseApplication.sInstance.getShopIdenty() == null
                     ? 0L : BaseApplication.sInstance.getShopIdenty();
 
             Dao<MarketPlanCommercialRel, String> planRelDao = helper.getDao(MarketPlanCommercialRel.class);
@@ -135,8 +121,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
                     .and()
                     .eq(MarketPlanCommercialRel.$.statusFlag, StatusFlag.VALID);
 
-            // 过滤出pos终端conditionType(11),conditionValue(1)
-            Dao<MarketDynamicCondition, String> conditionDao = helper.getDao(MarketDynamicCondition.class);
+                        Dao<MarketDynamicCondition, String> conditionDao = helper.getDao(MarketDynamicCondition.class);
             QueryBuilder<MarketDynamicCondition, String> conditionQB = conditionDao.queryBuilder();
             conditionQB.selectColumns(MarketDynamicCondition.$.planId);
             conditionQB.where()
@@ -151,8 +136,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
             Dao<MarketPlan, Long> planDao = helper.getDao(MarketPlan.class);
             QueryBuilder<MarketPlan, Long> planBuilder = planDao.queryBuilder();
 
-            // 过滤有效时间 eg:12月8号-12月25号,planStatus=3 执行中的活动
-            planBuilder.orderBy(MarketPlan.$.serverUpdateTime, false)
+                        planBuilder.orderBy(MarketPlan.$.serverUpdateTime, false)
                     .where()
                     .le(MarketPlan.$.planStartDay, date)
                     .and()
@@ -243,7 +227,6 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
 
     @Override
     public List<MarketDynamicCondition> queryConditionByPlanId(Long planId) {
-        // TODO Auto-generated method stub
 
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
@@ -264,8 +247,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
 
     @Override
     public List<MarketActivityWeekday> queryWeekdayByRuleId(Long ruleId) {
-        // TODO Auto-generated method stub
-        DatabaseHelper helper = DBHelperManager.getHelper();
+                DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             Dao<MarketActivityWeekday, Long> dao = helper.getDao(MarketActivityWeekday.class);
             return dao.queryBuilder()
@@ -285,8 +267,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
 
     @Override
     public List<MarketActivityRule> queryRuleByPlanId(Long planId) {
-        // TODO Auto-generated method stub
-        DatabaseHelper helper = DBHelperManager.getHelper();
+                DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             Dao<MarketActivityRule, Long> dao = helper.getDao(MarketActivityRule.class);
             return dao.queryBuilder()
@@ -305,8 +286,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
 
     @Override
     public MarketActivityRule queryRuleByRuleId(Long ruleId) {
-        // TODO Auto-generated method stub
-        DatabaseHelper helper = DBHelperManager.getHelper();
+                DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             Dao<MarketActivityRule, Long> dao = helper.getDao(MarketActivityRule.class);
             return dao.queryBuilder()
@@ -325,8 +305,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
 
     @Override
     public DishMemberPrice queryDishSpecailPrice(Long dishId) {
-        // TODO Auto-generated method stub
-        DatabaseHelper helper = DBHelperManager.getHelper();
+                DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             Dao<MemberPriceTempletDetail, Long> priceTempletDetailDao = helper.getDao(MemberPriceTempletDetail.class);
             MemberPriceTempletDetail detail =
@@ -384,13 +363,7 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * com.zhongmei.bty.basemodule.discount.operates.interfaces.MarketDal#getMarketPlanvOList
-     * ()
-     */
+
     @Override
     public List<MarketPlanVo> getMarketPlanvOList() {
         List<MarketPlanVo> voList = new ArrayList<MarketPlanVo>();
@@ -416,54 +389,38 @@ public class MarketDaoImpl extends AbstractOpeartesImpl implements MarketDal {
                 if (marketActivity != null) {
                     vo = new MarketPlanVo(plan);
                     voList.add(vo);
-                    vo.setActivityType(marketActivity.getActivityType());// 营销方式：1单商品
-                    // 2多商品
-                    vo.setPromotionType(marketActivity.getPromotionType());// 优惠类型
-
-                    conditionList = this.queryConditionByPlanId(plan.getId());// 权限记录
-
+                    vo.setActivityType(marketActivity.getActivityType());                                        vo.setPromotionType(marketActivity.getPromotionType());
+                    conditionList = this.queryConditionByPlanId(plan.getId());
                     if (conditionList != null && !conditionList.isEmpty()) {
                         for (MarketDynamicCondition condition : conditionList) {
 
                             switch (condition.getConditionType()) {
 
-                                case CUSTOMER_TYPE:// 2参与人群
-                                    if (condition.getConditionValue() == 1)// 会员
-                                    {
+                                case CUSTOMER_TYPE:                                    if (condition.getConditionValue() == 1)                                    {
                                         vo.setUserType(UserType.MEMBER);
 
                                     } else if (condition.getConditionValue() == 2) {
-                                        vo.setUserType(UserType.MEMBERNON);// 非会员
-                                    }
+                                        vo.setUserType(UserType.MEMBERNON);                                    }
                                     break;
 
-                                case TRADE_TYPE:// 10单据类型
-                                    if (condition.getConditionValue() == 1)// 内用
-                                    {
+                                case TRADE_TYPE:                                    if (condition.getConditionValue() == 1)                                    {
                                         vo.setDeliveryType(DeliveryType.HERE);
 
-                                    } else if (condition.getConditionValue() == 2) {// 外送
-
+                                    } else if (condition.getConditionValue() == 2) {
                                         vo.setDeliveryType(DeliveryType.SEND);
-                                    } else if (condition.getConditionValue() == 3) {// 自提
-
+                                    } else if (condition.getConditionValue() == 3) {
                                         vo.setDeliveryType(DeliveryType.TAKE);
-                                    } else if (condition.getConditionValue() == 4) {// 打包（外带）
-
+                                    } else if (condition.getConditionValue() == 4) {
                                         vo.setDeliveryType(DeliveryType.CARRY);
                                     }
                                     break;
-                                case ACTIVITY_POS:// 活动终端
-                                    vo.setActivityPos(condition.getConditionValue());
+                                case ACTIVITY_POS:                                    vo.setActivityPos(condition.getConditionValue());
                                     break;
 
-                                case MEAL_BACKGROUND:// 12就餐场景
-                                    if (condition.getConditionValue() == 1)// 正餐
-                                    {
+                                case MEAL_BACKGROUND:                                    if (condition.getConditionValue() == 1)                                    {
                                         vo.setBusinessType(BusinessType.DINNER);
 
-                                    } else if (condition.getConditionValue() == 2) {// 快餐
-                                        vo.setBusinessType(BusinessType.SNACK);
+                                    } else if (condition.getConditionValue() == 2) {                                        vo.setBusinessType(BusinessType.SNACK);
                                     }
                                     break;
                                 default:

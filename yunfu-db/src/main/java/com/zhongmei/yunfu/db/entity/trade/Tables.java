@@ -9,80 +9,50 @@ import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 
-/**
- * Trade is a ORMLite bean type. Corresponds to the database table "tables"
- */
+
 @DatabaseTable(tableName = "tables")
 public class Tables extends AbsBasicEntityBase {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "tables"
-     */
+
     public interface $ extends AbsBasicEntityBase.$ {
 
-        /**
-         * area_id
-         */
+
         String canBooking = "can_booking";
 
-        /**
-         * area_id
-         */
+
         String areaId = "area_id";
 
-        /**
-         * table_name
-         */
+
         String tableName = "table_name";
 
-        /**
-         * min_consum
-         */
+
         String minConsum = "min_consum";
 
-        /**
-         * table_type_id
-         */
+
         String tableTypeID = "table_type_id";
 
-        /**
-         * table_person_count
-         */
+
         String tablePersonCount = "table_person_count";
 
-        /**
-         * table_status
-         */
+
         String tableStatus = "table_status";
 
-        /**
-         * sort
-         */
+
         String sort = "sort";
 
-        /**
-         * uuid
-         */
+
         String uuid = "uuid";
 
-        /**
-         * commercial_id
-         */
+
         String commercialID = "commercial_id";
 
-        /**
-         * create_date_time
-         */
+
         String createDateTime = "create_date_time";
 
-        /**
-         * modify_date_time
-         */
+
         String modifyDateTime = "modify_date_time";
 
     }
@@ -99,9 +69,7 @@ public class Tables extends AbsBasicEntityBase {
     @DatabaseField(columnName = "min_consum")
     private BigDecimal minConsum;
 
-    /**
-     * 可预订
-     */
+
     @DatabaseField(columnName = "can_booking")
     private Integer canBooking;
 

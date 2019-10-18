@@ -10,9 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BeautyDateTool {
 
     private static final int YESTERDY = -1;
@@ -23,9 +21,7 @@ public class BeautyDateTool {
 
     private static ThreadLocal<SimpleDateFormat> DateLocal = new ThreadLocal<SimpleDateFormat>();
 
-    /**
-     * 读取日期的格式
-     */
+
     public static SimpleDateFormat getDateFormat() {
         if (null == DateLocal.get()) {
             DateLocal.set(new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA));
@@ -33,9 +29,7 @@ public class BeautyDateTool {
         return DateLocal.get();
     }
 
-    /**
-     * 调用显示日期
-     */
+
     public static String getTitleDay(Context context, String day) {
         try {
             switch (JudgmentDay(day)) {
@@ -57,9 +51,7 @@ public class BeautyDateTool {
         return "";
     }
 
-    /**
-     * 判断日期(效率比较高)
-     */
+
     public static int JudgmentDay(String day) throws ParseException {
         Calendar pre = Calendar.getInstance();
         Date predate = new Date(System.currentTimeMillis());
@@ -90,13 +82,7 @@ public class BeautyDateTool {
         return OTHER_DAY;
     }
 
-    /**
-     * 判断是否为昨天(效率比较高)
-     *
-     * @param day 传入的 时间  "2016-06-28 10:10:30" "2016-06-28" 都可以
-     * @return true昨天 false不是
-     * @throws ParseException
-     */
+
     public static boolean IsYesterday(String day) throws ParseException {
 
         Calendar pre = Calendar.getInstance();
@@ -118,13 +104,7 @@ public class BeautyDateTool {
         return false;
     }
 
-    /**
-     * 判断是否为今天(效率比较高)
-     *
-     * @param day 传入的 时间  "2016-06-28 10:10:30" "2016-06-28" 都可以
-     * @return true今天 false不是
-     * @throws ParseException
-     */
+
     public static boolean IsToday(String day) throws ParseException {
         Calendar pre = Calendar.getInstance();
         Date predate = new Date(System.currentTimeMillis());
@@ -145,13 +125,7 @@ public class BeautyDateTool {
         return false;
     }
 
-    /**
-     * 判断是否为明天(效率比较高)
-     *
-     * @param day 传入的 时间  "2016-06-28 10:10:30" "2016-06-28" 都可以
-     * @return true明天 false不是
-     * @throws ParseException
-     */
+
     public static boolean IsTomorrowday(String day) throws ParseException {
 
         Calendar pre = Calendar.getInstance();

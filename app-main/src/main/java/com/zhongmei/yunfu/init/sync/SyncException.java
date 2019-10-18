@@ -1,9 +1,6 @@
 package com.zhongmei.yunfu.init.sync;
 
-/**
- * 同步异常
- * Created by demo on 2018/12/15
- */
+
 public class SyncException extends Exception {
 
     String messageId;

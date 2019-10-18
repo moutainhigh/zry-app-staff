@@ -6,11 +6,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.bean.CustomerSaleCardInfo
 
 import java.util.List;
 
-/**
- * @Date： 2016/6/30
- * @Description:匿名卡交易信息返回对象
- * @Version: 1.0
- */
+
 public class AnonymousCardTradeResp {
 
     private Trade trade;

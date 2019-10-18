@@ -1,8 +1,6 @@
 package com.zhongmei.bty.basemodule.commonbusiness.message;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class CommercialCustomSettingsReq {
     public void setShopIdenty(Long shopIdenty) {
         this.shopIdenty = shopIdenty;

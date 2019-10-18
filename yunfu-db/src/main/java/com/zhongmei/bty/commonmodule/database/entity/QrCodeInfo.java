@@ -4,9 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * 二维码信息
- */
+
 @DatabaseTable(tableName = "qr_code_info")
 public class QrCodeInfo extends EntityBase<Long> {
     private static final long serialVersionUID = 1L;
@@ -33,21 +31,15 @@ public class QrCodeInfo extends EntityBase<Long> {
 
     }
 
-    /**
-     * 商户id
-     */
+
     @DatabaseField(columnName = "commercial_id")
     private Long commercialID;
 
-    /**
-     * 创建时间
-     */
+
     @DatabaseField(columnName = "create_date_time")
     private Long createDateTime;
 
-    /**
-     * 更新时间
-     */
+
     @DatabaseField(columnName = "modify_date_time")
     private Long modifyDateTime;
 

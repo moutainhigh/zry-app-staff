@@ -47,9 +47,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by dingzb on 2019/6/25.
- */
+
 
 public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements View.OnClickListener {
     public static final int OPERATE_TYPE_NEW_CREATE=0x01;
@@ -64,8 +62,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
 
     private LinearLayout layout_tradeInfo;
     private TextView tv_tradeNo;
-    private TextView tv_tradeInfo;//订单组合信息
-
+    private TextView tv_tradeInfo;
     private LinearLayout layout_task;
     private EditText et_taskTitle;
     private LinearLayout layout_executeTime;
@@ -84,8 +81,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
 
     private TaskRemind mTask;
     private TaskCreateOrEditReq mTaskReq;
-    private UserVo mExecutor;//执行人，默认为当前登陆的店员
-    private CustomerResp mCustomer;
+    private UserVo mExecutor;    private CustomerResp mCustomer;
     private Date mSelectDate=new Date(System.currentTimeMillis());
 
     private int curOperateType=OPERATE_TYPE_NEW_CREATE;
@@ -124,11 +120,9 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
 
     private void setupWindow() {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getDialog().setCanceledOnTouchOutside(false);// 设置点击屏幕Dialog不消失
-        Window window = getDialog().getWindow();
+        getDialog().setCanceledOnTouchOutside(false);        Window window = getDialog().getWindow();
         if (window != null) {
-            //设置宽高
-            WindowManager.LayoutParams attributes = window.getAttributes();
+                        WindowManager.LayoutParams attributes = window.getAttributes();
             attributes.width = DensityUtil.dip2px(getActivity(), 460f);
             attributes.height = WindowManager.LayoutParams.WRAP_CONTENT;
             window.setAttributes(attributes);
@@ -139,10 +133,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
     }
 
-    /**
-     * 初始化view
-     * @param view
-     */
+
     private void initView(View view){
         tv_title=(TextView)view.findViewById(R.id.tv_title);
         tv_memberName=(TextView)view.findViewById(R.id.tv_member_name);
@@ -172,9 +163,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
     }
 
 
-    /**
-     * 初始化数据
-     */
+
     private void initData(){
         showExecutor(null);
 
@@ -188,8 +177,6 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
                 tv_memberName.setText(mTask.getCustomerName());
             }
 
-//            tv_tradeNo.setText();
-//            et_taskContent.setText();
             et_taskTitle.setText(mTask.getTitle());
             et_taskContent.setText(mTask.getContent());
             mSelectDate=new Date(mTask.getRemindTime());
@@ -220,10 +207,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
     }
 
 
-    /**
-     * 显示执行人
-     * @param userVo
-     */
+
     private void showExecutor(UserVo userVo){
         if(userVo==null){
             IAuthUser authUser=ShopInfoCfg.getInstance().authUser;
@@ -245,9 +229,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
     }
 
 
-    /**
-     * 检查数据的有效性
-     */
+
     private boolean checkDataValid(){
         String taskTitle = et_taskTitle.getText().toString().trim();
         if (TextUtils.isEmpty(taskTitle)) {
@@ -270,15 +252,12 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
 
         mTaskReq = new TaskCreateOrEditReq();
 
-        if(mTask!=null){//编辑
-            //需要修改
-            mTaskReq.setCustomerName(mTask.getCustomerName());
+        if(mTask!=null){                        mTaskReq.setCustomerName(mTask.getCustomerName());
             mTaskReq.setCustomerId(mTask.getCustomerId());
             mTaskReq.setCustomerMobile(mTask.getCustomerMobile());
             mTaskReq.setStatus(mTask.getStatus());
             mTaskReq.setTaskId(mTask.getId());
-        }else{//新增
-            mTaskReq.validateCreate();
+        }else{            mTaskReq.validateCreate();
             mTaskReq.setStatus(1);
 
             if(mCustomer!=null){
@@ -302,9 +281,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
     }
 
 
-    /**
-     * 选择执行时间（用户自己选择）
-     */
+
     private void selectExecuteTime(){
         CalendarTimeDialog  mCalendarTimeDialog = new CalendarTimeDialog(getContext(), new CalendarTimeDialog.SelectedDateTimeListener() {
             @Override
@@ -317,9 +294,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
         mCalendarTimeDialog.showDialog();
     }
 
-    /**
-     * 选择这行人，默认为当前服务员
-     */
+
     private void selectExecutor(){
         List<UserVo> selectUser=new ArrayList<UserVo>();
         selectUser.add(mExecutor);
@@ -335,15 +310,11 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
                 }
             }
         });
-        dialog.setSelectUsers(selectUser); // 编辑时传入锁定状态
-        dialog.setIsNotFreeUsers(new ArrayList<Long>());
+        dialog.setSelectUsers(selectUser);         dialog.setIsNotFreeUsers(new ArrayList<Long>());
         dialog.show(getChildFragmentManager(), "BeautyBookingWaiterDialog");
     }
 
-    /**
-     * 保存或创建任务
-     * @param taskReq
-     */
+
     private void saveTask(TaskCreateOrEditReq taskReq){
         if(taskReq!=null){
             YFResponseListener listener = LoadingYFResponseListener.ensure(new YFResponseListener<YFResponse<TaskRemind>>() {
@@ -351,8 +322,7 @@ public class BeautyCreateOrEditTaskDialog extends BasicDialogFragment implements
                 @Override
                 public void onResponse(YFResponse<TaskRemind> response) {
                     if (YFResponseList.isOk(response)) {
-                        //需要隐藏一下详情页面
-                       if(taskOperatorListener!=null){
+                                               if(taskOperatorListener!=null){
                            taskOperatorListener.save(response.getContent());
                        }
                        dismissAllowingStateLoss();

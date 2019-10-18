@@ -22,9 +22,7 @@ import java.io.FileInputStream;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 排队广播方法
- */
+
 
 public class QueuePlayService extends Service {
 
@@ -49,8 +47,7 @@ public class QueuePlayService extends Service {
         super.onCreate();
         mediaPlayer = new MediaPlayer();
         mediaPlayer.setOnCompletionListener(new CompleteListener());
-        // 百度语音
-        ThreadUtils.runOnWorkThread(new Runnable() {
+                ThreadUtils.runOnWorkThread(new Runnable() {
             @Override
             public void run() {
                 SpeechSynthesizerUtil.getInstance().init();
@@ -71,56 +68,32 @@ public class QueuePlayService extends Service {
         return new AudioBinder();
     }
 
-    /**
-     * 是否叫号
-     */
+
     private boolean isCallOrAuditon = false;
 
-    /**
-     * 叫号
-     *
-     * @param speechCall
-     * @param num
-     */
+
     public void playCall(BaiduSyntheticSpeech speechCall, String num) {
-        // TODO Auto-generated method stub
-        isCallOrAuditon = true;
-        stopPlay();// 先停止
-        SpeechSynthesizerUtil.getInstance().speakCall(speechCall, num);
+                isCallOrAuditon = true;
+        stopPlay();        SpeechSynthesizerUtil.getInstance().speakCall(speechCall, num);
     }
 
-    /**
-     * 试听
-     *
-     * @param speech
-     */
+
     public void playAudition(BaiduSyntheticSpeech speech) {
         isCallOrAuditon = true;
-        stopPlay();// 先停止
-        SpeechSynthesizerUtil.getInstance().speak(speech);
+        stopPlay();        SpeechSynthesizerUtil.getInstance().speak(speech);
     }
 
-    /**
-     * 播放音乐
-     *
-     * @param selectedVo
-     * @param selectIndex
-     */
+
     public void play(QueueVoiceVo selectedVo, int selectIndex) {
         this.selectedVo = selectedVo;
         this.selectIndex = selectIndex;
-        stopPlay();// 先停止
-        isPlay = true;
-        if (selectedVo.getType() == 1) {// 合成列表
-            SpeechSynthesizerUtil.getInstance().speak(selectedVo.getSpeech());
-        } else {// 下载列表
-            play(selectedVo.getPath());
+        stopPlay();        isPlay = true;
+        if (selectedVo.getType() == 1) {            SpeechSynthesizerUtil.getInstance().speak(selectedVo.getSpeech());
+        } else {            play(selectedVo.getPath());
         }
     }
 
-    /**
-     * 停止播放声音
-     */
+
     public void stopPlay() {
         SpeechSynthesizerUtil.getInstance().stop();
         if (mediaPlayer.isPlaying()) {
@@ -128,9 +101,7 @@ public class QueuePlayService extends Service {
         }
     }
 
-    /**
-     * 播放器监听
-     */
+
     private class CompleteListener implements OnCompletionListener {
 
         @Override
@@ -141,16 +112,11 @@ public class QueuePlayService extends Service {
         }
     }
 
-    /**
-     *
 
-     *
-     */
     private class PlayListener implements SpeechSynthesizerListener {
 
         @Override
         public void onError(String arg0, SpeechError arg1) {
-            // TODO Auto-generated method stub
 
         }
 
@@ -198,16 +164,11 @@ public class QueuePlayService extends Service {
 
         @Override
         public void onSynthesizeStart(String arg0) {
-            // TODO Auto-generated method stub
 
         }
     }
 
-    /**
-     * 播放本地下载文件
-     *
-     * @param filePath
-     */
+
     private void play(String filePath) {
         try {
             mediaPlayer.reset();
@@ -229,20 +190,14 @@ public class QueuePlayService extends Service {
         }
     }
 
-    // 为了和Activity交互，我们需要定义一个Binder对象
-    public class AudioBinder extends Binder {
+        public class AudioBinder extends Binder {
 
-        // 返回Service对象
-        public QueuePlayService getService() {
+                public QueuePlayService getService() {
             return QueuePlayService.this;
         }
     }
 
-    /**
-     * 播放状态
-     *
-     * @return
-     */
+
     public boolean isPlay() {
         return isPlay;
     }

@@ -3,19 +3,10 @@ package com.zhongmei.bty.basemodule.devices.mispos.data;
 import java.math.BigDecimal;
 
 public class CardSaleInfo implements java.io.Serializable {
-    /**
-     * @date：2016-3-18 下午12:14:27
-     * @Description:TODO
-     */
-    private static final long serialVersionUID = 1L;
-    private long cardKindId;//卡类型id
-    private int cardStatus;//状态
-    private String cardNum; //卡号
-    private String cardKindName;//卡类型
-    private BigDecimal cardCost;//售卡金额
 
-    //临时卡使用字段
-    private long tradeId;
+    private static final long serialVersionUID = 1L;
+    private long cardKindId;    private int cardStatus;    private String cardNum;     private String cardKindName;    private BigDecimal cardCost;
+        private long tradeId;
     private long tradeItemId;
     private long cardId;
     private long saleTime;
@@ -25,12 +16,8 @@ public class CardSaleInfo implements java.io.Serializable {
     private long serverUpdateTime;
 
 
-    //金诚卡使用字段
-    String needPassword;//Y 是，N 不是
-    String cardKind;//
-
-    // 雅座新增字段
-    private String password;
+        String needPassword;    String cardKind;
+        private String password;
     private Long cardType;
     private String identyCardNo;
 

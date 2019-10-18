@@ -1,21 +1,13 @@
 package com.zhongmei.beauty.operates.message;
 
-/**
- * 美业预定列表请求
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyBookingListReq {
-    //    开始时间
-    private Long startTime;
-    //    结束时间
-    private Long endTime;
-    //    请求页数
-    private Integer page;
-    //    查询列表类型，1待服务，2已超时(逾期)，3已取消
-    private Integer type;
-    //    每页下行数据数量
-    private Integer pageCount = 30;
+        private Long startTime;
+        private Long endTime;
+        private Integer page;
+        private Integer type;
+        private Integer pageCount = 30;
 
     public Long getStartTime() {
         return startTime;

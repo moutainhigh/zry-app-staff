@@ -44,13 +44,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2015年9月19日 下午4:00:30
- * @Description: 正餐订单中心Manager
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class DinnerOrderCenterManager {
 
     private static final String TAG = DinnerOrderCenterManager.class.getSimpleName();
@@ -133,8 +127,7 @@ public class DinnerOrderCenterManager {
             protected List<TradePaymentVo> doInBackground(Void... params) {
                 if (currentChildTab == BillCenterOrderType.ADJUST) {
                     return queryAdjustTradePaymentVo();
-                } else if (currentChildTab == BillCenterOrderType.ONLINEPAY_PAY//在线支付 支付状态|退款状态
-                        || currentChildTab == BillCenterOrderType.ONLINEPAY_REFUND) {
+                } else if (currentChildTab == BillCenterOrderType.ONLINEPAY_PAY                        || currentChildTab == BillCenterOrderType.ONLINEPAY_REFUND) {
                     List<Trade> tradeList = queryTradByOnline(currentChildTab, trade);
                     return queryTradePaymentVo1(tradeList);
                 } else {
@@ -161,8 +154,7 @@ public class DinnerOrderCenterManager {
     @SuppressWarnings("unchecked")
     private Where<Trade, String> createWhere(QueryBuilder<Trade, String> tradeQB,
                                              int currentChildTab) throws Exception {
-        // 查三天之内的外卖单
-        Calendar calendar = Calendar.getInstance();
+                Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
         calendar.add(Calendar.DAY_OF_MONTH, -7);
 
@@ -295,26 +287,16 @@ public class DinnerOrderCenterManager {
         return null;
     }
 
-    /**
-     * 查询在线支付订单数据
-     *
-     * @Title:
-     * @Description: TODO
-     * @Param @return TODO
-     * @Return List<Trade> 返回类型
-     */
+
     public List<Trade> queryTradByOnline(int type, Trade trade) {
-        // 根据支付类型来查找Trade
-        DatabaseHelper helper = DBHelperManager.getHelper();
+                DatabaseHelper helper = DBHelperManager.getHelper();
         try {
 
-            // 查三天之内的外卖单
-            Calendar calendar = Calendar.getInstance();
+                        Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             calendar.add(Calendar.DAY_OF_MONTH, -7);
 
-            // PaymentItem
-            Dao<PaymentItem, String> paymentItemDao = helper.getDao(PaymentItem.class);
+                        Dao<PaymentItem, String> paymentItemDao = helper.getDao(PaymentItem.class);
             QueryBuilder<PaymentItem, String> paymentItemBuilder = paymentItemDao.queryBuilder();
             Where<PaymentItem, String> paymentItemWhere =
                     paymentItemBuilder.distinct().selectColumns(PaymentItem.$.paymentUuid).where();
@@ -336,46 +318,28 @@ public class DinnerOrderCenterManager {
                         TradePayStatus.WAITING_REFUND.value());
             }
 
-            // Payment
-            // Dao<Payment, String> paymentDao =
-            // helper.getDao(Payment.class);
-            // QueryBuilder<Payment, String>
-            // paymentQueryBuilder =
-            // paymentDao.queryBuilder();
-            // Where<Payment, String> paymentWhere =
-            // paymentQueryBuilder.distinct().selectColumns(Payment.$.relateUuid).where();
-            //
-            // paymentWhere.in(Payment.$.uuid,
-            // paymentItemBuilder);
-            // List<Payment> payments =
-            // paymentWhere.query();
 
-            // 通过paymentitem的paymentuuid来查询符合的payment
-            Dao<Payment, String> paymentDao = helper.getDao(Payment.class);
+                        Dao<Payment, String> paymentDao = helper.getDao(Payment.class);
             QueryBuilder<Payment, String> paymentQueryBuilder = paymentDao.queryBuilder();
             Where<Payment, String> paymentWhere = paymentQueryBuilder.where();
             paymentWhere.in(Payment.$.uuid, paymentItemBuilder);
             List<Payment> payments = paymentQueryBuilder.query();
 
-            // 得到查询得到relateuuid（Trade的关联UUID）(因为有可能有多个payment指向trade，所以要通过relateuuid再查询一遍得到trade指向的所有的payment)
-            List<String> relateuuid = new ArrayList<String>();
+                        List<String> relateuuid = new ArrayList<String>();
             for (Payment payment : payments) {
                 relateuuid.add(payment.getRelateUuid());
             }
-            // 再查询所有相关relateuuid的payment
-            Dao<Payment, String> allPaymentDao = helper.getDao(Payment.class);
+                        Dao<Payment, String> allPaymentDao = helper.getDao(Payment.class);
             QueryBuilder<Payment, String> allPaymentQueryBuilder = allPaymentDao.queryBuilder();
             Where<Payment, String> allpaymentWhere = allPaymentQueryBuilder.where();
             allpaymentWhere.in(Payment.$.relateUuid, relateuuid.toArray());
             List<Payment> allpayments = allPaymentQueryBuilder.query();
 
-            // 将已经支付了payment和未支付的payment区分开来。
-            List<Payment> havePayment = new ArrayList<Payment>();
+                        List<Payment> havePayment = new ArrayList<Payment>();
 
             List<Payment> nothavePayment = new ArrayList<Payment>();
 
-            for (int i = 0; i < allpayments.size(); i++) {// 得到已经支付了的订单
-                if (allpayments.get(i).getIsPaid() == Bool.YES) {
+            for (int i = 0; i < allpayments.size(); i++) {                if (allpayments.get(i).getIsPaid() == Bool.YES) {
                     havePayment.add(allpayments.get(i));
 
                 } else {
@@ -383,8 +347,7 @@ public class DinnerOrderCenterManager {
                 }
             }
 
-            // 如果havePayment中的paymentitem中有不是在线支付(微信，支付宝，百度钱包)并且已经支付的那么移除当前这个payment，也要删除nothavePayment中具有相同Relateuuid的payment
-            List<String> deleteuuid = new ArrayList<String>();
+                        List<String> deleteuuid = new ArrayList<String>();
 
             Dao<PaymentItem, String> havepaymentItemDao = helper.getDao(PaymentItem.class);
             Iterator<Payment> iterator = havePayment.iterator();
@@ -395,18 +358,15 @@ public class DinnerOrderCenterManager {
                     deleteuuid.add(p.getRelateUuid());
                 }
             }
-            //
-            Iterator<Payment> iterator2 = nothavePayment.iterator();
+                        Iterator<Payment> iterator2 = nothavePayment.iterator();
             while (iterator2.hasNext()) {
                 Payment p = iterator2.next();
-                if (isContainRelatUUid(p, deleteuuid)) {//如果P中的uuid跟deleteUUid一直，返回true
-                    iterator2.remove();
+                if (isContainRelatUUid(p, deleteuuid)) {                    iterator2.remove();
                 }
 
             }
 
-            //得到匹配后的payment
-            List<Payment> filteredPayment = new ArrayList<Payment>();
+                        List<Payment> filteredPayment = new ArrayList<Payment>();
             filteredPayment.addAll(havePayment);
             filteredPayment.addAll(nothavePayment);
 
@@ -415,8 +375,7 @@ public class DinnerOrderCenterManager {
                 traduuid.add(filtpayment.getRelateUuid());
             }
 
-            // Trade
-            Dao<Trade, String> tradDao = helper.getDao(Trade.class);
+                        Dao<Trade, String> tradDao = helper.getDao(Trade.class);
             QueryBuilder<Trade, String> tradeQueryBuilder = tradDao.queryBuilder();
             Where<Trade, String> tradWhere = tradeQueryBuilder.where();
             tradWhere.in(Trade.$.uuid, traduuid.toArray());
@@ -429,7 +388,6 @@ public class DinnerOrderCenterManager {
                 tradWhere.and().in(Trade.$.tradeType, TradeType.REFUND, TradeType.REFUND_FOR_REPEAT);
             }
 
-            //
 
             tradWhere.and()
                     .eq(Trade.$.statusFlag, StatusFlag.VALID)
@@ -445,8 +403,7 @@ public class DinnerOrderCenterManager {
             tradeQueryBuilder.limit(PAGE_SIZE);
             tradeQueryBuilder.orderBy(Trade.$.serverUpdateTime, false);
 
-            /////
-            return tradeQueryBuilder.query();
+                        return tradeQueryBuilder.query();
         } catch (Exception exception) {
             Log.e(TAG, "", exception);
         } finally {
@@ -455,8 +412,7 @@ public class DinnerOrderCenterManager {
         return null;
     }
 
-    private boolean isContainRelatUUid(Payment payment, List<String> relateuuids) {//
-        for (String uuid : relateuuids) {
+    private boolean isContainRelatUUid(Payment payment, List<String> relateuuids) {        for (String uuid : relateuuids) {
             if (payment.getRelateUuid().equals(uuid)) {
                 return true;
             }
@@ -495,8 +451,7 @@ public class DinnerOrderCenterManager {
                 for (Trade trade : tradeList) {
                     tradeUuidList.add(trade.getUuid());
                 }
-                // 查出TradeExtra
-                List<TradeExtra> tradeExtraList = helper.getDao(TradeExtra.class)
+                                List<TradeExtra> tradeExtraList = helper.getDao(TradeExtra.class)
                         .queryBuilder()
                         .distinct()
                         .where()
@@ -514,10 +469,8 @@ public class DinnerOrderCenterManager {
                     }
 
                 }
-                // 查出TradeExtra
 
-                // 查出TradeItem
-                ArrayList<TradeItemVo> tiVoList = new ArrayList<TradeItemVo>();
+                                ArrayList<TradeItemVo> tiVoList = new ArrayList<TradeItemVo>();
                 Dao<TradeItem, String> tiDao = helper.getDao(TradeItem.class);
                 QueryBuilder<TradeItem, String> tiQb = tiDao.queryBuilder();
                 Where<TradeItem, String> tiWhere = tiQb.where();
@@ -537,10 +490,8 @@ public class DinnerOrderCenterManager {
                     }
 
                 }
-                // 查出TradeItem
 
-                // 查出TradeTable
-                Dao<TradeTable, String> tabledao = helper.getDao(TradeTable.class);
+                                Dao<TradeTable, String> tabledao = helper.getDao(TradeTable.class);
                 QueryBuilder<TradeTable, String> tradetablequery = tabledao.queryBuilder();
                 Where<TradeTable, String> tableWhere = tradetablequery.where();
                 tableWhere.in(TradeTable.$.tradeUuid, tradeUuidList.toArray());
@@ -557,10 +508,8 @@ public class DinnerOrderCenterManager {
                     }
 
                 }
-                // 查出TradeTable
 
-                // 查出Payment
-                Dao<Payment, String> dao = helper.getDao(Payment.class);
+                                Dao<Payment, String> dao = helper.getDao(Payment.class);
                 List<Payment> paymentList = dao.queryBuilder()
                         .where()
                         .in(Payment.$.relateUuid, tradeUuidList.toArray())
@@ -578,10 +527,8 @@ public class DinnerOrderCenterManager {
                         paymentMap.put(payment.getRelateUuid(), list);
                     }
                 }
-                // 查出Payment
 
-                // 查出PaymentItem
-                List<String> paymentuuidList = new ArrayList<String>();
+                                List<String> paymentuuidList = new ArrayList<String>();
                 for (Payment payment : paymentList) {
                     paymentuuidList.add(payment.getUuid());
                 }
@@ -601,20 +548,16 @@ public class DinnerOrderCenterManager {
                         paymentItemMap.put(paymentItem.getPaymentUuid(), list);
                     }
                 }
-                // 查出PaymentItem
 
                 for (Trade trade : tradeList) {
                     TradeVo tradeVo = new TradeVo();
 
-                    // TradeExtra
-                    tradeVo.setTrade(trade);
+                                        tradeVo.setTrade(trade);
                     if (tradeExtraMap.get(trade.getUuid()) != null && tradeExtraMap.get(trade.getUuid()).size() >= 1) {
                         tradeVo.setTradeExtra(tradeExtraMap.get(trade.getUuid()).get(0));
                     }
-                    // TradeExtra
 
-                    // TradeItem
-                    List<TradeItem> tradeItems = tradeItemMap.get(trade.getUuid());
+                                        List<TradeItem> tradeItems = tradeItemMap.get(trade.getUuid());
                     ArrayList<TradeItemVo> traditemvoList = new ArrayList<TradeItemVo>();
                     if (tradeItems != null) {
                         for (TradeItem tradeItem : tradeItems) {
@@ -624,15 +567,11 @@ public class DinnerOrderCenterManager {
                         }
                     }
                     tradeVo.setTradeItemList(traditemvoList);
-                    // TradeItem
 
-                    // TradeTable
-                    List<TradeTable> tradeTables = tradeTableMap.get(trade.getUuid());
+                                        List<TradeTable> tradeTables = tradeTableMap.get(trade.getUuid());
                     tradeVo.setTradeTableList(tradeTables);
-                    // TradeTable
 
-                    // Payment
-                    List<Payment> payments = paymentMap.get(trade.getUuid());
+                                        List<Payment> payments = paymentMap.get(trade.getUuid());
                     List<PaymentVo> voList = new ArrayList<PaymentVo>();
                     if (payments != null) {
                         for (Payment payment : payments) {
@@ -648,7 +587,6 @@ public class DinnerOrderCenterManager {
                     tradePaymentVo.setTradeVo(tradeVo);
                     tradePaymentVo.setPaymentVoList(voList);
                     tradePaymentVos.add(tradePaymentVo);
-                    // Payment
 
                 }
                 long end = System.currentTimeMillis();
@@ -672,16 +610,13 @@ public class DinnerOrderCenterManager {
                 for (Trade trade : tradeList) {
                     TradeVo tradeVo = new TradeVo();
                     tradeVo.setTrade(trade);
-                    // 交易扩展
-                    TradeExtra tradeExtra = helper.getDao(TradeExtra.class)
+                                        TradeExtra tradeExtra = helper.getDao(TradeExtra.class)
                             .queryBuilder()
                             .where()
                             .eq(TradeExtra.$.tradeUuid, trade.getUuid())
                             .queryForFirst();
                     tradeVo.setTradeExtra(tradeExtra);
-                    // 交易明细
-                    // 仅仅查了菜品
-                    ArrayList<TradeItemVo> tiVoList = new ArrayList<TradeItemVo>();
+                                                            ArrayList<TradeItemVo> tiVoList = new ArrayList<TradeItemVo>();
                     Dao<TradeItem, String> tiDao = helper.getDao(TradeItem.class);
                     QueryBuilder<TradeItem, String> tiQb = tiDao.queryBuilder();
                     Where<TradeItem, String> tiWhere = tiQb.where();
@@ -698,8 +633,7 @@ public class DinnerOrderCenterManager {
                     List<TradeTable> tradeTableList =
                             helper.getDao(TradeTable.class).queryForEq(TradeTable.$.tradeUuid, trade.getUuid());
                     tradeVo.setTradeTableList(tradeTableList);
-                    // 支付信息
-                    Dao<Payment, String> dao = helper.getDao(Payment.class);
+                                        Dao<Payment, String> dao = helper.getDao(Payment.class);
                     Dao<PaymentItem, String> itemDao = helper.getDao(PaymentItem.class);
                     List<PaymentVo> voList = new ArrayList<PaymentVo>();
                     List<Payment> paymentList = dao.queryBuilder()
@@ -735,9 +669,7 @@ public class DinnerOrderCenterManager {
         List<PaymentVo> paymentVos = new ArrayList<PaymentVo>();
         try {
             TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
-            // 查询paymentVos
-            paymentVos = tradeDal.listAdjustPayment();//查询支付主单及每个主单payment下面的支付明细payment_item
-        } catch (Exception e) {
+                        paymentVos = tradeDal.listAdjustPayment();        } catch (Exception e) {
             Log.e(TAG, e.getMessage(), e);
         }
         List<TradePaymentVo> tradePaymentVos = new ArrayList<TradePaymentVo>();
@@ -754,9 +686,7 @@ public class DinnerOrderCenterManager {
         return tradePaymentVos;
     }
 
-    /**
-     * 数据改变接口
-     */
+
     public interface IDataChangedListener {
 
         void onBegin();
@@ -776,12 +706,7 @@ public class DinnerOrderCenterManager {
 
     private static final Uri URI_PAYMENT_ITEM = DBHelperManager.getUri(PaymentItem.class);
 
-    /**
-     * 数据改变监听器
-     *
-     * @version: 1.0
-     * @date 2015年10月10日
-     */
+
     private class OrderCenterChangeObserver implements DatabaseHelper.DataChangeObserver {
 
         @Override

@@ -4,9 +4,7 @@ package com.zhongmei.bty.basemodule.customer.bean;
 import com.zhongmei.yunfu.ShopInfoManager;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 
-/**
- * 添加会员档案请求参数
- */
+
 public class TaskCreateOrEditReq {
     private Long taskId;
     private Long  customerId;
@@ -15,9 +13,7 @@ public class TaskCreateOrEditReq {
     private int type=1;
     private String title;
     private String content;
-    private Long creatorId; //操作者Id
-    private String creatorName; //操作者名称
-    private Long updatorId;
+    private Long creatorId;     private String creatorName;     private Long updatorId;
     private String updatorName;
     private Long clientCreateTime;
     private Long clientUpdateTime;

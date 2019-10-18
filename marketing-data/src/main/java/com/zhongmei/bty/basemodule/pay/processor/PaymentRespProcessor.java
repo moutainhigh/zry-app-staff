@@ -15,9 +15,7 @@ import com.zhongmei.bty.basemodule.trade.entity.TradeDeposit;
 
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PaymentRespProcessor extends OpsRequest.SaveDatabaseResponseProcessor<PaymentResp> {
     @Override
@@ -33,9 +31,7 @@ public class PaymentRespProcessor extends OpsRequest.SaveDatabaseResponseProcess
                 DBHelperManager.saveEntities(helper, PaymentItemExtra.class, resp.getPaymentItemExtras());
                 DBHelperManager.saveEntities(helper, PaymentItemUnionpay.class, resp.getPaymentItemUnionpays());
                 DBHelperManager.saveEntities(helper, PaymentDevice.class, resp.getPaymentDevices());
-                DBHelperManager.saveEntities(helper, PaymentItemGroupon.class, resp.getPaymentItemGroupons());//add 20160927
-                DBHelperManager.saveEntities(helper, TradeDeposit.class, resp.getTradeDeposit());//add 20160927
-                return null;
+                DBHelperManager.saveEntities(helper, PaymentItemGroupon.class, resp.getPaymentItemGroupons());                DBHelperManager.saveEntities(helper, TradeDeposit.class, resp.getTradeDeposit());                return null;
 
             }
         };

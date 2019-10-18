@@ -24,9 +24,7 @@ import com.zhongmei.bty.snack.orderdish.data.Position;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 口味做法
- */
+
 public class RecipeView extends LinearLayout implements OnClickListener {
     private static final String TAG = RecipeView.class.getSimpleName();
 
@@ -115,14 +113,7 @@ public class RecipeView extends LinearLayout implements OnClickListener {
         }
     }
 
-    /**
-     * 设置口味做法的名称和价格
-     *
-     * @param rootView
-     * @param typeIndex       类别的索引
-     * @param propertyIndex   属性在其类别下的索引
-     * @param propertyGroupVo
-     */
+
     private void setNameAndPrice(View rootView, int typeIndex, int propertyIndex,
                                  PropertyGroupVo<DishPropertyVo> propertyGroupVo) {
 
@@ -164,11 +155,7 @@ public class RecipeView extends LinearLayout implements OnClickListener {
         }
     }
 
-    /**
-     * 添加口味做法的类别标题
-     *
-     * @param dishProperties
-     */
+
     private void addPropertyTypeTitle(PropertyGroupVo<DishPropertyVo> dishProperties) {
         if (dishProperties != null && dishProperties.getPropertyList().size() > 0) {
             TextView tv = new TextView(getContext());
@@ -182,9 +169,7 @@ public class RecipeView extends LinearLayout implements OnClickListener {
         }
     }
 
-    /**
-     * 添加类别间的灰色线
-     */
+
     private void addLine() {
         View line = new View(getContext());
         line.setBackgroundColor(getContext().getResources().getColor(R.color.gray));
@@ -198,8 +183,7 @@ public class RecipeView extends LinearLayout implements OnClickListener {
         Position vPos = (Position) v.getTag();
         for (int i = 0; i < mSelectedViews.size(); i++) {
             Position position = (Position) mSelectedViews.get(i).getTag();
-            // 同一类别
-            if (position.getFirst() == vPos.getFirst()) {
+                        if (position.getFirst() == vPos.getFirst()) {
                 if (position.getSecond() == vPos.getSecond()) {
                     setPropertySelectable(v, vPos, false);
                 } else {
@@ -214,13 +198,7 @@ public class RecipeView extends LinearLayout implements OnClickListener {
         setPropertySelectable(v, vPos, true);
     }
 
-    /**
-     * 选中或取消某一属性
-     *
-     * @param v
-     * @param pos
-     * @param select
-     */
+
     private void setPropertySelectable(View v, Position pos, boolean select) {
         PropertyGroupVo<DishPropertyVo> dishPropertyGroupVo = mPropertyGroupVos.get(pos.getFirst());
         DishProperty vo = dishPropertyGroupVo.getProperty(pos.getSecond());

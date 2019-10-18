@@ -23,30 +23,20 @@ import java.lang.ref.WeakReference;
 public class NumberInputdialog extends Dialog implements OnClickListener {
     public static int NUMBER_TYPE_INT = 1;
     public static int NUMBER_TYPE_FLOAT = 2;
-    private boolean isDefaultValue = false;// 是否是自带值
-    private InputOverListener mListener;
+    private boolean isDefaultValue = false;    private InputOverListener mListener;
     private OnCancelListener onCancelListener;
-    private double mMaxValue;//最大值
-    // 数量
-    private EditTextWithDeleteIcon mShowValue;
+    private double mMaxValue;        private EditTextWithDeleteIcon mShowValue;
     private String mContent;
     private int mNumberType = NUMBER_TYPE_FLOAT;
-    private String mDefaultValue;//默认输入值
-    private TextView tvRemark;//在title之下，显示备注信息
-
+    private String mDefaultValue;    private TextView tvRemark;
     private NumberKeyBoard keyBoard;
 
     private Button mBtnOk;
-    private boolean mAllowDefaultValue = false; //允许默认值
+    private boolean mAllowDefaultValue = false;
 
-    /**
-     * 标记  是显示. 还是 "清除"
-     */
     private DotType mDotType = DotType.DOT;
 
-    /**
-     * 清除 或者 .
-     */
+
     public enum DotType {
         ClEAR, DOT
     }
@@ -74,11 +64,9 @@ public class NumberInputdialog extends Dialog implements OnClickListener {
     public NumberInputdialog(Context context, String title, String hint, String lastInput, String desc, double maxValue,
                              InputOverListener linster) {
         this(context, R.style.custom_alert_dialog);
-        // 隐藏软键盘
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        //this.mListener = linster;
-        this.mMaxValue = maxValue;
+                this.mMaxValue = maxValue;
         this.mDefaultValue = lastInput;
         this.init(title, lastInput, hint, desc);
         setOnInputOverListener(linster);
@@ -148,8 +136,7 @@ public class NumberInputdialog extends Dialog implements OnClickListener {
         keyBoard = (NumberKeyBoard) findViewById(R.id.keyboard);
         keyBoard.setShowPoint();
         keyBoard.setListener(listener);
-        //如果输入整数，屏蔽小数点
-        if (mNumberType == NUMBER_TYPE_INT) {
+                if (mNumberType == NUMBER_TYPE_INT) {
             keyBoard.setPointClickable(false);
         }
         mShowValue.setHint(hint);
@@ -211,9 +198,7 @@ public class NumberInputdialog extends Dialog implements OnClickListener {
         });
     }
 
-    /**
-     * 清除默认值
-     */
+
     private void clearDefaultValue() {
         if (isDefaultValue) {
             mShowValue.setText("");
@@ -296,8 +281,7 @@ public class NumberInputdialog extends Dialog implements OnClickListener {
             }
         }
     };
-    public static final String CASH_FORMAT_REG = "([0-9]{1,8}[.][0-9]{0,2})|([0-9]{1,8})";// 输入数字验证正则表达式
-
+    public static final String CASH_FORMAT_REG = "([0-9]{1,8}[.][0-9]{0,2})|([0-9]{1,8})";
     public static boolean isMatchNumberFormat(String value) {
         if (value == null) {
             return false;

@@ -50,9 +50,7 @@ import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.faceAmount;
 import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.paySource;
 import static com.zhongmei.yunfu.db.entity.trade.PaymentItem.$.payStatus;
 
-/**
- * 订单中心订单列表正餐Model，业务处理类主要负责数据库操作、网络操作
- */
+
 public class BeautyOrderCenterListManager extends OrderCenterListManager {
     private static final String TAG = BeautyOrderCenterListManager.class.getSimpleName();
 
@@ -61,11 +59,7 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
         return queryBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY);
     }
 
-    /**
-     * 处理已过期的订单（剔除已反结账，已退货的订单），Core-api对原单的状态不做更改，导致原单会显示
-     *
-     * @return
-     */
+
     public Where<Trade, String> filterTradeOutStatus(DatabaseHelper helper, Where<Trade, String> tradeWhere) throws Exception {
         Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
         QueryBuilder<Trade, String> queryBuilder = tradeDao.queryBuilder();
@@ -190,13 +184,7 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
         return lastPayTime <= lastClosingTime;
     }
 
-    /**
-     * 获取交易扩展
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return TradeExtra
-     */
+
     private TradeExtra getTradeExtra(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeExtra.class)
@@ -218,13 +206,7 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
         return null;
     }
 
-    /**
-     * 获取交易押金
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return TradeExtra
-     */
+
     private TradeDeposit getTradeDeposit(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeDeposit.class)
@@ -240,13 +222,7 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
         return null;
     }
 
-    /**
-     * 获取桌台信息
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return getTradeTableList
-     */
+
     private List<TradeTable> getTradeTableList(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeTable.class)
@@ -262,13 +238,7 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
         return Collections.emptyList();
     }
 
-    /**
-     * 获取顾客信息
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return getTradeCustomerList
-     */
+
     private List<TradeCustomer> getTradeCustomerList(DatabaseHelper helper, String tradeUuid) {
         try {
             return helper.getDao(TradeCustomer.class)
@@ -285,22 +255,13 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
         return Collections.emptyList();
     }
 
-    /**
-     * 加载订单相关支付信息（仅取了部分表的部分字段）
-     *
-     * @param helper    helper
-     * @param tradeUuid tradeUuid
-     * @return List<PaymentVo>
-     * @throws Exception
-     */
+
     private List<PaymentVo> listPaymentVo(DatabaseHelper helper, String tradeUuid) throws Exception {
         List<PaymentVo> voList = new ArrayList<PaymentVo>();
 
         Dao<Payment, String> dao = helper.getDao(Payment.class);
         QueryBuilder<Payment, String> paymentBuild = dao.queryBuilder();
         paymentBuild.selectColumns(Payment.$.uuid, Payment.$.serverUpdateTime, Payment.$.paymentType);
-        //paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid)
-        //        .and().eq(Payment.$.isPaid, Bool.YES);
         paymentBuild.where().eq(Payment.$.relateUuid, tradeUuid);
         paymentBuild.orderBy(Payment.$.serverCreateTime, false);
         List<Payment> paymentList = paymentBuild.query();
@@ -360,7 +321,6 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
                     Trade.$.serverUpdateTime);
             createTradeWhere(helper, tradeQB, childTab, postion, keyword, condition, lastData);
             tradeQB.limit(PAGE_SIZE);
-            //新订单||取消请求升序排列
             if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
                     || childTab == DbQueryConstant.UNPROCESSED_CANCEL_REQUEST) {
                 tradeQB.orderBy(Trade.$.serverUpdateTime, true);
@@ -377,11 +337,10 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
 
     private Where<Trade, String> createTradeWhere(DatabaseHelper helper, QueryBuilder<Trade, String> queryBuilder, int childTab, int position, String keyword, FilterCondition condition, Trade lastData) throws Exception {
         Where<Trade, String> where = generateTradeBusinessTypeWhere(queryBuilder);
-        filterTradeOutStatus(helper, where);//过滤已反结账，退货，作废的原单
+        filterTradeOutStatus(helper, where);
         where.and().eq(Trade.$.statusFlag, StatusFlag.VALID);
         where.and().ne(Trade.$.tradeType, TradeType.UNOIN_TABLE_MAIN);
 
-        //偏移条件
         if (lastData != null) {
             if (childTab == DbQueryConstant.UNPROCESSED_NEW_ORDER
                     || childTab == DbQueryConstant.UNPROCESSED_CANCEL_REQUEST) {
@@ -393,16 +352,15 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
             }
         }
 
-        //搜索条件
         if (!TextUtils.isEmpty(keyword)) {
             Where<Trade, String> searchWhere = null;
             if (childTab == DbQueryConstant.UNPROCESSED_ALL) {
                 switch (position) {
                     case 0: {
-                        Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
-                        QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
-                        tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
-                        tradeExtraQB.where().like(TradeExtra.$.serialNumber, "%" + keyword + "%");
+                        Dao<Trade, String> tradeExtraDao = helper.getDao(Trade.class);
+                        QueryBuilder<Trade, String> tradeExtraQB = tradeExtraDao.queryBuilder();
+                        tradeExtraQB.selectColumns(Trade.$.uuid);
+                        tradeExtraQB.where().like(Trade.$.serialNumber, "%" + keyword + "%");
                         Dao<TradeTable, String> tradeTableDao = helper.getDao(TradeTable.class);
                         QueryBuilder<TradeTable, String> tradeTableQB = tradeTableDao.queryBuilder();
                         tradeTableQB.selectColumns(TradeTable.$.tradeUuid);
@@ -417,10 +375,10 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
                     }
                     break;
                     case 1: {
-                        Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
-                        QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
-                        tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
-                        tradeExtraQB.where().like(TradeExtra.$.serialNumber, "%" + keyword + "%");
+                        Dao<Trade, String> tradeExtraDao = helper.getDao(Trade.class);
+                        QueryBuilder<Trade, String> tradeExtraQB = tradeExtraDao.queryBuilder();
+                        tradeExtraQB.selectColumns(Trade.$.uuid);
+                        tradeExtraQB.where().like(Trade.$.serialNumber, "%" + keyword + "%");
                         searchWhere = where.in(Trade.$.uuid, tradeExtraQB);
                     }
                     break;
@@ -443,13 +401,13 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
                 }
             } else {
                 switch (position) {
-                    case 0://全部
+                    case 0:
                         if (Utils.isNum(keyword)) {
                             BigDecimal amount = MathDecimal.round(new BigDecimal(keyword), 2);
-                            Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
-                            QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
-                            tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
-                            tradeExtraQB.where().like(TradeExtra.$.serialNumber, "%" + keyword + "%");
+                            Dao<Trade, String> tradeExtraDao = helper.getDao(Trade.class);
+                            QueryBuilder<Trade, String> tradeExtraQB = tradeExtraDao.queryBuilder();
+                            tradeExtraQB.selectColumns(Trade.$.uuid);
+                            tradeExtraQB.where().like(Trade.$.serialNumber, "%" + keyword + "%");
                             Dao<TradeTable, String> tradeTableDao = helper.getDao(TradeTable.class);
                             QueryBuilder<TradeTable, String> tradeTableQB = tradeTableDao.queryBuilder();
                             tradeTableQB.selectColumns(TradeTable.$.tradeUuid);
@@ -463,10 +421,10 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
                                     where.in(Trade.$.uuid, tradeCustomerQB),
                                     where.eq(Trade.$.tradeAmount, amount));
                         } else {
-                            Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
-                            QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
-                            tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
-                            tradeExtraQB.where().like(TradeExtra.$.serialNumber, "%" + keyword + "%");
+                            Dao<Trade, String> tradeExtraDao = helper.getDao(Trade.class);
+                            QueryBuilder<Trade, String> tradeExtraQB = tradeExtraDao.queryBuilder();
+                            tradeExtraQB.selectColumns(Trade.$.uuid);
+                            tradeExtraQB.where().like(Trade.$.serialNumber, "%" + keyword + "%");
                             Dao<TradeTable, String> tradeTableDao = helper.getDao(TradeTable.class);
                             QueryBuilder<TradeTable, String> tradeTableQB = tradeTableDao.queryBuilder();
                             tradeTableQB.selectColumns(TradeTable.$.tradeUuid);
@@ -482,14 +440,14 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
                         }
                         break;
                     case 1: {
-                        Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
-                        QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
-                        tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid);
-                        tradeExtraQB.where().like(TradeExtra.$.serialNumber, "%" + keyword + "%");
+                        Dao<Trade, String> tradeExtraDao = helper.getDao(Trade.class);
+                        QueryBuilder<Trade, String> tradeExtraQB = tradeExtraDao.queryBuilder();
+                        tradeExtraQB.selectColumns(Trade.$.uuid);
+                        tradeExtraQB.where().like(Trade.$.serialNumber, "%" + keyword + "%");
                         searchWhere = where.in(Trade.$.uuid, tradeExtraQB);
                     }
                     break;
-                    case 2://订单金额
+                    case 2:
                         if (Utils.isNum(keyword)) {
                             BigDecimal amount = MathDecimal.round(new BigDecimal(keyword), 2);
                             searchWhere = where.eq(Trade.$.tradeAmount, amount);
@@ -518,7 +476,6 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
             }
         }
 
-        //筛选条件
         if (condition != null) {
             if (Utils.isNotEmpty(condition.getDeliveryTypes())) {
                 where.and().in(Trade.$.deliveryType, condition.getDeliveryTypes());
@@ -545,46 +502,44 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
             }
         }
 
-        //分栏条件
         Where<Trade, String> tabWhere;
         switch (childTab) {
-            case DbQueryConstant.UNPROCESSED_ALL://待处理-全部
+            case DbQueryConstant.UNPROCESSED_ALL:
                 tabWhere = where.or(where.or(where.eq(Trade.$.tradePayStatus, TradePayStatus.PAID), where.ne(Trade.$.tradePayForm, TradePayForm.ONLINE))
                         .and().eq(Trade.$.tradeStatus, TradeStatus.UNPROCESSED)
                         .and().ne(Trade.$.sourceId, SourceId.POS), where.in(Trade.$.tradeStatus, TradeStatus.REFUSED, TradeStatus.CANCELLED).and().ne(Trade.$.sourceId, SourceId.POS));
                 break;
-            case DbQueryConstant.UNPROCESSED_NEW_ORDER://待处理-新订单
+            case DbQueryConstant.UNPROCESSED_NEW_ORDER:
                 tabWhere = where.or(where.eq(Trade.$.tradePayStatus, TradePayStatus.PAID), where.ne(Trade.$.tradePayForm, TradePayForm.ONLINE))
                         .and().eq(Trade.$.tradeStatus, TradeStatus.UNPROCESSED)
                         .and().ne(Trade.$.sourceId, SourceId.POS);
                 break;
-            case DbQueryConstant.UNPROCESSED_INVALID://待处理-已拒绝/取消
+            case DbQueryConstant.UNPROCESSED_INVALID:
                 tabWhere = where.in(Trade.$.tradeStatus, TradeStatus.REFUSED, TradeStatus.CANCELLED).and().ne(Trade.$.sourceId, SourceId.POS);
                 break;
-            case DbQueryConstant.SALES_ALL://销货单-全部
+            case DbQueryConstant.SALES_ALL:
                 tabWhere = where.or(where.in(Trade.$.tradeStatus, TradeStatus.CONFIRMED, TradeStatus.CREDIT).and().eq(Trade.$.tradePayStatus, TradePayStatus.UNPAID),
                         where.in(Trade.$.tradeType, TradeType.SELL, TradeType.SELL_FOR_REPEAT, TradeType.SPLIT).and().in(Trade.$.tradeStatus, TradeStatus.FINISH, TradeStatus.CONFIRMED, TradeStatus.CREDIT, TradeStatus.WRITEOFF, TradeStatus.SQUAREUP).and().eq(Trade.$.tradePayStatus, TradePayStatus.PAID),
                         where.in(Trade.$.tradeType, TradeType.REFUND, TradeType.REFUND_FOR_REPEAT),
                         where.eq(Trade.$.tradeStatus, TradeStatus.INVALID), where.in(Trade.$.tradeStatus, TradeStatus.CONFIRMED, TradeStatus.CREDIT)
                                 .and().eq(Trade.$.tradePayStatus, TradePayStatus.PAYING));
                 break;
-            case DbQueryConstant.SALES_UNPAID://销货单-未结账
+            case DbQueryConstant.SALES_UNPAID:
                 tabWhere = where.in(Trade.$.tradeStatus, TradeStatus.CONFIRMED, TradeStatus.CREDIT)
                         .and().eq(Trade.$.tradePayStatus, TradePayStatus.UNPAID);
                 break;
-            case DbQueryConstant.SALES_PAID://销货单-已结账
+            case DbQueryConstant.SALES_PAID:
                 tabWhere = where.in(Trade.$.tradeType, TradeType.SELL, TradeType.SELL_FOR_REPEAT, TradeType.SPLIT)
                         .and().in(Trade.$.tradeStatus, TradeStatus.FINISH, TradeStatus.CONFIRMED, TradeStatus.CREDIT, TradeStatus.WRITEOFF, TradeStatus.SQUAREUP)
-//                        .and().in(Trade.$.uuid, getTradeExtraQueryBuilder(helper))
                         .and().eq(Trade.$.tradePayStatus, TradePayStatus.PAID);
                 break;
-            case DbQueryConstant.SALES_REFUNDED://销货单-已退货
+            case DbQueryConstant.SALES_REFUNDED:
                 tabWhere = where.in(Trade.$.tradeType, TradeType.REFUND, TradeType.REFUND_FOR_REPEAT);
                 break;
-            case DbQueryConstant.SALES_INVALID://销货单-已作废
+            case DbQueryConstant.SALES_INVALID:
                 tabWhere = where.eq(Trade.$.tradeStatus, TradeStatus.INVALID);
                 break;
-            case DbQueryConstant.SALES_PAYING:// 销货单-支付中
+            case DbQueryConstant.SALES_PAYING:
                 tabWhere = where.in(Trade.$.tradeStatus, TradeStatus.CONFIRMED, TradeStatus.CREDIT)
                         .and().eq(Trade.$.tradePayStatus, TradePayStatus.PAYING);
                 break;
@@ -619,13 +574,7 @@ public class BeautyOrderCenterListManager extends OrderCenterListManager {
         return paymentItemQB;
     }
 
-    /**
-     * 获取TradeExtra表serialNumber字段不为空的订单UUID
-     *
-     * @param helper
-     * @return
-     * @throws Exception
-     */
+
     private QueryBuilder<TradeExtra, String> getTradeExtraQueryBuilder(DatabaseHelper helper) throws Exception {
         Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
         QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();

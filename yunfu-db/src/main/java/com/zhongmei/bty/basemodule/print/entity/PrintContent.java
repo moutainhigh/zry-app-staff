@@ -11,34 +11,22 @@ public class PrintContent extends EntityBase<Long> {
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         public static final String id = "id";
 
-        /**
-         * status
-         */
+
         public static final String status = "status";
 
-        /**
-         * content
-         */
+
         public static final String content = "content";
 
-        /**
-         * create_date_time
-         */
+
         public static final String createDateTime = "createDateTime";
 
-        /**
-         * modify_date_time
-         */
+
         public static final String modifyDateTime = "modifyDateTime";
 
-        /**
-         * commercialID
-         */
+
         public static final String commercialId = "commercialID";
 
     }

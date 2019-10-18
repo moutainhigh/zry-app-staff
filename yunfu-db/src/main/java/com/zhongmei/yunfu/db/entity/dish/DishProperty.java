@@ -9,82 +9,52 @@ import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * DishProperty is a ORMLite bean type. Corresponds to the database table "dish_property"
- */
+
 @DatabaseTable(tableName = "dish_property")
 public class DishProperty extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "dish_property"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * alias_name
-         */
+
         public static final String aliasName = "alias_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * enabled_flag
-         */
+
         public static final String enabledFlag = "enabled_flag";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * property_kind
-         */
+
         public static final String propertyKind = "property_kind";
 
-        /**
-         * property_type_id
-         */
+
         public static final String propertyTypeId = "property_type_id";
 
-        /**
-         * reprice
-         */
+
         public static final String reprice = "reprice";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * uuid
-         */
+
         public static final String uuid = "uuid";
 
-        /**
-         * 菜品id
-         */
+
         public static final String dishShopId = "dish_shop_id";
 
     }

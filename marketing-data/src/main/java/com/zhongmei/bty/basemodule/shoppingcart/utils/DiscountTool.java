@@ -4,18 +4,10 @@ import com.zhongmei.yunfu.db.entity.discount.TradePrivilege;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
 import com.zhongmei.yunfu.db.enums.PrivilegeType;
 
-/**
- * 折扣工具类，处理整单、单品的折扣和让价
- */
+
 public class DiscountTool {
 
-    /**
-     * @Title: isSinglePrivilege
-     * @Description: 是否有单品优惠
-     * @Param @param item
-     * @Param @return TODO
-     * @Return boolean 返回类型
-     */
+
     public static boolean isSinglePrivilege(IShopcartItemBase item) {
         if (item == null) {
             return false;

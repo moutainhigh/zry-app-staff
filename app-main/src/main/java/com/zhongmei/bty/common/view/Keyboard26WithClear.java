@@ -12,11 +12,7 @@ import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.util.SettingManager;
 import com.zhongmei.bty.commonmodule.component.IPanelSettings;
 
-/**
- * @Date：2016年3月7日 上午11:25:16
- * @Description: 字母键盘
- * @Version: 1.0
- */
+
 public class Keyboard26WithClear extends LinearLayout implements OnClickListener {
 
     private int[][] marginNormal = {{36, 36, 18}, {36, 36, 12}, {36, 36, 12}, {36, 36, 12}};
@@ -43,8 +39,7 @@ public class Keyboard26WithClear extends LinearLayout implements OnClickListener
 
     @Override
     protected void onAttachedToWindow() {
-        // TODO Auto-generated method stub
-        super.onAttachedToWindow();
+                super.onAttachedToWindow();
         findViewById(R.id.keyboard_a).setOnClickListener(this);
         findViewById(R.id.keyboard_b).setOnClickListener(this);
         findViewById(R.id.keyboard_c).setOnClickListener(this);
@@ -130,10 +125,6 @@ public class Keyboard26WithClear extends LinearLayout implements OnClickListener
         }
     }
 
-    // public void onClick_event(View view) {
-    //
-    //
-    // }
 
     public interface ClickEventListener {
         public void onClick(View v);
@@ -153,8 +144,7 @@ public class Keyboard26WithClear extends LinearLayout implements OnClickListener
     public void onClick(View v) {
         if (listener == null) {
             throw new RuntimeException("please set a listener first");
-            // return ;
-        }
+                    }
         switch (v.getId()) {
             case R.id.keyboard_clear: {
                 listener.onClear();

@@ -6,47 +6,31 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * DishUnitDictionary is a ORMLite bean type. Corresponds to the database table "dish_unit_dictionary"
- */
+
 @DatabaseTable(tableName = "dish_unit_dictionary")
 public class DishUnitDictionary extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "dish_unit_dictionary"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * alias_name
-         */
+
         public static final String aliasName = "alias_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

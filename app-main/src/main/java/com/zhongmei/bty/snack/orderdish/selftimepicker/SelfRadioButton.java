@@ -8,9 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.widget.RadioButton;
 
-/**
- * @description 用于RadioButton不显示文本，图像居中的情况
- */
+
 public class SelfRadioButton extends RadioButton {
     private static final String TAG = SelfRadioButton.class.getSimpleName();
     private Context context;
@@ -88,8 +86,7 @@ public class SelfRadioButton extends RadioButton {
         super.setCompoundDrawablesRelativeWithIntrinsicBounds(start, top, end, bottom);
     }
 
-    // 核心代码部分
-    @Override
+        @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 

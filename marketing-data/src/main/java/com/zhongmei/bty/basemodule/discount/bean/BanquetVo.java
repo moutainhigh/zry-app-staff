@@ -5,11 +5,7 @@ import android.util.Log;
 import com.zhongmei.yunfu.db.entity.discount.TradePrivilege;
 import com.zhongmei.yunfu.context.util.NoProGuard;
 
-/**
- * Created by demo on 2018/12/15
- * <p>
- * 宴请vo
- */
+
 
 public class BanquetVo implements java.io.Serializable, NoProGuard {
     private static final String TAG = "BanquetVo";

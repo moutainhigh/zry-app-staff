@@ -61,10 +61,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @version: 1.0
- * @date 2015年11月3日
- */
+
 public final class ShopcartItemUtils {
     private ShopcartItemUtils() {
     }
@@ -75,12 +72,7 @@ public final class ShopcartItemUtils {
         return SystemUtils.genOnlyIdentifier();
     }
 
-    /**
-     * 计算TradeVo中的明细项的单份数量
-     *
-     * @param mItemVos
-     * @return 返回的包含每项明细的单份数量的Map，其key为明细项的uuid，value为单份数量
-     */
+
     public static Map<String, BigDecimal> computeSingleQty(List<TradeItemVo> mItemVos) {
         List<TradeItemVo> itemVoList = mItemVos;
         Map<String, TradeItem> parentFinder = new HashMap<String, TradeItem>();
@@ -102,20 +94,12 @@ public final class ShopcartItemUtils {
         return resultMap;
     }
 
-    /**
-     * 计算条目的不受父条目影响的数量 获取退货的数量
-     *
-     * @param totalQty
-     * @param parent      父级
-     * @param grandfather 父级的父级
-     * @return
-     */
+
     public static BigDecimal computeReturnSingleQty(BigDecimal totalQty, TradeItem parent, TradeItem grandfather) {
         if (parent == null) {
             return totalQty;
         }
-        // 祖先中有非称重商品时就需要除以最近的非称重祖先条目的数量
-        BigDecimal qtyRef = null;
+                BigDecimal qtyRef = null;
         if (parent.getSaleType() != SaleType.WEIGHING) {
             qtyRef = parent.getReturnQuantity();
         } else if (grandfather != null && grandfather.getSaleType() != SaleType.WEIGHING) {
@@ -127,20 +111,12 @@ public final class ShopcartItemUtils {
         return MathDecimal.div(totalQty, qtyRef);
     }
 
-    /**
-     * 计算条目的不受父条目影响的数量
-     *
-     * @param totalQty
-     * @param parent      父级
-     * @param grandfather 父级的父级
-     * @return
-     */
+
     public static BigDecimal computeSingleQty(BigDecimal totalQty, TradeItem parent, TradeItem grandfather) {
         if (parent == null) {
             return totalQty;
         }
-        // 祖先中有非称重商品时就需要除以最近的非称重祖先条目的数量
-        BigDecimal qtyRef = null;
+                BigDecimal qtyRef = null;
         if (parent.getSaleType() != SaleType.WEIGHING) {
             qtyRef = parent.getQuantity();
         } else if (grandfather != null && grandfather.getSaleType() != SaleType.WEIGHING) {
@@ -194,13 +170,7 @@ public final class ShopcartItemUtils {
         return singleQty.multiply(qtyRef);
     }
 
-    /**
-     * 计算受父条目影响的总数量
-     *
-     * @param singleQty
-     * @param parent
-     * @return
-     */
+
     private static BigDecimal computeTotalQty(BigDecimal singleQty, ReadonlyShopcartItemBase parent) {
         if (parent == null) {
             return singleQty;
@@ -220,11 +190,7 @@ public final class ShopcartItemUtils {
         return actualAmount;
     }
 
-    /**
-     * 撤消购物车条目的被拆单状态。该方法将撤消条目及其下所有子条目的被拆单状态
-     *
-     * @param item
-     */
+
     public static void cancelSplit(ShopcartItem item) {
         if (item.ensureCancelSplit()) {
             completeCancelSplit(item);
@@ -246,11 +212,7 @@ public final class ShopcartItemUtils {
         }
     }
 
-    /**
-     * 撤消购物车条目的被拆单状态。该方法将撤消条目及其下所有子条目的被拆单状态
-     *
-     * @param item
-     */
+
     public static void cancelSplit(ReadonlyShopcartItem item) {
         if (item.ensureCancelSplit()) {
             completeCancelSplit(item);
@@ -272,12 +234,7 @@ public final class ShopcartItemUtils {
         }
     }
 
-    /**
-     * 将指定的购物车条目进行拆单操作，并返回新的购物车条目
-     *
-     * @param ref
-     * @return
-     */
+
     public static ShopcartItem splitCopy(ShopcartItem ref) {
         ShopcartItem newItem = null;
         if (ref.ensureSplit()) {
@@ -285,8 +242,7 @@ public final class ShopcartItemUtils {
             if (newItem == null) {
                 return null;
             }
-            // 套餐明细
-            if (ref.hasSetmeal()) {
+                        if (ref.hasSetmeal()) {
                 newItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
                 for (SetmealShopcartItem refSetmealItem : ref.getSetmealItems()) {
                     SetmealShopcartItem newSetmealItem = spliteCopySetmeal(refSetmealItem, newItem);
@@ -296,19 +252,12 @@ public final class ShopcartItemUtils {
                     newItem.getSetmealItems().add(newSetmealItem);
                 }
             }
-            // 保留tradeTableUuid，以便completeTradeTable方法中使用
-            newItem.setTradeTable(ref.getTradeTableUuid(), null);
+                        newItem.setTradeTable(ref.getTradeTableUuid(), null);
         }
         return newItem;
     }
 
-    /**
-     * 对指定的套餐明细条目进行拆单操作，返回新的套餐明细条目
-     *
-     * @param ref
-     * @param newParent 新套餐明细的父条目
-     * @return
-     */
+
     private static SetmealShopcartItem spliteCopySetmeal(SetmealShopcartItem ref, ShopcartItem newParent) {
         if (ref.ensureSplit()) {
             return completeSplitCopy(ref, new SetmealShopcartItem(uuid(), ref.orderDish, newParent));
@@ -317,13 +266,7 @@ public final class ShopcartItemUtils {
     }
 
 
-    /**
-     * 对theRef条目中的加料、属性、优惠进行拆单操作，并将生成的新条目设置到theNew中
-     *
-     * @param theRef
-     * @param theNew
-     * @return
-     */
+
     private static <T extends ShopcartItemBase<?>> T completeSplitCopy(T theRef, T theNew) {
         theNew.setRelateInfo(theRef.getId(), theRef.getUuid());
         if (theRef.hasExtra()) {
@@ -346,8 +289,7 @@ public final class ShopcartItemUtils {
             }
             theNew.setProperties(newProperties);
         }
-        // 优惠信息。会员折扣不复制
-        TradePrivilege refPrivilege = theRef.getPrivilege();
+                TradePrivilege refPrivilege = theRef.getPrivilege();
         if (refPrivilege != null && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
             TradePrivilege newPrivilege = newEntity(refPrivilege, theNew.getUuid());
             if (newPrivilege == null) {
@@ -356,8 +298,7 @@ public final class ShopcartItemUtils {
             theNew.setPrivilege(newPrivilege);
         }
 
-        //礼品劵
-        CouponPrivilegeVo couponPrivilegeVo = theRef.getCouponPrivilegeVo();
+                CouponPrivilegeVo couponPrivilegeVo = theRef.getCouponPrivilegeVo();
         if (couponPrivilegeVo != null) {
             CouponPrivilegeVo newCouponPrivilegeVo = new CouponPrivilegeVo();
             try {
@@ -388,12 +329,7 @@ public final class ShopcartItemUtils {
         return theNew;
     }
 
-    /**
-     * 将指定的购物车条目进行拆单操作，并返回新的购物车条目
-     *
-     * @param ref
-     * @return
-     */
+
     public static ReadonlyShopcartItem spliteCopy(ReadonlyShopcartItem ref) {
         ReadonlyShopcartItem newItem = null;
         if (ref.ensureSplit()) {
@@ -420,13 +356,7 @@ public final class ShopcartItemUtils {
     }
 
 
-    /**
-     * 对指定的套餐明细条目进行拆单操作，返回新的套餐明细条目
-     *
-     * @param ref
-     * @param newParent 新套餐明细的父条目
-     * @return
-     */
+
     private static ReadonlySetmealShopcartItem spliteCopySetmeal(ReadonlySetmealShopcartItem ref,
                                                                  ReadonlyShopcartItem newParent) {
         if (ref.ensureSplit()) {
@@ -441,17 +371,10 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 对theRef条目中的加料、属性、优惠进行拆单操作，并将生成的新条目设置到theNew中
-     *
-     * @param theRef
-     * @param theNew
-     * @return
-     */
+
     private static <T extends ReadonlyShopcartItemBase> T completeSplitCopy(T theRef, T theNew) {
         if (theRef.hasExtra()) {
-            // 复制加料
-            List<ReadonlyExtraShopcartItem> newExtraItems = new ArrayList<ReadonlyExtraShopcartItem>();
+                        List<ReadonlyExtraShopcartItem> newExtraItems = new ArrayList<ReadonlyExtraShopcartItem>();
             for (ReadonlyExtraShopcartItem refExtraItem : theRef.getExtraItems()) {
                 if (refExtraItem.ensureCopy(true)) {
                     TradeItem newExtraTradeItem = relateCopyBySplit(refExtraItem.tradeItem, theNew.getUuid());
@@ -464,8 +387,7 @@ public final class ShopcartItemUtils {
             theNew.setExtraItems(newExtraItems);
         }
         if (theRef.hasProperty()) {
-            // 复制属性
-            List<ReadonlyOrderProperty> newProperties = new ArrayList<ReadonlyOrderProperty>();
+                        List<ReadonlyOrderProperty> newProperties = new ArrayList<ReadonlyOrderProperty>();
             for (ReadonlyOrderProperty refProperty : theRef.getProperties()) {
                 TradeItemProperty newTradeItemProperty = newEntity(refProperty.tradeItemProperty, theNew.getUuid());
                 if (newTradeItemProperty == null) {
@@ -475,14 +397,12 @@ public final class ShopcartItemUtils {
             }
             theNew.setProperties(newProperties);
         }
-        // 优惠信息。会员折扣不复制
-        TradePrivilege refPrivilege = theRef.getPrivilege();
+                TradePrivilege refPrivilege = theRef.getPrivilege();
         if (refPrivilege != null && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
             TradePrivilege newPrivilege = newEntity(refPrivilege, theNew.getUuid());
             theNew.setPrivilege(newPrivilege);
         }
-        //复制折扣理由
-        TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
+                TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
         if (tradeReasonRel != null && tradeReasonRel.isValid()) {
             TradeReasonRel newReasonRel = newEntity(tradeReasonRel, theNew.getUuid());
             if (newReasonRel == null) {
@@ -491,8 +411,7 @@ public final class ShopcartItemUtils {
             theNew.setDiscountReasonRel(newReasonRel);
         }
 
-        //礼品劵
-        CouponPrivilegeVo couponPrivilegeVo = theRef.getCouponPrivilegeVo();
+                CouponPrivilegeVo couponPrivilegeVo = theRef.getCouponPrivilegeVo();
         if (couponPrivilegeVo != null) {
             CouponPrivilegeVo newCouponPrivilegeVo = new CouponPrivilegeVo();
             try {
@@ -512,11 +431,7 @@ public final class ShopcartItemUtils {
     }
 
 
-    /**
-     * 撤消退菜
-     *
-     * @param item
-     */
+
     public static void cancelReturnQty(ReadonlyShopcartItem item) {
         completeReturnQty(item);
         if (item.hasSetmeal()) {
@@ -574,14 +489,12 @@ public final class ShopcartItemUtils {
             if (Utils.isNotEmpty(dishVos)) {
                 ShopcartItem theNew = createShopcartItem(dishVos.get(0), theRef.getSingleQty());
                 theNew.creatorId = theRef.tradeItem.getCreatorId();
-                theNew.creatorName = theRef.tradeItem.getCreatorName();//设置原菜的creator
-                theNew.setIsGroupDish(theRef.isGroupDish());
+                theNew.creatorName = theRef.tradeItem.getCreatorName();                theNew.setIsGroupDish(theRef.isGroupDish());
                 theNew.setShopcartItemType(theRef.getShopcartItemType());
                 if (theRef.isGroupDish()) {
                     theNew.changeQty(theRef.getSigleDeskQuantity());
                 }
-                //临时菜改名后名字变化
-                theNew.changeName(theRef.getSkuName());
+                                theNew.changeName(theRef.getSkuName());
                 theRef.setupModifyDishState();
                 completeByMd(theRef, theNew);
                 if (theRef.hasSetmeal()) {
@@ -594,29 +507,15 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 退菜复制
-     *
-     * @param theRef
-     * @param returnQty
-     * @return
-     */
+
     public static ReadonlyShopcartItem returnQtyCopy(final ReadonlyShopcartItem theRef, final BigDecimal returnQty) {
-		/*if (returnQty.compareTo(BigDecimal.ZERO) >= 0) {
-			throw new RuntimeException("The returnQty is wrong.");
-		}*/
+
         BigDecimal newTotalQty = theRef.getTotalQty().add(returnQty);
-		/*if (newTotalQty.compareTo(BigDecimal.ZERO) < 0) {
-			throw new RuntimeException("The returnQty is wrong.");
-		}
-		if (theRef.getSaleType() == SaleType.WEIGHING && newTotalQty.compareTo(BigDecimal.ZERO) != 0) {
-			throw new RuntimeException("Must be all returns.");
-		}*/
+
 
         boolean allReturns = true;
         TradeItem newTradeItem = relateCopyByReturnQty(theRef.tradeItem, theRef.tradeItem.getParentUuid());
-        newTradeItem.setParentId(theRef.tradeItem.getParentId());//v8.10自助连台针对于单品作废
-        if (newTotalQty.compareTo(BigDecimal.ZERO) > 0) {
+        newTradeItem.setParentId(theRef.tradeItem.getParentId());        if (newTotalQty.compareTo(BigDecimal.ZERO) > 0) {
             newTradeItem.setQuantity(newTotalQty);
             newTradeItem.setAmount(newTradeItem.getPrice().multiply(newTotalQty));
             allReturns = false;
@@ -636,15 +535,13 @@ public final class ShopcartItemUtils {
                 itemNew.setIsGroupDish(itemRef.isGroupDish());
                 itemNew.setShopcartItemType(itemRef.getShopcartItemType());
                 setmealItems.add(itemNew);
-                // 累加套餐明细的金额
-                newActualAmount = newActualAmount.add(itemNew.getActualAmount());
+                                newActualAmount = newActualAmount.add(itemNew.getActualAmount());
             }
             theNew.setSetmealItems(setmealItems);
         }
         theNew = completeByRQ(theRef, theNew, allReturns);
         if (allReturns) {
-            // 全退时主条目的数量和金额均为0，状态为有效。
-            theNew.tradeItem.setQuantity(BigDecimal.ZERO);
+                        theNew.tradeItem.setQuantity(BigDecimal.ZERO);
             theNew.tradeItem.setAmount(BigDecimal.ZERO);
             theNew.tradeItem.setPropertyAmount(BigDecimal.ZERO);
             theNew.tradeItem.setFeedsAmount(BigDecimal.ZERO);
@@ -661,8 +558,7 @@ public final class ShopcartItemUtils {
                                                               ReadonlyShopcartItem newParent, boolean allReturns) {
         TradeItem tradeItem = relateCopyByReturnQty(itemRef.tradeItem, newParent.getUuid());
         if (allReturns) {
-            // 全退时明细条目的数量和金额不变，状态为无效。
-            tradeItem.setStatusFlag(StatusFlag.INVALID);
+                        tradeItem.setStatusFlag(StatusFlag.INVALID);
             itemRef.setupReturnQtyState(tradeItem.getQuantity().negate());
         } else {
             BigDecimal totalQty = computeTotalQty(itemRef.getSingleQty(), newParent);
@@ -681,8 +577,7 @@ public final class ShopcartItemUtils {
     private static void completeByMd(ReadonlyShopcartItem theRef, ShopcartItem theNew) {
         theNew.setRelateInfo(theRef.getId(), theRef.getUuid());
         theNew.changePrice(theRef.getPrice());
-        // 复制加料
-        if (theRef.hasExtra()) {
+                if (theRef.hasExtra()) {
             List<ExtraShopcartItem> newExtraItems = new ArrayList<ExtraShopcartItem>();
             for (ReadonlyExtraShopcartItem itemRef : theRef.getExtraItems()) {
                 if (itemRef.getStatusFlag() != StatusFlag.VALID) {
@@ -698,13 +593,6 @@ public final class ShopcartItemUtils {
                 Long dishId = theNew.getOrderDish().getBrandDishId();
                 Long childDishId = setmealDishShop.getBrandDishId();
                 DishSetmeal dishSetmeal = DishCache.getDishExtraHolder().get(dishId, childDishId);
-//				if (dishSetmeal == null) {
-//					// 获取加料对应的公共DishSetmeal
-//					dishSetmeal = DishCache.getDishExtraHolder().get(childDishId);
-//					if(dishSetmeal == null) {
-//						continue;
-//					}
-//				}
                 OrderExtra orderExtra = new OrderExtra(setmealDishShop, dishSetmeal);
                 BigDecimal parentQty = theNew.getTotalQty();
                 if (parentQty != null) {
@@ -719,8 +607,7 @@ public final class ShopcartItemUtils {
                     orderExtra.setQty(itemRef.tradeItem.getQuantity(), itemRef.tradeItem.getQuantity());
                 }
                 ExtraShopcartItem newExtraItem = new ExtraShopcartItem(uuid(), orderExtra, theNew);
-                //称重商品存的实际数量
-                if (theRef.isGroupDish() && itemRef.getDeskCount() != null && theRef.getSaleType() == SaleType.WEIGHING) {
+                                if (theRef.isGroupDish() && itemRef.getDeskCount() != null && theRef.getSaleType() == SaleType.WEIGHING) {
                     newExtraItem.getOrderDish().setQty(newExtraItem.getSingleQty().divide(itemRef.getDeskCount()), newExtraItem.getTotalQty());
                 }
                 newExtraItem.setIsGroupDish(theRef.isGroupDish());
@@ -730,12 +617,10 @@ public final class ShopcartItemUtils {
             }
             theNew.setExtraItems(newExtraItems);
         }
-        // 复制属性
-        if (theRef.hasProperty()) {
+                if (theRef.hasProperty()) {
             List<OrderProperty> newProperties = new ArrayList<>();
             OrderDish orderDish = theNew.getOrderDish();
-            // 添加规格类属性。根据一个商品就可以找出其规格列表
-            for (DishProperty property : orderDish.getStandards()) {
+                        for (DishProperty property : orderDish.getStandards()) {
                 Long propertyTypeId = property.getPropertyTypeId();
                 DishPropertyType propertyType = DishCache.getPropertyTypeHolder().get(propertyTypeId);
                 if (propertyType == null) {
@@ -744,8 +629,7 @@ public final class ShopcartItemUtils {
                 newProperties.add(new OrderProperty(propertyType, property));
             }
 
-            // 判断非规格类属性
-            for (ReadonlyOrderProperty propertyRef : theRef.getProperties()) {
+                        for (ReadonlyOrderProperty propertyRef : theRef.getProperties()) {
                 if (propertyRef.tradeItemProperty.getStatusFlag() != StatusFlag.VALID) {
                     continue;
                 }
@@ -761,22 +645,16 @@ public final class ShopcartItemUtils {
                     if (propertyType == null) {
                         continue;
                     }
-//					DishBrandProperty dishProperty = DishCache.getDishPropertyHolder().get(orderDish.getBrandDishId(), property.getId());
-//					if (dishProperty == null) {
-//						continue;
-//					}
                     newProperties.add(new OrderProperty(propertyType, property));
                 }
 
-                //原菜所有属性置为无效
-                propertyRef.tradeItemProperty.setStatusFlag(StatusFlag.INVALID);
+                                propertyRef.tradeItemProperty.setStatusFlag(StatusFlag.INVALID);
                 propertyRef.tradeItemProperty.validateUpdate();
             }
             theNew.setProperties(newProperties);
         }
 
-        // 优惠信息。会员折扣不复制
-        TradePrivilege refPrivilege = theRef.getPrivilege();
+                TradePrivilege refPrivilege = theRef.getPrivilege();
         if (refPrivilege != null && refPrivilege.isValid()
                 && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
                 && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
@@ -784,8 +662,7 @@ public final class ShopcartItemUtils {
             TradePrivilege newPrivilege = newEntity(refPrivilege, theNew.getUuid());
             theNew.setPrivilege(newPrivilege);
         }
-        //复制折扣理由
-        TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
+                TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
         if (tradeReasonRel != null && tradeReasonRel.isValid()) {
             TradeReasonRel newReasonRel = newEntity(tradeReasonRel, theNew.getUuid());
             if (newReasonRel == null) {
@@ -794,8 +671,7 @@ public final class ShopcartItemUtils {
             theNew.setDiscountReasonRel(newReasonRel);
         }
 
-        //礼品劵
-        CouponPrivilegeVo couponPrivilegeVo = theRef.getCouponPrivilegeVo();
+                CouponPrivilegeVo couponPrivilegeVo = theRef.getCouponPrivilegeVo();
         if (couponPrivilegeVo != null) {
             CouponPrivilegeVo newCouponPrivilegeVo = new CouponPrivilegeVo();
             try {
@@ -819,8 +695,7 @@ public final class ShopcartItemUtils {
     }
 
     private static <T extends ReadonlyShopcartItemBase> T completeByRQ(T theRef, T theNew, boolean allReturns) {
-        // 复制加料
-        if (theRef.hasExtra()) {
+                if (theRef.hasExtra()) {
             BigDecimal feedsAmount = BigDecimal.ZERO;
             List<ReadonlyExtraShopcartItem> newExtraItems = new ArrayList<ReadonlyExtraShopcartItem>();
             for (ReadonlyExtraShopcartItem itemRef : theRef.getExtraItems()) {
@@ -829,8 +704,7 @@ public final class ShopcartItemUtils {
                 }
                 TradeItem tradeItem = relateCopyByReturnQty(itemRef.tradeItem, theNew.getUuid());
                 if (allReturns) {
-                    // 全退时明细条目的数量和金额不变，状态为无效。
-                    tradeItem.setStatusFlag(StatusFlag.INVALID);
+                                        tradeItem.setStatusFlag(StatusFlag.INVALID);
                     itemRef.setupReturnQtyState(tradeItem.getQuantity().negate());
                 } else {
                     BigDecimal totalQty = computeTotalQty(itemRef.getSingleQty(), theNew);
@@ -848,8 +722,7 @@ public final class ShopcartItemUtils {
             theNew.setExtraItems(newExtraItems);
             theNew.tradeItem.setFeedsAmount(feedsAmount);
         }
-        // 复制属性
-        if (theRef.hasProperty()) {
+                if (theRef.hasProperty()) {
             BigDecimal propertyAmount = BigDecimal.ZERO;
             List<ReadonlyOrderProperty> newProperties = new ArrayList<ReadonlyOrderProperty>();
             for (ReadonlyOrderProperty propertyRef : theRef.getProperties()) {
@@ -869,14 +742,12 @@ public final class ShopcartItemUtils {
             theNew.setProperties(newProperties);
             theNew.tradeItem.setPropertyAmount(propertyAmount);
         }
-        //复制折扣理由
-        TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
+                TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
         if (tradeReasonRel != null && tradeReasonRel.isValid()) {
             TradeReasonRel newReasonRel = newEntity(tradeReasonRel, theNew.getUuid());
             theNew.setDiscountReasonRel(newReasonRel);
         }
-        //全退时不拷贝原菜的菜品操作记录
-        if (!allReturns) {
+                if (!allReturns) {
             if (theRef instanceof IShopcartItem && Utils.isNotEmpty(((IShopcartItem) theRef).getTradeItemOperations())) {
                 List<TradeItemOperation> newOperations = new ArrayList<TradeItemOperation>();
                 for (TradeItemOperation operationRef : ((IShopcartItem) theRef).getTradeItemOperations()) {
@@ -900,12 +771,7 @@ public final class ShopcartItemUtils {
         return theNew;
     }
 
-    /**
-     * 完全复制tradeItem
-     *
-     * @param theRef
-     * @return
-     */
+
     private static TradeItem relateCopyComplete(TradeItem theRef) {
         TradeItem theNew = new TradeItem();
         try {
@@ -921,8 +787,7 @@ public final class ShopcartItemUtils {
     }
 
     private static TradeItem relateCopyBySplit(TradeItem theRef, String newParentUuid) {
-        // 注意，保留tradeTableUuid，因为在complete方法中要使用
-        TradeItem theNew = relateCopy(theRef, newParentUuid);
+                TradeItem theNew = relateCopy(theRef, newParentUuid);
         theNew.setCreatorId(theRef.getCreatorId());
         theNew.setCreatorName(theRef.getCreatorName());
         theNew.setTradeId(null);
@@ -942,13 +807,7 @@ public final class ShopcartItemUtils {
         return theNew;
     }
 
-    /**
-     * 根据theRef中的信息新建一个TradeItem对象
-     *
-     * @param theRef        被克隆的对象
-     * @param newParentUuid 新TradeItem对象的parentUuid
-     * @return
-     */
+
     private static TradeItem relateCopy(TradeItem theRef, String newParentUuid) {
         TradeItem theNew = new TradeItem();
         try {
@@ -972,13 +831,7 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 根据theRef中的信息新建一个TradeItemProperty对象
-     *
-     * @param theRef           参考对象
-     * @param newTradeItemUuid 新对象的tradeItemUuid
-     * @return
-     */
+
     private static TradeItemProperty newEntity(TradeItemProperty theRef, String newTradeItemUuid) {
         TradeItemProperty newProperty = new TradeItemProperty();
         try {
@@ -997,13 +850,7 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 根据theRef中的信息新建一个TradePrivilege对象
-     *
-     * @param theRef           参考对象
-     * @param newTradeItemUuid 新对象的tradeItemUuid
-     * @return
-     */
+
     private static TradePrivilege newEntity(TradePrivilege theRef, String newTradeItemUuid) {
         TradePrivilege newPrivilege = new TradePrivilege();
         try {
@@ -1024,14 +871,7 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 拷贝菜品操作记录
-     *
-     * @Title: newEntity
-     * @Param @param theRef
-     * @Param @param newTradeItemUuid
-     * @Return TradeItemOperation 返回类型
-     */
+
     private static TradeItemOperation newEntity(TradeItemOperation theRef, String newTradeItemUuid) {
         TradeItemOperation tradeItemOperation = new TradeItemOperation();
         try {
@@ -1052,13 +892,7 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 根据theRef中的信息新建一个tradeReasonRel对象
-     *
-     * @param theRef           参考对象
-     * @param newTradeItemUuid 新对象的tradeUuid
-     * @return
-     */
+
     private static TradeReasonRel newEntity(TradeReasonRel theRef, String newTradeItemUuid) {
         TradeReasonRel theNew = new TradeReasonRel();
         try {
@@ -1077,13 +911,7 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 根据theRef中的信息新建一个tradeItemExtraDinner对象
-     *
-     * @param theRef           参考对象
-     * @param newTradeItemUuid 新对象的tradeUuid
-     * @return
-     */
+
     private static TradeItemExtraDinner newEntity(TradeItemExtraDinner theRef, String newTradeItemUuid) {
         TradeItemExtraDinner theNew = new TradeItemExtraDinner();
         try {
@@ -1100,13 +928,7 @@ public final class ShopcartItemUtils {
     }
 
 
-    /**
-     * 根据theRef中的信息新建一个TradeItemExtra对象
-     *
-     * @param theRef           参考对象
-     * @param newTradeItemUuid 新对象的tradeUuid
-     * @return
-     */
+
     private static TradeItemExtra newEntity(TradeItemExtra theRef, String newTradeItemUuid) {
         TradeItemExtra theNew = new TradeItemExtra();
         try {
@@ -1125,13 +947,7 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 根据theRef中的信息新建一个TradeTable对象
-     *
-     * @param theRef       参考对象
-     * @param newTradeUuid 新对象的tradeUuid
-     * @return
-     */
+
     private static TradeTable newEntity(TradeTable theRef, String newTradeUuid) {
         TradeTable theNew = new TradeTable();
         try {
@@ -1150,13 +966,7 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 将桌台信息加到拆单操作新创建的TradeVo中
-     *
-     * @param tradeVo
-     * @param originTreadTables
-     * @return
-     */
+
     public static TradeVo completeTradeTableOfSplit(TradeVo tradeVo, List<TradeTable> originTreadTables) {
         if (!Utils.isEmpty(tradeVo.getTradeTableList())) {
             return tradeVo;
@@ -1166,8 +976,7 @@ public final class ShopcartItemUtils {
             finder.put(tradeTable.getUuid(), tradeTable);
             Log.i(TAG, "refTradeTable.uuid=" + tradeTable.getUuid());
         }
-        Map<String, TradeTable> tradeTables = new HashMap<String, TradeTable>();// 记录原桌台uuid与新桌台的对应关系
-        String tradeUuid = tradeVo.getTrade().getUuid();
+        Map<String, TradeTable> tradeTables = new HashMap<String, TradeTable>();        String tradeUuid = tradeVo.getTrade().getUuid();
         for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
             TradeItem tradeItem = tradeItemVo.getTradeItem();
             String refTradeTableUuid = tradeItem.getTradeTableUuid();
@@ -1176,9 +985,7 @@ public final class ShopcartItemUtils {
                 Log.i(TAG, "tradeItem: uuid=" + tradeItem.getUuid() + ", tradeTableUuid=" + refTradeTableUuid);
                 TradeTable theRef = finder.get(refTradeTableUuid);
                 theNew = newEntity(theRef, tradeUuid);
-//				Log.i(TAG, "newTradeTable: uuid=" + theNew.getUuid());
-                theNew.setTablePeopleCount(0);// 拆单中的人数为0
-                tradeTables.put(refTradeTableUuid, theNew);
+                theNew.setTablePeopleCount(0);                tradeTables.put(refTradeTableUuid, theNew);
             }
             tradeItem.setTradeTableUuid(theNew.getUuid());
         }
@@ -1187,14 +994,7 @@ public final class ShopcartItemUtils {
         return tradeVo;
     }
 
-    /**
-     * 清除从原单克隆出的tradeVo中所有条目的被拆单状态
-     *
-     * @Title: cancelSplitMess
-     * @Description: 移除原单中的拆单状态
-     * @Param @param tradeVo
-     * @Return void 返回类型
-     */
+
     public static void clearAllSplitStatus(TradeVo tradeVo) {
         List<TradeItemVo> itemVoList = tradeVo.getTradeItemList();
         if (itemVoList != null) {
@@ -1211,11 +1011,8 @@ public final class ShopcartItemUtils {
     public static ShopcartItem createShopcartItem(DishVo dishVo, BigDecimal qty) {
         OrderDish orderDish = dishVo.toOrderDish();
         ShopcartItem shopcartItem = new ShopcartItem(uuid(), orderDish);
-        // 设置菜品数量
-        shopcartItem.changeQty(qty);
-        // shopcartItem.setTotalQty(increaseUnit);
-        // 设置规格属性
-        List<OrderProperty> properties = new ArrayList<OrderProperty>();
+                shopcartItem.changeQty(qty);
+                        List<OrderProperty> properties = new ArrayList<OrderProperty>();
         Set<DishProperty> standards = orderDish.getStandards();
         if (standards != null) {
             for (DishProperty dishProperty : standards) {
@@ -1228,13 +1025,7 @@ public final class ShopcartItemUtils {
         return shopcartItem;
     }
 
-    /**
-     * 转成套餐明细条目列表（针对于改菜）
-     *
-     * @param newParent
-     * @param refParent
-     * @return
-     */
+
     static void createSetmealShopcartItemsMD(ShopcartItem newParent, ReadonlyShopcartItem refParent) {
         List<ReadonlySetmealShopcartItem> readonlySetmealItems = refParent.getSetmealItems();
         if (Utils.isNotEmpty(readonlySetmealItems)) {
@@ -1275,8 +1066,7 @@ public final class ShopcartItemUtils {
         setmealNew.changePrice(setmealRef.getPrice());
         TradeItem tradeItem = setmealRef.tradeItem;
 
-        BigDecimal parentQty = null;//为null时不需要计算加料数量
-        BigDecimal totalQty = tradeItem.getQuantity();
+        BigDecimal parentQty = null;        BigDecimal totalQty = tradeItem.getQuantity();
         if (newParent != null && newParent.getSaleType() != SaleType.WEIGHING) {
             try {
                 BigDecimal singleQty = BigDecimal.ZERO;
@@ -1296,8 +1086,7 @@ public final class ShopcartItemUtils {
             parentQty = totalQty;
         }
 
-        // 添加属性
-        if (Utils.isNotEmpty(setmealRef.getProperties())) {
+                if (Utils.isNotEmpty(setmealRef.getProperties())) {
             List<OrderProperty> properties = completeSetmealProperties(setmealNew.getOrderDish(), setmealRef.getProperties());
             if (properties == null) {
                 return;
@@ -1305,8 +1094,7 @@ public final class ShopcartItemUtils {
             setmealNew.setProperties(properties);
         }
 
-        // 添加套餐明细的加料条目
-        Collection<ReadonlyExtraShopcartItem> setmealExtraList = setmealRef.getExtraItems();
+                Collection<ReadonlyExtraShopcartItem> setmealExtraList = setmealRef.getExtraItems();
         if (Utils.isNotEmpty(setmealExtraList)) {
             List<ExtraShopcartItem> extraItems = completeSetmealExtraItems(setmealNew, setmealExtraList, parentQty);
             if (extraItems == null) {
@@ -1315,8 +1103,7 @@ public final class ShopcartItemUtils {
             setmealNew.setExtraItems(extraItems);
         }
 
-        // 优惠信息。会员折扣不复制
-        TradePrivilege refPrivilege = setmealRef.getPrivilege();
+                TradePrivilege refPrivilege = setmealRef.getPrivilege();
         if (refPrivilege != null && refPrivilege.isValid()
                 && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
                 && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
@@ -1324,8 +1111,7 @@ public final class ShopcartItemUtils {
             TradePrivilege newPrivilege = newEntity(refPrivilege, setmealNew.getUuid());
             setmealNew.setPrivilege(newPrivilege);
         }
-        //复制折扣理由
-        TradeReasonRel tradeReasonRel = setmealRef.getDiscountReasonRel();
+                TradeReasonRel tradeReasonRel = setmealRef.getDiscountReasonRel();
         if (tradeReasonRel != null && tradeReasonRel.isValid()) {
             TradeReasonRel newReasonRel = newEntity(tradeReasonRel, setmealNew.getUuid());
             if (newReasonRel == null) {
@@ -1334,8 +1120,7 @@ public final class ShopcartItemUtils {
             setmealNew.setDiscountReasonRel(newReasonRel);
         }
 
-        //礼品劵
-        CouponPrivilegeVo couponPrivilegeVo = setmealRef.getCouponPrivilegeVo();
+                CouponPrivilegeVo couponPrivilegeVo = setmealRef.getCouponPrivilegeVo();
         if (couponPrivilegeVo != null) {
             CouponPrivilegeVo newCouponPrivilegeVo = new CouponPrivilegeVo();
             try {
@@ -1359,14 +1144,7 @@ public final class ShopcartItemUtils {
         setmealNew.setMemo(setmealRef.getMemo());
     }
 
-    /**
-     * 转为加料条目列表
-     *
-     * @param newParent
-     * @param readonlyExtraItems
-     * @param parentQty
-     * @return
-     */
+
     static List<ExtraShopcartItem> completeSetmealExtraItems(ShopcartItemBase<?> newParent, Collection<ReadonlyExtraShopcartItem> readonlyExtraItems,
                                                              BigDecimal parentQty) {
         if (readonlyExtraItems == null || readonlyExtraItems.isEmpty()) {
@@ -1381,13 +1159,6 @@ public final class ShopcartItemUtils {
             Long dishId = newParent.getOrderDish().getBrandDishId();
             Long childDishId = setmealDishShop.getBrandDishId();
             DishSetmeal dishSetmeal = DishCache.getDishExtraHolder().get(dishId, childDishId);
-//			if (dishSetmeal == null) {
-//				// 获取加料对应的公共DishSetmeal
-//				dishSetmeal = DishCache.getDishExtraHolder().get(childDishId);
-//				if(dishSetmeal == null) {
-//					continue;
-//				}
-//			}
             OrderExtra orderExtra = new OrderExtra(setmealDishShop, dishSetmeal);
             if (parentQty != null) {
                 try {
@@ -1409,17 +1180,10 @@ public final class ShopcartItemUtils {
         return newExtraItemList;
     }
 
-    /**
-     * 转为属性列表
-     *
-     * @param orderDish
-     * @param readonlyProperties
-     * @return
-     */
+
     static List<OrderProperty> completeSetmealProperties(OrderDish orderDish, List<ReadonlyOrderProperty> readonlyProperties) {
         List<OrderProperty> resultList = new ArrayList<OrderProperty>();
-        // 添加规格类属性。根据一个商品就可以找出其规格列表，所以就算规格有变化也不影响取挂单
-        for (DishProperty property : orderDish.getStandards()) {
+                for (DishProperty property : orderDish.getStandards()) {
             Long propertyTypeId = property.getPropertyTypeId();
             DishPropertyType propertyType = DishCache.getPropertyTypeHolder().get(propertyTypeId);
             if (propertyType == null) {
@@ -1427,8 +1191,7 @@ public final class ShopcartItemUtils {
             }
             resultList.add(new OrderProperty(propertyType, property));
         }
-        // 判断非规格类属性
-        for (ReadonlyOrderProperty readonlyProperty : readonlyProperties) {
+                for (ReadonlyOrderProperty readonlyProperty : readonlyProperties) {
             if (readonlyProperty.getPropertyKind() != PropertyKind.STANDARD) {
                 String propertyUuid = readonlyProperty.getPropertyUuid();
                 DishProperty property = DishCache.getPropertyHolder().get(propertyUuid);
@@ -1440,15 +1203,10 @@ public final class ShopcartItemUtils {
                 if (propertyType == null) {
                     continue;
                 }
-//				DishBrandProperty dishProperty = DishCache.getDishPropertyHolder().get(orderDish.getBrandDishId(), property.getId());
-//				if (dishProperty == null) {
-//					continue;
-//				}
                 resultList.add(new OrderProperty(propertyType, property));
             }
 
-            //原菜所有属性置为无效
-            readonlyProperty.tradeItemProperty.setStatusFlag(StatusFlag.INVALID);
+                        readonlyProperty.tradeItemProperty.setStatusFlag(StatusFlag.INVALID);
             readonlyProperty.tradeItemProperty.validateUpdate();
         }
         return resultList;
@@ -1473,13 +1231,7 @@ public final class ShopcartItemUtils {
         return tradeUser;
     }
 
-    /**
-     * 获取展示数量
-     *
-     * @param shopcartItem
-     * @param deskCount
-     * @return
-     */
+
     public static BigDecimal getDisplyQty(IShopcartItem shopcartItem, BigDecimal deskCount) {
         if (shopcartItem.isGroupDish() && shopcartItem instanceof ReadonlyShopcartItem && shopcartItem.getStatusFlag() == StatusFlag.VALID) {
             return MathDecimal.div(shopcartItem.getSingleQty(), deskCount);
@@ -1487,12 +1239,7 @@ public final class ShopcartItemUtils {
         return shopcartItem.getSingleQty();
     }
 
-    /**
-     * 获取团餐区别显示的数量
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     public static BigDecimal getDisplyQty(IShopcartItemBase shopcartItem, BigDecimal deskCount) {
         if (shopcartItem.isGroupDish() && (shopcartItem instanceof ReadonlyShopcartItem || shopcartItem instanceof ReadonlyExtraShopcartItem) && (shopcartItem.getStatusFlag() == StatusFlag.VALID)) {
             return MathDecimal.div(shopcartItem.getSingleQty(), deskCount);
@@ -1500,13 +1247,8 @@ public final class ShopcartItemUtils {
         return shopcartItem.getSingleQty();
     }
 
-/*****************************************************************************************/
-    /**
-     * 菜品复制，生成相同属性的菜品,针对新菜
-     *
-     * @param theRef
-     * @return
-     */
+
+
 
 
     public static ShopcartItem shopcartItemCopy(ShopcartItem theRef) {
@@ -1518,8 +1260,7 @@ public final class ShopcartItemUtils {
             if (Utils.isNotEmpty(dishVos)) {
                 ShopcartItem theNew = createShopcartItem(dishVos.get(0), theRef.getSingleQty());
                 theNew.setIsGroupDish(theRef.isGroupDish());
-                //临时菜改名后名字变化
-                theNew.changeName(theRef.getSkuName());
+                                theNew.changeName(theRef.getSkuName());
                 completeByMd(theRef, theNew);
                 if (theRef.hasSetmeal()) {
                     createSetmealShopcartItemsMD(theNew, theRef);
@@ -1536,8 +1277,7 @@ public final class ShopcartItemUtils {
         ReadonlyShopcartItem theNew = new ReadonlyShopcartItem(newTradeItem);
         theNew.setIsGroupDish(theRef.isGroupDish());
         theNew.setShopcartItemType(theRef.getShopcartItemType());
-        // 复制加料
-        if (theRef.hasExtra()) {
+                if (theRef.hasExtra()) {
             BigDecimal feedsAmount = BigDecimal.ZERO;
             List<ReadonlyExtraShopcartItem> newExtraItems = new ArrayList<ReadonlyExtraShopcartItem>();
             for (ReadonlyExtraShopcartItem extraRef : theRef.getExtraItems()) {
@@ -1553,8 +1293,7 @@ public final class ShopcartItemUtils {
             theNew.setExtraItems(newExtraItems);
             theNew.tradeItem.setFeedsAmount(feedsAmount);
         }
-        // 复制属性
-        if (theRef.hasProperty()) {
+                if (theRef.hasProperty()) {
             BigDecimal propertyAmount = BigDecimal.ZERO;
             List<ReadonlyOrderProperty> newProperties = new ArrayList<ReadonlyOrderProperty>();
             for (ReadonlyOrderProperty propertyRef : theRef.getProperties()) {
@@ -1568,14 +1307,12 @@ public final class ShopcartItemUtils {
             theNew.setProperties(newProperties);
             theNew.tradeItem.setPropertyAmount(propertyAmount);
         }
-        //复制折扣理由
-        TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
+                TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
         if (tradeReasonRel != null && tradeReasonRel.isValid()) {
             TradeReasonRel newReasonRel = newEntity(tradeReasonRel, theNew.getUuid());
             theNew.setDiscountReasonRel(newReasonRel);
         }
-        //拷贝菜品操作记录
-        if (theRef instanceof IShopcartItem && Utils.isNotEmpty(theRef.getTradeItemOperations())) {
+                if (theRef instanceof IShopcartItem && Utils.isNotEmpty(theRef.getTradeItemOperations())) {
             List<TradeItemOperation> newOperations = new ArrayList<TradeItemOperation>();
             for (TradeItemOperation operationRef : theRef.getTradeItemOperations()) {
                 if (operationRef.getStatusFlag() == StatusFlag.INVALID) {
@@ -1594,8 +1331,7 @@ public final class ShopcartItemUtils {
             theNew.setTradeItemExtraDinner(tradeItemExtraDinner);
         }
 
-        //子菜
-        if (theRef.hasSetmeal()) {
+                if (theRef.hasSetmeal()) {
             List<ReadonlySetmealShopcartItem> setmealItems = new ArrayList<ReadonlySetmealShopcartItem>();
             for (ReadonlySetmealShopcartItem setmealRef : theRef.getSetmealItems()) {
                 if (setmealRef.getStatusFlag() != StatusFlag.VALID) {
@@ -1617,8 +1353,7 @@ public final class ShopcartItemUtils {
         ReadonlySetmealShopcartItem theNew = new ReadonlySetmealShopcartItem(newTradeItem, newParent);
         theNew.setIsGroupDish(theRef.isGroupDish());
         theNew.setShopcartItemType(theRef.getShopcartItemType());
-        // 复制加料
-        if (theRef.hasExtra()) {
+                if (theRef.hasExtra()) {
             BigDecimal feedsAmount = BigDecimal.ZERO;
             List<ReadonlyExtraShopcartItem> newExtraItems = new ArrayList<ReadonlyExtraShopcartItem>();
             for (ReadonlyExtraShopcartItem extraRef : theRef.getExtraItems()) {
@@ -1634,8 +1369,7 @@ public final class ShopcartItemUtils {
             theNew.setExtraItems(newExtraItems);
             theNew.tradeItem.setFeedsAmount(feedsAmount);
         }
-        // 复制属性
-        if (theRef.hasProperty()) {
+                if (theRef.hasProperty()) {
             BigDecimal propertyAmount = BigDecimal.ZERO;
             List<ReadonlyOrderProperty> newProperties = new ArrayList<ReadonlyOrderProperty>();
             for (ReadonlyOrderProperty propertyRef : theRef.getProperties()) {
@@ -1649,14 +1383,12 @@ public final class ShopcartItemUtils {
             theNew.setProperties(newProperties);
             theNew.tradeItem.setPropertyAmount(propertyAmount);
         }
-        //复制折扣理由
-        TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
+                TradeReasonRel tradeReasonRel = theRef.getDiscountReasonRel();
         if (tradeReasonRel != null && tradeReasonRel.isValid()) {
             TradeReasonRel newReasonRel = newEntity(tradeReasonRel, theNew.getUuid());
             theNew.setDiscountReasonRel(newReasonRel);
         }
-        //拷贝菜品操作记录
-        if (theRef instanceof IShopcartItem && Utils.isNotEmpty(theRef.getTradeItemOperations())) {
+                if (theRef instanceof IShopcartItem && Utils.isNotEmpty(theRef.getTradeItemOperations())) {
             List<TradeItemOperation> newOperations = new ArrayList<TradeItemOperation>();
             for (TradeItemOperation operationRef : theRef.getTradeItemOperations()) {
                 if (operationRef.getStatusFlag() == StatusFlag.INVALID) {
@@ -1702,10 +1434,8 @@ public final class ShopcartItemUtils {
     }
 
     private static void completeByMd(ShopcartItem theRef, ShopcartItem theNew) {
-//		theNew.setRelateInfo(theRef.getId(), theRef.getUuid());
         theNew.changePrice(theRef.getPrice());
-        // 复制加料
-        if (theRef.hasExtra()) {
+                if (theRef.hasExtra()) {
             List<ExtraShopcartItem> newExtraItems = new ArrayList<ExtraShopcartItem>();
             for (ExtraShopcartItem itemRef : theRef.getExtraItems()) {
                 if (itemRef.getStatusFlag() != StatusFlag.VALID) {
@@ -1725,8 +1455,7 @@ public final class ShopcartItemUtils {
                 BigDecimal parentQty = theNew.getTotalQty();
                 if (parentQty != null) {
                     try {
-                        //?
-                        orderExtra.setQty(itemRef.getSingleQty(), itemRef.getTotalQty());
+                                                orderExtra.setQty(itemRef.getSingleQty(), itemRef.getTotalQty());
                     } catch (Exception e) {
                         continue;
                     }
@@ -1734,19 +1463,15 @@ public final class ShopcartItemUtils {
                     orderExtra.setQty(itemRef.getSingleQty(), itemRef.getTotalQty());
                 }
                 ExtraShopcartItem newExtraItem = new ExtraShopcartItem(uuid(), orderExtra, theNew);
-                //称重商品存的实际数量
-                newExtraItem.setIsGroupDish(theRef.isGroupDish());
-//				newExtraItem.setRelateInfo(itemRef.getId(), itemRef.getUuid());
+                                newExtraItem.setIsGroupDish(theRef.isGroupDish());
                 newExtraItems.add(newExtraItem);
             }
             theNew.setExtraItems(newExtraItems);
         }
-        // 复制属性
-        if (theRef.hasProperty()) {
+                if (theRef.hasProperty()) {
             List<OrderProperty> newProperties = new ArrayList<>();
             OrderDish orderDish = theNew.getOrderDish();
-            // 添加规格类属性。根据一个商品就可以找出其规格列表
-            for (DishProperty property : orderDish.getStandards()) {
+                        for (DishProperty property : orderDish.getStandards()) {
                 Long propertyTypeId = property.getPropertyTypeId();
                 DishPropertyType propertyType = DishCache.getPropertyTypeHolder().get(propertyTypeId);
                 if (propertyType == null) {
@@ -1755,8 +1480,7 @@ public final class ShopcartItemUtils {
                 newProperties.add(new OrderProperty(propertyType, property));
             }
 
-            // 判断非规格类属性
-            for (OrderProperty propertyRef : theRef.getProperties()) {
+                        for (OrderProperty propertyRef : theRef.getProperties()) {
                 if (propertyRef.getPropertyKind() != PropertyKind.STANDARD) {
                     String propertyUuid = propertyRef.getPropertyUuid();
                     DishProperty property = DishCache.getPropertyHolder().get(propertyUuid);
@@ -1779,13 +1503,7 @@ public final class ShopcartItemUtils {
     }
 
 
-    /**
-     * 转成套餐明细条目列表
-     *
-     * @param newParent
-     * @param refParent
-     * @return
-     */
+
     static void createSetmealShopcartItemsMD(ShopcartItem newParent, ShopcartItem refParent) {
         List<SetmealShopcartItem> readonlySetmealItems = refParent.getSetmealItems();
         if (Utils.isNotEmpty(readonlySetmealItems)) {
@@ -1813,11 +1531,9 @@ public final class ShopcartItemUtils {
 
     static <T extends ShopcartItemBase<?>> void completeNewSetmealItem(T setmealNew, SetmealShopcartItem setmealRef,
                                                                        ShopcartItemBase<?> newParent, ShopcartItemBase refParent) {
-//		setmealNew.setRelateInfo(setmealRef.getId(), setmealRef.getUuid());
         setmealNew.changePrice(setmealRef.getPrice());
 
-        BigDecimal parentQty = null;//为null时不需要计算加料数量
-        BigDecimal totalQty = setmealRef.getTotalQty();
+        BigDecimal parentQty = null;        BigDecimal totalQty = setmealRef.getTotalQty();
         if (newParent != null && newParent.getSaleType() != SaleType.WEIGHING) {
             try {
                 BigDecimal singleQty = BigDecimal.ZERO;
@@ -1837,8 +1553,7 @@ public final class ShopcartItemUtils {
             parentQty = totalQty;
         }
 
-        // 添加属性
-        if (Utils.isNotEmpty(setmealRef.getProperties())) {
+                if (Utils.isNotEmpty(setmealRef.getProperties())) {
             List<OrderProperty> properties = completeNewSetmealProperties(setmealNew.getOrderDish(), setmealRef.getProperties());
             if (properties == null) {
                 return;
@@ -1846,8 +1561,7 @@ public final class ShopcartItemUtils {
             setmealNew.setProperties(properties);
         }
 
-        // 添加套餐明细的加料条目
-        Collection<ExtraShopcartItem> setmealExtraList = setmealRef.getExtraItems();
+                Collection<ExtraShopcartItem> setmealExtraList = setmealRef.getExtraItems();
         if (Utils.isNotEmpty(setmealExtraList)) {
             List<ExtraShopcartItem> extraItems = completeNewSetmealExtraItems(setmealNew, setmealExtraList, parentQty);
             if (extraItems == null) {
@@ -1856,8 +1570,7 @@ public final class ShopcartItemUtils {
             setmealNew.setExtraItems(extraItems);
         }
 
-        // 优惠信息。会员折扣不复制
-        TradePrivilege refPrivilege = setmealRef.getPrivilege();
+                TradePrivilege refPrivilege = setmealRef.getPrivilege();
         if (refPrivilege != null && refPrivilege.isValid()
                 && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
                 && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
@@ -1865,8 +1578,7 @@ public final class ShopcartItemUtils {
             TradePrivilege newPrivilege = newEntity(refPrivilege, setmealNew.getUuid());
             setmealNew.setPrivilege(newPrivilege);
         }
-        //复制折扣理由
-        TradeReasonRel tradeReasonRel = setmealRef.getDiscountReasonRel();
+                TradeReasonRel tradeReasonRel = setmealRef.getDiscountReasonRel();
         if (tradeReasonRel != null && tradeReasonRel.isValid()) {
             TradeReasonRel newReasonRel = newEntity(tradeReasonRel, setmealNew.getUuid());
             if (newReasonRel == null) {
@@ -1875,8 +1587,7 @@ public final class ShopcartItemUtils {
             setmealNew.setDiscountReasonRel(newReasonRel);
         }
 
-        //礼品劵
-        CouponPrivilegeVo couponPrivilegeVo = setmealRef.getCouponPrivilegeVo();
+                CouponPrivilegeVo couponPrivilegeVo = setmealRef.getCouponPrivilegeVo();
         if (couponPrivilegeVo != null) {
             CouponPrivilegeVo newCouponPrivilegeVo = new CouponPrivilegeVo();
             try {
@@ -1901,17 +1612,10 @@ public final class ShopcartItemUtils {
     }
 
 
-    /**
-     * 转为属性列表
-     *
-     * @param orderDish
-     * @param readonlyProperties
-     * @return
-     */
+
     static List<OrderProperty> completeNewSetmealProperties(OrderDish orderDish, List<OrderProperty> readonlyProperties) {
         List<OrderProperty> resultList = new ArrayList<OrderProperty>();
-        // 添加规格类属性。根据一个商品就可以找出其规格列表，所以就算规格有变化也不影响取挂单
-        for (DishProperty property : orderDish.getStandards()) {
+                for (DishProperty property : orderDish.getStandards()) {
             Long propertyTypeId = property.getPropertyTypeId();
             DishPropertyType propertyType = DishCache.getPropertyTypeHolder().get(propertyTypeId);
             if (propertyType == null) {
@@ -1919,8 +1623,7 @@ public final class ShopcartItemUtils {
             }
             resultList.add(new OrderProperty(propertyType, property));
         }
-        // 判断非规格类属性
-        for (OrderProperty readonlyProperty : readonlyProperties) {
+                for (OrderProperty readonlyProperty : readonlyProperties) {
             if (readonlyProperty.getPropertyKind() != PropertyKind.STANDARD) {
                 String propertyUuid = readonlyProperty.getPropertyUuid();
                 DishProperty property = DishCache.getPropertyHolder().get(propertyUuid);
@@ -2001,7 +1704,7 @@ public final class ShopcartItemUtils {
     }
 
 
-    /***********************************联台批量菜在子单中拆菜***********************************************/
+
     public static void splitBatchItem(IShopcartItemBase shopcartItem) {
         if (shopcartItem instanceof ReadonlyShopcartItem) {
             splitBatchItem((ReadonlyShopcartItem) shopcartItem);
@@ -2016,22 +1719,15 @@ public final class ShopcartItemUtils {
         if (shopcartItem.getMainShopcartItem() == null) {
             return;
         }
-        //有拆单操作，更改主单批量菜价格和数量
-        BigDecimal mainItemQty = shopcartItem.getMainShopcartItem().getTotalQty();
+                BigDecimal mainItemQty = shopcartItem.getMainShopcartItem().getTotalQty();
         mainItemQty = mainItemQty.subtract(shopcartItem.getTotalQty());
         modifyReadonlyItemByQty(shopcartItem.getMainShopcartItem(), mainItemQty);
     }
 
-    /**
-     * 修改数量，并改变价格
-     *
-     * @param shopcartItem
-     * @param newQuantity  将要修改成的数量
-     */
+
     public static void modifyReadonlyItemByQty(ReadonlyShopcartItem shopcartItem, BigDecimal newQuantity) {
         BigDecimal parentQty = shopcartItem.getTotalQty();
-        //数量计算要再验证?
-        shopcartItem.modifyQty(newQuantity);
+                shopcartItem.modifyQty(newQuantity);
         modiyExtraItemByQty(shopcartItem.getExtraItems(), parentQty, newQuantity);
         shopcartItem.setChanged(true);
         if (shopcartItem.hasSetmeal()) {
@@ -2062,12 +1758,7 @@ public final class ShopcartItemUtils {
         readonlyOrderProperty.tradeItemProperty.setAmount(newQuantity.multiply(readonlyOrderProperty.tradeItemProperty.getPrice()));
     }
 
-    /**
-     * 复制菜品
-     *
-     * @param ref
-     * @param isNeedId 是否需要复制id
-     */
+
     public static ReadonlyShopcartItem copyReadonlyShopcartItem(ReadonlyShopcartItem ref, boolean isNeedId) {
         ReadonlyShopcartItem newItem = null;
         if (ref.ensureCopy()) {
@@ -2100,8 +1791,7 @@ public final class ShopcartItemUtils {
 
 
     private static void copyTradeItemPrivilege(IShopcartItemBase ref, IShopcartItemBase newItem) {
-        // 优惠信息。会员折扣不复制
-        TradePrivilege refPrivilege = ref.getPrivilege();
+                TradePrivilege refPrivilege = ref.getPrivilege();
         if (refPrivilege != null && refPrivilege.isValid()
                 && refPrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
                 && refPrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
@@ -2109,8 +1799,7 @@ public final class ShopcartItemUtils {
             TradePrivilege newPrivilege = newEntity(refPrivilege, ref.getUuid());
             newItem.setPrivilege(newPrivilege);
         }
-        //复制折扣理由
-        TradeReasonRel tradeReasonRel = ref.getDiscountReasonRel();
+                TradeReasonRel tradeReasonRel = ref.getDiscountReasonRel();
         if (tradeReasonRel != null && tradeReasonRel.isValid()) {
             TradeReasonRel newReasonRel = newEntity(tradeReasonRel, ref.getUuid());
             newItem.setDiscountReasonRel(newReasonRel);
@@ -2118,14 +1807,7 @@ public final class ShopcartItemUtils {
     }
 
 
-    /**
-     * 根据theRef中的信息新建一个TradeItem对象
-     *
-     * @param theRef        被克隆的对象
-     * @param newParentUuid 新TradeItem对象的parentUuid
-     * @param isNeedId      是否需要id
-     * @return
-     */
+
     private static TradeItem relateCopyPropertites(TradeItem theRef, String newParentUuid, boolean isNeedId) {
         TradeItem theNew = new TradeItem();
         try {
@@ -2138,8 +1820,6 @@ public final class ShopcartItemUtils {
             theNew.setParentUuid(newParentUuid);
             theNew.setRelateTradeItemId(theRef.getId());
             theNew.setRelateTradeItemUuid(theRef.getUuid());
-//			theNew.setServerCreateTime(null);
-//			theNew.setServerUpdateTime(null);
             theNew.setTradeId(null);
             theNew.setTradeUuid(null);
             theNew.validateCreate();
@@ -2150,17 +1830,10 @@ public final class ShopcartItemUtils {
         return null;
     }
 
-    /**
-     * 对theRef条目中的加料、属性、优惠进行拆单操作，并将生成的新条目设置到theNew中
-     *
-     * @param theRef
-     * @param theNew
-     * @return
-     */
+
     private static <T extends ReadonlyShopcartItemBase> T completeCopy(T theRef, T theNew, boolean isNeedId) {
         if (theRef.hasExtra()) {
-            // 复制加料
-            List<ReadonlyExtraShopcartItem> newExtraItems = new ArrayList<ReadonlyExtraShopcartItem>();
+                        List<ReadonlyExtraShopcartItem> newExtraItems = new ArrayList<ReadonlyExtraShopcartItem>();
             for (ReadonlyExtraShopcartItem refExtraItem : theRef.getExtraItems()) {
                 TradeItem newExtraTradeItem = relateCopyPropertites(refExtraItem.tradeItem, theNew.getUuid(), isNeedId);
                 if (newExtraTradeItem == null) {
@@ -2171,8 +1844,7 @@ public final class ShopcartItemUtils {
             theNew.setExtraItems(newExtraItems);
         }
         if (theRef.hasProperty()) {
-            // 复制属性
-            List<ReadonlyOrderProperty> newProperties = new ArrayList<ReadonlyOrderProperty>();
+                        List<ReadonlyOrderProperty> newProperties = new ArrayList<ReadonlyOrderProperty>();
             for (ReadonlyOrderProperty refProperty : theRef.getProperties()) {
                 TradeItemProperty newTradeItemProperty = newEntity(refProperty.tradeItemProperty, theNew.getUuid());
                 if (newTradeItemProperty == null) {
@@ -2211,13 +1883,7 @@ public final class ShopcartItemUtils {
     }
 
 
-    /**
-     * 对指定的套餐明细条目进行拆单操作，返回新的套餐明细条目
-     *
-     * @param ref
-     * @param newParent 新套餐明细的父条目
-     * @return
-     */
+
     private static ReadonlySetmealShopcartItem copySetmeal(ReadonlySetmealShopcartItem ref,
                                                            ReadonlyShopcartItem newParent, boolean isNeedId) {
         if (ref.ensureCopy()) {

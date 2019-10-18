@@ -41,8 +41,7 @@ public abstract class CalmRequest<T> extends EventListener<T> implements ErrorLi
     WeakReference<Context> mFragmentManager;
     Handler mhandler;
 
-    protected boolean isErpReq = false;//是否为erp的请求，erp请求不需要记录失败次数
-
+    protected boolean isErpReq = false;
     private String mHint = "";
     public static final int HANDLER_MESSAGE_DISPLAY_DIALOG = 0;
     public static final int DISMISS_MESSAGE_DISPLAY_DIALOG = 1;
@@ -99,8 +98,7 @@ public abstract class CalmRequest<T> extends EventListener<T> implements ErrorLi
                             Context context = mFragmentManager.get();
                             if (context != null) {
                                 try {
-								/*mDialogFragment = CalmLoadingDialogFragment.show(mFragmentManager);
-								mFragmentManager.executePendingTransactions();*/
+
                                     if (context instanceof UILoadingController) {
                                         mDialogFragment = (UILoadingController) context;
                                         mDialogFragment.showLoadingDialog();
@@ -145,8 +143,7 @@ public abstract class CalmRequest<T> extends EventListener<T> implements ErrorLi
         }
         if (mFragmentManager != null) {
             if (mDialogFragment != null) {
-                //CalmLoadingDialogFragment.hide(mDialogFragment);
-                mDialogFragment.dismissLoadingDialog();
+                                mDialogFragment.dismissLoadingDialog();
                 mDialogFragment = null;
             }
             mFragmentManager = null;
@@ -156,19 +153,15 @@ public abstract class CalmRequest<T> extends EventListener<T> implements ErrorLi
 
     @Override
     public void onErrorResponse(VolleyError error) {
-        //先确定网络是可用的
-        if (NetworkUtil.isNetworkConnected() && !isErpReq) {
-            //同步服务器请求失败，失败次数＋1
-            if (SwitchServerManager.getInstance().isServerError(error)) {
+                if (NetworkUtil.isNetworkConnected() && !isErpReq) {
+                        if (SwitchServerManager.getInstance().isServerError(error)) {
                 SwitchServerManager.getInstance().retryFailCount();
             }
         }
 
         status = STATUS_FINISH;
         dismissHintDialog();
-		/*if (mErrorListener != null) {
-			mErrorListener.onErrorResponse(error);
-		}*/
+
         if (this.mErrorListener != null) {
             VolleyError newError = null;
             if (error != null) {
@@ -190,8 +183,7 @@ public abstract class CalmRequest<T> extends EventListener<T> implements ErrorLi
 
     @Override
     public void onResponse(T response) {
-        //同步服务器请求成功，失败次数置为0
-        if (!isErpReq) {
+                if (!isErpReq) {
             SwitchServerManager.getInstance().reset();
         }
 

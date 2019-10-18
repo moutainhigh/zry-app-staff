@@ -20,33 +20,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2015年10月11日 上午9:39:10
- * @Description: 购物车数据对象
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class ShoppingCartVo {
-    // 未生效的菜品
-    protected List<ShopcartItem> listOrderDishshopVo = new ArrayList<ShopcartItem>();
+        protected List<ShopcartItem> listOrderDishshopVo = new ArrayList<ShopcartItem>();
 
     protected List<IShopcartItem> listIShopcatItem = new ArrayList<IShopcartItem>();
 
-    // 临时保存套餐选菜信息
-    protected ShopcartItem updateTempShopItem;
+        protected ShopcartItem updateTempShopItem;
 
-    // 用于保存当前正在操作的套餐
-    protected ShopcartItem tempShopItem;
+        protected ShopcartItem tempShopItem;
 
-    // 临时保存删除的套餐
-    // private SetmealShopcartItem tempSetmealShopcartItem;
 
-    // 用于记录每个菜品点的数量
-    protected Map<String, BigDecimal> selectDishQTYMap = new HashMap<String, BigDecimal>();
+        protected Map<String, BigDecimal> selectDishQTYMap = new HashMap<String, BigDecimal>();
 
-    // 用户在没有呼入电话时将起信息添加到tradeCustomer
-    protected TakeOutInfo mTakeOutInfo;
+        protected TakeOutInfo mTakeOutInfo;
 
     protected TradeVo mTradeVo = new TradeVo();
 
@@ -54,36 +41,24 @@ public class ShoppingCartVo {
 
     protected Map<Integer, TradeCustomer> arrayTradeCustomer;
 
-    // 菜品折扣
-    protected TradePrivilege dishTradePrivilege;
+        protected TradePrivilege dishTradePrivilege;
 
-    // 正餐结算界面中被选中的菜品
-    public List<IShopcartItemBase> dinnerListShopcartItem = new ArrayList<IShopcartItemBase>();
+        public List<IShopcartItemBase> dinnerListShopcartItem = new ArrayList<IShopcartItemBase>();
 
-    // 正餐桌台信息
-    private DinnertableTradeInfo dinnertableTradeInfo;
-//	protected IDinnertable mIDinnertable;
-    // 正餐桌台
-//	protected DinnertableTradeVo mDinnertableTradeVo;
+        private DinnertableTradeInfo dinnertableTradeInfo;
 
-    // 保存订单中修改的菜品数据
-    protected Map<String, IShopcartItem> saveUpdateDish = new HashMap<String, IShopcartItem>();
+        protected Map<String, IShopcartItem> saveUpdateDish = new HashMap<String, IShopcartItem>();
 
-    // 用于保存当前操作界面
-    private int indexPage = 0;
+        private int indexPage = 0;
 
-    // 用于订单回执时保存登录会员
-    private TradeCustomer mTradeMemer;
+        private TradeCustomer mTradeMemer;
 
     private String showPropertyPageDishUUID = "";
-    //是否是团餐或者自助餐组合点菜
-    private boolean isGroupMode = false;
+        private boolean isGroupMode = false;
 
-    //库存的一些数据
-    private InventoryVo inventoryVo;
+        private InventoryVo inventoryVo;
 
-    //add v 8.1 订单销售员
-    private TradeUser tradeUser;
+        private TradeUser tradeUser;
 
     private HashMap<String, InventoryItem> returnInventoryMap;
 
@@ -183,21 +158,6 @@ public class ShoppingCartVo {
         this.dinnertableTradeInfo = dinnertableTradeInfo;
     }
 
-//	public IDinnertable getmIDinnertable() {
-//		return mIDinnertable;
-//	}
-//	
-//	public void setmIDinnertable(IDinnertable mIDinnertable) {
-//		this.mIDinnertable = mIDinnertable;
-//	}
-//	
-//	public DinnertableTradeVo getmDinnertableTradeVo() {
-//		return mDinnertableTradeVo;
-//	}
-//	
-//	public void setmDinnertableTradeVo(DinnertableTradeVo mDinnertableTradeVo) {
-//		this.mDinnertableTradeVo = mDinnertableTradeVo;
-//	}
 
     public Map<String, IShopcartItem> getSaveUpdateDish() {
         return saveUpdateDish;

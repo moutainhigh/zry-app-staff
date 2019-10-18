@@ -12,10 +12,7 @@ import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.context.data.ICurrency;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 
-/**
- * 门店缓存配置
- * Created by demo on 2018/12/15
- */
+
 public class ShopCacheInitCheck extends AbsInitCheck {
 
     public ShopCacheInitCheck() {
@@ -31,15 +28,12 @@ public class ShopCacheInitCheck extends AbsInitCheck {
             public void run() {
                 DishCache.refresh();
                 SalesPromotionCache.init();
-                //Calm3PrtConfigManager.init();
-                ServerSettingCache.getInstance().refreshAll();
-                //NewOrderlistenerService.startService(MainApplication.getInstance());
-                ICurrency currency = new UserCurrency(ShopInfoCfg.getInstance().currencyId);
+                                ServerSettingCache.getInstance().refreshAll();
+                                ICurrency currency = new UserCurrency(ShopInfoCfg.getInstance().currencyId);
                 ShopInfoCfg.getInstance().setCurrency(currency);
                 checkProgress(ShopCacheInitCheck.this, 100, BaseApplication.getInstance().getString(R.string.init_shop_cache_success));
                 checkComplete(ShopCacheInitCheck.this, true, null);
-                //IPrintHelper.Holder.registerInstance(DinnerPrintHelper.getInstance());
-            }
+                            }
         });
     }
 }

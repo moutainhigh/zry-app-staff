@@ -8,43 +8,10 @@ import com.zhongmei.yunfu.db.IUpdator;
 
 import java.math.BigDecimal;
 
-/**
- * @Description:
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @DatabaseTable(tableName = "market_activity_rule")
 public class MarketActivityRule extends CrmBasicEntityBase implements ICreator, IUpdator {
-    /*
-     * `id` bigint(20) NOT NULL AUTO_INCREMENT, `brand_id`
-     * bigint(20) DEFAULT NULL COMMENT '品牌ID', `plan_id`
-     * bigint(20) DEFAULT NULL COMMENT '营销计划ID', `name`
-     * varchar(100) DEFAULT NULL COMMENT '优惠条件',
-     * `limit_period` tinyint(4) DEFAULT NULL COMMENT
-     * '是否限制时段', `period_start` time DEFAULT NULL COMMENT
-     * '开始时段', `period_end` time DEFAULT NULL COMMENT
-     * '结束时段', `limit_week` tinyint(4) DEFAULT NULL COMMENT
-     * '是否限制星期', `week_day` varchar(50) DEFAULT NULL COMMENT
-     * '星期1，2，3，4，5，6，7', `content` varchar(200) DEFAULT
-     * NULL COMMENT '优惠内容', `all_dish` tinyint(4) DEFAULT
-     * NULL COMMENT '是否所有菜品', `discount` decimal(4,1)
-     * DEFAULT NULL COMMENT '折扣', `menu_id` bigint(20)
-     * DEFAULT NULL COMMENT '特价菜单ID', `payment`
-     * decimal(20,0) DEFAULT NULL COMMENT '消费金额', `reduce`
-     * decimal(10,2) DEFAULT NULL COMMENT '立减金额',
-     * `server_create_time` timestamp NULL DEFAULT NULL ON
-     * UPDATE CURRENT_TIMESTAMP COMMENT ' 创建时间',
-     * `server_update_time` timestamp NULL DEFAULT NULL ON
-     * UPDATE CURRENT_TIMESTAMP COMMENT '更新时间', `creator_id`
-     * bigint(20) DEFAULT NULL COMMENT ' 创建者Id',
-     * `creator_name` varchar(100) DEFAULT NULL,
-     * `updator_id` bigint(20) DEFAULT NULL COMMENT '更新人id',
-     * `updator_name` varchar(100) DEFAULT NULL,
-     * `status_flag` tinyint(4) DEFAULT '1' COMMENT '
-     * dish_num BigDecimal  营销方式为单菜品时存放菜品数量
-     * 是否有效标识',
-     */
+
 
     private static final long serialVersionUID = 1L;
 
@@ -58,8 +25,7 @@ public class MarketActivityRule extends CrmBasicEntityBase implements ICreator, 
         public static final String periodStart = "period_start";
 
         public static final String periodEnd = "period_end";
-        //此字段已废
-        public static final String limitWeek = "limit_week";
+                public static final String limitWeek = "limit_week";
 
         public static final String allDish = "all_dish";
 
@@ -71,24 +37,16 @@ public class MarketActivityRule extends CrmBasicEntityBase implements ICreator, 
 
         public static final String reduce = "reduce";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
         public static final String dishNum = "dish_num";

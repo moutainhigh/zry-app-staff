@@ -11,42 +11,20 @@ import java.math.BigDecimal;
 public class CustomerOrderBean {
 
     private String mobile;
-    private String sellTime;//售卡时间
-    private String cardNo;//卡号
-    private String sellMoney;//售价
-    private String operater;//经手人
-    private String deviceNo;//设备号
-    private EntityCardType cardType;//实体卡类型 1:会员实体卡 2:匿名实体卡
-
-    private Integer accountStatus; //1已到账、0未到账。
-    private Integer tradeStatus;
+    private String sellTime;    private String cardNo;    private String sellMoney;    private String operater;    private String deviceNo;    private EntityCardType cardType;
+    private Integer accountStatus;     private Integer tradeStatus;
     private Integer tradePayStatus;
 
-    private Integer storeType; //储值类型：0储值、1储值退款、2消费
-    private Integer addValueType;//储值类型 1：现金，2:银行卡
-    private BigDecimal addValue; //储值金额
-    private BigDecimal sendValue; //赠送金额
-    private BigDecimal beforeValue;//充值前金额
-    private BigDecimal endValue;//当前金额
-    private BigDecimal beforeRealValue; // 操作前余额实储金额
-    private BigDecimal beforeSendValue;    // 操作前余额赠送金额
-    private BigDecimal currentRealValue; // 本次操作实储金额
-    private BigDecimal currentSendValue; // 本次操作赠送金额
-    private BigDecimal endRealValue; // 操作后实储金额
-    private BigDecimal endSendValue; // 操作后赠送金额
-
+    private Integer storeType;     private Integer addValueType;    private BigDecimal addValue;     private BigDecimal sendValue;     private BigDecimal beforeValue;    private BigDecimal endValue;    private BigDecimal beforeRealValue;     private BigDecimal beforeSendValue;        private BigDecimal currentRealValue;     private BigDecimal currentSendValue;     private BigDecimal endRealValue;     private BigDecimal endSendValue;
     private Long tradeId;
-    //实体卡和会员储值需获取到
-    private String paymentUuid;
+        private String paymentUuid;
     private Long customerId;
-    private Long historyId; //储值记录id
-    private Long clientCreateTime;
+    private Long historyId;     private Long clientCreateTime;
     private Long serverUpdateTime;
     private Long storeId;
     private Long bizDate;
 
-    //明细里返回
-    private BigDecimal integral;
+        private BigDecimal integral;
     private Long cardKindId;
 
     public String getMobile() {

@@ -6,12 +6,7 @@ import android.text.TextWatcher;
 import com.zhongmei.bty.snack.orderdish.presenter.Presenter;
 import com.zhongmei.bty.snack.orderdish.view.MvpView;
 
-/**
- * 家消费Presenter
- *
- * @version v8.1
- * @since 2017.09.19.
- */
+
 public class IAddFeeContract {
 
     public interface IAddFeeView extends MvpView {

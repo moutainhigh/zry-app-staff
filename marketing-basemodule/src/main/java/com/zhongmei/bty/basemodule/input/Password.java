@@ -8,9 +8,7 @@ import android.widget.LinearLayout;
 
 import com.zhongmei.yunfu.basemodule.R;
 
-/**
- * 自定义密码输入
- */
+
 public class Password extends LinearLayout {
     public static final String TAG = Password.class.getSimpleName();
 
@@ -30,8 +28,7 @@ public class Password extends LinearLayout {
         password = new StringBuffer();
     }
 
-    // @Override
-    protected void onAttachedToWindow() {
+        protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         this.setGravity(Gravity.CENTER_HORIZONTAL);
         for (int i = 0; i < MAX_INPUT_NUMBER; i++) {
@@ -46,10 +43,8 @@ public class Password extends LinearLayout {
 
     public void setText(String number) {
         if (password.length() == MAX_INPUT_NUMBER) {
-            // 如果已经达到最大数量，则不做任何操作
-        } else {
-            // 未达到最大值，则继续添加
-            password = password.append(number);
+                    } else {
+                        password = password.append(number);
             getChildAt(password.length() - 1).setBackgroundResource(R.drawable.input_password_dot_input);
             if (password.length() == MAX_INPUT_NUMBER) {
                 if (null != verifyListener) {

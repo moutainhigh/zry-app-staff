@@ -12,9 +12,7 @@ import com.zhongmei.yunfu.R;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.order_center_list_item_layout)
 public class ListItemView extends RelativeLayout {
     @ViewById(R.id.order_center_list_root_layout)
@@ -48,8 +46,7 @@ public class ListItemView extends RelativeLayout {
     @ViewById(R.id.order_status_layout_top)
     LinearLayout mOrderStatusLayoutTop;
     @ViewById(R.id.order_center_list_union_trade)
-    TextView mUnionLabel;//联台单标示
-
+    TextView mUnionLabel;
     public ListItemView(Context context) {
         super(context);
     }

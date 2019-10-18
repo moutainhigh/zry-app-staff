@@ -6,87 +6,55 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.IsDelete;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * 文件地址
- */
+
 @DatabaseTable(tableName = "sys_file")
 public class SysFile extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "commercial_area"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * file_name
-         */
+
         public static final String fileName = "file_name";
 
-        /**
-         * file_type
-         */
+
         public static final String fileType = "file_type";
 
-        /**
-         * file_size
-         */
+
         public static final String fileSize = "file_size";
 
-        /**
-         * file_url
-         */
+
         public static final String fileUrl = "file_url";
 
-        /**
-         * commercia_id
-         */
+
         public static final String commerciaId = "commercia_id";
 
-        /**
-         * brand_id
-         */
+
         public static final String brandId = "brand_id";
 
-        /**
-         * business_type
-         */
+
         public static final String businessType = "business_type";
 
-        /**
-         * user_type
-         */
+
         public static final String userType = "user_type";
 
-        /**
-         * memo
-         */
+
         public static final String memo = "memo";
 
-        /**
-         * is_delete
-         */
+
         public static final String isDelete = "is_delete";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * create_time
-         */
+
         public static final String createTime = "create_time";
 
-        /**
-         * updater_id
-         */
+
         public static final String updaterId = "updater_id";
 
-        /**
-         * update_time
-         */
+
         public static final String updateTime = "update_time";
 
     }
@@ -103,9 +71,7 @@ public class SysFile extends IdEntityBase {
     @DatabaseField(columnName = "file_url")
     private String fileUrl;
 
-    /**
-     * 1, "营销方案",2, "优惠券",3, "物理布局,4,"排队广播语音"
-     */
+
     @DatabaseField(columnName = "business_type")
     private Integer businessType;
 

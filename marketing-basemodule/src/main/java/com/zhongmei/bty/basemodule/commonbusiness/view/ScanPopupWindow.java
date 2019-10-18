@@ -18,10 +18,7 @@ import com.zhongmei.yunfu.basemodule.R;
 import com.zhongmei.bty.basemodule.devices.scaner.ScanCode;
 import com.zhongmei.bty.basemodule.devices.scaner.ScanCodeManager;
 
-/**
- * Created by demo on 2018/12/15
- * 扫描PopupWindow
- */
+
 public class ScanPopupWindow extends PopupWindow {
 
     private Context mContext;
@@ -58,10 +55,7 @@ public class ScanPopupWindow extends PopupWindow {
         setBackgroundDrawable(new ColorDrawable(0));
         setWidth(ViewGroup.LayoutParams.MATCH_PARENT);
         setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
-        //etBarcode.setInputType(InputType.TYPE_NULL);
-        //etBarcode.setOnKeyListener(scanListener);
-        //etBarcode.requestFocus();
-        close.setOnClickListener(new View.OnClickListener() {
+                                close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();

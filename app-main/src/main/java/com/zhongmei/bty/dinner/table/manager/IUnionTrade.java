@@ -43,27 +43,13 @@ public abstract class IUnionTrade {
         return this;
     }
 
-    /**
-     * 创建联台
-     *
-     * @param tablesVoList 选中的桌台
-     */
+
     public abstract void create(List<DinnerConnectTablesVo> tablesVoList, UnionListener listener);
 
-    /**
-     * 取消联台
-     *
-     * @param tablesVoList 选中的桌台
-     */
+
     public abstract void cancel(List<DinnerConnectTablesVo> tablesVoList, BuffetUnionCancelVo unionCancelVo, UnionListener listener);
 
-    /**
-     * 设置返回值
-     *
-     * @param listener
-     * @param error
-     * @param result
-     */
+
     protected void setResponse(UnionListener listener, Throwable error, ResponseObject<?> result) {
         if (mWeakReference.get() != null) {
             if (listener != null) {

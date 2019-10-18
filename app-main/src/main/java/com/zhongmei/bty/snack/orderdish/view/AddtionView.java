@@ -24,16 +24,13 @@ import com.zhongmei.bty.basemodule.orderdish.bean.OrderExtra;
 import com.zhongmei.yunfu.util.MathDecimal;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 
-/**
- * 加料
- */
+
 @EViewGroup(R.layout.cashier_order_dish_recipe)
 public class AddtionView extends LinearLayout {
     private List<ViewHolder> viewHolders;
 
     private List<ExtraInfo> mList;
-    //
-    @ViewById(R.id.recipe_view)
+        @ViewById(R.id.recipe_view)
     LinearLayout addtion_view;
 
     private OnAddtionCLicked mListener;
@@ -73,12 +70,7 @@ public class AddtionView extends LinearLayout {
         this(context, null);
     }
 
-    /**
-     * @Title: inflateAddtion
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void inflateAddtion() {
         addtion_view.removeAllViews();
         if (rootViews != null) {
@@ -157,8 +149,7 @@ public class AddtionView extends LinearLayout {
                             mList.get(v.getId()).setQty(BigDecimal.ONE);
                             mListener.onAddtionClicked(mList.get(v.getId()), BigDecimal.valueOf(1));
                         }
-                        // holder.ll.setVisibility(View.VISIBLE);
-                    }
+                                            }
                 });
                 holder.minus.setId(i * 2 + j);
                 holder.minus.setOnClickListener(new OnClickListener() {
@@ -170,8 +161,7 @@ public class AddtionView extends LinearLayout {
                         if (singleQty.compareTo(BigDecimal.ZERO) > 0) {
                             int count = singleQty.intValue() - 1;
                             setExtraCount(parentView, postion, count);
-                            //数量小于等于零时，点击minus按钮一般不会出现，属于异常状况，直接隐藏＋－按钮视图
-                        } else {
+                                                    } else {
                             hidenCount(postion);
                             parentView.setSelected(false);
                         }
@@ -208,7 +198,6 @@ public class AddtionView extends LinearLayout {
             }
             addtion_view.addView(root_view);
         }
-//		Log.e("xxxxxx", addtion_view.getChildCount()+"");
         View line = new View(getContext());
         line.setBackgroundColor(MainApplication.getInstance().getResources().getColor(R.color.gray));
         LayoutParams lp =
@@ -217,12 +206,7 @@ public class AddtionView extends LinearLayout {
         addtion_view.addView(line, lp);
     }
 
-    /**
-     * 设置加料视图的数量和价格
-     *
-     * @param parentView 整个加料视图
-     * @param position
-     */
+
     private void setExtraCount(View parentView, int position, int count) {
         if (mListener != null && mListener.onAddtionClicked(mList.get(position), BigDecimal.valueOf(count))) {
             BigDecimal newQty = BigDecimal.valueOf(count);

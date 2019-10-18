@@ -9,9 +9,7 @@ import com.zhongmei.yunfu.util.Checks;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public abstract class StatisticsRequest<T> extends Request<T> {
     public static final String PROTOCOL_CHARSET = "utf-8";
     protected final Map<String, String> httpProperties;

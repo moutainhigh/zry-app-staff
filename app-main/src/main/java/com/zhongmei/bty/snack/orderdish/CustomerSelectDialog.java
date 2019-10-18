@@ -51,11 +51,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * @Date： 16/10/18
- * @Description:
- * @Version: 1.0
- */
+
 public class CustomerSelectDialog extends BasicDialogFragment implements View.OnClickListener {
 
     private static final String TAG = CustomerSelectDialog.class.getSimpleName();
@@ -65,8 +61,7 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
     private List<String> mAccounts;
 
     private CommonAdapter<String> mAdapter;
-    private boolean hasLogined = false; //是否已经输入过密码
-    private ResponseListener<MemberLoginVoResp> mPhoneLoginListener;
+    private boolean hasLogined = false;     private ResponseListener<MemberLoginVoResp> mPhoneLoginListener;
     private ResponseListener<CardLoginResp> mCardLoginListener;
 
     @Override
@@ -151,12 +146,7 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
         super.onDestroy();
     }
 
-    /**
-     * 使用手机号登录
-     *
-     * @Title: loginByPhoneNo
-     * @Return void 返回类型
-     */
+
     private void loginByPhoneNo(final String inputNo, final int needPswd, final String pswd, final PasswordDialog dialog) {
         if (mPhoneLoginListener == null) {
             mPhoneLoginListener = new PhotoLoginListener(inputNo, needPswd, pswd, dialog);
@@ -164,12 +154,7 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
         CustomerManager.getInstance().customerLogin(CustomerLoginType.MOBILE, inputNo, pswd, needPswd == 1, false, true, LoadingResponseListener.ensure(mPhoneLoginListener, getFragmentManager()));
     }
 
-    /**
-     * 使用会员卡号登录
-     *
-     * @Title: loginByCardNo
-     * @Return void 返回类型
-     */
+
     private void loginByCardNo(String inputNo) {
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
         if (mCardLoginListener == null) {
@@ -190,8 +175,7 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
                             pwDlg.dismiss();
                         }
                         final CustomerLoginResp resp = response.getContent().getResult();
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                        if (resp.customerIsDisable()) {                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                             return;
                         }
                         loginByCardNo(inputNo);
@@ -229,8 +213,7 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
                 try {
                     if (ResponseObject.isOk(response) && MemberLoginVoResp.isOk(response.getContent())) {
                         final CustomerLoginResp resp = response.getContent().getResult();
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                        if (resp.customerIsDisable()) {                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                             return;
                         }
                         loginByCardNo(num);
@@ -259,16 +242,8 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
     }
 
     private void loginByCardNoCheckPwd(final String mobile, final String inputNo, final Context context) {
-        //密码登陆
-        final PasswordDialog dialog;
-        /*DisplayUserInfo dUserInfo =
-                DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-                        "",
-                        null,
-                        0,
-                        true, 0);
-        DisplayServiceManager.updateDisplay(context, dUserInfo);
-*/
+                final PasswordDialog dialog;
+
         dialog = new PasswordDialog(context) {
             @Override
             public void close() {
@@ -287,12 +262,7 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
 
             @Override
             public void showPassWord(String password) {
-                /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-                        password,
-                        null,
-                        0,
-                        false, 0);
-                DisplayServiceManager.updateDisplay(context, dUserInfo);*/
+
             }
 
             @Override
@@ -347,8 +317,7 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
                         dialog.dismiss();
                     }
                     final CustomerLoginResp resp = response.getContent().getResult();
-                    if (resp.customerIsDisable()) {//当前账号冻结
-                        ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                    if (resp.customerIsDisable()) {                        ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                         return;
                     }
                     new AsyncTask<Void, Void, CustomerResp>() {
@@ -378,13 +347,8 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
                             }
                             customer.integral = resp.getIntegral() == null ? 0 : resp.getIntegral();
                             ShoppingCart.getInstance().setFastFoodCustomer(tradeCustomer);
-                            ShoppingCart.getInstance().memberPrivilege();// 设置购物车会员折扣
-                            ToastUtil.showShortToast(R.string.customer_login);
-                            // 登录成功后第二屏显示用户信息
-                            /*DisplayUserInfo dUserInfo =
-                                    DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_USERINFO_SHOW,
-                                            customer, customer.integral, false, 0);
-                            DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+                            ShoppingCart.getInstance().memberPrivilege();                            ToastUtil.showShortToast(R.string.customer_login);
+
                             dismiss();
                         }
                     }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -418,18 +382,10 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
         public void onResponse(ResponseObject<CardLoginResp> response) {
             if (ResponseObject.isOk(response)) {
                 final CardLoginResp resp = response.getContent();
-                // 设置card的名称，从customer中获得
-                final EcCard card = resp.getResult().getCardInstance();
+                                final EcCard card = resp.getResult().getCardInstance();
                 if (card.getCardType() == EntityCardType.ANONYMOUS_ENTITY_CARD) {
                     ToastUtil.showShortToast(R.string.customer_login_not_member);
-                    // 副屏显示
-                    /*DisplayUserInfo dUserInfo =
-                            DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_VALIDATE_USER_FAIL,
-                                    "",
-                                    null,
-                                    0,
-                                    true, 0);
-                    DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
 
                 } else {
                     final CustomerV5 customerV5 = resp.getResult().getCustomer();
@@ -463,17 +419,11 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
                             ShoppingCart.getInstance().memberPrivilege();
 
                             ToastUtil.showShortToast(R.string.customer_login);
-                            // 如果有积分抵现
-                            BigDecimal integral = BigDecimal.ZERO;
+                                                        BigDecimal integral = BigDecimal.ZERO;
                             if (card.getIntegralAccount() != null && card.getIntegralAccount().getIntegral() != null) {
                                 integral = BigDecimal.valueOf(card.getIntegralAccount().getIntegral());
                             }
-                            // 登录成功后第二屏显示用户信息
-                            /*DisplayUserInfo dUserInfo =
-                                    DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_USERINFO_SHOW,
-                                            customer,
-                                            integral.longValue(), false, 0);
-                            DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
                             dismiss();
                         }
                     }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -482,14 +432,7 @@ public class CustomerSelectDialog extends BasicDialogFragment implements View.On
                 String message = response.getMessage();
                 ToastUtil.showShortToast(message);
 
-                // 副屏显示
-                /*DisplayUserInfo dUserInfo =
-                        DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_VALIDATE_USER_FAIL,
-                                "",
-                                null,
-                                0,
-                                true, 0);
-                DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
             }
         }
 

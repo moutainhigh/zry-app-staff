@@ -3,9 +3,7 @@ package com.zhongmei.bty.common.util;
 import android.os.AsyncTask;
 import android.util.Log;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public abstract class ExtraAsyncTask<Param, Progress, Result> extends AsyncTask<Param, Progress, Result> {
 
     private static final String TAG = ExtraAsyncTask.class.getSimpleName();

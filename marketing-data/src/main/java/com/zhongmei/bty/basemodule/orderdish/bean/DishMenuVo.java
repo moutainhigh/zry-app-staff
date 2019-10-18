@@ -11,44 +11,28 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DishMenuVo implements Serializable {
 
-    //团餐名
-    private String name;
-    //    菜品数量
-    private String count;
-    //餐标
-    private BigDecimal price;
-    //简码
-    private String code;
-    //是否被选中
-    private boolean isSelected = false;
+        private String name;
+        private String count;
+        private BigDecimal price;
+        private String code;
+        private boolean isSelected = false;
 
-    //菜单名
-    private String skuName;
-    //菜单uuid
-    private String skuUuid;
-    //菜单id
-    private Long skuId;
-    //菜单模板
-    private DishCarte dishCarte;
-    //模板下的菜品
-    private List<DishCarteDetail> carteDetailList;
+        private String skuName;
+        private String skuUuid;
+        private Long skuId;
+        private DishCarte dishCarte;
+        private List<DishCarteDetail> carteDetailList;
 
     private List<DishCarteNorms> carteNormsList;
 
-    /**
-     * 是否是通用模版
-     */
+
     private boolean isDefault;
 
-    /**
-     * 是否切换模版,模版是否发生改变
-     */
+
     private boolean isChange;
 
     public boolean getIsDefault() {
@@ -96,8 +80,7 @@ public class DishMenuVo implements Serializable {
         }
         BigDecimal count = BigDecimal.ZERO;
         for (DishCarteDetail detail : carteDetailList) {
-            //子菜不统计数量
-            if (detail.getMealId() == null || detail.getMealId() == 0) {
+                        if (detail.getMealId() == null || detail.getMealId() == 0) {
                 count = count.add(detail.getNum());
             }
         }

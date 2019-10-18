@@ -2,26 +2,16 @@ package com.zhongmei.bty.basemodule.notifycenter.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public enum BizStatus implements ValueEnum<Integer> {
 
-    /**
-     * 未处理
-     */
+
     UNPROCESSED(1),
 
-    /**
-     * 已认领
-     */
+
     CONFIRMED(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

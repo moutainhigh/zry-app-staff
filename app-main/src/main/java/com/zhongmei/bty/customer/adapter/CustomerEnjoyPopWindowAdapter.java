@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * 喜好Adapter
- */
+
 public class CustomerEnjoyPopWindowAdapter extends BaseAdapter {
 
     private List<String> mList;

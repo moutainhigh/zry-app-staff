@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.net.volley.IUserEvent;
 import com.zhongmei.yunfu.net.volley.Response;
 import com.zhongmei.yunfu.resp.UserActionEvent;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class EventListenerProxy<T> extends AbsEventListenerProxy implements Response.Listener<T> {
 
     private final String requestTag;
@@ -45,10 +43,5 @@ public class EventListenerProxy<T> extends AbsEventListenerProxy implements Resp
         }
     }
 
-    /*public static String getEventName(Response.Listener listener) {
-        if (listener instanceof EventListenerProxy) {
-            return ((EventListenerProxy) listener).eventName;
-        }
-        return EventListener.getEventName(listener);
-    }*/
+
 }

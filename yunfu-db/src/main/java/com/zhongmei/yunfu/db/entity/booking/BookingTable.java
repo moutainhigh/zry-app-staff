@@ -9,14 +9,10 @@ import com.zhongmei.yunfu.context.util.SystemUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 预订桌台
- */
+
 @DatabaseTable(tableName = "booking_table")
 public class BookingTable extends EntityBase<Long> {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ {
@@ -40,57 +36,39 @@ public class BookingTable extends EntityBase<Long> {
         String bookingUuid = "booking_uuid";
     }
 
-    /**
-     * 桌台id,tableId
-     */
+
     @DatabaseField(columnName = "btid", id = true, canBeNull = false)
     private Long btid;
 
-    /**
-     * uuid
-     */
+
     @DatabaseField(columnName = "uuid")
     private String uuid;
 
-    /**
-     * booking uuid
-     */
+
     @DatabaseField(columnName = "booking_uuid")
     private String bookingUuid;
 
-    /**
-     * 商户id
-     */
+
     @DatabaseField(columnName = "commercial_id")
     private Long commercialID;
 
-    /**
-     * 单号
-     */
+
     @DatabaseField(columnName = "order_id")
     private Long orderID;
 
-    /**
-     * 桌台uuid
-     */
+
     @DatabaseField(columnName = "table_id")
     private String tableID;
 
-    /**
-     * 桌台 -1无效 0正常
-     */
+
     @DatabaseField(columnName = "status")
     private Integer status;
 
-    /**
-     * 创建时间
-     */
+
     @DatabaseField(columnName = "create_date_time")
     private Long createDateTime;
 
-    /**
-     * 修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 

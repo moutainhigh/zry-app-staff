@@ -2,17 +2,11 @@ package com.zhongmei.yunfu.http;
 
 import java.util.Map;
 
-/**
- * QS Server实时接口返回结果格式
- */
+
 
 public class QSResponseObject<T> {
-    private int code;//状态码
-    private String globalMsgId;//全局消息ID
-    private String message;
-    private Map<String, Object> validErrors;//校验错误信息
-    private T content;//内容信息
-
+    private int code;    private String globalMsgId;    private String message;
+    private Map<String, Object> validErrors;    private T content;
     public int getCode() {
         return code;
     }

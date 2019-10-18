@@ -26,9 +26,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by demo on 2018/12/15
- */
 
 public class SystemUtils {
     private static final String TAG = SystemUtils.class.getSimpleName();
@@ -45,22 +42,10 @@ public class SystemUtils {
         return mMacAddress;
     }
 
-    /**
-     * @Title: genOnlyIdentifier
-     * @Description: 产生一个唯一性的标识
-     * @Param @return TODO
-     * @Return String 返回类型
-     */
     public static String genOnlyIdentifier() {
         return UUID.randomUUID().toString().replaceAll("-", "");
     }
 
-    /**
-     * @Title: getVersionCode
-     * @Description: 获取版本编号
-     * @Param @return TODO
-     * @Return String 返回类型
-     */
     public static String getVersionCode() {
         return getVersionCode(null);
     }
@@ -79,12 +64,6 @@ public class SystemUtils {
         return String.valueOf(info.versionCode);
     }
 
-    /**
-     * @Title: getVersionName
-     * @Description: 获取版本名称
-     * @Param @return TODO
-     * @Return String 返回类型
-     */
     public static String getVersionName() {
         PackageInfo info = null;
         try {
@@ -96,32 +75,14 @@ public class SystemUtils {
         return info.versionName;
     }
 
-    /**
-     * @Title: getSystemType
-     * @Description: 获取系统类型
-     * @Param @return TODO
-     * @Return String 返回类型
-     */
     public static String getSystemType() {
         return "android";
     }
 
-    /**
-     * @Title: getAppType
-     * @Description: 获取app类型
-     * @Param @return TODO
-     * @Return String 返回类型
-     */
     public static String getAppType() {
         return "5";
     }
 
-    /**
-     * 生成一个交易单号。生成规则：
-     * https://tower.im/projects/af99e92345b6418cb22715d48c139e59/uploads/a42c5e82710d45bea5dae62fab295927
-     *
-     * @return
-     */
     public static String getBillNumber() {
         SimpleDateFormat df = new SimpleDateFormat("yyMMddHHmmssSSS", Locale.getDefault());
         return "101" + df.format(new Date()) + ShopInfoCfg.getInstance().getTabletNumberFormat();
@@ -172,11 +133,6 @@ public class SystemUtils {
         deleteAllFiles(file);
     }
 
-    /**
-     * 删除目录下所有文件
-     *
-     * @param root
-     */
     public static void deleteAllFiles(File root) {
         File files[] = root.listFiles();
         if (files != null)
@@ -223,17 +179,11 @@ public class SystemUtils {
         }
     }
 
-    /**
-     * 获取程序流量总接受量，单位为KB
-     */
     public long getTotalRxKB() {
         long rxBytes = TrafficStats.getTotalRxBytes();//全部接收的字节数
         return byte2KB(rxBytes);
     }
 
-    /**
-     * 获取程序流量总上传量，单位为KB
-     */
     public long getTotalTxKB() {
         long txBytes = TrafficStats.getTotalTxBytes();//全部上传的字节数
         return byte2KB(txBytes);
@@ -243,9 +193,6 @@ public class SystemUtils {
         return bytes / 1024;
     }
 
-    /**
-     * 获取每个app的上传和下载流量
-     */
     public void getAppBytes() {
         Context context = BaseApplication.sInstance;
         //拿到包管理者
@@ -254,9 +201,6 @@ public class SystemUtils {
         List<PackageInfo> info = pm.getInstalledPackages(PackageManager.GET_UNINSTALLED_PACKAGES
                 | PackageManager.GET_PERMISSIONS);
         List<Map<String, String>> appInfo = new ArrayList<>();//用于存放App的名称，上传和下载的字节
-        /**
-         * 通过看它有没有网络权限权限
-         */
         for (PackageInfo temp : info) {
             String permissions[] = temp.requestedPermissions;    //拿到该包的权限
             if (permissions != null && permissions.length > 0) {   //如果有权限

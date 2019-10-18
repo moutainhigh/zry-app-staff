@@ -4,13 +4,7 @@ import com.zhongmei.bty.basemodule.pay.message.PaymentReq;
 
 import java.util.List;
 
-/**
- * 封装批量清账的数据
- *
- * @Date：2015-4-14 下午6:30:02
- * @Description: TODO
- * @Version: 1.0
- */
+
 public class DeliveredPaymentReq {
 
     private List<PaymentReq> deliveredPayments;

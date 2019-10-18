@@ -5,9 +5,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.EcCardSettingDetail;
 import java.io.Serializable;
 import java.util.Comparator;
 
-/**
- * 实体卡规则排序
- */
+
 public class CrmEcCardStoreRuleDetailCompartor implements Comparator<EcCardSettingDetail>, Serializable {
 
     @Override

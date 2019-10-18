@@ -9,9 +9,7 @@ import com.zhongmei.bty.commonmodule.http.LoadingResponseListener;
 import com.zhongmei.yunfu.resp.ResponseListener;
 import com.zhongmei.yunfu.resp.ResponseObject;
 
-/**
- * @date 2017/2/14 10:46
- */
+
 
 public abstract class SimpleResponseListener<T> implements ResponseListener<T> {
 

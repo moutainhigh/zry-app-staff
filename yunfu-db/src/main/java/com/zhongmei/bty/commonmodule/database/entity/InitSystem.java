@@ -11,17 +11,12 @@ import com.zhongmei.yunfu.db.enums.IsDelete;
 
 import java.math.BigDecimal;
 
-/**
- * 设备表
- * InitSystem is a ORMLite bean type. Corresponds to the database table "init_system"
- */
+
 @DatabaseTable(tableName = "init_system")
 public class InitSystem extends InitSystemEntityBase {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "init_system"
-     */
+
     public interface $ {
         String initID = "initID";
         String commercialID = "commercialID";
@@ -124,8 +119,7 @@ public class InitSystem extends InitSystemEntityBase {
     private String posNo;
 
     @DatabaseField(columnName = $.isKdsDevice, defaultValue = "2")
-    private String isKdsDevice;//是否KDS设备：  1，是  2，否 ,
-
+    private String isKdsDevice;
     public Long getInitID() {
         return initID;
     }

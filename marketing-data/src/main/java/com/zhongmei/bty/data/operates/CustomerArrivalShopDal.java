@@ -7,11 +7,7 @@ import com.zhongmei.bty.commonmodule.database.enums.ArriveWay;
 
 import java.util.List;
 
-/**
- * Desc
- *
- * @created 2017/7/27
- */
+
 public interface CustomerArrivalShopDal extends IOperates {
 
     CustomerArrivalShop save(CustomerArrivalShop customerArrivalShop);

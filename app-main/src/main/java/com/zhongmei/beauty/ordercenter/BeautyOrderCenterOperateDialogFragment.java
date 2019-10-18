@@ -57,33 +57,14 @@ import com.zhongmei.bty.entity.enums.InventoryShowType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 复用正餐模块的代码
- *
- * @date 2018/05/15
- * @description 修改拒绝、作废、退货的dialog为统一的dialog
- * 格式从上至下大致为：
- * 退货理由
- * 理由条目1
- * 理由条目2
- * .......
- * 理由条目n
- * 退款明细
- * 现金 ...
- * 银联...
- * 扫码...
- * ....
- * 其他
- * 打印选项
- */
+
 public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
         implements OnClickListener {
     private static final String TAG = BeautyOrderCenterOperateDialogFragment.class.getName();
 
     public static final String EXTRA_SOURCE = "extra_source";
 
-    //提示语
-    public static final String EXTRA_TIP = "extra_tip";
+        public static final String EXTRA_TIP = "extra_tip";
 
     private static final int DIALOG_WIDTH = 460;
     private static final int DIALOG_HEIGHT = 590;
@@ -93,31 +74,24 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
     private BeautyReasonLayout reasonLayout;
     private PayedLayout payedLayout;
     private PrintLayout printLayout;
-    private InventoryLayout inventoryLayout; //是否退回库存
-    private TextView dialog_title;
+    private InventoryLayout inventoryLayout;     private TextView dialog_title;
     private TextView tvTip;
     private ImageView btn_close;
     private Button btn_ok;
     private int mSource = 1;
     private int mType = -1;
-    private int mInventoryStyle = -1;//库存退回展示样式
-    private int mTypeForNoDocument = -1;
+    private int mInventoryStyle = -1;    private int mTypeForNoDocument = -1;
     private String mTip;
     private boolean isEmptyShow;
     private String uuid;
-    private boolean mReasonSwitch;//理由开关
-
+    private boolean mReasonSwitch;
     private TradeDeposit tradeDeposit;
     private PaymentVo sellPaymentVo;
     private List<PaymentVo> adjustPaymentVos = new ArrayList<PaymentVo>();
     private ArrayList<OperateListener> listeners = new ArrayList<OperateListener>();
     private ArrayList<OperateCloseListener> closelisteners = new ArrayList<OperateCloseListener>();
-    //是否显示打印选择标签
-    private boolean isShowPrint = true;
-    private ReturnInventoryLayout returnInventoryView; //退库存按钮和数量布局
-    private TradeVo tradeVo; //订单信息
-    private List<InventoryItemReq> returnInventroryItemReqs;//退库存的req
-    private List<InventoryItem> inventoryItems;
+        private boolean isShowPrint = true;
+    private ReturnInventoryLayout returnInventoryView;     private TradeVo tradeVo;     private List<InventoryItemReq> returnInventroryItemReqs;    private List<InventoryItem> inventoryItems;
 
     private int mFromType = -1000;
 
@@ -179,15 +153,11 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
         super.onViewCreated(view, savedInstanceState);
         setDialogWidthAndHeight(view);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        //设置ReasonLayout查询的类型
-        setReasonLayout();
-        //设置PayedLayout的PaymentVo
-        setPaymentVo();
+                setReasonLayout();
+                setPaymentVo();
         setTitleByType();
-        //无单退货使用
-        setInventoryLayout();
-        //选择菜品退货
-        setInventoryLayoutView();
+                setInventoryLayout();
+                setInventoryLayoutView();
         setClickListener();
         DisplayPrintLayoutOrNot();
 
@@ -219,8 +189,7 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
         inventoryItems = buildInventoryItems(tradeVo);
         if (InventoryCacheUtil.getInstance().getSaleSwitch() && !Utils.isEmpty(inventoryItems)) {
             returnInventoryView.setVisibility(View.VISIBLE);
-            //让其在scrollview的顶部
-            returnInventoryView.setFocusable(true);
+                        returnInventoryView.setFocusable(true);
             returnInventoryView.setFocusableInTouchMode(true);
             returnInventoryView.requestFocus();
             returnInventoryView.refreshView(inventoryItems);
@@ -262,8 +231,7 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
         return childTradeItems;
     }
 
-    //套餐和单菜 作为加减库存的单位
-    private List<InventoryItem> buildInventoryItems(TradeVo tradeVo) {
+        private List<InventoryItem> buildInventoryItems(TradeVo tradeVo) {
         if (tradeVo == null || Utils.isEmpty(tradeVo.getTradeItemList())) {
             return null;
         }
@@ -281,8 +249,7 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
                     inventoryItem.setChildTradeItem(childTradeItem);
                     inventoryItems.add(inventoryItem);
                 }
-            } else if (tradeItem.getType() == DishType.SINGLE && TextUtils.isEmpty(tradeItem.getParentUuid())) {//单菜非子菜
-                InventoryItem inventoryItem = new InventoryItem(tradeItem);
+            } else if (tradeItem.getType() == DishType.SINGLE && TextUtils.isEmpty(tradeItem.getParentUuid())) {                InventoryItem inventoryItem = new InventoryItem(tradeItem);
                 inventoryItems.add(inventoryItem);
             }
         }
@@ -298,23 +265,12 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
 
         Resources resources = getActivity().getResources();
         DisplayMetrics metrics = resources.getDisplayMetrics();
-//		int desiredWidth = DIALOG_WIDTH;
-//		int desiredHeight = DIALOG_HEIGHT;
         int desiredWidth = metrics.widthPixels;
         int desiredHeight = metrics.heightPixels;
         window.setLayout(desiredWidth, desiredHeight);
         window.getAttributes().y = 0;
 
-        //如果当前view的高度大于目标高度，则设置为目标高度,宽度亦如此
-//		if(measuredHeight > desiredHeight){
-//			window.setLayout(measuredWidth, desiredHeight);
-//		}else{
-//			desiredHeight = measuredHeight;
-//		}
-//		if(measuredWidth > desiredWidth){
-//			window.setLayout(desiredWidth, desiredHeight);
-//		}
-    }
+            }
 
     public void registerListener(OperateListener listener) {
         if (listener == null) return;
@@ -365,8 +321,7 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
                     || mType == ReasonType.TRADE_DISCOUNT.value().intValue()
                     || mType == ReasonType.ITEM_GIVE.value().intValue()
                     || mType == ReasonType.TRADE_BANQUET.value().intValue()
-                    //||mType == ReasonType.TRADE_RETURNED.value().intValue()
-                    || mType == ReasonType.TRADE_FREE.value().intValue()
+                                        || mType == ReasonType.TRADE_FREE.value().intValue()
                     || mType == ReasonType.INTEGRAL_MODIFY.value().intValue()
                     || mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
                 payedLayout.setVisibility(View.GONE);
@@ -431,8 +386,7 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
         } else {
             tvTip.setVisibility(View.GONE);
         }
-        //只展示库存退回布局时
-        if (mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
+                if (mInventoryStyle == InventoryShowType.ONLY_SHOW_INVENTORY.value().intValue()) {
             dialog_title.setText(getString(R.string.goods_return_inventory));
         }
     }
@@ -442,36 +396,22 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
         btn_ok.setOnClickListener(this);
         if (mType == ReasonType.TRADE_RETURNED.value().intValue()) {
             btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
-            btn_ok.setText(R.string.reason_type_delete_dish_title);//c
-        } else if (mType == ReasonType.TRADE_INVALID.value().intValue()) {
+            btn_ok.setText(R.string.reason_type_delete_dish_title);        } else if (mType == ReasonType.TRADE_INVALID.value().intValue()) {
             btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
-            btn_ok.setText(R.string.beauty_delete_trade);//c
-        } else if (mType == ReasonType.TRADE_REFUSED.value().intValue()) {
+            btn_ok.setText(R.string.beauty_delete_trade);        } else if (mType == ReasonType.TRADE_REFUSED.value().intValue()) {
             btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
-            btn_ok.setText(R.string.reason_type_refuse_title);//c
-        } else if (mType == ReasonType.TRADE_REPEATED.value().intValue()) {
+            btn_ok.setText(R.string.reason_type_refuse_title);        } else if (mType == ReasonType.TRADE_REPEATED.value().intValue()) {
             btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
-            btn_ok.setText(R.string.reason_type_repay_btn);//l
-        } else if (mType == ReasonType.TRADE_FREE.value().intValue()) {
+            btn_ok.setText(R.string.reason_type_repay_btn);        } else if (mType == ReasonType.TRADE_FREE.value().intValue()) {
             btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
-            btn_ok.setText(R.string.reason_type_free_btn);//l
-        } else if (mType == ReasonType.BOOKING_CANCEL.value().intValue()//c
-                || mType == ReasonType.BOOKING_REFUSED.value().intValue()//c
-                ) {
+            btn_ok.setText(R.string.reason_type_free_btn);        } else if (mType == ReasonType.BOOKING_CANCEL.value().intValue()                || mType == ReasonType.BOOKING_REFUSED.value().intValue()                ) {
             btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
             btn_ok.setText(R.string.common_submit);
-        } else if (mType == ReasonType.LAG_REASON.value().intValue()//l
-                || mType == ReasonType.TRADE_DISCOUNT.value().intValue()//l
-                || mType == ReasonType.TRADE_BANQUET.value().intValue()//l
-                || mType == ReasonType.ITEM_GIVE.value().intValue()//l
-                || mType == ReasonType.TRADE_SINGLE_DISCOUNT.value().intValue()) {//l
-            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+        } else if (mType == ReasonType.LAG_REASON.value().intValue()                || mType == ReasonType.TRADE_DISCOUNT.value().intValue()                || mType == ReasonType.TRADE_BANQUET.value().intValue()                || mType == ReasonType.ITEM_GIVE.value().intValue()                || mType == ReasonType.TRADE_SINGLE_DISCOUNT.value().intValue()) {            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
             btn_ok.setText(R.string.common_submit);
-        } else if (mType == ReasonType.AGREE_RETURN.value().intValue()) {//l
-            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+        } else if (mType == ReasonType.AGREE_RETURN.value().intValue()) {            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
             btn_ok.setText(R.string.order_detail_agree_st);
-        } else if (mType == ReasonType.REFUSE_RETURN.value().intValue()) {//c
-            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
+        } else if (mType == ReasonType.REFUSE_RETURN.value().intValue()) {            btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
             btn_ok.setText(R.string.order_detail_refuse_st);
         } else if (mType == ReasonType.INTEGRAL_MODIFY.value().intValue()) {
             btn_ok.setBackgroundResource(R.drawable.beauty_dialog_btn_bg_selector);
@@ -496,18 +436,12 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
         setPaymentVo();
     }
 
-    /**
-     * 设置押金信息
-     */
+
     public void setTradeDepoist(TradeDeposit vTradeDeposit) {
         tradeDeposit = vTradeDeposit;
     }
 
-    /**
-     * 设置订单信息
-     *
-     * @param tradeVo
-     */
+
     public void setTradeVo(TradeVo tradeVo) {
         this.tradeVo = tradeVo;
     }
@@ -537,8 +471,7 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
             if (returnInventroryItemReqs != null) {
                 result.returnInventoryItemReqs = returnInventroryItemReqs;
             } else {
-                //默认退全部的库存
-                result.returnInventoryItemReqs = InventoryUtils.buildInventoryItemReqs(buildInventoryItems(tradeVo));
+                                result.returnInventoryItemReqs = InventoryUtils.buildInventoryItemReqs(buildInventoryItems(tradeVo));
             }
         }else{
             result.returnInventoryItemReqs = new ArrayList<>();
@@ -622,41 +555,23 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
 
     }
 
-    /**
-     * 是否开启了理由弹窗
-     *
-     * @return
-     */
+
     private boolean isReasonSwitchOpen() {
         ReasonDal reasonDal = OperatesFactory.create(ReasonDal.class);
         int type = getArguments().getInt("type");
-        if (ReasonType.LAG_REASON.value() == type) {//挂账必须要理由
-            return true;
+        if (ReasonType.LAG_REASON.value() == type) {            return true;
         }
         return reasonDal.isReasonSwitchOpen(ReasonType.newReason(type));
     }
 
     @Override
     public void show(FragmentManager manager, String tag) {
-        //判断是否开启了理由弹窗
-//		if (!isReasonSwitchOpen()) {
-//			setResultListener(new OperateResult(null, false));
-//			return;
-//		}
-//
-//		super.show(manager, tag);
-        asyncBack(manager, null, tag);
+                asyncBack(manager, null, tag);
     }
 
     @Override
     public int show(FragmentTransaction transaction, String tag) {
-        //判断是否开启了理由弹窗
-//		if (!isReasonSwitchOpen()) {
-//			setResultListener(new OperateResult(null, false));
-//			return -1;
-//		}
-//		return super.show(transaction, tag);
-        asyncBack(null, transaction, tag);
+                asyncBack(null, transaction, tag);
         return -1;
     }
 
@@ -678,8 +593,7 @@ public class BeautyOrderCenterOperateDialogFragment extends BasicDialogFragment
                 if (!aBoolean) {
                     setResultListener(new OperateResult(null, false, true));
                 } else {
-                    try {//当使用FragmentManager.commit()时偶现stateLoss异常
-                        if (manager != null) {
+                    try {                        if (manager != null) {
                             BeautyOrderCenterOperateDialogFragment.super.show(manager, tag);
                         } else if (transaction != null) {
                             BeautyOrderCenterOperateDialogFragment.super.show(transaction, tag);

@@ -2,9 +2,7 @@ package com.zhongmei.bty.dinner.table.event;
 
 import com.zhongmei.bty.dinner.table.bean.FunctionBean;
 
-/**
- *
- */
+
 public class EventFunctionChange {
 
     public FunctionBean funcationBean;

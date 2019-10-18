@@ -1,21 +1,4 @@
-/****************************************************************
- * Licensed to the Apache Software Foundation (ASF) under one   *
- * or more contributor license agreements.  See the NOTICE file *
- * distributed with this work for additional information        *
- * regarding copyright ownership.  The ASF licenses this file   *
- * to you under the Apache License, Version 2.0 (the            *
- * "License"); you may not use this file except in compliance   *
- * with the License.  You may obtain a copy of the License at   *
- *                                                              *
- *   http://www.apache.org/licenses/LICENSE-2.0                 *
- *                                                              *
- * Unless required by applicable law or agreed to in writing,   *
- * software distributed under the License is distributed on an  *
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY       *
- * KIND, either express or implied.  See the License for the    *
- * specific language governing permissions and limitations      *
- * under the License.                                           *
- ****************************************************************/
+
 
 package com.zhongmei.bty.common.util.mime4j.decoder;
 
@@ -28,21 +11,12 @@ import android.util.Log;
 
 import com.zhongmei.bty.commonmodule.util.CharsetUtil;
 
-/**
- * Static methods for decoding strings, byte arrays and encoded words.
- *
- * @version $Id: DecoderUtil.java,v 1.3 2005/02/07 15:33:59 ntherning Exp $
- */
+
 public class DecoderUtil {
 
     private static String TAG = DecoderUtil.class.getSimpleName();
 
-    /**
-     * Decodes a string containing quoted-printable encoded data.
-     *
-     * @param s the string to decode.
-     * @return the decoded bytes.
-     */
+
     @SuppressWarnings("resource")
     public static byte[] decodeBaseQuotedPrintable(String s) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -58,21 +32,14 @@ public class DecoderUtil {
                 baos.write(b);
             }
         } catch (IOException e) {
-            /*
-             * This should never happen!
-             */
+
             Log.e(TAG, e.getLocalizedMessage());
         }
 
         return baos.toByteArray();
     }
 
-    /**
-     * Decodes a string containing base64 encoded data.
-     *
-     * @param s the string to decode.
-     * @return the decoded bytes.
-     */
+
     @SuppressWarnings("resource")
     public static byte[] decodeBase64(String s) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -88,45 +55,25 @@ public class DecoderUtil {
                 baos.write(b);
             }
         } catch (IOException e) {
-            /*
-             * This should never happen!
-             */
+
             Log.e(TAG, e.getLocalizedMessage());
         }
 
         return baos.toByteArray();
     }
 
-    /**
-     * Decodes an encoded word encoded with the 'B' encoding (described in RFC
-     * 2047) found in a header field body.
-     *
-     * @param encodedWord the encoded word to decode.
-     * @param charset     the Java charset to use.
-     * @return the decoded string.
-     * @throws UnsupportedEncodingException if the given Java charset isn't supported.
-     */
+
     public static String decodeB(String encodedWord, String charset)
             throws UnsupportedEncodingException {
 
         return new String(decodeBase64(encodedWord), charset);
     }
 
-    /**
-     * Decodes an encoded word encoded with the 'Q' encoding (described in RFC
-     * 2047) found in a header field body.
-     *
-     * @param encodedWord the encoded word to decode.
-     * @param charset     the Java charset to use.
-     * @return the decoded string.
-     * @throws UnsupportedEncodingException if the given Java charset isn't supported.
-     */
+
     public static String decodeQ(String encodedWord, String charset)
             throws UnsupportedEncodingException {
 
-        /*
-         * Replace _ with =20
-         */
+
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < encodedWord.length(); i++) {
             char c = encodedWord.charAt(i);
@@ -140,23 +87,10 @@ public class DecoderUtil {
         return new String(decodeBaseQuotedPrintable(sb.toString()), charset);
     }
 
-    /**
-     * Decodes a string containing encoded words as defined by RFC 2047. Encoded
-     * words in have the form =?charset?enc?Encoded word?= where enc is either
-     * 'Q' or 'q' for quoted-printable and 'B' or 'b' for Base64.
-     * <p>
-     * ANDROID: COPIED FROM A NEWER VERSION OF MIME4J
-     *
-     * @param body the string to decode.
-     * @return the decoded string.
-     */
+
     public static String decodeEncodedWords(String body) {
 
-        // ANDROID: Most strings will not include "=?" so a quick test can
-        // prevent unneeded
-        // object creation. This could also be handled via lazy creation of the
-        // StringBuilder.
-        if (body.indexOf("=?") == -1) {
+                                        if (body.indexOf("=?") == -1) {
             return body;
         }
 
@@ -168,13 +102,7 @@ public class DecoderUtil {
         while (true) {
             int begin = body.indexOf("=?", previousEnd);
 
-            // ANDROID: The mime4j original version has an error here. It gets
-            // confused if
-            // the encoded string begins with an '=' (just after "?Q?"). This
-            // patch seeks forward
-            // to find the two '?' in the "header", before looking for the final
-            // "?=".
-            int endScan = begin + 2;
+                                                                                    int endScan = begin + 2;
             if (begin != -1) {
                 int qm1 = body.indexOf('?', endScan + 2);
                 int qm2 = body.indexOf('?', qm1 + 1);
@@ -211,8 +139,7 @@ public class DecoderUtil {
         }
     }
 
-    // return null on error
-    private static String decodeEncodedWord(String body, int begin, int end) {
+        private static String decodeEncodedWord(String body, int begin, int end) {
         int qm1 = body.indexOf('?', begin + 2);
         if (qm1 == end - 2)
             return null;
@@ -246,8 +173,7 @@ public class DecoderUtil {
             }
         } catch (UnsupportedEncodingException e) {
             Log.e(TAG, e.getMessage(), e);
-            // should not happen because of isDecodingSupported check above
-            return null;
+                        return null;
         } catch (RuntimeException e) {
             Log.e(TAG, e.getMessage(), e);
             return null;

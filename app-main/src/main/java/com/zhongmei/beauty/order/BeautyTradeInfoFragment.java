@@ -81,12 +81,10 @@ import de.greenrobot.event.EventBus;
 public class BeautyTradeInfoFragment extends BasicFragment {
 
     private static final String TAG = BeautyTradeInfoFragment.class.getSimpleName();
-    //购物车界面所处页面
-    public static final String DISHSHOPCART_PAGE = "shopcart_page";
+        public static final String DISHSHOPCART_PAGE = "shopcart_page";
 
     @ViewById(R.id.lv_selected_dish)
-    SwipeMenuListView orderDishListView;//
-
+    SwipeMenuListView orderDishListView;
     @ViewById(R.id.haveNoDishLayout)
     RelativeLayout haveNoDishLayout;
 
@@ -96,29 +94,23 @@ public class BeautyTradeInfoFragment extends BasicFragment {
     @ViewById(R.id.tv_select_all)
     TextView tvSelectAll;
 
-    protected BeautyShopcartAdapter selectedDishAdapter;// 适配器
-
-    private int mCurrentPosition;// 当前定位
-
+    protected BeautyShopcartAdapter selectedDishAdapter;
+    private int mCurrentPosition;
     protected DinnerShoppingCart mShoppingCart;
 
     private TradeVo tradeVo;
 
-    //订单中的催菜数目
-    private long tradeItemOperationCount = 0;
+        private long tradeItemOperationCount = 0;
 
-    // 是否显示退菜、改菜后无效的数据
-    private boolean isShowDelete = true;
+        private boolean isShowDelete = true;
 
     private ChangePageListener mChangePageListener;
 
     private DatabaseHelper.DataChangeObserver observer;
 
-    private boolean enableSlide = true;//是否允许滑动
-
+    private boolean enableSlide = true;
     private BusinessType mBusinessType = BusinessType.DINNER;
-    //初始菜品缓存
-    private Map<String, List<TradeItemOperation>> mUnOpItemOperation = new HashMap<>();
+        private Map<String, List<TradeItemOperation>> mUnOpItemOperation = new HashMap<>();
 
     List<IShopcartItem> currentShopcartList = null;
     private List<IShopcartItem> mListOrderDishshopVo;
@@ -162,8 +154,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         orderDishListView.setItemsCanFocus(false);
         orderDishListView.setDescendantFocusability(ViewGroup.FOCUS_BEFORE_DESCENDANTS);
         selectedDishAdapter.isShowMemeberDiscount(true);
-        //可以移除营销活动
-        selectedDishAdapter.setCanRemoveMarketActivity(true);
+                selectedDishAdapter.setCanRemoveMarketActivity(true);
         bindItemListener();
         bindMenuListener();
 
@@ -205,11 +196,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         });
     }
 
-    /**
-     * 删除品项
-     *
-     * @param position
-     */
+
     private void deleteItem(int position) {
         DishDataItem dishDataItem = selectedDishAdapter.getItem(position);
         if (dishDataItem == null) {
@@ -219,8 +206,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
             case EXCISE_TAX:
                 ToastUtil.showLongToast(R.string.tax_cannot_delete);
                 break;
-            // 优惠券
-            case COUPONS:
+                        case COUPONS:
                 if (dishDataItem.getCouponPrivilegeVo().isUsed()) {
                     ToastUtil.showLongToast(R.string.dinner_privilege_used);
                     return;
@@ -228,8 +214,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                 DinnerShopManager.getInstance().getShoppingCart().removeCouponPrivilege(dishDataItem.getCouponPrivilegeVo(), true);
                 sendCouponAction(dishDataItem.getCouponPrivilegeVo());
                 break;
-            // 积分
-            case INTERGRAL:
+                        case INTERGRAL:
                 if (dishDataItem.getIntegralCashPrivilegeVo().isUsed()) {
                     ToastUtil.showLongToast(R.string.dinner_privilege_used);
                     return;
@@ -237,8 +222,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                 DinnerShopManager.getInstance().getShoppingCart().removeIntegralCash();
                 sendIntegralAction();
                 break;
-            // 微信卡券
-            case WECHAT_CARD_COUPONS:
+                        case WECHAT_CARD_COUPONS:
                 if (dishDataItem.getWeiXinCouponsVo() != null
                         && dishDataItem.getWeiXinCouponsVo().getmTradePrivilege() != null) {
                     if (dishDataItem.getWeiXinCouponsVo().isUsed()) {
@@ -258,8 +242,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                     if (tradePrivilege.getPrivilegeType() != PrivilegeType.AUTO_DISCOUNT
                             && tradePrivilege.getPrivilegeType() != PrivilegeType.MEMBER_PRICE
                             && tradePrivilege.getPrivilegeType() != PrivilegeType.MEMBER_REBATE) {
-                        // 如果是会员登录并且移除的不是会员折扣 恢复会员折扣
-                        if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
+                                                if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
                             DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(shopcartItem, true, true);
                         }
                     }
@@ -270,8 +253,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
             case COMBO_MEMO:
             case ALL_MEMO:
                 break;
-            // 整单折扣移除
-            case ALL_DISCOUNT:
+                        case ALL_DISCOUNT:
                 DinnerShopManager.getInstance().getShoppingCart().removeOrderPrivilege();
                 break;
             case CHARGE_PRIVILEGE:
@@ -292,17 +274,14 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                 }
 
                 break;
-            case BANQUET_PRIVILIGE://移除宴请
-                DinnerShopManager.getInstance().getShoppingCart().removeBanquet();
+            case BANQUET_PRIVILIGE:                DinnerShopManager.getInstance().getShoppingCart().removeBanquet();
                 break;
             case GIFT_COUPON:
-                //移除礼品劵
-                IShopcartItem item = dishDataItem.getItem();
+                                IShopcartItem item = dishDataItem.getItem();
                 if (item != null && item.getCouponPrivilegeVo() != null && item.getCouponPrivilegeVo().getTradePrivilege() != null) {
                     ShoppingCartVo shoppingCartVo = DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo();
                     DinnerShopManager.getInstance().getShoppingCart().removeGiftCouponePrivilege(item.getCouponPrivilegeVo().getTradePrivilege().getPromoId(), shoppingCartVo, true);
-                    // 移除礼品劵后,恢复会员折扣
-                    if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
+                                        if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
                         DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(item, true, true);
                     }
                     ActionSeparateDeleteCoupon coupon = new ActionSeparateDeleteCoupon();
@@ -314,8 +293,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
             case COMBO:
             case CHILD:
                 detailInventy(dishDataItem);
-                // 这一项要在最后
-                DinnerTradeItemManager.getInstance().deleteItem(dishDataItem.getBase(),
+                                DinnerTradeItemManager.getInstance().deleteItem(dishDataItem.getBase(),
                         dishDataItem.getItem().getUuid(), mChangePageListener, getActivity());
                 EventBus.getDefault().post(new AppletRemoveAction(dishDataItem.getBase()));
                 if (middleChangeListener != null) {
@@ -331,10 +309,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 处理退库存
-     * @param dishDataItem
-     */
+
     private void detailInventy(DishDataItem dishDataItem){
         if (dishDataItem == null||dishDataItem.getBase()==null) {
             return;
@@ -377,15 +352,13 @@ public class BeautyTradeInfoFragment extends BasicFragment {
     @Override
     public void onResume() {
         super.onResume();
-        DatabaseHelper.Registry.register(observer);//add 20170209
-        Log.i(TAG, "onResume: DatabaseHelper.Registry.register");
+        DatabaseHelper.Registry.register(observer);        Log.i(TAG, "onResume: DatabaseHelper.Registry.register");
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        DatabaseHelper.Registry.unregister(observer);//add  20170209
-        Log.i(TAG, "onPause: DatabaseHelper.Registry.unregister");
+        DatabaseHelper.Registry.unregister(observer);        Log.i(TAG, "onPause: DatabaseHelper.Registry.unregister");
     }
 
     public void onEventMainThread(EventSelectDish select) {
@@ -399,14 +372,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
     }
 
 
-    /**
-     * 全选操作
-     *
-     * @Title: doSelectAll
-     * @Description:
-     * @Param
-     * @Return void 返回类型
-     */
+
     @Click(R.id.tv_select_all)
     void doSelectAll() {
         if (!ClickManager.getInstance().isClicked()) {
@@ -423,12 +389,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 全选操作
-     *
-     * @Title: setSelectAll
-     * @Return void 返回类型
-     */
+
     public void doSelectAll(boolean isSelect) {
         if (selectedDishAdapter == null) {
             return;
@@ -446,8 +407,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
             for (DishDataItem dish : selectedDishAdapter.getAllData()) {
                 if (dish.getType() == ItemType.SINGLE
                         || dish.getType() == ItemType.COMBO) {
-                    // && dish.getBase().getEnableWholePrivilege() == Bool.YES
-                    if (dish.getBase() != null) {
+                                        if (dish.getBase() != null) {
                         if (selectedDishAdapter.isDiscountModle()
                                 && DinnerCashManager.hasMarketActivity(selectedDishAdapter.getTradeItemPlanActivityMap(), dish.getBase()) || dish.getBase().getEnableWholePrivilege() == Bool.NO) {
                             continue;
@@ -473,18 +433,12 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         selectedDishAdapter.notifyDataSetChanged();
     }
 
-    /**
-     * 先设置折扣再在订单列表中全选
-     *
-     * @Title: batchSetDiscount
-     * @Return void 返回类型
-     */
+
     public void batchSetDiscount() {
         ArrayList<IShopcartItemBase> listDishData = new ArrayList<IShopcartItemBase>();
         listDishData.clear();
         for (DishDataItem dish : selectedDishAdapter.getAllData()) {
-            // && dish.getBase().getEnableWholePrivilege() == Bool.YES
-            if ((dish.getBase() != null && dish.getBase().isSelected())
+                        if ((dish.getBase() != null && dish.getBase().isSelected())
                     && (dish.getType() == ItemType.SINGLE
                     || dish.getType() == ItemType.COMBO)) {
                 IShopcartItemBase mShopcartItemBase = dish.getBase();
@@ -497,13 +451,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
     }
 
 
-    /**
-     * 更新全选 取消全选文字
-     *
-     * @Title: setSelectView
-     * @Param @param srcList
-     * @Return void 返回类型
-     */
+
     private void setSelectView(List<IShopcartItem> srcList, List<IShopcartItemBase> selectedList) {
         if (srcList != null) {
             if (selectedList != null) {
@@ -519,14 +467,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 改变全选按钮选择
-     *
-     * @Title: setSelectBtn
-     * @Description:
-     * @Param @param isUsed
-     * @Return void 返回类型
-     */
+
     private void setSelectBtn(boolean isSelected) {
         if (!isSelected) {
             tvSelectAll.setText(getResources().getString(R.string.dinner_select_all));
@@ -555,9 +496,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
             gotoListViewBottom();
     }
 
-    /**
-     * 整单折扣
-     */
+
     public void goAllDiscountMode() {
         isDiscountPage = true;
         tvSelectAll.setVisibility(View.GONE);
@@ -565,12 +504,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         getSelectedDishAdapter().setDiscountModle(false);
     }
 
-    /**
-     * 批量打折模式
-     *
-     * @Title: goBatchDiscountMode
-     * @Return void 返回类型
-     */
+
     public void goBatchDiscountMode() {
         isDiscountPage = true;
         isBatchDiscountMode = true;
@@ -587,8 +521,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         getSelectedDishAdapter().setDiscountModle(false);
     }
 
-    //滑动到购物车底部
-    private void gotoListViewBottom() {
+        private void gotoListViewBottom() {
         if (isInit) {
             return;
         }
@@ -607,17 +540,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         updateOrderDishList(list, tradeVo, true, false, false);
     }
 
-    /**
-     * 购物车有变更时更新界面
-     *
-     * @Title: updateView
-     * @Description: TODO
-     * @Param @param list
-     * @Param @param tradeVo TODO
-     * @Param isSlide 是否允许滑动
-     * @Param isGroupCheckMode  是否是分组显示
-     * @Return void 返回类型
-     */
+
     public void updateOrderDishList(List<IShopcartItem> list, TradeVo tradeVo, boolean isSlide, boolean isGroupCheckMode, boolean isInit) {
         this.tradeVo = tradeVo;
         currentShopcartList = new ArrayList<>();
@@ -677,7 +600,6 @@ public class BeautyTradeInfoFragment extends BasicFragment {
 
 
     private void itemClicked(int position) {
-        //批量操作时，不允许点击其他菜品
 
         mCurrentPosition = position;
         DishDataItem dishDataItem = selectedDishAdapter.getItem(position);
@@ -690,10 +612,8 @@ public class BeautyTradeInfoFragment extends BasicFragment {
             return;
         }
         if (isBatchDiscountMode) {
-            //针对批量折扣点击处理
-            selectedDishAdapter.doEditModeItemClick(dishDataItem, position);
+                        selectedDishAdapter.doEditModeItemClick(dishDataItem, position);
         } else if (selectedDishAdapter.isDishCheckMode()) {
-//                        针对营销活动点击处理
             if (dishDataItem.getCheckStatus() == DishCheckStatus.CHECKED) {
                 dishDataItem.setCheckStatus(DishCheckStatus.NOT_CHECK);
                 selectedDishAdapter.notifyDataSetChanged();
@@ -702,8 +622,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                 selectedDishAdapter.notifyDataSetChanged();
             }
         } else {
-            //选中条目
-            if (dishDataItem.isSelected()) {
+                        if (dishDataItem.isSelected()) {
                 return;
             }
             if (dishDataItem.getBase() != null) {
@@ -736,41 +655,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
         public void onChange(Collection<Uri> uris) {
             if (uris.contains(DBHelperManager.getUri(TradeItemOperation.class))) {
                 if (tradeVo != null && tradeVo.getTrade() != null) {
-                    /*PrintOperationDal dal = OperatesFactory.create(PrintOperationDal.class);
-                    try {
-                        List<TradeItemOperation> tradeItemOperations = dal.findTradeItemOperation(tradeVo.getTrade().getUuid());
-                        if (tradeItemOperationCount != tradeItemOperations.size()) {
-                            Map<Long, List<TradeItemOperation>> tradeItemOperationIdMap = new HashMap<Long, List<TradeItemOperation>>();
-                            for (TradeItemOperation tradeItemOperation : tradeItemOperations) {
-                                List<TradeItemOperation> tios = tradeItemOperationIdMap.get(tradeItemOperation.getTradeItemId());
-                                if (tios == null) {
-                                    tios = new ArrayList<TradeItemOperation>();
-                                    tradeItemOperationIdMap.put(tradeItemOperation.getTradeItemId(), tios);
-                                }
-                                tios.add(tradeItemOperation);
-                            }
 
-                            //将id转换成uuid
-                            final Map<String, List<TradeItemOperation>> tradeItemOperationUuidMap = new HashMap<String, List<TradeItemOperation>>();
-                            TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
-                            for (Entry<Long, List<TradeItemOperation>> entry : tradeItemOperationIdMap.entrySet()) {
-                                TradeItem tradeItem = tradeDal.findTradeItem(entry.getKey());
-                                tradeItemOperationUuidMap.put(tradeItem.getUuid(), entry.getValue());
-                            }
-                            if (!tradeItemOperationUuidMap.isEmpty()) {
-                                getActivity().runOnUiThread(new Runnable() {
-
-                                    @Override
-                                    public void run() {
-                                        mShoppingCart.refreshTradeItemOperations(tradeItemOperationUuidMap);
-                                    }
-                                });
-                            }
-                        }
-                        tradeItemOperationCount = tradeItemOperations.size();
-                    } catch (Exception e) {
-                        Log.e(TAG, e.getMessage(), e);
-                    }*/
                 }
             }
         }
@@ -782,13 +667,10 @@ public class BeautyTradeInfoFragment extends BasicFragment {
     }
 
 
-    /**
-     * 点选一项后改变全选按钮的选中状态
-     */
+
     private void chnageCheckAllText() {
         EventChoice eventChoice = new EventChoice();
         eventChoice.setCount(getString(R.string.dinner_orderdish_dishcheck_number, String.valueOf(selectedDishAdapter.getCheckedNumber())));
-//        eventChoice.setCheckAll(selectedDishAdapter.isCheckedAll());
         EventBus.getDefault().post(eventChoice);
     }
 

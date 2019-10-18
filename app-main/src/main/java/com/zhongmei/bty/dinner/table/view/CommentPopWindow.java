@@ -18,18 +18,10 @@ import android.widget.PopupWindow;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.util.DensityUtil;
 
-/**
- * @Date：2015-9-9
- * @Description:用户列表弹出框
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class CommentPopWindow extends PopupWindow implements View.OnTouchListener, TextWatcher {
-    private EditText contentEditText;// 输入内容
-
-    private CommentsView commentsView;// 备注控件
-
+    private EditText contentEditText;
+    private CommentsView commentsView;
     private View parentView;
 
     private Activity activity;
@@ -60,8 +52,7 @@ public class CommentPopWindow extends PopupWindow implements View.OnTouchListene
         contentEditText.addTextChangedListener(this);
 
         commentsView = (CommentsView) view.findViewById(R.id.commentsview);
-        commentsView.setItemClickListener(itemClickListener);// 评论点击添加
-        commentsView.setAdatper(commentsList);
+        commentsView.setItemClickListener(itemClickListener);        commentsView.setAdatper(commentsList);
         commentsView.initialView(activity, DensityUtil.dip2px(activity, 300));
 
         setTouchable(true);
@@ -138,7 +129,6 @@ public class CommentPopWindow extends PopupWindow implements View.OnTouchListene
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-        // TODO Auto-generated method stub
 
     }
 

@@ -13,28 +13,20 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.EcCardInfo;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 
-/**
- * 余额、积分、优惠券、充值页面
- */
+
 @EActivity(R.layout.customer_balance_charging_layout)
 public class BeautyCustomerChargingBalanceActivity extends MainBaseActivity {
 
     public final static String KEY_CUSTOMER = "key_customer";
 
     private BeautyCustomerBalanceFragment customerBalanceFragment;
-//	private CustomerChargingFragment customerChargingFragment;
-//	public int whereFrom=FROM_MEMBER_CUSTOMER;
-//	public  static  final int FROM_MEMBER_PAY=0;//来自支付界面
-//	public  static final  int FROM_MEMBER_CUSTOMER=1;//来自顾客界面
 
     @AfterViews
     void initView() {
         FragmentManager fragmentManager = this.getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         customerBalanceFragment = new BeautyCustomerBalanceFragment_();
-//		customerChargingFragment = new CustomerChargingFragment_();
         fragmentTransaction.replace(R.id.customer_charging_left, customerBalanceFragment);
-//		fragmentTransaction.replace(R.id.customer_charging_right, customerChargingFragment);
         fragmentTransaction.commit();
         loadData();
 
@@ -42,9 +34,7 @@ public class BeautyCustomerChargingBalanceActivity extends MainBaseActivity {
 
     private void loadData() {
         Bundle bundle = this.getIntent().getExtras();
-//		whereFrom = bundle.getInt("whereFrom");
-        String customerId = bundle.getString("customerId");// 会员id
-        final int type = bundle.getInt("type");
+        String customerId = bundle.getString("customerId");        final int type = bundle.getInt("type");
         final String integarl = bundle.getString("integral");
         final String balance = bundle.getString("balance");
         final EcCardInfo ecCard = (EcCardInfo) bundle.getSerializable("ecCard");
@@ -54,6 +44,5 @@ public class BeautyCustomerChargingBalanceActivity extends MainBaseActivity {
 
     private void bindFragemnt(CustomerResp customer, int type, String integarl, EcCardInfo ecCard, String balance) {
         customerBalanceFragment.bindData(customer, type, integarl, ecCard);
-//		customerChargingFragment.bindData(whereFrom,customer, balance,ecCard);
     }
 }

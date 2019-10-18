@@ -23,22 +23,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class InventoryUtils {
 
-    /**
-     * 获取菜品库存数据（包含退回和扣减）
-     *
-     * @param inventoryVo
-     * @return
-     */
+
     public static InventoryChangeReq makeInventoryChangeReq(InventoryVo inventoryVo) {
-        /*if(inventoryVo == null){
-            return null;
-        }*/
+
         InventoryChangeReq inventoryChangeReq = new InventoryChangeReq();
         inventoryChangeReq.setReturnInventoryItems(getReturnInventoryItemReq(inventoryVo));
         inventoryChangeReq.setDeductInventoryItems(getDeductInventoryItems(inventoryVo));
@@ -46,12 +37,7 @@ public class InventoryUtils {
         return inventoryChangeReq;
     }
 
-    /**
-     * 库存退回数据
-     *
-     * @param inventoryVo
-     * @return
-     */
+
     private static List<InventoryItemReq> getReturnInventoryItemReq(InventoryVo inventoryVo) {
         if (inventoryVo != null) {
             if (inventoryVo.getReturnInventoryItemMap() != null &&
@@ -92,12 +78,7 @@ public class InventoryUtils {
         return null;
     }
 
-    /**
-     * 库存扣减数据
-     *
-     * @param inventoryVo
-     * @return
-     */
+
     private static List<InventoryItemReq> getDeductInventoryItems(InventoryVo inventoryVo) {
         if (inventoryVo != null) {
             if (Utils.isNotEmpty(inventoryVo.getNewAddDishList())) {
@@ -122,12 +103,7 @@ public class InventoryUtils {
         return null;
     }
 
-    /**
-     * 构建退库存请求
-     *
-     * @param inventoryItemList
-     * @return
-     */
+
     public static List<InventoryItemReq> buildInventoryItemReqs(List<InventoryItem> inventoryItemList) {
         if (Utils.isEmpty(inventoryItemList)) {
             return null;
@@ -148,14 +124,11 @@ public class InventoryUtils {
                 for (TradeItem childTradeItem : inventoryItem.getChildTradeItem()) {
                     InventoryItemReq inventoryItemReqChild = new InventoryItemReq();
                     inventoryItemReqChild.setPrice(childTradeItem.getPrice());
-                    //套餐按比例计算退库存数
-                    BigDecimal total = inventoryItem.getReturnInventoryNum()
+                                        BigDecimal total = inventoryItem.getReturnInventoryNum()
                             .multiply(childTradeItem.getQuantity());
                     BigDecimal quantity = MathDecimal.div(total, inventoryItem.getMaxInventoryNum());
-                    //退库存数量
-                    inventoryItemReqChild.setQuantity(quantity);
-                    //退货数量
-                    inventoryItemReqChild.setReturnQuantity(childTradeItem.getQuantity());
+                                        inventoryItemReqChild.setQuantity(quantity);
+                                        inventoryItemReqChild.setReturnQuantity(childTradeItem.getQuantity());
                     inventoryItemReqChild.setAmount(childTradeItem.getPrice().multiply(inventoryItemReq.getQuantity()));
                     inventoryItemReqChild.setSkuName(childTradeItem.getDishName());
                     inventoryItemReqChild.setSkuUuid(childTradeItem.getSkuUuid());
@@ -167,34 +140,11 @@ public class InventoryUtils {
         return inventoryItemReqs;
     }
 
-    /***
-     * 单菜品操作
-     * 将已生效的DishDataItem转换成InventoryItem
-     * @param dishDataItem
-     * @return
-     */
+
     public static InventoryItem transformInventoryItem(DishDataItem dishDataItem, BigDecimal returnCount) {
         InventoryItem inventoryItem = null;
         if (dishDataItem == null) return null;
         TradeItem tradeItem = ((ReadonlyShopcartItem) dishDataItem.getBase()).tradeItem;
-//        if(tradeItem.getSaleType() == SaleType.WEIGHING){
-//            inventoryItem = new InventoryItem(tradeItem);
-//        }else {
-//            if(TextUtils.isEmpty(dishDataItem.getBase().getBatchNo()) || dishDataItem.getBase().getShopcartItemType() == ShopcartItemType.MAINBATCH){
-//                inventoryItem = new InventoryItem(tradeItem);
-//            }else {
-//                inventoryItem = new InventoryItem(tradeItem,
-//                        returnCount,InventoryItem.TAG_INVENTORY_NUM);
-//            }
-//            if(tradeItem.getType() == DishType.COMBO){
-//                inventoryItem.setDishQuantity(((ReadonlyShopcartItem)dishDataItem.getBase()).tradeItem.getQuantity());
-//                List<TradeItem> childTradeItem = new ArrayList<>();
-//                for (ReadonlySetmealShopcartItem item:((ReadonlyShopcartItem)dishDataItem.getBase()).getSetmealItems()) {
-//                    childTradeItem.add(item.tradeItem);
-//                }
-//                inventoryItem.setChildTradeItem(childTradeItem);
-//            }
-//        }
         inventoryItem = new InventoryItem(tradeItem, returnCount, InventoryItem.TAG_INVENTORY_NUM);
         if (tradeItem.getType() == DishType.COMBO) {
             inventoryItem.setDishQuantity(((ReadonlyShopcartItem) dishDataItem.getBase()).tradeItem.getQuantity());
@@ -210,11 +160,7 @@ public class InventoryUtils {
         return inventoryItem;
     }
 
-    /**
-     * 批量菜品操作
-     *
-     * @return
-     */
+
     public static List<InventoryItem> transformInventoryItemList(List<DishDataItem> dishDataItemList) {
         if (Utils.isEmpty(dishDataItemList)) return null;
         List<InventoryItem> inventoryItemList = new ArrayList<>();
@@ -235,12 +181,7 @@ public class InventoryUtils {
         return inventoryItemList;
     }
 
-    /**
-     * 用于联台功能的拆单，将TradeItem转换成InventoryItemReq
-     *
-     * @param tradeItems
-     * @return
-     */
+
     public static List<InventoryItemReq> getInventoryItemReqList(List<TradeItem> tradeItems) {
         if (Utils.isNotEmpty(tradeItems)) {
             List<InventoryItemReq> inventoryItemReqList = new ArrayList<>();
@@ -264,7 +205,6 @@ public class InventoryUtils {
         List<TradeItem> newAddDishList = new ArrayList<>();
         Map<String, TradeItemVo> tradeItemMap = new HashMap<String, TradeItemVo>();
         if (tradeVo != null && Utils.isNotEmpty(tradeVo.getTradeItemList())) {
-            // 把tradeitemvo存在一个map中，查找关联菜品
 
             for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
                 tradeItemMap.put(tradeItemVo.getTradeItem().getUuid(), tradeItemVo);
@@ -274,8 +214,7 @@ public class InventoryUtils {
                 String relateTradeItemUuid = tradeItemVo.getTradeItem().getRelateTradeItemUuid();
 
                 if (tradeItemVo.getTradeItem().getId() == null) {
-                    if (TextUtils.isEmpty(relateTradeItemUuid)) {//新点的菜
-                        newAddDishList.add(tradeItemVo.getTradeItem());
+                    if (TextUtils.isEmpty(relateTradeItemUuid)) {                        newAddDishList.add(tradeItemVo.getTradeItem());
                     } else {
                         if (tradeItemMap.containsKey(relateTradeItemUuid)) {
                             TradeItemVo relateTradeItemVo = tradeItemMap.get(relateTradeItemUuid);

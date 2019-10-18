@@ -11,9 +11,7 @@ import com.zhongmei.yunfu.db.entity.trade.Tables;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 接收数据
- */
+
 public class BookingAndTableReq {
 
     public Long bookingId;

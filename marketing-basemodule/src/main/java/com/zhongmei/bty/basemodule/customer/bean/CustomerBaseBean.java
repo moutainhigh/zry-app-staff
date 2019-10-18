@@ -1,8 +1,7 @@
 package com.zhongmei.bty.basemodule.customer.bean;
 
 public class CustomerBaseBean {
-    //private String _id;
-    private String uuid;
+        private String uuid;
     private String id;
     private String name;
     private String localCreateDateTime;
@@ -34,12 +33,8 @@ public class CustomerBaseBean {
         this.uuid = uuid;
     }
 
-    /*public String get_id() {
-        return _id;
-    }*/
-	/*public void set_id(String _id) {
-		this._id = _id;
-	}*/
+
+
     public String getLocalCreateDateTime() {
         return localCreateDateTime;
     }

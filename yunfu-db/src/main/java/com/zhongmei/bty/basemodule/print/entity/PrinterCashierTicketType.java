@@ -13,16 +13,12 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.UuidEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * PrinterCashierTicket is a ORMLite bean type. Corresponds to the database table "cashier_ticket_document_type"
- */
+
 @DatabaseTable(tableName = "printer_cashier_ticket_type")
 public class PrinterCashierTicketType extends UuidEntityBase implements ICreator, IUpdator {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "printer_cashier_ticket_type"
-     */
+
     public interface $ extends UuidEntityBase.$ {
         public static final String statusFlag = "status_flag";
         public static final String brandIdenty = "brand_identy";
@@ -105,8 +101,7 @@ public class PrinterCashierTicketType extends UuidEntityBase implements ICreator
     @DatabaseField(columnName = "combo_show_way")
     private Integer comboShowWay;
 
-    //一菜一纸是否同一张票据打印打印所有子菜 1:在不同的票据上打印套餐子菜（默认）;2:在同一票据上打印套餐子菜
-    @DatabaseField(columnName = "is_print_all_subdish")
+        @DatabaseField(columnName = "is_print_all_subdish")
     private Integer isPrintAllSubdish;
 
 

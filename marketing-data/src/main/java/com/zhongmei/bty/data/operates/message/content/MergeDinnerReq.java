@@ -11,10 +11,7 @@ import com.zhongmei.yunfu.db.entity.discount.TradePrivilege;
 import com.zhongmei.yunfu.db.entity.trade.TradeReasonRel;
 import com.zhongmei.yunfu.db.entity.trade.TradeTable;
 
-/**
- * @version: 1.0
- * @date 2015年9月25日
- */
+
 public class MergeDinnerReq {
 
     private Long updatorId;
@@ -110,9 +107,7 @@ public class MergeDinnerReq {
     }
 
     public static class OperationRelation {
-        private Long srcTradeItemOperationId;//原单菜品操作记录
-        private String tgtTradeItemUuid;//合单时目标订单对应菜品的uuid
-
+        private Long srcTradeItemOperationId;        private String tgtTradeItemUuid;
         public OperationRelation(Long srcTradeItemOperationId, String tgtTradeItemUuid) {
             this.srcTradeItemOperationId = srcTradeItemOperationId;
             this.tgtTradeItemUuid = tgtTradeItemUuid;

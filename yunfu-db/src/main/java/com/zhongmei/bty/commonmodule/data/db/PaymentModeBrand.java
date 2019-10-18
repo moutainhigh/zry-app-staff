@@ -8,39 +8,10 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = PaymentModeBrand.$.TABLE_NAME)
 public class PaymentModeBrand extends IdEntityBase {
 
-//    CREATE TABLE `payment_mode_brand` (
-//            `id` bigint(20) NOT NULL AUTO_INCREMENT,
-//  `erp_mode_id` bigint(20) DEFAULT NULL COMMENT 'erp支付方式ID',
-//            `name` varchar(100) NOT NULL COMMENT '支付方式名称',
-//            `alias_name` varchar(100) DEFAULT NULL COMMENT '支付方式别名',
-//            `face_value` decimal(10,2) DEFAULT NULL COMMENT '面额',
-//            `actual_value` decimal(10,2) DEFAULT NULL COMMENT '实收',ø
-//            `payment_mode_type` tinyint(4) NOT NULL COMMENT '支付类型',
-//            `is_change` tinyint(4) NOT NULL COMMENT '是否找零:2为否，1为是',
-//            `is_discount` tinyint(4) NOT NULL COMMENT '是否打折:2为否，1为是',
-//            `sort` int(11) DEFAULT NULL COMMENT '排序',
-//            `brand_identy` bigint(20) NOT NULL COMMENT '品牌ID',
-//            `is_invoice` tinyint(4) NOT NULL COMMENT '是否发票:2为否，1为是',
-//            `is_refund` tinyint(4) NOT NULL COMMENT '是否退款:2为否，1为是',
-//            `is_cure` tinyint(4) DEFAULT NULL COMMENT '是否被固化:2为否，1为是',
-//            `enabled_flag` tinyint(4) NOT NULL COMMENT '启用停用标示:2为停用，1为启用',
-//            `status_flag` tinyint(4) NOT NULL COMMENT '删除标示:2为停用，1为启用',
-//            `server_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-//            `server_update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '服务器更新时间',
-//            `creator_name` varchar(32) DEFAULT NULL COMMENT '创建用户名',
-//            `creator_id` bigint(20) DEFAULT NULL COMMENT '创建人ID',
-//            `updator_name` varchar(32) DEFAULT NULL COMMENT '修改人名',
-//            `updator_id` bigint(20) DEFAULT NULL COMMENT '修改人ID',
-//            `is_settlement` tinyint(4) NOT NULL DEFAULT '2' COMMENT '是否结算 1：是；2：否',
-//    PRIMARY KEY (`id`),
-//    KEY `idx_brand_identy` (`brand_identy`)
-//            ) ENGINE=InnoDB AUTO_INCREMENT=93728611793656833 DEFAULT CHARSET=utf8
 
     public interface $ extends IdEntityBase.$ {
         String TABLE_NAME = "payment_mode_brand";

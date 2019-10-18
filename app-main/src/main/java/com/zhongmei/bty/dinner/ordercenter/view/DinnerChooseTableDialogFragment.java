@@ -48,9 +48,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.dinner_choose_table_dialog_fragment)
 public class DinnerChooseTableDialogFragment extends BasicDialogFragment {
 
@@ -147,8 +145,7 @@ public class DinnerChooseTableDialogFragment extends BasicDialogFragment {
             if (Utils.isNotEmpty(tablesList) && Utils.isNotEmpty(areasList)) {
                 for (Tables tables : tablesList) {
                     if (tables.getTableStatus() == TableStatus.DONE || tables.getTableStatus() == TableStatus.LOCKING) {
-                        // 空闲桌台保留
-                        continue;
+                                                continue;
                     } else if (tables.getTableStatus() == TableStatus.OCCUPIED && !allowMultTrades) {
                         continue;
                     }

@@ -45,27 +45,17 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 封装view,左侧工具栏
- * <p>
- * 需要结合
- *
- * @see BusinessMainActivity 一起使用
- * <p>
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.dinner_left_menu)
 public class DinnerLeftMenuView extends LinearLayout implements VerifyPermissionsDialogFragment.PermissionVerify {
 
     @ViewById(R.id.dinner_left_login_name)
     protected TextView tv_loginName;
 
-    // 通知按钮上的小红点
-    @ViewById(R.id.view_notify_tip)
+        @ViewById(R.id.view_notify_tip)
     protected TextView viewNotifyCenterTip;
 
-    // 通知上的其他数
-    @ViewById(R.id.view_notify_tip_other)
+        @ViewById(R.id.view_notify_tip_other)
     protected TextView viewNotifyCenterOtherTip;
 
     @ViewById(R.id.dinner_bar_menu_btn)
@@ -89,8 +79,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
     @ViewById(R.id.rlDinner_Group)
     protected RelativeLayout mGroup;
 
-    // 顾客到店通知
-    @ViewById(R.id.ll_customer)
+        @ViewById(R.id.ll_customer)
     protected LinearLayout llCustomer;
 
     @ViewById(R.id.fl_customer)
@@ -98,13 +87,11 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
 
     @ViewById(R.id.btn_switch_lang)
     protected ToggleButton mBtnSwitchLanguage;
-    //滚动提示view
-    private LinearLayout customerAlterView;
+        private LinearLayout customerAlterView;
     private Animation animation;
     @ViewById(R.id.view_notify_customer)
     protected TextView tvNotifyCustomer;
-    //private ArriveCustomerListFragment customerListFragment;
-    protected BusinessMainActivity mBusinessMainActivity;
+        protected BusinessMainActivity mBusinessMainActivity;
     private boolean isGoinRemind;
     private EntranceType mEntranceType = EntranceType.DINNER;
 
@@ -146,11 +133,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
         setLoginName();
     }
 
-    /**
-     * 设置业务类型
-     *
-     * @param mEntranceType
-     */
+
     public void setEntranceType(EntranceType mEntranceType) {
         this.mEntranceType = mEntranceType;
     }
@@ -165,19 +148,13 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
         if (!this.isInEditMode()) {
             setLoginName();
         }
-        //add 20170817 begin
-        //是否开启顾客到店提醒
-        isGoinRemind = SpHelper.getDefault().getBoolean(SpHelper.CUSTOMER_GOIN_REMIND);
+                        isGoinRemind = SpHelper.getDefault().getBoolean(SpHelper.CUSTOMER_GOIN_REMIND);
         if (isGoinRemind && mEntranceType == EntranceType.DINNER && llCustomer != null) {
             llCustomer.setVisibility(View.VISIBLE);
             llCustomer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*if (customerListFragment == null || !customerListFragment.isVisible()) {
-                        hideCustomerArriveDot();
-                        customerListFragment = ArriveCustomerListFragment_.builder().build();
-                        customerListFragment.show(mBusinessMainActivity.getSupportFragmentManager(), ArriveCustomerListFragment.class.getSimpleName());
-                    }*/
+
                 }
             });
         }
@@ -218,12 +195,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
         customerAlterView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //关闭灯光提示
-                //LedControl.getInstance().setLed(LedControl.Event.CUSTOMER_ARRIVE, false);
-                //显示顾客详情
-                //ArriveCustomerDialogFragment dialogFragment = ArriveCustomerDialogFragment.getNewInstance(customer, mNoticeListener);
-                //dialogFragment.show(mBusinessMainActivity.getSupportFragmentManager(), ArriveCustomerDialogFragment.class.getSimpleName());
-            }
+                                                                                            }
         });
         flCustomer.addView(customerAlterView);
     }
@@ -243,23 +215,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
         }
     }
 
-    /*public void onEventMainThread(CustomerArriveEvent event) {
-        if (mEntranceType == EntranceType.DINNER) {
-            //开启灯光提示
-            LedControl.getInstance().setLed(LedControl.Event.CUSTOMER_ARRIVE, true);
-            //语音提示
-            CustomerNoticeHelper.callCustomerArrive(getContext(), event.getCustomerArrivalShop());
-            //如果开启了顾客到店滚动显示
-            if (CustomerNoticeHelper.isOpenCustomerNotice()) {
-                CustomerArrivalShop currentCustomer = event.getCustomerArrivalShop();
-                if (customerAlterView == null) {
-                    showCustomerAlterView(getContext(), currentCustomer);
-                }
-            } else {
-                showCustomerArriveDot();
-            }
-        }
-    }*/
+
 
     @Override
     protected void onAttachedToWindow() {
@@ -267,8 +223,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
         }
-        //如果开启了顾客到店滚动显示
-        if (isGoinRemind) {
+                if (isGoinRemind) {
             if (mEntranceType == EntranceType.DINNER && CustomerNoticeHelper.isOpenCustomerNotice()) {
                 asyncFindData();
             } else {
@@ -298,9 +253,7 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
         super.onDetachedFromWindow();
     }
 
-    //add 20170817 end
-    // 设置桌台界面的登录名
-    private void setLoginName() {
+            private void setLoginName() {
         if (Session.getAuthUser() == null) {
             tv_loginName.setText(R.string.unlogin);
             Drawable unLoginDrawable = getResources().getDrawable(R.drawable.dinner_unlogin_icon);
@@ -353,18 +306,14 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
                 clickBombBox();
                 break;
             case R.id.dinner_queue:
-                //NotifyCenterUtil.showQueueTradeCenter(null, mBusinessMainActivity, mEntranceType);
-                break;
+                                break;
             case R.id.dinner_booking:
-                //NotifyCenterUtil.showBookingTradeCenter(null, mBusinessMainActivity, mEntranceType);
-                break;
+                                break;
             case R.id.dinner_group:
-                //NotifyCenterUtil.showGroupTradeCenter(null, mBusinessMainActivity, mEntranceType);
-                mBusinessMainActivity.finish();
+                                mBusinessMainActivity.finish();
                 break;
             case R.id.dinner_dinner:
-                //NotifyCenterUtil.showDinnerTradeCenter(null, mBusinessMainActivity, mEntranceType);
-                mBusinessMainActivity.finish();
+                                mBusinessMainActivity.finish();
                 break;
             case R.id.dinner_left_login_name:
                 showQuietDialog();
@@ -380,15 +329,11 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
                     @Override
                     public void onPositive(User user, String code, Auth.Filter filter) {
                         super.onPositive(user, code, filter);
-                        //PRTPrintContentQueue.getCommonPrintQueue().openMoneyBox(null);
-                        //IPrintHelper.Holder.getInstance().openMoneyBox();
-                    }
+                                                                    }
                 });
     }
 
-    /**
-     * 显示退出确认对话框
-     */
+
     private void showQuietDialog() {
         CommonDialogFragment.CommonDialogFragmentBuilder builder = new CommonDialogFragment.CommonDialogFragmentBuilder(BaseApplication.sInstance);
         builder.iconType(CommonDialogFragment.ICON_WARNING)
@@ -411,29 +356,14 @@ public class DinnerLeftMenuView extends LinearLayout implements VerifyPermission
         fragment.show(mBusinessMainActivity.getSupportFragmentManager(), "quiet_dialog");
     }
 
-    /**
-     * 跳转到登录界面
-     *
-     * @Title: showLogin
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void showLogin() {
-        /*Session.unbind();
-        Intent intent = new Intent();
-        intent.setClass(mBusinessMainActivity, LoginActivity_.class);
-        intent.putExtra("isDialogMode", true);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        mBusinessMainActivity.startActivity(intent);*/
-        //LoginActivity.logoutDialog(mBusinessMainActivity);
-    }
+
+            }
 
     @Override
     public void verify(String permission, boolean success) {
         if (success) {
-            //PRTPrintContentQueue.getCommonPrintQueue().openMoneyBox(null);
-            //IPrintHelper.Holder.getInstance().openMoneyBox();
-        }
+                                }
     }
 }

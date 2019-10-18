@@ -9,62 +9,40 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.yunfu.db.enums.PropertyKind;
 
-/**
- * DishPropertyType is a ORMLite bean type. Corresponds to the database table "dish_property_type"
- */
+
 @DatabaseTable(tableName = "dish_property_type")
 public class DishPropertyType extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "dish_property_type"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * alias_name
-         */
+
         public static final String aliasName = "alias_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * enabled_flag
-         */
+
         public static final String enabledFlag = "enabled_flag";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * property_kind
-         */
+
         public static final String propertyKind = "property_kind";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

@@ -14,9 +14,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-/**
- * 充值金额面板
- */
+
 public class ChargeMoneyAdapter extends BaseAdapter {
 
     private List<ChargeMoneyVo> chargeMoneyList;
@@ -71,8 +69,7 @@ public class ChargeMoneyAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        TextView chargeMoney;// 队列名称
-
+        TextView chargeMoney;
     }
 
 }

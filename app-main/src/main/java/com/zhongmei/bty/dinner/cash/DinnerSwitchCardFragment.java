@@ -56,14 +56,7 @@ import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 正餐切换实体卡登录界面
- *
- * @Date：2016-5-19 上午10:56:01
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @EFragment(R.layout.fragment_dinner_switch_card)
 public class DinnerSwitchCardFragment extends BasicFragment {
 
@@ -114,8 +107,7 @@ public class DinnerSwitchCardFragment extends BasicFragment {
     void click(View v) {
         switch (v.getId()) {
             case R.id.iv_back:
-                // 返回到items界面
-                EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
+                                EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
                 break;
             case R.id.btn_exit_customer:
                 DinnerShopManager.getInstance().setLoginCustomer(null);
@@ -128,53 +120,40 @@ public class DinnerSwitchCardFragment extends BasicFragment {
 
                 DisplayServiceManager.doCancel(getActivity());
 
-                // 返回到items界面
-                EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
+                                EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
                 break;
         }
     }
 
     @ItemClick(R.id.lv_cards)
     void itemClick(int position) {
-        //切换虚拟会员
-        if (position == 0) {
+                if (position == 0) {
             CustomerResp customer = DinnerShopManager.getInstance().getLoginCustomer();
             if (customer == null) {
                 return;
             }
 
-            //如果当前登录的就是虚拟会员，直接返回结算优惠主界面
-            if (customer.card == null) {
+                        if (customer.card == null) {
                 EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
                 return;
             }
 
             String inputNo = customer.mobile;
             loginByPhoneNo(inputNo);
-            //切换实体卡
-        } else {
+                    } else {
             String cardNo = cards.get(position).getCardNum();
             CustomerResp customer = DinnerShopManager.getInstance().getLoginCustomer();
-            //要切换的实体卡，就是当前登录的实体卡，直接返回
-            if (customer != null && customer.card != null && TextUtils.equals(customer.card.getCardNum(), cardNo)) {
+                        if (customer != null && customer.card != null && TextUtils.equals(customer.card.getCardNum(), cardNo)) {
                 EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
             } else {
-                //loginByCardNo(cardNo);
-                loginByCardNoCheckPwd(customer.mobile, cardNo, getActivity());
+                                loginByCardNoCheckPwd(customer.mobile, cardNo, getActivity());
             }
         }
     }
 
     private void loginByCardNoCheckPwd(final String mobile, final String inputNo, final Context context) {
-        //密码登陆
-        final PasswordDialog dialog;
-		/*DisplayUserInfo dUserInfo =
-				DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-						"",
-						null,
-						0,
-						true, 0);
-		DisplayServiceManager.updateDisplay(context, dUserInfo);*/
+                final PasswordDialog dialog;
+
 
         dialog = new PasswordDialog(context) {
             @Override
@@ -194,12 +173,7 @@ public class DinnerSwitchCardFragment extends BasicFragment {
 
             @Override
             public void showPassWord(String password) {
-				/*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-						password,
-						null,
-						0,
-						false, 0);
-				DisplayServiceManager.updateDisplay(context, dUserInfo);*/
+
             }
 
             @Override
@@ -241,8 +215,7 @@ public class DinnerSwitchCardFragment extends BasicFragment {
                             pwDlg.dismiss();
                         }
                         final CustomerLoginResp resp = response.getContent().getResult();
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                        if (resp.customerIsDisable()) {                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                             return;
                         }
                         loginByCardNo(inputNo);
@@ -273,12 +246,7 @@ public class DinnerSwitchCardFragment extends BasicFragment {
                 mobile, pwd, true, false, true, LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * 使用手机号登录
-     *
-     * @Title: loginByPhoneNo
-     * @Return void 返回类型
-     */
+
     private void loginByPhoneNo(final String inputNo) {
         loginByPhoneNo(inputNo, CustomerManager.NOT_NEED_PSWD, null, null);
     }
@@ -296,8 +264,7 @@ public class DinnerSwitchCardFragment extends BasicFragment {
 
                         CustomerLoginResp resp = response.getContent().getResult();
 
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                        if (resp.customerIsDisable()) {                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                             return;
                         }
 
@@ -308,8 +275,7 @@ public class DinnerSwitchCardFragment extends BasicFragment {
                         customer.queryLevelRightInfos();
                         ToastUtil.showShortToast(R.string.customer_login);
 
-                        EventBus.getDefault().post(new EventReadKeyboard(true, ""));// 发送成功到ReadKeyboardDialogFragment
-
+                        EventBus.getDefault().post(new EventReadKeyboard(true, ""));
                         DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
 
                         new DinnerCashManager().jumpAfterLogin(null, customer, null);
@@ -324,8 +290,7 @@ public class DinnerSwitchCardFragment extends BasicFragment {
                         } else {
                             msg = response.getMessage();
                         }
-                        EventBus.getDefault().post(new EventReadKeyboard(false, msg));// 发送失败到ReadKeyboardDialogFragment
-
+                        EventBus.getDefault().post(new EventReadKeyboard(false, msg));
                         loginFail(response.getMessage());
                     }
                 } catch (Exception e) {
@@ -337,20 +302,14 @@ public class DinnerSwitchCardFragment extends BasicFragment {
             public void onError(VolleyError error) {
                 ToastUtil.showShortToast(error.getMessage());
 
-                EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));// 发送失败到ReadKeyboardDialogFragment
-            }
+                EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));            }
         };
 
         CustomerManager customerManager = CustomerManager.getInstance();
         customerManager.customerLogin(CustomerLoginType.MOBILE, inputNo, pswd, needPswd == 1, false, true, LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * 使用会员卡号登录
-     *
-     * @Title: loginByCardNo
-     * @Return void 返回类型
-     */
+
     private void loginByCardNo(final String inputNo) {
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<LoyaltyMindTransferResp<NewCardLoginResp>> listener =
@@ -360,15 +319,12 @@ public class DinnerSwitchCardFragment extends BasicFragment {
                                                    public void onResponse(ResponseObject<LoyaltyMindTransferResp<NewCardLoginResp>> response) {
                                                        if (ResponseObject.isOk(response)) {
                                                            NewCardLoginResp resp = response.getContent().getData();
-                                                           //1表示loyaty登录成功
-                                                           if (response.getContent().isOk() && resp != null) {
-                                                               // 设置card的名称，从customer中获得
-                                                               EcCard card = resp.getCardInstance();
+                                                                                                                      if (response.getContent().isOk() && resp != null) {
+                                                                                                                              EcCard card = resp.getCardInstance();
                                                                CustomerV5 customerV5 = resp.getCustomerV5();
                                                                card.setName(customerV5.getName());
                                                                card.queryLevelSettingInfo();
-                                                               // 如果valuecard为null时，给一个余额为0的对象，避免切换该界面时总是加载网络获取信息（只有新卡会为null）
-                                                               EcValueCardAccount valueCardAccount = card.getValueCardAccount();
+                                                                                                                              EcValueCardAccount valueCardAccount = card.getValueCardAccount();
                                                                if (valueCardAccount == null) {
                                                                    valueCardAccount = new EcValueCardAccount();
                                                                    valueCardAccount.setRemainValue(0D);
@@ -406,14 +362,7 @@ public class DinnerSwitchCardFragment extends BasicFragment {
     private void loginFail(String message) {
         ToastUtil.showShortToast(message);
 
-        // 副屏显示
-		/*DisplayUserInfo dUserInfo =
-				DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_VALIDATE_USER_FAIL,
-						"",
-						null,
-						0,
-						true,0);
-		DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
     }
 
 }

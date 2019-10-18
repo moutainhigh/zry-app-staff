@@ -27,9 +27,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * The type Common list dialog fragment.
- */
+
 @EFragment(R.layout.common_list_dialog_layout)
 public class CommonListDialogFragment extends BasicDialogFragment implements OnClickListener, OnKeyListener {
 
@@ -46,7 +44,6 @@ public class CommonListDialogFragment extends BasicDialogFragment implements OnC
     @FragmentArg("iconType")
     protected int iconType = ICON_ERROR;
 
-    //protected List<PrinterStausInfo> mprinterStatusInfoList;
 
     public static final int ICON_ERROR = R.drawable.commonmodule_dialog_icon_error;
 
@@ -72,7 +69,6 @@ public class CommonListDialogFragment extends BasicDialogFragment implements OnC
     @ViewById(R.id.listview)
     protected ListView mlistView;
 
-    //protected PrinterStatusAdapter printerStatusAdapter;
 
     private boolean mCancelWithHomeKey = true;
 
@@ -111,10 +107,7 @@ public class CommonListDialogFragment extends BasicDialogFragment implements OnC
             mPositiveButton.setOnClickListener(this);
             mPositiveButton.setVisibility(View.VISIBLE);
         }
-        /*if (mprinterStatusInfoList != null) {
-            printerStatusAdapter = new PrinterStatusAdapter(mprinterStatusInfoList, getActivity().getApplicationContext());
-            mlistView.setAdapter(printerStatusAdapter);
-        }*/
+
 
         if (mNegativeButton.getVisibility() == View.GONE) {
             mPositiveButton.setBackgroundResource(R.drawable.commonmodule_dialog_positive_only);
@@ -137,16 +130,8 @@ public class CommonListDialogFragment extends BasicDialogFragment implements OnC
         mTitle.setText(title);
     }
 
-    /**
-     * 刷新ListView的数据
-     */
-    /*public void refreshListData(List<PrinterStausInfo> printerStatusInfoList) {
-        mprinterStatusInfoList = printerStatusInfoList;
-        if (printerStatusAdapter != null) {
-            printerStatusAdapter.reshDataList(mprinterStatusInfoList);
-        }
 
-    }*/
+
 
 
     public static class CommonListDialogFragmentBuilder {
@@ -157,7 +142,6 @@ public class CommonListDialogFragment extends BasicDialogFragment implements OnC
 
         OnClickListener mpositiveLinstner;
 
-        //private List<PrinterStausInfo> mprinterStatusInfoList;
 
         public CommonListDialogFragmentBuilder() {
             mBundle = new Bundle();
@@ -165,8 +149,7 @@ public class CommonListDialogFragment extends BasicDialogFragment implements OnC
 
         public CommonListDialogFragment build() {
             CommonListDialogFragment fragment = new CommonListDialogFragment_();
-            //fragment.setPrinterStatusInfoList(mprinterStatusInfoList);
-            fragment.setArguments(mBundle);
+                        fragment.setArguments(mBundle);
             if (mNegativeListener != null) {
                 fragment.setNegativeListener(mNegativeListener);
             }
@@ -218,10 +201,7 @@ public class CommonListDialogFragment extends BasicDialogFragment implements OnC
             return this;
         }
 
-        /*public CommonListDialogFragmentBuilder setDataList(List<PrinterStausInfo> printerStausInfoList) {
-            mprinterStatusInfoList = printerStausInfoList;
-            return this;
-        }*/
+
 
     }
 
@@ -255,7 +235,5 @@ public class CommonListDialogFragment extends BasicDialogFragment implements OnC
         return false;
     }
 
-    /*public void setPrinterStatusInfoList(List<PrinterStausInfo> mprinterStatusInfoList) {
-        this.mprinterStatusInfoList = mprinterStatusInfoList;
-    }*/
+
 }

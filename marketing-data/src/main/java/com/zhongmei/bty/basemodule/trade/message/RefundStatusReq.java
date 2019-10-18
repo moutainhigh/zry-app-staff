@@ -7,14 +7,7 @@ import com.zhongmei.yunfu.db.enums.RefundWay;
 import com.zhongmei.yunfu.db.enums.TradePayStatus;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * 修改银联退款状态请求类
- *
- * @Date：2016-2-17 下午4:37:15
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class RefundStatusReq {
 
     private long tradeId;
@@ -35,10 +28,7 @@ public class RefundStatusReq {
                            TradePayStatus tradePayStatus, List<RefundPaymentItem> refundPaymentItems,
                            List<PaymentItemUnionpay> refundPaymentItemUnionpays) {
         this.tradeId = tradeId;
-//		this.updatorId = updatorId;
-//		this.updatorName = updatorName;
         this.serverUpdateTime = serverUpdateTime;
-//		this.tradePayStatus = ValueEnums.toValue(tradePayStatus);
         this.refundPaymentItems = refundPaymentItems;
         this.refundPaymentItemUnionpays = refundPaymentItemUnionpays;
     }

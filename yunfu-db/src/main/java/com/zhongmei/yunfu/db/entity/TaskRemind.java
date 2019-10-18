@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.db.DataEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * Created by dingzb on 2019/6/24.
- */
+
 @DatabaseTable(tableName = "task_remind")
 public class TaskRemind extends DataEntityBase implements ICreator, IUpdator {
 
@@ -40,41 +38,29 @@ public class TaskRemind extends DataEntityBase implements ICreator, IUpdator {
     }
 
     @DatabaseField(columnName = "title")
-    private String title;//任务主题
-
+    private String title;
     @DatabaseField(columnName = "content")
-    private String content;//任务内容
-
+    private String content;
     @DatabaseField(columnName = "remind_time")
-    private Long remindTime;//执行时间
-
+    private Long remindTime;
     @DatabaseField(columnName = "type")
-    private Integer type;//任务类型
-
+    private Integer type;
     @DatabaseField(columnName = "status")
-    private Integer status=1;//任务状态，1 待执行，2，已完成
-
+    private Integer status=1;
     @DatabaseField(columnName = "customer_doc_id")
-    private Long customerDocId;//会员档案id
-
+    private Long customerDocId;
     @DatabaseField(columnName = "task_result")
-    private String taskResult;//任务结论
-
+    private String taskResult;
     @DatabaseField(columnName = "customer_id")
-    private Long customerId;//会员id
-
+    private Long customerId;
     @DatabaseField(columnName = "customer_name")
-    private String customerName; //会员名称
-
+    private String customerName;
     @DatabaseField(columnName = "customer_mobile")
-    private String customerMobile; //会员电话号码
-
+    private String customerMobile;
     @DatabaseField(columnName = "user_id")
-    private Long userId;//任务执行人id
-
+    private Long userId;
     @DatabaseField(columnName = "user_name")
-    private String userName;//任务执行人名称
-
+    private String userName;
 
     public String getTitle() {
         return title;

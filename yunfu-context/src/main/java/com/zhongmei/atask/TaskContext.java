@@ -18,11 +18,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-/**
- * 统一管理AsyncTask绑定Fragment,Activity生命周期
- *
- * @Created by demo on 2018/12/15
- */
+
 public class TaskContext {
 
     private static final String TAG = TaskContext.class.getSimpleName();

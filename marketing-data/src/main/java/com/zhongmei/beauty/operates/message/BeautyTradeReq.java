@@ -19,9 +19,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyTradeReq extends Trade {
 
@@ -38,12 +36,10 @@ public class BeautyTradeReq extends Trade {
     private List<TradeItemPlanActivity> tradeItemPlanActivities;
     private List<TradeItemExtra> tradeItemExtras;
     private List<TradeExtra> tradeExtras;
-    private List<TradeUser> tradeUsers;  //add 20180309 增加多销售员支持
-    private List<TradeTax> tradeTaxs;
+    private List<TradeUser> tradeUsers;      private List<TradeTax> tradeTaxs;
     private List<TradeTable> tradeTables;
 
-    //次卡服务关联表
-    private List<TradePrivilegeLimitNumCard> tradePrivilegeLimitNumCards;
+        private List<TradePrivilegeLimitNumCard> tradePrivilegeLimitNumCards;
 
     private List<TradePrivilegeApplet> tradePrivilegeApplets;
 

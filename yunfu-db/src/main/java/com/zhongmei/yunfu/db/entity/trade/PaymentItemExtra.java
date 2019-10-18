@@ -7,64 +7,42 @@ import com.zhongmei.yunfu.db.enums.PayType;
 import com.zhongmei.yunfu.db.DataEntityBase;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * PaymentItemExtra is a ORMLite bean type. Corresponds to the database table "payment_item_extra"
- */
+
 @DatabaseTable(tableName = "payment_item_extra")
 public class PaymentItemExtra extends DataEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "payment_item_extra"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * buyer_account
-         */
+
         public static final String buyerAccount = "buyer_account";
 
-        /**
-         * pay_callback_time
-         */
+
         public static final String payCallbackTime = "pay_callback_time";
 
-        /**
-         * payment_item_id
-         */
+
         public static final String paymentItemId = "payment_item_id";
 
         public static final String paymentItemUuid = "payment_item_uuid";
 
-        /**
-         * pay_type
-         */
+
         public static final String payType = "pay_type";
 
-        /**
-         * pay_tran_no
-         */
+
         public static final String payTranNo = "pay_tran_no";
 
-        /**
-         * refund_callback_time
-         */
+
         public static final String refundCallbackTime = "refund_callback_time";
 
-        /**
-         * refund_trade_no
-         */
+
         public static final String refundTradeNo = "refund_trade_no";
 
-        /**
-         * seller_account
-         */
+
         public static final String sellerAccount = "seller_account";
 
-        /**
-         * seller_account_type
-         */
+
         public static final String sellerAccountType = "seller_account_type";
 
     }

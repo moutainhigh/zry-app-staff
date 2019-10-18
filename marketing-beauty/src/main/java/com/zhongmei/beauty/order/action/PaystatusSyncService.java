@@ -25,26 +25,17 @@ import com.zhongmei.yunfu.resp.ResponseObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 退货退款支付状态同步
- * 主要流程：pos发起退货成功后，如果paymentItem中有第三方支付，退款结果无法返回，由客户端发起轮训。
- * 一个成功的退货后10s开始轮训，轮训失败后30s后开始轮训，轮训3次失败后，移除轮训队列
- */
+
 
 public class PaystatusSyncService extends Service {
 
-    private final long START_TIME_STAMP = 10 * 1000;//10后开始轮训
-
-    private final long CYCLE_SYNC_TIME_STEP = 30 * 1000;//一次轮训之后的间隔时间
-
-    private final int CYCLE_COUNT = 3;//轮训次数
-
+    private final long START_TIME_STAMP = 10 * 1000;
+    private final long CYCLE_SYNC_TIME_STEP = 30 * 1000;
+    private final int CYCLE_COUNT = 3;
     private HandlerThread handlerThread;
     private WorkHandler mWorkHanlder;
 
-    private List<PayStatusRecord> mRequestQueueList = new ArrayList<>();//轮训队列
-
+    private List<PayStatusRecord> mRequestQueueList = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -71,8 +62,7 @@ public class PaystatusSyncService extends Service {
         if (!TextUtils.isEmpty(url) && tradeId != null && paymentItemId != null) {
             mRequestQueueList.add(new PayStatusRecord(url, tradeId, paymentItemId));
 
-            //如果只有新加的一条记录，需要10s之后开始发起轮训
-            if (mRequestQueueList.size() == 1) {
+                        if (mRequestQueueList.size() == 1) {
                 sendWorkMessage(0, START_TIME_STAMP);
             }
         }
@@ -108,22 +98,18 @@ public class PaystatusSyncService extends Service {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            //网络请求
-            int index = msg.getData().getInt("index", -1);
+                        int index = msg.getData().getInt("index", -1);
 
-            //如果没有了，就返回
-            if (mRequestQueueList != null && mRequestQueueList.size() <= 0) {
+                        if (mRequestQueueList != null && mRequestQueueList.size() <= 0) {
                 return;
             }
 
-            //轮训以前之后，休息30s
-            if (mRequestQueueList != null && mRequestQueueList.size() <= index) {
+                        if (mRequestQueueList != null && mRequestQueueList.size() <= index) {
                 sendWorkMessage(0, CYCLE_SYNC_TIME_STEP);
                 return;
             }
 
-            //发起请求
-            if (index >= 0 && mRequestQueueList.size() > index) {
+                        if (index >= 0 && mRequestQueueList.size() > index) {
                 PayStatusRecord record = mRequestQueueList.get(index);
                 refreshTradePayStatus(index, record.getTradeId(), record.getPaymentItemId());
             }
@@ -150,13 +136,11 @@ public class PaystatusSyncService extends Service {
             public void onResponse(ResponseObject<TradePayStateResp> response) {
                 int curIdx = index;
                 if (ResponseObject.isOk(response) && isReturnSuccess(response.getContent().getPaymentItems())) {
-                    //请求下一个，移除当前这个
-                    if (mRequestQueueList != null && mRequestQueueList.size() > index) {
+                                        if (mRequestQueueList != null && mRequestQueueList.size() > index) {
                         mRequestQueueList.remove(index);
                     }
                 } else {
-                    //当前的+1
-                    if (mRequestQueueList != null && mRequestQueueList.size() > index) {
+                                        if (mRequestQueueList != null && mRequestQueueList.size() > index) {
                         PayStatusRecord record = mRequestQueueList.get(index);
                         record.setTryCount(record.getTryCount() + 1);
                         curIdx++;

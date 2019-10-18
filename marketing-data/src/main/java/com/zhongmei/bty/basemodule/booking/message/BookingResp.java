@@ -18,9 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 接收数据
- */
+
 public class BookingResp {
     private Booking booking;
 
@@ -104,11 +102,7 @@ public class BookingResp {
         this.booking = booking;
     }
 
-    /**
-     * 请求构建bookingvo
-     *
-     * @return
-     */
+
     public BookingVo getBookingVo() {
         if (mBookingVo == null) {
             mBookingVo = new BookingVo();
@@ -127,8 +121,7 @@ public class BookingResp {
         }
         Map<String, BookingTradeItemVo> bookingTradeItemVoMap = new HashMap<>();
         for (BookingTradeItem bTradeItem : bookingTradeItem) {
-            //设置餐标外壳
-            if (bTradeItem.getType() == DishType.MEAL_SHELL) {
+                        if (bTradeItem.getType() == DishType.MEAL_SHELL) {
                 BookingMealShellVo bookingMealShellVo = new BookingMealShellVo();
                 bookingMealShellVo.setBookingTradeItem(bTradeItem);
                 mBookingVo.setMealShellVo(bookingMealShellVo);

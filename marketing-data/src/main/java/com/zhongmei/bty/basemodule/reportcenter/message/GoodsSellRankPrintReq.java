@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.reportcenter.message;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class GoodsSellRankPrintReq {
     private String startDate;
     private String endDate;
@@ -14,13 +12,9 @@ public class GoodsSellRankPrintReq {
     private Integer limitNo;
     private Long majorCategoryId;
     private Long categoryId;
-    private Long cashierTicketId; //收银点id,所有收银点传入null,没有收银点传入－1
-    private Long shopId;
+    private Long cashierTicketId;     private Long shopId;
     private Long brandId;
-    private Integer hasContainType; //是否查询中类 1 查询
-    private Integer hasContainMajorType; //是否查询大类 1查询
-    private Integer queryType = 1;//1 营业日  2自然日(默认营业日查询)
-
+    private Integer hasContainType;     private Integer hasContainMajorType;     private Integer queryType = 1;
     public Integer getHasContainType() {
         return hasContainType;
     }

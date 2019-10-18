@@ -6,9 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class SearchTypeItemDivider extends RecyclerView.ItemDecoration {
     private Drawable mDrawable;

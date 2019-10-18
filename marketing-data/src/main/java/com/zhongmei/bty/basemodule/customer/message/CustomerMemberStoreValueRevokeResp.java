@@ -7,11 +7,7 @@ import com.zhongmei.yunfu.db.entity.trade.Trade;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @Date：2016年4月5日
- * @Description:会员储值撤销请求
- * @Version: 1.0
- */
+
 public class CustomerMemberStoreValueRevokeResp {
     private BigDecimal value;
     private BigDecimal remainValue;
@@ -22,8 +18,7 @@ public class CustomerMemberStoreValueRevokeResp {
         List<Payment> payments;
         List<PaymentItem> paymentItems;
 
-        //List<Customer> customers;
-        public List<Trade> getTrades() {
+                public List<Trade> getTrades() {
             return trades;
         }
 
@@ -46,12 +41,7 @@ public class CustomerMemberStoreValueRevokeResp {
         public void setPaymentItems(List<PaymentItem> paymentItems) {
             this.paymentItems = paymentItems;
         }
-		/*public List<Customer> getCustomers() {
-			return customers;
-		}
-		public void setCustomers(List<Customer> customers) {
-			this.customers = customers;
-		}*/
+
 
 
     }

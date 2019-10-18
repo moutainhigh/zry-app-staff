@@ -6,17 +6,12 @@ import com.zhongmei.bty.basemodule.trade.bean.IZone;
 
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年9月20日
- */
+
 public class DinnertableVo {
 
     private final IDinnertable dinnertable;
 
-    /**
-     * 桌台上的所有单据列表
-     */
+
     private List<DinnertableTradeVo> dinnertableTradeVos;
 
     private DinnertableTradeVo unionMainTradeVo;
@@ -47,38 +42,22 @@ public class DinnertableVo {
         this.unionSubTradeVos = unionSubTradeVos;
     }
 
-    /**
-     * 返回桌台ID
-     *
-     * @return
-     */
+
     public Long getTableId() {
         return dinnertable.getId();
     }
 
-    /**
-     * 返回桌台名称
-     *
-     * @return
-     */
+
     public String getTableName() {
         return dinnertable.getName();
     }
 
-    /**
-     * 返回桌台所属区域
-     *
-     * @return
-     */
+
     public IZone getZone() {
         return dinnertable.getZone();
     }
 
-    /**
-     * 返回桌台的座位数
-     *
-     * @return
-     */
+
     public Integer getNumberOfSeats() {
         return dinnertable.getNumberOfSeats();
     }

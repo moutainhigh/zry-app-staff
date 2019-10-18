@@ -2,23 +2,14 @@ package com.zhongmei.bty.basemodule.customer.bean;
 
 import java.io.Serializable;
 
-/**
- * @Date： 2017/3/16
- * @Description:会员常用地址
- * @Version: 1.0
- */
+
 public class MemberAddressNew implements Serializable {
 
-    private Long memberID;//会员memberID
-
-    private String address;//地址内容
-
-    private Integer isDefault;//是否默认送餐地址，1是，0否
-
-    private String areaId;//区域id
-
-    private String street;//街道地址
-
+    private Long memberID;
+    private String address;
+    private Integer isDefault;
+    private String areaId;
+    private String street;
     public Long getMemberID() {
         return memberID;
     }

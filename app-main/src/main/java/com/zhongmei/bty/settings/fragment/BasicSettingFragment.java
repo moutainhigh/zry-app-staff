@@ -21,20 +21,14 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- * 基本功能，菜品打印顺序
- */
+
 
 @EFragment(R.layout.setting_basic_setting)
 public class BasicSettingFragment extends BasicFragment {
     @ViewById(R.id.iv_timer_order)
-    protected ImageView timeImage;//下单时间排序
-    @ViewById(R.id.iv_type_order)
-    protected ImageView typeImage;//中类排序
-    @ViewById(R.id.tb_enable_printer_open_short_name)
-    protected ToggleButton toggleOpenShortName;//开启短名称
-
+    protected ImageView timeImage;    @ViewById(R.id.iv_type_order)
+    protected ImageView typeImage;    @ViewById(R.id.tb_enable_printer_open_short_name)
+    protected ToggleButton toggleOpenShortName;
     private ImageView[] orderImages;
 
     @AfterViews
@@ -56,10 +50,8 @@ public class BasicSettingFragment extends BasicFragment {
         } else {
             changeOrderSelected(0);
         }
-        if (null != customSettingIsOpenShortName && "1".equals(customSettingIsOpenShortName.getSettingValue())) {//开启
-            toggleOpenShortName.setChecked(true);
-        } else {//关闭
-            toggleOpenShortName.setChecked(false);
+        if (null != customSettingIsOpenShortName && "1".equals(customSettingIsOpenShortName.getSettingValue())) {            toggleOpenShortName.setChecked(true);
+        } else {            toggleOpenShortName.setChecked(false);
         }
     }
 
@@ -92,8 +84,7 @@ public class BasicSettingFragment extends BasicFragment {
         }
     }
 
-    //sort：打印顺序  1表示下单时间，2表示中类顺序
-    private void saveSettingConfig(int sort) {
+        private void saveSettingConfig(int sort) {
         SystemSettingDal systemSettingDal = OperatesFactory.create(SystemSettingDal.class);
         systemSettingDal.updatePrintSort(sort, LoadingResponseListener.ensure(new ResponseListener<MindTransferResp<CommercialCustomSettings>>() {
             @Override
@@ -108,8 +99,7 @@ public class BasicSettingFragment extends BasicFragment {
         }, getFragmentManager()));
     }
 
-    //保存是否开启短名称
-    private void saveIsOpenShortName() {
+        private void saveIsOpenShortName() {
         int sort = toggleOpenShortName.isChecked() ? 1 : 2;
 
         SystemSettingDal systemSettingDal = OperatesFactory.create(SystemSettingDal.class);

@@ -3,9 +3,7 @@ package com.zhongmei.bty.data.operates.message.content;
 
 import com.zhongmei.bty.basemodule.trade.message.TradeReq;
 
-/**
- * @date:2015年9月28日下午6:19:53
- */
+
 public class PayDinnerReq {
 
     private TradeReq trade;

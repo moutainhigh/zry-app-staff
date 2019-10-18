@@ -1,11 +1,6 @@
 package com.zhongmei.bty.basemodule.devices.mispos.data.message;
 
-/**
- * 会员登录的请求数据
- *
- * @version: 1.0
- * @date 2015年5月13日
- */
+
 public class CustomerCardStoreValueReq {
     private Integer source;
 

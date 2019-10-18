@@ -4,10 +4,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.enums.TradePayStatus;
 import com.zhongmei.yunfu.db.enums.TradeStatus;
 
-/**
- * Created by demo on 2018/12/15
- * 销账在线支付轮训下行数据
- */
+
 
 public class WriteoffOnlineResultResp {
     private String outTradeNo;

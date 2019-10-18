@@ -38,11 +38,7 @@ import org.androidannotations.annotations.ViewById;
 
 import static android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE;
 
-/**
- * 口碑核销
- *
- * @since 2018.06.09.
- */
+
 @EFragment(R.layout.dialog_verification_koubei)
 public class VerificationDialog extends BasicDialogFragment implements ScanCodeReceivedListener, ImplContext, OnReceiveDataListener {
 
@@ -96,9 +92,7 @@ public class VerificationDialog extends BasicDialogFragment implements ScanCodeR
         DeWoScanCode.getInstance().start();
     }
 
-    /**
-     * 切换扫码
-     */
+
     private void switchScan() {
         mVerificationScan.setVisibility(View.VISIBLE);
         mBarCode.setVisibility(View.VISIBLE);
@@ -107,9 +101,7 @@ public class VerificationDialog extends BasicDialogFragment implements ScanCodeR
         mVerificationResult.setVisibility(View.GONE);
     }
 
-    /**
-     * 切换结果
-     */
+
     private void switchResult(boolean isSuccess) {
         mVerificationScan.setVisibility(View.GONE);
         mBarCode.setVisibility(View.GONE);
@@ -124,9 +116,7 @@ public class VerificationDialog extends BasicDialogFragment implements ScanCodeR
         }
     }
 
-    /**
-     * 请求核销
-     */
+
     private void requestVerify(String code) {
         operates.koubeiVerification(code, LoadingResponseListener.ensure(new ResponseListener<KouBeiVerifyResp>() {
             @Override
@@ -156,9 +146,7 @@ public class VerificationDialog extends BasicDialogFragment implements ScanCodeR
 
     }
 
-    /**
-     * CountDownTimer 实现倒计时
-     */
+
     private CountDownTimer countDownTimer = new CountDownTimer(3 * 1000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -172,17 +160,13 @@ public class VerificationDialog extends BasicDialogFragment implements ScanCodeR
         }
     };
 
-    /**
-     * 德沃扫码枪
-     */
+
     @Override
     public void onReceiveData(String data) {
         requestVerify(data);
     }
 
-    /**
-     * 其他扫码枪
-     */
+
     @Override
     public void onScanCodeReceived(String data) {
         requestVerify(data);

@@ -17,21 +17,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class ActivityUtils {
 
     private ActivityUtils() {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    /**
-     * 判断某个界面是否在前台
-     *
-     * @param context
-     * @param className 某个界面名称
-     */
+
     public static boolean isForeground(Context context, String className) {
         if (context == null || TextUtils.isEmpty(className)) {
             return false;
@@ -49,13 +42,7 @@ public class ActivityUtils {
         return false;
     }
 
-    /**
-     * 判断是否存在Activity
-     *
-     * @param packageName 包名
-     * @param className   activity全路径类名
-     * @return {@code true}: 是<br>{@code false}: 否
-     */
+
     public static boolean isActivityExists(Context context, String packageName, String className) {
         Intent intent = new Intent();
         intent.setClassName(packageName, className);
@@ -64,113 +51,55 @@ public class ActivityUtils {
                 context.getPackageManager().queryIntentActivities(intent, 0).size() == 0);
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param activity activity
-     * @param cls      activity类
-     */
+
     public static void startActivity(Activity activity, Class<?> cls) {
         startActivity(activity, null, activity.getPackageName(), cls.getName(), null);
     }
 
-    /**
-     * 启动activity并且finish
-     */
+
     public static void startActivityAndFinish(Activity activity, Class<?> cls) {
         startActivity(activity, null, activity.getPackageName(), cls.getName(), null);
         activity.finish();
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param extras   extras
-     * @param activity activity
-     * @param cls      activity类
-     */
+
     public static void startActivity(Bundle extras, Activity activity, Class<?> cls) {
         startActivity(activity, extras, activity.getPackageName(), cls.getName(), null);
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param activity  activity
-     * @param cls       activity类
-     * @param enterAnim 入场动画
-     * @param exitAnim  出场动画
-     */
+
     public static void startActivity(Activity activity, Class<?> cls, int enterAnim, int exitAnim) {
         startActivity(activity, null, activity.getPackageName(), cls.getName(), null);
         activity.overridePendingTransition(enterAnim, exitAnim);
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param extras    extras
-     * @param activity  activity
-     * @param cls       activity类
-     * @param enterAnim 入场动画
-     * @param exitAnim  出场动画
-     */
+
     public static void startActivity(Bundle extras, Activity activity, Class<?> cls, int enterAnim, int exitAnim) {
         startActivity(activity, extras, activity.getPackageName(), cls.getName(), null);
         activity.overridePendingTransition(enterAnim, exitAnim);
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param activity activity
-     * @param cls      activity类
-     * @param options  跳转动画
-     */
+
     public static void startActivity(Activity activity, Class<?> cls, Bundle options) {
         startActivity(activity, null, activity.getPackageName(), cls.getName(), options);
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param extras   extras
-     * @param activity activity
-     * @param cls      activity类
-     * @param options  跳转动画
-     */
+
     public static void startActivity(Bundle extras, Activity activity, Class<?> cls, Bundle options) {
         startActivity(activity, extras, activity.getPackageName(), cls.getName(), options);
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param pkg 包名
-     * @param cls 全类名
-     */
+
     public static void startActivity(Context context, String pkg, String cls) {
         startActivity(context, null, pkg, cls, null);
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param extras extras
-     * @param pkg    包名
-     * @param cls    全类名
-     */
+
     public static void startActivity(Context context, Bundle extras, String pkg, String cls) {
         startActivity(context, extras, pkg, cls, extras);
     }
 
-    /**
-     * 启动Activity
-     *
-     * @param pkg     包名
-     * @param cls     全类名
-     * @param options 动画
-     */
+
     public static void startActivity(Context context, String pkg, String cls, Bundle options) {
         startActivity(context, null, pkg, cls, options);
     }
@@ -189,12 +118,7 @@ public class ActivityUtils {
         }
     }
 
-    /**
-     * 获取launcher activity
-     *
-     * @param packageName 包名
-     * @return launcher activity
-     */
+
     public static String getLauncherActivity(Context context, String packageName) {
         Intent intent = new Intent(Intent.ACTION_MAIN, null);
         intent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -210,11 +134,7 @@ public class ActivityUtils {
     }
 
 
-    /**
-     * 获取栈顶Activity
-     *
-     * @return 栈顶Activity
-     */
+
     public static Activity getTopActivity() {
         try {
             Class activityThreadClass = Class.forName("android.app.ActivityThread");

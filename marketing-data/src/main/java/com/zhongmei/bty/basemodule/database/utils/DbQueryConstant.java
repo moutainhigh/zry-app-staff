@@ -61,142 +61,84 @@ public final class DbQueryConstant {
     public static final int DISH_TASTE_QUERY = 104;
 
     public static final int DELIVERY_ALL = 111;
-    /**
-     * 内用
-     */
+
     public static final int DELIVERY_HERE = 112;
-    /**
-     * 外送
-     */
+
     public static final int DELIVERY_SEND = 113;
-    /**
-     * 自提
-     */
+
     public static final int DELIVERY_TAKE = 114;
-    /**
-     * 外带
-     */
+
     public static final int DELIVERY_CARRY = 115;
 
     public static final int REFUND_ALL = 121;
-    /**
-     * 已退货
-     */
+
     public static final int REFUND_RETURNED = 122;
-    /**
-     * 已作废
-     */
+
     public static final int REFUND_INVALID = 123;
-    /**
-     * 已拒绝
-     */
+
     public static final int REFUND_REFUSED = 124;
-    /**
-     * 已取消
-     */
+
     public static final int REFUND_CANCELLED = 125;
 
     public static final int UNPROCESS_ALL = 131;
 
-    /**
-     * 新订单
-     */
+
     public static final int UNPROCESS_NEW_ORDER = 132;
 
-    /**
-     * 取消请求
-     */
+
     public static final int UNPROCESS_CANCEL_REQUEST = 133;
 
-    // 未处理
-    public static final int ALL_UNDEAL__TAKEOUT_ORDER = 110001;
-    // 待配送
-    public static final int ALL_WAIT_DISTRIBUTE__TAKEOUT_ORDER = 110002;
-    // 配送中
-    public static final int ALL_DISTRIBUTING__TAKEOUT_ORDER = 110003;
-    // 配送完成
-    public static final int ALL_DISTRIBUTE_FINISH__TAKEOUT_ORDER = 110004;
+        public static final int ALL_UNDEAL__TAKEOUT_ORDER = 110001;
+        public static final int ALL_WAIT_DISTRIBUTE__TAKEOUT_ORDER = 110002;
+        public static final int ALL_DISTRIBUTING__TAKEOUT_ORDER = 110003;
+        public static final int ALL_DISTRIBUTE_FINISH__TAKEOUT_ORDER = 110004;
 
-    /**
-     * 网络订单
-     */
+
     public static final int ALL_BILLCENTER_NETWORK_ORDER = 12001;
-    /**
-     * 销货单
-     */
+
     public static final int ALL_BILLCENTER_SALES_ORDER = 12002;
-    /**
-     * 退货单
-     */
+
     public static final int ALL_BILLCENTER_RETURNS_ORDER = 12003;
 
-    /**
-     * 调账单
-     */
+
     public static final int ALL_BILLCENTER_ADJUST = 12004;
 
-    /**
-     * 在线支付订单
-     */
+
     public static final int ALL_BILLCENTER_ONLINE = 12005;
 
-    /**
-     * 待处理
-     */
+
     public static final int UNPROCESSED = 200;
 
-    /**
-     * 待处理-全部
-     */
+
     public static final int UNPROCESSED_ALL = 201;
 
-    /**
-     * 待处理-新订单
-     */
+
     public static final int UNPROCESSED_NEW_ORDER = 202;
 
-    /**
-     * 待处理-取消请求
-     */
+
     public static final int UNPROCESSED_CANCEL_REQUEST = 203;
 
-    /**
-     * 待处理-已拒绝/取消
-     */
+
     public static final int UNPROCESSED_INVALID = 204;
 
-    /**
-     * 销货单
-     */
+
     public static final int SALES = 210;
 
-    /**
-     * 销货单-全部
-     */
+
     public static final int SALES_ALL = 211;
 
-    /**
-     * 销货单-未结账
-     */
+
     public static final int SALES_UNPAID = 212;
 
-    /**
-     * 销货单-已结账
-     */
+
     public static final int SALES_PAID = 213;
 
-    /**
-     * 销货单-已退货
-     */
+
     public static final int SALES_REFUNDED = 214;
 
-    /**
-     * 销货单-已作废
-     */
+
     public static final int SALES_INVALID = 215;
 
-    /**
-     * 销货单-支付中
-     */
+
     public static final int SALES_PAYING = 216;
 }

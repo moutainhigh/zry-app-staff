@@ -12,11 +12,7 @@ import android.widget.TextView;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * @Date： 17/3/6
- * @Description:
- * @Version: 1.0
- */
+
 public class DishTwoTypeItemView extends LinearLayout implements Checkable {
 
     private TextView mText;

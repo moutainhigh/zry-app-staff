@@ -10,9 +10,7 @@ import com.zhongmei.yunfu.ui.view.recycler.ViewWrapper;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EBean
 public class TodayReserverAdapter extends RecyclerViewBaseAdapter<BeautyBookingVo, TodayReserverItemView> {
     @RootContext

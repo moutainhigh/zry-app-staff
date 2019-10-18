@@ -3,16 +3,12 @@ package com.zhongmei.bty.basemodule.trade.message;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * 批量查询配送费响应体
- */
+
 
 public class BatchDeliveryFee implements Serializable {
     private Long tradeId;
-    //配送费
-    private BigDecimal fee;
-    //配送费说明
-    private String feeTip;
+        private BigDecimal fee;
+        private String feeTip;
 
     public Long getTradeId() {
         return tradeId;

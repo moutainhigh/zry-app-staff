@@ -39,18 +39,12 @@ import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 点菜管理
- *
- * @version: 1.0
- * @date 2015年7月7日
- */
+
 public class DishManager {
 
     private static final String TAG = DishManager.class.getSimpleName();
 
-    //搜索类型 0=所有   1=首字母  2=价格 3=编码 4=菜名
-    public static final int ALL = 0;
+        public static final int ALL = 0;
 
     public static final int FIRST_LETTER = 1;
 
@@ -63,18 +57,11 @@ public class DishManager {
     public static final int BARCODE = 5;
 
     public DishManager() {
-        initShowValue(loadData().dishTypeList);  //初始化设备选择的中类
-    }
+        initShowValue(loadData().dishTypeList);      }
 
-    /**
-     * 加载数据。将使用通知所有菜品分类列表
-     */
+
     public DishBrandTypes loadData() {
-        /*
-        Collection<DishBrandType> dishTypes = DishCache.getDishTypeHolder().getAll();
-        Log.i(TAG, "dishTypes.size()=" + dishTypes.size());
-        List<DishBrandType> dishTypeList = new ArrayList<DishBrandType>(dishTypes);
-        */
+
         final DishCache.DishHolder dishHolder = DishCache.getDishHolder();
         Collection<DishBrandType> dishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
             @Override
@@ -109,11 +96,7 @@ public class DishManager {
         }
     }
 
-    /**
-     * 获取菜品大类
-     *
-     * @return
-     */
+
     public DishBrandTypes getSupperDishTypes() {
         Collection<DishBrandType> dishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
             @Override
@@ -142,12 +125,7 @@ public class DishManager {
         return dishTypes;
     }
 
-    /**
-     * 获取大类下中类
-     *
-     * @param type
-     * @return
-     */
+
     public DishBrandTypes getSecondDishTypes(final DishBrandType type) {
         Collection<DishBrandType> dishTypes = getSecondBrandTypes(type);
         List<DishBrandType> dishTypeList = new ArrayList<DishBrandType>(dishTypes);
@@ -164,29 +142,11 @@ public class DishManager {
     }
 
 
-    /**
-     * 切换菜品分类。将使用{@link }通知该分类下的菜品列表
-     *
-     * @param dishType
-     */
-    public DishInfo switchType(final DishBrandType dishType) {
-        /*DataFilter<DishShop> filter = new DataFilter<DishShop>() {
 
-			@Override
-			public boolean accept(DishShop entity) {
-				// 排除不能单点的
-				if (entity.getIsSingle() != Bool.YES) {
-					return false;
-				}
-				return dishType.getId().equals(entity.getDishTypeId());
-			}
-			
-		};
-		List<DishShop> dishList = DishCache.getDishHolder().filter(filter);*/
+    public DishInfo switchType(final DishBrandType dishType) {
+
         List<DishShop> dishList = null;
-        //大类下全部菜品
-        if (dishType.getId() == -2L) {//以前是-1，-1现在被服务所占用了
-            Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
+                if (dishType.getId() == -2L) {            Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {
                     return entity.getParentId() != null && entity.getParentId().longValue() == dishType.getParentId().longValue();
@@ -215,15 +175,10 @@ public class DishManager {
         return dishInfo;
     }
 
-    /**
-     * 切换菜品分类。
-     *
-     * @param dishType
-     */
+
     public DishInfo switchType2(final DishBrandType dishType) {
         List<DishShop> dishList = null;
-        //大类下全部菜品
-        if (dishType.getId() == -1L) {
+                if (dishType.getId() == -1L) {
             Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {
@@ -253,15 +208,10 @@ public class DishManager {
         return dishInfo;
     }
 
-    /**
-     * 切换菜品分类。
-     *
-     * @param dishType
-     */
+
     public DishInfo switchType3(final DishBrandType dishType) {
         List<DishShop> dishList = null;
-        //大类下全部菜品
-        if (dishType == null || dishType.getId() == -1L) {
+                if (dishType == null || dishType.getId() == -1L) {
             Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {
@@ -290,16 +240,10 @@ public class DishManager {
         return dishInfo;
     }
 
-    /**
-     * 切换菜品分类。
-     * 不同的规格当成不同的菜，并且过滤称重商品和套餐
-     *
-     * @param dishType
-     */
+
     public DishInfo switchTypeFilter(final DishBrandType dishType) {
         List<DishShop> dishList = null;
-        //大类下全部菜品
-        if (dishType == null || dishType.getId() == -1L) {
+                if (dishType == null || dishType.getId() == -1L) {
             Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {
@@ -328,14 +272,9 @@ public class DishManager {
         return dishInfo;
     }
 
-    /**
-     * 自助获取菜品大类
-     *
-     * @return
-     */
+
     public DishBrandTypes getSupperDishTypes(final boolean single, final String carteUuid) {
-        //final DishCache.DishCarteDetailHolder dishCarteDetailHolder  = DishCache.getDishCarteDetailHolder();
-        Collection<DishBrandType> dishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
+                Collection<DishBrandType> dishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
             @Override
             public boolean accept(DishBrandType entity) {
                 return entity.getParentId() == null && Utils.isNotEmpty(getSecondBrandTypes(single, carteUuid, entity));
@@ -347,12 +286,7 @@ public class DishManager {
         return dishBrandTypes;
     }
 
-    /**
-     * 自助获取大类下中类
-     *
-     * @param type
-     * @return
-     */
+
     public DishBrandTypes getSecondDishTypes(final boolean single, String carteUuid, final DishBrandType type) {
 
         Collection<DishBrandType> dishTypes = getSecondBrandTypes(single, carteUuid, type);
@@ -411,9 +345,7 @@ public class DishManager {
     }
 
 
-    /**
-     * 自助餐菜品数据获取
-     */
+
     public DishInfo buffetSwitchTypes(boolean single, String carteUuid, final DishBrandType dishType) {
         List<DishShop> dishList = null;
         DishCache.DishCarteDetailHolder dishCarteDetailHolder = DishCache.getDishCarteDetailHolder();
@@ -446,16 +378,11 @@ public class DishManager {
         return dishInfo;
     }
 
-    //##########################################################################
-    // 监听数据库中DishShop的变化
 
     private List<DishShop> selectedList;
     private DishCache.OnDataChangeListener onDataChangelistener;
 
-    /**
-     * 注册监听数据库中DishShop的变化(如剩余可售数量)，使用{@link EventDishChangedNotice}通知变化。
-     * 注意！在不用时要调用{@link #unregisterObserver()}取消注册以便回收资源。
-     */
+
     public void registerObserver() {
         if (onDataChangelistener != null) {
             throw new IllegalStateException("Already registered! ");
@@ -492,9 +419,7 @@ public class DishManager {
         DishCache.getDishHolder().addDataChangeListener(onDataChangelistener);
     }
 
-    /**
-     * 取消监听数据库中DishShop的变化
-     */
+
     public void unregisterObserver() {
         if (onDataChangelistener == null) {
             throw new IllegalStateException("Already unregistered! ");
@@ -503,21 +428,15 @@ public class DishManager {
         onDataChangelistener = null;
     }
 
-    //##########################################################################
 
-    /**
-     * 按关键词搜索菜品。将使用{@link }通知符合条件的菜品列表
-     *
-     * @param keyword 搜索的关键词
-     */
+
     public DishInfo search(final String keyword, final int searchType) {
         Checks.verifyNotNull(keyword, "keyword");
         DataFilter<DishShop> filter = new DataFilter<DishShop>() {
 
             @Override
             public boolean accept(DishShop entity) {
-                // 排除不能单点的
-                if (entity.getIsSingle() != Bool.YES) {
+                                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
                 if (entity.getDishCode().equals(DishCache.TEMPDISHCODE)) {
@@ -541,24 +460,18 @@ public class DishManager {
                         }
                         break;
                     case PRICE:
-//                        if (keyword.toUpperCase().equals(MathDecimal.toTrimZeroString(entity.getMarketPrice()))) {
-//                            return true;
-//                        }
 
-                        //update by dzb 为了能够搜索处带小数价格的菜品
-                        Log.e(TAG, entity.getMarketPrice() + "," + toTrimDecimal(entity.getMarketPrice()));
+                                                Log.e(TAG, entity.getMarketPrice() + "," + toTrimDecimal(entity.getMarketPrice()));
                         if (keyword.toUpperCase().equals(toTrimDecimal(entity.getMarketPrice()))) {
                             return true;
                         }
                         break;
-                    case DISHNAME://根据名字查询
-                        if (contains(entity.getName().toUpperCase())) {
+                    case DISHNAME:                        if (contains(entity.getName().toUpperCase())) {
                             return true;
                         }
                         break;
 
-                    case BARCODE://根据条形码模糊查询
-                        if (containStart(entity.getBarcode())) {
+                    case BARCODE:                        if (containStart(entity.getBarcode())) {
                             return true;
                         }
                         break;
@@ -597,17 +510,14 @@ public class DishManager {
         return dishInfo;
     }
 
-    /**
-     * @param keyword 搜索的关键词
-     */
+
     public DishInfo search1(final String keyword, final int searchType) {
         Checks.verifyNotNull(keyword, "keyword");
         DataFilter<DishShop> filter = new DataFilter<DishShop>() {
 
             @Override
             public boolean accept(DishShop entity) {
-                // 排除不能单点的
-                if (entity.getIsSingle() != Bool.YES) {
+                                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
                 if (entity.getDishCode().equals(DishCache.TEMPDISHCODE)) {
@@ -636,14 +546,12 @@ public class DishManager {
                             return true;
                         }
                         break;
-                    case DISHNAME://根据名字查询
-                        if (contains(entity.getName().toUpperCase())) {
+                    case DISHNAME:                        if (contains(entity.getName().toUpperCase())) {
                             return true;
                         }
                         break;
 
-                    case BARCODE://根据条形码模糊查询
-                        if (containStart(entity.getBarcode())) {
+                    case BARCODE:                        if (containStart(entity.getBarcode())) {
                             return true;
                         }
                         break;
@@ -683,9 +591,7 @@ public class DishManager {
     }
 
 
-    /**
-     * @param keyword 搜索的关键词
-     */
+
     public DishInfo search2(final String keyword) {
         Checks.verifyNotNull(keyword, "keyword");
         List<DishShop> temp1 = new ArrayList<>();
@@ -730,12 +636,7 @@ public class DishManager {
                 || (!TextUtils.isEmpty(dishShop.getName()) && dishShop.getName().toUpperCase().startsWith(keyWorkds));
     }
 
-    /**
-     * 去掉小数为，解决不能搜索小数的bug
-     *
-     * @param value
-     * @return
-     */
+
     private String toTrimDecimal(Number value) {
         if (value == null) {
             return "";
@@ -753,8 +654,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                // 排除不能单点的
-                if (entity.getIsSingle() != Bool.YES) {
+                                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
 
@@ -777,8 +677,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                // 排除不能单点的
-                if (entity.getIsSingle() != Bool.YES) {
+                                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
 
@@ -801,8 +700,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                // 排除不能单点的
-                if (entity.getIsSingle() != Bool.YES) {
+                                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
 
@@ -826,8 +724,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                // 排除不能单点的
-                if (entity.getIsSingle() != Bool.YES) {
+                                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
 
@@ -846,19 +743,13 @@ public class DishManager {
         return null;
     }
 
-    /**
-     * 生成DishVo对象
-     *
-     * @param dishList
-     */
+
     public List<DishVo> getDishsVo(List<DishShop> dishList) {
         InventoryCacheUtil inventoryCacheUtil = InventoryCacheUtil.getInstance();
-        boolean inventoryIsOpen = inventoryCacheUtil.getSaleSwitch();//true库存开关打开
-        Map<String, DishVo> voMap = new LinkedHashMap<String, DishVo>();
+        boolean inventoryIsOpen = inventoryCacheUtil.getSaleSwitch();        Map<String, DishVo> voMap = new LinkedHashMap<String, DishVo>();
         for (DishShop dishShop : dishList) {
             DishUnitDictionary unit = DishCache.getUnitHolder().get(dishShop.getUnitId());
-            // 没有规格的与有规格的不合成一个
-            if (dishShop.getHasStandard() == Bool.YES) {
+                        if (dishShop.getHasStandard() == Bool.YES) {
                 DishVo vo = voMap.get(dishShop.getName());
                 if (vo != null) {
                     vo.setContainProperties(true);
@@ -873,8 +764,7 @@ public class DishManager {
                     vo = new DishVo(dishShop, standards, unit);
                     voMap.put(vo.getName(), vo);
                 }
-                if (inventoryIsOpen) {//实时库存
-                    InventoryInfo inventoryInfo = inventoryCacheUtil.getInventoryNumByDishUuid(dishShop.getUuid());
+                if (inventoryIsOpen) {                    InventoryInfo inventoryInfo = inventoryCacheUtil.getInventoryNumByDishUuid(dishShop.getUuid());
                     if (inventoryInfo != null) {
                         vo.setInventoryNum(inventoryInfo.getInventoryQty());
                     }
@@ -882,8 +772,7 @@ public class DishManager {
             } else {
                 String key = dishShop.getUuid() + "_" + dishShop.getName();
                 DishVo dishVo = new DishVo(dishShop, unit);
-                if (inventoryIsOpen) {//实时库存
-                    InventoryInfo inventoryInfo = inventoryCacheUtil.getInventoryNumByDishUuid(dishShop.getUuid());
+                if (inventoryIsOpen) {                    InventoryInfo inventoryInfo = inventoryCacheUtil.getInventoryNumByDishUuid(dishShop.getUuid());
                     if (inventoryInfo != null) {
                         dishVo.setInventoryNum(inventoryInfo.getInventoryQty());
                     }
@@ -894,14 +783,9 @@ public class DishManager {
         List<DishVo> dishVoList = new ArrayList<DishVo>(voMap.values());
         Log.i(TAG, "voList.size()=" + dishVoList.size());
         return dishVoList;
-//		EventBus.getDefault().post(new EventDishsNotice(dishType, dishVoList, scanResult));
     }
 
-    /**
-     * 生成DishVo对象
-     *
-     * @param dishList
-     */
+
     public List<DishVo> getDishsVo1(List<DishShop> dishList) {
         List<DishVo> dishVoList = new ArrayList<DishVo>();
         for (DishShop dishShop : dishList) {
@@ -913,16 +797,9 @@ public class DishManager {
         return dishVoList;
     }
 
-    /**
-     * 获取指定商品的规格集
-     *
-     * @param dishShop
-     * @return
-     */
+
     public static Set<DishProperty> filterStandards(DishShop dishShop) {
         Set<DishProperty> standards = new LinkedHashSet<DishProperty>();
-//		DishStandardFilter filter = new DishStandardFilter(dishShop);
-//		List<DishBrandProperty> dishPropertyList = DishCache.getDishPropertyHolder().filter(filter);
         List<DishBrandProperty> dishPropertyList = DishCache.getDishPropertyHolder().getPropertysByDishId(dishShop.getBrandDishId());
         if (dishPropertyList == null) {
             return standards;
@@ -936,10 +813,7 @@ public class DishManager {
         return standards;
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年7月20日
-     */
+
     private static class DishStandardFilter implements DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;
@@ -955,11 +829,7 @@ public class DishManager {
         }
     }
 
-    /**
-     * 获取菜品中有估清的菜品
-     *
-     * @param
-     */
+
     public DishInfo loadDishInfoHaveClear() {
 
         List<DishBrandType> typeList = new ArrayList<>(DishCache.getDishTypeHolder().getAll());
@@ -989,11 +859,7 @@ public class DishManager {
         return dishsVos;
     }
 
-    /**
-     * 是否有临时菜设置
-     *
-     * @return
-     */
+
     public boolean isHasTempDish() {
         if (DishCache.getTempDishShop() != null) {
             return true;
@@ -1001,11 +867,7 @@ public class DishManager {
         return false;
     }
 
-    /**
-     * 获取临时菜封装的dishVo对象
-     *
-     * @return
-     */
+
     public DishVo getTempDishVo() {
         DishShop dishShop = DishCache.getTempDishShop();
         if (dishShop == null) {
@@ -1020,9 +882,7 @@ public class DishManager {
     }
 
 
-    /**
-     * 估清菜品排后面
-     */
+
     public static void clearDishToEnd(List<DishVo> dataSet) {
         if (dataSet == null || dataSet.isEmpty())
             return;
@@ -1040,11 +900,7 @@ public class DishManager {
         dataSet.addAll(clearDishList);
     }
 
-    /**
-     * 获取所有的菜品
-     *
-     * @return
-     */
+
     public List<DishVo> getAllDishVo() {
         List<DishShop> dishList = new ArrayList<>(DishCache.getDishHolder().getAll());
         return getDishsVo(dishList);

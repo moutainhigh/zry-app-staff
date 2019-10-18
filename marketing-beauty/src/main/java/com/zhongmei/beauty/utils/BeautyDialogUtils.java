@@ -8,27 +8,12 @@ import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 
-/**
- * Created by demo on 2018/12/15
- * 美业通用dialog样式
- */
+
 
 public class BeautyDialogUtils {
 
 
-    /**
-     * 美业dialog
-     *
-     * @param fragmentManager
-     * @param iconType
-     * @param titleResId
-     * @param positiveResId
-     * @param negativeResId
-     * @param positiveClickListener
-     * @param negativeClickListener
-     * @param tag
-     * @return
-     */
+
     public static DialogFragment showDialog(FragmentManager fragmentManager, int iconType, int titleResId,
                                             int positiveResId, int negativeResId, View.OnClickListener positiveClickListener,
                                             View.OnClickListener negativeClickListener, String tag) {

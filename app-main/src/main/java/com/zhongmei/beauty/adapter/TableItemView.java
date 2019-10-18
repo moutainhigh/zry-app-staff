@@ -19,9 +19,7 @@ import com.zhongmei.yunfu.util.ResourceUtils;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.beauty_table)
 public class TableItemView extends RelativeLayout implements View.OnClickListener {
     @ViewById(R.id.tv_table_name)
@@ -67,8 +65,7 @@ public class TableItemView extends RelativeLayout implements View.OnClickListene
             tv_tradeNo.setText(tradeModel.getTradeAmount());
             iv_tip.setVisibility(View.VISIBLE);
         } else {
-            //没有订单，设置开台UI
-            tv_tradeNo.setText("");
+                        tv_tradeNo.setText("");
             tv_tradeNo.setBackground(getResources().getDrawable(R.drawable.beauty_icon_table_create_trade));
             iv_tip.setVisibility(View.GONE);
         }

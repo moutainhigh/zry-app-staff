@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.CommonEntityBase;
 import com.zhongmei.yunfu.db.enums.PaymentType;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "refund_exception_reason")
 public class RefundExceptionReason extends CommonEntityBase {
 
@@ -26,15 +24,11 @@ public class RefundExceptionReason extends CommonEntityBase {
 
     }
 
-    /**
-     * 品牌标识
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 
-    /**
-     * 门店标识
-     */
+
     @DatabaseField(columnName = "shop_identy", canBeNull = false)
     private Long shopIdenty;
 

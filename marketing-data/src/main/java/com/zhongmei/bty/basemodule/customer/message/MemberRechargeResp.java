@@ -6,12 +6,7 @@ import com.zhongmei.yunfu.db.entity.trade.Payment;
 
 import java.util.List;
 
-/**
- * 会员充值接口回复数据封装
- *
- * @version: 1.0
- * @date 2015年5月8日
- */
+
 public class MemberRechargeResp {
 
     private List<JsonObject> memberValuecard;

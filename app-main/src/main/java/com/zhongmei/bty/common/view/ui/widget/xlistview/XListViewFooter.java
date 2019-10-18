@@ -1,8 +1,4 @@
-/**
- * @file XFooterView.java
- * @create Mar 31, 2012 9:33:43 PM
- * @description XListView's footer
- */
+
 package com.zhongmei.bty.common.view.ui.widget.xlistview;
 
 import android.content.Context;
@@ -64,35 +60,27 @@ public class XListViewFooter extends LinearLayout {
     }
 
 
-    /**
-     * normal status
-     */
+
     public void normal() {
         mHintView.setVisibility(View.VISIBLE);
         mProgressBar.setVisibility(View.GONE);
     }
 
 
-    /**
-     * loading status
-     */
+
     public void loading() {
         mHintView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.VISIBLE);
     }
 
-    /**
-     * hide footer when disable pull load more
-     */
+
     public void hide() {
         LayoutParams lp = (LayoutParams) mContentView.getLayoutParams();
         lp.height = 0;
         mContentView.setLayoutParams(lp);
     }
 
-    /**
-     * show footer
-     */
+
     public void show() {
         LayoutParams lp = (LayoutParams) mContentView.getLayoutParams();
         lp.height = LayoutParams.WRAP_CONTENT;

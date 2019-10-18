@@ -20,9 +20,7 @@ import com.zhongmei.yunfu.ui.base.BasicFragment;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.util.DensityUtil;
 
-/**
- * 扫描枪测试
- */
+
 @EFragment(R.layout.settings_scan)
 public class ScannerFragment extends BasicFragment {
 

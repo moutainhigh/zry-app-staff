@@ -2,27 +2,15 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum YesOrNo implements ValueEnum<Integer> {
 
-    /**
-     * 是
-     */
+
     YES(1),
-    /**
-     * 否
-     */
+
     NO(0),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

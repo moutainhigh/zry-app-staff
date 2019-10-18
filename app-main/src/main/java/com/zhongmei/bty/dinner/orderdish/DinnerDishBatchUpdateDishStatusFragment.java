@@ -46,10 +46,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- * 批量上架商品
- */
+
 @EFragment(R.layout.dinner_dish_batchupdatestatus_fragment)
 public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment implements ViewPager.OnPageChangeListener {
 
@@ -63,16 +60,13 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
     protected LinearLayout llDots;
 
     @ViewById(R.id.cb_select_all)
-    CheckBox cbSelectAll;//全选、反选
-
+    CheckBox cbSelectAll;
     @ViewById(R.id.batch_update_button)
-    Button btnBottom;//提交按钮
-    protected DinnerDishListPagerAdapter mAdapter;
+    Button btnBottom;    protected DinnerDishListPagerAdapter mAdapter;
 
     private int mCurrentIndex = 0;
 
-    private DishInfo mDishInfo;//当前带入数据
-
+    private DishInfo mDishInfo;
     private DishManager mDishManager;
 
     private List<DishShop> selectedDishs = new LinkedList<DishShop>();
@@ -113,8 +107,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
 
             @Override
             public void doItemTouch(DishVo dishVo) {
-                //点击处理事件
-                myGridItemClicked(dishVo);
+                                myGridItemClicked(dishVo);
             }
 
             @Override
@@ -163,8 +156,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
 
     }
 
-    //选择对话框回调处理
-    OnCloseListener mOnSelectedDialogCloseListener = new OnCloseListener() {
+        OnCloseListener mOnSelectedDialogCloseListener = new OnCloseListener() {
 
         @Override
         public void onClose(boolean isEnsure, Object obj) {
@@ -185,8 +177,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
 
     private void myGridItemClicked(final DishVo dishVo) {
         if (dishVo.isContainProperties()) {
-            // 弹出估清界面
-            OrderDishSelectedClearedDishFragment orderDishClearStatusFragment = new OrderDishSelectedClearedDishFragment_();
+                        OrderDishSelectedClearedDishFragment orderDishClearStatusFragment = new OrderDishSelectedClearedDishFragment_();
             orderDishClearStatusFragment.setData(dishVo);
             orderDishClearStatusFragment.setOnCloseListener(mOnSelectedDialogCloseListener);
             orderDishClearStatusFragment.setCancelSelectedListener(mCancelSelectedListener);
@@ -222,8 +213,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
         }
     }
 
-    //全选
-    private void doSelectedAll() {
+        private void doSelectedAll() {
         if (mDishInfo != null && mDishInfo.dishList != null) {
             selectedDishs.clear();
             DishShop dish = null;
@@ -231,13 +221,11 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
                 dishVo.setSelected(true);
                 if (dishVo.isContainProperties()) {
                     List<DishShop> list = new ArrayList<DishShop>();
-                    //外壳菜品
-                    if (dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
+                                        if (dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
                         list.add(dishVo.getDishShop());
                         selectedDishs.add(dishVo.getDishShop());
                     }
-                    //其它同类菜品
-                    if (dishVo.getOtherDishs() != null) {
+                                        if (dishVo.getOtherDishs() != null) {
                         for (Map.Entry<String, DishShop> entry : dishVo.getOtherDishs().entrySet()) {
                             dish = entry.getValue();
                             if (dish.getClearStatus() == ClearStatus.CLEAR) {
@@ -256,8 +244,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
         }
     }
 
-    //取消全选
-    private void doCancelSelectedAll() {
+        private void doCancelSelectedAll() {
         selectedDishs.clear();
         for (DishVo dishVo : mDishInfo.dishList) {
             if (dishVo.isSelected()) {
@@ -267,8 +254,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
         }
     }
 
-    //是否全选
-    private boolean isSelectedAll() {
+        private boolean isSelectedAll() {
         for (DishVo dishVo : mDishInfo.dishList) {
             if (!dishVo.isSelected()) {
                 return false;
@@ -277,11 +263,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
         return true;
     }
 
-    /**
-     * @Title: requestClearStatus
-     * @Description: 请求更改估清状态
-     * @Return void 返回类型
-     */
+
     @Click(R.id.batch_update_button)
     protected void batchClearStatus() {
         if (this.selectedDishs.isEmpty()) {
@@ -294,9 +276,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
             dishUuids.add(dish.getUuid());
         }
         final ClearStatus newValue = ClearStatus.SALE;
-        /*
-         * 估清请求结果
-         */
+
         ResponseListener<Boolean> listener = new ResponseListener<Boolean>() {
 
             @Override
@@ -343,9 +323,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
         dishDal.clearStatus(newValue, dishUuids, LoadingResponseListener.ensure(listener, getFragmentManager()));
     }
 
-    /**
-     * 加载数据
-     */
+
     private void loadData() {
         if (isAdded() && mDishInfo != null && mAdapter != null) {
             if (Utils.isNotEmpty(mDishInfo.dishList)) {
@@ -364,12 +342,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
         }
     }
 
-    /**
-     * 创建索引
-     *
-     * @Title: createIndex
-     * @Return void 返回类型
-     */
+
     private void createIndex(int currentIndex, int totalSize) {
         llDots.removeAllViews();
 
@@ -395,8 +368,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
     @Override
     public void onDismiss(DialogInterface dialog) {
         if (!selectedDishs.isEmpty()) {
-            this.doCancelSelectedAll();//还原缓存中的dishVo原型
-        }
+            this.doCancelSelectedAll();        }
         super.onDismiss(dialog);
     }
 
@@ -407,14 +379,12 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if (isChecked) {
                         cbSelectAll.setText(R.string.order_dish_cancel_select_all);
-                        //全选操作
-                        doSelectedAll();
+                                                doSelectedAll();
                         updatCheckView();
                         mAdapter.notifyDataSetChanged();
                     } else {
                         cbSelectAll.setText(R.string.selectAll);
-                        //取消全选操作
-                        doCancelSelectedAll();
+                                                doCancelSelectedAll();
                         updatCheckView();
                         mAdapter.notifyDataSetChanged();
                     }

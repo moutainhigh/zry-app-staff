@@ -68,9 +68,7 @@ import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class LagPayFragment extends BasicFragment implements View.OnClickListener {
     private final String TAG = LagPayFragment.class.getSimpleName();
@@ -93,11 +91,9 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
 
     private CustomerResp mCustomer;
 
-    // 可挂账金额
-    private Double restAmount = 0.0;
+        private Double restAmount = 0.0;
 
-    // 已挂账金额
-    private Double usageAmount = 0.0;
+        private Double usageAmount = 0.0;
 
     private IPaymentInfo mPaymentInfo;
 
@@ -226,16 +222,12 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
         dialog.show();
     }
 
-    //modify v8.4 添加联台主单挂账功能
-    private void doLag() {
-        //如果是联台主单，先合单再挂账
-        if (mPaymentInfo.getTradeVo().getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
-            //保存成功回调
-            ISavedCallback savedCallback = new ISavedCallback() {
+        private void doLag() {
+                if (mPaymentInfo.getTradeVo().getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
+                        ISavedCallback savedCallback = new ISavedCallback() {
                 @Override
                 public void onSaved(boolean isOk) {
-                    //合单成功
-                    if (isOk) {
+                                        if (isOk) {
                         lag();
                     }
                 }
@@ -247,9 +239,7 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
         }
     }
 
-    /**
-     * 挂账操作
-     */
+
     private void lag() {
         TradeOperates tradeOperates = BusinessTypeUtils.isRetail() ? OperatesRetailFactory.create(TradeOperates.class) : OperatesFactory.create(TradeOperates.class);
         LagReq lagReq = new LagReq();
@@ -281,19 +271,15 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
                         if (ResponseObject.isOk(response)) {
                             mPaymentInfo.getTradeVo().setTrade(response.getContent().getModifyResponse().getTrades().get(0));
                             doLagPrint();
-                            startLagOk();//挂账成功回调
-                            AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CREDIT, tradeId, tradeUuid, null);
+                            startLagOk();                            AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CREDIT, tradeId, tradeUuid, null);
                             getActivity().finish();
                             UserActionEvent.end(UserActionEvent.DINNER_PAY_SETTLE_LAG_PAY);
                         } else {
-                            //挂账失败可能改单成功
-                            if (response.getContent().getModifyResponse() != null && mPaymentInfo.isDinner()) {
-                                //先把原单会员拿出来，等reset方法玩了以后再放回去（临时方案，后续需要优化）
-                                CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
+                                                        if (response.getContent().getModifyResponse() != null && mPaymentInfo.isDinner()) {
+                                                                CustomerResp customer = CustomerManager.getInstance().getDinnerLoginCustomer();
                                 DinnerShoppingCart.getInstance().resetShopcartItemFromDB(null);
                                 CustomerManager.getInstance().setDinnerLoginCustomer(customer);
-                                //刷新积分抵现
-                                DinnerCashManager cashManager = new DinnerCashManager();
+                                                                DinnerCashManager cashManager = new DinnerCashManager();
                                 if (customer != null) {
                                     if (customer.card == null) {
                                         cashManager.updateIntegralCash(customer);
@@ -304,8 +290,7 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
                                 TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
                                 TradeVo tradeVo = tradeDal.findTrade(mPaymentInfo.getTradeVo().getTrade().getUuid());
                                 mPaymentInfo.setTradeVo(tradeVo);
-                                mPaymentInfo.setOrdered(true);// 表示已经下单
-                            }
+                                mPaymentInfo.setOrdered(true);                            }
                             AuthLogManager.getInstance().clear();
                             ToastUtil.showLongToast(response.getMessage());
                         }
@@ -329,9 +314,7 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
         }
     }
 
-    /**
-     * 打印挂账单
-     */
+
     private void doLagPrint() {
         TradeVo tradeVo = mPaymentInfo.getTradeVo();
         Trade trade = tradeVo.getTrade();
@@ -342,18 +325,11 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
                 resp.setCustomerName(mCustomer.customerName);
                 resp.setPhoneNumber(mCustomer.mobile);
             }
-           /* PrintContentQueue.getInstance().printDinnerCashTrade(trade.getUuid(), false, resp, null,
-                    new OnSimplePrintListener(PrintTicketTypeEnum.CASH));
-           */// modify v8.8 替换接口
-            //IPrintHelper.Holder.getInstance().printDinnerPayTicket(trade.getUuid(), resp, false, true, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.CASH));
-            //PLog.d(PLog.TAG_CALLPRINT_KEY, "info:正餐收银调用结账单接口打印挂账票据printDinnerPayTicket（）;tradeUuid:" + trade.getUuid() + ",position:" + TAG + "->doLagPrint()");
-        }
+                                           }
     }
 
-    //add 20170913 start
-    private void prepareLag() {
-        //订单为负，不能支付
-        if (mPaymentInfo.getActualAmount() < 0) {
+        private void prepareLag() {
+                if (mPaymentInfo.getActualAmount() < 0) {
             ToastUtil.showShortToast(R.string.negative_not_pay);
             return;
         }
@@ -382,9 +358,7 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
             ToastUtil.showShortToast(R.string.open_table_please);
             return;
         }
-        //add 20161109 end
-        //判断是否有无效优惠
-        if (!DinnerShopManager.getInstance().hasValidItems(mPaymentInfo.getTradeVo())) {
+                        if (!DinnerShopManager.getInstance().hasValidItems(mPaymentInfo.getTradeVo())) {
             ToastUtil.showShortToast(R.string.dinner_no_item_hint);
             return;
         }
@@ -392,26 +366,20 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
             ToastUtil.showShortToast(R.string.privilege_ineffective);
             return;
         }
-        //判断是否需要密码
-        if (ServerSettingCache.getInstance().isCommercialNeedVerifPassword()) {
+                if (ServerSettingCache.getInstance().isCommercialNeedVerifPassword()) {
             showPasswordDialog(mCustomer.mobile, mPaymentInfo, this.getActivity());
         } else {
             doLag();
         }
     }
 
-    //显示支付密码
-    private void showPasswordDialog(final String phonenum, final IPaymentInfo paymentInfo, final FragmentActivity context) {
+        private void showPasswordDialog(final String phonenum, final IPaymentInfo paymentInfo, final FragmentActivity context) {
 
         final PasswordDialog dialog = new PasswordDialog(context) {
             @Override
             public void close() {
                 super.close();
-                /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_USERINFO_SHOW,
-                        mCustomer,
-                        mCustomer.integral != null ? mCustomer.integral : 0,
-                        true, paymentInfo.getActualAmount());
-                DisplayServiceManager.updateDisplay(context.getApplicationContext(), dUserInfo);*/
+
             }
         };
 
@@ -426,12 +394,7 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
 
             @Override
             public void showPassWord(String password) {
-                /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-                        password,
-                        null,
-                        0,
-                        false, paymentInfo.getActualAmount());
-                DisplayServiceManager.updateDisplay(context.getApplicationContext(), dUserInfo);*/
+
             }
 
             @Override
@@ -455,8 +418,7 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
 
                     @Override
                     public void onFail(NewLDResponse ldResponse) {
-                        // TODO Auto-generated method stub
-                    }
+                                            }
                 };
                 dialogFragment.setPosOvereCallback(cardOvereCallback);
 
@@ -464,13 +426,10 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
             }
         });
         dialog.show();
-        /*DisplayUserInfo dUserInfo =
-                DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT, "", null, 0, true, paymentInfo.getActualAmount());
-        DisplayServiceManager.updateDisplay(context.getApplicationContext(), dUserInfo);*/
+
     }
 
-    //验证支付密码
-    private void doVerifypassword(String phonenum, final String password, final IPaymentInfo paymentInfo, final FragmentActivity context,
+        private void doVerifypassword(String phonenum, final String password, final IPaymentInfo paymentInfo, final FragmentActivity context,
                                   final PasswordDialog dialog) {
         UserActionEvent.start(UserActionEvent.DINNER_PAY_SETTLE_STORE);
         if (phonenum != null) {
@@ -491,8 +450,7 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
                         ToastUtil.showShortToast(R.string.veryfy_password_success);
                         if (dialog != null)
                             dialog.dismiss();
-                        EventBus.getDefault().post(new EventReadKeyboard(true, ""));// 发送成功到ReadKeyboardDialogFragment
-                        doLag();
+                        EventBus.getDefault().post(new EventReadKeyboard(true, ""));                        doLag();
                     } else {
                         String msg = "";
                         if (response.getStatusCode() == 1126) {
@@ -503,26 +461,20 @@ public class LagPayFragment extends BasicFragment implements View.OnClickListene
                             ToastUtil.showLongToastCenter(context, msg);
                         }
                         if (dialog != null)
-                            dialog.clean();// 清空输入框
+                            dialog.clean();
+                        EventBus.getDefault().post(new EventReadKeyboard(false, msg));
 
-                        EventBus.getDefault().post(new EventReadKeyboard(false, msg));// 发送失败到ReadKeyboardDialogFragment
-
-                        /*DisplayUserInfo dUserInfo = DisplayServiceManager
-                                .buildDUserInfo(DisplayUserInfo.COMMAND_VALIDATE_PASS_FAIL, "", null, 0, true, paymentInfo.getActualAmount());
-                        DisplayServiceManager.updateDisplay(context, dUserInfo);*/
                     }
                 }
 
                 @Override
                 public void onError(VolleyError error) {
                     ToastUtil.showLongToastCenter(context, error.getMessage());
-                    EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));// 发送失败到ReadKeyboardDialogFragment
-                }
+                    EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));                }
 
             }, context.getSupportFragmentManager()));
         } else {
             ToastUtil.showShortToast(R.string.pay_member_login_please);
         }
     }
-    //add 20170913 end 挂账添加密码验证
-}
+    }

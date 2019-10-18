@@ -9,10 +9,7 @@ import com.zhongmei.beauty.view.UserItemView_;
 import com.zhongmei.yunfu.ui.view.recycler.ViewWrapper;
 import com.zhongmei.yunfu.context.session.core.user.Role;
 
-/**
- * Created by demo on 2018/12/15
- * 技师／顾问／销售员 适配器
- */
+
 public class RoleAdapter extends RecyclerViewBaseAdapter<Role, RoleItemView> {
 
     private Context mContext;

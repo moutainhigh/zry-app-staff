@@ -5,19 +5,13 @@ import com.zhongmei.bty.basemodule.monitor.shopmanager.handover.entitys.Handover
 
 import java.util.List;
 
-/**
- * 交接历史数据
- */
+
 public class HandoverResponseData {
 
-    /**
-     * 交班数据
-     */
+
     private List<HandoverData> cashHandovers;
 
-    /**
-     * 收款明细
-     */
+
     private List<HandoverItem> cashHandoverItems;
 
     public List<HandoverData> getCashHandovers() {

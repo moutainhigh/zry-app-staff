@@ -3,25 +3,13 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * 营业概况
- * Created by demo on 2018/12/15
- */
-public class BizAmountInfo implements Serializable {
-    private Double tradeAmount = 0.00;//销售总额
-    private Double privilegeAmount = 0.00;//优惠金额
-    private Double exemptAmount = 0.00;//抹零
-    private Double redundant = 0.00;//溢收
-    private BigDecimal totalTradeAmount;//应收总额（尾数处理后金额）
-    private BigDecimal tradeAmountBefore;//应收总额（尾数处理前金额）
-    private BigDecimal promotionAmount;
-    private BigDecimal depositAmount;
-    private BigDecimal roundOffAmount; //尾数处理
-    private BigDecimal serviceChargeAmount;
 
-    /**
-     * 尾数处理总金额
-     */
+public class BizAmountInfo implements Serializable {
+    private Double tradeAmount = 0.00;    private Double privilegeAmount = 0.00;    private Double exemptAmount = 0.00;    private Double redundant = 0.00;    private BigDecimal totalTradeAmount;    private BigDecimal tradeAmountBefore;    private BigDecimal promotionAmount;
+    private BigDecimal depositAmount;
+    private BigDecimal roundOffAmount;     private BigDecimal serviceChargeAmount;
+
+
     public BigDecimal getMantissaAmount() {
         BigDecimal mantissaAmount = BigDecimal.ZERO;
         if (totalTradeAmount != null && tradeAmountBefore != null) {

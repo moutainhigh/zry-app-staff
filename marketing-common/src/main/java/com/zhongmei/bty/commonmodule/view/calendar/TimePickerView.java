@@ -26,21 +26,18 @@ public class TimePickerView extends RelativeLayout {
     protected boolean canLoop = true;
     protected boolean wheelModeEnable = false;
     protected boolean weightEnable = false;
-    protected boolean canLinkage = false;//是否联动
-
+    protected boolean canLinkage = false;
     private ArrayList<String> hours = new ArrayList<>();
     private ArrayList<String> minutes = new ArrayList<>();
     private ArrayList<String> hoursAndUnit = new ArrayList<>();
     private ArrayList<String> minutesAndUnit = new ArrayList<>();
     private int selectedHourIndex = 0, selectedMinuteIndex = 0;
-    //不带单位
-    private String selectedHour = "", selectedMinute = "";
+        private String selectedHour = "", selectedMinute = "";
     protected LineConfig lineConfig;
     private OnWheelListener onWheelListener;
     private int startHour, startMinute = 0;
     private int endHour, endMinute = 59;
-    private int stepMinute = 1, stepHour = 1;//时间间隔
-
+    private int stepMinute = 1, stepHour = 1;
 
     private WheelListView hourView;
     private WheelListView minuteView;
@@ -90,8 +87,7 @@ public class TimePickerView extends RelativeLayout {
         minuteView = (WheelListView) view.findViewById(R.id.wv_minute);
 
         hourView.setCanLoop(canLoop);
-        hourView.setTextSize(textSize);//must be called before setDateList
-        hourView.setSelectedTextColor(textColorFocus);
+        hourView.setTextSize(textSize);        hourView.setSelectedTextColor(textColorFocus);
         hourView.setUnSelectedTextColor(textColorNormal);
         hourView.setLineConfig(lineConfig);
         hourView.setItems(hoursAndUnit, selectedHour+getContext().getString(R.string.hour_unit));
@@ -108,17 +104,14 @@ public class TimePickerView extends RelativeLayout {
                 if (!canLinkage) {
                     return;
                 }
-//                        LogUtils.verbose(this, "change minutes after hour wheeled");
                 changeMinuteData(DateTimeUtils.trimZero(item));
                 minuteView.setItems(minutes, selectedMinuteIndex);
             }
         });
 
 
-        //分钟
-        minuteView.setCanLoop(canLoop);
-        minuteView.setTextSize(textSize);//must be called before setDateList
-        minuteView.setSelectedTextColor(textColorFocus);
+                minuteView.setCanLoop(canLoop);
+        minuteView.setTextSize(textSize);        minuteView.setSelectedTextColor(textColorFocus);
         minuteView.setUnSelectedTextColor(textColorNormal);
         minuteView.setLineConfig(lineConfig);
         minuteView.setItems(minutesAndUnit, selectedMinute+getContext().getString(R.string.minute_unit));
@@ -167,15 +160,12 @@ public class TimePickerView extends RelativeLayout {
             }
         }
         if (minutes.indexOf(selectedMinute) == -1) {
-            //当前设置的分钟不在指定范围，则默认选中范围开始的分钟
-            selectedMinute = minutes.get(0);
+                        selectedMinute = minutes.get(0);
         }
     }
 
 
-    /**
-     * 设置范围：开始的时分
-     */
+
     public void setTimeRangeStart(int startHour, int startMinute) {
         boolean illegal = false;
         if (startHour < 0 || startMinute < 0 || startMinute > 59) {
@@ -191,9 +181,7 @@ public class TimePickerView extends RelativeLayout {
         this.startMinute = startMinute;
     }
 
-    /**
-     * 设置范围：结束的时分
-     */
+
     public void setTimeRangeEnd(int endHour, int endMinute) {
         boolean illegal = false;
         if (endHour < 0 || endMinute < 0 || endMinute > 59) {
@@ -217,36 +205,27 @@ public class TimePickerView extends RelativeLayout {
             hoursAndUnit.add(hour);
         }
         if (hours.indexOf(selectedHour) == -1) {
-            //当前设置的小时不在指定范围，则默认选中范围开始的小时
-            selectedHour = hours.get(0);
+                        selectedHour = hours.get(0);
         }
     }
 
 
-    /**
-     * 设置文字大小
-     */
+
     public void setTextSize(int textSize) {
         this.textSize = textSize;
     }
 
-    /**
-     * 设置未选中文字颜色
-     */
+
     public void setUnSelectedTextColor(@ColorInt int unSelectedTextColor) {
         this.textColorNormal = unSelectedTextColor;
     }
 
-    /**
-     * 设置选中文字颜色
-     */
+
     public void setSelectedTextColor(@ColorInt int selectedTextColor) {
         this.textColorFocus = selectedTextColor;
     }
 
-    /**
-     * 设置分隔线是否可见
-     */
+
     public void setLineVisible(boolean lineVisible) {
         if (null == lineConfig) {
             lineConfig = new LineConfig();
@@ -254,27 +233,14 @@ public class TimePickerView extends RelativeLayout {
         lineConfig.setVisible(lineVisible);
     }
 
-    /**
-     * 设置分隔阴影是否可见
-     * 暂时去掉此功能
-     */
-//    public void setShadowVisible(boolean shadowVisible) {
-//        if (null == lineConfig) {
-//            lineConfig = new LineConfig();
-//        }
-//        lineConfig.setShadowVisible(shadowVisible);
-//    }
 
-    /**
-     * 设置是否自动联动
-     */
+
+
     public void setCanLinkage(boolean canLinkage) {
         this.canLinkage = canLinkage;
     }
 
-    /**
-     * 设置分隔线颜色
-     */
+
     public void setLineColor(@ColorInt int lineColor) {
         if (null == lineConfig) {
             lineConfig = new LineConfig();
@@ -283,9 +249,7 @@ public class TimePickerView extends RelativeLayout {
         lineConfig.setColor(lineColor);
     }
 
-    /**
-     * 设置分隔线配置项，设置null将隐藏分割线及阴影
-     */
+
     public void setLineConfig(@Nullable LineConfig config) {
         if (null == config) {
             lineConfig = new LineConfig();
@@ -296,33 +260,22 @@ public class TimePickerView extends RelativeLayout {
         }
     }
 
-    /**
-     * 设置选项偏移量，可用来要设置显示的条目数，范围为1-3。
-     * 1显示3条、2显示5条、3显示7条
-     */
+
     public void setOffset(@IntRange(from = 1, to = 3) int offset) {
         this.offset = offset;
     }
 
-    /**
-     * 设置是否禁用循环
-     * true 循环 false 不循环
-     */
+
     public void setCanLoop(boolean canLoop) {
         this.canLoop = canLoop;
     }
 
-    /**
-     * 设置是否启用ios滚轮模式
-     */
+
     public void setWheelModeEnable(boolean wheelModeEnable) {
         this.wheelModeEnable = wheelModeEnable;
     }
 
-    /**
-     * 线性布局设置是否启用权重
-     * true 启用 false 自适应width
-     */
+
     public void setWeightEnable(boolean weightEnable) {
         this.weightEnable = weightEnable;
     }

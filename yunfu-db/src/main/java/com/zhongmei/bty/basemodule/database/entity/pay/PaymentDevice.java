@@ -7,55 +7,33 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * @Date：2016-2-24 上午10:29:02
- * @Description: 保存联迪pos设备端口信息
- * @Version: 1.0
- */
+
 @DatabaseTable(tableName = "payment_device")
 public class PaymentDevice extends IdEntityBase implements java.io.Serializable, ICreator {
-    /**
-     * serialVersionUID.
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "payment_item_unionpay"
-     */
+
     public interface $ extends IdEntityBase.$ {
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * shop_identy
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
         public static final String posChannelId = "pos_channel_id";
@@ -64,33 +42,23 @@ public class PaymentDevice extends IdEntityBase implements java.io.Serializable,
 
     }
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 品牌Identy
-     */
+
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
 
-    /**
-     * 门店Identy
-     */
+
     @DatabaseField(columnName = "shop_identy", canBeNull = false)
     private Long shopIdenty;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 

@@ -14,10 +14,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeReasonRel;
 
 import java.util.List;
 
-/**
- * 联台主单改单请求
- * Created by demo on 2018/12/15
- */
+
 
 public class TradeUnionModifyMainWarpReq {
 

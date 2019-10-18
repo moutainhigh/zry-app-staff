@@ -21,9 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-/**
- * 消费记录
- */
+
 public class CustomerExpenseRecordAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
@@ -92,8 +90,7 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
             viewHolder.tradeValue.setText(mContext.getResources().getString(R.string.order_amount_lable)+record.getTradeValue().toString());
             viewHolder.person.setText(getPersonName(record.getUserId()));
 
-            //交易类型 1:SELL:售货 2:REFUND:退货 3:REPAY:反结账 4:REPAY_FOR_REFUND:反结账退货
-            if(record.getTradeType().equals("售货")){
+                        if(record.getTradeType().equals("售货")){
                 viewHolder.typeIcon.setBackground(mContext.getResources().getDrawable(R.drawable.customer_sales_icon));
             }else if(record.getTradeType().equals("退货")){
                 viewHolder.typeIcon.setBackground(mContext.getResources().getDrawable(R.drawable.customer_return_icon));
@@ -103,8 +100,7 @@ public class CustomerExpenseRecordAdapter extends BaseAdapter {
             viewHolder.viewDetails.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                     //http://mk.zhongmeiyunfu.com/marketing/internal/trade/tradeDetail?tradeId=1001&brandIdenty=1&shopIdenty=1
-                    Long brandId = ShopInfoManager.getInstance().getShopInfo().getBrandId();
+                                         Long brandId = ShopInfoManager.getInstance().getShopInfo().getBrandId();
                     Long shopId = ShopInfoManager.getInstance().getShopInfo().getShopId();
                     String url = String.format("http://mk.zhongmeiyunfu.com/marketing/internal/trade/tradeDetail?source=1&tradeId=%d&brandIdenty=%d&shopIdenty=%d", record.getTradeId(), brandId, shopId);
                     H5WebViewActivity.start(mContext, url);

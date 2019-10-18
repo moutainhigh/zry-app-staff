@@ -49,12 +49,10 @@ public class DishTypeInflate {
 
     private VerticalViewPager viewPager;
 
-    private int mPageSize = 6;// 每页个数
-
+    private int mPageSize = 6;
     private int mResId = R.drawable.dish_type_item_bg;
 
-    private int mEmptyResId = -1;//之所以默认值设为-1,是因为正餐不用设空项背景
-
+    private int mEmptyResId = -1;
     private float mTextSize = 22;
 
     private ColorStateList mTextColors;
@@ -85,9 +83,7 @@ public class DishTypeInflate {
         isDinner = dinner;
     }
 
-    /**
-     * 页数
-     */
+
     private int getPageCount() {
         return (list.size() + mPageSize - 1) / mPageSize;
     }
@@ -187,8 +183,7 @@ public class DishTypeInflate {
         }
         viewPager.setAdapter(new CommonPagerAdapter(views));
 
-        // 若数据发生变化（lasType不为空），则选中之前选择的item
-        currentItem = 0;
+                currentItem = 0;
         currentPage = 0;
         boolean isLastTypeMap = false;
         if (lasType != null && Utils.isNotEmpty(list)) {
@@ -201,15 +196,13 @@ public class DishTypeInflate {
                 }
             }
         }
-        // 若lastType没有匹配上，则默认选中第一项
-        if (!isLastTypeMap) {
+                if (!isLastTypeMap) {
             lasType = list.get(0);
         }
         if (listener != null) {
             listener.onChangeTypeListener(lasType);
         }
-        //设置当前选中页面
-        viewPager.setCurrentItem(currentPage, true);
+                viewPager.setCurrentItem(currentPage, true);
         lastSelectView = ((LinearLayout) views.get(currentPage)).getChildAt(currentItem % mPageSize);
         lastSelectView.setSelected(true);
     }
@@ -267,13 +260,8 @@ public class DishTypeInflate {
     }
 
     private class ViewPagerScroller extends Scroller {
-        private int mScrollDuration = 400; // 滑动速度
+        private int mScrollDuration = 400;
 
-        /**
-         * 设置速度速度
-         *
-         * @param duration
-         */
         public void setScrollDuration(int duration) {
             this.mScrollDuration = duration;
         }

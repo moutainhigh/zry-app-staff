@@ -2,15 +2,11 @@ package com.zhongmei.bty.basemodule.customer.message;
 
 import com.zhongmei.yunfu.bean.req.CustomerResp;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class CustomerEditReq {
 
-    public String address; //	地址
-    public String birthday; //	生日
-    public Long id;
+    public String address;     public String birthday;     public Long id;
     public Long customerMainId;
     public Long cMemberCreateDateTime;
     public Long groupID;
@@ -33,17 +29,11 @@ public class CustomerEditReq {
     public Long localCreateDateTime;
     public String uuid;
     public String birthdate;
-    /**
-     * 国家英文名称(为空默认中国) = countryEN
-     */
+
     public String nation;
-    /**
-     * 国家中文名称(为空默认中国) = countryZH
-     */
+
     public String country;
-    /**
-     * 电话国际区码(为空默认中国) = AreaCode
-     */
+
     public String nationalTelCode;
 
 

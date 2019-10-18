@@ -14,9 +14,7 @@ import com.zhongmei.yunfu.util.DialogUtil;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragmentExt;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AppDialog {
 
@@ -54,30 +52,10 @@ public class AppDialog {
         }
     }
 
-    /**
-     * 默认提示信息
-     *
-     * @param message
-     */
-    /*public void showHintDialog(String message) {
-        final Activity activity = MainApplication.getInstance().getActivityLifecycle().getCurrentActivity();
-        if (activity != null && activity instanceof FragmentActivity) {
-            FragmentActivity fragmentActivity = (FragmentActivity) activity;
-            DialogUtil.showHintConfirmDialog(fragmentActivity.getSupportFragmentManager(), message,
-                    R.string.know, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
 
-                        }
-                    }, true, "showHintDialog");
-        }
-    }*/
 
-    /**
-     * erp推送消息提示
-     *
-     * @param erpMessagePushDetail
-     */
+
+
     public static void showErpInfoDialog(final ErpMessagePushDetail erpMessagePushDetail) {
         FragmentActivity activity = BaseApplication.sInstance.getActivityLifecycle().getCurrentFragmentActivity();
         if (activity != null) {
@@ -96,23 +74,19 @@ public class AppDialog {
         }
     }
 
-    /**
-     * 合同逾期提示
-     */
+
     public static void showContractOverdueDialog() {
         FragmentActivity activity = BaseApplication.sInstance.getActivityLifecycle().getCurrentFragmentActivity();
         if (activity != null && !ILoginController.class.isAssignableFrom(activity.getClass())) {
             CommonDialogFragmentExt.CommonDialogFragmentExtBuilder builder = new CommonDialogFragmentExt.CommonDialogFragmentExtBuilder(BaseApplication.sInstance)
                     .title(activity.getString(R.string.erp_check_error_expired))
-                    //.message(String.format(getString(R.string.login_check_error_exit_message), error))
-                    .iconType(CommonDialogFragment.ICON_WARNING)
+                                        .iconType(CommonDialogFragment.ICON_WARNING)
                     .positiveText(R.string.login_quiet)
                     .positiveListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             BaseApplication.sInstance.finishAllActivity(null);
-                            //System.exit(0);
-                        }
+                                                    }
                     });
 
             CommonDialogFragmentExt mDialogFragment = builder.build();

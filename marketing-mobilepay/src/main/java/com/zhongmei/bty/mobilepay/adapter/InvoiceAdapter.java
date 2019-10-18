@@ -19,10 +19,7 @@ import com.zhongmei.bty.commonmodule.view.ExpandPlusListView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 点击发票的列表适配器
- * Created by demo on 2018/12/15
- */
+
 
 public class InvoiceAdapter extends ExpandPlusListView.ExpandPlusListAdapter {
 
@@ -103,12 +100,10 @@ public class InvoiceAdapter extends ExpandPlusListView.ExpandPlusListAdapter {
             invoiceView.setInvoice((Invoice) getGroup(0));
             expandPlusListView.setVisibility(View.GONE);
 
-//            expandPlusListView.expandGroup(0, true);
         } else {
             invoiceView.setVisibility(View.GONE);
             expandPlusListView.setVisibility(View.VISIBLE);
 
-//            expandPlusListView.closeAllGroups();
         }
     }
 
@@ -123,7 +118,6 @@ public class InvoiceAdapter extends ExpandPlusListView.ExpandPlusListAdapter {
 
     @Override
     public int getChildrenCount(int groupPosition) {
-//        Only one
         return 1;
     }
 

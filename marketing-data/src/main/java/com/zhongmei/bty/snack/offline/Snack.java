@@ -1,14 +1,11 @@
 package com.zhongmei.bty.snack.offline;
 
-//import com.zhongmei.bty.push.PushPacket;
 
 import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 import com.zhongmei.yunfu.db.enums.BusinessType;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class Snack {
     private static final String TAG = Snack.class.getSimpleName() + "--->";
 
@@ -22,9 +19,6 @@ public class Snack {
         snack.release();
     }
 
-//    public static boolean handle(PushPacket pushPacket) {
-//        return snack.handle(pushPacket);
-//    }
 
     public static boolean netWorkAvailable() {
         return snack.netWorkAvailable();

@@ -9,9 +9,7 @@ import android.annotation.SuppressLint;
 import android.hardware.usb.UsbDevice;
 import android.util.Log;
 
-/**
- * 获取电子秤设备节点
- */
+
 @SuppressLint("NewApi")
 public class DeviceNodeUtil {
 
@@ -80,16 +78,12 @@ public class DeviceNodeUtil {
         return content;
     }
 
-    /**
-     * 判断有没有连接电子秤
-     */
+
     public static boolean isDeviceConnected() {
         return getDeviceNode() != null;
     }
 
-    /**
-     * 获取节点信息
-     */
+
     public static String getDeviceNodeAddress() {
         return getDeviceNode();
     }

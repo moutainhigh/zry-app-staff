@@ -21,39 +21,25 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @version: 1.0
- * @date 2015年8月19日
- */
+
 public class DinnertableModel implements IDinnertable {
-    private String uuid;//
-    private Long id; //table id
-    private String name;
+    private String uuid;    private Long id;     private String name;
     private int x;
     private int y;
     private int width;
     private int height;
-    /**
-     * 桌台座位数
-     */
+
     private int numberOfSeats;
-    /**
-     * 桌台形状
-     */
+
     private DinnertableShape shape;
-    /**
-     * 所属区域
-     */
+
     private IZone zone;
 
-    private boolean isReserved;//是否被预定
-
-    private TableStatus tableStatus;//桌台表中桌台的状态（桌台当前真实的状态还与订单相关）
-
+    private boolean isReserved;
+    private TableStatus tableStatus;
     private List<AsyncHttpRecord> mListHttpRecord;
 
-    private Map<String, List<AsyncHttpRecord>> mListTradeHttpRecord;//用于缓存桌台下订单对应的异步请求纪录
-
+    private Map<String, List<AsyncHttpRecord>> mListTradeHttpRecord;
     private List<TableSeat> tableSeats;
 
     @Override
@@ -164,8 +150,7 @@ public class DinnertableModel implements IDinnertable {
                 count++;
             }
         }
-        // 只显示最后4单
-        try {
+                try {
             Collections.sort(dinnertableTrades, new Comparator<IDinnertableTrade>() {
 
                 @Override
@@ -179,16 +164,7 @@ public class DinnertableModel implements IDinnertable {
         } catch (Exception e) {
             Log.e("DinnertableModel", e.getMessage());
         }
-//		int size = dinnertableTrades.size();
-//		if (size > 4) {
-//			ArrayList<IDinnertableTrade> subList = new ArrayList<IDinnertableTrade>();
-//			for (int i = size - 4; i < size; i++) {
-//				subList.add(dinnertableTrades.get(i));
-//			}
-//			this.dinnertableTrades = subList;
-//		} else {
         this.dinnertableTrades = dinnertableTrades;
-//		}
         numberOfMeals = number;
         unprocessTradeCount = count;
     }
@@ -227,27 +203,16 @@ public class DinnertableModel implements IDinnertable {
 
     public synchronized void setmListHttpRecord(List<AsyncHttpRecord> mListHttpRecord) {
 
-        if (Utils.isEmpty(mListHttpRecord)) {//如果没有数据就直接返回
-            this.mListHttpRecord = null;
+        if (Utils.isEmpty(mListHttpRecord)) {            this.mListHttpRecord = null;
             return;
         }
 
-        try {//排序偶尔会弹出一个异常，暂时没有找到原因
-            Collections.sort(mListHttpRecord, new Comparator<AsyncHttpRecord>() {
+        try {            Collections.sort(mListHttpRecord, new Comparator<AsyncHttpRecord>() {
                 @Override
                 public int compare(AsyncHttpRecord lhs, AsyncHttpRecord rhs) {
 
                     int flag = lhs.getClientUpdateTime().compareTo(rhs.getClientUpdateTime());
 
-//					int flag = rhs.getType().value().compareTo(lhs.getType().value());
-//
-//					if (flag == 0) {
-//						flag = lhs.getStatus().value().compareTo(rhs.getStatus().value());
-//					}
-//
-//					if (flag == 0) {
-//						flag = lhs.getClientUpdateTime().compareTo(rhs.getClientUpdateTime());
-//					}
 
                     return flag;
 
@@ -341,11 +306,7 @@ public class DinnertableModel implements IDinnertable {
         return stateInfo == null ? TableStatus.EMPTY : stateInfo.tableStatus;
     }
 
-    /**
-     * 返回桌台表中的桌台状态
-     *
-     * @return
-     */
+
     public TableStatus getPhysicsTableStatus() {
         return tableStatus;
     }
@@ -391,12 +352,7 @@ public class DinnertableModel implements IDinnertable {
         this.uuid = uuid;
     }
 
-    /**
-     * @Date 2016/10/13
-     * @Description:获取桌台需要展示的http请求
-     * @Param
-     * @Return
-     */
+
     public AsyncHttpRecord getAsyncHttpRecord() {
         if (dinnertableTrades != null && dinnertableTrades.size() != 0) {
             AsyncHttpRecord recordResult = null;
@@ -421,12 +377,7 @@ public class DinnertableModel implements IDinnertable {
         return null;
     }
 
-    /**
-     * @Date 2016/10/21
-     * @Description:判断桌台上是否有加菜
-     * @Param
-     * @Return
-     */
+
     public boolean hasAddDish() {
         if (dinnertableTrades != null) {
             for (IDinnertableTrade trade : dinnertableTrades) {

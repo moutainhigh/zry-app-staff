@@ -4,9 +4,7 @@ import android.database.DataSetObservable;
 import android.database.DataSetObserver;
 import android.view.View;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public interface Indicator {
 
@@ -18,7 +16,6 @@ public interface Indicator {
 
         private DataSetObservable observable = new DataSetObservable();
 
-//        TODO: add recycler
 
         public abstract View getPrevActionView(Indicator indicator, int orientation);
 

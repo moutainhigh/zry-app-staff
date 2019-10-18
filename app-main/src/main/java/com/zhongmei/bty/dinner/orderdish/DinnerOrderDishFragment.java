@@ -6,11 +6,7 @@ import com.zhongmei.yunfu.context.util.SharedPreferenceUtil;
 import com.zhongmei.bty.dinner.orderdish.view.BrandTypeView;
 import com.zhongmei.bty.dinner.orderdish.view.BrandTypeViewEx;
 
-/**
- * @Date： 17/6/7
- * @Description:
- * @Version: 1.0
- */
+
 public class DinnerOrderDishFragment extends DishHomePageFragment {
 
     @Override

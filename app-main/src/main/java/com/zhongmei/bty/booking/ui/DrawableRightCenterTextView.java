@@ -6,11 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-/**
- *
 
- *
- */
 public class DrawableRightCenterTextView extends TextView {
 
     private final static String TAG = "RightDrawableButton";

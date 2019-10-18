@@ -63,14 +63,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 正餐退菜原因窗口
- *
- * @Date：2015-12-11 上午9:57:42
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @EFragment(R.layout.view_return_goods_reason)
 public class ReturnGoodsReasonView extends BasicDialogFragment {
 
@@ -118,11 +111,8 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
 
     private Drawable selectDrawable;
 
-    private BigDecimal returnCount;// 退菜数
-
-    private BigDecimal increaseUnit = BigDecimal.ONE;//菜品起卖份数
-    private BigDecimal stepNum = BigDecimal.ONE;//菜品增量
-
+    private BigDecimal returnCount;
+    private BigDecimal increaseUnit = BigDecimal.ONE;    private BigDecimal stepNum = BigDecimal.ONE;
     InputMethodManager mInputMethodManager;
 
     private ConfirmListener confirmListener;
@@ -164,26 +154,19 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         initInventoryItemList();
     }
 
-    /**
-     * 初始化编辑框的数量
-     */
+
     private void initCount() {
         if (!DinnerTradeItemManager.isMustReturnAll(shopcartItemBase)
-                && !TextUtils.isEmpty(shopcartItemBase.getBatchNo())) {// 退菜数默认为增量值
-            // 菜品数量小于等于起卖份数时，只能全退
-            if (shopcartItemBase.getSingleQty().compareTo(increaseUnit) <= 0) {
+                && !TextUtils.isEmpty(shopcartItemBase.getBatchNo())) {                        if (shopcartItemBase.getSingleQty().compareTo(increaseUnit) <= 0) {
                 returnCount = shopcartItemBase.getSingleQty();
-                // 正常情况下为其增量值
-            } else {
+                            } else {
                 BigDecimal leaveCount = shopcartItemBase.getSingleQty().subtract(stepNum);
-                if (leaveCount.compareTo(increaseUnit) < 0) {//加数量时，如果导致剩余数量小于起卖份数，自动跳为全退数目
-                    returnCount = shopcartItemBase.getSingleQty();
+                if (leaveCount.compareTo(increaseUnit) < 0) {                    returnCount = shopcartItemBase.getSingleQty();
                 } else {
                     returnCount = stepNum;
                 }
             }
-        } else {// 称重商品不显示数量修改，数量为全退
-            returnCount = shopcartItemBase.getSingleQty();
+        } else {            returnCount = shopcartItemBase.getSingleQty();
 
         }
 
@@ -195,11 +178,9 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
     private void initReturnDishCountView() {
         if (!DinnerTradeItemManager.isMustReturnAll(shopcartItemBase)
                 && !TextUtils.isEmpty(shopcartItemBase.getBatchNo())
-                && shopcartItemBase.getShopcartItemType() != ShopcartItemType.MAINBATCH) {// 退菜数默认为增量值
-            tvCount.setVisibility(View.VISIBLE);
+                && shopcartItemBase.getShopcartItemType() != ShopcartItemType.MAINBATCH) {            tvCount.setVisibility(View.VISIBLE);
             llCount.setVisibility(View.VISIBLE);
-            // 小于等于0的还好意思展示？
-        } else {
+                    } else {
             hideCountView();
         }
         if (returnCount.compareTo(BigDecimal.ZERO) > 0) {
@@ -259,8 +240,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
     }
 
     private void initUtil() {
-        //初始化输入法
-        mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     private void initUI() {
@@ -277,7 +257,6 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         }
         if (isShowReturnInventoryLayout) {
             inventoryLayout.setVisibility(View.VISIBLE);
-//			initInventoryItemList();
             inventoryLayout.refreshView(inventoryItemList);
         } else {
             inventoryLayout.setVisibility(View.GONE);
@@ -306,8 +285,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
 
             BigDecimal leaveCount = shopcartItemBase.getSingleQty().subtract(inputCount);
 
-            // 不能退0
-            if (inputCount.compareTo(BigDecimal.ZERO) <= 0) {
+                        if (inputCount.compareTo(BigDecimal.ZERO) <= 0) {
                 ToastUtil.showShortToast(R.string.return_must_more_than_0);
                 etCount.setText(MathDecimal.toTrimZeroString(returnCount));
                 etCount.setSelection(etCount.getText().length());
@@ -335,9 +313,6 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
                 if (hasFocus) {
                     clearReasonSelect();
                 } else {
-//					InputMethodManager imm =
-//						(InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-//					imm.hideSoftInputFromWindow(getActivity()., InputMethodManager.RESULT_UNCHANGED_SHOWN);
                 }
                 break;
             default:
@@ -371,13 +346,11 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
                     return;
                 }
 
-                if (shopcartItemBase.getSingleQty().compareTo(increaseUnit) <= 0) {//菜品数量小于等于起卖份数，只能全退
-                    newCount = shopcartItemBase.getSingleQty();
+                if (shopcartItemBase.getSingleQty().compareTo(increaseUnit) <= 0) {                    newCount = shopcartItemBase.getSingleQty();
                     ToastUtil.showShortToast(R.string.must_return_all);
                 } else {
                     BigDecimal leaveCount = shopcartItemBase.getSingleQty().subtract(newCount);
-                    if (leaveCount.compareTo(BigDecimal.ZERO) > 0 && leaveCount.compareTo(increaseUnit) < 0) {//加数量时，如果导致剩余数量小于起卖份数，自动跳为全量－剩余数量
-                        newCount = shopcartItemBase.getSingleQty().subtract(increaseUnit);
+                    if (leaveCount.compareTo(BigDecimal.ZERO) > 0 && leaveCount.compareTo(increaseUnit) < 0) {                        newCount = shopcartItemBase.getSingleQty().subtract(increaseUnit);
                     }
                 }
 
@@ -401,12 +374,10 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
                 newCount = oldCount.add(stepNum);
 
                 if (newCount.compareTo(shopcartItemBase.getSingleQty()) > 0) {
-                    newCount = shopcartItemBase.getSingleQty();//全退
-                    ToastUtil.showShortToast(R.string.return_cannot_more_than_count);
+                    newCount = shopcartItemBase.getSingleQty();                    ToastUtil.showShortToast(R.string.return_cannot_more_than_count);
                 } else {
                     BigDecimal leaveCount = shopcartItemBase.getSingleQty().subtract(newCount);
-                    if (leaveCount.compareTo(increaseUnit) < 0) {//加数量时，如果导致剩余数量小于起卖份数，自动跳为全退数目
-                        newCount = shopcartItemBase.getSingleQty();
+                    if (leaveCount.compareTo(increaseUnit) < 0) {                        newCount = shopcartItemBase.getSingleQty();
                     }
                 }
 
@@ -414,19 +385,12 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
                 etCount.setSelection(etCount.getText().length());
                 break;
             case R.id.btn_confirm_return:
-                //非批量模式需要验证退菜数量
-                if (!isBatchMode//不是批量模式
-                        && !TextUtils.isEmpty(dishDataItem.getBase().getBatchNo()) //已出单
-                        && !dishDataItem.getBase().isGroupDish() //不是团餐菜品
-                        && dishDataItem.getBase().getSaleType() != SaleType.WEIGHING  //不是称重
-                        && dishDataItem.getBase().getShopcartItemType() != ShopcartItemType.MAINBATCH) {//不是正餐联台批量菜
-                    if (!verifyReturnCount()) {
+                                if (!isBatchMode                        && !TextUtils.isEmpty(dishDataItem.getBase().getBatchNo())                         && !dishDataItem.getBase().isGroupDish()                         && dishDataItem.getBase().getSaleType() != SaleType.WEIGHING                          && dishDataItem.getBase().getShopcartItemType() != ShopcartItemType.MAINBATCH) {                    if (!verifyReturnCount()) {
                         return;
                     }
                 }
 
-                // 退菜监听
-                if (confirmListener != null) {
+                                if (confirmListener != null) {
                     Reason reason = null;
                     if (reasonLayout.isShown()) {
                         reason = getReason();
@@ -467,20 +431,17 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
 
         BigDecimal leaveCount = shopcartItemBase.getSingleQty().subtract(returnCount);
 
-        // 不能退0
-        if (returnCount.compareTo(BigDecimal.ZERO) <= 0) {
+                if (returnCount.compareTo(BigDecimal.ZERO) <= 0) {
             ToastUtil.showShortToast(R.string.return_must_more_than_0);
             etCount.setSelection(0, etCount.getText().length());
 
             return false;
-            // 没退完，但是剩余部分少于起卖份数
-        } else if (leaveCount.compareTo(increaseUnit) < 0 && leaveCount.compareTo(BigDecimal.ZERO) > 0) {
+                    } else if (leaveCount.compareTo(increaseUnit) < 0 && leaveCount.compareTo(BigDecimal.ZERO) > 0) {
             ToastUtil.showShortToast(R.string.leave_less_than_min);
             etCount.setSelection(0, etCount.getText().length());
 
             return false;
-            // 退菜份数比原本的份数还多了
-        } else if (returnCount.compareTo(shopcartItemBase.getSingleQty()) > 0) {
+                    } else if (returnCount.compareTo(shopcartItemBase.getSingleQty()) > 0) {
             ToastUtil.showShortToast(R.string.return_cannot_more_than_count);
             etCount.setSelection(0, etCount.getText().length());
 
@@ -494,12 +455,10 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         ReturnGoodsReasonTextView textView = getSelectReason();
         Long id;
         String text;
-        // 处理选中的原因
-        if (textView != null) {
+                if (textView != null) {
             id = textView.id;
             text = textView.getText().toString();
-            // 未选中，处理输入的原因
-        } else if (!TextUtils.isEmpty(etOtherReason.getText())) {
+                    } else if (!TextUtils.isEmpty(etOtherReason.getText())) {
             id = DEFAULT_RETURN_GOODS_REASON_ID;
             text = etOtherReason.getText().toString();
         } else {
@@ -518,12 +477,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
     boolean touch(View v, MotionEvent event) {
         switch (v.getId()) {
             case R.id.et_other_reason:
-                etOtherReason.setFocusable(true);//设置输入框可聚集
-                etOtherReason.setFocusableInTouchMode(true);//设置触摸聚焦
-                etOtherReason.requestFocus();//请求焦点
-                etOtherReason.findFocus();//获取焦点
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-//					svContainer.scrollTo(0, (int)v.getY());
+                etOtherReason.setFocusable(true);                etOtherReason.setFocusableInTouchMode(true);                etOtherReason.requestFocus();                etOtherReason.findFocus();                if (event.getAction() == MotionEvent.ACTION_UP) {
                 }
                 break;
             default:
@@ -535,7 +489,6 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
 
     @Override
     public void show(FragmentManager manager, String tag) {
-//		if(isBatchMode || shopcartItemBase != null && shopcartItemBase.)
         isShowReturnInventoryLayout = InventoryCacheUtil.getInstance().getSaleSwitch();
         if (isShowReturnInventoryLayout || isShowReason) {
             super.show(manager, tag);
@@ -549,12 +502,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         }
     }
 
-    /**
-     * 显示时，添加所有可选原因
-     *
-     * @Title: initReasonLayout
-     * @Return void 返回类型
-     */
+
     private void initReasonLayout() {
         ReasonDal reasonDal = OperatesFactory.create(ReasonDal.class);
         if (reasonDal.isReasonSwitchOpen(ReasonType.ITEM_RETURN_QTY)) {
@@ -565,8 +513,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
                 for (int i = 0; i < reasons.size(); i++) {
                     ReasonSetting reason = reasons.get(i);
                     llSelectReason.addView(new ReturnGoodsReasonTextView(getActivity(), reason.getId(), reason.getContent()));
-                    // 最后一个不加分割线
-                    if (i < reasons.size() - 1) {
+                                        if (i < reasons.size() - 1) {
                         LinearLayout.LayoutParams separatorLp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 1);
                         View separatorView = new View(getActivity());
                         separatorView.setBackgroundResource(R.color.separator_reason);
@@ -581,18 +528,11 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         }
     }
 
-    /**
-     * 隐藏时，清除所有可选原因
-     *
-     * @Title: hide
-     * @Return void 返回类型
-     */
+
     public void hide() {
         etOtherReason.setText("");
         llSelectReason.removeAllViews();
-        // 滚回顶部
-//		svContainer.scrollTo(0, 0);
-        dismiss();
+                dismiss();
     }
 
     private List<ReasonSetting> queryReason() {
@@ -606,12 +546,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         return null;
     }
 
-    /**
-     * 获取选中的原因
-     *
-     * @Title: getSelectReason
-     * @Return ReturnGoodsReasonTextView 返回类型
-     */
+
     private ReturnGoodsReasonTextView getSelectReason() {
         for (int i = 0; i < llSelectReason.getChildCount(); i++) {
             View child = llSelectReason.getChildAt(i);
@@ -623,12 +558,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         return null;
     }
 
-    /**
-     * 清空所有选中的原因
-     *
-     * @Title: clearReasonSelect
-     * @Return void 返回类型
-     */
+
     private void clearReasonSelect() {
         for (int i = 0; i < llSelectReason.getChildCount(); i++) {
             View child = llSelectReason.getChildAt(i);
@@ -665,17 +595,13 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
                 public void onClick(View v) {
                     etOtherReason.setFocusable(false);
                     if (mInputMethodManager.isActive()) {
-                        mInputMethodManager.hideSoftInputFromWindow(etOtherReason.getWindowToken(), 0);// 隐藏输入法
-                    }
+                        mInputMethodManager.hideSoftInputFromWindow(etOtherReason.getWindowToken(), 0);                    }
                     if (isSelected()) {
                         setSelected(false);
                     } else {
-                        // 先取消勾选其他的
-                        clearReasonSelect();
-                        // 选中自己
-                        setSelected(true);
-                        // 清空自定义输入框
-                        etOtherReason.setText("");
+                                                clearReasonSelect();
+                                                setSelected(true);
+                                                etOtherReason.setText("");
                         tvCount.requestFocus();
                     }
                 }
@@ -693,12 +619,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         }
     }
 
-    /**
-     * 获取起卖份数
-     *
-     * @param shopcartItem
-     * @return
-     */
+
     private BigDecimal getIncreaseUnit(IShopcartItemBase shopcartItem) {
         DishShop dishShop = shopcartItem.getDishShop();
         if (dishShop == null) {
@@ -713,12 +634,7 @@ public class ReturnGoodsReasonView extends BasicDialogFragment {
         }
     }
 
-    /**
-     * @Title: getStepNum
-     * @Description: 获取菜品增量
-     * @Param @param shopcartItem
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal genStepNum(IShopcartItemBase shopcartItem) {
         DishShop dishShop = shopcartItem.getDishShop();
         if (dishShop == null) {

@@ -6,47 +6,31 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.BasicEntityBase;
 import com.zhongmei.yunfu.db.enums.TradeReturnInfoReturnStatus;
 
-/**
- * ThirdReturnInfo is a ORMLite bean type. Corresponds to the database table "trade_return_info"
- */
+
 @DatabaseTable(tableName = "trade_return_info")
 public class TradeReturnInfo extends BasicEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_return_info"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * return_status
-         */
+
         public static final String returnStatus = "return_status";
 
-        /**
-         * uuid
-         */
+
         public static final String uuid = "uuid";
 
-        /**
-         * reason
-         */
+
         public static final String reason = "reason";
 
-        /**
-         * sequence_no
-         */
+
         public static final String sequence_no = "sequence_no";
     }
 

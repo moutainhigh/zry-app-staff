@@ -2,31 +2,19 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public enum TradePrintStatus implements ValueEnum<Integer> {
 
-    /**
-     * 未打印
-     */
+
     UNPRINT(1),
 
-    /**
-     * 已打印
-     */
+
     PRINTED(2),
 
-    /**
-     * 部分打印
-     */
+
     PART_PRINTED(3),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

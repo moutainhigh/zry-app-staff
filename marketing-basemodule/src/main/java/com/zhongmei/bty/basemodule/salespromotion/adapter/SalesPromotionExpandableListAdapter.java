@@ -229,8 +229,7 @@ public class SalesPromotionExpandableListAdapter extends BaseExpandableListAdapt
                             || SalesPromotionConstant.PolicySubject.GIVE_GOODS == policySubjectType) {
                         ruleRestrictStr = mContext.getString(R.string.sales_promotion_rule_restrict_match_quantity_once_multiple_goods, MathDecimal.trimZero(logicValue));
                     } else if (SalesPromotionConstant.PolicySubject.SINGLE_GOODS == policySubjectType) {
-                        // TODO: 2018/7/18 要做点什么
-                    } else if (SalesPromotionConstant.PolicySubject.NEXT_GOODS == policySubjectType) {
+                                            } else if (SalesPromotionConstant.PolicySubject.NEXT_GOODS == policySubjectType) {
                         ruleRestrictStr = mContext.getString(R.string.sales_promotion_rule_restrict_match_quantity_once_next_goods, MathDecimal.trimZero(logicValue));
                     } else if (SalesPromotionConstant.PolicySubject.RAISE_PRICE_BUY_GOODS == policySubjectType) {
                         ruleRestrictStr = mContext.getString(R.string.sales_promotion_rule_restrict_raise_price_goods, MathDecimal.trimZero(logicValue), MathDecimal.trimZero(salesPromotionRule.getPolicyValue1()));
@@ -283,14 +282,12 @@ public class SalesPromotionExpandableListAdapter extends BaseExpandableListAdapt
         endDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //展示促销详情界面
-                SalesPromotionDetailFragment.show(mFragmentManager, salesPromotionRuleVo);
+                                SalesPromotionDetailFragment.show(mFragmentManager, salesPromotionRuleVo);
             }
         });
     }
 
-    //设置查看详情控件
-    private void setViewDetailsView(TextView viewDetails, final SalesPromotionRuleVo salesPromotionRuleVo) {
+        private void setViewDetailsView(TextView viewDetails, final SalesPromotionRuleVo salesPromotionRuleVo) {
         if (salesPromotionRuleVo.isCurrentEnable(mCustomerNew)) {
             viewDetails.setTextColor(mContext.getResources().getColor(R.color.color_666666));
         } else {
@@ -299,14 +296,12 @@ public class SalesPromotionExpandableListAdapter extends BaseExpandableListAdapt
         viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //展示促销详情界面
-                SalesPromotionDetailFragment.show(mFragmentManager, salesPromotionRuleVo);
+                                SalesPromotionDetailFragment.show(mFragmentManager, salesPromotionRuleVo);
             }
         });
     }
 
-    //设置规则信息控件
-    private void setRuleInfoView(View ruleInfo, SalesPromotionRuleVo salesPromotionRuleVo) {
+        private void setRuleInfoView(View ruleInfo, SalesPromotionRuleVo salesPromotionRuleVo) {
         SalesPromotionRule salesPromotionRule = salesPromotionRuleVo.getRule();
         if (salesPromotionRule != null) {
             int policyDetailType = salesPromotionRule.getPolicyDetailType();
@@ -337,8 +332,7 @@ public class SalesPromotionExpandableListAdapter extends BaseExpandableListAdapt
         }
     }
 
-    //设置内容控件
-    private void setContentView(View content, SalesPromotionRuleVo salesPromotionRuleVo) {
+        private void setContentView(View content, SalesPromotionRuleVo salesPromotionRuleVo) {
         if (salesPromotionRuleVo.isCurrentEnable(mCustomerNew)) {
             content.setBackgroundResource(R.drawable.sales_promotion_selector_bg_item_child);
             SalesPromotionRule salesPromotionRule = salesPromotionRuleVo.getRule();

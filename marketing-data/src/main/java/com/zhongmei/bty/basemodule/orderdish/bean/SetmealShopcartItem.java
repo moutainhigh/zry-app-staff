@@ -2,10 +2,7 @@ package com.zhongmei.bty.basemodule.orderdish.bean;
 
 import com.zhongmei.yunfu.db.entity.trade.TradeReasonRel;
 
-/**
- * @version: 1.0
- * @date 2015年7月10日
- */
+
 public class SetmealShopcartItem extends ShopcartItemBase<OrderSetmeal> implements ISetmealShopcartItem {
 
     public SetmealShopcartItem(String uuid, OrderSetmeal orderSetmeal, ShopcartItem parent) {

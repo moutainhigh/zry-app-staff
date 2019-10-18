@@ -24,11 +24,7 @@ import com.zhongmei.bty.basemodule.input.NumberKeyBoardUtils;
 import com.zhongmei.yunfu.util.ToastUtil;
 import com.zhongmei.bty.commonmodule.util.manager.ClickManager;
 
-/**
- *
 
- *
- */
 public class PasswordDialog extends Dialog {
 
     private ImageButton back;
@@ -67,8 +63,7 @@ public class PasswordDialog extends Dialog {
     }
 
     private void init() {
-        // 隐藏软键盘
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         back = (ImageButton) findViewById(R.id.close);
         sure = (Button) findViewById(R.id.sure);
@@ -83,8 +78,7 @@ public class PasswordDialog extends Dialog {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                if (lisetner != null) {
+                                if (lisetner != null) {
                     lisetner.showReadKeyBord();
                 }
             }
@@ -132,21 +126,17 @@ public class PasswordDialog extends Dialog {
 
             @Override
             public void clearClicked() {
-                // password.setLength(0);
-                // setEtText();
-            }
+                                            }
         });
         et.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
 
             }
 
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
 
             }
 
@@ -212,9 +202,7 @@ public class PasswordDialog extends Dialog {
                 || keyCode == KeyEvent.KEYCODE_NUMPAD_8 || keyCode == KeyEvent.KEYCODE_NUMPAD_9;
     }
 
-    /**
-     * 修改文本框显示值
-     */
+
     private void setEtText() {
         et.setText(password);
         et.setSelection(password.length());
@@ -234,35 +222,23 @@ public class PasswordDialog extends Dialog {
         void showReadKeyBord();
     }
 
-    /**
-     * 设置会员名称
-     *
-     * @param name
-     */
+
     public void setMembeName(String name) {
         name = name == null ? getContext().getString(R.string.have_no_name) : name;
         memberName.setText(this.getContext().getString(R.string.customer_passwor_dialog_membername, name));
     }
 
-    /**
-     * 设置会员内容
-     *
-     * @param content
-     */
+
     public void setMemberContent(String content) {
         memberName.setText(content);
     }
 
-    /**
-     * 关闭
-     */
+
     public void close() {
         PasswordDialog.this.dismiss();
     }
 
-    /**
-     * 清空输入框
-     */
+
     public void clean() {
         isAutoClean = true;
         password.setLength(0);

@@ -11,8 +11,7 @@ public class TradeCenterManager {
     private static TradeCenterManager sOrderCenterManager = new TradeCenterManager();
 
     private TradeCenterManager() {
-        // TODO Auto-generated constructor stub
-    }
+            }
 
     public static TradeCenterManager getInstance() {
         return sOrderCenterManager;

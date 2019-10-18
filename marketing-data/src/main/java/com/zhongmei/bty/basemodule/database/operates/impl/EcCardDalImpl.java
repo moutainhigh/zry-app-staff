@@ -12,9 +12,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class EcCardDalImpl extends AbstractOpeartesImpl implements EcCardDal {
 
     private static final String TAG = AbstractOpeartesImpl.class.getSimpleName();

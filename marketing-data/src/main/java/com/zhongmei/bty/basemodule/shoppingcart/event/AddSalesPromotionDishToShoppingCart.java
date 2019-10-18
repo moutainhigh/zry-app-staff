@@ -7,18 +7,13 @@ import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AddSalesPromotionDishToShoppingCart {
 
-    public static final int DISH_POLICY_ADD_PRICE_PURCHASE = 101;//加价购
-    public static final int DISH_POLICY_FREE = 102;//赠送
-
+    public static final int DISH_POLICY_ADD_PRICE_PURCHASE = 101;    public static final int DISH_POLICY_FREE = 102;
     private BigDecimal qty;
-    private int policyType;//营销策略类型
-    private SalesPromotionRuleVo salesPromotionRuleVo;
+    private int policyType;    private SalesPromotionRuleVo salesPromotionRuleVo;
 
     public int getPolicyType() {
         return policyType;

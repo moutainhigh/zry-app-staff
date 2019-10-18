@@ -141,10 +141,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-/**
- * @version: 1.0
- * @date 2015年5月11日
- */
+
 public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
     private static final String TAG = TradeDalImpl.class.getName();
@@ -161,24 +158,20 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             List<String> tradePrivilegeUuids = tradeBatchUnbindCouponReq.getTradePrivilegeUuids();
 
             Trade trade = null;
-            // 根据tradeId查询trade数据
-            if (Utils.isNotEmpty(tradePrivilegeUuids)) {
+                        if (Utils.isNotEmpty(tradePrivilegeUuids)) {
                 TradePrivilege tradePrivilege = getTradePrivilege(tradePrivilegeUuids.get(0));
                 tradeUuid = tradeUuid == null ? tradePrivilege.getTradeUuid() : tradeUuid;
                 trade = getTrade(tradeUuid);
             }
 
-            //TODO 订单为空时，抛出异常
-            if (trade == null) {
+                        if (trade == null) {
                 throw new Exception();
             }
 
             List<TradeItem> relatedTradeItems = new ArrayList<TradeItem>();
             for (String tradePrivilegeUuid : tradePrivilegeUuids) {
-                // 根据tradePrivilegeId查询tradePrivilege数据
-                TradePrivilege tradePrivilege = getTradePrivilege(tradePrivilegeUuid);
-                //TODO 优惠为空时，抛出异常
-                if (tradePrivilege == null) {
+                                TradePrivilege tradePrivilege = getTradePrivilege(tradePrivilegeUuid);
+                                if (tradePrivilege == null) {
                     throw new Exception();
                 }
 
@@ -191,15 +184,13 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 if (null != tradeItemUuid && !tradeItemUuid.isEmpty()) {
                     TradeItem tradeItem = getTradeItem(tradeItemUuid);
                     if (null != tradeItem) {
-                        // trade_item优惠金额
-                        tradeItem.setPropertyAmount(tradeItem.getPropertyAmount().abs().subtract(privilegeAmount));
+                                                tradeItem.setPropertyAmount(tradeItem.getPropertyAmount().abs().subtract(privilegeAmount));
                         tradeItem.setActualAmount(tradeItem.getActualAmount().abs().add(privilegeAmount));
                         relatedTradeItems.add(tradeItem);
                     }
                 }
 
-                // 将TradePrivilege Status_Flag值置为2
-                Dao<TradePrivilege, String> tradePrivilegeDao = helper.getDao(TradePrivilege.class);
+                                Dao<TradePrivilege, String> tradePrivilegeDao = helper.getDao(TradePrivilege.class);
                 UpdateBuilder<TradePrivilege, String> updateBuilder = tradePrivilegeDao.updateBuilder();
                 updateBuilder.updateColumnValue(TradePrivilege.$.statusFlag, StatusFlag.INVALID);
                 updateBuilder.updateColumnValue(TradePrivilege.$.serverUpdateTime, Standard.Time.currentTime());
@@ -207,8 +198,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 updateBuilder.update();
             }
 
-            //更新tradeItem数据
-            if (Utils.isNotEmpty(relatedTradeItems)) {
+                        if (Utils.isNotEmpty(relatedTradeItems)) {
                 for (TradeItem tradeItem : relatedTradeItems) {
                     Dao<TradeItem, String> tradeItemDao = helper.getDao(TradeItem.class);
                     UpdateBuilder<TradeItem, String> updateBuilder = tradeItemDao.updateBuilder();
@@ -220,8 +210,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 }
             }
 
-            // 更新trade数据
-            trade.setServerUpdateTime(Standard.Time.currentTime());
+                        trade.setServerUpdateTime(Standard.Time.currentTime());
             DBHelperManager.saveEntities(helper, Trade.class, true, trade);
         } finally {
             DBHelperManager.releaseHelper(helper);
@@ -599,8 +588,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(DateTimeUtils.getCurrentDayStart());
-            calendar.add(Calendar.DAY_OF_MONTH, -2);// 保留最近3天的记录
-            long minBizDate = calendar.getTimeInMillis();
+            calendar.add(Calendar.DAY_OF_MONTH, -2);            long minBizDate = calendar.getTimeInMillis();
             Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
             QueryBuilder<Trade, String> qb = tradeDao.queryBuilder();
             Where<Trade, String> where = qb.where();
@@ -644,8 +632,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         try {
             Calendar calendar = Calendar.getInstance();
             calendar.setTimeInMillis(DateTimeUtils.getCurrentDayStart());
-            calendar.add(Calendar.DAY_OF_MONTH, -2);// 保留最近3天的记录
-            long minBizDate = calendar.getTimeInMillis();
+            calendar.add(Calendar.DAY_OF_MONTH, -2);            long minBizDate = calendar.getTimeInMillis();
             Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
             QueryBuilder<Trade, String> qb = tradeDao.queryBuilder();
             Where<Trade, String> where = qb.where();
@@ -703,8 +690,6 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             paymentItemQb.selectColumns(PaymentItem.$.paymentId)
                     .where()
                     .eq(PaymentItem.$.payStatus, TradePayStatus.REFUND_FAILED)
-//                    .and()
-//                    .eq(PaymentItem.$.deviceIdenty, BaseApplication.getInstance().getDeviceIdenty())
                     .and()
                     .in(PaymentItem.$.payModeId, PayModeId.WEIXIN_PAY.value(), PayModeId.ALIPAY.value(), PayModeId.BAIFUBAO.value())
                     .and()
@@ -760,9 +745,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                         }
                     }
 
-                    /**
-                     * 微信卡券优惠列表
-                     */
+
                     List<WeiXinCouponsVo> weiXinCouponsVoList = tradeVo.getmWeiXinCouponsVo();
                     if (weiXinCouponsVoList != null) {
                         Dao<TradePrivilege, String> tpDao = helper.getDao(TradePrivilege.class);
@@ -771,8 +754,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                         }
                     }
 
-                    //优惠券列表
-                    List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
+                                        List<CouponPrivilegeVo> couponPrivilegeVoList = tradeVo.getCouponPrivilegeVoList();
 
                     if (couponPrivilegeVoList != null) {
                         Dao<TradePrivilege, String> tpDao = helper.getDao(TradePrivilege.class);
@@ -876,103 +858,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
     @Override
     public TakeOutVo findTradeVoTakeOutNew()
             throws Exception {
-        /*// TODO Auto-generated method stub
-        CalmDatabaseHelper mHelper = OpenHelperManager.getHelper(getContext(), CalmDatabaseHelper.class);
-        Cursor cursor = null;
-        // 查三天之内的外卖单
-        Calendar cad = Calendar.getInstance();
-        cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
-        cad.add(Calendar.DAY_OF_MONTH, -3);
 
-        StringBuilder sql = new StringBuilder("SELECT " + "t." + Trade.$.id + ",t." + Trade.$.uuid + ",t."
-                + Trade.$.tradeNo + ",t." + Trade.$.tradeStatus + ",t." + Trade.$.sourceId + ",t."
-                + Trade.$.serverCreateTime + "," + " te." + TradeExtra.$.deliveryStatus + ",te." + TradeExtra.$.receiverName
-                + ",te." + TradeExtra.$.receiverPhone + ",te." + TradeExtra.$.receivedTime + "," + " te."
-                + TradeExtra.$.deliveryAddress + ",te." + TradeExtra.$.deliveryRealTime + ",te." + TradeExtra.$.expectTime
-                + ",tc." + TradeCustomer.$.customerPhone + ",tc." + TradeCustomer.$.customerName
-                + " FROM trade t  LEFT JOIN trade_extra te ON t." + Trade.$.uuid + " = te." + TradeExtra.$.tradeUuid
-                + " LEFT JOIN trade_customer tc ON t." + Trade.$.uuid + "= tc." + TradeExtra.$.tradeUuid + " AND tc."
-                + TradeCustomer.$.customerType + " IN (" + CustomerType.MEMBER.value() + "," + CustomerType.CARD.value()
-                + ")" + " WHERE  t." + Trade.$.deliveryType + " = " + DeliveryType.SEND + " AND t." + Trade.$.businessType
-                + "!= " + BusinessType.DINNER + " AND t." + Trade.$.statusFlag + "= " + StatusFlag.VALID + " AND t."
-                + Trade.$.tradeStatus + " IN (" + TradeStatus.UNPROCESSED + "," + TradeStatus.CONFIRMED + ","
-                + TradeStatus.FINISH + ")" + " AND t." + Trade.$.tradeType + "=" + TradeType.SELL + " AND ( t."
-                + Trade.$.tradePayForm + "= " + TradePayForm.OFFLINE + " OR t." + Trade.$.tradePayStatus + " ="
-                + TradePayStatus.PAID + ")" + " AND t." + Trade.$.serverCreateTime + ">" + cad.getTime().getTime()
-                + " ORDER BY  t." + Trade.$.serverCreateTime + " DESC");
-
-        TakeOutVo takeOutVo = new TakeOutVo();
-        List<TradeVo> listUnProcess = new ArrayList<TradeVo>();
-        List<TradeVo> listDeliverWait = new ArrayList<TradeVo>();
-        List<TradeVo> listDelivering = new ArrayList<TradeVo>();
-        List<TradeVo> listRealDelivery = new ArrayList<TradeVo>();
-        try {
-            cursor = mHelper.getReadableDatabase().rawQuery(sql.toString(), null);
-            while (cursor.moveToNext()) {
-                Trade trade = new Trade();
-                trade.setId(cursor.getLong(cursor.getColumnIndex(Trade.$.id)));
-                trade.setUuid(cursor.getString(cursor.getColumnIndex(Trade.$.uuid)));
-                trade.setTradeNo(cursor.getString(cursor.getColumnIndex(Trade.$.tradeNo)));
-                trade.setSource(
-                        ValueEnums.toEnum(SourceId.class, cursor.getInt(cursor.getColumnIndex(Trade.$.sourceId))));
-                trade.setServerCreateTime(cursor.getLong(cursor.getColumnIndex(Trade.$.serverCreateTime)));
-                trade.setTradeStatus(
-                        ValueEnums.toEnum(TradeStatus.class, cursor.getInt(cursor.getColumnIndex(Trade.$.tradeStatus))));
-
-                TradeExtra tradeExtra = new TradeExtra();
-                tradeExtra.setReceiverName(cursor.getString(cursor.getColumnIndex(TradeExtra.$.receiverName)));
-                tradeExtra.setReceivedTime(cursor.getLong(cursor.getColumnIndex(TradeExtra.$.receivedTime)));
-                tradeExtra.setReceiverPhone(cursor.getString(cursor.getColumnIndex(TradeExtra.$.receiverPhone)));
-                tradeExtra.setDeliveryAddress(cursor.getString(cursor.getColumnIndex(TradeExtra.$.deliveryAddress)));
-                tradeExtra.setDeliveryRealTime(cursor.getLong(cursor.getColumnIndex(TradeExtra.$.deliveryRealTime)));
-                tradeExtra.setExpectTime(cursor.getLong(cursor.getColumnIndex(TradeExtra.$.expectTime)));
-                tradeExtra.setDeliveryStatus(ValueEnums.toEnum(DeliveryStatus.class,
-                        cursor.getInt(cursor.getColumnIndex(TradeExtra.$.deliveryStatus))));
-
-                TradeCustomer tradeCustomer = new TradeCustomer();
-                tradeCustomer.setCustomerPhone(cursor.getString(cursor.getColumnIndex(TradeCustomer.$.customerPhone)));
-                tradeCustomer.setCustomerName(cursor.getString(cursor.getColumnIndex(TradeCustomer.$.customerName)));
-                TradeVo tradeVo = new TradeVo();
-                tradeVo.setTrade(trade);
-                tradeVo.setTradeExtra(tradeExtra);
-                List<TradeCustomer> customers = new ArrayList<TradeCustomer>();
-                customers.add(tradeCustomer);
-                tradeVo.setTradeCustomerList(customers);
-
-                if (tradeExtra != null && tradeExtra.getDeliveryStatus() != null) {
-                    if (DeliveryStatus.WAITINT_DELIVERY.equalsValue(tradeExtra.getDeliveryStatus().value())) {
-                        if (TradeStatus.UNPROCESSED.equalsValue(trade.getTradeStatus().value())) {// 未处理
-                            listUnProcess.add(tradeVo);
-                        } else if (TradeStatus.CONFIRMED.equalsValue(trade.getTradeStatus().value())// 待配送
-                                // 接受订单时，已支付会改成已完成，未支付的会改成已确认
-                                || TradeStatus.FINISH.equalsValue(trade.getTradeStatus().value())) {
-                            listDeliverWait.add(tradeVo);
-                        }
-                    } else if (DeliveryStatus.DELIVERYING.equalsValue(tradeExtra.getDeliveryStatus().value())) {// 正在配送
-                        listDelivering.add(tradeVo);
-                    } else if (DeliveryStatus.REAL_DELIVERY.equalsValue(tradeExtra.getDeliveryStatus().value())
-                            || DeliveryStatus.SQUARE_UP.equalsValue(tradeExtra.getDeliveryStatus().value())) {// 配送完成或已清账
-                        if (trade.getServerCreateTime() >= DateTimeUtils.getCurrentDayStart()
-                                && trade.getServerCreateTime() <= DateTimeUtils.getCurrentDayEnd()) {// 配送送完成只显示当天的
-                            listRealDelivery.add(tradeVo);
-                        }
-                    }
-                }
-            }
-            takeOutVo.setListDelivering(listDelivering);
-            takeOutVo.setListDeliverWait(listDeliverWait);
-            takeOutVo.setListRealDelivery(listRealDelivery);
-            takeOutVo.setListUnProcess(listUnProcess);
-
-        } catch (Exception e) {
-            Log.e(TAG, "", e);
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-            OpenHelperManager.releaseHelper();
-        }
-        return takeOutVo;*/
         throw new Exception("findTradeVoTakeOutNew not supported");
     }
 
@@ -981,8 +867,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             throws Exception {
         final DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 查三天之内的外卖单
-            Calendar cad = Calendar.getInstance();
+                        Calendar cad = Calendar.getInstance();
             cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             cad.add(Calendar.DAY_OF_MONTH, -3);
             Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
@@ -1003,8 +888,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             List<Trade> tradeList = qb.query();
             List<TradeVo> tradeVoList = new ArrayList<TradeVo>();
             for (Trade trade : tradeList) {
-                // 状态同时为在线支付和未支付的单据过滤掉
-                if (trade.getTradePayForm().equalsValue(TradePayForm.ONLINE.value())
+                                if (trade.getTradePayForm().equalsValue(TradePayForm.ONLINE.value())
                         && trade.getTradePayStatus().equalsValue(TradePayStatus.UNPAID.value())) {
                     continue;
                 }
@@ -1038,8 +922,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             qb.limit(maxRows);
             List<Trade> trades = qb.query();
 
-            // 根据Trade组装TradeVo
-            List<TradeVo> tradeVos = new ArrayList<TradeVo>();
+                        List<TradeVo> tradeVos = new ArrayList<TradeVo>();
             if (Utils.isNotEmpty(trades)) {
                 for (Trade trade : trades) {
                     TradeVo tradeVo = new TradeVo();
@@ -1058,8 +941,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             throws Exception {
         final DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 查三天之内的外卖单
-            Calendar cad = Calendar.getInstance();
+                        Calendar cad = Calendar.getInstance();
             cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             cad.add(Calendar.DAY_OF_MONTH, -3);
 
@@ -1068,15 +950,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             List<TradeVo> tradeVoList = new ArrayList<TradeVo>();
             Where<TradeExtra, String> where = qb.where();
             switch (status) {
-                case UN_PROCESS:// 未处理
-                case WAITINT_DELIVERY:// 等待配送
-                    where.eq(TradeExtra.$.deliveryStatus, DeliveryStatus.WAITINT_DELIVERY);
+                case UN_PROCESS:                case WAITINT_DELIVERY:                    where.eq(TradeExtra.$.deliveryStatus, DeliveryStatus.WAITINT_DELIVERY);
                     break;
-                case DELIVERYING:// 正在配送
-                    where.eq(TradeExtra.$.deliveryStatus, DeliveryStatus.DELIVERYING);
+                case DELIVERYING:                    where.eq(TradeExtra.$.deliveryStatus, DeliveryStatus.DELIVERYING);
                     break;
-                case REAL_DELIVERY:// 配送完成
-                    where.eq(TradeExtra.$.deliveryStatus, DeliveryStatus.REAL_DELIVERY);
+                case REAL_DELIVERY:                    where.eq(TradeExtra.$.deliveryStatus, DeliveryStatus.REAL_DELIVERY);
                     break;
                 default:
                     break;
@@ -1092,17 +970,13 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                             && TradeType.SELL.equalsValue(trade.getTradeType().value())
                             && StatusFlag.VALID.equalsValue(trade.getStatusFlag().value())) {
                         TradeVo tradeVo = findTradeVo(helper, trade);
-                        if (status == TradeDeliveryStatus.UN_PROCESS) {// 未处理
-                            if (TradeStatus.UNPROCESSED.equalsValue(trade.getTradeStatus().value())) {
+                        if (status == TradeDeliveryStatus.UN_PROCESS) {                            if (TradeStatus.UNPROCESSED.equalsValue(trade.getTradeStatus().value())) {
                                 tradeVoList.add(tradeVo);
                             }
-                        } else if (status == TradeDeliveryStatus.WAITINT_DELIVERY) {// pad已确认
-                            // 待配送
-                            if (TradeStatus.CONFIRMED.equalsValue(trade.getTradeStatus().value())) {
+                        } else if (status == TradeDeliveryStatus.WAITINT_DELIVERY) {                                                        if (TradeStatus.CONFIRMED.equalsValue(trade.getTradeStatus().value())) {
                                 tradeVoList.add(tradeVo);
                             }
-                        } else if (status == TradeDeliveryStatus.REAL_DELIVERY) {// 如果是配送完成，只显示当天的
-                            if (DateTimeUtils.getCurrentDayStart() == trade.getBizDate()) {
+                        } else if (status == TradeDeliveryStatus.REAL_DELIVERY) {                            if (DateTimeUtils.getCurrentDayStart() == trade.getBizDate()) {
                                 tradeVoList.add(tradeVo);
                             }
                         } else {
@@ -1153,8 +1027,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             throws SQLException {
         final DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 查三天之内的订单
-            Calendar cad = Calendar.getInstance();
+                        Calendar cad = Calendar.getInstance();
             cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             cad.add(Calendar.DAY_OF_MONTH, -3);
 
@@ -1172,8 +1045,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             where.gt(Trade.$.serverCreateTime, cad.getTime().getTime());
             qb.orderBy(Trade.$.serverCreateTime, false);
             List<Trade> tradeList = qb.query();
-            // 未处理订单，删除在线支付但未完成支付的
-            if (status == TradeStatus.UNPROCESSED) {
+                        if (status == TradeStatus.UNPROCESSED) {
                 for (int i = tradeList.size() - 1; i >= 0; i--) {
                     Trade trade = tradeList.get(i);
                     if (trade.getTradePayStatus() == TradePayStatus.UNPAID
@@ -1213,8 +1085,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             throws SQLException {
         final DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 查三天之内的订单
-            Calendar cad = Calendar.getInstance();
+                        Calendar cad = Calendar.getInstance();
             cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             cad.add(Calendar.DAY_OF_MONTH, -3);
 
@@ -1222,8 +1093,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             QueryBuilder<Trade, String> qb = tradeDao.queryBuilder();
             List<TradeVo> tradeVoList = new ArrayList<TradeVo>();
             Where<Trade, String> where = qb.where();
-            // 未支付的必胜客订单
-            where.eq(Trade.$.sourceId, SourceId.KIOSK).and().eq(Trade.$.sourceChild, SourceChild.PIZZAHUT);
+                        where.eq(Trade.$.sourceId, SourceId.KIOSK).and().eq(Trade.$.sourceChild, SourceChild.PIZZAHUT);
             where.and().eq(Trade.$.tradeStatus, TradeStatus.CONFIRMED).and().eq(Trade.$.tradePayStatus,
                     TradePayStatus.UNPAID);
             where.and().gt(Trade.$.serverCreateTime, cad.getTime().getTime());
@@ -1240,8 +1110,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             throws Exception {
         final DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 查三天之内的单据
-            Calendar cad = Calendar.getInstance();
+                        Calendar cad = Calendar.getInstance();
             cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             cad.add(Calendar.DAY_OF_MONTH, -3);
             Dao<TradeCustomer, String> tradeCustomerDao = helper.getDao(TradeCustomer.class);
@@ -1307,29 +1176,20 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
     }
 
-    /**
-     * 只查订单和扩展 加上客户信息 用于自定义搜索
-     *
-     * @param helper
-     * @param trade
-     * @return
-     * @throws Exception
-     */
+
     private TradeVo findTradeAndExtra(DatabaseHelper helper, Trade trade)
             throws Exception {
         TradeVo tradeVo = null;
         if (trade != null) {
             tradeVo = new TradeVo();
             tradeVo.setTrade(trade);
-            // 交易扩展
-            TradeExtra tradeExtra = helper.getDao(TradeExtra.class)
+                        TradeExtra tradeExtra = helper.getDao(TradeExtra.class)
                     .queryBuilder()
                     .where()
                     .eq(TradeExtra.$.tradeUuid, trade.getUuid())
                     .queryForFirst();
             tradeVo.setTradeExtra(tradeExtra);
-            // 客户列表
-            List<TradeCustomer> tradeCustomerList =
+                        List<TradeCustomer> tradeCustomerList =
                     helper.getDao(TradeCustomer.class).queryForEq(TradeCustomer.$.tradeUuid, trade.getUuid());
             tradeVo.setTradeCustomerList(tradeCustomerList);
         }
@@ -1341,8 +1201,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             throws Exception {
         final DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 查三天之内的单据
-            Calendar cad = Calendar.getInstance();
+                        Calendar cad = Calendar.getInstance();
             cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
             cad.add(Calendar.DAY_OF_MONTH, -3);
             Dao<TradeExtra, String> extraDao = helper.getDao(TradeExtra.class);
@@ -1366,8 +1225,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     TradeVo vo = new TradeVo();
                     vo.setTrade(trade);
                     vo.setTradeExtra(extra);
-                    // 客户列表
-                    List<TradeCustomer> tradeCustomerList =
+                                        List<TradeCustomer> tradeCustomerList =
                             helper.getDao(TradeCustomer.class).queryForEq(TradeCustomer.$.tradeUuid, trade.getUuid());
                     vo.setTradeCustomerList(tradeCustomerList);
                     List<PaymentVo> paymentList = listPaymentVo(helper, extra.getTradeUuid());
@@ -1420,8 +1278,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
     @Override
     public List<PaymentVo> listAdjustPayment()
             throws Exception {
-        // 查三天之内的单
-        Calendar cad = Calendar.getInstance();
+                Calendar cad = Calendar.getInstance();
         cad.setTimeInMillis(DateTimeUtils.getCurrentDayEnd());
         cad.add(Calendar.DAY_OF_MONTH, -3);
         DatabaseHelper helper = DBHelperManager.getHelper();
@@ -1471,11 +1328,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
     }
 
-    /**
-     * 清除过期的挂单记录
-     *
-     * @throws Exception
-     */
+
     private static void clearExpiredPending(final DatabaseHelper helper)
             throws Exception {
         Callable<Object> callable = new Callable<Object>() {
@@ -1484,8 +1337,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     throws Exception {
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTimeInMillis(DateTimeUtils.getCurrentDayStart());
-                calendar.add(Calendar.DAY_OF_MONTH, -2);// 保留最近3天的记录
-                long minBizDate = calendar.getTimeInMillis();
+                calendar.add(Calendar.DAY_OF_MONTH, -2);                long minBizDate = calendar.getTimeInMillis();
                 Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
                 QueryBuilder<Trade, String> qb = tradeDao.queryBuilder();
                 qb.selectColumns(Trade.$.uuid);
@@ -1513,8 +1365,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
     @Override
     public List<Trade> listTradeByUUID(List<String> uuids) throws Exception {
-        //05e7787a0af1458d8f5dbd2ec2fe6f45
-        Checks.verifyNotNull(uuids, "uuids");
+                Checks.verifyNotNull(uuids, "uuids");
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
@@ -1562,8 +1413,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
         }
 
-        // 交易扩展
-        List<TradeExtra> tradeExtras = helper.getDao(TradeExtra.class)
+                List<TradeExtra> tradeExtras = helper.getDao(TradeExtra.class)
                 .queryBuilder()
                 .where()
                 .in(TradeExtra.$.tradeUuid, tradeUUIIDs)
@@ -1575,8 +1425,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        // 订单押金信息
-        List<TradeDeposit> tradeDeposits = helper.getDao(TradeDeposit.class)
+                List<TradeDeposit> tradeDeposits = helper.getDao(TradeDeposit.class)
                 .queryBuilder()
                 .where()
                 .in(TradeDeposit.$.tradeUuid, tradeUUIIDs)
@@ -1587,21 +1436,18 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradeDeposit.put(tradeDeposit.getTradeUuid(), tradeDeposit);
         }
 
-        //查询销售员
-        List<TradeUser> tradeUsers = helper.getDao(TradeUser.class)
+                List<TradeUser> tradeUsers = helper.getDao(TradeUser.class)
                 .queryBuilder()
                 .where()
                 .in(TradeUser.$.tradeId, tradeIDs)
-                .and().isNull(TradeUser.$.tradeItemId)//tradeItemId为null表示整单销售员
-                .query();
+                .and().isNull(TradeUser.$.tradeItemId)                .query();
 
         Map<Long, TradeUser> mapTradeUser = new HashMap<>();
         for (TradeUser tradeUser : tradeUsers) {
             mapTradeUser.put(tradeUser.getTradeId(), tradeUser);
         }
 
-        // 订单押金支付信息
-        List<TradeDepositPayRelation> tradeDepositPayRelations = helper.getDao(TradeDepositPayRelation.class)
+                List<TradeDepositPayRelation> tradeDepositPayRelations = helper.getDao(TradeDepositPayRelation.class)
                 .queryBuilder()
                 .orderBy(TradeDepositPayRelation.$.serverCreateTime, false)
                 .where()
@@ -1616,7 +1462,6 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             List<Long> depositPayRelationPaymentItemsIds = new ArrayList<Long>();
             for (TradeDepositPayRelation relation : tradeDepositPayRelations) {
                 depositPayRelationPaymentItemsIds.add(relation.getPaymentItemId());
-//                mapTradeDepositPayRelation.put(relation.getTradeUuid(), relation);
             }
 
             List<PaymentItem> paymentItem = helper.getDao(PaymentItem.class)
@@ -1630,16 +1475,14 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 mapDepositPaymentItem.put(item.getId(), item);
             }
 
-            for (TradeDepositPayRelation depositRelation : tradeDepositPayRelations) {//确定只有一条有效的押金支付关系
-                if (mapDepositPaymentItem.containsKey(depositRelation.getPaymentItemId())) {
+            for (TradeDepositPayRelation depositRelation : tradeDepositPayRelations) {                if (mapDepositPaymentItem.containsKey(depositRelation.getPaymentItemId())) {
                     mapTradeDepositPayRelation.put(depositRelation.getTradeUuid(), depositRelation);
                 }
             }
         }
 
 
-        // 客户列表
-        List<TradeCustomer> tradeCustomerList = helper.getDao(TradeCustomer.class)
+                List<TradeCustomer> tradeCustomerList = helper.getDao(TradeCustomer.class)
                 .queryBuilder()
                 .orderBy(TradeCustomer.$.serverUpdateTime, false)
                 .where()
@@ -1655,8 +1498,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //自助餐人数
-        List<TradeBuffetPeople> tradeBuffetPeoplesList = helper.getDao(TradeBuffetPeople.class)
+                List<TradeBuffetPeople> tradeBuffetPeoplesList = helper.getDao(TradeBuffetPeople.class)
                 .queryBuilder().where()
                 .in(TradeBuffetPeople.$.tradeUuid, tradeUUIIDs)
                 .query();
@@ -1669,8 +1511,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradeBuffetPeoples.get(tradeBuffetPeople.getTradeUuid()).add(tradeBuffetPeople);
         }
 
-        // 桌台列表
-        List<TradeTable> tradeTableList = helper.getDao(TradeTable.class).queryBuilder().where().in(TradeTable.$.tradeUuid, tradeUUIIDs).query();
+                List<TradeTable> tradeTableList = helper.getDao(TradeTable.class).queryBuilder().where().in(TradeTable.$.tradeUuid, tradeUUIIDs).query();
 
         Map<String, List<TradeTable>> mapTradeTable = new HashMap<>();
         for (TradeTable tradeTable : tradeTableList) {
@@ -1681,8 +1522,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        // 营销活动Trade_Plan_Activity
-        List<TradePlanActivity> tradePlanActivitys = helper.getDao(TradePlanActivity.class)
+                List<TradePlanActivity> tradePlanActivitys = helper.getDao(TradePlanActivity.class)
                 .queryBuilder()
                 .where()
                 .in(TradePlanActivity.$.tradeUuid, tradeUUIIDs)
@@ -1702,15 +1542,13 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradePlanActivitys.get(tradePlanActivity.getTradeUuid()).add(tradePlanActivity);
         }
 
-        // 营销活动Trade_Plan_Item_Activity
-        List<TradeItemPlanActivity> tradeItemPlanActivities = helper.getDao(TradeItemPlanActivity.class)
+                List<TradeItemPlanActivity> tradeItemPlanActivities = helper.getDao(TradeItemPlanActivity.class)
                 .queryBuilder()
                 .where()
                 .in(TradeItemPlanActivity.$.relUuid, tradePlanUUIDs)
                 .and()
                 .eq(TradeItemPlanActivity.$.statusFlag, StatusFlag.VALID)
                 .query();
-//TradeItemPlanActivity 服务器数据库中未存tradeUuid
         Map<Long, List<TradeItemPlanActivity>> mapTradeItemPlanActivity = new HashMap<>();
         for (TradeItemPlanActivity tradeItemPlanActivity : tradeItemPlanActivities) {
             if (!mapTradeItemPlanActivity.containsKey(tradeItemPlanActivity.getTradeId())) {
@@ -1719,9 +1557,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradeItemPlanActivity.get(tradeItemPlanActivity.getTradeId()).add(tradeItemPlanActivity);
         }
 
-        //查询优惠，（单独做一个方法来抽取）
-        // 优惠
-        List<TradePrivilege> tpList = helper.getDao(TradePrivilege.class)
+                        List<TradePrivilege> tpList = helper.getDao(TradePrivilege.class)
                 .queryBuilder()
                 .orderBy(TradePrivilege.$.privilegeType, true)
                 .where()
@@ -1753,8 +1589,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 .and()
                 .in(ExtraCharge.$.id, extraChargeIds)
                 .query();
-        //最低消费附加费
-        ExtraCharge minConsumCharge = helper.getDao(ExtraCharge.class).queryBuilder().where()
+                ExtraCharge minConsumCharge = helper.getDao(ExtraCharge.class).queryBuilder().where()
                 .eq(ExtraCharge.$.statusFlag, StatusFlag.VALID)
                 .and()
                 .eq(ExtraCharge.$.enabledFlag, Bool.YES)
@@ -1766,15 +1601,13 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapExtraCharge.put(extraCharge.getId(), extraCharge);
         }
 
-        //会员积分规则
-        List<CrmCustomerLevelRights> memberRules = helper.getDao(CrmCustomerLevelRights.class).queryBuilder().where().in(CrmCustomerLevelRights.$.id, privilegeRuleIds).query();
+                List<CrmCustomerLevelRights> memberRules = helper.getDao(CrmCustomerLevelRights.class).queryBuilder().where().in(CrmCustomerLevelRights.$.id, privilegeRuleIds).query();
         Map<Long, CrmCustomerLevelRights> mapMemberRule = new HashMap<>();
         for (CrmCustomerLevelRights memberRule : memberRules) {
             mapMemberRule.put(memberRule.getId(), memberRule);
         }
 
-        //实体卡积分规则
-        List<EcCardLevelSetting> cardRules = helper.getDao(EcCardLevelSetting.class).queryBuilder().where().in(EcCardLevelSetting.$.id, privilegeRuleIds).query();
+                List<EcCardLevelSetting> cardRules = helper.getDao(EcCardLevelSetting.class).queryBuilder().where().in(EcCardLevelSetting.$.id, privilegeRuleIds).query();
         Map<Long, EcCardLevelSetting> mapCardRule = new HashMap<>();
         for (EcCardLevelSetting cardRule : cardRules) {
             mapCardRule.put(cardRule.getId(), cardRule);
@@ -1801,17 +1634,9 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTpExtra.put(tradePrivilegeExtra.getTradePrivilegeId(), tradePrivilegeExtra);
         }
 
-        Map<String, List<CouponPrivilegeVo>> mapCouponPrivilege = new HashMap<>();//整单优惠，各种券
-        Map<String, IntegralCashPrivilegeVo> mapIntegralPrivilege = new HashMap<>();//积分优惠
-        Map<String, List<WeiXinCouponsVo>> mapWeiXinCouponPrivilege = new HashMap<>();//优惠卷
-        Map<String, BanquetVo> mapBanquetPrivelegeo = new HashMap<>();//宴请
-        Map<String, Map<Long, ExtraCharge>> mapTradeExtraCharge = new HashMap<>();//附加费
-        Map<String, List<TradePrivilege>> mapTradePrivilege = new HashMap<>();//附加费优惠
-        Map<String, TradePrivilege> mapTradeItemPrivilege = new HashMap<>();//单品优惠
-        for (TradePrivilege tp : tpList) {
+        Map<String, List<CouponPrivilegeVo>> mapCouponPrivilege = new HashMap<>();        Map<String, IntegralCashPrivilegeVo> mapIntegralPrivilege = new HashMap<>();        Map<String, List<WeiXinCouponsVo>> mapWeiXinCouponPrivilege = new HashMap<>();        Map<String, BanquetVo> mapBanquetPrivelegeo = new HashMap<>();        Map<String, Map<Long, ExtraCharge>> mapTradeExtraCharge = new HashMap<>();        Map<String, List<TradePrivilege>> mapTradePrivilege = new HashMap<>();        Map<String, TradePrivilege> mapTradeItemPrivilege = new HashMap<>();        for (TradePrivilege tp : tpList) {
             if (TextUtils.isEmpty(tp.getTradeItemUuid())) {
-                // 整单优惠
-                if (tp.getPrivilegeType() == PrivilegeType.COUPON) {
+                                if (tp.getPrivilegeType() == PrivilegeType.COUPON) {
                     CouponPrivilegeVo couponPrivilege = new CouponPrivilegeVo();
                     couponPrivilege.setTradePrivilege(tp);
                     if (mapTpExtra.get(tp.getId()) != null) {
@@ -1821,21 +1646,16 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                         Dao<Coupon, Long> couponDao = helper.getDao(Coupon.class);
                         Coupon coupon = couponDao.queryForId(tp.getPromoId());
                         couponPrivilege.setCoupon(coupon);
-//                        Dao<CoupRule, Long> coupRuleDao = helper.getDao(CoupRule.class);
-//                        List<CoupRule> coupRuleList = coupRuleDao.queryForEq(CoupRule.$.couponId, tp.getCouponId());
-//                        couponPrivilege.setCoupRuleList(coupRuleList);
                     }
 
                     Coupon coupon = couponPrivilege.getCoupon();
                     if (coupon != null) {
-                        // 礼品券可以和整单折扣共存，其他券不行
-                        if (coupon.getCouponType() == CouponType.GIFT) {
+                                                if (coupon.getCouponType() == CouponType.GIFT) {
                             if (mapTrade.get(tp.getTradeUuid()).getTradeAmount().compareTo(coupon.getFullValue()) >= 0) {
                                 couponPrivilege.setActived(true);
                             }
                         } else {
-                            // 单品菜价格加上折扣价格
-                            if (couponPrivilege.getTradePrivilege()
+                                                        if (couponPrivilege.getTradePrivilege()
                                     .getPrivilegeAmount()
                                     .compareTo(BigDecimal.ZERO) != 0) {
                                 couponPrivilege.setActived(true);
@@ -1855,14 +1675,12 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     if (mapTpExtra.get(tp.getId()) != null) {
                         integralCashPrivilegeVo.setTradePrivilegeExtra(mapTpExtra.get(tp.getId()));
                     }
-                    // 约定同时为零，视为无效
-                    if (tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) == 0
+                                        if (tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) == 0
                             && tp.getPrivilegeValue().compareTo(BigDecimal.ZERO) == 0) {
                         integralCashPrivilegeVo.setActived(false);
                     }
 
-                    //查询积分抵现规则
-                    try {
+                                        try {
                         Long ruleId = tp.getPromoId();
                         if (ruleId != null && ruleId > 0 && Utils.isNotEmpty(mapTradeCustomer.get(tp.getTradeUuid()))) {
                             List<TradeCustomer> tradeCustomers = mapTradeCustomer.get(tp.getTradeUuid());
@@ -1885,8 +1703,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     if (mapTpExtra.get(tp.getId()) != null) {
                         weiXinCouponsVo.setTradePrivilegeExtra(mapTpExtra.get(tp.getId()));
                     }
-                    // 约定同时为零，视为无效
-                    if (tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) == 0
+                                        if (tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) == 0
                             && tp.getPrivilegeValue().compareTo(BigDecimal.ZERO) == 0) {
                         weiXinCouponsVo.setActived(false);
                     }
@@ -1896,8 +1713,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     }
                     mapWeiXinCouponPrivilege.get(tp.getTradeUuid()).add(weiXinCouponsVo);
                 } else if (tp.getPrivilegeType() == PrivilegeType.BANQUET) {
-                    //宴请
-                    BanquetVo banquetVo = new BanquetVo();
+                                        BanquetVo banquetVo = new BanquetVo();
                     banquetVo.setTradePrivilege(tp);
                     mapBanquetPrivelegeo.put(tp.getTradeUuid(), banquetVo);
                 } else {
@@ -1920,14 +1736,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     mapTradePrivilege.get(tp.getTradeUuid()).add(tp);
                 }
             } else {
-                // 单品优惠
-                //itemTpFinder.put(tp.getTradeItemUuid(), tp);
-                mapTradeItemPrivilege.put(tp.getTradeItemUuid(), tp);
+                                                mapTradeItemPrivilege.put(tp.getTradeItemUuid(), tp);
             }
         }
 
-        // 获取订单促销活动
-        Map<Long, List<TradePromotion>> mapTradePromotion = new HashMap<>();
+                Map<Long, List<TradePromotion>> mapTradePromotion = new HashMap<>();
         if (Utils.isNotEmpty(tradeIDs)) {
             List<TradePromotion> tradePromotions = helper.getDao(TradePromotion.class).queryBuilder()
                     .orderBy(TradePromotion.$.serverUpdateTime, false)
@@ -1946,8 +1759,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //查询菜品
-        Dao<TradeItem, String> tiDao = helper.getDao(TradeItem.class);
+                Dao<TradeItem, String> tiDao = helper.getDao(TradeItem.class);
         QueryBuilder<TradeItem, String> tiQb = tiDao.queryBuilder();
         Where<TradeItem, String> tiWhere = tiQb.where();
         tiWhere.in(TradeItem.$.tradeUuid, tradeUUIIDs);
@@ -1961,8 +1773,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         List<Long> tradeItemIds = new ArrayList<>();
         List<String> tradeItemsUUIDs = new ArrayList<String>();
         for (TradeItem tradeItem : tradeItems) {
-            //子单占位的虚拟菜
-            if (tradeItem.getInvalidType() == InvalidType.SUB_BATCH_VITURAL && tradeItem.getStatusFlag() == StatusFlag.INVALID) {
+                        if (tradeItem.getInvalidType() == InvalidType.SUB_BATCH_VITURAL && tradeItem.getStatusFlag() == StatusFlag.INVALID) {
                 continue;
             }
             tradeItemsUUIDs.add(tradeItem.getUuid());
@@ -1971,8 +1782,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
         }
 
-        //查询联台单菜品数据
-        Dao<TradeItemMainBatchRel, String> tradeItemMainBatchRelDao = helper.getDao(TradeItemMainBatchRel.class);
+                Dao<TradeItemMainBatchRel, String> tradeItemMainBatchRelDao = helper.getDao(TradeItemMainBatchRel.class);
         List<TradeItemMainBatchRel> tradeItemMainBatchRels = tradeItemMainBatchRelDao.queryBuilder().where().in(TradeItemMainBatchRel.$.mainTradeId, tradeIDs).query();
 
         Map<Long, List<TradeItemMainBatchRel>> mapTradeItemMainBatchs = new HashMap<>();
@@ -1996,8 +1806,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //查询菜品关联的座位号
-        Dao<TradeItemExtraDinner, Long> seatDao = helper.getDao(TradeItemExtraDinner.class);
+                Dao<TradeItemExtraDinner, Long> seatDao = helper.getDao(TradeItemExtraDinner.class);
         List<TradeItemExtraDinner> listSeats = seatDao.queryBuilder().where().in(TradeItemExtraDinner.$.trade_item_id, tradeItemIds)
                 .and().eq(TradeItemExtraDinner.$.statusFlag, StatusFlag.VALID).query();
 
@@ -2013,8 +1822,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        // 查询TradeItemProperty
-        Dao<TradeItemProperty, String> tipDao = helper.getDao(TradeItemProperty.class);
+                Dao<TradeItemProperty, String> tipDao = helper.getDao(TradeItemProperty.class);
         Map<String, List<TradeItemProperty>> tradeItemPropertyListMap = new HashMap<String, List<TradeItemProperty>>();
         List<TradeItemProperty> TradeItemPropertyList =
                 tipDao.queryBuilder().where().in(TradeItemProperty.$.tradeItemUuid, tradeItemsUUIDs).query();
@@ -2028,14 +1836,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
         }
 
-        // 查询菜品对应的TradeReasonRel
-        Dao<TradeReasonRel, String> reasonRelDao = helper.getDao(TradeReasonRel.class);
+                Dao<TradeReasonRel, String> reasonRelDao = helper.getDao(TradeReasonRel.class);
         List<TradeReasonRel> reasionList = reasonRelDao.queryBuilder()
                 .orderBy(TradeReasonRel.$.serverUpdateTime, true)
                 .where()
-                //.in(TradeReasonRel.$.operateType, OperateType.ITEM_RETURN_QTY, OperateType.ITEM_GIVE, OperateType.TRADE_SINGLE_DISCOUNT)
-                //.and()
-                .in(TradeReasonRel.$.relateUuid, tradeItemsUUIDs)
+                                                .in(TradeReasonRel.$.relateUuid, tradeItemsUUIDs)
                 .and()
                 .eq(TradeReasonRel.$.statusFlag, StatusFlag.VALID)
                 .query();
@@ -2049,8 +1854,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //查询菜品对应的TradeReasonRel
-        Dao<TradeItemOperation, String> dao = helper.getDao(TradeItemOperation.class);
+                Dao<TradeItemOperation, String> dao = helper.getDao(TradeItemOperation.class);
         QueryBuilder<TradeItemOperation, String> qb = dao.queryBuilder();
         qb.where().in(TradeItemOperation.$.tradeItemId, tradeItemIds);
         qb.orderBy(TradeItemOperation.$.serverUpdateTime, true);
@@ -2065,8 +1869,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //TradeItem扩展
-        List<TradeItemExtra> tradeItemExtras = helper.getDao(TradeItemExtra.class)
+                List<TradeItemExtra> tradeItemExtras = helper.getDao(TradeItemExtra.class)
                 .queryBuilder().orderBy(TradeItemExtra.$.clientUpdateTime, false)
                 .where()
                 .in(TradeItemExtra.$.tradeItemUuid, tradeItemsUUIDs)
@@ -2077,11 +1880,8 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradeItemExtra.put(tradeItemExtra.getTradeItemUuid(), tradeItemExtra);
         }
 
-        //tradeItem篮子
-        //Map<Long, DishItemTypeAndSort> mapPkgName = getTradeItemPkgName(tradeItemIds);
 
-        //构建TradeItem信息
-        Map<String, MealShellVo> mapMealShellVo = new HashMap<>();
+                Map<String, MealShellVo> mapMealShellVo = new HashMap<>();
         Map<String, List<TradeItemVo>> mapTradeItemVo = new HashMap<>();
         for (TradeItem tradeItem : tradeItems) {
             if (tradeItem.getType() == DishType.MEAL_SHELL || tradeItem.getType() == DishType.BUFFET_COMBO_SHELL) {
@@ -2095,15 +1895,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
             TradeItemVo tiVo = new TradeItemVo();
             tiVo.setTradeItem(tradeItem);
-            tiVo.setTradeItemMainBatchRelList(mapTradeItemMainBatchs.get(tradeItem.getId()));//联台单设置TradeItem关联信息
-            tiVo.setTradeItemExtraDinner(mapTradeItemExtraDinner.get(tradeItem.getId()));
+            tiVo.setTradeItemMainBatchRelList(mapTradeItemMainBatchs.get(tradeItem.getId()));            tiVo.setTradeItemExtraDinner(mapTradeItemExtraDinner.get(tradeItem.getId()));
 
-            //篮子信息
-            //tiVo.setDishItemTypeAndSort(mapPkgName.get(tradeItem.getId()));
 
             tiVo.setTradeItemExtra(mapTradeItemExtra.get(tradeItem.getUuid()));
-            // 单品优惠
-            TradePrivilege tradePrivilege = mapTradeItemPrivilege.get(tradeItem.getUuid());
+                        TradePrivilege tradePrivilege = mapTradeItemPrivilege.get(tradeItem.getUuid());
 
             if (tradePrivilege != null) {
                 if (tradePrivilege != null && tradePrivilege.getPrivilegeType() == PrivilegeType.COUPON) {
@@ -2115,7 +1911,6 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                         couponPrivilegeVo.setCoupon(coupon);
                         Dao<CoupRule, Long> coupRuleDao = helper.getDao(CoupRule.class);
                         List<CoupRule> coupRuleList = coupRuleDao.queryForEq(CoupRule.$.couponId, tradePrivilege.getPromoId());
-//                        couponPrivilegeVo.setCoupRuleList(coupRuleList);
                     }
                     if (mapTpExtra.containsKey(tradePrivilege.getId())) {
                         couponPrivilegeVo.setTradePrivilegeExtra(mapTpExtra.get(tradePrivilege.getId()));
@@ -2126,8 +1921,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 }
             }
 
-            // 明细属性列表
-            List<TradeItemProperty> tips = tradeItemPropertyListMap.get(tradeItem.getUuid());
+                        List<TradeItemProperty> tips = tradeItemPropertyListMap.get(tradeItem.getUuid());
 
             tiVo.setTradeItemPropertyList(tips);
 
@@ -2166,12 +1960,10 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //查询订单原因
-        List<TradeReasonRel> tradeReasonRelList = helper.getDao(TradeReasonRel.class)
+                List<TradeReasonRel> tradeReasonRelList = helper.getDao(TradeReasonRel.class)
                 .queryBuilder()
                 .orderBy(TradeReasonRel.$.serverUpdateTime, false)
                 .where()
-//                    .eq(TradeReasonRel.$.relateUuid, getRelateUuid(trade))
                 .in(TradeReasonRel.$.relateUuid, tradeUUIIDs)
                 .query();
 
@@ -2202,8 +1994,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //挂账信息
-        List<TradeCreditLog> tradeCreditLogList = helper.getDao(TradeCreditLog.class)
+                List<TradeCreditLog> tradeCreditLogList = helper.getDao(TradeCreditLog.class)
                 .queryBuilder()
                 .where()
                 .in(TradeCreditLog.$.tradeId, tradeIDs)
@@ -2219,8 +2010,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //就餐时长计算
-        List<TradeStatusLog> startTradeStatusLogs = helper.getDao(TradeStatusLog.class)
+                List<TradeStatusLog> startTradeStatusLogs = helper.getDao(TradeStatusLog.class)
                 .queryBuilder()
                 .orderBy(TradeStatusLog.$.serverCreateTime, true)
                 .where()
@@ -2240,8 +2030,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradeStatusLog.get(startTradeStatusLog.getTradeUuid()).add(startTradeStatusLog);
         }
 
-        //结束时间(tradeStatus -1表示就餐结束，方案很不好，求后面优化)
-        List<TradeStatusLog> endTradeStatusLogs = helper.getDao(TradeStatusLog.class)
+                List<TradeStatusLog> endTradeStatusLogs = helper.getDao(TradeStatusLog.class)
                 .queryBuilder()
                 .where()
                 .in(TradeStatusLog.$.tradeUuid, tradeUUIIDs)
@@ -2258,8 +2047,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-        //接受方
-        List<TradeReceiveLog> tradeReceiveLog = helper.getDao(TradeReceiveLog.class)
+                List<TradeReceiveLog> tradeReceiveLog = helper.getDao(TradeReceiveLog.class)
                 .queryBuilder()
                 .where()
                 .in(TradeReceiveLog.$.tradeUuid, tradeUUIIDs)
@@ -2273,8 +2061,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradeReceiveLog.put(receiveLog.getTradeUuid(), receiveLog);
         }
 
-        // v7.15 添加团餐数据查询
-        List<TradeGroupInfo> tradeGropuInfos = helper.getDao(TradeGroupInfo.class)
+                List<TradeGroupInfo> tradeGropuInfos = helper.getDao(TradeGroupInfo.class)
                 .queryBuilder()
                 .where().in(TradeGroupInfo.$.tradeUuid, tradeUUIIDs).or().in(TradeGroupInfo.$.tradeUuid, relateTradeUUIDs).query();
 
@@ -2283,8 +2070,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradeGroupInfo.put(tradeGropuInfo.getTradeUuid(), tradeGropuInfo);
         }
 
-        //税率
-        List<TradeTax> tradeTaxList = helper.getDao(TradeTax.class)
+                List<TradeTax> tradeTaxList = helper.getDao(TradeTax.class)
                 .queryBuilder()
                 .where().in(TradeTax.$.tradeId, tradeIDs).and().eq(TradeTax.$.statusFlag, StatusFlag.VALID).query();
 
@@ -2296,8 +2082,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             mapTradeTax.get(tradeTax.getTradeId()).add(tradeTax);
         }
 
-        //服务费率
-        List<TradeInitConfig> tradeInitConfigList = helper.getDao(TradeInitConfig.class)
+                List<TradeInitConfig> tradeInitConfigList = helper.getDao(TradeInitConfig.class)
                 .queryBuilder()
                 .where().in(TradeInitConfig.$.trade_id, tradeIDs).and().eq(TradeInitConfig.$.statusFlag, StatusFlag.VALID).query();
         Map<Long, List<TradeInitConfig>> mapTradeInitConfig = new HashMap<>();
@@ -2307,8 +2092,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
             mapTradeInitConfig.get(initConfig.getTradeId()).add(initConfig);
         }
-        //预定金  add 20180619
-        List<TradeEarnestMoney> tradeEarnestMonies = helper.getDao(TradeEarnestMoney.class)
+                List<TradeEarnestMoney> tradeEarnestMonies = helper.getDao(TradeEarnestMoney.class)
                 .queryBuilder()
                 .where().in(TradeEarnestMoney.$.tradeId, tradeIDs).and().eq(TradeEarnestMoney.$.statusFlag, StatusFlag.VALID).query();
         Map<Long, List<TradeEarnestMoney>> mapTradeEarnestMoney = new HashMap<>();
@@ -2321,57 +2105,25 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
         }
 
-        //构建tradeVos
-        List<TradeVo> tradeVos = new ArrayList<>();
+                List<TradeVo> tradeVos = new ArrayList<>();
         for (Trade trade : trades) {
             TradeVo tradeVo = new TradeVo();
-            tradeVo.setTrade(trade);//订单信息
-            tradeVo.setTradeExtra(mapTradeExtra.get(trade.getUuid()));//交易扩张
-            tradeVo.setTradeDeposit(mapTradeDeposit.get(trade.getUuid()));//押金信息
-            tradeVo.setTradeUser(mapTradeUser.get(trade.getId()));//推销员
-
+            tradeVo.setTrade(trade);            tradeVo.setTradeExtra(mapTradeExtra.get(trade.getUuid()));            tradeVo.setTradeDeposit(mapTradeDeposit.get(trade.getUuid()));            tradeVo.setTradeUser(mapTradeUser.get(trade.getId()));
             TradeDepositPayRelation tradeDepositPayRelation = mapTradeDepositPayRelation.get(trade.getUuid());
             if (tradeDepositPayRelation != null) {
-                tradeVo.setTradeDepositPayRelation(tradeDepositPayRelation);//押金支付关联信息
-                tradeVo.setTradeDepositPaymentItem(mapDepositPaymentItem.get(tradeDepositPayRelation.getPaymentItemId()));//押金支付信息
-            }
+                tradeVo.setTradeDepositPayRelation(tradeDepositPayRelation);                tradeVo.setTradeDepositPaymentItem(mapDepositPaymentItem.get(tradeDepositPayRelation.getPaymentItemId()));            }
 
-            tradeVo.setTradeCustomerList(mapTradeCustomer.get(trade.getUuid()));//客户列表
-            tradeVo.setTradeBuffetPeoples(mapTradeBuffetPeoples.get(trade.getUuid()));//自助餐就餐顾客类型
-            tradeVo.setTradeTableList(mapTradeTable.get(trade.getUuid()));//桌台列表
-            tradeVo.setTradePlanActivityList(mapTradePlanActivitys.get(trade.getUuid()));//营销活动
-            tradeVo.setTradeItemPlanActivityList(mapTradeItemPlanActivity.get(trade.getId()));//营销活动列表
-            tradeVo.setTradePrivilegeExtraMap(mapTradePrivilegeExtra.get(trade.getUuid()));//营销活动额外信息
-            tradeVo.setmWeiXinCouponsVo(mapWeiXinCouponPrivilege.get(trade.getUuid()));//微信优惠
-            tradeVo.setBanquetVo(mapBanquetPrivelegeo.get(trade.getUuid()));//宴请
-            tradeVo.setExtraChargeMap(mapTradeExtraCharge.get(trade.getUuid()));//附加费信息
-            tradeVo.setMinconExtraCharge(minConsumCharge);
-            tradeVo.setTradePrivileges(mapTradePrivilege.get(trade.getUuid()));//附加费优惠
-            tradeVo.setTradePromotions(mapTradePromotion.get(trade.getId()));//促销活动
-            tradeVo.setCouponPrivilegeVoList(mapCouponPrivilege.get(trade.getUuid()));//优惠券优惠
-            tradeVo.setIntegralCashPrivilegeVo(mapIntegralPrivilege.get(trade.getUuid()));//积分抵现
-            tradeVo.setMealHullVo(mapMealShellVo.get(trade.getUuid()));//自助餐套餐外壳
-            tradeVo.setTradeItemExtraDinners(mapTradeItemExtraDinners.get(trade.getId()));//西餐座位号
-            tradeVo.setTradeItemList(mapTradeItemVo.get(trade.getUuid()));//菜品信息
-            tradeVo.setTradeBuffetPeopleTradeItems(mapBuffetPeople.get(trade.getUuid()));//自助餐餐标item
-            tradeVo.setTradeItemMainBatchRelExtraList(tradeItemMainBatchRelExtraMap.get(trade.getId()));//联台tradeItem 关联属性 关联表
-
+            tradeVo.setTradeCustomerList(mapTradeCustomer.get(trade.getUuid()));            tradeVo.setTradeBuffetPeoples(mapTradeBuffetPeoples.get(trade.getUuid()));            tradeVo.setTradeTableList(mapTradeTable.get(trade.getUuid()));            tradeVo.setTradePlanActivityList(mapTradePlanActivitys.get(trade.getUuid()));            tradeVo.setTradeItemPlanActivityList(mapTradeItemPlanActivity.get(trade.getId()));            tradeVo.setTradePrivilegeExtraMap(mapTradePrivilegeExtra.get(trade.getUuid()));            tradeVo.setmWeiXinCouponsVo(mapWeiXinCouponPrivilege.get(trade.getUuid()));            tradeVo.setBanquetVo(mapBanquetPrivelegeo.get(trade.getUuid()));            tradeVo.setExtraChargeMap(mapTradeExtraCharge.get(trade.getUuid()));            tradeVo.setMinconExtraCharge(minConsumCharge);
+            tradeVo.setTradePrivileges(mapTradePrivilege.get(trade.getUuid()));            tradeVo.setTradePromotions(mapTradePromotion.get(trade.getId()));            tradeVo.setCouponPrivilegeVoList(mapCouponPrivilege.get(trade.getUuid()));            tradeVo.setIntegralCashPrivilegeVo(mapIntegralPrivilege.get(trade.getUuid()));            tradeVo.setMealHullVo(mapMealShellVo.get(trade.getUuid()));            tradeVo.setTradeItemExtraDinners(mapTradeItemExtraDinners.get(trade.getId()));            tradeVo.setTradeItemList(mapTradeItemVo.get(trade.getUuid()));            tradeVo.setTradeBuffetPeopleTradeItems(mapBuffetPeople.get(trade.getUuid()));            tradeVo.setTradeItemMainBatchRelExtraList(tradeItemMainBatchRelExtraMap.get(trade.getId()));
             if (trade.getTradeStatus() == TradeStatus.TEMPORARY
                     || Snack.isOfflineTrade(tradeVo)) {
-                tradeVo.setTradeReasonRelList(mapTradeReasonRel.get(trade.getUuid()));//订单各种理由
-            } else {
-                tradeVo.setTradeReasonRelList(mapTradeRelateReasonRel.get(getRelateId(trade)));//订单各种理由
-            }
+                tradeVo.setTradeReasonRelList(mapTradeReasonRel.get(trade.getUuid()));            } else {
+                tradeVo.setTradeReasonRelList(mapTradeRelateReasonRel.get(getRelateId(trade)));            }
 
-            tradeVo.setTradeCreditLogList(mapTradeCreditLog.get(trade.getId()));//订单挂帐记录
-            tradeVo.setTradeStatusLogList(mapTradeStatusLog.get(trade.getUuid()));//就餐时长
-            tradeVo.setTradeReceiveLog(mapTradeReceiveLog.get(trade.getUuid()));//订单接收方日志
-            tradeVo.setTradeGroup(mapTradeGroupInfo.get(trade.getUuid()));//团餐信息
-
+            tradeVo.setTradeCreditLogList(mapTradeCreditLog.get(trade.getId()));            tradeVo.setTradeStatusLogList(mapTradeStatusLog.get(trade.getUuid()));            tradeVo.setTradeReceiveLog(mapTradeReceiveLog.get(trade.getUuid()));            tradeVo.setTradeGroup(mapTradeGroupInfo.get(trade.getUuid()));
             tradeVo.setTradeTaxs(mapTradeTax.get(trade.getId()));
             tradeVo.setTradeInitConfigs(mapTradeInitConfig.get(trade.getId()));
-            tradeVo.setTradeEarnestMoneys(mapTradeEarnestMoney.get(trade.getId()));//预定金明细
-            tradeVos.add(tradeVo);
+            tradeVo.setTradeEarnestMoneys(mapTradeEarnestMoney.get(trade.getId()));            tradeVos.add(tradeVo);
         }
 
         return tradeVos;
@@ -2400,25 +2152,9 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
         TradeVo tradeVo = new TradeVo();
         tradeVo.setTrade(trade);
-        // 交易扩展
-//        TradeExtra tradeExtra = helper.getDao(TradeExtra.class)
-//                .queryBuilder()
-//                .where()
-//                .eq(TradeExtra.$.tradeUuid, trade.getUuid())
-//                .queryForFirst();
-//        tradeVo.setTradeExtra(tradeExtra);
 
-//        // 订单押金信息
-//        TradeDeposit tradeDeposit = helper.getDao(TradeDeposit.class)
-//                .queryBuilder()
-//                .where()
-//                .eq(TradeDeposit.$.tradeUuid, trade.getUuid())
-//                .queryForFirst();
-//
-//        tradeVo.setTradeDeposit(tradeDeposit);
 
-        //订单推销员信息 add v8.1
-        if (trade.getId() != null) {
+                if (trade.getId() != null) {
             TradeUser tradeUser = helper.getDao(TradeUser.class)
                     .queryBuilder()
                     .where()
@@ -2434,35 +2170,9 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             tradeVo.setTradeUsers(tradeUserList);
         }
 
-//        // 订单押金支付信息
-//        List<TradeDepositPayRelation> tradeDepositPayRelations = helper.getDao(TradeDepositPayRelation.class)
-//                .queryBuilder()
-//                .orderBy(TradeDepositPayRelation.$.serverCreateTime, false)
-//                .where()
-//                .eq(TradeDepositPayRelation.$.tradeUuid, trade.getUuid())
-//                .and().eq(TradeDepositPayRelation.$.depositType, 1)
-//                .query();
 
-//        if (Utils.isNotEmpty(tradeDepositPayRelations)) {
-//            for (TradeDepositPayRelation relation : tradeDepositPayRelations) {
-//                if (relation == null)
-//                    continue;
-//                PaymentItem paymentItem = helper.getDao(PaymentItem.class)
-//                        .queryBuilder()
-//                        .where()
-//                        .eq(PaymentItem.$.id, relation.getPaymentItemId())
-//                        .and().eq(PaymentItem.$.payStatus, TradePayStatus.PAID)
-//                        .queryForFirst();
-//                if (paymentItem != null) {
-//                    tradeVo.setTradeDepositPayRelation(relation);
-//                    tradeVo.setTradeDepositPaymentItem(paymentItem);
-//                    break;
-//                }
-//            }
-//        }
 
-        // 客户列表
-        List<TradeCustomer> tradeCustomerList = helper.getDao(TradeCustomer.class)
+                List<TradeCustomer> tradeCustomerList = helper.getDao(TradeCustomer.class)
                 .queryBuilder()
                 .orderBy(TradeCustomer.$.serverUpdateTime, false)
                 .where()
@@ -2470,29 +2180,19 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 .query();
         tradeVo.setTradeCustomerList(tradeCustomerList);
 
-//        List<TradeBuffetPeople> tradeBuffetPeoplesList = helper.getDao(TradeBuffetPeople.class)
-//                .queryBuilder().where()
-//                .eq(TradeBuffetPeople.$.tradeUuid, trade.getUuid())
-//                .query();
-//        tradeVo.setTradeBuffetPeoples(tradeBuffetPeoplesList);
 
-        // 桌台列表
-        List<TradeTable> tradeTableList =
+                List<TradeTable> tradeTableList =
                 helper.getDao(TradeTable.class).queryForEq(TradeTable.$.tradeUuid, trade.getUuid());
         tradeVo.setTradeTableList(tradeTableList);
-        // 营销活动Trade_Plan_Activity
-        List<TradePlanActivity> tradePlanActivitys = helper.getDao(TradePlanActivity.class)
+                List<TradePlanActivity> tradePlanActivitys = helper.getDao(TradePlanActivity.class)
                 .queryBuilder()
                 .where()
                 .eq(TradePlanActivity.$.tradeUuid, trade.getUuid())
                 .and()
                 .eq(TradePlanActivity.$.statusFlag, StatusFlag.VALID)
                 .query();
-        // List<TradePlanActivity>
-        // tradePlanActivitys=helper.getDao(TradePlanActivity.class).queryForEq(TradePlanActivity.$.tradeId,trade.getId());
-        if (Utils.isEmpty(tradePlanActivitys)) {
-            tradePlanActivitys = new ArrayList<>();//Collections.emptyList();
-        }
+                        if (Utils.isEmpty(tradePlanActivitys)) {
+            tradePlanActivitys = new ArrayList<>();        }
         List<String> tradePlanActivityUuidList = new ArrayList<String>();
         for (TradePlanActivity tradePlanActivity : tradePlanActivitys) {
             if (tradePlanActivity.getUuid() != null) {
@@ -2501,8 +2201,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
         }
         tradeVo.setTradePlanActivityList(tradePlanActivitys);
-        // 营销活动Trade_Plan_Item_Activity
-        List<TradeItemPlanActivity> tradeItemPlanActivities = helper.getDao(TradeItemPlanActivity.class)
+                List<TradeItemPlanActivity> tradeItemPlanActivities = helper.getDao(TradeItemPlanActivity.class)
                 .queryBuilder()
                 .where()
                 .in(TradeItemPlanActivity.$.relUuid, tradePlanActivityUuidList.toArray())
@@ -2510,19 +2209,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 .eq(TradeItemPlanActivity.$.statusFlag, StatusFlag.VALID)
                 .query();
         if (Utils.isEmpty(tradeItemPlanActivities)) {
-            tradeItemPlanActivities = new ArrayList<>();//Collections.emptyList();
-        }
-        // List<TradeItemPlanActivity>
-        // tradeItemPlanActivities=helper.getDao(TradeItemPlanActivity.class).queryForEq(TradeItemPlanActivity.$.tradeId,trade.getId());
-        /*
-        for (TradeItemPlanActivity itemPlanActivity: tradeItemPlanActivities){
-            itemPlanActivity.setTradeUuid(trade.getUuid());
-        }
-        */
+            tradeItemPlanActivities = new ArrayList<>();        }
+
         tradeVo.setTradeItemPlanActivityList(tradeItemPlanActivities);
 
-        // 优惠
-        List<TradePrivilege> tpList = helper.getDao(TradePrivilege.class)
+                List<TradePrivilege> tpList = helper.getDao(TradePrivilege.class)
                 .queryBuilder()
                 .orderBy(TradePrivilege.$.privilegeType, true)
                 .where()
@@ -2550,13 +2241,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         tradeVo.setTradePrivilegeExtraMap(privilegeExtraMap);
 
         IntegralCashPrivilegeVo integralCashPrivilegeVo = null;
-        //Map<String, TradePrivilege> itemTpFinder = new HashMap<String, TradePrivilege>();
-        List<TradePrivilege> itemTpList = new ArrayList<>();
+                List<TradePrivilege> itemTpList = new ArrayList<>();
         List<CouponPrivilegeVo> couponPrivilegeVoList = new ArrayList<CouponPrivilegeVo>();
         for (TradePrivilege tp : tpList) {
             if (TextUtils.isEmpty(tp.getTradeItemUuid())) {
-                // 整单优惠
-                if (tp.getPrivilegeType() == PrivilegeType.COUPON) {
+                                if (tp.getPrivilegeType() == PrivilegeType.COUPON) {
                     CouponPrivilegeVo couponPrivilege = new CouponPrivilegeVo();
                     couponPrivilege.setTradePrivilege(tp);
                     if (privilegeExtraMap.get(tp.getId()) != null) {
@@ -2567,20 +2256,16 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                         Coupon coupon = couponDao.queryForId(tp.getCouponId());
                         couponPrivilege.setCoupon(coupon);
                         Dao<CoupRule, Long> coupRuleDao = helper.getDao(CoupRule.class);
-//                        List<CoupRule> coupRuleList = coupRuleDao.queryForEq(CoupRule.$.couponId, tp.getCouponId());
-//                        couponPrivilege.setCoupRuleList(coupRuleList);
                     }
 
                     Coupon coupon = couponPrivilege.getCoupon();
                     if (coupon != null) {
-                        // 礼品券可以和整单折扣共存，其他券不行
-                        if (coupon.getCouponType() == CouponType.GIFT) {
+                                                if (coupon.getCouponType() == CouponType.GIFT) {
                             if (trade.getTradeAmount().compareTo(coupon.getFullValue()) >= 0) {
                                 couponPrivilege.setActived(true);
                             }
                         } else {
-                            // 单品菜价格加上折扣价格
-                            if (couponPrivilege.getTradePrivilege()
+                                                        if (couponPrivilege.getTradePrivilege()
                                     .getPrivilegeAmount()
                                     .compareTo(BigDecimal.ZERO) != 0) {
                                 couponPrivilege.setActived(true);
@@ -2595,14 +2280,12 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     if (privilegeExtraMap.get(tp.getId()) != null) {
                         integralCashPrivilegeVo.setTradePrivilegeExtra(privilegeExtraMap.get(tp.getId()));
                     }
-                    // 约定同时为零，视为无效
-                    if (tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) == 0
+                                        if (tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) == 0
                             && tp.getPrivilegeValue().compareTo(BigDecimal.ZERO) == 0) {
                         integralCashPrivilegeVo.setActived(false);
                     }
 
-                    //查询积分抵现规则
-                    try {
+                                        try {
                         Long ruleId = tp.getPromoId();
                         if (ruleId != null && ruleId > 0) {
                             for (TradeCustomer tradeCustomer : tradeCustomerList) {
@@ -2633,8 +2316,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     if (privilegeExtraMap.get(tp.getId()) != null) {
                         weiXinCouponsVo.setTradePrivilegeExtra(privilegeExtraMap.get(tp.getId()));
                     }
-                    // 约定同时为零，视为无效
-                    if (tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) == 0
+                                        if (tp.getPrivilegeAmount().compareTo(BigDecimal.ZERO) == 0
                             && tp.getPrivilegeValue().compareTo(BigDecimal.ZERO) == 0) {
                         weiXinCouponsVo.setActived(false);
                     }
@@ -2644,8 +2326,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     }
                     tradeVo.getmWeiXinCouponsVo().add(weiXinCouponsVo);
                 } else if (tp.getPrivilegeType() == PrivilegeType.BANQUET) {
-                    //宴请
-                    BanquetVo banquetVo = new BanquetVo();
+                                        BanquetVo banquetVo = new BanquetVo();
                     banquetVo.setTradePrivilege(tp);
                     tradeVo.setBanquetVo(banquetVo);
                 } else {
@@ -2679,18 +2360,12 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     tradeVo.getTradePrivileges().add(tp);
                 }
             } else {
-                // 单品优惠
-                //itemTpFinder.put(tp.getTradeItemUuid(), tp);
-                itemTpList.add(tp);
+                                                itemTpList.add(tp);
             }
         }
 
-        //最低消费附加费
-//        ExtraCharge minConsumCharge=ExtraManager.getMinconsumExtra();
-//        tradeVo.setMinconExtraCharge(minConsumCharge);
 
-        // 获取订单促销活动
-        if (trade.getId() != null) {
+                if (trade.getId() != null) {
             Dao<TradePromotion, String> tradePromotionDao = helper.getDao(TradePromotion.class);
             List<TradePromotion> tradePromotions = tradePromotionDao.queryBuilder()
                     .orderBy(TradePromotion.$.serverUpdateTime, false)
@@ -2702,11 +2377,8 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             tradeVo.setTradePromotions(tradePromotions);
         }
 
-        // 优惠券优惠
-        tradeVo.setCouponPrivilegeVoList(couponPrivilegeVoList);
-        // 积分抵现
-        tradeVo.setIntegralCashPrivilegeVo(integralCashPrivilegeVo);
-        // 交易明细
+                tradeVo.setCouponPrivilegeVoList(couponPrivilegeVoList);
+                tradeVo.setIntegralCashPrivilegeVo(integralCashPrivilegeVo);
 
         List<TradeItemVo> tiVoList = new ArrayList<TradeItemVo>();
 
@@ -2738,21 +2410,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
 
 
-//        //查询菜品关联的座位号
-//        Dao<TradeItemExtraDinner, Long> seatDao = helper.getDao(TradeItemExtraDinner.class);
-//        List<TradeItemExtraDinner> listSeats = seatDao.queryBuilder().where().in(TradeItemExtraDinner.$.trade_item_id, tradeItemIdList)
-//                .and().eq(TradeItemExtraDinner.$.statusFlag, StatusFlag.VALID).query();
-
-//        tradeVo.setTradeItemExtraDinners(listSeats);
-
-//        Map<Long, TradeItemExtraDinner> mapSeats = new HashMap<Long, TradeItemExtraDinner>();
-//        for (TradeItemExtraDinner seat : listSeats) {
-//            mapSeats.put(seat.getTradeItemId(), seat);
-//        }
 
 
-        // 查询TradeItemProperty
-        Map<String, List<TradeItemProperty>> tradeItemPropertyListMap = new HashMap<String, List<TradeItemProperty>>();
+
+
+                Map<String, List<TradeItemProperty>> tradeItemPropertyListMap = new HashMap<String, List<TradeItemProperty>>();
         List<TradeItemProperty> TradeItemPropertyList =
                 tipDao.queryBuilder().where().in(TradeItemProperty.$.tradeItemUuid, tradeItemUuidList.toArray()).query();
 
@@ -2765,16 +2427,12 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 tradeItemPropertyListMap.put(property.getTradeItemUuid(), itemProperties);
             }
         }
-        // 查询TradeItemProperty
 
-        // 查询菜品对应的TradeReasonRel
-        Map<String, List<TradeReasonRel>> tradeReasonRelMap = new HashMap<String, List<TradeReasonRel>>();
+                Map<String, List<TradeReasonRel>> tradeReasonRelMap = new HashMap<String, List<TradeReasonRel>>();
         List<TradeReasonRel> reasionList = reasonRelDao.queryBuilder()
                 .orderBy(TradeReasonRel.$.serverUpdateTime, true)
                 .where()
-                //.in(TradeReasonRel.$.operateType, OperateType.ITEM_RETURN_QTY, OperateType.ITEM_GIVE, OperateType.TRADE_SINGLE_DISCOUNT)
-                //.and()
-                .in(TradeReasonRel.$.relateUuid, tradeItemUuidList.toArray())
+                                                .in(TradeReasonRel.$.relateUuid, tradeItemUuidList.toArray())
                 .and()
                 .eq(TradeReasonRel.$.statusFlag, StatusFlag.VALID)
                 .query();
@@ -2804,28 +2462,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
         }
 
-//        Map<Long, List<TradeItemMainBatchRel>> mapTradeItemMainBatchRel = new HashMap<>();
-//        if (trade.getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
-//            Dao<TradeItemMainBatchRel, String> tradeItemMainBatchRelDao = helper.getDao(TradeItemMainBatchRel.class);
-//            List<TradeItemMainBatchRel> tradeItemMainBatchRels = tradeItemMainBatchRelDao.queryBuilder().where().in(TradeItemMainBatchRel.$.mainTradeId, trade.getId()).query();
-//
-//            for (TradeItemMainBatchRel tradeItemMainBatchRel : tradeItemMainBatchRels) {
-//                List<TradeItemMainBatchRel> listTmpTradeItemReal = mapTradeItemMainBatchRel.get(tradeItemMainBatchRel.getMainItemId());
-//                if (listTmpTradeItemReal == null) {
-//                    listTmpTradeItemReal = new ArrayList<TradeItemMainBatchRel>();
-//                    mapTradeItemMainBatchRel.put(tradeItemMainBatchRel.getMainItemId(), listTmpTradeItemReal);
-//                }
-//
-//                listTmpTradeItemReal.add(tradeItemMainBatchRel);
-//            }
-//
-//
-//            Dao<TradeItemMainBatchRelExtra, String> tradeItemMainBatchRelExtraDao = helper.getDao(TradeItemMainBatchRelExtra.class);
-//            List<TradeItemMainBatchRelExtra> tradeItemMainBatchRelExtras = tradeItemMainBatchRelExtraDao.queryBuilder().where().in(TradeItemMainBatchRelExtra.$.mainTradeId, trade.getId()).query();
-//            tradeVo.setTradeItemMainBatchRelExtraList(tradeItemMainBatchRelExtras);
-//        }
-        //key: tradeItem id
-        Map<Long, List<TradeUser>> itemUserMap = new HashMap<>();
+                Map<Long, List<TradeUser>> itemUserMap = new HashMap<>();
         if (tradeVo.getTrade().getId() != null) {
             List<TradeUser> tradeItemUserList = helper.getDao(TradeUser.class)
                     .queryBuilder()
@@ -2842,27 +2479,15 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 }
             }
         }
-        //
-        for (TradeItem tradeItem : tis) {
+                for (TradeItem tradeItem : tis) {
             if (tradeItem.getType() == DishType.MEAL_SHELL || tradeItem.getType() == DishType.BUFFET_COMBO_SHELL) {
                 continue;
             }
             TradeItemVo tiVo = new TradeItemVo();
             tiVo.setTradeItem(tradeItem);
-//            tiVo.setTradeItemMainBatchRelList(mapTradeItemMainBatchRel.get(tradeItem.getId()));
-//            tiVo.setTradeItemExtraDinner(mapSeats.get(tradeItem.getId()));
 
-            //篮子信息
-//            if (tradeItem.getId() != null) {
-//                try {
-//                    tiVo.setDishItemTypeAndSort(findTradeItemPkgName(tradeItem.getId()));
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
 
-            //TradeItem扩展
-            TradeItemExtra tradeItemExtra = helper.getDao(TradeItemExtra.class)
+                        TradeItemExtra tradeItemExtra = helper.getDao(TradeItemExtra.class)
                     .queryBuilder()
                     .where()
                     .eq(TradeItemExtra.$.tradeItemUuid, tradeItem.getUuid())
@@ -2870,11 +2495,9 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             if (tradeItemExtra != null) {
                 tiVo.setTradeItemExtra(tradeItemExtra);
             }
-            // 单品优惠
-            Iterator<TradePrivilege> iterator = itemTpList.iterator();
+                        Iterator<TradePrivilege> iterator = itemTpList.iterator();
             while (iterator.hasNext()) {
-                TradePrivilege tradePrivilege = iterator.next();  //itemTpFinder.get(tradeItem.getUuid());
-                if (!tradePrivilege.getTradeItemUuid().equals(tradeItem.getUuid()))
+                TradePrivilege tradePrivilege = iterator.next();                  if (!tradePrivilege.getTradeItemUuid().equals(tradeItem.getUuid()))
                     continue;
                 if (tradePrivilege != null && tradePrivilege.getPrivilegeType() == PrivilegeType.COUPON) {
                     CouponPrivilegeVo couponPrivilegeVo = new CouponPrivilegeVo();
@@ -2883,9 +2506,6 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                         Dao<Coupon, Long> couponDao = helper.getDao(Coupon.class);
                         Coupon coupon = couponDao.queryForId(tradePrivilege.getPromoId());
                         couponPrivilegeVo.setCoupon(coupon);
-//                        Dao<CoupRule, Long> coupRuleDao = helper.getDao(CoupRule.class);
-//                        List<CoupRule> coupRuleList = coupRuleDao.queryForEq(CoupRule.$.couponId, tradePrivilege.getPromoId());
-//                        couponPrivilegeVo.setCoupRuleList(coupRuleList);
                     }
                     if (privilegeExtraMap.get(tradePrivilege.getId()) != null) {
                         couponPrivilegeVo.setTradePrivilegeExtra(privilegeExtraMap.get(tradePrivilege.getId()));
@@ -2894,17 +2514,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 } else if (tradePrivilege != null && tradePrivilege.getPrivilegeType() == PrivilegeType.CARD_SERVICE) {
                     CardServicePrivilegeVo cardServicePrivilegeVo = new CardServicePrivilegeVo();
                     cardServicePrivilegeVo.setTradePrivilege(tradePrivilege);
-//                    Dao<TradePrivilegeLimitNumCard,Long> numCardDao=helper.getDao(TradePrivilegeLimitNumCard.class);
-//                    List<TradePrivilegeLimitNumCard> numCards=numCardDao.queryForEq(TradePrivilegeLimitNumCard.$.tradePrivilegeId,tradePrivilege.getId());
-//                    if(Utils.isNotEmpty(numCards)){
-//                        cardServicePrivilegeVo.setTradePrivilegeLimitNumCard(numCards.get(0));
-//                    }
 
-//                    Dao<TradePrivilegeLimitNumCardSku,Long> numCardSkuDao=helper.getDao(TradePrivilegeLimitNumCardSku.class);
-//                    List<TradePrivilegeLimitNumCardSku> numCardSkus=numCardSkuDao.queryForEq(TradePrivilegeLimitNumCardSku.$.tradePrivilegeId,tradePrivilege.getId());
-//                    if(Utils.isNotEmpty(numCardSkus)){
-//                        cardServicePrivilegeVo.setTradePrivilegeLimitNumCardSku(numCardSkus.get(0));
-//                    }
 
                     tiVo.setCardServicePrivilegeVo(cardServicePrivilegeVo);
                 } else if (tradePrivilege != null && tradePrivilege.isAppletPrivilege()) {
@@ -2918,12 +2528,10 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             }
 
 
-            // 明细属性列表
-            List<TradeItemProperty> tips = tradeItemPropertyListMap.get(tradeItem.getUuid());
+                        List<TradeItemProperty> tips = tradeItemPropertyListMap.get(tradeItem.getUuid());
 
             tiVo.setTradeItemPropertyList(tips);
-            // 单菜理由
-            List<TradeReasonRel> reasonList = tradeReasonRelMap.get(tradeItem.getUuid());
+                        List<TradeReasonRel> reasonList = tradeReasonRelMap.get(tradeItem.getUuid());
             if (reasonList != null)
                 tiVo.setReasonRelList(reasonList);
 
@@ -2934,55 +2542,9 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             tiVoList.add(tiVo);
         }
 
-        // for (TradeItem tradeItem : tis) {
-        // TradeItemVo tiVo = new TradeItemVo();
-        // tiVo.setTradeItem(tradeItem);
-        // // 单品优惠
-        // tiVo.setTradeItemPrivilege(itemTpFinder.get(tradeItem.getUuid()));
-        // // 明细属性列表
-        // List<TradeItemProperty> tips =
-        // tipDao.queryForEq(TradeItemProperty.$.tradeItemUuid, tradeItem.getUuid());
-        // tiVo.setTradeItemPropertyList(tips);
-        // // 退菜理由
-        // TradeReasonRel reasion =
-        // reasonRelDao.queryBuilder()
-        // .where()
-        // .eq(TradeReasonRel.$.operateType, OperateType.ITEM_RETURN_QTY)
-        // .and()
-        // .eq(TradeReasonRel.$.relateUuid, tradeItem.getUuid())
-        // .queryForFirst();
-        // if (reasion != null) {
-        // tiVo.setRejectQtyReason(reasion);
-        // }
-        //
-        // if(tradeItem.getId() != null){
-        // //菜品操作记录列表
-        // List<TradeItemOperation> tradeItemOperations = findTradeItemOperationByTradeItemId(tradeItem.getId());
-        // if(tradeItemOperations != null && !tradeItemOperations.isEmpty()){
-        // tiVo.setTradeItemOperations(tradeItemOperations);
-        // }
-        // }
-        //
-        // tiVoList.add(tiVo);
-        // }
-        tradeVo.setTradeItemList(tiVoList);
+                                                                                                                                                                                                                                                                tradeVo.setTradeItemList(tiVoList);
 
 
-//        List<TradeItemVo> buffetPeopleTradeItem = new ArrayList<>();
-//        if (Utils.isNotEmpty(tradeBuffetPeoplesList) && tradeVo.getMealShellVo() != null) {
-//            //初始化
-//            for (TradeBuffetPeople tradeBuffetPeople : tradeBuffetPeoplesList) {
-//                TradeItemVo tiVo = new TradeItemVo();
-//                TradeItem tradeItem = new TradeItem();
-//                tradeItem.setId(-1l);
-//                tradeItem.setDishName(tradeVo.getMealShellVo().getDishMenuVo().getSkuName() + "-" + tradeBuffetPeople.getCarteNormsName());
-//                tradeItem.setPrice(tradeBuffetPeople.getCartePrice());
-//                tradeItem.setQuantity(tradeBuffetPeople.getPeopleCount());
-//                tiVo.setTradeItem(tradeItem);
-//                buffetPeopleTradeItem.add(tiVo);
-//            }
-//        }
-//        tradeVo.setTradeBuffetPeopleTradeItems(buffetPeopleTradeItem);
 
         long startTradeReasonRel = System.currentTimeMillis();
         List<TradeReasonRel> tradeReasonRelList = new ArrayList<>();
@@ -2992,7 +2554,6 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     .queryBuilder()
                     .orderBy(TradeReasonRel.$.serverUpdateTime, false)
                     .where()
-//                    .eq(TradeReasonRel.$.relateUuid, getRelateUuid(trade))
                     .eq(TradeReasonRel.$.relateUuid, trade.getUuid())
                     .query();
         } else {
@@ -3004,38 +2565,9 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     .query();
         }
 
-//        if(trade.getTradeType()==TradeType.SELL_FOR_REPEAT&&trade.getTradeStatus()!=TradeStatus.RETURNED&&trade.getTradePayStatus()==TradePayStatus.PAID&&trade.getRelateTradeId()!=null){
-//        List<TradeReasonRel>     reletradeReasonRelList = helper.getDao(TradeReasonRel.class)
-//                    .queryBuilder()
-//                    .orderBy(TradeReasonRel.$.serverUpdateTime, false)
-//                    .where()
-//                    .eq(TradeReasonRel.$.relateId, trade.getRelateTradeId())
-//                    .query();
-//            tradeReasonRelList.addAll(reletradeReasonRelList);
-//        }
-//        if(trade.getTradeType()==TradeType.SELL_FOR_REPEAT&&trade.getTradeStatus()!=TradeStatus.RETURNED&&trade.getTradePayStatus()==TradePayStatus.PAID&&trade.getId()!=null){
-//            List<TradeReasonRel>     reletradeReasonRelList = helper.getDao(TradeReasonRel.class)
-//                    .queryBuilder()
-//                    .orderBy(TradeReasonRel.$.serverUpdateTime, false)
-//                    .where()
-//                    .eq(TradeReasonRel.$.relateId, trade.getId())
-//                    .query();
-//            tradeReasonRelList.addAll(reletradeReasonRelList);
-//        }
-//
-//        if(trade.getTradeType()==TradeType.SELL && trade.getTradeStatus()!=TradeStatus.FINISH && tradeDeposit != null &&trade.getId()!=null){
-//            List<TradeReasonRel>     reletradeReasonRelList = helper.getDao(TradeReasonRel.class)
-//                    .queryBuilder()
-//                    .orderBy(TradeReasonRel.$.serverUpdateTime, false)
-//                    .where()
-//                    .eq(TradeReasonRel.$.relateId, trade.getId())
-//                    .query();
-//            tradeReasonRelList.addAll(reletradeReasonRelList);
-//        }
 
         tradeVo.setTradeReasonRelList(tradeReasonRelList);
-        // 挂账信息
-        if (trade.getId() != null) {
+                if (trade.getId() != null) {
             List<TradeCreditLog> tradeCreditLogList = helper.getDao(TradeCreditLog.class)
                     .queryBuilder()
                     .where()
@@ -3045,99 +2577,12 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             tradeVo.setTradeCreditLogList(tradeCreditLogList);
         }
 
-        // 就餐时长
-//        if (trade.getUuid() != null) {
-//            List<TradeStatusLog> tradeStatusLogList = new ArrayList<TradeStatusLog>();
-//            //开始时间(TradeStatus = 4  && tradePayStatus = 3 order by serverCreateTime )的第一条数据表示开始时间
-//            TradeStatusLog startTradeStatusLog = helper.getDao(TradeStatusLog.class)
-//                    .queryBuilder()
-//                    .orderBy(TradeStatusLog.$.serverCreateTime, true)
-//                    .where()
-//                    .eq(TradeStatusLog.$.tradeUuid, trade.getUuid())
-//                    .and()
-//                    .eq(TradeStatusLog.$.tradeStatus, TradeStatus.FINISH)
-//                    .and()
-//                    .eq(TradeStatusLog.$.tradePayStatus, TradePayStatus.PAID)
-//                    .queryForFirst();
-//            if (startTradeStatusLog != null) {
-//                tradeStatusLogList.add(startTradeStatusLog);
-//            }
-//
-//            //结束时间(tradeStatus -1表示就餐结束，方案很不好，求后面优化)
-//            TradeStatusLog endTradeStatusLog = helper.getDao(TradeStatusLog.class)
-//                    .queryBuilder()
-//                    .where()
-//                    .eq(TradeStatusLog.$.tradeUuid, trade.getUuid())
-//                    .and()
-//                    .eq(TradeStatusLog.$.tradeStatus, -1)
-//                    .queryForFirst();
-//            if (endTradeStatusLog != null) {
-//                tradeStatusLogList.add(endTradeStatusLog);
-//            }
-//            tradeVo.setTradeStatusLogList(tradeStatusLogList);
-//
-//            //接受方
-//            TradeReceiveLog tradeReceiveLog = helper.getDao(TradeReceiveLog.class)
-//                    .queryBuilder()
-//                    .where()
-//                    .eq(TradeReceiveLog.$.tradeUuid, trade.getUuid())
-//                    .and()
-//                    .eq(TradeStatusLog.$.statusFlag, StatusFlag.VALID)
-//                    .queryForFirst();
-//            tradeVo.setTradeReceiveLog(tradeReceiveLog);
-//
-//            // v7.15 添加团餐数据查询
-//            Where<TradeGroupInfo, ?> where = helper.getDao(TradeGroupInfo.class)
-//                    .queryBuilder()
-//                    .where();
-//            where.eq(TradeGroupInfo.$.tradeUuid, trade.getUuid());
-//            if (trade.getRelateTradeUuid() != null) {
-//                where.or();
-//                where.eq(TradeGroupInfo.$.tradeUuid, trade.getRelateTradeUuid());
-//            }
-//
-//            TradeGroupInfo groupInfo = where.queryForFirst();
-//            tradeVo.setTradeGroup(groupInfo);
-//        }
 
-//        if (trade.getId() != null) {
-//            List<TradeTax> tradeTaxs = helper.getDao(TradeTax.class)
-//                    .queryBuilder()
-//                    .where().eq(TradeTax.$.tradeId, trade.getId()).and().eq(TradeTax.$.statusFlag, StatusFlag.VALID).query();
-//            tradeVo.setTradeTaxs(tradeTaxs);
-//
-//            if (tradeTaxs != null && !tradeTaxs.isEmpty()) {//add v9.0
-//                TradeInvoiceNo tradeInvoiceNo = helper.getDao(TradeInvoiceNo.class)
-//                        .queryBuilder()
-//                        .where().eq(TradeInvoiceNo.$.tradeId, trade.getId()).and().eq(TradeInvoiceNo.$.statusFlag, StatusFlag.VALID).queryForFirst();
-//                tradeVo.setTradeInvoiceNo(tradeInvoiceNo);
-//            }
-//
-//            List<TradeInitConfig> tradeInitConfigs = helper.getDao(TradeInitConfig.class)
-//                    .queryBuilder()
-//                    .where().eq(TradeInitConfig.$.trade_id, trade.getId()).and().eq(TradeInitConfig.$.statusFlag, StatusFlag.VALID).query();
-//            tradeVo.setTradeInitConfigs(tradeInitConfigs);
-//        }
-        //预订金记录 add v8.13  团餐和正餐才有
-//        if (trade.getBusinessType() == BusinessType.DINNER || trade.getBusinessType() == BusinessType.GROUP) {
-//
-//            List<TradeEarnestMoney> tradeEarnestMonies = helper.getDao(TradeEarnestMoney.class)
-//                    .queryBuilder()
-//                    .where().eq(TradeEarnestMoney.$.tradeId, trade.getId()).and().eq(TradeEarnestMoney.$.statusFlag, StatusFlag.VALID).query();
-//            tradeVo.setTradeEarnestMoneys(tradeEarnestMonies);
-//        }
 
-//        //口碑核销查询
-//        VerifyKoubeiOrder verifyKoubeiOrder = helper.getDao(VerifyKoubeiOrder.class)
-//                .queryBuilder()
-//                .where().eq(VerifyKoubeiOrder.$.tradeUuid, trade.getUuid()).and().eq(VerifyKoubeiOrder.$.statusFlag, StatusFlag.VALID).queryForFirst();
-//        tradeVo.setVerifyKoubeiOrder(verifyKoubeiOrder);
         return tradeVo;
     }
 
-    /**
-     * 根据主单查询桌台信息
-     */
+
     @Override
     public List<TradeTable> getTradeTablesByMainTrade(DatabaseHelper helper, Long tradeId) throws SQLException {
         List<TradeTable> tradeTableList = new ArrayList<>();
@@ -3155,8 +2600,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
     private static Long getRelateId(Trade trade) {
         TradeStatus tradeStatus = trade.getTradeStatus();
-        // 退货取原单,无单退货没有原单
-        Long tradeId = (tradeStatus == TradeStatus.RETURNED && trade.getTradeType() != TradeType.SPLIT
+                Long tradeId = (tradeStatus == TradeStatus.RETURNED && trade.getTradeType() != TradeType.SPLIT
                 && trade.getRelateTradeId() != null && trade.getTradeType() != TradeType.SELL_FOR_REPEAT) ? trade.getRelateTradeId() : trade.getId();
 
         return tradeId;
@@ -3164,15 +2608,13 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
     private static String getRelateUuid(Trade trade) {
         TradeStatus tradeStatus = trade.getTradeStatus();
-        // 退货取原单,无单退货没有原单
-        String tradeUuid = (tradeStatus == TradeStatus.RETURNED && !TextUtils.isEmpty(trade.getRelateTradeUuid()))
+                String tradeUuid = (tradeStatus == TradeStatus.RETURNED && !TextUtils.isEmpty(trade.getRelateTradeUuid()))
                 ? trade.getRelateTradeUuid() : trade.getUuid();
 
         return tradeUuid;
     }
 
-    //modify begin 20170623
-    private static List<PaymentVo> listPaymentVo(DatabaseHelper helper, String tradeUuid)
+        private static List<PaymentVo> listPaymentVo(DatabaseHelper helper, String tradeUuid)
             throws Exception {
         return listPaymentVo(helper, tradeUuid, null);
     }
@@ -3201,13 +2643,11 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
             List<Long> paymentItemIdList = new ArrayList<>();
             List<String> paymentItemUuidList = new ArrayList<>();
-            //如果支付方式为美团团购卷
-            for (PaymentItem paymentItem : listPaymentItems) {
+                        for (PaymentItem paymentItem : listPaymentItems) {
                 paymentItemIdList.add(paymentItem.getId());
                 paymentItemUuidList.add(paymentItem.getUuid());
                 if (PayModeId.MEITUAN_TUANGOU.value().equals(paymentItem.getPayModeId())) {
                     List<PaymentItemGroupon> tmpListPaymentItemGroupon = discountTicketDao.queryForEq(PaymentItemGroupon.$.paymentItemId, paymentItem.getId());
-//                    List<PaymentItemGroupon> tmpListPaymentItemGroupon=discountTicketDao.queryForAll();
                     if (tmpListPaymentItemGroupon != null && tmpListPaymentItemGroupon.size() > 0)
                         paymentItem.setPaymentItemGroupon(tmpListPaymentItemGroupon.get(0));
                 }
@@ -3215,62 +2655,31 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
             vo.setPaymentItemList(listPaymentItems);
 
-//            QueryBuilder<PaymentItem, String> itemSubQuery = itemDao.queryBuilder();
-//            itemSubQuery.selectColumns(PaymentItem.$.id).where().eq(PaymentItem.$.paymentUuid, payment.getUuid());
             List<PaymentItemExtra> itemExtraList =
                     itemExtraDao.queryBuilder().where().in(PaymentItemExtra.$.paymentItemUuid, paymentItemUuidList).query();
             vo.setPaymentItemExtraList(itemExtraList);
 
-            //查询退款失败原因
-            CollectionUtils.filterNull(paymentItemIdList);
-//            List<RefundExceptionReason> refundExceptionReasonList = refundFailedDao.queryBuilder().where().in(RefundExceptionReason.$.paymentItemId, paymentItemIdList).query();
-//            if(Utils.isNotEmpty(refundExceptionReasonList)) {
-//                Map<Long, List<RefundExceptionReason>> refundExceptionReasonMap = new HashMap<>();
-//                for (RefundExceptionReason refundExceptionReason : refundExceptionReasonList) {
-//                    Long paymentItemId = refundExceptionReason.getPaymentItemId();
-//                    List<RefundExceptionReason> rers = refundExceptionReasonMap.get(refundExceptionReason.getPaymentItemId());
-//                    if(rers == null){
-//                        rers = new ArrayList<>();
-//                        refundExceptionReasonMap.put(refundExceptionReason.getPaymentItemId(), rers);
-//                    }
-//                    rers.add(refundExceptionReason);
-//                }
-//                vo.setRefundExceptionReasonMap(refundExceptionReasonMap);
-//            }
+                        CollectionUtils.filterNull(paymentItemIdList);
 
             voList.add(vo);
         }
         return voList;
     }
-    //modify end 20170623
 
-    /**
-     * 排序
-     *
-     * @param list
-     */
+
     private static void reSortItems(List<PaymentItem> list) {
         final Map<String, Long> map = new HashMap<String, Long>();
         for (PaymentItem item : list) {
             long payModeId = item.getPayModeId();
-            if (payModeId == -3) {// 现金
-                map.put(item.getUuid(), 1L);
-            } else if (payModeId == -4) {// 银行卡
-                map.put(item.getUuid(), 2L);
-            } else if (payModeId == -1) {// 储值卡
-                map.put(item.getUuid(), 3L);
-            } else if (payModeId == -5) {// 微信
-                map.put(item.getUuid(), 4L);
-            } else if (payModeId == -6) {// 支付宝
-                map.put(item.getUuid(), 5L);
-            } else if (payModeId == -7) {// 百度钱包
-                map.put(item.getUuid(), 6L);
-            } else if (payModeId == -2) {// 优惠券
-                map.put(item.getUuid(), 8L);
-            } else if (payModeId == -8) {// 百度直达号
-                map.put(item.getUuid(), 9L);
-            } else {// 其他
-                map.put(item.getUuid(), item.getPayModeId());
+            if (payModeId == -3) {                map.put(item.getUuid(), 1L);
+            } else if (payModeId == -4) {                map.put(item.getUuid(), 2L);
+            } else if (payModeId == -1) {                map.put(item.getUuid(), 3L);
+            } else if (payModeId == -5) {                map.put(item.getUuid(), 4L);
+            } else if (payModeId == -6) {                map.put(item.getUuid(), 5L);
+            } else if (payModeId == -7) {                map.put(item.getUuid(), 6L);
+            } else if (payModeId == -2) {                map.put(item.getUuid(), 8L);
+            } else if (payModeId == -8) {                map.put(item.getUuid(), 9L);
+            } else {                map.put(item.getUuid(), item.getPayModeId());
             }
         }
         Collections.sort(list, new Comparator<PaymentItem>() {
@@ -3281,11 +2690,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         });
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @反结账原单查询新单
-     */
+
     @Override
     public TradePaymentVo findTradPaymentByRelateTradeUuid(String relateTradeUuid)
             throws Exception {
@@ -3402,9 +2807,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
             Dao<DishShop, String> dao = helper.getDao(DishShop.class);
             QueryBuilder<DishShop, String> qb = dao.queryBuilder();
             DishShop dishShop = qb.selectColumns(DishShop.$.dishTypeId).where().eq(DishShop.$.uuid, tradeItemSkuUUID).queryForFirst();
-            if (dishShop == null) {//如果是网络虚拟菜就直接返回固定种类
-                //PLog.e(PLog.TAG_KEY, "{info:该菜在dishShop表里找不到导致标记为虚拟菜;skuUUID:%s;position:" + TAG + "->findTradeItemBrandTypeByTradeUUID()}", tradeItemSkuUUID);
-                return BaseApplication.getInstance().getString(R.string.third_party_sources);
+            if (dishShop == null) {                                return BaseApplication.getInstance().getString(R.string.third_party_sources);
             } else {
                 Dao<DishBrandType, String> typeDao = helper.getDao(DishBrandType.class);
                 QueryBuilder<DishBrandType, String> typeQb = typeDao.queryBuilder();
@@ -3415,8 +2818,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 if (type != null && !TextUtils.isEmpty(type.getName())) {
                     return type.getName();
                 } else {
-                    //PLog.e(PLog.TAG_KEY, "{info:该菜在dishBrandType表里找不到中类导致标记为虚拟菜;skuUUID:%s;position:" + TAG + "->findTradeItemBrandTypeByTradeUUID()}", tradeItemSkuUUID);
-                    return BaseApplication.getInstance().getString(R.string.third_party_sources);
+                                        return BaseApplication.getInstance().getString(R.string.third_party_sources);
                 }
             }
         } finally {
@@ -3424,105 +2826,13 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
     }
 
-    // 根据SkuUUID，获取菜品品类id
-    /*@Override
-    public DishItemTypeAndSort findTradeItemBrandIDByTradeUUID(String tradeItemSkuUUID) throws Exception {
-        DatabaseHelper helper = DBHelperManager.getHelper();
-        try {
-            Dao<DishShop, String> dao = helper.getDao(DishShop.class);
-            QueryBuilder<DishShop, String> qb = dao.queryBuilder();
-            DishShop dishShop = qb.selectColumns(DishShop.$.dishTypeId).where().eq(DishShop.$.uuid, tradeItemSkuUUID).queryForFirst();
-            DishItemTypeAndSort itemSort = new DishItemTypeAndSort();
-            if (dishShop == null) {//如果是虚拟菜，就直接返回数据，主要用于种类排序使用
-                PLog.e(PLog.TAG_KEY, "{info:获取sort值,该菜在dishShop表里找不到导致标记为虚拟菜;skuUUID:%s;position:" + TAG + "->findTradeItemBrandTypeByTradeUUID()}", tradeItemSkuUUID);
-                return itemSort.defaultSort();
-            } else {
-                Dao<DishBrandType, String> typeDao = helper.getDao(DishBrandType.class);
-                QueryBuilder<DishBrandType, String> typeQb = typeDao.queryBuilder();
-                DishBrandType type = typeQb.selectColumns(DishBrandType.$.sort, DishBrandType.$.name)
-                        .where()
-                        .eq(DishBrandType.$.id, dishShop.getDishTypeId())
-                        .queryForFirst();
-
-                if (type != null && type.getSort() != null) {
-                    itemSort.itemSort = type.getSort();
-                    itemSort.itemType = type.getName();
-                    return itemSort;
-                } else {
-                    PLog.e(PLog.TAG_KEY, "{info:获取sort值,该菜在dishBrandType表里找不到中类导致标记为虚拟菜;skuUUID:%s;position:" + TAG + "->findTradeItemBrandTypeByTradeUUID()}", tradeItemSkuUUID);
-                    return itemSort.defaultSort();
-                }
-            }
-        } finally {
-            DBHelperManager.releaseHelper(helper);
-        }
-    }*/
 
 
-    /**
-     * 批量获取tradeItemI篮子名称
-     *
-     * @param tradeItemIds
-     * @return
-     */
-    /*private Map<Long, DishItemTypeAndSort> getTradeItemPkgName(List<Long> tradeItemIds) {
-        Map<Long, DishItemTypeAndSort> mapPkg = new HashMap<Long, DishItemTypeAndSort>();
-        DatabaseHelper helper = DBHelperManager.getHelper();
-        try {
-            Dao<TradeItemExtraTakeaway, String> typeDao = helper.getDao(TradeItemExtraTakeaway.class);
-            QueryBuilder<TradeItemExtraTakeaway, String> typeQb = typeDao.queryBuilder();
-            List<TradeItemExtraTakeaway> tradeItemExtraTakeaways = typeQb.selectColumns(TradeItemExtraTakeaway.$.packName)
-                    .where()
-                    .in(TradeItemExtraTakeaway.$.tradeItemId, tradeItemIds)
-                    .and()
-                    .eq(TradeItemExtraTakeaway.$.statusFlag, 1)
-                    .query();
 
-            for (TradeItemExtraTakeaway tradeItemExtraTakeaway : tradeItemExtraTakeaways) {
-                DishItemTypeAndSort itemSort = new DishItemTypeAndSort();
-                itemSort.itemSort = 1000;
-                itemSort.itemType = tradeItemExtraTakeaway.getPackName();
-                mapPkg.put(tradeItemExtraTakeaway.getTradeItemId(), itemSort);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            DBHelperManager.releaseHelper(helper);
-            return mapPkg;
-        }
-    }*/
 
-    //根据tradeItemI获取篮子名称
-    /*@Override
-    public DishItemTypeAndSort findTradeItemPkgName(Long tradeItemId) throws Exception {
-        DatabaseHelper helper = DBHelperManager.getHelper();
-        try {
-            DishItemTypeAndSort itemSort = new DishItemTypeAndSort();
-            Dao<TradeItemExtraTakeaway, String> typeDao = helper.getDao(TradeItemExtraTakeaway.class);
-            QueryBuilder<TradeItemExtraTakeaway, String> typeQb = typeDao.queryBuilder();
-            TradeItemExtraTakeaway tradeItemExtraTakeaway = typeQb.selectColumns(TradeItemExtraTakeaway.$.packName)
-                    .where()
-                    .eq(TradeItemExtraTakeaway.$.tradeItemId, tradeItemId)
-                    .and()
-                    .eq(TradeItemExtraTakeaway.$.statusFlag, 1)
-                    .queryForFirst();
 
-            if (tradeItemExtraTakeaway != null) {
-                itemSort.itemSort = 1000;
-                itemSort.itemType = tradeItemExtraTakeaway.getPackName();
-                return itemSort;
-            } else {
-                return null;
-            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            DBHelperManager.releaseHelper(helper);
-        }
 
-    }*/
     public TradeItem findTradeItem(Long id)
             throws SQLException {
         DatabaseHelper helper = DBHelperManager.getHelper();
@@ -3761,8 +3071,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
     public TradeDeposit getTradeDepositByUuid(String uuid) throws SQLException {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
-            // 订单押金信息
-            TradeDeposit tradeDeposit = helper.getDao(TradeDeposit.class)
+                        TradeDeposit tradeDeposit = helper.getDao(TradeDeposit.class)
                     .queryBuilder()
                     .where()
                     .eq(TradeDeposit.$.tradeUuid, uuid)
@@ -3878,27 +3187,8 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         try {
             Date date = DateTimeUtil.getOpenTime();
 
-//            String sql = "select trade.uuid, trade_extra.serial_number, trade_table.table_name, payment.payment_time " +
-//                    "from trade left join trade_extra on trade.id = trade_extra.trade_id " +
-//                    "left join trade_table on trade.id = trade_table.trade_id " +
-//                    "left join payment on trade.id = payment.relate_id where payment.id in " +
-//                    "(select payment_id from payment_item where payment_item.pay_source = 10 and payment_item.pay_status = 3) " +
-//                    "and payment.payment_time > '" + date.getTime() + "' order by payment.payment_time desc";
-//
-//            GenericRawResults<String[]> genericRawResults = helper.getDao(PaymentItem.class).queryRaw(sql);
-//            Log.i(TAG, genericRawResults.getResults().size() + "");
-//            List<NotifyOtherClientPayedVo> otherClientPayedVos = new ArrayList<>();
-//            for(String[] result : genericRawResults.getResults()){
-//                NotifyOtherClientPayedVo wechatPayedVo = new NotifyOtherClientPayedVo();
-//                wechatPayedVo.setTradeUuid(result[0]);
-//                wechatPayedVo.setSerialNumber(result[1]);
-//                wechatPayedVo.setTableName(result[2]);
-//                wechatPayedVo.setPayTime(Long.valueOf(result[3]));
-//                otherClientPayedVos.add(wechatPayedVo);
-//            }
 
-            //查询payment的id列表
-            Dao<PaymentItem, String> paymentItemDao = helper.getDao(PaymentItem.class);
+                        Dao<PaymentItem, String> paymentItemDao = helper.getDao(PaymentItem.class);
             QueryBuilder<PaymentItem, String> paymentItemQb = paymentItemDao.queryBuilder();
             List<PaymentItem> paymentItems = paymentItemQb.selectColumns(PaymentItem.$.paymentId, PaymentItem.$.paySource).where()
                     .in(PaymentItem.$.paySource, PaySource.PORTAL, PaySource.ON_MOBILE, PaySource.KIOSK)
@@ -3910,14 +3200,12 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 paymentItemMap.put(paymentItem.getPaymentId(), paymentItem.getPaySource());
             }
 
-            //查询trade的id列表
-            Dao<Payment, String> paymentDao = helper.getDao(Payment.class);
+                        Dao<Payment, String> paymentDao = helper.getDao(Payment.class);
             QueryBuilder<Payment, String> paymentQb = paymentDao.queryBuilder();
             List<Payment> payments = paymentQb.selectColumns(Payment.$.id, Payment.$.relateId, Payment.$.paymentTime).where()
                     .in(Payment.$.id, paymentItemMap.keySet()).and().ge(Payment.$.paymentTime, date.getTime()).query();
 
-            //存储订单id和支付时间
-            Map<Long, NotifyOtherClientPayedVo.PayContent> tradePayMap = new HashMap<>();
+                        Map<Long, NotifyOtherClientPayedVo.PayContent> tradePayMap = new HashMap<>();
             for (Payment payment : payments) {
                 NotifyOtherClientPayedVo.PayContent payContent = new NotifyOtherClientPayedVo.PayContent();
                 payContent.paySource = paymentItemMap.get(payment.getId());
@@ -3925,14 +3213,12 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 tradePayMap.put(payment.getRelateId(), payContent);
             }
 
-            //筛选trade的id列表
-            Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
+                        Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
             QueryBuilder<Trade, String> tradeQb = tradeDao.queryBuilder();
             tradeQb.selectColumns(Trade.$.id).where().in(Trade.$.id, tradePayMap.keySet()).and()
                     .eq(Trade.$.businessType, BusinessType.DINNER);
 
-            //查询tradeextra，用来获取流水号
-            Map<Long, String> serialNoMap = new HashMap<>();
+                        Map<Long, String> serialNoMap = new HashMap<>();
             Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
             QueryBuilder<TradeExtra, String> tradeExtraQb = tradeExtraDao.queryBuilder();
             List<TradeExtra> tradeExtras = tradeExtraQb.where().in(TradeTable.$.tradeId, tradeQb).query();
@@ -3942,8 +3228,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 }
             }
 
-            //查询tradetable
-            Dao<TradeTable, String> tradeTableDao = helper.getDao(TradeTable.class);
+                        Dao<TradeTable, String> tradeTableDao = helper.getDao(TradeTable.class);
             QueryBuilder<TradeTable, String> tradeTableQb = tradeTableDao.queryBuilder();
             List<TradeTable> tradeTables = tradeTableQb.where().in(TradeTable.$.tradeId, tradeQb).query();
             List<NotifyOtherClientPayedVo> otherClientPayedVos = new ArrayList<>();
@@ -3954,8 +3239,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 tableIds.add(tradeTable.getTableId());
             }
             if (tableIds.size() > 0) {
-                //add areaname 20180130 start
-                List<CommercialArea> areaList = null;
+                                List<CommercialArea> areaList = null;
                 List<Tables> tablesList = null;
                 Map<Long, CommercialArea> areaMap = new HashMap<Long, CommercialArea>();
                 Map<Long, Tables> tablesMap = new HashMap<Long, Tables>();
@@ -3966,28 +3250,24 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                 } catch (Exception e) {
                     throw new SQLException();
                 }
-                //将区域数据放入map 用于查取
-                if (areaList != null && !areaList.isEmpty()) {
+                                if (areaList != null && !areaList.isEmpty()) {
                     for (int i = 0; i < areaList.size(); i++) {
                         areaMap.put(areaList.get(i).getId(), areaList.get(i));
                     }
                 }
-                //将桌台数据放入map 用于查取
-                if (tablesList != null && tablesList.size() > 0) {
+                                if (tablesList != null && tablesList.size() > 0) {
                     for (int i = 0; i < tablesList.size(); i++) {
                         tablesMap.put(tablesList.get(i).getId(), tablesList.get(i));
                     }
                 }
                 Tables tb = null;
                 CommercialArea area = null;
-                //add areaname 20180130 end
-                for (TradeTable tradeTable : tradeTables) {
+                                for (TradeTable tradeTable : tradeTables) {
                     NotifyOtherClientPayedVo otherClientPayedVo = new NotifyOtherClientPayedVo();
                     otherClientPayedVo.setUuid(tradeTable.getTradeUuid());
                     otherClientPayedVo.setTradeUuid(tradeTable.getTradeUuid());
                     otherClientPayedVo.setTableName(tradeTable.getTableName());
-                    //设置流水号
-                    String serialNo = serialNoMap.get(tradeTable.getTradeId());
+                                        String serialNo = serialNoMap.get(tradeTable.getTradeId());
                     otherClientPayedVo.setSerialNumber(serialNo);
                     NotifyOtherClientPayedVo.PayContent payContent = tradePayMap.get(tradeTable.getTradeId());
                     if (payContent != null) {
@@ -3998,20 +3278,17 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                             otherClientPayedVo.paySource = payContent.paySource;
                         }
                     }
-                    //add areaname 20180130 start
-                    tb = tablesMap.get(tradeTable.getTableId());
+                                        tb = tablesMap.get(tradeTable.getTableId());
                     if (tb != null && tb.getAreaId() != null) {
                         area = areaMap.get(tb.getAreaId());
                         if (area != null) {
                             otherClientPayedVo.areaName = area.getAreaName();
                         }
                     }
-                    //add areaname 20180130 end
-                    otherClientPayedVos.add(otherClientPayedVo);
+                                        otherClientPayedVos.add(otherClientPayedVo);
                 }
             }
-            //按照支付时间降序排序
-            Comparator<NotifyOtherClientPayedVo> comparator = new Comparator<NotifyOtherClientPayedVo>() {
+                        Comparator<NotifyOtherClientPayedVo> comparator = new Comparator<NotifyOtherClientPayedVo>() {
                 @Override
                 public int compare(NotifyOtherClientPayedVo lhs, NotifyOtherClientPayedVo rhs) {
                     if (lhs.getPayTime() > rhs.getPayTime()) {
@@ -4036,8 +3313,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         DatabaseHelper helper = DBHelperManager.getHelper();
         List<Long> tableIds = new ArrayList<Long>();
         try {
-            //根据菜品筛选tradeItem 中的 tradeid列表
-            Dao<TradeItem, String> tradeItemDao = helper.getDao(TradeItem.class);
+                        Dao<TradeItem, String> tradeItemDao = helper.getDao(TradeItem.class);
             QueryBuilder<TradeItem, String> tradeItemQb = tradeItemDao.queryBuilder();
             tradeItemQb.selectColumns(TradeItem.$.tradeId, TradeItem.$.tradeTableId, TradeItem.$.invalidType);
             tradeItemQb.where().in(TradeItem.$.skuUuid, dishUuids);
@@ -4045,8 +3321,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
 
             List<TradeItem> list = tradeItemQb.query();
             List<Long> tradeIds = new ArrayList<Long>();
-            //筛选菜品
-            if (list != null && !list.isEmpty()) {
+                        if (list != null && !list.isEmpty()) {
                 TradeItem it = null;
                 for (int i = 0; i < list.size(); i++) {
                     it = list.get(i);
@@ -4054,16 +3329,14 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                         continue;
                     tradeIds.add(it.getTradeId());
                 }
-                //筛选tradeid中有效的订单
-                List<BusinessType> businessTypes = new ArrayList<BusinessType>();
+                                List<BusinessType> businessTypes = new ArrayList<BusinessType>();
                 if (businessType == BusinessType.BUFFET) {
                     businessTypes.add(BusinessType.BUFFET);
                 } else {
                     businessTypes.add(BusinessType.DINNER);
                     businessTypes.add(BusinessType.GROUP);
                 }
-                //添加联台主单子单查询 add 8.4
-                Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
+                                Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
                 QueryBuilder<Trade, String> tradeQb = tradeDao.queryBuilder();
                 tradeQb.selectColumns(Trade.$.id).where().in(Trade.$.id, tradeIds).and()
                         .in(Trade.$.businessType, businessTypes).and().in(Trade.$.tradeStatus, TradeStatus.UNPROCESSED, TradeStatus.CONFIRMED)
@@ -4075,39 +3348,19 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     Trade trade = null;
                     for (int i = 0; i < tradeList.size(); i++) {
                         trade = tradeList.get(i);
-                        //如果是联台主单,查询主单下所有子单 add 8.4
-                        if (trade.getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
+                                                if (trade.getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
                             List<Trade> subTrades = getUnionTradesByTrade(trade);
                             if (subTrades != null && subTrades.size() > 0) {
                                 for (Trade subTrade : subTrades) {
-                                    tradeIdSet.add(subTrade.getId());//联台子单
-                                }
+                                    tradeIdSet.add(subTrade.getId());                                }
                             }
                         } else {
                             tradeIdSet.add(trade.getId());
                         }
                     }
                 }
-                // 查找桌台方案1  根据菜品的tradeTableIds查找桌台(适合正餐、自助场景)
-               /* if (!tradeIdSet.isEmpty()) {
-                    List<Long> tradeTableIds = new ArrayList<Long>();
-                    for (int i = 0; i < list.size(); i++) {
-                        it = list.get(i);
-                        if (tradeIdSet.contains(it.getTradeId()))
-                            tradeTableIds.add(it.getTradeTableId());
-                    }
-                    Dao<TradeTable, Long> tbDao = helper.getDao(TradeTable.class);
 
-                    List<TradeTable> ls = tbDao.queryBuilder().selectColumns(TradeTable.$.tableId).where().in(TradeTable.$.id, tradeTableIds).and().eq(TradeTable.$.statusFlag, StatusFlag.VALID).query();
-
-                    if (ls != null && !ls.isEmpty()) {
-                        for (TradeTable tradeTable : ls) {
-                            tableIds.add(tradeTable.getTableId());
-                        }
-                    }
-                }*/
-                // 查找桌台方案2  根据菜品关联的trade查找桌台(适合团餐场景)
-                if (!tradeIdSet.isEmpty()) {
+                                if (!tradeIdSet.isEmpty()) {
                     Dao<TradeTable, Long> tbDao = helper.getDao(TradeTable.class);
                     QueryBuilder<TradeTable, Long> tbQb = tbDao.queryBuilder();
                     tbQb.selectColumns(TradeTable.$.tableId).where().in(TradeTable.$.tradeId, tradeIdSet).and().eq(TradeTable.$.statusFlag, StatusFlag.VALID);
@@ -4152,8 +3405,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
 
-            //所有deliveryOrder记录
-            Dao<DeliveryOrder, String> deliveryOrderDao = helper.getDao(DeliveryOrder.class);
+                        Dao<DeliveryOrder, String> deliveryOrderDao = helper.getDao(DeliveryOrder.class);
             QueryBuilder<DeliveryOrder, String> deliveryOrderQB = deliveryOrderDao.queryBuilder();
             deliveryOrderQB.selectColumns(DeliveryOrder.$.tradeUuid);
             deliveryOrderQB.where()
@@ -4161,8 +3413,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     .and()
                     .eq(DeliveryOrder.$.enableFlag, YesOrNo.YES);
 
-            //待派单 待下发 订单
-            Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
+                        Dao<TradeExtra, String> tradeExtraDao = helper.getDao(TradeExtra.class);
             QueryBuilder<TradeExtra, String> tradeExtraQB = tradeExtraDao.queryBuilder();
             tradeExtraQB.selectColumns(TradeExtra.$.tradeUuid).where()
                     .isNull(TradeExtra.$.deliveryUserId)
@@ -4185,8 +3436,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
     }
 
-    //获取最小营业日
-    private Long getMinBizDate() {
+        private Long getMinBizDate() {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(DateTimeUtils.getCurrentDayStart());
         calendar.add(Calendar.DAY_OF_MONTH, -2);
@@ -4302,12 +3552,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
     }
 
-    /**
-     * 根据联台主单、子单获取联台所有订单 add v8.4
-     *
-     * @return
-     * @throws Exception
-     */
+
     public List<Trade> getUnionTradesByTrade(Trade trade) throws Exception {
         if (trade == null || trade.getId() == null) {
             return null;
@@ -4318,23 +3563,20 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         try {
 
             Dao<TradeMainSubRelation, Long> rDao = helper.getDao(TradeMainSubRelation.class);
-            if (trade.getTradeType() == TradeType.UNOIN_TABLE_SUB) { //如果是子单，先找到主单id
-                QueryBuilder<TradeMainSubRelation, Long> rQb = rDao.queryBuilder();
+            if (trade.getTradeType() == TradeType.UNOIN_TABLE_SUB) {                 QueryBuilder<TradeMainSubRelation, Long> rQb = rDao.queryBuilder();
                 TradeMainSubRelation tradeMainSubRelation = rQb.where().eq(TradeMainSubRelation.$.subTradeId, trade.getId()).and()
                         .eq(Trade.$.statusFlag, StatusFlag.VALID).queryForFirst();
 
                 if (tradeMainSubRelation != null)
                     mainTradeId = tradeMainSubRelation.getMainTradeId();
 
-            } else {//如果主单,直接去主单id
-                mainTradeId = trade.getId();
+            } else {                mainTradeId = trade.getId();
             }
 
             if (mainTradeId == null) {
                 return null;
             }
-            //根据关联表查询所有的子单id
-            QueryBuilder<TradeMainSubRelation, Long> rQb2 = rDao.queryBuilder();
+                        QueryBuilder<TradeMainSubRelation, Long> rQb2 = rDao.queryBuilder();
             List<TradeMainSubRelation> relationList = rQb2.where().eq(TradeMainSubRelation.$.mainTradeId, mainTradeId).and()
                     .eq(Trade.$.statusFlag, StatusFlag.VALID).query();
 
@@ -4345,8 +3587,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
                     idSet.add(relation.getSubTradeId());
                 }
             }
-            //根据订单id查询订单
-            Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
+                        Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
             QueryBuilder<Trade, String> tradeQb = tradeDao.queryBuilder();
             tradeList = tradeQb.where().in(Trade.$.id, idSet).and().eq(Trade.$.statusFlag, StatusFlag.VALID).query();
         } finally {
@@ -4355,12 +3596,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         return tradeList;
     }
 
-    /**
-     * 根据联台子单获取联台主单 add v8.4
-     *
-     * @return
-     * @throws Exception
-     */
+
     @Override
     public TradeMainSubRelation getTradeMainSubRelationBySubTrade(Trade subTrade) throws Exception {
         if (subTrade == null || subTrade.getId() == null) {
@@ -4379,8 +3615,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             Dao<TradeMainSubRelation, Long> rDao = helper.getDao(TradeMainSubRelation.class);
-            //如果是子单，先找到主单id
-            QueryBuilder<TradeMainSubRelation, Long> rQb = rDao.queryBuilder();
+                        QueryBuilder<TradeMainSubRelation, Long> rQb = rDao.queryBuilder();
             List<TradeMainSubRelation> tradeMainSubRelation = rQb.where().eq(TradeMainSubRelation.$.mainTradeId, mainTradeId).and()
                     .eq(Trade.$.statusFlag, StatusFlag.VALID).query();
 
@@ -4395,8 +3630,7 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
             Dao<TradeMainSubRelation, Long> rDao = helper.getDao(TradeMainSubRelation.class);
-            //如果是子单，先找到主单id
-            QueryBuilder<TradeMainSubRelation, Long> rQb = rDao.queryBuilder();
+                        QueryBuilder<TradeMainSubRelation, Long> rQb = rDao.queryBuilder();
             TradeMainSubRelation tradeMainSubRelation = rQb.where().eq(TradeMainSubRelation.$.subTradeId, subTradeId).and()
                     .eq(Trade.$.statusFlag, StatusFlag.VALID).queryForFirst();
 

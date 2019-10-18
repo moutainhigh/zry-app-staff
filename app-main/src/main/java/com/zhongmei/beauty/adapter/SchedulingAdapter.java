@@ -10,10 +10,7 @@ import com.zhongmei.yunfu.ui.view.recycler.ViewWrapper;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
-/**
- * Created by demo on 2018/12/15
- * 技师／顾问／销售员 适配器
- */
+
 @EBean
 public class SchedulingAdapter extends RecyclerViewBaseAdapter<SchedulingVo, SchedulingItemView> {
 

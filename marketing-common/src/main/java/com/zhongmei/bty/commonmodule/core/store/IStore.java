@@ -1,8 +1,6 @@
 package com.zhongmei.bty.commonmodule.core.store;
 
-/**
- * 设置存储接口
- */
+
 public interface IStore {
 
     boolean getBoolean(String key, boolean defaultValue);

@@ -4,67 +4,43 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * CoupRule is a ORMLite bean type. Corresponds to the database table "coup_rule"
- */
+
 @DatabaseTable(tableName = "coup_rule")
 public class CoupRule extends EntityBase<Long> {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * is_delete
-         */
+
         String isDelete = "is_delete";
 
-        /**
-         * coupon_id
-         */
+
         String couponId = "coupon_id";
 
-        /**
-         * rule_name
-         */
+
         String ruleName = "rule_name";
 
-        /**
-         * rule_value
-         */
+
         String ruleValue = "rule_value";
 
-        /**
-         * brand_id
-         */
+
         String brandId = "brand_id";
 
-        /**
-         * create_id
-         */
+
         String createId = "create_id";
 
-        /**
-         * create_time
-         */
+
         String createTime = "create_time";
 
-        /**
-         * updator_id
-         */
+
         String updatorId = "updator_id";
 
-        /**
-         * update_time
-         */
+
         String updateTime = "update_time";
 
     }

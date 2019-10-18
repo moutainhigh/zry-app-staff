@@ -12,38 +12,23 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @Date：2016-5-20 下午1:22:24
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class MarketPlanVo implements java.io.Serializable {
-    /**
-     * @date：2016-5-20 下午1:21:07
-     * @Description:营销活动信息
-     */
+
     private static final long serialVersionUID = 1L;
 
     private MarketPlan marketPlan;
 
-    // 优惠类型
-    private PromotionType promotionType;
+        private PromotionType promotionType;
 
-    // 营销方式：1单商品 2多商品
-    private ActivityType activityType;
+        private ActivityType activityType;
 
-    // 用户类型
-    private Set<UserType> userTypes = new HashSet<UserType>();
+        private Set<UserType> userTypes = new HashSet<UserType>();
 
-    // 订单类型
-    private Set<BusinessType> businessTypes = new HashSet<BusinessType>();
+        private Set<BusinessType> businessTypes = new HashSet<BusinessType>();
 
-    // 单据类型
-    private Set<DeliveryType> deliveryTypes = new HashSet<DeliveryType>();
-    //参与终端
-    private List<Integer> activityPos = new ArrayList<Integer>();
+        private Set<DeliveryType> deliveryTypes = new HashSet<DeliveryType>();
+        private List<Integer> activityPos = new ArrayList<Integer>();
 
     public MarketPlanVo(MarketPlan plan) {
         marketPlan = plan;

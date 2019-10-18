@@ -6,18 +6,14 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @DatabaseTable(tableName = "loyt_mrule_policy_dish")
 public class LoytMrulePolicyDish extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "loyt_mrule_policy_dish"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
         public static final String brandId = "brand_id";
@@ -38,14 +34,11 @@ public class LoytMrulePolicyDish extends IdEntityBase {
     }
 
     @DatabaseField(columnName = "brand_id")
-    private Long brandId;//商户Id
-
+    private Long brandId;
     @DatabaseField(columnName = "plan_id")
-    private Long planId;//方案Id
-
+    private Long planId;
     @DatabaseField(columnName = "dish_type")
-    private int dishType; //1-子菜品，2-中类菜品
-
+    private int dishType;
     @DatabaseField(columnName = "mid_dish_type_id")
     private Long midDishTypeId;
 
@@ -56,11 +49,9 @@ public class LoytMrulePolicyDish extends IdEntityBase {
     private BigDecimal price;
 
     @DatabaseField(columnName = "dish_id")
-    private Long dishId;//菜品id
-
+    private Long dishId;
     @DatabaseField(columnName = "dish_name")
-    private String dishName;//是否有效 0无效，1有效
-
+    private String dishName;
     @DatabaseField(columnName = "valid_flag")
     private int validFlag;
 

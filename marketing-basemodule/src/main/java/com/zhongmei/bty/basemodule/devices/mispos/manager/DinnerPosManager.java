@@ -49,14 +49,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * pos相关业务层的封装类
- *
- * @Date：2016-2-17 下午3:35:04
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class DinnerPosManager {
 
     private final static String TAG = DinnerPosManager.class.getSimpleName();
@@ -65,13 +58,7 @@ public class DinnerPosManager {
 
     public final static int UNIONPAY_REFUND_FAIL = 2;
 
-    /**
-     * 获取订单中对应的pos支付记录，不存在时返回null
-     *
-     * @Title: getPosPaymentitem
-     * @Param @param tradeUuid
-     * @Return PaymentItem 返回类型
-     */
+
     public PaymentItem getPosPaymentItem(String tradeUuid) {
         try {
             TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
@@ -84,13 +71,7 @@ public class DinnerPosManager {
         return null;
     }
 
-    /**
-     * 获取支付中对应的pos支付记录，不存在时返回null
-     *
-     * @Title: getPosPaymentItem
-     * @Param @param tradePaymentVo
-     * @Return PaymentItem 返回类型
-     */
+
     public PaymentItem getPosPaymentItem(List<PaymentVo> paymentVoList) {
         if (Utils.isNotEmpty(paymentVoList)) {
             for (PaymentVo paymentVo : paymentVoList) {
@@ -108,11 +89,7 @@ public class DinnerPosManager {
         return null;
     }
 
-    /**
-     * @Title: IsMixPayHavePos 判断组合支付中是否有银行卡支付。
-     * @Param @param tradePaymentVo
-     * @Return PaymentItem 返回类型
-     */
+
     public static boolean IsMixPayHavePos(TradePaymentVo tradePaymentVo) {
         if (!Utils.isEmpty(tradePaymentVo.getPaymentVoList())) {
             for (PaymentVo paymentVo : tradePaymentVo.getPaymentVoList()) {
@@ -129,19 +106,7 @@ public class DinnerPosManager {
         return false;
     }
 
-    /**
-     * 修改银联退款状态
-     *
-     * @param sellTrade           销货单
-     * @param payStatus           退款状态 4:REFUNDING:退款中 5:REFUNDED:已退款
-     *                            6:REFUND_FAILED:退款失败
-     * @param refundPaymentItem   退货支付信息
-     * @param refundWay           退款方式，1：无需退款，2：自动退款，3：手动退款
-     * @param log                 退款对应的pos刷卡记录（需要在修改退款状态成功后删除）
-     * @param paymentItemUnionpay 支付交易的银联明细，经过修改过生成一条退货交易的明细
-     * @Title: changeUnionpayRefundStatus
-     * @Return void 返回类型
-     */
+
     public void changeRefundStatus(Trade sellTrade, TradePayStatus payStatus, PaymentItem refundPaymentItem,
                                    RefundWay refundWay, final PosTransLog log, PaymentItemUnionpay paymentItemUnionpay,
                                    FragmentManager fragmentManager) {
@@ -152,15 +117,13 @@ public class DinnerPosManager {
 
         List<PaymentItemUnionpay> refundPaymentItemUnionpays = new ArrayList<PaymentItemUnionpay>();
         if (paymentItemUnionpay != null) {
-            //以支付交易的银联明细为基础，生成退货的交易明细
-            paymentItemUnionpay.setId(null);
+                        paymentItemUnionpay.setId(null);
             paymentItemUnionpay.setUuid(SystemUtils.genOnlyIdentifier());
             paymentItemUnionpay.setPaymentItemId(refundPaymentItem.getId());
             paymentItemUnionpay.setPaymentItemUuid(refundPaymentItem.getUuid());
             paymentItemUnionpay.setTransType(PosBusinessType.REPEAL);
             paymentItemUnionpay.validateCreate();
-            //拷贝退款log里的流水号和批次号信息
-            if (log != null) {
+                        if (log != null) {
                 paymentItemUnionpay.setBatchNumber(log.getBatchNumber());
                 paymentItemUnionpay.setPosTraceNumber(log.getPosTraceNumber());
             }
@@ -177,8 +140,7 @@ public class DinnerPosManager {
                     public void onResponse(ResponseObject<RefundStatusResp> response) {
                         if (ResponseObject.isOk(response)) {
                             if (log != null) {
-                                NewLiandiposManager.getInstance().completeRefund(log.getUuid());// 当POS刷卡成功的时候log才有值，失败的时候log=null;
-                            }
+                                NewLiandiposManager.getInstance().completeRefund(log.getUuid());                            }
                         } else {
                             ToastUtil.showShortToast(response.getMessage());
                         }
@@ -192,24 +154,14 @@ public class DinnerPosManager {
         operates.changeRefundStatus(req, listener);
     }
 
-    /**
-     * 进行pos刷卡退款
-     *
-     * @param sellTrade 退货订单
-     * @throws Exception
-     * @Title: posRefund
-     * @Return void 返回类型
-     */
+
     public void posRefund(final Trade sellTrade, final Trade refundTrade, final FragmentManager fragmentManager) throws Exception {
-        // 查询支付类型为pos刷卡的paymentitem，并发起pos退款
-        final PaymentItem paymentItem = getPosPaymentItem(sellTrade.getUuid());// 使用原单的支付信息
-        final PaymentItem refundPaymentItem = getPosPaymentItem(refundTrade.getUuid());
+                final PaymentItem paymentItem = getPosPaymentItem(sellTrade.getUuid());        final PaymentItem refundPaymentItem = getPosPaymentItem(refundTrade.getUuid());
         if (paymentItem == null) {
             return;
         }
 
-        // pos机未连接时，直接返回
-        if (!PosConnectManager.isPosConnected()) {
+                if (!PosConnectManager.isPosConnected()) {
             showRefundFailAndOfflineRefundDialog(sellTrade,
                     refundPaymentItem,
                     R.string.no_pos_connected,
@@ -217,12 +169,10 @@ public class DinnerPosManager {
             return;
         }
 
-        // 查询原单pos刷卡信息
-        PaymentItemDal paymentItemDal = OperatesFactory.create(PaymentItemDal.class);
+                PaymentItemDal paymentItemDal = OperatesFactory.create(PaymentItemDal.class);
         final PaymentItemUnionpayVo vo = paymentItemDal.findPaymentItemUnionpayVoByPaymentItemId(paymentItem.getId());
 
-        // 不能撤销时，直接提示是否线下退款
-        if (!NewLiandiposManager.getInstance().canRepeal(RefundRef.valueOf(vo.getPaymentItemUnionpay(),
+                if (!NewLiandiposManager.getInstance().canRepeal(RefundRef.valueOf(vo.getPaymentItemUnionpay(),
                 vo.getPaymentDevice()))) {
             showRefundFailAndOfflineRefundDialog(sellTrade,
                     refundPaymentItem,
@@ -261,28 +211,16 @@ public class DinnerPosManager {
                 .show(fragmentManager, "refund_pos");
     }
 
-    /**
-     * pos二次退款
-     *
-     * @param refundTradeVo 退货单
-     * @throws Exception
-     * @Title: retryPosRefund
-     * @Return void 返回类型
-     */
+
     public void retryPosRefund(TradeVo refundTradeVo, final FragmentManager fragmentManager) throws Exception {
         final Trade refundTrade = refundTradeVo.getTrade();
 
-        // 1.验证是否为修改已退款状态的下行失败
-        String renfundTradeUuid = refundTrade.getUuid();
-        final PaymentItem refundPaymentItem = new DinnerPosManager().getPosPaymentItem(renfundTradeUuid);// 退货单的支付信息
-
-        // 查询销货单信息
-        PaymentItem paymentItem = new DinnerPosManager().getPosPaymentItem(refundTrade.getRelateTradeUuid());// 原单支付信息
-        PaymentItemDal paymentItemDal = OperatesFactory.create(PaymentItemDal.class);
+                String renfundTradeUuid = refundTrade.getUuid();
+        final PaymentItem refundPaymentItem = new DinnerPosManager().getPosPaymentItem(renfundTradeUuid);
+                PaymentItem paymentItem = new DinnerPosManager().getPosPaymentItem(refundTrade.getRelateTradeUuid());        PaymentItemDal paymentItemDal = OperatesFactory.create(PaymentItemDal.class);
         final PaymentItemUnionpay paymentItemUnionpay = paymentItemDal.findByPaymentItemId(paymentItem.getId());
 
-        // 从服务器验证支付信息是否为已退款
-        TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
+                TradeOperates tradeOperates = OperatesFactory.create(TradeOperates.class);
         ResponseListener<PaymentItem> listener = LoadingResponseListener.ensure(new ResponseListener<PaymentItem>() {
 
                                                                                     @Override
@@ -290,20 +228,16 @@ public class DinnerPosManager {
                                                                                         if (ResponseObject.isOk(response)) {
                                                                                             PaymentItem item = response.getContent();
                                                                                             if (item != null && item.getPayStatus() == TradePayStatus.REFUNDED) {
-                                                                                                // 订单已经退款成功，删除本地pos刷卡记录
-                                                                                                ToastUtil.showShortToast(R.string.pos_refund_successed);
+                                                                                                                                                                                                ToastUtil.showShortToast(R.string.pos_refund_successed);
                                                                                                 NewLiandiposManager.getInstance().completeRefund(refundPaymentItem.getUuid());
                                                                                             } else {
-                                                                                                // 2.查询是否已经刷卡
-                                                                                                try {
-                                                                                                    // 销货单
-                                                                                                    Trade sellTrade = DBHelperManager.queryById(Trade.class, refundTrade.getRelateTradeUuid());
+                                                                                                                                                                                                try {
+                                                                                                                                                                                                        Trade sellTrade = DBHelperManager.queryById(Trade.class, refundTrade.getRelateTradeUuid());
 
                                                                                                     PosTransLog posTransLog =
                                                                                                             DBHelperManager.queryById(PosTransLog.class, refundPaymentItem.getUuid());
                                                                                                     if (posTransLog != null) {
-                                                                                                        // 修改退款状态为已退款
-                                                                                                        ToastUtil.showShortToast(R.string.pos_refund_unsuccessed);
+                                                                                                                                                                                                                ToastUtil.showShortToast(R.string.pos_refund_unsuccessed);
                                                                                                         changeRefundStatus(sellTrade,
                                                                                                                 TradePayStatus.REFUNDED,
                                                                                                                 refundPaymentItem,
@@ -312,8 +246,7 @@ public class DinnerPosManager {
                                                                                                                 paymentItemUnionpay,
                                                                                                                 fragmentManager);
                                                                                                     } else {
-                                                                                                        // 3.进行完整的刷卡退款流程
-                                                                                                        ToastUtil.showShortToast(R.string.pos_refund_uncard);
+                                                                                                                                                                                                                ToastUtil.showShortToast(R.string.pos_refund_uncard);
                                                                                                         posRefund(sellTrade, refundTrade, fragmentManager);
                                                                                                     }
                                                                                                 } catch (Exception e) {
@@ -335,35 +268,22 @@ public class DinnerPosManager {
         tradeOperates.queryPaymentItem(refundPaymentItem.getUuid(), listener);
     }
 
-    /**
-     * 进行pos刷卡退款(反结账)
-     *
-     * @param sellTrade   原销货单
-     * @param refundTrade 退货单
-     * @throws Exception
-     * @Title: posRefund
-     * @Return void 返回类型
-     */
+
     public void posRefundForRepay(final Trade sellTrade, Trade refundTrade, final FragmentManager fragmentManager,
                                   final OnPosUIListener listener) throws Exception {
-        // 查询支付类型为pos刷卡的paymentitem，并发起pos退款
-        final DinnerPosManager posManager = new DinnerPosManager();
-        final PaymentItem paymentItem = posManager.getPosPaymentItem(refundTrade.getRelateTradeUuid());// 使用原单的支付信息
-        final PaymentItem refundPaymentItem = posManager.getPosPaymentItem(refundTrade.getUuid());
-        if (paymentItem == null) {// 如果没有银行卡刷卡那么就走POS刷卡
-            listener.onFail();
+                final DinnerPosManager posManager = new DinnerPosManager();
+        final PaymentItem paymentItem = posManager.getPosPaymentItem(refundTrade.getRelateTradeUuid());        final PaymentItem refundPaymentItem = posManager.getPosPaymentItem(refundTrade.getUuid());
+        if (paymentItem == null) {            listener.onFail();
             return;
         }
 
-        // pos机未连接时，直接返回
-        if (!PosConnectManager.isPosConnected()) {
+                if (!PosConnectManager.isPosConnected()) {
             ToastUtil.showShortToast(R.string.no_pos_connected);
             listener.onFail();
             return;
         }
 
-        // 查询pos刷卡信息
-        PaymentItemDal paymentItemDal = OperatesFactory.create(PaymentItemDal.class);
+                PaymentItemDal paymentItemDal = OperatesFactory.create(PaymentItemDal.class);
         final PaymentItemUnionpayVo vo = paymentItemDal.findPaymentItemUnionpayVoByPaymentItemId(paymentItem.getId());
         final PaymentItemUnionpay refundPaymentItemUnionpay =
                 paymentItemDal.findByPaymentItemId(refundPaymentItem.getId());
@@ -404,15 +324,7 @@ public class DinnerPosManager {
                 .show(fragmentManager, "refund_pos");
     }
 
-    /**
-     * 弹出退款失败和线下退款的对话框
-     *
-     * @Title: showRefundFailAndOfflineRefundDialog
-     * @Param @param sellTrade 原单
-     * @Param @param refundPaymentItem 退货单支付信息
-     * @Param @param titleResId
-     * @Return void 返回类型
-     */
+
     public void showRefundFailAndOfflineRefundDialog(final Trade sellTrade, final PaymentItem refundPaymentItem,
                                                      int titleResId, final FragmentManager fragmentManager) {
         DialogUtil.showWarnConfirmDialog(fragmentManager,
@@ -436,8 +348,7 @@ public class DinnerPosManager {
 
                     @Override
                     public void onClick(View v) {
-                        // 点击线下退款，状态修改为线下退款中
-                        changeRefundStatus(sellTrade,
+                                                changeRefundStatus(sellTrade,
                                 TradePayStatus.REFUNDING,
                                 refundPaymentItem,
                                 RefundWay.HAND_REFUND,
@@ -449,14 +360,7 @@ public class DinnerPosManager {
                 "offline_refund");
     }
 
-    /**
-     * 根据TradeType返回类型，没有则返回NULL
-     *
-     * @Title: getTradeByTradeType
-     * @Param @param trades
-     * @Param @param tradeType
-     * @Return Trade 返回类型
-     */
+
     public static Trade getTradeByTradeType(List<Trade> trades, TradeType tradeType) {
         for (Trade trade : trades) {
             if (trade.getTradeType() == tradeType) {
@@ -466,14 +370,7 @@ public class DinnerPosManager {
         return null;
     }
 
-    /**
-     * 根据TradeType返回类型，没有则返回NULL
-     *
-     * @Title: getTradeByTradeStatus
-     * @Param @param trades
-     * @Param @param tradeType
-     * @Return Trade 返回类型
-     */
+
     public static Trade getTradeByTradeStatus(List<Trade> trades, TradeStatus tradeStatus) {
         for (Trade trade : trades) {
             if (trade.getTradeStatus() == tradeStatus) {
@@ -484,8 +381,6 @@ public class DinnerPosManager {
     }
 
     public interface OnPosUIListener {
-        void onSuccess();// POS刷卡成功
-
-        void onFail();// POS刷卡失败
-    }
+        void onSuccess();
+        void onFail();    }
 }

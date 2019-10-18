@@ -15,13 +15,8 @@ public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
         if (Intent.ACTION_BOOT_COMPLETED.equals(action)) {
-        } /*else if (PayMessage.DISPLAY_ACTION.equals(action)) {
-            DisplayServiceManager.startService(context);
-        } else if (PayMessage.DISPLAY_BOOT_ACTION.equals(action)) {
-            DisplayServiceManager.updateDisplay(context, new DisplayBootCommand());
-        }*/ else if (ACTION_APP_RESTART.equals(action)) {
-            //startLoginInitActivity(context);
-            PackageManager packageManager = context.getPackageManager();
+        }  else if (ACTION_APP_RESTART.equals(action)) {
+                        PackageManager packageManager = context.getPackageManager();
             Intent sender = packageManager.getLaunchIntentForPackage(context.getPackageName());
             sender.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             context.startActivity(sender);

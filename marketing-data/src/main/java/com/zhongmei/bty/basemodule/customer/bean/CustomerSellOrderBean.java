@@ -5,49 +5,24 @@ import com.zhongmei.yunfu.db.enums.BusinessType;
 
 import java.math.BigDecimal;
 
-/**
- * @Date：2016年3月10日
- * @Description:售卡列表、储值列表bean
- * @Version: 1.0
- */
+
 public class CustomerSellOrderBean extends CustomerOrderBean {
     private Long tradeId;
-    /*private String mobile;
-    private String sellTime;//售卡时间
-    private String cardNo;//卡号
-    private String sellMoney;//售价
-    private String operater;//经手人
-    private String deviceNo;//设备号
-    private EntityCardType cardType;//实体卡类型 1:会员实体卡 2:匿名实体卡*/
-    //服务器更新时间
-    private Long serverUpdateTime;
 
-    //实体卡和会员储值需获取到
-    private String paymentUuid;
+        private Long serverUpdateTime;
+
+        private String paymentUuid;
     private long customerId;
 
-    //实体卡储值，需获取到卡信息
-    private BigDecimal sendValue;//赠送金额
-    private BigDecimal beforeValue;//充值前金额
-    private BigDecimal addValue;//充值金额
-    private BigDecimal endValue;//当前金额
-
-    private BigDecimal beforeRealValue; // 操作前余额实储金额
-    private BigDecimal beforeSendValue;    // 操作前余额赠送金额
-    private BigDecimal currentRealValue; // 本次操作实储金额
-    private BigDecimal currentSendValue; // 本次操作赠送金额
-    private BigDecimal endRealValue; // 操作后实储金额
-    private BigDecimal endSendValue; // 操作后赠送金额
-
+        private BigDecimal sendValue;    private BigDecimal beforeValue;    private BigDecimal addValue;    private BigDecimal endValue;
+    private BigDecimal beforeRealValue;     private BigDecimal beforeSendValue;        private BigDecimal currentRealValue;     private BigDecimal currentSendValue;     private BigDecimal endRealValue;     private BigDecimal endSendValue;
     private BigDecimal integral;
     private String cardKindKame;
     private Long cardKindId;
     private Integer cardStatus;
     private BigDecimal remainValue;
-    private Integer type;//记录类型 0：储值，1：退款，2：调账,3：消费，4：换卡储值调账
-
-    private Integer addValueType;//储值类型 1：现金，2:银行卡
-
+    private Integer type;
+    private Integer addValueType;
     private Long tradeClientCreateTime;
     private Long tradeServerUpdateTime;
 
@@ -57,78 +32,11 @@ public class CustomerSellOrderBean extends CustomerOrderBean {
 
     private Integer businessType;
 
-	/*private Integer accountStatus; //1已到账、0未到账。
-	private Integer tradeStatus;
-	private Integer tradePayStatus;*/
 
-	/*public AccountStatus getAccountStatus() {
-		return ValueEnums.toEnum(AccountStatus.class, accountStatus);
-	}
 
-	public void setAccountStatus(AccountStatus accountStatus) {
-		this.accountStatus = ValueEnums.toValue(accountStatus);
-	}
 
-	public TradeStatus getTradeStatus() {
-		return ValueEnums.toEnum(TradeStatus.class, tradeStatus);
-	}
 
-	public void setTradeStatus(TradeStatus tradeStatus) {
-		this.tradeStatus = ValueEnums.toValue(tradeStatus);
-	}
 
-	public TradePayStatus getTradePayStatus() {
-		return ValueEnums.toEnum(TradePayStatus.class, tradePayStatus);
-	}
-
-	public void setTradePayStatus(TradePayStatus tradePayStatus) {
-		this.tradePayStatus = ValueEnums.toValue(tradePayStatus);;
-	}*/
-
-	/*public String getMobile() {
-		return mobile;
-	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-	public String getSellTime() {
-		return sellTime;
-	}
-	public void setSellTime(String sellTime) {
-		this.sellTime = sellTime;
-	}
-	public String getCardNo() {
-		return cardNo;
-	}
-	public void setCardNo(String cardNo) {
-		this.cardNo = cardNo;
-	}
-	public String getSellMoney() {
-		return sellMoney;
-	}
-	public void setSellMoney(String sellMoney) {
-		this.sellMoney = sellMoney;
-	}
-	public String getOperater() {
-		return operater;
-	}
-	public void setOperater(String operater) {
-		this.operater = operater;
-	}
-	public String getDeviceNo() {
-		return deviceNo;
-	}
-	public void setDeviceNo(String deviceNo) {
-		this.deviceNo = deviceNo;
-	}
-
-	public EntityCardType getCardType() {
-		return cardType;
-	}
-
-	public void setCardType(EntityCardType cardType) {
-		this.cardType = cardType;
-	}*/
 
     public Long getTradeId() {
         return tradeId;
@@ -181,13 +89,7 @@ public class CustomerSellOrderBean extends CustomerOrderBean {
     public void setCardKindKame(String cardKindKame) {
         this.cardKindKame = cardKindKame;
     }
-	/*public CardStatus getCardStatus() {
-		return ValueEnums.toEnum(CardStatus.class, cardStatus);
-	}
-	public void setCardStatus(CardStatus cardStatus) {
-		this.cardStatus = ValueEnums.toValue(cardStatus);
-	}
-*/
+
 
 
     public Integer getAddValueType() {

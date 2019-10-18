@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.db.BasicEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "dish_carte_norms")
 public class DishCarteNorms extends BasicEntityBase implements Cloneable {
 

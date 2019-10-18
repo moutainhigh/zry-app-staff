@@ -11,9 +11,7 @@ import com.zhongmei.bty.dinner.table.model.ZoneModel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TableFilterManager {
     private static TableFilterManager mTableFilter;
@@ -37,21 +35,12 @@ public class TableFilterManager {
         }
     }
 
-    /**
-     * 加载坐台信息
-     */
+
     public void loadTables() {
-        mTableManager.loadTableInfos();//加载坐台信息
-    }
+        mTableManager.loadTableInfos();    }
 
 
-    /**
-     * 过滤坐台
-     *
-     * @param zoneId      //需要过滤的桌台，全部桌台传入null
-     * @param tableStatus //坐台状态，全部传入null
-     * @return
-     */
+
     public List<DinnertableModel> filter(Long zoneId, TableStatus tableStatus) {
         List<DinnertableModel> listTableMode = null;
         List<DinnertableModel> listTargetTableMode = new ArrayList<>();

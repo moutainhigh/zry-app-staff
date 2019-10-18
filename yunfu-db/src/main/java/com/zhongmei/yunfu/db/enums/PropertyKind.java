@@ -2,32 +2,18 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 菜品属性类型
- */
+
 public enum PropertyKind implements ValueEnum<Integer> {
 
-    /**
-     * 口味，做法
-     */
+
     PROPERTY(1),
-    /**
-     * 标签
-     */
+
     LABEL(2),
-    /**
-     * 备注
-     */
+
     MEMO(3),
-    /**
-     * 规格类属性
-     */
+
     STANDARD(4),
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

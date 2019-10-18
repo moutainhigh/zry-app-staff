@@ -7,22 +7,14 @@ import com.zhongmei.bty.basemodule.database.entity.base.ServerBrandIdEntityBase;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * Model class of 商品类营销菜品表.
- *
- * @version $Id$
- */
+
 @DatabaseTable(tableName = "market_activity_dish")
 public class MarketActivityDish extends ServerBrandIdEntityBase implements Serializable {
 
-    /**
-     * serialVersionUID.
-     */
+
     private static final long serialVersionUID = 1L;
 
-    public final static int MARKET_ACTIVITY_DISH = 1;//菜品
-    public final static int MARKET_ACTIVITY_DISH_TYPE = 2;//中类
-
+    public final static int MARKET_ACTIVITY_DISH = 1;    public final static int MARKET_ACTIVITY_DISH_TYPE = 2;
     public static interface $ extends ServerBrandIdEntityBase.$ {
 
         public static final String planId = "plan_id";
@@ -39,116 +31,70 @@ public class MarketActivityDish extends ServerBrandIdEntityBase implements Seria
 
     }
 
-    /**
-     * 方案id.
-     */
+
     @DatabaseField(columnName = "plan_id")
     private Long planId;
 
-    /**
-     * 规则id.
-     */
+
     @DatabaseField(columnName = "rule_id")
     private Long ruleId;
 
-    /**
-     * 类型（1-菜品，2-中类）.
-     */
+
     @DatabaseField(columnName = "type")
     private Integer type;
 
-    /**
-     * 品牌菜品id.
-     */
+
     @DatabaseField(columnName = "dish_id")
     private Long dishId;
 
-    /**
-     * 菜品名称.
-     */
+
     @DatabaseField(columnName = "dish_name")
     private String dishName;
 
-    /**
-     * 菜品数量.
-     */
+
     @DatabaseField(columnName = "dish_num")
     private BigDecimal dishNum;
 
-    /**
-     * Constructor.
-     */
+
     public MarketActivityDish() {
     }
 
-    /**
-     * Set the 方案id.
-     *
-     * @param planId 方案id
-     */
+
     public void setPlanId(Long planId) {
         this.planId = planId;
     }
 
-    /**
-     * Get the 方案id.
-     *
-     * @return 方案id
-     */
+
     public Long getPlanId() {
         return this.planId;
     }
 
-    /**
-     * Set the 规则id.
-     *
-     * @param ruleId 规则id
-     */
+
     public void setRuleId(Long ruleId) {
         this.ruleId = ruleId;
     }
 
-    /**
-     * Get the 规则id.
-     *
-     * @return 规则id
-     */
+
     public Long getRuleId() {
         return this.ruleId;
     }
 
-    /**
-     * Set the 品牌菜品id.
-     *
-     * @param dishId 品牌菜品id
-     */
+
     public void setDishId(Long dishId) {
         this.dishId = dishId;
     }
 
-    /**
-     * Get the 品牌菜品id.
-     *
-     * @return 品牌菜品id
-     */
+
     public Long getDishId() {
         return this.dishId;
     }
 
-    /**
-     * Set the 菜品名称.
-     *
-     * @param dishName 菜品名称
-     */
+
     public void setDishName(String dishName) {
         this.dishName = dishName;
     }
 
-    /**
-     * Get the 菜品名称.
-     *
-     * @return 菜品名称
-     */
+
     public String getDishName() {
         return this.dishName;
     }
@@ -169,9 +115,7 @@ public class MarketActivityDish extends ServerBrandIdEntityBase implements Seria
         this.type = type;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -180,9 +124,7 @@ public class MarketActivityDish extends ServerBrandIdEntityBase implements Seria
         return result;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

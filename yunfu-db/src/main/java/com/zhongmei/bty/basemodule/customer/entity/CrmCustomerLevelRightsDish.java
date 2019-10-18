@@ -9,92 +9,60 @@ import com.zhongmei.yunfu.db.IUpdator;
 @DatabaseTable(tableName = "crm_customer_level_rights_dish")
 public class CrmCustomerLevelRightsDish extends CrmBasicEntityBase implements ICreator, IUpdator {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "crm_customer_level_rights"
-     */
+
     public interface $ extends CrmBasicEntityBase.$ {
 
-        /**
-         * rights_type
-         */
+
         public static final String rightsType = "rights_type";
 
-        /**
-         * customer_level_rights_id
-         */
+
         public static final String customerLevelRightsId = "customer_level_rights_id";
 
-        /**
-         * dish_brand_id
-         */
+
         public static final String dishBrandId = "dish_brand_id";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
     }
 
-    /**
-     * 权益类型（1：积分，2折扣）
-     */
+
     @DatabaseField(columnName = "rights_type")
     private Short rightsType;
 
-    /**
-     * 会员权益id
-     */
+
     @DatabaseField(columnName = "customer_level_rights_id", canBeNull = false)
     private Long customerLevelRightsId;
 
-    /**
-     * 品牌菜id
-     */
+
     @DatabaseField(columnName = "dish_brand_id")
     private Long dishBrandId;
 
-    /**
-     * 创建者id
-     */
+
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
 
-    /**
-     * 创建者名称
-     */
+
     @DatabaseField(columnName = "creator_name")
     private String creatorName;
 
-    /**
-     * 更新者id
-     */
+
     @DatabaseField(columnName = "updator_id")
     private Long updatorId;
 
-    /**
-     * 最后修改者姓名
-     */
+
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 

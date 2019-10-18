@@ -21,9 +21,7 @@ import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ReturnInventoryDialogFragment extends BasicDialogFragment implements View.OnClickListener {
 

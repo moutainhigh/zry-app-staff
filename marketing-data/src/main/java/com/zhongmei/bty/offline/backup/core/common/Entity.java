@@ -2,9 +2,7 @@ package com.zhongmei.bty.offline.backup.core.common;
 
 import com.zhongmei.bty.offline.backup.backup4qs.IQSBackup;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public final class Entity {
 
     public static final int STATE_FREE = 0;

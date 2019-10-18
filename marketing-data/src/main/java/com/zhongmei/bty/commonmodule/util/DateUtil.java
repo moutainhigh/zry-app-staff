@@ -27,36 +27,24 @@ public class DateUtil {
         return format(date, "MM-dd HH:mm");
     }
 
-    /**
-     * 将毫秒转换成时间字符串.  注意...不是格式化时间.
-     *
-     * @param millis
-     * @return
-     */
+
     public static String exchangeMillisToTime(long millis) {
         if (millis < 60 * 60 * 1000) {
-            //小于一个小时的只返回分秒
-            return format(millis, "mm:ss");
+                        return format(millis, "mm:ss");
         } else {
-            //大于一个小时的话加上16小时的时间,  因为时间戳是从 1970-1-1 8:00 算起的.... 直接format会不正确
-            millis += 16 * 60 * 60 * 1000;
+                        millis += 16 * 60 * 60 * 1000;
             return format(millis, "HH:mm:ss");
         }
     }
 
-    /**
-     * @param date
-     * @return yyyy-MM-dd
-     */
+
     public static String formatDate(long date) {
         SimpleDateFormat sdf = new SimpleDateFormat(DEFAULT_DATE_FORMAT,
                 Locale.getDefault());
         return sdf.format(new Date(date));
     }
 
-    /*
-     * @return HH:mm
-     */
+
     public static String getHHmm(long time) {
         SimpleDateFormat sdf = new SimpleDateFormat(TIME_FORMAT,
                 Locale.getDefault());
@@ -90,10 +78,7 @@ public class DateUtil {
     }
 
 
-    /*
-     *获取天数转换的毫秒总时间
-     *@param 天数
-     * */
+
     public static long getDayConvertMillisTotal(int daytime) {
         return daytime * 24 * 60 * 60 * 1000;
     }

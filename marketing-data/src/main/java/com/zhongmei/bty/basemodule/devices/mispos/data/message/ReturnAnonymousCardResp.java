@@ -8,11 +8,7 @@ import com.zhongmei.yunfu.db.entity.trade.Payment;
 
 import java.util.List;
 
-/**
- * @Date： 2016/6/30
- * @Description:匿名卡退卡返回对象
- * @Version: 1.0
- */
+
 public class ReturnAnonymousCardResp extends TradeResp {
 
     private List<Payment> payments;

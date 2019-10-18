@@ -29,10 +29,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 加料View
- */
+
 @EViewGroup(R.layout.add_material_view)
 public class BeautyExtraView extends LinearLayout {
 
@@ -159,8 +156,7 @@ public class BeautyExtraView extends LinearLayout {
                         mList.get(v.getId()).setQty(BigDecimal.ONE);
                         mListener.onAddMaterial(mList.get(v.getId()), BigDecimal.valueOf(1));
                     }
-                    // ll.setVisibility(View.VISIBLE);
-                }
+                                    }
             });
             minus.setId(i);
             minus.setOnClickListener(new OnClickListener() {

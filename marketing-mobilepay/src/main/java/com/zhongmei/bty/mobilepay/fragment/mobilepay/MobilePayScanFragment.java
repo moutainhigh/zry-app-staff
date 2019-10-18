@@ -34,10 +34,7 @@ import com.zhongmei.yunfu.util.ViewUtil;
 
 import java.util.List;
 
-/**
- * 移动支付扫描枪界面
- * Created by demo on 2018/12/15
- */
+
 public class MobilePayScanFragment extends BasicFragment implements ScanDataReceivedListener, TextView.OnEditorActionListener, View.OnClickListener {
 
     public static final String TAG = MobilePayScanFragment.class.getSimpleName();
@@ -48,14 +45,12 @@ public class MobilePayScanFragment extends BasicFragment implements ScanDataRece
 
     protected LinearLayout mLlScanTypes;
 
-    private EditText mWechatIdET;// 外接扫码枪输入框
-
+    private EditText mWechatIdET;
     private IPaymentInfo mPaymentInfo;
 
     private MobliePayMenuTool mobliePayMenuTool;
 
-    private IScannerManager mScannerManager;// 一体机扫描
-
+    private IScannerManager mScannerManager;
     private MobilePayDialog.MobilePayCallBack mobilePayCallBack;
 
     public static MobilePayScanFragment newInstance(IPaymentInfo info, MobilePayDialog.MobilePayCallBack payCallBack) {
@@ -134,25 +129,17 @@ public class MobilePayScanFragment extends BasicFragment implements ScanDataRece
     }
 
     private void initScanManager() {
-        /*if (DensityUtil.isHaveMiniScreen(this.getActivity()) && Product.isSupportSoftwareScanner()) {//如果有副屏且软解码
-            mScannerManager = InnerScanerManager.newInstance(this.getActivity(), this);//副屏进程
-        } else {*/
-        mScannerManager = InnerScannerManager1.newInstance(this.getActivity(), this);//当前进程
-        //}
-    }
 
-    //获取副屏扫描数据
-    @Override
+        mScannerManager = InnerScannerManager1.newInstance(this.getActivity(), this);            }
+
+        @Override
     public void onDataReceivedOver(String authCode) {
         try {
-            //PLog.d(PLog.TAG_CALLPRINT_KEY, "info:内置扫码枪扫码时间:" + System.currentTimeMillis() + ",TradeUuid:" + mPaymentInfo.getTradeVo().getTrade().getUuid() + ",authCode:" + authCode + "->onDataReceivedOver()");
-        } catch (Exception e) {
+                    } catch (Exception e) {
             e.printStackTrace();
         }
-        // 如果下单成功，启动被扫支付
-        if (!TextUtils.isEmpty(authCode)) {
-            // TODO: 2018/6/5 主扫 回调接口
-            mobilePayCallBack.payByAuthCode(authCode, PayModeId.MOBILE_PAY);
+                if (!TextUtils.isEmpty(authCode)) {
+                        mobilePayCallBack.payByAuthCode(authCode, PayModeId.MOBILE_PAY);
             showScanOverIcon();
         } else {
             ToastUtil.showLongToast(R.string.pay_authcode_can_not_empty);
@@ -181,13 +168,11 @@ public class MobilePayScanFragment extends BasicFragment implements ScanDataRece
     public void onClick(View v) {
         if (ClickManager.getInstance().isClicked()) return;
         if (v.getId() == R.id.tv_refresh_pay_state) {
-            // TODO: 2018/6/5 刷新支付状态
-            mobilePayCallBack.getPayState();
+                        mobilePayCallBack.getPayState();
         }
     }
 
-    //显示扫码完成提示
-    public void showScanOverIcon() {
+        public void showScanOverIcon() {
         mShowBarcodeView.setShowType(ShowBarcodeView.SHOW_SCAN_SUCCESS);
     }
 
@@ -207,14 +192,11 @@ public class MobilePayScanFragment extends BasicFragment implements ScanDataRece
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         String authCode = mWechatIdET.getText().toString();
         try {
-            //PLog.d(PLog.TAG_CALLPRINT_KEY, "info:外置扫码枪扫码时间:" + System.currentTimeMillis() + ",TradeUuid:" + mPaymentInfo.getTradeVo().getTrade().getUuid() + ",authCode:" + authCode + "->onEditorAction()");
-        } catch (Exception e) {
+                    } catch (Exception e) {
             e.printStackTrace();
         }
-        // 如果下单成功，启动被扫支付
-        if (!TextUtils.isEmpty(authCode)) {
-            // TODO: 2018/6/5 主扫 回调接口
-            mobilePayCallBack.payByAuthCode(authCode, PayModeId.MOBILE_PAY);
+                if (!TextUtils.isEmpty(authCode)) {
+                        mobilePayCallBack.payByAuthCode(authCode, PayModeId.MOBILE_PAY);
             mWechatIdET.setText("");
             mWechatIdET.requestFocus();
             ViewUtil.hiddenSoftKeyboard(mWechatIdET);

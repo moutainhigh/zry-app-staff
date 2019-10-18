@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.commonbusiness.constants;
 
 import com.zhongmei.yunfu.context.util.SharedPreferenceUtil;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class SnackConstant {
 
@@ -14,12 +12,8 @@ public class SnackConstant {
     public final static int PAGE_ORDER_CENTER = 2;
 
     public final static class OfflineEnableSwitch {
-        public static final String KEY_OFFLINE_ENABLE = "offline_enable";//离线是否可用的key
-        private static final String VALUE_OFFLINE_ENABLE = "1"; //离线可用
-        private static final String VALUE_OFFLINE_DISABLE = "2";//离线不可用
-
-        public static final String KEY_SP_SWITCH = NAME_SPACE + "key_sp_switch";//记录到sp里面的key
-
+        public static final String KEY_OFFLINE_ENABLE = "offline_enable";        private static final String VALUE_OFFLINE_ENABLE = "1";         private static final String VALUE_OFFLINE_DISABLE = "2";
+        public static final String KEY_SP_SWITCH = NAME_SPACE + "key_sp_switch";
         private OfflineEnableSwitch() {
 
         }

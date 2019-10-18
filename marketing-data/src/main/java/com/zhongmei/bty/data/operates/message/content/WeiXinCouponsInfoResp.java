@@ -2,10 +2,7 @@ package com.zhongmei.bty.data.operates.message.content;
 
 import com.zhongmei.bty.basemodule.discount.bean.WeiXinCouponsInfo;
 
-/**
- * 对返回的微信卡券数据的封装
- * Created by demo on 2018/12/15
- */
+
 public class WeiXinCouponsInfoResp {
 
     private String code;

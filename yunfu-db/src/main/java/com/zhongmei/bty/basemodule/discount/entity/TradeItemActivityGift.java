@@ -2,20 +2,14 @@ package com.zhongmei.bty.basemodule.discount.entity;
 
 import java.io.Serializable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TradeItemActivityGift implements Serializable {
 
-    private String tradeUuid; // 关联tradeUUID
-
-    private String tradeItemUuid; // 关联tradeItemUuid
-
-    private Long ruleId; // 营销活动ID
-
-    private String relUuid; // 关联trade_plan_activity的uuid
-
+    private String tradeUuid;
+    private String tradeItemUuid;
+    private Long ruleId;
+    private String relUuid;
 
     public String getTradeUuid() {
         return tradeUuid;

@@ -1,21 +1,4 @@
-/****************************************************************
- * Licensed to the Apache Software Foundation (ASF) under one   *
- * or more contributor license agreements.  See the NOTICE file *
- * distributed with this work for additional information        *
- * regarding copyright ownership.  The ASF licenses this file   *
- * to you under the Apache License, Version 2.0 (the            *
- * "License"); you may not use this file except in compliance   *
- * with the License.  You may obtain a copy of the License at   *
- *                                                              *
- *   http://www.apache.org/licenses/LICENSE-2.0                 *
- *                                                              *
- * Unless required by applicable law or agreed to in writing,   *
- * software distributed under the License is distributed on an  *
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY       *
- * KIND, either express or implied.  See the License for the    *
- * specific language governing permissions and limitations      *
- * under the License.                                           *
- ****************************************************************/
+
 
 package com.zhongmei.bty.common.util.mime4j.decoder;
 
@@ -24,12 +7,7 @@ import java.io.InputStream;
 
 import android.util.Log;
 
-/**
- * Performs Quoted-Printable decoding on an underlying stream.
- *
- * @version $Id: QuotedPrintableInputStream.java,v 1.3 2004/11/29 13:15:47
- * ntherning Exp $
- */
+
 public class QuotedPrintableInputStream extends InputStream {
     private static final String TAG = QuotedPrintableInputStream.class
             .getSimpleName();
@@ -43,11 +21,7 @@ public class QuotedPrintableInputStream extends InputStream {
         this.stream = stream;
     }
 
-    /**
-     * Closes the underlying stream.
-     *
-     * @throws IOException on I/O errors.
-     */
+
     public void close() throws IOException {
         stream.close();
     }
@@ -65,17 +39,8 @@ public class QuotedPrintableInputStream extends InputStream {
         }
     }
 
-    /**
-     * Pulls bytes out of the underlying stream and places them in the pushback
-     * queue. This is necessary (vs. reading from the underlying stream
-     * directly) to detect and filter out "transport padding" whitespace, i.e.,
-     * all whitespace that appears immediately before a CRLF.
-     *
-     * @throws IOException Underlying stream threw IOException.
-     */
+
     private void populatePushbackQueue() throws IOException {
-        // Debug.verify(pushbackq.count() == 0,
-        // "PopulatePushbackQueue called when pushback queue was not empty!");
 
         if (pushbackq.count() != 0)
             return;
@@ -84,17 +49,14 @@ public class QuotedPrintableInputStream extends InputStream {
             int i = stream.read();
             switch (i) {
                 case -1:
-                    // stream is done
-                    pushbackq.clear(); // discard any whitespace preceding EOF
-                    return;
+                                        pushbackq.clear();                     return;
                 case ' ':
                 case '\t':
                     pushbackq.enqueue((byte) i);
                     break;
                 case '\r':
                 case '\n':
-                    pushbackq.clear(); // discard any whitespace preceding EOL
-                    pushbackq.enqueue((byte) i);
+                    pushbackq.clear();                     pushbackq.enqueue((byte) i);
                     return;
                 default:
                     pushbackq.enqueue((byte) i);
@@ -103,16 +65,9 @@ public class QuotedPrintableInputStream extends InputStream {
         }
     }
 
-    /**
-     * Causes the pushback queue to get populated if it is empty, then consumes
-     * and decodes bytes out of it until one or more bytes are in the byte
-     * queue. This decoding step performs the actual QP decoding.
-     *
-     * @throws IOException Underlying stream threw IOException.
-     */
+
     private void fillBuffer() throws IOException {
-        byte msdChar = 0; // first digit of escaped num
-        while (byteq.count() == 0) {
+        byte msdChar = 0;         while (byteq.count() == 0) {
             if (pushbackq.count() == 0) {
                 populatePushbackQueue();
                 if (pushbackq.count() == 0)
@@ -122,28 +77,21 @@ public class QuotedPrintableInputStream extends InputStream {
             byte b = (byte) pushbackq.dequeue();
 
             switch (state) {
-                case 0: // start state, no bytes pending
-                    if (b != '=') {
+                case 0:                     if (b != '=') {
                         byteq.enqueue(b);
-                        break; // state remains 0
-                    } else {
+                        break;                     } else {
                         state = 1;
                         break;
                     }
-                case 1: // encountered "=" so far
-                    if (b == '\r') {
+                case 1:                     if (b == '\r') {
                         state = 2;
                         break;
                     } else if ((b >= '0' && b <= '9') || (b >= 'A' && b <= 'F')
                             || (b >= 'a' && b <= 'f')) {
                         state = 3;
-                        msdChar = b; // save until next digit encountered
-                        break;
+                        msdChar = b;                         break;
                     } else if (b == '=') {
-                        /*
-                         * Special case when == is encountered. Emit one = and stay
-                         * in this state.
-                         */
+
                         byteq.enqueue((byte) '=');
                         break;
                     } else {
@@ -152,8 +100,7 @@ public class QuotedPrintableInputStream extends InputStream {
                         byteq.enqueue(b);
                         break;
                     }
-                case 2: // encountered "=\r" so far
-                    if (b == '\n') {
+                case 2:                     if (b == '\n') {
                         state = 0;
                         break;
                     } else {
@@ -163,9 +110,7 @@ public class QuotedPrintableInputStream extends InputStream {
                         byteq.enqueue(b);
                         break;
                     }
-                case 3: // encountered =<digit> so far; expecting another <digit> to
-                    // complete the octet
-                    if ((b >= '0' && b <= '9') || (b >= 'A' && b <= 'F')
+                case 3:                                         if ((b >= '0' && b <= '9') || (b >= 'A' && b <= 'F')
                             || (b >= 'a' && b <= 'f')) {
                         byte msd = asciiCharToNumericValue(msdChar);
                         byte low = asciiCharToNumericValue(b);
@@ -179,8 +124,7 @@ public class QuotedPrintableInputStream extends InputStream {
                         byteq.enqueue(b);
                         break;
                     }
-                default: // should never happen
-                    Log.e(TAG, "Illegal state: " + state);
+                default:                     Log.e(TAG, "Illegal state: " + state);
                     state = 0;
                     byteq.enqueue(b);
                     break;
@@ -188,12 +132,7 @@ public class QuotedPrintableInputStream extends InputStream {
         }
     }
 
-    /**
-     * Converts '0' => 0, 'A' => 10, etc.
-     *
-     * @param c ASCII character value.
-     * @return Numeric value of hexadecimal character.
-     */
+
     private byte asciiCharToNumericValue(byte c) {
         if (c >= '0' && c <= '9') {
             return (byte) (c - '0');
@@ -202,10 +141,7 @@ public class QuotedPrintableInputStream extends InputStream {
         } else if (c >= 'a' && c <= 'z') {
             return (byte) (0xA + (c - 'a'));
         } else {
-            /*
-             * This should never happen since all calls to this method are
-             * preceded by a check that c is in [0-9A-Za-z]
-             */
+
             throw new IllegalArgumentException((char) c
                     + " is not a hexadecimal digit");
         }

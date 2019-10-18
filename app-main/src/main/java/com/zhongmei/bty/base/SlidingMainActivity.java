@@ -16,11 +16,7 @@ import com.zhongmei.bty.dinner.orderdish.TitleBarFragment;
 import com.zhongmei.bty.dinner.orderdish.TitleBarFragment_;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
 
-/**
- * 统一左边侧栏菜单
- *
- * @date 2017/2/9 16:00
- */
+
 public abstract class SlidingMainActivity extends MainBaseActivity {
 
     private View rootView;
@@ -49,8 +45,7 @@ public abstract class SlidingMainActivity extends MainBaseActivity {
 
     public void setLeftMenu(BasicFragment fragment) {
         replaceFragment(R.id.main_left_menu, fragment, fragment.getClass().getName());
-        //fragment.showFragment(this, R.id.main_left_menu);
-    }
+            }
 
     public void switchLeftMenu() {
         setLeftMenu(!contentShadow.isShown());
@@ -62,8 +57,7 @@ public abstract class SlidingMainActivity extends MainBaseActivity {
         }
 
         if (visible) {
-            // 展开左侧菜单时，显示遮罩
-            contentShadow.setVisibility(View.VISIBLE);
+                        contentShadow.setVisibility(View.VISIBLE);
             final int tx = leftMenu.getLayoutParams().width;
             menuAnim = ValueAnimator.ofInt(0, tx);
             menuAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -76,13 +70,11 @@ public abstract class SlidingMainActivity extends MainBaseActivity {
                         menuAnim = null;
                     }
                 }
-            });//DecelerateInterpolator
-            menuAnim.setInterpolator(new DecelerateInterpolator());
+            });            menuAnim.setInterpolator(new DecelerateInterpolator());
             menuAnim.setDuration(300);
             menuAnim.start();
         } else {
-            // 关闭左侧菜单时，隐藏遮罩
-            contentShadow.setVisibility(View.GONE);
+                        contentShadow.setVisibility(View.GONE);
             final int tx = leftMenu.getLayoutParams().width;
             menuAnim = ValueAnimator.ofInt(0, tx);
             menuAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -95,8 +87,7 @@ public abstract class SlidingMainActivity extends MainBaseActivity {
                         menuAnim = null;
                     }
                 }
-            });//AccelerateInterpolator
-            menuAnim.setInterpolator(new AccelerateInterpolator());
+            });            menuAnim.setInterpolator(new AccelerateInterpolator());
             menuAnim.setDuration(300);
             menuAnim.start();
         }

@@ -41,11 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @Date：2016年1月14日 下午2:37:50
- * @Description: TODO
- * @Version: 1.0
- */
+
 @EFragment(R.layout.settings_table_number)
 public class TableNumberFragment extends BasicFragment {
 
@@ -85,9 +81,7 @@ public class TableNumberFragment extends BasicFragment {
 
     private boolean haveLimitServiceTime = false;
 
-    /**
-     * 加载就餐时长设置
-     */
+
     private class LoadLimitServiceTimeAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
         @Override
@@ -104,9 +98,7 @@ public class TableNumberFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 判断是否存在就餐时长
-     */
+
     private boolean haveLimitTime() {
         return !TextUtils.isEmpty(ServerSettingCache.getInstance().getLimitServiceTime());
     }
@@ -183,8 +175,7 @@ public class TableNumberFragment extends BasicFragment {
     protected void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_table:
-                // 如果cbTable已经是选中状态，点击后重置全部checkbox状态
-                if (cbTable.isChecked()) {
+                                if (cbTable.isChecked()) {
                     reset();
                 } else {
                     setContrary(cbTable);
@@ -194,8 +185,7 @@ public class TableNumberFragment extends BasicFragment {
                 }
                 break;
             case R.id.rl_number:
-                // 同上
-                if (cbNumber.isChecked()) {
+                                if (cbNumber.isChecked()) {
                     reset();
                 } else {
                     setContrary(cbNumber);
@@ -205,14 +195,12 @@ public class TableNumberFragment extends BasicFragment {
                 }
                 break;
             case R.id.rl_here:
-                // 只有在桌台号牌其中之一被选择后才可以点击
-                if (cbTable.isChecked() || cbNumber.isChecked()) {
+                                if (cbTable.isChecked() || cbNumber.isChecked()) {
                     setContrary(cbHere);
                 }
                 break;
             case R.id.rl_carray:
-                // 同理
-                if (cbTable.isChecked() || cbNumber.isChecked()) {
+                                if (cbTable.isChecked() || cbNumber.isChecked()) {
                     setContrary(cbCarray);
                 }
                 break;
@@ -413,9 +401,7 @@ public class TableNumberFragment extends BasicFragment {
         }
     }
 
-    /**
-     * 检测是否展示号牌提示
-     */
+
     private void checkNumberTip() {
         if (cbNumber.isChecked() && haveLimitServiceTime) {
             tvNumberTip.setVisibility(View.VISIBLE);

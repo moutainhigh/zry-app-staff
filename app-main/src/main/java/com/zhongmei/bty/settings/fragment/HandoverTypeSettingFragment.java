@@ -21,15 +21,10 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- * 交接方式设置界面
- */
+
 @EFragment(R.layout.fragment_handover_type)
 public class HandoverTypeSettingFragment extends Fragment {
-    private final static int HANDOVER_TYPE_SHOW_DATA = 1;//明交接
-    private final static int HANDOVER_TYPE_HIDE_DATA = 2;//暗交接
-    @ViewById(R.id.show_data_type)
+    private final static int HANDOVER_TYPE_SHOW_DATA = 1;    private final static int HANDOVER_TYPE_HIDE_DATA = 2;    @ViewById(R.id.show_data_type)
     ImageButton showDataHandoverType;
     @ViewById(R.id.hide_data_type)
     ImageButton hideDataHandoverType;
@@ -76,8 +71,7 @@ public class HandoverTypeSettingFragment extends Fragment {
             return;
         }
         currentType = type;
-        //     setViewByType(currentType);
-        setHandoverType(currentType);
+                setHandoverType(currentType);
     }
 
     private void setViewByType(int type) {

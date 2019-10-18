@@ -16,14 +16,11 @@ public class VerifyKoubeiOrder extends ShopEntityBase {
     }
 
     @DatabaseField(columnName = $.tradeId)
-    private Long tradeId; //订单ID |是
-
+    private Long tradeId;
     @DatabaseField(columnName = $.tradeUuid)
-    private String tradeUuid; //订单UUID |是
-
+    private String tradeUuid;
     @DatabaseField(columnName = $.verifyStatus)
-    private Integer verifyStatus; //核销状态(1-待核销,2-核销成功) |是
-
+    private Integer verifyStatus;
     public Long getTradeId() {
         return tradeId;
     }
@@ -49,20 +46,12 @@ public class VerifyKoubeiOrder extends ShopEntityBase {
     }
 
     public enum VerifyStatus implements ValueEnum<Integer> {
-        /**
-         * 待核销
-         */
+
         VERIFY_WAITING(1),
-        /**
-         * 核销成功
-         */
+
         VERIFY_SUCCESS(2),
 
-        /**
-         * 未知的值
-         *
-         * @deprecated 为了避免转为enum出错而设置，不应直接使用
-         */
+
         @Deprecated
         __UNKNOWN__;
 

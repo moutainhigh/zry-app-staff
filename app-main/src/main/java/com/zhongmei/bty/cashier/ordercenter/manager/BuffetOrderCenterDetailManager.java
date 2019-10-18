@@ -21,9 +21,7 @@ import com.zhongmei.bty.basemodule.trade.message.TradeResp;
 
 import java.util.List;
 
-/**
- * 订单中心订单详情正餐Model，业务处理类主要负责数据库操作、网络操作
- */
+
 public class BuffetOrderCenterDetailManager extends OrderCenterDetailManager {
     public BuffetOrderCenterDetailManager() {
         super();

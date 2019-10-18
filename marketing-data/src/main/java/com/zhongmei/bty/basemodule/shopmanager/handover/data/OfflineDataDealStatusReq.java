@@ -1,8 +1,6 @@
 package com.zhongmei.bty.basemodule.shopmanager.handover.data;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class OfflineDataDealStatusReq {
     Long shopId;

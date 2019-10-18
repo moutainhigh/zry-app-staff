@@ -1,11 +1,8 @@
 package com.zhongmei.bty.basemodule.commonbusiness.bean;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class MediaPlayerFileVo {
-    private int fileType;//1,文件，2，resID
-    private String filePath;
+    private int fileType;    private String filePath;
     private int resId;
 
     public MediaPlayerFileVo(int fileType, String filePath) {

@@ -14,10 +14,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- * 排班设置（看板单元格）
- */
+
 public class SchedulingView extends LinearLayout {
 
     private TextView tv_workNo;

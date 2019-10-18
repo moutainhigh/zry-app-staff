@@ -4,11 +4,7 @@ import com.zhongmei.bty.basemodule.trade.bean.DinnertableState;
 
 import java.util.List;
 
-/**
- * @Date： 2016/11/8
- * @Description:快餐换桌请求封装
- * @Version: 1.0
- */
+
 public class ExChangeTableReq {
 
     private Long updatorId;

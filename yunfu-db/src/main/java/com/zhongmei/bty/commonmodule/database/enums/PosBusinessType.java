@@ -3,25 +3,15 @@ package com.zhongmei.bty.commonmodule.database.enums;
 import com.zhongmei.yunfu.util.ValueEnum;
 
 public enum PosBusinessType implements ValueEnum<Integer> {
-    /**
-     * 消费
-     */
+
     EXPENSE(2),
 
-    /**
-     * 撤销
-     */
+
     REPEAL(3),
 
-    /**
-     * 退货
-     */
+
     REFUND(4),
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

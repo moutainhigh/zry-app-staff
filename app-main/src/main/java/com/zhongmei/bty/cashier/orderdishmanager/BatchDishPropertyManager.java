@@ -23,22 +23,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BatchDishPropertyManager {
 
     private final static String TAG = BatchDishPropertyManager.class.getSimpleName();
 
-    /**
-     * 获取批量菜品的公共做法、加料库（目前只支持正餐）
-     *
-     * @param shopcartItems
-     */
+
     public BatchDishPropertyVo loadData(List<ShopcartItem> shopcartItems) {
-        //查询所有口味做法、加料作为最初结果
-        List<DishProperty> propertyResultList = DishCache.getPropertyHolder().filter(new TastePropertyFilter());
+                List<DishProperty> propertyResultList = DishCache.getPropertyHolder().filter(new TastePropertyFilter());
         List<DishShop> extraResultList = DishCache.getExtraHolder().filter(null);
         for (ShopcartItem shopcartItem : shopcartItems) {
             Long brandDishId = shopcartItem.getDishShop().getBrandDishId();
@@ -48,8 +41,7 @@ public class BatchDishPropertyManager {
                 continue;
             }
 
-            //查询当前菜品对应的口味做法属性
-            DishTastePropertyFilter filter = new DishTastePropertyFilter(dishShop);
+                        DishTastePropertyFilter filter = new DishTastePropertyFilter(dishShop);
             List<DishBrandProperty> dishBrandPropertyList = DishCache.getDishPropertyHolder().filter(filter);
             List<DishProperty> dishPropertyList = new ArrayList<>();
             if (Utils.isNotEmpty(dishBrandPropertyList)) {
@@ -61,15 +53,12 @@ public class BatchDishPropertyManager {
                 }
             }
 
-            //过滤结果集（与当前菜品属性求交）
-            if (Utils.isNotEmpty(dishPropertyList)) {
+                        if (Utils.isNotEmpty(dishPropertyList)) {
                 propertyResultList.retainAll(dishPropertyList);
             }
 
-            //查询当前菜品对应的加料
-            DishExtraFilter extraFilter = new DishExtraFilter(dishShop);
-            List<DishSetmeal> dishSetmealList = DishCache.getDishExtraHolder().filter(extraFilter);//加料关联表
-            Map<Long, DishShop> dishExtraMap = new HashMap<>();
+                        DishExtraFilter extraFilter = new DishExtraFilter(dishShop);
+            List<DishSetmeal> dishSetmealList = DishCache.getDishExtraHolder().filter(extraFilter);            Map<Long, DishShop> dishExtraMap = new HashMap<>();
             if (Utils.isNotEmpty(dishSetmealList)) {
                 for (DishSetmeal dishSetmeal : dishSetmealList) {
                     if (dishExtraMap.containsKey(dishSetmeal.getChildDishId())) {
@@ -86,26 +75,18 @@ public class BatchDishPropertyManager {
                 }
             }
 
-            //过滤结果集（与当前菜品加料求交）
-            if (!dishExtraMap.isEmpty()) {
+                        if (!dishExtraMap.isEmpty()) {
                 extraResultList.retainAll(dishExtraMap.values());
             }
         }
 
-        Collections.sort(propertyResultList, newPropertyComparator());//对口味做法进行排序
-        return makeBatchDishPropertyVo(propertyResultList, extraResultList);
+        Collections.sort(propertyResultList, newPropertyComparator());        return makeBatchDishPropertyVo(propertyResultList, extraResultList);
     }
 
-    /**
-     * 构建批量操作菜品共有的做法和加料列表
-     *
-     * @param propertyResultList
-     * @param extraResultList
-     */
+
     private BatchDishPropertyVo makeBatchDishPropertyVo(List<DishProperty> propertyResultList, List<DishShop> extraResultList) {
         BatchDishPropertyVo batchDishPropertyVo = new BatchDishPropertyVo();
-        //构建做法数据，按做法种类进行分类
-        if (Utils.isNotEmpty(propertyResultList)) {
+                if (Utils.isNotEmpty(propertyResultList)) {
             Map<Long, PropertyGroupVo<DishPropertyVo>> propertyGroupVoMap = new HashMap<>();
             for (DishProperty property : propertyResultList) {
                 Long typeId = property.getPropertyTypeId();
@@ -119,28 +100,20 @@ public class BatchDishPropertyManager {
             }
             batchDishPropertyVo.propertyGroupVoList = new ArrayList<>();
             batchDishPropertyVo.propertyGroupVoList.addAll(propertyGroupVoMap.values());
-            Collections.sort(batchDishPropertyVo.propertyGroupVoList, newGroupVoComparator());//对口味做法分组进行排序
-        }
+            Collections.sort(batchDishPropertyVo.propertyGroupVoList, newGroupVoComparator());        }
 
-        //构建加料数据
-        if (Utils.isNotEmpty(extraResultList)) {
+                if (Utils.isNotEmpty(extraResultList)) {
             List<OrderExtra> orderExtraList = new ArrayList<>();
             for (DishShop extra : extraResultList) {
                 orderExtraList.add(new OrderExtra(extra, null));
             }
             batchDishPropertyVo.extraList = orderExtraList;
-            Collections.sort(batchDishPropertyVo.extraList, newExtraComparator());//对加料进行排序
-        }
+            Collections.sort(batchDishPropertyVo.extraList, newExtraComparator());        }
 
         return batchDishPropertyVo;
     }
 
-    /**
-     * 口味做法属性过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月20日
-     */
+
     private static class TastePropertyFilter implements DishCache.DataFilter<DishProperty> {
 
         @Override
@@ -150,12 +123,7 @@ public class BatchDishPropertyManager {
 
     }
 
-    /**
-     * 菜品对应口味做法属性过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月20日
-     */
+
     private static class DishTastePropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private DishShop dishShop;
@@ -172,12 +140,7 @@ public class BatchDishPropertyManager {
 
     }
 
-    /**
-     * 菜品对应配料过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月20日
-     */
+
     private static class DishExtraFilter implements DishCache.DataFilter<DishSetmeal> {
 
         private DishShop dishShop;

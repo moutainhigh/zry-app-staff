@@ -31,12 +31,7 @@ import com.zhongmei.bty.commonmodule.database.enums.AsyncHttpState;
 import com.zhongmei.yunfu.db.enums.TradeStatus;
 import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 
-/**
- * 桌台订单视图
- *
- * @version: 1.0
- * @date 2015年9月2日
- */
+
 public abstract class TableTradeViewBase extends DirectDragableView {
 
     private static final String TAG = TableTradeViewBase.class.getSimpleName();
@@ -45,12 +40,9 @@ public abstract class TableTradeViewBase extends DirectDragableView {
     protected TextView mTimeTextView;
     private DinnertableStatus statusOfView;
     private boolean enableTransparent;
-    protected ImageView preCashIv;//预结单图标
-
-    private boolean enablePreCashDisplay = false;//是否显示预结单
-
-    private boolean enableTradeMoneyDispay = true;//是否显示订单金额
-
+    protected ImageView preCashIv;
+    private boolean enablePreCashDisplay = false;
+    private boolean enableTradeMoneyDispay = true;
     private boolean enableHttpRecord = true;
 
 
@@ -71,8 +63,7 @@ public abstract class TableTradeViewBase extends DirectDragableView {
             } else {
                 color = ViewUtils.COLOR_TRADE_EMPTY;
             }
-            // 未处理订单使用黑色
-            if (mModel.getTradeStatus() != TradeStatus.UNPROCESSED) {
+                        if (mModel.getTradeStatus() != TradeStatus.UNPROCESSED) {
                 statusOfView = mModel.getStatus();
                 switch (statusOfView) {
                     case UNISSUED:
@@ -106,14 +97,11 @@ public abstract class TableTradeViewBase extends DirectDragableView {
 
             if (mTimeTextView == null) {
                 mTimeTextView = (TextView) findViewById(R.id.time);
-//				mUnitTextView = (TextView) timeLayout.findViewById(R.id.unit);
             }
 
-            //根据设置显示订单号或者订单金额
-            TextView snTextView = (TextView) findViewById(R.id.sn);
+                        TextView snTextView = (TextView) findViewById(R.id.sn);
 
-            if (isUnionMainTrade(mModel.getTradeType())) {//如果是联台单，字体颜色为白色
-                color = Color.WHITE;
+            if (isUnionMainTrade(mModel.getTradeType())) {                color = Color.WHITE;
                 mTimeTextView.setVisibility(View.GONE);
                 snTextView.setPadding(0, DensityUtil.dip2px(getContext(), 5), 0, 0);
             } else {
@@ -124,8 +112,6 @@ public abstract class TableTradeViewBase extends DirectDragableView {
             snTextView.setTextColor(color);
             setSN(enableTradeMoneyDispay, model, snTextView);
 
-//			View timeLayout = findViewById(R.id.time_layout);
-//			timeLayout.setBackgroundColor(color);
 
             mTimeTextView.setBackgroundColor(color);
             doRefreshSpendTime();
@@ -133,8 +119,7 @@ public abstract class TableTradeViewBase extends DirectDragableView {
             setVisibility(View.VISIBLE);
 
             preCashIv = (ImageView) findViewById(R.id.image);
-            // 显示预结单标志
-            if (SharedPreferenceUtil.getSpUtil().getBoolean(TableFragment.SHOW_PRECASH_KEY, false)) {
+                        if (SharedPreferenceUtil.getSpUtil().getBoolean(TableFragment.SHOW_PRECASH_KEY, false)) {
                 if (enablePreCashDisplay && mModel.getPreCashPrintStatus() == YesOrNo.YES) {
                     preCashIv.setVisibility(View.VISIBLE);
                 } else {
@@ -165,15 +150,12 @@ public abstract class TableTradeViewBase extends DirectDragableView {
 
     private void setSN(boolean enableSn, IDinnertableTrade model, TextView snTextView) {
         if (enableSn && !UnionUtil.isUnionTrade(model.getTradeType())) {
-            if (model.getUpContent() == IDinnertableTrade.UpContentType.SN) {//显示订单号
-                snTextView.setText(model.getSn());
-            } else if (mModel.getUpContent() == IDinnertableTrade.UpContentType.TRADE_AMOUNT) {//显示订单金额
-                snTextView.setText(model.getTradeAmount());
+            if (model.getUpContent() == IDinnertableTrade.UpContentType.SN) {                snTextView.setText(model.getSn());
+            } else if (mModel.getUpContent() == IDinnertableTrade.UpContentType.TRADE_AMOUNT) {                snTextView.setText(model.getTradeAmount());
             }
         } else {
             if (TextUtils.isEmpty(model.getSn())) {
-                //流水号为空时，显示问号
-                snTextView.setText("?");
+                                snTextView.setText("?");
             } else {
                 snTextView.setText(model.getSn());
             }
@@ -194,7 +176,6 @@ public abstract class TableTradeViewBase extends DirectDragableView {
             int spendTime = mModel.getSpendTime();
             mTimeTextView.setText(SpendTimeFormater.format(spendTime));
         }
-//		mUnitTextView.setText(formater.unit);
     }
 
     @Override
@@ -228,12 +209,7 @@ public abstract class TableTradeViewBase extends DirectDragableView {
         return tradeType == TradeType.UNOIN_TABLE_MAIN;
     }
 
-    /**
-     * @Date 2016/10/13
-     * @Description:显示异步请求信息
-     * @Param
-     * @Return
-     */
+
     public void showHttpRecord() {
         if (mModel == null || !(mModel instanceof DinnertableTradeModel)) {
             return;
@@ -248,8 +224,7 @@ public abstract class TableTradeViewBase extends DirectDragableView {
 
         if (enableHttpRecord && record != null) {
 
-            //重试响应
-            retryTv.setOnClickListener(new OnClickListener() {
+                        retryTv.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AsyncNetworkUtil.retryModifyOrCasher(record);

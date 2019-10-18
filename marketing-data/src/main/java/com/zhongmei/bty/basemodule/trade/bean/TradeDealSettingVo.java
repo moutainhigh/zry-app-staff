@@ -9,10 +9,7 @@ import java.util.List;
 
 public class TradeDealSettingVo implements Serializable {
 
-    /**
-     * @date：2015年9月14日 下午2:26:20
-     * @Description:TODO
-     */
+
     private static final long serialVersionUID = 1L;
 
 

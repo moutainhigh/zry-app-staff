@@ -5,10 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 import com.zhongmei.yunfu.db.IEntity;
 
-/**
- * @Date：2016-2-16 下午4:40:32
- * @Description: Erp配置费率表记录
- */
+
 @DatabaseTable(tableName = "erp_commercial_relation")
 public class ErpCommercialRelation extends EntityBase<Long> {
 
@@ -16,52 +13,35 @@ public class ErpCommercialRelation extends EntityBase<Long> {
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * localCreateDateTime
-         */
+
         String localCreateDateTime = "localCreateDateTime";
 
-        /**
-         * localModifyDateTime
-         */
+
         String localModifyDateTime = "localModifyDateTime";
 
-        /**
-         * 商户id
-         */
+
         String commercialId = "commercial_id";
 
-        /**
-         * 部门Id
-         */
+
         String deptId = "dept_id";
 
-        /**
-         * 商户状态：1:已开通,2:服务中,3:超租期，-1:已禁用'
-         */
+
         String commercialStatus = "commercial_status";
 
-        /**
-         * crm商户id
-         */
+
         String crmCommercialId = "crm_commercial_id";
 
-        /**
-         * 是否开通熟客
-         */
+
         String isShuke = "is_shuke";
     }
 
     @DatabaseField(columnName = "id", id = true, canBeNull = false)
     private Long id;
 	
-	/*@DatabaseField(columnName = "_id", canBeNull = false)
-	private Long _id;*/
+
 
     @DatabaseField(columnName = "commercial_id")
     private Long commercialId;
@@ -143,13 +123,7 @@ public class ErpCommercialRelation extends EntityBase<Long> {
         this.id = id;
     }
 	
-	/*public Long get_id() {
-		return _id;
-	}
-	
-	public void set_id(Long _id) {
-		this._id = _id;
-	}*/
+
 
     @Override
     public boolean isValid() {

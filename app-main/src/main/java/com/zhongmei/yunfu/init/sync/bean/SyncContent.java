@@ -44,25 +44,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * 与同步Request和Response中的content对应
- *
- * @version: 1.0
- * @date 2015年4月15日
- */
+
 public class SyncContent implements NoProGuard {
 
     private static final String TAG = SyncContent.class.getSimpleName();
     private static final String CONFIG_MODULE_CMD = "configModuleCMD";
 
-    //private SyncItem<Brand> brand;
-    //private SyncItem<Commercial> commercial;
-    private SyncItem<AuthUser> authUser;
+            private SyncItem<AuthUser> authUser;
     private SyncItem<AuthPermission> authPermission;
     private SyncItem<AuthRole> authRole;
     private SyncItem<AuthRolePermission> authRolePermission;
     private SyncItem<Booking> booking;
-    //private SyncItem<CustomerGroupLevel> customerGroupLevel;
 
     private SyncItem<CommercialArea> tableArea;
     private SyncItem<Tables> tables;
@@ -87,38 +79,12 @@ public class SyncContent implements NoProGuard {
     private SyncItem<CommercialCustomSettings> commercialCustomSettings;
     private SyncItem<CustomerSaveRule> customerSaveRule;
     private SyncItem<CustomerDishPrivilege> customerDishPrivilege;
-//    private SyncItem<TaskRemind> taskRemind;
     private SyncItem<DishTimeChargingRule> dishTimeChargingRule;
 
 
 
 
-    /*lateinit var collageCustomer: SyncItem<CollageCustomer>
-    lateinit var collageMarketing: SyncItem<CollageMarketing>
-    lateinit var commercial: SyncItem<Commercial>
-    lateinit var coupon: SyncItem<Coupon>
-    lateinit var couponRuleDish: SyncItem<CouponRuleDish>
-    lateinit var customer: SyncItem<Customer>
-    lateinit var customerCardTime: SyncItem<CustomerCardTime>
-    lateinit var customerCoupon: SyncItem<CustomerCoupon>
-    lateinit var customerExtra: SyncItem<CustomerExtra>
-    lateinit var customerLevelRule: SyncItem<CustomerLevelRule>
-    lateinit var customerMarketingExpanded: SyncItem<CustomerMarketingExpanded>
-    lateinit var customerMarketingTogether: SyncItem<CustomerMarketingTogether>
-    lateinit var customerScoreRule: SyncItem<CustomerScoreRule>
-    lateinit var customerStored: SyncItem<CustomerStored>
-    lateinit var cutDownCustomer: SyncItem<CutDownCustomer>
-    lateinit var cutDownHistory: SyncItem<CutDownHistory>
-    lateinit var cutDownMarketing: SyncItem<CutDownMarketing>
-    lateinit var expandedCommission: SyncItem<ExpandedCommission>
-    lateinit var flashSalesMarketing: SyncItem<FlashSalesMarketing>
-    lateinit var marketingExpanded: SyncItem<MarketingExpanded>
-    lateinit var marketingPutOn: SyncItem<MarketingPutOn>
-    lateinit var marketingShare: SyncItem<MarketingShare>
-    lateinit var marketingTogether: SyncItem<MarketingTogether>
-    lateinit var pushMessageCustomer: SyncItem<PushMessageCustomer>
-    lateinit var pushPlanActivity: SyncItem<PushPlanActivity>
-    lateinit var pushPlanNewDish: SyncItem<PushPlanNewDish>*/
+
 
     public static void setSyncModuleConfig(SysCmdResponse config) {
         SysCmdResponse.SyncModuleConfig moduleConfig = (config != null && config.syncModule != null) ? config.syncModule : new SysCmdResponse.SyncModuleConfig();
@@ -186,10 +152,7 @@ public class SyncContent implements NoProGuard {
     }
 
     public static String getModuleName(Field field, Class genericClazz) {
-        /*if (genericClazz == Map.class) {
-            return field.getName();
-        }
-        return Beans.uncapitalize(genericClazz.getSimpleName());*/
+
         return field.getName();
     }
 }

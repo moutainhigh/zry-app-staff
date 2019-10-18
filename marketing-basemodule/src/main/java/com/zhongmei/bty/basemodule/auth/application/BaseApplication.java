@@ -18,8 +18,7 @@ public abstract class BaseApplication {
     private String packageName;
     private String activityName;
     private boolean hasPermission;
-    private String hasNewShareKey;//有新消息提示
-
+    private String hasNewShareKey;
     private Intent intent;
 
     private String mainPermission;
@@ -53,20 +52,7 @@ public abstract class BaseApplication {
 
     public abstract void setHasNewShareKey();
 
-	/*@Override
-	public boolean equals(Object obj) {
-		if (null != obj && obj instanceof BaseApplication) {
-			BaseApplication app = (BaseApplication) obj;
-			return app.activityName.equals(this.activityName);
-		} else {
-			return false;
-		}
-	}
 
-	@Override
-	public int hashCode() {
-		return title + icon + (null != activityName ? activityName.hashCode() : 0);
-	}*/
 
     public boolean isSystemApp() {
         return systemApp;
@@ -103,10 +89,7 @@ public abstract class BaseApplication {
 
     @NonNull
     public static Drawable getClickStateListDrawable(BitmapDrawable drawable) {
-		/*StateListDrawable statelistDrawable = new StateListDrawable();
-		statelistDrawable.addState(new int[]{android.R.attr.state_pressed}, ImageUtil.setBitmap(drawable.getBitmap()).setAlpha(0xaa).getDrawable());
-		statelistDrawable.addState(new int[]{0}, drawable);
-		return statelistDrawable;*/
+
         if (drawable.getBitmap() == null) {
             return drawable;
         }
@@ -195,8 +178,7 @@ public abstract class BaseApplication {
 
 
     public boolean hasPermission() {
-        // 如果没有主权限控制或者全部是系统图标，那么就不受权限控制，统一展示原始图标
-        hasPermission = systemApp || TextUtils.isEmpty(mainPermission) || VerifyHelper.verify(mainPermission);
+                hasPermission = systemApp || TextUtils.isEmpty(mainPermission) || VerifyHelper.verify(mainPermission);
         return hasPermission;
     }
 

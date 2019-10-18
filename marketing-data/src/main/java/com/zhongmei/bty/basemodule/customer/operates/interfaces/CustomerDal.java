@@ -34,92 +34,43 @@ public interface CustomerDal extends IOperates {
 
     public DishMemberPrice findDishMemberPriceByDishId(long dishId, long levelId);
 
-    //获取会员实体卡对应的会员价模板
-    public DishMemberPrice queryMemberPrice(long templetPriceId, long dishId);
+        public DishMemberPrice queryMemberPrice(long templetPriceId, long dishId);
 
     public List<EcCardKind> findEcCardKinds();
 
     public DishShop findDishopByEcCardKindId(Long ecCardKindId);
 
-    /**
-     * 获取充值规则
-     *
-     * @param cardLevelId 实体卡种id
-     * @return
-     */
+
     public RechargeRuleVo findRechargeRule(Long cardLevelId) throws Exception;
 
-    /**
-     * 获取充值规则
-     *
-     * @param
-     * @return
-     */
+
     public RechargeRuleVo findRechargeRule() throws Exception;
 
-    /**
-     * 获取充值规则
-     *
-     * @param cardKindId 实体卡别
-     * @return
-     */
+
     public RechargeRuleVo findRechargeRuleByKind(Long cardKindId) throws Exception;
 
-    /**
-     * 获取实体卡(会员实体卡、匿名实体卡)充值规则
-     *
-     * @param cardKindId  卡种Id
-     * @param cardLevelId 卡等级Id
-     * @return
-     * @throws Exception
-     */
+
     public RechargeRuleVo findEcCardRechargeRule(Long cardKindId, Long cardLevelId) throws Exception;
 
-    /**
-     * 获取卡种
-     *
-     * @return
-     * @throws Exception
-     */
+
     public EcCardKind findEcCardKindById(Long id) throws Exception;
 
-    /**
-     * 根据卡种Id获取权益列表
-     *
-     * @param cardKindId
-     * @return
-     * @throws Exception
-     */
+
     public List<EcCardKindCommercialRel> findEcCardKindCommercialRel(Long cardKindId) throws Exception;
 
-    /**
-     * 根据卡类型获取权益列表
-     *
-     * @param entityCardType
-     * @return
-     * @throws Exception
-     */
+
     public List<EcCardKindCommercialRel> findEcCardKindCommercialRel(EntityCardType entityCardType) throws Exception;
 
 
-    /**
-     * 获取是否需要关注公众号才能通过openID方式注册会员
-     */
+
 
     public boolean getopenIdRegisterSetting() throws SQLException;
 
-    /**
-     * 获取是否开通微信公众号
-     */
+
     public boolean getLoginQrCodeSetting() throws SQLException;
 
     public List<CustomerLevel> getCustomerLevelList() throws SQLException;
 
-    /**
-     * 查询免密支付配置项
-     *
-     * @return
-     * @throws SQLException
-     */
+
     CrmLevelStoreRule findCrmLevelStoreRule() throws SQLException;
 }

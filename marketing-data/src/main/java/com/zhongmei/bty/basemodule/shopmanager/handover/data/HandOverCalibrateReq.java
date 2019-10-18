@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.shopmanager.handover.data;
 
 import com.zhongmei.bty.basemodule.monitor.shopmanager.handover.entitys.HandoverData;
 
-/**
- * 重新校准请求
- */
+
 public class HandOverCalibrateReq {
 
     public Long getRelateId() {

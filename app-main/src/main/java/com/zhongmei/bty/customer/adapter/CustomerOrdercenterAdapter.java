@@ -19,13 +19,7 @@ import com.zhongmei.bty.customer.CustomerOrdercenterFragment;
 
 import java.util.List;
 
-/**
- * @Date：2016年2月18日
- * @Description:售卡记录或储值记录列表adapter
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class CustomerOrdercenterAdapter extends BaseAdapter {
     private Context mContext;
     private CustomerOrdercenterFragment.WindowToken token;
@@ -103,19 +97,15 @@ public class CustomerOrdercenterAdapter extends BaseAdapter {
             viewHolder.cardOrderStatusTv.setVisibility(View.GONE);
         }
 
-        //实体卡类型 1:会员实体卡 2:匿名实体卡
-        EntityCardType cardType = customerSellOrderBean.getCardType();
+                EntityCardType cardType = customerSellOrderBean.getCardType();
         if (cardType != null) {
             if (cardType == EntityCardType.ANONYMOUS_ENTITY_CARD) {
-//				viewHolder.ivCardType.setImageResource(R.drawable.ic_entity_card_type_anonymous);
                 viewHolder.ivCardType.setText(R.string.customer_entity_card_type_anonymous);
                 viewHolder.ivCardType.setVisibility(View.VISIBLE);
             } else if (cardType == EntityCardType.CUSTOMER_ENTITY_CARD) {
-//				viewHolder.ivCardType.setImageResource(R.drawable.ic_entity_card_type_customer);
                 viewHolder.ivCardType.setText(R.string.customer_entity_card_type_customer);
                 viewHolder.ivCardType.setVisibility(View.VISIBLE);
             } else if (cardType == EntityCardType.GENERAL_CUSTOMER_CARD) {
-//				viewHolder.ivCardType.setImageResource(R.drawable.ic_entity_card_type_general);
                 viewHolder.ivCardType.setText(R.string.customer_entity_card_type_general);
                 viewHolder.ivCardType.setVisibility(View.VISIBLE);
             } else {
@@ -166,8 +156,7 @@ public class CustomerOrdercenterAdapter extends BaseAdapter {
     }
 
     public boolean isShowOrderStatus() {
-        /*return token == CustomerOrdercenterFragment.WindowToken.MEMBER_STORE_VALUE
-                || token == CustomerOrdercenterFragment.WindowToken.CARD_STORE_VALUE;*/
+
         return false;
     }
 

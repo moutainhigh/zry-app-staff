@@ -2,10 +2,7 @@ package com.zhongmei.bty.mobilepay.message;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 美团点评团购券查询参数
- */
+
 
 public class TuanGouCouponReq {
     Long payModeId;

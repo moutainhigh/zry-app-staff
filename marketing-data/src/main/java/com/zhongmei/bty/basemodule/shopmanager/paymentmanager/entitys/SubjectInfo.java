@@ -6,11 +6,7 @@ import com.zhongmei.bty.commonmodule.data.db.AccountSubject;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @Date： 2016/7/20
- * @Description:收支科目信息
- * @Version: 1.0
- */
+
 public class SubjectInfo implements Serializable {
 
     private AccountSubject mSubject;

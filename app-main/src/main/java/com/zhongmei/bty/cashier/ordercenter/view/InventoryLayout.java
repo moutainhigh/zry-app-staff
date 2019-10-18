@@ -10,11 +10,7 @@ import android.widget.TextView;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * @Date： 2017/3/2
- * @Description:库存退回选择layout
- * @Version: 1.0
- */
+
 public class InventoryLayout extends LinearLayout implements RadioGroup.OnCheckedChangeListener {
 
     private Context mContext;
@@ -23,8 +19,7 @@ public class InventoryLayout extends LinearLayout implements RadioGroup.OnChecke
 
     private RadioGroup mRadioGroup;
 
-    private boolean isReturnInventory = true;//是否选择退回库存
-
+    private boolean isReturnInventory = true;
     public InventoryLayout(Context context) {
         super(context);
     }
@@ -57,9 +52,7 @@ public class InventoryLayout extends LinearLayout implements RadioGroup.OnChecke
         }
     }
 
-    /**
-     * 获取是否退回库存
-     */
+
     public boolean getInventoryCheckStatus() {
         return isReturnInventory;
     }

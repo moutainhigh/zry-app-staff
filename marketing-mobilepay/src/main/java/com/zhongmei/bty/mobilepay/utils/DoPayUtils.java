@@ -46,17 +46,11 @@ import java.util.Set;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- * 支付工具
- */
 
 public class DoPayUtils {
     private static final String TAG = DoPayUtils.class.getSimpleName();
 
-    //判断是否支持组合支付工具
     public static boolean isSupportGroupPay(IPaymentInfo paymentInfo, boolean isSetToSupportGroupPay) {
-        //如果是金诚商户 不支持分步支付
         if (ServerSettingCache.getInstance().isJinChBusiness()) {
             return false;
         }
@@ -73,7 +67,7 @@ public class DoPayUtils {
                         }
 
                     default:
-                        return paymentInfo.isGroupPay() && isSetToSupportGroupPay;//modify v8.9
+                        return paymentInfo.isGroupPay() && isSetToSupportGroupPay;
                 }
             }
         }
@@ -113,20 +107,18 @@ public class DoPayUtils {
         return value;
     }
 
-    // 判断订单是否支付完成
     public static boolean isTradePaidOver(Trade trade) {
         if (trade == null || trade.getBusinessType() == null || trade.getTradePayStatus() == null) {
             return false;
         }
         switch (trade.getBusinessType()) {
-            case BUFFET://自助预结状态为支付完成
+            case BUFFET:
                 return (trade.getTradePayStatus() == TradePayStatus.PREPAID || trade.getTradeStatus() == TradeStatus.FINISH);
             default:
                 return trade.getTradeStatus() == TradeStatus.FINISH;
         }
     }
 
-    //判断订单是否有消费税
     public static boolean isHaveTradeTax(TradeVo tradeVo) {
         boolean isHaveTradeTax = false;
         if (tradeVo != null) {
@@ -141,10 +133,8 @@ public class DoPayUtils {
         return isHaveTradeTax;
     }
 
-    // add  20180523 发票最大金额 ： 实付-押金
     public static BigDecimal getMaxInvoiceAmount(TradeVo tradeVo, List<PaymentItem> paymentItems) {
         BigDecimal paidAmount = BigDecimal.ZERO;
-        //计算用户实付：sum（面值- 找零）
         if (paymentItems != null) {
             for (PaymentItem item : paymentItems) {
                 if (item.getPayStatus() == TradePayStatus.PAID && item.getStatusFlag() == StatusFlag.VALID) {
@@ -157,7 +147,6 @@ public class DoPayUtils {
                 }
             }
         }
-        //发票最大金额 ： 实付-押金
         if (tradeVo != null && tradeVo.getTradeDeposit() != null && tradeVo.getTradeDeposit().getDepositPay() != null) {
             paidAmount = paidAmount.subtract(tradeVo.getTradeDeposit().getDepositPay());
         }
@@ -182,19 +171,16 @@ public class DoPayUtils {
             } catch (Exception e) {
                 Log.e(TAG, "", e);
             }
-            // 通知ui更新
             paymentInfo.setPaidPaymentRecords(list);
         }
     }
 
-    //生产订单菜品UUid（不包含套餐子菜）
     public static List<String> getTradeDishIds(TradeVo tradeVo) {
         Set<String> dishIdSet = new HashSet<String>();
         if (tradeVo != null && tradeVo.getTradeItemList() != null) {
             TradeItem tradeItem = null;
             for (TradeItemVo itemVo : tradeVo.getTradeItemList()) {
                 tradeItem = itemVo.getTradeItem();
-                //modify v8.5不包含套餐子菜
                 if (tradeItem != null && tradeItem.isValid() && TextUtils.isEmpty(tradeItem.getParentUuid())) {
                     dishIdSet.add(tradeItem.getSkuUuid());
                 }
@@ -224,7 +210,6 @@ public class DoPayUtils {
                 }
 
                 protected void onPostExecute(List<PaymentVo> data) {
-                    // 通知ui更新
                     paymentInfo.setPaidPaymentRecords(data);
                     if (isPostUpdateInput)
                         EventBus.getDefault().post(new ExemptEventUpdate(paymentInfo.getEraseType()));
@@ -243,37 +228,30 @@ public class DoPayUtils {
         return true;
     }
 
-    //跳转到快餐支付界面
     public static void gotoPayActivity(final Activity context, DoPayApi doPayApi, final TradeVo tradeVo, boolean isOrderCenter) {
-        gotoPayActivity(context, doPayApi, tradeVo, isOrderCenter, PayScene.SCENE_CODE_SHOP, -1, -1);//默认是消费付款场景
+        gotoPayActivity(context, doPayApi, tradeVo, isOrderCenter, PayScene.SCENE_CODE_SHOP, -1, -1);
     }
 
-    //跳转到快餐支付界面
     public static void gotoPayActivity(final Activity context, DoPayApi doPayApi, final TradeVo tradeVo, boolean isOrderCenter, int defaultPayMenuType) {
-        gotoPayActivity(context, doPayApi, tradeVo, isOrderCenter, PayScene.SCENE_CODE_SHOP, defaultPayMenuType, -1);//默认是消费付款场景
+        gotoPayActivity(context, doPayApi, tradeVo, isOrderCenter, PayScene.SCENE_CODE_SHOP, defaultPayMenuType, -1);
     }
 
-    //跳转到快餐支付界面
     public static void gotoPayActivity(final Activity context, DoPayApi doPayApi, final TradeVo tradeVo, boolean isOrderCenter, PayScene payScene) {
-        gotoPayActivity(context, doPayApi, tradeVo, isOrderCenter, payScene, -1, -1);//默认是消费付款场景
+        gotoPayActivity(context, doPayApi, tradeVo, isOrderCenter, payScene, -1, -1);
     }
 
-    // 跳转到快捷支付界面
     public static void gotoPayActivity(final Activity context, DoPayApi doPayApi, final TradeVo tradeVo, int defaultPayMenuType, int quickPayType) {
         gotoPayActivity(context, doPayApi, tradeVo, false, PayScene.SCENE_CODE_SHOP, defaultPayMenuType, quickPayType);
     }
 
-    //跳转到快餐支付界面
     public static void gotoPayActivity(final Activity context, DoPayApi doPayApi, final TradeVo tradeVo, boolean isOrderCenter, PayScene payScene, int defaultPayMenuType, int quickPayType) {
         gotoPayActivity(context, doPayApi, tradeVo, isOrderCenter, payScene, defaultPayMenuType, quickPayType, true);
     }
 
-    //跳转到快餐支付界面
     public static void gotoPayActivity(final Activity context, DoPayApi doPayApi, final TradeVo tradeVo, boolean isOrderCenter, PayScene payScene, int defaultPayMenuType, int quickPayType, boolean isGroupPay) {
         gotoPayActivity(context, doPayApi, tradeVo, isOrderCenter, payScene, defaultPayMenuType, quickPayType, isGroupPay, 0);
     }
 
-    //跳转到快餐支付界面
     public static void gotoPayActivity(final Activity context, DoPayApi doPayApi, final TradeVo tradeVo, boolean isOrderCenter, PayScene payScene, int defaultPayMenuType, int quickPayType, boolean isGroupPay, int menuDisplayType) {
         if (!checkPayModeSettings(context)) {
             return;
@@ -287,26 +265,23 @@ public class DoPayUtils {
 
         Intent intent = new Intent();
         intent.setData(uri);
-        // PayActivity.setTradeVo(tradeVo);//modify 20170327 快餐不用购物车对象，通过反序列化生成
-        intent.putExtra("payScene", payScene);//add 20170704
+        intent.putExtra("payScene", payScene);
         intent.putExtra("tradeVo", tradeVo);
         if (doPayApi != null)
-            intent.putExtra("doPayApi", doPayApi.getClass().getSimpleName());//add v8.14
+            intent.putExtra("doPayApi", doPayApi.getClass().getSimpleName());
         intent.putExtra("isOrderCenter", isOrderCenter);
         intent.putExtra("paymenutype", defaultPayMenuType);
         intent.putExtra("isGroupPay", isGroupPay);
         intent.putExtra(IPayConstParame.EXTRA_QUICK_PAY_TYPE, quickPayType);
-        // v8.15.0 雅座储值支付显示参数
         intent.putExtra(IPayConstParame.EXTRA_MENU_DISPLAY_TYPE, menuDisplayType);
         context.startActivityForResult(intent, IntentNo.ORDER_PAY);
     }
 
-    //显示支付成功界面
     public static void showPayOkDialog(FragmentActivity context, DoPayApi doPayApi, IPaymentInfo paymentInfo, boolean isAsync, int operateType) {
         try {
             if (context != null && !context.isDestroyed()) {
                 PayOkDialog dialog = new PayOkDialog(context, paymentInfo, isAsync, operateType);
-                dialog.setDoPayApi(doPayApi);//add 8.10 临时方案
+                dialog.setDoPayApi(doPayApi);
                 dialog.show();
             }
         } catch (Exception e) {
@@ -314,7 +289,6 @@ public class DoPayUtils {
         }
     }
 
-    //显示支付成功查询税号界面
     public static void showGetTaxNoPayOkDialog(FragmentActivity context, DoPayApi doPayApi, IPaymentInfo paymentInfo, int operateType) {
         try {
             if (context != null && !context.isDestroyed()) {
@@ -326,7 +300,6 @@ public class DoPayUtils {
         }
     }
 
-    //显示支付失败界面
     public static void showPayErrorDialog(FragmentActivity context, DoPayApi doPayApi, IPaymentInfo paymentInfo, String errorReason, IPayOverCallback callBack, int errorCode) {
         try {
             if (context != null && !context.isDestroyed()) {

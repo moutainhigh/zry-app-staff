@@ -103,65 +103,38 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChangeListener, View.OnClickListener,
         CustomDishQuantityView.IDishQuantityListener {
     private static final String TAG = TradeItemPropertyUtil.class.getSimpleName();
 
-    //操作栏位
-    protected LinearLayout vActionBar;
-    //内容栏位
-    private FrameLayout vContent;
+        protected LinearLayout vActionBar;
+        private FrameLayout vContent;
 
 
-    //菜品数量
-    protected CustomDishQuantityView vDishQuantity;
-    //座位号
-    protected Button btnSeat;
-    //规格
-    private Button btnStandard;
-    //做法
-    protected Button btnProperty;
-    //单品备注
-    private Button btnRemark;
-    //加料
-    protected Button btnExtra;
-    //变价
-    private Button btnChangePrice;
-    //变价标示
-    private ImageView btnChagepriceAnchor;
-    //分割线
-    private View vDivideLine;
+        protected CustomDishQuantityView vDishQuantity;
+        protected Button btnSeat;
+        private Button btnStandard;
+        protected Button btnProperty;
+        private Button btnRemark;
+        protected Button btnExtra;
+        private Button btnChangePrice;
+        private ImageView btnChagepriceAnchor;
+        private View vDivideLine;
 
-    /**
-     * 当前内容
-     */
+
     private View mCurrentContentView;
-    /**
-     * 空态页
-     */
+
     private CustomEmptyView mCustomEmptyView;
-    /**
-     * 规格页
-     */
+
     private CustomStandardView mCustomStandardView;
-    /**
-     * 做法页
-     */
+
     private TasteView mTasteView;
-    /**
-     * 加料页
-     */
+
     private ExtraView mExtraView;
-    /**
-     * 变价页
-     */
+
     private DinnerCustomChangePriceView mCustomChangePriceView;
-    /**
-     * 备注页
-     */
+
     private DinnerRemarkView mRemarkView;
 
     private View mParentView;
@@ -175,34 +148,25 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
     protected SetmealShopcartItem mSetmealShopcartItem;
     protected ShopcartItemBase<?> mRealItemBase;
 
-    //购物车条目UUID
-    private String mUuid;
-    //购物车父条目UUID，可为空
-    private String mParentUuid;
+        private String mUuid;
+        private String mParentUuid;
 
-    // 判读是否是第一次进入 第一次进入就不去add到ShoppingCart
-    private boolean isFirst = true;
+        private boolean isFirst = true;
 
-    // 当前是否有菜品加入
-    protected boolean added = true;
+        protected boolean added = true;
 
     private String mMemo;
 
     private int mTargetPageNo = -1;
 
     private DishPropertyManager mDishPropertyManager;
-    //若当前菜品不为空，那么此DishSetmealManager不为空
-    protected DishSetmealManager mDishSetmealManager;
+        protected DishSetmealManager mDishSetmealManager;
 
-    /**
-     * 规格类属性分组列表
-     */
+
     private List<PropertyGroupVo<DishStandardVo>> standardGroupList = new ArrayList<>();
     private ArrayList<PropertyGroupVo<DishPropertyVo>> tasteGroupVo = new ArrayList<>();
     private ArrayList<OrderProperty> properties = new ArrayList<>();
-    /**
-     * 加料列表
-     */
+
     private List<OrderExtra> extraList = new ArrayList<>();
 
     private AsyncTask mAsyncTask;
@@ -212,14 +176,12 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
     private TradePrivilege mTradePrivilege;
     private TradeReasonRel mDiscountReason;
 
-    //数量编辑弹框
-    private QuantityEditPopupWindow mQuantityEditPopupWindow;
+        private QuantityEditPopupWindow mQuantityEditPopupWindow;
 
     protected DinnerDishMiddleFragment.IChangePageListener mListener;
     private ChangePageListener mChangePageListener;
 
-    //当前是有什么场景调用
-    protected int mCurrentMode = DinnerDishMiddleFragment.DINNER_ORDER_MODE;
+        protected int mCurrentMode = DinnerDishMiddleFragment.DINNER_ORDER_MODE;
 
     public void setCurrentMode(int currentMode) {
         this.mCurrentMode = currentMode;
@@ -295,18 +257,13 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         if (mTargetPageNo == -1 && TextUtils.isEmpty(mDishDataItem.getBase().getUuid())
                 || DinnerTradeItemManager.getInstance().isSaved(mDishDataItem)
                 || DinnerTradeItemManager.getInstance().isReturnDish(mDishDataItem.getBase())
-                || DinnerTradeItemManager.getInstance().isUnsavedReadonly(mDishDataItem.getBase())) {//标识没有属性项被选中
-            initUnselectData();
+                || DinnerTradeItemManager.getInstance().isUnsavedReadonly(mDishDataItem.getBase())) {            initUnselectData();
         } else {
             initSelectData();
         }
     }
 
-    /**
-     * 是否是配菜
-     *
-     * @return
-     */
+
     protected boolean isSlideDish() {
         return mCurrentMode == DinnerDishMiddleFragment.GROUP_SLIDE_MODE;
     }
@@ -320,11 +277,9 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         added = false;
         isFirst = true;
 
-        //清除选中按钮
-        clearButtonSelected();
+                clearButtonSelected();
 
-        //刷新菜品操作按钮状态
-        vDishQuantity.setData(null, true);
+                vDishQuantity.setData(null, true);
         vDishQuantity.setAlpha(0.5f);
         ViewUtil.setButtonEnabled(btnStandard, true);
         ViewUtil.setButtonEnabled(btnProperty, false);
@@ -333,8 +288,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         ViewUtil.setButtonEnabled(btnChangePrice, false);
         ViewUtil.setButtonEnabled(btnSeat, false);
         if (isSavedValidSingleOrComboItem()) {
-            //团餐不允许改
-            if (!isCanModify()) {
+                        if (!isCanModify()) {
                 ViewUtil.setButtonEnabled(btnStandard, false);
             }
             btnStandard.setText(R.string.dish_combo_modify);
@@ -347,8 +301,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
             if (isGroup() && mDishDataItem.getBase() instanceof ReadonlyShopcartItemBase) {
                 vDishQuantity.setText(MathDecimal.toTrimZeroString(((ReadonlyShopcartItemBase) mDishDataItem.getBase()).getSigleDeskQuantity()));
             } else if (mDishDataItem.getType() == ItemType.WEST_CHILD) {
-                //西餐子菜显示实际的数量
-                vDishQuantity.setText(MathDecimal.toTrimZeroString(mDishDataItem.getBase().getTotalQty()));
+                                vDishQuantity.setText(MathDecimal.toTrimZeroString(mDishDataItem.getBase().getTotalQty()));
             } else {
                 vDishQuantity.setText(MathDecimal.toTrimZeroString(mDishDataItem.getBase().getSingleQty()));
             }
@@ -363,15 +316,10 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                 }
             }
         }
-        //刷新内容页
-        showCustomContentView(null);
+                showCustomContentView(null);
     }
 
-    /**
-     * 是否为已保存的有效单菜或套餐外壳（全退的0条目除外）
-     *
-     * @return
-     */
+
     protected boolean isSavedValidSingleOrComboItem() {
         if (mDishDataItem.getBase() == null) {
             return false;
@@ -379,16 +327,9 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
 
         return mDishDataItem.getBase().getStatusFlag() == StatusFlag.VALID
                 && DinnerTradeItemManager.getInstance().isSaved(mDishDataItem)
-                && !DinnerTradeItemManager.getInstance().isDishReturnAll(mDishDataItem)//全退菜品不能修改
-                && !DinnerTradeItemManager.getInstance().isUnsavedReadonly(mDishDataItem.getBase())//未生效的readonlyshopcartitem不能修改
-                && !(mDishDataItem.getBase() instanceof ISetmealShopcartItem);//套餐子菜不能修改
-    }
+                && !DinnerTradeItemManager.getInstance().isDishReturnAll(mDishDataItem)                && !DinnerTradeItemManager.getInstance().isUnsavedReadonly(mDishDataItem.getBase())                && !(mDishDataItem.getBase() instanceof ISetmealShopcartItem);    }
 
-    /**
-     * 是否不允许修改的菜品（目前是团餐餐标菜品和联台主单菜品）
-     *
-     * @return
-     */
+
     protected boolean isCanModify() {
         if (mDishDataItem.getBase() == null) {
             return false;
@@ -402,11 +343,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         return true;
     }
 
-    /**
-     * 是否是团餐餐标下的菜
-     *
-     * @return
-     */
+
     protected boolean isGroup() {
         if (mDishDataItem.getBase() != null && mDishDataItem.getBase().isGroupDish()) {
             return true;
@@ -414,9 +351,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         return false;
     }
 
-    /**
-     * 清除所有选中
-     */
+
     public void clearButtonSelected() {
         ViewUtil.setButtonSelected(vActionBar, null);
     }
@@ -453,8 +388,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
             mMemo = mRealItemBase.getMemo();
         }
 
-        //加载数据
-        mDishPropertyManager = new DishPropertyManager();
+                mDishPropertyManager = new DishPropertyManager();
         if (mRealItemBase != null) {
             loadProperties();
             mDishSetmealManager = mShopcartItem.getSetmealManager();
@@ -472,9 +406,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         }
     }
 
-    /**
-     * 估清状态界面显示
-     */
+
     private void setClearView() {
         vContent.removeAllViews();
         TextView textView = new TextView(mActivity);
@@ -500,11 +432,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         }.execute();
     }
 
-    /**
-     * 刷新菜品属性内容
-     *
-     * @param eventDishPropertiesNotice
-     */
+
     private void refreshView(EventDishPropertiesNotice eventDishPropertiesNotice) {
         if (eventDishPropertiesNotice != null && eventDishPropertiesNotice.dishPropertiesVo != null && eventDishPropertiesNotice.uuid.equals(mUuid)) {
             if (mShoppingCart.getOrder().isUnionMainTrade() && eventDishPropertiesNotice.dishPropertiesVo.getOrderDish() != null && eventDishPropertiesNotice.dishPropertiesVo.getOrderDish().getSaleType() == SaleType.WEIGHING) {
@@ -512,24 +440,19 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                 return;
             }
 
-            //数量
-            vDishQuantity.setData(eventDishPropertiesNotice.dishPropertiesVo.getOrderDish(), true);
-            //西餐子菜显示实际的数量
-            if (mDishDataItem.getType() == ItemType.WEST_CHILD) {
+                        vDishQuantity.setData(eventDishPropertiesNotice.dishPropertiesVo.getOrderDish(), true);
+                        if (mDishDataItem.getType() == ItemType.WEST_CHILD) {
                 vDishQuantity.setText(MathDecimal.toTrimZeroString(mDishDataItem.getBase().getTotalQty()));
             }
-            // 规格（规格切换不成功时，直接返回）
-            if (!setStandard(eventDishPropertiesNotice)) {
+                        if (!setStandard(eventDishPropertiesNotice)) {
                 return;
             }
-            //做法
-            setRecipe(eventDishPropertiesNotice);
+                        setRecipe(eventDishPropertiesNotice);
 
             OrderDish orderDish = eventDishPropertiesNotice.dishPropertiesVo.getOrderDish();
             if (orderDish != null
                     && (orderDish.getDishShop().getClearStatus() == ClearStatus.SALE || mShoppingCart.getIsSalesReturn())) {
-                // 清除老的规格属性,并添加新的规格属性
-                ArrayList<OrderProperty> newProperties = new ArrayList<OrderProperty>();
+                                ArrayList<OrderProperty> newProperties = new ArrayList<OrderProperty>();
                 for (OrderProperty orderProperty : properties) {
                     if (orderProperty.getPropertyKind() != PropertyKind.STANDARD) {
                         newProperties.add(orderProperty);
@@ -549,27 +472,22 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                 properties.clear();
             }
 
-            //加料
-            setExtra(eventDishPropertiesNotice);
-            //变价
-            setChangePrice(eventDishPropertiesNotice);
+                        setExtra(eventDishPropertiesNotice);
+                        setChangePrice(eventDishPropertiesNotice);
             if (eventDishPropertiesNotice.dishPropertiesVo.getOrderDish() == null) {
                 ViewUtil.setButtonEnabled(btnRemark, false);
             }
-            //菜品加入购物车
-            addOrderDishToCart(eventDishPropertiesNotice);
+                        addOrderDishToCart(eventDishPropertiesNotice);
         }
     }
 
-    //设置规格
-    protected boolean setStandard(EventDishPropertiesNotice eventDishPropertiesNotice) {
+        protected boolean setStandard(EventDishPropertiesNotice eventDishPropertiesNotice) {
         standardGroupList.clear();
         if (eventDishPropertiesNotice.dishPropertiesVo.getStandardGroupList() != null) {
             standardGroupList.addAll(eventDishPropertiesNotice.dishPropertiesVo.getStandardGroupList());
         }
 
-        //如果当前菜品为套餐壳子，不展示规格（套餐壳子也没有规格）
-        if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
+                if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
             btnStandard.setText(R.string.dish_combo_modify);
             ViewUtil.setButtonEnabled(btnStandard, true);
         } else {
@@ -587,8 +505,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         return true;
     }
 
-    //设置做法
-    private void setRecipe(EventDishPropertiesNotice eventDishPropertiesNotice) {
+        private void setRecipe(EventDishPropertiesNotice eventDishPropertiesNotice) {
         if (isSlideDish()) {
             return;
         }
@@ -611,7 +528,6 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
 
         }
         if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
-//            btnProperty.setText("");
             ViewUtil.setButtonEnabled(btnProperty, false);
         } else {
             btnProperty.setText(R.string.dish_property);
@@ -620,8 +536,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         ViewUtil.setViewVisibility(btnProperty, View.VISIBLE);
     }
 
-    //设置加料
-    private void setExtra(EventDishPropertiesNotice eventDishPropertiesNotice) {
+        private void setExtra(EventDishPropertiesNotice eventDishPropertiesNotice) {
         if (isSlideDish()) {
             return;
         }
@@ -635,7 +550,6 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         }
 
         if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
-//            btnExtra.setText("");
             ViewUtil.setButtonEnabled(btnExtra, false);
         } else {
             btnExtra.setText(R.string.dish_extra);
@@ -645,11 +559,8 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         ViewUtil.setViewVisibility(btnExtra, View.VISIBLE);
     }
 
-    //设置变价
-    private void setChangePrice(EventDishPropertiesNotice eventDishPropertiesNotice) {
-//        isCombo()||
+        private void setChangePrice(EventDishPropertiesNotice eventDishPropertiesNotice) {
         if (eventDishPropertiesNotice.dishPropertiesVo.getOrderDish() == null) {
-//            btnChangePrice.setText("");
             ViewUtil.setButtonEnabled(btnChangePrice, false);
         } else {
             btnChagepriceAnchor.setVisibility(View.VISIBLE);
@@ -665,9 +576,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         ViewUtil.setViewVisibility(btnChangePrice, View.VISIBLE);
     }
 
-    /**
-     * 菜品加入购物车
-     */
+
     private void addOrderDishToCart(EventDishPropertiesNotice eventDishPropertiesNotice) {
         OrderDish orderDish = eventDishPropertiesNotice.dishPropertiesVo.getOrderDish();
         if (orderDish != null
@@ -705,31 +614,24 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                     showChangePriceView();
                 }
             } else {
-                //数量
-                BigDecimal singleQty = mShopcartItem.getSingleQty();
-                // 获取原来的关联原菜id和uuid
-                Long relateId = null;
+                                BigDecimal singleQty = mShopcartItem.getSingleQty();
+                                Long relateId = null;
                 String relateUuid = null;
                 if (mShopcartItem != null) {
                     relateId = mShopcartItem.getRelateTradeItemId();
                     relateUuid = mShopcartItem.getRelateTradeItemUuid();
                 }
 
-                //加料
-                List<ExtraShopcartItem> extraItems = new ArrayList<>();
-                DishShop dishShop = orderDish.getDishShop();//新选的dishshop
-                if (dishShop == null) {
+                                List<ExtraShopcartItem> extraItems = new ArrayList<>();
+                DishShop dishShop = orderDish.getDishShop();                if (dishShop == null) {
                     return;
                 }
-                // 获取到商品的加料信息
-                DishPropertyManager.DishExtraFilter dishExtraFilter = new DishPropertyManager.DishExtraFilter(dishShop);
+                                DishPropertyManager.DishExtraFilter dishExtraFilter = new DishPropertyManager.DishExtraFilter(dishShop);
                 List<DishSetmeal> dishExtraList = DishCache.getDishExtraHolder().filter(dishExtraFilter);
-                //菜品加料为空，使用的是公共库，所有加料都可以直接加进去
-                if (Utils.isEmpty(dishExtraList)) {
+                                if (Utils.isEmpty(dishExtraList)) {
                     extraItems.addAll(mShopcartItem.getExtraItems());
                 } else {
-                    //缓存菜品的私有加料库
-                    Map<Long, DishSetmeal> setmealMap = new HashMap<>();
+                                        Map<Long, DishSetmeal> setmealMap = new HashMap<>();
                     for (DishSetmeal setmeal : dishExtraList) {
                         if (setmeal.getChildDishType() == ChildDishType.EXTRA) {
                             setmealMap.put(setmeal.getChildDishId(), setmeal);
@@ -741,9 +643,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                             continue;
                         }
 
-                        //判断菜品私有加料库，有没有当前加料
-                        Long extraId = extraItem.getOrderDish().getSetmeal().getChildDishId();//加料对应菜品的品牌菜id
-                        DishSetmeal setmeal = setmealMap.get(extraId);
+                                                Long extraId = extraItem.getOrderDish().getSetmeal().getChildDishId();                        DishSetmeal setmeal = setmealMap.get(extraId);
                         if (setmeal != null) {
                             extraItem.getOrderDish().setSetmeal(setmeal);
                             extraItems.add(extraItem);
@@ -751,9 +651,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                     }
                 }
 
-                //属性
-                //先移除所有口味做法，避免重复
-                if (Utils.isNotEmpty(properties)) {
+                                                if (Utils.isNotEmpty(properties)) {
                     for (int i = properties.size() - 1; i >= 0; i--) {
                         OrderProperty property = properties.get(0);
                         if (property.getPropertyKind() == PropertyKind.PROPERTY) {
@@ -761,12 +659,9 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                         }
                     }
                 }
-                // 获取到商品的属性信息
-                DishPropertyFilter dishPropertyFilter = new DishPropertyFilter(dishShop);
+                                DishPropertyFilter dishPropertyFilter = new DishPropertyFilter(dishShop);
                 List<DishBrandProperty> dishBrandPropertyList = DishCache.getDishPropertyHolder().filter(dishPropertyFilter);
-                //菜品属性信息为空，使用的是公共库，所有属性都可以直接加进去
-                boolean hasDishProperty = false;//是否有口味做法
-                for (DishBrandProperty brandProperty : dishBrandPropertyList) {
+                                boolean hasDishProperty = false;                for (DishBrandProperty brandProperty : dishBrandPropertyList) {
                     if (brandProperty.getPropertyKind() == PropertyKind.PROPERTY) {
                         hasDishProperty = true;
                     }
@@ -778,8 +673,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                         }
                     }
                 } else {
-                    //缓存菜品的私有属性库
-                    Map<Long, DishBrandProperty> brandPropertyMap = new HashMap<>();
+                                        Map<Long, DishBrandProperty> brandPropertyMap = new HashMap<>();
                     for (DishBrandProperty brandProperty : dishBrandPropertyList) {
                         if (brandProperty.getPropertyKind() == PropertyKind.PROPERTY) {
                             brandPropertyMap.put(brandProperty.getPropertyId(), brandProperty);
@@ -791,21 +685,17 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                             continue;
                         }
 
-                        //判断菜品私有属性库，有没有当前属性
-                        Long propertyId = property.getProperty().getId();//加料对应菜品的品牌菜id
-                        DishBrandProperty brandProperty = brandPropertyMap.get(propertyId);
+                                                Long propertyId = property.getProperty().getId();                        DishBrandProperty brandProperty = brandPropertyMap.get(propertyId);
                         if (brandProperty != null) {
                             properties.add(property);
                         }
                     }
                 }
 
-                //备注
-                String memo = mShopcartItem.getMemo();
+                                String memo = mShopcartItem.getMemo();
                 boolean isGroupDish = mShopcartItem.isGroupDish();
                 ShopcartItemType shopcartItemType = mShopcartItem.getShopcartItemType();
-                // 因为orderDish对象已经变了，所以要创建新的条目
-                mShopcartItem = new ShopcartItem(mShopcartItem.getUuid(), orderDish);
+                                mShopcartItem = new ShopcartItem(mShopcartItem.getUuid(), orderDish);
                 BigDecimal increaseUnit = MathDecimal.trimZero(orderDish.getDishShop().getDishIncreaseUnit());
                 BigDecimal stepNum = MathDecimal.trimZero(orderDish.getDishShop().getStepNum());
                 if (shopcartItemType == ShopcartItemType.MAINBATCH && increaseUnit != null) {
@@ -813,8 +703,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                     stepNum = stepNum.multiply(mShoppingCart.getOrder().getSubTradeCount());
                 }
 
-                // 拷贝对应属性
-                mShopcartItem.setRelateInfo(relateId, relateUuid);
+                                mShopcartItem.setRelateInfo(relateId, relateUuid);
                 mShopcartItem.setExtraItems(extraItems);
                 mShopcartItem.setProperties(properties);
                 mShopcartItem.setMemo(memo);
@@ -834,17 +723,12 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                     mShopcartItem.changeQty(increaseUnit);
                 }
 
-                //称重商品
-                //if (mShopcartItem.getSaleType() == SaleType.WEIGHING) {
-                //    showQuantityEditPopupWindow();
-                //} else {
-                mShoppingCart.addDishToShoppingCart(mShopcartItem, false, false);
+                                                                                mShoppingCart.addDishToShoppingCart(mShopcartItem, false, false);
                 if (mListener != null) {
                     mListener.closePage(null);
                 }
                 added = true;
-                //}
-            }
+                            }
         } else {
             isFirst = false;
             added = false;
@@ -871,8 +755,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                 boolean existKds = ShopInfoCfg.getInstance().isExistKdsDevice();
                 if (existKds) {
                     if (mDishDataItem.getBase() != null && !TextUtils.isEmpty(mDishDataItem.getBase().getBatchNo())
-                            && mDishDataItem.getBase() instanceof ReadonlyShopcartItemBase) {//已出单的菜，才判断kds的状态限制
-                        if (!((ReadonlyShopcartItemBase) mDishDataItem.getBase()).isWaiting()) {
+                            && mDishDataItem.getBase() instanceof ReadonlyShopcartItemBase) {                        if (!((ReadonlyShopcartItemBase) mDishDataItem.getBase()).isWaiting()) {
                             ToastUtil.showShortToast(R.string.dish_has_maked);
                             return;
                         }
@@ -889,8 +772,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                                     modifyDish();
                                 }
                             });
-                } else {//没有code就表示不需要权限，预点菜界面的修改不需要权限就传的null
-                    modifyDish();
+                } else {                    modifyDish();
                 }
             } else if (DinnerTradeItemManager.getInstance().isCombo(mRealItemBase)) {
                 if (mChangePageListener != null) {
@@ -908,13 +790,10 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         }
     }
 
-    /**
-     * 退菜
-     */
+
     private void modifyDish() {
         MobclickAgentEvent.onEvent(UserActionCode.ZC020015);
-        //未出单或者已出单的菜品重新生成新菜
-        ShopcartItem shopcartItem = null;
+                ShopcartItem shopcartItem = null;
         try {
             if (mDishDataItem.getBase() instanceof ReadonlyShopcartItem) {
                 ReadonlyShopcartItem oldShopcartItem = (ReadonlyShopcartItem) mDishDataItem.getBase();
@@ -922,8 +801,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                 shopcartItem = oldShopcartItem.modifyDish();
                 if (shopcartItem != null) {
                     DinnerShoppingCart.getInstance().modifyDish(shopcartItem);
-                    //套餐修改完成后，跳转到套餐点菜界面
-                    if (shopcartItem.getOrderDish().isCombo() && mChangePageListener != null) {
+                                        if (shopcartItem.getOrderDish().isCombo() && mChangePageListener != null) {
                         Bundle bundle = new Bundle();
                         bundle.putString(Constant.EXTRA_SHOPCART_ITEM_UUID, shopcartItem.getUuid());
                         bundle.putInt(Constant.EXTRA_LAST_PAGE, ChangePageListener.ORDERDISHLIST);
@@ -932,26 +810,22 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                     }
                 }
 
-                //处理原菜库存
-                if (isNeedInventory()) {
+                                if (isNeedInventory()) {
                     switch (oldShopcartItem.getType()) {
                         case SINGLE:
                         case COMBO:
                             InventoryItem inventoryItem = new InventoryItem(oldShopcartItem.tradeItem,
                                     oldShopcartItem.getTotalQty(), InventoryItem.TAG_INVENTORY_NUM);
 
-                            //套餐外壳添加子菜列表
-                            if (oldShopcartItem.getType() == DishType.COMBO && Utils.isNotEmpty(oldShopcartItem.getSetmealItems())) {
+                                                        if (oldShopcartItem.getType() == DishType.COMBO && Utils.isNotEmpty(oldShopcartItem.getSetmealItems())) {
                                 List<TradeItem> childTradeItemList = new ArrayList<>();
-                                //添加子菜
-                                for (ReadonlySetmealShopcartItem childShopcartItem : oldShopcartItem.getSetmealItems()) {
+                                                                for (ReadonlySetmealShopcartItem childShopcartItem : oldShopcartItem.getSetmealItems()) {
                                     childTradeItemList.add(childShopcartItem.tradeItem);
                                 }
                                 inventoryItem.setChildTradeItem(childTradeItemList);
                             }
 
-                            boolean isInventorySwitch = InventoryCacheUtil.getInstance().getSaleSwitch();//是否是展示库存模式
-                            if (isInventorySwitch) {
+                            boolean isInventorySwitch = InventoryCacheUtil.getInstance().getSaleSwitch();                            if (isInventorySwitch) {
                                 ReturnInventoryDialogFragment fragment = new ReturnInventoryDialogFragment();
                                 fragment.setInventoryItemList(Utils.asList(inventoryItem));
                                 fragment.setTitle(R.string.order_center_return_inventory_title2);
@@ -964,8 +838,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                                 fragment.setReturnCloseListener(new ReturnInventoryDialogFragment.ReturnCloseListener() {
                                     @Override
                                     public void onClose(List<InventoryItem> inventoryItemList) {
-                                        //关闭退库存弹框时，将库存退回量置为0
-                                        if (Utils.isNotEmpty(inventoryItemList)) {
+                                                                                if (Utils.isNotEmpty(inventoryItemList)) {
                                             for (InventoryItem item : inventoryItemList) {
                                                 item.setReturnInventoryNum(BigDecimal.ZERO);
                                             }
@@ -975,8 +848,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
                                 });
                                 fragment.show(mActivity.getSupportFragmentManager(), "returnInventory");
                             } else {
-                                //非展示库存模式下，库存全退
-                                DinnerShoppingCart.getInstance().addReturnInventoryList(Utils.asList(inventoryItem));
+                                                                DinnerShoppingCart.getInstance().addReturnInventoryList(Utils.asList(inventoryItem));
                             }
                             break;
                         default:
@@ -999,19 +871,12 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         });
     }
 
-    /**
-     * 是否需要处理库存
-     * 注：预点菜和团餐配置菜单不需要
-     *
-     * @return
-     */
+
     protected boolean isNeedInventory() {
         return true;
     }
 
-    /**
-     * 展示规格页
-     */
+
     private void showStandardView() {
         ViewUtil.setButtonSelected(vActionBar, btnStandard);
 
@@ -1028,9 +893,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         showCustomContentView(mCustomStandardView);
     }
 
-    /**
-     * 展示做法页
-     */
+
     private void showPropertyView() {
         ViewUtil.setButtonSelected(vActionBar, btnProperty);
 
@@ -1082,9 +945,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         showCustomContentView(mTasteView);
     }
 
-    /**
-     * 展示加料页
-     */
+
     private void showExtraView() {
         ViewUtil.setButtonSelected(vActionBar, btnExtra);
 
@@ -1106,9 +967,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         showCustomContentView(mExtraView);
     }
 
-    /**
-     * 展示变价页
-     */
+
     private void showChangePriceView() {
         ViewUtil.setButtonSelected(vActionBar, btnChangePrice);
 
@@ -1122,9 +981,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         showCustomContentView(mCustomChangePriceView);
     }
 
-    /**
-     * @param customContentView
-     */
+
     protected void showCustomContentView(View customContentView) {
         vContent.removeAllViews();
         if (customContentView == null) {
@@ -1139,9 +996,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         }
     }
 
-    /**
-     * 展示数量编辑框
-     */
+
     private void showQuantityEditPopupWindow() {
         if (mQuantityEditPopupWindow != null && mQuantityEditPopupWindow.isShowing()) {
             return;
@@ -1162,9 +1017,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         mQuantityEditPopupWindow.showAtLocation(vActionBar, Gravity.NO_GRAVITY, 0, 0);
     }
 
-    /**
-     * 关闭数量弹框
-     */
+
     public void dismissQuantityEditPopupWindow() {
         if (mQuantityEditPopupWindow != null && mQuantityEditPopupWindow.isShowing()) {
             mQuantityEditPopupWindow.dismiss();
@@ -1172,12 +1025,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
         }
     }
 
-    /**
-     * 单品或套餐的属性数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月15日
-     */
+
     private static class DishPropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;
@@ -1193,9 +1041,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
 
     }
 
-    /**
-     * 展示备注页
-     */
+
     private void showRemarkView() {
         if (ClickManager.getInstance().isClicked(R.id.btn_remark)) {
             return;
@@ -1298,10 +1144,7 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
 
     @Override
     public void onOnClicked() {
-        //套餐子菜称重商品不使用弹框
-        /*if (mSetmealShopcartItem != null) {
-            return;
-        }*/
+
         showQuantityEditPopupWindow();
     }
 
@@ -1333,7 +1176,6 @@ public class TradeItemPropertyUtil implements CustomChangePriceView.OnPriceChang
 
     protected String getModifyDishPermissionCode() {
         return DinnerApplication.PERMISSION_DINNER_MODIFY_DISH;
-//        return null;
     }
 
 }

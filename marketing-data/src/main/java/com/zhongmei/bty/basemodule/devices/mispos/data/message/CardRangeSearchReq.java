@@ -12,15 +12,12 @@ public class CardRangeSearchReq {
 
     private String endCardNum;
 
-    // private Integer cardStatus;
 
     private Integer commercialType;
 
     private int pageSize = 200;
 
-    /**
-     * 上传状态 用"，"进行分割
-     */
+
     private String cardTypes;
 
     public Integer getSource() {
@@ -71,14 +68,6 @@ public class CardRangeSearchReq {
         this.endCardNum = endCardNum;
     }
 
-    // public CardStatus getCardStatus() {
-    // return ValueEnums.toEnum(CardStatus.class,
-    // cardStatus);
-    // }
-    //
-    // public void setCardStatus(CardStatus cardStatus) {
-    // this.cardStatus = ValueEnums.toValue(cardStatus);
-    // }
 
     public int getPageSize() {
         return pageSize;

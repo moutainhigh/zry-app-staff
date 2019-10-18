@@ -214,9 +214,7 @@ public class CalmDialogView extends Dialog {
 
     @Override
     public void setTitle(CharSequence title) {
-        // TODO Auto-generated method stub
-        // super.setTitle(title);
-        mTitle = null;
+                        mTitle = null;
         mSpannedTitle = title;
         if (titleView != null) {
             titleView.setVisibility(View.VISIBLE);
@@ -224,12 +222,5 @@ public class CalmDialogView extends Dialog {
         }
     }
 
-    // public void setTitle(Spanned fromHtml){
-    // mTitle= null;
-    // mSpannedTitle = fromHtml;
-    // if (titleView!= null) {
-    // titleView.setText(mSpannedTitle);
-    // }
-    // }
 
 }

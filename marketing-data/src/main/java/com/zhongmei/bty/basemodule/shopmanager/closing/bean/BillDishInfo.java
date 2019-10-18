@@ -3,9 +3,7 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * 关账明细 销售商品
- */
+
 public class BillDishInfo implements Serializable {
     private String typeName;
 
@@ -21,14 +19,11 @@ public class BillDishInfo implements Serializable {
 
     private String serverUpdateTime;
 
-    //private Long dishId;
 
     private String uuid;
     private String dishCode;
 
-    /**
-     * 配料
-     */
+
     private List<BillDishInfo> subList;
 
     public String getServerUpdateTime() {
@@ -87,13 +82,7 @@ public class BillDishInfo implements Serializable {
         this.actualAmount = actualAmount;
     }
 	
-	/*public Long getDishId() {
-		return dishId;
-	}
-	
-	public void setDishId(Long dishId) {
-		this.dishId = dishId;
-	}*/
+
 
     public List<BillDishInfo> getSubList() {
         return subList;

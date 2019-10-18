@@ -1,6 +1,4 @@
-/*
- * Copyright (c) 2017. Xi'an iRain IOT Technology service CO., Ltd (ShenZhen). All Rights Reserved.
- */
+
 package com.zhongmei.beauty.booking.groundrecycleradapter;
 
 import android.graphics.Canvas;
@@ -10,11 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-/**
- * 分组列表的分割线
- *
- * @since 2017-05-02 0.1
- */
+
 public class GroupItemDecoration extends RecyclerView.ItemDecoration {
     private final int ITEM_DIVIDER = -10001;
     private GroupRecyclerAdapter mAdapter;

@@ -2,28 +2,16 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum IsDelete implements ValueEnum<Integer> {
 
-    /**
-     * 有效的
-     */
+
     VALID(0),
 
-    /**
-     * 无效的
-     */
+
     INVALID(-1),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

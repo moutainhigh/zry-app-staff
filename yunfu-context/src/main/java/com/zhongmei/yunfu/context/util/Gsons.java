@@ -15,10 +15,7 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
 
-/**
 
- *
- */
 public abstract class Gsons {
 
     private final static String TAG = Gsons.class.getSimpleName();
@@ -85,8 +82,7 @@ public abstract class Gsons {
                     return Long.valueOf(value);
                 }
             } catch (NumberFormatException nfe) {
-                // throw new JsonSyntaxException(e);
-                Log.e(TAG, nfe.getMessage(), nfe);
+                                Log.e(TAG, nfe.getMessage(), nfe);
             } catch (ParseException pe) {
                 Log.e(TAG, pe.getMessage(), pe);
             }

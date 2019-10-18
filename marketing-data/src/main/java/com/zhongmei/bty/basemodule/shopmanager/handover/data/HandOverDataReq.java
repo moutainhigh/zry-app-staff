@@ -1,17 +1,12 @@
 package com.zhongmei.bty.basemodule.shopmanager.handover.data;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class HandOverDataReq {
 
-    private Integer bussinessType;//业务类型
-
-    private boolean checkClearAccount;//是否检查为清账订单
-
-    private boolean checkUnpaid;//是否检查为结账订单
-
+    private Integer bussinessType;
+    private boolean checkClearAccount;
+    private boolean checkUnpaid;
     public Integer getBussinessType() {
         return bussinessType;
     }

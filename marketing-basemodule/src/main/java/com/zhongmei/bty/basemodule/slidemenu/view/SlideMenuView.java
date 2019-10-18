@@ -5,9 +5,7 @@ import android.widget.RelativeLayout;
 
 import com.zhongmei.bty.basemodule.slidemenu.listener.SlideMenuListener;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class SlideMenuView extends RelativeLayout {
 

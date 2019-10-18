@@ -37,12 +37,7 @@ import de.greenrobot.event.EventBus;
 
 ;
 
-/**
- * 套餐管理
- *
- * @version: 1.0
- * @date 2015年7月7日
- */
+
 public class DishSetmealManager {
 
     private static final String TAG = DishSetmealManager.class.getSimpleName();
@@ -50,15 +45,9 @@ public class DishSetmealManager {
     private final ShopcartItem shopcartItem;
     private final Map<Long, SetmealGroupWrapper> groupWrapperMap;
     private final List<DishSetmealVo> selectedList;
-    private final List<DishSetmealVo> requisiteClearList;//被估清的必选菜
-    private boolean requisiteDeleted;//判断必选子菜是否被删除
-    private boolean loaded;
+    private final List<DishSetmealVo> requisiteClearList;    private boolean requisiteDeleted;    private boolean loaded;
 
-    /**
-     * 注意，不要直接构建此对象，使用{@link ShopcartItem#getSetmealManager()}方法
-     *
-     * @param shopcartItem
-     */
+
     public DishSetmealManager(ShopcartItem shopcartItem) {
         this.shopcartItem = shopcartItem;
         groupWrapperMap = new LinkedHashMap<Long, SetmealGroupWrapper>();
@@ -68,11 +57,7 @@ public class DishSetmealManager {
         loaded = false;
     }
 
-    /**
-     * 判断此套餐是否符合要求，符合要求返回true，否则返回false
-     *
-     * @return
-     */
+
     public boolean isValid() {
         checkLoad();
         for (SetmealGroupWrapper groupWrapper : groupWrapperMap.values()) {
@@ -81,19 +66,14 @@ public class DishSetmealManager {
             }
         }
 
-        //必选子菜被删除
-        if (requisiteDeleted) {
+                if (requisiteDeleted) {
             return false;
         }
 
         return true;
     }
 
-    /**
-     * 判断必选子菜是否删除
-     *
-     * @return
-     */
+
     public boolean isRequisiteDeleted() {
         return requisiteDeleted;
     }
@@ -111,8 +91,7 @@ public class DishSetmealManager {
     public void addRequisiteClearListItem(DishSetmealVo dishSetmealVo) {
         boolean isAdd = false;
 
-        //判断当前必选菜是否已在购物车中存在，不存在时才添加到requisiteClearList
-        DishSetmeal setmeal = dishSetmealVo.getSetmeal();
+                DishSetmeal setmeal = dishSetmealVo.getSetmeal();
         SetmealGroupWrapper setmealGroupWrapper = groupWrapperMap.get(setmeal.getComboDishTypeId());
         SetmealWrapper setmealWrapper = setmealGroupWrapper.getSetmealWrapper(setmeal.getId());
         if (!setmealWrapper.isValid()) {
@@ -124,15 +103,12 @@ public class DishSetmealManager {
         }
     }
 
-    /**
-     * 加载数据。将使用{@link EventSetmealGroupsNotice}事件通知通知分组列表数据
-     */
+
     public void loadData() {
         List<DishSetmealVo> selecteds = null;
         boolean loadState = true;
         if (!loaded) {
-            // 第一次加载时才在event中返回必选项
-            loadState = doLoadData();
+                        loadState = doLoadData();
             selecteds = selectedList;
         }
         if (loadState) {
@@ -149,11 +125,7 @@ public class DishSetmealManager {
         }
     }
 
-    /**
-     * 注意，除了取出挂单时直接调用此方法外，其他地方不要直接调用此方法
-     *
-     * @return
-     */
+
     public boolean doLoadData() {
         if (loaded) {
             throw new RuntimeException("This manager is already loaded!");
@@ -161,8 +133,7 @@ public class DishSetmealManager {
         loaded = true;
         groupWrapperMap.clear();
 
-        // 获取套餐分组
-        SetmealGroupFilter groupFilter = new SetmealGroupFilter(shopcartItem.getOrderDish().getDishShop());
+                SetmealGroupFilter groupFilter = new SetmealGroupFilter(shopcartItem.getOrderDish().getDishShop());
         List<DishSetmealGroup> groupList = DishCache.getSetmealGroupHolder().filter(groupFilter);
         Log.i(TAG, "groupList.size()=" + groupList.size());
         for (DishSetmealGroup group : groupList) {
@@ -172,8 +143,7 @@ public class DishSetmealManager {
 
         boolean hasItems = Utils.isNotEmpty(shopcartItem.getSetmealItems());
 
-        // 获取套餐明细
-        SetmealFilter setmealFilter = new SetmealFilter(groupFilter.dishShop);
+                SetmealFilter setmealFilter = new SetmealFilter(groupFilter.dishShop);
         List<DishSetmeal> setmealList = DishCache.getSetmealHolder().filter(setmealFilter);
         Log.i(TAG, "setmealList.size()=" + setmealList.size());
         for (DishSetmeal setmeal : setmealList) {
@@ -191,8 +161,7 @@ public class DishSetmealManager {
                     DishUnitDictionary unit = DishCache.getUnitHolder().get(dishShop.getUnitId());
                     setmealWrapper = new SetmealWrapper(dishShop, setmeal, unit);
 
-                    // 获取规格
-                    Set<DishProperty> standards = DishManager.filterStandards(dishShop);
+                                        Set<DishProperty> standards = DishManager.filterStandards(dishShop);
                     Log.i(TAG, "standards.size()=" + standards.size());
                     setmealWrapper.setStandards(standards);
 
@@ -200,8 +169,7 @@ public class DishSetmealManager {
                 }
 
                 if (!hasItems) {
-                    // 添加必选项和默认选择项
-                    if (setmealWrapper.isRequisite() || setmealWrapper.isDefault()) {
+                                        if (setmealWrapper.isRequisite() || setmealWrapper.isDefault()) {
                         if (setmealWrapper.isClear()) {
                             if (setmealWrapper.isRequisite()) {
                                 requisiteClearList.add(setmealWrapper.toDishSetmealVo());
@@ -238,11 +206,7 @@ public class DishSetmealManager {
         return true;
     }
 
-    /**
-     * 切换套餐分组。将使用{@link EventSetmealsNotice}事件通知该分组下的明细列表等数据
-     *
-     * @param groupVo
-     */
+
     public void switchGroup(DishSetmealGroupVo groupVo) {
         checkLoad();
         Long groupId = groupVo.getSetmealGroup().getId();
@@ -258,11 +222,7 @@ public class DishSetmealManager {
         EventBus.getDefault().post(new EventSetmealsNotice(shopcartItem.getUuid(), groupVo, voList));
     }
 
-    /**
-     * 通过分组子菜uuid获取分组
-     *
-     * @param subDishUuid
-     */
+
     public DishSetmealGroupVo getGroupBySubDishUuid(String subDishUuid) {
         for (SetmealGroupWrapper setmealGroupWrapper : groupWrapperMap.values()) {
             for (int i = 0; i < setmealGroupWrapper.setmealWrapperArray.size(); i++) {
@@ -276,22 +236,12 @@ public class DishSetmealManager {
         return null;
     }
 
-    /**
-     * 添加默认选中项
-     *
-     * @param setmealItem
-     */
+
     public void addDefaultSelected(SetmealShopcartItem setmealItem) {
         modifySetmeal(setmealItem, setmealItem.getSingleQty());
     }
 
-    /**
-     * 修改套餐明细条目数量。将使用{@link EventSetmealModifyNotice}事件通知添加后的相关数据
-     *
-     * @param setmealItem 要修改的套餐明细条目
-     * @param qty         修改后的数量，0表示删除该条目
-     * @return
-     */
+
     public ModifyResult modifySetmeal(SetmealShopcartItem setmealItem, BigDecimal qty) {
         checkLoad();
         Log.i(TAG, ">>modifySetmeal(" + setmealItem.getSkuName() + ", " + qty + ")");
@@ -314,13 +264,7 @@ public class DishSetmealManager {
         return result;
     }
 
-    /**
-     * 测试修改后的套餐是否还符合要求
-     *
-     * @param setmealItem
-     * @param newQty      修改后的数量
-     * @return
-     */
+
     public ModifyResult testModify(SetmealShopcartItem setmealItem, BigDecimal newQty) {
         checkLoad();
         Log.i(TAG, ">>testModify(" + setmealItem.getSkuName() + ", " + newQty + ")");
@@ -341,12 +285,7 @@ public class DishSetmealManager {
         }
     }
 
-    /**
-     * 用于过滤出套餐的所有分组
-     *
-     * @version: 1.0
-     * @date 2015年7月16日
-     */
+
     private static class SetmealGroupFilter implements DataFilter<DishSetmealGroup> {
 
         private DishShop dishShop;
@@ -361,12 +300,7 @@ public class DishSetmealManager {
         }
     }
 
-    /**
-     * 用于过滤出套餐的所有明细
-     *
-     * @version: 1.0
-     * @date 2015年7月16日
-     */
+
     private static class SetmealFilter implements DataFilter<DishSetmeal> {
 
         private DishShop dishShop;
@@ -382,12 +316,7 @@ public class DishSetmealManager {
 
     }
 
-    /**
-     * 对套餐明细的包装
-     *
-     * @version: 1.0
-     * @date 2015年7月16日
-     */
+
     private static class SetmealWrapper {
 
         private final DishShop dishShop;
@@ -406,11 +335,7 @@ public class DishSetmealManager {
             totalQty = BigDecimal.ZERO;
         }
 
-        /**
-         * 返回份数，非称重商品返回qty, 称重商品按购物车条目数返回
-         *
-         * @return
-         */
+
         BigDecimal getCount() {
             if (dishShop.getSaleType() == SaleType.WEIGHING) {
                 return BigDecimal.valueOf(qtyMap.size());
@@ -450,38 +375,22 @@ public class DishSetmealManager {
             this.standards = standards;
         }
 
-        /**
-         * 是否是必选项
-         *
-         * @return
-         */
+
         boolean isRequisite() {
             return setmeal.getIsReplace() == Bool.YES;
         }
 
-        /**
-         * 是否默认选中
-         *
-         * @return
-         */
+
         boolean isDefault() {
             return setmeal.getIsDefault() == Bool.YES;
         }
 
-        /**
-         * 是否可以多选
-         *
-         * @return
-         */
+
         boolean isMulti() {
             return setmeal.getIsMulti() != Bool.YES;
         }
 
-        /**
-         * 是否被估清
-         *
-         * @return
-         */
+
         boolean isClear() {
             return dishShop.getClearStatus() == ClearStatus.CLEAR;
         }
@@ -492,8 +401,7 @@ public class DishSetmealManager {
 
         boolean isValid() {
             if (isRequisite()) {
-                // 如果是必选项，必须要有一条的数量大于起售数量
-                BigDecimal num = setmeal.getLeastCellNum();
+                                BigDecimal num = setmeal.getLeastCellNum();
                 if (num == null) {
                     num = BigDecimal.ONE;
                 }
@@ -514,12 +422,7 @@ public class DishSetmealManager {
         }
     }
 
-    /**
-     * 对套餐明细分组的包装
-     *
-     * @version: 1.0
-     * @date 2015年7月16日
-     */
+
     private static class SetmealGroupWrapper {
 
         private final DishSetmealGroup setmealGroup;
@@ -549,13 +452,7 @@ public class DishSetmealManager {
             Log.i(TAG, "groupCount=" + groupCount + ", qty=" + setmealWrapper.getTotalQty());
         }
 
-        /**
-         * 测试修改数量后是否还符合分组要求
-         *
-         * @param setmealItem
-         * @param newQty      修改后的数量
-         * @return
-         */
+
         TestModifyResult testModifyQty(SetmealShopcartItem setmealItem, BigDecimal newQty) {
             SetmealWrapper wrapper = setmealWrapperArray.get(setmealItem.getSetmealId());
 
@@ -570,8 +467,7 @@ public class DishSetmealManager {
             if (leastCellNum == null) {
                 leastCellNum = BigDecimal.ONE;
             }
-            // 如果新数量不为0，则数量不能小于起售份数
-            if (newQty.compareTo(BigDecimal.ZERO) > 0 && newQty.compareTo(leastCellNum) < 0) {
+                        if (newQty.compareTo(BigDecimal.ZERO) > 0 && newQty.compareTo(leastCellNum) < 0) {
                 return new TestModifyResult(ModifyResult.FAILED_LESS_THAN_STEP, wrapper);
             }
 
@@ -586,14 +482,11 @@ public class DishSetmealManager {
                 newCount = newCount.add(BigDecimal.ONE);
             }
 
-            // 不允许删除必选项
-            if (wrapper.isRequisite() && newTotalQty.compareTo(BigDecimal.ZERO) <= 0) {
+                        if (wrapper.isRequisite() && newTotalQty.compareTo(BigDecimal.ZERO) <= 0) {
                 return new TestModifyResult(ModifyResult.FAILED_REMOVE_REQUISITE, wrapper);
             }
             if (wrapper.isMulti()) {
-                // 不允许多选的非称重商品数量不能大于起售份数
-                // 不允许多选的称重商品份量不能大于1
-                if (wrapper.isUnweighing()) {
+                                                if (wrapper.isUnweighing()) {
                     if (newTotalQty.compareTo(leastCellNum) > 0) {
                         return new TestModifyResult(ModifyResult.FAILED_MULTI, wrapper);
                     }
@@ -601,14 +494,12 @@ public class DishSetmealManager {
                     return new TestModifyResult(ModifyResult.FAILED_MULTI, wrapper);
                 }
             }
-            // 不能超过明细分组的上限
-            BigDecimal newGroupCount = groupCount.add(newCount).subtract(oldCount);
+                        BigDecimal newGroupCount = groupCount.add(newCount).subtract(oldCount);
             BigDecimal maxCount = setmealGroup.getOrderMax();
             if (maxCount != null && newGroupCount.compareTo(maxCount) > 0) {
                 return new TestModifyResult(ModifyResult.FAILED_GREATER_THAN_MAX, wrapper);
             }
-            // 不能低于明细分组的下限
-            BigDecimal minCount = setmealGroup.getOrderMin();
+                        BigDecimal minCount = setmealGroup.getOrderMin();
             if (minCount != null && newGroupCount.compareTo(minCount) < 0) {
                 return new TestModifyResult(ModifyResult.FAILED_LESS_THAN_MIN, wrapper);
             }
@@ -616,12 +507,7 @@ public class DishSetmealManager {
             return new TestModifyResult(ModifyResult.SUCCESSFUL, wrapper);
         }
 
-        /**
-         * 设置明细菜品数量
-         *
-         * @param newQty 修改后的数量
-         * @return
-         */
+
         ModifyResult modifyQty(SetmealShopcartItem setmealItem, BigDecimal newQty) {
             TestModifyResult result = testModifyQty(setmealItem, newQty);
             switch (result.modifyResult) {
@@ -639,11 +525,7 @@ public class DishSetmealManager {
             }
         }
 
-        /**
-         * 判断此套餐明细分组是否符合要求，符合要求返回true，否则返回false
-         *
-         * @return
-         */
+
         boolean isValid() {
             BigDecimal minQty = setmealGroup.getOrderMin();
             if (minQty != null && groupCount.compareTo(minQty) < 0) {
@@ -664,10 +546,7 @@ public class DishSetmealManager {
 
     }
 
-    /**
-     * @version: 1.0
-     * @date 2016年1月7日
-     */
+
     private static class TestModifyResult {
 
         final ModifyResult modifyResult;
@@ -679,43 +558,24 @@ public class DishSetmealManager {
         }
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年7月28日
-     */
+
     public static enum ModifyResult {
 
-        /**
-         * 成功
-         */
+
         SUCCESSFUL,
-        /**
-         * 失败，原因是未找到此明细商品
-         */
+
         FAILED_NOT_FOUND,
-        /**
-         * 数量错误
-         */
+
         FAILED_QTY_WRONG,
-        /**
-         * 失败，原因是删除必须项
-         */
+
         FAILED_REMOVE_REQUISITE,
-        /**
-         * 失败，原因是数量小于起售份数
-         */
+
         FAILED_LESS_THAN_STEP,
-        /**
-         * 失败，原因是多选了不可多选的明细
-         */
+
         FAILED_MULTI,
-        /**
-         * 失败，原因是未达到下限
-         */
+
         FAILED_LESS_THAN_MIN,
-        /**
-         * 失败，原因是超出了上限
-         */
+
         FAILED_GREATER_THAN_MAX;
 
     }

@@ -14,41 +14,25 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 单品或套餐条目
- *
- * @version: 1.0
- * @date 2015年7月10日
- */
+
 public class ShopcartItem extends ShopcartItemBase<OrderDish> implements IShopcartItem {
 
-    /**
-     * 套餐的Manager。单品时为null
-     */
+
     private final DishSetmealManager setmealManager;
 
-    /**
-     * 套餐明细列表。单品时为null
-     */
+
     private List<SetmealShopcartItem> setmealItems;
 
-    /**
-     * 购买服务可用的子服务
-     * 不可删除，只做展示用
-     */
+
     private List<SetmealShopcartItem> serverSetmealItems;
 
-    //tradePlanActivity表的uuid
-    private String tradePlanUuid;
-    /**
-     * 理由rel
-     */
+        private String tradePlanUuid;
+
     private TradeReasonRel reasonRel;
 
     private long clientCreateTime;
 
-    private int policyType;//营销策略类型
-    private SalesPromotionRuleVo salesPromotionRuleVo;
+    private int policyType;    private SalesPromotionRuleVo salesPromotionRuleVo;
 
 
     public int getPolicyType() {
@@ -161,8 +145,7 @@ public class ShopcartItem extends ShopcartItemBase<OrderDish> implements IShopca
     @Override
     public void changeQty(BigDecimal singleQty) {
         super.changeQty(singleQty);
-        // 修改套餐明细的数量
-        if (setmealItems != null) {
+                if (setmealItems != null) {
             for (SetmealShopcartItem setmealItem : setmealItems) {
                 setmealItem.changeQty(setmealItem.getSingleQty());
             }
@@ -222,14 +205,12 @@ public class ShopcartItem extends ShopcartItemBase<OrderDish> implements IShopca
 
     @Override
     public String getTradePlanUUID() {
-        // TODO Auto-generated method stub
-        return tradePlanUuid;
+                return tradePlanUuid;
     }
 
     @Override
     public void setTradePlanUUID(String tradePlanUuid) {
-        // TODO Auto-generated method stub
-        this.tradePlanUuid = tradePlanUuid;
+                this.tradePlanUuid = tradePlanUuid;
     }
 
     @Override
@@ -275,8 +256,7 @@ public class ShopcartItem extends ShopcartItemBase<OrderDish> implements IShopca
     @Override
     public void setIssueStatus(IssueStatus issueStatus) {
         super.setIssueStatus(issueStatus);
-        //更新子菜的打印状态
-        if (Utils.isNotEmpty(getSetmealItems())) {
+                if (Utils.isNotEmpty(getSetmealItems())) {
             for (SetmealShopcartItem setmealShopcartItem : getSetmealItems()) {
                 setmealShopcartItem.setIssueStatus(issueStatus);
             }

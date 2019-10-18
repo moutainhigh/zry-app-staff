@@ -10,9 +10,7 @@ import org.androidannotations.annotations.EFragment;
 import java.util.ArrayList;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.dinner_dish_search)
 public class BeautySearchFragment extends DinnerDishSearchFragment {
 

@@ -4,10 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 团购券属性相关接口
- */
+
 
 public interface IGroupBuyingCoupon extends Serializable {
     public Long getGrouponId();

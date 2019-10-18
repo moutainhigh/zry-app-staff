@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PrivilegeItemDetails {
     private String privileName;

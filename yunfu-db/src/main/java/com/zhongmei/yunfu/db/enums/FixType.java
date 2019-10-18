@@ -2,27 +2,15 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum FixType implements ValueEnum<Integer> {
 
-    /**
-     * 顾客自选
-     */
+
     SELF_SELECTION(1),
-    /**
-     * 扫码找位
-     */
+
     SCAN_CODE(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

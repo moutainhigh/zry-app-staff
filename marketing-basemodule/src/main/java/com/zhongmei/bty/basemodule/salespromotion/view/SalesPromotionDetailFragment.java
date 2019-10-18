@@ -33,9 +33,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 
-/**
- * 促销活动详情
- */
+
 public class SalesPromotionDetailFragment extends BasicDialogFragment {
     private static final String TAG = SalesPromotionDetailFragment.class.getSimpleName();
 
@@ -238,8 +236,7 @@ public class SalesPromotionDetailFragment extends BasicDialogFragment {
                 if (weekDay != null) {
                     int size = weekDay.size();
                     StringBuilder stringBuilder = new StringBuilder();
-                    boolean needPrefix = false;//是否需要前置
-                    for (int i = 0; i < size; i++) {
+                    boolean needPrefix = false;                    for (int i = 0; i < size; i++) {
                         SalesPromotionWeekday salesPromotionWeekday = weekDay.valueAt(i);
                         if (salesPromotionWeekday != null && salesPromotionWeekday.isEnable() && !TextUtils.isEmpty(salesPromotionWeekday.getName())) {
                             if (needPrefix) {

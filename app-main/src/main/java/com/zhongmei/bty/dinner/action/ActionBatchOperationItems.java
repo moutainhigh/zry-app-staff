@@ -4,9 +4,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.DishDataItem;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ActionBatchOperationItems {
 

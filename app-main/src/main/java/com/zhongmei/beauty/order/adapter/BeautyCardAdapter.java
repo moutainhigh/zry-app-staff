@@ -21,11 +21,7 @@ import com.zhongmei.yunfu.util.ToastUtil;
 
 import java.util.List;
 
-/**
- * 开单界面 会员卡选择
- *
- * @date 2018/4/13 17:44
- */
+
 public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.ViewHolder> {
 
     private Context mContext;
@@ -50,9 +46,7 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
         this.mBeautyCardManager = BeautyCardManager.getInstance();
     }
 
-    /**
-     * 创建view
-     */
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.beauty_order_membership_card_item, null);
@@ -61,9 +55,7 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
         return new ViewHolder(view, viewType);
     }
 
-    /**
-     * 赋值数据
-     */
+
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         final BeautyCardServiceInfo info = mData.get(position);
@@ -150,10 +142,7 @@ public class BeautyCardAdapter extends RecyclerView.Adapter<BeautyCardAdapter.Vi
         return String.format(mContext.getString(R.string.beauty_card_service_surplus_count), remainderCount);
     }
 
-    /**
-     * @description (ViewHolder 绑定Item点击事件 和 item 长按事件)
-     * @time 2015年6月1日
-     */
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView cardKind, projects, surplusCount, validityTime, cardNum;

@@ -9,47 +9,31 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.bty.commonmodule.database.enums.SetDeliveryType;
 import com.zhongmei.bty.commonmodule.database.enums.SetType;
 
-/**
- * TableNumberSetting is a ORMLite bean type. Corresponds to the database table "table_number_setting"
- */
+
 @DatabaseTable(tableName = "table_number_setting")
 public class TableNumberSetting extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "table_number_setting"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * type
-         */
+
         public static final String type = "type";
 
-        /**
-         * delivery_type
-         */
+
         public static final String deliveryType = "deliveryType";
 
     }

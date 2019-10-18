@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "booking_trade_item_user")
 public class BookingTradeItemUser extends IdEntityBase {
 

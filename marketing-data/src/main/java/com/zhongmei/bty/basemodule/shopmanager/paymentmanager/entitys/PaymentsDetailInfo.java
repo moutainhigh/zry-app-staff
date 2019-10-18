@@ -7,11 +7,7 @@ import com.zhongmei.bty.commonmodule.database.enums.SubjectType;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * @Date： 2016/7/21
- * @Description:收支详情内容
- * @Version: 1.0
- */
+
 public class PaymentsDetailInfo implements Serializable {
 
     private Long id;

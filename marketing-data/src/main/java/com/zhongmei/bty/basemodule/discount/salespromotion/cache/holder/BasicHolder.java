@@ -12,9 +12,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class BasicHolder<T extends IdEntityBase> extends AbstractHolder<T> {
 

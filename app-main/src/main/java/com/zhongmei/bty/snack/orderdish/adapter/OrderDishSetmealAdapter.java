@@ -21,13 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * @Date：2015年7月8日 下午5:10:12
- * @Description: 菜品适配器
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class OrderDishSetmealAdapter extends BaseAdapter {
     protected Context mContext;
 
@@ -109,13 +103,9 @@ public class OrderDishSetmealAdapter extends BaseAdapter {
         int index = position % mNumColumns;
         if (dishSetmealVo.isClear()) {
             resId = R.drawable.selector_dish_single_clear;
-        } else {// 默认
-            if (index == 0) {// 绿色
-                resId = R.drawable.selector_dish_single_green;
-            } else if (index == 1) {// 蓝色
-                resId = R.drawable.selector_dish_single_blue;
-            } else if (index == 2) {// 紫色
-                resId = R.drawable.selector_dish_single_blue;
+        } else {            if (index == 0) {                resId = R.drawable.selector_dish_single_green;
+            } else if (index == 1) {                resId = R.drawable.selector_dish_single_blue;
+            } else if (index == 2) {                resId = R.drawable.selector_dish_single_blue;
             } else {
                 resId = R.drawable.selector_dish_single_slateblue;
             }
@@ -137,8 +127,7 @@ public class OrderDishSetmealAdapter extends BaseAdapter {
 
         holder.tvName.setText(genName(dishSetmealVo));
 
-        // 为1表示称重商品
-        BigDecimal price = dishSetmealVo.getPrice();
+                BigDecimal price = dishSetmealVo.getPrice();
         if (holder.tvPrice != null) {
             if (price != null && price.compareTo(BigDecimal.ZERO) > 0) {
                 holder.tvPrice.setText("+" + ShopInfoCfg.getInstance().getCurrencySymbol() + MathDecimal.trimZero(price));
@@ -154,8 +143,7 @@ public class OrderDishSetmealAdapter extends BaseAdapter {
         } else {
             holder.tvResidue.setVisibility(View.GONE);
         }
-        // 套餐子菜
-        BigDecimal selectedQTY = dishSetmealVo.getSelectedQty();
+                BigDecimal selectedQTY = dishSetmealVo.getSelectedQty();
         if (selectedQTY != null && selectedQTY.compareTo(BigDecimal.ZERO) > 0) {
             if (selectedQTY.compareTo(new BigDecimal("100")) >= 0) {
                 holder.tvNumber.setText("99+");
@@ -163,8 +151,7 @@ public class OrderDishSetmealAdapter extends BaseAdapter {
                 holder.tvNumber.setText(MathDecimal.toTrimZeroString(selectedQTY));
             }
 
-            // 根据字数显示字体大小
-            int length = holder.tvNumber.getText().toString().length();
+                        int length = holder.tvNumber.getText().toString().length();
             if (length <= 2) {
                 holder.tvNumber.setTextSize(18);
             } else if (length == 3) {
@@ -178,20 +165,13 @@ public class OrderDishSetmealAdapter extends BaseAdapter {
             holder.tvNumber.setVisibility(View.INVISIBLE);
         }
 
-        // 设置背景
-        holder.vMainContent.setBackgroundResource(getBackgroundResource(position));
+                holder.vMainContent.setBackgroundResource(getBackgroundResource(position));
         holder.tvMarketPrice.setVisibility(View.INVISIBLE);
 
         holder.ivProperty.setVisibility(dishSetmealVo.isContainProperties() ? View.VISIBLE : View.GONE);
     }
 
-    /**
-     * @Title: genName
-     * @Description: 拼接字符串
-     * @Param @param dishSetmealVo
-     * @Param @return TODO
-     * @Return String 返回类型
-     */
+
     private String genName(DishSetmealVo dishSetmealVo) {
         StringBuilder sb = new StringBuilder(dishSetmealVo.getName());
         Set<DishProperty> standards = dishSetmealVo.getStandards();

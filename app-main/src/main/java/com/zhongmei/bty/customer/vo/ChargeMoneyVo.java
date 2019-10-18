@@ -5,34 +5,20 @@ import com.zhongmei.bty.commonmodule.database.enums.SendType;
 
 import java.math.BigDecimal;
 
-/**
- * 充值金额对象
- */
+
 public class ChargeMoneyVo {
 
-    /**
-     * 充值金额
-     */
+
     private BigDecimal fullMoney;
-    /**
-     * 赠送金额
-     */
+
     private BigDecimal sendMoney;
-    /**
-     * 是否开启自定义
-     */
+
     private boolean isAutoInput;
-    /**
-     * 赠送类型
-     */
+
     private SendType sendType;
-    /**
-     * 赠送百分比
-     */
+
     private BigDecimal sendRate;
-    /**
-     * 是否有满赠
-     */
+
     private FullSend isFullSend;
 
     public FullSend getIsFullSend() {

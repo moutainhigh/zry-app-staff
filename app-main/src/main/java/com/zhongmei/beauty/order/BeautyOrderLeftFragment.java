@@ -60,10 +60,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 import okhttp3.internal.Util;
 
-/**
- * 美业点单左侧界面
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_order_left)
 public class BeautyOrderLeftFragment extends BasicFragment {
     private final static String TAG = BeautyOrderLeftFragment.class.getSimpleName();
@@ -75,8 +72,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     protected LoadingFinish mLoadingFinish;
 
     DinnerShoppingCart mShopcarting;
-    private MarketRuleVo marketRuleVo;// 选择模式对应的营销活动
-
+    private MarketRuleVo marketRuleVo;
     @ViewById(R.id.cancel_choose_dish_btn)
     Button btn_market_cancel;
 
@@ -102,8 +98,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     private ChangePageListener mChangePageListener;
 
     private IChangeMiddlePageListener middleChangeListener;
-    //是否是套餐编辑
-    private boolean isEditMode = false;
+        private boolean isEditMode = false;
 
     public void registerLoadingListener(LoadingFinish mLoadingFinish) {
         this.mLoadingFinish = mLoadingFinish;
@@ -126,9 +121,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         orderTitleFragment.setBusinessType(mBusinessType);
     }
 
-    /**
-     * 保存过的订单初始化数据
-     */
+
     private void initData() {
         isEdit = getActivity().getIntent().getBooleanExtra(BeautyOrderConstants.IS_ORDER_EDIT, false);
         final Tables tables = (Tables) getActivity().getIntent().getSerializableExtra(BeautyOrderConstants.ORDER_EDIT_TABLE);
@@ -156,17 +149,11 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     }
 
 
-    /**
-     * 根据BusinessTypec初始化UI
-     *
-     * @param busType
-     */
+
     private void initView(BusinessType busType) {
         if (isBuyServer(busType)) {
-            //初始化Title 隐藏房间
 
-            //隐藏预结单，保存按钮，准许结账按钮，同时会员必须登录
-            btn_save.setVisibility(View.GONE);
+                        btn_save.setVisibility(View.GONE);
             btn_print.setVisibility(View.GONE);
         }
     }
@@ -199,11 +186,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     }
 
 
-    /**
-     * 设置新加的菜品被选中
-     *
-     * @param item
-     */
+
     public DishDataItem doSelected(IShopcartItemBase item) {
         if (item == null) {
             return null;
@@ -211,7 +194,6 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         DishDataItem dishDataItem = null;
         try {
             dishDataItem = tradeInfoFragment.getSelectedDishAdapter().doSelectedItem(item.getUuid());
-//            tradeInfoFragment.goToPosition(tradeInfoFragment.getSelectedDishAdapter().mSelectPostions.get(0));
         } catch (IndexOutOfBoundsException e) {
             return null;
         }
@@ -226,18 +208,14 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     }
 
 
-    /**
-     * 从折扣页恢复
-     */
+
     public void goDefaultDiscountMode() {
         clearAllSelected();
         tradeInfoFragment.goDefaultMode();
         tradeInfoFragment.getSelectedDishAdapter().notifyDataSetChanged();
     }
 
-    /**
-     * 整单折扣
-     */
+
     public void goAllDiscountMode() {
         tradeInfoFragment.goAllDiscountMode();
     }
@@ -247,19 +225,12 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         showMarketingCampaignDishCheckMode(false, null);
     }
 
-    /**
-     * 批量打折模式
-     *
-     * @Title: goBatchDiscountMode
-     * @Return void 返回类型
-     */
+
     public void goBatchDiscountMode() {
         tradeInfoFragment.goBatchDiscountMode();
     }
 
-    /**
-     * 清除选中状态
-     */
+
     public void clearAllSelected() {
         tradeInfoFragment.getSelectedDishAdapter().clearAllSelected();
     }
@@ -336,8 +307,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
 
         @Override
         public void setIntegralCash(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-            // TODO Auto-generated method stub
-            updateShopCartView(listOrderDishshopVo, mTradeVo);
+                        updateShopCartView(listOrderDishshopVo, mTradeVo);
         }
 
         @Override
@@ -412,15 +382,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         updateShopCartView(list, tradeVo, null, ShoppingCartListener.OperationStatus.None);
     }
 
-    /**
-     * 购物车有变更时更新界面
-     *
-     * @Title: updateView
-     * @Description:
-     * @Param @param list
-     * @Param @param tradeVo
-     * @Return void 返回类型
-     */
+
     public void updateShopCartView(List<IShopcartItem> list, TradeVo tradeVo, ShopcartItem shopcartItem, ShoppingCartListener.OperationStatus operationStatus) {
         try {
             if (this.isAdded()) {
@@ -509,11 +471,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         showMarketingCampaignDishCheckMode(event.isSelected, event.marketRuleVo);
     }
 
-    /**
-     * @Date 2016年5月21日
-     * @Description: 营销活动菜品check mode
-     * @Return void
-     */
+
     public void showMarketingCampaignDishCheckMode(boolean show, MarketRuleVo marketRuleVo) {
         BeautyShopcartAdapter selectedDishAdapter = tradeInfoFragment.getSelectedDishAdapter();
         if (show) {
@@ -536,12 +494,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
 
     }
 
-    /**
-     * @param view
-     * @Date 2016年5月22日
-     * @Description:
-     * @Return void
-     */
+
     @Click({R.id.cancel_choose_dish_btn, R.id.ok_choose_dish_btn})
     void clickMarketingCampaignButtons(View view) {
         switch (view.getId()) {
@@ -574,11 +527,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         this.middleChangeListener = middleChangeListener;
     }
 
-    /**
-     * @Date 2016年5月25日
-     * @Description: 取消右侧活动列表选择状态
-     * @Return void
-     */
+
     private void cancelSelectInMarketActivityFragment() {
         if (mChangePageListener == null) {
             return;
@@ -587,11 +536,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     }
 
 
-    /**
-     * 设置工作台／房间名称
-     *
-     * @param roomName
-     */
+
     public void setTableName(String roomName) {
         if (orderTitleFragment != null) {
             orderTitleFragment.setRoomName(roomName);

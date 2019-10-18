@@ -16,22 +16,17 @@ import com.zhongmei.yunfu.init.sync.SyncServiceUtil;
 
 import java.io.File;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class ResetFragment {
 
     private FragmentActivity mContext;
     private CommonDialogFragment mDialogFragment;
 
-    //从设置登录进行初始化
-    public static final int OTHER = 1;
+        public static final int OTHER = 1;
 
-    //从lancher进行初始化
-    public static final int LAUNCHER = 2;
+        public static final int LAUNCHER = 2;
 
-    //检查到本地数据与服务器数据不匹配
-    public static final int VERSION = 3;
+        public static final int VERSION = 3;
 
     public ResetFragment(FragmentActivity context, int type) {
         mContext = context;
@@ -95,10 +90,7 @@ public class ResetFragment {
     }
 
     private void reset() {
-        /*DisplayServiceManager.stopService(MainApplication.getInstance());
-        SyncServiceUtil.stopSyncService(MainApplication.getInstance());
-        NewOrderlistenerService.stopService(MainApplication.getInstance());
-        TradeDealServiceUtil.stopTradeDealService(MainApplication.getInstance());*/
+
         dismiss();
         if (mContext instanceof BaseActivity) {
             ((BaseActivity) mContext).showLoadingProgressDialog(mContext.getString(R.string.onekey_init_loading));
@@ -110,11 +102,8 @@ public class ResetFragment {
                 SystemUtils.deleteRootDir();
                 SystemUtils.deleteAllinpayDir();
                 DatabaseHelper helper = DBHelperManager.getHelper();
-//                File file = new File(FileUtil.getRootPath());
-//                SystemUtils.delete(file);
 
-                //删除calm/databases下所以db文件
-                File file = new File(FileUtil.getDBPath());
+                                File file = new File(FileUtil.getDBPath());
                 SystemUtils.deleteAllFiles(file);
 
                 SharedPreferenceUtil.getSpUtil().clear();
@@ -123,7 +112,6 @@ public class ResetFragment {
 
 
                 SyncServiceUtil.stopService(mContext);
-                //PushServiceManager.stopPushService();
 
                 try {
                     Thread.sleep(3000);
@@ -131,9 +119,7 @@ public class ResetFragment {
                     e.printStackTrace();
                 }
 
-                //dismiss();
-                //System.exit(0);
-                if (mContext instanceof BaseActivity) {
+                                                if (mContext instanceof BaseActivity) {
                     ((BaseActivity) mContext).dismissLoadingProgressDialog();
                 }
                 startApp();

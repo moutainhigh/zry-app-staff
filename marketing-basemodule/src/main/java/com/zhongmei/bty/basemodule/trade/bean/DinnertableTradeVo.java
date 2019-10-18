@@ -11,15 +11,10 @@ import com.zhongmei.yunfu.db.enums.TradeType;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年9月20日
- */
+
 public class DinnertableTradeVo {
 
-    /**
-     * 当前桌台单据
-     */
+
     private final IDinnertableTrade dinnertableTrade;
 
     private final DinnertableTradeInfo info;
@@ -96,30 +91,23 @@ public class DinnertableTradeVo {
         if (info == null) {
             return null;
         }
-        //非自助才用此结构
-        if (unionMainTradeInfo != null && info.getTradeVo().isUnionSubTrade() && !info.getTradeVo().isBuffet()) {
+                if (unionMainTradeInfo != null && info.getTradeVo().isUnionSubTrade() && !info.getTradeVo().isBuffet()) {
             DinnerUnionShopcartUtil.initSubTradeBatchItem(unionMainTradeInfo, info, shopcartItemList);
         }
         shopcartItemList.addAll(info.getItems());
-        //自助联台主单
-        if (info.getTradeVo().isBuffetUnionMainTrade()) {
+                if (info.getTradeVo().isBuffetUnionMainTrade()) {
             DinnerUnionShopcartUtil.initBuffetMainTradeSubItems(info, shopcartItemList);
         } else if (info.getTradeVo().isUnionMainTrade()) {
             DinnerUnionShopcartUtil.initMainTradeSubItems(info, shopcartItemList);
         }
-        //联台单才重新计算
-        if (info.getTradeVo().isSellTrade() || info.getTradeVo().isUnionSubTrade() || info.getTradeVo().isUnionMainTrade()) {
+                if (info.getTradeVo().isSellTrade() || info.getTradeVo().isUnionSubTrade() || info.getTradeVo().isUnionMainTrade()) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, info.getTradeVo());
             dinnertableTrade.setTradeAmount(info.getTradeVo().getTrade().getTradeAmount());
         }
         return shopcartItemList;
     }
 
-    /**
-     * 查询是否需要执行订单完结操作
-     *
-     * @return
-     */
+
     public boolean isNeedFinishTrade() {
         TradeVo tradeVo = getTradeVo();
         boolean paidOutTimeFee = BuffetOutTimeManager.calculateOutTimeFee(tradeVo).compareTo(BuffetOutTimeManager.getPaidOutTimeFee(tradeVo)) <= 0;
@@ -129,11 +117,7 @@ public class DinnertableTradeVo {
         return false;
     }
 
-    /**
-     * 是否需要退押金
-     *
-     * @return
-     */
+
     public boolean isNeedReturnDeposit() {
         TradeVo tradeVo = getTradeVo();
         if (tradeVo != null && tradeVo.getTradeDeposit() != null) {

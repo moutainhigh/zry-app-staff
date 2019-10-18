@@ -36,9 +36,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DinnerCreateUnionManager {
 
@@ -109,8 +107,7 @@ public class DinnerCreateUnionManager {
     }
 
     private List<TradeTax> createTradeTaxReq() {
-        //增加默认税率
-        TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
+                TaxRateInfo taxRateInfo = ServerSettingCache.getInstance().getmTaxRateInfo();
         if (taxRateInfo != null && taxRateInfo.isTaxSupplyOpen()) {
             TradeTax tradeTax = taxRateInfo.toTradeTax(null);
             return Arrays.asList(tradeTax);
@@ -119,8 +116,7 @@ public class DinnerCreateUnionManager {
     }
 
     private List<TradeInitConfig> createTradeInitConfig() {
-        //加入服务费
-        ExtraCharge serviceExtraCharge = ServerSettingCache.getInstance().getmServiceExtraCharge();
+                ExtraCharge serviceExtraCharge = ServerSettingCache.getInstance().getmServiceExtraCharge();
         if (serviceExtraCharge != null && serviceExtraCharge.isAutoJoinTrade()) {
             return Arrays.asList(serviceExtraCharge.toTradeInitConfig());
         }
@@ -191,8 +187,7 @@ public class DinnerCreateUnionManager {
             e.printStackTrace();
         }
         mTrade.setBusinessType(BusinessType.DINNER);
-        mTrade.setTradeType(TradeType.UNOIN_TABLE_SUB); // 交易类型 1:SELL:售货 2:REFUND:退货
-        mTrade.setDeliveryType(DeliveryType.HERE);
+        mTrade.setTradeType(TradeType.UNOIN_TABLE_SUB);         mTrade.setDeliveryType(DeliveryType.HERE);
         mTrade.setTradeNo(SystemUtils.getBillNumber());
         mTrade.setTradeAmountBefore(new BigDecimal(0));
         mTrade.setTradePeopleCount(tablesVo.tables.getTablePersonCount());
@@ -214,8 +209,7 @@ public class DinnerCreateUnionManager {
 
         tradeTable.isValid();
 
-        //设置登录操作员为默认服务员
-        AuthUser user = Session.getAuthUser();
+                AuthUser user = Session.getAuthUser();
         if (user != null) {
             tradeTable.setWaiterId(user.getId());
             tradeTable.setWaiterName(user.getName());

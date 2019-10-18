@@ -19,13 +19,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.bty.basemodule.pay.operates.PaymentItemDal;
 import com.zhongmei.bty.basemodule.pay.bean.PaymentItemUnionpayVo;
 
-/**
- * @Date：2016-2-17 下午6:13:22
- * @Description: 银联刷卡记录表操作接口
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class PaymentItemDalImpl extends AbstractOpeartesImpl implements PaymentItemDal {
     private static final String TAG = PaymentItemDalImpl.class.getSimpleName();
 

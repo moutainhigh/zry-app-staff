@@ -22,15 +22,12 @@ public class TableInfoViewPager extends ViewPager {
 
     @Override
     public void scrollTo(int x, int y) {
-//		if (isCanScroll) {
         super.scrollTo(x, y);
-//		}
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent arg0) {
-        // TODO Auto-generated method stub
-        if (isCanScroll) {
+                if (isCanScroll) {
             return super.onInterceptTouchEvent(arg0);
         } else {
             return false;
@@ -40,8 +37,7 @@ public class TableInfoViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent arg0) {
-        // TODO Auto-generated method stub
-        if (isCanScroll) {
+                if (isCanScroll) {
             return super.onTouchEvent(arg0);
         } else {
             return false;

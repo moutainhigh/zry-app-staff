@@ -3,9 +3,7 @@ package com.zhongmei.beauty.entity;
 import com.zhongmei.beauty.booking.bean.BeautyBookingVo;
 import com.zhongmei.beauty.order.view.ReserverTradeView;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ReserverItemVo {
     private float offsetX;

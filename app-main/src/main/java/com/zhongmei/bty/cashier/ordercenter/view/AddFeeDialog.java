@@ -21,11 +21,7 @@ import com.zhongmei.bty.cashier.ordercenter.presenter.IAddFeeContract;
 import com.zhongmei.bty.cashier.ordercenter.presenter.IAddFeeContract.IAddFeePresenter;
 import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
 
-/**
- * @Date： 16/10/18
- * @Description:
- * @Version: 1.0
- */
+
 public class AddFeeDialog extends BasicDialogFragment implements View.OnClickListener, IAddFeeContract.IAddFeeView {
 
     public static final String EXTRA_DELIVERY_ORDER_ID = "EXTRA_DELIVERY_ORDER_ID";
@@ -59,8 +55,7 @@ public class AddFeeDialog extends BasicDialogFragment implements View.OnClickLis
         Dialog dialog = getDialog();
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = inflater.inflate(R.layout.dialog_add_fee, container);
-        dialog.setCanceledOnTouchOutside(false);// 设置点击屏幕Dialog不消失
-        assignViews(view);
+        dialog.setCanceledOnTouchOutside(false);        assignViews(view);
         return view;
     }
 
@@ -78,8 +73,7 @@ public class AddFeeDialog extends BasicDialogFragment implements View.OnClickLis
         mPresenter = new AddFeePresenter();
         mPresenter.attachView(this);
 
-        // Bundle参数
-        Bundle bundle = getArguments();
+                Bundle bundle = getArguments();
         deliveryOrderId = bundle.getLong(EXTRA_DELIVERY_ORDER_ID);
         deliveryPlatform = bundle.getInt(EXTRA_DELIVERY_PLATFORM);
 

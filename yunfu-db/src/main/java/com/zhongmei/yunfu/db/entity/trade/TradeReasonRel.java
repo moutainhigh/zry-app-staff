@@ -11,97 +11,61 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.enums.OperateType;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * TradeReasonRel is a ORMLite bean type. Corresponds to the database table "trade_reason_rel"
- */
+
 @DatabaseTable(tableName = "trade_reason_rel")
 public class TradeReasonRel extends UuidEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_reason_rel"
-     */
+
     public interface $ extends UuidEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         String updatorName = "updator_name";
 
-        /**
-         * reason_content
-         */
+
         String reasonContent = "reason_content";
 
-        /**
-         * reason_id
-         */
+
         String reasonId = "reason_id";
 
-        /**
-         * operate_type
-         */
+
         String operateType = "operate_type";
 
-        /**
-         * relate_id
-         */
+
         String relateId = "relate_id";
 
-        /**
-         * relate_uuid
-         */
+
         String relateUuid = "relate_uuid";
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * brand_identy
-         */
+
         String brandIdenty = "brand_identy";
 
-        /**
-         * shop_identy
-         */
+
         String shopIdenty = "shop_identy";
 
-        /**
-         * device_identy
-         */
+
         String deviceIdenty = "device_identy";
 
     }

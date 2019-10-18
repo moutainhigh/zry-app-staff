@@ -106,9 +106,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 充值页面
- */
+
 
 @EFragment(R.layout.customer_charging_dialog)
 public class CustomerChargingDialogFragment extends BasicDialogFragment implements OnClickListener {
@@ -117,10 +115,10 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
 
     public static final String FLAG = "Charging";
 
-    /* 现金 */
+
     private final static int CASHCHARGE = 0;
 
-    /* 银行卡 */
+
     private final static int BANKCARDCHARGE = 1;
 
     @ViewById(R.id.customer_cash_charging)
@@ -140,62 +138,40 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
     @ViewById(R.id.customer_name)
     protected TextView mName;
 
-    /**
-     * 充值可选金额面板
-     */
+
     @ViewById(R.id.customer_charging_num)
     protected GridView mRuleListView;
 
     @ViewById(R.id.salesman_name_et)
-    protected EditText etSalesman;//add 20170915 销售员
-
+    protected EditText etSalesman;
     private CustomerResp mCustomer;
 
-    private ListConfirmDialogFragment mConfirmDialog;//确定对话框
-    /**
-     * 实体卡
-     */
+    private ListConfirmDialogFragment mConfirmDialog;
     private EcCardInfo ecCard;
 
-    // 当前余额
-    private String mBalance;
+        private String mBalance;
 
     private String serverId;
 
     private int chargeType = CASHCHARGE;
 
-    /**
-     * 充值规则
-     */
+
     private RechargeRuleVo ruleVo;
 
-    /**
-     * 充值可选金额
-     */
+
     private List<ChargeMoneyVo> chargeMoneyList;
-    /**
-     * 充值金额
-     */
+
     private BigDecimal chargeMoney = BigDecimal.ZERO;
 
-    /**
-     * 赠送金额
-     */
+
     private BigDecimal sendMoney = BigDecimal.ZERO;
 
-    private int from;//从哪里跳转到充值界面的 CustomerChargingBalanceActivity
-    //两个字段 FROM_MEMBER_PAY       FROM_MEMBER_CUSTOMER
-
+    private int from;
     public interface OnChargingClickListener {
         void onClickClose();
     }
 
-    public static final int FROM_MEMBER_PAY = 0;//来自支付界面
-    public static final int FROM_MEMBER_CUSTOMER = 1;//来自顾客界面
-    public static final int FROM_CREATE_CUSTOMER = 2;//来自注册界面
-    public static final int FROM_CARD_SALE = 3;//来自售卡界面
-    public static final int FROM_CARD_BEATY_MAIN = 4;//来自美业首页
-
+    public static final int FROM_MEMBER_PAY = 0;    public static final int FROM_MEMBER_CUSTOMER = 1;    public static final int FROM_CREATE_CUSTOMER = 2;    public static final int FROM_CARD_SALE = 3;    public static final int FROM_CARD_BEATY_MAIN = 4;
 
     public static final String KEY_CUSTOMER = "key_customer";
     public static final String KEY_FROM = "key_form";
@@ -228,9 +204,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         registerEventBus();
     }
 
-    /**
-     * 构建view
-     */
+
     private void setupView() {
         if (CustomerApplication.mCustomerBussinessType == CustomerAppConfig.CustomerBussinessType.BEAUTY) {
             mBtnCharging.setBackgroundResource(R.drawable.beauty_customer_charging_pay_cash_selector);
@@ -245,9 +219,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         this.setCancelable(false);
     }
 
-    /**
-     * 获取数据
-     */
+
     public void getArgumentsData() {
         this.from = getArguments().getInt(KEY_FROM);
         this.mCustomer = (CustomerResp) getArguments().getSerializable(KEY_CUSTOMER);
@@ -267,10 +239,8 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         if (getActivity() == null || getActivity().isFinishing()) {
             return;
         }
-        if (ecCard != null && ecCard.getCardType() == EntityCardType.CUSTOMER_ENTITY_CARD.value()) { // 权益卡 v8.3修改
-            mName.setText(String.format(getResources().getString(R.string.customer_charging_name), ecCard.getCardNum()));
-        } else { // 会员卡
-            if (mCustomer != null) {
+        if (ecCard != null && ecCard.getCardType() == EntityCardType.CUSTOMER_ENTITY_CARD.value()) {             mName.setText(String.format(getResources().getString(R.string.customer_charging_name), ecCard.getCardNum()));
+        } else {             if (mCustomer != null) {
                 mName.setText(String.format(getResources().getString(R.string.customer_charging_name), mCustomer.getCustomerName(getActivity())));
             }
         }
@@ -285,11 +255,6 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         } else {
             checkRule();
         }
-//        if (ecCard != null &&  ecCard.getRightStatus() == CardRechagingStatus.EFFECTIVE){ // 当前卡没有储值权限
-//            checkRule();
-//        } else {
-//            mRuleListView.setVisibility(View.INVISIBLE);
-//        }
     }
 
     @Click({R.id.ivClose_CCharging, R.id.customer_cash_charging, R.id.show_value, R.id.salesman_iv})
@@ -302,8 +267,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
                 }
                 dismissAllowingStateLoss();
                 break;
-            case R.id.customer_cash_charging:// 现金充值
-                MobclickAgentEvent.onEvent(UserActionCode.GK010023);
+            case R.id.customer_cash_charging:                MobclickAgentEvent.onEvent(UserActionCode.GK010023);
                 VerifyHelper.verifyAlert(getActivity(), CustomerApplication.PERMISSION_CUSTOMER_STORE,
                         new VerifyHelper.Callback() {
                             @Override
@@ -315,8 +279,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
                                         ToastUtil.showLongToast(R.string.customer_data_error);
                                         return;
                                     }
-                                    if (ecCard == null || ecCard.getCardType() == EntityCardType.GENERAL_CUSTOMER_CARD.value()) { // v8.3 卡为空  或者 会员为空
-                                        if (TextUtils.isEmpty(mCustomer.mobile)) {
+                                    if (ecCard == null || ecCard.getCardType() == EntityCardType.GENERAL_CUSTOMER_CARD.value()) {                                         if (TextUtils.isEmpty(mCustomer.mobile)) {
                                             ToastUtil.showLongToast(R.string.customer_bind_pohone);
                                             return;
                                         }
@@ -330,8 +293,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
             case R.id.show_value:
                 showNumberInputDialog();
                 break;
-            case R.id.salesman_iv: //add start 20170915 销售员
-                if (CustomerApplication.mCustomerBussinessType == CustomerAppConfig.CustomerBussinessType.BEAUTY) {
+            case R.id.salesman_iv:                 if (CustomerApplication.mCustomerBussinessType == CustomerAppConfig.CustomerBussinessType.BEAUTY) {
                     showBeautyWaiterDialog();
                 } else {
                     List<User> allUserList = Session.getFunc(UserFunc.class).getUsers();
@@ -344,8 +306,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         }
     }
 
-    //add start 20170915 销售员
-    private List<AuthUser> mSalesmans = new ArrayList<>();
+        private List<AuthUser> mSalesmans = new ArrayList<>();
     DoubleUserDialog.DoubleUserListener mSelectedListener = new DoubleUserDialog.DoubleUserListener() {
 
         @Override
@@ -365,11 +326,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
             }
         }
     };
-    //add end 20170915 销售员
-    // yutang add 2016 06 12 start
-    /**
-     * 自定义输入回调
-     */
+
     NumberInputdialog.InputOverListener mInputOverListener = new NumberInputdialog.InputOverListener() {
         @Override
         public void afterInputOver(String inputContent) {
@@ -379,19 +336,13 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
                 if (ruleVo != null && ruleVo.getIsFullSend() == FullSend.YES && sendMoney.compareTo(BigDecimal.ZERO) > 0) {
                     mRuleMoneyTx.setText(getString(R.string.customer_charging_rule_money, sendMoney));
                 } else {
-                    mRuleMoneyTx.setText("");// 自定义不显示赠送
-                }
+                    mRuleMoneyTx.setText("");                }
                 mShowValue.setText(ShopInfoCfg.formatCurrencySymbol(inputContent));
             }
         }
     };
 
-    /**
-     * 根据输入金额匹配赠送金额
-     *
-     * @param inputChargeMoney
-     * @return
-     */
+
     private BigDecimal findSendMoneyByInput(BigDecimal inputChargeMoney) {
         if (inputChargeMoney == null) {
             return BigDecimal.ZERO;
@@ -411,9 +362,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         return _sendMoney;
     }
 
-    /**
-     * 显示自定义输入框
-     */
+
     private void showNumberInputDialog() {
         double maxValue = 999999d;
         String defaultInput = null;
@@ -426,23 +375,12 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         numberDialog.setNumberType(NumberInputdialog.NUMBER_TYPE_FLOAT).setDotType(DotType.DOT).show();
     }
 
-    /**
-     * 跳转到支付界面
-     */
+
     private void gotoPayRecharge() {
         long customerId = mCustomer.customerId;
         TradeVo tradeVo = null;
         SaleCardDataModel saleCard = new SaleCardDataModel(OperatesFactory.create(CustomerDal.class));
-        /*if (ecCard != null) {// 实体卡充值(需要tradeitem保存卡号)
-            List<EcCardInfo> list = new ArrayList<EcCardInfo>();
-            list.add(ecCard);
-            tradeVo = saleCard.createTradeVo(CustomerApplication.mCustomerBussinessType , list);
-            tradeVo.getTradeItemList().get(0).getTradeItem().setAmount(chargeMoney);
-            tradeVo.getTrade().setBusinessType(BusinessType.CARD_RECHARGE);
-            tradeVo.getTrade().setSaleAmount(chargeMoney);
-            tradeVo.getTrade().setTradeAmount(chargeMoney);
-        } else {*///会员充值(不需要tradeitem)
-        tradeVo = saleCard.createMemberRechargeTradeVo(chargeMoney, BusinessType.ONLINE_RECHARGE, CustomerApplication.mCustomerBussinessType);
+                tradeVo = saleCard.createMemberRechargeTradeVo(chargeMoney, BusinessType.ONLINE_RECHARGE, CustomerApplication.mCustomerBussinessType);
 
         Trade trade = tradeVo.getTrade();
         TradeCustomer tradeCustomer = new TradeCustomer();
@@ -456,8 +394,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         tradeCustomer.setCustomerSex(ValueEnums.toEnum(Sex.class, mCustomer.sex));
         tradeCustomer.setCustomerPhone(mCustomer.mobile);
         tradeVo.setTradeCustomerList(Arrays.asList(tradeCustomer));
-        //}
-        List<TradeUser> tradeUsers = new ArrayList<>();
+                List<TradeUser> tradeUsers = new ArrayList<>();
         if (CustomerApplication.mCustomerBussinessType == CustomerAppConfig.CustomerBussinessType.BEAUTY) {
             for (UserVo vo : mUserVos) {
                 tradeUsers.add(PayUtils.creatTradeUser(tradeVo.getTrade(), vo));
@@ -471,37 +408,31 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         ZMIntent.payRecharge(getActivity(), tradeVo, customerId, chargeMoney);
     }
 
-    //本地计算充值后余额 = 原有余额+充值+赠送（注明;可能不准确）
-    private BigDecimal getAfterBalanceValue() {
+        private BigDecimal getAfterBalanceValue() {
         BigDecimal value = BigDecimal.ZERO;
         String balanceStr = mCustomerBalance.getText().toString();
         if (!TextUtils.isEmpty(balanceStr)) {
             balanceStr = balanceStr.replace(ShopInfoCfg.getInstance().getCurrencySymbol(), "");
         }
-        //充值
-        if (chargeMoney != null) {
+                if (chargeMoney != null) {
             value = value.add(chargeMoney);
         }
-        //赠送
-        if (sendMoney != null) {
+                if (sendMoney != null) {
             value = value.add(sendMoney);
         }
-        //原有余额
-        if (!TextUtils.isEmpty(balanceStr)) {
+                if (!TextUtils.isEmpty(balanceStr)) {
             value = value.add(new BigDecimal(balanceStr));
         }
         return value;
     }
 
-    //充值前余额
-    private BigDecimal geBeforeBalanceValue() {
+        private BigDecimal geBeforeBalanceValue() {
         BigDecimal value = BigDecimal.ZERO;
         String balanceStr = mCustomerBalance.getText().toString();
         if (!TextUtils.isEmpty(balanceStr)) {
             balanceStr = balanceStr.replace(ShopInfoCfg.getInstance().getCurrencySymbol(), "");
         }
-        //原有余额
-        if (!TextUtils.isEmpty(balanceStr)) {
+                if (!TextUtils.isEmpty(balanceStr)) {
             value = value.add(new BigDecimal(balanceStr));
         }
         return value;
@@ -594,45 +525,20 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
             }
         }
         print.setPayMethods(list);
-        //PrintTool.printCardOrMemberCharge(print, false, new PRTOnSimplePrintListener(PrintTicketTypeEnum.STORE));
-    }
+            }
 
-    //清空输入数据
-    private void clearInput() {
+        private void clearInput() {
         chargeMoney = BigDecimal.ZERO;
         sendMoney = BigDecimal.ZERO;
         mShowValue.setText(getString(R.string.zero));
     }
 
-    //充值成功回调处理
-    public void onEventMainThread(EventPayResult eventPayResult) {
-//        cleaUserVo();
-//        if (eventPayResult.getType() == BusinessType.ONLINE_RECHARGE || eventPayResult.getType() == BusinessType.CARD_RECHARGE) {
-//            if (from == FROM_CARD_SALE || from == FROM_MEMBER_CUSTOMER || from == FROM_CREATE_CUSTOMER) {
-//                if (ecCard != null) { // 卡储值
-//                    EventBus.getDefault().post(new EventSaleCardCharging(chargeMoney, sendMoney, eventPayResult, EventSaleCardCharging.ChargingType.CARD, ecCard));
-//                } else {
-//                    EventBus.getDefault().post(new EventSaleCardCharging(chargeMoney, sendMoney, eventPayResult));
-//                }
-//            }
-////            dismissConfirmDialog();//关闭核对框
-//            //显示对话框
-//            if (eventPayResult.isOnlinePay()) {//如果在线支付不返回余额
-//                doChargePrint(chargeMoney, getAfterBalanceValue(), eventPayResult);
-//                showPromptDialog(chargeMoney, getAfterBalanceValue(), eventPayResult.getType());
-//            } else {//非在线支付有返回余额
-//                AnonymousCardStoreResp content = (AnonymousCardStoreResp) eventPayResult.getContent();
-//                //doChargePrint(chargeMoney, content.getValueCard(), eventPayResult);
-//                showPromptDialog(chargeMoney, content.getValueCard(), eventPayResult.getType());
-//            }
-//        }
+        public void onEventMainThread(EventPayResult eventPayResult) {
         this.dismissAllowingStateLoss();
     }
 
     private void showPromptDialog(final BigDecimal chargeMoney, final BigDecimal valueCard, final BusinessType businessType) {
-        String money = CashInfoManager.formatCashAmount(chargeMoney.doubleValue()); // 充值金额
-        String currentBalance = CashInfoManager.formatCashAmount(valueCard.doubleValue()); // 当前余额
-        Bundle data = new Bundle();
+        String money = CashInfoManager.formatCashAmount(chargeMoney.doubleValue());         String currentBalance = CashInfoManager.formatCashAmount(valueCard.doubleValue());         Bundle data = new Bundle();
         data.putString("money", money);
         data.putString("currentBalance", currentBalance);
         if (sendMoney != null && sendMoney.compareTo(BigDecimal.ZERO) > 0) {
@@ -645,18 +551,13 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
             @Override
             public void onClickSubmit() {
                 Log.d("DEBUG", "DEBUG----from=" + from);
-                //if如果是收银调转过来，直接关闭充值界面
-                if (from == FROM_MEMBER_PAY) {
+                                if (from == FROM_MEMBER_PAY) {
                     Log.d("DEBUG", "DEBUG----from=FROM_MEMBER_PAY===" + valueCard.toString());
                     MemberPayChargeEvent memberPayChargeEvent = new MemberPayChargeEvent();
-                    memberPayChargeEvent.setType(MemberPayChargeEvent.BALANCE_CHANGE_TYPE_CHARGE);//add 20170217
-                    memberPayChargeEvent.setmValueCardBalance(valueCard);
-                    EventBus.getDefault().post(memberPayChargeEvent);//发送EVENTBUS到会员支付界面MemberPayFragment
-                    //提示会员重新登录(只有正餐拆弹购物车需要，快餐每次都会去更新，正餐原单不需要展示所以不更新)
-                    CustomerResp separatorCustomer = CustomerManager.getInstance().getSeparateLoginCustomer();
+                    memberPayChargeEvent.setType(MemberPayChargeEvent.BALANCE_CHANGE_TYPE_CHARGE);                    memberPayChargeEvent.setmValueCardBalance(valueCard);
+                    EventBus.getDefault().post(memberPayChargeEvent);                                        CustomerResp separatorCustomer = CustomerManager.getInstance().getSeparateLoginCustomer();
                     if (separatorCustomer != null) {
-                        //判断充值的会员是当前登录的会员
-                        if (mCustomer != null && TextUtils.equals(mCustomer.mobile, separatorCustomer.mobile)) {
+                                                if (mCustomer != null && TextUtils.equals(mCustomer.mobile, separatorCustomer.mobile)) {
                             separatorCustomer.needRefresh = (true);
                         } else if (ecCard != null && separatorCustomer.card != null && TextUtils.equals(ecCard.getCardNum(), separatorCustomer.card.getCardNum())) {
                             separatorCustomer.needRefresh = (true);
@@ -665,10 +566,8 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
                 } else if (from == FROM_CREATE_CUSTOMER) {
                     EventBus.getDefault().post(new EventDinnerCustomerRegisterRecharge(mCustomer));
                 } else if (from == FROM_CARD_SALE) {
-                    // 售卡处充值
-                } else {
-                    // 刷新左边列表
-                    if (ecCard != null) {
+                                    } else {
+                                        if (ecCard != null) {
                         EventBus.getDefault().post(new EventRefreshBalance(ecCard.getCardNum()));
                     } else {
                         EventBus.getDefault().post(new EventRefreshBalance(null));
@@ -679,9 +578,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         dialog.show(getActivity().getSupportFragmentManager(), "customerChargingSussessDialog");
     }
 
-    /**
-     * 确认dialog
-     */
+
     private void showConfirmDialog() {
         if (mConfirmDialog == null) {
             mConfirmDialog = ListConfirmDialogFragment_.builder().mTitleString(getString(R.string.customer_confirm)).build();
@@ -704,14 +601,11 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         mConfirmDialog.show(getFragmentManager(), "ListConfirmDialogFragment");
     }
 
-    /**
-     * 取消确认
-     */
+
     private void dismissConfirmDialog() {
         if (mConfirmDialog != null)
             mConfirmDialog.dismissAllowingStateLoss();
     }
-    // yutang modify 2016 07 18 end
 
     private ChargeMoneyToDialogAdapter.OnRuleClick mOnRuleClick = new ChargeMoneyToDialogAdapter.OnRuleClick() {
         @Override
@@ -732,9 +626,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         }
     };
 
-    /**
-     * 充值确认页面
-     */
+
     private void PreCharging() {
         if (TextUtils.isEmpty(mShowValue.getText())) {
             ToastUtil.showShortToast(getString(R.string.select_recharge_amount));
@@ -752,8 +644,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
             ToastUtil.showShortToast(getString(R.string.entity_card) + CustomerUtil.getStatusName(ecCard.getCardStatus()) + getString(R.string.can_not_execute));
             return;
         }
-        // 有些卡不允许充值 ，禁止打开充值界面
-        CustomerDal dal = OperatesFactory.create(CustomerDal.class);
+                CustomerDal dal = OperatesFactory.create(CustomerDal.class);
         EcCardKind cardKind = null;
         try {
             if (ecCard != null)
@@ -772,9 +663,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         gotoPayRecharge();
     }
 
-    /**
-     * 封装会员充值请求数据
-     */
+
     private MemberRechargeReq getMemberRechargeReq() {
         MemberRechargeReq req = new MemberRechargeReq();
         setValueReq(req);
@@ -791,9 +680,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         return req;
     }
 
-    /**
-     * 封装实体卡充值请求数据
-     */
+
     private CardRechargeReq getCardRechargeReq() {
         CardRechargeReq req = new CardRechargeReq();
         setValueReq(req);
@@ -803,11 +690,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         return req;
     }
 
-    /**
-     * 公共字段赋值
-     *
-     * @return
-     */
+
     private RechargeReq setValueReq(RechargeReq req) {
         req.setClientCreateTime(System.currentTimeMillis());
         req.setClientUpdateTime(System.currentTimeMillis());
@@ -838,27 +721,15 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         return req;
     }
 
-    /**
-     * 查看规则
-     */
+
     public void checkRule() {
         chargeMoneyList = new ArrayList<ChargeMoneyVo>();
         final CustomerDal dal = OperatesFactory.create(CustomerDal.class);
-        //modify begin 20170302
-        TaskContext.bindExecute(this, new SimpleAsyncTask<RechargeRuleVo>() {
+                TaskContext.bindExecute(this, new SimpleAsyncTask<RechargeRuleVo>() {
             @Override
             public RechargeRuleVo doInBackground(Void... params) {
                 RechargeRuleVo rechargeRuleVo = null;
                 try {
-//                    if (ecCard != null) {
-//                        if (ecCard.getCardLevelId() == null) {
-//                            rechargeRuleVo = dal.findRechargeRuleByKind(ecCard.getCardKindId());
-//                        } else {
-//                            rechargeRuleVo = dal.findRechargeRule(Long.valueOf(ecCard.getCardLevelId()));
-//                        }
-//                    } else if (mCustomer != null) {
-//                        rechargeRuleVo = dal.findRechargeRule(null);
-//                    }
                     rechargeRuleVo = dal.findRechargeRule();
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
@@ -869,12 +740,9 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
             public void onPostExecute(RechargeRuleVo result) {
                 try {
                     ruleVo = result;
-                    // 做一个判断，如果没有满赠，就不显示满赠的布局
-                    if (ruleVo != null) {
+                                        if (ruleVo != null) {
                         List<RechargeRuleDetailVo> ruleList = ruleVo.getRuleDetailList();
-                        // 判断是否有满增
-                        if (ruleVo.getIsFullSend() == FullSend.YES) {
-//                            mRuleLayout.setVisibility(View.VISIBLE);
+                                                if (ruleVo.getIsFullSend() == FullSend.YES) {
                             if (ruleList != null && ruleList.size() > 0) {
                                 for (RechargeRuleDetailVo rule : ruleList) {
                                     if (rule.getFullValue() != null) {
@@ -885,10 +753,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
                                         } else {
                                             chargeMoneyVo.setSendMoney(rule.getSendRate().multiply(rule.getFullValue()).divide(new BigDecimal(100)));
                                         }
-                                        chargeMoneyVo.setIsFullSend(result.getIsFullSend()); // 是否有满赠
-                                        chargeMoneyVo.setSendType(result.getSendType()); // 判断赠送类型
-                                        chargeMoneyVo.setSendRate(rule.getSendRate()); // 赠送百分比
-                                        chargeMoneyList.add(chargeMoneyVo);
+                                        chargeMoneyVo.setIsFullSend(result.getIsFullSend());                                         chargeMoneyVo.setSendType(result.getSendType());                                         chargeMoneyVo.setSendRate(rule.getSendRate());                                         chargeMoneyList.add(chargeMoneyVo);
                                     }
                                 }
                             } else {
@@ -911,23 +776,18 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
                     } else {
                         fixAmount();
                     }
-//                    chargeMoneyList.add(new ChargeMoneyVo(true)); // 是否添加自定义按钮
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
                 }
-                // 初始话充值金额界面
-                ChargeMoneyToDialogAdapter adapter = new ChargeMoneyToDialogAdapter(getActivity());
+                                ChargeMoneyToDialogAdapter adapter = new ChargeMoneyToDialogAdapter(getActivity());
                 adapter.setOnRuleClick(mOnRuleClick);
                 mRuleListView.setAdapter(adapter);
                 adapter.setDataSource(chargeMoneyList);
             }
         });
-        //modify end 20170302
-    }
+            }
 
-    /**
-     * 显示固定充值金额
-     */
+
     private void fixAmount() {
         for (int i = 0; i < 4; i++) {
             ChargeMoneyVo chargeMoneyVo = new ChargeMoneyVo(false);
@@ -952,7 +812,7 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         }
     }
 
-    /**************************** 美业推销员 *********************************/
+
     private List<UserVo> mUserVos = new ArrayList<>();
     private BeautyCustomerWaiterDialog mBeautyCustomerWaiterDialog;
 
@@ -986,10 +846,9 @@ public class CustomerChargingDialogFragment extends BasicDialogFragment implemen
         mBeautyCustomerWaiterDialog.show(getChildFragmentManager(), "BeautyWaiterDialog");
     }
 
-    /**************************** 美业推销员(完) *********************************/
+
 
     private void cleaUserVo() {
-        mUserVos.clear(); // 储值成功清空销售员记录
-        etSalesman.setText("");
+        mUserVos.clear();         etSalesman.setText("");
     }
 }

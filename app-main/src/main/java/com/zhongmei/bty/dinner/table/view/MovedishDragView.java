@@ -15,10 +15,7 @@ import com.zhongmei.bty.basemodule.trade.enums.DinnertableStatus;
 import com.zhongmei.bty.basemodule.trade.bean.IDinnertableTradeMoveDish;
 import com.zhongmei.yunfu.db.enums.TradeStatus;
 
-/**
- * @Date 2016/6/12
- * @Description:移菜拖动view
- */
+
 public class MovedishDragView extends DirectDragableView {
     private static final String TAG = MovedishDragView.class.getSimpleName();
     private IDinnertableTradeMoveDish mModel;
@@ -41,8 +38,7 @@ public class MovedishDragView extends DirectDragableView {
             } else {
                 color = ViewUtils.COLOR_TRADE_EMPTY;
             }
-            // 未处理订单使用黑色
-            if (mModel.getTradeStatus() != TradeStatus.UNPROCESSED) {
+                        if (mModel.getTradeStatus() != TradeStatus.UNPROCESSED) {
                 statusOfView = mModel.getStatus();
                 switch (statusOfView) {
                     case UNISSUED:

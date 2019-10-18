@@ -4,11 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * @Date： 16/8/8
- * @Description:
- * @Version: 1.0
- */
+
 
 @DatabaseTable(tableName = "coup_dish")
 public class CoupDish extends EntityBase<Long> {
@@ -17,54 +13,34 @@ public class CoupDish extends EntityBase<Long> {
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * coupon_id
-         */
+
         String couponId = "coupon_id";
 
-        /**
-         * dish_id
-         */
+
         String dishId = "dish_id";
 
-        /**
-         * brand_id
-         */
+
         String brandId = "brand_id";
 
-        /**
-         * create_id
-         */
+
         String createId = "create_id";
 
-        /**
-         * create_time
-         */
+
         String createTime = "create_time";
 
-        /**
-         * updator_id
-         */
+
         String updatorId = "updator_id";
 
-        /**
-         * update_time
-         */
+
         String updateTime = "update_time";
 
-        /**
-         * is_delete
-         */
+
         String isDelete = "is_delete";
 
-        /**
-         * dish_type_id
-         */
+
         String dishTypeId = "dish_type_id";
 
     }

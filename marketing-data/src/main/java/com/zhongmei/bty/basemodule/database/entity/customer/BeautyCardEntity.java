@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.database.entity.customer;
 
 import java.io.Serializable;
 
-/**
- * Created by dingzb on 2019/5/28.
- */
+
 
 public class BeautyCardEntity implements Serializable {
 

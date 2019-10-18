@@ -16,11 +16,7 @@ import com.zhongmei.yunfu.db.entity.trade.PaymentModeShop;
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory;
 import com.zhongmei.bty.basemodule.pay.operates.PaymentModeDal;
 
-/**
- * @Date：2015年10月17日
- * @Description:处理调账界面的数据
- * @Version: 1.0
- */
+
 public class AccountReconciliationDataManager {
     private static final String TAG = AccountReconciliationDataManager.class.getSimpleName();
 
@@ -36,8 +32,7 @@ public class AccountReconciliationDataManager {
         try {
             paymentModeShops = dal.findAllPaymentMode();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            Log.e(TAG, "", e);
+                        Log.e(TAG, "", e);
         }
         if (paymentModeShops == null || paymentModeShops.size() == 0) return null;
         List<PayModeBean> payModeBeans = new ArrayList<PayModeBean>();
@@ -55,17 +50,9 @@ public class AccountReconciliationDataManager {
 
     }
 
-    /**
-     * @param accountItemBeans
-     * @param payModeBeans
-     * @return
-     * @Date 2015年10月20日
-     * @Description: 找出未出现的item
-     * @Return String
-     */
+
     public PayModeBean findNotAppearItem(List<AccountItemBean> accountItemBeans, List<PayModeBean> payModeBeans) {
-        if (accountItemBeans == null) {//第一项数据需要判断
-            if (payModeBeans != null && payModeBeans.size() > 0) {
+        if (accountItemBeans == null) {            if (payModeBeans != null && payModeBeans.size() > 0) {
                 return payModeBeans.get(0);
             } else {
                 return new PayModeBean();
@@ -81,14 +68,7 @@ public class AccountReconciliationDataManager {
         return null;
     }
 
-    /**
-     * @param name
-     * @param accountItemBeans
-     * @return
-     * @Date 2015年10月20日
-     * @Description: 判断名称是否出现在list中
-     * @Return boolean
-     */
+
     boolean isNameInAccountItemBeanList(String name, List<AccountItemBean> accountItemBeans) {
         for (AccountItemBean accountItemBean : accountItemBeans) {
             if (accountItemBean.getPayModeName().equals(name)) {
@@ -116,14 +96,7 @@ public class AccountReconciliationDataManager {
         return payModeBeans;
     }
 
-    /**
-     * @param context
-     * @param name
-     * @return
-     * @Date 2015年10月20日
-     * @Description: 获取排序索引
-     * @Return int
-     */
+
     private byte getValue(Context context, String name) {
         String[] arrays = context.getResources().getStringArray(R.array.dinner_ordercenter_account_reconciliation_payways2);
         for (byte index = 0; index < arrays.length; index++) {

@@ -13,11 +13,7 @@ import com.zhongmei.yunfu.R;
 
 import java.util.List;
 
-/**
- * 消费记录
- *
- * @date 2017/3/13 15:09
- */
+
 public class BeautyConsumeRecordAdapter1 extends RecyclerView.Adapter<BeautyConsumeRecordAdapter1.ViewHolder> {
 
     private Context mContext;
@@ -29,9 +25,7 @@ public class BeautyConsumeRecordAdapter1 extends RecyclerView.Adapter<BeautyCons
         this.mContext = context;
     }
 
-    /**
-     * 创建view
-     */
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.beauty_consume_record_item, null);
@@ -40,26 +34,20 @@ public class BeautyConsumeRecordAdapter1 extends RecyclerView.Adapter<BeautyCons
         return new ViewHolder(view, viewType);
     }
 
-    /**
-     * 赋值数据
-     */
+
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        if (mData.size() == 1) { // 只有一条数据
-            viewHolder.bottomLine.setVisibility(View.INVISIBLE);
+        if (mData.size() == 1) {             viewHolder.bottomLine.setVisibility(View.INVISIBLE);
             viewHolder.topLine.setVisibility(View.INVISIBLE);
             viewHolder.middlePoint.setImageResource(R.drawable.beauty_consume_record_stepview_pink_point);
         } else {
-            if (position + 1 == mData.size()) { // 最后一条
-                viewHolder.bottomLine.setVisibility(View.INVISIBLE);
+            if (position + 1 == mData.size()) {                 viewHolder.bottomLine.setVisibility(View.INVISIBLE);
                 viewHolder.topLine.setVisibility(View.VISIBLE);
                 viewHolder.middlePoint.setImageResource(R.drawable.beauty_consume_record_stepview_gray_point);
-            } else if (position == 0) { // 第一条
-                viewHolder.bottomLine.setVisibility(View.VISIBLE);
+            } else if (position == 0) {                 viewHolder.bottomLine.setVisibility(View.VISIBLE);
                 viewHolder.topLine.setVisibility(View.INVISIBLE);
                 viewHolder.middlePoint.setImageResource(R.drawable.beauty_consume_record_stepview_pink_point);
-            } else { // 中间
-                viewHolder.bottomLine.setVisibility(View.VISIBLE);
+            } else {                 viewHolder.bottomLine.setVisibility(View.VISIBLE);
                 viewHolder.topLine.setVisibility(View.VISIBLE);
                 viewHolder.middlePoint.setImageResource(R.drawable.beauty_consume_record_stepview_gray_point);
             }
@@ -74,10 +62,7 @@ public class BeautyConsumeRecordAdapter1 extends RecyclerView.Adapter<BeautyCons
         return mData.size() == 0 ? 0 : mData.size();
     }
 
-    /**
-     * @description (ViewHolder 绑定Item点击事件 和 item 长按事件)
-     * @time 2015年6月1日
-     */
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView time, proiects, remark;

@@ -1,18 +1,9 @@
 package com.zhongmei.bty.entity.bean.common;
 
-/**
- * 接收商户Logo更新推送的实体
- */
+
 public class PushShopLogo {
 
-    private Long id; //主键
-    private String logo;//logo URL
-    private Long brandIdenty;// 品牌id
-    private Long shopIdenty;//门店id
-    private Long updatorId;//修改人id
-    private String updatorName;//修改人姓名
-    private Long serverUpdateTime;//服务端修改时间
-
+    private Long id;     private String logo;    private Long brandIdenty;    private Long shopIdenty;    private Long updatorId;    private String updatorName;    private Long serverUpdateTime;
     public String getLogo() {
         return logo;
     }

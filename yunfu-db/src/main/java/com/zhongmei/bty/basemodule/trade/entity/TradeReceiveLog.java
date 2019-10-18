@@ -5,11 +5,7 @@ import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.DataEntityBase;
 import com.zhongmei.yunfu.db.Option;
 
-/**
- * @Date： 2017/5/17
- * @Description:订单接受记录
- * @Version: 1.0
- */
+
 
 @DatabaseTable(tableName = "trade_receive")
 public class TradeReceiveLog extends DataEntityBase implements Option {
@@ -21,40 +17,26 @@ public class TradeReceiveLog extends DataEntityBase implements Option {
         }
     }
 
-    /**
-     * The columns of table "trade_receive"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
 
-        /**
-         * trade_uuid
-         */
+
         public static final String tradeUuid = "trade_uuid";
 
-        /**
-         * op_source_id
-         */
+
         public static final String opSourceId = "op_source_id";
 
-        /**
-         * op_type
-         */
+
         public static final String opType = "op_type";
 
-        /**
-         * business_type 业务形态 1快餐 2正餐 3外卖
-         */
+
         public static final String businessType = "business_type";
 
-        /**
-         * receive_source 接单来源 1 2第三方
-         */
+
         public static final String receiverSource = "receive_source";
     }
 

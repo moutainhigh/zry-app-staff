@@ -13,12 +13,7 @@ public class CustomerUtil {
 
     public static final String SP_MEMBER_NUMBER = "sp_member_number";
 
-    /**
-     * 获取卡状态名称
-     *
-     * @param cardStatus
-     * @return
-     */
+
     public static String getStatusName(CardStatus cardStatus) {
         Resources res = BaseApplication.sInstance.getResources();
         if (cardStatus == null) {
@@ -41,14 +36,9 @@ public class CustomerUtil {
         return res.getString(R.string.eccard_not_make_card);
     }
 
-    /**
-     * 获取新增会员数量
-     *
-     * @return
-     */
+
     public static int getRegistMemberNumber() {
-        //通过接口返回数据，缓存到share，本地创建会员添加成功后更新数据，数据结构：年月日:新增会员数量
-        String memberDataStr = SharedPreferenceUtil.getSpUtil().getString(SP_MEMBER_NUMBER, "");
+                String memberDataStr = SharedPreferenceUtil.getSpUtil().getString(SP_MEMBER_NUMBER, "");
 
         if (TextUtils.isEmpty(memberDataStr)) {
             return 0;
@@ -63,22 +53,14 @@ public class CustomerUtil {
         return 0;
     }
 
-    /**
-     * 设置新增会员数量
-     *
-     * @return
-     */
+
     public static void setRegistMemberNumber(int memberNumber) {
         String curDate = DateUtil.format(System.currentTimeMillis(), DateUtil.DEFAULT_DATE_FORMAT);
 
         SharedPreferenceUtil.getSpUtil().putString(SP_MEMBER_NUMBER, curDate + ":" + memberNumber);
     }
 
-    /**
-     * 新增会员数量
-     *
-     * @param newMemberNumber
-     */
+
     public static void addRegistMemberNumber(int newMemberNumber) {
         int numberNumber = getRegistMemberNumber();
         numberNumber = numberNumber + newMemberNumber;

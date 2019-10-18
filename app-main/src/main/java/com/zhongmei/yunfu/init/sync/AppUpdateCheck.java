@@ -9,11 +9,7 @@ import com.zhongmei.yunfu.context.util.SharedPreferenceUtil;
 import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.yunfu.context.data.VersionInfo;
 
-/**
- * App升级检查
- *
- * @created 2017/05/09
- */
+
 public class AppUpdateCheck extends UpdateCheck {
 
     public AppUpdateCheck(Context context) {
@@ -23,9 +19,7 @@ public class AppUpdateCheck extends UpdateCheck {
     @Override
     protected void onSuccess(VersionInfo response) {
         ShopInfoCfg.getInstance().setAppVersionInfo(response);
-        //MainApplication.getInstance().initVersionInfo(response);
-        //VersionInfo versionInfo = MainApplication.getInstance().getVersionInfo();
-        SharedPreferenceUtil.getSpUtil().putBoolean(response.getVersionCode() + "_remind", response.hasUpdate());
+                        SharedPreferenceUtil.getSpUtil().putBoolean(response.getVersionCode() + "_remind", response.hasUpdate());
         success(mContext.getString(R.string.update_check_success));
     }
 

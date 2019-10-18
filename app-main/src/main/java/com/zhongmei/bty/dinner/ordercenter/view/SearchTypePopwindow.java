@@ -60,7 +60,6 @@ public class SearchTypePopwindow extends PopupWindow implements OnTouchListener 
         setHeight(LayoutParams.MATCH_PARENT);
         setFocusable(true);
         setTouchable(true);
-//		setOutsideTouchable(true);
         setTouchInterceptor(this);
         setBackgroundDrawable(new ColorDrawable(128));
         setAnimationStyle(R.style.dinner_table_info_waiterwindow_style);
@@ -77,8 +76,7 @@ public class SearchTypePopwindow extends PopupWindow implements OnTouchListener 
 
         private String[] contents;
 
-        private int choosePosition = -1;// 选中位置
-
+        private int choosePosition = -1;
         public SearchTypeAdapter(Context context, String[] contents) {
             this.context = context;
             this.contents = contents;
@@ -131,8 +129,6 @@ public class SearchTypePopwindow extends PopupWindow implements OnTouchListener 
 
                 @Override
                 public void onClick(View v) {
-//					setChoosePosition(position);
-//					notifyDataSetChanged();
                     chooseListener.choose(searchTypeTv.getText().toString(), (byte) position);
                     hide();
 

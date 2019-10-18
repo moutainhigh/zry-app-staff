@@ -10,11 +10,7 @@ import com.zhongmei.bty.basemodule.trade.entity.TradeStatusLog;
 
 import java.util.List;
 
-/**
- * @Date： 16/5/19
- * @Description:
- * @Version: 1.0
- */
+
 public class DepositRefundResp {
 
     private List<Trade> trades;

@@ -8,52 +8,34 @@ import com.zhongmei.yunfu.db.CrmBasicEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * EcCardKindCommercialRel is a ORMLite bean type. Corresponds to the database table "ec_card_kind_commercial_rel"
- */
+
 @DatabaseTable(tableName = "ec_card_kind_commercial_rel")
 public class EcCardKindCommercialRel extends CrmBasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "ec_card_kind_commercial_rel"
-     */
+
     public interface $ extends CrmBasicEntityBase.$ {
 
-        /**
-         * card_kind_id
-         */
+
         public static final String cardKindId = "card_kind_id";
 
-        /**
-         * commercial_id
-         */
+
         public static final String commercialId = "commercial_id";
 
-        /**
-         * commercial_type
-         */
+
         public static final String commercialType = "commercial_type";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
     }
 

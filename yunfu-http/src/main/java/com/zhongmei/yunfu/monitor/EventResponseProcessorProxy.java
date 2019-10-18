@@ -5,9 +5,7 @@ import com.zhongmei.yunfu.resp.AbsEventListener;
 import com.zhongmei.yunfu.resp.ResponseObject;
 import com.zhongmei.yunfu.resp.UserActionEvent;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class EventResponseProcessorProxy<T> extends AbsEventListenerProxy implements OpsRequest.ResponseProcessor<T> {
 

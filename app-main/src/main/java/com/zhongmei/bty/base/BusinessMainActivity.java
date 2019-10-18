@@ -25,9 +25,6 @@ import com.zhongmei.bty.dinner.orderdish.TitleBarFragment_;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.util.DensityUtil;
 
-/**
- * Created by demo on 2018/12/15
- */
 public abstract class BusinessMainActivity extends MainBaseActivity {
 
     protected int slideMenuType = SlideMenuView.SLIDE_MENU_TYPE_TRADE;
@@ -36,15 +33,11 @@ public abstract class BusinessMainActivity extends MainBaseActivity {
 
     private RelativeLayout rlRootView;
     private FrameLayout flSlideView;
-    // 遮罩层
-    private View viewShadow;
-    // 通知中心抽屉
-    private DrawerLayout dlDrawer;
-    // 滚动气泡
-    private ViewSwitcher vsNotifyBubble;
+        private View viewShadow;
+        private DrawerLayout dlDrawer;
+        private ViewSwitcher vsNotifyBubble;
 
-    //业态视图容器
-    private FrameLayout flMainFrame;
+        private FrameLayout flMainFrame;
 
     private boolean isLeftShown = false;
 
@@ -139,9 +132,6 @@ public abstract class BusinessMainActivity extends MainBaseActivity {
         }
     };
 
-    /**
-     * 打开或关闭通知中心
-     */
     public void switchDrawer() {
         if (dlDrawer.isDrawerOpen(Gravity.LEFT)) {
             dlDrawer.closeDrawer(Gravity.LEFT);
@@ -150,11 +140,6 @@ public abstract class BusinessMainActivity extends MainBaseActivity {
         }
     }
 
-    /**
-     * 关闭抽屉
-     *
-     * @return
-     */
     public boolean closeDrawer() {
         if (dlDrawer != null && dlDrawer.isDrawerOpen(Gravity.LEFT)) {
             dlDrawer.closeDrawer(Gravity.LEFT);
@@ -165,9 +150,6 @@ public abstract class BusinessMainActivity extends MainBaseActivity {
         return false;
     }
 
-    /**
-     * 显示或隐藏左侧菜单
-     */
     public void switchLeftMenu() {
         setLeftMenu(!isLeftShown);
     }
@@ -182,16 +164,14 @@ public abstract class BusinessMainActivity extends MainBaseActivity {
                 doAnimation(this, flSlideView, R.animator.fragment_slide_right_exit);
                 doAnimation(this, slideMenuView, R.animator.fragment_slide_left_enter);
 
-                // 展开左侧菜单时，显示遮罩
-                viewShadow.setVisibility(View.VISIBLE);
+                                viewShadow.setVisibility(View.VISIBLE);
             }
         } else {
             if (isLeftShown) {
                 doAnimation(this, flSlideView, R.animator.fragment_slide_right_enter);
                 doAnimation(this, slideMenuView, R.animator.fragment_slide_left_exit);
 
-                // 关闭左侧菜单时，隐藏遮罩
-                viewShadow.setVisibility(View.GONE);
+                                viewShadow.setVisibility(View.GONE);
             }
         }
         isLeftShown = visible;
@@ -203,79 +183,18 @@ public abstract class BusinessMainActivity extends MainBaseActivity {
         objectAnimator.start();
     }
 
-    /**
-     * 获取侧边栏菜单的监听
-     *
-     * @return
-     */
     protected abstract SlideMenuListener getSlideMenuListener();
 
-    /**
-     * 获取业态对应的业务类型
-     *
-     * @return
-     */
     public abstract EntranceType getEntranceType();
 
-    /**
-     * 返回各业态主入口的视图
-     */
     protected abstract View getBusinessContentView();
 
-    /**
-     * 通知订单数目显示的TextView
-     *
-     * @return
-     */
     protected abstract @NonNull
     TextView getViewNotifyCenterTip();
 
-    /**
-     * 通知其他消息数目显示的TextView
-     *
-     * @return
-     */
     protected abstract @NonNull
     TextView getViewNotifyCenterOtherTip();
 
-    /*protected void showOrderCenterFragment(int from) {
-        int childTabType = DbQueryConstant.UNPROCESSED_NEW_ORDER;
-        OrderCenterMainFragment mOrderCenterFragment = OrderCenterMainFragment.newInstance(from, childTabType);
-        replaceFragment(R.id.main_frame, mOrderCenterFragment, OrderCenterMainFragment.class.getSimpleName());
-    }*/
-
-    /**
-     * @Date 2016/6/30
-     * @Description 显示报表界面
-     * @Param
-     * @Return
-     */
-    /*protected void showReportForm() {
-        MobclickAgentEvent.onEvent(this, MobclickAgentEvent.ReportFormMainFragmentShowReportForm);
-        VerifyHelper.verifyAlert(this, DinnerApplication.PERMISSION_DINNER_REPORT_FORM,
-                new VerifyHelper.Callback() {
-                    @Override
-                    public void onPositive(User user, String code, Auth.Filter filter) {
-                        super.onPositive(user, code, filter);
-                        ReportFormMainFragment mReportFormFragment = new ReportFormMainFragment();
-                        replaceFragment(R.id.main_frame, mReportFormFragment, ReportFormMainFragment.class.getSimpleName());
-                    }
-                });
-    }*/
-
-
-    /*protected void showShopManagementMainFragment(int from, ChangePageListener mChangePageListener) {
-        int tab = getIntent().getIntExtra(ShopManagementMainFragment.KEY_TAB, ShopManagementMainFragment.TAB_BALANCE);
-        ShopManagementMainFragment mShopManagerFragment = ShopManagementMainFragment.newInstance(from, tab);
-        mShopManagerFragment.registerListener(mChangePageListener);
-        replaceFragment(R.id.main_frame, mShopManagerFragment, ShopManagementMainFragment.class.getSimpleName());
-    }*/
-
-    /**
-     * 设置当前选中的fragment标识
-     *
-     * @param pageNo
-     */
     protected void onModelChecked(int pageNo) {
         if (slideMenuView != null) {
             slideMenuView.onModelClick(pageNo);

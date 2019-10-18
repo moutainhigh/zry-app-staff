@@ -16,49 +16,23 @@ import com.zhongmei.yunfu.context.util.SystemUtils;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * @Date：2015-9-16 下午7:45:35
- * @Description: 保存一个其它支付数据
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class PayModelItem implements Serializable {
     private static final long serialVersionUID = 1L;
-    private PaymentModeShop paymentModeShop;//自定义支付数据
-    private IGroupBuyingCoupon tuanGouCouponDetail;//美团团购券信息(百度糯米券口碑券)
-    private PosTransLog posTransLog;// 银联pos扣款信息add 20161128
-    private PayModeId payModeId;//支付方式类型
-    private int usedCount;//使用次数
-    private PayType payType;//区分主扫还是被扫
-    private String authCode;//付款码，支付上行数据
-    private BigDecimal noDiscountAmount;//不参与优惠金额
-    private PasswordType passwordType;//密码类别 add 20170612 会员扫码支付需要
-    private String uuid;
-    private BigDecimal usedValue;//使用的金额
-    private BigDecimal ChangeAmount = BigDecimal.ZERO;//找零金额//add 20161123
-    private MeituanDishVo meituanDishVo;//add 2017.11.16
-    private String deviceId;//add 8.7 手环id
-
-    // 构造方法1
-    public PayModelItem(PaymentModeShop payModeShop) {
+    private PaymentModeShop paymentModeShop;    private IGroupBuyingCoupon tuanGouCouponDetail;    private PosTransLog posTransLog;    private PayModeId payModeId;    private int usedCount;    private PayType payType;    private String authCode;    private BigDecimal noDiscountAmount;    private PasswordType passwordType;    private String uuid;
+    private BigDecimal usedValue;    private BigDecimal ChangeAmount = BigDecimal.ZERO;    private MeituanDishVo meituanDishVo;    private String deviceId;
+        public PayModelItem(PaymentModeShop payModeShop) {
         this.paymentModeShop = payModeShop;
         this.payModeId = ValueEnums.toEnum(PayModeId.class, paymentModeShop.getErpModeId());
     }
 
-    //构造方法2 modify 20161127
-    /*public PayModelItem(TuanGouCouponDetail meiTuanCoupon) {
-        this.tuanGouCouponDetail = meiTuanCoupon;
-        this.payModeId = PayModeId.MEITUAN_TUANGOU;
-    }*/
 
-    //构造方法3 add 20161123
-    public PayModelItem(PayModeId payModeId) {
+
+        public PayModelItem(PayModeId payModeId) {
         this.payModeId = payModeId;
     }
 
-    //构造方法4 add 20161226 for BaiDuNuoMiQuan
-    public PayModelItem(PayModeId payModeId, IGroupBuyingCoupon meiTuanCoupon) {
+        public PayModelItem(PayModeId payModeId, IGroupBuyingCoupon meiTuanCoupon) {
         this.payModeId = payModeId;
         this.tuanGouCouponDetail = meiTuanCoupon;
     }
@@ -110,8 +84,7 @@ public class PayModelItem implements Serializable {
 
     public void setPosTransLog(PosTransLog posTransLog) {
         this.posTransLog = posTransLog;
-        if (posTransLog != null) {//add 20170314银联刷卡uuid取PosTransLog记录uuid
-            this.uuid = posTransLog.getUuid();
+        if (posTransLog != null) {            this.uuid = posTransLog.getUuid();
         }
     }
 
@@ -123,11 +96,9 @@ public class PayModelItem implements Serializable {
         this.payModeId = payModeId;
     }
 
-    //面值
-    public BigDecimal getUsedValue() {
+        public BigDecimal getUsedValue() {
         if (this.payModeId == PayModeId.MEITUAN_TUANGOU || this.payModeId == PayModeId.BAINUO_TUANGOU || this.payModeId == PayModeId.KOUBEI_TUANGOU) {
-            return this.usedValue;//美团、百度糯米券、口碑
-        } else {
+            return this.usedValue;        } else {
             if (isAutoInput()) {
                 return usedValue;
             } else {
@@ -140,39 +111,29 @@ public class PayModelItem implements Serializable {
         }
     }
 
-    //成本价
-    public BigDecimal getActualValue() {
+        public BigDecimal getActualValue() {
 
         if (this.payModeId == PayModeId.MEITUAN_TUANGOU || this.payModeId == PayModeId.BAINUO_TUANGOU || this.payModeId == PayModeId.KOUBEI_TUANGOU) {
-            return this.tuanGouCouponDetail.getPrice().multiply(new BigDecimal(usedCount));//美团售价、 百度糯米券
-        } else if (this.payModeId == PayModeId.CASH) {//现金实收要减去找零
-            return MathDecimal.round(getUsedValue().subtract(getChangeAmount()), 2);
+            return this.tuanGouCouponDetail.getPrice().multiply(new BigDecimal(usedCount));        } else if (this.payModeId == PayModeId.CASH) {            return MathDecimal.round(getUsedValue().subtract(getChangeAmount()), 2);
         } else {
             if (isAutoInput()) {
-                return usedValue;//手动输入金额
-            } else {
+                return usedValue;            } else {
                 if (usedCount > 0) {
-                    return paymentModeShop.getFaceValue().multiply(new BigDecimal(usedCount));//面值
-                } else {
+                    return paymentModeShop.getFaceValue().multiply(new BigDecimal(usedCount));                } else {
                     return BigDecimal.ZERO;
                 }
             }
         }
     }
 
-    //票面金额
-    public BigDecimal getFaceValue() {
+        public BigDecimal getFaceValue() {
         if (this.payModeId == PayModeId.MEITUAN_TUANGOU || this.payModeId == PayModeId.BAINUO_TUANGOU || this.payModeId == PayModeId.KOUBEI_TUANGOU) {
-            return this.tuanGouCouponDetail.getMarketPrice().multiply(new BigDecimal(usedCount));//美团、 百度糯米券、口碑券面额
-        } else if (this.payModeId == PayModeId.CASH) {//现金实收要减去找零
-            return MathDecimal.round(getUsedValue(), 2);
+            return this.tuanGouCouponDetail.getMarketPrice().multiply(new BigDecimal(usedCount));        } else if (this.payModeId == PayModeId.CASH) {            return MathDecimal.round(getUsedValue(), 2);
         } else {
             if (isAutoInput()) {
-                return usedValue;//手动输入金额
-            } else {
+                return usedValue;            } else {
                 if (usedCount > 0 && paymentModeShop != null) {
-                    return paymentModeShop.getFaceValue().multiply(new BigDecimal(usedCount));//面值
-                } else {
+                    return paymentModeShop.getFaceValue().multiply(new BigDecimal(usedCount));                } else {
                     return BigDecimal.ZERO;
                 }
             }
@@ -196,24 +157,9 @@ public class PayModelItem implements Serializable {
         }
 
         switch (this.payModeId) {
-            case CASH://现金
-            case BANK_CARD://银行卡(记账)
-            case POS_CARD://银联pos刷卡
-            case WEIXIN_PAY://微信支付
-            case ALIPAY://支付宝
-            case BAIFUBAO://百度钱包
-            case MEMBER_CARD://会员卡余额
-            case ENTITY_CARD://会员实体卡
-            case ANONYMOUS_ENTITY_CARD://匿名实体卡余额
-            case MEITUAN_FASTPAY://美团闪付
-            case MEITUAN_TUANGOU://美团团购
-            case DIANPING_COUPON://点评团购劵
-            case BAINUO_TUANGOU://百度糯米券
-            case KOUBEI_TUANGOU://口碑券
-                return true;
+            case CASH:            case BANK_CARD:            case POS_CARD:            case WEIXIN_PAY:            case ALIPAY:            case BAIFUBAO:            case MEMBER_CARD:            case ENTITY_CARD:            case ANONYMOUS_ENTITY_CARD:            case MEITUAN_FASTPAY:            case MEITUAN_TUANGOU:            case DIANPING_COUPON:            case BAINUO_TUANGOU:            case KOUBEI_TUANGOU:                return true;
 
-            default://其它自定义支付
-                if (paymentModeShop != null) {
+            default:                if (paymentModeShop != null) {
                     if (paymentModeShop.getFaceValue() != null) {
                         return false;
                     } else {
@@ -234,22 +180,17 @@ public class PayModelItem implements Serializable {
     }
 
     public Long getPayModelId() {
-        if (this.payModeId == PayModeId.MEITUAN_TUANGOU) {//美团券
-            return Long.valueOf(tuanGouCouponDetail.getSerialNumber());
+        if (this.payModeId == PayModeId.MEITUAN_TUANGOU) {            return Long.valueOf(tuanGouCouponDetail.getSerialNumber());
 
-        } else if (this.payModeId == PayModeId.BAINUO_TUANGOU) {//百度糯米券
-            return Long.valueOf(tuanGouCouponDetail.getSerialNumber());
+        } else if (this.payModeId == PayModeId.BAINUO_TUANGOU) {            return Long.valueOf(tuanGouCouponDetail.getSerialNumber());
 
-        } else if (this.payModeId == PayModeId.KOUBEI_TUANGOU) {//口碑券券
-            return Long.valueOf(tuanGouCouponDetail.getSerialNumber());
+        } else if (this.payModeId == PayModeId.KOUBEI_TUANGOU) {            return Long.valueOf(tuanGouCouponDetail.getSerialNumber());
 
         } else {
             if (paymentModeShop != null) {
-                return paymentModeShop.getErpModeId();//其它自定义券
-
+                return paymentModeShop.getErpModeId();
             } else {
-                return this.payModeId.value();//现金、银联等手动输入金额
-
+                return this.payModeId.value();
             }
         }
     }

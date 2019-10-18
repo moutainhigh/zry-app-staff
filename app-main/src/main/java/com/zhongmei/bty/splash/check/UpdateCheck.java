@@ -15,11 +15,7 @@ import com.zhongmei.yunfu.http.CalmStringRequest;
 
 import java.util.Set;
 
-/**
- * 检查更新基类
- *
- * @created 2017/05/09
- */
+
 public abstract class UpdateCheck extends Check {
 
     private String checkUrl;
@@ -36,8 +32,7 @@ public abstract class UpdateCheck extends Check {
         CalmStringRequest quest1 = new CalmStringRequest(mContext, Method.GET,
                 checkUrl,
                 responseListener(), errorListener());
-        quest1.executeRequest("2");// , "server address");
-    }
+        quest1.executeRequest("2");    }
 
     private Response.Listener<String> responseListener() {
         return new EventListener<String>(UserActionEvent.INIT_PROCESS) {
@@ -48,18 +43,7 @@ public abstract class UpdateCheck extends Check {
                     onError(mContext.getString(R.string.update_check_failed));
                 } else {
                     OSLog.info("onResponse =" + response);
-                    /*try {
-                        JSONObject obj = new JSONObject(response);
-                        String status = obj.getString("status");
-                        if (!TextUtils.isEmpty(status)) {
-                            onQuerySuccess(response);
-                        } else {
-                            onError(mContext.getString(R.string.update_check_failed));
-                        }
-                    } catch (Exception e) {
-                        OSLog.error("onResponse is is error,and e.message=" + e.getMessage());
-                        onError(mContext.getString(R.string.update_check_failed));
-                    }*/
+
 
                     VersionInfo versionInfo = VersionInfo.create(response);
                     if (versionInfo != null) {
@@ -74,9 +58,7 @@ public abstract class UpdateCheck extends Check {
     }
 
     protected void onSuccess(VersionInfo response) {
-        /*MainApplication.getInstance().initVersionInfo(response);
-        VersionInfo versionInfo = MainApplication.getInstance().getVersionInfo();
-        SharedPreferenceUtil.getSpUtil().putBoolean(versionInfo.getUpdateVersion() + "_remind", versionInfo.hasUpdate());*/
+
         success(mContext.getString(R.string.update_check_success));
     }
 

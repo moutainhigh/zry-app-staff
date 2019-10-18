@@ -37,10 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * 团餐购物车工具类
- * Created by demo on 2018/12/15
- */
+
 public class GroupShoppingCartTool {
 
     private static Map<Long, List<IShopcartItem>> typeMap = null;
@@ -49,27 +46,18 @@ public class GroupShoppingCartTool {
 
     protected static final Long otherTypeId = -10000L;
 
-    /**
-     * 将菜单和开台数据带入购物车
-     *
-     * @param dishMenuVo 模板可能为null
-     */
+
     public static void addMenuToShopcart(DishMenuVo dishMenuVo, DinnerShoppingCart shoppingCart) {
         if (dishMenuVo == null || Utils.isEmpty(dishMenuVo.getCarteDetailList())) {
             return;
         }
         ShoppingCartVo dinnerShoppingCartVo = shoppingCart.getShoppingCartVo();
-        //存储数量
-        Map<Long, BigDecimal> disCartNumMap = new HashMap<>();
+                Map<Long, BigDecimal> disCartNumMap = new HashMap<>();
         List<DishCarteDetail> dishCarteDetailList = dishMenuVo.getCarteDetailList();
-        //子菜map
-        Map<Long, List<DishCarteDetail>> detailMap = new HashMap<Long, List<DishCarteDetail>>();
-        //单菜list
-        List<DishShop> singleList = new ArrayList<>();
-        //套餐list
-        List<DishShop> comboList = new ArrayList<>();
-        //存储菜品的备注
-        Map<Long, String> memoMap = new HashMap<>();
+                Map<Long, List<DishCarteDetail>> detailMap = new HashMap<Long, List<DishCarteDetail>>();
+                List<DishShop> singleList = new ArrayList<>();
+                List<DishShop> comboList = new ArrayList<>();
+                Map<Long, String> memoMap = new HashMap<>();
         if (Utils.isNotEmpty(dishCarteDetailList)) {
             for (DishCarteDetail detail : dishCarteDetailList) {
                 DishShop dishShop = DishCache.getDishHolder().get(detail.getDishUuid());
@@ -161,20 +149,14 @@ public class GroupShoppingCartTool {
         return shopcartItem.getSingleQty();
     }
 
-    /**
-     * 获取分组菜品的市场价
-     *
-     * @param shopcartItemList
-     * @return
-     */
+
     public static BigDecimal getGroupDiffAmount(BigDecimal dishMenuPrice, List<IShopcartItem> shopcartItemList, BigDecimal deskCount) {
         BigDecimal totalMarketPrice = BigDecimal.ZERO;
         for (IShopcartItem shopcartItem : shopcartItemList) {
             if (!shopcartItem.isGroupDish() || shopcartItem.getStatusFlag() == StatusFlag.INVALID) {
                 continue;
             }
-            //怎么拿到实际价格,保存过的菜没有实际价格
-            if (shopcartItem instanceof ReadonlyShopcartItem) {
+                        if (shopcartItem instanceof ReadonlyShopcartItem) {
                 DishShop dishShop = DishCache.getDishHolder().get(shopcartItem.getSkuUuid());
                 if (dishShop == null) {
                     continue;
@@ -196,11 +178,7 @@ public class GroupShoppingCartTool {
         return diff.negate();
     }
 
-    /**
-     * 计算保存过的菜品价格
-     *
-     * @return
-     */
+
     private static BigDecimal mathSaveGroupDishPrice(IShopcartItemBase shopcartItem, BigDecimal deskCount) {
         BigDecimal totalMarketPrice = BigDecimal.ZERO;
         List<? extends IOrderProperty> properties = shopcartItem.getProperties();
@@ -227,19 +205,14 @@ public class GroupShoppingCartTool {
         return totalMarketPrice;
     }
 
-    /**
-     * 创建分类
-     *
-     * @param dataList
-     */
+
     public static List<IShopcartItem> buildTypeMap(List<IShopcartItem> dataList) {
         List<IShopcartItem> filterList = new ArrayList<>();
 
         typeMap = new HashMap<Long, List<IShopcartItem>>();
         singleTypeMap = new HashMap<Long, List<IShopcartItem>>();
         if (dataList != null && dataList.size() > 0) {
-            // 遍历购物车中的菜品，对菜品进行分组
-            for (int i = 0; i < dataList.size(); i++) {
+                        for (int i = 0; i < dataList.size(); i++) {
 
                 IShopcartItem shopCartItem = dataList.get(i);
 
@@ -250,8 +223,7 @@ public class GroupShoppingCartTool {
                     continue;
                 }
 
-                //添加商品，用来做累计商品数量
-                filterList.add(shopCartItem);
+                                filterList.add(shopCartItem);
 
                 Long typeId = otherTypeId;
                 DishShop dishShop = shopCartItem.getDishShop();

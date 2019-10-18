@@ -2,17 +2,10 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 
 import java.io.Serializable;
 
-/**
- * 核数 统计
- * Created by demo on 2018/12/15
- */
+
 public class TradeAVGCount implements Serializable {
-    private String peopleCount;//来客数
-    private Integer tradeType;//订单类型
-    private Long tradeCount;//账单数据量
-    private String name;
-    private String tradeAmount;//金额
-    private String unitName;
+    private String peopleCount;    private Integer tradeType;    private Long tradeCount;    private String name;
+    private String tradeAmount;    private String unitName;
     private String unitDisplayName;
 
     public String getUnitDisplayName() {

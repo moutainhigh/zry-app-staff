@@ -96,9 +96,7 @@ import java.util.regex.Pattern;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.dinner_customer_login_fragment_layout)
 public class DinnerCustomerLoginFragment extends BasicFragment {
     public static final String TAG = DinnerCustomerLoginFragment.class.getSimpleName();
@@ -149,22 +147,15 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
 
     boolean isOpenWeChat, isNeedOpenId;
 
-    // 人脸ID
-    private String mFaceCode;
+        private String mFaceCode;
 
-    //private FaceFeature mFaceFeature;
 
-    private boolean isLogin = false;//判断是否已经登录避免重复登录
-
+    private boolean isLogin = false;
     private ScanCodeManager mScanCodeManager;
 
     private int loginType = LOGIN_MOBILE;
 
-    /**
-     * 标记进入模式
-     *
-     * @see com.zhongmei.beauty.customer.constants.BeautyCustomerConstants.CustomerLoginLaunchMode
-     */
+
     private int mLaunchMode;
 
     private DinnerCustomerLoginDialogFragment.CallbackListener listener;
@@ -217,9 +208,6 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         switchTitle();
         setupCountryView();
         isShowQrCode();
-//        InputFilter[] filters = {new InputFilter.LengthFilter(20)};
-//        mShowValue.setFilters(filters);
-//        mShowValue.addTextChangedListener(mTextWatcher);
         mShowValue.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -270,14 +258,6 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
     }
 
     private void isShowQrCode() {
-//        if (loginType==LOGIN_MOBILE) {//没有开通微信公众号
-////            mTvScanDesc.setText(getString(R.string.customer_login_desc_2));
-//            mTvScanDesc.setVisibility(View.GONE);
-//        } else {
-//            mTvScanDesc.setVisibility(View.VISIBLE);
-//            mTvScanDesc.setText(getString(R.string.customer_login_desc_1));
-//        }
-//        getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
     }
 
     private TextWatcher mTextWatcher = new TextWatcher() {
@@ -294,8 +274,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         public void afterTextChanged(Editable s) {
             String inputStr = s.toString();
             Log.e("loginFragment","inputStr:"+inputStr);
-            if (inputStr.endsWith("\n")) {//处理回车事件
-                verification();
+            if (inputStr.endsWith("\n")) {                verification();
                 return;
             }
             if (!TextUtils.isEmpty(mShowValue.getText())) {
@@ -315,13 +294,10 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                     mLoginBtn.setBackgroundResource(R.drawable.orderdish_clear_status_select_all_not_enabled);
                 }
             }
-//            getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
         }
     };
 
-    /**
-     * 校验
-     */
+
     private void verification() {
         final String inputNo = mShowValue.getText().toString().replace("\n", "").trim();
         if (TextUtils.isEmpty(inputNo)) {
@@ -339,7 +315,6 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                 break;
             case LOGIN_CARD:
                 showPasswordDialog(inputNo);
-//                getCardBaseInfo(inputNo);// v8.2支持刷卡登录会员，先校验卡，在校验手机
                 break;
             default:
                 break;
@@ -374,7 +349,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         });
     }
 
-    /*   * 获取卡的基本信息*/
+
     private void getCardBaseInfo(final String inputNo) {
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<CardBaseInfoResp> listener =
@@ -417,12 +392,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
     }
 
 
-    /**
-     * 使用会员卡号登录
-     *
-     * @Title: loginByCardNo
-     * @Return void 返回类型
-     */
+
     private void loginByCardNo(String input, boolean needPswd, final String pswd, final PasswordDialog dialog) {
         CustomerManager.getInstance().customerLogin(CustomerLoginType.CARD_NO_ENTITY, input, pswd, needPswd, false, true,
                 getResponseMemberLogin(needPswd, dialog, UserActionEvent.DINNER_PAY_LOGIN_INPUT_MOBILE, CustomerLoginType.MOBILE));
@@ -438,21 +408,12 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         operates.validationMemberPwd(getActivity(), req, listener);
     }
 
-    /**
-     * 使用微信扫码登录
-     */
+
     private void loginByWeChat(Long customerId) {
         CustomerManager.getInstance().customerLogin(CustomerLoginType.MEMBER_ID, customerId.toString(), null, false, true, getResponseMemberLogin(false, null, UserActionEvent.DINNER_PAY_LOGIN_SCAN_WECHAT_CODE, CustomerLoginType.MEMBER_ID));
     }
 
-    /**
-     * 手机号登录
-     *
-     * @param input
-     * @param needPswd
-     * @param pswd
-     * @param dialog
-     */
+
     private void loginByMobile(String input, boolean needPswd, final String pswd, final PasswordDialog dialog) {
         String telCode = mErpCurrency != null && mErpCurrency.getAreaCode() != null ? mErpCurrency.getAreaCode() : null;
         String country = mErpCurrency != null && mErpCurrency.getCountryZh() != null ? mErpCurrency.getCountryZh() : null;
@@ -461,32 +422,16 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                 getResponseMemberLogin(needPswd, dialog, UserActionEvent.DINNER_PAY_LOGIN_INPUT_MOBILE, CustomerLoginType.MOBILE));
     }
 
-    /**
-     * customerId登录
-     *
-     * @param customerId
-     * @param needPswd
-     * @param pswd
-     * @param dialog
-     */
+
     private void loginByCustomerId(Long customerId, boolean needPswd, final String pswd, final PasswordDialog dialog) {
         CustomerManager.getInstance().customerLogin(CustomerLoginType.MEMBER_ID, customerId.toString(), pswd, needPswd, false, true,
                 getResponseMemberLogin(needPswd, dialog, UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE, CustomerLoginType.MEMBER_ID));
     }
 
-    /**
-     * 人脸识别登录
-     */
-    /*private void loginByFace() {
-        CustomerManager.getInstance().customerLoginByFace(mFaceCode, false, true,
-                getResponseMemberLogin(false, null, UserActionEvent.DINNER_PAY_LOGIN_INPUT_FACE, CustomerLoginType.FACE_CODE));
-    }*/
 
-    /**
-     * 微信登录
-     *
-     * @param number
-     */
+
+
+
     private void loginByWeixin(final String number) {
         ResponseListener<MemberLoginVoResp> listener = new EventResponseListener<MemberLoginVoResp>(UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE) {
             @Override
@@ -496,8 +441,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                         return;
                     }
                     CustomerLoginResp resp = response.getContent().getResult();
-                    if (resp.customerIsDisable()) {//当前账号冻结
-                        ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                    if (resp.customerIsDisable()) {                        ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                     } else {
                         isLogin = true;
                         CustomerResp customerNew = resp.getCustomer();
@@ -507,20 +451,13 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                         TradeCustomer tradeCustomer = CustomerManager.getInstance().getTradeCustomer(customerNew);
                         tradeCustomer.setCustomerType(CustomerType.MEMBER);
                         ToastUtil.showShortToast(R.string.customer_login);
-                        // 登录成功后第二屏显示用户信息
-                        /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_USERINFO_SHOW, customerNew, customerNew.integral, false, 0);
-                        DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
-                        //数据设置
-                        EventBus.getDefault().post(new EventReadKeyboard(true, ""));// 发送成功到ReadKeyboardDialogFragment
-                        DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
+
+                                                EventBus.getDefault().post(new EventReadKeyboard(true, ""));                        DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
                         if (mLaunchMode == BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE) {
-                            // 卡登录直接跳转充值
-//                            showChargingDialog(customerNew , null);
-                            showCustomerCardDialoig(customerNew);
+                                                        showCustomerCardDialoig(customerNew);
                         } else {
                             new DinnerCashManager().jumpAfterLogin("", customerNew, null);
                         }
-//                        new DinnerCashManager().jumpAfterLogin("", customerNew, null);
                         DinnerShopManager.getInstance().getShoppingCart().setOpenIdenty(resp.getOpenId());
                         getParentDialogFragment().dismiss();
                     }
@@ -539,13 +476,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         CustomerManager.getInstance().customerLogin(CustomerLoginType.WECHAT_MEMBERCARD_ID, number, "", false, false, true, LoadingResponseListener.ensure(listener, getChildFragmentManager()));
     }
 
-    /**
-     * 登录成功回调
-     *
-     * @param needPswd
-     * @param dialog
-     * @return
-     */
+
     private YFResponseListener<YFResponse<CustomerLoginResp>> getResponseMemberLogin(final boolean needPswd, final PasswordDialog dialog, UserActionEvent event, final CustomerLoginType customerLoginType) {
         YFResponseListener<YFResponse<CustomerLoginResp>> response = new YFResponseListener<YFResponse<CustomerLoginResp>>() {
             @Override
@@ -558,10 +489,8 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                         if (dialog != null && dialog.isShowing()) {
                             dialog.dismiss();
                         }
-                        //response.getContent().setCustomerLoginType(customerLoginType);
-                        CustomerLoginResp resp = response.getContent();
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                                                CustomerLoginResp resp = response.getContent();
+                        if (resp.customerIsDisable()) {                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                         } else {
                             isLogin = true;
                             CustomerResp customerNew = resp.getCustomer();
@@ -581,27 +510,15 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                             }
                             ToastUtil.showShortToast(R.string.customer_login);
                             mShowValue.setText("");
-                            // 登录成功后第二屏显示用户信息
-                            /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_USERINFO_SHOW, customerNew, customerNew.integral, false, 0);
-                            if (mFaceFeature != null) {
-                                dUserInfo.setFaceFeature(mFaceFeature.getFaceType(), mFaceFeature.getFaceTypeDescribe(), mFaceFeature.getFaceScoreDescribe(), mFaceFeature.getGender());
-                                customerNew.mFaceFeatureVo = mFaceFeature.getFaceFeatureVo();
-                            }
-                            DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
-                            EventBus.getDefault().post(new EventReadKeyboard(true, ""));// 发送成功到ReadKeyboardDialogFragment
-//                            DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
-                            if (mLaunchMode == BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE) {
-                                // 顾客登录跳转到选卡界面
-//                                showChargingDialog(customerNew , null);
-                                showCustomerCardDialoig(customerNew);
+
+                            EventBus.getDefault().post(new EventReadKeyboard(true, ""));                            if (mLaunchMode == BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE) {
+                                                                showCustomerCardDialoig(customerNew);
                             } else {
                                 new DinnerCashManager().jumpAfterLogin("", customerNew, null);
                             }
-//                            new DinnerCashManager().jumpAfterLogin("", customerNew, null);
                             DinnerShopManager.getInstance().getShoppingCart().setOpenIdenty(resp.getOpenId());
                             if (customerLoginType == CustomerLoginType.FACE_CODE) {
-                                /*DinnerShopManager.getInstance().getLoginCustomer().faceGrade = (int) mFaceFeature.getBeauty();
-                                showFaceGrade();*/
+
                             } else {
                                 getParentDialogFragment().dismiss();
                             }
@@ -616,9 +533,7 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                         } else {
                             msg = response.getMessage();
                         }
-                        EventBus.getDefault().post(new EventReadKeyboard(false, msg));// 发送失败到ReadKeyboardDialogFragment
-                        loginFail(msg, !needPswd);//不需要验证密码的模式下，要清空输入框
-                    }
+                        EventBus.getDefault().post(new EventReadKeyboard(false, msg));                        loginFail(msg, !needPswd);                    }
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
                 }
@@ -627,35 +542,26 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
             @Override
             public void onError(VolleyError error) {
                 ToastUtil.showLongToast(error.getMessage());
-                EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));// 发送失败到ReadKeyboardDialogFragment
-            }
+                EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));            }
         };
         return LoadingYFResponseListener.ensure(response, getSupportFragmentManager());
     }
 
-    /**
-     * 卡登录下行处理
-     *
-     * @param resp
-     * @param card
-     */
+
     private void setLoginByCardNo(CardLoginResp resp, EcCard card) {
         isLogin = true;
-        //add v8.2 start 获取当前登录的卡是否开启会员价限制开关
-        EcCardKind cardKind = resp.getResult().getCardKind();
+                EcCardKind cardKind = resp.getResult().getCardKind();
         if (cardKind != null && cardKind.priceLimit != null) {
             CustomerManager.getInstance().setCurrentCardIsPriceLimit(cardKind.priceLimit == 2 ? true : false);
         }
-        //add v8.2 end  获取当前登录的卡是否开启会员价限制开关
-        CustomerV5 customerV5 = resp.getResult().getCustomer();
+                CustomerV5 customerV5 = resp.getResult().getCustomer();
         card.setName(customerV5.getName());
         card.setCardLevel(resp.getResult().getCardLevel());
         card.setCardLevelSetting(resp.getResult().getCardLevelSetting());
         card.setCardSettingDetails(resp.getResult().getCardSettingDetails());
         card.setIntegralAccount(resp.getResult().getIntegralAccount());
         card.setValueCardAccount(resp.getResult().getValueCardAccount());
-        card.setCardKind(cardKind); // 8.3添加  结账界面 储值屏蔽售卡即激活的卡片 的 充值
-        card.setCustomer(customerV5);
+        card.setCardKind(cardKind);         card.setCustomer(customerV5);
         CustomerResp customerNew = resp.getCustomer();
         customerNew.queryLevelRightInfos();
         TradeCustomer tradeCustomer = CustomerManager.getInstance().getTradeCustomer(card.getCustomer());
@@ -663,81 +569,48 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         tradeCustomer.setEntitycardNum(card.getCardNum());
         ToastUtil.showShortToast(R.string.customer_login);
         mShowValue.setText("");
-        // 如果有积分抵现
-        BigDecimal integral = BigDecimal.ZERO;
+                BigDecimal integral = BigDecimal.ZERO;
         if (card.getIntegralAccount() != null && card.getIntegralAccount().getIntegral() != null) {
             integral = BigDecimal.valueOf(card.getIntegralAccount().getIntegral());
         }
-        /*DisplayUserInfo dUserInfo = DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_USERINFO_SHOW, customerNew, integral.longValue(), false, 0);// 登录成功后第二屏显示用户信息
-        DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
-        //跳转
-        if (mLaunchMode == BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE) {
-            // 卡登录直接跳转充值
-            showChargingDialog(null, card.getEcCardInfo());
+
+                if (mLaunchMode == BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE) {
+                        showChargingDialog(null, card.getEcCardInfo());
         } else {
             new DinnerCashManager().jumpAfterLogin("", customerNew, null);
         }
         getParentDialogFragment().dismiss();
     }
 
-    /**
-     * 登录失败的响应
-     */
+
     private void loginFail(String message, boolean clearInput) {
         ToastUtil.showShortToast(message);
         mShowValue.clearFocus();
         mShowValue.setText("");
         mShowValue.requestFocus();
         mShowValue.findFocus();
-//        if (clearInput) {
-//
-////            mShowValue.startAnimation(shakeAnimation(6));
-//        }
-//        getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
     }
 
     public static Animation shakeAnimation(int counts) {
         Animation translateAnimation = new TranslateAnimation(0, 15, 0, 0);
-        // 设置一个循环加速器，使用传入的次数就会出现摆动的效果。
-        translateAnimation.setInterpolator(new CycleInterpolator(counts));
+                translateAnimation.setInterpolator(new CycleInterpolator(counts));
         translateAnimation.setDuration(500);
         return translateAnimation;
     }
 
 
-    /**
-     * 获取父实例
-     *
-     * @return
-     */
+
     DinnerCustomerLoginBasicDialogFragment getParentDialogFragment() {
         return (DinnerCustomerLoginBasicDialogFragment) getParentFragment();
     }
 
 
-    /**
-     * 人脸评分
-     */
+
     private void showFaceGrade() {
-        /*if (mFaceFeature == null) {
-            return;
-        }
-        FaceGradeDialogFragment dialogFragment = new FaceGradeDialogFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(FaceGradeDialogFragment.KEY_FACE_FEATURE, mFaceFeature);
-        dialogFragment.setArguments(bundle);
-        dialogFragment.setOnFaceGradeListener(new FaceGradeDialogFragment.OnFaceGradeListener() {
-            @Override
-            public void onDismissListener() {
-                getParentDialogFragment().dismiss();
-            }
-        });
-        dialogFragment.show(getFragmentManager(), "showFaceGrade");*/
+
     }
 
-    /**
-     * 加载人脸登录错误view
-     */
+
     private void showFaceLoginErrorView() {
         mLlLoginLayout.setVisibility(View.GONE);
         if (listener != null) {
@@ -745,45 +618,19 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         }
     }
 
-    /*开启扫码*/
+
 
     private void startScanQc() {
         mShowValue.requestFocus();
-//        startScan();
     }
 
-//    /* 开始扫码并获取焦点*/
-//    private void startScan() {
-//        mScanCodeManager = new ScanCodeManager(getActivity(), mShowValue, true);
-//        mScanCodeManager.start(new ScanCode.ScanCodeReceivedListener() {
-//            @Override
-//            public void onScanCodeReceived(String data) {
-//                if (!TextUtils.isEmpty(data)) {
-//                    UserActionEvent.start(UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE);
-//                    loginByWeixin(data);        //微信登录
-//                }
-//            }
-//        });
-//        // add v8.8 begin
-//        DeWoScanCode.getInstance().registerReceiveDataListener(new DeWoScanCode.OnReceiveDataListener() {
-//            @Override
-//            public void onReceiveData(String data) {
-//                UserActionEvent.start(UserActionEvent.DINNER_PAY_LOGIN_SCAN_CODE);
-//                loginByWeixin(data);        //微信登录
-//            }
-//        });
-//        // add v8.8 end
-//    }
 
-    /**
-     * OpenId登录
-     */
+
     public void onEventMainThread(EventOpenIdLoginInfo event) {
         if (event != null) {
             OpenIdLoginInfo openIdLoginInfo = event.getmOpenIdLoginInfo();
             if (openIdLoginInfo.getResult()) {
-                if (getParentDialogFragment().requestUuid.equals(openIdLoginInfo.getUuid())) {//同一次登录请求
-                    CommCustomer customer = openIdLoginInfo.getCustomer();
+                if (getParentDialogFragment().requestUuid.equals(openIdLoginInfo.getUuid())) {                    CommCustomer customer = openIdLoginInfo.getCustomer();
                     if (customer != null) {
                         loginByWeChat(customer.getId());
                     }
@@ -816,9 +663,6 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
 
     @Override
     public void onPause() {
-//        if (mScanCodeManager != null) { // 关闭扫码枪
-//            mScanCodeManager.stop();
-//        }
         super.onPause();
     }
 
@@ -891,70 +735,25 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
                 });
     }
 
-    /**
-     * 刷卡登录
-     */
+
     private void cardLogin() {
         mShowValue.requestFocus();
         DisplayServiceManager.doCancel(getActivity());
-        /*ReadCardDialogFragment readCardDialogFragment = new ReadCardDialogFragment.UionCardDialogFragmentBuilder()
-                .buildReadCardId(ReadCardDialogFragment.UionCardStaus.READ_CARD_ID_SINGLE,
-                        new ReadCardDialogFragment.CardOvereCallback() {
 
-                            @Override
-                            public void onSuccess(ReadCardDialogFragment.UionCardStaus status, String number) {
-                                getCardBaseInfo(number);
-                            }
-
-                            @Override
-                            public void onFail(ReadCardDialogFragment.UionCardStaus status, String rejCodeExplain) {
-                                if (!TextUtils.isEmpty(rejCodeExplain)) {
-                                    ToastUtil.showShortToast(rejCodeExplain);
-                                }
-                            }
-                        });
-        readCardDialogFragment.show(getFragmentManager(), "get_cardno");
-        readCardDialogFragment.setCloseListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getParentDialogFragment().showSecondDisPlay(mShowValue.getText().toString().trim());
-            }
-        });*/
     }
 
-    /**
-     * 人脸登录
-     */
+
     private void inputFace() {
-        /*boolean available = BaiduFaceRecognition.getInstance().checkFaceServer();
-        if (!available) {
-            FacecognitionActivity.showFaceServerWarmDialog(getContext(), getChildFragmentManager());
-            return;
-        }
-        startActivityForResult(BaiduFaceRecognition.getInstance().getRecognitionFaceIntent(true), FaceRequestCodeConstant.RC_DINNER_CUSTOMER_LOGIN);*/
+
     }
 
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FaceRequestCodeConstant.RC_DINNER_CUSTOMER_LOGIN && resultCode == Activity.RESULT_OK) {
-            mFaceCode = data.getStringExtra(BaiduFaceRecognition.KEY_FACE_CODE);
-            mFaceFeature = (FaceFeature) data.getSerializableExtra(BaiduFaceRecognition.KEY_FACE_FEATURE);
-            loginByFace();
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }*/
 
-    /**
-     * 实体卡会员充值界面
-     *
-     * @param customer 顾客信息
-     * @param ecCard   实体卡信息 , 会员充值 传 null
-     */
+
+
     private void showChargingDialog(CustomerResp customer, EcCardInfo ecCard) {
         CustomerChargingDialogFragment dialogFragment = new CustomerChargingDialogFragment_();
         Bundle args = new Bundle();
-        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_CARD_BEATY_MAIN);//来自顾客界面
-        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
+        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_CARD_BEATY_MAIN);        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
         if (ecCard != null) {
             args.putSerializable(CustomerChargingDialogFragment.KEY_ECCARD, ecCard);
             args.putString(CustomerChargingDialogFragment.KEY_BALANCE, ecCard.getRemainValue() != null ? ecCard.getRemainValue().toString() : "0");
@@ -965,20 +764,13 @@ public class DinnerCustomerLoginFragment extends BasicFragment {
         dialogFragment.show(getParentDialogFragment().getFragmentManager(), "ecCardCharging");
     }
 
-    /**
-     * 充值卡选择
-     */
+
     private void showCustomerCardDialoig(CustomerResp customer) {
-        /*BeautyCustomerCardDialogFragment dialog = new BeautyCustomerCardDialogFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(BeautyCustomerConstants.KEY_CUSTOMER_INFO, customer);
-        dialog.setArguments(bundle);
-        dialog.show(getParentDialogFragment().getFragmentManager(), "BeautyCustomerCardDialogFragment");*/
+
 
         CustomerChargingDialogFragment dialogFragment = new CustomerChargingDialogFragment_();
         Bundle args = new Bundle();
-        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_CARD_BEATY_MAIN);//来自顾客界面
-        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
+        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_CARD_BEATY_MAIN);        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
         args.putString(CustomerChargingDialogFragment.KEY_BALANCE, customer.remainValue != null ? customer.remainValue.toString() : "0");
         dialogFragment.setArguments(args);
         dialogFragment.show(getParentDialogFragment().getFragmentManager(), "ecCardCharging");

@@ -8,62 +8,40 @@ import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.PropertyKind;
 
-/**
- * DishBrandProperty is a ORMLite bean type. Corresponds to the database table "dish_brand_property"
- */
+
 @DatabaseTable(tableName = "dish_brand_property")
 public class DishBrandProperty extends BasicEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "dish_brand_property"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * dish_id
-         */
+
         public static final String dishId = "dish_id";
 
-        /**
-         * dish_name
-         */
+
         public static final String dishName = "dish_name";
 
-        /**
-         * property_id
-         */
+
         public static final String propertyId = "property_id";
 
-        /**
-         * property_kind
-         */
+
         public static final String propertyKind = "property_kind";
 
-        /**
-         * property_type_id
-         */
+
         public static final String propertyTypeId = "property_type_id";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

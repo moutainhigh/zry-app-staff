@@ -11,9 +11,7 @@ import com.zhongmei.bty.basemodule.discount.salespromotion.cache.holder.RulePoli
 import com.zhongmei.yunfu.orm.DBHelperManager;
 import com.zhongmei.yunfu.orm.DatabaseHelper;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class SalesPromotionCache {
 
     private static final String TAG = SalesPromotionCache.class.getSimpleName();
@@ -31,30 +29,22 @@ public class SalesPromotionCache {
         mRulePolicyDishHolder = new RulePolicyDishHolder();
     }
 
-    /**
-     * 返回活动菜品缓存数据
-     */
+
     public static RuleActivityDishHolder getRuleActivityDishHolder() {
         return SalesPromotionCache.LazySingletonHolder.INSTANCE.mRuleActivityDishHolder;
     }
 
-    /**
-     * 返回活动细则缓存数据
-     */
+
     public static RuleMarketRuleHolder getRuleMarketRuleHolder() {
         return SalesPromotionCache.LazySingletonHolder.INSTANCE.mRuleMarketRuleHolder;
     }
 
-    /**
-     * 返回活动主表缓存数据
-     */
+
     public static RulePlanHolder getRulePlanHolder() {
         return SalesPromotionCache.LazySingletonHolder.INSTANCE.mRulePlanHolder;
     }
 
-    /**
-     * 返回赠送商品缓存数据
-     */
+
     public static RulePolicyDishHolder getRulePolicyDishHolder() {
         return SalesPromotionCache.LazySingletonHolder.INSTANCE.mRulePolicyDishHolder;
     }
@@ -63,9 +53,7 @@ public class SalesPromotionCache {
         private static final SalesPromotionCache INSTANCE = new SalesPromotionCache();
     }
 
-    /**
-     * 刷新所有缓存数据
-     */
+
     public synchronized static void init() {
         try {
             SalesPromotionCache.LazySingletonHolder.INSTANCE.refresh();
@@ -75,9 +63,7 @@ public class SalesPromotionCache {
         SalesPromotionCache.LazySingletonHolder.INSTANCE.checkData();
     }
 
-    /**
-     * 刷新所有缓存数据
-     */
+
     private synchronized void refresh() throws Exception {
         Log.i(TAG, "refresh...");
         DatabaseHelper helper = DBHelperManager.getHelper();

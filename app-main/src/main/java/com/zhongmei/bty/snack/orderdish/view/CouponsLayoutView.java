@@ -61,33 +61,27 @@ public class CouponsLayoutView extends LinearLayout {
     public void init() {
         switch (this.mType) {
 
-            case REBATE:// 满减券
-                titleTV.setText(mContext.getString(R.string.coupon_type_rebate));
+            case REBATE:                titleTV.setText(mContext.getString(R.string.coupon_type_rebate));
                 break;
-            case DISCOUNT:// 折扣券
-                titleTV.setText(mContext.getString(R.string.coupon_type_discount));
+            case DISCOUNT:                titleTV.setText(mContext.getString(R.string.coupon_type_discount));
                 break;
-            case GIFT:// 礼品券
-                titleTV.setText(mContext.getString(R.string.coupon_type_gift));
+            case GIFT:                titleTV.setText(mContext.getString(R.string.coupon_type_gift));
                 break;
-            case CASH:// 现金券
-                titleTV.setText(mContext.getString(R.string.coupon_type_cash));
+            case CASH:                titleTV.setText(mContext.getString(R.string.coupon_type_cash));
                 break;
             default:
                 break;
         }
     }
 
-    // 可以设置显示列数
-    public void setData(List<CouponVo> data, int numColumns) {
+        public void setData(List<CouponVo> data, int numColumns) {
         if (gridView != null) {
             gridView.setNumColumns(numColumns);
             setData(data);
         }
     }
 
-    // 默认显示3列
-    public void setData(List<CouponVo> data) {
+        public void setData(List<CouponVo> data) {
         mData = data;
         if (mType.equals(CouponType.GIFT)) {
             mAdapter = new CustomerCouponsAdapter2(mContext, mData, mType);
@@ -129,9 +123,7 @@ public class CouponsLayoutView extends LinearLayout {
         updateViews();
     }
 
-    /**
-     * 移除所有选中的券
-     */
+
     public void removeAllSelectCoupon() {
         for (CouponVo couponVo : mData) {
             couponVo.setSelected(false);
@@ -140,9 +132,7 @@ public class CouponsLayoutView extends LinearLayout {
     }
 
 
-    /**
-     * 批量移券
-     */
+
     public void removeCoupns(List<Long> ids) {
         if (ids != null) {
             for (CouponVo couponVo : mData) {

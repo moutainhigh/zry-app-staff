@@ -18,12 +18,7 @@ import com.zhongmei.bty.dinner.table.model.ZoneModel;
 
 import java.util.List;
 
-/**
- * 桌台区域指示视图（用于切换区域）
- *
- * @version: 1.0
- * @date 2015年9月2日
- */
+
 public class ZonesVerticalIndicator extends LinearLayout {
 
     private OnControlListener mOnControlListener;
@@ -55,7 +50,6 @@ public class ZonesVerticalIndicator extends LinearLayout {
         }
         for (ZoneModel vo : zones) {
             ViewGroup viewGroup = ViewUtils.inflateZoneIndicatorVerticalItem(getContext());
-//            viewGroup.setBackgroundResource(R.drawable.beauty_shape_zone_normal);
             LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             layoutParams.setMargins(30, 0, 0, 20);
             viewGroup.setLayoutParams(layoutParams);
@@ -76,12 +70,7 @@ public class ZonesVerticalIndicator extends LinearLayout {
         }
     }
 
-    /**
-     * 切换到指定区域
-     *
-     * @param zone
-     * @return
-     */
+
     public boolean switchZone(IZone zone) {
         if (zone != mCurr) {
             if (mCurr != null) {
@@ -89,7 +78,6 @@ public class ZonesVerticalIndicator extends LinearLayout {
                 LayoutParams params = (LayoutParams) viewGroup.getLayoutParams();
                 params.setMargins(30, 0, 0, 20);
                 viewGroup.setLayoutParams(params);
-//                viewGroup.setBackgroundResource(R.drawable.beauty_shape_zone_normal);
                 TextView textView = (TextView) viewGroup.findViewById(R.id.name);
                 textView.setSelected(false);
                 textView.setTextColor(ViewUtils.COLOR_BEAUTY_ZONE_INDICATOR);
@@ -99,7 +87,6 @@ public class ZonesVerticalIndicator extends LinearLayout {
             LayoutParams params = (LayoutParams) viewGroup.getLayoutParams();
             params.setMargins(0, 0, 0, 20);
             viewGroup.setLayoutParams(params);
-//            viewGroup.setBackgroundResource(R.drawable.beauty_shape_zone_selected);
             TextView textView = (TextView) viewGroup.findViewById(R.id.name);
             textView.setSelected(true);
             textView.setTextColor(ViewUtils.COLOR_BEAUTY_ZONE_INDICATOR_SELECTED);
@@ -109,12 +96,7 @@ public class ZonesVerticalIndicator extends LinearLayout {
         return false;
     }
 
-    /**
-     * 切换到指定ID的区域
-     *
-     * @param zoneId
-     * @return true表示当前桌台，false表示需要切换区域
-     */
+
     public boolean switchZone(Long zoneId) {
         if (zoneId != null) {
             if (mCurr != null && zoneId.equals(mCurr.getId())) {
@@ -143,9 +125,7 @@ public class ZonesVerticalIndicator extends LinearLayout {
 
     };
 
-    /**
-     * 刷新桌台区域
-     */
+
     public void refreshZone() {
         if (zones != null) {
             for (ZoneModel vo : zones) {
@@ -155,14 +135,9 @@ public class ZonesVerticalIndicator extends LinearLayout {
         }
     }
 
-    /**
-     * 刷新桌台区域微信标志
-     *
-     * @param viewGroup
-     */
+
     private void refreshWechatSign(ViewGroup viewGroup) {
-        // 显示微信订单标识
-        boolean isShowWechatImage = false;
+                boolean isShowWechatImage = false;
         ZoneModel model = (ZoneModel) viewGroup.getTag();
         List<DinnertableModel> dinnerTableModels = model.getDinnertableModels();
         if (dinnerTableModels != null && dinnerTableModels.size() > 0) {

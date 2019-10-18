@@ -65,9 +65,7 @@ import java.util.List;
 import de.greenrobot.event.EventBus;
 
 
-/**
- * 折扣自定义控件
- */
+
 @EViewGroup(R.layout.beauty_discount_layout)
 public class BeautyDiscountView extends LinearLayout implements OnItemClickListener {
     private static final String TAG = BeautyDiscountView.class.getSimpleName();
@@ -86,8 +84,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
     @ViewById(R.id.dinner_tab_let)
     TextView tab_let;
-    //赠送
-    @ViewById(R.id.dinner_tab_free)
+        @ViewById(R.id.dinner_tab_free)
     TextView tab_free;
 
     @ViewById(R.id.ll_free)
@@ -117,10 +114,8 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
     private DinnerDiscountAdapter discountAdapter;
 
     private int HAVENO_SELECT = 0;
-    //整单折扣或者折让或赠送
-    private final int ALL_MODE = 1;
-    //	批量折扣或者折让
-    private final int BATCH_MODE = 2;
+        private final int ALL_MODE = 1;
+        private final int BATCH_MODE = 2;
 
 
     private DiscountType currentDiscountType = DiscountType.ALLDISCOUNT;
@@ -129,11 +124,9 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
     private List<DiscountShopVo> discountList = new ArrayList<DiscountShopVo>();
 
-    // edittext 设置时，是否需要移除折扣
-    private boolean isNeedRemove = false;
+        private boolean isNeedRemove = false;
 
-    // 此值时为赠送
-    public static final double DISCOUNT_FREE_VALUE = 0d;
+        public static final double DISCOUNT_FREE_VALUE = 0d;
 
     private CustomDiscountDialog dialog;
     private FragmentActivity mActivity;
@@ -158,18 +151,15 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         }
         gridView_discount.setOnItemClickListener(this);
         isAllDiscountMode();
-//        loadDefaultDiscount(currentDiscountType);
     }
 
 
     void loadDefaultDiscount(DiscountType discountType) {
-        // TODO Auto-generated method stub
-        changeTab(discountType);
+                changeTab(discountType);
     }
 
     public void loadDatabaseDicount(DiscountType discountType) {
-        //赠送
-        if (discountType == DiscountType.ALL_FREE || discountType == DiscountType.BATCH_GIVE || discountType == DiscountType.BATCH_PROBLEM) {
+                if (discountType == DiscountType.ALL_FREE || discountType == DiscountType.BATCH_GIVE || discountType == DiscountType.BATCH_PROBLEM) {
             discountAdapter.resetData(null);
             gridView_discount.setVisibility(View.GONE);
             return;
@@ -184,8 +174,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
             List<DiscountShop> discountShopList = tradeDal.findDiscountByType(discountType);
             resetAdaper(discountShopList);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+                        e.printStackTrace();
         }
     }
 
@@ -219,8 +208,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         dinner_all_discount.setSelected(true);
         dinner_batch_discount.setSelected(false);
         changeTab(DiscountType.ALLDISCOUNT);
-        // 通知购物车刷新视图
-        EventBus.getDefault().post(new ActionDinnerBatchDiscount(false, true));
+                EventBus.getDefault().post(new ActionDinnerBatchDiscount(false, true));
     }
 
     private void isBatchDiscountMode() {
@@ -228,21 +216,17 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         dinner_all_discount.setSelected(false);
         dinner_batch_discount.setSelected(true);
         changeTab(DiscountType.BATCHDISCOUNT);
-        // 通知购物车刷新视图
-        EventBus.getDefault().post(new ActionDinnerBatchDiscount(true, false));
+                EventBus.getDefault().post(new ActionDinnerBatchDiscount(true, false));
     }
 
-    // 改变折扣 让价标签
-    private void changeTab(DiscountType type) {
+        private void changeTab(DiscountType type) {
         currentDiscountType = type;
         resetTabSelected(type);
         loadDatabaseDicount(currentDiscountType);
     }
 
-    // 改变标签文字和选择状态
-    private void resetTabSelected(DiscountType type) {
-        // TODO Auto-generated method stub
-        if (type == DiscountType.ALLDISCOUNT || type == DiscountType.BATCHDISCOUNT) {
+        private void resetTabSelected(DiscountType type) {
+                if (type == DiscountType.ALLDISCOUNT || type == DiscountType.BATCHDISCOUNT) {
             tab_discount.setSelected(true);
             tab_let.setSelected(false);
             tab_free.setSelected(false);
@@ -268,8 +252,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
             setFreeBtnVisible(false);
             changeItemCanSelected(false);
         }
-        //改变title文字
-        if (privilegeMode == ALL_MODE) {
+                if (privilegeMode == ALL_MODE) {
             tab_free.setText(R.string.freemeal);
             btn_free.setText(R.string.freemeal);
             tv_free_hint.setText(R.string.tv_free_hint);
@@ -300,8 +283,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                 break;
             case R.id.dinner_batch_discount:
                 privilegeMode = HAVENO_SELECT;
-                // 清除之前设置的值
-                DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().setDishTradePrivilege(null);
+                                DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().setDishTradePrivilege(null);
                 unselectAllDiscount();
                 isBatchDiscountMode();
                 break;
@@ -315,8 +297,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                 } else {
                     DinnerShopManager.getInstance().getShoppingCart().removeAllSelectedPrivilege();
                     DinnerShopManager.getInstance().getShoppingCart().setDishPrivilege(null, null);
-                    // 自动添加会员折扣
-                    if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
+                                        if (DinnerShopManager.getInstance().getLoginCustomer() != null) {
                         DinnerShopManager.getInstance().getShoppingCart().memberPrivilegeForSelected();
                     }
                 }
@@ -340,11 +321,9 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                 if (privilegeMode == ALL_MODE) {
                     changeTab(DiscountType.ALL_FREE);
                     changeItemCanSelected(false);
-//                    ll_fete.setVisibility(View.VISIBLE);
                 } else {
                     changeTab(DiscountType.BATCH_GIVE);
                     changeItemCanSelected(false);
-//                    ll_fete.setVisibility(View.GONE);
                 }
                 break;
             case R.id.btn_user_define:
@@ -353,8 +332,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                     ToastUtil.showLongToast(R.string.pleanse_select_discount);
                     return;
                 }
-                //输入折扣
-                if (MathManualMarketTool.isHasTradePlan(DinnerShopManager.getInstance().getShoppingCart().getOrder()) && privilegeMode == ALL_MODE) {
+                                if (MathManualMarketTool.isHasTradePlan(DinnerShopManager.getInstance().getShoppingCart().getOrder()) && privilegeMode == ALL_MODE) {
                     showNoDicountDialog();
                     return;
                 }
@@ -371,8 +349,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                 dialog.show(mActivity.getSupportFragmentManager(), "DinnerDiscount");
                 break;
             case R.id.btn_free:
-                //赠送、免单
-                MobclickAgentEvent.onEvent(UserActionCode.ZC030014);
+                                MobclickAgentEvent.onEvent(UserActionCode.ZC030014);
                 if (MathManualMarketTool.isHasTradePlan(DinnerShopManager.getInstance().getShoppingCart().getOrder()) && privilegeMode == ALL_MODE) {
                     showNoDicountDialog();
                     return;
@@ -381,8 +358,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                 break;
             case R.id.btn_fete:
                 MobclickAgentEvent.onEvent(UserActionCode.ZC030015);
-                //宴请按钮
-                VerifyHelper.verifyAlert(mActivity, BeautyApplication.PERMISSION_BEAUTY_PRIVILEDGE_BANQUET,
+                                VerifyHelper.verifyAlert(mActivity, BeautyApplication.PERMISSION_BEAUTY_PRIVILEDGE_BANQUET,
                         new VerifyHelper.Callback() {
                             @Override
                             public void onPositive(User user, String code, Auth.Filter filter) {
@@ -413,28 +389,18 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         });
     }
 
-    /**
-     * @Title: changeItemState
-     * @Description: 点击批量赠送按钮时，让不打折商品也可以选
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void changeItemCanSelected(boolean isBatchFree) {
         EventBus.getDefault().post(new ActionDinnerBatchFree(isBatchFree));
     }
 
-    //控制按钮显示隐藏
-    private void setFreeBtnVisible(boolean isVisible) {
+        private void setFreeBtnVisible(boolean isVisible) {
         if (isVisible) {
             ll_free.setVisibility(View.VISIBLE);
-//            ll_fete.setVisibility(View.VISIBLE);
             btn_user_define.setVisibility(View.GONE);
-//			btn_clear.setVisibility(View.GONE);
         } else {
             ll_free.setVisibility(View.GONE);
-//            ll_fete.setVisibility(View.GONE);
             btn_user_define.setVisibility(View.VISIBLE);
-//			btn_clear.setVisibility(View.VISIBLE);
         }
     }
 
@@ -442,9 +408,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
         @Override
         public void onCustomDiscount(final float discount) {
-            // TODO Auto-generated method stub
-            //没有选中菜品不能点击打折
-            if (privilegeMode == BATCH_MODE && DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
+                                    if (privilegeMode == BATCH_MODE && DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
                 ToastUtil.showLongToast(R.string.pleanse_select_discount);
                 return;
             }
@@ -468,12 +432,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         }
     };
 
-    /**
-     * @Title: getDiscountPerName
-     * @Description: 获得折扣权限需要的名字
-     * @Param @return TODO
-     * @Return String 返回类型
-     */
+
     private String getDiscountPerName() {
         if (currentDiscountType == DiscountType.ALLLET || currentDiscountType == DiscountType.BATCHLET) {
             return BeautyApplication.PERMISSION_BEAUTY_PRIVILEDGE_REBATE;
@@ -482,18 +441,9 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         }
     }
 
-    /**
-     * @Title: afterTextChange
-     * @Description: TODO
-     * @Param @param tv
-     * @Param @param s TODO
-     * @Return void 返回类型
-     * @deprecated 以前的计算方式，未使用
-     */
-    // @AfterTextChange({R.id.user_define})
-    void afterTextChange(TextView tv, Editable s) {
-        // 手动清空自定义输入框时，移除优惠
-        if (TextUtils.isEmpty(s) && isNeedRemove) {
+
+        void afterTextChange(TextView tv, Editable s) {
+                if (TextUtils.isEmpty(s) && isNeedRemove) {
             if (privilegeMode == ALL_MODE) {
                 DinnerShopManager.getInstance().getShoppingCart().removeOrderPrivilege();
             } else if (privilegeMode == BATCH_MODE) {
@@ -519,8 +469,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
             return;
         }
 
-        // 小数点开始的，先补零
-        if (s.toString().startsWith("")) {
+                if (s.toString().startsWith("")) {
             setText(tv, "0" + s);
             return;
         }
@@ -529,26 +478,14 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
     }
 
-    /**
-     * 当用户点击输入框后其它按钮的选中状态清空
-     *
-     * @Title: focusChange
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     @FocusChange({R.id.btn_user_define})
     void focusChange() {
         if (btn_user_define.isFocused())
             unselectAllDiscount();
     }
 
-    /**
-     * @Title: getPrivilegeType
-     * @Description: 根据整单、批量的标签切换折扣，返回折扣类型
-     * @Param @return TODO
-     * @Return PrivilegeType 返回类型
-     */
+
     private PrivilegeType getPrivilegeType() {
         if (currentDiscountType == DiscountType.BATCH_PROBLEM) {
             return PrivilegeType.PROBLEM;
@@ -561,12 +498,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         }
     }
 
-    /**
-     * 设置文字，并将光标移动到末尾
-     *
-     * @param tv
-     * @param text
-     */
+
     private void setText(TextView tv, CharSequence text) {
         tv.setText(text);
         if (tv instanceof EditText && text != null && text.length() > 0) {
@@ -579,26 +511,16 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
     }
 
 
-    /**
-     * 取消所有折扣按钮的选中状态
-     */
+
     private void unselectAllDiscount() {
         clearDiscountItems();
     }
 
-    /**
-     * @Title: checkDiscountIsvalid
-     * @Description: TODO
-     * @Param @param cs
-     * @Param @param isDiscount:true打折操作.false:让价操作
-     * @Param @return TODO
-     * @Return boolean 返回类型
-     */
+
     private boolean checkDiscountIsvalid(String privilege, PrivilegeType mPrivilegeType) {
         DinnerShoppingCart shoppingCart = DinnerShopManager.getInstance().getShoppingCart();
         Double privilegeValue = Double.parseDouble(privilege);
-        // 批量折扣和让价
-        if (privilegeMode == BATCH_MODE && mPrivilegeType == PrivilegeType.REBATE) {
+                if (privilegeMode == BATCH_MODE && mPrivilegeType == PrivilegeType.REBATE) {
             if (!Utils.checkPointTwoIndex(privilege)) {
                 ToastUtil.showShortToast(R.string.inputTwoADecimal);
                 return false;
@@ -614,8 +536,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                 return false;
             }
 
-        } else if (privilegeMode == ALL_MODE && mPrivilegeType == PrivilegeType.REBATE) {// 整单让价
-            if (!Utils.checkPointTwoIndex(privilege)) {
+        } else if (privilegeMode == ALL_MODE && mPrivilegeType == PrivilegeType.REBATE) {            if (!Utils.checkPointTwoIndex(privilege)) {
                 ToastUtil.showShortToast(R.string.inputTwoADecimal);
                 return false;
             }
@@ -626,15 +547,12 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
                 return false;
             }
 
-        } else if (mPrivilegeType == PrivilegeType.DISCOUNT) {// 单菜、整单折扣
-
-            // 验证输入格式
-            if (!Utils.checkPointOneIndex(privilege)) {
+        } else if (mPrivilegeType == PrivilegeType.DISCOUNT) {
+                        if (!Utils.checkPointOneIndex(privilege)) {
                 ToastUtil.showShortToast(R.string.inputADecimal);
                 return false;
             }
-            //折扣在0，到10之间
-            if (privilegeValue < 0) {
+                        if (privilegeValue < 0) {
                 return false;
             } else if (privilegeValue >= 10) {
                 ToastUtil.showShortToast(R.string.discountError);
@@ -646,31 +564,19 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         return true;
     }
 
-    /**
-     * @Title: getCompareAmount
-     * @Description: 获得需要比较的价格, 只用于输入的折让
-     * @Param @return TODO
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal getCompareAmount() {
         DinnerShoppingCart shoppingCart = DinnerShopManager.getInstance().getShoppingCart();
-        // 批量时让价最大金额
-        if (privilegeMode == BATCH_MODE) {
+                if (privilegeMode == BATCH_MODE) {
             BigDecimal minPrice = shoppingCart.getMinPrice(shoppingCart.getShoppingCartVo());
             return minPrice;
-        } else if (privilegeMode == ALL_MODE) {// 整单让价
-            BigDecimal tradeAumont = shoppingCart.getTradeAmoutCanDiscount(shoppingCart.getShoppingCartVo());
+        } else if (privilegeMode == ALL_MODE) {            BigDecimal tradeAumont = shoppingCart.getTradeAmoutCanDiscount(shoppingCart.getShoppingCartVo());
             return tradeAumont;
         }
         return BigDecimal.ZERO;
     }
 
-    /**
-     * @param type
-     * @param mReason
-     * @param isDefine 是否整单
-     * @return
-     */
+
     private Boolean setFreePrivilege(PrivilegeType type, Reason mReason, boolean isDefine) {
         if (isDefine) {
             buildPrivilege("0", mActivity.getString(R.string.freethisOrder), type, mReason);
@@ -689,14 +595,12 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         BigDecimal privilegeValue = new BigDecimal(String.valueOf(privateValue));
 
         if (mPrivilegeType == PrivilegeType.DISCOUNT) {
-            // 因折扣信息保存格式为：8折-80 所以需要x10
-            privilegeValue = getReviseValue(privilegeValue);
+                        privilegeValue = getReviseValue(privilegeValue);
         }
         TradePrivilege privilege = new TradePrivilege();
         privilege.setPrivilegeType(mPrivilegeType);
         privilege.setPrivilegeValue(privilegeValue);
-        privilege.setPrivilegeName(privilegeName);//传折扣名称给购物车
-
+        privilege.setPrivilegeName(privilegeName);
         if (privilegeMode == ALL_MODE) {
             DinnerShopManager.getInstance().getShoppingCart().setDefineTradePrivilege(privilege, mReason, true, true);
         } else {
@@ -733,20 +637,13 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         dialog.show(mActivity.getSupportFragmentManager(), "discount");
     }
 
-    // 清空自动生成的折扣的item选择
-    private void clearDiscountItems() {
+        private void clearDiscountItems() {
         discountAdapter.changeSelected(-1);
     }
 
-    /**
-     * @Title: getFreeDiscountLe
-     * @Description: 获取折扣时能
-     * @Param @return TODO
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal getFreeDiscountLe() {
-        // 让价
-        if (!isDiscout()) {
+                if (!isDiscout()) {
             BigDecimal tradeAumont = DinnerShopManager.getInstance().getShoppingCart().getOrder().getTrade().getTradeAmount();
             return tradeAumont;
         } else {
@@ -758,28 +655,20 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
     public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
         DinnerShoppingCart shoppingCart = DinnerShopManager.getInstance().getShoppingCart();
         final DiscountShopVo discountShopVo = discountList.get(position);
-        //免单、赠送权限
-        if (MathManualMarketTool.isHasTradePlan(shoppingCart.getOrder()) && privilegeMode == ALL_MODE) {
+                if (MathManualMarketTool.isHasTradePlan(shoppingCart.getOrder()) && privilegeMode == ALL_MODE) {
             showNoDicountDialog();
             return;
         }
-        //没有选中菜品不能点击打折
-        if (privilegeMode == BATCH_MODE && shoppingCart.getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
+                if (privilegeMode == BATCH_MODE && shoppingCart.getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
             ToastUtil.showLongToast(R.string.pleanse_select_discount);
             return;
         }
         validateCommonPermission(discountShopVo, position);
     }
 
-    /**
-     * @Title: validateFreePermission
-     * @Description: 验证免单、赠送权限
-     * @Param @param position TODO
-     * @Return void 返回类型
-     */
+
     private void validateFreePermission() {
-        //没有选中菜品不能点击打折
-        if (privilegeMode == BATCH_MODE && DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
+                if (privilegeMode == BATCH_MODE && DinnerShopManager.getInstance().getShoppingCart().getShoppingCartVo().getDinnerListShopcartItem().isEmpty()) {
             ToastUtil.showLongToast(R.string.pleanse_select_discount);
             return;
         }
@@ -788,27 +677,11 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
             @Override
             public void run() {
                 try {
-                    //整单免单
-                    if (privilegeMode == ALL_MODE) {
+                                        if (privilegeMode == ALL_MODE) {
                         setFreePrivilege(PrivilegeType.FREE, null, true);
-//                        setReasonDialog(ReasonType.TRADE_FREE, new OrderCenterOperateDialogFragment.OperateListener() {
-//                            @Override
-//                            public boolean onSuccess(OrderCenterOperateDialogFragment.OperateResult result) {
-//                                setFreePrivilege(PrivilegeType.FREE, result.reason, true);
-//                                return true;
-//                            }
-//                        });
                     } else {
-                        //批量赠送
-                        discountAdapter.changeSelected(currentFreePosition);
+                                                discountAdapter.changeSelected(currentFreePosition);
                         setFreePrivilege(PrivilegeType.GIVE, null, false);
-//                        setReasonDialog(ReasonType.ITEM_GIVE, new OrderCenterOperateDialogFragment.OperateListener() {
-//                            @Override
-//                            public boolean onSuccess(OrderCenterOperateDialogFragment.OperateResult result) {
-//                                setFreePrivilege(PrivilegeType.GIVE, result.reason, false);
-//                                return true;
-//                            }
-//                        });
                     }
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage(), e);
@@ -839,18 +712,12 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
 
     }
 
-    /**
-     * @Title: validateCommonPermission
-     * @Description: TODO
-     * @Param @param discountShopVo TODO
-     * @Return void 返回类型
-     */
+
     private void validateCommonPermission(final DiscountShopVo discountShopVo, final int position) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                // TODO Auto-generated method stub
-                doClick(discountShopVo, position);
+                                doClick(discountShopVo, position);
             }
         };
         String name = getDiscountPerName();
@@ -863,24 +730,13 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         validatePermission(name, discountValue, runnable);
     }
 
-    /**
-     * @Title: getReviseValue
-     * @Description: 获得修正后的折扣值 因折扣信息保存格式为：8折-80 所以需要x10
-     * @Param @param discountValue
-     * @Param @return TODO
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal getReviseValue(BigDecimal discountValue) {
         discountValue = MathDecimal.mul(discountValue, 10);
         return discountValue;
     }
 
-    /**
-     * @Title: isDiscout
-     * @Description: 判断是否是折扣（整单、批量）折扣
-     * @Param @return TODO
-     * @Return boolean 返回类型
-     */
+
     private boolean isDiscout() {
         if (currentDiscountType == DiscountType.ALLDISCOUNT || currentDiscountType == DiscountType.BATCHDISCOUNT) {
             return true;
@@ -888,14 +744,7 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         return false;
     }
 
-    /**
-     * @Title: validatePermission
-     * @Description: 折扣权限验证
-     * @Param @param discountName
-     * @Param @param value
-     * @Param @param runnable TODO
-     * @Return void 返回类型
-     */
+
     private void validatePermission(final String discountName, final BigDecimal value, final Runnable runnable) {
         Auth.Filter filter;
         String permission;
@@ -918,7 +767,6 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
             @Override
             public void onPositive(User user, String code, Auth.Filter filter) {
                 super.onPositive(user, code, filter);
-//                runnable.run();
                 PrivilegeType privilegeType = getPrivilegeType();
                 buildPrivilege(String.valueOf(value), getUserDefinedPrivilegeName(value.floatValue()), privilegeType, null);
             }
@@ -930,16 +778,10 @@ public class BeautyDiscountView extends LinearLayout implements OnItemClickListe
         final DiscountShop discountShop = discountShopVo.getDiscountShop();
         setReasonResult(discountShop.getContent().toString(), discountShop.getName());
 
-        //选择完后要清空选择
-        unselectAllDiscount();
+                unselectAllDiscount();
     }
 
-    /**
-     * @return
-     * @Date 2016年5月20日
-     * @Description: 获取自定义优惠名称
-     * @Return String
-     */
+
     private String getUserDefinedPrivilegeName(float discount) {
         String name = null;
         if (currentDiscountType == DiscountType.ALLDISCOUNT) {

@@ -9,9 +9,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DishMenuResp {
     public Long id;

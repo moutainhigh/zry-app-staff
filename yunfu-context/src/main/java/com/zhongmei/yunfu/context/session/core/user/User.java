@@ -2,9 +2,7 @@ package com.zhongmei.yunfu.context.session.core.user;
 
 import java.io.Serializable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class User implements Serializable {
 

@@ -45,9 +45,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * 微信卡劵界面
- */
+
 @EFragment(R.layout.dinner_weixin_coupon_code)
 public class DinnerWeixinCouponCodeFragment extends BasicDialogFragment {
     @ViewById(R.id.scan_btn)
@@ -119,9 +117,7 @@ public class DinnerWeixinCouponCodeFragment extends BasicDialogFragment {
         }
     }
 
-    /**
-     * 开启扫描
-     */
+
     private void startScan() {
         scanPopupWindow = new ScanPopupWindow(getActivity());
         scanPopupWindow.showAtLocation(mScanBtn, Gravity.NO_GRAVITY, 0, 0);
@@ -141,11 +137,7 @@ public class DinnerWeixinCouponCodeFragment extends BasicDialogFragment {
     }
 
 
-    /**
-     * 请求服务器验劵
-     *
-     * @param ticketNo
-     */
+
     public void doVerifyCode(String ticketNo, final TextView tvHint, final FragmentActivity activity) {
         if (activity == null || activity.isDestroyed()) {
             return;
@@ -170,8 +162,7 @@ public class DinnerWeixinCouponCodeFragment extends BasicDialogFragment {
                     if (LoyaltyTransferResp.isOk(response.getContent())) {
                         WeiXinCouponsInfo info = response.getContent().getResult().getWeixinCard();
                         WeiXinCouponsInfo.WeiXinCodeInfo codeInfo = info.getCode_info();
-                        //判断是否是代金券,暂时只支持代金券
-                        if (info.getCard_type() != WeiXinCardType.CASH) {
+                                                if (info.getCard_type() != WeiXinCardType.CASH) {
                             if (tvHint != null) {
                                 tv_hint.setVisibility(View.VISIBLE);
                                 tvHint.setText(getString(R.string.not_support_coupons));
@@ -236,12 +227,9 @@ public class DinnerWeixinCouponCodeFragment extends BasicDialogFragment {
         return true;
     }
 
-    /**
-     * 加入购物车
-     */
+
     private static void addToShopcart(WeiXinCouponsInfo info) {
-        //特殊处理微信卡号
-        String wxCardNumber = info.getCode();
+                String wxCardNumber = info.getCode();
         info.setCode(BaseShoppingCart.getNewWxCode(wxCardNumber));
 
         DinnerShopManager.getInstance().getShoppingCart().addWeiXinCouponsPrivilege(info);

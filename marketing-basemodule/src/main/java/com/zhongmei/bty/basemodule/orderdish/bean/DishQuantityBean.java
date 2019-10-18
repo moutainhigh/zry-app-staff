@@ -5,9 +5,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItem;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class DishQuantityBean {
     public BigDecimal quantity;
     public IShopcartItem shopcartItem;

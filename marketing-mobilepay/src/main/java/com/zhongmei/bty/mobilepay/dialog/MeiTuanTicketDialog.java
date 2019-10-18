@@ -19,9 +19,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MeiTuanTicketDialog extends Dialog implements View.OnClickListener {
     private TuanGouCouponDetail mTuanGouCouponDetail;
@@ -33,8 +31,7 @@ public class MeiTuanTicketDialog extends Dialog implements View.OnClickListener 
     private int mUsedCount;
     private double mUnPayValue;
     private Context mContext;
-    private boolean isLimitMax = true;//add v8.3限制溢出，默认限制
-
+    private boolean isLimitMax = true;
     public void setLimitMax(boolean limitMax) {
         isLimitMax = limitMax;
     }
@@ -89,8 +86,7 @@ public class MeiTuanTicketDialog extends Dialog implements View.OnClickListener 
     }
 
     private void add() {
-        //
-        if (mUsedCount < mTuanGouCouponDetail.getMaxConsume()) {
+                if (mUsedCount < mTuanGouCouponDetail.getMaxConsume()) {
             mUsedCount++;
             mCountET.setText(mUsedCount + "");
             updateButtonEnable();
@@ -126,8 +122,7 @@ public class MeiTuanTicketDialog extends Dialog implements View.OnClickListener 
             this.dismiss();
         } else if (vId == R.id.btn_ok) {
             BigDecimal value = new BigDecimal(mUsedCount).multiply(mTuanGouCouponDetail.getMarketPrice());
-            //如果溢收大于券面值,不支持 modify 20170412
-            if (isLimitMax && ((value.doubleValue() - this.mUnPayValue) > mTuanGouCouponDetail.getMarketPrice().doubleValue())) {
+                        if (isLimitMax && ((value.doubleValue() - this.mUnPayValue) > mTuanGouCouponDetail.getMarketPrice().doubleValue())) {
                 ToastUtil.showShortToast(getContext().getString(R.string.toast_excessive_charge_limit));
                 return;
             }

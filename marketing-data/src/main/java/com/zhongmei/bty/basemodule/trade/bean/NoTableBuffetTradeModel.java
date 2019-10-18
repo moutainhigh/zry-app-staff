@@ -14,9 +14,7 @@ import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class NoTableBuffetTradeModel implements IDinnertableTrade {
     private TradeTableInfo tradeTableInfo = null;

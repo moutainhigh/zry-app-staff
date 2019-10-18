@@ -27,24 +27,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * 处理tradeUser与tradeItemUser的工具类
- * Created by demo on 2018/12/15
- */
+
 
 public class TradeUserUtil {
 
-    /**
-     * @param user
-     * @return
-     */
+
     public static TradeUser createTradeUser(User user, Trade trade) {
         TradeUser tradeUser = new TradeUser();
         tradeUser.setUuid(SystemUtils.genOnlyIdentifier());
         tradeUser.setUserId(user.getId());
         tradeUser.setUserName(user.getName());
-//        tradeUser.setTradeId(trade.getId());
-//        tradeUser.setTradeUuid(trade.getUuid());
         tradeUser.setBrandIdenty(BaseApplication.sInstance.getBrandIdenty());
         tradeUser.setShopIdenty(BaseApplication.sInstance.getShopIdenty());
         tradeUser.setStatusFlag(StatusFlag.VALID);
@@ -55,12 +47,7 @@ public class TradeUserUtil {
         return tradeUser;
     }
 
-    /**
-     * 添加整单的销售员、技师等
-     *
-     * @param tradeUserList
-     * @param user
-     */
+
     public static void addTradeUser(List<TradeUser> tradeUserList, User user, Trade trade) {
         if (tradeUserList == null) {
             return;
@@ -88,12 +75,7 @@ public class TradeUserUtil {
         }
     }
 
-    /**
-     * 移除整单的销售员、技师等
-     *
-     * @param tradeUserList
-     * @param user
-     */
+
     public static void removeTradeUser(List<TradeUser> tradeUserList, User user) {
         if (Utils.isEmpty(tradeUserList)) {
             return;
@@ -101,9 +83,6 @@ public class TradeUserUtil {
         Iterator tradeUserIterator = tradeUserList.iterator();
         while (tradeUserIterator.hasNext()) {
             TradeUser tradeUser = (TradeUser) tradeUserIterator.next();
-//            if (tradeUser.getUserType() != identity) {
-//                continue;
-//            }
             if (user != null && !MathDecimal.isLongEqual(tradeUser.getUserId(), user.getId())) {
                 continue;
             }
@@ -133,13 +112,7 @@ public class TradeUserUtil {
     }
 
 
-    /**
-     * 构建tradeItemUser
-     *
-     * @param user
-     * @param isAssigin
-     * @return
-     */
+
     public static TradeUser createTradeItemUser(User user, IShopcartItemBase iShopcartItemBase, boolean isAssigin) {
         TradeUser tradeItemUser = new TradeUser();
         tradeItemUser.setUuid(SystemUtils.genOnlyIdentifier());
@@ -148,7 +121,6 @@ public class TradeUserUtil {
         tradeItemUser.setTradeItemUuid(iShopcartItemBase.getUuid());
         tradeItemUser.setUserId(user.getId());
         tradeItemUser.setUserName(user.getName());
-//        tradeItemUser.setUserType(identity);、
         tradeItemUser.setRoleId(user.getRoleId());
         tradeItemUser.setRoleName(user.getRoleName());
         tradeItemUser.setBrandIdenty(BaseApplication.sInstance.getBrandIdenty());
@@ -160,14 +132,7 @@ public class TradeUserUtil {
     }
 
 
-    /**
-     * 添加user
-     *
-     * @param user
-     * @param iShopcartItemBase
-     * @param identity
-     * @param isAssigin
-     */
+
     public static void addTradeItemUsers(User user, IShopcartItemBase iShopcartItemBase, boolean isAssigin) {
         List<TradeUser> tradeItemUserList = iShopcartItemBase.getTradeItemUserList();
         if (tradeItemUserList == null) {
@@ -198,43 +163,26 @@ public class TradeUserUtil {
 
     }
 
-    /**
-     * 更新tradeItemuser的指定状态
-     *
-     * @param user
-     * @param iShopcartItemBase
-     * @param identity
-     * @param isAssigin
-     */
+
     public static void updateTradeItemUsers(User user, IShopcartItemBase iShopcartItemBase, boolean isAssigin) {
         List<TradeUser> tradeItemUserList = iShopcartItemBase.getTradeItemUserList();
         if (Utils.isEmpty(tradeItemUserList) && isAssigin) {
             addTradeItemUsers(user, iShopcartItemBase, isAssigin);
             return;
         }
-        //以防有无效的数据
-        boolean isFind = false;
+                boolean isFind = false;
         for (TradeUser tradeItemUser : tradeItemUserList) {
-//            if(tradeItemUser.getUserType()!=identity){
-//                continue;
-//            }
             if (!MathDecimal.isLongEqual(user.getId(), tradeItemUser.getUserId())) {
                 continue;
             }
             isFind = true;
             tradeItemUser.setIsAssign(isAssigin);
         }
-        //未匹配到user 新建
-        if (!isFind)
+                if (!isFind)
             addTradeItemUsers(user, iShopcartItemBase, isAssigin);
     }
 
-    /**
-     * 通过用户移除 tradeItemUser
-     *
-     * @param user
-     * @param iShopcartItemBase
-     */
+
     public static void removeTradeItemusers(User user, IShopcartItemBase iShopcartItemBase) {
         List<TradeUser> tradeItemUserList = iShopcartItemBase.getTradeItemUserList();
         if (tradeItemUserList == null) {
@@ -246,9 +194,6 @@ public class TradeUserUtil {
             if (user != null && !MathDecimal.isLongEqual(user.getId(), tradeItemUser.getUserId())) {
                 continue;
             }
-//            if(tradeItemUser.getUserType()!=identity){
-//                continue;
-//            }
             if (tradeItemUser.getId() == null) {
                 iterator.remove();
             } else {
@@ -282,23 +227,11 @@ public class TradeUserUtil {
     }
 
     public static String getUserName(TradeUser tradeUser) {
-//        return getUserName(context,tradeUser.getRoleName(),tradeUser.getUserName());
         String roleName = tradeUser.getRoleName();
         String userName = tradeUser.getUserName();
         return roleName + "-" + userName;
     }
 
-//    public static String getUserName(Context context,String roleName,String name){
-//        String namePrefix="";
-//        if(userType==TradeUserType.SHOPOWER.value()){
-//            namePrefix=context.getResources().getString(R.string.btn_shopowner_select);
-//        }else if(userType==TradeUserType.ADVISER.value()){
-//            namePrefix=context.getResources().getString(R.string.btn_adviser);
-//        }else if(userType==TradeUserType.TECHNICIAN.value()){
-//            namePrefix=context.getResources().getString(R.string.btn_cosmetologist);
-//        }
-//        return namePrefix+":"+name;
-//    }
 
 
     public static List<UserVo> getUserVos(Long tradeId, boolean isDefine, List<TradeUser> tradeUserList, IShopcartItemBase shopcartItemBase, ItemType itemType) {
@@ -315,9 +248,6 @@ public class TradeUserUtil {
                 if (tradeUser.getStatusFlag() == StatusFlag.INVALID) {
                     continue;
                 }
-//                if(tradeUser.getUserType().intValue()!=identity){
-//                    continue;
-//                }
                 selectedUserMap.put(tradeUser.getUserId(), tradeUser.getUserId());
             }
         } else if (shopcartItemBase != null && Utils.isNotEmpty(shopcartItemBase.getTradeItemUserList())) {
@@ -338,51 +268,16 @@ public class TradeUserUtil {
             mapRole.put(role.getId(),role);
         }
 
-//        LongSparseArray<Long> usedUserMap = new LongSparseArray<>();
-//        LongSparseArray<Long> usedItemUserMap = new LongSparseArray<>();
-//        if (isDefine) {
-//            List<TradeUser> userdTradeUserList = BeautyDaoImpl.getTradeUserListNo(BusinessType.BEAUTY);
-//            for (TradeUser tradeUser : userdTradeUserList) {
-//                if (MathDecimal.isLongEqual(tradeUser.getTradeId(), tradeId)) {
-//                    continue;
-//                }
-//                usedUserMap.put(tradeUser.getUserId(), tradeUser.getUserId());
-//            }
-//        } else {
-//            List<TradeUser> userItemUserList = BeautyDaoImpl.getTradeItemListByIdentity(TradeUserType.TECHNICIAN.value(), BusinessType.BEAUTY);
-//            for (TradeUser tradeItemUser : userItemUserList) {
-//                if (MathDecimal.isLongEqual(tradeItemUser.getTradeId(), tradeId)) {
-//                    continue;
-//                }
-//                usedItemUserMap.put(tradeItemUser.getUserId(), tradeItemUser.getUserId());
-//            }
-//        }
 
         for (User user : userList) {
             UserVo userVo = new UserVo(user);
             if (selectedUserMap.get(user.getId()) != null) {
                 userVo.setChecked(true);
-//                if (assginUserMap.get(user.getId()) != null) {
-//                    userVo.setOppoint(true);
-//                }
             }
             Role role=mapRole.get(user.getRoleId());
             if(role!=null){
                 userVo.getUser().setRoleName(role.getRoleName());
             }
-//            if (isDefine) {
-//                if (usedUserMap.get(user.getId()) != null) {
-//                    userVo.setFree(false);
-//                }
-//            } else {
-//                if (usedItemUserMap.get(user.getId()) != null) {
-//                    userVo.setFree(false);
-//                }
-//
-//                if (itemType == ItemType.CHILD) {
-//                    userVo.setChild(true);
-//                }
-//            }
             listUserVo.add(userVo);
         }
 

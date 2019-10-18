@@ -48,39 +48,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @version: 1.0
- * @date 2015年9月15日
- */
+
 @EFragment(R.layout.dinnertable_manager)
 public class DinnertableFragment extends TableFragment {
 
-    //@ViewById(R.id.iv_customer_arrive_dot)
-    //ViewGroup layout_customer_arrive;
-    //ImageView iv_customer_arrive_dot;
-    //ArriveCustomerListFragment customerListFragment;
 
     @Override
     public void init() {
-        //modify start 20170828 屏蔽顾客到店列表
-        //layout_customer_arrive = findViewById(R.id.layout_customer_arrive);
-        //iv_customer_arrive_dot = findViewById(R.id.iv_customer_arrive_dot);
-		/*boolean isGoinRemind = SpHelper.getDefault().getBoolean(SpHelper.CUSTOMER_GOIN_REMIND);
-		layout_customer_arrive.setVisibility(isGoinRemind ? View.VISIBLE : View.GONE);
-		showCustomerArriveDot();
-		layout_customer_arrive.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (customerListFragment == null || !customerListFragment.isVisible()) {
-					hideCustomerArriveDot();
-					customerListFragment = ArriveCustomerListFragment_.builder().build();
-					customerListFragment.show(getChildFragmentManager(), ArriveCustomerListFragment.class.getSimpleName());
-				}
-			}
-		});*/
-        //modify end 20170828 屏蔽顾客到店列表
-        //tvJoinTrade.setVisibility(View.GONE);
-        super.init();
+
+                        super.init();
     }
 
     @Override
@@ -110,8 +86,7 @@ public class DinnertableFragment extends TableFragment {
             return;
         }
 
-        //目标点处于支付中状态
-        if (dest.getTradePayStatus() == TradePayStatus.PAYING) {
+                if (dest.getTradePayStatus() == TradePayStatus.PAYING) {
             ToastUtil.showShortToast(getString(R.string.dinner_target_paying));
             return;
         }
@@ -158,10 +133,8 @@ public class DinnertableFragment extends TableFragment {
 
                 checkMergeOrTransfer(orginal.getTradeUuid(), null, dest.getId(), TicketTypeEnum.TRANSFERTABLE, new Runnable() {
                     public void run() {
-                        if (getInfoFragment() != null && getInfoFragment().getDinnerTableTradeVo() != null) {//add 20171204
-                            List<IShopcartItem> shopcartItems = getInfoFragment().getDinnerTableTradeVo().getItems();
-                            if (Utils.isEmpty(shopcartItems) || !DinnerUtils.isWestStyle()) {//如果没有菜品，直接合单
-                                mManager.transfer(null, orginal, dest);
+                        if (getInfoFragment() != null && getInfoFragment().getDinnerTableTradeVo() != null) {                            List<IShopcartItem> shopcartItems = getInfoFragment().getDinnerTableTradeVo().getItems();
+                            if (Utils.isEmpty(shopcartItems) || !DinnerUtils.isWestStyle()) {                                mManager.transfer(null, orginal, dest);
                             } else {
                                 transferTableDialog(orginal, dest);
                             }
@@ -179,15 +152,6 @@ public class DinnertableFragment extends TableFragment {
             return;
         }
 
-//		if(isUnionTrade(dinnertableTrade.getTradeType())){
-//			ToastUtil.showShortToast(getString(R.string.dinner_cant_abolish));
-//			return;
-//		}
-//
-//		if(dinnertableTrade.getTradeType()== TradeType.UNOIN_TABLE_SUB || dinnertableTrade.getTradeType()== TradeType.UNOIN_TABLE_MAIN ){
-//			ToastUtil.showShortToast(getString(R.string.diner_abolish_union_trade));
-//			return;
-//		}
 
         if (dinnertableTrade != null && UnionUtil.isUnionSubTrade(dinnertableTrade.getTradeType())) {
             ToastUtil.showLongToast(R.string.diner_abolish_union_trade);
@@ -206,83 +170,18 @@ public class DinnertableFragment extends TableFragment {
 
     @Override
     public void doMergeMoveDishDialog(final IDinnertableTradeMoveDish orginal, final IDinnertableTrade dest) {
-        /*String headTitle = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.move_dishes) : getActivity().getString(R.string.dinner_copydish);
-        String keyWord = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.dinner_movedish) : getActivity().getString(R.string.dinner_copydish);
-        String title = getActivity().getString(R.string.dinner_move_dish_merge_dialog_title, orginal.getSn(), dest.getSn(), keyWord);
 
-
-        final DishQuantityAndSeatEditDialogFragment fragment = bulildDishQuantitySeatEditDialog(headTitle, title, R.drawable.commonmodule_dialog_icon_warning, R.string.dinner_ok, R.string.dinner_cancel);
-
-        fragment.setPositiveListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View arg0) {// 确定
-                final List<DishQuantityBean> dishItes = fragment.mDishQuantityBeans;
-                final boolean copyProperty = fragment.copyDishPropertyCb.isChecked();
-                final boolean printKitcen = fragment.printKitchenCb.isChecked();
-                checkMergeOrTransfer(orginal.getTradeUuid(), getMoveDishItems(orginal), dest.getId(), TicketTypeEnum.MOVEDISH, new Runnable() {
-                    public void run() {
-
-                        if (MoreMenuPopWindow.operateType == OperateType.MOVE_DISH) {
-                            UserActionEvent.start(UserActionEvent.DINNER_DISHES_MOVE);
-                            mManager.mergeMoveDish(dishItes, orginal, dest, 1, true, false);
-                        } else {
-                            UserActionEvent.start(UserActionEvent.DINNER_DISHES_COPY);
-                            mManager.mergeMoveDish(dishItes, orginal, dest, 2, copyProperty, printKitcen);
-                        }
-                    }
-                });
-            }
-        });
-
-
-        fragment.setData(orginal, dest.getTableSeats());
-        fragment.setmOperateType(MoreMenuPopWindow.operateType);
-
-        fragment.show(getFragmentManager(), DIALOG_TAG);*/
     }
 
     @Override
     public void doTransferMoveDishDialog(final IDinnertableTradeMoveDish orginal, final IDinnertable dest) {
-        /*String headTitle = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.move_dishes) : getActivity().getString(R.string.dinner_copydish);
-        String keyWord = MoreMenuPopWindow.operateType == OperateType.MOVE_DISH ? getActivity().getString(R.string.dinner_movedish) : getActivity().getString(R.string.dinner_copydish);
 
-        String title = getActivity().getString(R.string.dinner_move_dish_transfer_dialog_title, orginal.getSn(), dest.getName(), keyWord);
-
-        final DishQuantityAndSeatEditDialogFragment fragment = bulildDishQuantitySeatEditDialog(headTitle, title, R.drawable.commonmodule_dialog_icon_warning, R.string.dinner_ok, R.string.dinner_cancel);
-
-        fragment.setPositiveListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(final View arg0) {// 确定
-                final List<DishQuantityBean> dishItes = fragment.mDishQuantityBeans;
-                final boolean copyProperty = fragment.copyDishPropertyCb.isChecked();
-                final boolean printKitcen = fragment.printKitchenCb.isChecked();
-                checkMergeOrTransfer(orginal.getTradeUuid(), getMoveDishItems(orginal), dest.getId(), TicketTypeEnum.MOVEDISH, new Runnable() {
-                    public void run() {
-                        if (MoreMenuPopWindow.operateType == OperateType.MOVE_DISH) {
-                            UserActionEvent.start(UserActionEvent.DINNER_DISHES_MOVE);
-                            mManager.transferMoveDish(dishItes, orginal, dest, 1, true, false);
-                        } else {
-                            UserActionEvent.start(UserActionEvent.DINNER_DISHES_COPY);
-                            mManager.transferMoveDish(dishItes, orginal, dest, 2, copyProperty, printKitcen);
-                        }
-                    }
-                });
-            }
-        });
-
-        fragment.setData(orginal, dest.getTableSeats());
-        fragment.setmOperateType(MoreMenuPopWindow.operateType);
-
-        fragment.show(getFragmentManager(), DIALOG_TAG);*/
     }
 
     @Override
     public void doMergeDialog(final IDinnertableTrade orginal, final IDinnertableTrade dest) {
         List<IShopcartItem> shopcartItems = getInfoFragment().getDinnerTableTradeVo().getItems();
-        if (Utils.isEmpty(shopcartItems) || !DinnerUtils.isWestStyle()) {//如果没有菜品，直接合单
-            super.doMergeDialog(orginal, dest);
+        if (Utils.isEmpty(shopcartItems) || !DinnerUtils.isWestStyle()) {            super.doMergeDialog(orginal, dest);
             return;
         }
 
@@ -364,22 +263,8 @@ public class DinnertableFragment extends TableFragment {
     }
 
 
-    //modify  20170828 屏蔽顾客到店列表
-	/*public void onEventMainThread(CustomerArriveEvent event) {
-		showCustomerArriveDot();
-	}
 
-	private void showCustomerArriveDot() {
-		boolean isShowDot = SpHelper.getDefault().getBoolean(SpHelper.CUSTOMER_ARRIVE_DOT);
-		iv_customer_arrive_dot.setVisibility(isShowDot ? View.VISIBLE : View.GONE);
-	}
-
-	private void hideCustomerArriveDot() {
-		SpHelper.getDefault().putBoolean(SpHelper.CUSTOMER_ARRIVE_DOT, false);
-		showCustomerArriveDot();
-	}*/
-    //modify  20170828 屏蔽顾客到店列表
-    private List<TradeItemExtraDinner> buildTradeItemExtraDinners(DinnertableTradeVo dinnertableTradeVo, List<DishQuantityBean> listDishItem) {
+        private List<TradeItemExtraDinner> buildTradeItemExtraDinners(DinnertableTradeVo dinnertableTradeVo, List<DishQuantityBean> listDishItem) {
         return buildTradeItemExtraDinners(dinnertableTradeVo, listDishItem, true);
     }
 

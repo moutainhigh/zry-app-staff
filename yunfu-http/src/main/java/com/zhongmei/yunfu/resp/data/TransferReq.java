@@ -1,9 +1,6 @@
 package com.zhongmei.yunfu.resp.data;
 
-/**
- * 透传接口通用请求体
- * Created by demo on 2018/12/15
- */
+
 public class TransferReq<T> {
 
     private String url;

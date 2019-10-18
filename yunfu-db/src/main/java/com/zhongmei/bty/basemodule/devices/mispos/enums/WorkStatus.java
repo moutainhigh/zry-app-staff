@@ -2,25 +2,15 @@ package com.zhongmei.bty.basemodule.devices.mispos.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 卡状态
- */
+
 public enum WorkStatus implements ValueEnum<Integer> {
 
-    /**
-     * 激活后可用
-     */
+
     AVAILABLE_AFTER_ACTIVATION(1),
-    /**
-     * 售卡后可用
-     */
+
     AVAILABLE_AFTER_SALE(2),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

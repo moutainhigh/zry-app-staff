@@ -9,9 +9,7 @@ import android.hardware.usb.UsbDevice;
 import android.os.Environment;
 import android.util.Log;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class LDUtil {
 
     private static final String TAG = LDUtil.class.getSimpleName();
@@ -90,11 +88,7 @@ public class LDUtil {
         return Environment.getExternalStorageDirectory().getAbsolutePath() + "/ALLINPAY/Print.txt";
     }
 
-    /**
-     * 判断pos机有没有连接
-     *
-     * @return the boolean
-     */
+
     public static boolean isPosConnected() {
         return getLDDevicePort() != null;
     }

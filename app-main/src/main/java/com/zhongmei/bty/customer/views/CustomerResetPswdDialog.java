@@ -75,8 +75,7 @@ public class CustomerResetPswdDialog extends BasicDialogFragment {
 
     public void show(FragmentManager manager, Bundle bundle, String tag) {
         if (manager == null) {
-            //网络请求中调用，可能出现NullPointerException问题
-            return;
+                        return;
         }
         FragmentTransaction ft = manager.beginTransaction();
         setArguments(bundle);

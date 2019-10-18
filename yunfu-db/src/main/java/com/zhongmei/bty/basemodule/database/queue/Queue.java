@@ -7,25 +7,17 @@ import com.zhongmei.yunfu.db.EntityBase;
 import com.zhongmei.yunfu.db.enums.Sex;
 import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 
-/**
- * 排队
- */
+
 @DatabaseTable(tableName = "queue")
 public class Queue extends EntityBase<String> {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ {
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * status
-         */
+
         String status = "status";
 
         String commercialID = "commercial_id";
@@ -76,105 +68,71 @@ public class Queue extends EntityBase<String> {
 
     }
 
-    /**
-     * 商户id
-     */
+
     @DatabaseField(columnName = "commercial_id")
     private Long commercialID;
 
-    /**
-     * 排队状态 0:排队中;1:入场;-1作废;-2取消
-     */
+
     @DatabaseField(columnName = "queue_status")
     private Integer queueStatus;
 
-    /**
-     * 创建时间
-     */
+
     @DatabaseField(columnName = "create_date_time")
     private Long createDateTime;
 
-    /**
-     * 更新时间
-     */
+
     @DatabaseField(columnName = "modify_date_time")
     private Long modifyDateTime;
 
-    /**
-     * 客户名称
-     */
+
     @DatabaseField(columnName = "name")
     private String name;
 
-    /**
-     * 电话
-     */
+
     @DatabaseField(columnName = "mobile")
     private String mobile;
 
-    /**
-     * 排队人数
-     */
+
     @DatabaseField(columnName = "repast_person_count")
     private Integer repastPersonCount;
 
-    /**
-     * 排队序号
-     */
+
     @DatabaseField(columnName = "queue_number")
     private Integer queueNumber;
 
-    /**
-     * 性别 0女 1 男
-     */
+
     @DatabaseField(columnName = "sex")
     private Integer sex;
 
-    /**
-     * 排队来源
-     */
+
     @DatabaseField(columnName = "queue_source")
     private String queueSource;
 
-    /**
-     * queueProof
-     */
+
     @DatabaseField(columnName = "queue_proof")
     private String queueProof;
 
-    /**
-     * 入场时间
-     */
+
     @DatabaseField(columnName = "in_date_time")
     private Long inDateTime;
 
-    /**
-     * 过号时间
-     */
+
     @DatabaseField(columnName = "skip_datetime")
     private Long skipDatetime;
 
-    /**
-     * 是否清零 0否 1 是
-     */
+
     @DatabaseField(columnName = "is_zero_oped")
     private Integer isZeroOped;
 
-    /**
-     * 微信订单来源 0：官微 ，1：商微
-     */
+
     @DatabaseField(columnName = "is_official")
     private Integer isOfficial;
 
-    /**
-     * 同步上行是否成功(0成功，-1失败)
-     */
+
     @DatabaseField(columnName = "is_ok")
     private Integer isOk;
 
-    /**
-     * 队列编号
-     */
+
     @DatabaseField(columnName = "queue_line_id")
     private Long queueLineId;
 
@@ -187,18 +145,14 @@ public class Queue extends EntityBase<String> {
     @DatabaseField(columnName = "status", canBeNull = false)
     private Integer status;
 
-    /**
-     * 提醒状态
-     */
+
     @DatabaseField(columnName = "notifyType")
     private String notifyType;
 
     @DatabaseField(columnName = "customer_id")
     private Long customerId;
 
-    /**
-     * remind_count和remind_time不用，现使用queueExtra里面的值，由服务器记录的
-     */
+
     @DatabaseField(columnName = "remind_count")
     private Integer remindCount;
 
@@ -208,21 +162,15 @@ public class Queue extends EntityBase<String> {
     @DatabaseField(columnName = "national_tel_code")
     private String nationalTelCode;
 
-    /**
-     * 备注
-     */
+
     @DatabaseField(columnName = "memo")
     private String memo;
 
-    //////////////////////以下是扩展字段，不属于数据库值////////////////////
-    public Long levelId; //	等级Id
-
+        public Long levelId;
     public QueueExtra queueExtra;
 
-    public String country;//国家名
-
-    public String nation;//国家英文名
-
+    public String country;
+    public String nation;
     public String getNationalTelCode() {
         return nationalTelCode;
     }

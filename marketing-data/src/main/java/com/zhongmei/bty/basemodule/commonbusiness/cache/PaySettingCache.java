@@ -43,13 +43,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * @Date：2016-2-17 下午12:01:45
- * @Description: 缓存erp设置项(支付方式 ， 支付方式排序 ， 是否组合 ； 电子发票设置 ； 银联开关)
- * @Version: 1.0
- * <p>
- * reserved.
- */
+
 public class PaySettingCache {
     private static final String TAG = PaySettingCache.class.getSimpleName();
 
@@ -79,8 +73,7 @@ public class PaySettingCache {
         else return false;
     }
 
-    // add 20170510 start for paymentmodescene
-    public static boolean isSetPayModeGroup(Integer sceneCode, PayModelGroup payModelGroup) {
+        public static boolean isSetPayModeGroup(Integer sceneCode, PayModelGroup payModelGroup) {
         if (LazySingletonHolder.INSTANCE.mPaymentModeContent != null)
             return LazySingletonHolder.INSTANCE.mPaymentModeContent.isContainsPayModelType(sceneCode, payModelGroup.value());
         else return false;
@@ -92,18 +85,15 @@ public class PaySettingCache {
         else return false;
     }
 
-    // 根据场景从缓存获取其它支付方式
-    public static List<PaymentModeShop> getOthersPaymentModeShops(Integer sceneCode) {
+        public static List<PaymentModeShop> getOthersPaymentModeShops(Integer sceneCode) {
         if (LazySingletonHolder.INSTANCE.mPaymentModeContent != null)
             return LazySingletonHolder.INSTANCE.mPaymentModeContent.getOtherPaymentModeShop(sceneCode);
         else return null;
     }
 
-    //是否有配置支付方式
-    public static boolean isContainsPayModes(Integer sceneCode) {
+        public static boolean isContainsPayModes(Integer sceneCode) {
         return LazySingletonHolder.INSTANCE.isContainsPayMode(sceneCode);
     }
-    // add 20170510 end
 
 
     public static boolean isErpModeID(long id) {
@@ -112,29 +102,18 @@ public class PaySettingCache {
         else return false;
     }
 
-    //add v8.12 start
-    public static PaymentModeShop getPaymentModeShop(long erpModeId) {
+        public static PaymentModeShop getPaymentModeShop(long erpModeId) {
 
         return LazySingletonHolder.INSTANCE.mPaymentModesMap.get(erpModeId);
     }
 
-    /*public static List<PaymentModeShop> getPaymentModeShopByType(Integer sceneCode, Integer paymentModeType) {
 
-        if (LazySingletonHolder.INSTANCE.mPaymentModeContent != null)
-            return LazySingletonHolder.INSTANCE.mPaymentModeContent.getPaymentModeShopByType(sceneCode, paymentModeType);
-        else return null;
-
-    }*/
 
     public static MobilePaySettingHolder getMobilePaySettingHolder() {
         return LazySingletonHolder.INSTANCE.mMobilePaySettingHolder;
     }
-    //add v8.12 end
 
-    /**
-     * @Description: erp设置里面判断是否采用银联支付
-     * @Return boolean 返回类型
-     */
+
     public static boolean isUnionpay() {
         ErpCommercialRelation erpComRel = LazySingletonHolder.INSTANCE.getmErpCommercialRelation();
 
@@ -144,10 +123,7 @@ public class PaySettingCache {
         return false;
     }
 
-    /**
-     * @Description: erp设置里面判断是否采用熟客
-     * @Return boolean 返回类型
-     */
+
     public static boolean isShukeInErp() {
         ErpCommercialRelation erpComRel = LazySingletonHolder.INSTANCE.getmErpCommercialRelation();
 
@@ -165,8 +141,7 @@ public class PaySettingCache {
         return LazySingletonHolder.INSTANCE.getMenuOrder(Long.valueOf(MenuId));
     }
 
-    //是否有配置支付方式
-    public static boolean isContainsPayModes() {
+        public static boolean isContainsPayModes() {
         return LazySingletonHolder.INSTANCE.isContainsPayMode(PayScene.SCENE_CODE_SHOP.value());
     }
 
@@ -178,28 +153,22 @@ public class PaySettingCache {
         LazySingletonHolder.INSTANCE.isSupportGroupPay = supportGroupPay;
     }
 
-    /**
-     * 获取电子发票设置数据
-     */
+
     public static ElectronicInvoiceVo getElectronicInvoiceVo() {
         return LazySingletonHolder.INSTANCE.mElectronicInvoiceVo;
     }
 
-    /**
-     * 获取电子发票开关
-     */
+
     public static boolean isElectronicInvoiceOpen() {
         if (LazySingletonHolder.INSTANCE.mElectronicInvoiceVo != null)
             return LazySingletonHolder.INSTANCE.mElectronicInvoiceVo.isOpen();
         return false;
     }
 
-    public static boolean isSupportOneCodePay() {//add v8.12
-        return LazySingletonHolder.INSTANCE.isSupportOneCodePay;
+    public static boolean isSupportOneCodePay() {        return LazySingletonHolder.INSTANCE.isSupportOneCodePay;
     }
 
-    public static void setSupportOneCodePay(boolean isSuport) {//add v8.12
-        LazySingletonHolder.INSTANCE.isSupportOneCodePay = isSuport;
+    public static void setSupportOneCodePay(boolean isSuport) {        LazySingletonHolder.INSTANCE.isSupportOneCodePay = isSuport;
     }
 
     public static boolean isCanPayNoPwd(BigDecimal amount) {
@@ -210,48 +179,33 @@ public class PaySettingCache {
 
     private static final Uri URI_PAYMENT_MODE_ID = DBHelperManager.getUri(PaymentModeShop.class);
 
-    //门店设置
-    private static final Uri URI_COMMERCIAL_CUSTOMER_SETTINGS = DBHelperManager.getUri(CommercialCustomSettings.class);
+        private static final Uri URI_COMMERCIAL_CUSTOMER_SETTINGS = DBHelperManager.getUri(CommercialCustomSettings.class);
 
-    //电子发票设置信息表
-    private static final Uri URI_ELECTRONIC_INVOICE = DBHelperManager.getUri(ElectronicInvoice.class);
+        private static final Uri URI_ELECTRONIC_INVOICE = DBHelperManager.getUri(ElectronicInvoice.class);
 
-    //电子发票税率表
-    private static final Uri URI_INVOICE_TAX_RATE = DBHelperManager.getUri(InvoiceTaxRate.class);
+        private static final Uri URI_INVOICE_TAX_RATE = DBHelperManager.getUri(InvoiceTaxRate.class);
 
-    //支付方式场景表
-    private static final Uri URI_PAYMENT_MODE_SCENE = DBHelperManager.getUri(PaymentModeScene.class);
+        private static final Uri URI_PAYMENT_MODE_SCENE = DBHelperManager.getUri(PaymentModeScene.class);
 
-    //免密支付配置
-    private static final Uri URI_CRM_LEVEL_STORE_RULE = DBHelperManager.getUri(CrmLevelStoreRule.class);
+        private static final Uri URI_CRM_LEVEL_STORE_RULE = DBHelperManager.getUri(CrmLevelStoreRule.class);
 
-    //移动支付设置
-    private static final Uri URI_CRM_MOBILE_PAY_SETTING = DBHelperManager.getUri(MobilePaySetting.class);
+        private static final Uri URI_CRM_MOBILE_PAY_SETTING = DBHelperManager.getUri(MobilePaySetting.class);
 
     private ErpCommercialRelation mErpCommercialRelation;
 
     private ElectronicInvoiceVo mElectronicInvoiceVo;
 
-    private Map<Long, String> mPaymentModeNamesMap = new HashMap<Long, String>();//所有支付方式名称缓存
-
-    private Map<Long, PaymentModeShop> mPaymentModesMap = new HashMap<Long, PaymentModeShop>();//所有支付方式名称缓存 add v8.12
-
-    private Map<Long, Integer> mPayMenuOrderMap;//支付菜单顺序
-
-    private boolean isSupportGroupPay;//add 20170425 是否支持组合支付本地参数
-
-    private boolean isSupportOneCodePay;//add 8.12 是否支持一码支付本地参数
-
-    private PaymentModeContent mPaymentModeContent;//add 20170510 添加支付方式场景缓存
-
-    private CrmLevelStoreRule mCrmLevelStoreRule;//免密支付配置项
-
-    private MobilePaySettingHolder mMobilePaySettingHolder = new MobilePaySettingHolder();//移动支付配置项 add v8.12
-
+    private Map<Long, String> mPaymentModeNamesMap = new HashMap<Long, String>();
+    private Map<Long, PaymentModeShop> mPaymentModesMap = new HashMap<Long, PaymentModeShop>();
+    private Map<Long, Integer> mPayMenuOrderMap;
+    private boolean isSupportGroupPay;
+    private boolean isSupportOneCodePay;
+    private PaymentModeContent mPaymentModeContent;
+    private CrmLevelStoreRule mCrmLevelStoreRule;
+    private MobilePaySettingHolder mMobilePaySettingHolder = new MobilePaySettingHolder();
     private DatabaseHelper.DataChangeObserver mObserver;
 
-    private Context mContext;//add 20180308
-
+    private Context mContext;
     public void init(Context context) {
         mContext = context;
         if (mObserver == null) {
@@ -269,15 +223,11 @@ public class PaySettingCache {
         if (mPaymentModeNamesMap != null) {
             mPaymentModeNamesMap.clear();
         }
-        if (mPaymentModesMap != null) {//add v8.12
-            mPaymentModesMap.clear();
+        if (mPaymentModesMap != null) {            mPaymentModesMap.clear();
         }
     }
 
-    /**
-     * @Title: backgroundRefresh
-     * @Description: 开启新线程刷新缓存数据
-     */
+
     private void backgroundRefresh() {
         ThreadUtils.runOnWorkThread(new Runnable() {
             @Override
@@ -287,9 +237,7 @@ public class PaySettingCache {
                 refreshElectronicInvoice();
                 refreshPayMenuOrder();
                 refreshCrmLevelStoreRule();
-                initIsSupportGroupPay();//add 20170424 是否支持分步开关
-                refreshMobilePaySetting();//刷新移动支付设置
-            }
+                initIsSupportGroupPay();                refreshMobilePaySetting();            }
         });
     }
 
@@ -335,229 +283,159 @@ public class PaySettingCache {
         }
     }
 
-    private void refreshMobilePaySetting() {//刷新移动支付设置 add v8.12
-        PaymentModeDal paymentModeDal = OperatesFactory.create(PaymentModeDal.class);
+    private void refreshMobilePaySetting() {        PaymentModeDal paymentModeDal = OperatesFactory.create(PaymentModeDal.class);
         List<MobilePaySetting> list = paymentModeDal.findAllMobilePaySettings();
         mMobilePaySettingHolder.updateData(list);
     }
 
-    /**
-     * 刷新
-     */
+
     private void refreshElectronicInvoice() {
         mElectronicInvoiceVo = SystemSettingsManager.findElectronicInvoiceVo();
     }
 
-    //modify 20170510 start 刷新支付方式及支付场景
-    private void refreshPaymentModes() {
+        private void refreshPaymentModes() {
         try {
-            PaymentModeContent _PaymentModeContent = new PaymentModeContent();//支付方式配置场景缓存容器
-            Map<Long, String> _PaymentModeNamesMap = new HashMap<Long, String>();//支付方式名字缓存
-            Map<Long, PaymentModeShop> _PaymentModeShopMap = new HashMap<Long, PaymentModeShop>();//modify v8.12 缓存所有支付方式
-            boolean isUsedScene = false;//是否开启支付场景设置
-            PaymentModeDal paymentModeDal = OperatesFactory.create(PaymentModeDal.class);
-            //查询所有支付方式
-            List<PaymentModeShop> modeList = paymentModeDal.findAllPaymentMode();
-            //查询所有支付方式场景
-            List<PaymentModeScene> sceneList = paymentModeDal.findAllPaymentModeScene();
-            //查询所有支付方式场景类别
-            Set<Integer> sceneCodeSet = paymentModeDal.findAllPaymentModeSceneCode();
-            //根据场景数据是否为空作为场景开关
-            if (sceneList != null && !sceneList.isEmpty() && sceneCodeSet != null) {
+            PaymentModeContent _PaymentModeContent = new PaymentModeContent();            Map<Long, String> _PaymentModeNamesMap = new HashMap<Long, String>();            Map<Long, PaymentModeShop> _PaymentModeShopMap = new HashMap<Long, PaymentModeShop>();            boolean isUsedScene = false;            PaymentModeDal paymentModeDal = OperatesFactory.create(PaymentModeDal.class);
+                        List<PaymentModeShop> modeList = paymentModeDal.findAllPaymentMode();
+                        List<PaymentModeScene> sceneList = paymentModeDal.findAllPaymentModeScene();
+                        Set<Integer> sceneCodeSet = paymentModeDal.findAllPaymentModeSceneCode();
+                        if (sceneList != null && !sceneList.isEmpty() && sceneCodeSet != null) {
                 isUsedScene = true;
             }
             if (modeList != null && !modeList.isEmpty()) {
                 for (PaymentModeShop shop : modeList) {
                     if (shop.getErpModeId() != null) {
-                        _PaymentModeShopMap.put(shop.getErpModeId(), shop);//add v812 缓存所有支付方式
-                        //如果没有消费场景，默认所有支付方式
-                        if (!sceneCodeSet.contains(PayScene.SCENE_CODE_SHOP.value())) {
+                        _PaymentModeShopMap.put(shop.getErpModeId(), shop);                                                if (!sceneCodeSet.contains(PayScene.SCENE_CODE_SHOP.value())) {
                             _PaymentModeContent.setPaymentMode(PayScene.SCENE_CODE_SHOP.value(), shop);
                         }
-                        //如果没有储值场景，默认所有支付方式
-                        if (!sceneCodeSet.contains(PayScene.SCENE_CODE_CHARGE.value())) {
+                                                if (!sceneCodeSet.contains(PayScene.SCENE_CODE_CHARGE.value())) {
                             _PaymentModeContent.setPaymentMode(PayScene.SCENE_CODE_CHARGE.value(), shop);
                         }
-                        //如果没有销账场景，默认所有支付方式 add v8.10
-                        if (!sceneCodeSet.contains(PayScene.SCENE_CODE_WRITEOFF.value())) {
+                                                if (!sceneCodeSet.contains(PayScene.SCENE_CODE_WRITEOFF.value())) {
                             _PaymentModeContent.setPaymentMode(PayScene.SCENE_CODE_WRITEOFF.value(), shop);
                         }
-                        //缓存支付方式名字
-                        if (!TextUtils.isEmpty(shop.getName())) {
+                                                if (!TextUtils.isEmpty(shop.getName())) {
                             _PaymentModeNamesMap.put(shop.getErpModeId(), shop.getName());
                         }
                     }
                 }
-                this.mPaymentModeNamesMap = _PaymentModeNamesMap;//刷新支付方式名字缓存
-                this.mPaymentModesMap = _PaymentModeShopMap;//刷新所有支付方式缓存 add 8.12
-            }
-            //如果开启场景支持
-            if (isUsedScene) {
+                this.mPaymentModeNamesMap = _PaymentModeNamesMap;                this.mPaymentModesMap = _PaymentModeShopMap;            }
+                        if (isUsedScene) {
                 for (PaymentModeScene scene : sceneList) {
                     if (scene.getShopErpModeId() != null && scene.getSceneCode() != null) {
-                        //添加数据到缓存容器
-                        _PaymentModeContent.setPaymentMode(scene.getSceneCode(), _PaymentModeShopMap.get(scene.getShopErpModeId()));
+                                                _PaymentModeContent.setPaymentMode(scene.getSceneCode(), _PaymentModeShopMap.get(scene.getShopErpModeId()));
                     }
                 }
             }
-            this.mPaymentModeContent = _PaymentModeContent;//刷新各场景支付方式缓存
-        } catch (Exception e) {
+            this.mPaymentModeContent = _PaymentModeContent;        } catch (Exception e) {
             Log.e(TAG, "refreshPaymentMode error!", e);
         }
     }
-    //modify 20170510 end
 
     public ErpCommercialRelation getmErpCommercialRelation() {
         return this.mErpCommercialRelation;
     }
 
-    //moidfy begin 20170510
-    //是否配置有支付方式
-    private boolean isContainsPayMode(Integer senceCode) {
+            private boolean isContainsPayMode(Integer senceCode) {
         if (LazySingletonHolder.INSTANCE.mPaymentModeContent != null) {
-            if (LazySingletonHolder.INSTANCE.mPaymentModeContent.paymentModeShopHolderMap.get(senceCode) != null) {//大的支付类型
-                return true;
+            if (LazySingletonHolder.INSTANCE.mPaymentModeContent.paymentModeShopHolderMap.get(senceCode) != null) {                return true;
             }
-            if (LazySingletonHolder.INSTANCE.mPaymentModeContent.mPayModeIdMap.get(senceCode) != null) {//具体支付方式
-                return true;
+            if (LazySingletonHolder.INSTANCE.mPaymentModeContent.mPayModeIdMap.get(senceCode) != null) {                return true;
             }
         }
         return false;
     }
-    //moidfy end 20170510
 
-    /**
-     * @Description: 缓存里面获取支付类型名称
-     * @Param @param paymodeId
-     * @Return String 返回类型
-     */
+
     private String getPayModeName(long paymodeId) {
         String payModeName = this.mPaymentModeNamesMap.get(paymodeId);
-        // 如果为空，手动设值
-        if (TextUtils.isEmpty(payModeName) && mContext != null) {
+                if (TextUtils.isEmpty(payModeName) && mContext != null) {
             String[] paymentModeName = mContext.getResources().getStringArray(R.array.trade_payment_mode);
             switch ((int) (paymodeId + 0)) {
                 case 1:
-                    // 会员卡余额
-                    payModeName = paymentModeName[0];
+                                        payModeName = paymentModeName[0];
                     break;
                 case 2:
-                    // 现金
-                    payModeName = paymentModeName[1];
+                                        payModeName = paymentModeName[1];
                     break;
                 case 3:
-                    // 银行卡
-                    payModeName = paymentModeName[2];
+                                        payModeName = paymentModeName[2];
                     break;
                 case 4:
-                    // 微信支付
-                    payModeName = paymentModeName[3];
+                                        payModeName = paymentModeName[3];
                     break;
                 case 5:
-                    // 支付宝
-                    payModeName = paymentModeName[4];
+                                        payModeName = paymentModeName[4];
                     break;
                 case 6:
-                    // 积分抵现
-                    payModeName = paymentModeName[5];
+                                        payModeName = paymentModeName[5];
                     break;
                 case 7:
-                    // 优惠券
-                    payModeName = paymentModeName[6];
+                                        payModeName = paymentModeName[6];
                     break;
-                //------end--------//
-                case -8:
-                    // 百度直达号
-                    payModeName = paymentModeName[7];
+                                case -8:
+                                        payModeName = paymentModeName[7];
                     break;
                 case -9:
-                    // 积分抵现
-                    payModeName = paymentModeName[8];
+                                        payModeName = paymentModeName[8];
 
                     break;
                 case -10:
-                    // 百度地图
-                    payModeName = paymentModeName[9];
+                                        payModeName = paymentModeName[9];
 
                     break;
                 case -11:
-                    // 银联POS刷卡
-                    payModeName = paymentModeName[10];
+                                        payModeName = paymentModeName[10];
                     break;
-                case -12: //百糯到店付
-                    payModeName = paymentModeName[11];
+                case -12:                     payModeName = paymentModeName[11];
                     break;
-                case -13: //百度外卖
-                    payModeName = paymentModeName[12];
+                case -13:                     payModeName = paymentModeName[12];
                     break;
-                case -14: //饿了么
-                    payModeName = paymentModeName[13];
+                case -14:                     payModeName = paymentModeName[13];
                     break;
-                case -15: //实体卡支付
-                    payModeName = paymentModeName[14];
+                case -15:                     payModeName = paymentModeName[14];
                     break;
-                case -16: //大众点评
-                    payModeName = paymentModeName[15];
+                case -16:                     payModeName = paymentModeName[15];
                     break;
-                case -17: //美团外卖
-                    payModeName = paymentModeName[16];
+                case -17:                     payModeName = paymentModeName[16];
                     break;
-                case -18: //点评团购券
-                    payModeName = paymentModeName[17];
+                case -18:                     payModeName = paymentModeName[17];
                     break;
-                case -19: //点评闪惠
-                    payModeName = paymentModeName[18];
+                case -19:                     payModeName = paymentModeName[18];
                     break;
-                case -20: //匿名卡支付
-                    payModeName = paymentModeName[19];
+                case -20:                     payModeName = paymentModeName[19];
                     break;
-                case -21: //糯米点菜
-                    payModeName = paymentModeName[20];
+                case -21:                     payModeName = paymentModeName[20];
                     break;
-                case -22: //第三方C端
-                    payModeName = paymentModeName[21];
+                case -22:                     payModeName = paymentModeName[21];
                     break;
-                case -23: //美团闪付
-                    payModeName = paymentModeName[22];
+                case -23:                     payModeName = paymentModeName[22];
                     break;
-                case -24: //美团团购
-                    payModeName = paymentModeName[23];
+                case -24:                     payModeName = paymentModeName[23];
                     break;
-                case -25://钱包生活
-                    payModeName = paymentModeName[24];
+                case -25:                    payModeName = paymentModeName[24];
                     break;
-                case -26://百度糯米券
-                    payModeName = paymentModeName[25];
+                case -26:                    payModeName = paymentModeName[25];
                     break;
-                case -29://金诚支付:
-                    payModeName = paymentModeName[26];
+                case -29:                    payModeName = paymentModeName[26];
                     break;
-                case -30://金诚储值卡
-                    payModeName = paymentModeName[27];
+                case -30:                    payModeName = paymentModeName[27];
                     break;
-                case -34://烽火手环//add v8.7
-                    payModeName = paymentModeName[28];
+                case -34:                    payModeName = paymentModeName[28];
                     break;
-                case -36://口碑券//add v8.9
-                    payModeName = paymentModeName[29];
+                case -36:                    payModeName = paymentModeName[29];
                     break;
-                case -37://银联云闪付//add v8.11
-                    payModeName = paymentModeName[30];
+                case -37:                    payModeName = paymentModeName[30];
                     break;
-                case -38://工商E支付//add v8.11
-                    payModeName = paymentModeName[31];
+                case -38:                    payModeName = paymentModeName[31];
                     break;
-                case -40: //移动支付
-                    payModeName = paymentModeName[32];
+                case -40:                     payModeName = paymentModeName[32];
                     break;
-                case -42: //订金抵扣
-                    payModeName = paymentModeName[33];
+                case -42:                     payModeName = paymentModeName[33];
                     break;
-                case -101: //电信翼支付
-                    payModeName = paymentModeName[34];
+                case -101:                     payModeName = paymentModeName[34];
                     break;
-                // 其他
-                default:
+                                default:
                     payModeName = mContext.getResources().getString(R.string.erp_unknow);
                     break;
             }
@@ -574,19 +452,10 @@ public class PaySettingCache {
         }
     }
 
-    /**
-     * 当前金额是否可以进行免密支付（只针对虚拟会员储值支付）
-     *
-     * @param amount
-     * @return
-     */
+
     public boolean canPayNoPwd(BigDecimal amount) {
         if (mCrmLevelStoreRule != null) {
-            if (mCrmLevelStoreRule.getPayNoPwd() == YesOrNo.YES //支持免密
-                    && (mCrmLevelStoreRule.getPayNoPwdAmount() == null //免密额度为空
-                    || mCrmLevelStoreRule.getPayNoPwdAmount().compareTo(new BigDecimal(-1)) == 0 //-1表示免密不限额
-                    || mCrmLevelStoreRule.getPayNoPwdAmount().compareTo(amount) >= 0)) {//免密额度大于等于订单金额
-
+            if (mCrmLevelStoreRule.getPayNoPwd() == YesOrNo.YES                     && (mCrmLevelStoreRule.getPayNoPwdAmount() == null                     || mCrmLevelStoreRule.getPayNoPwdAmount().compareTo(new BigDecimal(-1)) == 0                     || mCrmLevelStoreRule.getPayNoPwdAmount().compareTo(amount) >= 0)) {
                 return true;
             }
         }
@@ -599,33 +468,25 @@ public class PaySettingCache {
         @Override
         public void onChange(Collection<Uri> uris) {
             if (uris.contains(URI_ERP_COMMERCIAL_RELATION)) {
-                refreshErpCommercialRelation();// 刷新erp配置（费率）
-            }
+                refreshErpCommercialRelation();            }
             if (uris.contains(URI_PAYMENT_MODE_ID) || uris.contains(URI_PAYMENT_MODE_SCENE)) {
-                refreshPaymentModes();// 刷新erp配置（支付类型）
-            }
-            //刷新电子发票相关表
-            if (uris.contains(URI_COMMERCIAL_CUSTOMER_SETTINGS)
+                refreshPaymentModes();            }
+                        if (uris.contains(URI_COMMERCIAL_CUSTOMER_SETTINGS)
                     || uris.contains(URI_ELECTRONIC_INVOICE)
                     || uris.contains(URI_INVOICE_TAX_RATE)) {
                 refreshElectronicInvoice();
             }
-            //刷新免密支付配置项
-            if (uris.contains(URI_CRM_LEVEL_STORE_RULE)) {
+                        if (uris.contains(URI_CRM_LEVEL_STORE_RULE)) {
                 refreshCrmLevelStoreRule();
             }
-            //刷新移动支付设置
-            if (uris.contains(URI_CRM_MOBILE_PAY_SETTING)) {
+                        if (uris.contains(URI_CRM_MOBILE_PAY_SETTING)) {
                 refreshMobilePaySetting();
             }
         }
     }
 
-    //add 20170510 begin  for 支付方式场景
-    private static class PaymentModeContent {
-        Map<Integer, Set<Long>> mPayModeIdMap;//sceneCode 作为key
-        Map<Integer, PaymentModeShopHolder> paymentModeShopHolderMap;//modify v8.12 根据支付类型缓存 sceneCode 作为key
-
+        private static class PaymentModeContent {
+        Map<Integer, Set<Long>> mPayModeIdMap;        Map<Integer, PaymentModeShopHolder> paymentModeShopHolderMap;
         public PaymentModeContent() {
             mPayModeIdMap = new HashMap<Integer, Set<Long>>();
             paymentModeShopHolderMap = new HashMap<Integer, PaymentModeShopHolder>();
@@ -677,8 +538,7 @@ public class PaySettingCache {
 
         private boolean isContainsPaymentModeId(Integer sceneCode, Long payModeId) {
             if (this.mPayModeIdMap.get(sceneCode) == null) {
-                //如果没有缓存的场景默认是消费(目前自助押金取消费)
-                if (this.mPayModeIdMap.get(PayScene.SCENE_CODE_SHOP.value()) != null)
+                                if (this.mPayModeIdMap.get(PayScene.SCENE_CODE_SHOP.value()) != null)
                     return this.mPayModeIdMap.get(PayScene.SCENE_CODE_SHOP.value()).contains(payModeId);
                 else
                     return false;
@@ -701,18 +561,15 @@ public class PaySettingCache {
         }
     }
 
-    //add 20170510 end  for 支付方式场景
 
-    //add v8.12 begin
-    private static class PaymentModeShopHolder extends BaseDataHolder<Integer, PaymentModeShop> {
+        private static class PaymentModeShopHolder extends BaseDataHolder<Integer, PaymentModeShop> {
 
         private PaymentModeShopHolder() {
             super();
         }
 
         protected void addData(PaymentModeShop paymentModeShop) {
-            if (paymentModeShop.getPaymentModeType() != null) {//PaymentModeType作为Key
-                if (this.get(paymentModeShop.getPaymentModeType().value()) == null) {
+            if (paymentModeShop.getPaymentModeType() != null) {                if (this.get(paymentModeShop.getPaymentModeType().value()) == null) {
                     List<PaymentModeShop> list = new ArrayList<PaymentModeShop>();
                     list.add(paymentModeShop);
                     this.put(paymentModeShop.getPaymentModeType().value(), list);
@@ -733,10 +590,8 @@ public class PaySettingCache {
         }
     }
 
-    //移动支付后台开关
-    public class MobilePaySettingHolder extends BaseDataHolder<String, MobilePaySetting> {
-        Set<PayModeId> mOneCodeSet = new HashSet<PayModeId>();//缓存一码付的支付方式
-
+        public class MobilePaySettingHolder extends BaseDataHolder<String, MobilePaySetting> {
+        Set<PayModeId> mOneCodeSet = new HashSet<PayModeId>();
         private MobilePaySettingHolder() {
             super();
         }
@@ -745,14 +600,12 @@ public class PaySettingCache {
             this.clear();
             if (dataList != null) {
                 mOneCodeSet.clear();
-                //先遍历找出支持一码付的支付方式
-                for (MobilePaySetting mobilePaySetting : dataList) {
+                                for (MobilePaySetting mobilePaySetting : dataList) {
                     if (mobilePaySetting.isSupportOneCodePay()) {
                         mOneCodeSet.add(mobilePaySetting.getPayModeId());
                     }
                 }
-                //遍历找出主扫和被扫
-                for (MobilePaySetting mobilePaySetting : dataList) {
+                                for (MobilePaySetting mobilePaySetting : dataList) {
                     this.addData(mobilePaySetting);
                 }
             }
@@ -760,10 +613,8 @@ public class PaySettingCache {
 
         @Override
         public void addData(MobilePaySetting mobilePaySetting) {
-            String payModeCode = mobilePaySetting.getPayModeCode();//PayModeCode作为Key
-            if (!TextUtils.isEmpty(payModeCode) && (MobilePayMode.PAY_MODE_SCANCODE.equals(payModeCode) || MobilePayMode.PAY_MODE_SHOWCODE.equals(payModeCode))) {
-                //如果是被扫，要把支持一码付的单独分开
-                if (MobilePayMode.PAY_MODE_SCANCODE.equals(payModeCode) && this.mOneCodeSet.contains(mobilePaySetting.getPayModeId())) {
+            String payModeCode = mobilePaySetting.getPayModeCode();            if (!TextUtils.isEmpty(payModeCode) && (MobilePayMode.PAY_MODE_SCANCODE.equals(payModeCode) || MobilePayMode.PAY_MODE_SHOWCODE.equals(payModeCode))) {
+                                if (MobilePayMode.PAY_MODE_SCANCODE.equals(payModeCode) && this.mOneCodeSet.contains(mobilePaySetting.getPayModeId())) {
                     payModeCode = MobilePayMode.PAY_MODE_SCAN_ONE_CODE;
                 }
                 if (this.get(payModeCode) == null) {
@@ -786,8 +637,7 @@ public class PaySettingCache {
     }
 
 
-    //容器基类， Map<K, List<V>>类型的容器
-    private static abstract class BaseDataHolder<K, V> {
+        private static abstract class BaseDataHolder<K, V> {
         Map<K, List<V>> mPaymentModeMap;
 
         BaseDataHolder() {
@@ -816,5 +666,4 @@ public class PaySettingCache {
             return mPaymentModeMap.containsKey(key);
         }
     }
-    //add v8.12 end
-}
+    }

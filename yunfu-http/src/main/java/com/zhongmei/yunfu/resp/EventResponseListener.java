@@ -1,8 +1,6 @@
 package com.zhongmei.yunfu.resp;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public abstract class EventResponseListener<T> extends AbsEventListener implements ResponseListener<T> {
 
     public EventResponseListener() {

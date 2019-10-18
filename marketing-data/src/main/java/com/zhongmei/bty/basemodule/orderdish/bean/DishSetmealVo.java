@@ -9,10 +9,7 @@ import com.zhongmei.yunfu.db.entity.dish.DishSetmeal;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishUnitDictionary;
 
-/**
- * @version: 1.0
- * @date 2015年7月8日
- */
+
 public class DishSetmealVo extends DishVo {
 
     protected final DishSetmeal setmeal;

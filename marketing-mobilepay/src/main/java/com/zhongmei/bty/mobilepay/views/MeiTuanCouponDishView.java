@@ -17,18 +17,12 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class MeiTuanCouponDishView extends LinearLayout {
-    // @ViewById(R.id.ticket_name)
-    TextView mCouponNameTV;
-    // @ViewById(R.id.ticket_dish_relate)
-    TextView mDishRelateTV;
-    // @ViewById(R.id.dish_list_ll)
-    LinearLayout mDishLL;
-    // @ViewById(R.id.ticket_dish_list_tv)
-    TextView mDishsTV;
+        TextView mCouponNameTV;
+        TextView mDishRelateTV;
+        LinearLayout mDishLL;
+        TextView mDishsTV;
     boolean isOpen = false;
     MeituanDishItemVo mDishItemVo;
     IGroupBuyingCoupon mCouponInfo;
@@ -83,8 +77,7 @@ public class MeiTuanCouponDishView extends LinearLayout {
         } else {
             mCouponNameTV.setText("");
         }
-        //有菜品显示菜品
-        if (mDishItemVo != null && Utils.isNotEmpty(mDishItemVo.getMeituanItemVoList())) {
+                if (mDishItemVo != null && Utils.isNotEmpty(mDishItemVo.getMeituanItemVoList())) {
             mDishRelateTV.setVisibility(View.VISIBLE);
             mDishsTV.setText(getDishsStr(mDishItemVo.getMeituanItemVoList()));
         } else {
@@ -109,13 +102,10 @@ public class MeiTuanCouponDishView extends LinearLayout {
             }
             sb.append(dishItem.dishName);
             sb.append(" ");
-            //modify begin v8.14
-            if (dishItem.deductionType == 2) {//如果是抵扣金额，只显示金额
-                if (dishItem.deductionAmount != null) {
+                        if (dishItem.deductionType == 2) {                if (dishItem.deductionAmount != null) {
                     sb.append(Utils.formatPrice(dishItem.deductionAmount.doubleValue()));
                 }
-            } else {//如果是抵扣数量，显示单价*数量
-                if (dishItem.price != null) {
+            } else {                if (dishItem.price != null) {
                     sb.append(Utils.formatPrice(dishItem.price.doubleValue()));
                 }
                 if (dishItem.num != null) {
@@ -123,8 +113,7 @@ public class MeiTuanCouponDishView extends LinearLayout {
                     sb.append(Utils.transferDot2(dishItem.num.toString()));
                 }
             }
-            //modify end v8.14
-            count++;
+                        count++;
         }
         return sb.toString();
     }

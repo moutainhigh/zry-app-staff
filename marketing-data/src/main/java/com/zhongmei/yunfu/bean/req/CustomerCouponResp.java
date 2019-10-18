@@ -6,24 +6,15 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class CustomerCouponResp implements Serializable {
 
-    private Integer applyDish;//菜品使用规则，1部分可用 2部分不可用
-    private String content;
-    private Integer couponState;//优惠券状态
-    private Integer couponType;//优惠券类型  1,折扣 2。代金  3礼品
-    private BigDecimal discountValue;
-    private Long endTime;//使用结束时间
-    private BigDecimal fullValue;//满额
-    private Long id;//券id
-    private String name;
+    private Integer applyDish;    private String content;
+    private Integer couponState;    private Integer couponType;    private BigDecimal discountValue;
+    private Long endTime;    private BigDecimal fullValue;    private Long id;    private String name;
     private String remark;
-    private Long customerCouponId;//记录id
-
+    private Long customerCouponId;
     private Long dishId;
     private String dishName;
 

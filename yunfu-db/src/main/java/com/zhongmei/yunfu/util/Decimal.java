@@ -2,16 +2,10 @@ package com.zhongmei.yunfu.util;
 
 import java.math.BigDecimal;
 
-/**
- *
 
- *
- */
 public class Decimal extends BigDecimal {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     private Decimal(BigDecimal value) {
@@ -23,10 +17,7 @@ public class Decimal extends BigDecimal {
         return toPlainString();
     }
 
-    /**
-     * @param value
-     * @return
-     */
+
     public static Decimal valueOf(BigDecimal value) {
         if (value == null) {
             return null;

@@ -8,52 +8,34 @@ import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 import com.zhongmei.bty.commonmodule.database.enums.TradeDealSettingBusinessType;
 import com.zhongmei.bty.commonmodule.database.enums.TradeDealSettingOperateType;
 
-/**
- * TradeDealSetting is a ORMLite bean type. Corresponds to the database table "trade_deal_setting"
- */
+
 @DatabaseTable(tableName = "trade_deal_setting")
 public class TradeDealSetting extends BasicEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_deal_setting"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * business_type
-         */
+
         public static final String businessType = "business_type";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * is_enabled
-         */
+
         public static final String isEnabled = "is_enabled";
 
-        /**
-         * operate_type
-         */
+
         public static final String operateType = "operate_type";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * wait_time
-         */
+
         public static final String waitTime = "wait_time";
 
     }

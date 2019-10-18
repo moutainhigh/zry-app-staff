@@ -1,10 +1,6 @@
 package com.zhongmei.bty.basemodule.customer.message;
 
-/**
- * @Date：2015年10月16日 下午6:06:51
- * @Description: TODO
- * @Version: 1.0
- */
+
 public class MemberUpgradeReq {
     private String phone;
     private String customerSyncFlag;
@@ -17,17 +13,11 @@ public class MemberUpgradeReq {
     private String memberCard;
     private String password;
 
-    /**
-     * 国家英文名称(为空默认中国) = countryEN
-     */
+
     private String nation;
-    /**
-     * 国家中文名称(为空默认中国) = countryZH
-     */
+
     private String country;
-    /**
-     * 电话国际区码(为空默认中国) = AreaCode
-     */
+
     private String nationalTelCode;
 
     public MemberUpgradeReq(String phone, String customerSyncFlag, String sex, String birthday, String isAcceptSubscription

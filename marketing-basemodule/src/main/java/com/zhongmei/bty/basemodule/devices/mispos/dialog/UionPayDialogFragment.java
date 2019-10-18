@@ -35,19 +35,7 @@ import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.math.BigDecimal;
 
-/**
- * 银行卡刷卡功能实现的DialogFragment，功能：1.银行卡刷卡支付功能。2.银行卡刷卡退钱功能。3.
- * 会员卡刷卡读取卡号。 当调用UionPayDialogFragment的时候。此界面屏蔽了HOME键和BACK键。
- * UionPayDialogFragment会执行刷卡的整个流程。 重要：当界面隐藏的时候才回调监听
- * 隐藏有两种方式：1.当刷卡成功界面或者刷卡失败界面显示出来后,2S后自动隐藏。
- * 2.点击close按钮隐藏。隐藏一定会调用回调。
- *
- * @Date：2016-1-13 上午9:21:41
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 
 public class UionPayDialogFragment extends BasicDialogFragment implements OnClickListener, OnKeyListener {
 
@@ -61,55 +49,32 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
 
     public static final int ICON_FAILED = R.drawable.commonmodule_uion_card_failed;
 
-    protected TextView reminder_msg_tv;// 刷卡提示信息
-
-    protected TextView pay_money_tv;// 显示金额的TextView
-
-    protected Button close_button;// 关闭按钮。
-
-    protected ImageView center_iv;// 中间显示图片
-
-    protected TextView show_info_tv;// 显示结果信息的TextView
-
-    protected Button try_again_button;// 再次尝试BUTTON
-
-    OnClickListener mcloseListener;// 关闭按钮监听器(外部传入的点击监听器)
-
-    OnClickListener mtryAgainListener;// 再次尝试按钮监听器(外部传入的点击监听器)
-
-    PosOvereCallback mPosOvereCallback;// 由外部传入的监听器。用来返回刷卡的结果。
-
-    TradePaymentVo mTradePaymentVo;// 交易信息数据。
-
-    BigDecimal currentmoney;// 当前交易金额(外部传入的金额)
-
-    PosTransLog currentTransLog;// 当前传入的TransLog(外部传入的金额)
-
-    private String tradeNo;    //订单号
-
-    String currentposTraceNo;// 当前传入的刷卡交易号。
-
-    String currentRefundUuid;// 当前传入的退货使用的payment的uuid
-
-    private UionPayStaus currentpayStaus = UionPayStaus.PAY;// 当前刷卡模式(外部传入的支付模式)
-
+    protected TextView reminder_msg_tv;
+    protected TextView pay_money_tv;
+    protected Button close_button;
+    protected ImageView center_iv;
+    protected TextView show_info_tv;
+    protected Button try_again_button;
+    OnClickListener mcloseListener;
+    OnClickListener mtryAgainListener;
+    PosOvereCallback mPosOvereCallback;
+    TradePaymentVo mTradePaymentVo;
+    BigDecimal currentmoney;
+    PosTransLog currentTransLog;
+    private String tradeNo;
+    String currentposTraceNo;
+    String currentRefundUuid;
+    private UionPayStaus currentpayStaus = UionPayStaus.PAY;
     private static final int FLAG_HOMEKEY_DISPATCHED = 0x80000000;
 
-    UiHandler handler;// 自动隐藏Dialog使用的Handler
-
-    OnTransListener onTransListener;// 刷卡功能管理类监听器
-
-    private boolean isSuccess = false;// 判断是否刷卡成功返回结果
-
-    private PosTransLog resultTranLog;// 刷卡返回的结果
-
-    private NewLDResponse errLDResponse;// 刷卡返回的错误信息
-
-    private long delaytime = 2000;// 自动隐藏刷卡成功或者失败界面的时间。默认为2S
-
+    UiHandler handler;
+    OnTransListener onTransListener;
+    private boolean isSuccess = false;
+    private PosTransLog resultTranLog;
+    private NewLDResponse errLDResponse;
+    private long delaytime = 2000;
     private String deviceNum = "";
 
-    //private static UionPayDialogFragment fragment = new UionPayDialogFragment();
 
     private int readyCountDown = 30;
 
@@ -165,23 +130,16 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
     }
 
     private void initViewById(View view) {
-        reminder_msg_tv = (TextView) view.findViewById(R.id.reminder_msg_tv);// 提示信息的TextView
-
-        pay_money_tv = (TextView) view.findViewById(R.id.pay_money_tv);// 显示金额的TextView
-
-        close_button = (Button) view.findViewById(R.id.close_button);// 关闭按钮。
-
-        center_iv = (ImageView) view.findViewById(R.id.center_iv);// 中间显示图片
-
-        show_info_tv = (TextView) view.findViewById(R.id.show_info_tv);// 显示结果信息的TextView
-
-        try_again_button = (Button) view.findViewById(R.id.try_again_button);// 再次尝试BUTTON
-        getDialog().getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED, FLAG_HOMEKEY_DISPATCHED);
+        reminder_msg_tv = (TextView) view.findViewById(R.id.reminder_msg_tv);
+        pay_money_tv = (TextView) view.findViewById(R.id.pay_money_tv);
+        close_button = (Button) view.findViewById(R.id.close_button);
+        center_iv = (ImageView) view.findViewById(R.id.center_iv);
+        show_info_tv = (TextView) view.findViewById(R.id.show_info_tv);
+        try_again_button = (Button) view.findViewById(R.id.try_again_button);        getDialog().getWindow().setFlags(FLAG_HOMEKEY_DISPATCHED, FLAG_HOMEKEY_DISPATCHED);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         this.setCancelable(false);
 
-        show_info_tv.getPaint().setFakeBoldText(true);// 设置文字粗体
-
+        show_info_tv.getPaint().setFakeBoldText(true);
         close_button.setOnClickListener(this);
 
         try_again_button.setOnClickListener(this);
@@ -191,22 +149,13 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
 
     }
 
-    /**
-     * 进行刷卡操作。
-     *
-     * @Title: doPos
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void doPos() {
         isSuccess = false;
         resultTranLog = null;
         errLDResponse = null;
 
-        changeViewByType(UionViewStaus.Credit_card_Ready, Utils.formatPrice(Math.abs(currentmoney.doubleValue())));// 准备刷卡操作，界面需要展示金钱所以请传递金钱
-        startCountDown();// 开始倒计时
-
+        changeViewByType(UionViewStaus.Credit_card_Ready, Utils.formatPrice(Math.abs(currentmoney.doubleValue())));        startCountDown();
 
         onTransListener = new OnTransListener() {
 
@@ -219,8 +168,7 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
             public void onStart() {
                 Log.d(TAG, TAG + "----------------onStart()");
                 changeViewByType(UionViewStaus.Credit_card_operating,
-                        Utils.formatPrice(Math.abs(currentmoney.doubleValue())));// 界面需要展示金钱所以请传递金钱
-                stopCountDown();
+                        Utils.formatPrice(Math.abs(currentmoney.doubleValue())));                stopCountDown();
             }
 
             @Override
@@ -230,38 +178,29 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
                 resultTranLog = null;
                 errLDResponse = ldResponse;
                 changeViewByType(UionViewStaus.Credit_card_fail,
-                        Utils.formatPrice(Math.abs(currentmoney.doubleValue())));//
-                stopCountDown();
+                        Utils.formatPrice(Math.abs(currentmoney.doubleValue())));                stopCountDown();
             }
 
             @Override
             public void onConfirm(PosTransLog log) {
                 Log.d(TAG, TAG + "----------------onConfirm()");
                 stopCountDown();
-                SharedPreferenceUtil.getSpUtil().putString(Constant.SP_POS_DEVICIE_ID, log.getTerminalNumber());// 保存每次交易的终端号。
-                Log.d(TAG,
+                SharedPreferenceUtil.getSpUtil().putString(Constant.SP_POS_DEVICIE_ID, log.getTerminalNumber());                Log.d(TAG,
                         TAG + "onConfirm---SP_POS_DEVICIE_ID"
                                 + SharedPreferenceUtil.getSpUtil().getString(Constant.SP_POS_DEVICIE_ID, "默认"));
                 log.setTradeNo(tradeNo);
                 isSuccess = true;
-                resultTranLog = log;// 设置结果，成功赋值。
-                errLDResponse = null;
+                resultTranLog = log;                errLDResponse = null;
                 changeViewByType(UionViewStaus.Credit_card_success,
                         Utils.formatPrice(Math.abs(currentmoney.doubleValue())));
-//				IPrintContentQueue.Holder.getInstance().PrintLDPosTicket(log, new OnSimplePrintListener(PrintTicketTypeEnum.BANK));// 打印银行
-                //解耦后的打印
-                //IPrintHelper.Holder.getInstance().printLDPosTicket(log, new PRTOnSimplePrintListener(PrintTicketTypeEnum.BANK));// 打印银行
-            }
+                                            }
 
         };
         Log.d(TAG, TAG + ":doPos()");
         if (currentpayStaus == UionPayStaus.PAY) {
-            NewLiandiposManager.getInstance().startPay(currentmoney, onTransListener);// 刷卡支付
-        } else if (currentpayStaus == UionPayStaus.RETURN) {
-            NewLiandiposManager.getInstance().startRefund(currentRefundUuid, currentposTraceNo, onTransListener);// 刷卡退货
-        } else if (currentpayStaus == UionPayStaus.CANCLE) {
-            NewLiandiposManager.getInstance().cancelPay(currentTransLog, onTransListener);// 刷卡撤消
-        }
+            NewLiandiposManager.getInstance().startPay(currentmoney, onTransListener);        } else if (currentpayStaus == UionPayStaus.RETURN) {
+            NewLiandiposManager.getInstance().startRefund(currentRefundUuid, currentposTraceNo, onTransListener);        } else if (currentpayStaus == UionPayStaus.CANCLE) {
+            NewLiandiposManager.getInstance().cancelPay(currentTransLog, onTransListener);        }
     }
 
     public void setCloseListener(OnClickListener listener) {
@@ -298,30 +237,25 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
 
     public static class UionPayDialogFragmentBuilder {
 
-        //private Bundle mBundle;
-        String mDeviceNum;
+                String mDeviceNum;
         OnClickListener mbuilderCloseListener;
 
         OnClickListener mbuilderTryAgainListener;
 
         public UionPayDialogFragmentBuilder() {
-            //mBundle = new Bundle();
-        }
+                    }
 
-        // 建立支付刷卡的UionPayDialogFragment（支付刷卡只用传金额）
-        public UionPayDialogFragment buildPay(BigDecimal money, String no, PosOvereCallback overeCallback) {
+                public UionPayDialogFragment buildPay(BigDecimal money, String no, PosOvereCallback overeCallback) {
             return build(UionPayStaus.PAY, money, no, null, null, null, overeCallback);
 
         }
 
-        // 建立退货刷卡的UionPayDialogFragment（退货刷卡传金额和PosTransLog
-        public UionPayDialogFragment buildReturn(BigDecimal money, String no, String refundUuid, String posTraceNo,
+                public UionPayDialogFragment buildReturn(BigDecimal money, String no, String refundUuid, String posTraceNo,
                                                  PosOvereCallback overeCallback) {
             return build(UionPayStaus.RETURN, money, no, refundUuid, posTraceNo, null, overeCallback);
         }
 
-        // 建立撤消刷卡的UionPayDialogFragment(撤消刷卡传PosTransLog)
-        public UionPayDialogFragment buildCancle(PosTransLog transLog, PosOvereCallback overeCallback) {
+                public UionPayDialogFragment buildCancle(PosTransLog transLog, PosOvereCallback overeCallback) {
             BigDecimal bigDecimal = NewLiandiposManager.getRealMoney(transLog.getAmount());
 
             return build(UionPayStaus.CANCLE, bigDecimal, null, uuid(), null, transLog, overeCallback);
@@ -330,8 +264,7 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
         private UionPayDialogFragment build(UionPayStaus payStaus, BigDecimal money, String tradeNo, String refundUuid,
                                             String posTraceNo, PosTransLog transLog, PosOvereCallback overeCallback) {
 
-            //fragment.setArguments(mBundle);
-            UionPayDialogFragment fragment = new UionPayDialogFragment();
+                        UionPayDialogFragment fragment = new UionPayDialogFragment();
             fragment.setCurrentpayStaus(payStaus);
             if (mDeviceNum != null) {
                 fragment.setDeviceNum(mDeviceNum);
@@ -355,19 +288,10 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
             return fragment;
         }
 
-        /**
-         * 设置卡号NUM
-         *
-         * @Title: setNum 设置刷卡设备号。为了在不同设备刷卡失败的时候返回错误信息
-         * @Description: TODO
-         * @Param @param num
-         * @Param @return TODO
-         * @Return UionPayDialogFragment 返回类型
-         */
+
         public UionPayDialogFragmentBuilder setNum(String num) {
             mDeviceNum = num;
-            //fragment.setDeviceNum(num);
-            return this;
+                        return this;
         }
 
         public UionPayDialogFragmentBuilder closeListener(OnClickListener listener) {
@@ -395,8 +319,7 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
         if (view.equals(try_again_button)) {
             doPos();
             if (handler != null) {
-                handler.removeCallbacksAndMessages(null);// 重试的时候，应该移除隐藏Dialog
-            }
+                handler.removeCallbacksAndMessages(null);            }
             if (mtryAgainListener != null) {
                 mtryAgainListener.onClick(view);
 
@@ -419,17 +342,7 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
         public void onFinished(UionPayStaus status, boolean issuccess, PosTransLog log, NewLDResponse ldResponse);
     }
 
-    /**
-     * 展示UI都应该调用这个方法
-     *
-     * @Title: changeViewByType
-     * @Description: TODO
-     * @Param @param staus
-     * @Param @param money TODO 在UionViewStaus=
-     * Credit_card_Ready或者Credit_card_operating时候显示金额
-     * ，为其它值的时候没作用
-     * @Return void 返回类型
-     */
+
     public void changeViewByType(UionViewStaus staus, String money) {
         if (getActivity() == null) {
             return;
@@ -504,20 +417,11 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
 
     }
 
-    /**
-     * 显示准备刷卡的UI
-     *
-     * @Title: show_credit_card_Ready
-     * @Description: TODO
-     * @Param @param showinfo 显示结果信息
-     * @Param @param money TODO 显示金额
-     * @Return void 返回类型
-     */
+
 
     private void show_credit_card_Ready(String showinfo, String money) {
 
-        //DisplayServiceManager.doUpdateUnionPay(getActivity(), DisplayPayUnion.COMMAND_UNION_PRE, showinfo, money,false);
-        center_iv.setBackgroundResource(ICON_READY);
+                center_iv.setBackgroundResource(ICON_READY);
         pay_money_tv.setVisibility(View.VISIBLE);
         pay_money_tv.setText(money);
         close_button.setVisibility(View.GONE);
@@ -528,18 +432,9 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
         try_again_button.setVisibility(View.INVISIBLE);
     }
 
-    /**
-     * 显示正在刷卡中的UI
-     *
-     * @Title: show_credit_card_operating
-     * @Description: TODO
-     * @Param @param showinfo 显示信息
-     * @Param @param money TODO 显示刷卡金额
-     * @Return void 返回类型
-     */
+
     private void show_credit_card_operating(String showinfo, String money) {
-        //DisplayServiceManager.doUpdateUnionPay(getActivity(), DisplayPayUnion.COMMAND_UNION_DOING, showinfo, money);
-        center_iv.setBackgroundResource(ICON_READY);
+                center_iv.setBackgroundResource(ICON_READY);
         pay_money_tv.setVisibility(View.VISIBLE);
         pay_money_tv.setText(money);
         close_button.setVisibility(View.INVISIBLE);
@@ -549,19 +444,10 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
         try_again_button.setVisibility(View.INVISIBLE);
     }
 
-    /**
-     * 显示刷卡成功的UI
-     *
-     * @Title: show_credit_card_success
-     * @Description: TODO
-     * @Param @param showinfo 显示展示信息
-     * @Param @param money TODO 显示金额，这里金额的View会隐藏起来 所以可以不用填写
-     * @Return void 返回类型
-     */
+
 
     private void show_credit_card_success(String showinfo, String money) {
-        //DisplayServiceManager.doUpdateUnionPay(getActivity(), DisplayPayUnion.COMMAND_UNION_SUCCESS, showinfo, money);
-        center_iv.setBackgroundResource(ICON_SUCCESS);
+                center_iv.setBackgroundResource(ICON_SUCCESS);
         pay_money_tv.setVisibility(View.VISIBLE);
         pay_money_tv.setText(money);
         close_button.setVisibility(View.INVISIBLE);
@@ -572,18 +458,9 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
         hideDialogDelayed();
     }
 
-    /**
-     * 显示刷卡失败的UI
-     *
-     * @Title: show_credit_card_fail
-     * @Description: TODO
-     * @Param @param showinfo 显示展示信息
-     * @Param @param money TODO 显示金额，这里金额的View会隐藏起来 所以可以不用填写
-     * @Return void 返回类型
-     */
+
     private void show_credit_card_fail(String showinfo, String money, boolean isHideDialog) {
-        //DisplayServiceManager.doUpdateUnionPay(getActivity(), DisplayPayUnion.COMMAND_UNION_FAIL, showinfo, money);
-        center_iv.setBackgroundResource(ICON_FAILED);
+                center_iv.setBackgroundResource(ICON_FAILED);
         pay_money_tv.setVisibility(View.INVISIBLE);
         pay_money_tv.setText(money);
         close_button.setVisibility(View.VISIBLE);
@@ -596,38 +473,17 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
             hideDialogDelayed();
     }
 
-    /**
-     * 设置当前弹出框的是支付模式还是退货模式
-     *
-     * @Title: setCurrentpayStaus
-     * @Description: TODO
-     * @Param @param currentpayStaus TODO
-     * @Return void 返回类型
-     */
+
     public void setCurrentpayStaus(UionPayStaus currentpayStaus) {
         this.currentpayStaus = currentpayStaus;
     }
 
-    /**
-     * 设置刷卡失败的时候的设备号
-     *
-     * @Title: setDeviceNum
-     * @Description: TODO
-     * @Param @param deviceNum TODO
-     * @Return void 返回类型
-     */
+
     public void setDeviceNum(String deviceNum) {
         this.deviceNum = deviceNum;
     }
 
-    /**
-     * 当弹出刷卡成功或者刷卡失败的时候，自动在2S后隐藏Dialog
-     *
-     * @Title: hideDialogDelayed
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void hideDialogDelayed() {
         if (handler != null) {
             handler.sendEmptyMessageDelayed(0, delaytime);
@@ -635,21 +491,12 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
 
     }
 
-    /**
-     * 隐藏Dialog 当点击Close按钮的时候隐藏并回调方法，2后自动隐藏会回调该方法
-     *
-     * @Title: dimissUionDialog
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void dimissUionDialog() {
         dismissAllowingStateLoss();
         DisplayServiceManager.doCancel(getActivity());
         if (mPosOvereCallback != null) {
-            if (!isSuccess) {// 根据isSuccess的值来判断是否成功
-                if (errLDResponse == null) {// 如果未空的时候。
-
+            if (!isSuccess) {                if (errLDResponse == null) {
                 }
                 mPosOvereCallback.onFinished(currentpayStaus, false, null, errLDResponse);
             } else {
@@ -687,31 +534,17 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
     }
 
     public enum UionPayStaus {
-        PAY, // 刷卡支付
-        RETURN, // 刷卡退货
-        CANCLE, // 撤消
-    }
+        PAY,         RETURN,         CANCLE,     }
 
     private enum UionViewStaus {
-        Credit_card_Ready, // 请进行刷卡操作（准备进行刷卡）
-        Credit_card_operating, // 刷卡进行中
-        Credit_card_success, // 刷卡成功
-        Credit_card_fail // 刷卡失败
-
+        Credit_card_Ready,         Credit_card_operating,         Credit_card_success,         Credit_card_fail
     }
 
     private static String uuid() {
         return SystemUtils.genOnlyIdentifier();
     }
 
-    /**
-     * 开始倒计时
-     *
-     * @Title: startCountDown
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void startCountDown() {
         if (countDownHandler != null) {
             countDownHandler.sendEmptyMessageDelayed(0, 1000);
@@ -719,14 +552,7 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
 
     }
 
-    /**
-     * 停止倒计时
-     *
-     * @Title: stopCountDown
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void stopCountDown() {
         readyCountDown = 30;
         if (countDownHandler != null) {
@@ -735,15 +561,7 @@ public class UionPayDialogFragment extends BasicDialogFragment implements OnClic
 
     }
 
-    /**
-     * 倒计时30秒的Handler
-     *
-     * @Date：2016-4-6 下午4:25:48
-     * @Description: TODO
-     * @Version: 1.0
-     * <p>
-     * rights reserved.
-     */
+
     private static class UionCountDownHandler extends Handler {
         private WeakReference<UionPayDialogFragment> weakReference;
 

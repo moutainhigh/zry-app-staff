@@ -11,98 +11,61 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.yunfu.db.enums.Sex;
 
-/**
- * AuthUser is a ORMLite bean type. Corresponds to the database table
- * "auth_user"
- */
+
 @DatabaseTable(tableName = "auth_user")
 public class AuthUserEntity extends BasicEntityBase implements ICreator, IUpdator, IAuthUser {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "auth_user"
-     */
+
     public interface $ extends BasicEntityBase.$ {
 
-        /**
-         * account
-         */
+
         public static final String account = "account";
 
-        /**
-         * address
-         */
+
         public static final String address = "address";
 
-        /**
-         * birthday
-         */
+
         public static final String birthday = "birthday";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * email
-         */
+
         public static final String email = "email";
 
-        /**
-         * enabled_flag
-         */
+
         public static final String enabledFlag = "enabled_flag";
 
-        /**
-         * gender
-         */
+
         public static final String gender = "gender";
 
-        /**
-         * icon
-         */
+
         public static final String icon = "icon";
 
-        /**
-         * mobile
-         */
+
         public static final String mobile = "mobile";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * password_num
-         */
+
         public static final String passwordNum = "password_num";
 
-        /**
-         * salt
-         */
+
         public static final String salt = "salt";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }
@@ -155,8 +118,7 @@ public class AuthUserEntity extends BasicEntityBase implements ICreator, IUpdato
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
-    private String password; //明文密码
-
+    private String password;
     public String getAccount() {
         return account;
     }

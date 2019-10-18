@@ -5,9 +5,7 @@ import android.util.Log;
 import com.zhongmei.yunfu.net.builder.NetworkRequest;
 import com.zhongmei.yunfu.resp.ResponseObject;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public abstract class CalmResponseProcessor<R> implements NetworkRequest.ResponseProcessor {
     private static final String TAG = CalmResponseProcessor.class.getName();
 
@@ -25,8 +23,7 @@ public abstract class CalmResponseProcessor<R> implements NetworkRequest.Respons
             try {
                 saveToDatabase((R) responseObj.getContent());
             } catch (Exception ex) {
-                // block
-                Log.e(TAG, "Save to database error!", ex);
+                                Log.e(TAG, "Save to database error!", ex);
             }
         }
         return response;

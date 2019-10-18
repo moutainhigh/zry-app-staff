@@ -6,57 +6,37 @@ import com.zhongmei.yunfu.db.DataEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * PrinterTableDocument is a ORMLite bean type. Corresponds to the database table "printer_table_document"
- */
+
 @DatabaseTable(tableName = "printer_table_document")
 public class PrinterTableDocument extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "printer_dish_document"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * table_id
-         */
+
         public static final String tableId = "table_id";
 
-        /**
-         * table_uuid
-         */
+
         public static final String tableUuid = "table_uuid";
 
-        /**
-         * document_id
-         */
+
         public static final String documentId = "document_id";
 
-        /**
-         * document_uuid
-         */
+
         public static final String documentUuid = "document_uuid";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
         public static final String cashierTicketId = "cashier_ticket_id";

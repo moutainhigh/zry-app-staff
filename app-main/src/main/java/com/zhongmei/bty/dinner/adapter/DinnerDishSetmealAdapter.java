@@ -38,8 +38,7 @@ public class DinnerDishSetmealAdapter extends OrderDishSetmealAdapter {
     }
 
     protected void detailResidue(TextView tvResidue, int position) {
-        if (mInventoryCacheUtil.getSaleSwitch()) {//实时库存开启
-            DishVo dishVo = (DishVo) getItem(position);
+        if (mInventoryCacheUtil.getSaleSwitch()) {            DishVo dishVo = (DishVo) getItem(position);
             if (dishVo != null) {
                 String residue;
                 boolean isShowInventory = InventoryCacheUtil.getInstance().getSaleNumOpenSwitch();

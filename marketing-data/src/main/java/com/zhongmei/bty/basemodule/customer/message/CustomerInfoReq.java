@@ -7,8 +7,7 @@ public class CustomerInfoReq {
 
     private String password;
 
-    private int needPassword = 2;//是否需要密码:1需要 2不需要
-
+    private int needPassword = 2;
     private int isCustomer = 2;
 
     private int ignoreDisable = 2;

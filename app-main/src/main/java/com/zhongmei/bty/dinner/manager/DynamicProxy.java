@@ -10,11 +10,7 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-/**
- * java动态代理
- *
- * @created 2017/8/18
- */
+
 public class DynamicProxy<T> implements InvocationHandler {
 
     public interface OnInvokeCallback<T> {

@@ -20,22 +20,13 @@ import com.zhongmei.yunfu.db.entity.discount.CoupRule;
 import com.zhongmei.yunfu.db.enums.CouponType;
 import com.zhongmei.bty.dinner.orderdish.CouponDatailDialog;
 
-/**
- * 仅用于礼品券
- *
- * @Date：2015-8-7 下午3:28:03
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class CustomerCouponsAdapter2 extends BaseAdapter {
     protected Context mContext;
 
     private LayoutInflater mInflater;
 
     private CouponType mType;
-    ;
 
     private Drawable item_bg;
 
@@ -46,7 +37,7 @@ public class CustomerCouponsAdapter2 extends BaseAdapter {
         this.mData = data;
         this.setmType(type);
         this.mInflater = LayoutInflater.from(mContext);
-        item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_gift);// 礼品
+        item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_gift);
     }
 
     @Override
@@ -100,13 +91,11 @@ public class CustomerCouponsAdapter2 extends BaseAdapter {
             }
         });
         if (vo.isEnabled()) {
-            // 设置背景图
             viewHolder.vMainContent.setBackgroundDrawable(this.item_bg);
         } else {
             viewHolder.vMainContent.setBackgroundResource(R.drawable.coupons_item_bg_disable);
         }
 
-        // 是否被选中
         if (vo.isSelected()) {
             viewHolder.tvSelected.setVisibility(View.VISIBLE);
         } else {
@@ -117,9 +106,7 @@ public class CustomerCouponsAdapter2 extends BaseAdapter {
 
         viewHolder.tvTimeLimit.setText(res.getString(R.string.period_of_validity) + "" + DateUtil.formatDate(vo.getCouponInfo().getEndTime()));
 
-        // 优惠券名称
         viewHolder.tvCouponsName.setText(vo.getCouponInfo().getName());
-        // 礼品名称
 
         viewHolder.tvGiftName.setText(vo.getCouponInfo().getDishName() + "    " + 1);
 

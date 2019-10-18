@@ -10,9 +10,7 @@ import com.zhongmei.bty.dinner.manager.DinnerTradeItemManager;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BuffetTradeItemOperateUtil extends TradeItemOperateUtil {
     @Override
     protected void doGive(final IShopcartItemBase shopcartItem, Reason reason) {

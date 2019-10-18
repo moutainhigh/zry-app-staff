@@ -8,82 +8,52 @@ import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.TableStatus;
 
-/**
- * TradeTable is a ORMLite bean type. Corresponds to the database table "trade_table"
- */
+
 @DatabaseTable(tableName = "trade_table")
 public class TradeTable extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_table"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * memo
-         */
+
         public static final String memo = "memo";
 
-        /**
-         * table_id
-         */
+
         public static final String tableId = "table_id";
 
-        /**
-         * table_name
-         */
+
         public static final String tableName = "table_name";
 
-        /**
-         * table_people_count
-         */
+
         public static final String tablePeopleCount = "table_people_count";
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * trade_uuid
-         */
+
         public static final String tradeUuid = "trade_uuid";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * waiter_id
-         */
+
         public static final String waiterId = "waiter_id";
 
-        /**
-         * waiter_name
-         */
+
         public static final String waiterName = "waiter_name";
 
-        /**
-         * self_table_status
-         */
+
         public static final String selfTableStatus = "self_table_status";
 
     }

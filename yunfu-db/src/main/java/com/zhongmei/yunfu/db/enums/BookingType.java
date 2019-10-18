@@ -2,37 +2,23 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 预订单状态
- */
+
 public enum BookingType implements ValueEnum<Integer> {
 
-    /**
-     * 默认(正餐预订老数据)
-     */
+
     NORMAL(0),
-    /**
-     * 正餐
-     */
+
     DINNER(1),
 
-    /**
-     * 团餐
-     */
+
     GROUP(2),
 
 
-    /**
-     * 美业
-     */
+
     BEAUTY(3),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

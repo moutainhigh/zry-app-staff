@@ -23,8 +23,7 @@ public class OrderDishClearStatusAdapter extends BaseAdapter {
 
     private LayoutInflater mLayoutInflater;
 
-    private List<DishAndStandards> mSelectedProperty;// 已选中的谷歌
-
+    private List<DishAndStandards> mSelectedProperty;
     private List<DishAndStandards> mDataSet;
 
     private Resources mResources;
@@ -118,10 +117,7 @@ public class OrderDishClearStatusAdapter extends BaseAdapter {
     private void bindView(ViewHolder holder, int position) {
         DishAndStandards dishAndStandards = (DishAndStandards) getItem(position);
         ClearStatus clearStatus = dishAndStandards.getDishShop().getClearStatus();
-        if (clearStatus == ClearStatus.SALE) {// 在售
-            /*holder.tvPropertyName.setBackgroundDrawable(mResources.getDrawable(R.drawable.orderdish_clear_status_item_bg_sale_selector));
-			holder.tvPropertyName.setTextColor(mResources.getColorStateList(R.color.orderdish_clear_status_item_text_sale_selector));
-			*/
+        if (clearStatus == ClearStatus.SALE) {
             if (mSelectedProperty.contains(dishAndStandards)) {
                 holder.tvPropertyName.setSelected(true);
                 holder.tvPropertyName.setTextColor(mContext.getResources().getColor(R.color.text_blue));
@@ -131,8 +127,7 @@ public class OrderDishClearStatusAdapter extends BaseAdapter {
                 holder.tvPropertyName.setTextColor(mContext.getResources().getColor(R.color.orderdish_text_black));
                 holder.tvPropertyName.setBackgroundResource(R.drawable.bg_dinner_discount_normal);
             }
-        } else {// 已估清
-            if (mSelectedProperty.contains(dishAndStandards)) {
+        } else {            if (mSelectedProperty.contains(dishAndStandards)) {
                 holder.tvPropertyName.setSelected(true);
                 holder.tvPropertyName.setTextColor(mContext.getResources().getColor(R.color.text_blue));
                 holder.tvPropertyName.setBackgroundResource(R.drawable.bg_dinner_discount_pressed);
@@ -141,15 +136,10 @@ public class OrderDishClearStatusAdapter extends BaseAdapter {
                 holder.tvPropertyName.setTextColor(mContext.getResources().getColor(R.color.orderdish_text_black));
                 holder.tvPropertyName.setBackgroundResource(R.drawable.bg_dinner_discount_normal);
             }
-			/*holder.tvPropertyName.setBackgroundDrawable(mResources.getDrawable(R.drawable.orderdish_clear_status_item_bg_clear_selector));
-			holder.tvPropertyName.setTextColor(Color.WHITE);*/
+
         }
 		
-		/*if (mSelectedProperty.contains(dishAndStandards)) {
-			holder.tvPropertyName.setSelected(true);
-		} else {
-			holder.tvPropertyName.setSelected(false);
-		}*/
+
 
         holder.tvPropertyName.setText(genStandardString(dishAndStandards.getStandards()));
     }

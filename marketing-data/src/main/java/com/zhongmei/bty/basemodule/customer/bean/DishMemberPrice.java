@@ -4,14 +4,10 @@ import com.zhongmei.yunfu.db.enums.MemberPrivilegeType;
 import com.zhongmei.yunfu.util.ValueEnums;
 
 public class DishMemberPrice {
-    private Double discount;// 会员折扣
-
-    private Double memberPrice;// 会员价
-
-    private int priceType;// 会员优惠方式
-
-    private String priceName;// 会员优惠名称
-
+    private Double discount;
+    private Double memberPrice;
+    private int priceType;
+    private String priceName;
     private String periodStart;
     private String periodEnd;
 

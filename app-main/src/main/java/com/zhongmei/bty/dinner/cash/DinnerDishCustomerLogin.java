@@ -68,8 +68,6 @@ import de.greenrobot.event.EventBus;
 public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnClickListener {
     private static final String TAG = DinnerDishCustomerLogin.class.getSimpleName();
 
-//    // 品牌编号长度
-//    private static final int BRAND_LENGTH = 7;
 
     private String source;
 
@@ -117,22 +115,7 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
                 if (ClickManager.getInstance().isClicked()) {
                     return;
                 }
-                /*new ReadCardDialogFragment.UionCardDialogFragmentBuilder().buildReadCardId(UionCardStaus.READ_CARD_ID_SINGLE,
-                        new CardOvereCallback() {
 
-                            @Override
-                            public void onSuccess(UionCardStaus status, String number) {
-                                loginByCardNo(number);
-                            }
-
-                            @Override
-                            public void onFail(UionCardStaus status, String rejCodeExplain) {
-                                if (!TextUtils.isEmpty(rejCodeExplain)) {
-                                    ToastUtil.showShortToast(rejCodeExplain);
-                                }
-                            }
-                        })
-                        .show(getFragmentManager(), "get_cardno");*/
                 break;
             case R.id.btn_scan_code:
                 if (!ClickManager.getInstance().isClicked()) {
@@ -152,8 +135,7 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
 
     @AfterViews
     protected void init() {
-        // 隐藏软键盘
-        getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         getDialog().getWindow().setFlags(CommonDialogFragment.FLAG_HOMEKEY_DISPATCHED,
                 CommonDialogFragment.FLAG_HOMEKEY_DISPATCHED);
         getDialog().getWindow().setBackgroundDrawable(
@@ -165,17 +147,14 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
         }
 
         if (getActivity().getWindow().getAttributes().softInputMode == WindowManager.LayoutParams.SOFT_INPUT_STATE_UNSPECIFIED) {
-            // 隐藏软键盘
-            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         }
         show_value.requestFocus();
         show_value.setTag(DinnerCashManager.CUSTOMERLOGIN);
         show_value.addTextChangedListener(textWatcher);
         mNumberKeyBorad.setCurrentInput(show_value);
         NumberKeyBoardUtils.setTouchListener(show_value);
-        /*DisplayUserInfo dUserInfo =
-                DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_ACCOUNT_INPUT, "", null, 0, true, 0);
-        DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
 
         show_value.addTextChangedListener(new TextWatcher() {
 
@@ -192,13 +171,7 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
             @Override
             public void afterTextChanged(Editable s) {
                 if (isShowAccount) {
-                    /*DisplayUserInfo dUserInfo =
-                            DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_ACCOUNT_INPUT,
-                                    s.toString(),
-                                    null,
-                                    0,
-                                    false, 0);
-                    DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
                 } else {
                     isShowAccount = true;
                 }
@@ -217,18 +190,13 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
                 return false;
             }
         });
-        // EventBus.getDefault().post(new InnerScannerManager1.ScannerStatus(this.hashCode(), 1));
-    }
+            }
 
     public void registerListener(ChangePageListener mChangePageListener) {
         this.mChangePageListener = mChangePageListener;
     }
 
     private void verification() {
-        // 登录新用户之前，先确保之前的登录会员被置为无效（主要防止因为自动登录失败，但购物车的登录会员还存在的情况）
-        // CustomerManager.getInstance().setDinnerLoginCustomer(null);//
-        // 设置正餐会员
-        // DinnerShoppingCart.getInstance().setDinnerCustomer(null);
 
         final String inputNo = mNumberKeyBorad.getValue();
         if (TextUtils.isEmpty(inputNo)) {
@@ -236,11 +204,7 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
             return;
         }
 
-        /*CustomerNew customer = CustomerManager.getInstance().getCustomerByPhone(inputNo);
-        if(customer == null){
-            ToastUtil.showShortToast(R.string.customer_not_exist);
-            return;
-        }*/
+
 
         CustomerOperates customerOperates = OperatesFactory.create(CustomerOperates.class);
         customerOperates.findCustomerByPhone(inputNo, new SimpleResponseListener<CustomerMobileVo>() {
@@ -249,27 +213,6 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
             public void onSuccess(ResponseObject<CustomerMobileVo> response) {
                 loginByPhoneNo(inputNo, null);
 
-//                CustomerMobile customer = response.getContent().result;
-//                if(customer == null){
-//                    ToastUtil.showShortToast(R.string.customer_not_exist);
-//                    return;
-//                }
-//                if(!customer.isMember()){
-//                    loginByPhoneNo(inputNo, null);
-//                    return;
-//                }
-//                CustomerManager.getInstance().dinnerLoginByPhoneNo(getActivity(), customer.customerName, new CustomerManager.DinnerLoginListener() {
-//                    @Override
-//                    public void login(PasswordDialog dialog, int needPswd, String password) {
-//                        if (needPswd == NEED_PSWD) {
-//                            //需要密码
-//                            loginByPhoneNo(inputNo, null, NEED_PSWD, password, dialog);
-//                        } else {
-//                            //不需要密码
-//                            loginByPhoneNo(inputNo, null);
-//                        }
-//                    }
-//                });
             }
 
             @Override
@@ -279,20 +222,14 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
         });
     }
 
-    /**
-     * 使用会员卡号登录
-     *
-     * @Title: loginByCardNo
-     * @Return void 返回类型
-     */
+
     private void loginByCardNo(final String inputNo) {
         ResponseListener<LoyaltyMindTransferResp<NewCardLoginResp>> listener = LoadingResponseListener.ensure(new ResponseListener<LoyaltyMindTransferResp<NewCardLoginResp>>() {
             @Override
             public void onResponse(ResponseObject<LoyaltyMindTransferResp<NewCardLoginResp>> response) {
                 if (ResponseObject.isOk(response)) {
                     NewCardLoginResp resp = response.getContent().getData();
-                    //1表示loyaty登录成功
-                    if (response.getContent().isOk() && resp != null) {
+                                        if (response.getContent().isOk() && resp != null) {
                         EcCard card = resp.getCardInstance();
                         card.queryLevelSettingInfo();
                         try {
@@ -305,30 +242,19 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
                             Log.e(TAG, e.getMessage(), e);
                         }
 
-                        // 设置card的名称，从customer中获得
-                        CustomerV5 customerV5 = resp.getCustomerV5();
+                                                CustomerV5 customerV5 = resp.getCustomerV5();
                         card.setName(customerV5.getName());
-//							card.setIntegralAccount(resp.getResult().getIntegralAccount());
-//							card.setValueCardAccount(resp.getResult().getValueCardAccount());
                         card.setCustomer(customerV5);
 
-                        //副屏展示
-//                        Customer customer = Customer.fromPhoneNo(getActivity(), customerV5.getMobile());
-//                        customer.setCard(card);
-//                        customer.setOtherCardList(resp.getCardList());
-//                        customer.queryLevelRightInfos();
-//                        DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
 
                         CustomerResp customer = resp.getCustomer();
                         customer.queryLevelRightInfos();
 
-                        //提示
-                        ToastUtil.showShortToast(R.string.customer_login);
+                                                ToastUtil.showShortToast(R.string.customer_login);
                         isShowAccount = false;
                         show_value.setText("");
 
-                        //跳转
-                        new DinnerCashManager().jumpAfterLogin(source, customer, null);
+                                                new DinnerCashManager().jumpAfterLogin(source, customer, null);
                         dismiss();
                     } else {
                         loginFail(response.getContent().getMessage());
@@ -347,12 +273,7 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
         operates.cardLoginNew(inputNo, listener);
     }
 
-    /**
-     * 使用手机号登录,默认不需要密码验证
-     *
-     * @Title: loginByPhoneNo
-     * @Return void 返回类型
-     */
+
     private void loginByPhoneNo(final String inputNo, String wxNo) {
         loginByPhoneNo(inputNo, wxNo, CustomerManager.NOT_NEED_PSWD, null, null);
     }
@@ -369,8 +290,7 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
                         }
                         CustomerLoginResp resp = response.getContent().getResult();
 
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                        if (resp.customerIsDisable()) {                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                             return;
                         }
 
@@ -385,8 +305,7 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
                         isShowAccount = false;
                         show_value.setText("");
 
-                        EventBus.getDefault().post(new EventReadKeyboard(true, ""));// 发送成功到ReadKeyboardDialogFragment
-
+                        EventBus.getDefault().post(new EventReadKeyboard(true, ""));
                         DinnerPriviligeItemsFragment.showDisplayUserInfo(getActivity());
 
                         new DinnerCashManager().jumpAfterLogin(source, customer, null);
@@ -402,10 +321,8 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
                         } else {
                             msg = response.getMessage();
                         }
-                        EventBus.getDefault().post(new EventReadKeyboard(false, msg));// 发送失败到ReadKeyboardDialogFragment
-
-                        loginFail(response.getMessage(), needPswd != CustomerManager.NEED_PSWD);//不需要验证密码的模式下，要清空输入框
-                    }
+                        EventBus.getDefault().post(new EventReadKeyboard(false, msg));
+                        loginFail(response.getMessage(), needPswd != CustomerManager.NEED_PSWD);                    }
                 } catch (Exception e) {
                     Log.e(TAG, "", e);
                 }
@@ -415,8 +332,7 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
             public void onError(VolleyError error) {
                 ToastUtil.showShortToast(error.getMessage());
 
-                EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));// 发送失败到ReadKeyboardDialogFragment
-            }
+                EventBus.getDefault().post(new EventReadKeyboard(false, error.getMessage()));            }
         };
 
         CustomerManager customerManager = CustomerManager.getInstance();
@@ -429,27 +345,17 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
         }
     }
 
-    /**
-     * 登录失败的响应,默认清空号码输入框
-     */
+
     private void loginFail(String message) {
         loginFail(message, true);
     }
 
-    /**
-     * 登录失败的响应
-     */
+
     private void loginFail(String message, boolean isNoPswd) {
         ToastUtil.showShortToast(message);
 
         if (isNoPswd) {
-            /*DisplayUserInfo dUserInfo =
-                    DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_VALIDATE_USER_FAIL,
-                            "",
-                            null,
-                            0,
-                            true, 0);
-            DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
 
             show_value.setBackgroundResource(R.drawable.customer_edit_error_bg);
             show_value.requestFocus();
@@ -457,44 +363,19 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
             show_value.setText("");
             show_value.startAnimation(shakeAnimation(6));
         } else {
-            /*DisplayUserInfo dUserInfo =
-                    DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_PASSWORD_INPUT,
-                            "",
-                            null,
-                            0,
-                            true, 0);
-            DisplayServiceManager.updateDisplay(getActivity(), dUserInfo);*/
+
         }
     }
 
 
-    /**
-     * 关闭登录界面后，根据来源参数恢复界面
-     */
+
     private void close() {
-//		if (getArguments() != null) {
-//			if (TextUtils.equals(getArguments().getString(SOURCE), INTEGRAL)) {
-//				EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
-//
-//				return;
-//			} else if (TextUtils.equals(getArguments().getString(SOURCE), COUPON)) {
-//				EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
-//
-//				return;
-//			} else if (TextUtils.equals(getArguments().getString(SOURCE), ITEMS)) {
-//				EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.PRIVILIGE_ITEMS));
-//
-//				return;
-//			}
-//		}
-//		mChangePageListener.changePage(ChangePageListener.ORDERDISHLIST, null);
         dismiss();
     }
 
     public static Animation shakeAnimation(int counts) {
         Animation translateAnimation = new TranslateAnimation(0, 15, 0, 0);
-        // 设置一个循环加速器，使用传入的次数就会出现摆动的效果。
-        translateAnimation.setInterpolator(new CycleInterpolator(counts));
+                translateAnimation.setInterpolator(new CycleInterpolator(counts));
         translateAnimation.setDuration(500);
 
         return translateAnimation;
@@ -502,13 +383,10 @@ public class DinnerDishCustomerLogin extends BasicDialogFragment implements OnCl
 
     @Override
     public void onDestroy() {
-        // EventBus.getDefault().post(new InnerScannerManager1.ScannerStatus(this.hashCode(), 2)); //add 20161118 for bugid23673
-        super.onDestroy();
+                super.onDestroy();
     }
 
-    /**
-     * 开启扫描
-     */
+
     private void startScan() {
         scanPopupWindow = new ScanPopupWindow(getActivity(), getString(R.string.sacn_customer_number_desc));
         scanPopupWindow.showAtLocation(btnScanCode, Gravity.NO_GRAVITY, 0, 0);

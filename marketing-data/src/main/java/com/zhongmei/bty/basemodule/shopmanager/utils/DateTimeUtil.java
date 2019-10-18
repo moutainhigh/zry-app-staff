@@ -16,22 +16,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DateTimeUtil {
-    /**
-     * 获取最近的一个开业时间
-     *
-     * @return
-     * @throws SQLException
-     * @throws ParseException
-     */
+
     public static Date getOpenTime() throws SQLException, ParseException {
-        //获取最近的开业时间，只查询这个时间点之后的
-        String openTimeStr = "00:00:00";//默认为0点
-        OpenTime openTime = null;
+                String openTimeStr = "00:00:00";        OpenTime openTime = null;
 
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
@@ -44,12 +34,10 @@ public class DateTimeUtil {
         if (openTime != null && !TextUtils.isEmpty(openTime.getClosingTime())) {
             openTimeStr = openTime.getClosingTime();
         }
-        //拼接今天所属的开门时间
-        String dateTimeStr = DateTimeUtils.getCurrentDate() + " " + openTimeStr;
+                String dateTimeStr = DateTimeUtils.getCurrentDate() + " " + openTimeStr;
         SimpleDateFormat format = new SimpleDateFormat(DateTimeUtils.DATE_TIME_FORMAT3);
         Date date = format.parse(dateTimeStr);
-        //大于当前时间时，往前回退一天
-        if (date.getTime() > System.currentTimeMillis()) {
+                if (date.getTime() > System.currentTimeMillis()) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(date);
             calendar.add(Calendar.DATE, -1);
@@ -64,7 +52,6 @@ public class DateTimeUtil {
         List<OpenTime> openTimes = null;
         try {
             Dao<OpenTime, Long> openTimeDao = helper.getDao(OpenTime.class);
-//            openTimes = openTimeDao.queryBuilder().where().eq(OpenTime.$.status, Status.VALID).and().eq(OpenTime.$.businessTimeType,0).query();
             openTimes = openTimeDao.queryBuilder().where().eq(OpenTime.$.status, Status.VALID).query();
         } catch (Exception ex) {
             ex.printStackTrace();

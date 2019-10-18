@@ -2,33 +2,19 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum TradeDealSettingBusinessType implements ValueEnum<Integer> {
 
-    /**
-     * 外卖订单
-     */
+
     TAKEAWAY(1),
 
-    /**
-     * 预订订单
-     */
+
     BOOKING(2),
 
-    /**
-     * 正餐
-     */
+
     DINNER(3),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

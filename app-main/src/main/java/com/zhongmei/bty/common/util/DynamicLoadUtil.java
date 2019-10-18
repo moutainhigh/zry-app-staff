@@ -58,29 +58,20 @@ public class DynamicLoadUtil {
     }
 
     private void combinePathList(ClassLoader loader) {
-        // 获取系统的classloader
-        PathClassLoader pathLoader = (PathClassLoader) context.getClassLoader();
+                PathClassLoader pathLoader = (PathClassLoader) context.getClassLoader();
 
         try {
-            // 反射dexpathlist
-            Field pathListFiled = Class.forName("dalvik.system.BaseDexClassLoader").getDeclaredField("pathList");
+                        Field pathListFiled = Class.forName("dalvik.system.BaseDexClassLoader").getDeclaredField("pathList");
             pathListFiled.setAccessible(true);
-            // 反射dexElements
-            Field dexElementsFiled = Class.forName("dalvik.system.DexPathList").getDeclaredField("dexElements");
+                        Field dexElementsFiled = Class.forName("dalvik.system.DexPathList").getDeclaredField("dexElements");
             dexElementsFiled.setAccessible(true);
-            // 获取系统的pathList
-            Object pathList1 = pathListFiled.get(pathLoader);
-            // 获取系统的dexElements
-            Object dexElements1 = dexElementsFiled.get(pathList1);
+                        Object pathList1 = pathListFiled.get(pathLoader);
+                        Object dexElements1 = dexElementsFiled.get(pathList1);
 
-            // 获取插件的pathlist
-            Object pathList2 = pathListFiled.get(loader);
-            // 获取插件的dexElements
-            Object dexElements2 = dexElementsFiled.get(pathList2);
-            // 合并dexElements
-            Object combineDexElements = combineArray(dexElements2, dexElements1);
-            // 设置给系统的dexpathlist
-            dexElementsFiled.set(pathList1, combineDexElements);
+                        Object pathList2 = pathListFiled.get(loader);
+                        Object dexElements2 = dexElementsFiled.get(pathList2);
+                        Object combineDexElements = combineArray(dexElements2, dexElements1);
+                        dexElementsFiled.set(pathList1, combineDexElements);
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -109,14 +100,11 @@ public class DynamicLoadUtil {
     }
 
     private boolean copyDex(String name) {
-        File dexFile = context.getDir("dex", 0);// 需要导出的的文件路径
-
+        File dexFile = context.getDir("dex", 0);
         try {
-            InputStream localInputStream = context.getAssets().open(name);// 获取Assets下的文件
-            FileOutputStream localFileOutputStream = new FileOutputStream(new File(dexFile, name));
+            InputStream localInputStream = context.getAssets().open(name);            FileOutputStream localFileOutputStream = new FileOutputStream(new File(dexFile, name));
             byte[] arrayOfByte = new byte[1024];
-            // int i = localInputStream.read(arrayOfByte);
-            for (; ; ) {
+                        for (; ; ) {
                 int i = localInputStream.read(arrayOfByte);
                 if (i == -1) {
                     break;

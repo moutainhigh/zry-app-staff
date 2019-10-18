@@ -21,9 +21,7 @@ import com.zhongmei.bty.dinner.vo.DinnerConnectTablesVo;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BatchOperationTableDialogFragment extends BasicDialogFragment
         implements View.OnClickListener {

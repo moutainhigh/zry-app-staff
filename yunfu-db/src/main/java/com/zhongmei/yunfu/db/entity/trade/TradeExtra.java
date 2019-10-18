@@ -14,200 +14,121 @@ import com.zhongmei.yunfu.db.enums.TakeDishStatus;
 import com.zhongmei.yunfu.db.enums.TradePrintStatus;
 import com.zhongmei.yunfu.db.enums.TradeServingStatus;
 
-/**
- * TradeExtra is a ORMLite bean type. Corresponds to the database table "trade_extra"
- */
+
 @DatabaseTable(tableName = "trade_extra")
 public class TradeExtra extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_extra"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * binding_delivery_user_time 绑定外卖员时间
-         */
+
         public static final String bindingDeliveryUserTime = "binding_delivery_user_time";
 
-        /**
-         * call_dish_status 取餐状态： 0未取餐， 1已取餐
-         */
+
         public static final String callDishStatus = "call_dish_status";
 
-        /**
-         * called 是否已叫号：1:未提示 2:已提示
-         */
+
         public static final String called = "called";
 
-        /**
-         * creator_id 创建者，创建此记录的系统用户
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name 创建者姓名
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * delivery_address 送货地址
-         */
+
         public static final String deliveryAddress = "delivery_address";
 
-        /**
-         * delivery_address_id 送货地址ID
-         */
+
         public static final String deliveryAddressId = "delivery_address_id";
 
-        /**
-         * delivery_fee 送货费
-         */
+
         public static final String deliveryFee = "delivery_fee";
 
-        /**
-         * delivery_man 送餐员
-         */
+
         public static final String deliveryMan = "delivery_man";
 
-        /**
-         * delivery_real_time 外卖送餐的真实配送时间
-         */
+
         public static final String deliveryRealTime = "delivery_real_time";
 
-        /**
-         * delivery_status 送餐状态：0默认等待送餐，1正在配送，2送餐完成，3已清账
-         */
+
         public static final String deliveryStatus = "delivery_status";
 
-        /**
-         * delivery_user_id 外卖送餐员的USERID
-         */
+
         public static final String deliveryUserId = "delivery_user_id";
 
-        /**
-         * device_platform 设备平台，比如手持设备等(合作方传来的)
-         */
+
         public static final String devicePlatform = "device_platform";
 
-        /**
-         * device_token 设备token，比如手持设备等(合作方传来的)
-         */
+
         public static final String deviceToken = "device_token";
 
-        /**
-         * expect_time 顾客期望的收货时间。对于外送单据，表示顾客期望送达的时间，为null表示尽快。
-         * 对于自提单据，表示预约的取货时间
-         */
+
         public static final String expectTime = "expect_time";
 
-        /**
-         * fix_type 选择桌台的方式：(目前只有微信使用)  1:ASSIGN: 顾客自选  2:SCAN_CODE: 扫码找位
-         */
+
         public static final String fixType = "fix_type";
 
-        /**
-         * invoice_title 发票抬头
-         */
+
         public static final String invoiceTitle = "invoice_title";
 
-        /**
-         * number_plate 号牌
-         */
+
         public static final String numberPlate = "number_plate";
 
-        /**
-         * open_identy 微信号
-         */
+
         public static final String openIdenty = "open_identy";
 
-        /**
-         * received_time 实际收货时间，为null表示还未送达(或取货)
-         * 对于外送单据，表示实际送达的时间
-         * 对于自提单据，表示实际来取货的时间
-         */
+
         public static final String receivedTime = "received_time";
 
-        /**
-         * receiver_name 收货人姓名
-         */
+
         public static final String receiverName = "receiver_name";
 
-        /**
-         * receiver_phone 收货人电话
-         */
+
         public static final String receiverPhone = "receiver_phone";
 
-        /**
-         * receiver_sex 1:MALE 男  0:FEMALE 女,  -1:NONE 未知
-         */
+
         public static final String receiverSex = "receiver_sex";
 
-        /**
-         * send_area_id 送餐范围id，到店自提时为空
-         */
+
         public static final String sendAreaId = "send_area_id";
 
-        /**
-         * serial_number 流水号
-         */
+
         public static final String serialNumber = "serial_number";
 
-        /**
-         * square_up_time 清账时间
-         */
+
         public static final String squareUpTime = "square_up_time";
 
-        /**
-         * third_tran_no 第三方交易号
-         */
+
         public static final String thirdTranNo = "third_tran_no";
 
-        /**
-         * trade_id 交易ID
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * trade_uuid 关联TRADE表的UUID
-         */
+
         public static final String tradeUuid = "trade_uuid";
 
-        /**
-         * updator_id 最后修改此记录的用户
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name 最后修改者姓名
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * user_identy 百度appId
-         */
+
         public static final String userIdenty = "user_identy";
 
-        /**
-         * delivery_platform 外送平台：1商家自送 2百度外卖 3蜂鸟（饿了么）4美团配送 5 达达配送
-         */
+
         public static final String deliveryPlatform = "delivery_platform";
 
-        /**
-         * third_serial_no 第三方订单流水号
-         */
+
         public static final String thirdSerialNo = "third_serial_no";
 
-        /**
-         * is_printed 总单打印状态，1：未打印，2：已打印,3：部分打印
-         */
+
         public static final String isPrinted = "is_printed";
 
-        /**
-         * has_serving 总单服务状态，1,未上菜；2，已上菜；3，部分上菜
-         */
+
         public static final String hasServing = "has_serving";
 
     }
@@ -320,12 +241,9 @@ public class TradeExtra extends DataEntityBase implements ICreator, IUpdator {
     @DatabaseField(columnName = "has_serving")
     private Integer hasServing;
 
-    //国家英文名称
-    private String nation;
-    //国家中文名称
-    private String country;
-    //电话国际区码
-    private String nationalTelCode;
+        private String nation;
+        private String country;
+        private String nationalTelCode;
 
     public Long getBindingDeliveryUserTime() {
         return bindingDeliveryUserTime;

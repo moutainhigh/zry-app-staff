@@ -1,1 +1,1 @@
-package com.zhongmei.bty.basemodule.shoppingcart.listerner;/** * 点菜和收银界面实时监听回调 * Created by demo on 2018/12/15 */public interface ShoppingAsyncListener {    //多终端更新了数据    public void onMultiTerminalUpdate(String hint);    //异步数据返回    public void onAsyncUpdate();}
+package com.zhongmei.bty.basemodule.shoppingcart.listerner;public interface ShoppingAsyncListener {        public void onMultiTerminalUpdate(String hint);        public void onAsyncUpdate();}

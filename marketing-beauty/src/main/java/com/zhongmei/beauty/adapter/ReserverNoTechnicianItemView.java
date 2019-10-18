@@ -15,9 +15,7 @@ import com.zhongmei.yunfu.db.entity.booking.Booking;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import com.zhongmei.yunfu.db.enums.Sex;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class ReserverNoTechnicianItemView extends RelativeLayout implements View.OnClickListener {
 
     private ImageView iv_header;
@@ -80,8 +78,7 @@ public class ReserverNoTechnicianItemView extends RelativeLayout implements View
     @Override
     public void onClick(View v) {
         if (v == btn_choiceTechnician && mListener != null) {
-            //选择技师
-            mListener.editTrade(mBookingVo);
+                        mListener.editTrade(mBookingVo);
         }
     }
 }

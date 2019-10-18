@@ -18,12 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * 桌台区域指示视图（用于切换区域）
- *
- * @version: 1.0
- * @date 2015年9月2日
- */
+
 public class ZonesIndicator extends LinearLayout {
 
     private OnControlListener mOnControlListener;
@@ -78,12 +73,7 @@ public class ZonesIndicator extends LinearLayout {
         }
     }
 
-    /**
-     * 切换到指定区域
-     *
-     * @param zone
-     * @return
-     */
+
     public boolean switchZone(IZone zone) {
         if (zone != mCurr) {
             if (mCurr != null) {
@@ -103,12 +93,7 @@ public class ZonesIndicator extends LinearLayout {
         return false;
     }
 
-    /**
-     * 切换到指定ID的区域
-     *
-     * @param zoneId
-     * @return true表示当前桌台，false表示需要切换区域
-     */
+
     public boolean switchZone(Long zoneId) {
         if (zoneId != null) {
             if (mCurr != null && zoneId.equals(mCurr.getId())) {
@@ -137,9 +122,7 @@ public class ZonesIndicator extends LinearLayout {
 
     };
 
-    /**
-     * 刷新桌台区域
-     */
+
     public void refreshZone() {
         if (zones != null) {
             for (ZoneModel vo : zones) {
@@ -149,14 +132,9 @@ public class ZonesIndicator extends LinearLayout {
         }
     }
 
-    /**
-     * 刷新桌台区域微信标志
-     *
-     * @param viewGroup
-     */
+
     private void refreshWechatSign(ViewGroup viewGroup) {
-        // 显示微信订单标识
-        boolean isShowWechatImage = false;
+                boolean isShowWechatImage = false;
         ZoneModel model = (ZoneModel) viewGroup.getTag();
         List<DinnertableModel> dinnerTableModels = model.getDinnertableModels();
         if (dinnerTableModels != null && dinnerTableModels.size() > 0) {

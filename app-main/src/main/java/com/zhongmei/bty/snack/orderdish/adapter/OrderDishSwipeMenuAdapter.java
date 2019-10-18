@@ -62,68 +62,39 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2015-7-16 下午4:41:03
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class OrderDishSwipeMenuAdapter extends BaseAdapter {
     private static final String TAG = OrderDishSwipeMenuAdapter.class.getSimpleName();
 
-    final String STR_SEMICOLON = "：";// 分号
-
-    final String STR_COMMA = "，";// 逗号
-
+    final String STR_SEMICOLON = "：";
+    final String STR_COMMA = "，";
     private static String NO_HAVE_ACTIVITY_KEY = "no_have_activity_key";
 
-    public static final int ITEM_TYPE_GRAY_SEPERATOR = -1; // 灰色间隔线
-
-    public static final int ITEM_TYPE_SINGLE = 0;// 单菜
-
-    public static final int ITEM_TYPE_SINGLE_DISCOUNT = 1;// 单菜折扣
-
-    public static final int ITEM_TYPE_SINGLE_MEMO = 2;// 单菜备注
-
-    public static final int ITEM_TYPE_COMBO = 3;// 套餐外壳
-
-    public static final int ITEM_TYPE_COMBO_DISCOUNT = 4;// 套餐折扣
-
-    public static final int ITEM_TYPE_COMBO_MEMO = 5;// 套餐备注
-
-    public static final int ITEM_TYPE_CHILD = 6;// 套餐子菜
-
-    public static final int ITEM_TYPE_CHILD_MEMO = 7;// 子菜备注
-
-    public static final int ITEM_TYPE_ALL_MEMO = 8;// 整单备注
-
-    public static final int ITEM_TYPE_ALL_DISCOUNT = 9;// 整单打折
-
-    public static final int ITEM_TYPE_CUSTOMER_COUPONS = 10;// 会员优惠劵
-
-    public static final int ITEM_TYPE_INTERGRAL = 11;// 积分抵现
-
-    public static final int ITEM_TYPE_FREE_REASON = 12;// 免单原因
-
-    public static final int ITEM_TYPE_EXTRA_CHARGE = 13;//附加费
-
-    public static final int ITEM_TYPE_DEPOSIT = 14;//押金
-
-    public static final int ITEM_TYPE_WEIXIN_COUPONS = 15;//微信优惠券
-
-    public static final int ITEM_TYPE_MARKET_ACTIVITY = 16;// 营销活动
-
-    public static final int ITEM_TYPE_TAX = 17; //税
-
-    private ArrayList<DishDataItem> data = new ArrayList<DishDataItem>(10); // 数据源
-
+    public static final int ITEM_TYPE_GRAY_SEPERATOR = -1;
+    public static final int ITEM_TYPE_SINGLE = 0;
+    public static final int ITEM_TYPE_SINGLE_DISCOUNT = 1;
+    public static final int ITEM_TYPE_SINGLE_MEMO = 2;
+    public static final int ITEM_TYPE_COMBO = 3;
+    public static final int ITEM_TYPE_COMBO_DISCOUNT = 4;
+    public static final int ITEM_TYPE_COMBO_MEMO = 5;
+    public static final int ITEM_TYPE_CHILD = 6;
+    public static final int ITEM_TYPE_CHILD_MEMO = 7;
+    public static final int ITEM_TYPE_ALL_MEMO = 8;
+    public static final int ITEM_TYPE_ALL_DISCOUNT = 9;
+    public static final int ITEM_TYPE_CUSTOMER_COUPONS = 10;
+    public static final int ITEM_TYPE_INTERGRAL = 11;
+    public static final int ITEM_TYPE_FREE_REASON = 12;
+    public static final int ITEM_TYPE_EXTRA_CHARGE = 13;
+    public static final int ITEM_TYPE_DEPOSIT = 14;
+    public static final int ITEM_TYPE_WEIXIN_COUPONS = 15;
+    public static final int ITEM_TYPE_MARKET_ACTIVITY = 16;
+    public static final int ITEM_TYPE_TAX = 17;
+    private ArrayList<DishDataItem> data = new ArrayList<DishDataItem>(10);
     private Context context;
 
     private Boolean isEditModle = false;
 
-    private Boolean isDiscountAll = false;// 是否整单打折
-
+    private Boolean isDiscountAll = false;
     private static boolean mDepositEnable = true;
 
     private Drawable mChildIcon;
@@ -158,15 +129,12 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
 
     private int IMAGEMARGINRIGHT = 5;
 
-    private boolean isDishCheckMode = false;// 是否处于菜品操作mode
-
+    private boolean isDishCheckMode = false;
     private SalesPromotionRuleVo mSalesPromotionRuleVo = null;
 
-    // 存储菜品uuid和对应的营销活动对象
-    private Map<String, TradeItemPlanActivity> mTradeItemPlanActivityMap = new HashMap<String, TradeItemPlanActivity>();
+        private Map<String, TradeItemPlanActivity> mTradeItemPlanActivityMap = new HashMap<String, TradeItemPlanActivity>();
 
-    private String mCurSelectUuid = "";//当前选中
-
+    private String mCurSelectUuid = "";
     private int pos = -2;
 
     public boolean isDishCheckMode() {
@@ -204,28 +172,21 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
     public void updateData(List<IShopcartItem> dataList, TradeVo tradeVo) {
         this.data.clear();
         boolean isHasItem = false;
-        // 遍历菜品
-        if (dataList != null && dataList.size() > 0) {
+                if (dataList != null && dataList.size() > 0) {
             isHasItem = true;
-            //判断是否有营销活动
-            List<TradePlanActivity> tradePlanActivityList = tradeVo.getTradePlanActivityList();//Trade对应的营销活动列表
-            List<TradeItemPlanActivity> tradeItemPlanActivityList = tradeVo.getTradeItemPlanActivityList();//TradeItem对应的营销活动列表
-            if (tradePlanActivityList == null) {
+                        List<TradePlanActivity> tradePlanActivityList = tradeVo.getTradePlanActivityList();            List<TradeItemPlanActivity> tradeItemPlanActivityList = tradeVo.getTradeItemPlanActivityList();            if (tradePlanActivityList == null) {
                 tradePlanActivityList = Collections.emptyList();
             }
             if (tradeItemPlanActivityList == null) {
                 tradeItemPlanActivityList = Collections.emptyList();
             }
-            Map<String, TradePlanActivity> tradePlanActivityMap = new HashMap<String, TradePlanActivity>();//用来存储Trade的营销活动的Map
-            for (TradePlanActivity tradePlanActivity : tradePlanActivityList) {
+            Map<String, TradePlanActivity> tradePlanActivityMap = new HashMap<String, TradePlanActivity>();            for (TradePlanActivity tradePlanActivity : tradePlanActivityList) {
                 if (tradePlanActivity.getStatusFlag() == StatusFlag.INVALID
                         || tradePlanActivity.getRuleEffective() == ActivityRuleEffective.INVALID) {
                     continue;
                 }
-                tradePlanActivityMap.put(tradePlanActivity.getUuid(), tradePlanActivity);//将TradePlanActivity中的id当成key存储在Map中
-            }
-            //Map<String, TradeItemPlanActivity> tradeItemPlanActivityMap = new HashMap<String, TradeItemPlanActivity>();//用来存储TradeItem的营销活动的Map
-            mTradeItemPlanActivityMap.clear();
+                tradePlanActivityMap.put(tradePlanActivity.getUuid(), tradePlanActivity);            }
+                        mTradeItemPlanActivityMap.clear();
             for (TradeItemPlanActivity tradeItemPlanActivity : tradeItemPlanActivityList) {
                 if (tradeItemPlanActivity.getStatusFlag() == StatusFlag.INVALID) {
                     continue;
@@ -233,19 +194,14 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 mTradeItemPlanActivityMap.put(tradeItemPlanActivity.getTradeItemUuid(), tradeItemPlanActivity);
             }
 
-            Map<String, List<IShopcartItem>> tradeItemListMap = new HashMap<String, List<IShopcartItem>>();//用来存储方法最终返回值
-            tradeItemListMap.put(NO_HAVE_ACTIVITY_KEY, new ArrayList<IShopcartItem>());//设置没有营销活动的Map
-
+            Map<String, List<IShopcartItem>> tradeItemListMap = new HashMap<String, List<IShopcartItem>>();            tradeItemListMap.put(NO_HAVE_ACTIVITY_KEY, new ArrayList<IShopcartItem>());
 
             for (String key : tradePlanActivityMap.keySet()) {
-                tradeItemListMap.put(key, new ArrayList<IShopcartItem>());//为每个Trade营销活动设置一个TradeItemVo列表  key为TradePlanActivity的UUID
-            }
+                tradeItemListMap.put(key, new ArrayList<IShopcartItem>());            }
 
             for (IShopcartItem shopcartItem : dataList) {
                 TradeItemPlanActivity tradeItemPlanActivity = mTradeItemPlanActivityMap.get(shopcartItem.getUuid());
-                if (tradeItemPlanActivity != null && tradePlanActivityMap.get(tradeItemPlanActivity.getRelUuid()) != null) {//通过tradeitem的ID在Map中是否有营销活动(null为没有营销活动,有营销活动)
-                    TradePlanActivity tradePlanActivity = tradePlanActivityMap.get(tradeItemPlanActivity.getRelUuid());//找到TradeItemPlanActivity对应的TradePlanActivity
-                    List<IShopcartItem> shopcartItemList = tradeItemListMap.get(tradePlanActivity.getUuid());
+                if (tradeItemPlanActivity != null && tradePlanActivityMap.get(tradeItemPlanActivity.getRelUuid()) != null) {                    TradePlanActivity tradePlanActivity = tradePlanActivityMap.get(tradeItemPlanActivity.getRelUuid());                    List<IShopcartItem> shopcartItemList = tradeItemListMap.get(tradePlanActivity.getUuid());
                     shopcartItemList.add(shopcartItem);
                 } else {
                     List<IShopcartItem> shopcartItemList = tradeItemListMap.get(NO_HAVE_ACTIVITY_KEY);
@@ -267,8 +223,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 addDishItems(shopcartItemList);
             }
 
-            //押金添加
-            if (ServerSettingCache.getInstance().getDepositEnable()) {
+                        if (ServerSettingCache.getInstance().getDepositEnable()) {
                 DepositInfo deposit = ServerSettingCache.getInstance().getTradeDeposit();
                 DishDataItem item = new DishDataItem(ITEM_TYPE_DEPOSIT);
 
@@ -284,8 +239,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 data.add(item);
             }
         }
-        // 整单
-        if (tradeVo != null && tradeVo.getTrade() != null) {
+                if (tradeVo != null && tradeVo.getTrade() != null) {
             addOverallAttribute(tradeVo, isHasItem);
         }
 
@@ -314,19 +268,15 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
         notifyDataSetChanged();
     }
 
-    //添加营销活动标题
-    private void addActivityTitleItem(TradePlanActivity planActivity) {
+        private void addActivityTitleItem(TradePlanActivity planActivity) {
         DishDataItem item = new DishDataItem(ITEM_TYPE_MARKET_ACTIVITY);
         item.setTradePlanActivityUuid(planActivity.getUuid());
         item.setName(planActivity.getRuleName());
         item.setValue(planActivity.getOfferValue() == null ? 0 : planActivity.getOfferValue().doubleValue());
-        // 营销活动条目不需要topline
-        item.setNeedTopLine(false);
-        data.add(0, item);//将促销活动放在首位
-    }
+                item.setNeedTopLine(false);
+        data.add(0, item);    }
 
-    /*
-     * 添加菜品列表*/
+
     private void addDishItems(List<IShopcartItem> dataList) {
         if (dataList == null || dataList.isEmpty())
             return;
@@ -335,11 +285,9 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             if (shopCartItem.getStatusFlag() == StatusFlag.INVALID) {
                 continue;
             }
-            // 套餐外壳
-            if (shopCartItem.getSetmealItems() != null && shopCartItem.getType() == DishType.COMBO) {
+                        if (shopCartItem.getSetmealItems() != null && shopCartItem.getType() == DishType.COMBO) {
 
-                DishDataItem item = new DishDataItem(ITEM_TYPE_COMBO);// 套餐外壳
-                item.setBase(shopCartItem);
+                DishDataItem item = new DishDataItem(ITEM_TYPE_COMBO);                item.setBase(shopCartItem);
                 item.setUuid(shopCartItem.getUuid());
                 if (i == dataList.size() - 1)
                     item.setNeedTopLine(false);
@@ -350,14 +298,12 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 if (chirldList != null && chirldList.size() > 0) {
 
                     for (ISetmealShopcartItem chirld : chirldList) {
-                        // 套餐字菜
-                        DishDataItem it = new DishDataItem(ITEM_TYPE_CHILD);
+                                                DishDataItem it = new DishDataItem(ITEM_TYPE_CHILD);
                         it.setBase(chirld);
                         it.setUuid(shopCartItem.getUuid());
                         data.add(it);
 
-                        // 字菜备注
-                        if (!TextUtils.isEmpty(chirld.getMemo())) {
+                                                if (!TextUtils.isEmpty(chirld.getMemo())) {
                             DishDataItem chMemoIt = new DishDataItem(ITEM_TYPE_CHILD_MEMO);
                             chMemoIt.setBase(chirld);
                             chMemoIt.setUuid(shopCartItem.getUuid());
@@ -368,8 +314,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                     }
                 }
 
-                // 套餐外壳折扣
-                if (shopCartItem.getPrivilege() != null) {
+                                if (shopCartItem.getPrivilege() != null) {
                     DishDataItem it = new DishDataItem(ITEM_TYPE_COMBO_DISCOUNT);
                     it.setBase(shopCartItem);
                     it.setUuid(shopCartItem.getUuid());
@@ -378,8 +323,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
 
                     data.add(it);
                 }
-                // 套餐外壳备注
-                if (!TextUtils.isEmpty(shopCartItem.getMemo())) {
+                                if (!TextUtils.isEmpty(shopCartItem.getMemo())) {
                     DishDataItem it2 = new DishDataItem(ITEM_TYPE_COMBO_MEMO);
                     it2.setBase(shopCartItem);
                     it2.setUuid(shopCartItem.getUuid());
@@ -387,17 +331,14 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                             + shopCartItem.getMemo());
                     data.add(it2);
                 }
-                // 单菜
-            } else {
-                DishDataItem item = new DishDataItem(ITEM_TYPE_SINGLE);// 单菜
-                item.setBase(shopCartItem);
+                            } else {
+                DishDataItem item = new DishDataItem(ITEM_TYPE_SINGLE);                item.setBase(shopCartItem);
                 item.setUuid(shopCartItem.getUuid());
                 if (i == dataList.size() - 1)
                     item.setNeedTopLine(false);
                 data.add(item);
 
-                // 单菜折扣
-                if (shopCartItem.getPrivilege() != null) {
+                                if (shopCartItem.getPrivilege() != null) {
                     DishDataItem it = new DishDataItem(ITEM_TYPE_SINGLE_DISCOUNT);
                     it.setBase(shopCartItem);
                     it.setUuid(shopCartItem.getUuid());
@@ -408,8 +349,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                     data.add(it);
                 }
 
-                // 单菜礼品券优惠
-                if (shopCartItem.getCouponPrivilegeVo() != null) {
+                                if (shopCartItem.getCouponPrivilegeVo() != null) {
                     DishDataItem it = new DishDataItem(ITEM_TYPE_SINGLE_DISCOUNT);
                     it.setBase(shopCartItem);
                     it.setUuid(shopCartItem.getUuid());
@@ -426,8 +366,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                     data.add(it);
                 }
 
-                // 单菜备注
-                if (!TextUtils.isEmpty(shopCartItem.getMemo())) {
+                                if (!TextUtils.isEmpty(shopCartItem.getMemo())) {
                     DishDataItem it2 = new DishDataItem(ITEM_TYPE_SINGLE_MEMO);
                     it2.setBase(shopCartItem);
                     it2.setUuid(shopCartItem.getUuid());
@@ -439,11 +378,9 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
         }
     }
 
-    /*
-     * 添加整单标签*/
+
     private void addOverallAttribute(TradeVo tradeVo, boolean isHasItem) {
-        // 优惠劵
-        if (tradeVo.getCouponPrivilegeVoList() != null) {
+                if (tradeVo.getCouponPrivilegeVoList() != null) {
             for (CouponPrivilegeVo couponPrivilegeVo : tradeVo.getCouponPrivilegeVoList()) {
                 if (couponPrivilegeVo != null
                         && couponPrivilegeVo.getTradePrivilege() != null
@@ -458,28 +395,23 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
 
                 switch (couponPrivilegeVo.getCoupon().getCouponType()) {
 
-                    case REBATE:// 满减券
-                        item.setName(context.getString(R.string.coupon_type_rebate) + STR_SEMICOLON
+                    case REBATE:                        item.setName(context.getString(R.string.coupon_type_rebate) + STR_SEMICOLON
                                 + couponPrivilegeVo.getCoupon().getName());
                         break;
 
-                    case DISCOUNT:// 折扣券
-                        item.setName(context.getString(R.string.coupon_type_discount) +
+                    case DISCOUNT:                        item.setName(context.getString(R.string.coupon_type_discount) +
                                 STR_SEMICOLON + couponPrivilegeVo.getCoupon().getName());
                         break;
-                    case GIFT:// 礼品券
-                        item.setName(context.getString(R.string.coupon_type_gift) + STR_SEMICOLON +
+                    case GIFT:                        item.setName(context.getString(R.string.coupon_type_gift) + STR_SEMICOLON +
                                 couponPrivilegeVo.getCoupon().getName());
                         break;
-                    case CASH:// 现金券
-                        item.setName(context.getString(R.string.coupon_type_cash) + STR_SEMICOLON +
+                    case CASH:                        item.setName(context.getString(R.string.coupon_type_cash) + STR_SEMICOLON +
                                 couponPrivilegeVo.getCoupon().getName());
                         break;
                     default:
                         break;
                 }
-                // 是否生效
-                if (couponPrivilegeVo.isActived()) {
+                                if (couponPrivilegeVo.isActived()) {
                     item.setCouponEnabled(true);
                 } else {
                     item.setCouponEnabled(false);
@@ -488,21 +420,17 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             }
         }
 
-        //微信卡券优惠列表
-        List<WeiXinCouponsVo> weiXinCouponsVoList = tradeVo.getmWeiXinCouponsVo();
+                List<WeiXinCouponsVo> weiXinCouponsVoList = tradeVo.getmWeiXinCouponsVo();
         if (Utils.isNotEmpty(weiXinCouponsVoList)) {
             for (WeiXinCouponsVo weiXinCouponsVo : weiXinCouponsVoList) {
                 DishDataItem item = new DishDataItem(ITEM_TYPE_WEIXIN_COUPONS);
                 item.setWeiXinCouponsVo(weiXinCouponsVo);
                 TradePrivilege tradePrivilege = weiXinCouponsVo.getmTradePrivilege();
-                //设置优惠名称
-                item.setName(tradePrivilege.getPrivilegeName());
-                //设置优惠金额
-                if (tradePrivilege != null && tradePrivilege.getPrivilegeAmount() != null) {
+                                item.setName(tradePrivilege.getPrivilegeName());
+                                if (tradePrivilege != null && tradePrivilege.getPrivilegeAmount() != null) {
                     item.setValue(tradePrivilege.getPrivilegeAmount().doubleValue());
                 }
-                //设置优惠是否生效
-                item.setCouponEnabled(weiXinCouponsVo.isActived());
+                                item.setCouponEnabled(weiXinCouponsVo.isActived());
                 data.add(item);
             }
         }
@@ -515,20 +443,16 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 item.setValue(privilege.getPrivilegeAmount().doubleValue());
             }
 
-            // 是否生效
-            if (tradeVo.getIntegralCashPrivilegeVo().isActived()) {
+                        if (tradeVo.getIntegralCashPrivilegeVo().isActived()) {
                 item.setCouponEnabled(true);
-                int value = privilege.getPrivilegeValue() == null ? 0 : privilege.getPrivilegeValue().intValue();// 积分
-                int amount = privilege.getPrivilegeAmount() == null ? 0 : privilege.getPrivilegeAmount().intValue();// 抵现（为负）
-                item.setName(ResourceUtils.getString(R.string.use_integralcash, value + "", (0 - amount)));
+                int value = privilege.getPrivilegeValue() == null ? 0 : privilege.getPrivilegeValue().intValue();                int amount = privilege.getPrivilegeAmount() == null ? 0 : privilege.getPrivilegeAmount().intValue();                item.setName(ResourceUtils.getString(R.string.use_integralcash, value + "", (0 - amount)));
             } else {
                 item.setCouponEnabled(false);
                 item.setName(context.getResources().getString(R.string.intergral_ineffective));
             }
             data.add(item);
         }
-        //附加费包含餐盒费
-        List<TradePrivilege> datas = tradeVo.getTradePrivileges();
+                List<TradePrivilege> datas = tradeVo.getTradePrivileges();
         if (datas != null) {
             for (TradePrivilege temp : datas) {
                 Map<Long, ExtraCharge> chargeData = tradeVo.getExtraChargeMap();
@@ -545,8 +469,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             }
         }
 
-        // 整单打折
-        if (tradeVo.getTradePrivilege() != null) {
+                if (tradeVo.getTradePrivilege() != null) {
             isDiscountAll = true;
             DishDataItem item = new DishDataItem(ITEM_TYPE_ALL_DISCOUNT);
             item.setName(tradeVo.getTradePrivilege().getPrivilegeName());
@@ -556,22 +479,19 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             isDiscountAll = false;
         }
 
-        // 整单备注
-        if (!TextUtils.isEmpty(tradeVo.getTrade().getTradeMemo())) {
+                if (!TextUtils.isEmpty(tradeVo.getTrade().getTradeMemo())) {
             DishDataItem item = new DishDataItem(ITEM_TYPE_ALL_MEMO);
             item.setName(context.getResources().getString(R.string.remarkOrder) + tradeVo.getTrade().getTradeMemo());
             data.add(item);
         }
 
-        //免单原因
-        String freeReason = getFreeReason(tradeVo);
+                String freeReason = getFreeReason(tradeVo);
         if (!TextUtils.isEmpty(freeReason)) {
             DishDataItem item = new DishDataItem(ITEM_TYPE_FREE_REASON);
             item.setName(context.getString(R.string.order_center_detail_reason_free, freeReason));
             data.add(item);
         }
-        //没有菜品不显示消费shui
-        if (Utils.isEmpty(tradeVo.getTradeTaxs()) || !isHasItem) {
+                if (Utils.isEmpty(tradeVo.getTradeTaxs()) || !isHasItem) {
             return;
         }
 
@@ -717,37 +637,29 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.topLine = convertView.findViewById(R.id.topline);
             holder.checkButton = (ImageView) convertView.findViewById(R.id.checkButton);
-            // 菜名
-            holder.dishView = (LinearLayout) convertView.findViewById(R.id.dishView);
+                        holder.dishView = (LinearLayout) convertView.findViewById(R.id.dishView);
             holder.dish_name = (TextView) convertView.findViewById(R.id.dish_name);
             holder.dish_num = (TextView) convertView.findViewById(R.id.dish_num);
             holder.dish_price = (TextView) convertView.findViewById(R.id.dish_price);
-            // 口味做法
-            holder.dishTasteView = (LinearLayout) convertView.findViewById(R.id.dishTasteView);
+                        holder.dishTasteView = (LinearLayout) convertView.findViewById(R.id.dishTasteView);
 
-            // 加料
-            holder.dishAddtionView = (LinearLayout) convertView.findViewById(R.id.dishAddtionView);// 加料
-
+                        holder.dishAddtionView = (LinearLayout) convertView.findViewById(R.id.dishAddtionView);
             holder.addtionName = (TextView) convertView.findViewById(R.id.dishAddtionName);
 
             holder.addtionPrice = (TextView) convertView.findViewById(R.id.dishAddtionPrice);
 
-            // 备注
-            holder.dish_memo = (TextView) convertView.findViewById(R.id.dish_memo);
+                        holder.dish_memo = (TextView) convertView.findViewById(R.id.dish_memo);
 
             holder.customAllowanceIv = (ImageView) convertView.findViewById(R.id.custom_allowance_iv);
             holder.depositDemo = (TextView) convertView.findViewById(R.id.deposit_demo);
             holder.deposit = (LinearLayout) convertView.findViewById(R.id.deposit);
 
-            // 营销活动条目
-            holder.rlMarketActivity = (RelativeLayout) convertView.findViewById(R.id.rl_market_activity);
+                        holder.rlMarketActivity = (RelativeLayout) convertView.findViewById(R.id.rl_market_activity);
             holder.tvMarketActivityName = (TextView) convertView.findViewById(R.id.tv_market_activity_name);
             holder.tvMarketActivityValue = (TextView) convertView.findViewById(R.id.tv_market_activity_value);
             holder.ivMarketActivityRemove = (ImageView) convertView.findViewById(R.id.iv_market_activity_remove);
 
-            // 灰色间隔线
-            holder.viewGraySeperator = convertView.findViewById(R.id.view_seperator);// 灰色间隔线
-
+                        holder.viewGraySeperator = convertView.findViewById(R.id.view_seperator);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -766,35 +678,14 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             if (((position == data.size() - 1) && (item.getType() == ITEM_TYPE_COMBO || item.getType() == ITEM_TYPE_SINGLE) && pos == position)
                     || item.getType() == ITEM_TYPE_FREE_REASON
                     || (pos + 1 == position && data.get(pos).getBase() != null && Utils.isEmpty(data.get(pos).getBase().getExtraItems()) && isContainProperty(data.get(pos).getBase().getProperties()))
-                    || position == 0) {//第一项、选中的第二项并且上一项加料、做法为空都不需要分割线
-                item.setNeedTopLine(false);
+                    || position == 0) {                item.setNeedTopLine(false);
             } else {
                 item.setNeedTopLine(true);
             }
             holder.dishView.setBackgroundResource(0);
         }
 
-		/*
-		if (isEditModle) {
-			// 单菜或套餐可以批量打折
-			if (item.getType() == ITEM_TYPE_SINGLE || item.getType() == ITEM_TYPE_COMBO) {
-				holder.checkButton.setVisibility(View.VISIBLE);
-				if(item.getBase().getEnableWholePrivilege() == Bool.NO){//不能参与打折
-					holder.checkButton.setBackgroundResource(R.drawable.checkbox_cannot_discount);
-				}else{
-					if (item.getBase().isSelected()) {
-						holder.checkButton.setBackgroundResource(R.drawable.checkbox_selected);
-					} else {
-						holder.checkButton.setBackgroundResource(R.drawable.checkbox_nomal);
-					}
-				}
 
-			} else {
-				holder.checkButton.setVisibility(View.INVISIBLE);
-				holder.checkButton.setNavBackgroundDrawable(null);
-			}
-
-		} else */
         if (isDishCheckMode || isEditModle) {
             if (item.getType() == ITEM_TYPE_SINGLE || item.getType() == ITEM_TYPE_COMBO) {
                 holder.checkButton.setVisibility(View.VISIBLE);
@@ -837,13 +728,11 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
 
                 @Override
                 public void onClick(View v) {
-//						ShoppingCart.getInstance().removeMarketActivity(item.getTradePlanActivityUuid());
                     ShoppingCart.getInstance().removeSalesPromotion(item.getTradePlanActivityUuid());
                 }
             });
 
-        } else if (item.getType() == ITEM_TYPE_COMBO) { // 如果是套餐的外壳或者正常菜品则显示 份数和价钱
-            holder.topLine.setVisibility(View.VISIBLE);
+        } else if (item.getType() == ITEM_TYPE_COMBO) {             holder.topLine.setVisibility(View.VISIBLE);
             holder.dishView.setVisibility(View.VISIBLE);
             holder.dish_num.setVisibility(View.VISIBLE);
             holder.dishTasteView.setVisibility(View.GONE);
@@ -856,10 +745,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dish_name.setTextAppearance(context, R.style.dishOrderTextStyle);
             if (shopcartItemBase != null) {
                 holder.dish_name.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
-                holder.dish_name.setText(shopcartItemBase.getSkuName()); // 菜名
-                holder.dish_num.setText(MathDecimal.toTrimZeroString(shopcartItemBase.getSingleQty()).toString());// 数量
-                holder.dish_price.setText(formatPrice(shopcartItemBase.getAmount().doubleValue()));// 价格
-                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
+                holder.dish_name.setText(shopcartItemBase.getSkuName());                 holder.dish_num.setText(MathDecimal.toTrimZeroString(shopcartItemBase.getSingleQty()).toString());                holder.dish_price.setText(formatPrice(shopcartItemBase.getAmount().doubleValue()));                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
                 if (shopcartItemBase.getEnableWholePrivilege() == Bool.NO && this.isDiscountAll) {
                     holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(this.mEnableWholeIcon, null, null, null);
                     holder.dish_name.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
@@ -874,9 +760,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 holder.dish_name.setCompoundDrawablePadding(0);
             }
-            showPropertys(shopcartItemBase, holder, false);// 处理规格口味
-            showExtra(shopcartItemBase, holder, false);// 处理加料
-        } else if (item.getType() == ITEM_TYPE_SINGLE) {
+            showPropertys(shopcartItemBase, holder, false);            showExtra(shopcartItemBase, holder, false);        } else if (item.getType() == ITEM_TYPE_SINGLE) {
             holder.topLine.setVisibility(View.VISIBLE);
             holder.dishView.setVisibility(View.VISIBLE);
             holder.dish_num.setVisibility(View.VISIBLE);
@@ -890,16 +774,12 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dish_name.setTextAppearance(context, R.style.dishOrderTextStyle);
             if (shopcartItemBase != null) {
                 holder.dish_name.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
-                holder.dish_name.setText(shopcartItemBase.getSkuName()); // 菜名
-                if (shopcartItemBase.getDishShop() != null
+                holder.dish_name.setText(shopcartItemBase.getSkuName());                 if (shopcartItemBase.getDishShop() != null
                         && shopcartItemBase.getDishShop().getSaleType() != null
                         && shopcartItemBase.getDishShop().getSaleType() == SaleType.WEIGHING) {
-                    holder.dish_num.setText(MathDecimal.toTrimThreeZeroString(shopcartItemBase.getSingleQty()).toString());// 数量
-                } else {
-                    holder.dish_num.setText(MathDecimal.toTrimZeroString(shopcartItemBase.getSingleQty()).toString());// 数量
-                }
-                holder.dish_price.setText(formatPrice(shopcartItemBase.getAmount().doubleValue()));// 价格
-                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
+                    holder.dish_num.setText(MathDecimal.toTrimThreeZeroString(shopcartItemBase.getSingleQty()).toString());                } else {
+                    holder.dish_num.setText(MathDecimal.toTrimZeroString(shopcartItemBase.getSingleQty()).toString());                }
+                holder.dish_price.setText(formatPrice(shopcartItemBase.getAmount().doubleValue()));                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
 
                 if (shopcartItemBase.getEnableWholePrivilege() == Bool.NO && this.isDiscountAll) {
                     holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(this.mEnableWholeIcon, null, null, null);
@@ -914,10 +794,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
                 holder.dish_name.setCompoundDrawablePadding(0);
             }
-            showPropertys(shopcartItemBase, holder, false);// 处理规格口味
-            showExtra(shopcartItemBase, holder, false);// 处理加料
-            // 套餐子菜
-        } else if (item.getType() == ITEM_TYPE_CHILD) {
+            showPropertys(shopcartItemBase, holder, false);            showExtra(shopcartItemBase, holder, false);                    } else if (item.getType() == ITEM_TYPE_CHILD) {
             holder.topLine.setVisibility(View.GONE);
             holder.dishView.setVisibility(View.VISIBLE);
             holder.dish_num.setVisibility(View.VISIBLE);
@@ -933,16 +810,12 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dish_name.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
             if (shopcartItemBase != null) {
                 holder.dish_name.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
-                holder.dish_name.setText(shopcartItemBase.getSkuName()); // 显示数据
-                if (shopcartItemBase.getDishShop() != null
+                holder.dish_name.setText(shopcartItemBase.getSkuName());                 if (shopcartItemBase.getDishShop() != null
                         && shopcartItemBase.getDishShop().getSaleType() != null
                         && shopcartItemBase.getDishShop().getSaleType() == SaleType.WEIGHING) {
-                    holder.dish_num.setText(MathDecimal.toTrimThreeZeroString(shopcartItemBase.getSingleQty()).toString());// 数量
-                } else {
-                    holder.dish_num.setText(MathDecimal.toTrimZeroString(shopcartItemBase.getSingleQty()).toString());// 数量
-                }
-                //modify by zhubo 显示套餐子菜加价
-                if (shopcartItemBase.getPrice() == null || shopcartItemBase.getPrice().compareTo(new BigDecimal(0)) == 0) {
+                    holder.dish_num.setText(MathDecimal.toTrimThreeZeroString(shopcartItemBase.getSingleQty()).toString());                } else {
+                    holder.dish_num.setText(MathDecimal.toTrimZeroString(shopcartItemBase.getSingleQty()).toString());                }
+                                if (shopcartItemBase.getPrice() == null || shopcartItemBase.getPrice().compareTo(new BigDecimal(0)) == 0) {
                     holder.dish_price.setText("");
                 } else {
                     holder.dish_price.setText(formatPrice(shopcartItemBase.getAmount().doubleValue()));
@@ -950,10 +823,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 }
 
             }
-            showPropertys(shopcartItemBase, holder, true);// 处理规格口味
-            showExtra(shopcartItemBase, holder, true);// 处理加料
-            // 单品或套餐外壳备注
-        } else if (item.getType() == ITEM_TYPE_SINGLE_MEMO || item.getType() == ITEM_TYPE_COMBO_MEMO) {
+            showPropertys(shopcartItemBase, holder, true);            showExtra(shopcartItemBase, holder, true);                    } else if (item.getType() == ITEM_TYPE_SINGLE_MEMO || item.getType() == ITEM_TYPE_COMBO_MEMO) {
             holder.topLine.setVisibility(View.GONE);
             holder.dishView.setVisibility(View.GONE);
             holder.dishTasteView.setVisibility(View.GONE);
@@ -966,13 +836,11 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dish_memo.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             holder.dish_name.setCompoundDrawablePadding(0);
             if (!TextUtils.isEmpty(item.getName())) {
-                holder.dish_memo.setText(item.getName()); // 显示数据
-
+                holder.dish_memo.setText(item.getName());
             } else {
                 holder.dish_memo.setText("");
             }
-            // 套餐子菜备注
-        } else if (item.getType() == ITEM_TYPE_CHILD_MEMO) {
+                    } else if (item.getType() == ITEM_TYPE_CHILD_MEMO) {
             holder.topLine.setVisibility(View.GONE);
             holder.dishView.setVisibility(View.GONE);
             holder.dishTasteView.setVisibility(View.GONE);
@@ -985,13 +853,11 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dish_memo.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             holder.dish_name.setCompoundDrawablePadding(0);
             if (!TextUtils.isEmpty(item.getName())) {
-                holder.dish_memo.setText(item.getName()); // 显示数据
-
+                holder.dish_memo.setText(item.getName());
             } else {
                 holder.dish_memo.setText("");
             }
-            // 单品或套餐外壳折让
-        } else if (item.getType() == ITEM_TYPE_SINGLE_DISCOUNT || item.getType() == ITEM_TYPE_COMBO_DISCOUNT) {
+                    } else if (item.getType() == ITEM_TYPE_SINGLE_DISCOUNT || item.getType() == ITEM_TYPE_COMBO_DISCOUNT) {
             holder.topLine.setVisibility(View.GONE);
             holder.dishView.setVisibility(View.GONE);
             holder.dishTasteView.setVisibility(View.GONE);
@@ -1008,15 +874,13 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
 
                 if (shopcartItemBase.getPrivilege() != null) {
                     PrivilegeType privilegeType = shopcartItemBase.getPrivilege().getPrivilegeType();
-                    if (privilegeType == PrivilegeType.MEMBER_REBATE || privilegeType == PrivilegeType.MEMBER_PRICE || privilegeType == PrivilegeType.AUTO_DISCOUNT) {//会员优惠
-                        holder.customAllowanceIv.setVisibility(View.VISIBLE);
+                    if (privilegeType == PrivilegeType.MEMBER_REBATE || privilegeType == PrivilegeType.MEMBER_PRICE || privilegeType == PrivilegeType.AUTO_DISCOUNT) {                        holder.customAllowanceIv.setVisibility(View.VISIBLE);
                         holder.addtionPrice.setTextColor(context.getResources().getColor(R.color.customer_allowance));
                     } else {
                         holder.customAllowanceIv.setVisibility(View.GONE);
                         holder.addtionPrice.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
                     }
-                    holder.addtionPrice.setText(formatPrice(item.getValue()));// 价格
-                }
+                    holder.addtionPrice.setText(formatPrice(item.getValue()));                }
 
 
                 if (shopcartItemBase.getCouponPrivilegeVo() != null && shopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().getPrivilegeType() == PrivilegeType.COUPON) {
@@ -1027,11 +891,9 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                         holder.addtionName.setCompoundDrawablesWithIntrinsicBounds(mCouponEnabledIcon, null, null, null);
                         holder.addtionName.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
                         holder.addtionPrice.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
-                        holder.addtionPrice.setText(formatPrice(item.getValue()));// 价格
-
+                        holder.addtionPrice.setText(formatPrice(item.getValue()));
                     } else {
-                        holder.addtionPrice.setText("");// 价格
-                        holder.addtionName.setTextColor(context.getResources().getColor(R.color.shopcat_item_coupon_unenabled));
+                        holder.addtionPrice.setText("");                        holder.addtionName.setTextColor(context.getResources().getColor(R.color.shopcat_item_coupon_unenabled));
                         holder.addtionName.setCompoundDrawablesWithIntrinsicBounds(mUnEnableCouponIcon, null, null, null);
                         holder.addtionName.setCompoundDrawablePadding(5);
                     }
@@ -1045,8 +907,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 holder.addtionPrice.setText("");
                 holder.customAllowanceIv.setVisibility(View.GONE);
             }
-            // 整单备注
-        } else if (item.getType() == ITEM_TYPE_ALL_MEMO) {
+                    } else if (item.getType() == ITEM_TYPE_ALL_MEMO) {
             holder.topLine.setVisibility(View.VISIBLE);
             holder.dishView.setVisibility(View.GONE);
             holder.dishTasteView.setVisibility(View.GONE);
@@ -1064,13 +925,11 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                         0,
                         0,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                holder.dish_memo.setText(builder); // 显示数据
-
+                holder.dish_memo.setText(builder);
             } else {
                 holder.dish_memo.setText("");
             }
-            // 整单打折
-        } else if (item.getType() == ITEM_TYPE_ALL_DISCOUNT) {
+                    } else if (item.getType() == ITEM_TYPE_ALL_DISCOUNT) {
             holder.topLine.setVisibility(View.VISIBLE);
             holder.dishTasteView.setVisibility(View.GONE);
             holder.dishAddtionView.setVisibility(View.GONE);
@@ -1084,16 +943,11 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dish_name.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
             if (!TextUtils.isEmpty(item.getName())) {
                 holder.dishView.setVisibility(View.VISIBLE);
-                holder.dish_name.setText(item.getName()); // 菜名
-                // holder.dish_name.setTextColor(context.getResources().getColor(R.color.buton_text_bule));
-                holder.dish_num.setText("");// 数量
-                holder.dish_price.setText(formatPrice(item.getValue()));// 价格
-                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
+                holder.dish_name.setText(item.getName());                                 holder.dish_num.setText("");                holder.dish_price.setText(formatPrice(item.getValue()));                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
             } else {
                 holder.dishView.setVisibility(View.GONE);
             }
-            // 优惠劵
-        } else if (item.getType() == ITEM_TYPE_CUSTOMER_COUPONS
+                    } else if (item.getType() == ITEM_TYPE_CUSTOMER_COUPONS
                 || item.getType() == ITEM_TYPE_WEIXIN_COUPONS) {
             holder.topLine.setVisibility(View.VISIBLE);
             holder.dishTasteView.setVisibility(View.GONE);
@@ -1108,27 +962,21 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mCouponEnabledIcon, null, null, null);
                 holder.dish_name.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
                 if (item.getValue() != 0d) {
-                    holder.dish_price.setText(formatPrice(item.getValue()));// 价格
-                } else {
-                    holder.dish_price.setText("");// 价格
-                }
+                    holder.dish_price.setText(formatPrice(item.getValue()));                } else {
+                    holder.dish_price.setText("");                }
             } else {
-                holder.dish_price.setText("");// 价格
-                holder.dish_name.setTextColor(context.getResources().getColor(R.color.shopcat_item_coupon_unenabled));
+                holder.dish_price.setText("");                holder.dish_name.setTextColor(context.getResources().getColor(R.color.shopcat_item_coupon_unenabled));
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mUnEnableCouponIcon, null, null, null);
                 holder.dish_name.setCompoundDrawablePadding(5);
             }
 
             if (!TextUtils.isEmpty(item.getName())) {
                 holder.dishView.setVisibility(View.VISIBLE);
-                holder.dish_name.setText(item.getName()); // 名称
-                holder.dish_num.setText("");// 数量
-                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
+                holder.dish_name.setText(item.getName());                 holder.dish_num.setText("");                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
             } else {
                 holder.dishView.setVisibility(View.GONE);
             }
-            // 积分抵现
-        } else if (item.getType() == ITEM_TYPE_INTERGRAL) {
+                    } else if (item.getType() == ITEM_TYPE_INTERGRAL) {
             holder.topLine.setVisibility(View.VISIBLE);
             holder.dishTasteView.setVisibility(View.GONE);
             holder.dishAddtionView.setVisibility(View.GONE);
@@ -1142,22 +990,17 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mIntegralEnableIcon, null, null, null);
                 holder.dish_name.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
                 if (item.getValue() != 0d) {
-                    holder.dish_price.setText(formatPrice(item.getValue()));// 价格
-                } else {
-                    holder.dish_price.setText("");// 价格
-                }
+                    holder.dish_price.setText(formatPrice(item.getValue()));                } else {
+                    holder.dish_price.setText("");                }
             } else {
-                holder.dish_price.setText("");// 价格
-                holder.dish_name.setTextColor(context.getResources().getColor(R.color.shopcat_item_coupon_unenabled));
+                holder.dish_price.setText("");                holder.dish_name.setTextColor(context.getResources().getColor(R.color.shopcat_item_coupon_unenabled));
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mUnEnableIntegralIcon, null, null, null);
                 holder.dish_name.setCompoundDrawablePadding(5);
             }
 
             if (!TextUtils.isEmpty(item.getName())) {
                 holder.dishView.setVisibility(View.VISIBLE);
-                holder.dish_name.setText(item.getName()); // 名称
-                holder.dish_num.setText("");// 数量
-                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
+                holder.dish_name.setText(item.getName());                 holder.dish_num.setText("");                holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
             } else {
                 holder.dishView.setVisibility(View.GONE);
             }
@@ -1171,9 +1014,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.viewGraySeperator.setVisibility(View.GONE);
             holder.dish_memo.setVisibility(View.VISIBLE);
             holder.dish_memo.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-            holder.dish_memo.setText(item.getName()); // 显示数据
-        } else if (item.getType() == ITEM_TYPE_EXTRA_CHARGE) {//附加费
-            holder.topLine.setVisibility(View.VISIBLE);
+            holder.dish_memo.setText(item.getName());         } else if (item.getType() == ITEM_TYPE_EXTRA_CHARGE) {            holder.topLine.setVisibility(View.VISIBLE);
             holder.dishView.setVisibility(View.VISIBLE);
             holder.dishTasteView.setVisibility(View.GONE);
             holder.dishAddtionView.setVisibility(View.GONE);
@@ -1190,17 +1031,8 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dish_price.setTextColor(context.getResources().getColor(R.color.selectedDishPrice));
             holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mExtraChargeIcon, null, null, null);
             holder.dish_name.setCompoundDrawablePadding(5);
-/*
-			if (isEditModle) {
-				holder.checkButton.setVisibility(View.INVISIBLE);
-				holder.checkButton.setBackgroundResource(R.drawable.checkbox_nomal);
-			}else{
-				holder.checkButton.setVisibility(View.GONE);
-				holder.checkButton.setNavBackgroundDrawable(null);
-			}
-			*/
-            // 押金
-        } else if (item.getType() == ITEM_TYPE_DEPOSIT) {
+
+                    } else if (item.getType() == ITEM_TYPE_DEPOSIT) {
             holder.topLine.setVisibility(View.VISIBLE);
             holder.dishView.setVisibility(View.VISIBLE);
             holder.dishTasteView.setVisibility(View.GONE);
@@ -1215,8 +1047,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dish_name.setText(context.getString(R.string.order_deposit));
             holder.depositDemo.setText(context.getString(R.string.order_deposit_paymode_tip));
             holder.dish_num.setVisibility(View.INVISIBLE);
-            holder.dish_price.setText(formatPrice(item.getValue()));//设置押金总金额
-            if (mDepositEnable) {
+            holder.dish_price.setText(formatPrice(item.getValue()));            if (mDepositEnable) {
                 holder.dish_name.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
                 holder.depositDemo.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDepositIcon, null, null, null);
@@ -1274,8 +1105,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
         if (shopcartItem != null && shopcartItem.getExtraItems() != null && shopcartItem.getExtraItems().size() > 0) {
             StringBuilder sb = new StringBuilder(context.getResources().getString(R.string.addExtra));
             int i = 0;
-            //加料总金额
-            BigDecimal extraAmount = BigDecimal.ZERO;
+                        BigDecimal extraAmount = BigDecimal.ZERO;
             for (IExtraShopcartItem extra : shopcartItem.getExtraItems()) {
                 if (i > 0) {
                     sb.append(STR_COMMA);
@@ -1308,15 +1138,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
         }
     }
 
-    /**
-     * 规格口味做法展示
-     *
-     * @Title: showPropertys
-     * @Description: TODO
-     * @Param @param basedish
-     * @Param @param holder TODO
-     * @Return void 返回类型
-     */
+
     private void showPropertys(IShopcartItemBase shopcartItem, ViewHolder holder, boolean isChild) {
 
         if (shopcartItem != null && shopcartItem.getProperties() != null && shopcartItem.getProperties().size() > 0) {
@@ -1331,8 +1153,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             StringBuilder sbST = new StringBuilder("");
             StringBuilder propertySb = new StringBuilder(context.getString(R.string.addMethod));
             LayoutInflater inflater = LayoutInflater.from(context);
-            //做法总金额
-            BigDecimal propertyAmount = BigDecimal.ZERO;
+                        BigDecimal propertyAmount = BigDecimal.ZERO;
             for (IOrderProperty property : shopcartItem.getProperties()) {
 
                 if (property.getPropertyKind() == PropertyKind.PROPERTY) {
@@ -1341,8 +1162,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                         propertySb.append(STR_COMMA);
                     }
                     propertySb = propertySb.append(property.getPropertyName());
-                    //每一种口味做法的总金额
-                    propertyAmount = propertyAmount.add(property.getPropertyPrice().multiply(shopcartItem.getTotalQty()));
+                                        propertyAmount = propertyAmount.add(property.getPropertyPrice().multiply(shopcartItem.getTotalQty()));
 
                     iPR++;
                 }
@@ -1368,8 +1188,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
                 }
             }
 
-            // 有口味做法
-            if (iPR > 0) {
+                        if (iPR > 0) {
                 holder.dishTasteView.setVisibility(View.VISIBLE);
 
             } else {
@@ -1386,30 +1205,9 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
             holder.dishTasteView.setVisibility(View.GONE);
         }
 
-        // Set<DishProperty> dishPropertySet =
-        // shopcartItem.getOrderDish().getStandards();
-        // // 如果有规格
-        // if (dishPropertySet != null &&
-        // dishPropertySet.size() > 0) {
-        // StringBuilder sbST = new StringBuilder("");
-        // int iST = 0;
-        // for (DishProperty p : dishPropertySet) {
-        // if (iST > 0) {
-        // sbST.append(STR_COMMA);
-        // }
-        // sbST.append(p.getName());
-        // iST++;
-        // }
-        //
-        // if (iST > 0) {
-        // holder.dish_name.setText(shopcartItem.getOrderDish().getDishShop().getName()
-        // + "(" + sbST + ")");
-        // }
-        // }
-    }
+                                                                                                                                                                    }
 
     public LinearLayout.LayoutParams getIsComboDiyWh(Context context) {
-//		int left = DensityUtil2.dip2px(context, 18);
         int left = 0;
         int topOrBottom = DensityUtil.dip2px(context, 0);
         LinearLayout.LayoutParams diyWh =
@@ -1429,12 +1227,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
         return diyWh;
     }
 
-    /**
-     * 获取属性显示参数
-     *
-     * @Title: getPropertyDiyWh
-     * @Return LinearLayout.LayoutParams 返回类型
-     */
+
     private LinearLayout.LayoutParams getPropertyDiyWh(Context context, boolean isChild) {
         int left = 0, topOrBottom = 0;
         LinearLayout.LayoutParams diyWh =
@@ -1451,12 +1244,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
         return diyWh;
     }
 
-    /**
-     * 获取备注显示参数
-     *
-     * @Title: getMemoDiyWh
-     * @Return LinearLayout.LayoutParams 返回类型
-     */
+
     private LinearLayout.LayoutParams getMemoDiyWh(Context context) {
         int left = 0, topOrBottom = 0;
         LinearLayout.LayoutParams diyWh =
@@ -1468,9 +1256,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
         return diyWh;
     }
 
-    /**
-     * 设置打包、反结图标
-     */
+
     private void setPackAndRepayIcon(IShopcartItemBase shopcartItemBase, ViewHolder holder) {
         if (shopcartItemBase.getPack() && shopcartItemBase instanceof ReadonlyShopcartItemBase) {
             if (isDiscountAll) {
@@ -1500,27 +1286,18 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
     }
 
 
-    /***
-     *设置选中的菜品
-     */
+
     public void setCurSelectPos(String pos) {
         mCurSelectUuid = pos;
         this.pos = -2;
     }
 
-    /**
-     * 获取选中的Uuid
-     */
+
     public String getCurSelectUuid() {
         return mCurSelectUuid;
     }
 
-    /**
-     * 获取属性显示参数
-     *
-     * @Title: getPropertyDiyWh
-     * @Return LinearLayout.LayoutParams 返回类型
-     */
+
     public LinearLayout.LayoutParams getExtraDiyWh(Context context, boolean isChild) {
         int left = 0, top = 0, bottom = 0;
         LinearLayout.LayoutParams diyWh =
@@ -1552,38 +1329,28 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
 
         TextView dish_price;
 
-        LinearLayout dishTasteView;// 口味做法
-
-        LinearLayout dishAddtionView;// 加料
-
+        LinearLayout dishTasteView;
+        LinearLayout dishAddtionView;
         TextView addtionName;
 
         TextView addtionPrice;
 
         TextView dish_memo;
 
-        ImageView customAllowanceIv;//会员价图标
-
+        ImageView customAllowanceIv;
         TextView depositDemo;
 
         LinearLayout deposit;
 
-        RelativeLayout rlMarketActivity;// 营销活动
-
-        TextView tvMarketActivityName;// 营销活动名称
-
-        TextView tvMarketActivityValue;// 营销活动优惠金额
-
-        ImageView ivMarketActivityRemove;// 营销活动关闭按钮
-
-        View viewGraySeperator;// 灰色间隔线
-
+        RelativeLayout rlMarketActivity;
+        TextView tvMarketActivityName;
+        TextView tvMarketActivityValue;
+        ImageView ivMarketActivityRemove;
+        View viewGraySeperator;
     }
 
 
-    /**
-     * "￥######.00"格式 将金额格式化
-     */
+
     public static String formatPrice(double value) {
         try {
             DecimalFormat df = new DecimalFormat("0.00");
@@ -1603,9 +1370,7 @@ public class OrderDishSwipeMenuAdapter extends BaseAdapter {
         }
     }
 
-    /**
-     * 判断菜品中是否包含加料做法
-     */
+
     private boolean isContainProperty(List<? extends IOrderProperty> properties) {
         if (Utils.isEmpty(properties)) {
             return true;

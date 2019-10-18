@@ -27,9 +27,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_main_fragment)
 public class BeautyMainFragment extends BasicFragment implements IBeautyOperator {
 
@@ -70,10 +68,6 @@ public class BeautyMainFragment extends BasicFragment implements IBeautyOperator
 
     @Override
     public void toCreateCrad() {
-//        Intent intent = new Intent();
-//        intent.setClass(getActivity() , BeautyCustomerActivity_.class);
-//        intent.putExtra(BeautyCustomerActivity.BUNDER_FLAG , BeautyCustomerConstants.CustomerStartFlag.ENTITY_CARD);
-//        startActivity(intent);
 
         Intent intent = new Intent();
         intent.setClass(getActivity(), BeautyOrderActivity.class);
@@ -83,8 +77,7 @@ public class BeautyMainFragment extends BasicFragment implements IBeautyOperator
 
     @Override
     public void toCharge() {
-        // TODO 充值 ，先调用登录
-        BeautyCustomerLoginDialogFragment dialog = new BeautyCustomerLoginDialogFragment();
+                BeautyCustomerLoginDialogFragment dialog = new BeautyCustomerLoginDialogFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(BeautyCustomerConstants.KEY_CUSTOMER_LOGIN_FLAG, BeautyCustomerConstants.CustomerLoginLaunchMode.RECHARGE);
         dialog.setArguments(bundle);

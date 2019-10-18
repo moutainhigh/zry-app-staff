@@ -6,9 +6,7 @@ import com.zhongmei.bty.basemodule.notifycenter.enums.NotificationType;
 
 import static android.R.attr.data;
 
-/**
- * 通知类，用来包装主界面通知中心的新订单和打印失败等通知
- */
+
 public class ActionNotify {
 
     private EntranceType entranceType;
@@ -22,8 +20,7 @@ public class ActionNotify {
     private String ip;
 
     public ActionNotify(NotificationType notificationType) {
-        entranceType = EntranceType.DINNER;// 只有正餐有后厨打印失败，暂定为默认正餐入口
-        this.notificationType = notificationType;
+        entranceType = EntranceType.DINNER;        this.notificationType = notificationType;
     }
 
     public ActionNotify(EntranceType entranceType, NotificationType type) {

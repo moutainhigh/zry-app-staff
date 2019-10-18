@@ -13,9 +13,7 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.basemodule.R;
 
 
-/**
- * 自定义数字键盘
- */
+
 public class NumberKeyBoard extends LinearLayout {
     public static final String TAG = NumberKeyBoard.class.getSimpleName();
 
@@ -25,8 +23,7 @@ public class NumberKeyBoard extends LinearLayout {
 
     private EditText editText;
 
-    private boolean isDefaultValue = false;// 是否是自带值
-
+    private boolean isDefaultValue = false;
     private NumberClickListener listener;
 
     public void setListener(NumberClickListener listener) {
@@ -69,9 +66,7 @@ public class NumberKeyBoard extends LinearLayout {
         isDefaultValue = true;
     }
 
-    /**
-     * 清除默认值
-     */
+
     private void clearDefaultValue() {
         if (isDefaultValue) {
             editText.setText("");

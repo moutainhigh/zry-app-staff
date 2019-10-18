@@ -2,31 +2,23 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 优惠使用状态
- * Created by demo on 2018/12/15
- */
+
 
 public enum PrivilegeUseStatus implements ValueEnum<Integer> {
-    //未使用
-    UNUSE(0),
-    //    已使用
-    USED(1),
-    //    使用失败
-    USEFAIL(2),
+        UNUSE(0),
+        USED(1),
+        USEFAIL(2),
 
     @Deprecated __UNKNOWN__;
 
     private final Helper<Integer> helper;
 
     private PrivilegeUseStatus(Integer value) {
-        // TODO Auto-generated constructor stub
-        helper = Helper.valueHelper(value);
+                helper = Helper.valueHelper(value);
     }
 
     private PrivilegeUseStatus() {
-        // TODO Auto-generated constructor stub
-        helper = Helper.unknownHelper();
+                helper = Helper.unknownHelper();
     }
 
     @Override

@@ -35,8 +35,5 @@ public class SyncCheck extends Check {
 
     public void startPushService(Context context) {
         success(mContext.getString(R.string.init_success));
-        //PushServiceManager.startPushService(pushConfig);
-        //JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
-        //JPushInterface.init(context);            // 初始化 JPush
-    }
+                            }
 }

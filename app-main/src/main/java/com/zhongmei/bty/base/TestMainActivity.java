@@ -10,9 +10,7 @@ import com.zhongmei.bty.basemodule.slidemenu.listener.TradeSlideMenuListener;
 import com.zhongmei.yunfu.util.ToastUtil;
 import com.zhongmei.bty.basemodule.database.enums.EntranceType;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class TestMainActivity extends BusinessMainActivity {
 
     @Override

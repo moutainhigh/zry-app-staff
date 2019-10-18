@@ -86,19 +86,13 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
     private List<DishPropertyVo> mDishMemos;
 
-    /**
-     * 规格类属性分组列表
-     */
+
     private List<PropertyGroupVo<DishStandardVo>> standardGroupList;
 
-    /**
-     * 非规格类属性分组列表
-     */
+
     public List<PropertyGroupVo<DishPropertyVo>> propertyGroupList;
 
-    /**
-     * 加料列表，可能为null
-     */
+
     private List<OrderExtra> extraList;
 
     private SetmealShopcartItem mSetmealShopcartItem;
@@ -111,19 +105,15 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
     private String mMemo;
 
-    // 当前是否有菜品加入
-    private boolean added;
+        private boolean added;
 
-    // 判读是否是第一次进入 第一次进入就不去add到ShoppingCart
-    private boolean isFirst = true;
+        private boolean isFirst = true;
 
     private DinnerShoppingCart mShoppingCart;
 
     private ArrayList<PropertyGroupVo<DishPropertyVo>> tasteGroupVo;
 
-    // private DishPropertyVo taste;
-    // private DishPropertyVo taste;
-    private ChangePageListener mChangePageListener;
+            private ChangePageListener mChangePageListener;
 
     private DishSetmealManager mDishSetmealManager;
 
@@ -169,28 +159,22 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
     @ViewById
     StandardView taste_root_view;
 
-    // 限售余额LinearLayout
-    @ViewById(R.id.ll_residue)
+        @ViewById(R.id.ll_residue)
     LinearLayout llResidue;
 
-    // 商品总量
-    @ViewById(R.id.tv_residue_sum)
+        @ViewById(R.id.tv_residue_sum)
     TextView tvTotal;
 
-    // 限售余额
-    @ViewById(R.id.tv_residue)
+        @ViewById(R.id.tv_residue)
     TextView tvResidue;
 
-    // 商品总额的单位
-    @ViewById(R.id.tv_residue_sum_unit)
+        @ViewById(R.id.tv_residue_sum_unit)
     TextView tvTotalUnit;
 
-    // 限售额的单位
-    @ViewById(R.id.tv_residue_unit)
+        @ViewById(R.id.tv_residue_unit)
     TextView tvResiduceUnit;
 
-    // 赠送按钮
-    @ViewById(R.id.ll_dish_give)
+        @ViewById(R.id.ll_dish_give)
     LinearLayout giveLayout;
 
     @ViewById(R.id.tv_dish_give)
@@ -203,13 +187,11 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            // TODO Auto-generated method stub
 
         }
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            // TODO Auto-generated method stub
 
         }
 
@@ -225,8 +207,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
         }
     };
 
-    // 控制小数点前八位，小数点后两位
-    private InputFilter mInputFilter = new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
+        private InputFilter mInputFilter = new DigitsKeyListener(Boolean.FALSE, Boolean.TRUE) {
         int beforeDecimal = 8, afterDecimal = 2;
 
         @Override
@@ -236,8 +217,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
             if (temp.equals(".")) {
                 return "0.";
             } else if (temp.indexOf(".") == -1) {
-                // no decimal point placed yet
-                if (temp.length() > beforeDecimal) {
+                                if (temp.length() > beforeDecimal) {
                     return "";
                 }
             } else {
@@ -306,8 +286,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
         etEditableContent.setText("");
     }
 
-    // add 2016.06.13 begin
-    @Click(R.id.tv_dish_give)
+        @Click(R.id.tv_dish_give)
     protected void giveDish() {
         if (!ClickManager.getInstance().isClicked()) {
             VerifyHelper.verifyAlert(getActivity(), DinnerApplication.PERMISSION_DINNER_PRIVILEDGE_PRESENT,
@@ -323,11 +302,9 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
     private void addPrivilege() {
         if (item != null && added) {
-            if (btnGive.isSelected()) {// 取消赠送
-                btnGive.setSelected(false);
+            if (btnGive.isSelected()) {                btnGive.setSelected(false);
                 mShoppingCart.removeShopcarItemPrivilege(item);
-            } else {// 赠送
-                TradePrivilege p = getGivePrivilege();
+            } else {                TradePrivilege p = getGivePrivilege();
                 item.setPrivilege(p);
                 mShoppingCart.addDishToShoppingCart(item, false);
                 btnGive.setSelected(true);
@@ -342,16 +319,9 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
         return privilege;
     }
 
-    /*private void updateGiveLayout() {
-        if (item != null && item.getPrivilege() != null && item.getPrivilege().getPrivilegeType() == PrivilegeType.FREE) {
-            btnGive.setSelected(true);
-        } else {
-            btnGive.setSelected(false);
-        }
-    }*/
 
-    // add 2016.06.13 end
-    public static DinnerDishPropertyFragment getInstance(Bundle bundle) {
+
+        public static DinnerDishPropertyFragment getInstance(Bundle bundle) {
         DinnerDishPropertyFragment fragment = new DinnerDishPropertyFragment_();
         fragment.setArguments(bundle);
         return fragment;
@@ -403,19 +373,11 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
         mShoppingCart.setTempShopItem(item);
 
         etEditableContent.setFilters(new InputFilter[]{mInputFilter});
-        // 赠送标记,子菜不支持赠送
-        giveLayout.setVisibility(View.GONE);
-        /*if (mSetmealShopcartItem != null) {
-            giveLayout.setVisibility(View.GONE);
+                giveLayout.setVisibility(View.GONE);
 
-        } else {
-            giveLayout.setVisibility(View.VISIBLE);
-            updateGiveLayout();
-        }*/
     }
 
-    //
-    @Override
+        @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         isFirst = true;
@@ -444,8 +406,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
     public void onEventMainThread(EventDishPropertiesNotice eventDishPropertiesNotice) {
         if (eventDishPropertiesNotice.uuid.equals(mUuid)) {
-            // 规格
-            standardGroupList = eventDishPropertiesNotice.dishPropertiesVo.getStandardGroupList();
+                        standardGroupList = eventDishPropertiesNotice.dishPropertiesVo.getStandardGroupList();
             setStandard(standardGroupList, manager);
             setResidue(eventDishPropertiesNotice);
             etEditableContent.removeTextChangedListener(mSelfDishTextWatcher);
@@ -455,12 +416,10 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
             OrderDish orderDish = eventDishPropertiesNotice.dishPropertiesVo.getOrderDish();
             if (orderDish != null && orderDish.getDishShop().getClearStatus() == ClearStatus.SALE) {
 
-                // 加料
-                extraList = eventDishPropertiesNotice.dishPropertiesVo.getExtraList();
+                                extraList = eventDishPropertiesNotice.dishPropertiesVo.getExtraList();
                 setAddtion(extraList);
 
-                // 口味做法
-                tasteGroupVo.clear();
+                                tasteGroupVo.clear();
                 if (eventDishPropertiesNotice.dishPropertiesVo.getPropertyGroupList() != null) {
                     int size = eventDishPropertiesNotice.dishPropertiesVo.getPropertyGroupList().size();
                     for (int i = 0; i < size; i++) {
@@ -476,13 +435,11 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
                         }
                     }
                 }
-                // 获取标签
-                if (mDishMemos != null && mDishMemos.size() > 0) {
+                                if (mDishMemos != null && mDishMemos.size() > 0) {
                     int size = mDishMemos.size();
                     mLables.clear();
                     for (int i = 0; i < size; i++) {
-                        // 只要备注
-                        if (mDishMemos.get(i).getProperty().getPropertyKind() == PropertyKind.MEMO) {
+                                                if (mDishMemos.get(i).getProperty().getPropertyKind() == PropertyKind.MEMO) {
                             mLables.add(mDishMemos.get(i).getProperty().getName());
                         }
                     }
@@ -490,8 +447,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
                 }
                 setRecipe(tasteGroupVo);
 
-                // 清除老的规格属性,并添加新的规格属性
-                ArrayList<OrderProperty> newProperties = new ArrayList<OrderProperty>();
+                                ArrayList<OrderProperty> newProperties = new ArrayList<OrderProperty>();
                 for (OrderProperty orderProperty : properties) {
                     if (orderProperty.getPropertyKind() != PropertyKind.STANDARD) {
                         newProperties.add(orderProperty);
@@ -521,25 +477,15 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
                         mShoppingCart.addDishToShoppingCart(item, false);
                     }
                 } else {
-                    // 因为orderDish对象已经变了，所以要创建新的条目
-                    item = new ShopcartItem(item.getUuid(), orderDish);
+                                        item = new ShopcartItem(item.getUuid(), orderDish);
                     added = true;
-                    // item.changeQty(mSelectedQty);
-                    BigDecimal increaseUnit = MathDecimal.trimZero(orderDish.getDishShop().getDishIncreaseUnit());
+                                        BigDecimal increaseUnit = MathDecimal.trimZero(orderDish.getDishShop().getDishIncreaseUnit());
                     item.changeQty(increaseUnit);
                     item.setMemo(mMemo);
                     item.setProperties(properties);
                     mRealItemBase = item;
 
-                    // 称重商品
-//                    if (item.getDishShop().getSaleType() == SaleType.WEIGHING) {
-//                        QuantityEditPopupWindow popupWindow =
-//                                new QuantityEditPopupWindow(getActivity(), item, true, dataChangeListener);
-//                        popupWindow.showAtLocation(tvDishName, Gravity.NO_GRAVITY, 0, 0);
-//                    } else {
-//                        mShoppingCart.addDishToShoppingCart(item, false);
-//                    }
-                    mShoppingCart.addDishToShoppingCart(item, false);
+                                        mShoppingCart.addDishToShoppingCart(item, false);
                 }
 
                 if (mRealItemBase != null) {
@@ -562,14 +508,10 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
                 } else {
                     vChangePrice.setVisibility(View.GONE);
                 }
-                //add 2016 06 14 begin
-                // updateGiveLayout();
-                //add 2016 06 14 end
-            } else {
+                                                            } else {
                 added = false;
                 mShoppingCart.removeDinnerDish(item);
-                // btnGive.setSelected(false);//add 2016 06 14
-                isFirst = false;
+                                isFirst = false;
                 setAddtion(null);
                 setRecipe(null);
                 ll_count_and_memo.setList(null);
@@ -608,14 +550,12 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
     public void onEventMainThread(ActionDinnerModifyItemProperty action) {
         if (TextUtils.equals(action.getUuid(), mUuid)) {
-            // 刷新属性界面数量
-            ll_count_and_memo.setCount(action.getSelectedQty());
+                        ll_count_and_memo.setCount(action.getSelectedQty());
         }
     }
 
     public void setRecipe(ArrayList<PropertyGroupVo<DishPropertyVo>> recipeList) {
-        // 清除之前选中的口味做法
-        properties.clear();
+                properties.clear();
         if (recipeList == null || recipeList.size() == 0) {
             recipe_root_view.setVisibility(View.GONE);
             return;
@@ -631,8 +571,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
             return;
         }
         taste_root_view.setVisibility(View.VISIBLE);
-        // taste_root_view.setListener(this);
-        taste_root_view.setList(propertyGroupVo, manager, mShoppingCart);
+                taste_root_view.setList(propertyGroupVo, manager, mShoppingCart);
     }
 
     public void setAddtion(List<OrderExtra> extraList) {
@@ -659,12 +598,10 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
         }
 
         if (needAdd) {
-            // ToastUtil.showShortToast("属性加入");
-            mShoppingCart.addDishToShoppingCart(item, false);
+                        mShoppingCart.addDishToShoppingCart(item, false);
         }
 
-        //做法导致菜品金额为负，移除该做法
-        if (item.getActualAmount().compareTo(BigDecimal.ZERO) < 0) {
+                if (item.getActualAmount().compareTo(BigDecimal.ZERO) < 0) {
             properties.remove(property);
             DinnerShoppingCart.getInstance().refreshDish();
 
@@ -695,8 +632,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
             mShoppingCart.addDishToShoppingCart(item, false);
         }
 
-        //做法导致菜品金额为负，添加该做法
-        if (item.getActualAmount().compareTo(BigDecimal.ZERO) < 0) {
+                if (item.getActualAmount().compareTo(BigDecimal.ZERO) < 0) {
             properties.add(property);
             DinnerShoppingCart.getInstance().refreshDish();
 
@@ -718,8 +654,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
     @Override
     public boolean onAddtionClicked(ExtraInfo extraInfo, BigDecimal qty) {
-        //修改前的数量，方便修改后进行还原
-        BigDecimal oldQty = BigDecimal.ZERO;
+                BigDecimal oldQty = BigDecimal.ZERO;
         if (mSetmealShopcartItem != null) {
             oldQty = mSetmealShopcartItem.getExtraQty(extraInfo.orderExtra);
             mSetmealShopcartItem.setExtra(extraInfo.orderExtra, qty);
@@ -730,10 +665,8 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
         mShoppingCart.addDishToShoppingCart(item, false);
 
-        //做法导致菜品金额为负，移除该做法
-        if (item.getActualAmount().compareTo(BigDecimal.ZERO) < 0) {
-            //还原到修改前的金额
-            if (mSetmealShopcartItem != null) {
+                if (item.getActualAmount().compareTo(BigDecimal.ZERO) < 0) {
+                        if (mSetmealShopcartItem != null) {
                 mSetmealShopcartItem.setExtra(extraInfo.orderExtra, oldQty);
             } else {
                 item.setExtra(extraInfo.orderExtra, oldQty);
@@ -758,9 +691,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
                 switch (mDishSetmealManager.modifySetmeal(mSetmealShopcartItem, selectedQty)) {
                     case SUCCESSFUL:
                         mSetmealShopcartItem.changeQty(selectedQty);
-                        // mSetmealShopcartItem.setTotalQty(item.getTotalQty().multiply(selectedQty));
-                        // mSetmealShopcartItem.setSingleQty(selectedQty);
-                        break;
+                                                                        break;
                     case FAILED_MULTI:
                         ToastUtil.showLongToast(R.string.order_dish_setmeal_modify_failed_multi);
                         ll_count_and_memo.setCount(mSelectedQty);
@@ -776,32 +707,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
                 }
             } else {
                 item.changeQty(selectedQty);
-                // item.setTotalQty(selectedQty);
-                // item.setSingleQty(selectedQty);
-            }
-            // List<ExtraShopcartItem> list = null;
-            // if (mSetmealShopcartItem != null) {
-            // list = mSetmealShopcartItem.getExtraItems();
-            // } else {
-            // list = item.getExtraItems();
-            // }
-            // if (list != null) {
-            // int size = list.size();
-            // OrderExtra mExtra = null;
-            // for (int i = 0; i < size; i++) {
-            // mExtra = list.get(i).getOrderDish();
-            // if
-            // (mExtra.getSingleQty().compareTo(BigDecimal.ZERO)
-            // == 1) {
-            // if (mSetmealShopcartItem == null) {
-            // mExtra.setTotalQty(mExtra.getSingleQty().multiply(item.getTotalQty()));
-            // } else {
-            // mExtra.setTotalQty(mExtra.getSingleQty().multiply(mSetmealShopcartItem.getTotalQty()));
-            // }
-            //
-            // }
-            // }
-            // }
+                                            }
 
             mShoppingCart.addDishToShoppingCart(item, false);
         }
@@ -846,8 +752,7 @@ public class DinnerDishPropertyFragment extends MobclickAgentFragment implements
 
         @Override
         public void dataChange(ShopcartItem shopcartItem, boolean isContainProperties) {
-            // TODO Auto-generated method stub
-            mShoppingCart.addDishToShoppingCart(item, false);
+                        mShoppingCart.addDishToShoppingCart(item, false);
             ll_count_and_memo.setCount(item.getSingleQty());
         }
     };

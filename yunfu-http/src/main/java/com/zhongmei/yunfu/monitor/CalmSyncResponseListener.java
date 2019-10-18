@@ -2,11 +2,7 @@ package com.zhongmei.yunfu.monitor;
 
 import com.zhongmei.yunfu.net.builder.NetError;
 
-/**
- * Desc
- *
- * @created 2017/8/30
- */
+
 public class CalmSyncResponseListener extends CalmResponseListener {
 
     private CalmResponseListener calmResponseListener;

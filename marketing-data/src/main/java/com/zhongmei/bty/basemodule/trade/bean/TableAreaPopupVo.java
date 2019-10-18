@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.trade.bean;
 
 import com.zhongmei.yunfu.db.entity.CommercialArea;
 
-/**
- * 桌台区域
- */
+
 public class TableAreaPopupVo {
     private boolean isSelect;
 

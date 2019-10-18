@@ -37,9 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * 菜品备注页
- */
+
 @EViewGroup(R.layout.dinner_remark_layout)
 public class DinnerRemarkView extends LinearLayout {
 
@@ -55,26 +53,19 @@ public class DinnerRemarkView extends LinearLayout {
     @Bean
     ExtraOrderAdapter mExtraOrderAdapter;
 
-    private boolean isOrderRemark = false;//默认是整单备注
-
-    private boolean isBatchMode = false;//是否是批量操作模式
-
+    private boolean isOrderRemark = false;
+    private boolean isBatchMode = false;
     private OrderDishInterfaceListener listener;
 
     protected ShopcartItemBase shopcartItem;
 
-    protected List<ShopcartItem> shopcartItems;//批量操作模式下使用
+    protected List<ShopcartItem> shopcartItems;
 
-    /**
-     * 常用整单备注
-     */
     private List<String> mCommonTradeRemarks;
 
     private String orderRemark;
 
-    /**
-     * 常用单品备注
-     */
+
     private List<String> mCommonDishRemarks;
 
     private String dishRemark;
@@ -161,8 +152,7 @@ public class DinnerRemarkView extends LinearLayout {
             }
         });
 
-        //设置已有备注
-        etRemark.setText(dishRemark);
+                etRemark.setText(dishRemark);
         etRemark.addTextChangedListener(mTextWatcher);
         if (!isBatchMode) {
             etRemark.setSelection(etRemark.getText().length());
@@ -189,8 +179,7 @@ public class DinnerRemarkView extends LinearLayout {
 
                     if (listener != null) {
                         listener.onBatchMemoChange(memo);
-                        //回调后清空输入
-                        dishRemark = null;
+                                                dishRemark = null;
                         etRemark.setText("");
                     }
                     break;
@@ -198,9 +187,7 @@ public class DinnerRemarkView extends LinearLayout {
         }
     };
 
-    /**
-     * 加载单品常用备注
-     */
+
     private void loadDishRemark() {
         AsyncTask<Void, Void, List<String>> asyncTask = new AsyncTask<Void, Void, List<String>>() {
             @Override
@@ -217,8 +204,7 @@ public class DinnerRemarkView extends LinearLayout {
                     return null;
                 }
 
-                List<String> memoResultList = setPublicProperty();//备注公共库
-
+                List<String> memoResultList = setPublicProperty();
                 for (ShopcartItem shopcartItem : shopcartItems) {
                     OrderDish orderDish = shopcartItem.getOrderDish();
                     DishShop dishShop = DishCache.getDishHolder().get(orderDish.getBrandDishId());
@@ -253,19 +239,14 @@ public class DinnerRemarkView extends LinearLayout {
                     }
 
                     List<String> memoList = filterMemo(dishPropertyList);
-                    //如果未设置属性，拿公共库的
-                    if (memoList.isEmpty()) {
+                                        if (memoList.isEmpty()) {
                         memoList = setPublicProperty();
                     }
                     return memoList;
                 }
             }
 
-            /**
-             * 从属性中过滤备注
-             * @param dishPropertyList
-             * @return
-             */
+
             private List<String> filterMemo(List<DishBrandProperty> dishPropertyList) {
                 if (Utils.isEmpty(dishPropertyList)) {
                     return null;
@@ -282,11 +263,7 @@ public class DinnerRemarkView extends LinearLayout {
                 return memoList;
             }
 
-            /**
-             * 获取制定菜品的常用备注
-             * @param orderDish
-             * @param dishShop
-             */
+
             private List<DishBrandProperty> getDishMemoList(OrderDish orderDish, DishShop dishShop) {
                 if (orderDish instanceof OrderSetmeal) {
                     SetmealPropertyFilter filter = new SetmealPropertyFilter(dishShop);
@@ -297,9 +274,7 @@ public class DinnerRemarkView extends LinearLayout {
                 }
             }
 
-            /**
-             * 获取常用备注公共库
-             */
+
             private List<String> setPublicProperty() {
                 List<String> memoList = new ArrayList<>();
                 List<DishProperty> dishPropertieList = DishCache.getPropertyHolder().filter(null);
@@ -330,12 +305,7 @@ public class DinnerRemarkView extends LinearLayout {
         }
     }
 
-    /**
-     * 套餐明细的属性数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月20日
-     */
+
     private static class SetmealPropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;
@@ -352,12 +322,7 @@ public class DinnerRemarkView extends LinearLayout {
 
     }
 
-    /**
-     * 单品或套餐的属性数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月15日
-     */
+
     private static class DishPropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;

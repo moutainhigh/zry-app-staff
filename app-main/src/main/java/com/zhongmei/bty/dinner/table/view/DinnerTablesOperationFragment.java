@@ -43,9 +43,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.dinner_tables_operation_fragment)
 public class DinnerTablesOperationFragment extends BasicFragment implements View.OnClickListener {
 
@@ -67,8 +65,7 @@ public class DinnerTablesOperationFragment extends BasicFragment implements View
 
     SelectedTableListAdapter adapter;
 
-    List<DinnerConnectTablesVo> tablesVoList;//已经选择的桌台
-
+    List<DinnerConnectTablesVo> tablesVoList;
     DinnerCreateUnionManager manager;
     IUnionTrade unionTrade;
 
@@ -82,9 +79,7 @@ public class DinnerTablesOperationFragment extends BasicFragment implements View
     void init() {
         mBusinessType = ((BatchOperationTableDialogFragment) getParentFragment()).getmBusinessType();
         unionTrade = IUnionTrade.newUnion(this, mBusinessType);
-        /*if (mBusinessType == BusinessType.BUFFET) {
-            manager = new BuffetCreateUnionManager();
-        } else*/
+
         if (mBusinessType == BusinessType.DINNER) {
             manager = new DinnerCreateUnionManager();
         }
@@ -219,20 +214,14 @@ public class DinnerTablesOperationFragment extends BasicFragment implements View
                             }
 
                             TradeVo mainTradeVo = splitTool.getMainTradeVo();
-                            //判断押金是否支持
-                            if (mBusinessType == BusinessType.BUFFET && mainTradeVo.isNeedToPayDeposit() && mainTradeVo.isPaidTradeposit()) {
+                                                        if (mBusinessType == BusinessType.BUFFET && mainTradeVo.isNeedToPayDeposit() && mainTradeVo.isPaidTradeposit()) {
                                 ToastUtil.showShortToast(R.string.buffet_union_cancel_error_nocancel);
                                 return;
                             }
 
                             if (mainTradeVo.getMealShellVo() != null) {
                                 if (splitTool.getTradeMainSubRelationList().size() > 1) {
-                                    /*UnionCancelDialogFragment.show(getActivity(), mainTradeVo, new UnionCancelDialogFragment.OnDialogListener() {
-                                        @Override
-                                        public void onKnow(BuffetUnionCancelVo unionCancelVo) {
-                                            cancelUnionTrade(unionCancelVo);
-                                        }
-                                    });*/
+
                                 } else {
                                     BuffetUnionCancelVo unionCancelVo = BuffetUnionCancelVo.createBuffetUnionCancelVo(mainTradeVo);
                                     cancelUnionTrade(unionCancelVo);
@@ -283,8 +272,7 @@ public class DinnerTablesOperationFragment extends BasicFragment implements View
 
         @Override
         public void onResponse(ResponseObject<TradeResp> response) {
-            // 下单成功
-            try {
+                        try {
                 if (ResponseObject.isOk(response)) {
                     notifyUnion();
                     ToastUtil.showLongToast(response.getMessage());

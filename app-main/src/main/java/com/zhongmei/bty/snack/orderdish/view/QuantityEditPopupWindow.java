@@ -56,30 +56,21 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 扫码、称重PopupWindow
- */
+
 public class QuantityEditPopupWindow extends PopupWindow implements OnClickListener, PopupWindow.OnDismissListener {
     public static final String TAG = QuantityEditPopupWindow.class.getSimpleName();
 
     private static final int MAX_LENGTH_BEFORE_DOT = 5;
 
     private static final int MAX_LENGTH_AFTER_DOT = 3;
-    //	允许最大的数量
-    private static final int MAX_COUNT = 100000;
-    /**
-     * 扫码模式
-     */
+        private static final int MAX_COUNT = 100000;
+
     private static final int SCAN_MODE = 10001;
 
-    /**
-     * 数量编辑模式
-     */
+
     private static final int NUM_EDIT_MODE = 10002;
 
-    /**
-     * 称重模式
-     */
+
     private static final int WEIGHT_MODE = 10003;
 
     private static final String DOT = ".";
@@ -90,8 +81,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
 
     private TextView tvDishName;
 
-    //数量
-    private TextView tvQuantity;
+        private TextView tvQuantity;
 
     private EditText etBarcode;
 
@@ -101,22 +91,19 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
 
     private RelativeLayout mWeightLayout;
 
-    //重量TextView
-    private TextView mWeight;
+        private TextView mWeight;
 
     private ImageView mWeightLoading;
 
     private Button mOkBtn;
 
-    //电子连接状态TextView
-    private TextView mConnectionState;
+        private TextView mConnectionState;
 
     private ShopcartItemBase mShopcartItem;
 
     private Activity mActivity;
 
-    //标识是否带有属性，作用只是回传
-    private boolean mContainProperties = false;
+        private boolean mContainProperties = false;
 
     protected DishManager mDishManager;
 
@@ -126,29 +113,20 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
 
     private ElecScaleManagerWrapper mElecScaleManager;
 
-    // 当前的模式
-    private int mCurMode = SCAN_MODE;
+        private int mCurMode = SCAN_MODE;
 
-    //记录进入时的模式
-    private int mMode = SCAN_MODE;
+        private int mMode = SCAN_MODE;
 
-    //当前重量
-    private float mCurWeight;
+        private float mCurWeight;
 
     private boolean mIsDinner = false;
 
     private boolean mIsCustomInput = false;
-    //add v8.15 称重自动进位
-    private boolean mSelfInstructed = SpHelper.getDefault().getBoolean(Constant.SETTING_SUPPORT_WEIGH_SELF_INSTRUCTED, false);
+        private boolean mSelfInstructed = SpHelper.getDefault().getBoolean(Constant.SETTING_SUPPORT_WEIGH_SELF_INSTRUCTED, false);
 
     private View contentView;
 
-    /**
-     * 扫码模式构造方法
-     *
-     * @param activity  activity
-     * @param listenter listenter
-     */
+
     public QuantityEditPopupWindow(Activity activity, DataChangeListener listenter) {
         this.mCurMode = SCAN_MODE;
         this.mActivity = activity;
@@ -156,12 +134,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         init();
     }
 
-    /**
-     * 搜索模式构造方法
-     *
-     * @param activity activity
-     * @param item     ShopcartItem
-     */
+
     public QuantityEditPopupWindow(Activity activity, ShopcartItemBase item, DataChangeListener listenter) {
         this.mCurMode = NUM_EDIT_MODE;
         this.mActivity = activity;
@@ -170,15 +143,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         init();
     }
 
-    /**
-     * 称量模式构造方法
-     *
-     * @param activity          activity
-     * @param item              ShopcartItem
-     * @param setamalItem       SetmealShopcartItem
-     * @param containProperties 是否包含属性
-     * @param listenter         listenter
-     */
+
     public QuantityEditPopupWindow(Activity activity, ShopcartItemBase item, SetmealShopcartItem setamalItem,
                                    boolean containProperties, DataChangeListener listenter) {
         this.mCurMode = WEIGHT_MODE;
@@ -189,26 +154,12 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         init();
     }
 
-    /**
-     * 称量模式构造方法
-     *
-     * @param activity          activity
-     * @param item              ShopcartItem
-     * @param containProperties 是否包含属性
-     * @param listenter         listenter
-     */
+
     public QuantityEditPopupWindow(Activity activity, ShopcartItemBase item, boolean containProperties, DataChangeListener listenter) {
         this(activity, item, null, containProperties, listenter);
     }
 
-    /**
-     * 称量模式构造方法(修改)
-     *
-     * @param activity          activity
-     * @param item              ShopcartItem
-     * @param containProperties 是否包含属性
-     * @param listenter         listenter
-     */
+
     public QuantityEditPopupWindow(Activity activity, ShopcartItemBase item, boolean containProperties, boolean edit, DataChangeListener listenter) {
         this(activity, item, null, containProperties, listenter);
         mIsCustomInput = edit;
@@ -273,9 +224,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
     }
 
 
-    /**
-     * 根据不同模式显示页面
-     */
+
     private void initViewByMode() {
         if (mCurMode == SCAN_MODE) {
             mDishManager = new DishManager();
@@ -298,8 +247,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
                 etBarcode.setFocusable(false);
             }
         } else if (mCurMode == WEIGHT_MODE) {
-            if (mShopcartItem.getDishShop().getWeight() != null) {//如果设置有转换单位时才读取电子秤数据，没有时手动输入
-                if (mElecScaleManager == null) {
+            if (mShopcartItem.getDishShop().getWeight() != null) {                if (mElecScaleManager == null) {
                     mElecScaleManager = new ElecScaleManagerWrapper(this.mActivity);
                 }
                 mElecScaleManager.startGetElecScaleData(dataReceivedListener);
@@ -323,11 +271,9 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         });
     }
 
-    //添加进位规则计算 add v8.15
-    private BigDecimal doSelfInstructed(BigDecimal inputValue) {
+        private BigDecimal doSelfInstructed(BigDecimal inputValue) {
         BigDecimal result = inputValue;
-        //如果开启进位，且只有海南信投客户可以做称重进位
-        if (this.mSelfInstructed && ShopInfoCfg.getInstance().isMonitorCode(ShopInfoCfg.ShopMonitorCode.MONITOR_CODE_HNXT)) {
+                if (this.mSelfInstructed && ShopInfoCfg.getInstance().isMonitorCode(ShopInfoCfg.ShopMonitorCode.MONITOR_CODE_HNXT)) {
             result = MathDecimal.roundUp(inputValue, 0);
         }
         return result;
@@ -366,9 +312,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
                     }
                 }
             };
-    /**
-     * 电子秤Message CallBack
-     */
+
     private DataReceivedListener
             mWeightListener = new DataReceivedListener() {
 
@@ -384,8 +328,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         @Override
         public void onDataReceivedOver(String data) {
             try {
-                //mIsCustomInput = false;
-                if (mShopcartItem.getDishShop().getWeight() != null
+                                if (mShopcartItem.getDishShop().getWeight() != null
                         && mShopcartItem.getDishShop().getWeight().floatValue() != 0) {
                     mCurWeight = MathDecimal.div(Float.parseFloat(data), mShopcartItem.getDishShop().getWeight().floatValue(), 3);
                     mathWeightDishPrice();
@@ -422,27 +365,20 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
             DishInfo dishInfo = mDishManager.scan(barcode);
             if (dishInfo != null && Utils.isNotEmpty(dishInfo.dishList) && dishInfo.scanResult) {
                 updateScanModeView(dishInfo);
-            } /*else if (BarCodeUtil.isRightBarCode(barcode)) {
-                ShopcartItem shopcartItem = BarCodeUtil.getShopcartItem(barcode);
-                if (shopcartItem != null) mShopcartItemListenter.dataChange(shopcartItem, false);
-            }*/ else {
+            }  else {
                 ToastUtil.showShortToast(R.string.order_dish_not_exist);
             }
 
         }
     }
 
-    /**
-     * 扫描返回结果刷新View
-     */
+
     private void updateScanModeView(DishInfo dishInfo) {
         DishVo dishVo = dishInfo.dishList.get(0);
         ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
-        if (shopcartItem.getDishShop().getSaleType() == SaleType.WEIGHING) {//称重商品
-            mCurMode = WEIGHT_MODE;
+        if (shopcartItem.getDishShop().getSaleType() == SaleType.WEIGHING) {            mCurMode = WEIGHT_MODE;
             mContainProperties = dishVo.isContainProperties();
-            if (shopcartItem.getDishShop().getWeight() != null) {//如果设置有转换单位时才读取电子秤数据，没有时手动输入
-                if (mElecScaleManager == null) {
+            if (shopcartItem.getDishShop().getWeight() != null) {                if (mElecScaleManager == null) {
                     mElecScaleManager = new ElecScaleManagerWrapper(this.mActivity);
                 }
                 mElecScaleManager.startGetElecScaleData(dataReceivedListener);
@@ -464,9 +400,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         }
     }
 
-    /**
-     * 执行加操作
-     */
+
     private void executeAdd() {
         String val = tvQuantity.getText().toString();
         if (!TextUtils.isEmpty(val) && Utils.isNum(val)) {
@@ -479,9 +413,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         }
     }
 
-    /**
-     * 判断输入是否有效
-     */
+
     private boolean isValid(String quantity) {
         String[] s = quantity.split("\\" + DOT);
 
@@ -502,9 +434,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         return true;
     }
 
-    /**
-     * 执行减操作
-     */
+
     private void executeSubtract() {
         String val = tvQuantity.getText().toString();
         if (!TextUtils.isEmpty(val) && Utils.isNum(val)) {
@@ -520,17 +450,14 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         }
     }
 
-    /**
-     * 执行数量输入操作
-     */
+
     private void executeAppend(String value) {
         String text = "";
         mIsCustomInput = true;
         if (mCurMode == WEIGHT_MODE) {
             text = mWeight.getText().toString();
             if (!TextUtils.isEmpty(text)
-                    && ((mShopcartItem.getOrderDish().getUnitName() != null && text.contains(mShopcartItem.getOrderDish().getUnitName())))) {//如果包含单位把单位去掉
-                if (mShopcartItem != null) {
+                    && ((mShopcartItem.getOrderDish().getUnitName() != null && text.contains(mShopcartItem.getOrderDish().getUnitName())))) {                if (mShopcartItem != null) {
                     text = text.substring(0, text.length() - mShopcartItem.getOrderDish().getUnitName().length()) + "";
                 }
             }
@@ -576,9 +503,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
     }
 
 
-    /**
-     * 改变ShoppingCart
-     */
+
     private void notifyShoppingCart(BigDecimal quantity) {
         if (mShopcartItem != null && quantity != null) {
             mShopcartItem.changeQty(quantity);
@@ -586,30 +511,23 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         }
     }
 
-    /**
-     * 根据shopcartItem设置Title内容
-     */
+
     public void setShopcartItem(ShopcartItemBase shopcartItem) {
         this.mShopcartItem = shopcartItem;
         updateView();
         mIsQuantityChanged = false;
     }
 
-    /**
-     * 刷新内容显示界面
-     */
+
     private void refreshMainContent() {
-        if (mCurMode == SCAN_MODE) {//扫码模式
-            llLoadingMode.setVisibility(View.VISIBLE);
+        if (mCurMode == SCAN_MODE) {            llLoadingMode.setVisibility(View.VISIBLE);
             rlQuantityMode.setVisibility(View.GONE);
-        } else if (mCurMode == NUM_EDIT_MODE) {//数量编辑模式
-            llLoadingMode.setVisibility(View.GONE);
+        } else if (mCurMode == NUM_EDIT_MODE) {            llLoadingMode.setVisibility(View.GONE);
             rlQuantityMode.setVisibility(View.VISIBLE);
             mNumLayout.setVisibility(View.VISIBLE);
             mWeightLayout.setVisibility(View.GONE);
             mOkBtn.setVisibility(View.GONE);
-        } else {//称量模式
-            llLoadingMode.setVisibility(View.GONE);
+        } else {            llLoadingMode.setVisibility(View.GONE);
             rlQuantityMode.setVisibility(View.VISIBLE);
             mNumLayout.setVisibility(View.GONE);
             mWeightLayout.setVisibility(View.VISIBLE);
@@ -627,9 +545,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
 
     }
 
-    /**
-     * 设置名字与规格的值
-     */
+
     private void updateTitleView() {
         String name = mShopcartItem.getSkuName();
         String standardStr = getStandardStr(mShopcartItem.getProperties());
@@ -652,17 +568,13 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         return sb.toString();
     }
 
-    /**
-     * 设置数量
-     */
+
     private void updateCountView(String text) {
         tvQuantity.setText(text);
         mIsQuantityChanged = true;
     }
 
-    /**
-     * 设置重量
-     */
+
     private void updateWeightView(String text) {
         if (TextUtils.isEmpty(text)) {
             mCurWeight = 0;
@@ -686,9 +598,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
 
     }
 
-    /**
-     * 计算称重商品金额
-     */
+
     private void mathWeightDishPrice() {
         BigDecimal price = BigDecimal.ONE;
         BigDecimal weight = new BigDecimal(mCurWeight);
@@ -718,9 +628,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
 
     }
 
-    /**
-     * 扫码加载动画
-     */
+
     public void startLoadingAnimation(ImageView imageView) {
         if (imageView.getAnimation() != null) {
             imageView.clearAnimation();
@@ -752,9 +660,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         ivLoading.setVisibility(View.VISIBLE);
     }
 
-    /**
-     * 称重加载动画
-     */
+
     public void weightLoadingAnimation(ImageView imageView) {
         if (imageView.getAnimation() != null) {
             imageView.clearAnimation();
@@ -778,14 +684,12 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
                 String temp = mWeight.getText().toString();
                 if (mCurMode == WEIGHT_MODE && !TextUtils.isEmpty(mWeight.getText())) {
                     if (((mShopcartItem.getOrderDish().getUnitName() != null && temp.contains(mShopcartItem.getOrderDish().getUnitName())))
-                            && temp.length() >= mShopcartItem.getOrderDish().getUnitName().length() + 2) {//如果包含单位把单位去掉
-
+                            && temp.length() >= mShopcartItem.getOrderDish().getUnitName().length() + 2) {
                         if (mShopcartItem != null && mShopcartItem.getOrderDish().getUnitName() != null) {
                             temp = temp.substring(0, temp.length() - mShopcartItem.getOrderDish().getUnitName().length() - 1) + "";
                         }
 
-                    } else if ((mShopcartItem.getOrderDish().getUnitName() == null) && temp.length() > 2) {//没有单位
-                        temp = temp.substring(0, temp.length() - 1);
+                    } else if ((mShopcartItem.getOrderDish().getUnitName() == null) && temp.length() > 2) {                        temp = temp.substring(0, temp.length() - 1);
                     } else {
                         temp = "";
                     }
@@ -851,17 +755,13 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
                                     public void onPositive(User user, String code, Auth.Filter filter) {
                                         if (mCurWeight != 0 && mCurWeight < MAX_COUNT) {
                                             BigDecimal increaseUnit = mShopcartItem.getOrderDish().getDishShop().getDishIncreaseUnit();
-                                            //.setScale(3, BigDecimal.ROUND_HALF_UP)
-                                            BigDecimal singleQty = new BigDecimal(("" + mCurWeight));
-                                            if (singleQty.compareTo(increaseUnit) < 0) {//当前数量不满足起卖直接设置为起卖
-                                                singleQty = increaseUnit;
+                                                                                        BigDecimal singleQty = new BigDecimal(("" + mCurWeight));
+                                            if (singleQty.compareTo(increaseUnit) < 0) {                                                singleQty = increaseUnit;
                                                 ToastUtil.showShortToast(R.string.weight_less_than_min);
                                             }
-                                            singleQty = doSelfInstructed(singleQty);//add v8.15 无条件进位
-                                            mShopcartItem.changeQty(singleQty);
+                                            singleQty = doSelfInstructed(singleQty);                                            mShopcartItem.changeQty(singleQty);
                                             mShopcartItemListenter.dataChange(mShopcartItem, mContainProperties);
-                                            if (mMode == SCAN_MODE) {//进入时扫码模式，称重后返回扫码页面
-                                                mCurMode = SCAN_MODE;
+                                            if (mMode == SCAN_MODE) {                                                mCurMode = SCAN_MODE;
                                                 mCurWeight = 0;
                                                 mWeight.setText("");
                                                 refreshMainContent();
@@ -879,17 +779,13 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
 
                         if (mCurWeight != 0 && mCurWeight < MAX_COUNT) {
                             BigDecimal increaseUnit = mShopcartItem.getOrderDish().getDishShop().getDishIncreaseUnit();
-                            //.setScale(3, BigDecimal.ROUND_HALF_UP)
-                            BigDecimal singleQty = new BigDecimal(("" + mCurWeight));
-                            if (singleQty.compareTo(increaseUnit) < 0) {//当前数量不满足起卖直接设置为起卖
-                                singleQty = increaseUnit;
+                                                        BigDecimal singleQty = new BigDecimal(("" + mCurWeight));
+                            if (singleQty.compareTo(increaseUnit) < 0) {                                singleQty = increaseUnit;
                                 ToastUtil.showShortToast(R.string.weight_less_than_min);
                             }
-                            singleQty = doSelfInstructed(singleQty);//add v8.15 无条件进位
-                            this.mShopcartItem.changeQty(singleQty);
+                            singleQty = doSelfInstructed(singleQty);                            this.mShopcartItem.changeQty(singleQty);
                             this.mShopcartItemListenter.dataChange(mShopcartItem, mContainProperties);
-                            if (this.mMode == SCAN_MODE) {//进入时扫码模式，称重后返回扫码页面
-                                mCurMode = SCAN_MODE;
+                            if (this.mMode == SCAN_MODE) {                                mCurMode = SCAN_MODE;
                                 mCurWeight = 0;
                                 mWeight.setText("");
                                 refreshMainContent();
@@ -943,30 +839,24 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
         }
     }
 
-    /**
-     * 事件处理
-     */
+
     private void registerKeyboardListener() {
         tvDishName.setOnKeyListener(new OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_UP) {
                     switch (keyCode) {
-                        // -
-                        case 156:
+                                                case 156:
                             executeSubtract();
                             return true;
-                        // +
-                        case 157:
+                                                case 157:
                             executeAdd();
                             return true;
-                        // enter
-                        case 160:
+                                                case 160:
                         case 66:
                             dismiss();
                             return true;
-                        // 1-9的事件 144为0的keyCode
-                        case 144:
+                                                case 144:
                         case 145:
                         case 146:
                         case 147:
@@ -978,12 +868,10 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
                         case 153:
                             executeAppend((char) (keyCode - 144 + '0') + "");
                             return true;
-                        // .
-                        case 158:
+                                                case 158:
                             executeAppend(DOT);
                             return true;
-                        // 退格键
-                        case 67:
+                                                case 67:
                             if (mCurMode == WEIGHT_MODE && !TextUtils.isEmpty(mWeight.getText())) {
                                 mWeight.setText(mWeight.getText().toString().subSequence(0, mWeight.length() - 1));
                             } else if (!TextUtils.isEmpty(tvQuantity.getText())) {
@@ -1020,8 +908,7 @@ public class QuantityEditPopupWindow extends PopupWindow implements OnClickListe
     };
 
     static public abstract class DataChangeListener {
-        //isContainProperties称重模式时，对是否有属性的判断
-        public void dataChange(ShopcartItemBase shopcartItem, boolean isContainProperties) {
+                public void dataChange(ShopcartItemBase shopcartItem, boolean isContainProperties) {
             if (shopcartItem instanceof ShopcartItem) {
                 dataChange((ShopcartItem) shopcartItem, isContainProperties);
             }

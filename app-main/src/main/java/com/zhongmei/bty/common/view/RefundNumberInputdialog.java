@@ -18,23 +18,17 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.mobilepay.manager.CashInfoManager;
 
-/**
- * 退款弹窗
- */
+
 public class RefundNumberInputdialog extends Dialog implements OnClickListener {
     public static int NUMBER_TYPE_INT = 1;
     public static int NUMBER_TYPE_FLOAT = 2;
-    private boolean isDefaultValue = false;// 是否是自带值
-    private InputOverListener mListener;
-    private double mMaxValue;//最大值
-    // 数量
-    private EditText mShowValue;
+    private boolean isDefaultValue = false;    private InputOverListener mListener;
+    private double mMaxValue;        private EditText mShowValue;
     private ImageView mDotIV;
     private Button btnOK;
     private String mContent;
     private int mNumberType = NUMBER_TYPE_FLOAT;
-    private String mDefaultValue;//默认输入值
-
+    private String mDefaultValue;
     public RefundNumberInputdialog(Context context, int theme) {
         super(context, theme);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -44,8 +38,7 @@ public class RefundNumberInputdialog extends Dialog implements OnClickListener {
     public RefundNumberInputdialog(Context context, String title, String hint, String lastInput, double maxValue,
                                    InputOverListener linster) {
         this(context, R.style.custom_alert_dialog);
-        // 隐藏软键盘
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+                getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         this.mListener = linster;
         this.mMaxValue = maxValue;
         this.mDefaultValue = lastInput;
@@ -92,8 +85,7 @@ public class RefundNumberInputdialog extends Dialog implements OnClickListener {
         btnOK = (Button) findViewById(R.id.btn_ok);
         btnOK.setOnClickListener(this);
         mShowValue = (EditText) findViewById(R.id.et_input);
-        //如果输入整数，屏蔽小数点
-        if (mNumberType == NUMBER_TYPE_INT) {
+                if (mNumberType == NUMBER_TYPE_INT) {
             mDotIV.setEnabled(false);
         }
         mShowValue.setHint(hint);
@@ -132,14 +124,12 @@ public class RefundNumberInputdialog extends Dialog implements OnClickListener {
                         ismodify = true;
                     }
                     if (!CashInfoManager.isMatchCashFormat(mContent)) {
-                        //ToastUtil.showShortToast(R.string.input_format_wrong);
-                        btnOK.setEnabled(false);
+                                                btnOK.setEnabled(false);
                         mContent = mContent.substring(0, mContent.length() - 1);
                         ismodify = true;
                     } else {
                         if (Double.valueOf(mContent) > mMaxValue) {
-                            //ToastUtil.showShortToast(R.string.input_amount_too_much);
-                            btnOK.setEnabled(false);
+                                                        btnOK.setEnabled(false);
                             mContent = mContent.substring(0, mContent.length() - 1);
                             ismodify = true;
                         } else {
@@ -158,9 +148,7 @@ public class RefundNumberInputdialog extends Dialog implements OnClickListener {
         });
     }
 
-    /**
-     * 清除默认值
-     */
+
     private void clearDefaultValue() {
         if (isDefaultValue) {
             mShowValue.setText("");
@@ -185,13 +173,10 @@ public class RefundNumberInputdialog extends Dialog implements OnClickListener {
     public void onClick(View v) {
         int vId = v.getId();
         switch (vId) {
-            case R.id.btn_close:// 退出
-                this.dismiss();
+            case R.id.btn_close:                this.dismiss();
                 break;
-            case R.id.btn_ok:// 确定
-                if (!TextUtils.isEmpty(mContent)) {
-                    if (mListener != null /*&& !isEqualsDefault(mContent)*/) {
-//                    if (mListener != null) {
+            case R.id.btn_ok:                if (!TextUtils.isEmpty(mContent)) {
+                    if (mListener != null ) {
                         if (mNumberType == NUMBER_TYPE_INT && mContent.startsWith("0")) {
                             mContent = Long.valueOf(mContent).toString();
                         }

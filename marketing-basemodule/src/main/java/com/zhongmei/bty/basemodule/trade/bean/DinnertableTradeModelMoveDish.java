@@ -14,16 +14,11 @@ import com.zhongmei.bty.commonmodule.database.enums.YesOrNo;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @Date 2016/6/13
- * @Description:移菜拖动View绑定数据
- */
+
 public class DinnertableTradeModelMoveDish implements IDinnertableTradeMoveDish {
     private DinnertableTradeVo sourceTradeVo;
     private List<IShopcartItem> items;
-    private byte modeType = 0;//0：移菜  1：复制
-    private int copyCount;//复制次数
-    private int copyDishItemSize;
+    private byte modeType = 0;    private int copyCount;    private int copyDishItemSize;
 
 
     public DinnertableTradeModelMoveDish(int dishSize) {

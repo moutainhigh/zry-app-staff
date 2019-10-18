@@ -26,13 +26,10 @@ import com.zhongmei.bty.basemodule.shoppingcart.BaseShoppingCart;
 import com.zhongmei.bty.cashier.shoppingcart.vo.DishStandardVo;
 import com.zhongmei.bty.cashier.shoppingcart.vo.PropertyGroupVo;
 
-/**
- * 规格
- */
+
 public class StandardView extends LinearLayout implements OnClickListener {
     private static final String TAG = StandardView.class.getSimpleName();
-    // 选择的规格
-    private Set<DishProperty> mStandards;
+        private Set<DishProperty> mStandards;
 
     DishPropertyManager manager;
 
@@ -64,13 +61,7 @@ public class StandardView extends LinearLayout implements OnClickListener {
         setLayoutParams(lp);
     }
 
-    /**
-     * @Title: setList
-     * @Description: 设置规格
-     * @Param @param propertyGroupVo
-     * @Param @param manager 用于重新加载菜品
-     * @Return void 返回类型
-     */
+
     public void setList(List<PropertyGroupVo<DishStandardVo>> propertyGroupVos, DishPropertyManager manager,
                         BaseShoppingCart baseShoppingCart) {
         this.mPropertyGroupVos = propertyGroupVos;
@@ -81,11 +72,7 @@ public class StandardView extends LinearLayout implements OnClickListener {
         }
     }
 
-    /**
-     * @Title: inflateRecipe
-     * @Description: 动态加载view
-     * @Return void 返回类型
-     */
+
     private void inflateRecipe() {
         if (mStandards == null) {
             mStandards = new HashSet<DishProperty>();
@@ -124,14 +111,7 @@ public class StandardView extends LinearLayout implements OnClickListener {
 
     }
 
-    /**
-     * 设置规格的名称
-     *
-     * @param rootView
-     * @param typeIndex       类别的索引
-     * @param propertyIndex   属性在其类别下的索引
-     * @param propertyGroupVo
-     */
+
     private void setNameAndPrice(View rootView, int typeIndex, int propertyIndex,
                                  PropertyGroupVo<DishStandardVo> propertyGroupVo) {
 
@@ -160,19 +140,16 @@ public class StandardView extends LinearLayout implements OnClickListener {
             parentView.setOnClickListener(this);
         }
         DishStandardVo standardVo = propertyGroupVo.getPropertyList().get(propertyIndex);
-        //设置背景
-        if (standardVo.getClearStatus() == ClearStatus.CLEAR) {
+                if (standardVo.getClearStatus() == ClearStatus.CLEAR) {
             parentView.setBackgroundResource(R.drawable.dish_standard_clear_bg);
             if (mBaseShoppingCart.getIsSalesReturn()) {
-                //设置是否选中
-                if (propertyGroupVo.getPropertyList().get(propertyIndex).isSelected()) {
+                                if (propertyGroupVo.getPropertyList().get(propertyIndex).isSelected()) {
                     parentView.setSelected(true);
                     mStandards.add(propertyGroupVo.getProperty(propertyIndex));
                 } else {
                     parentView.setSelected(false);
                 }
-                //设置点击事件
-                switch (standardVo.getState()) {
+                                switch (standardVo.getState()) {
                     case DishStandardVo.ENABLE:
                         parentView.setActivated(false);
                         tvName.setEnabled(true);
@@ -191,15 +168,13 @@ public class StandardView extends LinearLayout implements OnClickListener {
             }
         } else {
             parentView.setBackgroundResource(R.drawable.dish_type_item_bg);
-            //设置是否选中
-            if (propertyGroupVo.getPropertyList().get(propertyIndex).isSelected()) {
+                        if (propertyGroupVo.getPropertyList().get(propertyIndex).isSelected()) {
                 parentView.setSelected(true);
                 mStandards.add(propertyGroupVo.getProperty(propertyIndex));
             } else {
                 parentView.setSelected(false);
             }
-            //设置点击事件
-            switch (standardVo.getState()) {
+                        switch (standardVo.getState()) {
                 case DishStandardVo.ENABLE:
                     parentView.setActivated(false);
                     tvName.setEnabled(true);
@@ -212,11 +187,7 @@ public class StandardView extends LinearLayout implements OnClickListener {
         }
     }
 
-    /**
-     * 添加规格的类别标题
-     *
-     * @param propertyGroup
-     */
+
     private void addStandardTypeTitle(PropertyGroupVo<DishStandardVo> propertyGroup) {
         if (propertyGroup != null && propertyGroup.getPropertyList().size() > 0) {
             TextView tv = new TextView(getContext());
@@ -230,9 +201,7 @@ public class StandardView extends LinearLayout implements OnClickListener {
         }
     }
 
-    /**
-     * 添加类别间的灰色线
-     */
+
     private void addLine() {
         View line = new View(getContext());
         line.setBackgroundColor(MainApplication.getInstance().getResources().getColor(R.color.gray));

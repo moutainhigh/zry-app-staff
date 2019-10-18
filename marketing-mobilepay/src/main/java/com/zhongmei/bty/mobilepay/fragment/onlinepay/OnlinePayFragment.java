@@ -43,10 +43,7 @@ import java.math.BigDecimal;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- * 在线支付输入界面
- */
+
 
 
 public class OnlinePayFragment extends BasePayFragment implements View.OnClickListener, IPaymentMenuType, IOnlinePayBreakCallback, PayView {
@@ -56,13 +53,11 @@ public class OnlinePayFragment extends BasePayFragment implements View.OnClickLi
     private PayKeyPanel mNumberKeyBorad;
     private AmountEditedEvent mAmountEditedEvent = new AmountEditedEvent(PayModelGroup.CASH, "");
     private int mPayType = PAY_MENU_TYPE_ALIPAY;
-    private PayModeId mCurrentPayModeId = PayModeId.WEIXIN_PAY;// 当前支付方式Id
-    private TextView mCashPayAlerttext;
+    private PayModeId mCurrentPayModeId = PayModeId.WEIXIN_PAY;    private TextView mCashPayAlerttext;
 
     private EditText mCashPayEditValue;
     private ImageView mCashPayDeleteCash;
-    private boolean isDefaultShowDialog = true;//true默认初始化就显示扫描框
-    private Button mPay;
+    private boolean isDefaultShowDialog = true;    private Button mPay;
     private boolean mInit = false;
 
     public static OnlinePayFragment newInstance(int payType, IPaymentInfo paymentInfo, DoPayApi doPayApi) {
@@ -108,8 +103,7 @@ public class OnlinePayFragment extends BasePayFragment implements View.OnClickLi
             case PAY_MENU_TYPE_MEITUANCASHPAY:
                 mCurrentPayModeId = PayModeId.MEITUAN_FASTPAY;
                 break;
-            case PAY_MENU_TYPE_MEMBER://add 20170612 会员扫描支付
-                mCurrentPayModeId = PayModeId.MEMBER_CARD;
+            case PAY_MENU_TYPE_MEMBER:                mCurrentPayModeId = PayModeId.MEMBER_CARD;
                 break;
             case PAY_MENU_TYPE_JIN_CHENG:
                 mCurrentPayModeId = PayModeId.JIN_CHENG;
@@ -117,17 +111,13 @@ public class OnlinePayFragment extends BasePayFragment implements View.OnClickLi
             case PAY_MENU_TYPE_JIN_CHENG_VALUE_CARD:
                 mCurrentPayModeId = PayModeId.JIN_CHENG_VALUE_CARD;
                 break;
-            case PAY_MENU_TYPE_UNIONPAY_CLOUD://add v8.11
-                mCurrentPayModeId = PayModeId.UNIONPAY_CLOUD_PAY;
+            case PAY_MENU_TYPE_UNIONPAY_CLOUD:                mCurrentPayModeId = PayModeId.UNIONPAY_CLOUD_PAY;
                 break;
-            case PAY_MENU_TYPE_ICBC_EPAY://add v8.11
-                mCurrentPayModeId = PayModeId.ICBC_E_PAY;
+            case PAY_MENU_TYPE_ICBC_EPAY:                mCurrentPayModeId = PayModeId.ICBC_E_PAY;
                 break;
-            case PAY_MENU_TYPE_MOBILE://add v8.12
-                mCurrentPayModeId = PayModeId.MOBILE_PAY;
+            case PAY_MENU_TYPE_MOBILE:                mCurrentPayModeId = PayModeId.MOBILE_PAY;
                 break;
-            case PAY_MENU_TYPE_DX_YIPAY://add v8.16
-                mCurrentPayModeId = PayModeId.DIANXIN_YIPAY;
+            case PAY_MENU_TYPE_DX_YIPAY:                mCurrentPayModeId = PayModeId.DIANXIN_YIPAY;
                 break;
             default:
                 break;
@@ -186,8 +176,7 @@ public class OnlinePayFragment extends BasePayFragment implements View.OnClickLi
             EventBus.getDefault().post(mAmountEditedEvent);
             EventBus.getDefault().register(this);
             setVewEvents();
-            if (mCurrentPayModeId == PayModeId.MEMBER_CARD)//add 20170612 会员扫描支付
-            {
+            if (mCurrentPayModeId == PayModeId.MEMBER_CARD)            {
                 View emputyView = view.findViewById(R.id.union_pay_errortext);
                 emputyView.setVisibility(View.GONE);
             }
@@ -204,23 +193,14 @@ public class OnlinePayFragment extends BasePayFragment implements View.OnClickLi
                 verify();
             }
         } else {
-            //隐藏时清空已输入金额
-            clearInputData();
+                        clearInputData();
         }
         super.onHiddenChanged(hidden);
     }
 
-   /* //add begin 20170424 for 组合支付开关
-    private boolean enablePay() {
-        if (isSuportGroupPay()) {//如果支持组合支付
-            return getInputValue() > 0;
-        } else {
-            return getInputValue() >= mPaymentInfo.getActualAmount();//不分步支付，输入金额必须大于等于应付金额
-        }
-    }*/
 
-    //add end 20170424 for 组合支付开关
-    @Override
+
+        @Override
     public void onClick(View v) {
         int vId = v.getId();
         if (vId == R.id.pay) {
@@ -256,33 +236,24 @@ public class OnlinePayFragment extends BasePayFragment implements View.OnClickLi
     private void doPay() {
         PayModelItem payModelItem = new PayModelItem(mCurrentPayModeId);
         payModelItem.setUsedValue(BigDecimal.valueOf(getInputValue()));
-        if (mCurrentPayModeId == PayModeId.MOBILE_PAY) {//modify v8.12 如果是移动支付，调用移动支付界面
-            if (MobliePayMenuTool.isSetMobilePay()) {
+        if (mCurrentPayModeId == PayModeId.MOBILE_PAY) {            if (MobliePayMenuTool.isSetMobilePay()) {
                 MobilePayDialog payDialog = MobilePayDialog.newInstance(mDoPayApi, mPaymentInfo, payModelItem, IPayConstParame.ONLIEN_SCAN_TYPE_ACTIVE);
                 payDialog.setOnPayStopListener(this);
                 payDialog.show(getFragmentManager(), "MobilePayDialog");
             } else {
                 ToastUtil.showShortToast(getString(R.string.please_open_onecode_pay));
             }
-        } else {//modify v8.12 调用calm3在线支付界面
-            if (mDoPayApi != null)
+        } else {            if (mDoPayApi != null)
                 mDoPayApi.showOnlinePayDialog(this.getActivity(), payModelItem, mPaymentInfo, IPayConstParame.ONLIEN_SCAN_TYPE_ACTIVE, this);
         }
     }
 
-    /**
-     * 设置编辑框改变事件
-     */
+
     private void setVewEvents() {
-        //modify 20180309
-        mCashPayEditValue.addTextChangedListener(new CashEditTextWatcher(this, this.mPaymentInfo, mCashPayEditValue, ShopInfoCfg.getInstance().getCurrencySymbol()));
+                mCashPayEditValue.addTextChangedListener(new CashEditTextWatcher(this, this.mPaymentInfo, mCashPayEditValue, ShopInfoCfg.getInstance().getCurrencySymbol()));
     }
 
-    /**
-     * @Title: updateNotPayMent
-     * @Description: 刷新未支付或找零
-     * @Return void 返回类型
-     */
+
     public void updateNotPayMent() {
         double notpayvalue = mPaymentInfo.getActualAmount();
         String input = mCashPayEditValue.getText().toString();
@@ -328,11 +299,7 @@ public class OnlinePayFragment extends BasePayFragment implements View.OnClickLi
             mPaymentInfo.getOtherPay().clear();
     }
 
-    /***
-     * 监听抹零事件
-     *
-     * @param event
-     */
+
     public void onEventMainThread(ExemptEventUpdate event) {
         mCashPayEditValue.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));
         mNumberKeyBorad.setDefaultValue(true);
@@ -345,8 +312,7 @@ public class OnlinePayFragment extends BasePayFragment implements View.OnClickLi
         super.onDestroy();
     }
 
-    //获取输入金额
-    public double getInputValue() {
+        public double getInputValue() {
         String inputValueStr = mCashPayEditValue.getText().toString();
         return DoPayUtils.formatInputCash(inputValueStr);
     }

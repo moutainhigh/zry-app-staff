@@ -8,9 +8,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.data.EcCard;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class NewCardLoginResp implements ICustomer {
 
     private EcCard cardInstance;

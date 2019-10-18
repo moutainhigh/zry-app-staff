@@ -10,9 +10,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.util.regex.Pattern;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public abstract class AbsInitCheck implements InitCheck {
 
     private final static String TAG = AbsInitCheck.class.getSimpleName();

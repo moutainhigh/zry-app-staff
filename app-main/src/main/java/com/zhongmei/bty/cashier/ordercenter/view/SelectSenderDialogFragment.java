@@ -32,8 +32,7 @@ public class SelectSenderDialogFragment extends DialogFragment implements View.O
     private OnSelectAuthUserListener mListener;
     private List<User> authUsers;
     public final static String ITEMS_KEY = "items_key";
-    public final static String DEFAULT_SELECTED_AUTH_USER_ID = "default_selected_auth_user_id";//默认选中的配送员
-    private String defaultSelectedAuthUserId;
+    public final static String DEFAULT_SELECTED_AUTH_USER_ID = "default_selected_auth_user_id";    private String defaultSelectedAuthUserId;
 
     public static SelectSenderDialogFragment newInstance(List<User> authUsers, String defaultSelectedAuthUserId) {
         SelectSenderDialogFragment fragment = new SelectSenderDialogFragment();

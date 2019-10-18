@@ -2,20 +2,11 @@ package com.zhongmei.bty.basemodule.pay.message;
 
 import java.math.BigDecimal;
 
-/**
- * 获取微信支付URL的请求
- *
- * @version: 1.0
- * @date 2015年6月4日
- */
+
 public class WechatPayUrlReq {
     private BigDecimal usefulAmount;
     private BigDecimal exemptAmount;
-    private BigDecimal noDiscountAmount;//不参与优惠金额
-    private Long customerId;//会员Id
-    private String entityCardNo;//匿名卡号
-    private BigDecimal sendValue;//储值赠送金额
-    private Long payModeId;
+    private BigDecimal noDiscountAmount;    private Long customerId;    private String entityCardNo;    private BigDecimal sendValue;    private Long payModeId;
 
     private Long tradeId;
 
@@ -27,8 +18,7 @@ public class WechatPayUrlReq {
 
     private String payModeName;
 
-    private Long tradeUpdateTime;//订单最新时间戳
-
+    private Long tradeUpdateTime;
     public Long getTradeUpdateTime() {
         return tradeUpdateTime;
     }

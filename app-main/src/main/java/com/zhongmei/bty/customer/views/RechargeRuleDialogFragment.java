@@ -24,11 +24,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-/**
- * @Date：2015年11月2日 下午5:31:58
- * @Description: 充赠规则对话框
- * @Version: 1.0
- */
+
 @EFragment(R.layout.recharge_rule_dialog)
 public class RechargeRuleDialogFragment extends BasicDialogFragment implements OnClickListener {
     @ViewById(R.id.recharge_dialog_listview)
@@ -46,15 +42,13 @@ public class RechargeRuleDialogFragment extends BasicDialogFragment implements O
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onCreate(savedInstanceState);
+                super.onCreate(savedInstanceState);
         this.setCancelable(false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         getDialog().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         return null;

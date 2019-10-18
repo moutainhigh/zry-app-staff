@@ -2,30 +2,18 @@ package com.zhongmei.bty.basemodule.customer.bean;
 
 public class IntegralRecord {
 
-    private Long id;//序号
-
-    private Integer recordType; //记录类型1储值、2消费
-
-    private String beforeIntegral;// 储值之前的积分余额
-
-    private String addIntegral;// 增加的积分
-
-    private String endIntegral;// 增加积分之后的余额
-
-    private String userId;// 操作员
-
-    private String commercialId;// 商户Id
-
-    private String commercialGroupId;// 品牌编号
-
-    private String commercialMemberId;// 会员编号
-
-    private long createDateTime;// 创建时间
-
-    private long modifyDateTime;// 修改时间
-
-    private String status;// 有效状态
-
+    private Long id;
+    private Integer recordType;
+    private String beforeIntegral;
+    private String addIntegral;
+    private String endIntegral;
+    private String userId;
+    private String commercialId;
+    private String commercialGroupId;
+    private String commercialMemberId;
+    private long createDateTime;
+    private long modifyDateTime;
+    private String status;
     private String reason;
 
     private String aggregateCount;

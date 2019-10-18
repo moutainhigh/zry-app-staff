@@ -45,12 +45,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * @Date 2016/9/26
- * @Description:桌台修改服务员人数
- * @Param
- * @Return
- */
+
 @EViewGroup(R.layout.view_number_and_waiter_table)
 public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAdapter.OnUserSelectedListener {
 
@@ -72,8 +67,7 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
     Button positiveBtn;
 
     @ViewById(R.id.piv_salesman)
-    protected PropertyItemView piv_saleMan;//add start 20170915 销售员
-
+    protected PropertyItemView piv_saleMan;
     protected BusinessType mBusinessType;
 
     private UserDialog userDialog;
@@ -113,14 +107,11 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //消费事件，以免背景下的视图被触发
-            }
+                            }
         });
         etCount.addTextChangedListener(textWatcher);
 
-        //初始化展示人数和服务员信息
-//        updateNumberAndWaiter();
-    }
+            }
 
     public void setmBusinessType(BusinessType mBusinessType) {
         this.mBusinessType = mBusinessType;
@@ -139,8 +130,7 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
             }
             waiterName = tradeTable.getWaiterName();
             waiterId = tradeTable.getWaiterId();
-        } else {//联台单没有TradeTable
-            setViewEnable(false);
+        } else {            setViewEnable(false);
             etCount.setText("");
             waiterName = Session.getAuthUser().getName();
             waiterId = Session.getAuthUser().getId();
@@ -154,8 +144,7 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
         String waiterTitle = String.format(getResources().getString(R.string.buffet_waiter), waiterName != null ? waiterName : "");
         piv_waiter.setTitleText(waiterTitle);
 
-        initSalesman(tradeVo); //add  20170915 销售员
-    }
+        initSalesman(tradeVo);     }
 
 
     private void setViewEnable(boolean enable) {
@@ -206,7 +195,6 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
                     customerNum--;
                     etCount.setText(String.valueOf(customerNum));
                     etCount.setSelection(String.valueOf(customerNum).length());
-//                    modifyCustomerCount(customerNum);
                 }
 
                 break;
@@ -225,11 +213,9 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
                 }
 
                 customerNum = Integer.valueOf(countStr);
-                if (customerNum < 999) {//最多只能输入4位
-                    customerNum++;
+                if (customerNum < 999) {                    customerNum++;
                     etCount.setText(String.valueOf(customerNum));
                     etCount.setSelection(String.valueOf(customerNum).length());
-//                    modifyCustomerCount(customerNum);
                 }
                 break;
             case R.id.piv_waiter:
@@ -289,11 +275,9 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
                 }
 
                 manager.setUser(waiterId, waiterName);
-                //add  start 20170915 销售员
-                TradeVo tradeVo = dinnertableTradeVo.getTradeVo();
+                                TradeVo tradeVo = dinnertableTradeVo.getTradeVo();
                 if (mSalesman != null && tradeVo != null) {
-                    //如果有销售员直接更新
-                    if (tradeVo.getTradeUser() != null) {
+                                        if (tradeVo.getTradeUser() != null) {
                         TradeUser tradeUser = tradeVo.getTradeUser();
                         if (tradeUser.getUserId() != null && !tradeUser.getUserId().equals(mSalesman.getId())) {
                             tradeUser.setUserId(mSalesman.getId());
@@ -302,12 +286,10 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
                             manager.setTradeUser(tradeUser);
                         }
                     } else {
-                        //如果没有销售员新加
-                        manager.setTradeUser(PayUtils.creatTradeUser(tradeVo.getTrade(), mSalesman));
+                                                manager.setTradeUser(PayUtils.creatTradeUser(tradeVo.getTrade(), mSalesman));
                     }
                 }
-                //add  end 20170915 销售员
-                manager.finishChangeTable();
+                                manager.finishChangeTable();
                 setVisibility(View.GONE);
                 tableInfoFragment.hideNumberAndWaiterView(View.GONE);
                 break;
@@ -315,10 +297,8 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
                 MobclickAgentEvent.onEvent(mActivity, DinnerMobClickAgentEvent.tableDetailsModifyCustomerCancel);
                 setVisibility(View.GONE);
                 tableInfoFragment.hideNumberAndWaiterView(View.GONE);
-                cancelSelectSalesman();//add  20170915 销售员
-                break;
-            case R.id.piv_salesman: //add start 20170915 销售员
-                MobclickAgentEvent.onEvent(mActivity, DinnerMobClickAgentEvent.tableDetailsModifyCustomerTradeuser);
+                cancelSelectSalesman();                break;
+            case R.id.piv_salesman:                 MobclickAgentEvent.onEvent(mActivity, DinnerMobClickAgentEvent.tableDetailsModifyCustomerTradeuser);
                 List<User> allUserList = Session.getFunc(UserFunc.class).getAllSalesman();
                 if (Utils.isNotEmpty(allUserList)) {
                     UserDialog userDialog = new UserDialog(mActivity, R.string.salesman_select_hint, allUserList, mSalesman, mItemSelectedListener);
@@ -370,23 +350,11 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
 
 
     }
-    //add end 20170915 销售员
-    /* */
 
-    /**
-     * 修改顾客人数
-     *//*
-    private void modifyCustomerCount(int customerNum) {
-        DinnerShoppingCart.getInstance().modifyCustomerCount(customerNum);
-        if (onTradeTableChangeListener != null) {
-            onTradeTableChangeListener.afterTradeTableChanged();
-        }
-    }*/
+
+
     @Override
     public void onSelected(User item, Long userId, String userName) {
-//        if(userDialog != null && userDialog.isShowing()){
-//            userDialog.dismiss();
-//        }
         mWaiter = new AuthUser();
         mWaiter.setName(userName);
         mWaiter.setId(userId);
@@ -395,17 +363,6 @@ public class NumberAndWaiterViewTable extends LinearLayout implements UserGridAd
         piv_waiter.setTitleText(waiterTitle);
         piv_waiter.setTag(userId);
 
-//       TradeVo tradeVo =dinnertableTradeVo.getTradeVo();
-//        if (tradeVo != null && Utils.isNotEmpty(tradeVo.getTradeTableList())) {
-//            TradeTable tradeTable = tradeVo.getTradeTableList().get(0);
-//            tradeTable.setWaiterId(userId);
-//            tradeTable.setWaiterName(userName);
-//            tradeTable.setChanged(true);
-//
-//            if(onTradeTableChangeListener != null){
-//                onTradeTableChangeListener.afterTradeTableChanged();
-//            }
-//        }
     }
 
     public void show(DinnertableTradeVo dinnertableTradeVo, TableInfoFragment tableInfoFragment) {

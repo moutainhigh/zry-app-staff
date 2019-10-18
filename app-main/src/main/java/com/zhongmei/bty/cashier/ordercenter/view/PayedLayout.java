@@ -24,20 +24,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * @date 2015/12/14
- * @description 显示支付信息部分
- */
+
 public class PayedLayout extends LinearLayout {
     private String uuid;
-    // 销货支付对象
-    private List<PaymentVo> sellPaymentVo = new ArrayList<>();
+        private List<PaymentVo> sellPaymentVo = new ArrayList<>();
 
-    //退款对象
-    private List<PaymentVo> refundPaymentVo = new ArrayList<>();
+        private List<PaymentVo> refundPaymentVo = new ArrayList<>();
 
-    // 调账支付对象
-    private List<PaymentVo> adjustPaymentVos = new ArrayList<PaymentVo>();
+        private List<PaymentVo> adjustPaymentVos = new ArrayList<PaymentVo>();
 
     private Context mContext;
 
@@ -123,20 +117,9 @@ public class PayedLayout extends LinearLayout {
         mContentView = LayoutInflater.from(mContext).inflate(R.layout.order_center_operate_dialog_fragment_payed_content, null);
         addView(mContentView);
 
-        // 展示抹零数据
-//		LinearLayout llExempt = (LinearLayout)mContentView.findViewById(R.id.ll_exempt);
-//		if (sellPaymentVo.getPayment() != null
-//			&& (sellPaymentVo.getPayment().getExemptAmount().compareTo(BigDecimal.ZERO) > 0)) {
-//			llExempt.setVisibility(View.VISIBLE);
-//			Payment payment = sellPaymentVo.getPayment();
-//			TextView tvExemptAmount = (TextView)mContentView.findViewById(R.id.tv_exempt_amount);
-//			tvExemptAmount.setText(String.format(mContext.getResources().getString(R.string.order_cash),
-//				payment.getExemptAmount().negate()));
-//		}
 
         List<PaymentItem> paymentItems = makePaymentList();
-        //设置总金额
-        BigDecimal paymentAmount = BigDecimal.ZERO;
+                BigDecimal paymentAmount = BigDecimal.ZERO;
         for (PaymentItem item : paymentItems) {
             if (item.getPayStatus() == TradePayStatus.PAID
                     || item.getPayStatus() == TradePayStatus.REFUNDED
@@ -144,12 +127,10 @@ public class PayedLayout extends LinearLayout {
                 paymentAmount = paymentAmount.add(item.getUsefulAmount());
             }
         }
-        //如果押金已退，退款总金额要减去押金
-        if (mTradeDeposit != null && mTradeDeposit.getDepositRefund() != null) {
+                if (mTradeDeposit != null && mTradeDeposit.getDepositRefund() != null) {
             paymentAmount = paymentAmount.add(mTradeDeposit.getDepositPay().negate());
 
-            //已退还押金情况下，目前仅支持现金退还，故构建一个现金支付方式
-            paymentItems.clear();
+                        paymentItems.clear();
             PaymentItem paymentItem = new PaymentItem();
             paymentItem.setPayModeId(PayModeId.CASH.value());
             paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(PayModeId.CASH.value()));
@@ -167,8 +148,7 @@ public class PayedLayout extends LinearLayout {
 
     private List<PaymentItem> makePaymentList() {
         List<PaymentItem> paymentItems = new ArrayList<PaymentItem>();
-        // 结账
-        if (sellPaymentVo != null) {
+                if (sellPaymentVo != null) {
             for (PaymentVo paymentVo : sellPaymentVo) {
                 List<PaymentItem> pis = paymentVo.getPaymentItemList();
                 if (pis != null) {
@@ -176,8 +156,7 @@ public class PayedLayout extends LinearLayout {
                 }
             }
         }
-        //退款
-        if (!Utils.isEmpty(refundPaymentVo)) {
+                if (!Utils.isEmpty(refundPaymentVo)) {
             for (PaymentVo paymentVo : refundPaymentVo) {
                 List<PaymentItem> pis = paymentVo.getPaymentItemList();
                 if (pis != null) {
@@ -189,19 +168,6 @@ public class PayedLayout extends LinearLayout {
         return paymentItems;
     }
 
-//	private List<PaymentGroup> makePaymentGroup() {
-//		List<PaymentGroup> paymentGroups = new ArrayList<PaymentAdapter.PaymentGroup>();
-//		// 结账
-//		if (sellPaymentVo != null && sellPaymentVo.getPayment() != null && sellPaymentVo.getPaymentItemList() != null
-//			& sellPaymentVo.getPaymentItemList().size() > 0) {
-//			PaymentGroup paymentGroup =
-//				new PaymentGroup(getContext().getString(R.string.dinner_checkout), sellPaymentVo.getPayment().getMemo(),
-//						sellPaymentVo.getPaymentItemList());
-//			paymentGroups.add(paymentGroup);
-//		}
-//
-//		return paymentGroups;
-//	}
 
     private void setListViewHeightBasedOnChildren(ListView listView) {
         ListAdapter listAdapter = listView.getAdapter();

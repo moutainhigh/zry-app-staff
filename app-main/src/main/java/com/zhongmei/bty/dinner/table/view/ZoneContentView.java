@@ -20,21 +20,13 @@ import com.zhongmei.yunfu.util.ToastUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 桌台区域内容视图，不带滚动功能
- *
- * @version: 1.0
- * @date 2015年9月6日
- */
+
 @SuppressWarnings("deprecation")
 public abstract class ZoneContentView extends ZoneContentViewBase {
 
     private static final String TAG = ZoneContentView.class.getSimpleName();
 
-    /**
-     * @version: 1.0
-     * @date 2015年9月10日
-     */
+
     public static interface Callback extends ZoneView.DeleteCallback {
 
         void onClick(TableViewBase view);
@@ -84,13 +76,6 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
         return mOnClickListener;
     }
 
-//	@Override
-//	protected DinnertableView createDinnertableView(DinnertableModel dinnertableModel) {
-//		DinnertableView view = super.createDinnertableView(dinnertableModel);
-//		view.setOnDragListener(mOnDragListener);
-//		view.setOnClickListener(mOnClickListener);
-//		return view;
-//	}
 
 
     @Override
@@ -173,21 +158,18 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
                 case DragEvent.ACTION_DROP:
                     Log.i("zhubo", "ACTION_DROP");
                     if (view != ZoneContentView.this) {
-//						Object localState = event.getLocalState();
                         if (isDragCard(localState)) {
                             IDinnertableTrade orginal = getDragTradeModel(localState);
                             if (orginal.getDinnertable() != null) {
                                 if (view instanceof TableViewBase) {
                                     TableViewBase dest = (TableViewBase) view;
-                                    // 源桌台与目标桌台相同时不响应拖放换桌
-                                    if (!orginal.getDinnertable().getId().equals(dest.getModel().getId())) {
+                                                                        if (!orginal.getDinnertable().getId().equals(dest.getModel().getId())) {
                                         mCallback.onDrop(orginal, dest);
                                     }
                                 } else if (view instanceof TradeLayout) {
                                     TradeLayout tradeLayout = (TradeLayout) view;
                                     TableTradeViewBase dest = tradeLayout.mTradeView;
-                                    // 源单据与目标单据相同时不响应拖放合单
-                                    if (!orginal.equals(dest.getModel())) {
+                                                                        if (!orginal.equals(dest.getModel())) {
                                         mCallback.onDrop(orginal, dest);
                                     }
                                 } else if (view == mDeleteView) {
@@ -207,15 +189,13 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
                                     if (dest.getDinnertableStatus() == DinnertableStatus.DONE) {
                                         ToastUtil.showShortToast(R.string.dinner_move_dish_to_done_dinnertable);
                                     } else {
-                                        // 允许移菜到同一个桌子
-                                        mCallback.onDropMoveDish(orginal, dest);
+                                                                                mCallback.onDropMoveDish(orginal, dest);
                                     }
 
                                 } else if (view instanceof TradeLayout) {
                                     TradeLayout tradeLayout = (TradeLayout) view;
                                     TableTradeViewBase dest = tradeLayout.mTradeView;
-                                    // 源单据与目标单据相同时不响应拖放合单
-                                    if (!orginal.getTradeId().equals(dest.getModel().getTradeId())) {
+                                                                        if (!orginal.getTradeId().equals(dest.getModel().getTradeId())) {
                                         mCallback.onDropMoveDish(orginal, dest);
                                     } else {
                                         ToastUtil.showShortToast(R.string.dinner_move_dish_to_sametrade);
@@ -254,12 +234,7 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
 
     }
 
-    /**
-     * 卡片是否可以拖动
-     *
-     * @param viewObject
-     * @return
-     */
+
     private boolean isDragCard(Object viewObject) {
         return viewObject instanceof TableTradeViewBase || viewObject instanceof UnionTradeGroupView;
     }
@@ -276,10 +251,7 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
         return null;
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年9月6日
-     */
+
     private class DragHoverHelper {
 
         private static final int DINNERTABLE_TIMEOUT_MS = 400;
@@ -327,23 +299,16 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
             }
         };
 
-        /**
-         * 移到边界悬停一段时间后滚动视图
-         *
-         * @param view
-         * @param event
-         */
+
         public void onHover(View view, DragEvent event) {
             int eventX = Math.round(event.getX());
             int eventY = Math.round(event.getY());
-            // 单据选取器如果已经显示，在桌台到选取器之间的区域移动时不隐藏单据选取器
-            if (mTradesSelector.isShown()) {
+                        if (mTradesSelector.isShown()) {
                 if (view != hoverDinnertableView) {
                     int left;
                     int right;
                     if (mTradesSelector.getX() < hoverDinnertableView.getX()) {
-                        // 单据选取器在桌台左边
-                        left = Math.round(mTradesSelector.getX());
+                                                left = Math.round(mTradesSelector.getX());
                         right = hoverDinnertableView.getLeft() + 1;
                     } else {
                         left = hoverDinnertableView.getRight() - 1;
@@ -413,9 +378,7 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
         }
 
         private void startDinnertableHover(TableViewBase view) {
-            /*if (view instanceof BuffetTableView) {//自助餐不允许合单
-                return;
-            }*/
+
             if (hoverDinnertableView != view) {
                 if (hoverDinnertableView != null) {
                     stopDinnertableHover();
@@ -483,10 +446,7 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
 
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年9月9日
-     */
+
     private static class TradesSelector extends LinearLayout {
 
         private final List<TradeLayout> tradeLayouts;
@@ -525,8 +485,7 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
                 }
             }
 
-            // 在适当位置显示
-            float dinnertableX = tableView.getX();
+                        float dinnertableX = tableView.getX();
             float dinnertableY = tableView.getY();
             float x = dinnertableX + tableView.getWidth();
             if (x + width > parentWidth) {
@@ -562,10 +521,7 @@ public abstract class ZoneContentView extends ZoneContentViewBase {
         }
     }
 
-    /**
-     * @version: 1.0
-     * @date 2015年9月8日
-     */
+
     private static class TradeLayout extends LinearLayout {
 
         final TableTradeViewBase mTradeView;

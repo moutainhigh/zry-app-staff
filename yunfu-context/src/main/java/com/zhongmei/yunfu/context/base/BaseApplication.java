@@ -14,9 +14,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public abstract class BaseApplication extends MultiDexApplication implements ActivityLifecycle.AppExitCallback {
     public static BaseApplication sInstance;
 
@@ -35,8 +33,7 @@ public abstract class BaseApplication extends MultiDexApplication implements Act
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         sInstance = this;
-        //Looper.getMainLooper().setMessageLogging(new LooperLogPrinter("ActivityThread"));
-    }
+            }
 
     public static BaseApplication getInstance() {
         return sInstance;
@@ -79,10 +76,7 @@ public abstract class BaseApplication extends MultiDexApplication implements Act
         return activityLifecycle;
     }
 
-    /**
-     * api安全验证数据信息加密信息设置
-     * SHA-256(kry-api-token=登录认证token&kry-api-shop-id=门店ID^512&kry-api-timestamp=客户端时间戳)
-     */
+
     public abstract Map<String, String> tokenEncrypt();
 
     @Override

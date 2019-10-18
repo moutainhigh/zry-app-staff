@@ -11,11 +11,7 @@ import com.zhongmei.yunfu.context.util.DeviceNodeUtil;
 
 import static com.zhongmei.yunfu.context.util.ThreadUtils.runOnUiThread;
 
-/**
- * 德沃扫码枪
- *
- * @created 2017/9/13
- */
+
 public class DeWoScanCode {
 
     private USBBroadcastReceiver mUSBBroadcastReceiver;

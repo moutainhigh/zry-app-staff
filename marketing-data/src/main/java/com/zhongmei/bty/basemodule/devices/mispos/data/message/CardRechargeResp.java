@@ -2,12 +2,7 @@ package com.zhongmei.bty.basemodule.devices.mispos.data.message;
 
 import java.math.BigDecimal;
 
-/**
- * 会员充值接口回复数据封装
- *
- * @version: 1.0
- * @date 2015年5月8日
- */
+
 public class CardRechargeResp {
 
     private BigDecimal valueCard;

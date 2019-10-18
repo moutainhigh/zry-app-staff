@@ -21,9 +21,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class OrderCenterListManagerNew extends OrderCenterListManager {
 
     private static final String TAG = OrderCenterListManagerNew.class.getSimpleName();
@@ -55,13 +53,11 @@ public class OrderCenterListManagerNew extends OrderCenterListManager {
             tradePaymentVo.setPaymentVoList(orderCenterDBDal.getPaymentVos(tradeUUID));
             tradePaymentVos.add(tradePaymentVo);
         }
-        // v8.12.0 取餐号搜索过滤 由于取餐号的值取了 tradeTrables, tradeExtra的数据，故加过滤
-        if ((childTab == DbQueryConstant.UNPROCESSED_ALL && position == 4) || (childTab == DbQueryConstant.SALES_ALL && position == 5)) {
+                if ((childTab == DbQueryConstant.UNPROCESSED_ALL && position == 4) || (childTab == DbQueryConstant.SALES_ALL && position == 5)) {
             List<TradePaymentVo> vos = new ArrayList<>();
             for (TradePaymentVo tradePaymentVo : tradePaymentVos) {
                 TradeVo tradeVo = tradePaymentVo.getTradeVo();
-                // 首先匹配桌台号码
-                List<TradeTable> tradeTables = tradeVo.getTradeTableList();
+                                List<TradeTable> tradeTables = tradeVo.getTradeTableList();
                 if (EmptyUtils.isNotEmpty(tradeTables)) {
                     for (TradeTable tradeTable : tradeTables) {
                         String tableName = tradeTable.getTableName();
@@ -72,8 +68,7 @@ public class OrderCenterListManagerNew extends OrderCenterListManager {
                     }
                     continue;
                 }
-                // 其次匹配号牌
-                TradeExtra extra = tradeVo.getTradeExtra();
+                                TradeExtra extra = tradeVo.getTradeExtra();
                 String numberPlate = extra.getNumberPlate();
                 if (!TextUtils.isEmpty(numberPlate)) {
                     if (numberPlate.contains(keyword)) {

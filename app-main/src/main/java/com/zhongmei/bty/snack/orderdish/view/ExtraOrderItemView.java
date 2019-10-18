@@ -9,9 +9,7 @@ import com.zhongmei.yunfu.R;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.extra_order_item)
 public class ExtraOrderItemView extends LinearLayout {
     @ViewById(R.id.extra_order_item)

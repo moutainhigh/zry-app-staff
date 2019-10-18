@@ -2,13 +2,9 @@ package com.zhongmei.bty.basemodule.devices.mispos.data.bean;
 
 import java.io.Serializable;
 
-/**
- * 实体卡卡号和状态信息
- */
+
 public class CardInfo implements Serializable {
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
     private String cardStatus;
     private String cardNum;

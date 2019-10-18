@@ -7,9 +7,7 @@ import com.zhongmei.bty.basemodule.pay.message.PaymentTo;
 
 import java.util.List;
 
-/**
- * @date:2015年9月28日下午6:46:59
- */
+
 public class PaymentDinnerTo {
 
     private long paymentTime;

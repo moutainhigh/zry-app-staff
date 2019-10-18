@@ -5,17 +5,10 @@ import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItem;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Description: 封装一批打印的数据
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class ShopCartDataVo {
-    private String printNo;// 打印流水号
-
-    private List<IShopcartItem> baseData;// 基础数据
-
+    private String printNo;
+    private List<IShopcartItem> baseData;
     public ShopCartDataVo(String printno) {
         this.printNo = printno;
         baseData = new ArrayList<IShopcartItem>();

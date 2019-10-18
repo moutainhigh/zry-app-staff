@@ -5,27 +5,18 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.bty.commonmodule.database.enums.Status;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * @version: 1.0
- * @date 2015年7月23日
- */
+
 public abstract class OldEntityBase extends EntityBase<Long> {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     protected interface $ {
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * status
-         */
+
         String status = "status";
 
     }

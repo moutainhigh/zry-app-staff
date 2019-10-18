@@ -5,11 +5,7 @@ import java.util.Comparator;
 
 import com.zhongmei.bty.splash.login.UserGridItem;
 
-/**
- *
 
- *
- */
 public class PinyinComparator implements Comparator<UserGridItem>, Serializable {
 
     public int compare(UserGridItem o1, UserGridItem o2) {

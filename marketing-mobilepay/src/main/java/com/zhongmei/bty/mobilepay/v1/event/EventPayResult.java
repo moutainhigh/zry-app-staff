@@ -31,8 +31,7 @@ public class EventPayResult {
         this.content = content;
     }
 
-    private Object content;//数据
-
+    private Object content;
     public EventPayResult(boolean success) {
         this.success = success;
     }

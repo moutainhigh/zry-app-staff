@@ -10,9 +10,7 @@ import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public final class EmptyUtils {
 
@@ -20,12 +18,7 @@ public final class EmptyUtils {
         throw new UnsupportedOperationException("u can't instantiate me...");
     }
 
-    /**
-     * 判断对象是否为空
-     *
-     * @param obj 对象
-     * @return {@code true}: 为空<br>{@code false}: 不为空
-     */
+
     public static boolean isEmpty(Object obj) {
         if (obj == null) {
             return true;
@@ -59,12 +52,7 @@ public final class EmptyUtils {
         return false;
     }
 
-    /**
-     * 判断对象是否非空
-     *
-     * @param obj 对象
-     * @return {@code true}: 非空<br>{@code false}: 空
-     */
+
     public static boolean isNotEmpty(Object obj) {
         return !isEmpty(obj);
     }

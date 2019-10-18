@@ -18,9 +18,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "booking_trade_item")
 public class BookingTradeItem extends IdEntityBase {
 
@@ -36,9 +34,7 @@ public class BookingTradeItem extends IdEntityBase {
         String parentUuid = "parent_uuid";
 
         String skuUuid = "sku_uuid";
-        /**
-         * sku_id
-         */
+
         public static final String skuId = "sku_id";
 
 
@@ -109,247 +105,166 @@ public class BookingTradeItem extends IdEntityBase {
 
     }
 
-    /**
-     * 预定id
-     */
+
     @DatabaseField(columnName = "booking_id")
     private Long bookingId;
 
-    /**
-     * 预定uuid
-     */
+
     @DatabaseField(columnName = "booking_uuid")
     private String bookingUuid;
 
-    /**
-     * 预定id
-     */
+
     @DatabaseField(columnName = "parent_id")
     private Long parentId;
 
-    /**
-     * 指向父记录的uuid，如果是子菜才有值，单菜此字段为空
-     */
+
     @DatabaseField(columnName = "parent_uuid")
     private String parentUuid;
 
-    /**
-     * 商品UUID
-     */
+
     @DatabaseField(columnName = "dish_uuid")
     private String dishUuid;
 
-    /**
-     * 套餐内菜品分组 id
-     */
+
     @DatabaseField(columnName = "dish_setmeal_group_id")
     private Long dishSetmealGroupId;
 
-    /**
-     * 商品名称
-     */
+
     @DatabaseField(columnName = "sku_name")
     private String dishName;
 
     @DatabaseField(columnName = "dish_id")
     private Long dishId;
 
-    /**
-     * 菜品类型
-     * 菜品种类 0:单菜 1:套餐 2:加料 10:临时卡售卡 11:临时卡储值 12: 团餐餐标 13：自助餐菜单
-     */
+
     @DatabaseField(columnName = "type")
     private Integer type;
 
-    /**
-     * 排序位
-     */
+
     @DatabaseField(columnName = "sort")
     private Integer sort;
 
-    /**
-     * 单价
-     */
+
     @DatabaseField(columnName = "price")
     private BigDecimal price;
 
-    /**
-     * 数量
-     */
+
     @DatabaseField(columnName = "quantity")
     private BigDecimal quantity = BigDecimal.ONE;
 
-    /**
-     * 金额，等于 PRICE * QTY
-     */
+
     @DatabaseField(columnName = "amount")
     private BigDecimal amount;
 
-    /**
-     * 各种特征的金额合计
-     */
+
     @DatabaseField(columnName = "property_amount")
     private BigDecimal propertyAmount;
 
-    /**
-     * 售价，等于 AMOUNT + FEATURE_AMOUNT'
-     */
+
     @DatabaseField(columnName = "actual_amount")
     private BigDecimal actualAmount;
 
-    /**
-     * 备注
-     */
+
     @DatabaseField(columnName = "memo")
     private String memo;
 
-    /**
-     * 品牌标识
-     */
+
     @DatabaseField(columnName = "brand_identy")
     private Long brandIdenty;
 
-    /**
-     * 门店标识
-     */
+
     @DatabaseField(columnName = "shop_identy")
     private Long shopIdenty;
 
-    /**
-     * 设备标识
-     */
+
     @DatabaseField(columnName = "device_identy")
     private String deviceIdenty;
 
-    /**
-     * UUID，本笔记录唯一值
-     */
+
     @DatabaseField(columnName = "uuid")
     private String uuid;
 
-    /**
-     * 1:VALID:有效的\r\n 2:INVALID:无效的'
-     */
+
     @DatabaseField(columnName = "status_flag")
     private Integer statusFlag;
 
-    /**
-     * PAD本地创建时间
-     */
+
     @DatabaseField(columnName = "client_create_time")
     private Long clientCreateTime;
 
-    /**
-     * PAD本地最后修改时间
-     */
+
     @DatabaseField(columnName = "client_update_time")
     private Long clientUpdateTime;
 
-    /**
-     * 服务端创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务端最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 
-    /**
-     * 创建者，创建此记录的系统用户
-     */
+
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
 
-    /**
-     * 创建者姓名
-     */
+
     @DatabaseField(columnName = "creator_name")
     private String creatorName;
 
-    /**
-     * 最后修改此记录的用户
-     */
+
     @DatabaseField(columnName = "updator_id")
     private Long updatorId;
 
-    /**
-     * 最后修改者姓名
-     */
+
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
-    /**
-     * 桌台UUID
-     */
+
     @DatabaseField(columnName = "booking_trade_table_uuid")
     private String bookingTradeTableUuid;
 
-    /**
-     * 是否参与整单折扣 1 是 2 否
-     */
+
     @DatabaseField(columnName = "enable_whole_privilege")
     private Integer enableWholePrivilege;
 
-    /**
-     * 单位名称
-     */
+
     @DatabaseField(columnName = "unit_name")
     private String unitName;
 
-    /**
-     * 销售类型: 1 称重 2非称重
-     */
+
     @DatabaseField(columnName = "sale_type")
     private Integer saleType;
 
-    /**
-     * 桌台id
-     */
+
     @DatabaseField(columnName = "booking_trade_table_id")
     private Long bookingTradeTableId;
 
-    /**
-     * 当此记录是修改其他品项而来时记录被修改的品项ID
-     */
+
     @DatabaseField(columnName = "relate_trade_item_id")
     private Long relateTradeItemId;
 
-    /**
-     * 当此记录是修改其他品项而来时记录被修改的品项UUID
-     */
+
     @DatabaseField(columnName = "relate_trade_item_uuid")
     private String relateTradeItemUuid;
 
-    /**
-     * 0.00
-     */
+
     @DatabaseField(columnName = "feeds_amount")
     private BigDecimal feedsAmount;
 
-    /**
-     * 无效类型 1:退菜，2:被拆单，3：被删除 , 4:改菜,5:退菜被撤回，6:改菜被撤回,7移菜
-     */
+
     @DatabaseField(columnName = "invalid_type")
     private Integer invalidType;
 
-    /**
-     * 1=正常  2=在回收站
-     */
+
     @DatabaseField(columnName = "recycle_status")
     private Integer recycleStatus;
 
-    /**
-     * 是否允许变价: 1 允许 2不允许
-     */
+
     @DatabaseField(columnName = "is_change_price")
     private Integer isChangePrice;
 
-    /**
-     * 退菜数量
-     */
+
     @DatabaseField(columnName = "return_quantity")
     private BigDecimal returnQuantity;
 

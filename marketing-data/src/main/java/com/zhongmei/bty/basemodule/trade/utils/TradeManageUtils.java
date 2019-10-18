@@ -32,9 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TradeManageUtils {
 
@@ -43,8 +41,7 @@ public class TradeManageUtils {
     public static void delete(DatabaseHelper helper, String tradeUuid)
             throws Exception {
         Dao<TradeItem, String> tiDao = helper.getDao(TradeItem.class);
-        // 删除TradeItemProperty
-        QueryBuilder<TradeItem, String> subQb = tiDao.queryBuilder();
+                QueryBuilder<TradeItem, String> subQb = tiDao.queryBuilder();
         subQb.selectColumns(TradeItem.$.uuid);
         subQb.where().eq(TradeItem.$.tradeUuid, tradeUuid);
         Dao<TradeItemProperty, String> tipDao = helper.getDao(TradeItemProperty.class);
@@ -52,64 +49,50 @@ public class TradeManageUtils {
         tipDeleteBuilder.where().in(TradeItemProperty.$.tradeItemUuid, subQb);
         tipDeleteBuilder.delete();
 
-        //删除TradeItemExtra
 
         Dao<TradeItemExtra, String> tieDao = helper.getDao(TradeItemExtra.class);
         DeleteBuilder<TradeItemExtra, String> tieDeleteBuilder = tieDao.deleteBuilder();
         tieDeleteBuilder.where().in(TradeItemExtra.$.tradeItemUuid, subQb);
         tieDeleteBuilder.delete();
 
-        // 删除TradePrivilege
-        Dao<TradePrivilege, String> tpDao = helper.getDao(TradePrivilege.class);
+                Dao<TradePrivilege, String> tpDao = helper.getDao(TradePrivilege.class);
         DeleteBuilder<TradePrivilege, String> tpDeleteBuilder = tpDao.deleteBuilder();
         tpDeleteBuilder.where().eq(TradePrivilege.$.tradeUuid, tradeUuid);
         tpDeleteBuilder.delete();
 
-        // 删除TradePrivilegeExtra
-        Dao<TradePrivilegeExtra, String> tpExtraDao = helper.getDao(TradePrivilegeExtra.class);
+                Dao<TradePrivilegeExtra, String> tpExtraDao = helper.getDao(TradePrivilegeExtra.class);
         DeleteBuilder<TradePrivilegeExtra, String> tpExtraDeleteBuilder = tpExtraDao.deleteBuilder();
         tpExtraDeleteBuilder.where().eq(TradePrivilegeExtra.$.tradeUuid, tradeUuid);
         tpExtraDeleteBuilder.delete();
 
-        // 删除TradeCustomer
-        Dao<TradeCustomer, String> tcDao = helper.getDao(TradeCustomer.class);
+                Dao<TradeCustomer, String> tcDao = helper.getDao(TradeCustomer.class);
         DeleteBuilder<TradeCustomer, String> tcDeleteBuilder = tcDao.deleteBuilder();
         tcDeleteBuilder.where().eq(TradeCustomer.$.tradeUuid, tradeUuid);
         tcDeleteBuilder.delete();
-        // 删除TradeExtra
-        Dao<TradeExtra, String> teDao = helper.getDao(TradeExtra.class);
+                Dao<TradeExtra, String> teDao = helper.getDao(TradeExtra.class);
         DeleteBuilder<TradeExtra, String> teDeleteBuilder = teDao.deleteBuilder();
         teDeleteBuilder.where().eq(TradeExtra.$.tradeUuid, tradeUuid);
         teDeleteBuilder.delete();
-        // 删除TradeTable
-        Dao<TradeTable, String> ttDao = helper.getDao(TradeTable.class);
+                Dao<TradeTable, String> ttDao = helper.getDao(TradeTable.class);
         DeleteBuilder<TradeTable, String> ttDeleteBuilder = ttDao.deleteBuilder();
         ttDeleteBuilder.where().eq(TradeTable.$.tradeUuid, tradeUuid);
         ttDeleteBuilder.delete();
-        // 删除TradeItem
-        DeleteBuilder<TradeItem, String> tiDeleteBuilder = tiDao.deleteBuilder();
+                DeleteBuilder<TradeItem, String> tiDeleteBuilder = tiDao.deleteBuilder();
         tiDeleteBuilder.where().eq(TradeItem.$.tradeUuid, tradeUuid);
         tiDeleteBuilder.delete();
 
-        // 删除TradeReasonRel
-        Dao<TradeReasonRel, String> trrDao = helper.getDao(TradeReasonRel.class);
+                Dao<TradeReasonRel, String> trrDao = helper.getDao(TradeReasonRel.class);
         DeleteBuilder<TradeReasonRel, String> trrDeleteBuilder = trrDao.deleteBuilder();
         trrDeleteBuilder.where().eq(TradeReasonRel.$.relateUuid, tradeUuid);
         trrDeleteBuilder.delete();
 
-        // 删除TradeDeposit
-        Dao<TradeDeposit, String> tdDao = helper.getDao(TradeDeposit.class);
+                Dao<TradeDeposit, String> tdDao = helper.getDao(TradeDeposit.class);
         DeleteBuilder<TradeDeposit, String> tdDeleteBuilder = tdDao.deleteBuilder();
         tdDeleteBuilder.where().eq(TradeExtra.$.tradeUuid, tradeUuid);
         tdDeleteBuilder.delete();
 
-        //删除营销活动
-        Dao<TradeItemPlanActivity, String> tipaDao = helper.getDao(TradeItemPlanActivity.class);
-        /*
-        QueryBuilder<TradeItemPlanActivity, String> supbQb = tipaDao.queryBuilder();
-        subQb.selectColumns(TradeItemPlanActivity.$.id);
-        subQb.where().eq(TradeItemPlanActivity.$.tradeUuid, tradeUuid);
-        */
+                Dao<TradeItemPlanActivity, String> tipaDao = helper.getDao(TradeItemPlanActivity.class);
+
         DeleteBuilder<TradeItemPlanActivity, String> tipaDeleteBuilder = tipaDao.deleteBuilder();
         tipaDeleteBuilder.where().eq(TradeItemPlanActivity.$.tradeUuid, tradeUuid);
         tipaDeleteBuilder.delete();
@@ -119,24 +102,17 @@ public class TradeManageUtils {
         tpaDeleteBuilder.where().eq(TradePlanActivity.$.tradeUuid, tradeUuid);
         tpaDeleteBuilder.delete();
 
-        // 删除Trade
-        Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
+                Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
         tradeDao.deleteById(tradeUuid);
     }
 
-    /**
-     * 去除预点菜订单
-     *
-     * @param trades 查询出的菜单
-     * @return
-     */
+
     public static List<Trade> delExtrades(List<Trade> trades) {
         synchronized (trades) {
             PrepareTradeRelationDal prepareTradeRelationDal = OperatesFactory.create(PrepareTradeRelationDal.class);
             try {
                 Map<Long, PrepareTradeRelation> prepareMap = prepareTradeRelationDal.findMapByTradeId(null);
-                //过滤预点菜的数据
-                if (prepareMap != null && prepareMap.size() > 0 && Utils.isNotEmpty(trades)) {
+                                if (prepareMap != null && prepareMap.size() > 0 && Utils.isNotEmpty(trades)) {
                     for (int i = trades.size() - 1; i >= 0; i--) {
                         Trade trade = trades.get(i);
                         if (prepareMap.containsKey(trade.getId())) {
@@ -151,12 +127,7 @@ public class TradeManageUtils {
         return trades;
     }
 
-    /**
-     * 去除快餐微信未支付完成的订单(仅在线支付)
-     *
-     * @param trades
-     * @return
-     */
+
     public static List<Trade> delWeXinSnackTradesNotPaid(List<Trade> trades) {
         synchronized (trades) {
             Iterator<Trade> iterator = trades.iterator();

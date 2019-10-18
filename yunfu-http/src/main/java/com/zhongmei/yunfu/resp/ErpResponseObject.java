@@ -2,9 +2,7 @@ package com.zhongmei.yunfu.resp;
 
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class ErpResponseObject<T> {
 
     private int status;
@@ -62,17 +60,10 @@ public class ErpResponseObject<T> {
         this.returnValues = returnValues;
     }
 
-    /**
-     * 操作成功
-     */
+
     public static final int OK = 1000;
 
-    /**
-     * 判断指定的回复信息是否是成功状态，是成功状态返回true
-     *
-     * @param obj
-     * @return
-     */
+
     public static boolean isOk(ErpResponseObject<?> obj) {
         if (obj == null) {
             return false;

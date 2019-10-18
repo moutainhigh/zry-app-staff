@@ -14,37 +14,25 @@ import com.zhongmei.yunfu.util.Beans;
 
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年8月14日
- */
+
 public class CouponPrivilegeVo implements java.io.Serializable, NoProGuard {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
     private static final String TAG = CouponPrivilegeVo.class.getSimpleName();
 
     private TradePrivilege tradePrivilege;
 
-    /**
-     * 优惠拓展信息
-     */
+
     private TradePrivilegeExtra tradePrivilegeExtra;
 
     private boolean actived = false;
-    // ***********************************************************
-    // *  特别注意！添加属性时要注意修改clone()方法
-    // ***********************************************************
 
-    // 以下是基础数据对象，操作过程中不会更改其属性值，所以不需要克隆
-    private Coupon coupon;
+        private Coupon coupon;
 
     private transient ShopcartItem shopcartItem;
 
-    private Long couponInfoId;// 会员的优惠券id
-
+    private Long couponInfoId;
     public TradePrivilege getTradePrivilege() {
         return tradePrivilege;
     }
@@ -77,34 +65,21 @@ public class CouponPrivilegeVo implements java.io.Serializable, NoProGuard {
         this.shopcartItem = shopcartItem;
     }
 
-    /**
-     * 如果此优惠符合规格要求则返回true
-     *
-     * @return
-     */
+
     public boolean isActived() {
         return actived;
     }
 
-    /**
-     * 设置优惠是否是激活的（符合规格要求为已激活状态）
-     *
-     * @param actived
-     */
+
     public void setActived(boolean actived) {
         this.actived = actived;
     }
 
-    //是否被核销、使用
-    public boolean isUsed() {
+        public boolean isUsed() {
         return tradePrivilegeExtra != null && tradePrivilegeExtra.getUseStatus() == PrivilegeUseStatus.USED;
     }
 
-    /**
-     * tradePrivilege.statusFlag 为 VALID 时返回true
-     *
-     * @return
-     */
+
     public boolean isValid() {
         return tradePrivilege != null && tradePrivilege.getStatusFlag() == StatusFlag.VALID;
     }

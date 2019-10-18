@@ -4,11 +4,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.bty.basemodule.pay.message.PayResp;
 
 
-/**
- * @Date： 16/12/2
- * @Description:
- * @Version: 1.0
- */
+
 public class PushPayRespEvent {
 
     private NewPushPayMent mPushPayMent;

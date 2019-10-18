@@ -11,20 +11,14 @@ import com.zhongmei.bty.data.operates.CommercialDal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class CommercialImpl extends AbstractOpeartesImpl implements CommercialDal {
 
     public CommercialImpl(ImplContext context) {
         super(context);
     }
 
-    /**
-     * 判断是否存在多个商户信息
-     *
-     * @return
-     */
+
     @Override
     public List<Long> queryAllShopIdenty() {
         List<Long> listShopIdenty = null;

@@ -11,19 +11,13 @@ import com.zhongmei.bty.commonmodule.data.operate.message.BaseRequest;
 
 import java.util.List;
 
-/**
- * 编辑预定数据
- *
- * @date 2018/7/23
- */
+
 public class BeautyBookingUpdateReq extends BaseRequest {
 
 
     public Long id;
     public String uuid;
-    //
-//    //预定类型 1正餐 2团餐 3美业
-    public Integer bookingType;
+        public Integer bookingType;
 
     public List<BookingTradeItem> bookingTradeItems;
 
@@ -33,9 +27,7 @@ public class BeautyBookingUpdateReq extends BaseRequest {
 
     public String deviceIdenty;
 
-    /**
-     * 预定人数
-     */
+
     public Integer customerNum;
 
     public Long clientUpdateTime;
@@ -45,19 +37,12 @@ public class BeautyBookingUpdateReq extends BaseRequest {
     public Integer confirmed;
 
 
-    public Integer bookingSource; //订单来源 1pos，2微信小程序
+    public Integer bookingSource;
 
-    /**
-     * 国家英文名称(为空默认中国) = countryEN
-     */
     public String nation;
-    /**
-     * 国家中文名称(为空默认中国) = countryZH
-     */
+
     public String country;
-    /**
-     * 电话国际区码(为空默认中国) = AreaCode
-     */
+
     public String nationalTelCode;
 
     public Long startTime;
@@ -77,33 +62,16 @@ public class BeautyBookingUpdateReq extends BaseRequest {
 
     private Long commercialId;
 
-    /**
-     * 预定时间，与时段的startTime一致
-     */
+
     public Long orderTime;
 
 
-//    /**
-//     * 预定人数
-//     */
-//    public Integer orderNumber;
 
-//    /**
-//     * 订单来源
-//     * @see com.zhongmei.bty.commonmodule.database.enums.BookingOrderSource 22
-//     */
-//    public Integer orderSource;
-    /**
-     * 预定单状态
-     *
-     * @see com.zhongmei.bty.commonmodule.database.enums.BookingOrderStatus -1
-     */
+
     public Integer orderStatus;
     public Integer sort;
 
-    /**
-     * 备注
-     */
+
     public String orderDesc;
 
     public String remark;
@@ -118,19 +86,14 @@ public class BeautyBookingUpdateReq extends BaseRequest {
 
     public Integer orderSource;
 
-    /**
-     * Booking对象转BeautyBookingUpdateReq对象
-     *
-     * @see Booking
-     */
+
     public void convertBookingToBookingUpdateReq(Booking booking, AuthUser user, String remark) {
 
         this.endTime = booking.getEndTime();
         this.startTime = booking.getStartTime();
         this.deviceIdenty = BaseApplication.getInstance().getDeviceIdenty();
         this.orderStatus = booking.getOrderStatus().value();
-        this.customerNum = booking.getCustomerNum(); // 默认1人
-        this.clientUpdateTime = System.currentTimeMillis();
+        this.customerNum = booking.getCustomerNum();         this.clientUpdateTime = System.currentTimeMillis();
         this.orderTime = booking.getOrderTime();
         this.confirmed = 2;
         this.commercialName = booking.getCommercialName();

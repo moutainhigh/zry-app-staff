@@ -13,11 +13,7 @@ import com.zhongmei.yunfu.context.session.auth.IAuthUser;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Date：2015年9月29日 下午2:35:59
- * @Description: TODO
- * @Version: 1.0
- */
+
 public class NormalSpinerAdapter extends BaseAdapter {
 
 

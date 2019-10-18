@@ -2,9 +2,7 @@ package com.zhongmei.yunfu.util;
 
 import java.io.Serializable;
 
-/**
- * @param <T>
- */
+
 public interface ValueEnum<T> {
 
     T value();
@@ -15,10 +13,7 @@ public interface ValueEnum<T> {
 
     void setUnknownValue(T value);
 
-    /**
-     * @param <T>
-     * @param <E>
-     */
+
     final class Helper<T> implements Serializable {
 
         public static <T> Helper<T> valueHelper(T value) {

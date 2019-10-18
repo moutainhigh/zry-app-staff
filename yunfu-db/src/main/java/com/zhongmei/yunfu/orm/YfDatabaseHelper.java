@@ -78,9 +78,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
 
- */
 public class YfDatabaseHelper extends SQLiteDatabaseHelper {
 
     private static final String TAG = YfDatabaseHelper.class.getName();
@@ -102,24 +100,19 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(Booking.class);
         tables.add(BookingTable.class);
         tables.add(BookingTradeItem.class);
-        //tables.add(BookingTradeItemUser.class);
-        tables.add(BookingSetting.class);
-        //tables.add(CommercialCustomSettings.class);
+                tables.add(BookingSetting.class);
 
-        //待处理的表
-        tables.add(Trade.class);
+                tables.add(Trade.class);
         tables.add(TradeExtra.class);
         tables.add(TradeItem.class);
         tables.add(TradeItemOperation.class);
-//        tables.add(TradeItemUser.class);
         tables.add(TradeTable.class);
         tables.add(TradeReturnInfo.class);
         tables.add(MobilePaySetting.class);
         tables.add(Payment.class);
         tables.add(PaymentItem.class);
         tables.add(PaymentItemExtra.class);
-        //tables.add(PrepareTradeRelation.class);
-        tables.add(PaymentModeShop.class);
+                tables.add(PaymentModeShop.class);
         tables.add(PaymentModeScene.class);
         tables.add(MarketPlan.class);
         tables.add(MarketDynamicCondition.class);
@@ -138,46 +131,17 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(DishCyclePeriod.class);
         tables.add(DishBrandType.class);
         tables.add(OpenTime.class);
-        //tables.add(Queue.class);
 
-        //为了不报错加的表
-        tables.add(TradeTable.class);
-        //tables.add(AuthUserPermission.class);
-        tables.add(Coupon.class);
+                tables.add(TradeTable.class);
+                tables.add(Coupon.class);
         tables.add(CustomerScoreRule.class);
         tables.add(DishProperty.class);
         tables.add(DishSetmeal.class);
         tables.add(DishSetmealGroup.class);
         tables.add(CommercialCustomSettings.class);
 
-        /*tables.add(Coupon.class);
-        tables.add(CouponRuleDish.class);
-        tables.add(Customer.class);
-        tables.add(CustomerCardTime.class);
-        tables.add(CustomerCoupon.class);
-        tables.add(CustomerExtra.class);
-        tables.add(CustomerLevelRule.class);
-        tables.add(CustomerMarketingExpanded.class);
-        tables.add(CustomerMarketingTogether.class);
-        tables.add(CustomerScoreRule.class);
-        tables.add(CustomerStored.class);
-        tables.add(CutDownCustomer.class);
-        tables.add(CutDownHistory.class);
-        tables.add(CutDownMarketing.class);
-        tables.add(ExpandedCommission.class);
-        tables.add(FlashSalesMarketing.class);
-        tables.add(MarketingExpanded.class);
-        tables.add(MarketingPutOn.class);
-        tables.add(MarketingShare.class);
-        tables.add(MarketingTogether.class);
-        tables.add(PushMessageCustomer.class);
-        tables.add(PushPlanActivity.class);
-        tables.add(PushPlanNewDish.class);*/
-        //订单
-        tables.add(CommercialArea.class); //桌台区域
-        tables.add(Tables.class);
-        //tables.add(TalentPlan.class);
-        //tables.add(TalentRole.class);
+
+                tables.add(CommercialArea.class);         tables.add(Tables.class);
 
         tables.add(TradeCustomer.class);
         tables.add(TradeUser.class);
@@ -193,7 +157,6 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(CoupRule.class);
         tables.add(CustomerSaveRule.class);
         tables.add(CustomerDishPrivilege.class);
-//        tables.add(TaskRemind.class);
         tables.add(DishTimeChargingRule.class);
 
         BeautyDbHelperUtil.initTables(tables);
@@ -204,9 +167,7 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         super(context, DATABASE_NAME, AppBuildConfig.VERSION_CODE);
     }
 
-    /**
-     * 创建SQLite数据库
-     */
+
     @Override
     public void onCreate(SQLiteDatabase sqliteDatabase, ConnectionSource connectionSource) {
         Log.i(TAG, "Creating database...");
@@ -220,9 +181,7 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         }
     }
 
-    /**
-     * 更新SQLite数据库
-     */
+
     @Override
     public void onUpgrade(SQLiteDatabase sqliteDatabase, ConnectionSource connectionSource, int oldVer, int newVer) {
         Constant.setIsNeedInit(true);

@@ -31,9 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 美业登录
- */
+
 public class BeautyCustomerCardDialogFragment extends BasicDialogFragment implements View.OnClickListener {
 
     public static final String TAG = BeautyCustomerCardDialogFragment.class.getSimpleName();
@@ -91,8 +89,7 @@ public class BeautyCustomerCardDialogFragment extends BasicDialogFragment implem
     }
 
     private void initView() {
-        // 设置布局管理器
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         linearLayoutManager.setSmoothScrollbarEnabled(true);
         mRvContent.setHasFixedSize(true);
@@ -100,8 +97,7 @@ public class BeautyCustomerCardDialogFragment extends BasicDialogFragment implem
         mRvContent.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                if (parent.getChildAdapterPosition(view) == mCards.size()) { // ji有Header不需要减一
-                    outRect.bottom = 13;
+                if (parent.getChildAdapterPosition(view) == mCards.size()) {                     outRect.bottom = 13;
                 }
                 outRect.top = 13;
             }
@@ -116,23 +112,16 @@ public class BeautyCustomerCardDialogFragment extends BasicDialogFragment implem
             @Override
             public void onCustomerListener(@NotNull CustomerResp customerNew) {
                 showChargingDialog(customerNew, null);
-//                dismiss();
             }
         });
         mRvContent.setAdapter(adapter);
     }
 
-    /**
-     * 实体卡会员充值界面
-     *
-     * @param customer 顾客信息
-     * @param ecCard   实体卡信息 , 会员充值 传 null
-     */
+
     private void showChargingDialog(CustomerResp customer, EcCardInfo ecCard) {
         CustomerChargingDialogFragment dialogFragment = new CustomerChargingDialogFragment_();
         Bundle args = new Bundle();
-        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_CARD_BEATY_MAIN);//来自顾客界面
-        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
+        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_CARD_BEATY_MAIN);        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
         if (ecCard != null) {
             args.putSerializable(CustomerChargingDialogFragment.KEY_ECCARD, ecCard);
             args.putString(CustomerChargingDialogFragment.KEY_BALANCE, ecCard.getRemainValue() != null ? ecCard.getRemainValue().toString() : "0");

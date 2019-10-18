@@ -14,9 +14,7 @@ import com.zhongmei.bty.dinner.orderdish.DishHomePageFragment;
 
 import java.util.ArrayList;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyOrderProductFragment extends DishHomePageFragment {
 
@@ -32,7 +30,6 @@ public class BeautyOrderProductFragment extends DishHomePageFragment {
 
             @Override
             public void doItemLongClick(DishVo dishVo) {
-//                myGridItemLongClicked(dishVo);
             }
 
         };
@@ -83,8 +80,7 @@ public class BeautyOrderProductFragment extends DishHomePageFragment {
     @Override
     protected int calculateGridHeight() {
         int height = super.calculateGridHeight();
-        //减去titleBar高度
-        return height - 45;
+                return height - 45;
     }
 
     protected int getQuanPopLeftWidth() {

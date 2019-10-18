@@ -6,23 +6,17 @@ import android.util.Log;
 import com.zhongmei.yunfu.ShopInfoManager;
 import com.zhongmei.yunfu.context.util.NetworkUtil;
 
-/**
- * 服务器切换manager
- * Created by demo on 2018/12/15
- */
+
 public class SwitchServerManager {
 
     private final static String TAG = SwitchServerManager.class.getSimpleName();
 
-    private final static int COUNT_TO_SWITCH_SERVER = 3;//需要切换服务器的失败次数
-
+    private final static int COUNT_TO_SWITCH_SERVER = 3;
     private static SwitchServerManager instance;
 
     private int retryFailCount = 0;
 
-    //private String serverKey = ShopInfo.SERVER_KEY;
-    private boolean isBackupSyncUrlEnabled = false; //是否启用备用的同步地址
-
+        private boolean isBackupSyncUrlEnabled = false;
     private String syncUrl;
     private String backSyncUrl;
 
@@ -49,40 +43,25 @@ public class SwitchServerManager {
         return new SyncRetryPolicy();
     }
 
-    /**
-     * 判断volley返回的error是否为服务器类型错误
-     *
-     * @param error
-     * @return
-     */
+
     public boolean isServerError(Exception error) {
-//        return error instanceof NetworkError || error instanceof ServerError || error instanceof TimeoutError;
-        return true;//目前统一认为是服务器异常
-    }
+        return true;    }
 
     public boolean isServerException(Exception e) {
-//        return e instanceof ConnectException || e instanceof SocketException || e instanceof SocketTimeoutException
-//                || e instanceof IOException;
-        return true;//目前统一认为是服务器异常
-    }
+        return true;    }
 
-    /**
-     * 同步服务器失败次数＋1
-     */
+
     public synchronized void retryFailCount() {
         retryFailCount++;
         Log.i(TAG, "连接失败次数：" + retryFailCount);
         if (retryFailCount >= COUNT_TO_SWITCH_SERVER) {
             isBackupSyncUrlEnabled = !isBackupSyncUrlEnabled;
 
-            //切换后，将失败次数置为0
-            reset();
+                        reset();
         }
     }
 
-    /**
-     * 重置服务器失败次数
-     */
+
     public synchronized void reset() {
         retryFailCount = 0;
     }
@@ -93,15 +72,6 @@ public class SwitchServerManager {
 
     public String getServerKey() {
         String serverKey = ShopInfoManager.REMOTE_SERVER_HOST;
-//        String serverKey = getAddress(syncUrl, backSyncUrl);
-//        //补齐https前缀
-//        if (!TextUtils.isEmpty(serverKey)) {//add 20171204
-//            if (!serverKey.startsWith("http")) {
-//                serverKey = "https://" + serverKey;
-//            } else {
-//                serverKey = serverKey.replace("http://", "https://");
-//            }
-//        }
         return serverKey;
     }
 
@@ -114,14 +84,9 @@ public class SwitchServerManager {
     }
 
     static public class SyncRetryPolicy {
-        public static final int DEFAULT_MAX_RETRIES = 3; //重试次数
-        private int retryCount = 0;
+        public static final int DEFAULT_MAX_RETRIES = 3;         private int retryCount = 0;
 
-        /**
-         * 是否重试
-         *
-         * @return
-         */
+
         public synchronized void retry(Exception error) throws Exception {
             if (NetworkUtil.isNetworkConnected()) {
                 retryCount++;

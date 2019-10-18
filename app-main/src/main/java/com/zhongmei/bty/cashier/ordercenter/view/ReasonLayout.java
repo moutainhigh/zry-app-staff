@@ -36,10 +36,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * @date 2015/12/14
- * @description 显示reason部分
- */
+
 @SuppressWarnings("UnnecessaryUnboxing")
 public class ReasonLayout extends LinearLayout implements OnFinishComposingListener {
     private static final String TAG = ReasonLayout.class.getName();
@@ -63,16 +60,13 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
         super(context);
     }
 
-    // 在xml里面初始化
-    public ReasonLayout(Context context, AttributeSet attrs) {
+        public ReasonLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         initUtil();
         mContext = context;
         LayoutInflater inflater = LayoutInflater.from(context);
-        //View view = inflater.inflate(R.layout.order_center_operate_dialog_fragment_reason, null);
-        main_content = (LinearLayout) inflater.inflate(R.layout.order_center_operate_dialog_fragment_reason, null);
-        //radioGroup = (RadioGroup) view.findViewById(R.id.radioGroup);
-        listView = (ListView) main_content.findViewById(R.id.listView);
+                main_content = (LinearLayout) inflater.inflate(R.layout.order_center_operate_dialog_fragment_reason, null);
+                listView = (ListView) main_content.findViewById(R.id.listView);
         user_defined_text = (MyEditText) main_content.findViewById(R.id.user_defined_text);
         user_defined_text.setOnClickListener(new OnClickListener() {
             @Override
@@ -80,22 +74,15 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
                 if (adapter != null || listView.getCount() != 0) {
                     setCurrentPosion(-1);
                 }
-                user_defined_text.setFocusable(true);//设置输入框可聚集
-                user_defined_text.setFocusableInTouchMode(true);//设置触摸聚焦
-                user_defined_text.requestFocus();//请求焦点
-                user_defined_text.findFocus();//获取焦点
-                mInputMethodManager.showSoftInput(user_defined_text, InputMethodManager.SHOW_FORCED);// 显示输入法
-            }
+                user_defined_text.setFocusable(true);                user_defined_text.setFocusableInTouchMode(true);                user_defined_text.requestFocus();                user_defined_text.findFocus();                mInputMethodManager.showSoftInput(user_defined_text, InputMethodManager.SHOW_FORCED);            }
         });
         title = (TextView) main_content.findViewById(R.id.title);
         addView(main_content);
         reasonList = new ArrayList<ReasonSetting>();
-        //setUserDefinedTextListener();
-    }
+            }
 
     private void initUtil() {
-        //初始化输入法
-        mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                mInputMethodManager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     public ReasonLayout(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -110,16 +97,12 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
     public void setTypeAndStart(int source, int type) {
         mCurrentSource = source;
         mCurrentType = type;
-		/*if(mCurrentType == ReasonType.TRADE_REPEATED.value().intValue()){
-			//main_content.removeView(title);
-		}*/
+
         this.setTitle(chooseTitle());
         startAsyncTask();
     }
 
-    /**
-     * 隐藏自定义输入理由
-     */
+
     public void setDefinedGone() {
         if (user_defined_text != null) {
             user_defined_text.setVisibility(View.GONE);
@@ -128,11 +111,9 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
 
     public void finishComposing() {
         Log.d(TAG, "finishComposing");
-//		clearUserDifinedFocus();
         user_defined_text.setFocusable(true);
         user_defined_text.setFocusableInTouchMode(true);
-        //setUserDefinedTextListener();
-    }
+            }
 
     public void setScrollView(ObservableScrollView scrollView) {
         this.scrollView = scrollView;
@@ -155,24 +136,7 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
         listView.getLocalVisibleRect(rect);
         return rect.bottom;
     }
-	/*private void setUserDefinedTextListener(){
-		user_defined_text.setOnFocusChangeListener(new OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				Log.d(TAG, "hasFocus:"+hasFocus);
-				if(hasFocus && adapter != null){
-					setCurrentPosion(-1);
-					Log.d(TAG, "srollLocation:"+srollLocation);
-//					scrollView.smoothScrollTo(0, getListviewY());
-				}else{
-					Log.d(TAG, "srollBeforeLocation:"+srollBeforeLocation);
-//					scrollView.smoothScrollTo(0, srollBeforeLocation);
-				}
-			}
-		});
-		user_defined_text.setOnFinishComposingListener(this);
-		clearUserDifinedFocus();
-	}*/
+
 
     private void startAsyncTask() {
         reasonList.clear();
@@ -194,8 +158,7 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
 
     private List<ReasonSetting> queryReason(ReasonSource source, ReasonType type) {
         if (source == ReasonSource.KOUBEI) {
-            // 商户拒绝接单 商户反结账 商户反结账
-            if (type == ReasonType.TRADE_REFUSED ||
+                        if (type == ReasonType.TRADE_REFUSED ||
                     type == ReasonType.TRADE_REPEATED ||
                     type == ReasonType.TRADE_RETURNED ||
                     type == ReasonType.REFUSE_RETURN) {
@@ -227,13 +190,6 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
 
             @Override
             public int compare(ReasonSetting lhs, ReasonSetting rhs) {
-//				initSortKey(lhs);
-//				initSortKey(rhs);
-//				if (ReasonSetting.USERDEFINED_ENABLE.equals(lhs)) {
-//					return 1;
-//				} else if (ReasonSetting.USERDEFINED_ENABLE.equals(rhs)) {
-//					return -1;
-//				}
 
                 if (lhs.getSort() > rhs.getSort()) {
                     return 1;
@@ -245,12 +201,6 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
 
             }
 
-//			private void initSortKey(ReasonSetting lhs) {
-//				if (TextUtils.isEmpty(lhs
-//						.get(ReasonSetting.COLUMN_ALL_REASON_SORT_KEY))) {
-//					lhs.set(ReasonSetting.COLUMN_ALL_REASON_SORT_KEY, "0");
-//				}
-//			}
         });
     }
 
@@ -264,18 +214,14 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
     private void resetDialogUI() {
         if (isReasonDataValid()) {
             sort();
-            //initRadioGroup();
-            initListview();
+                        initListview();
         } else {
-            //show();
-            main_content.removeView(listView);
+                        main_content.removeView(listView);
         }
     }
 
     private void clearUserDifinedFocus() {
-//		user_defined_text.clearFocus();
-		/*InputMethodManager imm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(user_defined_text.getWindowToken(), 0);*/
+
     }
 
     private void setCurrentPosion(int position) {
@@ -293,49 +239,25 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
                 user_defined_text.setHint(getResources().getString(R.string.reason_type_self_define_reason));
                 user_defined_text.setFocusable(false);
                 if (mInputMethodManager.isActive()) {
-                    mInputMethodManager.hideSoftInputFromWindow(user_defined_text.getWindowToken(), 0);// 隐藏输入法
-                }
-                //clearUserDifinedFocus();
-            }
+                    mInputMethodManager.hideSoftInputFromWindow(user_defined_text.getWindowToken(), 0);                }
+                            }
         });
         setListViewHeightBasedOnChildren(listView);
     }
 
     public static void setListViewHeightBasedOnChildren(ListView listView) {
-        // 获取ListView对应的Adapter
-        ListAdapter listAdapter = listView.getAdapter();
+                ListAdapter listAdapter = listView.getAdapter();
         if (listAdapter == null) {
             return;
         }
         int totalHeight = 0;
-        for (int i = 0; i < listAdapter.getCount(); i++) { // listAdapter.getCount()返回数据项的数目
-            View listItem = listAdapter.getView(i, null, listView);
-            listItem.measure(0, 0); // 计算子项View 的宽高
-            totalHeight += listItem.getMeasuredHeight(); // 统计所有子项的总高度
-        }
+        for (int i = 0; i < listAdapter.getCount(); i++) {             View listItem = listAdapter.getView(i, null, listView);
+            listItem.measure(0, 0);             totalHeight += listItem.getMeasuredHeight();         }
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         params.height = totalHeight
                 + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
-        // listView.getDividerHeight()获取子项间分隔符占用的高度
-        // params.height最后得到整个ListView完整显示需要的高度
-        listView.setLayoutParams(params);
+                        listView.setLayoutParams(params);
     }
-//	private void setListViewHeightBasedOnChildren(ListView listView) {
-//		ListAdapter listAdapter = listView.getAdapter();
-//		if (listAdapter == null) {
-//			return;
-//		}
-//		int singleHeight = 0;
-//		for (int i = 0; i < listAdapter.getCount(); i++) {
-//			View listItem = listAdapter.getView(i, null, listView);
-//			listItem.measure(0, 0);
-//			singleHeight = listItem.getMeasuredHeight();
-//			break;
-//		}
-//		Log.d(TAG, "singleHeight-->"+singleHeight);
-//		listView.setLayoutParams(new LayoutParams(android.view.ViewGroup.LayoutParams.MATCH_PARENT,
-//				66 * listAdapter.getCount()));
-//	}
 
     private int chargeId() {
         int id = 0;
@@ -420,13 +342,8 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
     public Reason getReason() {
         ReasonSetting reason = null;
         boolean isSelfDifinedReason = false;
-        //加入自定义reason
-        ReasonSetting userDefinedReason = new ReasonSetting();
-//		userDefinedReason.setReasonType(mCurrentType);
-//		userDefinedReason.setRejectReason(user_defined_text.getText().toString());
-        //reasonList.add(userDefinedReason);
-        // 如果数据有效
-        if (isReasonDataValid() && adapter != null && adapter.getCurrentCheckedItem() != -1 && reasonList.size() > 0) {
+                ReasonSetting userDefinedReason = new ReasonSetting();
+                        if (isReasonDataValid() && adapter != null && adapter.getCurrentCheckedItem() != -1 && reasonList.size() > 0) {
             reason = (ReasonSetting) adapter.getItem(adapter.getCurrentCheckedItem());
         } else {
             if (adapter != null && adapter.getCurrentCheckedItem() == -1
@@ -434,8 +351,7 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
                     && reasonList.size() > 0
                     && !user_defined_text.getText().toString()
                     .equals(mContext.getResources().getString(R.string.reason_type_self_define_reason))) {
-                //读取自定义resaon
-                reason = userDefinedReason;
+                                reason = userDefinedReason;
                 isSelfDifinedReason = true;
             } else {
                 if (adapter == null
@@ -459,8 +375,7 @@ public class ReasonLayout extends LinearLayout implements OnFinishComposingListe
             resultReason.setContent(user_defined_text.getText().toString());
             resultReason.setContentCode("OTHER_REASON");
         } else {
-            //resultReason.setId(reason.getType().value().longValue());
-            resultReason.setId(reason.getId());
+                        resultReason.setId(reason.getId());
             resultReason.setContent(reason.getContent());
             resultReason.setContentCode(reason.getContentCode());
         }

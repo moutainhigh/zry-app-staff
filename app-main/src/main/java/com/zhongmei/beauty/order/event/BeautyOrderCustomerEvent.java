@@ -10,14 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-/**
- * 开单登录 eventbus
- * <p>
- * LOGIN 的时候有Customer对象
- * EXIT 的时候没有Customer对象
- * <p>
- * Created by demo on 2018/12/15
- */
+
 public class BeautyOrderCustomerEvent {
 
     @IntDef({EventFlag.LOGIN,

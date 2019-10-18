@@ -10,9 +10,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 
 import java.math.BigDecimal;
 
-/**
- * Created by dingzb on 2019/6/5.
- */
+
 @DatabaseTable(tableName = "customer_dish_privilege")
 public class CustomerDishPrivilege extends CrmBasicEntityBase {
 
@@ -38,27 +36,19 @@ public class CustomerDishPrivilege extends CrmBasicEntityBase {
 
     }
 
-    /**
-     * 会员等级id  1～6 表示六个等级
-     */
+
     @DatabaseField(columnName = "level_id")
     private int levelId;
 
-    /**
-     * 商品id
-     */
+
     @DatabaseField(columnName = "dish_id")
     private Long dishId;
 
-    /**
-     * 优惠方式 1：折扣 2：让价  3：特价
-     */
+
     @DatabaseField(columnName = "privilege_type")
     private Integer privilegeType;
 
-    /**
-     * 优惠金额
-     */
+
     @DatabaseField(columnName = "privilege_value")
     private BigDecimal privilegeValue;
 

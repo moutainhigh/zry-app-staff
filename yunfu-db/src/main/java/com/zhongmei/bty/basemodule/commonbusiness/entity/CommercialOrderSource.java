@@ -4,62 +4,40 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * 订单来源
- */
+
 @DatabaseTable(tableName = "commercial_order_source")
 public class CommercialOrderSource extends EntityBase<Long> {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         String id = "id";
 
-        /**
-         * commercial_id
-         */
+
         String commercialId = "commercial_id";
 
-        /**
-         * brand_id
-         */
+
         String brandId = "brand_id";
 
-        /**
-         * is_delete
-         */
+
         String source = "source";
 
-        /**
-         * is_delete
-         */
+
         String isDelete = "is_delete";
 
-        /**
-         * creator_id
-         */
+
         String creatorId = "creator_id";
 
-        /**
-         * updateTime
-         */
+
         String updateTime = "update_ime";
 
-        /**
-         * create_time
-         */
+
         String createTime = "create_time";
 
-        /**
-         * updater_d
-         */
+
         String updaterId = "updater_d";
 
     }
@@ -67,9 +45,7 @@ public class CommercialOrderSource extends EntityBase<Long> {
     @DatabaseField(columnName = "id", id = true, canBeNull = false)
     private Long id;
 
-    /**
-     * 商户id
-     */
+
     @DatabaseField(columnName = "commercial_id")
     private Long commercialId;
 
@@ -84,15 +60,11 @@ public class CommercialOrderSource extends EntityBase<Long> {
     @DatabaseField(columnName = "brand_id")
     private Long brandId;
 
-    /**
-     * 是否删除(0 否; -1 是)
-     */
+
     @DatabaseField(columnName = "is_delete", canBeNull = false)
     private Integer isDelete;
 
-    /**
-     * 来源
-     */
+
     @DatabaseField(columnName = "source")
     private Integer source;
 

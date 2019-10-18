@@ -18,9 +18,7 @@ import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.viewgroup_property_item)
 public class PropertyItemView extends LinearLayout {
 
@@ -28,14 +26,11 @@ public class PropertyItemView extends LinearLayout {
     protected TextView tv_title;
 
     @ViewById(R.id.tv_property)
-    protected TextView tv_property;//属性值
-
+    protected TextView tv_property;
     @ViewById(R.id.iv_icon)
-    protected ImageView iv_icon;//右边图标
-
+    protected ImageView iv_icon;
     @ViewById(R.id.view_line)
-    protected View view_horizontal_line;//分隔线
-
+    protected View view_horizontal_line;
 
     private String titleText = "";
     private int devideVisiable = View.VISIBLE;

@@ -11,18 +11,11 @@ import com.zhongmei.yunfu.db.enums.InvalidType;
 
 import java.math.BigDecimal;
 
-/**
- * @Description: item 封装购正餐物车展示的数据
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
-public class DishDataItem {
-    // dishitem是单菜／套餐外壳时，是其本身；dishitem是子菜时，是其对应的套餐外壳
-    private IShopcartItem item;
 
-    // item对应菜品
-    private IShopcartItemBase base;
+public class DishDataItem {
+        private IShopcartItem item;
+
+        private IShopcartItemBase base;
 
     private ItemType type;
 
@@ -30,52 +23,30 @@ public class DishDataItem {
 
     private DishDataItem relateItem;
 
-    private double value;// 金额
+    private double value;
+    private String name;        private String dishDesc;
 
-    private String name;// 名字
-    //菜品相关的描述信息
-    private String dishDesc;
-
-    private Integer count = 0;//数量
-
+    private Integer count = 0;
     private IOrderProperty property;
 
-    private String standText;//规格
+    private String standText;
+    private CouponPrivilegeVo couponPrivilegeVo;
+    private IntegralCashPrivilegeVo integralCashPrivilegeVo;
+    private WeiXinCouponsVo weiXinCouponsVo;
+    private boolean isEnabled = false;
+    private boolean isDishServing = false;
+    private boolean isMemberDiscount = false;
+    private boolean canEditNumber = false;
+    private BigDecimal[] discountPrices;
+    private String discountReason;
+    private String tradeReason;
+        private ExtraCharge extraCharge;
 
-    private CouponPrivilegeVo couponPrivilegeVo;// 优惠劵信息
-
-    private IntegralCashPrivilegeVo integralCashPrivilegeVo;// 积分抵现
-
-    private WeiXinCouponsVo weiXinCouponsVo;// 微信卡券
-
-    private boolean isEnabled = false;// 是否有效
-
-    private boolean isDishServing = false;// 是否上菜 用于点选判断
-
-    private boolean isMemberDiscount = false;// 是否针对会员价或者会员折扣
-
-    private boolean canEditNumber = false; //是否可编辑数量
-
-    private BigDecimal[] discountPrices;// 分别显示打折商品和不能打折商品的总价
-
-    private String discountReason;//单品折扣理由
-
-    private String tradeReason;// 订单折扣理由
-
-    // 保存附加费对象
-    private ExtraCharge extraCharge;
-
-    private DishCheckStatus checkStatus = DishCheckStatus.INVALIATE_CHECK;// 菜品操作选择状态
-
-    private String tradePlanActivityUuid;// 营销活动uuid
-
-    private boolean needTopLine = true;//展示时是否需要topline，默认为true
-    //是否选中
-    private boolean isSelected = false;
-    //
-    private Long dishTypeId;
-    //是否是分组名称
-    private boolean isCategory = false;
+    private DishCheckStatus checkStatus = DishCheckStatus.INVALIATE_CHECK;
+    private String tradePlanActivityUuid;
+    private boolean needTopLine = true;        private boolean isSelected = false;
+        private Long dishTypeId;
+        private boolean isCategory = false;
 
     private boolean isPaid = false;
 
@@ -83,10 +54,8 @@ public class DishDataItem {
 
     private TradeUser tradeUser;
 
-    private String serverTime;//带单位X分钟
-
-    private String chargingRule;//计算规则
-
+    private String serverTime;
+    private String chargingRule;
     public String getServerTime() {
         return serverTime;
     }
@@ -207,11 +176,7 @@ public class DishDataItem {
         this.relateItem = relateItem;
     }
 
-    /**
-     * 是否改菜的原菜
-     *
-     * @return
-     */
+
     public boolean isModifyDishItem() {
         if ((type == ItemType.SINGLE || type == ItemType.COMBO)
                 && base != null && base.getInvalidType() == InvalidType.MODIFY_DISH) {
@@ -221,11 +186,7 @@ public class DishDataItem {
         }
     }
 
-    /**
-     * 是否退菜的原菜
-     *
-     * @return
-     */
+
     public boolean isReturnDishItem() {
         if ((type == ItemType.SINGLE || type == ItemType.COMBO)
                 && base != null && base.getInvalidType() == InvalidType.RETURN_QTY) {

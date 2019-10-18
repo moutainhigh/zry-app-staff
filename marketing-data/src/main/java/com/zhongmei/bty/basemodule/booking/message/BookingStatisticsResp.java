@@ -2,80 +2,52 @@ package com.zhongmei.bty.basemodule.booking.message;
 
 import java.math.BigDecimal;
 
-/**
- * 会员统计信息
- */
+
 public class BookingStatisticsResp {
 
-    /**
-     * 消费总金额
-     */
+
 
     private BigDecimal realConsumeCount;
 
-    /**
-     * 通话次数
-     */
+
 
     private Integer phoneCount;
 
-    /**
-     * 人均消费
-     */
+
 
     private BigDecimal consumPerCount;
 
-    /**
-     * 排队次数
-     */
+
 
     private Integer queueCount;
 
-    /**
-     * 排队入场数
-     */
+
 
     private Integer queueEnterCount;
 
-    /**
-     * 外卖次数
-     */
+
 
     private Integer takeawayCount;
 
-    /**
-     * 预订次数
-     */
+
     private Integer bookingCount;
 
-    /**
-     * 取消预订次数
-     */
+
     private Integer cancelCount;
 
-    /**
-     * 逾期未到店次数
-     */
+
     private Integer overdueCount;
 
-    /**
-     * 到店次数
-     */
+
     private Integer arriveCount;
 
-    /**
-     * 会员余额
-     */
+
     private BigDecimal memberBalance;
 
-    /**
-     * 可用积分
-     */
+
     private BigDecimal memberIntegral;
 
-    /**
-     * 可用优惠券
-     */
+
     private BigDecimal memberCoupons;
 
     public BigDecimal getRealConsumeCount() {

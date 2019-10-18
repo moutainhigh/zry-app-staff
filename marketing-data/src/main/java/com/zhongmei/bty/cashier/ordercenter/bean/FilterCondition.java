@@ -12,46 +12,31 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.util.List;
 
-/**
- * 订单中心订单列表过滤条件
- */
 
 public class FilterCondition {
-    //筛选条件：配送类型
     private List<DeliveryType> deliveryTypes;
 
-    //筛选条件：订单来源
     private List<SourceId> sourceIds;
-    //筛选条件: 配送状态(新)
     private List<DeliveryOrderStatus> deliveryOrderStatuses;
 
     private List<DeliveryOrderSubStatus> deliveryOrderSubStatuses;
 
-    //特殊过滤条件：配送状态用于快餐清账
     private DeliveryStatus deliveryStatus;
 
-    //特殊过滤条件：是否绑定外卖员
     private boolean hasBindDeliveryUser;
 
-    //特殊过滤条件：是否排除POS来源的订单
     private boolean excludePosOrder;
 
-    //特殊过滤条件：支付来源用于清账
     private PaySource paySource;
 
-    //特殊过滤条件：支付方式用于清账
     private PayModeId payModeId;
 
-    //特殊过滤条件：最后修改此记录的用户名字
     private long updatorId;
 
-    //特殊过滤条件：交易状态用于正餐清账筛选
     private List<TradeStatus> tradeStatus;
 
-    //特殊过滤条件:配送员信息
 
     private Object[] deliveryInfo;
-    //特殊过滤条件:是否展示离线订单
     private boolean excludeOfflineOrder;
 
     public Object[] getDeliveryInfo() {
@@ -158,11 +143,7 @@ public class FilterCondition {
         this.excludeOfflineOrder = excludeOfflineOrder;
     }
 
-    /**
-     * 判断是否是清账模式
-     *
-     * @return true：处于清账模式；反之为false
-     */
+
     public boolean isCleanMode() {
         return (DeliveryStatus.REAL_DELIVERY == deliveryStatus
                 || (Utils.isNotEmpty(tradeStatus) && tradeStatus.contains(TradeStatus.SQUAREUP)))

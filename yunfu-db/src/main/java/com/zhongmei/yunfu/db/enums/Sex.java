@@ -2,29 +2,17 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 性别
- */
+
 public enum Sex implements ValueEnum<Integer> {
 
-    /**
-     * 男
-     */
+
     MALE(1),
-    /**
-     * 女
-     */
+
     FEMALE(0),
-    /**
-     * 未知
-     */
+
     UNKNOW(-1),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

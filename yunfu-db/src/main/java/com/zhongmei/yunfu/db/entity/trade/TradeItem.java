@@ -18,193 +18,118 @@ import com.zhongmei.yunfu.db.enums.ServingStatus;
 
 import java.math.BigDecimal;
 
-/**
- * TradeItem is a ORMLite bean type. Corresponds to the
- * database table "trade_item"
- */
+
 @DatabaseTable(tableName = "trade_item")
 public class TradeItem extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_item"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * actual_amount
-         */
+
         public static final String actualAmount = "actual_amount";
 
-        /**
-         * amount
-         */
+
         public static final String amount = "amount";
 
-        /**
-         * batch_no
-         */
+
         public static final String batchNo = "batch_no";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * dish_setmeal_group_id
-         */
+
         public static final String dishSetmealGroupId = "dish_setmeal_group_id";
 
-        /**
-         * enable_whole_privilege
-         */
+
         public static final String enableWholePrivilege = "enable_whole_privilege";
 
-        /**
-         * feeds_amount
-         */
+
         public static final String feedsAmount = "feeds_amount";
 
-        /**
-         * invalid_type
-         */
+
         public static final String invalidType = "invalid_type";
 
-        /**
-         * is_change_price
-         */
+
         public static final String isChangePrice = "is_change_price";
 
-        /**
-         * issue_status
-         */
+
         public static final String issueStatus = "issue_status";
 
-        /**
-         * parent_id
-         */
+
         public static final String parentId = "parent_id";
 
-        /**
-         * parent_uuid
-         */
+
         public static final String parentUuid = "parent_uuid";
 
-        /**
-         * price
-         */
+
         public static final String price = "price";
 
-        /**
-         * property_amount
-         */
+
         public static final String propertyAmount = "property_amount";
 
-        /**
-         * quantity
-         */
+
         public static final String quantity = "quantity";
 
-        /**
-         * relate_trade_Item_id
-         */
+
         public static final String relateTradeItemId = "relate_trade_Item_id";
 
-        /**
-         * relate_trade_Item_uuid
-         */
+
         public static final String relateTradeItemUuid = "relate_trade_Item_uuid";
 
-        /**
-         * return_quantity
-         */
+
         public static final String returnQuantity = "return_quantity";
 
-        /**
-         * serving_status
-         */
+
         public static final String servingStatus = "serving_status";
 
-        /**
-         * sku_name
-         */
+
         public static final String skuName = "sku_name";
 
-        /**
-         * sku_id
-         */
+
         public static final String skuId = "sku_id";
 
-        /**
-         * sku_uuid
-         */
+
         public static final String skuUuid = "sku_uuid";
 
-        /**
-         * sort
-         */
+
         public static final String sort = "sort";
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * trade_memo
-         */
+
         public static final String tradeMemo = "trade_memo";
 
-        /**
-         * trade_table_id
-         */
+
         public static final String tradeTableId = "trade_table_id";
 
-        /**
-         * trade_table_uuid
-         */
+
         public static final String tradeTableUuid = "trade_table_uuid";
 
-        /**
-         * trade_uuid
-         */
+
         public static final String tradeUuid = "trade_uuid";
 
-        /**
-         * type
-         */
+
         public static final String type = "type";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * sale_type
-         */
+
         public static final String saleType = "sale_type";
 
-        /**
-         * unit_name
-         */
+
         public static final String unitName = "unit_name";
 
-        /**
-         * guest_printed
-         */
+
         public static final String guestPrinted = "guest_printed";
     }
 
@@ -313,9 +238,7 @@ public class TradeItem extends DataEntityBase implements ICreator, IUpdator {
     @DatabaseField(columnName = "guest_printed")
     private Integer guestPrinted = GuestPrinted.UNPRINT.value();
 
-    private int itemSource = 1;//1：下单，2：加菜,该字段仅表示是否加菜，目前仅KDS在使用
-    //联台批量点菜使用
-    private Long batchId;
+    private int itemSource = 1;        private Long batchId;
 
     public java.math.BigDecimal getActualAmount() {
         return actualAmount;

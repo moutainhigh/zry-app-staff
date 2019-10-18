@@ -2,41 +2,23 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum PayType implements ValueEnum<Integer> {
 
-    /**
-     * 网页
-     */
+
     WEB(1),
-    /**
-     * 主扫。生成二维码给顾客扫
-     */
+
     QCODE(2),
-    /**
-     * 被扫。扫顾客提供的条码
-     */
+
     SCAN(3),
 
-    /**
-     * APP
-     */
+
     APP(4),
 
-    /**
-     * 快捷支付
-     */
+
     QUICK_PAY(99),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

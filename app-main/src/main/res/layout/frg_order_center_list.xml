@@ -141,18 +141,18 @@
                 android:layout_weight="1"
                 android:paddingBottom="10dp"
                 android:paddingLeft="14dp"
-                android:paddingTop="10dp"
-                android:visibility="gone">
+                android:paddingTop="10dp">
                 <!--此处为了让显示和隐藏搜索右侧筛选无抖动,所以嵌套了一层-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:orientation="horizontal"
                     android:background="@drawable/order_center_search_bg">
 
                     <TextView
                         android:id="@+id/order_center_search_type"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:layout_height="45dp"
                         android:drawablePadding="5dp"
                         android:drawableRight="@drawable/ordercenter_searchtype_arrow"
                         android:gravity="center"
@@ -179,7 +179,7 @@
                         android:maxLines="1"
                         android:padding="3dp"
                         android:textColor="@color/black"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
             </LinearLayout>
 

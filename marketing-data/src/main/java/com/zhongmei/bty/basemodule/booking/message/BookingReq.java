@@ -8,13 +8,9 @@ import com.zhongmei.yunfu.db.enums.BookingOrderStatus;
 import com.zhongmei.yunfu.db.enums.Sex;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * 封装预订创建或修改请求
- */
+
 public class BookingReq {
-    /**
-     * 是否删除
-     */
+
     private int deleted;
 
     private String serverId;
@@ -23,156 +19,96 @@ public class BookingReq {
 
     private Long localModifyDateTime;
 
-    /**
-     * 订单id 可以为空
-     */
+
     private Long orderID;
 
     private Long commercialId;
 
-    /**
-     * 本地客户表示
-     */
+
     private Long customerLocalID;
 
-    /**
-     * 客户名称
-     */
+
     private String commercialName;
 
-    /**
-     * 客户分组
-     */
+
     private String commercialGroup;
 
-    /**
-     * 客户电话
-     */
+
     private String commercialPhone;
 
-    /**
-     * 预订时间
-     */
+
     private Long orderTime;
 
-    /**
-     * 预订人数
-     */
+
     private int orderNumber;
 
-    /**
-     * 订单来源
-     */
+
     private Integer bookingSource;
 
-    /**
-     * 订单状态
-     */
+
     private Integer orderStatus;
 
-    /**
-     * 到店时间
-     */
+
     private String shopArriveTime;
 
-    /**
-     * 离店时间
-     */
+
     private String shopLeaveTime;
 
-    /**
-     * 消费标准
-     */
+
     private String consumeStandard;
 
-    /**
-     * 代订人
-     */
+
     private String innerOrderPerson;
 
-    /**
-     * 经手人
-     */
+
     private String creatorID;
 
-    /**
-     * 性别
-     */
+
     private Integer commercialGender;
 
-    /**
-     * 备注
-     */
+
     private String memo;
 
-    /**
-     * 实际消费金额
-     */
+
     private BigDecimal realConsume;
 
-    /**
-     * 包厢优先
-     */
+
     private int boxFirst;
 
-    /**
-     * 实际消费操作员
-     */
+
     private String realConsumeUser;
 
-    /**
-     * 到店操作员
-     */
+
     private String shopArriveUser;
 
-    /**
-     * 离店操作员
-     */
+
     private String shopLeaveUser;
 
-    /**
-     * 取消操作员
-     */
+
     private String cancelOrderUser;
 
-    /**
-     * 实际消费金额修改时间
-     */
+
     private String realConsumeTime;
 
-    /**
-     * 取消预订操作时间
-     */
+
     private String cancelOrderTime;
 
-    /**
-     * 客户唯一标识 uuid
-     */
+
     private String customerID;
 
-    /**
-     * 时段uuid
-     */
+
     private String periodServerId;
 
-    /**
-     * 客户uuid
-     */
+
     private String customerSynflag;
 
-    /**
-     * 拒绝理由
-     */
+
     private String rr;
 
-    /**
-     * 是否重点预订
-     */
+
     private Integer isImportant;
 
-    /**
-     * 环境喜好
-     */
+
     private String envFavorite;
 
     private List<BookingTableReq> bookingTableList;

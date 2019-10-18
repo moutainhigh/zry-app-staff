@@ -68,13 +68,6 @@ public class CouponDalImpl extends AbstractOpeartesImpl implements CouponDal {
                 Dao<Coupon, Long> couponDao = helper.getDao(Coupon.class);
                 vo.setCoupon(couponDao.queryForId(couponInfo.getId()));
 
-//				Dao<CoupRule, Long> ruledao = helper.getDao(CoupRule.class);
-//
-//				QueryBuilder<CoupRule, Long> qb = ruledao.queryBuilder();
-//
-//				qb.where().eq(CoupRule.$.couponId, couponInfo.getId());
-//
-////				vo.setCoupRules(qb.orderBy(CoupRule.$.id, true).query());
             } finally {
                 DBHelperManager.releaseHelper(helper);
             }

@@ -12,9 +12,7 @@ import com.zhongmei.yunfu.resp.ResponseObject;
 import com.zhongmei.yunfu.resp.UserActionEvent;
 import com.zhongmei.yunfu.util.ToastUtil;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AsyncBatchModifyResponseListener extends EventResponseListener<TradeResp> implements AsyncResponseListener<TradeResp> {
 
@@ -22,7 +20,6 @@ public class AsyncBatchModifyResponseListener extends EventResponseListener<Trad
 
     protected AsyncHttpRecord asyncRec;
 
-    //public DinnerModifyPrintBean printBean;
 
     @Override
     public AsyncHttpRecord getAsyncRec() {
@@ -48,9 +45,7 @@ public class AsyncBatchModifyResponseListener extends EventResponseListener<Trad
             switch (response.getStatusCode()) {
                 case ResponseObject.OK:
                     if (asyncRec != null) {
-                        //PRTPrintOperator operator = new PRTPrintOperator();
-                        //operator.printUnionMainTradeModifyTicket(asyncRec.getPrintBeanJson());
-                        AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHANGE_ORDER, asyncRec.getTradeId(), asyncRec.getTradeUuId(), asyncRec.getTradeUpdateTime());
+                                                                        AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHANGE_ORDER, asyncRec.getTradeId(), asyncRec.getTradeUuId(), asyncRec.getTradeUpdateTime());
                     }
                     break;
             }

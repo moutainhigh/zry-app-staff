@@ -18,9 +18,7 @@ import java.util.List;
 
 public class EcCard implements Serializable {
 
-    /**
-     * @date：2016-3-21 下午3:14:52
-     */
+
     private static final long serialVersionUID = 1L;
 
     private static final String TAG = EcCard.class.getSimpleName();
@@ -93,11 +91,8 @@ public class EcCard implements Serializable {
 
     private CustomerV5 customer;
 
-    private EctempAccount ectempAccount;//临时卡信息
+    private EctempAccount ectempAccount;
 
-    /**
-     * 卡是否有储值权限
-     */
     private Integer rightStatus;
 
     private BigDecimal remainValue;
@@ -422,11 +417,7 @@ public class EcCard implements Serializable {
         }
     }
 
-    /**
-     * 获取 EcCardInfo 卡信息
-     *
-     * @return
-     */
+
     public EcCardInfo getEcCardInfo() {
         EcCardInfo info = new EcCardInfo();
         info.setCardNum(this.cardNum);

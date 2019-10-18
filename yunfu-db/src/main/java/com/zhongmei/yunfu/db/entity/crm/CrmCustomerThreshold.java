@@ -8,29 +8,19 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.enums.Bool;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * @Date： 2016/11/30
- * @Description:品牌客户成为 会员门槛配置
- * @Version: 1.0
- */
+
 @DatabaseTable(tableName = "crm_customer_threshold")
 public class CrmCustomerThreshold extends CrmBasicEntityBase implements ICreator, IUpdator {
 
 
-    /**
-     * The columns of table "crm_customer_threshold"
-     */
+
     public interface $ extends CrmBasicEntityBase.$ {
 
-        /**
-         * is_open
-         */
+
         public static final String isOpen = "is_open";
 
 
-        /**
-         * customer_threshold_type
-         */
+
         public static final String customerThreSholdType = "customer_threshold_type";
 
     }

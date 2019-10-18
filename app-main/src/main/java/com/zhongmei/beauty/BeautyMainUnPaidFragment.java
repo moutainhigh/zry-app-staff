@@ -48,9 +48,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_main_unpaid_fragment)
 public class BeautyMainUnPaidFragment extends BasicFragment implements UnpaidTradeItemView.OnOperateListener, BeautyNotifyCache.BeautyDataListener {
 
@@ -77,8 +75,7 @@ public class BeautyMainUnPaidFragment extends BasicFragment implements UnpaidTra
         mUnpaidTradeAdapter.setOperateListener(this);
         mTradesListView.setAdapter(mUnpaidTradeAdapter);
 
-        initData();//初始化数据
-
+        initData();
     }
 
     private void initData() {
@@ -87,11 +84,7 @@ public class BeautyMainUnPaidFragment extends BasicFragment implements UnpaidTra
         mBeautyNotifyCache.startModuleCache(BeautyNotifyCache.MODULE_TRADES);
     }
 
-    /**
-     * 订单删除
-     *
-     * @param unPaidradeVo
-     */
+
     @Override
     public void tradeDelete(final UnpaidTradeVo unPaidradeVo) {
         VerifyHelper.verifyAlert(getActivity(), BeautyApplication.PERMISSION_BEAUTY_INVALID, new VerifyHelper.Callback() {
@@ -158,14 +151,10 @@ public class BeautyMainUnPaidFragment extends BasicFragment implements UnpaidTra
                         ToastUtil.showShortToast(R.string.dinner_recision_failed);
                     }
                 } else {
-                    // 打印作废单
-                    Trade trade = resp.getContent().getTrade();
+                                        Trade trade = resp.getContent().getTrade();
                     if (trade != null) {
                         String uuid = trade.getUuid();
-//                            PRTPrintOperator operator = new PRTPrintOperator();
-//                            operator.printCancelTicket(uuid, null, result.isPrintChecked, false);
-                        //IPrintHelper.Holder.getInstance().printCancelTicket(uuid, null, false, new PRTOnSimplePrintListener(PrintTicketTypeEnum.CANCEL));
-                        AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CANCEL_ORDER, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
+                                                AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CANCEL_ORDER, trade.getId(), trade.getUuid(), trade.getClientUpdateTime());
                     }
                 }
             }
@@ -180,11 +169,7 @@ public class BeautyMainUnPaidFragment extends BasicFragment implements UnpaidTra
                 reason, inventoryItems, listener, this);
     }
 
-    /**
-     * 订单进入
-     *
-     * @param beautyTradeVo
-     */
+
     @Override
     public void tradeDetilas(UnpaidTradeVo beautyTradeVo) {
         showOrderDish(beautyTradeVo.getTradeId());

@@ -6,41 +6,26 @@ import com.zhongmei.bty.basemodule.discount.bean.CouponPrivilegeVo;
 import com.zhongmei.bty.basemodule.discount.bean.IntegralCashPrivilegeVo;
 import com.zhongmei.bty.basemodule.discount.bean.WeiXinCouponsVo;
 
-/**
- * @Date： 16/8/31
- * @Description:
- * @Version: 1.0
- */
+
 public class DishDataItem {
     private IShopcartItemBase base;
 
     private int type;
 
-    private double value;// 金额
-
-    private String name;// 名字
-
-    private String uuid;// 单菜或套餐uuid
-
-    private CouponPrivilegeVo couponPrivilegeVo;// 优惠劵信息
-
-    private WeiXinCouponsVo weiXinCouponsVo;//微信优惠券信息
-
-    private IntegralCashPrivilegeVo integralCashPrivilegeVo;// 积分抵现
-
-    private ExtraCharge extraCharge;//附加费
-
+    private double value;
+    private String name;
+    private String uuid;
+    private CouponPrivilegeVo couponPrivilegeVo;
+    private WeiXinCouponsVo weiXinCouponsVo;
+    private IntegralCashPrivilegeVo integralCashPrivilegeVo;
+    private ExtraCharge extraCharge;
     private boolean isCouponEnabled;
 
-    private Integer depositType;//押金类型
-
+    private Integer depositType;
     private DishCheckStatus checkStatus;
 
-    private String tradePlanActivityUuid;// 营销活动uuid
-
-    private boolean needTopLine = true;//展示时是否需要topline，默认为true
-
-    // private boolean isIntegralEnable;
+    private String tradePlanActivityUuid;
+    private boolean needTopLine = true;
 
 
     public Integer getDepositType() {
@@ -160,14 +145,7 @@ public class DishDataItem {
     }
 
 
-    /*
-     * public boolean isIntegralEnable() { return
-     * isIntegralEnable; }
-     *
-     * public void setIntegralEnable(boolean
-     * isIntegralEnable) { this.isIntegralEnable =
-     * isIntegralEnable; }
-     */
+
 
     public enum DishCheckStatus {
         NOT_CHECK, CHECKED, INVALIATE_CHECK

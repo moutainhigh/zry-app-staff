@@ -1,8 +1,4 @@
-/**
- * @file XListViewHeader.java
- * @create Apr 18, 2012 5:22:27 PM
- * @description XListView's header
- */
+
 package com.zhongmei.bty.common.view.ui.widget.xlistview;
 
 import android.content.Context;
@@ -40,18 +36,14 @@ public class XListViewHeader extends LinearLayout {
         initView(context);
     }
 
-    /**
-     * @param context
-     * @param attrs
-     */
+
     public XListViewHeader(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
 
     private void initView(Context context) {
-        // 鍒濆鎯呭喌锛岃缃笅鎷夊埛鏂皏iew楂樺害涓�
-        LayoutParams lp = new LayoutParams(
+                LayoutParams lp = new LayoutParams(
                 LayoutParams.FILL_PARENT, 0);
         mContainer = (LinearLayout) LayoutInflater.from(context).inflate(
                 R.layout.xlistview_header, null);
@@ -77,12 +69,10 @@ public class XListViewHeader extends LinearLayout {
     public void setState(int state) {
         if (state == mState) return;
 
-        if (state == STATE_REFRESHING) {    // 鏄剧ず杩涘害
-            mArrowImageView.clearAnimation();
+        if (state == STATE_REFRESHING) {                mArrowImageView.clearAnimation();
             mArrowImageView.setVisibility(View.INVISIBLE);
             mProgressBar.setVisibility(View.VISIBLE);
-        } else {    // 鏄剧ず绠ご鍥剧墖
-            mArrowImageView.setVisibility(View.VISIBLE);
+        } else {                mArrowImageView.setVisibility(View.VISIBLE);
             mProgressBar.setVisibility(View.INVISIBLE);
         }
 

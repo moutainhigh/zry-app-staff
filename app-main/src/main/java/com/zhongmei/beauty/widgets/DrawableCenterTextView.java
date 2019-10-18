@@ -9,12 +9,9 @@ import android.widget.TextView;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * Created by demo on 2018/12/15
- */
-public class DrawableCenterTextView extends TextView {
-    private int drawableCenterMargin = -1;//-1默认表示居中
 
+public class DrawableCenterTextView extends TextView {
+    private int drawableCenterMargin = -1;
     public DrawableCenterTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context, attrs);

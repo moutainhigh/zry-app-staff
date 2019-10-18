@@ -2,14 +2,10 @@ package com.zhongmei.bty.data.operates.message.content;
 
 import java.util.List;
 
-/**
- * 删除出票口设置的请求数据
- */
+
 public class DeleteTicketOutletSettingReq implements java.io.Serializable {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     private List<Long> ids;

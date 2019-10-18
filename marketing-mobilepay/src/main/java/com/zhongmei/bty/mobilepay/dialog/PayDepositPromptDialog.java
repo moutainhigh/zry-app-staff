@@ -22,17 +22,11 @@ import com.zhongmei.bty.mobilepay.bean.IPaymentInfo;
 import com.zhongmei.bty.basemodule.pay.enums.PayScene;
 import com.zhongmei.bty.mobilepay.manager.CashInfoManager;
 
-/**
- * 押金提示框
- * Created by demo on 2018/12/15
- */
+
 
 public class PayDepositPromptDialog extends Dialog implements View.OnClickListener {
     private static final int MSG_WAT_PAYDEPOSIT = 1;
-    private ImageView mCloseBT;//关闭按钮
-    private IPaymentInfo mPaymentInfo;//
-    private TextView mDepositAmountTV;//押金金额
-    private Activity mContext;
+    private ImageView mCloseBT;    private IPaymentInfo mPaymentInfo;    private TextView mDepositAmountTV;    private Activity mContext;
     private DoPayApi mDoPayApi;
 
     public static void start(Activity context, DoPayApi doPayApi, IPaymentInfo paymentInfo) {

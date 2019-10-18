@@ -2,23 +2,16 @@ package com.zhongmei.beauty.entity;
 
 import com.zhongmei.yunfu.context.session.core.user.User;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class UserVo {
     private User mUser;
 
-    private boolean isOppoint = false; //是否指定（用户操作）默认非指定
+    private boolean isOppoint = false;
+    private boolean isFree = true;         private boolean isChecked = false;
 
-    private boolean isFree = true; //是否空闲，默认空闲
-    //是否选中
-    private boolean isChecked = false;
-
-    private int tradeUserType;// 标记当前身份
-
-    private boolean isChild = false;//是否是子菜
-
+    private int tradeUserType;
+    private boolean isChild = false;
     public UserVo(User user) {
         this.mUser = user;
     }

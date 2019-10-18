@@ -8,57 +8,37 @@ import com.zhongmei.yunfu.db.enums.TradePayStatus;
 import com.zhongmei.yunfu.db.enums.TradeStatus;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * TradeStatusLog is a ORMLite bean type. Corresponds to the database table "trade_status_log"
- */
+
 @DatabaseTable(tableName = "trade_status_log")
 public class TradeStatusLog extends DataEntityBase implements ICreator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade_status_log"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * reason_content
-         */
+
         public static final String reasonContent = "reason_content";
 
-        /**
-         * reason_id
-         */
+
         public static final String reasonId = "reason_id";
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * trade_status
-         */
+
         public static final String tradeStatus = "trade_status";
 
-        /**
-         * trade_uuid
-         */
+
         public static final String tradeUuid = "trade_uuid";
 
-        /**
-         * trade_pay_status
-         */
+
         public static final String tradePayStatus = "trade_pay_status";
 
     }

@@ -2,68 +2,40 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum PaySource implements ValueEnum<Integer> {
 
-    /**
-     * Cashier
-     */
+
     CASHIER(1),
 
-    /**
-     * Kiosk
-     */
+
     KIOSK(2),
 
-    /**
-     * 百度外卖
-     */
+
     BAIDU_TAKEOUT(3),
 
-    /**
-     * 百度糯米
-     */
+
     BAIDU_RICE(4),
 
-    /**
-     * 百度地图
-     */
+
     BAIDU_MAP(5),
 
-    /**
-     * Loyal
-     */
+
     LOYAL(6),
 
-    /**
-     * OnMobile
-     */
+
     ON_MOBILE(7),
 
-    /**
-     * 快捷支付
-     */
+
     QUICK_PAY(8),
 
-    /**
-     * 熟客
-     */
+
     FAMILIAR(9),
 
-    /**
-     * portal
-     */
+
     PORTAL(10),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

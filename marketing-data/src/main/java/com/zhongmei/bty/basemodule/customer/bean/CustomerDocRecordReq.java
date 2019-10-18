@@ -1,17 +1,13 @@
 package com.zhongmei.bty.basemodule.customer.bean;
 
-/**
- * Created by dingzb on 2019/6/25.
- */
+
 
 public class CustomerDocRecordReq {
 
     private int pageNo = 0;
     private int  pageSize = 100;
     private Long customerId;
-    private int type;//类型，1:事务性   2：疗效性   可不传
-    private String title; //主题，可用来做模糊查询， 可不传
-
+    private int type;    private String title;
     public int getPageNo() {
         return pageNo;
     }

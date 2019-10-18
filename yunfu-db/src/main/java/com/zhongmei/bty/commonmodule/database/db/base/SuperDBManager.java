@@ -3,9 +3,7 @@ package com.zhongmei.bty.commonmodule.database.db.base;
 import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.orm.SQLiteDatabaseHelper;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class SuperDBManager {
     private static final String TAG = SuperDBManager.class.getSimpleName();

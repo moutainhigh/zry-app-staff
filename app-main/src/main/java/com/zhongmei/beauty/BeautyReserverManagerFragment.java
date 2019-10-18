@@ -35,9 +35,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_reserver_manage_fragment)
 public class BeautyReserverManagerFragment extends BasicFragment implements BeautyNotifyCache.BeautyNotifyListener,XRadioGroup.OnCheckedChangeListener{
 
@@ -63,42 +61,32 @@ public class BeautyReserverManagerFragment extends BasicFragment implements Beau
     }
 
 
-    /**
-     * 前往预约看板
-     */
+
     private void toReserverBoard() {
         reserverBoardFragment = new BeautyReserverBoardFragment();
         replaceChildFragment(R.id.fl_content, reserverBoardFragment, BeautyReserverBoardFragment.class.getSimpleName());
     }
 
-    /**
-     * 待服务页
-     */
+
     private void toUnServicePage() {
         listFragment = new BeautyUnServiceBookFragment();
         replaceChildFragment(R.id.fl_content, listFragment, BeautyUnServiceBookFragment.class.getSimpleName());
     }
 
-    /**
-     * 已超时服务页
-     */
+
     private void toOuttimeServicePage() {
         listFragment = new BeautyOuttimeFragment();
         replaceChildFragment(R.id.fl_content, listFragment, BeautyOuttimeFragment.class.getSimpleName());
     }
 
-    /**
-     * 已取消服务页
-     */
+
     private void toCancelServicePage() {
         listFragment = new BeautyCancelBookingFragment();
         replaceChildFragment(R.id.fl_content, listFragment, BeautyCancelBookingFragment.class.getSimpleName());
     }
 
 
-    /**
-     * 已取消未处理
-     */
+
     private void toUnDealServicePage() {
         listFragment = new BeautyUndealBookingFragment();
         replaceChildFragment(R.id.fl_content, listFragment, BeautyUndealBookingFragment.class.getSimpleName());
@@ -108,8 +96,7 @@ public class BeautyReserverManagerFragment extends BasicFragment implements Beau
     @Click(R.id.btn_create_reserver)
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_create_reserver://创建订单
-                VerifyHelper.verifyAlert(getActivity(), BeautyApplication.PERMISSION_BEAUTY_CREATE_RESERVER, new VerifyHelper.Callback() {
+            case R.id.btn_create_reserver:                VerifyHelper.verifyAlert(getActivity(), BeautyApplication.PERMISSION_BEAUTY_CREATE_RESERVER, new VerifyHelper.Callback() {
                     @Override
                     public void onPositive(User user, String code, Auth.Filter filter) {
                         super.onPositive(user, code, filter);
@@ -168,20 +155,15 @@ public class BeautyReserverManagerFragment extends BasicFragment implements Beau
     @Override
     public void onCheckedChanged(XRadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.rb_reserver_board://预约看板
-                toReserverBoard();
+            case R.id.rb_reserver_board:                toReserverBoard();
                 break;
-            case R.id.rb_reserver_trades://待服务预约单
-                toUnServicePage();
+            case R.id.rb_reserver_trades:                toUnServicePage();
                 break;
-            case R.id.rb_reserver_outtime_trades://已超时预约单
-                toOuttimeServicePage();
+            case R.id.rb_reserver_outtime_trades:                toOuttimeServicePage();
                 break;
-            case R.id.rb_reserver_cancel_trades://已取消预约单
-                toCancelServicePage();
+            case R.id.rb_reserver_cancel_trades:                toCancelServicePage();
                 break;
-            case R.id.rb_reserver_unprocess://未处理订单
-                toUnDealServicePage();
+            case R.id.rb_reserver_unprocess:                toUnDealServicePage();
                 break;
         }
     }

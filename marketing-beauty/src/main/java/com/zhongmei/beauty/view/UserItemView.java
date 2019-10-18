@@ -17,9 +17,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @EViewGroup(resName = "beauty_item_user")
 public class UserItemView extends RelativeLayout {
@@ -75,8 +73,7 @@ public class UserItemView extends RelativeLayout {
         cb_name.setText(userVo.getUser().getName());
         if (userVo.isFree()) {
             tv_status.setVisibility(View.GONE);
-            //子菜
-            if (!userVo.isChild()) {
+                        if (!userVo.isChild()) {
                 setViewEnabled(true);
             } else {
                 setViewEnabled(false);
@@ -114,8 +111,7 @@ public class UserItemView extends RelativeLayout {
             }
         } else if (viewId == R.id.tb_appoint) {
             if (tb_appoint.isChecked()) {
-                mUserVo.setOppoint(true);//设置用户指定
-                mUserVo.setChecked(true);
+                mUserVo.setOppoint(true);                mUserVo.setChecked(true);
                 onUserCheckedListener.updateAppoint(mUserVo, true);
 
             } else {
@@ -128,7 +124,6 @@ public class UserItemView extends RelativeLayout {
     public interface OnUserItemCheckListener {
         void onCheckedChange(UserVo userVo, boolean isChecked);
 
-        //更新指定状态
-        void updateAppoint(UserVo userVo, boolean isChcked);
+                void updateAppoint(UserVo userVo, boolean isChcked);
     }
 }

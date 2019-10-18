@@ -1,10 +1,6 @@
 package com.zhongmei.bty.basemodule.orderdish.bean;
 
-/**
- * @Date：2015年11月23日
- * @Description:
- * @Version: 1.0
- */
+
 public class DishServiceStatusItem {
     private Long id;
     private byte servingStatus;

@@ -34,9 +34,7 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.dinner_customer_login_dialog_layout)
 public class DinnerCustomerLoginDialogFragment extends DinnerCustomerLoginBasicDialogFragment {
 
@@ -124,7 +122,6 @@ public class DinnerCustomerLoginDialogFragment extends DinnerCustomerLoginBasicD
                         @Override
                         public void onPositive(User user, String code, Auth.Filter filter) {
                             super.onPositive(user, code, filter);
-//                            showSecondDisPlay("");
                             replaceChildFragment(R.id.login_frame_layout, customerRegisterFragment, DinnerCustomerRegisterFragment.TAG);
                             mIbBack.setVisibility(View.VISIBLE);
                             mIbClose.setVisibility(View.GONE);
@@ -165,8 +162,7 @@ public class DinnerCustomerLoginDialogFragment extends DinnerCustomerLoginBasicD
         if (DinnerShopManager.getInstance().getLoginCustomer() == null) {
             DisplayServiceManager.doCancel(getActivity());
         }
-        EventBus.getDefault().post(new EventLoginView(EventLoginView.TYPE_LOGIN_VIEW_END));//add v8.4
-        EventBus.getDefault().unregister(this);
+        EventBus.getDefault().post(new EventLoginView(EventLoginView.TYPE_LOGIN_VIEW_END));        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 }

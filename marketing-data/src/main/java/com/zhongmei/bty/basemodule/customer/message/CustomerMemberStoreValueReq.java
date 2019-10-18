@@ -1,11 +1,6 @@
 package com.zhongmei.bty.basemodule.customer.message;
 
-/**
- * 会员储值记录请求
- *
- * @version: 1.0
- * @date 2015年5月13日
- */
+
 public class CustomerMemberStoreValueReq {
     private String fuzzyMobile;
     private int page;

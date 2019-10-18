@@ -7,87 +7,55 @@ import com.zhongmei.yunfu.db.enums.IsDelete;
 import com.zhongmei.bty.entity.enums.LayoutType;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * TablePosition is a ORMLite bean type. Corresponds to the database table "table_position"
- */
+
 @DatabaseTable(tableName = "table_position")
 public class TablePosition extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "table_position"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * brand_id
-         */
+
         public static final String brandId = "brand_id";
 
-        /**
-         * commercial_id
-         */
+
         public static final String commercialId = "commercial_id";
 
-        /**
-         * create_time
-         */
+
         public static final String createTime = "create_time";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * height
-         */
+
         public static final String height = "height";
 
-        /**
-         * is_delete
-         */
+
         public static final String isDelete = "is_delete";
 
-        /**
-         * layout_id
-         */
+
         public static final String layoutId = "layout_id";
 
-        /**
-         * layout_type
-         */
+
         public static final String layoutType = "layout_type";
 
-        /**
-         * table_id
-         */
+
         public static final String tableId = "table_id";
 
-        /**
-         * updater_id
-         */
+
         public static final String updaterId = "updater_id";
 
-        /**
-         * update_time
-         */
+
         public static final String updateTime = "update_time";
 
-        /**
-         * width
-         */
+
         public static final String width = "width";
 
-        /**
-         * x_axis
-         */
+
         public static final String xAxis = "x_axis";
 
-        /**
-         * y_axis
-         */
+
         public static final String yAxis = "y_axis";
 
     }

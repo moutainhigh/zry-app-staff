@@ -7,12 +7,7 @@ import com.zhongmei.bty.basemodule.devices.mispos.enums.AccountStatus;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
 
-/**
- * 会员储值记录的响应
- *
- * @version: 1.0
- * @date 2015年5月13日
- */
+
 public class CustomerMemberStoreValueResp {
     private List<ValuecardHistoryAndMobile> valuecardHistorys;
 
@@ -43,13 +38,7 @@ public class CustomerMemberStoreValueResp {
         private String serverCreateTime;
         private String serverUpdateTime;
 
-        private BigDecimal beforeRealValue; // 操作前余额实储金额
-        private BigDecimal beforeSendValue;    // 操作前余额赠送金额
-        private BigDecimal currentRealValue; // 本次操作实储金额
-        private BigDecimal currentSendValue; // 本次操作赠送金额
-        private BigDecimal endRealValue; // 操作后实储金额
-        private BigDecimal endSendValue; // 操作后赠送金额
-
+        private BigDecimal beforeRealValue;         private BigDecimal beforeSendValue;            private BigDecimal currentRealValue;         private BigDecimal currentSendValue;         private BigDecimal endRealValue;         private BigDecimal endSendValue;
         public BigDecimal getCashValuecard() {
             return cashValuecard;
         }
@@ -223,8 +212,7 @@ public class CustomerMemberStoreValueResp {
         private String mobile;
         private Integer padNo;
         private String userName;
-        private Integer accountStatus; //1已到账、0未到账
-        private ValuecardHistory valuecardHistory;
+        private Integer accountStatus;         private ValuecardHistory valuecardHistory;
         private Trade trade;
 
         public String getMobile() {

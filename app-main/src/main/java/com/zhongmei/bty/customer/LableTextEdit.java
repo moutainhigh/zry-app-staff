@@ -10,9 +10,7 @@ import android.widget.EditText;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * 自定义带标签的EditText
- */
+
 public class LableTextEdit extends EditText {
     private String text;
     private Context context;
@@ -38,8 +36,6 @@ public class LableTextEdit extends EditText {
     protected void onDraw(Canvas canvas) {
         Paint paint = new Paint();
         paint.setTextSize(context.getResources().getDimension(R.dimen.text_18));
-//		Typeface font = Typeface.create(Typeface.SANS_SERIF, Typeface.BOLD);
-//		paint.setTypeface(font);
         paint.setAntiAlias(true);
         paint.setColor(context.getResources().getColor(R.color.customer_add_text_gray));
         canvas.drawText(text, 20, getHeight() / 2 + 8, paint);

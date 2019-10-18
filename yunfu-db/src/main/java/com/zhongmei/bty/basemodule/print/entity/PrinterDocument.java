@@ -15,95 +15,61 @@ import com.zhongmei.bty.basemodule.print.enums.PrintPolicy;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 import com.zhongmei.yunfu.util.ValueEnums;
 
-/**
- * PrinterDocument is a ORMLite bean type. Corresponds to the database table "printer_document"
- */
+
 @DatabaseTable(tableName = "printer_document")
 public class PrinterDocument extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "printer_document"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * delivery_type
-         */
+
         public static final String deliveryType = "delivery_type";
 
-        /**
-         * device_id
-         */
+
         public static final String deviceId = "device_id";
 
-        /**
-         * document_category
-         */
+
         public static final String documentCategory = "document_category";
 
-        /**
-         * is_print_submenu
-         */
+
         public static final String isPrintSubmenu = "is_print_submenu";
 
 
         public static final String isPrintPrice = "is_print_price";
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * print_count
-         */
+
         public static final String printCount = "print_count";
 
-        /**
-         * print_policy
-         */
+
         public static final String printPolicy = "print_policy";
 
-        /**
-         * combine_policy
-         */
+
         public static final String combinePolicy = "combine_policy";
 
-        /**
-         * scope
-         */
+
         public static final String scope = "scope";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * isShowTableArea
-         */
+
         public static final String isShowTableArea = "isShowTableArea";
 
-        /**
-         * isShowDishList
-         */
+
         public static final String isShowDishList = "isShowDishList";
 
         public static final String isShowMark = "isShowMark";
@@ -168,18 +134,12 @@ public class PrinterDocument extends DataEntityBase implements ICreator, IUpdato
     @DatabaseField(columnName = "isShowDishList")
     private Integer isShowDishList;
     @DatabaseField(columnName = "isShowMark")
-    private Integer isShowMark;//是否显示整单备注
-    @DatabaseField(columnName = "isShowOrderTime")
-    private Integer isShowOrderTime;//是否显示下单时间
-    @DatabaseField(columnName = "isShowShopPhone")
-    private Integer isShowShopPhone;//是否显示商户手机号
-    @DatabaseField(columnName = "isShowShopAddress")
-    private Integer isShowShopAddress;//是否显示商户地址
-    @DatabaseField(columnName = "is_show_num")
-    private Integer isShowNum;//是否显示页码
-    @DatabaseField(columnName = "deviceIds")
-    private String deviceIds;//设置ID
-
+    private Integer isShowMark;    @DatabaseField(columnName = "isShowOrderTime")
+    private Integer isShowOrderTime;    @DatabaseField(columnName = "isShowShopPhone")
+    private Integer isShowShopPhone;    @DatabaseField(columnName = "isShowShopAddress")
+    private Integer isShowShopAddress;    @DatabaseField(columnName = "is_show_num")
+    private Integer isShowNum;    @DatabaseField(columnName = "deviceIds")
+    private String deviceIds;
     public Long getCreatorId() {
         return creatorId;
     }

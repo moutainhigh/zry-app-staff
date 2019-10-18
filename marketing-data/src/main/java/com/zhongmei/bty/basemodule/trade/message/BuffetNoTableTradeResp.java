@@ -11,9 +11,7 @@ import com.zhongmei.bty.commonmodule.database.entity.TradeTax;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BuffetNoTableTradeResp {
     private Trade trade;
@@ -23,8 +21,7 @@ public class BuffetNoTableTradeResp {
     private List<TradeBuffetPeople> tradeBuffetPeoples;
     private TradeDeposit tradeDeposit;
 
-    private List<TradeTax> tradeTaxs; //税率
-    private List<TradeInitConfig> tradeInitConfigs;
+    private List<TradeTax> tradeTaxs;     private List<TradeInitConfig> tradeInitConfigs;
 
     public Trade getTrade() {
         return trade;

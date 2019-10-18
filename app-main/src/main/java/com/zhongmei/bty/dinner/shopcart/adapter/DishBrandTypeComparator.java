@@ -4,9 +4,7 @@ import com.zhongmei.yunfu.db.entity.dish.DishBrandType;
 
 import java.util.Comparator;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DishBrandTypeComparator implements Comparator<DishBrandType> {
 

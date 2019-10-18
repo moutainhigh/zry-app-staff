@@ -9,9 +9,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * LogAction基类,只记录数据结构,不关心记录的具体实现
- */
+
 
 public abstract class BaseLogAction {
     public static final String TAG = BaseLogAction.class.getSimpleName();
@@ -66,7 +64,5 @@ public abstract class BaseLogAction {
         return this.canChangeFolderName;
     }
 
-    public abstract void putStrLog(String logStr); // 记录日志
-
-    public abstract void destroy(); // 资源释放
-}
+    public abstract void putStrLog(String logStr);
+    public abstract void destroy(); }

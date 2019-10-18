@@ -4,9 +4,7 @@ import com.zhongmei.bty.commonmodule.database.entity.AuthorizedLog;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AuthLogReq {
     private List<AuthorizedLog> authorizedLogs;

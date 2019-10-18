@@ -2,19 +2,13 @@ package com.zhongmei.beauty.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public enum BeautyListType implements ValueEnum<Integer> {
-    //    待服务
-    UNSERVICE(1),
-    //    已超时(逾期)
-    OUTLINE(2),
-    //    已取消
-    CANCELD(3),
-    //未处理
-    UNDEAL(4),;
+        UNSERVICE(1),
+        OUTLINE(2),
+        CANCELD(3),
+        UNDEAL(4),;
     private final Helper<Integer> helper;
 
     private BeautyListType(Integer value) {

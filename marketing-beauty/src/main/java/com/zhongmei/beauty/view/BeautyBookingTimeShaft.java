@@ -14,16 +14,11 @@ import android.view.ViewGroup;
 import com.zhongmei.yunfu.beauty.R;
 import com.zhongmei.bty.commonmodule.util.DateUtil;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyBookingTimeShaft extends View {
 
-    private Long startTime; //开店时间
-    private Long stopTime; //关店时间
-    private Long perTime = 30 * 60 * 1000L;//最小时间间隔 默认半小时
-    private int timeWidth;
+    private Long startTime;     private Long stopTime;     private Long perTime = 30 * 60 * 1000L;    private int timeWidth;
 
     private Paint mPaint;
 

@@ -7,9 +7,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class TaskManager implements FragmentLifecycle {
 
     private List<AsyncTaskProxy> taskList = new ArrayList<>();

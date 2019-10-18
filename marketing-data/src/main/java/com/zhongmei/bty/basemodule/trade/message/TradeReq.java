@@ -28,19 +28,10 @@ import com.zhongmei.yunfu.db.entity.trade.TradeTable;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 封装Trade相关的实时请求的Request数据
- *
- * @Date：2015-4-14 下午6:30:02
- * @Description:
- * @Version: 1.0
- */
+
 public class TradeReq extends Trade implements NationInfoInterface {
 
-    /**
-     * @date：2015-4-14 下午6:30:21
-     * @Description:
-     */
+
     private static final long serialVersionUID = 1L;
 
     private TradeExtra tradeExtra;
@@ -63,14 +54,10 @@ public class TradeReq extends Trade implements NationInfoInterface {
     private Long relatedId;
     private List<TradeBuffetPeople> tradeBuffetPeoples;
     private TradeGroupInfo tradeGroup;
-    private TradeUser tradeUser;//add 20170916 订单推销员
-    private List<TradeUser> tradeUsers;  //add 20180309 增加多销售员支持
-    private List<TradeItemExtraDinner> tradeItemExtraDinners;
+    private TradeUser tradeUser;    private List<TradeUser> tradeUsers;      private List<TradeItemExtraDinner> tradeItemExtraDinners;
     private List<TradeTax> tradeTaxs;
     private List<TradeInitConfig> tradeInitConfigs;
-    /**
-     * 商品分摊优惠结合
-     */
+
     public List<PrivilegeApportionManager.ItemApportion> skuPrivileges;
 
     public TradeExtra getTradeExtra() {

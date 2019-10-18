@@ -38,10 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-/**
- * @version: 1.0
- * @date 2016年1月8日
- */
+
 public final class NewLiandiposManager {
 
     private static final String TAG = NewLiandiposManager.class.getSimpleName();
@@ -68,12 +65,7 @@ public final class NewLiandiposManager {
         this.misPosWorking = misPosWorking;
     }
 
-    /**
-     * 根据UUID查询刷卡交易记录
-     *
-     * @param transUuid 交易记录的UUID（与PaymentItem.uuid相同）
-     * @return
-     */
+
     public PosTransLog queryTrans(String transUuid) {
         try {
             return DBHelperManager.queryById(PosTransLog.class, transUuid);
@@ -83,13 +75,7 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 判断指定的刷卡支付是否能撤消（即这笔刷卡支付有没有被结算）
-     * <p>
-     * //	 * @param transUuid 交易记录的UUID（与PaymentItem.uuid相同）
-     *
-     * @return
-     */
+
     @SuppressLint("SimpleDateFormat")
     public boolean canRepeal(RefundRef ref) {
         boolean issame = false;
@@ -100,11 +86,9 @@ public final class NewLiandiposManager {
             issame = true;
         }
 
-        // 不能撤消当前日期之前的交易
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         String today = df.format(new Date());
-        if (compare_date(today, ref.transDate) == 0) {// 当天交易才可以刷银行卡
-            iscan = true;
+        if (compare_date(today, ref.transDate) == 0) {            iscan = true;
         } else {
             iscan = false;
         }
@@ -112,15 +96,7 @@ public final class NewLiandiposManager {
         return issame && iscan;
     }
 
-    /**
-     * 是否是相同的POS设备ID号
-     *
-     * @Title: isSamePosDeviceId
-     * @Description:
-     * @Param @param terminalNumber
-     * @Param @return
-     * @Return boolean 返回类型
-     */
+
     private static boolean isSamePosDeviceId(String terminalNumber) {
         String localnum = SharedPreferenceUtil.getSpUtil().getString(Constant.SP_POS_DEVICIE_ID, "");
         Log.d(TAG, TAG + "------SP_POS_DEVICIE_ID=" + localnum + "terminalNumber=" + terminalNumber);
@@ -131,12 +107,7 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 开始刷卡消费操作
-     *
-     * @param amount   要支付的金额，单位为元
-     * @param listener
-     */
+
     public void startPay(final BigDecimal amount, final OnTransListener listener) {
         Checks.verifyNotNull(amount, "amount");
         Checks.verifyNotNull(listener, "listener");
@@ -149,9 +120,7 @@ public final class NewLiandiposManager {
         if (misPosWorking) {
             onOccupied(listener);
             return;
-            // throw new
-            // IllegalStateException("The MisPos working.");
-        }
+                                }
         new Thread() {
             @Override
             public void run() {
@@ -160,83 +129,53 @@ public final class NewLiandiposManager {
         }.start();
     }
 
-    /**
-     * 完成刷卡消费操作
-     *
-     * @param transUuid 交易记录的UUID（与PaymentItem.uuid相同）
-     */
+
     public void completePay(String transUuid) {
         deleteTrans(transUuid);
     }
 
-    /**
-     * 取消刷卡消费操作，在向服务端提交结账请求失败时调用此方法取消刷卡交易
-     *
-     * @param transLog
-     * @param listener
-     */
+
     public void cancelPay(final PosTransLog transLog, final OnTransListener listener) {
         Checks.verifyNotNull(transLog, "transLog");
         Checks.verifyNotNull(listener, "listener");
         if (misPosWorking) {
             onOccupied(listener);
             return;
-            // throw new
-            // IllegalStateException("The MisPos working.");
-        }
+                                }
         new Thread() {
             @Override
             public void run() {
                 RefundRef ref = RefundRef.valueOf(transLog);
                 BigDecimal amount = RefundRef.getAmount(ref);
-                // 取消支付操作不需要保存交易记录
-                doRepealOrRefund(amount, ref, false, createCancelPayProxy(transLog.getUuid(), listener));
+                                doRepealOrRefund(amount, ref, false, createCancelPayProxy(transLog.getUuid(), listener));
             }
         }.start();
     }
 
-    /**
-     * 开始刷卡退款操作 退款需要Payment的UUID传入进来
-     * <p>
-     * //	 * @param amount 要退款的金额，单位为元
-     * //	 * @param ref
-     *
-     * @param listener
-     */
+
     public void startRefund(final String uuid, final String posTraceNo, final OnTransListener listener) {
         Checks.verifyNotNull(posTraceNo, "posTraceNo");
         Checks.verifyNotNull(listener, "listener");
         if (misPosWorking) {
             onOccupied(listener);
             return;
-            // throw new
-            // IllegalStateException("The MisPos working.");
-        }
+                                }
         new Thread() {
             @Override
             public void run() {
-                RefundRef ref = new RefundRef(uuid, null, null, null, null, posTraceNo, null);// 只需知道posTraceNo单号就可以发起撤消退货
-                doRepealOrRefund(null, ref, true, createProxy(listener));
+                RefundRef ref = new RefundRef(uuid, null, null, null, null, posTraceNo, null);                doRepealOrRefund(null, ref, true, createProxy(listener));
             }
         }.start();
     }
 
-    /**
-     * 开始刷卡消费操作
-     * <p>
-     * //	 * @param amount 要支付的金额，单位为元
-     *
-     * @param listener isdelay是否延迟几秒发指令
-     */
+
     public void startReadCardID(final Context context, final OnTransListener listener, final boolean isdelay) {
         Checks.verifyNotNull(listener, "listener");
 
         if (misPosWorking) {
             onOccupied(listener);
             return;
-            // throw new
-            // IllegalStateException("The MisPos working.");
-        }
+                                }
         new Thread() {
             @Override
             public void run() {
@@ -248,8 +187,7 @@ public final class NewLiandiposManager {
 
                     doReadCardId(createProxy(listener));
                 } catch (InterruptedException e) {
-                    // TODO Auto-generated catch block
-                    Log.d(TAG, TAG + e.toString());
+                                        Log.d(TAG, TAG + e.toString());
                     e.printStackTrace();
                 }
 
@@ -257,14 +195,7 @@ public final class NewLiandiposManager {
         }.start();
     }
 
-    /**
-     * 开始读取键盘输入的密码（读取键盘值）
-     *
-     * @Title: startReadKeyboardNum
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public void startReadKeyboardNum(final Context context, final OnTransListener listener) {
         Checks.verifyNotNull(listener, "listener");
 
@@ -297,21 +228,12 @@ public final class NewLiandiposManager {
         }.start();
     }
 
-    /**
-     * 完成刷卡退款操作
-     *
-     * @param transUuid
-     */
+
     public void completeRefund(String transUuid) {
         deleteTrans(transUuid);
     }
 
-    /**
-     * 创建一个注册监听了状态变化的MisPos实例
-     *
-     * @param listener
-     * @return
-     */
+
     private MisPos createMisPos(ListenerProxy listener) {
         MisPos misPos = new MisPos();
         misPos.setOnMessageListener(new MessageListenerImpl(listener));
@@ -339,19 +261,13 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 执行刷卡交易操作
-     *
-     * @param amount
-     * @param listener
-     */
+
     private void doPay(BigDecimal amount, ListenerProxy listener) {
         try {
             RequestData request = createPayRequest(amount);
             NewLDResponse ldResponse = trans(createMisPos(listener), request);
             if (ldResponse.isSuccess()) {
-                // 保存刷卡交易记录
-                PosTransLog log = storeLog(toTransLog(ldResponse));
+                                PosTransLog log = storeLog(toTransLog(ldResponse));
                 listener.onConfirm(log);
             } else {
                 listener.onFailure(ldResponse);
@@ -362,32 +278,21 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 执行撤消或退款操作
-     *
-     * @param amount
-     * @param ref
-     * @param logEnable
-     * @param listener
-     */
+
     private void doRepealOrRefund(BigDecimal amount, RefundRef ref, boolean logEnable, ListenerProxy listener) {
         try {
-            // 先执行撤消操作
-            RequestData request = createRepealRequest(ref.posTraceNo, ref.transUuid);
+                        RequestData request = createRepealRequest(ref.posTraceNo, ref.transUuid);
             request.PutValue(LDRequestConstant.AMOUNT, fillString("0"));
 
             NewLDResponse ldResponse = trans(createMisPos(listener), request);
             if (ldResponse.isSuccess()) {
                 PosTransLog log = toTransLog(ldResponse);
-                // 取消支付时不记录刷卡记录
-                if (logEnable) {
+                                if (logEnable) {
                     storeLog(log);
                 }
                 listener.onConfirm(log);
             } else {
-                // 如果撤消失败，再执行退款操作
-                // TODO 暂不提供退款功能
-                listener.onFailure(ldResponse);
+                                                listener.onFailure(ldResponse);
             }
         } catch (Exception e) {
             Log.e(TAG, "doRepealOrRefund error!", e);
@@ -395,11 +300,7 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 执行读取会员卡的操作
-     *
-     * @param listener
-     */
+
     private void doReadCardId(ListenerProxy listener) {
         try {
             RequestData request = createCardIdRequest();
@@ -416,14 +317,7 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 执行读取键盘值的操作（读取密码）
-     *
-     * @Title: doReadKeyboardNum
-     * @Description: TODO
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     private void doReadKeyboardNum(ListenerProxy listener) {
 
         try {
@@ -441,11 +335,7 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 签到
-     *
-     * @param listener
-     */
+
     private void doRegister(ListenerProxy listener) {
         try {
             RequestData request = createRegisterData();
@@ -462,24 +352,16 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 发起交易请求并在需要结算时执行结算
-     *
-     * @param misPos
-     * @param request
-     * @return
-     */
+
     private NewLDResponse trans(MisPos misPos, RequestData request) {
         misPosWorking = true;
         try {
             NewLDResponse ldResponse = submit(misPos, request);
             if (ldResponse.isStorageFull()) {
-                // 需要结算时执行结算，POS机上显示结算时不接受外部指令，待一会儿再发送后续指令
-                await(SHORT_DELAY);
+                                await(SHORT_DELAY);
                 ldResponse = submit(misPos, createSettlementRequestData());
                 if (ldResponse.isSuccess()) {
-                    // 保存结算记录
-                    storeLog(toSettlementLog(ldResponse));
+                                        storeLog(toSettlementLog(ldResponse));
                     await(LONG_DELAY);
                     ldResponse = submit(misPos, request);
 
@@ -491,60 +373,35 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * POS刷卡机上显示“存储已满”会很快消失
-     */
+
     private static final int SHORT_DELAY = 500;
 
-    /**
-     * POS刷卡机结算需要较长时间
-     */
+
     private static final int LONG_DELAY = 4000;
 
-    /**
-     * 签到
-     */
+
     private static final String TRANS_TYPE_REGISER = "01";
 
-    /**
-     * 支付
-     */
+
     private static final String TRANS_TYPE_PAY = "02";
 
-    /**
-     * 撤消
-     */
+
     private static final String TRANS_TYPE_REPEAL = "03";
 
-    /**
-     * 退货
-     */
+
     private static final String TRANS_TYPE_RETURN = "04";
-    /**
-     * 结算
-     */
+
     private static final String TRANS_TYPE_SETTLEMENT = "14";
 
-    /**
-     * 读取卡号
-     */
+
     private static final String TRANS_TYPE_READCARDID = "101";
 
-    /**
-     * 读取键盘输入值
-     */
+
     private static final String TRANS_TYPE_READKEYBORD = "102";
 
-    /**
-     * 向银联POS机发送请求
-     *
-     * @param misPos
-     * @param request
-     * @return
-     */
+
     private static NewLDResponse submit(MisPos misPos, RequestData request) {
-        //Log.i(TAG, "submit... " + request.getRequest());
-        ResponseData response = new ResponseData();
+                ResponseData response = new ResponseData();
         long code = 0;
         try {
             code = misPos.TransProcess(request, response);
@@ -552,8 +409,7 @@ public final class NewLiandiposManager {
             e.printStackTrace();
         }
         Log.i(TAG, "code: " + code);
-        //Log.i(TAG, "response: " + response.getResponse());
-        return new NewLDResponse(response);
+                return new NewLDResponse(response);
     }
 
     private static PosSettlementLog toSettlementLog(NewLDResponse response) {
@@ -604,33 +460,14 @@ public final class NewLiandiposManager {
     }
 
     private static PosSettlementLog storeLog(PosSettlementLog log) {
-        /*DatabaseHelper helper = DBHelper.getHelper();
-		try {
-			Dao<PosSettlementLog, String> dao = helper.getDao(PosSettlementLog.class);
-			dao.create(log);
-			dao.deleteBuilder().where().lt(PosSettlementLog.$.transDate, log.getTransDate());
-		} catch (Exception e) {
-			Log.e(TAG, "Store log error!", e);
-		} finally {
-			DBHelper.releaseHelper(helper);
-		}
-		return log;*/
+
         PosLogsDal posLogsDal = new PosLogsDal();
         posLogsDal.storePosSettlementLog(log);
         return log;
     }
 
     private static PosTransLog storeLog(PosTransLog log) {
-        //modify 20170301 统一调用dal处理数据库业务
-		/*DatabaseHelper helper = DBHelper.getHelper();
-		try {
-			DBHelper.saveEntities(helper, PosTransLog.class, log);
-		} catch (Exception e) {
-			Log.e(TAG, "Store log error!", e);
-		} finally {
-			DBHelper.releaseHelper(helper);
-		}
-		return log;*/
+
         PosLogsDal posLogsDal = new PosLogsDal();
         posLogsDal.storePosTransLog(log);
         return log;
@@ -650,17 +487,12 @@ public final class NewLiandiposManager {
             @Override
             public void run() {
                 super.run();
-                // 删除本地pos收银记录
-                deleteTrans(transUuid);
+                                deleteTrans(transUuid);
             }
         }.start();
     }
 
-    /**
-     * 等待指定时间
-     *
-     * @param time 等待的时间，单位ms
-     */
+
     private static void await(long time) {
         try {
             Thread.sleep(time);
@@ -669,12 +501,7 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 创建刷卡支付的请求体
-     *
-     * @param amount 刷卡金额，单位为元
-     * @return
-     */
+
     private static RequestData createPayRequest(BigDecimal amount) {
         RequestData reqData = createRequestData();
         reqData.PutValue(LDRequestConstant.TRANS_TYPE, TRANS_TYPE_PAY);
@@ -691,11 +518,7 @@ public final class NewLiandiposManager {
         return fillstr.substring(0, len) + str;
     }
 
-    /**
-     * 创建刷卡获取卡号的方法
-     *
-     * @return
-     */
+
     private static RequestData createCardIdRequest() {
         RequestData reqData = createRequestData();
         reqData.PutValue(LDRequestConstant.TRANS_TYPE, TRANS_TYPE_READCARDID);
@@ -704,11 +527,7 @@ public final class NewLiandiposManager {
     }
 
 
-    /**
-     * 创建读取键盘输入值得方法
-     *
-     * @return
-     */
+
     private static RequestData createKeyboardRequest() {
         RequestData reqData = createRequestData();
         reqData.PutValue(LDRequestConstant.TRANS_TYPE, TRANS_TYPE_READKEYBORD);
@@ -716,12 +535,7 @@ public final class NewLiandiposManager {
         return reqData;
     }
 
-    /**
-     * 创建撤消支付的请求体
-     *
-     * @param oldPosTraceNo 要被撤消的交易号(原交易号)
-     * @return
-     */
+
     private static RequestData createRepealRequest(String oldPosTraceNo, String uuid) {
         RequestData reqData = createRequestData();
         reqData.PutValue(LDRequestConstant.TRANS_TYPE, TRANS_TYPE_REPEAL);
@@ -730,11 +544,7 @@ public final class NewLiandiposManager {
         return reqData;
     }
 
-    /**
-     * 创建结算的请求体
-     *
-     * @return
-     */
+
     private static RequestData createSettlementRequestData() {
         RequestData reqData = createRequestData();
         reqData.PutValue(LDRequestConstant.TRANS_TYPE, TRANS_TYPE_SETTLEMENT);
@@ -764,10 +574,7 @@ public final class NewLiandiposManager {
         return Looper.myLooper() == Looper.getMainLooper();
     }
 
-    /**
-     * @version: 1.0
-     * @date 2016年1月13日
-     */
+
     private static class MessageListenerImpl implements IMessageListener {
 
         private final ListenerProxy mListener;
@@ -796,8 +603,7 @@ public final class NewLiandiposManager {
 
         @Override
         public void showMessage() {
-            //TODO 联迪的返回是1标示开始交易
-            if (!mNotifiedIsAcive && mMessage.type == 0x01) {
+                        if (!mNotifiedIsAcive && mMessage.type == 0x01) {
                 mNotifiedIsAcive = true;
                 mListener.onActive();
             } else if (!mNotified && mMessage.type == 0x00) {
@@ -808,12 +614,7 @@ public final class NewLiandiposManager {
 
     }
 
-    /**
-     * OnTransListener代理，保证OnTransListener中的方法在UI线程中执行
-     *
-     * @version: 1.0
-     * @date 2016年1月15日
-     */
+
     private static class ListenerProxy implements OnTransListener {
 
         private final Handler mPoster;
@@ -871,10 +672,7 @@ public final class NewLiandiposManager {
 
     }
 
-    /**
-     * @version: 1.0
-     * @date 2016年1月15日
-     */
+
     private static class CancelPayListenerProxy extends ListenerProxy {
 
         private final String transUuid;
@@ -886,17 +684,13 @@ public final class NewLiandiposManager {
 
         @Override
         public void onConfirm(final PosTransLog log) {
-            // 取消支付后删除本地刷卡交易记录
-            deleteTrans(transUuid);
+                        deleteTrans(transUuid);
             super.onConfirm(log);
         }
 
     }
 
-    /**
-     * @version: 1.0
-     * @date 2016年1月11日
-     */
+
     public static class RefundRef {
 
         public final String transUuid;
@@ -924,24 +718,13 @@ public final class NewLiandiposManager {
             this.hostSerialNo = hostSerialNo;
         }
 
-        /**
-         * 根据PosTransLog生成退款参考数据
-         *
-         * @param log
-         * @return
-         */
+
         public static RefundRef valueOf(PosTransLog log) {
             return new RefundRef(log.getUuid(), log.getTerminalNumber(), log.getAmount(), log.getTransDate(),
                     log.getTransTime(), log.getPosTraceNumber(), log.getHostSerialNumber());
         }
 
-        /**
-         * 根据PaymentItemUnionpay生成退款参考数据
-         *
-         * @Title: valueOf
-         * @Param @param paymentItemUnionpay
-         * @Return RefundRef 返回类型
-         */
+
         public static RefundRef valueOf(PaymentItemUnionpay paymentItemUnionpay, PaymentDevice paymentdevice) {
             SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
             String transDateStr = dfs.format(new Date(paymentItemUnionpay.getTransDate()));
@@ -951,12 +734,7 @@ public final class NewLiandiposManager {
                     paymentItemUnionpay.getPosTraceNumber(), paymentItemUnionpay.getHostSerialNumber());
         }
 
-        /**
-         * 获取参考金额，单位为元。 由于RefundRef中的amount是以分为单位，此方法将分转换为元
-         *
-         * @param ref
-         * @return
-         */
+
         static BigDecimal getAmount(RefundRef ref) {
             if (ref.amount == null) {
                 return BigDecimal.ZERO;
@@ -969,51 +747,24 @@ public final class NewLiandiposManager {
 
     }
 
-    /**
-     * POS刷卡处理过程的监听。所有回调方法都将在UI线程中执行。
-     *
-     * @version: 1.0
-     * @date 2016年1月8日
-     */
+
     public static interface OnTransListener {
 
-        /**
-         * pos当前是否激活
-         */
+
         void onActive();
 
-        /**
-         * 完成刷卡和输入密码后正在与银联服务器交易时回调
-         */
+
         void onStart();
 
-        /**
-         * 刷卡并扣款成功后回调
-         *
-         * @param log 交易产生的刷卡记录，在此回调中创建PaymentItem时使用log的uuid
-         *            。 取消支付(调用
-         *            {@link NewLiandiposManager#cancelPay(PosTransLog, OnTransListener)}
-         *            )时为null
-         */
+
         void onConfirm(PosTransLog log);
 
-        /**
-         * 刷卡交易失败时回调
-         * <p>
-         * //		 * @param msg
-         */
+
         void onFailure(NewLDResponse ldResponse);
 
     }
 
-    /**
-     * 得到真正的金额
-     *
-     * @param intener
-     * @Title: getRealMoney
-     * @Description:
-     * @Return BigDecimal 返回类型
-     */
+
     public static BigDecimal getRealMoney(Integer intener) {
         BigDecimal bigDecimal = new BigDecimal(intener);
         BigDecimal div = bigDecimal.divide(new BigDecimal(100));
@@ -1022,14 +773,7 @@ public final class NewLiandiposManager {
 
     private static final String MESSAGE_OCCUPIED = BaseApplication.sInstance.getString(R.string.mispos_pos_occupying);
 
-    /**
-     * 生成本地返回的错误信息
-     *
-     * @Title: GenerateErroLDResponse
-     * @Description:
-     * @Param message
-     * @Return NewLDResponse 返回类型
-     */
+
     private static NewLDResponse generateErroLDResponse(String message) {
         ResponseData responseData = new ResponseData();
         responseData.PutValue(LDResponseConstant.REJ_CODE, "X001");
@@ -1046,10 +790,8 @@ public final class NewLiandiposManager {
             Date dt1 = df.parse(DATE1);
             Date dt2 = df.parse(DATE2);
             if (dt1.getTime() > dt2.getTime()) {
-//				System.out.println("dt1 在dt2前");
                 return 1;
             } else if (dt1.getTime() < dt2.getTime()) {
-//				System.out.println("dt1在dt2后");
                 return -1;
             } else {
                 return 0;
@@ -1060,17 +802,12 @@ public final class NewLiandiposManager {
         return 0;
     }
 
-    /**
-     * 判断初始化化是否成功，如果不成功则重新初始化联迪SDK
-     *
-     * @param context
-     */
+
     private void isSuccessInit(Context context) {
         try {
             if (!MisPos.isInitSuccess()) {
                 Log.d("LiandiPos", "LiandiPos--init_failed");
-                //如果初始化失败则重新初始化
-                MisPos.deleteFile(context);
+                                MisPos.deleteFile(context);
                 MisPos.reInit(context);
                 if (MisPos.isInitSuccess()) {
                     Log.d("LiandiPos", "LiandiPos--init_success");
@@ -1081,9 +818,7 @@ public final class NewLiandiposManager {
         }
     }
 
-    /**
-     * 取消链接
-     */
+
     public void cancelConnect() {
         TaskContext.execute(new Runnable() {
             @Override

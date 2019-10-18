@@ -3,19 +3,13 @@ package com.zhongmei.bty.customer.util;
 import com.zhongmei.yunfu.util.ValueEnum;
 
 public enum RecordType implements ValueEnum<Integer> {
-    /**
-     * 购买，买入的
-     */
+
     BUY(1, "购买"),
 
-    /**
-     * 消费
-     */
+
     EXPENSE(2, "消费"),
 
-    /**
-     * 退货
-     */
+
     REFUND(3, "退货"),
 
     @Deprecated

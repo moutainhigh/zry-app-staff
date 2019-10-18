@@ -32,12 +32,7 @@ public class BuffetUnionCancelVo {
     }
 
     public static BuffetUnionCancelVo createBuffetUnionCancelVo(TradeVo tradeVo, BigDecimal depositPay, BigDecimal peopleCount) {
-        /*boolean depositEnable = ServerSettingCache.getInstance().getBuffetDepositEnable();
-        DepositInfo depositInfo = ServerSettingCache.getInstance().getBuffetTradeDeposit();
-        if (depositEnable && depositInfo != null) {
-            buffetUnionBean.depositType = deposit.getType();
-            buffetUnionBean.depositPay = BigDecimal.ZERO;
-        }*/
+
 
         BuffetUnionCancelVo buffetUnion = new BuffetUnionCancelVo();
         if (tradeVo.getTradeDeposit() != null) {
@@ -83,8 +78,7 @@ public class BuffetUnionCancelVo {
         public BigDecimal depositPay;
 
         public BigDecimal countDepositPay(BigDecimal peopleCount) {
-            //只有按人数时，才计算押金
-            if (depositType == DepositInfo.TYPE_BY_PEOPLE) {
+                        if (depositType == DepositInfo.TYPE_BY_PEOPLE) {
                 return peopleCount.multiply(unitPrice);
             }
 

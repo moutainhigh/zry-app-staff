@@ -6,10 +6,7 @@ import com.zhongmei.yunfu.db.enums.Sex;
 import com.zhongmei.yunfu.util.ValueEnums;
 
 public class CustomerV5 implements Serializable {
-    /**
-     * @date：2016-3-21 下午3:14:42
-     * @Description:TODO
-     */
+
     private static final long serialVersionUID = 1L;
 
     private Long customerid;

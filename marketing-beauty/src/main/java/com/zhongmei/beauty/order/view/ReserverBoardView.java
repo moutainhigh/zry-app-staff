@@ -18,9 +18,7 @@ import com.zhongmei.yunfu.util.DensityUtil;
 import java.util.List;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ReserverBoardView extends AbsoluteLayout {
     private final String TAG = ReserverBoardView.class.getSimpleName();
@@ -34,8 +32,7 @@ public class ReserverBoardView extends AbsoluteLayout {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        //画格子
-        drawableItemLine(canvas);
+                drawableItemLine(canvas);
         super.onDraw(canvas);
     }
 
@@ -54,15 +51,13 @@ public class ReserverBoardView extends AbsoluteLayout {
 
         float curPaintHeight = 0f;
         int index = 0;
-        while (curPaintHeight < height) {//画水平线
-            curPaintHeight += itemHeight;
+        while (curPaintHeight < height) {            curPaintHeight += itemHeight;
             index++;
             canvas.drawLine(0, curPaintHeight- 1, width, curPaintHeight- 1, paint);
         }
 
         float curPaintWidth = 0f;
-        while (curPaintWidth < width) {//画垂直的线
-            curPaintWidth += itemWidth;
+        while (curPaintWidth < width) {            curPaintWidth += itemWidth;
             canvas.drawLine(curPaintWidth, 0, curPaintWidth, height, paint);
         }
 
@@ -84,13 +79,7 @@ public class ReserverBoardView extends AbsoluteLayout {
     }
 
 
-    /**
-     * 构建预定看板View
-     *
-     * @param context
-     * @param reserverItemVo
-     * @return
-     */
+
     private ReserverTradeView createReserverTradeView(Context context, ReserverItemVo reserverItemVo) {
         ReserverTradeView reserverTradeView = (ReserverTradeView) LinearLayout.inflate(context, R.layout.beauty_reserver_tradeview, null);
         reserverTradeView.setLayoutParams(getReserverTradeViewLayoutParams(context, reserverItemVo));
@@ -100,13 +89,7 @@ public class ReserverBoardView extends AbsoluteLayout {
     }
 
 
-    /**
-     * 获取预定看板view参数
-     *
-     * @param context
-     * @param reserverItemVo
-     * @return
-     */
+
     private LayoutParams getReserverTradeViewLayoutParams(Context context, ReserverItemVo reserverItemVo) {
         int width = (int) (reserverItemVo.getWidth() - 1);
         int height = (int) (reserverItemVo.getHeight() - 1);

@@ -1,8 +1,6 @@
 package com.zhongmei.bty.mobilepay.bean;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MemberLoginTypeData {
     public static final int UI_TYPE_MOBILE = 0;

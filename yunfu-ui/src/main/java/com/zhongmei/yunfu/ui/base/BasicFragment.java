@@ -30,11 +30,7 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 所有Fragment的父类
- *
- * @date 2014-8-18
- */
+
 public class BasicFragment extends Fragment implements UILoadingController {
 
     protected static final String TAG = BasicFragment.class.getSimpleName();
@@ -67,8 +63,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
             public boolean queueIdle() {
                 Log.i("IdleHandler", "queueIdle");
                 onInit();
-                return false; //false 表示只监听一次IDLE事件,之后就不会再执行	这个函数了.
-            }
+                return false;             }
         });
     }
 
@@ -97,38 +92,24 @@ public class BasicFragment extends Fragment implements UILoadingController {
         }
     }
 
-    /**
-     * 初始化数据
-     */
+
     protected void onInit() {
     }
 
-    /**
-     * 获取bundle数据
-     *
-     * @param extras
-     */
+
     protected void getBundleExtras(Bundle extras) {
     }
 
-    /**
-     * 加载layout布局
-     *
-     * @return id of layout resource
-     */
+
     protected int getContentViewLayoutID() {
         return 0;
     }
 
-    /**
-     * 初始化UI控件
-     */
+
     protected void initId() {
     }
 
-    /**
-     * 初始化视图
-     */
+
     protected void initViewsAndEvents() {
     }
 
@@ -142,32 +123,8 @@ public class BasicFragment extends Fragment implements UILoadingController {
 
     @Override
     public void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
+                super.onResume();
 
-//		if(AuthUserCache.getCurrentUser() == null){
-//			 new CommonDialogFragmentBuilder().title(getResources().getString(R.string.invalidLogin))
-//				.iconType(R.drawable.common_dialog_icon_warning)
-//				.negativeText(R.string.reLogin)
-//				.negativeLisnter(new OnClickListener() {
-//
-//					@Override
-//					public void onClick(View arg0) {
-////						解决anr后activity not attached 问题
-//						if(getActivity()==null||getActivity().isDestroyed()){
-//							return;
-//						}
-//			    		 Intent intent = new Intent();
-//			    		 intent.setClassName("com.zhongmei.bty",
-//			    		 "com.zhongmei.bty.splash.login.LoginActivity_");
-//			    		 startActivity(intent);
-//			    		 getActivity().finish();
-//					}
-//				})
-//				.build()
-//				.show(this.getFragmentManager(), TAG);
-//
-//		 }
 
     }
 
@@ -182,31 +139,18 @@ public class BasicFragment extends Fragment implements UILoadingController {
 
     }
 
-    /**
-     * 获取 support fragment manager
-     *
-     * @return
-     */
+
     protected FragmentManager getSupportFragmentManager() {
         return getActivity().getSupportFragmentManager();
     }
 
-    /**
-     * startActivity
-     *
-     * @param clazz
-     */
+
     protected void readyGo(Class<?> clazz) {
         Intent intent = new Intent(getActivity(), clazz);
         startActivity(intent);
     }
 
-    /**
-     * startActivity with bundle
-     *
-     * @param clazz
-     * @param bundle
-     */
+
     protected void readyGo(Class<?> clazz, Bundle bundle) {
         Intent intent = new Intent(getActivity(), clazz);
         if (null != bundle) {
@@ -215,24 +159,13 @@ public class BasicFragment extends Fragment implements UILoadingController {
         startActivity(intent);
     }
 
-    /**
-     * startActivityForResult
-     *
-     * @param clazz
-     * @param requestCode
-     */
+
     protected void readyGoForResult(Class<?> clazz, int requestCode) {
         Intent intent = new Intent(getActivity(), clazz);
         startActivityForResult(intent, requestCode);
     }
 
-    /**
-     * startActivityForResult with bundle
-     *
-     * @param clazz
-     * @param requestCode
-     * @param bundle
-     */
+
     protected void readyGoForResult(Class<?> clazz, int requestCode, Bundle bundle) {
         Intent intent = new Intent(getActivity(), clazz);
         if (null != bundle) {
@@ -251,13 +184,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
 
     }
 
-    /**
-     * @Title: addFragment
-     * @Description: 添加碎片
-     * @Param mFragmentVo  碎片对象
-     * @Param isAnim 是否有动画
-     * @Return void 返回类型
-     */
+
     public void addFragment(FragmentVo mFragmentVo, Boolean isAnim) {
         if (getFragmentManager() != null) {
             FragmentTransaction fragmentTransaction;
@@ -273,13 +200,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
         }
     }
 
-    /**
-     * @Title: showFragment
-     * @Description: 显示碎片
-     * @Param mFragmentVo
-     * @Param isAnim TODO
-     * @Return void 返回类型
-     */
+
     public void showFragment(Fragment mFragment, Boolean isAnim) {
         if (getFragmentManager() != null) {
             FragmentTransaction fragmentTransaction;
@@ -325,13 +246,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
         }
     }
 
-    /**
-     * @Title: replaceFragment
-     * @Description: 当个替换碎片
-     * @Param mFragmentVo
-     * @Param isAnim TODO
-     * @Return void 返回类型
-     */
+
     protected void replaceFragment(FragmentVo mFragmentVo, Boolean isAnim) {
         FragmentTransaction fragmentTransaction;
         if (isAnim) {
@@ -345,13 +260,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
     }
 
 
-    /**
-     * @Title: replaceFragment
-     * @Description: 当个替换子碎片
-     * @Param mFragmentVo
-     * @Param isAnim TODO
-     * @Return void 返回类型
-     */
+
     protected void replaceChildFragment(FragmentVo mFragmentVo, Boolean isAnim) {
         FragmentTransaction fragmentTransaction;
         if (isAnim) {
@@ -364,13 +273,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
         fragmentTransaction.commitAllowingStateLoss();
     }
 
-    /**
-     * @Title: replaceFragment
-     * @Description: 批量替换碎片
-     * @Param @param listFragment：要替换的碎片列表
-     * @Param @param isAnim 是否需要动画
-     * @Return void 返回类型
-     */
+
     protected void replaceFragment(List<FragmentVo> listFragment, Boolean isAnim) {
         FragmentTransaction fragmentTransaction;
         if (isAnim) {
@@ -385,12 +288,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
         fragmentTransaction.commitAllowingStateLoss();
     }
 
-    /**
-     * @Title: removeFragment
-     * @Description: 移除碎片
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     protected void removeChileFragment(Fragment mFragment, String tag) {
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         fragmentTransaction.remove(mFragment);
@@ -399,12 +297,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
     }
 
 
-    /**
-     * @Title: removeFragment
-     * @Description: 移除碎片
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     protected void removeFragment(Fragment mFragment, String tag) {
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.remove(mFragment);
@@ -421,10 +314,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
 
     public FragmentTransaction getFragmentTransaction(FragmentManager mFragmentManager) {
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
-		/*fragmentTransaction.setCustomAnimations(R.animator.fragment_right_enter,
-			R.animator.fragment_right_exit,
-			R.animator.fragment_pop_right_exit,
-			R.animator.fragment_pop_right_enter);*/
+
         return fragmentTransaction;
     }
 
@@ -444,9 +334,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
         super.onDestroy();
     }
 
-    /**
-     * 注册EventBus
-     */
+
     protected void registerEventBus() {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
@@ -459,29 +347,17 @@ public class BasicFragment extends Fragment implements UILoadingController {
         }
     }
 
-    /**
-     * 用EventBus发送一个事件
-     *
-     * @param obj
-     */
+
     public void post(Object obj) {
         EventBus.getDefault().post(obj);
     }
 
-    /**
-     * 用EventBus发送一个Sticky事件
-     *
-     * @param obj
-     */
+
     public void postSticky(Object obj) {
         EventBus.getDefault().postSticky(obj);
     }
 
-    /**
-     * 显示一组View
-     *
-     * @param views
-     */
+
     public void show(View... views) {
         for (View view : views) {
             if (view != null) {
@@ -490,11 +366,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
         }
     }
 
-    /**
-     * 隐藏一组View
-     *
-     * @param views
-     */
+
     public void hide(View... views) {
         for (View view : views) {
             if (view != null) {
@@ -503,12 +375,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
         }
     }
 
-    /**
-     * 删除fragment的子fragment，确保程序的安全性(在fragment摧毁时调用)
-     *
-     * @param fm
-     * @param tag
-     */
+
     protected void tryRemoveTargetFragment(FragmentManager fm, String tag) {
         if (fm == null || fm.isDestroyed()) {
             return;
@@ -523,11 +390,7 @@ public class BasicFragment extends Fragment implements UILoadingController {
         }
     }
 
-    /**
-     * 禁用软键盘
-     *
-     * @param editText 指定的输入框
-     */
+
     protected void forbiddenSoftKeyboard(EditText editText) {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         try {
@@ -592,8 +455,5 @@ public class BasicFragment extends Fragment implements UILoadingController {
         }
     }
 
-	/*@Override
-	public void showToast(String msg) {
-		((BaseActivity) getActivity()).showToast(msg);
-	}*/
+
 }

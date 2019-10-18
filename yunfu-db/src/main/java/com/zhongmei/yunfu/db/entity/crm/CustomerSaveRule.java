@@ -16,85 +16,55 @@ import java.math.BigDecimal;
 @DatabaseTable(tableName = "customer_save_rule")
 public class CustomerSaveRule extends CrmBasicEntityBase implements ICreator, IUpdator {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "crm_customer_level_rights"
-     */
+
     public interface $ extends CrmBasicEntityBase.$ {
 
-        /**
-         * 充值金额
-         */
+
         public static final String storedValue = "stored_value";
 
-        /**
-         * 赠送金额
-         */
+
         public static final String giveValue = "give_value";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * coupon_type
-         */
+
         String couponType = "coupon_type";
     }
 
-    /**
-     * 充值金额
-     */
+
     @DatabaseField(columnName = "stored_value")
     private BigDecimal storedValue;
 
-    /**
-     * 赠送金额
-     */
+
     @DatabaseField(columnName = "give_value")
     private BigDecimal giveValue;
 
-    /**
-     * 创建者id
-     */
+
     @DatabaseField(columnName = "creator_id")
     private Long creatorId;
 
-    /**
-     * 创建者名称
-     */
+
     @DatabaseField(columnName = "creator_name")
     private String creatorName;
 
-    /**
-     * 更新者id
-     */
+
     @DatabaseField(columnName = "updator_id")
     private Long updatorId;
 
-    /**
-     * 最后修改者姓名
-     */
+
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 

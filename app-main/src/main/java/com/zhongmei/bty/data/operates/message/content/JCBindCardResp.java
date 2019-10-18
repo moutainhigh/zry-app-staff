@@ -5,9 +5,7 @@ import com.zhongmei.yunfu.db.entity.trade.TradeItem;
 import com.zhongmei.yunfu.db.entity.trade.TradeCustomer;
 import com.zhongmei.bty.basemodule.devices.mispos.data.CardSaleInfo;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class JCBindCardResp {
     private Trade trade;

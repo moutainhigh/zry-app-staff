@@ -1,8 +1,6 @@
 package com.zhongmei.bty.cashier.exception;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class OperateException extends RuntimeException {
     public OperateException() {
     }

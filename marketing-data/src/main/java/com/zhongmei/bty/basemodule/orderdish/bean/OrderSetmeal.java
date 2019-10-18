@@ -8,10 +8,7 @@ import com.zhongmei.bty.basemodule.orderdish.entity.DishUnitDictionary;
 import java.math.BigDecimal;
 import java.util.Set;
 
-/**
- * @version: 1.0
- * @date 2015年7月10日
- */
+
 public class OrderSetmeal extends OrderDish {
 
     protected DishSetmeal setmeal;

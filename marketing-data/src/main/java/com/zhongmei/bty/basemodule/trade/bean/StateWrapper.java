@@ -4,9 +4,7 @@ package com.zhongmei.bty.basemodule.trade.bean;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class StateWrapper {
     public TradeTableInfo unionTableMainTrade;

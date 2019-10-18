@@ -58,24 +58,17 @@ public class BuffetUnionTrade extends IUnionTrade {
                     return;
                 }
 
-                /*TradeVo mainTradeVo = splitTool.getMainTradeVo();
-                //判断押金是否支持
-                if (businessType == BusinessType.BUFFET && mainTradeVo.isNeedToPayDeposit() && mainTradeVo.isPaidTradeposit()) {
-                    setResponse(listener, new Exception("联台单已经交押金，不能取消联台"), null);
-                    return;
-                }*/
+
 
                 createDepositPeople(splitTool.getMainTradeVo(), splitTool.getSubTradeVo(), unionCancelVo);
-                //checkBuffetUnionTradeMainVail(splitTool);
-                BuffetUnionTradeCancelReq buffetUnionTradeCancelReq = splitTool.createBuffetUnionTradeCancelReq(splitTool.getMainTradeVo(), splitTool.getSubTradeVo(), false);
+                                BuffetUnionTradeCancelReq buffetUnionTradeCancelReq = splitTool.createBuffetUnionTradeCancelReq(splitTool.getMainTradeVo(), splitTool.getSubTradeVo(), false);
                 setResult(buffetUnionTradeCancelReq, listener);
             }
         }.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     private void checkBuffetUnionTradeMainVail(BuffetSplitUnionManager splitTool) {
-        //如果是最后一个子单那么设置主单为无效
-        if (splitTool.getTradeMainSubRelationList().size() == 1) {
+                if (splitTool.getTradeMainSubRelationList().size() == 1) {
             TradeVo mainTradeVo = splitTool.getMainTradeVo();
             mainTradeVo.getTrade().setStatusFlag(StatusFlag.INVALID);
             mainTradeVo.getTrade().validateUpdate();
@@ -89,8 +82,7 @@ public class BuffetUnionTrade extends IUnionTrade {
 
         createTradeDeposit(subTradeVo, unionCancelVo.buffetDeposit);
 
-        //设置人数为无效
-        List<TradeBuffetPeople> tradeBuffetPeopleList = subTradeVo.getTradeBuffetPeoples();
+                List<TradeBuffetPeople> tradeBuffetPeopleList = subTradeVo.getTradeBuffetPeoples();
         if (tradeBuffetPeopleList == null) {
             tradeBuffetPeopleList = new ArrayList<>();
             subTradeVo.setTradeBuffetPeoples(tradeBuffetPeopleList);
@@ -106,8 +98,7 @@ public class BuffetUnionTrade extends IUnionTrade {
         List<TradeBuffetPeople> tradeBuffetPeoples = createTradeBuffetPeople(subTradeVo, unionCancelVo.buffetPeople);
         tradeBuffetPeopleList.addAll(tradeBuffetPeoples);
 
-        //修改子单桌台人数
-        List<TradeTable> tradeTableList = subTradeVo.getTradeTableList();
+                List<TradeTable> tradeTableList = subTradeVo.getTradeTableList();
         if (tradeTableList != null) {
             for (TradeTable tradeTable : tradeTableList) {
                 if (tradeTable.isValid()) {
@@ -117,27 +108,20 @@ public class BuffetUnionTrade extends IUnionTrade {
             }
         }
 
-        //复制主单消费税到子单
-        copyMainTradeTaxToSubTradeTax(mainTradeVo, subTradeVo);
+                copyMainTradeTaxToSubTradeTax(mainTradeVo, subTradeVo);
         copyMainTradeInitConfigToSubTradeInitConfig(mainTradeVo, subTradeVo);
 
         deductionMainTrade(mainTradeVo, subTradeVo, unionCancelVo);
     }
 
-    /**
-     * 复制主单消费税到子单
-     *
-     * @param mainTradeVo
-     * @param subTradeVo
-     */
+
     public static void copyMainTradeTaxToSubTradeTax(TradeVo mainTradeVo, TradeVo subTradeVo) {
         List<TradeTax> mainTradeTaxs = mainTradeVo.getTradeTaxs();
         if (Utils.isEmpty(mainTradeTaxs)) {
             return;
         }
 
-        //复制当前主单税费信息
-        List<TradeTax> tradeTaxListCopy = new ArrayList<>();
+                List<TradeTax> tradeTaxListCopy = new ArrayList<>();
         for (TradeTax mainTradeTax : mainTradeTaxs) {
             TradeTax tradeTaxCopy = new TradeTax();
             tradeTaxCopy.validateCreate();
@@ -159,8 +143,7 @@ public class BuffetUnionTrade extends IUnionTrade {
         if (Utils.isEmpty(subTradeTaxs)) {
             subTradeVo.setTradeTaxs(tradeTaxListCopy);
         } else {
-            //设置当前税费为无效
-            for (TradeTax tradeTax : subTradeTaxs) {
+                        for (TradeTax tradeTax : subTradeTaxs) {
                 if (tradeTax.isValid()) {
                     tradeTax.setStatusFlag(StatusFlag.INVALID);
                     tradeTax.validateUpdate();
@@ -170,20 +153,14 @@ public class BuffetUnionTrade extends IUnionTrade {
         }
     }
 
-    /**
-     * 复制主单服务费信息到子单
-     *
-     * @param mainTradeVo
-     * @param subTradeVo
-     */
+
     public static void copyMainTradeInitConfigToSubTradeInitConfig(TradeVo mainTradeVo, TradeVo subTradeVo) {
         List<TradeInitConfig> mainTradeInitCfgs = mainTradeVo.getTradeInitConfigs();
         if (Utils.isEmpty(mainTradeInitCfgs)) {
             return;
         }
 
-        //复制当前主单税费信息
-        List<TradeInitConfig> tradeTaxListCopy = new ArrayList<>();
+                List<TradeInitConfig> tradeTaxListCopy = new ArrayList<>();
         for (TradeInitConfig mainTradeInitCfg : mainTradeInitCfgs) {
             TradeInitConfig tradeInitCfgCopy = new TradeInitConfig();
             tradeInitCfgCopy.validateCreate();
@@ -198,8 +175,7 @@ public class BuffetUnionTrade extends IUnionTrade {
         if (Utils.isEmpty(subTradeTaxs)) {
             subTradeVo.setTradeInitConfigs(tradeTaxListCopy);
         } else {
-            //设置当前税费为无效
-            for (TradeInitConfig tradeInitCfg : subTradeTaxs) {
+                        for (TradeInitConfig tradeInitCfg : subTradeTaxs) {
                 if (tradeInitCfg.isValid()) {
                     tradeInitCfg.setStatusFlag(StatusFlag.INVALID);
                     tradeInitCfg.validateUpdate();
@@ -209,16 +185,9 @@ public class BuffetUnionTrade extends IUnionTrade {
         }
     }
 
-    /**
-     * 主单扣减
-     *
-     * @param mainTradeVo
-     * @param subTradeVo
-     * @param unionCancelVo
-     */
+
     private void deductionMainTrade(TradeVo mainTradeVo, TradeVo subTradeVo, BuffetUnionCancelVo unionCancelVo) {
-        //去除子单会员价
-        IntegralCashPrivilegeVo integralCashPrivilegeVo = subTradeVo.getIntegralCashPrivilegeVo();
+                IntegralCashPrivilegeVo integralCashPrivilegeVo = subTradeVo.getIntegralCashPrivilegeVo();
         if (integralCashPrivilegeVo != null) {
             TradePrivilege tradePrivilege = integralCashPrivilegeVo.getTradePrivilege();
             if (tradePrivilege != null
@@ -230,16 +199,13 @@ public class BuffetUnionTrade extends IUnionTrade {
             }
         }
 
-        //主单押金减去子单押金
-        TradeDeposit mainTradeDeposit = mainTradeVo.getTradeDeposit();
+                TradeDeposit mainTradeDeposit = mainTradeVo.getTradeDeposit();
         if (mainTradeDeposit != null && subTradeVo.getTradeDeposit() != null) {
-            //mainTradeDeposit.setType(tradeDeposit.getType());
-            mainTradeDeposit.setDepositPay(mainTradeDeposit.getDepositPay().subtract(subTradeVo.getTradeDeposit().getDepositPay()));
+                        mainTradeDeposit.setDepositPay(mainTradeDeposit.getDepositPay().subtract(subTradeVo.getTradeDeposit().getDepositPay()));
             mainTradeDeposit.setChanged(true);
         }
 
-        //主单餐标人数减去拆出去的订单
-        List<TradeBuffetPeople> mainTradeBuffetPeopleList = mainTradeVo.getTradeBuffetPeoples();
+                List<TradeBuffetPeople> mainTradeBuffetPeopleList = mainTradeVo.getTradeBuffetPeoples();
         if (mainTradeBuffetPeopleList != null) {
             for (TradeBuffetPeople it : mainTradeBuffetPeopleList) {
                 if (unionCancelVo.buffetPeople != null && it.getStatusFlag() == StatusFlag.VALID) {

@@ -12,11 +12,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
-/**
- * 同步服务
- *
- * @created 2018/04/17
- */
+
 public class SyncService extends Service {
 
     public static final String SYNC_KEEP_ALIVE = ":SYNC_KEEP_ALIVE";
@@ -24,9 +20,7 @@ public class SyncService extends Service {
     private static final String EXTRA_MODULE_KEY = "module";
 
     private SyncServiceManager syncServiceManager;
-    private Set<String> mSyncAllModules = SyncContent.getSyncModuleAll(); //同步所有Module
-    private long keepAliveCount = 0; //心跳次数
-
+    private Set<String> mSyncAllModules = SyncContent.getSyncModuleAll();     private long keepAliveCount = 0;
     public static void startService(Context context) {
         Intent intent = new Intent(context, SyncService.class);
         context.startService(intent);

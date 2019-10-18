@@ -16,74 +16,48 @@ import com.zhongmei.bty.commonmodule.database.enums.PrinterDeviceType;
 import com.zhongmei.bty.commonmodule.database.enums.PrinterKind;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * PrinterDevice is a ORMLite bean type. Corresponds to the database table "printer_device"
- */
+
 @DatabaseTable(tableName = "printer_device")
 public class PrinterDevice extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "printer_device"
-     */
+
     public interface $ extends DataEntityBase.$ {
 
-        /**
-         * address
-         */
+
         public static final String address = "address";
 
-        /**
-         * connection_type
-         */
+
         public static final String connectionType = "connection_type";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * device_name
-         */
+
         public static final String deviceName = "device_name";
 
-        /**
-         * printer_device_type
-         */
+
         public static final String printerDeviceType = "printer_device_type";
 
-        /**
-         * printer_kind
-         */
+
         public static final String printerKind = "printer_kind";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * paper_size
-         */
+
         public static final String paperSize = "paper_size";
 
         public static final String healthStatus = "health_status";
 
-        /**
-         * ring
-         */
+
         public static final String isOpenRing = "is_open_ring";
 
         public static final String ringCount = "ring_count";
@@ -130,11 +104,9 @@ public class PrinterDevice extends DataEntityBase implements ICreator, IUpdator 
     private Integer isOpenRing;
 
     @DatabaseField(columnName = "ring_count")
-    public Integer ringCount; // 响铃次数，后续同步会增加该字段
-
+    public Integer ringCount;
     @DatabaseField(columnName = "printer_device_model")
-    private Integer printerDeviceModel; //打印机型号 用于在打印时设置行间距
-
+    private Integer printerDeviceModel;
 
     public Integer getRingCount() {
         return ringCount;
@@ -276,9 +248,7 @@ public class PrinterDevice extends DataEntityBase implements ICreator, IUpdator 
         validateUpdate();
     }
 
-    /*
-     *获取打印机类型名称
-     */
+
     public String getPrintModelName() {
         switch (getPrinterDeviceModel()) {
 

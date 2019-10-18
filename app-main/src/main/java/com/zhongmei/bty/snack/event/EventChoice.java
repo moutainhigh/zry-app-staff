@@ -1,9 +1,6 @@
 package com.zhongmei.bty.snack.event;
 
-/**
- * 等叫起菜、选中菜品时事件
- * Created by demo on 2018/12/15
- */
+
 
 public class EventChoice {
     private String count;

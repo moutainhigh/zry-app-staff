@@ -21,9 +21,7 @@ import com.zhongmei.yunfu.context.data.ShopInfoCfg;
 import com.zhongmei.bty.basemodule.customer.bean.coupon.CouponVo;
 import com.zhongmei.yunfu.db.entity.discount.CoupRule;
 
-/**
- * 优惠券Adapter
- */
+
 @SuppressLint("SimpleDateFormat")
 public class CouponAdapter extends BaseAdapter {
 
@@ -57,8 +55,7 @@ public class CouponAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return 0;
+                return 0;
     }
 
     @Override
@@ -81,19 +78,15 @@ public class CouponAdapter extends BaseAdapter {
         }
         if (mCouponList != null) {
             CouponVo vo = mCouponList.get(position);
-            // 有效期需格式转换
-            try {
-//				Date start = formatter.parse(vo.getCouponInfo().getValidStartDate());
+                        try {
                 String end = DateUtil.format(vo.getCouponInfo().getEndTime());
                 viewHolder.timeLimit.setText(mContext.getString(R.string.customer_coupon_record_time, end));
             } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                                e.printStackTrace();
             }
             if (vo.getCoupon() != null) {
                 switch (vo.getCoupon().getCouponType()) {
-                    case CASH:// 现金券
-                        viewHolder.cashprice.setText("¥" + vo.getCoupon().getDiscountValue());
+                    case CASH:                        viewHolder.cashprice.setText("¥" + vo.getCoupon().getDiscountValue());
                         viewHolder.name.setText(mContext.getString(R.string.cash_ticket_str));
                         viewHolder.vwLabel.setBackgroundResource(R.drawable.customer_coupon_label_purple);
                         viewHolder.discountLayout.setVisibility(View.GONE);
@@ -104,8 +97,7 @@ public class CouponAdapter extends BaseAdapter {
                         viewHolder.price.setVisibility(View.GONE);
                         viewHolder.cashprice.setVisibility(View.VISIBLE);
                         break;
-                    case DISCOUNT:// 折扣
-                        viewHolder.discount.setText("" + vo.getCoupon().getDiscountValue());
+                    case DISCOUNT:                        viewHolder.discount.setText("" + vo.getCoupon().getDiscountValue());
                         if (vo.getCoupon().getFullValue() != null) {
                             viewHolder.desc.setText(String.format(mContext.getString(R.string.discount_full_value), vo.getCoupon().getFullValue().toString()));
                         }
@@ -116,8 +108,7 @@ public class CouponAdapter extends BaseAdapter {
                         viewHolder.desc.setVisibility(View.VISIBLE);
                         viewHolder.discountLayout.setVisibility(View.VISIBLE);
                         break;
-                    case REBATE:// 满减
-                        viewHolder.discount.setText("¥" + vo.getCoupon().getDiscountValue());
+                    case REBATE:                        viewHolder.discount.setText("¥" + vo.getCoupon().getDiscountValue());
                         if (vo.getCoupon().getFullValue() != null) {
                             viewHolder.desc.setText(String.format(mContext.getString(R.string.rebate_full_value), vo.getCoupon().getFullValue().toString()));
                         }
@@ -128,8 +119,7 @@ public class CouponAdapter extends BaseAdapter {
                         viewHolder.price.setVisibility(View.VISIBLE);
                         viewHolder.desc.setVisibility(View.VISIBLE);
                         break;
-                    case GIFT://礼品券
-                        String giftName = vo.getCoupon().getDishName();
+                    case GIFT:                        String giftName = vo.getCoupon().getDishName();
                         String giftCount = "1";
 
                         if (vo.getCoupon().getFullValue() != null) {

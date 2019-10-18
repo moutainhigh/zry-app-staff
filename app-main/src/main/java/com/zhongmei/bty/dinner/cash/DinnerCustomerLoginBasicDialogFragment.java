@@ -20,9 +20,7 @@ import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
 
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class DinnerCustomerLoginBasicDialogFragment extends BasicDialogFragment {
 
     public static final String TAG = DinnerCustomerLoginBasicDialogFragment.class.getSimpleName();
@@ -31,10 +29,8 @@ public class DinnerCustomerLoginBasicDialogFragment extends BasicDialogFragment 
 
     public String requestUuid;
 
-    private int barcodeWH = 180;// 微信二维码宽度
-
-    // 生成二维码
-    Bitmap mBitmap = null;
+    private int barcodeWH = 180;
+        Bitmap mBitmap = null;
 
     public static final int UI_TYPE_LOGIN = 0;
 

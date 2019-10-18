@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.EntityBase;
 import com.zhongmei.yunfu.db.enums.PrintStatus;
 
-/**
- * PrintOperation is a ORMLite bean type. Corresponds to the database table "print_operation"
- */
+
 @DatabaseTable(tableName = "print_operation_local_status")
 public class PrintOperationLocalStatus extends EntityBase<Long> {
 
@@ -23,8 +21,7 @@ public class PrintOperationLocalStatus extends EntityBase<Long> {
     public Long printOperationId;
 
     @DatabaseField(columnName = "local_print_status")
-    public Integer localPrintStatus; //本地打印状态
-
+    public Integer localPrintStatus;
 
     public void setLocalPrintStatus(PrintStatus localPrintStatus) {
         this.localPrintStatus = ValueEnums.toValue(localPrintStatus);

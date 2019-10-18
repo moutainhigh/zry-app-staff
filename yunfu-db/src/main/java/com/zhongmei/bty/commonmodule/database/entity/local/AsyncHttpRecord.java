@@ -8,11 +8,7 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.bty.commonmodule.database.enums.AsyncHttpState;
 import com.zhongmei.bty.commonmodule.database.enums.AsyncHttpType;
 
-/**
- * Model class of 网络异步请求记录.
- *
- * @version $Id$
- */
+
 @DatabaseTable(tableName = "async_http_record")
 public class AsyncHttpRecord extends LocalEntityBase implements ICreator, IUpdator, Cloneable {
 
@@ -47,75 +43,51 @@ public class AsyncHttpRecord extends LocalEntityBase implements ICreator, IUpdat
 
     }
 
-    /**
-     * 订单ID.
-     */
+
     @DatabaseField(columnName = "trade_id")
     private Long tradeId;
 
-    /**
-     * 订单uuid.
-     */
+
     @DatabaseField(columnName = "trade_uuid")
     private String tradeUuId;
 
-    /**
-     * 桌台ID
-     **/
+
     @DatabaseField(columnName = "table_id")
     private Long tableId;
 
-    /**
-     * 流水号
-     */
+
     @DatabaseField(columnName = "serial_number")
     private String serialNumber;
 
-    /**
-     * 桌台号
-     */
+
     @DatabaseField(columnName = "table_name")
     private String tableName;
 
-    /**
-     * 服务器最后一次更新时间.
-     */
+
     @DatabaseField(columnName = "trade_update_time")
     private Long tradeUpdateTime;
 
-    /**
-     * 业务类型. AsyncHttpType
-     */
+
     @DatabaseField(columnName = "type")
     private Integer type;
 
-    /**
-     * 状态. AsyncHttpState
-     */
+
     @DatabaseField(columnName = "status")
     private Integer status = AsyncHttpState.EXCUTING.value();
 
-    /**
-     * 原因.
-     */
+
     @DatabaseField(columnName = "reason")
     private String reason;
 
-    /**
-     * 重试次数.
-     */
+
     @DatabaseField(columnName = "retry_count")
     private Integer retryCount = 0;
 
-    /**
-     * 网络请求参数.
-     */
+
     @DatabaseField(columnName = "req_str")
     private String reqStr;
 
-    /**
-     * 网络请求地址.
-     */
+
     @DatabaseField(columnName = "req_url")
     private String reqUrl;
 
@@ -134,13 +106,10 @@ public class AsyncHttpRecord extends LocalEntityBase implements ICreator, IUpdat
     @DatabaseField(columnName = "device_no")
     private String deviceNo;
 
-    //异步改单类接口触发的打印json数据
-    @DatabaseField(columnName = "print_bean_json")
+        @DatabaseField(columnName = "print_bean_json")
     private String printBeanJson;
 
-    /**
-     * Constructor.
-     */
+
     public AsyncHttpRecord() {
     }
 

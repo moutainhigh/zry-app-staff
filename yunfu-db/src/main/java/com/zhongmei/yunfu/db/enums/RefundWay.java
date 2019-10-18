@@ -4,24 +4,14 @@ import com.zhongmei.yunfu.util.ValueEnum;
 
 public enum RefundWay implements ValueEnum<Integer> {
 
-    /**
-     * 无需退款
-     */
+
     NONEED_REFUND(1),
-    /**
-     * 自动退款
-     */
+
     AUTO_REFUND(2),
-    /**
-     * 手动退款
-     */
+
     HAND_REFUND(3),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

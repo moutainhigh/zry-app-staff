@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2006 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.zhongmei.bty.statusbar;
 
@@ -35,9 +21,7 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 
-/**
- * This widget display an analogic clock with two hands for hours and minutes.
- */
+
 public class Clock extends TextView {
     private boolean mAttached;
     private Calendar mCalendar;
@@ -68,17 +52,10 @@ public class Clock extends TextView {
 
         registerTimeTick();
 
-        // NOTE: It's safe to do these after registering the receiver since the
-        // receiver always runs
-        // in the main thread, therefore the receiver can't run before this
-        // method returns.
 
-        // The time zone may have changed while the receiver wasn't registered,
-        // so update the Time
-        mCalendar = Calendar.getInstance(TimeZone.getDefault());
+                        mCalendar = Calendar.getInstance(TimeZone.getDefault());
 
-        // Make sure we update to the current time
-        updateClock();
+                updateClock();
     }
 
     @Override
@@ -106,7 +83,6 @@ public class Clock extends TextView {
             filter.addAction(Intent.ACTION_TIME_TICK);
             filter.addAction(Intent.ACTION_TIME_CHANGED);
             filter.addAction(Intent.ACTION_TIMEZONE_CHANGED);
-            //filter.addAction(Intent.ACTION_CONFIGURATION_CHANGED);
 
             getContext().registerReceiver(mIntentReceiver, filter, null, getHandler());
         }
@@ -148,11 +124,7 @@ public class Clock extends TextView {
         SimpleDateFormat sdf;
         String format = getTimeFormat(context);
         if (!format.equals(mClockFormatString)) {
-            /*
-             * Search for an unquoted "a" in the format string, so we can add
-             * dummy characters around it to let us find it again after
-             * formatting and change its size.
-             */
+
             if (AM_PM_STYLE != AM_PM_STYLE_NORMAL) {
                 int a = -1;
                 boolean quoted = false;
@@ -169,9 +141,7 @@ public class Clock extends TextView {
                 }
 
                 if (a >= 0) {
-                    // Move a back so any whitespace before AM/PM is also in the
-                    // alternate size.
-                    final int b = a;
+                                                            final int b = a;
                     while (a > 0 && Character.isWhitespace(format.charAt(a - 1))) {
                         a--;
                     }
@@ -211,7 +181,6 @@ public class Clock extends TextView {
 
     private String getTimeFormat(Context context) {
         boolean b24 = DateFormat.is24HourFormat(context);
-        //return b24 ? "H:mm" : "a h:mm";
-        return "H:mm";
+                return "H:mm";
     }
 }

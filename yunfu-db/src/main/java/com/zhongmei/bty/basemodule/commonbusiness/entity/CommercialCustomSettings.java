@@ -4,11 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.BasicEntityBase;
 
-/**
- * @Date： 16/5/18
- * @Description: 商户设置表
- * @Version: 1.0
- */
+
 @DatabaseTable(tableName = "commercial_custom_settings")
 public class CommercialCustomSettings extends BasicEntityBase {
     private static final long serialVersionUID = 1L;
@@ -19,24 +15,16 @@ public class CommercialCustomSettings extends BasicEntityBase {
 
         public static final String value = "setting_value";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

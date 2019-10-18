@@ -32,23 +32,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @EFragment(R.layout.setting_paymodel_order_fragment_layout)
 public class PayModelOrderSettingFragment extends Fragment {
     private final String TAG = "PayModelOrderSetting";
     @ViewById(R.id.myDragGridView)
-    DragGridView mDragGridView;//可拖动的gridView
-    List<PayMethodItem> methodList = new ArrayList<PayMethodItem>();
+    DragGridView mDragGridView;    List<PayMethodItem> methodList = new ArrayList<PayMethodItem>();
     PayMethodAdapter adapter;
 
     @AfterViews
     void init() {
         adapter = new PayMethodAdapter(this.getActivity());
-        // 初始化支付方式
-        PaymentMenuTool menuTool = new PaymentMenuTool(getActivity(), BusinessType.DINNER);
+                PaymentMenuTool menuTool = new PaymentMenuTool(getActivity(), BusinessType.DINNER);
         menuTool.isBuildEmpty(false);
         methodList.addAll(menuTool.initMethodList());
         adapter.addList(methodList);
@@ -122,9 +118,7 @@ public class PayModelOrderSettingFragment extends Fragment {
 
     private static class PayMethodAdapter extends BaseListAdapter<ViewHolder, PayMethodItem> {
 
-        /**
-         * @param context
-         */
+
         public PayMethodAdapter(Context context) {
             super(context, R.layout.setting_pay_method_item);
         }
@@ -145,8 +139,7 @@ public class PayModelOrderSettingFragment extends Fragment {
             viewHolder.linearLayout.setFocusable(false);
             viewHolder.linearLayout.setEnabled(false);
             viewHolder.linearLayout.setSelected(false);
-            //viewHolder.linearLayout.setVisibility(View.VISIBLE);
-            viewHolder.methodIconImg.setSelected(false);
+                        viewHolder.methodIconImg.setSelected(false);
             viewHolder.methodNameTxv.setSelected(item.isSelected);
             viewHolder.methodNameTxv.setText(item.methodName);
             viewHolder.methodIconImg.setImageResource(item.methodResId);

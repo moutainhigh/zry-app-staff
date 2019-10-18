@@ -13,9 +13,7 @@ import android.widget.TextView;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.db.entity.crm.CustomerGroupLevel;
 
-/**
- * 分组Adapter
- */
+
 public class CustomerGroupPopWindowAdapter extends BaseAdapter {
 
     private List<CustomerGroupLevel> mList;

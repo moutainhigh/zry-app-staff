@@ -22,26 +22,20 @@ import com.zhongmei.bty.basemodule.devices.scaner.DeWoScanCode;
 
 import java.lang.reflect.Method;
 
-/**
- * Created by demo on 2018/12/15
- * 验券控件
- */
+
 public class CheckCouponView extends LinearLayout implements View.OnClickListener {
 
     private static final String TAG = CheckCouponView.class.getSimpleName();
 
     private Context mContext;
 
-    //扫描Button
-    private LinearLayout mScanBtn;
+        private LinearLayout mScanBtn;
 
     private EditText mValue;
 
-    //验券Button
-    private Button mCheckBtn;
+        private Button mCheckBtn;
 
-    //是否显示系统键盘
-    private boolean isShowSystemKeryBoard = true;
+        private boolean isShowSystemKeryBoard = true;
 
     private CouponsListener mListener = null;
 
@@ -62,9 +56,7 @@ public class CheckCouponView extends LinearLayout implements View.OnClickListene
         super(context, attrs, defStyleAttr);
     }
 
-    /**
-     * 初始化layout
-     */
+
     private void init(Context context) {
         LayoutInflater.from(context).inflate(R.layout.comm_check_coupons_vertical_layout, this);
         mScanBtn = (LinearLayout) findViewById(R.id.scan_btn);
@@ -112,18 +104,12 @@ public class CheckCouponView extends LinearLayout implements View.OnClickListene
         return mValue;
     }
 
-    /**
-     * 清除内容
-     */
+
     public void cleanEditText() {
         mValue.setText("");
     }
 
-    /**
-     * 设置是否隐藏系统键盘
-     *
-     * @param flag true:显示 false：隐藏
-     */
+
     public void setKeyBoardValue(boolean flag) {
         this.isShowSystemKeryBoard = flag;
         forbiddenSoftKeyboard();
@@ -148,9 +134,7 @@ public class CheckCouponView extends LinearLayout implements View.OnClickListene
     }
 
 
-    /**
-     * 设置系统隐藏与显示
-     */
+
     private void forbiddenSoftKeyboard() {
 
         try {
@@ -171,9 +155,7 @@ public class CheckCouponView extends LinearLayout implements View.OnClickListene
         }
     }
 
-    /**
-     * 开启扫描
-     */
+
     private void startScan() {
         scanPopupWindow = new ScanPopupWindow(mContext);
         scanPopupWindow.showAtLocation(mScanBtn, Gravity.NO_GRAVITY, 0, 0);
@@ -195,15 +177,11 @@ public class CheckCouponView extends LinearLayout implements View.OnClickListene
 
     public interface CouponsListener {
 
-        /**
-         * 券号
-         */
+
         public void getCouponsNo(String ticketNo);
     }
 
-    /**
-     * 设置Listener
-     */
+
     public void setCouponsListener(CouponsListener vListener) {
         this.mListener = vListener;
     }

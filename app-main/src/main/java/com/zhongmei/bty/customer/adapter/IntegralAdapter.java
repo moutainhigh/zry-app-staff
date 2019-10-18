@@ -19,9 +19,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-/**
- * 积分Adapter
- */
+
 public class IntegralAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
@@ -56,8 +54,7 @@ public class IntegralAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return 0;
+                return 0;
     }
 
     @SuppressWarnings("deprecation")

@@ -18,9 +18,7 @@ import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @date 2017/2/13 10:10
- */
+
 
 public class BasicDialogFragment extends DialogFragment {
 
@@ -59,9 +57,7 @@ public class BasicDialogFragment extends DialogFragment {
         super.onDestroyView();
     }
 
-    /**
-     * 注册EventBus
-     */
+
     protected void registerEventBus() {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this);
@@ -77,8 +73,7 @@ public class BasicDialogFragment extends DialogFragment {
     public void hideSoftInputFromWindow(View view) {
         Context context = view.getContext();
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(view.getWindowToken(), 0); //强制隐藏键盘
-    }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);     }
 
     protected void replaceFragment(int containerViewId, Fragment fragment, String tag) {
         try {
@@ -148,12 +143,7 @@ public class BasicDialogFragment extends DialogFragment {
         }
     }
 
-    /**
-     * 删除fragment的子fragment，确保程序的安全性(在fragment摧毁时调用)
-     *
-     * @param fm
-     * @param tag
-     */
+
     protected void tryRemoveTargetFragment(FragmentManager fm, String tag) {
         if (fm == null || fm.isDestroyed()) {
             return;
@@ -168,12 +158,7 @@ public class BasicDialogFragment extends DialogFragment {
         }
     }
 
-    /**
-     * @Title: removeFragment
-     * @Description: 移除碎片
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     protected void removeFragment(Fragment mFragment, String tag) {
         FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
         fragmentTransaction.remove(mFragment);

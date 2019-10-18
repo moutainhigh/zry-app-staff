@@ -6,20 +6,14 @@ import com.zhongmei.yunfu.data.R;
 import com.zhongmei.bty.basemodule.discount.enums.WeiXinCardType;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * 微信卡券信息
- * Created by demo on 2018/12/15
- */
+
 public class WeiXinCouponsInfo implements java.io.Serializable {
 
-    private String code;//卡号
-
+    private String code;
     private WeiXinCardType card_type;
 
-    private WeiXinCashCouponsInfo cash;//代金券信息
-
-    private WeiXinCodeInfo code_info;//错误信息
-
+    private WeiXinCashCouponsInfo cash;
+    private WeiXinCodeInfo code_info;
     public String getCode() {
         return code;
     }
@@ -59,15 +53,11 @@ public class WeiXinCouponsInfo implements java.io.Serializable {
         public static final String DELETE = "DELETE";
         public static final String UNAVAILABLE = "UNAVAILABLE";
 
-        private String errcode;//0为正常
-
+        private String errcode;
         private String errmsg;
 
-        private Boolean can_consume;//是否可以核销
+        private Boolean can_consume;
 
-        /**
-         * 是否可以核销
-         */
         public Boolean isCanConsume() {
             if (getErrcode().equals("0") && getCan_consume()) {
                 return true;
@@ -76,9 +66,7 @@ public class WeiXinCouponsInfo implements java.io.Serializable {
             }
         }
 
-        /**
-         * 错误信息提示
-         */
+
         public String getStatus() {
             int id = 0;
             if (TextUtils.isEmpty(getUser_card_status())) {
@@ -99,17 +87,8 @@ public class WeiXinCouponsInfo implements java.io.Serializable {
             return BaseApplication.sInstance.getString(id);
         }
 
-        /**
-         * NORMAL             正常
-         * CONSUMED           已核销
-         * EXPIRE             已过期
-         * GIFTING            转赠中
-         * GIFT_TIMEOUT       转赠超时
-         * DELETE             已删除
-         * UNAVAILABLE        已失效
-         */
-        private String user_card_status;//当前code对应卡券的状态
 
+        private String user_card_status;
 
         public String getErrcode() {
             return errcode;

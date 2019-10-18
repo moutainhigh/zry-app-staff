@@ -20,9 +20,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by dingzb on 2019/3/1.
- */
+
 @EFragment(R.layout.dialog_download_hint)
 public class DownloadHintDialog extends DialogFragment implements DialogInterface.OnKeyListener,View.OnClickListener{
 
@@ -90,9 +88,6 @@ public class DownloadHintDialog extends DialogFragment implements DialogInterfac
     @Override
     public boolean onKey(DialogInterface dialogInterface, int keyCode, KeyEvent event) {
         if (keyCode == event.KEYCODE_HOME) {
-//            if (mCancelWithHomeKey) {
-//            dismiss();
-//            }
             if (getActivity() != null) {
                 getActivity().onKeyDown(keyCode, event);
             }

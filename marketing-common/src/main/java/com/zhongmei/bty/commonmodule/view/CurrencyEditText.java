@@ -9,10 +9,7 @@ import android.widget.EditText;
 
 import com.zhongmei.yunfu.util.ResourceUtils;
 
-/**
- * 支持货币符
- * Created by demo on 2018/12/15
- */
+
 public class CurrencyEditText extends EditText implements ICurrencyView {
 
     private Context context;

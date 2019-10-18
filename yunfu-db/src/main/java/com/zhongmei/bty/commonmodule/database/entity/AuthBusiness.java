@@ -6,61 +6,38 @@ import com.zhongmei.yunfu.db.CommonEntityBase;
 import com.zhongmei.yunfu.db.ICreator;
 import com.zhongmei.yunfu.db.IUpdator;
 
-/**
- * 业务基础表
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "auth_business")
 public class AuthBusiness extends CommonEntityBase implements ICreator, IUpdator {
 
-    /**
-     * The columns of table "auth_business"
-     */
+
     public interface $ extends CommonEntityBase.$ {
 
-        /**
-         * name
-         */
+
         public static final String name = "name";
 
-        /**
-         * code
-         */
+
         public static final String code = "code";
 
-        /**
-         * description
-         */
+
         public static final String description = "description";
 
-        /**
-         * source_flag
-         */
+
         public static final String sourceFlag = "source_flag";
 
-        /**
-         * support_version
-         */
+
         public static final String supportVersion = "support_version";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
     }

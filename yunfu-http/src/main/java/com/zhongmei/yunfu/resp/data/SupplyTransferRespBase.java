@@ -1,17 +1,14 @@
 package com.zhongmei.yunfu.resp.data;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class SupplyTransferRespBase extends TransferResp {
 
-    //public Integer code;
-    public boolean success;
+        public boolean success;
     public String message;
 
     @Override
     public boolean isOk() {
-        return success /*code != null && code == 200*/;
+        return success ;
     }
 
     public boolean isSuccess() {

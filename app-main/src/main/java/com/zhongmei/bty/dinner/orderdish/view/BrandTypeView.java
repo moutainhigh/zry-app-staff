@@ -23,11 +23,7 @@ import com.zhongmei.bty.snack.orderdish.adapter.DishTypeInflate;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * @Date： 17/6/7
- * @Description: 二级菜单选择器
- * @Version: 1.0
- */
+
 public class BrandTypeView extends LinearLayout implements DishTypeInflate.ChangeTypeListener, View.OnClickListener {
 
     private Context mContext;
@@ -84,8 +80,7 @@ public class BrandTypeView extends LinearLayout implements DishTypeInflate.Chang
         RLog.i(RLog.DISH_KEY_TAG, "## 正餐商品界面获取商品中类信息 begin" + "position : BrandTypeView -> initView()");
         List<DishBrandType> dishBrandTypes = mDishManager.loadData().dishTypeList;
         RLog.i(RLog.DISH_KEY_TAG, "## 正餐商品界面获取商品中类信息 end 个数为:" + Utils.size(dishBrandTypes) + "position : BrandTypeView -> initView()");
-        Iterator<DishBrandType> iterator = dishBrandTypes.iterator();    //过滤不显示中类
-        while (iterator.hasNext()) {
+        Iterator<DishBrandType> iterator = dishBrandTypes.iterator();            while (iterator.hasNext()) {
             DishBrandType type = iterator.next();
             if (type.isShow() != Bool.YES.value())
                 iterator.remove();

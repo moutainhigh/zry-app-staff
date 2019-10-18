@@ -26,9 +26,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.coupons_view_layout)
 public class CouponsView extends LinearLayout implements View.OnClickListener, CheckCouponView.CouponsListener {
     @ViewById(R.id.checkcouponview)
@@ -43,8 +41,6 @@ public class CouponsView extends LinearLayout implements View.OnClickListener, C
     @ViewById(R.id.customer_coupon_view)
     CustomerCouponView mCustomerCouponView;
 
-    //@ViewById(R.id.keyat_yaz_coupons)
-    //YazCouponView mKeyAtYazCoupons;
 
     private FragmentActivity mActivity;
 
@@ -102,25 +98,16 @@ public class CouponsView extends LinearLayout implements View.OnClickListener, C
         }
     }
 
-    // 显示优惠券
-    private void showCouponView() {
-        /*if (KeyAt.getKeyAtType() == KeyAtType.YAZUO) {
-            mKeyAtYazCoupons.setVisibility(View.VISIBLE);
-            mKeyAtYazCoupons.loadYazCoupons();
-        } else {*/
+        private void showCouponView() {
+
         mCustomerCouponView.setVisibility(View.VISIBLE);
         mCustomerCouponView.lodata();
-        //}
-    }
+            }
 
-    // 隐藏优惠券
-    private void hideCouponView() {
-        /*if (KeyAt.getKeyAtType() == KeyAtType.YAZUO) {
-            mKeyAtYazCoupons.setVisibility(View.GONE);
-        } else {*/
+        private void hideCouponView() {
+
         mCustomerCouponView.setVisibility(View.GONE);
-        //}
-    }
+            }
 
     @Override
     public void getCouponsNo(String ticketNo) {
@@ -141,9 +128,7 @@ public class CouponsView extends LinearLayout implements View.OnClickListener, C
         }
     }
 
-    /**
-     * 微信卡券Resp Listener
-     */
+
     ResponseListener<LoyaltyTransferResp<WxCouponsInfoResp>> listener = new ResponseListener<LoyaltyTransferResp<WxCouponsInfoResp>>() {
 
         @Override
@@ -151,8 +136,7 @@ public class CouponsView extends LinearLayout implements View.OnClickListener, C
             if (ResponseObject.isOk(response)) {
                 if (LoyaltyTransferResp.isOk(response.getContent())) {
                     WeiXinCouponsInfo info = response.getContent().getResult().getWeixinCard();
-                    //判断是否是代金券
-                    if (info.getCard_type() != WeiXinCardType.CASH) {
+                                        if (info.getCard_type() != WeiXinCardType.CASH) {
                         ToastUtil.showShortToast(mActivity.getString(R.string.not_support_coupons));
                         return;
                     }
@@ -160,8 +144,7 @@ public class CouponsView extends LinearLayout implements View.OnClickListener, C
                     if (info.getCode_info().isCanConsume()) {
                         Long id = response.getContent().getResult().getId();
                         if (id == null || mShoppingCart.isAllowAddCoupon(mShoppingCart.fastFootShoppingCartVo, id)) {
-                            //特殊处理微信卡号
-                            String wxCardNumber = info.getCode();
+                                                        String wxCardNumber = info.getCode();
                             info.setCode(BaseShoppingCart.getNewWxCode(wxCardNumber));
 
                             mShoppingCart.addWeiXinCouponsPrivilege(info);

@@ -16,14 +16,10 @@ import android.widget.PopupWindow;
 import com.zhongmei.yunfu.R;
 
 
-/**
- * 顾客编辑页面popWindow
- */
+
 public class CustomerEditPopWindow extends PopupWindow {
 
-    /**
-     * Width
-     */
+
     private static final int WINDOW_WIDTH = 150;
 
     private Activity context;

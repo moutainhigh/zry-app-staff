@@ -19,29 +19,21 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ShowBarcodeView extends RelativeLayout implements View.OnClickListener {
 
-    //二维码生成中
-    public static final int SHOW_QR_CODE_ING = 0;
+        public static final int SHOW_QR_CODE_ING = 0;
 
-    //二维码生成失败
-    public static final int SHOW_QR_CODE_FAIL = 1;
+        public static final int SHOW_QR_CODE_FAIL = 1;
 
-    //二维码失效
-    public static final int SHOW_QR_CODE_INVALID = 2;
+        public static final int SHOW_QR_CODE_INVALID = 2;
 
-    //扫码完成
-    public static final int SHOW_SCAN_SUCCESS = 3;
+        public static final int SHOW_SCAN_SUCCESS = 3;
 
-    //请使用扫码枪扫描顾客的二维码
-    public static final int SHOW_SCAN_TO_CUSTOMER = 4;
+        public static final int SHOW_SCAN_TO_CUSTOMER = 4;
 
-    //位指定生成二维码的方式
-    public static final int SHOW_QR_NOT_ASSIGN = 5;
+        public static final int SHOW_QR_NOT_ASSIGN = 5;
 
     Context context;
 

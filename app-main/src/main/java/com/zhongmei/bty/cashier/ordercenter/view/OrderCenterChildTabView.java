@@ -9,9 +9,7 @@ import com.zhongmei.yunfu.R;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.order_center_child_tab_layout)
 public class OrderCenterChildTabView extends RelativeLayout {
     @ViewById(R.id.child_tab_text)

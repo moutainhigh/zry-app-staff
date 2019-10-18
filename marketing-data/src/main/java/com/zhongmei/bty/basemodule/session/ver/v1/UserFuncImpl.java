@@ -15,9 +15,7 @@ import com.zhongmei.yunfu.db.entity.AuthUser;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class UserFuncImpl extends BaseUserFunc {
 
@@ -99,12 +97,7 @@ public class UserFuncImpl extends BaseUserFunc {
         throw new UnsupportedOperationException("");
     }
 
-    /**
-     * V1版本为旧权限，V8.4之后就不需要兼容了
-     *
-     * @param identity
-     * @return
-     */
+
     @Override
     public List<User> getUserByIdentity(int identity) {
         try {
@@ -127,8 +120,7 @@ public class UserFuncImpl extends BaseUserFunc {
         return new ArrayList<>();
     }
 
-    //-----------------------------------------------------------------------------------UTILS----------
-    private static class InnerFetchUserTask extends Task<List<User>> {
+        private static class InnerFetchUserTask extends Task<List<User>> {
 
         @Override
         protected List<User> onExecute() {

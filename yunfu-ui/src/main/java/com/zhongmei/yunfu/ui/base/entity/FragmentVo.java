@@ -6,10 +6,7 @@ import android.support.v4.app.Fragment;
 
 public class FragmentVo implements Serializable {
 
-    /**
-     * @date：2016年3月22日 下午2:36:38
-     * @Description:TODO
-     */
+
     private static final long serialVersionUID = 1L;
     private int containerViewId;
     private Fragment fragment;

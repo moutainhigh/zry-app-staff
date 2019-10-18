@@ -11,9 +11,7 @@ import com.zhongmei.bty.basemodule.trade.bean.TradeVo;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class Invoice {
 
@@ -23,15 +21,13 @@ public class Invoice {
     private final ElectronicInvoiceVo electronicInvoiceVo;
 
     private InvoiceTaxRate invoiceTaxRate;
-    // private BigDecimal actualAmount;
-    private BigDecimal unitPrice;
+        private BigDecimal unitPrice;
 
     private int count = 1;
 
     public Invoice(TradeVo tradeVo, ElectronicInvoiceVo electronicInvoiceVo, BigDecimal actualAmount) {
         this.tradeVo = tradeVo;
         this.electronicInvoiceVo = electronicInvoiceVo;
-        //this.actualAmount = actualAmount;
 
         List<InvoiceTaxRate> invoiceTaxRates = electronicInvoiceVo.getInvoiceTaxRates();
         InvoiceTaxRate selectedInvoiceTaxRate = invoiceTaxRates.get(0);

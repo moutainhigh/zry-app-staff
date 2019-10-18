@@ -75,9 +75,7 @@ public class DeliveryFeeItemAdapter extends BaseAdapter {
         TextView deliveryFee;
     }
 
-    /**
-     * 设置订单来源图标
-     */
+
     private void setSourceIcon(ImageView icon, SourceId sourceId) {
         if (sourceId != null) {
             if (sourceId == SourceId.BAIDU_RICE) {
@@ -121,10 +119,6 @@ public class DeliveryFeeItemAdapter extends BaseAdapter {
     }
 
     public static class TradeAndDeliveryFee {
-        public SourceId sourceId;//订单来源，设置不同的图标
-        public String serialNo;//流水号
-        public String tradeNo;//订单号
-        //配送费
-        public BigDecimal fee;
+        public SourceId sourceId;        public String serialNo;        public String tradeNo;                public BigDecimal fee;
     }
 }

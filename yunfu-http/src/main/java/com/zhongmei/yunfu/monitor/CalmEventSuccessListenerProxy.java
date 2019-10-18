@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.resp.UserActionEvent;
 import java.net.URI;
 import java.util.UUID;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class CalmEventSuccessListenerProxy<T> extends AbsEventListenerProxy implements NetworkRequest.OnSuccessListener<T> {
 
     private final String requestTag;
@@ -78,17 +76,5 @@ public class CalmEventSuccessListenerProxy<T> extends AbsEventListenerProxy impl
         return String.format("[%s]%s:%s", UUID.randomUUID().toString().replaceAll("-", ""), method, url);
     }
 
-    /*public static <T> String getEventName(NetworkRequest.OnSuccessListener<T> listener) {
-        if (listener instanceof CalmEventSuccessListenerProxy) {
-            return ((CalmEventSuccessListenerProxy) listener).eventName;
-        }
-        return getUserEventName(listener);
-    }
 
-    public static <T> String getUserEventName(NetworkRequest.OnSuccessListener<T> listener) {
-        if (listener instanceof IUserEvent) {
-            return ((IUserEvent) listener).getEventName();
-        }
-        return null;
-    }*/
 }

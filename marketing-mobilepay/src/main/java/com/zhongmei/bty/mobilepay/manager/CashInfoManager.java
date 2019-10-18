@@ -50,95 +50,53 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Description: 记录收银信息, 缓存订单及用户输入的各种支付信息
- * @Version: 1.0
- */
+
 public class CashInfoManager implements IPaymentInfo {
     private static final String TAG = CashInfoManager.class.getSimpleName();
 
-    public static final String CASH_FORMAT_REG = "([0-9]{1,8}[.][0-9]{0,2})|([0-9]{1,8})";// 金额验证正则表达式
+    public static final String CASH_FORMAT_REG = "([0-9]{1,8}[.][0-9]{0,2})|([0-9]{1,8})";
 
-    //public static String CASH_FORMAT = BaseApplication.sInstance.getString(R.string.dinner_balace_price);// 金额输入框显示格式
-
-    private int eraseType = 8;// 抹零方式
-
-    private double tradeAmount;// 应收金额
-
-    private double actualAmount;// 实收金额
-
-    private double cashPayMoney; // 记录现金收银金额
-
-    private double unionPayMoney; // 记录银联收银金额
-
-    private double memberPayMoney; // 记录会员收银金额
-
-    private double memberCardBalance;// 会员余额
-
-    private long memberIntegral;// 会员积分
-
-    private GroupPay otherPay;// 其它支付组合
-
-    private boolean isCurrentDefaultInputValue;// 当前选项是否默认值
-
+    private int eraseType = 8;
+    private double tradeAmount;
+    private double actualAmount;
+    private double cashPayMoney;
+    private double unionPayMoney;
+    private double memberPayMoney;
+    private double memberCardBalance;
+    private long memberIntegral;
+    private GroupPay otherPay;
+    private boolean isCurrentDefaultInputValue;
     private PayModelGroup defaultInputPayGroup;
 
-    private boolean isOrderCenter;// 是否订单中心，判断是否打印下单
-
-    private boolean isOrdered;// 是否已经下单，判断走收银还是下单及收银
-
-    private boolean isQuickPay;// 是否闪结
-
-    private boolean isPrintedOk;// 是否已经打印
-
-    private String memberId;// 会员服务器id
-
-    private CustomerResp customer;// 会员姓名
-
-    private String memberPassword;// 会员支付密码
-
-    private CustomerLoginResp memberResp;// 会员储值信息
-
-    private TradeVo mTradeVo;// 订单数据
-
-    private String paymentItemCashUuid;// 现金UUid
-
-    private String paymentItemUnionUuid;// 银联UUid
-
-    private String paymentItemMemberUuid;// 会员收银UUid
-
-    private String paymentUuid;// 支付uuid
-
-    private String mTradeUUid;// 订单uuid
-
-    private boolean isSplit;// 是否拆单
-
-    private TradeVo sourceTradeVo;// 原单数据(拆单时调用)
-
-    private Reason mReason;// 退货原因(无单退货时调用)
-
-    private boolean isPrintKitchen = true;// 是否打印厨打(无单退货时调用)
-
-    private PosTransLog mPosTransLog;// 银联pos扣款信息
-
+    private boolean isOrderCenter;
+    private boolean isOrdered;
+    private boolean isQuickPay;
+    private boolean isPrintedOk;
+    private String memberId;
+    private CustomerResp customer;
+    private String memberPassword;
+    private CustomerLoginResp memberResp;
+    private TradeVo mTradeVo;
+    private String paymentItemCashUuid;
+    private String paymentItemUnionUuid;
+    private String paymentItemMemberUuid;
+    private String paymentUuid;
+    private String mTradeUUid;
+    private boolean isSplit;
+    private TradeVo sourceTradeVo;
+    private Reason mReason;
+    private boolean isPrintKitchen = true;
+    private PosTransLog mPosTransLog;
     private EcCard ecCard;
 
-    private BigDecimal chargeMoney;//充值金额
-
-    private BigDecimal chargeSendMoney;//充值赠送金额
-
-    private long customerId;//会员Id
-
-    private boolean reviseStock = true;//是否退回库存
-
-    private int defaultPaymentMenuType = -1;//默認支付方式
-
-    private String id;//当前对象实例ID add 20170708
-
-    private PayScene mPayScene = PayScene.SCENE_CODE_SHOP;//add 20170704
-
-    private PayActionPage mPayActionPage = PayActionPage.COMPAY; //add 20180309  sign pay activity 默认快餐界面
-
+    private BigDecimal chargeMoney;
+    private BigDecimal chargeSendMoney;
+    private long customerId;
+    private boolean reviseStock = true;
+    private int defaultPaymentMenuType = -1;
+    private String id;
+    private PayScene mPayScene = PayScene.SCENE_CODE_SHOP;
+    private PayActionPage mPayActionPage = PayActionPage.COMPAY;
     public boolean getIsReviseStock() {
         return reviseStock;
     }
@@ -147,21 +105,16 @@ public class CashInfoManager implements IPaymentInfo {
         this.reviseStock = reviseStock;
     }
 
-    /**
-     * 新增是否打印电子发票
-     */
+
     private boolean isPrintInvoice;
 
     private ElectronicInvoiceVo electronicInvoiceVo;
 
-    //构造方法
-    private CashInfoManager() {
-        otherPay = new GroupPay(PayModelGroup.OTHER);// 初始化其它支付
-        this.id = SystemUtils.genOnlyIdentifier();
+        private CashInfoManager() {
+        otherPay = new GroupPay(PayModelGroup.OTHER);        this.id = SystemUtils.genOnlyIdentifier();
     }
 
-    //工厂方法构建器
-    public static CashInfoManager getNewInstance() {
+        public static CashInfoManager getNewInstance() {
         return new CashInfoManager();
     }
 
@@ -198,11 +151,7 @@ public class CashInfoManager implements IPaymentInfo {
         this.mPosTransLog = posTransLog;
     }
 
-    /**
-     * @Title: clearData
-     * @Description: 清理所有数据
-     * @Return void 返回类型
-     */
+
     public void clearData() {
         tradeAmount = 0.0;
         actualAmount = 0.0;
@@ -247,8 +196,7 @@ public class CashInfoManager implements IPaymentInfo {
         this.mPayScene = scene;
     }
 
-    //是否需要付押金
-    @Override
+        @Override
     public boolean isNeedToPayDeposit() {
         return false;
     }
@@ -321,10 +269,7 @@ public class CashInfoManager implements IPaymentInfo {
         paymentUuid = null;
     }
 
-    /**
-     * @Description: 判断是否正餐，true 正餐：false:不是正餐
-     * @Return boolean 返回类型
-     */
+
     public boolean isDinner() {
         if (mTradeVo == null) {
             return false;
@@ -348,84 +293,47 @@ public class CashInfoManager implements IPaymentInfo {
         return permissionCode;
     }
 
-    /**
-     * @Title: getCashPayMoney
-     * @Description: 读取现金输入金额
-     * @Return double 返回类型
-     */
+
     public double getCashPayMoney() {
         return cashPayMoney;
     }
 
-    /**
-     * @Title: setCashPayMoney
-     * @Description: 设置现金输入金额
-     * @Param cashPayMoney
-     * @Return void 返回类型
-     */
+
     public void setCashPayMoney(double cashPayMoney) {
         this.cashPayMoney = cashPayMoney;
     }
 
-    /**
-     * @Title: getUnionPayMoney
-     * @Description: 读取银联输入金额
-     * @Return double 返回类型
-     */
+
     public double getUnionPayMoney() {
         return unionPayMoney;
     }
 
-    /**
-     * @Title: setUnionPayMoney
-     * @Description: 设置银联输入金额
-     * @Param unionPayMoney 输入金额
-     * @Return void 返回类型
-     */
+
     public void setUnionPayMoney(double unionPayMoney) {
         this.unionPayMoney = unionPayMoney;
     }
 
-    /**
-     * @Title: getMemberPayMoney
-     * @Description:读取会员储值输入金额
-     * @Return double 返回类型
-     */
+
     public double getMemberPayMoney() {
         return memberPayMoney;
     }
 
-    /**
-     * @Title: setMemberPayMoney
-     * @Description: 设置会员储值输入金额
-     * @Param membePayMoney 输入金额
-     * @Return void 返回类型
-     */
+
     public void setMemberPayMoney(double membePayMoney) {
         this.memberPayMoney = membePayMoney;
     }
 
-    /**
-     * @Description: 获取其它支付数据
-     * @Return GroupPay 返回类型
-     */
+
     public GroupPay getOtherPay() {
         return otherPay;
     }
 
-    /**
-     * @Description: 设计其它支付数据
-     * @Param @param otherPay 其它支付
-     * @Return void 返回类型
-     */
+
     public void setOtherPay(GroupPay otherPay) {
         this.otherPay = otherPay;
     }
 
-    /**
-     * @Description: 获取抹零金额
-     * @Return double 返回类型
-     */
+
     public double getExemptAmount() {
 
         return floatSubtract(this.tradeAmount, this.actualAmount);
@@ -441,42 +349,28 @@ public class CashInfoManager implements IPaymentInfo {
         return 0;
     }
 
-    /**
-     * @Description: 获取未付金额(应收 - 所有输入金额之和)
-     * @Return double 返回类型
-     */
+
     public double getNotPayMent() {
         return floatSubtract(this.actualAmount, this.getCommonPaySum());
     }
 
-    // 未收小于等于零返回true
-    public boolean enablePay() {
+        public boolean enablePay() {
         return getNotPayMent() <= 0;
     }
 
-    /**
-     * @Description: 获取未付金额字串
-     * @Param @return
-     * @Return String 返回类型
-     */
+
     public String getNotPayMentStr() {
 
         return formatCash(getNotPayMent());
 
     }
 
-    /**
-     * @Description: 获取找零、溢收金额字串
-     * @Return String 返回类型
-     */
+
     public String getMorePaymentStr() {
         return formatCash(floatSubtract(this.getCommonPaySum(), this.actualAmount));
     }
 
-    /**
-     * @Description: 获取找零、溢收金额(不找零金额和-应收)
-     * @Return double 返回类型
-     */
+
     public double getMorePaymentAmount() {
         if (new BigDecimal(otherPay.getGroupAmount()).compareTo(BigDecimal.ZERO) == 0) {
             return 0.0;
@@ -485,10 +379,7 @@ public class CashInfoManager implements IPaymentInfo {
         }
     }
 
-    /**
-     * @Description(各种支付和-找零)
-     * @Return BigDecimal 返回类型
-     */
+
     private BigDecimal getActualPaymentAmount() {
         if (new BigDecimal(otherPay.getGroupAmount()).compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.valueOf(this.actualAmount);
@@ -497,11 +388,7 @@ public class CashInfoManager implements IPaymentInfo {
         }
     }
 
-    /**
-     * @Description: 获取现金找零金额
-     * @Param @return
-     * @Return float 返回类型
-     */
+
     public double getChangeAmount() {
         if (getCashNotPayMent() >= 0) {
             return floatSubtract(this.cashPayMoney, this.getCashNotPayMent());
@@ -513,109 +400,71 @@ public class CashInfoManager implements IPaymentInfo {
         }
     }
 
-    /**
-     * @Description: 获取除现金以外已付款金额(银联 + 会员 + 其它 。 。)
-     * @Param @return
-     * @Return double 返回类型
-     */
+
     public double getNotCashPayMent() {
         return unionPayMoney + memberPayMoney + otherPay.getGroupAmount();
 
     }
 
-    /**
-     * @Description: 获取除现金以外未付金额
-     * @Param @return
-     * @Return double 返回类型
-     */
+
     public double getCashNotPayMent() {
         return floatSubtract(this.actualAmount, (unionPayMoney + memberPayMoney + otherPay.getGroupAmount()));
 
     }
 
-    /**
-     * @Description: 获取除银联以外未付金额
-     * @Return double 返回类型
-     */
+
     public double getUnionNotPayMent() {
         return floatSubtract(this.actualAmount, (cashPayMoney + memberPayMoney + otherPay.getGroupAmount()));
     }
 
-    /**
-     * @Description: 获取除会员以外未付金额
-     * @Return double 返回类型
-     */
+
     public double getMemberNotPayMent() {
         return floatSubtract(this.actualAmount, (cashPayMoney + unionPayMoney + otherPay.getGroupAmount()));
     }
 
-    /**
-     * @Description: 获取某支付方式金额
-     * @Return double 返回类型
-     */
+
     public double getInputValueByPayModelGroup(PayModelGroup group) {
         switch (group) {
-            case CASH:// 现金
-                return cashPayMoney;
+            case CASH:                return cashPayMoney;
 
-            case BANK_CARD:// 银联
-                return unionPayMoney;
+            case BANK_CARD:                return unionPayMoney;
 
-            case VALUE_CARD:// 会员
-                return memberPayMoney;
+            case VALUE_CARD:                return memberPayMoney;
 
-            case OTHER:// 会员
-                return otherPay.getGroupAmount();
+            case OTHER:                return otherPay.getGroupAmount();
 
             default:
                 return 0;
         }
     }
 
-    /**
-     * @Description: 获取某其它支付未付金额
-     * @Param ModelId 其它支付id
-     * @Return double 返回类型
-     */
+
     public double getOtherPayNotPayMentByModelId(Long ModelId) {
 
         return floatSubtract(this.actualAmount,
                 (cashPayMoney + unionPayMoney + memberPayMoney + otherPay.getGroupAmountExceptModel(ModelId)));
     }
 
-    /**
-     * @Title: getCommonPaySum
-     * @Description: 获取输入总金额
-     * @Return double 返回类型
-     */
+
     public double getCommonPaySum() {
         double sum = cashPayMoney + unionPayMoney + memberPayMoney + otherPay.getGroupAmount();
         return MathDecimal.round(sum, 2);
     }
 
-    /**
-     * @Description: 获取订单金额
-     * @Param @return
-     * @Return double 返回类型
-     */
+
     public double getTradeAmount() {
         return tradeAmount;
     }
 
     public double getSaleAmount() {
-        //订单金额:对应UI上的折前
-        return this.mTradeVo.getTrade().getSaleAmount().doubleValue();
+                return this.mTradeVo.getTrade().getSaleAmount().doubleValue();
     }
 
     public void setTradeAmount(double tradeAmount) {
         this.tradeAmount = tradeAmount;
     }
 
-    /**
-     * @Description: 获取实收金额(抹零后的金额)
-     * @Param @return
-     * @Return float 返回类型
-     */
+
     public Double getActualAmount() {
         return actualAmount;
     }
@@ -624,11 +473,7 @@ public class CashInfoManager implements IPaymentInfo {
         this.actualAmount = actualAmount;
     }
 
-    /**
-     * @Description: 获取抹零方式
-     * @Param @return
-     * @Return int 返回类型
-     */
+
     public int getEraseType() {
         return eraseType;
     }
@@ -637,10 +482,7 @@ public class CashInfoManager implements IPaymentInfo {
         this.eraseType = eraseType;
     }
 
-    /**
-     * @Description: 读取储值卡余额
-     * @Return double 返回类型
-     */
+
     public double getMemberCardBalance() {
         return memberCardBalance;
     }
@@ -649,10 +491,7 @@ public class CashInfoManager implements IPaymentInfo {
         this.memberCardBalance = memberCardBalance;
     }
 
-    /**
-     * @Description: 读取积分余额
-     * @Return int 返回类型
-     */
+
     public long getMemberIntegral() {
         return memberIntegral;
     }
@@ -669,10 +508,7 @@ public class CashInfoManager implements IPaymentInfo {
         this.mTradeVo = tradeVo;
     }
 
-    /**
-     * @Description: 判断是否是自动输入金额
-     * @Return boolean 返回类型
-     */
+
     public boolean isDefaultValue() {
         return isCurrentDefaultInputValue;
     }
@@ -686,9 +522,7 @@ public class CashInfoManager implements IPaymentInfo {
         this.defaultInputPayGroup = payModelGroup;
     }
 
-    /* public void setDefaultValue(boolean isDefaultValue) {
-         this.isCurrentDefaultInputValue = isDefaultValue;
-     }*/
+
     public String getMemberPassword() {
         return memberPassword;
     }
@@ -755,11 +589,7 @@ public class CashInfoManager implements IPaymentInfo {
         return null;
     }
 
-    /**
-     * @Description: 是否已经下单
-     * @Param @return
-     * @Return boolean 返回类型
-     */
+
     public boolean isOrdered() {
         return isOrdered;
     }
@@ -821,18 +651,15 @@ public class CashInfoManager implements IPaymentInfo {
         return paymentItemUnionUuid;
     }
 
-    //add v8.14
-    public void addPaymentRecord(PaymentVo paymentVo) {
+        public void addPaymentRecord(PaymentVo paymentVo) {
 
     }
 
-    //add v8.14
-    public List<PaymentVo> getPaymentRecords() {
+        public List<PaymentVo> getPaymentRecords() {
         return null;
     }
 
-    //根据登录会员生成打印信息 add v8.4
-    public String getPaymentItemMemberUuid() {
+        public String getPaymentItemMemberUuid() {
         if (paymentItemMemberUuid == null) {
             paymentItemMemberUuid = SystemUtils.genOnlyIdentifier();
         }
@@ -852,20 +679,12 @@ public class CashInfoManager implements IPaymentInfo {
         return null;
     }
 
-    /**
-     * @Description: 各种支付数据验证(找零不能大于100 ， 用户不能为空 ， 未收不能大于0. 。 。)
-     * @Param context
-     * @Param @return
-     * @Return boolean 返回类型
-     */
+
     public boolean checkInputValue(Context context) {
 
-        if (this.actualAmount < 0) {// 退货不验证
-            return true;
+        if (this.actualAmount < 0) {            return true;
         }
-        // double oddChange = this.getChangeAmount();// 找零金额
-        double commPaySum = this.getCommonPaySum();// 总付金额
-
+                double commPaySum = this.getCommonPaySum();
         if (this.unionPayMoney > floatSubtract(this.actualAmount, this.memberPayMoney)) {
             ToastUtil.showLongToastCenter(context, context.getString(R.string.pay_more_input_alter));
             return false;
@@ -881,11 +700,7 @@ public class CashInfoManager implements IPaymentInfo {
             return false;
 
         }
-        /*else if (oddChange >= 100) {
 
-            PopupManager.showLongToastCenter(context, context.getString(R.string.pay_change_more_error));
-            return false;
-        } */
         else if (Session.getAuthUser() == null) {
             ToastUtil.showLongToastCenter(context, context.getString(R.string.pay_user_not_login));
             return false;
@@ -893,76 +708,48 @@ public class CashInfoManager implements IPaymentInfo {
         return true;
     }
 
-    /**
-     * @Description: 构建收银数据
-     * @Return PaymentVo 返回类型
-     */
+
     public PaymentVo getTradePaymentVo() {
         PaymentVo paymenVo = null;
         Trade trade = null;
         if ((trade = mTradeVo.getTrade()) != null) {
             paymenVo = new PaymentVo();
             Payment payment = new Payment();
-            double restAmount = actualAmount;// 未收金额初始值为实收
-            payment.validateCreate();
+            double restAmount = actualAmount;            payment.validateCreate();
 
             final List<PaymentItem> paymentItemList = new ArrayList<PaymentItem>();
-            // 收银员
-            String _operatorName = Session.getAuthUser() != null
+                        String _operatorName = Session.getAuthUser() != null
                     ? Session.getAuthUser().getName() : trade.getCreatorName();
             long _operatorId = Session.getAuthUser() != null
                     ? Session.getAuthUser().getId() : trade.getCreatorId();
 
-            // 设置支付信息
-            payment.setReceivableAmount(trade.getTradeAmount());// 可收金额
-
+                        payment.setReceivableAmount(trade.getTradeAmount());
             payment.setBeforePrivilegeAmount(mTradeVo.getBeforePrivilegeAmount());
 
             double moreAmount = getMorePaymentAmount();
-            // 如果有溢收
-            if (moreAmount > 0) {
-                payment.setActualAmount(BigDecimal.valueOf(this.actualAmount + moreAmount));// 实际收金额
-            } else {
-                payment.setActualAmount(BigDecimal.valueOf(this.actualAmount));// 实际收金额
-            }
-            payment.setExemptAmount(BigDecimal.valueOf(this.getExemptAmount()));// 抹零金额
-            payment.setRelateUuid(trade.getUuid());// 主单uuid
-            payment.setRelateId(trade.getId());// 关联id
-            //支付类型
-            BusinessType businessType = this.getTradeBusinessType();
+                        if (moreAmount > 0) {
+                payment.setActualAmount(BigDecimal.valueOf(this.actualAmount + moreAmount));            } else {
+                payment.setActualAmount(BigDecimal.valueOf(this.actualAmount));            }
+            payment.setExemptAmount(BigDecimal.valueOf(this.getExemptAmount()));            payment.setRelateUuid(trade.getUuid());            payment.setRelateId(trade.getId());                        BusinessType businessType = this.getTradeBusinessType();
             PaymentType paymentType = PaymentType.TRADE_SELL;
             if (businessType != null) {
                 switch (businessType) {
-                    case ONLINE_RECHARGE://会员虚拟卡充值
-                        paymentType = PaymentType.MEMBER_RECHARGE;
+                    case ONLINE_RECHARGE:                        paymentType = PaymentType.MEMBER_RECHARGE;
                         break;
-                    case CARD_RECHARGE://会员实体卡充值
-                        paymentType = PaymentType.ENTITY_CARD_RECHARGE;
+                    case CARD_RECHARGE:                        paymentType = PaymentType.ENTITY_CARD_RECHARGE;
                         break;
-                    case ANONYMOUS_ENTITY_CARD_SELL_AND_RECHARGE://匿名卡售卡储值
-                        paymentType = PaymentType.ANONYMOUS_ENTITY_CARD_SELL_RECHARGE;
+                    case ANONYMOUS_ENTITY_CARD_SELL_AND_RECHARGE:                        paymentType = PaymentType.ANONYMOUS_ENTITY_CARD_SELL_RECHARGE;
                         break;
-                    case ANONYMOUS_ENTITY_CARD_RECHARGE://匿名卡储值
-                        paymentType = PaymentType.ANONYMOUS_ENTITY_CARD_RECHARGE;
+                    case ANONYMOUS_ENTITY_CARD_RECHARGE:                        paymentType = PaymentType.ANONYMOUS_ENTITY_CARD_RECHARGE;
                         break;
                     default:
                         break;
                 }
             }
-            payment.setPaymentType(paymentType);// 交易支付
-            // 生成PaymentUUID并缓存
-            payment.setUuid(this.getPaymentUuid());
-            payment.setCreatorId(_operatorId);// 收银员id
-            payment.setCreatorName(_operatorName);// 收银员名字
-            payment.setUpdatorId(_operatorId);// 收银员id
-            payment.setUpdatorName(_operatorName);// 收银员名字
-
-            paymenVo.setPayment(payment);// 支付主单
-            paymenVo.setPaymentItemList(paymentItemList);// 支付明细列表
-
-            if (this.getUnionPayMoney() > 0) {// 银联方式
-                if (mPosTransLog != null && isPosUnionPay(mPosTransLog)) {// 银行刷卡相关信息
-                    final List<PaymentItemUnionpayVoReq> paymentCards = new ArrayList<PaymentItemUnionpayVoReq>();
+            payment.setPaymentType(paymentType);                        payment.setUuid(this.getPaymentUuid());
+            payment.setCreatorId(_operatorId);            payment.setCreatorName(_operatorName);            payment.setUpdatorId(_operatorId);            payment.setUpdatorName(_operatorName);
+            paymenVo.setPayment(payment);            paymenVo.setPaymentItemList(paymentItemList);
+            if (this.getUnionPayMoney() > 0) {                if (mPosTransLog != null && isPosUnionPay(mPosTransLog)) {                    final List<PaymentItemUnionpayVoReq> paymentCards = new ArrayList<PaymentItemUnionpayVoReq>();
                     paymentCards.add(getPaymentItemUnionpayVoReq(mPosTransLog, _operatorId, _operatorName));
                     paymenVo.setPaymentCards(paymentCards);
                 }
@@ -970,8 +757,7 @@ public class CashInfoManager implements IPaymentInfo {
                 paymentItem.setPaySource(PaySource.CASHIER);
                 paymentItem.validateCreate();
 
-                // 生成UUID并缓存,pos刷卡
-                if (mPosTransLog != null && isPosUnionPay(mPosTransLog)) {
+                                if (mPosTransLog != null && isPosUnionPay(mPosTransLog)) {
                     paymentItem.setRefundWay(RefundWay.AUTO_REFUND);
                     paymentItem.setUuid(mPosTransLog.getUuid());
                     paymentItem.setPayModeId(PayModeId.POS_CARD.value());
@@ -983,71 +769,46 @@ public class CashInfoManager implements IPaymentInfo {
                 paymentItem.setPaymentUuid(payment.getUuid());
                 paymentItem.setPayModelGroup(PayModelGroup.BANK_CARD);
 
-                // 支付类型名称
-                paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
-                paymentItem.setFaceAmount(BigDecimal.valueOf(this.unionPayMoney));// 票面金额
-                paymentItem.setChangeAmount(BigDecimal.valueOf(0));// 找零金额
-                paymentItem.setUsefulAmount(BigDecimal.valueOf(this.unionPayMoney));// 实付款
-                paymentItem.setCreatorId(_operatorId);// 收银员id
-                paymentItem.setCreatorName(_operatorName);// 收银员名字
-                paymentItemList.add(paymentItem);
+                                paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
+                paymentItem.setFaceAmount(BigDecimal.valueOf(this.unionPayMoney));                paymentItem.setChangeAmount(BigDecimal.valueOf(0));                paymentItem.setUsefulAmount(BigDecimal.valueOf(this.unionPayMoney));                paymentItem.setCreatorId(_operatorId);                paymentItem.setCreatorName(_operatorName);                paymentItemList.add(paymentItem);
 
                 restAmount = floatSubtract(restAmount, this.unionPayMoney);
             }
-            if (this.getMemberPayMoney() > 0) {// 会员方式
-
+            if (this.getMemberPayMoney() > 0) {
                 PaymentItem paymentItem = new PaymentItem();
                 if (customer != null && ecCard == null) {
                     PaymentItemExtra paymentItemExtra = new PaymentItemExtra();
                     paymentItemExtra.setUuid(SystemUtils.genOnlyIdentifier());
-                    paymentItemExtra.setCustomerId(Long.valueOf(memberId));//如果是虚拟卡就不传
-                    //paymentItemExtra.setEntityNo("");//如果是虚拟卡卡号就不传entityNo
-
-                    paymentItem.setRelateId(memberId);// 会员id
-                    paymentItem.setPayModeId(PayModeId.MEMBER_CARD.value());
+                    paymentItemExtra.setCustomerId(Long.valueOf(memberId));
+                    paymentItem.setRelateId(memberId);                    paymentItem.setPayModeId(PayModeId.MEMBER_CARD.value());
                     paymentItem.setPaymentItemExtra(paymentItemExtra);
 
                 } else if (customer == null && ecCard != null) {
                     if (ecCard.getCardType() == EntityCardType.CUSTOMER_ENTITY_CARD) {
                         PaymentItemExtra paymentItemExtra = new PaymentItemExtra();
                         paymentItemExtra.setUuid(SystemUtils.genOnlyIdentifier());
-                        paymentItemExtra.setCustomerId(ecCard.getCustomer().getCustomerid());//传入实体卡绑定的会员ID号
-                        paymentItemExtra.setEntityNo(ecCard.getCardNum());//实体卡就传入实体卡卡号
-
-                        paymentItem.setRelateId(ecCard.getCustomer().getCustomerid() + "");// 会员id
-                        paymentItem.setPayModeId(PayModeId.ENTITY_CARD.value());
+                        paymentItemExtra.setCustomerId(ecCard.getCustomer().getCustomerid());                        paymentItemExtra.setEntityNo(ecCard.getCardNum());
+                        paymentItem.setRelateId(ecCard.getCustomer().getCustomerid() + "");                        paymentItem.setPayModeId(PayModeId.ENTITY_CARD.value());
                         paymentItem.setPaymentItemExtra(paymentItemExtra);
                     } else if (ecCard.getCardType() == EntityCardType.ANONYMOUS_ENTITY_CARD) {
-                        paymentItem.setRelateId(ecCard.getCardNum());// 临时卡应该传入卡号
-                        paymentItem.setPayModeId(PayModeId.ANONYMOUS_ENTITY_CARD.value());
+                        paymentItem.setRelateId(ecCard.getCardNum());                        paymentItem.setPayModeId(PayModeId.ANONYMOUS_ENTITY_CARD.value());
                     }
 
                 }
                 paymentItem.setPaySource(PaySource.CASHIER);
                 paymentItem.validateCreate();
-                // 退款来源
-                paymentItem.setRefundWay(RefundWay.AUTO_REFUND);
+                                paymentItem.setRefundWay(RefundWay.AUTO_REFUND);
                 paymentItem.setUuid(this.getPaymentItemMemberUuid());
-                // paymentItem.setRelateId(memberId);// 会员id
-                paymentItem.setPaymentUuid(payment.getUuid());
-                // paymentItem.setPayModeId(PayModeId.MEMBER_CARD.value());
-                paymentItem.setPayModelGroup(PayModelGroup.VALUE_CARD);
-                // 支付类型名称
-                paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
+                                paymentItem.setPaymentUuid(payment.getUuid());
+                                paymentItem.setPayModelGroup(PayModelGroup.VALUE_CARD);
+                                paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
 
-                paymentItem.setFaceAmount(BigDecimal.valueOf(this.memberPayMoney));// 票面金额
-                paymentItem.setChangeAmount(BigDecimal.valueOf(0));// 找零金额
-                paymentItem.setUsefulAmount(BigDecimal.valueOf(this.memberPayMoney));// 实付款
-                paymentItem.setCreatorId(_operatorId);// 收银员id
-                paymentItem.setCreatorName(_operatorName);// 收银员名字
-                paymentItemList.add(paymentItem);
+                paymentItem.setFaceAmount(BigDecimal.valueOf(this.memberPayMoney));                paymentItem.setChangeAmount(BigDecimal.valueOf(0));                paymentItem.setUsefulAmount(BigDecimal.valueOf(this.memberPayMoney));                paymentItem.setCreatorId(_operatorId);                paymentItem.setCreatorName(_operatorName);                paymentItemList.add(paymentItem);
                 restAmount = floatSubtract(restAmount, this.memberPayMoney);
             }
 
-            // 其它支付方式
-            if (!otherPay.isEmpty()) {
-                // 自定义自由输入选项不考虑找零
-                List<PayModelItem> faceValueList = otherPay.getAllPayModelItems();
+                        if (!otherPay.isEmpty()) {
+                                List<PayModelItem> faceValueList = otherPay.getAllPayModelItems();
                 boolean isContainsMeituan = false;
                 if (faceValueList != null && !faceValueList.isEmpty()) {
                     for (PayModelItem model : faceValueList) {
@@ -1055,24 +816,12 @@ public class CashInfoManager implements IPaymentInfo {
                         paymentItem.setPaySource(PaySource.CASHIER);
                         paymentItem.validateCreate();
                         paymentItem.setRefundWay(RefundWay.NONEED_REFUND);
-                        paymentItem.setUuid(SystemUtils.genOnlyIdentifier());// 生成UUID
-                        paymentItem.setPaymentUuid(payment.getUuid());
+                        paymentItem.setUuid(SystemUtils.genOnlyIdentifier());                        paymentItem.setPaymentUuid(payment.getUuid());
                         paymentItem.setPayModelGroup(otherPay.getGroup());
-                        // 点评券
-                       /* if (model.getPayMode() == PayModeId.DIANPING_COUPON) {
-                            paymentItem.setPayModeId(PayModeId.DIANPING_COUPON.value());
-                            paymentItem.setPayModeName(model.getTicketInfo().getDealTitle());// 券名
-                            paymentItem.setFaceAmount(model.getUsedValue());// 点评券市场价
-                            paymentItem.setRelateId(model.getTicketInfo().getSerialNumber());
 
-                        } else */
-                        if (model.getPayMode() == PayModeId.MEITUAN_TUANGOU) {//美团点评券
-                            paymentItem.setPayModeId(PayModeId.MEITUAN_TUANGOU.value());
-                            paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));// 券名
-                            paymentItem.setFaceAmount(model.getUsedValue());// 点评券市场价
-                            paymentItem.setRelateId(model.getTuanGouCouponDetail().getSerialNumber());
-                            //美团点评券详细信息
-                            PaymentItemGroupon pig = new PaymentItemGroupon();
+                        if (model.getPayMode() == PayModeId.MEITUAN_TUANGOU) {                            paymentItem.setPayModeId(PayModeId.MEITUAN_TUANGOU.value());
+                            paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));                            paymentItem.setFaceAmount(model.getUsedValue());                            paymentItem.setRelateId(model.getTuanGouCouponDetail().getSerialNumber());
+                                                        PaymentItemGroupon pig = new PaymentItemGroupon();
                             pig.setGrouponId(model.getTuanGouCouponDetail().getGrouponId());
                             pig.setDealTitle(model.getTuanGouCouponDetail().getDealTitle());
                             pig.setMarketPrice(model.getTuanGouCouponDetail().getMarketPrice());
@@ -1080,85 +829,53 @@ public class CashInfoManager implements IPaymentInfo {
                             pig.setUseCount(model.getUsedCount());
                             paymentItem.setPaymentItemGroupon(pig);
                             isContainsMeituan = true;
-                        } else {// 其它自定义支付
-                            paymentItem.setPayModeId(model.getPayModelId());
+                        } else {                            paymentItem.setPayModeId(model.getPayModelId());
                             paymentItem.setPayModeName(model.getPaymentModeShop().getName());
-                            paymentItem.setFaceAmount(model.getUsedValue());// 票面金额
-                        }
+                            paymentItem.setFaceAmount(model.getUsedValue());                        }
 
                         if (restAmount >= model.getUsedValue().doubleValue()) {
-                            // 不满足溢收
-                            paymentItem.setChangeAmount(BigDecimal.valueOf(0));// 找零金额
-
-                            paymentItem.setUsefulAmount(model.getUsedValue());// 实付款
-
+                                                        paymentItem.setChangeAmount(BigDecimal.valueOf(0));
+                            paymentItem.setUsefulAmount(model.getUsedValue());
                             restAmount = floatSubtract(restAmount, model.getUsedValue().doubleValue());
 
-                        } else {// 满足溢收
-                            paymentItem.setChangeAmount(BigDecimal.valueOf(0));// 找零金额
-
-                            paymentItem.setUsefulAmount(BigDecimal.valueOf(restAmount));// 实付款
-
+                        } else {                            paymentItem.setChangeAmount(BigDecimal.valueOf(0));
+                            paymentItem.setUsefulAmount(BigDecimal.valueOf(restAmount));
                             restAmount = 0;
                         }
-                        // }
-                        paymentItem.setCreatorId(_operatorId);// 收银员id
-                        paymentItem.setCreatorName(_operatorName);// 收银员名字
-                        paymentItemList.add(paymentItem);
+                                                paymentItem.setCreatorId(_operatorId);                        paymentItem.setCreatorName(_operatorName);                        paymentItemList.add(paymentItem);
                     }
                 }
-                //如果有美团券，重新计算实收（用售价计算）
-                if (isContainsMeituan) {
-                    payment.setShopActualAmount(this.getActualPaymentAmount());//  商户实际收金额
-                }
+                                if (isContainsMeituan) {
+                    payment.setShopActualAmount(this.getActualPaymentAmount());                }
             }
-            if (this.getCashPayMoney() > 0) {// 现金方式
-                PaymentItem paymentItem = new PaymentItem();
+            if (this.getCashPayMoney() > 0) {                PaymentItem paymentItem = new PaymentItem();
                 paymentItem.setPaySource(PaySource.CASHIER);
                 paymentItem.validateCreate();
-                // 生成UUID并缓存
-                paymentItem.setUuid(this.getPaymentItemCashUuid());
+                                paymentItem.setUuid(this.getPaymentItemCashUuid());
                 paymentItem.setPaymentUuid(payment.getUuid());
                 paymentItem.setPayModeId(PayModeId.CASH.value());
                 paymentItem.setPayModelGroup(PayModelGroup.CASH);
                 paymentItem.setRefundWay(RefundWay.NONEED_REFUND);
-                // 支付类型名称
-                paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
+                                paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
 
-                paymentItem.setFaceAmount(BigDecimal.valueOf(this.cashPayMoney));// 票面金额
-                paymentItem.setChangeAmount(BigDecimal.valueOf(floatSubtract(this.cashPayMoney, restAmount)));// 找零金额
-                paymentItem.setUsefulAmount(BigDecimal.valueOf(restAmount));// 实付款
-                paymentItem.setCreatorId(_operatorId);// 收银员id
-                paymentItem.setCreatorName(_operatorName);// 收银员名字
-                paymentItemList.add(paymentItem);
+                paymentItem.setFaceAmount(BigDecimal.valueOf(this.cashPayMoney));                paymentItem.setChangeAmount(BigDecimal.valueOf(floatSubtract(this.cashPayMoney, restAmount)));                paymentItem.setUsefulAmount(BigDecimal.valueOf(restAmount));                paymentItem.setCreatorId(_operatorId);                paymentItem.setCreatorName(_operatorName);                paymentItemList.add(paymentItem);
             }
 
-            // 如果收银明细为空,默认添加零的现金记录
-            if (paymentItemList.size() <= 0) {// 快捷支付
-                // CashType cashType = null;
-                PaymentItem paymentItem = new PaymentItem();
+                        if (paymentItemList.size() <= 0) {                                PaymentItem paymentItem = new PaymentItem();
                 paymentItem.setPaySource(PaySource.CASHIER);
                 paymentItem.validateCreate();
-                // 生成UUID并缓存
-                paymentItem.setUuid(this.getPaymentItemCashUuid());
+                                paymentItem.setUuid(this.getPaymentItemCashUuid());
                 paymentItem.setPaymentUuid(payment.getUuid());
                 paymentItem.setPayModeId(PayModeId.CASH.value());
                 paymentItem.setPayModelGroup(PayModelGroup.CASH);
                 paymentItem.setRefundWay(RefundWay.NONEED_REFUND);
-                // 支付类型名称
-                paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
+                                paymentItem.setPayModeName(PaySettingCache.getPayModeNameByModeId(paymentItem.getPayModeId()));
 
-                paymentItem.setFaceAmount(BigDecimal.valueOf(this.cashPayMoney));// 票面金额
-                if (BigDecimal.valueOf(this.cashPayMoney).compareTo(BigDecimal.ZERO) < 0) {// 无单退货
-                    paymentItem.setChangeAmount(BigDecimal.ZERO);
+                paymentItem.setFaceAmount(BigDecimal.valueOf(this.cashPayMoney));                if (BigDecimal.valueOf(this.cashPayMoney).compareTo(BigDecimal.ZERO) < 0) {                    paymentItem.setChangeAmount(BigDecimal.ZERO);
                     paymentItem.setUsefulAmount(BigDecimal.valueOf(this.cashPayMoney));
                 } else {
-                    paymentItem.setChangeAmount(BigDecimal.valueOf(this.getChangeAmount()));// 找零金额
-                    paymentItem.setUsefulAmount(BigDecimal.valueOf(this.cashPayMoney - this.getChangeAmount()));// 实付款
-                }
-                paymentItem.setCreatorId(_operatorId);// 收银员id
-                paymentItem.setCreatorName(_operatorName);// 收银员名字
-                paymentItemList.add(paymentItem);
+                    paymentItem.setChangeAmount(BigDecimal.valueOf(this.getChangeAmount()));                    paymentItem.setUsefulAmount(BigDecimal.valueOf(this.cashPayMoney - this.getChangeAmount()));                }
+                paymentItem.setCreatorId(_operatorId);                paymentItem.setCreatorName(_operatorName);                paymentItemList.add(paymentItem);
             }
         }
         return paymenVo;
@@ -1177,8 +894,7 @@ public class CashInfoManager implements IPaymentInfo {
             vo.setIssName(log.getIssName());
             vo.setPaymentItemUnionpay(
                     getPaymentItemUnionpayReq(PaySettingCache.getmErpComRel(), log, operatorId, operatorName));
-            // 设备终端号
-            PaymentDeviceReq device = new PaymentDeviceReq();
+                        PaymentDeviceReq device = new PaymentDeviceReq();
             device.setDeviceNumber(log.getTerminalNumber());
             if (PaySettingCache.getmErpComRel() != null)
                 device.setPosChannelId(PaySettingCache.getmErpComRel().getBankChannelId());
@@ -1201,10 +917,8 @@ public class CashInfoManager implements IPaymentInfo {
             if (erpComRel != null) {
                 Double backRates = erpComRel.getBankRates();
                 if (backRates != null) {
-                    req.setRates(backRates);// 费率
-                    Double fee = log.getAmount() * backRates;
-                    req.setFee(MathDecimal.round(fee, 4));// 手续费
-                } else {
+                    req.setRates(backRates);                    Double fee = log.getAmount() * backRates;
+                    req.setFee(MathDecimal.round(fee, 4));                } else {
                     req.setFee(0D);
                 }
                 req.setPosChannelId(erpComRel.getBankChannelId());
@@ -1220,8 +934,7 @@ public class CashInfoManager implements IPaymentInfo {
         req.setHostSerialNumber(log.getHostSerialNumber());
         req.setPosTraceNumber(log.getPosTraceNumber());
         req.setBatchNumber(log.getBatchNumber());
-        req.setTerminalNumber(log.getTerminalNumber());// 设备终端号
-        req.setAppname(log.getAppName());
+        req.setTerminalNumber(log.getTerminalNumber());        req.setAppname(log.getAppName());
         return req;
     }
 
@@ -1236,13 +949,7 @@ public class CashInfoManager implements IPaymentInfo {
         return isPos;
     }
 
-    /**
-     * @Description:浮点数求差公共方法,保留2位小数
-     * @Param arg1 被減数
-     * @Param arg2 减数
-     * @Param @return
-     * @Return float 返回类型
-     */
+
     public static double floatSubtract(double arg1, double arg2) {
         BigDecimal bigDecimal = new BigDecimal(arg1);
 
@@ -1253,9 +960,7 @@ public class CashInfoManager implements IPaymentInfo {
         return MathDecimal.round(result, 2);
     }
 
-    /**
-     * "Y######.00"格式 将金额格式化添加货币符号
-     */
+
     public static String formatCash(double value) {
         DecimalFormat df = new DecimalFormat("0.00");
         try {
@@ -1266,9 +971,7 @@ public class CashInfoManager implements IPaymentInfo {
         return ShopInfoCfg.getInstance().getCurrencySymbol() + value + "";
     }
 
-    /**
-     * "######.00"格式 将金额格式化
-     */
+
     public static String formatCashAmount(double value) {
         DecimalFormat df = new DecimalFormat("0.00");
         try {
@@ -1279,12 +982,7 @@ public class CashInfoManager implements IPaymentInfo {
         return value + "";
     }
 
-    /**
-     * @Description: 验证金额输入是否合法
-     * @Param value
-     * @Param @return
-     * @Return boolean 返回类型
-     */
+
     public static boolean isMatchCashFormat(String value) {
         if (value == null) {
             return false;
@@ -1300,27 +998,17 @@ public class CashInfoManager implements IPaymentInfo {
         this.ecCard = ecCard;
     }
 
-    /**
-     * 设置实体卡的信息因为 打印的时候需要 memberResp的值 所以需要设置这个值
-     *
-     * @Title: setPrintMemeberInfoByCard
-     * @Description:
-     * @Return void 返回类型
-     */
+
     public void setPrintMemeberInfoByCard() {
-        // 如果是有实体卡信息
-        CustomerLoginResp loginResp = new CustomerLoginResp();
+                CustomerLoginResp loginResp = new CustomerLoginResp();
         if (loginResp != null && ecCard != null) {
             loginResp.setCustomerId(ecCard.getId());
             loginResp.setLevel(ecCard.getCardLevel().getCardLevelName());
             loginResp.setSex(Sex.MALE);
 
-            BigDecimal integralAccount = new BigDecimal(0);// 会员积分
-            BigDecimal valueCardAccount = new BigDecimal(memberCardBalance);// 会员余额
-            switch (ecCard.getCardType()) {
+            BigDecimal integralAccount = new BigDecimal(0);            BigDecimal valueCardAccount = new BigDecimal(memberCardBalance);            switch (ecCard.getCardType()) {
                 case CUSTOMER_ENTITY_CARD:
-                    // 得到 integralAccount 的值 valueCardAccount的值
-                    if (ecCard.getIntegralAccount() == null) {
+                                        if (ecCard.getIntegralAccount() == null) {
                         integralAccount = BigDecimal.valueOf(0);
                     } else {
                         if (ecCard.getIntegralAccount().getIntegral() == null) {
@@ -1332,41 +1020,19 @@ public class CashInfoManager implements IPaymentInfo {
 
                     }
 
-               /* if (ecCard.getValueCardAccount() == null) {
-                    valueCardAccount = BigDecimal.valueOf(0);
-                } else {
-                    if (ecCard.getValueCardAccount().getRemainValue() == null) {
-                        valueCardAccount = BigDecimal.valueOf(0);
-                    } else {
-                        valueCardAccount =
-                                MathDecimal.round(BigDecimal.valueOf(ecCard.getValueCardAccount().getRemainValue()), 2);
-                    }
 
-                }*/
                     loginResp.setCustomerName(ecCard.getCardNum());
                     break;
                 case ANONYMOUS_ENTITY_CARD:
-                   /* if (ecCard != null && null != ecCard.getEctempAccount() && null != ecCard.getEctempAccount().getRemainValue()) {
-                        integralAccount = BigDecimal.valueOf(0);
 
-                   *//* valueCardAccount =
-                            MathDecimal.round(BigDecimal.valueOf(ecCard.getEctempAccount().getRemainValue()), 2);*//*
-
-                    } else {
-                        integralAccount = BigDecimal.valueOf(0);
-                   *//* valueCardAccount = BigDecimal.valueOf(0);*//*
-                    }*/
                     integralAccount = BigDecimal.valueOf(0);
-                    loginResp.setCustomerName("");//匿名卡不需要传入名字
-                    break;
+                    loginResp.setCustomerName("");                    break;
                 default:
                     break;
 
             }
 
-            loginResp.setIntegralBalance(integralAccount);// 会员积分
-            loginResp.setValueCardBalance(valueCardAccount);// 会员余额
-        }
+            loginResp.setIntegralBalance(integralAccount);            loginResp.setValueCardBalance(valueCardAccount);        }
         setMemberResp(loginResp);
     }
 }

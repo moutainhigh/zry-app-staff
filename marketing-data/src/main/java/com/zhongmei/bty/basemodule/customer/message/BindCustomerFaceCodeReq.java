@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.customer.message;
 
 import com.zhongmei.bty.commonmodule.data.operate.message.BaseRequest;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BindCustomerFaceCodeReq extends BaseRequest {
 

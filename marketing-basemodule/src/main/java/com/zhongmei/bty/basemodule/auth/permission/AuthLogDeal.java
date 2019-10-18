@@ -13,16 +13,12 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class AuthLogDeal {
 
-    //10分钟处理一次
-    private static final int RECYLE_TIME = 10 * 60 * 1000;
-    //每次查询的条数
-    private static final int QUERYCOUNT = 30;
+        private static final int RECYLE_TIME = 10 * 60 * 1000;
+        private static final int QUERYCOUNT = 30;
     private Timer mTimer = null;
     private TimerTask mTimerTask = null;
     private boolean isStart = false;
@@ -51,11 +47,7 @@ public class AuthLogDeal {
         isStart = false;
     }
 
-    /**
-     * 处理上传与下行后删除
-     *
-     * @param isRetry:是否重试
-     */
+
     private void deal(final boolean isRetry) {
         List<AuthorizedLog> authList = AuthLogManager.getInstance().queryList(-1);
         if (authList == null || authList.isEmpty()) {
@@ -72,8 +64,7 @@ public class AuthLogDeal {
 
             @Override
             public void onError(VolleyError error) {
-                //重试一次
-                if (!isRetry) {
+                                if (!isRetry) {
                     deal(true);
                 }
             }

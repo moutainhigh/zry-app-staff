@@ -42,14 +42,7 @@ public class DinnerDishManager {
         }
     }
 
-    /**
-     * 移除批量菜品对应操作记录标签
-     *
-     * @Title: removeSelectedTradeItemOperations
-     * @Param @param selectedItems
-     * @Param @param opType
-     * @Return boolean 返回类型
-     */
+
     public boolean removeSelectedTradeItemOperations(List<DishDataItem> dishDataItems, PrintOperationOpType opType) {
         Map<IShopcartItemBase, PrintOperationOpType> map = new HashMap<>();
         for (DishDataItem item : dishDataItems) {
@@ -68,13 +61,7 @@ public class DinnerDishManager {
         }
     }
 
-    /**
-     * 批量添加菜品操作
-     *
-     * @param dishDataItems
-     * @param opType
-     * @return
-     */
+
     public boolean addSelectedTradeItemOperations(List<DishDataItem> dishDataItems, PrintOperationOpType opType) {
         Map<IShopcartItemBase, PrintOperationOpType> map = new HashMap<>();
         for (DishDataItem item : dishDataItems) {
@@ -144,12 +131,7 @@ public class DinnerDishManager {
         }
     }
 
-    /**
-     * 是否有未生成批次号的
-     *
-     * @param dishDataItems
-     * @return
-     */
+
     public List<String> getNoBatchNo(List<DishDataItem> dishDataItems) {
         List<String> uuids = new ArrayList<>();
         for (DishDataItem item : dishDataItems) {
@@ -216,12 +198,7 @@ public class DinnerDishManager {
         return hasBatch;
     }
 
-    /**
-     * 是否加菜
-     *
-     * @param dishDataItems
-     * @return
-     */
+
     public boolean isAddDish(List<DishDataItem> dishDataItems) {
 
         if (filterNoBatchNo(dishDataItems).isEmpty())
@@ -240,9 +217,7 @@ public class DinnerDishManager {
         return false;
     }
 
-    /**
-     * 过滤未生成批次号的
-     */
+
     public List<DishDataItem> filterNoBatchNo(List<DishDataItem> dishDataItems) {
         List<DishDataItem> tmpList = new ArrayList<>();
         for (DishDataItem item : dishDataItems) {
@@ -257,13 +232,7 @@ public class DinnerDishManager {
         return tmpList;
     }
 
-    /**
-     * 获取菜品列表中单菜和套餐外壳的id
-     *
-     * @Title: getSingleAndComboIds
-     * @Param @param dishDataItems
-     * @Return List<Long> 返回类型
-     */
+
     public List<Long> getSingleAndComboIds(List<DishDataItem> dishDataItems) {
         List<Long> selectedItemIds = new ArrayList<Long>();
         for (DishDataItem item : dishDataItems) {
@@ -287,24 +256,16 @@ public class DinnerDishManager {
         return false;
     }
 
-    /**
-     * 获取菜品列表中单菜和套餐外壳的id
-     *
-     * @Title: getSingleAndComboUuids
-     * @Param @param dishDataItems
-     * @Return List<String> 返回类型
-     */
+
     public List<String> getSingleAndComboUuids(List<DishDataItem> dishDataItems) {
         List<String> selectedItemUuids = new ArrayList<String>();
         for (DishDataItem item : dishDataItems) {
             if ((item.getType() == ItemType.WEST_CHILD || item.getType() == ItemType.CHILD) && item.getBase() != null && item.getBase().getUuid() != null) {
                 selectedItemUuids.add(item.getBase().getUuid());
-                if (item.getItem() != null && !selectedItemUuids.contains(item.getItem().getUuid()))    //加入套餐外壳的UUid
-                    selectedItemUuids.add(item.getItem().getUuid());
+                if (item.getItem() != null && !selectedItemUuids.contains(item.getItem().getUuid()))                        selectedItemUuids.add(item.getItem().getUuid());
             } else if (item.getType() == ItemType.SINGLE && item.getItem() != null && item.getItem().getUuid() != null) {
                 selectedItemUuids.add(item.getItem().getUuid());
-            } else if (item.getType() == ItemType.COMBO && item.getItem() != null && item.getItem().getUuid() != null) {    //加入套餐子菜UUid
-                IShopcartItem iShopcartItem = item.getItem();
+            } else if (item.getType() == ItemType.COMBO && item.getItem() != null && item.getItem().getUuid() != null) {                    IShopcartItem iShopcartItem = item.getItem();
                 if (iShopcartItem.getUuid() != null && !selectedItemUuids.contains(iShopcartItem.getUuid()))
                     selectedItemUuids.add(iShopcartItem.getUuid());
                 List<? extends ISetmealShopcartItem> iSetmealShopcartItems = iShopcartItem.getSetmealItems();
@@ -319,12 +280,7 @@ public class DinnerDishManager {
     }
 
 
-    /**
-     * 设置菜品ID
-     *
-     * @param tradeItems
-     * @param dishDataItems
-     */
+
     public void setDishItemsId(List<TradeItem> tradeItems, List<DishDataItem> dishDataItems) {
         Map<String, Long> tmpMap = new HashMap<>();
         for (TradeItem item : tradeItems) {
@@ -357,8 +313,7 @@ public class DinnerDishManager {
                         if (iSetmealShopcartItem != null) {
                             id = tmpMap.get(iSetmealShopcartItem.getUuid());
                             for (TradeItemOperation operation : iSetmealShopcartItem.getTradeItemOperations()) {
-                                //if(iSetmealShopcartItem.getId() != null)
-                                operation.setTradeItemId(id);
+                                                                operation.setTradeItemId(id);
                             }
                         }
                     }
@@ -367,12 +322,7 @@ public class DinnerDishManager {
         }
     }
 
-    /**
-     * 获取最新的菜品操作记录
-     *
-     * @param tradeItemOperations
-     * @return
-     */
+
     public TradeItemOperation getLastOperation(List<TradeItemOperation> tradeItemOperations) {
         if (Utils.isEmpty(tradeItemOperations)) {
             return null;
@@ -382,8 +332,7 @@ public class DinnerDishManager {
         TradeItemOperation riseUpTio = null;
         TradeItemOperation cancelWakeUpTio = null;
         TradeItemOperation cancelRiseUpTio = null;
-        //挑选催菜、起菜、等叫操作，如果遇到催菜（优先级最高），直接返回
-        for (int i = tradeItemOperations.size() - 1; i >= 0; i--) {
+                for (int i = tradeItemOperations.size() - 1; i >= 0; i--) {
             TradeItemOperation tradeItemOperation = tradeItemOperations.get(i);
             if (tradeItemOperation.getStatusFlag() == StatusFlag.VALID) {
                 switch (tradeItemOperation.getOpType()) {
@@ -407,8 +356,7 @@ public class DinnerDishManager {
             }
         }
 
-        //没有催菜时，依次按照取消起菜、取消等叫、起菜和等叫的优先级返回
-        if (cancelRiseUpTio != null) {
+                if (cancelRiseUpTio != null) {
             return cancelRiseUpTio;
         } else if (cancelWakeUpTio != null) {
             return cancelWakeUpTio;
@@ -423,12 +371,10 @@ public class DinnerDishManager {
 
     public static void prepareCustomPrintData(TradeVo tradeVo, List<String> customAddDishUuids, List<String> customModifyDishUuids,
                                               List<String> customDeleteDishUuids) {
-        //团餐餐标
-        if (tradeVo.getMealShellVo() != null && tradeVo.getMealShellVo().getTradeItem() != null)
+                if (tradeVo.getMealShellVo() != null && tradeVo.getMealShellVo().getTradeItem() != null)
             customAddDishUuids.add(tradeVo.getMealShellVo().getTradeItem().getUuid());
 
-        //缓存所有菜品
-        Map<String, TradeItem> tradeItemMap = new HashMap<>();
+                Map<String, TradeItem> tradeItemMap = new HashMap<>();
         for (TradeItemVo tradeItemVo : tradeVo.getTradeItemList()) {
             tradeItemMap.put(tradeItemVo.getTradeItem().getUuid(), tradeItemVo.getTradeItem());
         }
@@ -439,8 +385,7 @@ public class DinnerDishManager {
             TradeItem relateTradeItem = tradeItemMap.get(relateUuid);
 
             if (tradeItem.getGuestPrinted() == GuestPrinted.UNPRINT) {
-                /*DinnerPrintUtil.prepareDishCustomPrintData(tradeItem, relateTradeItem, tradeItemMap, customAddDishUuids,
-                        customDeleteDishUuids, customModifyDishUuids);*/
+
             }
         }
     }

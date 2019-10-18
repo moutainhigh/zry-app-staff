@@ -17,9 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyTableManager extends TableManagerBase implements ITableTradeRefresh {
 
@@ -37,10 +35,8 @@ public class BeautyTableManager extends TableManagerBase implements ITableTradeR
 
     @Override
     public void refreshTableTrade(Map<Long, StateWrapper> stateWrapper) {
-        //跟新桌台上的订单信息。
-        doRefreshState(stateWrapper);
-        //刷新UI
-        if (mTableOperatorListeners != null) {
+                doRefreshState(stateWrapper);
+                if (mTableOperatorListeners != null) {
             List<ZoneModel> listZoneModel = new ArrayList<ZoneModel>(zoneModelFinder.values());
             for (ITableOperator listener : mTableOperatorListeners) {
                 listener.refreshTableTrades(listZoneModel);
@@ -57,16 +53,14 @@ public class BeautyTableManager extends TableManagerBase implements ITableTradeR
                 StateWrapper stateWrapper = stateWrapperMap.get(tableId);
                 if (stateWrapper != null) {
                     TableStateInfo tableStateInfo = stateWrapper.tableStateInfo;
-                    // 创建桌台上的单据数据
-                    List<IDinnertableTrade> dinnertableTrades = createTableTradeInfo(stateWrapper.tradeTableInfos, dinnertableModel);
+                                        List<IDinnertableTrade> dinnertableTrades = createTableTradeInfo(stateWrapper.tradeTableInfos, dinnertableModel);
 
                     dinnertableModel.setTableStatus(tableStateInfo.tableStatus);
                     dinnertableModel.setStateInfo(tableStateInfo, dinnertableTrades);
                 }
 
                 if (dinnertableModel.getPhysicsTableStatus() == TableStatus.EMPTY) {
-                    //桌台状态为null
-                    emptyTableCount++;
+                                        emptyTableCount++;
                 }
             }
         }

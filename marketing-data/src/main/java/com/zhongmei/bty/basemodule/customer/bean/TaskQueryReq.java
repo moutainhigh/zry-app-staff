@@ -2,9 +2,7 @@ package com.zhongmei.bty.basemodule.customer.bean;
 
 import com.zhongmei.yunfu.ShopInfoManager;
 
-/**
- * Created by dingzb on 2019/6/25.
- */
+
 
 public class TaskQueryReq {
 

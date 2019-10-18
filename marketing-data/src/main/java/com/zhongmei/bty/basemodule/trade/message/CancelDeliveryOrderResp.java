@@ -4,9 +4,7 @@ import com.zhongmei.bty.commonmodule.database.entity.DeliveryOrder;
 
 import java.io.Serializable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class CancelDeliveryOrderResp implements Serializable {
     DeliveryOrder deliveryOrder;

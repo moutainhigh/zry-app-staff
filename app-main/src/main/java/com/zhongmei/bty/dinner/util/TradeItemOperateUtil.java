@@ -77,15 +77,11 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
 
     private Button btnPausePrint;
 
-    // 重打厨总
-    private Button btnReprintKitchenAll;
+        private Button btnReprintKitchenAll;
 
-    // 重打堂口
-    private Button btnReprintKitchenCell;
-    //    赠送
-    private Button btnGive;
-    //换菜
-    private Button btn_replace;
+        private Button btnReprintKitchenCell;
+        private Button btnGive;
+        private Button btn_replace;
 
     private Button btnWakeup;
     private Button btnWakeupCancel;
@@ -119,29 +115,18 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
     private int deleteMode = -1;
     private int giveMode = -1;
 
-    private final static int DELETE_MODE = 1;//删除品项
-    private final static int CONFIRM_DELETE_MODE = 2;//确认删除
-    private final static int REFUND_MODE = 3;//作废商品
-
-    private final static int GIVE_MODE = 1;//赠送
-    private final static int CANCEL_GIVE_MODE = 2;//取消赠送
-
-    boolean isGive = false;//是否为赠送条目
-    boolean isSingleOrCombo = false;//是否为单菜或套餐外壳
-    boolean isUnsaveDish = false;//是否为未生效的菜
-    View parentView;
+    private final static int DELETE_MODE = 1;    private final static int CONFIRM_DELETE_MODE = 2;    private final static int REFUND_MODE = 3;
+    private final static int GIVE_MODE = 1;    private final static int CANCEL_GIVE_MODE = 2;
+    boolean isGive = false;    boolean isSingleOrCombo = false;    boolean isUnsaveDish = false;    View parentView;
     DinnerDishMiddleFragment.IChangePageListener mListener;
 
-    //当前是有什么场景调用
-    private int mCurrentMode = WESTERN_DISH_MODE;
+        private int mCurrentMode = WESTERN_DISH_MODE;
 
     public void setCurrentMode(int currentMode) {
         mCurrentMode = currentMode;
     }
 
-    /**
-     * 设置赠送、打印等操作条
-     */
+
     public void setOperateButton(FragmentActivity activity, DishDataItem item, View parentView, ChangePageListener changePageListener, DinnerDishMiddleFragment.IChangePageListener listener, boolean isComboEditMode) {
         mActivity = (MainBaseActivity) activity;
         this.parentView = parentView;
@@ -151,9 +136,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         setDishDataItem(item, isComboEditMode);
     }
 
-    /**
-     * 配菜时条显示
-     */
+
     public void contorlSlideDishShow() {
         btnGive.setVisibility(View.GONE);
         btnPausePrint.setVisibility(View.GONE);
@@ -194,8 +177,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
             default:
                 break;
         }
-        //西餐子菜
-        boolean isChild = false;
+                boolean isChild = false;
         if (dishDataItem.getType() == ItemType.WEST_CHILD || dishDataItem.getType() == ItemType.CHILD) {
             isChild = true;
         }
@@ -207,8 +189,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
             if ((dishDataItem.getBase().getStatusFlag() == StatusFlag.INVALID) &&
                     (dishDataItem.getBase().getInvalidType() != InvalidType.SPLIT)) {
                 if (dishDataItem.getType() != ItemType.CHILD) {
-                    //已退菜
-                    showReturned();
+                                        showReturned();
                 }
             } else {
                 if (!TextUtils.isEmpty(dishDataItem.getBase().getRelateTradeItemUuid())
@@ -258,12 +239,9 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
             btnRemind.setVisibility(View.GONE);
     }
 
-    /**
-     * 设置暂停打印的状态
-     */
+
     private void setPauseButton() {
-        // 未生成过批次号的套餐和单菜（子菜不能暂停出单），可以暂停打印
-        if (isSingleOrCombo && TextUtils.isEmpty(shopcartItemBase.getBatchNo())) {
+                if (isSingleOrCombo && TextUtils.isEmpty(shopcartItemBase.getBatchNo())) {
             if (shopcartItemBase.getIssueStatus() == IssueStatus.PAUSE) {
                 setPausePrintBtn(true);
             } else {
@@ -274,25 +252,19 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 组织button的显示
-     *
-     * @return 是否显示此popupwindow
-     */
+
     private boolean arrangeBtns() {
         if (shopcartItemBase == null) {
             return false;
         }
 
-        // 反结账不显示暂停出单和重新打印
-        if (DinnerShoppingCart.getInstance().isReturnCash()) {
+                if (DinnerShoppingCart.getInstance().isReturnCash()) {
             btnPausePrint.setVisibility(View.GONE);
             btnReprintKitchenAll.setVisibility(View.GONE);
             btnReprintKitchenCell.setVisibility(View.GONE);
         }
 
-        //套餐外壳和单菜可以进行赠送
-        if (isSingleOrCombo && shopcartItemBase.getStatusFlag() == StatusFlag.VALID) {
+                if (isSingleOrCombo && shopcartItemBase.getStatusFlag() == StatusFlag.VALID) {
             isShowGiveView();
             boolean hasGiven = DinnerTradeItemManager.getInstance().hasGiven(shopcartItemBase);
             setGiveBtn(hasGiven ? CANCEL_GIVE_MODE : GIVE_MODE);
@@ -301,8 +273,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
             btnGive.setVisibility(View.GONE);
         }
 
-        //联台子单批量菜品不显示重打厨总和堂口按钮
-        if (shopcartItemBase.getShopcartItemType() == ShopcartItemType.SUBBATCH
+                if (shopcartItemBase.getShopcartItemType() == ShopcartItemType.SUBBATCH
                 || shopcartItemBase.getShopcartItemType() == ShopcartItemType.SUBBATCHMODIFY) {
             btnReprintKitchenAll.setVisibility(View.GONE);
             btnReprintKitchenCell.setVisibility(View.GONE);
@@ -315,10 +286,8 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         btnDeleteItem = (Button) parentView.findViewById(R.id.btn_delete);
         btnPausePrint = (Button) parentView.findViewById(R.id.btn_pause);
         btnGive = (Button) parentView.findViewById(R.id.btn_give);
-        //重打堂口
-        btnReprintKitchenCell = (Button) parentView.findViewById(R.id.btn_reprint_kitchen_cell);
-        //重打厨打
-        btnReprintKitchenAll = (Button) parentView.findViewById(R.id.btn_reprint_kitchen_all);
+                btnReprintKitchenCell = (Button) parentView.findViewById(R.id.btn_reprint_kitchen_cell);
+                btnReprintKitchenAll = (Button) parentView.findViewById(R.id.btn_reprint_kitchen_all);
         btn_replace = (Button) parentView.findViewById(R.id.btn_replace);
 
         btnWakeup = (Button) parentView.findViewById(R.id.btn_prepare);
@@ -344,8 +313,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
     }
 
     private void initDrawable() {
-        // 初始化按钮图标
-        pauseDrawable = mActivity.getResources().getDrawable(R.drawable.dinner_pause_print);
+                pauseDrawable = mActivity.getResources().getDrawable(R.drawable.dinner_pause_print);
         pauseDrawable.setBounds(0, 0, pauseDrawable.getMinimumWidth(), pauseDrawable.getMinimumHeight());
         pausePressedDrawable = mActivity.getResources().getDrawable(R.drawable.dinner_resume_print);
         pausePressedDrawable.setBounds(0, 0, pausePressedDrawable.getMinimumWidth(), pausePressedDrawable.getMinimumHeight());
@@ -361,9 +329,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         returnGoodsDrawable.setBounds(0, 0, returnGoodsDrawable.getMinimumWidth(), returnGoodsDrawable.getMinimumHeight());
     }
 
-    /**
-     * 未保存菜品的操作条
-     */
+
     private void showUnSave() {
         btnDeleteItem.setVisibility(View.VISIBLE);
         setDeleteBtn(DELETE_MODE);
@@ -374,9 +340,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         setPauseButton();
     }
 
-    /**
-     * 未出单的菜品
-     */
+
     private void showUnPrint(boolean isWestChild) {
         setDeleteBtn(DELETE_MODE);
         isShowGiveView();
@@ -393,9 +357,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
     }
 
 
-    /**
-     * 已打印的菜品
-     */
+
     private void showPrinted(boolean isWestChild) {
         setDeleteBtn(REFUND_MODE);
         if (isWestChild) {
@@ -414,9 +376,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         btnPausePrint.setVisibility(View.GONE);
     }
 
-    /**
-     * 退菜的菜品
-     */
+
     private void showReturned() {
         btnDeleteItem.setVisibility(View.GONE);
         btnGive.setVisibility(View.GONE);
@@ -433,11 +393,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 设置删除按钮样式
-     *
-     * @param mode 1表示删除品项，2表示确认删除，3表示作废商品
-     */
+
     private void setDeleteBtn(int mode) {
         deleteMode = mode;
         btnDeleteItem.setVisibility(View.VISIBLE);
@@ -460,11 +416,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 设置赠送按钮样式
-     *
-     * @param mode 1表示赠送，2表示取消赠送
-     */
+
     private void setGiveBtn(int mode) {
         switch (mode) {
             case GIVE_MODE:
@@ -485,9 +437,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 未出单菜品退库存
-     */
+
     private void showReturnInventoryDialog() {
         rgrvReturnReason = new ReturnGoodsReasonView_();
         rgrvReturnReason.isShowReturnInventoryLayout = true;
@@ -504,9 +454,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         rgrvReturnReason.show(mActivity.getSupportFragmentManager(), "return_reason");
     }
 
-    /**
-     * 已出单菜品退库存or退菜理由
-     */
+
     private void showReturnInVentoryOrReasonDialog(final boolean isShowReturnInventoryLayout, final boolean isShowReason) {
         rgrvReturnReason = new ReturnGoodsReasonView_();
         rgrvReturnReason.isShowReturnInventoryLayout = isShowReturnInventoryLayout;
@@ -527,12 +475,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
     }
 
 
-    /**
-     * 执行退菜
-     *
-     * @param returnCount
-     * @param returnReason
-     */
+
     private void doReturnItem(BigDecimal returnCount, Reason returnReason, final List<InventoryItem> inventoryItemList) {
         TradeReasonRel tradeReasonRel = null;
         if (returnReason != null) {
@@ -543,8 +486,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         ShopcartItemUtils.splitBatchItem(shopcartItemBase);
         final IShopcartItem shopcartItem = ((IShopcartItem) shopcartItemBase).returnQty(returnCount.negate(), tradeReasonRel);
 
-        //拷贝原菜的赠送
-        if (DinnerTradeItemManager.getInstance().hasGiven(shopcartItemBase)) {
+                if (DinnerTradeItemManager.getInstance().hasGiven(shopcartItemBase)) {
             Reason giveReason = null;
             if (shopcartItem.getDiscountReasonRel() != null) {
                 giveReason = new Reason();
@@ -592,11 +534,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 设置暂停打印按钮的样式
-     *
-     * @param isPause 是否为已暂停
-     */
+
     private void setPausePrintBtn(boolean isPause) {
         btnPausePrint.setVisibility(View.VISIBLE);
         if (isPause) {
@@ -618,15 +556,13 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
         switch (v.getId()) {
             case R.id.btn_delete:
-                if (isUnsaveDish) {//未生效菜品直接删除
-                    doDeleteDish();
+                if (isUnsaveDish) {                    doDeleteDish();
                     doClose();
                     MobclickAgentEvent.onEvent(UserActionCode.ZC020018);
                     return;
                 }
 
-                if (isCanDelete()) {//第一次点击进行确认，再次点击删除
-                    if (deleteMode == DELETE_MODE) {
+                if (isCanDelete()) {                    if (deleteMode == DELETE_MODE) {
                         setDeleteBtn(CONFIRM_DELETE_MODE);
 
                         return;
@@ -640,8 +576,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                     }
                 }
 
-                if (isCanReturn()) {//作废商品
-                    MobclickAgentEvent.onEvent(UserActionCode.ZC020022);
+                if (isCanReturn()) {                    MobclickAgentEvent.onEvent(UserActionCode.ZC020022);
                     TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
                     if (tradeVo != null && tradeVo.getTrade() != null && tradeVo.getTrade().getBusinessType() == BusinessType.BUFFET) {
                         if (shopcartItemBase.getCouponPrivilegeVo() != null && shopcartItemBase.getCouponPrivilegeVo().isUsed()) {
@@ -666,15 +601,11 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                 ShopcartItemUtils.splitBatchItem(shopcartItemBase);
                 IssueStatus issueStatus = shopcartItemBase.getIssueStatus();
                 if (issueStatus != IssueStatus.PAUSE) {
-                    // 暂停出单
-                    DinnerShoppingCart.getInstance().updatePrintStatus(shopcartItemBase, IssueStatus.PAUSE);
-                    //设置为已暂停模式
-                    setPausePrintBtn(true);
+                                        DinnerShoppingCart.getInstance().updatePrintStatus(shopcartItemBase, IssueStatus.PAUSE);
+                                        setPausePrintBtn(true);
                 } else {
-                    // 恢复打印
-                    DinnerShoppingCart.getInstance().updatePrintStatus(shopcartItemBase, IssueStatus.DIRECTLY);
-                    //设置为未暂停模式
-                    setPausePrintBtn(false);
+                                        DinnerShoppingCart.getInstance().updatePrintStatus(shopcartItemBase, IssueStatus.DIRECTLY);
+                                        setPausePrintBtn(false);
                 }
                 doClose();
                 break;
@@ -682,11 +613,9 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
             case R.id.btn_reprint_kitchen_cell:
                 MobclickAgentEvent.onEvent(UserActionCode.ZC020023);
                 if (shopcartItemBase.getShopcartItemType() == ShopcartItemType.COMMON || shopcartItemBase.getShopcartItemType() == ShopcartItemType.SUB) {
-                    // 重新打印单菜
-                    reprintKitchen(v.getId() == R.id.btn_reprint_kitchen_all);
+                                        reprintKitchen(v.getId() == R.id.btn_reprint_kitchen_all);
                 } else if (shopcartItemBase.getShopcartItemType() == ShopcartItemType.MAINBATCH) {
-                    // 重新打印主单菜品
-                    reprintUnionMainKitchen(v.getId() == R.id.btn_reprint_kitchen_all);
+                                        reprintUnionMainKitchen(v.getId() == R.id.btn_reprint_kitchen_all);
                 }
                 doClose();
                 break;
@@ -696,8 +625,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                     DinnerShoppingCart.getInstance().removeShopcarItemPrivilege(shopcartItemBase);
                     doClose();
                 } else {
-                    //参与营销活动的菜品不允许赠送
-                    if (DinnerTradeItemManager.getInstance().hasMarketActivity(shopcartItemBase)) {
+                                        if (DinnerTradeItemManager.getInstance().hasMarketActivity(shopcartItemBase)) {
                         ToastUtil.showShortToast(R.string.cannot_give);
                         return;
                     }
@@ -709,8 +637,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                                     ReasonDal reasonDal = OperatesFactory.create(ReasonDal.class);
                                     boolean reasonSwitch = reasonDal.isReasonSwitchOpen(ReasonType.ITEM_GIVE);
 
-                                    if (!DinnerTradeItemManager.isCommonUnweightDish(shopcartItemBase)) {//普通（非联台相关）非称重商品才能部分赠送
-                                        showGiveReasonDialog();
+                                    if (!DinnerTradeItemManager.isCommonUnweightDish(shopcartItemBase)) {                                        showGiveReasonDialog();
                                     } else {
                                         showUserdefineGiveDialog(shopcartItemBase, reasonSwitch);
                                     }
@@ -721,8 +648,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
             case R.id.btn_replace:
                 doClose();
                 break;
-            case R.id.btn_prepare:      //等叫
-            {
+            case R.id.btn_prepare:                  {
                 MobclickAgentEvent.onEvent(UserActionCode.ZC020016);
                 DinnerShopManager.getInstance().verifyDishInventory(mActivity, DinnerShoppingCart.getInstance().getShoppingCartVo().getListOrderDishshopVo(), new Runnable() {
                     @Override
@@ -735,8 +661,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                 });
                 break;
             }
-            case R.id.btn_make:         //起菜
-            {
+            case R.id.btn_make:                     {
                 MobclickAgentEvent.onEvent(UserActionCode.ZC020017);
                 DinnerShopManager.getInstance().verifyDishInventory(mActivity, DinnerShoppingCart.getInstance().getShoppingCartVo().getListOrderDishshopVo(), new Runnable() {
                     @Override
@@ -749,8 +674,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                 });
                 break;
             }
-            case R.id.btn_cancel_prepare:   //取消等叫
-            {
+            case R.id.btn_cancel_prepare:               {
                 MobclickAgentEvent.onEvent(UserActionCode.ZC020029);
                 DinnerShopManager.getInstance().verifyDishInventory(mActivity, DinnerShoppingCart.getInstance().getShoppingCartVo().getListOrderDishshopVo(), new Runnable() {
                     @Override
@@ -763,8 +687,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                 });
                 break;
             }
-            case R.id.btn_cancel_make:      //取消起菜
-            {
+            case R.id.btn_cancel_make:                  {
                 MobclickAgentEvent.onEvent(UserActionCode.ZC020030);
                 DinnerShopManager.getInstance().verifyDishInventory(mActivity, DinnerShoppingCart.getInstance().getShoppingCartVo().getListOrderDishshopVo(), new Runnable() {
                     @Override
@@ -826,32 +749,21 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         restoreDishDataItems(dataItems);
     }
 
-    /**
-     * 需要退库存
-     * 删除Or作废
-     */
+
     private void needInventoryDeleteOrCancelled() {
-        //是否生效
-        boolean isSave = DinnerTradeItemManager.getInstance().isSaved(dishDataItem);
-        //是否有关联菜品
-        boolean isRelate = !TextUtils.isEmpty(dishDataItem.getBase().getRelateTradeItemUuid());
-        //是否已出单
-        boolean isPrint = !TextUtils.isEmpty(dishDataItem.getBase().getBatchNo());
+                boolean isSave = DinnerTradeItemManager.getInstance().isSaved(dishDataItem);
+                boolean isRelate = !TextUtils.isEmpty(dishDataItem.getBase().getRelateTradeItemUuid());
+                boolean isPrint = !TextUtils.isEmpty(dishDataItem.getBase().getBatchNo());
         if (isPrint) {
             doCancelledAndReturnInventory();
         }
     }
 
-    /**
-     * 删菜
-     */
+
     private void doDeleteDish() {
-//        boolean needInventory = InventoryCacheUtil.getInstance().getSaleSwitch();
         boolean needInventory = true;
-        //是否生效
-        boolean isSave = DinnerTradeItemManager.getInstance().isSaved(dishDataItem);
-        //是否有关联菜品
-        boolean isRelate = !TextUtils.isEmpty(dishDataItem.getBase().getRelateTradeItemUuid());
+                boolean isSave = DinnerTradeItemManager.getInstance().isSaved(dishDataItem);
+                boolean isRelate = !TextUtils.isEmpty(dishDataItem.getBase().getRelateTradeItemUuid());
         if (needInventory && mCurrentMode != DinnerDishMiddleFragment.BOOKING_DISH_MODE && mCurrentMode != DinnerDishMiddleFragment.GROUP_SLIDE_MODE) {
             if (!isSave) {
                 doDeleteNoTakeEffect(isRelate);
@@ -863,11 +775,8 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 作废
-     */
+
     private void doCancelledDish() {
-//        boolean needInventory = InventoryCacheUtil.getInstance().getSaleSwitch();
         boolean needInventory = true;
         if (needInventory && mCurrentMode != DinnerDishMiddleFragment.BOOKING_DISH_MODE && mCurrentMode != DinnerDishMiddleFragment.GROUP_SLIDE_MODE) {
             doCancelledAndReturnInventory();
@@ -876,10 +785,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /*
-     * 删除未生效的菜品
-     * hasRelateDish 是否所有关联菜
-     * */
+
     private void doDeleteNoTakeEffect(boolean hasRelateDish) {
         if (!hasRelateDish) {
             doDelete();
@@ -888,10 +794,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 删除未出单的菜品
-     * hasRelateDish 是否所有关联菜
-     */
+
     private void doDeleteTakeEffect(boolean hasRelateDish) {
         if (!hasRelateDish) {
             showReturnInventoryDialog();
@@ -900,37 +803,29 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 作废已出单的菜品
-     */
+
     private void doCancelled() {
         ReasonDal reasonDal = OperatesFactory.create(ReasonDal.class);
         boolean needReturnReason = reasonDal.isReasonSwitchOpen(ReasonType.ITEM_RETURN_QTY);
-        //称重商品（只支持全退）不需要理由时，直接退不需要弹框
-        if (DinnerTradeItemManager.isMustReturnAll(shopcartItemBase) && !needReturnReason) {
+                if (DinnerTradeItemManager.isMustReturnAll(shopcartItemBase) && !needReturnReason) {
             doReturnItem(shopcartItemBase.getTotalQty(), null, null);
         } else {
             showReturnInVentoryOrReasonDialog(false, true);
         }
     }
 
-    /**
-     * 作废&&退库存
-     */
+
     private void doCancelledAndReturnInventory() {
         ReasonDal reasonDal = OperatesFactory.create(ReasonDal.class);
         boolean needReturnReason = reasonDal.isReasonSwitchOpen(ReasonType.ITEM_RETURN_QTY);
-        //称重商品（只支持全退）不需要理由时，直接退不需要弹框
-        if (DinnerTradeItemManager.isMustReturnAll(shopcartItemBase) && !needReturnReason) {
+                if (DinnerTradeItemManager.isMustReturnAll(shopcartItemBase) && !needReturnReason) {
             showReturnInVentoryOrReasonDialog(true, false);
         } else {
             showReturnInVentoryOrReasonDialog(true, true);
         }
     }
 
-    /**
-     * 删除菜品
-     */
+
     public void doDelete() {
         DinnerTradeItemManager.getInstance().deleteItem(shopcartItemBase,
                 dishDataItem.getItem().getUuid(), mChangePageListener, mActivity);
@@ -943,14 +838,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         });
     }
 
-    /*public void doDelete(int type, final IShopcartItemBase shopcartItemBase,List<InventoryItem> mInventoryItemList){
-        DinnerTradeItemManager.getInstance().deleteItem(shopcartItemBase,
-                dishDataItem.getItem().getUuid(), mChangePageListener, mActivity);
-        DinnerTradeItemManager.getInstance().showTradeAmountNegativeDialog(mActivity,type,shopcartItemBase,mInventoryItemList, new Runnable() {
-            @Override
-            public void run() {DinnerTradeItemManager.getInstance().cancelDeleteItem(shopcartItemBase, dishDataItem.getItem().getUuid());}
-        });
-    }*/
+
 
     public void doDelete(final int type, final IShopcartItemBase shopcartItemBase, final List<InventoryItem> inventoryItemList) {
         ShopcartItemUtils.splitBatchItem(shopcartItemBase);
@@ -969,9 +857,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         });
     }
 
-    /**
-     * 删除已生效菜品，新菜退库存，原菜扣库存
-     **/
+
     private void doDeleteAddChangeInventory() {
         if (((ReadonlyShopcartItem) shopcartItemBase).tradeItem.getQuantity().compareTo(BigDecimal.ZERO) > 0) {
             showReturnInventoryDialog();
@@ -980,11 +866,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /**
-     * 重打厨总／堂口
-     *
-     * @param isKitchenAll true表示厨总，false表示堂口
-     */
+
     private void reprintKitchen(boolean isKitchenAll) {
         try {
             if (shopcartItemBase instanceof ReadonlyShopcartItemBase) {
@@ -1000,16 +882,13 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                         tradeItemOperations.add(tradeItemOperation);
                     }
 
-                    // 如果是套餐需要传套餐和子菜的uuid
-                    IShopcartItem shopcartItem = (IShopcartItem) shopcartItemBase;
-                    if (shopcartItem.getSetmealItems() != null) {// 是套餐
-                        List<? extends ISetmealShopcartItem> chirldList = shopcartItem.getSetmealItems();
+                                        IShopcartItem shopcartItem = (IShopcartItem) shopcartItemBase;
+                    if (shopcartItem.getSetmealItems() != null) {                        List<? extends ISetmealShopcartItem> chirldList = shopcartItem.getSetmealItems();
                         if (chirldList.size() > 0) {
                             for (ISetmealShopcartItem child : chirldList) {
                                 tradeItemUuids.add(child.getUuid());
 
-                                //添加子菜的菜品操作
-                                TradeItemOperation childTradeItemOperation = DinnerDishManager.getInstance().
+                                                                TradeItemOperation childTradeItemOperation = DinnerDishManager.getInstance().
                                         getLastOperation(child.getTradeItemOperations());
                                 if (childTradeItemOperation != null) {
                                     tradeItemOperations.add(childTradeItemOperation);
@@ -1026,14 +905,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                     Log.i(TAG, "tradeItemUuids size" + tradeItemUuids.size());
                     String tradeUuid = tradeItem.getTradeUuid();
 
-                    /*int type = getDishReprintType();
-                    if (isKitchenAll) {
-                        IPrintHelper.Holder.getInstance().reprintDishKitchenAllTicket(tradeUuid, tradeItemUuids,
-                                type, new SingleReprintAdapter(PrintTicketTypeEnum.KITCHENALL, tradeItemOperations));
-                    } else {
-                        IPrintHelper.Holder.getInstance().reprintDishKitchenCellTicket(tradeUuid, tradeItemUuids,
-                                type, new SingleReprintAdapter(PrintTicketTypeEnum.KITCHENCELL, tradeItemOperations));
-                    }*/
+
                 }
             }
         } catch (Exception e) {
@@ -1041,30 +913,9 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         }
     }
 
-    /*private int getDishReprintType() {
-        int type = Calm.DINNER_DISH_ADD;
-        if (shopcartItemBase.getRelateTradeItemUuid() != null) {
-            IShopcartItemBase iShopcartItemBase = DinnerShoppingCart.getInstance().getDinnerShoppingCartItem(shopcartItemBase.getRelateTradeItemUuid());
-            if (iShopcartItemBase != null) {
-                switch (iShopcartItemBase.getInvalidType()) {
-                    case RETURN_QTY:
-                        type = Calm.DINNER_DISH_DELETE;
-                        break;
-                    case MODIFY_DISH:
-                        type = Calm.DINNER_DISH_MODIFY;
-                        break;
-                }
-            }
-        }
 
-        return type;
-    }*/
 
-    /**
-     * 重打主单菜品厨总／堂口
-     *
-     * @param isKitchenAll true表示厨总，false表示堂口
-     */
+
     private void reprintUnionMainKitchen(boolean isKitchenAll) {
         try {
             if (shopcartItemBase instanceof ReadonlyShopcartItemBase) {
@@ -1077,60 +928,40 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
                     tradeItemOperations.add(tradeItemOperation);
                 }
 
-                //添加菜品uuid列表
-                List<String> itemUuids = new ArrayList<>();
+                                List<String> itemUuids = new ArrayList<>();
                 itemUuids.add(readonlyShopcartItemBase.getUuid());
                 if (Utils.isNotEmpty(((ReadonlyShopcartItem) readonlyShopcartItemBase).getSetmealItems())) {
                     for (ReadonlySetmealShopcartItem setmealItem : ((ReadonlyShopcartItem) readonlyShopcartItemBase).getSetmealItems()) {
                         itemUuids.add(setmealItem.getUuid());
 
-                        //添加子菜的菜品操作
-                        TradeItemOperation childTradeItemOperation = DinnerDishManager.getInstance().
+                                                TradeItemOperation childTradeItemOperation = DinnerDishManager.getInstance().
                                 getLastOperation(setmealItem.getTradeItemOperations());
                         if (childTradeItemOperation != null) {
                             tradeItemOperations.add(childTradeItemOperation);
                         }
                     }
                 }
-                /*if (isKitchenAll) {
-                    IPrintHelper.Holder.getInstance().reprintUnionMainTradeKitchenAllTicket(readonlyShopcartItemBase.getTradeUuid(),
-                            itemUuids, new UnionMainSingleReprintAdapter(PrintTicketTypeEnum.KITCHENALL, tradeItemOperations));
-                } else {
-                    IPrintHelper.Holder.getInstance().reprintUnionMainTradeKitchenCellTicket(readonlyShopcartItemBase.getTradeUuid(),
-                            itemUuids, new UnionMainSingleReprintAdapter(PrintTicketTypeEnum.KITCHENALL, tradeItemOperations));
-                }*/
+
             }
         } catch (Exception e) {
             Log.e(TAG, "", e);
         }
     }
 
-    /**
-     * 是否是可以删除的品项
-     *
-     * @return
-     */
+
     private boolean isCanDelete() {
-        // 未生效的菜、赠送条目可以进行删除品项
-        return isUnsaveDish || isGive ||
-                //未出单、有效的单菜和套餐外壳，可以进行删除品项
-                (TextUtils.isEmpty(shopcartItemBase.getBatchNo())
+                return isUnsaveDish || isGive ||
+                                (TextUtils.isEmpty(shopcartItemBase.getBatchNo())
                         && shopcartItemBase.getStatusFlag() == StatusFlag.VALID && isSingleOrCombo);
     }
 
-    /**
-     * 是否是可以退回的品项
-     *
-     * @return
-     */
+
     private boolean isCanReturn() {
         return !TextUtils.isEmpty(shopcartItemBase.getBatchNo()) && shopcartItemBase.getStatusFlag() == StatusFlag.VALID
                 && shopcartItemBase.getSingleQty().compareTo(BigDecimal.ZERO) > 0 && isSingleOrCombo;
     }
 
-    /**
-     * 赠送操作
-     */
+
     private void showGiveReasonDialog() {
         OrderCenterOperateDialogFragment dialog = new OrderCenterOperateDialogFragment();
         Bundle bundle = new Bundle();
@@ -1159,8 +990,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         OrderDishUserdefineGiveDialogFragment dialog = new OrderDishUserdefineGiveDialogFragment_();
         dialog.maxCount = shopcartItemBase.getSingleQty();
         dialog.mReasonSwitch = reasonSwitch;
-        dialog.isNeedReturnInventory = shopcartItemBase.getId() != null;//已生效的菜品才退库存
-        if (dialog.isNeedReturnInventory) {
+        dialog.isNeedReturnInventory = shopcartItemBase.getId() != null;        if (dialog.isNeedReturnInventory) {
             dialog.mInventoryItemList = Utils.asList(InventoryUtils.transformInventoryItem(dishDataItem, shopcartItemBase.getTotalQty()));
         }
         dialog.itemGiveListener = new OrderDishUserdefineGiveDialogFragment.OnItemGiveListener() {
@@ -1182,11 +1012,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         dialog.show(mActivity.getSupportFragmentManager(), "userdefine_give");
     }
 
-    /**
-     * 赠送对应的菜品
-     *
-     * @param shopcartItemBase
-     */
+
     protected void doGive(final IShopcartItemBase shopcartItemBase, Reason reason) {
         ShopcartItemUtils.splitBatchItem(shopcartItemBase);
         DinnerTradeItemManager.getInstance().give(shopcartItemBase, reason);
@@ -1199,9 +1025,7 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
         });
     }
 
-    /**
-     * 自定以赠送菜品
-     */
+
     private void doUserdefineGive(final IShopcartItemBase shopcartItemBase, Reason reason, BigDecimal giveCount,
                                   List<InventoryItem> inventoryItems) {
         if (!(shopcartItemBase instanceof IShopcartItem)) {
@@ -1212,84 +1036,32 @@ public class TradeItemOperateUtil implements OnClickListener, DishOptListener {
 
         BigDecimal leftCount = shopcartItemBase.getSingleQty().subtract(giveCount);
         if (shopcartItemBase instanceof ReadonlyShopcartItem) {
-            //赠送部分
-            ReadonlyShopcartItem newShopcartItem = ShopcartItemUtils.shopcartItemCopy((ReadonlyShopcartItem) shopcartItemBase);
-            //未出单的菜品赠送后，不需要重新打印客看单
-            newShopcartItem.setGuestPrinted(GuestPrinted.PRINTED);
+                        ReadonlyShopcartItem newShopcartItem = ShopcartItemUtils.shopcartItemCopy((ReadonlyShopcartItem) shopcartItemBase);
+                        newShopcartItem.setGuestPrinted(GuestPrinted.PRINTED);
             ShopcartItemUtils.modifyReadonlyItemByQty(newShopcartItem, giveCount);
-            //剩余部分
-            ShopcartItemUtils.modifyReadonlyItemByQty((ReadonlyShopcartItem) shopcartItemBase, leftCount);
+                        ShopcartItemUtils.modifyReadonlyItemByQty((ReadonlyShopcartItem) shopcartItemBase, leftCount);
             if (newShopcartItem != null) {
-                //添加新生成的并对其赠送
-                DinnerShoppingCart.getInstance().returnQTY(newShopcartItem);
+                                DinnerShoppingCart.getInstance().returnQTY(newShopcartItem);
                 DinnerTradeItemManager.getInstance().give(newShopcartItem, reason);
             }
 
-            //已生效处理库存退回
-            if (Utils.isNotEmpty(inventoryItems)) {
+                        if (Utils.isNotEmpty(inventoryItems)) {
                 DinnerShoppingCart.getInstance().addReturnInventoryList(inventoryItems);
             }
         } else {
-            //赠送部分
-            ShopcartItem newShopcartItem = ShopcartItemUtils.shopcartItemCopy((ShopcartItem) shopcartItemBase);
+                        ShopcartItem newShopcartItem = ShopcartItemUtils.shopcartItemCopy((ShopcartItem) shopcartItemBase);
             newShopcartItem.changeQty(giveCount);
-            //剩余部分
-            ((ShopcartItem) shopcartItemBase).changeQty(leftCount);
+                        ((ShopcartItem) shopcartItemBase).changeQty(leftCount);
             if (newShopcartItem != null) {
-                //添加新生成的并对其赠送
-                DinnerShoppingCart.getInstance().addDishToShoppingCart(newShopcartItem, false);
+                                DinnerShoppingCart.getInstance().addDishToShoppingCart(newShopcartItem, false);
                 DinnerTradeItemManager.getInstance().give(newShopcartItem, reason);
             }
         }
 
 
-//        DinnerTradeItemManager.getInstance().showTradeAmountNegativeDialog(mActivity, new Runnable() {
-//            @Override
-//            public void run() {
-//                DinnerShoppingCart.getInstance().removeShopcarItemPrivilege(shopcartItemBase);
-//            }
-//        });
     }
 
-    /**
-     * 主单菜品重打回调
-     */
-    /*private class UnionMainSingleReprintAdapter extends PRTBatchOnSimplePrintListener {
 
-        List<TradeItemOperation> tradeItemOperations;
 
-        public UnionMainSingleReprintAdapter(PrintTicketTypeEnum ticketTypeEnum, List<TradeItemOperation> tradeItemOperations) {
-            super(ticketTypeEnum);
-            this.tradeItemOperations = tradeItemOperations;
-        }
-
-        @Override
-        public void onResult(int globalCode, LongSparseArray<PRTReturnCashierTicketBean> returnCashierSparseArray, Map<Long, Integer> dishMap, SendData sendData) {
-            if (ticketType == PrintTicketTypeEnum.KITCHENALL) {
-                DinnerModifyPrintStatusUtil.changeMainPrintStatusAfterOperateOrSingleReprint(dishMap, tradeItemOperations, TicketTypeEnum.KITCHENALL);
-            } else {
-                DinnerModifyPrintStatusUtil.changeMainPrintStatusAfterOperateOrSingleReprint(dishMap, tradeItemOperations, TicketTypeEnum.KITCHENCELL);
-            }
-        }
-    }
-
-    private class SingleReprintAdapter extends PRTBatchOnSimplePrintListener {
-
-        List<TradeItemOperation> tradeItemOperations;
-
-        public SingleReprintAdapter(PrintTicketTypeEnum ticketTypeEnum, List<TradeItemOperation> tradeItemOperations) {
-            super(ticketTypeEnum);
-            this.tradeItemOperations = tradeItemOperations;
-        }
-
-        @Override
-        public void onResult(int globalCode, LongSparseArray<PRTReturnCashierTicketBean> returnCashierSparseArray, Map<Long, Integer> dishMap, SendData sendData) {
-            if (ticketType == PrintTicketTypeEnum.KITCHENALL) {
-                DinnerModifyPrintStatusUtil.changePrintStatusAfterOperateOrSingleReprint(dishMap, tradeItemOperations, TicketTypeEnum.KITCHENALL);
-            } else {
-                DinnerModifyPrintStatusUtil.changePrintStatusAfterOperateOrSingleReprint(dishMap, tradeItemOperations, TicketTypeEnum.KITCHENCELL);
-            }
-        }
-    }*/
 
 }

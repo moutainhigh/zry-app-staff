@@ -6,9 +6,7 @@ import com.zhongmei.yunfu.context.util.JsonUtil;
 import com.zhongmei.yunfu.context.util.SystemUtils;
 import com.zhongmei.yunfu.context.util.Utils;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class VersionInfo {
 
@@ -59,9 +57,7 @@ public class VersionInfo {
     }
 
     public boolean isForce() {
-        //强制更新
-        return upgradeModel == 1;
-//        return false;
+                return upgradeModel == 1;
     }
 
     public boolean hasUpdate() {

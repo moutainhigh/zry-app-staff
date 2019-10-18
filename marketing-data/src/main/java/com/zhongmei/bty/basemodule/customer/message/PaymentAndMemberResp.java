@@ -8,20 +8,12 @@ import com.zhongmei.yunfu.db.entity.trade.TradeItem;
 
 import java.util.List;
 
-/**
- * 查询支付信息和会员信息
- *
- * @version: 1.0
- * @date 2015年5月13日
- */
+
 public class PaymentAndMemberResp {
-    private List<PaymentItem> paymentItems;//卡号
-    private List<Payment> payments;//返回数量
-    private List<Member> members;
+    private List<PaymentItem> paymentItems;    private List<Payment> payments;    private List<Member> members;
     private List<Trade> trades;
     private List<TradeItem> tradeItems;
-    // v8.6.0 匿名卡补打
-    private List<MemberValueCard> memberValuecard;
+        private List<MemberValueCard> memberValuecard;
 
     public List<MemberValueCard> getMemberValuecard() {
         return memberValuecard;
@@ -33,16 +25,13 @@ public class PaymentAndMemberResp {
 
 
     public class Member {
-        //还差会员余额 积分
-        private String name;
+                private String name;
         private String sex;
         private String levelName;
         private String nextLevelName;
         private String nextNdGrownVaule;
         private String createdatetime;
-        private double remainValue;//余额
-        private double integral;//积分
-
+        private double remainValue;        private double integral;
         public String getName() {
             return name;
         }

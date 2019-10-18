@@ -13,9 +13,7 @@ import com.zhongmei.yunfu.resp.ResponseListener;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyOrderCenterDetailManager extends OrderCenterDetailManager {
 

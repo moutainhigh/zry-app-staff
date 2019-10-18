@@ -4,33 +4,19 @@ import com.zhongmei.yunfu.util.ValueEnum;
 import com.zhongmei.yunfu.db.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 
-/**
- * 性别
- */
+
 public enum ArriveStatus implements ValueEnum<Integer> {
 
-    /**
-     * 到店周围
-     */
+
     BEYOND(1),
-    /**
-     * 已到店未就餐
-     */
+
     ARRIVED_UNEAT(2),
-    /**
-     * 已到店就餐中
-     */
+
     ARRIVED_EATING(3),
-    /**
-     * 已离店
-     */
+
     LEFT(4),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

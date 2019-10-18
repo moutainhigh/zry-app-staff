@@ -6,13 +6,10 @@ import com.zhongmei.yunfu.net.volley.Response;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class VolleyRequest<T, R> extends GsonRequest<T, R> {
-    // 对于返回数据的进一步处理
-    private NetworkRequest.ResponseProcessor mProcessor;
+        private NetworkRequest.ResponseProcessor mProcessor;
 
     public VolleyRequest(int method, String url, T requestObject, Type responseType, Response.Listener<R> listener, Response.ErrorListener errorListener) {
         super(method, url, requestObject, responseType, listener, errorListener);

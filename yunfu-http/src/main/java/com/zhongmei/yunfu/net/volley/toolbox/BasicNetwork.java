@@ -1,18 +1,4 @@
-/*
- * Copyright (C) 2011 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+
 
 package com.zhongmei.yunfu.net.volley.toolbox;
 
@@ -46,9 +32,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * A network performing Volley requests over an {@link HttpStack}.
- */
+
 public class BasicNetwork implements Network {
     protected static final boolean DEBUG = VolleyLog.DEBUG;
 
@@ -60,20 +44,12 @@ public class BasicNetwork implements Network {
 
     protected final ByteArrayPool mPool;
 
-    /**
-     * @param httpStack HTTP stack to be used
-     */
+
     public BasicNetwork(HttpStack httpStack) {
-        // If a pool isn't passed in, then build a small default pool that will
-        // give us a lot of
-        // benefit and not use too much memory.
-        this(httpStack, new ByteArrayPool(DEFAULT_POOL_SIZE));
+                                this(httpStack, new ByteArrayPool(DEFAULT_POOL_SIZE));
     }
 
-    /**
-     * @param httpStack HTTP stack to be used
-     * @param pool      a buffer pool that improves GC performance in copy operations
-     */
+
     public BasicNetwork(HttpStack httpStack, ByteArrayPool pool) {
         mHttpStack = httpStack;
         mPool = pool;
@@ -83,39 +59,31 @@ public class BasicNetwork implements Network {
     public NetworkResponse performRequest(Request<?> request)
             throws VolleyError {
         long requestStart = SystemClock.elapsedRealtime();
-//		while (true) {
         HttpResponse httpResponse = null;
         byte[] responseContents = null;
         Map<String, String> responseHeaders = new HashMap<String, String>();
         try {
-            // Gather headers.
-            Map<String, String> headers = new HashMap<String, String>();
+                        Map<String, String> headers = new HashMap<String, String>();
             addCacheHeaders(headers, request.getCacheEntry());
             httpResponse = mHttpStack.performRequest(request, headers);
             StatusLine statusLine = httpResponse.getStatusLine();
             int statusCode = statusLine.getStatusCode();
 
             responseHeaders = convertHeaders(httpResponse.getAllHeaders());
-            // Handle cache validation.
-            if (statusCode == HttpStatus.SC_NOT_MODIFIED) {
+                        if (statusCode == HttpStatus.SC_NOT_MODIFIED) {
                 return new NetworkResponse(HttpStatus.SC_NOT_MODIFIED,
                         request.getCacheEntry() == null ? null : request
                                 .getCacheEntry().data,
                         responseHeaders, true);
             }
 
-            // Some responses such as 204s do not have content. We must
-            // check.
-            if (httpResponse.getEntity() != null) {
+                                    if (httpResponse.getEntity() != null) {
                 responseContents = entityToBytes(httpResponse.getEntity());
             } else {
-                // Add 0 byte response as a way of honestly representing a
-                // no-content request.
-                responseContents = new byte[0];
+                                                responseContents = new byte[0];
             }
 
-            // if the request is slow, log it.
-            long requestLifetime = SystemClock.elapsedRealtime()
+                        long requestLifetime = SystemClock.elapsedRealtime()
                     - requestStart;
             logSlowRequests(requestLifetime, request, responseContents,
                     statusLine);
@@ -126,14 +94,10 @@ public class BasicNetwork implements Network {
             return new NetworkResponse(statusCode, responseContents,
                     responseHeaders, false);
         } catch (SocketTimeoutException e) {
-            // throw new NoConnectionError(e);
-            throw new TimeoutError();
-            // attemptRetryOnException("socket", request, new TimeoutError());
-        } catch (ConnectTimeoutException e) {
-            // throw new NoConnectionError(e);
-            throw new TimeoutError();
-            // attemptRetryOnException("connection", request, new TimeoutError());
-        } catch (MalformedURLException e) {
+                        throw new TimeoutError();
+                    } catch (ConnectTimeoutException e) {
+                        throw new TimeoutError();
+                    } catch (MalformedURLException e) {
             throw new RuntimeException("Bad URL " + request.getUrl(), e);
         } catch (IOException e) {
             int statusCode = 0;
@@ -150,22 +114,17 @@ public class BasicNetwork implements Network {
                         responseContents, responseHeaders, false);
                 if (statusCode == HttpStatus.SC_UNAUTHORIZED
                         || statusCode == HttpStatus.SC_FORBIDDEN) {
-                    // attemptRetryOnException("auth", request, new AuthFailureError(networkResponse));
-                    throw new TimeoutError();
+                                        throw new TimeoutError();
                 } else {
-                    // TODO: Only throw ServerError for 5xx status codes.
-                    throw new ServerError(networkResponse);
+                                        throw new ServerError(networkResponse);
                 }
             } else {
                 throw new NetworkError(networkResponse);
             }
         }
-//		}
     }
 
-    /**
-     * Logs requests that took over SLOW_REQUEST_THRESHOLD_MS to complete.
-     */
+
     private void logSlowRequests(long requestLifetime, Request<?> request,
                                  byte[] responseContents, StatusLine statusLine) {
         if (DEBUG || requestLifetime > SLOW_REQUEST_THRESHOLD_MS) {
@@ -179,13 +138,7 @@ public class BasicNetwork implements Network {
         }
     }
 
-    /**
-     * Attempts to prepare the request for a retry. If there are no more
-     * attempts remaining in the request's retry policy, a timeout exception is
-     * thrown.
-     *
-     * @param request The request to use.
-     */
+
     private static void attemptRetryOnException(String logPrefix,
                                                 Request<?> request, VolleyError exception) throws VolleyError {
         RetryPolicy retryPolicy = request.getRetryPolicy();
@@ -203,8 +156,7 @@ public class BasicNetwork implements Network {
     }
 
     private void addCacheHeaders(Map<String, String> headers, Cache.Entry entry) {
-        // If there's no cache entry, we're done.
-        if (entry == null) {
+                if (entry == null) {
             return;
         }
 
@@ -224,9 +176,7 @@ public class BasicNetwork implements Network {
                 url);
     }
 
-    /**
-     * Reads the contents of HttpEntity into a byte[].
-     */
+
     private byte[] entityToBytes(HttpEntity entity) throws IOException,
             ServerError {
         PoolingByteArrayOutputStream bytes = new PoolingByteArrayOutputStream(
@@ -245,23 +195,16 @@ public class BasicNetwork implements Network {
             return bytes.toByteArray();
         } finally {
             try {
-                // Close the InputStream and release the resources by
-                // "consuming the content".
-                entity.consumeContent();
+                                                entity.consumeContent();
                 mPool.returnBuf(buffer);
                 bytes.close();
             } catch (IOException e) {
-                // This can happen if there was an exception above that left the
-                // entity in
-                // an invalid state.
-                VolleyLog.v("Error occured when calling consumingContent");
+                                                                VolleyLog.v("Error occured when calling consumingContent");
             }
         }
     }
 
-    /**
-     * Converts Headers[] to Map<String, String>.
-     */
+
     private static Map<String, String> convertHeaders(Header[] headers) {
         Map<String, String> result = new HashMap<String, String>();
         for (int i = 0; i < headers.length; i++) {

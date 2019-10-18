@@ -7,31 +7,20 @@ import com.zhongmei.bty.basemodule.shopmanager.closing.bean.UnHandoverItem;
 import java.util.List;
 
 
-/**
- * 关账交接记录查询response
- *
- * @date:2015年12月25日上午10:00:51
- */
+
 public class ClosingHandOverResp {
 
-    // 已交接记录
-    private List<HandoverItem> handoverItems;
+        private List<HandoverItem> handoverItems;
 
-    // 未交接记录设备列表
-    private List<UnHandoverItem> unHandoverItems;
-    //最后一次关账记录
-    private ClosingAccountRecord lastClosing;
-    //是否有为清账订单
-    private boolean haveUnClearAccount;
+        private List<UnHandoverItem> unHandoverItems;
+        private ClosingAccountRecord lastClosing;
+        private boolean haveUnClearAccount;
 
-    //是否有支付中订单 true 有，false 没有
-    private boolean havePaying;
+        private boolean havePaying;
 
-    //是否有未付款订单，true 有，false 没有
-    private boolean haveUnpaid;
+        private boolean haveUnpaid;
 
-    private boolean haveUnFinishPaid; //是否存在已支付未完结订单，true 有，false 没有
-
+    private boolean haveUnFinishPaid;
 
     public List<HandoverItem> getHandoverItems() {
         return handoverItems;

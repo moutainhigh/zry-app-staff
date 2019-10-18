@@ -63,181 +63,106 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
 
- */
 public class TradeVo implements java.io.Serializable, NoProGuard {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
     private static final String TAG = TradeVo.class.getSimpleName();
 
-    /**
-     * 交易主单
-     */
+
     private Trade trade;
-    /**
-     * 交易扩展
-     */
+
     private TradeExtra tradeExtra;
-    /**
-     * 第三方隐私手机号
-     */
+
     private TradeExtraSecrecyPhone tradeExtraSecrecyPhone;
-    /**
-     * 整单优惠和附加费
-     */
+
     private List<TradePrivilege> tradePrivileges;
-    /**
-     * 附加费
-     */
+
     private Map<Long, ExtraCharge> extraChargeMap;
 
 
-    //最低消费差额附加费
-    private ExtraCharge minconExtraCharge;
+        private ExtraCharge minconExtraCharge;
 
-    /**
-     * 存放优惠的核销 优惠包括：附加费，优惠卷，积分
-     */
+
     private Map<Long, TradePrivilegeExtra> tradePrivilegeExtraMap;
 
-    /**
-     * 餐标外壳vo
-     */
+
     private MealShellVo mealShellVo;
 
-    /**
-     * 宴请vo
-     */
+
     private BanquetVo banquetVo;
 
-    /**
-     * 能参与整单折扣的附加费总金额
-     */
+
     private BigDecimal discountExtracharge = BigDecimal.ZERO;
 
-    /**
-     * 烘焙收预定金金额
-     */
+
     private BigDecimal bakeryBookingAmount = BigDecimal.ZERO;
 
-    /**
-     * 优惠券
-     */
+
     private CouponPrivilegeVo couponPrivilege;
 
-    /**
-     * 超时费记录
-     */
+
     private List<TradePrivilege> outTimeFeePrivaleges;
 
-    /**
-     * v7.7修改为多张优惠券
-     */
+
 
     private List<CouponPrivilegeVo> couponPrivilegeVoList;
-    /**
-     * 会员积分抵现
-     */
+
     private IntegralCashPrivilegeVo integralCashPrivilegeVo;
-    /**
-     * 交易的顾客信息列表
-     */
+
     private List<TradeCustomer> tradeCustomerList;
-    /**
-     * 交易所占用的桌台列表
-     */
+
     private List<TradeTable> tradeTableList;
-    /**
-     * 交易明细列表
-     */
+
     private List<TradeItemVo> tradeItemList;
-    /**
-     * 是否是退货单
-     */
+
     private Boolean isSalesReturn = false;
 
-//    private TradeReasonRel operateReason;
 
     private List<TradeReasonRel> tradeReasonRelList;
 
-    /**
-     * 营销活动与订单关系
-     */
+
     private List<TradePlanActivity> tradePlanActivityList;
-    /**
-     * 营销活动与菜品的关系
-     */
+
     private List<TradeItemPlanActivity> tradeItemPlanActivityList;
 
-    /**
-     * 促销活动赠送菜品
-     */
-//    private List<TradeItemActivityGift> tradeItemActivityGiftList = new ArrayList<>();
 
-    /**
-     * 微信卡卷
-     */
+
+
     private List<WeiXinCouponsVo> mWeiXinCouponsVo;
-    /**
-     * 订单押金信息
-     */
+
     private TradeDeposit tradeDeposit;
 
-    /**
-     * 订单对应的支付信息，状态等
-     */
+
     private TradeDepositPayRelation tradeDepositPayRelation;
 
-    /**
-     * 押金支付状态
-     */
+
     private PaymentItem tradeDepositPaymentItem;
 
-    /**
-     * TradeItem扩展
-     */
+
     private List<TradeItemExtra> tradeItemExtraList;
 
-    /**
-     * 订单接受方
-     */
+
     private TradeReceiveLog tradeReceiveLog;
 
-    /**
-     * 不参与折扣金额
-     */
+
     private BigDecimal noJoinDiscount = BigDecimal.ZERO;
 
-    private List<TradeCreditLog> tradeCreditLogList;//挂账信息
-
-    private List<TradeStatusLog> tradeStatusLogList;//用于取就餐时长
-
+    private List<TradeCreditLog> tradeCreditLogList;
+    private List<TradeStatusLog> tradeStatusLogList;
     private BigDecimal beforePrivilegeAmount;
 
-    private List<TradePromotion> tradePromotions;//订单促销活动
-    /**
-     * 自助对象及数量
-     */
+    private List<TradePromotion> tradePromotions;
     private List<TradeBuffetPeople> tradeBuffetPeoples;
 
-    private List<TradeItemVo> tradeBuffetPeopleTradeItems;//本地购物车使用
+    private List<TradeItemVo> tradeBuffetPeopleTradeItems;
+    private TradeInvoice tradeInvoice;
 
-    private TradeInvoice tradeInvoice;//订单中心展示发票信息
-
-    /**
-     * 排队 2、预定 1
-     */
     private Integer relatedType;
-    /**
-     * 预定排队的id
-     */
+
     private Long relatedId;
-    //未修改桌台前的桌台数
-    private BigDecimal oldDeskCount = BigDecimal.ONE;
+        private BigDecimal oldDeskCount = BigDecimal.ONE;
 
     private BigDecimal paidAmount = BigDecimal.ZERO;
 
@@ -250,43 +175,27 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
 
     private List<TradeItemExtraDinner> tradeItemExtraDinners;
 
-    private TradeUser tradeUser;//add v8.1 订单推销员信息（一单一个推销员）
+    private TradeUser tradeUser;
+    private List<TradeUser> tradeUsers;
+    private boolean enableMinConsum = true;
+        private List<Long> subTradeIdList;
 
-    private List<TradeUser> tradeUsers;  //add 20180309 增加多销售员支持
-
-    private boolean enableMinConsum = true;     //自助最低消费附加开关
-
-    //子单tradeId列表
-    private List<Long> subTradeIdList;
-
-    //缓存子单tradeTable key:TradeTable的id
-    private Map<Long, TradeTable> subTableMap;
-    //子单 tradeId与tradeTable的缓存
-    private Map<Long, TradeTable> subTradeTableMap;
+        private Map<Long, TradeTable> subTableMap;
+        private Map<Long, TradeTable> subTradeTableMap;
 
     private List<TradeItemMainBatchRelExtra> tradeItemMainBatchRelExtraList;
 
     private List<TradeTax> tradeTaxs;
     private List<TradeInitConfig> tradeInitConfigs;
-    //收银改单之前是否是联台主单
-    private boolean isBUnionMainTrade = false;
-    //当前订单所在桌台id
-    private Long tableId;
-    //桌台名
-    private String tableName;
+        private boolean isBUnionMainTrade = false;
+        private Long tableId;
+        private String tableName;
 
-    private TradeInvoiceNo tradeInvoiceNo;//add 9.0 消费税号
-
-    private List<TradeEarnestMoney> tradeEarnestMoneys;//add v8.13 预定金记录
-
+    private TradeInvoiceNo tradeInvoiceNo;
+    private List<TradeEarnestMoney> tradeEarnestMoneys;
     private VerifyKoubeiOrder verifyKoubeiOrder;
-    // ***********************************************************
-    // *  特别注意！添加属性时要注意修改clone()方法与isChanged()方法
-    // ***********************************************************
 
-    /**
-     * 商品优惠分摊
-     */
+
     public List<PrivilegeApportionManager.ItemApportion> itemApportionList;
 
     public TradeGroupInfo getTradeGroup() {
@@ -417,12 +326,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         this.tradeItemMainBatchRelExtraList = tradeItemMainBatchRelExtraList;
     }
 
-    /**
-     * @Title: getTradePrivilege
-     * @Description: 获取整单手动折扣
-     * @Param @return TODO
-     * @Return TradePrivilege 返回类型
-     */
+
     public TradePrivilege getTradePrivilege() {
         if (tradePrivileges != null) {
             for (TradePrivilege mTradePrivilege : tradePrivileges) {
@@ -438,15 +342,11 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
                 }
             }
         }
-//		return Utils.isEmpty(tradePrivileges) ? null : tradePrivileges.get(0);
         return null;
     }
 
 
-    /**
-     *  获取会员折扣折让优惠
-     * @return
-     */
+
     public TradePrivilege getTradeChargePrivilege(){
         if (tradePrivileges != null) {
             for (TradePrivilege mTradePrivilege : tradePrivileges) {
@@ -462,12 +362,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return null;
     }
 
-    /**
-     * @Title: getTradePrivilege
-     * @Description: 获取整单手动折扣
-     * @Param @return TODO
-     * @Return TradePrivilege 返回类型
-     */
+
     public TradePrivilege getTradePrivilege(PrivilegeType privilegeType) {
         if (tradePrivileges != null) {
             for (TradePrivilege mTradePrivilege : tradePrivileges) {
@@ -480,9 +375,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return null;
     }
 
-    /**
-     * 获取某个类别下的优惠信息列表
-     */
+
     public List<TradePrivilege> getTradePrivilegeList(PrivilegeType privilegeType) {
         List<TradePrivilege> tradePrivilegeList = new ArrayList<>();
         if (tradePrivileges != null) {
@@ -497,12 +390,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
     }
 
 
-    /**
-     * @Title: getTradePrivilege
-     * @Description: 获取整单手动折扣
-     * @Param @return TODO
-     * @Return TradePrivilege 返回类型
-     */
+
     public TradePrivilege getTradePrivilege(PrivilegeType... privilegeTypes) {
         if (tradePrivileges != null) {
             for (TradePrivilege mTradePrivilege : tradePrivileges) {
@@ -520,18 +408,12 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return tradePrivileges;
     }
 
-    /**
-     * @Title: replaceTradePrivilege
-     * @Description: 替换整单折扣
-     * @Param @param tradePrivilege TODO
-     * @Return void 返回类型
-     */
+
     public void replaceTradePrivilege(TradePrivilege tradePrivilege) {
         if (tradePrivilege == null) {
             removeTradePrivileges(PrivilegeType.DISCOUNT);
             removeTradePrivileges(PrivilegeType.REBATE);
             removeTradePrivileges(PrivilegeType.FREE);
-//			setTradePrivileges(null);
         } else {
             if (tradePrivileges == null) {
                 tradePrivileges = new ArrayList<TradePrivilege>();
@@ -540,19 +422,13 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
                     removeTradePrivileges(PrivilegeType.DISCOUNT);
                     removeTradePrivileges(PrivilegeType.REBATE);
                     removeTradePrivileges(PrivilegeType.FREE);
-//				    tradePrivileges.clear();
                 }
             }
             tradePrivileges.add(tradePrivilege);
         }
     }
 
-    /**
-     * @Title: replaceExtraCharge
-     * @Description: 替换附加费和手动整单折扣
-     * @Param @param tradePrivileges TODO
-     * @Return void 返回类型
-     */
+
     public void replaceAllPrivilege(List<TradePrivilege> listTradePrivilege) {
         if (listTradePrivilege == null) {
             setTradePrivileges(null);
@@ -624,11 +500,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         this.subTradeTableMap = subTradeTableMap;
     }
 
-    /**
-     * 获取桌数
-     *
-     * @return
-     */
+
     public BigDecimal getDeskCount() {
         BigDecimal count = BigDecimal.ZERO;
         if (tradeTableList == null) {
@@ -639,8 +511,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
                 count = count.add(BigDecimal.ONE);
             }
         }
-        //默认为1桌
-        if (count.compareTo(BigDecimal.ZERO) == 0) {
+                if (count.compareTo(BigDecimal.ZERO) == 0) {
             count = BigDecimal.ONE;
         }
         return count;
@@ -685,13 +556,6 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         this.couponPrivilegeVoList = couponPrivilegeVoList;
     }
 
-    //	public TradeReasonRel getOperateReason() {
-//		return operateReason;
-//	}
-//
-//	public void setOperateReason(TradeReasonRel operateReason) {
-//		this.operateReason = operateReason;
-//	}
 
     public List<TradeReasonRel> getTradeReasonRelList() {
         return tradeReasonRelList;
@@ -703,8 +567,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
 
     public TradeReasonRel getOperateReason(OperateType operateType) {
         if (tradeReasonRelList != null && operateType != null) {
-            //for (TradeReasonRel entity : tradeReasonRelList) {
-            for (int i = tradeReasonRelList.size() - 1; i >= 0; i--) {
+                        for (int i = tradeReasonRelList.size() - 1; i >= 0; i--) {
                 TradeReasonRel entity = tradeReasonRelList.get(i);
                 if (entity.getOperateType() == operateType && entity.isValid()) {
                     return entity;
@@ -726,11 +589,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return resultList;
     }
 
-    /**
-     * 如果对象中已经被修改过就返回true
-     *
-     * @return
-     */
+
     public boolean isChanged() {
         if (Trade.isChanged(trade)) {
             return true;
@@ -820,12 +679,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         if (integralCashPrivilegeVo != null && integralCashPrivilegeVo.getTradePrivilege() != null) {
             integralCashPrivilegeVo.getTradePrivilege().setChanged(false);
         }
-        //TradeItemVo先不处理
-//		if (tradeItemList != null) {
-//			for (TradeItemVo itemVo : tradeItemList) {
-//			}
-//		}
-        if (tradeCustomerList != null) {
+                if (tradeCustomerList != null) {
             for (TradeCustomer entity : tradeCustomerList) {
                 entity.setChanged(false);
             }
@@ -841,20 +695,13 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         }
     }
 
-    /**
-     * @param source
-     * @param target
-     * @return
-     * @throws Exception
-     */
+
     static <T> T copyEntity(T source, T target) throws Exception {
         Beans.copyProperties(source, target);
         return target;
     }
 
-    /**
-     *
-     */
+
     @Override
     public TradeVo clone() {
         TradeVo vo = new TradeVo();
@@ -865,14 +712,11 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
             if (tradeExtra != null) {
                 vo.setTradeExtra(copyEntity(tradeExtra, new TradeExtra()));
             }
-            if (this.tradeDepositPaymentItem != null) {// add v8.2
-                vo.setTradeDepositPaymentItem(copyEntity(this.tradeDepositPaymentItem, new PaymentItem()));
+            if (this.tradeDepositPaymentItem != null) {                vo.setTradeDepositPaymentItem(copyEntity(this.tradeDepositPaymentItem, new PaymentItem()));
             }
-            if (this.tradeDepositPayRelation != null) {// add v8.2
-                vo.setTradeDepositPayRelation(copyEntity(this.tradeDepositPayRelation, new TradeDepositPayRelation()));
+            if (this.tradeDepositPayRelation != null) {                vo.setTradeDepositPayRelation(copyEntity(this.tradeDepositPayRelation, new TradeDepositPayRelation()));
             }
-            if (this.tradeUser != null) {// add v8.2  销售员
-                vo.setTradeUser(copyEntity(this.tradeUser, new TradeUser()));
+            if (this.tradeUser != null) {                vo.setTradeUser(copyEntity(this.tradeUser, new TradeUser()));
             }
             if (tradePrivileges != null) {
                 List<TradePrivilege> newList = new ArrayList<TradePrivilege>();
@@ -965,8 +809,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
                 vo.setTradeDeposit(copyEntity(tradeDeposit, new TradeDeposit()));
             }
 
-            // extraChargeMap 不需要深克隆
-            if (extraChargeMap != null) {
+                        if (extraChargeMap != null) {
                 vo.setExtraChargeMap(extraChargeMap);
             }
 
@@ -978,8 +821,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
             vo.setRelatedId(relatedId);
             vo.setRelatedType(relatedType);
 
-            //复制微信卡劵
-            if (mWeiXinCouponsVo != null) {
+                        if (mWeiXinCouponsVo != null) {
                 List<WeiXinCouponsVo> newWeixinCouponsVo = new ArrayList<WeiXinCouponsVo>();
                 for (WeiXinCouponsVo weiXinCouponsVo : mWeiXinCouponsVo) {
                     newWeixinCouponsVo.add(copyEntity(weiXinCouponsVo, new WeiXinCouponsVo()));
@@ -1092,14 +934,6 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
     public void setTradeItemPlanActivityList(List<TradeItemPlanActivity> tradeItemPlanActivityList) {
         this.tradeItemPlanActivityList = tradeItemPlanActivityList;
     }
-//
-//    public List<TradeItemActivityGift> getTradeItemActivityGiftList() {
-//        return tradeItemActivityGiftList;
-//    }
-//
-//    public void setTradeItemActivityGiftList(List<TradeItemActivityGift> tradeItemActivityGiftList) {
-//        this.tradeItemActivityGiftList = tradeItemActivityGiftList;
-//    }
 
     public TradeDeposit getTradeDeposit() {
         return tradeDeposit;
@@ -1208,11 +1042,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return strBuff.substring(0, strBuff.length() - 1) + ")";
     }
 
-    /**
-     * 获取团餐的顾客
-     *
-     * @return
-     */
+
     public TradeCustomer getGroupCustomer() {
         for (TradeCustomer customer : getTradeCustomerList()) {
             if (customer.getCustomerType() == CustomerType.BOOKING) {
@@ -1222,20 +1052,13 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return null;
     }
 
-    /**
-     * 是否已支付押金
-     *
-     * @return
-     */
+
     public boolean isPaidTradeposit() {
         return getTradeDepositPaymentItem() != null && getTradeDepositPaymentItem().getPayStatus() == TradePayStatus.PAID;
     }
 
-    /**
-     * @return
-     */
-    public boolean isTradeDeposit() {    //按订单或自定义类型押金
-        return getTradeDeposit() != null && (getTradeDeposit().getType() == 2 || getTradeDeposit().getType() == 3);
+
+    public boolean isTradeDeposit() {            return getTradeDeposit() != null && (getTradeDeposit().getType() == 2 || getTradeDeposit().getType() == 3);
     }
 
     public BigDecimal getOldDeskCount() {
@@ -1332,28 +1155,23 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return null;
     }
 
-    //判断订单是否有积分抵现 add 20180510
-    public boolean isHaveIntegralCash() {
+        public boolean isHaveIntegralCash() {
         if (integralCashPrivilegeVo != null) {
             return true;
         }
         return false;
     }
 
-    //判断订单是否有优惠 add 20171115
-    public boolean isHavePrivilege() {
-        //获取整单优惠
-        if (this.tradePrivileges != null) {
+        public boolean isHavePrivilege() {
+                if (this.tradePrivileges != null) {
             for (TradePrivilege tp : this.tradePrivileges) {
-                //排除附加费
-                if (tp.isValid() && (tp.getPrivilegeType() != PrivilegeType.ADDITIONAL
+                                if (tp.isValid() && (tp.getPrivilegeType() != PrivilegeType.ADDITIONAL
                         && tp.getPrivilegeType() != PrivilegeType.SERVICE)) {
                     return true;
                 }
             }
         }
-        //获取整单券优惠
-        if (this.couponPrivilege != null && this.couponPrivilege.isValid() && this.couponPrivilege.isActived()) {
+                if (this.couponPrivilege != null && this.couponPrivilege.isValid() && this.couponPrivilege.isActived()) {
             return true;
         }
         if (this.couponPrivilegeVoList != null) {
@@ -1363,28 +1181,24 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
                 }
             }
         }
-        //获取营销活动
-        if (this.tradePlanActivityList != null && this.tradePlanActivityList.size() > 0) {
+                if (this.tradePlanActivityList != null && this.tradePlanActivityList.size() > 0) {
             for (TradePlanActivity tpa : this.tradePlanActivityList) {
                 if (tpa.isValid()) {
                     return true;
                 }
             }
         }
-        //微信卡卷
-        if (mWeiXinCouponsVo != null && mWeiXinCouponsVo.size() > 0) {
+                if (mWeiXinCouponsVo != null && mWeiXinCouponsVo.size() > 0) {
             for (WeiXinCouponsVo weiXinCVo : this.mWeiXinCouponsVo) {
                 if (weiXinCVo.isValid() && weiXinCVo.isActived()) {
                     return true;
                 }
             }
         }
-        //积分抵现
-        if (integralCashPrivilegeVo != null && integralCashPrivilegeVo.isActived()) {
+                if (integralCashPrivilegeVo != null && integralCashPrivilegeVo.isActived()) {
             return true;
         }
-        //单菜优惠
-        if (this.tradeItemList != null) {
+                if (this.tradeItemList != null) {
             TradePrivilege tp = null;
             TradeItem tradeItem = null;
             for (TradeItemVo itemVo : this.tradeItemList) {
@@ -1398,48 +1212,28 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return false;
     }
 
-    /**
-     * 是否售货单
-     *
-     * @return
-     */
+
     public boolean isSellTrade() {
         return trade != null && trade.getTradeType() == TradeType.SELL;
     }
 
-    /**
-     * 是否是联台主单
-     *
-     * @return
-     */
+
     public boolean isUnionMainTrade() {
         return trade != null && trade.getTradeType() == TradeType.UNOIN_TABLE_MAIN;
     }
 
-    /**
-     * 是否是联台子单
-     *
-     * @return
-     */
+
     public boolean isUnionSubTrade() {
         return trade != null && trade.getTradeType() == TradeType.UNOIN_TABLE_SUB;
     }
 
 
-    /**
-     * 是否是自助联台主单
-     *
-     * @return
-     */
+
     public boolean isBuffetUnionMainTrade() {
         return isBuffet() && isUnionMainTrade();
     }
 
-    /**
-     * 是否是自助
-     *
-     * @return
-     */
+
     public boolean isBuffet() {
         return trade != null && trade.getBusinessType() == BusinessType.BUFFET;
     }
@@ -1448,11 +1242,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return trade != null && trade.getBusinessType() == BusinessType.BEAUTY;
     }
 
-    /**
-     * 是否是自助联台子单
-     *
-     * @return
-     */
+
     public boolean isBuffetUnionSubTrade() {
         return isBuffet() && isUnionSubTrade();
     }
@@ -1552,11 +1342,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return earnestDecimal;
     }
 
-    /**
-     * 获取未支付押金金额
-     *
-     * @return
-     */
+
     public BigDecimal getUnPayDepositAmount() {
         BigDecimal depositAmount = BigDecimal.ZERO;
         if (getTrade().getBusinessType() == BusinessType.BOOKING_LIST && getTradeDeposit() != null && getTradeDeposit().isValid()) {
@@ -1565,11 +1351,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return depositAmount;
     }
 
-    /**
-     * 获取已支付押金
-     *
-     * @return
-     */
+
     public BigDecimal getPayDepositAmount() {
         BigDecimal depositAmount = BigDecimal.ZERO;
         if (getTrade().getBusinessType() == BusinessType.BOOKING_LIST && getTradeDeposit() != null && getTradeDeposit().isValid()) {
@@ -1582,8 +1364,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return depositAmount;
     }
 
-    // add v8.5 by yutang for openplatform tradeInfo save
-    public TradeResp toTradeResp() {
+        public TradeResp toTradeResp() {
 
         TradeResp tradeResp = new TradeResp();
 
@@ -1609,8 +1390,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
     }
 
     public boolean isNeedToPayDeposit() {
-        //押金大于o 才可以支付押金
-        if (tradeDeposit != null && tradeDeposit.isNeedToPay()) {
+                if (tradeDeposit != null && tradeDeposit.isNeedToPay()) {
             return true;
         }
         return false;
@@ -1682,11 +1462,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return BigDecimal.ZERO;
     }
 
-    /**
-     * 是否有有效的桌台
-     *
-     * @return
-     */
+
     public boolean isHasValidTable() {
         if (Utils.isEmpty(tradeTableList)) {
             return false;
@@ -1714,11 +1490,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return new ArrayList<>(tableIds);
     }
 
-    /**
-     * 只用于烘焙预定 除去押金的金额
-     *
-     * @return
-     */
+
     public BigDecimal getTradeAmountWithoutDepositAmount() {
         BigDecimal depositAmount = getDepositAmount();
         return getTrade().getTradeAmount().subtract(depositAmount);
@@ -1732,11 +1504,7 @@ public class TradeVo implements java.io.Serializable, NoProGuard {
         return depositAmount;
     }
 
-    /**
-     * 判断是否为预约单
-     *
-     * @return
-     */
+
     public boolean isAppointmentOrder() {
         return tradeExtra != null
                 && tradeExtra.getExpectTime() != null;

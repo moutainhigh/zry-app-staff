@@ -24,9 +24,7 @@ import org.androidannotations.annotations.EViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.view_trade_memo_model)
 public class TradeMemoModelView extends RecyclerView {
 
@@ -37,9 +35,7 @@ public class TradeMemoModelView extends RecyclerView {
     @Bean
     ExtraOrderAdapter mExtraOrderAdapter;
 
-    /**
-     * 常用整单备注
-     */
+
     private List<String> mCommonTradeRemarks;
 
     public TradeMemoModelView(Context context) {
@@ -67,9 +63,7 @@ public class TradeMemoModelView extends RecyclerView {
         }
     }
 
-    /**
-     * 加载整单常用备注
-     */
+
     private void loadTradeRemark() {
         AsyncTask<Void, Void, List<String>> asyncTask = new AsyncTask<Void, Void, List<String>>() {
             @Override

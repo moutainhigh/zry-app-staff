@@ -32,9 +32,7 @@ import com.zhongmei.bty.splash.login.adapter.UserGridAdapter;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements UserGridAdapter.OnUserSelectedListener, View.OnClickListener {
 
     protected ImageView ivMinus;
@@ -45,8 +43,7 @@ public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements Us
 
     private UserDialog userDialog;
 
-    //add start 20170915 销售员
-    private AuthUser mSalesman;
+        private AuthUser mSalesman;
 
     private Integer mGuestCount = null;
 
@@ -70,11 +67,9 @@ public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements Us
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                //消费事件，以免背景下的视图被触发
-            }
+                            }
         });
         etCount.addTextChangedListener(textWatcher);
-        //初始化展示人数和服务员信息
 
         updateNumberAndWaiter();
 
@@ -104,8 +99,7 @@ public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements Us
 
         setWaiterName(waiterName);
 
-        //add  20170915 销售员
-        if (tradeVo != null && tradeVo.getTradeUser() != null) {
+                if (tradeVo != null && tradeVo.getTradeUser() != null) {
             if (!TextUtils.isEmpty(tradeVo.getTradeUser().getUserName())) {
                 setSalesmanText(tradeVo.getTradeUser().getUserName());
                 mSalesman = new AuthUser();
@@ -115,8 +109,7 @@ public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements Us
         } else {
             setSalesmanText(this.getResources().getString(R.string.salesman_select_hint));
         }
-        //add  20170915 销售员
-    }
+            }
 
     private TextWatcher textWatcher = new TextWatcher() {
         @Override
@@ -178,8 +171,7 @@ public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements Us
                 }
 
                 customerNum = Integer.valueOf(countStr);
-                if (customerNum < 999) {//最多只能输入4位
-                    customerNum++;
+                if (customerNum < 999) {                    customerNum++;
                     etCount.setText(String.valueOf(customerNum));
                     etCount.setSelection(String.valueOf(customerNum).length());
                     modifyCustomerCount(customerNum);
@@ -219,8 +211,7 @@ public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements Us
                     }
                 });
                 break;
-            case R.id.piv_salesman: //add start 20170915 销售员
-                List<User> allUserList = Session.getFunc(UserFunc.class).getAllSalesman();
+            case R.id.piv_salesman:                 List<User> allUserList = Session.getFunc(UserFunc.class).getAllSalesman();
                 if (Utils.isNotEmpty(allUserList)) {
                     UserDialog userDialog = new UserDialog(mActivity, R.string.salesman_select_hint, allUserList, mSalesman, mItemSelectedListener);
                     userDialog.show();
@@ -243,23 +234,18 @@ public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements Us
             mSalesman.setId(userId);
             mSalesman.setName(userName);
             setSalesmanText(userName);
-            //如果有销售员直接更新
-            if (DinnerShoppingCart.getInstance().getTradeUser() != null) {
+                        if (DinnerShoppingCart.getInstance().getTradeUser() != null) {
                 DinnerShoppingCart.getInstance().getTradeUser().setUserId(userId);
                 DinnerShoppingCart.getInstance().getTradeUser().setUserName(userName);
                 DinnerShoppingCart.getInstance().getTradeUser().setChanged(true);
             } else {
-                //如果没有销售员新加
-                TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
+                                TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
                 DinnerShoppingCart.getInstance().setTradeUser(PayUtils.creatTradeUser(tradeVo.getTrade(), mSalesman));
             }
         }
     };
-//add end 20170915 销售员
 
-    /**
-     * 修改顾客人数
-     */
+
     private void modifyCustomerCount(int customerNum) {
         DinnerShoppingCart.getInstance().modifyCustomerCount(customerNum);
         if (onChangeListener != null) {
@@ -281,9 +267,6 @@ public class DinnerNumberAndWaiterView extends NumberAndWaiterView implements Us
 
     @Override
     public void onSelected(User item, Long userId, String userName) {
-//        if(userDialog != null && userDialog.isShowing()){
-//            userDialog.dismiss();
-//        }
 
         setWaiterName(userName);
 

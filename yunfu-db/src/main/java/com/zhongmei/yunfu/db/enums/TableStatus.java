@@ -2,36 +2,22 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 桌台状态
- */
+
 public enum TableStatus implements ValueEnum<Integer> {
 
-    /**
-     * 空闲
-     */
+
     EMPTY(1),
 
-    /**
-     * 就餐
-     */
+
     OCCUPIED(2),
 
-    /**
-     * 待清台
-     */
+
     DONE(3),
 
-    /**
-     * 锁定
-     */
+
     LOCKING(4),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

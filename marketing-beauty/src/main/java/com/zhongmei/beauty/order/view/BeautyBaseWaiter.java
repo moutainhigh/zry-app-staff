@@ -33,9 +33,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(resName = "beauty_viewgroup_user")
 public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUserItemCheckListener {
 
@@ -59,20 +57,14 @@ public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUse
     private int mTitleResId;
 
     private boolean isHasPonitView = false;
-    //针对产品或服务选择
-    private IShopcartItemBase shopcartItemBase;
+        private IShopcartItemBase shopcartItemBase;
     List<TradeUser> tradeUserList;
-    //是否是整单操作
-    private boolean isDefine = false;
+        private boolean isDefine = false;
 
     private List<UserVo> mListUserVo;
     private ItemType mItemType;
 
-    /**
-     * @param context
-     * @param titleResId     title resid
-     * @param isHasPointView 是否有指定view
-     */
+
     public BeautyBaseWaiter(Context context, int titleResId, boolean isHasPointView) {
         super(context);
         mTitleResId = titleResId;
@@ -129,8 +121,7 @@ public class BeautyBaseWaiter extends LinearLayout implements UserItemView.OnUse
         lv_content.setAdapter(adapter);
 
         if (Utils.isEmpty(mListUserVo)) {
-            //设置空态页
-            layout_content.setVisibility(View.GONE);
+                        layout_content.setVisibility(View.GONE);
             include_emptyStatus.setVisibility(View.VISIBLE);
         } else {
             layout_content.setVisibility(View.VISIBLE);

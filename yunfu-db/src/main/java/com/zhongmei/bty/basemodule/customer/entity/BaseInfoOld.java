@@ -5,48 +5,30 @@ import android.database.Cursor;
 import com.j256.ormlite.field.DatabaseField;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * @Date：2015-8-28 上午11:59:08
- * @Description: 会员等级
- * @Version: 1.0
- */
+
 public abstract class BaseInfoOld extends EntityBase<Long> {
 
-    /**
-     *
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ {
 
-        /**
-         * id
-         */
+
         String id = "_id";
 
-        /**
-         * localCreateDateTime
-         */
+
         String createDateTime = "createDateTime";
 
-        /**
-         * status
-         */
+
         String status = "status";
 
-        /**
-         * dirty
-         */
+
         String dirty = "dirty";
 
-        /**
-         * localModifyDateTime
-         */
+
         String modifyDateTime = "modifyDateTime";
 
-        /**
-         * uuid
-         */
+
         String uuid = "uuid";
 
     }
@@ -55,13 +37,10 @@ public abstract class BaseInfoOld extends EntityBase<Long> {
     private Long id;
 
     @DatabaseField(columnName = "status")
-    private Integer status; //0有效 -1无效
-
+    private Integer status;
     @DatabaseField(columnName = "createDateTime")
     private Long createDateTime;
 
-    //@DatabaseField(columnName = "dirty")
-    //private String dirty;
 
     @DatabaseField(columnName = "modifyDateTime")
     private Long modifyDateTime;
@@ -72,17 +51,14 @@ public abstract class BaseInfoOld extends EntityBase<Long> {
     public void initFromCursor(Cursor cursor) {
         this.id = cursor.getLong(cursor.getColumnIndex($.id));
         this.status = cursor.getInt(cursor.getColumnIndex($.status));
-        //this._id = cursor.getLong(cursor.getColumnIndex("_id"));
-        this.createDateTime = cursor.getLong(cursor.getColumnIndex($.createDateTime));
-        //this.dirty = cursor.getString(cursor.getColumnIndex("dirty"));
-        this.modifyDateTime = cursor.getLong(cursor.getColumnIndex($.modifyDateTime));
+                this.createDateTime = cursor.getLong(cursor.getColumnIndex($.createDateTime));
+                this.modifyDateTime = cursor.getLong(cursor.getColumnIndex($.modifyDateTime));
         this.uuid = cursor.getString(cursor.getColumnIndex($.uuid));
     }
 
     @Override
     public boolean isValid() {
-        return true; //status == 0;
-    }
+        return true;     }
 
     @Override
     public Long pkValue() {

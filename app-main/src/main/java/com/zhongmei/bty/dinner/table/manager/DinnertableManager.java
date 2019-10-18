@@ -114,10 +114,7 @@ import java.util.concurrent.Executors;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @version: 1.0
- * @date 2015年9月16日
- */
+
 @SuppressLint("UseSparseArrays")
 public class DinnertableManager implements DinnertableStateCache.OnDataChangeListener {
 
@@ -127,33 +124,23 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         return MainApplication.getInstance();
     }
 
-    /**
-     * 所有桌台区域。key为ZoneModel.id(tableArea.id)
-     */
+
     private final Map<Long, ZoneModel> zoneModelFinder;
 
-    /**
-     * 所有桌台。key为DinnertableModel.id(table.id)
-     */
+
     private final Map<Long, DinnertableModel> dinnertableFinder;
 
     private ExecutorService executorService;
 
     private TableFragment fragment;
 
-    /**
-     * 是否启用上餐功能
-     */
+
     private boolean enableServing;
 
-    /**
-     * 是否开启自动清台功能
-     */
+
     private boolean autoClearTable;
 
-    /**
-     * 当前选中的桌台ID
-     */
+
     private Long selectedDinnertableId;
 
     private BookingTablesManager bookingTablesManager;
@@ -165,9 +152,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         bookingTablesManager = new BookingTablesManager();
     }
 
-    /**
-     * @param fragment
-     */
+
     public void open(TableFragment fragment, final String uuid) {
         if (executorService != null) {
             throw new IllegalStateException("The manager is opened!");
@@ -184,33 +169,16 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                 }
             }
         });
-        ///modify v8.2 线程池工具替换独立线程池
-//        ThreadUtils.runOnWorkThread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    doLoadDate(uuid);
-//                } catch (Exception e) {
-//                    Log.e(TAG, "Load data error!", e);
-//                }
-//            }
-//        });
-    }
+            }
 
     private void doLoadDate(String uuid) throws Exception {
         long time = System.currentTimeMillis();
-        //获取已预定桌台列表
-        HashMap<String, BookingTable> bookingMap = bookingTablesManager.getCurrentPeriodBookingTables();
+                HashMap<String, BookingTable> bookingMap = bookingTablesManager.getCurrentPeriodBookingTables();
 
-        // 调用状态缓存刷新
-        // DinnertableStateCache.refresh(); jikun
-//		Log.i("zhubo", "trade查询耗时：" + (System.currentTimeMillis() - time));
-        // 从数，据库中获取区域和桌台的基本信息存放到zoneModelFinder中
-        TablesDal dal = OperatesFactory.create(TablesDal.class);
+                                TablesDal dal = OperatesFactory.create(TablesDal.class);
         Collection<DinnertableWrapper> wrappers = dal.listDinnertables();
         Log.i(TAG, "TableWrapper.size=" + wrappers.size());
-        //刷新桌台开台异步
-        for (DinnertableWrapper wrapper : wrappers) {
+                for (DinnertableWrapper wrapper : wrappers) {
             ZoneModel zoneModel = zoneModelFinder.get(wrapper.getZoneId());
             if (zoneModel == null) {
                 zoneModel = new ZoneModel();
@@ -234,15 +202,13 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             dinnertableModel.setUuid(wrapper.getUuid());
             dinnertableModel.setTableStatus(wrapper.getTableStatus());
             dinnertableModel.setTableSeats(wrapper.getTableSeats());
-            //设置桌台预定状态
-            if (bookingMap.get(wrapper.getUuid()) == null) {
+                        if (bookingMap.get(wrapper.getUuid()) == null) {
                 dinnertableModel.setReserved(false);
             } else {
                 dinnertableModel.setReserved(true);
             }
 
-            // 计算区域的大小
-            int minWidth = wrapper.getWidth() + dinnertableModel.getX();
+                        int minWidth = wrapper.getWidth() + dinnertableModel.getX();
             if (zoneModel.getWidth() < minWidth) {
                 zoneModel.setWidth(minWidth);
             }
@@ -256,8 +222,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         }
         Log.i(TAG, "zoneModelFinder.size=" + zoneModelFinder.size());
 
-        // 获取正餐设置项的状态
-        enableServing = false;
+                enableServing = false;
         autoClearTable = false;
         try {
             SystemSettingDal settingDal = OperatesFactory.create(SystemSettingDal.class);
@@ -273,11 +238,8 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             Log.w(TAG, "Query setting failed!", e);
         }
 
-        // 刷新桌台状态及桌台上的单据状态
-        //doRefreshState(DinnertableStateCache.getStateWrapperDatas()); jikun
 
-        // 区域按编号排序，并发送Event通知数据
-        List<ZoneModel> zoneList = new ArrayList<ZoneModel>(zoneModelFinder.values());
+                List<ZoneModel> zoneList = new ArrayList<ZoneModel>(zoneModelFinder.values());
         try {
             Collections.sort(zoneList, new Comparator<ZoneModel>() {
 
@@ -304,29 +266,17 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         Log.i("zhubo", "loaddata查询耗时：" + (System.currentTimeMillis() - time));
     }
 
-    /**
-     * 是否开启上餐功能，开启返回true
-     *
-     * @return
-     */
+
     public boolean isEnableServing() {
         return enableServing;
     }
 
-    /**
-     * 是否开启自动清台功能，开启返回true
-     *
-     * @return
-     */
+
     public boolean isAutoClearTable() {
         return autoClearTable;
     }
 
-    /**
-     * 从缓存中获取桌台状态刷新
-     *
-     * @param stateWrapperMap
-     */
+
     private int doRefreshState(Map<Long, StateWrapper> stateWrapperMap) {
         int emptyTableCount = 0;
         for (ZoneModel zoneModel : zoneModelFinder.values()) {
@@ -335,8 +285,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                 StateWrapper stateWrapper = stateWrapperMap.get(tableId);
                 if (stateWrapper != null) {
                     TableStateInfo tableStateInfo = stateWrapper.tableStateInfo;
-                    // 创建桌台上的单据数据
-                    List<IDinnertableTrade> dinnertableTrades = createTableTradeInfo(stateWrapper.tradeTableInfos, dinnertableModel);
+                                        List<IDinnertableTrade> dinnertableTrades = createTableTradeInfo(stateWrapper.tradeTableInfos, dinnertableModel);
 
 
                     TradeTableInfo unionTableMainTrade = stateWrapper.unionTableMainTrade;
@@ -350,8 +299,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                         unionMainTradeModel = new DinnertableTradeModel(unionTableMainTrade, dinnertableModel);
                         unionMainTradeModel.refreshSpendTime();
 
-                        unionSubTrades = createUnionTableTradeInfo(stateWrapper.unionTableSubTrades);//联台单需要去缓冲查询桌台信息
-                    }
+                        unionSubTrades = createUnionTableTradeInfo(stateWrapper.unionTableSubTrades);                    }
 
 
                     dinnertableModel.setTableStatus(tableStateInfo.tableStatus);
@@ -360,8 +308,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                 }
 
                 if (dinnertableModel.getPhysicsTableStatus() == TableStatus.EMPTY) {
-                    //桌台状态为null
-                    emptyTableCount++;
+                                        emptyTableCount++;
                 }
             }
         }
@@ -415,12 +362,9 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             }
         }
 
-        EventBus.getDefault().post(new EventRefreshOpenTableAsync(null, null));//刷新桌台
-    }
+        EventBus.getDefault().post(new EventRefreshOpenTableAsync(null, null));    }
 
-    /**
-     * 从数据库获取完整的TradeVo生成购物车条目后发送Event通知
-     */
+
     public void notifyDinnertable(Long tableId) {
         DinnertableModel model = dinnertableFinder.get(tableId);
         notifyDinnertable(model);
@@ -440,9 +384,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             Map<String, IDinnertableTrade> mapDinnerTableTrade = new HashMap<>();
             Map<Long, DinnertableModel> mapTableModel = new HashMap<>();
             List<String> unionTradeUUIDs = new ArrayList<>();
-            /**
-             * 处理联台订单
-             */
+
             if (unionTrade != null) {
                 unionTradeUUIDs.add(unionTrade.getTradeUuid());
                 mapDinnerTableTrade.put(unionTrade.getTradeUuid(), unionTrade);
@@ -454,13 +396,10 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                 }
             }
 
-            /**
-             * 处理桌台订单
-             */
+
             for (IDinnertableTrade dinnertableTrade : model.getDinnertableTrades()) {
                 unionTradeUUIDs.add(dinnertableTrade.getTradeUuid());
                 mapDinnerTableTrade.put(dinnertableTrade.getTradeUuid(), dinnertableTrade);
-//                model.getDinnertableTrades().add(dinnertableTrade);
             }
 
 
@@ -468,10 +407,8 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             List<Trade> trades = tradeDal.listTradeByUUID(unionTradeUUIDs);
             List<TradeVo> tradeVos = tradeDal.getTradeVosByTrades(trades);
 
-            DinnertableTradeVo unionTableTradeMain = null;//联台主单
-            List<DinnertableTradeVo> dinnerTableTradeVos = new ArrayList<DinnertableTradeVo>();
-            List<DinnertableTradeVo> unionTableTradesubs = new ArrayList<DinnertableTradeVo>();//联台子单集合
-            List<DinnertableTradeInfo> unionTableTradeInfosubs = new ArrayList<DinnertableTradeInfo>();
+            DinnertableTradeVo unionTableTradeMain = null;            List<DinnertableTradeVo> dinnerTableTradeVos = new ArrayList<DinnertableTradeVo>();
+            List<DinnertableTradeVo> unionTableTradesubs = new ArrayList<DinnertableTradeVo>();            List<DinnertableTradeInfo> unionTableTradeInfosubs = new ArrayList<DinnertableTradeInfo>();
 
             if (Utils.isNotEmpty(tradeVos)) {
 
@@ -484,24 +421,20 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
 
 
                 for (TradeVo tradeVo : tradeVos) {
-                    //设置订单菜品价总和（不包含附加费）
-                    List<TradeItem> items = new ArrayList<>();
+                                        List<TradeItem> items = new ArrayList<>();
                     if (tradeVo.getTradeItemList() != null) {
                         for (TradeItemVo itemVo : tradeVo.getTradeItemList()) {
                             items.add(itemVo.getTradeItem());
                         }
                     }
 
-                    //设置kds划菜份数
-                    setKdsScratchDishQty(tradeVo);
+                                        setKdsScratchDishQty(tradeVo);
 
                     MathShoppingCartTool.setTradeDishAmount(tradeVo.getTrade(), items);
 
                     DinnertableTradeModel mode = (DinnertableTradeModel) mapDinnerTableTrade.get(tradeVo.getTrade().getUuid());
 
-                    //订单列表显示金额需要用到tradeSaleAmount
-                    mode.getTradeTableInfo().tradeSaleAmount = tradeVo.getTrade().getTradeAmount();//tradeVo.getTrade().getDishAmount();实际金额
-
+                                        mode.getTradeTableInfo().tradeSaleAmount = tradeVo.getTrade().getTradeAmount();
                     if (tradeVo != null) {
                         DinnertableTradeInfo info = DinnertableTradeInfo.create(mapDinnerTableTrade.get(tradeVo.getTrade().getUuid()), tradeVo);
                         DinnertableTradeVo dinnerTableTradeVo = new DinnertableTradeVo(mapDinnerTableTrade.get(tradeVo.getTrade().getUuid()), info);
@@ -547,8 +480,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             List<Long> itemIds = new ArrayList<>();
             List<TradeItemVo> tradeItemVoList = tradeVo.getTradeItemList();
             for (TradeItemVo itemVo : tradeItemVoList) {
-                itemVo.setKdsScratchDishQty(BigDecimal.ZERO); //清除kds数据
-                itemIds.add(itemVo.getTradeItem().getId());
+                itemVo.setKdsScratchDishQty(BigDecimal.ZERO);                 itemIds.add(itemVo.getTradeItem().getId());
             }
             if (itemIds.size() > 0) {
                 KdsTradeDal kdsTradeDal = OperatesFactory.create(KdsTradeDal.class);
@@ -574,17 +506,14 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         return null;
     }
 
-    /**
-     * 数据库中的数据有变更时将回调此方法
-     */
+
     @Override
     public void onDataChanged(Map<Long, StateWrapper> stateWrapperMap) {
         Log.i(TAG, "onDataChanged...");
         if (!zoneModelFinder.isEmpty()) {
             int emptyTableCount = doRefreshState(stateWrapperMap);
             EventBus.getDefault().post(new EventRefreshDinnertableNotice(emptyTableCount));
-            // 如果当前有桌台信息是打开的，就发送event通知桌台信息界面刷新
-            if (getSelectedDinnertableId() != null) {
+                        if (getSelectedDinnertableId() != null) {
                 DinnertableModel model = dinnertableFinder.get(selectedDinnertableId);
                 if (model != null) {
                     notifyDinnertable(model);
@@ -597,15 +526,10 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
     public void onHttpRecordChanged(Map<Long, List<AsyncHttpRecord>> tableAsyncRecord, Map<String, List<AsyncHttpRecord>> tradeAsyncRecord) {
         doRefreshAsyncHttpRecord(tableAsyncRecord, tradeAsyncRecord);
         if (getSelectedDinnertableId() != null) {
-            EventBus.getDefault().post(new EventRefreshTradeAsyncHttp());//刷新桌台详情页
-        }
+            EventBus.getDefault().post(new EventRefreshTradeAsyncHttp());        }
     }
 
-    /**
-     * 切换区域
-     *
-     * @param zone
-     */
+
     public void switchZone(IZone zone) {
         ZoneModel zoneModel = zoneModelFinder.get(zone.getId());
         if (zoneModel != null) {
@@ -615,12 +539,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         }
     }
 
-    /**
-     * 刷新桌台上指定单据的信息
-     *
-     * @param tradeUuid
-     * @param tableId
-     */
+
     public void refreshDinnertableTrade(String tradeUuid, Long tableId) {
         DinnertableModel model = dinnertableFinder.get(tableId);
         if (model == null) {
@@ -629,8 +548,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         }
         try {
             TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
-            // 创建桌台单据信息
-            for (IDinnertableTrade dinnertableTrade : model.getDinnertableTrades()) {
+                        for (IDinnertableTrade dinnertableTrade : model.getDinnertableTrades()) {
                 if (tradeUuid.equals(dinnertableTrade.getTradeUuid())) {
                     TradeVo tradeVo = tradeDal.findTrade(tradeUuid, false);
                     if (tradeVo != null) {
@@ -646,33 +564,18 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         }
     }
 
-    /**
-     * 选中指定的桌台
-     *
-     * @param model
-     */
+
     public void select(DinnertableModel model) {
         if (model == null) {
             setSelectedDinnertableId(null);
         } else {
             Log.i(TAG, "show detail..." + model.getName());
-            //微信加菜通知，选中桌台但是没有打开详情也，所以会出现没法显示的问题。
-//			if (selectedDinnertableId != null) {
-//				if (selectedDinnertableId.equals(model.getId())) {
-//					Log.w(TAG, "The same, ignore.");
-//					return;
-//				}
-//			}
-            setSelectedDinnertableId(model.getId());
+                        setSelectedDinnertableId(model.getId());
             notifyDinnertable(model);
         }
     }
 
-    /**
-     * 当前选中的桌台ID
-     *
-     * @return
-     */
+
     public Long getSelectedDinnertableId() {
         return selectedDinnertableId;
     }
@@ -682,11 +585,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
     }
 
 
-    /**
-     * 删除指定的桌台单据
-     *
-     * @param
-     */
+
     public void delete(final IDinnertableTrade dinnertableTrade, final TradeVo tradeVo, final boolean isPrintChecked, Reason reason, List<InventoryItemReq> inventoryItems) {
         Log.i(TAG, "delete..." + dinnertableTrade.getSn());
         ResponseListener<TradeResp> listener = new EventResponseListener<TradeResp>(UserActionEvent.DINNER_DEL_ORDER) {
@@ -704,21 +603,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                             }
 
                             String uuid = trade.getUuid();
-                            //使用打印回调管理进行打印
-//                            PrintOperator printOperator = new PrintOperator(false);
-//                            if (Utils.isNotEmpty(resp.getTradeTables())) {
-//                                printOperator.setTableName(resp.getTradeTables().get(0).getTableName());
-//                            }
-//                            if (Utils.isNotEmpty(resp.getTradeExtras())) {
-//                                printOperator.setSerialNUmber(resp.getTradeExtras().get(0).getSerialNumber());
-//                            }
-//                            printOperator.cancelTradePrint(uuid, isPrintChecked);
-                            /*PRTPrintOperator operator = new PRTPrintOperator();
-                            if (UnionUtil.isUnionMainTrade(dinnertableTrade.getTradeType())) {
-                                operator.printUnionCancelTicket(tradeVo, null, isPrintChecked, false);
-                            } else {
-                                operator.printCancelTicket(uuid, null, isPrintChecked, false);
-                            }*/
+
                             AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CANCEL_ORDER, trade.getId(), uuid, trade.getClientUpdateTime());
 
                             UserActionEvent.end(UserActionEvent.DINNER_DEL_ORDER);
@@ -752,8 +637,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
 
         Long tradeId = dinnertableTrade.getTradeId();
         Long serverUpdateTime = dinnertableTrade.getTradeServerUpdateTime();
-        // 桌台上只有一单时将状态改为空桌
-        DinnertableState dinnertableState = new DinnertableState();
+                DinnertableState dinnertableState = new DinnertableState();
         if (dinnertableTrade.getDinnertable() == null) {
             return;
         }
@@ -786,20 +670,14 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         }
     }
 
-    /**
-     * 换桌
-     *
-     * @param orginal
-     * @param dest
-     */
+
     public void transfer(final List<TradeItemExtraDinner> tradeItemSeats, final IDinnertableTrade orginal, final IDinnertable dest) {
         if (orginal == null || dest == null) {
             Log.e(TAG, "The orginal or dest is null!");
             return;
         }
         Log.i(TAG, "transfer..." + orginal.getSn() + " --> " + dest.getName());
-        // 允许一桌多单 update by Zhaos 2016-02-22
-        if (!ServerSettingManager.allowMultiTradesOnTable()) {
+                if (!ServerSettingManager.allowMultiTradesOnTable()) {
             if (dest.getTradeCount() >= 1) {
                 ToastUtil.showShortToast(R.string.dinner_trade_exceeded_the_limit);
                 return;
@@ -816,26 +694,12 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                                 fragment.getActivity().getResources().getString(R.string.connecting_print));
                     }
 
-                    /*PrintDinnerTable orginalTable = new PrintDinnerTable();
-                    orginalTable.setSn(orginal.getSn());
-                    orginalTable.setTableName(orginal.getDinnertable().getName());
-                    orginalTable.setZoneName(orginal.getDinnertable().getZone().getName());
-                    // 转台单需要按原单后厨配置出票，所以新增传入原单桌台id
-                    orginalTable.setTableId(orginal.getDinnertable().getId());
-                    PrintDinnerTable destTable = new PrintDinnerTable();
-                    destTable.setTableName(dest.getName());
-                    destTable.setZoneName(dest.getZone().getName());
-                    destTable.setTableId(dest.getId());*/
-
-                    /*PrintContentQueue.getInstance().mergeOrTransferDinnerTrade(orginalTable, destTable,
-                            orginal.getTradeUuid(), Calm.OPERATE_TYPE_TRANSTER,
-                            new TransferOrMergePrintListener(PrintTicketTypeEnum.TRANSFERTABLE));*/
 
 
-                    /*TradeTableWrapper srcTable = TradeTableWrapper.create(orginal);
-                    TradeTableWrapper destTradeTableList = TradeTableWrapper.create(dest);
-                    IPrintHelper.Holder.getInstance().printMovingTableTicket(orginal.getTradeUuid(), srcTable, destTradeTableList,
-                            new PRTTransferOrMergePrintListener(PrintTicketTypeEnum.TRANSFERTABLE));*/
+
+
+
+
                 } else {
                     String msg = response.getMessage();
                     if (msg != null) {
@@ -860,12 +724,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                 LoadingResponseListener.ensure(listener, fragment.getFragmentManager()));
     }
 
-    /**
-     * 合单
-     *
-     * @param orginal
-     * @param dest
-     */
+
     public void merge(final List<TradeItemExtraDinner> tradeItemSeats, final IDinnertableTrade orginal, final IDinnertableTrade dest) {
         if (orginal.equals(dest)) {
             ToastUtil.showLongToast(R.string.dinner_merge_self_hint);
@@ -901,11 +760,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         }
     }
 
-    /**
-     * @param orginal
-     * @param dest
-     * @param levelId 目标单会员等级id
-     */
+
     private void doMerge(final List<TradeItemExtraDinner> tradeItemSeats, final IDinnertableTrade orginal, final IDinnertableTrade dest, final Long levelId) {
         ResponseListener<TradeResp> listener = new ResponseListener<TradeResp>() {
 
@@ -917,23 +772,9 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                                 fragment.getActivity().getResources().getString(R.string.connecting_print));
                     }
 
-                    /*PrintDinnerTable orginalTable = new PrintDinnerTable();
-                    orginalTable.setSn(orginal.getSn());
-                    orginalTable.setTableName(orginal.getDinnertable().getName());
-                    orginalTable.setZoneName(orginal.getDinnertable().getZone().getName());
-                    // 合单需要按原单后厨配置出票，所以新增传入原单桌台id
-                    orginalTable.setTableId(orginal.getDinnertable().getId());
-                    PrintDinnerTable destTable = new PrintDinnerTable();
-                    destTable.setSn(dest.getSn());
-                    // 传入目标桌台的ID，方便判断目标桌台是否被配置为该单据下可打印
-                    destTable.setTableId(dest.getDinnertable().getId());
-                    destTable.setTableName(dest.getDinnertable().getName());
-                    destTable.setZoneName(dest.getDinnertable().getZone().getName());*/
 
-                    /*PrintContentQueue.getInstance().mergeOrTransferDinnerTrade(orginalTable, destTable,
-                            dest.getTradeUuid(), Calm.OPERATE_TYPE_MERGE,
-                            new TransferOrMergePrintListener(PrintTicketTypeEnum.MERGETABLE));*/
-                    // 成功后直接刷新
+
+
 
                     List<String> mergeDishUuids = null;
                     if (Utils.isNotEmpty(response.getContent().getTradeItems())) {
@@ -943,10 +784,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                         }
                     }
 
-                    /*TradeTableWrapper srcTradeTableList = TradeTableWrapper.create(orginal);
-                    TradeTableWrapper destTradeTableList = TradeTableWrapper.create(dest);
-                    IPrintHelper.Holder.getInstance().printMergeTableTicket(dest.getTradeUuid(), srcTradeTableList, destTradeTableList,
-                            mergeDishUuids, new PRTTransferOrMergePrintListener(PrintTicketTypeEnum.MERGETABLE));*/
+
                 } else {
                     String msg = response.getMessage();
                     if (msg != null) {
@@ -969,11 +807,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         operates.mergeDinner(tradeItemSeats, orginal, dest, levelId, LoadingResponseListener.ensure(listener, fragment.getFragmentManager()));
     }
 
-    /**
-     * 清台
-     *
-     * @param model
-     */
+
     public void clear(final DinnertableModel model) {
         Log.i(TAG, "clear dinnertable...");
         ResponseListener<ClearDinnertableResp> listener = new EventResponseListener<ClearDinnertableResp>(UserActionEvent.DINNER_TABLE_CLEAR) {
@@ -1007,9 +841,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
     }
 
 
-    /**
-     * 关闭并释放资源
-     */
+
     public void close() {
         executorService.shutdownNow();
         DinnertableStateCache.close();
@@ -1021,12 +853,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
     }
 
 
-    /**
-     * @Date 2016/6/13
-     * @Description:合单移菜
-     * @Param
-     * @Return
-     */
+
     public void mergeMoveDish(final List<DishQuantityBean> dishItes, final IDinnertableTradeMoveDish orginal,
                               final IDinnertableTrade dest, final Integer actionType, final boolean copyDishProperty,
                               final boolean printKitchen) {
@@ -1041,8 +868,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
             final TradeVo destTradeVo = tradeDal.findTrade(dest.getTradeId(), true);
             if (destTradeVo != null) {
-                //调用接口植入会员等级id，临时方案
-                final TradeCustomer tradeCustomer = CustomerManager.getInstance().getValidMemberOrCardCustomer(destTradeVo.getTradeCustomerList());
+                                final TradeCustomer tradeCustomer = CustomerManager.getInstance().getValidMemberOrCardCustomer(destTradeVo.getTradeCustomerList());
                 if (tradeCustomer != null) {
                     CustomerOperates customerOperates = OperatesFactory.create(CustomerOperates.class);
                     customerOperates.getCustomerByType(CustomerRequest.CUSTOMER_ID, tradeCustomer.getCustomerId() + "", LoadingResponseListener.ensure(new ResponseListener<CustomerMobileVo>() {
@@ -1075,11 +901,9 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                                        final IDinnertableTrade dest, final Integer actionType, boolean copyDishProperty,
                                        final boolean printKitchen, TradeVo destTradeVo) {
         DinnertableTradeModelMoveDish modelMoveDish = (DinnertableTradeModelMoveDish) orginal;
-        // 构建移菜数据
-        CopyMoveDishTool copyMoveDishTool = new CopyMoveDishTool();
+                CopyMoveDishTool copyMoveDishTool = new CopyMoveDishTool();
         DinnertableTradeInfo sourceTradeInfo = modelMoveDish.getSourceTradeVo().getInfo();
-        final List<IShopcartItem> moveShopcartItems = modelMoveDish.getItems();// 移的菜
-
+        final List<IShopcartItem> moveShopcartItems = modelMoveDish.getItems();
         DinnertableTradeInfo targetTradeInfo = DinnertableTradeInfo.create(dest, destTradeVo);
         final Map<Integer, TradeVo> resultMap;
         if (actionType == 1) {
@@ -1096,41 +920,13 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                     ToastUtil.showShortToast(response.getMessage());
 
                     if (actionType == 1) {
-                        //发送移菜成功通知到TableInfoFragment更新界面
-                        EventBus.getDefault().post(new EventMoveDishNotice(true));
+                                                EventBus.getDefault().post(new EventMoveDishNotice(true));
 
                         if (fragment != null) {
                             DialogUtil.showLoadingDialog(fragment.getFragmentManager(),
                                     fragment.getActivity().getResources().getString(R.string.connecting_print));
                         }
 
-//                        PrintDinnerTable orginalTable = new PrintDinnerTable();
-//                        orginalTable.setSn(orginal.getSn());
-//                        orginalTable.setZoneName(orginal.getDinnertable().getZone().getName());
-//                        orginalTable.setTableName(orginal.getDinnertable().getName());
-//                        // 合单需要按原单后厨配置出票，所以新增传入原单桌台id
-//                        orginalTable.setTableId(orginal.getDinnertable().getId());
-//                        PrintDinnerTable destTable = new PrintDinnerTable();
-//                        destTable.setSn(dest.getSn());
-//                        // 传入目标桌台的ID，方便判断目标桌台是否被配置为该单据下可打印
-//                        destTable.setTableId(dest.getDinnertable().getId());
-//                        destTable.setTableName(dest.getDinnertable().getName());
-//                        destTable.setZoneName(dest.getDinnertable().getZone().getName());
-//                        destTable.setSn(dest.getSn());
-//
-//                        ArrayList<TradeItemChange> changes = new ArrayList<TradeItemChange>();
-//                        for (TradeItem tradeItem : response.getContent().getTradeItems()) {
-//                            if (tradeItem.getStatusFlag() == StatusFlag.VALID) {
-//                                TradeItemChange tradeItemChange =
-//                                        new TradeItemChange(Calm.DINNER_DISH_ADD, tradeItem.getUuid());
-//                                changes.add(tradeItemChange);
-//                            }
-//
-//                        }
-//
-//                        PrintContentQueue.getInstance().mergeOrTransferOrMoveDinnerTrade(orginalTable,
-//                                destTable, dest.getTradeUuid(), Calm.OPERATE_TYPE_MOVE, changes,
-//                                new TransferOrMergePrintListener(PrintTicketTypeEnum.MOVEDISH));
 
                         List<String> mergeDishUuids = null;
                         if (Utils.isNotEmpty(response.getContent().getTradeItems())) {
@@ -1140,20 +936,12 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                             }
                         }
 
-                        /*TradeTableWrapper srcTradeTableList = TradeTableWrapper.create(orginal);
-                        TradeTableWrapper destTradeTableList = TradeTableWrapper.create(dest);
-                        IPrintHelper.Holder.getInstance().printMovingDishTicket(dest.getTradeUuid(), srcTradeTableList, destTradeTableList,
-                                mergeDishUuids, new PRTTransferOrMergePrintListener(PrintTicketTypeEnum.MOVEDISH));*/
-                    } else {//复制菜品成功后打印
-                        //复制次数累加
-                        fragment.getInfoFragment().addCopydishTimes();
-                        //更新取消复制按钮
-                        fragment.getInfoFragment().talbeInfoContentBean.updateCancelMoveDishBtn((byte) 2);
 
-                        if (printKitchen) {//传送后厨
-                            printTicktForCopyDish(resultMap, response, true);
-                        } else {//未勾选打印客看单
-                            printCustomerTicktForCopyDish(resultMap, response, true);
+                    } else {                                                fragment.getInfoFragment().addCopydishTimes();
+                                                fragment.getInfoFragment().talbeInfoContentBean.updateCancelMoveDishBtn((byte) 2);
+
+                        if (printKitchen) {                            printTicktForCopyDish(resultMap, response, true);
+                        } else {                            printCustomerTicktForCopyDish(resultMap, response, true);
                         }
                     }
                     AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHANGE_ORDER, orginal.getTradeId(), orginal.getTradeUuid(), orginal.getTradeClientUpdateTime());
@@ -1174,8 +962,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             }
         };
 
-        // 移菜请求
-        if (resultMap != null && resultMap.size() == 2) {
+                if (resultMap != null && resultMap.size() == 2) {
             Log.i("zhubo", "发起移菜请求");
             List<TradeItem> tradeItems = new ArrayList<TradeItem>();
             if (dishItes != null) {
@@ -1184,8 +971,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                     CTradeItem temp = new CTradeItem();
                     temp.setId(item.shopcartItem.getId());
                     temp.setUuid(item.shopcartItem.getUuid());
-                    temp.setMoveQuantity(item.quantity.compareTo(item.shopcartItem.getSingleQty()) == 0 ? null : item.quantity);//设置移动分数
-                    tradeItems.add(temp);
+                    temp.setMoveQuantity(item.quantity.compareTo(item.shopcartItem.getSingleQty()) == 0 ? null : item.quantity);                    tradeItems.add(temp);
 
                     TradeItemExtraDinner tradeItemExtraDinner = CopyMoveDishTool.buildTradeItemExtraDinner(item.shopcartItem, item.tableSeat);
                     if (tradeItemExtraDinner != null) {
@@ -1210,12 +996,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         }
     }
 
-    /**
-     * @Date 2016/6/13
-     * @Description:转台移菜或者复制菜品
-     * @Param
-     * @Return
-     */
+
     public void transferMoveDish(List<DishQuantityBean> dishItes, final IDinnertableTrade orginal, final IDinnertable dest, final Integer actionType, boolean copyDishProperty, final boolean printKitchen) {
         if (orginal == null || dest == null) {
             Log.e(TAG, "The orginal or dest is null!");
@@ -1233,17 +1014,8 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         DinnertableTradeModelMoveDish modelMoveDish = (DinnertableTradeModelMoveDish) orginal;
         CopyMoveDishTool copyMoveDishTool = new CopyMoveDishTool();
         DinnertableTradeInfo sourceTradeInfo = modelMoveDish.getSourceTradeVo().getInfo();
-        final List<IShopcartItem> moveShopcartItems = modelMoveDish.getItems();// 移的菜
+        final List<IShopcartItem> moveShopcartItems = modelMoveDish.getItems();
 
-       /* final TradeTable tradeTable = TradeTableWrapper.createTradeTable(dest);
-
-        final Map<Integer, TradeVo> resultMap;
-        if (actionType == 1) {//移菜数据构造
-            resultMap = copyMoveDishTool.moveDish(sourceTradeInfo, null, tradeTable, dishItes);
-        } else {//复制数据构造
-            resultMap = copyMoveDishTool.copyDish(sourceTradeInfo, null, tradeTable, moveShopcartItems, dishItes, copyDishProperty);
-
-        }*/
 
         ResponseListener<TradeResp> listener = new EventResponseListener<TradeResp>(actionType == 1 ? UserActionEvent.DINNER_DISHES_MOVE : UserActionEvent.DINNER_DISHES_COPY) {
 
@@ -1252,73 +1024,22 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                 if (ResponseObject.isOk(response)) {
                     ToastUtil.showShortToast(response.getMessage());
                     if (actionType == 1) {
-                        //发送移菜成功通知到TableInfoFragment更新界面
-                        EventBus.getDefault().post(new EventMoveDishNotice(true));
+                                                EventBus.getDefault().post(new EventMoveDishNotice(true));
                         if (fragment != null) {
                             DialogUtil.showLoadingDialog(fragment.getFragmentManager(),
                                     fragment.getActivity().getResources().getString(R.string.connecting_print));
                         }
 
-                        // 调打印接口
-                        /*PrintDinnerTable orginalTable = new PrintDinnerTable();
-                        orginalTable.setSn(orginal.getSn());
-                        orginalTable.setTableName(orginal.getDinnertable().getName());
-                        orginalTable.setZoneName(orginal.getDinnertable().getZone().getName());
-                        // 转台单需要按原单后厨配置出票，所以新增传入原单桌台id
-                        orginalTable.setTableId(orginal.getDinnertable().getId());
-                        PrintDinnerTable destTable = new PrintDinnerTable();
-                        destTable.setTableName(dest.getName());
-                        destTable.setZoneName(dest.getZone().getName());
-                        destTable.setTableId(dest.getId());
-                        ArrayList<TradeItemChange> changes = new ArrayList<TradeItemChange>();
-                        for (TradeItem tradeItem : response.getContent().getTradeItems()) {
-                            if (tradeItem.getStatusFlag() == StatusFlag.VALID) {
-                                TradeItemChange tradeItemChange =
-                                        new TradeItemChange(Calm.DINNER_DISH_ADD, tradeItem.getUuid());
-                                changes.add(tradeItemChange);
-                            }
 
-                        }*/
-                        /*PrintContentQueue.getInstance().mergeOrTransferOrMoveDinnerTrade(orginalTable,
-                                destTable, resultMap.get(CopyMoveDishTool.TARGET).getTrade().getUuid(),
-                                Calm.OPERATE_TYPE_MOVE, changes,
-                                new TransferOrMergePrintListener(PrintTicketTypeEnum.MOVEDISH));*/
 
-                        //String destTradeUuid = resultMap.get(CopyMoveDishTool.TARGET).getTrade().getUuid();
 
-                        /*String serialNumber = null;
-                        List<TradeExtra> tradeExtras = response.getContent().getTradeExtras();
-                        if (tradeExtras != null) {
-                            for (TradeExtra extra : tradeExtras) {
-                                if (destTradeUuid.equals(extra.getTradeUuid())) {
-                                    serialNumber = extra.getSerialNumber();
-                                    break;
-                                }
-                            }
-                        }
 
-                        List<String> mergeDishUuids = null;
-                        if (Utils.isNotEmpty(response.getContent().getTradeItems())) {
-                            mergeDishUuids = new ArrayList<>();
-                            for (TradeItem tradeItem : response.getContent().getTradeItems()) {
-                                mergeDishUuids.add(tradeItem.getUuid());
-                            }
-                        }*/
 
-                        /*TradeTableWrapper srcTradeTableList = TradeTableWrapper.create(orginal);
-                        TradeTableWrapper destTradeTableList = TradeTableWrapper.create(serialNumber, tradeTable);
-                        IPrintHelper.Holder.getInstance().printMovingDishTicket(destTradeUuid, srcTradeTableList, destTradeTableList,
-                                mergeDishUuids, new PRTTransferOrMergePrintListener(PrintTicketTypeEnum.MOVEDISH));*/
-                    } else {//复制菜品成功后打印信息
-                        //复制次数累加
-                        fragment.getInfoFragment().addCopydishTimes();
-                        //更新取消复制按钮
-                        fragment.getInfoFragment().talbeInfoContentBean.updateCancelMoveDishBtn((byte) 2);
-                        /*if (printKitchen) {//勾选传送后厨
-                            printTicktForCopyDish(resultMap, response, false);
-                        } else {//未勾选打印客看单
-                            printCustomerTicktForCopyDish(resultMap, response, false);
-                        }*/
+
+
+                    } else {                                                fragment.getInfoFragment().addCopydishTimes();
+                                                fragment.getInfoFragment().talbeInfoContentBean.updateCancelMoveDishBtn((byte) 2);
+
                     }
                     AuthLogManager.getInstance().flush(OrderActionEnum.ACTION_CHANGE_ORDER, orginal.getTradeId(), orginal.getTradeUuid(), orginal.getTradeClientUpdateTime());
                 } else {
@@ -1343,77 +1064,15 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
             }
         };
 
-        /*if (resultMap != null && resultMap.size() == 2) {
-            Log.i("zhubo", "发起转台移菜请求");
-            List<TradeItem> tradeItems = new ArrayList<TradeItem>();
-            if (dishItes != null) {
-                TradeVo tRradeVo = resultMap.get(CopyMoveDishTool.TARGET);
-                for (DishQuantityBean item : dishItes) {
-                    CTradeItem temp = new CTradeItem();
-                    temp.setId(item.shopcartItem.getId());
-                    temp.setUuid(item.shopcartItem.getUuid());
-                    temp.setMoveQuantity(item.quantity.compareTo(item.shopcartItem.getSingleQty()) == 0 ? null : item.quantity);//设置移动分数
-                    tradeItems.add(temp);
 
 
-                    TradeItemExtraDinner tradeItemExtraDinner = CopyMoveDishTool.buildTradeItemExtraDinner(item.shopcartItem, item.tableSeat);
-                    if (tradeItemExtraDinner != null) {
-                        tRradeVo.getTradeItemExtraDinners().add(tradeItemExtraDinner);
-                    }
-                }
-            } else {
-                for (IShopcartItem item : moveShopcartItems) {
-                    CTradeItem temp = new CTradeItem();
-                    temp.setId(item.getId());
-                    temp.setUuid(item.getUuid());
-                    tradeItems.add(temp);
-                }
-            }*/
 
 
-           /* moveDishRequest(resultMap.get(CopyMoveDishTool.SOURCE),
-                    resultMap.get(CopyMoveDishTool.TARGET),
-                    tradeItems,
-                    listener, actionType, copyDishProperty ? 1 : 2);*/
-        //}
-    }
+            }
 
-    /*private TradeTableWrapper createTradeTable(IDinnertableTrade dinnertableTrade) {
-        String serialNumber = null;
-        if (dinnertableTrade instanceof DinnertableTradeModel) {
-            serialNumber = ((DinnertableTradeModel) dinnertableTrade).getTradeTableInfo().serialNumber;
-        }
 
-        return TradeTableWrapper.create(serialNumber, createTradeTable(dinnertableTrade.getDinnertable()));
-    }
 
-    private TradeTable createTradeTable(IDinnertable dest) {
-        final TradeTable tradeTable = new TradeTable();
-        tradeTable.setTableId(dest.getId());
-        tradeTable.setTableName(dest.getName());
-        tradeTable.validateCreate();
-        String uuid = SystemUtils.genOnlyIdentifier();
-        tradeTable.setUuid(uuid);
 
-        tradeTable.setTablePeopleCount(dest.getNumberOfSeats());
-        tradeTable.setMemo("");
-
-        // 需要获取waiterId
-        //设置登录操作员为默认服务员
-        AuthUser user = Session.getAuthUser();
-        if (user != null) {
-            tradeTable.setWaiterId(user.getId());
-            tradeTable.setWaiterName(user.getName());
-        }
-        return tradeTable;
-    }*/
-
-    /**
-     * @Date 2016/6/13
-     * @Description:调用移菜接口
-     * @Param
-     * @Return
-     */
     public void moveDishRequest(TradeVo sourceTradeVo, TradeVo targetTradeVo, List<TradeItem> tradeItems,
                                 ResponseListener<TradeResp> listener, Integer actionType, Integer moveAdd) {
         TradeOperates mTradeOperates = OperatesFactory.create(TradeOperates.class);
@@ -1423,114 +1082,19 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
                 fragment == null ? listener : LoadingResponseListener.ensure(listener, fragment.getFragmentManager()), actionType, moveAdd);
     }
 
-    /*private class TransferOrMergePrintListener extends OnSimplePrintListener {
 
-        public TransferOrMergePrintListener(PrintTicketTypeEnum ticketTypeEnum) {
-            super(ticketTypeEnum);
-        }
 
-        @Override
-        public void onResult(int globalCode, LongSparseArray<ReturnCashierTicketBean> returnCashierSparseArray, HashMap<Long, Integer> dishMap, SendData sendData) {
-            if (DialogUtil.isLoadingDialogShowing()) {
-                DialogUtil.dismissLoadingDialog();
-            }
-        }
-    }
 
-    private class PRTTransferOrMergePrintListener extends PRTBatchModifyPrintListener {
-
-        public PRTTransferOrMergePrintListener(PrintTicketTypeEnum ticketTypeEnum) {
-            super(ticketTypeEnum, false);
-        }
-
-        @Override
-        public void onResult(int globalCode, LongSparseArray<PRTReturnCashierTicketBean> returnCashierSparseArray, Map<Long, Integer> dishMap, SendData sendData) {
-            super.onResult(globalCode, returnCashierSparseArray, dishMap, sendData);
-            if (DialogUtil.isLoadingDialogShowing()) {
-                DialogUtil.dismissLoadingDialog();
-            }
-        }
-    }*/
-
-    /**
-     * @Date 2016/7/25
-     * @Description:复制菜品后打印
-     * @Param
-     * @Return
-     */
     private void printTicktForCopyDish(Map<Integer, TradeVo> resultMap, ResponseObject<TradeResp> response, final boolean isAdd) {
-//		if(fragment!=null){
-//			DialogUtil.showLoadingDialog(fragment.getFragmentManager(),fragment.getResources().getString(R.string.connecting_print));
-//		}
-        //打印客看单
-        /*TradeVo target = resultMap.get(CopyMoveDishTool.TARGET);
-        final String targetTradeUuid = target.getTrade().getUuid();
 
-        final List<String> tradeItemUuid = new ArrayList<>();
-        List<TradeItem> tradeItems = new ArrayList<>();
-        for (TradeItem tradeItem : response.getContent().getTradeItems()) {
-            if (tradeItem.getTradeUuid().equals(targetTradeUuid)) {
-                tradeItemUuid.add(tradeItem.getUuid());
-                tradeItems.add(tradeItem);
-                tradeItem.setIssueStatus(IssueStatus.ISSUING);
-                tradeItem.setGuestPrinted(GuestPrinted.PRINTED);
-            }
-        }
-
-        IPrintHelper.Holder.getInstance().printCustomerTicket(targetTradeUuid, tradeItemUuid, null,
-                null, !isAdd, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.CUSTOMER));
-
-        //修改批次号
-        DinnerPrintManager.modifyPrintStatus(tradeItems, null, null, new ResponseListener<TradeItemResp>() {
-
-            @Override
-            public void onResponse(ResponseObject<TradeItemResp> response) {
-                if (ResponseObject.isOk(response)) {
-                    IPrintHelper.Holder.getInstance().printKitchenAllTicket(targetTradeUuid, tradeItemUuid, null, null, !isAdd, PRTBatchModifyPrintListener.create(PrintTicketTypeEnum.KITCHENALL));
-                    IPrintHelper.Holder.getInstance().printKitchenCellTicket(targetTradeUuid, tradeItemUuid, null, null, !isAdd, PRTBatchModifyPrintListener.create(PrintTicketTypeEnum.KITCHENCELL));
-                } else {
-                    ToastUtil.showShortToast(response.getMessage());
-                }
-            }
-
-            @Override
-            public void onError(VolleyError error) {
-                ToastUtil.showShortToast(error.getMessage());
-            }
-        });*/
     }
 
-    /**
-     * @Date 2016/7/27
-     * @Description:打印客看单
-     * @Param
-     * @Return
-     */
+
     private void printCustomerTicktForCopyDish(Map<Integer, TradeVo> resultMap, ResponseObject<TradeResp> response, final boolean isAdd) {
-//		if(fragment!=null){
-//			DialogUtil.showLoadingDialog(fragment.getFragmentManager(),fragment.getResources().getString(R.string.connecting_print));
-//		}
-        //打印客看单
-        /*TradeVo target = resultMap.get(CopyMoveDishTool.TARGET);
-        final String targetTradeUuid = target.getTrade().getUuid();
 
-        final List<String> tradeItemUuid = new ArrayList<>();
-        for (TradeItem tradeItem : response.getContent().getTradeItems()) {
-            if (tradeItem.getTradeUuid().equals(targetTradeUuid)) {
-                tradeItemUuid.add(tradeItem.getUuid());
-            }
-        }
-
-        IPrintHelper.Holder.getInstance().printCustomerTicket(targetTradeUuid, tradeItemUuid, null,
-                null, !isAdd, new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.CUSTOMER));*/
     }
 
-    /**
-     * 获取paymentvo
-     *
-     * @param tradeUuid
-     * @return
-     */
+
     public PaymentVo getPaymentVo(String tradeUuid) {
         if (!TextUtils.isEmpty(tradeUuid)) {
             try {
@@ -1554,13 +1118,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
     }
 
 
-    /**
-     * 根据联台单子单，构建桌台数据
-     *
-     * @param trades
-     * @return
-     * @throws Exception
-     */
+
     private Map<Long, DinnertableModel> getDinnerTableModelByTrades(List<Trade> trades) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
@@ -1635,12 +1193,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
     }
 
 
-    /**
-     * 根据子单获取联台单
-     *
-     * @param trade
-     * @return
-     */
+
     private Trade getDinnerUnionTrade(IDinnertableTrade trade) {
         if (trade.getTradeType() != TradeType.UNOIN_TABLE_SUB) {
             return null;
@@ -1664,12 +1217,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         return unionTrade;
     }
 
-    /**
-     * 根据联台单查询所有的子单
-     *
-     * @param trade
-     * @return
-     */
+
     private List<Trade> getSubTrade(Trade trade) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         List<Trade> unionChildTrades = null;
@@ -1699,12 +1247,7 @@ public class DinnertableManager implements DinnertableStateCache.OnDataChangeLis
         return unionChildTrades;
     }
 
-    /**
-     * 获取桌台状态
-     *
-     * @param tradeExtra
-     * @return
-     */
+
     private DinnertableStatus getDinnertableStatus(TradeExtra tradeExtra) {
         if (tradeExtra.getHasServing() == TradeServingStatus.SERVED) {
             return DinnertableStatus.SERVING;

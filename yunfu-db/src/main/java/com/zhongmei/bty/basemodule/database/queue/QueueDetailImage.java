@@ -4,9 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.EntityBase;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "queue_detail_image")
 public class QueueDetailImage extends EntityBase<Long> {
 
@@ -29,33 +27,23 @@ public class QueueDetailImage extends EntityBase<Long> {
     @DatabaseField(columnName = "id", id = true, canBeNull = false)
     private Long id;
 
-    /**
-     * 图片URL
-     */
+
     @DatabaseField(columnName = "queue_img_id")
     private String queueImgId;
 
-    /**
-     * 图片URL
-     */
+
     @DatabaseField(columnName = "image_url")
     private String imageUrl;
 
-    /**
-     * 创建时间
-     */
+
     @DatabaseField(columnName = "create_date_time")
     private Long createDateTime;
 
-    /**
-     * 更新时间
-     */
+
     @DatabaseField(columnName = "modify_date_time")
     private Long modifyDateTime;
 
-    /**
-     * 状态 -1错误 0正常
-     */
+
     @DatabaseField(columnName = "status")
     private Integer status;
 

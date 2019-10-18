@@ -10,9 +10,7 @@ import com.zhongmei.yunfu.R;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public abstract class BeautyOrderProductListPagerAdapter extends OrderDishListPagerAdapter {
 
@@ -34,10 +32,7 @@ public abstract class BeautyOrderProductListPagerAdapter extends OrderDishListPa
     @Override
     protected ListAdapter getAdapter(List<DishVo> subDataSet) {
         BeautyProductAdapter orderDishAdapter = new BeautyProductAdapter(mContext, subDataSet, getNumColumns());
-//        orderDishAdapter.setDishCardBg(this.dishCardType);
-        orderDishAdapter.setEditMode(this.isEditMode());//yutang modify 20160811
-        orderDishAdapter.setHidClearNumber(this.isHidClearNumber());//yutang modify 20160816
-        if (getGridHeight() > 0 && getNumRows() > 0) {
+        orderDishAdapter.setEditMode(this.isEditMode());        orderDishAdapter.setHidClearNumber(this.isHidClearNumber());        if (getGridHeight() > 0 && getNumRows() > 0) {
             orderDishAdapter.setItemHeight(getGridHeight() / getNumRows());
         }
         return orderDishAdapter;

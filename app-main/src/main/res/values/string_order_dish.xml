@@ -155,7 +155,7 @@
     <string name="order_dish_wifi_closing">WIFI正在关闭</string>
     <string name="order_dish_wifi_openning">WIFI正在开启</string>
     <string name="order_dish_bluetooth">蓝牙</string>
-    <string name="order_dish_kry_service">服务器</string>
+    <string name="order_dish_zmyf_service">服务器</string>
     <string name="order_dish_print_service">打印服务器</string>
     <string name="order_dish_battery">电量</string>
     <string name="order_dish_phone">电话</string>

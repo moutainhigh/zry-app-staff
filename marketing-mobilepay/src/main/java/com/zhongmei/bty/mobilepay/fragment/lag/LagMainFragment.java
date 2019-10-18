@@ -14,9 +14,7 @@ import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.bty.basemodule.trade.manager.DinnerShopManager;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class LagMainFragment extends BasicFragment implements LoginListener {
     private final String TAG = LagMainFragment.class.getSimpleName();
@@ -24,11 +22,9 @@ public class LagMainFragment extends BasicFragment implements LoginListener {
     private String currentPhone;
 
     private Long mCustomerId;
-    //add 20160714 start
-    private IPaymentInfo mPaymentInfo;
+        private IPaymentInfo mPaymentInfo;
     private IDoLag mIDoLag;
-    private DoPayApi mDoPayApi;//add v8.9
-
+    private DoPayApi mDoPayApi;
     public void setPaymentInfo(IPaymentInfo iPaymentInfo) {
         this.mPaymentInfo = iPaymentInfo;
     }
@@ -80,11 +76,7 @@ public class LagMainFragment extends BasicFragment implements LoginListener {
         changeLoginFragment();
     }
 
-    /**
-     * 是否有登录用户
-     *
-     * @return 用户电话号码
-     */
+
     private String getCustomerPhoneNo() {
         boolean isDinner = mPaymentInfo.isDinner();
         if (isDinner) {
@@ -106,8 +98,7 @@ public class LagMainFragment extends BasicFragment implements LoginListener {
 
     private void toLagPayPage(CustomerResp customer) {
         LagPayFragment infoFragment = LagPayFragment.newInstance(mPaymentInfo, mDoPayApi);
-        infoFragment.setIDoPay(mIDoLag);//add 20161122
-        if (customer != null) {
+        infoFragment.setIDoPay(mIDoLag);        if (customer != null) {
             infoFragment.setCustomerInfo(customer);
         }
         replaceFragment(R.id.pay_lag_mainlayout, infoFragment, infoFragment.getClass().getSimpleName());
@@ -126,8 +117,7 @@ public class LagMainFragment extends BasicFragment implements LoginListener {
 
     @Override
     public void onCardSuccess(CustomerResp customer) {
-        // toLagPayPage();
-    }
+            }
 
     public void onEventMainThread(ActionClose close) {
         if (getActivity() == null) {

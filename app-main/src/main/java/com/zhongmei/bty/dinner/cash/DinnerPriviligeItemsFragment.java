@@ -70,9 +70,7 @@ import org.androidannotations.annotations.ViewById;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 结算项主界面，展示会员登录信息，积分和优惠卷等按钮
- */
+
 @EFragment(R.layout.fragment_dinner_priviliges)
 public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
     private static final String TAG = DinnerPriviligeItemsFragment.class.getSimpleName();
@@ -90,8 +88,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
     TextView tvCardNo;
 
     @ViewById(R.id.btn_check)
-    Button btnCheck;//切换按钮
-
+    Button btnCheck;
     @ViewById(R.id.tv_customer_info)
     TextView tvCustomerInfo;
 
@@ -168,31 +165,24 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         initCustomer(true);
     }
 
-    /**
-     * 根据业务类型，控制按钮显示
-     */
+
     private void controlShow() {
-        //联台主单不提供保存结算信息的功能
-        if (DinnerShopManager.getInstance().getShoppingCart().getOrder().isUnionMainTrade()) {
+                if (DinnerShopManager.getInstance().getShoppingCart().getOrder().isUnionMainTrade()) {
             layout_save.setVisibility(View.GONE);
         }
         BusinessType type = DinnerShopManager.getInstance().getShoppingCart().getOrder().getTrade().getBusinessType();
         if (type == BusinessType.GROUP || type == BusinessType.BUFFET) {
-            //团餐控制没有营销活动功能
-            layout_extra.setVisibility(View.GONE);
+                        layout_extra.setVisibility(View.GONE);
             mViewLine.setVisibility(View.GONE);
         }
-        //金诚没有会员登录
-        if (ServerSettingCache.getInstance().isJinChBusiness()) {
+                if (ServerSettingCache.getInstance().isJinChBusiness()) {
             viewPrivilegeSeperator.setVisibility(View.GONE);
             rlCustomerLogin.setVisibility(View.GONE);
         }
     }
 
     private void initCustomer(boolean isCancelMiniDisplay) {
-        //自助餐暂时不刷新会员信息
-//        BusinessType type = DinnerShopManager.getInstance().getShoppingCart().getOrder().getTrade().getBusinessType();
-        CustomerResp customer = DinnerShopManager.getInstance().getLoginCustomer();
+                CustomerResp customer = DinnerShopManager.getInstance().getLoginCustomer();
         if (customer != null) {
             if (customer.card == null) {
                 initPhoneCustomer(customer);
@@ -204,9 +194,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * 显示提示dialog
-     */
+
     private void showInputFaceDialog(final CustomerResp customer) {
         boolean isOpen = SpHelper.getDefault().getBoolean(SpHelper.IBEACON_REMIND, false);
         if (!isOpen || customer.hasFaceCode()) {
@@ -227,81 +215,19 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         builder.build().show(getFragmentManager(), "");
     }
 
-    /**
-     * 密码输入框
-     *
-     * @param inputNo
-     * @param customerId
-     */
-    /*
-    private void showPasswordDialog(final String mobile, final String inputNo, final Long customerId) {
-        CustomerManager.getInstance().showMemberPasswordDialog(getActivity(), inputNo, new CustomerManager.DinnerLoginListener() {
-            @Override
-            public void login(PasswordDialog dialog, int needPswd, String password) {
-                doVerifypassword(mobile, customerId + "", password, dialog);
-            }
-        });
-    }*/
-
-    /**
-     * 验证密码
-     */
-    /*
-    private void doVerifypassword(String mobile, String customerId, final String password, final PasswordDialog dialog) {
-        if (customerId != null) {
-            MemberLoginReq loginReq = new MemberLoginReq();
-            loginReq.setLoginId(customerId);
-            loginReq.setMobile(mobile);
-            loginReq.setPassword(password);
-            CustomerOperates customerOperate = OperatesFactory.create(CustomerOperates.class);
-            customerOperate.login(loginReq, LoadingResponseListener.ensure(new ResponseListener<MemberLoginResp>() {
-
-                @Override
-                public void onResponse(ResponseObject<MemberLoginResp> response) {
-                    if (ResponseObject.isOk(response)) {
-                        if (dialog != null) {
-                            dialog.dismiss();
-                        }
-                        inputFace();
-                    } else {
-                        if (dialog != null) {
-                            dialog.clean();
-                        }
-                        ToastUtil.showShortToast(response.getMessage());
-                    }
-                }
-
-                @Override
-                public void onError(VolleyError error) {
-                    ToastUtil.showShortToast(error.getMessage());
-                }
-
-            }, getFragmentManager()));
-        } else {
-            ToastUtil.showShortToast(R.string.pay_member_login_please);
-        }
-    }
-    */
 
 
-    /**
-     * 绑定顾客
-     */
+
+
+
+
+
+
     private void inputFace() {
-        /*boolean available= BaiduFaceRecognition.getInstance().checkFaceServer();
-        if(!available){
-            FacecognitionActivity.showFaceServerWarmDialog(getContext(),getChildFragmentManager());
-            return;
-        }
-        startActivityForResult(BaiduFaceRecognition.getInstance().getRegistFaceIntent(), FaceRequestCodeConstant.RC_PAY_BIND_FACE);*/
+
     }
 
-    /**
-     * 绑定顾客
-     *
-     * @param customer
-     * @param faceCode
-     */
+
     private void bindFace(CustomerResp customer, final String faceCode) {
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
         operates.bindCustomerFaceCode(customer.customerId, faceCode, new ResponseListener<BindCustomerFaceCodeResp>() {
@@ -331,12 +257,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         });
     }
 
-    /**
-     * 加载手机号会员信息
-     *
-     * @Title: initPhoneCustomer
-     * @Return void 返回类型
-     */
+
     private void initPhoneCustomer(CustomerResp customer) {
         rlCustomerLogin.setVisibility(View.GONE);
         rlCustomerInfo.setVisibility(View.VISIBLE);
@@ -347,7 +268,6 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
             tvCustomerName.setText(R.string.customer_no_name2);
         }
         if (customer.isMember()) {
-//            showInputFaceDialog(customer); // 屏蔽会员认证弹框
             tvCardNo.setText("");
             tvCardNo.setVisibility(View.GONE);
             btnCheck.setVisibility(View.VISIBLE);
@@ -394,10 +314,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * @Title: initCardCustomer
-     * @Return void 返回类型
-     */
+
     private void initCardCustomer(CustomerResp customer) {
         rlCustomerLogin.setVisibility(View.GONE);
         rlCustomerInfo.setVisibility(View.VISIBLE);
@@ -412,9 +329,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         btnCheck.setVisibility(View.GONE);
 
         if (!isNeedRefresh && card.getValueCardAccount() != null) {
-            Double value = null;// 余额
-            Long integral = null;// 积分
-            if (card.getValueCardAccount() != null) {
+            Double value = null;            Long integral = null;            if (card.getValueCardAccount() != null) {
                 value = card.getValueCardAccount().getRemainValue();
             }
             if (card.getIntegralAccount() != null) {
@@ -434,22 +349,15 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         }
     }
 
-    /**
-     * 移除会员信息，并清空相关的显示
-     */
+
     private void removeCustomerInfo() {
         removeCustomerInfo(true);
     }
 
-    /**
-     * 移除会员信息，并清空相关的显示
-     *
-     * @param isCancelMiniDisplay 是否清空副屏
-     */
+
     private void removeCustomerInfo(boolean isCancelMiniDisplay) {
         if (ServerSettingCache.getInstance().isJinChBusiness()) {
-            return; //金诚没有会员登录功能，直接返回。
-        }
+            return;         }
         if (isCancelMiniDisplay) {
             DisplayServiceManager.doCancel(mContext);
         }
@@ -473,9 +381,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         llCustomerPrivilege.setVisibility(View.GONE);
     }
 
-    /**
-     * 根据手机号查询会员信息
-     */
+
     private void loginByPhoneOrId(final CustomerResp customer) {
         ResponseListener<MemberLoginVoResp> listener = new ResponseListener<MemberLoginVoResp>() {
 
@@ -484,18 +390,14 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                 try {
                     if (ResponseObject.isOk(response) && MemberLoginVoResp.isOk(response.getContent())) {
                         CustomerLoginResp resp = response.getContent().getResult();
-                        if (resp.customerIsDisable()) {//当前账号冻结
-                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
+                        if (resp.customerIsDisable()) {                            ToastUtil.showShortToast(R.string.order_dish_member_disabled);
                             return;
                         }
                         CustomerResp customerNew = resp.getCustomer();
                         customerNew.setInitialValue();
                         customerNew.queryLevelRightInfos();
                         customerNew.needRefresh = false;
-                        DinnerShopManager.getInstance().setLoginCustomer(customerNew);// 设置会员
-                        DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(true, true);//设置会员折扣／会员价
-                        //构建并设置TradeCustomer
-                        TradeCustomer tradeCustomer = CustomerManager.getInstance().getTradeCustomer(customerNew);
+                        DinnerShopManager.getInstance().setLoginCustomer(customerNew);                        DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(true, true);                                                TradeCustomer tradeCustomer = CustomerManager.getInstance().getTradeCustomer(customerNew);
                         if (customerNew.card == null) {
                             if (customerNew.isMember()) {
                                 tradeCustomer.setCustomerType(CustomerType.MEMBER);
@@ -506,8 +408,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                             tradeCustomer.setCustomerType(CustomerType.CARD);
                             tradeCustomer.setEntitycardNum(customerNew.card.getCardNum());
                         }
-                        //获取之前的tradecustomer，把id和uuid等值赋值给新的tradecustomer，保证服务器不会重复存储同类型的tradecustomer
-                        TradeVo tradeVo = DinnerShopManager.getInstance().getShoppingCart().getOrder();
+                                                TradeVo tradeVo = DinnerShopManager.getInstance().getShoppingCart().getOrder();
                         TradeCustomer oldTradeCustomer = new DinnerCashManager().getTradeCustomer(tradeVo, tradeCustomer.getCustomerType());
                         if (oldTradeCustomer != null) {
                             tradeCustomer.setId(oldTradeCustomer.getId());
@@ -522,8 +423,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                             DinnerShoppingCart.getInstance().setDinnerCustomer(tradeCustomer);
                         }
                         DinnerShopManager.getInstance().getShoppingCart().setOpenIdenty(resp.getOpenId());
-                        //刷新会员信息的展示
-                        initPhoneCustomer(customerNew);
+                                                initPhoneCustomer(customerNew);
                     } else {
                         ToastUtil.showShortToast(response.getMessage());
                         removeCustomerInfo();
@@ -549,12 +449,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
 
     }
 
-    /**
-     * 使用实体卡号登录
-     *
-     * @Title: loginByCardNo
-     * @Return void 返回类型
-     */
+
     private void loginByCardNo(final String cardNo) {
         CustomerOperates operates = OperatesFactory.create(CustomerOperates.class);
         ResponseListener<LoyaltyMindTransferResp<NewCardLoginResp>> listener =
@@ -565,15 +460,12 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                         try {
                             if (ResponseObject.isOk(response)) {
                                 NewCardLoginResp resp = response.getContent().getData();
-                                //1表示loyaty登录成功
-                                if (response.getContent().isOk() && resp != null) {
-                                    // 设置card的名称，从customer中获得
-                                    EcCard card = resp.getCardInstance();
+                                                                if (response.getContent().isOk() && resp != null) {
+                                                                        EcCard card = resp.getCardInstance();
                                     CustomerV5 customerV5 = resp.getCustomerV5();
                                     card.setName(customerV5.getName());
                                     card.queryLevelSettingInfo();
-                                    // 如果valuecard为null时，给一个余额为0的对象，避免切换该界面时总是加载网络获取信息（只有新卡会为null）
-                                    EcValueCardAccount valueCardAccount = card.getValueCardAccount();
+                                                                        EcValueCardAccount valueCardAccount = card.getValueCardAccount();
                                     if (valueCardAccount == null) {
                                         valueCardAccount = new EcValueCardAccount();
                                         valueCardAccount.setRemainValue(0D);
@@ -584,8 +476,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                                         CustomerManager.getInstance().setCurrentCardIsPriceLimit(card.priceLimit == 2 ? true : false);
                                     }
                                     CustomerResp customerNew = resp.getCustomer();
-                                    // 重新设置拆单购物车实体卡登录对象，更新内容
-                                    DinnerShopManager.getInstance().setLoginCustomer(customerNew);
+                                                                        DinnerShopManager.getInstance().setLoginCustomer(customerNew);
                                     DinnerShopManager.getInstance().getShoppingCart().memberPrivilege(true, true);
                                     initCardCustomer(customerNew);
                                 } else {
@@ -610,14 +501,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         operates.cardLoginNew(cardNo, listener);
     }
 
-    /**
-     * 显示积分和储值
-     *
-     * @param valuecard 余额
-     * @param integral  积分
-     * @param levelName 等级名称
-     * @param level     等级
-     */
+
     private void showValuecardAndIntegral(Double valuecard, Long integral, String levelName, Long level) {
         if (valuecard == null) {
             valuecard = 0.0;
@@ -636,12 +520,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         showDisplayUserInfo(mContext);
     }
 
-    /**
-     * 显示积分和优惠券张数
-     *
-     * @param integral
-     * @param couponCount
-     */
+
     private void showIntegralAndCoupon(Long integral, int couponCount, boolean hasFaceCode, boolean isCard, int faceGrade) {
         viewTopSeparator.setVisibility(View.VISIBLE);
         llCustomerPrivilege.setVisibility(View.VISIBLE);
@@ -673,7 +552,6 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
             if (!hasFaceCode) {
                 tvFace.setTextColor(getResources().getColor(R.color.color_bcbcbc));
                 tvFace.setText(R.string.customer_face_regiest_off);
-//            rlFace.setEnabled(true);
             } else {
                 tvFace.setTextColor(getResources().getColor(R.color.coloc_FF6B6A));
                 if (faceGrade == 0) {
@@ -681,7 +559,6 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                 } else {
                     tvFace.setText(getString(R.string.customer_face_regiest_on) + faceGrade + getString(R.string.cent));
                 }
-//            rlFace.setEnabled(false);
             }
         }
 
@@ -690,9 +567,6 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
     @Click({R.id.btn_customer_login, R.id.btn_check, R.id.btn_exit_customer, R.id.rl_discount, R.id.rl_integral, R.id.rl_coupon,
             R.id.rl_extra_charge, R.id.rl_coupon_code, R.id.rl_market_activity, R.id.tv_fete, R.id.done_save_bt, R.id.rl_face, R.id.rl_memo, R.id.rl_customer_coupon})
     void click(View v) {
-//        if(ClickManager.getInstance().isClicked()){
-//            return;
-//        }
         CustomerResp customer;
         switch (v.getId()) {
             case R.id.btn_customer_login:
@@ -739,11 +613,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                 break;
             case R.id.rl_face:
                 MobclickAgentEvent.onEvent(UserActionCode.ZC030024);
-//                customer = DinnerShopManager.getInstance().getLoginCustomer();
-//                if (!customer.hasFaceCode() && !TextUtils.isEmpty(customer.mobile)){
                 inputFace();
-//                    showPasswordDialog(customer.mobile , customer.customerName , customer.customerId);
-//                }
                 break;
             case R.id.rl_extra_charge:
                 MobclickAgentEvent.onEvent(UserActionCode.ZC030006);
@@ -758,14 +628,12 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                 EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.MARKET_ACTIVITY));
                 break;
             case R.id.done_save_bt:
-                // 没有可结算品项不能跳转
-                MobclickAgentEvent.onEvent(UserActionCode.ZC030009);
+                                MobclickAgentEvent.onEvent(UserActionCode.ZC030009);
                 UserActionEvent.start(UserActionEvent.DINNER_PAY_ORDER_SAVE);
                 EventBus.getDefault().post(new ActionSaveData());
                 break;
             case R.id.rl_customer_coupon:
-                // 没有可结算品项不能跳转
-                customer = DinnerShopManager.getInstance().getLoginCustomer();
+                                customer = DinnerShopManager.getInstance().getLoginCustomer();
                 if (customer != null && customer.customerId != null) {
                     EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.CUSTOMER_COUPON, customer));
                 } else {
@@ -773,8 +641,7 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
                 }
                 break;
             case R.id.rl_memo:
-                // 喜欢/备注
-                EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.CUSTOMER_LIKE_REMARK));
+                                EventBus.getDefault().post(new ActionDinnerPrilivige(DinnerPriviligeType.CUSTOMER_LIKE_REMARK));
                 break;
             default:
                 break;
@@ -794,40 +661,21 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         }
     }
 
-    public void onEventMainThread(DisplayUserInfoEvent displayUserInfoEvent) {//add v8.9 解耦
-        showDisplayUserInfo(getActivity());
+    public void onEventMainThread(DisplayUserInfoEvent displayUserInfoEvent) {        showDisplayUserInfo(getActivity());
     }
 
-    // 第二屏显示用户信息
-    public static void showDisplayUserInfo(Context context) {
+        public static void showDisplayUserInfo(Context context) {
         CustomerResp customer = DinnerShopManager.getInstance().getLoginCustomer();
         if (customer != null) {
             if (customer.card == null) {
-                /*DisplayUserInfo userInfo =
-                        DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_USERINFO_SHOW,
-                                customer,
-                                customer.integral == null ? 0 : customer.integral,
-                                false, 0);
-                if(customer.mFaceFeatureVo!=null){
-                    userInfo.setFaceFeature(customer.mFaceFeatureVo.face,customer.mFaceFeatureVo.faceDesc
-                    ,customer.mFaceFeatureVo.faceScoreDesc,customer.mFaceFeatureVo.sex
-                    );
-                }
-                DisplayServiceManager.updateDisplay(context, userInfo);*/
+
             } else {
                 EcCard card = customer.card;
                 long integral = 0;
                 if (card.getIntegralAccount() != null && card.getIntegralAccount().getIntegral() != null) {
                     integral = card.getIntegralAccount().getIntegral();
                 }
-                /*DisplayUserInfo userInfo =
-                        DisplayServiceManager.buildDUserInfo(DisplayUserInfo.COMMAND_USERINFO_SHOW, card, integral, false, 0);
-                if(customer.mFaceFeatureVo!=null){
-                    userInfo.setFaceFeature(customer.mFaceFeatureVo.face,customer.mFaceFeatureVo.faceDesc
-                            ,customer.mFaceFeatureVo.faceScoreDesc,customer.mFaceFeatureVo.sex
-                    );
-                }
-                DisplayServiceManager.updateDisplay(context, userInfo);*/
+
             }
         }
     }
@@ -838,12 +686,6 @@ public class DinnerPriviligeItemsFragment extends MobclickAgentFragment {
         super.onDestroy();
     }
 
-    /*@Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FaceRequestCodeConstant.RC_PAY_BIND_FACE && resultCode == Activity.RESULT_OK) {
-            bindFace(DinnerShopManager.getInstance().getLoginCustomer(), data.getStringExtra(BaiduFaceRecognition.KEY_FACE_CODE));
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }*/
+
 
 }

@@ -4,39 +4,21 @@ import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.db.R;
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum DishMakeStatus implements ValueEnum<Integer> {
 
-    /**
-     * 等待中
-     */
+
     WAITING(0, R.string.commonmodule_dinner_waiting),
-    /**
-     * 配菜中
-     */
+
     MATCHING(1, R.string.commonmodule_dinner_jardiniering),
-    /**
-     * 制作中
-     */
+
     MAKING(2, R.string.commonmodule_dinner_cooking),
-    /**
-     * 已完成
-     */
+
     FINISHED(3, R.string.commonmodule_dinner_finished),
-    /**
-     * 已作废
-     */
+
     CANCELED(4, R.string.commonmodule_dinner_canceded),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

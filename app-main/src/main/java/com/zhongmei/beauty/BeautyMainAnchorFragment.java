@@ -29,9 +29,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_main_activity_anchor)
 public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNotifyCache.BeautyNotifyListener,XRadioGroup.OnCheckedChangeListener{
 
@@ -58,8 +56,7 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
         this.mBeautyAnchor = iAnchor;
     }
 
-    private int preCheckedResId;//上一次选中的id
-
+    private int preCheckedResId;
 
     @AfterViews
     public void init() {
@@ -70,11 +67,7 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
         rg_mundleAnchor.setOnCheckedChangeListener(this);
     }
 
-    /**
-     * 设置服务员信息
-     *
-     * @param authUser
-     */
+
     public void setWaiterInfo(AuthUser authUser) {
         if (authUser != null) {
             tv_waiter.setText(authUser.getName());
@@ -138,8 +131,7 @@ public class BeautyMainAnchorFragment extends BasicFragment implements BeautyNot
     private void hideTip(){
         if(tv_taskNumberTip!=null){
             tv_taskNumberTip.setVisibility(View.GONE);
-            tv_taskNumberTip.setTag(R.id.tv_task_number_tip,true);//点击之后不在显示
-        }
+            tv_taskNumberTip.setTag(R.id.tv_task_number_tip,true);        }
     }
 
     @Override

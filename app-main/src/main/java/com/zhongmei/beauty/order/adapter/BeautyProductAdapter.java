@@ -13,10 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 美业产品/服务 展示adapter
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyProductAdapter extends OrderDishAdapter {
     public BeautyProductAdapter(Context context, List<DishVo> dishList, int columns) {
@@ -42,7 +39,6 @@ public class BeautyProductAdapter extends OrderDishAdapter {
 
     @Override
     protected int getPlaceBg(ViewHolder holder) {
-//        holder.topView.setVisibility(View.GONE);
         return R.drawable.beauty_card_empty;
     }
 
@@ -58,15 +54,12 @@ public class BeautyProductAdapter extends OrderDishAdapter {
 
     @Override
     protected void controlViewVisible(ViewHolder holder, DishVo dishVo) {
-//        holder.topView.setVisibility(View.VISIBLE);
         if (dishVo.isClear()) {
-//            holder.topView.setBackgroundResource(R.drawable.beauty_grid_item_topview_clear_bg);
             holder.tvResidue.setTextColor(mContext.getResources().getColor(R.color.beauty_color_BCBCBC));
             holder.tvShortName.setTextColor(mContext.getResources().getColor(R.color.beauty_color_BCBCBC));
             holder.tvMarketPrice.setTextColor(mContext.getResources().getColor(R.color.beauty_color_BCBCBC));
         } else {
             holder.tvShortName.setTextColor(mContext.getResources().getColor(R.color.beauty_color_434343));
-//            holder.topView.setBackgroundResource(R.drawable.beauty_grid_item_topview_bg);
             holder.tvResidue.setTextColor(mContext.getResources().getColor(R.color.beauty_color_6E8DFF));
             holder.tvMarketPrice.setTextColor(mContext.getResources().getColor(R.color.beauty_color_FF666666));
         }

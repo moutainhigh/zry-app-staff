@@ -44,9 +44,7 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EActivity(R.layout.beauty_setting_layout)
 public class BeautySettingActivity extends BaseActivity {
 
@@ -55,63 +53,46 @@ public class BeautySettingActivity extends BaseActivity {
     public static final String INTENT_TAG = "intent_tag";
 
     public static final String PHONE = "phone";
-    public static final String CASHIERMANAGER = "cashierManager";//收银点管理
-    public static final String LABEL = "label";//标签
-    public static final String TICKETPROT = "ticketPort";//出票口
-
-    // 打印机
-    @ViewById(R.id.Seting_printer)
+    public static final String CASHIERMANAGER = "cashierManager";    public static final String LABEL = "label";    public static final String TICKETPROT = "ticketPort";
+        @ViewById(R.id.Seting_printer)
     TextView printer;
 
-    // 钱箱
-    @ViewById(R.id.Seting_moneyBox)
+        @ViewById(R.id.Seting_moneyBox)
     TextView moneyBox;
 
-    // 扫描枪
-    @ViewById(R.id.Seting_scanner)
+        @ViewById(R.id.Seting_scanner)
     TextView scanner;
 
-    //指定设备接收网络订单
-    @ViewById(R.id.tv_setting_order_display_device)
+        @ViewById(R.id.tv_setting_order_display_device)
     TextView tvSettingOrderDisplayDevice;
 
-    // 支付方式设置
-    @ViewById(R.id.Setting_PayModelOrder)
+        @ViewById(R.id.Setting_PayModelOrder)
     TextView payModelTV;
-    //组合支付方式开关
-    @ViewById(R.id.Setting_GroupPay)
+        @ViewById(R.id.Setting_GroupPay)
     TextView groupPaySetTV;
 
-    // 通知中心
-    @ViewById(R.id.Seting_notifity)
+        @ViewById(R.id.Seting_notifity)
     TextView nofify;
 
-    // 基础设置
-    @ViewById(R.id.setting_basic)
+        @ViewById(R.id.setting_basic)
     TextView mBasicSetting;
 
-    // 收银点管理
-    @ViewById(R.id.Setting_CashierPointManagement)
+        @ViewById(R.id.Setting_CashierPointManagement)
     TextView mCashierPointManagement;
 
-    // 后厨管理
-    @ViewById(R.id.Setting_KitchenManagement)
+        @ViewById(R.id.Setting_KitchenManagement)
     TextView mKitchenManagement;
 
-    // 票据样式
-    @ViewById(R.id.Seting_ticketStyle)
+        @ViewById(R.id.Seting_ticketStyle)
     TextView mTicketStyle;
 
-    //票据样式管理
-    @ViewById(R.id.Seting_customization)
+        @ViewById(R.id.Seting_customization)
     TextView mCustomization;
 
-    // 标签
-    @ViewById(R.id.Seting_Labelingmachine)
+        @ViewById(R.id.Seting_Labelingmachine)
     TextView labelingMachine;
 
-    // 流水号设置
-    @ViewById(R.id.Seting_Document)
+        @ViewById(R.id.Seting_Document)
     TextView settingDocument;
 
     @ViewById(R.id.Seting_Table_Number)
@@ -129,71 +110,56 @@ public class BeautySettingActivity extends BaseActivity {
     @ViewById(R.id.tv_prepay_setting)
     TextView tvPrepaySetting;
 
-    // 定时打印
-    @ViewById(R.id.Seting_timingPrint)
+        @ViewById(R.id.Seting_timingPrint)
     TextView timingPrint;
 
-    //接单设置分割线
-    @ViewById(R.id.v_snack_order_accept)
+        @ViewById(R.id.v_snack_order_accept)
     View vSnackOrderAccept;
 
-    //接单设置
-    @ViewById(R.id.tv_snack_order_accept)
+        @ViewById(R.id.tv_snack_order_accept)
     TextView tvSnackOrderAccept;
 
-    //接单设置分割线
-    @ViewById(R.id.v_dinner_order_accept)
+        @ViewById(R.id.v_dinner_order_accept)
     View vDinnerOrderAccept;
 
-    //接单设置
-    @ViewById(R.id.tv_dinner_order_accept)
+        @ViewById(R.id.tv_dinner_order_accept)
     TextView tvDinnerOrderAccept;
-    //交接方式设置分割线
-    @ViewById(R.id.v_snack_handover_type)
+        @ViewById(R.id.v_snack_handover_type)
     View vHandoverType;
-    //交接方式设置
-    @ViewById(R.id.tv_snack_handover_type)
+        @ViewById(R.id.tv_snack_handover_type)
     TextView tvHandoverType;
 
     @ViewById(R.id.tv_dinner_menu_setting)
     TextView tvDinnerMenuSetting;
 
-    // 商户信息
-    @ViewById(R.id.Seting_customerInfo)
+        @ViewById(R.id.Seting_customerInfo)
     TextView customerInfo;
 
-    // 版本信息
-    @ViewById(R.id.Seting_verionInfo)
+        @ViewById(R.id.Seting_verionInfo)
     TextView verionInfo;
 
     @ViewById(R.id.iv_update_remind)
     ImageView iv_updateRemind;
 
-    // 系统日志
-    @ViewById(R.id.Seting_systemJournal)
+        @ViewById(R.id.Seting_systemJournal)
     TextView systemJournal;
 
     @ViewById(R.id.setting_title)
     TextView title;
 
-    // 预定常用开关
-    @ViewById(R.id.book_switch)
+        @ViewById(R.id.book_switch)
     TextView bookCommonSwitch;
 
-    // 常用开关
-    @ViewById(R.id.queue_common_switch)
+        @ViewById(R.id.queue_common_switch)
     TextView queueCommonSwitch;
 
-    // 排队管理
-    @ViewById(R.id.queue_manager)
+        @ViewById(R.id.queue_manager)
     TextView queueManager;
 
-    // 排队管理
-    @ViewById(R.id.voice_manager)
+        @ViewById(R.id.voice_manager)
     TextView voiceManager;
 
-    // 蓝牙电话
-    @ViewById(R.id.Seting_blue_phone)
+        @ViewById(R.id.Seting_blue_phone)
     TextView phoneManager;
 
     TextView textView = null;
@@ -218,8 +184,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, printer);
             setCurrentStyle(printer);
-            //switchFragment(R.id.right_container1, new NetPrinterListFragment_(), printer);
-            textView = printer;
+                        textView = printer;
         }
     }
 
@@ -281,8 +246,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, phoneManager);
             setCurrentStyle(phoneManager);
-            //switchFragment(R.id.right_container1, new PhoneSettingFragment_(), phoneManager);
-            textView = phoneManager;
+                        textView = phoneManager;
         }
     }
 
@@ -292,8 +256,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, nofify);
             setCurrentStyle(nofify);
-            //switchFragment(R.id.right_container1, new NotifySettingFragment_(), nofify);
-            textView = nofify;
+                        textView = nofify;
         }
     }
 
@@ -315,9 +278,7 @@ public class BeautySettingActivity extends BaseActivity {
             changeLastStyle(textView, mCashierPointManagement);
             setCurrentStyle(mCashierPointManagement);
             Bundle bundle = new Bundle();
-            //bundle.putInt(KitchenTicketOutletListFragment.S_TICKET_TYPE, KitchenTicketOutletListFragment.S_CASHIER_POINT_TYPE);
-            //switchFragment(R.id.right_container1, new KitchenTicketOutletListFragment_(), mCashierPointManagement, bundle);
-            textView = mCashierPointManagement;
+                                    textView = mCashierPointManagement;
         }
     }
 
@@ -338,8 +299,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, mTicketStyle);
             setCurrentStyle(mTicketStyle);
-            //switchFragment(R.id.right_container1, new PrintTicketStyleListFragment_(), mTicketStyle);
-            textView = mTicketStyle;
+                        textView = mTicketStyle;
         }
     }
 
@@ -349,10 +309,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, mCustomization);
             setCurrentStyle(mCustomization);
-            //CustomizationManagerFragment fragment = new CustomizationManagerFragment_();
-            //fragment.setFromType(CustomizationManagerFragment.FROM_TYPE_RETAIL);
-            //switchFragment(R.id.right_container1, fragment, mCustomization);
-            textView = mCustomization;
+                                                textView = mCustomization;
         }
     }
 
@@ -362,8 +319,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, labelingMachine);
             setCurrentStyle(labelingMachine);
-            //switchFragment(R.id.right_container1, new PrintLabelListFragment_(), labelingMachine);
-            textView = labelingMachine;
+                        textView = labelingMachine;
         }
     }
 
@@ -373,8 +329,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, settingDocument);
             setCurrentStyle(settingDocument);
-            //switchFragment(R.id.right_container1, new DocumentSettingFragment_(), settingDocument);
-            textView = settingDocument;
+                        textView = settingDocument;
         }
     }
 
@@ -396,9 +351,7 @@ public class BeautySettingActivity extends BaseActivity {
             changeLastStyle(textView, mKitchenManagement);
             setCurrentStyle(mKitchenManagement);
             Bundle bundle = new Bundle();
-            //bundle.putInt(KitchenTicketOutletListFragment.S_TICKET_TYPE, KitchenTicketOutletListFragment.S_TICKET_OUTLET_TYPE);
-            //switchFragment(R.id.right_container1, new KitchenTicketOutletListFragment_(), mKitchenManagement, bundle);
-            textView = mKitchenManagement;
+                                    textView = mKitchenManagement;
         }
     }
 
@@ -408,8 +361,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, mLayoutOption);
             setCurrentStyle(mLayoutOption);
-            //switchFragment(R.id.right_container1, new LayoutOptionFragment_(), mLayoutOption);
-            textView = mLayoutOption;
+                        textView = mLayoutOption;
         }
     }
 
@@ -419,8 +371,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, mLayoutItemSettings);
             setCurrentStyle(mLayoutItemSettings);
-            //switchFragment(R.id.right_container1, new LayoutItemSettingsFragment_(), mLayoutItemSettings);
-            textView = mLayoutItemSettings;
+                        textView = mLayoutItemSettings;
         }
     }
 
@@ -441,8 +392,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, tvDinnerLayoutOption);
             setCurrentStyle(tvDinnerLayoutOption);
-            //switchFragment(R.id.right_container1, new DinnerLayoutOptionFragment_(), tvDinnerLayoutOption);
-            textView = tvDinnerLayoutOption;
+                        textView = tvDinnerLayoutOption;
         }
     }
 
@@ -457,8 +407,7 @@ public class BeautySettingActivity extends BaseActivity {
         }
     }
 
-    //接单设置点击
-    @UiThread
+        @UiThread
     @Click(R.id.tv_snack_order_accept)
     public void snackOrderAcceptClick() {
         if (!ClickManager.getInstance().isClicked()) {
@@ -480,8 +429,7 @@ public class BeautySettingActivity extends BaseActivity {
         }
     }
 
-    //正餐接单设置点击
-    @UiThread
+        @UiThread
     @Click(R.id.tv_dinner_order_accept)
     public void dinnerOrderAcceptClick() {
         if (!ClickManager.getInstance().isClicked()) {
@@ -557,7 +505,6 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, queueCommonSwitch);
             setCurrentStyle(queueCommonSwitch);
-            //switchFragment(R.id.right_container1, new QueueSettingSwitchFragment_(), queueCommonSwitch);
 
             textView = queueCommonSwitch;
         }
@@ -569,7 +516,6 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, queueManager);
             setCurrentStyle(queueManager);
-            //switchFragment(R.id.right_container1, new QueueSettingFragment_(), queueManager);
 
             textView = queueManager;
         }
@@ -581,14 +527,12 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, voiceManager);
             setCurrentStyle(voiceManager);
-            //switchFragment(R.id.right_container1, new SpeechSynthesisSettingFragment_(), voiceManager);
 
             textView = voiceManager;
         }
     }
 
-    //改变上次点击的TextView的背景颜色以及字体颜色
-    private void changeLastStyle(TextView view1, TextView view2) {
+        private void changeLastStyle(TextView view1, TextView view2) {
         if (view1 != null && view1 != view2) {
             Resources res = getResources();
             view1.setBackgroundColor(res.getColor(R.color.settings_normalback));
@@ -596,8 +540,7 @@ public class BeautySettingActivity extends BaseActivity {
         }
     }
 
-    //设置当前的TextView的背景颜色以及字体颜色
-    private void setCurrentStyle(TextView view) {
+        private void setCurrentStyle(TextView view) {
         if (textView != view) {
             Resources res = getResources();
             view.setBackgroundColor(res.getColor(R.color.settings_biueword));
@@ -612,23 +555,18 @@ public class BeautySettingActivity extends BaseActivity {
         String tag = getIntent().getStringExtra(INTENT_TAG);
         if (TextUtils.equals(tag, PHONE)) {
             callSettingClick();
-        } else if (TextUtils.equals(tag, CASHIERMANAGER)) {//收银点
-            setCashierPointManagement();
-        } else if (TextUtils.equals(tag, LABEL)) {//标签
-            setscanningGun();
-        } else if (TextUtils.equals(tag, TICKETPROT)) {//出票口
-            setKitchenManagement();
+        } else if (TextUtils.equals(tag, CASHIERMANAGER)) {            setCashierPointManagement();
+        } else if (TextUtils.equals(tag, LABEL)) {            setscanningGun();
+        } else if (TextUtils.equals(tag, TICKETPROT)) {            setKitchenManagement();
         }
 
         mTicketStyle.setVisibility(View.GONE);
         mCustomization.setVisibility(View.VISIBLE);
-        // 在设置界面添加修复收银点信息
-        CashierPointManager.getInstance().modifyCashierPointPrinterDeviceId(false);
+                CashierPointManager.getInstance().modifyCashierPointPrinterDeviceId(false);
     }
 
 
-    //点击切换fragemnt
-    private void switchFragment(int containerId, Fragment fragment, TextView view) {
+        private void switchFragment(int containerId, Fragment fragment, TextView view) {
         if (textView != view) {
             try {
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -640,8 +578,7 @@ public class BeautySettingActivity extends BaseActivity {
         }
     }
 
-    //适用于给Fragment提供参数的切换
-    private void switchFragment(int containerId, Fragment fragment, TextView view, Bundle bundle) {
+        private void switchFragment(int containerId, Fragment fragment, TextView view, Bundle bundle) {
         fragment.setArguments(bundle);
         switchFragment(containerId, fragment, view);
     }

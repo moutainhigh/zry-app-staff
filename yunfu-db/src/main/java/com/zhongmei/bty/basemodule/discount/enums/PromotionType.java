@@ -2,33 +2,20 @@ package com.zhongmei.bty.basemodule.discount.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * @date:2016年4月27日下午3:12:52
- */
-public enum PromotionType implements ValueEnum<Integer> {
-    //	(1-立减，2-折扣，3-赠送，4-特价)
-    MINUS(1), //立减
-    DISCOUNT(2), //折扣
-    GIFT(3),//赠送
-    SPECAILPRICE(4), //特价
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+public enum PromotionType implements ValueEnum<Integer> {
+        MINUS(1),     DISCOUNT(2),     GIFT(3),    SPECAILPRICE(4),
+
     @Deprecated __UNKNOWN__;
 
     private final Helper<Integer> helper;
 
     private PromotionType(Integer value) {
-        // TODO Auto-generated constructor stub
-        helper = Helper.valueHelper(value);
+                helper = Helper.valueHelper(value);
     }
 
     private PromotionType() {
-        // TODO Auto-generated constructor stub
-        helper = Helper.unknownHelper();
+                helper = Helper.unknownHelper();
     }
 
     @Override

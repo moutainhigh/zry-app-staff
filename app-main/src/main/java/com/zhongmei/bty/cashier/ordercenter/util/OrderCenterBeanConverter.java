@@ -101,8 +101,7 @@ public class OrderCenterBeanConverter {
             order.setOrderType(1);
             order.setOrderNo(tradeVo.getTrade().getTradeNo());
             order.setOrderId(tradeVo.getTrade().getId());
-            //list不会很大，不考虑效率问题
-            if (!ArgsUtils.isEmpty(deliveryFees)) {
+                        if (!ArgsUtils.isEmpty(deliveryFees)) {
                 for (BatchDeliveryFee deliveryFee : deliveryFees) {
                     if (order.getOrderId().equals(deliveryFee.getTradeId())) {
                         order.setDeliveryFee(deliveryFee.getFee());

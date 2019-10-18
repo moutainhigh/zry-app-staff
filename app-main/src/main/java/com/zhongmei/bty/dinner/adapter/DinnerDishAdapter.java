@@ -12,13 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2015年9月6日 上午9:39:50
- * @Description: 正餐菜品首页适配器
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class DinnerDishAdapter extends OrderDishAdapter {
 
     private int currentSelected;
@@ -66,11 +60,5 @@ public class DinnerDishAdapter extends OrderDishAdapter {
         return name;
     }
 
-	/*
 
-	@Override
-	protected int getItemLayoutResId() {
-		return R.layout.dinner_dish_grid_item;
-	}
-*/
 }

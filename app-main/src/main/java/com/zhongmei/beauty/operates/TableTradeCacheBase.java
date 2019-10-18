@@ -18,10 +18,7 @@ import com.zhongmei.yunfu.db.enums.TradeType;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- * 桌台订单缓存
- */
+
 
 public abstract class TableTradeCacheBase {
 
@@ -43,13 +40,7 @@ public abstract class TableTradeCacheBase {
         DBHelperManager.releaseHelper(helper);
     }
 
-    /**
-     * 根据区域id查询桌台信息(桌台id,桌台状态，桌台更新时间)
-     *
-     * @param zoneId
-     * @return
-     * @throws Exception
-     */
+
     protected List<Tables> getTablesByZoneID(DatabaseHelper dbHelper, Long zoneId) throws Exception {
         Dao<Tables, Long> tablesDao = dbHelper.getDao(Tables.class);
         QueryBuilder queryBuild = tablesDao.queryBuilder();
@@ -66,13 +57,7 @@ public abstract class TableTradeCacheBase {
     }
 
 
-    /**
-     * 根据桌台返回tradeTables(tradeTables表所有字段)
-     *
-     * @param dbHelper
-     * @param tableIds
-     * @return
-     */
+
     protected List<TradeTable> getTradeTableByTables(DatabaseHelper dbHelper, List<Long> tableIds) throws Exception {
         Dao<TradeTable, String> tradeTableDao = dbHelper.getDao(TradeTable.class);
         return tradeTableDao.queryBuilder()
@@ -84,14 +69,7 @@ public abstract class TableTradeCacheBase {
     }
 
 
-    /**
-     * 根据订单id查询订单列表
-     *
-     * @param dbHelper
-     * @param tradeIds
-     * @return
-     * @throws Exception
-     */
+
     protected List<Trade> getTradeByTradeIds(DatabaseHelper dbHelper, List<Long> tradeIds) throws Exception {
         Dao<Trade, String> tradeDao = dbHelper.getDao(Trade.class);
         QueryBuilder tradeBuilder = tradeDao.queryBuilder();

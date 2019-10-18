@@ -6,18 +6,14 @@ import com.zhongmei.yunfu.db.IdEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 @DatabaseTable(tableName = "loyt_mrule_activity_dish")
 public class LoytMruleActivityDish extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "loyt_mrule_activity_dish"
-     */
+
     public interface $ extends IdEntityBase.$ {
         public static final String brandId = "brand_id";
         public static final String planId = "plan_id";
@@ -207,8 +203,7 @@ public class LoytMruleActivityDish extends IdEntityBase {
 
     @Override
     public boolean isValid() {
-        return validFlag == 1;//1有效，0无效
-    }
+        return validFlag == 1;    }
 
     @Override
     public Long verValue() {

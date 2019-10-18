@@ -34,27 +34,16 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- * 管理美业通知
- * 如：到店人数，预约单数，订单数等
- */
+
 
 public class BeautyNotifyCache {
 
-    //刷新模块-预定
-    public static final int MODULE_RESERVER = 0x01;
-    //刷新模块-订单
-    public static final int MODULE_TRADES = 0x02;
+        public static final int MODULE_RESERVER = 0x01;
+        public static final int MODULE_TRADES = 0x02;
 
     private static BeautyNotifyCache mNotifyCache;
-    private Set<BeautyNotifyListener> mNotifyListenerSet; //通知回掉监听集合
-    private WorkerHandler mWorkerHandler; //工作线程
-    private HandlerThread mHandlerThread;
-    private BeautyTradeChangeObserver mObserver; //数据改变监听
-    private BeautyTradeDataManager mTradeManager; //订单查询管理
-    private BeautyDataListener mBeautyDataListener;//数据刷新
-
+    private Set<BeautyNotifyListener> mNotifyListenerSet;     private WorkerHandler mWorkerHandler;     private HandlerThread mHandlerThread;
+    private BeautyTradeChangeObserver mObserver;     private BeautyTradeDataManager mTradeManager;     private BeautyDataListener mBeautyDataListener;
     private int mRefreshModule = MODULE_RESERVER;
 
     private BeautyNotifyEntity mNotifyEntity = new BeautyNotifyEntity();
@@ -96,9 +85,7 @@ public class BeautyNotifyCache {
         this.mBeautyDataListener = mBeautyDataListener;
     }
 
-    /**
-     * 启动查询
-     */
+
     public void start() {
         if (mWorkerHandler != null) {
             mWorkerHandler.sendEmptyMessage(WorkerHandler.WHAT_QUERY_NOTIFY);
@@ -108,8 +95,7 @@ public class BeautyNotifyCache {
 
     public void startModuleCache(int module) {
         this.mRefreshModule = module;
-        //刷新数据
-        switch (module) {
+                switch (module) {
             case MODULE_RESERVER:
                 break;
             case MODULE_TRADES:
@@ -118,11 +104,7 @@ public class BeautyNotifyCache {
         }
     }
 
-    /**
-     * 查询美业通知
-     *
-     * @return
-     */
+
     private BeautyNotifyEntity queryBeautyNotify() {
         DatabaseHelper helper = DBHelperManager.getHelper();
         try {
@@ -142,9 +124,7 @@ public class BeautyNotifyCache {
         return mNotifyEntity;
     }
 
-    /**
-     * 获取今日任务数量
-     */
+
     private void getTodayTaskNumber(){
         YFResponseListener listener = new YFResponseListener<YFResponseList<TaskRemind>>() {
 
@@ -165,10 +145,7 @@ public class BeautyNotifyCache {
         mTradeManager.getTaskNumberSync(listener);
     }
 
-    /**
-     * 刷新通知数据
-     * 例如订单数量，预约数量等
-     */
+
     private void refreshNotify() {
         BeautyNotifyEntity notifyEntity = queryBeautyNotify();
         if (mNotifyListenerSet != null) {
@@ -179,10 +156,7 @@ public class BeautyNotifyCache {
         }
     }
 
-    /**
-     * 刷新任务数量
-     * @param taskNumber
-     */
+
     private void refreshTaskNotify(int taskNumber){
         mNotifyEntity.setTaskNumber(taskNumber);
         if (mNotifyListenerSet != null) {
@@ -193,9 +167,7 @@ public class BeautyNotifyCache {
         }
     }
 
-    /**
-     * 刷新订单数据
-     */
+
     private void refreshTrades() {
         List<UnpaidTradeVo> listTrades = mTradeManager.queryUnpaidTrades(BusinessType.BEAUTY);
         if (mBeautyDataListener != null) {
@@ -274,14 +246,10 @@ public class BeautyNotifyCache {
     }
 
     public interface BeautyDataListener {
-        /**
-         * 刷新预定订单信息
-         */
+
         public void refreshReserverTrade();
 
-        /**
-         * 刷新订单信息
-         */
+
         public void refreshTrade(List<UnpaidTradeVo> beautyTradeVos);
     }
 }

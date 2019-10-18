@@ -14,9 +14,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(resName = "slidemenu_group_left_menu")
 public class GroupSlideMenuView extends SlideMenuView {
 

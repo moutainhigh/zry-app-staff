@@ -53,9 +53,7 @@ import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * 菜品备注页
- */
+
 @EViewGroup(R.layout.cashier_remark_layout)
 public class RemarkView extends LinearLayout {
     private static final String TAG = RemarkView.class.getSimpleName();
@@ -81,33 +79,25 @@ public class RemarkView extends LinearLayout {
     @Bean
     ExtraOrderAdapter mExtraOrderAdapter;
 
-    private boolean isOrderRemark = true;//默认是整单备注
-
+    private boolean isOrderRemark = true;
     private OrderDishInterfaceListener listener;
 
     protected ShopcartItemBase shopcartItem;
 
-    /**
-     * 常用整单备注
-     */
+
     private List<String> mCommonTradeRemarks;
 
     private String orderRemark;
 
-    /**
-     * 常用单品备注
-     */
+
     private List<String> mCommonDishRemarks;
 
     private String dishRemark;
 
-    // v8.3 添加备注选项
-    private IPanelItemSettings iPanelItemSettings;
+        private IPanelItemSettings iPanelItemSettings;
 
-    // v8.3 整单备注
-    public static final int REMARK_ORDER = 0;
-    // v8.3 单品备注
-    public static final int REMARK_DISH = 1;
+        public static final int REMARK_ORDER = 0;
+        public static final int REMARK_DISH = 1;
 
     private TextWatcher mTextWatcher = new TextWatcher() {
         @Override
@@ -135,13 +125,7 @@ public class RemarkView extends LinearLayout {
         }
     };
 
-    /*private BaseDataManager<OrderMemo> mTradeMemoManager = new BaseDataManager<OrderMemo>(OrderMemo.class) {
 
-        @Override
-        protected String getSelection() {
-            return super.getSelection() + " and memoContent is not null";
-        }
-    };*/
 
     public RemarkView(Context context, ShopcartItemBase shopcartItem, String orderRemark, boolean isOrderRemark) {
         super(context);
@@ -224,8 +208,7 @@ public class RemarkView extends LinearLayout {
             tvOrderRemark.setTextColor(getResources().getColor(R.color.text_white));
             tvSingleRemark.setBackgroundResource(R.drawable.discount_right_nomail);
             tvSingleRemark.setTextColor(getResources().getColor(R.color.text_blue));
-            //设置已有备注
-            etRemark.setText(orderRemark);
+                        etRemark.setText(orderRemark);
             etRemark.setSelection(etRemark.getText().length());
             iPanelItemSettings.setSnackRemarkType(REMARK_ORDER);
             loadTradeRemark();
@@ -234,8 +217,7 @@ public class RemarkView extends LinearLayout {
             tvOrderRemark.setTextColor(getResources().getColor(R.color.text_blue));
             tvSingleRemark.setBackgroundResource(R.drawable.discount_right_selected);
             tvSingleRemark.setTextColor(getResources().getColor(R.color.text_white));
-            //设置已有备注
-            etRemark.setText(dishRemark);
+                        etRemark.setText(dishRemark);
             etRemark.setSelection(etRemark.getText().length());
             iPanelItemSettings.setSnackRemarkType(REMARK_DISH);
             loadDishRemark();
@@ -244,9 +226,7 @@ public class RemarkView extends LinearLayout {
         etRemark.addTextChangedListener(mTextWatcher);
     }
 
-    /**
-     * 加载整单常用备注
-     */
+
     private void loadTradeRemark() {
         AsyncTask<Void, Void, List<String>> asyncTask = new AsyncTask<Void, Void, List<String>>() {
             @Override
@@ -283,9 +263,7 @@ public class RemarkView extends LinearLayout {
         }
     }
 
-    /**
-     * 加载单品常用备注
-     */
+
     private void loadDishRemark() {
         @SuppressLint("StaticFieldLeak")
         AsyncTask<Void, Void, List<String>> asyncTask = new AsyncTask<Void, Void, List<String>>() {
@@ -344,12 +322,7 @@ public class RemarkView extends LinearLayout {
         }
     }
 
-    /**
-     * 套餐明细的属性数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月20日
-     */
+
     private static class SetmealPropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;
@@ -365,12 +338,7 @@ public class RemarkView extends LinearLayout {
 
     }
 
-    /**
-     * 单品或套餐的属性数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月15日
-     */
+
     private static class DishPropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;
@@ -400,8 +368,7 @@ public class RemarkView extends LinearLayout {
                 tvSingleRemark.setBackgroundResource(R.drawable.discount_right_nomail);
                 tvSingleRemark.setTextColor(getResources().getColor(R.color.text_blue));
 
-                //刷新常用备注
-                if (mCommonTradeRemarks != null) {
+                                if (mCommonTradeRemarks != null) {
                     if (mExtraOrderAdapter != null) {
                         mExtraOrderAdapter.setItems(mCommonTradeRemarks);
                     }
@@ -409,19 +376,16 @@ public class RemarkView extends LinearLayout {
                     loadTradeRemark();
                 }
 
-                //设置已有备注
-                etRemark.setText(orderRemark);
+                                etRemark.setText(orderRemark);
                 etRemark.setSelection(etRemark.getText().length());
-                // v8.3 保存状态
-                iPanelItemSettings.setSnackRemarkType(REMARK_ORDER);
+                                iPanelItemSettings.setSnackRemarkType(REMARK_ORDER);
                 break;
             case R.id.tv_single_remark:
                 if (ClickManager.getInstance().isClicked()) {
                     return;
                 }
 
-                // 单品备注使用数
-                MobclickAgentEvent.onEvent(getContext(), MobClick.SNACK_ORDER_GOODS_SINGLE_REMARK);
+                                MobclickAgentEvent.onEvent(getContext(), MobClick.SNACK_ORDER_GOODS_SINGLE_REMARK);
 
                 if (shopcartItem == null) {
                     ToastUtil.showShortToast(R.string.please_select_food);
@@ -434,8 +398,7 @@ public class RemarkView extends LinearLayout {
                 tvSingleRemark.setBackgroundResource(R.drawable.discount_right_selected);
                 tvSingleRemark.setTextColor(getResources().getColor(R.color.text_white));
 
-                //刷新常用备注
-                if (mCommonDishRemarks != null) {
+                                if (mCommonDishRemarks != null) {
                     if (mExtraOrderAdapter != null) {
                         mExtraOrderAdapter.setItems(mCommonDishRemarks);
                     }
@@ -443,23 +406,19 @@ public class RemarkView extends LinearLayout {
                     loadDishRemark();
                 }
 
-                //设置已有备注
-                etRemark.setText(dishRemark);
+                                etRemark.setText(dishRemark);
                 etRemark.setSelection(etRemark.getText().length());
-                // v8.3 保存状态
-                iPanelItemSettings.setSnackRemarkType(REMARK_DISH);
+                                iPanelItemSettings.setSnackRemarkType(REMARK_DISH);
                 break;
             case R.id.item_packaged:
-                // 单品打包使用数
-                MobclickAgentEvent.onEvent(getContext(), MobClick.SNACK_ORDER_GOODS_SINGLE_BALE);
+                                MobclickAgentEvent.onEvent(getContext(), MobClick.SNACK_ORDER_GOODS_SINGLE_BALE);
                 if (shopcartItem == null) {
                     ToastUtil.showShortToast(R.string.please_select_food);
                     return;
                 }
                 if (mItemPackaged.isChecked()) {
                     shopcartItem.setPack(true);
-                    if (!ShoppingCart.getInstance().haveExtraChargeChf()) {//还未添加餐盒费
-                        ExtraCharge extraChargeChf = ExtraManager.getExtraChargeChf();
+                    if (!ShoppingCart.getInstance().haveExtraChargeChf()) {                        ExtraCharge extraChargeChf = ExtraManager.getExtraChargeChf();
                         if (extraChargeChf != null) {
                             List<ExtraCharge> temp = new ArrayList<ExtraCharge>();
                             temp.add(extraChargeChf);

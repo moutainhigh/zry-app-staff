@@ -19,17 +19,13 @@ import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.add_item_batch_view)
 public class AddItemBatchView extends LinearLayout {
     @ViewById(R.id.root_ll)
-    public LinearLayout rootLL;//根目录
-
+    public LinearLayout rootLL;
     @ViewById(R.id.content_ll)
-    LinearLayout contentLL;//内容区
-
+    LinearLayout contentLL;
     List<AddItemBatchBean> addItemBatchBeans;
 
     public int choosePos;
@@ -62,32 +58,25 @@ public class AddItemBatchView extends LinearLayout {
             ImageView tradeChooseIv = (ImageView) itemView.findViewById(R.id.trade_choose_iv);
             AutofitTextView snTv = (AutofitTextView) itemView.findViewById(R.id.sn);
             TextView timeTextView = (TextView) itemView.findViewById(R.id.time);
-//            TextView unitTv = (TextView) itemView.findViewById(R.id.unit);
-//            View timeLayout = itemView.findViewById(R.id.time_layout);
 
 
-            //加菜单序号
-            snTv.setTextColor(ViewUtils.COLOR_TRADE_UNISSUED);
+                        snTv.setTextColor(ViewUtils.COLOR_TRADE_UNISSUED);
             snTv.setText(bean.getSequenceNumber());
 
 
-            //获取加菜单时间
-            timeTextView.setBackgroundColor(ViewUtils.COLOR_TRADE_UNISSUED);
+                        timeTextView.setBackgroundColor(ViewUtils.COLOR_TRADE_UNISSUED);
             int spendTime = (int) (System.currentTimeMillis() - bean.getTime()) / (60 * 1000);
             if (spendTime < 0) {
                 spendTime = -1;
             }
-            //设置时间ø
-            timeTextView.setText(SpendTimeFormater.format(spendTime));
-//            unitTv.setText(formater.unit);
+                        timeTextView.setText(SpendTimeFormater.format(spendTime));
 
             final int position = i;
             itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (choosePos != position) {
-                        //选中处理
-                        if (choosePos != -1) {
+                                                if (choosePos != -1) {
                             contentLL.getChildAt(choosePos).findViewById(R.id.trade_choose_iv).setVisibility(View.INVISIBLE);
                         }
                         contentLL.getChildAt(position).findViewById(R.id.trade_choose_iv).setVisibility(View.VISIBLE);

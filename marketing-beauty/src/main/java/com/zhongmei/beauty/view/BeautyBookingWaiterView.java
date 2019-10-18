@@ -25,11 +25,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 人员封装
- *
- * @date 2018/6/14 15:15
- */
+
 public class BeautyBookingWaiterView extends LinearLayout implements UserItemView.OnUserItemCheckListener {
 
     protected ViewGroup include_emptyStatus;
@@ -67,10 +63,7 @@ public class BeautyBookingWaiterView extends LinearLayout implements UserItemVie
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    /**
-     * @param context
-     * @param isHasPointView 是否有指定view
-     */
+
     public BeautyBookingWaiterView(Context context, boolean isHasPointView) {
         super(context);
         this.mContext = context;
@@ -90,19 +83,14 @@ public class BeautyBookingWaiterView extends LinearLayout implements UserItemVie
         lv_content.setLayoutManager(manager);
     }
 
-    /**
-     * 当前被选中的人员
-     *
-     * @param users
-     */
+
     public void refreshView(Role role, UserVo users, List<Long> isNotFreeUsers) {
         mListUserVo = getUserByIdentity(role, users, isNotFreeUsers);
         UserAdapter adapter = getAdapter();
         adapter.setItems(mListUserVo);
         lv_content.setAdapter(adapter);
         if (Utils.isEmpty(mListUserVo)) {
-            //设置空态页
-            lv_content.setVisibility(View.GONE);
+                        lv_content.setVisibility(View.GONE);
             include_emptyStatus.setVisibility(View.VISIBLE);
         } else {
             lv_content.setVisibility(View.VISIBLE);
@@ -110,13 +98,7 @@ public class BeautyBookingWaiterView extends LinearLayout implements UserItemVie
         }
     }
 
-    /**
-     * 返回人员列表
-     *
-     * @param userVo         当前被选中的人
-     * @param isNotFreeUsers 被占用的人
-     * @return
-     */
+
     protected List<UserVo> getUserByIdentity(Role role, UserVo userVo, List<Long> isNotFreeUsers) {
         List<UserVo> listUserVo = new ArrayList<>();
         List<User> userList = Session.getFunc(UserFunc.class).getUsers();
@@ -125,13 +107,11 @@ public class BeautyBookingWaiterView extends LinearLayout implements UserItemVie
         }
         for (User user : userList) {
             UserVo vo = new UserVo(user);
-            if (isNotFreeUsers != null && isNotFreeUsers.size() > 0) { // 先判断占用
-                if (isNotFreeUsers.contains(user.getId())) {
+            if (isNotFreeUsers != null && isNotFreeUsers.size() > 0) {                 if (isNotFreeUsers.contains(user.getId())) {
                     vo.setFree(false);
                 }
             }
             if (userVo != null && user.getId().equals(userVo.getUser().getId())) {
-//                vo.setTradeUserType(mIndetity);
                 vo.setChecked(true);
             }
             if (role != null && user.getRoleId() == role.getId()) {
@@ -155,7 +135,6 @@ public class BeautyBookingWaiterView extends LinearLayout implements UserItemVie
     @Override
     public void onCheckedChange(UserVo userVo, boolean isChecked) {
         updateItemChecked(userVo);
-//        userVo.setTradeUserType(mIndetity);
         if (mOnUserCheckedListener != null) {
             mOnUserCheckedListener.onUserCheckData(userVo);
         }

@@ -2,11 +2,7 @@ package com.zhongmei.bty.basemodule.inventory.message;
 
 import java.util.List;
 
-/**
- * @Date： 2017/2/28
- * @Description:库存请求对象
- * @Version: 1.0
- */
+
 public class InventoryChangeReq {
 
     List<InventoryItemReq> returnInventoryItems;

@@ -1,8 +1,6 @@
 package com.zhongmei.bty.snack.event;
 
-/**
- * 订单选中event
- */
+
 public class EventSelectOrder {
 
 

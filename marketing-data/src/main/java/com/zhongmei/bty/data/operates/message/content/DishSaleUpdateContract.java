@@ -5,9 +5,7 @@ import com.zhongmei.yunfu.resp.data.SupplyTransferRespBase;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class DishSaleUpdateContract {
 
     public static class DishSaleUpdateReq {

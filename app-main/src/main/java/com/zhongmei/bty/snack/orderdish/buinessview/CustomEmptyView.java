@@ -11,9 +11,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * 空态页
- */
+
 @EViewGroup(R.layout.layout_custom_empty)
 public class CustomEmptyView extends FrameLayout {
     @ViewById(R.id.tv_content)

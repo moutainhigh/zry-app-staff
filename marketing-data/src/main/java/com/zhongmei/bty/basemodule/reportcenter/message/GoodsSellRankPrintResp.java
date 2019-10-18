@@ -3,18 +3,12 @@ package com.zhongmei.bty.basemodule.reportcenter.message;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * @Date 2016/7/1
- * @Description:打印小票数据响应
- */
+
 public class GoodsSellRankPrintResp {
     public Total total;
     public List<SaleItem> sale;
-    public List<SaleItem> typeList; //中类排行数据
-    public List<SaleItem> majorTypeList;//大类排行数据
-    public List<PrivilegeItem> privilege;
-    public int type;  //1表示商品销售统计 2表示套餐商品统计 3表示商品中类统计 4表示商品大类统计
-
+    public List<SaleItem> typeList;     public List<SaleItem> majorTypeList;    public List<PrivilegeItem> privilege;
+    public int type;
 
     public Total getTotal() {
         return total;
@@ -138,9 +132,7 @@ public class GoodsSellRankPrintResp {
         public Long majorTypeId;
         public String majorTypeName;
         public Long typeId;
-        public String typeName;//中类
-        public String categoryName;//大类
-        public BigDecimal count;
+        public String typeName;        public String categoryName;        public BigDecimal count;
         public BigDecimal amount;
         public Boolean isTotal;
 

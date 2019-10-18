@@ -3,17 +3,11 @@ package com.zhongmei.bty.basemodule.shopmanager.paymentmanager.entitys;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * @Date： 2016/7/20
- * @Description:收支管理Vo
- * @Version: 1.0
- */
+
 public class AccountSubjectVo implements Serializable {
 
-    private List<SubjectInfo> mInComeSubject;//收入科目项
-
-    private List<SubjectInfo> mExpensesSubject;//支出科目项
-
+    private List<SubjectInfo> mInComeSubject;
+    private List<SubjectInfo> mExpensesSubject;
     public List<SubjectInfo> getmInComeSubject() {
         return mInComeSubject;
     }

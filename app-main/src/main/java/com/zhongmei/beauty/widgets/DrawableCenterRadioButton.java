@@ -11,13 +11,10 @@ import android.widget.RadioButton;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DrawableCenterRadioButton extends RadioButton {
-    private float drawableCenterMargin = -1f;//-1默认表示居中
-
+    private float drawableCenterMargin = -1f;
     public DrawableCenterRadioButton(Context context) {
         this(context, null);
     }

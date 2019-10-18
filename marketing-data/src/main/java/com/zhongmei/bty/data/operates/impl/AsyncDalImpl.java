@@ -17,9 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
 
     public AsyncDalImpl(ImplContext context) {
@@ -32,8 +30,7 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
         AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
         try {
             final Dao<AsyncHttpRecord, Long> dao = helper.getDao(AsyncHttpRecord.class);
-            //查询并赋值
-            final AsyncHttpRecord rec = asyncDal.query(recUuid);
+                        final AsyncHttpRecord rec = asyncDal.query(recUuid);
             if (rec == null) {
                 return false;
             }
@@ -46,9 +43,7 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
             rec.setReqStr(json);
             rec.setSerialNumber(serialNumber);
             rec.validateUpdate();
-            //更新后的数据插入数据库
-            // modify 20170216 start 添加事务来实现线程同步
-            helper.callInTransaction(new Callable<Void>() {
+                                    helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
                         throws Exception {
@@ -59,8 +54,7 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
                     return null;
                 }
             });
-            // modify 20170216 end 添加事务来实现线程同步
-            return true;
+                        return true;
         } finally {
             LocalDBManager.releaseHelper();
         }
@@ -72,9 +66,7 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
         AsyncDal asyncDal = OperatesFactory.create(AsyncDal.class);
         try {
             final Dao<AsyncHttpRecord, Long> dao = helper.getDao(AsyncHttpRecord.class);
-            //查询并赋值
-//            final AsyncHttpRecord rec = asyncDal.query(recUuid);
-            if (rec == null) {
+                        if (rec == null) {
                 return null;
             }
             AuthUser user = Session.getAuthUser();
@@ -85,9 +77,7 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
             rec.setStatus(state);
             rec.setReason(reason);
             rec.validateUpdate();
-            //更新后的数据插入数据库
-            // modify 20170216 start 添加事务来实现线程同步
-            helper.callInTransaction(new Callable<Void>() {
+                                    helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
                         throws Exception {
@@ -98,8 +88,7 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
                     return null;
                 }
             });
-            // modify 20170216 end 添加事务来实现线程同步
-            return rec;
+                        return rec;
         } finally {
             LocalDBManager.releaseHelper();
         }
@@ -108,20 +97,15 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
     @Override
     public AsyncHttpRecord retryCountPlus(final AsyncHttpRecord rec) throws Exception {
         final DatabaseHelper helper = LocalDBManager.getHelper();
-//        AsyncDal asyncDal= OperatesFactory.create(AsyncDal.class);
         try {
             final Dao<AsyncHttpRecord, Long> dao = helper.getDao(AsyncHttpRecord.class);
-            //查询并赋值
-//            final AsyncHttpRecord rec = asyncDal.query(recUuid);
-            if (rec == null) {
+                        if (rec == null) {
                 return null;
             }
             Integer retryCount = rec.getRetryCount() == null ? 0 : rec.getRetryCount();
             rec.setRetryCount(++retryCount);
             rec.validateUpdate();
-            //更新后的数据插入数据库
-            // modify 20170216 start 添加事务来实现线程同步
-            helper.callInTransaction(new Callable<Void>() {
+                                    helper.callInTransaction(new Callable<Void>() {
                 @Override
                 public Void call()
                         throws Exception {
@@ -129,7 +113,6 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
                     return null;
                 }
             });
-            // modify 20170216 end 添加事务来实现线程同步
 
             return rec;
         } finally {
@@ -144,17 +127,7 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
             DeleteBuilder<AsyncHttpRecord, Long> deleteBuilder = dao.deleteBuilder();
             deleteBuilder.where().eq(AsyncHttpRecord.$.status, state.value());
             int deleteCount = deleteBuilder.delete();
-//            final List<AsyncHttpRecord> recList = dao.queryBuilder().where().eq(AsyncHttpRecord.$.status, state).query();
-//            // modify 20170216 start 添加事务来实现线程同步
-//            boolean change = helper.callInTransaction(new Callable<Boolean>() {
-//                @Override
-//                public Boolean call()
-//                        throws Exception {
-//                    return dao.delete(recList) > 0;
-//                }
-//            });
-            // modify 20170216 end 添加事务来实现线程同步
-            if (deleteCount > 0) {
+                        if (deleteCount > 0) {
                 helper.getChangeSupportable().addChange(AsyncHttpRecord.class);
             }
         } finally {
@@ -172,13 +145,7 @@ public class AsyncDalImpl extends AbstractOpeartesImpl implements AsyncDal {
         }
     }
 
-    /**
-     * 查询规则:查询请求失败的,或者重试次数大于0的。
-     * 正在执行,首次执行成功的条目都不显示
-     *
-     * @return
-     * @throws SQLException
-     */
+
     @Override
     public List<AsyncHttpRecord> queryAllBesideExcuting() throws Exception {
         DatabaseHelper helper = LocalDBManager.getHelper();

@@ -11,11 +11,7 @@ import com.zhongmei.yunfu.db.enums.StatusFlag;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Kds划菜、取消划菜
- *
- * @created 2017/6/9
- */
+
 public class KdsTradeDalImpl extends AbstractOpeartesImpl implements KdsTradeDal {
 
     public KdsTradeDalImpl(ImplContext context) {

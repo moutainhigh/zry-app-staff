@@ -5,24 +5,18 @@ import com.zhongmei.bty.basemodule.commonbusiness.bean.TypeBase;
 
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年7月27日
- */
+
 public class TablesAreaVo extends TypeBase {
 
     private final CommercialArea tablesArea;
 
     private List<TablesVo> tablesVoList;
 
-    // 是否是全部选择
-    private boolean isSelectAll = false;
+        private boolean isSelectAll = false;
 
     private boolean isSelected;
 
-    /**
-     * 初始 选中桌台个数
-     */
+
     private int initSelectedTableCount;
 
     public int getInitSelectedTableCount() {
@@ -63,8 +57,7 @@ public class TablesAreaVo extends TypeBase {
 
     @Override
     public String getName() {
-        // TODO Auto-generated method stub
-        int count = 0;
+                int count = 0;
         if (tablesVoList != null) {
             count = tablesVoList.size();
         }

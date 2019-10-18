@@ -11,25 +11,17 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * @Date：2015-9-29 上午10:03:47
- * @Description: 保存一组支付类型
- * @Version: 1.0
- */
+
 public class GroupPay implements Serializable {
     private static final long serialVersionUID = 1L;
     private PayModelGroup group;
     private Map<Long, PayModelItem> payments;
-    //溢收金额
-    private double mMorePayAmount;//add 20170531
-
-    //构造方法1
-    public GroupPay() {
+        private double mMorePayAmount;
+        public GroupPay() {
         payments = new LinkedHashMap<Long, PayModelItem>();
     }
 
-    //构造方法2
-    public GroupPay(PayModelGroup payModelGroup) {
+        public GroupPay(PayModelGroup payModelGroup) {
         this();
         group = payModelGroup;
     }
@@ -38,13 +30,11 @@ public class GroupPay implements Serializable {
         return group;
     }
 
-    //添加一种支付金额
-    public void addPayModelItem(PayModelItem item) {
+        public void addPayModelItem(PayModelItem item) {
         payments.put(item.getPayModelId(), item);
     }
 
-    //添加多种支付金额
-    public void addPayModelItems(List<PayModelItem> items) {
+        public void addPayModelItems(List<PayModelItem> items) {
         if (!Utils.isEmpty(items)) {
             for (PayModelItem item : items) {
                 this.addPayModelItem(item);
@@ -52,27 +42,23 @@ public class GroupPay implements Serializable {
         }
     }
 
-    //取消一种支付金额
-    public void removePayModelItem(PayModelItem item) {
+        public void removePayModelItem(PayModelItem item) {
         if (payments.containsKey(item.getPayModelId())) {
             payments.remove(item.getPayModelId());
         }
     }
 
-    //获取一种支付金额
-    public PayModelItem getPayModelItemByPayModeId(PayModeId payModeId) {
+        public PayModelItem getPayModelItemByPayModeId(PayModeId payModeId) {
 
         return getPayModelItemByPayModeId(payModeId.value());
     }
 
-    //根据key获取一种支付金额
-    public PayModelItem getPayModelItemByPayModeId(Long payModeId) {
+        public PayModelItem getPayModelItemByPayModeId(Long payModeId) {
 
         return payments.get(payModeId);
     }
 
-    //支付面值
-    public double getGroupAmount() {
+        public double getGroupAmount() {
         BigDecimal temp = BigDecimal.ZERO;
         for (PayModelItem item : payments.values()) {
             if (item != null) {
@@ -82,8 +68,7 @@ public class GroupPay implements Serializable {
         return temp.doubleValue();
     }
 
-    //其它支付成本价
-    public double getGroupActualAmount() {
+        public double getGroupActualAmount() {
         BigDecimal temp = BigDecimal.ZERO;
         for (PayModelItem item : payments.values()) {
             if (item != null) {
@@ -93,12 +78,7 @@ public class GroupPay implements Serializable {
         return temp.doubleValue();
     }
 
-    /**
-     * @Title: getGroupAmountExceptModel
-     * @Description: 获取除payModelId 之外的其它支付之和
-     * @Param @param payModelId
-     * @Return double 返回类型
-     */
+
     public double getGroupAmountExceptModel(Long payModelId) {
         BigDecimal temp = BigDecimal.ZERO;
         for (Long key : payments.keySet()) {
@@ -163,8 +143,7 @@ public class GroupPay implements Serializable {
         this.mMorePayAmount = morePayAmount;
     }
 
-    ///add v8.16
-    public GroupPay clone() {
+        public GroupPay clone() {
         GroupPay groupPay = new GroupPay();
         groupPay.group = this.group;
         groupPay.mMorePayAmount = this.mMorePayAmount;

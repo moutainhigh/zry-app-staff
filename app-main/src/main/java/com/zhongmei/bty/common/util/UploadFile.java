@@ -39,36 +39,27 @@ public class UploadFile {
 
     private static final String LOG_FILE_PATH = "/files/";
 
-    private static final int MAX_UPLOAD_LENGTH = 5 * 1024 * 1024;// 5M
-
+    private static final int MAX_UPLOAD_LENGTH = 5 * 1024 * 1024;
     public static boolean uploadLogFile(Context context, String url, File file)
             throws NameNotFoundException, ClientProtocolException, IOException {
         ArrayList<File> fileList = new ArrayList<File>();
-//		SharedPreferenceUtil mSharedPreferenceUtil = new SharedPreferenceUtil(
-//				context);
         PackageInfo info = context.getPackageManager().getPackageInfo(
                 context.getPackageName(), 0);
 
         boolean res = false;
 
-        // int fileLength = (int) file.length();
-        int sepCount = 0;
-        // if (fileLength > MAX_UPLOAD_LENGTH) {
-        // sepCount = fileLength / MAX_UPLOAD_LENGTH + 1;
-        // }
+                int sepCount = 0;
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
-        MultipartEntity mpEntity = new MultipartEntity(); // 文件传输
-
+        MultipartEntity mpEntity = new MultipartEntity();
         if (sepCount == 0) {
             fileList.add(file);
             Log.d(TAG, "Upload log file>>" + file.getAbsolutePath() + " ("
                     + file.length() + " byte)");
             ContentBody cbFile = new FileBody(file);
             mpEntity.addPart("fileData", cbFile);
-        } else {// 拆分上传
-            fileList.add(file);
+        } else {            fileList.add(file);
             String zipPath = FileUtil.getLocalLogpath(context) + ZIP_FILE_PATH;
             FileInputStream in = new FileInputStream(zipPath + file.getName()
                     + ".zip");
@@ -120,8 +111,7 @@ public class UploadFile {
         Boolean res = false;
         MainApplication app = (MainApplication) context.getApplicationContext();
 
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss"); // 初始化Formatter的转换格式。
-        String hms = formatter.format(System.currentTimeMillis());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss");         String hms = formatter.format(System.currentTimeMillis());
 
         String newFilePathTemp = ShopInfoCfg.getInstance().shopId
                 + "_"
@@ -176,8 +166,7 @@ public class UploadFile {
 
         HttpResponse response = httpClient.execute(httpPost);
 
-        // HttpStatus.SC_OK表示连接成功
-        if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             res = true;
         } else {
             res = false;

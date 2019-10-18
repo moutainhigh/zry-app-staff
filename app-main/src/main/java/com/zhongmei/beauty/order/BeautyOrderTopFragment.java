@@ -21,22 +21,11 @@ import org.androidannotations.annotations.ViewById;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_order_top_fragment)
 public class BeautyOrderTopFragment extends BasicFragment implements NestRadioGroup.OnCheckedChangeListener {
 
-    public static final int TYPE_CARD = 0x01; //次卡
-    public static final int TYPE_INTEGRAL = 0x02; //积分
-    public static final int TYPE_PARTY = 0x03; //参与者
-    public static final int TYPE_COUPON = 0x04; //优惠券
-    public static final int TYPE_DISCOUNT = 0x05; //打折
-    public static final int TYPE_ACTIVITY = 0x06; //活动
-    public static final int TYPE_EXTRA = 0x07; //备注
-    public static final int TYPE_REMARK = 0x08; //备注
-    public static final int TYPE_TABLE = 0x09; //选择桌台
-
+    public static final int TYPE_CARD = 0x01;     public static final int TYPE_INTEGRAL = 0x02;     public static final int TYPE_PARTY = 0x03;     public static final int TYPE_COUPON = 0x04;     public static final int TYPE_DISCOUNT = 0x05;     public static final int TYPE_ACTIVITY = 0x06;     public static final int TYPE_EXTRA = 0x07;     public static final int TYPE_REMARK = 0x08;     public static final int TYPE_TABLE = 0x09;
 
     @ViewById(R.id.custom_rb)
     protected NestRadioGroup custom_rb;
@@ -102,12 +91,7 @@ public class BeautyOrderTopFragment extends BasicFragment implements NestRadioGr
     }
 
 
-    /**
-     * 按钮选择状态
-     *
-     * @param type
-     * @param isCheck
-     */
+
     public void setCompoundButtonStatus(int type, boolean isCheck) {
         switch (type) {
             case TYPE_CARD:
@@ -140,12 +124,7 @@ public class BeautyOrderTopFragment extends BasicFragment implements NestRadioGr
         }
     }
 
-    /**
-     * 按钮选择状态
-     *
-     * @param type
-     * @param enable 是否可用
-     */
+
     public void setCompoundButtonEnable(int type, boolean enable) {
         switch (type) {
             case TYPE_CARD:
@@ -178,19 +157,14 @@ public class BeautyOrderTopFragment extends BasicFragment implements NestRadioGr
         }
     }
 
-    /**
-     * 会员已登陆
-     */
+
     public void doLoginCustomer() {
-        setEnable(rb_card, !BeautyOrderManager.isBuyServerBus());//登陆之后，如果是购买次卡，次卡优惠不可用
-        setEnable(rb_integral, true);
+        setEnable(rb_card, !BeautyOrderManager.isBuyServerBus());        setEnable(rb_integral, true);
         setEnable(rb_coupon, true);
         btn_login.setText("登出");
     }
 
-    /**
-     * 会员登出
-     */
+
     public void doLoginOutCustomer() {
         setEnable(rb_card, false);
         setEnable(rb_integral, false);
@@ -220,33 +194,27 @@ public class BeautyOrderTopFragment extends BasicFragment implements NestRadioGr
     @Override
     public void onCheckedChanged(NestRadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.rb_card://次卡
-                if (mOperatorListener != null) {
+            case R.id.rb_card:                if (mOperatorListener != null) {
                     mOperatorListener.onCardClick();
                 }
                 break;
-            case R.id.rb_integral://积分
-                if (mOperatorListener != null) {
+            case R.id.rb_integral:                if (mOperatorListener != null) {
                     mOperatorListener.onIntegralClick();
                 }
                 break;
-            case R.id.rb_party://参与者
-                if (mOperatorListener != null) {
+            case R.id.rb_party:                if (mOperatorListener != null) {
                     mOperatorListener.onPartyClick();
                 }
                 break;
-            case R.id.rb_coupon://优惠券
-                if (mOperatorListener != null) {
+            case R.id.rb_coupon:                if (mOperatorListener != null) {
                     mOperatorListener.onCouponClick();
                 }
                 break;
-            case R.id.rb_discount://折扣
-                if (mOperatorListener != null) {
+            case R.id.rb_discount:                if (mOperatorListener != null) {
                     mOperatorListener.onDiscountClick();
                 }
                 break;
-            case R.id.rb_activity://活动
-                if (mOperatorListener != null) {
+            case R.id.rb_activity:                if (mOperatorListener != null) {
                     mOperatorListener.onActivityClick();
                 }
                 break;
@@ -255,13 +223,11 @@ public class BeautyOrderTopFragment extends BasicFragment implements NestRadioGr
                     mOperatorListener.onExtraClick();
                 }
                 break;
-            case R.id.rb_remark://整单备注
-                if (mOperatorListener != null) {
+            case R.id.rb_remark:                if (mOperatorListener != null) {
                     mOperatorListener.onRemarkClick();
                 }
                 break;
-            case R.id.rb_table://工作台
-                if (mOperatorListener != null) {
+            case R.id.rb_table:                if (mOperatorListener != null) {
                     mOperatorListener.onTableClick();
                 }
                 break;
@@ -271,13 +237,11 @@ public class BeautyOrderTopFragment extends BasicFragment implements NestRadioGr
 
     public void onEventMainThread(BeautyOrderCustomerEvent event) {
         if (event.mEventFlag == BeautyOrderCustomerEvent.EventFlag.LOGIN) {
-            //登陆成功
-            if (btn_login != null) {
+                        if (btn_login != null) {
                 btn_login.setText(getResources().getString(R.string.login_out));
             }
         } else {
-            //登出
-            if (btn_login != null) {
+                        if (btn_login != null) {
                 btn_login.setText(getResources().getString(R.string.login_in));
             }
         }

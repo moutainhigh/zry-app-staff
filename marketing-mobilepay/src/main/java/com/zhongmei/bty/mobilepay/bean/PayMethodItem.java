@@ -6,8 +6,7 @@ import java.io.Serializable;
 
 public class PayMethodItem implements Serializable {
 
-    public PayModelGroup payModelGroup;//与methodId映射
-    public String methodName;
+    public PayModelGroup payModelGroup;    public String methodName;
     public boolean isFocused;
     public boolean isSelected;
     public double cash = 0f;
@@ -15,19 +14,13 @@ public class PayMethodItem implements Serializable {
     public int unSelectedIconSrc;
     public int pressedIconSrc;
     public int methodId;
-    public Integer order;//add20170119
-    public boolean enabled = true;//add 20170411
-//    -----follow[yanm]---------------
+    public Integer order;    public boolean enabled = true;
 
-    /**
-     * 支付方式的图标(实际项目中，代表着支付方式的Drawable)
-     */
     public int methodResId;
 
     public PayMethodItem() {
     }
 
     public PayMethodItem(int menuType) {
-        methodId = menuType;// 菜单类别
-    }
+        methodId = menuType;    }
 }

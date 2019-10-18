@@ -71,9 +71,7 @@ public class CalmStringRequest extends CalmRequest<String> {
 
         @Override
         protected void deliverResponse1(String response) {
-            /*if (AppBuildConfig.DEBUG) {
-                Log.e("url:" + getUrl(), response);
-            }*/
+
             super.deliverResponse1(response);
         }
     }

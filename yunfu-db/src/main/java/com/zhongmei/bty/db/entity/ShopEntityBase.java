@@ -10,8 +10,7 @@ public class ShopEntityBase extends BasicEntityBase {
     }
 
     @DatabaseField(columnName = $.shopIdenty, canBeNull = false)
-    private Long shopIdenty; //门店标识 |是
-
+    private Long shopIdenty;
     public Long getShopIdenty() {
         return shopIdenty;
     }

@@ -1,20 +1,14 @@
 package com.zhongmei.bty.basemodule.devices.mispos.data.message;
 
-/**
- * 会员实体卡请求
- */
+
 public class MemberCardReq {
 
-    /**
-     * 创建人
-     */
+
     private Long createId;
 
     private Long customerId;
 
-    /**
-     * 手机
-     */
+
     private String mobile;
 
     public Long getCustomerId() {

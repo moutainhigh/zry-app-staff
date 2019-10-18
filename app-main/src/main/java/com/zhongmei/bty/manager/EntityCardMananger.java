@@ -53,19 +53,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * 会员储值接口工具类
- *
- * @date:2016年4月5日下午8:06:48
- */
+
 public class EntityCardMananger {
 
-    /**
-     * @Title: memberStoreRevoke
-     * @Description: 会员储值退货
-     * @Param TODO
-     * @Return void 返回类型
-     */
+
     public static void memberStoreRevoke(final CustomerOrderBean mOrderBean, Reason reason,
                                          ResponseListener<CustomerMemberStoreValueRevokeResp> listener, FragmentManager fragmentManager) {
         if (mOrderBean == null) {
@@ -74,8 +65,7 @@ public class EntityCardMananger {
         CustomerMemberStoreValueRevokeReq req = new CustomerMemberStoreValueRevokeReq();
         req.setClientCreateTime(System.currentTimeMillis());
         req.setCustomerId(mOrderBean.getCustomerId());
-        // req.setPaymentUuid(mOrderBean.getPaymentUuid());
-        req.setTradeId(mOrderBean.getTradeId());
+                req.setTradeId(mOrderBean.getTradeId());
         if (mOrderBean.getAddValue() != null) {
             req.setValue(mOrderBean.getAddValue().doubleValue());
         } else {
@@ -94,15 +84,7 @@ public class EntityCardMananger {
         customerOperates.memberStoreValueRevokeReq(req, LoadingResponseListener.ensure(listener, fragmentManager));
     }
 
-    /**
-     * 会员/实体卡储值撤销打印和补打
-     *
-     * @param orderBean
-     * @param chargingType 0充值，1撤销
-     * @param isReprint    是否是补打
-     * @Title: printStoreValue
-     * @Return void 返回类型
-     */
+
     public static void printStoreValue(final CustomerOrderBean orderBean, final List<PaymentItem> payments, final int chargingType, final boolean isReprint) {
         if (orderBean == null) {
             return;
@@ -131,8 +113,7 @@ public class EntityCardMananger {
         print.setPhoneNo(orderBean.getMobile());
         print.setChargingType(chargingType);
         DatabaseHelper helper = DBHelperManager.getHelper();
-        //查询订单操作列表
-        List<PrintOperation> printOperationsListAll = null;
+                List<PrintOperation> printOperationsListAll = null;
         try {
             Dao<PrintOperation, String> printOperationsDao = helper.getDao(PrintOperation.class);
             printOperationsListAll = printOperationsDao.queryBuilder()
@@ -155,12 +136,8 @@ public class EntityCardMananger {
                 BigDecimal currentRealValue = orderBean.getCurrentRealValue();
                 BigDecimal currentSendValue = orderBean.getCurrentSendValue();
 
-                currentRealValue = currentRealValue != null ? currentRealValue.abs() : new BigDecimal(BigInteger.ZERO); // 负数转正数
-                currentSendValue = currentSendValue != null ? currentSendValue.abs() : new BigDecimal(BigInteger.ZERO); // 负数转正数
-
-                print.setTrueIncomeValuecard(currentRealValue); // 本次消费  储值本金
-                print.setChargeValuecard(currentRealValue.add(currentSendValue)); // 本次消费  合计
-
+                currentRealValue = currentRealValue != null ? currentRealValue.abs() : new BigDecimal(BigInteger.ZERO);                 currentSendValue = currentSendValue != null ? currentSendValue.abs() : new BigDecimal(BigInteger.ZERO);
+                print.setTrueIncomeValuecard(currentRealValue);                 print.setChargeValuecard(currentRealValue.add(currentSendValue));
                 print.setEndValuecard(orderBean.getEndValue());
                 print.setBeforeValuecard(orderBean.getBeforeValue());
             } else {
@@ -177,8 +154,7 @@ public class EntityCardMananger {
                     e.printStackTrace();
                 }
 
-                // 撤销（非补打）时，充值前和充值后要反过来
-                print.setEndValuecard(orderBean.getBeforeValue());
+                                print.setEndValuecard(orderBean.getBeforeValue());
                 print.setBeforeValuecard(orderBean.getEndValue());
                 print.setTrueIncomeValuecard(orderBean.getAddValue());
                 print.setChargeValuecard(orderBean.getAddValue()
@@ -230,8 +206,7 @@ public class EntityCardMananger {
             for (PaymentItem item : payments) {
                 if (item.getStatusFlag() == StatusFlag.VALID) {
                     String name = TextUtils.isEmpty(item.getPayModeName()) ? PaySettingCache.getPayModeNameByModeId(item.getPayModeId()) : item.getPayModeName();
-                    //list.add(new PRTPayMethod(name, item.getUsefulAmount()));
-                    PayMethod payMethod = new PayMethod(name, item.getUsefulAmount());
+                                        PayMethod payMethod = new PayMethod(name, item.getUsefulAmount());
                     if (chargingType == 1) {
                         payMethod.setChangeAmount(item.getChangeAmount().abs());
                         payMethod.setFaceAmount(item.getFaceAmount().abs());
@@ -258,17 +233,9 @@ public class EntityCardMananger {
             }
         }
         print.setPayMethods(list);
-        //PrintContentQueue.getInstance().printCardOrMemberCharge(print,isReprint,new OnSimplePrintListener(PrintTicketTypeEnum.STORE));
-        //PrintTool.printCardOrMemberCharge(print, isReprint, new PRTOnSimplePrintListener(PrintTicketTypeEnum.STORE));
-    }
+                    }
 
-    /**
-     * 实体卡未结账/已作废/已结账/已退货补打
-     *
-     * @Title: printSaleCard
-     * @Param @param resp
-     * @Return void 返回类型
-     */
+
     public static void printSaleCard(CustomerSellcardDetailResp resp) {
         if (resp == null || resp.getTradeItems() == null) {
             return;
@@ -294,13 +261,7 @@ public class EntityCardMananger {
         printSaleCard(resp.getTrades(), tradeItemVos, resp.getPayments(), resp.getPaymentItems(), true);
     }
 
-    /**
-     * 实体卡退货打印
-     *
-     * @Title: printSaleCard
-     * @Param @param resp
-     * @Return void 返回类型
-     */
+
     public static void printSaleCard(SalesCardReturnResp resp) {
         if (resp == null) {
             return;
@@ -352,15 +313,7 @@ public class EntityCardMananger {
         printSaleCard(resp.getTrades(), tradeItemVos, null, null, false);
     }
 
-    /**
-     * 调用实体卡打印
-     *
-     * @param trades
-     * @param tradeItemVos
-     * @param payments
-     * @param paymentItems
-     * @param isReprint
-     */
+
     public static void printSaleCard(List<Trade> trades, List<TradeItemVo> tradeItemVos, List<Payment> payments,
                                      List<PaymentItem> paymentItems, boolean isReprint) {
         TradeVo tradeVo = new TradeVo();
@@ -375,8 +328,7 @@ public class EntityCardMananger {
         }
 
         List<PaymentItem> items = new ArrayList<PaymentItem>();
-        // 筛选有效的支付项
-        if (tradeVo.getTrade() != null && paymentItems != null) {
+                if (tradeVo.getTrade() != null && paymentItems != null) {
             switch (tradeVo.getTrade().getTradeStatus()) {
                 case CONFIRMED:
                 case INVALID:
@@ -399,10 +351,7 @@ public class EntityCardMananger {
         paymentVo.setPaymentItemList(items);
         paymentVos.add(paymentVo);
 
-//		PrintContentQueue.getInstance().printCardSaleTrade(tradeVo,
-//			paymentVos, null, isReprint, new OnSimplePrintListener(PrintTicketTypeEnum.STORE));
-        /*IPrintHelper.Holder.getInstance().printEntityCardTicket(tradeVo, paymentVos, null, isReprint,
-                new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.STORE));*/
+
     }
 
     private static List<PaymentItem> filterPaymentItems(List<PaymentItem> paymentItems,

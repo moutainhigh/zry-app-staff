@@ -45,9 +45,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class BeautyTablePopWindow extends PopupWindow implements ITableOperator, CompoundButton.OnCheckedChangeListener, View.OnClickListener, View.OnTouchListener, AdapterView.OnItemClickListener {
 
     private Context mContext;
@@ -90,16 +88,14 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
 
     private List<ZoneModel> mListZoneModel;
 
-    private Set<Long> tableSetTmp;//临时存放选中的tableId
-
+    private Set<Long> tableSetTmp;
     public void setiTableChoiceListener(ITableChoice tableChoiceListener) {
         this.mTableChoiceListener = tableChoiceListener;
     }
 
     public BeautyTablePopWindow(Context context, BusinessType businessType) {
         super(context);
-        //初始化popuwindow
-        this.mContext = context;
+                this.mContext = context;
         this.mBusinessType = businessType;
         this.mUiHandler = new UIHandler(context.getMainLooper());
         initView(context);
@@ -114,7 +110,6 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
         setContentView(view);
         setWidth(DensityUtil.dip2px(MainApplication.getInstance(), 500f));
         setHeight(DensityUtil.dip2px(MainApplication.getInstance(), 550f));
-//        setHeight(ViewGroup.LayoutParams.MATCH_PARENT);
         setBackgroundDrawable(mContext.getResources().getDrawable(R.drawable.beauty_bg_dialog));
         setFocusable(false);
         setOutsideTouchable(true);
@@ -156,8 +151,7 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
     }
 
     private void initData() {
-        mTableFileterManager = new TableFilterManager();//默认加载桌台信息，异步
-        mTableFileterManager.setTableListener(this);
+        mTableFileterManager = new TableFilterManager();        mTableFileterManager.setTableListener(this);
         mTableFileterManager.loadTables();
     }
 
@@ -300,8 +294,7 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //设置返回只
-        mCurModel = mListZoneModel.get(position);
+                mCurModel = mListZoneModel.get(position);
         mZonesChoiceAdapter.setCheckZoneModel(mCurModel);
         mZonesChoiceAdapter.notifyDataSetChanged();
         tv_zone.setText(mCurModel.getName());

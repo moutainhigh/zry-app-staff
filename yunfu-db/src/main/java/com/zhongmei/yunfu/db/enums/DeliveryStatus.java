@@ -2,36 +2,22 @@ package com.zhongmei.yunfu.db.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 送餐状态
- */
+
 public enum DeliveryStatus implements ValueEnum<Integer> {
 
-    /**
-     * 等待配送
-     */
+
     WAITINT_DELIVERY(0),
 
-    /**
-     * 正在配送
-     */
+
     DELIVERYING(1),
 
-    /**
-     * 送餐完成
-     */
+
     REAL_DELIVERY(2),
 
-    /**
-     * 已清账
-     */
+
     SQUARE_UP(3),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

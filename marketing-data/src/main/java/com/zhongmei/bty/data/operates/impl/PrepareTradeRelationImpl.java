@@ -78,13 +78,7 @@ public class PrepareTradeRelationImpl extends AbstractOpeartesImpl implements
         return list;
     }
 
-    /**
-     * 用relatedId作为key的结果
-     *
-     * @param type
-     * @return
-     * @throws Exception
-     */
+
     private Map<Long, PrepareTradeRelation> findMap(String type)
             throws Exception {
         Map<Long, PrepareTradeRelation> map = new TreeMap<Long, PrepareTradeRelation>();
@@ -101,13 +95,7 @@ public class PrepareTradeRelationImpl extends AbstractOpeartesImpl implements
         return map;
     }
 
-    /**
-     * 用tradeid作为key的结果
-     *
-     * @param type(排队或者预定) 为null时查询所有数据
-     * @return
-     * @throws Exception
-     */
+
     public Map<Long, PrepareTradeRelation> findMapByTradeId(String type)
             throws Exception {
         Map<Long, PrepareTradeRelation> map = new TreeMap<Long, PrepareTradeRelation>();

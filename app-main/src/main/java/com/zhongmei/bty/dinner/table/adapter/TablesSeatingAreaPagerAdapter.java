@@ -18,14 +18,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-/**
- * Date：2017/11/17 14:54
- */
+
 public abstract class TablesSeatingAreaPagerAdapter extends PagerAdapter {
     private static final String TAG = TablesSeatingAreaPagerAdapter.class.getSimpleName();
 
-    public static final int PAGE_SIZE = 5;// 每页显示队列
-
+    public static final int PAGE_SIZE = 5;
     public static final int STYLE_SEATING = 0;
 
     public static final int STYLE_CONNECT = 1;
@@ -95,12 +92,9 @@ public abstract class TablesSeatingAreaPagerAdapter extends PagerAdapter {
         List<Long> subList = getSubDataSet(position);
         int size = subList.size();
         for (int i = 0; i < size; i++) {
-            // 数据
-            final Long data = subList.get(i);
-            // 控件
-            View itemView = itemViews[i];
-            // 名称
-            TextView tvName = (TextView) itemView.findViewById(R.id.table_area_name);
+                        final Long data = subList.get(i);
+                        View itemView = itemViews[i];
+                        TextView tvName = (TextView) itemView.findViewById(R.id.table_area_name);
             if (style == STYLE_CONNECT) {
                 String serialNumber = mainTradeExtraMap.get(data).getSerialNumber();
                 tvName.setText(String.format(mContext.getString(R.string.batch_operation_table_connect_num), serialNumber));
@@ -146,11 +140,7 @@ public abstract class TablesSeatingAreaPagerAdapter extends PagerAdapter {
         }
     }
 
-    /**
-     * 选择桌位数
-     *
-     * @param data
-     */
+
     public abstract void selectArea(Long data);
 
     @Override
@@ -183,10 +173,7 @@ public abstract class TablesSeatingAreaPagerAdapter extends PagerAdapter {
         notifyDataSetChanged();
     }
 
-    /**
-     * @param position
-     * @return
-     */
+
     private List<Long> getSubDataSet(int position) {
         int start = position * PAGE_SIZE;
         int end = Math.min((position + 1) * PAGE_SIZE, mDataMap.size());

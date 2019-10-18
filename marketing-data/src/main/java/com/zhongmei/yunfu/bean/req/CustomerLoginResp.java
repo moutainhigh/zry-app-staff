@@ -11,51 +11,18 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年5月13日
- */
+
 public class CustomerLoginResp implements Serializable, ICustomer {
 
-    private Long customerId;//顾客id
-    private String customerName;// 顾客名字 （新的登录接口使用）
-    private Integer sex; //性别
-    private String mobile;//联系电话 （新接口使用）
-    private String phoneNumber;//手机号码(老接口使用)
-    private String address;//顾客地址
-    private Long levelId;
-    private String level; //会员等级
-    private BigDecimal valueCardBalance; //储值余额
-    private BigDecimal integralBalance; //积分余额
-    private String openId;//微信openID
-    private double remainValue;//当前虚拟会员储值余额
-    private Long integral;//当前积分
-    private Integer cardCount;//实体卡（有/无）
-    private Integer coupCount;//优惠券（有/无）
-    private Integer isDisable;//是否停用 1.是停用; 2.否
-    private double creditableValue;//可挂账总额度
-    private double remainCreditValue;//可挂账余额
-    private double usedCreditValue;//已挂账金额
-    private List<CustomerInfoResp.Card> cardList;//实体卡列表
-    private Long brandId;//品牌id
-    private Long commercialId;//顾客所属门店id
-    private Integer hasFaceCode;//是否有人脸识别码
-    private Integer storedPrivilegeType; //储值支付优惠类型  折扣，折让
-    private BigDecimal storedPrivilegeValue; //储值支付优惠值
-    private BigDecimal storedFullAmount=BigDecimal.ZERO;
+    private Long customerId;    private String customerName;    private Integer sex;     private String mobile;    private String phoneNumber;    private String address;    private Long levelId;
+    private String level;     private BigDecimal valueCardBalance;     private BigDecimal integralBalance;     private String openId;    private double remainValue;    private Long integral;    private Integer cardCount;    private Integer coupCount;    private Integer isDisable;    private double creditableValue;    private double remainCreditValue;    private double usedCreditValue;    private List<CustomerInfoResp.Card> cardList;    private Long brandId;    private Long commercialId;    private Integer hasFaceCode;    private Integer storedPrivilegeType;     private BigDecimal storedPrivilegeValue;     private BigDecimal storedFullAmount=BigDecimal.ZERO;
     private CustomerType customerType;
 
-    /**
-     * 国家英文名称(为空默认中国) = countryEN
-     */
+
     public String nation;
-    /**
-     * 国家中文名称(为空默认中国) = countryZH
-     */
+
     public String country;
-    /**
-     * 电话国际区码(为空默认中国) = AreaCode
-     */
+
     public String nationalTelCode;
 
 
@@ -271,10 +238,7 @@ public class CustomerLoginResp implements Serializable, ICustomer {
         this.storedFullAmount = storedFullAmount;
     }
 
-    /***
-     *
-     * 判断是否停用
-     * */
+
     public boolean customerIsDisable() {
         if (isDisable == 1) {
             return true;
@@ -305,15 +269,9 @@ public class CustomerLoginResp implements Serializable, ICustomer {
         customer.usedCreditValue = this.usedCreditValue;
         customer.otherCardList = cardList;
         customer.commercialId = this.commercialId;
-        customer.commercialName = ""; //this.commercialName;
-        customer.address = this.address;
+        customer.commercialName = "";         customer.address = this.address;
         customer.hasFaceCode = this.hasFaceCode;
-        customer.nation = this.nation;//add v8.16 修复国际化bug
-        customer.country = this.country;//add v8.16 修复国际化bug
-        customer.nationalTelCode = this.nationalTelCode;//add v8.16 修复国际化bug
-        customer.storedPrivilegeType=this.storedPrivilegeType; //储值支付优惠类型  折扣，折让
-        customer.storedPrivilegeValue=this.storedPrivilegeValue; //储值支付优惠值
-        customer.storedFullAmount=this.storedFullAmount;
+        customer.nation = this.nation;        customer.country = this.country;        customer.nationalTelCode = this.nationalTelCode;        customer.storedPrivilegeType=this.storedPrivilegeType;         customer.storedPrivilegeValue=this.storedPrivilegeValue;         customer.storedFullAmount=this.storedFullAmount;
         customer.setCustomerType(this.customerType);
         if (cardList != null && cardList.size() > 0) {
             customer.cardList = new ArrayList<>();

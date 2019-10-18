@@ -8,11 +8,7 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * 会员卡实体对象
- * <p>
- * Created by demo on 2018/12/15
- */
+
 public class CustomerCardItem implements IEcCardInfo, Serializable {
     public Long id;
     public Long cardKindId;
@@ -24,9 +20,7 @@ public class CustomerCardItem implements IEcCardInfo, Serializable {
     public BigDecimal remainValue;
 
 
-    /**
-     * 卡是否有储值权限
-     */
+
     public Integer rightStatus;
 
     @Override

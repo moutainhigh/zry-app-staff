@@ -21,174 +21,95 @@ import com.zhongmei.yunfu.db.enums.TradeType;
 
 import java.math.BigDecimal;
 
-/**
- * Trade is a ORMLite bean type. Corresponds to the database table "trade"
- */
+
 @DatabaseTable(tableName = "trade")
 public class Trade extends DataEntityBase implements ICreator, IUpdator {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "trade"
-     */
+
     public interface $ extends DataEntityBase.$ {
-        /**
-         * serial_number 流水号
-         */
+
         public static final String serialNumber = "serial_number";
 
-        /**
-         * action_type 操作类型 1为手动 2为自动
-         */
+
         public static final String actionType = "action_type";
 
-        /**
-         * biz_date 营业日期，由服务端生成
-         */
+
         public static final String bizDate = "biz_date";
 
-        /**
-         * business_type 业务形态 1:SNACK:快餐 2:DINNER:正餐
-         */
+
         public static final String businessType = "business_type";
 
-        /**
-         * creator_id 创建者，创建此记录的系统用户
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name 创建者姓名
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * delivery_type
-         * 订单形式：1:HERE:内用，在店内点餐，可以绑定桌号或者叫餐号
-         * 2:SEND:外送，需要填写收货人信息和期望送达时间
-         * 3:TAKE:自提，需要填写取货人和约定取货时间
-         * 4:CARRY:外带，顾客立即拿走的，以便告知是否打包
-         * 15:UNKNOW:未知（比如无单收银）
-         */
+
         public static final String deliveryType = "delivery_type";
 
-        /**
-         * domain_type 所属领域:RESTAURANT:餐饮业
-         */
+
         public static final String domainType = "domain_type";
 
-        /**
-         * privilege_amount 各种优惠折扣的减免金额，销货时为负数，退货时为正数
-         */
+
         public static final String privilegeAmount = "privilege_amount";
 
-        /**
-         * relate_trade_id 1、退货所对应的销货单 2、拆单时对应的原单
-         */
+
         public static final String relateTradeId = "relate_trade_id";
 
-        /**
-         * relate_trade_uuid
-         */
+
         public static final String relateTradeUuid = "relate_trade_uuid";
 
-        /**
-         * sale_amount 销售金额，明细SALE_AMOUNT之和
-         */
+
         public static final String saleAmount = "sale_amount";
 
-        /**
-         * sku_kind_count 商品种数，每种商品计1，组合套餐明细不计
-         */
+
         public static final String skuKindCount = "sku_kind_count";
 
-        /**
-         * source
-         * 来源：1:android(删了)，2:ios(删了)，3:微信，4:百度外卖，5:百度直达号，6:百度糯米，
-         * 7:百度地图，8:呼叫中心，9:自助终端，10:商户收银终端，11:商户官网，12:电话订单，
-         * 13:loyal，14:OnMobile，15：熟客,16:饿了么 ,17:点评点菜,18:美团外卖
-         */
+
         public static final String sourceId = "source_id";
 
-        /**
-         * source_child
-         * 子来源：1:ANDROID收银终端，2:IPAD自助终端，3:ipad收银终端，31:微信官微，32:微信商微，
-         * 33:微信快捷支付，41:百度外卖，51:百度直达号，61:百度糯米点菜，71:百度地图，
-         * 81:呼叫中心，91:必胜客自助，92味千,111:商户官网，131:loyal，141:OnMobile，
-         * 151:熟客，161:饿了么,171:点评正餐，181：美团外卖菜
-         */
+
         public static final String sourceChild = "source_child";
 
-        /**
-         * trade_amount 交易金额，等于SALE_AMOUNT与PRIVILEGE_AMOUNT之和
-         */
+
         public static final String tradeAmount = "trade_amount";
 
-        /**
-         * trade_amount_before 进位处理之前金额
-         */
+
         public static final String tradeAmountBefore = "trade_amount_before";
 
-        /**
-         * trade_memo 备注
-         */
+
         public static final String tradeMemo = "trade_memo";
 
-        /**
-         * trade_no 单号,生成规则:固定编码(3)+年月日时分秒(yyMMddHHmmSS)+erp后台设置硬件编号(6)
-         */
+
         public static final String tradeNo = "trade_no";
 
-        /**
-         * trade_pay_form 默认值1：线下支付2：在线支付3：组合支付 暂时是微信在使用
-         */
+
         public static final String tradePayForm = "trade_pay_form";
 
-        /**
-         * trade_pay_status
-         * 支付状态： 1:UNPAID:未支付  2:PAYING:支付中，微信下单选择了在线支付但实际上未完成支付的  (删了)
-         * 3:PAID:已支付  4:REFUNDING:退款中  5:REFUNDED:已退款  6:REFUND_FAILED:退款失败
-         * 7:PREPAID:预支付(现在都没用)  8:WAITING_REFUND:等待退款 9:PAID_FAIL:支付失败
-         */
+
         public static final String tradePayStatus = "trade_pay_status";
 
-        /**
-         * trade_status
-         * 交易状态(订单状态)  1:UNPROCESSED:未处理  2:TEMPORARY:挂单，不需要厨房打印(客户端本地的.)
-         * 3:CONFIRMED:已确认  4:FINISH:已完成(全部支付)  5:RETURNED:已退货
-         * 6:INVALID:已作废  7:REFUSED:已拒绝,  8:已取消 10:已反结账 11:已挂账 12:已销账 13:待清账
-         */
+
         public static final String tradeStatus = "trade_status";
 
-        /**
-         * trade_time 交易时间
-         */
+
         public static final String tradeTime = "trade_time";
 
-        /**
-         * trade_type
-         * 交易类型 1:SELL:售货 2:REFUND:退货 3:SPLIT:拆单 4:REPAY:反结账 5:REPAY_FOR_REFUND:反结账退货,6冲账售货单,7冲账退货单
-         */
+
         public static final String tradeType = "trade_type";
 
-        /**
-         * updator_id 最后修改此记录的用户
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name 最后修改者姓名
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * print_time 订单打印时间
-         */
+
         public static final String printTime = "print_time";
-        /**
-         * trade_people_count 订单就餐人数订单实际就餐人数，放在总表里面,是方便后台根据总金额做统计
-         */
+
         public static final String tradePeopleCount = "trade_people_count";
 
     }
@@ -278,9 +199,7 @@ public class Trade extends DataEntityBase implements ICreator, IUpdator {
     private Integer tradePeopleCount;
 
 
-    /**
-     * 订单菜品金额总和，其中不包含附加费和优惠信息
-     */
+
     private BigDecimal dishAmount;
 
     public String getSerialNumber() {

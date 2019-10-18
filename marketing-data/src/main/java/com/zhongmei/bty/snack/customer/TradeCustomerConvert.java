@@ -12,9 +12,7 @@ import com.zhongmei.yunfu.context.util.Utils;
 
 import java.util.ArrayList;
 
-/**
- * @since 2018.05.14.
- */
+
 public class TradeCustomerConvert {
 
 
@@ -37,8 +35,7 @@ public class TradeCustomerConvert {
     public TradeCustomer buildTradeCustomer(Long tradeId, String tradeUuid, CustomerResp customerNew, EcCard ecCard, CustomerType customerType) {
         TradeCustomer customer = new TradeCustomer();
         customer.validateCreate();
-        // 支付人
-        customer.setTradeId(tradeId);
+                customer.setTradeId(tradeId);
         customer.setTradeUuid(tradeUuid);
         customer.setCustomerType(customerType);
         customer.setUuid(SystemUtils.genOnlyIdentifier());

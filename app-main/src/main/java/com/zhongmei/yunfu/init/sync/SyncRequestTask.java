@@ -13,11 +13,7 @@ import com.zhongmei.yunfu.init.sync.bean.SyncResponse;
 import java.util.List;
 import java.util.Map;
 
-/**
- * 同步数据任务
- *
- * @created 2017/5/5
- */
+
 public class SyncRequestTask implements Runnable {
 
     private Context context;

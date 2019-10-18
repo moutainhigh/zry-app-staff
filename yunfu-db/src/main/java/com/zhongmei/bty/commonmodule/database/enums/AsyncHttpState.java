@@ -3,32 +3,21 @@ package com.zhongmei.bty.commonmodule.database.enums;
 import com.zhongmei.yunfu.util.ValueEnum;
 
 
-/**
- * Created by demo on 2018/12/15
- * 备注:有些地方需要根据但前状态的value做优先级排序,优先级高的,value就越小。
- */
+
 
 public enum AsyncHttpState implements ValueEnum<Integer> {
 
-    //正在执行中
-    EXCUTING(2),
+        EXCUTING(2),
 
-    //成功
-    SUCCESS(1),
+        SUCCESS(1),
 
-    //重试中
-    RETRING(0),
+        RETRING(0),
 
 
-    //失败
-    FAILED(-1),
+        FAILED(-1),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

@@ -7,10 +7,8 @@ import java.util.List;
 
 public class CustomerIntegralResp {
 
-    Long aggregateCount;//累计积分总量
-
-    Long integralCount;//当前可用积分总量
-
+    Long aggregateCount;
+    Long integralCount;
     List<NewIntegralRecord> items;
 
     public List<NewIntegralRecord> getItems() {
@@ -19,24 +17,15 @@ public class CustomerIntegralResp {
 
     class NewIntegralRecord {
 
-        Long id;//积分记录ID
-
-        Integer recordType; //记录类型1储值、2消费
-
-        Long beforeIntegral;//之前积分
-
-        Long addIntegral;//本次新增积分
-
-        Long endIntegral;//操作后积分
-
-        Long createDateTime;//创建时间
-
-        Long modifyDateTime;//修改时间
-
-        Integer status;//状态
-
-        String reason;//操作原因
-
+        Long id;
+        Integer recordType;
+        Long beforeIntegral;
+        Long addIntegral;
+        Long endIntegral;
+        Long createDateTime;
+        Long modifyDateTime;
+        Integer status;
+        String reason;
         String userName;
 
 

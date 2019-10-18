@@ -4,59 +4,39 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.IdEntityBase;
 
-/**
- * @Date： 2016/11/30
- * @Description:品牌表
- * @Version: 1.0
- */
+
 @DatabaseTable(tableName = "brand")
 public class Brand extends IdEntityBase {
 
 
     public interface $ {
 
-        /**
-         * weixinAppId
-         */
+
         String weixinAppId = "weixinAppId";
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * status
-         */
+
         String statusFlag = "status_flag";
 
     }
 
-    /**
-     * 微信AppId
-     */
+
     @DatabaseField(columnName = "weixinAppId")
     private String weixinAppId;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 

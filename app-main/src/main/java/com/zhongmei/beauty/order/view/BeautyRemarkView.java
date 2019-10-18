@@ -46,9 +46,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * 菜品备注页
- */
+
 @EViewGroup(R.layout.beauty_remark_layout)
 public class BeautyRemarkView extends LinearLayout {
     private static final String TAG = BeautyRemarkView.class.getSimpleName();
@@ -71,33 +69,25 @@ public class BeautyRemarkView extends LinearLayout {
     @Bean
     ExtraOrderAdapter mExtraOrderAdapter;
 
-    private boolean isOrderRemark = true;//默认是整单备注
-
+    private boolean isOrderRemark = true;
     private OrderDishInterfaceListener listener;
 
     protected IShopcartItemBase shopcartItem;
 
-    /**
-     * 常用整单备注
-     */
+
     private List<String> mCommonTradeRemarks;
 
     private String orderRemark;
 
-    /**
-     * 常用单品备注
-     */
+
     private List<String> mCommonDishRemarks;
 
     private String dishRemark;
 
-    // v8.3 添加备注选项
-    private IPanelItemSettings iPanelItemSettings;
+        private IPanelItemSettings iPanelItemSettings;
 
-    // v8.3 整单备注
-    public static final int REMARK_ORDER = 0;
-    // v8.3 单品备注
-    public static final int REMARK_DISH = 1;
+        public static final int REMARK_ORDER = 0;
+        public static final int REMARK_DISH = 1;
 
     private TextWatcher mTextWatcher = new TextWatcher() {
         @Override
@@ -166,11 +156,9 @@ public class BeautyRemarkView extends LinearLayout {
         iPanelItemSettings = SettingManager.getSettings(IPanelItemSettings.class);
         mExtraOrderView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         mExtraOrderView.setAdapter(mExtraOrderAdapter);
-        //如果有选择菜品默认切换到单品备注
-        if (shopcartItem != null) {
+                if (shopcartItem != null) {
             isOrderRemark = false;
-            tv_title.setText(R.string.orderSingleRemark);//单品备注
-        }
+            tv_title.setText(R.string.orderSingleRemark);        }
         mExtraOrderAdapter.setOnItemClickListener(new ExtraOrderAdapter.OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -197,16 +185,14 @@ public class BeautyRemarkView extends LinearLayout {
         if (isOrderRemark) {
             tvOrderRemark.setSelected(true);
             tvSingleRemark.setSelected(false);
-            //设置已有备注
-            etRemark.setText(orderRemark);
+                        etRemark.setText(orderRemark);
             etRemark.setSelection(etRemark.getText().length());
             iPanelItemSettings.setSnackRemarkType(REMARK_ORDER);
             loadTradeRemark();
         } else {
             tvOrderRemark.setSelected(false);
             tvSingleRemark.setSelected(true);
-            //设置已有备注
-            etRemark.setText(dishRemark);
+                        etRemark.setText(dishRemark);
             etRemark.setSelection(etRemark.getText().length());
             loadDishRemark();
         }
@@ -214,9 +200,7 @@ public class BeautyRemarkView extends LinearLayout {
         etRemark.addTextChangedListener(mTextWatcher);
     }
 
-    /**
-     * 加载整单常用备注
-     */
+
     private void loadTradeRemark() {
         AsyncTask<Void, Void, List<String>> asyncTask = new AsyncTask<Void, Void, List<String>>() {
             @Override
@@ -253,9 +237,7 @@ public class BeautyRemarkView extends LinearLayout {
         }
     }
 
-    /**
-     * 加载单品常用备注
-     */
+
     private void loadDishRemark() {
         @SuppressLint("StaticFieldLeak")
         AsyncTask<Void, Void, List<String>> asyncTask = new AsyncTask<Void, Void, List<String>>() {
@@ -269,8 +251,7 @@ public class BeautyRemarkView extends LinearLayout {
                     return Collections.emptyList();
                 } else {
                     List<DishBrandProperty> dishPropertyList;
-                    //是否是套餐子菜
-                    if (shopcartItem instanceof SetmealShopcartItem || shopcartItem instanceof ReadonlySetmealShopcartItem) {
+                                        if (shopcartItem instanceof SetmealShopcartItem || shopcartItem instanceof ReadonlySetmealShopcartItem) {
                         SetmealPropertyFilter filter = new SetmealPropertyFilter(dishShop);
                         dishPropertyList = DishCache.getDishPropertyHolder().filter(filter);
                     } else {
@@ -314,12 +295,7 @@ public class BeautyRemarkView extends LinearLayout {
         }
     }
 
-    /**
-     * 套餐明细的属性数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月20日
-     */
+
     private static class SetmealPropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;
@@ -335,12 +311,7 @@ public class BeautyRemarkView extends LinearLayout {
 
     }
 
-    /**
-     * 单品或套餐的属性数据过滤器
-     *
-     * @version: 1.0
-     * @date 2015年7月15日
-     */
+
     private static class DishPropertyFilter implements DishCache.DataFilter<DishBrandProperty> {
 
         private final DishShop dishShop;
@@ -371,8 +342,7 @@ public class BeautyRemarkView extends LinearLayout {
                 isOrderRemark = true;
                 tvOrderRemark.setSelected(true);
                 tvSingleRemark.setSelected(false);
-                //刷新常用备注
-                if (mCommonTradeRemarks != null) {
+                                if (mCommonTradeRemarks != null) {
                     if (mExtraOrderAdapter != null) {
                         mExtraOrderAdapter.setItems(mCommonTradeRemarks);
                     }
@@ -380,8 +350,7 @@ public class BeautyRemarkView extends LinearLayout {
                     loadTradeRemark();
                 }
 
-                //设置已有备注
-                etRemark.setText(orderRemark);
+                                etRemark.setText(orderRemark);
                 etRemark.setSelection(etRemark.getText().length());
                 break;
             case R.id.tv_single_remark:
@@ -398,8 +367,7 @@ public class BeautyRemarkView extends LinearLayout {
                 tvOrderRemark.setSelected(false);
                 tvSingleRemark.setSelected(true);
 
-                //刷新常用备注
-                if (mCommonDishRemarks != null) {
+                                if (mCommonDishRemarks != null) {
                     if (mExtraOrderAdapter != null) {
                         mExtraOrderAdapter.setItems(mCommonDishRemarks);
                     }
@@ -407,8 +375,7 @@ public class BeautyRemarkView extends LinearLayout {
                     loadDishRemark();
                 }
 
-                //设置已有备注
-                etRemark.setText(dishRemark);
+                                etRemark.setText(dishRemark);
                 etRemark.setSelection(etRemark.getText().length());
                 break;
             default:

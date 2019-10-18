@@ -11,92 +11,54 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.UuidEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * PrinterStyleSetting is a ORMLite bean type. Corresponds to the database table "printer_style_setting"
- */
+
 @DatabaseTable(tableName = "printer_style_setting")
 public class PrinterStyleSetting extends UuidEntityBase {
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "printer_style_setting"
-     */
+
     public interface $ extends UuidEntityBase.$ {
 
-        /**
-         * id
-         */
+
         public static final String id = "id";
 
-        /**
-         * printer_type
-         */
+
         public static final String printerType = "printer_type";
 
-        /**
-         * style_id
-         */
+
         public static final String styleId = "style_id";
 
-        /**
-         * server_create_time
-         */
+
         public static final String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         public static final String serverUpdateTime = "server_update_time";
 
-        /**
-         * status_flag
-         */
+
         public static final String statusFlag = "status_flag";
 
-        /**
-         * brand_identy
-         */
+
         public static final String brandIdenty = "brand_identy";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * device_identy
-         */
+
         public static final String deviceIdenty = "device_identy";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_name
-         */
-        // public static final String creatorName = "creator_name" ;
 
-        /**
-         * creator_id
-         */
-        //public static final String creatorId = "creator_id" ;
 
-        /**
-         * updator_id
-         */
+
+
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * client_create_time
-         */
-        //  public static final String clientCreateTime = "client_create_time";
 
-        /**
-         * client_update_time
-         */
-        //  public static final String clientUpdateTime = "client_update_time";
+
+
 
     }
 
@@ -109,11 +71,9 @@ public class PrinterStyleSetting extends UuidEntityBase {
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
     
- /*   @DatabaseField(columnName = "creator_name")
-    private String creatorName;*/
+
     
-   /* @DatabaseField(columnName = "creator_id")
-    private String creatorId;*/
+
 
     @DatabaseField(columnName = "updator_id")
     private String updatorId;
@@ -136,11 +96,7 @@ public class PrinterStyleSetting extends UuidEntityBase {
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
     
-/*    @DatabaseField(columnName = "client_create_time")
-    private Long clientCreateTime;
 
-    @DatabaseField(columnName = "client_update_time")
-    private Long clientUpdateTime;*/
 
     @DatabaseField(columnName = "brand_identy", canBeNull = false)
     private Long brandIdenty;
@@ -170,21 +126,7 @@ public class PrinterStyleSetting extends UuidEntityBase {
         this.updatorName = updatorName;
     }
 
-	/*public String getCreatorName() {
-		return creatorName;
-	}
 
-	public void setCreatorName(String creatorName) {
-		this.creatorName = creatorName;
-	}
-
-	public String getCreatorId() {
-		return creatorId;
-	}
-
-	public void setCreatorId(String creatorId) {
-		this.creatorId = creatorId;
-	}*/
 
     public String getUpdatorId() {
         return updatorId;
@@ -242,23 +184,7 @@ public class PrinterStyleSetting extends UuidEntityBase {
         this.serverUpdateTime = serverUpdateTime;
     }
 
-    /**
-     * public Long getClientCreateTime() {
-     * return clientCreateTime;
-     * }
-     * <p>
-     * public void setClientCreateTime(Long clientCreateTime) {
-     * this.clientCreateTime = clientCreateTime;
-     * }
-     * <p>
-     * public Long getClientUpdateTime() {
-     * return clientUpdateTime;
-     * }
-     * <p>
-     * public void setClientUpdateTime(Long clientUpdateTime) {
-     * this.clientUpdateTime = clientUpdateTime;
-     * }
-     **/
+
 
     public Long getBrandIdenty() {
         return brandIdenty;
@@ -283,8 +209,7 @@ public class PrinterStyleSetting extends UuidEntityBase {
         setBrandIdenty(BaseApplication.sInstance.getBrandIdenty());
         setShopIdenty(BaseApplication.sInstance.getShopIdenty());
         setDeviceIdenty(BaseApplication.sInstance.getDeviceIdenty());
-        //setClientCreateTime(System.currentTimeMillis());
-        if (this instanceof ICreator) {
+                if (this instanceof ICreator) {
             AuthUser user = Session.getAuthUser();
             if (user != null) {
                 ICreator creator = (ICreator) this;
@@ -296,8 +221,7 @@ public class PrinterStyleSetting extends UuidEntityBase {
     }
 
     public void validateUpdate() {
-        //	setClientUpdateTime(System.currentTimeMillis());
-        setChanged(true);
+                setChanged(true);
         if (this instanceof IUpdator) {
             AuthUser user = Session.getAuthUser();
             if (user != null) {

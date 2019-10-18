@@ -43,9 +43,7 @@ public class BatteryReceiverManager extends Observable<BatteryReceiverManager.Ba
         mContext.unregisterReceiver(broadcastReceiver);
     }
 
-    /**
-     * 是否存在电池
-     */
+
     public boolean exist() {
         return status != BatteryManager.BATTERY_STATUS_UNKNOWN;
     }

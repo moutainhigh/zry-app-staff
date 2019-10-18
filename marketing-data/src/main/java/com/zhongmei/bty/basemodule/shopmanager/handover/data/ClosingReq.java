@@ -1,13 +1,10 @@
 package com.zhongmei.bty.basemodule.shopmanager.handover.data;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class ClosingReq {
 
-    private Integer bussinessType;//业务类型
-
+    private Integer bussinessType;
     public Integer getBussinessType() {
         return bussinessType;
     }

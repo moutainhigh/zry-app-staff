@@ -1,18 +1,9 @@
 package com.zhongmei.beauty.entity;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BeautyNotifyEntity {
-    private int customerNumber;//到店人数
-    private int reserverNumber;//预约单数
-    private int unDealReserverNumber;//未处理的订单数
-    private int tradeNumber;//订单数
-    private int memberNumber;//新增会员数
-    private int todayReserverNumber;//今日预约数
-    private int unpaidTradeNumber;//待付款订单
-    private int taskNumber;
+    private int customerNumber;    private int reserverNumber;    private int unDealReserverNumber;    private int tradeNumber;    private int memberNumber;    private int todayReserverNumber;    private int unpaidTradeNumber;    private int taskNumber;
 
     public int getCustomerNumber() {
         return customerNumber;

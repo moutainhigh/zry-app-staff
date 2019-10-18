@@ -2,10 +2,7 @@ package com.zhongmei.yunfu;
 
 import android.text.TextUtils;
 
-/**
- * Created by demo on 2018/12/15
- * 门店配置信息
- */
+
 public class ShopInfo {
 
     public String syncUrl = ShopInfoManager.REMOTE_SERVER_HOST;
@@ -20,8 +17,7 @@ public class ShopInfo {
     private String shopLogo;
     private String latitude;
     private String longitude;
-    private String openTime;  //9:00-18:00
-
+    private String openTime;
     public String getDeviceId() {
         return deviceId;
     }

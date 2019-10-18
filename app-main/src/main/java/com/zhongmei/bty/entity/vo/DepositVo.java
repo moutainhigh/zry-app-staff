@@ -5,11 +5,7 @@ import com.zhongmei.bty.basemodule.trade.entity.TradeDeposit;
 
 import java.io.Serializable;
 
-/**
- * @Date： 2016/7/19
- * @Description:押金操作对象
- * @Version: 1.0
- */
+
 public class DepositVo implements Serializable {
 
     private DepositInfo mDepositInfo;

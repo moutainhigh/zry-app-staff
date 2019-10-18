@@ -67,8 +67,7 @@ public class DishTypeSelectDialog extends BaseDialog implements View.OnClickList
         dialogWindow.setGravity(Gravity.CENTER);
         DisplayMetrics metric = new DisplayMetrics();
         dialogWindow.getWindowManager().getDefaultDisplay().getMetrics(metric);
-        int width = metric.widthPixels; // 屏幕宽度（像素）
-        int height = metric.heightPixels;
+        int width = metric.widthPixels;         int height = metric.heightPixels;
 
         WindowManager.LayoutParams lp = dialogWindow.getAttributes();
         lp.width = width - DensityUtil.dip2px(MainApplication.getInstance(), 260);
@@ -163,8 +162,7 @@ public class DishTypeSelectDialog extends BaseDialog implements View.OnClickList
 
     public static void close() {
         if (mInstance != null) {
-            //解决View not attached to window manager崩溃
-            Activity activity = mInstance.activity;
+                        Activity activity = mInstance.activity;
             if (activity == null || activity.isDestroyed() || activity.isFinishing()) {
                 return;
             }

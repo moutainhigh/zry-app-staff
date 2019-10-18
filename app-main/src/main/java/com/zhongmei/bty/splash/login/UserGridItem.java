@@ -2,22 +2,14 @@ package com.zhongmei.bty.splash.login;
 
 import com.zhongmei.yunfu.context.session.core.user.User;
 
-/**
- * @date:2016年6月7日上午9:24:54
- */
-public class UserGridItem {
-    //authuser的id
-    private Long userId;
-    //	用户名
-    private String userName;
-    //首字母
-    private String sortLetters;
-    //是否被选中
-    private boolean isSelected;
-    //首字母的位置
-    private int section;
-    private User user;//add v8.2
 
+public class UserGridItem {
+        private Long userId;
+        private String userName;
+        private String sortLetters;
+        private boolean isSelected;
+        private int section;
+    private User user;
     public Long getUserId() {
         return userId;
     }

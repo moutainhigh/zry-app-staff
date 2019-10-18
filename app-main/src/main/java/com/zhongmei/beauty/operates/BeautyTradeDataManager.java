@@ -47,21 +47,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Created by demo on 2018/12/15
- * 为UI提供数据支持
- */
+
 
 public class BeautyTradeDataManager {
     private static final String TAG = BeautyTradeDataManager.class.getSimpleName();
 
 
-    /**
-     * 查询到店人数
-     *
-     * @param helper
-     * @return
-     */
+
     public int queryCustomerNumber(DatabaseHelper helper) throws Exception {
         Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
         QueryBuilder tradeBuilder = tradeDao.queryBuilder();
@@ -78,12 +70,7 @@ public class BeautyTradeDataManager {
         return (int) tradeBuilder.countOf();
     }
 
-    /**
-     * 查询预约单数
-     *
-     * @param helper
-     * @return
-     */
+
     public int queryReserverNumber(DatabaseHelper helper) throws Exception{
         Dao<Booking, String> bookingDao = helper.getDao(Booking.class);
         QueryBuilder bookingBuilder = bookingDao.queryBuilder();
@@ -94,17 +81,10 @@ public class BeautyTradeDataManager {
                 .gt(Booking.$.serverCreateTime, date)
                 .and()
                 .eq(Booking.$.statusFlag, StatusFlag.VALID);
-//                .and()
-//                .notIn(Booking.$.orderStatus, BookingOrderStatus.CANCEL);
         return (int) bookingBuilder.countOf();
     }
 
-    /**
-     * 查询未处理的订单数（目前只有小程序过来的订单）
-     * @param helper
-     * @return
-     * @throws Exception
-     */
+
     public int queryUnDealReserverNumber(DatabaseHelper helper) throws Exception{
         Dao<Booking, String> bookingDao = helper.getDao(Booking.class);
         QueryBuilder bookingBuilder = bookingDao.queryBuilder();
@@ -120,12 +100,7 @@ public class BeautyTradeDataManager {
         return (int) bookingBuilder.countOf();
     }
 
-    /**
-     * 查询今日订单数
-     *
-     * @param helper
-     * @return
-     */
+
     public int queryTradeNumber(DatabaseHelper helper) throws Exception {
         Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
         QueryBuilder tradeBuilder = tradeDao.queryBuilder();
@@ -135,8 +110,6 @@ public class BeautyTradeDataManager {
         tradeBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY)
                 .and().
                     gt(Trade.$.serverCreateTime, date)
-//                .and()
-//                .in(Trade.$.tradeStatus, TradeStatus.CONFIRMED)
                 .and()
                 .eq(Trade.$.statusFlag, StatusFlag.VALID)
                 .and()
@@ -145,24 +118,14 @@ public class BeautyTradeDataManager {
         return (int) tradeBuilder.countOf();
     }
 
-    /**
-     * 查询新增会员数
-     *
-     * @return
-     */
+
     public int queryMemberNumber() {
-        //通过接口返回数据，缓存到share，本地创建会员添加成功后更新数据，数据结构：年月日:新增会员数量
-        return CustomerUtil.getRegistMemberNumber();
+                return CustomerUtil.getRegistMemberNumber();
     }
 
-    /**
-     * 查询未处理的今日预约订单
-     *
-     * @return
-     */
+
     public int queryTodayReserverNumber(DatabaseHelper helper) throws Exception {
-        //查询预订单数据
-        Dao<Booking, String> bookingTradeDao = helper.getDao(Booking.class);
+                Dao<Booking, String> bookingTradeDao = helper.getDao(Booking.class);
         QueryBuilder tradeBuilder = bookingTradeDao.queryBuilder();
 
         long startTime = DateTimeUtils.getDayStart(new Date());
@@ -179,12 +142,7 @@ public class BeautyTradeDataManager {
         return (int) tradeBuilder.countOf();
     }
 
-    /**
-     * 查询未付款订单
-     *
-     * @param helper
-     * @return
-     */
+
     public int queryUnPaidTradeNumber(DatabaseHelper helper) throws Exception {
         Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
         QueryBuilder tradeBuilder = tradeDao.queryBuilder();
@@ -199,11 +157,7 @@ public class BeautyTradeDataManager {
     }
 
 
-    /**
-     * 查询未处理的订单
-     *
-     * @return
-     */
+
     public List<UnpaidTradeVo> queryUnpaidTrades(BusinessType businessType) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         List<UnpaidTradeVo> listUnpaidTradeVos = new ArrayList<>();
@@ -214,13 +168,11 @@ public class BeautyTradeDataManager {
             List<TradeExtra> extras = getTradeExtrasByTrades(trades, helper);
 
             Map<Long, List<TradeCustomer>> mapTradeCustomer = getTradeCustomerMap(customers);
-//            Map<Long,TradeExtra> mapTradeExtra=getTradeExtraMap(extras);
             Map<Long, List<TradeItemVo>> mapTradeItemVos = getTradeItemVosByTrades(trades, helper);
 
             for (Trade trade : trades) {
                 UnpaidTradeVo tradeVo = new UnpaidTradeVo();
                 tradeVo.setTrade(trade);
-//                tradeVo.setTradeExtra(mapTradeExtra.get(trade.getId()));
                 tradeVo.setmTradeCustomer(mapTradeCustomer.get(trade.getId()));
                 tradeVo.setTradeItemList(mapTradeItemVos.get(trade.getId()));
                 listUnpaidTradeVos.add(tradeVo);
@@ -234,14 +186,7 @@ public class BeautyTradeDataManager {
         return listUnpaidTradeVos;
     }
 
-    /**
-     * 根据页态获取订单
-     *
-     * @param businessType
-     * @param helper
-     * @return
-     * @throws Exception
-     */
+
     private List<Trade> getUNFinishTradeByBusinessType(BusinessType businessType, DatabaseHelper helper) throws Exception {
         if (helper == null) {
             throw new Exception("DatabaseHelper is null!");
@@ -277,14 +222,7 @@ public class BeautyTradeDataManager {
 
     }
 
-    /**
-     * 根据订单查询TradeExtras
-     *
-     * @param trades
-     * @param helper
-     * @return
-     * @throws Exception
-     */
+
     public List<TradeExtra> getTradeExtrasByTrades(List<Trade> trades, DatabaseHelper helper) throws Exception {
         if (helper == null) {
             throw new Exception("DatabaseHelper is null!");
@@ -306,14 +244,7 @@ public class BeautyTradeDataManager {
         return tradeExtraList;
     }
 
-    /**
-     * 获取订单对应的会员
-     *
-     * @param trades
-     * @param helper
-     * @return
-     * @throws Exception
-     */
+
     private List<TradeCustomer> getCustomerByTrades(List<Trade> trades, DatabaseHelper helper) throws Exception {
         if (helper == null) {
             throw new Exception("DatabaseHelper is null!");
@@ -387,12 +318,7 @@ public class BeautyTradeDataManager {
     }
 
 
-    /**
-     * 将订单会员组织成map集合，方便组装数据
-     *
-     * @param customers
-     * @return
-     */
+
     private Map<Long, List<TradeCustomer>> getTradeCustomerMap(List<TradeCustomer> customers) {
         Map<Long, List<TradeCustomer>> mapTradeCustomer = new HashMap<>();
 
@@ -424,12 +350,7 @@ public class BeautyTradeDataManager {
         return mapTradeExtra;
     }
 
-    /**
-     * 获取paymentvo
-     *
-     * @param tradeUuid
-     * @return
-     */
+
     public PaymentVo getPaymentVo(String tradeUuid) {
         if (!TextUtils.isEmpty(tradeUuid)) {
             try {

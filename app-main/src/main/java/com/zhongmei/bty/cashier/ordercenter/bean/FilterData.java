@@ -7,9 +7,7 @@ import com.zhongmei.yunfu.util.ValueEnum;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class FilterData {
     private String category;

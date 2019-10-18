@@ -12,9 +12,7 @@ import com.zhongmei.bty.basemodule.pay.entity.PaymentItemGroupon;
 
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class DiscountTicketAdapter extends BaseAdapter {
 

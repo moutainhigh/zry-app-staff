@@ -2,27 +2,15 @@ package com.zhongmei.bty.basemodule.customer.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- *
 
- *
- */
 public enum FullSend implements ValueEnum<Integer> {
 
-    /**
-     * 是
-     */
+
     YES(0),
-    /**
-     * 否
-     */
+
     NO(1),
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

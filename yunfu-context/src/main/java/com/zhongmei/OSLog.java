@@ -21,9 +21,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class OSLog {
 
     private static final String TAG_FORMAT = "%s/%s[%s]";
@@ -35,19 +33,9 @@ public class OSLog {
         @Override
         public Thread newThread(@NonNull Runnable r) {
             Thread thread = new Thread(r, "OSLog #" + poolNumber.getAndIncrement());
-            /*if (thread.isDaemon()) {
-                thread.setDaemon(false);
-            }
-            if (thread.getPriority() != Thread.NORM_PRIORITY) {
-                thread.setPriority(Thread.NORM_PRIORITY);
-            }*/
 
-            /*thread.setUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-                @Override
-                public void uncaughtException(Thread thread, Throwable ex) {
 
-                }
-            });*/
+
             return thread;
         }
     });
@@ -132,12 +120,8 @@ public class OSLog {
         for (StackTraceElement element : stackTraceElements) {
             if (!element.getClassName().equals(OSLog.class.getName())) {
                 String tag = element.getClassName();
-                /*Matcher m = ANONYMOUS_CLASS.matcher(tag);
-                if (m.find()) {
-                    tag = m.replaceAll("");
-                }*/
-                //return tag.substring(tag.lastIndexOf('.') + 1);
-                return String.format(TAG_CLASS_FORMAT, tag.substring(tag.lastIndexOf('.') + 1), element.getMethodName(), element.getLineNumber());
+
+                                return String.format(TAG_CLASS_FORMAT, tag.substring(tag.lastIndexOf('.') + 1), element.getMethodName(), element.getLineNumber());
             }
         }
         return "UNKNOWN";
@@ -161,8 +145,7 @@ public class OSLog {
 
     public void println(int priority, Throwable t, String msg, Object... args) {
         final String message = getMessage(t, msg, args);
-        //Log.i(getTag(), message);
-        Log.println(priority, getTag(), message != null ? message : "{null}");
+                Log.println(priority, getTag(), message != null ? message : "{null}");
     }
 
     public void log(String msg, Object... args) {

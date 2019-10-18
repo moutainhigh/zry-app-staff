@@ -8,69 +8,41 @@ import com.zhongmei.yunfu.db.IUpdator;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * @Date： 2016/12/23
- * @Description:营销设置表
- * @Version: 1.0
- */
+
 @DatabaseTable(tableName = "lyd_market_setting")
 public class LydMarketSetting extends IdEntityBase implements ICreator, IUpdator {
 
 
-    /**
-     * The columns of table "lyd_market_setting"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
 
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * config_name
-         */
+
         public static final String configName = "config_name";
-        /**
-         * config_desc
-         */
+
         public static final String configDesc = "config_desc";
-        /**
-         * config_type
-         */
+
         public static final String configType = "config_type";
-        /**
-         * config_value
-         */
+
         public static final String configValue = "config_value";
-        /**
-         * brand_id
-         */
+
         public static final String brandId = "brand_id";
 
     }
@@ -144,21 +116,15 @@ public class LydMarketSetting extends IdEntityBase implements ICreator, IUpdator
     @DatabaseField(columnName = "updator_name")
     private String updatorName;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 

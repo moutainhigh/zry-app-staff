@@ -27,9 +27,7 @@ import java.util.Map;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * 主要处理通过本预定开台的业务，在订单状态变为完成的时候更改此预定的预定状态为已离店
- */
+
 public class PrepareTradeRelationManager {
     private final static String TAG = PrepareTradeRelationManager.class.getSimpleName();
 
@@ -58,33 +56,15 @@ public class PrepareTradeRelationManager {
     }
 
 
-    /**
-     * 修改会员状态为已离店
-     *
-     * @param listTradeVo
-     * @param manager
-     */
+
     public void doArrival(List<TradeVo> listTradeVo, FragmentManager manager) {
         if (listTradeVo != null && listTradeVo.size() > 0) {
-//            /*
-//            获取预定订单匹配表里的数据
-//             */
-////            Map<Long, PrepareTradeRelation> prepareMap = null;
-//            try {
-//                prepareMap =  prepareTradeRelationDal.findMapByTradeId( PrepareTradeRelationDal.TYPE_VALUE_BOOKING);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
             if (prepareMap == null) {
                 return;
             }
 
             for (TradeVo tradeVo : listTradeVo) {
-                /*
-                   判断是否匹配表里有这个订单，如果有，代表是从预定或者排队开台的
-                   从匹配表里找出这个订单对应的预定id，根据预定id找到这个预定所有的开台订单
-                   循环判断这些订单状态，如果所有订单都是已完成状态，则更改这个预定的状态为已离店
-                */
+
                 if (prepareMap.containsKey(tradeVo.getTrade().getId())) {
 
                     Long bookingid = prepareMap.get(tradeVo.getTrade().getId()).getRelatedId();
@@ -144,17 +124,13 @@ public class PrepareTradeRelationManager {
             e.printStackTrace();
         }
 
-        /**
-         * 为了以防有此预定而本地数据库没有同步过来
-         */
+
         if (bookingVo == null) {
             bookingVo = new BookingVo();
             bookingVo.getBooking().setId(bookingid);
         }
 
         Date now = new Date();
-//        bookingVo.getBooking().setShopLeaveTime(now.getTime());
-//        bookingVo.getBooking().setShopLeaveUser(Session.getAuthUser().getName());
         bookingVo.getBooking().setOrderStatus(BookingOrderStatus.LEAVE);
 
         return bookingVo;
@@ -185,21 +161,10 @@ public class PrepareTradeRelationManager {
     }
 
 
-    /**
-     * 接收预定表变动的消息
-     *
-     * @param event
-     */
-    /*public void onEventBackgroundThread(BookingChangeEvent event) {
 
-        if (event != null) {
-            initBookingData();
-        }
-    }*/
 
-    /**
-     * 获取预定订单匹配表里的数据
-     */
+
+
     private void initBookingData() {
 
         try {

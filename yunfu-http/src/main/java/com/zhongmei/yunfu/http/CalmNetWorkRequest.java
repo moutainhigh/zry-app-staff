@@ -28,13 +28,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class CalmNetWorkRequest {
-    /*
-     * 获取指定Content类型的ResponseObject对象的类型
-     */
+
     @NonNull
     public static Type getResponseType(Type contentType) {
         return com.google.gson.internal.$Gson$Types.newParameterizedTypeWithOwner(null,
@@ -54,19 +50,11 @@ public class CalmNetWorkRequest {
         return new Builder<>().with(activity);
     }
 
-    /**
-     * @param <T> 请求数据类型
-     * @param <R> 返回数据类型
-     */
+
     public static class Builder<T, R> {
-        private Context context; //上下文
-        private Fragment fragment;
-        //private FragmentActivity activity;
-        private int method = NetworkRequest.HttpMethod.POST;
-        private T requestContent; //请求的内容
-        private Type responseType; //返回的数据类型
-        private String url; //请求的url
-        private NetworkRequest.ResponseProcessor responseProcessor;
+        private Context context;         private Fragment fragment;
+                private int method = NetworkRequest.HttpMethod.POST;
+        private T requestContent;         private Type responseType;         private String url;         private NetworkRequest.ResponseProcessor responseProcessor;
         private NetworkRequest.OnSuccessListener<R> successListener;
         private NetworkRequest.OnErrorListener errorListener;
         private Map<String, String> headers;
@@ -74,19 +62,12 @@ public class CalmNetWorkRequest {
         private int timeout = -1;
         private boolean isShowLoading = false;
         private List<NetworkRequest.RequestInterceptor> requestInterceptors = new ArrayList<>();
-        // loadingDialog相关
-        private UILoadingController mDialogFragment = null;
-        private String reqMarker = null;//幂等重试标示
-        private int serviceRetryCount = 0;//幂等重试次数
+                private UILoadingController mDialogFragment = null;
+        private String reqMarker = null;        private int serviceRetryCount = 0;
+        private boolean interceptEnable;
 
-        private boolean interceptEnable;//异步拦截
-
-        /**
-         * 处理参数，发送请求
-         */
         public void create() {
-            // url为空，请求和返回类型为空时时直接返回
-            if (TextUtils.isEmpty(url) || requestContent == null || responseType == null) {
+                        if (TextUtils.isEmpty(url) || requestContent == null || responseType == null) {
                 return;
             }
 
@@ -98,25 +79,20 @@ public class CalmNetWorkRequest {
                     .responseType(responseType)
                     .interceptEnable(interceptEnable)
                     .httpMethod(method);
-            // 添加返回处理
-            if (responseProcessor != null) {
+                        if (responseProcessor != null) {
                 String eventName = CalmEventSuccessListenerProxy.getEventName(successListener);
                 NetworkRequest.ResponseProcessor proxy = CalmEventProcessorProxy.newProxy(responseProcessor, eventName, method, url, requestObject);
                 builder.responseProcessor(proxy);
             }
 
-            builder.tag(tag); // 添加tag标识
-            builder.timeout(timeout); // 添加超时时间
-
-            // 添加回调
-            NetworkRequest.OnSuccessListener proxy = CalmEventSuccessListenerProxy.newProxy(successListener, method, url, requestObject);
+            builder.tag(tag);             builder.timeout(timeout);
+                        NetworkRequest.OnSuccessListener proxy = CalmEventSuccessListenerProxy.newProxy(successListener, method, url, requestObject);
             ApiResponse apiResponse = new ApiResponse(url, requestObject, proxy, errorListener) {
                 @Override
                 public void onError(NetError error) {
                     if (RequestRetryUtil.isUrlCanServiceRetry(url) && !TextUtils.isEmpty(reqMarker)
                             && serviceRetryCount < RequestRetryUtil.MAX_SERVICE_RETRY_COUNT) {
-                        //重试
-                        create();
+                                                create();
                         serviceRetryCount++;
                         return;
                     }
@@ -130,8 +106,7 @@ public class CalmNetWorkRequest {
             if (isShowLoading && mDialogFragment == null) {
                 showLoadingDialog();
             }
-            // 创建request
-            NetworkRequest request = builder.build();
+                        NetworkRequest request = builder.build();
             if (headers != null && !headers.isEmpty()) {
                 request.setHeader(headers);
             }
@@ -145,21 +120,14 @@ public class CalmNetWorkRequest {
                 builder.with(context);
             } else if (fragment != null) {
                 builder.with(fragment);
-            } /*else if (activity != null) {
-                builder.with(activity);
-            }*/ else {
-                // 没有上下文的情况下，直接报错
-                throw new RuntimeException("sholud contain context or fragment or activty");
+            }  else {
+                                throw new RuntimeException("sholud contain context or fragment or activty");
             }
             builder.request(request).create();
         }
 
         private void showLoadingDialog() {
-            /*FragmentManager fragmentManager = getFragmentManager();
-            if (fragmentManager == null) {
-                return;
-            }
-            mDialogFragment = CalmLoadingDialogFragment.showByAllowingStateLoss(fragmentManager);*/
+
 
             if (context instanceof UILoadingController) {
                 mDialogFragment = (UILoadingController) context;
@@ -174,17 +142,7 @@ public class CalmNetWorkRequest {
             }
         }
 
-        /*private FragmentManager getFragmentManager() {
-            if (fragment != null) {
-                return fragment.getFragmentManager();
-            }
 
-            if (activity != null) {
-                return activity.getSupportFragmentManager();
-            }
-
-            return null;
-        }*/
 
         private void addRequestInterceptors(NetworkRequest request) {
             if (requestInterceptors != null && !requestInterceptors.isEmpty()) {
@@ -206,10 +164,7 @@ public class CalmNetWorkRequest {
             return this;
         }
 
-        /*public Builder with(FragmentActivity activity) {
-            this.activity = activity;
-            return this;
-        }*/
+
 
         public Builder httpMethod(int method) {
             this.method = method;
@@ -295,8 +250,7 @@ public class CalmNetWorkRequest {
             @Override
             public void onSuccess(R data) {
                 if (isDialogShowing()) {
-                    //CalmLoadingDialogFragment.hide(mDialogFragment);
-                    mDialogFragment.dismissLoadingDialog();
+                                        mDialogFragment.dismissLoadingDialog();
                     mDialogFragment = null;
                 }
                 if (!(data instanceof ResponseObject)) {
@@ -317,8 +271,7 @@ public class CalmNetWorkRequest {
             @Override
             public void onError(NetError error) {
                 if (isDialogShowing()) {
-                    //CalmLoadingDialogFragment.hide(mDialogFragment);
-                    mDialogFragment.dismissLoadingDialog();
+                                        mDialogFragment.dismissLoadingDialog();
                     mDialogFragment = null;
                 }
                 if (mErrorListener == null) {

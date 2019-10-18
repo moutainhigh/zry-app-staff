@@ -33,9 +33,7 @@ import com.zhongmei.bty.data.operates.impl.CallDishNotifyOperatesImpl;
 
 import java.util.List;
 
-/**
- * 订单中心订单列表快餐Model，业务处理类主要负责数据库操作、网络操作
- */
+
 
 public class SnackOrderCenterListManager extends OrderCenterListManagerNew {
     private static final String TAG = SnackOrderCenterListManager.class.getSimpleName();

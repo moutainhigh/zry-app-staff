@@ -18,12 +18,7 @@ import org.androidannotations.annotations.ViewById;
 
 import java.math.BigDecimal;
 
-/**
- * @Description: 反结账记录
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @EViewGroup(R.layout.dinner_ordercenter_repay_order_item)
 public class OrderCenterRePayLayout extends LinearLayout {
 
@@ -85,12 +80,10 @@ public class OrderCenterRePayLayout extends LinearLayout {
 
         }
         if (mTradePaymentVo.getPaymentVoList() != null && mTradePaymentVo.getPaymentVoList().size() > 0) {
-            // 实收 金额
-            BigDecimal totalAmount = mOrderCenterDetailPresenter.getShiShouAmountString(mTradePaymentVo.getTradeVo(), mTradePaymentVo.getPaymentVoList(), false);
+                        BigDecimal totalAmount = mOrderCenterDetailPresenter.getShiShouAmountString(mTradePaymentVo.getTradeVo(), mTradePaymentVo.getPaymentVoList(), false);
             tvAmount.setText(
                     mContext.getString(R.string.customer_money) + " " + Utils.formatPrice(totalAmount.doubleValue()));
-            // 收银时间
-            if (mTradePaymentVo.getTradeVo() != null
+                        if (mTradePaymentVo.getTradeVo() != null
                     && mTradePaymentVo.getTradeVo().getTrade() != null
                     && mTradePaymentVo.getTradeVo().getTrade().getClientUpdateTime() != null) {
                 tvTime.setText(DateTimeUtils.formatDateTime(mTradePaymentVo.getTradeVo().getTrade().getClientUpdateTime())
@@ -101,8 +94,7 @@ public class OrderCenterRePayLayout extends LinearLayout {
                     && mTradePaymentVo.getTradeVo().getTrade().getTradeAmount() != null) {
                 tvAmount.setText(mContext.getString(R.string.customer_money) + " "
                         + Utils.formatPrice(mTradePaymentVo.getTradeVo().getTrade().getTradeAmount().doubleValue()));
-                // 收银时间
-                if (mTradePaymentVo.getTradeVo() != null
+                                if (mTradePaymentVo.getTradeVo() != null
                         && mTradePaymentVo.getTradeVo().getTrade() != null
                         && mTradePaymentVo.getTradeVo().getTrade().getClientUpdateTime() != null) {
                     tvTime.setText(DateTimeUtils.formatDateTime(mTradePaymentVo.getTradeVo().getTrade().getClientUpdateTime())

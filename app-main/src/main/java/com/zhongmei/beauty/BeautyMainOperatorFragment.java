@@ -20,9 +20,7 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EFragment(R.layout.beauty_main_fragment_operator)
 public class BeautyMainOperatorFragment extends BasicFragment implements BeautyNotifyCache.BeautyNotifyListener {
 
@@ -39,17 +37,13 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
     protected TextView tv_shopinfo;
 
     @ViewById(R.id.tv_customer_number)
-    protected TextView tv_customerNumber;//到店人数
-
+    protected TextView tv_customerNumber;
     @ViewById(R.id.tv_reserver_number)
-    protected TextView tv_reserverNumber;//预约单数
-
+    protected TextView tv_reserverNumber;
     @ViewById(R.id.tv_trade_number)
-    protected TextView tv_tradeNumber;//订单数
-
+    protected TextView tv_tradeNumber;
     @ViewById(R.id.tv_member_number)
-    protected TextView tv_memberNumber;//新增会员数
-
+    protected TextView tv_memberNumber;
     private BeautyNotifyCache mBeautyNotifyCache;
 
     private IBeautyOperator iBeautyOperatorListener;
@@ -66,9 +60,7 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
         this.iBeautyOperatorListener = iBeautyOperatorListener;
     }
 
-    /**
-     * 加载门店信息
-     */
+
     private void showShopInfo() {
         String shopName = ShopInfoManager.getInstance().shopInfo.getShopName();
         tv_shopName.setText(shopName);
@@ -76,20 +68,13 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
 
         String logoUrl = ShopInfoManager.getInstance().shopInfo.getShopLogo();
         if (!TextUtils.isEmpty(logoUrl)) {
-            /*ImageLoader imageLoader = new ImageLoader.Builder()
-                    .imageView(iv_shopLogo)
-                    .url(logoUrl)
-                    .errorImage(R.drawable.shop_icon).build();
-            ImageHandler.getInstance().loadImage(getActivity().getApplicationContext(), imageLoader);*/
+
             AsyncImage.showImg(getActivity(), iv_shopLogo, logoUrl, R.drawable.shop_icon);
         }
 
     }
 
-    /**
-     * 设置版本号
-     * @param versionName
-     */
+
     private void setVersion(String versionName){
         if(TextUtils.isEmpty(versionName)){
             tv_version.setVisibility(View.GONE);
@@ -110,28 +95,23 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
     @Click({R.id.btn_create_trade, R.id.btn_create_card, R.id.btn_charge, R.id.btn_create_member, R.id.btn_create_reserver})
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_create_trade://开单
-                if (iBeautyOperatorListener != null) {
+            case R.id.btn_create_trade:                if (iBeautyOperatorListener != null) {
                     iBeautyOperatorListener.toCreateTrade();
                 }
                 break;
-            case R.id.btn_create_card://办卡
-                if (iBeautyOperatorListener != null) {
+            case R.id.btn_create_card:                if (iBeautyOperatorListener != null) {
                     iBeautyOperatorListener.toCreateCrad();
                 }
                 break;
-            case R.id.btn_charge://充值
-                if (iBeautyOperatorListener != null) {
+            case R.id.btn_charge:                if (iBeautyOperatorListener != null) {
                     iBeautyOperatorListener.toCharge();
                 }
                 break;
-            case R.id.btn_create_member://添加会员
-                if (iBeautyOperatorListener != null) {
+            case R.id.btn_create_member:                if (iBeautyOperatorListener != null) {
                     iBeautyOperatorListener.toCreateMember();
                 }
                 break;
-            case R.id.btn_create_reserver://添加预约
-                if (iBeautyOperatorListener != null) {
+            case R.id.btn_create_reserver:                if (iBeautyOperatorListener != null) {
                     iBeautyOperatorListener.toCreateReserver();
                 }
                 break;

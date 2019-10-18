@@ -7,117 +7,77 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * 排队预订和单据关联表
- */
+
 @DatabaseTable(tableName = "prepare_trade_relation")
 public class PrepareTradeRelation extends IdEntityBase {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * The columns of table "commercial_area"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * type
-         */
+
         public static final String type = "type";
 
-        /**
-         * related_id
-         */
+
         public static final String relatedId = "related_id";
 
-        /**
-         * trade_id
-         */
+
         public static final String tradeId = "trade_id";
 
-        /**
-         * brand_identy
-         */
+
         public static final String brandIdenty = "brand_identy";
 
-        /**
-         * shop_identy
-         */
+
         public static final String shopIdenty = "shop_identy";
 
-        /**
-         * shop_identy
-         */
+
         public static final String deviceIdenty = "device_identy";
 
-        /**
-         * server_create_time
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * server_update_time
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * status_flag
-         */
+
         String statusFlag = "status_flag";
 
     }
 
-    /**
-     * 预点菜关联业务类型 1为预订 2为排队
-     */
+
     @DatabaseField(columnName = "type")
     private Integer type;
 
-    /**
-     * 关联id 预订或排队id
-     */
+
     @DatabaseField(columnName = "related_id")
     private Long relatedId;
 
-    /**
-     * 订单id
-     */
+
     @DatabaseField(columnName = "tradeId")
     private Long tradeId;
 
-    /**
-     * 品牌标识
-     */
+
     @DatabaseField(columnName = "brand_identy")
     private Long brandIdenty;
 
-    /**
-     * 门店标识
-     */
+
     @DatabaseField(columnName = "shop_identy")
     private Long shopIdenty;
 
-    /**
-     * 设备标识
-     */
+
     @DatabaseField(columnName = "device_identy")
     private String deviceIdenty;
 
-    /**
-     * 服务器创建时间
-     */
+
     @DatabaseField(columnName = "server_create_time")
     private Long serverCreateTime;
 
-    /**
-     * 服务器最后修改时间
-     */
+
     @DatabaseField(columnName = "server_update_time")
     private Long serverUpdateTime;
 
-    /**
-     * 状态
-     */
+
     @DatabaseField(columnName = "status_flag", canBeNull = false)
     private Integer statusFlag;
 

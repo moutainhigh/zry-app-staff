@@ -57,27 +57,17 @@ public class FileUtil {
         return LOCAL_ROOT_PATH;
     }
 
-    /**
-     * 获取calm.db的路径
-     *
-     * @return
-     */
+
     public static String getCamlDBPath() {
         return LOCAL_ROOT_PATH + LOCAL_DATEBASE_COPY_FOLDER + LOACL_CALM_DATABASE_NAME;
     }
 
-    /**
-     * 获取DB存放路径
-     *
-     * @return
-     */
+
     public static String getDBPath() {
         return LOCAL_ROOT_PATH + LOCAL_DATEBASE_COPY_FOLDER;
     }
 
-    /**
-     * 校验数据库是否存在
-     */
+
     public static boolean checkdbExsit(String name) {
         File dbFile = new File(LOCAL_DATABASE_PATH + name);
         if (dbFile.exists()) {
@@ -106,15 +96,6 @@ public class FileUtil {
             dbPath.mkdirs();
         }
         return dbPath + "/" + dbName;
-//		File dbFilePath = new File(dbPath.getAbsolutePath() + "/" + dbName);
-//		if (!dbFilePath.exists()) {
-//			try {
-//				dbFilePath.createNewFile();
-//			} catch (java.io.IOException e) {
-//				Log.e(TAG,"",e);
-//			}
-//		}
-//		return dbFilePath.exists() ? dbFilePath.getAbsolutePath() : dbName;
     }
 
     public static boolean deleteLocalLicensePath(Context context) {
@@ -158,10 +139,7 @@ public class FileUtil {
         }
     }
 
-    /**
-     * @param url
-     * @return
-     */
+
     public static String getLocalFileName(String url) {
         if (url == null || url.trim().length() == 0) {
             return null;
@@ -182,24 +160,18 @@ public class FileUtil {
         return null;
     }
 
-    /**
-     * @return
-     */
+
     public static String getLocalImagePath(Context context) {
         return getLocalRootPath(context);
     }
 
-    /**
-     * @return
-     */
+
     private static boolean checkSDCard() {
         return Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED);
     }
 
-    /**
-     * @return
-     */
+
     private static String getLocalRootPath(Context context) {
         if (checkSDCard()) {
             File file = new File(LOCAL_IMAGE_PATH);
@@ -212,27 +184,17 @@ public class FileUtil {
         }
     }
 
-    /**
-     * @param url
-     * @return
-     */
+
     public static String getLocalImageNameByUrl(Context context, String url) {
         return getLocalImagePath(context) + getLocalFileName(url);
     }
 
-    /**
-     * @param paramString
-     * @return
-     */
+
     public static boolean checkFileExist(String paramString) {
         return new File(paramString).exists();
     }
 
-    /**
-     * 获取应用的主目录
-     *
-     * @return
-     */
+
     private static String getRootDirectory() {
         String rootpath = null;
         File externalFilesDir = BaseApplication.sInstance.getExternalFilesDir(null);
@@ -260,10 +222,7 @@ public class FileUtil {
         return new File(homeDir, "calm/" + subDir).getPath() + File.separator;
     }
 
-    /**
-     * @param paramString
-     * @return
-     */
+
     public static boolean deleteFile(String paramString) {
         File f = new File(paramString);
         if (f.exists()) {
@@ -272,13 +231,7 @@ public class FileUtil {
         return false;
     }
 
-    /**
-     * @param context
-     * @param filename
-     * @param content
-     * @param filePath
-     * @throws Exception
-     */
+
     public static void saveToSDCardOrRAM(Context context, String filename,
                                          InputStream content, String filePath) throws Exception {
         if (Environment.getExternalStorageState().equals(
@@ -340,13 +293,7 @@ public class FileUtil {
         return s;
     }
 
-    /**
-     * @param context
-     * @param filename
-     * @param content
-     * @param filePath
-     * @throws Exception
-     */
+
     public static void saveToSDCardOrRAM(Context context, String filename,
                                          String content, String filePath) throws Exception {
         if (Environment.getExternalStorageState().equals(

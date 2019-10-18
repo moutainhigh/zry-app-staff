@@ -1,17 +1,9 @@
 package com.zhongmei.bty.basemodule.devices.mispos.data.message;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class MemberCardsReq {
-    private Long brandId;//品牌ID
-    private Long commercialId;//门店ID
-    private String clientType;//客户端请求来源
-    private Long customerId;//顾客id
-    private int currentPage;//当前也，非必需
-    private int pageSize;//每页显示的条数
-
+    private Long brandId;    private Long commercialId;    private String clientType;    private Long customerId;    private int currentPage;    private int pageSize;
     public Long getBrandId() {
         return brandId;
     }

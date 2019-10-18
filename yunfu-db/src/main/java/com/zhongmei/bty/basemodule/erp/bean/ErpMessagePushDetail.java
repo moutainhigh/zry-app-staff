@@ -6,7 +6,6 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-//消息推送详情表
 @DatabaseTable(tableName = "erp_message_push_detail")
 public class ErpMessagePushDetail extends IdEntityBase {
 
@@ -28,29 +27,21 @@ public class ErpMessagePushDetail extends IdEntityBase {
     public static final int CategoryMessage = 8;
 
     @DatabaseField(columnName = "status")
-    Integer status; //消息状态 1-有效 2-无效
-    @DatabaseField(columnName = "title")
+    Integer status;     @DatabaseField(columnName = "title")
     String title;
     @DatabaseField(columnName = "thumbnail")
-    String thumbnail; //标题图片
-    @DatabaseField(columnName = "detail")
-    String detail; //消息的详细信息 html格式
-    @DatabaseField(columnName = "server_create_time")
+    String thumbnail;     @DatabaseField(columnName = "detail")
+    String detail;     @DatabaseField(columnName = "server_create_time")
     Long serverCreateTime;
     @DatabaseField(columnName = "server_update_time")
     Long serverUpdateTime;
 
     @DatabaseField(columnName = "category_id")
-    Integer categoryId; //on pos 的消息通知category_id是8，公告category_id是14
-    @DatabaseField(columnName = "msg_level")
-    int msgLevel; //消息级别：1，普通；2，严重；3，特别严重’
-    @DatabaseField(columnName = "effective_date")
-    long effectiveDate; //生效时间
-    @DatabaseField(columnName = "expiry_date")
-    long expiryDate; //失效时间
-    @DatabaseField(columnName = "readed_local")
-    int readedLocal; //已读数
-
+    Integer categoryId;     @DatabaseField(columnName = "msg_level")
+    int msgLevel;     @DatabaseField(columnName = "effective_date")
+    long effectiveDate;     @DatabaseField(columnName = "expiry_date")
+    long expiryDate;     @DatabaseField(columnName = "readed_local")
+    int readedLocal;
     public Integer getStatus() {
         return status;
     }

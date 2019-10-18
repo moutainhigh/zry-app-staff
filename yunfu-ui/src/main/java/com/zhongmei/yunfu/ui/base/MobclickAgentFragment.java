@@ -4,10 +4,7 @@ import android.os.Bundle;
 
 import com.zhongmei.yunfu.util.MobclickAgentEvent;
 
-/**
- * 支持统计页面执行时间
- * Created by demo on 2018/12/15
- */
+
 public class MobclickAgentFragment extends BasicFragment {
 
     boolean isCreated = false;

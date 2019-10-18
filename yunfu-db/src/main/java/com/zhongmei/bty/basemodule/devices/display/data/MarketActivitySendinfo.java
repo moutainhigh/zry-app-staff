@@ -6,17 +6,11 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.bty.commonmodule.database.entity.base.UserEntityBase;
 
-/**
- * Model class of 第二屏营销图片表.
- *
- * @version $Id$
- */
+
 @DatabaseTable(tableName = "market_activity_sendinfo")
 public class MarketActivitySendinfo extends UserEntityBase implements Serializable {
 
-    /**
-     * serialVersionUID.
-     */
+
     private static final long serialVersionUID = 1L;
 
     public interface $ extends UserEntityBase.$ {
@@ -40,61 +34,40 @@ public class MarketActivitySendinfo extends UserEntityBase implements Serializab
 
         public static final String marketPlanType = "market_plan_type";
 
-        // `market_plan_type` tinyint(4) DEFAULT NULL
-        // COMMENT '1, 预订时间营销, 2, 预订渠道营销, 3, 预订频次营销,\r\n 4,
-        // 排队渠道营销,5, 排队频次营销, 6, 排队时间营销, 7, 新会员招募,\r\n8,
-        // 生日营销, 9,
-        // 外卖渠道营销,10,消费满额赠券,11,消费满额立减,\r\n12,储值赠券活动,13,商品类营销,14,关怀短信,15,"抽奖活动"),',
-    }
+                                            }
 
-    /**
-     * 品牌id.
-     */
+
     @DatabaseField(columnName = "brand_id")
     private Long brandId;
 
-    /**
-     * 营销方案id.
-     */
+
     @DatabaseField(columnName = "plan_id")
     private Long planId;
 
-    /**
-     * pos/自助点餐.1、pos 2、自助
-     */
+
     @DatabaseField(columnName = "target")
     private Integer target;
 
-    /**
-     * 开始时间.
-     */
+
     @DatabaseField(columnName = "startDay")
     private Long startDay;
 
-    /**
-     * 截止日期.
-     */
+
     @DatabaseField(columnName = "endDay")
     private Long endDay;
 
-    /**
-     * 图片url.
-     */
+
     @DatabaseField(columnName = "url")
     private String url;
 
-    /**
-     * sys_file表Id.
-     */
+
     @DatabaseField(columnName = "sys_file_id")
     private Long sysFileId;
 
-    // 图片优先顺序
-    @DatabaseField(columnName = "priority")
+        @DatabaseField(columnName = "priority")
     private Integer priority;
 
-    // 图片是否暂时 1、展示，2、不展示
-    @DatabaseField(columnName = "is_show")
+        @DatabaseField(columnName = "is_show")
     private Integer isShow;
 
     @DatabaseField(columnName = "market_plan_type")

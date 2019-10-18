@@ -30,14 +30,11 @@ import java.util.List;
 @EFragment(R.layout.dinner_dish_comment_fragment)
 public class DinnerDishCommentFragment extends MobclickAgentFragment implements TextWatcher {
     @ViewById(R.id.close_iv)
-    public ImageButton closeIv;//关闭
-
+    public ImageButton closeIv;
     @ViewById(R.id.content_edit)
-    public EditText contentEditText;// 输入内容
-
+    public EditText contentEditText;
     @ViewById(R.id.commentsview)
-    public CommentsView commentsView;// 备注控件
-
+    public CommentsView commentsView;
     private String[] commentsList;
 
     private TextChangedLisener lisener;
@@ -68,8 +65,7 @@ public class DinnerDishCommentFragment extends MobclickAgentFragment implements 
         contentEditText.setText(memo);
         commentsView.setAdatper(commentsList);
         commentsView.initialView(getActivity(), DensityUtil.dip2px(getActivity(), 950));
-        commentsView.setItemClickListener(itemClickListener);// 评论点击添加
-
+        commentsView.setItemClickListener(itemClickListener);
     }
 
     public void setAdapter() {
@@ -127,10 +123,7 @@ public class DinnerDishCommentFragment extends MobclickAgentFragment implements 
             case R.id.btn_print_memo:
                 TradeVo tradeVo = DinnerShoppingCart.getInstance().getOrder();
                 if (tradeVo != null && tradeVo.getTrade() != null && !TextUtils.isEmpty(tradeVo.getTrade().getTradeMemo())) {
-//					PrintContentQueue.getInstance().printDinnerKitchenAllForUpdateOrderMark(Calm.PRINT_TYPE_GEN,
-//							tradeVo, null, new OnSimplePrintListener(PrintTicketTypeEnum.KITCHENALL));
-                    //IPrintHelper.Holder.getInstance().printOrderMemo(tradeVo.getTrade().getUuid(), tradeVo.getTrade().getTradeMemo(), new PRTBatchOnSimplePrintListener(PrintTicketTypeEnum.KITCHENALL));
-                } else {
+                                    } else {
                     ToastUtil.showShortToast(R.string.dinner_formcenter_no_print_data);
                 }
                 mChangePageListener.changePage(ChangePageListener.ORDERDISHLIST, null);

@@ -27,10 +27,8 @@ public class ColumnHorizontalScrollView extends HorizontalScrollView {
     private boolean flag;
 
     private int itemWidth;
-    //上一次选中的item
-    private int lastItem;
-    //有多少个用户
-    private int childCount = 0;
+        private int lastItem;
+        private int childCount = 0;
 
     private int middle = 2;
 
@@ -136,25 +134,16 @@ public class ColumnHorizontalScrollView extends HorizontalScrollView {
             TextView v = (TextView) v1.getChildAt(0);
             View v2 = v1.getChildAt(1);
             if (i == currentItem + middle) {
-                //将中间的图标放大
-                //v.setScaleX(1.3f - 0.6f * last / Float.valueOf(itemWidth * 2));
-                //v.setScaleY(1.3f - 0.6f * last / Float.valueOf(itemWidth * 2));
-                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, getItemTextSize() * (ITEM_TEXT_SCALE - 0.6f * last / Float.valueOf(itemWidth * 2)));
+                                                                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, getItemTextSize() * (ITEM_TEXT_SCALE - 0.6f * last / Float.valueOf(itemWidth * 2)));
                 v2.setScaleX(ITEM_IMAGE_SCALE - last / Float.valueOf(itemWidth * 2));
                 v2.setScaleY(ITEM_IMAGE_SCALE - last / Float.valueOf(itemWidth * 2));
             } else if (i == currentItem + middle + 1) {
-                //v.setScaleX(1 + 0.6f * last / Float.valueOf(itemWidth * 2));
-                //v.setScaleY(1 + 0.6f * last / Float.valueOf(itemWidth * 2));
-                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, getItemTextSize() * (1 + 0.6f * last / Float.valueOf(itemWidth * 2)));
+                                                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, getItemTextSize() * (1 + 0.6f * last / Float.valueOf(itemWidth * 2)));
                 v2.setScaleX(1 + last / Float.valueOf(itemWidth * 2));
                 v2.setScaleY(1 + last / Float.valueOf(itemWidth * 2));
             } else {
-                //v.setScaleX(1f);
-                //v.setScaleY(1f);
-                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, getItemTextSize());
-                // v.setTextSize(DensityUtil.px2sp(getContext(),
-                // 18));
-                v2.setScaleX(1f);
+                                                v.setTextSize(TypedValue.COMPLEX_UNIT_PX, getItemTextSize());
+                                                v2.setScaleX(1f);
                 v2.setScaleY(1f);
             }
 
@@ -193,12 +182,7 @@ public class ColumnHorizontalScrollView extends HorizontalScrollView {
         }
     }
 
-    /**
-     * @Title: goToPosition
-     * @Description: 滚动到指定位置
-     * @Param @param position TODO
-     * @Return void 返回类型
-     */
+
     public void goToPosition(int position) {
         if (position > currentItem) {
             smoothScrollBy(itemWidth * (position - currentItem), 0);

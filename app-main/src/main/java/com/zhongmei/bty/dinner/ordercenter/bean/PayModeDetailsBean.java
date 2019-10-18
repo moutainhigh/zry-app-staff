@@ -9,19 +9,14 @@ import com.zhongmei.yunfu.context.util.Utils;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PayModeDetailsBean {
 
     private PaymentType paymentType;
-    //用券名称
-    private String payModeName;
-    //用券总金额
-    private BigDecimal payModeTotalDenomination;
-    //使用券的详情
-    private List<PaymentItemGroupon> payModeItems;
+        private String payModeName;
+        private BigDecimal payModeTotalDenomination;
+        private List<PaymentItemGroupon> payModeItems;
 
     private PaymentItem paymentItem;
 

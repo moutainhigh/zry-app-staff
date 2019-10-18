@@ -26,9 +26,7 @@ import com.zhongmei.yunfu.util.ToastUtil;
 import com.zhongmei.yunfu.context.session.Session;
 import com.zhongmei.bty.settings.view.NumberKeyboardLayout;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 public class CustomDiscountDialog extends BasicDialogFragment implements NumberKeyboardLayout.NumberClickListener,
         View.OnClickListener {
 
@@ -47,10 +45,8 @@ public class CustomDiscountDialog extends BasicDialogFragment implements NumberK
     private CustomDiscountListener listener = null;
     private boolean isDinner;
     private boolean allowFree;
-    //折扣权限码
-    private String discountPermission;
-    //折让权限码
-    private String rebatePermission;
+        private String discountPermission;
+        private String rebatePermission;
 
     public interface CustomDiscountListener {
         void onCustomDiscount(float discount);
@@ -60,21 +56,12 @@ public class CustomDiscountDialog extends BasicDialogFragment implements NumberK
         this.listener = listener;
     }
 
-    /**
-     * @param type   折扣还是让价
-     * @param amount 让价时交易总金额
-     */
+
     public static CustomDiscountDialog newInstance(String discountPermission, String rebatePermission, int type, float amount) {
         return newInstance(discountPermission, rebatePermission, type, amount, false);
     }
 
-    /**
-     * @param isDinner  是否正餐弹窗
-     * @param type      折扣还是让价
-     * @param amount    让价时交易总金额
-     * @param allowFree 是否允许优惠价格为菜价或整单价
-     * @return
-     */
+
     public static CustomDiscountDialog newInstance(String discountPermission, String rebatePermission, int type, float amount, boolean allowFree) {
         CustomDiscountDialog f = new CustomDiscountDialog();
         Bundle bundle = new Bundle();
@@ -120,21 +107,11 @@ public class CustomDiscountDialog extends BasicDialogFragment implements NumberK
         String permissionCode;
         if (mType == TYPE_REBATE) {
             permissionCode = rebatePermission;
-//        	if(isDinner){
-//        		permissionCode=DinnerApplication.PERMISSION_DINNER_PRIVILEDGE_REBATE;
-//        	}else{
-//                permissionCode = FastFoodApplication.PERMISSION_FASTFOOD_PRIVILEDGE_REBATE;
-//        	}
             ((TextView) view.findViewById(R.id.tv_title)).setText(R.string.userdefine_rebate);
             mEditValue.setHint(R.string.input_userdefine_rebate);
             mTvDiscountUnite.setVisibility(View.GONE);
         } else {
             permissionCode = discountPermission;
-//        	if(isDinner){
-//        		permissionCode=DinnerApplication.PERMISSION_DINNER_PRIVILEDGE_DISCOUNT;
-//        	}else{
-//                permissionCode = FastFoodApplication.PERMISSION_FASTFOOD_PRIVILEDGE_DISCOUNT;
-//        	}
             mTvDiscountUnite.setVisibility(View.VISIBLE);
         }
 
@@ -144,11 +121,6 @@ public class CustomDiscountDialog extends BasicDialogFragment implements NumberK
         } else {
             String value;
             if (mType == TYPE_DISCOUNT) {
-//            	if(isDinner){
-//                    value = Session.getAuthUser().getAuth().getAuthDetail(DinnerApplication.PERMISSION_DINNER_PRIVILEDGE_DISCOUNT,DinnerApplication.PERMISSION_DISCOUND);
-//            	}else{
-//                    value = Session.getAuthUser().getAuth().getAuthDetail(FastFoodApplication.PERMISSION_FASTFOOD_PRIVILEDGE_DISCOUNT,FastFoodApplication.PERMISSION_DISCOUND);
-//            	}
                 value = Session.getAuthUser().getAuth().getAuthDetail(discountPermission, DinnerApplication.PERMISSION_DISCOUND);
                 if (!TextUtils.isEmpty(value)) {
                     mPrivilege.setVisibility(View.VISIBLE);
@@ -160,11 +132,6 @@ public class CustomDiscountDialog extends BasicDialogFragment implements NumberK
 
                 }
             } else {
-//            	if(isDinner){
-//                    value = Session.getAuthUser().getAuth().getAuthDetail(DinnerApplication.PERMISSION_DINNER_PRIVILEDGE_REBATE,DinnerApplication.PERMISSION_REBATE);
-//            	}else{
-//                value = Session.getAuthUser().getAuth().getAuthDetail(FastFoodApplication.PERMISSION_FASTFOOD_PRIVILEDGE_REBATE,FastFoodApplication.PERMISSION_REBATE);
-//            	}
                 value = Session.getAuthUser().getAuth().getAuthDetail(rebatePermission, DinnerApplication.PERMISSION_REBATE);
                 if (!TextUtils.isEmpty(value)) {
                     mPrivilege.setVisibility(View.VISIBLE);
@@ -269,8 +236,7 @@ public class CustomDiscountDialog extends BasicDialogFragment implements NumberK
                 }
             }
         }
-        if (listener != null)//add 20170506 for NullPointer
-            listener.onCustomDiscount(value);
+        if (listener != null)            listener.onCustomDiscount(value);
         dismiss();
     }
 

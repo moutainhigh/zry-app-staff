@@ -2,33 +2,19 @@ package com.zhongmei.bty.basemodule.pay.message;
 
 import com.zhongmei.yunfu.db.ICreator;
 
-/**
- * @Date：2016-2-18 上午11:14:39
- * @Description: pos刷卡记录提交数据
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class PaymentItemUnionpayVoReq implements java.io.Serializable, ICreator {
 
     private static final long serialVersionUID = 1L;
 
-    private String cardNumber;// 银行卡号
-
-    private String cardName;// 发卡行名称
-
-    private String expireDate;// 有效期
-
-    private String issNumber;// 发卡行号
-
-    private String issName;// 发卡行名称
-
-    private Long creatorId;// 操作员id
-
-    private String creatorName;// 操作员名称
-
-    private PaymentItemUnionpayReq paymentItemUnionpay;// 刷卡记录详情
-
+    private String cardNumber;
+    private String cardName;
+    private String expireDate;
+    private String issNumber;
+    private String issName;
+    private Long creatorId;
+    private String creatorName;
+    private PaymentItemUnionpayReq paymentItemUnionpay;
     private PaymentDeviceReq paymentDevice;
 
     public String getCardNumber() {

@@ -39,10 +39,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * @version: 1.0
- * @date 2015年9月20日
- */
+
 public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
 
     private static final String TAG = ReadonlyShopcartItemBase.class.getSimpleName();
@@ -56,41 +53,26 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
     protected TradeItemExtra tradeItemExtra;
 
     private boolean isGroupDish = false;
-    //单桌菜品数量
-    private BigDecimal sigleDeskQuantity;
+        private BigDecimal sigleDeskQuantity;
 
-    /**
-     * 是否打包
-     */
+
     private boolean isPack = false;
-    /**
-     * 购物车菜品加入循序
-     */
+
     private int index;
-    /**
-     * 是否退回库存
-     */
+
     private boolean isReturnInventory;
 
     private List<TradeItemOperation> tradeItemOperations;
-    /**
-     * 座位号
-     */
+
     private TradeItemExtraDinner tradeItemExtraDinner;
 
-    private BigDecimal kdsScratchDishQty = BigDecimal.ZERO; //已划菜份数
-
+    private BigDecimal kdsScratchDishQty = BigDecimal.ZERO;
     private ShopcartItemType shopcartItemType = ShopcartItemType.COMMON;
-    //主单批量菜关联
-    private List<TradeItemMainBatchRel> tradeItemMainBatchRelList;
-    //主单批量菜在子单时关联的主单批量菜原数据
-    private ReadonlyShopcartItem mainShopcartItem;
-    //技师与服务关联表
-    private List<TradeUser> tradeItemUserList;
-    //次卡项目优惠vo
-    private CardServicePrivilegeVo cardServicePrivilegeVo;
-    //小程序优惠vo
-    AppletPrivilegeVo appletPrivilegeVo;
+        private List<TradeItemMainBatchRel> tradeItemMainBatchRelList;
+        private ReadonlyShopcartItem mainShopcartItem;
+        private List<TradeUser> tradeItemUserList;
+        private CardServicePrivilegeVo cardServicePrivilegeVo;
+        AppletPrivilegeVo appletPrivilegeVo;
 
     @Override
     public CardServicePrivilegeVo getCardServicePrivilgeVo() {
@@ -169,9 +151,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
 
     @Override
     public Long getSkuId() {
-        // TODO 由于后台没有增加sku_id，暂时先从缓存中取sku_id。
-        // 存在风险：需要使用sku_id时此菜品有可能被后台禁用了，这时会返回null
-        if (tradeItem.getDishId() == null) {
+                        if (tradeItem.getDishId() == null) {
             DishShop dishShop = DishCache.getDishHolder().get(getSkuUuid());
             if (dishShop != null) {
                 return dishShop.getBrandDishId();
@@ -240,15 +220,12 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
 
     @Override
     public BigDecimal getActualAmount() {
-        //区分是否需要计算，通过tradeItemSaleType
-        if(DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(tradeItem.getDishId())!=null){
+                if(DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(tradeItem.getDishId())!=null){
             BigDecimal actualAmount=calculTimeChargingAmount();
-            if(tradeItem.getActualAmount().compareTo(actualAmount)!=0){//不相等
-                tradeItem.setActualAmount(actualAmount);
+            if(tradeItem.getActualAmount().compareTo(actualAmount)!=0){                tradeItem.setActualAmount(actualAmount);
                 tradeItem.setChanged(true);
             }
-            return actualAmount;//计算时间
-        }
+            return actualAmount;        }
         return tradeItem.getActualAmount();
     }
 
@@ -412,22 +389,14 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
     public void setIssueStatus(IssueStatus mIssueStatus) {
         tradeItem.setIssueStatus(mIssueStatus);
         tradeItem.setChanged(true);
-        //更新加料的打印状态
-        if (Utils.isNotEmpty(getExtraItems())) {
+                if (Utils.isNotEmpty(getExtraItems())) {
             for (ReadonlyExtraShopcartItem extraShopcartItem : getExtraItems()) {
                 extraShopcartItem.setIssueStatus(mIssueStatus);
             }
         }
     }
 
-    /**
-     * 计算计时消费的费用
-     * StartChargingTime小时内StartChargingPrice元
-     * 超过部分每ChargingUnit小时ChargingPrice元
-     * 其中：满FullUnit分钟算FullUnitCharging小时
-     *      不满NoFullUnit分钟算NoFullUnitCharging小时
-     * @return
-     */
+
     private BigDecimal calculTimeChargingAmount() {
         BigDecimal actualAmount = BigDecimal.ZERO;
         DishTimeChargingRule rule = DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(tradeItem.getDishId());
@@ -436,34 +405,22 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         }
         BigDecimal currentTime = new BigDecimal(System.currentTimeMillis());
         BigDecimal currentMintes = currentTime.subtract(new BigDecimal(tradeItem.getServerCreateTime())).divide(new BigDecimal(60 * 1000),2,BigDecimal.ROUND_HALF_DOWN);
-        BigDecimal currentTimeParts = new BigDecimal(Math.floor(currentMintes.divide(rule.getChargingUnit().multiply(new BigDecimal(60)),2,BigDecimal.ROUND_HALF_DOWN).doubleValue()));//根据单位计算时间份数
-        BigDecimal serviceTimeHour = currentTimeParts.multiply(rule.getChargingUnit());//换成小时
+        BigDecimal currentTimeParts = new BigDecimal(Math.floor(currentMintes.divide(rule.getChargingUnit().multiply(new BigDecimal(60)),2,BigDecimal.ROUND_HALF_DOWN).doubleValue()));        BigDecimal serviceTimeHour = currentTimeParts.multiply(rule.getChargingUnit());
 
-
-        //不满最低时间，按照最低时间算
-        if (rule.getStartChargingTimes().compareTo(serviceTimeHour) >= 0) {
-            //按照最低消费时间来算
-            return MathDecimal.round(rule.getStartChargingPrice().multiply(tradeItem.getQuantity()),2);
+                if (rule.getStartChargingTimes().compareTo(serviceTimeHour) >= 0) {
+                        return MathDecimal.round(rule.getStartChargingPrice().multiply(tradeItem.getQuantity()),2);
         }
 
-        //超过最低时间
-        BigDecimal overMinutes = currentMintes.divideAndRemainder(rule.getChargingUnit().multiply(new BigDecimal(60)))[1];//取余操作
-        if (rule.getFullUnit()!=null && rule.getFullUnit().compareTo(overMinutes) <= 0) {
-            //按不满算
-            serviceTimeHour = serviceTimeHour.add(rule.getFullUnitCharging());
+                BigDecimal overMinutes = currentMintes.divideAndRemainder(rule.getChargingUnit().multiply(new BigDecimal(60)))[1];        if (rule.getFullUnit()!=null && rule.getFullUnit().compareTo(overMinutes) <= 0) {
+                        serviceTimeHour = serviceTimeHour.add(rule.getFullUnitCharging());
         } else if(rule.getNoFullUnit()!=null && rule.getNoFullUnit().compareTo(overMinutes) >= 0){
-            //按满了算
-            serviceTimeHour = serviceTimeHour.add(rule.getNoFullUnitCharging());
+                        serviceTimeHour = serviceTimeHour.add(rule.getNoFullUnitCharging());
         }else{
-            //普通计算
-            serviceTimeHour=serviceTimeHour.add(overMinutes.divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_DOWN));
+                        serviceTimeHour=serviceTimeHour.add(overMinutes.divide(new BigDecimal(60),2,BigDecimal.ROUND_HALF_DOWN));
         }
 
-        //计算价格(最低消费)
-        actualAmount=actualAmount.add(rule.getStartChargingPrice().multiply(tradeItem.getQuantity()));//基础费用
-
-        //计算真实的价格（加上超过的部分费用）
-        Log.e("TimeCharging","serviceTimeHour:"+serviceTimeHour);
+                actualAmount=actualAmount.add(rule.getStartChargingPrice().multiply(tradeItem.getQuantity()));
+                Log.e("TimeCharging","serviceTimeHour:"+serviceTimeHour);
         serviceTimeHour = serviceTimeHour.subtract(rule.getStartChargingTimes());
         actualAmount=actualAmount.add(serviceTimeHour.divide(rule.getChargingUnit(),2,BigDecimal.ROUND_HALF_DOWN).multiply(rule.getChargingPrice()).multiply(tradeItem.getQuantity()));
         return MathDecimal.round(actualAmount,2);
@@ -476,8 +433,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
     public void setGuestPrinted(GuestPrinted guestPrinted) {
         tradeItem.setGuestPrinted(guestPrinted);
         tradeItem.setChanged(true);
-        //更新加料的打印状态
-        if (Utils.isNotEmpty(getExtraItems())) {
+                if (Utils.isNotEmpty(getExtraItems())) {
             for (ReadonlyExtraShopcartItem extraShopcartItem : getExtraItems()) {
                 extraShopcartItem.setGuestPrinted(guestPrinted);
             }
@@ -488,8 +444,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
     public void setIssueStatusWithoutSetmeal(IssueStatus issueStatus) {
         tradeItem.setIssueStatus(issueStatus);
         tradeItem.setChanged(true);
-        //更新加料的打印状态
-        if (Utils.isNotEmpty(getExtraItems())) {
+                if (Utils.isNotEmpty(getExtraItems())) {
             for (ReadonlyExtraShopcartItem extraShopcartItem : getExtraItems()) {
                 extraShopcartItem.setIssueStatus(issueStatus);
             }
@@ -564,10 +519,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
     private boolean splited = false;
     private boolean splitedChangedBak = false;
 
-    /**
-     * @param isSplit true:拆单
-     * @return
-     */
+
     public boolean ensureCopy(boolean isSplit) {
         if (isSplit) {
             return ensureSplit();
@@ -590,8 +542,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
     }
 
     public boolean ensureSplit() {
-        // 没被拆单过的才能拆单
-        if (splited
+                if (splited
                 || getStatusFlag() != StatusFlag.VALID
                 || getInvalidType() == InvalidType.DELETE
                 || getInvalidType() == InvalidType.RETURN_QTY
@@ -603,8 +554,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         splited = true;
         tradeItem.setStatusFlag(StatusFlag.INVALID);
         tradeItem.setInvalidType(InvalidType.SPLIT);
-        // 备份拆单操作前的 changed 状态
-        splitedChangedBak = tradeItem.isChanged();
+                splitedChangedBak = tradeItem.isChanged();
         tradeItem.setChanged(true);
         return true;
     }
@@ -616,36 +566,27 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
             splited = false;
             tradeItem.setStatusFlag(StatusFlag.VALID);
             tradeItem.setInvalidType(null);
-            // 恢复为拆单前的 changed 状态
-            tradeItem.setChanged(splitedChangedBak);
+                        tradeItem.setChanged(splitedChangedBak);
             return true;
         }
         return false;
     }
 
-    /**
-     * 将此条目修改为被改菜状态
-     */
+
     public void setupModifyDishState() {
         tradeItem.setStatusFlag(StatusFlag.INVALID);
         tradeItem.setInvalidType(InvalidType.MODIFY_DISH);
         tradeItem.validateUpdate();
     }
 
-    /**
-     * 清除此条目的被改菜状态
-     */
+
     public void clearModifyDishState() {
         tradeItem.setStatusFlag(StatusFlag.VALID);
         tradeItem.setInvalidType(null);
         tradeItem.validateUpdate();
     }
 
-    /**
-     * 将此条目修改为被退菜状态
-     *
-     * @param returnQty
-     */
+
     public void setupReturnQtyState(BigDecimal returnQty) {
         tradeItem.setStatusFlag(StatusFlag.INVALID);
         tradeItem.setInvalidType(InvalidType.RETURN_QTY);
@@ -653,9 +594,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         tradeItem.validateUpdate();
     }
 
-    /**
-     * 清除此条目的被退菜状态
-     */
+
     public void clearReturnQtyState() {
         tradeItem.setStatusFlag(StatusFlag.VALID);
         tradeItem.setInvalidType(null);
@@ -663,9 +602,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         tradeItem.validateUpdate();
     }
 
-    /**
-     * 联台批量菜、拆菜
-     */
+
     public void setupUnionSplitState() {
         tradeItem.setId(null);
         tradeItem.validateCreate();
@@ -747,9 +684,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         this.tradeItemExtra = tradeItemExtra;
     }
 
-    /**
-     * 菜品是否正在等待中
-     */
+
     public boolean isWaiting() {
         if (tradeItemExtra == null || tradeItemExtra.getDishMakeStatus() == DishMakeStatus.WAITING) {
             return true;
@@ -791,12 +726,10 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         if (getStatusFlag() == StatusFlag.INVALID) {
             return CANNOT_WAKE_UP;
         }
-        //数目为0的才，不能等叫
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return CANNOT_WAKE_UP;
         }
-        // 已上菜的菜品，不能等叫
-        if (getServingStatus() == ServingStatus.SERVING) {
+                if (getServingStatus() == ServingStatus.SERVING) {
             return CANNOT_WAKE_UP;
         }
         if (getIssueStatus() == IssueStatus.PAUSE) {
@@ -812,8 +745,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
                         case WAKE_UP:
                             if (tradeItemOperation.getStatusFlag() == StatusFlag.VALID) {
                                 if (tradeItemOperation.getId() != null)
-                                    return CANNOT_WAKE_UP;  // 等叫操作已经保存服务器的菜品，不能进行等叫操作
-                                else
+                                    return CANNOT_WAKE_UP;                                  else
                                     hasWakeUp = true;
                             }
                             break;
@@ -840,12 +772,10 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         if (getStatusFlag() == StatusFlag.INVALID) {
             return false;
         }
-        //数目为0的才，不能等叫
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return false;
         }
-        // 已上菜的菜品，不能等叫
-        if (getServingStatus() == ServingStatus.SERVING) {
+                if (getServingStatus() == ServingStatus.SERVING) {
             return false;
         }
 
@@ -860,8 +790,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
                 if (tradeItemOperation.getOpType() == PrintOperationOpType.WAKE_UP
                         && tradeItemOperation.getStatusFlag() == StatusFlag.VALID) {
                     if (tradeItemOperation.getId() != null)
-                        hasWakeUp = true;  // 等叫操作已经保存服务器
-                    else
+                        hasWakeUp = true;                      else
                         hasWakeUp = false;
                 }
             }
@@ -875,12 +804,10 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         if (getStatusFlag() == StatusFlag.INVALID) {
             return false;
         }
-        //数目为0的才，不能起菜
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return false;
         }
-        // 已上菜的菜品，不能起菜
-        if (getServingStatus() == ServingStatus.SERVING) {
+                if (getServingStatus() == ServingStatus.SERVING) {
             return false;
         }
 
@@ -910,13 +837,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
 
         if (hasRiseDish)
             return false;
-		/*
-		else if(!TextUtils.isEmpty(getBatchNo())){
-			if(hasWakeUp)
-				return true;
-			else
-				return false;
-		}*/
+
         else {
             return true;
         }
@@ -927,12 +848,10 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         if (getStatusFlag() == StatusFlag.INVALID) {
             return false;
         }
-        //数目为0的才，不能起菜
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return false;
         }
-        // 已上菜的菜品，不能起菜
-        if (getServingStatus() == ServingStatus.SERVING) {
+                if (getServingStatus() == ServingStatus.SERVING) {
             return false;
         }
 
@@ -958,12 +877,10 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         if (getStatusFlag() == StatusFlag.INVALID) {
             return false;
         }
-        //数目为0的才，不能催菜
-        if (getTotalQty().equals(BigDecimal.ZERO)) {
+                if (getTotalQty().equals(BigDecimal.ZERO)) {
             return false;
         }
-        // 已上菜的菜品，不能催菜
-        if (getServingStatus() == ServingStatus.SERVING) {
+                if (getServingStatus() == ServingStatus.SERVING) {
             return false;
         }
 
@@ -1008,8 +925,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         boolean needAdd = false;
         switch (opType) {
             case WAKE_UP:
-                // 已有未保存的等叫，就不能再添加等叫了，以免重复
-                if (!hasWakeUp()) {
+                                if (!hasWakeUp()) {
                     needAdd = true;
                 }
                 break;
@@ -1141,11 +1057,7 @@ public abstract class ReadonlyShopcartItemBase implements IShopcartItemBase {
         this.mainShopcartItem = mainShopcartItem;
     }
 
-    /**
-     * 修改数量，并修改对应的价格
-     *
-     * @param quantity
-     */
+
     public void modifyQty(BigDecimal quantity) {
         BigDecimal newAmount = MathDecimal.divDown(getAmount().multiply(quantity), getTotalQty(), 2);
         tradeItem.setAmount(newAmount);

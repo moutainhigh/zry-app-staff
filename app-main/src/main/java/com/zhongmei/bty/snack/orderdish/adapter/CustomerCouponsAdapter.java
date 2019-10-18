@@ -22,15 +22,7 @@ import com.zhongmei.yunfu.db.entity.discount.CoupRule;
 import com.zhongmei.yunfu.db.enums.CouponType;
 import com.zhongmei.bty.dinner.orderdish.CouponDatailDialog;
 
-/**
- * 使用于积分卷，优惠劵，折扣卷
- *
- * @Date：2015-8-7 下午3:28:31
- * @Description: TODO
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class CustomerCouponsAdapter extends BaseAdapter {
     protected Context mContext;
 
@@ -49,14 +41,11 @@ public class CustomerCouponsAdapter extends BaseAdapter {
         this.mInflater = LayoutInflater.from(mContext);
         switch (this.mType) {
             case CASH:
-                item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_cash);// 代金券
-                break;
+                item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_cash);                break;
             case DISCOUNT:
-                item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_discount);// 折扣
-                break;
+                item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_discount);                break;
             case REBATE:
-                item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_rebate);// 满减
-                break;
+                item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_rebate);                break;
             default:
                 item_bg = context.getResources().getDrawable(R.drawable.coupons_item_bg_rebate);
                 break;
@@ -120,15 +109,13 @@ public class CustomerCouponsAdapter extends BaseAdapter {
         });
 
         if (vo.isEnabled()) {
-            // 设置背景图
-            viewHolder.vMainContent.setBackgroundDrawable(this.item_bg);
+                        viewHolder.vMainContent.setBackgroundDrawable(this.item_bg);
         } else {
             viewHolder.vMainContent.setBackgroundResource(R.drawable.coupons_item_bg_disable);
 
         }
 
-        // 是否被选中
-        if (vo.isSelected()) {
+                if (vo.isSelected()) {
             viewHolder.tvSelected.setVisibility(View.VISIBLE);
         } else {
             viewHolder.tvSelected.setVisibility(View.GONE);
@@ -141,33 +128,22 @@ public class CustomerCouponsAdapter extends BaseAdapter {
             valueLimit = res.getString(R.string.full) + " ¥" + vo.getCouponInfo().getFullValue().toString();
         }
 
-        //金额限制
-        viewHolder.tvValueLimit.setText(valueLimit);
-        // 有效期
-//		if(vo.getCouponInfo().isFixedPeriod()){
-//			String time = String.format(mContext.getString(R.string.customer_send_coupon_period_of_validity),vo.getCouponInfo().getValidDayNum());
-//			String limit = vo.getCouponInfo().isCurDay() ? mContext.getString(R.string.customer_send_coupon_today_valid) : mContext.getString(R.string.customer_send_coupon_today_invalid);
-//			viewHolder.tvTimeLimit.setText(time + limit);
-//		}else {
-        viewHolder.tvTimeLimit.setText(res.getString(R.string.period_of_validity) + ":" + DateUtil.format(vo.getCouponInfo().getEndTime()));
-//		}
+                viewHolder.tvValueLimit.setText(valueLimit);
+                viewHolder.tvTimeLimit.setText(res.getString(R.string.period_of_validity) + ":" + DateUtil.format(vo.getCouponInfo().getEndTime()));
         viewHolder.tvYuan.setText(ShopInfoCfg.getInstance().getCurrencySymbol());
         switch (vo.getCouponInfo().getCouponType()) {
-            case CASH:// 代金券
-                viewHolder.tvYuan.setVisibility(View.VISIBLE);
+            case CASH:                viewHolder.tvYuan.setVisibility(View.VISIBLE);
                 viewHolder.tvName.setText(vo.getCouponInfo().getName());
                 viewHolder.tvPrice.setText(vo.getCouponInfo().getDiscountValue() + "");
 
                 viewHolder.tvDiscount.setVisibility(View.GONE);
                 break;
-            case DISCOUNT:// 折扣
-                viewHolder.tvYuan.setVisibility(View.GONE);
+            case DISCOUNT:                viewHolder.tvYuan.setVisibility(View.GONE);
                 viewHolder.tvName.setText(vo.getCouponInfo().getName());
                 viewHolder.tvPrice.setText(vo.getCouponInfo().getDiscountValue().toString());
                 viewHolder.tvDiscount.setVisibility(View.VISIBLE);
                 break;
-            case REBATE:// 满减
-                viewHolder.tvYuan.setVisibility(View.VISIBLE);
+            case REBATE:                viewHolder.tvYuan.setVisibility(View.VISIBLE);
                 viewHolder.tvName.setText(vo.getCouponInfo().getName());
                 viewHolder.tvPrice.setText(vo.getCouponInfo().getDiscountValue().toString());
                 viewHolder.tvDiscount.setVisibility(View.GONE);

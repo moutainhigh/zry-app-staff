@@ -4,11 +4,7 @@ import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.widget.LinearLayout;
 
-/**
- * @Date： 17/6/19
- * @Description:
- * @Version: 1.0
- */
+
 public abstract class NumberAndWaiterView extends LinearLayout {
 
     protected FragmentActivity mActivity;

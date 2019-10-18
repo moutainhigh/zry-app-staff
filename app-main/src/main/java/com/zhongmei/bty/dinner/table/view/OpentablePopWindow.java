@@ -34,10 +34,7 @@ import com.zhongmei.bty.dinner.vo.DinnertableVo;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * @Date 2016/7/21
- * @Description:桌台开台人数修改弹窗
- */
+
 public class OpentablePopWindow extends PopupWindow implements View.OnTouchListener, View.OnClickListener {
 
     private static final String TAG = OpentablePopWindow.class.getSimpleName();
@@ -46,8 +43,7 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
     public static int ADD_BUTTON_HEIGHT = 48;
 
     public static String QUICK_OPEN_TABLE = "quick_open_table";
-    public static boolean isQuickOpentable = false;//是否是快速开台
-
+    public static boolean isQuickOpentable = false;
     private Context context;
 
     private int contentWidth;
@@ -62,12 +58,10 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
 
     private static OpentablePopWindow opentablePopWindow;
 
-    private int customerNum = 2;// 客人数
-
+    private int customerNum = 2;
     private DinnertableModel model;
 
-    private OpenTableManager openTableManager;//开台操作封装
-
+    private OpenTableManager openTableManager;
     private BusinessType mBusinessType;
 
     public static OpentablePopWindow getInstance(Context context) {
@@ -82,7 +76,7 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
         this.mBusinessType = mBusinessType;
     }
 
-    public OpentablePopWindow(Context context/*, View parentView, int contentWidth*/) {
+    public OpentablePopWindow(Context context) {
         super();
         this.context = context;
         initialView(context);
@@ -117,18 +111,14 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
         setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         setTouchListener(customerNumEdit);
-//		setAnimationStyle(R.style.dinner_table_info_waiterwindow_style);
     }
 
 
     public void show(View parentView) {
-//		hide();
         if (parentView != null) {
             if (!isShowing()) {
                 customerNumEdit.setText(String.valueOf(model.getNumberOfSeats()));
-                int xOff = DensityUtil.dip2px(context, 15);//-43
-                int yOff = DensityUtil.dip2px(context, 70);//153
-                showAsDropDown(parentView, xOff, -yOff);
+                int xOff = DensityUtil.dip2px(context, 15);                int yOff = DensityUtil.dip2px(context, 70);                showAsDropDown(parentView, xOff, -yOff);
             }
 
         }
@@ -180,11 +170,7 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
         return true;
     }
 
-    /**
-     * @Date 2016年4月25日
-     * @Description:
-     * @Param
-     */
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -194,8 +180,7 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
                     return;
                 }
 
-                if (customerNum < 9999) {//最多只能输入4位
-                    customerNum++;
+                if (customerNum < 9999) {                    customerNum++;
                     customerNumEdit.setText(String.valueOf(customerNum));
                 }
 
@@ -271,17 +256,12 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
         this.context = context;
     }
 
-    /**
-     * 点击EditText不弹出软键盘（屏蔽软键盘）
-     *
-     * @param input
-     */
+
     public void setTouchListener(final EditText input) {
         input.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                // TODO Auto-generated method stub
-                v.requestFocus();
+                                v.requestFocus();
                 if (input.getText() != null) {
                     input.setSelection(input.getText().length());
                 }
@@ -296,7 +276,6 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
             return;
         }
 
-//		TableInfoContentBean.needJumpToDishWindow=true;
         isQuickOpentable = true;
         OpenTableManager manager = new OpenTableManager(new DinnertableVo(model), getEmptyTradeDefaultCustomerNumber(), context, mBusinessType);
         manager.finishOpenTable();
@@ -310,8 +289,7 @@ public class OpentablePopWindow extends PopupWindow implements View.OnTouchListe
     }
 
     private int getEmptyTradeDefaultCustomerNumber() {
-        if (model != null && mBusinessType != BusinessType.BUFFET) {//自助餐默认人数为0
-            return model.getNumberOfSeats();
+        if (model != null && mBusinessType != BusinessType.BUFFET) {            return model.getNumberOfSeats();
         } else {
             return 0;
         }

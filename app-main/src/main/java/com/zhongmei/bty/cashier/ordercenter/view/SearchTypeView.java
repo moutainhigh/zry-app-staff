@@ -9,9 +9,7 @@ import com.zhongmei.yunfu.R;
 import org.androidannotations.annotations.EViewGroup;
 import org.androidannotations.annotations.ViewById;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @EViewGroup(R.layout.order_center_search_type_item)
 public class SearchTypeView extends LinearLayout {
     @ViewById(R.id.search_type_text)

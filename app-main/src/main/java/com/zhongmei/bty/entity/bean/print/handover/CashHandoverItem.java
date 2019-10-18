@@ -3,41 +3,27 @@ package com.zhongmei.bty.entity.bean.print.handover;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * 交接明细条目
- */
+
 public class CashHandoverItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 支付方式
-     */
+
     private String payModeName;
 
-    /**
-     * 实时金额
-     */
+
     private BigDecimal amount = BigDecimal.ZERO;
 
-    /**
-     * 营业金额
-     */
+
     private BigDecimal orderAmount = BigDecimal.ZERO;
 
-    /**
-     * 储值金额
-     */
+
     private BigDecimal valuecardAmount = BigDecimal.ZERO;
 
-    /**
-     * 交接金额
-     */
+
     private BigDecimal actualAmount = BigDecimal.ZERO;
 
-    /**
-     * 差额
-     */
+
     private BigDecimal diffAmount = BigDecimal.ZERO;
 
     public String getPayModeName() {

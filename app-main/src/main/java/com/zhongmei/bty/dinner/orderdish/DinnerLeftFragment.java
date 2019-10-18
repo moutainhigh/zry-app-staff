@@ -9,11 +9,7 @@ import org.androidannotations.annotations.EFragment;
 
 import java.util.List;
 
-/**
- * @Date： 17/6/19
- * @Description:
- * @Version: 1.0
- */
+
 
 @EFragment(R.layout.dinner_left)
 public class DinnerLeftFragment extends DishLeftFragment {

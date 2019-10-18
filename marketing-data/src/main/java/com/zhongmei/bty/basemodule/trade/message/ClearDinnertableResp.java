@@ -5,12 +5,7 @@ import com.zhongmei.bty.basemodule.trade.entity.TradeStatusLog;
 
 import java.util.List;
 
-/**
- * 封装正餐清台接口的返回数据
- *
- * @version: 1.0
- * @date 2015年9月23日
- */
+
 public class ClearDinnertableResp {
 
     private List<Tables> tables;

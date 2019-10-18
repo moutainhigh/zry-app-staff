@@ -11,58 +11,35 @@ import com.zhongmei.bty.commonmodule.database.enums.CardRechagingStatus;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class CustomerCardInfoResp extends CardBaseResp<CustomerCardInfoResp.CustomerCardInfoResult> {
 
     public class CustomerCardInfoResult implements IEcCardInfo {
-        private Long id;//实体卡Id
-
-        private Long cardLevelId;//卡种等级Id
-
-        private Long cardKindId;//卡种Id
-
-        private Integer cardStatus;//实体卡状态(实体卡状态 0：未制卡，1:未出售，2：未激活，3：已激活，4：已停用，5：已废除)
-
-        private String cardNum;//实体卡号
-
-        private String cardKindName;//卡种名称
-
-        private Integer cardType;//实体卡类型 1:权益实体卡 2:匿名实体卡 3:会员实体卡
-
-        private BigDecimal cardCost;//卡费 (0表示不需要卡费)
-
-        private Integer isIntegral;//是否积分（仅权益卡返回）
-
-        private Integer isDiscount;//是否折扣（仅权益卡返回）
-
-        private Integer isValueCard;//是否储值（仅权益卡返回）
-
-        private BigDecimal remainValue;//储值余额
-
-        private BigDecimal integral;//积分余额
-
+        private Long id;
+        private Long cardLevelId;
+        private Long cardKindId;
+        private Integer cardStatus;
+        private String cardNum;
+        private String cardKindName;
+        private Integer cardType;
+        private BigDecimal cardCost;
+        private Integer isIntegral;
+        private Integer isDiscount;
+        private Integer isValueCard;
+        private BigDecimal remainValue;
+        private BigDecimal integral;
         private Integer workStatus;
 
-        private Integer isBind; // 即售即用标记
-
-        // v8.5.0 新增储赠余额
-        private BigDecimal remainRealValue; // 剩余实储金额
-        private BigDecimal remainSendValue; // 剩余赠送金额
-        private BigDecimal remainPrepareValue; // 剩余预储金额
-
-        private BigDecimal price; // 起售价
-
+        private Integer isBind;
+                private BigDecimal remainRealValue;         private BigDecimal remainSendValue;         private BigDecimal remainPrepareValue;
+        private BigDecimal price;
         public BigDecimal getRemainRealValue() {
             return remainRealValue;
         }
 
 
-        /**
-         * 卡是否有储值  权限 权益状态1：可用 2：不可用，受周期控制，为2时，服务账户冻结，不返积分、不享受储赠
-         */
+
         private Integer rightStatus;
 
 
@@ -238,8 +215,7 @@ public class CustomerCardInfoResp extends CardBaseResp<CustomerCardInfoResp.Cust
             info.setWorkStatus(ValueEnums.toEnum(WorkStatus.class, workStatus));
             info.setIsBind(ValueEnums.toEnum(EcCardInfo.CardIsBind.class, isBind));
             info.setRemainValue(remainValue);
-            // v8.5.0 新增赠送余额
-            info.setRemainPrepareValue(remainPrepareValue);
+                        info.setRemainPrepareValue(remainPrepareValue);
             info.setRemainRealValue(remainRealValue);
             info.setRemainSendValue(remainSendValue);
             info.setRightStatus(rightStatus);

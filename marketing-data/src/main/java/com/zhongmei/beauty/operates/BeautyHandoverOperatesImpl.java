@@ -17,9 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
 
- */
 @SuppressLint("SimpleDateFormat")
 public class BeautyHandoverOperatesImpl extends AbstractOpeartesImpl implements HandoverOperates {
 

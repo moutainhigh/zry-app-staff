@@ -5,9 +5,7 @@ import com.zhongmei.bty.basemodule.trade.bean.DinnertableState;
 
 import java.util.List;
 
-/**
- * 封装正餐换桌接口的请求数据
- */
+
 public class TransferDinnertableReq {
 
     private Long updatorId;

@@ -27,21 +27,14 @@ import com.zhongmei.yunfu.init.sync.bean.ModulesBody;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Date： 2017/3/1
- * @Description:库存管理类
- * @Version: 1.0
- */
+
 public class InventoryManager {
 
-    //实时库存消息推送标识
-    private static final String SALE_INENTORY = "saleInventory";
+        private static final String SALE_INENTORY = "saleInventory";
 
-    //开关消息推送标识
-    private static final String AUTO_CLEAR_STATUS = "autoClearStatus";
+        private static final String AUTO_CLEAR_STATUS = "autoClearStatus";
 
-    //是否正在请求
-    private boolean isRequesting = false;
+        private boolean isRequesting = false;
 
     private static InventoryManager mInstance;
 
@@ -55,34 +48,26 @@ public class InventoryManager {
         return mInstance;
     }
 
-    /**
-     * 获取库存开关项外层可回调结果
-     */
+
     public void getInventorySet(ResponseListener<InventorySetResp> resp) {
         InventoryOperates operates = OperatesFactory.create(InventoryOperates.class);
         operates.getInventorySet(resp);
     }
 
-    /**
-     * 获取库存数据外层可回调结果
-     */
+
     public void getInentoryInfo(String time, ResponseListener<InventoryInfoResp> resp) {
         InventoryOperates operates = OperatesFactory.create(InventoryOperates.class);
         operates.getInventoryInfo(time, resp);
     }
 
 
-    /**
-     * 获取库存开关项调用者不需要回调结果
-     */
+
     public void getInventorySet() {
         InventoryOperates operates = OperatesFactory.create(InventoryOperates.class);
         operates.getInventorySet(setRespResponseListener);
     }
 
-    /**
-     * 获取库存数据调用者不需要回调结果
-     */
+
     public void getInventoryInfo() {
         if (!isRequesting) {
             isRequesting = true;
@@ -92,31 +77,25 @@ public class InventoryManager {
         }
     }
 
-    /**
-     * 库存数据发生改变，重新请求数据
-     */
+
     public void setChangeData(ModulesBody modulesBody) {
         List<String> list = modulesBody.getModules();
         if (!Utils.isEmpty(list)) {
             if (list.contains(AUTO_CLEAR_STATUS)) {
                 getInventorySet();
             } else if (list.contains(SALE_INENTORY)) {
-                if (InventoryCacheUtil.getInstance().getSaleSwitch()) {//实时库存开启
-                    getInventoryInfo();
+                if (InventoryCacheUtil.getInstance().getSaleSwitch()) {                    getInventoryInfo();
                 }
             }
         }
 
     }
 
-    /**
-     * 扣减库存的数据组装与请求
-     */
+
     public void changeInvetory(TradeVo tradeVo) {
         List<IShopcartItem> reduceList = ShoppingCart.getInstance().getReduceItems();
         List<IShopcartItem> addList = ShoppingCart.getInstance().getAddChangeItems();
-        if (!Utils.isEmpty(reduceList)) {//扣减
-            InventorySyncReq req = new InventorySyncReq();
+        if (!Utils.isEmpty(reduceList)) {            InventorySyncReq req = new InventorySyncReq();
             req.setBrandId(MainApplication.getInstance().getBrandIdenty());
             req.setShopId(MainApplication.getInstance().getShopIdenty());
             req.setOrderNo(tradeVo.getTrade().getTradeNo());
@@ -141,8 +120,7 @@ public class InventoryManager {
             req.setDishes(disList);
             syncInventory(req, listener);
         }
-        if (!Utils.isEmpty(addList)) {//退回
-            InventorySyncReq req = new InventorySyncReq();
+        if (!Utils.isEmpty(addList)) {            InventorySyncReq req = new InventorySyncReq();
             req.setBrandId(MainApplication.getInstance().getBrandIdenty());
             req.setShopId(MainApplication.getInstance().getShopIdenty());
             req.setOrderNo(tradeVo.getTrade().getTradeNo());
@@ -169,9 +147,7 @@ public class InventoryManager {
         }
     }
 
-    /**
-     * 将IShopcartItem转成Dish
-     */
+
     private void addDish(List<InventorySyncReq.Dish> list, IShopcartItem item) {
         InventorySyncReq.Dish dish = new InventorySyncReq.Dish();
         dish.setAmount(item.getAmount());
@@ -182,9 +158,7 @@ public class InventoryManager {
         list.add(dish);
     }
 
-    /**
-     * 将ISetmealShopcartItem转成Dish
-     */
+
     private void addDish(List<InventorySyncReq.Dish> list, ISetmealShopcartItem item) {
         InventorySyncReq.Dish dish = new InventorySyncReq.Dish();
         dish.setAmount(item.getAmount());
@@ -209,9 +183,7 @@ public class InventoryManager {
         }
     };
 
-    /**
-     * 同步库存
-     */
+
     public void syncInventory(InventorySyncReq inventorySyncReq, ResponseListener<ResponseObjectExtra> listener) {
         InventoryOperates operates = OperatesFactory.create(InventoryOperates.class);
         operates.postInventory(inventorySyncReq, listener);
@@ -223,13 +195,11 @@ public class InventoryManager {
             if (ResponseObject.isOk(response)) {
                 InventorySetResp content = response.getContent();
                 if (content != null && content.isSuccess()) {
-                    //缓存开关
-                    if (content.getSaleNumOpen() != null) {
+                                        if (content.getSaleNumOpen() != null) {
                         InventoryCacheUtil.getInstance().setSaleNumOpenSwitch(content.getSaleNumOpen().intValue());
                     }
                     InventoryCacheUtil.getInstance().setSaleSwitch(content.getShowSaleVal());
-                    if (content.getShowSaleVal() == InventoryCacheUtil.SWITCH_OPEN) {//实时库存开关打开
-                        getInventoryInfo();
+                    if (content.getShowSaleVal() == InventoryCacheUtil.SWITCH_OPEN) {                        getInventoryInfo();
                         InventoryCacheUtil.getInstance().setAutoClearSwitch(content.getAutoClearStatus());
                     }
                 }

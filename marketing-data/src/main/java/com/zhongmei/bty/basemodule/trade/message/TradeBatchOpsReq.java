@@ -5,9 +5,7 @@ import com.zhongmei.yunfu.db.enums.ActionType;
 
 import java.util.List;
 
-/**
- * 订单批量操作请求
- */
+
 public class TradeBatchOpsReq {
 
     private Long reasonId;

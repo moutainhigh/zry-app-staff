@@ -82,11 +82,7 @@ public class DinnerIntegralToCashFragment extends BasicFragment {
         EventBus.getDefault().register(this);
     }
 
-    /**
-     * 监听拆单购物车的事件，删除积分抵现
-     *
-     * @param action
-     */
+
     public void onEventMainThread(ActionSeparateDeleteIntegral action) {
         tbUserIntegral.setChecked(false);
     }
@@ -106,8 +102,7 @@ public class DinnerIntegralToCashFragment extends BasicFragment {
                         return;
                     }
                     if (customer.card == null) {
-                        //会员
-                        long integral = customer.integral == null ? 0 : customer.integral;
+                                                long integral = customer.integral == null ? 0 : customer.integral;
                         if (integral <= 0) {
                             ToastUtil.showShortToast(R.string.intergral_is_zero);
                             tbUserIntegral.setChecked(false);
@@ -124,8 +119,7 @@ public class DinnerIntegralToCashFragment extends BasicFragment {
                             }
                         }
                     } else {
-                        //实体卡
-                        EcCard card = customer.card;
+                                                EcCard card = customer.card;
                         long integral = card.getIntegralAccount() != null ? card.getIntegralAccount().getIntegral() : 0;
                         if (integral <= 0) {
                             ToastUtil.showShortToast(R.string.intergral_is_zero);

@@ -23,8 +23,7 @@ public class DishTypeAdapter extends BaseAdapter {
 
     private List<DishBrandType> listData;
 
-    // 同一单据类型商品被选次数
-    private Map<String, Integer> map = new HashMap<String, Integer>();
+        private Map<String, Integer> map = new HashMap<String, Integer>();
 
     public Map<String, Integer> getMap() {
         return map;

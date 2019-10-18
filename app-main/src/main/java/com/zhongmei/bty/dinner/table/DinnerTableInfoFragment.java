@@ -11,16 +11,11 @@ import com.zhongmei.bty.basemodule.trade.bean.DinnertableTradeVo;
 import org.androidannotations.annotations.EFragment;
 
 
-/**
- * @Date：2015年9月5日
- * @Description:桌台详情页
- * @Version: 1.0
- */
+
 @EFragment(R.layout.dinner_table_info)
 public class DinnerTableInfoFragment extends TableInfoFragment {
 
-    //人数服务员弹框
-    NumberAndWaiterViewTable viewNumberAndWaiter;
+        NumberAndWaiterViewTable viewNumberAndWaiter;
 
     @Override
     public View getNumberAndWaiterView() {

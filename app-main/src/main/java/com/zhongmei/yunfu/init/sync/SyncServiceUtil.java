@@ -11,14 +11,9 @@ import com.zhongmei.yunfu.context.util.SharedPreferenceUtil;
 
 public class SyncServiceUtil {
 
-    private static boolean startSync; //是否已经启动过服务
-    private static PendingIntent pendingIntent;
+    private static boolean startSync;     private static PendingIntent pendingIntent;
 
-    /**
-     * 是否需要初始化
-     *
-     * @return
-     */
+
     public static boolean isNeedInit() {
         return SharedPreferenceUtil.getSpUtil().getBoolean(SyncConstant.SP_NEED_INIT, true);
     }
@@ -27,34 +22,22 @@ public class SyncServiceUtil {
         SharedPreferenceUtil.getSpUtil().putBoolean(SyncConstant.SP_NEED_INIT, isNeedInit);
     }
 
-    /**
-     * 启动同步服务
-     *
-     * @param context
-     */
+
     public static void startService(Context context) {
         SyncService.startService(context);
         if (!startSync) {
             startSync = true;
-            // 包装需要执行Service的Intent
-            Intent intent = new Intent(context, SyncService.class);
+                        Intent intent = new Intent(context, SyncService.class);
             intent.setAction(SyncService.SYNC_KEEP_ALIVE);
             pendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            // 触发服务的起始时间
-            long triggerAtTime = SystemClock.elapsedRealtime() + 60 * 1000;
-            // 获取AlarmManager系统服务
-            AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-            // 使用AlarmManger的setRepeating方法设置定期执行的时间间隔（seconds秒）和需要执行的Service
-            manager.setRepeating(AlarmManager.ELAPSED_REALTIME, triggerAtTime,
+                        long triggerAtTime = SystemClock.elapsedRealtime() + 60 * 1000;
+                        AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+                        manager.setRepeating(AlarmManager.ELAPSED_REALTIME, triggerAtTime,
                     60 * 1000, pendingIntent);
         }
     }
 
-    /**
-     * 停止服务
-     *
-     * @param context
-     */
+
     public static void stopService(Context context) {
         if (startSync) {
             startSync = false;

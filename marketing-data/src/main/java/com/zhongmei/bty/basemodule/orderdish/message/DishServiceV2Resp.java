@@ -11,18 +11,13 @@ import java.util.List;
 
 public class DishServiceV2Resp {
 
-    //public static final int OK = 1000;
 
     public List<TradeItem> tradeItems;
     public List<TradeExtra> tradeExtras;
     public List<KdsTradeItem> kdsTradeItems;
     public List<KdsTradeItemPart> kdsTradeItemParts;
-    /**
-     * 联台批次关系表
-     */
+
     public List<TradeItemMainBatchRel> tradeItemMainBatchRels;
-    /**
-     * 联台菜品相关属性批次关系表
-     */
+
     public List<TradeItemMainBatchRelExtra> tradeItemMainBatchRelExtras;
 }

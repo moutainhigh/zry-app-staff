@@ -3,32 +3,12 @@ package com.zhongmei.bty.basemodule.shopmanager.closing.bean;
 import java.math.BigDecimal;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @Deprecated
 public class DiscountDetailVo {
-    private String bizDate; //营业日期
-    private BigDecimal privilegeAmount;//总优惠金额
-    private BigDecimal goodsDiscount; //手动商品折扣
-    private BigDecimal orderDiscount; //手动整单折扣
-    private BigDecimal autoDiscount; //会员折扣
-    private Map goodsMap;//手动商品折扣
-    private Map orderMap;//手动整单折扣
+    private String bizDate;     private BigDecimal privilegeAmount;    private BigDecimal goodsDiscount;     private BigDecimal orderDiscount;     private BigDecimal autoDiscount;     private Map goodsMap;    private Map orderMap;
 
-
-    private BigDecimal integral; //积分抵现
-    private BigDecimal promoDiscount; //折扣券
-    private BigDecimal promoVoucher; //现金券
-    private BigDecimal promoDebt; //满减券
-    private BigDecimal promoGift; //礼品券
-    private BigDecimal activeConsume; //满立减活动
-    private BigDecimal privilegeThirdPrty; //第三方平台优惠
-    private BigDecimal dishMarketing;//营销活动优惠
-    private BigDecimal shukePrivilege;//熟客优惠
-    private BigDecimal weixinCardPrivilege;//微信卡劵优惠
-    private BigDecimal entertainPrivilege;//宴请
-
+    private BigDecimal integral;     private BigDecimal promoDiscount;     private BigDecimal promoVoucher;     private BigDecimal promoDebt;     private BigDecimal promoGift;     private BigDecimal activeConsume;     private BigDecimal privilegeThirdPrty;     private BigDecimal dishMarketing;    private BigDecimal shukePrivilege;    private BigDecimal weixinCardPrivilege;    private BigDecimal entertainPrivilege;
 
     public BigDecimal getDishMarketing() {
         return dishMarketing;

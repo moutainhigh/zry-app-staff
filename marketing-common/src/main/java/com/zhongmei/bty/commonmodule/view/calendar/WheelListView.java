@@ -37,36 +37,25 @@ import java.util.List;
 
 public class WheelListView extends ListView implements ListView.OnScrollListener, View.OnTouchListener,
         ViewTreeObserver.OnGlobalLayoutListener {
-    public static final int SMOOTH_SCROLL_DURATION = 50;//ms
-    public static final int SECTION_DELAY = 300;//ms
-
-    public static final int TEXT_SIZE = 18;//sp
-    public static final float TEXT_ALPHA = 0.8f;
+    public static final int SMOOTH_SCROLL_DURATION = 50;    public static final int SECTION_DELAY = 300;
+    public static final int TEXT_SIZE = 18;    public static final float TEXT_ALPHA = 0.8f;
     public static final int TEXT_COLOR_FOCUS = 0XFF32ADF6;
     public static final int TEXT_COLOR_NORMAL = 0XFFBCBCBC;
 
     public static final int ITEM_OFF_SET = 2;
-    public static final int ITEM_HEIGHT = 45;//dp
-    public static final int ITEM_PADDING_TOP_BOTTOM = 5;//dp
-    public static final int ITEM_PADDING_LEFT_RIGHT = 10;//dp
-    public static final int ITEM_MARGIN = 5;//dp
-    public static final int ITEM_TAG_IMAGE = 100;
+    public static final int ITEM_HEIGHT = 45;    public static final int ITEM_PADDING_TOP_BOTTOM = 5;    public static final int ITEM_PADDING_LEFT_RIGHT = 10;    public static final int ITEM_MARGIN = 5;    public static final int ITEM_TAG_IMAGE = 100;
     public static final int ITEM_TAG_TEXT = 101;
 
     private static final int MATCH_PARENT = ViewGroup.LayoutParams.MATCH_PARENT;
     private static final int WRAP_CONTENT = ViewGroup.LayoutParams.WRAP_CONTENT;
 
-    private int itemHeightPixels = 0; // 每一项高度
-    private int currentPosition = -1;    // 记录滚轮当前刻度
-    private WheelAdapter adapter = new WheelAdapter();
+    private int itemHeightPixels = 0;     private int currentPosition = -1;        private WheelAdapter adapter = new WheelAdapter();
     private OnWheelChangeListener onWheelChangeListener;
 
     private int textSize = TEXT_SIZE;
     private int textColorNormal = TEXT_COLOR_NORMAL;
     private int textColorFocus = TEXT_COLOR_FOCUS;
-//    private boolean isUserScroll = false;//是否用户手动滚动
-    private LineConfig lineConfig = null;//分割线配置
-
+    private LineConfig lineConfig = null;
     public WheelListView(Context context) {
         super(context);
         init();
@@ -101,9 +90,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         super.setAdapter(adapter);
     }
 
-    /**
-     * 设置背景
-     */
+
     private void changeBackground() {
         int wheelSize = adapter.getWheelSize();
         if (null == lineConfig) {
@@ -130,8 +117,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             super.setBackground(drawable);
         } else {
-            //noinspection deprecation
-            super.setBackgroundDrawable(drawable);
+                        super.setBackgroundDrawable(drawable);
         }
     }
 
@@ -139,15 +125,13 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         if (null == list || list.size() == 0) {
             throw new IllegalArgumentException("data are empty");
         }
-//        isUserScroll = false;
         currentPosition = -1;
         adapter.setData(list);
     }
 
     public void setItems(List<String> list) {
         _setItems(list);
-        // 2015/12/25 初始化时设置默认选中项
-        setSelectedIndex(0);
+                setSelectedIndex(0);
     }
 
     public void setItems(String[] list) {
@@ -192,9 +176,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         }
     }
 
-    /**
-     * 设置滚轮个数偏移量
-     */
+
     public void setOffset(@IntRange(from = 1, to = 3) int offset) {
         if (offset < 1 || offset > 3) {
             throw new IllegalArgumentException("Offset must between 1 and 3");
@@ -203,9 +185,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         adapter.setWheelSize(wheelSize);
     }
 
-    /**
-     * 设置滚轮是否禁用循环滚动
-     */
+
     public void setCanLoop(boolean canLoop) {
         adapter.setLoop(canLoop);
     }
@@ -216,10 +196,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
 
     public void setSelectedIndex(final int index) {
         final int realPosition = getRealPosition(index);
-//        WheelListView.super.setSelection(realPosition);
-//        refreshCurrentPosition();
-        //延时一下以保证数据初始化完成，才定位到选中项
-        postDelayed(new Runnable() {
+                postDelayed(new Runnable() {
             @Override
             public void run() {
                 WheelListView.super.setSelection(realPosition);
@@ -228,9 +205,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         }, SECTION_DELAY);
     }
 
-    /**
-     * 获取当前滚轮位置的数据
-     */
+
     @Override
     public String getSelectedItem() {
         return adapter.getItem(getCurrentPosition());
@@ -242,9 +217,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
 
    
 
-    /**
-     * 获得滚轮当前真实位置
-     */
+
     private int getRealPosition(int position) {
         int realCount = adapter.getRealCount();
         if (realCount == 0) {
@@ -257,9 +230,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         return position;
     }
 
-    /**
-     * 获取当前滚轮位置
-     */
+
     public int getCurrentPosition() {
         if (currentPosition == -1) {
             return 0;
@@ -267,11 +238,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         return currentPosition;
     }
 
-    /**
-     * 设置滚轮数据适配器
-     *
-     * @deprecated 使用{@link #setItems}代替
-     */
+
     @Deprecated
     @Override
     public void setAdapter(ListAdapter adapter) {
@@ -286,7 +253,6 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
     private void onSelectedCallback() {
         int index = getSelectedIndex();
         String item = getSelectedItem();
-//        LogUtils.verbose("isUserScroll=" + isUserScroll + ", index=" + index + ", item=" + item);
         if (null != onWheelChangeListener) {
             onWheelChangeListener.onItemSelected(index, item);
         }
@@ -298,8 +264,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         } else if (Math.abs(scrollDistance) < 12) {
             return scrollDistance > 0 ? 2 : -2;
         } else {
-            return (int) (scrollDistance / 6);  // 减缓平滑滑动速率
-        }
+            return (int) (scrollDistance / 6);          }
     }
 
     private void refreshCurrentPosition() {
@@ -317,20 +282,17 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
         } else {
             position = firstPosition + 1;
         }
-        //由这个逆推：int wheelSize = offset * 2 + 1;
-        int offset = (adapter.getWheelSize() - 1) / 2;
+                int offset = (adapter.getWheelSize() - 1) / 2;
         int curPosition = position + offset;
         refreshVisibleItems(firstPosition, curPosition, offset);
         if (adapter.isLoop()) {
             position = curPosition % adapter.getRealCount();
         }
         if (position == currentPosition) {
-            //LogUtils.verbose("scrolling position: " + position);
-            return;
+                        return;
         }
         currentPosition = position;
-        //LogUtils.verbose("refresh position as: " + position);
-        onSelectedCallback();
+                onSelectedCallback();
     }
 
     private void refreshVisibleItems(int firstPosition, int curPosition, int offset) {
@@ -343,14 +305,10 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             refreshTextView(i, curPosition, itemView, textView);
         }
     }
-//刷新文本设置
     private void refreshTextView(int position, int curPosition, View
             itemView, TextView textView) {
-        //LogUtils.verbose("position=" + position + ", curPosition=" + curPosition);
-        if (curPosition == position) { // 选中
-            setTextView(itemView, textView, textColorFocus, textSize, 1.0f);
-        } else { // 未选中
-            int delta = Math.abs(position - curPosition);
+                if (curPosition == position) {             setTextView(itemView, textView, textColorFocus, textSize, 1.0f);
+        } else {             int delta = Math.abs(position - curPosition);
             float alpha = (float) Math.pow(TEXT_ALPHA, delta);
             setTextView(itemView, textView, textColorNormal, textSize, alpha);
         }
@@ -387,9 +345,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-//        isUserScroll = true;//触发触摸事件，说明是用户在滚动
-        //v.getParent().requestDisallowInterceptTouchEvent(true);
-        switch (event.getAction()) {
+                switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Log.v("WheelListView","press down: currentPosition=" + currentPosition);
                 break;
@@ -410,8 +366,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             return;
         }
         float deltaY = itemView.getY();
-        // fixed: 17-1-7  Equality tests should not be made with floating point values.
-        if ((int) deltaY == 0 || itemHeightPixels == 0) {
+                if ((int) deltaY == 0 || itemHeightPixels == 0) {
             return;
         }
         if (Math.abs(deltaY) < itemHeightPixels / 2) {
@@ -433,13 +388,10 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
     @Override
     protected void onMeasure(int widthSpec, int heightSpec) {
         int width = getLayoutParams().width;
-        //LogUtils.verbose(this, "onMeasure: width is " + width);
-        if (width == WRAP_CONTENT) {
-            //宽度自适应
-            super.onMeasure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), heightSpec);
+                if (width == WRAP_CONTENT) {
+                        super.onMeasure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), heightSpec);
         } else {
-            //宽度填充屏幕或明确设置了宽度
-            super.onMeasure(widthSpec, heightSpec);
+                        super.onMeasure(widthSpec, heightSpec);
         }
     }
 
@@ -452,13 +404,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
     }
 
     public interface OnWheelChangeListener {
-        /**
-         * 滑动选择回调
-         *
-//         * @param isUserScroll 是否用户手动滚动，用于联动效果判断是否自动重置选中项
-         * @param index        当前选择项的索引
-         * @param item         当前选择项的值
-         */
+
         void onItemSelected(int index, String item);
     }
 
@@ -491,8 +437,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             setPadding(paddingLeftRight, paddingTopBottom, paddingLeftRight, paddingTopBottom);
             setGravity(Gravity.CENTER);
             int height = DensityUtil.dip2px(context, ITEM_HEIGHT);
-            // fixed: 17-1-8 #79 安卓4.x兼容问题，java.lang.ClassCastException……onMeasure……
-            setLayoutParams(new AbsListView.LayoutParams(MATCH_PARENT, height));
+                        setLayoutParams(new AbsListView.LayoutParams(MATCH_PARENT, height));
 
             imageView = new ImageView(getContext());
             imageView.setTag(ITEM_TAG_IMAGE);
@@ -512,16 +457,12 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             addView(textView, textParams);
         }
 
-        /**
-         * 设置文本
-         */
+
         public void setText(CharSequence text) {
             textView.setText(text);
         }
 
-        /**
-         * 设置图片资源
-         */
+
         public void setImage(@DrawableRes int resId) {
             imageView.setVisibility(View.VISIBLE);
             imageView.setImageResource(resId);
@@ -603,8 +544,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
                 position = 0;
             }
             holder.itemView.setText(data.get(position));
-            //holder.wheelItem.setImage(...);
-            return convertView;
+                        return convertView;
         }
 
         public final WheelAdapter setLoop(boolean loop) {
@@ -646,18 +586,14 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             return isLoop;
         }
 
-        /**
-         * 数据已改变，重绘可见区域
-         */
+
         @Override
         @Deprecated
         public final void notifyDataSetChanged() {
             super.notifyDataSetChanged();
         }
 
-        /**
-         * 数据失效，重绘控件
-         */
+
         @Override
         @Deprecated
         public final void notifyDataSetInvalidated() {
@@ -716,7 +652,6 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
             this.lineConfig = config;
             this.wheelSize = config.getWheelSize();
             this.itemHeight = config.getItemHeight();
-//            ratio = config.getRatio();
             init(config);
         }
 
@@ -732,12 +667,9 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
 
         @Override
         public void draw(Canvas canvas) {
-            // draw background
-            canvas.drawRect(0, 0, width, height, bgPaint);
-            //设置线可见时绘制两条线
-            if(lineConfig.isVisible()){
-                // draw select border
-                if (itemHeight != 0) {
+                        canvas.drawRect(0, 0, width, height, bgPaint);
+                        if(lineConfig.isVisible()){
+                                if (itemHeight != 0) {
                     canvas.drawLine(width * ratio, itemHeight * (wheelSize / 2), width * (1 - ratio),
                             itemHeight * (wheelSize / 2), paint);
                     canvas.drawLine(width * ratio, itemHeight * (wheelSize / 2 + 1), width * (1 - ratio),
@@ -755,12 +687,9 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
                         0xFF999999,
                         0x00AAAAAA,
                         0x00AAAAAA
-                }; // 阴影色值
-        private GradientDrawable topShadow = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
-                SHADOWS_COLORS); // 顶部阴影
-        private GradientDrawable bottomShadow = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,
-                SHADOWS_COLORS); // 底部阴影
-        private Paint bgPaint, paint, dividerPaint;
+                };         private GradientDrawable topShadow = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM,
+                SHADOWS_COLORS);         private GradientDrawable bottomShadow = new GradientDrawable(GradientDrawable.Orientation.BOTTOM_TOP,
+                SHADOWS_COLORS);         private Paint bgPaint, paint, dividerPaint;
         private int wheelSize, itemHeight;
 
         public ShadowWheelDrawable(LineConfig config) {
@@ -784,11 +713,9 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
 
         @Override
         public void draw(Canvas canvas) {
-            // draw background
-            canvas.drawRect(0, 0, width, height, bgPaint);
+                        canvas.drawRect(0, 0, width, height, bgPaint);
 
-            // draw select border
-            if (itemHeight != 0) {
+                        if (itemHeight != 0) {
                 canvas.drawRect(0, itemHeight * (wheelSize / 2), width, itemHeight
                         * (wheelSize / 2 + 1), paint);
                 canvas.drawLine(0, itemHeight * (wheelSize / 2), width, itemHeight
@@ -796,8 +723,7 @@ public class WheelListView extends ListView implements ListView.OnScrollListener
                 canvas.drawLine(0, itemHeight * (wheelSize / 2 + 1), width, itemHeight
                         * (wheelSize / 2 + 1), dividerPaint);
 
-                // top, bottom
-                topShadow.setBounds(0, 0, width, itemHeight);
+                                topShadow.setBounds(0, 0, width, itemHeight);
                 topShadow.draw(canvas);
 
                 bottomShadow.setBounds(0, height - itemHeight, width, height);

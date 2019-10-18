@@ -26,9 +26,7 @@ public class JCReturnAnonymousCardReq extends Trade {
     }
 
     public static class JCCardSaleInfo {
-        private String cardKind;// 卡类型
-        private String cardNum; //卡号
-
+        private String cardKind;        private String cardNum;
         public String getCardKind() {
             return cardKind;
         }

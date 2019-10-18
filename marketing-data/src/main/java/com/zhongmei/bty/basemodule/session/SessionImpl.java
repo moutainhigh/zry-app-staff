@@ -21,9 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class SessionImpl extends AbsSession {
 
@@ -32,8 +30,7 @@ public class SessionImpl extends AbsSession {
     public static final int AV1 = 1;
     public static final int AV2 = 2;
 
-    //private static List<BindListener> bindListeners = new ArrayList<>();
-    private static Map<Class<? extends SessionFunc>, SessionFunc> pool = new WeakHashMap<>();
+        private static Map<Class<? extends SessionFunc>, SessionFunc> pool = new WeakHashMap<>();
 
     private static AuthUser authUser;
 
@@ -49,8 +46,7 @@ public class SessionImpl extends AbsSession {
         @Override
         public void onChange(Collection<Uri> uris) {
             if (false && needRefresh(uris)) {
-                //目前屏蔽数据库变化的时候加载权限
-                if (auth != null) {
+                                if (auth != null) {
                     auth.load(authUser);
                 }
             }
@@ -135,19 +131,7 @@ public class SessionImpl extends AbsSession {
         }
     }
 
-    /**
-     * 请注意：
-     * 1.本来原来为空的时候，会发送广播，跳转到登录页面，但是由于项目中，很多地方，调用后如果为空，在外面又跳转到
-     * 登录页面，所以，后来去掉了发送广播。
-     * <p>
-     * 2.原来调用unbind的时候，会回调出去，在MainApplication中发送一个广播，跳转到登录页面，但是由于后来需求修改了
-     * 解绑登录用户后，不自动跳转到登录页面。
-     * <p>
-     * 故：基于以上2个原因，请调用这个方法的地方，自行判断是否为null。不要在业务代码很深的地方调用该方法，最好离UI代码
-     * 很近的地方调用，然后传入到你所需要的地方。
-     *
-     * @return
-     */
+
     public synchronized AuthUser getAuthUser() {
         if (authUser == null) {
             log("当前登录用户不存在");
@@ -155,17 +139,7 @@ public class SessionImpl extends AbsSession {
         return authUser;
     }
 
-	/*public synchronized void registerCallback(BindListener bindListener) {
-		if (bindListener != null) {
-			bindListeners.add(bindListener);
-		}
-	}
 
-	public synchronized void unRegisterCallback(BindListener bindListener) {
-		if (bindListener != null) {
-			bindListeners.remove(bindListener);
-		}
-	}*/
 
     public synchronized <T extends SessionFunc> T getFunc(Class<T> tClass) {
         ArgsUtils.notNull(tClass, "Class of SessionFunc is null");
@@ -202,8 +176,6 @@ public class SessionImpl extends AbsSession {
 
     private static void log(String message) {
         Log.d("--->", message);
-//		OSLog.getLog("session").log(message);
 
-        //PLog.d("Session--->", message);
-    }
+            }
 }

@@ -13,13 +13,7 @@ import android.widget.TextView;
 
 import com.zhongmei.yunfu.R;
 
-/**
- * @Date：2015年7月9日 上午9:34:53
- * @Description: 套餐界面按钮
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 public class SetmealButton extends FrameLayout {
     private Context mContext;
 

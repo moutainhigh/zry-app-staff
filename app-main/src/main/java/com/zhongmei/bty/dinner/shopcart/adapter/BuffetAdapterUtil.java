@@ -23,9 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BuffetAdapterUtil {
 
@@ -50,22 +48,18 @@ public class BuffetAdapterUtil {
                 data.add(dishDataItem);
             }
         } else if (mealShellVo != null && mealShellVo.getDishMenuVo() != null) {
-            //针对联台子单没有TradeBuffetPeople
-            DishDataItem dishDataItem = new DishDataItem(ItemType.BUFFET_TRADE_PEOPLE);
+                        DishDataItem dishDataItem = new DishDataItem(ItemType.BUFFET_TRADE_PEOPLE);
             dishDataItem.setName(mealShellVo.getDishMenuVo().getSkuName());
             data.add(dishDataItem);
         }
 
 
-        //根据菜品类型分组
-        Map<Integer, List<IShopcartItem>> dishGroup = new HashMap<Integer, List<IShopcartItem>>();
+                Map<Integer, List<IShopcartItem>> dishGroup = new HashMap<Integer, List<IShopcartItem>>();
 
-        //key:tradeTableId
-        Map<Long, List<IShopcartItem>> tableItemMap = new LinkedHashMap<>();
+                Map<Long, List<IShopcartItem>> tableItemMap = new LinkedHashMap<>();
 
         if (dataList != null && dataList.size() > 0) {
-            // 遍历购物车中的菜品，对菜品进行分组
-            for (int i = 0; i < dataList.size(); i++) {
+                        for (int i = 0; i < dataList.size(); i++) {
 
                 IShopcartItem shopCartItem = dataList.get(i);
 
@@ -76,12 +70,10 @@ public class BuffetAdapterUtil {
                     continue;
                 }
 
-                //累计商品数量
-                adapter.sumAllDishCount(shopCartItem);
+                                adapter.sumAllDishCount(shopCartItem);
 
                 if (shopCartItem.isGroupDish()) {
-                    //说明是套餐内的
-                    if (!dishGroup.containsKey(comboVoGroup)) {
+                                        if (!dishGroup.containsKey(comboVoGroup)) {
                         dishGroup.put(comboVoGroup, new ArrayList<IShopcartItem>());
                     }
                     dishGroup.get(comboVoGroup).add(shopCartItem);
@@ -95,8 +87,7 @@ public class BuffetAdapterUtil {
                             dishGroup.put(singleGroup, new ArrayList<IShopcartItem>());
                         }
                         dishGroup.get(singleGroup).add(shopCartItem);
-                        //按桌分組
-                        List singleDeskList = tableItemMap.get(shopCartItem.getTradeTableId());
+                                                List singleDeskList = tableItemMap.get(shopCartItem.getTradeTableId());
                         if (singleDeskList == null) {
                             singleDeskList = new ArrayList();
                             tableItemMap.put(shopCartItem.getTradeTableId(), singleDeskList);
@@ -149,14 +140,7 @@ public class BuffetAdapterUtil {
         return dishGroup;
     }
 
-    /**
-     * 按桌分组数据
-     *
-     * @param tableItemMap
-     * @param tradeTableMap
-     * @param data
-     * @param adapter
-     */
+
     private static void createDeskDataItem(Map<Long, List<IShopcartItem>> tableItemMap, Map<Long, TradeTable> tradeTableMap, ArrayList<DishDataItem> data, SuperShopCartAdapter adapter) {
         Iterator<Long> iterator = tableItemMap.keySet().iterator();
         while (iterator.hasNext()) {

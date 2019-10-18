@@ -8,30 +8,7 @@ import com.zhongmei.bty.commonmodule.database.enums.BatchDishRelType;
 
 import java.math.BigDecimal;
 
-/**
- * CREATE TABLE `trade_item_main_batch_rel_extra` (
- * `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '服务端自增ID',
- * `main_id` bigint(20) NOT NULL COMMENT '主单数据id 根据rel_type区分',
- * `main_uuid` varchar(32) NOT NULL COMMENT '主单数据uuid 根据rel_type区分',
- * `sub_id` bigint(20) NOT NULL COMMENT '子单数据id 根据rel_type区分',
- * `sub_uuid` varchar(32) NOT NULL COMMENT '子单数据uuid 根据rel_type区分',
- * `main_trade_id` bigint(20) NOT NULL COMMENT '主订单ID',
- * `sub_trade_id` bigint(20) NOT NULL COMMENT '子订单ID',
- * `status_flag` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1:VALID:有效的 2: INVALID: 无效的',
- * `server_create_time` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT '服务端创建时间',
- * `server_update_time` timestamp(3) NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3) COMMENT '服务端最后修改时间',
- * `rel_type` tinyint(4) NOT NULL DEFAULT '1' COMMENT '1: trade_item_extra关联关系  2:trade_item_property关联关系  3:trade_item_operation关联关系',
- * `brand_identy` bigint(20) NOT NULL COMMENT '品牌标识',
- * `shop_identy` bigint(20) NOT NULL COMMENT '门店标识',
- * `quantity` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '菜品数量，当记录为trade_item和trade_item_property 口味做法关系时，才有此值',
- * PRIMARY KEY (`id`),
- * KEY `idx_brand_identy_shop_identy` (`brand_identy`,`shop_identy`) USING BTREE,
- * KEY `idx_shop_identy_server_update_time` (`shop_identy`,`server_update_time`) USING BTREE,
- * KEY `idx_main_id_rel_type` (`main_id`,`rel_type`),
- * KEY `idx_main_trade_id` (`main_trade_id`)
- * ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='联台菜品条目数据批次关系表'
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "trade_item_main_batch_rel_extra")
 public class TradeItemMainBatchRelExtra extends BasicEntityBase {
     private static final long serialVersionUID = 1L;
@@ -172,9 +149,7 @@ public class TradeItemMainBatchRelExtra extends BasicEntityBase {
         this.quantity = quantity;
     }
 
-    /**
-     * 子单中主单批量菜拆出时，信息改变
-     */
+
     public void initSplitState() {
         setId(null);
         setSubId(null);

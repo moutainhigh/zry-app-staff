@@ -4,11 +4,7 @@ import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import com.zhongmei.yunfu.db.ServerEntityBase;
 
-/**
- * Created by demo on 2018/12/15
- * V8.1新增表
- * 菜品座位号关联表（以后可能会扩展其他的内容）
- */
+
 @DatabaseTable(tableName = "trade_item_extra_dinner")
 public class TradeItemExtraDinner extends ServerEntityBase {
 
@@ -25,24 +21,16 @@ public class TradeItemExtraDinner extends ServerEntityBase {
         public static final String clientCreateTime = "client_create_time";
 
         public static final String clientUpdateTime = "client_update_time";
-        /**
-         * creator_id
-         */
+
         public static final String creatorId = "creator_id";
 
-        /**
-         * creator_name
-         */
+
         public static final String creatorName = "creator_name";
 
-        /**
-         * updator_id
-         */
+
         public static final String updatorId = "updator_id";
 
-        /**
-         * updator_name
-         */
+
         public static final String updatorName = "updator_name";
     }
 
@@ -77,8 +65,7 @@ public class TradeItemExtraDinner extends ServerEntityBase {
     private String updatorName;
 
     @DatabaseField(columnName = "servingOrder")
-    private Integer servingOrder; //上菜顺序 小于等于0为没有设置顺序
-
+    private Integer servingOrder;
     public Long getTradeItemId() {
         return tradeItemId;
     }

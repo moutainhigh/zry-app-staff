@@ -9,11 +9,7 @@ import com.zhongmei.yunfu.orm.DatabaseHelper;
 
 import java.util.List;
 
-/**
- * Desc
- *
- * @created 2017/9/29
- */
+
 public class TakeawayMemoDalImpl extends AbstractOpeartesImpl implements TakeawayMemoDal {
 
     public TakeawayMemoDalImpl(IOperates.ImplContext context) {

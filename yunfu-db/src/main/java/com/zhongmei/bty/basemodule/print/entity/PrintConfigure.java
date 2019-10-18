@@ -6,72 +6,46 @@ import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.db.IdEntityBase;
 import com.zhongmei.yunfu.db.enums.StatusFlag;
 
-/**
- * 打印配置信息表
- */
+
 @DatabaseTable(tableName = "print_configure")
 public class PrintConfigure extends IdEntityBase {
     private static final long serialVersionUID = 1L;
 
 
-    /**
-     * The columns of table "printer_style_setting"
-     */
+
     public interface $ extends IdEntityBase.$ {
 
-        /**
-         * 占位符
-         */
+
         String key = "key";
 
-        /**
-         * 对象属性值
-         */
+
         String value = "value";
 
-        /**
-         * 启用标示(1:启用2:停用)
-         */
+
         String enableFlag = "enable_flag";
 
-        /**
-         * 状态标识(1:有效2:无效)
-         */
+
         String statusFlag = "status_flag";
 
-        /**
-         * 服务器创建时间
-         */
+
         String serverCreateTime = "server_create_time";
 
-        /**
-         * 创建者ID
-         */
+
         String creatorId = "creator_id";
 
-        /**
-         * 创建者名字
-         */
+
         String creatorName = "creator_name";
 
-        /**
-         * 服务器更新时间
-         */
+
         String serverUpdateTime = "server_update_time";
 
-        /**
-         * 更新者ID
-         */
+
         String updatorId = "updator_id";
 
-        /**
-         * 更新者名字
-         */
+
         String updatorName = "updator_name";
 
-        /**
-         * 占位符对应哪一个票据
-         */
+
         String type = "type";
     }
 

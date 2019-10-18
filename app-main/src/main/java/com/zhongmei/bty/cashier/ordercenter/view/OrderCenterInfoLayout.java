@@ -58,13 +58,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @Date：2015-11-18 下午2:58:39
- * @Description: 显示正餐详细情况
- * @Version: 1.0
- * <p>
- * rights reserved.
- */
+
 @EViewGroup(R.layout.dinner_ordercenter_orderinfos)
 public class OrderCenterInfoLayout extends LinearLayout {
     private static final String TAG = OrderCenterInfoLayout.class.getName();
@@ -139,11 +133,9 @@ public class OrderCenterInfoLayout extends LinearLayout {
     XInnerListView goodsListView;
 
     @ViewById(R.id.reject_goods_info)
-    View vRejectGoodsInfo;// add 2015.12.21
-
+    View vRejectGoodsInfo;
     @ViewById(R.id.dinner_billcenter_detail_reject_goodslistview)
-    XInnerListView rejectgoodsListView;// add 2015.12.21
-
+    XInnerListView rejectgoodsListView;
     @ViewById(R.id.operating_info_view)
     OrderCenterDetailView operating_info_view1;
 
@@ -159,8 +151,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
     @ViewById(R.id.v_line_customer)
     View vLineCustomer;
 
-    // add 2016.01.12 start
-    @ViewById(R.id.tv_trade_source)
+        @ViewById(R.id.tv_trade_source)
     TextView tvTradeSource;
 
     @ViewById(R.id.line_operation_people)
@@ -174,8 +165,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
 
     private TradeDal tradeDal;
 
-    // add 2016.01.12 end
-    private Context mContext;
+        private Context mContext;
 
     private LayoutInflater mLayoutInflater;
 
@@ -183,9 +173,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
 
     private OrderCenterDishAdapter adapter;
 
-    private DinnerBillCenterRejectDishAdapter rejectadapter;// add
-    // 2015.12.21
-    private IOrderCenterDetailPresenter mOrderCenterDetailPresenter;
+    private DinnerBillCenterRejectDishAdapter rejectadapter;        private IOrderCenterDetailPresenter mOrderCenterDetailPresenter;
 
     public OrderCenterInfoLayout(Context context) {
         super(context);
@@ -205,13 +193,10 @@ public class OrderCenterInfoLayout extends LinearLayout {
     public void init() {
         tradeDal = OperatesFactory.create(TradeDal.class);
         adapter = new OrderCenterDishAdapter(mContext, false);
-        // add 2015.12.21
-        rejectadapter = new DinnerBillCenterRejectDishAdapter(mContext);
+                rejectadapter = new DinnerBillCenterRejectDishAdapter(mContext);
         goodsListView.setAdapter(adapter);
-        // add 2015.12.21
-        rejectgoodsListView.setAdapter(rejectadapter);
-        // add 2015.12.21
-        refreshOperateReasonInfo(mContext, mTradePaymentVo.getTradeVo());
+                rejectgoodsListView.setAdapter(rejectadapter);
+                refreshOperateReasonInfo(mContext, mTradePaymentVo.getTradeVo());
         refreshPayInfo(mContext, mTradePaymentVo);
         refreshPrivilegeInfo(mContext, mTradePaymentVo);
         refreshBillInfo(mContext, mTradePaymentVo.getTradeVo());
@@ -219,11 +204,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
         refreshRejectGoodsInfo(mTradePaymentVo.getTradeVo());
     }
 
-    /**
-     * @Title: refreshPayInfo
-     * @Description: 刷新支付信息
-     * @Return void 返回类型
-     */
+
     private void refreshPayInfo(Context context, TradePaymentVo tradePaymentVo) {
         llPayinfoContent.removeAllViews();
         vPayInfo.setVisibility(View.GONE);
@@ -274,11 +255,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
         return false;
     }
 
-    /**
-     * @Title: refreshPrivilegeInfo
-     * @Description: 刷新优惠信息
-     * @Return void 返回类型
-     */
+
     private void refreshPrivilegeInfo(Context context, TradePaymentVo tradePaymentVo) {
         TradeVo tradeVo = tradePaymentVo.getTradeVo();
         List<PaymentVo> paymentVoList = tradePaymentVo.getPaymentVoList();
@@ -346,8 +323,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
         if (tradeTaxList == null || tradeTaxList.isEmpty()) {
             order_center_tax_info.setVisibility(View.GONE);
         } else {
-            showTaxCode(tradeVo); //显示税号 add v9.0
-            order_center_tax_info.setVisibility(View.VISIBLE);
+            showTaxCode(tradeVo);             order_center_tax_info.setVisibility(View.VISIBLE);
             order_center_tax_info.setTitle(getResources().getString(R.string.tax));
             for (TradeTax tradeTax : tradeVo.getTradeTaxs()) {
                 order_center_tax_info.addItemNormalView(tradeTax.getTaxTypeName(),
@@ -358,17 +334,14 @@ public class OrderCenterInfoLayout extends LinearLayout {
         }
     }
 
-    //显示税号 add v9.0
-    private void showTaxCode(TradeVo tradeVo) {
+        private void showTaxCode(TradeVo tradeVo) {
         if (Utils.isEmpty(tradeVo.getTradeTaxs())) {
             order_center_tax_info.setTime("");
         } else {
-            //如果税号已生成就展示
-            if (tradeVo.getTradeInvoiceNo() != null && !TextUtils.isEmpty(tradeVo.getTradeInvoiceNo().getCode())) {
+                        if (tradeVo.getTradeInvoiceNo() != null && !TextUtils.isEmpty(tradeVo.getTradeInvoiceNo().getCode())) {
                 order_center_tax_info.setTime(getResources().getString(R.string.tax_code) + ":" + tradeVo.getTradeInvoiceNo().getCode());
             } else {
-                //已经支付或预结单没生产税号要提示
-                if (tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PAID || tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PREPAID) {
+                                if (tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PAID || tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PREPAID) {
                     String alterText = getResources().getString(R.string.tax_code) + ":" + getResources().getString(R.string.tax_code_not_find);
                     SpannableStringBuilder builder =
                             new SpannableStringBuilder(alterText);
@@ -384,17 +357,12 @@ public class OrderCenterInfoLayout extends LinearLayout {
         }
     }
 
-    /**
-     * @Title: refreshBillInfo
-     * @Description: 刷新单据信息
-     * @Return void 返回类型
-     */
+
     private void refreshBillInfo(Context context, TradeVo tradeVo) {
         if (tradeVo != null) {
             mTvBillTime.setText(context.getString(R.string.dinner_order_center_trade_time, DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerCreateTime())));
             Trade trade = tradeVo.getTrade();
-            // 开单人
-            String creatorName = trade.getCreatorName();
+                        String creatorName = trade.getCreatorName();
             if (!TextUtils.isEmpty(creatorName)) {
                 mTvOperationBillPeople.setText(context.getString(R.string.dinner_order_center_trade_creator,
                         creatorName));
@@ -405,8 +373,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
                 mLineOperationPeople.setVisibility(View.INVISIBLE);
             }
 
-            // 备注
-            String tradeMemo = trade.getTradeMemo();
+                        String tradeMemo = trade.getTradeMemo();
             if (!TextUtils.isEmpty(tradeMemo)) {
                 mTvBillTableMemo.setText(context.getString(R.string.dinner_order_center_memo, tradeMemo));
                 vMemoGroup.setVisibility(View.VISIBLE);
@@ -414,8 +381,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
                 vMemoGroup.setVisibility(View.GONE);
             }
 
-            // 流水号
-            TradeExtra tradeExtra = tradeVo.getTradeExtra();
+                        TradeExtra tradeExtra = tradeVo.getTradeExtra();
             if (tradeExtra != null && !TextUtils.isEmpty(tradeExtra.getSerialNumber())) {
                 mTvBillSerialNumber.setText(context.getString(R.string.dinner_order_center_serial_no,
                         tradeExtra.getSerialNumber()));
@@ -428,8 +394,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
             if (Utils.isNotEmpty(tradeTableList)) {
                 TradeTable tradeTable = tradeTableList.get(0);
 
-                // 桌台号
-                TradeType tradeType = trade.getTradeType();
+                                TradeType tradeType = trade.getTradeType();
                 String tableName = tradeTable.getTableName();
                 if (!TextUtils.isEmpty(tableName)) {
                     mTvTableNumber.setText(context.getString(R.string.dinner_order_center_tables, tableName));
@@ -446,15 +411,13 @@ public class OrderCenterInfoLayout extends LinearLayout {
                     mPeopleGroup.setVisibility(View.GONE);
                 }
             }
-            // 客位数
-            if (trade.getTradePeopleCount() != 0) {
+                        if (trade.getTradePeopleCount() != 0) {
                 mTvPeopleCount.setVisibility(View.VISIBLE);
                 mTvPeopleCount.setText(context.getString(R.string.dinner_order_center_people_count, String.valueOf(trade.getTradePeopleCount())));
             } else {
                 mTvPeopleCount.setVisibility(View.GONE);
             }
-            //顾客信息
-            List<String> customerInfo = getCustomerInfo(context, tradeVo);
+                        List<String> customerInfo = getCustomerInfo(context, tradeVo);
             if (Utils.isNotEmpty(customerInfo)) {
                 clCustomer.setData(customerInfo);
                 vLineCustomer.setVisibility(View.VISIBLE);
@@ -462,8 +425,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
                 clCustomer.setVisibility(View.GONE);
                 vLineCustomer.setVisibility(View.GONE);
             }
-            // 添加订单来源 和订单原单号
-            final String tradeSource = mOrderCenterDetailPresenter.getTradeSource(context, trade);
+                        final String tradeSource = mOrderCenterDetailPresenter.getTradeSource(context, trade);
             if (!TextUtils.isEmpty(tradeSource)) {
                 tvTradeSource.setText(context.getString(R.string.dinner_order_center_tradesource, tradeSource));
                 tvTradeSource.setVisibility(View.VISIBLE);
@@ -488,18 +450,12 @@ public class OrderCenterInfoLayout extends LinearLayout {
         }
     }
 
-    /**
-     * @Title: refreshGoodsInfo
-     * @Description: 刷新商品信息
-     * @Return void 返回类型
-     */
+
     private void refreshGoodsInfo(Context context, TradeVo tradeVo) {
         if (tradeVo != null && Utils.isNotEmpty(tradeVo.getTradeItemList())) {
             List<TradeItemVo> tradeItemVos = tradeVo.getTradeItemList();
             adapter.setDataSet(tradeVo);
-            // 合计
-            BigDecimal totalAmount = OrderCenterDetailFragment.getGoodsAmount(tradeVo); //getGoodsAmount(tradeVo);
-            mTvAmount.setText(Utils.formatPrice(totalAmount.doubleValue()));
+                        BigDecimal totalAmount = OrderCenterDetailFragment.getGoodsAmount(tradeVo);             mTvAmount.setText(Utils.formatPrice(totalAmount.doubleValue()));
             mTvNumber.setVisibility(View.VISIBLE);
             mTvNumber.setText(context.getString(R.string.dinner_order_center_goods_total_number, getAllDishCount(tradeItemVos, tradeVo.getTrade().getTradeType())));
             vGoodsInfo.setVisibility(View.VISIBLE);
@@ -513,8 +469,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
         if (list != null) {
             for (int i = list.size() - 1; i >= 0; i--) {
                 TradeItem tradeItem = list.get(i).getTradeItem();
-                if (tradeItem.getType() == DishType.SINGLE && tradeItem.getParentUuid() != null) {//套餐子菜
-                    continue;
+                if (tradeItem.getType() == DishType.SINGLE && tradeItem.getParentUuid() != null) {                    continue;
                 }
                 if (tradeItem.getType() == DishType.SINGLE || tradeItem.getType() == DishType.COMBO) {
                     if (tradeItem.getSaleType() == SaleType.WEIGHING) {
@@ -528,8 +483,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
         return MathDecimal.trimZero(count).toString();
     }
 
-    //商品金额
-    private BigDecimal getGoodsAmount(TradeVo tradeVo) {
+        private BigDecimal getGoodsAmount(TradeVo tradeVo) {
         BigDecimal totalAmount = BigDecimal.ZERO;
         BigDecimal exemptAmount = BigDecimal.ZERO;
         BigDecimal actualAmount = tradeVo.getTrade().getSaleAmount();
@@ -537,8 +491,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
                 Utils.transferDot2(tradeVo.getTrade().getPrivilegeAmount().add(exemptAmount.negate()).toString());
         if (!TextUtils.isEmpty(discountAmount)) {
             List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
-            // 附加费总和
-            if (tradePrivileges != null) {
+                        if (tradePrivileges != null) {
                 for (TradePrivilege tradePrivilege : tradeVo.getTradePrivileges()) {
                     if (tradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL) {
                         BigDecimal privilegeAmount = tradePrivilege.getPrivilegeAmount();
@@ -561,11 +514,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
         return totalAmount;
     }
 
-    /**
-     * @Title: refreshRejectGoodsInfo
-     * @Description: 刷新废弃商品展示
-     * @Return void 返回类型
-     */
+
     private void refreshRejectGoodsInfo(TradeVo tradeVo) {
         List<TradeItemVo> tradeItemVoList = mOrderCenterDetailPresenter.getInvalidTradeItemList(tradeVo.getTradeItemList(), InvalidType.RETURN_QTY);
         if (tradeVo != null && Utils.isNotEmpty(tradeItemVoList)) {
@@ -581,12 +530,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
         return value != null && !TextUtils.isEmpty(value.getReasonContent());
     }
 
-    /**
-     * @Title: refreshTradeStatusLogInfo
-     * @Description: 刷新操作的信息
-     * @Param @param tradeVo
-     * @Return void 返回类型
-     */
+
     private void refreshOperateReasonInfo(Context context, TradeVo tradeVo) {
         if (tradeVo != null) {
             operating_info_view1.removeAllItemView();
@@ -597,8 +541,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
             int titleResId = 0;
             int operatResId = 0;
             switch (tradeStatus) {
-                case RETURNED:// 退货操作信息
-                    TradeType tradeType = tradeVo.getTrade().getTradeType();
+                case RETURNED:                    TradeType tradeType = tradeVo.getTrade().getTradeType();
                     if (tradeType == TradeType.REFUND) {
                         operateType = OperateType.TRADE_RETURNED;
                     } else if (tradeType == TradeType.REFUND_FOR_REPEAT) {
@@ -608,27 +551,22 @@ public class OrderCenterInfoLayout extends LinearLayout {
                     titleResId = R.string.order_center_detail_info_return;
                     operatResId = R.string.order_center_detail_operat_return;
                     break;
-                case INVALID:// 作废操作信息
-                    operateType = OperateType.TRADE_FASTFOOD_INVALID;
+                case INVALID:                    operateType = OperateType.TRADE_FASTFOOD_INVALID;
                     resId = R.string.order_center_detail_reason_invalid;
                     titleResId = R.string.order_center_detail_info_invalid;
                     operatResId = R.string.order_center_detail_operat_invalid;
                     break;
-                case REFUSED:// 拒绝操作信息
-                    operateType = OperateType.TRADE_FASTFOOD_REFUSE;
+                case REFUSED:                    operateType = OperateType.TRADE_FASTFOOD_REFUSE;
                     resId = R.string.order_center_detail_reason_refuse;
                     titleResId = R.string.order_center_detail_info_refuse;
                     operatResId = R.string.order_center_detail_operat_refuse;
                     break;
-                case REPEATED:// 反结账操作信息
-                    operateType = OperateType.TRADE_REPEATED;
+                case REPEATED:                    operateType = OperateType.TRADE_REPEATED;
                     resId = R.string.order_center_detail_reason_repeated;
                     titleResId = R.string.order_center_detail_info_repeated;
                     operatResId = R.string.order_center_detail_operat_repeated;
                     break;
-                case CREDIT:// 挂账操作信息
-                case WRITEOFF://销账状态
-                    operateType = OperateType.TRADE_CREDIT;
+                case CREDIT:                case WRITEOFF:                    operateType = OperateType.TRADE_CREDIT;
                     resId = R.string.order_center_detail_reason_credit;
                     titleResId = R.string.order_center_detail_info_credit;
                     operatResId = R.string.order_center_detail_operat_credit;
@@ -654,12 +592,9 @@ public class OrderCenterInfoLayout extends LinearLayout {
                 TradeReasonRel operateReason = tradeVo.getOperateReason(operateType);
                 String date;
                 if (operateType == OperateType.TRADE_RETURNED) {
-                    date = context.getString(R.string.order_center_detail_return_time, DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerUpdateTime()));// 获取订单的更新时间
-                } else {
-                    date = DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerUpdateTime());// 获取订单的更新时间
-                }
-                String username = tradeVo.getTrade().getUpdatorName();// 获取用户名称
-
+                    date = context.getString(R.string.order_center_detail_return_time, DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerUpdateTime()));                } else {
+                    date = DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerUpdateTime());                }
+                String username = tradeVo.getTrade().getUpdatorName();
                 operating_info_view1.setVisibility(View.VISIBLE);
                 operating_info_view1.setTitle(context.getString(titleResId));
                 operating_info_view1.setTime(date);
@@ -668,8 +603,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
                 }
                 String description = context.getString(resId, "");
                 if (operateReason != null && !TextUtils.isEmpty(operateReason.getReasonContent())) {
-                    description = context.getString(resId, operateReason.getReasonContent());// 获取原因
-                }
+                    description = context.getString(resId, operateReason.getReasonContent());                }
                 operating_info_view1.addItemNormalView(description, null, null, false);
             }
         }
@@ -677,8 +611,7 @@ public class OrderCenterInfoLayout extends LinearLayout {
 
     private List<String> getCustomerInfo(Context context, TradeVo tradeVo) {
         List<String> customerInfo = new ArrayList<String>();
-        // 会员信息 因为存在有 顾客 和会员 同时存在的情况这个时候应该展示会员的信息
-        List<TradeCustomer> tradeCustomers = tradeVo.getTradeCustomerList();
+                List<TradeCustomer> tradeCustomers = tradeVo.getTradeCustomerList();
         if (Utils.isNotEmpty(tradeCustomers)) {
             for (TradeCustomer tradeCustomer : tradeCustomers) {
                 customerInfo.clear();
@@ -692,18 +625,12 @@ public class OrderCenterInfoLayout extends LinearLayout {
                         customerInfo.add(context.getString(R.string.dinner_order_center_customer_account,
                                 tradeCustomer.getCustomerPhone()));
                     }
-                    // 不用break
-                } else if (tradeCustomer.getCustomerType() == CustomerType.CARD) {
-//                    if (Utils.isEmpty(customerInfo)) {
-//                        customerInfo.add("");
-//                        customerInfo.add("");// 加两个占位
-//                    }
+                                    } else if (tradeCustomer.getCustomerType() == CustomerType.CARD) {
                     customerInfo.add(context.getString(R.string.dinner_order_center_card_account,
                             tradeCustomer.getEntitycardNum()));
                     break;
                 } else if (tradeCustomer.getCustomerType() == CustomerType.MEMBER) {
-                    // 加一个填充位
-                    if (!TextUtils.isEmpty(tradeCustomer.getCustomerName())) {
+                                        if (!TextUtils.isEmpty(tradeCustomer.getCustomerName())) {
                         customerInfo.add(context.getString(R.string.dinner_order_center_member_name,
                                 tradeCustomer.getCustomerName()));
                     }

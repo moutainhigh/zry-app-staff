@@ -8,16 +8,13 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class BookingDepositInfo implements Serializable {
 
     private Trade trade;
 
-    //private Payment payment;
-    private List<Payment> payments;
+        private List<Payment> payments;
 
     private List<PaymentItem> paymentItems;
 
@@ -29,13 +26,9 @@ public class BookingDepositInfo implements Serializable {
         this.trade = trade;
     }
 
-    /*public Payment getPayment() {
-        return payment;
-    }*/
 
-    /*public void setPayments(Payment payment) {
-        this.payment = payment;
-    }*/
+
+
 
     public List<Payment> getPayments() {
         return payments;
@@ -53,21 +46,13 @@ public class BookingDepositInfo implements Serializable {
         this.paymentItems = paymentItems;
     }
 
-    /**
-     * 设置预订金金额
-     *
-     * @param tradeAmount
-     */
+
     public void setTradeAmount(BigDecimal tradeAmount) {
         if (trade == null) trade = new Trade();
         trade.setTradeAmount(tradeAmount);
     }
 
-    /**
-     * 获取预订金金额
-     *
-     * @return
-     */
+
     public BigDecimal getTradeAmount() {
         return trade != null && trade.getTradeAmount() != null ? trade.getTradeAmount() : BigDecimal.ZERO;
     }

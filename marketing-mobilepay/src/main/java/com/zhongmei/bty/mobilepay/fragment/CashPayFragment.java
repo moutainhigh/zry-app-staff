@@ -46,10 +46,7 @@ import com.zhongmei.bty.mobilepay.PayKeyPanel;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-/**
- * Created by demo on 2018/12/15
- * 现金输入界面
- */
+
 
 
 public class CashPayFragment extends BasePayFragment implements View.OnClickListener, PayView {
@@ -57,8 +54,7 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
     private PayKeyPanel mNumberKeyBorad;
     private ArrayList<Money> IntelligentCashList;
     private int MoneyListSize;
-    private double userChanges;//用户输入的找零
-
+    private double userChanges;
     private TextView mCashPayUnreceived;
     private LinearLayout mInputLayout;
     private TextView mCashPayAlerttext;
@@ -75,9 +71,7 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
         CashPayFragment f = new CashPayFragment();
         f.setPaymentInfo(info);
         f.setDoPayApi(doPayApi);
-        // Bundle bundle = new Bundle();//modify 20170802
-        //bundle.putSerializable("paymentInfo", info);
-        f.setArguments(new Bundle());
+                        f.setArguments(new Bundle());
         return f;
     }
 
@@ -99,8 +93,7 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // mPaymentInfo = (IPaymentInfo) getArguments().getSerializable("paymentInfo");
-    }
+            }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -125,8 +118,7 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
         });
         if (mPaymentInfo != null) {
             mNumberKeyBorad = new PayKeyPanel(view);
-            initIntelligentCash();// 初始化快捷选项
-            mCashPayEditValue.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));
+            initIntelligentCash();            mCashPayEditValue.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));
             mNumberKeyBorad.setDefaultValue(true);
             mNumberKeyBorad.setEnabled(true);
             if (!mPaymentInfo.isDinner() || mPaymentInfo.isOrderCenter())
@@ -136,8 +128,7 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
             updateNotPayMent();
             this.registerEventBus();
             setViewEvents();
-            //付押金不能溢收
-            if (mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT || mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BAKERY_BOOKING_DEPOSIT) {
+                        if (mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BUFFET_DEPOSIT || mPaymentInfo.getPayScene() == PayScene.SCENE_CODE_BAKERY_BOOKING_DEPOSIT) {
                 btnModifyPayment.setVisibility(View.GONE);
             }
         }
@@ -151,12 +142,9 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
             mNumberKeyBorad.setEnabled(true);
             DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
             updateNotPayMent();
-            initIntelligentCash();// 初始化快捷选项
-        } else {
-            //隐藏时清空已输入金额
-            clearInputData();
-           /* DisplayServiceManager.updateDisplay(getActivity().getApplicationContext(),
-                    DisplayServiceManager.buildPayMessage(DisplayUserInfo.COMMAND_CACEL, ""));*/
+            initIntelligentCash();        } else {
+                        clearInputData();
+
         }
         super.onHiddenChanged(hidden);
     }
@@ -187,16 +175,13 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
         } else if (vId == R.id.cash_pay_delete_cash) {
             mCashPayEditValue.setText("");
         } else if (vId == R.id.modify_payment_btn) {
-            //调起输入框
-            if (!ClickManager.getInstance().isClicked()) {
+                        if (!ClickManager.getInstance().isClicked()) {
                 showNumberInputDialog();
             }
         }
     }
 
-    /**
-     * 显示自定义输入框
-     */
+
     private void showNumberInputDialog() {
         double inputvalue = getInputValue();
         double notpayvalue = mPaymentInfo.getActualAmount();
@@ -207,19 +192,12 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
         numberDialog.setNumberType(NumberInputdialog.NUMBER_TYPE_FLOAT).setDotType(NumberInputdialog.DotType.DOT).setRemark(String.format(getString(R.string.pay_should_changes), CashInfoManager.formatCash(maxValue))).show();
     }
 
-    /**
-     * 自定义输入回调
-     */
+
     NumberInputdialog.InputOverListener mInputOverListener = new NumberInputdialog.InputOverListener() {
         @Override
-        public void afterInputOver(String inputContent) {//找零金额
-            if (inputContent != null) {
-                double inputvalue = getInputValue();//用户输入金额
-                double notpayvalue = mPaymentInfo.getActualAmount();//订单金额
-                userChanges = DoPayUtils.formatInputCash(inputContent);//用户输入的找零金额
-
-                double overIncoume = CashInfoManager.floatSubtract(CashInfoManager.floatSubtract(inputvalue, notpayvalue), userChanges);//溢收金额
-                mCashPayAlerttext.setText(String.format(getString(R.string.cash_change_text), CashInfoManager.formatCash(userChanges)));
+        public void afterInputOver(String inputContent) {            if (inputContent != null) {
+                double inputvalue = getInputValue();                double notpayvalue = mPaymentInfo.getActualAmount();                userChanges = DoPayUtils.formatInputCash(inputContent);
+                double overIncoume = CashInfoManager.floatSubtract(CashInfoManager.floatSubtract(inputvalue, notpayvalue), userChanges);                mCashPayAlerttext.setText(String.format(getString(R.string.cash_change_text), CashInfoManager.formatCash(userChanges)));
                 if (overIncoume > 0) {
                     tvOverIncoume.setVisibility(View.VISIBLE);
                     tvOverIncoume.setText(String.format(getString(R.string.more_pay_cash_text), CashInfoManager.formatCash(overIncoume)));
@@ -232,36 +210,25 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
 
     public boolean enablePay() {
         if (mPaymentInfo.getActualAmount() <= 0) {
-            //自助预支付不容许再支付
-            if (mPaymentInfo.getTradeBusinessType() == BusinessType.BUFFET && mPaymentInfo.getTradeVo().getTrade().getTradePayStatus() == TradePayStatus.PREPAID) {
+                        if (mPaymentInfo.getTradeBusinessType() == BusinessType.BUFFET && mPaymentInfo.getTradeVo().getTrade().getTradePayStatus() == TradePayStatus.PREPAID) {
                 return false;
             }
             return true;
         } else {
-           /* if (isSuportGroupPay()) {//如果支持组合支付
-                return getInputValue() > 0;
-            } else {
-                return getInputValue() >= mPaymentInfo.getActualAmount();//不分步支付，输入金额必须大于等于应付金额
-            }*/
+
             return super.enablePay();
         }
     }
 
-    //获取输入金额
-    public double getInputValue() {
+        public double getInputValue() {
         String inputValueStr = mCashPayEditValue.getText().toString();
         return DoPayUtils.formatInputCash(inputValueStr);
     }
 
-    //生成支付信息对象(PayModelItem 将用来生成paymentItem)
-    private PayModelItem getPayModelItem() {
-        PayModelItem item = new PayModelItem(PayModeId.CASH);//现金
-        double faceValue = getInputValue();
-        // double willPayValue = mPaymentInfo.getActualAmount();
-        if (userChanges > 0)//有找零情况
-        {
+        private PayModelItem getPayModelItem() {
+        PayModelItem item = new PayModelItem(PayModeId.CASH);        double faceValue = getInputValue();
+                if (userChanges > 0)        {
             item.setChangeAmount(BigDecimal.valueOf(userChanges));
-//            item.setChangeAmount(BigDecimal.valueOf(CashInfoManager.floatSubtract(faceValue, willPayValue)));
         } else {
             item.setChangeAmount(BigDecimal.ZERO);
         }
@@ -277,9 +244,7 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
                 if (isOK) {
                     mNumberKeyBorad.setEnabled(true);
                     mCashPayEditValue.setText("");
-                    initIntelligentCash();// 刷新自动输入栏
-                    //DisplayServiceManager.updateDisplayPay(getActivity().getApplicationContext(), mPaymentInfo.getActualAmount());
-                } else {
+                    initIntelligentCash();                                    } else {
                     mNumberKeyBorad.setEnabled(true);
                     mPay.setEnabled(true);
                     DoPayUtils.updatePayEnable(getActivity(), mPay, enablePay());
@@ -290,12 +255,7 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
         }
     };
 
-    /**
-     * 自动生成快捷支付选项
-     *
-     * @Title: initIntelligentCash
-     * @Return void 返回类型
-     */
+
     private void initIntelligentCash() {
 
         double cashNotPayMent = mPaymentInfo.getActualAmount();
@@ -355,28 +315,19 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
 
     }
 
-    /**
-     * 设置编辑框改变事件
-     */
+
     private void setViewEvents() {
-        //modify 20180309
-        mCashPayEditValue.addTextChangedListener(new CashEditTextWatcher(this, this.mPaymentInfo, mCashPayEditValue, ShopInfoCfg.getInstance().getCurrencySymbol()).setSuportPayMore(true));
+                mCashPayEditValue.addTextChangedListener(new CashEditTextWatcher(this, this.mPaymentInfo, mCashPayEditValue, ShopInfoCfg.getInstance().getCurrencySymbol()).setSuportPayMore(true));
 
     }
 
 
-    /**
-     * @Title: updateNotPayMent
-     * @Description: 刷新未支付或找零
-     * @Return void 返回类型
-     */
+
     public void updateNotPayMent() {
-        // String input = mCashPayEditValue.getText().toString();
-        double inputvalue = getInputValue();
+                double inputvalue = getInputValue();
         double notpayvalue = mPaymentInfo.getActualAmount();
         double value = CashInfoManager.floatSubtract(inputvalue, notpayvalue);
-        userChanges = value;//将用户输入的找零金额设置为0
-
+        userChanges = value;
         if (value > 0) {
             rlDiffChangesHint.setVisibility(View.VISIBLE);
             if (mPaymentInfo.getPayScene() != PayScene.SCENE_CODE_BUFFET_DEPOSIT && mPaymentInfo.getPayScene() != PayScene.SCENE_CODE_BAKERY_BOOKING_DEPOSIT) {
@@ -425,18 +376,13 @@ public class CashPayFragment extends BasePayFragment implements View.OnClickList
     }
 
 
-    /***
-     * 监听抹零事件
-     *
-     * @param event
-     */
+
     public void onEventMainThread(ExemptEventUpdate event) {
         if (this.isAdded() && !this.isHidden()) {
             mCashPayEditValue.setText(CashInfoManager.formatCash(mPaymentInfo.getActualAmount()));
             mNumberKeyBorad.setDefaultValue(true);
             updateNotPayMent();
-            initIntelligentCash();// 刷新自动输入栏
-        }
+            initIntelligentCash();        }
     }
 
     @Override

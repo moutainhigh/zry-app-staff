@@ -5,10 +5,7 @@ import com.zhongmei.bty.basemodule.database.entity.pay.PaymentItemUnionpay;
 
 public class PaymentItemUnionpayVo implements java.io.Serializable {
 
-    /**
-     * @date：2016-2-24 下午2:07:51
-     * @Description:TODO
-     */
+
     private static final long serialVersionUID = 1L;
 
     private PaymentItemUnionpay paymentItemUnionpay;

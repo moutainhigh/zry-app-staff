@@ -106,64 +106,49 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     @Bean(CommonKeyBorad.class)
     protected CommonKeyBorad mNumberKeyBorad;
 
-    // 标题名称
-    @ViewById(R.id.title_name)
+        @ViewById(R.id.title_name)
     TextView mTitleName;
 
-    // 生日
-    @ViewById(R.id.birthday)
+        @ViewById(R.id.birthday)
     protected TextView mBirthday;
 
-    // 生日Button
-    @ViewById(R.id.birthday_btn)
+        @ViewById(R.id.birthday_btn)
     protected ImageButton mBirthdayBtn;
 
-    // 分组
-    @ViewById(R.id.group)
+        @ViewById(R.id.group)
     protected TextView mGroup;
 
-    // 分组Button
-    @ViewById(R.id.group_btn)
+        @ViewById(R.id.group_btn)
     protected ImageButton mGroupBtn;
 
-    // 备注
-    @ViewById(R.id.customer_memo)
+        @ViewById(R.id.customer_memo)
     protected EditText mMemo;
 
-    // 发票
-    @ViewById(R.id.cusetomer_invoice)
+        @ViewById(R.id.cusetomer_invoice)
     protected EditText mInvoice;
 
-    // 地址
-    @ViewById(R.id.customer_addr)
+        @ViewById(R.id.customer_addr)
     protected EditText mAddress;
 
-    // 名字
-    @ViewById(R.id.customer_name)
+        @ViewById(R.id.customer_name)
     protected EditText mName;
 
-    // 男
-    @ViewById(R.id.customer_male)
+        @ViewById(R.id.customer_male)
     protected ImageView mMale;
 
-    // 女
-    @ViewById(R.id.customer_female)
+        @ViewById(R.id.customer_female)
     protected ImageView mFemale;
 
-    // 电话
-    @ViewById(R.id.customer_phonenum)
+        @ViewById(R.id.customer_phonenum)
     protected EditText mPhonenum;
 
-    // 密码
-    @ViewById(R.id.customer_password_first)
+        @ViewById(R.id.customer_password_first)
     protected EditText mPassword;
 
-    // 密码确认
-    @ViewById(R.id.customer_password_second)
+        @ViewById(R.id.customer_password_second)
     protected EditText mPasswordSecond;
 
-    // 喜好
-    @ViewById(R.id.enjoy)
+        @ViewById(R.id.enjoy)
     LableTextEdit mEnjoy;
 
     @ViewById(R.id.customer_enjoy_btn)
@@ -172,48 +157,35 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     @ViewById(R.id.enjoy_layout)
     LinearLayout mEnjoyLayout;
 
-    // 导入
-    @ViewById(R.id.customer_import)
+        @ViewById(R.id.customer_import)
     ImageView mImport;
 
     @ViewById(R.id.card_store)
     Button mCardStoreBtn;
 
-    /**
-     * 人脸识别
-     */
+
     @ViewById(R.id.tvFace)
     TextView mTvFace;
 
-    /**
-     * 人脸识别 按钮
-     */
+
     @ViewById(R.id.llFace)
     LinearLayout mLlFace;
 
-    /**
-     * 国籍
-     */
+
     @ViewById(R.id.etCountry_CustomerInfo)
     EditText mEtCountry;
 
-    /**
-     * 国籍
-     */
+
     @ViewById(R.id.ivCountry_CustomerInfo)
     ImageButton mIvCountry;
 
-    /**
-     *
-     */
+
     @ViewById(R.id.entity_card_store)
     Button mEntityCardActivate;
 
-    // 选中的喜好
-    private ArrayList<String> mSelectSet = new ArrayList<String>();
+        private ArrayList<String> mSelectSet = new ArrayList<String>();
 
-    // 所有的喜好
-    private List<String> enjoyValue = null;
+        private List<String> enjoyValue = null;
 
     private CustomerEditPopWindow mEditPopWindow;
 
@@ -229,24 +201,15 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
     private boolean mMisPosInput = false;
 
-    /**
-     * 顾客分组
-     */
+
     private CustomerGroupLevel customerGroup;
 
-    /**
-     * 业务类型
-     */
+
     private int type = CustomerActivity.PARAM_ADD;
 
-    /**
-     * 旧会员唯一识别号
-     */
-    //private String uniqueCode = null;
 
-    /**
-     * 是否激活实体卡创建会员
-     */
+
+
     private int activityType;
 
     private Drawable drawableWrong, drawableCorrect;
@@ -259,21 +222,15 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
     private ArrayList<EcCardInfo> mActiveList;
 
-    /**
-     * 当前商户国籍
-     */
+
     private ErpCurrency mErpCurrency;
 
     private List<ErpCurrency> mErpCurrencyList;
 
-    /**
-     * faceCode
-     */
+
     private String mFaceCode;
 
-    /**
-     * 跳转到 card的状态
-     */
+
     private enum TO_CARD_TYPE {
         EDIT, NEW
     }
@@ -307,20 +264,8 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         setupEditTextFocus(mName);
         refreshInfo();
         initDialog();
-//        jinChInit();
     }
 
-//    /**
-//     * 金城初始化
-//     */
-//    private void jinChInit() {
-//        isJinCh = ServerSettingCache.getInstance().isJinChBusiness();
-//        if (isJinCh) {
-//            String phone = getIntent().getStringExtra(EXTRA_JC_PHONE);
-//            mPhonenum.setEnabled(false);
-//            mPhonenum.setText(phone);
-//        }
-//    }
 
     private void setupEditTextFocus(final EditText editText) {
         editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -336,18 +281,15 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         });
     }
 
-    // 验证密码的有效性
-    private TextWatcher mPasswordSecondWatcher = new TextWatcher() {
+        private TextWatcher mPasswordSecondWatcher = new TextWatcher() {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            // TODO Auto-generated method stub
 
         }
 
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            // TODO Auto-generated method stub
 
         }
 
@@ -367,16 +309,13 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         mPageFrom = getIntent().getIntExtra(BeautyCustomerConstants.KEY_CUSTOMER_EDIT_PAGE, BeautyCustomerConstants.CustomerEditPage.OTHER);
     }
 
-    /**
-     * 根据intent获取customer
-     */
+
     private void refreshInfo() {
         Intent intent = getIntent();
         if (intent != null) {
             type = intent.getIntExtra("type", CustomerActivity.PARAM_ADD);
             String areaCode = ShopInfoCfg.getInstance().getCurrency().getAreaCode();
-            if (CustomerActivity.PARAM_ADD == type) {// 新增
-                chooseFaceDesc(false);
+            if (CustomerActivity.PARAM_ADD == type) {                chooseFaceDesc(false);
                 if (!TextUtils.isEmpty(areaCode)) {
                     mErpCurrency = mErpDal.queryErpCurrenctByAreaCode(areaCode);
                 }
@@ -385,8 +324,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 mImport.setVisibility(View.GONE);
                 mLlFace.setVisibility(View.GONE);
                 setCardVisble(false);
-            } else if (CustomerActivity.PARAM_EDIT == type) {// 编辑
-                mLlFace.setVisibility(View.GONE);
+            } else if (CustomerActivity.PARAM_EDIT == type) {                mLlFace.setVisibility(View.GONE);
                 mCustomer = (CustomerResp) intent.getSerializableExtra(CustomerContants.KEY_CUSTOMER_EDIT);
                 if (!TextUtils.isEmpty(mCustomer.nationalTelCode)) {
                     mErpCurrency = mErpDal.queryErpCurrenctByAreaCode(mCustomer.nationalTelCode);
@@ -397,14 +335,11 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 } else {
                     setCardVisble(true);
                 }
-                mPhonenum.setEnabled(true); //编辑的时候也可以更改电话号码
-                mPhonenum.setFocusable(true);
+                mPhonenum.setEnabled(true);                 mPhonenum.setFocusable(true);
                 mIvCountry.setEnabled(false);
                 setPasswordDisable(true);
                 mImport.setVisibility(View.GONE);
-                //非会员不显示储值按钮
-                //非会员不显示密码
-                if (mCustomer == null || mCustomer.levelId == null) {
+                                                if (mCustomer == null || mCustomer.levelId == null) {
                     setCardVisble(false);
                 } else {
                     mPassword.setText("******");
@@ -424,9 +359,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         updateUI(mCustomer);
     }
 
-    /**
-     * 通过customer更新界面
-     */
+
     private void updateUI(CustomerResp customer) {
         if (customer == null) {
             return;
@@ -444,8 +377,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             mPhonenum.setText(AppUtil.getTel(phone));
 
         }
-        // 设置分组
-        if (customer.groupId != null) {
+                if (customer.groupId != null) {
             groupId = customer.groupId;
             mGroup.setText(getGroup(groupId));
         }
@@ -455,8 +387,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             mBirthday.setText(CustomerActivity.BIRTHDAY_DEFAULT);
         }
 
-        // 设置喜好
-        String enjoyStr = EnjoyManager.getInstance().getDtailEnjoyString(customer.hobby);
+                String enjoyStr = EnjoyManager.getInstance().getDtailEnjoyString(customer.hobby);
         if (!TextUtils.isEmpty(enjoyStr)) {
             mEnjoy.setText(enjoyStr);
         }
@@ -483,9 +414,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         }
     }
 
-    /**
-     * 设置选中的 sex
-     */
+
     private void checkSex(Sex sexValue) {
         if (sexValue == Sex.MALE) {
             mMale.setImageResource(R.drawable.queue_takeno_man_selected);
@@ -505,9 +434,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         refreshInfo();
     }
 
-    /**
-     * 禁止密码框
-     */
+
     private void setPasswordDisable(boolean en) {
         if (!en) {
             mPassword.setBackground(getResources().getDrawable(R.drawable.booking_detail_bg));
@@ -587,18 +514,15 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                     showMemberImportDialog();
                     break;
                 case R.id.ivCountry_CustomerInfo:
-                    // 选择国籍
-                    MobclickAgentEvent.onEvent(UserActionCode.GK020003);
+                                        MobclickAgentEvent.onEvent(UserActionCode.GK020003);
                     showCountryDialog(mErpCurrencyList, mErpCurrency);
                     break;
-                case R.id.card_store://虚拟卡储值
-                    MobclickAgentEvent.onEvent(UserActionCode.GK020005);
+                case R.id.card_store:                    MobclickAgentEvent.onEvent(UserActionCode.GK020005);
                     if (mCustomer != null && !mCustomer.isDisabled()) {
                         cardStore();
                     }
                     break;
-                case R.id.entity_card_store://实体卡激活
-                    MobclickAgentEvent.onEvent(UserActionCode.GK020006);
+                case R.id.entity_card_store:                    MobclickAgentEvent.onEvent(UserActionCode.GK020006);
                     if (mCustomer != null && !mCustomer.isDisabled()) {
                         VerifyHelper.verifyAlert(this, CustomerApplication.PERMISSION_CUSTOMER_CARD_ENABLE,
                                 new VerifyHelper.Callback() {
@@ -619,25 +543,13 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         }
     }
 
-    /**
-     * 录入人脸
-     */
+
     private void inputFace() {
-        /*boolean available = BaiduFaceRecognition.getInstance().checkFaceServer();
-        if (!available) {
-            FacecognitionActivity.showFaceServerWarmDialog(getBaseContext(), getSupportFragmentManager());
-            return;
-        }
-        startActivityForResult(BaiduFaceRecognition.getInstance().getRegistFaceIntent(), FaceRequestCodeConstant.RC_CUSTOMER_CREATE_REGIEST);*/
+
     }
 
 
-    /**
-     * 显示国籍dialog
-     *
-     * @param erpCurrencyList
-     * @param currentErpCurrency
-     */
+
     public void showCountryDialog(List<ErpCurrency> erpCurrencyList, ErpCurrency currentErpCurrency) {
         if (erpCurrencyList == null || erpCurrencyList.size() == 0) {
             ToastUtil.showShortToast(getString(R.string.customer_erpcurrency_empty));
@@ -653,9 +565,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         dialog.show();
     }
 
-    /**
-     * 转到会员存储界面
-     */
+
     private void cardStore() {
         if (TextUtils.isEmpty(serviceId)) {
             ToastUtil.showShortToast(R.string.customer_get_info_fail);
@@ -686,24 +596,17 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 this);
     }
 
-    /**
-     * 实体卡会员充值界面
-     *
-     * @param customer 顾客信息
-     * @param balance  余额，实体卡充值时该值 传 null
-     */
+
     private void showChargingDialog(CustomerResp customer, String balance) {
         CustomerChargingDialogFragment dialogFragment = new CustomerChargingDialogFragment_();
         Bundle args = new Bundle();
-        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_MEMBER_CUSTOMER);//来自顾客界面
-        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
+        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_MEMBER_CUSTOMER);        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
         args.putString(CustomerChargingDialogFragment.KEY_BALANCE, balance);
         dialogFragment.setArguments(args);
         dialogFragment.setOnClickListener(new CustomerChargingDialogFragment.OnChargingClickListener() {
             @Override
             public void onClickClose() {
-                // 新增时点x返回 退出
-                if (type == CustomerActivity.PARAM_ADD) {
+                                if (type == CustomerActivity.PARAM_ADD) {
                     finish();
                 }
             }
@@ -712,35 +615,13 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     }
 
 
-    /**
-     * 显示会员导入窗口
-     */
+
     @SuppressLint("SimpleDateFormat")
     private void showMemberImportDialog() {
-        /*MemberImportDialog dialog = new MemberImportDialog(this, this.getSupportFragmentManager()) {
-            @Override
-            protected void doImport(MemberInfo member) {
-                //uniqueCode = member.getUniqueCode();
-                //setTitleText(uniqueCode);
-                CustomerResp customer = new CustomerResp();
-                customer.customerName = member.getName();
-                customer.sex = member.getGender().value();
-                customer.birthday = member.getBirthday();
-                customer.groupId = TextUtils.isEmpty(member.getGroupId()) ? null : Long.parseLong(member.getGroupId());
-                customer.interest = member.getEnvironmentHobby();
-                customer.memo = member.getProfile();
-                customer.invoice = member.getInvoice();
-                customer.address = member.getAddress();
-                customer.mobile = member.getMobile();
-                updateUI(customer);
-            }
-        };
-        dialog.show();*/
+
     }
 
-    /**
-     * 修改标题
-     */
+
     private void setTitleText(String uniqueCode) {
         mTitleName.setText(getString(R.string.customer_import_edit_title, uniqueCode));
     }
@@ -749,7 +630,6 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
         @Override
         public void onFocusChange(View v, boolean hasFocus) {
-            // TODO Auto-generated method stub
 
             if (!hasFocus) {
                 mNumberKeyBorad.setCurrentInput(null);
@@ -795,9 +675,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
     };
 
-    /**
-     * 根据groupId 获取GroupName
-     */
+
     private String getGroup(Long groupId) {
         try {
             CustomerDal customerDal = OperatesFactory.create(CustomerDal.class);
@@ -810,36 +688,26 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         return getString(R.string.customer_not_set);
 
     }
-    /**
-     * 为customer赋值
-     */
-    /**
-     * @return
-     */
+
+
     private boolean setUpdateCustomerValue() {
-        // 用户名
-        String name = mName.getText().toString();
+                String name = mName.getText().toString();
         if (TextUtils.isEmpty(name)) {
             ToastUtil.showShortToast(R.string.customer_no_name);
             mName.requestFocus();
             return false;
         }
         mCustomer.customerName = name;
-        // 生日
-        String birthDate = mBirthday.getText().toString();
+                String birthDate = mBirthday.getText().toString();
         if (TextUtils.isEmpty(birthDate)) {
             birthDate = CustomerActivity.BIRTHDAY_DEFAULT;
         }
         mCustomer.birthday = birthDate;
-        // 手机
-        if (CustomerActivity.PARAM_ADD == type) {
-            // 是否开启隐私保护
-            mCustomer.mobile = mPhonenum.getText().toString();
+                if (CustomerActivity.PARAM_ADD == type) {
+                        mCustomer.mobile = mPhonenum.getText().toString();
         } else {
-            //if (!SpHelper.getDefault().getBoolean(QueueSettingSwitchFragment.MOBILE_PRIVACY, false)) {
-                mCustomer.mobile = mPhonenum.getText().toString();
-            //}
-        }
+                            mCustomer.mobile = mPhonenum.getText().toString();
+                    }
 
         if (TextUtils.isEmpty(mCustomer.mobile) || !NumberUtil.isCellPhone(mCustomer.mobile)) {
             ToastUtil.showShortToast(getString(R.string.customer_mobile_regulation_error));
@@ -873,7 +741,6 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         mCustomer.address = mAddress.getText().toString();
         mCustomer.invoice = mInvoice.getText().toString();
         mCustomer.memo = mMemo.getText().toString();
-//        mCustomer.interest = EnjoyManager.getInstance().tohoddyString(mSelectSet);
         mCustomer.hobby = mEnjoy.getText().toString();
         if (mErpCurrency != null) {
             mCustomer.nation = mErpCurrency.getCountryEn();
@@ -887,32 +754,16 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         return true;
     }
 
-    /**
-     * 执行添加或更新
-     */
+
     private void insertOrUpdate() {
         if (setUpdateCustomerValue()) {
-            /*switch (type) {
-                case CustomerActivity.PARAM_ADD:// 使用新接口,添加国籍
-                    doCreateCustomer(mCustomer, uniqueCode);
-                    break;
-                case CustomerActivity.PARAM_EDIT:
-                    CustomerOperates customerOperates = OperatesFactory.create(CustomerOperates.class);
-                    try {
-                        customerOperates.editCustomer(mCustomer, LoadingResponseListener.ensure(listener, getSupportFragmentManager()));
-                    } catch (JSONException e) {
-                        Log.e(TAG, e.getMessage(), e);
-                    }
-                    break;
-            }*/
+
             doCreateCustomer(mCustomer);
-//            checkPassword(mCustomer.mobile,mCustomer.name,getContext()); //密码验证
         }
     }
 
     private void checkPassword(final String mobile, final String inputNo, final Context context) {
-        //密码登陆
-        final PasswordDialog dialog;
+                final PasswordDialog dialog;
         dialog = new PasswordDialog(context) {
             @Override
             public void close() {
@@ -941,9 +792,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         dialog.show();
     }
 
-    /**
-     * 新增会员
-     */
+
     private void doCreateCustomer(final CustomerResp customer) {
         CustomerOperates oper = OperatesFactory.create(CustomerOperates.class);
         YFResponseListener<YFResponse<CustomerCreateResp>> listener = new YFResponseListener<YFResponse<CustomerCreateResp>>() {
@@ -952,20 +801,15 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             public void onResponse(YFResponse<CustomerCreateResp> response) {
                 try {
                     if (YFResponse.isOk(response)) {
-                        if (customer.customerId == null) {//新增会员，会员数量+1
-                            CustomerUtil.addRegistMemberNumber(1);
+                        if (customer.customerId == null) {                            CustomerUtil.addRegistMemberNumber(1);
                         }
                         CustomerCreateResp info = response.getContent();
                         serviceId = info.getUuid();
                         customerId = info.getCustomerID();
                         mCustomer = info.getCustomer();
-                        if (activityType == CustomerContants.CARD_ACTIVITY_CREATE_TYPE) {// 绑定实体卡创建会员
-                            showBandCustomerDialog(info.getCustomer());
-                        } else { // 创建会员
-//							 发送eventbus 通知 列表界面刷新数据
-                            EventBus.getDefault().post(new EventCreateOrEditCustomer(type, info.getCustomerListBean()));
-                            //dialogShow();
-                            setCardVisble(true);
+                        if (activityType == CustomerContants.CARD_ACTIVITY_CREATE_TYPE) {                            showBandCustomerDialog(info.getCustomer());
+                        } else {                             EventBus.getDefault().post(new EventCreateOrEditCustomer(type, info.getCustomerListBean()));
+                                                        setCardVisble(true);
                             finish();
                         }
 
@@ -985,39 +829,13 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             }
 
         };
-        //if (TextUtils.isEmpty(uniqueCode)) {
-        oper.saveCustomer(customer, LoadingYFResponseListener.ensure(listener, getSupportFragmentManager()));
-        /*} else {
-            oper.createMemberByPresetCustomer(customer, uniqueCode, LoadingYFResponseListener.ensure(listener, getSupportFragmentManager()));
-        }*/
+                oper.saveCustomer(customer, LoadingYFResponseListener.ensure(listener, getSupportFragmentManager()));
+
     }
 
-    /**
-     * 绑定会员
-     */
+
     private void showBandCustomerDialog(CustomerResp customer) {
-        /*if (mActiveList == null || mActiveList.size() == 0) {
-            ToastUtil.showShortToast(getString(R.string.toast_customer_need_choose_card));
-            return;
-        }
-        UionBindCardToCustomerDialogFragment dialogFragment = new UionBindCardToCustomerDialogFragment_();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("customer", customer);
-        bundle.putSerializable("flag", UionBindCardToCustomerDialogFragment.FlagType.NEW_CUSTOMER_BIND);
-        bundle.putSerializable("activeList", mActiveList);
-        dialogFragment.setArguments(bundle);
-        dialogFragment.setOnUionBindClickListener(new UionBindCardToCustomerDialogFragment.OnUionBindClickListener() {
-            @Override
-            public void onClose() {
-            }
 
-            @Override
-            public void onActiveSuccessCallback(CumtomerSaleCardsActivity.ActiveStatus status) {
-                finish();
-            }
-
-        });
-        dialogFragment.show(getSupportFragmentManager(), "uionBandCustomerDialog");*/
     }
 
     private ResponseListener<CustomerEditResp> listener = new ResponseListener<CustomerEditResp>() {
@@ -1033,8 +851,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 if (mCustomer != null) {
                     customer.levelId = mCustomer.levelId;
                 }
-                // 更新成功后，更新顾客详情信息
-                EventBus.getDefault().post(new EventCreateOrEditCustomer(type, customer.getCustomerListBean()));
+                                EventBus.getDefault().post(new EventCreateOrEditCustomer(type, customer.getCustomerListBean()));
                 finish();
             }
 
@@ -1055,49 +872,16 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     };
 
 
-    /**
-     * 编辑界面返回
-     */
+
     protected void close() {
-        /*if (!TextUtils.isEmpty(mName.getText().toString().trim())
-                && !TextUtils.isEmpty(mPhonenum.getText().toString().trim())) {
-            new CommonDialogFragmentBuilder(MainApplication.getInstance()).title(R.string.customer_giveup_save)
-                    .negativeText(R.string.common_cancel)
-                    .negativeLisnter(new OnClickListener() {
 
-                        @Override
-                        public void onClick(View arg0) {
-                        }
-                    })
-                    .positiveText(R.string.common_submit)
-                    .positiveLinstner(new OnClickListener() {
 
-                        @Override
-                        public void onClick(View arg0) {
-                            *//*if (mPageFrom == BeautyCustomerConstants.CustomerEditPage.OTHER && activityType != CustomerContants.CARD_ACTIVITY_CREATE_TYPE) {// 绑定实体卡创建会员
-                                Intent intent = new Intent(BeautyCustomerEditActivity.this, BeautyCustomerActivity_.class);
-                                startActivity(intent);
-                            }*//*
-                            finish();
-                        }
-                    })
-                    .build()
-                    .show(getSupportFragmentManager(), "cancelBeautyEditCustomer");
-        } else {*/
-            /*if (mPageFrom == BeautyCustomerConstants.CustomerEditPage.OTHER && activityType != CustomerContants.CARD_ACTIVITY_CREATE_TYPE) {// 绑定实体卡创建会员
-                Intent intent = new Intent(BeautyCustomerEditActivity.this, BeautyCustomerActivity_.class);
-                startActivity(intent);
-            }*/
         finish();
-        //}
-    }
+            }
 
-    /**
-     * 分组popWindow
-     */
+
     private void initPopwindow() {
-        // 查询分组数据
-        try {
+                try {
             CustomerDal customerDal = OperatesFactory.create(CustomerDal.class);
             list = customerDal.findCustomerGroupAll();
         } catch (Exception e) {
@@ -1124,38 +908,30 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         mEditPopWindow = new CustomerEditPopWindow(this, mGroupAdapter, mGroupBtn, groupItemClick);
     }
 
-    /**
-     * 喜好popwindow
-     */
+
     private void enjoyPopwindow() {
         enjoyValue = EnjoyManager.getInstance().getAllList();
         mEnjoyAdapter = new CustomerEnjoyPopWindowAdapter(this, enjoyValue);
         mEditPopWindow = new CustomerEditPopWindow(this, mEnjoyAdapter, mEnjoyBtn, enjoyItemClick);
     }
 
-    /**
-     * 分组Item事件
-     */
+
     private OnItemClickListener groupItemClick = new OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // TODO Auto-generated method stub
-            groupId = list.get(position).getId();
+                        groupId = list.get(position).getId();
             mGroup.setText(list.get(position).getGroupName());
             mEditPopWindow.dismiss();
         }
     };
 
-    /**
-     * 喜好Item事件
-     */
+
     private OnItemClickListener enjoyItemClick = new OnItemClickListener() {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            // TODO Auto-generated method stub
-            if (mSelectSet.contains(enjoyValue.get(position))) {
+                        if (mSelectSet.contains(enjoyValue.get(position))) {
                 mSelectSet.remove(enjoyValue.get(position));
             } else {
                 mSelectSet.add(enjoyValue.get(position));
@@ -1186,10 +962,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     }
 
     private void toEntityCardSalePage(TO_CARD_TYPE type) {
-        /*Intent intent = new Intent(BeautyCustomerEditActivity.this, CumtomerSaleCardsActivity_.class);
-        intent.putExtra("customer", mCustomer);
-        intent.putExtra("customer_flag", CustomerContants.FLAG_CUSTOMER_BAND);
-        startActivity(intent);*/
+
         if (type == TO_CARD_TYPE.NEW) {
             finish();
         }
@@ -1197,11 +970,8 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
     private void returnList() {
         Intent intent;
-        //if (CustomerApplication.mCustomerBussinessType == CustomerAppConfig.CustomerBussinessType.BEAUTY) {
-        intent = new Intent(getBaseContext(), BeautyCustomerActivity_.class);
-        /*} else {
-            intent = new Intent(getBaseContext(), CustomerActivity_.class);
-        }*/
+                intent = new Intent(getBaseContext(), BeautyCustomerActivity_.class);
+
         startActivity(intent);
         finish();
     }
@@ -1240,21 +1010,9 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         }
     }
 
-    /*@Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == FaceRequestCodeConstant.RC_CUSTOMER_CREATE_REGIEST && resultCode == Activity.RESULT_OK) {
-            // FIXME 保存人脸认证数据
-            mFaceCode = data.getStringExtra(BaiduFaceRecognition.KEY_FACE_CODE);
-            chooseFaceDesc(true);
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }*/
 
-    /**
-     * 修改人脸标记
-     *
-     * @param hasFaceCode
-     */
+
+
     private void chooseFaceDesc(boolean hasFaceCode) {
         if (hasFaceCode) {
             mTvFace.setTextColor(getResources().getColor(R.color.color_32ADF6));

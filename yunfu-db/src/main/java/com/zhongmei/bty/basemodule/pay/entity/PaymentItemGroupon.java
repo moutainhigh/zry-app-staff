@@ -8,9 +8,7 @@ import com.zhongmei.yunfu.db.ServerEntityBase;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 @DatabaseTable(tableName = "payment_item_groupon")
 public class PaymentItemGroupon extends ServerEntityBase {
     private static final long serialVersionUID = 1L;
@@ -60,8 +58,7 @@ public class PaymentItemGroupon extends ServerEntityBase {
     @DatabaseField(columnName = "used_serial_no")
     private String usedSerialNo;
 
-    private String serialNo; // 团购券码(用于上行接口)
-
+    private String serialNo;
     public String getUsedSerialNo() {
         return usedSerialNo;
     }

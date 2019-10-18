@@ -2,27 +2,17 @@ package com.zhongmei.bty.commonmodule.database.enums;
 
 import com.zhongmei.yunfu.util.ValueEnum;
 
-/**
- * 科目类别
- */
+
 public enum SubjectType implements ValueEnum<Integer> {
 
-    /**
-     * 收入项
-     */
+
     INCOME(1),
 
-    /**
-     * 支出项
-     */
+
     EXPENSES(2),
 
 
-    /**
-     * 未知的值
-     *
-     * @deprecated 为了避免转为enum出错而设置，不应直接使用
-     */
+
     @Deprecated
     __UNKNOWN__;
 

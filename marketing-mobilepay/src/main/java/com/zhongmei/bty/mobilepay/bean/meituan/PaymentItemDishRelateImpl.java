@@ -4,9 +4,7 @@ import com.zhongmei.bty.basemodule.pay.entity.PaymentItemGrouponDish;
 
 import java.math.BigDecimal;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PaymentItemDishRelateImpl implements ICouponDishRelate {
     private PaymentItemGrouponDish mPaymentItemGrouponDish;

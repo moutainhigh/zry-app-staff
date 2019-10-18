@@ -17,15 +17,10 @@ import com.zhongmei.bty.snack.orderdish.buinessview.SeatView_;
 
 import java.math.BigDecimal;
 
-/**
- * Desc
- *
- * @created 2017/9/19
- */
+
 public class WesternTradeItemPropertyUtil extends TradeItemPropertyUtil {
 
-    //座位号页
-    private SeatView seatView;
+        private SeatView seatView;
 
     @Override
     protected void initData() {
@@ -77,15 +72,13 @@ public class WesternTradeItemPropertyUtil extends TradeItemPropertyUtil {
                     ShopcartItemBase shopcartItemBase = getShopcartItem();
                     TradeItemExtraDinner tradeItemExtraDinner = mShopcartItem.getTradeItemExtraDinner();
                     if (tradeItemExtraDinner != null && tradeItemExtraDinner.getId() != null) {
-                        //是否已经选择过桌台
-                        if (chooseVo.isSelected()) {
+                                                if (chooseVo.isSelected()) {
                             tradeItemExtraDinner.validateUpdate();
                             tradeItemExtraDinner.setSeatId(tableSeat.getId());
                             tradeItemExtraDinner.setSeatNumber(tableSeat.getSeatName());
                             tradeItemExtraDinner.setClientUpdateTime(System.currentTimeMillis());
                         } else {
-                            //tradeItemExtraDinner.setStatusFlag(StatusFlag.INVALID);
-                            tradeItemExtraDinner.setSeatId(null);
+                                                        tradeItemExtraDinner.setSeatId(null);
                             tradeItemExtraDinner.setSeatNumber(null);
                             tradeItemExtraDinner.setClientUpdateTime(System.currentTimeMillis());
                         }
@@ -120,13 +113,9 @@ public class WesternTradeItemPropertyUtil extends TradeItemPropertyUtil {
             return;
         }
         if (added) {
-            //西餐套餐未生效菜品修改数量,只处理套餐外壳
-            if (mSetmealShopcartItem == null && mShopcartItem.getId() == null && mShopcartItem.hasSetmeal()) {
-                //称重商品不拆分
-                if (mDishSetmealManager != null && mShopcartItem.getDishShop().getSaleType() != SaleType.WEIGHING) {
-                    //验证套餐是否修改成功,称重商品处理?
-                    //西餐修改数量，每份分开
-                    for (int i = 1; selectedQty.compareTo(new BigDecimal(i)) > 0; i++) {
+                        if (mSetmealShopcartItem == null && mShopcartItem.getId() == null && mShopcartItem.hasSetmeal()) {
+                                if (mDishSetmealManager != null && mShopcartItem.getDishShop().getSaleType() != SaleType.WEIGHING) {
+                                                            for (int i = 1; selectedQty.compareTo(new BigDecimal(i)) > 0; i++) {
                         ShopcartItem shopcartItem = ShopcartItemUtils.shopcartItemCopy(mShopcartItem);
                         if (shopcartItem.getSetmealManager() != null) {
                             shopcartItem.getSetmealManager().loadData();

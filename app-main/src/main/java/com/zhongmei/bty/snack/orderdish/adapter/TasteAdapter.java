@@ -22,9 +22,7 @@ import com.zhongmei.bty.snack.orderdish.data.Position;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class TasteAdapter extends BaseExpandableListAdapter {
     private Context mContext;

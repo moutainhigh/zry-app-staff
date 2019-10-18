@@ -28,30 +28,20 @@ import com.zhongmei.yunfu.resp.ResponseObject;
 
 import de.greenrobot.event.EventBus;
 
-/**
- * Created by demo on 2018/12/15
- */
+
 
 public class PayErrorDialog extends Dialog implements View.OnClickListener {
 
     private static final String TAG = PayErrorDialog.class.getSimpleName();
 
     private FragmentActivity mContext;
-    private TextView mPayAmountTV;//显示 本次付款
-    private TextView mErrorReasonTV;// 显示失败原因
-    private ImageView mCloseBT;//关闭按钮
-    private Button mRePayBT;//再次尝试按钮
-    private IPaymentInfo mPaymentInfo;//
-    private String errorReason;
-    private int errorCode;//支付失败码
-    private IPayOverCallback mCallBack;
-    private DoPayApi mDoPayApi;//add v8.9 jieou
-
+    private TextView mPayAmountTV;    private TextView mErrorReasonTV;    private ImageView mCloseBT;    private Button mRePayBT;    private IPaymentInfo mPaymentInfo;    private String errorReason;
+    private int errorCode;    private IPayOverCallback mCallBack;
+    private DoPayApi mDoPayApi;
     public PayErrorDialog(Context context, int theme) {
         super(context, theme);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.pay_error_dialog_layout);//新收银失败界面
-    }
+        setContentView(R.layout.pay_error_dialog_layout);    }
 
     public PayErrorDialog(FragmentActivity context, DoPayApi doPayApi, IPaymentInfo paymentInfo, String errorReason, IPayOverCallback callBack, int errCode) {
         this(context, R.style.custom_alert_dialog);
@@ -63,8 +53,7 @@ public class PayErrorDialog extends Dialog implements View.OnClickListener {
         this.errorCode = errCode;
         initView(paymentInfo);
         this.setOnDismissListener(listener);
-        //查询已经支付的记录
-        findPaymentVos(paymentInfo);
+                findPaymentVos(paymentInfo);
     }
 
     private void initView(IPaymentInfo paymentInfo) {
@@ -75,19 +64,14 @@ public class PayErrorDialog extends Dialog implements View.OnClickListener {
         mRePayBT = (Button) findViewById(R.id.pay_error_repay_button);
         if (errorCode == ResponseObject.TRADE_HAS_PAID && mPaymentInfo.isDinner()) {
             if (mPaymentInfo.isOrderCenter()) {
-                mRePayBT.setText(mContext.getString(R.string.pay_back_text));//返回
-            } else {
-                mRePayBT.setText(mContext.getString(R.string.pay_goto_table));//返回桌台
-            }
-            mCloseBT.setVisibility(View.INVISIBLE);//隐藏关闭按钮
-        }
+                mRePayBT.setText(mContext.getString(R.string.pay_back_text));            } else {
+                mRePayBT.setText(mContext.getString(R.string.pay_goto_table));            }
+            mCloseBT.setVisibility(View.INVISIBLE);        }
         mCloseBT.setOnClickListener(this);
         mRePayBT.setOnClickListener(this);
         mPayAmountTV.setText(CashInfoManager.formatCash(paymentInfo.getOtherPay().getGroupAmount()));
         mErrorReasonTV.setText(mContext.getString(R.string.pay_error_reason) + this.errorReason);
-        /*PayMessage payMessage = DisplayServiceManager.buildPayMessage(PayMessage.PAY_STATE_FAIL, "");
-        payMessage.setLabel(this.getContext().getString(R.string.pay_error));
-        DisplayServiceManager.updateDisplay(this.getContext().getApplicationContext(), payMessage);*/
+
     }
 
     private void findPaymentVos(IPaymentInfo paymentInfo) {
@@ -111,8 +95,7 @@ public class PayErrorDialog extends Dialog implements View.OnClickListener {
                 DinnerShopManager.getInstance().clearCustomer();
                 this.dismiss();
                 mContext.finish();
-                EventBus.getDefault().post(new ActionCloseOrderDishActivity());//返回桌台
-            } else {
+                EventBus.getDefault().post(new ActionCloseOrderDishActivity());            } else {
                 if (mDoPayApi != null)
                     mDoPayApi.doPay(this.mContext, this.mPaymentInfo, mCallBack);
                 this.dismiss();
@@ -124,8 +107,7 @@ public class PayErrorDialog extends Dialog implements View.OnClickListener {
         @Override
         public void onDismiss(DialogInterface dialogInterface) {
             try {
-                //刷新副2屏应收
-                DisplayServiceManager.updateDisplayPay(mContext.getApplicationContext(), mPaymentInfo.getActualAmount());
+                                DisplayServiceManager.updateDisplayPay(mContext.getApplicationContext(), mPaymentInfo.getActualAmount());
             } catch (Exception e) {
                 Log.e(TAG, e.getMessage(), e);
             }

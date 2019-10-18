@@ -87,8 +87,7 @@ public class UserGridAdapter extends BaseAdapter implements StickyGridHeadersSim
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onItemClick(item);//modify v8.2
-                    item.setSelected(!item.isSelected());
+                    mListener.onItemClick(item);                    item.setSelected(!item.isSelected());
                     notifyDataSetChanged();
                 }
             }
@@ -121,16 +120,12 @@ public class UserGridAdapter extends BaseAdapter implements StickyGridHeadersSim
         public TextView mTextView;
     }
 
-    /**
-     * 根据gridView的当前位置获取分类的首字母的Char ascii值
-     */
+
     public int getSectionForPosition(int position) {
         return list.get(position).getSortLetters().charAt(0);
     }
 
-    /**
-     * 根据分类的首字母的Char ascii值获取其第一次出现该首字母的位置
-     */
+
     public int getPositionForSection(int section) {
         for (int i = 0; i < getCount(); i++) {
             String sortStr = list.get(i).getSortLetters();
@@ -145,8 +140,7 @@ public class UserGridAdapter extends BaseAdapter implements StickyGridHeadersSim
 
     @Override
     public long getHeaderId(int position) {
-        // TODO Auto-generated method stub
-        return list.get(position).getSection();
+                return list.get(position).getSection();
     }
 
     public interface OnItemClikListener {

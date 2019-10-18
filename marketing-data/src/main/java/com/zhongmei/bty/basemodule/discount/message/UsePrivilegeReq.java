@@ -7,16 +7,10 @@ import com.zhongmei.yunfu.db.enums.PrivilegeType;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 接口请求体
- */
+
 
 public class UsePrivilegeReq {
-    private BaseInfo base;//基本信息
-    private List<IntegralInfo> integrals;//积分抵现信息
-    private List<PromoInfo> promos;//优惠券信息
-    private List<WeixinCardInfo> weixinCards;//微信卡券信息
-
+    private BaseInfo base;    private List<IntegralInfo> integrals;    private List<PromoInfo> promos;    private List<WeixinCardInfo> weixinCards;
     public BaseInfo getBase() {
         return base;
     }
@@ -50,12 +44,7 @@ public class UsePrivilegeReq {
     }
 
     public class BaseInfo {
-        private Long bizDate;//营业日
-        private Integer bizType;// 业务类型
-        private Long operateId;//操作人ID
-        private String operateName;//操作人姓名
-        private String tradeUuid;//订单uuid
-
+        private Long bizDate;        private Integer bizType;        private Long operateId;        private String operateName;        private String tradeUuid;
         public Long getOperateId() {
             return operateId;
         }
@@ -98,13 +87,7 @@ public class UsePrivilegeReq {
     }
 
     public class IntegralInfo {
-        private Long customerId;//顾客或会员id
-        private String entityCardNo;//实体卡卡号
-        private BigDecimal privilegeAmount;//优惠金额
-        private Integer privilegeType;//优惠类型
-        private BigDecimal privilegeValue;//优惠值
-        private String uuid;//uuid
-
+        private Long customerId;        private String entityCardNo;        private BigDecimal privilegeAmount;        private Integer privilegeType;        private BigDecimal privilegeValue;        private String uuid;
         public Long getCustomerId() {
             return customerId;
         }
@@ -155,12 +138,7 @@ public class UsePrivilegeReq {
     }
 
     public class PromoInfo {
-        private Long customerId;//顾客或会员id
-        private BigDecimal privilegeAmount;//优惠金额
-        private Integer privilegeType;//优惠类型
-        private Long promoId;//优惠活动或者优惠券id
-        private String uuid;//uuid
-
+        private Long customerId;        private BigDecimal privilegeAmount;        private Integer privilegeType;        private Long promoId;        private String uuid;
         public Long getCustomerId() {
             return customerId;
         }
@@ -203,11 +181,7 @@ public class UsePrivilegeReq {
     }
 
     public class WeixinCardInfo {
-        private BigDecimal privilegeAmount;//优惠金额
-        private Integer privilegeType;//优惠类型
-        private Long promoId;//优惠活动或者优惠券id
-        private String uuid;//uuid
-        private BigDecimal tradeAmount;
+        private BigDecimal privilegeAmount;        private Integer privilegeType;        private Long promoId;        private String uuid;        private BigDecimal tradeAmount;
 
         public BigDecimal getPrivilegeAmount() {
             return privilegeAmount;

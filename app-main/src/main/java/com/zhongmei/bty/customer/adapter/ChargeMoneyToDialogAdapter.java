@@ -17,9 +17,7 @@ import com.zhongmei.bty.commonmodule.database.enums.SendType;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- * 充值金额面板
- */
+
 public class ChargeMoneyToDialogAdapter extends BaseAdapter {
 
     private List<ChargeMoneyVo> chargeMoneyList;
@@ -81,8 +79,7 @@ public class ChargeMoneyToDialogAdapter extends BaseAdapter {
             final BigDecimal sendRatio = chargeMoney.getSendRate();
             if (chargeMoney.getIsFullSend() == FullSend.YES) {
                 if (chargeMoney.getSendType() == SendType.FIXED) {
-                    // 固定值
-                    if (fullMoney != null) {
+                                        if (fullMoney != null) {
                         if (sendMoney != null && sendMoney.compareTo(BigDecimal.ZERO) > 0) {
                             holder.chargeMoney.setText(mContext.getString(R.string.customer_charging_fullmoney_by_fixed, fullMoney.toPlainString(), sendMoney.toPlainString()));
                         } else {
@@ -92,8 +89,7 @@ public class ChargeMoneyToDialogAdapter extends BaseAdapter {
                         holder.chargeMoney.setText("");
                     }
                 } else {
-                    // 百分比
-                    if (fullMoney != null) {
+                                        if (fullMoney != null) {
                         if (sendRatio != null && sendRatio.compareTo(BigDecimal.ZERO) > 0) {
                             holder.chargeMoney.setText(mContext.getString(R.string.customer_charging_fullmoney_by_ratio, fullMoney.toPlainString(), sendRatio.toPlainString()));
                         } else {
@@ -123,7 +119,6 @@ public class ChargeMoneyToDialogAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
-        Button chargeMoney;// 队列名称
-    }
+        Button chargeMoney;    }
 
 }

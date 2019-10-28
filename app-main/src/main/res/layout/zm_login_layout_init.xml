@@ -25,15 +25,15 @@
             android:id="@+id/tv_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/beauty_main_text_color2"
-            android:layout_toRightOf="@id/logo"
             android:layout_alignTop="@id/logo"
-            android:textSize="@dimen/text_12"
+            android:layout_marginLeft="-30dp"
+            android:layout_toRightOf="@id/logo"
+            android:background="@drawable/beauty_icon_bg_dialog"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:layout_marginLeft="-30dp"
-            android:visibility="gone"
-            android:background="@drawable/beauty_icon_bg_dialog" />
+            android:textColor="@color/beauty_main_text_color2"
+            android:textSize="@dimen/text_12"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout

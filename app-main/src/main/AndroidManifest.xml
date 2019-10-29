@@ -102,6 +102,14 @@
         </activity>
 
         <activity
+            android:name="com.zhongmei.beauty.BeautyLaunchActivity_"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
+            android:hardwareAccelerated="false"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorLandscape">
+        </activity>
+
+        <activity
             android:name="com.zhongmei.beauty.BeautyOrderActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:launchMode="singleTask"

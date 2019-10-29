@@ -23,11 +23,11 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <fragment
-                android:id="@+id/fragment_anchor"
-                class="com.zhongmei.beauty.BeautyMainAnchorFragment_"
-                android:layout_width="110dp"
-                android:layout_height="match_parent" />
+            <!--<fragment-->
+                <!--android:id="@+id/fragment_anchor"-->
+                <!--class="com.zhongmei.beauty.BeautyMainAnchorFragment_"-->
+                <!--android:layout_width="110dp"-->
+                <!--android:layout_height="match_parent"/>-->
 
             <LinearLayout
                 android:id="@+id/layout_contain_content"

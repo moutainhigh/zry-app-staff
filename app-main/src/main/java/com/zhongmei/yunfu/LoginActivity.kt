@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import com.zhongmei.beauty.BeautyLaunchActivity
 import com.zhongmei.beauty.BeautyMainActivity
 import com.zhongmei.bty.basemodule.input.NumberKeyBoardUtils
 import com.zhongmei.bty.basemodule.session.core.user.UserFunc
@@ -106,7 +107,8 @@ class LoginActivity : BaseActivity(), UserGridAdapter.OnUserSelectedListener {
 
         Session.bind(user, object : Callback {
             override fun onBindSuccess() {
-                BeautyMainActivity.start(this@LoginActivity)
+//                BeautyMainActivity.start(this@LoginActivity)
+                BeautyLaunchActivity.start(this@LoginActivity)
                 EventBus.getDefault().post(LoginSuccessEvent())
                 finish()
             }

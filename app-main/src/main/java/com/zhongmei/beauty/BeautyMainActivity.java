@@ -36,6 +36,14 @@ import org.androidannotations.annotations.ViewById;
 @EActivity(R.layout.beauty_main_activity)
 public class BeautyMainActivity extends MainBaseActivity implements IBeautyAnchor, DrawerLayout.DrawerListener {
 
+    public static final int PAGE_CASHIER=0x01;
+    public static final int PAGE_RESERVER=0x02;
+    public static final int PAGE_TRADE_CENTER=0x03;
+    public static final int PAGE_MEMBER_CENTER=0x04;
+    public static final int PAGE_SHOP_MANAGE=0x05;
+    public static final int PAGE_REPORT_CENTER =0x06;
+    public static final int PAGE_TASK_CENTER =0x07;
+
     @ViewById(R.id.dl_drawer)
     protected DrawerLayout mDrawerLayout;
 
@@ -43,8 +51,10 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
     @FragmentById(R.id.fragment_titlebar)
     protected TitleBarFragment mTitleBarFragment;
 
-    @FragmentById(R.id.fragment_anchor)
-    protected BeautyMainAnchorFragment mAnchorFragment;
+//    @FragmentById(R.id.fragment_anchor)
+//    protected BeautyMainAnchorFragment mAnchorFragment;
+
+    private int currentPage=PAGE_CASHIER;
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, BeautyMainActivity_.class));
@@ -58,7 +68,7 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
 
     @AfterViews
     protected void initView() {
-        mAnchorFragment.setBeautyAnchor(this);
+//        mAnchorFragment.setBeautyAnchor(this);
         mTitleBarFragment.setBgColor(R.color.bg_beauty_main);
 
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -67,7 +77,42 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
         mDrawerLayout.setDrawerListener(this);
 
 
-        toCashier();
+//        toCashier();
+          initPage();
+    }
+
+
+    private void initPage(){
+        Intent intent=getIntent();
+        if(intent!=null){
+            currentPage=intent.getIntExtra("page_no",PAGE_CASHIER);
+        }
+
+        switch (currentPage) {
+            case PAGE_CASHIER:
+                toCashier();
+                break;
+            case PAGE_RESERVER:
+                toReserverManager();
+                break;
+            case PAGE_TRADE_CENTER:
+                toTradeCenter();
+                break;
+            case PAGE_MEMBER_CENTER:
+                toMemberCenter();
+                break;
+            case PAGE_SHOP_MANAGE:
+                toShopManagerCenter();
+                break;
+            case PAGE_REPORT_CENTER:
+                toReportCenter();
+                break;
+            case PAGE_TASK_CENTER:
+                toTaskCenter();
+                break;
+
+
+        }
     }
 
     @Override

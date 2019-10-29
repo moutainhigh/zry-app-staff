@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_board_default"
+    android:orientation="vertical">
+
+    <!--存放title-->
+    <RelativeLayout
+        android:id="@+id/launcher_top_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/launcher_user_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="43dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/launcher_user_icon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginStart="47dp"
+                android:src="@drawable/launcher_icon" />
+
+            <TextView
+                android:id="@+id/launcher_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:maxWidth="150dp"
+                android:maxLines="1"
+                android:textColor="#80FFFFFF"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/ll_divide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="17dp"
+                android:orientation="horizontal">
+
+                <View
+                    style="@style/beauty_vertical_line"
+                    android:layout_width="1dp"
+                    android:layout_height="24dp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/launcher_user_login_out"
+                android:layout_width="24dp"
+                android:layout_height="28dp"
+                android:layout_gravity="center"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/launcher_user_change_icon" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="43dp"
+            android:layout_marginEnd="47dp"
+            android:orientation="horizontal">
+
+
+            <com.zhongmei.bty.common.view.ui.widget.RoundImageView
+                android:id="@+id/iv_shop_logo"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/shop_icon" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="13dp"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_shop_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="2"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_shop_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#59FFFFFF"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+    <!--九宫格-->
+
+    <!-- 操作栏  根据不同的模式，加载不同的入口 -->
+    <FrameLayout
+        android:id="@+id/fl_operator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+</LinearLayout>

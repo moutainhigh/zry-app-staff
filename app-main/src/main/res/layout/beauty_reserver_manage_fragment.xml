@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <FrameLayout
         android:id="@+id/fl_content"
         android:layout_weight="1"
@@ -29,14 +28,6 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/rb_reserver_board"
-                style="@style/beauty_reserver_tab_style"
-                android:background="@drawable/beauty_reserver_tab_center_bg_selecgtor"
-                android:text="@string/beauty_reserver_board" />
-
-            <View style="@style/beauty_reserver_tab_vertical_line" />
-
-            <RadioButton
                 android:id="@+id/rb_reserver_trades"
                 style="@style/beauty_reserver_tab_style"
                 android:background="@drawable/beauty_reserver_tab_center_bg_selecgtor"
@@ -58,62 +49,7 @@
                 android:background="@drawable/beauty_reserver_tab_center_bg_selecgtor"
                 android:text="@string/beauty_reserver_cancel_trades" />
 
-            <View style="@style/beauty_reserver_tab_vertical_line" />
-
-
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent">
-                <RadioButton
-                    android:id="@+id/rb_reserver_unprocess"
-                    style="@style/beauty_reserver_tab_style"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/beauty_reserver_tab_center_bg_selecgtor"
-                    android:text="@string/beauty_reserver_unaccept_trades" />
-
-                <TextView
-                    android:id="@+id/tv_undeal_trade_tip"
-                    android:layout_width="@dimen/reserver_tip_size"
-                    android:layout_height="@dimen/reserver_tip_size"
-                    android:textSize="@dimen/text_10"
-                    android:textColor="@color/text_white"
-                    android:background="@drawable/shape_bg_cycle_red"
-                    android:gravity="center"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginTop="10dp"
-                    android:text="10"/>
-            </RelativeLayout>
-
-
         </com.zhongmei.beauty.widgets.XRadioGroup>
-
-        <View style="@style/beauty_reserver_tab_vertical_line" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
-
-            <com.zhongmei.beauty.widgets.DrawableCenterButton
-                android:id="@+id/btn_create_reserver"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:background="@drawable/beauty_btn_operator_selector"
-                android:drawableLeft="@drawable/beauty_reserver_icon_add"
-                android:drawablePadding="5dp"
-                android:paddingTop="5dp"
-                android:paddingBottom="5dp"
-                android:gravity="left|center_vertical"
-                android:text="@string/beauty_create_reserver"
-                android:textColor="@color/beauty_text_white"
-                android:textSize="14sp" />
-        </RelativeLayout>
-
 
     </LinearLayout>
 

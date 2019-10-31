@@ -33,7 +33,7 @@
                 android:layout_marginStart="16dp"
                 android:maxWidth="150dp"
                 android:maxLines="1"
-                android:textColor="#80FFFFFF"
+                android:textColor="@color/color_333333"
                 android:textSize="20sp" />
 
             <LinearLayout
@@ -66,6 +66,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="43dp"
             android:layout_marginEnd="47dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
 
@@ -88,14 +89,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="2"
-                    android:textColor="#80FFFFFF"
+                    android:textColor="@color/color_333333"
                     android:textSize="20sp" />
 
                 <TextView
                     android:id="@+id/tv_shop_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#59FFFFFF"
+                    android:textColor="@color/text_color_gray"
                     android:textSize="15sp" />
 
             </LinearLayout>

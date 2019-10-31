@@ -22,7 +22,7 @@ import org.androidannotations.annotations.ViewById;
 
 
 @EFragment(R.layout.beauty_main_fragment_operator)
-public class BeautyMainOperatorFragment extends BasicFragment implements BeautyNotifyCache.BeautyNotifyListener {
+public class BeautyMainOperatorFragment extends BasicFragment{
 
     @ViewById(R.id.tv_version)
     TextView tv_version;
@@ -44,7 +44,6 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
     protected TextView tv_tradeNumber;
     @ViewById(R.id.tv_member_number)
     protected TextView tv_memberNumber;
-    private BeautyNotifyCache mBeautyNotifyCache;
 
     private IBeautyOperator iBeautyOperatorListener;
 
@@ -52,7 +51,6 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
     public void init() {
         showShopInfo();
         setVersion(SystemUtils.getVersionName());
-        initEnvrionment();
     }
 
 
@@ -86,11 +84,6 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
     }
 
 
-    private void initEnvrionment() {
-        mBeautyNotifyCache = BeautyNotifyCache.getInstance();
-        mBeautyNotifyCache.addNotifyListener(this);
-        mBeautyNotifyCache.start();
-    }
 
     @Click({R.id.btn_create_trade, R.id.btn_create_card, R.id.btn_charge, R.id.btn_create_member, R.id.btn_create_reserver})
     public void onClick(View v) {
@@ -118,21 +111,9 @@ public class BeautyMainOperatorFragment extends BasicFragment implements BeautyN
         }
     }
 
-    @UiThread
-    @Override
-    public void refreshNotifyNumbers(BeautyNotifyEntity notifyEntity) {
-        tv_customerNumber.setText(String.valueOf(notifyEntity.getCustomerNumber()));
-        tv_reserverNumber.setText(String.valueOf(notifyEntity.getReserverNumber()));
-        tv_tradeNumber.setText(String.valueOf(notifyEntity.getTradeNumber()));
-        tv_memberNumber.setText(String.valueOf(notifyEntity.getMemberNumber()));
-    }
-
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mBeautyNotifyCache!=null){
-            mBeautyNotifyCache.removeNotifyListener(this);
-        }
     }
 }

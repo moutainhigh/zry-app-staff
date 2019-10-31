@@ -37,34 +37,19 @@ import org.jetbrains.annotations.NotNull;
 
 
 @EFragment(R.layout.beauty_reserver_manage_fragment)
-public class BeautyReserverManagerFragment extends BasicFragment implements BeautyNotifyCache.BeautyNotifyListener,XRadioGroup.OnCheckedChangeListener{
+public class BeautyReserverManagerFragment extends BasicFragment implements XRadioGroup.OnCheckedChangeListener {
 
     @ViewById(R.id.rg_reserver_status)
     protected XRadioGroup rb_reserverStatus;
-
-    @ViewById(R.id.tv_undeal_trade_tip)
-    protected TextView tv_undealBookingTradeTip;
 
     protected BeautyBookingListFragment listFragment;
 
     private BeautyReserverBoardFragment reserverBoardFragment;
 
-    private BeautyNotifyCache mBeautyNotifyCache;
-
     @AfterViews
     protected void initView() {
-        mBeautyNotifyCache=BeautyNotifyCache.getInstance();
-        mBeautyNotifyCache.addNotifyListener(this);
-        mBeautyNotifyCache.start();
         rb_reserverStatus.setOnCheckedChangeListener(this);
-        rb_reserverStatus.check(R.id.rb_reserver_board);
-    }
-
-
-
-    private void toReserverBoard() {
-        reserverBoardFragment = new BeautyReserverBoardFragment();
-        replaceChildFragment(R.id.fl_content, reserverBoardFragment, BeautyReserverBoardFragment.class.getSimpleName());
+        rb_reserverStatus.check(R.id.rb_reserver_trades);
     }
 
 
@@ -85,38 +70,6 @@ public class BeautyReserverManagerFragment extends BasicFragment implements Beau
         replaceChildFragment(R.id.fl_content, listFragment, BeautyCancelBookingFragment.class.getSimpleName());
     }
 
-
-
-    private void toUnDealServicePage() {
-        listFragment = new BeautyUndealBookingFragment();
-        replaceChildFragment(R.id.fl_content, listFragment, BeautyUndealBookingFragment.class.getSimpleName());
-    }
-
-
-    @Click(R.id.btn_create_reserver)
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_create_reserver:                VerifyHelper.verifyAlert(getActivity(), BeautyApplication.PERMISSION_BEAUTY_CREATE_RESERVER, new VerifyHelper.Callback() {
-                    @Override
-                    public void onPositive(User user, String code, Auth.Filter filter) {
-                        super.onPositive(user, code, filter);
-                        showCreateBookingDialog();
-                    }
-
-                });
-                break;
-        }
-
-    }
-
-    private void showCreateBookingDialog() {
-        BeautyCreateOrEditBookingDialog dialog = new BeautyCreateOrEditBookingDialog();
-        dialog.setOnBookingListener(bookingListener);
-        Bundle bundle = new Bundle();
-        bundle.putInt(BeautyBookingEnum.LAUNCHMODE_BOOKING_DIALOG, BeautyBookingEnum.BookingDialogLaunchMode.CREATE);
-        dialog.setArguments(bundle);
-        dialog.show(getChildFragmentManager(), "BeautyCreateOrEditBookingDialog");
-    }
 
     BeautyCreateOrEditBookingDialog.OnBookingListener bookingListener = new BeautyCreateOrEditBookingDialog.OnBookingListener() {
 
@@ -143,27 +96,17 @@ public class BeautyReserverManagerFragment extends BasicFragment implements Beau
     };
 
 
-    @UiThread
-    @Override
-    public void refreshNotifyNumbers(BeautyNotifyEntity notifyEntity) {
-        if(tv_undealBookingTradeTip!=null){
-            tv_undealBookingTradeTip.setVisibility(notifyEntity.getUnDealReserverNumber()<=0?View.GONE:View.VISIBLE);
-            tv_undealBookingTradeTip.setText(notifyEntity.getUnDealReserverNumber()+"");
-        }
-    }
-
     @Override
     public void onCheckedChanged(XRadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.rb_reserver_board:                toReserverBoard();
+            case R.id.rb_reserver_trades:
+                toUnServicePage();
                 break;
-            case R.id.rb_reserver_trades:                toUnServicePage();
+            case R.id.rb_reserver_outtime_trades:
+                toOuttimeServicePage();
                 break;
-            case R.id.rb_reserver_outtime_trades:                toOuttimeServicePage();
-                break;
-            case R.id.rb_reserver_cancel_trades:                toCancelServicePage();
-                break;
-            case R.id.rb_reserver_unprocess:                toUnDealServicePage();
+            case R.id.rb_reserver_cancel_trades:
+                toCancelServicePage();
                 break;
         }
     }
@@ -171,8 +114,5 @@ public class BeautyReserverManagerFragment extends BasicFragment implements Beau
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mBeautyNotifyCache!=null){
-            mBeautyNotifyCache.removeNotifyListener(this);
-        }
     }
 }

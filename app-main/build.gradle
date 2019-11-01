@@ -134,6 +134,7 @@ dependencies {
     compile opensdk.swipemenulistview
     compile opensdk.okhttp3
     compile opensdk.eventbus
+    compile opensdk.imageLoader
 
     compile project(':marketing-basemodule')
     compile project(':marketing-common')

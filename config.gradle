@@ -56,7 +56,8 @@ ext {
             swipemenulistview: "com.baoyz.swipemenulistview:library:1.3.0",
             umengCommon      : "com.umeng.sdk:common:1.5.0",
             umengAnalytics   : "com.umeng.sdk:analytics:7.5.0",
-            eventbus         : "de.greenrobot:eventbus:2.4.0"
+            eventbus         : "de.greenrobot:eventbus:2.4.0",
+            imageLoader      : "com.nostra13.universalimageloader:universal-image-loader:1.9.3"
     ]
 
     // dependencies

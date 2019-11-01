@@ -1,9 +1,13 @@
 package com.zhongmei.beauty.order;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.zhongmei.beauty.BeautyShopCartActivity;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import com.zhongmei.yunfu.util.DensityUtil;
@@ -16,9 +20,11 @@ import java.util.ArrayList;
 
 
 
-public class BeautyOrderProductFragment extends DishHomePageFragment {
+public class BeautyOrderProductFragment extends DishHomePageFragment implements View.OnClickListener {
 
     Button btn_service, btn_product;
+    RelativeLayout rl_back,rl_shopCart;
+    TextView tv_tableName,tv_waiterName,tv_shopcartCount;
 
     protected void initAdapter() {
         mAdapter = new BeautyOrderProductListPagerAdapter(getActivity(), new ArrayList<DishVo>()) {
@@ -45,10 +51,21 @@ public class BeautyOrderProductFragment extends DishHomePageFragment {
         super.assignViews(view);
         btn_service = (Button) view.findViewById(R.id.beauty_tab_service);
         btn_product = (Button) view.findViewById(R.id.beauty_tab_product);
+
+        rl_back=(RelativeLayout)view.findViewById(R.id.rl_back);
+        rl_shopCart=(RelativeLayout)view.findViewById(R.id.rl_shop_cart);
+
+        tv_tableName=(TextView)view.findViewById(R.id.tv_table);
+        tv_waiterName=(TextView)view.findViewById(R.id.tv_waiter);
+        tv_shopcartCount=(TextView)view.findViewById(R.id.tv_shopcart_count);
+
         btn_service.setSelected(true);
         btn_product.setSelected(false);
         btn_service.setOnClickListener(tabClickListener);
         btn_product.setOnClickListener(tabClickListener);
+
+        rl_back.setOnClickListener(this);
+        rl_shopCart.setOnClickListener(this);
 
     }
 
@@ -103,6 +120,20 @@ public class BeautyOrderProductFragment extends DishHomePageFragment {
             return new BeautyBrandTypeView(getActivity(), mDishManager, this,isBuyServerBusiness());
         } else {
             return new BeautyBrandTypeViewEx(getActivity(), mDishManager, this);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+        switch (v.getId()){
+            case R.id.rl_back:
+                this.getActivity().finish();
+                break;
+            case R.id.rl_shop_cart:
+                Intent intent=new Intent(getContext(), BeautyShopCartActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 }

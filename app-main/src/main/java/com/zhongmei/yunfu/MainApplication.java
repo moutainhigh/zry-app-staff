@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.StrictMode;
 import android.util.Log;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.zhongmei.OSLog;
 import com.zhongmei.beauty.operates.BeautyOperateData;
 import com.zhongmei.bty.basemodule.auth.permission.manager.AuthLogManager;
@@ -86,6 +88,9 @@ public class MainApplication extends BaseApplication {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
         }
+
+        ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
+        ImageLoader.getInstance().init(configuration);
     }
 
     @Override

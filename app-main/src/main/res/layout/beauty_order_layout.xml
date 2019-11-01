@@ -7,34 +7,11 @@
     android:background="@color/beauty_color_F6F6F6"
     android:orientation="vertical">
 
-    <!--<FrameLayout-->
-        <!--android:id="@+id/dinner_title_bar_layout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="18dp"-->
-        <!--android:background="@color/beauty_color_1D1E1E" />-->
-
-    <!--<fragment-->
-        <!--android:id="@+id/beauty_order_top_fragment"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--class="com.zhongmei.beauty.order.BeautyOrderTopFragment_"></fragment>-->
-
     <RelativeLayout
         android:id="@+id/rootDishOrderView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/orderdish_select_dish_item_color">
-
-        <LinearLayout
-            android:id="@+id/orderDishLeftView"
-            android:layout_width="@dimen/beauty_height_left_cart"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:background="@color/beauty_bg_white"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-        </LinearLayout>
 
 
         <LinearLayout
@@ -43,8 +20,6 @@
             android:layout_height="fill_parent"
             android:focusableInTouchMode="true"
             android:focusable="true"
-            android:layout_marginLeft="@dimen/beauty_height_middle_operator"
-            android:layout_toRightOf="@id/orderDishLeftView"
             android:orientation="horizontal">
 
             <com.zhongmei.bty.common.view.LoadingView_
@@ -55,50 +30,6 @@
 
 
         </LinearLayout>
-
-        <View
-            android:id="@+id/view_shadow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/orderDishLeftView"
-            android:layout_marginLeft="250dp"
-            android:background="@color/shadow_bg"
-            android:clickable="true"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/orderDishMiddle"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_toRightOf="@id/orderDishLeftView"
-            android:orientation="vertical"></LinearLayout>
-
-
-        <ImageButton
-            android:id="@+id/btn_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="15dp"
-            android:layout_alignRight="@id/orderDishMiddle"
-            android:background="@android:color/transparent"
-            android:src="@drawable/ic_property_close"
-            android:visibility="gone" />
-
-        <com.zhongmei.bty.common.view.LoadingView_
-            android:id="@+id/leftLoading"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignEnd="@+id/orderDishRightView"
-            android:layout_marginTop="11dp"
-            android:visibility="visible" />
-
-        <View
-            android:id="@+id/view_masking"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:background="#41bebebe" />
 
     </RelativeLayout>
 </LinearLayout>

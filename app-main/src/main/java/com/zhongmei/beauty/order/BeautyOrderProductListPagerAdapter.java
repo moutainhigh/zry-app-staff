@@ -21,12 +21,12 @@ public abstract class BeautyOrderProductListPagerAdapter extends OrderDishListPa
 
     @Override
     protected int getNumColumns() {
-        return 3;
+        return 4;
     }
 
     @Override
     protected int getNumRows() {
-        return mContext.getResources().getInteger(R.integer.beauty_rows_size);
+        return 2;
     }
 
     @Override

@@ -39,7 +39,8 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
 
     private boolean isEditMode;
     private boolean isHidClearNumber;
-    private int mGridHeight = 0;    protected int dishCardType;
+    private int mGridHeight = 0;
+    protected int dishCardType;
 
     public OrderDishListPagerAdapter(Context context, List<DishVo> dataSet) {
         this.mContext = context;
@@ -60,7 +61,8 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         GridView gridView = (GridView) mLayoutInflater.inflate(R.layout.order_dish_list_page, container, false);
-        gridView.setId(position);        gridView.setNumColumns(getNumColumns());
+        gridView.setId(position);
+        gridView.setNumColumns(getNumColumns());
         gridView.setVerticalScrollBarEnabled(false);
         gridView.setOnTouchListener(new OnTouchListener() {
 
@@ -85,7 +87,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
                     return;
                 }
 
-                                if (item.isCombo()) {
+                if (item.isCombo()) {
 
                     if (!isItemClicked()) {
                         doItemTouch(item);
@@ -252,7 +254,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         return orderDishAdapter;
     }
 
-        public void setEditMode(boolean isEdit) {
+    public void setEditMode(boolean isEdit) {
         this.isEditMode = isEdit;
     }
 

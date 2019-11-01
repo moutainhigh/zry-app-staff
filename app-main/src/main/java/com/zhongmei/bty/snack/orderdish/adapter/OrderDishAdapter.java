@@ -32,12 +32,14 @@ public class OrderDishAdapter extends BaseAdapter {
     protected Context mContext;
     public static final int DEFAULT_DISH_CARD_BG = 0;
     public static final int DISH_CARD_BG1 = 1;
-        private int cardBgType = DEFAULT_DISH_CARD_BG;
+    private int cardBgType = DEFAULT_DISH_CARD_BG;
     private LayoutInflater mInflater;
 
     private List<DishVo> mDishList;
     protected String residue;
-    private boolean isEditMode;    private boolean isHidClearNumber;    private BigDecimal multiply = new BigDecimal(15);
+    private boolean isEditMode;
+    private boolean isHidClearNumber;
+    private BigDecimal multiply = new BigDecimal(15);
     private BigDecimal divide = new BigDecimal(100);
     private int mColumns;
     private int mItemHeight = 0;
@@ -102,15 +104,16 @@ public class OrderDishAdapter extends BaseAdapter {
     public ViewHolder updateView(int itemIndex, GridView gridView) {
         int visiblePosition = gridView.getFirstVisiblePosition();
         if (itemIndex - visiblePosition >= 0) {
-                        View view = gridView.getChildAt(itemIndex - visiblePosition);
+            View view = gridView.getChildAt(itemIndex - visiblePosition);
             if (view == null) {
                 return null;
             }
-                        ViewHolder holder = (ViewHolder) view.getTag();
+            ViewHolder holder = (ViewHolder) view.getTag();
             inflateHolder(view, holder);
             bindView(holder, itemIndex);
 
-            if (mInventoryCacheUtil.getSaleSwitch()) {                DishVo dishVo = (DishVo) getItem(itemIndex);
+            if (mInventoryCacheUtil.getSaleSwitch()) {
+                DishVo dishVo = (DishVo) getItem(itemIndex);
                 if (dishVo != null) {
                     setView(holder.tvResidue, dishVo);
                 }
@@ -151,7 +154,7 @@ public class OrderDishAdapter extends BaseAdapter {
 
     private void setView(TextView tvResidue, DishVo dishVo) {
         if (dishVo != null) {
-                        if (dishVo.isContainProperties() && dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
+            if (dishVo.isContainProperties() && dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
                 DishShop leastResidueFromOtherDishs = dishVo.getLeastResidueFromOtherDishs();
                 if (leastResidueFromOtherDishs != null && !TextUtils.isEmpty(leastResidueFromOtherDishs.getUuid())) {
                     InventoryInfo inventoryInfo = mInventoryCacheUtil.getInventoryNumByDishUuid(leastResidueFromOtherDishs.getUuid());
@@ -163,7 +166,8 @@ public class OrderDishAdapter extends BaseAdapter {
                 } else {
                     dishVo.setInventoryNum(null);
                 }
-            } else if (dishVo.isContainProperties()) {                if (dishVo.getDishShop() != null) {
+            } else if (dishVo.isContainProperties()) {
+                if (dishVo.getDishShop() != null) {
                     InventoryInfo inventoryInfo = mInventoryCacheUtil.getInventoryNumByDishUuid(dishVo.getDishShop().getUuid());
                     if (inventoryInfo != null) {
                         dishVo.setInventoryNum(inventoryInfo.getInventoryQty());
@@ -266,21 +270,29 @@ public class OrderDishAdapter extends BaseAdapter {
     protected int getResourceCardId(DishVo dishVo, int position) {
         int resId;
         int index = position % mColumns;
-        if (dishVo.isCombo()) {            if (index == 0) {                resId = R.drawable.selector_dish_combo_green;
-            } else if (index == 1) {                resId = R.drawable.selector_dish_combo_blue;
+        if (dishVo.isCombo()) {
+            if (index == 0) {
+                resId = R.drawable.selector_dish_combo_green;
+            } else if (index == 1) {
+                resId = R.drawable.selector_dish_combo_blue;
             } else if (index == 2) {
 
                 resId = R.drawable.selector_dish_combo_purple;
-            } else if (index == 3) {                resId = R.drawable.selector_dish_combo_slateblue;
+            } else if (index == 3) {
+                resId = R.drawable.selector_dish_combo_slateblue;
             } else {
                 resId = R.drawable.selector_dish_combo_darkblue;
             }
-        } else {            if (index == 0) {                resId = R.drawable.selector_dish_single_green;
-            } else if (index == 1) {                resId = R.drawable.selector_dish_single_blue;
+        } else {
+            if (index == 0) {
+                resId = R.drawable.selector_dish_single_green;
+            } else if (index == 1) {
+                resId = R.drawable.selector_dish_single_blue;
             } else if (index == 2) {
 
                 resId = R.drawable.selector_dish_single_purple;
-            } else if (index == 3) {                resId = R.drawable.selector_dish_single_slateblue;
+            } else if (index == 3) {
+                resId = R.drawable.selector_dish_single_slateblue;
             } else {
                 resId = R.drawable.selector_dish_single_darkblue;
             }
@@ -291,21 +303,29 @@ public class OrderDishAdapter extends BaseAdapter {
     protected int getResourceCardId1(DishVo dishVo, int position) {
         int resId;
         int index = position % mColumns;
-        if (dishVo.isCombo()) {            if (index == 0) {                resId = R.drawable.selector_dish_combo_green1;
-            } else if (index == 1) {                resId = R.drawable.selector_dish_combo_blue1;
+        if (dishVo.isCombo()) {
+            if (index == 0) {
+                resId = R.drawable.selector_dish_combo_green1;
+            } else if (index == 1) {
+                resId = R.drawable.selector_dish_combo_blue1;
             } else if (index == 2) {
 
                 resId = R.drawable.selector_dish_combo_purple1;
-            } else if (index == 3) {                resId = R.drawable.selector_dish_combo_slateblue1;
+            } else if (index == 3) {
+                resId = R.drawable.selector_dish_combo_slateblue1;
             } else {
                 resId = R.drawable.selector_dish_combo_darkblue1;
             }
-        } else {            if (index == 0) {                resId = R.drawable.selector_dish_single_green1;
-            } else if (index == 1) {                resId = R.drawable.selector_dish_single_blue1;
+        } else {
+            if (index == 0) {
+                resId = R.drawable.selector_dish_single_green1;
+            } else if (index == 1) {
+                resId = R.drawable.selector_dish_single_blue1;
             } else if (index == 2) {
 
                 resId = R.drawable.selector_dish_single_purple1;
-            } else if (index == 3) {                resId = R.drawable.selector_dish_single_slateblue1;
+            } else if (index == 3) {
+                resId = R.drawable.selector_dish_single_slateblue1;
             } else {
                 resId = R.drawable.selector_dish_single_darkblue1;
             }
@@ -322,7 +342,7 @@ public class OrderDishAdapter extends BaseAdapter {
     }
 
     protected void bindView(ViewHolder holder, int position) {
-                holder.vMainContent.setBackgroundResource(getBackgroundResource(holder, position));
+        holder.vMainContent.setBackgroundResource(getBackgroundResource(holder, position));
 
         Object item = getItem(position);
         if (item == null) {
@@ -338,7 +358,7 @@ public class OrderDishAdapter extends BaseAdapter {
 
             DishShop dishShop = dishVo.getDishShop();
 
-                        if (dishVo.isClear()) {
+            if (dishVo.isClear()) {
                 holder.tvShortName.setTextColor(Color.parseColor("#ebeff2"));
                 holder.tvShortName.setText(R.string.hadClear);
             } else {
@@ -346,32 +366,32 @@ public class OrderDishAdapter extends BaseAdapter {
                 holder.tvShortName.setText(getShortName(dishVo));
             }
 
-                        String name = getDishName(dishVo);
+            String name = getDishName(dishVo);
             holder.tvName.setText(name);
 
-                        if (dishVo.isCombo() && dishVo.getMinPrice().compareTo(dishVo.getMaxPrice()) != 0) {
+            if (dishVo.isCombo() && dishVo.getMinPrice().compareTo(dishVo.getMaxPrice()) != 0) {
                 holder.tvMarketPrice.setVisibility(View.INVISIBLE);
             } else {
                 holder.tvMarketPrice.setText(ShopInfoCfg.formatCurrencySymbol(dishVo.getPrice()));
                 holder.tvMarketPrice.setVisibility(View.VISIBLE);
             }
 
-                        if (this.isEditMode) {
+            if (this.isEditMode) {
                 if (dishVo.isSelected()) {
                     holder.tvNumber.setBackgroundResource(R.drawable.dinner_dish_status_selected);
                 } else {
                     holder.tvNumber.setBackgroundResource(R.drawable.dinner_dish_status_unselected);
                 }
             } else {
-                                BigDecimal selectedQTY = getSelectedQty(dishVo);
+                BigDecimal selectedQTY = getSelectedQty(dishVo);
                 if (selectedQTY.compareTo(BigDecimal.ZERO) > 0) {
-                                        if (selectedQTY.compareTo(divide) >= 0) {
+                    if (selectedQTY.compareTo(divide) >= 0) {
                         holder.tvNumber.setText("99+");
                     } else {
                         holder.tvNumber.setText(MathDecimal.toTrimZeroString(selectedQTY));
                     }
 
-                                        int length = holder.tvNumber.getText().toString().length();
+                    int length = holder.tvNumber.getText().toString().length();
                     if (length <= 2) {
                         holder.tvNumber.setTextSize(18);
                     } else if (length == 3) {
@@ -386,7 +406,7 @@ public class OrderDishAdapter extends BaseAdapter {
                 }
             }
 
-                        if (!this.isEditMode && isHidClearNumber) {
+            if (!this.isEditMode && isHidClearNumber) {
                 holder.tvNumber.setVisibility(View.INVISIBLE);
             }
 
@@ -398,11 +418,12 @@ public class OrderDishAdapter extends BaseAdapter {
     }
 
     protected void setResidueView(DishVo dishVo, DishShop dishShop, ViewHolder holder) {
-                BigDecimal count = dishShop.getResidueTotal();
+        BigDecimal count = dishShop.getResidueTotal();
         BigDecimal total = dishShop.getSaleTotal();
 
         if (dishVo.isContainProperties() && dishVo.isClear()) {
-        } else if (dishShop.getClearStatus() == ClearStatus.CLEAR) {                        DishShop leastResidueFromOtherDishs = dishVo.getLeastResidueFromOtherDishs();
+        } else if (dishShop.getClearStatus() == ClearStatus.CLEAR) {
+            DishShop leastResidueFromOtherDishs = dishVo.getLeastResidueFromOtherDishs();
             if (leastResidueFromOtherDishs != null) {
                 count = leastResidueFromOtherDishs.getResidueTotal();
                 total = leastResidueFromOtherDishs.getSaleTotal();
@@ -468,6 +489,7 @@ public class OrderDishAdapter extends BaseAdapter {
         viewHolder.tvNumber = (TextView) convertView.findViewById(R.id.tv_number);
         viewHolder.tvResidue = (TextView) convertView.findViewById(R.id.tv_residue);
         viewHolder.ivProperty = (ImageView) convertView.findViewById(R.id.iv_property);
+
     }
 
     protected static class ViewHolder {
@@ -488,6 +510,8 @@ public class OrderDishAdapter extends BaseAdapter {
         public TextView tvResidue;
 
         public TextView tvWeight;
+
+        public ImageView iv_shopLogo;
 
     }
 

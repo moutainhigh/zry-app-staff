@@ -44,7 +44,7 @@ public class DishManager {
 
     private static final String TAG = DishManager.class.getSimpleName();
 
-        public static final int ALL = 0;
+    public static final int ALL = 0;
 
     public static final int FIRST_LETTER = 1;
 
@@ -57,7 +57,8 @@ public class DishManager {
     public static final int BARCODE = 5;
 
     public DishManager() {
-        initShowValue(loadData().dishTypeList);      }
+        initShowValue(loadData().dishTypeList);
+    }
 
 
     public DishBrandTypes loadData() {
@@ -142,11 +143,11 @@ public class DishManager {
     }
 
 
-
     public DishInfo switchType(final DishBrandType dishType) {
 
         List<DishShop> dishList = null;
-                if (dishType.getId() == -2L) {            Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
+        if (dishType.getId() == -2L) {
+            Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {
                     return entity.getParentId() != null && entity.getParentId().longValue() == dishType.getParentId().longValue();
@@ -178,7 +179,7 @@ public class DishManager {
 
     public DishInfo switchType2(final DishBrandType dishType) {
         List<DishShop> dishList = null;
-                if (dishType.getId() == -1L) {
+        if (dishType.getId() == -1L) {
             Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {
@@ -211,7 +212,7 @@ public class DishManager {
 
     public DishInfo switchType3(final DishBrandType dishType) {
         List<DishShop> dishList = null;
-                if (dishType == null || dishType.getId() == -1L) {
+        if (dishType == null || dishType.getId() == -1L) {
             Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {
@@ -243,7 +244,7 @@ public class DishManager {
 
     public DishInfo switchTypeFilter(final DishBrandType dishType) {
         List<DishShop> dishList = null;
-                if (dishType == null || dishType.getId() == -1L) {
+        if (dishType == null || dishType.getId() == -1L) {
             Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
                 @Override
                 public boolean accept(DishBrandType entity) {
@@ -274,7 +275,7 @@ public class DishManager {
 
 
     public DishBrandTypes getSupperDishTypes(final boolean single, final String carteUuid) {
-                Collection<DishBrandType> dishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
+        Collection<DishBrandType> dishTypes = DishCache.getDishTypeHolder().filter(new DataFilter<DishBrandType>() {
             @Override
             public boolean accept(DishBrandType entity) {
                 return entity.getParentId() == null && Utils.isNotEmpty(getSecondBrandTypes(single, carteUuid, entity));
@@ -343,7 +344,6 @@ public class DishManager {
         }
         return dishList;
     }
-
 
 
     public DishInfo buffetSwitchTypes(boolean single, String carteUuid, final DishBrandType dishType) {
@@ -429,14 +429,13 @@ public class DishManager {
     }
 
 
-
     public DishInfo search(final String keyword, final int searchType) {
         Checks.verifyNotNull(keyword, "keyword");
         DataFilter<DishShop> filter = new DataFilter<DishShop>() {
 
             @Override
             public boolean accept(DishShop entity) {
-                                if (entity.getIsSingle() != Bool.YES) {
+                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
                 if (entity.getDishCode().equals(DishCache.TEMPDISHCODE)) {
@@ -461,17 +460,19 @@ public class DishManager {
                         break;
                     case PRICE:
 
-                                                Log.e(TAG, entity.getMarketPrice() + "," + toTrimDecimal(entity.getMarketPrice()));
+                        Log.e(TAG, entity.getMarketPrice() + "," + toTrimDecimal(entity.getMarketPrice()));
                         if (keyword.toUpperCase().equals(toTrimDecimal(entity.getMarketPrice()))) {
                             return true;
                         }
                         break;
-                    case DISHNAME:                        if (contains(entity.getName().toUpperCase())) {
+                    case DISHNAME:
+                        if (contains(entity.getName().toUpperCase())) {
                             return true;
                         }
                         break;
 
-                    case BARCODE:                        if (containStart(entity.getBarcode())) {
+                    case BARCODE:
+                        if (containStart(entity.getBarcode())) {
                             return true;
                         }
                         break;
@@ -517,7 +518,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                                if (entity.getIsSingle() != Bool.YES) {
+                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
                 if (entity.getDishCode().equals(DishCache.TEMPDISHCODE)) {
@@ -546,12 +547,14 @@ public class DishManager {
                             return true;
                         }
                         break;
-                    case DISHNAME:                        if (contains(entity.getName().toUpperCase())) {
+                    case DISHNAME:
+                        if (contains(entity.getName().toUpperCase())) {
                             return true;
                         }
                         break;
 
-                    case BARCODE:                        if (containStart(entity.getBarcode())) {
+                    case BARCODE:
+                        if (containStart(entity.getBarcode())) {
                             return true;
                         }
                         break;
@@ -589,7 +592,6 @@ public class DishManager {
         DishInfo dishInfo = new DishInfo(null, dishsVo, false);
         return dishInfo;
     }
-
 
 
     public DishInfo search2(final String keyword) {
@@ -654,7 +656,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                                if (entity.getIsSingle() != Bool.YES) {
+                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
 
@@ -677,7 +679,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                                if (entity.getIsSingle() != Bool.YES) {
+                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
 
@@ -700,7 +702,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                                if (entity.getIsSingle() != Bool.YES) {
+                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
 
@@ -724,7 +726,7 @@ public class DishManager {
 
             @Override
             public boolean accept(DishShop entity) {
-                                if (entity.getIsSingle() != Bool.YES) {
+                if (entity.getIsSingle() != Bool.YES) {
                     return false;
                 }
 
@@ -746,10 +748,11 @@ public class DishManager {
 
     public List<DishVo> getDishsVo(List<DishShop> dishList) {
         InventoryCacheUtil inventoryCacheUtil = InventoryCacheUtil.getInstance();
-        boolean inventoryIsOpen = inventoryCacheUtil.getSaleSwitch();        Map<String, DishVo> voMap = new LinkedHashMap<String, DishVo>();
+        boolean inventoryIsOpen = inventoryCacheUtil.getSaleSwitch();
+        Map<String, DishVo> voMap = new LinkedHashMap<String, DishVo>();
         for (DishShop dishShop : dishList) {
             DishUnitDictionary unit = DishCache.getUnitHolder().get(dishShop.getUnitId());
-                        if (dishShop.getHasStandard() == Bool.YES) {
+            if (dishShop.getHasStandard() == Bool.YES) {
                 DishVo vo = voMap.get(dishShop.getName());
                 if (vo != null) {
                     vo.setContainProperties(true);
@@ -764,7 +767,8 @@ public class DishManager {
                     vo = new DishVo(dishShop, standards, unit);
                     voMap.put(vo.getName(), vo);
                 }
-                if (inventoryIsOpen) {                    InventoryInfo inventoryInfo = inventoryCacheUtil.getInventoryNumByDishUuid(dishShop.getUuid());
+                if (inventoryIsOpen) {
+                    InventoryInfo inventoryInfo = inventoryCacheUtil.getInventoryNumByDishUuid(dishShop.getUuid());
                     if (inventoryInfo != null) {
                         vo.setInventoryNum(inventoryInfo.getInventoryQty());
                     }
@@ -772,7 +776,8 @@ public class DishManager {
             } else {
                 String key = dishShop.getUuid() + "_" + dishShop.getName();
                 DishVo dishVo = new DishVo(dishShop, unit);
-                if (inventoryIsOpen) {                    InventoryInfo inventoryInfo = inventoryCacheUtil.getInventoryNumByDishUuid(dishShop.getUuid());
+                if (inventoryIsOpen) {
+                    InventoryInfo inventoryInfo = inventoryCacheUtil.getInventoryNumByDishUuid(dishShop.getUuid());
                     if (inventoryInfo != null) {
                         dishVo.setInventoryNum(inventoryInfo.getInventoryQty());
                     }
@@ -880,7 +885,6 @@ public class DishManager {
             return dishVoList.get(0);
         return null;
     }
-
 
 
     public static void clearDishToEnd(List<DishVo> dataSet) {

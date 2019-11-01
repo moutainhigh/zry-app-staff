@@ -3,26 +3,26 @@
 
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
-            <solid android:color="#ECECEC"></solid>
-            <stroke android:width="@dimen/beauty_stroke_width" android:color="#FF000000" />
-            <corners android:radius="27dp"></corners>
+            <solid android:color="#acc2db"></solid>
+            <stroke android:width="@dimen/beauty_stroke_width" android:color="#acc2db" />
+            <corners android:radius="0dp"></corners>
         </shape>
     </item>
 
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <solid android:color="@color/bg_white"></solid>
-            <stroke android:width="@dimen/beauty_stroke_width" android:color="#BCBCBC" />
-            <corners android:radius="27dp"></corners>
+            <solid android:color="#c0d8f4"></solid>
+            <stroke android:width="@dimen/beauty_stroke_width" android:color="#c0d8f4" />
+            <corners android:radius="0dp"></corners>
         </shape>
     </item>
 
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#FFFFFFFF"></solid>
-            <stroke android:width="@dimen/beauty_stroke_width" android:color="#FF000000" />
-            <corners android:radius="27dp"></corners>
+            <solid android:color="#c0d8f4"></solid>
+            <stroke android:width="@dimen/beauty_stroke_width" android:color="#c0d8f4" />
+            <corners android:radius="0dp"></corners>
         </shape>
     </item>
 </selector>

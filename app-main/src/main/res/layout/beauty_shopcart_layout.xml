@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/beauty_color_F6F6F6"
+    android:orientation="vertical">
+
+    <!--<FrameLayout-->
+    <!--android:id="@+id/dinner_title_bar_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="18dp"-->
+    <!--android:background="@color/beauty_color_1D1E1E" />-->
+
+    <!--<fragment-->
+    <!--android:id="@+id/beauty_order_top_fragment"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--class="com.zhongmei.beauty.order.BeautyOrderTopFragment_"></fragment>-->
+
+    <LinearLayout
+        android:id="@+id/layout_operator"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_launcher_left_selector"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_gameIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_game" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_gameIcon"
+                android:text="返回"
+                android:textSize="24sp" />
+
+        </RelativeLayout>
+
+        <!--中间部分-->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/bg_white">
+
+            <TextView
+                android:id="@+id/tv_trade_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="请在上方选择商品"
+                android:textSize="@dimen/text_20" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_trade_hint"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_table"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="工作台：13号"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/tv_waiter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="服务员：张婷"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <!--右边部分-->
+        <LinearLayout
+            android:id="@+id/rl_shop_cart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:background="@drawable/btn_launcher_right_selector">
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/beauty_save_selector"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/text_16"
+                android:text="保存"/>
+
+            <Button
+                android:id="@+id/btn_pay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/beauty_pay_selector"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/text_16"
+                android:text="结帐"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rootDishOrderView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/layout_operator"
+        android:padding="10dp"
+        android:background="@color/orderdish_select_dish_item_color">
+
+        <LinearLayout
+            android:id="@+id/orderDishLeftView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_marginRight="120dp"
+            android:background="@color/beauty_bg_white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/view_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="250dp"
+            android:background="@color/shadow_bg"
+            android:clickable="true"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/orderDishMiddle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"
+            android:layout_toLeftOf="@id/orderDishMiddle"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_property_close"
+            android:visibility="gone" />
+
+        <com.zhongmei.bty.common.view.LoadingView_
+            android:id="@+id/leftLoading"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignEnd="@+id/orderDishRightView"
+            android:layout_marginTop="11dp"
+            android:visibility="visible" />
+
+        <View
+            android:id="@+id/view_masking"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="#41bebebe" />
+
+    </RelativeLayout>
+</RelativeLayout>

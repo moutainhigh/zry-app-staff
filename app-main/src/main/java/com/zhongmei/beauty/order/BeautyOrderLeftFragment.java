@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.zhongmei.beauty.BeautyShopCartActivity;
 import com.zhongmei.beauty.order.util.BeautyPrePrintUtil;
 import com.zhongmei.bty.basemodule.shoppingcart.utils.MathShoppingCartTool;
 import com.zhongmei.yunfu.ShopInfoManager;
@@ -65,8 +66,6 @@ import okhttp3.internal.Util;
 public class BeautyOrderLeftFragment extends BasicFragment {
     private final static String TAG = BeautyOrderLeftFragment.class.getSimpleName();
 
-    private BeautyOrderLeftTbarFragment orderTitleFragment;
-
     private BeautyTradeInfoFragment tradeInfoFragment;
 
     protected LoadingFinish mLoadingFinish;
@@ -116,9 +115,6 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         initData();
         initView(mBusinessType);
 
-        orderTitleFragment = new BeautyOrderLeftTbarFragment_();
-        replaceFragment(R.id.beauty_left_title, orderTitleFragment, "title");
-        orderTitleFragment.setBusinessType(mBusinessType);
     }
 
 
@@ -140,7 +136,6 @@ public class BeautyOrderLeftFragment extends BasicFragment {
                 super.onPostExecute(aVoid);
                 updateShopCartView(mShopcarting.getShoppingCartDish(), mShopcarting.getOrder());
                 initTableView();
-                initSerialView();
                 mLoadingFinish.loadingFinish();
                 EventBus.getDefault().post(new BeautyCustmoerEvent(CustomerManager.getInstance().getDinnerLoginCustomer()));
             }
@@ -164,8 +159,15 @@ public class BeautyOrderLeftFragment extends BasicFragment {
 
     private void initTableView() {
         FragmentActivity activity = getActivity();
-        if (DinnerShoppingCart.getInstance().getOrder().getTradeTableList() != null && activity instanceof BeautyOrderActivity) {
-            ((BeautyOrderActivity) activity).setTables(DinnerShoppingCart.getInstance().getOrder().getTradeTableList());
+        if (DinnerShoppingCart.getInstance().getOrder().getTradeTableList() != null && activity instanceof BeautyShopCartActivity) {
+            ((BeautyShopCartActivity) activity).setTables(DinnerShoppingCart.getInstance().getOrder().getTradeTableList());
+        }
+    }
+
+    private void updateShopCartHint(Trade trade, List<IShopcartItem> list) {
+        FragmentActivity activity = getActivity();
+        if (DinnerShoppingCart.getInstance().getOrder().getTradeTableList() != null && activity instanceof BeautyShopCartActivity) {
+            ((BeautyShopCartActivity) activity).updateShopCartHint(trade, list,isEditMode);
         }
     }
 
@@ -176,15 +178,6 @@ public class BeautyOrderLeftFragment extends BasicFragment {
             loginFragment.loginOrOut();
         }
     }
-
-
-    private void initSerialView() {
-        BeautyOrderLeftTbarFragment tbarFragment = (BeautyOrderLeftTbarFragment) getFragmentManager().findFragmentById(R.id.beauty_left_title);
-        if (tbarFragment != null) {
-            tbarFragment.initSerialView();
-        }
-    }
-
 
 
     public DishDataItem doSelected(IShopcartItemBase item) {
@@ -397,6 +390,8 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     }
 
     private void updateView(Trade trade, List<IShopcartItem> list) {
+        updateShopCartHint(trade,list);
+
         BigDecimal price = trade.getTradeAmount();
         if (price == null) {
             total_price.setText(Utils.formatPrice(0.00));
@@ -538,9 +533,6 @@ public class BeautyOrderLeftFragment extends BasicFragment {
 
 
     public void setTableName(String roomName) {
-        if (orderTitleFragment != null) {
-            orderTitleFragment.setRoomName(roomName);
-        }
     }
 
     public void clearShopCart(){
@@ -561,4 +553,5 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     public void onDestroy() {
         super.onDestroy();
     }
+
 }

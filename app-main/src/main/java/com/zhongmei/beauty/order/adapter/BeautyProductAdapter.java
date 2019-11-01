@@ -2,12 +2,16 @@ package com.zhongmei.beauty.order.adapter;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
 import com.zhongmei.bty.snack.orderdish.adapter.OrderDishAdapter;
+import com.zhongmei.yunfu.net.volley.RequestQueue;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -16,12 +20,16 @@ import java.util.Map;
 
 
 public class BeautyProductAdapter extends OrderDishAdapter {
+
+    DisplayImageOptions options= DisplayImageOptions.createSimple();
+
     public BeautyProductAdapter(Context context, List<DishVo> dishList, int columns) {
         super(context, dishList, columns);
     }
 
     protected void inflateHolder(View convertView, ViewHolder viewHolder) {
         super.inflateHolder(convertView, viewHolder);
+        viewHolder.iv_shopLogo=(ImageView)convertView.findViewById(R.id.iv_goods_icon);
     }
 
     protected void setResidueView(DishVo dishVo, DishShop dishShop, ViewHolder holder) {
@@ -53,6 +61,11 @@ public class BeautyProductAdapter extends OrderDishAdapter {
     }
 
     @Override
+    protected void bindView(ViewHolder holder, int position) {
+        super.bindView(holder, position);
+    }
+
+    @Override
     protected void controlViewVisible(ViewHolder holder, DishVo dishVo) {
         if (dishVo.isClear()) {
             holder.tvResidue.setTextColor(mContext.getResources().getColor(R.color.beauty_color_BCBCBC));
@@ -63,6 +76,8 @@ public class BeautyProductAdapter extends OrderDishAdapter {
             holder.tvResidue.setTextColor(mContext.getResources().getColor(R.color.beauty_color_6E8DFF));
             holder.tvMarketPrice.setTextColor(mContext.getResources().getColor(R.color.beauty_color_FF666666));
         }
+
+        ImageLoader.getInstance().displayImage(dishVo.getDishShopImgUrl(),holder.iv_shopLogo,options);
     }
 
     @Override

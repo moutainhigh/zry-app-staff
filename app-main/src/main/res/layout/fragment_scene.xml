@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="35dp"
+        android:gravity="center_vertical"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:text="用户角色"
+        android:textColor="#666666"
+        android:textSize="@dimen/text_16" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/beauty_shape_square"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/rl_customer"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="顾客"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_16" />
+
+            <CheckBox
+                android:id="@+id/cb_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:button="@null"
+                android:drawableLeft="@drawable/handover_btn_ok"
+                android:clickable="false" />
+        </RelativeLayout>
+
+        <View
+            style="@style/beauty_horizontal_line"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_mixed"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="顾客与服务员混用"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_16" />
+
+            <CheckBox
+                android:id="@+id/cb_mixed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:button="@null"
+                android:drawableLeft="@drawable/handover_btn_ok"
+                android:clickable="false" />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

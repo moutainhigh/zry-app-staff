@@ -21,22 +21,6 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/title_bar_height"
-                android:background="@color/settings_blue"
-                android:paddingRight="3dp">
-
-                <TextView
-                    android:id="@+id/setting_title"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/title_bar_height"
-                    android:gravity="center"
-                    android:text="@string/set"
-                    android:textColor="#FFFFFF"
-                    android:textSize="22sp" />
-            </FrameLayout>
-
             <ScrollView
                 android:id="@+id/sv_container"
                 android:layout_width="match_parent"
@@ -51,402 +35,25 @@
 
                     <TextView
                         style="@style/settings_left1"
-                        android:text="@string/peripheral_management" />
+                        android:text="场景设置" />
 
 
                     <TextView
-                        android:id="@+id/Seting_printer"
+                        android:id="@+id/setting_use_sence"
                         style="@style/settings_left2"
-                        android:tag="@string/peripheral_management"
-                        android:text="@string/printer" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/Seting_moneyBox"
-                        style="@style/settings_left2"
-                        android:tag="@string/peripheral_management"
-                        android:text="@string/cashbox" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/Seting_scanner"
-                        style="@style/settings_left2"
-                        android:tag="@string/peripheral_management"
-                        android:text="@string/scanner" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/Seting_blue_phone"
-                        style="@style/settings_left2"
-                        android:tag="@string/peripheral_management"
-                        android:text="@string/setting_phone" />
-
-                    <TextView
-                        style="@style/settings_left1"
-                        android:text="@string/setting_pay_and_hand_over_set_label" />
-
-                    <TextView
-                        android:id="@+id/Setting_PayModelOrder"
-                        style="@style/settings_left2"
-                        android:tag="@string/setting_pay_and_hand_over_set_label"
-                        android:text="@string/setting_pay_method_set_label" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:id="@+id/Setting_GroupPay"
-                        style="@style/settings_left2"
-                        android:tag="@string/setting_pay_and_hand_over_set_label"
-                        android:text="@string/setting_group_pay_setting_label"
-                        android:visibility="gone" />
-
-                    <View
-                        android:id="@+id/v_snack_handover_type"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/tv_snack_handover_type"
-                        style="@style/settings_left2"
-                        android:tag="@string/setting_pay_and_hand_over_set_label"
-                        android:text="@string/handover_type_setting"
-                        android:visibility="gone" />
-
-                    <TextView
-                        style="@style/settings_left1"
-                        android:text="@string/print_allocation" />
-
-                    <TextView
-                        android:id="@+id/setting_basic"
-                        style="@style/settings_left2"
-                        android:tag="@string/print_allocation"
-                        android:visibility="gone"
-                        android:text="@string/print_basic_setting" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/Setting_CashierPointManagement"
-                        style="@style/settings_left2"
-                        android:tag="@string/print_allocation"
-                        android:text="@string/cash_point_management" />
-
-                    <View
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/Setting_KitchenManagement"
-                        style="@style/settings_left2"
-                        android:tag="@string/print_allocation"
-                        android:text="@string/kitchen_management" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-
-                    <TextView
-                        android:id="@+id/Seting_ticketStyle"
-                        style="@style/settings_left2"
-                        android:tag="@string/print_allocation"
-                        android:visibility="gone"
-                        android:text="@string/ticket_style" />
-
-                    <View
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/Seting_customization"
-                        style="@style/settings_left2"
-                        android:tag="@string/print_allocation"
-                        android:text="@string/customization" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/Seting_Labelingmachine"
-                        style="@style/settings_left2"
-                        android:tag="@string/print_allocation"
-                        android:text="@string/label" />
-
-                    <TextView
-                        style="@style/settings_left1"
-                        android:visibility="gone"
-                        android:text="@string/dinner_setting" />
-
-                    <TextView
-                        android:id="@+id/tv_dinner_layout_option"
-                        style="@style/settings_left2"
-                        android:visibility="gone"
-                        android:tag="@string/dinner_setting"
-                        android:text="@string/layout_option" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:visibility="gone"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/tv_prepay_setting"
-                        style="@style/settings_left2"
-                        android:visibility="gone"
-                        android:tag="@string/dinner_setting"
-                        android:text="@string/prepay_and_kitchen_setting" />
-
-                    <View
-                        android:id="@+id/v_dinner_order_accept"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:visibility="gone"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/tv_dinner_order_accept"
-                        style="@style/settings_left2"
-                        android:tag="@string/dinner_setting"
-                        android:visibility="gone"
-                        android:text="@string/order_accept_settings" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/tv_dinner_order_dish"
-                        style="@style/settings_left1"
-                        android:text="@string/setting_dinner_order_dish_title" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/tv_dinner_menu_setting"
-                        style="@style/settings_left2"
-                        android:tag="@string/dinner_setting"
-                        android:text="@string/dinner_menu_settings" />
-
-                    <TextView
-                        android:visibility="gone"
-                        style="@style/settings_left1"
-                        android:text="@string/setting_other" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/Seting_timingPrint"
-                        style="@style/settings_left2"
-                        android:tag="@string/front_silver"
-                        android:text="@string/timing_print" />
-
-                    <View
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/Seting_Table_Number"
-                        style="@style/settings_left2"
-                        android:tag="@string/front_silver"
-                        android:text="@string/table_number_setting"
-                        android:visibility="gone" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/layout_option"
-                        style="@style/settings_left2"
-                        android:tag="@string/front_silver"
-                        android:text="@string/layout_option" />
-
-                    <View
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/layout_item_settings"
-                        style="@style/settings_left2"
-                        android:tag="@string/front_silver"
-                        android:text="@string/layout_item_settings" />
-
-                    <View
-                        android:id="@+id/v_snack_order_accept"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:visibility="gone"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/tv_snack_order_accept"
-                        style="@style/settings_left2"
-                        android:tag="@string/front_silver"
-                        android:text="@string/order_accept_settings"
-                        android:visibility="gone" />
-
-                    <View
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/Seting_Document"
-                        style="@style/settings_left2"
-                        android:tag="@string/front_silver"
-                        android:text="@string/setting_serial" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:id="@+id/tv_setting_order_display_device"
-                        style="@style/settings_left2"
-                        android:visibility="gone"
-                        android:tag="@string/front_silver"
-                        android:text="@string/setting_order_display_device" />
-
-                    <TextView
-                        android:visibility="gone"
-                        style="@style/settings_left1"
-                        android:text="@string/booking_setting" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/book_switch"
-                        style="@style/settings_left2"
-                        android:tag="@string/queue_setting"
-                        android:text="@string/common_switch" />
-
-                    <TextView
-                        android:visibility="gone"
-                        style="@style/settings_left1"
-                        android:text="@string/queue_setting" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/queue_common_switch"
-                        style="@style/settings_left2"
-                        android:tag="@string/queue_setting"
-                        android:text="@string/common_switch" />
-
-                    <View
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/queue_manager"
-                        style="@style/settings_left2"
-                        android:tag="@string/queue_setting"
-                        android:text="@string/queue_manager" />
-
-                    <View
-                        android:visibility="gone"
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-                    <TextView
-                        android:visibility="gone"
-                        android:id="@+id/voice_manager"
-                        style="@style/settings_left2"
-                        android:tag="@string/queue_setting"
-                        android:text="@string/voice_manager" />
+                        android:tag="场景设置"
+                        android:text="使用场景" />
 
 
                     <TextView
                         style="@style/settings_left1"
-                        android:text="@string/notify_center" />
+                        android:text="设备" />
 
                     <TextView
-                        android:id="@+id/Seting_notifity"
+                        android:id="@+id/setting_baseInfo"
                         style="@style/settings_left2"
-                        android:tag="@string/notify_center"
-                        android:text="@string/notify_nofity" />
-
-
-                    <TextView
-                        style="@style/settings_left1"
-                        android:text="@string/system_information" />
-
-                    <TextView
-                        android:id="@+id/Seting_customerInfo"
-                        style="@style/settings_left2"
-                        android:tag="@string/system_information"
-                        android:text="@string/merchant_information" />
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:background="@color/print_line" />
-
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:id="@+id/Seting_verionInfo"
-                            style="@style/settings_left2"
-                            android:tag="@string/system_information"
-                            android:text="@string/version_information" />
-
-                        <ImageView
-                            android:id="@+id/iv_update_remind"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="54dp"
-                            android:src="@drawable/booking_date_prompt" />
-                    </RelativeLayout>
+                        android:tag="设备"
+                        android:text="基本信息" />
 
                     <View
                         android:layout_width="match_parent"
@@ -454,10 +61,15 @@
                         android:background="@color/print_line" />
 
                     <TextView
-                        android:id="@+id/Seting_systemJournal"
+                        android:id="@+id/setting_tables"
                         style="@style/settings_left2"
-                        android:tag="@string/system_information"
-                        android:text="@string/system_log" />
+                        android:tag="设备"
+                        android:text="房间绑定" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/print_line" />
                 </LinearLayout>
             </ScrollView>
         </LinearLayout>
@@ -469,7 +81,6 @@
             android:layout_weight="2.3"
             android:background="#ffffff"
             android:orientation="vertical"></LinearLayout>
-        <!--android:background="@drawable/settings_fragment_background"-->
 
     </LinearLayout>
 </LinearLayout>

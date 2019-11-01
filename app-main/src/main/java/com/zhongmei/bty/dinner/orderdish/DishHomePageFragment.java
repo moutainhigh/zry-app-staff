@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -98,7 +99,7 @@ import java.util.Set;
 public abstract class DishHomePageFragment extends MobclickAgentFragment implements OnPageChangeListener, BrandTypeListener, OnClickListener {
 
     private final static String TAG = DishHomePageFragment.class.getSimpleName();
-        private static final int MAX_INDEX_COUNT = 7;
+    private static final int MAX_INDEX_COUNT = 7;
 
     protected ChangePageListener mChangePageListener;
 
@@ -114,14 +115,14 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     private DishBrandType mSelectDishType;
 
-        private QuantityEditPopupWindow mPopupWindow;
+    private QuantityEditPopupWindow mPopupWindow;
 
     private LoadingFinish mLoadingFinish;
-        protected boolean isAllowAddTempDish = false;
+    protected boolean isAllowAddTempDish = false;
 
     private TempDishFragment tempDishFragment = null;
 
-        private String mCarteUuid = null;
+    private String mCarteUuid = null;
     private boolean mIsSingle = false;
 
     private RelativeLayout mMainView;
@@ -158,15 +159,13 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         mBtnScanCode.setOnClickListener(this);
         mBtnTempDish.setOnClickListener(this);
 
-         int busInteger = getActivity().getIntent().getIntExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE, ValueEnums.toValue(BusinessType.BEAUTY));
-        businessTypeValue=ValueEnums.toEnum(BusinessType.class,busInteger);
+        int busInteger = getActivity().getIntent().getIntExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE, ValueEnums.toValue(BusinessType.BEAUTY));
+        businessTypeValue = ValueEnums.toEnum(BusinessType.class, busInteger);
     }
 
-    protected boolean isBuyServerBusiness(){
-        return ValueEnums.equalsValue(businessTypeValue,BusinessType.CARD_TIME.value());
+    protected boolean isBuyServerBusiness() {
+        return ValueEnums.equalsValue(businessTypeValue, BusinessType.CARD_TIME.value());
     }
-
-
 
 
     abstract public View getBrandTypeView();
@@ -221,10 +220,10 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             GridView gridView = (GridView) mVpDishList.findViewById(mCurrentIndex);
             mAdapter.updateItemView(gridView, iShopcartItemBase.getSkuUuid());
 
-                        GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
+            GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
             mAdapter.updateItemView(prevGridView, iShopcartItemBase.getSkuUuid());
 
-                        GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
+            GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
             mAdapter.updateItemView(nextGridView, iShopcartItemBase.getSkuUuid());
         }
     }
@@ -242,10 +241,10 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             GridView gridView = (GridView) mVpDishList.findViewById(mCurrentIndex);
             mAdapter.updateItemView(gridView, dishUuids);
 
-                        GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
+            GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
             mAdapter.updateItemView(prevGridView, dishUuids);
 
-                        GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
+            GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
             mAdapter.updateItemView(nextGridView, dishUuids);
         }
     }
@@ -256,10 +255,10 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             GridView gridView = (GridView) mVpDishList.findViewById(mCurrentIndex);
             mAdapter.updateItemView(gridView, dishShopMap);
 
-                        GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
+            GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
             mAdapter.updateItemView(prevGridView, dishShopMap);
 
-                        GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
+            GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
             mAdapter.updateItemView(nextGridView, dishShopMap);
         }
     }
@@ -271,12 +270,12 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             ((BaseAdapter) gridView.getAdapter()).notifyDataSetChanged();
         }
 
-                GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
+        GridView prevGridView = (GridView) mVpDishList.findViewById(mCurrentIndex - 1);
         if (prevGridView != null && prevGridView.getAdapter() != null) {
             ((BaseAdapter) prevGridView.getAdapter()).notifyDataSetChanged();
         }
 
-                GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
+        GridView nextGridView = (GridView) mVpDishList.findViewById(mCurrentIndex + 1);
         if (nextGridView != null && nextGridView.getAdapter() != null) {
             ((BaseAdapter) nextGridView.getAdapter()).notifyDataSetChanged();
         }
@@ -358,11 +357,11 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     }
 
     private void dealDishVo(DishVo dishVo) {
-                boolean isUnionMainTrade = mShoppingCart.getOrder().isUnionMainTrade();
-                if (dishVo.isContainProperties() && dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
+        boolean isUnionMainTrade = mShoppingCart.getOrder().isUnionMainTrade();
+        if (dishVo.isContainProperties() && dishVo.getDishShop().getClearStatus() == ClearStatus.CLEAR) {
             DishShop dishShop;
             if (isUnionMainTrade) {
-                                dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
+                dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
             } else {
                 dishShop = dishVo.getLeastResidueFromOtherDishs();
             }
@@ -371,7 +370,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         } else {
             if (dishVo.getDishShop().getSaleType() == SaleType.WEIGHING) {
                 if (isUnionMainTrade) {
-                                        DishShop dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
+                    DishShop dishShop = dishVo.getLeastUnweighResidueFromOtherDishs();
                     if (dishShop != null) {
                         addOtherStandardSingleDish(dishVo, dishShop);
                     } else {
@@ -381,10 +380,12 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
                     addSingleDish(dishVo);
                 }
             } else {
-                if (dishVo.isCombo()) {                    addUnweighCombo(dishVo);
-                } else if(dishVo.isServerComBoPart()){
+                if (dishVo.isCombo()) {
+                    addUnweighCombo(dishVo);
+                } else if (dishVo.isServerComBoPart()) {
                     addServerComboPart(dishVo);
-                }else {                    addSingleDish(dishVo);
+                } else {
+                    addSingleDish(dishVo);
                 }
             }
         }
@@ -412,7 +413,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     private void addUnweighCombo(DishVo dishVo) {
         if (mChangePageListener != null) {
-                        ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
+            ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
             shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
             mShoppingCart.addDishToShoppingCart(shopcartItem, false);
 
@@ -425,23 +426,22 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     }
 
 
-
     private void addServerComboPart(DishVo dishVo) {
         if (mChangePageListener != null) {
-                        ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
+            ShopcartItem shopcartItem = CreateItemTool.createShopcartItem(dishVo);
             shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
 
-                        List<DishSetmeal> dishSetmeals = DishCache.getSetmealHolder().getDishSetmealByDishId(dishVo.getDishShop().getId());
+            List<DishSetmeal> dishSetmeals = DishCache.getSetmealHolder().getDishSetmealByDishId(dishVo.getDishShop().getId());
 
-            if(Utils.isNotEmpty(dishSetmeals)){
-                                List<SetmealShopcartItem> dishChildMeals=new ArrayList<>();
+            if (Utils.isNotEmpty(dishSetmeals)) {
+                List<SetmealShopcartItem> dishChildMeals = new ArrayList<>();
                 for (DishSetmeal dishSetmeal : dishSetmeals) {
-                    DishShop dishShop=DishCache.getDishHolder().get(dishSetmeal.getChildDishId());
-                    if(dishShop==null){
+                    DishShop dishShop = DishCache.getDishHolder().get(dishSetmeal.getChildDishId());
+                    if (dishShop == null) {
                         continue;
                     }
 
-                    DishSetmealVo setMealVo=new DishSetmealVo(dishShop,dishSetmeal,null);
+                    DishSetmealVo setMealVo = new DishSetmealVo(dishShop, dishSetmeal, null);
 
                     SetmealShopcartItem setmealShopcartItem = CreateItemTool.createSetmealShopcartItem(shopcartItem, setMealVo);
                     BigDecimal leastCellNum = MathDecimal.trimZero(setMealVo.getSetmeal().getLeastCellNum());
@@ -478,7 +478,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     public void myGridItemLongClicked(final DishVo dishVo) {
         if (dishVo.isContainProperties()) {
-                        OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
+            OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
             orderDishClearStatusFragment.setData(dishVo);
             orderDishClearStatusFragment.setOnCloseListener(new OnCloseListener() {
 
@@ -642,9 +642,10 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         protected void onPostExecute(DishInfo dishInfo) {
             if (isAdded() && dishInfo != null && mAdapter != null && dishInfo.dishType != null) {
                 if (Utils.isNotEmpty(dishInfo.dishList)) {
+                    Log.e("BeautyOrderProduct","商品展示UI更新数据....");
                     mAdapter.setDataSet(dishInfo.dishList);
                     createIndex(mCurrentIndex, mAdapter.getCount());
-                                        mVpDishList.setCurrentItem(0, false);
+                    mVpDishList.setCurrentItem(0, false);
                     mVpDishList.setVisibility(View.VISIBLE);
                     mLlDots.setVisibility(View.VISIBLE);
                     mIvDishTypeEmpty.setVisibility(View.GONE);
@@ -673,7 +674,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             mLoadingFinish.loadingFinish();
 
 
-        mVBrandType.setVisibility(isBuyServerBusiness()?View.GONE:View.VISIBLE);
+        mVBrandType.setVisibility(isBuyServerBusiness() ? View.GONE : View.VISIBLE);
         UserActionEvent.end(UserActionEvent.DINNER_DISH_DISPLAY);
     }
 
@@ -698,7 +699,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     }
 
     private void setTempDishBtn() {
-                isAllowAddTempDish = mDishManager.isHasTempDish();
+        isAllowAddTempDish = mDishManager.isHasTempDish();
         if (isAllowAddTempDish) {
             mBtnTempDish.setVisibility(View.VISIBLE);
         } else {
@@ -730,7 +731,6 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             refreshPartVisibleGridViews(event.residueTotalChangedMap);
         }
     }
-
 
 
     private void createIndex(int currentIndex, int totalSize) {
@@ -773,9 +773,9 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             mLlDots.getChildAt(currentIndex).setSelected(true);
         }
 
-                ViewGroup.LayoutParams layoutParams = mHsvDots.getLayoutParams();
+        ViewGroup.LayoutParams layoutParams = mHsvDots.getLayoutParams();
         if (totalSize > MAX_INDEX_COUNT) {
-                        layoutParams.width = DensityUtil.dip2px(MainApplication.getInstance(), 29) * MAX_INDEX_COUNT +
+            layoutParams.width = DensityUtil.dip2px(MainApplication.getInstance(), 29) * MAX_INDEX_COUNT +
                     DensityUtil.dip2px(MainApplication.getInstance(), 10) * MAX_INDEX_COUNT;
         } else {
             layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
@@ -804,15 +804,15 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     public void onPageSelected(int position) {
         columnSelectIndex = position;
         for (int i = 0; i < mLlDots.getChildCount(); i++) {
-                        View checkView = mLlDots.getChildAt(position);
+            View checkView = mLlDots.getChildAt(position);
             if (checkView == null) continue;
 
             int k = checkView.getMeasuredWidth();
             int l = checkView.getLeft();
             int i2 = l + k / 2 - maxWidth / 2;
-                        mHsvDots.smoothScrollTo(i2, 0);
+            mHsvDots.smoothScrollTo(i2, 0);
         }
-                for (int j = 0; j < mLlDots.getChildCount(); j++) {
+        for (int j = 0; j < mLlDots.getChildCount(); j++) {
             View checkView = mLlDots.getChildAt(j);
             boolean isCheck;
             if (j == position) {
@@ -833,8 +833,9 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
         @Override
         public void dataChange(ShopcartItem shopcartItem, boolean isContainProperties) {
-                        if (shopcartItem.getOrderDish().isCombo()) {                if (mChangePageListener != null) {
-                                        shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
+            if (shopcartItem.getOrderDish().isCombo()) {
+                if (mChangePageListener != null) {
+                    shopcartItem.setSetmealItems(new ArrayList<SetmealShopcartItem>());
                     mShoppingCart.addDishToShoppingCart(shopcartItem, false);
 
                     Bundle bundle = new Bundle();
@@ -881,7 +882,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             return;
         }
         MobclickAgentEvent.onEvent(UserActionCode.ZC020012);
-                tempDishFragment = new TempDishFragment_();
+        tempDishFragment = new TempDishFragment_();
         tempDishFragment.setDishVo(mDishManager.getTempDishVo());
         tempDishFragment.show(getFragmentManager(), "TempDishFragment");
     }
@@ -918,13 +919,13 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
                         mAdapter.updateItemInventory(gridView, inventoryInfoMap);
                     }
 
-                                        View prevView = mVpDishList.findViewById(mCurrentIndex - 1);
+                    View prevView = mVpDishList.findViewById(mCurrentIndex - 1);
                     if (prevView != null) {
                         GridView prevGridView = (GridView) prevView;
                         mAdapter.updateItemInventory(prevGridView, inventoryInfoMap);
                     }
 
-                                        View nextView = mVpDishList.findViewById(mCurrentIndex + 1);
+                    View nextView = mVpDishList.findViewById(mCurrentIndex + 1);
                     if (nextView != null) {
                         GridView nextGridView = (GridView) nextView;
                         mAdapter.updateItemInventory(nextGridView, inventoryInfoMap);

@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.TrafficStats;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
@@ -25,6 +27,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+
+import static android.content.Context.WIFI_SERVICE;
 
 
 public class SystemUtils {
@@ -101,6 +105,17 @@ public class SystemUtils {
         } else {
             Settings.System.putInt(resolver, Settings.System.AUTO_TIME, 1);
         }
+    }
+
+    public static String getConnectWifiSsid(){
+        WifiManager wifiManager = (WifiManager) BaseApplication.sInstance.getSystemService(WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        Log.d("wifiInfo", wifiInfo.toString());
+        Log.d("SSID",wifiInfo.getSSID());
+        if(TextUtils.isEmpty(wifiInfo.getSSID())){
+            return "暂无";
+        }
+        return wifiInfo.getSSID();
     }
 
     public static void setTime1224(ContentResolver resolver) {

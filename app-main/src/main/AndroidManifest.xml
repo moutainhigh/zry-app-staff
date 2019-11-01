@@ -123,6 +123,19 @@
         </activity>
 
         <activity
+            android:name="com.zhongmei.beauty.BeautyShopCartActivity"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
+            android:launchMode="singleTask"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden">
+            <intent-filter>
+                <action android:name="com.zhongmei.beauty.order.ACTION" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name="com.zhongmei.beauty.BeautySettingActivity_"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize"
             android:launchMode="singleTask"

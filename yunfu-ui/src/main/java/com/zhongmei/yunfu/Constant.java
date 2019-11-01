@@ -89,5 +89,7 @@ public class Constant {
 
     public static final String SETTING_SUPPORT_WEIGH_SELF_INSTRUCTED = "setting_allow_self_instructed";
 
-    public static final String SP_USE_SENCE_MODE="setting_use_sence_mode";
+    public static final String SP_USE_SENCE_MODE="setting_use_sence_mode";//用户场景，1服务员模式，2顾客模式
+    public static final String SP_TABLE_ID="setting_table_id";
+    public static final String SP_TABLE_NAME="setting_table_name";
 }

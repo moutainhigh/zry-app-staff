@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
     <!--android:background="@color/dinnerdish_bg"-->
 
+
     <LinearLayout
         android:id="@+id/v_brand_type"
         android:layout_width="wrap_content"
@@ -22,11 +23,131 @@
         android:background="@drawable/dinner_order_dish_type_bg"
         android:visibility="gone" />
 
+    <LinearLayout
+        android:id="@+id/layout_operator"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_back"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_launcher_left_selector"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_gameIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/icon_game" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/iv_gameIcon"
+                android:text="返回"
+                android:textSize="24sp" />
+
+        </RelativeLayout>
+
+        <!--中间部分-->
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:background="@color/bg_white">
+
+            <TextView
+                android:id="@+id/btn_open_trade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="请在上方选择商品"
+                android:textSize="@dimen/text_20" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btn_open_trade"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_table"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="工作台：13号"
+                    android:textSize="@dimen/text_14" />
+
+                <TextView
+                    android:id="@+id/tv_waiter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="服务员：张婷"
+                    android:textSize="@dimen/text_14" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <!--右边部分-->
+        <RelativeLayout
+            android:id="@+id/rl_shop_cart"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_launcher_right_selector"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_shopcartIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_bill" />
+
+            <TextView
+                android:id="@+id/tv_shopcart_count"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="-15dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/iv_shopcartIcon"
+                android:background="@color/bg_red"
+                android:gravity="center"
+                android:paddingLeft="3dp"
+                android:paddingRight="3dp"
+                android:text="0"
+                android:textColor="@color/text_white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="30dp"
+                android:layout_toRightOf="@id/iv_shopcartIcon"
+                android:text="消费清单"
+                android:textSize="24sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
     <RelativeLayout
         android:id="@+id/v_search_and_index"
         android:layout_width="match_parent"
         android:layout_height="@dimen/order_dish_index_field_height"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@id/layout_operator"
         android:layout_toLeftOf="@id/v_brand_type"
         android:orientation="horizontal">
 
@@ -52,12 +173,12 @@
             android:layout_height="36dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@id/bt_clear_dish_list_show"
             android:background="@color/transparent"
             android:drawableLeft="@drawable/icon_scan_code_gray"
-            android:layout_toRightOf="@id/bt_clear_dish_list_show"
             android:drawablePadding="8dp"
-            android:text="@string/scan_code"
             android:gravity="center_vertical"
+            android:text="@string/scan_code"
             android:textColor="#3f4348"
             android:textSize="16sp" />
 
@@ -67,28 +188,28 @@
             android:layout_height="36dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="32dp"
+            android:layout_toRightOf="@id/btn_scan_code"
             android:background="@color/transparent"
             android:drawableLeft="@drawable/icon_temp_dish"
-            android:layout_toRightOf="@id/btn_scan_code"
             android:drawablePadding="8dp"
-            android:visibility="gone"
-            android:text="@string/temp_dish"
             android:gravity="center_vertical"
+            android:text="@string/temp_dish"
             android:textColor="#3f4348"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <HorizontalScrollView
             android:id="@+id/hsv_dots"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:padding="4dp"
-            android:layout_marginRight="30dp"
             android:layout_centerVertical="true"
-            android:scrollbars="none"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/dish_list_index_bg"
             android:fadingEdge="none"
             android:overScrollMode="never"
-            android:background="@drawable/dish_list_index_bg">
+            android:padding="4dp"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:id="@+id/ll_dots"
@@ -110,12 +231,12 @@
         <LinearLayout
             android:layout_width="200dp"
             android:layout_height="0dp"
-            android:layout_marginTop="0dp"
-            android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="0dp"
             android:background="@drawable/beauty_tab_bg"
-            android:visibility="gone"
-            android:orientation="horizontal">
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/beauty_tab_service"

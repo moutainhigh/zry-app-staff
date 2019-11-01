@@ -4,10 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/beauty_left_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
     <!--顾客信息-->
     <fragment
         android:id="@+id/beauty_left_customer"
@@ -23,6 +19,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="60dp">
 
         <View

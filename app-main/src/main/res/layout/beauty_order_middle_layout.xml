@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
+    <FrameLayout
+        android:id="@+id/v_content"
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:visibility="gone"
+        android:paddingTop="22dp" />
+
+
     <LinearLayout
         android:id="@+id/vActionBar"
         android:layout_width="@dimen/beauty_height_middle_operator"
@@ -198,16 +207,5 @@
         </LinearLayout>
     </LinearLayout>
 
-    <View
-        android:layout_width="1dp"
-        android:layout_height="match_parent"
-        android:background="@color/divide_line_color" />
 
-    <FrameLayout
-        android:id="@+id/v_content"
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:paddingTop="22dp"
-        android:visibility="gone" />
 </LinearLayout>

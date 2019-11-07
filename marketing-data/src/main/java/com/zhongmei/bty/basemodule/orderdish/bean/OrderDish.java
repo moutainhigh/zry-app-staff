@@ -128,7 +128,8 @@ public class OrderDish {
     }
 
     public void setQty(BigDecimal singleQty, BigDecimal totalQty) {
-        if (getSaleType() == SaleType.WEIGHING) {            this.singleQty = new BigDecimal(MathDecimal.toTrimThreeZeroString(singleQty));
+        if (getSaleType() == SaleType.WEIGHING) {
+            this.singleQty = new BigDecimal(MathDecimal.toTrimThreeZeroString(singleQty));
             this.totalQty = new BigDecimal(MathDecimal.toTrimThreeZeroString(totalQty));
         } else {
             this.singleQty = Decimal.valueOf(singleQty);
@@ -138,7 +139,7 @@ public class OrderDish {
     }
 
     public BigDecimal getActualAmount() {
-                if(ValueEnums.equalsValue(getDishShop().getSaleType(),SaleType.TIMECHARGING.value())){
+        if (ValueEnums.equalsValue(getDishShop().getSaleType(), SaleType.TIMECHARGING.value())) {
             return caculTimeChargingAmount();
         }
         return mathActualAmount();
@@ -154,7 +155,7 @@ public class OrderDish {
         if (rule == null) {
             return mathActualAmount();
         }
-                return MathDecimal.round(rule.getStartChargingPrice().multiply(totalQty),2);
+        return MathDecimal.round(rule.getStartChargingPrice().multiply(totalQty), 2);
     }
 
     public String getBatchNo() {

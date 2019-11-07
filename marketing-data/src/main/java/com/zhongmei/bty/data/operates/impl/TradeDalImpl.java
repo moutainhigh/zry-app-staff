@@ -2992,6 +2992,28 @@ public class TradeDalImpl extends AbstractOpeartesImpl implements TradeDal {
         }
     }
 
+    //根据工作台查询订单
+    @Override
+    public Trade getTradeByTableId(Long tableId) throws SQLException {
+        Checks.verifyNotNull(tableId, "tradeId");
+        DatabaseHelper helper = DBHelperManager.getHelper();
+        try{
+            Dao<TradeTable,Long> tradeTableDao=helper.getDao(TradeTable.class);
+            TradeTable tradeTable=tradeTableDao.queryBuilder().orderBy(TradeTable.$.serverCreateTime,false).where().eq(TradeTable.$.tableId,tableId).and().eq(TradeTable.$.statusFlag,StatusFlag.VALID).queryForFirst();
+
+            if(tradeTable==null){
+                return null;
+            }
+
+            return getTrade(tradeTable.getTradeId());
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }finally {
+            DBHelperManager.releaseHelper(helper);
+        }
+        return null;
+    }
+
     @Override
     public List<Trade> getTrade(List<Long> tradeIds, List<TradeStatus> tradeStatuses) throws SQLException {
         Checks.verifyNotEmpty(tradeIds, "tradeIds");

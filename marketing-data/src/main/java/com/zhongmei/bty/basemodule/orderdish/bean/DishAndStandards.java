@@ -67,6 +67,8 @@ public class DishAndStandards {
         return dishShop.getSaleType();
     }
 
+    public String getDishPic(){return dishShop.getDishPic();}
+
 
     public boolean isCombo() {
         return dishShop.getType() == DishType.COMBO;

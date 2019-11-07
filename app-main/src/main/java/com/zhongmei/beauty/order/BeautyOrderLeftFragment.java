@@ -90,14 +90,13 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     @ViewById(R.id.beauty_btn_print)
     Button btn_print;
 
-    private AsyncTask initTask;
     private boolean isEdit = false;
     private BusinessType mBusinessType = BusinessType.BEAUTY;
 
     private ChangePageListener mChangePageListener;
 
     private IChangeMiddlePageListener middleChangeListener;
-        private boolean isEditMode = false;
+    private boolean isEditMode = false;
 
     public void registerLoadingListener(LoadingFinish mLoadingFinish) {
         this.mLoadingFinish = mLoadingFinish;
@@ -112,43 +111,47 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         tradeInfoFragment.registerListener(mChangePageListener, middleChangeListener);
         replaceFragment(R.id.beauty_left_content, tradeInfoFragment, "tradeInfoFragment");
         tradeInfoFragment.setDishCheckMode(false);
-        initData();
         initView(mBusinessType);
-
+        initData();
     }
 
 
     private void initData() {
-        isEdit = getActivity().getIntent().getBooleanExtra(BeautyOrderConstants.IS_ORDER_EDIT, false);
-        final Tables tables = (Tables) getActivity().getIntent().getSerializableExtra(BeautyOrderConstants.ORDER_EDIT_TABLE);
-        final Long tradeId = getActivity().getIntent().getLongExtra(BeautyOrderConstants.ORDER_EDIT_TRADEID, -1);
-        Integer businessTypeValue = getActivity().getIntent().getIntExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE, ValueEnums.toValue(BusinessType.BEAUTY));
-        mBusinessType = ValueEnums.toEnum(BusinessType.class, businessTypeValue);
-        initTask = new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void[] objects) {
-                BeautyOrderManager.initOrder(isEdit, tradeId, tables, mBusinessType);
-                return null;
-            }
+//        isEdit = getActivity().getIntent().getBooleanExtra(BeautyOrderConstants.IS_ORDER_EDIT, false);
+//        final Tables tables = (Tables) getActivity().getIntent().getSerializableExtra(BeautyOrderConstants.ORDER_EDIT_TABLE);
+//        final Long tradeId = getActivity().getIntent().getLongExtra(BeautyOrderConstants.ORDER_EDIT_TRADEID, -1);
+//        Integer businessTypeValue = getActivity().getIntent().getIntExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE, ValueEnums.toValue(BusinessType.BEAUTY));
+//        mBusinessType = ValueEnums.toEnum(BusinessType.class, businessTypeValue);
+//        initTask = new AsyncTask<Void, Void, Void>() {
+//            @Override
+//            protected Void doInBackground(Void[] objects) {
+//                BeautyOrderManager.initOrder(isEdit, tradeId, tables, mBusinessType);
+//                return null;
+//            }
+//
+//            @Override
+//            protected void onPostExecute(Void aVoid) {
+//                super.onPostExecute(aVoid);
+//                updateShopCartView(mShopcarting.getShoppingCartDish(), mShopcarting.getOrder());
+//                initTableView();
+//                mLoadingFinish.loadingFinish();
+//                EventBus.getDefault().post(new BeautyCustmoerEvent(CustomerManager.getInstance().getDinnerLoginCustomer()));
+//            }
+//        }.execute();
 
-            @Override
-            protected void onPostExecute(Void aVoid) {
-                super.onPostExecute(aVoid);
-                updateShopCartView(mShopcarting.getShoppingCartDish(), mShopcarting.getOrder());
-                initTableView();
-                mLoadingFinish.loadingFinish();
-                EventBus.getDefault().post(new BeautyCustmoerEvent(CustomerManager.getInstance().getDinnerLoginCustomer()));
-            }
-        }.execute();
+
+        mLoadingFinish.loadingFinish();
+        initTableView();
+        updateView(mShopcarting.getOrder().getTrade(),mShopcarting.getShoppingCartDish());
+        EventBus.getDefault().post(new BeautyCustmoerEvent(CustomerManager.getInstance().getDinnerLoginCustomer()));
 
     }
-
 
 
     private void initView(BusinessType busType) {
         if (isBuyServer(busType)) {
 
-                        btn_save.setVisibility(View.GONE);
+            btn_save.setVisibility(View.GONE);
             btn_print.setVisibility(View.GONE);
         }
     }
@@ -167,7 +170,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     private void updateShopCartHint(Trade trade, List<IShopcartItem> list) {
         FragmentActivity activity = getActivity();
         if (DinnerShoppingCart.getInstance().getOrder().getTradeTableList() != null && activity instanceof BeautyShopCartActivity) {
-            ((BeautyShopCartActivity) activity).updateShopCartHint(trade, list,isEditMode);
+            ((BeautyShopCartActivity) activity).updateShopCartHint(trade, list, isEditMode);
         }
     }
 
@@ -199,7 +202,6 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         }
         return tradeInfoFragment.getSelectedDishAdapter().doSelectedItem(uuid);
     }
-
 
 
     public void goDefaultDiscountMode() {
@@ -300,7 +302,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
 
         @Override
         public void setIntegralCash(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
-                        updateShopCartView(listOrderDishshopVo, mTradeVo);
+            updateShopCartView(listOrderDishshopVo, mTradeVo);
         }
 
         @Override
@@ -390,7 +392,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     }
 
     private void updateView(Trade trade, List<IShopcartItem> list) {
-        updateShopCartHint(trade,list);
+        updateShopCartHint(trade, list);
 
         BigDecimal price = trade.getTradeAmount();
         if (price == null) {
@@ -531,14 +533,13 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     }
 
 
-
     public void setTableName(String roomName) {
     }
 
-    public void clearShopCart(){
-        initTask.cancel(true);
+    public void clearShopCart() {
+//        initTask.cancel(true);
         DinnerShoppingCart.getInstance().unRegisterListenerByTag(ShoppingCartListerTag.ORDER_DISH_LEFT);
-        BeautyOrderManager.clearShopcart();
+//        BeautyOrderManager.clearShopcart();
     }
 
     @Override

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class TableFilterManager {
     private static TableFilterManager mTableFilter;
 
@@ -37,8 +36,8 @@ public class TableFilterManager {
 
 
     public void loadTables() {
-        mTableManager.loadTableInfos();    }
-
+        mTableManager.loadTableInfos();
+    }
 
 
     public List<DinnertableModel> filter(Long zoneId, TableStatus tableStatus) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Gravity;
@@ -30,6 +31,7 @@ import com.zhongmei.beauty.order.BeautySetmealFragment;
 import com.zhongmei.beauty.order.BeautySetmealFragment_;
 import com.zhongmei.beauty.order.event.BeautyCustmoerEvent;
 import com.zhongmei.beauty.order.event.BeautyOrderCustomerEvent;
+import com.zhongmei.beauty.order.event.BeautyShopCartLoadEvent;
 import com.zhongmei.beauty.order.util.IChangeMiddlePageListener;
 import com.zhongmei.beauty.utils.BeautyOrderConstants;
 import com.zhongmei.beauty.widgets.BeautyTablePopWindow;
@@ -142,7 +144,8 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
             protected void onPostExecute(Void aVoid) {
                 super.onPostExecute(aVoid);
                 Log.e("BeautyOrderActivity","加载购物车。。。");
-                EventBus.getDefault().post(new BeautyCustmoerEvent(CustomerManager.getInstance().getDinnerLoginCustomer()));
+                initTableView();
+                EventBus.getDefault().post(new BeautyShopCartLoadEvent()); //购物车加载完成
             }
         }.execute();
 
@@ -151,6 +154,12 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    private void initTableView() {
+        if (DinnerShoppingCart.getInstance().getOrder().getTradeTableList() != null && mDishHomePageFragment!=null) {
+            mDishHomePageFragment.setTables(DinnerShoppingCart.getInstance().getOrder().getTradeTableList());
+        }
     }
 
     public void onEventMainThread(BeautyOrderCustomerEvent event) {

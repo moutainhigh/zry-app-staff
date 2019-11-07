@@ -200,6 +200,8 @@ public interface TradeDal extends IOperates {
 
     Trade getTrade(Long tradeId) throws SQLException;
 
+    Trade getTradeByTableId(Long tableId) throws  SQLException;
+
 
     List<Trade> getTrade(List<Long> tradeIds, List<TradeStatus> tradeStatuses) throws SQLException;
 

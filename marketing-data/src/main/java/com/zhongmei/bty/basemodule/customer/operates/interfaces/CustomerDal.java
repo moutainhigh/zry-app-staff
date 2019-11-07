@@ -34,7 +34,7 @@ public interface CustomerDal extends IOperates {
 
     public DishMemberPrice findDishMemberPriceByDishId(long dishId, long levelId);
 
-        public DishMemberPrice queryMemberPrice(long templetPriceId, long dishId);
+    public DishMemberPrice queryMemberPrice(long templetPriceId, long dishId);
 
     public List<EcCardKind> findEcCardKinds();
 
@@ -60,8 +60,6 @@ public interface CustomerDal extends IOperates {
 
 
     public List<EcCardKindCommercialRel> findEcCardKindCommercialRel(EntityCardType entityCardType) throws Exception;
-
-
 
 
     public boolean getopenIdRegisterSetting() throws SQLException;

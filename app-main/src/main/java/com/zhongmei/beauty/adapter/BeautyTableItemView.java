@@ -42,9 +42,9 @@ public class BeautyTableItemView extends LinearLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void refreshUI(DinnertableModel tableModel, boolean isCheck, OnClickListener listener) {
+    public void refreshUI(DinnertableModel tableModel, boolean isCheck,boolean isCheckStatus, OnClickListener listener) {
         this.mTableModel = tableModel;
-        if (tableModel.getPhysicsTableStatus().equalsValue(TableStatus.EMPTY.value())) {
+        if (tableModel.getPhysicsTableStatus().equalsValue(TableStatus.EMPTY.value()) || !isCheckStatus) {
             cb_table.setEnabled(true);
         } else {
             cb_table.setEnabled(false);

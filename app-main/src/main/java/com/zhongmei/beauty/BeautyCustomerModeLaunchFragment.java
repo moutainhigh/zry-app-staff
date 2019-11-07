@@ -1,12 +1,17 @@
 package com.zhongmei.beauty;
 
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.zhongmei.beauty.order.BeautyOrderManager;
+import com.zhongmei.beauty.order.event.BeautyCustmoerEvent;
 import com.zhongmei.beauty.utils.BeautyOrderConstants;
+import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItem;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItemBase;
 import com.zhongmei.bty.basemodule.orderdish.bean.ShopcartItem;
@@ -23,6 +28,7 @@ import com.zhongmei.yunfu.context.session.core.user.AuthUser;
 import com.zhongmei.yunfu.context.util.SharedPreferenceUtil;
 import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.db.entity.trade.Tables;
+import com.zhongmei.yunfu.db.enums.BusinessType;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
 import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 import com.zhongmei.yunfu.util.ToastUtil;
@@ -32,6 +38,8 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 美业顾客模式
@@ -58,44 +66,75 @@ public class BeautyCustomerModeLaunchFragment extends BasicFragment implements V
 
     private DinnerShoppingCart mShopCart;
 
+    private AsyncTask initTask;
+
     @AfterViews
-    public void init(){
+    public void init() {
 
         btn_openTrade.setOnClickListener(this);
         rl_shopCart.setOnClickListener(this);
 
+        mShopCart = DinnerShoppingCart.getInstance();
 
         setWaiterInfo(Session.getAuthUser());
-        initData();
     }
 
-    private void initData(){
-        mShopCart=DinnerShoppingCart.getInstance();
-
-        Long tableId= SharedPreferenceUtil.getSpUtil().getLong(Constant.SP_TABLE_ID,-1);
-        if(tableId>0){
-            mTable=new Tables();
+    private void initData() {
+        Long tableId = SharedPreferenceUtil.getSpUtil().getLong(Constant.SP_TABLE_ID, -1);
+        if (tableId > 0) {
+            mTable = new Tables();
             mTable.setId(tableId);
-            mTable.setTableName(SharedPreferenceUtil.getSpUtil().getString(Constant.SP_TABLE_NAME,"--"));
+            mTable.setTableName(SharedPreferenceUtil.getSpUtil().getString(Constant.SP_TABLE_NAME, "--"));
         }
 
         setTableInfo(mTable);
     }
 
 
+
+    private void refreshShopCart() {
+        if (mTable == null) {
+            return;
+        }
+
+        //根据TradeTable查询订单
+        initTask = new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void[] objects) {
+                BeautyOrderManager.initOrderByTable(mTable, BusinessType.BEAUTY);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                //刷新UI
+                refreshShopCartUi();
+            }
+        }.execute();
+
+
+    }
+
+    //刷新购物车UI
+    private void refreshShopCartUi(){
+        tv_shopCartCount.setText(mShopCart.getShoppingCartDish().size()+"");
+    }
+
+
     public void setWaiterInfo(AuthUser authUser) {
         if (authUser != null) {
-            tv_waiter.setText("服务员:"+authUser.getName());
-        }else{
+            tv_waiter.setText("服务员:" + authUser.getName());
+        } else {
             tv_waiter.setText("服务员：--");
         }
     }
 
-    public void setTableInfo(Tables table){
-        if(table!=null){
+    public void setTableInfo(Tables table) {
+        if (table != null) {
             btn_openTrade.setText("开始点单");
-            tv_table.setText("工作台:"+table.getTableName());
-        }else{
+            tv_table.setText("工作台:" + table.getTableName());
+        } else {
             btn_openTrade.setText("请先设置工作台");
             tv_table.setText("工作台: -- ");
         }
@@ -104,13 +143,22 @@ public class BeautyCustomerModeLaunchFragment extends BasicFragment implements V
     @Override
     public void onResume() {
         super.onResume();
-        if(mShopCart!=null){
-            updateShopCartCount(mShopCart);
+        initData();
+        if(mTable!=null){
+            refreshShopCart();//需要重新查询
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(initTask!=null){
+            initTask.cancel(true);
         }
     }
 
     private void createOrderDish(Tables table) {
-        if(table==null){
+        if (table == null) {
             return;
         }
 
@@ -118,32 +166,37 @@ public class BeautyCustomerModeLaunchFragment extends BasicFragment implements V
         mIntent.setClass(getActivity(), BeautyOrderActivity.class);
         mIntent.putExtra(BeautyOrderConstants.IS_ORDER_EDIT, false);
         mIntent.putExtra(BeautyOrderConstants.ORDER_EDIT_TABLE, table);
+
+        if(mShopCart.getOrder().getTrade().getId()!=null){
+            mIntent.putExtra(BeautyOrderConstants.IS_ORDER_EDIT, true);
+            mIntent.putExtra(BeautyOrderConstants.ORDER_EDIT_TRADEID, mShopCart.getOrder().getTrade().getId());
+        }
         startActivity(mIntent);
     }
 
-    private void updateShopCartCount(DinnerShoppingCart shopCart){
-        int shopCartCount=shopCart.getShoppingCartDish().size();
-        tv_shopCartCount.setText(shopCartCount+"");
-    }
 
-    private void toShopCartItem(){
-        if(Utils.isEmpty(mShopCart.getShoppingCartDish())){
+    private void toShopCartItem(Tables table) {
+        if (Utils.isEmpty(mShopCart.getShoppingCartDish())) {
             ToastUtil.showShortToast("消费清单为空，请先点单!");
             return;
         }
-        Intent intent=new Intent(getContext(), BeautyShopCartActivity.class);
+        Intent intent = new Intent(getContext(), BeautyShopCartActivity.class);
+        intent.putExtra(BeautyOrderConstants.IS_ORDER_EDIT, true);
+        intent.putExtra(BeautyOrderConstants.ORDER_EDIT_TABLE, table);
+        intent.putExtra(BeautyOrderConstants.ORDER_EDIT_TRADEID, mShopCart.getOrder().getTrade().getId());
         startActivity(intent);
     }
 
+
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_open_trade:
                 //开单
                 createOrderDish(mTable);
                 break;
             case R.id.rl_shop_cart:
-                toShopCartItem();
+                toShopCartItem(mTable);
                 break;
         }
     }

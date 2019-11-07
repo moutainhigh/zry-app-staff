@@ -21,6 +21,12 @@ import java.util.Set;
 public class BeautyTableChoiceAdapter extends RecyclerViewBaseAdapter<DinnertableModel, BeautyTableItemView> {
 
     private Context mContext;
+    private boolean isCheckStatus=true;
+
+    public BeautyTableChoiceAdapter(Context context,boolean isCheckStatus) {
+        this.mContext = context;
+        this.isCheckStatus=isCheckStatus;
+    }
 
     public BeautyTableChoiceAdapter(Context context) {
         this.mContext = context;
@@ -43,9 +49,10 @@ public class BeautyTableChoiceAdapter extends RecyclerViewBaseAdapter<Dinnertabl
 
         if (tableSetChecked.contains(tableModel.getId())) {
             mapCheckedTable.put(tableModel.getId(), new TableInfo(tableModel, position));
-            tableSetChecked.remove(tableModel.getId());        }
+            tableSetChecked.remove(tableModel.getId());
+        }
 
-        tableView.refreshUI(tableModel, mapCheckedTable.containsKey(tableModel.getId()), new OnRBClickListener(tableModel, position));
+        tableView.refreshUI(tableModel, mapCheckedTable.containsKey(tableModel.getId()), isCheckStatus,new OnRBClickListener(tableModel, position));
     }
 
 
@@ -62,7 +69,6 @@ public class BeautyTableChoiceAdapter extends RecyclerViewBaseAdapter<Dinnertabl
         for (TableInfo tableInfo : listTableInfo) {
             listTableModes.add(tableInfo.getTableMode());
         }
-
         return listTableModes;
     }
 
@@ -106,9 +112,12 @@ public class BeautyTableChoiceAdapter extends RecyclerViewBaseAdapter<Dinnertabl
                 mapCheckedTable.put(mTableModel.getId(), tableinfo);
             }
 
+            if(mOnItemClickListener!=null){
+                mOnItemClickListener.onItemClick(v,mPosition);
+            }
             notifyDataSetChanged();
 
-                    }
+        }
     }
 
 

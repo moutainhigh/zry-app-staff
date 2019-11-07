@@ -2,6 +2,7 @@ package com.zhongmei.beauty;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,6 +25,7 @@ import com.zhongmei.yunfu.ui.view.CommonDialogFragment;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.LongClick;
 import org.androidannotations.annotations.ViewById;
 
 @EActivity(R.layout.activity_launch)
@@ -50,6 +52,8 @@ public class BeautyLaunchActivity extends MainBaseActivity {
     @ViewById(R.id.tv_shop_address)
     protected TextView tv_shopAddr;
 
+    private int mCurentMode=-1;//默认服务员模式
+
 
     @AfterViews
     protected void initView(){
@@ -57,11 +61,16 @@ public class BeautyLaunchActivity extends MainBaseActivity {
         //设置
         setShopInfo();
         setWaiterInfo(Session.getAuthUser());
-        initModele();
     }
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, BeautyLaunchActivity_.class));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initModele();
     }
 
     private void setShopInfo(){
@@ -92,7 +101,13 @@ public class BeautyLaunchActivity extends MainBaseActivity {
 
     private void initModele(){
         int mode=SharedPreferenceUtil.getSpUtil().getInt(Constant.SP_USE_SENCE_MODE,1);
-        switch (mode){
+        if(mCurentMode==mode){//每次进入都检查一下当前模式
+            return;
+        }
+
+        mCurentMode=mode;
+
+        switch (mCurentMode){
             case 1: //服务员模式
                 loadWaiterMode();
                 break;
@@ -115,6 +130,18 @@ public class BeautyLaunchActivity extends MainBaseActivity {
         }
     }
 
+    @LongClick(R.id.iv_shop_logo)
+    public void onLongClick(View v){
+        switch (v.getId()){
+            case R.id.iv_shop_logo:
+                //跳转到设置
+                Intent intent=new Intent();
+                intent.setClass(getContext(),BeautySettingActivity_.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
     /**
      * 显示注销对话框
      */
@@ -130,11 +157,19 @@ public class BeautyLaunchActivity extends MainBaseActivity {
                     public void onClick(View arg0) {
                         Session.unbind();
                         setWaiterInfo(null);
+                        loginOutWaiter();
                     }
 
                 })
                 .build()
                 .show(getSupportFragmentManager(), "launcher_login_out_confirm");
+    }
+
+    private void loginOutWaiter(){
+        Fragment fragment =  getSupportFragmentManager().findFragmentByTag(BeautyCustomerModeLaunchFragment.class.getSimpleName());
+        if(fragment!=null && fragment instanceof  BeautyCustomerModeLaunchFragment){
+            ((BeautyCustomerModeLaunchFragment)fragment).setWaiterInfo(null);
+        }
     }
 
 
@@ -150,7 +185,5 @@ public class BeautyLaunchActivity extends MainBaseActivity {
         BeautyCustomerModeLaunchFragment customerLaunchFragment=new BeautyCustomerModeLaunchFragment_.FragmentBuilder_().build();
         replaceFragment(R.id.fl_operator,customerLaunchFragment,BeautyCustomerModeLaunchFragment.class.getSimpleName());
     }
-
-
 
 }

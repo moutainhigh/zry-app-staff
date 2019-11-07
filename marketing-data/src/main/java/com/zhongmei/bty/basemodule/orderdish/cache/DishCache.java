@@ -979,7 +979,8 @@ public class DishCache {
                     DishShop.$.weight,
                     DishShop.$.minNum,
                     DishShop.$.maxNum,
-                    DishShop.$.wmType);
+                    DishShop.$.wmType,
+                    DishShop.$.dishPic);
             qb.where().eq(DishShop.$.statusFlag, StatusFlag.VALID).and().ne(DishShop.$.type, DishType.CARD);
             return qb.orderBy(DishShop.$.sort, true).orderBy(DishShop.$.brandDishId, true)
                     .query();

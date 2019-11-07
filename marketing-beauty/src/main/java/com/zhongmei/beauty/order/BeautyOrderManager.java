@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.zhongmei.bty.basemodule.trade.event.ActionCloseOrderDishActivity;
 import com.zhongmei.bty.mobilepay.IPayOverCallback;
 import com.zhongmei.bty.mobilepay.ISavedCallback;
 import com.zhongmei.bty.mobilepay.bean.IPaymentInfo;
@@ -13,6 +14,9 @@ import com.zhongmei.bty.mobilepay.core.DoPayApi;
 import com.zhongmei.bty.basemodule.beauty.BeautyCardManager;
 import com.zhongmei.yunfu.bean.req.CustomerResp;
 import com.zhongmei.bty.basemodule.customer.manager.CustomerManager;
+import com.zhongmei.yunfu.db.entity.trade.Trade;
+import com.zhongmei.yunfu.db.entity.trade.TradeTable;
+import com.zhongmei.yunfu.db.enums.TradeStatus;
 import com.zhongmei.yunfu.monitor.CalmResponseListener;
 import com.zhongmei.bty.basemodule.orderdish.bean.IShopcartItem;
 import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
@@ -37,12 +41,13 @@ import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.ui.view.CalmLoadingDialogFragment;
 import com.zhongmei.yunfu.util.ValueEnums;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.zhongmei.ZMIntent;
 
-
+import de.greenrobot.event.EventBus;
 
 
 public class BeautyOrderManager {
@@ -71,6 +76,22 @@ public class BeautyOrderManager {
         DinnerShoppingCart.getInstance().setDinnerOrderType(DeliveryType.HERE);
         DinnerShoppingCart.getInstance().setDominType(DinnerShoppingCart.getInstance().getShoppingCartVo(), DomainType.BEAUTY);
                 DinnerShoppingCart.getInstance().getOrder().getTrade().setTradePeopleCount(1);
+    }
+
+    public static void initOrderByTable(Tables tables, BusinessType busType){
+        TradeDal tradeDal = OperatesFactory.create(TradeDal.class);
+        try {
+            Trade trade  = tradeDal.getTradeByTableId(tables.getId());
+            if(trade!=null && trade.isValid() && ValueEnums.equalsValue(trade.getTradeStatus(), TradeStatus.CONFIRMED.value())){
+                //有效订单
+                doEdit(trade.getId());
+            }else{
+                doInit(tables,busType);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static void doEdit(Long tradeId) {
@@ -219,7 +240,8 @@ public class BeautyOrderManager {
             @Override
             public void onSuccess(ResponseObject<BeautyTradeResp> resp) {
                 if (ResponseObject.isOk(resp)) {
-                    activity.finish();
+                    activity.finish();//发一个通知，让点单页面也关闭。
+                    EventBus.getDefault().post(new ActionCloseOrderDishActivity());
                 } else {
                     if (resp.getMessage() != null) {
                         ToastUtil.showLongToast(resp.getMessage());
@@ -243,6 +265,7 @@ public class BeautyOrderManager {
             public void onSuccess(ResponseObject<BeautyTradeResp> resp) {
                 if (ResponseObject.isOk(resp)) {
                     activity.finish();
+                    EventBus.getDefault().post(new ActionCloseOrderDishActivity());
                 } else {
                     if (resp.getMessage() != null) {
                         ToastUtil.showLongToast(resp.getMessage());

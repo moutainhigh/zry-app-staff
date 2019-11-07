@@ -89,13 +89,14 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
     private List<ZoneModel> mListZoneModel;
 
     private Set<Long> tableSetTmp;
+
     public void setiTableChoiceListener(ITableChoice tableChoiceListener) {
         this.mTableChoiceListener = tableChoiceListener;
     }
 
     public BeautyTablePopWindow(Context context, BusinessType businessType) {
         super(context);
-                this.mContext = context;
+        this.mContext = context;
         this.mBusinessType = businessType;
         this.mUiHandler = new UIHandler(context.getMainLooper());
         initView(context);
@@ -151,7 +152,8 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
     }
 
     private void initData() {
-        mTableFileterManager = new TableFilterManager();        mTableFileterManager.setTableListener(this);
+        mTableFileterManager = new TableFilterManager();
+        mTableFileterManager.setTableListener(this);
         mTableFileterManager.loadTables();
     }
 
@@ -294,7 +296,7 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                mCurModel = mListZoneModel.get(position);
+        mCurModel = mListZoneModel.get(position);
         mZonesChoiceAdapter.setCheckZoneModel(mCurModel);
         mZonesChoiceAdapter.notifyDataSetChanged();
         tv_zone.setText(mCurModel.getName());

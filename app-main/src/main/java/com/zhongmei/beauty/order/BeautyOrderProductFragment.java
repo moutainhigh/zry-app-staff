@@ -8,8 +8,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongmei.beauty.BeautyShopCartActivity;
+import com.zhongmei.beauty.order.event.BeautyShopCartLoadEvent;
+import com.zhongmei.bty.basemodule.orderdish.event.EventDishChangedNotice;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
+import com.zhongmei.yunfu.context.util.Utils;
+import com.zhongmei.yunfu.db.entity.trade.TradeTable;
 import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.yunfu.context.util.SharedPreferenceUtil;
 import com.zhongmei.beauty.order.view.BeautyBrandTypeView;
@@ -17,7 +21,7 @@ import com.zhongmei.beauty.order.view.BeautyBrandTypeViewEx;
 import com.zhongmei.bty.dinner.orderdish.DishHomePageFragment;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class BeautyOrderProductFragment extends DishHomePageFragment implements View.OnClickListener {
@@ -45,6 +49,7 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
     protected View loadView(LayoutInflater inflater) {
         return inflater.inflate(R.layout.beauty_order_home_page, null);
     }
+
 
     @Override
     protected void assignViews(View view) {
@@ -94,10 +99,28 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
         }
     }
 
+    public void onEventMainThread(BeautyShopCartLoadEvent event) {
+        //购物车加载完毕
+        mAdapter.notifyDataSetChanged();
+        tv_shopcartCount.setText(mShoppingCart.getShoppingCartDish().size()+"");
+    }
+
     @Override
     protected int calculateGridHeight() {
         int height = super.calculateGridHeight();
                 return height - 45;
+    }
+
+    public void setTables(List<TradeTable> tradeTables) {
+        if (Utils.isEmpty(tradeTables)) {
+            return;
+        }
+        String tablesNameTmp = "";
+        for (TradeTable tb : tradeTables) {
+            tablesNameTmp += tb.getTableName() + ",";
+        }
+        String tableName = tablesNameTmp.substring(0, tablesNameTmp.length() - 1);
+        tv_tableName.setText("工作台:" + tableName);
     }
 
     protected int getQuanPopLeftWidth() {

@@ -286,7 +286,7 @@ public class DishVo {
     }
 
     public String getDishShopImgUrl(){
-        return "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1572515124853&di=e92b8999fa96802b327e003b9e5a47c3&imgtype=0&src=http%3A%2F%2Fimg.chinapp.com%2Fuploadfile%2Fpinpai%2Foriginal%2F20180905%2F48658101a4eedfdde74c74e11b95473d.jpg";
+        return dish.getDishPic();
     }
 
 }

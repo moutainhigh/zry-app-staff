@@ -127,8 +127,6 @@ public class BaseShoppingCart {
     }
 
 
-
-
     public void setOrderBusinessType(ShoppingCartVo mShoppingCartVo, BusinessType mBusinessType) {
         checkNeedBuildMainOrder(mShoppingCartVo.getmTradeVo());
         if (mShoppingCartVo.getmTradeVo() != null && mShoppingCartVo.getmTradeVo().getTrade() != null
@@ -168,15 +166,15 @@ public class BaseShoppingCart {
 
     public void addShippingToCart(ShoppingCartVo mShoppingCartVo, ShopcartItem mShopcartItem, Boolean isTempDish) {
         checkNeedBuildMainOrder(mShoppingCartVo.getmTradeVo());
-                IShopcartItem value = getShopcartItemFromList(mShoppingCartVo, mShopcartItem.getUuid());
+        IShopcartItem value = getShopcartItemFromList(mShoppingCartVo, mShopcartItem.getUuid());
         if (value != null) {
-                        mShopcartItem.setTradeTable(value.getTradeTableUuid(), value.getTradeTableId());
+            mShopcartItem.setTradeTable(value.getTradeTableUuid(), value.getTradeTableId());
             OperateShoppingCart.updateDish(mShoppingCartVo.getmTradeVo(),
                     mShoppingCartVo.getListOrderDishshopVo(),
                     mShopcartItem);
             resetSelectDishQTY(mShoppingCartVo);
         } else {
-                        if (mShoppingCartVo.getmTradeVo().getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
+            if (mShoppingCartVo.getmTradeVo().getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN) {
                 mShopcartItem.setShopcartItemType(ShopcartItemType.MAINBATCH);
                 mShopcartItem.changeQty(mShopcartItem.getSingleQty().multiply(mShoppingCartVo.getmTradeVo().getSubTradeCount()));
             } else if (mShoppingCartVo.getmTradeVo().getTrade().getTradeType() == TradeType.UNOIN_TABLE_SUB) {
@@ -198,7 +196,7 @@ public class BaseShoppingCart {
 
     public void addReadOnlyShippingToCart(ShoppingCartVo mShoppingCartVo, IShopcartItem mShopcartItem, Boolean isTempDish) {
         checkNeedBuildMainOrder(mShoppingCartVo.getmTradeVo());
-                IShopcartItem value = getShopcartItemFromList(mShoppingCartVo, mShopcartItem.getUuid());
+        IShopcartItem value = getShopcartItemFromList(mShoppingCartVo, mShopcartItem.getUuid());
 
         if (value != null) {
             OperateShoppingCart.updateReadOnlyShopcarItem(mShoppingCartVo.getmTradeVo(),
@@ -299,7 +297,7 @@ public class BaseShoppingCart {
             removeShopcartItem(mShoppingCartVo, (ShopcartItemBase) mShopcartItemBase);
             CardServiceTool.removeService(mShopcartItemBase);
         } else if (mShopcartItemBase instanceof ReadonlyShopcartItem) {
-                        removeReadOnlyShopcartItem(mShoppingCartVo, (ReadonlyShopcartItem) mShopcartItemBase);
+            removeReadOnlyShopcartItem(mShoppingCartVo, (ReadonlyShopcartItem) mShopcartItemBase);
         }
     }
 
@@ -336,14 +334,14 @@ public class BaseShoppingCart {
     public void removeShoppingcartItem(ShoppingCartVo mShoppingCartVo, IShopcartItem mShopcartItem,
                                        SetmealShopcartItem mSetmealShopcartItem, ChangePageListener mChangePageListener,
                                        FragmentManager mFragmentManager) {
-                if (mShopcartItem.getId() != null) {
+        if (mShopcartItem.getId() != null) {
             removeReadonlyShopcartItem(mShoppingCartVo, (ReadonlyShopcartItem) mShopcartItem);
             return;
         }
 
-                if (mSetmealShopcartItem == null) {
+        if (mSetmealShopcartItem == null) {
             removeDish(mShoppingCartVo, mShopcartItem);
-                        if (mShoppingCartVo.getTempShopItem() != null
+            if (mShoppingCartVo.getTempShopItem() != null
                     && mShoppingCartVo.getTempShopItem().getUuid().equals(mShopcartItem.getUuid())) {
                 mShoppingCartVo.setTempShopItem(null);
                 Bundle bundle = new Bundle();
@@ -351,12 +349,12 @@ public class BaseShoppingCart {
                 mChangePageListener.changePage(ChangePageListener.ORDERDISHLIST, null);
             }
         } else {
-                        switch (mShopcartItem.getSetmealManager().testModify(mSetmealShopcartItem, BigDecimal.ZERO)) {
+            switch (mShopcartItem.getSetmealManager().testModify(mSetmealShopcartItem, BigDecimal.ZERO)) {
                 case SUCCESSFUL:
                     if (mSetmealShopcartItem != null) {
                         removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
-                                                if (mShoppingCartVo.getIndexPage() == ChangePageListener.DISHPROPERTY
+                        if (mShoppingCartVo.getIndexPage() == ChangePageListener.DISHPROPERTY
                                 && mShoppingCartVo.getShowPropertyPageDishUUID().equals(mSetmealShopcartItem.getUuid())) {
                             Bundle bundle = new Bundle();
                             bundle.putBoolean(Constant.NONEEDCHECK, true);
@@ -373,7 +371,7 @@ public class BaseShoppingCart {
 
                     break;
                 default:
-                                        if (mShoppingCartVo.getTempShopItem() != null
+                    if (mShoppingCartVo.getTempShopItem() != null
                             && mShopcartItem.getUuid().equals(mShoppingCartVo.getTempShopItem().getUuid())
                             && mShoppingCartVo.getIndexPage() == ChangePageListener.DISHCOMBO) {
                         removeDish(mShoppingCartVo, mSetmealShopcartItem);
@@ -383,7 +381,7 @@ public class BaseShoppingCart {
                             && mShopcartItem.getUuid().equals(mShoppingCartVo.getTempShopItem().getUuid())
                             && mShoppingCartVo.getIndexPage() == ChangePageListener.DISHPROPERTY
                             && mShoppingCartVo.getShowPropertyPageDishUUID().equals(mSetmealShopcartItem.getUuid())) {
-                                                removeDish(mShoppingCartVo, mSetmealShopcartItem);
+                        removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
 
                         Bundle bundle = new Bundle();
@@ -396,19 +394,19 @@ public class BaseShoppingCart {
                             && mShopcartItem.getUuid().equals(mShoppingCartVo.getTempShopItem().getUuid())
                             && mShoppingCartVo.getIndexPage() == ChangePageListener.DISHPROPERTY
                             && !mShoppingCartVo.getShowPropertyPageDishUUID().equals(mSetmealShopcartItem.getUuid())) {
-                                                removeDish(mShoppingCartVo, mSetmealShopcartItem);
+                        removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
 
                     } else if (mShoppingCartVo.getTempShopItem() != null
                             && !mShopcartItem.getUuid().equals(mShoppingCartVo.getTempShopItem().getUuid())) {
-                                                isCheckVaild(mShoppingCartVo,
+                        isCheckVaild(mShoppingCartVo,
                                 ChangePageListener.DISHCOMBO,
                                 mChangePageListener,
                                 mFragmentManager,
                                 mShopcartItem,
                                 mSetmealShopcartItem);
                     } else if (mShoppingCartVo.getTempShopItem() == null) {
-                                                removeDish(mShoppingCartVo, mSetmealShopcartItem);
+                        removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
 
                         Bundle bundle = new Bundle();
@@ -424,9 +422,9 @@ public class BaseShoppingCart {
 
     public void isCheckVaild(ShoppingCartVo mShoppingCartVo, int mPageNo, ChangePageListener mChangePageListener,
                              FragmentManager mFragmentManager, IShopcartItem mShopcartItem, SetmealShopcartItem mSetmealShopcartItem) {
-                if (mShoppingCartVo.getTempShopItem() != null && mShoppingCartVo.getTempShopItem().getSetmealManager() != null
+        if (mShoppingCartVo.getTempShopItem() != null && mShoppingCartVo.getTempShopItem().getSetmealManager() != null
                 && !mShoppingCartVo.getTempShopItem().getSetmealManager().isValid()) {
-                        showCheckDialog(mShoppingCartVo,
+            showCheckDialog(mShoppingCartVo,
                     mPageNo,
                     mChangePageListener,
                     mFragmentManager,
@@ -434,7 +432,7 @@ public class BaseShoppingCart {
                     mSetmealShopcartItem);
 
         } else {
-                        removeDish(mShoppingCartVo, mSetmealShopcartItem);
+            removeDish(mShoppingCartVo, mSetmealShopcartItem);
             mShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
 
             Bundle bundle = new Bundle();
@@ -458,19 +456,19 @@ public class BaseShoppingCart {
                     @Override
                     public void onClick(View arg0) {
 
-                                                if (mSetmealShopcartItem != null) {
+                        if (mSetmealShopcartItem != null) {
                             ShopcartItem deleteShopcartItem =
                                     getShopcartItemByUUID(mShoppingCartVo, mSetmealShopcartItem.getParentUuid());
                             deleteShopcartItem.getSetmealManager().modifySetmeal(mSetmealShopcartItem, BigDecimal.ZERO);
                             removeDish(mShoppingCartVo, mSetmealShopcartItem);
                         }
 
-                                                if (mShoppingCartVo.getTempShopItem() != null) {
+                        if (mShoppingCartVo.getTempShopItem() != null) {
                             isCheckAdd(mShoppingCartVo, mShoppingCartVo.getTempShopItem(), false);
                             mShoppingCartVo.setTempShopItem(null);
                         }
 
-                                                if (mChangePageListener != null) {
+                        if (mChangePageListener != null) {
                             Bundle bundle = new Bundle();
                             bundle.putString(Constant.EXTRA_SHOPCART_ITEM_UUID,
                                     mShopcartItem != null ? mShopcartItem.getUuid() : "");
@@ -479,7 +477,7 @@ public class BaseShoppingCart {
                             mChangePageListener.changePage(mPageNo, bundle);
                         }
 
-                                                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(mShoppingCartVo),
+                        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(mShoppingCartVo),
                                 mShoppingCartVo.getmTradeVo());
                         for (int key : arrayListener.keySet()) {
                             arrayListener.get(key).removeShoppingCart(mergeShopcartItem(mShoppingCartVo),
@@ -545,7 +543,7 @@ public class BaseShoppingCart {
     public void addDishQTY(ShoppingCartVo mShoppingCartVo, IShopcartItemBase mShopcartItem) {
         BigDecimal selectQTY = mShoppingCartVo.getSelectDishQTYMap().get(mShopcartItem.getSkuUuid());
         BigDecimal itemQTY = mShopcartItem.getSingleQty();
-                if (mShopcartItem.isGroupDish()) {
+        if (mShopcartItem.isGroupDish()) {
             itemQTY = ShopcartItemUtils.getDisplyQty(mShopcartItem, mShoppingCartVo.getmTradeVo().getDeskCount());
         }
         if (selectQTY != null) {
@@ -556,12 +554,10 @@ public class BaseShoppingCart {
     }
 
 
-
-
     public void subtractDishQTY(ShoppingCartVo mShoppingCartVo, IShopcartItemBase mShopcartItem) {
         BigDecimal selectQTY = mShoppingCartVo.getSelectDishQTYMap().get(mShopcartItem.getSkuUuid());
         BigDecimal itemQTY = mShopcartItem.getSingleQty();
-                if (mShopcartItem.isGroupDish()) {
+        if (mShopcartItem.isGroupDish()) {
             itemQTY = ShopcartItemUtils.getDisplyQty(mShopcartItem, mShoppingCartVo.getmTradeVo().getDeskCount());
         }
         if (selectQTY != null) {
@@ -592,7 +588,7 @@ public class BaseShoppingCart {
             }
         }
 
-                for (ShopcartItem shopcartItem : mShoppingCartVo.getListOrderDishshopVo()) {
+        for (ShopcartItem shopcartItem : mShoppingCartVo.getListOrderDishshopVo()) {
             List<SetmealShopcartItem> listSetmeal = shopcartItem.getSetmealItems();
             if (listSetmeal != null) {
                 for (SetmealShopcartItem setmeal : listSetmeal) {
@@ -751,11 +747,13 @@ public class BaseShoppingCart {
     public BigDecimal getTradeAmoutCanDiscount(ShoppingCartVo mShoppingCartVo) {
         List<IShopcartItem> iShopcartItem = mergeShopcartItem(mShoppingCartVo);
 
-                BigDecimal noDiscountAllAmout = BigDecimal.ZERO;
+        BigDecimal noDiscountAllAmout = BigDecimal.ZERO;
         BigDecimal noDiscPrivilegeAmout = BigDecimal.ZERO;
         for (IShopcartItem item : iShopcartItem) {
             if (item.getStatusFlag() == StatusFlag.VALID) {
-                                boolean isAppletService=item.getAppletPrivilegeVo()!=null && item.getAppletPrivilegeVo().isPrivilegeValid();                boolean isCardService=item.getCardServicePrivilgeVo()!=null && item.getCardServicePrivilgeVo().isPrivilegeValid();                if (item.getEnableWholePrivilege() == Bool.YES && !isAppletService && !isCardService) {
+                boolean isAppletService = item.getAppletPrivilegeVo() != null && item.getAppletPrivilegeVo().isPrivilegeValid();
+                boolean isCardService = item.getCardServicePrivilgeVo() != null && item.getCardServicePrivilgeVo().isPrivilegeValid();
+                if (item.getEnableWholePrivilege() == Bool.YES && !isAppletService && !isCardService) {
                     noDiscountAllAmout = noDiscountAllAmout.add(item.getActualAmount());
                     if (item.getPrivilege() != null && item.getPrivilege().getPrivilegeAmount() != null && item.getPrivilege().isValid()) {
                         noDiscPrivilegeAmout = noDiscPrivilegeAmout.add(item.getPrivilege().getPrivilegeAmount());
@@ -787,9 +785,9 @@ public class BaseShoppingCart {
             mShoppingCartVo.setArrayTradeCustomer(new HashMap<Integer, TradeCustomer>());
 
         }
-                removeCustomer(mShoppingCartVo);
-                if (mTradeCustomer != null) {
-                        mShoppingCartVo.getArrayTradeCustomer().put(mTradeCustomer.getCustomerType().value(), mTradeCustomer);
+        removeCustomer(mShoppingCartVo);
+        if (mTradeCustomer != null) {
+            mShoppingCartVo.getArrayTradeCustomer().put(mTradeCustomer.getCustomerType().value(), mTradeCustomer);
         }
     }
 
@@ -808,7 +806,7 @@ public class BaseShoppingCart {
 
         checkNeedBuildMainOrder(mShoppingCartVo.getmTradeVo());
 
-                List<TradeCustomer> listCustomer = mShoppingCartVo.getmTradeVo().getTradeCustomerList();
+        List<TradeCustomer> listCustomer = mShoppingCartVo.getmTradeVo().getTradeCustomerList();
         if (listCustomer != null) {
             for (int i = listCustomer.size() - 1; i >= 0; i--) {
                 TradeCustomer mCustomer = listCustomer.get(i);
@@ -822,7 +820,7 @@ public class BaseShoppingCart {
         } else {
             listCustomer = new ArrayList<TradeCustomer>();
         }
-                if (mTradeCustomers != null) {
+        if (mTradeCustomers != null) {
 
             TradeCustomer mTradeCustomer = mTradeCustomers.get(CustomerType.MEMBER.value());
             if (mTradeCustomer != null) {
@@ -847,7 +845,7 @@ public class BaseShoppingCart {
     }
 
     public void createTradeCustomer(TradeCustomer mTradeCustomer, String tradeUuid) {
-                mTradeCustomer.setEntitycardNum(mTradeCustomer.getEntitycardNum());
+        mTradeCustomer.setEntitycardNum(mTradeCustomer.getEntitycardNum());
         mTradeCustomer.setCustomerType(mTradeCustomer.getCustomerType());
         mTradeCustomer.validateCreate();
         AuthUser authUser = Session.getAuthUser();
@@ -865,7 +863,7 @@ public class BaseShoppingCart {
     protected void buildCallCustomer(ShoppingCartVo mShoppingCartVo, TradeCustomer mTradeCustomer) {
         checkNeedBuildMainOrder(mShoppingCartVo.getmTradeVo());
         if (mTradeCustomer != null) {
-                        List<TradeCustomer> listCustomer = mShoppingCartVo.getmTradeVo().getTradeCustomerList();
+            List<TradeCustomer> listCustomer = mShoppingCartVo.getmTradeVo().getTradeCustomerList();
             if (listCustomer != null) {
                 for (TradeCustomer mCustomer : listCustomer) {
                     if (mCustomer.getCustomerType() == CustomerType.BOOKING) {
@@ -877,10 +875,10 @@ public class BaseShoppingCart {
                 listCustomer = new ArrayList<TradeCustomer>();
             }
 
-                        String haveNoName = BaseApplication.sInstance.getResources().getString(R.string.have_no_name);
+            String haveNoName = BaseApplication.sInstance.getResources().getString(R.string.have_no_name);
             if (TextUtils.isEmpty(mTradeCustomer.getCustomerName())
                     || haveNoName.equals(mTradeCustomer.getCustomerName())) {
-                                if (mShoppingCartVo.getmTradeVo().getTradeExtra() != null && mTradeCustomer.getCustomerPhone() != null
+                if (mShoppingCartVo.getmTradeVo().getTradeExtra() != null && mTradeCustomer.getCustomerPhone() != null
                         && mTradeCustomer.getCustomerPhone()
                         .equals(mShoppingCartVo.getmTradeVo().getTradeExtra().getReceiverPhone())
                         && !TextUtils.isEmpty(mShoppingCartVo.getmTradeVo().getTradeExtra().getReceiverName())) {
@@ -943,8 +941,8 @@ public class BaseShoppingCart {
             }
 
         }
-                if (isGuaDan) {
-                        List<CouponPrivilegeVo> couponPrivilegeVoList = mShoppingCartVo.getmTradeVo().getCouponPrivilegeVoList();
+        if (isGuaDan) {
+            List<CouponPrivilegeVo> couponPrivilegeVoList = mShoppingCartVo.getmTradeVo().getCouponPrivilegeVoList();
             if (couponPrivilegeVoList != null) {
                 for (CouponPrivilegeVo couponPrivilegeVo : couponPrivilegeVoList) {
                     if (!couponPrivilegeVo.isActived()) {
@@ -953,7 +951,7 @@ public class BaseShoppingCart {
                 }
             }
         } else {
-                                                                                                                                                                                                                                            }
+        }
 
         CreateTradeTool.createTradeVo(mShoppingCartVo.getListOrderDishshopVo(),
                 mShoppingCartVo.getListIShopcatItem(),
@@ -963,7 +961,8 @@ public class BaseShoppingCart {
         TradeVo tradeVo = mShoppingCartVo.getmTradeVo();
         tradeVo.setTradeDeposit(mShoppingCartVo.getmTradeVo().getTradeDeposit());
         tradeVo.getTrade().setDishKindCount(mShoppingCartVo.getSelectDishQTYMap().size());
-        tradeVo.setTradeUser(mShoppingCartVo.getTradeUser());        if (tradeVo.getTradeTableList() != null && tradeVo.getTradeTableList().size() > 0) {
+        tradeVo.setTradeUser(mShoppingCartVo.getTradeUser());
+        if (tradeVo.getTradeTableList() != null && tradeVo.getTradeTableList().size() > 0) {
             int peopleCount = 0;
             for (TradeTable tradeTable : tradeVo.getTradeTableList()) {
                 if (!tradeTable.isValid()) {
@@ -990,7 +989,7 @@ public class BaseShoppingCart {
             mTrade.setPrivilegeAmount(mTrade.getPrivilegeAmount().negate());
         }
 
-                List<TradePrivilege> tradePrivileges = mSalesTradeVo.getTradePrivileges();
+        List<TradePrivilege> tradePrivileges = mSalesTradeVo.getTradePrivileges();
         if (Utils.isNotEmpty(tradePrivileges)) {
             for (TradePrivilege tradePrivilege : tradePrivileges) {
                 if (tradePrivilege != null) {
@@ -1008,12 +1007,12 @@ public class BaseShoppingCart {
                 mTradeItem.setActualAmount(mTradeItem.getActualAmount().negate());
                 mTradeItem.setPropertyAmount(mTradeItem.getPropertyAmount().negate());
 
-                                TradePrivilege itemTradePrivilege = item.getTradeItemPrivilege();
+                TradePrivilege itemTradePrivilege = item.getTradeItemPrivilege();
                 if (itemTradePrivilege != null) {
                     itemTradePrivilege.setPrivilegeAmount(itemTradePrivilege.getPrivilegeAmount().negate());
                 }
 
-                                List<TradeItemProperty> itemProperty = item.getTradeItemPropertyList();
+                List<TradeItemProperty> itemProperty = item.getTradeItemPropertyList();
                 if (itemProperty != null) {
                     for (TradeItemProperty property : itemProperty) {
                         property.setAmount(property.getAmount().negate());
@@ -1023,13 +1022,13 @@ public class BaseShoppingCart {
             }
         }
 
-                List<TradePlanActivity> tradePlanActivities = mSalesTradeVo.getTradePlanActivityList();
+        List<TradePlanActivity> tradePlanActivities = mSalesTradeVo.getTradePlanActivityList();
         if (tradePlanActivities != null) {
             for (TradePlanActivity tradePlanActivity : tradePlanActivities) {
                 tradePlanActivity.setOfferValue(tradePlanActivity.getOfferValue().negate());
             }
         }
-                List<TradeTax> tradeTaxs = mSalesTradeVo.getTradeTaxs();
+        List<TradeTax> tradeTaxs = mSalesTradeVo.getTradeTaxs();
         if (tradeTaxs != null) {
             for (TradeTax tradeTax : tradeTaxs) {
                 tradeTax.setTaxAmount(tradeTax.getTaxAmount().negate());
@@ -1040,18 +1039,14 @@ public class BaseShoppingCart {
     }
 
 
-
-
-
-
     public void batchMemberPrivilege(ShoppingCartVo mShoppingCartVo, CustomerResp mCustomer, Boolean isDinner) {
         if (mCustomer == null) {
             return;
         }
 
-                for (IShopcartItemBase item : mergeShopcartItem(mShoppingCartVo)) {
+        for (IShopcartItemBase item : mergeShopcartItem(mShoppingCartVo)) {
 
-                        if ((item.getPrivilege() != null &&
+            if ((item.getPrivilege() != null &&
                     (item.getPrivilege().getPrivilegeType() == PrivilegeType.DISCOUNT
                             || item.getPrivilege().getPrivilegeType() == PrivilegeType.REBATE
                             || item.getPrivilege().getPrivilegeType() == PrivilegeType.FREE
@@ -1059,7 +1054,7 @@ public class BaseShoppingCart {
                     && item.getPrivilege().isValid()) || item.isGroupDish()) {
                 continue;
             }
-                        if (item.getCardServicePrivilgeVo() != null && item.getCardServicePrivilgeVo().isPrivilegeValid()) {
+            if (item.getCardServicePrivilgeVo() != null && item.getCardServicePrivilgeVo().isPrivilegeValid()) {
                 continue;
             }
 
@@ -1081,7 +1076,7 @@ public class BaseShoppingCart {
         Map<String, TradeItemPlanActivity> tradeItemPlanActivityMap = covertItemPlanListToMap(mShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList());
 
         for (IShopcartItemBase item : mergeShopcartItem(mShoppingCartVo)) {
-                                    if ((item.getPrivilege() != null &&
+            if ((item.getPrivilege() != null &&
                     (item.getPrivilege().getPrivilegeType() == PrivilegeType.DISCOUNT
                             || item.getPrivilege().getPrivilegeType() == PrivilegeType.REBATE
                             || item.getPrivilege().getPrivilegeType() == PrivilegeType.FREE
@@ -1095,7 +1090,7 @@ public class BaseShoppingCart {
                 continue;
             }
 
-                        if (item.getCardServicePrivilgeVo() != null && item.getCardServicePrivilgeVo().isPrivilegeValid()) {
+            if (item.getCardServicePrivilgeVo() != null && item.getCardServicePrivilgeVo().isPrivilegeValid()) {
                 continue;
             }
 
@@ -1142,7 +1137,7 @@ public class BaseShoppingCart {
 
     public static Map<String, TradeItemPlanActivity> covertItemPlanListToMap(List<TradeItemPlanActivity> tradeItemPlanList) {
         Map<String, TradeItemPlanActivity> itemMap = new HashMap<String, TradeItemPlanActivity>();
-                if (tradeItemPlanList != null && tradeItemPlanList.size() > 0) {
+        if (tradeItemPlanList != null && tradeItemPlanList.size() > 0) {
 
             for (TradeItemPlanActivity tradeItemPlan : tradeItemPlanList) {
                 if (tradeItemPlan.getStatusFlag() == StatusFlag.INVALID) {
@@ -1173,13 +1168,13 @@ public class BaseShoppingCart {
 
     public static void setDishMemberPrivilege(TradeVo tradeVo, IShopcartItemBase mIShopcartItemBase, CustomerResp mCustomer, Boolean isDinner) {
 
-                if (mIShopcartItemBase.getDishShop() == null) {
+        if (mIShopcartItemBase.getDishShop() == null) {
             return;
         }
 
 
-
-        if (mIShopcartItemBase.getIsChangedPrice() == Bool.YES) {            mIShopcartItemBase.setPrivilege(null);
+        if (mIShopcartItemBase.getIsChangedPrice() == Bool.YES) {
+            mIShopcartItemBase.setPrivilege(null);
             return;
         }
         Map<String, TradeItemPlanActivity> tradeItemPlanActivityMap = covertItemPlanListToMap(tradeVo.getTradeItemPlanActivityList());
@@ -1195,23 +1190,23 @@ public class BaseShoppingCart {
             return;
         }
 
-                if (mIShopcartItemBase.getCardServicePrivilgeVo() != null && mIShopcartItemBase.getCardServicePrivilgeVo().isPrivilegeValid()) {
+        if (mIShopcartItemBase.getCardServicePrivilgeVo() != null && mIShopcartItemBase.getCardServicePrivilgeVo().isPrivilegeValid()) {
             return;
         }
 
-                if(mIShopcartItemBase.getAppletPrivilegeVo()!=null && mIShopcartItemBase.getAppletPrivilegeVo().isPrivilegeValid()){
+        if (mIShopcartItemBase.getAppletPrivilegeVo() != null && mIShopcartItemBase.getAppletPrivilegeVo().isPrivilegeValid()) {
             return;
         }
 
-        if (mCustomer == null) {
+        if (mCustomer == null || mCustomer.levelId==null) {
             return;
         }
 
-                if (mCustomer.card != null && mCustomer.card.getRightStatus() != CardRechagingStatus.EFFECTIVE) {
+        if (mCustomer.card != null && mCustomer.card.getRightStatus() != CardRechagingStatus.EFFECTIVE) {
             return;
         }
 
-                CrmMemberDay crmMemberDay = ServerSettingCache.getInstance().getCrmMemberDay();
+        CrmMemberDay crmMemberDay = ServerSettingCache.getInstance().getCrmMemberDay();
         boolean isInMemberDay = isInMemberDay(crmMemberDay);
 
 
@@ -1221,11 +1216,11 @@ public class BaseShoppingCart {
             mCardLevelSetting = mCustomer.card.getCardLevelSetting();
         }
 
-                CustomerDal operates = OperatesFactory.create(CustomerDal.class);
+        CustomerDal operates = OperatesFactory.create(CustomerDal.class);
         Long dishID = mIShopcartItemBase.getDishShop().getBrandDishId();
         DishMemberPrice mDishMemberPrice = null;
 
-                mDishMemberPrice = operates.findDishMemberPriceByDishId(dishID, mCustomer.levelId);
+        mDishMemberPrice = operates.findDishMemberPriceByDishId(dishID, mCustomer.levelId);
         Long privilegeTime = tradeVo.getTrade().getServerCreateTime();
         if (privilegeTime == null) {
             privilegeTime = System.currentTimeMillis();
@@ -1234,7 +1229,7 @@ public class BaseShoppingCart {
             TradePrivilege mTradePrivilege = BuildPrivilegeTool.mathMemberPrice(mIShopcartItemBase, mDishMemberPrice, tradeVo.getTrade().getUuid());
             mIShopcartItemBase.setPrivilege(mTradePrivilege);
         } else {
-                        TradePrivilege temp = mIShopcartItemBase.getPrivilege();
+            TradePrivilege temp = mIShopcartItemBase.getPrivilege();
             if (temp != null && (temp.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT || temp.getPrivilegeType() == PrivilegeType.MEMBER_PRICE || temp.getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
                 List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
                 if (temp.getId() != null && tradePrivileges != null) {
@@ -1252,19 +1247,18 @@ public class BaseShoppingCart {
     }
 
 
-
     public static boolean isInDate(Long time, String strDateBegin, String strDateEnd) {
         if (strDateBegin.equals("00:00") && strDateEnd.equals("00:00"))
             return true;
 
         Calendar calendar = Calendar.getInstance();
-                String[] startTime = strDateBegin.split(":");
+        String[] startTime = strDateBegin.split(":");
         calendar.set(Calendar.HOUR_OF_DAY, Integer.valueOf(startTime[0]));
         calendar.set(Calendar.MINUTE, Integer.valueOf(startTime[1]));
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.MILLISECOND, 0);
         long startTimeL = calendar.getTimeInMillis();
-                String[] endTime = strDateEnd.split(":");
+        String[] endTime = strDateEnd.split(":");
         calendar.set(Calendar.HOUR_OF_DAY, Integer.valueOf(endTime[0]));
         calendar.set(Calendar.MINUTE, Integer.valueOf(endTime[1]));
         calendar.set(Calendar.SECOND, 0);
@@ -1278,14 +1272,14 @@ public class BaseShoppingCart {
         if (crmMemberDay == null) {
             return false;
         }
-                if (!crmMemberDay.isValid()) {
+        if (!crmMemberDay.isValid()) {
             return false;
         }
-                if (!crmMemberDay.getIsSwitch()) {
+        if (!crmMemberDay.getIsSwitch()) {
             return false;
         }
-                String value = crmMemberDay.getMemberDayValue();
-                if (EmptyUtils.isEmpty(value)) {
+        String value = crmMemberDay.getMemberDayValue();
+        if (EmptyUtils.isEmpty(value)) {
             return false;
         }
         if (EmptyUtils.isEmpty(crmMemberDay.getMemberPriceTempletId())) {
@@ -1293,12 +1287,12 @@ public class BaseShoppingCart {
         }
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-                if (crmMemberDay.getMemberDayType() == 1) {
-                        String week = String.valueOf(cal.get(Calendar.DAY_OF_WEEK) - 1);
+        if (crmMemberDay.getMemberDayType() == 1) {
+            String week = String.valueOf(cal.get(Calendar.DAY_OF_WEEK) - 1);
             return value.contains(week);
 
         } else if (crmMemberDay.getMemberDayType() == 2) {
-                        String day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+            String day = String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
             return value.contains(day);
         }
         return false;
@@ -1316,7 +1310,7 @@ public class BaseShoppingCart {
         }
         List<IShopcartItem> tempList = new ArrayList<IShopcartItem>();
         for (IShopcartItem shopcartItem : list) {
-                        if (shopcartItem.getTotalQty() != null && (shopcartItem.getTotalQty().doubleValue() - 0 == 0)) {
+            if (shopcartItem.getTotalQty() != null && (shopcartItem.getTotalQty().doubleValue() - 0 == 0)) {
                 continue;
             }
             if ((shopcartItem.getStatusFlag() == StatusFlag.VALID)
@@ -1422,7 +1416,7 @@ public class BaseShoppingCart {
             }
         }
 
-                removeReason(mTradeVo, OperateType.TRADE_DISCOUNT);
+        removeReason(mTradeVo, OperateType.TRADE_DISCOUNT);
         removeFreeReason(mTradeVo);
     }
 
@@ -1448,7 +1442,6 @@ public class BaseShoppingCart {
         }
 
     }
-
 
 
     public void removeReason(TradeVo mTradeVo, OperateType operateType) {
@@ -1496,7 +1489,7 @@ public class BaseShoppingCart {
 
 
     public void setMarktingTradePrivilege(TradeVo tradeVo) {
-                        List<TradePlanActivity> tradePlans = tradeVo.getTradePlanActivityList();
+        List<TradePlanActivity> tradePlans = tradeVo.getTradePlanActivityList();
         if (EmptyUtils.isEmpty(tradePlans)) {
             List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
             if (EmptyUtils.isEmpty(tradePrivileges)) {
@@ -1517,9 +1510,9 @@ public class BaseShoppingCart {
             for (TradePlanActivity tradePlan : tradePlans) {
                 Long planId = tradePlan.getPlanId();
                 boolean hasPlanId = false;
-                                for (TradePrivilege tradePrivilege : tradePrivileges) {
+                for (TradePrivilege tradePrivilege : tradePrivileges) {
                     if (tradePrivilege.getPrivilegeType() == PrivilegeType.MARKTING && planId != null && tradePrivilege.getPromoId() != null && planId.compareTo(tradePrivilege.getPromoId()) == 0) {
-                                                hasPlanId = true;
+                        hasPlanId = true;
                         tradePlanToPrivilege(tradePlan, tradePrivilege);
                         break;
                     }
@@ -1527,7 +1520,7 @@ public class BaseShoppingCart {
                 if (hasPlanId) {
                     continue;
                 }
-                                TradePrivilege tradePrivilege = new TradePrivilege();
+                TradePrivilege tradePrivilege = new TradePrivilege();
                 tradePlanToPrivilege(tradePlan, tradePrivilege);
                 tradePrivileges.add(tradePrivilege);
             }
@@ -1626,7 +1619,7 @@ public class BaseShoppingCart {
                     || type == PrivilegeType.MEMBER_REBATE
                     || type == PrivilegeType.WECHAT_CARD_COUPONS
                     || type == PrivilegeType.MARKTING
-                    ) {
+            ) {
                 return type.value().toString() + "forOrder";
             } else {
                 return type.value().toString();
@@ -1637,7 +1630,7 @@ public class BaseShoppingCart {
                     || type == PrivilegeType.FREE
                     || type == PrivilegeType.GIVE
                     || type == PrivilegeType.WECHAT_CARD_COUPONS
-                    ) {
+            ) {
                 return "forDish";
             } else {
                 return type.value().toString();
@@ -1723,7 +1716,7 @@ public class BaseShoppingCart {
     public List<IShopcartItem> getAllValidShopcartItem(List<IShopcartItem> list) {
         List<IShopcartItem> tempList = new ArrayList<>();
         if (list != null) {
-                        Map<String, IShopcartItem> validShopcartItemMap = new HashMap<String, IShopcartItem>();
+            Map<String, IShopcartItem> validShopcartItemMap = new HashMap<String, IShopcartItem>();
             for (IShopcartItem item : list) {
                 if (item.getStatusFlag() == StatusFlag.VALID && !TextUtils.isEmpty(item.getRelateTradeItemUuid())) {
                     validShopcartItemMap.put(item.getRelateTradeItemUuid(), item);
@@ -1733,7 +1726,7 @@ public class BaseShoppingCart {
                 if (item.getStatusFlag() == StatusFlag.VALID || (item.getStatusFlag() == StatusFlag.INVALID
                         && (item.getInvalidType() == InvalidType.SPLIT || item.getInvalidType() == InvalidType.RETURN_QTY
                         || item.getInvalidType() == InvalidType.MODIFY_DISH))) {
-                                        if (item.getStatusFlag() == StatusFlag.INVALID
+                    if (item.getStatusFlag() == StatusFlag.INVALID
                             && (item.getInvalidType() == InvalidType.RETURN_QTY
                             || (item.getInvalidType() == InvalidType.MODIFY_DISH))) {
                         if (validShopcartItemMap.get(item.getUuid()) == null) {
@@ -1751,7 +1744,8 @@ public class BaseShoppingCart {
     public boolean isOnlySingleAddDish(List<IShopcartItem> list, List<String> uuids) {
         for (IShopcartItem iShopcartItem : list) {
             String uuid = iShopcartItem.getUuid();
-            if (TextUtils.isEmpty(uuid) || !uuids.contains(uuid)) {                continue;
+            if (TextUtils.isEmpty(uuid) || !uuids.contains(uuid)) {
+                continue;
             }
 
             if (TextUtils.isEmpty(iShopcartItem.getBatchNo())
@@ -1759,7 +1753,7 @@ public class BaseShoppingCart {
                 continue;
             }
 
-                        if (iShopcartItem.isGroupDish()) {
+            if (iShopcartItem.isGroupDish()) {
                 return false;
             }
         }
@@ -1827,7 +1821,7 @@ public class BaseShoppingCart {
                 }
             }
         }
-                if (isRemoveExtrage) {
+        if (isRemoveExtrage) {
             tradeVo.setExtraChargeMap(null);
             if (tradeVo.getBanquetVo() != null && isRmBanquet) {
                 TradePrivilege tradePrivilege = tradeVo.getBanquetVo().getTradePrivilege();
@@ -1881,12 +1875,12 @@ public class BaseShoppingCart {
             }
         }
         MathManualMarketTool.removeAllActivity(tradeVo);
-                List<TradeItemVo> tradeItemVoList = tradeVo.getTradeItemList();
+        List<TradeItemVo> tradeItemVoList = tradeVo.getTradeItemList();
         if (tradeItemVoList != null) {
             for (TradeItemVo tradeItemVo : tradeItemVoList) {
                 if (tradeItemVo.getTradeItemPrivilege() != null) {
                     PrivilegeType privilegeType = tradeItemVo.getTradeItemPrivilege().getPrivilegeType();
-                                        if (privilegeType != PrivilegeType.MEMBER_REBATE && privilegeType != PrivilegeType.MEMBER_PRICE && privilegeType != PrivilegeType.AUTO_DISCOUNT || isRemoveMemeberPrice) {
+                    if (privilegeType != PrivilegeType.MEMBER_REBATE && privilegeType != PrivilegeType.MEMBER_PRICE && privilegeType != PrivilegeType.AUTO_DISCOUNT || isRemoveMemeberPrice) {
                         if (tradeItemVo.getTradeItemPrivilege().getId() == null) {
                             tradeItemVo.setTradeItemPrivilege(null);
                         } else {
@@ -1895,7 +1889,7 @@ public class BaseShoppingCart {
                         }
                     }
                 }
-                                if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
+                if (tradeItemVo.getCouponPrivilegeVo() != null && tradeItemVo.getCouponPrivilegeVo().getTradePrivilege() != null) {
                     TradePrivilege tradePrivilege = tradeItemVo.getCouponPrivilegeVo().getTradePrivilege();
                     if (tradePrivilege.getId() == null) {
                         tradeItemVo.getCouponPrivilegeVo().setTradePrivilege(null);
@@ -1919,17 +1913,17 @@ public class BaseShoppingCart {
         }
         for (IShopcartItem item : shopcartItemList) {
             if (item.getCouponPrivilegeVo() != null && item.getCouponPrivilegeVo().getTradePrivilege() != null) {
-                                BigDecimal count = BigDecimal.ONE;
+                BigDecimal count = BigDecimal.ONE;
 
-                                BigDecimal privilegeAmount = item.getPrice().multiply(count);
+                BigDecimal privilegeAmount = item.getPrice().multiply(count);
                 item.getCouponPrivilegeVo().getTradePrivilege().setPrivilegeAmount(privilegeAmount.negate());
                 item.getCouponPrivilegeVo().getTradePrivilege().setPrivilegeValue(privilegeAmount);
 
                 BigDecimal depositValue = BigDecimal.ZERO;
-                                if (tradeVo.getTradeDeposit() != null) {
+                if (tradeVo.getTradeDeposit() != null) {
                     depositValue = tradeVo.getTradeDeposit().getDepositPay();
                 }
-                                BigDecimal saleAmount = tradeVo.getTrade().getSaleAmount().subtract(depositValue);
+                BigDecimal saleAmount = tradeVo.getTrade().getSaleAmount().subtract(depositValue);
                 if ((saleAmount.compareTo(BigDecimal.ZERO) == 0
                         && item.getCouponPrivilegeVo().getCoupon().getFullValue().doubleValue() != 0)
                         || item.getCouponPrivilegeVo().getCoupon() == null) {
@@ -1947,7 +1941,7 @@ public class BaseShoppingCart {
 
             }
         }
-                MathShoppingCartTool.mathTotalPrice(shopcartItemList, tradeVo);
+        MathShoppingCartTool.mathTotalPrice(shopcartItemList, tradeVo);
     }
 
 
@@ -1970,7 +1964,7 @@ public class BaseShoppingCart {
                 }
             }
         }
-                MathShoppingCartTool.mathTotalPrice(iShopcartItems, shoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(iShopcartItems, shoppingCartVo.getmTradeVo());
 
         for (ModifyShoppingCartListener listener : arrayListener.values()) {
             listener.updateDish(iShopcartItems, shoppingCartVo.getmTradeVo());
@@ -2003,7 +1997,7 @@ public class BaseShoppingCart {
 
             }
         }
-                MathShoppingCartTool.mathTotalPrice(iShopcartItems,
+        MathShoppingCartTool.mathTotalPrice(iShopcartItems,
                 shoppingCartVo.getmTradeVo());
         for (ModifyShoppingCartListener listener : arrayListener.values()) {
             listener.updateDish(iShopcartItems, shoppingCartVo.getmTradeVo());
@@ -2012,14 +2006,13 @@ public class BaseShoppingCart {
 
 
     public void removeDefineOrGiftCoupon(ShoppingCartVo shoppingCartVo, CouponPrivilegeVo couponPrivilegeVo) {
-                if (couponPrivilegeVo.getCoupon().getCouponType() == CouponType.GIFT
+        if (couponPrivilegeVo.getCoupon().getCouponType() == CouponType.GIFT
                 && couponPrivilegeVo.getShopcartItem() != null && couponPrivilegeVo.getTradePrivilege() != null) {
             removeGiftCouponePrivilege(couponPrivilegeVo.getTradePrivilege().getPromoId(), shoppingCartVo, true);
         } else {
             removeCouponPrivilege(shoppingCartVo, couponPrivilegeVo, true);
         }
     }
-
 
 
     public void removeCouponPrivilege(ShoppingCartVo shoppingCartVo, CouponPrivilegeVo couponPrivilegeVo, boolean isNeedListener) {
@@ -2050,7 +2043,7 @@ public class BaseShoppingCart {
             }
         }
 
-                List<IShopcartItem> shopcartItemList = mergeShopcartItem(shoppingCartVo);
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(shoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
                 shoppingCartVo.getmTradeVo());
@@ -2069,9 +2062,9 @@ public class BaseShoppingCart {
         }
         CouponType couponType = couponPrivilegeVo.getCoupon().getCouponType();
         for (CouponPrivilegeVo mCouponPrivilegeVo : couponPrivilegeVoList) {
-                        if (mCouponPrivilegeVo.getCoupon() != null && mCouponPrivilegeVo.getTradePrivilege() != null
+            if (mCouponPrivilegeVo.getCoupon() != null && mCouponPrivilegeVo.getTradePrivilege() != null
                     && mCouponPrivilegeVo.getTradePrivilege().isValid()
-                    ) {
+            ) {
                 if (mCouponPrivilegeVo.getCoupon().getCouponType() != couponType || couponType != CouponType.CASH) {
                     return false;
                 }
@@ -2125,7 +2118,7 @@ public class BaseShoppingCart {
                 TradePrivilege mTradePrivilege = listPrivilege.get(i);
 
                 if (mTradePrivilege != null && (mTradePrivilege.getPrivilegeType() == privilegeType)) {
-                                        if (outTimeExtra != null && outTimeExtra.getId().longValue() == mTradePrivilege.getPromoId().longValue()) {
+                    if (outTimeExtra != null && outTimeExtra.getId().longValue() == mTradePrivilege.getPromoId().longValue()) {
                         continue;
                     }
 
@@ -2194,7 +2187,6 @@ public class BaseShoppingCart {
     }
 
 
-
     public void removeAllCouponPrivilege(ShoppingCartVo shoppingCartVo, boolean isNeedListener) {
         List<CouponPrivilegeVo> couponPrivilegeVoList = shoppingCartVo.getmTradeVo().getCouponPrivilegeVoList();
         if (Utils.isNotEmpty(couponPrivilegeVoList)) {
@@ -2209,7 +2201,7 @@ public class BaseShoppingCart {
             }
         }
 
-                List<IShopcartItem> shopcartItemList = mergeShopcartItem(shoppingCartVo);
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(shoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, shoppingCartVo.getmTradeVo());
         if (isNeedListener) {
 
@@ -2249,7 +2241,6 @@ public class BaseShoppingCart {
     }
 
 
-
     public void setOpenIdenty(ShoppingCartVo shoppingCartVo, String openId) {
         checkNeedBuildMainOrder(shoppingCartVo.getmTradeVo());
         if (!TextUtils.isEmpty(openId)) {
@@ -2266,17 +2257,17 @@ public class BaseShoppingCart {
 
 
     protected void addSalesPromotion(@NonNull ShoppingCartVo shoppingCartVo, @NonNull SalesPromotionRuleVo salesPromotionRuleVo, @NonNull List<IShopcartItem> selectedShopcartItems, @Nullable CustomerResp customerNew) {
-                if (MathSalesPromotionTool.canAddSalesPromotion(salesPromotionRuleVo, selectedShopcartItems, customerNew)) {
-                        MathSalesPromotionTool.mathManualAddSalesPromotion(salesPromotionRuleVo, selectedShopcartItems, shoppingCartVo.getmTradeVo(), customerNew);
-                        removeBanquetOnly(shoppingCartVo.getmTradeVo());
-                        removeGiftCouponPrivilege(selectedShopcartItems, shoppingCartVo);
-                        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(shoppingCartVo),
+        if (MathSalesPromotionTool.canAddSalesPromotion(salesPromotionRuleVo, selectedShopcartItems, customerNew)) {
+            MathSalesPromotionTool.mathManualAddSalesPromotion(salesPromotionRuleVo, selectedShopcartItems, shoppingCartVo.getmTradeVo(), customerNew);
+            removeBanquetOnly(shoppingCartVo.getmTradeVo());
+            removeGiftCouponPrivilege(selectedShopcartItems, shoppingCartVo);
+            MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(shoppingCartVo),
                     shoppingCartVo.getmTradeVo());
-                        for (int key : arrayListener.keySet()) {
+            for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).addSalesPromotion(true, shoppingCartVo.getmTradeVo());
             }
         } else {
-                        for (int key : arrayListener.keySet()) {
+            for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).addSalesPromotion(false, null);
             }
         }
@@ -2297,9 +2288,9 @@ public class BaseShoppingCart {
 
     protected void removeSalesPromotion(@NonNull ShoppingCartVo shoppingCartVo, Long planId, CustomerResp mCustomer, boolean isDinner) {
         TradeVo mTradeVo = shoppingCartVo.getmTradeVo();
-                MathSalesPromotionTool.removeTradePlanActivity(mTradeVo.getTradePlanActivityList(), mTradeVo.getTradeItemPlanActivityList(), planId);
-                batchMemberPrivilege(shoppingCartVo);
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(shoppingCartVo), mTradeVo);
+        MathSalesPromotionTool.removeTradePlanActivity(mTradeVo.getTradePlanActivityList(), mTradeVo.getTradeItemPlanActivityList(), planId);
+        batchMemberPrivilege(shoppingCartVo);
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(shoppingCartVo), mTradeVo);
 
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeSalesPromotion(shoppingCartVo.getmTradeVo());
@@ -2310,14 +2301,13 @@ public class BaseShoppingCart {
     public void removeSalesPromotion(@NonNull ShoppingCartVo shoppingCartVo, String tradePlanUuid, CustomerResp mCustomer, boolean isDinner) {
         TradeVo mTradeVo = shoppingCartVo.getmTradeVo();
         MathSalesPromotionTool.removeTradePlanActivity(mTradeVo.getTradePlanActivityList(), mTradeVo.getTradeItemPlanActivityList(), tradePlanUuid);
-                batchMemberPrivilege(shoppingCartVo);
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(shoppingCartVo), mTradeVo);
+        batchMemberPrivilege(shoppingCartVo);
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(shoppingCartVo), mTradeVo);
 
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeSalesPromotion(mTradeVo);
         }
     }
-
 
 
     public void removeSalesPromotion(TradeVo tradeVo) {
@@ -2391,11 +2381,11 @@ public class BaseShoppingCart {
         }
 
         for (SalesPromotionRuleVo salesPromotionRuleVo : map.keySet()) {
-                        MathSalesPromotionTool.mathManualAddSalesPromotion(salesPromotionRuleVo, map.get(salesPromotionRuleVo), shoppingCartVo.getmTradeVo(), CustomerManager.getInstance().getLoginCustomer());
+            MathSalesPromotionTool.mathManualAddSalesPromotion(salesPromotionRuleVo, map.get(salesPromotionRuleVo), shoppingCartVo.getmTradeVo(), CustomerManager.getInstance().getLoginCustomer());
         }
 
-                removeBanquetOnly(shoppingCartVo.getmTradeVo());
-                for (int key : arrayListener.keySet()) {
+        removeBanquetOnly(shoppingCartVo.getmTradeVo());
+        for (int key : arrayListener.keySet()) {
             arrayListener.get(key).addSalesPromotion(true, shoppingCartVo.getmTradeVo());
         }
     }

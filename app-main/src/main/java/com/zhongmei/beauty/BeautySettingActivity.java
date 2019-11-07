@@ -96,7 +96,7 @@ public class BeautySettingActivity extends BaseActivity {
         if (!ClickManager.getInstance().isClicked()) {
             changeLastStyle(textView, setting_tables);
             setCurrentStyle(setting_tables);
-            switchFragment(R.id.right_container1, new BeautyCashboxFragment_(), setting_tables);
+            switchFragment(R.id.right_container1, new BeautySettingTableBindFragment_(), setting_tables);
             textView = setting_tables;
         }
     }
@@ -123,7 +123,7 @@ public class BeautySettingActivity extends BaseActivity {
             try {
                 FragmentTransaction mFragmentTransaction = mFragmentManager.beginTransaction();
                 mFragmentTransaction.replace(containerId, fragment);
-                mFragmentTransaction.commit();
+                mFragmentTransaction.commitAllowingStateLoss();
             } catch (Exception e) {
                 Log.e(TAG, "", e);
             }

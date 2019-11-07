@@ -114,13 +114,13 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     private static DinnerShoppingCart instance = null;
 
     protected ShoppingCartVo dinnerShoppingCartVo = new ShoppingCartVo();
-        protected DinnertableTradeInfo mainTradeInfo;
+    protected DinnertableTradeInfo mainTradeInfo;
 
     public DinnertableTradeInfo getCurrentTradeInfo() {
         return currentTradeInfo;
     }
 
-        protected DinnertableTradeInfo currentTradeInfo;
+    protected DinnertableTradeInfo currentTradeInfo;
 
 
     public static DinnerShoppingCart getInstance() {
@@ -235,7 +235,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     public void updateTable(TradeTable mTradeTable) {
         List<TradeTable> listTradeTable = dinnerShoppingCartVo.getmTradeVo().getTradeTableList();
 
-        if (Utils.isEmpty(listTradeTable)) {            return;
+        if (Utils.isEmpty(listTradeTable)) {
+            return;
         }
 
         for (int i = 0; i < listTradeTable.size(); i++) {
@@ -254,7 +255,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
         if (mTradeCustomer == null) {
-                        if (dinnerShoppingCartVo.getmTradeMemer() != null) {
+            if (dinnerShoppingCartVo.getmTradeMemer() != null) {
                 dinnerShoppingCartVo.getmTradeMemer().setStatusFlag(StatusFlag.INVALID);
                 dinnerShoppingCartVo.getArrayTradeCustomer().put(null, dinnerShoppingCartVo.getmTradeMemer());
             }
@@ -289,7 +290,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         dinnerShoppingCartVo.getArrayTradeCustomer().remove(CustomerType.CUSTOMER.value());
         dinnerShoppingCartVo.getArrayTradeCustomer().remove(CustomerType.CARD.value());
     }
-
 
 
     public void addTable(TradeTable mTradeTable) {
@@ -335,17 +335,16 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         if (isNeedSetGroup)
             mShopcartItem.setIsGroupDish(dinnerShoppingCartVo.isGroupMode());
         addShippingToCart(dinnerShoppingCartVo, mShopcartItem, isTempDish);
-                if (!isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
+        if (!isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
             setDishMemberPrivilege(dinnerShoppingCartVo, mShopcartItem, CustomerManager.getInstance().getDinnerLoginCustomer(), false);
         }
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).addToShoppingCart(allIttem, dinnerShoppingCartVo.getmTradeVo(), mShopcartItem);
         }
     }
-
 
 
     public BigDecimal getSubTradeCount() {
@@ -367,7 +366,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         shopcartItemBase.recoveryDelete();
 
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
         }
@@ -376,7 +375,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     public void removeDinnerTradeItem(TradeItemVo mTradeItemVo) {
         ShopcartItem mShopcartItem = removeTradeItem(dinnerShoppingCartVo, mTradeItemVo);
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeShoppingCart(mergeShopcartItem(dinnerShoppingCartVo),
@@ -388,7 +387,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     public void removeDinnerDish(IShopcartItem shopcartItem) {
         removeDish(dinnerShoppingCartVo, shopcartItem);
-                if (!TextUtils.isEmpty(shopcartItem.getRelateTradeItemUuid())
+        if (!TextUtils.isEmpty(shopcartItem.getRelateTradeItemUuid())
                 && Utils.isNotEmpty(dinnerShoppingCartVo.getListIShopcatItem())) {
             IShopcartItemBase iShopcartItem = getIShopcartItemByUUID(dinnerShoppingCartVo, shopcartItem.getRelateTradeItemUuid());
             if (iShopcartItem instanceof ReadonlyShopcartItem) {
@@ -402,7 +401,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 }
             }
         }
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
@@ -422,7 +421,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 mChangePageListener,
                 mFragmentManager);
 
-                if (mSetmealShopcartItem == null && !TextUtils.isEmpty(mShopcartItem.getRelateTradeItemUuid())
+        if (mSetmealShopcartItem == null && !TextUtils.isEmpty(mShopcartItem.getRelateTradeItemUuid())
                 && Utils.isNotEmpty(dinnerShoppingCartVo.getListIShopcatItem())) {
             IShopcartItem iShopcartItem = getIShopcartItemByUUID(dinnerShoppingCartVo, mShopcartItem.getRelateTradeItemUuid());
             if (iShopcartItem instanceof ReadonlyShopcartItem) {
@@ -439,13 +438,13 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         resetSelectDishQTY(dinnerShoppingCartVo);
         List<IShopcartItem> allShopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                MathManualMarketTool.removeShopcartItem(dinnerShoppingCartVo.getmTradeVo(),
+        MathManualMarketTool.removeShopcartItem(dinnerShoppingCartVo.getmTradeVo(),
                 allShopcartItemList,
                 mShopcartItem,
                 true,
                 false);
 
-                MathShoppingCartTool.mathTotalPrice(allShopcartItemList, dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(allShopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeShoppingCart(allShopcartItemList,
@@ -458,7 +457,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         removeDish(dinnerShoppingCartVo, mShopcartItem);
         resetSelectDishQTY(dinnerShoppingCartVo);
         List<IShopcartItem> allShopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                MathManualMarketTool.removeShopcartItem(dinnerShoppingCartVo.getmTradeVo(),
+        MathManualMarketTool.removeShopcartItem(dinnerShoppingCartVo.getmTradeVo(),
                 allShopcartItemList,
                 mShopcartItem,
                 true,
@@ -466,7 +465,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    public void removeAppletItem(IShopcartItem shopcartItem){
+    public void removeAppletItem(IShopcartItem shopcartItem) {
         removeDinnerShoppingcartItem(shopcartItem);
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeMarketActivity(dinnerShoppingCartVo.getmTradeVo());
@@ -479,11 +478,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 dinnerShoppingCartVo.getListIShopcatItem(),
                 mShopcartItem);
         resetSelectDishQTY(dinnerShoppingCartVo);
-                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(),
+        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(),
                 mergeShopcartItem(dinnerShoppingCartVo),
                 true,
                 false);
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(mergeShopcartItem(dinnerShoppingCartVo),
@@ -500,11 +499,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         OperateShoppingCart.addToShoppingCart(dinnerShoppingCartVo.getmTradeVo(),
                 dinnerShoppingCartVo.getListOrderDishshopVo(),
                 mShopcartItem);
-                if (!isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
+        if (!isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
             setDishMemberPrivilege(dinnerShoppingCartVo, mShopcartItem, CustomerManager.getInstance().getDinnerLoginCustomer(), false);
         }
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).addToShoppingCart(allIttem, dinnerShoppingCartVo.getmTradeVo(), mShopcartItem);
@@ -514,7 +513,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     public void updateDinnerDish(IShopcartItemBase mShopcartItemBase, Boolean isTempDish) {
         updateDish(dinnerShoppingCartVo, mShopcartItemBase, isTempDish);
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         resetSelectDishQTY(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
@@ -533,7 +532,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 updateDish(dinnerShoppingCartVo, item.getItem(), false);
         }
 
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         resetSelectDishQTY(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
@@ -568,7 +567,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         resetSelectDishQTY(dinnerShoppingCartVo);
         for (int key : arrayListener.keySet()) {
@@ -643,7 +642,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         setDeskId(currentTradeInfo);
         initTableTradeInfo(mainInfo, currentTradeInfo);
 
-                if (currentTradeInfo.getTradeVo() != null)
+        if (currentTradeInfo.getTradeVo() != null)
             dinnerShoppingCartVo.setTradeUser(currentTradeInfo.getTradeVo().getTradeUser());
         List<IShopcartItem> listShopcartItem = currentTradeInfo.getItems();
         if (listShopcartItem != null) {
@@ -662,11 +661,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         convertCustomerToArrayCustomer();
         resetSelectDishQTY(dinnerShoppingCartVo);
 
-                if (getOrder().getTrade().getTradePayStatus() != TradePayStatus.PAYING) {
+        if (getOrder().getTrade().getTradePayStatus() != TradePayStatus.PAYING) {
             MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), currentTradeInfo.getTradeVo());
             CheckGiftCouponIsActived(dinnerShoppingCartVo);
         }
-                if (isCallback) {
+        if (isCallback) {
             for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).resetOrder(mergeShopcartItem(dinnerShoppingCartVo),
                         dinnerShoppingCartVo.getmTradeVo());
@@ -707,7 +706,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
     private void convertCustomerToArrayCustomer() {
-                List<TradeCustomer> listTradeCustomer = dinnerShoppingCartVo.getmTradeVo().getTradeCustomerList();
+        List<TradeCustomer> listTradeCustomer = dinnerShoppingCartVo.getmTradeVo().getTradeCustomerList();
         if (listTradeCustomer != null) {
             for (TradeCustomer mCustomer : listTradeCustomer) {
                 if (dinnerShoppingCartVo.getArrayTradeCustomer() == null) {
@@ -753,11 +752,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         updateTradeVoNoTradeInfo(tradeVo, false, true);
     }
 
-        public void updateDataFromTradeVo(TradeVo tradeVo) {
+    public void updateDataFromTradeVo(TradeVo tradeVo) {
         this.updateDataFromTradeVo(tradeVo, true);
     }
 
-    public void updateDataWithTrade(Trade trade) {        if (trade != null && this.dinnerShoppingCartVo != null && this.dinnerShoppingCartVo.getmTradeVo() != null) {
+    public void updateDataWithTrade(Trade trade) {
+        if (trade != null && this.dinnerShoppingCartVo != null && this.dinnerShoppingCartVo.getmTradeVo() != null) {
             this.dinnerShoppingCartVo.getmTradeVo().setTrade(trade);
         }
     }
@@ -800,16 +800,17 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
     public void updateBeautyDataFromTradeVo(TradeVo tradeVo, boolean isCallback) {
-                if (tradeVo == null || dinnerShoppingCartVo == null || tradeVo.getTrade().getBusinessType().equalsValue(BusinessType.ONLINE_RECHARGE.value())) {
+        if (tradeVo == null || dinnerShoppingCartVo == null || tradeVo.getTrade().getBusinessType().equalsValue(BusinessType.ONLINE_RECHARGE.value())) {
             return;
         }
 
-        if (dinnerShoppingCartVo.getDinnertableTradeInfo() != null){             DinnertableTradeInfo dinnertableTradeInfo = dinnerShoppingCartVo.getDinnertableTradeInfo();
+        if (dinnerShoppingCartVo.getDinnertableTradeInfo() != null) {
+            DinnertableTradeInfo dinnertableTradeInfo = dinnerShoppingCartVo.getDinnertableTradeInfo();
             dinnertableTradeInfo.setTradeVo(tradeVo);
-            resetOrderFromTable(dinnertableTradeInfo,isCallback);
+            resetOrderFromTable(dinnertableTradeInfo, isCallback);
         } else {
-            DinnertableTradeInfo tradeInfo=DinnertableTradeInfo.createNoTableBuffet(tradeVo);
-            resetOrderFromTable(null,tradeInfo,true);
+            DinnertableTradeInfo tradeInfo = DinnertableTradeInfo.createNoTableBuffet(tradeVo);
+            resetOrderFromTable(null, tradeInfo, true);
         }
     }
 
@@ -892,7 +893,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-                if (Utils.isNotEmpty(tradeItemOperations)) {
+        if (Utils.isNotEmpty(tradeItemOperations)) {
             for (TradeItemOperation tradeItemOperation : tradeItemOperations) {
                 if (tradeItemOperation.getTradeItemId() == null) {
                     continue;
@@ -962,7 +963,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         Map<String, IShopcartItem> modifyDishsMap = new HashMap<>();
         if (orderDishsStore != null && !orderDishsStore.isEmpty()) {
             for (IShopcartItem iShopcartItem : orderDishsStore) {
-                if (iShopcartItem.isChanged())                           modifyDishsMap.put(iShopcartItem.getUuid(), iShopcartItem);
+                if (iShopcartItem.isChanged())
+                    modifyDishsMap.put(iShopcartItem.getUuid(), iShopcartItem);
             }
         }
 
@@ -1015,10 +1017,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 dinnerShoppingCartVo.setmTradeVo(dinnertableTradeInfo.getTradeVo());
             }
         } catch (Exception e) {
-                        e.printStackTrace();
+            e.printStackTrace();
         }
 
-                if (currentTradeInfo.getTradeVo() != null)
+        if (currentTradeInfo.getTradeVo() != null)
             dinnerShoppingCartVo.setTradeUser(currentTradeInfo.getTradeVo().getTradeUser());
         List<IShopcartItem> listShopcartItem = currentTradeInfo.getItems();
         if (listShopcartItem != null) {
@@ -1033,7 +1035,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         convertCustomerToArrayCustomer();
         resetSelectDishQTY(dinnerShoppingCartVo);
 
-                if (getOrder().getTrade().getTradePayStatus() != TradePayStatus.PAYING) {
+        if (getOrder().getTrade().getTradePayStatus() != TradePayStatus.PAYING) {
             MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), currentTradeInfo.getTradeVo());
             CheckGiftCouponIsActived(dinnerShoppingCartVo);
         }
@@ -1062,7 +1064,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
 
-                for (int key : arrayListener.keySet()) {
+        for (int key : arrayListener.keySet()) {
             arrayListener.get(key).resetOrder(mergeShopcartItem(dinnerShoppingCartVo),
                     dinnerShoppingCartVo.getmTradeVo());
         }
@@ -1098,10 +1100,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             for (IShopcartItem mIShopcartItem : listDish) {
                 if (mIShopcartItem.getUuid().equals(mShopcartItemBase.getUuid())) {
                     boolean isIssueStatusFinished = false;
-                                        List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
+                    List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
                     if (listSetmeal != null && !listSetmeal.isEmpty()) {
                         for (ISetmealShopcartItem setmeal : listSetmeal) {
-                                                        if (isIssueStatusFinished(mIssueStatus, setmeal)) {
+                            if (isIssueStatusFinished(mIssueStatus, setmeal)) {
                                 isIssueStatusFinished = true;
                                 uuidIssueStatusMap.put(setmeal.getUuid(), IssueStatus.FINISHED);
                                 setmeal.setIssueStatus(IssueStatus.FINISHED);
@@ -1164,7 +1166,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 break;
             }
         }
-                MathShoppingCartTool.mathTotalPrice(itemList, dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(itemList, dinnerShoppingCartVo.getmTradeVo());
     }
 
 
@@ -1188,7 +1190,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-                List<IShopcartItem> listShopcarItems = mergeShopcartItem(dinnerShoppingCartVo);
+        List<IShopcartItem> listShopcarItems = mergeShopcartItem(dinnerShoppingCartVo);
         if (listShopcarItems != null) {
             TradePrivilege privilege = null;
             for (IShopcartItem item : listShopcarItems) {
@@ -1200,7 +1202,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 }
             }
         }
-                return saleAmount;
+        return saleAmount;
     }
 
 
@@ -1208,10 +1210,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         if (dinnerShoppingCartVo.getmTradeVo() != null && dinnerShoppingCartVo.getmTradeVo().getTrade() != null) {
             dinnerShoppingCartVo.getmTradeVo().getTrade().setTradePeopleCount(count);
         }
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
     }
-
 
 
     public Boolean isReturnCash() {
@@ -1224,7 +1225,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
         return false;
 
-                    }
+    }
 
 
     public void filterByTable(String tableId) {
@@ -1259,26 +1260,26 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     public TradeVo createDinnerTradeVo() {
         TradeVo mTradeVo = createOrder(dinnerShoppingCartVo, false);
 
-                List<TradeItemVo> listTradeItem = mTradeVo.getTradeItemList();
+        List<TradeItemVo> listTradeItem = mTradeVo.getTradeItemList();
         Map<String, TradeItemVo> tempTradeItem = new HashMap<String, TradeItemVo>();
         for (TradeItemVo mTradeItemVo : listTradeItem) {
             tempTradeItem.put(mTradeItemVo.getTradeItem().getUuid(), mTradeItemVo);
         }
 
-                if (dinnerShoppingCartVo.getListIShopcatItem() != null) {
+        if (dinnerShoppingCartVo.getListIShopcatItem() != null) {
             for (IShopcartItem mIShopcartItem : dinnerShoppingCartVo.getListIShopcatItem()) {
 
-                                TradeItemVo mTradeItemVo = tempTradeItem.get(mIShopcartItem.getUuid());
+                TradeItemVo mTradeItemVo = tempTradeItem.get(mIShopcartItem.getUuid());
                 if (mTradeItemVo != null && mTradeItemVo.getRejectQtyReason() != null) {
                     mTradeItemVo.setRejectQtyReason(mIShopcartItem.getReturnQtyReason());
                 }
-                                if (tempTradeItem.get(mIShopcartItem.getUuid()) == null
+                if (tempTradeItem.get(mIShopcartItem.getUuid()) == null
                         && mIShopcartItem instanceof ReadonlyShopcartItemBase) {
 
                     ReadonlyShopcartItemBase mReadonlyShopcartItemBase = (ReadonlyShopcartItemBase) mIShopcartItem;
                     listTradeItem.add(CreateTradeTool.buildReadOnlyTradeItemVo(mReadonlyShopcartItemBase));
 
-                                        List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
+                    List<? extends ISetmealShopcartItem> listSetmeal = mIShopcartItem.getSetmealItems();
                     if (listSetmeal != null) {
                         for (ISetmealShopcartItem item : listSetmeal) {
                             ReadonlyShopcartItemBase readonlySetmeal = (ReadonlyShopcartItemBase) item;
@@ -1286,7 +1287,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                                 listTradeItem.add(CreateTradeTool.buildReadOnlyTradeItemVo(readonlySetmeal));
                             }
 
-                                                        Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
+                            Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
                             if (listExtra != null) {
                                 for (ReadonlyExtraShopcartItem mReadonlyExtraShopcartItem : listExtra) {
                                     listTradeItem
@@ -1296,7 +1297,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                         }
                     }
 
-                                        Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
+                    Collection<ReadonlyExtraShopcartItem> listExtra = mReadonlyShopcartItemBase.getExtraItems();
                     if (listExtra != null) {
                         for (ReadonlyExtraShopcartItem mReadonlyExtraShopcartItem : listExtra) {
                             listTradeItem.add(CreateTradeTool.buildReadOnlyTradeItemVo(mReadonlyExtraShopcartItem));
@@ -1307,9 +1308,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-                setMarktingTradePrivilege(mTradeVo);
+        setMarktingTradePrivilege(mTradeVo);
 
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
 
         return mTradeVo;
@@ -1317,10 +1318,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
 
     public void setShopcartItemPrivilege(IShopcartItemBase mIShopcartItemBase, Reason reason) {
-                removeShopcartItemCoupon(mIShopcartItemBase);
+        removeShopcartItemCoupon(mIShopcartItemBase);
 
         BuildPrivilegeTool.buildPrivilege(mIShopcartItemBase, dinnerShoppingCartVo.getmTradeVo().getTrade().getUuid());
-                if (reason != null) {
+        if (reason != null) {
             if (mIShopcartItemBase.getDiscountReasonRel() != null) {
                 mIShopcartItemBase.getDiscountReasonRel().setReasonContent(reason.getContent());
                 mIShopcartItemBase.getDiscountReasonRel().setReasonId(reason.getId());
@@ -1333,8 +1334,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         } else {
             mIShopcartItemBase.setDiscountReasonRel(null);
         }
-                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
-                List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
+        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+        List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
         if (listTradeItem != null) {
             for (TradeItemVo item : listTradeItem) {
                 if (item.getTradeItem().getUuid().equals(mIShopcartItemBase.getUuid())) {
@@ -1351,7 +1352,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).batchPrivilege(mergeShopcartItem(dinnerShoppingCartVo),
@@ -1359,7 +1360,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         }
     }
-
 
 
     public void removeShopcarItemPrivilege(IShopcartItemBase mShopcartItem) {
@@ -1374,7 +1374,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                     || mTradePrivilege.getPrivilegeType() == PrivilegeType.GIVE) {
                 mShopcartItem.setPrivilege(null);
                 mShopcartItem.setDiscountReasonRel(null);
-                                List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
+                List<TradeItemVo> listTradeItem = dinnerShoppingCartVo.getmTradeVo().getTradeItemList();
                 if (listTradeItem != null) {
                     for (TradeItemVo item : listTradeItem) {
                         if (item.getTradeItem().getUuid().equals(mShopcartItem.getUuid())) {
@@ -1398,7 +1398,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             mShopcartItem.getDiscountReasonRel().validateUpdate();
         }
 
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).batchPrivilege(mergeShopcartItem(dinnerShoppingCartVo),
@@ -1425,7 +1425,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void removeTradeRebate() {
         if (getOrder() != null && Utils.isNotEmpty(getOrder().getTradePrivileges())) {
             List<TradePrivilege> privilegeList = getOrder().getTradePrivileges();
@@ -1439,7 +1438,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                     }
 
                     List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-                                        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+                    MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
                     for (int key : arrayListener.keySet()) {
                         arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
                     }
@@ -1460,7 +1459,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             tradeVo.getTrade().setTradePeopleCount(customerCount);
 
             List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-                        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+            MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
             for (int key : arrayListener.keySet()) {
                 arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
             }
@@ -1470,7 +1469,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     public void refreshDish() {
         List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
         }
@@ -1481,8 +1480,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setChanged(true);
         dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setUnitPrice(BigDecimal.valueOf(value));
         dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setDepositPay(BigDecimal.valueOf(value));
-        dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setType(3);                List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
-                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+        dinnerShoppingCartVo.getmTradeVo().getTradeDeposit().setType(3);
+        List<IShopcartItem> allIttem = mergeShopcartItem(dinnerShoppingCartVo);
+        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).updateDish(allIttem, dinnerShoppingCartVo.getmTradeVo());
         }
@@ -1521,7 +1521,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(),
                 allIttem, true, false);
-                MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(allIttem, dinnerShoppingCartVo.getmTradeVo());
 
     }
 
@@ -1538,15 +1538,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
-
-
     public void setDefineTradePrivilege(TradePrivilege tradePrivilege, Reason mReason, Boolean needMath,
                                         Boolean needListener) {
 
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
-                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
-                removeAllCouponPrivilege(dinnerShoppingCartVo, false);
+        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+        removeAllCouponPrivilege(dinnerShoppingCartVo, false);
         if (tradePrivilege != null) {
             if (tradePrivilege.getId() == null) {
                 tradePrivilege.setUuid(SystemUtils.genOnlyIdentifier());
@@ -1580,7 +1577,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                if (needMath) {
+        if (needMath) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         }
 
@@ -1592,7 +1589,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
     }
-
 
 
     public void removeOrderPrivilege() {
@@ -1618,57 +1614,57 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         setDishPrivilege(mPrivilege, reason, null);
     }
 
-    public void setDishPrivilege (TradePrivilege mPrivilege, Reason reason, OperateType operateType,String uuid){
+    public void setDishPrivilege(TradePrivilege mPrivilege, Reason reason, OperateType operateType, String uuid) {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
 
         dinnerShoppingCartVo.setDishTradePrivilege(mPrivilege);
 
 
-                for (IShopcartItemBase mShopcartItemBase : mergeShopcartItem(dinnerShoppingCartVo)) {
+        for (IShopcartItemBase mShopcartItemBase : mergeShopcartItem(dinnerShoppingCartVo)) {
 
 
-                    if (mShopcartItemBase.getUuid().equals(uuid)) {
+            if (mShopcartItemBase.getUuid().equals(uuid)) {
 
-                                                removeShopcartItemCoupon(mShopcartItemBase);
+                removeShopcartItemCoupon(mShopcartItemBase);
 
-                        if (mPrivilege != null) {
+                if (mPrivilege != null) {
 
-                            TradePrivilege mTradePrivilege = new TradePrivilege();
+                    TradePrivilege mTradePrivilege = new TradePrivilege();
 
-                            mTradePrivilege.setPrivilegeType(mPrivilege.getPrivilegeType());
+                    mTradePrivilege.setPrivilegeType(mPrivilege.getPrivilegeType());
 
-                            mTradePrivilege.setPrivilegeValue(mPrivilege.getPrivilegeValue());
+                    mTradePrivilege.setPrivilegeValue(mPrivilege.getPrivilegeValue());
 
-                            mTradePrivilege.setPrivilegeName(mPrivilege.getPrivilegeName());
+                    mTradePrivilege.setPrivilegeName(mPrivilege.getPrivilegeName());
 
-                            mShopcartItemBase.setPrivilege(mTradePrivilege);
+                    mShopcartItemBase.setPrivilege(mTradePrivilege);
 
-                            mTradePrivilege = BuildPrivilegeTool.buildPrivilege(mShopcartItemBase,
+                    mTradePrivilege = BuildPrivilegeTool.buildPrivilege(mShopcartItemBase,
 
-                                    dinnerShoppingCartVo.getmTradeVo().getTrade().getUuid());
-                            mShopcartItemBase.setPrivilege(mTradePrivilege);
-                            mShopcartItemBase.setDiscountReasonRel(null);
-                            if (reason != null) {
-                                TradeReasonRel tradeReasonRel = setTradeItemReasonRel(mShopcartItemBase, reason, operateType);
-                                mShopcartItemBase.setDiscountReasonRel(tradeReasonRel);
-                            }
-
-                        } else {
-
-                                                        if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
-                                mShopcartItemBase.getPrivilege().setInValid();
-                            }
-                            if (mShopcartItemBase.getDiscountReasonRel() != null && mShopcartItemBase.getDiscountReasonRel().getId() != null) {
-                                mShopcartItemBase.getDiscountReasonRel().setStatusFlag(StatusFlag.INVALID);
-                                mShopcartItemBase.getDiscountReasonRel().validateUpdate();
-                            }
-                        }
-
-                        break;
-
+                            dinnerShoppingCartVo.getmTradeVo().getTrade().getUuid());
+                    mShopcartItemBase.setPrivilege(mTradePrivilege);
+                    mShopcartItemBase.setDiscountReasonRel(null);
+                    if (reason != null) {
+                        TradeReasonRel tradeReasonRel = setTradeItemReasonRel(mShopcartItemBase, reason, operateType);
+                        mShopcartItemBase.setDiscountReasonRel(tradeReasonRel);
                     }
 
+                } else {
+
+                    if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
+                        mShopcartItemBase.getPrivilege().setInValid();
+                    }
+                    if (mShopcartItemBase.getDiscountReasonRel() != null && mShopcartItemBase.getDiscountReasonRel().getId() != null) {
+                        mShopcartItemBase.getDiscountReasonRel().setStatusFlag(StatusFlag.INVALID);
+                        mShopcartItemBase.getDiscountReasonRel().validateUpdate();
+                    }
                 }
+
+                break;
+
+            }
+
+        }
 
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
 
@@ -1700,7 +1696,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
                     if (mdinnerShopcartItemBase.getUuid().equals(mShopcartItemBase.getUuid())) {
 
-                                                removeShopcartItemCoupon(mShopcartItemBase);
+                        removeShopcartItemCoupon(mShopcartItemBase);
 
                         if (mPrivilege != null) {
 
@@ -1726,7 +1722,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
                         } else {
 
-                                                        if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
+                            if (mShopcartItemBase.getPrivilege() != null && mShopcartItemBase.getPrivilege().getId() != null) {
                                 mShopcartItemBase.getPrivilege().setInValid();
                             }
                             if (mShopcartItemBase.getDiscountReasonRel() != null && mShopcartItemBase.getDiscountReasonRel().getId() != null) {
@@ -1761,7 +1757,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void batchDishPrivilege(List<IShopcartItemBase> listShopcartItem) {
         batchDishPrivilege(listShopcartItem, true);
     }
@@ -1769,7 +1764,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     public void batchDishPrivilege(List<IShopcartItemBase> listShopcartItem, boolean isRemoveBanquet) {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
 
-                if (isRemoveBanquet) {
+        if (isRemoveBanquet) {
             removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
         }
 
@@ -1788,7 +1783,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             for (IShopcartItem sitem : mergeShopcartItem(dinnerShoppingCartVo)) {
 
                 if (item.getUuid().equals(sitem.getUuid())) {
-                                        if (sitem.getCouponPrivilegeVo() != null && sitem.getCouponPrivilegeVo().getTradePrivilege() != null) {
+                    if (sitem.getCouponPrivilegeVo() != null && sitem.getCouponPrivilegeVo().getTradePrivilege() != null) {
                         if (sitem.getCouponPrivilegeVo().getTradePrivilege().getId() != null) {
                             sitem.getCouponPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
                             sitem.getCouponPrivilegeVo().getTradePrivilege().setChanged(true);
@@ -1837,14 +1832,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public TradePrivilege getDishPrivilege() {
 
         return dinnerShoppingCartVo.getDishTradePrivilege();
 
     }
-
-
 
 
     public void removeDishPrivilege(IShopcartItem mIshopcartItem) {
@@ -1866,7 +1858,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
@@ -1881,7 +1873,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
     }
-
 
 
     public void removeAllSelectedPrivilege() {
@@ -1951,7 +1942,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void removeAllItemsPrivilege() {
         removeAllItemsPrivilege(true, true);
     }
@@ -1989,12 +1979,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     public void setCouponPrivilege(CouponPrivilegeVo mCouponPrivilegeVo, Boolean needMath, Boolean needListener) {
 
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
-                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
-                removeOrderTreadePrivilege(dinnerShoppingCartVo.getmTradeVo());
-                if (!mCouponPrivilegeVo.isUsed())
+        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+        removeOrderTreadePrivilege(dinnerShoppingCartVo.getmTradeVo());
+        if (!mCouponPrivilegeVo.isUsed())
             BuildPrivilegeTool.buildCouponPrivilege(dinnerShoppingCartVo.getmTradeVo(), mCouponPrivilegeVo);
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                if (needMath) {
+        if (needMath) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         }
 
@@ -2007,9 +1997,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public boolean setCoupon(CouponPrivilegeVo mCouponPrivilegeVo, Boolean needMath, Boolean needListener) {
-                if (mCouponPrivilegeVo.getCoupon().getCouponType() == CouponType.GIFT
+        if (mCouponPrivilegeVo.getCoupon().getCouponType() == CouponType.GIFT
                 && mCouponPrivilegeVo.getShopcartItem() != null) {
             return setGiftCouponPrivilege(mCouponPrivilegeVo);
         } else {
@@ -2027,9 +2016,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
 
     public void addWeiXinCouponsPrivilege(WeiXinCouponsInfo mWeiXinCouponsInfo) {
-                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
         addWeiXinCouponsVo(dinnerShoppingCartVo.getmTradeVo(), mWeiXinCouponsInfo);
-                List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
 
@@ -2042,7 +2031,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     public void removeWeiXinCouponsPrivilege(TradePrivilege mTradePrivilege) {
         removeWeiXinCouponsVo(dinnerShoppingCartVo.getmTradeVo(), mTradePrivilege);
-                List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
 
@@ -2075,7 +2064,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 WeiXinCouponsVo couponsVo = listWX.get(i);
                 TradePrivilege tradePrivilege = couponsVo.getmTradePrivilege();
                 if (tradePrivilege != null && tradePrivilege.getPromoId() != null && tradePrivilege.getPromoId().longValue() == promoId.longValue()) {
-                                        if (tradePrivilege.getId() != null) {
+                    if (tradePrivilege.getId() != null) {
                         tradePrivilege.setStatusFlag(StatusFlag.INVALID);
                         tradePrivilege.setChanged(true);
                         couponsVo.setActived(false);
@@ -2086,7 +2075,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-                List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).removeWeiXinCouponsPrivilege(shopcartItemList,
@@ -2096,12 +2085,11 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void setIntegralCash(IntegralCashPrivilegeVo mIntegralCashPrivilegeVo, Boolean needMath,
                                 Boolean needListener) {
 
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
-                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
         if (mIntegralCashPrivilegeVo == null) {
 
             return;
@@ -2110,12 +2098,12 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         if (!mIntegralCashPrivilegeVo.hasRule() || mIntegralCashPrivilegeVo.getIntegral().compareTo(BigDecimal.ZERO) == 0 || mIntegralCashPrivilegeVo.isUsed()) {
 
-                        dinnerShoppingCartVo.getmTradeVo().setIntegralCashPrivilegeVo(mIntegralCashPrivilegeVo);
+            dinnerShoppingCartVo.getmTradeVo().setIntegralCashPrivilegeVo(mIntegralCashPrivilegeVo);
         } else {
-                        BuildPrivilegeTool.buildCashPrivilege(mIntegralCashPrivilegeVo, dinnerShoppingCartVo.getmTradeVo());
+            BuildPrivilegeTool.buildCashPrivilege(mIntegralCashPrivilegeVo, dinnerShoppingCartVo.getmTradeVo());
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                if (needMath) {
+        if (needMath) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         }
 
@@ -2141,7 +2129,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void removeIntegralCash() {
         removeIntegralCash(true);
     }
@@ -2158,7 +2145,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
 
-                List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
+        List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
 
                 dinnerShoppingCartVo.getmTradeVo());
@@ -2188,9 +2175,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void memberPrivilege(Boolean needMath, Boolean needListener) {
-                if (isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
+        if (isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
             return;
         }
 
@@ -2199,8 +2185,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         batchMemberPrivilege(dinnerShoppingCartVo, mCustomer, true);
         batchMemberChargePrivilege(dinnerShoppingCartVo, mCustomer);
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
-                if (needMath) {
+        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+        if (needMath) {
             MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
         }
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
@@ -2214,13 +2200,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    public void batchMemberChargePrivilege(ShoppingCartVo mShoppingCartVo, CustomerResp mCustomer){
-                boolean checkSwitch=ServerSettingCache.getInstance().isChargePrivilegeWhenPay();
-        boolean isTure=(!checkSwitch && mCustomer.getCustomerType().equalsValue(CustomerType.MEMBER.value())) || (checkSwitch && mCustomer.getCustomerType().equalsValue(CustomerType.PAY.value()));
-        if(isTure && mShoppingCartVo.getmTradeVo().getTradeChargePrivilege()==null){            TradePrivilege chargePrivilege=BuildPrivilegeTool.buildChargePrivilege(mShoppingCartVo,mCustomer);
-            if(chargePrivilege!=null){
-                List<TradePrivilege> tradePrivileges=mShoppingCartVo.getmTradeVo().getTradePrivileges();
-                if(tradePrivileges==null){
+    public void batchMemberChargePrivilege(ShoppingCartVo mShoppingCartVo, CustomerResp mCustomer) {
+        boolean checkSwitch = ServerSettingCache.getInstance().isChargePrivilegeWhenPay();
+        boolean isTure = (!checkSwitch && mCustomer.getCustomerType().equalsValue(CustomerType.MEMBER.value())) || (checkSwitch && mCustomer.getCustomerType().equalsValue(CustomerType.PAY.value()));
+        if (isTure && mShoppingCartVo.getmTradeVo().getTradeChargePrivilege() == null) {
+            TradePrivilege chargePrivilege = BuildPrivilegeTool.buildChargePrivilege(mShoppingCartVo, mCustomer);
+            if (chargePrivilege != null) {
+                List<TradePrivilege> tradePrivileges = mShoppingCartVo.getmTradeVo().getTradePrivileges();
+                if (tradePrivileges == null) {
                     mShoppingCartVo.getmTradeVo().setTradePrivileges(new ArrayList<TradePrivilege>());
                 }
                 mShoppingCartVo.getmTradeVo().getTradePrivileges().add(chargePrivilege);
@@ -2230,7 +2217,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    public void batchMemberChargePrivilege(boolean needMath,boolean needListener){
+    public void batchMemberChargePrivilege(boolean needMath, boolean needListener) {
         CustomerResp mCustomer = DinnerShopManager.getInstance().getLoginCustomer();
         batchMemberChargePrivilege(dinnerShoppingCartVo, mCustomer);
 
@@ -2249,9 +2236,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void memberPrivilege(IShopcartItemBase mIShopcartItemBase, boolean isNeedMath, boolean isNeedListener) {
-                if (isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
+        if (isHasValidBanquet(dinnerShoppingCartVo.getmTradeVo())) {
             return;
         }
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
@@ -2276,7 +2262,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void memberPrivilegeForSelected() {
 
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
@@ -2289,7 +2274,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
 
 
         MathShoppingCartTool.mathTotalPrice(shopcartItemList,
@@ -2307,30 +2292,30 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-    private void removeChargePrivilege(){
-        TradePrivilege privilege=dinnerShoppingCartVo.getmTradeVo().getTradeChargePrivilege();
-        if(privilege==null){
+    private void removeChargePrivilege() {
+        TradePrivilege privilege = dinnerShoppingCartVo.getmTradeVo().getTradeChargePrivilege();
+        if (privilege == null) {
             return;
         }
 
-        if(privilege.getId()!=null){
+        if (privilege.getId() != null) {
             privilege.setChanged(true);
             privilege.setStatusFlag(StatusFlag.INVALID);
-        }else{
+        } else {
             dinnerShoppingCartVo.getmTradeVo().getTradePrivileges().remove(privilege);
         }
     }
 
-    public void removeChargePrivilege(boolean needMath,boolean needListener){
+    public void removeChargePrivilege(boolean needMath, boolean needListener) {
         removeChargePrivilege();
-        if(!needMath){
+        if (!needMath) {
             return;
         }
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
 
-        MathShoppingCartTool.mathTotalPrice(shopcartItemList,dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(shopcartItemList, dinnerShoppingCartVo.getmTradeVo());
 
-        if(needListener){
+        if (needListener) {
             for (int key : arrayListener.keySet()) {
 
                 arrayListener.get(key).batchPrivilege(shopcartItemList,
@@ -2342,11 +2327,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void removeMemberPrivilege() {
 
         for (IShopcartItemBase item : mergeShopcartItem(dinnerShoppingCartVo)) {
-                        if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
+            if (item.getPrivilege() != null && (item.getPrivilege().getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT
                     || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_PRICE
                     || item.getPrivilege().getPrivilegeType() == PrivilegeType.MEMBER_REBATE)) {
 
@@ -2372,18 +2356,17 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void removeAllPrivilegeForCustomer(boolean isNeedMathAndCallback, boolean isMarketNeedCallback) {
 
-                removeIntegralCash(false);
-                removeAllCouponPrivilege(dinnerShoppingCartVo, false);
-                        removeAllGiftCoupon(false);
+        removeIntegralCash(false);
+        removeAllCouponPrivilege(dinnerShoppingCartVo, false);
+        removeAllGiftCoupon(false);
         removeMemberPrivilege();
         removeChargePrivilege();
-                removeTradePlanActivity(isNeedMathAndCallback, isMarketNeedCallback);
+        removeTradePlanActivity(isNeedMathAndCallback, isMarketNeedCallback);
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         removeAllCardServicePrivilege(shopcartItemList);
-                MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+        MathManualMarketTool.mathMarketPlan(dinnerShoppingCartVo.getmTradeVo(), shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
         if (!isNeedMathAndCallback) {
             return;
         }
@@ -2418,7 +2401,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             for (int i = 0; i < tradePlanActivities.size(); i++) {
                 TradePlanActivity tradePlanActivity = tradePlanActivities.get(i);
                 if (isCustomer) {
-                                        MarketRuleVo marketRuleVo = MarketRuleCache.getMarketDishVoByRule(tradePlanActivity.getRuleId());
+                    MarketRuleVo marketRuleVo = MarketRuleCache.getMarketDishVoByRule(tradePlanActivity.getRuleId());
                     if (marketRuleVo != null && Utils.isNotEmpty(marketRuleVo.getUserTypes())
                             && marketRuleVo.getUserTypes().size() == 1
                             && marketRuleVo.getUserTypes().contains(UserType.MEMBER)) {
@@ -2428,7 +2411,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                                 true);
                     }
                 } else {
-                                        MathManualMarketTool.unBindTradePlanByTradePlanUuid(tradePlanActivities,
+                    MathManualMarketTool.unBindTradePlanByTradePlanUuid(tradePlanActivities,
                             tradeItemPlanActivities,
                             tradePlanActivity.getUuid(),
                             true);
@@ -2441,7 +2424,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             }
         }
     }
-
 
 
     public void addExtraCharge(List<ExtraCharge> listExtraCharge, Boolean needMath, Boolean needListener) {
@@ -2468,7 +2450,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
         dinnerShoppingCartVo.getmTradeVo().setExtraChargeMap(extraChargeMap);
 
-                if (needMath) {
+        if (needMath) {
             MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                     dinnerShoppingCartVo.getmTradeVo());
         }
@@ -2482,7 +2464,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
     }
-
 
 
     public void removeExtraCharge(Long id) {
@@ -2507,7 +2488,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
     public void removeMinconsumExtra() {
         dinnerShoppingCartVo.getmTradeVo().setEnableMinConsum(false);
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
 
                 dinnerShoppingCartVo.getmTradeVo());
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
@@ -2528,7 +2509,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             arrayListener.get(key).removeCustomerPrivilege(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());
         }
     }
-
 
 
     public Boolean checkIsHaveWXC(String code) {
@@ -2555,14 +2535,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 true)) {
             return false;
         }
-                removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
-                removeGiftInMarkertActivity(selectedItemList);
+        removeBanquetOnly(dinnerShoppingCartVo.getmTradeVo());
+        removeGiftInMarkertActivity(selectedItemList);
         MathManualMarketTool.mathManualAddMarket(selectedItemList,
                 dinnerShoppingCartVo.getmTradeVo(),
                 marketDishVo,
                 true);
 
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
         for (int key : arrayListener.keySet()) {
             arrayListener.get(key).addMarketActivity(dinnerShoppingCartVo.getmTradeVo());
@@ -2591,7 +2571,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 true);
         CustomerResp customer = DinnerShopManager.getInstance().getLoginCustomer();
         batchMemberPrivilege(dinnerShoppingCartVo, customer, true);
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo),
                 dinnerShoppingCartVo.getmTradeVo());
 
         for (int key : arrayListener.keySet()) {
@@ -2632,16 +2612,16 @@ public class DinnerShoppingCart extends BaseShoppingCart {
 
 
     public void removePrivilegeNotBanquet(List<IShopcartItem> shopcartItemList, TradeVo mTradeVo) {
-                removeIntegralCash();
-                removeAllCouponPrivilege(dinnerShoppingCartVo, false);
+        removeIntegralCash();
+        removeAllCouponPrivilege(dinnerShoppingCartVo, false);
 
         removeMemberPrivilege();
         removeAllItemsPrivilege();
         removeOrderPrivilege();
         removeAllWeixinCoupon(mTradeVo);
 
-                MathManualMarketTool.removeAllActivity(mTradeVo);
-                MathManualMarketTool.mathMarketPlan(mTradeVo, shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
+        MathManualMarketTool.removeAllActivity(mTradeVo);
+        MathManualMarketTool.mathMarketPlan(mTradeVo, shopcartItemList, true, DinnerShopManager.getInstance().isSepartShopCart());
     }
 
 
@@ -2652,7 +2632,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             arrayListener.get(key).removeBanquet(dinnerShoppingCartVo.getmTradeVo());
         }
     }
-
 
 
     public void removeAllDinnerListItems() {
@@ -2703,8 +2682,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
-
     public boolean setGiftCouponPrivilege(CouponPrivilegeVo mCouponPrivilegeVo) {
 
         ShopcartItem tempItem = mCouponPrivilegeVo.getShopcartItem();
@@ -2713,14 +2690,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
         boolean marketFlag = false;
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
-                List<TradeItemPlanActivity> tradeItemPlanActivityList = dinnerShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList();
+        List<TradeItemPlanActivity> tradeItemPlanActivityList = dinnerShoppingCartVo.getmTradeVo().getTradeItemPlanActivityList();
         if (tradeItemPlanActivityList != null && tradeItemPlanActivityList.size() > 0) {
             for (IShopcartItem item : shopcartItemList) {
                 for (TradeItemPlanActivity tradeItemPlanActivity : tradeItemPlanActivityList) {
                     if (tradeItemPlanActivity.getTradeItemUuid().compareTo(item.getUuid()) == 0
                             && tempItem.getSkuUuid().compareTo(item.getSkuUuid()) == 0
                             && tradeItemPlanActivity.isValid()
-                            ) {
+                    ) {
                         marketFlag = true;
                         break;
                     }
@@ -2731,8 +2708,9 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         }
 
         IShopcartItem value = null;
-        if (!marketFlag) {                        for (IShopcartItem item : shopcartItemList) {
-                                if (item.getStatusFlag() == StatusFlag.INVALID || item.getDishShop() == null
+        if (!marketFlag) {
+            for (IShopcartItem item : shopcartItemList) {
+                if (item.getStatusFlag() == StatusFlag.INVALID || item.getDishShop() == null
                         || tempItem.getDishShop() == null) {
                     continue;
                 }
@@ -2746,10 +2724,10 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 }
             }
 
-                        if(value==null){
-                addDishToShoppingCart(tempItem,true);
+            if (value == null) {
+                addDishToShoppingCart(tempItem, true);
                 shopcartItemList.add(tempItem);
-                value=tempItem;
+                value = tempItem;
             }
 
         }
@@ -2776,7 +2754,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 value.setPrivilege(null);
             }
         }
-                MathShoppingCartTool.mathTotalPrice(shopcartItemList,
+        MathShoppingCartTool.mathTotalPrice(shopcartItemList,
                 dinnerShoppingCartVo.getmTradeVo());
 
         CheckGiftCouponIsActived(dinnerShoppingCartVo);
@@ -2787,14 +2765,13 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void removeAllGiftCoupon(boolean isNeedListener) {
         List<IShopcartItem> shopcartItemList = mergeShopcartItem(dinnerShoppingCartVo);
         for (IShopcartItem shopcartItem : shopcartItemList) {
             if (shopcartItem.getCouponPrivilegeVo() != null && shopcartItem.getCouponPrivilegeVo().getTradePrivilege() != null) {
                 if (shopcartItem.getCouponPrivilegeVo().getTradePrivilege().getId() != null
                         && shopcartItem.getCouponPrivilegeVo().getTradePrivilege().isValid()
-                        ) {
+                ) {
                     shopcartItem.getCouponPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
                     shopcartItem.getCouponPrivilegeVo().getTradePrivilege().setChanged(true);
                 } else {
@@ -2817,7 +2794,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             if (shopcartItem.getCouponPrivilegeVo() != null && shopcartItem.getCouponPrivilegeVo().getTradePrivilege() != null) {
                 if (shopcartItem.getCouponPrivilegeVo().isValid() &&
                         !shopcartItem.getCouponPrivilegeVo().isActived()
-                        ) {
+                ) {
                     if (shopcartItem.getCouponPrivilegeVo().getTradePrivilege().getId() != null) {
                         shopcartItem.getCouponPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
                         shopcartItem.getCouponPrivilegeVo().getTradePrivilege().setChanged(true);
@@ -2864,9 +2841,8 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void removeShopcartItemCoupon(IShopcartItemBase mShopcartItemBase) {
-                if (mShopcartItemBase.getCouponPrivilegeVo() != null && mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege() != null) {
+        if (mShopcartItemBase.getCouponPrivilegeVo() != null && mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege() != null) {
             if (mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().getId() != null) {
                 mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().setStatusFlag(StatusFlag.INVALID);
                 mShopcartItemBase.getCouponPrivilegeVo().getTradePrivilege().setChanged(true);
@@ -2884,7 +2860,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         if (tradeVo == null || tradeId == null || mTradeTable == null) {
             return;
         }
-                tradeVo.getTrade().setId(tradeId);
+        tradeVo.getTrade().setId(tradeId);
         tradeVo.getTrade().setServerCreateTime(trade.getServerCreateTime());
         tradeVo.getTrade().setServerUpdateTime(trade.getServerUpdateTime());
         tradeVo.getTrade().setTradeNo(trade.getTradeNo());
@@ -2985,14 +2961,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
                 tradeTax.setTradeId(tradeId);
             }
         }
-                if (Utils.isNotEmpty(tradeInitConfigs)) {
+        if (Utils.isNotEmpty(tradeInitConfigs)) {
             tradeVo.setTradeInitConfigs(tradeInitConfigs);
         }
-                if (Utils.isNotEmpty(tradeTaxs)) {
+        if (Utils.isNotEmpty(tradeTaxs)) {
             tradeVo.setTradeTaxs(tradeTaxs);
         }
 
-                if (dinnerShoppingCartVo != null && dinnerShoppingCartVo.getDinnertableTradeInfo() != null
+        if (dinnerShoppingCartVo != null && dinnerShoppingCartVo.getDinnertableTradeInfo() != null
                 && dinnerShoppingCartVo.getDinnertableTradeInfo().getiDinnertableTrade() != null
                 && dinnerShoppingCartVo.getDinnertableTradeInfo().getiDinnertableTrade().getDinnertable() != null) {
             IDinnertable dinnertable = dinnerShoppingCartVo.getDinnertableTradeInfo().getiDinnertableTrade().getDinnertable();
@@ -3014,7 +2990,6 @@ public class DinnerShoppingCart extends BaseShoppingCart {
     }
 
 
-
     public void addMenuToShopcart(DishMenuVo dishMenuVo, TradeVo tradeVo) {
         updateTradeVoNoTradeInfo(tradeVo);
         GroupShoppingCartTool.addMenuToShopcart(dishMenuVo, this);
@@ -3028,7 +3003,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         checkNeedBuildMainOrder(dinnerShoppingCartVo.getmTradeVo());
         setDinnerBusinessType(BusinessType.GROUP);
         setDinnerOrderType(DeliveryType.HERE);
-                MealShellVo mealHullVo = new MealShellVo();
+        MealShellVo mealHullVo = new MealShellVo();
         BigDecimal count = new BigDecimal(tableList.size());
         mealHullVo.buildHell(dishMenuVo, count);
         mealHullVo.setTradeRelate(dinnerShoppingCartVo.getmTradeVo().getTrade());
@@ -3076,7 +3051,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             tradeCustomer.setTradeUuid(dinnerShoppingCartVo.getmTradeVo().getTrade().getUuid());
             dinnerShoppingCartVo.getmTradeVo().getTradeCustomerList().add(tradeCustomer);
         }
-                MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());
+        MathShoppingCartTool.mathTotalPrice(mergeShopcartItem(dinnerShoppingCartVo), dinnerShoppingCartVo.getmTradeVo());
         TradeVo tradeVo = createOrder(dinnerShoppingCartVo, false);
         CreateTradeTool.updateTradeItemPrivilgeOfRelate(tradeVo, mergeShopcartItem(dinnerShoppingCartVo));
     }
@@ -3088,7 +3063,7 @@ public class DinnerShoppingCart extends BaseShoppingCart {
             buildTradeTables(tableList);
         }
         Map<Long, Tables> newTableMap = new HashMap<>();
-                List<Tables> newTablesList = new ArrayList<>();
+        List<Tables> newTablesList = new ArrayList<>();
         for (Tables tables : tableList) {
             newTableMap.put(tables.getId(), tables);
             newTablesList.add(tables);
@@ -3176,14 +3151,14 @@ public class DinnerShoppingCart extends BaseShoppingCart {
         return dinnerShoppingCartVo.getInventoryVo();
     }
 
-        public TradeUser getTradeUser() {
+    public TradeUser getTradeUser() {
         if (this.dinnerShoppingCartVo != null) {
             return dinnerShoppingCartVo.getTradeUser();
         }
         return null;
     }
 
-        public void setTradeUser(TradeUser tradeUser) {
+    public void setTradeUser(TradeUser tradeUser) {
         if (this.dinnerShoppingCartVo != null) {
             this.dinnerShoppingCartVo.setTradeUser(tradeUser);
         }

@@ -157,7 +157,7 @@ public class BeautyTradeInfoFragment extends BasicFragment {
                 selectedDishAdapter.setCanRemoveMarketActivity(true);
         bindItemListener();
         bindMenuListener();
-
+        updateOrderDishList(mShoppingCart.getShoppingCartDish(), mShoppingCart.getOrder());//更新数据
     }
 
     private SwipeMenuCreator mSwipeMenuCreator = new SwipeMenuCreator() {

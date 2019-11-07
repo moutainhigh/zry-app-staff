@@ -107,7 +107,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     protected OrderDishListPagerAdapter mAdapter;
 
-    private DinnerShoppingCart mShoppingCart;
+    protected DinnerShoppingCart mShoppingCart;
 
     private int mCurrentIndex = 0;
 

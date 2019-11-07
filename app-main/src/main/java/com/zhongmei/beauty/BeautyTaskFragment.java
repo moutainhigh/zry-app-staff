@@ -34,6 +34,7 @@ import com.zhongmei.bty.customer.adapter.CustomerDocRecordAdapter;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.bean.YFResponse;
 import com.zhongmei.yunfu.bean.YFResponseList;
+import com.zhongmei.yunfu.context.session.Session;
 import com.zhongmei.yunfu.context.util.DateTimeUtils;
 import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.data.LoadingYFResponseListener;
@@ -52,8 +53,7 @@ import java.util.Date;
 
 
 @EFragment(R.layout.beauty_task_fragment)
-public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCheckedChangeListener,View.OnClickListener,OnRefreshListener, OnLoadMoreListener ,BeautyCreateOrEditTaskDialog.TaskOperatorLisnter,TaskItemView.OnOperateListener,BeautyResultTaskDialog.CallBackListener
-{
+public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, OnRefreshListener, OnLoadMoreListener, BeautyCreateOrEditTaskDialog.TaskOperatorLisnter, TaskItemView.OnOperateListener, BeautyResultTaskDialog.CallBackListener {
 
 
     @ViewById(R.id.btn_create_task)
@@ -83,18 +83,18 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
     private Date selectedDate;
 
     private CalendarDialog calendarDialog;
-    private int taskStatus=1;
+    private int taskStatus = 1;
     private TaskQueryReq taskQueryReq = new TaskQueryReq();
 
     @Bean
     protected TaskAdapter mTaskAdapter;
 
-    private int totalPageSize=1;
+    private int totalPageSize = 1;
 
     BeautyCreateOrEditTaskDialog dialog;
 
     @AfterViews
-    public void initView(){
+    public void initView() {
         mTaskAdapter.setOperateListener(this);
         lv_task.setLayoutManager(new LinearLayoutManager(getContext()));
         lv_task.setAdapter(mTaskAdapter);
@@ -109,16 +109,15 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
         rg_status.setOnCheckedChangeListener(this);
         rg_date.setOnCheckedChangeListener(this);
 
-        selectedDate = getDate(0);        taskQueryReq.setPageNo(1);
+        selectedDate = getDate(0);
+        taskQueryReq.setPageNo(1);
         taskQueryReq.setPageSize(20);
         taskQueryReq.setRemindTime(selectedDate.getTime());
         taskQueryReq.setStatus(taskStatus);
         taskQueryReq.setType(1);
+        taskQueryReq.setUserId(Session.getAuthUser().getId());//设置userid
         requestTasks(false);
     }
-
-
-
 
     private Date getDate(int afterDay) {
         Long curTime = System.currentTimeMillis();
@@ -159,7 +158,7 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
     };
 
     private void requestTasks(boolean isClearData) {
-        if(isClearData && mTaskAdapter!=null){
+        if (isClearData && mTaskAdapter != null) {
             iv_emptyView.setVisibility(View.VISIBLE);
             mTaskAdapter.getItems().clear();
             mTaskAdapter.notifyDataSetChanged();
@@ -172,12 +171,12 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
                 if (YFResponseList.isOk(response)) {
                     mTaskAdapter.getItems().addAll(response.getContent());
                     mTaskAdapter.notifyDataSetChanged();
-                    totalPageSize=(int)response.getPage().getPageCount();
+                    totalPageSize = (int) response.getPage().getPageCount();
                 } else {
                     ToastUtil.showShortToast(response.getMessage());
                 }
 
-                if(Utils.isNotEmpty(mTaskAdapter.getItems())){
+                if (Utils.isNotEmpty(mTaskAdapter.getItems())) {
                     iv_emptyView.setVisibility(View.GONE);
                 }
             }
@@ -192,7 +191,7 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
         operates.getTaskList(taskQueryReq, listener);
     }
 
-    private void showCreateDocDialog(TaskRemind task,int type) {
+    private void showCreateDocDialog(TaskRemind task, int type) {
         dialog = new BeautyCreateOrEditTaskDialog();
         dialog.setTaskOperatorListener(this);
         dialog.setTaskInfo(task);
@@ -211,13 +210,15 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch(checkedId){
+        switch (checkedId) {
             case R.id.rb_task:
-                taskStatus=1;                taskQueryReq.setStatus(taskStatus);
+                taskStatus = 1;
+                taskQueryReq.setStatus(taskStatus);
                 requestTasks(true);
                 break;
             case R.id.rb_outtime_task:
-                taskStatus=2;                taskQueryReq.setStatus(taskStatus);
+                taskStatus = 2;
+                taskQueryReq.setStatus(taskStatus);
                 requestTasks(true);
                 break;
             case R.id.rb_today:
@@ -255,24 +256,24 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.tv_custom_date:
                 rb_customDate.setChecked(true);
             case R.id.rb_custom_date:
                 showCalendarDialog();
                 break;
             case R.id.btn_create_task:
-                showCreateDocDialog(null,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_NEW_CREATE);
+                showCreateDocDialog(null, BeautyCreateOrEditTaskDialog.OPERATE_TYPE_NEW_CREATE);
                 break;
         }
     }
 
     @Override
     public void onLoadMore() {
-        if(taskQueryReq.getPageNo()<totalPageSize){
-            taskQueryReq.setPageNo(taskQueryReq.getPageNo()+1);
+        if (taskQueryReq.getPageNo() < totalPageSize) {
+            taskQueryReq.setPageNo(taskQueryReq.getPageNo() + 1);
             requestTasks(false);
-        }else{
+        } else {
             ToastUtil.showShortToast("没有更多数据了");
         }
         refreshOver();
@@ -288,26 +289,26 @@ public class BeautyTaskFragment extends BasicFragment implements RadioGroup.OnCh
 
     @Override
     public void save(TaskRemind taskObj) {
-                onRefresh();
+        onRefresh();
     }
 
     @Override
     public void taskModify(TaskRemind task) {
-                showCreateDocDialog(task,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_EDIT);
+        showCreateDocDialog(task, BeautyCreateOrEditTaskDialog.OPERATE_TYPE_EDIT);
     }
 
     @Override
     public void taskScan(TaskRemind task) {
-                showCreateDocDialog(task,BeautyCreateOrEditTaskDialog.OPERATE_TYPE_SCAN);
+        showCreateDocDialog(task, BeautyCreateOrEditTaskDialog.OPERATE_TYPE_SCAN);
     }
 
     @Override
     public void taskException(TaskRemind task) {
-                showExecuteDialog(task);
+        showExecuteDialog(task);
     }
 
     @Override
     public void onSuccess(TaskRemind task) {
-                onRefresh();
+        onRefresh();
     }
 }

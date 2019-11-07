@@ -106,49 +106,49 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     @Bean(CommonKeyBorad.class)
     protected CommonKeyBorad mNumberKeyBorad;
 
-        @ViewById(R.id.title_name)
+    @ViewById(R.id.title_name)
     TextView mTitleName;
 
-        @ViewById(R.id.birthday)
+    @ViewById(R.id.birthday)
     protected TextView mBirthday;
 
-        @ViewById(R.id.birthday_btn)
+    @ViewById(R.id.birthday_btn)
     protected ImageButton mBirthdayBtn;
 
-        @ViewById(R.id.group)
+    @ViewById(R.id.group)
     protected TextView mGroup;
 
-        @ViewById(R.id.group_btn)
+    @ViewById(R.id.group_btn)
     protected ImageButton mGroupBtn;
 
-        @ViewById(R.id.customer_memo)
+    @ViewById(R.id.customer_memo)
     protected EditText mMemo;
 
-        @ViewById(R.id.cusetomer_invoice)
+    @ViewById(R.id.cusetomer_invoice)
     protected EditText mInvoice;
 
-        @ViewById(R.id.customer_addr)
+    @ViewById(R.id.customer_addr)
     protected EditText mAddress;
 
-        @ViewById(R.id.customer_name)
+    @ViewById(R.id.customer_name)
     protected EditText mName;
 
-        @ViewById(R.id.customer_male)
+    @ViewById(R.id.customer_male)
     protected ImageView mMale;
 
-        @ViewById(R.id.customer_female)
+    @ViewById(R.id.customer_female)
     protected ImageView mFemale;
 
-        @ViewById(R.id.customer_phonenum)
+    @ViewById(R.id.customer_phonenum)
     protected EditText mPhonenum;
 
-        @ViewById(R.id.customer_password_first)
+    @ViewById(R.id.customer_password_first)
     protected EditText mPassword;
 
-        @ViewById(R.id.customer_password_second)
+    @ViewById(R.id.customer_password_second)
     protected EditText mPasswordSecond;
 
-        @ViewById(R.id.enjoy)
+    @ViewById(R.id.enjoy)
     LableTextEdit mEnjoy;
 
     @ViewById(R.id.customer_enjoy_btn)
@@ -157,7 +157,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     @ViewById(R.id.enjoy_layout)
     LinearLayout mEnjoyLayout;
 
-        @ViewById(R.id.customer_import)
+    @ViewById(R.id.customer_import)
     ImageView mImport;
 
     @ViewById(R.id.card_store)
@@ -183,9 +183,9 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     @ViewById(R.id.entity_card_store)
     Button mEntityCardActivate;
 
-        private ArrayList<String> mSelectSet = new ArrayList<String>();
+    private ArrayList<String> mSelectSet = new ArrayList<String>();
 
-        private List<String> enjoyValue = null;
+    private List<String> enjoyValue = null;
 
     private CustomerEditPopWindow mEditPopWindow;
 
@@ -206,8 +206,6 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
 
     private int type = CustomerActivity.PARAM_ADD;
-
-
 
 
     private int activityType;
@@ -281,7 +279,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         });
     }
 
-        private TextWatcher mPasswordSecondWatcher = new TextWatcher() {
+    private TextWatcher mPasswordSecondWatcher = new TextWatcher() {
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -315,7 +313,8 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
         if (intent != null) {
             type = intent.getIntExtra("type", CustomerActivity.PARAM_ADD);
             String areaCode = ShopInfoCfg.getInstance().getCurrency().getAreaCode();
-            if (CustomerActivity.PARAM_ADD == type) {                chooseFaceDesc(false);
+            if (CustomerActivity.PARAM_ADD == type) {
+                chooseFaceDesc(false);
                 if (!TextUtils.isEmpty(areaCode)) {
                     mErpCurrency = mErpDal.queryErpCurrenctByAreaCode(areaCode);
                 }
@@ -324,7 +323,8 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 mImport.setVisibility(View.GONE);
                 mLlFace.setVisibility(View.GONE);
                 setCardVisble(false);
-            } else if (CustomerActivity.PARAM_EDIT == type) {                mLlFace.setVisibility(View.GONE);
+            } else if (CustomerActivity.PARAM_EDIT == type) {
+                mLlFace.setVisibility(View.GONE);
                 mCustomer = (CustomerResp) intent.getSerializableExtra(CustomerContants.KEY_CUSTOMER_EDIT);
                 if (!TextUtils.isEmpty(mCustomer.nationalTelCode)) {
                     mErpCurrency = mErpDal.queryErpCurrenctByAreaCode(mCustomer.nationalTelCode);
@@ -335,11 +335,12 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 } else {
                     setCardVisble(true);
                 }
-                mPhonenum.setEnabled(true);                 mPhonenum.setFocusable(true);
+                mPhonenum.setEnabled(true);
+                mPhonenum.setFocusable(true);
                 mIvCountry.setEnabled(false);
                 setPasswordDisable(true);
                 mImport.setVisibility(View.GONE);
-                                                if (mCustomer == null || mCustomer.levelId == null) {
+                if (mCustomer == null || mCustomer.levelId == null) {
                     setCardVisble(false);
                 } else {
                     mPassword.setText("******");
@@ -377,7 +378,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             mPhonenum.setText(AppUtil.getTel(phone));
 
         }
-                if (customer.groupId != null) {
+        if (customer.groupId != null) {
             groupId = customer.groupId;
             mGroup.setText(getGroup(groupId));
         }
@@ -387,7 +388,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             mBirthday.setText(CustomerActivity.BIRTHDAY_DEFAULT);
         }
 
-                String enjoyStr = EnjoyManager.getInstance().getDtailEnjoyString(customer.hobby);
+        String enjoyStr = EnjoyManager.getInstance().getDtailEnjoyString(customer.hobby);
         if (!TextUtils.isEmpty(enjoyStr)) {
             mEnjoy.setText(enjoyStr);
         }
@@ -514,15 +515,17 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                     showMemberImportDialog();
                     break;
                 case R.id.ivCountry_CustomerInfo:
-                                        MobclickAgentEvent.onEvent(UserActionCode.GK020003);
+                    MobclickAgentEvent.onEvent(UserActionCode.GK020003);
                     showCountryDialog(mErpCurrencyList, mErpCurrency);
                     break;
-                case R.id.card_store:                    MobclickAgentEvent.onEvent(UserActionCode.GK020005);
+                case R.id.card_store:
+                    MobclickAgentEvent.onEvent(UserActionCode.GK020005);
                     if (mCustomer != null && !mCustomer.isDisabled()) {
                         cardStore();
                     }
                     break;
-                case R.id.entity_card_store:                    MobclickAgentEvent.onEvent(UserActionCode.GK020006);
+                case R.id.entity_card_store:
+                    MobclickAgentEvent.onEvent(UserActionCode.GK020006);
                     if (mCustomer != null && !mCustomer.isDisabled()) {
                         VerifyHelper.verifyAlert(this, CustomerApplication.PERMISSION_CUSTOMER_CARD_ENABLE,
                                 new VerifyHelper.Callback() {
@@ -547,7 +550,6 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     private void inputFace() {
 
     }
-
 
 
     public void showCountryDialog(List<ErpCurrency> erpCurrencyList, ErpCurrency currentErpCurrency) {
@@ -600,20 +602,20 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     private void showChargingDialog(CustomerResp customer, String balance) {
         CustomerChargingDialogFragment dialogFragment = new CustomerChargingDialogFragment_();
         Bundle args = new Bundle();
-        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_MEMBER_CUSTOMER);        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
+        args.putInt(CustomerChargingDialogFragment.KEY_FROM, CustomerChargingDialogFragment.FROM_MEMBER_CUSTOMER);
+        args.putSerializable(CustomerChargingDialogFragment.KEY_CUSTOMER, customer);
         args.putString(CustomerChargingDialogFragment.KEY_BALANCE, balance);
         dialogFragment.setArguments(args);
         dialogFragment.setOnClickListener(new CustomerChargingDialogFragment.OnChargingClickListener() {
             @Override
             public void onClickClose() {
-                                if (type == CustomerActivity.PARAM_ADD) {
+                if (type == CustomerActivity.PARAM_ADD) {
                     finish();
                 }
             }
         });
         dialogFragment.show(getSupportFragmentManager(), "ecCardCharging");
     }
-
 
 
     @SuppressLint("SimpleDateFormat")
@@ -691,23 +693,23 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
 
     private boolean setUpdateCustomerValue() {
-                String name = mName.getText().toString();
+        String name = mName.getText().toString();
         if (TextUtils.isEmpty(name)) {
             ToastUtil.showShortToast(R.string.customer_no_name);
             mName.requestFocus();
             return false;
         }
         mCustomer.customerName = name;
-                String birthDate = mBirthday.getText().toString();
+        String birthDate = mBirthday.getText().toString();
         if (TextUtils.isEmpty(birthDate)) {
             birthDate = CustomerActivity.BIRTHDAY_DEFAULT;
         }
         mCustomer.birthday = birthDate;
-                if (CustomerActivity.PARAM_ADD == type) {
-                        mCustomer.mobile = mPhonenum.getText().toString();
+        if (CustomerActivity.PARAM_ADD == type) {
+            mCustomer.mobile = mPhonenum.getText().toString();
         } else {
-                            mCustomer.mobile = mPhonenum.getText().toString();
-                    }
+            mCustomer.mobile = mPhonenum.getText().toString();
+        }
 
         if (TextUtils.isEmpty(mCustomer.mobile) || !NumberUtil.isCellPhone(mCustomer.mobile)) {
             ToastUtil.showShortToast(getString(R.string.customer_mobile_regulation_error));
@@ -718,9 +720,9 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             String passwrod = mPassword.getText().toString();
             String passwrodSed = mPasswordSecond.getText().toString();
 
-            if(TextUtils.isEmpty(passwrod)){
-                mCustomer.password = mCustomer.mobile.substring(mCustomer.mobile.length()-6,mCustomer.mobile.length());
-            }else{
+            if (TextUtils.isEmpty(passwrod)) {
+                mCustomer.password = mCustomer.mobile.substring(mCustomer.mobile.length() - 6, mCustomer.mobile.length());
+            } else {
                 if (TextUtils.isEmpty(passwrod)) {
                     ToastUtil.showShortToast(R.string.customer_no_password);
                     return false;
@@ -731,7 +733,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                     ToastUtil.showShortToast(R.string.customer_password_not_match);
                     return false;
                 }
-                mCustomer.password=passwrod;
+                mCustomer.password = passwrod;
             }
         }
         SexUtils.setSex(mCustomer, mSex);
@@ -763,7 +765,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     }
 
     private void checkPassword(final String mobile, final String inputNo, final Context context) {
-                final PasswordDialog dialog;
+        final PasswordDialog dialog;
         dialog = new PasswordDialog(context) {
             @Override
             public void close() {
@@ -777,7 +779,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             @Override
             public void checkPassWord(String password) {
                 password = new MD5().getMD5ofStr(password);
-                mCustomer.password=password;
+                mCustomer.password = password;
                 doCreateCustomer(mCustomer);
             }
 
@@ -801,15 +803,18 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             public void onResponse(YFResponse<CustomerCreateResp> response) {
                 try {
                     if (YFResponse.isOk(response)) {
-                        if (customer.customerId == null) {                            CustomerUtil.addRegistMemberNumber(1);
+                        if (customer.customerId == null) {
+                            CustomerUtil.addRegistMemberNumber(1);
                         }
                         CustomerCreateResp info = response.getContent();
                         serviceId = info.getUuid();
                         customerId = info.getCustomerID();
                         mCustomer = info.getCustomer();
-                        if (activityType == CustomerContants.CARD_ACTIVITY_CREATE_TYPE) {                            showBandCustomerDialog(info.getCustomer());
-                        } else {                             EventBus.getDefault().post(new EventCreateOrEditCustomer(type, info.getCustomerListBean()));
-                                                        setCardVisble(true);
+                        if (activityType == CustomerContants.CARD_ACTIVITY_CREATE_TYPE) {
+                            showBandCustomerDialog(info.getCustomer());
+                        } else {
+                            EventBus.getDefault().post(new EventCreateOrEditCustomer(type, info.getCustomerListBean()));
+                            setCardVisble(true);
                             finish();
                         }
 
@@ -829,7 +834,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             }
 
         };
-                oper.saveCustomer(customer, LoadingYFResponseListener.ensure(listener, getSupportFragmentManager()));
+        oper.saveCustomer(customer, LoadingYFResponseListener.ensure(listener, getSupportFragmentManager()));
 
     }
 
@@ -851,7 +856,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
                 if (mCustomer != null) {
                     customer.levelId = mCustomer.levelId;
                 }
-                                EventBus.getDefault().post(new EventCreateOrEditCustomer(type, customer.getCustomerListBean()));
+                EventBus.getDefault().post(new EventCreateOrEditCustomer(type, customer.getCustomerListBean()));
                 finish();
             }
 
@@ -872,16 +877,15 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
     };
 
 
-
     protected void close() {
 
 
         finish();
-            }
+    }
 
 
     private void initPopwindow() {
-                try {
+        try {
             CustomerDal customerDal = OperatesFactory.create(CustomerDal.class);
             list = customerDal.findCustomerGroupAll();
         } catch (Exception e) {
@@ -920,7 +924,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        groupId = list.get(position).getId();
+            groupId = list.get(position).getId();
             mGroup.setText(list.get(position).getGroupName());
             mEditPopWindow.dismiss();
         }
@@ -931,7 +935,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if (mSelectSet.contains(enjoyValue.get(position))) {
+            if (mSelectSet.contains(enjoyValue.get(position))) {
                 mSelectSet.remove(enjoyValue.get(position));
             } else {
                 mSelectSet.add(enjoyValue.get(position));
@@ -970,7 +974,7 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
 
     private void returnList() {
         Intent intent;
-                intent = new Intent(getBaseContext(), BeautyCustomerActivity_.class);
+        intent = new Intent(getBaseContext(), BeautyCustomerActivity_.class);
 
         startActivity(intent);
         finish();
@@ -1009,8 +1013,6 @@ public class BeautyCustomerEditActivity extends MainBaseActivity {
             finish();
         }
     }
-
-
 
 
     private void chooseFaceDesc(boolean hasFaceCode) {

@@ -101,6 +101,7 @@ public class BeautyCustomerModeLaunchFragment extends BasicFragment implements V
         initTask = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void[] objects) {
+                BeautyOrderManager.clearShopcart();
                 BeautyOrderManager.initOrderByTable(mTable, BusinessType.BEAUTY);
                 return null;
             }

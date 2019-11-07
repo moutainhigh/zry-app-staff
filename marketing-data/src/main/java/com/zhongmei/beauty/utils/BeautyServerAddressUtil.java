@@ -57,7 +57,7 @@ public class BeautyServerAddressUtil {
 
 
     public static String getTask() {
-        return ShopInfoManager.getInstance().getServerKey() + "/pos/taskRemind/list";
+        return ShopInfoManager.getInstance().getServerKey() + "/staff/taskRemind/list";
     }
 
 
@@ -67,12 +67,12 @@ public class BeautyServerAddressUtil {
 
 
     public static String saveTask() {
-        return ShopInfoManager.getInstance().getServerKey() + "/pos/taskRemind/addTaskRemind";
+        return ShopInfoManager.getInstance().getServerKey() + "/staff/taskRemind/save";
     }
 
 
     public static String saveEditTask() {
-        return ShopInfoManager.getInstance().getServerKey() + "/pos/taskRemind/modfityTaskRemind";
+        return ShopInfoManager.getInstance().getServerKey() + "/staff/taskRemind/finish";//任务完成接口，将修改放到save中
     }
 
 
@@ -137,7 +137,7 @@ public class BeautyServerAddressUtil {
 
 
     public static String getBookingList() {
-        return SwitchServerManager.getInstance().getServerKey() + "/pos/api/booking/getPageBooking";
+        return ShopInfoManager.getInstance().getServerKey() + "/staff/booking/list";
     }
 
 

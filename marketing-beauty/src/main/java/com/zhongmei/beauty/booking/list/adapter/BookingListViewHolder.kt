@@ -93,7 +93,7 @@ class BookingListViewHolder : RecyclerView.ViewHolder {
             holder.itemView.btn_accept.visibility = View.GONE
             holder.itemView.btn_refuse.visibility = View.GONE
             holder.itemView.btn_open.visibility = View.VISIBLE
-            holder.itemView.btn_modify.visibility = View.VISIBLE
+            holder.itemView.btn_modify.visibility = View.GONE//服务员端没有修改预定的权限，只有执行，或者查看
         }
     }
 

@@ -66,6 +66,7 @@ public class BeautySettingActivity extends BaseActivity {
     @AfterViews
     public void init() {
         mFragmentManager = getSupportFragmentManager();
+        onUseSenceClick();
     }
 
     @UiThread

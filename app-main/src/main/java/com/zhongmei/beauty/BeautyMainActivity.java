@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zhongmei.beauty.customer.BeautyCustomerContentFragment;
 import com.zhongmei.beauty.customer.BeautyCustomerContentFragment_;
@@ -28,6 +30,7 @@ import com.zhongmei.yunfu.init.sync.SyncServiceManager;
 import com.zhongmei.yunfu.init.sync.SyncServiceUtil;
 
 import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.FragmentById;
 import org.androidannotations.annotations.ViewById;
@@ -44,21 +47,32 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
     public static final int PAGE_REPORT_CENTER =0x06;
     public static final int PAGE_TASK_CENTER =0x07;
 
+    @ViewById(R.id.back_btn)
+    protected ImageView btn_back;
+
+    @ViewById(R.id.title_name)
+    protected TextView tv_title;
+
     @ViewById(R.id.dl_drawer)
     protected DrawerLayout mDrawerLayout;
 
 
-    @FragmentById(R.id.fragment_titlebar)
-    protected TitleBarFragment mTitleBarFragment;
 
 //    @FragmentById(R.id.fragment_anchor)
 //    protected BeautyMainAnchorFragment mAnchorFragment;
 
     private int currentPage=PAGE_CASHIER;
+    private String moduleTitle="";
 
     public static void start(Context context) {
         context.startActivity(new Intent(context, BeautyMainActivity_.class));
     }
+
+    @Click(R.id.back_btn)
+    public void onBackClick(View v){
+        this.finish();
+    }
+
 
     @Override
     protected void onCreate(Bundle arg0) {
@@ -69,7 +83,6 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
     @AfterViews
     protected void initView() {
 //        mAnchorFragment.setBeautyAnchor(this);
-        mTitleBarFragment.setBgColor(R.color.bg_beauty_main);
 
         mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         mDrawerLayout.setScrimColor(getResources().getColor(R.color.shadow_bg));
@@ -86,7 +99,10 @@ public class BeautyMainActivity extends MainBaseActivity implements IBeautyAncho
         Intent intent=getIntent();
         if(intent!=null){
             currentPage=intent.getIntExtra("page_no",PAGE_CASHIER);
+            moduleTitle=intent.getStringExtra("module_name");
         }
+
+        tv_title.setText(moduleTitle);
 
         switch (currentPage) {
             case PAGE_CASHIER:

@@ -3,6 +3,7 @@ package com.zhongmei.beauty;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridLayout;
@@ -20,6 +21,8 @@ import com.zhongmei.bty.dinner.table.model.DinnertableModel;
 import com.zhongmei.bty.dinner.table.model.ZoneModel;
 import com.zhongmei.yunfu.Constant;
 import com.zhongmei.yunfu.R;
+import com.zhongmei.yunfu.context.session.Session;
+import com.zhongmei.yunfu.context.session.core.user.AuthUser;
 import com.zhongmei.yunfu.context.util.SharedPreferenceUtil;
 import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.db.entity.trade.Tables;
@@ -88,6 +91,8 @@ public class BeautySettingTableBindFragment extends BasicFragment implements ITa
         }
         setTableName(mTable,false);
 
+        setWaiterName();
+
         mTableManager=new TableFilterManager();
         mTableManager.setTableListener(this);
         mTableManager.loadTables();
@@ -121,6 +126,13 @@ public class BeautySettingTableBindFragment extends BasicFragment implements ITa
         tv_commitTable.setVisibility(View.GONE);
     }
 
+    private void setWaiterName(){
+        AuthUser user = Session.getAuthUser();
+        if(user != null){
+            tv_waiterName.setText(user.getName());
+        }
+    }
+
     @UiThread
     protected void initTableZone(List<ZoneModel> zoneModles){
         if(Utils.isEmpty(zoneModles)){
@@ -132,22 +144,32 @@ public class BeautySettingTableBindFragment extends BasicFragment implements ITa
         for (final ZoneModel zoneModle : zoneModles) {
             TextView textView = new TextView(getContext());
             textView.setText(zoneModle.getName());
-            textView.setTextColor(getContext().getResources().getColor(R.color.color_333333));
+            textView.setTextColor(getContext().getResources().getColor(R.color.color_666666));
             textView.setTextSize(getContext().getResources().getDimension(R.dimen.text_16));
-            textView.setBackgroundResource(R.drawable.beauty_shape_square);
+            textView.setBackgroundResource(R.drawable.beauty_shape_gray);
+            textView.setGravity(Gravity.CENTER);
+            textView.setPadding(0,DensityUtil.dip2px(getContext(),10),0,DensityUtil.dip2px(getContext(),10));
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     loadTableData(zoneModle.getId());
                     v.setBackgroundResource(R.color.customer_allowance);
+                    ((TextView)v).setTextColor(getContext().getResources().getColor(R.color.beauty_color_white));
                     if(mTempAreaTextView!=null){
-                        mTempAreaTextView.setBackgroundResource(R.drawable.beauty_shape_square); //加入临时记录
+                        mTempAreaTextView.setBackgroundResource(R.drawable.beauty_shape_gray); //加入临时记录
+                        mTempAreaTextView.setTextColor(getContext().getResources().getColor(R.color.color_666666));
                     }
                     mTempAreaTextView= (TextView) v;
                 }
             });
             layout_tableArea.addView(textView);
+
             Log.e("initTableZone","addView"+zoneModle.getName());
+        }
+
+        if(layout_tableArea.getChildCount()>0){
+            View view=layout_tableArea.getChildAt(0);
+            view.callOnClick();
         }
 
         loadTableData(zoneModles.get(0).getId());//

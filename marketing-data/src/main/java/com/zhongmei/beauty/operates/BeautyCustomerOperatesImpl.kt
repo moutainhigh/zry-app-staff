@@ -1,5 +1,6 @@
 package com.zhongmei.beauty.operates
 
+import android.text.TextUtils
 import com.zhongmei.beauty.operates.message.*
 import com.zhongmei.beauty.utils.BeautyServerAddressUtil
 import com.zhongmei.bty.basemodule.beauty.BeautyCardServiceInfo
@@ -84,7 +85,7 @@ class BeautyCustomerOperatesImpl : AbstractOpeartesImpl, BeautyCustomerOperates 
 
     override fun saveTask(taskReq: TaskCreateOrEditReq, listener: YFResponseListener<YFResponse<TaskRemind>>) {
         var url = BeautyServerAddressUtil.saveTask()
-        if(taskReq.taskId!=null){
+        if(!TextUtils.isEmpty(taskReq.taskResult)){//完成任务
             url = BeautyServerAddressUtil.saveEditTask()
         }
         val executor = JFRequest.create(url)

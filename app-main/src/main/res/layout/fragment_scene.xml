@@ -45,7 +45,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:button="@null"
-                android:drawableLeft="@drawable/handover_btn_ok"
+                android:drawableLeft="@drawable/checkbox_style"
                 android:clickable="false" />
         </RelativeLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:button="@null"
-                android:drawableLeft="@drawable/handover_btn_ok"
+                android:drawableLeft="@drawable/checkbox_style"
                 android:clickable="false" />
         </RelativeLayout>
     </LinearLayout>

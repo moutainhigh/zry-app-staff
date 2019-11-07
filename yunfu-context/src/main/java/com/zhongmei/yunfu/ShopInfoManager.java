@@ -16,7 +16,8 @@ public class ShopInfoManager {
     }
 
     private static final String TAG = ShopInfoManager.class.getSimpleName();
-    public static final String MARKETING_SERVER_HOST = "http://mk.zhongmeiyunfu.com/marketing";
+//    public static final String MARKETING_SERVER_HOST = "http://mk.zhongmeiyunfu.com/marketing";
+    public static final String MARKETING_SERVER_HOST ="http://10.180.2.177:8080/marketing";
     public static final String REMOTE_SERVER_HOST = "http://b.zhongmeiyunfu.com/MeiYe";
     //    public static final String REMOTE_SERVER_HOST = "http://192.168.14.100:8090/MeiYe";
     public static final String SHOP_INFO_CFG = "zm_shop_info_cfg";

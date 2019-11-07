@@ -39,6 +39,7 @@ public class ServerAddressUtil {
 
     public String getErpApi() {
         return ShopInfoManager.REMOTE_SERVER_HOST + String.format("/pos/api/sync/shop/info/%s", SystemUtils.getMacAddress());
+//                return ShopInfoManager.MARKETING_SERVER_HOST + String.format("/pos/shop/info/%s", SystemUtils.getMacAddress());
     }
 
 

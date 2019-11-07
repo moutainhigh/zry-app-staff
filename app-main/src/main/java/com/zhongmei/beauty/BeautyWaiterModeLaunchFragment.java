@@ -41,15 +41,15 @@ public class BeautyWaiterModeLaunchFragment extends BasicFragment implements Ada
     private List<AppContent> getApps() {
         List<AppContent> listApps = new ArrayList<>();
 
-        listApps.add(new AppContent("收银/开单", BeautyMainActivity.PAGE_CASHIER, R.drawable.launcher_icon));
-        listApps.add(new AppContent("预约中心", BeautyMainActivity.PAGE_RESERVER, R.drawable.launcher_icon));
-        listApps.add(new AppContent("订单中心", BeautyMainActivity.PAGE_TRADE_CENTER, R.drawable.launcher_icon));
-        listApps.add(new AppContent("会员中心", BeautyMainActivity.PAGE_MEMBER_CENTER, R.drawable.launcher_icon));
-        listApps.add(new AppContent("门店管理", BeautyMainActivity.PAGE_SHOP_MANAGE, R.drawable.launcher_icon));
-        listApps.add(new AppContent("报表中心", BeautyMainActivity.PAGE_REPORT_CENTER, R.drawable.launcher_icon));
-        listApps.add(new AppContent("任务中心", BeautyMainActivity.PAGE_TASK_CENTER, R.drawable.launcher_icon));
+        listApps.add(new AppContent("收银/开单", BeautyMainActivity.PAGE_CASHIER, R.drawable.icon_launch_cashier));
+        listApps.add(new AppContent("预约中心", BeautyMainActivity.PAGE_RESERVER, R.drawable.icon_launch_reserver));
+        listApps.add(new AppContent("订单中心", BeautyMainActivity.PAGE_TRADE_CENTER, R.drawable.icon_launch_trades));
+        listApps.add(new AppContent("会员中心", BeautyMainActivity.PAGE_MEMBER_CENTER, R.drawable.icon_launch_member));
+        listApps.add(new AppContent("门店管理", BeautyMainActivity.PAGE_SHOP_MANAGE, R.drawable.icon_launch_shop));
+        listApps.add(new AppContent("报表中心", BeautyMainActivity.PAGE_REPORT_CENTER, R.drawable.icon_launch_report));
+        listApps.add(new AppContent("任务中心", BeautyMainActivity.PAGE_TASK_CENTER, R.drawable.icon_launch_task));
 
-        AppContent setting = new AppContent("设置中心", -1, R.drawable.launcher_icon);
+        AppContent setting = new AppContent("设置中心", -1, R.drawable.icon_launch_setting);
         setting.setActivityClass("com.zhongmei.beauty.BeautySettingActivity_");
         listApps.add(setting);
         return listApps;
@@ -64,6 +64,7 @@ public class BeautyWaiterModeLaunchFragment extends BasicFragment implements Ada
         Intent intent = new Intent();
         intent.setClassName(app.getPackageName(), app.getActivityClass());
         intent.putExtra("page_no", app.getPageNo());
+        intent.putExtra("module_name", app.getModuleName());
         startActivity(intent);
     }
 }

@@ -8,6 +8,7 @@ public class BeautyBookingListReq {
         private Integer page;
         private Integer type;
         private Integer pageCount = 30;
+        private Long userId;
 
     public Long getStartTime() {
         return startTime;
@@ -47,5 +48,13 @@ public class BeautyBookingListReq {
 
     public void setPageCount(Integer pageCount) {
         this.pageCount = pageCount;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

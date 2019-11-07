@@ -35,9 +35,31 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:singleLine="true"
-                
                 android:textColor="@color/color_333333"
                 android:textSize="@dimen/text_16" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:textSize="@dimen/text_16"
+                android:layout_alignParentLeft="true"
+                android:textColor="@color/color_333333"
+                android:text="商户名称:"/>
+            <TextView
+                android:id="@+id/tvDeviceCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/text_16"/>
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -66,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -112,6 +135,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:orientation="horizontal">
 
             <TextView
@@ -217,29 +241,6 @@
                 android:text="MAC地址:"/>
             <TextView
                 android:id="@+id/tvDeviceid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                
-                android:textColor="@color/color_333333"
-                android:textSize="@dimen/text_16"/>
-        </RelativeLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                
-                android:textSize="@dimen/text_16"
-                android:layout_alignParentLeft="true"
-                android:textColor="@color/color_333333"
-                android:text="设备编号:"/>
-            <TextView
-                android:id="@+id/tvDeviceCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

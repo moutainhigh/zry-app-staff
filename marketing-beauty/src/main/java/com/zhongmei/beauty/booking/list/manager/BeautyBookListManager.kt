@@ -21,6 +21,7 @@ import com.zhongmei.beauty.operates.message.BeautyBookingListReq
 import com.zhongmei.beauty.operates.message.BeautyBookingListResp
 import com.zhongmei.beauty.operates.message.BeautyBookingResp
 import com.zhongmei.bty.commonmodule.data.operate.OperatesFactory
+import com.zhongmei.yunfu.context.session.Session
 import com.zhongmei.yunfu.db.enums.BookingOrderStatus
 import com.zhongmei.yunfu.resp.ResponseObject
 import com.zhongmei.yunfu.util.ToastUtil
@@ -90,6 +91,7 @@ class BeautyBookListManager {
         bookingListReq.page = currentPage
         bookingListReq.pageCount = COMMON_PAGE_COUNT
         bookingListReq.type = BeautyListType.UNSERVICE.value()
+        bookingListReq.userId = Session.getAuthUser().id
         doListReq(activty, bookingListReq, callback)
     }
 
@@ -111,6 +113,7 @@ class BeautyBookListManager {
         bookingListReq.page = currentPage
         bookingListReq.pageCount = COMMON_PAGE_COUNT
         bookingListReq.type = BeautyListType.OUTLINE.value()
+        bookingListReq.userId = Session.getAuthUser().id
         doListReq(activty, bookingListReq, callback)
     }
 
@@ -130,6 +133,7 @@ class BeautyBookListManager {
         bookingListReq.page = currentPage
         bookingListReq.pageCount = COMMON_PAGE_COUNT
         bookingListReq.type = BeautyListType.CANCELD.value()
+        bookingListReq.userId = Session.getAuthUser().id
         doListReq(activty, bookingListReq, callback)
     }
 
@@ -150,6 +154,7 @@ class BeautyBookListManager {
         bookingListReq.page = currentPage
         bookingListReq.pageCount = COMMON_PAGE_COUNT
         bookingListReq.type = BeautyListType.UNDEAL.value()
+        bookingListReq.userId = Session.getAuthUser().id
         doListReq(activty, bookingListReq, callback)
     }
 

@@ -909,4 +909,8 @@ public class DishManager {
         List<DishShop> dishList = new ArrayList<>(DishCache.getDishHolder().getAll());
         return getDishsVo(dishList);
     }
+
+    public void getDishPageInfo(){
+
+    }
 }

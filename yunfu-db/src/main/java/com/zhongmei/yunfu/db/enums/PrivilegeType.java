@@ -77,6 +77,8 @@ public enum PrivilegeType implements ValueEnum<Integer> {
 
     SPECIAL_PRICE(29),
 
+    GOODS_SERVICE(30),//小程序端的服务购买
+
 
     MEMBER_REBATE(26),
 

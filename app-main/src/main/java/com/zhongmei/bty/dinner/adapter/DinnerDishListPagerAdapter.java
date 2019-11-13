@@ -3,6 +3,7 @@ package com.zhongmei.bty.dinner.adapter;
 import android.content.Context;
 import android.widget.ListAdapter;
 
+import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.bty.snack.orderdish.adapter.OrderDishListPagerAdapter;
 import com.zhongmei.util.SettingManager;
 import com.zhongmei.bty.settings.component.panel.IDinnerPanelSettings;
@@ -15,7 +16,7 @@ public abstract class DinnerDishListPagerAdapter extends OrderDishListPagerAdapt
 
     private int panelType = IDinnerPanelSettings.PANEL_TYPE_1;
 
-    public DinnerDishListPagerAdapter(Context context, List<DishVo> dataSet) {
+    public DinnerDishListPagerAdapter(Context context, List<DishPageInfo> dataSet) {
         super(context, dataSet);
         IDinnerPanelSettings panelSettings = SettingManager.getSettings(IDinnerPanelSettings.class);
         panelType = panelSettings.getPanel();

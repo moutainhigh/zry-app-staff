@@ -292,7 +292,8 @@ public class TradePrivilege extends DataEntityBase implements ICreator, IUpdator
         if (getPrivilegeType() == PrivilegeType.COLLAGE ||
                 getPrivilegeType() == PrivilegeType.SECKILL
                 || getPrivilegeType() == PrivilegeType.BARGAIN
-        || getPrivilegeType() == PrivilegeType.SPECIAL_PRICE) {
+        || getPrivilegeType() == PrivilegeType.SPECIAL_PRICE
+                || getPrivilegeType() == PrivilegeType.GOODS_SERVICE) {
             return true;
         }
         return false;

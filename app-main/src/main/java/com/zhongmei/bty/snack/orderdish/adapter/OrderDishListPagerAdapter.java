@@ -13,6 +13,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 
+import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import com.zhongmei.bty.basemodule.orderdish.manager.DishManager;
@@ -31,7 +32,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
 
     private LayoutInflater mLayoutInflater;
 
-    private List<DishVo> mDataSet;
+    private List<DishPageInfo> mDataSet;
 
     private long mLastItemClickTime = 0L;
 
@@ -42,7 +43,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
     private int mGridHeight = 0;
     protected int dishCardType;
 
-    public OrderDishListPagerAdapter(Context context, List<DishVo> dataSet) {
+    public OrderDishListPagerAdapter(Context context, List<DishPageInfo> dataSet) {
         this.mContext = context;
         this.mLayoutInflater = LayoutInflater.from(mContext);
         this.mDataSet = dataSet;
@@ -50,7 +51,8 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return (mDataSet.size() + getPageSize() - 1) / getPageSize();
+//        return (mDataSet.size() + getPageSize() - 1) / getPageSize();
+        return mDataSet.size();
     }
 
     @Override
@@ -76,7 +78,8 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
                 return false;
             }
         });
-        final List<DishVo> subDataSet = getSubDataSet(position);
+//        final List<DishVo> subDataSet = getSubDataSet(position);
+        final List<DishVo> subDataSet = getItem(position).listDishVos;
         gridView.setAdapter(getAdapter(subDataSet));
         gridView.setOnItemClickListener(new OnItemClickListener() {
 
@@ -200,8 +203,15 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
         return PagerAdapter.POSITION_NONE;
     }
 
+    public DishPageInfo getItem(int position){
+        if(mDataSet!=null && mDataSet.size()>position){
+            return mDataSet.get(position);
+        }
+        return null;
+    }
 
-    public void setDataSet(List<DishVo> dataSet) {
+
+    public void setDataSet(List<DishPageInfo> dataSet) {
         mDataSet.clear();
         if (dataSet != null) {
             mDataSet.addAll(dataSet);
@@ -211,25 +221,25 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
 
     @Override
     public void notifyDataSetChanged() {
-        DishManager.clearDishToEnd(mDataSet);
+//        DishManager.clearDishToEnd(mDataSet);
         super.notifyDataSetChanged();
     }
 
 
-    private List<DishVo> getSubDataSet(int position) {
-        int start = position * getPageSize();
-        int end = Math.min((position + 1) * getPageSize(), mDataSet.size());
-        List<DishVo> list = new ArrayList<DishVo>(mDataSet.subList(start, end));
-
-        int size = list.size();
-        if (size < getPageSize()) {
-            for (int i = size; i < getPageSize(); i++) {
-                list.add(null);
-            }
-        }
-
-        return list;
-    }
+//    private List<DishVo> getSubDataSet(int position) {
+//        int start = position * getPageSize();
+//        int end = Math.min((position + 1) * getPageSize(), mDataSet.size());
+//        List<DishVo> list = new ArrayList<DishVo>(mDataSet.subList(start, end));
+//
+//        int size = list.size();
+//        if (size < getPageSize()) {
+//            for (int i = size; i < getPageSize(); i++) {
+//                list.add(null);
+//            }
+//        }
+//
+//        return list;
+//    }
 
     private boolean isItemClicked() {
 
@@ -292,7 +302,7 @@ public abstract class OrderDishListPagerAdapter extends PagerAdapter {
     }
 
 
-    protected int getPageSize() {
+    public int getPageSize() {
         return getNumColumns() * getNumRows();
     }
 

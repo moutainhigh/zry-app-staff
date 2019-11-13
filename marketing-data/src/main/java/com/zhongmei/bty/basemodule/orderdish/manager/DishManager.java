@@ -1,8 +1,10 @@
 package com.zhongmei.bty.basemodule.orderdish.manager;
 
+import android.graphics.pdf.PdfDocument;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.yunfu.data.R;
 import com.zhongmei.bty.basemodule.inventory.bean.InventoryInfo;
 import com.zhongmei.bty.basemodule.inventory.utils.InventoryCacheUtil;
@@ -174,6 +176,42 @@ public class DishManager {
         DishInfo dishInfo = new DishInfo(dishType, dishsVo, false);
         selectedList = dishList;
         return dishInfo;
+    }
+
+    /**
+     * 根据size分组
+     * @param perSize
+     * @return
+     */
+    public List<DishPageInfo> loadDishInfo(int perSize){
+        List<DishPageInfo> listDishPageInfos=new ArrayList<>();
+        Collection<DishBrandType> twoDishTypes = DishCache.getDishTypeHolder().getAll();
+        int index=0;
+        for (DishBrandType dishType : twoDishTypes) {
+            List<DishShop> dishList = DishCache.getDishHolder().getDishShopByType(dishType.getId());
+            int pageSize=(int)dishList.size()/perSize;
+            if(dishList.size()%perSize>0){
+                pageSize=pageSize+1;//如果超过一页，不足一页，加上一页
+            }
+
+            for(int i=0;i<pageSize;i++){
+                DishPageInfo pageInfo=new DishPageInfo(dishType,getDishVos(dishList,i,perSize),index,false);
+                listDishPageInfos.add(pageInfo);
+                index++;
+            }
+
+        }
+
+        return listDishPageInfos;
+    }
+
+    public List<DishVo> getDishVos(List<DishShop> listDishShop,int currentPage,int perSize){
+        int startIndex=currentPage*perSize;
+        int endIndex=startIndex+perSize;
+        if(listDishShop.size()<=endIndex){
+            endIndex=listDishShop.size();
+        }
+        return getDishsVo(listDishShop.subList(startIndex,endIndex));
     }
 
 

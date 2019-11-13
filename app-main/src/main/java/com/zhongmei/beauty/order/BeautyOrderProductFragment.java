@@ -3,13 +3,19 @@ package com.zhongmei.beauty.order;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongmei.beauty.BeautyShopCartActivity;
+import com.zhongmei.beauty.order.adapter.BeautyCardAdapter;
 import com.zhongmei.beauty.order.event.BeautyShopCartLoadEvent;
+import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.bty.basemodule.orderdish.event.EventDishChangedNotice;
+import com.zhongmei.bty.snack.orderdish.adapter.DishTypeAdapter;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import com.zhongmei.yunfu.context.util.Utils;
@@ -24,14 +30,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class BeautyOrderProductFragment extends DishHomePageFragment implements View.OnClickListener {
+public class BeautyOrderProductFragment extends DishHomePageFragment implements View.OnClickListener , AdapterView.OnItemClickListener {
 
     Button btn_service, btn_product;
     RelativeLayout rl_back,rl_shopCart;
     TextView tv_tableName,tv_waiterName,tv_shopcartCount;
 
+    LinearLayout layout_typeName;
+    TextView tv_curDishType;
+    ListView lv_dishType;
+
+    DishTypeAdapter mDishTypeAdapter;
+
     protected void initAdapter() {
-        mAdapter = new BeautyOrderProductListPagerAdapter(getActivity(), new ArrayList<DishVo>()) {
+        mAdapter = new BeautyOrderProductListPagerAdapter(getActivity(), new ArrayList<DishPageInfo>()) {
 
             @Override
             public void doItemTouch(DishVo dishVo) {
@@ -64,6 +76,10 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
         tv_waiterName=(TextView)view.findViewById(R.id.tv_waiter);
         tv_shopcartCount=(TextView)view.findViewById(R.id.tv_shopcart_count);
 
+        layout_typeName=(LinearLayout)view.findViewById(R.id.layout_type_name);
+        tv_curDishType=(TextView)view.findViewById(R.id.tv_cur_dish_type);
+        lv_dishType=(ListView)view.findViewById(R.id.lv_dish_type);
+
         btn_service.setSelected(true);
         btn_product.setSelected(false);
         btn_service.setOnClickListener(tabClickListener);
@@ -71,6 +87,11 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
 
         rl_back.setOnClickListener(this);
         rl_shopCart.setOnClickListener(this);
+        layout_typeName.setOnClickListener(this);
+        lv_dishType.setOnItemClickListener(this);
+
+        mDishTypeAdapter=new DishTypeAdapter(getContext(),new ArrayList<DishPageInfo>());
+        lv_dishType.setAdapter(mDishTypeAdapter);
 
     }
 
@@ -157,6 +178,43 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
                 Intent intent=new Intent(getContext(), BeautyShopCartActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.layout_type_name:
+                //弹出所有商品品牌选项
+                mDishTypeAdapter.notifyDataSetChanged();
+                layout_typeName.setVisibility(View.GONE);
+                lv_dishType.setVisibility(View.VISIBLE);
+                mViewShadow.setVisibility(View.VISIBLE);
+                break;
+            case R.id.view_shadow:
+                layout_typeName.setVisibility(View.VISIBLE);
+                lv_dishType.setVisibility(View.GONE);
+                mViewShadow.setVisibility(View.GONE);
+                break;
+
         }
+    }
+
+    public void setCurDishType(DishPageInfo dishPageInfo){
+        if(dishPageInfo!=null){
+            mDishTypeAdapter.setCurPageInfo(dishPageInfo);
+            tv_curDishType.setText(dishPageInfo.dishBrand.getName());
+        }
+    }
+
+    public void refreshAdapterData(List<DishPageInfo> listDishPageInfo){
+        mDishTypeAdapter.setData(listDishPageInfo);
+        mDishTypeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        DishPageInfo dishPageInfo = mDishTypeAdapter.getItem(position);
+        if(dishPageInfo!=null){
+            mVpDishList.setCurrentItem(dishPageInfo.position,true);
+        }
+        setCurDishType(dishPageInfo);
+        layout_typeName.setVisibility(View.VISIBLE);
+        lv_dishType.setVisibility(View.GONE);
+        mViewShadow.setVisibility(View.GONE);
     }
 }

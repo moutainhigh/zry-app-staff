@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.yunfu.context.base.BaseApplication;
 import com.zhongmei.yunfu.ui.base.BasicDialogFragment;
@@ -103,7 +104,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
         cbSelectAll.setChecked(false);
         cbSelectAll.setText(R.string.selectAll);
         cbSelectAll.setOnCheckedChangeListener(mCheckedChangeListener);
-        mAdapter = new DinnerDishListPagerAdapter(getActivity(), new ArrayList<DishVo>()) {
+        mAdapter = new DinnerDishListPagerAdapter(getActivity(), new ArrayList<DishPageInfo>()) {
 
             @Override
             public void doItemTouch(DishVo dishVo) {
@@ -327,7 +328,7 @@ public class DinnerDishBatchUpdateDishStatusFragment extends BasicDialogFragment
     private void loadData() {
         if (isAdded() && mDishInfo != null && mAdapter != null) {
             if (Utils.isNotEmpty(mDishInfo.dishList)) {
-                mAdapter.setDataSet(mDishInfo.dishList);
+//                mAdapter.setDataSet(mDishInfo.dishList);
                 createIndex(mCurrentIndex, mAdapter.getCount());
 
                 vpDishList.setVisibility(View.VISIBLE);

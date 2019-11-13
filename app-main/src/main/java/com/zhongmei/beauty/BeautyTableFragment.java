@@ -124,7 +124,9 @@ public class BeautyTableFragment extends TableFragmentBase implements ITableOper
 
     @Override
     public void onDestroy() {
-        mTableManager.onDestory();
+        if(mTableManager!=null){
+            mTableManager.onDestory();
+        }
         super.onDestroy();
     }
 

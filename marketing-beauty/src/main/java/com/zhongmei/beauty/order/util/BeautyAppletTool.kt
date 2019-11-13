@@ -204,6 +204,8 @@ class BeautyAppletTool {
                     return PrivilegeType.SECKILL
                 4 ->
                     return PrivilegeType.SPECIAL_PRICE
+                5 ->
+                    return PrivilegeType.GOODS_SERVICE
                 else ->
                     return PrivilegeType.__UNKNOWN__
             }

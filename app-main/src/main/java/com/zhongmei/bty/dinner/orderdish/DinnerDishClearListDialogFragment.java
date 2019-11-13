@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.yunfu.MainApplication;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.yunfu.context.base.BaseApplication;
@@ -75,14 +76,16 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
     protected Button close_button;
 
     @ViewById(R.id.batchupdate_button)
-    protected Button batchUpdateButton;    @ViewById(R.id.descipe)
+    protected Button batchUpdateButton;
+    @ViewById(R.id.descipe)
     protected TextView descipe;
     protected DinnerDishListPagerAdapter mAdapter;
 
     private LoadDishTask mTask;
 
     private int mCurrentIndex = 0;
-    private DishInfo mDishInfo;    protected DishManager mDishManager;
+    private DishInfo mDishInfo;
+    protected DishManager mDishManager;
     private OnCloseListener mOnCloseListener;
 
     @Override
@@ -112,11 +115,11 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         vpDishList.setOnPageChangeListener(this);
 
-        mAdapter = new DinnerDishListPagerAdapter(getActivity(), new ArrayList<DishVo>()) {
+        mAdapter = new DinnerDishListPagerAdapter(getActivity(), new ArrayList<DishPageInfo>()) {
 
             @Override
             public void doItemTouch(DishVo dishVo) {
-                            }
+            }
 
             @Override
             public void doItemLongClick(DishVo dishVo) {
@@ -159,7 +162,7 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
 
     public void myGridItemLongClicked(final DishVo dishVo) {
         if (dishVo.isContainProperties()) {
-                        OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
+            OrderDishClearStatusFragment orderDishClearStatusFragment = new OrderDishClearStatusFragment_();
             orderDishClearStatusFragment.setData(dishVo);
             orderDishClearStatusFragment.setOnCloseListener(new OnCloseListener() {
 
@@ -186,7 +189,6 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
                     .show(getActivity().getSupportFragmentManager(), "clearDishStatus");
         }
     }
-
 
 
     private void requestClearStatus(final DishVo dishVo, final ClearStatus newValue) {
@@ -248,7 +250,8 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
 
     public void onEventMainThread(EventDishChangedNotice eventDishChangedNotice) {
         Log.e("onEventMainThread", " received  EventDishChangedNotice");
-        loadData();    }
+        loadData();
+    }
 
 
     private void loadData() {
@@ -275,7 +278,8 @@ public class DinnerDishClearListDialogFragment extends BasicDialogFragment imple
         protected void onPostExecute(DishInfo dishInfo) {
             if (isAdded() && dishInfo != null && mAdapter != null) {
                 if (Utils.isNotEmpty(dishInfo.dishList)) {
-                    mDishInfo = dishInfo;                    mAdapter.setDataSet(dishInfo.dishList);
+                    mDishInfo = dishInfo;
+//                    mAdapter.setDataSet(dishInfo.dishList);
                     createIndex(mCurrentIndex, mAdapter.getCount());
 
                     vpDishList.setVisibility(View.VISIBLE);

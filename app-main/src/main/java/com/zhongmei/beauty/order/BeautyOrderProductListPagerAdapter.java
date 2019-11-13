@@ -3,6 +3,7 @@ package com.zhongmei.beauty.order;
 import android.content.Context;
 import android.widget.ListAdapter;
 
+import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import com.zhongmei.beauty.order.adapter.BeautyProductAdapter;
 import com.zhongmei.bty.snack.orderdish.adapter.OrderDishListPagerAdapter;
@@ -14,7 +15,7 @@ import java.util.List;
 public abstract class BeautyOrderProductListPagerAdapter extends OrderDishListPagerAdapter {
 
 
-    public BeautyOrderProductListPagerAdapter(Context context, List<DishVo> dataSet) {
+    public BeautyOrderProductListPagerAdapter(Context context, List<DishPageInfo> dataSet) {
         super(context, dataSet);
     }
 

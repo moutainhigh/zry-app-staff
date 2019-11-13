@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhongmei.beauty.utils.BeautyOrderConstants;
+import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishSetmealVo;
 import com.zhongmei.bty.router.RouteIntent;
 import com.zhongmei.yunfu.MainApplication;
@@ -134,9 +135,9 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     protected Button mBtnTempDish;
     private HorizontalScrollView mHsvDots;
     private LinearLayout mLlDots;
-    private ViewPager mVpDishList;
+    protected ViewPager mVpDishList;
     private ImageView mIvDishTypeEmpty;
-    private View mViewShadow;
+    protected View mViewShadow;
 
     private InventoryCacheUtil mInventoryCacheUtil;
 
@@ -158,6 +159,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         mBtClearDishListShow.setOnClickListener(this);
         mBtnScanCode.setOnClickListener(this);
         mBtnTempDish.setOnClickListener(this);
+        mViewShadow.setOnClickListener(this);
 
         int busInteger = getActivity().getIntent().getIntExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE, ValueEnums.toValue(BusinessType.BEAUTY));
         businessTypeValue = ValueEnums.toEnum(BusinessType.class, busInteger);
@@ -617,7 +619,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         mTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    private class LoadDishTask extends AsyncTask<Void, Void, DishInfo> {
+    private class LoadDishTask extends AsyncTask<Void, Void, List<DishPageInfo>> {
 
         DishBrandType dishBrandType;
         String cartUuid;
@@ -628,27 +630,30 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         }
 
         @Override
-        protected DishInfo doInBackground(Void... params) {
-            if (cartUuid == null) {
-                RLog.i(RLog.DISH_KEY_TAG, "## 正餐商品界面根据商品中类:" + dishBrandType.getName() + "调用mDishManager->switchType获取商品信息");
-                return mDishManager.switchType(dishBrandType);
-            } else {
-                RLog.i(RLog.DISH_KEY_TAG, "## 正餐商品界面根据商品中类:" + dishBrandType.getName() + "调用mDishManager->buffetSwitchTypes获取商品信息");
-                return mDishManager.buffetSwitchTypes(mIsSingle, cartUuid, dishBrandType);
-            }
+        protected List<DishPageInfo> doInBackground(Void... params) {
+//            if (cartUuid == null) {
+//                RLog.i(RLog.DISH_KEY_TAG, "## 正餐商品界面根据商品中类:" + dishBrandType.getName() + "调用mDishManager->switchType获取商品信息");
+//                return mDishManager.switchType(dishBrandType);
+//            } else {
+//                RLog.i(RLog.DISH_KEY_TAG, "## 正餐商品界面根据商品中类:" + dishBrandType.getName() + "调用mDishManager->buffetSwitchTypes获取商品信息");
+//                return mDishManager.buffetSwitchTypes(mIsSingle, cartUuid, dishBrandType);
+//            }
+            return mDishManager.loadDishInfo(mAdapter.getPageSize());
         }
 
         @Override
-        protected void onPostExecute(DishInfo dishInfo) {
-            if (isAdded() && dishInfo != null && mAdapter != null && dishInfo.dishType != null) {
-                if (Utils.isNotEmpty(dishInfo.dishList)) {
+        protected void onPostExecute(List<DishPageInfo> dishInfo) {
+            if (isAdded() && dishInfo != null && mAdapter != null) {
+                if (Utils.isNotEmpty(dishInfo)) {
                     Log.e("BeautyOrderProduct","商品展示UI更新数据....");
-                    mAdapter.setDataSet(dishInfo.dishList);
+                    mAdapter.setDataSet(dishInfo);
                     createIndex(mCurrentIndex, mAdapter.getCount());
                     mVpDishList.setCurrentItem(0, false);
                     mVpDishList.setVisibility(View.VISIBLE);
+                    setCurDishType(dishInfo.get(0));
                     mLlDots.setVisibility(View.VISIBLE);
                     mIvDishTypeEmpty.setVisibility(View.GONE);
+                    refreshAdapterData(dishInfo);
                 } else {
                     mVpDishList.setVisibility(View.GONE);
                     mLlDots.setVisibility(View.GONE);
@@ -679,7 +684,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     }
 
     protected void initAdapter() {
-        mAdapter = new DinnerDishListPagerAdapter(getActivity(), new ArrayList<DishVo>()) {
+        mAdapter = new DinnerDishListPagerAdapter(getActivity(), new ArrayList<DishPageInfo>()) {
 
             @Override
             public void doItemTouch(DishVo dishVo) {
@@ -803,6 +808,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     @Override
     public void onPageSelected(int position) {
         columnSelectIndex = position;
+        setCurDishType(mAdapter.getItem(position));
         for (int i = 0; i < mLlDots.getChildCount(); i++) {
             View checkView = mLlDots.getChildAt(position);
             if (checkView == null) continue;
@@ -936,5 +942,13 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             }
         }
     };
+
+    public void setCurDishType(DishPageInfo dishPageInfo){
+        //子类实现
+    }
+
+    public void refreshAdapterData(List<DishPageInfo> listDishPageInfo){
+
+    }
 
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -39,6 +40,8 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
     LinearLayout layout_typeName;
     TextView tv_curDishType;
     ListView lv_dishType;
+
+    private ImageView iv_search;
 
     DishTypeAdapter mDishTypeAdapter;
 
@@ -80,6 +83,8 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
         tv_curDishType=(TextView)view.findViewById(R.id.tv_cur_dish_type);
         lv_dishType=(ListView)view.findViewById(R.id.lv_dish_type);
 
+        iv_search=(ImageView)view.findViewById(R.id.iv_search);
+
         btn_service.setSelected(true);
         btn_product.setSelected(false);
         btn_service.setOnClickListener(tabClickListener);
@@ -89,6 +94,7 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
         rl_shopCart.setOnClickListener(this);
         layout_typeName.setOnClickListener(this);
         lv_dishType.setOnItemClickListener(this);
+        iv_search.setOnClickListener(this);
 
         mDishTypeAdapter=new DishTypeAdapter(getContext(),new ArrayList<DishPageInfo>());
         lv_dishType.setAdapter(mDishTypeAdapter);
@@ -189,6 +195,9 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
                 layout_typeName.setVisibility(View.VISIBLE);
                 lv_dishType.setVisibility(View.GONE);
                 mViewShadow.setVisibility(View.GONE);
+                break;
+            case R.id.iv_search:
+                onSearchClick();
                 break;
 
         }

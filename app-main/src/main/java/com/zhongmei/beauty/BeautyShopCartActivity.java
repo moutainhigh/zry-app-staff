@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -84,6 +85,7 @@ public class BeautyShopCartActivity extends MainBaseActivity implements View.OnC
 
     protected View shadowView;
     protected View viewMasking;
+    protected LinearLayout orderDishLeft;
     protected LinearLayout orderDishMiddle;
     protected ImageButton btn_close;
 
@@ -137,6 +139,7 @@ public class BeautyShopCartActivity extends MainBaseActivity implements View.OnC
     public void init() {
         shadowView = findViewById(R.id.view_shadow);
         viewMasking = findViewById(R.id.view_masking);
+        orderDishLeft=(LinearLayout)findViewById(R.id.orderDishLeftView) ;
         orderDishMiddle = (LinearLayout) findViewById(R.id.orderDishMiddle);
         btn_close = (ImageButton) findViewById(R.id.btn_close);
         leftLoading = (LoadingView) findViewById(R.id.leftLoading);
@@ -269,7 +272,7 @@ public class BeautyShopCartActivity extends MainBaseActivity implements View.OnC
 
 
     private void changeMidddlePage(int page, String uuid) {
-        shadowView.setVisibility(View.VISIBLE);
+        shadowView.setVisibility(View.GONE);
         btn_close.setVisibility(View.VISIBLE);
         switch (page) {
             case IChangeMiddlePageListener.DEFAULT_PAGE:
@@ -299,7 +302,7 @@ public class BeautyShopCartActivity extends MainBaseActivity implements View.OnC
 
 
     private void showMiddleFragment(DishDataItem item) {
-        shadowView.setVisibility(View.VISIBLE);
+        shadowView.setVisibility(View.GONE);
         btn_close.setVisibility(View.VISIBLE);
         onClearSelected();
         if (item.getType() == ItemType.COMBO) {
@@ -715,5 +718,10 @@ public class BeautyShopCartActivity extends MainBaseActivity implements View.OnC
         }else{
             tv_waiterName.setText("服务员: --");
         }
+    }
+
+    public void changeShopCartLayoutParams(int rightMargin){
+        ViewGroup.MarginLayoutParams layoutParams= (ViewGroup.MarginLayoutParams) orderDishLeft.getLayoutParams();
+        layoutParams.setMargins(layoutParams.leftMargin,layoutParams.topMargin,rightMargin,layoutParams.bottomMargin);
     }
 }

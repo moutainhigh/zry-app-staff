@@ -1,6 +1,7 @@
 package com.zhongmei.beauty.order;
 
 import android.content.DialogInterface;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.zhongmei.beauty.BeautyShopCartActivity;
 import com.zhongmei.beauty.dialog.BeautyBookingWaiterDialog;
 import com.zhongmei.beauty.entity.UserVo;
 import com.zhongmei.beauty.interfaces.BeautyOrderOperatorListener;
@@ -30,6 +32,7 @@ import com.zhongmei.bty.basemodule.shoppingcart.DinnerShoppingCart;
 import com.zhongmei.yunfu.context.session.core.user.User;
 import com.zhongmei.yunfu.db.entity.trade.TradeUser;
 import com.zhongmei.bty.basemodule.trade.enums.TradeUserType;
+import com.zhongmei.yunfu.util.DensityUtil;
 import com.zhongmei.yunfu.util.ValueEnums;
 import com.zhongmei.yunfu.util.ViewUtil;
 import com.zhongmei.beauty.order.event.BeautyUpdateUserInfo;
@@ -592,7 +595,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
 
     public void showCustomContentView(View customContentView) {
         vContent.removeAllViews();
-        vContent.setVisibility(View.VISIBLE);
+        showContent();
         if (mBeautyActionManager != null) {
             mBeautyActionManager.clearSelectedView();
         }
@@ -615,6 +618,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     public void showContent() {
         if (vContent != null)
             vContent.setVisibility(View.VISIBLE);
+        setOrderLeftViewMarginRigh(DensityUtil.dip2px(getContext(), 370));
     }
 
     public void hideContent() {
@@ -623,6 +627,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
             Log.e("MiddleFragment", "removeAllViews.....>");
             vContent.removeAllViews();
             vContent.setVisibility(View.GONE);
+            setOrderLeftViewMarginRigh(DensityUtil.dip2px(getContext(), 120));
         }
 
         if (beautyPropertyUtil != null) {
@@ -732,6 +737,13 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     public void onDestroy() {
         unregisterEventBus();
         super.onDestroy();
+    }
+
+    public void setOrderLeftViewMarginRigh(int marginRight) {
+        FragmentActivity activity = getActivity();
+        if (activity instanceof BeautyShopCartActivity) {
+            ((BeautyShopCartActivity) activity).changeShopCartLayoutParams(marginRight);
+        }
     }
 
 }

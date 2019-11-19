@@ -679,7 +679,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
             mLoadingFinish.loadingFinish();
 
 
-        mVBrandType.setVisibility(isBuyServerBusiness() ? View.GONE : View.VISIBLE);
+//        mVBrandType.setVisibility(View.GONE);
         UserActionEvent.end(UserActionEvent.DINNER_DISH_DISPLAY);
     }
 

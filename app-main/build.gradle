@@ -143,6 +143,7 @@ dependencies {
     compile project(':marketing-mobilepay')
     compile project(':marketing-beauty')
     compile project(':yunfu-push')
+    compile project(":zxinglib")
 
     //添加单元测试
     testCompile sdk.junit

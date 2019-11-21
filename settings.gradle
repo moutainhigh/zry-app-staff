@@ -9,5 +9,6 @@ include ':app-main',
         ':yunfu-db',
         ':yunfu-http',
         ':yunfu-push',
-        ':yunfu-ui'
+        ':yunfu-ui',
+        ':zxinglib'
 

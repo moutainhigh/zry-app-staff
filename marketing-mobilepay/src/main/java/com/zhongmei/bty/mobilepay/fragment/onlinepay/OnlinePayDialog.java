@@ -1,6 +1,8 @@
 package com.zhongmei.bty.mobilepay.fragment.onlinepay;
 
+import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,7 +29,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.skateboard.zxinglib.CaptureActivity;
 import com.zhongmei.bty.basemodule.commonbusiness.enums.PasswordType;
 import com.zhongmei.bty.basemodule.commonbusiness.view.ShowBarcodeView;
 import com.zhongmei.bty.basemodule.devices.display.manager.DisplayServiceManager;
@@ -90,7 +94,11 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
     private View splitView;
     private ShowBarcodeView mShowBarcode;
     private TextView mTvAmount;
-    private LinearLayout mUnDisCountLayout;    private EditText mWechatIdET;    private TextView mUnDisCountValueInput;    private TextView mGetPayStautsTV;    private IPaymentInfo mPaymentInfo;
+    private LinearLayout mUnDisCountLayout;
+    private EditText mWechatIdET;
+    private TextView mUnDisCountValueInput;
+    private TextView mGetPayStautsTV;
+    private IPaymentInfo mPaymentInfo;
     private PayModeId mCurrentPayModeId = PayModeId.WEIXIN_PAY;
 
     private volatile int mMaxTimeoutMs = 0;
@@ -109,7 +117,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
     private IScannerManager mScannerManager;
     private int mCurrentScanType = ONLIEN_SCAN_TYPE_ACTIVE;
     private static int BARCODE_FAIL = 2;
-        private static int BARCODE_PAYING = 3;
+    private static int BARCODE_PAYING = 3;
     private boolean isOnPaying = false;
     private Timer mUpdateTimeTimer;
     private long mCurrentPaymentItemId;
@@ -129,8 +137,26 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         f.setPaymentInfo(info);
         Bundle bundle = new Bundle();
         bundle.putSerializable("payModelItem", payModelItem);
-        bundle.putInt(EXTRA_SCAN_TYPE, scanType);        f.setArguments(bundle);
+        bundle.putInt(EXTRA_SCAN_TYPE, scanType);
+        f.setArguments(bundle);
         return f;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode==1001 && resultCode== Activity.RESULT_OK)
+        {
+            String result=data.getStringExtra(CaptureActivity.KEY_DATA);
+            if (!TextUtils.isEmpty(result)) {
+                doPayByAuthCode(result);
+                mWechatIdET.setText("");
+                mWechatIdET.requestFocus();
+                ViewUtil.hiddenSoftKeyboard(mWechatIdET);
+            } else {
+                ToastUtil.showLongToast(R.string.pay_authcode_can_not_empty);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     public void setDoPayApi(DoPayApi doPayApi) {
@@ -151,7 +177,8 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         this.getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getDialog().setCancelable(false);
         this.getDialog().setCanceledOnTouchOutside(false);
-        this.getDialog().setOnKeyListener(this);    }
+        this.getDialog().setOnKeyListener(this);
+    }
 
     private void assignViews(View view) {
         mBack = (Button) view.findViewById(R.id.back);
@@ -170,7 +197,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
 
     private void initViewListener() {
         mBack.setOnClickListener(this);
-                mBack.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mBack.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -192,7 +219,8 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         } else {
             mRgScanType.check(R.id.rb_to_scan);
         }
-        mRgScanType.setOnCheckedChangeListener(mRadioGroupOnCheckListener);    }
+        mRgScanType.setOnCheckedChangeListener(mRadioGroupOnCheckListener);
+    }
 
 
     @Override
@@ -200,7 +228,9 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         super.onCreate(savedInstanceState);
         mPayModelItem = (PayModelItem) getArguments().getSerializable("payModelItem");
         mCurrentScanType = getArguments().getInt(EXTRA_SCAN_TYPE);
-        mCurrentPayModeId = mPayModelItem.getPayMode();        mDoPayApi.setCurrentPaymentInfoId(mPaymentInfo.getId());    }
+        mCurrentPayModeId = mPayModelItem.getPayMode();
+        mDoPayApi.setCurrentPaymentInfoId(mPaymentInfo.getId());
+    }
 
     @Nullable
     @Override
@@ -209,7 +239,8 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         View view = inflater.inflate(R.layout.pay_online_pay_dialog_layout, container);
         assignViews(view);
         initViewListener();
-        mScannerManager = InnerScannerManager1.newInstance(this.getActivity(), this);                updateMiniDiplay(mCurrentScanType, null);
+        mScannerManager = InnerScannerManager1.newInstance(this.getActivity(), this);
+        updateMiniDiplay(mCurrentScanType, null);
         mTvAmount.setText(getString(R.string.pay_for) + " " + CashInfoManager.formatCash(mPayModelItem.getUsedValue().doubleValue()));
         switch (mCurrentPayModeId) {
             case WEIXIN_PAY:
@@ -221,9 +252,11 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
             case BAIFUBAO:
                 mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.baidupay_icon, 0, 0, 0);
                 break;
-            case UNIONPAY_CLOUD_PAY:                mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pay_cloud_icon, 0, 0, 0);
+            case UNIONPAY_CLOUD_PAY:
+                mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pay_cloud_icon, 0, 0, 0);
                 break;
-            case ICBC_E_PAY:                mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pay_epay_icon, 0, 0, 0);
+            case ICBC_E_PAY:
+                mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pay_epay_icon, 0, 0, 0);
                 break;
             case MEITUAN_FASTPAY:
                 mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.sanpay_icon, 0, 0, 0);
@@ -236,19 +269,20 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
                 break;
             case JIN_CHENG_VALUE_CARD:
                 mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.jincheng_value_card_pay_icon, 0, 0, 0);
-                                splitView.setVisibility(View.GONE);
+                splitView.setVisibility(View.GONE);
                 mRbRecvScan.setVisibility(View.GONE);
                 break;
-            case DIANXIN_YIPAY:                mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pay_yipay_icon, 0, 0, 0);
+            case DIANXIN_YIPAY:
+                mTvAmount.setCompoundDrawablesWithIntrinsicBounds(R.drawable.pay_yipay_icon, 0, 0, 0);
                 break;
             default:
                 break;
         }
-                if (mCurrentPayModeId == PayModeId.MEITUAN_FASTPAY) {
+        if (mCurrentPayModeId == PayModeId.MEITUAN_FASTPAY) {
             mUnDisCountLayout.setVisibility(View.VISIBLE);
             mRgScanType.setVisibility(View.INVISIBLE);
             if (mPaymentInfo.getTradeVo().getNoJoinDiscount() != null && mPaymentInfo.getTradeVo().getNoJoinDiscount().compareTo(BigDecimal.ZERO) > 0) {
-                                if (mPaymentInfo.getTradeVo().getNoJoinDiscount().compareTo(mPaymentInfo.getTradeVo().getTrade().getTradeAmount()) < 0) {
+                if (mPaymentInfo.getTradeVo().getNoJoinDiscount().compareTo(mPaymentInfo.getTradeVo().getTrade().getTradeAmount()) < 0) {
                     mUnDisCountValueInput.setText(CashInfoManager.formatCash(mPaymentInfo.getTradeVo().getNoJoinDiscount().doubleValue()));
                 } else {
                     mUnDisCountValueInput.setText(CashInfoManager.formatCash(mPaymentInfo.getTradeVo().getTrade().getTradeAmount().doubleValue()));
@@ -274,7 +308,9 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
             showNumberInputDialog();
 
         } else if (v.getId() == R.id.tv_refresh_pay_state) {
-            this.getPayStateOfThird();
+//            this.getPayStateOfThird();
+            Intent intent=new Intent(getContext(), CaptureActivity.class);
+            startActivityForResult(intent,1001);
         }
     }
 
@@ -283,7 +319,8 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         super.onStart();
         registerDewoScan();
         DoPayApi.OnlineDialogShowing = true;
-        switchPayWay(mCurrentScanType);    }
+        switchPayWay(mCurrentScanType);
+    }
 
     private void registerDewoScan() {
         if (mCurrentScanType == ONLIEN_SCAN_TYPE_ACTIVE && isAdded()) {
@@ -384,9 +421,10 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
 
 
     public void onEventMainThread(PushPayRespEvent event) {
-                try {
-                        PayResp result = event.getPushPayMent().getContent();
-                        mDoPayApi.doVerifyPayResp(getActivity(), mPaymentInfo, result, onlinePayCallback);        } catch (Exception e) {
+        try {
+            PayResp result = event.getPushPayMent().getContent();
+            mDoPayApi.doVerifyPayResp(getActivity(), mPaymentInfo, result, onlinePayCallback);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -417,7 +455,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
             } else {
 
                 mHandler.sendMessageDelayed(message, INTERVALTIME);
-                            }
+            }
             requestPayStatusCount++;
         }
     }
@@ -425,12 +463,13 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
 
     private void stopGetPayStatus() {
         stopUpdateTimeTimer();
-        RequestManager.cancelAll("paystatus");        if (mHandler != null) {
+        RequestManager.cancelAll("paystatus");
+        if (mHandler != null) {
             mHandler.removeMessages(WHAT_PAYSTATUS);
         }
     }
 
-        public void clearBarCode() {
+    public void clearBarCode() {
         if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE && isBQ) {
             Message message = new Message();
             message.what = WHAT_BARCODE_TIMEOUT;
@@ -457,9 +496,11 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
                         break;
 
                     case WHAT_BARCODE_TIMEOUT:
-                        if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {                            onBarcodeTimeOut();
+                        if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
+                            onBarcodeTimeOut();
                             if (mCurrentPayModeId != PayModeId.ALIPAY) {
-                                isBQTimeOut = true;                             }
+                                isBQTimeOut = true;
+                            }
                         }
                         break;
                     case WHAT_SHOW_PAYSTATUS_BUTTON:
@@ -474,7 +515,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         }
     };
 
-        private void onBarcodeTimeOut() {
+    private void onBarcodeTimeOut() {
         stopUpdateTimeTimer();
         mPaymodelalter.setVisibility(View.GONE);
         mPaytimeoutAlert.setVisibility(View.GONE);
@@ -482,13 +523,14 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         updateMiniDiplay(BARCODE_FAIL, null);
     }
 
-        private void generateBarcodeing() {
+    private void generateBarcodeing() {
         mShowBarcode.setShowType(ShowBarcodeView.SHOW_QR_CODE_ING);
         mPaytimeoutAlert.setVisibility(View.GONE);
         stopUpdateTimeTimer();
-        saveTradeAndGetBarcode();    }
+        saveTradeAndGetBarcode();
+    }
 
-        private void generateBarcodeingFail() {
+    private void generateBarcodeingFail() {
         if (mPaymentInfo.getActualAmount() != null) {
             updateMiniDiplay(BARCODE_FAIL, null);
         }
@@ -497,7 +539,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         mShowBarcode.setShowType(ShowBarcodeView.SHOW_QR_CODE_FAIL);
     }
 
-        private void showScanOverIcon() {
+    private void showScanOverIcon() {
         mShowBarcode.setShowType(ShowBarcodeView.SHOW_SCAN_SUCCESS);
     }
 
@@ -528,30 +570,31 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
                     break;
 
             }
-        } else {            stopUpdateTimeTimer();
+        } else {
+            stopUpdateTimeTimer();
             mPaymodelalter.setVisibility(View.INVISIBLE);
             mPaytimeoutAlert.setVisibility(View.GONE);
             mPaymodelalter.setText("");
             mPaytimeoutAlert.setText("");
         }
-                if (mCurrentPayModeId == PayModeId.MEITUAN_FASTPAY) {
+        if (mCurrentPayModeId == PayModeId.MEITUAN_FASTPAY) {
             mUnDisCountLayout.setVisibility(View.VISIBLE);
         } else {
             mUnDisCountLayout.setVisibility(View.GONE);
         }
     }
 
-        private void generateBarcodedSuccess() {
+    private void generateBarcodedSuccess() {
         updatePayModelAlert();
         mPaymodelalter.setVisibility(View.VISIBLE);
-                if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
+        if (mCurrentScanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
             mMaxTimeoutMs = TIME_OUT_MS;
             startUpdateTimeTimer();
             mPaytimeoutAlert.setVisibility(View.VISIBLE);
         }
     }
 
-        RadioGroup.OnCheckedChangeListener mRadioGroupOnCheckListener = new RadioGroup.OnCheckedChangeListener() {
+    RadioGroup.OnCheckedChangeListener mRadioGroupOnCheckListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             if (checkedId == R.id.rb_to_scan) {
@@ -596,13 +639,13 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         }
     }
 
-        private void startUpdateTimeTimer() {
+    private void startUpdateTimeTimer() {
         stopUpdateTimeTimer();
         mUpdateTimeTimer = new Timer();
         mUpdateTimeTimer.scheduleAtFixedRate(new UpdateTimeTask(), 0, 1000);
     }
 
-        private void stopUpdateTimeTimer() {
+    private void stopUpdateTimeTimer() {
         if (mUpdateTimeTimer != null) {
             mUpdateTimeTimer.cancel();
             mHandler.removeMessages(WHAT_UPDATE_TIME);
@@ -610,7 +653,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         }
     }
 
-        private void updateMiniDiplay(int payWay, Bitmap bitmap) {
+    private void updateMiniDiplay(int payWay, Bitmap bitmap) {
         updateMiniDiplayWithUrl(payWay, null, bitmap, false);
     }
 
@@ -618,7 +661,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
 
     }
 
-            NumberInputdialog.InputOverListener mInputOverListener = new NumberInputdialog.InputOverListener() {
+    NumberInputdialog.InputOverListener mInputOverListener = new NumberInputdialog.InputOverListener() {
         @Override
         public void afterInputOver(String inputContent) {
             if (inputContent != null) {
@@ -631,7 +674,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         }
     };
 
-        void showNumberInputDialog() {
+    void showNumberInputDialog() {
         if (!ClickManager.getInstance().isClicked()) {
             double maxValue = mPaymentInfo.getTradeAmount();
             String defaultInput = getUnDiscountInputValue();
@@ -641,7 +684,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         }
     }
 
-        private String getUnDiscountInputValue() {
+    private String getUnDiscountInputValue() {
         String content = mUnDisCountValueInput.getText().toString();
         if (TextUtils.isEmpty(content)) {
             return null;
@@ -650,15 +693,17 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         }
     }
 
-        private void switchPayWay(int scanType) {
-        if (scanType == ONLIEN_SCAN_TYPE_UNACTIVE) {            mCurrentScanType = ONLIEN_SCAN_TYPE_UNACTIVE;
+    private void switchPayWay(int scanType) {
+        if (scanType == ONLIEN_SCAN_TYPE_UNACTIVE) {
+            mCurrentScanType = ONLIEN_SCAN_TYPE_UNACTIVE;
             if (mCurrentPayModeId.value() != 0) {
                 generateBarcodeing();
             }
             if (mScannerManager != null) {
                 mScannerManager.stop();
             }
-        } else {            mCurrentScanType = ONLIEN_SCAN_TYPE_ACTIVE;
+        } else {
+            mCurrentScanType = ONLIEN_SCAN_TYPE_ACTIVE;
             scanGunRequestFocus();
             ViewUtil.hiddenSoftKeyboard(mWechatIdET);
             mShowBarcode.setShowType(ShowBarcodeView.SHOW_SCAN_TO_CUSTOMER);
@@ -670,7 +715,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         updateMiniDiplay(mCurrentScanType, null);
     }
 
-        private void scanGunRequestFocus() {
+    private void scanGunRequestFocus() {
         mWechatIdET.setVisibility(View.VISIBLE);
         mWechatIdET.setText("");
         mWechatIdET.setSelection(0);
@@ -678,13 +723,13 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         mWechatIdET.requestFocusFromTouch();
     }
 
-        @Override
+    @Override
     public void onDataReceivedOver(String authCode) {
         try {
-                    } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-                if (!TextUtils.isEmpty(authCode)) {
+        if (!TextUtils.isEmpty(authCode)) {
             doPayByAuthCode(authCode);
         } else {
             ToastUtil.showLongToast(R.string.pay_authcode_can_not_empty);
@@ -696,10 +741,10 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         String authCode = mWechatIdET.getText().toString();
         try {
-                    } catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-                if (!TextUtils.isEmpty(authCode)) {
+        if (!TextUtils.isEmpty(authCode)) {
             doPayByAuthCode(authCode);
             mWechatIdET.setText("");
             mWechatIdET.requestFocus();
@@ -721,7 +766,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
                 } else {
                     saveTradeAndPayByAuthCode(authCode);
                 }
-                            } else {
+            } else {
                 ToastUtil.showLongToast(R.string.is_paying);
             }
         }
@@ -739,8 +784,9 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         mPayModelItem.setPayType(PayType.QCODE);
         mPaymentInfo.getOtherPay().clear();
         mPaymentInfo.getOtherPay().addPayModelItem(mPayModelItem);
-        mDoPayApi.setOnlinePaymentItemUuid(mPayModelItem.getUuid());        mCurrentPaymentItemUuid = mPayModelItem.getUuid();
-                mDoPayApi.getOnlinePayBarcode(getActivity(), mPaymentInfo, mPayModelItem, onlinePayCallback);
+        mDoPayApi.setOnlinePaymentItemUuid(mPayModelItem.getUuid());
+        mCurrentPaymentItemUuid = mPayModelItem.getUuid();
+        mDoPayApi.getOnlinePayBarcode(getActivity(), mPaymentInfo, mPayModelItem, onlinePayCallback);
     }
 
     OnlinePayCallback onlinePayCallback = new OnlinePayCallback() {
@@ -751,11 +797,12 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
                 isBQ = true;
                 mCurrentPaymentItemId = paymentItemId;
                 generateBarcodedSuccess();
-                                updateMiniDiplayWithUrl(mCurrentScanType, codeUrl, bitmap, true);
-                                mShowBarcode.setShowQR(bitmap);
-                                startGetPayStatus();
+                updateMiniDiplayWithUrl(mCurrentScanType, codeUrl, bitmap, true);
+                mShowBarcode.setShowQR(bitmap);
+                startGetPayStatus();
 
-                sendShowGetPayStateButtonMS();            }
+                sendShowGetPayStateButtonMS();
+            }
         }
 
         @Override
@@ -768,9 +815,9 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
             isOnPaying = false;
             if (paymentItemId != null)
                 mCurrentPaymentItemId = paymentItemId;
-                        startGetPayStatus();
+            startGetPayStatus();
 
-                        showGetPayStateBT();
+            showGetPayStateBT();
         }
 
         @Override
@@ -786,14 +833,18 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
         @Override
         public void onPayResult(Long paymentItemId, int payStatus) {
             dismissLoadingProgressDialog();
-            if (TradePayStatus.PAID.value() == payStatus) {                EventBus.getDefault().post(new ActionCloseOrderDishActivity());
-                DoPayApi.OnlineDialogShowing = false;                stopGetPayStatus();                dismiss();
-            } else if (TradePayStatus.PAID_FAIL.value() == payStatus) {                stopGetPayStatus();            } else {
+            if (TradePayStatus.PAID.value() == payStatus) {
+                EventBus.getDefault().post(new ActionCloseOrderDishActivity());
+                DoPayApi.OnlineDialogShowing = false;
+                stopGetPayStatus();
+                dismiss();
+            } else if (TradePayStatus.PAID_FAIL.value() == payStatus) {
+                stopGetPayStatus();
+            } else {
                 sendGetPayStatusMessage();
             }
         }
     };
-
 
 
     private void saveTradeAndPayByAuthCode(final String authCode) {
@@ -818,12 +869,14 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
 
         mPaymentInfo.getOtherPay().clear();
         mPaymentInfo.getOtherPay().addPayModelItem(mPayModelItem);
-        mDoPayApi.setOnlinePaymentItemUuid(mPayModelItem.getUuid());        mDoPayApi.onlinePayByAuthCode(getActivity(), mPaymentInfo, mPayModelItem, onlinePayCallback);
+        mDoPayApi.setOnlinePaymentItemUuid(mPayModelItem.getUuid());
+        mDoPayApi.onlinePayByAuthCode(getActivity(), mPaymentInfo, mPayModelItem, onlinePayCallback);
 
         mCurrentPaymentItemUuid = mPayModelItem.getUuid();
-        showScanOverIcon();            }
+        showScanOverIcon();
+    }
 
-        IPayOverCallback mPayOverCallback = new IPayOverCallback() {
+    IPayOverCallback mPayOverCallback = new IPayOverCallback() {
 
         @Override
         public void onFinished(boolean isOK, int statusCode) {
@@ -858,7 +911,8 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
                     }
                     this.mPaymentInfo.setMemberPassword(token);
                     this.mPaymentInfo.getOtherPay().clear();
-                    this.mPaymentInfo.getOtherPay().addPayModelItem(mPayModelItem);                    isOnPaying = true;
+                    this.mPaymentInfo.getOtherPay().addPayModelItem(mPayModelItem);
+                    isOnPaying = true;
                     if (mDoPayApi != null)
                         mDoPayApi.doPay(this.getActivity(), this.mPaymentInfo, mPayOverCallback);
                 } else {
@@ -871,27 +925,25 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
     }
 
 
-
-
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Window window = getDialog().getWindow();
         if (window != null) {
             window.setBackgroundDrawableResource(android.R.color.transparent);
-                        WindowManager.LayoutParams attributes = window.getAttributes();
+            WindowManager.LayoutParams attributes = window.getAttributes();
             attributes.width = DensityUtil.dip2px(getActivity(), 460);
             attributes.height = WindowManager.LayoutParams.WRAP_CONTENT;
             window.setAttributes(attributes);
-                        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+            window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         }
     }
 
-        private void sendShowGetPayStateButtonMS() {
+    private void sendShowGetPayStateButtonMS() {
         Message message = new Message();
         message.what = WHAT_SHOW_PAYSTATUS_BUTTON;
-        mHandler.sendMessageDelayed(message, 10 * 1000);    }
+        mHandler.sendMessageDelayed(message, 10 * 1000);
+    }
 
     private void showGetPayStateBT() {
         if (mCurrentPaymentItemId != 0) {
@@ -900,7 +952,7 @@ public class OnlinePayDialog extends BasicDialogFragment implements View.OnClick
     }
 
     private void getPayState() {
-                if (!DoPayApi.OnlineDialogShowing || mCurrentPaymentItemUuid == null) {
+        if (!DoPayApi.OnlineDialogShowing || mCurrentPaymentItemUuid == null) {
             return;
         }
         mDoPayApi.getOnlinePayState(getActivity(), mPaymentInfo, mCurrentPaymentItemId, mCurrentPaymentItemUuid, onlinePayCallback);

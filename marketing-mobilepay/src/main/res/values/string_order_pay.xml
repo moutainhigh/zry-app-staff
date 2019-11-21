@@ -129,6 +129,7 @@
     <string name="pay_deposit_text">押金</string>
     <string name="pay_data_format_not_ok">数据格式不正确！</string>
     <string name="please_refresh">等待超时，点击查询支付结果</string>
+    <string name="to_scan_use_local_camera">使用本地摄像头扫码</string>
     <string name="pay_authcode_can_not_empty">付款码不能为空！</string>
     <string name="coupon_type_txt">券类型</string>
     <string name="coupon_face_amount_txt">总面额</string>

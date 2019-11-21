@@ -247,8 +247,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/pay_online_getstatus_button_selector"
         android:gravity="center"
-        android:text="@string/please_refresh"
+        android:text="@string/to_scan_use_local_camera"
         android:textColor="@color/color_FF8249"
-        android:textSize="14sp"
-        android:visibility="invisible" />
+        android:textSize="14sp"/>
 </LinearLayout>

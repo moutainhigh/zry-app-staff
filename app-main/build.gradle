@@ -35,9 +35,9 @@ android {
 
         release {
             storeFile file('../release.keystore')
-            storePassword "zhongmeiyunfu"
-            keyAlias "zhongmei"
-            keyPassword "zhongmeiyunfu"
+            storePassword "ziranyu-waiter"
+            keyAlias "ziranyu-staff"
+            keyPassword "ziranyu-waiter"
         }
 
         develop {
@@ -83,7 +83,7 @@ android {
     android.applicationVariants.all {
         variant ->
             variant.outputs.each {
-                output -> output.outputFile = new File(output.outputFile.parent, "yf_v" + variant.versionName + "_" + new Date().format("yyMMdd") + "_" + buildType.name + ".apk")
+                output -> output.outputFile = new File(output.outputFile.parent, "ziranyu_staff_v" + variant.versionName + "_" + new Date().format("yyMMdd") + "_" + buildType.name + ".apk")
             }
     }
 

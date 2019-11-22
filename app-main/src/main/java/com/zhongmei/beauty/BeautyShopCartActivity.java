@@ -224,7 +224,7 @@ public class BeautyShopCartActivity extends MainBaseActivity implements View.OnC
 
     public void buildFragment() {
         mShoppingCart = DinnerShoppingCart.getInstance();
-        mShoppingCart.unRegisterListener();
+//        mShoppingCart.unRegisterListener();
 
         mLeftFragment = new BeautyOrderLeftFragment_();
         mLeftFragment.registerLoadingListener(mLeftLoadingFinish);

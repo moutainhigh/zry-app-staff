@@ -154,7 +154,6 @@ import static com.zhongmei.bty.commonmodule.util.ServerHeartbeat.NetworkState.Ne
 import static com.zhongmei.bty.commonmodule.util.ServerHeartbeat.NetworkState.NetworkUnavailable;
 
 
-
 @EFragment(R.layout.frg_order_center_detail)
 public class OrderCenterDetailFragment extends BasicFragment implements IOrderCenterDetailView {
     private static final String TAG = OrderCenterDetailFragment.class.getSimpleName();
@@ -384,7 +383,6 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     TextView tvEditableMemo;
 
 
-
     @ViewById(R.id.tv_dinner_verify_status)
     TextView tvVerifyStatus;
 
@@ -520,12 +518,18 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
 
     private void initTitleBarBg() {
         switch (mFromType) {
-            case OCConstant.FromType.FROM_TYPE_SNACK:            case OCConstant.FromType.FROM_TYPE_DINNER:            case OCConstant.FromType.FROM_TYPE_BUFFET:            case OCConstant.FromType.FROM_TYPE_GROUP:            case OCConstant.FromType.FROM_TYPE_RETAIL:                layout_titlebar.setBackgroundColor(getResources().getColor(R.color.snack_title_bg));
+            case OCConstant.FromType.FROM_TYPE_SNACK:
+            case OCConstant.FromType.FROM_TYPE_DINNER:
+            case OCConstant.FromType.FROM_TYPE_BUFFET:
+            case OCConstant.FromType.FROM_TYPE_GROUP:
+            case OCConstant.FromType.FROM_TYPE_RETAIL:
+                layout_titlebar.setBackgroundColor(getResources().getColor(R.color.snack_title_bg));
                 layout_LoadingTitleBar.setBackgroundColor(getResources().getColor(R.color.snack_title_bg));
                 setrChildTvColor(layout_titlebar, getResources().getColor(R.color.text_color_white));
                 tv_emptyTradeDetails.setTextColor(getResources().getColor(R.color.text_color_white));
                 break;
-            case OCConstant.FromType.FROM_TYPE_BEAUTY:                layout_titlebar.setBackgroundColor(getResources().getColor(R.color.beauty_bg_white));
+            case OCConstant.FromType.FROM_TYPE_BEAUTY:
+                layout_titlebar.setBackgroundColor(getResources().getColor(R.color.beauty_bg_white));
                 layout_LoadingTitleBar.setBackgroundColor(getResources().getColor(R.color.beauty_bg_white));
                 setrChildTvColor(layout_titlebar, getResources().getColor(R.color.beauty_color_333333));
                 tv_emptyTradeDetails.setTextColor(getResources().getColor(R.color.beauty_color_333333));
@@ -555,7 +559,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     private void initPresenter() {
         switch (mFromType) {
             case OCConstant.FromType.FROM_TYPE_SNACK:
-                                break;
+                break;
             case OCConstant.FromType.FROM_TYPE_DINNER:
                 mPresenter = new DinnerOrderCenterDetailPresenter(this);
                 break;
@@ -566,8 +570,9 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 mPresenter = new GroupOrderCenterDetailPresenter(this);
                 break;
             case OCConstant.FromType.FROM_TYPE_RETAIL:
-                                break;
-            case OCConstant.FromType.FROM_TYPE_BEAUTY:                mPresenter = new BeautyOrderCenterDetailPresenter(this);
+                break;
+            case OCConstant.FromType.FROM_TYPE_BEAUTY:
+                mPresenter = new BeautyOrderCenterDetailPresenter(this);
                 break;
         }
     }
@@ -741,9 +746,9 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     }
 
     @Click(R.id.btn_create_doc)
-    void clickCreateDoc(){
-        TradeCustomer tradeCustomer=mPresenter.getTradeCustomer();
-        if(tradeCustomer!=null){
+    void clickCreateDoc() {
+        TradeCustomer tradeCustomer = mPresenter.getTradeCustomer();
+        if (tradeCustomer != null) {
             BeautyCreateOrEditMemberDocDialog dialog = new BeautyCreateOrEditMemberDocDialog();
             dialog.setCustomerInfo(CustomerManager.getInstance().getCustomer(tradeCustomer));
             dialog.show(getChildFragmentManager(), "BeautyCreateOrEditMemberDocDialog");
@@ -751,7 +756,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     }
 
     @Click(R.id.btn_create_task)
-    void clickCreateTask(){
+    void clickCreateTask() {
         BeautyCreateOrEditTaskDialog dialog = new BeautyCreateOrEditTaskDialog();
         dialog.show(getChildFragmentManager(), "BeautyResultTaskDialog");
     }
@@ -761,7 +766,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         if (!ClickManager.getInstance().isClicked()) {
             List<PartnerShopBiz> deliveryPlatformPartnerShopBizs = new ArrayList<PartnerShopBiz>(mPresenter.getDeliveryPlatformPartnerShopBizMap().values());
             if (Utils.isNotEmpty(deliveryPlatformPartnerShopBizs)) {
-                                if (deliveryPlatformPartnerShopBizs.size() == 1) {
+                if (deliveryPlatformPartnerShopBizs.size() == 1) {
                     mPresenter.sendOrder(deliveryPlatformPartnerShopBizs.get(0), null);
                 } else {
                     showDeliveryPlatformPopupWindow(flSendOrder, deliveryPlatformPartnerShopBizs);
@@ -893,7 +898,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
 
     }
 
-        private void reprint(ActionReprintType action) {
+    private void reprint(ActionReprintType action) {
 
     }
 
@@ -922,7 +927,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     @Override
     public void showAdditionaltPrivilegeInfo(TradeVo tradeVo) {
         additional_privilege_view.removeAllItemView();
-                List<TradePrivilege> tradePrivileges = mPresenter.getOrderPrivilegeList(tradeVo, PrivilegeType.ADDITIONAL);
+        List<TradePrivilege> tradePrivileges = mPresenter.getOrderPrivilegeList(tradeVo, PrivilegeType.ADDITIONAL);
         if (tradePrivileges.isEmpty()) {
             additional_privilege_view.setVisibility(View.GONE);
             return;
@@ -933,7 +938,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         ExtraCharge outTimeFeeExtra = ServerSettingCache.getInstance().getmOutTimeRule();
         BigDecimal paidOutTimeFee = BigDecimal.ZERO;
         for (TradePrivilege tradePrivilege : tradePrivileges) {
-                        ExtraCharge extraCharge = null;
+            ExtraCharge extraCharge = null;
             Map<Long, ExtraCharge> extraChargeMap = tradeVo.getExtraChargeMap();
             if (extraChargeMap != null) {
                 extraCharge = extraChargeMap.get(tradePrivilege.getPromoId());
@@ -943,7 +948,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
             if (tradePrivilege.getPrivilegeType() != PrivilegeType.ADDITIONAL) {
                 continue;
             }
-                        if (outTimeFeeExtra != null && MathDecimal.isLongEqual(tradePrivilege.getPromoId(), outTimeFeeExtra.getId())) {
+            if (outTimeFeeExtra != null && MathDecimal.isLongEqual(tradePrivilege.getPromoId(), outTimeFeeExtra.getId())) {
                 paidOutTimeFee = paidOutTimeFee.add(tradePrivilege.getPrivilegeAmount());
                 continue;
             }
@@ -991,14 +996,14 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         tax_view.setVisibility(View.GONE);
     }
 
-        private void showTaxCode(TradeVo tradeVo) {
+    private void showTaxCode(TradeVo tradeVo) {
         if (Utils.isEmpty(tradeVo.getTradeTaxs())) {
             tax_view.setTime("");
         } else {
-                        if (tradeVo.getTradeInvoiceNo() != null && !TextUtils.isEmpty(tradeVo.getTradeInvoiceNo().getCode())) {
+            if (tradeVo.getTradeInvoiceNo() != null && !TextUtils.isEmpty(tradeVo.getTradeInvoiceNo().getCode())) {
                 tax_view.setTime(getString(R.string.invoice_no) + ":" + tradeVo.getTradeInvoiceNo().getCode());
             } else {
-                                if (tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PAID || tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PREPAID || tradeVo.getTrade().getTradeType() == TradeType.REFUND) {
+                if (tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PAID || tradeVo.getTrade().getTradePayStatus() == TradePayStatus.PREPAID || tradeVo.getTrade().getTradeType() == TradeType.REFUND) {
                     String alterText = getString(R.string.invoice_no) + ":" + getString(R.string.tax_code_not_find);
                     SpannableStringBuilder builder =
                             new SpannableStringBuilder(alterText);
@@ -1007,7 +1012,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                             alterText.length(),
                             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     tax_view.setTime(builder);
-                                        mPresenter.getTaxNoByTradeId(tradeVo.getTrade().getId());
+                    mPresenter.getTaxNoByTradeId(tradeVo.getTrade().getId());
                 } else {
                     tax_view.setTime("");
                 }
@@ -1015,7 +1020,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         }
     }
 
-        @Override
+    @Override
     public void showRejectGoodsInfo(TradeVo tradeVo) {
         vRejectGoodsInfo.setVisibility(View.GONE);
         if (tradeVo != null) {
@@ -1050,7 +1055,8 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         int titleResId = 0;
         int operatResId = 0;
         switch (tradeStatus) {
-            case RETURNED:                TradeType tradeType = tradeVo.getTrade().getTradeType();
+            case RETURNED:
+                TradeType tradeType = tradeVo.getTrade().getTradeType();
                 if (tradeType == TradeType.REFUND) {
                     if (isNoOrderReturn(tradeVo)) {
                         operateType = OperateType.TRADE_HAVENOORDER_RETURN;
@@ -1064,7 +1070,8 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 titleResId = R.string.order_center_detail_info_return;
                 operatResId = R.string.order_center_detail_operat_return;
                 break;
-            case INVALID:                if (mFromType == OCConstant.FromType.FROM_TYPE_SNACK || mFromType == OCConstant.FromType.FROM_TYPE_RETAIL) {
+            case INVALID:
+                if (mFromType == OCConstant.FromType.FROM_TYPE_SNACK || mFromType == OCConstant.FromType.FROM_TYPE_RETAIL) {
                     operateType = OperateType.TRADE_FASTFOOD_INVALID;
                 } else {
                     operateType = OperateType.TRADE_DINNER_INVALID;
@@ -1073,7 +1080,8 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 titleResId = R.string.order_center_detail_info_invalid;
                 operatResId = R.string.order_center_detail_operat_invalid;
                 break;
-            case REFUSED:                if (mFromType == OCConstant.FromType.FROM_TYPE_SNACK || mFromType == OCConstant.FromType.FROM_TYPE_RETAIL) {
+            case REFUSED:
+                if (mFromType == OCConstant.FromType.FROM_TYPE_SNACK || mFromType == OCConstant.FromType.FROM_TYPE_RETAIL) {
                     operateType = OperateType.TRADE_FASTFOOD_REFUSE;
                 } else {
                     operateType = OperateType.TRADE_DINNER_REFUSE;
@@ -1082,12 +1090,15 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 titleResId = R.string.order_center_detail_info_refuse;
                 operatResId = R.string.order_center_detail_operat_refuse;
                 break;
-            case REPEATED:                operateType = OperateType.TRADE_REPEATED;
+            case REPEATED:
+                operateType = OperateType.TRADE_REPEATED;
                 resId = R.string.order_center_detail_reason_repeated;
                 titleResId = R.string.order_center_detail_info_repeated;
                 operatResId = R.string.order_center_detail_operat_repeated;
                 break;
-            case CREDIT:            case WRITEOFF:                operateType = OperateType.TRADE_CREDIT;
+            case CREDIT:
+            case WRITEOFF:
+                operateType = OperateType.TRADE_CREDIT;
                 resId = R.string.order_center_detail_reason_credit;
                 titleResId = R.string.order_center_detail_info_credit;
                 operatResId = R.string.order_center_detail_operat_credit;
@@ -1122,8 +1133,10 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
             TradeReasonRel operateReason = tradeVo.getOperateReason(operateType);
             String date;
             if (operateType == OperateType.TRADE_RETURNED) {
-                date = getString(R.string.order_center_detail_return_time, DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerUpdateTime()));            } else {
-                date = DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerUpdateTime());            }
+                date = getString(R.string.order_center_detail_return_time, DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerUpdateTime()));
+            } else {
+                date = DateTimeUtils.formatDateTime(tradeVo.getTrade().getServerUpdateTime());
+            }
             String username = tradeVo.getTrade().getUpdatorName();
             operating_info_view1.setVisibility(View.VISIBLE);
             operating_info_view1.setTitle(getString(titleResId));
@@ -1177,12 +1190,13 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     public void showBillInfo(TradeVo tradeVo, TradeVo oriTradeVo) {
         if (tradeVo != null) {
             Trade trade = tradeVo.getTrade();
-                        if (oriTradeVo.getTrade().getTradeType() == TradeType.SELL
+            if (oriTradeVo.getTrade().getTradeType() == TradeType.SELL
                     || oriTradeVo.getTrade().getTradeType() == TradeType.SPLIT
                     || oriTradeVo.getTrade().getTradeType() == TradeType.SELL_FOR_REPEAT
                     || oriTradeVo.getTrade().getTradeType() == TradeType.SELL_FOR_REVERSAL
                     || oriTradeVo.getTrade().getTradeType() == TradeType.UNOIN_TABLE_MAIN
-                    || oriTradeVo.getTrade().getTradeType() == TradeType.UNOIN_TABLE_SUB) {                Long tradeCreateTime = oriTradeVo.getTrade().getServerCreateTime();
+                    || oriTradeVo.getTrade().getTradeType() == TradeType.UNOIN_TABLE_SUB) {
+                Long tradeCreateTime = oriTradeVo.getTrade().getServerCreateTime();
                 mTvBillTime.setText(getString(R.string.dinner_order_center_trade_time,
                         DateTimeUtils.formatDateTime(tradeCreateTime)));
             } else {
@@ -1201,7 +1215,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
             groupNameLayout.setVisibility(mFromType == OCConstant.FromType.FROM_TYPE_GROUP ? View.VISIBLE : View.GONE);
             tvGroupName.setText(getString(R.string.dinner_order_center_group_name, tradeVo.getTradeGroup() != null ? tradeVo.getTradeGroup().getName() : ""));
 
-                        String creatorName = trade.getCreatorName();
+            String creatorName = trade.getCreatorName();
             if (!TextUtils.isEmpty(creatorName)) {
                 mTvOperationBillPeople
                         .setText(getString(R.string.dinner_order_center_trade_creator, creatorName));
@@ -1211,7 +1225,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 mTvOperationBillPeople.setVisibility(View.INVISIBLE);
                 mLineOperationPeople.setVisibility(View.INVISIBLE);
             }
-                        showEditableMemo(trade);
+            showEditableMemo(trade);
 
 
             tvVerifyStatus.setVisibility(View.GONE);
@@ -1220,7 +1234,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 tvVerifyStatus.setText(getString(R.string.order_detail_verify_status, getVerifyStatusStr(tradeVo.getVerifyKoubeiOrder())));
             }
 
-                        TradeExtra tradeExtra = tradeVo.getTradeExtra();
+            TradeExtra tradeExtra = tradeVo.getTradeExtra();
             if (tradeExtra != null && !TextUtils.isEmpty(tradeExtra.getSerialNumber())) {
                 mTvBillSerialNumber
                         .setText(getString(R.string.dinner_order_center_serial_number, tradeExtra.getSerialNumber()));
@@ -1231,9 +1245,9 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
 
             List<TradeTable> tradeTableList = tradeVo.getTradeTableList();
             if (tradeTableList != null && tradeTableList.size() > 0) {
-                                mTvTableNumber.setVisibility(View.VISIBLE);
+                mTvTableNumber.setVisibility(View.VISIBLE);
                 BigDecimal deskCount = tradeVo.getDeskCount();
-                                if (deskCount.compareTo(BigDecimal.ONE) > 0) {
+                if (deskCount.compareTo(BigDecimal.ONE) > 0) {
                     String deskCountString = String.format(getString(R.string.group_order_item_desknum), deskCount.toString());
                     mTvTableNumber.setText(deskCountString);
                 } else {
@@ -1267,7 +1281,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 mTvTableNumber.setVisibility(View.GONE);
             }
 
-                        if (mFromType != OCConstant.FromType.FROM_TYPE_RETAIL) {
+            if (mFromType != OCConstant.FromType.FROM_TYPE_RETAIL) {
                 mTvPeopleCount.setVisibility(View.VISIBLE);
                 mTvPeopleCount.setText(getString(R.string.dinner_order_center_people_count, String.valueOf(trade.getTradePeopleCount())) + tradeVo.getTradeBuffetPeopleTip());
             }
@@ -1283,10 +1297,10 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
             }
 
 
-                        showShopperInfo(tradeVo, vShopperGroup, mTvShopper, mTvCounselor, mViewLineShopper);
+            showShopperInfo(tradeVo, vShopperGroup, mTvShopper, mTvCounselor, mViewLineShopper);
 
 
-                        List<String> customerInfo = getCustomerInfo(tradeVo);
+            List<String> customerInfo = getCustomerInfo(tradeVo);
             if (Utils.isNotEmpty(customerInfo)) {
                 clCustomer.setData(customerInfo);
                 vLineCustomer.setVisibility(View.VISIBLE);
@@ -1396,13 +1410,16 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
 
     public Long getMealTime(TradeVo tradeVo) {
         Long mealTime = null;
-        if (tradeVo != null && tradeVo.getTrade().getBusinessType() == BusinessType.SNACK) {            long currentTimeMillis = System.currentTimeMillis();
+        if (tradeVo != null && tradeVo.getTrade().getBusinessType() == BusinessType.SNACK) {
+            long currentTimeMillis = System.currentTimeMillis();
             List<TradeTable> tradeTableList = tradeVo.getTradeTableList();
             List<TradeStatusLog> tradeStatusLogList = tradeVo.getTradeStatusLogList();
             if (Utils.isNotEmpty(tradeTableList) && Utils.isNotEmpty(tradeStatusLogList)) {
-                if (tradeStatusLogList.size() > 1) {                    mealTime = tradeStatusLogList.get(tradeStatusLogList.size() - 1).getServerCreateTime()
+                if (tradeStatusLogList.size() > 1) {
+                    mealTime = tradeStatusLogList.get(tradeStatusLogList.size() - 1).getServerCreateTime()
                             - tradeStatusLogList.get(0).getServerCreateTime();
-                } else if (tradeStatusLogList.size() == 1) {                    mealTime = currentTimeMillis - tradeVo.getTradeStatusLogList().get(0).getServerCreateTime();
+                } else if (tradeStatusLogList.size() == 1) {
+                    mealTime = currentTimeMillis - tradeVo.getTradeStatusLogList().get(0).getServerCreateTime();
                 } else {
                     mealTime = currentTimeMillis - tradeVo.getTrade().getServerCreateTime();
                 }
@@ -1416,7 +1433,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     private List<String> getCustomerInfo(TradeVo tradeVo) {
         List<String> customerInfo = new ArrayList<String>();
 
-                List<TradeCustomer> tradeCustomers = tradeVo.getTradeCustomerList();
+        List<TradeCustomer> tradeCustomers = tradeVo.getTradeCustomerList();
         if (Utils.isNotEmpty(tradeCustomers)) {
             for (TradeCustomer tradeCustomer : tradeCustomers) {
                 customerInfo.clear();
@@ -1438,7 +1455,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                     }
                     break;
                 } else if (tradeCustomer.getCustomerType() == CustomerType.MEMBER) {
-                                        if (!TextUtils.isEmpty(tradeCustomer.getCustomerName())) {
+                    if (!TextUtils.isEmpty(tradeCustomer.getCustomerName())) {
                         customerInfo.add(getActivity().getString(R.string.dinner_order_center_member_name,
                                 tradeCustomer.getCustomerName()));
                     }
@@ -1490,7 +1507,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         }
     }
 
-        private BigDecimal getGoodsAmount(TradeVo tradeVo, TradePaymentVo oriTradePaymentVo) {
+    private BigDecimal getGoodsAmount(TradeVo tradeVo, TradePaymentVo oriTradePaymentVo) {
         if (tradeVo.getTrade().getTradeType() == TradeType.REFUND ||
                 tradeVo.getTrade().getTradeType() == TradeType.REFUND_FOR_REPEAT ||
                 tradeVo.getTrade().getTradeType() == TradeType.REFUND_FOR_REVERSAL) {
@@ -1516,7 +1533,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 Utils.transferDot2(tradeVo.getTrade().getPrivilegeAmount().add(exemptAmount.negate()).toString());
         if (!TextUtils.isEmpty(discountAmount)) {
             List<TradePrivilege> tradePrivileges = tradeVo.getTradePrivileges();
-                        if (tradePrivileges != null) {
+            if (tradePrivileges != null) {
                 for (TradePrivilege tradePrivilege : tradeVo.getTradePrivileges()) {
                     if (tradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL) {
                         BigDecimal privilegeAmount = tradePrivilege.getPrivilegeAmount();
@@ -1563,7 +1580,6 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     }
 
 
-
     public String getAllDishCount(List<TradeItemVo> list, TradeType tradeType, TradeVo tradeVo) {
         BigDecimal count = BigDecimal.ZERO;
         if (list != null) {
@@ -1573,10 +1589,11 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
             }
             for (int i = list.size() - 1; i >= 0; i--) {
                 TradeItem tradeItem = list.get(i).getTradeItem();
-                if (tradeItem.getType() == DishType.SINGLE && !TextUtils.isEmpty(tradeItem.getParentUuid()) && !(tradeItem.getParentUuid().equals(shellUuid))) {                    continue;
+                if (tradeItem.getType() == DishType.SINGLE && !TextUtils.isEmpty(tradeItem.getParentUuid()) && !(tradeItem.getParentUuid().equals(shellUuid))) {
+                    continue;
                 }
                 if (tradeItem.getType() == DishType.SINGLE || tradeItem.getType() == DishType.COMBO) {
-                                        if (tradeItem.getSaleType() == SaleType.WEIGHING) {
+                    if (tradeItem.getSaleType() == SaleType.WEIGHING) {
                         count = count.add(BigDecimal.ONE);
                     } else {
                         count = count.add(new BigDecimal(tradeItem.getQuantity() + "").abs());
@@ -1597,7 +1614,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     @Override
     public void showPayInfo(TradePaymentVo tradePaymentVo, TradePaymentVo oriTradePaymentVo, boolean isRefund) {
 
-                if (oriTradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.SELL
+        if (oriTradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.SELL
                 || oriTradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.SPLIT
                 || oriTradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.SELL_FOR_REVERSAL
                 || oriTradePaymentVo.getTradeVo().getTrade().getTradeType() == TradeType.SELL_FOR_REPEAT) {
@@ -1632,9 +1649,9 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         llPayInfoContent.removeAllViews();
         List<PaymentVo> paymentVos = new ArrayList<PaymentVo>();
         if (Utils.isNotEmpty(paymentTempVoList)) {
-                                                                                                                        paymentVos.addAll(paymentTempVoList);
+            paymentVos.addAll(paymentTempVoList);
         }
-                                if (isNeedShowPayInfo(paymentVos)) {
+        if (isNeedShowPayInfo(paymentVos)) {
             View view = mPresenter.createPayInfoItem(getActivity(), tradePaymentVo, oriTradePaymentVo, isRefund);
             llPayInfoContent.addView(view);
             vPayInfo.setVisibility(mPresenter.showPayInfo(tradeVo, paymentTempVoList) ? View.VISIBLE : View.GONE);
@@ -1646,8 +1663,8 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
             if (paymentVo.getPayment().getPaymentType() == PaymentType.TRADE_SELL) {
                 List<PaymentItem> paymentItems = paymentVo.getPaymentItemList();
                 for (PaymentItem paymentItem : paymentItems) {
-                    if(paymentItem.getPayModeId()== PayModeId.ALIPAY.value() || paymentItem.getPayModeId()== PayModeId.WEIXIN_PAY.value())
-                    return true;
+//                    if (paymentItem.getPayModeId() == PayModeId.ALIPAY.value() || paymentItem.getPayModeId() == PayModeId.WEIXIN_PAY.value())
+                        return true;
                 }
             }
         }
@@ -1716,7 +1733,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         }
     }
 
-        private DeliveryPlatform getDeliveryPlatform(TradePaymentVo tradePaymentVo) {
+    private DeliveryPlatform getDeliveryPlatform(TradePaymentVo tradePaymentVo) {
         DeliveryPlatform deliveryPlatform = null;
         DeliveryOrderVo deliveryOrderVo = getDeliveryOrderVo(tradePaymentVo.getDeliveryOrderVoList());
         if (deliveryOrderVo != null) {
@@ -1742,16 +1759,16 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
             if (deliveryOrder != null) {
                 DeliveryPlatform deliveryPlatform = deliveryOrder.getDeliveryPlatform();
                 DeliveryOrderStatus deliveryOrderStatus = deliveryOrder.getDeliveryStatus();
-                                PartnerDeliveryPlatformConfig partnerDeliveryPlatformConfig = ServerSettingManager.getPartnerDeliveryPlatformConfig(DeliveryPlatform.DA_DA);
-                                refreshTipHintView(deliveryPlatform, deliveryOrderStatus, partnerDeliveryPlatformConfig);
-                                refreshPassiveAddTipView(deliveryPlatform, deliveryOrderStatus, partnerDeliveryPlatformConfig);
+                PartnerDeliveryPlatformConfig partnerDeliveryPlatformConfig = ServerSettingManager.getPartnerDeliveryPlatformConfig(DeliveryPlatform.DA_DA);
+                refreshTipHintView(deliveryPlatform, deliveryOrderStatus, partnerDeliveryPlatformConfig);
+                refreshPassiveAddTipView(deliveryPlatform, deliveryOrderStatus, partnerDeliveryPlatformConfig);
             }
 
             List<DeliveryOrderRecord> tipRecords = getTipRecords(deliveryOrderVo.getDeliveryOrderRecords());
-                        refreshTipRecordView(tipRecords);
-                        refreshTipTotalAmountView(tipRecords);
+            refreshTipRecordView(tipRecords);
+            refreshTipTotalAmountView(tipRecords);
 
-                        boolean showTip = tvFeeHint.getVisibility() == View.VISIBLE
+            boolean showTip = tvFeeHint.getVisibility() == View.VISIBLE
                     || mListViewFee.getVisibility() == View.VISIBLE
                     || tvFeeTotal.getVisibility() == View.VISIBLE
                     || tvPassiveAddTip.getVisibility() == View.VISIBLE;
@@ -1847,7 +1864,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         }
     }
 
-        private boolean isSupportTip(DeliveryPlatform deliveryPlatform) {
+    private boolean isSupportTip(DeliveryPlatform deliveryPlatform) {
         Map<Integer, PartnerShopBiz> partnerShopBizMap = mPresenter.getDeliveryPlatformPartnerShopBizMap();
         if (partnerShopBizMap != null) {
             PartnerShopBiz partnerShopBiz = partnerShopBizMap.get(deliveryPlatform.value());
@@ -1915,7 +1932,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         }
     }
 
-        private boolean isShowReceiverInfoView() {
+    private boolean isShowReceiverInfoView() {
         if (delivery_name != null && delivery_name.getVisibility() == View.VISIBLE) {
             return true;
         }
@@ -1952,7 +1969,6 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         refreshTakeDishStatus(trade, tradeExtra);
 
 
-
     }
 
     private void refreshTakeDishStatus(Trade trade, TradeExtra tradeExtra) {
@@ -1961,7 +1977,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
             return;
         }
         if (SourceId.POS != trade.getSource()
-                && SourceId.KOU_BEI != trade.getSource()                 && TradeStatus.UNPROCESSED != trade.getTradeStatus()
+                && SourceId.KOU_BEI != trade.getSource() && TradeStatus.UNPROCESSED != trade.getTradeStatus()
                 && TradeStatus.REFUSED != trade.getTradeStatus()
                 && TradeStatus.CANCELLED != trade.getTradeStatus()
                 && DeliveryType.TAKE == trade.getDeliveryType()
@@ -1982,7 +1998,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         return getString(R.string.order_detail_task_dish_status_waiting);
     }
 
-        private void refreshDeliveryStatus(TradePaymentVo tradePaymentVo) {
+    private void refreshDeliveryStatus(TradePaymentVo tradePaymentVo) {
         Trade trade = null;
 
         if (tradePaymentVo.getTradeVo() != null && tradePaymentVo.getTradeVo().getTrade() != null) {
@@ -2039,7 +2055,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         }
     }
 
-        private void refreshDeliveryPlatform(TradePaymentVo tradePaymentVo) {
+    private void refreshDeliveryPlatform(TradePaymentVo tradePaymentVo) {
         Trade trade = tradePaymentVo.getTradeVo().getTrade();
         if (trade != null
                 && trade.getBusinessType() == BusinessType.TAKEAWAY
@@ -2098,29 +2114,31 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
 
     @Override
     public void showHandlerButton() {
-                btnRefuse.setVisibility(View.GONE);
-                btnAccept.setVisibility(View.GONE);
-                btnCall.setVisibility(View.GONE);
+        btnRefuse.setVisibility(View.GONE);
+        btnAccept.setVisibility(View.GONE);
+        btnCall.setVisibility(View.GONE);
         boolean showPayBtn = mPresenter.showPay();
         btnPay.setVisibility(showPayBtn ? View.VISIBLE : View.GONE);
         boolean recisionTrade = mPresenter.showRecision();
-        btnRecision.setVisibility(recisionTrade ? View.VISIBLE : View.GONE);        boolean refundTrade = mPresenter.showRefund();
+        btnRecision.setVisibility(recisionTrade ? View.VISIBLE : View.GONE);
+        boolean refundTrade = mPresenter.showRefund();
         btnRefund.setVisibility(refundTrade ? View.VISIBLE : View.GONE);
-        btnCreateDoc.setVisibility(mPresenter.showCreateDoc()?View.VISIBLE:View.GONE);
-        btnCreateTask.setVisibility(mPresenter.showCreateTask()?View.VISIBLE:View.GONE);
-                btnPrint.setVisibility(View.GONE);                btnRetryRefund.setVisibility(View.GONE);
-                btnRepay.setVisibility(View.GONE);
-                btnContinueRepay.setVisibility(View.GONE);
+        btnCreateDoc.setVisibility(mPresenter.showCreateDoc() ? View.VISIBLE : View.GONE);
+        btnCreateTask.setVisibility(mPresenter.showCreateTask() ? View.VISIBLE : View.GONE);
+        btnPrint.setVisibility(View.GONE);
+        btnRetryRefund.setVisibility(View.GONE);
+        btnRepay.setVisibility(View.GONE);
+        btnContinueRepay.setVisibility(View.GONE);
         showSendOrderButton();
-                btnCancelOrder.setVisibility(View.GONE);
-                btnAcceptReturn.setVisibility(View.GONE);
-                btnRefuseReturn.setVisibility(View.GONE);
-                btnDepositRefund.setVisibility(View.GONE);
-                btnContinuePay.setVisibility(View.GONE);
-                btnInvoice.setVisibility(View.GONE);
-                btnInvoiceRevoke.setVisibility(View.GONE);
-                btnTakeDish.setVisibility(View.GONE);
-                btnRebindDeliveryUser.setVisibility(View.GONE);
+        btnCancelOrder.setVisibility(View.GONE);
+        btnAcceptReturn.setVisibility(View.GONE);
+        btnRefuseReturn.setVisibility(View.GONE);
+        btnDepositRefund.setVisibility(View.GONE);
+        btnContinuePay.setVisibility(View.GONE);
+        btnInvoice.setVisibility(View.GONE);
+        btnInvoiceRevoke.setVisibility(View.GONE);
+        btnTakeDish.setVisibility(View.GONE);
+        btnRebindDeliveryUser.setVisibility(View.GONE);
         boolean showBtnBar = showPayBtn || recisionTrade || refundTrade;
         vTradeHandle.setVisibility(showBtnBar ? View.VISIBLE : View.GONE);
 
@@ -2140,7 +2158,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
                 tvSendOrder.setText(R.string.order_center_send_order);
             }
         }
-                flSendOrder.setVisibility(View.GONE);
+        flSendOrder.setVisibility(View.GONE);
     }
 
 
@@ -2307,9 +2325,9 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
     private void changeHandlerButtonState(ServerHeartbeat.NetworkState state) {
         if (Snack.isOfflineTrade(mTradeVo) && isFromSnack()) {
             boolean networkAvailable = (state == NetworkAvailable || state == NetworkUnavailable);
-                        ChangeViewStateUtil.setViewStateByNetworkState(getActivity(), networkAvailable, R.drawable.btn_gray_disabled,
+            ChangeViewStateUtil.setViewStateByNetworkState(getActivity(), networkAvailable, R.drawable.btn_gray_disabled,
                     btnPay, btnRecision, btnRefund);
-                        ChangeViewStateUtil.setViewStateByNetworkState(getActivity(), false, R.drawable.btn_gray_disabled, R.string.feature_not_supported,
+            ChangeViewStateUtil.setViewStateByNetworkState(getActivity(), false, R.drawable.btn_gray_disabled, R.string.feature_not_supported,
                     btnDepositRefund, btnInvoice, btnInvoiceRevoke, btnRebindDeliveryUser);
         } else {
             ChangeViewStateUtil.setViewStateByNetworkState(getActivity(), true, R.drawable.btn_gray_disabled,
@@ -2317,7 +2335,7 @@ public class OrderCenterDetailFragment extends BasicFragment implements IOrderCe
         }
     }
 
-        private boolean isPosTrade() {
+    private boolean isPosTrade() {
         if (mTradeVo != null) {
             Trade trade = mTradeVo.getTrade();
             return SourceId.POS == trade.getSource();

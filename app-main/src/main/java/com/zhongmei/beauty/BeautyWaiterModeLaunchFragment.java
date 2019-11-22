@@ -8,7 +8,9 @@ import android.widget.GridView;
 import com.zhongmei.beauty.adapter.ModuleAdapter;
 import com.zhongmei.beauty.entity.AppContent;
 import com.zhongmei.yunfu.R;
+import com.zhongmei.yunfu.context.session.Session;
 import com.zhongmei.yunfu.ui.base.BasicFragment;
+import com.zhongmei.yunfu.util.ToastUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -60,6 +62,10 @@ public class BeautyWaiterModeLaunchFragment extends BasicFragment implements Ada
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //判断会员登陆信息
         //跳转
+        if(Session.getAuthUser()==null){
+            ToastUtil.showShortToast("请登陆服务员");
+            return;
+        }
         AppContent app = mAdapter.getItem(position);
         Intent intent = new Intent();
         intent.setClassName(app.getPackageName(), app.getActivityClass());

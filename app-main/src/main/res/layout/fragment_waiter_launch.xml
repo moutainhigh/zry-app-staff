@@ -14,7 +14,7 @@
         android:listSelector="@android:color/transparent"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:numColumns="5"
+        android:numColumns="6"
         android:scrollbars="none" />
 
     <!--<com.shishike.calm.splash.calmlauncher.ViewPagerDot-->

@@ -144,7 +144,6 @@ public class BeautyOrderLeftFragment extends BasicFragment {
         initTableView();
         updateView(mShopcarting.getOrder().getTrade(),mShopcarting.getShoppingCartDish());
         EventBus.getDefault().post(new BeautyCustmoerEvent(CustomerManager.getInstance().getDinnerLoginCustomer()));
-
     }
 
 
@@ -392,7 +391,7 @@ public class BeautyOrderLeftFragment extends BasicFragment {
     }
 
     private void updateView(Trade trade, List<IShopcartItem> list) {
-        updateShopCartHint(trade, list);
+        updateShopCartHint(trade, mShopcarting.getAllValidShopcartItem(list));
 
         BigDecimal price = trade.getTradeAmount();
         if (price == null) {

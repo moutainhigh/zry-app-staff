@@ -65,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="顾客与服务员混用"
+                android:text="服务员"
                 android:textColor="@color/color_333333"
                 android:textSize="@dimen/text_16" />
 

@@ -100,8 +100,13 @@ public class BeautyCustomerModeLaunchFragment extends BasicFragment implements V
         //根据TradeTable查询订单
         initTask = new AsyncTask<Void, Void, Void>() {
             @Override
-            protected Void doInBackground(Void[] objects) {
+            protected void onPreExecute() {
                 BeautyOrderManager.clearShopcart();
+                super.onPreExecute();
+            }
+
+            @Override
+            protected Void doInBackground(Void[] objects) {
                 BeautyOrderManager.initOrderByTable(mTable, BusinessType.BEAUTY);
                 return null;
             }
@@ -193,10 +198,18 @@ public class BeautyCustomerModeLaunchFragment extends BasicFragment implements V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_open_trade:
+                if(Session.getAuthUser()==null){
+                    ToastUtil.showShortToast("请登陆服务员");
+                    return;
+                }
                 //开单
                 createOrderDish(mTable);
                 break;
             case R.id.rl_shop_cart:
+                if(Session.getAuthUser()==null){
+                    ToastUtil.showShortToast("请登陆服务员");
+                    return;
+                }
                 toShopCartItem(mTable);
                 break;
         }

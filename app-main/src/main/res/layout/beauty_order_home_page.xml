@@ -324,6 +324,7 @@
         android:layout_marginTop="30dp"
         android:visibility="gone"
         android:dividerHeight="10dp"
+        android:divider="@color/transparent"
         android:listSelector="@color/transparent"
         android:layout_above="@id/v_search_and_index">
 

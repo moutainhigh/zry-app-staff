@@ -226,4 +226,10 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
         lv_dishType.setVisibility(View.GONE);
         mViewShadow.setVisibility(View.GONE);
     }
+
+    public void refreshShopCartCount(){
+        if(tv_shopcartCount!=null && mShoppingCart!=null){
+            tv_shopcartCount.setText(mShoppingCart.getShoppingCartDish().size()+"");
+        }
+    }
 }

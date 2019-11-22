@@ -176,6 +176,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     private ModifyShoppingCartListener mShoppingCartListener = new ShoppingCartListener() {
         public void addToShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo, ShopcartItem mShopcartItem) {
             refreshPartVisibleGridViews(mShopcartItem);
+            refreshShopCartCount();
         }
 
         public void updateDish(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
@@ -191,10 +192,12 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
         public void removeShoppingCart(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo,
                                        IShopcartItemBase mShopcartItemBase) {
             refreshPartVisibleGridViews(mShopcartItemBase);
+            refreshShopCartCount();
         }
 
         public void resetOrder(List<IShopcartItem> listOrderDishshopVo, TradeVo mTradeVo) {
             refreshPartVisibleGridViews(listOrderDishshopVo);
+            refreshShopCartCount();
         }
 
         public void exception(String message) {
@@ -336,17 +339,22 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden) {
-            mShoppingCart.unRegisterListenerByTag(ShoppingCartListerTag.DINNER_DISH_HOME_PAGE);
+//            mShoppingCart.unRegisterListenerByTag(ShoppingCartListerTag.DINNER_DISH_HOME_PAGE);
             mInventoryCacheUtil.unRegisterListener(ChangePageListener.PAGE_ORDER_DISH);
         } else {
             if (mAdapter != null) {
                 mAdapter.notifyDataSetChanged();
             }
-            mShoppingCart.registerListener(ShoppingCartListerTag.DINNER_DISH_HOME_PAGE, mShoppingCartListener);
+//            mShoppingCart.registerListener(ShoppingCartListerTag.DINNER_DISH_HOME_PAGE, mShoppingCartListener);
             mInventoryCacheUtil.registerListener(ChangePageListener.PAGE_ORDER_DISH, mInventoryListener);
         }
     }
 
+    @Override
+    public void onDestroyView() {
+        mShoppingCart.unRegisterListenerByTag(ShoppingCartListerTag.DINNER_DISH_HOME_PAGE);
+        super.onDestroyView();
+    }
 
     public void onTouch(final DishVo dishVo) {
         if (mAdapter != null) {
@@ -951,4 +959,5 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
 
     }
 
+    public void refreshShopCartCount(){}
 }

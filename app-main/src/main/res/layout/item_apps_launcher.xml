@@ -8,10 +8,11 @@
 
     <ImageView
         android:id="@+id/iv_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:padding="25dp"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/launcher_icon"/>
+        android:background="@drawable/bg_launch_icon"/>
 
     <TextView
         android:id="@+id/tv_name"

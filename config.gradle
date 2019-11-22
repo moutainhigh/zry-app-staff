@@ -11,9 +11,9 @@ ext {
 
     //APP
     calm = [
-            applicationId: "com.zhongmei.yunfu",
-            versionCode  : 2110081400,
-            versionName  : "0.9.0"
+            applicationId: "com.ziranyu.staff",
+            versionCode  : 2001010,
+            versionName  : "0.1.0"
     ]
     //android libs
     sdk = [

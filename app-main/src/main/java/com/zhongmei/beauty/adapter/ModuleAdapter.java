@@ -61,10 +61,8 @@ public class ModuleAdapter extends BaseAdapter {
             holdView= (HoldView) convertView.getTag();
         }
 
-        convertView.setBackgroundColor(position%2==0?mContext.getResources().getColor(R.color.blue):mContext.getResources().getColor(R.color.beauty_color_btn_pink_nomal));
-
         AppContent app=getItem(position);
-        holdView.iv_icon.setBackgroundResource(app.getModuleIcon());
+        holdView.iv_icon.setImageResource(app.getModuleIcon());
         holdView.tv_name.setText(app.getModuleName());
 
         return convertView;

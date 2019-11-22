@@ -57,7 +57,7 @@ public class BeautySenceFragment extends Fragment {
                     SharedPreferenceUtil.getSpUtil().putInt(Constant.SP_USE_SENCE_MODE,1);
                     cb_customer.setChecked(false);
                     cb_mixed.setChecked(true);
-                    ToastUtil.showShortToast("已切换至顾客与服务员混用模式！");
+                    ToastUtil.showShortToast("已切换至服务员模式！");
                 }
                 break;
         }

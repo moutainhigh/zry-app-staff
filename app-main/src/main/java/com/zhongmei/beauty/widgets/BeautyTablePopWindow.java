@@ -181,7 +181,7 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
 
     @Override
     public void refreshZones(List<ZoneModel> zoneModes) {
-
+        mTableFileterManager.loadTableTrades(null);//加载所有工作台的View
     }
 
     @Override
@@ -276,8 +276,7 @@ public class BeautyTablePopWindow extends PopupWindow implements ITableOperator,
             table.setStatusFlag(StatusFlag.VALID);
             table.setId(tableMode.getId());
             table.setUuid(tableMode.getUuid());
-            table.setModifyDateTime(tableMode.getServerUpdateTime());
-
+            table.setModifyDateTime(System.currentTimeMillis());
             choiceTables.add(table);
         }
 

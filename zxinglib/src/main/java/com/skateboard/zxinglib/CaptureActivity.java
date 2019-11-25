@@ -38,6 +38,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,7 +65,7 @@ import java.util.Map;
  * @author dswitkin@google.com (Daniel Switkin)
  * @author Sean Owen
  */
-public class CaptureActivity extends Activity implements SurfaceHolder.Callback
+public class CaptureActivity extends Activity implements SurfaceHolder.Callback , View.OnClickListener
 {
 
     private static final String TAG = CaptureActivity.class.getSimpleName();
@@ -77,6 +80,7 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback
                     ResultMetadataType.ERROR_CORRECTION_LEVEL,
                     ResultMetadataType.POSSIBLE_COUNTRY);
 
+    private ImageView btn_back;
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
     private Result savedResultToShow;
@@ -113,11 +117,12 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback
     public void onCreate(Bundle icicle)
     {
         super.onCreate(icicle);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON );
+        window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN );
         setContentView(R.layout.capture);
-
 
         hasSurface = false;
         inactivityTimer = new InactivityTimer(this);
@@ -134,10 +139,12 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback
         super.onResume();
         cameraManager = new CameraManager(getApplication());
         viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
+        btn_back=(ImageView) findViewById(R.id.back_btn);
         viewfinderView.setCameraManager(cameraManager);
 
         //    resultView = findViewById(R.id.result_view);
         statusView = (TextView) findViewById(R.id.status_view);
+        btn_back.setOnClickListener(this);
 
         handler = null;
         lastResult = null;
@@ -387,5 +394,12 @@ public class CaptureActivity extends Activity implements SurfaceHolder.Callback
     public void drawViewfinder()
     {
         viewfinderView.drawViewfinder();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v==btn_back){
+            this.finish();
+        }
     }
 }

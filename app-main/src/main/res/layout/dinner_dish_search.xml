@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="60dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
@@ -104,7 +104,7 @@
     <com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon
         android:id="@+id/et_search_content"
         android:layout_width="match_parent"
-        android:layout_height="68dp"
+        android:layout_height="50dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:paddingLeft="20dp"
@@ -121,7 +121,7 @@
         android:textStyle="bold"
         android:textColor="#333333"
         android:textColorHint="#c9caca"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:focusableInTouchMode="true"
         android:focusable="true"></com.zhongmei.bty.commonmodule.view.EditTextWithDeleteIcon>
 

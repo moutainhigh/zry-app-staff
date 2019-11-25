@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 
 import com.zhongmei.yunfu.R;
+import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.db.enums.TableStatus;
 import com.zhongmei.bty.dinner.table.model.DinnertableModel;
 
@@ -44,7 +45,7 @@ public class BeautyTableItemView extends LinearLayout {
 
     public void refreshUI(DinnertableModel tableModel, boolean isCheck,boolean isCheckStatus, OnClickListener listener) {
         this.mTableModel = tableModel;
-        if (tableModel.getPhysicsTableStatus().equalsValue(TableStatus.EMPTY.value()) || !isCheckStatus) {
+        if (tableModel.getTableStatus().equalsValue(TableStatus.EMPTY.value()) || !isCheckStatus) {
             cb_table.setEnabled(true);
         } else {
             cb_table.setEnabled(false);

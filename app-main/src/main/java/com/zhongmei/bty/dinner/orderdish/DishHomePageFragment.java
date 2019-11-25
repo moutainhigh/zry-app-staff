@@ -816,6 +816,7 @@ public abstract class DishHomePageFragment extends MobclickAgentFragment impleme
     @Override
     public void onPageSelected(int position) {
         columnSelectIndex = position;
+        mCurrentIndex = position;
         setCurDishType(mAdapter.getItem(position));
         for (int i = 0; i < mLlDots.getChildCount(); i++) {
             View checkView = mLlDots.getChildAt(position);

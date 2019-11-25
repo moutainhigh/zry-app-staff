@@ -145,7 +145,7 @@ public class BeautySettingTableBindFragment extends BasicFragment implements ITa
             TextView textView = new TextView(getContext());
             textView.setText(zoneModle.getName());
             textView.setTextColor(getContext().getResources().getColor(R.color.color_666666));
-            textView.setTextSize(getContext().getResources().getDimension(R.dimen.text_16));
+            textView.setTextSize(16);
             textView.setBackgroundResource(R.drawable.beauty_shape_gray);
             textView.setGravity(Gravity.CENTER);
             textView.setPadding(0,DensityUtil.dip2px(getContext(),10),0,DensityUtil.dip2px(getContext(),10));

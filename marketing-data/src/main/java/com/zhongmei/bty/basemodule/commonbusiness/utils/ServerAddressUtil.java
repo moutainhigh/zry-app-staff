@@ -125,7 +125,7 @@ public class ServerAddressUtil {
 
 
     public String getUpdateCheckApi() {
-        return ShopInfoManager.getInstance().getServerKey() + "/pos/systemVersion/checkVersion?shopId="
+        return ShopInfoManager.getInstance().getServerKey() + "/staff/app/checkVersion?shopId="
                 + ShopInfoManager.getInstance().getShopInfo().getShopId() + "&brandId="+
                 ShopInfoManager.getInstance().getShopInfo().getBrandId()
                 +"&versionCode="

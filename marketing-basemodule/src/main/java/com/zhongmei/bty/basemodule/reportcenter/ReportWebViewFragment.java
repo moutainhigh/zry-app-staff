@@ -52,7 +52,7 @@ public class ReportWebViewFragment extends BasicFragment {
         Long createId = Session.getAuthUser().getId();
         String createName = Session.getAuthUser().getName();
 
-        String url = "http://mk.zhongmeiyunfu.com/marketing/internal/report/posReport?brandIdenty=" + brandId + "&shopIdenty=" + shopId + "&creatorId=" + createId + "&creatorName=" + createName;
+        String url = "http://mk.zhongmeiyunfu.com/marketing/internal/report/staff/staffSalse?brandIdenty=" + brandId + "&shopIdenty=" + shopId + "&userId==" + createId;
         webView.loadUrl(url);//加载url
 
 

@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 public class TradeManageUtils {
 
     private final static String TAG = TradeManageUtils.class.getSimpleName();
@@ -41,7 +40,7 @@ public class TradeManageUtils {
     public static void delete(DatabaseHelper helper, String tradeUuid)
             throws Exception {
         Dao<TradeItem, String> tiDao = helper.getDao(TradeItem.class);
-                QueryBuilder<TradeItem, String> subQb = tiDao.queryBuilder();
+        QueryBuilder<TradeItem, String> subQb = tiDao.queryBuilder();
         subQb.selectColumns(TradeItem.$.uuid);
         subQb.where().eq(TradeItem.$.tradeUuid, tradeUuid);
         Dao<TradeItemProperty, String> tipDao = helper.getDao(TradeItemProperty.class);
@@ -55,43 +54,43 @@ public class TradeManageUtils {
         tieDeleteBuilder.where().in(TradeItemExtra.$.tradeItemUuid, subQb);
         tieDeleteBuilder.delete();
 
-                Dao<TradePrivilege, String> tpDao = helper.getDao(TradePrivilege.class);
+        Dao<TradePrivilege, String> tpDao = helper.getDao(TradePrivilege.class);
         DeleteBuilder<TradePrivilege, String> tpDeleteBuilder = tpDao.deleteBuilder();
         tpDeleteBuilder.where().eq(TradePrivilege.$.tradeUuid, tradeUuid);
         tpDeleteBuilder.delete();
 
-                Dao<TradePrivilegeExtra, String> tpExtraDao = helper.getDao(TradePrivilegeExtra.class);
+        Dao<TradePrivilegeExtra, String> tpExtraDao = helper.getDao(TradePrivilegeExtra.class);
         DeleteBuilder<TradePrivilegeExtra, String> tpExtraDeleteBuilder = tpExtraDao.deleteBuilder();
         tpExtraDeleteBuilder.where().eq(TradePrivilegeExtra.$.tradeUuid, tradeUuid);
         tpExtraDeleteBuilder.delete();
 
-                Dao<TradeCustomer, String> tcDao = helper.getDao(TradeCustomer.class);
+        Dao<TradeCustomer, String> tcDao = helper.getDao(TradeCustomer.class);
         DeleteBuilder<TradeCustomer, String> tcDeleteBuilder = tcDao.deleteBuilder();
         tcDeleteBuilder.where().eq(TradeCustomer.$.tradeUuid, tradeUuid);
         tcDeleteBuilder.delete();
-                Dao<TradeExtra, String> teDao = helper.getDao(TradeExtra.class);
+        Dao<TradeExtra, String> teDao = helper.getDao(TradeExtra.class);
         DeleteBuilder<TradeExtra, String> teDeleteBuilder = teDao.deleteBuilder();
         teDeleteBuilder.where().eq(TradeExtra.$.tradeUuid, tradeUuid);
         teDeleteBuilder.delete();
-                Dao<TradeTable, String> ttDao = helper.getDao(TradeTable.class);
+        Dao<TradeTable, String> ttDao = helper.getDao(TradeTable.class);
         DeleteBuilder<TradeTable, String> ttDeleteBuilder = ttDao.deleteBuilder();
         ttDeleteBuilder.where().eq(TradeTable.$.tradeUuid, tradeUuid);
         ttDeleteBuilder.delete();
-                DeleteBuilder<TradeItem, String> tiDeleteBuilder = tiDao.deleteBuilder();
+        DeleteBuilder<TradeItem, String> tiDeleteBuilder = tiDao.deleteBuilder();
         tiDeleteBuilder.where().eq(TradeItem.$.tradeUuid, tradeUuid);
         tiDeleteBuilder.delete();
 
-                Dao<TradeReasonRel, String> trrDao = helper.getDao(TradeReasonRel.class);
+        Dao<TradeReasonRel, String> trrDao = helper.getDao(TradeReasonRel.class);
         DeleteBuilder<TradeReasonRel, String> trrDeleteBuilder = trrDao.deleteBuilder();
         trrDeleteBuilder.where().eq(TradeReasonRel.$.relateUuid, tradeUuid);
         trrDeleteBuilder.delete();
 
-                Dao<TradeDeposit, String> tdDao = helper.getDao(TradeDeposit.class);
+        Dao<TradeDeposit, String> tdDao = helper.getDao(TradeDeposit.class);
         DeleteBuilder<TradeDeposit, String> tdDeleteBuilder = tdDao.deleteBuilder();
         tdDeleteBuilder.where().eq(TradeExtra.$.tradeUuid, tradeUuid);
         tdDeleteBuilder.delete();
 
-                Dao<TradeItemPlanActivity, String> tipaDao = helper.getDao(TradeItemPlanActivity.class);
+        Dao<TradeItemPlanActivity, String> tipaDao = helper.getDao(TradeItemPlanActivity.class);
 
         DeleteBuilder<TradeItemPlanActivity, String> tipaDeleteBuilder = tipaDao.deleteBuilder();
         tipaDeleteBuilder.where().eq(TradeItemPlanActivity.$.tradeUuid, tradeUuid);
@@ -102,7 +101,7 @@ public class TradeManageUtils {
         tpaDeleteBuilder.where().eq(TradePlanActivity.$.tradeUuid, tradeUuid);
         tpaDeleteBuilder.delete();
 
-                Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
+        Dao<Trade, String> tradeDao = helper.getDao(Trade.class);
         tradeDao.deleteById(tradeUuid);
     }
 
@@ -112,7 +111,7 @@ public class TradeManageUtils {
             PrepareTradeRelationDal prepareTradeRelationDal = OperatesFactory.create(PrepareTradeRelationDal.class);
             try {
                 Map<Long, PrepareTradeRelation> prepareMap = prepareTradeRelationDal.findMapByTradeId(null);
-                                if (prepareMap != null && prepareMap.size() > 0 && Utils.isNotEmpty(trades)) {
+                if (prepareMap != null && prepareMap.size() > 0 && Utils.isNotEmpty(trades)) {
                     for (int i = trades.size() - 1; i >= 0; i--) {
                         Trade trade = trades.get(i);
                         if (prepareMap.containsKey(trade.getId())) {

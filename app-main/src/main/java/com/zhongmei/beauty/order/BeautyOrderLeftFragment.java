@@ -149,7 +149,6 @@ public class BeautyOrderLeftFragment extends BasicFragment {
 
     private void initView(BusinessType busType) {
         if (isBuyServer(busType)) {
-
             btn_save.setVisibility(View.GONE);
             btn_print.setVisibility(View.GONE);
         }

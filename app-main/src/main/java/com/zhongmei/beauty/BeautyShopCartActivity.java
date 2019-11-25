@@ -130,6 +130,14 @@ public class BeautyShopCartActivity extends MainBaseActivity implements View.OnC
     private void initData(){
         Integer businessTypeValue = getIntent().getIntExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE, ValueEnums.toValue(BusinessType.BEAUTY));
         mBusinessType = ValueEnums.toEnum(BusinessType.class, businessTypeValue);
+
+        initView(mBusinessType);
+    }
+
+    private void initView(BusinessType busType) {
+        if (isBuyServer(busType)) {
+            btn_save.setVisibility(View.GONE);
+        }
     }
 
     private int getLayoutRes() {
@@ -504,7 +512,7 @@ public class BeautyShopCartActivity extends MainBaseActivity implements View.OnC
                 BeautyOrderManager.saveTrade(this, mShoppingCart);
                 break;
             case R.id.btn_pay:
-                if (isBuyServer(mBusinessType) && DinnerShopManager.getInstance().getLoginCustomer() == null) {
+                if (isBuyServer(mShoppingCart.getOrder().getTrade().getBusinessType()) && DinnerShopManager.getInstance().getLoginCustomer() == null) {
                     ToastUtil.showShortToast(R.string.beauty_no_login_customer);
                     return;
                 }

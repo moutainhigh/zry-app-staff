@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 
-public class BeautyTableManager extends TableManagerBase implements ITableTradeRefresh {
+public class BeautyTableManager extends TableManager implements ITableTradeRefresh {
 
     private BeautyTableTradeCache mBeautyTableTradeCache;
 

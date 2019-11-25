@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.zhongmei.beauty.BeautyShopCartActivity;
 import com.zhongmei.beauty.order.adapter.BeautyCardAdapter;
 import com.zhongmei.beauty.order.event.BeautyShopCartLoadEvent;
+import com.zhongmei.beauty.utils.BeautyOrderConstants;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishPageInfo;
 import com.zhongmei.bty.basemodule.orderdish.event.EventDishChangedNotice;
 import com.zhongmei.bty.snack.orderdish.adapter.DishTypeAdapter;
@@ -182,6 +183,7 @@ public class BeautyOrderProductFragment extends DishHomePageFragment implements 
                 break;
             case R.id.rl_shop_cart:
                 Intent intent=new Intent(getContext(), BeautyShopCartActivity.class);
+                intent.putExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE,businessTypeValue.value());
                 startActivity(intent);
                 break;
             case R.id.layout_type_name:

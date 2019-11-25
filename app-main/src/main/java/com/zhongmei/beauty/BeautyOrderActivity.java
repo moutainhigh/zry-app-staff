@@ -133,10 +133,12 @@ public class BeautyOrderActivity extends MainBaseActivity implements View.OnClic
         final boolean isEdit = getIntent().getBooleanExtra(BeautyOrderConstants.IS_ORDER_EDIT, false);
         final Tables tables = (Tables) getIntent().getSerializableExtra(BeautyOrderConstants.ORDER_EDIT_TABLE);
         final Long tradeId = getIntent().getLongExtra(BeautyOrderConstants.ORDER_EDIT_TRADEID, -1);
+        int busInteger = getIntent().getIntExtra(BeautyOrderConstants.ORDER_BUSINESSTYPE, ValueEnums.toValue(BusinessType.BEAUTY));
+        final BusinessType businessTypeValue = ValueEnums.toEnum(BusinessType.class, busInteger);
         initTask = new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void[] objects) {
-                BeautyOrderManager.initOrder(isEdit, tradeId, tables, BusinessType.BEAUTY);
+                BeautyOrderManager.initOrder(isEdit, tradeId, tables, businessTypeValue);
                 return null;
             }
 

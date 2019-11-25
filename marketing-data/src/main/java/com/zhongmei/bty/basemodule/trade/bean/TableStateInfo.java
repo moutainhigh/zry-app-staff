@@ -20,4 +20,12 @@ public class TableStateInfo {
         this.serverUpdateTime = table.verValue();
         this.tradeBusinessType = businessType;
     }
+
+    public TableStateInfo(Tables table,TableStatus status, BusinessType businessType) {
+        this.id = table.getId();
+        this.tableStatus = status==null?table.getTableStatus():status;
+        this.serverUpdateTime = table.verValue();
+        this.tradeBusinessType = businessType;
+    }
+
 }

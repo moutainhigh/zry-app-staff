@@ -1,11 +1,14 @@
 package com.zhongmei.beauty.order.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
+import com.nostra13.universalimageloader.core.display.SimpleBitmapDisplayer;
 import com.zhongmei.yunfu.R;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
@@ -18,10 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 
-
 public class BeautyProductAdapter extends OrderDishAdapter {
 
-    DisplayImageOptions options= DisplayImageOptions.createSimple();
+    DisplayImageOptions options = null;
 
     public BeautyProductAdapter(Context context, List<DishVo> dishList, int columns) {
         super(context, dishList, columns);
@@ -29,7 +31,7 @@ public class BeautyProductAdapter extends OrderDishAdapter {
 
     protected void inflateHolder(View convertView, ViewHolder viewHolder) {
         super.inflateHolder(convertView, viewHolder);
-        viewHolder.iv_shopLogo=(ImageView)convertView.findViewById(R.id.iv_goods_icon);
+        viewHolder.iv_shopLogo = (ImageView) convertView.findViewById(R.id.iv_goods_icon);
     }
 
     protected void setResidueView(DishVo dishVo, DishShop dishShop, ViewHolder holder) {
@@ -77,7 +79,7 @@ public class BeautyProductAdapter extends OrderDishAdapter {
             holder.tvMarketPrice.setTextColor(mContext.getResources().getColor(R.color.beauty_color_FF666666));
         }
 
-        ImageLoader.getInstance().displayImage(dishVo.getDishShopImgUrl(),holder.iv_shopLogo,options);
+        ImageLoader.getInstance().displayImage(dishVo.getDishShopImgUrl(), holder.iv_shopLogo, getImageLoadOption());
     }
 
     @Override
@@ -90,5 +92,24 @@ public class BeautyProductAdapter extends OrderDishAdapter {
             }
         }
         return qty;
+    }
+
+    public DisplayImageOptions getImageLoadOption(){
+        if(options==null){
+            options = new DisplayImageOptions.Builder()
+                    .showImageOnLoading(R.drawable.icon_image_empty) // resource or drawable
+                    .showImageForEmptyUri(R.drawable.icon_image_empty) // resource or drawable
+                    .showImageOnFail(R.drawable.icon_image_empty) // resource or drawable
+                    .resetViewBeforeLoading(false)  // default
+                    .delayBeforeLoading(1000)
+                    .cacheInMemory(true) // default
+                    .cacheOnDisk(true) // default
+                    .considerExifParams(true) // default
+                    .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2) // default
+                    .bitmapConfig(Bitmap.Config.ARGB_8888) // default
+                    .displayer(new SimpleBitmapDisplayer()) // default
+                    .build();
+        }
+        return options;
     }
 }

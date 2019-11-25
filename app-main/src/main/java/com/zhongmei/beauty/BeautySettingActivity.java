@@ -50,6 +50,7 @@ public class BeautySettingActivity extends BaseActivity {
 
     private static final String TAG = BeautySettingActivity.class.getSimpleName();
 
+
     @ViewById(R.id.setting_use_sence)
     TextView setting_useSence;
 
@@ -100,6 +101,11 @@ public class BeautySettingActivity extends BaseActivity {
             switchFragment(R.id.right_container1, new BeautySettingTableBindFragment_(), setting_tables);
             textView = setting_tables;
         }
+    }
+
+    @Click(R.id.btn_back)
+    public void onBackClick(){
+        this.finish();
     }
 
     private void changeLastStyle(TextView view1, TextView view2) {

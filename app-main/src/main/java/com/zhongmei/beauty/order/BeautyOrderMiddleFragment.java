@@ -618,7 +618,7 @@ public class BeautyOrderMiddleFragment extends BasicFragment implements IOperate
     public void showContent() {
         if (vContent != null)
             vContent.setVisibility(View.VISIBLE);
-        setOrderLeftViewMarginRigh(DensityUtil.dip2px(getContext(), 370));
+        setOrderLeftViewMarginRigh(DensityUtil.dip2px(getContext(), 350));
     }
 
     public void hideContent() {

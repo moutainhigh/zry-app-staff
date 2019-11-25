@@ -15,10 +15,10 @@ import java.util.List;
 public class TableFilterManager {
     private static TableFilterManager mTableFilter;
 
-    private TableManager mTableManager;
+    private BeautyTableManager mTableManager;
 
     public TableFilterManager() {
-        mTableManager = new TableManager();
+        mTableManager = new BeautyTableManager();
     }
 
 
@@ -39,6 +39,9 @@ public class TableFilterManager {
         mTableManager.loadTableInfos();
     }
 
+    public void loadTableTrades(Long zoneId){
+        mTableManager.loadTableTrades(zoneId);
+    }
 
     public List<DinnertableModel> filter(Long zoneId, TableStatus tableStatus) {
         List<DinnertableModel> listTableMode = null;
@@ -55,7 +58,7 @@ public class TableFilterManager {
             for (int i = index; i >= 0; i--) {
                 DinnertableModel tableMode = listTableMode.get(i);
 
-                if (tableMode.getPhysicsTableStatus().equalsValue(tableStatus.value())) {
+                if (tableMode.getTableStatus().equalsValue(tableStatus.value())) {
                     listTargetTableMode.add(tableMode);
                 }
             }

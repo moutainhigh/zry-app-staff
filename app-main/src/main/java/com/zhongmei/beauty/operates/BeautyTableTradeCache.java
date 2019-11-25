@@ -1,10 +1,12 @@
 package com.zhongmei.beauty.operates;
 
+import com.zhongmei.yunfu.context.util.Utils;
 import com.zhongmei.yunfu.db.entity.trade.TradeTable;
 import com.zhongmei.bty.basemodule.trade.enums.DinnertableStatus;
 import com.zhongmei.bty.basemodule.trade.bean.StateWrapper;
 import com.zhongmei.bty.basemodule.trade.bean.TableStateInfo;
 import com.zhongmei.bty.basemodule.trade.bean.TradeTableInfo;
+import com.zhongmei.yunfu.db.enums.TableStatus;
 import com.zhongmei.yunfu.orm.DatabaseHelper;
 import com.zhongmei.yunfu.db.entity.trade.Tables;
 import com.zhongmei.yunfu.db.entity.trade.Trade;
@@ -16,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
 public class BeautyTableTradeCache extends TableTradeCacheBase {
     private final String TAG = BeautyTableTradeCache.class.getSimpleName();
 
@@ -25,13 +26,13 @@ public class BeautyTableTradeCache extends TableTradeCacheBase {
         DatabaseHelper dbHelper = getDBHelper();
 
         try {
-                        List<Tables> tables = getTablesByZoneID(dbHelper, zoneId);
+            List<Tables> tables = getTablesByZoneID(dbHelper, zoneId);
             List<Long> tableIds = new ArrayList<>();
             for (Tables table : tables) {
                 tableIds.add(table.getId());
             }
 
-                        List<TradeTable> tradeTables = getTradeTableByTables(dbHelper, tableIds);
+            List<TradeTable> tradeTables = getTradeTableByTables(dbHelper, tableIds);
             List<Long> tradeIds = new ArrayList<>();
             Map<Long, List<TradeTable>> mapTradeTables = new HashMap<>();
             if (tradeTables != null) {
@@ -45,17 +46,16 @@ public class BeautyTableTradeCache extends TableTradeCacheBase {
                 }
             }
 
-                        List<Trade> trades = getTradeByTradeIds(dbHelper, tradeIds);
+            List<Trade> trades = getTradeByTradeIds(dbHelper, tradeIds);
             Map<Long, Trade> mapTrades = new HashMap<>();
-            if (trades != null) {                tableIds.clear();
+            if (trades != null) {
+                tableIds.clear();
                 for (Trade trade : trades) {
                     tableIds.add(trade.getId());
 
                     mapTrades.put(trade.getId(), trade);
                 }
             }
-
-
 
 
             Map<Long, List<TradeTableInfo>> ttInfosFinder = new HashMap<>();
@@ -77,9 +77,16 @@ public class BeautyTableTradeCache extends TableTradeCacheBase {
                 }
             }
 
-
-            Map<Long, StateWrapper> stateWrapperMap = new HashMap<Long, StateWrapper>();            for (Tables table : tables) {
-                TableStateInfo stateInfo = new TableStateInfo(table, BusinessType.BEAUTY);                List<TradeTableInfo> ttInfos = ttInfosFinder.get(table.getId());                StateWrapper stateWrapper = new StateWrapper(stateInfo, ttInfos);                stateWrapperMap.put(table.getId(), stateWrapper);
+            Map<Long, StateWrapper> stateWrapperMap = new HashMap<Long, StateWrapper>();
+            for (Tables table : tables) {
+                List<TradeTableInfo> ttInfos = ttInfosFinder.get(table.getId());
+                TableStatus status=TableStatus.EMPTY;
+                if(Utils.isNotEmpty(ttInfos)){
+                    status=TableStatus.OCCUPIED;
+                }
+                TableStateInfo stateInfo = new TableStateInfo(table,status, BusinessType.BEAUTY);
+                StateWrapper stateWrapper = new StateWrapper(stateInfo, ttInfos);
+                stateWrapperMap.put(table.getId(), stateWrapper);
             }
 
 

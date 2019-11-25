@@ -346,7 +346,6 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
     private void switchSoftInput(int searchType, EditText etTarget) {
         switch (searchType) {
             case CODE:
-            case PRICE:
             case FIRST_LETTER:
                 forbiddenSoftKeyboard(etTarget);
                 keyboard.setVisibility(View.VISIBLE);
@@ -360,6 +359,7 @@ public class DinnerDishSearchFragment extends MobclickAgentFragment implements T
                     }
                 });
                 break;
+            case PRICE:
             case DISHNAME:
                 showSoftKeyboard(etTarget);
                 keyboard.setVisibility(View.GONE);

@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/layout_operator"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal">
 
@@ -25,16 +25,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="30dp"
-                android:src="@drawable/icon_home" />
+                android:layout_marginRight="20dp"
+                android:src="@drawable/icon_to_back" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/iv_gameIcon"
+                android:textColor="@color/color_657480"
                 android:text="返回"
-                android:textSize="24sp" />
+                android:textSize="20sp" />
 
         </RelativeLayout>
 
@@ -50,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="7dp"
                 android:text="请在上方选择商品"
                 android:textSize="@dimen/text_20" />
 
@@ -60,7 +61,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/btn_open_trade"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView

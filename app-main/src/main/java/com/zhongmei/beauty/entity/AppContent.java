@@ -2,7 +2,7 @@ package com.zhongmei.beauty.entity;
 
 public class AppContent {
     private String moduleName;
-    private String packageName="com.zhongmei.yunfu";
+    private String packageName="com.ziranyu.staff";
     private String activityClass= "com.zhongmei.beauty.BeautyMainActivity_";
     private int moduleIcon;
     private int pageNo;

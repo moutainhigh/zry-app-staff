@@ -202,6 +202,12 @@ public class BeautyCustomerModeLaunchFragment extends BasicFragment implements V
                     ToastUtil.showShortToast("请登陆服务员");
                     return;
                 }
+                if(mTable==null){
+                    Intent intent=new Intent();
+                    intent.setClass(getContext(),BeautySettingActivity.class);
+                    startActivity(intent);
+                    return;
+                }
                 //开单
                 createOrderDish(mTable);
                 break;

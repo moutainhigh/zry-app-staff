@@ -1,6 +1,7 @@
 package com.zhongmei.beauty.booking.list
 
 import android.os.Bundle
+import android.support.annotation.UiThread
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -95,6 +96,7 @@ open abstract class BeautyBookingListFragment : BasicFragment(), OnRefreshListen
         refreshView()
     }
 
+    @UiThread
     fun showEmptyView(listVos: ArrayList<BeautyBookingListVo>,haveMore: Boolean) {
         if (Utils.isEmpty(listVos)) {
             empty_view.visibility = View.VISIBLE

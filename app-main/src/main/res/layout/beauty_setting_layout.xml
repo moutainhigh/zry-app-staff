@@ -72,12 +72,14 @@
                     <TextView
                         android:id="@+id/setting_baseInfo"
                         style="@style/settings_left2"
+                        android:visibility="gone"
                         android:tag="设备"
                         android:text="基本信息" />
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
+                        android:visibility="gone"
                         android:background="@color/print_line" />
 
                     <TextView

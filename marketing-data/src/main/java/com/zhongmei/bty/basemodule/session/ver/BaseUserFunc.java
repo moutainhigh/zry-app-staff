@@ -12,7 +12,7 @@ public abstract class BaseUserFunc implements UserFunc {
     public boolean checkPassword(User user, String password) {
         String firstPasswordNum = Password.create().generate(user.getAccount(), password);
         String secondPasswordNum = user.getPassword();
-        return secondPasswordNum.equals(secondPasswordNum);
+        return secondPasswordNum.equals(firstPasswordNum);
     }
 
 }

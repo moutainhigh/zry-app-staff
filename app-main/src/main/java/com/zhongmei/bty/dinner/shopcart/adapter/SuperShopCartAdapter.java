@@ -69,51 +69,54 @@ import java.util.List;
 import java.util.Map;
 
 
-
-
 public abstract class SuperShopCartAdapter extends BaseAdapter {
     private final static String TAG = SuperShopCartAdapter.class.getSimpleName();
-            public static final int DISH_TYPE = 0;
-        public static final int LABLE_TYPE = 1;
-        public static final int MEMO_TYPE = 2;
-        public static final int SIGLE_PRIVILEGE_TYPE = 3;
-        public static final int PRIVILEGE_TYPE = 4;
-        public static final int MARKET_TYPE = 5;
-        public static final int GRAY_SEPERATOR_TYPE = 6;
-        public static final int EXTRA_TYPE = 7;
-        public static final int PROPERTIES_TYPE = 8;
-        public static final int TITLE_TYPE = 9;
-        public static final int BUFFET_PEOPLE_TYPE = 10;
-        public static final int BUFFET_EXTRA = 11;
-        public static final int TITLE_CATEGORY = 12;
-        public static final int DISH_WEST_TYPE = 13;
-        public static final int ITEM_USER_TYPE = 14;
-        public static final int TRADE_USER_TYPE = 15;
-        public static final int CARD_SERVICE_LABEL = 16;
-        public static final int CARD_SERVICE_ITEM=17;
+    public static final int DISH_TYPE = 0;
+    public static final int LABLE_TYPE = 1;
+    public static final int MEMO_TYPE = 2;
+    public static final int SIGLE_PRIVILEGE_TYPE = 3;
+    public static final int PRIVILEGE_TYPE = 4;
+    public static final int MARKET_TYPE = 5;
+    public static final int GRAY_SEPERATOR_TYPE = 6;
+    public static final int EXTRA_TYPE = 7;
+    public static final int PROPERTIES_TYPE = 8;
+    public static final int TITLE_TYPE = 9;
+    public static final int BUFFET_PEOPLE_TYPE = 10;
+    public static final int BUFFET_EXTRA = 11;
+    public static final int TITLE_CATEGORY = 12;
+    public static final int DISH_WEST_TYPE = 13;
+    public static final int ITEM_USER_TYPE = 14;
+    public static final int TRADE_USER_TYPE = 15;
+    public static final int CARD_SERVICE_LABEL = 16;
+    public static final int CARD_SERVICE_ITEM = 17;
 
-    protected Boolean isBatchDiscountModle = false;    protected boolean isBatchCoercionModel = false;
-    protected Boolean isDiscountAllMode = false;    protected boolean isShowAllDiscount = false;
+    protected Boolean isBatchDiscountModle = false;
+    protected boolean isBatchCoercionModel = false;
+    protected Boolean isDiscountAllMode = false;
+    protected boolean isShowAllDiscount = false;
     protected boolean isShowFreeDiscount = true;
     protected boolean isHasBanquetOrFree = false;
     protected static boolean isDishCheckMode = false;
     final String STR_SEMICOLON = "：";
     final String STR_COMMA = "，";
     protected int IMAGEMARGINRIGHT = 5;
-    protected ArrayList<DishDataItem> data = new ArrayList<DishDataItem>(10);     protected Context context;
+    protected ArrayList<DishDataItem> data = new ArrayList<DishDataItem>(10);
+    protected Context context;
 
     protected String min;
     protected String hour;
     protected String day;
-    protected Drawable mChildIcon;    protected Drawable mDeleteIcon, mDishUnSaveIcon, mDishUnPrintedIcon, mDishPrintedIcon, mDishPausedIcon, mDIshPrintFailIcon,
+    protected Drawable mChildIcon;
+    protected Drawable mDeleteIcon, mDishUnSaveIcon, mDishUnPrintedIcon, mDishPrintedIcon, mDishPausedIcon, mDIshPrintFailIcon,
             mDishPrintIngIcon, mDishDiscountAllIcon, mDishNoDiscountIcon, mBuffetPeople, mDeposit, mOutTimeFee, mDrawableCategory;
 
-    protected Drawable mLabelUnSaveIcon, mLabelSaveUnprintedIcon, mLabelSavePrintedIcon,mLabelCardIcon,mLabelVipIcon;
-        protected Drawable mSplitPritedIcon, mSplitUnPritedIcon;
+    protected Drawable mLabelUnSaveIcon, mLabelSaveUnprintedIcon, mLabelSavePrintedIcon, mLabelCardIcon, mLabelVipIcon;
+    protected Drawable mSplitPritedIcon, mSplitUnPritedIcon;
 
-    protected BigDecimal mAllDishCount = BigDecimal.ZERO;        protected Map<String, TradeItemPlanActivity> tradeItemPlanActivityMap = new HashMap<String, TradeItemPlanActivity>();
-        protected boolean isSlideDish = false;
-        protected BigDecimal deskCount = BigDecimal.ONE;
+    protected BigDecimal mAllDishCount = BigDecimal.ZERO;
+    protected Map<String, TradeItemPlanActivity> tradeItemPlanActivityMap = new HashMap<String, TradeItemPlanActivity>();
+    protected boolean isSlideDish = false;
+    protected BigDecimal deskCount = BigDecimal.ONE;
 
     protected Map<Long, List<IShopcartItem>> typeMap = null;
 
@@ -132,8 +135,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         this.mLabelUnSaveIcon = context.getResources().getDrawable(R.drawable.dinner_label_unsave);
         this.mLabelSaveUnprintedIcon = context.getResources().getDrawable(R.drawable.dinner_label_unprinted);
         this.mLabelSavePrintedIcon = context.getResources().getDrawable(R.drawable.dinner_label_printed);
-        this.mLabelCardIcon=context.getResources().getDrawable(R.drawable.icon_card);
-        this.mLabelVipIcon=context.getResources().getDrawable(R.drawable.icon_vip);
+        this.mLabelCardIcon = context.getResources().getDrawable(R.drawable.icon_card);
+        this.mLabelVipIcon = context.getResources().getDrawable(R.drawable.icon_vip);
         this.mDishPausedIcon = context.getResources().getDrawable(R.drawable.dinner_pause_icon);
         this.mDIshPrintFailIcon = context.getResources().getDrawable(R.drawable.dinner_print_fail_icon);
         this.mDishPrintIngIcon = context.getResources().getDrawable(R.drawable.dinner_print_ing_icon);
@@ -273,7 +276,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         }
 
         DishDataItem item = data.get(position);
-                if (item != null && item.getBase() != null && (item.getBase().getInvalidType() == InvalidType.SPLIT)
+        if (item != null && item.getBase() != null && (item.getBase().getInvalidType() == InvalidType.SPLIT)
                 || isDiscountAllMode) {
             return false;
         }
@@ -296,13 +299,13 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         BuffetPeopleHolder buffetPeopleHolder = null;
         BuffetExtraHolder buffetExtraHolder = null;
         UserHolder userHolder = null;
-        CardServerItemsHolder cardServerItemsHolder=null;
+        CardServerItemsHolder cardServerItemsHolder = null;
         int type = getItemViewType(position);
         switch (type) {
             case CARD_SERVICE_ITEM:
                 if (convertView == null || convertView.getTag(R.id.layout_card_server_item) == null) {
                     cardServerItemsHolder = new CardServerItemsHolder();
-                    convertView = initcardServerItemsView(LayoutInflater.from(context),cardServerItemsHolder);
+                    convertView = initcardServerItemsView(LayoutInflater.from(context), cardServerItemsHolder);
                     convertView.setTag(R.id.layout_card_server_item, cardServerItemsHolder);
                 } else {
                     cardServerItemsHolder = (CardServerItemsHolder) convertView.getTag(R.id.layout_card_server_item);
@@ -328,10 +331,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 }
                 break;
             case EXTRA_TYPE:
-                                if (convertView == null || convertView.getTag(R.id.dishLabelView) == null) {
+                if (convertView == null || convertView.getTag(R.id.dishLabelView) == null) {
                     extraHolder = new ExtraHolder();
                     convertView = LayoutInflater.from(context).inflate(R.layout.dinner_shopcart_item_dish_extra, null);
-                    extraHolder.dishLabelView = (LinearLayout) convertView.findViewById(R.id.dishLabelView);                    extraHolder.dishLabelName = (TextView) convertView.findViewById(R.id.extraLabelName);
+                    extraHolder.dishLabelView = (LinearLayout) convertView.findViewById(R.id.dishLabelView);
+                    extraHolder.dishLabelName = (TextView) convertView.findViewById(R.id.extraLabelName);
                     convertView.setTag(R.id.dishLabelView, extraHolder);
                 } else {
                     extraHolder = (ExtraHolder) convertView.getTag(R.id.dishLabelView);
@@ -354,7 +358,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 if (convertView == null || convertView.getTag(R.id.dish_memo) == null) {
                     memoHolder = new MemoHolder();
                     convertView = LayoutInflater.from(context).inflate(R.layout.dinner_shopcart_item_memo, null);
-                                        memoHolder.dish_memo = (TextView) convertView.findViewById(R.id.dish_memo);
+                    memoHolder.dish_memo = (TextView) convertView.findViewById(R.id.dish_memo);
                     memoHolder.topLine = (View) convertView.findViewById(R.id.topline);
                     convertView.setTag(R.id.dish_memo, memoHolder);
                 } else {
@@ -393,7 +397,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 break;
 
             case MARKET_TYPE:
-                                if (convertView == null || convertView.getTag(R.id.ll_market_activity) == null) {
+                if (convertView == null || convertView.getTag(R.id.ll_market_activity) == null) {
                     marketHolder = new MarketHolder();
                     convertView = LayoutInflater.from(context).inflate(R.layout.dinner_dish_shopcart_item_market, null);
                     marketHolder.llMarketActivity = (LinearLayout) convertView.findViewById(R.id.ll_market_activity);
@@ -406,10 +410,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 }
                 break;
             case GRAY_SEPERATOR_TYPE:
-                                if (convertView == null || convertView.getTag(R.id.view_seperator) == null) {
+                if (convertView == null || convertView.getTag(R.id.view_seperator) == null) {
                     seperatorHolder = new SeperatorHolder();
                     convertView = LayoutInflater.from(context).inflate(R.layout.dinner_dish_shopcart_item_gray_line, null);
-                    seperatorHolder.viewGraySeperator = convertView.findViewById(R.id.view_seperator);                    convertView.setTag(R.id.view_seperator, seperatorHolder);
+                    seperatorHolder.viewGraySeperator = convertView.findViewById(R.id.view_seperator);
+                    convertView.setTag(R.id.view_seperator, seperatorHolder);
                 } else {
                     seperatorHolder = (SeperatorHolder) convertView.getTag(R.id.view_seperator);
                 }
@@ -555,11 +560,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     protected void showUser(UserHolder userHolder, DishDataItem item, boolean isDefine) {
         if (!isDefine) {
             userHolder.user_info.setLayoutParams(getExtraDiyWh(context, true));
-            setDrawableLeft(userHolder.user_info,R.drawable.icon_trade_item_user);
+            setDrawableLeft(userHolder.user_info, R.drawable.icon_trade_item_user);
             userHolder.user_info.setTextColor(context.getResources().getColor(R.color.remark_text_color));
         } else {
             userHolder.user_info.setLayoutParams(getExtraDiyWh(context, false));
-            setDrawableLeft(userHolder.user_info,R.drawable.icon_trade_user);
+            setDrawableLeft(userHolder.user_info, R.drawable.icon_trade_user);
             userHolder.user_info.setTextColor(context.getResources().getColor(R.color.beauty_color_FC2584));
         }
         if (item.isNeedTopLine()) {
@@ -570,11 +575,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         userHolder.user_info.setText(item.getName());
     }
 
-    private void setDrawableLeft(TextView tv,int iconResId){
+    private void setDrawableLeft(TextView tv, int iconResId) {
         Drawable drawableLeft = context.getResources().getDrawable(iconResId);
         tv.setCompoundDrawablesWithIntrinsicBounds(drawableLeft,
                 null, null, null);
-        tv.setCompoundDrawablePadding(DensityUtil.dip2px(context,5));
+        tv.setCompoundDrawablePadding(DensityUtil.dip2px(context, 5));
     }
 
     protected void showTitle(TitleHolder titleHolder, DishDataItem item) {
@@ -648,16 +653,15 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
 
-
     protected abstract View loadDishLayout();
 
 
     protected abstract View initDishLayout(ViewHolder holder);
 
-    protected View initcardServerItemsView(LayoutInflater inflater,CardServerItemsHolder holder) {
-        View contentView=inflater.inflate(R.layout.dinner_shopcart_item_server_items, null);
-        holder.topLine=contentView.findViewById(R.id.topline);
-        holder.tv_dishName=(TextView) contentView.findViewById(R.id.tv_dish_name);
+    protected View initcardServerItemsView(LayoutInflater inflater, CardServerItemsHolder holder) {
+        View contentView = inflater.inflate(R.layout.dinner_shopcart_item_server_items, null);
+        holder.topLine = contentView.findViewById(R.id.topline);
+        holder.tv_dishName = (TextView) contentView.findViewById(R.id.tv_dish_name);
         return contentView;
     }
 
@@ -673,7 +677,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         holder.mainLayout = convertView;
         holder.topLine = (View) convertView.findViewById(R.id.topline);
         holder.checkButton = (ImageView) convertView.findViewById(R.id.checkButton);
-                holder.dishView = (RelativeLayout) convertView.findViewById(R.id.dishView);
+        holder.dishView = (RelativeLayout) convertView.findViewById(R.id.dishView);
         holder.dish_name = (TextView) convertView.findViewById(R.id.dish_name);
         holder.dish_printstate = (ImageView) convertView.findViewById(R.id.printstateicon);
         holder.dish_num = (TextView) convertView.findViewById(R.id.dish_num);
@@ -684,7 +688,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
     }
 
-        protected void initSlideLayout(ViewHolder holder, View convertView) {
+    protected void initSlideLayout(ViewHolder holder, View convertView) {
         holder.slideLayout = (LinearLayout) convertView.findViewById(R.id.slide_layout);
         holder.slideStatusIv = (ImageView) convertView.findViewById(R.id.slide_status_iv);
         holder.slideStatusTv = (TextView) convertView.findViewById(R.id.slide_status_tv);
@@ -695,11 +699,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         holder.tv_make_status = (TextView) convertView.findViewById(R.id.tv_make_status);
         holder.tv_dish_bat_serving = (TextView) convertView.findViewById(R.id.tv_dish_bat_serving);
 
-                holder.returnDishQuantityTv = (TextView) convertView.findViewById(R.id.return_dish_quantity_tv);
+        holder.returnDishQuantityTv = (TextView) convertView.findViewById(R.id.return_dish_quantity_tv);
         holder.returnDishReasonTv = (TextView) convertView.findViewById(R.id.return_dish_reason_tv);
         holder.returnDishLL = (LinearLayout) convertView.findViewById(R.id.return_dish_ll);
 
-                holder.dishOperateTagLL = (LinearLayout) convertView.findViewById(R.id.dish_operate_tag_ll);
+        holder.dishOperateTagLL = (LinearLayout) convertView.findViewById(R.id.dish_operate_tag_ll);
         holder.dishPrepareTv = (TextView) convertView.findViewById(R.id.dish_prepare_tv);
         holder.dishMakeTv = (TextView) convertView.findViewById(R.id.dish_make_tv);
         holder.dishPrepareCancelTv = (TextView) convertView.findViewById(R.id.dish_prepare_cancel_tv);
@@ -707,7 +711,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
     protected void initTimeView(ViewHolder holder, View convertView) {
-                holder.issueTimeTv = (TextView) convertView.findViewById(R.id.issue_time_tv);
+        holder.issueTimeTv = (TextView) convertView.findViewById(R.id.issue_time_tv);
     }
 
 
@@ -731,9 +735,9 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     protected abstract void showDishLayout(ViewHolder holder, final DishDataItem item, int position);
 
 
-    protected void showCardServerItem(CardServerItemsHolder holder, final DishDataItem item, int position){
-            holder.tv_dishName.setText(item.getName());
-            holder.topLine.setVisibility(item.isNeedTopLine()?View.VISIBLE:View.GONE);
+    protected void showCardServerItem(CardServerItemsHolder holder, final DishDataItem item, int position) {
+        holder.tv_dishName.setText(item.getName());
+        holder.topLine.setVisibility(item.isNeedTopLine() ? View.VISIBLE : View.GONE);
     }
 
 
@@ -741,16 +745,20 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         IShopcartItemBase shopcartItem = item.getBase();
         if (shopcartItem != null) {
             holder.dish_name.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
-            holder.dish_name.setText(shopcartItem.getSkuName());             BigDecimal qty = BigDecimal.ZERO;
+            holder.dish_name.setText(shopcartItem.getSkuName());
+            BigDecimal qty = BigDecimal.ZERO;
             if (item.getType() == ItemType.WEST_CHILD) {
                 qty = shopcartItem.getTotalQty();
             } else {
                 qty = ShopcartItemUtils.getDisplyQty(shopcartItem, deskCount);
             }
-            holder.dish_num.setText("×" + MathDecimal.toTrimZeroString(qty));            holder.dish_num.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
-                        if (shopcartItem.isGroupDish() || item.getType() == ItemType.WEST_CHILD) {
-                holder.dish_price.setText("");            } else {
-                holder.dish_price.setText(getDisplayPrice(shopcartItem));                holder.dish_price.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
+            holder.dish_num.setText("×" + MathDecimal.toTrimZeroString(qty));
+            holder.dish_num.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
+            if (shopcartItem.isGroupDish() || item.getType() == ItemType.WEST_CHILD) {
+                holder.dish_price.setText("");
+            } else {
+                holder.dish_price.setText(getDisplayPrice(shopcartItem));
+                holder.dish_price.setTextColor(context.getResources().getColor(R.color.orderdish_text_black));
             }
 
             if (isCardService(shopcartItem) || isApplet(shopcartItem)) {
@@ -803,7 +811,6 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
 
-
     protected void showExtra(IShopcartItemBase shopcartItem, ExtraHolder holder, boolean isChild) {
         if (shopcartItem != null && shopcartItem.getExtraItems() != null && shopcartItem.getExtraItems().size() > 0) {
             StringBuilder sb = new StringBuilder(context.getResources().getString(R.string.addExtra));
@@ -812,7 +819,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 if (i > 0) {
                     sb.append(STR_COMMA);
                 }
-                                BigDecimal qty = extra.getSingleQty();
+                BigDecimal qty = extra.getSingleQty();
                 if (shopcartItem.getSaleType() == SaleType.WEIGHING) {
                     qty = GroupShoppingCartTool.getDisplyExtraQty(extra, deskCount);
                 }
@@ -843,8 +850,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         }
         if (item.getType() == ItemType.SINGLE || item.getType() == ItemType.COMBO) {
             Drawable checkDrawable = null;
-            if (item.getCheckStatus() == DishDataItem.DishCheckStatus.NOT_CHECK) {                checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_nomal);
-            } else if (item.getCheckStatus() == DishDataItem.DishCheckStatus.CHECKED) {                checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_selected);
+            if (item.getCheckStatus() == DishDataItem.DishCheckStatus.NOT_CHECK) {
+                checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_nomal);
+            } else if (item.getCheckStatus() == DishDataItem.DishCheckStatus.CHECKED) {
+                checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_selected);
             } else if (item.getCheckStatus() == DishDataItem.DishCheckStatus.INVALIATE_CHECK) {
                 checkDrawable = context.getResources().getDrawable(R.drawable.checkbox_cannot_discount);
             }
@@ -860,9 +869,9 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
             return;
         }
-                if (isBatchDiscountModle || isDiscountAllMode) {
+        if (isBatchDiscountModle || isDiscountAllMode) {
             if (isBatchDiscountModle && shopcartItem.isGroupDish()) {
-                                holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishNoDiscountIcon, null, null, null);
+                holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishNoDiscountIcon, null, null, null);
                 return;
             }
             if (shopcartItem.getEnableWholePrivilege() == Bool.YES || isHasBanquetOrFree) {
@@ -881,16 +890,21 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             setSplitIcon(shopcartItem, holder, mSplitUnPritedIcon);
         } else {
             switch (shopcartItem.getIssueStatus()) {
-                case PAUSE:                    holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishPausedIcon, null, null, null);
+                case PAUSE:
+                    holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishPausedIcon, null, null, null);
                     break;
-                case DIRECTLY:                case DIRECTLY_FROM_CLOUD:
-                case ISSUING:                case FAILED:                    if (shopcartItem.getId() == null) {
+                case DIRECTLY:
+                case DIRECTLY_FROM_CLOUD:
+                case ISSUING:
+                case FAILED:
+                    if (shopcartItem.getId() == null) {
                         holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishUnSaveIcon, null, null, null);
                     } else {
                         holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishUnPrintedIcon, null, null, null);
                     }
                     break;
-                case FINISHED:                    holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishPrintedIcon, null, null, null);
+                case FINISHED:
+                    holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDishPrintedIcon, null, null, null);
                     setSplitIcon(shopcartItem, holder, mSplitPritedIcon);
                     break;
                 default:
@@ -926,7 +940,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         }
         if ((item.getBase().getStatusFlag() == StatusFlag.INVALID)
                 && (item.getBase().getInvalidType() != InvalidType.SPLIT)) {
-                        if (item.getType() != ItemType.CHILD && item.getType()!=ItemType.EXTRA_ITEM) {
+            if (item.getType() != ItemType.CHILD && item.getType() != ItemType.EXTRA_ITEM) {
                 holder.dish_name.setCompoundDrawablesWithIntrinsicBounds(mDeleteIcon, null, null, null);
             }
             setLayoutGray(holder);
@@ -960,13 +974,18 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             holder.dish_printstate.setVisibility(View.GONE);
         } else {
             switch (shopcartItem.getIssueStatus()) {
-                case PAUSE:                case DIRECTLY:                case DIRECTLY_FROM_CLOUD:
-                case FINISHED:                    holder.dish_printstate.setVisibility(View.GONE);
+                case PAUSE:
+                case DIRECTLY:
+                case DIRECTLY_FROM_CLOUD:
+                case FINISHED:
+                    holder.dish_printstate.setVisibility(View.GONE);
                     break;
-                case ISSUING:                    holder.dish_printstate.setVisibility(View.VISIBLE);
+                case ISSUING:
+                    holder.dish_printstate.setVisibility(View.VISIBLE);
                     holder.dish_printstate.setImageDrawable(mDishPrintIngIcon);
                     break;
-                case FAILED:                    holder.dish_printstate.setVisibility(View.VISIBLE);
+                case FAILED:
+                    holder.dish_printstate.setVisibility(View.VISIBLE);
                     holder.dish_printstate.setImageDrawable(mDIshPrintFailIcon);
                     break;
                 default:
@@ -984,7 +1003,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         holder.dish_price.setTextColor(context.getResources().getColor(R.color.dinner_label_unsave));
     }
 
-        protected void setTopLine(View topLine, DishDataItem item, int position) {
+    protected void setTopLine(View topLine, DishDataItem item, int position) {
         if (topLine == null) {
             return;
         }
@@ -999,13 +1018,16 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     protected void showLabel(LabelHolder holder, DishDataItem item) {
         Drawable labelDrawable = this.mLabelUnSaveIcon;
         switch (item.getType()) {
-            case LABEL_UNSAVE:                labelDrawable = this.mLabelUnSaveIcon;
+            case LABEL_UNSAVE:
+                labelDrawable = this.mLabelUnSaveIcon;
                 holder.labelName.setTextAppearance(context, R.style.dinnerLabelUnsave);
                 break;
-            case LABEL_SAVE_UNPRINTED:                labelDrawable = this.mLabelSaveUnprintedIcon;
+            case LABEL_SAVE_UNPRINTED:
+                labelDrawable = this.mLabelSaveUnprintedIcon;
                 holder.labelName.setTextAppearance(context, R.style.dinnerLabelUnPrinted);
                 break;
-            case LABEL_SAVE_PRINTED:                labelDrawable = this.mLabelSavePrintedIcon;
+            case LABEL_SAVE_PRINTED:
+                labelDrawable = this.mLabelSavePrintedIcon;
                 holder.labelName.setTextAppearance(context, R.style.dinnerLabelSavePrinted);
                 break;
             case CARD_SERVICE_LABEL:
@@ -1049,7 +1071,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         holder.dish_memo.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         holder.dish_memo.setCompoundDrawablePadding(IMAGEMARGINRIGHT);
         if (!TextUtils.isEmpty(item.getName())) {
-            holder.dish_memo.setText(item.getName());         } else {
+            holder.dish_memo.setText(item.getName());
+        } else {
             holder.dish_memo.setText("");
         }
     }
@@ -1066,7 +1089,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 holder.dish_member_img.setVisibility(View.GONE);
             }
             holder.privilegeName.setText(item.getName());
-            holder.privilegeValue.setText(Utils.formatPrice(item.getValue()));                        if (!TextUtils.isEmpty(item.getDiscountReason())) {
+            holder.privilegeValue.setText(Utils.formatPrice(item.getValue()));
+            if (!TextUtils.isEmpty(item.getDiscountReason())) {
                 holder.dish_memo.setLayoutParams(getPrivilegeDiyWh(context, holder.dish_memo));
                 holder.dish_memo.setVisibility(View.VISIBLE);
                 holder.dish_memo.setText(item.getDiscountReason());
@@ -1141,17 +1165,16 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
 
-
     protected LinearLayout.LayoutParams getExtraDiyWh(Context context, boolean isChild) {
         int left = 0;
-        int bottom=0;
-        int top=0;
+        int bottom = 0;
+        int top = 0;
         if (isChild) {
             left = DensityUtil.dip2px(context, 44);
         } else {
             left = DensityUtil.dip2px(context, 10);
-            top=DensityUtil.dip2px(context, 10);
-            bottom=DensityUtil.dip2px(context, 10);
+            top = DensityUtil.dip2px(context, 10);
+            bottom = DensityUtil.dip2px(context, 10);
 
         }
         return getExtraDiyWh(left, top, 0, bottom);
@@ -1166,7 +1189,6 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
 
-
     public abstract void updateData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid);
 
 
@@ -1177,14 +1199,14 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
     protected void updateGroupSelectData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isGroupModule) {
         initGroupData(dataList, tradeVo);
-                buildTypeItem(typeMap, ItemType.TITLE_CATEGORY, true, isGroupModule);
+        buildTypeItem(typeMap, ItemType.TITLE_CATEGORY, true, isGroupModule);
         buildTypeItem(singleTypeMap, ItemType.TITLE_CATEGORY, false, isGroupModule);
     }
 
 
     public void updateGroupData(List<IShopcartItem> dataList, TradeVo tradeVo, boolean isShowInvalid) {
         initGroupData(dataList, tradeVo);
-                buildTypeItem(typeMap, ItemType.TITLE_ITEM, true, true);
+        buildTypeItem(typeMap, ItemType.TITLE_ITEM, true, true);
         buildTypeItem(singleTypeMap, ItemType.TITLE_ITEM, false, true);
     }
 
@@ -1207,7 +1229,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
     protected void buildTypeItem(Map<Long, List<IShopcartItem>> typeMap, ItemType titleType, boolean isGroup, boolean isShowGroupTitle) {
         Iterator<Long> typeIterator = typeMap.keySet().iterator();
-                        if (!typeMap.isEmpty() && !isSlideDish && isShowGroupTitle) {
+        if (!typeMap.isEmpty() && !isSlideDish && isShowGroupTitle) {
             DishDataItem item = new DishDataItem(ItemType.TITLE_ITEM);
             item.setEnabled(true);
             item.setNeedTopLine(false);
@@ -1246,31 +1268,31 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     protected abstract void updateTrade(TradeVo tradeVo, boolean isShowUnActive);
 
 
-    private void setChargingRuleInfo(DishDataItem item,IShopcartItem shopcartItem){
-        DishTimeChargingRule rule=DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(shopcartItem.getSkuId());
-        if(rule==null){
+    private void setChargingRuleInfo(DishDataItem item, IShopcartItem shopcartItem) {
+        DishTimeChargingRule rule = DishCache.getDishTimeChargingRuleHolder().getRuleByDishId(shopcartItem.getSkuId());
+        if (rule == null) {
             return;
         }
 
-        StringBuffer ruleInfo=new StringBuffer();
-        ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_rule),rule.getStartChargingTimes(),rule.getStartChargingPrice(),rule.getChargingUnit(),rule.getChargingPrice()));
+        StringBuffer ruleInfo = new StringBuffer();
+        ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_rule), rule.getStartChargingTimes(), rule.getStartChargingPrice(), rule.getChargingUnit(), rule.getChargingPrice()));
 
-        if(rule.getFullUnit()!=null && rule.getFullUnitCharging()!=null){
-            ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_limit_rule),rule.getFullUnit(),rule.getFullUnitCharging()));
+        if (rule.getFullUnit() != null && rule.getFullUnitCharging() != null) {
+            ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_limit_rule), rule.getFullUnit(), rule.getFullUnitCharging()));
         }
 
-        if(rule.getNoFullUnit()!=null && rule.getNoFullUnitCharging()!=null){
-            ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_limit_rule2),rule.getNoFullUnit(),rule.getNoFullUnitCharging()));
+        if (rule.getNoFullUnit() != null && rule.getNoFullUnitCharging() != null) {
+            ruleInfo.append(String.format(context.getResources().getString(R.string.dish_charging_limit_rule2), rule.getNoFullUnit(), rule.getNoFullUnitCharging()));
         }
 
         item.setChargingRule(ruleInfo.toString().trim());
 
-        if(shopcartItem.getId()==null){
-                        item.setServerTime(context.getResources().getString(R.string.dish_no_time));
-        }else{
-                        Long currentTime=System.currentTimeMillis();
-            Long serverMinute=(currentTime-shopcartItem.getServerCreateTime())/(60*1000);
-            item.setServerTime(String.format(context.getResources().getString(R.string.dish_server_time),serverMinute));
+        if (shopcartItem.getId() == null) {
+            item.setServerTime(context.getResources().getString(R.string.dish_no_time));
+        } else {
+            Long currentTime = System.currentTimeMillis();
+            Long serverMinute = (currentTime - shopcartItem.getServerCreateTime()) / (60 * 1000);
+            item.setServerTime(String.format(context.getResources().getString(R.string.dish_server_time), serverMinute));
         }
     }
 
@@ -1281,11 +1303,12 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         }
         List<DishDataItem> comboAndSingleItems = null;
         comboAndSingleItems = new ArrayList<DishDataItem>();
-                for (int i = dataList.size() - 1; i >= 0; i--) {
+        for (int i = dataList.size() - 1; i >= 0; i--) {
             IShopcartItem shopCartItem = dataList.get(i);
             DishDataItem item = null;
-                        if (Utils.isNotEmpty(shopCartItem.getSetmealItems()) || isServerDishShop(shopCartItem)) {
-                item = new DishDataItem(ItemType.COMBO);                item.setBase(shopCartItem);
+            if (Utils.isNotEmpty(shopCartItem.getSetmealItems()) || isServerDishShop(shopCartItem)) {
+                item = new DishDataItem(ItemType.COMBO);
+                item.setBase(shopCartItem);
                 item.setItem(shopCartItem);
                 if (shopCartItem.getId() == null
                         && shopCartItem instanceof ShopcartItemBase
@@ -1293,44 +1316,44 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                         && shopCartItem.getInvalidType() != InvalidType.RETURN_QTY
                         && shopCartItem.getInvalidType() != InvalidType.DELETE
                         && !isCardService(shopCartItem) && !isApplet(shopCartItem)
-                        ) {
+                ) {
                     item.setCanEditNumber(true);
                 } else
                     item.setCanEditNumber(false);
-                setChargingRuleInfo(item,shopCartItem);
+                setChargingRuleInfo(item, shopCartItem);
                 data.add(item);
                 comboAndSingleItems.add(item);
 
                 List<? extends ISetmealShopcartItem> chirldList = shopCartItem.getSetmealItems();
                 if (Utils.isNotEmpty(chirldList)) {
                     for (ISetmealShopcartItem chirld : chirldList) {
-                                                createChildItem(shopCartItem, chirld, ItemType.CHILD, null, false);
+                        createChildItem(shopCartItem, chirld, ItemType.CHILD, null, false);
                     }
                 }
-                if(shopCartItem.getType()==DishType.SERVER_COMBO_ALL){
-                                        DishDataItem it = new DishDataItem(ItemType.SERVER_CHILD_ITEM);
+                if (shopCartItem.getType() == DishType.SERVER_COMBO_ALL) {
+                    DishDataItem it = new DishDataItem(ItemType.SERVER_CHILD_ITEM);
                     it.setItem(shopCartItem);
                     it.setName("所有商品可用");
                     it.setDishTypeId(null);
                     it.setNeedTopLine(true);
                     this.data.add(it);
                 }
-                if(shopCartItem.getType()==DishType.SERVER_COMBO_PART && Utils.isNotEmpty(shopCartItem.getServerItems())){
-                                        for (ISetmealShopcartItem serverItems:shopCartItem.getServerItems()){
-                                                createServerChildItem(shopCartItem, serverItems, ItemType.SERVER_CHILD_ITEM, null, false);
+                if (shopCartItem.getType() == DishType.SERVER_COMBO_PART && Utils.isNotEmpty(shopCartItem.getServerItems())) {
+                    for (ISetmealShopcartItem serverItems : shopCartItem.getServerItems()) {
+                        createServerChildItem(shopCartItem, serverItems, ItemType.SERVER_CHILD_ITEM, null, false);
                     }
                 }
                 createCardServiceHint(shopCartItem);
                 createApplet(shopCartItem);
-                createItemUser(shopCartItem,shopCartItem);
-                                createMemoItem(shopCartItem,
+                createItemUser(shopCartItem, shopCartItem);
+                createMemoItem(shopCartItem,
                         shopCartItem,
                         data,
                         ItemType.COMBO_MEMO,
                         R.string.order_dish_memo_semicolon);
                 createComboPrivilege(shopCartItem);
 
-                            } else {
+            } else {
                 item = createSigleItem(shopCartItem, ItemType.SINGLE, null);
                 comboAndSingleItems.add(item);
             }
@@ -1342,14 +1365,15 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
 
-    private boolean isServerDishShop(IShopcartItem shopCartItem){
-        return shopCartItem.getType()==DishType.SERVER_COMBO_PART || shopCartItem.getType()==DishType.SERVER_COMBO_ALL;
+    private boolean isServerDishShop(IShopcartItem shopCartItem) {
+        return shopCartItem.getType() == DishType.SERVER_COMBO_PART || shopCartItem.getType() == DishType.SERVER_COMBO_ALL;
     }
 
 
     private void createComboPrivilege(IShopcartItem shopCartItem) {
         if (shopCartItem.getPrivilege() != null && shopCartItem.getPrivilege().getStatusFlag() == StatusFlag.VALID) {
-            DishDataItem it = new DishDataItem(ItemType.COMBO_DISCOUNT);            it.setItem(shopCartItem);
+            DishDataItem it = new DishDataItem(ItemType.COMBO_DISCOUNT);
+            it.setItem(shopCartItem);
             it.setBase(shopCartItem);
             createDishItemNameByPrivilege(it, shopCartItem, shopCartItem.getPrivilege());
             BigDecimal amount = shopCartItem.getPrivilege().getPrivilegeAmount();
@@ -1367,7 +1391,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
 
     private DishDataItem createSigleItem(IShopcartItem shopCartItem, ItemType itemType, Long typeId) {
-        DishDataItem item = new DishDataItem(ItemType.SINGLE);        item.setBase(shopCartItem);
+        DishDataItem item = new DishDataItem(ItemType.SINGLE);
+        item.setBase(shopCartItem);
         item.setItem(shopCartItem);
         item.setDishTypeId(typeId);
         if (shopCartItem.getId() == null
@@ -1376,19 +1401,19 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 && shopCartItem.getInvalidType() != InvalidType.RETURN_QTY
                 && shopCartItem.getInvalidType() != InvalidType.DELETE
                 && !isCardService(shopCartItem) && !isApplet(shopCartItem)
-                ) {
+        ) {
             item.setCanEditNumber(true);
         } else
             item.setCanEditNumber(false);
-        setChargingRuleInfo(item,shopCartItem);
+        setChargingRuleInfo(item, shopCartItem);
         data.add(item);
         createCardServiceHint(shopCartItem);
         createApplet(shopCartItem);
         createPropertiesItem(item);
         createExtraItem(item);
-        createItemUser(shopCartItem,shopCartItem);
+        createItemUser(shopCartItem, shopCartItem);
 
-                createMemoItem(shopCartItem,
+        createMemoItem(shopCartItem,
                 shopCartItem,
                 data,
                 ItemType.SINGLE_MEMO,
@@ -1399,8 +1424,9 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
     private void createSiglePrivilege(IShopcartItem shopCartItem, IShopcartItemBase shopcartItemBase) {
-                if (shopcartItemBase.getPrivilege() != null && shopcartItemBase.getPrivilege().isValid()) {
-            DishDataItem it = new DishDataItem(ItemType.SINGLE_DISCOUNT);            it.setBase(shopcartItemBase);
+        if (shopcartItemBase.getPrivilege() != null && shopcartItemBase.getPrivilege().isValid()) {
+            DishDataItem it = new DishDataItem(ItemType.SINGLE_DISCOUNT);
+            it.setBase(shopcartItemBase);
             it.setItem(shopCartItem);
             createDishItemNameByPrivilege(it, shopcartItemBase, shopcartItemBase.getPrivilege());
             BigDecimal amount = shopcartItemBase.getPrivilege().getPrivilegeAmount();
@@ -1427,7 +1453,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         createPropertiesItem(it);
         createExtraItem(it);
         createSiglePrivilege(shopCartItem, child);
-                createItemUser(child,null);
+        createItemUser(child, null);
         createMemoItem(child,
                 shopCartItem,
                 data,
@@ -1460,8 +1486,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
     private void updateWestByMedium(List<IShopcartItem> dataList, SuperShopCartAdapter adapter) {
         Map<Long, Map<String, List<IShopcartItemBase>>> singleTypeMap = new LinkedHashMap<>();
-                Map<String, IShopcartItem> childMap = new HashMap<>();
-                for (int i = 0; i < dataList.size(); i++) {
+        Map<String, IShopcartItem> childMap = new HashMap<>();
+        for (int i = 0; i < dataList.size(); i++) {
 
             IShopcartItem shopCartItem = dataList.get(i);
             DishDataItem item;
@@ -1474,12 +1500,13 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
             List<? extends ISetmealShopcartItem> setmealShopcartItems = shopCartItem.getSetmealItems();
             boolean isAdd = false;
-                        if (shopCartItem.getType() != null && shopCartItem.getType() == DishType.COMBO) {
-                item = new DishDataItem(ItemType.COMBO);                item.setBase(shopCartItem);
+            if (shopCartItem.getType() != null && shopCartItem.getType() == DishType.COMBO) {
+                item = new DishDataItem(ItemType.COMBO);
+                item.setBase(shopCartItem);
                 item.setItem(shopCartItem);
-                                item.setCanEditNumber(false);
+                item.setCanEditNumber(false);
                 data.add(item);
-                                createMemoItem(shopCartItem,
+                createMemoItem(shopCartItem,
                         shopCartItem,
                         data,
                         ItemType.COMBO_MEMO,
@@ -1487,9 +1514,9 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 createComboPrivilege(shopCartItem);
                 isAdd = true;
             }
-                        if (Utils.isNotEmpty(setmealShopcartItems)) {
+            if (Utils.isNotEmpty(setmealShopcartItems)) {
                 for (ISetmealShopcartItem setmealShopcartItem : setmealShopcartItems) {
-                                        if (shopCartItem.getStatusFlag() == StatusFlag.VALID && setmealShopcartItem.getStatusFlag() == StatusFlag.INVALID) {
+                    if (shopCartItem.getStatusFlag() == StatusFlag.VALID && setmealShopcartItem.getStatusFlag() == StatusFlag.INVALID) {
                         continue;
                     }
                     Long typeId = null;
@@ -1506,7 +1533,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                         singleTypeMap.put(typeId, shopcartItemMap);
                     }
                     childMap.put(setmealShopcartItem.getUuid(), shopCartItem);
-                                        List<IShopcartItemBase> shopcartItemList = shopcartItemMap.get(setmealShopcartItem.getSkuName());
+                    List<IShopcartItemBase> shopcartItemList = shopcartItemMap.get(setmealShopcartItem.getSkuName());
                     if (shopcartItemList == null) {
                         shopcartItemList = new ArrayList<>();
                         shopcartItemMap.put(setmealShopcartItem.getSkuName(), shopcartItemList);
@@ -1520,7 +1547,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             if (isAdd) {
                 continue;
             }
-                        if (adapter != null)
+            if (adapter != null)
                 adapter.sumWestAllDishCount(shopCartItem, false);
             Long typeId = null;
             DishShop dishShop = shopCartItem.getDishShop();
@@ -1535,7 +1562,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 shopcartItemMap = new LinkedHashMap<>();
                 singleTypeMap.put(typeId, shopcartItemMap);
             }
-                        List<IShopcartItemBase> shopcartItemList = shopcartItemMap.get(shopCartItem.getSkuName());
+            List<IShopcartItemBase> shopcartItemList = shopcartItemMap.get(shopCartItem.getSkuName());
             if (shopcartItemList == null) {
                 shopcartItemList = new ArrayList<>();
                 shopcartItemMap.put(shopCartItem.getSkuName(), shopcartItemList);
@@ -1579,7 +1606,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         while (iterator.hasNext()) {
             List<IShopcartItemBase> shopcartItemBaseList = (List<IShopcartItemBase>) iterator.next();
             for (IShopcartItemBase shopcartItemBase : shopcartItemBaseList) {
-                                Map<String, List<IShopcartItemBase>> shopcartMap = new LinkedHashMap<>();
+                Map<String, List<IShopcartItemBase>> shopcartMap = new LinkedHashMap<>();
                 List<IShopcartItemBase> tShopcartList = shopcartMap.get(shopcartItemBase.getSkuUuid());
                 if (tShopcartList == null) {
                     tShopcartList = new ArrayList<IShopcartItemBase>();
@@ -1608,11 +1635,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
 
-
     private void updateWestByServering(List<IShopcartItem> dataList, SuperShopCartAdapter adapter) {
         Map<Long, List<IShopcartItemBase>> singleTypeMap = new LinkedHashMap<>();
-                Map<String, IShopcartItem> childMap = new LinkedHashMap<>();
-                final Long otherId = 10000L;
+        Map<String, IShopcartItem> childMap = new LinkedHashMap<>();
+        final Long otherId = 10000L;
         for (int i = dataList.size() - 1; i >= 0; i--) {
 
             IShopcartItem shopCartItem = dataList.get(i);
@@ -1626,12 +1652,13 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
             List<? extends ISetmealShopcartItem> setmealShopcartItems = shopCartItem.getSetmealItems();
             boolean isAdd = false;
-                        if (shopCartItem.getType() != null && shopCartItem.getType() == DishType.COMBO) {
-                item = new DishDataItem(ItemType.COMBO);                item.setBase(shopCartItem);
+            if (shopCartItem.getType() != null && shopCartItem.getType() == DishType.COMBO) {
+                item = new DishDataItem(ItemType.COMBO);
+                item.setBase(shopCartItem);
                 item.setItem(shopCartItem);
                 item.setCanEditNumber(false);
                 data.add(item);
-                                createMemoItem(shopCartItem,
+                createMemoItem(shopCartItem,
                         shopCartItem,
                         data,
                         ItemType.COMBO_MEMO,
@@ -1640,15 +1667,15 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 isAdd = true;
             }
             Long sortId = otherId;
-                        if (Utils.isNotEmpty(setmealShopcartItems)) {
+            if (Utils.isNotEmpty(setmealShopcartItems)) {
                 for (ISetmealShopcartItem setmealShopcartItem : setmealShopcartItems) {
-                                        if (shopCartItem.getStatusFlag() == StatusFlag.VALID && setmealShopcartItem.getStatusFlag() == StatusFlag.INVALID) {
+                    if (shopCartItem.getStatusFlag() == StatusFlag.VALID && setmealShopcartItem.getStatusFlag() == StatusFlag.INVALID) {
                         continue;
                     }
                     if (setmealShopcartItem.getTradeItemExtraDinner() != null && setmealShopcartItem.getTradeItemExtraDinner().getServingOrder() != null) {
                         sortId = Long.valueOf(setmealShopcartItem.getTradeItemExtraDinner().getServingOrder());
                     }
-                                        if (sortId == null || sortId == 0) {
+                    if (sortId == null || sortId == 0) {
                         sortId = otherId;
                     }
                     List<IShopcartItemBase> shopcartItemList = singleTypeMap.get(sortId);
@@ -1666,12 +1693,12 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             if (isAdd) {
                 continue;
             }
-                        if (adapter != null)
+            if (adapter != null)
                 adapter.sumWestAllDishCount(shopCartItem, false);
             if (shopCartItem.getTradeItemExtraDinner() != null && shopCartItem.getTradeItemExtraDinner().getServingOrder() != null) {
                 sortId = Long.valueOf(shopCartItem.getTradeItemExtraDinner().getServingOrder());
             }
-                        if (sortId == null || sortId == 0) {
+            if (sortId == null || sortId == 0) {
                 sortId = otherId;
             }
             List<IShopcartItemBase> shopcartItemList = singleTypeMap.get(sortId);
@@ -1691,7 +1718,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         Collections.sort(sortList);
         int[] sequenceKey = context.getResources().getIntArray(R.array.dish_sequence_key);
         String[] sequenceValue = context.getResources().getStringArray(R.array.dish_sequence_value);
-                if (sortList.size() == 1 && sortList.get(0) == otherId) {
+        if (sortList.size() == 1 && sortList.get(0) == otherId) {
             createWestItems(singleTypeMap, childMap, sortList.get(0));
             return;
         }
@@ -1730,7 +1757,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
 
-    private void createItemUser(IShopcartItemBase shopCartItemBase,IShopcartItem shopcartItem) {
+    private void createItemUser(IShopcartItemBase shopCartItemBase, IShopcartItem shopcartItem) {
         if (Utils.isEmpty(shopCartItemBase.getTradeItemUserList())) {
             return;
         }
@@ -1811,7 +1838,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                 String reason = iShopcartItem.getDiscountReasonRel().getReasonContent();
                 it.setDiscountReason(String.format("%s：%s", context.getResources().getString(R.string.order_concession_reason), reason));
             }
-        } else if (privilege.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT) {            it.setMemberDiscount(true);
+        } else if (privilege.getPrivilegeType() == PrivilegeType.AUTO_DISCOUNT) {
+            it.setMemberDiscount(true);
             String privilegeStr = "";
             if (ErpConstants.isSimplifiedChinese()) {
                 privilegeStr = privilege.getPrivilegeValue().doubleValue() / 10 + "";
@@ -1822,10 +1850,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     + privilegeStr
                     + context.getResources().getString(R.string.discount1));
         } else if (privilege.getPrivilegeType() == PrivilegeType.MEMBER_PRICE) {
-                        it.setMemberDiscount(true);
+            it.setMemberDiscount(true);
             it.setName(context.getResources().getString(R.string.dinner_memeber_price_label));
-        }else if (privilege.getPrivilegeType() == PrivilegeType.MEMBER_REBATE) {
-                        it.setMemberDiscount(true);
+        } else if (privilege.getPrivilegeType() == PrivilegeType.MEMBER_REBATE) {
+            it.setMemberDiscount(true);
             it.setName(context.getResources().getString(R.string.dinner_memeber_rebate_label));
         }
     }
@@ -1839,16 +1867,18 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
         StringBuilder sbST = new StringBuilder("");
         for (IOrderProperty property : shopcartItem.getProperties()) {
-            if (property.getPropertyKind() == PropertyKind.PROPERTY) {                DishDataItem dishDataItem = new DishDataItem(ItemType.PROPERTIES);
+            if (property.getPropertyKind() == PropertyKind.PROPERTY) {
+                DishDataItem dishDataItem = new DishDataItem(ItemType.PROPERTIES);
                 dishDataItem.setBase(shopcartItem);
                 dishDataItem.setProperty(property);
                 dishDataItem.setItem(item.getItem());
                 data.add(dishDataItem);
-            } else if (property.getPropertyKind() == PropertyKind.STANDARD) {                sbST.append(property.getPropertyName()).append(STR_COMMA);
+            } else if (property.getPropertyKind() == PropertyKind.STANDARD) {
+                sbST.append(property.getPropertyName()).append(STR_COMMA);
             }
         }
         int len = sbST.length();
-                if (len > 0) {
+        if (len > 0) {
             sbST.setLength(len - 1);
             item.setStandText(sbST.toString());
         }
@@ -1966,7 +1996,6 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
 
-
     protected void buildCoupon(TradeVo tradeVo, boolean isShowUnActive) {
         if (Utils.isEmpty(tradeVo.getCouponPrivilegeVoList())) {
             return;
@@ -1983,26 +2012,30 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
                 switch (couponPrivilegeVo.getCoupon().getCouponType()) {
 
-                    case REBATE:                        item.setName(context.getString(R.string.coupon_type_rebate) + STR_SEMICOLON
+                    case REBATE:
+                        item.setName(context.getString(R.string.coupon_type_rebate) + STR_SEMICOLON
                                 + couponPrivilegeVo.getCoupon().getName());
                         break;
 
-                    case DISCOUNT:                        item.setName(context.getString(R.string.coupon_type_discount) + STR_SEMICOLON
+                    case DISCOUNT:
+                        item.setName(context.getString(R.string.coupon_type_discount) + STR_SEMICOLON
                                 + couponPrivilegeVo.getCoupon().getName());
                         break;
-                    case GIFT:                        item.setName(context.getString(R.string.coupon_type_gift) + STR_SEMICOLON
+                    case GIFT:
+                        item.setName(context.getString(R.string.coupon_type_gift) + STR_SEMICOLON
                                 + couponPrivilegeVo.getCoupon().getName());
                         break;
-                    case CASH:                        item.setName(context.getString(R.string.coupon_type_cash) + STR_SEMICOLON
+                    case CASH:
+                        item.setName(context.getString(R.string.coupon_type_cash) + STR_SEMICOLON
                                 + couponPrivilegeVo.getCoupon().getName());
                         break;
                     default:
                         break;
                 }
-                                if (couponPrivilegeVo.isActived()) {
+                if (couponPrivilegeVo.isActived()) {
                     item.setEnabled(true);
                 }
-                                if (!couponPrivilegeVo.isActived() && isShowUnActive
+                if (!couponPrivilegeVo.isActived() && isShowUnActive
                         || couponPrivilegeVo.isActived()) {
                     data.add(item);
                 }
@@ -2021,12 +2054,11 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
                     item.setName(tradePrivilege.getPrivilegeName());
                     double value = tradePrivilege == null ? 0 : tradePrivilege.getPrivilegeAmount().doubleValue();
                     item.setValue(value);
-                                        data.add(item);
+                    data.add(item);
                 }
             }
         }
     }
-
 
 
     protected void buildExtraCharge(TradeVo tradeVo) {
@@ -2035,7 +2067,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             for (TradePrivilege tradePrivilege : tradeprivileges) {
                 if (tradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL && tradePrivilege.isValid()) {
                     DishDataItem item = new DishDataItem(ItemType.ADDITIONAL);
-                                                            ExtraCharge extraCharge = ExtraManager.getExtraChargeById(tradeVo, tradePrivilege.getPromoId());
+                    ExtraCharge extraCharge = ExtraManager.getExtraChargeById(tradeVo, tradePrivilege.getPromoId());
                     if (extraCharge == null || extraCharge.getStatusFlag() == StatusFlag.INVALID) {
                         continue;
                     }
@@ -2056,7 +2088,7 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
             for (TradePrivilege tradePrivilege : tradeprivileges) {
                 if (tradePrivilege.getPrivilegeType() == PrivilegeType.ADDITIONAL && tradePrivilege.isValid()) {
                     DishDataItem item = new DishDataItem(ItemType.ADDITIONAL);
-                                                            ExtraCharge outTimeExtraCharge = ServerSettingCache.getInstance().getmOutTimeRule();
+                    ExtraCharge outTimeExtraCharge = ServerSettingCache.getInstance().getmOutTimeRule();
                     if (outTimeExtraCharge == null || outTimeExtraCharge.getStatusFlag() == StatusFlag.INVALID || outTimeExtraCharge.getId().longValue() != tradePrivilege.getPromoId().longValue()) {
                         continue;
                     }
@@ -2148,28 +2180,29 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         if (shopCartItem == null) {
             return;
         }
-                if (shopCartItem.getStatusFlag() == StatusFlag.INVALID
+        if (shopCartItem.getStatusFlag() == StatusFlag.INVALID
                 && (shopCartItem.getInvalidType() == InvalidType.RETURN_QTY
                 || shopCartItem.getInvalidType() == InvalidType.MODIFY_DISH)) {
             return;
         }
-        if (Utils.isNotEmpty(shopCartItem.getSetmealItems())) {            this.mAllDishCount = this.mAllDishCount.add(ShopcartItemUtils.getDisplyQty(shopCartItem, deskCount));
-        } else {            submitSigleCount(shopCartItem);
+        if (Utils.isNotEmpty(shopCartItem.getSetmealItems())) {
+            this.mAllDishCount = this.mAllDishCount.add(ShopcartItemUtils.getDisplyQty(shopCartItem, deskCount));
+        } else {
+            submitSigleCount(shopCartItem);
         }
     }
-
 
 
     public void sumWestAllDishCount(IShopcartItemBase shopCartItem, boolean isChild) {
         if (shopCartItem == null) {
             return;
         }
-                if (shopCartItem.getStatusFlag() == StatusFlag.INVALID
+        if (shopCartItem.getStatusFlag() == StatusFlag.INVALID
                 && (shopCartItem.getInvalidType() == InvalidType.RETURN_QTY
                 || shopCartItem.getInvalidType() == InvalidType.MODIFY_DISH)) {
             return;
         }
-                if (isChild) {
+        if (isChild) {
             if (shopCartItem.getSaleType() == SaleType.WEIGHING) {
                 this.mAllDishCount = this.mAllDishCount.add(BigDecimal.ONE);
             } else {
@@ -2182,7 +2215,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
     private void submitSigleCount(IShopcartItemBase shopCartItem) {
         if (shopCartItem.getSaleType() != null) {
-            if (shopCartItem.getSaleType() == SaleType.WEIGHING) {                if (shopCartItem.getSingleQty() != null && shopCartItem.getSingleQty().compareTo(BigDecimal.ZERO) > 0) {
+            if (shopCartItem.getSaleType() == SaleType.WEIGHING) {
+                if (shopCartItem.getSingleQty() != null && shopCartItem.getSingleQty().compareTo(BigDecimal.ZERO) > 0) {
                     this.mAllDishCount = this.mAllDishCount.add(BigDecimal.ONE);
                 }
             } else {
@@ -2243,10 +2277,10 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
         public RelativeLayout dishView;
         public TextView dish_name;
-                TextView dish_desc;
-                TextView tv_remind_dish;
+        TextView dish_desc;
+        TextView tv_remind_dish;
 
-                TextView tv_make_status;
+        TextView tv_make_status;
 
         TextView tv_dish_bat_serving;
         public TextView dish_num;
@@ -2259,7 +2293,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
 
         TextView labelValue;
 
-        LinearLayout slideLayout;        ImageView slideStatusIv;
+        LinearLayout slideLayout;
+        ImageView slideStatusIv;
         TextView slideStatusTv;
 
         LinearLayout returnDishLL;
@@ -2271,23 +2306,31 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         TextView dishMakeTv;
         TextView dishPrepareCancelTv;
         TextView dishMakeCancelTv;
-        TextView issueTimeTv;        ImageView imgAnchorLeft;        ImageView imgAnchorRight;
+        TextView issueTimeTv;
+        ImageView imgAnchorLeft;
+        ImageView imgAnchorRight;
         TextView tvWeighFlag;
 
-        public RelativeLayout rl_extraInfo;        public TextView tv_serverTimes;        public TextView tv_deadLines;
+        public RelativeLayout rl_extraInfo;
+        public TextView tv_serverTimes;
+        public TextView tv_deadLines;
         public LinearLayout layout_chargingRule;
         public TextView tv_serverTime;
         public TextView tv_chargingRule;
     }
 
     class PropertiesHolder {
-        TextView propertiesName;    }
+        TextView propertiesName;
+    }
 
     class ExtraHolder {
-        LinearLayout dishLabelView;        TextView dishLabelName;    }
+        LinearLayout dishLabelView;
+        TextView dishLabelName;
+    }
 
     class LabelHolder {
-        LinearLayout lableView;        TextView labelName;
+        LinearLayout lableView;
+        TextView labelName;
         View topLine;
     }
 
@@ -2300,7 +2343,8 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
         LinearLayout singlePrivilegeView;
         TextView privilegeName;
         TextView privilegeValue;
-        ImageView dish_member_img;         TextView dish_memo;
+        ImageView dish_member_img;
+        TextView dish_memo;
     }
 
     class PrivilegeHolder {
@@ -2312,45 +2356,54 @@ public abstract class SuperShopCartAdapter extends BaseAdapter {
     }
 
     class MarketHolder {
-        LinearLayout llMarketActivity;        TextView tvMarketActivityName;        TextView tvMarketActivityValue;        ImageView ivClose;    }
+        LinearLayout llMarketActivity;
+        TextView tvMarketActivityName;
+        TextView tvMarketActivityValue;
+        ImageView ivClose;
+    }
 
     class SeperatorHolder {
-        View viewGraySeperator;    }
+        View viewGraySeperator;
+    }
 
     class TitleHolder {
         View backgrund;
         View topLine;
-        TextView tvTitle;        TextView tvProperty;
+        TextView tvTitle;
+        TextView tvProperty;
         View llParent;
     }
 
 
     class CategroyHolder {
         View topLine;
-        TextView tvCategoryName;        TextView tvCategoryCount;
+        TextView tvCategoryName;
+        TextView tvCategoryCount;
     }
 
     class BuffetPeopleHolder {
         View topLine;
-        TextView tv_name;        TextView tv_count;
+        TextView tv_name;
+        TextView tv_count;
         TextView tv_price;
         ImageView iv_icon;
     }
 
     class BuffetExtraHolder {
         View topLine;
-        TextView tv_name;        TextView tv_property;
+        TextView tv_name;
+        TextView tv_property;
         TextView tv_price;
         ImageView iv_icon;
         Button btn_Edit;
     }
 
     class UserHolder {
-                TextView user_info;
+        TextView user_info;
         View topLine;
     }
 
-    class CardServerItemsHolder{
+    class CardServerItemsHolder {
         TextView tv_dishName;
         View topLine;
     }

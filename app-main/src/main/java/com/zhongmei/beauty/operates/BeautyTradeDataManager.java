@@ -9,8 +9,11 @@ import com.j256.ormlite.stmt.QueryBuilder;
 import com.zhongmei.bty.basemodule.customer.bean.TaskQueryReq;
 import com.zhongmei.bty.basemodule.customer.util.CustomerUtil;
 import com.zhongmei.yunfu.bean.YFResponseList;
+import com.zhongmei.yunfu.context.session.Session;
+import com.zhongmei.yunfu.context.session.core.user.AuthUser;
 import com.zhongmei.yunfu.data.LoadingYFResponseListener;
 import com.zhongmei.yunfu.db.entity.TaskRemind;
+import com.zhongmei.yunfu.db.entity.trade.TradeUser;
 import com.zhongmei.yunfu.db.enums.BookingOrderStatus;
 import com.zhongmei.bty.commonmodule.util.DateUtil;
 import com.zhongmei.bty.customer.util.CustomerContants;
@@ -48,10 +51,8 @@ import java.util.Map;
 import java.util.Set;
 
 
-
 public class BeautyTradeDataManager {
     private static final String TAG = BeautyTradeDataManager.class.getSimpleName();
-
 
 
     public int queryCustomerNumber(DatabaseHelper helper) throws Exception {
@@ -71,7 +72,7 @@ public class BeautyTradeDataManager {
     }
 
 
-    public int queryReserverNumber(DatabaseHelper helper) throws Exception{
+    public int queryReserverNumber(DatabaseHelper helper) throws Exception {
         Dao<Booking, String> bookingDao = helper.getDao(Booking.class);
         QueryBuilder bookingBuilder = bookingDao.queryBuilder();
 
@@ -85,7 +86,7 @@ public class BeautyTradeDataManager {
     }
 
 
-    public int queryUnDealReserverNumber(DatabaseHelper helper) throws Exception{
+    public int queryUnDealReserverNumber(DatabaseHelper helper) throws Exception {
         Dao<Booking, String> bookingDao = helper.getDao(Booking.class);
         QueryBuilder bookingBuilder = bookingDao.queryBuilder();
 
@@ -109,23 +110,23 @@ public class BeautyTradeDataManager {
 
         tradeBuilder.where().eq(Trade.$.businessType, BusinessType.BEAUTY)
                 .and().
-                    gt(Trade.$.serverCreateTime, date)
+                gt(Trade.$.serverCreateTime, date)
                 .and()
                 .eq(Trade.$.statusFlag, StatusFlag.VALID)
                 .and()
                 .eq(Trade.$.tradeType, TradeType.SELL);
-        List<Trade>  trades = tradeBuilder.query();
+        List<Trade> trades = tradeBuilder.query();
         return (int) tradeBuilder.countOf();
     }
 
 
     public int queryMemberNumber() {
-                return CustomerUtil.getRegistMemberNumber();
+        return CustomerUtil.getRegistMemberNumber();
     }
 
 
     public int queryTodayReserverNumber(DatabaseHelper helper) throws Exception {
-                Dao<Booking, String> bookingTradeDao = helper.getDao(Booking.class);
+        Dao<Booking, String> bookingTradeDao = helper.getDao(Booking.class);
         QueryBuilder tradeBuilder = bookingTradeDao.queryBuilder();
 
         long startTime = DateTimeUtils.getDayStart(new Date());
@@ -157,13 +158,19 @@ public class BeautyTradeDataManager {
     }
 
 
-
     public List<UnpaidTradeVo> queryUnpaidTrades(BusinessType businessType) {
         DatabaseHelper helper = DBHelperManager.getHelper();
         List<UnpaidTradeVo> listUnpaidTradeVos = new ArrayList<>();
 
         try {
-            List<Trade> trades = getUNFinishTradeByBusinessType(businessType, helper);
+//            List<Long> tradeIds = getTradeIdByUser(Session.getAuthUser(), helper);
+//
+//            if(Utils.isEmpty(tradeIds)){
+//                return listUnpaidTradeVos;
+//            }
+
+
+            List<Trade> trades = getUNFinishTradeByBusinessType(null, businessType, helper);
             List<TradeCustomer> customers = getCustomerByTrades(trades, helper);
             List<TradeExtra> extras = getTradeExtrasByTrades(trades, helper);
 
@@ -187,7 +194,7 @@ public class BeautyTradeDataManager {
     }
 
 
-    private List<Trade> getUNFinishTradeByBusinessType(BusinessType businessType, DatabaseHelper helper) throws Exception {
+    private List<Trade> getUNFinishTradeByBusinessType(List<Long> tradeIds, BusinessType businessType, DatabaseHelper helper) throws Exception {
         if (helper == null) {
             throw new Exception("DatabaseHelper is null!");
         }
@@ -215,7 +222,10 @@ public class BeautyTradeDataManager {
                 .and()
                 .eq(Trade.$.statusFlag, StatusFlag.VALID)
                 .and()
-                .in(Trade.$.tradeType, TradeType.SELL, TradeType.UNOIN_TABLE_SUB, TradeType.UNOIN_TABLE_MAIN);
+                .in(Trade.$.tradeType, TradeType.SELL, TradeType.UNOIN_TABLE_SUB, TradeType.UNOIN_TABLE_MAIN)
+//                .and()
+//                .in(Trade.$.id, tradeIds)
+        ;
 
 
         return tradeBuilder.query();
@@ -278,6 +288,41 @@ public class BeautyTradeDataManager {
         return customerBuilder.query();
     }
 
+    /**
+     * 根据当前登陆的服务员，查询服务员对应的订单信息。
+     * 相关表trade_user,trade_item_user
+     *
+     * @param user
+     * @param helper
+     * @return
+     * @throws Exception
+     */
+    private List<Long> getTradeIdByUser(AuthUser user, DatabaseHelper helper) throws Exception {
+        if (helper == null) {
+            throw new Exception("DatabaseHelper is null!");
+        }
+
+        Dao<TradeUser, String> tradeUserDao = helper.getDao(TradeUser.class);
+
+        QueryBuilder customerBuilder = tradeUserDao.queryBuilder();
+        customerBuilder.selectColumns(TradeUser.$.id,
+                TradeUser.$.tradeId);
+
+        customerBuilder.where().eq(TradeUser.$.statusFlag, StatusFlag.VALID).and().eq(TradeUser.$.userId, user.getId());
+
+        List<TradeUser> tradeUsers = customerBuilder.query();
+
+
+        Set<Long> tradeIds = new HashSet<>();
+        if (Utils.isNotEmpty(tradeUsers)) {
+            for (TradeUser tradeUser : tradeUsers) {
+                tradeIds.add(tradeUser.getTradeId());
+            }
+        }
+
+        return new ArrayList<>(tradeIds);
+    }
+
 
     private Map<Long, List<TradeItemVo>> getTradeItemVosByTrades(List<Trade> trades, DatabaseHelper helper) throws Exception {
         if (helper == null) {
@@ -316,7 +361,6 @@ public class BeautyTradeDataManager {
 
         return mapTradeItemVos;
     }
-
 
 
     private Map<Long, List<TradeCustomer>> getTradeCustomerMap(List<TradeCustomer> customers) {

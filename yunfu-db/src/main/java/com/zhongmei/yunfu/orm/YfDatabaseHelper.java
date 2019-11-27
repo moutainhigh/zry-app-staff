@@ -100,9 +100,9 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(Booking.class);
         tables.add(BookingTable.class);
         tables.add(BookingTradeItem.class);
-                tables.add(BookingSetting.class);
+        tables.add(BookingSetting.class);
 
-                tables.add(Trade.class);
+        tables.add(Trade.class);
         tables.add(TradeExtra.class);
         tables.add(TradeItem.class);
         tables.add(TradeItemOperation.class);
@@ -112,7 +112,7 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(Payment.class);
         tables.add(PaymentItem.class);
         tables.add(PaymentItemExtra.class);
-                tables.add(PaymentModeShop.class);
+        tables.add(PaymentModeShop.class);
         tables.add(PaymentModeScene.class);
         tables.add(MarketPlan.class);
         tables.add(MarketDynamicCondition.class);
@@ -132,8 +132,8 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(DishBrandType.class);
         tables.add(OpenTime.class);
 
-                tables.add(TradeTable.class);
-                tables.add(Coupon.class);
+        tables.add(TradeTable.class);
+        tables.add(Coupon.class);
         tables.add(CustomerScoreRule.class);
         tables.add(DishProperty.class);
         tables.add(DishSetmeal.class);
@@ -141,7 +141,8 @@ public class YfDatabaseHelper extends SQLiteDatabaseHelper {
         tables.add(CommercialCustomSettings.class);
 
 
-                tables.add(CommercialArea.class);         tables.add(Tables.class);
+        tables.add(CommercialArea.class);
+        tables.add(Tables.class);
 
         tables.add(TradeCustomer.class);
         tables.add(TradeUser.class);

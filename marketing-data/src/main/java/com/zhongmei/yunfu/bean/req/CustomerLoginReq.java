@@ -10,8 +10,14 @@ public class CustomerLoginReq {
     @Deprecated
     private String mobile;
 
-        private Long brandId;     private Long shopId;    private Integer loginType;    private String loginId;    private String password;
-    private boolean isNeedPwd;    private boolean isNeedCredit;    private boolean isNeedCard;
+    private Long brandId;
+    private Long shopId;
+    private Integer loginType;
+    private String loginId;
+    private String password;
+    private boolean isNeedPwd;
+    private boolean isNeedCredit;
+    private boolean isNeedCard;
     public String nation;
 
     public String country;

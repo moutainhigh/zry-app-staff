@@ -69,7 +69,7 @@
         <!-- since 3.0.9 Required SDK 核心功能-->
         <provider
             android:name="cn.jpush.android.service.DataProvider"
-            android:authorities="com.zhongmei.yunfu.DataProvider"
+            android:authorities="com.ziranyu.staff.DataProvider"
             android:exported="false" />
 
         <!-- since 1.8.0 option 可选项。用于同一设备中不同应用的JPush服务相互拉起的功能。 -->
@@ -87,7 +87,7 @@
         <!-- since 3.1.0 Required SDK 核心功能-->
         <provider
             android:name="cn.jpush.android.service.DownloadProvider"
-            android:authorities="com.zhongmei.yunfu.DownloadProvider"
+            android:authorities="com.ziranyu.staff.DownloadProvider"
             android:exported="true" />
         <!-- Required SDK核心功能-->
         <receiver

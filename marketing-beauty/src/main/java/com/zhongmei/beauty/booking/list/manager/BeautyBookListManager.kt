@@ -108,7 +108,7 @@ class BeautyBookListManager {
             endTime = startTime
         }
         var bookingListReq = BeautyBookingListReq()
-        bookingListReq.startTime = startTime
+        bookingListReq.startTime = null
         bookingListReq.endTime = endTime
         bookingListReq.page = currentPage
         bookingListReq.pageCount = COMMON_PAGE_COUNT

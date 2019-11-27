@@ -8,7 +8,7 @@
 
         <provider
             android:name="com.zhongmei.yunfu.orm.YfProvider"
-            android:authorities="com.zhongmei.calm.provider.Calm"
+            android:authorities="com.ziranyu.staff.provider.Calm"
             android:exported="true" />
 
     </application>

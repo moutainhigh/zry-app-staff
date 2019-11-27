@@ -204,7 +204,7 @@ public class BeautyCustomerModeLaunchFragment extends BasicFragment implements V
                 }
                 if(mTable==null){
                     Intent intent=new Intent();
-                    intent.setClass(getContext(),BeautySettingActivity.class);
+                    intent.setClass(getContext(),BeautySettingActivity_.class);
                     startActivity(intent);
                     return;
                 }

@@ -47,6 +47,10 @@ open abstract class BeautyBookingListFragment : BasicFragment(), OnRefreshListen
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         initAdapter()
+    }
+
+    override fun onStart() {
+        super.onStart()
         refreshView()
     }
 

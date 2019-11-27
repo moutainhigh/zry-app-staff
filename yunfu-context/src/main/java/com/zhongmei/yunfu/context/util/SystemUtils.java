@@ -84,12 +84,12 @@ public class SystemUtils {
     }
 
     public static String getAppType() {
-        return "5";
+        return "2";
     }
 
     public static String getBillNumber() {
         SimpleDateFormat df = new SimpleDateFormat("yyMMddHHmmssSSS", Locale.getDefault());
-        return "101" + df.format(new Date()) + ShopInfoCfg.getInstance().getTabletNumberFormat();
+        return "201" + df.format(new Date()) + ShopInfoCfg.getInstance().getTabletNumberFormat();
     }
 
     public static String getPrinterServer() {

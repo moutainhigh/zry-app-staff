@@ -16,6 +16,7 @@ public class TradeUser extends BasicEntityBase {
         public static final String tradeId = "trade_id";
         public static final String tradeItemUuid = "trade_item_uuid";
         public static final String tradeItemId = "trade_item_id";
+        public static final String userId = "user_id";
         public static final String roleId = "role_id";
         public static final String roleName = "role_name";
 

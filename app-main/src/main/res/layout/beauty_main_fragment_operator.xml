@@ -109,6 +109,7 @@
             android:id="@+id/btn_create_reserver"
             style="@style/beauty_operatory_btn2"
             android:drawableLeft="@drawable/icon_beauty_operator_reserver"
+            android:visibility="gone"
             android:text="@string/beauty_create_reserver" />
     </LinearLayout>
 

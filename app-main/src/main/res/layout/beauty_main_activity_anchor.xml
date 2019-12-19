@@ -15,7 +15,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_margin="10dp"
             android:scaleType="centerInside"
             android:src="@drawable/beauty_new_company_logo_white" />
 

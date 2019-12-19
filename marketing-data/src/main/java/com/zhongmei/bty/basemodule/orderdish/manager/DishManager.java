@@ -15,6 +15,7 @@ import com.zhongmei.bty.basemodule.orderdish.bean.DishBrandTypes;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishInfo;
 import com.zhongmei.bty.basemodule.orderdish.bean.DishVo;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishBrandProperty;
+import com.zhongmei.yunfu.db.entity.dish.DishDescribe;
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishUnitDictionary;
@@ -788,6 +789,7 @@ public class DishManager {
         InventoryCacheUtil inventoryCacheUtil = InventoryCacheUtil.getInstance();
         boolean inventoryIsOpen = inventoryCacheUtil.getSaleSwitch();
         Map<String, DishVo> voMap = new LinkedHashMap<String, DishVo>();
+        DishCache.DishDescribeHolder dishDescribeHolder=DishCache.getDishDescriveHolder();
         for (DishShop dishShop : dishList) {
             DishUnitDictionary unit = DishCache.getUnitHolder().get(dishShop.getUnitId());
             if (dishShop.getHasStandard() == Bool.YES) {
@@ -811,6 +813,8 @@ public class DishManager {
                         vo.setInventoryNum(inventoryInfo.getInventoryQty());
                     }
                 }
+                DishDescribe dishDescribe=dishDescribeHolder.get(dishShop.getId());
+                vo.setDishDescribe(dishDescribe);
             } else {
                 String key = dishShop.getUuid() + "_" + dishShop.getName();
                 DishVo dishVo = new DishVo(dishShop, unit);
@@ -820,6 +824,9 @@ public class DishManager {
                         dishVo.setInventoryNum(inventoryInfo.getInventoryQty());
                     }
                 }
+                //设置商品描述
+                DishDescribe dishDescribe=dishDescribeHolder.get(dishShop.getId());
+                dishVo.setDishDescribe(dishDescribe);
                 voMap.put(key, dishVo);
             }
         }

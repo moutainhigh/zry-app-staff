@@ -4,6 +4,7 @@ import com.zhongmei.bty.basemodule.commonbusiness.entity.CommercialCustomSetting
 import com.zhongmei.bty.basemodule.discount.entity.CustomerDishPrivilege;
 import com.zhongmei.yunfu.db.entity.TaskRemind;
 import com.zhongmei.yunfu.db.entity.crm.CustomerSaveRule;
+import com.zhongmei.yunfu.db.entity.dish.DishDescribe;
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
 import com.zhongmei.yunfu.db.entity.dish.DishSetmeal;
 import com.zhongmei.yunfu.db.entity.dish.DishSetmealGroup;
@@ -80,6 +81,7 @@ public class SyncContent implements NoProGuard {
     private SyncItem<CustomerSaveRule> customerSaveRule;
     private SyncItem<CustomerDishPrivilege> customerDishPrivilege;
     private SyncItem<DishTimeChargingRule> dishTimeChargingRule;
+    private SyncItem<DishDescribe> dishDescribe;
 
 
 

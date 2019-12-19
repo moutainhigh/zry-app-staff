@@ -2,6 +2,7 @@ package com.zhongmei.bty.basemodule.orderdish.bean;
 
 import android.text.TextUtils;
 
+import com.zhongmei.yunfu.db.entity.dish.DishDescribe;
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
 import com.zhongmei.yunfu.db.entity.dish.DishShop;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishUnitDictionary;
@@ -30,6 +31,7 @@ public class DishVo {
 
     private Map<String, DishShop> otherDishs;
 
+    private DishDescribe dishDescribe;
 
     private BigDecimal minPrice;
 
@@ -49,6 +51,7 @@ public class DishVo {
     }
 
     private List<DishShop> selectedDishs;
+
     public boolean isSelected() {
         return isSelected;
     }
@@ -90,7 +93,7 @@ public class DishVo {
         return dish.isCombo();
     }
 
-    public boolean isServerComBoPart(){
+    public boolean isServerComBoPart() {
         return dish.isServerComboPart();
     }
 
@@ -160,7 +163,7 @@ public class DishVo {
 
     public boolean isClear() {
         if (dish.isClear()) {
-                        for (DishShop dishShop : otherDishs.values()) {
+            for (DishShop dishShop : otherDishs.values()) {
                 if (dishShop.getClearStatus() != ClearStatus.CLEAR) {
                     return false;
                 }
@@ -222,6 +225,13 @@ public class DishVo {
         otherDishs.put(dishShop.getUuid(), dishShop);
     }
 
+    public DishDescribe getDishDescribe() {
+        return dishDescribe;
+    }
+
+    public void setDishDescribe(DishDescribe dishDescribe) {
+        this.dishDescribe = dishDescribe;
+    }
 
     public boolean isSameSeries(String skuUuid) {
         return getSkuUuid().equals(skuUuid) || otherDishs.get(skuUuid) != null;
@@ -262,7 +272,7 @@ public class DishVo {
             return true;
 
         } else {
-                        for (DishShop dishShop : otherDishs.values()) {
+            for (DishShop dishShop : otherDishs.values()) {
                 if (dishShop.getClearStatus() == ClearStatus.CLEAR) {
                     return true;
                 }
@@ -285,8 +295,11 @@ public class DishVo {
         return standardName;
     }
 
-    public String getDishShopImgUrl(){
-        return dish.getDishPic();
+    public String getDishShopImgUrl() {
+        if (dishDescribe != null) {
+            return dishDescribe.getDishPic();
+        }
+        return "";
     }
 
 }

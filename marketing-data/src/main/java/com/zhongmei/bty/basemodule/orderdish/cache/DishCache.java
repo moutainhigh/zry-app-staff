@@ -14,6 +14,7 @@ import com.zhongmei.bty.basemodule.orderdish.entity.DishCarte;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishCarteDetail;
 import com.zhongmei.bty.basemodule.orderdish.entity.DishCarteNorms;
 import com.zhongmei.yunfu.db.entity.dish.DishCyclePeriod;
+import com.zhongmei.yunfu.db.entity.dish.DishDescribe;
 import com.zhongmei.yunfu.db.entity.dish.DishProperty;
 import com.zhongmei.yunfu.db.entity.dish.DishPropertyType;
 import com.zhongmei.yunfu.db.entity.dish.DishSetmeal;
@@ -51,8 +52,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class DishCache {
 
     private static final String TAG = DishCache.class.getSimpleName();
-        public static final String TEMPDISHCODE = "zmyf_linshicai";
-        private static final Uri S_URI_DISH_SHOP = DBHelperManager.getUri(DishShop.class);
+    public static final String TEMPDISHCODE = "zmyf_linshicai";
+    private static final Uri S_URI_DISH_SHOP = DBHelperManager.getUri(DishShop.class);
     private static final Uri S_URI_DISH_BRAND_TYPE = DBHelperManager.getUri(DishBrandType.class);
 
     private static class LazySingletonHolder {
@@ -74,7 +75,7 @@ public class DishCache {
     }
 
 
-    public static DishTimeChargingRulehHolder getDishTimeChargingRuleHolder(){
+    public static DishTimeChargingRulehHolder getDishTimeChargingRuleHolder() {
         return LazySingletonHolder.INSTANCE.dishTimeChargingRuleHolder;
     }
 
@@ -96,6 +97,10 @@ public class DishCache {
 
     public static DishHolder getDishHolder() {
         return LazySingletonHolder.INSTANCE.dishHolder;
+    }
+
+    public static DishDescribeHolder getDishDescriveHolder(){
+        return LazySingletonHolder.INSTANCE.dishDescribeHolder;
     }
 
 
@@ -150,6 +155,7 @@ public class DishCache {
 
     private final DishCyclePeriodHolder dishCyclePeriodHolder;
     private final DishHolder dishHolder;
+    private final DishDescribeHolder dishDescribeHolder;
     private final DishTypeHolder dishTypeHolder;
     private final DishTimeChargingRulehHolder dishTimeChargingRuleHolder;
     private final ExtraHolder extraHolder;
@@ -163,14 +169,15 @@ public class DishCache {
     private final DishCarteHolder dishCarteHolder;
     private final DishCarteDetailHolder dishCarteDetailHolder;
     private final DishCarteNormsHolder dishCarteNormsHolder;
-        private static DishShop tempDishShop;
+    private static DishShop tempDishShop;
 
     private boolean inited = false;
 
     private DishCache() {
         dishCyclePeriodHolder = new DishCyclePeriodHolder();
         dishHolder = new DishHolder(dishCyclePeriodHolder);
-        dishTimeChargingRuleHolder=new DishTimeChargingRulehHolder();
+        dishDescribeHolder=new DishDescribeHolder();
+        dishTimeChargingRuleHolder = new DishTimeChargingRulehHolder();
         dishTypeHolder = new DishTypeHolder(dishHolder);
         extraHolder = new ExtraHolder(dishHolder);
         propertyTypeHolder = new BasicHolder<DishPropertyType>(DishPropertyType.class) {
@@ -244,6 +251,7 @@ public class DishCache {
             _refresh(helper, propertyTypeHolder);
             _refresh(helper, propertyHolder);
             _refresh(helper, dishHolder);
+            _refresh(helper,dishDescribeHolder);
             _refresh(helper, dishTypeHolder);
             _refresh(helper, dishPropertyHolder);
             _refresh(helper, setmealHolder);
@@ -252,7 +260,7 @@ public class DishCache {
             _refresh(helper, dishCarteHolder);
             _refresh(helper, dishCarteDetailHolder);
             _refresh(helper, dishCarteNormsHolder);
-            _refresh(helper,dishTimeChargingRuleHolder);
+            _refresh(helper, dishTimeChargingRuleHolder);
             initDishLog();
             inited = true;
         } finally {
@@ -263,7 +271,7 @@ public class DishCache {
                 + MemUtil.getUsedHeapSizeWithMB() + "MB");
     }
 
-        private void initDishLog() {
+    private void initDishLog() {
         RLog.i(RLog.DISH_KEY_TAG, "初始化操作, dishHolder 商品size : " + Utils.size(dishHolder.getAll()));
         RLog.i(RLog.DISH_KEY_TAG, "初始化操作, dishTypeHolder 商品中类size : " + Utils.size(dishTypeHolder.getAll()));
     }
@@ -383,7 +391,7 @@ public class DishCache {
         private DatabaseHelper.DataChangeObserver observer;
         private Map<Long, T> datas;
 
-                BasicHolder(Class<T> classType) {
+        BasicHolder(Class<T> classType) {
             this.classType = classType;
             uri = DBHelperManager.getUri(classType);
             datas = new LinkedHashMap<Long, T>();
@@ -395,12 +403,12 @@ public class DishCache {
 
                 observer = new DataObserver(this, uri);
             }
-                        DatabaseHelper.Registry.register(observer);
+            DatabaseHelper.Registry.register(observer);
         }
 
         void unregistenObserver() {
             if (observer != null) {
-                                                DatabaseHelper.Registry.unregister(observer);
+                DatabaseHelper.Registry.unregister(observer);
                 observer = null;
             }
         }
@@ -445,6 +453,7 @@ public class DishCache {
 
     public static class DishCyclePeriodHolder extends BasicHolder<DishCyclePeriod> {
         private Map<Long, List<DishCyclePeriod>> mDishCycleMap = new LinkedHashMap<Long, List<DishCyclePeriod>>();
+
         public DishCyclePeriodHolder() {
             super(DishCyclePeriod.class);
         }
@@ -471,10 +480,10 @@ public class DishCache {
         public boolean isValidDish(Long brandDishId) {
 
             List<DishCyclePeriod> dishCyclePeriods = mDishCycleMap.get(brandDishId);
-                                    if (dishCyclePeriods == null || dishCyclePeriods.isEmpty()) {
+            if (dishCyclePeriods == null || dishCyclePeriods.isEmpty()) {
                 return true;
             } else {
-                                for (DishCyclePeriod dishCyclePeriod : dishCyclePeriods) {
+                for (DishCyclePeriod dishCyclePeriod : dishCyclePeriods) {
                     if (isValid(dishCyclePeriod)) {
                         return true;
                     }
@@ -484,7 +493,7 @@ public class DishCache {
             }
         }
 
-                private void updateDishCyclePeriodMap(List<DishCyclePeriod> list) {
+        private void updateDishCyclePeriodMap(List<DishCyclePeriod> list) {
             mDishCycleMap.clear();
             for (DishCyclePeriod dcPeriod : list) {
                 if (dcPeriod.getDishId() != null) {
@@ -509,14 +518,15 @@ public class DishCache {
 
         private boolean isValid(DishCyclePeriod dishCyclePeriod) {
             long currentTimeMillis = System.currentTimeMillis();
-                        int currentDayNumber = DateTimeUtils.getDayNumber(currentTimeMillis);
+            int currentDayNumber = DateTimeUtils.getDayNumber(currentTimeMillis);
             if (!dishCyclePeriod.getDayNumber().equalsValue(currentDayNumber)) {
                 return false;
             }
 
-                        String periodStart = dishCyclePeriod.getPeriodStart();
+            String periodStart = dishCyclePeriod.getPeriodStart();
             String periodEnd = dishCyclePeriod.getPeriodEnd();
-            Date onlyDate = DateTimeUtils.onlyDate(new Date());            if (!TextUtils.isEmpty(periodStart) && !TextUtils.isEmpty(periodEnd)) {
+            Date onlyDate = DateTimeUtils.onlyDate(new Date());
+            if (!TextUtils.isEmpty(periodStart) && !TextUtils.isEmpty(periodEnd)) {
                 Date periodStartDate = new Date(DateTimeUtils.formatDate(periodStart));
                 Date periodEndDate = new Date(DateTimeUtils.formatDate(periodEnd));
                 if (periodStartDate.compareTo(onlyDate) > 0 || periodEndDate.compareTo(onlyDate) < 0) {
@@ -534,12 +544,12 @@ public class DishCache {
                 }
             }
 
-                        long validityStartTime = DateTimeUtils.getTime(dishCyclePeriod.getValidityStart());
+            long validityStartTime = DateTimeUtils.getTime(dishCyclePeriod.getValidityStart());
             if (validityStartTime > currentTimeMillis) {
                 return false;
             }
 
-                        long validityEndTime = DateTimeUtils.getTime(dishCyclePeriod.getValidityEnd());
+            long validityEndTime = DateTimeUtils.getTime(dishCyclePeriod.getValidityEnd());
             if (validityEndTime < currentTimeMillis) {
                 return false;
             }
@@ -550,8 +560,11 @@ public class DishCache {
 
     public static class DishCarteDetailHolder extends BasicHolder<DishCarteDetail> {
         private final List<OnDataChangeListener> listeners;
-        private Map<Long, List<DishCarteDetail>> carteDishNorms;                private Map<String, List<DishShop>> dishShopByCarteUuid;
-        private Map<String, Map<Long, List<DishShop>>> dishShopByDishType;        private Map<String, Map<Long, Map<String, DishShop>>> dishShopMapByDishType;        private DishHolder mDishHolder;
+        private Map<Long, List<DishCarteDetail>> carteDishNorms;
+        private Map<String, List<DishShop>> dishShopByCarteUuid;
+        private Map<String, Map<Long, List<DishShop>>> dishShopByDishType;
+        private Map<String, Map<Long, Map<String, DishShop>>> dishShopMapByDishType;
+        private DishHolder mDishHolder;
         private DishCarteHolder mDishCarteHolder;
 
         public void removeDataChangeListener(OnDataChangeListener listener) {
@@ -676,6 +689,7 @@ public class DishCache {
     public static class DishCarteNormsHolder extends BasicHolder<DishCarteNorms> {
         private final List<OnDataChangeListener> listeners;
         private Map<Long, List<DishCarteNorms>> carteTypeDishNorms;
+
         public void removeDataChangeListener(OnDataChangeListener listener) {
             listeners.remove(listener);
         }
@@ -726,6 +740,7 @@ public class DishCache {
     public static class DishCarteHolder extends BasicHolder<DishCarte> {
         private final List<OnDataChangeListener> listeners;
         private Map<Integer, List<DishCarte>> carteTypeDish;
+
         public void removeDataChangeListener(OnDataChangeListener listener) {
             listeners.remove(listener);
         }
@@ -780,12 +795,13 @@ public class DishCache {
 
     public static class DishTimeChargingRulehHolder extends BasicHolder<DishTimeChargingRule> {
         protected Map<Long, DishTimeChargingRule> mDishChargingRuleMap;
+
         DishTimeChargingRulehHolder() {
             super(DishTimeChargingRule.class);
-            mDishChargingRuleMap=new HashMap<Long,DishTimeChargingRule>();
+            mDishChargingRuleMap = new HashMap<Long, DishTimeChargingRule>();
         }
 
-        public DishTimeChargingRule getRuleByDishId(Long dishId){
+        public DishTimeChargingRule getRuleByDishId(Long dishId) {
             return mDishChargingRuleMap.get(dishId);
         }
 
@@ -793,20 +809,47 @@ public class DishCache {
         protected Map<Long, DishTimeChargingRule> cache(List<DishTimeChargingRule> list) {
             mDishChargingRuleMap.clear();
             for (DishTimeChargingRule dishTimeChargingRule : list) {
-                mDishChargingRuleMap.put(dishTimeChargingRule.getDishId(),dishTimeChargingRule);
+                mDishChargingRuleMap.put(dishTimeChargingRule.getDishId(), dishTimeChargingRule);
             }
             return super.cache(list);
         }
 
         @Override
         protected List<DishTimeChargingRule> query(DatabaseHelper helper, Dao<DishTimeChargingRule, Long> dao) throws Exception {
-            QueryBuilder<DishTimeChargingRule,Long> queryBuilder=dao.queryBuilder();
-            queryBuilder.where().eq(DishTimeChargingRule.$.statusFlag,StatusFlag.VALID);
-            List<DishTimeChargingRule> listData=queryBuilder.query();
+            QueryBuilder<DishTimeChargingRule, Long> queryBuilder = dao.queryBuilder();
+            queryBuilder.where().eq(DishTimeChargingRule.$.statusFlag, StatusFlag.VALID);
+            List<DishTimeChargingRule> listData = queryBuilder.query();
             return listData;
         }
     }
 
+    public static class DishDescribeHolder extends BasicHolder<DishDescribe>{
+
+        Map<String,DishDescribe> mapDescribe;
+
+        DishDescribeHolder() {
+            super(DishDescribe.class);
+            mapDescribe=new LinkedHashMap<String, DishDescribe>();
+        }
+
+        public DishDescribe getDishDescriveByDishId(Long dishId){
+            if(dishId==null){
+                return null;
+            }
+            return mapDescribe.get(dishId.toString());
+        }
+
+        @Override
+        protected List<DishDescribe> query(DatabaseHelper helper, Dao<DishDescribe, Long> dao) throws Exception {
+            QueryBuilder<DishDescribe, Long> dishDescribeDao = dao.queryBuilder();
+            dishDescribeDao.where().eq(DishDescribe.$.statusFlag,StatusFlag.VALID);
+            List<DishDescribe> listDishDescribe=dishDescribeDao.query();
+            for (DishDescribe dishDescribe : listDishDescribe) {
+                mapDescribe.put(dishDescribe.getDishID().toString(),dishDescribe);
+            }
+            return listDishDescribe;
+        }
+    }
 
 
     public static class DishHolder extends BasicHolder<DishShop> {
@@ -846,12 +889,11 @@ public class DishCache {
         }
 
 
-
         public List<DishShop> getDishShopByType(Long typeId) {
             List<DishShop> temp = dishInTypeMap.get(typeId);
             List<DishShop> dishShops = new ArrayList<DishShop>();
             if (temp != null) {
-                                for (DishShop dishShop : temp) {
+                for (DishShop dishShop : temp) {
                     if (dishShop != null && dishCyclePeriodHolder.isValidDish(dishShop.getBrandDishId()) && !dishShop.isTempDish(TEMPDISHCODE)) {
                         dishShops.add(dishShop);
                     }
@@ -861,19 +903,16 @@ public class DishCache {
         }
 
 
-
         public List<DishShop> getDishShopAllByType(Long typeId) {
             return dishInTypeMap.get(typeId);
         }
-
-
 
 
         public List<DishShop> getPrintDishShopByType(Long typeId) {
             List<DishShop> temp = dishInTypeMap.get(typeId);
             List<DishShop> dishShops = new ArrayList<DishShop>();
             if (temp != null) {
-                                for (DishShop dishShop : temp) {
+                for (DishShop dishShop : temp) {
                     if (!dishShop.isCombo() && dishShop.getSaleType() != SaleType.WEIGHING && dishShop.getIsChangePrice() != Bool.YES) {
                         dishShops.add(dishShop);
                     }
@@ -881,7 +920,6 @@ public class DishCache {
             }
             return dishShops;
         }
-
 
 
         public List<DishShop> getBindDishShopByType(Long typeId) {
@@ -940,9 +978,9 @@ public class DishCache {
 
         @Override
         protected List<DishShop> query(DatabaseHelper helper, Dao<DishShop, Long> dao) throws Exception {
-                        QueryBuilder<DishShop, Long> tempDishQb = dao.queryBuilder();
+            QueryBuilder<DishShop, Long> tempDishQb = dao.queryBuilder();
             tempDishShop = tempDishQb.where().eq(DishShop.$.dishCode, TEMPDISHCODE).queryForFirst();
-                        QueryBuilder<DishShop, Long> qb = dao.queryBuilder();
+            QueryBuilder<DishShop, Long> qb = dao.queryBuilder();
             qb.selectColumns(DishShop.$.id,
                     DishShop.$.statusFlag,
                     DishShop.$.serverCreateTime,
@@ -979,8 +1017,7 @@ public class DishCache {
                     DishShop.$.weight,
                     DishShop.$.minNum,
                     DishShop.$.maxNum,
-                    DishShop.$.wmType,
-                    DishShop.$.dishPic);
+                    DishShop.$.wmType);
             qb.where().eq(DishShop.$.statusFlag, StatusFlag.VALID).and().ne(DishShop.$.type, DishType.CARD);
             return qb.orderBy(DishShop.$.sort, true).orderBy(DishShop.$.brandDishId, true)
                     .query();
@@ -995,7 +1032,7 @@ public class DishCache {
             Map<Long, List<DishShop>> dishsMap = new LinkedHashMap<Long, List<DishShop>>();
             Set<Long> typeIds = new HashSet<Long>();
             for (DishShop entity : list) {
-                                Long dishId = entity.getId();
+                Long dishId = entity.getId();
                 String dishUuid = entity.getUuid();
                 if (entity.getType() == DishType.EXTRA) {
                     extras.put(dishId, entity);
@@ -1027,7 +1064,7 @@ public class DishCache {
         @Override
         protected void renewDatas(Map<Long, DishShop> theNew) {
             super.renewDatas(theNew);
-                        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
                     for (OnDataChangeListener listener : listeners) {
@@ -1108,7 +1145,7 @@ public class DishCache {
         private Map<String, DishSetmeal> keySetmealMap;
         protected Map<Long, DishSetmeal> dishExtraMap;
         protected Map<String, DishSetmeal> keyDishExtraMap;
-        protected  Map<Long,List<DishSetmeal>> mapDishSetmealByDishId;
+        protected Map<Long, List<DishSetmeal>> mapDishSetmealByDishId;
 
         DishSetmealHolder() {
             super(DishSetmeal.class);
@@ -1119,11 +1156,11 @@ public class DishCache {
             return keySetmealMap.get(key);
         }
 
-        public List<DishSetmeal> getDishSetmealByDishId(Long dishId){
-                if(mapDishSetmealByDishId==null){
-                    return null;
-                }
-                return mapDishSetmealByDishId.get(dishId);
+        public List<DishSetmeal> getDishSetmealByDishId(Long dishId) {
+            if (mapDishSetmealByDishId == null) {
+                return null;
+            }
+            return mapDishSetmealByDishId.get(dishId);
         }
 
         @Override
@@ -1164,15 +1201,15 @@ public class DishCache {
                     keyDishExtras.put(key, entity);
                 }
 
-                if(!dishSetmealByDishId.containsKey(entity.getDishId())){
-                    dishSetmealByDishId.put(entity.getDishId(),new ArrayList<DishSetmeal>());
+                if (!dishSetmealByDishId.containsKey(entity.getDishId())) {
+                    dishSetmealByDishId.put(entity.getDishId(), new ArrayList<DishSetmeal>());
                 }
                 dishSetmealByDishId.get(entity.getDishId()).add(entity);
             }
             this.dishExtraMap = dishExtras;
             this.keySetmealMap = keySetmeals;
             this.keyDishExtraMap = keyDishExtras;
-            this.mapDishSetmealByDishId=dishSetmealByDishId;
+            this.mapDishSetmealByDishId = dishSetmealByDishId;
             return setmeals;
         }
 
@@ -1330,12 +1367,12 @@ public class DishCache {
         protected Map<Long, DishBrandProperty> cache(List<DishBrandProperty> list) {
             Map<Long, DishBrandProperty> map = new LinkedHashMap<Long, DishBrandProperty>();
             Map<String, DishBrandProperty> keyDishProperties = new HashMap<String, DishBrandProperty>();
-                        Map<Long, List<DishBrandProperty>> keyPropertys = new HashMap<Long, List<DishBrandProperty>>();
+            Map<Long, List<DishBrandProperty>> keyPropertys = new HashMap<Long, List<DishBrandProperty>>();
             for (DishBrandProperty entity : list) {
                 map.put(entity.getId(), entity);
                 keyDishProperties.put(toKey(entity.getDishId(), entity.getPropertyId()), entity);
 
-                                if (entity.getPropertyKind() == PropertyKind.STANDARD) {
+                if (entity.getPropertyKind() == PropertyKind.STANDARD) {
                     if (keyPropertys.containsKey(entity.getDishId())) {
                         keyPropertys.get(entity.getDishId()).add(entity);
                     } else {
@@ -1356,8 +1393,7 @@ public class DishCache {
     }
 
 
-
-        private static class DataObserver implements DatabaseHelper.DataChangeObserver {
+    private static class DataObserver implements DatabaseHelper.DataChangeObserver {
 
         private final BasicHolder<?> holder;
         private final Uri uri;
@@ -1382,7 +1418,8 @@ public class DishCache {
         @Override
         public void onChange(Collection<Uri> uris) {
             if (uris.contains(uri)) {
-                ThreadUtils.runOnWorkThread(new Runnable() {                    public void run() {
+                ThreadUtils.runOnWorkThread(new Runnable() {
+                    public void run() {
                         try {
                             recordDishLog(true);
                             holder.refresh();
@@ -1408,6 +1445,7 @@ public class DishCache {
             Log.i(TAG, "isInit=" + inited);
             Log.i(TAG, "dishCyclePeriodHolder.count=" + dishCyclePeriodHolder.getCount());
             Log.i(TAG, "dish.count=" + dishHolder.getCount());
+            Log.i(TAG, "dish.count=" + dishDescribeHolder.getCount());
             Log.i(TAG, "extra.count=" + extraHolder.getCount());
             Log.i(TAG, "dishType.count=" + dishTypeHolder.getCount());
             Log.i(TAG, "propertyType.count=" + propertyTypeHolder.getCount());

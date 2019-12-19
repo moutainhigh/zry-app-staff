@@ -164,7 +164,6 @@ public class DishShop extends BasicEntityBase implements ICreator, IUpdator {
 
         public static final String unitName = "unit_name";
 
-        public static final String dishPic="dish_pic";
     }
 
     @DatabaseField(columnName = "unit_name")
@@ -304,9 +303,6 @@ public class DishShop extends BasicEntityBase implements ICreator, IUpdator {
 
     @DatabaseField(columnName = "weight")
     private BigDecimal weight;
-
-    @DatabaseField(columnName = "dish_pic")
-    private String dishPic;
 
     public String getAliasName() {
         return aliasName;
@@ -675,14 +671,6 @@ public class DishShop extends BasicEntityBase implements ICreator, IUpdator {
             return true;
         }
         return false;
-    }
-
-    public String getDishPic() {
-        return dishPic;
-    }
-
-    public void setDishPic(String dishPic) {
-        this.dishPic = dishPic;
     }
 
     public boolean isCombo() {
